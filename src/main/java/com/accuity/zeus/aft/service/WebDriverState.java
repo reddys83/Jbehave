@@ -20,16 +20,19 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class WebDriverState {
 
-    @Value("${web.aft.webdriver}")
-    private String webDriverName;
+    @Value("${web.aft.webdriver.type}")
+    private String webDriverType;
+
+    @Value("${web.aft.webdriver.implicitWait}")
+    private long implicitWait;
 
     public static WebDriver webDriver;
 
     @BeforeScenario
     public void create() throws InterruptedException{
         if (webDriver==null) {
-            webDriver = getWebDriver(webDriverName);
-            webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            webDriver = getWebDriver(webDriverType);
+            webDriver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
             webDriver.manage().window().maximize();
             Thread.sleep(2000L);
         }

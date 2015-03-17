@@ -11,16 +11,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class SecondMapSteps {
 
-
-    WebDriverState webDriverState = new WebDriverState();
-
     @Then("system is in a different state")
     public void then(){
-        webDriverState.webDriver.get("https://www.google.com");
+        WebDriverState.webDriver.get("https://www.google.com");
     }
 
     @Then("system is in a new different state")
     public void thenNew(){
-        webDriverState.webDriver.get("https://www.google.com");
+        WebDriverState.webDriver.get("https://www.google.com");
     }
 }
