@@ -1,4 +1,4 @@
-package com.accuity.zeus.aft.service;
+package com.accuity.zeus.aft.web.driver;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;

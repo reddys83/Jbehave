@@ -1,9 +1,9 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.zeus.aft.service.WebDriverState;
 import org.jbehave.core.annotations.Then;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.accuity.zeus.aft.web.driver.WebDriverState;
 
 /**
  * Created by soofis on 3/12/2015.

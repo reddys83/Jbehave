@@ -9,7 +9,7 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:/aft.properties</value>
+            	<value>classpath:/environment/${ACCUITY_RUN_ENVIRONMENT}/environment.properties</value>
             </list>
         </property>
     </bean>
