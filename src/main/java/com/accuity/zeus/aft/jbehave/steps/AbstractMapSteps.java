@@ -7,11 +7,17 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import com.accuity.zeus.aft.web.driver.WebDriverState;
 
 public abstract class AbstractMapSteps {
 	
 	private static final Logger log = Logger.getLogger(AbstractMapSteps.class);
+	
+	@Autowired
+	protected WebDriverState webDriverState;
 
 	@Value("${data.management.webapp.aft.scheme}")
 	private String scheme;
