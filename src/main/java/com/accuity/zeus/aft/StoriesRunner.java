@@ -25,7 +25,7 @@ import org.jbehave.core.steps.ParameterConverters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.accuity.zeus.aft.jbehave.steps.FirstMapSteps;
+import com.accuity.zeus.aft.jbehave.steps.SearchSteps;
 
 
 @RunWith(SpringAnnotatedEmbedderRunner.class)
@@ -44,7 +44,7 @@ import com.accuity.zeus.aft.jbehave.steps.FirstMapSteps;
         storyTimeoutInSecs = 15000,
         metaFilters = "-skip"
 )
-@UsingSteps(instances = {FirstMapSteps.class})
+@UsingSteps(instances = {SearchSteps.class})
 @UsingSpring(resources = {"classpath:/applicationContext.xml"})
 public class StoriesRunner extends InjectableEmbedder {
 

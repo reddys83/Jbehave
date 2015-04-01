@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.accuity.zeus.aft.web.driver.WebDriverState;
 
-public abstract class AbstractMapSteps {
+public abstract class AbstractSteps {
 	
-	private static final Logger log = Logger.getLogger(AbstractMapSteps.class);
+	private static final Logger log = Logger.getLogger(AbstractSteps.class);
 	
 	@Autowired
 	protected WebDriverState webDriverState;
@@ -63,10 +63,12 @@ public abstract class AbstractMapSteps {
 		builder.setHost(host);
 		builder.setPort(port);
 
+		StringBuilder pathBuilder = new StringBuilder();
+		pathBuilder.append(uri);
 		if (StringUtils.isNotBlank(path)) {
-			builder.setPath("/" + path.trim());
+			pathBuilder.append("/").append(path.trim());
 		}
-
+		builder.setPath(pathBuilder.toString());
 		if (params != null) {
 			for (Map.Entry<String, String> param : params.entrySet()) {
 				builder.addParameter(param.getKey(), param.getValue());

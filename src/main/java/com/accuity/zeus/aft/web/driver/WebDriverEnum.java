@@ -26,7 +26,7 @@ public enum WebDriverEnum {
 	
 	public static WebDriver getWebDriver(String webDriverType) {
 		if (StringUtils.isNotBlank(webDriverType)) {
-			WebDriverEnum webDriver = valueOf(webDriverType);
+			WebDriverEnum webDriver = valueOf(StringUtils.upperCase(webDriverType));
 			if (webDriver != null) {
 				return webDriver.createWebDriver();
 			}

@@ -30,7 +30,7 @@ public class WebDriverState {
 			webDriver = WebDriverEnum.getWebDriver(webDriverType);
 			webDriver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
 			webDriver.manage().window().maximize();
-			Thread.sleep(2000L);
+			Thread.sleep(1000L);
 		}
 	}
 
