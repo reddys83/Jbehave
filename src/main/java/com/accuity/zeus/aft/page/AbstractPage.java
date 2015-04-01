@@ -32,7 +32,7 @@ public abstract class AbstractPage {
 
 	public void validatePage() {
 		assertNotNull(driver);
-		Wait wait = new FluentWait(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(2, TimeUnit.SECONDS);
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(2, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.presenceOfElementLocated(contentLocator));
 	}
 

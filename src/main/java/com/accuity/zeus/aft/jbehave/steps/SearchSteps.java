@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
@@ -8,7 +9,6 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.springframework.stereotype.Component;
 
-import com.accuity.zeus.aft.page.result.ResultsListItem;
 import com.accuity.zeus.aft.page.result.ResultsPage;
 import com.accuity.zeus.aft.page.search.SearchPage;
 
@@ -35,7 +35,7 @@ public class SearchSteps extends AbstractSteps {
 	@Then("the results should appear correctly")
 	public void thenUserShouldSeeCorrectResults() {
 		if (resultsPage != null) {
-			assertEquals("1", resultsPage.getNumResultsValue());
+			assertEquals("1", resultsPage.getNumResultsValue().getText());
 			assertNotNull(resultsPage.getResults());
 			assertEquals(1, resultsPage.getResults().size());
 			/*

@@ -20,31 +20,31 @@ public class ResultsListItem {
 	}
 	
 	public void assertValid(String name, String address, String fid, String tfpid, String status) {
-		assertEquals(name, getName());
-		assertEquals(address, getAddress());
-		assertEquals(fid, getFid());
-		assertEquals(tfpid, getTfpid());
-		assertEquals(status, getStatus());
+		assertEquals(name, getName().getText());
+		assertEquals(address, getAddress().getText());
+		assertEquals(fid, getFid().getText());
+		assertEquals(tfpid, getTfpid().getText());
+		assertEquals(status, getStatus().getText());
 	}
 	
-	public String getName() {
-		return webElement.findElement(nameLocator).getText();
+	public WebElement getName() {
+		return webElement.findElement(nameLocator);
 	}
 	
-	public String getAddress() {
-		return webElement.findElement(addressLocator).getText();
+	public WebElement getAddress() {
+		return webElement.findElement(addressLocator);
 	}
 	
-	public String getFid() {
-		return webElement.findElement(fidLocator).getText();
+	public WebElement getFid() {
+		return webElement.findElement(fidLocator);
 	}
 	
-	public String getTfpid() {
-		return webElement.findElement(tfpidLocator).getText();
+	public WebElement getTfpid() {
+		return webElement.findElement(tfpidLocator);
 	}
 	
-	public String getStatus() {
-		return webElement.findElement(statusLocator).getText();
+	public WebElement getStatus() {
+		return webElement.findElement(statusLocator);
 	}
 
 }

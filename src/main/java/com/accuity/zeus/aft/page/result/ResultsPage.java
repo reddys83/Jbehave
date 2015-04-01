@@ -48,8 +48,8 @@ public class ResultsPage extends AbstractPage {
 		return sb.toString();
 	}
 
-	public String getNumResultsValue() {
-		return getDriver().findElement(numResultsValueSelector).getText();
+	public WebElement getNumResultsValue() {
+		return getDriver().findElement(numResultsValueSelector);
 	}
 
 	public List<ResultsListItem> getResults() {
