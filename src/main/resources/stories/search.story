@@ -12,4 +12,4 @@ Then the results should appear correctly
 
 Examples:    
 |entity|field|value|
-|legalEntity|FID|1038|
+|legalEntity|fid|1038|
