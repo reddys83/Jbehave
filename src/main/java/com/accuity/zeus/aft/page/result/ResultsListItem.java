@@ -1,9 +1,13 @@
 package com.accuity.zeus.aft.page.result;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import com.accuity.domain.legalEntity.LegalEntity;
 
 public class ResultsListItem {
 
@@ -26,6 +30,18 @@ public class ResultsListItem {
 		assertEquals(fid, getFid().getText());
 		assertEquals(tfpid, getTfpid().getText());
 		assertEquals(status, getStatus().getText());
+	}
+	
+	public void assertValid(Map<String, LegalEntity> expectedMap) {
+		LegalEntity expected = expectedMap.get(getFid().getText());
+		if (expected == null) {
+			fail();
+		}
+		assertEquals(expected.getSummary().getNames().getNames().get(0).getValue(), getName().getText());
+		//assertEquals(address, getAddress().getText());
+		assertEquals(expected.getFid(), getFid().getText());
+		assertEquals(expected.getTfpid(), getTfpid().getText());
+		assertEquals(expected.getSummary().getStatus(), getStatus().getText());
 	}
 	
 	public WebElement getName() {

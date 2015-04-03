@@ -1,21 +1,27 @@
 apply plugin: 'java'
+apply plugin: 'eclipse'
 
 sourceCompatibility = 1.7
 version = '1.0'
 
 repositories {
-    mavenCentral()
+    maven{ url 'http://10.72.0.16/nexus/content/groups/public/' }
+	maven{ url 'http://10.72.0.16/nexus/content/repositories/snapshots/' }
 }
 
 dependencies {
     compile 'org.springframework:spring-context:4.1.5.RELEASE'
     compile 'org.springframework:spring-beans:4.1.5.RELEASE'
     compile 'org.springframework:spring-core:4.1.5.RELEASE'
+    compile 'org.springframework:spring-web:4.1.5.RELEASE'
+	
 	
 	compile 'org.slf4j:slf4j-log4j12:1.7.2'
+	
+	compile group: 'com.accuity', name: 'common-entity', version: '1.0.9', changing: true
 
     compile 'org.seleniumhq.selenium:selenium-java:2.45.0'
-    compile group: 'junit', name: 'junit', version: '4.11'
+    compile 'junit:junit:4.+'
     compile 'org.jbehave:jbehave-core:3.9.5'
     compile 'org.springframework:spring-test:4.1.5.RELEASE'
     compile 'org.jbehave:jbehave-spring:3.9.5'
