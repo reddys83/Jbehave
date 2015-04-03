@@ -20,11 +20,14 @@ public class ResultsPage extends AbstractPage {
 	
 	private String value;
 	
-	private List<ResultsListItem> results = null;
+	private List<ResultsListItem> resultsList = null;
+
+	private ResultsListItem results = null;
 	
 	private By numResultsValueSelector = By.xpath("//*[@id='content']/div/header/p/span[@class='counter']");
 
 	private By resultsSelector = By.xpath("//*[@id='search-results-list']//li");
+
 
 	public ResultsPage(WebDriver driver, String urlPrefix) {
 		super(driver, urlPrefix);
@@ -52,21 +55,30 @@ public class ResultsPage extends AbstractPage {
 		return getDriver().findElement(numResultsValueSelector);
 	}
 
-	public List<ResultsListItem> getResults() {
-		if (results == null) {
-			results = createResultsItemList();
+	public List<ResultsListItem> getResultsList() {
+		if (resultsList == null) {
+			resultsList = createResultsItemList();
 		}
-		return results;
+		return resultsList;
 	}
 	
 	private List<ResultsListItem> createResultsItemList() {
+		List<ResultsListItem> tempResults = new LinkedList<ResultsListItem>();
 		List<WebElement> webElements = getDriver().findElements(resultsSelector);
 		if (webElements != null && webElements.size() > 0) {
-			List<ResultsListItem> tempResults = new LinkedList<ResultsListItem>();
 			for (WebElement webElement : webElements) {
 				tempResults.add(new ResultsListItem(webElement));
 			}
 			return tempResults;
+		} else {
+			// The following provides a webElement to access the no results disclaimer
+			webElements = getDriver().findElements(contentLocator);
+			if (webElements != null && webElements.size() > 0) {
+				for (WebElement webElement : webElements) {
+					tempResults.add(new ResultsListItem(webElement));
+				}
+				return tempResults;
+			}
 		}
 		return Collections.emptyList();
 	}

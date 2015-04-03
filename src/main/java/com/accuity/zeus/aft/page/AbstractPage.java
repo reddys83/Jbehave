@@ -16,7 +16,7 @@ public abstract class AbstractPage {
 
 	private String urlPrefix;
 
-	private By contentLocator = By.xpath("//body/div[@id='content']");
+	protected By contentLocator = By.xpath("//body/div[@id='content']");
 
 	public AbstractPage(WebDriver driver, String urlPrefix) {
 		this.driver = driver;

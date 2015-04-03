@@ -14,6 +14,7 @@ public class ResultsListItem {
 	private By fidLocator = By.xpath("//dl[@class='fid']/dd");
 	private By tfpidLocator = By.xpath("//dl[@class='tfpid']/dd");
 	private By statusLocator = By.xpath("//dl[@class='status']/dd");
+	private By noResultsLocator = By.xpath("//div/header[@class='subheader']/p");
 	
 	public ResultsListItem(WebElement webElement) {
 		this.webElement = webElement;
@@ -46,5 +47,7 @@ public class ResultsListItem {
 	public WebElement getStatus() {
 		return webElement.findElement(statusLocator);
 	}
+
+	public WebElement getNoResults() { return webElement.findElement(noResultsLocator); }
 
 }

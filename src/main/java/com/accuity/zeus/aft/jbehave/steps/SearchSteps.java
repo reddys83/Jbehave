@@ -7,10 +7,14 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
 import org.springframework.stereotype.Component;
 
 import com.accuity.zeus.aft.page.result.ResultsPage;
 import com.accuity.zeus.aft.page.search.SearchPage;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class SearchSteps extends AbstractSteps {
@@ -32,18 +36,24 @@ public class SearchSteps extends AbstractSteps {
 		}
 	}
 
-	@Then("the results should appear correctly")
-	public void thenUserShouldSeeCorrectResults() {
+	@Then("the results should appear correctly $table")
+	public void thenUserShouldSeeCorrectResults(ExamplesTable table) {
 		if (resultsPage != null) {
 			assertEquals("1", resultsPage.getNumResultsValue().getText());
-			assertNotNull(resultsPage.getResults());
-			assertEquals(1, resultsPage.getResults().size());
-			/*
-			for (ResultsListItem resultsListItem : resultsPage.getResults()) {
-				resultsListItem.assertValid(name, address, fid, tfpid, status)
+			assertNotNull(resultsPage.getResultsList());
+			assertEquals(1, resultsPage.getResultsList().size());
+			for (int i = 0; i < table.getRowCount(); i++) {
+				resultsPage.getResultsList().get(i).assertValid(table.getRow(i).get(table.getHeaders().get(0)), table.getRow(i).get(table.getHeaders().get(1)), table.getRow(i).get(table.getHeaders().get(2)), table.getRow(i).get(table.getHeaders().get(3)), table.getRow(i).get(table.getHeaders().get(4)));
 			}
-			*/
-			resultsPage.getResults().get(0).assertValid("Bank of America National Association", "100 N Tryon St, Ste 170", "1038", "10077420", "Active");
+		}
+	}
+
+	@Then("there should be no results $table")
+	public void thenUserShouldSeeNoResults(ExamplesTable table) {
+		if (resultsPage != null) {
+			for (int i = 0; i < table.getRowCount(); i++) {
+				assertEquals(resultsPage.getResultsList().get(i).getNoResults(), table.getRow(i).get(table.getHeaders().get(0)));
+			}
 		}
 	}
 
