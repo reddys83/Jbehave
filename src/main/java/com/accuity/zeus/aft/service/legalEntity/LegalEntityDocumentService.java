@@ -26,11 +26,13 @@ public class LegalEntityDocumentService extends AbstractDocumentService<LegalEnt
 	@Override
 	public LegalEntity getArbitraryEntity(String entity) {
 		Map<String, String> params = new HashMap<String, String>();
-		return getArbitraryEntity(params);
+		params.put("entity", entity);
+		URI uri = searchUriBuilder.buildUriString("any", params);
+		return getEntity(uri);
 	}
 
 	@Override
-	public LegalEntity getArbitraryEntity(Map<String, String> params) {
+	public LegalEntity search(Map<String, String> params) {
 		ensureRequiredFieldsAreSetInParamsMap(params);
 		URI uri = searchUriBuilder.buildUriString(null, params);
 		LegalEntities results = getSearchResults(uri);

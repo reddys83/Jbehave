@@ -22,11 +22,11 @@ public class ResultsPage extends AbstractPage {
 	
 	private List<ResultsListItem> resultsList = null;
 
-	private ResultsListItem results = null;
-	
-	private By numResultsValueSelector = By.xpath("//*[@id='content']/div/header/p/span[@class='counter']");
+	private By numResultsValueSelector = By.xpath(".//*[@id='content']/div/header/p/span[@class='counter']");
 
-	private By resultsSelector = By.xpath("//*[@id='search-results-list']//li");
+	private By resultsSelector = By.xpath(".//*[@id='search-results-list']//li");
+	
+	private By noResultsLocator = By.xpath(".//*[@id='content']/div/header[@class='subheader']/p");
 
 
 	public ResultsPage(WebDriver driver, String urlPrefix) {
@@ -53,6 +53,10 @@ public class ResultsPage extends AbstractPage {
 
 	public WebElement getNumResultsValue() {
 		return getDriver().findElement(numResultsValueSelector);
+	}
+	
+	public WebElement getNoResults() { 
+		return getDriver().findElement(noResultsLocator); 
 	}
 
 	public List<ResultsListItem> getResultsList() {

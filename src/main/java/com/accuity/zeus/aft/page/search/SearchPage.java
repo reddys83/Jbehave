@@ -11,9 +11,9 @@ public class SearchPage extends AbstractPage {
 	
 	private static final String PAGE_URI = "";
 	
-	private By searchFieldLocator = By.xpath("//header/form/select[@name='idType']");
+	private By searchFieldLocator = By.xpath(".//header/form/select[@name='idType']");
 
-	private By searchValueLocator = By.xpath("//header/form/input[@name='id']");
+	private By searchValueLocator = By.xpath(".//header/form/input[@name='id']");
  
 	private By searchButtonLocator = By.id("search-button");
 	

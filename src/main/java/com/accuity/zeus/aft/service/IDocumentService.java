@@ -8,6 +8,6 @@ public interface IDocumentService<T extends AbstractSerializableRoot> {
 
 	T getArbitraryEntity(String entity);
 	
-	T getArbitraryEntity(Map<String, String> params);
+	T search(Map<String, String> params);
 	
 }

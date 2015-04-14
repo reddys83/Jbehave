@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft.page.result;
 
+import static com.accuity.zeus.junit.AssertUtils.*;
 import static org.junit.Assert.*;
 
 import java.util.Map;
@@ -13,23 +14,22 @@ public class ResultsListItem {
 
 	private WebElement webElement;
 	
-	private By nameLocator = By.xpath("//div[@class='name-address-container']/h3");
-	private By addressLocator = By.xpath("//div[@class='name-address-container']/p");
-	private By fidLocator = By.xpath("//dl[@class='fid']/dd");
-	private By tfpidLocator = By.xpath("//dl[@class='tfpid']/dd");
-	private By statusLocator = By.xpath("//dl[@class='status']/dd");
-	private By noResultsLocator = By.xpath("//div/header[@class='subheader']/p");
+	private By nameLocator = By.xpath(".//div[@class='name-address-container']/h3");
+	private By addressLocator = By.xpath(".//div[@class='name-address-container']/p");
+	private By fidLocator = By.xpath(".//dl[@class='fid']/dd");
+	private By tfpidLocator = By.xpath(".//dl[@class='tfpid']/dd");
+	private By statusLocator = By.xpath(".//dl[@class='status']/dd");
 	
 	public ResultsListItem(WebElement webElement) {
 		this.webElement = webElement;
 	}
 	
 	public void assertValid(String name, String address, String fid, String tfpid, String status) {
-		assertEquals(name, getName().getText());
-		assertEquals(address, getAddress().getText());
-		assertEquals(fid, getFid().getText());
-		assertEquals(tfpid, getTfpid().getText());
-		assertEquals(status, getStatus().getText());
+		assertEqualsOrIsExpectedBlank(name, getName().getText());
+		assertEqualsOrIsExpectedBlank(address, getAddress().getText());
+		assertEqualsOrIsExpectedBlank(fid, getFid().getText());
+		assertEqualsOrIsExpectedBlank(tfpid, getTfpid().getText());
+		assertEqualsOrIsExpectedBlank(status, getStatus().getText());
 	}
 	
 	public void assertValid(Map<String, LegalEntity> expectedMap) {
@@ -37,11 +37,11 @@ public class ResultsListItem {
 		if (expected == null) {
 			fail();
 		}
-		assertEquals(expected.getSummary().getNames().getNames().get(0).getValue(), getName().getText());
-		//assertEquals(address, getAddress().getText());
-		assertEquals(expected.getFid(), getFid().getText());
-		assertEquals(expected.getTfpid(), getTfpid().getText());
-		assertEquals(expected.getSummary().getStatus(), getStatus().getText());
+		assertEqualsOrIsExpectedBlank(expected.getSummary().getNames().getNames().get(0).getValue(), getName().getText());
+		//assertEqualsOrIsExpectedBlank(address, getAddress().getText());
+		assertEqualsOrIsExpectedBlank(expected.getFid(), getFid().getText());
+		assertEqualsOrIsExpectedBlank(expected.getTfpid(), getTfpid().getText());
+		assertEqualsOrIsExpectedBlank(expected.getSummary().getStatus(), getStatus().getText());
 	}
 	
 	public WebElement getName() {
@@ -63,7 +63,5 @@ public class ResultsListItem {
 	public WebElement getStatus() {
 		return webElement.findElement(statusLocator);
 	}
-
-	public WebElement getNoResults() { return webElement.findElement(noResultsLocator); }
 
 }
