@@ -50,7 +50,7 @@ public class StoriesRunner extends InjectableEmbedder {
 
     @Test
     public void run() throws IOException {
-        List<String> storyPaths = new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("./src/main/resources"), "**/*.story", "");
+        List<String> storyPaths = new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("./src/main/resources"), "**/Design.story", "");
         injectedEmbedder().runStoriesAsPaths(storyPaths) ;
     }
 

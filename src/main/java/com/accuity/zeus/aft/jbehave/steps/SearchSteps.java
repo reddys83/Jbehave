@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.accuity.zeus.aft.jbehave.pages.DetailsPage;
 import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
@@ -15,9 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.accuity.domain.legalEntity.LegalEntity;
-import com.accuity.zeus.aft.page.result.ResultsListItem;
-import com.accuity.zeus.aft.page.result.ResultsPage;
-import com.accuity.zeus.aft.page.search.SearchPage;
+import com.accuity.zeus.aft.result.ResultsListItem;
+import com.accuity.zeus.aft.result.ResultsPage;
+import com.accuity.zeus.aft.jbehave.pages.SearchPage;
 import com.accuity.zeus.aft.service.legalEntity.LegalEntityDocumentService;
 
 @Component
@@ -49,10 +50,16 @@ public class SearchSteps extends AbstractSteps {
 	@When("the user searches for <entity> with <field> equals <value>")
 	public void whenUserSearches(@Named("entity") String entity, @Named("field") String field, @Named("value") String value) {
 		if (searchPage != null) {
-			getExpectedLegalEntity(entity, field, value);
+			//getExpectedLegalEntity(entity, field, value);
 			resultsPage = searchPage.search(entity, field, value);
 		}
 	}
+
+	@When("the user clicks on the card with fid <value>")
+	public void whenUserClicksOnTheResultCard(@Named("value") String value){
+		searchPage.clickOnResultCard(resultsPage.getResultCardElement(value));
+	}
+
 
 	@Then("the results should appear correctly")
 	public void thenUserShouldSeeCorrectResults() {
@@ -70,7 +77,8 @@ public class SearchSteps extends AbstractSteps {
 		assertNotNull(resultsPage);
 		assertEquals("No results found", resultsPage.getNoResults().getText());
 	}
-	
+
+
 	private LegalEntity getExpectedLegalEntity(String entity) {
 		LegalEntity instance = legalEntityDocumentService.getArbitraryEntity(entity);
 		if (instance != null) {
