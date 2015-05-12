@@ -4,10 +4,7 @@ package com.accuity.zeus.aft;
  * Created by soofis on 3/11/2015.
  */
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-
+import com.accuity.zeus.aft.jbehave.steps.SearchSteps;
 import org.jbehave.core.InjectableEmbedder;
 import org.jbehave.core.annotations.Configure;
 import org.jbehave.core.annotations.UsingEmbedder;
@@ -25,7 +22,9 @@ import org.jbehave.core.steps.ParameterConverters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.accuity.zeus.aft.jbehave.steps.SearchSteps;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 
 @RunWith(SpringAnnotatedEmbedderRunner.class)

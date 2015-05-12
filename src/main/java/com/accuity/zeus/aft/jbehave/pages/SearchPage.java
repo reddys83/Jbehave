@@ -1,23 +1,20 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
+import com.accuity.zeus.aft.result.ResultsPage;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.accuity.zeus.aft.result.ResultsPage;
-import org.openqa.selenium.WebElement;
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class SearchPage extends AbstractPage {
 
 	private static final String PAGE_URI = "";
-	
+
 	private By searchFieldLocator = By.xpath(".//header/form/select[@name='idType']");
 
 	private By searchValueLocator = By.xpath(".//header/form/input[@name='id']");
- 
+
 	private By searchButtonLocator = By.id("search-button");
-	
+
 	public SearchPage(WebDriver driver, String urlPrefix) {
 		super(driver, urlPrefix);
 	}
@@ -40,7 +37,4 @@ public class SearchPage extends AbstractPage {
 		return resultsPage;
 	}
 
-	public void clickOnResultCard(WebElement element) {
-		element.click();
-	}
 }
