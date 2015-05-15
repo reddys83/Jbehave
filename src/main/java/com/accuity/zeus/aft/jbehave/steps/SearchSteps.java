@@ -1,25 +1,18 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import com.accuity.zeus.aft.jbehave.pages.DetailsPage;
+import com.accuity.domain.legalEntity.LegalEntity;
+import com.accuity.zeus.aft.jbehave.pages.SearchPage;
+import com.accuity.zeus.aft.result.ResultsPage;
+import com.accuity.zeus.aft.service.legalEntity.LegalEntityDocumentService;
 import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
-import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.accuity.domain.legalEntity.LegalEntity;
-import com.accuity.zeus.aft.result.ResultsListItem;
-import com.accuity.zeus.aft.result.ResultsPage;
-import com.accuity.zeus.aft.jbehave.pages.SearchPage;
-import com.accuity.zeus.aft.service.legalEntity.LegalEntityDocumentService;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class SearchSteps extends AbstractSteps {
@@ -27,9 +20,9 @@ public class SearchSteps extends AbstractSteps {
 	@Autowired
 	private LegalEntityDocumentService legalEntityDocumentService;
 
-	private SearchPage searchPage = null;
+	private SearchPage searchPage;
 
-	private ResultsPage resultsPage = null;
+	public static ResultsPage resultsPage;
 
 	private Map<String, LegalEntity> expectedMap = new HashMap<String, LegalEntity>();
 
@@ -57,48 +50,29 @@ public class SearchSteps extends AbstractSteps {
 
 	@When("the user clicks on the card with fid <value>")
 	public void whenUserClicksOnTheResultCard(@Named("value") String value){
-		searchPage.clickOnResultCard(resultsPage.getResultCardElement(value));
+		resultsPage.clickOnResultCard(resultsPage.getResultCardElement(value));
 	}
 
+    private LegalEntity getExpectedLegalEntity(String entity) {
+        LegalEntity instance = legalEntityDocumentService.getArbitraryEntity(entity);
+        if (instance != null) {
+            expectedMap.put(instance.getFid(), instance);
+        }
+        return instance;
+    }
 
-	@Then("the results should appear correctly")
-	public void thenUserShouldSeeCorrectResults() {
-		assertNotNull(resultsPage);
-		assertEquals("1", resultsPage.getNumResultsValue().getText());
-		assertNotNull(resultsPage.getResultsList());
-		assertEquals(1, resultsPage.getResultsList().size());
-		for (ResultsListItem resultsListItem : resultsPage.getResultsList()) {
-			resultsListItem.assertValid(expectedMap);
-		}
-	}
-
-	@Then("there should be no results")
-	public void thenUserShouldSeeNoResults() {
-		assertNotNull(resultsPage);
-		assertEquals("No results found", resultsPage.getNoResults().getText());
-	}
-
-
-	private LegalEntity getExpectedLegalEntity(String entity) {
-		LegalEntity instance = legalEntityDocumentService.getArbitraryEntity(entity);
-		if (instance != null) {
-			expectedMap.put(instance.getFid(), instance);
-		}
-		return instance;
-	}
-
-	private LegalEntity getExpectedLegalEntity(String entity, String field, String value) {
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("entity", entity);
-		if (StringUtils.isNotBlank(field) && StringUtils.isNotBlank(value)) {
-			params.put("idType", field);
-			params.put("id", value);
-		}
-		LegalEntity instance = legalEntityDocumentService.search(params);
-		if (instance != null) {
-			expectedMap.put(instance.getFid(), instance);
-		}
-		return instance;
-	}
+    private LegalEntity getExpectedLegalEntity(String entity, String field, String value) {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("entity", entity);
+        if (StringUtils.isNotBlank(field) && StringUtils.isNotBlank(value)) {
+            params.put("idType", field);
+            params.put("id", value);
+        }
+        LegalEntity instance = legalEntityDocumentService.search(params);
+        if (instance != null) {
+            expectedMap.put(instance.getFid(), instance);
+        }
+        return instance;
+    }
 
 }
