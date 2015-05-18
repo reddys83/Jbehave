@@ -48,11 +48,6 @@ public class SearchSteps extends AbstractSteps {
 		}
 	}
 
-	@When("the user clicks on the card with fid <value>")
-	public void whenUserClicksOnTheResultCard(@Named("value") String value){
-		resultsPage.clickOnResultCard(resultsPage.getResultCardElement(value));
-	}
-
     private LegalEntity getExpectedLegalEntity(String entity) {
         LegalEntity instance = legalEntityDocumentService.getArbitraryEntity(entity);
         if (instance != null) {

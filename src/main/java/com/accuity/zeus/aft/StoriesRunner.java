@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft;
 
+import com.accuity.zeus.aft.jbehave.steps.DetailsSteps;
 import com.accuity.zeus.aft.jbehave.steps.SearchResultsSteps;
 import com.accuity.zeus.aft.jbehave.steps.SearchSteps;
 import org.jbehave.core.InjectableEmbedder;
@@ -40,13 +41,13 @@ import java.util.List;
         storyTimeoutInSecs = 15000,
         metaFilters = "-skip"
 )
-@UsingSteps(instances = {SearchSteps.class, SearchResultsSteps.class})
+@UsingSteps(instances = {SearchSteps.class, SearchResultsSteps.class, DetailsSteps.class})
 @UsingSpring(resources = {"classpath:/applicationContext.xml"})
 public class StoriesRunner extends InjectableEmbedder {
 
     @Test
     public void run() throws IOException {
-        List<String> storyPaths = new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("./src/main/resources"), "**/SearchResults.story", "");
+        List<String> storyPaths = new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("./src/main/resources"), "**/Details.story", "");
         injectedEmbedder().runStoriesAsPaths(storyPaths) ;
     }
 

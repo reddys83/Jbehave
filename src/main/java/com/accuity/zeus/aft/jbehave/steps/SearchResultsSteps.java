@@ -119,4 +119,9 @@ public class SearchResultsSteps extends AbstractSteps{
         }
         assertEquals(searchSteps.resultsPage.getCurrentSearchResultsPage().getText(), Integer.toString(Integer.parseInt(currentPage) - 1));
     }
+
+    @When("the user clicks on the search results card with fid <value>")
+    public void whenUserClicksOnTheResultCard(@Named("value") String value){
+        searchSteps.resultsPage.clickOnResultCard(searchSteps.resultsPage.getFidElements(value));
+    }
 }

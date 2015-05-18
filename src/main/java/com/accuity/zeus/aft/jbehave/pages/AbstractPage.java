@@ -1,18 +1,18 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
-import static org.junit.Assert.*;
-
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertNotNull;
+
 public abstract class AbstractPage {
 
-	private final static int STANDARD_WAIT = 1;
+	private final static long STANDARD_WAIT = 1000L;
 
 	private WebDriver driver;
 
@@ -64,10 +64,11 @@ public abstract class AbstractPage {
 	}
 
 	private void waitFor(){
-		try{
-			wait(STANDARD_WAIT);
-		} catch(InterruptedException e) {
-			System.out.println("Wait Exception Thrown");
+		try {
+			Thread.sleep(STANDARD_WAIT);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
+
 }
