@@ -41,6 +41,8 @@ public class ResultsPage extends AbstractPage {
 
     private By previousPageLinkLocator = By.xpath("//span[contains(@class,' pages-navigation-link-previous')]");
 
+	private By fidLocator = By.xpath(".//*[@id='search-results-items']/li/dl[1]/dd");
+
 	public ResultsPage(WebDriver driver, String urlPrefix) {
 		super(driver, urlPrefix);
 	}
@@ -152,4 +154,14 @@ public class ResultsPage extends AbstractPage {
     public void clickOnResultCard(WebElement element) {
         element.click();
     }
+
+	public WebElement getFidElements(String fid) {
+		List<WebElement> elements = getDriver().findElements(fidLocator);
+		for (WebElement element : elements) {
+			if (element.getText().equals(fid.toString())) {
+				return element;
+			}
+		}
+		return null;
+	}
 }
