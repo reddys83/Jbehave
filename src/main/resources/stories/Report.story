@@ -1,0 +1,21 @@
+Meta:@Report
+
+Narrative:
+In order to view stub entry details
+As a user when I search by Name, FID, TFPID and click on the search results card I can view details
+I want to cover the requirements mentioned in
+JIRA ID - ZEUS-155 - Code counts
+
+Scenario: Verify Code Count
+Given a user is on the search page
+When the user clicks on the report tab
+Then the user should see the report page
+When the user selects the area as <area>
+And the user selects the required match as <requiredMatch>
+And the user clicks on the Run button
+Then the user should see the count of the selected criteria as <count>
+
+Examples:
+|area|requiredMatch|count|
+|Codes|ABI|814|
+|Codes|CHIPS|8301|

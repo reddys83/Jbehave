@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.domain.legalEntity.LegalEntity;
+import com.accuity.zeus.aft.jbehave.pages.ReportPage;
 import com.accuity.zeus.aft.jbehave.pages.SearchPage;
 import com.accuity.zeus.aft.result.ResultsPage;
 import com.accuity.zeus.aft.service.legalEntity.LegalEntityDocumentService;
@@ -23,6 +24,7 @@ public class SearchSteps extends AbstractSteps {
 	private SearchPage searchPage;
 
 	public static ResultsPage resultsPage;
+    public static ReportPage reportPage;
 
 	private Map<String, LegalEntity> expectedMap = new HashMap<String, LegalEntity>();
 
@@ -47,6 +49,11 @@ public class SearchSteps extends AbstractSteps {
 			resultsPage = searchPage.search(entity, field, value);
 		}
 	}
+
+	@When("the user clicks on the report tab")
+    public void whenUserClicksOnReportTab(){
+        reportPage = searchPage.clickOnReportsTab();
+    }
 
     private LegalEntity getExpectedLegalEntity(String entity) {
         LegalEntity instance = legalEntityDocumentService.getArbitraryEntity(entity);

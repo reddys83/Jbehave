@@ -15,6 +15,8 @@ public class SearchPage extends AbstractPage {
 
 	private By searchButtonLocator = By.id("search-button");
 
+	private By resultLinkLocator = By.id("report-nav");
+
 	public SearchPage(WebDriver driver, String urlPrefix) {
 		super(driver, urlPrefix);
 	}
@@ -37,4 +39,9 @@ public class SearchPage extends AbstractPage {
 		return resultsPage;
 	}
 
+	public ReportPage clickOnReportsTab(){
+        getDriver().findElement(resultLinkLocator).click();
+        ReportPage reportPage = new ReportPage(getDriver(), getUrlPrefix());
+        return reportPage;
+    }
 }
