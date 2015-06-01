@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 
+import com.accuity.zeus.aft.jbehave.pages.ReportPage;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.log4j.Logger;
@@ -15,7 +16,9 @@ import com.accuity.zeus.aft.web.driver.WebDriverState;
 public abstract class AbstractSteps {
 	
 	private static final Logger log = Logger.getLogger(AbstractSteps.class);
-	
+
+	private static ReportPage reportPage;
+
 	@Autowired
 	protected WebDriverState webDriverState;
 
@@ -81,6 +84,15 @@ public abstract class AbstractSteps {
 			throw new RuntimeException(e);
 		}
 		
+	}
+
+
+	public ReportPage getReportPage() {
+		return reportPage;
+	}
+
+	public void setReportPage(ReportPage reportPage) {
+		this.reportPage = reportPage;
 	}
 
 }

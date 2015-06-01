@@ -24,7 +24,6 @@ public class SearchSteps extends AbstractSteps {
 	private SearchPage searchPage;
 
 	public static ResultsPage resultsPage;
-    public static ReportPage reportPage;
 
 	private Map<String, LegalEntity> expectedMap = new HashMap<String, LegalEntity>();
 
@@ -52,7 +51,7 @@ public class SearchSteps extends AbstractSteps {
 
 	@When("the user clicks on the report tab")
     public void whenUserClicksOnReportTab(){
-        reportPage = searchPage.clickOnReportsTab();
+        setReportPage(searchPage.clickOnReportsTab());
     }
 
     private LegalEntity getExpectedLegalEntity(String entity) {
