@@ -1,23 +1,23 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Map;
-
 import com.accuity.zeus.aft.jbehave.pages.ReportPage;
+import com.accuity.zeus.aft.jbehave.pages.SearchPage;
+import com.accuity.zeus.aft.web.driver.WebDriverState;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.accuity.zeus.aft.web.driver.WebDriverState;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Map;
 
 public abstract class AbstractSteps {
 	
 	private static final Logger log = Logger.getLogger(AbstractSteps.class);
-
 	private static ReportPage reportPage;
+	private static SearchPage searchPage;
 
 	@Autowired
 	protected WebDriverState webDriverState;
@@ -83,9 +83,7 @@ public abstract class AbstractSteps {
 			log.error(e.getLocalizedMessage());
 			throw new RuntimeException(e);
 		}
-		
 	}
-
 
 	public ReportPage getReportPage() {
 		return reportPage;
@@ -93,6 +91,14 @@ public abstract class AbstractSteps {
 
 	public void setReportPage(ReportPage reportPage) {
 		this.reportPage = reportPage;
+	}
+
+	public SearchPage getSearchPage() {
+		return searchPage;
+	}
+
+	public void setSearchPage(SearchPage searchPage) {
+		this.searchPage = searchPage;
 	}
 
 }

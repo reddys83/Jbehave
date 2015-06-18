@@ -17,8 +17,6 @@ public class SearchPage extends AbstractPage {
 
 	private By resultLinkLocator = By.id("report-nav");
 
-
-
 	public SearchPage(WebDriver driver, String urlPrefix) {
 		super(driver, urlPrefix);
 	}
