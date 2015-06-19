@@ -1,6 +1,8 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.jbehave.pages.LoginPage;
 import com.accuity.zeus.aft.jbehave.pages.ReportPage;
+import com.accuity.zeus.aft.jbehave.pages.ResetPasswordPage;
 import com.accuity.zeus.aft.jbehave.pages.SearchPage;
 import com.accuity.zeus.aft.web.driver.WebDriverState;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +20,8 @@ public abstract class AbstractSteps {
 	private static final Logger log = Logger.getLogger(AbstractSteps.class);
 	private static ReportPage reportPage;
 	private static SearchPage searchPage;
+	private static ResetPasswordPage resetPasswordPage;
+	private static LoginPage loginPage;
 
 	@Autowired
 	protected WebDriverState webDriverState;
@@ -101,4 +105,19 @@ public abstract class AbstractSteps {
 		this.searchPage = searchPage;
 	}
 
+	public ResetPasswordPage getResetPasswordPage() {
+		return resetPasswordPage;
+	}
+
+	public void setResetPasswordPage(ResetPasswordPage resetPasswordPage) {
+		this.resetPasswordPage = resetPasswordPage;
+	}
+
+	public LoginPage getLoginPage() {
+		return loginPage;
+	}
+
+	public void setLoginPage(LoginPage loginPage) {
+		this.loginPage = loginPage;
+	}
 }

@@ -47,4 +47,14 @@ public class LoginSteps extends AbstractSteps {
     public void thenUserShouldSeeAllFieldsRequiredErrorMessage(){
         loginPage.verifyAllFieldsAreRequiredErrorMessage();
     }
+
+    @When("the user clicks on the forgot password link on login screen")
+    public void whenUserClicksOnForgotPasswordLink(){
+        setResetPasswordPage(loginPage.clickOnForgotPasswordLink());
+    }
+
+    @Then("the user should see the login page")
+    public void thenTheUserShouldSeeLoginPage(){
+        getLoginPage().verifyLoginPage();
+    }
 }

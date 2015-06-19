@@ -7,11 +7,14 @@ import static org.junit.Assert.assertEquals;
 
 public class LoginPage extends AbstractPage {
 
+    private ResetPasswordPage resetPasswordPage;
+
     private By username_field_name = By.name("username");
     private By password_field_name = By.name("password");
     private By login_button_name = By.name("login");
     private By invalid_combination_error_msg_id = By.id("login-error1");
     private By all_fields_required_error_msg_id = By.id("login-error2");
+    private By forgot_password_link_linkText = By.linkText("Forgot password?");
 
     public LoginPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -19,7 +22,7 @@ public class LoginPage extends AbstractPage {
 
     @Override
     public String getPageUrl() {
-        return getUrlPrefix() ;
+        return getDriver().getCurrentUrl() ;
     }
 
     public void enterUserName(String username) {
@@ -42,5 +45,15 @@ public class LoginPage extends AbstractPage {
 
     public void verifyAllFieldsAreRequiredErrorMessage() {
         assertEquals(getDriver().findElement(all_fields_required_error_msg_id).getText(),"All fields are required.");
+    }
+
+    public ResetPasswordPage clickOnForgotPasswordLink() {
+        getDriver().findElement(forgot_password_link_linkText).click();
+        ResetPasswordPage resetPasswordPage = new ResetPasswordPage(getDriver(), getUrlPrefix());
+        return resetPasswordPage;
+    }
+
+    public void verifyLoginPage() {
+        assertEquals(getPageUrl(),"");
     }
 }
