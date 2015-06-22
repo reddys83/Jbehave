@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LoginPage extends AbstractPage {
 
@@ -54,6 +55,11 @@ public class LoginPage extends AbstractPage {
     }
 
     public void verifyLoginPage() {
-        assertEquals(getPageUrl(),"");
+        validatePage(username_field_name);
+        assertTrue(getDriver().findElement(username_field_name).isDisplayed());
+    }
+
+    public void clickBackButton() {
+        getDriver().navigate().back();
     }
 }

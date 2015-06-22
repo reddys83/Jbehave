@@ -1,10 +1,7 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.jbehave.pages.LoginPage;
-import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Named;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
+import org.jbehave.core.annotations.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -54,7 +51,15 @@ public class LoginSteps extends AbstractSteps {
     }
 
     @Then("the user should see the login page")
+    @Aliases (values={"the user is successfully logged out",
+                      "the user is still logged out"})
     public void thenTheUserShouldSeeLoginPage(){
         getLoginPage().verifyLoginPage();
     }
+
+    @When("I click the back button on the browser")
+    public void whenIClickBackButton(){
+        loginPage.clickBackButton();
+    }
+
 }

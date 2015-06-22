@@ -39,6 +39,12 @@ public abstract class AbstractPage {
 		wait.until(ExpectedConditions.presenceOfElementLocated(contentLocator));
 	}
 
+	public void validatePage(By by) {
+		assertNotNull(driver);
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(2, TimeUnit.SECONDS);
+		wait.until(ExpectedConditions.presenceOfElementLocated(by));
+	}
+
 	public WebDriver getDriver() {
 		return driver;
 	}

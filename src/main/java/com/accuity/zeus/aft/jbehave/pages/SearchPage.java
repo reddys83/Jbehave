@@ -17,6 +17,8 @@ public class SearchPage extends AbstractPage {
 
 	private By resultLinkLocator = By.id("report-nav");
 
+	private By logoutLinkLocator = By.linkText("logout");
+
 	public SearchPage(WebDriver driver, String urlPrefix) {
 		super(driver, urlPrefix);
 	}
@@ -44,4 +46,8 @@ public class SearchPage extends AbstractPage {
         ReportPage reportPage = new ReportPage(getDriver(), getUrlPrefix());
 		return reportPage;
     }
+
+	public void clickOnLogout() {
+		getDriver().findElement(logoutLinkLocator).click();
+	}
 }

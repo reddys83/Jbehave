@@ -8,6 +8,7 @@ import com.accuity.zeus.aft.service.legalEntity.LegalEntityDocumentService;
 import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
+import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -54,7 +55,13 @@ public class SearchSteps extends AbstractSteps {
         setReportPage(searchPage.clickOnReportsTab());
     }
 
-    private LegalEntity getExpectedLegalEntity(String entity) {
+	@When("the user clicks on the logout link")
+	public void whenUserClicksLogout(){
+		searchPage.clickOnLogout();
+	}
+
+
+	private LegalEntity getExpectedLegalEntity(String entity) {
         LegalEntity instance = legalEntityDocumentService.getArbitraryEntity(entity);
         if (instance != null) {
             expectedMap.put(instance.getFid(), instance);
