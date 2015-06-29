@@ -3,10 +3,9 @@ package com.accuity.zeus.aft.jbehave.steps;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.springframework.stereotype.Component;
 
-/**
- * Created by sahug on 6/19/2015.
- */
+@Component
 public class ResetPasswordSteps extends AbstractSteps{
 
     @Then("the user should see the reset password page")

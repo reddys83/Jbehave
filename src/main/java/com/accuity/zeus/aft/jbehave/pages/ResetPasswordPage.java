@@ -5,12 +5,11 @@ import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by sahug on 6/19/2015.
- */
 public class ResetPasswordPage extends AbstractPage {
 
+    private static final String PAGE_URI = "/#forgotPassword";
     private By reset_password_instruction_id = By.id("forgot-dialog1");
+    private By reset_password_text_xpath = By.xpath("//*[@id='content']//legend");
     private By username_field_name = By.name("username");
     private By email_field_name = By.name("email");
     private By submit_button_name = By.name("submit");
@@ -26,11 +25,14 @@ public class ResetPasswordPage extends AbstractPage {
 
     @Override
     public String getPageUrl() {
-        return getDriver().getCurrentUrl();
+            StringBuilder sb = new StringBuilder();
+            sb.append(getUrlPrefix());
+            sb.append(PAGE_URI);
+            return sb.toString();
     }
 
     public void verifyResetPasswordPage(){
-        assertEquals(getPageUrl(),"");
+        assertEquals(getDriver().findElement(reset_password_text_xpath).getText(), "RESET PASSWORD:");
     }
 
     public void verifyResetInstruction() {

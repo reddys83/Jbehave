@@ -6,17 +6,6 @@ As a user when I search by Name, FID, TFPID and click on the search results card
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-68 - An authorized user can log in to Zeus
 
-Scenario: Successful login
-Given user is on the login page
-When the user enters username as <username>
-And the user enters password as <password>
-And the user clicks on the login button
-Then the user should see the search page
-
-Examples:
-|username|password|
-|||
-
 Scenario: Inavlid username/password combination
 Given user is on the login page
 When the user enters username as <username>
@@ -26,8 +15,8 @@ Then the user should see the error message please enter a valid username/passwor
 
 Examples:
 |username|password|
-|||
-|||
+|qatest|password2|
+|qates|password1|
 
 Scenario: All fields are required
 Given user is on the login page
@@ -38,5 +27,16 @@ Then the user should see the error message all fields are required
 
 Examples:
 |username|password|
-|||
-|||
+|qatest||
+||password1|
+
+Scenario: Successful login
+Given user is on the login page
+When the user enters username as <username>
+And the user enters password as <password>
+And the user clicks on the login button
+Then the user should see the search page
+
+Examples:
+|username|password|
+|qatest|password1|

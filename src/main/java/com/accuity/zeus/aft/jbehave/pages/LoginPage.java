@@ -2,14 +2,13 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class LoginPage extends AbstractPage {
 
     private ResetPasswordPage resetPasswordPage;
-
+    private static final String PAGE_URI = "";
     private By username_field_name = By.name("username");
     private By password_field_name = By.name("password");
     private By login_button_name = By.name("login");
@@ -23,7 +22,7 @@ public class LoginPage extends AbstractPage {
 
     @Override
     public String getPageUrl() {
-        return getDriver().getCurrentUrl() ;
+        return getUrlPrefix() + PAGE_URI;
     }
 
     public void enterUserName(String username) {
@@ -41,7 +40,12 @@ public class LoginPage extends AbstractPage {
     }
 
     public void verifyInvalidCombinationErrorMessage() {
-        assertEquals(getDriver().findElement(invalid_combination_error_msg_id).getText(),"Please enter a valid username/password combination.");
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(getDriver().findElement(invalid_combination_error_msg_id).getText(), "Please enter a valid username/password combination.");
     }
 
     public void verifyAllFieldsAreRequiredErrorMessage() {
@@ -50,7 +54,7 @@ public class LoginPage extends AbstractPage {
 
     public ResetPasswordPage clickOnForgotPasswordLink() {
         getDriver().findElement(forgot_password_link_linkText).click();
-        ResetPasswordPage resetPasswordPage = new ResetPasswordPage(getDriver(), getUrlPrefix());
+        resetPasswordPage = new ResetPasswordPage(getDriver(), getUrlPrefix());
         return resetPasswordPage;
     }
 

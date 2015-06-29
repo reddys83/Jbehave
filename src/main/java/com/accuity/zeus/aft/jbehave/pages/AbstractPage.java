@@ -82,6 +82,4 @@ public abstract class AbstractPage {
 		Select dropdown = new Select(driver.findElement(by));
 		dropdown.selectByValue(value);
 	}
-
-
 }

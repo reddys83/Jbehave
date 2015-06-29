@@ -1,4 +1,4 @@
-Meta:@Login
+Meta:@ResetPassword
 
 Narrative:
 In order to view stub entry details
@@ -18,7 +18,7 @@ Then the user should see the password reset request confirmation message in the 
 
 Examples:
 |username|emailId|
-|||
+|qatest|gajendra.sahu@accuity.com|
 
 Scenario: Invalid Email
 Given user is on the login page
@@ -32,7 +32,7 @@ Then the user should see the error message for email does not match in the reset
 
 Examples:
 |username|emailId|
-|||
+|qatest|gajendra.sahu@accuit.com|
 
 Scenario: Invalid Username
 Given user is on the login page
@@ -46,7 +46,7 @@ Then the user should see the error message for invalid username in the reset pas
 
 Examples:
 |username|emailId|
-|||
+|qates|gajendra.sahu@accuity.com|
 
 Scenario: Invalid Username
 Given user is on the login page
@@ -60,7 +60,7 @@ Then the user should see the error message for all fields are required in the re
 
 Examples:
 |username|emailId|
-|||
+|qatest||
 
 Scenario: Return to login
 Given user is on the login page
@@ -69,7 +69,3 @@ Then the user should see the reset password page
 And the user should see the instructions to provide username and email id in the reset password page
 When the user clicks on return to login link in the reset password page
 Then the user should see the login page
-
-Examples:
-|username|emailId|
-|||
