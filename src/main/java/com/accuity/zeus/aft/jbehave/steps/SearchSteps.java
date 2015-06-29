@@ -1,14 +1,12 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.domain.legalEntity.LegalEntity;
-import com.accuity.zeus.aft.jbehave.pages.ReportPage;
 import com.accuity.zeus.aft.jbehave.pages.SearchPage;
 import com.accuity.zeus.aft.result.ResultsPage;
 import com.accuity.zeus.aft.service.legalEntity.LegalEntityDocumentService;
 import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
-import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -57,7 +55,12 @@ public class SearchSteps extends AbstractSteps {
 
 	@When("the user clicks on the logout link")
 	public void whenUserClicksLogout(){
-		searchPage.clickOnLogout();
+		setLoginPage(getSearchPage().clickOnLogout());
+	}
+
+	@When("the user moves the cursor to the settings in the search page")
+	public void userMovesCursorToSettings(){
+		getSearchPage().moveCursorToSettings();
 	}
 
 
