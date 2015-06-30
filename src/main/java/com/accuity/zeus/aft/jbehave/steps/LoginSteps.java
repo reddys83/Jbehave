@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.jbehave.pages.LoginPage;
 import org.jbehave.core.annotations.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -9,21 +10,38 @@ public class LoginSteps extends AbstractSteps {
 
     private LoginPage loginPage;
 
+    @Value("${data.management.webapp.aft.uid}")
+    private String username;
+
+    @Value("${data.management.webapp.aft.pwd}")
+    private String password;
+
     @Given("user is on the login page")
     public void givenUserOpensLoginPage(){
         loginPage = new LoginPage(webDriverState.getWebDriver(), getDataManagementWebappUrl());
         loginPage.open();
     }
 
-    @When("the user enters username as <username> in the login page")
-    public void whenUserEntersUserName(@Named("username") String username){
+    @When("the user enters a valid username on the login page")
+    public void whenUserEntersUserName(){
         loginPage.enterUserName(username);
     }
 
-    @When("the user enters password as <password> in the login page")
-    public void whenUserEntersPassword(@Named("password") String password){
+    @When("the user enters a valid password on the login page")
+    public void whenUserEntersPassword(){
         loginPage.enterPassword(password);
     }
+
+    @When("the user enters an invalid username on the login page")
+    public void whenUserEntersInvalidUserName(){
+        loginPage.enterUserName("NotAValidUsername");
+    }
+
+    @When("the user enters an invalid password on the login page")
+    public void whenUserEntersInvalidPassword(){
+        loginPage.enterPassword("NotAValidPassword");
+    }
+
 
     @When("the user clicks on the login button in the login page")
     public void whenUserClicksOnLoginButton(){

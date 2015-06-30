@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.springframework.beans.factory.annotation.Value;
 
 
 public class SearchPage extends AbstractPage {
@@ -16,6 +17,12 @@ public class SearchPage extends AbstractPage {
 	private By result_link_id = By.id("report-nav");
 	private By logout_link_id = By.id("logout");
 	private By settings_icon_id = By.cssSelector("#user-menu>span");
+
+	@Value("${data.management.webapp.aft.uid}")
+	private String username;
+
+	@Value("${data.management.webapp.aft.pwd}")
+	private String password;
 
 	public SearchPage(WebDriver driver, String urlPrefix) {
 		super(driver, urlPrefix);
@@ -76,8 +83,8 @@ public class SearchPage extends AbstractPage {
 			e.printStackTrace();
 		}
 		if(getDriver().getCurrentUrl().contains("#login")){
-			loginPage.enterUserName("qatest");
-			loginPage.enterPassword("password1");
+			loginPage.enterUserName(username);
+			loginPage.enterPassword(password);
 			searchPage = loginPage.clickOnLoginButton();
 		} else {
             searchPage = new SearchPage(getDriver(), getUrlPrefix());
