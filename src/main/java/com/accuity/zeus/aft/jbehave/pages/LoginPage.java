@@ -26,14 +26,29 @@ public class LoginPage extends AbstractPage {
     }
 
     public void enterUserName(String username) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         getDriver().findElement(username_field_name).sendKeys(username);
     }
 
     public void enterPassword(String password) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         getDriver().findElement(password_field_name).sendKeys(password);
     }
 
     public SearchPage clickOnLoginButton() {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         getDriver().findElement(login_button_name).click();
         SearchPage searchPage = new SearchPage(getDriver(), getUrlPrefix());
         return searchPage;

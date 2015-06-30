@@ -9,9 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by soofis on 3/11/2015.
- */
 @Component()
 @Scope("singleton")
 public class WebDriverState {

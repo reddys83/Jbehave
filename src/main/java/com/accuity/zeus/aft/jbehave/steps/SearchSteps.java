@@ -29,28 +29,23 @@ public class SearchSteps extends AbstractSteps {
 	@Given("a user is on the search page")
 	public void givenUserIsOnSearchPage() {
 		searchPage = new SearchPage(webDriverState.getWebDriver(), getDataManagementWebappUrl());
-		searchPage.open();
+		setSearchPage(searchPage.goToSearchPage());
 	}
 	
 	@When("the user searches for an arbitrary <entity>")
 	public void whenUserSearches(@Named("entity") String entity) {
-		if (searchPage != null) {
 			LegalEntity tempEntity = getExpectedLegalEntity(entity);
-			resultsPage = searchPage.search(entity, "id", tempEntity.getId());
-		}
+			setResultsPage(getSearchPage().search(entity, "id", tempEntity.getId()));
 	}
 
 	@When("the user searches for <entity> with <field> equals <value>")
 	public void whenUserSearches(@Named("entity") String entity, @Named("field") String field, @Named("value") String value) {
-		if (searchPage != null) {
-			//getExpectedLegalEntity(entity, field, value);
-			resultsPage = searchPage.search(entity, field, value);
-		}
+			setResultsPage(getSearchPage().search(entity, field, value));
 	}
 
 	@When("the user clicks on the report tab")
     public void whenUserClicksOnReportTab(){
-        setReportPage(searchPage.clickOnReportsTab());
+        setReportPage(getSearchPage().clickOnReportsTab());
     }
 
 	@When("the user clicks on the logout link")
@@ -62,7 +57,6 @@ public class SearchSteps extends AbstractSteps {
 	public void userMovesCursorToSettings(){
 		getSearchPage().moveCursorToSettings();
 	}
-
 
 	private LegalEntity getExpectedLegalEntity(String entity) {
         LegalEntity instance = legalEntityDocumentService.getArbitraryEntity(entity);

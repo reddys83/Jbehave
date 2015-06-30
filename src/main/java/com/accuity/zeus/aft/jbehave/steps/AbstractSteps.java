@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.jbehave.pages.LoginPage;
 import com.accuity.zeus.aft.jbehave.pages.ReportPage;
 import com.accuity.zeus.aft.jbehave.pages.ResetPasswordPage;
 import com.accuity.zeus.aft.jbehave.pages.SearchPage;
+import com.accuity.zeus.aft.result.ResultsPage;
 import com.accuity.zeus.aft.web.driver.WebDriverState;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.utils.URIBuilder;
@@ -20,6 +21,7 @@ public abstract class AbstractSteps {
 	private static final Logger log = Logger.getLogger(AbstractSteps.class);
 	private static ReportPage reportPage;
 	private static SearchPage searchPage;
+	private static ResultsPage resultsPage;
 	private static ResetPasswordPage resetPasswordPage;
 	private static LoginPage loginPage;
 
@@ -119,5 +121,13 @@ public abstract class AbstractSteps {
 
 	public void setLoginPage(LoginPage loginPage) {
 		this.loginPage = loginPage;
+	}
+
+	public ResultsPage getResultsPage() {
+		return resultsPage;
+	}
+
+	public void setResultsPage(ResultsPage resultsPage) {
+		this.resultsPage = resultsPage;
 	}
 }

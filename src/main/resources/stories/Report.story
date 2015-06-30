@@ -10,12 +10,12 @@ Scenario: Verify Code Count
 Given a user is on the search page
 When the user clicks on the report tab
 Then the user should see the report page
-And the Run button is disabled
-When the user selects the area as <area>
-Then the Run button is disabled
-When the user selects the required match as <requiredMatch>
-And the user clicks on the Run button
-Then the user should see the count of the selected criteria as <count>
+And the user should see the run button disabled in the report page
+When the user selects the area as <area> in the report page
+Then the user should see the run button disabled in the report page
+When the user selects the required match as <requiredMatch> in the report page
+And the user clicks on the run button in the report page
+Then the user should see the count of the selected criteria as <count> in the report page
 
 Examples:
 |area|requiredMatch|count|

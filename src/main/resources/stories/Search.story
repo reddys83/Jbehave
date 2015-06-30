@@ -1,4 +1,4 @@
-Meta:
+Meta:@Search
 
 Narrative:
 As a user

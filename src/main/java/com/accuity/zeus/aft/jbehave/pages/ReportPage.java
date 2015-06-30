@@ -48,6 +48,11 @@ public class ReportPage extends AbstractPage {
     }
 
     public void selectRequiredMatch(String requiredMatch) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         this.requiredMatch = requiredMatch;
         assertFalse(getDriver().findElement(run_button_disabled).isEnabled());
         assertEquals(getDriver().findElement(required_match_label).getText(),"REQUIRED MATCH");
@@ -55,6 +60,11 @@ public class ReportPage extends AbstractPage {
     }
 
     public void clickOnRunButton() {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         getDriver().findElement(run_button_css).click();
     }
 
