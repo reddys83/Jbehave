@@ -8,14 +8,14 @@ JIRA ID - ZEUS-194 - user can log out of zeus
 
 Scenario: Successful logout
 Given user is on the login page
-When the user enters username as <username>
-And the user enters password as <password>
-And the user clicks on the login button
+When the user enters username as <username> in the login page
+And the user enters password as <password> in the login page
+And the user clicks on the login button in the login page
 Then the user should see the search page
 When the user moves the cursor to the settings in the search page
-When the user clicks on the logout link
+When the user clicks on the logout link in the search page
 Then the user is successfully logged out
-When I click the back button on the browser
+When the user clicks on the browser navigate back button
 Then the user is still logged out
 
 Examples:

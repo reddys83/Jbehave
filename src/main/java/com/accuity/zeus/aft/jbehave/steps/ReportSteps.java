@@ -30,7 +30,7 @@ public class ReportSteps extends AbstractSteps{
 
     @Then("the user should see the run button disabled in the report page")
     public void verifyRunButtonIsDisabled(){
-
+        getReportPage().verifyRunButtonIsDisabled();
     }
 
     @Then("the user should see the count of the selected criteria as <count> in the report page")

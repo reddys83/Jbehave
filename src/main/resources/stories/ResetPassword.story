@@ -8,7 +8,7 @@ JIRA ID - ZEUS-99 - send password reset email
 
 Scenario: Successful Reset
 Given user is on the login page
-When the user clicks on the forgot password link on login screen
+When the user clicks on the forgot password link in the login page
 Then the user should see the reset password page
 And the user should see the instructions to provide username and email id in the reset password page
 When the user enters username as <username> in the reset password page
@@ -22,7 +22,7 @@ Examples:
 
 Scenario: Invalid Email
 Given user is on the login page
-When the user clicks on the forgot password link on login screen
+When the user clicks on the forgot password link in the login page
 Then the user should see the reset password page
 And the user should see the instructions to provide username and email id in the reset password page
 When the user enters username as <username> in the reset password page
@@ -36,7 +36,7 @@ Examples:
 
 Scenario: Invalid Username
 Given user is on the login page
-When the user clicks on the forgot password link on login screen
+When the user clicks on the forgot password link in the login page
 Then the user should see the reset password page
 And the user should see the instructions to provide username and email id in the reset password page
 When the user enters username as <username> in the reset password page
@@ -50,7 +50,7 @@ Examples:
 
 Scenario: Invalid Username
 Given user is on the login page
-When the user clicks on the forgot password link on login screen
+When the user clicks on the forgot password link in the login page
 Then the user should see the reset password page
 And the user should see the instructions to provide username and email id in the reset password page
 When the user enters username as <username> in the reset password page
@@ -64,7 +64,7 @@ Examples:
 
 Scenario: Return to login
 Given user is on the login page
-When the user clicks on the forgot password link on login screen
+When the user clicks on the forgot password link in the login page
 Then the user should see the reset password page
 And the user should see the instructions to provide username and email id in the reset password page
 When the user clicks on return to login link in the reset password page

@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class LoginPage extends AbstractPage {
@@ -15,6 +16,7 @@ public class LoginPage extends AbstractPage {
     private By invalid_combination_error_msg_id = By.id("login-error1");
     private By all_fields_required_error_msg_id = By.id("login-error2");
     private By forgot_password_link_linkText = By.linkText("Forgot password?");
+    private By error_message_css = By.cssSelector(".login-error>p");
 
     public LoginPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -76,9 +78,14 @@ public class LoginPage extends AbstractPage {
     public void verifyLoginPage() {
         validatePage(username_field_name);
         assertTrue(getDriver().findElement(username_field_name).isDisplayed());
+        assertFalse(getDriver().findElement(error_message_css).isDisplayed());
     }
 
     public void clickBackButton() {
         getDriver().navigate().back();
+    }
+
+    public void refreshPage() {
+        getDriver().navigate().refresh();
     }
 }
