@@ -31,12 +31,6 @@ public class WebDriverState {
 		}
 	}
 
-	@AfterStories
-	public void cleanup() {
-		webDriver.quit();
-		webDriver = null;
-	}
-	
 	public WebDriver getWebDriver() {
 		return webDriver;
 	}

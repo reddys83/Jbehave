@@ -75,7 +75,6 @@ public class ResetPasswordPage extends AbstractPage {
 
     public LoginPage clickOnReturnToLoginLink() {
         getDriver().findElement(return_to_login_linkText).click();
-        LoginPage loginPage = new LoginPage(getDriver(), getUrlPrefix());
-        return loginPage;
+        return new LoginPage(getDriver(), getUrlPrefix());
     }
 }

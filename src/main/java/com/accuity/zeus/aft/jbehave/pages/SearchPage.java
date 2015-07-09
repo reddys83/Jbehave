@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
 import com.accuity.zeus.aft.result.ResultsPage;
+import org.jbehave.core.annotations.AfterStories;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,12 +25,17 @@ public class SearchPage extends AbstractPage {
 	@Value("${data.management.webapp.aft.pwd}")
 	private String password;
 
+	@AfterStories
+	public void cleanup() {
+		clickOnLogout();
+		getDriver().quit();
+	}
+
 	public SearchPage(WebDriver driver, String urlPrefix) {
 		super(driver, urlPrefix);
 	}
 
 	private LoginPage loginPage = new LoginPage(getDriver(), getUrlPrefix());
-	private SearchPage searchPage;
 
 	@Override
 	public String getPageUrl() {
@@ -59,14 +65,16 @@ public class SearchPage extends AbstractPage {
 
 	public ReportPage clickOnReportsTab(){
         getDriver().findElement(result_link_id).click();
-        ReportPage reportPage = new ReportPage(getDriver(), getUrlPrefix());
-		return reportPage;
+        return new ReportPage(getDriver(), getUrlPrefix());
     }
 
 	public LoginPage clickOnLogout() {
-		getDriver().findElement(logout_link_id).click();
-		loginPage = new LoginPage(getDriver(), getUrlPrefix());
-		return loginPage;
+		if(!getDriver().getCurrentUrl().contains("#login")) {
+			getDriver().findElement(logout_link_id).click();
+			loginPage = new LoginPage(getDriver(), getUrlPrefix());
+			return loginPage;
+		}
+		return null;
 	}
 
 	public void moveCursorToSettings() {
@@ -85,10 +93,9 @@ public class SearchPage extends AbstractPage {
 		if(getDriver().getCurrentUrl().contains("#login")){
 			loginPage.enterUserName(username);
 			loginPage.enterPassword(password);
-			searchPage = loginPage.clickOnLoginButton();
+			return loginPage.clickOnLoginButton();
 		} else {
-            searchPage = new SearchPage(getDriver(), getUrlPrefix());
+            return new SearchPage(getDriver(), getUrlPrefix());
         }
-		return searchPage;
 	}
 }
