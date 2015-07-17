@@ -9,15 +9,15 @@ public class SearchPage extends AbstractPage {
 
 	private static final String PAGE_URI = "";
 
-	private By searchFieldLocator = By.xpath(".//header/form/select[@name='idType']");
+	private By search_field_xpath = By.xpath(".//header/form/select[@name='idType']");
 
-	private By searchValueLocator = By.xpath(".//header/form/input[@name='id']");
+	private By search_value_xpath = By.xpath(".//header/form/input[@name='id']");
 
-	private By searchButtonLocator = By.id("search-button");
+	private By search_button_id = By.id("search-button");
 
-	private By resultLinkLocator = By.id("report-nav");
+	private By result_link_xpath = By.id("report-nav");
 
-
+	private By data_tab_xpath = By.xpath("//header/nav[1]/ul/li[1]");
 
 	public SearchPage(WebDriver driver, String urlPrefix) {
 		super(driver, urlPrefix);
@@ -33,17 +33,23 @@ public class SearchPage extends AbstractPage {
 			throw new RuntimeException();
 		}
 		//getDriver().findElement(entityTypeLocator).sendKeys(entity);
-		getDriver().findElement(searchFieldLocator).sendKeys(field);
-		getDriver().findElement(searchValueLocator).sendKeys(value);
-		getDriver().findElement(searchButtonLocator).click();
+		getDriver().findElement(search_field_xpath).sendKeys(field);
+		getDriver().findElement(search_value_xpath).sendKeys(value);
+		getDriver().findElement(search_button_id).click();
 		ResultsPage resultsPage = new ResultsPage(getDriver(), getUrlPrefix(), entity, field, value);
 		resultsPage.validatePage();
 		return resultsPage;
 	}
 
 	public ReportPage clickOnReportsTab(){
-        getDriver().findElement(resultLinkLocator).click();
+        getDriver().findElement(result_link_xpath).click();
         ReportPage reportPage = new ReportPage(getDriver(), getUrlPrefix());
 		return reportPage;
     }
+
+	public DataPage clickOnDataTab() {
+		getDriver().findElement(data_tab_xpath).click();
+		DataPage dataPage = new DataPage(getDriver(), getUrlPrefix());
+		return dataPage;
+	}
 }
