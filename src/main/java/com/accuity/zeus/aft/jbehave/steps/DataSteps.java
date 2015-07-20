@@ -35,5 +35,35 @@ public class DataSteps extends AbstractSteps {
     public void thenTheUSerShouldNoResultsMatchOption(){
         getDataPage().verifyNoResultsMatchOption();
     }
+
+    @When("the user selects the currency <currency> from the currency drop-down")
+    public void whenTheUserSelctsTheCurrecny(@Named("currency") String currency){
+        getDataPage().selectCurrencyFromDropDownList(currency);
+    }
+
+    @Then("the user should see the currency iso code <isoCode> view only field for the selected currency")
+    public void thenTheUserShouldSeeCurrencyIsoCode(@Named("isoCode") String isoCode){
+        getDataPage().verifyCurrencyIsoCode(isoCode);
+    }
+
+    @Then("the user should see the currency name <name> view only field for the selected currency")
+    public void thenTheUserShouldSeeCurrencyName(@Named("name") String name){
+        getDataPage().verifyCurrencyName(name);
+    }
+
+    @Then("the user should see the currency abbr <abbr> view only field for the selected currency")
+    public void thenTheUserShouldSeeCurrencyAbbr(@Named("abbr") String abbr){
+        getDataPage().verifyCurrencyAbbr(abbr);
+    }
+
+    @Then("the user should see the currency unit <unit> view only field for the selected currency")
+    public void thenTheUserShouldSeeCurrencyUnit(@Named("unit") String unit){
+        getDataPage().verifyCurrencyUnit(unit);
+    }
+
+    @Then("the user should see the currency quantity <quantity> view only field for the selected currency")
+    public void thenTheUserShouldSeeCurrencyQuantity(@Named("quantity") String quantity){
+        getDataPage().verifyCurrencyQuantity(quantity);
+    }
 }
 
