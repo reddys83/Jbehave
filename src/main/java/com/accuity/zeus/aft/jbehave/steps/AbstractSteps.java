@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 
+import com.accuity.zeus.aft.jbehave.pages.DataPage;
 import com.accuity.zeus.aft.jbehave.pages.ReportPage;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.utils.URIBuilder;
@@ -18,6 +19,7 @@ public abstract class AbstractSteps {
 	private static final Logger log = Logger.getLogger(AbstractSteps.class);
 
 	private static ReportPage reportPage;
+	private static DataPage dataPage;
 
 	@Autowired
 	protected WebDriverState webDriverState;
@@ -86,7 +88,6 @@ public abstract class AbstractSteps {
 		
 	}
 
-
 	public ReportPage getReportPage() {
 		return reportPage;
 	}
@@ -95,4 +96,11 @@ public abstract class AbstractSteps {
 		this.reportPage = reportPage;
 	}
 
+	public DataPage getDataPage() {
+		return dataPage;
+	}
+
+	public void setDataPage(DataPage dataPage) {
+		this.dataPage = dataPage;
+	}
 }
