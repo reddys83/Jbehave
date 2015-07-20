@@ -1,7 +1,8 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.zeus.aft.jbehave.pages.ReportPage;
-import org.jbehave.core.annotations.*;
+import org.jbehave.core.annotations.Named;
+import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,18 +1,9 @@
-Meta:
+Meta:@Search
 
 Narrative:
 As a user
 I want to perform an action
 So that I can achieve a business goal
-
-Scenario: search for an arbitrary entity and verify values
-Given a user is on the search page
-When the user searches for an arbitrary <entity>
-Then the user should see the search results for the searched entity
-
-Examples:    
-|entity|
-|legalEntity|
 
 Scenario: search by finid and verify values
 Given a user is on the search page
