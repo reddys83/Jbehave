@@ -70,6 +70,11 @@ public class ResetPasswordSteps extends AbstractSteps{
         getResetPasswordPage().verifyErrorMsgInvalidUsername();
     }
 
+    @Then("the user should see the error message that all fields are required")
+    public void thenUserShouldSeeAllFieldsRequiredErrMsg(){
+        getResetPasswordPage().verifyErrorMsgAllFieldsRequired();
+    }
+
     @Then("the user should see the error message to enter a valid email address")
     public void thenUserShouldSeeAllFieldsAreRequiredErrMsg(){
         getResetPasswordPage().verifyErrorMsgEnterValidEmailAddress();

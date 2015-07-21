@@ -8,10 +8,12 @@ JIRA ID - ZEUS-99 - send password reset email
 
 
 Scenario:
+Bug ID - ZEUS-282: IE 11 does not show any messages on clicking submit
 a. Valid username, Invalid Email - error message should be displayed for email
 b. Invalid username, valid Email - error message should be displayed for username
 c. Valid Username and no email address - error message should be displayed to enter valid email address
 d. Valid email address and no Username - error message should be displayed to enter valid username
+e. no username and no email address - error message all fields are required
 e. Valid Username and valid Email - password reset confirmation message is displayed
 f. Return to login page
 Meta:
@@ -39,6 +41,10 @@ When the user refreshes the reset password page
 And the user enters a valid email address in the reset password page
 And the user clicks on the submit button in the reset password page
 Then the user should see the error message for invalid username in the reset password page
+When the user refreshes the reset password page
+
+And the user clicks on the submit button in the reset password page
+Then the user should see the error message that all fields are required
 When the user refreshes the reset password page
 
 And the user enters a valid username in the reset password page

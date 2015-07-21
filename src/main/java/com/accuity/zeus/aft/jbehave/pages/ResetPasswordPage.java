@@ -78,4 +78,8 @@ public class ResetPasswordPage extends AbstractPage {
     public void refreshPage(){
         getDriver().navigate().refresh();
     }
+
+    public void verifyErrorMsgAllFieldsRequired() {
+        assertEquals("All fields are required.", getTextOnPage(error_message_xpath));
+    }
 }
