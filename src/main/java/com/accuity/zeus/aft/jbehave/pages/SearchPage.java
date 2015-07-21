@@ -14,7 +14,6 @@ public class SearchPage extends AbstractPage {
 	private static final String PAGE_URI = "";
 	private By search_by_id = By.id("search-type");
 	private By search_hera_css = By.cssSelector("[type='text']");
-	private By search_button_id = By.id("search-button");
 	private By result_link_id = By.id("report-nav");
 	private By logout_link_id = By.id("logout");
 	private By settings_icon_id = By.cssSelector("#user-menu>span");
@@ -30,6 +29,16 @@ public class SearchPage extends AbstractPage {
 		clickOnLogout();
 		getDriver().quit();
 	}
+
+	private By search_field_xpath = By.xpath(".//header/form/select[@name='idType']");
+
+	private By search_value_xpath = By.xpath(".//header/form/input[@name='id']");
+
+	private By search_button_id = By.id("search-button");
+
+	private By result_link_xpath = By.id("report-nav");
+
+	private By data_tab_xpath = By.xpath("//header/nav[1]/ul/li[1]");
 
 	public SearchPage(WebDriver driver, String urlPrefix) {
 		super(driver, urlPrefix);
@@ -57,6 +66,8 @@ public class SearchPage extends AbstractPage {
         getDriver().findElement(search_hera_css).click();
         getDriver().findElement(search_hera_css).sendKeys(value);
         getDriver().findElement(search_by_id).sendKeys(field);
+		getDriver().findElement(search_field_xpath).sendKeys(field);
+		getDriver().findElement(search_value_xpath).sendKeys(value);
 		getDriver().findElement(search_button_id).click();
 		ResultsPage resultsPage = new ResultsPage(getDriver(), getUrlPrefix(), entity, field, value);
 		resultsPage.validatePage();
@@ -97,5 +108,11 @@ public class SearchPage extends AbstractPage {
 		} else {
             return new SearchPage(getDriver(), getUrlPrefix());
         }
+    }
+
+	public DataPage clickOnDataTab() {
+		getDriver().findElement(data_tab_xpath).click();
+		DataPage dataPage = new DataPage(getDriver(), getUrlPrefix());
+		return dataPage;
 	}
 }
