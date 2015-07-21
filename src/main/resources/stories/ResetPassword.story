@@ -24,28 +24,28 @@ And the user enters an invalid email address a@a.com in the reset password page
 And the user clicks on the submit button in the reset password page
 Then the user should see the error message that says email does not match with the ID
 When the user refreshes the reset password page
-!--b
+
 And the user enters an invalid username ab in the reset password page
 And the user enters a valid email address in the reset password page
 And the user clicks on the submit button in the reset password page
 Then the user should see the error message for invalid username in the reset password page
 When the user refreshes the reset password page
-!--c
+
 And the user enters a valid username in the reset password page
 And the user clicks on the submit button in the reset password page
 Then the user should see the error message to enter a valid email address
 When the user refreshes the reset password page
-!--d
+
 And the user enters a valid email address in the reset password page
 And the user clicks on the submit button in the reset password page
 Then the user should see the error message for invalid username in the reset password page
 When the user refreshes the reset password page
-!--e
+
 And the user enters a valid username in the reset password page
 And the user enters a valid email address in the reset password page
 And the user clicks on the submit button in the reset password page
 Then the user should see the password reset request confirmation message in the reset password page
-!--f
+
 When the user clicks on return to login link in the reset password page
 Then the user should see the login page
 

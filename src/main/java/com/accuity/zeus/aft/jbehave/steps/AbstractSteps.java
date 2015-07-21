@@ -138,6 +138,7 @@ public abstract class AbstractSteps {
 
 	public void setResultsPage(ResultsPage resultsPage) {
 		this.resultsPage = resultsPage;
+	}
 
 	public DataPage getDataPage() {
 		return dataPage;
