@@ -30,6 +30,11 @@ public abstract class AbstractPage {
 
 	public void open() {
 		driver.get(getPageUrl());
+		try {
+			driver.navigate().to("javascript:document.getElementById('overridelink').click()");
+		}catch (Exception e){
+			System.out.println("SSL not handled");
+		}
 		validatePage();
 	}
 
@@ -82,4 +87,5 @@ public abstract class AbstractPage {
 		Select dropdown = new Select(driver.findElement(by));
 		dropdown.selectByValue(value);
 	}
+
 }

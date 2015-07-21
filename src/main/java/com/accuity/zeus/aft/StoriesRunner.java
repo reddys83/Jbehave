@@ -19,9 +19,11 @@ import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.ParameterConverters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -47,7 +49,7 @@ public class StoriesRunner extends InjectableEmbedder {
 
     @Test
     public void run() throws IOException {
-        List<String> storyPaths = new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("./src/main/resources"), "**/Login.story", "");
+        List<String> storyPaths = new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("./src/main/resources"), "**/ResetPassword.story", "");
         injectedEmbedder().runStoriesAsPaths(storyPaths) ;
     }
 
