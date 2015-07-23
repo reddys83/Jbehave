@@ -8,7 +8,6 @@ import java.util.Map;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.accuity.domain.legalEntity.LegalEntity;
 
 public class ResultsListItem {
 
@@ -34,18 +33,6 @@ public class ResultsListItem {
 		assertEqualsOrIsExpectedBlank(fid, getFid().getText());
 		assertEqualsOrIsExpectedBlank(tfpid, getTfpid().getText());
 		assertEqualsOrIsExpectedBlank(status, getStatus().getText());
-	}
-	
-	public void assertValid(Map<String, LegalEntity> expectedMap) {
-		LegalEntity expected = expectedMap.get(getFid().getText());
-		if (expected == null) {
-			fail();
-		}
-		assertEqualsOrIsExpectedBlank(expected.getSummary().getNames().getNames().get(0).getValue(), getName().getText());
-		//assertEqualsOrIsExpectedBlank(address, getAddress().getText());
-		assertEqualsOrIsExpectedBlank(expected.getFid(), getFid().getText());
-		assertEqualsOrIsExpectedBlank(expected.getTfpid(), getTfpid().getText());
-		assertEqualsOrIsExpectedBlank(expected.getSummary().getStatus(), getStatus().getText());
 	}
 	
 	public WebElement getName() {

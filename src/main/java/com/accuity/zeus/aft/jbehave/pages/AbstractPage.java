@@ -30,6 +30,11 @@ public abstract class AbstractPage {
 
 	public void open() {
 		driver.get(getPageUrl());
+		try {
+			driver.navigate().to("javascript:document.getElementById('overridelink').click()");
+		}catch (Exception e){
+			System.out.println("SSL not handled");
+		}
 		validatePage();
 	}
 
@@ -37,6 +42,12 @@ public abstract class AbstractPage {
 		assertNotNull(driver);
 		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(2, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.presenceOfElementLocated(contentLocator));
+	}
+
+	public void validatePage(By by) {
+		assertNotNull(driver);
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(2, TimeUnit.SECONDS);
+		wait.until(ExpectedConditions.presenceOfElementLocated(by));
 	}
 
 	public WebDriver getDriver() {
@@ -76,6 +87,5 @@ public abstract class AbstractPage {
 		Select dropdown = new Select(driver.findElement(by));
 		dropdown.selectByValue(value);
 	}
-
 
 }

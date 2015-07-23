@@ -1,25 +1,38 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.jbehave.pages.DataPage;
+
+import com.accuity.zeus.aft.jbehave.pages.LoginPage;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
-
 import com.accuity.zeus.aft.jbehave.pages.DataPage;
 import com.accuity.zeus.aft.jbehave.pages.ReportPage;
+import com.accuity.zeus.aft.jbehave.pages.ResetPasswordPage;
+import com.accuity.zeus.aft.jbehave.pages.SearchPage;
+import com.accuity.zeus.aft.result.ResultsPage;
+import com.accuity.zeus.aft.web.driver.WebDriverState;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.accuity.zeus.aft.web.driver.WebDriverState;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Map;
 
 public abstract class AbstractSteps {
 	
 	private static final Logger log = Logger.getLogger(AbstractSteps.class);
-
 	private static ReportPage reportPage;
+	private static SearchPage searchPage;
+	private static ResultsPage resultsPage;
+	private static ResetPasswordPage resetPasswordPage;
+	private static LoginPage loginPage;
+
 	private static DataPage dataPage;
+
 
 	@Autowired
 	protected WebDriverState webDriverState;
@@ -85,7 +98,6 @@ public abstract class AbstractSteps {
 			log.error(e.getLocalizedMessage());
 			throw new RuntimeException(e);
 		}
-		
 	}
 
 	public ReportPage getReportPage() {
@@ -96,11 +108,44 @@ public abstract class AbstractSteps {
 		this.reportPage = reportPage;
 	}
 
+	public SearchPage getSearchPage() {
+		return searchPage;
+	}
+
+	public void setSearchPage(SearchPage searchPage) {
+		this.searchPage = searchPage;
+	}
+
+	public ResetPasswordPage getResetPasswordPage() {
+		return resetPasswordPage;
+	}
+
+	public void setResetPasswordPage(ResetPasswordPage resetPasswordPage) {
+		this.resetPasswordPage = resetPasswordPage;
+	}
+
+	public LoginPage getLoginPage() {
+		return loginPage;
+	}
+
+	public void setLoginPage(LoginPage loginPage) {
+		this.loginPage = loginPage;
+	}
+
+	public ResultsPage getResultsPage() {
+		return resultsPage;
+	}
+
+	public void setResultsPage(ResultsPage resultsPage) {
+		this.resultsPage = resultsPage;
+	}
+
 	public DataPage getDataPage() {
 		return dataPage;
 	}
 
 	public void setDataPage(DataPage dataPage) {
 		this.dataPage = dataPage;
+
 	}
 }

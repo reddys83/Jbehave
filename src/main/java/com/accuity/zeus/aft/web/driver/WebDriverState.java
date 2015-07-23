@@ -1,17 +1,14 @@
 package com.accuity.zeus.aft.web.driver;
 
-import java.util.concurrent.TimeUnit;
-
-import org.jbehave.core.annotations.AfterScenario;
-import org.jbehave.core.annotations.BeforeScenario;
+import org.jbehave.core.annotations.AfterStories;
+import org.jbehave.core.annotations.BeforeStories;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by soofis on 3/11/2015.
- */
+import java.util.concurrent.TimeUnit;
+
 @Component()
 @Scope("singleton")
 public class WebDriverState {
@@ -24,7 +21,7 @@ public class WebDriverState {
 
 	private WebDriver webDriver;
 
-	@BeforeScenario
+	@BeforeStories
 	public void create() throws InterruptedException {
 		if (webDriver == null) {
 			webDriver = WebDriverEnum.getWebDriver(webDriverType);
@@ -34,12 +31,11 @@ public class WebDriverState {
 		}
 	}
 
-	@AfterScenario
-	public void cleanup() {
+	@AfterStories
+	public void cleanup(){
 		webDriver.quit();
-		webDriver = null;
 	}
-	
+
 	public WebDriver getWebDriver() {
 		return webDriver;
 	}

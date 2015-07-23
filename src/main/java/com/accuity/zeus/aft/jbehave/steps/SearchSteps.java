@@ -1,6 +1,5 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.domain.legalEntity.LegalEntity;
 import com.accuity.zeus.aft.jbehave.pages.DataPage;
 import com.accuity.zeus.aft.jbehave.pages.SearchPage;
 import com.accuity.zeus.aft.result.ResultsPage;
@@ -19,26 +18,32 @@ public class SearchSteps extends AbstractSteps {
 	public static ResultsPage resultsPage;
 	public static DataPage dataPage;
 
-	private Map<String, LegalEntity> expectedMap = new HashMap<String, LegalEntity>();
-
 	@Given("a user is on the search page")
 	public void givenUserIsOnSearchPage() {
 		searchPage = new SearchPage(webDriverState.getWebDriver(), getDataManagementWebappUrl());
-		searchPage.open();
+		setSearchPage(searchPage.goToSearchPage());
 	}
 
 	@When("the user searches for <entity> with <field> equals <value>")
 	public void whenUserSearches(@Named("entity") String entity, @Named("field") String field, @Named("value") String value) {
-		if (searchPage != null) {
-			//getExpectedLegalEntity(entity, field, value);
-			resultsPage = searchPage.search(entity, field, value);
-		}
+			setResultsPage(getSearchPage().search(entity, field, value));
 	}
 
 	@When("the user clicks on the report tab")
     public void whenUserClicksOnReportTab(){
-        setReportPage(searchPage.clickOnReportsTab());
+        setReportPage(getSearchPage().clickOnReportsTab());
     }
+
+
+	@When("the user clicks on the logout link in the search page")
+	public void whenUserClicksLogout(){
+		setLoginPage(getSearchPage().clickOnLogout());
+	}
+
+	@When("the user moves the cursor to the settings in the search page")
+	public void userMovesCursorToSettings(){
+		getSearchPage().moveCursorToSettings();
+	}
 
 	@When("the user clicks on the data tab in the search page")
 	public void whenUserClicksOnDataTab(){

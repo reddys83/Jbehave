@@ -34,6 +34,9 @@ public enum WebDriverEnum {
 	INTERNETEXPLORER {
 		@Override
 		public WebDriver createWebDriver() {
+			URL url;
+			url = this.getClass().getResource("/iedriver.exe");
+			System.setProperty("webdriver.ie.driver", url.getPath());
 			return new InternetExplorerDriver();
 		}
 	};

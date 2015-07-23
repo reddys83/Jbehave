@@ -29,7 +29,7 @@ public class ResultsPage extends AbstractPage {
 
 	private By resultsSelector = By.xpath(".//*[@id='search-results-list']/section/ol/li");
 
-	private By noResultsLocator = By.xpath("//*[@id='content']/div //header[@class='subheader']/p");
+	private By no_results_text_css = By.cssSelector(".subheader>p");
 
 	private By paginationInfoLocator = By.xpath(".//*[@id='pagination-info']");
 
@@ -70,7 +70,7 @@ public class ResultsPage extends AbstractPage {
 	}
 
 	public WebElement getNoResults() {
-		return getDriver().findElement(noResultsLocator);
+		return getDriver().findElement(no_results_text_css);
 	}
 
 	public WebElement getPaginationInfo() {
@@ -78,8 +78,7 @@ public class ResultsPage extends AbstractPage {
 	}
 
 	public List<ResultsListItem> getResultsList() {
-
-        if (resultsList == null) {
+		if (resultsList == null) {
 			resultsList = createResultsItemList();
 		}
 		return resultsList;
@@ -136,7 +135,12 @@ public class ResultsPage extends AbstractPage {
     }
 
     public WebElement goToDesiredSearchResultsPage(String page){
-        return getDriver().findElement(By.xpath(pagesNavigationListElements + "/li[" + page.replace("st", "").replace("nd", "").replace("rd", "").replace("th", "") + "]/span"));
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return getDriver().findElement(By.xpath(pagesNavigationListElements + "/li[" + page.replace("st", "").replace("nd", "").replace("rd", "").replace("th", "") + "]/span"));
     }
 
     public WebElement getCurrentSearchResultsPage(){
