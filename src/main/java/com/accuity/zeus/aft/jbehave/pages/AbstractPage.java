@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.Wait;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractPage {
 
@@ -30,18 +31,26 @@ public abstract class AbstractPage {
 
 	public void open() {
 		driver.get(getPageUrl());
-		try {
-			driver.navigate().to("javascript:document.getElementById('overridelink').click()");
-		}catch (Exception e){
-			System.out.println("SSL not handled");
+		if(driver.equals("internetExplorer")) {
+			try {
+				driver.navigate().to("javascript:document.getElementById('overridelink').click()");
+			} catch (Exception e) {
+				System.out.println("SSL not handled");
+			}
 		}
-		validatePage();
+		//validatePage();
 	}
 
 	public void validatePage() {
+		try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		assertNotNull(driver);
-		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(2, TimeUnit.SECONDS);
-		wait.until(ExpectedConditions.presenceOfElementLocated(contentLocator));
+		//Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(2, TimeUnit.SECONDS);
+		assertTrue(driver.findElement(contentLocator).isDisplayed());
+		//wait.until(ExpectedConditions.presenceOfElementLocated(contentLocator));
 	}
 
 	public void validatePage(By by) {
