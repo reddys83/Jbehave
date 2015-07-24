@@ -44,6 +44,11 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnChooseACurrencyOption() {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         getDriver().findElement(choose_currency_option_xpath).click();
     }
 
@@ -55,18 +60,23 @@ public class DataPage extends AbstractPage {
 
     public void enterCurrency(String curr) {
         currencySearchString = curr;
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         getDriver().findElement(currency_input_xpath).sendKeys(curr);
     }
 
     public void verifyCurrencyDropDownMatchesSearchString() {
         List<WebElement> currencyList = getDriver().findElements(currency_list_xpath);
-        for(WebElement currencyElement : currencyList){
-            assertTrue(currencyElement.getText().matches(currencySearchString));
+        for(int i=0; i<currencyList.size(); i++){
+            assertTrue(currencyList.get(i).getText().toLowerCase().contains(currencySearchString.toLowerCase()));
         }
     }
 
     public void verifyNoResultsMatchOption() {
-        assertEquals(getDriver().findElement(no_results_match_xpath).getText(),"\"No results match \"" + currencySearchString);
+        assertEquals("No results match \"" + currencySearchString + "\"",getDriver().findElement(no_results_match_xpath).getText());
     }
 
     public void selectCurrencyFromDropDownList(String currency) {
@@ -74,27 +84,27 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCurrencyIsoCode(String isoCode) {
-        assertEquals(currency_iso_code_label_id, "ISO:");
-        assertEquals(currency_iso_code_id, isoCode);
+        assertEquals("ISO:", currency_iso_code_label_id);
+        assertEquals(isoCode, currency_iso_code_id);
     }
 
     public void verifyCurrencyName(String name) {
-        assertEquals(currency_name_label_id, "Name:");
-        assertEquals(currency_name_id, name);
+        assertEquals("Name:", currency_name_label_id);
+        assertEquals(name, currency_name_id);
     }
 
     public void verifyCurrencyAbbr(String abbr) {
-        assertEquals(currency_abbr_label_id, "Abbr:");
-        assertEquals(currency_abbr_id, abbr);
+        assertEquals("Abbr:", currency_abbr_label_id);
+        assertEquals(abbr, currency_abbr_id);
     }
 
     public void verifyCurrencyUnit(String unit) {
-        assertEquals(currency_unit_label_id, "Abbr:");
-        assertEquals(currency_unit_id, unit);
+        assertEquals("Abbr:", currency_unit_label_id);
+        assertEquals(unit, currency_unit_id);
     }
 
     public void verifyCurrencyQuantity(String quantity) {
-        assertEquals(currency_quantity_label_id, "Quantity:");
-        assertEquals(currency_quantity_id, quantity);
+        assertEquals("Quantity:", currency_quantity_label_id);
+        assertEquals(quantity, currency_quantity_id);
     }
 }

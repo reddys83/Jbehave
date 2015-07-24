@@ -102,8 +102,10 @@ public class SearchPage extends AbstractPage {
 			e.printStackTrace();
 		}
 		if(getDriver().getCurrentUrl().contains("#login")){
-			loginPage.enterUserName(username);
-			loginPage.enterPassword(password);
+			//loginPage.enterUserName(username);
+			//loginPage.enterPassword(password);
+            loginPage.enterUserName("qatest");
+            loginPage.enterPassword("password1");
 			return loginPage.clickOnLoginButton();
 		} else {
             return new SearchPage(getDriver(), getUrlPrefix());
