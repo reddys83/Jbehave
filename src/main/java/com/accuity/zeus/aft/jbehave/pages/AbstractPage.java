@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -31,7 +32,7 @@ public abstract class AbstractPage {
 
 	public void open() {
 		driver.get(getPageUrl());
-		if(driver.equals("internetExplorer")) {
+		if(driver instanceof InternetExplorerDriver) {
 			try {
 				driver.navigate().to("javascript:document.getElementById('overridelink').click()");
 			} catch (Exception e) {
@@ -68,20 +69,38 @@ public abstract class AbstractPage {
 	}
 
 	public String getTextOnPage(By by) {
-		int timeout = 0;
+		int attempts = 0;
 		String text = null;
 		while(true){
+			waitFor();
 			if(!driver.findElement(by).getText().trim().isEmpty() || !driver.findElement(by).getText().trim().equals("")){
 				text = driver.findElement(by).getText().trim();
 				break;
 			}
-			if(timeout>=10){
+			if(attempts>=10){
 				break;
 			}
 			waitFor();
-			timeout++;
+			attempts++;
 		}
 		return text;
+	}
+
+	public void attemptClick(By by) {
+		int attempts = 0;
+		String text = null;
+		while(true){
+			waitFor();
+			if(driver.findElement(by).isDisplayed()){
+				driver.findElement(by).click();
+				break;
+			}
+			if(attempts>=10){
+				break;
+			}
+			waitFor();
+			attempts++;
+		}
 	}
 
 	private void waitFor(){

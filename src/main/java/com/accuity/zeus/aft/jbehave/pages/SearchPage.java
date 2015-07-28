@@ -113,7 +113,7 @@ public class SearchPage extends AbstractPage {
     }
 
 	public DataPage clickOnDataTab() {
-		getDriver().findElement(data_tab_xpath).click();
+		attemptClick(data_tab_xpath);
 		DataPage dataPage = new DataPage(getDriver(), getUrlPrefix());
 		return dataPage;
 	}

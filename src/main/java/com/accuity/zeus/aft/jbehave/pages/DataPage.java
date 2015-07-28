@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -19,14 +20,14 @@ public class DataPage extends AbstractPage {
     private By no_results_match_xpath = By.xpath("//*[@id='currency_chosen']/div/ul/li");
     private By currency_iso_code_label_id = By.id("iso");
     private By currency_iso_code_id = By.id("iso-value");
-    private By currency_name_label_id = By.id("");
-    private By currency_name_id = By.id("");
-    private By currency_abbr_label_id = By.id("");
-    private By currency_abbr_id = By.id("");
-    private By currency_unit_label_id = By.id("");
-    private By currency_unit_id = By.id("");
-    private By currency_quantity_label_id = By.id("");
-    private By currency_quantity_id = By.id("");
+    private By currency_name_label_xpath = By.xpath("//div[@id='view-currency']//dt[1]");
+    private By currency_name_xpath = By.xpath("//div[@id='view-currency']//dd[1]");
+    private By currency_abbr_label_xpath = By.xpath("//div[@id='view-currency']//dt[2]");
+    private By currency_abbr_xpath = By.xpath("//div[@id='view-currency']//dd[2]");
+    private By currency_unit_label_xpath = By.xpath("//div[@id='view-currency']//dt[3]");
+    private By currency_unit_xpath = By.xpath("//div[@id='view-currency']//dd[3]");
+    private By currency_quantity_label_xpath = By.xpath("//div[@id='view-currency']//dt[4]");
+    private By currency_quantity_xpath = By.xpath("//div[@id='view-currency']//dd[4]");
 
     private String currencySearchString = null;
 
@@ -40,7 +41,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnCurrencyTab() {
-        getDriver().findElement(currency_tab_xpath).click();
+        attemptClick(currency_tab_xpath);
     }
 
     public void clickOnChooseACurrencyOption() {
@@ -79,32 +80,42 @@ public class DataPage extends AbstractPage {
         assertEquals("No results match \"" + currencySearchString + "\"",getDriver().findElement(no_results_match_xpath).getText());
     }
 
-    public void selectCurrencyFromDropDownList(String currency) {
-        selectItemFromDropdownList(currency_list_xpath, currency);
+    public void selectCurrencyFromTypeAhead(String currency) {
+        getDriver().findElement(currency_input_xpath).sendKeys(currency);
+        getDriver().findElement(currency_input_xpath).sendKeys(Keys.RETURN);
     }
 
     public void verifyCurrencyIsoCode(String isoCode) {
-        assertEquals("ISO:", currency_iso_code_label_id);
-        assertEquals(isoCode, currency_iso_code_id);
+        assertEquals("ISO", getTextOnPage(currency_iso_code_label_id));
+        assertEquals(isoCode, getTextOnPage(currency_iso_code_id));
     }
 
     public void verifyCurrencyName(String name) {
-        assertEquals("Name:", currency_name_label_id);
-        assertEquals(name, currency_name_id);
+        assertEquals("Name", getTextOnPage(currency_name_label_xpath));
+        assertEquals(name, getTextOnPage(currency_name_xpath));
     }
 
     public void verifyCurrencyAbbr(String abbr) {
-        assertEquals("Abbr:", currency_abbr_label_id);
-        assertEquals(abbr, currency_abbr_id);
+        assertEquals("Abbr", getTextOnPage(currency_abbr_label_xpath));
+        assertEquals(abbr, getTextOnPage(currency_abbr_xpath));
     }
 
     public void verifyCurrencyUnit(String unit) {
-        assertEquals("Abbr:", currency_unit_label_id);
-        assertEquals(unit, currency_unit_id);
+        assertEquals("Unit", getTextOnPage(currency_unit_label_xpath));
+        if(unit.equals("null")){
+            assertTrue(null == getTextOnPage(currency_unit_xpath));
+        } else {
+            assertEquals(unit, getTextOnPage(currency_unit_xpath));
+        }
+
     }
 
     public void verifyCurrencyQuantity(String quantity) {
-        assertEquals("Quantity:", currency_quantity_label_id);
-        assertEquals(quantity, currency_quantity_id);
+        assertEquals("Quantity", getTextOnPage(currency_quantity_label_xpath));
+        if(quantity.equals("null")){
+            assertTrue(null == getTextOnPage(currency_quantity_xpath));
+        } else {
+            assertEquals(quantity, getTextOnPage(currency_quantity_xpath));
+        }
     }
 }
