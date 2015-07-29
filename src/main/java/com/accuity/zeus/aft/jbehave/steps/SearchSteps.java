@@ -15,8 +15,6 @@ import java.util.Map;
 public class SearchSteps extends AbstractSteps {
 
 	private SearchPage searchPage;
-	public static ResultsPage resultsPage;
-	public static DataPage dataPage;
 
 	@Given("a user is on the search page")
 	public void givenUserIsOnSearchPage() {

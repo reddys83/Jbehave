@@ -3,7 +3,9 @@ package com.accuity.zeus.aft.jbehave.steps;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DataSteps extends AbstractSteps {
 
     @When("the user clicks on the currency tab in the data area")
@@ -36,32 +38,32 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyNoResultsMatchOption();
     }
 
-    @When("the user selects the currency <currency> from the currency drop-down")
+    @When("the user enters the currency <currency> in the typeahead box")
     public void whenTheUserSelctsTheCurrecny(@Named("currency") String currency){
-        getDataPage().selectCurrencyFromDropDownList(currency);
+        getDataPage().selectCurrencyFromTypeAhead(currency);
     }
 
-    @Then("the user should see the currency iso code <isoCode> view only field for the selected currency")
+    @Then("the user should see the currency iso code value as <isoCode>")
     public void thenTheUserShouldSeeCurrencyIsoCode(@Named("isoCode") String isoCode){
         getDataPage().verifyCurrencyIsoCode(isoCode);
     }
 
-    @Then("the user should see the currency name <name> view only field for the selected currency")
+    @Then("the user should see the currency name value as <name>")
     public void thenTheUserShouldSeeCurrencyName(@Named("name") String name){
         getDataPage().verifyCurrencyName(name);
     }
 
-    @Then("the user should see the currency abbr <abbr> view only field for the selected currency")
+    @Then("the user should see the currency abbr value as <abbr>")
     public void thenTheUserShouldSeeCurrencyAbbr(@Named("abbr") String abbr){
         getDataPage().verifyCurrencyAbbr(abbr);
     }
 
-    @Then("the user should see the currency unit <unit> view only field for the selected currency")
+    @Then("the user should see the currency unit value as <unit>")
     public void thenTheUserShouldSeeCurrencyUnit(@Named("unit") String unit){
         getDataPage().verifyCurrencyUnit(unit);
     }
 
-    @Then("the user should see the currency quantity <quantity> view only field for the selected currency")
+    @Then("the user should see the currency quantity value as <quantity>")
     public void thenTheUserShouldSeeCurrencyQuantity(@Named("quantity") String quantity){
         getDataPage().verifyCurrencyQuantity(quantity);
     }

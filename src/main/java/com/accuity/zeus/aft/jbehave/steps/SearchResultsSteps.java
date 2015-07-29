@@ -11,8 +11,6 @@ import static org.junit.Assert.*;
 @Component
 public class SearchResultsSteps extends AbstractSteps{
 
-    SearchSteps searchSteps;
-
     @Then("the user should see the search results for the searched entity")
     public void thenUserShouldSeeCorrectResults() {
         if(Integer.parseInt(getResultsPage().getNumResultsValue().getText()) < 10) {
