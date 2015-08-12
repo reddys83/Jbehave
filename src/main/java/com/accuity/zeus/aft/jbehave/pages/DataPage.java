@@ -1,23 +1,19 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
+
 import com.accuity.zeus.aft.commons.DataManagementAppVals;
-import com.google.common.collect.Ordering;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class DataPage extends AbstractPage {
@@ -26,19 +22,22 @@ public class DataPage extends AbstractPage {
     private By country_tab_xpath=By.xpath("//*[@id='data-navbar']/ul/li[2]");
     private By currency_label_xpath = By.xpath("//*[@id='data']/dl/dt[1]");
     private By currency_list_xpath = By.xpath("//*[@class='chosen-results']/li");
-    private By choose_currency_option_xpath = By.xpath("//*[@id='currency_chosen']/a/span");
+    private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
-    private By no_results_match_xpath = By.xpath("//*[@id='currency_chosen']/div/ul/li");
+    private By no_results_match_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private By currency_iso_code_label_id = By.id("iso");
     private By currency_iso_code_id = By.id("iso-value");
-    private By currency_name_label_xpath = By.xpath("//div[@id='view-currency']//dt[1]");
-    private By currency_name_xpath = By.xpath("//div[@id='view-currency']//dd[1]");
-    private By currency_abbr_label_xpath = By.xpath("//div[@id='view-currency']//dt[2]");
-    private By currency_abbr_xpath = By.xpath("//div[@id='view-currency']//dd[2]");
-    private By currency_unit_label_xpath = By.xpath("//div[@id='view-currency']//dt[3]");
-    private By currency_unit_xpath = By.xpath("//div[@id='view-currency']//dd[3]");
-    private By currency_quantity_label_xpath = By.xpath("//div[@id='view-currency']//dt[4]");
-    private By currency_quantity_xpath = By.xpath("//div[@id='view-currency']//dd[4]");
+
+    private By currency_name_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[1]");
+    private By currency_name_xpath = By.xpath("//*[@id='content']/div/dl[1]/dd[1]");
+    private By currency_abbr_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[2]");
+    private By currency_abbr_xpath = By.xpath("//div[@id='content']//dd[2]");
+    private By currency_unit_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[3]");
+    private By currency_unit_xpath = By.xpath("//*[@id='content']/div/dl[1]/dd[3]");
+    private By currency_quantity_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[4]");
+    private By currency_quantity_xpath = By.xpath("//div[@id='content']//dd[4]");
+    String currency_use_table_xpath_string = "//*[@id='content']/div/table/tbody/tr[";
+    private By currency_use_table_header_xpath = By.xpath("//*[@id='content']/div/table/thead/tr");
     private By country_listbox_id= By.id("entitySelect_chosen");
     private By country_type_ahead_xpath=By.xpath("//*[@class='chosen-search']/input");
 
@@ -90,7 +89,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyNoResultsMatchOption() {
-        assertEquals("No results match \"" + currencySearchString + "\"",getDriver().findElement(no_results_match_xpath).getText());
+        assertEquals("No results match \"" + currencySearchString + "\"", getDriver().findElement(no_results_match_xpath).getText());
     }
 
     public void selectCurrencyFromTypeAhead(String currency) {
@@ -179,4 +178,45 @@ public class DataPage extends AbstractPage {
             assertTrue(countryList.getRow(i).containsValue(expCountryList[i+1]));
         }
     }
+
+    public void verifyCurrencyUse(ExamplesTable currencyUseTable) {
+        verifyCurrencyUseTableHeaders();
+        for(int i=0; i<currencyUseTable.getRowCount(); i++){
+
+            assertEquals(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(0)),
+                    getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i+1) + "]/td[1]")));
+
+            assertEquals(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(1)),
+                    getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i+1) + "]/td[2]")));
+
+            if(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(2)).isEmpty()){} else{
+                assertEquals(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(2)),
+                        getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[3]")));
+            }
+
+            assertEquals(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(3)),
+                    getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i+1) + "]/td[4]")));
+
+            if(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(4)).isEmpty()){} else {
+                assertEquals(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(4)),
+                        getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[5]")));
+            }
+
+            if(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(5)).isEmpty()){} else {
+                assertEquals(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(5)),
+                        getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[6]")));
+            }
+       }
+    }
+
+    public void verifyCurrencyUseTableHeaders() {
+            assertEquals(getTextOnPage(currency_use_table_header_xpath).replace("/n", "").replace("/r", ""), "COUNTRY START DATE END DATE PRIMARY REPLACED BY STATUS");
+        }
+
+    public void verifyNoCurrencyUse() {
+        try {
+            assertNull(getDriver().findElement(currency_use_table_header_xpath));
+        } catch(Exception NoSuchElementException){}
+    }
+
 }

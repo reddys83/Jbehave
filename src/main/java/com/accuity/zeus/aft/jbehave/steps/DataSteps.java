@@ -100,8 +100,18 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the countries in the listbox as: $countryList")
-    public void verifyCountriesInListBox(ExamplesTable countryList){
+    public void verifyCountriesInListBox(ExamplesTable countryList) {
         getDataPage().verifyCountriesInListBox(countryList);
+    }
+
+    @Then("the user should see the currency's uses $currencyUseTable")
+    public void thenTheUserShouldSeeCurrencyUse(ExamplesTable currencyUseTable){
+        getDataPage().verifyCurrencyUse(currencyUseTable);
+    }
+
+    @Then("the user should not see the currency's uses")
+    public void thenTheUserShouldNotSeeCurrencyUse(){
+        getDataPage().verifyNoCurrencyUse();
     }
 }
 

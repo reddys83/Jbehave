@@ -6,6 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-241 - User can search for an existing currency by full name
 JIRA ID - ZEUS-189 - User can view a currency
+JIRA ID - ZEUS-242 - User can view a currency's uses
 
 Scenario: Verify currency list
 Given a user is on the search page
@@ -49,3 +50,44 @@ Examples:
 |US Dollar|USD|US Dollar|US$|Cents|100|
 |Icelandic Krona|ISK|Icelandic Krona|ISK|null|null|
 |Sudanese Dinar|SDD|Sudanese Dinar|Dinar|Dirham|null|
+
+Scenario: Verify currency's uses.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+Then the user should see the currency's uses
+|COUNTRY|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
+|AFG|1980-01-01|2003-01-01|True|AFN|Inactive|
+
+Examples:
+|currency|
+|afghani|
+
+Scenario: Verify currency's uses. Sorting order.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+Then the user should see the currency's uses
+|COUNTRY|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
+|ZAF|1980-01-01||True||Active|
+|NAM|1980-01-01|1993-09-29|True|NAD|Inactive|
+
+Examples:
+|currency|
+|Rand|
+
+Scenario: Verify currency's uses. No uses.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+Then the user should not see the currency's uses
+
+Examples:
+|currency|
+|Special Drawing Rights|
