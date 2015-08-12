@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,6 +12,11 @@ public class DataSteps extends AbstractSteps {
     @When("the user clicks on the currency tab in the data area")
     public void whenUserClicksOnCurrencyTab(){
         getDataPage().clickOnCurrencyTab();
+    }
+
+    @When("the user clicks on the country tab in the data area")
+    public void userClicksOnCountryTab(){
+        getDataPage().clickOnCountryTab();
     }
 
     @When("the user clicks on the choose a currency option")
@@ -66,6 +72,36 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the currency quantity value as <quantity>")
     public void thenTheUserShouldSeeCurrencyQuantity(@Named("quantity") String quantity){
         getDataPage().verifyCurrencyQuantity(quantity);
+    }
+
+    @Then("the country list box is displayed")
+    public void verifyCountryListBoxIsDisplayed(){
+        getDataPage().verifyCountryListBoxIsDisplayed();
+    }
+
+    @When("the user clicks on the country list box")
+    public void userClicksOnCountryListBox(){
+        getDataPage().clickOnCountryListBox();
+    }
+
+    @Then("the countries type ahead and list is displayed")
+    public void verifyCountryTypeAheadAndListBox(){
+        getDataPage().verifyCountryTypeAheadAndListBox();
+    }
+
+    @Then("the list matches the expected country list and is sorted")
+    public void verifyCountryListMatchesExpectedList(){
+        getDataPage().verifyCountryListValues();
+    }
+
+    @When("the user starts typing the name of a country as $word in the country input box")
+    public void userEnterCountryTextInTypeAhead(String word){
+        getDataPage().enterValueInCountryTypeAhead(word);
+    }
+
+    @Then("the user should see the countries in the listbox as: $countryList")
+    public void verifyCountriesInListBox(ExamplesTable countryList){
+        getDataPage().verifyCountriesInListBox(countryList);
     }
 }
 
