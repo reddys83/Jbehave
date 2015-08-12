@@ -25,4 +25,5 @@ dependencies {
     compile 'org.jbehave:jbehave-core:3.9.5'
     compile 'org.springframework:spring-test:4.1.5.RELEASE'
     compile 'org.jbehave:jbehave-spring:3.9.5'
+    compile 'com.google.guava:guava:18.0'
 }

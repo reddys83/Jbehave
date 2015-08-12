@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
+import com.accuity.zeus.aft.commons.Utils;
 import com.accuity.zeus.aft.result.ResultsPage;
 import org.jbehave.core.annotations.AfterStories;
 import org.openqa.selenium.By;
@@ -7,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Value;
-
+import org.springframework.stereotype.Component;
 
 public class SearchPage extends AbstractPage {
 
@@ -17,12 +18,7 @@ public class SearchPage extends AbstractPage {
 	private By result_link_id = By.id("report-nav");
 	private By logout_link_id = By.id("logout");
 	private By settings_icon_id = By.cssSelector("#user-menu>span");
-
-	@Value("${data.management.webapp.aft.uid}")
-	private String username;
-
-	@Value("${data.management.webapp.aft.pwd}")
-	private String password;
+	private Utils utils = new Utils();
 
 	@AfterStories
 	public void cleanup() {
@@ -102,10 +98,8 @@ public class SearchPage extends AbstractPage {
 			e.printStackTrace();
 		}
 		if(getDriver().getCurrentUrl().contains("#login")){
-			//loginPage.enterUserName(username);
-			//loginPage.enterPassword(password);
-            loginPage.enterUserName("qatest");
-            loginPage.enterPassword("password1");
+			loginPage.enterUserName(utils.readPropertyFile().getProperty("data.management.webapp.aft.uid"));
+			loginPage.enterPassword(utils.readPropertyFile().getProperty("data.management.webapp.aft.pwd"));
 			return loginPage.clickOnLoginButton();
 		} else {
             return new SearchPage(getDriver(), getUrlPrefix());

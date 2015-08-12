@@ -1,20 +1,25 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
+
+import com.accuity.zeus.aft.commons.DataManagementAppVals;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class DataPage extends AbstractPage {
 
     private By currency_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li");
+    private By country_tab_xpath=By.xpath("//*[@id='data-navbar']/ul/li[2]");
     private By currency_label_xpath = By.xpath("//*[@id='data']/dl/dt[1]");
     private By currency_list_xpath = By.xpath("//*[@class='chosen-results']/li");
     private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
@@ -22,6 +27,7 @@ public class DataPage extends AbstractPage {
     private By no_results_match_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private By currency_iso_code_label_id = By.id("iso");
     private By currency_iso_code_id = By.id("iso-value");
+
     private By currency_name_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[1]");
     private By currency_name_xpath = By.xpath("//*[@id='content']/div/dl[1]/dd[1]");
     private By currency_abbr_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[2]");
@@ -32,6 +38,8 @@ public class DataPage extends AbstractPage {
     private By currency_quantity_xpath = By.xpath("//div[@id='content']//dd[4]");
     String currency_use_table_xpath_string = "//*[@id='content']/div/table/tbody/tr[";
     private By currency_use_table_header_xpath = By.xpath("//*[@id='content']/div/table/thead/tr");
+    private By country_listbox_id= By.id("entitySelect_chosen");
+    private By country_type_ahead_xpath=By.xpath("//*[@class='chosen-search']/input");
 
     private String currencySearchString = null;
 
@@ -120,6 +128,54 @@ public class DataPage extends AbstractPage {
             assertTrue(null == getTextOnPage(currency_quantity_xpath));
         } else {
             assertEquals(quantity, getTextOnPage(currency_quantity_xpath));
+        }
+    }
+
+    public void clickOnCountryTab() {
+        attemptClick(country_tab_xpath);
+    }
+
+    public void verifyCountryListBoxIsDisplayed() {
+        assertTrue(getDriver().findElement(country_listbox_id).isDisplayed());
+    }
+
+    public void clickOnCountryListBox() {
+        getDriver().findElement(country_listbox_id).click();
+    }
+
+    public void verifyCountryTypeAheadAndListBox() {
+        assertTrue(getDriver().findElement(country_type_ahead_xpath).isDisplayed());
+        assertFalse(getDriver().findElement(country_listbox_id).getText().isEmpty());
+
+    }
+
+    //=CHAR(34)&A1&CHAR(34)&","
+    public void verifyCountryListValues() {
+
+        List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listbox_id).getText().split("\n")));
+
+        assertTrue(DataManagementAppVals.expCountryListVal.size() == retCountryListVal.size());
+        for (int i = 0; i <=DataManagementAppVals.expCountryListVal.size()-1; i++) {
+            if (retCountryListVal.get(i).equals(DataManagementAppVals.expCountryListVal.get(i))) {
+                continue;
+            }
+                else {
+                System.out.println("The returned country list has the value " + retCountryListVal.get(i) + " but the expected country list has the value " + DataManagementAppVals.expCountryListVal.get(i));
+                assertTrue(false);
+                break;
+            }
+        }
+
+    }
+
+    public void enterValueInCountryTypeAhead(String word) {
+        getDriver().findElement(country_type_ahead_xpath).sendKeys(word);
+    }
+
+    public void verifyCountriesInListBox(ExamplesTable countryList) {
+        String[] expCountryList = getDriver().findElement(country_listbox_id).getText().split("\n");
+        for (int i=0; i<=countryList.getRowCount()-1;i++){
+            assertTrue(countryList.getRow(i).containsValue(expCountryList[i+1]));
         }
     }
 

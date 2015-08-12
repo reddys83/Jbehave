@@ -14,6 +14,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCurrencyTab();
     }
 
+    @When("the user clicks on the country tab in the data area")
+    public void userClicksOnCountryTab(){
+        getDataPage().clickOnCountryTab();
+    }
+
     @When("the user clicks on the choose a currency option")
     public void whenUserClicksOnChooseACurrency(){
         getDataPage().clickOnChooseACurrencyOption();
@@ -69,7 +74,37 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCurrencyQuantity(quantity);
     }
 
-    @Then("the user should see the currency's uses $currencyUse")
+    @Then("the country list box is displayed")
+    public void verifyCountryListBoxIsDisplayed(){
+        getDataPage().verifyCountryListBoxIsDisplayed();
+    }
+
+    @When("the user clicks on the country list box")
+    public void userClicksOnCountryListBox(){
+        getDataPage().clickOnCountryListBox();
+    }
+
+    @Then("the countries type ahead and list is displayed")
+    public void verifyCountryTypeAheadAndListBox(){
+        getDataPage().verifyCountryTypeAheadAndListBox();
+    }
+
+    @Then("the list matches the expected country list and is sorted")
+    public void verifyCountryListMatchesExpectedList(){
+        getDataPage().verifyCountryListValues();
+    }
+
+    @When("the user starts typing the name of a country as $word in the country input box")
+    public void userEnterCountryTextInTypeAhead(String word){
+        getDataPage().enterValueInCountryTypeAhead(word);
+    }
+
+    @Then("the user should see the countries in the listbox as: $countryList")
+    public void verifyCountriesInListBox(ExamplesTable countryList) {
+        getDataPage().verifyCountriesInListBox(countryList);
+    }
+
+    @Then("the user should see the currency's uses $currencyUseTable")
     public void thenTheUserShouldSeeCurrencyUse(ExamplesTable currencyUseTable){
         getDataPage().verifyCurrencyUse(currencyUseTable);
     }
