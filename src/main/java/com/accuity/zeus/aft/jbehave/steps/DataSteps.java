@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -66,6 +67,16 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the currency quantity value as <quantity>")
     public void thenTheUserShouldSeeCurrencyQuantity(@Named("quantity") String quantity){
         getDataPage().verifyCurrencyQuantity(quantity);
+    }
+
+    @Then("the user should see the currency's uses $currencyUse")
+    public void thenTheUserShouldSeeCurrencyUse(ExamplesTable currencyUseTable){
+        getDataPage().verifyCurrencyUse(currencyUseTable);
+    }
+
+    @Then("the user should not see the currency's uses")
+    public void thenTheUserShouldNotSeeCurrencyUse(){
+        getDataPage().verifyNoCurrencyUse();
     }
 }
 
