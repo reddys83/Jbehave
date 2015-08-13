@@ -49,6 +49,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().selectCurrencyFromTypeAhead(currency);
     }
 
+    @When("the user enters the currency $currency in the typeahead box")
+    public void whenUserEntersCurrency(String currency){
+        getDataPage().selectCurrencyFromTypeAhead(currency);
+    }
+
     @Then("the user should see the currency iso code value as <isoCode>")
     public void thenTheUserShouldSeeCurrencyIsoCode(@Named("isoCode") String isoCode){
         getDataPage().verifyCurrencyIsoCode(isoCode);
@@ -112,6 +117,11 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should not see the currency's uses")
     public void thenTheUserShouldNotSeeCurrencyUse(){
         getDataPage().verifyNoCurrencyUse();
+    }
+
+    @When("the user clicks on the replaced by currency $replacedBy")
+    public void userClicksOnReplacedByCurrency(String replacedBy){
+        getDataPage().clickOnReplacedByLink(replacedBy);
     }
 }
 
