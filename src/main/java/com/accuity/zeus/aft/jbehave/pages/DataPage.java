@@ -219,4 +219,7 @@ public class DataPage extends AbstractPage {
         } catch(Exception NoSuchElementException){}
     }
 
+    public void clickOnReplacedByLink(String replacedBy) {
+        attemptClick(By.linkText(replacedBy));
+    }
 }
