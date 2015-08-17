@@ -39,7 +39,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCurrencyDropDownMatchesSearchString();
     }
 
-    @Then("the user should see the option no results match for the searched string")
+    @Then("the user should see the option no results match for the searched currency string")
     public void thenTheUSerShouldNoResultsMatchOption(){
         getDataPage().verifyNoResultsMatchOption();
     }

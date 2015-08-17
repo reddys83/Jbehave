@@ -165,7 +165,6 @@ public class DataPage extends AbstractPage {
                 break;
             }
         }
-
     }
 
     public void enterValueInCountryTypeAhead(String word) {

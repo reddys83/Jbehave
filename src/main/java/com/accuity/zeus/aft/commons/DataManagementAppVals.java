@@ -252,4 +252,8 @@ public class DataManagementAppVals {
             "Zambia",
             "Zimbabwe"
             ));
+
+        public static List<String> expTaxonomiesListVal = new ArrayList<>(Arrays.asList(
+                ""
+        ));
 }

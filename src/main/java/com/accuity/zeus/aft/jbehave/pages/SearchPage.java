@@ -19,28 +19,21 @@ public class SearchPage extends AbstractPage {
 	private By logout_link_id = By.id("logout");
 	private By settings_icon_id = By.cssSelector("#user-menu>span");
 	private Utils utils = new Utils();
-
+	private By admin_tab_xpath = By.xpath("//header/nav[1]/ul/li[5]");
+	private By search_field_xpath = By.xpath(".//header/form/select[@name='idType']");
+	private By search_value_xpath = By.xpath(".//header/form/input[@name='id']");
+	private By search_button_id = By.id("search-button");
+	private By result_link_xpath = By.id("report-nav");
+	private By data_tab_xpath = By.xpath("//header/nav[1]/ul/li[1]");
+	public SearchPage(WebDriver driver, String urlPrefix) {
+		super(driver, urlPrefix);
+	}
+	private LoginPage loginPage = new LoginPage(getDriver(), getUrlPrefix());
 	@AfterStories
 	public void cleanup() {
 		clickOnLogout();
 		getDriver().quit();
 	}
-
-	private By search_field_xpath = By.xpath(".//header/form/select[@name='idType']");
-
-	private By search_value_xpath = By.xpath(".//header/form/input[@name='id']");
-
-	private By search_button_id = By.id("search-button");
-
-	private By result_link_xpath = By.id("report-nav");
-
-	private By data_tab_xpath = By.xpath("//header/nav[1]/ul/li[1]");
-
-	public SearchPage(WebDriver driver, String urlPrefix) {
-		super(driver, urlPrefix);
-	}
-
-	private LoginPage loginPage = new LoginPage(getDriver(), getUrlPrefix());
 
 	@Override
 	public String getPageUrl() {
@@ -111,4 +104,11 @@ public class SearchPage extends AbstractPage {
 		DataPage dataPage = new DataPage(getDriver(), getUrlPrefix());
 		return dataPage;
 	}
+
+	public AdminPage clickOnAdminTab() {
+		attemptClick(admin_tab_xpath);
+		AdminPage adminPage = new AdminPage(getDriver(), getUrlPrefix());
+		return adminPage;
+	}
+
 }

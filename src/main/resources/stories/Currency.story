@@ -30,7 +30,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user starts typing the name of a currency as dfbhjb in the currency input box
-Then the user should see the option no results match for the searched string
+Then the user should see the option no results match for the searched currency string
 
 Scenario: Verify currency view only information
 1. search for a currency that has all fields
