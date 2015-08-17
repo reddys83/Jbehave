@@ -12,9 +12,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by sahug on 8/17/2015.
- */
 public class AdminPage extends AbstractPage{
 
     private By taxonomies_listbox_id = By.id("taxonomy_chosen");

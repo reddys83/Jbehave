@@ -3,7 +3,8 @@ Meta: @Taxonomies
 Narrative:
 As a user
 I want to search for taxonomy by name
-So that I can achieve a business goal
+So that I can achieve a business goal mentioned in the story
+JIRA ID - ZEUS-259-Admin can search for taxonomy by name
 
 Scenario: View for taxonomy by name
 Given a user is on the search page
