@@ -23,6 +23,10 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user starts typing the name of a currency as Afg in the currency input box
 Then the user should see the drop-down list of the currencies matching the input characters
+And the user should see the currencies in the listbox as:
+|CURRENCY|
+|afghani|
+|Afghani|
 
 Scenario: Verify no results match
 Given a user is on the search page
