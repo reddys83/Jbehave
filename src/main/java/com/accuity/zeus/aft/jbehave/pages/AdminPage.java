@@ -14,13 +14,13 @@ import static org.junit.Assert.assertTrue;
 
 public class AdminPage extends AbstractPage{
 
-    private By taxonomies_listbox_id = By.id("taxonomy_chosen");
+    private By taxonomies_listbox_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private By taxonomies_tab_xpath = By.xpath("//*[@id='admin-navbar']/ul/li");
-    private By choose_taxonomy_option_xpath = By.xpath("//*[@id='taxonomy_chosen']/a/span");
-    private By taxonomy_input_xpath = By.xpath("//*[@id='taxonomy_chosen']/div/div/input");
-    private By taxonomy_list_xpath = By.xpath("//*[@id='taxonomy_chosen']/div/ul/li");
-    private By taxonomy_label_xpath = By.xpath("//*[@id='admin']/fieldset/label");
-    private By no_results_match_xpath = By.xpath("//*[@id='taxonomy_chosen']/div/ul/li");
+    private By choose_taxonomy_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
+    private By taxonomy_input_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/div/input");
+    private By taxonomy_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
+    private By taxonomy_label_xpath = By.xpath("//*[@id='selection']/div/dl/dt");
+    private By no_results_match_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private String taxonomySearchString = "";
 
     public AdminPage(WebDriver driver, String urlPrefix) {
@@ -33,11 +33,11 @@ public class AdminPage extends AbstractPage{
     }
 
     public void verifyTaxonomiesList() {
-        assertEquals("TAXONOMIES:",getDriver().findElement(taxonomy_label_xpath).getText());
-        List<String> retTaxonomiesListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(taxonomies_listbox_id).getText().split("\n")));
+        assertEquals("TAXONOMIES", getDriver().findElement(taxonomy_label_xpath).getText());
+        List<WebElement> retTaxonomiesListVal = getDriver().findElements(taxonomies_listbox_xpath);
         assertTrue(DataManagementAppVals.expTaxonomiesListVal.size() == retTaxonomiesListVal.size());
         for (int i = 0; i <=DataManagementAppVals.expTaxonomiesListVal.size()-1; i++) {
-            if (retTaxonomiesListVal.get(i).equals(DataManagementAppVals.expTaxonomiesListVal.get(i))) {
+            if (retTaxonomiesListVal.get(i).getText().equals(DataManagementAppVals.expTaxonomiesListVal.get(i))) {
                 continue;
             }
             else {

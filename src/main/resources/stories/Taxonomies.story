@@ -18,7 +18,7 @@ Given a user is on the search page
 When the user clicks on the admin tab in the search page
 And the user clicks on the taxonomies tab in the data area
 And the user clicks on the choose a taxonomy option
-And the user starts typing the name of a taxonomy as Afg in the taxonomy input box
+And the user starts typing the name of a taxonomy as Rou in the taxonomy input box
 Then the user should see the drop-down list of the taxonomies matching the input characters
 
 Scenario: No results match for taxonomy by name
@@ -26,5 +26,5 @@ Given a user is on the search page
 When the user clicks on the admin tab in the search page
 And the user clicks on the taxonomies tab in the data area
 And the user clicks on the choose a taxonomy option
-And the user starts typing the name of a taxonomy as Afg in the taxonomy input box
+And the user starts typing the name of a taxonomy as jadsfvbj in the taxonomy input box
 Then the user should see the option no results match for the searched taxonomy string
