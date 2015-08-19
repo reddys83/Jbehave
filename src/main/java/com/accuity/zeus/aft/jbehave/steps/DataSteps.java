@@ -234,9 +234,9 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryPoliticalStructure(politicalStructure);
     }
 
-    @Then("the user should see the country population as $population")
-    public void verifyCountryPopulation(@Named("population") String population){
-        getDataPage().verifyCountryPopulation(population);
+    @Then("the user should see the country additional info as $addInfo")
+    public void verifyCountryAddInfo(@Named("addInfo") String addInfo){
+        getDataPage().verifyCountryAddInfo(addInfo);
     }
 }
 

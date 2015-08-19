@@ -96,8 +96,8 @@ public class DataPage extends AbstractPage {
     private By country_intl_dial_code_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[7]/td");
     private By country_political_structure_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[8]/th");
     private By country_political_structure_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[8]/td");
-    private By country_population_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[9]/th");
-    private By country_population_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[9]/td");
+    private By country_add_info_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[5]/th");
+    private By country_add_info_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[5]/td");
     private By country_imports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[5]/th");
     private By country_imports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[5]/td");
 
@@ -421,7 +421,7 @@ public class DataPage extends AbstractPage {
         assertEquals("Replaced by", getDriver().findElement(country_replaced_by_label_xpath).getText());
         String replacedBys[] = replacedBy.split(" ");
         for(int i=0; i<replacedBys.length; i++){
-            assertTrue(getDriver().findElement(country_replaced_by_xpath).getText().contains(replacedBys[i]));
+            assertTrue(getDriver().findElement(country_replaced_by_xpath).getText().contains(replacedBys[i].replace(",","")));
         }
     }
 
@@ -440,9 +440,9 @@ public class DataPage extends AbstractPage {
         assertEquals(politicalStructure, getDriver().findElement(country_political_structure_xpath).getText());
     }
 
-    public void verifyCountryPopulation(String population) {
-        assertEquals("Population", getDriver().findElement(country_population_label_xpath).getText());
-        assertEquals(population, getDriver().findElement(country_population_xpath).getText());
+    public void verifyCountryAddInfo(String addInfo) {
+        assertEquals("Add Info", getDriver().findElement(country_add_info_label_xpath).getText());
+        assertEquals(addInfo, getDriver().findElement(country_add_info_xpath).getText());
     }
 
     public void verifyCountryImports(String imports) {
