@@ -90,16 +90,16 @@ public class DataPage extends AbstractPage {
     private By country_end_date_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[3]/td");
     private By country_replaced_by_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[4]/th");
     private By country_replaced_by_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[4]/td");
-    private By country_exports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/th");
-    private By country_exports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/td");
-    private By country_intl_dial_code_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[7]/th");
-    private By country_intl_dial_code_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[7]/td");
-    private By country_political_structure_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[8]/th");
-    private By country_political_structure_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[8]/td");
+    private By country_exports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[7]/th");
+    private By country_exports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[7]/td");
+    private By country_intl_dial_code_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[8]/th");
+    private By country_intl_dial_code_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[8]/td");
+    private By country_political_structure_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[9]/th");
+    private By country_political_structure_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[9]/td");
     private By country_add_info_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[5]/th");
     private By country_add_info_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[5]/td");
-    private By country_imports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[5]/th");
-    private By country_imports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[5]/td");
+    private By country_imports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/th");
+    private By country_imports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/td");
 
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -209,9 +209,7 @@ public class DataPage extends AbstractPage {
 
     //=CHAR(34)&A1&CHAR(34)&","
     public void verifyCountryListValues() {
-
         List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listbox_id).getText().split("\n")));
-
         assertTrue(DataManagementAppVals.expCountryListVal.size() == retCountryListVal.size());
         for (int i = 0; i <=DataManagementAppVals.expCountryListVal.size()-1; i++) {
             if (retCountryListVal.get(i).equals(DataManagementAppVals.expCountryListVal.get(i))) {
@@ -418,7 +416,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCountryReplacedBy(String replacedBy) {
-        assertEquals("Replaced by", getDriver().findElement(country_replaced_by_label_xpath).getText());
+        assertEquals("Replaced By", getDriver().findElement(country_replaced_by_label_xpath).getText());
         String replacedBys[] = replacedBy.split(" ");
         for(int i=0; i<replacedBys.length; i++){
             assertTrue(getDriver().findElement(country_replaced_by_xpath).getText().contains(replacedBys[i].replace(",","")));

@@ -249,6 +249,7 @@ public class DataManagementAppVals {
             "Wallis and Futuna",
             "Western Sahara",
             "Yemen",
+            "Yugoslavia",
             "Zambia",
             "Zimbabwe"
             ));
