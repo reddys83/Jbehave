@@ -1,4 +1,4 @@
-Meta:@Login
+Meta:@login
 
 Narrative:
 In order to view stub entry details
