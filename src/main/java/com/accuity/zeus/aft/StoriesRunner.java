@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft;
 
+import com.accuity.zeus.aft.commons.Utils;
 import com.accuity.zeus.aft.jbehave.steps.DetailsSteps;
 import com.accuity.zeus.aft.jbehave.steps.SearchResultsSteps;
 import com.accuity.zeus.aft.jbehave.steps.SearchSteps;
@@ -24,7 +25,9 @@ import org.springframework.beans.factory.annotation.Value;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 
 @RunWith(SpringAnnotatedEmbedderRunner.class)
@@ -49,7 +52,8 @@ public class StoriesRunner extends InjectableEmbedder {
 
     @Test
     public void run() throws IOException {
-        List<String> storyPaths = new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("./src/main/resources"), "**/Design.story", "");
+        List<String> storyPaths = new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("./src/main/resources"), "**/*.story", "");
+        injectedEmbedder().useMetaFilters(getMetaFiltersList(new Utils().readPropertyFile().getProperty("tags.filter")));
         injectedEmbedder().runStoriesAsPaths(storyPaths) ;
     }
 
@@ -81,6 +85,16 @@ public class StoriesRunner extends InjectableEmbedder {
         public MyDateConverter() {
             super(new SimpleDateFormat("yyyy-MM-dd"));
         }
+    }
+
+    private ArrayList getMetaFiltersList(String filterString){
+        String[] metaFilter = filterString.split(",");
+        ArrayList<String> metaFilterList = new ArrayList<String>();
+        for (String item: metaFilter ){
+            item = "+" + item;
+            metaFilterList.add(item);
+        }
+        return metaFilterList;
     }
 
 }
