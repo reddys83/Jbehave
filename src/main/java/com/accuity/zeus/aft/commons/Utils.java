@@ -3,7 +3,10 @@ package com.accuity.zeus.aft.commons;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 /**
  * Created by soofis on 8/12/2015.
@@ -30,4 +33,17 @@ public class Utils {
         }
         return prop;
     }
+
+    public Set<String> findDuplicates(List<String> appList){
+        final Set<String> setToReturn = new HashSet<String>();
+        final Set<String> setForComp = new HashSet<String>();
+
+        for (String yourInt : appList) {
+            if (!setForComp.add(yourInt)) {
+                setToReturn.add(yourInt);
+            }
+        }
+        return setToReturn;
+    }
+
 }

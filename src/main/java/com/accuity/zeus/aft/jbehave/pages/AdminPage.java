@@ -1,12 +1,14 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
 import com.accuity.zeus.aft.commons.DataManagementAppVals;
+import com.accuity.zeus.aft.commons.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -26,6 +28,7 @@ public class AdminPage extends AbstractPage{
     public AdminPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
+
 
     @Override
     public String getPageUrl() {
@@ -75,5 +78,14 @@ public class AdminPage extends AbstractPage{
 
     public void verifyNoResultsMatchOption() {
         assertEquals("No results match \"" + taxonomySearchString + "\"", getDriver().findElement(no_results_match_xpath).getText());
+    }
+
+    public void verifyNoDuplicatesInList() {
+        Utils utils = new Utils();
+        List<String> retTaxonomiesListVal = new ArrayList<>();
+        for (Iterator<WebElement> it = getDriver().findElements(taxonomies_listbox_xpath).iterator(); it.hasNext();){
+            retTaxonomiesListVal.add(it.next().getText());
+        }
+        assertTrue(utils.findDuplicates(retTaxonomiesListVal).size() == 0);
     }
 }

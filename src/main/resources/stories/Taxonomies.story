@@ -12,6 +12,7 @@ When the user clicks on the admin tab in the search page
 And the user clicks on the taxonomies tab in the data area
 And the user clicks on the choose a taxonomy option
 Then the user should see the list of all existing taxonomies by name
+And the list should not have any duplicates
 
 Scenario: Filter for taxonomy by name
 Given a user is on the search page
@@ -28,3 +29,4 @@ And the user clicks on the taxonomies tab in the data area
 And the user clicks on the choose a taxonomy option
 And the user starts typing the name of a taxonomy as jadsfvbj in the taxonomy input box
 Then the user should see the option no results match for the searched taxonomy string
+

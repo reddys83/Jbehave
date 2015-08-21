@@ -37,4 +37,9 @@ public class AdminSteps extends AbstractSteps{
     public void thenTheUSerShouldNoResultsMatchOption(){
         getAdminPage().verifyNoResultsMatchOption();
     }
+
+    @Then("the list should not have any duplicates")
+    public void verifyTheListDoesNotHaveAnyDuplicates(){
+        getAdminPage().verifyNoDuplicatesInList();
+    }
 }
