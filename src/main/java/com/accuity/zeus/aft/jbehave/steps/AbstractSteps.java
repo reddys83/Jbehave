@@ -1,15 +1,11 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.zeus.aft.jbehave.pages.DataPage;
+import com.accuity.zeus.aft.jbehave.pages.*;
 
-import com.accuity.zeus.aft.jbehave.pages.LoginPage;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 import com.accuity.zeus.aft.jbehave.pages.DataPage;
-import com.accuity.zeus.aft.jbehave.pages.ReportPage;
-import com.accuity.zeus.aft.jbehave.pages.ResetPasswordPage;
-import com.accuity.zeus.aft.jbehave.pages.SearchPage;
 import com.accuity.zeus.aft.result.ResultsPage;
 import com.accuity.zeus.aft.web.driver.WebDriverState;
 import org.apache.commons.lang3.StringUtils;
@@ -30,8 +26,8 @@ public abstract class AbstractSteps {
 	private static ResultsPage resultsPage;
 	private static ResetPasswordPage resetPasswordPage;
 	private static LoginPage loginPage;
-
 	private static DataPage dataPage;
+	private static AdminPage adminPage;
 
 
 	@Autowired
@@ -148,4 +144,13 @@ public abstract class AbstractSteps {
 		this.dataPage = dataPage;
 
 	}
+	public AdminPage getAdminPage() {
+		return adminPage;
+	}
+
+	public void setAdminPage(AdminPage adminPage) {
+		this.adminPage = adminPage;
+
+	}
+
 }

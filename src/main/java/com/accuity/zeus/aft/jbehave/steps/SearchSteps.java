@@ -47,4 +47,9 @@ public class SearchSteps extends AbstractSteps {
 	public void whenUserClicksOnDataTab(){
 		setDataPage(searchPage.clickOnDataTab());
 	}
+
+	@When("the user clicks on the admin tab in the search page")
+	public void whenUserClicksOnAdminTab() {
+		setAdminPage(searchPage.clickOnAdminTab());
+	}
 }
