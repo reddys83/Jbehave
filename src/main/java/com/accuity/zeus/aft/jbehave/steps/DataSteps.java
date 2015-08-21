@@ -144,7 +144,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryIso3(iso3);
     }
 
-    @Then("the user should see the country basic info")
+    @Then("the user should see the basic info for the selected country")
     public void verifyCountryBasicInfo(){
         getDataPage().verifyCountryBasicInfo();
     }
@@ -237,6 +237,11 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the country additional info as $addInfo")
     public void verifyCountryAddInfo(@Named("addInfo") String addInfo){
         getDataPage().verifyCountryAddInfo(addInfo);
+    }
+
+    @When("the user clicks on the replaced by country <replacedByCountry> in the country basic info")
+    public void clickOnReplacedByCountry(@Named("replacedByCountry") String replacedByCountry){
+        getDataPage().clickOnReplacedByCountry(replacedByCountry);
     }
 }
 
