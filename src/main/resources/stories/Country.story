@@ -37,7 +37,7 @@ And the user enters the country <country> in the type-ahead box
 Then the user should see the country iso2 as YU
 And the user should see the country iso3 as YUG
 When the user clicks on the basic info link in the navigation bar
-Then the user should see the country basic info
+Then the user should see the basic info for the selected country
 
 And the user should see the list of country names type and value as:
 |TYPE|VALUE|
@@ -85,4 +85,17 @@ Examples:
 |country|
 |Yugoslavia|
 
+Scenario: Click on replaced by country link
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the basic info link in the navigation bar
+And the user clicks on the replaced by country <replacedByCountry> in the country basic info
+And the user clicks on the basic info link in the navigation bar
+Then the user should see the basic info for the selected country
 
+Examples:
+|country|replacedByCountry|
+|Yugoslavia|Slovenia|

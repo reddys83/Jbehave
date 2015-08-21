@@ -27,7 +27,6 @@ public class DataPage extends AbstractPage {
     private By no_results_match_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private By currency_iso_code_label_id = By.id("iso");
     private By currency_iso_code_id = By.id("iso-value");
-
     private By currency_name_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[1]");
     private By currency_name_xpath = By.xpath("//*[@id='content']/div/dl[1]/dd[1]");
     private By currency_abbr_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[2]");
@@ -100,7 +99,8 @@ public class DataPage extends AbstractPage {
     private By country_add_info_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[5]/td");
     private By country_imports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/th");
     private By country_imports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/td");
-
+    private By country_name_selected_xpath = By.xpath("//*[@id='content']//li[1]/table[1]/tbody/tr[1]/td[2]");
+    private String selectedCountry = "";
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
@@ -286,6 +286,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void enterCountryInTheTypeAheadBox(String country) {
+        selectedCountry = country;
         getDriver().findElement(country_type_ahead_xpath).sendKeys(country);
         getDriver().findElement(country_type_ahead_xpath).sendKeys(Keys.RETURN);
     }
@@ -301,6 +302,12 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCountryBasicInfo() {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(selectedCountry, getDriver().findElement(country_name_selected_xpath).getText());
         assertEquals("BASIC INFO", getDriver().findElement(country_basic_info_xpath).getText());
     }
 
@@ -319,7 +326,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnBasicInfoInNavigationBar() {
-        getDriver().findElement(basic_info_link_id).click();
+        attemptClick(basic_info_link_id);
     }
 
     public void verifyCountryDemographics(ExamplesTable countryDemographics) {
@@ -445,5 +452,10 @@ public class DataPage extends AbstractPage {
     public void verifyCountryImports(String imports) {
         assertEquals("Imports", getDriver().findElement(country_imports_label_xpath).getText());
         assertEquals(imports, getDriver().findElement(country_imports_xpath).getText());
+    }
+
+    public void clickOnReplacedByCountry(String replacedByCountry) {
+        selectedCountry = replacedByCountry;
+        attemptClick(By.linkText(replacedByCountry));
     }
 }
