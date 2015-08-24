@@ -243,6 +243,21 @@ public class DataSteps extends AbstractSteps {
     public void clickOnReplacedByCountry(@Named("replacedByCountry") String replacedByCountry){
         getDataPage().clickOnReplacedByCountry(replacedByCountry);
     }
+
+    @When("the user clicks on the country holiday link in the navigation bar")
+    public void clickOnCountryHolidays(){
+        getDataPage().clickOnCountryHolidays();
+    }
+    @Then("the user should see the country's holidays list as: $countryHolidaysList")
+    public void verifyCountryHolidays(ExamplesTable countryHolidaysList){
+        getDataPage().verifyCountryHolidays(countryHolidaysList);
+    }
+
+    @Then("the user should not see the country's holidays list")
+    public void verifyNoCountryHolidays(){
+        getDataPage().verifyNoCountryHolidays();
+    }
+
 }
 
 
