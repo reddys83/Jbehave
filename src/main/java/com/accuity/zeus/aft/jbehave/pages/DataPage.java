@@ -108,6 +108,14 @@ public class DataPage extends AbstractPage {
     private By country_holiday_date_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//tr/td[1]");
     private By country_holiday_description_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//tr/td[2]");
     private By country_holiday_notes_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//tr/td[3]");
+    private By country_regions_link_id = By.id("regions");
+    private By country_regions_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//span");
+    private By country_alt_regions_for_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//h2");
+    private By country_regions_type_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/th[1]");
+    private By country_regions_value_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/th[2]");
+    private By country_regions_type_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/td[1]");
+    private By country_regions_value_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/td[2]");
+
 
     private String selectedCountry = "";
     public DataPage(WebDriver driver, String urlPrefix) {
@@ -498,5 +506,22 @@ public class DataPage extends AbstractPage {
 
         }
 
+    }
+
+    public void clickOnRegionsInNavigationBar() {
+        attemptClick(country_regions_link_id);
+    }
+
+    public void verifyCountryRegions(ExamplesTable countryRegions) {
+        assertEquals("REGIONS", getDriver().findElement(country_regions_label_xpath).getText());
+        assertEquals("ALTERNATIVE REGIONS FOR " + selectedCountry.toUpperCase(), getDriver().findElement(country_alt_regions_for_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(country_regions_type_label_xpath).getText());
+        assertEquals("VALUE", getDriver().findElement(country_regions_value_label_xpath).getText());
+        List<WebElement> regionType = getDriver().findElements(country_regions_type_xpath);
+        List<WebElement> regionValue = getDriver().findElements(country_regions_value_xpath);
+        for(int i=0; i<countryRegions.getRowCount(); i++){
+            assertEquals(countryRegions.getRow(i).get(countryRegions.getHeaders().get(0)),regionType.get(i).getText());
+            assertEquals(countryRegions.getRow(i).get(countryRegions.getHeaders().get(1)),regionValue.get(i).getText());
+        }
     }
 }
