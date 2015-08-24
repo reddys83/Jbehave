@@ -100,6 +100,9 @@ public class DataPage extends AbstractPage {
     private By country_imports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/th");
     private By country_imports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/td");
     private By country_name_selected_xpath = By.xpath("//*[@id='content']//li[1]/table[1]/tbody/tr[1]/td[2]");
+    private By currency_usage_label_xpath = By.xpath("//*[@id='content']/div/dl[2]/dt");
+    private By currency_usage_xpath = By.xpath("//*[@id='content']/div/dl[2]/dd/a");
+
     private String selectedCountry = "";
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -457,5 +460,22 @@ public class DataPage extends AbstractPage {
     public void clickOnReplacedByCountry(String replacedByCountry) {
         selectedCountry = replacedByCountry;
         attemptClick(By.linkText(replacedByCountry));
+    }
+
+    public void verifyCountriesCurrencyUsage(String countries) {
+        assertEquals("USAGE", getDriver().findElement(currency_usage_label_xpath).getText());
+        String[] countriesList = countries.split(",");
+        for (int i = 0; i<countriesList.length; i++){
+            assertTrue(getDriver().findElements(currency_usage_xpath ).get(i).getText().contains(countriesList[i]));
+        }
+    }
+
+    public void clickOnCurrencyUsageCountry(String currencyUsageCountry) {
+        selectedCountry = currencyUsageCountry;
+        attemptClick(By.linkText(currencyUsageCountry));
+    }
+
+    public void clickOnCurrenctIso3(String iso3) {
+        attemptClick(By.linkText(iso3));
     }
 }

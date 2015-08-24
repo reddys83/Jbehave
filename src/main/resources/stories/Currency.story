@@ -57,33 +57,48 @@ Examples:
 |Sudanese Dinar|SDD|Sudanese Dinar|Dinar|Dirham|null|
 
 Scenario: Verify currency's uses.
+1. Verify sorting order.
+2. Click on usage country link
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-Then the user should see the currency's uses
-|COUNTRY|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
-|AFG|1980-01-01|2003-01-01|True|AFN|Inactive|
-
-Examples:
-|currency|
-|afghani|
-
-Scenario: Verify currency's uses. Sorting order.
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
-Then the user should see the currency's uses
+Then the user should see the countries South Africa Namibia in the currency usage
+And the user should see the currency's uses as:
 |COUNTRY|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
 |ZAF|1980-01-01||True||Active|
 |NAM|1980-01-01|1993-09-29|True|NAD|Inactive|
 
+When the user clicks on the country <currencyUsageCountry> in the currency usage
+And the user clicks on the country basic info link in the navigation bar
+Then the user should see the basic info for the selected country
+
+Examples:
+|currency|currencyUsageCountry|
+|Rand|South Affrica|
+
+Scenario: Verify currency's uses.
+1. Verify sorting order.
+2. Click on usage country link
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+Then the user should see the countries Curaçao Sint Maarten Bonaire, Sint Eustatius and Saba in the currency usage
+And the user should see the currency's uses as:
+|COUNTRY|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
+|CUW|1980-01-01||True||Active|
+|SXM|1980-01-01||True||Active|
+|BES|1980-01-01|2010-12-31|True|USD|Inactive|
+
+When the user clicks on the country iso3 BES in the currency usage
+Then the user should see the country iso3 as BES
+
 Examples:
 |currency|
-|Rand|
+|Netherlands Antilles Guilder|
 
 Scenario: Verify currency's uses. No uses.
 Given a user is on the search page
@@ -97,7 +112,6 @@ Examples:
 |currency|
 |Special Drawing Rights|
 
-
 Scenario: Zeus-222
 Verify clicking on the Replaced By link the user is taken to that currency (switch Rand to Rouble when the list value becomes more unique)
 Given a user is on the search page
@@ -105,7 +119,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency Rand in the typeahead box
-Then the user should see the currency's uses
+Then the user should see the currency's uses as:
 |COUNTRY|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
 |ZAF|1980-01-01||True||Active|
 |NAM|1980-01-01|1993-09-29|True|NAD|Inactive|
