@@ -53,7 +53,7 @@ public class StoriesRunner extends InjectableEmbedder {
     @Test
     public void run() throws IOException {
         List<String> storyPaths = new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("./src/main/resources"), "**/*.story", "");
-        injectedEmbedder().useMetaFilters(getMetaFiltersList(new Utils().readPropertyFile().getProperty("tags.filter")));
+        injectedEmbedder().useMetaFilters(getMetaFiltersList(new Utils().readPropertyFile().getProperty("web.aft.story.filter")));
         injectedEmbedder().runStoriesAsPaths(storyPaths) ;
     }
 
