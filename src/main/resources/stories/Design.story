@@ -1,4 +1,4 @@
-Meta: @design
+Meta: @Design
 
 Narrative:
 In order to view stub entry details
