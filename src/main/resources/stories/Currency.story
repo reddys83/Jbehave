@@ -64,7 +64,11 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-Then the user should see the countries South Africa Namibia in the currency usage
+Then the user should see the countries in the currency usage as:
+|COUNTRIES|
+|South Africa|
+|Namibia|
+
 And the user should see the currency's uses as:
 |COUNTRY|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
 |ZAF|1980-01-01||True||Active|
@@ -86,7 +90,12 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-Then the user should see the countries Curaçao Sint Maarten Bonaire, Sint Eustatius and Saba in the currency usage
+Then the user should see the countries in the currency usage as:
+|COUNTRIES|
+|Curaçao|
+|Sint Maarten|
+|Bonaire, Sint Eustatius and Saba|
+
 And the user should see the currency's uses as:
 |COUNTRY|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
 |CUW|1980-01-01||True||Active|

@@ -1,6 +1,5 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -110,9 +109,9 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountriesInListBox(countryList);
     }
 
-    @Then("the user should see the countries $countries in the currency usage")
-    public void verifyCountriesCurrencyUsage(@Named("countries") String countries){
-        getDataPage().verifyCountriesCurrencyUsage(countries);
+    @Then("the user should see the countries in the currency usage as: $currencyCountries")
+    public void verifyCountriesCurrencyUsage(ExamplesTable currencyCountries){
+        getDataPage().verifyCountriesCurrencyUsage(currencyCountries);
     }
 
     @Then("the user should see the currency's uses as: $currencyUseTable")
@@ -256,7 +255,7 @@ public class DataSteps extends AbstractSteps {
 
     @When("the user clicks on the country iso3 $iso3 in the currency usage")
     public void clickOnCurrenctIso3(@Named("iso3") String iso3){
-        getDataPage().clickOnCurrenctIso3(iso3);
+        getDataPage().clickOnCurrencyIso3(iso3);
     }
 }
 

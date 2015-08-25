@@ -462,11 +462,10 @@ public class DataPage extends AbstractPage {
         attemptClick(By.linkText(replacedByCountry));
     }
 
-    public void verifyCountriesCurrencyUsage(String countries) {
+    public void verifyCountriesCurrencyUsage(ExamplesTable currencyCountries) {
         assertEquals("USAGE", getDriver().findElement(currency_usage_label_xpath).getText());
-        String[] countriesList = countries.split(",");
-        for (int i = 0; i<countriesList.length; i++){
-            assertTrue(getDriver().findElements(currency_usage_xpath ).get(i).getText().contains(countriesList[i]));
+        for (int i = 0; i<currencyCountries.getRowCount(); i++){
+            assertEquals(currencyCountries.getRow(i).get(currencyCountries.getHeaders().get(0)), getDriver().findElements(currency_usage_xpath).get(i).getText());
         }
     }
 
@@ -475,7 +474,7 @@ public class DataPage extends AbstractPage {
         attemptClick(By.linkText(currencyUsageCountry));
     }
 
-    public void clickOnCurrenctIso3(String iso3) {
+    public void clickOnCurrencyIso3(String iso3) {
         attemptClick(By.linkText(iso3));
     }
 }
