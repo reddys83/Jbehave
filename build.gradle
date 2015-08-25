@@ -4,6 +4,10 @@ apply plugin: 'eclipse'
 sourceCompatibility = 1.7
 version = '1.0'
 
+ext {
+    restletVersion = "2.3.2"
+}
+
 repositories {
     maven{ url 'http://10.72.0.16/nexus/content/groups/public/' }
 	maven{ url 'http://10.72.0.16/nexus/content/repositories/snapshots/' }
@@ -26,4 +30,6 @@ dependencies {
     compile 'org.springframework:spring-test:4.1.5.RELEASE'
     compile 'org.jbehave:jbehave-spring:3.9.5'
     compile 'com.google.guava:guava:18.0'
+    compile group: 'org.restlet.jee', name: 'org.restlet.ext.xml', version: restletVersion
+
 }

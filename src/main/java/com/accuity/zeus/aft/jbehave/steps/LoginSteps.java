@@ -18,11 +18,6 @@ public class LoginSteps extends AbstractSteps {
 
     private LoginPage loginPage;
 
-    @Autowired
-    ApacheHttpClient apacheHttpClient;
-    @Autowired
-    Database database;
-
     @Value("${data.management.webapp.aft.uid}")
     private String username;
 
@@ -33,21 +28,6 @@ public class LoginSteps extends AbstractSteps {
     public void givenUserOpensLoginPage(){
         loginPage = new LoginPage(webDriverState.getWebDriver(), getDataManagementWebappUrl());
         loginPage.open();
-    }
-
-    @Given("the user excecutes the xquery to get $xqueryName")
-    public void executeXquery(String xqueryName){
-        ArrayList<String> myList = new ArrayList<>();
-        XqueryMap xqueryMap = new XqueryMap();
-        database.setScheme("http");
-        database.setHost("localhost");
-        database.setPort("8003");
-        database.setUsername("addn-reader");
-        database.setPassword("password1");
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xqueryMap.getXquery(xqueryName));
-        for (int i=0;i<=document.getElementsByTagName("a").getLength();i++){
-            myList.add(document.getElementsByTagName("result").item(i).getTextContent());
-        }
     }
 
     @When("the user enters a valid username on the login page")
