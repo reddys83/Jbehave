@@ -109,7 +109,12 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountriesInListBox(countryList);
     }
 
-    @Then("the user should see the currency's uses $currencyUseTable")
+    @Then("the user should see the countries in the currency usage as: $currencyCountries")
+    public void verifyCountriesCurrencyUsage(ExamplesTable currencyCountries){
+        getDataPage().verifyCountriesCurrencyUsage(currencyCountries);
+    }
+
+    @Then("the user should see the currency's uses as: $currencyUseTable")
     public void thenTheUserShouldSeeCurrencyUse(ExamplesTable currencyUseTable){
         getDataPage().verifyCurrencyUse(currencyUseTable);
     }
@@ -154,7 +159,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryNames(countryNames);
     }
 
-    @When("the user clicks on the basic info link in the navigation bar")
+    @When("the user clicks on the country basic info link in the navigation bar")
     public void clickOnBasicInfoInNavigationBar(){
         getDataPage().clickOnBasicInfoInNavigationBar();
     }
@@ -247,6 +252,16 @@ public class DataSteps extends AbstractSteps {
     @When("the user clicks on the replaced by country <replacedByCountry> in the country basic info")
     public void clickOnReplacedByCountry(@Named("replacedByCountry") String replacedByCountry){
         getDataPage().clickOnReplacedByCountry(replacedByCountry);
+    }
+
+    @When("the user clicks on the country <currencyUsageCountry> in the currency usage")
+    public void clickOnCurrencyUsageCountry(@Named("currencyUsageCountry") String currencyUsageCountry){
+        getDataPage().clickOnCurrencyUsageCountry(currencyUsageCountry);
+    }
+
+    @When("the user clicks on the country iso3 $iso3 in the currency usage")
+    public void clickOnCurrenctIso3(@Named("iso3") String iso3){
+        getDataPage().clickOnCurrencyIso3(iso3);
     }
 
     @When("the user clicks on the country holiday link in the navigation bar")

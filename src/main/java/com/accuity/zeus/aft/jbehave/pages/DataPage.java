@@ -101,6 +101,8 @@ public class DataPage extends AbstractPage {
     private By country_imports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/th");
     private By country_imports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/td");
     private By country_name_selected_xpath = By.xpath("//*[@id='content']//li[1]/table[1]/tbody/tr[1]/td[2]");
+    private By currency_usage_label_xpath = By.xpath("//*[@id='content']/div/dl[2]/dt");
+    private By currency_usage_xpath = By.xpath("//*[@id='content']/div/dl[2]/dd/a");
     private By country_holidays_link_id = By.id("holidays");
     private By country_holiday_label_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//span");
     private By country_holiday_for_label_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//h2");
@@ -476,6 +478,21 @@ public class DataPage extends AbstractPage {
         attemptClick(By.linkText(replacedByCountry));
     }
 
+    public void verifyCountriesCurrencyUsage(ExamplesTable currencyCountries) {
+        assertEquals("USAGE", getDriver().findElement(currency_usage_label_xpath).getText());
+        for (int i = 0; i<currencyCountries.getRowCount(); i++){
+            assertEquals(currencyCountries.getRow(i).get(currencyCountries.getHeaders().get(0)), getDriver().findElements(currency_usage_xpath).get(i).getText());
+        }
+    }
+
+    public void clickOnCurrencyUsageCountry(String currencyUsageCountry) {
+        selectedCountry = currencyUsageCountry;
+        attemptClick(By.linkText(currencyUsageCountry));
+    }
+
+    public void clickOnCurrencyIso3(String iso3) {
+        attemptClick(By.linkText(iso3));
+    }
     public void clickOnCountryHolidays() {
         attemptClick(country_holidays_link_id);
     }
