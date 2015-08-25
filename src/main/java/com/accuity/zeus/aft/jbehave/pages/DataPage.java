@@ -115,9 +115,16 @@ public class DataPage extends AbstractPage {
     private By country_regions_value_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/th[2]");
     private By country_regions_type_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/td[1]");
     private By country_regions_value_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/td[2]");
-
+    private By currency_update_link_id = By.id("update-link");
 
     private String selectedCountry = "";
+    private By currency_input_name_xpath = By.xpath("//input[@name='name']");
+    private By currency_input_abbr_xpath = By.xpath("//input[@name='abbr']");
+    private By currency_input_unit_xpath = By.xpath("//input[@name='unit']");
+    private By currency_input_quantity_xpath = By.xpath("//input[@name='quantity']");
+    private By save_button_id = By.id("save-button");
+    private By cancel_button_id = By.id("cancel-button");
+
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
@@ -523,5 +530,37 @@ public class DataPage extends AbstractPage {
             assertEquals(countryRegions.getRow(i).get(countryRegions.getHeaders().get(0)),regionType.get(i).getText());
             assertEquals(countryRegions.getRow(i).get(countryRegions.getHeaders().get(1)),regionValue.get(i).getText());
         }
+    }
+
+    public void clickOnUpdateCurrencyLink() {
+        attemptClick(currency_update_link_id);
+    }
+
+    public void enterCurrencyName(String name) {
+        getDriver().findElement(currency_input_name_xpath).clear();
+        getDriver().findElement(currency_input_name_xpath).sendKeys(name);
+    }
+
+    public void enterCurrencyAbbr(String abbr) {
+        getDriver().findElement(currency_input_abbr_xpath).clear();
+        getDriver().findElement(currency_input_abbr_xpath).sendKeys(abbr);
+    }
+
+    public void enterCurrencyUnit(String unit) {
+        getDriver().findElement(currency_input_unit_xpath).clear();
+        getDriver().findElement(currency_input_unit_xpath).sendKeys(unit);
+    }
+
+    public void enterCurrencyQuantity(String quantity) {
+        getDriver().findElement(currency_input_quantity_xpath).clear();
+        getDriver().findElement(currency_input_quantity_xpath).sendKeys(quantity);
+    }
+
+    public void clickOnSaveButton() {
+        getDriver().findElement(save_button_id).click();
+    }
+
+    public void clickOnCancelButton() {
+        getDriver().findElement(cancel_button_id).click();
     }
 }

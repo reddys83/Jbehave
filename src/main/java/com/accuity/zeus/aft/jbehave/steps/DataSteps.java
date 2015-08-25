@@ -268,6 +268,40 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryRegions(countryRegions);
     }
 
+    @When("the user clicks on the update currency link")
+    public void clickOnUpdateCurrencyLink(){
+        getDataPage().clickOnUpdateCurrencyLink();
+    }
+
+    @When("the user enters the currency name value as <name>")
+    public void enterCurrencyName(@Named("name") String name){
+        getDataPage().enterCurrencyName(name);
+    }
+
+    @When("the user enters the currency abbr value as <abbr>")
+    public void enterCurrencyAbbr(@Named("abbr") String abbr){
+        getDataPage().enterCurrencyAbbr(abbr);
+    }
+
+    @When("the user enters the currency unit value as <unit>")
+    public void enterCurrencyUnit(@Named("unit") String unit){
+        getDataPage().enterCurrencyUnit(unit);
+    }
+
+    @When("the user enters the currency quantity value as <quantity>")
+    public void enterCurrencyQuantity(@Named("quantity") String quantity){
+        getDataPage().enterCurrencyQuantity(quantity);
+    }
+
+    @When("the user clicks on the save button")
+    public void clickOnSaveButton(){
+        getDataPage().clickOnSaveButton();
+    }
+
+    @When("the user clicks on the cancel button")
+    public void clickOnCancelButton(){
+        getDataPage().clickOnCancelButton();
+    }
 }
 
 
