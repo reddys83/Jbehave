@@ -164,6 +164,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnBasicInfoInNavigationBar();
     }
 
+    @When("the user clicks on the country regions link in the navigation bar")
+    public void clickOnRegionsInNavigationBar(){
+        getDataPage().clickOnRegionsInNavigationBar();
+    }
+
     @Then("the user should see the country demographics info as: $countryDemographics")
     public void verifyCountryDemographics(ExamplesTable countryDemographics){
         getDataPage().verifyCountryDemographics(countryDemographics);
@@ -248,6 +253,7 @@ public class DataSteps extends AbstractSteps {
     public void clickOnReplacedByCountry(@Named("replacedByCountry") String replacedByCountry){
         getDataPage().clickOnReplacedByCountry(replacedByCountry);
     }
+
     @When("the user clicks on the country <currencyUsageCountry> in the currency usage")
     public void clickOnCurrencyUsageCountry(@Named("currencyUsageCountry") String currencyUsageCountry){
         getDataPage().clickOnCurrencyUsageCountry(currencyUsageCountry);
@@ -257,6 +263,26 @@ public class DataSteps extends AbstractSteps {
     public void clickOnCurrenctIso3(@Named("iso3") String iso3){
         getDataPage().clickOnCurrencyIso3(iso3);
     }
+
+    @When("the user clicks on the country holiday link in the navigation bar")
+    public void clickOnCountryHolidays(){
+        getDataPage().clickOnCountryHolidays();
+    }
+    @Then("the user should see the country's holidays list as: $countryHolidaysList")
+    public void verifyCountryHolidays(ExamplesTable countryHolidaysList){
+        getDataPage().verifyCountryHolidays(countryHolidaysList);
+    }
+
+    @Then("the user should not see the country's holidays list")
+    public void verifyNoCountryHolidays(){
+        getDataPage().verifyNoCountryHolidays();
+    }
+
+    @Then("the user should see the country alternatuive regions as: $countryRegions")
+    public void verifyCountryRegions(ExamplesTable countryRegions){
+        getDataPage().verifyCountryRegions(countryRegions);
+    }
+
 }
 
 

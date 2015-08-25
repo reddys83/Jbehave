@@ -1,4 +1,4 @@
-Meta: @Country
+Meta:@CountryBasicInfo
 
 Narrative:
 In order to view and edit the currencies
@@ -6,6 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-246 - User can search for country by full name
 JIRA ID - ZEUS-93 - User can view basic country info
+JIRA ID - ZEUS-254 - User can view a country's holidays
 
 Scenario:
 1. Verify that the country list is displayed and is not empty
