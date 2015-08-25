@@ -159,6 +159,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnBasicInfoInNavigationBar();
     }
 
+    @When("the user clicks on the country regions link in the navigation bar")
+    public void clickOnRegionsInNavigationBar(){
+        getDataPage().clickOnRegionsInNavigationBar();
+    }
+
     @Then("the user should see the country demographics info as: $countryDemographics")
     public void verifyCountryDemographics(ExamplesTable countryDemographics){
         getDataPage().verifyCountryDemographics(countryDemographics);
@@ -256,6 +261,11 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should not see the country's holidays list")
     public void verifyNoCountryHolidays(){
         getDataPage().verifyNoCountryHolidays();
+    }
+
+    @Then("the user should see the country alternatuive regions as: $countryRegions")
+    public void verifyCountryRegions(ExamplesTable countryRegions){
+        getDataPage().verifyCountryRegions(countryRegions);
     }
 
 }
