@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -100,6 +101,14 @@ public class DataPage extends AbstractPage {
     private By country_imports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/th");
     private By country_imports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/td");
     private By country_name_selected_xpath = By.xpath("//*[@id='content']//li[1]/table[1]/tbody/tr[1]/td[2]");
+    private By country_holidays_link_id = By.id("holidays");
+    private By country_holiday_label_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//span");
+    private By country_holiday_for_label_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//h2");
+    private By country_holiday_table_header_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//thead");
+    private By country_holiday_date_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//tr/td[1]");
+    private By country_holiday_description_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//tr/td[2]");
+    private By country_holiday_notes_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//tr/td[3]");
+
     private String selectedCountry = "";
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -298,7 +307,7 @@ public class DataPage extends AbstractPage {
 
     public void verifyCountryIso3(String iso3) {
         assertEquals("ISO3",getDriver().findElement(country_iso3_label_id).getText());
-        assertEquals(iso3,getDriver().findElement(country_iso3_id).getText());
+        assertEquals(iso3, getDriver().findElement(country_iso3_id).getText());
     }
 
     public void verifyCountryBasicInfo() {
@@ -457,5 +466,37 @@ public class DataPage extends AbstractPage {
     public void clickOnReplacedByCountry(String replacedByCountry) {
         selectedCountry = replacedByCountry;
         attemptClick(By.linkText(replacedByCountry));
+    }
+
+    public void clickOnCountryHolidays() {
+        attemptClick(country_holidays_link_id);
+    }
+
+    public void verifyCountryHolidays(ExamplesTable countryHolidaysList) {
+        assertEquals("HOLIDAYS", getDriver().findElement(country_holiday_label_xpath).getText());
+        assertEquals("PUBLIC HOLIDAYS FOR " + selectedCountry.toUpperCase(), getDriver().findElement(country_holiday_for_label_xpath).getText());
+        assertEquals("DATE DESCRIPTION NOTES", getDriver().findElement(country_holiday_table_header_xpath).getText());
+        List<WebElement> dates = getDriver().findElements(country_holiday_date_xpath);
+        List<WebElement> description = getDriver().findElements(country_holiday_description_xpath);
+        List<WebElement> notes = getDriver().findElements(country_holiday_notes_xpath);
+        for (int i=0; i<countryHolidaysList.getRowCount(); i++){
+            assertEquals(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(0)), dates.get(i).getText());
+            if(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(1)).isEmpty()){} else{
+            assertEquals(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(1)), description.get(i).getText());}
+            if(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(2)).isEmpty()){} else{
+            assertEquals(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(2)), notes.get(i).getText());}
+        }
+    }
+
+    public void verifyNoCountryHolidays() {
+        assertEquals("HOLIDAYS", getDriver().findElement(country_holiday_label_xpath).getText());
+        assertEquals("PUBLIC HOLIDAYS FOR " + selectedCountry.toUpperCase(), getDriver().findElement(country_holiday_for_label_xpath).getText());
+        assertEquals("DATE DESCRIPTION NOTES", getDriver().findElement(country_holiday_table_header_xpath).getText());
+        try {
+            assertFalse(getDriver().findElement(country_holiday_date_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+
+        }
+
     }
 }
