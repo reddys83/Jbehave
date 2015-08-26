@@ -14,7 +14,7 @@ And the user clicks on the country tab in the data area
 Then the user should see the country list box displayed
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
-When the user clicks on the country holiday link in the navigation bar
+When the user clicks on the country holidays link in the navigation bar
 Then the user should see the country's holidays list as:
 |DATE|DESCRIPTION|NOTES|
 |01 Jan 2015|New Years Day|The day of the new year|
@@ -36,7 +36,7 @@ And the user clicks on the country tab in the data area
 Then the user should see the country list box displayed
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
-When the user clicks on the country holiday link in the navigation bar
+When the user clicks on the country holidays link in the navigation bar
 Then the user should not see the country's holidays list
 
 Examples:
