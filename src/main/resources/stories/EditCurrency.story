@@ -17,11 +17,6 @@ And the user enters the currency name value as <name>
 And the user enters the currency abbr value as <abbr>
 And the user enters the currency unit value as <unit>
 And the user enters the currency quantity value as <quantity>
-And the user clicks on the save button
-Then the user should see the currency name value as <name>
-And the user should see the currency abbr value as <abbr>
-And the user should see the currency unit value as <unit>
-And the user should see the currency quantity value as <quantity>
 
 Examples:
 |currency|name|abbr|unit|quantity|
@@ -38,7 +33,6 @@ And the user enters the currency name value as <name>
 And the user enters the currency abbr value as <abbr>
 And the user enters the currency unit value as <unit>
 And the user enters the currency quantity value as <quantity>
-And the user clicks on the cancel button
 
 Examples:
 |currency|name|abbr|unit|quantity|

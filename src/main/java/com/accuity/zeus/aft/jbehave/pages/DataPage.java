@@ -137,8 +137,6 @@ public class DataPage extends AbstractPage {
     private By currency_input_abbr_xpath = By.xpath("//input[@name='abbr']");
     private By currency_input_unit_xpath = By.xpath("//input[@name='unit']");
     private By currency_input_quantity_xpath = By.xpath("//input[@name='quantity']");
-    private By save_button_id = By.id("save-button");
-    private By cancel_button_id = By.id("cancel-button");
 
     private String selectedCountry = "";
 
@@ -645,11 +643,4 @@ public class DataPage extends AbstractPage {
         getDriver().findElement(currency_input_quantity_xpath).sendKeys(quantity);
     }
 
-    public void clickOnSaveButton() {
-        getDriver().findElement(save_button_id).click();
-    }
-
-    public void clickOnCancelButton() {
-        getDriver().findElement(cancel_button_id).click();
-    }
 }
