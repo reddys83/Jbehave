@@ -110,6 +110,20 @@ public class DataPage extends AbstractPage {
     private By country_holiday_date_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//tr/td[1]");
     private By country_holiday_description_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//tr/td[2]");
     private By country_holiday_notes_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//tr/td[3]");
+    private By country_payments_link_id = By.id("payments");
+    private By country_payments_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//span");
+    private By country_payments_iban_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//h2[1]");
+    private By country_payments_status_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[1]");
+    private By country_payments_iso_code_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[2]");
+    private By country_payments_registered_date_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[3]");
+    private By country_payments_code_type_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[4]");
+    private By country_payments_status_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]/tbody//tr/td[1]");
+    private By country_payments_iso_code_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]/tbody//tr/td[2]");
+    private By country_payments_registered_date_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]/tbody//tr/td[3]");
+    private By country_payments_code_type_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]/tbody//tr/td[4]");
+    private By country_payments_routing_code_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//h2[2]");
+    private By country_payments_routing_codes_types_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[2]//th[1]");
+    private By country_payments_routing_code_code_types_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[2]//td");
     private By country_regions_link_id = By.id("regions");
     private By country_regions_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//span");
     private By country_alt_regions_for_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//h2");
@@ -117,9 +131,8 @@ public class DataPage extends AbstractPage {
     private By country_regions_value_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/th[2]");
     private By country_regions_type_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/td[1]");
     private By country_regions_value_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/td[2]");
-
-
     private String selectedCountry = "";
+
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
@@ -522,7 +535,63 @@ public class DataPage extends AbstractPage {
         } catch (org.openqa.selenium.NoSuchElementException e) {
 
         }
+    }
 
+    public void clickOnCountryPayments() {
+        attemptClick(country_payments_link_id);
+    }
+
+    public void verifyCountryPaymentsIban(ExamplesTable countryPaymentsIban) {
+        assertEquals("PAYMENTS", getDriver().findElement(country_payments_label_xpath).getText());
+        assertEquals("IBAN", getDriver().findElement(country_payments_iban_label_xpath).getText());
+        assertEquals("STATUS", getDriver().findElement(country_payments_status_label_xpath).getText());
+        assertEquals("ISO CODE", getDriver().findElement(country_payments_iso_code_label_xpath).getText());
+        assertEquals("REGISTERED DATE", getDriver().findElement(country_payments_registered_date_label_xpath).getText());
+        assertEquals("IBAN ROUTING CODE TYPE", getDriver().findElement(country_payments_code_type_label_xpath).getText());
+        List<WebElement> status = getDriver().findElements(country_payments_status_xpath);
+        List<WebElement> isoCode = getDriver().findElements(country_payments_iso_code_xpath);
+        List<WebElement> registeredDate = getDriver().findElements(country_payments_registered_date_xpath);
+        List<WebElement> ibanRoutingCode = getDriver().findElements(country_payments_code_type_xpath);
+        for(int i=0; i<countryPaymentsIban.getRowCount(); i++){
+            assertEquals(countryPaymentsIban.getRow(i).get(countryPaymentsIban.getHeaders().get(0)),status.get(i).getText());
+            assertEquals(countryPaymentsIban.getRow(i).get(countryPaymentsIban.getHeaders().get(1)),isoCode.get(i).getText());
+            assertEquals(countryPaymentsIban.getRow(i).get(countryPaymentsIban.getHeaders().get(2)),registeredDate.get(i).getText());
+            assertEquals(countryPaymentsIban.getRow(i).get(countryPaymentsIban.getHeaders().get(3)),ibanRoutingCode.get(i).getText());
+        }
+    }
+
+    public void verifyCountryPaymentsRoutingCodesTypes(ExamplesTable countryPaymentsRoutingCodesTypes) {
+        assertEquals("PAYMENTS", getDriver().findElement(country_payments_label_xpath).getText());
+        assertEquals("ROUTING CODE TYPES IN " + selectedCountry.toUpperCase(), getDriver().findElement(country_payments_routing_code_label_xpath).getText());
+        assertEquals("TYPES", getDriver().findElement(country_payments_routing_codes_types_label_xpath).getText());
+        List<WebElement> types = getDriver().findElements(country_payments_routing_code_code_types_xpath);
+        for (int i=0; i<countryPaymentsRoutingCodesTypes.getRowCount(); i++){
+            assertEquals(countryPaymentsRoutingCodesTypes.getRow(i).get(countryPaymentsRoutingCodesTypes.getHeaders().get(0)),types.get(i).getText());
+        }
+    }
+
+    public void verifyCountryNoIbanInfo() {
+        assertEquals("PAYMENTS", getDriver().findElement(country_payments_label_xpath).getText());
+        assertEquals("IBAN", getDriver().findElement(country_payments_iban_label_xpath).getText());
+        assertEquals("STATUS", getDriver().findElement(country_payments_status_label_xpath).getText());
+        assertEquals("ISO CODE", getDriver().findElement(country_payments_iso_code_label_xpath).getText());
+        assertEquals("REGISTERED DATE", getDriver().findElement(country_payments_registered_date_label_xpath).getText());
+        assertEquals("IBAN ROUTING CODE TYPE", getDriver().findElement(country_payments_code_type_label_xpath).getText());
+        try {
+            assertFalse(getDriver().findElement(country_payments_status_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e){}
+
+    }
+
+
+    public void verifyCountryNoRoutingCodeTypes() {
+        assertEquals("PAYMENTS", getDriver().findElement(country_payments_label_xpath).getText());
+        assertEquals("ROUTING CODE TYPES IN " + selectedCountry.toUpperCase(), getDriver().findElement(country_payments_routing_code_label_xpath).getText());
+        assertEquals("TYPES", getDriver().findElement(country_payments_routing_codes_types_label_xpath).getText());
+        try {
+            assertFalse(getDriver().findElement(country_payments_routing_code_code_types_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
     }
 
     public void clickOnRegionsInNavigationBar() {

@@ -277,6 +277,31 @@ public class DataSteps extends AbstractSteps {
     public void verifyNoCountryHolidays(){
         getDataPage().verifyNoCountryHolidays();
     }
+    
+    @When("the user clicks on the country payments link in the navigation bar")
+    public void clickOnCountryPayments(){
+        getDataPage().clickOnCountryPayments();
+    }
+
+    @Then("the user should see the country's payments iban as: $countryPaymentsIban")
+    public void verifyCountryPaymentsIban(ExamplesTable countryPaymentsIban){
+        getDataPage().verifyCountryPaymentsIban(countryPaymentsIban);
+    }
+
+    @Then("the user should see the country's payments routing code types as: $countryPaymentsRoutingCodesTypes")
+    public void verifyCountryPaymentsRoutingCodesTypes(ExamplesTable countryPaymentsRoutingCodesTypes){
+        getDataPage().verifyCountryPaymentsRoutingCodesTypes(countryPaymentsRoutingCodesTypes);
+    }
+
+    @Then("the user should not see the country's payments iban")
+    public void verifyCountryNoIbanInfo(){
+        getDataPage().verifyCountryNoIbanInfo();
+    }
+
+    @Then("the user should not see the country's payments routing codes types")
+    public void verifyCountryNoRoutingCodeTypes(){
+        getDataPage().verifyCountryNoRoutingCodeTypes();
+    }
 
     @Then("the user should see the country alternatuive regions as: $countryRegions")
     public void verifyCountryRegions(ExamplesTable countryRegions){
