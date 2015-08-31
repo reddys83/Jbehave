@@ -292,16 +292,6 @@ public class DataSteps extends AbstractSteps {
     public void enterCurrencyQuantity(@Named("quantity") String quantity){
         getDataPage().enterCurrencyQuantity(quantity);
     }
-
-    @When("the user clicks on the save button")
-    public void clickOnSaveButton(){
-        getDataPage().clickOnSaveButton();
-    }
-
-    @When("the user clicks on the cancel button")
-    public void clickOnCancelButton(){
-        getDataPage().clickOnCancelButton();
-    }
 }
 
 
