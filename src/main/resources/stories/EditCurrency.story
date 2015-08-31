@@ -6,7 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-190 - User can edit currencies
 
-Scenario: Verify currency list matches the search string
+Scenario: Verify that the user can edit the currency name, abbr, unit, quantity
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area

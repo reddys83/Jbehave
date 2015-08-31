@@ -20,7 +20,6 @@ public class DetailsPage extends AbstractPage {
     private By telex_xpath = By.xpath(".//*[@id='content']/div/section/article[2]/dl/dd[7]");
     private By telephone_xpath = By.xpath(".//*[@id='content']/div/section/article[2]/dl/dd[8]");
 
-
     public DetailsPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
