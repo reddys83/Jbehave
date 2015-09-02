@@ -154,7 +154,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryBasicInfo();
     }
 
-    @Then("the user should see the list of country names type and value as: $countryNames")
+    @Then("the user should see the list of country's names type and value as: $countryNames")
     public void verifyCountryNames(ExamplesTable countryNames){
         getDataPage().verifyCountryNames(countryNames);
     }
@@ -169,32 +169,32 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnRegionsInNavigationBar();
     }
 
-    @Then("the user should see the country demographics info as: $countryDemographics")
+    @Then("the user should see the country's demographics info as: $countryDemographics")
     public void verifyCountryDemographics(ExamplesTable countryDemographics){
         getDataPage().verifyCountryDemographics(countryDemographics);
     }
 
-    @Then("the user should see the country identifiers as: $countryIdentifiers")
+    @Then("the user should see the country's identifiers as: $countryIdentifiers")
     public void verifyCountryIdentifiers(ExamplesTable countryIdentifiers){
         getDataPage().verifyCountryIdentifiers(countryIdentifiers);
     }
 
-    @Then("the user should see the country banking hours summary as $countryBankingHourSummary")
+    @Then("the user should see the country's banking hours summary as $countryBankingHourSummary")
     public void verifyCountryBankingHourSummary(@Named("countryBankingHourSummary") String countryBankingHourSummary){
         getDataPage().verifyCountryBankingHourSummary(countryBankingHourSummary);
     }
 
-    @Then("the user should see the country banking hours as: $countryBankingHrSummary")
+    @Then("the user should see the country's banking hours as: $countryBankingHrSummary")
     public void verifyCountryBankingHourSummaryDaysAndHrs(ExamplesTable countryBankingHrSummary){
         getDataPage().verifyCountryBankingHourSummaryDaysAndHrs(countryBankingHrSummary);
     }
 
-    @Then("the user should see the country time zones summary as $countryTimeZonesSummary")
+    @Then("the user should see the country's time zones summary as $countryTimeZonesSummary")
     public void verifyCountryTimeZonesSummary(@Named("countryTimeZonesSummary") String countryTimeZonesSummary){
         getDataPage().verifyCountryTimeZonesSummary(countryTimeZonesSummary);
     }
 
-    @Then("the user should see the country time zones as: $countryTimeZones")
+    @Then("the user should see the country's time zones as: $countryTimeZones")
     public void verifyCountryTimeZones(ExamplesTable countryTimeZones){
         getDataPage().verifyCountryTimeZones(countryTimeZones);
     }
@@ -204,47 +204,47 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountrySummary(countrySummary);
     }
 
-    @Then("the user should see the country status as $status")
+    @Then("the user should see the country's status as $status")
     public void verifyCountryStatus(@Named("status") String status){
         getDataPage().verifyCountryStatus(status);
     }
 
-    @Then("the user should see the country start date as $startDate")
+    @Then("the user should see the country's start date as $startDate")
     public void verifyCountryStartDate(@Named("startDate") String startDate){
         getDataPage().verifyCountryStartDate(startDate);
     }
 
-    @Then("the user should see the country end date as $endDate")
+    @Then("the user should see the country's end date as $endDate")
     public void verifyCountryEndDate(@Named("endDate") String endDate){
         getDataPage().verifyCountryEndDate(endDate);
     }
 
-    @Then("the user should see the country replaced by as $replacedBy")
+    @Then("the user should see the country's replaced by as $replacedBy")
     public void verifyCountryReplacedBy(@Named("replacedBy") String replacedBy){
         getDataPage().verifyCountryReplacedBy(replacedBy);
     }
 
-    @Then("the user should see the country imports as $imports")
+    @Then("the user should see the country's imports as $imports")
     public void verifyCountryImports(@Named("imports") String imports){
         getDataPage().verifyCountryImports(imports);
     }
 
-    @Then("the user should see the country exports as $exports")
+    @Then("the user should see the country's exports as $exports")
     public void verifyCountryExport(@Named("exports") String exports){
         getDataPage().verifyCountryExport(exports);
     }
 
-    @Then("the user should see the country intl dialing code as $intlDialCode")
+    @Then("the user should see the country's intl dialing code as $intlDialCode")
     public void verifyCountryIntlDialCode(@Named("intlDialCode") String intlDialCode){
         getDataPage().verifyCountryIntlDialCode(intlDialCode);
     }
 
-    @Then("the user should see the country political structure as $politicalStructure")
+    @Then("the user should see the country's political structure as $politicalStructure")
     public void verifyCountryPoliticalStructure(@Named("politicalStructure") String politicalStructure){
         getDataPage().verifyCountryPoliticalStructure(politicalStructure);
     }
 
-    @Then("the user should see the country additional info as $addInfo")
+    @Then("the user should see the country's additional info as $addInfo")
     public void verifyCountryAddInfo(@Named("addInfo") String addInfo){
         getDataPage().verifyCountryAddInfo(addInfo);
     }
@@ -303,9 +303,34 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryNoRoutingCodeTypes();
     }
 
-    @Then("the user should see the country alternatuive regions as: $countryRegions")
+    @Then("the user should see the country's alternative regions as: $countryRegions")
     public void verifyCountryRegions(ExamplesTable countryRegions){
         getDataPage().verifyCountryRegions(countryRegions);
+    }
+
+    @When("the user clicks on the country Languages link in the navigation bar")
+    public void clickOnCountryLanguages() {
+        getDataPage().clickOnCountryLanguages();
+    }
+
+    @Then("the user should see the country's Languages list <summary>")
+    public void verifyCountryLanguages(@Named("summary")String summary){
+        getDataPage().verifyCountryLanguages(summary);
+    }
+
+    @When("the user clicks on the country credit rating link in the navigation bar")
+    public void clickOnCountryCreditRating(){
+        getDataPage().clickOnCountryCreditRating();
+    }
+
+    @Then("the user should see the country's credit ratings as: $countryCreditRatings")
+    public void verifyCountryCreditRatings(ExamplesTable countryCreditRatings){
+        getDataPage().countryCreditRatings(countryCreditRatings);
+    }
+
+    @Then("the user should not see the country's credit ratings")
+    public void verifyNoCountryCreditRatings() {
+        getDataPage().verifyNoCountryCreditRatings();
     }
 
     @When("the user clicks on the update currency link")
@@ -347,6 +372,7 @@ public class DataSteps extends AbstractSteps {
     public void verifyNoCountryEntities(){
         getDataPage().verifyNoCountryEntities();
     }
+
 }
 
 
