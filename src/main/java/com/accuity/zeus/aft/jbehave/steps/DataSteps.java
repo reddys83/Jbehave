@@ -277,6 +277,31 @@ public class DataSteps extends AbstractSteps {
     public void verifyNoCountryHolidays(){
         getDataPage().verifyNoCountryHolidays();
     }
+    
+    @When("the user clicks on the country payments link in the navigation bar")
+    public void clickOnCountryPayments(){
+        getDataPage().clickOnCountryPayments();
+    }
+
+    @Then("the user should see the country's payments iban as: $countryPaymentsIban")
+    public void verifyCountryPaymentsIban(ExamplesTable countryPaymentsIban){
+        getDataPage().verifyCountryPaymentsIban(countryPaymentsIban);
+    }
+
+    @Then("the user should see the country's payments routing code types as: $countryPaymentsRoutingCodesTypes")
+    public void verifyCountryPaymentsRoutingCodesTypes(ExamplesTable countryPaymentsRoutingCodesTypes){
+        getDataPage().verifyCountryPaymentsRoutingCodesTypes(countryPaymentsRoutingCodesTypes);
+    }
+
+    @Then("the user should not see the country's payments iban")
+    public void verifyCountryNoIbanInfo(){
+        getDataPage().verifyCountryNoIbanInfo();
+    }
+
+    @Then("the user should not see the country's payments routing codes types")
+    public void verifyCountryNoRoutingCodeTypes(){
+        getDataPage().verifyCountryNoRoutingCodeTypes();
+    }
 
     @Then("the user should see the country's alternative regions as: $countryRegions")
     public void verifyCountryRegions(ExamplesTable countryRegions){
@@ -294,8 +319,33 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should not see the country's credit ratings")
-    public void verifyNoCountryCreditRatings(){
+    public void verifyNoCountryCreditRatings() {
         getDataPage().verifyNoCountryCreditRatings();
+    }
+
+    @When("the user clicks on the update currency link")
+    public void clickOnUpdateCurrencyLink(){
+        getDataPage().clickOnUpdateCurrencyLink();
+    }
+
+    @When("the user enters the currency name value as <name>")
+    public void enterCurrencyName(@Named("name") String name){
+        getDataPage().enterCurrencyName(name);
+    }
+
+    @When("the user enters the currency abbr value as <abbr>")
+    public void enterCurrencyAbbr(@Named("abbr") String abbr){
+        getDataPage().enterCurrencyAbbr(abbr);
+    }
+
+    @When("the user enters the currency unit value as <unit>")
+    public void enterCurrencyUnit(@Named("unit") String unit){
+        getDataPage().enterCurrencyUnit(unit);
+    }
+
+    @When("the user enters the currency quantity value as <quantity>")
+    public void enterCurrencyQuantity(@Named("quantity") String quantity){
+        getDataPage().enterCurrencyQuantity(quantity);
     }
 }
 
