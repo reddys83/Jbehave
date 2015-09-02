@@ -332,6 +332,21 @@ public class DataSteps extends AbstractSteps {
     public void enterCurrencyQuantity(@Named("quantity") String quantity){
         getDataPage().enterCurrencyQuantity(quantity);
     }
+
+    @When("the user clicks on the country places link in the navigation bar")
+    public void clickOnCountryPlaces() {
+        getDataPage().clickOnCountryPlaces();
+    }
+
+    @Then("the user should see the country's places as: $countryPlaces")
+    public void verifyCountryPlaces(ExamplesTable countryPlaces){
+        getDataPage().verifyCountryPlaces(countryPlaces);
+    }
+
+    @Then("the user should not see the country's places")
+    public void verifyNoCountryPlaces(){
+        getDataPage().verifyNoCountryPlaces();
+    }
 }
 
 
