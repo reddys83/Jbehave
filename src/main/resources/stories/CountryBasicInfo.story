@@ -40,24 +40,24 @@ And the user should see the country iso3 as YUG
 When the user clicks on the country basic info link in the navigation bar
 Then the user should see the basic info for the selected country
 
-And the user should see the list of country names type and value as:
+And the user should see the list of country's names type and value as:
 |TYPE|VALUE|
 |Country Name|Yugoslavia|
 |Former Name|Kingdom of Serbs, Croats and Slovenes|
 
-And the user should see the country demographics info as:
+And the user should see the country's demographics info as:
 |TYPE|VALUE|UNIT|DATE|
 |Area|39,518|mi²|01 Jan 2012|
 |Area|102,350|km²|01 Jan 2012|
 |Population|20,000,000||01 Jan 2012|
 
-And the user should see the country identifiers as:
+And the user should see the country's identifiers as:
 |TYPE|VALUE|STATUS|
 |ISO 3166-1 Numeric Identifier|891|Inactive|
 
-And the user should see the country banking hours summary as Workin' 9-5
+And the user should see the country's banking hours summary as Workin' 9-5
 
-And the user should see the country banking hours as:
+And the user should see the country's banking hours as:
 |DAY|HOURS|
 |Monday|9-5|
 |Tuesday|9-5|
@@ -65,22 +65,22 @@ And the user should see the country banking hours as:
 |Thursday|9-5|
 |Friday|9-5|
 
-And the user should see the country time zones summary as +1 hour
+And the user should see the country's time zones summary as +1 hour
 
-And the user should see the country time zones as:
+And the user should see the country's time zones as:
 |ZONE|VALUE|
 |UTC|+01:00|
 |UTC|+01:30|
 
-And the user should see the country status as Inactive
-And the user should see the country start date as 13 Jul 1922
-And the user should see the country end date as 21 May 2006
-And the user should see the country replaced by as  Montenegro, Serbia, Bosnia-Herzegovina, Slovenia Croatia
-And the user should see the country additional info as No longer exists.
-And the user should see the country imports as Machinery and transport equipment, fuels and lubricants, manufactured goods, chemicals, food and live animals, and raw materials.
-And the user should see the country exports as Manufactured goods, food (grain) and live animals, raw materials, and metals.
-And the user should see the country intl dialing code as +38
-And the user should see the country political structure as Republic?
+And the user should see the country's status as Inactive
+And the user should see the country's start date as 13 Jul 1922
+And the user should see the country's end date as 21 May 2006
+And the user should see the country's replaced by as  Montenegro, Serbia, Bosnia-Herzegovina, Slovenia Croatia
+And the user should see the country's additional info as No longer exists.
+And the user should see the country's imports as Machinery and transport equipment, fuels and lubricants, manufactured goods, chemicals, food and live animals, and raw materials.
+And the user should see the country's exports as Manufactured goods, food (grain) and live animals, raw materials, and metals.
+And the user should see the country's intl dialing code as +38
+And the user should see the country's political structure as Republic?
 
 Examples:
 |country|
