@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -39,7 +40,17 @@ public class AdminSteps extends AbstractSteps{
     }
 
     @Then("the list should not have any duplicates")
-    public void verifyTheListDoesNotHaveAnyDuplicates(){
+    public void verifyNoDuplicatesInList(){
         getAdminPage().verifyNoDuplicatesInList();
+    }
+
+    @When("the user enters the taxonomy <taxonomy> in the type-ahead box")
+    public void enterTaxonomyInTheTypeAheadBox(@Named("taxonomy") String taxonomy){
+        getAdminPage().enterTaxonomyInTheTypeAheadBox(taxonomy);
+    }
+
+    @Then("the user should see the taxonomy's entry as: $taxonomyEntry")
+    public void verifyTaxonomiesEntry(ExamplesTable taxonomyEntry){
+        getAdminPage().verifyTaxonomiesEntry(taxonomyEntry);
     }
 }
