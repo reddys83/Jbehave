@@ -103,7 +103,10 @@ public class DataPage extends AbstractPage {
     private By currency_usage_label_xpath = By.xpath("//*[@id='content']/div/dl[2]/dt");
     private By currency_usage_xpath = By.xpath("//*[@id='content']/div/dl[2]/dd/a");
     private By country_holidays_link_id = By.id("holidays");
+    private By country_languages_link_id = By.id("languages");
     private By country_holiday_label_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//span");
+    private By country_languages_label_xpath = By.xpath("//*[@id='content']/div/ul/li/dl/dt");
+    private By country_languages_value_xpath = By.xpath("//*[@id='content']/div/ul/li/dl/dd");
     private By country_holiday_for_label_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//h2");
     private By country_holiday_table_header_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//thead");
     private By country_holiday_date_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//tr/td[1]");
@@ -524,6 +527,11 @@ public class DataPage extends AbstractPage {
         attemptClick(country_holidays_link_id);
     }
 
+    public void clickOnCountryLanguages() {
+        attemptClick(country_languages_link_id);
+    }
+
+
     public void verifyCountryHolidays(ExamplesTable countryHolidaysList) {
         assertEquals("HOLIDAYS", getDriver().findElement(country_holiday_label_xpath).getText());
         assertEquals("PUBLIC HOLIDAYS FOR " + selectedCountry.toUpperCase(), getDriver().findElement(country_holiday_for_label_xpath).getText());
@@ -538,6 +546,12 @@ public class DataPage extends AbstractPage {
             if(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(2)).isEmpty()){} else{
             assertEquals(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(2)), notes.get(i).getText());}
         }
+    }
+
+
+    public void verifyCountryLanguages(String countryLanguagesList) {
+        assertEquals("Summary", getDriver().findElement(country_languages_label_xpath).getText());
+        assertEquals(countryLanguagesList, getDriver().findElement(country_languages_value_xpath).getText());
     }
 
     public void verifyNoCountryHolidays() {

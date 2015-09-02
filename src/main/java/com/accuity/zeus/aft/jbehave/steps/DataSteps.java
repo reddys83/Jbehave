@@ -308,6 +308,16 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryRegions(countryRegions);
     }
 
+    @When("the user clicks on the country Languages link in the navigation bar")
+    public void clickOnCountryLanguages() {
+        getDataPage().clickOnCountryLanguages();
+    }
+
+    @Then("the user should see the country's Languages list <summary>")
+    public void verifyCountryLanguages(@Named("summary")String summary){
+        getDataPage().verifyCountryLanguages(summary);
+    }
+
     @When("the user clicks on the country credit rating link in the navigation bar")
     public void clickOnCountryCreditRating(){
         getDataPage().clickOnCountryCreditRating();
@@ -347,6 +357,7 @@ public class DataSteps extends AbstractSteps {
     public void enterCurrencyQuantity(@Named("quantity") String quantity){
         getDataPage().enterCurrencyQuantity(quantity);
     }
+
 }
 
 
