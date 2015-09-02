@@ -260,7 +260,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the country iso3 $iso3 in the currency usage")
-    public void clickOnCurrenctIso3(@Named("iso3") String iso3){
+    public void clickOnCurrencyIso3(@Named("iso3") String iso3){
         getDataPage().clickOnCurrencyIso3(iso3);
     }
 
@@ -368,21 +368,35 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCurrencyQuantity(quantity);
     }
 
+    @When("the user clicks on the country places link in the navigation bar")
+    public void clickOnCountryPlaces() {
+        getDataPage().clickOnCountryPlaces();
+    }
+
+    @Then("the user should see the country's places as: $countryPlaces")
+    public void verifyCountryPlaces(ExamplesTable countryPlaces){
+        getDataPage().verifyCountryPlaces(countryPlaces);
+    }
+
+    @Then("the user should not see the country's places")
+    public void verifyNoCountryPlaces() {
+        getDataPage().verifyNoCountryPlaces();
+    }
+
     @When("the user clicks on the country entity link in the navigation bar")
-    public void clickOnCountryEntity(){
+    public void clickOnCountryEntity () {
         getDataPage().clickOnCountryEntity();
     }
 
     @Then("the user should see the country's entities as: $countryEntities")
-    public void verifyCountryEntities(ExamplesTable countryEntities){
+    public void verifyCountryEntities (ExamplesTable countryEntities){
         getDataPage().verifyCountryEntities(countryEntities);
     }
 
     @Then("the user should not see the country's entities")
-    public void verifyNoCountryEntities(){
+    public void verifyNoCountryEntities () {
         getDataPage().verifyNoCountryEntities();
     }
-
 }
 
 

@@ -147,6 +147,13 @@ public class DataPage extends AbstractPage {
     private By currency_input_abbr_xpath = By.xpath("//input[@name='abbr']");
     private By currency_input_unit_xpath = By.xpath("//input[@name='unit']");
     private By currency_input_quantity_xpath = By.xpath("//input[@name='quantity']");
+    private By country_places_link_id= By.id("places");
+    private By country_places_label_xpath = By.xpath("//li[contains(h1,'Places')]//span");
+    private By country_related_places_label_xpath = By.xpath("//li[contains(h2,'Places')]//h2");
+    private By country_places_type_label_xpath = By.xpath("//li[contains(h2,'Places')]//table/thead//th[1]");
+    private By country_places_place_label_xpath = By.xpath("//li[contains(h2,'Places')]//table/thead//th[2]");
+    private By country_places_details_label_xpath = By.xpath("//li[contains(h2,'Places')]//table/thead//th[3]");
+    private By country_places_type_xpath = By.xpath("//li[contains(h2,'Places')]//table/tbody//td[1]");
     private String selectedCountry = "";
     private By country_entity_link_id = By.id("presence");
     private By country_entities_label_xpath = By.xpath("//li[contains(h1,'Entities')]//span");
@@ -155,7 +162,6 @@ public class DataPage extends AbstractPage {
     private By country_entities_entity_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[2]");
     private By country_entities_details_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[3]");
     private By country_entities_type_xpath = By.xpath("//li[contains(h2,'Entities')]//table/tbody//td[1]");
-
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
@@ -716,6 +722,37 @@ public class DataPage extends AbstractPage {
         getDriver().findElement(currency_input_quantity_xpath).sendKeys(quantity);
     }
 
+    public void clickOnCountryPlaces() {
+        attemptClick(country_places_link_id);
+    }
+
+    public void verifyCountryPlaces(ExamplesTable countryPlaces)  {
+        assertEquals("PLACES", getDriver().findElement(country_places_label_xpath).getText());
+        assertEquals("RELATED PLACES FOR " + selectedCountry.toUpperCase(),getDriver().findElement(country_related_places_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(country_places_type_label_xpath).getText());
+        assertEquals("PLACE", getDriver().findElement(country_places_place_label_xpath).getText());
+        assertEquals("DETAILS", getDriver().findElement(country_places_details_label_xpath).getText());
+        for(int i = 0; i<countryPlaces.getRowCount(); i++){
+            assertEquals(countryPlaces.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
+                    getDriver().findElement(
+                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryPlaces.getRow(i).get(countryPlaces.getHeaders().get(0)) + "']")).getText().replace(",","").trim());
+        }
+
+
+    }
+    public void verifyNoCountryPlaces() {
+        assertEquals("PLACES", getDriver().findElement(country_places_label_xpath).getText());
+        assertEquals("RELATED PLACES FOR " + selectedCountry.toUpperCase(),getDriver().findElement(country_related_places_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(country_places_type_label_xpath).getText());
+        assertEquals("PLACE", getDriver().findElement(country_places_place_label_xpath).getText());
+        assertEquals("DETAILS", getDriver().findElement(country_places_details_label_xpath).getText());
+        try {
+            assertFalse(getDriver().findElement(country_places_type_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+
+        }
+    }
+
     public void clickOnCountryEntity() {
         attemptClick(country_entity_link_id);
     }
@@ -745,6 +782,5 @@ public class DataPage extends AbstractPage {
 
         }
     }
-
 }
 
