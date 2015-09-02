@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -146,7 +145,7 @@ public class DataPage extends AbstractPage {
     private By country_entities_type_xpath = By.xpath("//li[contains(h2,'Entities')]//table/tbody//td[1]");
     private By country_entities_entity_xpath = By.xpath("//li[contains(h2,'Entities')]//table/tbody//td[2]");
     private By country_entities_details_xpath = By.xpath("//li[contains(h2,'Entities')]//table/tbody//td[3]");
-
+    private By country_entities_table_rows_xpath = By.xpath("//li[contains(h2,'Entities')]//table/tbody//tr");
 
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -660,13 +659,10 @@ public class DataPage extends AbstractPage {
         assertEquals("TYPE", getDriver().findElement(country_entities_type_label_xpath).getText());
         assertEquals("ENTITY", getDriver().findElement(country_entities_entity_label_xpath).getText());
         assertEquals("DETAILS", getDriver().findElement(country_entities_details_label_xpath).getText());
-        List<WebElement> type = getDriver().findElements(country_entities_type_xpath);
-        List<WebElement> entity = getDriver().findElements(country_entities_entity_xpath);
-        List<WebElement> details = getDriver().findElements(country_entities_details_xpath);
         for(int i = 0; i<countryEntities.getRowCount(); i++){
-            assertEquals(countryEntities.getRow(i).get(countryEntities.getHeaders().get(0)),type.get(i).getText());
-            assertEquals(countryEntities.getRow(i).get(countryEntities.getHeaders().get(1)),entity.get(i).getText());
-            assertEquals(countryEntities.getRow(i).get(countryEntities.getHeaders().get(2)),details.get(i).getText());
+            assertEquals(countryEntities.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
+                    getDriver().findElement(
+                        By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryEntities.getRow(i).get(countryEntities.getHeaders().get(0)) + "']")).getText().replace(",","").trim());
         }
     }
 
