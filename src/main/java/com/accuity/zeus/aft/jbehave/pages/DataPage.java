@@ -134,7 +134,6 @@ public class DataPage extends AbstractPage {
     private By country_regions_type_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/td[1]");
     private By country_regions_value_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/td[2]");
     private By country_credit_rating_id = By.id("creditRating");
-    private String selectedCountry = "";
     private By country_credit_rating_label_xpath = By.xpath("//li[contains(h1,'Credit Rating')]/h1/span");
     private By country_credit_rating_for_label_xpath = By.xpath("//li[contains(h1,'Credit Rating')]/h2");
     private By country_credit_rating_table_headers_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//thead/tr");
@@ -148,7 +147,14 @@ public class DataPage extends AbstractPage {
     private By currency_input_abbr_xpath = By.xpath("//input[@name='abbr']");
     private By currency_input_unit_xpath = By.xpath("//input[@name='unit']");
     private By currency_input_quantity_xpath = By.xpath("//input[@name='quantity']");
-
+    private String selectedCountry = "";
+    private By country_entity_link_id = By.id("presence");
+    private By country_entities_label_xpath = By.xpath("//li[contains(h1,'Entities')]//span");
+    private By country_related_entities_label_xpath = By.xpath("//li[contains(h2,'Entities')]//h2");
+    private By country_entities_type_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[1]");
+    private By country_entities_entity_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[2]");
+    private By country_entities_details_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[3]");
+    private By country_entities_type_xpath = By.xpath("//li[contains(h2,'Entities')]//table/tbody//td[1]");
 
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -639,7 +645,6 @@ public class DataPage extends AbstractPage {
         }
     }
 
-<<<<<<< HEAD
     public void clickOnCountryCreditRating() {
         attemptClick(country_credit_rating_id);
     }
@@ -670,7 +675,7 @@ public class DataPage extends AbstractPage {
             assertFalse(getDriver().findElement(country_credit_rating_agency_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e){}
     }
-=======
+
     public void clickOnUpdateCurrencyLink() {
         attemptClick(currency_update_link_id);
     }
@@ -695,5 +700,34 @@ public class DataPage extends AbstractPage {
         getDriver().findElement(currency_input_quantity_xpath).sendKeys(quantity);
     }
 
->>>>>>> develop
+    public void clickOnCountryEntity() {
+        attemptClick(country_entity_link_id);
+    }
+
+    public void verifyCountryEntities(ExamplesTable countryEntities) {
+        assertEquals("ENTITIES", getDriver().findElement(country_entities_label_xpath).getText());
+        assertEquals("RELATED ENTITIES FOR " + selectedCountry.toUpperCase(),getDriver().findElement(country_related_entities_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(country_entities_type_label_xpath).getText());
+        assertEquals("ENTITY", getDriver().findElement(country_entities_entity_label_xpath).getText());
+        assertEquals("DETAILS", getDriver().findElement(country_entities_details_label_xpath).getText());
+        for(int i = 0; i<countryEntities.getRowCount(); i++){
+            assertEquals(countryEntities.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
+                    getDriver().findElement(
+                        By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryEntities.getRow(i).get(countryEntities.getHeaders().get(0)) + "']")).getText().replace(",","").trim());
+        }
+    }
+
+    public void verifyNoCountryEntities() {
+        assertEquals("ENTITIES", getDriver().findElement(country_entities_label_xpath).getText());
+        assertEquals("RELATED ENTITIES FOR " + selectedCountry.toUpperCase(),getDriver().findElement(country_related_entities_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(country_entities_type_label_xpath).getText());
+        assertEquals("ENTITY", getDriver().findElement(country_entities_entity_label_xpath).getText());
+        assertEquals("DETAILS", getDriver().findElement(country_entities_details_label_xpath).getText());
+        try {
+            assertFalse(getDriver().findElement(country_entities_type_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+
+        }
+    }
 }
+
