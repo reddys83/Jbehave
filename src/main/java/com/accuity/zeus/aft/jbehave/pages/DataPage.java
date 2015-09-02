@@ -645,6 +645,22 @@ public class DataPage extends AbstractPage {
         }
     }
 
+    public void verifyNoCountryRegionsSection() {
+        try {
+            assertFalse(getDriver().findElement(country_regions_label_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e){
+
+        }
+    }
+
+    public void verifyNoCountryHolidaysSection() {
+        try {
+            assertFalse(getDriver().findElement(country_holiday_label_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e){
+
+        }
+    }
+
     public void clickOnCountryCreditRating() {
         attemptClick(country_credit_rating_id);
     }
@@ -729,5 +745,6 @@ public class DataPage extends AbstractPage {
 
         }
     }
+
 }
 
