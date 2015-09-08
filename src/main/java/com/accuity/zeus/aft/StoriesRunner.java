@@ -18,10 +18,12 @@ import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.ParameterConverters;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
-
+import com.accuity.zeus.utils.*;
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,6 +51,22 @@ import java.util.Properties;
 @UsingSteps(instances = {SearchSteps.class, SearchResultsSteps.class, DetailsSteps.class})
 @UsingSpring(resources = {"classpath:/applicationContext.xml"})
 public class StoriesRunner extends InjectableEmbedder {
+
+    @After
+    public void styleReports() {
+        try {
+            File srcFolder = new File("./src/main/resources/reports");
+            File destFolder = new File("./target/jbehave/view");
+            if (destFolder.exists()) {
+                try {
+                    FilesUtils.copyFolder(srcFolder, destFolder);
+                } catch (Exception e) {
+                    System.out.println("The error message " + e.getMessage());
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
 
     @Test
     public void run() throws IOException {
