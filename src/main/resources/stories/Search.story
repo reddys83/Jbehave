@@ -6,6 +6,7 @@ I want to perform an action
 So that I can achieve a business goal
 
 Scenario: search by finid and verify values
+Meta:@verifyBuild
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
 Then the user should see the search results for the searched entity

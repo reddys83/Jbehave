@@ -8,6 +8,7 @@ JIRA ID - ZEUS-246 - User can search for country by full name
 JIRA ID - ZEUS-251 - User can view a country's credit ratings
 
 Scenario: Verify country's credit rating.
+Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

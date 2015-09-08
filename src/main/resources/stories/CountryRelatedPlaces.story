@@ -7,6 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-249 - User can view a country's related places
 
 Scenario: Verify country places data.
+Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

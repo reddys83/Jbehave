@@ -123,6 +123,7 @@ Examples:
 
 Scenario: Zeus-222
 Verify clicking on the Replaced By link the user is taken to that currency (switch Rand to Rouble when the list value becomes more unique)
+Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area

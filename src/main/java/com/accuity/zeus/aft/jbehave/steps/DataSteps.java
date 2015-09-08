@@ -268,6 +268,7 @@ public class DataSteps extends AbstractSteps {
     public void clickOnCountryHolidays(){
         getDataPage().clickOnCountryHolidays();
     }
+
     @Then("the user should see the country's holidays list as: $countryHolidaysList")
     public void verifyCountryHolidays(ExamplesTable countryHolidaysList){
         getDataPage().verifyCountryHolidays(countryHolidaysList);

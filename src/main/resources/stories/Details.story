@@ -8,6 +8,7 @@ JIRA ID - ZEUS-54 - (User can view entity stub entry)
 JIRA ID - ZEUS-74 - (User can view entity stub entry - head office information and address)
 
 Scenario: search by fid, click on result card and verify values for stub entry
+Meta:@verifyBuild
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
 And the user clicks on the search results card with fid <value>

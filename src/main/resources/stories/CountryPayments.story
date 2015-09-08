@@ -8,6 +8,7 @@ JIRA ID - ZEUS-246 - User can search for country by full name
 JIRA ID - ZEUS-255 - User can view country's payments info
 
 Scenario: Verify country payments data.
+Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
