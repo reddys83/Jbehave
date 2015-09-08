@@ -25,11 +25,14 @@ import org.springframework.beans.factory.annotation.Value;
 import com.accuity.zeus.utils.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 
 @RunWith(SpringAnnotatedEmbedderRunner.class)
@@ -70,9 +73,21 @@ public class StoriesRunner extends InjectableEmbedder {
 
     @Test
     public void run() throws IOException {
+        List<String> metaFiltersList = newArrayList(runASpecificStory().split(","));
         List<String> storyPaths = new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("./src/main/resources"), "**/*.story", "");
-        injectedEmbedder().useMetaFilters(getMetaFiltersList(new Utils().readPropertyFile().getProperty("web.aft.story.filter")));
+        injectedEmbedder().useMetaFilters(metaFiltersList);
         injectedEmbedder().runStoriesAsPaths(storyPaths) ;
+    }
+
+    private String runASpecificStory() throws IOException {
+        Properties properties = new Properties();
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("environment.properties");
+        properties.load(inputStream);
+        if (System.getProperty("story") == null) {
+            return properties.getProperty("web.aft.story.filter");
+        } else {
+            return System.getProperty("story");
+        }
     }
 
     public static class MyStoryControls extends StoryControls {

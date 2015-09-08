@@ -36,10 +36,11 @@ public class WebDriverState {
 		webDriver.quit();
 	}
 
-
-
 	public WebDriver getWebDriver() {
-		return webDriver;
+		if (System.getProperty("browser") == null) {
+			return webDriver;
+		} else {
+			return WebDriverEnum.getWebDriver(System.getProperty("browser"));
+		}
 	}
-
 }
