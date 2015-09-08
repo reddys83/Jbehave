@@ -103,6 +103,7 @@ And the user should see the currency's uses as:
 
 When the user clicks on the country iso3 BES in the currency usage
 Then the user should see the country iso3 as BES
+And the user should see the default country page and display all info
 
 Examples:
 |currency|
