@@ -75,12 +75,11 @@ And the user should see the currency's uses as:
 |NAM|1980-01-01|1993-09-29|True|NAD|Inactive|
 
 When the user clicks on the country <currencyUsageCountry> in the currency usage
-And the user clicks on the country basic info link in the navigation bar
-Then the user should see the basic info for the selected country
+Then the user should see the default country page and display all info
 
 Examples:
 |currency|currencyUsageCountry|
-|Rand|South Affrica|
+|Rand|South Africa|
 
 Scenario: Verify currency's uses.
 1. Verify sorting order.
@@ -104,6 +103,7 @@ And the user should see the currency's uses as:
 
 When the user clicks on the country iso3 BES in the currency usage
 Then the user should see the country iso3 as BES
+And the user should see the default country page and display all info
 
 Examples:
 |currency|

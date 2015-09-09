@@ -162,6 +162,8 @@ public class DataPage extends AbstractPage {
     private By country_entities_entity_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[2]");
     private By country_entities_details_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[3]");
     private By country_entities_type_xpath = By.xpath("//li[contains(h2,'Entities')]//table/tbody//td[1]");
+    private By country_select_all_link_xpath = By.xpath("//*[@id='all'][@class='selected']");
+
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
@@ -781,6 +783,10 @@ public class DataPage extends AbstractPage {
         } catch (org.openqa.selenium.NoSuchElementException e) {
 
         }
+    }
+
+    public void verifyCountryDefaultToViewAll() {
+        assertTrue(getDriver().findElement(country_select_all_link_xpath).isDisplayed());
     }
 }
 

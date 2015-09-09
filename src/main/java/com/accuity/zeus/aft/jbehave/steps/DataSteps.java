@@ -397,6 +397,12 @@ public class DataSteps extends AbstractSteps {
     public void verifyNoCountryEntities () {
         getDataPage().verifyNoCountryEntities();
     }
+
+    @Then("the user should see the default country page and display all info")
+    public void verifyCountryDefaultToViewAll(){
+        getDataPage().verifyCountryDefaultToViewAll();
+    }
+
 }
 
 
