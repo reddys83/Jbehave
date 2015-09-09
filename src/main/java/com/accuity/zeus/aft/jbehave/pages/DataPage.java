@@ -563,9 +563,9 @@ public class DataPage extends AbstractPage {
     }
 
 
-    public void verifyCountryLanguages(String countryLanguagesList) {
+    public void verifyCountryLanguages(String languages) {
         assertEquals("Summary", getDriver().findElement(country_languages_label_xpath).getText());
-        assertEquals(countryLanguagesList, getDriver().findElement(country_languages_value_xpath).getText());
+        assertEquals(languages, getDriver().findElement(country_languages_value_xpath).getText());
     }
 
     public void verifyNoCountryHolidays() {
@@ -781,12 +781,15 @@ public class DataPage extends AbstractPage {
         try {
             assertFalse(getDriver().findElement(country_entities_type_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e) {
-
         }
     }
 
     public void verifyCountryDefaultToViewAll() {
         assertTrue(getDriver().findElement(country_select_all_link_xpath).isDisplayed());
+    }
+
+    public void refreshThePage() {
+        getDriver().navigate().refresh();
     }
 }
 

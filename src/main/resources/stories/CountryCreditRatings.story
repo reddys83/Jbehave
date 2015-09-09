@@ -14,7 +14,8 @@ And the user clicks on the country tab in the data area
 Then the user should see the country list box displayed
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
-And the user clicks on the country credit rating link in the navigation bar
+Then the user should see the default country page and display all info
+When  the user clicks on the country credit rating link in the navigation bar
 Then the user should see the country's credit ratings as:
 |AGENCY|TYPE|VALUE|APPLIED DATE|CONFIRMED DATE|
 |Fitch|Long Term Sovereign Debt Rating|C-|01 Jan 2006|01 Feb 2006|
