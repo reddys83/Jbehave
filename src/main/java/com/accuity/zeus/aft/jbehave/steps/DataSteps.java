@@ -407,6 +407,17 @@ public class DataSteps extends AbstractSteps {
     public void refreshThePage(){
         getDataPage().refreshThePage();
     }
+
+    @When("the user clicks on the currencies link in the navigation bar")
+    public void clickOnCountryCurrenciesLink(){
+        getDataPage().clickOnCountryCurrenciesLink();
+    }
+
+    @Then("the user should see the country's currencies as: $countryCurrencies")
+    public void verifyCountryCurrencies(ExamplesTable countryCurrencies){
+        getDataPage().verifyCountryCurrencies(countryCurrencies);
+    }
+
 }
 
 
