@@ -162,9 +162,29 @@ public class DataPage extends AbstractPage {
     private By country_entities_entity_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[2]");
     private By country_entities_details_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[3]");
     private By country_entities_type_xpath = By.xpath("//li[contains(h2,'Entities')]//table/tbody//td[1]");
+    private By country_select_all_link_xpath = By.xpath("//*[@id='all'][@class='selected']");
+    private By country_currencies_link_id = By.id("currencies");
+    private By country_currencies_label_xpath = By.xpath("//li[contains(h1,'Currencies')]//span");
+    private By country_currencies_table_headings_xpath = By.xpath("//li[contains(h1,'Currencies')]//table/thead//tr");
+    private By country_currencies_iso_xpath = By.xpath("//li[contains(h1,'Currencies')]//table/tbody//td[1]");
+    private By country_currencies_name_xpath = By.xpath("//li[contains(h1,'Currencies')]//table/tbody//td[2]");
+    private By country_currencies_start_date_xpath = By.xpath("//li[contains(h1,'Currencies')]//table/tbody//td[3]");
+    private By country_currencies_end_date_xpath = By.xpath("//li[contains(h1,'Currencies')]//table/tbody//td[4]");
+    private By country_currencies_primary_xpath = By.xpath("//li[contains(h1,'Currencies')]//table/tbody//td[5]");
+    private By country_currencies_replaced_by_xpath = By.xpath("//li[contains(h1,'Currencies')]//table/tbody//td[6]");
+    private By country_currencies_status_xpath = By.xpath("//li[contains(h1,'Currencies')]//table/tbody//td[7]");
+
+
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
+    public By country_people_link_id= By.id("people");
+    public By country_people_label_xpath= By.xpath("//li[contains(h1,'People')]//span");
+    public By country_related_people_label_xpath = By.xpath("//li[contains(h2,'People')]//h2");
+    public By country_people_type_label_xpath= By.xpath("//li[contains(h2,'People')]//table/thead//th[1]");
+    public By country_people_entity_label_xpath= By.xpath("//li[contains(h2,'People')]//table/thead//th[2]");
+    public By country_people_type_xpath= By.xpath("//li[contains(h2,'People')]//table/tbody//td[1]");
+
 
     @Override
     public String getPageUrl() {
@@ -561,9 +581,9 @@ public class DataPage extends AbstractPage {
     }
 
 
-    public void verifyCountryLanguages(String countryLanguagesList) {
+    public void verifyCountryLanguages(String languages) {
         assertEquals("Summary", getDriver().findElement(country_languages_label_xpath).getText());
-        assertEquals(countryLanguagesList, getDriver().findElement(country_languages_value_xpath).getText());
+        assertEquals(languages, getDriver().findElement(country_languages_value_xpath).getText());
     }
 
     public void verifyNoCountryHolidays() {
@@ -778,6 +798,66 @@ public class DataPage extends AbstractPage {
         assertEquals("DETAILS", getDriver().findElement(country_entities_details_label_xpath).getText());
         try {
             assertFalse(getDriver().findElement(country_entities_type_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
+    }
+
+    public void verifyCountryDefaultToViewAll() {
+        assertTrue(getDriver().findElement(country_select_all_link_xpath).isDisplayed());
+    }
+
+    public void refreshThePage() {
+        getDriver().navigate().refresh();
+    }
+
+    public void clickOnCountryCurrenciesLink() {
+        attemptClick(country_currencies_link_id);
+    }
+
+    public void verifyCountryCurrencies(ExamplesTable countryCurrencies) {
+        assertEquals("CURRENCIES", getDriver().findElement(country_currencies_label_xpath).getText());
+        assertEquals("ISO NAME START DATE END DATE PRIMARY REPLACED BY STATUS", getDriver().findElement(country_currencies_table_headings_xpath).getText());
+        List<WebElement> iso = getDriver().findElements(country_currencies_iso_xpath);
+        List<WebElement> name = getDriver().findElements(country_currencies_name_xpath);
+        List<WebElement> startDate = getDriver().findElements(country_currencies_start_date_xpath);
+        List<WebElement> endDate = getDriver().findElements(country_currencies_end_date_xpath);
+        List<WebElement> primary = getDriver().findElements(country_currencies_primary_xpath);
+        List<WebElement> replacedBy = getDriver().findElements(country_currencies_replaced_by_xpath);
+        List<WebElement> status = getDriver().findElements(country_currencies_status_xpath);
+
+        for(int i=0; i<countryCurrencies.getRowCount(); i++){
+            assertEquals(countryCurrencies.getRow(i).get(countryCurrencies.getHeaders().get(0)),iso.get(i).getText());
+            assertEquals(countryCurrencies.getRow(i).get(countryCurrencies.getHeaders().get(1)),name.get(i).getText());
+            assertEquals(countryCurrencies.getRow(i).get(countryCurrencies.getHeaders().get(2)),startDate.get(i).getText());
+            assertEquals(countryCurrencies.getRow(i).get(countryCurrencies.getHeaders().get(3)),endDate.get(i).getText());
+            assertEquals(countryCurrencies.getRow(i).get(countryCurrencies.getHeaders().get(4)),primary.get(i).getText());
+            assertEquals(countryCurrencies.getRow(i).get(countryCurrencies.getHeaders().get(5)),replacedBy.get(i).getText());
+            assertEquals(countryCurrencies.getRow(i).get(countryCurrencies.getHeaders().get(6)),status.get(i).getText());
+        }
+    }
+
+    public void clickOnCountryPeople() { attemptClick(country_people_link_id);
+    }
+
+    public void verifyCountryPeople(ExamplesTable countryPeople) {
+        assertEquals("PEOPLE", getDriver().findElement(country_people_label_xpath).getText());
+        assertEquals("RELATED PEOPLE OF " + selectedCountry.toUpperCase(),getDriver().findElement(country_related_people_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(country_people_type_label_xpath).getText());
+        assertEquals("PERSON", getDriver().findElement(country_people_entity_label_xpath).getText());
+        for(int i = 0; i<countryPeople.getRowCount(); i++){
+            assertEquals(countryPeople.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
+                    getDriver().findElement(
+                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryPeople.getRow(i).get(countryPeople.getHeaders().get(0)) + "']")).getText().replace(",","").trim());
+        }
+    }
+
+    public void verifyNoCountryPeople() {
+        assertEquals("PEOPLE", getDriver().findElement(country_people_label_xpath).getText());
+        assertEquals("RELATED PEOPLE OF " + selectedCountry.toUpperCase(),getDriver().findElement(country_related_people_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(country_people_type_label_xpath).getText());
+        assertEquals("PERSON", getDriver().findElement(country_people_entity_label_xpath).getText());
+        try {
+            assertFalse(getDriver().findElement(country_people_type_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e) {
 
         }

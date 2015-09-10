@@ -5,6 +5,7 @@ In order to view and edit the currencies
 As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-313 - User can select multiple sections of country to view
+JIRA ID - ZEUS-312 - User can view all country info
 
 Scenario: Select and view multiple sections for country.
 Meta:@verifyBuild
@@ -16,10 +17,11 @@ When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 Then the user should see the country iso2 as YU
 And the user should see the country iso3 as YUG
+Then the user should see the default country page and display all info
+When the user refreshes the page
+Then the user should see the default country page and display all info
 When the user clicks on the country basic info link in the navigation bar
-Then the user should see the basic info for the selected country
-
-And the user should see the list of country's names type and value as:
+Then the user should see the list of country's names type and value as:
 |TYPE|VALUE|
 |Country Name|Yugoslavia|
 |Former Name|Kingdom of Serbs, Croats and Slovenes|
@@ -90,4 +92,22 @@ Examples:
 |country|
 |Yugoslavia|
 
+Scenario: Verify already selected options are preserved when the page is refreshed.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+Then the user should see the country list box displayed
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the country basic info link in the navigation bar
+Then the user should see the basic info for the selected country
+When the user clicks on the country languages link in the navigation bar
+Then the user should see the country's languages list as English, Samoan
+When the user refreshes the page
+Then the user should see the default country page and display all info
+Then the user should see the country's languages list as English, Samoan
+
+Examples:
+|country|
+|American Samoa|
 

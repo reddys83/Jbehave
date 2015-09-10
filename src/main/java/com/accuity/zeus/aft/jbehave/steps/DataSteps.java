@@ -319,14 +319,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyNoCountryHolidaysSection();
     }
 
-    @When("the user clicks on the country Languages link in the navigation bar")
+    @When("the user clicks on the country languages link in the navigation bar")
     public void clickOnCountryLanguages() {
         getDataPage().clickOnCountryLanguages();
     }
 
-    @Then("the user should see the country's Languages list <summary>")
-    public void verifyCountryLanguages(@Named("summary")String summary){
-        getDataPage().verifyCountryLanguages(summary);
+    @Then("the user should see the country's languages list as $languages")
+    public void verifyCountryLanguages(@Named("languages")String languages){
+        getDataPage().verifyCountryLanguages(languages);
     }
 
     @When("the user clicks on the country credit rating link in the navigation bar")
@@ -389,15 +389,51 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCountryEntity();
     }
 
+    @When("the user clicks on the country people link in the navigation bar")
+    public void clickOnCountryPeople() {
+    getDataPage().clickOnCountryPeople();
+    }
+
     @Then("the user should see the country's entities as: $countryEntities")
     public void verifyCountryEntities (ExamplesTable countryEntities){
         getDataPage().verifyCountryEntities(countryEntities);
+    }
+
+    @Then("the user should see the country's people as: $countryPeople")
+    public void verifyCountryPeople (ExamplesTable countryPeople) {
+        getDataPage().verifyCountryPeople(countryPeople);
     }
 
     @Then("the user should not see the country's entities")
     public void verifyNoCountryEntities () {
         getDataPage().verifyNoCountryEntities();
     }
+
+    @Then("the user should not see the country's people")
+    public void verifyNoCountryPeople() {
+        getDataPage().verifyNoCountryPeople();
+    }
+
+    @Then("the user should see the default country page and display all info")
+    public void verifyCountryDefaultToViewAll(){
+        getDataPage().verifyCountryDefaultToViewAll();
+    }
+
+    @When("the user refreshes the page")
+    public void refreshThePage(){
+        getDataPage().refreshThePage();
+    }
+
+    @When("the user clicks on the currencies link in the navigation bar")
+    public void clickOnCountryCurrenciesLink(){
+        getDataPage().clickOnCountryCurrenciesLink();
+    }
+
+    @Then("the user should see the country's currencies as: $countryCurrencies")
+    public void verifyCountryCurrencies(ExamplesTable countryCurrencies){
+        getDataPage().verifyCountryCurrencies(countryCurrencies);
+    }
+
 }
 
 
