@@ -165,6 +165,13 @@ public class DataPage extends AbstractPage {
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
+    public By country_people_link_id= By.id("people");
+    public By country_people_label_xpath= By.xpath("//li[contains(h1,'People')]//span");
+    public By country_related_people_label_xpath = By.xpath("//li[contains(h2,'People')]//h2");
+    public By country_people_type_label_xpath= By.xpath("//li[contains(h2,'People')]//table/thead//th[1]");
+    public By country_people_entity_label_xpath= By.xpath("//li[contains(h2,'People')]//table/thead//th[2]");
+    public By country_people_type_xpath= By.xpath("//li[contains(h2,'People')]//table/tbody//td[1]");
+
 
     @Override
     public String getPageUrl() {
@@ -778,6 +785,33 @@ public class DataPage extends AbstractPage {
         assertEquals("DETAILS", getDriver().findElement(country_entities_details_label_xpath).getText());
         try {
             assertFalse(getDriver().findElement(country_entities_type_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+
+        }
+    }
+
+    public void clickOnCountryPeople() { attemptClick(country_people_link_id);
+    }
+
+    public void verifyCountryPeople(ExamplesTable countryPeople) {
+        assertEquals("PEOPLE", getDriver().findElement(country_people_label_xpath).getText());
+        assertEquals("RELATED PEOPLE OF " + selectedCountry.toUpperCase(),getDriver().findElement(country_related_people_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(country_people_type_label_xpath).getText());
+        assertEquals("PERSON", getDriver().findElement(country_people_entity_label_xpath).getText());
+        for(int i = 0; i<countryPeople.getRowCount(); i++){
+            assertEquals(countryPeople.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
+                    getDriver().findElement(
+                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryPeople.getRow(i).get(countryPeople.getHeaders().get(0)) + "']")).getText().replace(",","").trim());
+        }
+    }
+
+    public void verifyNoCountryPeople() {
+        assertEquals("PEOPLE", getDriver().findElement(country_people_label_xpath).getText());
+        assertEquals("RELATED PEOPLE OF " + selectedCountry.toUpperCase(),getDriver().findElement(country_related_people_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(country_people_type_label_xpath).getText());
+        assertEquals("PERSON", getDriver().findElement(country_people_entity_label_xpath).getText());
+        try {
+            assertFalse(getDriver().findElement(country_people_type_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e) {
 
         }
