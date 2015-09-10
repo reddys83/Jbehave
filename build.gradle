@@ -1,11 +1,26 @@
+/**
+ *  Tasks:
+ *  pom - Write dependencies into pom.xml
+ *  deleteTargetFolder -  Deletes the target folder
+ *  runTaggedTestsOnGivenBrowser - Runs the given story in the given browser
+ *  runTaggedTestsRemotly - Runs the given story for the given browser in remote browsers
+ */
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'maven'
 
 sourceCompatibility = 1.7
 version = '1.0'
 
 ext {
     restletVersion = "2.3.2"
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+    }
 }
 
 repositories {
@@ -34,7 +49,7 @@ dependencies {
 }
 
 //Runs stories in given browser locally
-task runTaggedTestsOnGivenBrowser(type: test){
+task runTaggedTestsOnGivenBrowser(type: Test){
     if(project.hasProperty('taggedStory')){
         systemProperties['story'] = "$taggedStory"
     }
@@ -44,7 +59,7 @@ task runTaggedTestsOnGivenBrowser(type: test){
 }
 
 //Runs stories in given browser remotely
-task runTaggedTestsRemotly(type: test){
+task runTaggedTestsRemotly(type: Test){
     if(project.hasProperty('taggedStory')){
         systemProperties['story'] = "$taggedStory"
     }
@@ -53,13 +68,5 @@ task runTaggedTestsRemotly(type: test){
     }
     if(project.hasProperty('remoteBrowser')){
         systemProperties['remoteBrowser'] = "$remoteBrowser"
-    }
-}
-
-uploadArchives {
-    repositories {
-        flatDir {
-            dirs 'repos'
-        }
     }
 }
