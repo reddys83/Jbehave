@@ -2,7 +2,6 @@ package com.accuity.zeus.aft.commons;
 
 import org.apache.http.client.utils.URIBuilder;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -20,7 +19,7 @@ public class Utils {
         Properties prop = new Properties();
         InputStream input = null;
         try {
-            input = this.getClass().getResourceAsStream("/environment/local/environment.properties");
+            input = this.getClass().getResourceAsStream("/environment.properties");
             prop.load(input);
 
         } catch (IOException ex) {

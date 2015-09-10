@@ -1,9 +1,9 @@
-package com.accuity.zeus.aft;
+package com.accuity.zeus;
 
-import com.accuity.zeus.aft.commons.Utils;
 import com.accuity.zeus.aft.jbehave.steps.DetailsSteps;
 import com.accuity.zeus.aft.jbehave.steps.SearchResultsSteps;
 import com.accuity.zeus.aft.jbehave.steps.SearchSteps;
+import com.accuity.zeus.utils.FilesUtils;
 import org.jbehave.core.InjectableEmbedder;
 import org.jbehave.core.annotations.Configure;
 import org.jbehave.core.annotations.UsingEmbedder;
@@ -21,14 +21,12 @@ import org.jbehave.core.steps.ParameterConverters;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
-import com.accuity.zeus.utils.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 

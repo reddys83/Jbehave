@@ -24,12 +24,16 @@ public class WebDriverState {
 	@BeforeStories
 	public void create() throws InterruptedException {
 		if (webDriver == null) {
-			webDriver = WebDriverEnum.getWebDriver(webDriverType);
-			webDriver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
-			webDriver.manage().window().maximize();
-			Thread.sleep(1000L);
+			if (System.getProperty("browser") == null) {
+				webDriver = WebDriverEnum.getWebDriver(webDriverType);
+			} else {
+				webDriver = WebDriverEnum.getWebDriver(System.getProperty("browser"));
+			}
+				webDriver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
+				webDriver.manage().window().maximize();
+				Thread.sleep(1000L);
+			}
 		}
-	}
 
 	@AfterStories
 	public void cleanup(){
@@ -37,10 +41,6 @@ public class WebDriverState {
 	}
 
 	public WebDriver getWebDriver() {
-		if (System.getProperty("browser") == null) {
-			return webDriver;
-		} else {
-			return WebDriverEnum.getWebDriver(System.getProperty("browser"));
-		}
+		return webDriver;
 	}
 }

@@ -22,7 +22,7 @@ dependencies {
 	
 	compile 'org.slf4j:slf4j-log4j12:1.7.2'
 	
-	compile group: 'com.accuity', name: 'common-entity', version: '1.0.9', changing: true
+	compile group: 'com.accuity', name: 'common-entity', version: '1.0+', changing: true
 
     compile 'org.seleniumhq.selenium:selenium-java:2.45.0'
     compile 'junit:junit:4.+'
@@ -31,5 +31,35 @@ dependencies {
     compile 'org.jbehave:jbehave-spring:3.9.5'
     compile 'com.google.guava:guava:18.0'
     compile group: 'org.restlet.jee', name: 'org.restlet.ext.xml', version: restletVersion
+}
 
+//Runs stories in given browser locally
+task runTaggedTestsOnGivenBrowser(type: test){
+    if(project.hasProperty('taggedStory')){
+        systemProperties['story'] = "$taggedStory"
+    }
+    if(project.hasProperty('browser')){
+        systemProperties['browser'] = "$browser"
+    }
+}
+
+//Runs stories in given browser remotely
+task runTaggedTestsRemotly(type: test){
+    if(project.hasProperty('taggedStory')){
+        systemProperties['story'] = "$taggedStory"
+    }
+    if(project.hasProperty('browser')){
+        systemProperties['browser'] = "$browser"
+    }
+    if(project.hasProperty('remoteBrowser')){
+        systemProperties['remoteBrowser'] = "$remoteBrowser"
+    }
+}
+
+uploadArchives {
+    repositories {
+        flatDir {
+            dirs 'repos'
+        }
+    }
 }
