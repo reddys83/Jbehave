@@ -19,6 +19,7 @@ Examples:
 |legalEntity|name|First National Bank|
 
 Scenario: search by name and navigate through different search results
+Meta:@verifyBuild
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
 Then the user should see the option to navigate to the desired page

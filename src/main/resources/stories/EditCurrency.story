@@ -7,6 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-190 - User can edit currencies
 
 Scenario: Verify that the user can edit the currency name, abbr, unit, quantity
+Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area

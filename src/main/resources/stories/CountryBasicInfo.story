@@ -29,6 +29,7 @@ Then the user should see the countries in the listbox as:
 |St. Pierre et Miquelon|
 
 Scenario: Verify Country basic info
+Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

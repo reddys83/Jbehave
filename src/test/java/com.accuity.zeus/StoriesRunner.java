@@ -1,9 +1,9 @@
-package com.accuity.zeus.aft;
+package com.accuity.zeus;
 
-import com.accuity.zeus.aft.commons.Utils;
 import com.accuity.zeus.aft.jbehave.steps.DetailsSteps;
 import com.accuity.zeus.aft.jbehave.steps.SearchResultsSteps;
 import com.accuity.zeus.aft.jbehave.steps.SearchSteps;
+import com.accuity.zeus.utils.FilesUtils;
 import org.jbehave.core.InjectableEmbedder;
 import org.jbehave.core.annotations.Configure;
 import org.jbehave.core.annotations.UsingEmbedder;
@@ -18,16 +18,19 @@ import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.ParameterConverters;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 
 @RunWith(SpringAnnotatedEmbedderRunner.class)
@@ -50,11 +53,39 @@ import java.util.Properties;
 @UsingSpring(resources = {"classpath:/applicationContext.xml"})
 public class StoriesRunner extends InjectableEmbedder {
 
+    @After
+    public void styleReports() {
+        try {
+            File srcFolder = new File("./src/main/resources/reports");
+            File destFolder = new File("./target/jbehave/view");
+            if (destFolder.exists()) {
+                try {
+                    FilesUtils.copyFolder(srcFolder, destFolder);
+                } catch (Exception e) {
+                    System.out.println("The error message " + e.getMessage());
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+
     @Test
     public void run() throws IOException {
+        List<String> metaFiltersList = newArrayList(runASpecificStory().split(","));
         List<String> storyPaths = new StoryFinder().findPaths(CodeLocations.codeLocationFromPath("./src/main/resources"), "**/*.story", "");
-        injectedEmbedder().useMetaFilters(getMetaFiltersList(new Utils().readPropertyFile().getProperty("web.aft.story.filter")));
+        injectedEmbedder().useMetaFilters(metaFiltersList);
         injectedEmbedder().runStoriesAsPaths(storyPaths) ;
+    }
+
+    private String runASpecificStory() throws IOException {
+        Properties properties = new Properties();
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("environment.properties");
+        properties.load(inputStream);
+        if (System.getProperty("story") == null) {
+            return properties.getProperty("web.aft.story.filter");
+        } else {
+            return System.getProperty("story");
+        }
     }
 
     public static class MyStoryControls extends StoryControls {

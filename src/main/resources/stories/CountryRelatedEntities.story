@@ -8,6 +8,7 @@ JIRA ID - ZEUS-246 - User can search for country by full name
 JIRA ID - ZEUS-256 - User can view a country's related entities
 
 Scenario: Verify country entities data with legalEntity and office
+Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

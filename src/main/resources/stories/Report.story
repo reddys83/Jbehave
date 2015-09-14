@@ -7,6 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-155 - Code counts
 
 Scenario: Verify Code Count
+Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the report tab
 Then the user should see the report page

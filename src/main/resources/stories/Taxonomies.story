@@ -32,6 +32,7 @@ And the user starts typing the name of a taxonomy as jadsfvbj in the taxonomy in
 Then the user should see the option no results match for the searched taxonomy string
 
 Scenario: Filter for taxonomy by name
+Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the admin tab in the search page
 And the user clicks on the taxonomies tab in the data area

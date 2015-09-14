@@ -1,11 +1,26 @@
+/**
+ *  Tasks:
+ *  pom - Write dependencies into pom.xml
+ *  deleteTargetFolder -  Deletes the target folder
+ *  runTaggedTestsOnGivenBrowser - Runs the given story in the given browser
+ *  runTaggedTestsRemotly - Runs the given story for the given browser in remote browsers
+ */
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'maven'
 
 sourceCompatibility = 1.7
 version = '1.0'
 
 ext {
     restletVersion = "2.3.2"
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+    }
 }
 
 repositories {
@@ -22,7 +37,7 @@ dependencies {
 	
 	compile 'org.slf4j:slf4j-log4j12:1.7.2'
 	
-	compile group: 'com.accuity', name: 'common-entity', version: '1.0.9', changing: true
+	compile group: 'com.accuity', name: 'common-entity', version: '1.0+', changing: true
 
     compile 'org.seleniumhq.selenium:selenium-java:2.45.0'
     compile 'junit:junit:4.+'
@@ -31,5 +46,27 @@ dependencies {
     compile 'org.jbehave:jbehave-spring:3.9.5'
     compile 'com.google.guava:guava:18.0'
     compile group: 'org.restlet.jee', name: 'org.restlet.ext.xml', version: restletVersion
+}
 
+//Runs stories in given browser locally
+task runTaggedTestsOnGivenBrowser(type: Test){
+    if(project.hasProperty('taggedStory')){
+        systemProperties['story'] = "$taggedStory"
+    }
+    if(project.hasProperty('browser')){
+        systemProperties['browser'] = "$browser"
+    }
+}
+
+//Runs stories in given browser remotely
+task runTaggedTestsRemotly(type: Test){
+    if(project.hasProperty('taggedStory')){
+        systemProperties['story'] = "$taggedStory"
+    }
+    if(project.hasProperty('browser')){
+        systemProperties['browser'] = "$browser"
+    }
+    if(project.hasProperty('remoteBrowser')){
+        systemProperties['remoteBrowser'] = "$remoteBrowser"
+    }
 }
