@@ -19,6 +19,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCountryTab();
     }
 
+    @When("the user clicks on the area tab in the data area")
+    public void userClicksOnAreaTab() {
+        getDataPage().clickOnAreaTab();
+    }
+
     @When("the user clicks on the choose a currency option")
     public void whenUserClicksOnChooseACurrency(){
         getDataPage().clickOnChooseACurrencyOption();
@@ -80,12 +85,12 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the country list box displayed")
-    public void verifyCountryListBoxIsDisplayed(){
+    public void verifyCountryListBoxIsDisplayed()  {
         getDataPage().verifyCountryListBoxIsDisplayed();
     }
 
     @When("the user clicks on the choose a country option")
-    public void userClicksOnCountryListBox(){
+    public void userClicksOnCountryListBox()  {
         getDataPage().clickOnCountryListBox();
     }
 
@@ -137,6 +142,11 @@ public class DataSteps extends AbstractSteps {
     @When("the user enters the country <country> in the type-ahead box")
     public void enterCountryInTheTypeAheadBox(@Named("country") String country){
         getDataPage().enterCountryInTheTypeAheadBox(country);
+    }
+
+    @When("the user enters the area<area> in the type-ahead box")
+    public void enterAreaInTypeAhead(@Named("area") String area){
+        getDataPage().enterAreaInTypeAhead(area);
     }
 
     @Then("the user should see the country iso2 as $iso2")
@@ -433,6 +443,24 @@ public class DataSteps extends AbstractSteps {
     public void verifyCountryCurrencies(ExamplesTable countryCurrencies){
         getDataPage().verifyCountryCurrencies(countryCurrencies);
     }
+
+    @When("the user clicks on the choose an area option")
+    public void clickOnAreaDropdown() { getDataPage().clickOnAreaDropdown();}
+    @Then("the user should see the below states for the selected country: $areas")
+    public void verifyAreaForSelectedCountry(ExamplesTable areas) {
+        getDataPage().verifyAreaForSelectedCountry(areas);
+    }
+
+    @Then("the user should see the below subareas for the selected country and area: $subarea")
+    public void verifySubareaForSelectedArea(ExamplesTable subarea) {getDataPage().verifySubareaForSelectedArea(subarea); }
+
+    @Then("the user should see the area dropdown disabled")
+    public void verifyAreaDropdownDisabled() {
+        getDataPage().verifyAreaDropdownDisabled();
+    }
+
+    @Then("the user should see the subarea dropdown disabled")
+    public void verifySubareaDropdownDisabled() {getDataPage().verifySubareaDropdownDisabled(); }
 
 }
 
