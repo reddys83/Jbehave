@@ -10,7 +10,6 @@ import java.util.List;
 public class DataManagementAppVals {
 
     public static List<String> expCountryListVal = new ArrayList<>(Arrays.asList(
-            "Choose a Country",
             "Afghanistan",
             "Åland Islands",
             "Albania",

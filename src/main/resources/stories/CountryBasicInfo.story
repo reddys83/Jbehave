@@ -73,15 +73,15 @@ And the user should see the country's time zones as:
 |UTC|+01:00|
 |UTC|+01:30|
 
-And the user should see the country's status as Inactive
-And the user should see the country's start date as 13 Jul 1922
-And the user should see the country's end date as 21 May 2006
-And the user should see the country's replaced by as  Montenegro, Serbia, Bosnia-Herzegovina, Slovenia Croatia
-And the user should see the country's additional info as No longer exists.
-And the user should see the country's imports as Machinery and transport equipment, fuels and lubricants, manufactured goods, chemicals, food and live animals, and raw materials.
-And the user should see the country's exports as Manufactured goods, food (grain) and live animals, raw materials, and metals.
-And the user should see the country's intl dialing code as +38
-And the user should see the country's political structure as Republic?
+And the user should see the Status of a country as Inactive
+And the user should see the Start Date of a country as 13 Jul 1922
+And the user should see the End Date of a country as 21 May 2006
+And the user should see the countries's replace by as California, Kansas
+And the user should see the Add Info of a country as No longer exists.
+And the user should see the Imports of a country as Machinery and transport equipment, fuels and lubricants, manufactured goods, chemicals, food and live animals, and raw materials.
+And the user should see the Exports of a country as Manufactured goods, food (grain) and live animals, raw materials, and metals.
+And the user should see the Intl Dialing Code of a country as +38
+And the user should see the Political Structure of a country as Republic?
 
 Examples:
 |country|
