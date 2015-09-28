@@ -83,46 +83,8 @@ public class DataPage extends AbstractPage {
     private By country_time_zones_value_xpath = By.xpath("//*[@id='data']//li[1]/table[5]/tbody/tr/td");
     private By country_summary_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr/th");
     private By country_summary_value_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr/td");
-
     private String basic_info_label_xpath ="//*[@id='content']//li[2]/table/tbody/tr/th[text()='";
     private String basic_info_label_value_xpath = ".//*[@id='content']//table[@class='vertical']/tbody/tr[th='";
-
-
-  //  private By basic_info_status_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr/th[text()='Status']");  //*[@id='content']//li[2]/table/tbody/tr/th[text()='Start Date']
-  //  private By basic_info_status_xpath = By.xpath(".//*[@id='content']//table[@class='vertical']/tbody/tr[th='Status']/td");
-  //  private By basic_info_start_date_label_xpath = By.xpath(".//*[@id='content']//table[@class='vertical']/tbody/tr/th[text()='Began Date']");
-  //  private By basic_info_start_date_xpath = By.xpath(".//*[@id='content']//table[@class='vertical']/tbody/tr[th='Began Date']/td");
-  // private By basic_info_end_date_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr/th[text()='End Date']");
-  //  private By basic_info_end_date_xpath = By.xpath(".//*[@id='content']//table[@class='vertical']/tbody/tr[th='End Date']/td");
-  //  private By basic_info_replaced_by_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr/th[text()='Replaced By']");
-  // private By basic_info_replaced_by_xpath = By.xpath(".//*[@id='content']//table[@class='vertical']/tbody/tr[th='Replaced By']/td");
-
- /* private By basic_info_type_label_xpath= By.xpath("");rdf
-    private By basic_info_type_xpath= By.xpath("");
-    private By basic_info_country_label_xpath=By.xpath("");
-    private By basic_info_country_xpath=By.xpath("");
-    private By basic_info_area_parent_label_xpath=By.xpath("");
-    private By basic_info_area_parent_xpath=By.xpath("");
-    private By basic_info_use_in_address_label_xpath=By.xpath("");
-    private By basic_info_use_in_address_xpath=By.xpath("");
-    private By basic_info_interest_rate_limit_label_xpath=By.xpath("");
-    private By basic_info_interest_rate_limit_xpath=By.xpath("");
-    private By basic_info_iso2_label_xpath= By.xpath("");
-    private By basic_info_iso2_xpath=By.xpath("");
-    private By basic_info_add_info_label_xpath=By.xpath("");
-    private By basic_info_add_info_xpath=By.xpath("");sd*/
-
-    private By country_exports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[7]/th");
-    private By country_exports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[7]/td");
-    private By country_intl_dial_code_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[8]/th");
-    private By country_intl_dial_code_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[8]/td");
-    private By country_political_structure_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[9]/th");
-    private By country_political_structure_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[9]/td");
-    private By country_add_info_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[5]/th");
-    private By country_add_info_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[5]/td");
-    private By country_imports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/th");
-    private By country_imports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/td");
-    private By country_name_selected_xpath = By.xpath("//*[@id='content']//li[1]/table[1]/tbody/tr[1]/td[2]");
     private By currency_usage_label_xpath = By.xpath("//*[@id='content']/div/dl[2]/dt");
     private By currency_usage_xpath = By.xpath("//*[@id='content']/div/dl[2]/dd/a");
     private By country_holidays_link_id = By.id("holidays");
@@ -199,33 +161,35 @@ public class DataPage extends AbstractPage {
     private By country_currencies_status_xpath = By.xpath("//li[contains(h1,'Currencies')]//table/tbody//td[7]");
     private By area_area_dropdown_xpath = By.xpath(".//*[@id='selection1'] /div //*[@id='entitySelect_chosen'] //a");
     private By area_subarea_dropdown_xpath = By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen'] //a");
+    private By country_people_link_id= By.id("people");
+    private By country_people_label_xpath= By.xpath("//li[contains(h1,'People')]//span");
+    private By country_related_people_label_xpath = By.xpath("//li[contains(h2,'People')]//h2");
+    private By country_people_type_label_xpath= By.xpath("//li[contains(h2,'People')]//table/thead//th[1]");
+    private By country_people_entity_label_xpath= By.xpath("//li[contains(h2,'People')]//table/thead//th[2]");
+    private By country_people_type_xpath= By.xpath("//li[contains(h2,'People')]//table/tbody//td[1]");
+    private By area_area_dropdown_list_xpath = By.xpath(".//*[@id='selection1'] //ul/li");
+    private By area_subarea_dropdown_list_xpath = By.xpath(".//*[@id='selection2'] //ul/li");
+    private By area_area_dropdown_typeAhead_xpath = By.xpath(".//*[@id='selection1'] /div //*[@id='entitySelect_chosen']//input");
+    private By area_basic_info_link_id = By.id("areaBasicInfo");
+    private By area_identifiers_type_label_xpath= By.xpath(".//*[@id='content']//li[1]/table[2]/thead/tr/th[1]");
+    private By area_identifiers_value_label_xpath=By.xpath(".//*[@id='content']//li[1]/table[2]/thead/tr/th[2]");
+    private By area_identifiers_status_label_xpath=By.xpath(".//*[@id='content']//li[1]/table[2]/thead/tr/th[3]");
+    private By area_identifiers_type_xpath=By.xpath("//*[@id='content']//li[1]/table[2]/tbody/tr/td[1]");
+    private By area_identifiers_value_xpath=By.xpath("//*[@id='content']//li[1]/table[2]/tbody/tr/td[2]");
+    private By area_identifiers_status_xpath=By.xpath("//*[@id='content']//li[1]/table[2]/tbody/tr/td[3]");
+    private By area_time_zones_summary_label_xpath=By.xpath(".//*[@id='content']//li[1]/dl/dt");
+    private By area_time_zones_summary_xpath=By.xpath(".//*[@id='content']//li[1]/dl/dd");
+    private By area_time_zones_xpath=By.xpath(".//*[@id='content']//li/table[3]/tbody/tr/th");
+    private By area_time_zones_value_xpath= By.xpath(".//*[@id='content']//li/table[3]/tbody/tr/td");
+    private By area_related_people_link_id = By.id("areaPlaces");
+    private By city_tab_id = By.id("city-nav");
+    private By city_city_dropdown_xpath = By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen'] //a");
+    private By city_city_dropdown_list_xpath = By.xpath(".//*[@id='selection2'] //ul/li");
+    private By city_city_dropdown_disabled_xpath = By.xpath(".//*[@id='selection2'] /div //*[contains(@class,'chosen-disabled')]");
 
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
-    public By country_people_link_id= By.id("people");
-    public By country_people_label_xpath= By.xpath("//li[contains(h1,'People')]//span");
-    public By country_related_people_label_xpath = By.xpath("//li[contains(h2,'People')]//h2");
-    public By country_people_type_label_xpath= By.xpath("//li[contains(h2,'People')]//table/thead//th[1]");
-    public By country_people_entity_label_xpath= By.xpath("//li[contains(h2,'People')]//table/thead//th[2]");
-    public By country_people_type_xpath= By.xpath("//li[contains(h2,'People')]//table/tbody//td[1]");
-    public By area_area_dropdown_list_xpath = By.xpath(".//*[@id='selection1'] //ul/li");
-    public By area_subarea_dropdown_list_xpath = By.xpath(".//*[@id='selection2'] //ul/li");
-    public By area_area_dropdown_typeAhead_xpath = By.xpath(".//*[@id='selection1'] /div //*[@id='entitySelect_chosen']//input");
-    public By area_basic_info_link_id = By.id("areaBasicInfo");
-    public By area_identifiers_type_label_xpath= By.xpath(".//*[@id='content']//li[1]/table[2]/thead/tr/th[1]");
-    public By area_identifiers_value_label_xpath=By.xpath(".//*[@id='content']//li[1]/table[2]/thead/tr/th[2]");
-    public By area_identifiers_status_label_xpath=By.xpath(".//*[@id='content']//li[1]/table[2]/thead/tr/th[3]");
-    public By area_identifiers_type_xpath=By.xpath("//*[@id='content']//li[1]/table[2]/tbody/tr/td[1]");
-    public By area_identifiers_value_xpath=By.xpath("//*[@id='content']//li[1]/table[2]/tbody/tr/td[2]");
-    public By area_identifiers_status_xpath=By.xpath("//*[@id='content']//li[1]/table[2]/tbody/tr/td[3]");
-    public By area_time_zones_summary_label_xpath=By.xpath(".//*[@id='content']//li[1]/dl/dt");
-    public By area_time_zones_summary_xpath=By.xpath(".//*[@id='content']//li[1]/dl/dd");
-    public By area_time_zones_xpath=By.xpath(".//*[@id='content']//li/table[3]/tbody/tr/th");
-    public By area_time_zones_value_xpath= By.xpath(".//*[@id='content']//li/table[3]/tbody/tr/td");
-    public By area_related_people_link_id = By.id("areaPlaces");
-
-
 
     @Override
     public String getPageUrl() {
@@ -964,5 +928,23 @@ public class DataPage extends AbstractPage {
         attemptClick(area_related_people_link_id);
     }
 
-   }
+    public void clickOnCityTab() {
+        attemptClick(city_tab_id);
+    }
+
+    public void clickOnCityDropdown() {
+        attemptClick(city_city_dropdown_xpath);
+    }
+
+    public void verifyCitiesForSelectedArea(ExamplesTable cities) {
+        List<WebElement> areasCollection = getDriver().findElements(city_city_dropdown_list_xpath);
+        for (int i=0; i<cities.getRowCount(); i++){
+            assertEquals(cities.getRow(i).get(cities.getHeaders().get(0)),areasCollection.get(i).getText());
+        }
+    }
+
+    public void verifyNoCitiesForSelectedArea() {
+        assertTrue(getDriver().findElement(city_city_dropdown_disabled_xpath).isDisplayed());
+    }
+}
 

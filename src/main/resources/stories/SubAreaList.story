@@ -1,4 +1,4 @@
-Meta:@Subarea
+Meta:@SubAreaList
 
 Narrative:
 In order to view the places of country
@@ -16,7 +16,7 @@ Then the user should see the country list box displayed
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
-And the user enters the area<area> in the type-ahead box
+And the user enters the area <area> in the type-ahead box
 Then the user should see the below subareas for the selected country and area:
 |SUBAREAS|
 |Co. Antrim|
@@ -43,7 +43,7 @@ Then the user should see the country list box displayed
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
-And the user enters the area<area> in the type-ahead box
+And the user enters the area <area> in the type-ahead box
 Then the user should see the subarea dropdown disabled
 
 Examples:

@@ -35,17 +35,17 @@ And the user should see the area's time zones as:
 |UTC|+02:00|
 |UTC|+02:30|
 
-And the user should see the Status of a area as Active
-And the user should see the Began Date of a area as 13 Jul 1922
-And the user should see the End Date of a area as 21 May 2006
-And the user should see the Type of a area as Area
-And the user should see the Country of a area as USA
-And the user should see the Area Parent of a area as Atchison
+And the user should see the Status of an area as Active
+And the user should see the Began Date of an area as 13 Jul 1922
+And the user should see the End Date of an area as 21 May 2006
+And the user should see the Type of an area as Area
+And the user should see the Country of an area as USA
+And the user should see the Area Parent of an area as Atchison
 And the user should see the area's replace by as California, Kansas
-And the user should see the Use in Address of a area as True
-And the user should see the Interest Rate Limit of a area as 92%
-And the user should see the ISO2 of a area as IL
-And the user should see the Add Info of a area as ILLINOIS: Census area dissolved in 2100
+And the user should see the Use in Address of an area as True
+And the user should see the Interest Rate Limit of an area as 92%
+And the user should see the ISO2 of an area as IL
+And the user should see the Add Info of an area as ILLINOIS: Census area dissolved in 2100
 
 
 Examples:

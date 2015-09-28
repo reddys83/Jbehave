@@ -259,7 +259,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyBasicInfoLabel(label, value);
     }
 
-    @Then("the user should see the $label of a area as $value")
+    @Then("the user should see the $label of an area as $value")
     public void verifyAreaBasicInfo(@Named("label") String label,@Named("value") String value){
         getDataPage().verifyBasicInfoLabel(label, value);
     }
@@ -501,6 +501,7 @@ public class DataSteps extends AbstractSteps {
 
     @When("the user clicks on the choose an area option")
     public void clickOnAreaDropdown() { getDataPage().clickOnAreaDropdown();}
+
     @Then("the user should see the below states for the selected country: $areas")
     public void verifyAreaForSelectedCountry(ExamplesTable areas) {
         getDataPage().verifyAreaForSelectedCountry(areas);
@@ -526,6 +527,24 @@ public class DataSteps extends AbstractSteps {
     @When("the user clicks on the area's places link in the navigation bar")
     public void clickOnAreaRelatedPlaces() {
         getDataPage().clickOnAreaRelatedPlaces();
+    }
+
+    @When("the user clicks on the city tab in the data area")
+    public void userClicksOnCityTab() {
+        getDataPage().clickOnCityTab();
+    }
+
+    @When("the user clicks on the choose a city option")
+    public void clickOnCityDropdown() { getDataPage().clickOnCityDropdown();}
+
+    @Then("the user should see the below cities for the selected area: $cities")
+    public void verifyCitiesForSelectedArea(ExamplesTable cities) {
+        getDataPage().verifyCitiesForSelectedArea(cities);
+    }
+
+    @Then("the user should not see any cities for the selected area")
+    public void verifyNoCitiesForSelectedArea() {
+        getDataPage().verifyNoCitiesForSelectedArea();
     }
 }
 
