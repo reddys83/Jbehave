@@ -255,12 +255,12 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the $label of a country as $value")
-    public void verifyCountryStatus(@Named("label") String label,@Named("value") String value){
+    public void verifyCountryBasicInfo(@Named("label") String label,@Named("value") String value){
         getDataPage().verifyBasicInfoLabel(label, value);
     }
 
     @Then("the user should see the $label of a area as $value")
-    public void verifyAreaStatus(@Named("label") String label,@Named("value") String value){
+    public void verifyAreaBasicInfo(@Named("label") String label,@Named("value") String value){
         getDataPage().verifyBasicInfoLabel(label, value);
     }
 
@@ -431,12 +431,22 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the country's places as: $countryPlaces")
     public void verifyCountryPlaces(ExamplesTable countryPlaces){
-        getDataPage().verifyCountryPlaces(countryPlaces);
+        getDataPage().verifyPlaces(countryPlaces);
+    }
+
+    @Then("the user should see the area's places as: $areaPlaces")
+    public void verifyAreaPlaces(ExamplesTable areaPlaces) {
+        getDataPage().verifyPlaces(areaPlaces);
     }
 
     @Then("the user should not see the country's places")
     public void verifyNoCountryPlaces() {
-        getDataPage().verifyNoCountryPlaces();
+        getDataPage().verifyNoPlaces();
+    }
+
+    @Then("the user should not see the area's places")
+    public void verifyNoAreaPlaces() {
+        getDataPage().verifyNoPlaces();
     }
 
     @When("the user clicks on the country entity link in the navigation bar")
@@ -511,6 +521,11 @@ public class DataSteps extends AbstractSteps {
     public void clickOnAreaBasicInfoInNavigationBar() {
         getDataPage().clickOnAreaBasicInfoInNavigationBar();
 
+    }
+
+    @When("the user clicks on the area's places link in the navigation bar")
+    public void clickOnAreaRelatedPlaces() {
+        getDataPage().clickOnAreaRelatedPlaces();
     }
 }
 
