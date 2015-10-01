@@ -29,7 +29,7 @@ public class ApacheHttpClient {
     @Value("${marklogic.modules.xquery.folderPath}")
     String folderPath;
 
-    public Document executeDatabaseAdminQueryWithResponse(Database database, String xquery) {
+    public Document executeDatabaseAdminQueryWithResponse(String xquery, Database database) {
         Utils utils = new Utils();
         Document document = null;
         HttpClient client = new HttpClient();

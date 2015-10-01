@@ -1,15 +1,24 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class DataSteps extends AbstractSteps {
+
+
+    @Autowired
+    ApacheHttpClient apacheHttpClient;
+    @Autowired
+    Database database;
 
     @When("the user clicks on the currency tab in the data area")
     public void whenUserClicksOnCurrencyTab(){
@@ -101,11 +110,17 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryTypeAheadAndListBox();
     }
 
+   @Then("the countries list matches the $xqueryName from the database")
+    public void verifyCountryListMatchesExpectedList(String xqueryName) {
+        getDataPage().verifyCountryListValues(database, apacheHttpClient, xqueryName);
+    }
+
+   /*
     @Then("the user should see the country list matching the expected country list and sorted alphabetically")
     public void verifyCountryListMatchesExpectedList(){
         getDataPage().verifyCountryListValues();
     }
-
+*/
     @When("the user starts typing the name of a country as $word in the country input box")
     public void userEnterCountryTextInTypeAhead(String word){
         getDataPage().enterValueInCountryTypeAhead(word);

@@ -1,7 +1,10 @@
 package com.accuity.zeus.aft.io;
 
+import com.accuity.zeus.aft.commons.XqueryMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.Document;
 
 /**
  * Created by soofis on 8/21/2015.
@@ -9,11 +12,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class Database {
 
-    private String host;
-    private  String port;
-    private String username;
-    private String password;
-    private String scheme;
+    public String host;
+    public  String port;
+    public String username;
+    public String password;
+    public String scheme;
 
     @Value("${marklogic.admin.host}")
     public void setHost(String host) {
@@ -53,4 +56,5 @@ public class Database {
     }
 
     public String getScheme() {return scheme;}
+
 }

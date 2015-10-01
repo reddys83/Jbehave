@@ -2,11 +2,18 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 
 import com.accuity.zeus.aft.commons.DataManagementAppVals;
+import com.accuity.zeus.aft.commons.XqueryMap;
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.w3c.dom.Document;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -86,32 +93,6 @@ public class DataPage extends AbstractPage {
 
     private String basic_info_label_xpath ="//*[@id='content']//li[2]/table/tbody/tr/th[text()='";
     private String basic_info_label_value_xpath = ".//*[@id='content']//table[@class='vertical']/tbody/tr[th='";
-
-
-  //  private By basic_info_status_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr/th[text()='Status']");  //*[@id='content']//li[2]/table/tbody/tr/th[text()='Start Date']
-  //  private By basic_info_status_xpath = By.xpath(".//*[@id='content']//table[@class='vertical']/tbody/tr[th='Status']/td");
-  //  private By basic_info_start_date_label_xpath = By.xpath(".//*[@id='content']//table[@class='vertical']/tbody/tr/th[text()='Began Date']");
-  //  private By basic_info_start_date_xpath = By.xpath(".//*[@id='content']//table[@class='vertical']/tbody/tr[th='Began Date']/td");
-  // private By basic_info_end_date_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr/th[text()='End Date']");
-  //  private By basic_info_end_date_xpath = By.xpath(".//*[@id='content']//table[@class='vertical']/tbody/tr[th='End Date']/td");
-  //  private By basic_info_replaced_by_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr/th[text()='Replaced By']");
-  // private By basic_info_replaced_by_xpath = By.xpath(".//*[@id='content']//table[@class='vertical']/tbody/tr[th='Replaced By']/td");
-
- /* private By basic_info_type_label_xpath= By.xpath("");rdf
-    private By basic_info_type_xpath= By.xpath("");
-    private By basic_info_country_label_xpath=By.xpath("");
-    private By basic_info_country_xpath=By.xpath("");
-    private By basic_info_area_parent_label_xpath=By.xpath("");
-    private By basic_info_area_parent_xpath=By.xpath("");
-    private By basic_info_use_in_address_label_xpath=By.xpath("");
-    private By basic_info_use_in_address_xpath=By.xpath("");
-    private By basic_info_interest_rate_limit_label_xpath=By.xpath("");
-    private By basic_info_interest_rate_limit_xpath=By.xpath("");
-    private By basic_info_iso2_label_xpath= By.xpath("");
-    private By basic_info_iso2_xpath=By.xpath("");
-    private By basic_info_add_info_label_xpath=By.xpath("");
-    private By basic_info_add_info_xpath=By.xpath("");sd*/
-
     private By country_exports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[7]/th");
     private By country_exports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[7]/td");
     private By country_intl_dial_code_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[8]/th");
@@ -224,8 +205,6 @@ public class DataPage extends AbstractPage {
     public By area_time_zones_xpath=By.xpath(".//*[@id='content']//li/table[3]/tbody/tr/th");
     public By area_time_zones_value_xpath= By.xpath(".//*[@id='content']//li/table[3]/tbody/tr/td");
     public By area_related_people_link_id = By.id("areaPlaces");
-
-
 
     @Override
     public String getPageUrl() {
@@ -340,8 +319,34 @@ public class DataPage extends AbstractPage {
     }
 
     //=CHAR(34)&A1&CHAR(34)&","
-    public void verifyCountryListValues() {
+    public void verifyCountryListValues(Database database, ApacheHttpClient apacheHttpClient, String xqueryName) {
+        XqueryMap xqueryMap = new XqueryMap();
+        ArrayList<String> myList = new ArrayList<>();
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(xqueryMap.getXquery(xqueryName), database);
         List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listBox_value_xpath).getText().split("\n")));
+        for (int i=0;i<=document.getElementsByTagName("a").getLength();i++){
+            //this prepares the list for comparision
+            myList.add(document.getElementsByTagName("result").item(i).getTextContent());
+            System.out.println("Added values in the list are: " + document.getElementsByTagName("result").item(i).getTextContent());
+        }
+        assertTrue(myList.size() == retCountryListVal.size());
+        for (int j=0;j<=myList.size()-1;j++)
+        {
+            if (retCountryListVal.get(j).equals(myList.get(j))) {
+                continue;
+            }
+
+            else {
+                System.out.println("The returned country list has the value " + retCountryListVal.get(j) + " but the expected country list has the value " + myList.get(j));
+                assertTrue(false);
+                break;
+            }
+
+        }
+
+
+
+      /*  List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listBox_value_xpath).getText().split("\n")));
         assertTrue(DataManagementAppVals.expCountryListVal.size() == retCountryListVal.size());
         for (int i = 0; i <=DataManagementAppVals.expCountryListVal.size()-1; i++) {
             if (retCountryListVal.get(i).equals(DataManagementAppVals.expCountryListVal.get(i))) {
@@ -352,7 +357,7 @@ public class DataPage extends AbstractPage {
                 assertTrue(false);
                 break;
             }
-        }
+        } */
     }
 
     public void enterValueInCountryTypeAhead(String word) {
