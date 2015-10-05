@@ -9,7 +9,7 @@ JIRA ID - ZEUS-194 - user can log out of zeus
 Scenario: Successful login - logout
 Given user is on the login page
 When the user enters a valid username on the login page
-And the user enters an invalid password on the login page
+And the user enters a valid password on the login page
 And the user clicks on the login button in the login page
 Then the user should see the search page
 When the user moves the cursor to the settings in the search page

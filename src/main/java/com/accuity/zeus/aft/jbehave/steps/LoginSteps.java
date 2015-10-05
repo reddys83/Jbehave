@@ -92,6 +92,7 @@ public class LoginSteps extends AbstractSteps {
     @When("the user refreshes the login page")
     public void whenTheUserRefreshsesLoginPage(){
         loginPage.refreshPage();
+        setLoginPage(new LoginPage(webDriverState.getWebDriver(), getDataManagementWebappUrl()));
     }
 
 }

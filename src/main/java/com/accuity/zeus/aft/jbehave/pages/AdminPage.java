@@ -17,11 +17,11 @@ import static org.junit.Assert.assertTrue;
 public class AdminPage extends AbstractPage{
 
     private By taxonomies_listbox_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
-    private By taxonomies_tab_id = By.id("taxonomies-nav");
+    private By taxonomies_tab_id = By.id("taxonomy-nav");
     private By choose_taxonomy_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private By taxonomy_input_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/div/input");
     private By taxonomy_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
-    private By taxonomy_label_xpath = By.xpath("//*[@id='selection']/div/dl/dt");
+    private By taxonomy_label_xpath = By.xpath("//*[@id='selection']/dl/dt");
     private By no_results_match_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private String taxonomySearchString = "";
     private By taxonomies_table_headers_xpath = By.xpath("//table[1]/thead/tr");
