@@ -349,12 +349,12 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the country's credit ratings as: $countryCreditRatings")
     public void verifyCountryCreditRatings(ExamplesTable countryCreditRatings){
-        getDataPage().countryCreditRatings(countryCreditRatings);
+        getDataPage().verifyCreditRatings(countryCreditRatings);
     }
 
     @Then("the user should not see the country's credit ratings")
     public void verifyNoCountryCreditRatings() {
-        getDataPage().verifyNoCountryCreditRatings();
+        getDataPage().verifyNoCreditRatings();
     }
 
     @When("the user clicks on the update currency link")
@@ -519,7 +519,46 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should not see the area's people")
     public void verifyNoAreaPeople() {
         getDataPage().verifyNoPeople();
+    }
 
+    @When("the user clicks on the area's credit rating link in the navigation bar")
+    public void clickOnAreasCreditRatings(){
+        getDataPage().clickOnAreasCreditRatings();
+    }
+
+    @Then("the user should see the area's credit ratings as: $areaCreditRatings")
+    public void verifyAreaCreditRatings(ExamplesTable areaCreditRatings) {
+        getDataPage().verifyCreditRatings(areaCreditRatings);
+    }
+
+    @When("the user clicks on the choose a sub-area option")
+    public void clickOnSubAreaDropDown(){
+        getDataPage().clickOnSubAreaDropDown();
+    }
+
+    @When("the user enters the sub-area <subArea> in the type-ahead box")
+    public void enterSubAreaInTypeAhead(@Named("subArea") String subArea){
+        getDataPage().enterSubAreaInTypeAhead(subArea);
+    }
+
+    @Then("the user should not see the area's credit ratings")
+    public void verifyNoAreaCreditRatings(){
+        getDataPage().verifyNoCreditRatings();
+    }
+
+    @When("the user clicks on the sub-area's credit rating link in the navigation bar")
+    public void clickOnSubAreasCreditRatings(){
+        getDataPage().clickOnAreasCreditRatings();
+    }
+
+    @Then("the user should see the sub-area's credit ratings as: $areaCreditRatings")
+    public void verifySubAreaCreditRatings(ExamplesTable areaCreditRatings) {
+        getDataPage().verifyCreditRatings(areaCreditRatings);
+    }
+
+    @Then("the user should not see the sub-area's credit ratings")
+    public void verifyNoSubAreaCreditRatings(){
+        getDataPage().verifyNoCreditRatings();
     }
 }
 

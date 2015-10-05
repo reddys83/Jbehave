@@ -83,19 +83,7 @@ public class DataPage extends AbstractPage {
     private By country_summary_value_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr/td");
     private String basic_info_label_xpath ="//*[@id='content']//li[2]/table/tbody/tr/th[text()='";
     private String basic_info_label_value_xpath = ".//*[@id='content']//table[@class='vertical']/tbody/tr[th='";
-    /*
-    private By country_exports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[7]/th");
-    private By country_exports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[7]/td");
-    private By country_intl_dial_code_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[8]/th");
-    private By country_intl_dial_code_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[8]/td");
-    private By country_political_structure_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[9]/th");
-    private By country_political_structure_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[9]/td");
-    private By country_add_info_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[5]/th");
-    private By country_add_info_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[5]/td");
-    private By country_imports_label_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/th");
-    private By country_imports_xpath = By.xpath("//*[@id='content']//li[2]/table/tbody/tr[6]/td");
-    private By country_name_selected_xpath = By.xpath("//*[@id='content']//li[1]/table[1]/tbody/tr[1]/td[2]");
-    */
+
     private By currency_usage_label_xpath = By.xpath("//*[@id='content']/div/dl[2]/dt");
     private By currency_usage_xpath = By.xpath("//*[@id='content']/div/dl[2]/dd/a");
     private By country_holidays_link_id = By.id("countryHolidays");
@@ -129,15 +117,17 @@ public class DataPage extends AbstractPage {
     private By country_regions_value_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/th[2]");
     private By country_regions_type_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/td[1]");
     private By country_regions_value_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/td[2]");
+
     private By country_credit_rating_id = By.id("countryCreditRating");
-    private By country_credit_rating_label_xpath = By.xpath("//li[contains(h1,'Credit Rating')]/h1/span");
-    private By country_credit_rating_for_label_xpath = By.xpath("//li[contains(h1,'Credit Rating')]/h2");
-    private By country_credit_rating_table_headers_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//thead/tr");
-    private By country_credit_rating_agency_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//tbody/tr/td[1]");
-    private By country_credit_rating_type_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//tbody/tr/td[2]");
-    private By country_credit_rating_value_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//tbody/tr/td[3]");
-    private By country_credit_rating_applied_date_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//tbody/tr/td[4]");
-    private By country_credit_rating_confirmed_date_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//tbody/tr/td[5]");
+    private By credit_rating_label_xpath = By.xpath("//li[contains(h1,'Credit Rating')]/h1/span");
+    private By credit_rating_for_label_xpath = By.xpath("//li[contains(h1,'Credit Rating')]/h2");
+    private By credit_rating_table_headers_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//thead/tr");
+    private By credit_rating_agency_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//tbody/tr/td[1]");
+    private By credit_rating_type_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//tbody/tr/td[2]");
+    private By credit_rating_value_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//tbody/tr/td[3]");
+    private By credit_rating_applied_date_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//tbody/tr/td[4]");
+    private By credit_rating_confirmed_date_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//tbody/tr/td[5]");
+
     private By currency_update_link_id = By.id("update-link");
     private By currency_input_name_xpath = By.xpath("//input[@name='name']");
     private By currency_input_abbr_xpath = By.xpath("//input[@name='abbr']");
@@ -172,19 +162,7 @@ public class DataPage extends AbstractPage {
     private By area_area_dropdown_xpath = By.xpath(".//*[@id='selection1'] /div //*[@id='entitySelect_chosen'] //a");
     private By area_subarea_dropdown_xpath = By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen'] //a");
     private By country_people_link_id= By.id("countryPeople");
-    /*
-    private By country_people_label_xpath= By.xpath("//li[contains(h1,'People')]//span");
-    private By country_related_people_label_xpath = By.xpath("//li[contains(h2,'People')]//h2");
-    private By country_people_type_label_xpath= By.xpath("//li[contains(h2,'People')]//table/thead//th[1]");
-    private By country_people_entity_label_xpath= By.xpath("//li[contains(h2,'People')]//table/thead//th[2]");
-    private By country_people_type_xpath= By.xpath("//li[contains(h2,'People')]//table/tbody//td[1]");
-    private By area_identifiers_type_label_xpath= By.xpath(".//*[@id='content']//li[1]/table[2]/thead/tr/th[1]");
-    private By area_identifiers_value_label_xpath=By.xpath(".//*[@id='content']//li[1]/table[2]/thead/tr/th[2]");
-    private By area_identifiers_status_label_xpath=By.xpath(".//*[@id='content']//li[1]/table[2]/thead/tr/th[3]");
-    private By area_identifiers_type_xpath=By.xpath("//*[@id='content']//li[1]/table[2]/tbody/tr/td[1]");
-    private By area_identifiers_value_xpath=By.xpath("//*[@id='content']//li[1]/table[2]/tbody/tr/td[2]");
-    private By area_identifiers_status_xpath=By.xpath("//*[@id='content']//li[1]/table[2]/tbody/tr/td[3]");
-    */
+
     private By area_time_zones_summary_label_xpath=By.xpath(".//*[@id='content']//li[1]/dl/dt");
     private By area_time_zones_summary_xpath=By.xpath(".//*[@id='content']//li[1]/dl/dd");
     private By area_time_zones_xpath=By.xpath(".//*[@id='content']//li/table[3]/tbody/tr/th");
@@ -193,6 +171,7 @@ public class DataPage extends AbstractPage {
     private By city_city_dropdown_xpath = By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen'] //a");
     private By city_city_dropdown_list_xpath = By.xpath(".//*[@id='selection2'] //ul/li");
     private By city_city_dropdown_disabled_xpath = By.xpath(".//*[@id='selection2'] /div //*[contains(@class,'chosen-disabled')]");
+    private By area_credit_ratings_link_id = By.id("areaCreditRating");
 
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -206,6 +185,7 @@ public class DataPage extends AbstractPage {
     public By area_area_dropdown_list_xpath = By.xpath(".//*[@id='selection1'] //ul/li");
     public By area_subarea_dropdown_list_xpath = By.xpath(".//*[@id='selection2'] //ul/li");
     public By area_area_dropdown_typeAhead_xpath = By.xpath(".//*[@id='selection1'] /div //*[@id='entitySelect_chosen']//input");
+    public By area_subarea_dropdown_typeAhead_xpath = By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen']//input");
     public By area_basic_info_link_id = By.id("areaBasicInfo");
     public By area_related_places_link_id = By.id("areaPlaces");
     public By area_related_people_link_id = By.id("areaPeople");
@@ -718,15 +698,15 @@ public class DataPage extends AbstractPage {
         attemptClick(country_credit_rating_id);
     }
 
-    public void countryCreditRatings(ExamplesTable countryCreditRatings) {
-        assertEquals("CREDIT RATING", getDriver().findElement(country_credit_rating_label_xpath).getText());
-        assertEquals("CREDIT RATINGS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(country_credit_rating_for_label_xpath).getText());
-        assertEquals("AGENCY TYPE VALUE APPLIED DATE CONFIRMED DATE", getDriver().findElement(country_credit_rating_table_headers_xpath).getText());
-        List<WebElement> agency = getDriver().findElements(country_credit_rating_agency_xpath);
-        List<WebElement> type = getDriver().findElements(country_credit_rating_type_xpath);
-        List<WebElement> value = getDriver().findElements(country_credit_rating_value_xpath);
-        List<WebElement> appliedDate = getDriver().findElements(country_credit_rating_applied_date_xpath);
-        List<WebElement> confirmedDate = getDriver().findElements(country_credit_rating_confirmed_date_xpath);
+    public void verifyCreditRatings(ExamplesTable countryCreditRatings) {
+        assertEquals("CREDIT RATING", getDriver().findElement(credit_rating_label_xpath).getText());
+        assertEquals("CREDIT RATINGS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(credit_rating_for_label_xpath).getText());
+        assertEquals("AGENCY TYPE VALUE APPLIED DATE CONFIRMED DATE", getDriver().findElement(credit_rating_table_headers_xpath).getText());
+        List<WebElement> agency = getDriver().findElements(credit_rating_agency_xpath);
+        List<WebElement> type = getDriver().findElements(credit_rating_type_xpath);
+        List<WebElement> value = getDriver().findElements(credit_rating_value_xpath);
+        List<WebElement> appliedDate = getDriver().findElements(credit_rating_applied_date_xpath);
+        List<WebElement> confirmedDate = getDriver().findElements(credit_rating_confirmed_date_xpath);
         for (int i=0; i<countryCreditRatings.getRowCount(); i++){
             assertEquals(countryCreditRatings.getRow(i).get(countryCreditRatings.getHeaders().get(0)),agency.get(i).getText());
             assertEquals(countryCreditRatings.getRow(i).get(countryCreditRatings.getHeaders().get(1)),type.get(i).getText());
@@ -736,12 +716,12 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyNoCountryCreditRatings() {
-        assertEquals("CREDIT RATING", getDriver().findElement(country_credit_rating_label_xpath).getText());
-        assertEquals("CREDIT RATINGS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(country_credit_rating_for_label_xpath).getText());
-        assertEquals("AGENCY TYPE VALUE APPLIED DATE CONFIRMED DATE", getDriver().findElement(country_credit_rating_table_headers_xpath).getText());
+    public void verifyNoCreditRatings() {
+        assertEquals("CREDIT RATING", getDriver().findElement(credit_rating_label_xpath).getText());
+        assertEquals("CREDIT RATINGS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(credit_rating_for_label_xpath).getText());
+        assertEquals("AGENCY TYPE VALUE APPLIED DATE CONFIRMED DATE", getDriver().findElement(credit_rating_table_headers_xpath).getText());
         try {
-            assertFalse(getDriver().findElement(country_credit_rating_agency_xpath).isDisplayed());
+            assertFalse(getDriver().findElement(credit_rating_agency_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e){}
     }
 
@@ -945,6 +925,20 @@ public class DataPage extends AbstractPage {
 
     public void verifyNoCitiesForSelectedArea() {
         assertTrue(getDriver().findElement(city_city_dropdown_disabled_xpath).isDisplayed());
+    }
+
+    public void clickOnAreasCreditRatings() {
+        attemptClick(area_credit_ratings_link_id);
+    }
+
+    public void clickOnSubAreaDropDown() {
+        attemptClick(area_subarea_dropdown_xpath);
+    }
+
+    public void enterSubAreaInTypeAhead(String subArea) {
+        selectedEntity = subArea;
+        getDriver().findElement(area_subarea_dropdown_typeAhead_xpath).sendKeys(subArea);
+        getDriver().findElement(area_subarea_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
     }
 }
 
