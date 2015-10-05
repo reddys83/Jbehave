@@ -6,6 +6,8 @@ As a user when I search by Name, FID, TFPID and click on the search results card
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-54 - (User can view entity stub entry)
 JIRA ID - ZEUS-74 - (User can view entity stub entry - head office information and address)
+JIRA ID - ZEUS-504 - View entity stub entry - country of operations is not displayed
+JIRA ID - ZEUS-505 - View entity stub entry - The value and the label for status are not aligned.
 
 Scenario: search by fid, click on result card and verify values for stub entry
 Meta:@verifyBuild

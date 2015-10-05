@@ -1,4 +1,4 @@
-Meta:@CountryRelatedEntities
+Meta:@CountryRelatedEntities @Country
 
 Narrative:
 In order to view and edit the currencies
@@ -18,8 +18,8 @@ And the user enters the country <country> in the type-ahead box
 When the user clicks on the country entity link in the navigation bar
 Then the user should see the country's entities as:
 |TYPE|ENTITY|DETAILS|
-|Central Office, Central Office2|Bank of the Ryukyus, Ltd|Central Office, details 2|
-|Central Bank, Central Office2|Central Bank of Somalia|Central Bank, details 2|
+|Central Office|Bank of the Ryukyus, Ltd|Central Office, Test Related Office|
+|Central Bank|Central Bank of Somalia|Central Bank, Test Related LegalEntity|
 
 Examples:
 |country|

@@ -1,4 +1,4 @@
-Meta:@CityList
+Meta:@CityList @City
 
 Narrative:
 In order to view the places of country

@@ -1,4 +1,4 @@
-Meta:@AreaBasicInfo
+Meta:@AreaBasicInfo @Area
 
 Narrative:
 In order to view the area basic info

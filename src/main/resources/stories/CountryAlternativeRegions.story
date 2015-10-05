@@ -1,4 +1,4 @@
-Meta:@CountryAlternativeRegions
+Meta:@CountryAlternativeRegions @Country
 
 Narrative:
 In order to view and edit the currencies
