@@ -6,8 +6,6 @@ import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class DataSteps extends AbstractSteps {
 
@@ -172,12 +170,12 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the list of country's names type and value as: $countryNames")
     public void verifyCountryNames(ExamplesTable countryNames){
-        getDataPage().verifyCountryNames(countryNames);
+        getDataPage().verifyNames(countryNames);
     }
 
     @Then("the user should see the area's names as: $areaNames")
     public void verifyAreaNames(ExamplesTable areaNames){
-        getDataPage().verifyAreaNames(areaNames);
+        getDataPage().verifyNames(areaNames);
     }
 
     @When("the user clicks on the country basic info link in the navigation bar")
@@ -197,12 +195,12 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the country's identifiers as: $countryIdentifiers")
     public void verifyCountryIdentifiers(ExamplesTable countryIdentifiers){
-        getDataPage().verifyCountryIdentifiers(countryIdentifiers);
+        getDataPage().verifyIdentifiers(countryIdentifiers);
     }
 
     @Then("the user should see the area's identifiers as: $areaIdentifiers")
     public void verifyAreaIdentifiers(ExamplesTable areaIdentifiers){
-        getDataPage().verifyAreaIdentifiers(areaIdentifiers);
+        getDataPage().verifyIdentifiers(areaIdentifiers);
     }
     @Then("the user should see the country's banking hours summary as $countryBankingHourSummary")
     public void verifyCountryBankingHourSummary(@Named("countryBankingHourSummary") String countryBankingHourSummary){
@@ -264,46 +262,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyBasicInfoLabel(label, value);
     }
 
- /*   @Then("the user should see the country's start date as $startDate")
-    public void verifyCountryStartDate(@Named("startDate") String startDate){
-        getDataPage().verifyCountryStartDate(startDate);
-    }
-
-    @Then("the user should see the country's end date as $endDate")
-    public void verifyCountryEndDate(@Named("endDate") String endDate){
-        getDataPage().verifyCountryEndDate(endDate);
-    }
-
-    @Then("the user should see the country's replaced by as $replacedBy")
-    public void verifyCountryReplacedBy(@Named("replacedBy") String replacedBy){
-        getDataPage().verifyCountryReplacedBy(replacedBy);
-    }
-
-    @Then("the user should see the country's imports as $imports")
-    public void verifyCountryImports(@Named("imports") String imports){
-        getDataPage().verifyCountryImports(imports);
-    }
-
-    @Then("the user should see the country's exports as $exports")
-    public void verifyCountryExport(@Named("exports") String exports){
-        getDataPage().verifyCountryExport(exports);
-    }
-
-    @Then("the user should see the country's intl dialing code as $intlDialCode")
-    public void verifyCountryIntlDialCode(@Named("intlDialCode") String intlDialCode){
-        getDataPage().verifyCountryIntlDialCode(intlDialCode);
-    }
-
-    @Then("the user should see the country's political structure as $politicalStructure")
-    public void verifyCountryPoliticalStructure(@Named("politicalStructure") String politicalStructure){
-        getDataPage().verifyCountryPoliticalStructure(politicalStructure);
-    }
-
-    @Then("the user should see the country's additional info as $addInfo")
-    public void verifyCountryAddInfo(@Named("addInfo") String addInfo){
-        getDataPage().verifyCountryAddInfo(addInfo);
-    }
-*/
     @When("the user clicks on the replaced by country <replacedByCountry> in the country basic info")
     public void clickOnReplacedByCountry(@Named("replacedByCountry") String replacedByCountry){
         getDataPage().clickOnReplacedByCountry(replacedByCountry);
@@ -466,7 +424,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the country's people as: $countryPeople")
     public void verifyCountryPeople (ExamplesTable countryPeople) {
-        getDataPage().verifyCountryPeople(countryPeople);
+        getDataPage().verifyPeople(countryPeople);
     }
 
     @Then("the user should not see the country's entities")
@@ -476,7 +434,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should not see the country's people")
     public void verifyNoCountryPeople() {
-        getDataPage().verifyNoCountryPeople();
+        getDataPage().verifyNoPeople();
     }
 
     @Then("the user should see the default country page and display all info")
@@ -529,6 +487,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnAreaRelatedPlaces();
     }
 
+
     @When("the user clicks on the city tab in the data area")
     public void userClicksOnCityTab() {
         getDataPage().clickOnCityTab();
@@ -545,6 +504,22 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should not see any cities for the selected area")
     public void verifyNoCitiesForSelectedArea() {
         getDataPage().verifyNoCitiesForSelectedArea();
+    }
+
+    @When("the user clicks on the area's people link in the navigation bar")
+    public void clickOnAreaRelatedPeople() {
+        getDataPage().clickOnAreaRelatedPeople();
+    }
+
+    @Then("the user should see the area's people as: $areaPeople")
+    public void verifyAreaPeople (ExamplesTable areaPeople) {
+        getDataPage().verifyPeople(areaPeople);
+    }
+
+    @Then("the user should not see the area's people")
+    public void verifyNoAreaPeople() {
+        getDataPage().verifyNoPeople();
+
     }
 }
 
