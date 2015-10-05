@@ -1,4 +1,4 @@
-Meta:@CountryRelatedPlaces
+Meta:@CountryRelatedPlaces @Country
 
 Narrative:
 In order to view the places of country
@@ -17,8 +17,8 @@ And the user enters the country <country> in the type-ahead box
 When the user clicks on the country places link in the navigation bar
 Then the user should see the country's places as:
 |TYPE|PLACE|DETAILS|
-|Capital City|Beijing|Capital City|
 |Financial Centre|Beijing||
+|Capital City|Beijing|Capital City|
 
 Examples:
 |country|
@@ -34,8 +34,8 @@ And the user enters the country <country> in the type-ahead box
 When the user clicks on the country places link in the navigation bar
 Then the user should see the country's places as:
 |TYPE|PLACE|DETAILS|
-|Capital City, Data updated manually|India|Capital City, Data updated manually|
-|Financial Centre|Belgrade||
+|Capital City|Belgrade|Capital City, Data updated manually|
+|Financial Capital|Belgrade||
 
 Examples:
 |country|

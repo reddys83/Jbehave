@@ -56,7 +56,7 @@ public class SearchPage extends AbstractPage {
         getDriver().findElement(search_hera_css).sendKeys(value);
         getDriver().findElement(search_by_id).sendKeys(field);
 		getDriver().findElement(search_field_xpath).sendKeys(field);
-		getDriver().findElement(search_value_xpath).sendKeys(value);
+		//getDriver().findElement(search_value_xpath).sendKeys(value);
 		getDriver().findElement(search_button_id).click();
 		ResultsPage resultsPage = new ResultsPage(getDriver(), getUrlPrefix(), entity, field, value);
 		resultsPage.validatePage();

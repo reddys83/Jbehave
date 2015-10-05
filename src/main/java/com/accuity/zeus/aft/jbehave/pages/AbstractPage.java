@@ -52,7 +52,7 @@ public abstract class AbstractPage {
 		}
 		assertNotNull(driver);
 		//Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(2, TimeUnit.SECONDS);
-		assertTrue(driver.findElement(contentLocator).isDisplayed());
+		assertTrue(driver.findElement(contentLocator).isEnabled());
 		//wait.until(ExpectedConditions.presenceOfElementLocated(contentLocator));
 	}
 

@@ -4,8 +4,9 @@ Narrative:
 As a user
 I want to search for taxonomy by name
 So that I can achieve a business goal mentioned in the story
-JIRA ID - ZEUS-259-Admin can search for taxonomy by name
-JIRA ID - ZEUS-211-Admin user can view a taxonomy
+JIRA ID - ZEUS-259 - Admin can search for taxonomy by name
+JIRA ID - ZEUS-211 - Admin user can view a taxonomy
+JIRA ID - ZEUS-506 - Taxonomies - The taxonomy list is not sorted.
 
 Scenario: View for taxonomy by name
 Given a user is on the search page

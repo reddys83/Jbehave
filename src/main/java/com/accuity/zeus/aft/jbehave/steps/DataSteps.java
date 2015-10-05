@@ -257,51 +257,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyBasicInfoLabel(label, value);
     }
 
-    @Then("the user should see the $label of a area as $value")
+    @Then("the user should see the $label of an area as $value")
     public void verifyAreaBasicInfo(@Named("label") String label,@Named("value") String value){
         getDataPage().verifyBasicInfoLabel(label, value);
     }
 
- /*   @Then("the user should see the country's start date as $startDate")
-    public void verifyCountryStartDate(@Named("startDate") String startDate){
-        getDataPage().verifyCountryStartDate(startDate);
-    }
-
-    @Then("the user should see the country's end date as $endDate")
-    public void verifyCountryEndDate(@Named("endDate") String endDate){
-        getDataPage().verifyCountryEndDate(endDate);
-    }
-
-    @Then("the user should see the country's replaced by as $replacedBy")
-    public void verifyCountryReplacedBy(@Named("replacedBy") String replacedBy){
-        getDataPage().verifyCountryReplacedBy(replacedBy);
-    }
-
-    @Then("the user should see the country's imports as $imports")
-    public void verifyCountryImports(@Named("imports") String imports){
-        getDataPage().verifyCountryImports(imports);
-    }
-
-    @Then("the user should see the country's exports as $exports")
-    public void verifyCountryExport(@Named("exports") String exports){
-        getDataPage().verifyCountryExport(exports);
-    }
-
-    @Then("the user should see the country's intl dialing code as $intlDialCode")
-    public void verifyCountryIntlDialCode(@Named("intlDialCode") String intlDialCode){
-        getDataPage().verifyCountryIntlDialCode(intlDialCode);
-    }
-
-    @Then("the user should see the country's political structure as $politicalStructure")
-    public void verifyCountryPoliticalStructure(@Named("politicalStructure") String politicalStructure){
-        getDataPage().verifyCountryPoliticalStructure(politicalStructure);
-    }
-
-    @Then("the user should see the country's additional info as $addInfo")
-    public void verifyCountryAddInfo(@Named("addInfo") String addInfo){
-        getDataPage().verifyCountryAddInfo(addInfo);
-    }
-*/
     @When("the user clicks on the replaced by country <replacedByCountry> in the country basic info")
     public void clickOnReplacedByCountry(@Named("replacedByCountry") String replacedByCountry){
         getDataPage().clickOnReplacedByCountry(replacedByCountry);
@@ -499,6 +459,7 @@ public class DataSteps extends AbstractSteps {
 
     @When("the user clicks on the choose an area option")
     public void clickOnAreaDropdown() { getDataPage().clickOnAreaDropdown();}
+
     @Then("the user should see the below states for the selected country: $areas")
     public void verifyAreaForSelectedCountry(ExamplesTable areas) {
         getDataPage().verifyAreaForSelectedCountry(areas);
@@ -526,6 +487,25 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnAreaRelatedPlaces();
     }
 
+
+    @When("the user clicks on the city tab in the data area")
+    public void userClicksOnCityTab() {
+        getDataPage().clickOnCityTab();
+    }
+
+    @When("the user clicks on the choose a city option")
+    public void clickOnCityDropdown() { getDataPage().clickOnCityDropdown();}
+
+    @Then("the user should see the below cities for the selected area: $cities")
+    public void verifyCitiesForSelectedArea(ExamplesTable cities) {
+        getDataPage().verifyCitiesForSelectedArea(cities);
+    }
+
+    @Then("the user should not see any cities for the selected area")
+    public void verifyNoCitiesForSelectedArea() {
+        getDataPage().verifyNoCitiesForSelectedArea();
+    }
+
     @When("the user clicks on the area's people link in the navigation bar")
     public void clickOnAreaRelatedPeople() {
         getDataPage().clickOnAreaRelatedPeople();
@@ -539,6 +519,7 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should not see the area's people")
     public void verifyNoAreaPeople() {
         getDataPage().verifyNoPeople();
+
     }
 }
 

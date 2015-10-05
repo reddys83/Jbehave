@@ -1,4 +1,4 @@
-Meta:@AreaRelatedPeople
+Meta:@AreaRelatedPeople @Area
 
 Narrative:
 In order to view and edit the people information
