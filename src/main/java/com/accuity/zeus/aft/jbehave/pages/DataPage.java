@@ -915,7 +915,7 @@ public class DataPage extends AbstractPage {
     public void clickOnAreaRelatedPeople() {
         attemptClick(area_related_people_link_id);
     }
-    public void clickOnAreaDemographics() {
+    public void clickOnDemographics() {
         attemptClick(area_demographics_link_id);
     }
 
