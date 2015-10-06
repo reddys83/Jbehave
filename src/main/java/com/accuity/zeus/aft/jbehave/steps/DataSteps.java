@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -145,6 +146,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user enters the area <area> in the type-ahead box")
+    @Alias("the user enters the area $area in the type-ahead box")
     public void enterAreaInTypeAhead(@Named("area") String area){
         getDataPage().enterAreaInTypeAhead(area);
     }
@@ -566,6 +568,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user enters the sub-area <subArea> in the type-ahead box")
+    @Alias("the user enters the sub-area $subArea in the type-ahead box")
     public void enterSubAreaInTypeAhead(@Named("subArea") String subArea){
         getDataPage().enterSubAreaInTypeAhead(subArea);
     }
