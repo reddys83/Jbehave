@@ -707,8 +707,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyPeopleLabel();
     }
 
-
-
     @When("the user enters the city <city> in the type-ahead box")
     public void enterCityInTheTypeAheadBox(@Named("city") String city){
         getDataPage().enterCityInTheTypeAheadBox(city);
@@ -725,6 +723,5 @@ public class DataSteps extends AbstractSteps {
     }
     
 }
-
 
 

@@ -1059,9 +1059,10 @@ public class DataPage extends AbstractPage {
         getDriver().findElement(city_type_ahead_xpath).sendKeys(city);
         getDriver().findElement(city_type_ahead_xpath).sendKeys(Keys.RETURN);
    }
-    
+
     public void clickOnCityRegionsInNavigationBar() {
         attemptClick(city_region_link_id);
    }
+
 }
 
