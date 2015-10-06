@@ -111,6 +111,10 @@ public class DataPage extends AbstractPage {
     private By country_payments_routing_codes_types_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[2]//th[1]");
     private By country_payments_routing_code_code_types_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[2]//td");
     private By country_regions_link_id = By.id("countryRegions");
+<<<<<<< HEAD
+=======
+    private By country_regions_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//span");
+>>>>>>> feature/ZEUS-328-user-can-view-a-city-s-alternative
     private By regions_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//span");
     private By alt_regions_for_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//h2");
     private By regions_type_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/th[1]");
@@ -197,7 +201,8 @@ public class DataPage extends AbstractPage {
     public By area_demographics_unit_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[3]");
     public By area_demographics_date_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[4]");
     public By area_demographics_type_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table//tbody//td[1]");
-
+    private By city_type_ahead_xpath =By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen']//input");
+    private By city_region_link_id =By.id("cityRegions");
 
     @Override
     public String getPageUrl() {
@@ -999,6 +1004,7 @@ public class DataPage extends AbstractPage {
         getDriver().findElement(area_subarea_dropdown_typeAhead_xpath).sendKeys(subArea);
         getDriver().findElement(area_subarea_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
     }
+<<<<<<< HEAD
 
     public void clickOnAreasAlternativeRegions() {
         attemptClick(area_regions_link_id);
@@ -1015,5 +1021,19 @@ public class DataPage extends AbstractPage {
 
         }
     }
+=======
+    
+    public void enterCityInTheTypeAheadBox(String city) {
+        selectedEntity = city;
+        getDriver().findElement(city_type_ahead_xpath).sendKeys(city);
+        getDriver().findElement(city_type_ahead_xpath).sendKeys(Keys.RETURN);
+   }
+    
+    public void clickOnCityRegionsInNavigationBar() {
+        attemptClick(city_region_link_id);
+   }
+	
+   
+>>>>>>> feature/ZEUS-328-user-can-view-a-city-s-alternative
 }
 

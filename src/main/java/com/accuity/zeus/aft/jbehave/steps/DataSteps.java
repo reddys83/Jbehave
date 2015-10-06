@@ -674,6 +674,24 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyPeopleLabel();
     }
 
+
+
+    @When("the user enters the city <city> in the type-ahead box")
+    public void enterCityInTheTypeAheadBox(@Named("city") String city){
+        getDataPage().enterCityInTheTypeAheadBox(city);
     }
+    
+    @When("the user clicks on the city regions link in the navigation bar")
+    public void clickOnCityAlternativeRegions(){
+        getDataPage().clickOnCityRegionsInNavigationBar();
+    }
+    
+    @Then("the user should see the city's alternative regions as: $citryRegions")
+    public void verifyCityRegions(ExamplesTable citryRegions){
+        getDataPage().verifyRegions(citryRegions);
+    }
+    
+}
+
 
 
