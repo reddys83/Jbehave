@@ -197,7 +197,8 @@ public class DataPage extends AbstractPage {
     public By area_demographics_unit_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[3]");
     public By area_demographics_date_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[4]");
     public By area_demographics_type_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table//tbody//td[1]");
-
+    private By city_type_ahead_xpath =By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen']//input");
+    private By city_region_link_id =By.id("cityRegions");
 
     @Override
     public String getPageUrl() {
@@ -999,6 +1000,16 @@ public class DataPage extends AbstractPage {
         getDriver().findElement(area_subarea_dropdown_typeAhead_xpath).sendKeys(subArea);
         getDriver().findElement(area_subarea_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
     }
+    
+    public void enterCityInTheTypeAheadBox(String city) {
+        selectedEntity = city;
+        getDriver().findElement(city_type_ahead_xpath).sendKeys(city);
+        getDriver().findElement(city_type_ahead_xpath).sendKeys(Keys.RETURN);
+   }
+    
+   public void clickOnCityRegionsInNavigationBar() {
+        attemptClick(city_region_link_id);
+   }
 
     public void clickOnAreasAlternativeRegions() {
         attemptClick(area_regions_link_id);
