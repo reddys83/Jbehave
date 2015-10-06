@@ -173,6 +173,7 @@ public class DataPage extends AbstractPage {
     private By city_city_dropdown_disabled_xpath = By.xpath(".//*[@id='selection2'] /div //*[contains(@class,'chosen-disabled')]");
     private By area_credit_ratings_link_id = By.id("areaCreditRating");
     private By area_regions_link_id = By.id("areaRegions");
+    private By city_credit_ratings_link_id = By.id("cityCreditRating");
 
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -1025,6 +1026,10 @@ public class DataPage extends AbstractPage {
         } catch (org.openqa.selenium.NoSuchElementException e) {
 
         }
+    }
+    
+    public void clickOnCityCreditRatings() {
+        attemptClick(city_credit_ratings_link_id);
     }
 }
 

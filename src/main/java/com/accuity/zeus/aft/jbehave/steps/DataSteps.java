@@ -688,4 +688,14 @@ public class DataSteps extends AbstractSteps {
     public void verifyPeopleForSubArea() {
         getDataPage().verifyPeopleLabel();
     }
+    
+    @When("the user clicks on the city's credit rating link in the navigation bar")
+    public void clickOnCityCreditRatings(){
+        getDataPage().clickOnCityCreditRatings();
+    }
+
+    @Then("the user should see the city's credit ratings as: $cityCreditRatings")
+    public void verifyCityCreditRatings(ExamplesTable cityCreditRatings) {
+        getDataPage().verifyCreditRatings(cityCreditRatings);
+    }
 }
