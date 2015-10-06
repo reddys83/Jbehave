@@ -168,6 +168,11 @@ public class DataSteps extends AbstractSteps {
     public void verifyAreaBasicInfo(){
             getDataPage().verifyBasicInfo(); }
 
+    @Then("the user should see the basic info for selected city")
+    public void verifyCityBasicInfo() {
+        getDataPage().verifyBasicInfo();
+    }
+
     @Then("the user should see the list of country's names type and value as: $countryNames")
     public void verifyCountryNames(ExamplesTable countryNames){
         getDataPage().verifyNames(countryNames);
@@ -176,6 +181,11 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the area's names as: $areaNames")
     public void verifyAreaNames(ExamplesTable areaNames){
         getDataPage().verifyNames(areaNames);
+    }
+
+    @Then("the user should see the city's names as: $cityNames")
+    public void verifyCityNames(ExamplesTable cityNames) {
+        getDataPage().verifyNames(cityNames);
     }
 
     @When("the user clicks on the country basic info link in the navigation bar")
@@ -195,12 +205,17 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the country's identifiers as: $countryIdentifiers")
     public void verifyCountryIdentifiers(ExamplesTable countryIdentifiers){
-        getDataPage().verifyIdentifiers(countryIdentifiers);
+        getDataPage().verifyCountryIdentifiers(countryIdentifiers);
     }
 
     @Then("the user should see the area's identifiers as: $areaIdentifiers")
     public void verifyAreaIdentifiers(ExamplesTable areaIdentifiers){
         getDataPage().verifyIdentifiers(areaIdentifiers);
+    }
+
+    @Then("the user should see the city's identifiers as: $cityIdentifiers")
+    public void verifyCityIdentifiers(ExamplesTable cityIdentifiers){
+        getDataPage().verifyIdentifiers(cityIdentifiers);
     }
     @Then("the user should see the country's banking hours summary as $countryBankingHourSummary")
     public void verifyCountryBankingHourSummary(@Named("countryBankingHourSummary") String countryBankingHourSummary){
@@ -242,6 +257,15 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyAreaLinkInBasicInfo();
     }
 
+    @Then("the user should not see the city's area link")
+    public void verifyAreaLinkForCityInBasicInfo()
+    { getDataPage().verifyAreaLinkForCityInBasicInfo(); }
+
+    @Then("the user should not see the city's Subarea link")
+    public void verifySubAreaLinkForCityInBasicInfo() {
+        getDataPage().verifySubAreaLinkForCityInBasicInfo();
+    }
+
     @Then("the user should see the area's time zones as: $areaTimeZones")
     public void verifyAreaTimeZones(ExamplesTable areaTimeZones) {
         getDataPage().verifyAreaTimeZones(areaTimeZones);
@@ -259,6 +283,11 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the $label of an area as $value")
     public void verifyAreaBasicInfo(@Named("label") String label,@Named("value") String value){
+        getDataPage().verifyBasicInfoLabel(label, value);
+    }
+
+    @Then("the user should see the $label of a city as $value")
+    public void verifyCityBasicInfo(@Named("label") String label,@Named("value") String value) {
         getDataPage().verifyBasicInfoLabel(label, value);
     }
 
@@ -479,7 +508,11 @@ public class DataSteps extends AbstractSteps {
     @When("the user clicks on the area basic info link in the navigation bar")
     public void clickOnAreaBasicInfoInNavigationBar() {
         getDataPage().clickOnAreaBasicInfoInNavigationBar();
+    }
 
+    @When("the user clicks on the city basic info link in the navigation bar")
+    public void clickOnCityBasicInfoInNavigationBar() {
+        getDataPage().clickOnCityBasicInfoInNavigationBar();
     }
 
     @When("the user clicks on the area's places link in the navigation bar")
