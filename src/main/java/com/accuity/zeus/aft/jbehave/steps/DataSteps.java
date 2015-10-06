@@ -319,7 +319,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the country's alternative regions as: $countryRegions")
     public void verifyCountryRegions(ExamplesTable countryRegions){
-        getDataPage().verifyCountryRegions(countryRegions);
+        getDataPage().verifyRegions(countryRegions);
     }
 
     @Then("the user should not see the country regions section")
@@ -588,6 +588,36 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should not see the sub-area's credit ratings")
     public void verifyNoSubAreaCreditRatings(){
         getDataPage().verifyNoCreditRatings();
+    }
+
+    @When("the user clicks on the area's alternative regions link in the navigation bar")
+    public void clickOnAreasAlternativeRegions(){
+        getDataPage().clickOnAreasAlternativeRegions();
+    }
+
+    @Then("the user should see the area's alternative regions as: $areaRegions")
+    public void verifyAreaRegions(ExamplesTable areaRegions){
+        getDataPage().verifyRegions(areaRegions);
+    }
+
+    @When("the user clicks on the sub-area's alternative regions link in the navigation bar")
+    public void clickOnSubAreasAlternativeRegions(){
+        getDataPage().clickOnAreasAlternativeRegions();
+    }
+
+    @Then("the user should see the sub-area's alternative regions as: $subAreaRegions")
+    public void verifySubAreaRegions(ExamplesTable subAreaRegions){
+        getDataPage().verifyRegions(subAreaRegions);
+    }
+
+    @Then("the user should not see the area's alternative regions")
+    public void verifyNoAreaAlternativeRegions(){
+        getDataPage().verifyNoAlternativeRegions();
+    }
+
+    @Then("the user should not see the sub-area's alternative regions")
+    public void verifyNoSubAreaAlternativeRegions(){
+        getDataPage().verifyNoAlternativeRegions();
     }
 }
 
