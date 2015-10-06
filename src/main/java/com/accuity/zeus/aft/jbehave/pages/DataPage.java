@@ -117,7 +117,6 @@ public class DataPage extends AbstractPage {
     private By country_payments_routing_codes_types_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[2]//th[1]");
     private By country_payments_routing_code_code_types_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[2]//td");
     private By country_regions_link_id = By.id("countryRegions");
-    private By country_regions_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//span");
 
     private By regions_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//span");
     private By alt_regions_for_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//h2");
@@ -181,6 +180,7 @@ public class DataPage extends AbstractPage {
     private By city_city_dropdown_disabled_xpath = By.xpath(".//*[@id='selection2'] /div //*[contains(@class,'chosen-disabled')]");
     private By area_credit_ratings_link_id = By.id("areaCreditRating");
     private By area_regions_link_id = By.id("areaRegions");
+    private By city_credit_ratings_link_id = By.id("cityCreditRating");
 
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -1052,6 +1052,10 @@ public class DataPage extends AbstractPage {
         } catch (org.openqa.selenium.NoSuchElementException e) {
 
         }
+    }
+    
+    public void clickOnCityCreditRatings() {
+        attemptClick(city_credit_ratings_link_id);
     }
 
     public void enterCityInTheTypeAheadBox(String city) {
