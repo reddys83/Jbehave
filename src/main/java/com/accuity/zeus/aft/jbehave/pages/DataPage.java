@@ -189,6 +189,14 @@ public class DataPage extends AbstractPage {
     public By area_basic_info_link_id = By.id("areaBasicInfo");
     public By area_related_places_link_id = By.id("areaPlaces");
     public By area_related_people_link_id = By.id("areaPeople");
+    public By area_demographics_link_id= By.id("areaDemographics");
+    public By area_demographics_label_xpath = By.xpath("//li/h1/span[text()='Demographics']");
+    public By area_demographics_type_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[1]");
+    public By area_demographics_value_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[2]");
+    public By area_demographics_unit_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[3]");
+    public By area_demographics_date_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[4]");
+    public By area_demographics_type_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table//tbody//td[1]");
+
 
     @Override
     public String getPageUrl() {
@@ -906,6 +914,40 @@ public class DataPage extends AbstractPage {
 
     public void clickOnAreaRelatedPeople() {
         attemptClick(area_related_people_link_id);
+    }
+    public void clickOnDemographics() {
+        attemptClick(area_demographics_link_id);
+    }
+
+    public void verifyDemographics(ExamplesTable areaDemographics) {
+        assertEquals("DEMOGRAPHICS", getDriver().findElement(area_demographics_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(area_demographics_type_label_xpath).getText());
+        assertEquals("VALUE", getDriver().findElement(area_demographics_value_label_xpath).getText());
+        assertEquals("UNIT", getDriver().findElement(area_demographics_unit_label_xpath).getText());
+        assertEquals("DATE", getDriver().findElement(area_demographics_date_label_xpath).getText());
+        List<WebElement> areaDemographicsTypeVal = getDriver().findElements(area_demographics_type_xpath);
+        assertTrue(areaDemographics.getRowCount() == areaDemographicsTypeVal.size());
+        for(int i = 0; i<areaDemographics.getRowCount(); i++)
+        {
+            assertEquals(areaDemographics.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").replace(" ","").trim(),
+                    getDriver().findElement(
+                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + areaDemographics.getRow(i).get(areaDemographics.getHeaders().get(0)) + "']")).getText().replace(",","").replace(" ","").trim());
+
+        }
+    }
+
+    public void verifyNoDemographics() {
+        assertEquals("DEMOGRAPHICS", getDriver().findElement(area_demographics_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(area_demographics_type_label_xpath).getText());
+        assertEquals("VALUE", getDriver().findElement(area_demographics_value_label_xpath).getText());
+        assertEquals("UNIT", getDriver().findElement(area_demographics_unit_label_xpath).getText());
+        assertEquals("DATE", getDriver().findElement(area_demographics_date_label_xpath).getText());
+        try {
+            assertFalse(getDriver().findElement(area_demographics_type_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+
+        }
+
     }
 
     public void clickOnCityTab() {

@@ -511,6 +511,35 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnAreaRelatedPeople();
     }
 
+    @When("the user clicks on the area's demographics link in the navigation bar")
+    public void clickOnAreaDemographics() {
+        getDataPage().clickOnDemographics();
+    }
+
+    @When("the user clicks on the sub-area's demographics link in the navigation bar")
+    public void clickOnSubAreaDemographics() {
+        getDataPage().clickOnDemographics();
+    }
+
+    @Then("the user should see the area's demographics as: $areaDemographics")
+    public void verifyAreaDemographics(ExamplesTable areaDemographics) {
+        getDataPage().verifyDemographics(areaDemographics);
+    }
+
+    @Then("the user should see the sub-area's demographics as: $subAreaDemographics")
+    public void verifySubAreaDemographics(ExamplesTable subAreaDemographics) {
+        getDataPage().verifyDemographics(subAreaDemographics);
+    }
+
+    @Then("the user should not see the area's demographics")
+        public void verifyNoAresDemographics() {
+        getDataPage().verifyNoDemographics();
+    }
+    @Then("the user should not see the sub-area's demographics")
+    public void verifyNoSubAreaDemographics() {
+        getDataPage().verifyNoDemographics();
+    }
+
     @Then("the user should see the area's people as: $areaPeople")
     public void verifyAreaPeople (ExamplesTable areaPeople) {
         getDataPage().verifyPeople(areaPeople);
