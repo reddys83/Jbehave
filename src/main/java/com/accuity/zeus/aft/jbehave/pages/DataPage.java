@@ -67,6 +67,12 @@ public class DataPage extends AbstractPage {
     private By country_identifiers_type_xpath = By.xpath("//*[@id='content']//li[1]/table[3]/tbody/tr/td[1]");
     private By country_identifiers_value_xpath = By.xpath("//*[@id='content']//li[1]/table[3]/tbody/tr/td[2]");
     private By country_identifiers_status_xpath = By.xpath("//*[@id='content']//li[1]/table[3]/tbody/tr/td[3]");
+
+    public By basic_info_identifiers_type_label_xpath = By.xpath(".//*[@id='content']//table[2]//thead//th[1]");
+    public By basic_info_identifiers_value_label_xpath = By.xpath(".//*[@id='content']//table[2]//thead//th[2]");
+    public By basic_info_identifiers_status_label_xpath = By.xpath(".//*[@id='content']//table[2]//thead//th[3]");
+    public By basic_info_identifiers_type_xpath = By.xpath(".//*[@id='content']//table[2]//tbody//td[1]");
+
     private By country_banking_hr_summary_label_xpath = By.xpath("//*[@id='content']//li[1]/dl[1]/dt");
     private By country_banking_hr_summary_xpath = By.xpath("//*[@id='content']//li[1]/dl[1]/dd");
     private By country_banking_hrs_label_xpath =  By.xpath("//*[@id='content']//li[1]/h2[4]");
@@ -111,6 +117,7 @@ public class DataPage extends AbstractPage {
     private By country_payments_routing_codes_types_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[2]//th[1]");
     private By country_payments_routing_code_code_types_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[2]//td");
     private By country_regions_link_id = By.id("countryRegions");
+
     private By regions_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//span");
     private By alt_regions_for_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//h2");
     private By regions_type_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/th[1]");
@@ -200,6 +207,7 @@ public class DataPage extends AbstractPage {
     public By area_demographics_type_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table//tbody//td[1]");
     private By city_type_ahead_xpath =By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen']//input");
     private By city_region_link_id =By.id("cityRegions");
+    public By city_basic_info_link_id = By.id("cityBasicInfo");
 
     @Override
     public String getPageUrl() {
@@ -465,7 +473,7 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyIdentifiers(ExamplesTable identifiersList) {
+    public void verifyCountryIdentifiers(ExamplesTable identifiersList) {
         assertEquals("IDENTIFIERS", getDriver().findElement(basic_info_identifiers_label_xpath).getText());
         assertEquals("TYPE", getDriver().findElement(country_identifiers_type_label_xpath).getText());
         assertEquals("VALUE", getDriver().findElement(country_identifiers_value_label_xpath).getText());
@@ -479,6 +487,23 @@ public class DataPage extends AbstractPage {
             assertEquals(identifiersList.getRow(i).get(identifiersList.getHeaders().get(2)), actIdentifiersStatus.get(i).getText());
         }
     }
+
+    public void verifyIdentifiers(ExamplesTable identifiersList) {
+        assertEquals("IDENTIFIERS", getDriver().findElement(basic_info_identifiers_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(basic_info_identifiers_type_label_xpath).getText());
+        assertEquals("VALUE", getDriver().findElement(basic_info_identifiers_value_label_xpath).getText());
+        assertEquals("STATUS", getDriver().findElement(basic_info_identifiers_status_label_xpath).getText());
+        List<WebElement> IdentifiersTypeVal = getDriver().findElements(basic_info_identifiers_type_xpath);
+        assertTrue(identifiersList.getRowCount() == IdentifiersTypeVal.size());
+        for(int i = 0; i<identifiersList.getRowCount(); i++)
+        {
+            assertEquals(identifiersList.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").replace(" ","").trim(),
+                    getDriver().findElement(
+                            By.xpath(".//*[@id='content']//table[2]//tbody//tr[td='" + identifiersList.getRow(i).get(identifiersList.getHeaders().get(0)) + "']")).getText().replace(",","").replace(" ","").trim());
+
+        }
+    }
+
 
     public void verifyCountryBankingHourSummary(String countryBankingHourSummary) {
         assertEquals("Summary", getDriver().findElement(country_banking_hr_summary_label_xpath).getText());
@@ -556,6 +581,13 @@ public class DataPage extends AbstractPage {
         assertFalse(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Area Parent']/td")).isSelected());
     }
 
+    public void verifyAreaLinkForCityInBasicInfo() {
+        assertFalse(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Area']/td")).isSelected());
+    }
+
+    public void verifySubAreaLinkForCityInBasicInfo() {
+        assertFalse(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Sub Area']/td")).isSelected());
+    }
     public void clickOnReplacedByCountry(String replacedByCountry) {
         selectedEntity = replacedByCountry;
         attemptClick(By.linkText(replacedByCountry));
@@ -923,6 +955,10 @@ public class DataPage extends AbstractPage {
         attemptClick(area_basic_info_link_id);
     }
 
+    public void clickOnCityBasicInfoInNavigationBar() {
+        attemptClick(city_basic_info_link_id);
+    }
+
     public void clickOnAreaRelatedPlaces() {
         attemptClick(area_related_places_link_id);
     }
@@ -1001,16 +1037,6 @@ public class DataPage extends AbstractPage {
         getDriver().findElement(area_subarea_dropdown_typeAhead_xpath).sendKeys(subArea);
         getDriver().findElement(area_subarea_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
     }
-    
-    public void enterCityInTheTypeAheadBox(String city) {
-        selectedEntity = city;
-        getDriver().findElement(city_type_ahead_xpath).sendKeys(city);
-        getDriver().findElement(city_type_ahead_xpath).sendKeys(Keys.RETURN);
-   }
-    
-   public void clickOnCityRegionsInNavigationBar() {
-        attemptClick(city_region_link_id);
-   }
 
     public void clickOnAreasAlternativeRegions() {
         attemptClick(area_regions_link_id);
@@ -1031,5 +1057,16 @@ public class DataPage extends AbstractPage {
     public void clickOnCityCreditRatings() {
         attemptClick(city_credit_ratings_link_id);
     }
+
+    public void enterCityInTheTypeAheadBox(String city) {
+        selectedEntity = city;
+        getDriver().findElement(city_type_ahead_xpath).sendKeys(city);
+        getDriver().findElement(city_type_ahead_xpath).sendKeys(Keys.RETURN);
+   }
+
+    public void clickOnCityRegionsInNavigationBar() {
+        attemptClick(city_region_link_id);
+   }
+
 }
 
