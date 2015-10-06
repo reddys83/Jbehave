@@ -698,4 +698,9 @@ public class DataSteps extends AbstractSteps {
     public void verifyCityCreditRatings(ExamplesTable cityCreditRatings) {
         getDataPage().verifyCreditRatings(cityCreditRatings);
     }
+    
+    @Then("the user should not see the city's credit ratings")
+    public void verifyNoCityCreditRatings(){
+        getDataPage().verifyNoCreditRatings();
+    }
 }

@@ -1,4 +1,4 @@
-Meta:@AreaCreditRatings @Area
+Meta:@CityCreditRatings @City
 
 Narrative:
 In order to view and edit the cities
@@ -43,7 +43,7 @@ When the user clicks on the choose a city option
 When the user enters the city <city> in the type-ahead box
 When the user clicks on the city's credit rating link in the navigation bar
 
-Then the user should see the city's credit ratings
+Then the user should not see the city's credit ratings
 
 Examples:
 |country|area|city|
