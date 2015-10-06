@@ -148,7 +148,7 @@ public class DataPage extends AbstractPage {
     private By country_entities_entity_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[2]");
     private By country_entities_details_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[3]");
     private By country_entities_type_xpath = By.xpath("//li[contains(h2,'Entities')]//table/tbody//td[1]");
-    private By country_select_all_link_xpath = By.xpath("//*[@id='all'][@class='selected']");
+    private By select_all_link_xpath = By.xpath("//*[@id='all'][@class='selected']");
     private By country_currencies_link_id = By.id("countryCurrencies");
     private By country_currencies_label_xpath = By.xpath("//li[contains(h1,'Currencies')]//span");
     private By country_currencies_table_headings_xpath = By.xpath("//li[contains(h1,'Currencies')]//table/thead//tr");
@@ -708,7 +708,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCreditRatings(ExamplesTable creditRatings) {
-        assertEquals("CREDIT RATING", getDriver().findElement(credit_rating_label_xpath).getText());
+        verifyCreditRatingsLabel();
         assertEquals("CREDIT RATINGS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(credit_rating_for_label_xpath).getText());
         assertEquals("AGENCY TYPE VALUE APPLIED DATE CONFIRMED DATE", getDriver().findElement(credit_rating_table_headers_xpath).getText());
         List<WebElement> agency = getDriver().findElements(credit_rating_agency_xpath);
@@ -723,6 +723,10 @@ public class DataPage extends AbstractPage {
             assertEquals(creditRatings.getRow(i).get(creditRatings.getHeaders().get(3)),appliedDate.get(i).getText());
             assertEquals(creditRatings.getRow(i).get(creditRatings.getHeaders().get(4)),confirmedDate.get(i).getText());
         }
+    }
+
+    public void verifyCreditRatingsLabel() {
+        assertEquals("CREDIT RATING", getDriver().findElement(credit_rating_label_xpath).getText());
     }
 
     public void verifyNoCreditRatings() {
@@ -763,7 +767,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyPlaces(ExamplesTable placeValues)  {
-        assertEquals("PLACES", getDriver().findElement(places_label_xpath).getText());
+        verifyPlacesLabel();
         assertEquals("RELATED PLACES FOR " + selectedEntity.toUpperCase(),getDriver().findElement(related_places_label_xpath).getText());
         assertEquals("TYPE", getDriver().findElement(places_type_label_xpath).getText());
         assertEquals("PLACE", getDriver().findElement(places_place_label_xpath).getText());
@@ -773,6 +777,10 @@ public class DataPage extends AbstractPage {
                     getDriver().findElement(
                             By.xpath("//*[@id='content']//table/tbody//tr[td='" + placeValues.getRow(i).get(placeValues.getHeaders().get(0)) + "']")).getText().replace(",","").trim());
         }
+    }
+
+    public void verifyPlacesLabel() {
+        assertEquals("PLACES", getDriver().findElement(places_label_xpath).getText());
     }
 
     public void verifyNoPlaces() {
@@ -817,8 +825,8 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyCountryDefaultToViewAll() {
-        assertTrue(getDriver().findElement(country_select_all_link_xpath).isDisplayed());
+    public void verifyDefaultToViewAll() {
+        assertTrue(getDriver().findElement(select_all_link_xpath).isDisplayed());
     }
 
     public void refreshThePage() {
@@ -855,15 +863,19 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyPeople(ExamplesTable countryPeople) {
-        assertEquals("PEOPLE", getDriver().findElement(people_label_xpath).getText());
+        verifyPeopleLabel();
         assertEquals("RELATED PEOPLE FOR " + selectedEntity.toUpperCase(),getDriver().findElement(related_people_label_xpath).getText());
         assertEquals("TYPE", getDriver().findElement(people_type_label_xpath).getText());
         assertEquals("PERSON", getDriver().findElement(people_entity_label_xpath).getText());
         for(int i = 0; i<countryPeople.getRowCount(); i++){
             assertEquals(countryPeople.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
                     getDriver().findElement(
-                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryPeople.getRow(i).get(countryPeople.getHeaders().get(0)) + "']")).getText().replace(",","").trim());
+                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryPeople.getRow(i).get(countryPeople.getHeaders().get(0)) + "']")).getText().replace(",", "").trim());
         }
+    }
+
+    public void verifyPeopleLabel() {
+        assertEquals("PEOPLE", getDriver().findElement(people_label_xpath).getText());
     }
 
     public void verifyNoPeople() {
@@ -921,7 +933,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyDemographics(ExamplesTable areaDemographics) {
-        assertEquals("DEMOGRAPHICS", getDriver().findElement(area_demographics_label_xpath).getText());
+        verifyDemographicsLabel();
         assertEquals("TYPE", getDriver().findElement(area_demographics_type_label_xpath).getText());
         assertEquals("VALUE", getDriver().findElement(area_demographics_value_label_xpath).getText());
         assertEquals("UNIT", getDriver().findElement(area_demographics_unit_label_xpath).getText());
@@ -935,6 +947,10 @@ public class DataPage extends AbstractPage {
                             By.xpath("//*[@id='content']//table/tbody//tr[td='" + areaDemographics.getRow(i).get(areaDemographics.getHeaders().get(0)) + "']")).getText().replace(",","").replace(" ","").trim());
 
         }
+    }
+
+    public void verifyDemographicsLabel() {
+        assertEquals("DEMOGRAPHICS", getDriver().findElement(area_demographics_label_xpath).getText());
     }
 
     public void verifyNoDemographics() {

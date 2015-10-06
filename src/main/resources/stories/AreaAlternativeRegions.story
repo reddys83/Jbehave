@@ -4,7 +4,7 @@ Narrative:
 In order to view and edit the currencies
 As a user
 I want to cover the requirements mentioned in
-JIRA ID - ZEUS-303 - User can view an area's credit rating
+JIRA ID - ZEUS-304 - User can view an area's alternative regions
 
 Scenario: Verify area's alternative regions.
 Meta:@verifyBuild

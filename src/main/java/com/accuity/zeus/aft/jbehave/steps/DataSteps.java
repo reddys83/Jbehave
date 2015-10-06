@@ -439,7 +439,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the default country page and display all info")
     public void verifyCountryDefaultToViewAll(){
-        getDataPage().verifyCountryDefaultToViewAll();
+        getDataPage().verifyDefaultToViewAll();
     }
 
     @When("the user refreshes the page")
@@ -619,6 +619,61 @@ public class DataSteps extends AbstractSteps {
     public void verifyNoSubAreaAlternativeRegions(){
         getDataPage().verifyNoAlternativeRegions();
     }
-}
+
+    @Then("the user should see the default area page and display all info")
+    public void verifyAreaDefaultToViewAll(){
+        getDataPage().verifyDefaultToViewAll();
+    }
+
+    @Then("the user should see the default sub-area page and display all info")
+    public void verifySubAreaDefaultToViewAll(){
+        getDataPage().verifyDefaultToViewAll();
+    }
+
+    @Then("the user should see the basic info for selected sub-area")
+    public void verifySubAreaBasicInfo(){
+        getDataPage().verifyBasicInfo(); }
+
+    @Then("the user should see the credit ratings for selected sub-area")
+    public void verifyCreditRatingsForSubArea(){
+        getDataPage().verifyCreditRatingsLabel();
+    }
+
+    @Then("the user should see the credit ratings for selected area")
+    public void verifyCreditRatingsForArea() {
+        getDataPage().verifyCreditRatingsLabel();
+    }
+
+    @Then("the user should see the demographics for selected area")
+    public void verifyDemographicsForArea() {
+        getDataPage().verifyDemographicsLabel();
+    }
+
+    @Then("the user should see the demographics for selected sub-area")
+    public void verifyDemographicsForSubArea() {
+        getDataPage().verifyDemographicsLabel();
+    }
+
+    @Then("the user should see the places for selected sub-area")
+    public void verifyPlacesForSubArea() {
+        getDataPage().verifyPlacesLabel();
+    }
+
+    @Then("the user should see the places for selected area")
+    public void verifyPlacesForArea() {
+        getDataPage().verifyPlacesLabel();
+    }
+
+    @Then("the user should see the people for selected area")
+    public void verifyPeopleForArea() {
+        getDataPage().verifyPeopleLabel();
+    }
+
+    @Then("the user should see the people for selected sub-area")
+    public void verifyPeopleForSubArea() {
+        getDataPage().verifyPeopleLabel();
+    }
+
+    }
 
 
