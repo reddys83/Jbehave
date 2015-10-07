@@ -565,6 +565,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the area's people link in the navigation bar")
+    @Alias("the user clicks on the sub-area's people link in the navigation bar")
     public void clickOnAreaRelatedPeople() {
         getDataPage().clickOnAreaRelatedPeople();
     }
