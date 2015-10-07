@@ -209,8 +209,10 @@ public class DataPage extends AbstractPage {
     private By area_demographics_type_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table//tbody//td[1]");
     private By city_type_ahead_xpath =By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen']//input");
     private By city_region_link_id =By.id("cityRegions");
+    public By city_entity_link_id = By.id("cityPresences");
     private By city_basic_info_link_id = By.id("cityBasicInfo");
     private By city_related_places_link_id = By.id("cityPlaces");
+
 
     @Override
     public String getPageUrl() {
@@ -500,9 +502,9 @@ public class DataPage extends AbstractPage {
         assertTrue(identifiersList.getRowCount() == IdentifiersTypeVal.size());
         for(int i = 0; i<identifiersList.getRowCount(); i++)
         {
-            assertEquals(identifiersList.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").replace(" ","").trim(),
+            assertEquals(identifiersList.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").replace(" ", "").trim(),
                     getDriver().findElement(
-                            By.xpath(".//*[@id='content']//table[2]//tbody//tr[td='" + identifiersList.getRow(i).get(identifiersList.getHeaders().get(0)) + "']")).getText().replace(",","").replace(" ","").trim());
+                            By.xpath(".//*[@id='content']//table[2]//tbody//tr[td='" + identifiersList.getRow(i).get(identifiersList.getHeaders().get(0)) + "']")).getText().replace(",","").replace(" ", "").trim());
 
         }
     }
@@ -837,6 +839,7 @@ public class DataPage extends AbstractPage {
         attemptClick(country_entity_link_id);
     }
 
+
     public void verifyEntities(ExamplesTable countryEntities) {
         verifyEntitiesLabel();
         assertEquals("RELATED ENTITIES FOR " + selectedEntity.toUpperCase(),getDriver().findElement(related_entities_label_xpath).getText());
@@ -849,6 +852,7 @@ public class DataPage extends AbstractPage {
                         By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryEntities.getRow(i).get(countryEntities.getHeaders().get(0)) + "']")).getText().replace(",","").trim());
         }
     }
+
 
     public void verifyEntitiesLabel() {
         assertEquals("ENTITIES", getDriver().findElement(entities_label_xpath).getText());
@@ -927,7 +931,6 @@ public class DataPage extends AbstractPage {
         try {
             assertFalse(getDriver().findElement(people_type_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e) {
-
         }
     }
 
@@ -1067,6 +1070,10 @@ public class DataPage extends AbstractPage {
     
     public void clickOnCityCreditRatings() {
         attemptClick(city_credit_ratings_link_id);
+    }
+
+    public void clickOnCityEntity() {
+        attemptClick(city_entity_link_id);
     }
 
     public void enterCityInTheTypeAheadBox(String city) {
