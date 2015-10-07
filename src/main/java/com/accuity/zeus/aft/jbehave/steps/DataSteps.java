@@ -424,6 +424,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the area's places as: $areaPlaces")
+    @Alias("the user should see the sub-area's places as: $areaPlaces")
     public void verifyAreaPlaces(ExamplesTable areaPlaces) {
         getDataPage().verifyPlaces(areaPlaces);
     }
@@ -439,6 +440,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should not see the area's places")
+    @Alias("the user should not see the sub-area's places")
     public void verifyNoAreaPlaces() {
         getDataPage().verifyNoPlaces();
     }
@@ -533,6 +535,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the area's places link in the navigation bar")
+    @Alias("the user clicks on the sub-area's places link in the navigation bar")
     public void clickOnAreaRelatedPlaces() {
         getDataPage().clickOnAreaRelatedPlaces();
     }
@@ -596,11 +599,13 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the area's people as: $areaPeople")
+    @Alias("the user should see the sub-area's people as: $areaPeople")
     public void verifyAreaPeople (ExamplesTable areaPeople) {
         getDataPage().verifyPeople(areaPeople);
     }
 
     @Then("the user should not see the area's people")
+    @Alias("the user should not see the sub-area's people")
     public void verifyNoAreaPeople() {
         getDataPage().verifyNoPeople();
     }
