@@ -450,7 +450,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the country's entities as: $countryEntities")
     public void verifyCountryEntities (ExamplesTable countryEntities){
-        getDataPage().verifyCountryEntities(countryEntities);
+        getDataPage().verifyEntities(countryEntities);
     }
 
     @Then("the user should see the country's people as: $countryPeople")
@@ -460,7 +460,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should not see the country's entities")
     public void verifyNoCountryEntities () {
-        getDataPage().verifyNoCountryEntities();
+        getDataPage().verifyNoEntities();
     }
 
     @Then("the user should not see the country's people")
@@ -739,6 +739,35 @@ public class DataSteps extends AbstractSteps {
     public void verifyCityRegions(ExamplesTable citryRegions){
         getDataPage().verifyRegions(citryRegions);
     }
-    
+
+    @When("the user clicks on the area's entity link in the navigation bar")
+    public void clickOnAreaEntity(){
+        getDataPage().clickOnAreaEntity();
+    }
+
+    @Then("the user should see the area's entities as: $areaEntities")
+    public void verifyAreaEntities(ExamplesTable areaEntities){
+        getDataPage().verifyEntities(areaEntities);
+    }
+
+    @When("the user clicks on the sub-area's entity link in the navigation bar")
+    public void clickOnSubAreaEntity(){
+        getDataPage().clickOnAreaEntity();
+    }
+
+    @Then("the user should see the sub-area's entities as: $areaEntities")
+    public void verifySubAreaEntities(ExamplesTable areaEntities){
+        getDataPage().verifyEntities(areaEntities);
+    }
+
+    @Then("the user should not see the area's entities")
+    public void verifyNoAreaEntities () {
+        getDataPage().verifyNoEntities();
+    }
+
+    @Then("the user should not see the sub-area's entities")
+    public void verifyNoSubAreaEntities () {
+        getDataPage().verifyNoEntities();
+    }
 }
 
