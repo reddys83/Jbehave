@@ -754,6 +754,25 @@ public class DataSteps extends AbstractSteps {
     public void verifyCityRegions(ExamplesTable citryRegions){
         getDataPage().verifyRegions(citryRegions);
     }
-    
+
+    @When("the user clicks on the city's people link in the navigation bar")
+    public void clickOnCityRelatedPeople() {
+        getDataPage().clickOnCityRelatedPeople();
+    }
+
+    @Then("the user should see the city's people as: $cityPeople")
+    public void verifyCityPeople (ExamplesTable cityPeople) {
+        getDataPage().verifyPeople(cityPeople);
+    }
+
+    @Then("the user should not see the city's people")
+    public void verifyNoCityPeople() {
+        getDataPage().verifyNoPeople();
+    }
+
+    @Then("the user should not see the city's alternative regions")
+    public void verifyNoCityAlternativeRegions() {
+        getDataPage().verifyNoAlternativeRegions();
+    }
 }
 
