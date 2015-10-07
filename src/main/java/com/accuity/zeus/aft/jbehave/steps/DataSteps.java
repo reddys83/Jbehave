@@ -460,7 +460,12 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should not see the country's entities")
     public void verifyNoCountryEntities () {
-        getDataPage().verifyNoCountryEntities();
+        getDataPage().verifyNoEntities();
+    }
+
+    @Then("the user should not see the city's entity")
+    public void verifyNoCityEntities() {
+        getDataPage().verifyNoEntities();
     }
 
     @Then("the user should not see the country's people")
@@ -715,9 +720,18 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCityCreditRatings();
     }
 
+    @When("the user clicks on the city's entity link in the navigation bar")
+    public void clickOnCityEntity() {
+        getDataPage().clickOnCityEntity();
+    }
+
     @Then("the user should see the city's credit ratings as: $cityCreditRatings")
     public void verifyCityCreditRatings(ExamplesTable cityCreditRatings) {
         getDataPage().verifyCreditRatings(cityCreditRatings);
+    }
+    @Then("the user should see the city's entity as: $cityEntities")
+    public void verifyCityEntities(ExamplesTable cityEntities) {
+        getDataPage().verifyCountryEntities(cityEntities);
     }
     
     @Then("the user should not see the city's credit ratings")
