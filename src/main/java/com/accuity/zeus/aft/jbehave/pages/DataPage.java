@@ -68,10 +68,10 @@ public class DataPage extends AbstractPage {
     private By country_identifiers_value_xpath = By.xpath("//*[@id='content']//li[1]/table[3]/tbody/tr/td[2]");
     private By country_identifiers_status_xpath = By.xpath("//*[@id='content']//li[1]/table[3]/tbody/tr/td[3]");
 
-    public By basic_info_identifiers_type_label_xpath = By.xpath(".//*[@id='content']//table[2]//thead//th[1]");
-    public By basic_info_identifiers_value_label_xpath = By.xpath(".//*[@id='content']//table[2]//thead//th[2]");
-    public By basic_info_identifiers_status_label_xpath = By.xpath(".//*[@id='content']//table[2]//thead//th[3]");
-    public By basic_info_identifiers_type_xpath = By.xpath(".//*[@id='content']//table[2]//tbody//td[1]");
+    private By basic_info_identifiers_type_label_xpath = By.xpath(".//*[@id='content']//table[2]//thead//th[1]");
+    private By basic_info_identifiers_value_label_xpath = By.xpath(".//*[@id='content']//table[2]//thead//th[2]");
+    private By basic_info_identifiers_status_label_xpath = By.xpath(".//*[@id='content']//table[2]//thead//th[3]");
+    private By basic_info_identifiers_type_xpath = By.xpath(".//*[@id='content']//table[2]//tbody//td[1]");
 
     private By country_banking_hr_summary_label_xpath = By.xpath("//*[@id='content']//li[1]/dl[1]/dt");
     private By country_banking_hr_summary_xpath = By.xpath("//*[@id='content']//li[1]/dl[1]/dd");
@@ -147,7 +147,7 @@ public class DataPage extends AbstractPage {
     private By places_place_label_xpath = By.xpath("//li[contains(h2,'Places')]//table/thead//th[2]");
     private By places_details_label_xpath = By.xpath("//li[contains(h2,'Places')]//table/thead//th[3]");
     private By country_places_type_xpath = By.xpath("//li[contains(h2,'Places')]//table/tbody//td[1]");
-    public String selectedEntity="";
+    private String selectedEntity="";
     private By country_entity_link_id = By.id("countryPresence");
     private By entities_label_xpath = By.xpath("//li[contains(h1,'Entities')]//span");
     private By related_entities_label_xpath = By.xpath("//li[contains(h2,'Entities')]//h2");
@@ -181,35 +181,36 @@ public class DataPage extends AbstractPage {
     private By area_credit_ratings_link_id = By.id("areaCreditRating");
     private By area_regions_link_id = By.id("areaRegions");
     private By city_credit_ratings_link_id = By.id("cityCreditRating");
+    private By city_people_link_id = By.id("cityPeople");
     private By area_entities_link_id = By.id("areaPresences");
 
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
 
-    public By people_label_xpath = By.xpath("//li[contains(h1,'People')]//span");
-    public By related_people_label_xpath = By.xpath("//li[contains(h2,'People')]//h2");
-    public By people_type_label_xpath = By.xpath("//li[contains(h2,'People')]//table/thead//th[1]");
-    public By people_entity_label_xpath = By.xpath("//li[contains(h2,'People')]//table/thead//th[2]");
-    public By people_type_xpath = By.xpath("//li[contains(h2,'People')]//table/tbody//td[1]");
-    public By area_area_dropdown_list_xpath = By.xpath(".//*[@id='selection1'] //ul/li");
-    public By area_subarea_dropdown_list_xpath = By.xpath(".//*[@id='selection2'] //ul/li");
-    public By area_area_dropdown_typeAhead_xpath = By.xpath(".//*[@id='selection1'] /div //*[@id='entitySelect_chosen']//input");
-    public By area_subarea_dropdown_typeAhead_xpath = By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen']//input");
-    public By area_basic_info_link_id = By.id("areaBasicInfo");
-    public By area_related_places_link_id = By.id("areaPlaces");
-    public By area_related_people_link_id = By.id("areaPeople");
-    public By area_demographics_link_id= By.id("areaDemographics");
-    public By area_demographics_label_xpath = By.xpath("//li/h1/span[text()='Demographics']");
-    public By area_demographics_type_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[1]");
-    public By area_demographics_value_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[2]");
-    public By area_demographics_unit_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[3]");
-    public By area_demographics_date_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[4]");
-    public By area_demographics_type_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table//tbody//td[1]");
+    private By people_label_xpath = By.xpath("//li[contains(h1,'People')]//span");
+    private By related_people_label_xpath = By.xpath("//li[contains(h2,'People')]//h2");
+    private By people_type_label_xpath = By.xpath("//li[contains(h2,'People')]//table/thead//th[1]");
+    private By people_entity_label_xpath = By.xpath("//li[contains(h2,'People')]//table/thead//th[2]");
+    private By people_type_xpath = By.xpath("//li[contains(h2,'People')]//table/tbody//td[1]");
+    private By area_area_dropdown_list_xpath = By.xpath(".//*[@id='selection1'] //ul/li");
+    private By area_subarea_dropdown_list_xpath = By.xpath(".//*[@id='selection2'] //ul/li");
+    private By area_area_dropdown_typeAhead_xpath = By.xpath(".//*[@id='selection1'] /div //*[@id='entitySelect_chosen']//input");
+    private By area_subarea_dropdown_typeAhead_xpath = By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen']//input");
+    private By area_basic_info_link_id = By.id("areaBasicInfo");
+    private By area_related_places_link_id = By.id("areaPlaces");
+    private By area_related_people_link_id = By.id("areaPeople");
+    private By area_demographics_link_id= By.id("areaDemographics");
+    private By area_demographics_label_xpath = By.xpath("//li/h1/span[text()='Demographics']");
+    private By area_demographics_type_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[1]");
+    private By area_demographics_value_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[2]");
+    private By area_demographics_unit_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[3]");
+    private By area_demographics_date_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[4]");
+    private By area_demographics_type_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table//tbody//td[1]");
     private By city_type_ahead_xpath =By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen']//input");
     private By city_region_link_id =By.id("cityRegions");
-    public By city_basic_info_link_id = By.id("cityBasicInfo");
-    public By city_related_places_link_id = By.id("cityPlaces");
+    private By city_basic_info_link_id = By.id("cityBasicInfo");
+    private By city_related_places_link_id = By.id("cityPlaces");
 
     @Override
     public String getPageUrl() {
@@ -1078,7 +1079,11 @@ public class DataPage extends AbstractPage {
         attemptClick(city_region_link_id);
    }
 
-    public void clickOnAreaEntity() {
+    public void clickOnCityRelatedPeople() {
+        attemptClick(city_people_link_id);
+    }
+
+    public void clickOnAreaEntity(){
         attemptClick(area_entities_link_id);
     }
 }
