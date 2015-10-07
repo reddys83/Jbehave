@@ -428,6 +428,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyPlaces(areaPlaces);
     }
 
+    @Then("the user should see the city's places as: $cityPlaces")
+    public void verifyCityPlaces(ExamplesTable cityPlaces) {
+        getDataPage().verifyPlaces(cityPlaces);
+    }
+
     @Then("the user should not see the country's places")
     public void verifyNoCountryPlaces() {
         getDataPage().verifyNoPlaces();
@@ -435,6 +440,11 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should not see the area's places")
     public void verifyNoAreaPlaces() {
+        getDataPage().verifyNoPlaces();
+    }
+
+    @Then("the user should not see the city's related places")
+    public void verifyNoCityPlaces() {
         getDataPage().verifyNoPlaces();
     }
 
@@ -520,6 +530,11 @@ public class DataSteps extends AbstractSteps {
     @When("the user clicks on the area's places link in the navigation bar")
     public void clickOnAreaRelatedPlaces() {
         getDataPage().clickOnAreaRelatedPlaces();
+    }
+
+    @When("the user clicks on the city's places link in the navigation bar")
+    public void clickOnCityRelatedPlaces() {
+        getDataPage().clickOnCityRelatedPlaces();
     }
 
 
