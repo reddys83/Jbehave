@@ -209,6 +209,8 @@ public class DataPage extends AbstractPage {
     private By city_region_link_id =By.id("cityRegions");
     public By city_basic_info_link_id = By.id("cityBasicInfo");
     public By city_entity_link_id = By.id("cityPresences");
+    public By city_related_places_link_id = By.id("cityPlaces");
+
 
     @Override
     public String getPageUrl() {
@@ -962,6 +964,10 @@ public class DataPage extends AbstractPage {
 
     public void clickOnAreaRelatedPlaces() {
         attemptClick(area_related_places_link_id);
+    }
+
+    public void clickOnCityRelatedPlaces() {
+        attemptClick(city_related_places_link_id);
     }
 
     public void clickOnAreaRelatedPeople() {
