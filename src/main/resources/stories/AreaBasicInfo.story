@@ -27,6 +27,7 @@ And the user should see the area's identifiers as:
 |TYPE|VALUE|STATUS|
 |typeA|coolIdentifier 24601|Active|
 |typeB|ASDF|Inactive|
+|FIPS Code|Test Identifier|Inactive|
 
 And the user should see the area's time zones summary as +2 hour
 

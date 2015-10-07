@@ -24,7 +24,7 @@ Examples:
 |country|area|
 |USA|Illinois|
 
-Scenario: Verify the area which have no places
+Scenario: Verify the area which have no people.
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
