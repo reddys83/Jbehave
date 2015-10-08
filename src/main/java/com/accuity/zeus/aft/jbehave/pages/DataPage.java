@@ -148,7 +148,7 @@ public class DataPage extends AbstractPage {
     private By places_details_label_xpath = By.xpath("//li[contains(h2,'Places')]//table/thead//th[3]");
     private By country_places_type_xpath = By.xpath("//li[contains(h2,'Places')]//table/tbody//td[1]");
     private String selectedEntity="";
-    private By country_entity_link_id = By.id("countryPresence");
+    private By country_entity_link_id = By.id("countryPresences");
     private By entities_label_xpath = By.xpath("//li[contains(h1,'Entities')]//span");
     private By related_entities_label_xpath = By.xpath("//li[contains(h2,'Entities')]//h2");
     private By entities_type_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[1]");

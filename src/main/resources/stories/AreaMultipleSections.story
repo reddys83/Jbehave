@@ -50,6 +50,7 @@ When the user clicks on the area's demographics link in the navigation bar
 When the user clicks on the area's people link in the navigation bar
 When the user clicks on the area's places link in the navigation bar
 When the user clicks on the area's alternative regions link in the navigation bar
+When the user clicks on the area's entity link in the navigation bar
 Then the user should see the default area page and display all info
 
 Examples:

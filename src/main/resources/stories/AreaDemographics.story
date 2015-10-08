@@ -1,4 +1,4 @@
-Meta:@AreaDemographics
+Meta:@AreaDemographics @Area
 
 Narrative:
 In order to view the area basic info
