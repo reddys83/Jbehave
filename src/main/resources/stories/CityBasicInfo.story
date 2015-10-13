@@ -18,7 +18,7 @@ And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
-Then the user should see the basic info for selected city
+Then the user should be able to see the Basic Info for selected city
 
 And the user should see the city's names as:
 |TYPE|VALUE|

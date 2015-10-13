@@ -16,7 +16,7 @@ And the user enters the country <country> in the type-ahead box
 When the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 When the user clicks on the area basic info link in the navigation bar
-Then the user should see the basic info for selected area
+Then the user should be able to see the Basic Info for selected area
 
 And the user should see the area's names as:
 |TYPE|VALUE|
