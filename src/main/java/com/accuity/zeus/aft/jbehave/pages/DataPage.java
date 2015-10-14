@@ -597,6 +597,11 @@ public class DataPage extends AbstractPage {
     public void clickOnReplacedByCountry(String replacedByCountry) {
         selectedEntity = replacedByCountry;
         attemptClick(By.linkText(replacedByCountry));
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void verifyCountriesCurrencyUsage(ExamplesTable currencyCountries) {
