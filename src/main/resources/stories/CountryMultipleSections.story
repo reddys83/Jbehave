@@ -86,7 +86,7 @@ Then the user should not see the country regions section
 When the user clicks on the country holidays link in the navigation bar
 Then the user should not see the country holidays section
 When the user clicks on the country basic info link in the navigation bar
-Then the user should be able to see the Basic Info for the selected country
+Then the user should see the basic info for the selected country
 
 Examples:
 |country|
@@ -100,7 +100,7 @@ Then the user should see the country list box displayed
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 When the user clicks on the country basic info link in the navigation bar
-Then the user should be able to see the Basic Info for the selected country
+Then the user should see the basic info for the selected country
 When the user clicks on the country languages link in the navigation bar
 Then the user should see the country's languages list as English, Samoan
 When the user refreshes the page
