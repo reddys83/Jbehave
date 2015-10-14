@@ -44,8 +44,7 @@ public class DataPage extends AbstractPage {
     private By country_iso2_id = By.id("iso2-value");
     private By country_iso3_label_id = By.id("iso3");
     private By country_iso3_id = By.id("iso3-value");
-   // private By basic_info_xpath = By.xpath("//*[@id='content']/div/ul/li/h1/span");\
-    String data_heading_labels_xpath= ".//*[@id='content']/div/ul/li[contains(h1,'";
+    private By basic_info_xpath = By.xpath("//*[@id='content']/div/ul/li/h1/span");
     private By basic_info_names_label_xpath = By.xpath("//*[@id='content']//li[1]/h2[1]");
     private By basic_info_names_type_label_xpath = By.xpath("//*[@id='content']//table[1]/thead/tr/th[1]");
     private By basic_info_names_value_label_xpath = By.xpath("//*[@id='content']//table[1]/thead/tr/th[2]");
@@ -433,14 +432,14 @@ public class DataPage extends AbstractPage {
         assertEquals(iso3, getDriver().findElement(country_iso3_id).getText());
     }
 
-    public void verifyBasicInfo(String heading) {
+    public void verifyBasicInfo() {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
        // assertEquals(selectedCountry, getDriver().findElement(country_name_selected_xpath).getText());
-        assertEquals(heading.toUpperCase(), getDriver().findElement(By.xpath(data_heading_labels_xpath + heading + "')]//span")).getText());
+        assertEquals("BASIC INFO", getDriver().findElement(basic_info_xpath).getText());
     }
 
     public void verifyNames(ExamplesTable namesList) {
@@ -858,6 +857,10 @@ public class DataPage extends AbstractPage {
 
     public void verifyEntitiesLabel() {
         assertEquals("ENTITIES", getDriver().findElement(entities_label_xpath).getText());
+    }
+
+    public void verifyRegionsLabel() {
+        assertEquals("REGIONS", getDriver().findElement(regions_label_xpath));
     }
 
     public void verifyNoEntities() {

@@ -17,7 +17,7 @@ And the user enters the area <area> in the type-ahead box
 When the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 Then the user should see the default city page and display basic info
-Then the user should be able to see the Basic Info for selected city
+Then the user should see the basic info for selected area
 Examples:
 |country|area|city|
 |Angola|Cuanza Norte|Dondo|
@@ -33,12 +33,12 @@ And the user enters the area <area> in the type-ahead box
 When the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city all link in the navigation bar
-Then the user should be able to see the Basic Info for selected city
-Then the user should be able to see the Credit Rating for selected city
-Then the user should be able to see the Regions for selected city
-Then the user should be able to see the Places for selected city
-Then the user should be able to see the Entities for selected city
-Then the user should be able to see the People for selected city
+Then the user should see the basic info for selected city
+Then the user should see the credit rating for selected city
+Then the user should see the regions for selected city
+Then the user should see the places for selected city
+Then the user should see the entities for selected city
+Then the user should see the people for selected city
 
 Examples:
 |country|area|city|

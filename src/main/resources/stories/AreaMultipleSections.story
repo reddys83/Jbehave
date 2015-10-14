@@ -17,7 +17,7 @@ And the user enters the country <country> in the type-ahead box
 When the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 Then the user should see the default area page and display all info
-Then the user should be able to see the Basic Info for selected area
+Then the user should see the basic info for selected area
 And the user should see the demographics for selected area
 And the user should see the credit ratings for selected area
 And the user should see the places for selected area
@@ -25,7 +25,7 @@ And the user should see the people for selected area
 When the user clicks on the choose a sub-area option
 And the user enters the sub-area <subArea> in the type-ahead box
 Then the user should see the default sub-area page and display all info
-Then the user should be able to see the Basic Info for selected sub-area
+Then the user should see the basic info for selected sub-area
 And the user should see the credit ratings for selected sub-area
 And the user should see the demographics for selected sub-area
 And the user should see the places for selected sub-area

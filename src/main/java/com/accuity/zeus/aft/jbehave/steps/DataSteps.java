@@ -162,22 +162,18 @@ public class DataSteps extends AbstractSteps {
     }
 
 
-    @Then("the user should be able to see the $heading for the selected country")
-    public void verifyCountryBasicInfo(@Named("heading") String heading){
-        getDataPage().verifyBasicInfo(heading); }
+    @Then("the user should see the basic info for the selected country")
+    public void verifyCountryBasicInfo(){
+        getDataPage().verifyBasicInfo(); }
 
-    @Then("the user should be able to see the $heading for selected area")
-    public void verifyAreaBasicInfo(@Named("heading") String heading){
-            getDataPage().verifyBasicInfo(heading); }
+    @Then("the user should see the basic info for selected area")
+    @Alias("the user should see the basic info for selected city")
+    public void verifyAreaBasicInfo(){
+        getDataPage().verifyBasicInfo(); }
 
-    @Then("the user should be able to see the $heading for selected city")
-    public void verifyCityBasicInfo(@Named("heading") String heading) {
-        getDataPage().verifyBasicInfo(heading);
-    }
-
-    @Then("the user should be able to see the $heading for selected sub-area")
-    public void verifySubAreaBasicInfo(@Named("heading") String heading){
-        getDataPage().verifyBasicInfo(heading); }
+    @Then("the user should see the basic info for selected sub-area")
+    public void verifySubAreaBasicInfo(){
+        getDataPage().verifyBasicInfo(); }
 
     @Then("the user should see the list of country's names type and value as: $countryNames")
     public void verifyCountryNames(ExamplesTable countryNames){
@@ -697,6 +693,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the credit ratings for selected sub-area")
+    @Alias("the user should see the credit rating for selected city")
     public void verifyCreditRatingsForSubArea(){
         getDataPage().verifyCreditRatingsLabel();
     }
@@ -717,6 +714,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the places for selected sub-area")
+    @Alias("the user should see the places for selected city")
     public void verifyPlacesForSubArea() {
         getDataPage().verifyPlacesLabel();
     }
@@ -732,8 +730,17 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the people for selected sub-area")
+    @Alias("the user should see the people for selected city")
     public void verifyPeopleForSubArea() {
         getDataPage().verifyPeopleLabel();
+    }
+    @Then("the user should see the entities for selected city")
+    public void verifyEntitiesForCity() {
+        getDataPage().verifyEntitiesLabel();
+    }
+    @Then("the user should see the regions for selected city")
+    public void verifyRegionsForCity() {
+        getDataPage().verifyRegionsLabel();
     }
     
     @When("the user clicks on the city's credit rating link in the navigation bar")
