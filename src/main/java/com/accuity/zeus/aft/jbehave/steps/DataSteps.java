@@ -167,13 +167,13 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyBasicInfo(); }
 
     @Then("the user should see the basic info for selected area")
+    @Alias("the user should see the basic info for selected city")
     public void verifyAreaBasicInfo(){
-            getDataPage().verifyBasicInfo(); }
+        getDataPage().verifyBasicInfo(); }
 
-    @Then("the user should see the basic info for selected city")
-    public void verifyCityBasicInfo() {
-        getDataPage().verifyBasicInfo();
-    }
+    @Then("the user should see the basic info for selected sub-area")
+    public void verifySubAreaBasicInfo(){
+        getDataPage().verifyBasicInfo(); }
 
     @Then("the user should see the list of country's names type and value as: $countryNames")
     public void verifyCountryNames(ExamplesTable countryNames){
@@ -692,11 +692,8 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyDefaultToViewAll();
     }
 
-    @Then("the user should see the basic info for selected sub-area")
-    public void verifySubAreaBasicInfo(){
-        getDataPage().verifyBasicInfo(); }
-
     @Then("the user should see the credit ratings for selected sub-area")
+    @Alias("the user should see the credit rating for selected city")
     public void verifyCreditRatingsForSubArea(){
         getDataPage().verifyCreditRatingsLabel();
     }
@@ -717,6 +714,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the places for selected sub-area")
+    @Alias("the user should see the places for selected city")
     public void verifyPlacesForSubArea() {
         getDataPage().verifyPlacesLabel();
     }
@@ -732,8 +730,17 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the people for selected sub-area")
+    @Alias("the user should see the people for selected city")
     public void verifyPeopleForSubArea() {
         getDataPage().verifyPeopleLabel();
+    }
+    @Then("the user should see the entities for selected city")
+    public void verifyEntitiesForCity() {
+        getDataPage().verifyEntitiesLabel();
+    }
+    @Then("the user should see the regions for selected city")
+    public void verifyRegionsForCity() {
+        getDataPage().verifyRegionsLabel();
     }
     
     @When("the user clicks on the city's credit rating link in the navigation bar")
@@ -751,6 +758,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCreditRatings(cityCreditRatings);
     }
 
+    @Then("the user should see all is selected by default in the navigation bar")
+    public void verifyDefaultToViewAll() {
+        getDataPage().verifyDefaultToViewAll();
+    }
+
     @Then("the user should see the city's entity as: $cityEntities")
     public void verifyCityEntities(ExamplesTable cityEntities) {
         getDataPage().verifyEntities(cityEntities);
@@ -764,6 +776,16 @@ public class DataSteps extends AbstractSteps {
     @When("the user enters the city <city> in the type-ahead box")
     public void enterCityInTheTypeAheadBox(@Named("city") String city){
         getDataPage().enterCityInTheTypeAheadBox(city);
+    }
+
+    @When("the user clicks on the city all link in the navigation bar")
+    public void clicksOnAllTab() {
+        getDataPage().clicksOnAllTab();
+    }
+
+    @Then("the user should see the default city page and display basic info")
+    public void verifyDefaultBasicInfo() {
+        getDataPage().verifyDefaultBasicInfo();
     }
     
     @When("the user clicks on the city regions link in the navigation bar")

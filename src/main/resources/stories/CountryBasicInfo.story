@@ -39,7 +39,7 @@ And the user enters the country <country> in the type-ahead box
 Then the user should see the country iso2 as YU
 And the user should see the country iso3 as YUG
 When the user clicks on the country basic info link in the navigation bar
-Then the user should see the basic info for the selected country
+Then the user should be able to see the Basic Info for the selected country
 
 And the user should see the list of country's names type and value as:
 |TYPE|VALUE|
@@ -96,7 +96,7 @@ And the user enters the country <country> in the type-ahead box
 When the user clicks on the country basic info link in the navigation bar
 And the user clicks on the replaced by country <replacedByCountry> in the country basic info
 And the user clicks on the country basic info link in the navigation bar
-Then the user should see the basic info for the selected country
+Then the user should be able to see the Basic Info for the selected country
 
 Examples:
 |country|replacedByCountry|

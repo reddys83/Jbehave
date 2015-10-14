@@ -156,6 +156,7 @@ public class DataPage extends AbstractPage {
     private By entities_details_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[3]");
     private By country_entities_type_xpath = By.xpath("//li[contains(h2,'Entities')]//table/tbody//td[1]");
     private By select_all_link_xpath = By.xpath("//*[@id='all'][@class='selected']");
+    private By all_link_id = By.id("all");
     private By country_currencies_link_id = By.id("countryCurrencies");
     private By country_currencies_label_xpath = By.xpath("//li[contains(h1,'Currencies')]//span");
     private By country_currencies_table_headings_xpath = By.xpath("//li[contains(h1,'Currencies')]//table/thead//tr");
@@ -569,7 +570,7 @@ public class DataPage extends AbstractPage {
 
     public void verifyBasicInfoLabel(String label,String value) {
         assertEquals(label, getDriver().findElement(By.xpath(basic_info_label_xpath +label+"']")).getText());
-        assertEquals(value, getDriver().findElement(By.xpath(basic_info_label_value_xpath+label+"']/td")).getText());
+        assertEquals(value, getDriver().findElement(By.xpath(basic_info_label_value_xpath + label + "']/td")).getText());
     }
 
     public void verifyReplaceByLabelValues(String replacedBy) {
@@ -863,6 +864,10 @@ public class DataPage extends AbstractPage {
         assertEquals("ENTITIES", getDriver().findElement(entities_label_xpath).getText());
     }
 
+    public void verifyRegionsLabel() {
+        assertEquals("REGIONS", getDriver().findElement(regions_label_xpath));
+    }
+
     public void verifyNoEntities() {
         verifyEntitiesLabel();
         assertEquals("RELATED ENTITIES FOR " + selectedEntity.toUpperCase(),getDriver().findElement(related_entities_label_xpath).getText());
@@ -877,6 +882,14 @@ public class DataPage extends AbstractPage {
 
     public void verifyDefaultToViewAll() {
         assertTrue(getDriver().findElement(select_all_link_xpath).isDisplayed());
+    }
+
+    public void clicksOnAllTab() {
+        attemptClick(all_link_id);
+    }
+
+    public void verifyDefaultBasicInfo() {
+        assertTrue(getDriver().findElement(city_basic_info_link_id).isDisplayed());
     }
 
     public void refreshThePage() {
@@ -909,7 +922,8 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void clickOnCountryPeople() { attemptClick(country_people_link_id);
+    public void clickOnCountryPeople() {
+        attemptClick(country_people_link_id);
     }
 
     public void verifyPeople(ExamplesTable countryPeople) {
@@ -959,7 +973,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyAreaDropdownDisabled() {
-       assertFalse(getDriver().findElement(area_area_dropdown_xpath).isSelected());
+        assertFalse(getDriver().findElement(area_area_dropdown_xpath).isSelected());
     }
 
     public void verifySubareaDropdownDisabled() {
