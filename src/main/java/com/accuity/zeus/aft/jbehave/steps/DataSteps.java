@@ -141,14 +141,28 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user enters the country <country> in the type-ahead box")
-    public void enterCountryInTheTypeAheadBox(@Named("country") String country){
+     public void enterCountryInTheTypeAheadBox(@Named("country") String country){
         getDataPage().enterCountryInTheTypeAheadBox(country);
     }
 
+    @When("the user enters an another country $anotherCountry in the type-ahead box")
+    public void enterCountryName(@Named("anotherCountry") String anotherCountry) {
+        getDataPage().enterCountryInTheTypeAheadBox(anotherCountry);
+    }
+
     @When("the user enters the area <area> in the type-ahead box")
-    @Alias("the user enters the area $area in the type-ahead box")
     public void enterAreaInTypeAhead(@Named("area") String area){
         getDataPage().enterAreaInTypeAhead(area);
+    }
+
+    @When("the user enters an another area $anotherArea in the type-ahead box")
+    public void entersArea(@Named("anotherArea") String anotherArea){
+        getDataPage().enterAreaInTypeAhead(anotherArea);
+    }
+
+    @When("the user enters a another city $anotherCity in the type-ahead box")
+    public void entersCity(@Named("anotherCity") String anotherCity){
+        getDataPage().enterCityInTheTypeAheadBox(anotherCity);
     }
 
     @Then("the user should see the country iso2 as $iso2")
@@ -735,6 +749,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyPeopleLabel();
     }
     @Then("the user should see the entities for selected city")
+
     public void verifyEntitiesForCity() {
         getDataPage().verifyEntitiesLabel();
     }
