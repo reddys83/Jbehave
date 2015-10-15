@@ -287,7 +287,6 @@ public class DataPage extends AbstractPage {
         } else {
             assertEquals(unit, getTextOnPage(currency_unit_xpath));
         }
-
     }
 
     public void verifyCurrencyQuantity(String quantity) {
@@ -865,7 +864,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyRegionsLabel() {
-        assertEquals("REGIONS", getDriver().findElement(regions_label_xpath));
+        assertEquals("REGIONS", getDriver().findElement(regions_label_xpath).getText());
     }
 
     public void verifyNoEntities() {
