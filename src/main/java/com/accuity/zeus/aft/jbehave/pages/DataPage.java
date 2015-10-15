@@ -118,7 +118,7 @@ public class DataPage extends AbstractPage {
     private By country_payments_routing_code_code_types_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[2]//td");
     private By country_regions_link_id = By.id("countryRegions");
 
-    private By regions_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//span");
+    private By regions_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')] //span");
     private By alt_regions_for_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//h2");
     private By regions_type_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/th[1]");
     private By regions_value_label_xpath = By.xpath("//li[contains(h2,'Alternative Regions')]//tr/th[2]");
@@ -865,7 +865,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyRegionsLabel() {
-        assertEquals("REGIONS", getDriver().findElement(regions_label_xpath));
+        assertEquals("REGIONS", getDriver().findElement(regions_label_xpath).getText());
     }
 
     public void verifyNoEntities() {
