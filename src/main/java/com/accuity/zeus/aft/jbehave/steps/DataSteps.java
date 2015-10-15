@@ -160,7 +160,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterAreaInTypeAhead(anotherArea);
     }
 
-    @When("the user enters a another city $anotherCity in the type-ahead box")
+    @When("the user enters an another city $anotherCity in the type-ahead box")
     public void entersCity(@Named("anotherCity") String anotherCity){
         getDataPage().enterCityInTheTypeAheadBox(anotherCity);
     }

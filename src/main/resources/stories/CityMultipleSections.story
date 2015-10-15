@@ -147,7 +147,7 @@ And the user enters an another country Egypt in the type-ahead box
 And the user clicks on the choose an area option
 And the user enters an another area Giza in the type-ahead box
 And the user clicks on the choose a city option
-And the user enters a another city Dokki in the type-ahead box
+And the user enters an another city Dokki in the type-ahead box
 Then the user should see the people for selected city
 And the user should see the entities for selected city
 
