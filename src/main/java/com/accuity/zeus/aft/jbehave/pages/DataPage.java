@@ -287,7 +287,6 @@ public class DataPage extends AbstractPage {
         } else {
             assertEquals(unit, getTextOnPage(currency_unit_xpath));
         }
-
     }
 
     public void verifyCurrencyQuantity(String quantity) {
