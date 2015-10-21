@@ -170,8 +170,8 @@ public class DataPage extends AbstractPage {
     private By legalEntity_telecoms_rank_xpath = By.xpath(".//*[@id='content']//table[3]/tbody//td[2]");
     private By legalEntity_telecoms_info_xpath = By.xpath(".//*[@id='content']//table[3]/tbody//td[3]");
     private By legalEntity_telecoms_value_xpath = By.xpath(".//*[@id='content']//table[3]/tbody//td[4]");
-
-
+    private By legalEntity_basic_info_corporate_statement_label_xpath = By.xpath(".//*[@id='content']//dt");
+    private By legalEntity_basic_info_corporate_statement_xpath = By.xpath(".//*[@id='content']//dd");
     private By related_entities_label_xpath = By.xpath("//li[contains(h2,'Entities')]//h2");
     private By entities_type_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[1]");
     private By entities_entity_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[2]");
@@ -637,7 +637,12 @@ public class DataPage extends AbstractPage {
 
     public void verifyBasicInfoLabel(String label,String value) {
         assertEquals(label, getDriver().findElement(By.xpath(basic_info_label_xpath +label+"']")).getText());
-        assertEquals(value, getDriver().findElement(By.xpath(basic_info_label_value_xpath + label + "']/td")).getText().replace("\n",""));
+        assertEquals(value, getDriver().findElement(By.xpath(basic_info_label_value_xpath + label + "']/td")).getText().replace("\n", ""));
+    }
+
+    public void verifyCorporateStatement(String corporateStatement) {
+        assertEquals("Corporate Statement", getDriver().findElement(legalEntity_basic_info_corporate_statement_label_xpath).getText());
+        assertEquals(corporateStatement, getDriver().findElement(legalEntity_basic_info_corporate_statement_xpath).getText());
     }
 
     public void verifyReplaceByLabelValues(String replacedBy) {

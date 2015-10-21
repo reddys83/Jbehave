@@ -65,6 +65,7 @@ And the user should see the Add Info of a legalEntity as Ultimate Parent Company
 And the user should see the Country of Operations of a legalEntity as Norway
 And the user should see the Head Office of a legalEntity as Dronning Eufemias gate 30Oslo, Oslo, 0191Norway(View Head Office)
 
+And the user should see the legalEntity corporate statement as Ultimate Parent Company: The Bank of Nova Scotia 1709 Hollis Street, Halifax, NS B3J 3B7, Canada
 
 Examples:
 |institutionName|optionType|headOfficeAddresss|fid|tfpid|

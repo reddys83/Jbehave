@@ -354,6 +354,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyBasicInfoLabel(label, value);
     }
 
+    @Then("the user should see the legalEntity corporate statement as $corporateStatement")
+    public void verifyCorporateStatement(@Named("corporateStatement") String corporateStatement) {
+        getDataPage().verifyCorporateStatement(corporateStatement);
+    }
+
     @Then("the user should see the $label of a city as $value")
     public void verifyCityBasicInfo(@Named("label") String label,@Named("value") String value) {
         getDataPage().verifyBasicInfoLabel(label, value);
@@ -844,7 +849,7 @@ public class DataSteps extends AbstractSteps {
     public void verifyLegalEntityTelecoms(ExamplesTable legalEntitiesTelecoms){
         getDataPage().verifyLegalEntitiesTelecoms(legalEntitiesTelecoms);
     }
-    
+
     @Then("the user should not see the city's credit ratings")
     public void verifyNoCityCreditRatings(){
         getDataPage().verifyNoCreditRatings();
