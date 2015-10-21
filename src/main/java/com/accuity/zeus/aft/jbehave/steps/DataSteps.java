@@ -149,14 +149,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCountryInTheTypeAheadBox(country);
     }
 
-    @When("the user enters the <institutionName> in the typeahead")
-    public void enterLegalEntityInTypeahead(@Named("institutionName") String institution) {
-        getDataPage().enterLegalEntityInTypeAheadBox(institution);
+    @When("the user enters the <entity> in the typeahead")
+    public void enterLegalEntityInTypeahead(@Named("entity") String entity) {
+        getDataPage().enterLegalEntityInTypeAheadBox(entity);
     }
 
-    @When("the user selects the <optionType> from the dropdown")
-    public void enterSearchByOption(@Named("optionType") String optionType) {
-        getDataPage().enterSearchByOption(optionType);
+    @When("the user selects the <searchBy> from the dropdown")
+    public void enterSearchByOption(@Named("searchBy") String searchBy) {
+        getDataPage().enterSearchByOption(searchBy);
     }
 
     @When("the user clicks on the search button")
@@ -174,7 +174,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCountryInTheTypeAheadBox(anotherCountry);
     }
 
-    @When("the user clicks on the search results of fid as $fidValue")
+    @When("the user clicks on the search results card with fid $fidValue")
     public void clicksOnSearchResults(@Named("fidValue") String fidValue) {
         getDataPage().clicksOnSearchResults(fidValue);
     }
@@ -819,6 +819,10 @@ public class DataSteps extends AbstractSteps {
     public void clickOnCityCreditRatings(){
         getDataPage().clickOnCityCreditRatings();
     }
+    @When("the user clicks on the legalEntity credit rating link in the navigation bar")
+    public void clickOnLegalEntityCreditRating() {
+        getDataPage().clickOnLegalEntityCreditRating();
+    }
 
     @When("the user clicks on the city's entity link in the navigation bar")
     public void clickOnCityEntity() {
@@ -826,8 +830,9 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the city's credit ratings as: $cityCreditRatings")
-    public void verifyCityCreditRatings(ExamplesTable cityCreditRatings) {
-        getDataPage().verifyCreditRatings(cityCreditRatings);
+    @Alias("the user should see the legalEntity credit ratings as: $legalEntityCreditRatings")
+    public void verifyCityCreditRatings(ExamplesTable CreditRatings) {
+        getDataPage().verifyCreditRatings(CreditRatings);
     }
 
     @Then("the user should see all is selected by default in the navigation bar")
@@ -851,6 +856,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should not see the city's credit ratings")
+    @Alias("the user should not see the legalEntity credit ratings")
     public void verifyNoCityCreditRatings(){
         getDataPage().verifyNoCreditRatings();
     }

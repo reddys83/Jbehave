@@ -204,6 +204,7 @@ public class DataPage extends AbstractPage {
     private By area_credit_ratings_link_id = By.id("areaCreditRating");
     private By area_regions_link_id = By.id("areaRegions");
     private By city_credit_ratings_link_id = By.id("cityCreditRating");
+    private By legalEntity_credit_rating_link_id = By.id("legalEntityCreditRating");
     private By city_people_link_id = By.id("cityPeople");
     private By area_entities_link_id = By.id("areaPresences");
 
@@ -454,14 +455,14 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void enterLegalEntityInTypeAheadBox(String institution) {
-        selectedEntity = institution;
-        getDriver().findElement(legalEntity_type_ahead_xpath).sendKeys(institution);
+    public void enterLegalEntityInTypeAheadBox(String entity) {
+        selectedEntity = entity;
+        getDriver().findElement(legalEntity_type_ahead_xpath).sendKeys(entity);
         getDriver().findElement(legalEntity_type_ahead_xpath).sendKeys(Keys.RETURN);
     }
 
-    public void enterSearchByOption(String optionType) {
-        getDriver().findElement(legalEntity_search_option_type_dropdown_id).sendKeys(optionType);
+    public void enterSearchByOption(String searchBy) {
+        getDriver().findElement(legalEntity_search_option_type_dropdown_id).sendKeys(searchBy);
 
     }
 
@@ -1193,6 +1194,10 @@ public class DataPage extends AbstractPage {
     
     public void clickOnCityCreditRatings() {
         attemptClick(city_credit_ratings_link_id);
+    }
+
+    public void clickOnLegalEntityCreditRating() {
+        attemptClick(legalEntity_credit_rating_link_id);
     }
 
     public void clickOnCityEntity() {

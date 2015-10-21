@@ -1,4 +1,4 @@
-Meta:@LegalEntityBasicInfo
+Meta:@LegalEntityBasicInfo @LegalEntity
 
 Narrative:
 In order to view and edit the legalEntity
@@ -11,11 +11,11 @@ Scenario: Verify the basic info for legalEntity
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legalEntity tab in the data area
-And the user enters the <institutionName> in the typeahead
-And the user selects the <optionType> from the dropdown
+And the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
-When the user clicks on the search results of fid as 4537
+When the user clicks on the search results card with fid 4537
 
 Then the user should see the legalEntity header with <institutionName>, <headOfficeAddresss>, <fid> and <tfpid>
 
@@ -68,7 +68,7 @@ And the user should see the Head Office of a legalEntity as Dronning Eufemias ga
 And the user should see the legalEntity corporate statement as Ultimate Parent Company: The Bank of Nova Scotia 1709 Hollis Street, Halifax, NS B3J 3B7, Canada
 
 Examples:
-|institutionName|optionType|headOfficeAddresss|fid|tfpid|
+|entity|searchBy|headOfficeAddresss|fid|tfpid|
 |DNB Bank ASA|Name|Oslo, Oslo, Norway|4537|96664340|
 
 
