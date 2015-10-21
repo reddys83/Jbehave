@@ -71,7 +71,7 @@ Then the user should see the credit ratings for selected area
 When the user clicks on the area's demographics link in the navigation bar
 Then the user should see the demographics for selected area
 When the user clicks on the choose an area option
-When the user enters the area Alaska in the type-ahead box
+And the user enters an another area Alaska in the type-ahead box
 Then the user should see the credit ratings for selected area
 Then the user should see the demographics for selected area
 
