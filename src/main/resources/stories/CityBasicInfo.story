@@ -1,4 +1,4 @@
-Meta:@cityBasicInfo
+Meta:@CityBasicInfo @City
 
 Narrative:
 In order to view and edit the cities basic info
