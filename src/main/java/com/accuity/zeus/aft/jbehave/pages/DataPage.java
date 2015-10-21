@@ -19,6 +19,8 @@ public class DataPage extends AbstractPage {
     private By currency_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li");
     private By country_tab_xpath=By.xpath("//*[@id='data-navbar']/ul/li[2]");
     private By area_tab_id=By.id("area-nav");
+    private By currency_label_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
+    private By currency_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private By legalEntity_tab_id = By.id("legalEntity-nav");
     private By currency_label_xpath = By.xpath("//*[@id='selection']/dl/dt[1]");
     private By currency_list_xpath = By.xpath("//*[@class='chosen-results']/li");
@@ -97,7 +99,7 @@ public class DataPage extends AbstractPage {
     private String basic_info_label_xpath ="//*[@id='content']//li[2]/table/tbody/tr/th[text()='";
     private String basic_info_label_value_xpath = ".//*[@id='content']//table[@class='vertical']/tbody/tr[th='";
 
-    private By currency_usage_label_xpath = By.xpath("//*[@id='content']/div/dl[2]/dt");
+    private By currency_usage_label_xpath = By.xpath("//*[@id='content']/div/h3");
     private By currency_usage_xpath = By.xpath("//*[@id='content']/div/dl[2]/dd/a");
     private By country_holidays_link_id = By.id("countryHolidays");
     private By country_languages_link_id = By.id("countryLanguages");
@@ -240,6 +242,7 @@ public class DataPage extends AbstractPage {
     private By legalEntity_searchResults_headOffice_address_xpath=By.xpath(".//*[@id='legalEntityContentSummary']/header//p");
     private By legalEntity_searchResults_header_fid_xpath= By.xpath(".//*[@id='legalEntityContentSummary']/header/table//tr[th='FID']/td");
     private By legalEntity_searchResults_header_tfpid_xpath = By.xpath(".//*[@id='legalEntityContentSummary']/header/table//tr[th='TFPID']/td");
+
 
     @Override
     public String getPageUrl() {
@@ -441,6 +444,11 @@ public class DataPage extends AbstractPage {
 
     public void enterCountryInTheTypeAheadBox(String country) {
         selectedEntity = country;
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         getDriver().findElement(country_type_ahead_xpath).sendKeys(country);
         getDriver().findElement(country_type_ahead_xpath).sendKeys(Keys.RETURN);
     }
@@ -476,6 +484,11 @@ public class DataPage extends AbstractPage {
 
     public void enterAreaInTypeAhead(String area) {
         selectedEntity = area;
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(area);
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
     }
@@ -517,6 +530,7 @@ public class DataPage extends AbstractPage {
             assertEquals(namesList.getRow(i).get(namesList.getHeaders().get(0)), actNameTypes.get(i).getText());
             assertEquals(namesList.getRow(i).get(namesList.getHeaders().get(1)), actNameValue.get(i).getText());
         }
+
     }
 
     public void clickOnBasicInfoInNavigationBar() {
@@ -1206,6 +1220,11 @@ public class DataPage extends AbstractPage {
 
     public void enterCityInTheTypeAheadBox(String city) {
         selectedEntity = city;
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         getDriver().findElement(city_type_ahead_xpath).sendKeys(city);
         getDriver().findElement(city_type_ahead_xpath).sendKeys(Keys.RETURN);
    }
