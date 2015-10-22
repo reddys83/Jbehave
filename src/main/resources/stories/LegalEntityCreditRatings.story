@@ -20,12 +20,12 @@ And the user clicks on the legalEntity credit rating link in the navigation bar
 
 Then the user should see the legalEntity credit ratings as:
 |AGENCY|TYPE|VALUE|APPLIED DATE|CONFIRMED DATE|
-|Fitch|Long Term Rating|A+|2015-03-23||
-|Fitch|Short Term Rating|F1+|2015-03-23||
+|Fitch|Long Term Rating|A+|23 Mar 2015|22 Oct 2015|
+|Fitch|Short Term Rating|F1+|23 Mar 2015||
 
 Examples:
 |entity|searchBy|
-|DNB Bank ASA|Name|
+|Kreissparkasse Göppingen|Name|
 
 Scenario: Verify no legalEntity credit rating.
 Given a user is on the search page
@@ -35,11 +35,11 @@ And the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
-When the user clicks on the search results card with fid 3125
+When the user clicks on the search results card with fid 91832
 And the user clicks on the legalEntity credit rating link in the navigation bar
 
 Then the user should not see the legalEntity credit ratings
 
 Examples:
 |entity|searchBy|
-|DNB Bank ASA|Name|
+|Associated Commercial Finance Inc|Name|
