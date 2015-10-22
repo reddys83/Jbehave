@@ -186,6 +186,7 @@ public class DataPage extends AbstractPage {
     private By area_credit_ratings_link_id = By.id("areaCreditRating");
     private By area_regions_link_id = By.id("areaRegions");
     private By city_credit_ratings_link_id = By.id("cityCreditRating");
+    private By legalEntity_credit_rating_link_id = By.id("legalEntityCreditRating");
     private By city_people_link_id = By.id("cityPeople");
     private By area_entities_link_id = By.id("areaPresences");
 
@@ -1121,6 +1122,10 @@ public class DataPage extends AbstractPage {
     
     public void clickOnCityCreditRatings() {
         attemptClick(city_credit_ratings_link_id);
+    }
+
+    public void clickOnLegalEntityCreditRating() {
+        attemptClick(legalEntity_credit_rating_link_id);
     }
 
     public void clickOnCityEntity() {
