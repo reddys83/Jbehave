@@ -66,4 +66,19 @@ public class LegalEntitySteps extends AbstractSteps{
     public void verifyNoLegalEntityFinancialServices(){
         getLegalEntityPage().verifyNoLegalEntityFinancialServices();
     }
+
+    @When("the user clicks on the legal entity identifier link in the navigation bar")
+    public void clickOnLegalEntityIdentifierLink(){
+        getLegalEntityPage().clickOnLegalEntityIdentifierLink();
+    }
+
+    @Then("the user should see the legal entity's identifiers as: $legalEntityIdentifiers")
+    public void verifyLegalEntityIdentifiers(ExamplesTable legalEntityIdentifiers){
+        getDataPage().verifyIdentifiers(legalEntityIdentifiers);
+    }
+
+    @Then("the user should not see the legal entity's identifiers")
+    public void verifyNoLegalEntityIdentifiers(){
+        getDataPage().verifyNoIdentifiers();
+    }
 }

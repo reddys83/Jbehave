@@ -6,7 +6,6 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-350 - User can view legal entity's basic info
 
-
 Scenario: Verify the basic info for legalEntity
 Given a user is on the search page
 When the user clicks on the data tab in the search page

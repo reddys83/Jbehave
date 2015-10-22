@@ -38,6 +38,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_financial_services_details_label_xpath = By.xpath("//*[@id='content']//li[3]/ul/li[2]//tr/th[2]");
     private By legalEntity_services_label_xpath = By.xpath("//*[@id='content']/div/ul/li[3]/h1/span");
     private By legalEntity_search_msg_xpath = By.xpath("//*[@id='editHeader']/div/p");
+    private By legal_entity_identifiers_link_id = By.id("legalEntityIdentifiers");
 
     public LegalEntityPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -154,5 +155,9 @@ public class LegalEntityPage extends AbstractPage {
         } catch (org.openqa.selenium.NoSuchElementException e) {
 
         }
+    }
+
+    public void clickOnLegalEntityIdentifierLink() {
+        attemptClick(legal_entity_identifiers_link_id);
     }
 }
