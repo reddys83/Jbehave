@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.result;
 
 import com.accuity.zeus.aft.jbehave.pages.AbstractPage;
+import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,36 +13,22 @@ import java.util.List;
 public class ResultsPage extends AbstractPage {
 
 	private static final String PAGE_URI = "/#results";
-
 	private String entity;
-
 	private String field;
-
 	private String value;
-
     public static String lastNavigationPage;
-
 	private List<ResultsListItem> resultsList = null;
-
     private String pagesNavigationListElements = ".//*[@id='pages-navigation-list']";
-
 	private By numResultsValueSelector = By.xpath("//*[@id='content']/div //header/p/span[@class='counter']");
-
 	private By resultsSelector = By.xpath(".//*[@id='search-results-list']/section/ol/li");
-
 	private By no_results_text_css = By.cssSelector(".subheader>p");
-
 	private By paginationInfoLocator = By.xpath(".//*[@id='pagination-info']");
-
     private By pagesNavigationListLocator = By.xpath(pagesNavigationListElements + "/li");
-
     private By currentSearchResultsPage = By.xpath("//span[contains(@class,'pages-navigation-link-current')]");
-
     private By nextPageLinkLocator = By.xpath("//span[contains(@class,'pages-navigation-link-next')]");
-
     private By previousPageLinkLocator = By.xpath("//span[contains(@class,' pages-navigation-link-previous')]");
-
 	private By fidLocator = By.xpath(".//*[@id='search-results-items']/li/dl[1]/dd");
+	private By legalEntity_search_results_xpath=By.xpath(".//*[@id='search-results-items']/li");
 
 	public ResultsPage(WebDriver driver, String urlPrefix) {
 		super(driver, urlPrefix);
@@ -155,8 +142,9 @@ public class ResultsPage extends AbstractPage {
         return getDriver().findElement(previousPageLinkLocator);
     }
 
-    public void clickOnResultCard(WebElement element) {
+    public LegalEntityPage clickOnResultCard(WebElement element) {
         element.click();
+		return new LegalEntityPage(getDriver(), getUrlPrefix());
     }
 
 	public WebElement getFidElements(String fid) {
@@ -168,4 +156,9 @@ public class ResultsPage extends AbstractPage {
 		}
 		return null;
 	}
+
+	public void verifySearchResults() {
+		getDriver().findElement(legalEntity_search_results_xpath).isDisplayed();
+	}
+
 }

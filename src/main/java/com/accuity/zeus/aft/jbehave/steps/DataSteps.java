@@ -24,9 +24,10 @@ public class DataSteps extends AbstractSteps {
     public void clickOnAreaTab() {
         getDataPage().clickOnAreaTab();
     }
-    @When("the user clicks on the legalEntity tab in the data area")
+
+    @When("the user clicks on the legal entity tab in the data area")
     public void userClicksOnLegalEntityTab() {
-        getDataPage().clickOnLegalEntityTab();
+        setLegalEntityPage(getDataPage().clickOnLegalEntityTab());
     }
 
     @When("the user clicks on the choose a currency option")
@@ -149,37 +150,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCountryInTheTypeAheadBox(country);
     }
 
-    @When("the user enters the <entity> in the typeahead")
-    public void enterLegalEntityInTypeahead(@Named("entity") String entity) {
-        getDataPage().enterLegalEntityInTypeAheadBox(entity);
-    }
-
-    @When("the user selects the <searchBy> from the dropdown")
-    public void enterSearchByOption(@Named("searchBy") String searchBy) {
-        getDataPage().enterSearchByOption(searchBy);
-    }
-
-    @When("the user clicks on the search button")
-    public void clickOnSearchIcon() {
-        getDataPage().clicksOnSearchIcon();
-    }
-
-    @Then("the user should see the search results for the institution")
-    public void verifySearchResults() {
-        getDataPage().verifySearchResults();
-    }
-
     @When("the user enters an another country $anotherCountry in the type-ahead box")
     public void enterCountryName(@Named("anotherCountry") String anotherCountry) {
         getDataPage().enterCountryInTheTypeAheadBox(anotherCountry);
     }
 
-    @When("the user clicks on the search results card with fid $fidValue")
-    public void clicksOnSearchResults(@Named("fidValue") String fidValue) {
-        getDataPage().clicksOnSearchResults(fidValue);
-    }
-
-    @Then("the user should see the legalEntity header with institution name, head office addresss, fid and tfpid")
 
     @When("the user enters the area <area> in the type-ahead box")
     public void enterAreaInTypeAhead(@Named("area") String area){
@@ -211,10 +186,6 @@ public class DataSteps extends AbstractSteps {
     public void verifyCountryBasicInfo(){
         getDataPage().verifyBasicInfo(); }
 
-    @Then("the user should see the basic info for selected legalEntity")
-    public void verifyLegalEntityBasicInfo(){
-        getDataPage().verifyBasicInfo();
-    }
 
     @Then("the user should see the basic info for selected area")
     @Alias("the user should see the basic info for selected city")
@@ -232,17 +203,9 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the area's names as: $Names")
-    @Alias("the user should see the legalEntity's names as: $Names")
+    @Alias("the user should see the legal entity's names as: $Names")
     public void verifyAreaNames(ExamplesTable Names){
         getDataPage().verifyNames(Names);
-    }
-
-    @Then("the user should see the legalEntity header with <institutionName>, <headOfficeAddresss>, <fid> and <tfpid>")
-    public void verifyLegalEntityHeader(@Named("institutionName") String institutionName,
-                                        @Named("headOfficeAddresss") String headOfficeAddresss,
-                                        @Named("fid") String fid,
-                                        @Named("tfpid") String tfpid){
-        getDataPage().verifyLegalEntityHeader(institutionName, headOfficeAddresss, fid, tfpid);
     }
 
     @When("the user clicks on the legalEntity basic info link in the navigation bar")
@@ -352,11 +315,6 @@ public class DataSteps extends AbstractSteps {
     @Alias("the user should see the $label of a legalEntity as $value")
     public void verifyAreaBasicInfo(@Named("label") String label,@Named("value") String value){
         getDataPage().verifyBasicInfoLabel(label, value);
-    }
-
-    @Then("the user should see the legalEntity corporate statement as $corporateStatement")
-    public void verifyCorporateStatement(@Named("corporateStatement") String corporateStatement) {
-        getDataPage().verifyCorporateStatement(corporateStatement);
     }
 
     @Then("the user should see the $label of a city as $value")
@@ -845,15 +803,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyEntities(cityEntities);
     }
 
-    @Then("the user should see the legalEntity's entity types as: $legalEntityEntities")
-    public void verifyLegalEntityEntities(ExamplesTable legalEntities) {
-        getDataPage().verifyLegalEntityEntities(legalEntities);
-    }
-
-    @Then("the user should see the legalEntity's telecoms as: $legalEntityTelecoms")
-    public void verifyLegalEntityTelecoms(ExamplesTable legalEntitiesTelecoms){
-        getDataPage().verifyLegalEntitiesTelecoms(legalEntitiesTelecoms);
-    }
 
     @Then("the user should not see the city's credit ratings")
     @Alias("the user should not see the legalEntity credit ratings")
@@ -935,5 +884,6 @@ public class DataSteps extends AbstractSteps {
     public void verifyNoSubAreaEntities () {
         getDataPage().verifyNoEntities();
     }
+
 }
 

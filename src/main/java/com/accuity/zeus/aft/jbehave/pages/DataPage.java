@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 
 import com.accuity.zeus.aft.commons.DataManagementAppVals;
+import com.accuity.zeus.aft.result.ResultsPage;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -22,8 +23,6 @@ public class DataPage extends AbstractPage {
     private By currency_label_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
     private By currency_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private By legalEntity_tab_id = By.id("legalEntity-nav");
-    private By currency_label_xpath = By.xpath("//*[@id='selection']/dl/dt[1]");
-    private By currency_list_xpath = By.xpath("//*[@class='chosen-results']/li");
     private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
     private By no_results_match_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
@@ -43,10 +42,6 @@ public class DataPage extends AbstractPage {
     private By country_listBox_xpath= By.xpath(".//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By country_listBox_value_xpath=By.xpath(".//*[@id='selection0'] //*[@class='chosen-drop']//ul");
     private By country_type_ahead_xpath=By.xpath(".//*[@id='selection0'] //*[@id='entitySelect_chosen']//input");
-    private By legalEntity_type_ahead_xpath = By.xpath(".//*[@id='main-header']//input[2]");
-    private By legalEntity_search_option_type_dropdown_id= By.id("search-type");
-    private By legalEntity_search_button_id=By.id("search-button");
-    private By legalEntity_search_results_xpath=By.xpath(".//*[@id='search-results-items']/li");
     private String currencySearchString = null;
     private By country_iso2_label_id = By.id("iso2");
     private By country_iso2_id = By.id("iso2-value");
@@ -159,21 +154,6 @@ public class DataPage extends AbstractPage {
     private String selectedEntity="";
     private By country_entity_link_id = By.id("countryPresences");
     private By entities_label_xpath = By.xpath("//li[contains(h1,'Entities')]//span");
-    private By legalEntity_entityType_label_xpath = By.xpath(".//*[@id='content']//h2[2]");
-    private By legalEntity_entityType_type_label_xpath=By.xpath(".//*[@id='content']//table[2]//th");
-    private By legalEntity_entityType_list_xpath = By.xpath(".//*[@id='content']//table[2]//td");
-    private By legalEntity_telecoms_label_xpath = By.xpath(".//*[@id='content']//h2[3]");
-    private By legalEntity_telecoms_type_label_xpath = By.xpath(".//*[@id='content']//table[3]/thead//th[text()='Type']");
-    private By legalEntity_telecoms_rank_label_xpath = By.xpath(".//*[@id='content']//table[3]/thead//th[text()='Rank']");
-    private By legalEntity_telecoms_info_label_xpath = By.xpath(".//*[@id='content']//table[3]/thead//th[text()='Info']");
-    private By legalEntity_telecoms_value_label_xpath = By.xpath(".//*[@id='content']//table[3]/thead//th[text()='Value']");
-   // private By legalEntity_telecoms_list_xpath =By.xpath(".//*[@id='content']//table[3]/tbody//td");
-    private By legalEntity_telecoms_type_xpath= By.xpath(".//*[@id='content']//table[3]/tbody//td[1]");
-    private By legalEntity_telecoms_rank_xpath = By.xpath(".//*[@id='content']//table[3]/tbody//td[2]");
-    private By legalEntity_telecoms_info_xpath = By.xpath(".//*[@id='content']//table[3]/tbody//td[3]");
-    private By legalEntity_telecoms_value_xpath = By.xpath(".//*[@id='content']//table[3]/tbody//td[4]");
-    private By legalEntity_basic_info_corporate_statement_label_xpath = By.xpath(".//*[@id='content']//dt");
-    private By legalEntity_basic_info_corporate_statement_xpath = By.xpath(".//*[@id='content']//dd");
     private By related_entities_label_xpath = By.xpath("//li[contains(h2,'Entities')]//h2");
     private By entities_type_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[1]");
     private By entities_entity_label_xpath = By.xpath("//li[contains(h2,'Entities')]//table/thead//th[2]");
@@ -238,11 +218,6 @@ public class DataPage extends AbstractPage {
     public By city_entity_link_id = By.id("cityPresences");
     private By city_basic_info_link_id = By.id("cityBasicInfo");
     private By city_related_places_link_id = By.id("cityPlaces");
-    private By legalEntity_searchResults_institution_xpath = By.xpath(".//*[@id='legalEntityContentSummary']/header//h1");
-    private By legalEntity_searchResults_headOffice_address_xpath=By.xpath(".//*[@id='legalEntityContentSummary']/header//p");
-    private By legalEntity_searchResults_header_fid_xpath= By.xpath(".//*[@id='legalEntityContentSummary']/header/table//tr[th='FID']/td");
-    private By legalEntity_searchResults_header_tfpid_xpath = By.xpath(".//*[@id='legalEntityContentSummary']/header/table//tr[th='TFPID']/td");
-
 
     @Override
     public String getPageUrl() {
@@ -335,8 +310,9 @@ public class DataPage extends AbstractPage {
         attemptClick(area_tab_id);
     }
 
-    public void clickOnLegalEntityTab() {
+    public LegalEntityPage clickOnLegalEntityTab() {
         attemptClick(legalEntity_tab_id);
+        return new LegalEntityPage(getDriver(), getUrlPrefix());
     }
 
     public void verifyCountryListBoxIsDisplayed()   {
@@ -453,7 +429,7 @@ public class DataPage extends AbstractPage {
         getDriver().findElement(country_type_ahead_xpath).sendKeys(Keys.RETURN);
     }
 
-    public void clicksOnSearchResults(String fidValue) {
+    public LegalEntityPage clicksOnSearchResults(String fidValue) {
         try {
             attemptClick(By.xpath(legalEntity_search_results_byFid_xpath_string + fidValue + "']"));
             Thread.sleep(1000L);
@@ -461,25 +437,7 @@ public class DataPage extends AbstractPage {
         catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public void enterLegalEntityInTypeAheadBox(String entity) {
-        selectedEntity = entity;
-        getDriver().findElement(legalEntity_type_ahead_xpath).sendKeys(entity);
-        getDriver().findElement(legalEntity_type_ahead_xpath).sendKeys(Keys.RETURN);
-    }
-
-    public void enterSearchByOption(String searchBy) {
-        getDriver().findElement(legalEntity_search_option_type_dropdown_id).sendKeys(searchBy);
-
-    }
-
-    public void clicksOnSearchIcon() {
-        attemptClick(legalEntity_search_button_id);
-    }
-
-    public void verifySearchResults() {
-        getDriver().findElement(legalEntity_search_results_xpath).isDisplayed();
+        return new LegalEntityPage(getDriver(), getUrlPrefix());
     }
 
     public void enterAreaInTypeAhead(String area) {
@@ -511,13 +469,6 @@ public class DataPage extends AbstractPage {
         }
        // assertEquals(selectedCountry, getDriver().findElement(country_name_selected_xpath).getText());
         assertEquals("BASIC INFO", getDriver().findElement(basic_info_xpath).getText());
-    }
-
-    public void verifyLegalEntityHeader(String institutionName, String headOfficeAddresss, String fid, String tfpid) {
-        assertEquals(institutionName,getDriver().findElement(legalEntity_searchResults_institution_xpath).getText());
-        assertEquals(headOfficeAddresss, getDriver().findElement(legalEntity_searchResults_headOffice_address_xpath).getText());
-        assertEquals(fid,getDriver().findElement(legalEntity_searchResults_header_fid_xpath).getText());
-        assertEquals(tfpid,getDriver().findElement(legalEntity_searchResults_header_tfpid_xpath).getText());
     }
 
     public void verifyNames(ExamplesTable namesList) {
@@ -653,11 +604,6 @@ public class DataPage extends AbstractPage {
     public void verifyBasicInfoLabel(String label,String value) {
         assertEquals(label, getDriver().findElement(By.xpath(basic_info_label_xpath +label+"']")).getText());
         assertEquals(value, getDriver().findElement(By.xpath(basic_info_label_value_xpath + label + "']/td")).getText().replace("\n", ""));
-    }
-
-    public void verifyCorporateStatement(String corporateStatement) {
-        assertEquals("Corporate Statement", getDriver().findElement(legalEntity_basic_info_corporate_statement_label_xpath).getText());
-        assertEquals(corporateStatement, getDriver().findElement(legalEntity_basic_info_corporate_statement_xpath).getText());
     }
 
     public void verifyReplaceByLabelValues(String replacedBy) {
@@ -946,38 +892,6 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyLegalEntityEntities(ExamplesTable legalEntities)
-    {
-        assertEquals("ENTITY TYPES", getDriver().findElement(legalEntity_entityType_label_xpath).getText());
-        assertEquals("TYPE", getDriver().findElement(legalEntity_entityType_type_label_xpath).getText());
-        List<WebElement> legalEntityEntityList = getDriver().findElements(legalEntity_entityType_list_xpath);
-        assertTrue(legalEntities.getRowCount() == legalEntityEntityList.size());
-        for (int i=0;i<legalEntities.getRowCount();i++)
-        {
-            assertEquals(legalEntities.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(), legalEntityEntityList.get(i).getText().replace(",", "").trim());
-        }
-    }
-
-    public void verifyLegalEntitiesTelecoms(ExamplesTable legalEntitiesTelecoms)
-    {
-        assertEquals("TYPE",getDriver().findElement(legalEntity_telecoms_type_label_xpath).getText());
-        assertEquals("RANK",getDriver().findElement(legalEntity_telecoms_rank_label_xpath).getText());
-        assertEquals("INFO",getDriver().findElement(legalEntity_telecoms_info_label_xpath).getText());
-        assertEquals("VALUE",getDriver().findElement(legalEntity_telecoms_value_label_xpath).getText());
-        List<WebElement> type = getDriver().findElements(legalEntity_telecoms_type_xpath);
-        List<WebElement> rank = getDriver().findElements(legalEntity_telecoms_rank_xpath);
-        List<WebElement> info = getDriver().findElements(legalEntity_telecoms_info_xpath);
-        List<WebElement> value = getDriver().findElements(legalEntity_telecoms_value_xpath);
-
-        for(int i=0;i<legalEntitiesTelecoms.getRowCount();i++){
-            assertEquals(legalEntitiesTelecoms.getRow(i).get(legalEntitiesTelecoms.getHeaders().get(0)),type.get(i).getText());
-            assertEquals(legalEntitiesTelecoms.getRow(i).get(legalEntitiesTelecoms.getHeaders().get(1)),rank.get(i).getText());
-            assertEquals(legalEntitiesTelecoms.getRow(i).get(legalEntitiesTelecoms.getHeaders().get(2)), info.get(i).getText());
-            assertEquals(legalEntitiesTelecoms.getRow(i).get(legalEntitiesTelecoms.getHeaders().get(3)),value.get(i).getText());
-
-               }
-            }
-
 
     public void verifyEntitiesLabel() {
         assertEquals("ENTITIES", getDriver().findElement(entities_label_xpath).getText());
@@ -1240,5 +1154,6 @@ public class DataPage extends AbstractPage {
     public void clickOnAreaEntity(){
         attemptClick(area_entities_link_id);
     }
+
 }
 
