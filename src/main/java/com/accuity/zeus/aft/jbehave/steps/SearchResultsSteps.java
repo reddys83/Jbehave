@@ -1,9 +1,11 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.springframework.stereotype.Component;
 
 import static org.junit.Assert.*;
@@ -116,8 +118,13 @@ public class SearchResultsSteps extends AbstractSteps{
         assertEquals(getResultsPage().getCurrentSearchResultsPage().getText(), Integer.toString(Integer.parseInt(currentPage) - 1));
     }
 
-    @When("the user clicks on the search results card with fid <value>")
-    public void whenUserClicksOnTheResultCard(@Named("value") String value){
-        getResultsPage().clickOnResultCard(getResultsPage().getFidElements(value));
+    @When("the user clicks on the search results card with fid <fid>")
+    public void clickOnResultCard(@Named("fid") String fid){
+        setLegalEntityPage(getResultsPage().clickOnResultCard(getResultsPage().getFidElements(fid)));
+    }
+
+    @Then("the user should see the search results for the institution")
+    public void verifySearchResults() {
+        getResultsPage().verifySearchResults();
     }
 }
