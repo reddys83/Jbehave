@@ -30,21 +30,28 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_searchResults_header_fid_xpath= By.xpath(".//*[@id='legalEntityContentSummary']/header/table//tr[th='FID']/td");
     private By legalEntity_searchResults_header_tfpid_xpath = By.xpath(".//*[@id='legalEntityContentSummary']/header/table//tr[th='TFPID']/td");
     private By legalEntity_services_link_id = By.id("legalEntityServices");
-    private By legalEntity_offered_services_label_xpath = By.xpath("//*[@id='content']//li[3]/ul/li[1]/h2");
-    private By legalEntity_offered_services_category_label_xpath = By.xpath("//*[@id='content']//li[3]/ul/li[1]//tr/th[1]");
-    private By legalEntity_offered_services_override_label_xpath = By.xpath("//*[@id='content']//li[3]/ul/li[1]//tr/th[2]");
-    private By legalEntity_financial_services_label_xpath = By.xpath("//*[@id='content']//li[3]/ul/li[2]/h2");
-    private By legalEntity_financial_services_category_label_xpath = By.xpath("//*[@id='content']//li[3]/ul/li[2]//tr/th[1]");
-    private By legalEntity_financial_services_details_label_xpath = By.xpath("//*[@id='content']//li[3]/ul/li[2]//tr/th[2]");
-    private By legalEntity_services_label_xpath = By.xpath("//*[@id='content']/div/ul/li[3]/h1/span");
+    private By legalEntity_offered_services_label_xpath = By.xpath("//li[h2 = 'Offered Services']//h2");
+    private By legalEntity_offered_services_category_label_xpath = By.xpath("//li[h2 = 'Offered Services']//table/thead//th[1]");
+    private By legalEntity_offered_services_override_label_xpath = By.xpath("//li[h2 = 'Offered Services']//table/thead//th[2]");
+    private By legalEntity_financial_services_label_xpath = By.xpath("//li[h2 = 'Financial Services']//h2");
+    private By legalEntity_financial_services_category_label_xpath = By.xpath("//li[h2 = 'Financial Services']//table/thead//th[1]");
+    private By legalEntity_financial_services_details_label_xpath = By.xpath("//li[h2 = 'Financial Services']//table/thead//th[2]");
+    private By legalEntity_services_label_xpath = By.xpath("//li[contains(h1,'Services')]/h1/span");
     private By legalEntity_search_msg_xpath = By.xpath("//*[@id='editHeader']/div/p");
     private By legalEntity_statistics_link_id = By.id("legalEntityStatistics");
-    private By legalEntity_statistics_label_xpath = By.xpath(".//*[@id='content']//li/h1/span[text()='Statistics']");
-    private By legalEntity_statistics_type_label_xpath = By.xpath(".//*[@id='content']//li[h1='Statistics']//li//th[1]");
-    private By legalEntity_statistics_value_label_xpath = By.xpath(".//*[@id='content']//li[h1='Statistics']//li//th[2]");
-    private By legalEntity_statistics_type_list_xpath = By.xpath(".//*[@id='content']//li[3]//table/tbody/tr/td[1]");
-    private By legalEntity_statistics_value_list_xpath = By.xpath(".//*[@id='content']//li[3]//table/tbody/tr/td[2]");
+    private By legalEntity_statistics_label_xpath = By.xpath("//li/h1/span[text()='Statistics']");
+    private By legalEntity_statistics_type_label_xpath = By.xpath("//li[h1='Statistics']//li//th[1]");
+    private By legalEntity_statistics_value_label_xpath = By.xpath("//li[h1='Statistics']//li//th[2]");
+    private By legalEntity_statistics_type_list_xpath = By.xpath("//li[h1='Statistics']//li//table/tbody/tr/td[1]");
+    private By legalEntity_statistics_value_list_xpath = By.xpath("//li[h1='Statistics']//li//table/tbody/tr/td[1]");
+    private By legalEntity_credit_rating_link_id = By.id("legalEntityCreditRating");
+    private By legalEntity_ownership_link_id = By.id("legalEntityOwnershipSummaries");
 
+    private By legalEntity_ownership_label_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//h2");
+    private By legalEntity_ownership_type_label_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//table/thead//th[1]");
+    private By legalEntity_ownership_value_label_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//table/thead//th[2]");
+    private By legalEntity_ownership_type_list_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//table/tbody//td[1]");
+    private By legalEntity_ownership_value_list_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//table/tbody//td[2]");
 
     public LegalEntityPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -175,6 +182,40 @@ public class LegalEntityPage extends AbstractPage {
         verifyLegalEntityFinancialServicesLabels();
         try {
             assertFalse(getDriver().findElement(By.xpath("//li[h2='Financial Services']//tr/td")).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+
+        }
+    }
+
+    public void clickOnLegalEntityCreditRating() {
+        attemptClick(legalEntity_credit_rating_link_id);
+    }
+
+    public void clickOnLegalEntityOwnership() {
+        attemptClick(legalEntity_ownership_link_id);
+    }
+
+    public void verifyLegalEntityOwnership(ExamplesTable legalEntityOwnership) {
+        verifyOwnershipLabels();
+        List<WebElement> type = getDriver().findElements(legalEntity_ownership_type_list_xpath);
+        List<WebElement> value = getDriver().findElements(legalEntity_ownership_value_list_xpath);
+
+        for(int i=0;i<legalEntityOwnership.getRowCount();i++){
+            assertEquals(legalEntityOwnership.getRow(i).get(legalEntityOwnership.getHeaders().get(0)),type.get(i).getText());
+            assertEquals(legalEntityOwnership.getRow(i).get(legalEntityOwnership.getHeaders().get(1)),value.get(i).getText());
+        }
+    }
+
+    public void verifyOwnershipLabels(){
+        assertEquals("OWNERSHIP SUMMARIES", getTextOnPage(legalEntity_ownership_label_xpath));
+        assertEquals("TYPE",getTextOnPage(legalEntity_ownership_type_label_xpath));
+        assertEquals("VALUE",getTextOnPage(legalEntity_ownership_value_label_xpath));
+    }
+
+    public void verifyNoLegalEntityOwnership() {
+        verifyOwnershipLabels();
+        try {
+            assertFalse(getDriver().findElement(legalEntity_ownership_type_list_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e) {
 
         }
