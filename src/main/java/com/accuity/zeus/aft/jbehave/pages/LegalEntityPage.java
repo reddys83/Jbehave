@@ -38,6 +38,13 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_financial_services_details_label_xpath = By.xpath("//*[@id='content']//li[3]/ul/li[2]//tr/th[2]");
     private By legalEntity_services_label_xpath = By.xpath("//*[@id='content']/div/ul/li[3]/h1/span");
     private By legalEntity_search_msg_xpath = By.xpath("//*[@id='editHeader']/div/p");
+    private By legalEntity_statistics_link_id = By.id("legalEntityStatistics");
+    private By legalEntity_statistics_label_xpath = By.xpath(".//*[@id='content']//li/h1/span[text()='Statistics']");
+    private By legalEntity_statistics_type_label_xpath = By.xpath(".//*[@id='content']//li[h1='Statistics']//li//th[1]");
+    private By legalEntity_statistics_value_label_xpath = By.xpath(".//*[@id='content']//li[h1='Statistics']//li//th[2]");
+    private By legalEntity_statistics_type_list_xpath = By.xpath(".//*[@id='content']//li[3]//table/tbody/tr/td[1]");
+    private By legalEntity_statistics_value_list_xpath = By.xpath(".//*[@id='content']//li[3]//table/tbody/tr/td[2]");
+
 
     public LegalEntityPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -95,6 +102,10 @@ public class LegalEntityPage extends AbstractPage {
         attemptClick(legalEntity_services_link_id);
     }
 
+    public void clickOnLegalEntityStatistics() {
+        attemptClick(legalEntity_statistics_link_id);
+    }
+
     public void verifyLegalEntityOfferedServices(ExamplesTable offeredServices) {
         verifyLegalEntityOfferedServicesLabels();
         verifyServices(offeredServices, "Offered Services");
@@ -127,6 +138,19 @@ public class LegalEntityPage extends AbstractPage {
         for(int i=0;i<services.getRowCount();i++){
             assertEquals(services.getRow(i).get(services.getHeaders().get(0)),category.get(i).getText());
             assertEquals(services.getRow(i).get(services.getHeaders().get(1)),override_details.get(i).getText());
+        }
+    }
+
+    public void verifyLegalEntityStatistics(ExamplesTable legalEntityStatistics){
+        assertEquals("STATISTICS", getTextOnPage(legalEntity_statistics_label_xpath));
+        assertEquals("TYPE",getTextOnPage(legalEntity_statistics_type_label_xpath));
+        assertEquals("VALUE",getTextOnPage(legalEntity_statistics_value_label_xpath));
+        List<WebElement> type = getDriver().findElements(legalEntity_statistics_type_list_xpath);
+        List<WebElement> value = getDriver().findElements(legalEntity_statistics_value_list_xpath);
+
+        for(int i=0;i<legalEntityStatistics.getRowCount();i++){
+            assertEquals(legalEntityStatistics.getRow(i).get(legalEntityStatistics.getHeaders().get(0)),type.get(i).getText());
+            assertEquals(legalEntityStatistics.getRow(i).get(legalEntityStatistics.getHeaders().get(1)),value.get(i).getText());
         }
     }
 
