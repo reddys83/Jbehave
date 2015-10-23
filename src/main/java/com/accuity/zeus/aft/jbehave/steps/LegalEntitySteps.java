@@ -76,4 +76,19 @@ public class LegalEntitySteps extends AbstractSteps{
     public void verifyNoLegalEntityFinancialServices(){
         getLegalEntityPage().verifyNoLegalEntityFinancialServices();
     }
+
+    @When("the user clicks on the legal entity personnel link in the navigation bar")
+    public void clickOnLegalEntityPersonnel() {
+        getLegalEntityPage().clickOnLegalEntityPersonnel();
+    }
+
+    @Then("the user should see the legal entity's personnel as: $legalEntityPersonnel")
+    public void verifyLegalEntityPersonnel(ExamplesTable legalEntityPersonnel){
+        getLegalEntityPage().verifyLegalEntityPersonnel(legalEntityPersonnel);
+    }
+
+    @Then("the user should not see the legal entity's personnel")
+    public void verifyNoLegalEntityPersonnel(){
+        getLegalEntityPage().verifyNoLegalEntityPersonnel();
+    }
 }

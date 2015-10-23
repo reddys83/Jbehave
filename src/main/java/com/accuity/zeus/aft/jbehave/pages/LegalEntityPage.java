@@ -44,7 +44,12 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_statistics_value_label_xpath = By.xpath(".//*[@id='content']//li[h1='Statistics']//li//th[2]");
     private By legalEntity_statistics_type_list_xpath = By.xpath(".//*[@id='content']//li[3]//table/tbody/tr/td[1]");
     private By legalEntity_statistics_value_list_xpath = By.xpath(".//*[@id='content']//li[3]//table/tbody/tr/td[2]");
-
+    private By legalEntity_personnel_link_id = By.id("legalEntityPersonnel");
+    private By legalEntity_personnel_label_xpath = By.xpath("//li[h2='Personnel']//h2");
+    private By legalEntity_personnel_type_label_xpath = By.xpath("//li[h2='Personnel']//table/thead//th[1]");
+    private By legalEntity_personnel_value_label_xpath = By.xpath("//li[h2='Personnel']//table/thead//th[2]");
+    private By legalEntity_personnel_type_list_xpath = By.xpath("//li[h2='Personnel']//table/tbody//td[1]");
+    private By legalEntity_personnel_value_list_xpath = By.xpath("//li[h2='Personnel']//table/tbody//td[2]");
 
     public LegalEntityPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -176,7 +181,35 @@ public class LegalEntityPage extends AbstractPage {
         try {
             assertFalse(getDriver().findElement(By.xpath("//li[h2='Financial Services']//tr/td")).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
+    }
 
+    public void clickOnLegalEntityPersonnel() {
+        attemptClick(legalEntity_personnel_link_id);
+    }
+
+    public void verifyLegalEntityPersonnel(ExamplesTable legalEntityPersonnel) {
+        verifyLegalEntityPersonnelLabels();
+        List<WebElement> type = getDriver().findElements(legalEntity_personnel_type_list_xpath);
+        List<WebElement> value = getDriver().findElements(legalEntity_personnel_value_list_xpath);
+
+        for(int i=0;i<legalEntityPersonnel.getRowCount();i++){
+            assertEquals(legalEntityPersonnel.getRow(i).get(legalEntityPersonnel.getHeaders().get(0)),type.get(i).getText());
+            assertEquals(legalEntityPersonnel.getRow(i).get(legalEntityPersonnel.getHeaders().get(1)),value.get(i).getText());
+        }
+    }
+
+    public void verifyLegalEntityPersonnelLabels() {
+        assertEquals("PERSONNEL", getTextOnPage(legalEntity_personnel_label_xpath));
+        assertEquals("TYPE",getTextOnPage(legalEntity_personnel_type_label_xpath));
+        assertEquals("VALUE",getTextOnPage(legalEntity_personnel_value_label_xpath));
+    }
+
+    public void verifyNoLegalEntityPersonnel() {
+        verifyLegalEntityPersonnelLabels();
+        try {
+            assertFalse(getDriver().findElement(legalEntity_personnel_type_list_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
         }
     }
 }
