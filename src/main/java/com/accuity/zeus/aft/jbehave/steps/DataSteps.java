@@ -777,10 +777,6 @@ public class DataSteps extends AbstractSteps {
     public void clickOnCityCreditRatings(){
         getDataPage().clickOnCityCreditRatings();
     }
-    @When("the user clicks on the legalEntity credit rating link in the navigation bar")
-    public void clickOnLegalEntityCreditRating() {
-        getDataPage().clickOnLegalEntityCreditRating();
-    }
 
     @When("the user clicks on the city's entity link in the navigation bar")
     public void clickOnCityEntity() {
@@ -788,8 +784,8 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the city's credit ratings as: $cityCreditRatings")
-    @Alias("the user should see the legalEntity credit ratings as: $legalEntityCreditRatings")
-    public void verifyCityCreditRatings(ExamplesTable CreditRatings) {
+    @Alias("the user should see the legal entity's credit ratings as: $legalEntityCreditRatings")
+    public void verifyCreditRatings(ExamplesTable CreditRatings) {
         getDataPage().verifyCreditRatings(CreditRatings);
     }
 
@@ -805,8 +801,8 @@ public class DataSteps extends AbstractSteps {
 
 
     @Then("the user should not see the city's credit ratings")
-    @Alias("the user should not see the legalEntity credit ratings")
-    public void verifyNoCityCreditRatings(){
+    @Alias("the user should not see the legal entity's credit ratings")
+    public void verifyNoCreditRatings(){
         getDataPage().verifyNoCreditRatings();
     }
 
