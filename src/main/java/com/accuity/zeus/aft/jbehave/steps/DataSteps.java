@@ -234,8 +234,8 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the country's identifiers as: $countryIdentifiers")
-    public void verifyCountryIdentifiers(ExamplesTable countryIdentifiers) {
-        getDataPage().verifyCountryIdentifiers(countryIdentifiers);
+    public void verifyCountryIdentifiers(ExamplesTable countryIdentifiers){
+        getDataPage().verifyIdentifiers(countryIdentifiers);
     }
 
     @Then("the user should see the area's identifiers as: $areaIdentifiers")

@@ -78,6 +78,21 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyNoLegalEntityFinancialServices();
     }
 
+    @When("the user clicks on the legal entity identifier link in the navigation bar")
+    public void clickOnLegalEntityIdentifierLink(){
+        getLegalEntityPage().clickOnLegalEntityIdentifierLink();
+    }
+
+    @Then("the user should see the legal entity's identifiers as: $legalEntityIdentifiers")
+    public void verifyLegalEntityIdentifiers(ExamplesTable legalEntityIdentifiers){
+        getDataPage().verifyIdentifiers(legalEntityIdentifiers);
+    }
+
+    @Then("the user should not see the legal entity's identifiers")
+    public void verifyNoLegalEntityIdentifiers() {
+        getDataPage().verifyNoIdentifiers();
+    }
+
     @When("the user clicks on the legal entity personnel link in the navigation bar")
     public void clickOnLegalEntityPersonnel() {
         getLegalEntityPage().clickOnLegalEntityPersonnel();
@@ -111,5 +126,6 @@ public class LegalEntitySteps extends AbstractSteps{
     @Then("the user should not see the legal entity's ownership")
     public void verifyNoLegalEntityOwnership(){
         getLegalEntityPage().verifyNoLegalEntityOwnership();
+
     }
 }

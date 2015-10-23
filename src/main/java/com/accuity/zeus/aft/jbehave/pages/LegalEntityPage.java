@@ -36,6 +36,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_financial_services_details_label_xpath = By.xpath("//li[h2 = 'Financial Services']//table/thead//th[2]");
     private By legalEntity_services_label_xpath = By.xpath("//li[contains(h1,'Services')]/h1/span");
     private By legalEntity_search_msg_xpath = By.xpath("//*[@id='editHeader']/div/p");
+    private By legalEntity_identifiers_link_id = By.id("legalEntityIdentifiers");
     private By legalEntity_statistics_link_id = By.id("legalEntityStatistics");
     private By legalEntity_personnel_link_id = By.id("legalEntityPersonnel");
     private By legalEntity_personnel_label_xpath = By.xpath("//li[h2='Personnel']//h2");
@@ -105,8 +106,8 @@ public class LegalEntityPage extends AbstractPage {
     public void verifyLegalEntityHeader(String entity, String headOfficeAddress, String fid, String tfpid) {
         assertEquals(entity,getDriver().findElement(legalEntity_searchResults_institution_xpath).getText());
         assertEquals(headOfficeAddress, getDriver().findElement(legalEntity_searchResults_headOffice_address_xpath).getText());
-        assertEquals(fid,getDriver().findElement(legalEntity_searchResults_header_fid_xpath).getText());
-        assertEquals(tfpid,getDriver().findElement(legalEntity_searchResults_header_tfpid_xpath).getText());
+        assertEquals(fid, getDriver().findElement(legalEntity_searchResults_header_fid_xpath).getText());
+        assertEquals(tfpid, getDriver().findElement(legalEntity_searchResults_header_tfpid_xpath).getText());
     }
 
     public void clickOnLegalEntityServices() {
@@ -251,5 +252,9 @@ public class LegalEntityPage extends AbstractPage {
         } catch (org.openqa.selenium.NoSuchElementException e) {
 
         }
+    }
+
+    public void clickOnLegalEntityIdentifierLink() {
+        attemptClick(legalEntity_identifiers_link_id);
     }
 }

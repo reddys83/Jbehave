@@ -2,7 +2,6 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 
 import com.accuity.zeus.aft.commons.DataManagementAppVals;
-import com.accuity.zeus.aft.result.ResultsPage;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -64,18 +63,12 @@ public class DataPage extends AbstractPage {
     private By country_demographics_value_xpath = By.xpath("//*[@id='content']//li[1]/table[2]/tbody/tr/td[2]");
     private By country_demographics_unit_xpath = By.xpath("//*[@id='content']//li[1]/table[2]/tbody/tr/td[3]");
     private By country_demographics_date_xpath = By.xpath("//*[@id='content']//li[1]/table[2]/tbody/tr/td[4]");
-    private By basic_info_identifiers_label_xpath = By.xpath("//*[@id='content']//li[1]//h2[text()='Identifiers']");
-    private By country_identifiers_type_label_xpath = By.xpath("//*[@id='content']//li[1]/table[3]/thead/tr/th[1]");
-    private By country_identifiers_value_label_xpath = By.xpath("//*[@id='content']//li[1]/table[3]/thead/tr/th[2]");
-    private By country_identifiers_status_label_xpath = By.xpath("//*[@id='content']//li[1]/table[3]/thead/tr/th[3]");
-    private By country_identifiers_type_xpath = By.xpath("//*[@id='content']//li[1]/table[3]/tbody/tr/td[1]");
-    private By country_identifiers_value_xpath = By.xpath("//*[@id='content']//li[1]/table[3]/tbody/tr/td[2]");
-    private By country_identifiers_status_xpath = By.xpath("//*[@id='content']//li[1]/table[3]/tbody/tr/td[3]");
+    private By identifiers_label_xpath = By.xpath("//*[@id='content']//li//h2[text()='Identifiers']");
 
-    private By basic_info_identifiers_type_label_xpath = By.xpath(".//*[@id='content']//table[2]//thead//th[1]");
-    private By basic_info_identifiers_value_label_xpath = By.xpath(".//*[@id='content']//table[2]//thead//th[2]");
-    private By basic_info_identifiers_status_label_xpath = By.xpath(".//*[@id='content']//table[2]//thead//th[3]");
-    private By basic_info_identifiers_type_xpath = By.xpath(".//*[@id='content']//table[2]//tbody//td[1]");
+    private By identifiers_type_label_xpath = By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//th[1]");
+    private By identifiers_value_label_xpath = By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//th[2]");
+    private By identifiers_status_label_xpath = By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//th[3]");
+    private By identifiers_type_xpath = By.xpath(".//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//td[1]");
 
     private By country_banking_hr_summary_label_xpath = By.xpath("//*[@id='content']//li[1]/dl[1]/dt");
     private By country_banking_hr_summary_xpath = By.xpath("//*[@id='content']//li[1]/dl[1]/dd");
@@ -511,37 +504,27 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyCountryIdentifiers(ExamplesTable identifiersList) {
-        assertEquals("IDENTIFIERS", getDriver().findElement(basic_info_identifiers_label_xpath).getText());
-        assertEquals("TYPE", getDriver().findElement(country_identifiers_type_label_xpath).getText());
-        assertEquals("VALUE", getDriver().findElement(country_identifiers_value_label_xpath).getText());
-        assertEquals("STATUS", getDriver().findElement(country_identifiers_status_label_xpath).getText());
-        List<WebElement> actIdentifiersTypes = getDriver().findElements(country_identifiers_type_xpath);
-        List<WebElement> actIdentifiersValue = getDriver().findElements(country_identifiers_value_xpath);
-        List<WebElement> actIdentifiersStatus = getDriver().findElements(country_identifiers_status_xpath);
-        for(int i = 0; i<identifiersList.getRowCount(); i++) {
-            assertEquals(identifiersList.getRow(i).get(identifiersList.getHeaders().get(0)), actIdentifiersTypes.get(i).getText());
-            assertEquals(identifiersList.getRow(i).get(identifiersList.getHeaders().get(1)), actIdentifiersValue.get(i).getText());
-            assertEquals(identifiersList.getRow(i).get(identifiersList.getHeaders().get(2)), actIdentifiersStatus.get(i).getText());
-        }
-    }
 
     public void verifyIdentifiers(ExamplesTable identifiersList) {
-        assertEquals("IDENTIFIERS", getDriver().findElement(basic_info_identifiers_label_xpath).getText());
-        assertEquals("TYPE", getDriver().findElement(basic_info_identifiers_type_label_xpath).getText());
-        assertEquals("VALUE", getDriver().findElement(basic_info_identifiers_value_label_xpath).getText());
-        assertEquals("STATUS", getDriver().findElement(basic_info_identifiers_status_label_xpath).getText());
-        List<WebElement> IdentifiersTypeVal = getDriver().findElements(basic_info_identifiers_type_xpath);
+        verifyIdentifiersLabels();
+        List<WebElement> IdentifiersTypeVal = getDriver().findElements(identifiers_type_xpath);
         assertTrue(identifiersList.getRowCount() == IdentifiersTypeVal.size());
         for(int i = 0; i<identifiersList.getRowCount(); i++)
         {
             assertEquals(identifiersList.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").replace(" ", "").trim(),
                     getDriver().findElement(
-                            By.xpath(".//*[@id='content']//table[2]//tbody//tr[td='" + identifiersList.getRow(i).get(identifiersList.getHeaders().get(0)) + "']")).getText().replace(",","").replace(" ", "").trim());
+                            By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//tr[td='" + identifiersList.getRow(i)
+                                    .get(identifiersList.getHeaders().get(0)) + "']")).getText().replace(",","").replace(" ", "").trim());
 
         }
     }
 
+    public void verifyIdentifiersLabels(){
+        assertEquals("IDENTIFIERS", getDriver().findElement(identifiers_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(identifiers_type_label_xpath).getText());
+        assertEquals("VALUE", getDriver().findElement(identifiers_value_label_xpath).getText());
+        assertEquals("STATUS", getDriver().findElement(identifiers_status_label_xpath).getText());
+    }
 
     public void verifyCountryBankingHourSummary(String countryBankingHourSummary) {
         assertEquals("Summary", getDriver().findElement(country_banking_hr_summary_label_xpath).getText());
@@ -1067,7 +1050,6 @@ public class DataPage extends AbstractPage {
         } catch (org.openqa.selenium.NoSuchElementException e) {
 
         }
-
     }
 
     public void clickOnCityTab() {
@@ -1148,6 +1130,15 @@ public class DataPage extends AbstractPage {
 
     public void clickOnAreaEntity(){
         attemptClick(area_entities_link_id);
+    }
+
+    public void verifyNoIdentifiers() {
+        verifyIdentifiersLabels();
+        try {
+            assertFalse(getDriver().findElement(identifiers_type_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+
+        }
     }
 }
 
