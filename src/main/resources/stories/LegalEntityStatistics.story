@@ -6,7 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS - 395 User can view legalEntity statistics
 
-Scenario: scenario description
+Scenario: Verify legalEntity statistics
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
