@@ -142,7 +142,7 @@ public class LegalEntityPage extends AbstractPage {
         try {
             assertFalse(getDriver().findElement(By.xpath("//li[h2='Location Summaries']//table//tbody//td[1]")).isDisplayed());
         }catch (NoSuchElementException e){
-            
+
         }
     }
 
