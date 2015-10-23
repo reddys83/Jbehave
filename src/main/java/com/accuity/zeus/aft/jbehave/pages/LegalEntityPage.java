@@ -38,6 +38,16 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_search_msg_xpath = By.xpath("//*[@id='editHeader']/div/p");
     private By legalEntity_identifiers_link_id = By.id("legalEntityIdentifiers");
     private By legalEntity_statistics_link_id = By.id("legalEntityStatistics");
+
+    private By legalEntity_trustPowers_link_id = By.id("legalEntityTrustPowers");
+    private By legalEntity_trustPowers_label_xpath = By.xpath(".//*[@id='content']//h1/span[text()='Trust Powers']");
+    private By legalEntity_trustPower_granted_label_xpath = By.xpath(".//*[@id='content']//th[text()='Granted']");
+    private By legalEntity_trustPower_full_label_xpath = By.xpath(".//*[@id='content']//th[text()='Full']");
+    private By legalEntity_trustPower_used_label_xpath = By.xpath(".//*[@id='content']//th[text()='Used']");
+    private By legalEntity_trustPower_profEmployees_label_xpath = By.xpath(".//*[@id='content']//th[text()='Prof. Employees']");
+    private By legalEntity_trustPower_adminEmployees_label_xpath = By.xpath(".//*[@id='content']//th[text()='Admin Employees']");
+    private By legalEntity_trustPower_minAccountSize_label_xpath = By.xpath(".//*[@id='content']//th[text()='Min Account Size ($)']");
+    private By legalEntity_trustPower_values_list_xpath= By.xpath("//*[@id='content']//li[h1='Trust Powers']//tbody/tr");
     private By legalEntity_personnel_link_id = By.id("legalEntityPersonnel");
     private By legalEntity_personnel_label_xpath = By.xpath("//li[h2='Personnel']//h2");
     private By legalEntity_personnel_type_label_xpath = By.xpath("//li[h2='Personnel']//table/thead//th[1]");
@@ -81,7 +91,7 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyLegalEntitiesTelecoms(ExamplesTable legalEntitiesTelecoms)
     {
-        assertEquals("TYPE",getDriver().findElement(legalEntity_telecoms_type_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(legalEntity_telecoms_type_label_xpath).getText());
         assertEquals("RANK",getDriver().findElement(legalEntity_telecoms_rank_label_xpath).getText());
         assertEquals("INFO",getDriver().findElement(legalEntity_telecoms_info_label_xpath).getText());
         assertEquals("VALUE",getDriver().findElement(legalEntity_telecoms_value_label_xpath).getText());
@@ -104,7 +114,7 @@ public class LegalEntityPage extends AbstractPage {
     }
 
     public void verifyLegalEntityHeader(String entity, String headOfficeAddress, String fid, String tfpid) {
-        assertEquals(entity,getDriver().findElement(legalEntity_searchResults_institution_xpath).getText());
+        assertEquals(entity, getDriver().findElement(legalEntity_searchResults_institution_xpath).getText());
         assertEquals(headOfficeAddress, getDriver().findElement(legalEntity_searchResults_headOffice_address_xpath).getText());
         assertEquals(fid, getDriver().findElement(legalEntity_searchResults_header_fid_xpath).getText());
         assertEquals(tfpid, getDriver().findElement(legalEntity_searchResults_header_tfpid_xpath).getText());
@@ -116,6 +126,10 @@ public class LegalEntityPage extends AbstractPage {
 
     public void clickOnLegalEntityStatistics() {
         attemptClick(legalEntity_statistics_link_id);
+    }
+
+    public void clickOnLegalEntityTrustPowers() {
+        attemptClick(legalEntity_trustPowers_link_id);
     }
 
     public void verifyLegalEntityOfferedServices(ExamplesTable offeredServices) {
@@ -163,6 +177,32 @@ public class LegalEntityPage extends AbstractPage {
         for(int i=0;i<legalEntityStatistics.getRowCount();i++){
             assertEquals(legalEntityStatistics.getRow(i).get(legalEntityStatistics.getHeaders().get(0)),type.get(i).getText());
             assertEquals(legalEntityStatistics.getRow(i).get(legalEntityStatistics.getHeaders().get(1)),value.get(i).getText());
+        }
+    }
+
+    public void verifyLegalEntityTrustPowersLabels()
+    {
+        assertEquals("TRUST POWERS", getTextOnPage(legalEntity_trustPowers_label_xpath));
+        assertEquals("GRANTED", getTextOnPage(legalEntity_trustPower_granted_label_xpath));
+        assertEquals("FULL", getTextOnPage(legalEntity_trustPower_full_label_xpath));
+        assertEquals("USED", getTextOnPage(legalEntity_trustPower_used_label_xpath));
+        assertEquals("PROF. EMPLOYEES", getTextOnPage(legalEntity_trustPower_profEmployees_label_xpath));
+        assertEquals("ADMIN EMPLOYEES",getTextOnPage(legalEntity_trustPower_adminEmployees_label_xpath));
+        assertEquals("MIN ACCOUNT SIZE ($)", getTextOnPage(legalEntity_trustPower_minAccountSize_label_xpath));
+    }
+
+    public void verifyLegalEntityTrustPowers(ExamplesTable legalEntityTrustPowers)
+    {
+        verifyLegalEntityTrustPowersLabels();
+        assertEquals(legalEntityTrustPowers.getRow(0).values().toString().replace("[", "").replace("]", "").replace(",", "").trim(), getTextOnPage(legalEntity_trustPower_values_list_xpath).replace(",", "").trim());
+
+    }
+
+    public void verifyNoLegalEntityTrustPowers() {
+        verifyLegalEntityTrustPowersLabels();
+        try {
+            assertFalse(getDriver().findElement(legalEntity_trustPower_values_list_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
         }
     }
 
