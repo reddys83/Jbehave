@@ -69,7 +69,7 @@ public class LegalEntitySteps extends AbstractSteps{
 
     @Then("the user should not see the legal entity's trust powers")
     public void verifyNoLegalEntityTrustPowers(){
-        getLegalEntityPage().verifyNoLegalEnttityTrustPowers();
+        getLegalEntityPage().verifyNoLegalEntityTrustPowers();
     }
 
     @Then("the user should see the legal entity's financial services as: $financialServices")
