@@ -1,4 +1,4 @@
-Meta:@LegalEntityStatistics
+Meta:@LegalEntityStatistics @LegalEntity
 
 Narrative:
 In order to view and edit the legalEntities
