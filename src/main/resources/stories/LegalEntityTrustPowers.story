@@ -42,4 +42,4 @@ Then the user should not see the legal entity's trust powers
 
 Examples:
 |entity|searchBy|fid|
-|Val-Gaz Limited Liability Company|Name|180613|
+|Federation Nationale des Caisse d'Epargne|Name|153965|
