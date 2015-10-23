@@ -138,7 +138,7 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyNoLegalEntityLocations() {
         verifyLegalEntityLocationsLabel();
-        assertFalse(getDriver().findElement(legalEntity_locationSummaries_list_values_xpath).isDisplayed());
+        assertFalse(getDriver().findElement(By.xpath("//li[h2='Location Summaries']//table//tbody//td[1]")).isDisplayed());
     }
 
     public void verifyLegalEntityOfferedServicesLabels(){
