@@ -42,6 +42,11 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().clickOnLegalEntityServices();
     }
 
+    @When("the user clicks on the legal entity locations link in the navigation bar")
+    public void clickOnLegalEntityLocations(){
+        getLegalEntityPage().clickOnLegalEntityLocations();
+    }
+
     @When("the user clicks on the legal entity statistics link in the navigation bar")
     public void clickOnLegalEntityStatistics(){
         getLegalEntityPage().clickOnLegalEntityStatistics();
@@ -50,6 +55,16 @@ public class LegalEntitySteps extends AbstractSteps{
     @Then("the user should see the legal entity's offered services as: $offeredServices")
     public void verifyLegalEntityOfferedServices(ExamplesTable offeredServices){
         getLegalEntityPage().verifyLegalEntityOfferedServices(offeredServices);
+    }
+
+    @Then("the user should see the legal entity's location summaries as: $legalEntityLocations")
+    public void verifyLegalEntityLocations(ExamplesTable legalEntityLocations){
+        getLegalEntityPage().verifyLegalEntityLocations(legalEntityLocations);
+    }
+
+    @Then("the user should not see the legal entity's location summaries")
+    public void verifyNoLegalEntityLocations(){
+        getLegalEntityPage().verifyNoLegalEntityLocations();
     }
 
     @Then("the user should see the legal entity's statistics as: $legalEntityStatistics")

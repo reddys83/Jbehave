@@ -44,7 +44,11 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_statistics_value_label_xpath = By.xpath(".//*[@id='content']//li[h1='Statistics']//li//th[2]");
     private By legalEntity_statistics_type_list_xpath = By.xpath(".//*[@id='content']//li[3]//table/tbody/tr/td[1]");
     private By legalEntity_statistics_value_list_xpath = By.xpath(".//*[@id='content']//li[3]//table/tbody/tr/td[2]");
-
+    private By legalEntity_locations_link_id = By.id("legalEntityLocationSummaries");
+    private By legalEntity_location_summary_label_xpath = By.xpath(".//*[@id='content']//span[text()='Location Summaries']");
+    private By legalEntity_locationSummaries_type_label_xpath = By.xpath(".//*[@id='content']//li[h2='Location Summaries']//thead/tr/th[text()='Type']");
+    private By legalEntity_locationSummaries_value_lable_xpath= By.xpath(".//*[@id='content']//li[h2='Location Summaries']//thead/tr/th[text()='Value']");
+    private By legalEntity_locationSummaries_list_values_xpath=By.xpath(".//*[@id='content']//li[h2='Location Summaries']//tbody/tr");
 
     public LegalEntityPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -102,6 +106,10 @@ public class LegalEntityPage extends AbstractPage {
         attemptClick(legalEntity_services_link_id);
     }
 
+    public void clickOnLegalEntityLocations() {
+        attemptClick(legalEntity_locations_link_id);
+    }
+
     public void clickOnLegalEntityStatistics() {
         attemptClick(legalEntity_statistics_link_id);
     }
@@ -109,6 +117,28 @@ public class LegalEntityPage extends AbstractPage {
     public void verifyLegalEntityOfferedServices(ExamplesTable offeredServices) {
         verifyLegalEntityOfferedServicesLabels();
         verifyServices(offeredServices, "Offered Services");
+    }
+
+    public void verifyLegalEntityLocationsLabel(){
+        assertEquals("LOCATION SUMMARIES",getTextOnPage(legalEntity_location_summary_label_xpath));
+        assertEquals("TYPE",getTextOnPage(legalEntity_locationSummaries_type_label_xpath));
+        assertEquals("VALUE", getTextOnPage(legalEntity_locationSummaries_value_lable_xpath));
+    }
+
+    public void verifyLegalEntityLocations(ExamplesTable legalEntityLocations) {
+        verifyLegalEntityLocationsLabel();
+        List<WebElement> legalEntityLocationsSummary = getDriver().findElements(legalEntity_locationSummaries_list_values_xpath);
+        assertTrue(legalEntityLocations.getRowCount() == legalEntityLocationsSummary.size());
+
+        for (int i=0;i<legalEntityLocations.getRowCount();i++)
+        {
+            assertEquals(legalEntityLocations.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(), legalEntityLocationsSummary.get(i).getText().replace(",", "").trim());
+        }
+    }
+
+    public void verifyNoLegalEntityLocations() {
+        verifyLegalEntityLocationsLabel();
+        assertFalse(getDriver().findElement(legalEntity_locationSummaries_list_values_xpath).isDisplayed());
     }
 
     public void verifyLegalEntityOfferedServicesLabels(){
