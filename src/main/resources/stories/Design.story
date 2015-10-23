@@ -5,16 +5,17 @@ In order to view stub entry details
 As a user when I search by Name, FID, TFPID and click on the search results card I can view details
 I want to cover the requirements mentioned in JIRA ID - Zeus54 - (User can view entity stub entry)
 
-Scenario: Verify related people information for city.
+Scenario: Verify legalEntity has no trust powers
 Given a user is on the search page
 When the user clicks on the data tab in the search page
-And the user clicks on the country tab in the data area
-Then the user should see the country list box displayed
-When the user clicks on the choose a country option
-Then the user should see the list of all existing countries by full name
-And the user should see the country list matching the expected country list and sorted alphabetically
-When the user starts typing the name of a country as et in the country input box
-Then the user should see the countries in the listbox as:
-|COUNTRY|
-|Ethiopia|
-|St. Pierre et Miquelon|
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+When the user clicks on the legal entity tust power link in the navigation bar
+Then the user should not see the legal entity's trust powers
+
+Examples:
+|entity|searchBy|fid|
+|Federation Nationale des Caisse d'Epargne|Name|153965|
