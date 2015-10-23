@@ -155,7 +155,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCountryInTheTypeAheadBox(anotherCountry);
     }
 
-    @Then("the user should see the legalEntity header with institution name, head office addresss, fid and tfpid")
 
     @When("the user enters the area <area> in the type-ahead box")
     public void enterAreaInTypeAhead(@Named("area") String area){
@@ -778,6 +777,10 @@ public class DataSteps extends AbstractSteps {
     public void clickOnCityCreditRatings(){
         getDataPage().clickOnCityCreditRatings();
     }
+    @When("the user clicks on the legal entity credit rating link in the navigation bar")
+    public void clickOnLegalEntityCreditRating() {
+        getDataPage().clickOnLegalEntityCreditRating();
+    }
 
     @When("the user clicks on the city's entity link in the navigation bar")
     public void clickOnCityEntity() {
@@ -785,8 +788,9 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the city's credit ratings as: $cityCreditRatings")
-    public void verifyCityCreditRatings(ExamplesTable cityCreditRatings) {
-        getDataPage().verifyCreditRatings(cityCreditRatings);
+    @Alias("the user should see the legal entity's credit ratings as: $legalEntityCreditRatings")
+    public void verifyCityCreditRatings(ExamplesTable CreditRatings) {
+        getDataPage().verifyCreditRatings(CreditRatings);
     }
 
     @Then("the user should see all is selected by default in the navigation bar")
@@ -801,6 +805,7 @@ public class DataSteps extends AbstractSteps {
 
 
     @Then("the user should not see the city's credit ratings")
+    @Alias("the user should not see the legal entity's credit ratings")
     public void verifyNoCityCreditRatings(){
         getDataPage().verifyNoCreditRatings();
     }
