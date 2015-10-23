@@ -6,7 +6,6 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-350 - User can view legal entity's basic info
 
-
 Scenario: Verify the basic info for legalEntity
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -57,7 +56,7 @@ And the user should see the Claimed Est Date of a legalEntity as 01 Jul 1983
 And the user should see the Chartered Date of a legalEntity as 01 Jul 1990
 And the user should see the Charter Type of a legalEntity as Us State Chartered Bank
 And the user should see the FATCA Status of a legalEntity as Inactive
-And the user should see the Insurance Type of a legalEntity as Psaic
+And the user should see the Insurance Type of a legalEntity as PSAIC
 And the user should see the Ownership Type of a legalEntity as Corporate Bank
 And the user should see the Lead Institution of a legalEntity as False
 And the user should see the Add Info of a legalEntity as Ultimate Parent Company: The Bank of Nova Scotia 1709 Hollis Street, Halifax, NS B3J 3B7, Canada

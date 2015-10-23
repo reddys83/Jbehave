@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -52,6 +53,11 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().clickOnLegalEntityStatistics();
     }
 
+    @When("the user clicks on the legal entity tust power link in the navigation bar")
+    public void clickOnLegalEntityTrustPowers(){
+        getLegalEntityPage().clickOnLegalEntityTrustPowers();
+    }
+
     @Then("the user should see the legal entity's offered services as: $offeredServices")
     public void verifyLegalEntityOfferedServices(ExamplesTable offeredServices){
         getLegalEntityPage().verifyLegalEntityOfferedServices(offeredServices);
@@ -72,6 +78,16 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyLegalEntityStatistics(legalEntityStatistics);
     }
 
+    @Then("the user should see the legal entity's trust power as: $legalEntityTrustPowers")
+    public void verifyLegalEntityTrustPowers(ExamplesTable legalEntityTrustPowers) {
+        getLegalEntityPage().verifyLegalEntityTrustPowers(legalEntityTrustPowers);
+    }
+
+    @Then("the user should not see the legal entity's trust powers")
+    public void verifyNoLegalEntityTrustPowers(){
+        getLegalEntityPage().verifyNoLegalEntityTrustPowers();
+    }
+
     @Then("the user should see the legal entity's financial services as: $financialServices")
     public void verifyLegalEntityFinancialServices(ExamplesTable financialServices){
         getLegalEntityPage().verifyLegalEntityFinancialServices(financialServices);
@@ -90,5 +106,56 @@ public class LegalEntitySteps extends AbstractSteps{
     @Then("the user should not see the legal entity's financial services")
     public void verifyNoLegalEntityFinancialServices(){
         getLegalEntityPage().verifyNoLegalEntityFinancialServices();
+    }
+
+    @When("the user clicks on the legal entity identifier link in the navigation bar")
+    public void clickOnLegalEntityIdentifierLink(){
+        getLegalEntityPage().clickOnLegalEntityIdentifierLink();
+    }
+
+    @Then("the user should see the legal entity's identifiers as: $legalEntityIdentifiers")
+    public void verifyLegalEntityIdentifiers(ExamplesTable legalEntityIdentifiers){
+        getDataPage().verifyIdentifiers(legalEntityIdentifiers);
+    }
+
+    @Then("the user should not see the legal entity's identifiers")
+    public void verifyNoLegalEntityIdentifiers() {
+        getDataPage().verifyNoIdentifiers();
+    }
+
+    @When("the user clicks on the legal entity personnel link in the navigation bar")
+    public void clickOnLegalEntityPersonnel() {
+        getLegalEntityPage().clickOnLegalEntityPersonnel();
+    }
+
+    @Then("the user should see the legal entity's personnel as: $legalEntityPersonnel")
+    public void verifyLegalEntityPersonnel(ExamplesTable legalEntityPersonnel){
+        getLegalEntityPage().verifyLegalEntityPersonnel(legalEntityPersonnel);
+    }
+
+    @Then("the user should not see the legal entity's personnel")
+    public void verifyNoLegalEntityPersonnel() {
+        getLegalEntityPage().verifyNoLegalEntityPersonnel();
+    }
+
+    @When("the user clicks on the legal entity credit rating link in the navigation bar")
+    public void clickOnLegalEntityCreditRating() {
+        getLegalEntityPage().clickOnLegalEntityCreditRating();
+    }
+
+    @When("the user clicks on the legal entity ownership link in the navigation bar")
+    public void clickOnLegalEntityOwnership() {
+        getLegalEntityPage().clickOnLegalEntityOwnership();
+    }
+
+    @Then("the user should see the legal entity's ownership as: $legalEntityOwnership")
+    public void verifyLegalEntityOwnership(ExamplesTable legalEntityOwnership) {
+        getLegalEntityPage().verifyLegalEntityOwnership(legalEntityOwnership);
+    }
+
+    @Then("the user should not see the legal entity's ownership")
+    public void verifyNoLegalEntityOwnership(){
+        getLegalEntityPage().verifyNoLegalEntityOwnership();
+
     }
 }
