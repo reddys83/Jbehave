@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -88,7 +89,27 @@ public class LegalEntitySteps extends AbstractSteps{
     }
 
     @Then("the user should not see the legal entity's personnel")
-    public void verifyNoLegalEntityPersonnel(){
+    public void verifyNoLegalEntityPersonnel() {
         getLegalEntityPage().verifyNoLegalEntityPersonnel();
+    }
+
+    @When("the user clicks on the legal entity credit rating link in the navigation bar")
+    public void clickOnLegalEntityCreditRating() {
+        getLegalEntityPage().clickOnLegalEntityCreditRating();
+    }
+
+    @When("the user clicks on the legal entity ownership link in the navigation bar")
+    public void clickOnLegalEntityOwnership() {
+        getLegalEntityPage().clickOnLegalEntityOwnership();
+    }
+
+    @Then("the user should see the legal entity's ownership as: $legalEntityOwnership")
+    public void verifyLegalEntityOwnership(ExamplesTable legalEntityOwnership) {
+        getLegalEntityPage().verifyLegalEntityOwnership(legalEntityOwnership);
+    }
+
+    @Then("the user should not see the legal entity's ownership")
+    public void verifyNoLegalEntityOwnership(){
+        getLegalEntityPage().verifyNoLegalEntityOwnership();
     }
 }
