@@ -769,6 +769,9 @@ public class DataPage extends AbstractPage {
 
     public void verifyCreditRatings(ExamplesTable creditRatings) {
         verifyCreditRatingsLabel();
+        if(SearchPage.selectedEntity !=""){
+            selectedEntity = SearchPage.selectedEntity;
+        }
         assertEquals("CREDIT RATINGS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(credit_rating_for_label_xpath).getText());
         assertEquals("AGENCY TYPE VALUE APPLIED DATE CONFIRMED DATE", getDriver().findElement(credit_rating_table_headers_xpath).getText());
         List<WebElement> agency = getDriver().findElements(credit_rating_agency_xpath);
@@ -791,6 +794,9 @@ public class DataPage extends AbstractPage {
 
     public void verifyNoCreditRatings() {
         assertEquals("CREDIT RATING", getDriver().findElement(credit_rating_label_xpath).getText());
+        if(SearchPage.selectedEntity !=""){
+            selectedEntity = SearchPage.selectedEntity;
+        }
         assertEquals("CREDIT RATINGS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(credit_rating_for_label_xpath).getText());
         assertEquals("AGENCY TYPE VALUE APPLIED DATE CONFIRMED DATE", getDriver().findElement(credit_rating_table_headers_xpath).getText());
         try {
