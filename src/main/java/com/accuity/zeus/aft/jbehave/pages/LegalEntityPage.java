@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.util.List;
@@ -38,7 +39,11 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_search_msg_xpath = By.xpath("//*[@id='editHeader']/div/p");
     private By legalEntity_identifiers_link_id = By.id("legalEntityIdentifiers");
     private By legalEntity_statistics_link_id = By.id("legalEntityStatistics");
-
+    private By legalEntity_locations_link_id = By.id("legalEntityLocationSummaries");
+    private By legalEntity_location_summary_label_xpath = By.xpath(".//*[@id='content']//span[text()='Location Summaries']");
+    private By legalEntity_locationSummaries_type_label_xpath = By.xpath(".//*[@id='content']//li[h2='Location Summaries']//thead/tr/th[text()='Type']");
+    private By legalEntity_locationSummaries_value_lable_xpath= By.xpath(".//*[@id='content']//li[h2='Location Summaries']//thead/tr/th[text()='Value']");
+    private By legalEntity_locationSummaries_list_values_xpath=By.xpath(".//*[@id='content']//li[h2='Location Summaries']//tbody/tr");
     private By legalEntity_trustPowers_link_id = By.id("legalEntityTrustPowers");
     private By legalEntity_trustPowers_label_xpath = By.xpath(".//*[@id='content']//h1/span[text()='Trust Powers']");
     private By legalEntity_trustPower_granted_label_xpath = By.xpath(".//*[@id='content']//th[text()='Granted']");
@@ -124,6 +129,10 @@ public class LegalEntityPage extends AbstractPage {
         attemptClick(legalEntity_services_link_id);
     }
 
+    public void clickOnLegalEntityLocations() {
+        attemptClick(legalEntity_locations_link_id);
+    }
+
     public void clickOnLegalEntityStatistics() {
         attemptClick(legalEntity_statistics_link_id);
     }
@@ -135,6 +144,32 @@ public class LegalEntityPage extends AbstractPage {
     public void verifyLegalEntityOfferedServices(ExamplesTable offeredServices) {
         verifyLegalEntityOfferedServicesLabels();
         verifyServices(offeredServices, "Offered Services");
+    }
+
+    public void verifyLegalEntityLocationsLabel(){
+        assertEquals("LOCATION SUMMARIES",getTextOnPage(legalEntity_location_summary_label_xpath));
+        assertEquals("TYPE",getTextOnPage(legalEntity_locationSummaries_type_label_xpath));
+        assertEquals("VALUE", getTextOnPage(legalEntity_locationSummaries_value_lable_xpath));
+    }
+
+    public void verifyLegalEntityLocations(ExamplesTable legalEntityLocations) {
+        verifyLegalEntityLocationsLabel();
+        List<WebElement> legalEntityLocationsSummary = getDriver().findElements(legalEntity_locationSummaries_list_values_xpath);
+        assertTrue(legalEntityLocations.getRowCount() == legalEntityLocationsSummary.size());
+
+        for (int i=0;i<legalEntityLocations.getRowCount();i++)
+        {
+            assertEquals(legalEntityLocations.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(), legalEntityLocationsSummary.get(i).getText().replace(",", "").trim());
+        }
+    }
+
+    public void verifyNoLegalEntityLocations() {
+        verifyLegalEntityLocationsLabel();
+        try {
+            assertFalse(getDriver().findElement(By.xpath("//li[h2='Location Summaries']//table//tbody//td[1]")).isDisplayed());
+        }catch (NoSuchElementException e){
+
+        }
     }
 
     public void verifyLegalEntityOfferedServicesLabels(){
