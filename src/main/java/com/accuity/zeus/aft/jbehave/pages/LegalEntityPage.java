@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.util.List;
@@ -138,7 +139,11 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyNoLegalEntityLocations() {
         verifyLegalEntityLocationsLabel();
-        assertFalse(getDriver().findElement(By.xpath("//li[h2='Location Summaries']//table//tbody//td[1]")).isDisplayed());
+        try {
+            assertFalse(getDriver().findElement(By.xpath("//li[h2='Location Summaries']//table//tbody//td[1]")).isDisplayed());
+        }catch (NoSuchElementException e){
+            
+        }
     }
 
     public void verifyLegalEntityOfferedServicesLabels(){
