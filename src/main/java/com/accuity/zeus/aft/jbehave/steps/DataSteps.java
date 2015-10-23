@@ -11,12 +11,12 @@ import org.springframework.stereotype.Component;
 public class DataSteps extends AbstractSteps {
 
     @When("the user clicks on the currency tab in the data area")
-    public void clickOnCurrencyTab(){
+    public void clickOnCurrencyTab() {
         getDataPage().clickOnCurrencyTab();
     }
 
     @When("the user clicks on the country tab in the data area")
-    public void clickOnCountryTab(){
+    public void clickOnCountryTab() {
         getDataPage().clickOnCountryTab();
     }
 
@@ -31,87 +31,87 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the choose a currency option")
-    public void clickOnChooseACurrencyOption(){
+    public void clickOnChooseACurrencyOption() {
         getDataPage().clickOnChooseACurrencyOption();
     }
 
     @Then("the user should see the list of all existing currencies by full name")
-    public void verifyCurrencyList(){
+    public void verifyCurrencyList() {
         getDataPage().verifyCurrencyList();
     }
 
     @When("the user starts typing the name of a currency as $curr in the currency input box")
-    public void enterCurrency(@Named("curr") String curr){
+    public void enterCurrency(@Named("curr") String curr) {
         getDataPage().enterCurrency(curr);
     }
 
     @Then("the user should see the drop-down list of the currencies matching the input characters")
-    public void thenUserShouldSeeCurrencyDropDownMatchingTheSearchString(){
+    public void thenUserShouldSeeCurrencyDropDownMatchingTheSearchString() {
         getDataPage().verifyCurrencyDropDownMatchesSearchString();
     }
 
     @Then("the user should see the option no results match for the searched currency string")
-    public void thenTheUSerShouldNoResultsMatchOption(){
+    public void thenTheUSerShouldNoResultsMatchOption() {
         getDataPage().verifyNoResultsMatchOption();
     }
 
     @When("the user enters the currency <currency> in the typeahead box")
-    public void selectCurrencyFromTypeAhead(@Named("currency") String currency){
+    public void selectCurrencyFromTypeAhead(@Named("currency") String currency) {
         getDataPage().selectCurrencyFromTypeAhead(currency);
     }
 
     @When("the user enters the currency $currency in the typeahead box")
-    public void enterCurrencyInCurrencyTypeAhead(String currency){
+    public void enterCurrencyInCurrencyTypeAhead(String currency) {
         getDataPage().selectCurrencyFromTypeAhead(currency);
     }
 
     @Then("the user should see the currency iso code value as <isoCode>")
-    public void verifyCurrencyIsoCode(@Named("isoCode") String isoCode){
+    public void verifyCurrencyIsoCode(@Named("isoCode") String isoCode) {
         getDataPage().verifyCurrencyIsoCode(isoCode);
     }
 
     @Then("the user should see the currency name value as <name>")
-    public void verifyCurrencyName(@Named("name") String name){
+    public void verifyCurrencyName(@Named("name") String name) {
         getDataPage().verifyCurrencyName(name);
     }
 
     @Then("the user should see the currency abbr value as <abbr>")
-    public void verifyCurrencyAbbr(@Named("abbr") String abbr){
+    public void verifyCurrencyAbbr(@Named("abbr") String abbr) {
         getDataPage().verifyCurrencyAbbr(abbr);
     }
 
     @Then("the user should see the currency unit value as <unit>")
-    public void verifyCurrencyUnit(@Named("unit") String unit){
+    public void verifyCurrencyUnit(@Named("unit") String unit) {
         getDataPage().verifyCurrencyUnit(unit);
     }
 
     @Then("the user should see the currency quantity value as <quantity>")
-    public void verifyCurrencyQuantity(@Named("quantity") String quantity){
+    public void verifyCurrencyQuantity(@Named("quantity") String quantity) {
         getDataPage().verifyCurrencyQuantity(quantity);
     }
 
     @Then("the user should see the country list box displayed")
-    public void verifyCountryListBoxIsDisplayed()  {
+    public void verifyCountryListBoxIsDisplayed() {
         getDataPage().verifyCountryListBoxIsDisplayed();
     }
 
     @When("the user clicks on the choose a country option")
-    public void clickOnCountryListBox()  {
+    public void clickOnCountryListBox() {
         getDataPage().clickOnCountryListBox();
     }
 
     @Then("the user should see the list of all existing countries by full name")
-    public void verifyCountryTypeAheadAndListBox(){
+    public void verifyCountryTypeAheadAndListBox() {
         getDataPage().verifyCountryTypeAheadAndListBox();
     }
 
     @Then("the user should see the country list matching the expected country list and sorted alphabetically")
-    public void verifyCountryListMatchesExpectedList(){
+    public void verifyCountryListMatchesExpectedList() {
         getDataPage().verifyCountryListValues();
     }
 
     @When("the user starts typing the name of a country as $word in the country input box")
-    public void enterValueInCountryTypeAhead(String word){
+    public void enterValueInCountryTypeAhead(String word) {
         getDataPage().enterValueInCountryTypeAhead(word);
     }
 
@@ -121,32 +121,32 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the countries in the currency usage as: $currencyCountries")
-    public void verifyCountriesCurrencyUsage(ExamplesTable currencyCountries){
+    public void verifyCountriesCurrencyUsage(ExamplesTable currencyCountries) {
         getDataPage().verifyCountriesCurrencyUsage(currencyCountries);
     }
 
     @Then("the user should see the currency's uses as: $currencyUseTable")
-    public void verifyCurrencyUse(ExamplesTable currencyUseTable){
+    public void verifyCurrencyUse(ExamplesTable currencyUseTable) {
         getDataPage().verifyCurrencyUse(currencyUseTable);
     }
 
     @Then("the user should not see the currency's uses")
-    public void verifyNoCurrencyUse(){
+    public void verifyNoCurrencyUse() {
         getDataPage().verifyNoCurrencyUse();
     }
 
     @When("the user clicks on the replaced by currency $replacedBy")
-    public void clickOnReplacedByLink(String replacedBy){
+    public void clickOnReplacedByLink(String replacedBy) {
         getDataPage().clickOnReplacedByLink(replacedBy);
     }
 
     @Then("the user should see the currencies in the listbox as: $currencyList")
-    public void verifyCurrencyInListBox(ExamplesTable currencyList){
+    public void verifyCurrencyInListBox(ExamplesTable currencyList) {
         getDataPage().verifyCurrencyInListBox(currencyList);
     }
 
     @When("the user enters the country <country> in the type-ahead box")
-     public void enterCountryInTheTypeAheadBox(@Named("country") String country){
+    public void enterCountryInTheTypeAheadBox(@Named("country") String country) {
         getDataPage().enterCountryInTheTypeAheadBox(country);
     }
 
@@ -155,56 +155,56 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCountryInTheTypeAheadBox(anotherCountry);
     }
 
-
     @When("the user enters the area <area> in the type-ahead box")
-    public void enterAreaInTypeAhead(@Named("area") String area){
+    public void enterAreaInTypeAhead(@Named("area") String area) {
         getDataPage().enterAreaInTypeAhead(area);
     }
 
     @When("the user enters an another area $anotherArea in the type-ahead box")
-    public void entersArea(@Named("anotherArea") String anotherArea){
+    public void entersArea(@Named("anotherArea") String anotherArea) {
         getDataPage().enterAreaInTypeAhead(anotherArea);
     }
 
     @When("the user enters an another city $anotherCity in the type-ahead box")
-    public void entersCity(@Named("anotherCity") String anotherCity){
+    public void entersCity(@Named("anotherCity") String anotherCity) {
         getDataPage().enterCityInTheTypeAheadBox(anotherCity);
     }
 
     @Then("the user should see the country iso2 as $iso2")
-    public void verifyCountryIso2(@Named("iso2") String iso2){
+    public void verifyCountryIso2(@Named("iso2") String iso2) {
         getDataPage().verifyCountryIso2(iso2);
     }
 
     @Then("the user should see the country iso3 as $iso3")
-    public void verifyCountryIso3(@Named("iso3") String iso3){
+    public void verifyCountryIso3(@Named("iso3") String iso3) {
         getDataPage().verifyCountryIso3(iso3);
     }
 
 
     @Then("the user should see the basic info for the selected country")
-    public void verifyCountryBasicInfo(){
-        getDataPage().verifyBasicInfo(); }
-
+    public void verifyCountryBasicInfo() {
+        getDataPage().verifyBasicInfo();
+    }
 
     @Then("the user should see the basic info for selected area")
     @Alias("the user should see the basic info for selected city")
-
-    public void verifyAreaBasicInfo(){
-        getDataPage().verifyBasicInfo(); }
+    public void verifyAreaBasicInfo() {
+        getDataPage().verifyBasicInfo();
+    }
 
     @Then("the user should see the basic info for selected sub-area")
-    public void verifySubAreaBasicInfo(){
-        getDataPage().verifyBasicInfo(); }
+    public void verifySubAreaBasicInfo() {
+        getDataPage().verifyBasicInfo();
+    }
 
     @Then("the user should see the list of country's names type and value as: $countryNames")
-    public void verifyCountryNames(ExamplesTable countryNames){
+    public void verifyCountryNames(ExamplesTable countryNames) {
         getDataPage().verifyNames(countryNames);
     }
 
     @Then("the user should see the area's names as: $Names")
     @Alias("the user should see the legal entity's names as: $Names")
-    public void verifyAreaNames(ExamplesTable Names){
+    public void verifyAreaNames(ExamplesTable Names) {
         getDataPage().verifyNames(Names);
     }
 
@@ -219,17 +219,17 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the country basic info link in the navigation bar")
-    public void clickOnBasicInfoInNavigationBar(){
+    public void clickOnBasicInfoInNavigationBar() {
         getDataPage().clickOnBasicInfoInNavigationBar();
     }
 
     @When("the user clicks on the country regions link in the navigation bar")
-    public void clickOnRegionsInNavigationBar(){
+    public void clickOnRegionsInNavigationBar() {
         getDataPage().clickOnRegionsInNavigationBar();
     }
 
     @Then("the user should see the country's demographics info as: $countryDemographics")
-    public void verifyCountryDemographics(ExamplesTable countryDemographics){
+    public void verifyCountryDemographics(ExamplesTable countryDemographics) {
         getDataPage().verifyCountryDemographics(countryDemographics);
     }
 
@@ -239,57 +239,59 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the area's identifiers as: $areaIdentifiers")
-    public void verifyAreaIdentifiers(ExamplesTable areaIdentifiers){
+    public void verifyAreaIdentifiers(ExamplesTable areaIdentifiers) {
         getDataPage().verifyIdentifiers(areaIdentifiers);
     }
 
     @Then("the user should see the city's identifiers as: $cityIdentifiers")
-    public void verifyCityIdentifiers(ExamplesTable cityIdentifiers){
+    public void verifyCityIdentifiers(ExamplesTable cityIdentifiers) {
         getDataPage().verifyIdentifiers(cityIdentifiers);
     }
+
     @Then("the user should see the country's banking hours summary as $countryBankingHourSummary")
-    public void verifyCountryBankingHourSummary(@Named("countryBankingHourSummary") String countryBankingHourSummary){
+    public void verifyCountryBankingHourSummary(@Named("countryBankingHourSummary") String countryBankingHourSummary) {
         getDataPage().verifyCountryBankingHourSummary(countryBankingHourSummary);
     }
 
     @Then("the user should see the country's banking hours as: $countryBankingHrSummary")
-    public void verifyCountryBankingHourSummaryDaysAndHrs(ExamplesTable countryBankingHrSummary){
+    public void verifyCountryBankingHourSummaryDaysAndHrs(ExamplesTable countryBankingHrSummary) {
         getDataPage().verifyCountryBankingHourSummaryDaysAndHrs(countryBankingHrSummary);
     }
 
     @Then("the user should see the country's time zones summary as $countryTimeZonesSummary")
-    public void verifyCountryTimeZonesSummary(@Named("countryTimeZonesSummary") String countryTimeZonesSummary){
+    public void verifyCountryTimeZonesSummary(@Named("countryTimeZonesSummary") String countryTimeZonesSummary) {
         getDataPage().verifyCountryTimeZonesSummary(countryTimeZonesSummary);
     }
 
     @Then("the user should see the area's time zones summary as $areaTimeZonesSummary")
-    public void verifyAreaTimeZonesSummary(@Named("areaTimeZonesSummary") String areaTimeZonesSummary){
+    public void verifyAreaTimeZonesSummary(@Named("areaTimeZonesSummary") String areaTimeZonesSummary) {
         getDataPage().verifyAreaTimeZonesSummary(areaTimeZonesSummary);
     }
 
     @Then("the user should see the area's replace by as $areaReplacedBy")
-    public void verifyAreaReplaceByLabelValues(@Named("areaReplacedBy") String areaReplacedBy){
+    public void verifyAreaReplaceByLabelValues(@Named("areaReplacedBy") String areaReplacedBy) {
         getDataPage().verifyReplaceByLabelValues(areaReplacedBy);
     }
 
     @Then("the user should see the countries's replace by as $countryReplacedBy")
-    public void verifyCountryReplaceByLabelValues(@Named("countryReplacedBy") String countryReplacedBy){
+    public void verifyCountryReplaceByLabelValues(@Named("countryReplacedBy") String countryReplacedBy) {
         getDataPage().verifyReplaceByLabelValues(countryReplacedBy);
     }
+
     @Then("the user should see the country's time zones as: $countryTimeZones")
-    public void verifyCountryTimeZones(ExamplesTable countryTimeZones){
+    public void verifyCountryTimeZones(ExamplesTable countryTimeZones) {
         getDataPage().verifyCountryTimeZones(countryTimeZones);
     }
 
     @Then("the user should not see the area's area link")
-    public void verifyAreaLinkInBasicInfo()
-    {
+    public void verifyAreaLinkInBasicInfo() {
         getDataPage().verifyAreaLinkInBasicInfo();
     }
 
     @Then("the user should not see the city's area link")
-    public void verifyAreaLinkForCityInBasicInfo()
-    { getDataPage().verifyAreaLinkForCityInBasicInfo(); }
+    public void verifyAreaLinkForCityInBasicInfo() {
+        getDataPage().verifyAreaLinkForCityInBasicInfo();
+    }
 
     @Then("the user should not see the city's Subarea link")
     public void verifySubAreaLinkForCityInBasicInfo() {
@@ -302,93 +304,93 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the country summary as: $countrySummary")
-    public void verifyCountrySummary(ExamplesTable countrySummary){
+    public void verifyCountrySummary(ExamplesTable countrySummary) {
         getDataPage().verifyCountrySummary(countrySummary);
     }
 
     @Then("the user should see the $label of a country as $value")
-    public void verifyCountryBasicInfo(@Named("label") String label,@Named("value") String value){
+    public void verifyCountryBasicInfo(@Named("label") String label, @Named("value") String value) {
         getDataPage().verifyBasicInfoLabel(label, value);
     }
 
     @Then("the user should see the $label of an area as $value")
     @Alias("the user should see the $label of a legalEntity as $value")
-    public void verifyAreaBasicInfo(@Named("label") String label,@Named("value") String value){
+    public void verifyAreaBasicInfo(@Named("label") String label, @Named("value") String value) {
         getDataPage().verifyBasicInfoLabel(label, value);
     }
 
     @Then("the user should see the $label of a city as $value")
-    public void verifyCityBasicInfo(@Named("label") String label,@Named("value") String value) {
+    public void verifyCityBasicInfo(@Named("label") String label, @Named("value") String value) {
         getDataPage().verifyBasicInfoLabel(label, value);
     }
 
     @When("the user clicks on the replaced by country <replacedByCountry> in the country basic info")
-    public void clickOnReplacedByCountry(@Named("replacedByCountry") String replacedByCountry){
+    public void clickOnReplacedByCountry(@Named("replacedByCountry") String replacedByCountry) {
         getDataPage().clickOnReplacedByCountry(replacedByCountry);
     }
 
     @When("the user clicks on the country <currencyUsageCountry> in the currency usage")
-    public void clickOnCurrencyUsageCountry(@Named("currencyUsageCountry") String currencyUsageCountry){
+    public void clickOnCurrencyUsageCountry(@Named("currencyUsageCountry") String currencyUsageCountry) {
         getDataPage().clickOnCurrencyUsageCountry(currencyUsageCountry);
     }
 
     @When("the user clicks on the country iso3 $iso3 in the currency usage")
-    public void clickOnCurrencyIso3(@Named("iso3") String iso3){
+    public void clickOnCurrencyIso3(@Named("iso3") String iso3) {
         getDataPage().clickOnCurrencyIso3(iso3);
     }
 
     @When("the user clicks on the country holidays link in the navigation bar")
-    public void clickOnCountryHolidays(){
+    public void clickOnCountryHolidays() {
         getDataPage().clickOnCountryHolidays();
     }
 
     @Then("the user should see the country's holidays list as: $countryHolidaysList")
-    public void verifyCountryHolidays(ExamplesTable countryHolidaysList){
+    public void verifyCountryHolidays(ExamplesTable countryHolidaysList) {
         getDataPage().verifyCountryHolidays(countryHolidaysList);
     }
 
     @Then("the user should not see the country's holidays list")
-    public void verifyNoCountryHolidays(){
+    public void verifyNoCountryHolidays() {
         getDataPage().verifyNoCountryHolidays();
     }
-    
+
     @When("the user clicks on the country payments link in the navigation bar")
-    public void clickOnCountryPayments(){
+    public void clickOnCountryPayments() {
         getDataPage().clickOnCountryPayments();
     }
 
     @Then("the user should see the country's payments iban as: $countryPaymentsIban")
-    public void verifyCountryPaymentsIban(ExamplesTable countryPaymentsIban){
+    public void verifyCountryPaymentsIban(ExamplesTable countryPaymentsIban) {
         getDataPage().verifyCountryPaymentsIban(countryPaymentsIban);
     }
 
     @Then("the user should see the country's payments routing code types as: $countryPaymentsRoutingCodesTypes")
-    public void verifyCountryPaymentsRoutingCodesTypes(ExamplesTable countryPaymentsRoutingCodesTypes){
+    public void verifyCountryPaymentsRoutingCodesTypes(ExamplesTable countryPaymentsRoutingCodesTypes) {
         getDataPage().verifyCountryPaymentsRoutingCodesTypes(countryPaymentsRoutingCodesTypes);
     }
 
     @Then("the user should not see the country's payments iban")
-    public void verifyCountryNoIbanInfo(){
+    public void verifyCountryNoIbanInfo() {
         getDataPage().verifyCountryNoIbanInfo();
     }
 
     @Then("the user should not see the country's payments routing codes types")
-    public void verifyCountryNoRoutingCodeTypes(){
+    public void verifyCountryNoRoutingCodeTypes() {
         getDataPage().verifyCountryNoRoutingCodeTypes();
     }
 
     @Then("the user should see the country's alternative regions as: $countryRegions")
-    public void verifyCountryRegions(ExamplesTable countryRegions){
+    public void verifyCountryRegions(ExamplesTable countryRegions) {
         getDataPage().verifyRegions(countryRegions);
     }
 
     @Then("the user should not see the country regions section")
-    public void verifyNoCountryRegionsSection(){
+    public void verifyNoCountryRegionsSection() {
         getDataPage().verifyNoCountryRegionsSection();
     }
 
     @Then("the user should not see the country holidays section")
-    public void verifyNoCountryHolidaysSection(){
+    public void verifyNoCountryHolidaysSection() {
         getDataPage().verifyNoCountryHolidaysSection();
     }
 
@@ -398,17 +400,17 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the country's languages list as $languages")
-    public void verifyCountryLanguages(@Named("languages")String languages){
+    public void verifyCountryLanguages(@Named("languages") String languages) {
         getDataPage().verifyCountryLanguages(languages);
     }
 
     @When("the user clicks on the country credit rating link in the navigation bar")
-    public void clickOnCountryCreditRating(){
+    public void clickOnCountryCreditRating() {
         getDataPage().clickOnCountryCreditRating();
     }
 
     @Then("the user should see the country's credit ratings as: $countryCreditRatings")
-    public void verifyCountryCreditRatings(ExamplesTable countryCreditRatings){
+    public void verifyCountryCreditRatings(ExamplesTable countryCreditRatings) {
         getDataPage().verifyCreditRatings(countryCreditRatings);
     }
 
@@ -418,27 +420,27 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the update currency link")
-    public void clickOnUpdateCurrencyLink(){
+    public void clickOnUpdateCurrencyLink() {
         getDataPage().clickOnUpdateCurrencyLink();
     }
 
     @When("the user enters the currency name value as <name>")
-    public void enterCurrencyName(@Named("name") String name){
+    public void enterCurrencyName(@Named("name") String name) {
         getDataPage().enterCurrencyName(name);
     }
 
     @When("the user enters the currency abbr value as <abbr>")
-    public void enterCurrencyAbbr(@Named("abbr") String abbr){
+    public void enterCurrencyAbbr(@Named("abbr") String abbr) {
         getDataPage().enterCurrencyAbbr(abbr);
     }
 
     @When("the user enters the currency unit value as <unit>")
-    public void enterCurrencyUnit(@Named("unit") String unit){
+    public void enterCurrencyUnit(@Named("unit") String unit) {
         getDataPage().enterCurrencyUnit(unit);
     }
 
     @When("the user enters the currency quantity value as <quantity>")
-    public void enterCurrencyQuantity(@Named("quantity") String quantity){
+    public void enterCurrencyQuantity(@Named("quantity") String quantity) {
         getDataPage().enterCurrencyQuantity(quantity);
     }
 
@@ -448,7 +450,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the country's places as: $countryPlaces")
-    public void verifyCountryPlaces(ExamplesTable countryPlaces){
+    public void verifyCountryPlaces(ExamplesTable countryPlaces) {
         getDataPage().verifyPlaces(countryPlaces);
     }
 
@@ -480,27 +482,27 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the country entity link in the navigation bar")
-    public void clickOnCountryEntity () {
+    public void clickOnCountryEntity() {
         getDataPage().clickOnCountryEntity();
     }
 
     @When("the user clicks on the country people link in the navigation bar")
     public void clickOnCountryPeople() {
-    getDataPage().clickOnCountryPeople();
+        getDataPage().clickOnCountryPeople();
     }
 
     @Then("the user should see the country's entities as: $countryEntities")
-    public void verifyCountryEntities (ExamplesTable countryEntities){
+    public void verifyCountryEntities(ExamplesTable countryEntities) {
         getDataPage().verifyEntities(countryEntities);
     }
 
     @Then("the user should see the country's people as: $countryPeople")
-    public void verifyCountryPeople (ExamplesTable countryPeople) {
+    public void verifyCountryPeople(ExamplesTable countryPeople) {
         getDataPage().verifyPeople(countryPeople);
     }
 
     @Then("the user should not see the country's entities")
-    public void verifyNoCountryEntities () {
+    public void verifyNoCountryEntities() {
         getDataPage().verifyNoEntities();
     }
 
@@ -515,27 +517,29 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the default country page and display all info")
-    public void verifyCountryDefaultToViewAll(){
+    public void verifyCountryDefaultToViewAll() {
         getDataPage().verifyDefaultToViewAll();
     }
 
     @When("the user refreshes the page")
-    public void refreshThePage(){
+    public void refreshThePage() {
         getDataPage().refreshThePage();
     }
 
     @When("the user clicks on the currencies link in the navigation bar")
-    public void clickOnCountryCurrenciesLink(){
+    public void clickOnCountryCurrenciesLink() {
         getDataPage().clickOnCountryCurrenciesLink();
     }
 
     @Then("the user should see the country's currencies as: $countryCurrencies")
-    public void verifyCountryCurrencies(ExamplesTable countryCurrencies){
+    public void verifyCountryCurrencies(ExamplesTable countryCurrencies) {
         getDataPage().verifyCountryCurrencies(countryCurrencies);
     }
 
     @When("the user clicks on the choose an area option")
-    public void clickOnAreaDropdown() { getDataPage().clickOnAreaDropdown();}
+    public void clickOnAreaDropdown() {
+        getDataPage().clickOnAreaDropdown();
+    }
 
     @Then("the user should see the below states for the selected country: $areas")
     public void verifyAreaForSelectedCountry(ExamplesTable areas) {
@@ -543,7 +547,9 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the below subareas for the selected country and area: $subarea")
-    public void verifySubareaForSelectedArea(ExamplesTable subarea) {getDataPage().verifySubareaForSelectedArea(subarea); }
+    public void verifySubareaForSelectedArea(ExamplesTable subarea) {
+        getDataPage().verifySubareaForSelectedArea(subarea);
+    }
 
     @Then("the user should see the area dropdown disabled")
     public void verifyAreaDropdownDisabled() {
@@ -551,7 +557,9 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the subarea dropdown disabled")
-    public void verifySubareaDropdownDisabled() {getDataPage().verifySubareaDropdownDisabled(); }
+    public void verifySubareaDropdownDisabled() {
+        getDataPage().verifySubareaDropdownDisabled();
+    }
 
     @When("the user clicks on the area basic info link in the navigation bar")
     public void clickOnAreaBasicInfoInNavigationBar() {
@@ -581,7 +589,9 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the choose a city option")
-    public void clickOnCityDropdown() { getDataPage().clickOnCityDropdown();}
+    public void clickOnCityDropdown() {
+        getDataPage().clickOnCityDropdown();
+    }
 
     @Then("the user should see the below cities for the selected area: $cities")
     public void verifyCitiesForSelectedArea(ExamplesTable cities) {
@@ -620,9 +630,10 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should not see the area's demographics")
-        public void verifyNoAresDemographics() {
+    public void verifyNoAresDemographics() {
         getDataPage().verifyNoDemographics();
     }
+
     @Then("the user should not see the sub-area's demographics")
     public void verifyNoSubAreaDemographics() {
         getDataPage().verifyNoDemographics();
@@ -630,7 +641,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the area's people as: $areaPeople")
     @Alias("the user should see the sub-area's people as: $areaPeople")
-    public void verifyAreaPeople (ExamplesTable areaPeople) {
+    public void verifyAreaPeople(ExamplesTable areaPeople) {
         getDataPage().verifyPeople(areaPeople);
     }
 
@@ -641,7 +652,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the area's credit rating link in the navigation bar")
-    public void clickOnAreasCreditRatings(){
+    public void clickOnAreasCreditRatings() {
         getDataPage().clickOnAreasCreditRatings();
     }
 
@@ -651,23 +662,23 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the choose a sub-area option")
-    public void clickOnSubAreaDropDown(){
+    public void clickOnSubAreaDropDown() {
         getDataPage().clickOnSubAreaDropDown();
     }
 
     @When("the user enters the sub-area <subArea> in the type-ahead box")
     @Alias("the user enters the sub-area $subArea in the type-ahead box")
-    public void enterSubAreaInTypeAhead(@Named("subArea") String subArea){
+    public void enterSubAreaInTypeAhead(@Named("subArea") String subArea) {
         getDataPage().enterSubAreaInTypeAhead(subArea);
     }
 
     @Then("the user should not see the area's credit ratings")
-    public void verifyNoAreaCreditRatings(){
+    public void verifyNoAreaCreditRatings() {
         getDataPage().verifyNoCreditRatings();
     }
 
     @When("the user clicks on the sub-area's credit rating link in the navigation bar")
-    public void clickOnSubAreasCreditRatings(){
+    public void clickOnSubAreasCreditRatings() {
         getDataPage().clickOnAreasCreditRatings();
     }
 
@@ -677,53 +688,53 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should not see the sub-area's credit ratings")
-    public void verifyNoSubAreaCreditRatings(){
+    public void verifyNoSubAreaCreditRatings() {
         getDataPage().verifyNoCreditRatings();
     }
 
     @When("the user clicks on the area's alternative regions link in the navigation bar")
-    public void clickOnAreasAlternativeRegions(){
+    public void clickOnAreasAlternativeRegions() {
         getDataPage().clickOnAreasAlternativeRegions();
     }
 
     @Then("the user should see the area's alternative regions as: $areaRegions")
-    public void verifyAreaRegions(ExamplesTable areaRegions){
+    public void verifyAreaRegions(ExamplesTable areaRegions) {
         getDataPage().verifyRegions(areaRegions);
     }
 
     @When("the user clicks on the sub-area's alternative regions link in the navigation bar")
-    public void clickOnSubAreasAlternativeRegions(){
+    public void clickOnSubAreasAlternativeRegions() {
         getDataPage().clickOnAreasAlternativeRegions();
     }
 
     @Then("the user should see the sub-area's alternative regions as: $subAreaRegions")
-    public void verifySubAreaRegions(ExamplesTable subAreaRegions){
+    public void verifySubAreaRegions(ExamplesTable subAreaRegions) {
         getDataPage().verifyRegions(subAreaRegions);
     }
 
     @Then("the user should not see the area's alternative regions")
-    public void verifyNoAreaAlternativeRegions(){
+    public void verifyNoAreaAlternativeRegions() {
         getDataPage().verifyNoAlternativeRegions();
     }
 
     @Then("the user should not see the sub-area's alternative regions")
-    public void verifyNoSubAreaAlternativeRegions(){
+    public void verifyNoSubAreaAlternativeRegions() {
         getDataPage().verifyNoAlternativeRegions();
     }
 
     @Then("the user should see the default area page and display all info")
-    public void verifyAreaDefaultToViewAll(){
+    public void verifyAreaDefaultToViewAll() {
         getDataPage().verifyDefaultToViewAll();
     }
 
     @Then("the user should see the default sub-area page and display all info")
-    public void verifySubAreaDefaultToViewAll(){
+    public void verifySubAreaDefaultToViewAll() {
         getDataPage().verifyDefaultToViewAll();
     }
 
     @Then("the user should see the credit ratings for selected sub-area")
     @Alias("the user should see the credit rating for selected city")
-    public void verifyCreditRatingsForSubArea(){
+    public void verifyCreditRatingsForSubArea() {
         getDataPage().verifyCreditRatingsLabel();
     }
 
@@ -763,24 +774,22 @@ public class DataSteps extends AbstractSteps {
     public void verifyPeopleForSubArea() {
         getDataPage().verifyPeopleLabel();
     }
-    @Then("the user should see the entities for selected city")
 
+    @Then("the user should see the entities for selected city")
     public void verifyEntitiesForCity() {
         getDataPage().verifyEntitiesLabel();
     }
+
     @Then("the user should see the regions for selected city")
     public void verifyRegionsForCity() {
         getDataPage().verifyRegionsLabel();
     }
-    
+
     @When("the user clicks on the city's credit rating link in the navigation bar")
-    public void clickOnCityCreditRatings(){
+    public void clickOnCityCreditRatings() {
         getDataPage().clickOnCityCreditRatings();
     }
-    @When("the user clicks on the legal entity credit rating link in the navigation bar")
-    public void clickOnLegalEntityCreditRating() {
-        getDataPage().clickOnLegalEntityCreditRating();
-    }
+
 
     @When("the user clicks on the city's entity link in the navigation bar")
     public void clickOnCityEntity() {
@@ -789,7 +798,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the city's credit ratings as: $cityCreditRatings")
     @Alias("the user should see the legal entity's credit ratings as: $legalEntityCreditRatings")
-    public void verifyCityCreditRatings(ExamplesTable CreditRatings) {
+    public void verifyCreditRatings(ExamplesTable CreditRatings) {
         getDataPage().verifyCreditRatings(CreditRatings);
     }
 
@@ -806,7 +815,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should not see the city's credit ratings")
     @Alias("the user should not see the legal entity's credit ratings")
-    public void verifyNoCityCreditRatings(){
+    public void verifyNoCreditRatings(){
         getDataPage().verifyNoCreditRatings();
     }
 
@@ -884,6 +893,5 @@ public class DataSteps extends AbstractSteps {
     public void verifyNoSubAreaEntities () {
         getDataPage().verifyNoEntities();
     }
-
 }
 
