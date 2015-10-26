@@ -22,5 +22,3 @@ And the user enters the currency quantity value as <quantity>
 Examples:
 |currency|name|abbr|unit|quantity|
 |afghani|afghani|Af|Puls|100|
-
-Scenario: Verify that user can edit and cancel without saving
