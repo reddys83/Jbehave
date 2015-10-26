@@ -1,4 +1,4 @@
-Meta:@LegalEntityCreditRatings  @LegalEntity
+Meta:@LegalEntityCreditRatings @LegalEntity
 
 Narrative:
 In order to view and edit the legalEntity

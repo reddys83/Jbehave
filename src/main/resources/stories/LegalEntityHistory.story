@@ -1,4 +1,4 @@
-Meta:@LegalEntityHistory   @LegalEntity
+Meta:@LegalEntityHistory @LegalEntity
 
 Narrative:
 In order to view and edit the legalEntity

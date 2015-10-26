@@ -62,7 +62,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_statistics_label_xpath = By.xpath("//li/h1/span[text()='Statistics']");
     private By legalEntity_statistics_type_label_xpath = By.xpath("//li[h1='Statistics']//li//th[1]");
     private By legalEntity_statistics_value_label_xpath = By.xpath("//li[h1='Statistics']//li//th[2]");
-    private By legalEntity_statistics_type_list_xpath = By.xpath("//li[h1='Statistics']//li//table/tbody/tr/td[1]");
+    private By legalEntity_statistics_type_list_xpath = By.xpath("//li[h1='Statistics']//li//table/tbody/tr/th[1]");
     private By legalEntity_statistics_value_list_xpath = By.xpath("//li[h1='Statistics']//li//table/tbody/tr/td[1]");
     private By legalEntity_credit_rating_link_id = By.id("legalEntityCreditRating");
     private By legalEntity_ownership_link_id = By.id("legalEntityOwnershipSummaries");

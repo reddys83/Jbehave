@@ -19,13 +19,13 @@ When the user clicks on the search results card with fid <fid>
 When the user clicks on the legal entity statistics link in the navigation bar
 Then the user should see the legal entity's statistics as:
 |TYPE|VALUE|
-|Total ATMs:|100|
-|Total Checking Accounts:|1000000|
-|Total Savings Accounts:|5000|
-|Banks in Group:||
-|Association Members:||
-|Credit Union Members:||
-|Credit Union Share Draft:|False|
+|Total ATMs|100|
+|Total Checking Accounts|1000000|
+|Total Savings Accounts|5000|
+|Banks in Group||
+|Association Members||
+|Credit Union Members||
+|Credit Union Share Draft|False|
 
 
 Examples:

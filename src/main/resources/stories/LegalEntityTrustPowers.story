@@ -1,4 +1,4 @@
-Meta:@LegalEntityTrustPowers  @LegalEntity
+Meta:@LegalEntityTrustPowers @LegalEntity
 
 Narrative:
 In order to view and edit the legalEntity

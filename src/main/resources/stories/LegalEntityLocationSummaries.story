@@ -1,4 +1,4 @@
-Meta:@LegalEntityLocationSummaries  @LegalEntity
+Meta:@LegalEntityLocationSummaries @LegalEntity
 
 Narrative:
 In order to view and edit the legalEntity
