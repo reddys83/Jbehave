@@ -72,6 +72,19 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_ownership_value_label_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//table/thead//th[2]");
     private By legalEntity_ownership_type_list_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//table/tbody//td[1]");
     private By legalEntity_ownership_value_list_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//table/tbody//td[2]");
+    private By legalEntity_history_link_id = By.id("legalEntityHistory");
+    private By legalEntity_history_label_xpath = By.xpath("//li/h1/span[text()='History']");
+    private By legalEntity_history_summary_label_xpath = By.xpath("//li[h1='History']//th");
+    private By legalEntity_history_message_xpath = By.xpath("//li[h1='History']//td");
+    private By legalEntity_boardMeeting_link_id = By.id("legalEntityBoardMeetings");
+    private By legalEntity_boardMeeting_label_xpath = By.xpath("//li/h1/span[text()='Board Meetings']");
+    private By legalEntity_boardMeeting_summary_label_xpath =By.xpath("//li[h1='Board Meetings']//dt");
+    private By legalEntity_boardMeeting_summary_value_xpath=By.xpath("//li[h1='Board Meetings']//dd");
+    private By legalEntity_boardMeeting_type_label_xpath = By.xpath("//li[h1='Board Meetings']//th[1]");
+    private By legalEntity_boardMeeting_value_label_xpath = By.xpath("//li[h1='Board Meetings']//th[2]");
+    String legalEntity_boardMeeting_type_values_xpath = ("//li[h1='Board Meetings']//tr[td='");
+
+
 
     public LegalEntityPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -297,6 +310,74 @@ public class LegalEntityPage extends AbstractPage {
 
     public void clickOnLegalEntityCreditRating() {
         attemptClick(legalEntity_credit_rating_link_id);
+    }
+
+    public void clickOnLegalEntityHistory() {
+        attemptClick(legalEntity_history_link_id);
+    }
+
+    public void clickOnLegalEntityBoardMeetings()
+    {
+        attemptClick(legalEntity_boardMeeting_link_id);
+    }
+    public void verifyBoardMeetingsLabels() {
+        assertEquals("Summary",getTextOnPage(legalEntity_boardMeeting_summary_label_xpath));
+        assertEquals("TYPE",getTextOnPage(legalEntity_boardMeeting_type_label_xpath));
+        assertEquals("VALUE", getTextOnPage(legalEntity_boardMeeting_value_label_xpath));
+    }
+    public void verifyBoardMeetingsSummary(String SummaryValue)
+    {
+        verifyBoardMeetingsLabels();
+       assertEquals(SummaryValue, getTextOnPage(legalEntity_boardMeeting_summary_value_xpath));
+    }
+
+    public void verifyNoBoardMeetingsSummary()
+    {
+        verifyBoardMeetingsLabels();
+        try {
+            assertFalse(getDriver().findElement(legalEntity_boardMeeting_summary_value_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
+    }
+
+    public void verifyBoardMeetingsValues(ExamplesTable BoardMeetingsValues){
+        verifyBoardMeetingsLabels();
+        for(int i = 0; i<BoardMeetingsValues.getRowCount(); i++){
+            assertEquals(BoardMeetingsValues.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
+                    getDriver().findElement(
+                            By.xpath(legalEntity_boardMeeting_type_values_xpath + BoardMeetingsValues.getRow(i).get(BoardMeetingsValues.getHeaders().get(0)) + "']")).getText().replace(",", "").trim());
+        }
+    }
+
+    public void verifyNoBoardMeetingsValues()
+    {
+        verifyBoardMeetingsLabels();
+        try {
+            assertFalse(getDriver().findElement(legalEntity_boardMeeting_summary_value_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
+    }
+
+    public void verifyHistoryLabel() {
+        assertEquals("HISTORY", getTextOnPage(legalEntity_history_label_xpath));
+        assertEquals("SUMMARY",getTextOnPage(legalEntity_history_summary_label_xpath));
+
+    }
+    public void verifyLegalEntityHistory(ExamplesTable legalEntityHistory)
+    {
+        verifyHistoryLabel();
+        assertEquals(legalEntityHistory.getRow(0).get(legalEntityHistory.getHeaders().get(0)), getTextOnPage(legalEntity_history_message_xpath));
+
+    }
+
+    public void verifyNoLegalEntityHistory() {
+        verifyHistoryLabel();
+        try{
+            assertFalse(getDriver().findElement(legalEntity_history_message_xpath).isDisplayed());
+        }catch (NoSuchElementException e)
+        {
+
+        }
     }
 
     public void clickOnLegalEntityOwnership() {
