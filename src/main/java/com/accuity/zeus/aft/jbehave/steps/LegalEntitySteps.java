@@ -143,6 +143,44 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().clickOnLegalEntityCreditRating();
     }
 
+    @When("the user clicks on the legal entity history link in the navigation bar")
+    public void clickOnLegalEntityHistory(){
+        getLegalEntityPage().clickOnLegalEntityHistory();
+    }
+
+    @When("the user clicks on the legal entity board meetings link in the navigation bar")
+    public void clickOnLegalEntityBoardMeetings(){
+        getLegalEntityPage().clickOnLegalEntityBoardMeetings();
+    }
+    @Then("the user should see the legal entity's summary as $SummaryValue")
+    public void verifyBoardMeetingsSummary(@Named("SummaryValue") String SummaryValue){
+        getLegalEntityPage().verifyBoardMeetingsSummary(SummaryValue);
+    }
+
+    @Then("the user should not see the legal entity's summary")
+    public void verifyNoBoardMeetingsSummary() {
+        getLegalEntityPage().verifyNoBoardMeetingsSummary();
+    }
+
+    @Then("the user should see the legal entity's board meetings as: $BoardMeetingsValues")
+    public void verifyBoardMeetingsValues(ExamplesTable BoardMeetingsValues) {
+        getLegalEntityPage().verifyBoardMeetingsValues(BoardMeetingsValues);
+    }
+
+    @Then("the user should not see the legal entity's board meetings")
+    public void verifyNoBoardMeetingsValues() {
+        getLegalEntityPage().verifyNoBoardMeetingsValues();
+    }
+
+    @Then("the user should see the legal entity's history as: $legalEntityHistory")
+    public void verifyLegalEntityHistory(ExamplesTable legalEntityHistory) {
+        getLegalEntityPage().verifyLegalEntityHistory(legalEntityHistory);
+    }
+
+    @Then ("the user should not see the legal entity's history")
+    public void verifyNoLegalEntityHistory() {
+        getLegalEntityPage().verifyNoLegalEntityHistory();
+    }
     @When("the user clicks on the legal entity ownership link in the navigation bar")
     public void clickOnLegalEntityOwnership() {
         getLegalEntityPage().clickOnLegalEntityOwnership();
