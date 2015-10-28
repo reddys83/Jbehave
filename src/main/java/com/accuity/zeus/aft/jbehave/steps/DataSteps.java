@@ -825,8 +825,8 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the city all link in the navigation bar")
-    public void clicksOnAllTab() {
-        getDataPage().clicksOnAllTab();
+    public void clicksOnCiltyAllLink() {
+        getDataPage().clicksOnAllLink();
     }
 
     @Then("the user should see the default city page and display basic info")

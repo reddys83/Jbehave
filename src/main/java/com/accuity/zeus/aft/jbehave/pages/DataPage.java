@@ -181,6 +181,7 @@ public class DataPage extends AbstractPage {
     private By city_credit_ratings_link_id = By.id("cityCreditRating");
     private By city_people_link_id = By.id("cityPeople");
     private By area_entities_link_id = By.id("areaPresences");
+    private By identifiers_header_xpath = By.xpath("//li[h1='Identifiers'] //span");
 
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -526,6 +527,11 @@ public class DataPage extends AbstractPage {
         assertEquals("STATUS", getDriver().findElement(identifiers_status_label_xpath).getText());
     }
 
+    public void verifyLegalEntityIdentifiersLabels(){
+        verifyIdentifiersLabels();
+        assertEquals("IDENTIFIERS", getDriver().findElement(identifiers_header_xpath).getText());
+    }
+
     public void verifyCountryBankingHourSummary(String countryBankingHourSummary) {
         assertEquals("Summary", getDriver().findElement(country_banking_hr_summary_label_xpath).getText());
         assertEquals(countryBankingHourSummary, getDriver().findElement(country_banking_hr_summary_xpath).getText());
@@ -769,11 +775,6 @@ public class DataPage extends AbstractPage {
 
     public void verifyCreditRatings(ExamplesTable creditRatings) {
         verifyCreditRatingsLabel();
-        if(SearchPage.selectedEntity !=""){
-            selectedEntity = SearchPage.selectedEntity;
-        }
-        assertEquals("CREDIT RATINGS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(credit_rating_for_label_xpath).getText());
-        assertEquals("AGENCY TYPE VALUE APPLIED DATE CONFIRMED DATE", getDriver().findElement(credit_rating_table_headers_xpath).getText());
         List<WebElement> agency = getDriver().findElements(credit_rating_agency_xpath);
         List<WebElement> type = getDriver().findElements(credit_rating_type_xpath);
         List<WebElement> value = getDriver().findElements(credit_rating_value_xpath);
@@ -790,15 +791,15 @@ public class DataPage extends AbstractPage {
 
     public void verifyCreditRatingsLabel() {
         assertEquals("CREDIT RATING", getDriver().findElement(credit_rating_label_xpath).getText());
-    }
-
-    public void verifyNoCreditRatings() {
-        assertEquals("CREDIT RATING", getDriver().findElement(credit_rating_label_xpath).getText());
         if(SearchPage.selectedEntity !=""){
             selectedEntity = SearchPage.selectedEntity;
         }
         assertEquals("CREDIT RATINGS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(credit_rating_for_label_xpath).getText());
         assertEquals("AGENCY TYPE VALUE APPLIED DATE CONFIRMED DATE", getDriver().findElement(credit_rating_table_headers_xpath).getText());
+    }
+
+    public void verifyNoCreditRatings() {
+        verifyCreditRatingsLabel();
         try {
             assertFalse(getDriver().findElement(credit_rating_agency_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e){}
@@ -905,7 +906,7 @@ public class DataPage extends AbstractPage {
         assertTrue(getDriver().findElement(select_all_link_xpath).isDisplayed());
     }
 
-    public void clicksOnAllTab() {
+    public void clicksOnAllLink() {
         attemptClick(all_link_id);
     }
 

@@ -19,7 +19,7 @@ When the user clicks on the search results card with fid <fid>
 
 Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
 
-Then the user should see the basic info for selected legalEntity
+Then the user should see the basic info for selected legal entity
 
 And the user should see the legal entity's names as:
 |TYPE|VALUE|
