@@ -259,6 +259,11 @@ public class DataPage extends AbstractPage {
     public void selectCurrencyFromTypeAhead(String currency) {
         getDriver().findElement(currency_input_xpath).sendKeys(currency);
         getDriver().findElement(currency_input_xpath).sendKeys(Keys.RETURN);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void verifyCurrencyIsoCode(String isoCode) {
@@ -412,13 +417,13 @@ public class DataPage extends AbstractPage {
 
     public void enterCountryInTheTypeAheadBox(String country) {
         selectedEntity = country;
+        getDriver().findElement(country_type_ahead_xpath).sendKeys(country);
+        getDriver().findElement(country_type_ahead_xpath).sendKeys(Keys.RETURN);
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        getDriver().findElement(country_type_ahead_xpath).sendKeys(country);
-        getDriver().findElement(country_type_ahead_xpath).sendKeys(Keys.RETURN);
     }
 
     public LegalEntityPage clicksOnSearchResults(String fidValue) {
@@ -434,13 +439,13 @@ public class DataPage extends AbstractPage {
 
     public void enterAreaInTypeAhead(String area) {
         selectedEntity = area;
+        getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(area);
+        getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(area);
-        getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
     }
 
     public void verifyCountryIso2(String iso2) {
@@ -1117,13 +1122,13 @@ public class DataPage extends AbstractPage {
 
     public void enterCityInTheTypeAheadBox(String city) {
         selectedEntity = city;
+        getDriver().findElement(city_type_ahead_xpath).sendKeys(city);
+        getDriver().findElement(city_type_ahead_xpath).sendKeys(Keys.RETURN);
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        getDriver().findElement(city_type_ahead_xpath).sendKeys(city);
-        getDriver().findElement(city_type_ahead_xpath).sendKeys(Keys.RETURN);
    }
 
     public void clickOnCityRegionsInNavigationBar() {
