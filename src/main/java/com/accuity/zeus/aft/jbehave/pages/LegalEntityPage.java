@@ -77,13 +77,16 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_history_summary_label_xpath = By.xpath("//li[h1='History']//th");
     private By legalEntity_history_message_xpath = By.xpath("//li[h1='History']//td");
     private By legalEntity_boardMeeting_link_id = By.id("legalEntityBoardMeetings");
-    private By legalEntity_boardMeeting_label_xpath = By.xpath("//li/h1/span[text()='Board Meetings']");
+    private By legalEntity_boardMeeting_label_xpath = By.xpath(".//li[h1='Board Meetings'] //h2");
     private By legalEntity_boardMeeting_summary_label_xpath =By.xpath("//li[h1='Board Meetings']//dt");
     private By legalEntity_boardMeeting_summary_value_xpath=By.xpath("//li[h1='Board Meetings']//dd");
     private By legalEntity_boardMeeting_type_label_xpath = By.xpath("//li[h1='Board Meetings']//th[1]");
     private By legalEntity_boardMeeting_value_label_xpath = By.xpath("//li[h1='Board Meetings']//th[2]");
     String legalEntity_boardMeeting_type_values_xpath = ("//li[h1='Board Meetings']//tr[td='");
-
+    private By legalEntity_boardMeeting_header_xpath = By.xpath("//li[h1='Board Meetings'] //span");
+    private By legalEntity_location_summary_header_xpath = By.xpath("//li[h1='Location Summaries'] //span");
+    private By legalEntity_ownership_header_xpath = By.xpath("//li[h1='Ownership Summaries'] //span");
+    private By credit_rating_section_xpath = By.xpath("//li[h1='Credit Rating']");
 
 
     public LegalEntityPage(WebDriver driver, String urlPrefix) {
@@ -161,6 +164,7 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyLegalEntityLocationsLabel(){
         assertEquals("LOCATION SUMMARIES",getTextOnPage(legalEntity_location_summary_label_xpath));
+        assertEquals("LOCATION SUMMARIES",getTextOnPage(legalEntity_location_summary_header_xpath));
         assertEquals("TYPE",getTextOnPage(legalEntity_locationSummaries_type_label_xpath));
         assertEquals("VALUE", getTextOnPage(legalEntity_locationSummaries_value_lable_xpath));
     }
@@ -216,9 +220,7 @@ public class LegalEntityPage extends AbstractPage {
     }
 
     public void verifyLegalEntityStatistics(ExamplesTable legalEntityStatistics){
-        assertEquals("STATISTICS", getTextOnPage(legalEntity_statistics_label_xpath));
-        assertEquals("TYPE",getTextOnPage(legalEntity_statistics_type_label_xpath));
-        assertEquals("VALUE",getTextOnPage(legalEntity_statistics_value_label_xpath));
+        verifyLegalEntityStatisticsLabels();
         List<WebElement> type = getDriver().findElements(legalEntity_statistics_type_list_xpath);
         List<WebElement> value = getDriver().findElements(legalEntity_statistics_value_list_xpath);
 
@@ -226,6 +228,12 @@ public class LegalEntityPage extends AbstractPage {
             assertEquals(legalEntityStatistics.getRow(i).get(legalEntityStatistics.getHeaders().get(0)),type.get(i).getText());
             assertEquals(legalEntityStatistics.getRow(i).get(legalEntityStatistics.getHeaders().get(1)),value.get(i).getText());
         }
+    }
+
+    public void verifyLegalEntityStatisticsLabels(){
+        assertEquals("STATISTICS", getTextOnPage(legalEntity_statistics_label_xpath));
+        assertEquals("TYPE",getTextOnPage(legalEntity_statistics_type_label_xpath));
+        assertEquals("VALUE",getTextOnPage(legalEntity_statistics_value_label_xpath));
     }
 
     public void verifyLegalEntityTrustPowersLabels()
@@ -284,7 +292,7 @@ public class LegalEntityPage extends AbstractPage {
     }
 
     public void verifyLegalEntityPersonnel(ExamplesTable legalEntityPersonnel) {
-        verifyLegalEntityPersonnelLabels();
+        verifyPersonnelLabels();
         List<WebElement> type = getDriver().findElements(legalEntity_personnel_type_list_xpath);
         List<WebElement> value = getDriver().findElements(legalEntity_personnel_value_list_xpath);
 
@@ -294,14 +302,14 @@ public class LegalEntityPage extends AbstractPage {
         }
     }
 
-    public void verifyLegalEntityPersonnelLabels() {
+    public void verifyPersonnelLabels() {
         assertEquals("PERSONNEL", getTextOnPage(legalEntity_personnel_label_xpath));
         assertEquals("TYPE",getTextOnPage(legalEntity_personnel_type_label_xpath));
         assertEquals("VALUE",getTextOnPage(legalEntity_personnel_value_label_xpath));
     }
 
     public void verifyNoLegalEntityPersonnel() {
-        verifyLegalEntityPersonnelLabels();
+        verifyPersonnelLabels();
         try {
             assertFalse(getDriver().findElement(legalEntity_personnel_type_list_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e) {
@@ -320,7 +328,10 @@ public class LegalEntityPage extends AbstractPage {
     {
         attemptClick(legalEntity_boardMeeting_link_id);
     }
+
     public void verifyBoardMeetingsLabels() {
+        assertEquals("BOARD MEETINGS", getTextOnPage(legalEntity_boardMeeting_header_xpath));
+        assertEquals("BOARD MEETINGS", getTextOnPage(legalEntity_boardMeeting_label_xpath));
         assertEquals("Summary",getTextOnPage(legalEntity_boardMeeting_summary_label_xpath));
         assertEquals("TYPE",getTextOnPage(legalEntity_boardMeeting_type_label_xpath));
         assertEquals("VALUE", getTextOnPage(legalEntity_boardMeeting_value_label_xpath));
@@ -397,6 +408,7 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyOwnershipLabels(){
         assertEquals("OWNERSHIP SUMMARIES", getTextOnPage(legalEntity_ownership_label_xpath));
+        assertEquals("OWNERSHIP SUMMARIES", getTextOnPage(legalEntity_ownership_header_xpath));
         assertEquals("TYPE",getTextOnPage(legalEntity_ownership_type_label_xpath));
         assertEquals("VALUE",getTextOnPage(legalEntity_ownership_value_label_xpath));
     }
@@ -412,5 +424,11 @@ public class LegalEntityPage extends AbstractPage {
 
     public void clickOnLegalEntityIdentifierLink() {
         attemptClick(legalEntity_identifiers_link_id);
+    }
+
+    public void verifyNoLegalEntityCreditRatingsSection(){
+        try {
+            assertFalse(getDriver().findElement(credit_rating_section_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e){}
     }
 }

@@ -1,6 +1,5 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -18,7 +17,7 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyLegalEntityHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
-    @Then("the user should see the basic info for selected legalEntity")
+    @Then("the user should see the basic info for selected legal entity")
     public void verifyLegalEntityBasicInfo(){
         getDataPage().verifyBasicInfo();
     }
@@ -194,6 +193,75 @@ public class LegalEntitySteps extends AbstractSteps{
     @Then("the user should not see the legal entity's ownership")
     public void verifyNoLegalEntityOwnership(){
         getLegalEntityPage().verifyNoLegalEntityOwnership();
+    }
 
+    @Then("the user should see the default legal entity page and display basic info")
+    public void verifyDefaultLegalEntitySection(){
+        getDataPage().verifyBasicInfo();
+    }
+
+    @When("the user clicks on the legal entity all link in the navigation bar")
+    public void clickOnLegalEntityAllLink() {
+        getDataPage().clicksOnAllLink();
+    }
+
+    @Then("the user should see the board meetings for the legal entity")
+    public void verifyBoardMeetingsLabels(){
+        getLegalEntityPage().verifyBoardMeetingsLabels();
+    }
+
+    @Then("the user should see the credit rating for the legal entity")
+    public void verifyCreditRatingsLabel(){
+        getDataPage().verifyCreditRatingsLabel();
+    }
+
+    @Then("the user should see the history for the legal entity")
+    public void verifyHistoryLabel(){
+        getLegalEntityPage().verifyHistoryLabel();
+    }
+
+    @Then("the user should see the identifiers for the legal entity")
+    public void verifyLegalEntityIdentifiersLabels(){
+        getDataPage().verifyLegalEntityIdentifiersLabels();
+    }
+
+    @Then("the user should see the location summaries for the legal entity")
+    public void verifyLegalEntityLocationsLabel(){
+        getLegalEntityPage().verifyLegalEntityLocationsLabel();
+    }
+
+    @Then("the user should see the ownership summaries for the legal entity")
+    public void verifyOwnershipLabels(){
+        getLegalEntityPage().verifyOwnershipLabels();
+    }
+
+    @Then("the user should see the personnel for the legal entity")
+    public void verifyPersonnelLabels(){
+        getLegalEntityPage().verifyPersonnelLabels();
+    }
+
+    @Then("the user should see the offered services for the legal entity")
+    public void verifyLegalEntityOfferedServicesLabels(){
+        getLegalEntityPage().verifyLegalEntityOfferedServicesLabels();
+    }
+
+    @Then("the user should see the financial services for the legal entity")
+    public void verifyLegalEntityFinancialServicesLabels(){
+        getLegalEntityPage().verifyLegalEntityFinancialServicesLabels();
+    }
+
+    @Then("the user should see the statistics for the legal entity")
+    public void verifyLegalEntityStatisticsLabels(){
+        getLegalEntityPage().verifyLegalEntityStatisticsLabels();
+    }
+
+    @Then("the user should see the trust powers for the legal entity")
+    public void verifyLegalEntityTrustPowersLabels(){
+        getLegalEntityPage().verifyLegalEntityTrustPowersLabels();
+    }
+
+    @Then("the user should not see the legal entity's credit ratings section")
+    public void verifyNoLegalEntityCreditRatingsSection(){
+        getLegalEntityPage().verifyNoLegalEntityCreditRatingsSection();
     }
 }
