@@ -264,4 +264,9 @@ public class LegalEntitySteps extends AbstractSteps{
     public void verifyNoLegalEntityCreditRatingsSection(){
         getLegalEntityPage().verifyNoLegalEntityCreditRatingsSection();
     }
+
+    @Then("the user clicks on the offices tab in the legal entity")
+    public void clicksOnOfficesTab() {
+        getLegalEntityPage().clicksOnOfficesTab();
+    }
 }
