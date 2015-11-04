@@ -19,8 +19,8 @@ And the user clicks on the legal entity credit rating link in the navigation bar
 
 Then the user should see the legal entity's credit ratings as:
 |AGENCY|TYPE|VALUE|APPLIED DATE|CONFIRMED DATE|
-|Fitch|Long Term Rating|A+|23 Mar 2015|22 Oct 2015|
-|Fitch|Short Term Rating|F1+|23 Mar 2015|22 Oct 2015|
+|Fitch|Long Term Rating|A+|06 Oct 2015|06 Oct 2015|
+|Fitch|Short Term Rating|F1+|06 Oct 2015|06 Oct 2015|
 
 Examples:
 |entity|searchBy|fid|

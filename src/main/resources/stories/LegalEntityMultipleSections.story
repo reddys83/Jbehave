@@ -46,22 +46,25 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the legal entity credit rating link in the navigation bar
 
 Then the user should see the legal entity's credit ratings as:
-|AGENCY|TYPE|VALUE|APPLIED DATE|CONFIRMED DATE|
-|Fitch |Long Term Rating|A|23 Mar 2015||
-|Fitch |Short Term Rating|F1|23 Mar 2015||
-|Moody's|Long Term Rating|A2|21 Nov 2013||
-|Moody's|Short Term Rating|P-1|21 Nov 2013||
-|Standard & Poors|Long Term Rating|A|02 Dec 2011||
-|Standard & Poors|Short Term Rating|A-1|02 Dec 2011||
+|NAME|TYPE|VALUE|Date APPLIED|DATE CONFIRMED|
+|Fitch |Long Term Rating|A+|2015-10-07||
+|Fitch |Short Term Rating|F1|2015-10-07||
+|Moody's|Long Term Rating|A1|2015-09-02||
+|Moody's|Short Term Rating|P-1|2015-09-02||
+|Standard & Poors|Long Term Rating|A|2011-12-02||
+|Standard & Poors|Short Term Rating|A-1|2011-12-02||
 
 When the user clicks on the legal entity identifier link in the navigation bar
 
 Then the user should see the legal entity's identifiers as:
 |TYPE|VALUE|STATUS|
 |The Global Markets Entity Identifier (GMEI)|B4TYDEB6GKMZO031MB27|active|
+|S and P Identification Number (SPID)|105940|active|
 |RSSD|480228|active|
 |FDIC|3510|active|
 |OCC|13044|active|
+|Global Intermediary Identification Number|K613SZ.99999.SL.840|active|
+|Moodys Organisation ID|600011442|active|
 |US Tax ID|94-1687665|active|
 |Fitch ID|80089060|active|
 

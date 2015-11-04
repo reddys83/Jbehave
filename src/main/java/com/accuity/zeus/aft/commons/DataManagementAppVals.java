@@ -255,7 +255,7 @@ public class DataManagementAppVals {
 
         public static List<String> expTaxonomiesListVal = new ArrayList<>(Arrays.asList(
                 "Abbreviation Rules",
-                "Additional Info Text Type",
+                "Additional Info Type",
                 "Area Alternative Regions",
                 "Area Related Entity Type",
                 "Area Related Person Type",
@@ -274,6 +274,7 @@ public class DataManagementAppVals {
                 "Country Related Place Type",
                 "Default SWIFT BIC Pairings",
                 "Demographics Metrics",
+                "Domestic-With Place Type",
                 "Edit Type",
                 "Federal Home Loan Bank Districts",
                 "Federal Reserve Branch Districts",
@@ -290,11 +291,12 @@ public class DataManagementAppVals {
                 "Metropolitan Statistical Region",
                 "National Credit Union Administration Region",
                 "Office Third Party Identifiers",
-                "Ownership Summary Text Type",
-                "Personnel Summary Text Type",
+                "Ownership Summary Type",
+                "Personnel Summary Type",
                 "Place Name Type",
                 "Rating Agencies",
                 "Rating Types",
+                "Routing Code Type",
                 "Routing Code Type",
                 "SEPA Status",
                 "Service Categories",
@@ -302,6 +304,7 @@ public class DataManagementAppVals {
                 "Status",
                 "Telecom Type",
                 "Time Zones",
-                "Trading Regions"
+                "Trading Regions",
+                "Units of Measurement"
         ));
 }

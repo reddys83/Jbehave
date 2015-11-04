@@ -18,12 +18,11 @@ When the user clicks on the search results card with fid <fid>
 When the user clicks on the legal entity tust power link in the navigation bar
 Then the user should see the legal entity's trust power as:
 |GRANTED|FULL|USED|PROF.EMPLOYEES|ADMIN EMPLOYEES|MIN ACCOUNT SIZE($)|
-|True|True|True|1|1|100|
-
+|true|true|true|2|1|10000|
 
 Examples:
 |entity|searchBy|fid|
-|Val-Gaz Limited Liability Company|Name|180613|
+|73788|FID|73788|
 
 Scenario: Verify legalEntity has no trust powers
 Given a user is on the search page

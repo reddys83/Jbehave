@@ -20,9 +20,9 @@ And the user clicks on the city's places link in the navigation bar
 
 Then the user should see the city's places as:
 |TYPE|PLACE|DETAILS|
-|Capital|South Valley Stream|Including its lake area, The country has a total area of 1,635 square miles|
-|country|USA||
-|State, Largest sub area|Nassau||
+|Area, Test Data|Nassau||
+|Federal Reserve Bank Region|South Valley Stream|Test Data, Test Data|
+|Country|USA|Test Data, Test Data|
 
 Examples:
 |country|area|city|
