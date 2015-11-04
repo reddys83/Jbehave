@@ -18,6 +18,11 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().clickOnOfficePersonnelLink();
     }
 
+    @When("the user clicks on the office basic info link in the navigation bar")
+    public void clickOnOfficeBasicInfoLink() {
+        getOfficesPage().clickOnOfficeBasicInfoLink();
+    }
+
     @When("the user clicks on the office history link in the navigation bar")
     public void clickOnOfficeHistoryLink(){
         getOfficesPage().clickOnOfficeHistoryLink();

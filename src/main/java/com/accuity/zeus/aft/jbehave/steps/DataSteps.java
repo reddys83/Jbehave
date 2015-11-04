@@ -208,6 +208,12 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyNames(Names);
     }
 
+    @Then("the user should see the office's names as: $Names")
+    public void verifyOfficeNames(ExamplesTable Names) { getDataPage().verifyNames(Names);}
+
+    @Then("the user should see the office types: $Types")
+    public void verifyOfficeTypes(ExamplesTable Types) { getDataPage().verifyTypes(Types); }
+
     @When("the user clicks on the legalEntity basic info link in the navigation bar")
     public void clickOnLegalEntityBasicInfo() {
         getDataPage().clickOnLegalEntityBasicInfo();
@@ -234,7 +240,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the country's identifiers as: $countryIdentifiers")
-    public void verifyCountryIdentifiers(ExamplesTable countryIdentifiers){
+    public void verifyCountryIdentifiers(ExamplesTable countryIdentifiers) {
         getDataPage().verifyIdentifiers(countryIdentifiers);
     }
 
@@ -320,6 +326,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the $label of a city as $value")
+    @Alias("the user should see the $label of an office as $value")
     public void verifyCityBasicInfo(@Named("label") String label, @Named("value") String value) {
         getDataPage().verifyBasicInfoLabel(label, value);
     }
@@ -865,22 +872,22 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the area's entity link in the navigation bar")
-    public void clickOnAreaEntity(){
+    public void clickOnAreaEntity() {
         getDataPage().clickOnAreaEntity();
     }
 
     @Then("the user should see the area's entities as: $areaEntities")
-    public void verifyAreaEntities(ExamplesTable areaEntities){
+    public void verifyAreaEntities(ExamplesTable areaEntities) {
         getDataPage().verifyEntities(areaEntities);
     }
 
     @When("the user clicks on the sub-area's entity link in the navigation bar")
-    public void clickOnSubAreaEntity(){
+    public void clickOnSubAreaEntity() {
         getDataPage().clickOnAreaEntity();
     }
 
     @Then("the user should see the sub-area's entities as: $areaEntities")
-    public void verifySubAreaEntities(ExamplesTable areaEntities){
+    public void verifySubAreaEntities(ExamplesTable areaEntities) {
         getDataPage().verifyEntities(areaEntities);
     }
 
@@ -896,7 +903,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the legal entity's personnel as: $personnel")
     @Alias("the user should see the office's personnel as: $personnel")
-    public void verifyPersonnel(ExamplesTable personnel){
+    public void verifyPersonnel(ExamplesTable personnel) {
         getDataPage().verifyPersonnel(personnel);
     }
 

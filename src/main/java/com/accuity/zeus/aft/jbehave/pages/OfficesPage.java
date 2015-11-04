@@ -7,6 +7,7 @@ public class OfficesPage extends AbstractPage {
 
     private String office_results_card_xpath = "//*[@id='data']//tr[td='1038']";
     private By office_personnel_link_id = By.id("officePersonnel");
+    private By office_basic_info_link_id = By.id("officeBasicInfo");
     private By office_history_link_id = By.id("officeHistory");
 
     public OfficesPage(WebDriver driver, String urlPrefix) {
@@ -24,6 +25,10 @@ public class OfficesPage extends AbstractPage {
 
     public void clickOnOfficePersonnelLink() {
         attemptClick(office_personnel_link_id);
+    }
+
+    public void clickOnOfficeBasicInfoLink() {
+        attemptClick(office_basic_info_link_id);
     }
 
     public void clickOnOfficeHistoryLink() {

@@ -271,8 +271,14 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyNoLegalEntityCreditRatingsSection();
     }
 
+<<<<<<< HEAD
+    @Then("the user clicks on the offices tab in the legal entity")
+    public void clicksOnOfficesTab() {
+        getLegalEntityPage().clicksOnOfficesTab();
+=======
     @When("the user clicks on the offices link in the lagal entity page")
     public void clickOnOfficesLink(){
         setOfficesPage(getLegalEntityPage().clickOnOfficesLink());
+>>>>>>> feature/ZEUS-410-office-personnel
     }
 }

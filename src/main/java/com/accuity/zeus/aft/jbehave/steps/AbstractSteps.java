@@ -48,6 +48,7 @@ public abstract class AbstractSteps {
 	
 	public String getDataManagementWebappUrl() {
 		//return buildUriString(null, null);
+
 		return host;
 	}
 

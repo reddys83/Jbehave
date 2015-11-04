@@ -209,6 +209,10 @@ public class DataPage extends AbstractPage {
     private By city_basic_info_link_id = By.id("cityBasicInfo");
     private By city_related_places_link_id = By.id("cityPlaces");
 
+    private By basic_info_office_names_label_xpath = By.xpath(".//*[@id='content']//li[1]/h2[2]");
+    private By basic_info_office_type_label_xpath = By.xpath(".//*[@id='content']//li[1]/table[2]/thead/tr/th");
+    private By basic_info_office_type_xpath = By.xpath(".//*[@id='content']//li[1]/table[2]/tbody/tr/td");
+
     private By personnel_label_xpath = By.xpath("//li[h2='Personnel']//h2");
     private By personnel_type_label_xpath = By.xpath("//li[h2='Personnel']//table/thead//th[1]");
     private By personnel_value_label_xpath = By.xpath("//li[h2='Personnel']//table/thead//th[2]");
@@ -487,6 +491,15 @@ public class DataPage extends AbstractPage {
             assertEquals(namesList.getRow(i).get(namesList.getHeaders().get(1)), actNameValue.get(i).getText());
         }
 
+    }
+
+    public void verifyTypes(ExamplesTable types) {
+        assertEquals("OFFICE TYPES", getDriver().findElement(basic_info_office_names_label_xpath).getText());
+        assertEquals("TYPE", getDriver().findElement(basic_info_office_type_label_xpath).getText());
+        List<WebElement> officeTypes = getDriver().findElements(basic_info_office_type_xpath);
+        for(int i=0; i<types.getRowCount(); i++){
+            assertEquals(types.getRow(i).get(types.getHeaders().get(0)), officeTypes.get(i).getText());
+        }
     }
 
     public void clickOnBasicInfoInNavigationBar() {
@@ -1049,7 +1062,7 @@ public class DataPage extends AbstractPage {
         {
             assertEquals(areaDemographics.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").replace(" ","").trim(),
                     getDriver().findElement(
-                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + areaDemographics.getRow(i).get(areaDemographics.getHeaders().get(0)) + "']")).getText().replace(",","").replace(" ","").trim());
+                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + areaDemographics.getRow(i).get(areaDemographics.getHeaders().get(0)) + "']")).getText().replace(",", "").replace(" ","").trim());
 
         }
     }
@@ -1172,9 +1185,11 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyPersonnelLabels() {
+
         assertEquals("PERSONNEL", getTextOnPage(personnel_label_xpath));
         assertEquals("TYPE",getTextOnPage(personnel_type_label_xpath));
         assertEquals("VALUE",getTextOnPage(personnel_value_label_xpath));
+
     }
 
     public void verifyNoPersonnel() {
