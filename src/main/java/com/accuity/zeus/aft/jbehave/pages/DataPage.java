@@ -530,17 +530,16 @@ public class DataPage extends AbstractPage {
         }
     }
 
-
-    public void verifyIdentifiers(ExamplesTable identifiersList) {
+    public void verifyIdentifiers(ExamplesTable identifiers) {
         verifyIdentifiersLabels();
         List<WebElement> IdentifiersTypeVal = getDriver().findElements(identifiers_type_xpath);
-        assertTrue(identifiersList.getRowCount() == IdentifiersTypeVal.size());
-        for(int i = 0; i<identifiersList.getRowCount(); i++)
+        assertTrue(identifiers.getRowCount() == IdentifiersTypeVal.size());
+        for(int i = 0; i<identifiers.getRowCount(); i++)
         {
-            assertEquals(identifiersList.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").replace(" ", "").trim(),
+            assertEquals(identifiers.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").replace(" ", "").trim(),
                     getDriver().findElement(
-                            By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//tr[td='" + identifiersList.getRow(i)
-                                    .get(identifiersList.getHeaders().get(0)) + "']")).getText().replace(",","").replace(" ", "").trim());
+                            By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//tr[td='" + identifiers.getRow(i)
+                                    .get(identifiers.getHeaders().get(0)) + "']")).getText().replace(",","").replace(" ", "").trim());
 
         }
     }
@@ -614,7 +613,7 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyBasicInfoLabel(String label,String value) {
+    public void verifyBasicInfo(String label,String value) {
         assertEquals(label, getDriver().findElement(By.xpath(basic_info_label_xpath +label+"']")).getText());
         assertEquals(value, getDriver().findElement(By.xpath(basic_info_label_value_xpath + label + "']/td")).getText().replace("\n", ""));
     }

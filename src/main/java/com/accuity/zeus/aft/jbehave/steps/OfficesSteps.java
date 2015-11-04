@@ -27,4 +27,9 @@ public class OfficesSteps extends AbstractSteps {
     public void clickOnOfficeHistoryLink(){
         getOfficesPage().clickOnOfficeHistoryLink();
     }
+
+    @When("the user clicks on the office identifier link in the navigation bar")
+    public void clickOnOfficeIdentifiersLink(){
+        getOfficesPage().clickOnOfficeIdentifiersLink();
+    }
 }

@@ -9,6 +9,7 @@ public class OfficesPage extends AbstractPage {
     private By office_personnel_link_id = By.id("officePersonnel");
     private By office_basic_info_link_id = By.id("officeBasicInfo");
     private By office_history_link_id = By.id("officeHistory");
+    private By office_identifiers_link_id = By.id("officeIdentifiers");
 
     public OfficesPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -33,5 +34,9 @@ public class OfficesPage extends AbstractPage {
 
     public void clickOnOfficeHistoryLink() {
         attemptClick(office_history_link_id);
+    }
+
+    public void clickOnOfficeIdentifiersLink() {
+        attemptClick(office_identifiers_link_id);
     }
 }
