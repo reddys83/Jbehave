@@ -171,7 +171,7 @@ public class LegalEntitySteps extends AbstractSteps{
     public void verifyNoBoardMeetingsValues() {
         getLegalEntityPage().verifyNoBoardMeetingsValues();
     }
-
+    /*
     @Then("the user should see the legal entity's history as: $legalEntityHistory")
     public void verifyLegalEntityHistory(ExamplesTable legalEntityHistory) {
         getLegalEntityPage().verifyLegalEntityHistory(legalEntityHistory);
@@ -181,6 +181,8 @@ public class LegalEntitySteps extends AbstractSteps{
     public void verifyNoLegalEntityHistory() {
         getLegalEntityPage().verifyNoLegalEntityHistory();
     }
+    */
+
     @When("the user clicks on the legal entity ownership link in the navigation bar")
     public void clickOnLegalEntityOwnership() {
         getLegalEntityPage().clickOnLegalEntityOwnership();
@@ -216,10 +218,12 @@ public class LegalEntitySteps extends AbstractSteps{
         getDataPage().verifyCreditRatingsLabel();
     }
 
+    /*
     @Then("the user should see the history for the legal entity")
     public void verifyHistoryLabel(){
         getLegalEntityPage().verifyHistoryLabel();
     }
+    */
 
     @Then("the user should see the identifiers for the legal entity")
     public void verifyLegalEntityIdentifiersLabels(){
