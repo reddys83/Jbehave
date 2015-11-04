@@ -29,6 +29,7 @@ public abstract class AbstractSteps {
 	private static DataPage dataPage;
 	private static AdminPage adminPage;
 	private static LegalEntityPage legalEntityPage;
+	private static OfficesPage officesPage;
 
 	@Autowired
 	protected WebDriverState webDriverState;
@@ -159,7 +160,14 @@ public abstract class AbstractSteps {
 
 	public void setLegalEntityPage(LegalEntityPage legalEntityPage) {
 		this.legalEntityPage = legalEntityPage;
+	}
 
+	public OfficesPage getOfficesPage() {
+		return officesPage;
+	}
+
+	public void setOfficesPage(OfficesPage officesPage) {
+		this.officesPage = officesPage;
 	}
 
 }
