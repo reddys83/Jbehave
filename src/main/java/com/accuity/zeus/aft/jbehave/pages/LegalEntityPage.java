@@ -73,9 +73,11 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_ownership_type_list_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//table/tbody//td[1]");
     private By legalEntity_ownership_value_list_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//table/tbody//td[2]");
     private By legalEntity_history_link_id = By.id("legalEntityHistory");
+    /*
     private By legalEntity_history_label_xpath = By.xpath("//li/h1/span[text()='History']");
     private By legalEntity_history_summary_label_xpath = By.xpath("//li[h1='History']//th");
     private By legalEntity_history_message_xpath = By.xpath("//li[h1='History']//td");
+    */
     private By legalEntity_boardMeeting_link_id = By.id("legalEntityBoardMeetings");
     private By legalEntity_boardMeeting_label_xpath = By.xpath(".//li[h1='Board Meetings'] //h2");
     private By legalEntity_boardMeeting_summary_label_xpath =By.xpath("//li[h1='Board Meetings']//dt");
@@ -371,7 +373,7 @@ public class LegalEntityPage extends AbstractPage {
         } catch (org.openqa.selenium.NoSuchElementException e) {
         }
     }
-
+    /*
     public void verifyHistoryLabel() {
         assertEquals("HISTORY", getTextOnPage(legalEntity_history_label_xpath));
         assertEquals("SUMMARY",getTextOnPage(legalEntity_history_summary_label_xpath));
@@ -393,6 +395,7 @@ public class LegalEntityPage extends AbstractPage {
 
         }
     }
+    */
 
     public void clickOnLegalEntityOwnership() {
         attemptClick(legalEntity_ownership_link_id);

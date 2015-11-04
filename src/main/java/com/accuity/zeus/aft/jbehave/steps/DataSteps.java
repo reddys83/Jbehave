@@ -918,5 +918,23 @@ public class DataSteps extends AbstractSteps {
     public void verifyPersonnelLabels(){
         getDataPage().verifyPersonnelLabels();
     }
+
+    @Then("the user should see the legal entity's history as: $history")
+    @Alias("the user should see the office's history as: $history")
+    public void verifyHistory(ExamplesTable history) {
+        getDataPage().verifyHistory(history);
+    }
+
+    @Then("the user should see the history for the legal entity")
+    @Alias("the user should see the history for the office")
+    public void verifyHistoryLabel(){
+        getDataPage().verifyHistoryLabel();
+    }
+
+    @Then ("the user should not see the legal entity's history")
+    @Alias ("the user should not see the office's history")
+    public void verifyNoHistory() {
+        getDataPage().verifyNoHistory();
+    }
 }
 

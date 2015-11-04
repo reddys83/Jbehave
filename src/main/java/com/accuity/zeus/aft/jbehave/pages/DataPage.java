@@ -3,10 +3,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import com.accuity.zeus.aft.commons.DataManagementAppVals;
 import org.jbehave.core.model.ExamplesTable;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -212,14 +209,19 @@ public class DataPage extends AbstractPage {
     private By city_basic_info_link_id = By.id("cityBasicInfo");
     private By city_related_places_link_id = By.id("cityPlaces");
 
-    private By legalEntity_personnel_label_xpath = By.xpath("//li[h2='Personnel']//h2");
-    private By legalEntity_personnel_type_label_xpath = By.xpath("//li[h2='Personnel']//table/thead//th[1]");
-    private By legalEntity_personnel_value_label_xpath = By.xpath("//li[h2='Personnel']//table/thead//th[2]");
-    private By legalEntity_personnel_type_list_xpath = By.xpath("//li[h2='Personnel']//table/tbody//td[1]");
-    private By legalEntity_personnel_value_list_xpath = By.xpath("//li[h2='Personnel']//table/tbody//td[2]");
     private By basic_info_office_names_label_xpath = By.xpath(".//*[@id='content']//li[1]/h2[2]");
     private By basic_info_office_type_label_xpath = By.xpath(".//*[@id='content']//li[1]/table[2]/thead/tr/th");
     private By basic_info_office_type_xpath = By.xpath(".//*[@id='content']//li[1]/table[2]/tbody/tr/td");
+
+    private By personnel_label_xpath = By.xpath("//li[h2='Personnel']//h2");
+    private By personnel_type_label_xpath = By.xpath("//li[h2='Personnel']//table/thead//th[1]");
+    private By personnel_value_label_xpath = By.xpath("//li[h2='Personnel']//table/thead//th[2]");
+    private By personnel_type_list_xpath = By.xpath("//li[h2='Personnel']//table/tbody//td[1]");
+    private By personnel_value_list_xpath = By.xpath("//li[h2='Personnel']//table/tbody//td[2]");
+
+    private By history_label_xpath = By.xpath("//li/h1/span[text()='History']");
+    private By legalEntity_history_summary_label_xpath = By.xpath("//li[h1='History']//th");
+    private By history_message_xpath = By.xpath("//li[h1='History']//td");
 
     @Override
     public String getPageUrl() {
@@ -1171,29 +1173,53 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyPersonnel(ExamplesTable legalEntityPersonnel) {
+    public void verifyPersonnel(ExamplesTable personnel) {
         verifyPersonnelLabels();
-        List<WebElement> type = getDriver().findElements(legalEntity_personnel_type_list_xpath);
-        List<WebElement> value = getDriver().findElements(legalEntity_personnel_value_list_xpath);
+        List<WebElement> type = getDriver().findElements(personnel_type_list_xpath);
+        List<WebElement> value = getDriver().findElements(personnel_value_list_xpath);
 
-        for(int i=0;i<legalEntityPersonnel.getRowCount();i++){
-            assertEquals(legalEntityPersonnel.getRow(i).get(legalEntityPersonnel.getHeaders().get(0)),type.get(i).getText());
-            assertEquals(legalEntityPersonnel.getRow(i).get(legalEntityPersonnel.getHeaders().get(1)),value.get(i).getText());
+        for(int i=0;i<personnel.getRowCount();i++){
+            assertEquals(personnel.getRow(i).get(personnel.getHeaders().get(0)),type.get(i).getText());
+            assertEquals(personnel.getRow(i).get(personnel.getHeaders().get(1)),value.get(i).getText());
         }
     }
 
     public void verifyPersonnelLabels() {
-        assertEquals("PERSONNEL", getTextOnPage(legalEntity_personnel_label_xpath));
-        assertEquals("TYPE",getTextOnPage(legalEntity_personnel_type_label_xpath));
-        assertEquals("VALUE", getTextOnPage(legalEntity_personnel_value_label_xpath));
+
+        assertEquals("PERSONNEL", getTextOnPage(personnel_label_xpath));
+        assertEquals("TYPE",getTextOnPage(personnel_type_label_xpath));
+        assertEquals("VALUE",getTextOnPage(personnel_value_label_xpath));
+
     }
 
     public void verifyNoPersonnel() {
         verifyPersonnelLabels();
         try {
-            assertFalse(getDriver().findElement(legalEntity_personnel_type_list_xpath).isDisplayed());
+            assertFalse(getDriver().findElement(personnel_type_list_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e) {
         }
     }
+
+    public void verifyHistoryLabel() {
+        assertEquals("HISTORY", getTextOnPage(history_label_xpath));
+        //assertEquals("SUMMARY",getTextOnPage(legalEntity_history_summary_label_xpath)); /*Will be removed as part of ZEUS-635*/
+
+    }
+    public void verifyHistory(ExamplesTable history)
+    {
+        verifyHistoryLabel();
+        assertEquals(history.getRow(0).get(history.getHeaders().get(0)), getTextOnPage(history_message_xpath));
+    }
+
+    public void verifyNoHistory() {
+        verifyHistoryLabel();
+        try{
+            assertFalse(getDriver().findElement(history_message_xpath).isDisplayed());
+        }catch (NoSuchElementException e)
+        {
+
+        }
+    }
+
 }
 
