@@ -212,6 +212,12 @@ public class DataPage extends AbstractPage {
     private By city_basic_info_link_id = By.id("cityBasicInfo");
     private By city_related_places_link_id = By.id("cityPlaces");
 
+    private By legalEntity_personnel_label_xpath = By.xpath("//li[h2='Personnel']//h2");
+    private By legalEntity_personnel_type_label_xpath = By.xpath("//li[h2='Personnel']//table/thead//th[1]");
+    private By legalEntity_personnel_value_label_xpath = By.xpath("//li[h2='Personnel']//table/thead//th[2]");
+    private By legalEntity_personnel_type_list_xpath = By.xpath("//li[h2='Personnel']//table/tbody//td[1]");
+    private By legalEntity_personnel_value_list_xpath = By.xpath("//li[h2='Personnel']//table/tbody//td[2]");
+
     @Override
     public String getPageUrl() {
         return null;
@@ -1150,6 +1156,31 @@ public class DataPage extends AbstractPage {
             assertFalse(getDriver().findElement(identifiers_type_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e) {
 
+        }
+    }
+
+    public void verifyPersonnel(ExamplesTable legalEntityPersonnel) {
+        verifyPersonnelLabels();
+        List<WebElement> type = getDriver().findElements(legalEntity_personnel_type_list_xpath);
+        List<WebElement> value = getDriver().findElements(legalEntity_personnel_value_list_xpath);
+
+        for(int i=0;i<legalEntityPersonnel.getRowCount();i++){
+            assertEquals(legalEntityPersonnel.getRow(i).get(legalEntityPersonnel.getHeaders().get(0)),type.get(i).getText());
+            assertEquals(legalEntityPersonnel.getRow(i).get(legalEntityPersonnel.getHeaders().get(1)),value.get(i).getText());
+        }
+    }
+
+    public void verifyPersonnelLabels() {
+        assertEquals("PERSONNEL", getTextOnPage(legalEntity_personnel_label_xpath));
+        assertEquals("TYPE",getTextOnPage(legalEntity_personnel_type_label_xpath));
+        assertEquals("VALUE",getTextOnPage(legalEntity_personnel_value_label_xpath));
+    }
+
+    public void verifyNoPersonnel() {
+        verifyPersonnelLabels();
+        try {
+            assertFalse(getDriver().findElement(legalEntity_personnel_type_list_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
         }
     }
 }

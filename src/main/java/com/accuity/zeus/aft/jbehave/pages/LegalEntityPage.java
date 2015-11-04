@@ -88,6 +88,8 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_ownership_header_xpath = By.xpath("//li[h1='Ownership Summaries'] //span");
     private By credit_rating_section_xpath = By.xpath("//li[h1='Credit Rating']");
 
+    private By office_link_xpath = By.xpath("//*[@id='data-navbar']/div/ul/li[1]");
+
 
     public LegalEntityPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -291,6 +293,7 @@ public class LegalEntityPage extends AbstractPage {
         attemptClick(legalEntity_personnel_link_id);
     }
 
+    /*
     public void verifyLegalEntityPersonnel(ExamplesTable legalEntityPersonnel) {
         verifyPersonnelLabels();
         List<WebElement> type = getDriver().findElements(legalEntity_personnel_type_list_xpath);
@@ -315,7 +318,7 @@ public class LegalEntityPage extends AbstractPage {
         } catch (org.openqa.selenium.NoSuchElementException e) {
         }
     }
-
+*/
     public void clickOnLegalEntityCreditRating() {
         attemptClick(legalEntity_credit_rating_link_id);
     }
@@ -430,5 +433,10 @@ public class LegalEntityPage extends AbstractPage {
         try {
             assertFalse(getDriver().findElement(credit_rating_section_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e){}
+    }
+
+    public OfficesPage clickOnOfficesLink() {
+        attemptClick(office_link_xpath);
+        return new OfficesPage(getDriver(), getUrlPrefix());
     }
 }

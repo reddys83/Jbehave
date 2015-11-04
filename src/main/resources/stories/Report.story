@@ -20,5 +20,5 @@ Then the user should see the count of the selected criteria as <count> in the re
 
 Examples:
 |area|requiredMatch|count|
-|Codes|ABI|814|
-|Codes|CHIPS|8301|
+|Codes|ABI|8|
+|Codes|CHIPS|8304|

@@ -5,6 +5,7 @@ In order to view and edit the legalEntity
 As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-350 - User can view legal entity's basic info
+JIRA ID - ZEUS-382 - User will see head office address & legal entity title in header of legal entity screen
 
 Scenario: Verify the basic info for legalEntity
 Given a user is on the search page
@@ -38,6 +39,9 @@ And the user should see the legalEntity's entity types as:
 |Private Bank|
 |Retail Bank|
 |Savings Bank|
+|Bank|
+|Commercial Bank|
+|Universal Bank|
 
 And the user should see the legalEntity's telecoms as:
 |TYPE|RANK|INFO|VALUE|
@@ -52,7 +56,7 @@ And the user should see the legalEntity's telecoms as:
 |Savings Bank|Savings Bank|Savings Bank|Savings Bank|
 
 And the user should see the Status of a legalEntity as Active
-And the user should see the Claimed Est Date of a legalEntity as 01 Jul 1983
+And the user should see the Claimed Est Date of a legalEntity as 01 Jul 1990
 And the user should see the Chartered Date of a legalEntity as 01 Jul 1990
 And the user should see the Charter Type of a legalEntity as Us State Chartered Bank
 And the user should see the FATCA Status of a legalEntity as Inactive
@@ -69,3 +73,36 @@ Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
 |DNB Bank ASA|Name|Oslo, Oslo, Norway|4537|96664340|
 
+Scenario: Verify legal entity header with UseInAddress = False
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+Then the user should see the message you can search for a legal entity at any time using the header search
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+
+Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
+
+Examples:
+|entity|searchBy|headOfficeAddress|fid|tfpid|
+|Bank of America National Association|Name|Charlotte, North Carolina, USA|1038|10077420|
+
+Scenario: Verify legal entity header with UseInAddress = true
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+Then the user should see the message you can search for a legal entity at any time using the header search
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+
+Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
+
+Examples:
+|entity|searchBy|headOfficeAddress|fid|tfpid|
+|Bank at Ormond by the Sea|Name|Ormond Beach, Volusia, Florida, USA|12253||
