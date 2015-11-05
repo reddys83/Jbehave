@@ -23,7 +23,7 @@ public class OfficesPage extends AbstractPage {
     private By office_offered_services_label_xpath = By.xpath("//li[h2 = 'Offered Services']//h2");
     private By office_service_category_label_xpath = By.xpath("//li[h2 = 'Offered Services']//table/thead//th[1]");
     private By office_service_override_label_xpath = By.xpath("//li[h2 = 'Offered Services']//table/thead//th[2]");
-    private By office_credit_ratings_link_id = By.id("");
+    private By office_credit_ratings_link_id = By.id("officeCreditRating");
 
     public OfficesPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);

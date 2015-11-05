@@ -23,7 +23,6 @@ Then the user should see the office's credit ratings as:
 |Standard & Poors|Long Term Rating|A|2015-01-06||
 |Standard & Poors|Short Term Rating|A-1|2015-01-06||
 
-
 Examples:
 |entity|searchBy|fid|officeFid|
 |BNP Paribas SA|Name|1568|1568-71|
@@ -40,7 +39,7 @@ And the user clicks on the offices link in the lagal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office credit ratings link in the navigation bar
 
-Then the user should not see the office credit ratings
+Then the user should not see the office's credit ratings
 
 Examples:
 |entity|searchBy|fid|officeFid|
