@@ -660,11 +660,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnAreasCreditRatings();
     }
 
-    @Then("the user should see the area's credit ratings as: $areaCreditRatings")
-    public void verifyAreaCreditRatings(ExamplesTable areaCreditRatings) {
-        getDataPage().verifyCreditRatings(areaCreditRatings);
-    }
-
     @When("the user clicks on the choose a sub-area option")
     public void clickOnSubAreaDropDown() {
         getDataPage().clickOnSubAreaDropDown();
@@ -737,8 +732,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the credit ratings for selected sub-area")
-    @Aliases(values={"the user should see the credit rating for selected city",
-            "the user should see the office's credit ratings as: $creditRatings"})
+    @Aliases(values={"the user should see the credit rating for selected city"})
     public void verifyCreditRatingsForSubArea() {
         getDataPage().verifyCreditRatingsLabel();
     }
@@ -802,7 +796,9 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the city's credit ratings as: $cityCreditRatings")
-    @Alias("the user should see the legal entity's credit ratings as: $legalEntityCreditRatings")
+    @Aliases(values={"the user should see the legal entity's credit ratings as: $legalEntityCreditRatings",
+                      "the user should see the office's credit ratings as: $officeCreditRatings",
+                      "the user should see the area's credit ratings as: $areaCreditRatings"})
     public void verifyCreditRatings(ExamplesTable CreditRatings) {
         getDataPage().verifyCreditRatings(CreditRatings);
     }
