@@ -34,6 +34,21 @@ Examples:
 |entity|field|value|
 |legalEntity|name|Bank of Montreal|
 
+Scenario: search by name and verify search results
+Given a user is on the search page
+When the user searches for <entity> with <field> equals <value>
+
+Then the user should see the below search results card matching the searched entity
+|FID|TFPID|NAME|ADDRESS|STATUS|
+|4123|10055000|Société Générale|BP 208, 09|active|
+
+Then the user should see the search results paginated for the searched entity
+And the user should see the number of records displayed in the page w.r.t total search results
+
+Examples:
+|entity|field|value|
+|legalEntity|name|Société Générale|
+
 Scenario: search by fid and verify search results
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
