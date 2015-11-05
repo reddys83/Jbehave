@@ -1,12 +1,12 @@
-Meta:@OfficeHistory @Office
+Meta:@OfficeIdentifiers @Office
 
 Narrative:
-In order to view and edit the legalEntity
 As a user
-I want to cover the requirements mentioned in
-JIRA ID - ZEUS-539 - User can view office history
+I want to perform an action
+So that I can achieve a business goal
+JIRA ID - ZEUS-406 - User can view office identifiers
 
-Scenario: Verify office's history
+Scenario: Verify office's identifier
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -16,17 +16,18 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-And the user clicks on the office history link in the navigation bar
+And the user clicks on the office identifier link in the navigation bar
 
-Then the user should see the office's history as:
-|SUMMARY|
-|Holds a free-text summarisation of the events that have affected this office. Bank was formed blah-di-blah|
+Then the user should see the legal entity's identifiers as:
+|TYPE|VALUE|STATUS|
+|FDIC Office Branch ID|5|active|
+|FDIC Office Branch ID|5|inactive|
 
 Examples:
 |entity|searchBy|fid|officeFid|
-|299676|FID|299676|299676-0|
+|11621|FID|11621|11621-23|
 
-Scenario: Verify no history for office
+Scenario: Verify no office's identifier
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -36,10 +37,9 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-And the user clicks on the office history link in the navigation bar
-
-Then the user should not see the office's history
+And the user clicks on the office identifier link in the navigation bar
+Then the user should not see the office's identifiers
 
 Examples:
 |entity|searchBy|fid|officeFid|
-|1038|FID|1038|1038-0|
+|43823|FID|43823|43823-210|

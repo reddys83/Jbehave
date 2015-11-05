@@ -47,7 +47,17 @@ public class OfficesSteps extends AbstractSteps {
     }
 
     @Then("the user should see the offered services for the office")
-    public void verifyOfficeOfferedServicesLabels(){
+    public void verifyOfficeOfferedServicesLabels() {
         getOfficesPage().verifyOfficeOfferedServicesLabels();
+    }
+
+    @When("the user clicks on the office identifier link in the navigation bar")
+    public void clickOnOfficeIdentifiersLink(){
+        getOfficesPage().clickOnOfficeIdentifiersLink();
+    }
+
+    @Then("the user should not see the personnel section for the office")
+    public void verifyNoOfficePersonnelSection(){
+        getOfficesPage().verifyNoOfficePersonnelSection();
     }
 }
