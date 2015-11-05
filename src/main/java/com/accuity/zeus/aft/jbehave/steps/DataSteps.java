@@ -1,9 +1,6 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import org.jbehave.core.annotations.Alias;
-import org.jbehave.core.annotations.Named;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
+import org.jbehave.core.annotations.*;
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.stereotype.Component;
 
@@ -663,11 +660,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnAreasCreditRatings();
     }
 
-    @Then("the user should see the area's credit ratings as: $areaCreditRatings")
-    public void verifyAreaCreditRatings(ExamplesTable areaCreditRatings) {
-        getDataPage().verifyCreditRatings(areaCreditRatings);
-    }
-
     @When("the user clicks on the choose a sub-area option")
     public void clickOnSubAreaDropDown() {
         getDataPage().clickOnSubAreaDropDown();
@@ -740,7 +732,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the credit ratings for selected sub-area")
-    @Alias("the user should see the credit rating for selected city")
+    @Aliases(values={"the user should see the credit rating for selected city"})
     public void verifyCreditRatingsForSubArea() {
         getDataPage().verifyCreditRatingsLabel();
     }
@@ -804,7 +796,9 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the city's credit ratings as: $cityCreditRatings")
-    @Alias("the user should see the legal entity's credit ratings as: $legalEntityCreditRatings")
+    @Aliases(values={"the user should see the legal entity's credit ratings as: $legalEntityCreditRatings",
+                      "the user should see the office's credit ratings as: $officeCreditRatings",
+                      "the user should see the area's credit ratings as: $areaCreditRatings"})
     public void verifyCreditRatings(ExamplesTable CreditRatings) {
         getDataPage().verifyCreditRatings(CreditRatings);
     }
@@ -821,7 +815,8 @@ public class DataSteps extends AbstractSteps {
 
 
     @Then("the user should not see the city's credit ratings")
-    @Alias("the user should not see the legal entity's credit ratings")
+    @Aliases(values= {"the user should not see the legal entity's credit ratings",
+                      "the user should not see the office credit ratings"})
     public void verifyNoCreditRatings(){
         getDataPage().verifyNoCreditRatings();
     }

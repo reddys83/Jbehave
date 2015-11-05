@@ -6,6 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.security.PublicKey;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -22,6 +23,7 @@ public class OfficesPage extends AbstractPage {
     private By office_offered_services_label_xpath = By.xpath("//li[h2 = 'Offered Services']//h2");
     private By office_service_category_label_xpath = By.xpath("//li[h2 = 'Offered Services']//table/thead//th[1]");
     private By office_service_override_label_xpath = By.xpath("//li[h2 = 'Offered Services']//table/thead//th[2]");
+    private By office_credit_ratings_link_id = By.id("");
 
     public OfficesPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -53,7 +55,11 @@ public class OfficesPage extends AbstractPage {
         }
     }
 
-    public void verifyOfficeServices(ExamplesTable services) {
+    public void clickOnOfficeCreditRatingsLink() {
+        attemptClick(office_credit_ratings_link_id);
+    }
+
+     public void verifyOfficeServices(ExamplesTable services) {
        verifyOfficeOfferedServicesLabels();
        verifyServices(services, "Offered Services");
     }
