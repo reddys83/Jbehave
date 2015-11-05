@@ -1070,6 +1070,16 @@ public class DataPage extends AbstractPage {
         assertEquals("DEMOGRAPHICS", getDriver().findElement(area_demographics_label_xpath).getText());
     }
 
+    public void verifyServices(ExamplesTable services, String serviceType){
+        List<WebElement> category = getDriver().findElements(By.xpath(".//li[h2='" + serviceType + "']//tr/td[1]"));
+        List<WebElement> override_details = getDriver().findElements(By.xpath(".//li[h2='" + serviceType + "']//tr/td[2]"));
+
+        for(int i=0;i<services.getRowCount();i++){
+            assertEquals(services.getRow(i).get(services.getHeaders().get(0)),category.get(i).getText());
+            assertEquals(services.getRow(i).get(services.getHeaders().get(1)),override_details.get(i).getText());
+        }
+    }
+
     public void verifyNoDemographics() {
         assertEquals("DEMOGRAPHICS", getDriver().findElement(area_demographics_label_xpath).getText());
         assertEquals("TYPE", getDriver().findElement(area_demographics_type_label_xpath).getText());

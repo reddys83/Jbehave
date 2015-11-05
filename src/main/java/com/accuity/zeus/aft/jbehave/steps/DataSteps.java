@@ -909,7 +909,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyPersonnel(personnel);
     }
 
-    @Then("the user should not see the legal entity's personnel")
+     @Then("the user should not see the legal entity's personnel")
     @Alias("the user should not see the office's personnel")
     public void verifyNoPersonnel() {
         getDataPage().verifyNoPersonnel();
@@ -917,7 +917,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the personnel for the legal entity")
     @Alias("the user should see the personnel for the office")
-    public void verifyPersonnelLabels(){
+    public void verifyPersonnelLabels() {
         getDataPage().verifyPersonnelLabels();
     }
 
