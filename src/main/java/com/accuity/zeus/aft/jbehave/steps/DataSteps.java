@@ -936,5 +936,23 @@ public class DataSteps extends AbstractSteps {
     public void verifyNoHistory() {
         getDataPage().verifyNoHistory();
     }
+
+    @Then("the user should see the default legal entity page and display basic info")
+    @Alias("the user should see the default office page and display basic info")
+    public void verifyDefaultSection(){
+        getDataPage().verifyBasicInfo();
+    }
+
+    @When("the user clicks on the legal entity all link in the navigation bar")
+    @Alias("the user clicks on the office all link in the navigation bar")
+    public void clickOnAllLink() {
+        getDataPage().clicksOnAllLink();
+    }
+
+    @Then("the user should see the basic info for selected legal entity")
+    @Alias("the user should see the basic info for selected office")
+    public void verifyBasicInfo(){
+        getDataPage().verifyBasicInfo();
+    }
 }
 

@@ -26,7 +26,7 @@ public class OfficesSteps extends AbstractSteps {
     }
 
     @Then("the user should see the office's services as: $services")
-    public void verifyServices(ExamplesTable services) {
+    public void verifyOfficeServices(ExamplesTable services) {
          getOfficesPage().verifyOfficeServices(services);
     }
 
@@ -44,5 +44,10 @@ public class OfficesSteps extends AbstractSteps {
     @When("the user clicks on the office history link in the navigation bar")
     public void clickOnOfficeHistoryLink(){
         getOfficesPage().clickOnOfficeHistoryLink();
+    }
+
+    @Then("the user should see the offered services for the office")
+    public void verifyOfficeOfferedServicesLabels(){
+        getOfficesPage().verifyOfficeOfferedServicesLabels();
     }
 }
