@@ -418,16 +418,18 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCountryCreditRating();
     }
 
+    /*
     @Then("the user should see the country's credit ratings as: $countryCreditRatings")
     public void verifyCountryCreditRatings(ExamplesTable countryCreditRatings) {
         getDataPage().verifyCreditRatings(countryCreditRatings);
     }
-
+    */
+    /*
     @Then("the user should not see the country's credit ratings")
     public void verifyNoCountryCreditRatings() {
         getDataPage().verifyNoCreditRatings();
     }
-
+    */
     @When("the user clicks on the update currency link")
     public void clickOnUpdateCurrencyLink() {
         getDataPage().clickOnUpdateCurrencyLink();
@@ -665,11 +667,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnAreasCreditRatings();
     }
 
-    @Then("the user should see the area's credit ratings as: $areaCreditRatings")
-    public void verifyAreaCreditRatings(ExamplesTable areaCreditRatings) {
-        getDataPage().verifyCreditRatings(areaCreditRatings);
-    }
-
     @When("the user clicks on the choose a sub-area option")
     public void clickOnSubAreaDropDown() {
         getDataPage().clickOnSubAreaDropDown();
@@ -681,16 +678,18 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterSubAreaInTypeAhead(subArea);
     }
 
+    /*
     @Then("the user should not see the area's credit ratings")
     public void verifyNoAreaCreditRatings() {
         getDataPage().verifyNoCreditRatings();
     }
+    */
 
     @When("the user clicks on the sub-area's credit rating link in the navigation bar")
     public void clickOnSubAreasCreditRatings() {
         getDataPage().clickOnAreasCreditRatings();
     }
-
+    /*
     @Then("the user should see the sub-area's credit ratings as: $areaCreditRatings")
     public void verifySubAreaCreditRatings(ExamplesTable areaCreditRatings) {
         getDataPage().verifyCreditRatings(areaCreditRatings);
@@ -700,6 +699,7 @@ public class DataSteps extends AbstractSteps {
     public void verifyNoSubAreaCreditRatings() {
         getDataPage().verifyNoCreditRatings();
     }
+    */
 
     @When("the user clicks on the area's alternative regions link in the navigation bar")
     public void clickOnAreasAlternativeRegions() {
@@ -743,7 +743,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the credit ratings for selected sub-area")
     @Alias("the user should see the credit rating for selected city")
-    public void verifyCreditRatingsForSubArea() {
+    public void verifyCreditRatingsLabel() {
         getDataPage().verifyCreditRatingsLabel();
     }
 
@@ -805,10 +805,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCityEntity();
     }
 
-    @Then("the user should see the city's credit ratings as: $cityCreditRatings")
-    @Alias("the user should see the legal entity's credit ratings as: $legalEntityCreditRatings")
-    public void verifyCreditRatings(ExamplesTable CreditRatings) {
-        getDataPage().verifyCreditRatings(CreditRatings);
+    @Then("the user should see the city's credit ratings as: $creditRatings")
+    @Aliases(values={"the user should see the legal entity's credit ratings as: $creditRatings",
+                      "the user should see the office's credit ratings as: $creditRatings",
+                      "the user should see the area's credit ratings as: $creditRatings",
+                      "the user should see the country's credit ratings as: $creditRatings",
+                      "the user should see the sub-area's credit ratings as: $creditRatings"})
+    public void verifyCreditRatings(ExamplesTable creditRatings) {
+        getDataPage().verifyCreditRatings(creditRatings);
     }
 
     @Then("the user should see all is selected by default in the navigation bar")
@@ -823,7 +827,11 @@ public class DataSteps extends AbstractSteps {
 
 
     @Then("the user should not see the city's credit ratings")
-    @Alias("the user should not see the legal entity's credit ratings")
+    @Aliases(values= {"the user should not see the legal entity's credit ratings",
+                      "the user should not see the office's credit ratings",
+                      "the user should not see the country's credit ratings",
+                      "the user should not see the area's credit ratings",
+                      "the user should not see the sub-area's credit ratings"})
     public void verifyNoCreditRatings(){
         getDataPage().verifyNoCreditRatings();
     }
