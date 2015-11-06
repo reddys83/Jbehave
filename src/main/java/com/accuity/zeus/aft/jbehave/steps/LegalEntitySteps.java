@@ -17,22 +17,25 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyLegalEntityHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
+    /*
     @Then("the user should see the basic info for selected legal entity")
-    public void verifyLegalEntityBasicInfo(){
+    public void verifyBasicInfo(){
         getDataPage().verifyBasicInfo();
     }
+    */
 
-    @Then("the user should see the legalEntity's entity types as: $legalEntityEntities")
+
+    @Then("the user should see the legal entity's entity types as: $legalEntityEntities")
     public void verifyLegalEntityEntities(ExamplesTable legalEntities) {
         getLegalEntityPage().verifyLegalEntityEntities(legalEntities);
     }
 
-    @Then("the user should see the legalEntity's telecoms as: $legalEntityTelecoms")
+    @Then("the user should see the legal entity's telecoms as: $legalEntityTelecoms")
     public void verifyLegalEntitiesTelecoms(ExamplesTable legalEntitiesTelecoms){
         getLegalEntityPage().verifyLegalEntitiesTelecoms(legalEntitiesTelecoms);
     }
 
-    @Then("the user should see the legalEntity corporate statement as $corporateStatement")
+    @Then("the user should see the legal entity corporate statement as $corporateStatement")
     public void verifyCorporateStatement(@Named("corporateStatement") String corporateStatement) {
         getLegalEntityPage().verifyCorporateStatement(corporateStatement);
     }
@@ -107,6 +110,7 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().clickOnLegalEntityIdentifierLink();
     }
 
+    /*
     @Then("the user should see the legal entity's identifiers as: $legalEntityIdentifiers")
     public void verifyLegalEntityIdentifiers(ExamplesTable legalEntityIdentifiers){
         getDataPage().verifyIdentifiers(legalEntityIdentifiers);
@@ -116,7 +120,7 @@ public class LegalEntitySteps extends AbstractSteps{
     public void verifyNoLegalEntityIdentifiers() {
         getDataPage().verifyNoIdentifiers();
     }
-
+    */
     @When("the user clicks on the legal entity personnel link in the navigation bar")
     public void clickOnLegalEntityPersonnel() {
         getLegalEntityPage().clickOnLegalEntityPersonnel();
@@ -193,8 +197,9 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyNoLegalEntityOwnership();
     }
 
+    /*
     @Then("the user should see the default legal entity page and display basic info")
-    public void verifyDefaultLegalEntitySection(){
+    public void verifyDefaultSection(){
         getDataPage().verifyBasicInfo();
     }
 
@@ -202,7 +207,7 @@ public class LegalEntitySteps extends AbstractSteps{
     public void clickOnLegalEntityAllLink() {
         getDataPage().clicksOnAllLink();
     }
-
+    */
     @Then("the user should see the board meetings for the legal entity")
     public void verifyBoardMeetingsLabels(){
         getLegalEntityPage().verifyBoardMeetingsLabels();
@@ -218,13 +223,13 @@ public class LegalEntitySteps extends AbstractSteps{
     public void verifyHistoryLabel(){
         getLegalEntityPage().verifyHistoryLabel();
     }
-    */
+
 
     @Then("the user should see the identifiers for the legal entity")
-    public void verifyLegalEntityIdentifiersLabels(){
-        getDataPage().verifyLegalEntityIdentifiersLabels();
+    public void verifyIdentifiersSectionLabels(){
+        getDataPage().verifyIdentifiersSectionLabels();
     }
-
+    */
     @Then("the user should see the location summaries for the legal entity")
     public void verifyLegalEntityLocationsLabel(){
         getLegalEntityPage().verifyLegalEntityLocationsLabel();
@@ -261,7 +266,7 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyNoLegalEntityCreditRatingsSection();
     }
 
-    @When("the user clicks on the offices link in the lagal entity page")
+    @When("the user clicks on the offices link in the legal entity page")
     public void clickOnOfficesLink(){
         setOfficesPage(getLegalEntityPage().clickOnOfficesLink());
     }

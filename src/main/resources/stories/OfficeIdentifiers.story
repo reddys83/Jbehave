@@ -1,12 +1,12 @@
-Meta:@OfficeServices  @Office
+Meta:@OfficeIdentifiers @Office
 
 Narrative:
-In order to view and edit the office
 As a user
-I want to cover the requirements mentioned in
-JIRA ID - ZEUS - 407 - User can view office services
+I want to perform an action
+So that I can achieve a business goal
+JIRA ID - ZEUS-406 - User can view office identifiers
 
-Scenario: Verify office services (Office Id- c6458990-e7e7-4155-9024-7af61d55f9e9 )
+Scenario: Verify office's identifier
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -16,25 +16,18 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-When the user clicks on the office services link in the navigation bar
+And the user clicks on the office identifier link in the navigation bar
 
-Then the user should see the office's services as:
-|SERVICE CATEGORY|SERVICE OVERRIDE|
-|Capital Markets||
-|Documentary Collections|Quality Certifications|
-|Equity Investments||
-|Loans|Medium Terms Loans|
-|Mergers and Acquisitions||
-|Syndicated Loans||
-|Underwriting||
-|Advisory & Information Services|Advisory for Environment|
-
+Then the user should see the legal entity's identifiers as:
+|TYPE|VALUE|STATUS|
+|FDIC Office Branch ID|5|active|
+|FDIC Office Branch ID|5|inactive|
 
 Examples:
 |entity|searchBy|fid|officeFid|
-|MPS Capital Services Banca per le Imprese SpA|Name|3314|3314-0|
+|11621|FID|11621|11621-23|
 
-Scenario: Verify no office services (Office Id - cac0b9d5-8043-40d2-80cd-aea4180c74cb)
+Scenario: Verify no office's identifier
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -44,10 +37,9 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-When the user clicks on the office services link in the navigation bar
-
-Then the user should not see the office's services
+And the user clicks on the office identifier link in the navigation bar
+Then the user should not see the office's identifiers
 
 Examples:
 |entity|searchBy|fid|officeFid|
-|Anchor Savings Bank|Name|41031|41031-75|
+|43823|FID|43823|43823-210|

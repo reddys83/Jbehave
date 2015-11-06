@@ -1,12 +1,12 @@
-Meta:@OfficeServices  @Office
+Meta:@OfficeCreditRatings  @Office                                                                                                                                                Meta:
 
 Narrative:
 In order to view and edit the office
 As a user
 I want to cover the requirements mentioned in
-JIRA ID - ZEUS - 407 - User can view office services
+JIRA ID - ZEUS - 411 - User can view office credit ratings
 
-Scenario: Verify office services (Office Id- c6458990-e7e7-4155-9024-7af61d55f9e9 )
+Scenario: Verify office credit ratings  (Office ID - 99f53adf-5c75-400a-9f84-c8a098c3bcf0 )
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -16,25 +16,18 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-When the user clicks on the office services link in the navigation bar
+And the user clicks on the office credit ratings link in the navigation bar
 
-Then the user should see the office's services as:
-|SERVICE CATEGORY|SERVICE OVERRIDE|
-|Capital Markets||
-|Documentary Collections|Quality Certifications|
-|Equity Investments||
-|Loans|Medium Terms Loans|
-|Mergers and Acquisitions||
-|Syndicated Loans||
-|Underwriting||
-|Advisory & Information Services|Advisory for Environment|
-
+Then the user should see the office's credit ratings as:
+|AGENCY|TYPE|VALUE|APPLIED DATE|CONFIRMED DATE|
+|Standard & Poors|Long Term Rating|A|2015-01-06||
+|Standard & Poors|Short Term Rating|A-1|2015-01-06||
 
 Examples:
 |entity|searchBy|fid|officeFid|
-|MPS Capital Services Banca per le Imprese SpA|Name|3314|3314-0|
+|BNP Paribas SA|Name|1568|1568-71|
 
-Scenario: Verify no office services (Office Id - cac0b9d5-8043-40d2-80cd-aea4180c74cb)
+Scenario: Verify no office credit ratings ( Office ID - cac0b9d5-8043-40d2-80cd-aea4180c74cb )
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -44,9 +37,9 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-When the user clicks on the office services link in the navigation bar
+And the user clicks on the office credit ratings link in the navigation bar
 
-Then the user should not see the office's services
+Then the user should not see the office's credit ratings
 
 Examples:
 |entity|searchBy|fid|officeFid|
