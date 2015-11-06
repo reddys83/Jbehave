@@ -32,7 +32,7 @@ Examples:
 
 
 
-Scenario: Verify no statistics  (Office Id -   )
+Scenario: Verify no statistics  (Office Id - c6458990-e7e7-4155-9024-7af61d55f9e9 )
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
