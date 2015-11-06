@@ -311,9 +311,10 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountrySummary(countrySummary);
     }
 
+    /*
     @Then("the user should see the $label of a country as $value")
     public void verifyCountryBasicInfo(@Named("label") String label, @Named("value") String value) {
-        getDataPage().verifyBasicInfoLabel(label, value);
+        getDataPage().verifyBasicInfo(label, value);
     }
 
     @Then("the user should see the $label of an area as $value")
@@ -321,11 +322,15 @@ public class DataSteps extends AbstractSteps {
     public void verifyAreaBasicInfo(@Named("label") String label, @Named("value") String value) {
         getDataPage().verifyBasicInfoLabel(label, value);
     }
+    */
 
     @Then("the user should see the $label of a city as $value")
-    @Alias("the user should see the $label of an office as $value")
-    public void verifyCityBasicInfo(@Named("label") String label, @Named("value") String value) {
-        getDataPage().verifyBasicInfoLabel(label, value);
+    @Aliases(values={"the user should see the $label of an office as $value",
+            "the user should see the $label of an area as $value",
+            "the user should see the $label of a legal entity as $value",
+            "the user should see the $label of a country as $value"})
+    public void verifyBasicInfo(@Named("label") String label, @Named("value") String value) {
+        getDataPage().verifyBasicInfo(label, value);
     }
 
     @When("the user clicks on the replaced by country <replacedByCountry> in the country basic info")
@@ -940,6 +945,18 @@ public class DataSteps extends AbstractSteps {
     @Alias ("the user should not see the office's history")
     public void verifyNoHistory() {
         getDataPage().verifyNoHistory();
+    }
+
+    @Then("the user should see the legal entity's identifiers as: $identifiers")
+    @Alias("the user should see the office's identifiers as: $identifiers")
+    public void verifyLegalEntityIdentifiers(ExamplesTable identifiers){
+        getDataPage().verifyIdentifiers(identifiers);
+    }
+
+    @Then("the user should not see the legal entity's identifiers")
+    @Alias("the user should not see the office's identifiers")
+    public void verifyNoLegalEntityIdentifiers() {
+        getDataPage().verifyNoIdentifiers();
     }
 }
 

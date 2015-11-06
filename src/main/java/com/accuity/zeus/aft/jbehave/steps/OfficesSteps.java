@@ -46,7 +46,14 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().clickOnOfficeHistoryLink();
     }
 
+
+    @When("the user clicks on the office identifier link in the navigation bar")
+    public void clickOnOfficeIdentifiersLink(){
+        getOfficesPage().clickOnOfficeIdentifiersLink();
+    }
+
     @When("the user clicks on the office credit ratings link in the navigation bar")
     public void clickOnOfficeCreditRatingsLink() { getOfficesPage().clickOnOfficeCreditRatingsLink(); }
 
   }
+
