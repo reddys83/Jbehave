@@ -1,9 +1,6 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import org.jbehave.core.annotations.Alias;
-import org.jbehave.core.annotations.Named;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
+import org.jbehave.core.annotations.*;
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.stereotype.Component;
 
@@ -630,6 +627,18 @@ public class DataSteps extends AbstractSteps {
     public void verifyAreaDemographics(ExamplesTable areaDemographics) {
         getDataPage().verifyDemographics(areaDemographics);
     }
+
+    @Then("the user should see the legal entity's statistics as: $legalEntityStatistics")
+    @Aliases(values = {"the user should see the office's statistics as: $officeStatistics"})
+    public void verifyLegalEntityStatistics(ExamplesTable statistics) {
+        getDataPage().verifyStatistics(statistics);
+    }
+
+    @Then("the user should see the statistics for the legal entity")
+    public void verifyLegalEntityStatisticsLabels(){
+        getDataPage().verifyStatisticsLabels();
+    }
+
 
     @Then("the user should see the sub-area's demographics as: $subAreaDemographics")
     public void verifySubAreaDemographics(ExamplesTable subAreaDemographics) {

@@ -72,11 +72,6 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyNoLegalEntityLocations();
     }
 
-    @Then("the user should see the legal entity's statistics as: $legalEntityStatistics")
-    public void verifyLegalEntityStatistics(ExamplesTable legalEntityStatistics) {
-        getLegalEntityPage().verifyLegalEntityStatistics(legalEntityStatistics);
-    }
-
     @Then("the user should see the legal entity's trust power as: $legalEntityTrustPowers")
     public void verifyLegalEntityTrustPowers(ExamplesTable legalEntityTrustPowers) {
         getLegalEntityPage().verifyLegalEntityTrustPowers(legalEntityTrustPowers);
@@ -254,11 +249,6 @@ public class LegalEntitySteps extends AbstractSteps{
     @Then("the user should see the financial services for the legal entity")
     public void verifyLegalEntityFinancialServicesLabels(){
         getLegalEntityPage().verifyLegalEntityFinancialServicesLabels();
-    }
-
-    @Then("the user should see the statistics for the legal entity")
-    public void verifyLegalEntityStatisticsLabels(){
-        getLegalEntityPage().verifyLegalEntityStatisticsLabels();
     }
 
     @Then("the user should see the trust powers for the legal entity")
