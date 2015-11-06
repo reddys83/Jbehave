@@ -105,4 +105,4 @@ Then the user should see the legal entity header with <entity>, <headOfficeAddre
 
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
-|Bank at Ormond by the Sea|Name|Ormond Beach, Volusia, Florida, USA|12253||
+|Bank at Ormond by the Sea|Name|Ormond Beach, Florida, USA|12253||

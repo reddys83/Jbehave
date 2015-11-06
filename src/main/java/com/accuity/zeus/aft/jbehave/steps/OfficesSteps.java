@@ -60,4 +60,9 @@ public class OfficesSteps extends AbstractSteps {
     public void verifyNoOfficePersonnelSection(){
         getOfficesPage().verifyNoOfficePersonnelSection();
     }
-}
+
+    @When("the user clicks on the office credit ratings link in the navigation bar")
+    public void clickOnOfficeCreditRatingsLink() { getOfficesPage().clickOnOfficeCreditRatingsLink(); }
+
+  }
+
