@@ -93,4 +93,12 @@ public class OfficesPage extends AbstractPage {
     public void clickOnOfficeIdentifiersLink() {
         attemptClick(office_identifiers_link_id);
     }
+
+    public void verifyNoOfficePersonnelSection() {
+        try {
+            assertFalse(getDriver().findElement(By.xpath("//*[@id='content']//li[h1='Personnel']")).isDisplayed());
+        }catch (NoSuchElementException e){
+
+        }
+    }
 }

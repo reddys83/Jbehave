@@ -551,7 +551,7 @@ public class DataPage extends AbstractPage {
         assertEquals("STATUS", getDriver().findElement(identifiers_status_label_xpath).getText());
     }
 
-    public void verifyLegalEntityIdentifiersLabels(){
+    public void verifyIdentifiersSectionLabels(){
         verifyIdentifiersLabels();
         assertEquals("IDENTIFIERS", getDriver().findElement(identifiers_header_xpath).getText());
     }
