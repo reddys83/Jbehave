@@ -28,7 +28,7 @@ And the user should see the legal entity's names as:
 |Former Name|DnB NOR Bank ASA|
 |Former Name|Union Bank of Norway|
 
-And the user should see the legalEntity's entity types as:
+And the user should see the legal entity's entity types as:
 |TYPE|
 |Bank|
 |Commercial Bank|
@@ -43,7 +43,7 @@ And the user should see the legalEntity's entity types as:
 |Commercial Bank|
 |Universal Bank|
 
-And the user should see the legalEntity's telecoms as:
+And the user should see the legal entity's telecoms as:
 |TYPE|RANK|INFO|VALUE|
 |Bank|Bank|Bank|Bank|
 |Commercial Bank|Commercial Bank|Commercial Bank|Commercial Bank|
@@ -55,19 +55,19 @@ And the user should see the legalEntity's telecoms as:
 |Retail Bank|Retail Bank|Retail Bank|Retail Bank|
 |Savings Bank|Savings Bank|Savings Bank|Savings Bank|
 
-And the user should see the Status of a legalEntity as Active
-And the user should see the Claimed Est Date of a legalEntity as 01 Jul 1990
-And the user should see the Chartered Date of a legalEntity as 01 Jul 1990
-And the user should see the Charter Type of a legalEntity as Us State Chartered Bank
-And the user should see the FATCA Status of a legalEntity as Inactive
-And the user should see the Insurance Type of a legalEntity as PSAIC
-And the user should see the Ownership Type of a legalEntity as Corporate Bank
-And the user should see the Lead Institution of a legalEntity as False
-And the user should see the Add Info of a legalEntity as Ultimate Parent Company: The Bank of Nova Scotia 1709 Hollis Street, Halifax, NS B3J 3B7, Canada
-And the user should see the Country of Operations of a legalEntity as Norway
-And the user should see the Head Office of a legalEntity as Dronning Eufemias gate 30Oslo, Oslo, 0191Norway(View Head Office)
+And the user should see the Status of a legal entity as Active
+And the user should see the Claimed Est Date of a legal entity as 01 Jul 1990
+And the user should see the Chartered Date of a legal entity  as 01 Jul 1990
+And the user should see the Charter Type of a legal entity as Us State Chartered Bank
+And the user should see the FATCA Status of a legal entity as Inactive
+And the user should see the Insurance Type of a legal entity as PSAIC
+And the user should see the Ownership Type of a legal entity as Corporate Bank
+And the user should see the Lead Institution of a legal entity as False
+And the user should see the Add Info of a legal entity as Ultimate Parent Company: The Bank of Nova Scotia 1709 Hollis Street, Halifax, NS B3J 3B7, Canada
+And the user should see the Country of Operations of a legal entity as Norway
+And the user should see the Head Office of a legal entity as Dronning Eufemias gate 30Oslo, Oslo, 0191Norway(View Head Office)
 
-And the user should see the legalEntity corporate statement as Ultimate Parent Company: The Bank of Nova Scotia 1709 Hollis Street, Halifax, NS B3J 3B7, Canada
+And the user should see the legal entity corporate statement as Ultimate Parent Company: The Bank of Nova Scotia 1709 Hollis Street, Halifax, NS B3J 3B7, Canada
 
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
@@ -105,4 +105,4 @@ Then the user should see the legal entity header with <entity>, <headOfficeAddre
 
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
-|Bank at Ormond by the Sea|Name|Ormond Beach, Volusia, Florida, USA|12253||
+|Bank at Ormond by the Sea|Name|Ormond Beach, Florida, USA|12253||

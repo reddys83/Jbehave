@@ -41,8 +41,9 @@ And the user enters the sub-area <subArea> in the type-ahead box
 When the user clicks on the sub-area's alternative regions link in the navigation bar
 Then the user should see the sub-area's alternative regions as:
 |TYPE|VALUE|
-|State FRB District|Chicago|
-|State FHLB District|Chicago|
+|Federal Reserve Bank Region|San Francisco 12|
+|Federal Home Loan Bank Region|Seattle 12|
+|My random sweet region|Sugar 1234|
 
 Examples:
 |country|area|subArea|

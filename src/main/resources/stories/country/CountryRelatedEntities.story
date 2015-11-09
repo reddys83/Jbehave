@@ -18,12 +18,13 @@ And the user enters the country <country> in the type-ahead box
 When the user clicks on the country entity link in the navigation bar
 Then the user should see the country's entities as:
 |TYPE|ENTITY|DETAILS|
-|Central Office|Bank of the Ryukyus, Ltd|Central Office, Test Related Office|
-|Central Bank|Central Bank of Somalia|Central Bank, Test Related LegalEntity|
+|Regulator|Qatar Central Bank|Central, Bank|
+|Regulator|Qatar Financial Centre Regulatory Authority|Central, Bank|
+|Central Bank|Qatar Central Bank|Central, Bank|
 
 Examples:
 |country|
-|Yugoslavia|
+|Qatar|
 
 Scenario: Verify country entities data.
 Given a user is on the search page
@@ -35,9 +36,9 @@ And the user enters the country <country> in the type-ahead box
 When the user clicks on the country entity link in the navigation bar
 Then the user should see the country's entities as:
 |TYPE|ENTITY|DETAILS|
-|National Association|Vietnam Bankers Association||
 |Central Bank|State Bank of Vietnam||
 |Regulator|State Bank of Vietnam||
+|National Association|Vietnam Bankers Association||
 
 Examples:
 |country|

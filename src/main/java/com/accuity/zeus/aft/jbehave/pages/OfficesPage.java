@@ -18,6 +18,7 @@ public class OfficesPage extends AbstractPage {
     private By office_personnel_link_id = By.id("officePersonnel");
     private By office_basic_info_link_id = By.id("officeBasicInfo");
     private By office_history_link_id = By.id("officeHistory");
+    private By office_identifiers_link_id = By.id("officeIdentifiers");
     private By office_services_link_id = By.id("officeServices");
     private By office_services_label_xpath = By.xpath("//li[contains(h1,'Services')]/h1/span");
     private By office_offered_services_label_xpath = By.xpath("//li[h2 = 'Offered Services']//h2");
@@ -87,5 +88,17 @@ public class OfficesPage extends AbstractPage {
 
     public void clickOnOfficeHistoryLink() {
         attemptClick(office_history_link_id);
+    }
+
+    public void clickOnOfficeIdentifiersLink() {
+        attemptClick(office_identifiers_link_id);
+    }
+
+    public void verifyNoOfficePersonnelSection() {
+        try {
+            assertFalse(getDriver().findElement(By.xpath("//*[@id='content']//li[h1='Personnel']")).isDisplayed());
+        }catch (NoSuchElementException e){
+
+        }
     }
 }

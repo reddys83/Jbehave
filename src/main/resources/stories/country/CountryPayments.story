@@ -18,15 +18,16 @@ And the user enters the country <country> in the type-ahead box
 When the user clicks on the country payments link in the navigation bar
 Then the user should see the country's payments iban as:
 |STATUS|ISO CODE|REGISTERED DATE|IBAN ROUTING CODE TYPE|
-|True|YU|13 Jul 1922|CSRN|
+|True|QA|13 Jul 1922|SWIFT BIC|
 
 And the user should see the country's payments routing code types as:
 |TYPES|
 |CSRN|
+|ABA|
 
 Examples:
 |country|
-|Yugoslavia|
+|Qatar|
 
 Scenario: Verify country no payments data.
 Given a user is on the search page
@@ -36,8 +37,7 @@ Then the user should see the country list box displayed
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 When the user clicks on the country payments link in the navigation bar
-Then the user should not see the country's payments iban
-And the user should not see the country's payments routing codes types
+Then the user should not see the country's payments routing codes types
 
 
 Examples:

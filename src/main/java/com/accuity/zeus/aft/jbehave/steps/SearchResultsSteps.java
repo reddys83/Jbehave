@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ import static org.junit.Assert.*;
 @Component
 public class SearchResultsSteps extends AbstractSteps{
 
-    @Then("the user should see the search results for the searched entity")
+    @Then("the user should see the search results paginated for the searched entity")
     public void thenUserShouldSeeCorrectResults() {
         if(Integer.parseInt(getResultsPage().getNumResultsValue().getText()) < 10) {
             assertEquals(Integer.toString(getResultsPage().getResultsList().size()), getResultsPage().getNumResultsValue().getText());
@@ -126,5 +127,10 @@ public class SearchResultsSteps extends AbstractSteps{
     @Then("the user should see the search results for the institution")
     public void verifySearchResults() {
         getResultsPage().verifySearchResults();
+    }
+
+    @Then("the user should see the below search results card matching the searched entity $searchResults")
+    public void verifySearchResultsCards(ExamplesTable searchResults){
+        getResultsPage().verifySearchResultsCards(searchResults);
     }
 }

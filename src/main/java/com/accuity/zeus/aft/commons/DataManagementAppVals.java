@@ -186,6 +186,7 @@ public class DataManagementAppVals {
             "Qatar",
             "Reunion Island",
             "Romania",
+            "Russian Federation",
             "Rwanda",
             "Saint Helena, Ascension and Tristan da Cunha",
             "Samoa",
@@ -248,14 +249,13 @@ public class DataManagementAppVals {
             "Wallis and Futuna",
             "Western Sahara",
             "Yemen",
-            "Yugoslavia",
             "Zambia",
             "Zimbabwe"
             ));
 
         public static List<String> expTaxonomiesListVal = new ArrayList<>(Arrays.asList(
                 "Abbreviation Rules",
-                "Additional Info Type",
+                "Additional Info Text Type",
                 "Area Alternative Regions",
                 "Area Related Entity Type",
                 "Area Related Person Type",
@@ -291,12 +291,11 @@ public class DataManagementAppVals {
                 "Metropolitan Statistical Region",
                 "National Credit Union Administration Region",
                 "Office Third Party Identifiers",
-                "Ownership Summary Type",
-                "Personnel Summary Type",
+                "Ownership Summary Text Type",
+                "Personnel Summary Text Type",
                 "Place Name Type",
                 "Rating Agencies",
                 "Rating Types",
-                "Routing Code Type",
                 "Routing Code Type",
                 "SEPA Status",
                 "Service Categories",

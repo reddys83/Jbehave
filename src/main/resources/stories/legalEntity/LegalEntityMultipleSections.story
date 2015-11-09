@@ -47,12 +47,12 @@ And the user clicks on the legal entity credit rating link in the navigation bar
 
 Then the user should see the legal entity's credit ratings as:
 |NAME|TYPE|VALUE|Date APPLIED|DATE CONFIRMED|
-|Fitch |Long Term Rating|A+|2015-10-07||
-|Fitch |Short Term Rating|F1|2015-10-07||
-|Moody's|Long Term Rating|A1|2015-09-02||
-|Moody's|Short Term Rating|P-1|2015-09-02||
-|Standard & Poors|Long Term Rating|A|2011-12-02||
-|Standard & Poors|Short Term Rating|A-1|2011-12-02||
+|Fitch |Long Term Rating|A+|07 Oct 2015||
+|Fitch |Short Term Rating|F1|07 Oct 2015||
+|Moody's|Long Term Rating|A1|02 Sep 2015||
+|Moody's|Short Term Rating|P-1|02 Sep 2015||
+|Standard & Poors|Long Term Rating|A|02 Dec 2011||
+|Standard & Poors|Short Term Rating|A-1|02 Dec 2011||
 
 When the user clicks on the legal entity identifier link in the navigation bar
 
