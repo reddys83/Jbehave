@@ -54,8 +54,8 @@ When the user clicks on the sub-area's people link in the navigation bar
 
 Then the user should see the sub-area's people as:
 |TYPE|PERSON|
-|Government Type|Steven Bangert|
-|Board member, city|Yasuo Ueno|
+|Financial Institution Board member|Steven Bangert|
+|President, Cheif executor|Yasuo Ueno|
 
 Examples:
 |country|area|subArea|

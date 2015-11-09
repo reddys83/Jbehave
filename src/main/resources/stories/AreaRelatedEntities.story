@@ -37,9 +37,8 @@ And the user enters the sub-area <subArea> in the type-ahead box
 When the user clicks on the sub-area's entity link in the navigation bar
 Then the user should see the sub-area's entities as:
 |TYPE|ENTITY|DETAILS|
+|Government|Illinois Department of Employment Security|City Government|
 |Government Type|Illinois Department of Employment Security|City Government, City Government|
-|Government|Treasurer of Cook County|City Government|
-
 
 Examples:
 |country|area|subArea|

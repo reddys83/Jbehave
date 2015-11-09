@@ -155,7 +155,12 @@ public class ResultsPage extends AbstractPage {
     }
 
     public LegalEntityPage clickOnResultCard(WebElement element) {
-        element.click();
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		element.click();
 		return new LegalEntityPage(getDriver(), getUrlPrefix());
     }
 
