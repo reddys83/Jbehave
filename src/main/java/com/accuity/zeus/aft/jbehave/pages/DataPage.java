@@ -1099,14 +1099,14 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyStatistics(ExamplesTable legalEntityStatistics){
+    public void verifyStatistics(ExamplesTable statistics){
         verifyStatisticsLabels();
         List<WebElement> type = getDriver().findElements(statistics_type_list_xpath);
         List<WebElement> value = getDriver().findElements(statistics_value_list_xpath);
 
-        for(int i=0;i<legalEntityStatistics.getRowCount();i++){
-            assertEquals(legalEntityStatistics.getRow(i).get(legalEntityStatistics.getHeaders().get(0)),type.get(i).getText());
-            assertEquals(legalEntityStatistics.getRow(i).get(legalEntityStatistics.getHeaders().get(1)),value.get(i).getText());
+        for(int i=0;i<statistics.getRowCount();i++){
+            assertEquals(statistics.getRow(i).get(statistics.getHeaders().get(0)),type.get(i).getText());
+            assertEquals(statistics.getRow(i).get(statistics.getHeaders().get(1)),value.get(i).getText());
         }
     }
 
