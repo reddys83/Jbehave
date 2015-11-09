@@ -223,6 +223,12 @@ public class DataPage extends AbstractPage {
     private By legalEntity_history_summary_label_xpath = By.xpath("//li[h1='History']//th");
     private By history_message_xpath = By.xpath("//li[h1='History']//td");
 
+    private By statistics_label_xpath = By.xpath("//li/h1/span[text()='Statistics']");
+    private By statistics_type_label_xpath = By.xpath("//li[h1='Statistics']//li//th[1]");
+    private By statistics_value_label_xpath = By.xpath("//li[h1='Statistics']//li//th[2]");
+    private By statistics_type_list_xpath = By.xpath("//li[h1='Statistics']//li//table/tbody/tr/th[1]");
+    private By statistics_value_list_xpath = By.xpath("//li[h1='Statistics']//li//table/tbody/tr/td[1]");
+
     @Override
     public String getPageUrl() {
         return null;
@@ -1091,6 +1097,23 @@ public class DataPage extends AbstractPage {
         } catch (org.openqa.selenium.NoSuchElementException e) {
 
         }
+    }
+
+    public void verifyStatistics(ExamplesTable legalEntityStatistics){
+        verifyStatisticsLabels();
+        List<WebElement> type = getDriver().findElements(statistics_type_list_xpath);
+        List<WebElement> value = getDriver().findElements(statistics_value_list_xpath);
+
+        for(int i=0;i<legalEntityStatistics.getRowCount();i++){
+            assertEquals(legalEntityStatistics.getRow(i).get(legalEntityStatistics.getHeaders().get(0)),type.get(i).getText());
+            assertEquals(legalEntityStatistics.getRow(i).get(legalEntityStatistics.getHeaders().get(1)),value.get(i).getText());
+        }
+    }
+
+    public void verifyStatisticsLabels(){
+        assertEquals("STATISTICS", getTextOnPage(statistics_label_xpath));
+        assertEquals("TYPE",getTextOnPage(statistics_type_label_xpath));
+        assertEquals("VALUE",getTextOnPage(statistics_value_label_xpath));
     }
 
     public void clickOnCityTab() {
