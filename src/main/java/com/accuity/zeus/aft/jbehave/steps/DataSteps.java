@@ -635,6 +635,18 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyDemographics(areaDemographics);
     }
 
+    @Then("the user should see the legal entity's statistics as: $statistics")
+    @Aliases(values = {"the user should see the office's statistics as: $statistics"})
+    public void verifyStatistics(ExamplesTable statistics) {
+        getDataPage().verifyStatistics(statistics);
+    }
+
+    @Then("the user should see the statistics for the legal entity")
+    public void verifyLegalEntityStatisticsLabels(){
+        getDataPage().verifyStatisticsLabels();
+    }
+
+
     @Then("the user should see the sub-area's demographics as: $subAreaDemographics")
     public void verifySubAreaDemographics(ExamplesTable subAreaDemographics) {
         getDataPage().verifyDemographics(subAreaDemographics);

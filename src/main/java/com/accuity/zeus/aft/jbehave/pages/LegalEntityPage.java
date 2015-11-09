@@ -223,22 +223,6 @@ public class LegalEntityPage extends AbstractPage {
         }
     }
 
-    public void verifyLegalEntityStatistics(ExamplesTable legalEntityStatistics){
-        verifyLegalEntityStatisticsLabels();
-        List<WebElement> type = getDriver().findElements(legalEntity_statistics_type_list_xpath);
-        List<WebElement> value = getDriver().findElements(legalEntity_statistics_value_list_xpath);
-
-        for(int i=0;i<legalEntityStatistics.getRowCount();i++){
-            assertEquals(legalEntityStatistics.getRow(i).get(legalEntityStatistics.getHeaders().get(0)),type.get(i).getText());
-            assertEquals(legalEntityStatistics.getRow(i).get(legalEntityStatistics.getHeaders().get(1)),value.get(i).getText());
-        }
-    }
-
-    public void verifyLegalEntityStatisticsLabels(){
-        assertEquals("STATISTICS", getTextOnPage(legalEntity_statistics_label_xpath));
-        assertEquals("TYPE",getTextOnPage(legalEntity_statistics_type_label_xpath));
-        assertEquals("VALUE",getTextOnPage(legalEntity_statistics_value_label_xpath));
-    }
 
     public void verifyLegalEntityTrustPowersLabels()
     {

@@ -25,6 +25,13 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().clickOnOfficeServicesLink();
     }
 
+    @When("the user clicks on the office statistics link in the navigation bar")
+    public void clickOnOfficeStatisticsLink(){
+        getOfficesPage().clickOnOfficeStatisticsLink();
+    }
+
+
+
     @Then("the user should see the office's services as: $services")
     public void verifyOfficeServices(ExamplesTable services) {
          getOfficesPage().verifyOfficeServices(services);
