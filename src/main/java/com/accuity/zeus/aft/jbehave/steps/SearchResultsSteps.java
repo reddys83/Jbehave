@@ -1,12 +1,10 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.springframework.stereotype.Component;
 
 import static org.junit.Assert.*;
@@ -129,8 +127,18 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifySearchResults();
     }
 
-    @Then("the user should see the below search results card matching the searched entity $searchResults")
-    public void verifySearchResultsCards(ExamplesTable searchResults){
-        getResultsPage().verifySearchResultsCards(searchResults);
+    @Then("the user should see the legal entity search results card matching the searched entity $legalEntitySearchResults")
+    public void verifyLegalEntitySearchResultsCards(ExamplesTable legalEntitySearchResults){
+        getResultsPage().verifyLegalEntitySearchResultsCards(legalEntitySearchResults);
+    }
+
+    @Then("the user should see the office search results card for the search legal entity $officeSearchResults")
+    public void verifyOfficeSearchResults(ExamplesTable officeSearchResults){
+        getResultsPage().verifyOfficeSearchResults(officeSearchResults);
+    }
+
+    @Then("the user should see the office search results paginated")
+    public void verifyOfficeSearchResultsIsPaginated(){
+        getResultsPage().verifyOfficeSearchResultsIsPaginated();
     }
 }
