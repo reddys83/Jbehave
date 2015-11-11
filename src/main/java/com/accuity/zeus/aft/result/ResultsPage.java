@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 public class ResultsPage extends AbstractPage {
@@ -61,6 +62,8 @@ public class ResultsPage extends AbstractPage {
 	private By office_header_counter_xpath = By.xpath("//*[@id='subEntityList-header']//p");
 	private By office_footer_counter_xpath = By.xpath("//*[@id='subEntityList-footer']//p");
 	private By office_search_results_last_page_xpath = By.xpath("//*[@id='pages-navigation-list']/li[8]");
+	private By office_search_results_navigation_xpath = By.xpath("//*[@id='pages-navigation-list']");
+
 
 	public ResultsPage(WebDriver driver, String urlPrefix) {
 		super(driver, urlPrefix);
@@ -235,15 +238,15 @@ public class ResultsPage extends AbstractPage {
 	}
 
 	public void verifyOfficeSearchResultsIsPaginated() {
-		if(Integer.parseInt(getOfficeTotalResultsCount()) <= 25) {
-				assertEquals(getOfficeTotalResultsCount(), Integer.toString(getOfficeResultsCountInCurrentPage().size()));
+		if(Integer.parseInt(officeTotalResultsCount()) <= 25) {
+				assertEquals(officeTotalResultsCount(), Integer.toString(getOfficeResultsCountInCurrentPage().size()));
 			} else {
 				navigateToOfficeLastSearchResultsPage();
-				assertEquals(getOfficeTotalResultsCount(), getOfficeResultsCountTillCurrentPage());
+				assertEquals(officeTotalResultsCount(), getOfficeResultsCountTillCurrentPage());
 		}
 	}
 
-	public String getOfficeTotalResultsCount() {
+	public String officeTotalResultsCount() {
 		return getDriver().findElements(office_total_search_results_count_xpath).get(1).getText();
 	}
 
@@ -251,27 +254,28 @@ public class ResultsPage extends AbstractPage {
 		return getDriver().findElements(office_current_page_search_results_count_xpath);
 	}
 
-	public String getOfficeToResultsCount() {
-		return getDriver().findElement(office_to_search_results_count_xpath).getText();
+	public String getOfficeSearchResultsLastNavigationPage() {
+        String lastNavigationListItem = Integer.toString(getPagesNavigationList().size() - 1);
+		return getDriver().findElement(By.xpath(pagesNavigationListElements + "/li[" + lastNavigationListItem + "]")).getText();
 	}
 
-	public String getOfficeFromResultsCount() {
-		return getDriver().findElement(office_from_search_results_count_xpath).getText();
+	public String getOfficeSearchResultsCurrentPage() {
+		return getDriver().findElement(office_search_results_current_page_xpath).getText();
 	}
 
 	public void verifyOfficeSearchResultsCounter(){
-		if(Integer.parseInt(getOfficeTotalResultsCount()) <= 25) {
-			if(Integer.parseInt(getOfficeTotalResultsCount()) == 1){
-				assertEquals("1", getOfficeResultsCountInCurrentPage());
+		if(Integer.parseInt(officeTotalResultsCount()) <= 25) {
+			if(Integer.parseInt(officeTotalResultsCount()) == 1){
+				assertEquals("1", Integer.toString(getOfficeResultsCountInCurrentPage().size()));
 				assertEquals("1 to 1 of 1 result", getDriver().findElement(office_header_counter_xpath).getText());
 				assertEquals("1 to 1 of 1 result", getDriver().findElement(office_footer_counter_xpath).getText());
 			} else {
-				assertEquals("1 to " + getOfficeResultsCountInCurrentPage() + " of " + getOfficeResultsCountInCurrentPage() +" results", getDriver().findElement(office_header_counter_xpath).getText());
-				assertEquals("1 to " + getOfficeResultsCountInCurrentPage() + " of " + getOfficeResultsCountInCurrentPage() +" results", getDriver().findElement(office_footer_counter_xpath).getText());
+				assertEquals("1 to " + Integer.toString(getOfficeResultsCountInCurrentPage().size()) + " of " + Integer.toString(getOfficeResultsCountInCurrentPage().size()) +" results", getDriver().findElement(office_header_counter_xpath).getText());
+				assertEquals("1 to " + Integer.toString(getOfficeResultsCountInCurrentPage().size()) + " of " + Integer.toString(getOfficeResultsCountInCurrentPage().size()) +" results", getDriver().findElement(office_footer_counter_xpath).getText());
 			}
 		} else {
 			navigateToOfficeLastSearchResultsPage();
-			assertEquals(getOfficeTotalResultsCount(), getOfficeResultsCountTillCurrentPage());
+			assertEquals(officeTotalResultsCount(), getOfficeResultsCountTillCurrentPage());
 		}
 	}
 
@@ -283,6 +287,38 @@ public class ResultsPage extends AbstractPage {
 
 	public void navigateToOfficeLastSearchResultsPage(){
 		attemptClick(office_search_results_last_page_xpath);
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
+	public void verifyOfficeSearchResultsNavigation() {
+		if(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) > 7){
+			if(Integer.parseInt(getOfficeSearchResultsCurrentPage()) <= 4){
+				assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 2 3 4 5 ... " + getOfficeSearchResultsLastNavigationPage() + " Next");
+			} else if (Integer.parseInt(getOfficeSearchResultsCurrentPage()) > 5
+						&& Integer.parseInt(getOfficeSearchResultsCurrentPage()) < (Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 3)){
+				assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(),  "Previous 1 ... " +
+						Integer.toString(Integer.parseInt(getOfficeSearchResultsCurrentPage()) - 1) + " " +
+						getOfficeSearchResultsCurrentPage() + " " +
+                        Integer.toString(Integer.parseInt(getOfficeSearchResultsCurrentPage()) + 1) + " ... "+
+                        getOfficeSearchResultsLastNavigationPage() + " Next");
+			} else {
+						assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 ... " +
+						Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 4) + " " +
+						Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 3) + " " +
+						Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 2) + " " +
+						Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 1) + " " +
+						getOfficeSearchResultsLastNavigationPage() + " Next");
+			}
+		} else{
+            assertTrue(getDriver().findElement(office_search_results_navigation_xpath).getText().contains("Previous"));
+            assertTrue(getDriver().findElement(office_search_results_navigation_xpath).getText().contains("Next"));
+            for(int i=1; i<=Integer.parseInt(getOfficeSearchResultsLastNavigationPage()); i++) {
+                assertTrue(getDriver().findElement(office_search_results_navigation_xpath).getText().contains(Integer.toString(i)));
+            }
+		}
+	}
 }

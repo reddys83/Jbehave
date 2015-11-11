@@ -132,7 +132,7 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifyLegalEntitySearchResultsCards(legalEntitySearchResults);
     }
 
-    @Then("the user should see the office search results card for the search legal entity $officeSearchResults")
+    @Then("the user should see the office search results card for the searched legal entity $officeSearchResults")
     public void verifyOfficeSearchResults(ExamplesTable officeSearchResults){
         getResultsPage().verifyOfficeSearchResults(officeSearchResults);
     }
@@ -140,5 +140,15 @@ public class SearchResultsSteps extends AbstractSteps{
     @Then("the user should see the office search results paginated")
     public void verifyOfficeSearchResultsIsPaginated(){
         getResultsPage().verifyOfficeSearchResultsIsPaginated();
+    }
+
+    @Then("the user should see the offices number of records displayed in the page w.r.t total search results")
+    public void verifyOfficeSearchResultsCounter(){
+        getResultsPage().verifyOfficeSearchResultsCounter();
+    }
+
+    @Then("the user should see the option to navigate to the desired office search results page")
+    public void verifyOfficeSearchResultsNavigation(){
+        getResultsPage().verifyOfficeSearchResultsNavigation();
     }
 }
