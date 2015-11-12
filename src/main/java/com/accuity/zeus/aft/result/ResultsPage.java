@@ -56,13 +56,13 @@ public class ResultsPage extends AbstractPage {
 	private By legalEntity_search_results_xpath = By.xpath("//*[@id='search-results-items']/li");
 	private By office_total_search_results_count_xpath = By.xpath("//*[@class='search-results-module']//span[3]");
 	private By office_current_page_search_results_count_xpath = By.xpath("//*[@id='subEntityList-list']//tbody/tr");
-	private By office_to_search_results_count_xpath = By.xpath("//*[@class='search-results-module']//span[2]");
-	private By office_from_search_results_count_xpath = By.xpath("//*[@class='search-results-module']//span[1]");
 	private By office_search_results_current_page_xpath = By.className("current-page");
 	private By office_header_counter_xpath = By.xpath("//*[@id='subEntityList-header']//p");
 	private By office_footer_counter_xpath = By.xpath("//*[@id='subEntityList-footer']//p");
 	private By office_search_results_last_page_xpath = By.xpath("//*[@id='pages-navigation-list']/li[8]");
 	private By office_search_results_navigation_xpath = By.xpath("//*[@id='pages-navigation-list']");
+	private By office_search_results_next_page_classname = By.className("next-page");
+	private By office_search_results_previous_page_classname = By.className("previous-page");
 
 
 	public ResultsPage(WebDriver driver, String urlPrefix) {
@@ -156,13 +156,13 @@ public class ResultsPage extends AbstractPage {
         return getLastNavigationPage();
     }
 
-    public WebElement goToDesiredSearchResultsPage(String page){
+    public WebElement navigateToDesiredSearchResultsPage(String page){
 		try {
 			Thread.sleep(1000L);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return getDriver().findElement(By.xpath(pagesNavigationListElements + "/li[" + page.replace("st", "").replace("nd", "").replace("rd", "").replace("th", "") + "]/span"));
+		return getDriver().findElement(By.xpath(pagesNavigationListElements + "/li[" + page.replace("st", "").replace("nd", "").replace("rd", "").replace("th", "") + "]"));
     }
 
     public WebElement getCurrentSearchResultsPage(){
@@ -321,4 +321,21 @@ public class ResultsPage extends AbstractPage {
             }
 		}
 	}
+
+	public void navigateThroughOfficeSearchResults(String page) {
+		if(page.equals("last")){
+			navigateToOfficeLastSearchResultsPage();
+		} else {
+			navigateToDesiredSearchResultsPage(page);
+		}
+	}
+
+	public void navigateToNextOfficeSearchResultsPage() {
+		attemptClick(office_search_results_next_page_classname);
+	}
+
+	public void navigateToPreviousOfficeSearchResultsPage() {
+		attemptClick(office_search_results_previous_page_classname);
+	}
+
 }

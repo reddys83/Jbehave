@@ -81,3 +81,40 @@ And the user should see the option to navigate to the desired office search resu
 Examples:
 |entity|searchBy|fid|
 |41031|FID|41031|
+
+Scenario: Navigate through search results and verify pagination
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+Then the user should see the option to navigate to the desired office search results page
+When the user navigates to the 5th page on the office search results
+Then the user should see the option to navigate to the desired office search results page
+When the user navigates to the last page on the office search results
+Then the user should see the option to navigate to the desired office search results page
+
+Examples:
+|entity|searchBy|fid|
+|1038|FID|1038|1038|
+
+Scenario: Verify pagination next and previous navigation link
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user navigates to the office search results next page
+Then the user should see the option to navigate to the desired office search results page
+When the user navigates to the office search results previous page
+Then the user should see the option to navigate to the desired office search results page
+
+Examples:
+|entity|searchBy|fid|
+|1038|FID|1038|1038|

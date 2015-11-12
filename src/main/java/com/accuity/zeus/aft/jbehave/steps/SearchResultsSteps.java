@@ -84,7 +84,7 @@ public class SearchResultsSteps extends AbstractSteps{
         if(page.equals("last")){
             getResultsPage().goToLastSearchResultsPage().click();
         }else{
-            getResultsPage().goToDesiredSearchResultsPage(page).click();
+            getResultsPage().navigateToDesiredSearchResultsPage(page).click();
         }
         try {
             Thread.sleep(1000L);
@@ -150,5 +150,20 @@ public class SearchResultsSteps extends AbstractSteps{
     @Then("the user should see the option to navigate to the desired office search results page")
     public void verifyOfficeSearchResultsNavigation(){
         getResultsPage().verifyOfficeSearchResultsNavigation();
+    }
+
+    @When("the user navigates to the $page page on the office search results")
+    public void navigateThroughOfficeSearchResults(@Named("page") String page){
+        getResultsPage().navigateThroughOfficeSearchResults(page);
+    }
+
+    @When("the user navigates to the office search results next page")
+    public void navigateToNextOfficeSearchResultsPage(){
+        getResultsPage().navigateToNextOfficeSearchResultsPage();
+    }
+
+    @When("the user navigates to the office search results previous page")
+    public void navigateToPreviousOfficeSearchResultsPage(){
+        getResultsPage().navigateToPreviousOfficeSearchResultsPage();
     }
 }
