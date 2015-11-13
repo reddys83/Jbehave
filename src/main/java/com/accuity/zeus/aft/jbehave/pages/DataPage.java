@@ -220,7 +220,6 @@ public class DataPage extends AbstractPage {
     private By personnel_value_list_xpath = By.xpath("//li[h2='Personnel']//table/tbody//td[2]");
 
     private By history_label_xpath = By.xpath("//li/h1/span[text()='History']");
-    private By legalEntity_history_summary_label_xpath = By.xpath("//li[h1='History']//th");
     private By history_message_xpath = By.xpath("//li[h1='History']//td");
 
     private By statistics_label_xpath = By.xpath("//li/h1/span[text()='Statistics']");

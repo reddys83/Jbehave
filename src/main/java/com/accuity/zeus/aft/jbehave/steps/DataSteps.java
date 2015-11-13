@@ -311,19 +311,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountrySummary(countrySummary);
     }
 
-    /*
-    @Then("the user should see the $label of a country as $value")
-    public void verifyCountryBasicInfo(@Named("label") String label, @Named("value") String value) {
-        getDataPage().verifyBasicInfo(label, value);
-    }
-
-    @Then("the user should see the $label of an area as $value")
-    @Alias("the user should see the $label of a legalEntity as $value")
-    public void verifyAreaBasicInfo(@Named("label") String label, @Named("value") String value) {
-        getDataPage().verifyBasicInfoLabel(label, value);
-    }
-    */
-
     @Then("the user should see the $label of a city as $value")
     @Aliases(values={"the user should see the $label of an office as $value",
             "the user should see the $label of an area as $value",
@@ -418,18 +405,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCountryCreditRating();
     }
 
-    /*
-    @Then("the user should see the country's credit ratings as: $countryCreditRatings")
-    public void verifyCountryCreditRatings(ExamplesTable countryCreditRatings) {
-        getDataPage().verifyCreditRatings(countryCreditRatings);
-    }
-    */
-    /*
-    @Then("the user should not see the country's credit ratings")
-    public void verifyNoCountryCreditRatings() {
-        getDataPage().verifyNoCreditRatings();
-    }
-    */
     @When("the user clicks on the update currency link")
     public void clickOnUpdateCurrencyLink() {
         getDataPage().clickOnUpdateCurrencyLink();
@@ -690,28 +665,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterSubAreaInTypeAhead(subArea);
     }
 
-    /*
-    @Then("the user should not see the area's credit ratings")
-    public void verifyNoAreaCreditRatings() {
-        getDataPage().verifyNoCreditRatings();
-    }
-    */
 
     @When("the user clicks on the sub-area's credit rating link in the navigation bar")
     public void clickOnSubAreasCreditRatings() {
         getDataPage().clickOnAreasCreditRatings();
     }
-    /*
-    @Then("the user should see the sub-area's credit ratings as: $areaCreditRatings")
-    public void verifySubAreaCreditRatings(ExamplesTable areaCreditRatings) {
-        getDataPage().verifyCreditRatings(areaCreditRatings);
-    }
-
-    @Then("the user should not see the sub-area's credit ratings")
-    public void verifyNoSubAreaCreditRatings() {
-        getDataPage().verifyNoCreditRatings();
-    }
-    */
 
     @When("the user clicks on the area's alternative regions link in the navigation bar")
     public void clickOnAreasAlternativeRegions() {

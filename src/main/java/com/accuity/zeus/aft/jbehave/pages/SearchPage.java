@@ -22,9 +22,7 @@ public class SearchPage extends AbstractPage {
 	private Utils utils = new Utils();
 	private By admin_tab_xpath = By.xpath("//header/nav[1]/ul/li[5]");
 	private By search_field_xpath = By.xpath(".//header/form/select[@name='idType']");
-	private By search_value_xpath = By.xpath(".//header/form/input[@name='id']");
 	private By search_button_id = By.id("search-button");
-	private By result_link_xpath = By.id("report-nav");
 	private By data_tab_xpath = By.xpath("//header/nav[1]/ul/li[1]");
 	private By legalEntity_type_ahead_xpath = By.xpath(".//*[@id='main-header']//input[2]");
 	private By legalEntity_search_option_type_dropdown_id= By.id("search-type");
@@ -48,12 +46,6 @@ public class SearchPage extends AbstractPage {
 	}
 
 	public ResultsPage search(String entity, String field, String value) {
-		/*
-		if (StringUtils.isBlank(entity) || StringUtils.isBlank(field) || StringUtils.isBlank(value)) {
-			throw new RuntimeException();
-		}
-		*/
-		//getDriver().findElement(entityTypeLocator).sendKeys(entity);
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -63,7 +55,6 @@ public class SearchPage extends AbstractPage {
         getDriver().findElement(search_hera_css).sendKeys(value);
         getDriver().findElement(search_by_id).sendKeys(field);
 		getDriver().findElement(search_field_xpath).sendKeys(field);
-		//getDriver().findElement(search_value_xpath).sendKeys(value);
 		getDriver().findElement(search_button_id).click();
 		ResultsPage resultsPage = new ResultsPage(getDriver(), getUrlPrefix(), entity, field, value);
 		resultsPage.validatePage();
