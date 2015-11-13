@@ -18,7 +18,7 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>
+Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>
 When the user clicks on the office basic info link in the navigation bar
 
 Then the user should see the office's names as:
@@ -58,7 +58,7 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
+Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>
 When the user clicks on the legal title in the office headers
 
 Then the user should see the legal entity's names as:
@@ -82,7 +82,7 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
+Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>
 When the user clicks on the legal entity tab in the data area
 
 Then the user should see the legal entity's names as:
@@ -130,7 +130,7 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
+Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>
 And the user should see the offices and department tabs in the office page
 
 

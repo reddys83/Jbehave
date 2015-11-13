@@ -319,7 +319,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyLegalTileHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
-    @Then("the user should see the legal entity header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>")
+    @Then("the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>")
     public void verifyOfficeHeader(@Named("entity") String entity,
                                    @Named("headOfficeAddress") String headOfficeAddress,
                                    @Named("officeFid") String fid,
