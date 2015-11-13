@@ -11,6 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class OfficesPage extends AbstractPage {
 
@@ -26,6 +27,9 @@ public class OfficesPage extends AbstractPage {
     private By office_service_override_label_xpath = By.xpath("//li[h2 = 'Offered Services']//table/thead//th[2]");
     private By office_statistics_link_id = By.xpath("officeStatistics");
     private By office_credit_ratings_link_id = By.id("officeCreditRating");
+    private By office_legalTitle_header_link_xpath = By.xpath(".//*[@id='cssTempFixId']/header//a");
+    private By office_tab_id = By.id("office-link");
+    private By office_department_tab_id = By.id("department-link");
 
     public OfficesPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -52,6 +56,10 @@ public class OfficesPage extends AbstractPage {
         attemptClick(office_statistics_link_id);
     }
 
+    public void clickOnLegalTitleOnOfficeHeader() {
+        attemptClick(office_legalTitle_header_link_xpath);
+    }
+
     public void verifyNoServices() {
         verifyOfficeOfferedServicesLabels();
         try {
@@ -59,6 +67,12 @@ public class OfficesPage extends AbstractPage {
         }catch (NoSuchElementException e){
 
         }
+    }
+
+
+    public void verifyOfficesDepartmentTabsInOffice() {
+        assertTrue(getDriver().findElement(office_tab_id).isDisplayed());
+        assertTrue(getDriver().findElement(office_department_tab_id).isDisplayed());
     }
 
     public void clickOnOfficeCreditRatingsLink() {

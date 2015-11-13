@@ -311,6 +311,22 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountrySummary(countrySummary);
     }
 
+    @Then("the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>")
+    public void verifyLegalEntityHeader(@Named("entity") String entity,
+                                        @Named("headOfficeAddress") String headOfficeAddress,
+                                        @Named("fid") String fid,
+                                        @Named("tfpid") String tfpid){
+        getDataPage().verifyLegalTileHeader(entity, headOfficeAddress, fid, tfpid);
+    }
+
+    @Then("the user should see the legal entity header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>")
+    public void verifyOfficeHeader(@Named("entity") String entity,
+                                   @Named("headOfficeAddress") String headOfficeAddress,
+                                   @Named("officeFid") String fid,
+                                   @Named("tfpid") String tfpid){
+        getDataPage().verifyLegalTileHeader(entity, headOfficeAddress, fid, tfpid);
+    }
+
     /*
     @Then("the user should see the $label of a country as $value")
     public void verifyCountryBasicInfo(@Named("label") String label, @Named("value") String value) {
