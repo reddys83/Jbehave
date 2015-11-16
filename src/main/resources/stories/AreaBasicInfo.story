@@ -53,7 +53,7 @@ Examples:
 |country|area|
 |USA|Illinois|
 
-Scenario: Verify Area basic info.
+Scenario: Verify Sub-Area basic info.
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -100,6 +100,18 @@ And the user should see the Add Info of an sub-area as ILLINOIS: Census area dis
 Examples:
 |country|area|subArea|
 |USA|Illinois|Cook|
+
+Scenario: Verify area parent link.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area parent <areaParent> link for the selected area
+Then the user should see the
 
 Scenario: Verify Area basic info with have no link to another area
 Meta:@runThis

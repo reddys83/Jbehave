@@ -20,7 +20,7 @@ And the user clicks on the office identifier link in the navigation bar
 
 Then the user should see the legal entity's identifiers as:
 |TYPE|VALUE|STATUS|
-|FDIC Office Branch ID|5|active|
+|FDIC Office Branch|5|active|
 |FDIC Office Branch ID|5|inactive|
 
 Examples:
@@ -42,4 +42,4 @@ Then the user should not see the office's identifiers
 
 Examples:
 |entity|searchBy|fid|officeFid|
-|43823|FID|43823|43823-210|
+|43823|FID|43823|43823-1|

@@ -23,7 +23,7 @@ public class ResultsPage extends AbstractPage {
 	int totalCount = 0;
 	public static String lastNavigationPage;
 	private List<ResultsListItem> resultsList = null;
-    private String pagesNavigationListElements = ".//*[@id='pages-navigation-list']";
+    private String pagesNavigationListElements = "//*[@id='pages-navigation-list']";
 	private By num_results_value_selector_xpath = By.xpath("//*[@id='content']/div //header/p/span[@class='counter']");
 	private By results_selector_xpath = By.xpath(".//*[@id='search-results-list']/section/ol/li");
 	private By no_results_text_css = By.cssSelector(".subheader>p");
@@ -162,7 +162,7 @@ public class ResultsPage extends AbstractPage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return getDriver().findElement(By.xpath(pagesNavigationListElements + "/li[" + page.replace("st", "").replace("nd", "").replace("rd", "").replace("th", "") + "]"));
+		return getDriver().findElement(By.xpath(pagesNavigationListElements + "/li[" + page + "]"));
     }
 
     public WebElement getCurrentSearchResultsPage(){
@@ -326,7 +326,7 @@ public class ResultsPage extends AbstractPage {
 		if(page.equals("last")){
 			navigateToOfficeLastSearchResultsPage();
 		} else {
-			navigateToDesiredSearchResultsPage(page);
+			navigateToDesiredSearchResultsPage(Integer.toString(Integer.parseInt(page.replace("st", "").replace("nd", "").replace("rd", "").replace("th", ""))+1)).click();
 		}
 	}
 

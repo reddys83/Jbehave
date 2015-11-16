@@ -179,6 +179,8 @@ public class DataPage extends AbstractPage {
     private By city_people_link_id = By.id("cityPeople");
     private By area_entities_link_id = By.id("areaPresences");
     private By identifiers_header_xpath = By.xpath("//li[h1='Identifiers'] //span");
+    private By office_sort_name_label_xpath = By.xpath("//*[@id='content']//li[1]/dl/dt");
+    private By office_sort_name_value_xpath = By.xpath("//*[@id='content']//li[1]/dl/dd");
 
     public DataPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -223,10 +225,10 @@ public class DataPage extends AbstractPage {
     private By history_message_xpath = By.xpath("//li[contains(h1,'History')]/p");
 
     private By statistics_label_xpath = By.xpath("//li/h1/span[text()='Statistics']");
-    private By statistics_type_label_xpath = By.xpath("//li[h1='Statistics']//li//th[1]");
-    private By statistics_value_label_xpath = By.xpath("//li[h1='Statistics']//li//th[2]");
-    private By statistics_type_list_xpath = By.xpath("//li[h1='Statistics']//li//table/tbody/tr/th[1]");
-    private By statistics_value_list_xpath = By.xpath("//li[h1='Statistics']//li//table/tbody/tr/td[1]");
+    private By statistics_type_label_xpath = By.xpath("//li[h1='Statistics'] //thead/tr/th[1]");
+    private By statistics_value_label_xpath = By.xpath("//li[h1='Statistics'] //thead/tr/th[2]");
+    private By statistics_type_list_xpath = By.xpath("//li[h1='Statistics'] //table/tbody/tr/th");
+    private By statistics_value_list_xpath = By.xpath("//li[h1='Statistics'] //table/tbody/tr/td");
 
     private By searchResults_institution_xpath = By.xpath(".//*[@id='cssTempFixId']/header//a");
     private By searchResults_headOffice_address_xpath =By.xpath(".//*[@id='cssTempFixId']/header//p");
@@ -612,7 +614,12 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyLegalTileHeader(String entity, String headOfficeAddress, String fid, String tfpid) {
+    public void verifyHeader(String entity, String headOfficeAddress, String fid, String tfpid) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals(entity, getDriver().findElement(searchResults_institution_xpath).getText());
         assertEquals(headOfficeAddress, getDriver().findElement(searchResults_headOffice_address_xpath).getText());
         assertEquals(fid, getDriver().findElement(searchResults_header_fid_xpath).getText());
@@ -814,7 +821,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCreditRatings(ExamplesTable creditRatings) {
-        verifyCreditRatingsLabel();
+        verifyCreditRatingsLabels();
         List<WebElement> agency = getDriver().findElements(credit_rating_agency_xpath);
         List<WebElement> type = getDriver().findElements(credit_rating_type_xpath);
         List<WebElement> value = getDriver().findElements(credit_rating_value_xpath);
@@ -829,7 +836,7 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyCreditRatingsLabel() {
+    public void verifyCreditRatingsLabels() {
         assertEquals("CREDIT RATING", getDriver().findElement(credit_rating_label_xpath).getText());
         if(SearchPage.selectedEntity !=""){
             selectedEntity = SearchPage.selectedEntity;
@@ -839,7 +846,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyNoCreditRatings() {
-        verifyCreditRatingsLabel();
+        verifyCreditRatingsLabels();
         try {
             assertFalse(getDriver().findElement(credit_rating_agency_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e){}
@@ -1263,5 +1270,9 @@ public class DataPage extends AbstractPage {
         }
     }
 
+    public void verifyOfficeSortKey(String officeSortKey) {
+        assertEquals("Sort Name",getTextOnPage(office_sort_name_label_xpath));
+        assertEquals(officeSortKey,getTextOnPage(office_sort_name_value_xpath));
+    }
 }
 

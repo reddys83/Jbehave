@@ -42,8 +42,8 @@ And the user should see the offices number of records displayed in the page w.r.
 And the user should see the option to navigate to the desired office search results page
 
 Examples:
-|entity|searchBy|fid|officeFid|
-|1038|FID|951|1038|
+|entity|searchBy|fid|
+|1038|FID|1038|
 
 Scenario: Verify Only 1 Office Results
 Given a user is on the search page

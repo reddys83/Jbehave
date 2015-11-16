@@ -77,5 +77,15 @@ public class OfficesSteps extends AbstractSteps {
     @When("the user clicks on the office credit ratings link in the navigation bar")
     public void clickOnOfficeCreditRatingsLink() { getOfficesPage().clickOnOfficeCreditRatingsLink(); }
 
+    @Then("the user should see the credit ratings for the office")
+    public void verifyCreditRatingsLabels(){
+        getDataPage().verifyCreditRatingsLabels();
+    }
+
+    @Then("the user should see the statistics for the office")
+    public void verifyStatisticsLabels(){
+        getDataPage().verifyStatisticsLabels();
+    }
+
   }
 

@@ -1,4 +1,4 @@
-Meta:@OfficeCreditRatings  @Office                                                                                                                                                Meta:
+Meta:@OfficeCreditRatings  @Office
 
 Narrative:
 In order to view and edit the office
@@ -20,8 +20,8 @@ And the user clicks on the office credit ratings link in the navigation bar
 
 Then the user should see the office's credit ratings as:
 |AGENCY|TYPE|VALUE|APPLIED DATE|CONFIRMED DATE|
-|Standard & Poors|Long Term Rating|A|2015-01-06||
-|Standard & Poors|Short Term Rating|A-1|2015-01-06||
+|Standard & Poors|Long Term Rating|A|06 Jan 2015|06 Jan 2015|
+|Standard & Poors|Short Term Rating|A-1|06 Jan 2015|06 Jan 2015|
 
 Examples:
 |entity|searchBy|fid|officeFid|
@@ -43,4 +43,4 @@ Then the user should not see the office's credit ratings
 
 Examples:
 |entity|searchBy|fid|officeFid|
-|Anchor Savings Bank|Name|41031|41031-75|
+|Anchor Savings Bank|Name|41031|41031-1|

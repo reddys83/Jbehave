@@ -210,7 +210,7 @@ public class LegalEntitySteps extends AbstractSteps{
 
     @Then("the user should see the credit rating for the legal entity")
     public void verifyCreditRatingsLabel(){
-        getDataPage().verifyCreditRatingsLabel();
+        getDataPage().verifyCreditRatingsLabels();
     }
 
     /*

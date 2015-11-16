@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 
 public class OfficesPage extends AbstractPage {
 
-    private String office_results_card_xpath = "//*[@id='data']//tr[td='1038']";
+    private String office_results_card_xpath = "//*[@id='data']//tr[td='";
     private By office_personnel_link_id = By.id("officePersonnel");
     private By office_basic_info_link_id = By.id("officeBasicInfo");
     private By office_history_link_id = By.id("officeHistory");
@@ -25,7 +25,7 @@ public class OfficesPage extends AbstractPage {
     private By office_offered_services_label_xpath = By.xpath("//li[h2 = 'Offered Services']//h2");
     private By office_service_category_label_xpath = By.xpath("//li[h2 = 'Offered Services']//table/thead//th[1]");
     private By office_service_override_label_xpath = By.xpath("//li[h2 = 'Offered Services']//table/thead//th[2]");
-    private By office_statistics_link_id = By.xpath("officeStatistics");
+    private By office_statistics_link_id = By.id("officeStatistics");
     private By office_credit_ratings_link_id = By.id("officeCreditRating");
     private By office_legalTitle_header_link_xpath = By.xpath(".//*[@id='cssTempFixId']/header//a");
     private By office_tab_id = By.id("office-link");

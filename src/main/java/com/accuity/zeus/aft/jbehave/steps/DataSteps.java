@@ -205,6 +205,11 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the office's names as: $Names")
     public void verifyOfficeNames(ExamplesTable Names) { getDataPage().verifyNames(Names);}
 
+    @Then("the user should see the office sort key as $officeSortKey")
+    public void verifyOfficeSortKey(@Named("officeSortKey") String officeSortKey){
+        getDataPage().verifyOfficeSortKey(officeSortKey);
+    }
+
     @Then("the user should see the office types: $Types")
     public void verifyOfficeTypes(ExamplesTable Types) { getDataPage().verifyTypes(Types); }
 
@@ -317,7 +322,7 @@ public class DataSteps extends AbstractSteps {
                                         @Named("headOfficeAddress") String headOfficeAddress,
                                         @Named("fid") String fid,
                                         @Named("tfpid") String tfpid){
-        getDataPage().verifyLegalTileHeader(entity, headOfficeAddress, fid, tfpid);
+        getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
     @Then("the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>")
@@ -325,7 +330,7 @@ public class DataSteps extends AbstractSteps {
                                    @Named("headOfficeAddress") String headOfficeAddress,
                                    @Named("officeFid") String fid,
                                    @Named("tfpid") String tfpid){
-        getDataPage().verifyLegalTileHeader(entity, headOfficeAddress, fid, tfpid);
+        getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
     @Then("the user should see the $label of a city as $value")
@@ -732,12 +737,12 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the credit ratings for selected sub-area")
     @Alias("the user should see the credit rating for selected city")
     public void verifyCreditRatingsLabel() {
-        getDataPage().verifyCreditRatingsLabel();
+        getDataPage().verifyCreditRatingsLabels();
     }
 
     @Then("the user should see the credit ratings for selected area")
     public void verifyCreditRatingsForArea() {
-        getDataPage().verifyCreditRatingsLabel();
+        getDataPage().verifyCreditRatingsLabels();
     }
 
     @Then("the user should see the demographics for selected area")

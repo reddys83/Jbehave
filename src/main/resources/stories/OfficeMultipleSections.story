@@ -15,6 +15,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
+And the user navigates to the 4th page on the office search results
 And the user clicks on the offices results card with fid <officeFid>
 Then the user should see the default office page and display basic info
 When the user clicks on the office all link in the navigation bar
@@ -68,15 +69,20 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
+And the user navigates to the 4th page on the office search results
 And the user clicks on the offices results card with fid <officeFid>
 Then the user should see the default office page and display basic info
 When the user clicks on the office basic info link in the navigation bar
 And the user clicks on the office services link in the navigation bar
+And the user clicks on the office credit ratings link in the navigation bar
+And the user clicks on the office statistics link in the navigation bar
 And the user clicks on the office history link in the navigation bar
 And the user clicks on the office identifier link in the navigation bar
 And the user clicks on the office personnel link in the navigation bar
 Then the user should see the basic info for selected office
 And the user should see the offered services for the office
+And the user should see the credit ratings for the office
+And the user should see the statistics for the office
 And the user should see the history for the office
 And the user should see the identifiers for the office
 And the user should see the personnel for the office
