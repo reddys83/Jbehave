@@ -75,7 +75,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_ownership_header_xpath = By.xpath("//li[h1='Ownership Summaries'] //span");
     private By credit_rating_section_xpath = By.xpath("//li[h1='Credit Rating']");
 
-    private By office_link_xpath = By.xpath("//*[@id='data-navbar']/div/ul/li[1]");
+    private By office_link_xpath = By.id("office-link");
 
 
     public LegalEntityPage(WebDriver driver, String urlPrefix) {
@@ -123,12 +123,6 @@ public class LegalEntityPage extends AbstractPage {
         assertEquals(corporateStatement, getDriver().findElement(legalEntity_basic_info_corporate_statement_xpath).getText());
     }
 
-    public void verifyLegalEntityHeader(String entity, String headOfficeAddress, String fid, String tfpid) {
-        assertEquals(entity, getDriver().findElement(legalEntity_searchResults_institution_xpath).getText());
-        assertEquals(headOfficeAddress, getDriver().findElement(legalEntity_searchResults_headOffice_address_xpath).getText());
-        assertEquals(fid, getDriver().findElement(legalEntity_searchResults_header_fid_xpath).getText());
-        assertEquals(tfpid, getDriver().findElement(legalEntity_searchResults_header_tfpid_xpath).getText());
-    }
 
     public void clickOnLegalEntityServices() {
         attemptClick(legalEntity_services_link_id);

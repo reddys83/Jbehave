@@ -30,6 +30,8 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().clickOnOfficeStatisticsLink();
     }
 
+    @When("the user clicks on the legal title in the office headers")
+    public void clickOnLegalTitleOnOfficeHeader() { getOfficesPage().clickOnLegalTitleOnOfficeHeader(); }
 
 
     @Then("the user should see the office's services as: $services")
@@ -42,6 +44,10 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().verifyNoServices();
     }
 
+    @Then("the user should see the offices and department tabs in the office page")
+    public void verifyOfficesDepartmentTabsInOffice() {
+        getOfficesPage().verifyOfficesDepartmentTabsInOffice();
+    }
 
     @When("the user clicks on the office basic info link in the navigation bar")
     public void clickOnOfficeBasicInfoLink() {

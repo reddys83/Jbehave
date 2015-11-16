@@ -23,7 +23,6 @@ Then the user should see the default country page and display all info
 When the user clicks on the country basic info link in the navigation bar
 Then the user should see the list of country's names type and value as:
 |TYPE|VALUE|
-|TYPE|VALUE|
 |Country Name|Afghanistan|
 |Former Name|Afghanistan|
 
@@ -69,22 +68,32 @@ When the user clicks on the country holidays link in the navigation bar
 
 Then the user should see the country's holidays list as:
 |DATE|DESCRIPTION|NOTES|
-|2015-01-01|New Year's Day|National Day Off|
-|2015-01-01|Public Holiday|National Day Off|
-|2015-04-06|Easter Monday|National Day Off|
-|2015-05-01|Labour Day|National Day Off|
-|2015-05-14|Ascension Day|National Day Off|
-|2015-05-25|Whitmonday|National Day Off|
-|2015-06-26|Independence Day|National Day Off|
-|2015-12-25|Christmas Day|National Day Off|
-|2016-01-01|New Year's Day|National Day Off|
-|2016-03-28|Easter Monday|National Day Off|
-|2016-03-29|Veterans Day|National Day Off|
-|2016-05-05|Ascension Day|National Day Off|
-|2016-05-16|Whitmonday|National Day Off|
-|2016-08-15|Assumption Day|National Day Off|
-|2016-10-14|Proclamation of the First Republic|National Day Off|
-|2016-11-01|All Saints Day|National Day Off|
+|01 Jan 2015|New Year's Day||
+|03 Jan 2015|Mohemmed's Birthday||
+|15 Feb 2015|Liberation Day||
+|21 Mar 2015|Noruz (New Year) 1||
+|28 Apr 2015|Victory Day||
+|18 Jun 2015|Ramadan||
+|17 Jul 2015|Eid ul Fitr 1||
+|18 Jul 2015|Eid ul Fitr 2||
+|19 Jul 2015|Eid ul Fitr 3||
+|19 Aug 2015|National Day||
+|09 Sep 2015|Ahmed Shah Masoud Memorial Day||
+|23 Sep 2015|Eid ul Adha Additional Holiday||
+|24 Sep 2015|Eid ul Adha 1||
+|26 Sep 2015|Eid ul Adha 3||
+|24 Dec 2015|Prophet's Birthday||
+|15 Feb 2016|Liberation Day||
+|21 Mar 2016|Noruz (New Year) 1||
+|28 Apr 2016|Victory Day||
+|06 Jun 2016|Ramadan||
+|06 Jul 2016|Eid ul Fitr 1||
+|07 Jul 2016|Eid ul Fitr 2||
+|12 Sep 2016|Eid ul Adha 1||
+|13 Sep 2016|Eid ul Adha 2||
+|14 Sep 2016|Eid ul Adha 3||
+|11 Oct 2016|Ashoora||
+|12 Dec 2016|Mohemmed's Birthday||
 
 When the user clicks on the country regions link in the navigation bar
 Then the user should see the country's alternative regions as:

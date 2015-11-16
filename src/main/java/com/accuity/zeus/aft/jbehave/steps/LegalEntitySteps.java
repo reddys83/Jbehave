@@ -9,14 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class LegalEntitySteps extends AbstractSteps{
 
-    @Then("the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>")
-    public void verifyLegalEntityHeader(@Named("entity") String entity,
-                                        @Named("headOfficeAddress") String headOfficeAddress,
-                                        @Named("fid") String fid,
-                                        @Named("tfpid") String tfpid){
-        getLegalEntityPage().verifyLegalEntityHeader(entity, headOfficeAddress, fid, tfpid);
-    }
-
     @Then("the user should see the legal entity's entity types as: $legalEntityEntities")
     public void verifyLegalEntityEntities(ExamplesTable legalEntities) {
         getLegalEntityPage().verifyLegalEntityEntities(legalEntities);
