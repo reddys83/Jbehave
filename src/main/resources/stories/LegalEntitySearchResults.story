@@ -22,7 +22,7 @@ Scenario: search by name and verify search results
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
 
-Then the user should see the below search results card matching the searched entity
+Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
 |1124|10383720|Bank of Montreal|129 Rue St-Jacques|active|
 |312461|10077880|Bank of Montreal|FOUR EMBARCADERO CENTER|inactive|
@@ -38,7 +38,7 @@ Scenario: search by name and verify search results
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
 
-Then the user should see the below search results card matching the searched entity
+Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
 |4123|10055000|Société Générale|BP 208, 09|active|
 
@@ -53,7 +53,7 @@ Scenario: search by fid and verify search results
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
 
-Then the user should see the below search results card matching the searched entity
+Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
 |12253||Bank at Ormond by the Sea|1400 Ocean Shore Boulevard|inactive|
 
@@ -68,7 +68,7 @@ Scenario: search by tfpid and verify search results
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
 
-Then the user should see the below search results card matching the searched entity
+Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
 |1038|10077420|Bank of America National Association|100 N Tryon St, Ste 170|active|
 

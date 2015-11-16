@@ -90,7 +90,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_ownership_header_xpath = By.xpath("//li[h1='Ownership Summaries'] //span");
     private By credit_rating_section_xpath = By.xpath("//li[h1='Credit Rating']");
 
-    private By office_link_xpath = By.xpath("//*[@id='data-navbar']/div/ul/li[1]");
+    private By office_link_xpath = By.id("office-link");
 
 
     public LegalEntityPage(WebDriver driver, String urlPrefix) {

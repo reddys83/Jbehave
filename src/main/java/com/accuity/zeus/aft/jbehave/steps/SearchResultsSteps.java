@@ -1,12 +1,10 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.springframework.stereotype.Component;
 
 import static org.junit.Assert.*;
@@ -86,7 +84,7 @@ public class SearchResultsSteps extends AbstractSteps{
         if(page.equals("last")){
             getResultsPage().goToLastSearchResultsPage().click();
         }else{
-            getResultsPage().goToDesiredSearchResultsPage(page).click();
+            getResultsPage().navigateToDesiredSearchResultsPage(page).click();
         }
         try {
             Thread.sleep(1000L);
@@ -129,8 +127,43 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifySearchResults();
     }
 
-    @Then("the user should see the below search results card matching the searched entity $searchResults")
-    public void verifySearchResultsCards(ExamplesTable searchResults){
-        getResultsPage().verifySearchResultsCards(searchResults);
+    @Then("the user should see the legal entity search results card matching the searched entity $legalEntitySearchResults")
+    public void verifyLegalEntitySearchResultsCards(ExamplesTable legalEntitySearchResults){
+        getResultsPage().verifyLegalEntitySearchResultsCards(legalEntitySearchResults);
+    }
+
+    @Then("the user should see the office search results card for the searched legal entity $officeSearchResults")
+    public void verifyOfficeSearchResults(ExamplesTable officeSearchResults){
+        getResultsPage().verifyOfficeSearchResults(officeSearchResults);
+    }
+
+    @Then("the user should see the office search results paginated")
+    public void verifyOfficeSearchResultsIsPaginated(){
+        getResultsPage().verifyOfficeSearchResultsIsPaginated();
+    }
+
+    @Then("the user should see the offices number of records displayed in the page w.r.t total search results")
+    public void verifyOfficeSearchResultsCounter(){
+        getResultsPage().verifyOfficeSearchResultsCounter();
+    }
+
+    @Then("the user should see the option to navigate to the desired office search results page")
+    public void verifyOfficeSearchResultsNavigation(){
+        getResultsPage().verifyOfficeSearchResultsNavigation();
+    }
+
+    @When("the user navigates to the $page page on the office search results")
+    public void navigateThroughOfficeSearchResults(@Named("page") String page){
+        getResultsPage().navigateThroughOfficeSearchResults(page);
+    }
+
+    @When("the user navigates to the office search results next page")
+    public void navigateToNextOfficeSearchResultsPage(){
+        getResultsPage().navigateToNextOfficeSearchResultsPage();
+    }
+
+    @When("the user navigates to the office search results previous page")
+    public void navigateToPreviousOfficeSearchResultsPage(){
+        getResultsPage().navigateToPreviousOfficeSearchResultsPage();
     }
 }
