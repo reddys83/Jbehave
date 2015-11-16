@@ -184,23 +184,26 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the basic info for selected area")
-    @Alias("the user should see the basic info for selected city")
+    @Aliases(values={"the user should see the basic info for selected city",
+                    "the user should see the basic info for selected sub-area"})
     public void verifyAreaBasicInfo() {
         getDataPage().verifyBasicInfo();
     }
 
+    /*
     @Then("the user should see the basic info for selected sub-area")
     public void verifySubAreaBasicInfo() {
         getDataPage().verifyBasicInfo();
     }
-
+    */
     @Then("the user should see the list of country's names type and value as: $countryNames")
     public void verifyCountryNames(ExamplesTable countryNames) {
         getDataPage().verifyNames(countryNames);
     }
 
     @Then("the user should see the area's names as: $Names")
-    @Alias("the user should see the legal entity's names as: $Names")
+    @Aliases(values={"the user should see the legal entity's names as: $Names",
+                    "the user should see the sub-area's names as: $Names"})
     public void verifyAreaNames(ExamplesTable Names) {
         getDataPage().verifyNames(Names);
     }
@@ -242,6 +245,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the area's identifiers as: $areaIdentifiers")
+    @Alias("the user should see the sub-area's identifiers as: $areaIdentifiers")
     public void verifyAreaIdentifiers(ExamplesTable areaIdentifiers) {
         getDataPage().verifyIdentifiers(areaIdentifiers);
     }
@@ -267,11 +271,13 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the area's time zones summary as $areaTimeZonesSummary")
+    @Alias("the user should see the sub-area's time zones summary as $areaTimeZonesSummary")
     public void verifyAreaTimeZonesSummary(@Named("areaTimeZonesSummary") String areaTimeZonesSummary) {
         getDataPage().verifyAreaTimeZonesSummary(areaTimeZonesSummary);
     }
 
     @Then("the user should see the area's replace by as $areaReplacedBy")
+    @Alias("the user should see the sub-area's replace by as $areaReplacedBy")
     public void verifyAreaReplaceByLabelValues(@Named("areaReplacedBy") String areaReplacedBy) {
         getDataPage().verifyReplaceByLabelValues(areaReplacedBy);
     }
@@ -302,6 +308,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the area's time zones as: $areaTimeZones")
+    @Alias("the user should see the sub-area's time zones as: $areaTimeZones")
     public void verifyAreaTimeZones(ExamplesTable areaTimeZones) {
         getDataPage().verifyAreaTimeZones(areaTimeZones);
     }
@@ -327,6 +334,7 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the $label of a city as $value")
     @Aliases(values={"the user should see the $label of an office as $value",
             "the user should see the $label of an area as $value",
+            "the user should see the $label of an sub-area as $value",
             "the user should see the $label of a legal entity as $value",
             "the user should see the $label of a country as $value"})
     public void verifyBasicInfo(@Named("label") String label, @Named("value") String value) {
@@ -573,6 +581,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the area basic info link in the navigation bar")
+    @Alias("the user clicks on the sub-area basic info link in the navigation bar")
     public void clickOnAreaBasicInfoInNavigationBar() {
         getDataPage().clickOnAreaBasicInfoInNavigationBar();
     }
