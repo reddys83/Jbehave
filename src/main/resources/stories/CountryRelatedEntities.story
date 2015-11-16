@@ -18,7 +18,7 @@ And the user enters the country <country> in the type-ahead box
 When the user clicks on the country entity link in the navigation bar
 Then the user should see the country's entities as:
 |TYPE|ENTITY|DETAILS|
-|Regulator|Qatar Central Bank|Central, Bank|
+|Regulator1|Qatar Central Bank|Central, Bank|
 |Regulator|Qatar Financial Centre Regulatory Authority|Central, Bank|
 |Central Bank|Qatar Central Bank|Central, Bank|
 

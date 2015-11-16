@@ -22,8 +22,8 @@ When the user clicks on the city's credit rating link in the navigation bar
 Then the user should see the city's credit ratings as:
 |NAME|TYPE|VALUE|Date APPLIED|DATE CONFIRMED|
 |Fitch|Long Term Sovereign Debt Rating|B|01 Jan 1990|04 Jan 1991|
-|Standard and Poors|Long Term Sovereign Debt Rating|A-|01 Jan 1990|04 Jan 1991|
-||Mid Term Sovereign Debt Rating|C|||
+|Standard & Poors|Long Term Sovereign Debt Rating|A-|01 Jan 1990|04 Jan 1991|
+||Chicagos Terrible Credit Rating|F+|||
 
 
 Examples:
