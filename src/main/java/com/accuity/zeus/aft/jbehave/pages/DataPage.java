@@ -228,6 +228,10 @@ public class DataPage extends AbstractPage {
     private By statistics_type_list_xpath = By.xpath("//li[h1='Statistics']//li//table/tbody/tr/th[1]");
     private By statistics_value_list_xpath = By.xpath("//li[h1='Statistics']//li//table/tbody/tr/td[1]");
 
+    private By searchResults_institution_xpath = By.xpath(".//*[@id='cssTempFixId']/header//a");
+    private By searchResults_headOffice_address_xpath =By.xpath(".//*[@id='cssTempFixId']/header//p");
+    private By searchResults_header_fid_xpath = By.xpath(".//*[@id='cssTempFixId']/header/table//tr[th='FID']/td");
+    private By searchResults_header_tfpid_xpath = By.xpath(".//*[@id='cssTempFixId']/header/table//tr[th='TFPID']/td");
     @Override
     public String getPageUrl() {
         return null;
@@ -606,6 +610,13 @@ public class DataPage extends AbstractPage {
             assertEquals(areaTimeZones.getRow(i).get(areaTimeZones.getHeaders().get(0)), actAreaTimeZone.get(i).getText());
             assertEquals(areaTimeZones.getRow(i).get(areaTimeZones.getHeaders().get(1)), actAreaTimeZoneValue.get(i).getText());
         }
+    }
+
+    public void verifyLegalTileHeader(String entity, String headOfficeAddress, String fid, String tfpid) {
+        assertEquals(entity, getDriver().findElement(searchResults_institution_xpath).getText());
+        assertEquals(headOfficeAddress, getDriver().findElement(searchResults_headOffice_address_xpath).getText());
+        assertEquals(fid, getDriver().findElement(searchResults_header_fid_xpath).getText());
+        assertEquals(tfpid, getDriver().findElement(searchResults_header_tfpid_xpath).getText());
     }
 
     public void verifyCountrySummary(ExamplesTable countrySummary) {
