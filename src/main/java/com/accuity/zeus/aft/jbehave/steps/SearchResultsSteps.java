@@ -137,6 +137,11 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifyOfficeSearchResults(officeSearchResults);
     }
 
+    @When("the user clicks on the column fid")
+    public void clickOnColumnFid(){
+        getResultsPage().clickOnColumnFid();
+    }
+
     @Then("the user should see the office search results paginated")
     public void verifyOfficeSearchResultsIsPaginated(){
         getResultsPage().verifyOfficeSearchResultsIsPaginated();
@@ -155,6 +160,11 @@ public class SearchResultsSteps extends AbstractSteps{
     @When("the user navigates to the $page page on the office search results")
     public void navigateThroughOfficeSearchResults(@Named("page") String page){
         getResultsPage().navigateThroughOfficeSearchResults(page);
+    }
+
+    @Then("the user should see the $page page on the office search results")
+    public void verifyCurrentPageOnSearchResults(@Named("page") String page) {
+        getResultsPage().verifyCurrentPageOnSearchResults(page);
     }
 
     @When("the user navigates to the office search results next page")
