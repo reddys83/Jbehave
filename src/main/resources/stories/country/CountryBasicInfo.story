@@ -15,16 +15,14 @@ Scenario:
 4. Verify that the list contains countries by their full name
 5. Verify that the names are sorted Alphabetically
 6. Verify that the user can type in the filter to display names matching the characters input by the user
-Meta:@Laks
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
 Then the user should see the country list box displayed
 When the user clicks on the choose a country option
 Then the user should see the list of all existing countries by full name
-
-Then the countries list matches the list of countries from the database
-
+And the user should see the country list matching the expected country list and sorted alphabetically
 When the user starts typing the name of a country as et in the country input box
 Then the user should see the countries in the listbox as:
 |COUNTRY|

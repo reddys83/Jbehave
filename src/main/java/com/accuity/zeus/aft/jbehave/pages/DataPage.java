@@ -367,6 +367,7 @@ public class DataPage extends AbstractPage {
 
     }
 
+    /*
     //=CHAR(34)&A1&CHAR(34)&","
     public void verifyCountryListValues(Database database, ApacheHttpClient apacheHttpClient, String xqueryName) {
         XqueryMap xqueryMap = new XqueryMap();
@@ -393,9 +394,7 @@ public class DataPage extends AbstractPage {
 
         }
 
-
-
-      /*  List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listBox_value_xpath).getText().split("\n")));
+        List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listBox_value_xpath).getText().split("\n")));
         assertTrue(DataManagementAppVals.expCountryListVal.size() == retCountryListVal.size());
         for (int i = 0; i <=DataManagementAppVals.expCountryListVal.size()-1; i++) {
             if (retCountryListVal.get(i).equals(DataManagementAppVals.expCountryListVal.get(i))) {
@@ -406,7 +405,22 @@ public class DataPage extends AbstractPage {
                 assertTrue(false);
                 break;
             }
-        } */
+        }
+    }*/
+
+    public void verifyCountryListValues() {
+        List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listBox_value_xpath).getText().split("\n")));
+        assertTrue(DataManagementAppVals.expCountryListVal.size() == retCountryListVal.size());
+        for (int i = 0; i <=DataManagementAppVals.expCountryListVal.size()-1; i++) {
+            if (retCountryListVal.get(i).equals(DataManagementAppVals.expCountryListVal.get(i))) {
+                continue;
+            }
+            else {
+                System.out.println("The returned country list has the value " + retCountryListVal.get(i) + " but the expected country list has the value " + DataManagementAppVals.expCountryListVal.get(i));
+                assertTrue(false);
+                break;
+            }
+        }
     }
 
     public void enterValueInCountryTypeAhead(String word) {
