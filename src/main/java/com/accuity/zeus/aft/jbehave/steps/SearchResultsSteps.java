@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.NoSuchElementException;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +12,7 @@ import static org.junit.Assert.*;
 @Component
 public class SearchResultsSteps extends AbstractSteps{
 
-    @Then("the user should see the search results for the searched entity")
+    @Then("the user should see the search results paginated for the searched entity")
     public void thenUserShouldSeeCorrectResults() {
         if(Integer.parseInt(getResultsPage().getNumResultsValue().getText()) < 10) {
             assertEquals(Integer.toString(getResultsPage().getResultsList().size()), getResultsPage().getNumResultsValue().getText());
@@ -78,18 +79,9 @@ public class SearchResultsSteps extends AbstractSteps{
         }
     }
 
-    @When("the user navigates to the $page search results page")
-    public void whenUserNavigatesThroughSearchResultsPage(@Named("page") String page){
-        if(page.equals("last")){
-            getResultsPage().goToLastSearchResultsPage().click();
-        }else{
-            getResultsPage().goToDesiredSearchResultsPage(page).click();
-        }
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    @When("the user navigates to the $page page on the legal entity search results page")
+    public void navigateThroughLegalEntitySearchResultsPage(@Named("page") String page){
+        getResultsPage().navigateThroughSearchResults(page);
     }
 
     @When("the user clicks on the next page link")
@@ -116,8 +108,58 @@ public class SearchResultsSteps extends AbstractSteps{
         assertEquals(getResultsPage().getCurrentSearchResultsPage().getText(), Integer.toString(Integer.parseInt(currentPage) - 1));
     }
 
-    @When("the user clicks on the search results card with fid <value>")
-    public void whenUserClicksOnTheResultCard(@Named("value") String value){
-        getResultsPage().clickOnResultCard(getResultsPage().getFidElements(value));
+    @When("the user clicks on the search results card with fid <fid>")
+    public void clickOnResultCard(@Named("fid") String fid){
+        setLegalEntityPage(getResultsPage().clickOnResultCard(getResultsPage().getFidElements(fid)));
+    }
+
+    @Then("the user should see the search results for the institution")
+    public void verifySearchResults() {
+        getResultsPage().verifySearchResults();
+    }
+
+    @Then("the user should see the legal entity search results card matching the searched entity $legalEntitySearchResults")
+    public void verifyLegalEntitySearchResultsCards(ExamplesTable legalEntitySearchResults){
+        getResultsPage().verifyLegalEntitySearchResultsCards(legalEntitySearchResults);
+    }
+
+    @Then("the user should see the office search results card for the searched legal entity $officeSearchResults")
+    public void verifyOfficeSearchResults(ExamplesTable officeSearchResults){
+        getResultsPage().verifyOfficeSearchResults(officeSearchResults);
+    }
+
+    @Then("the user should see the office search results paginated")
+    public void verifyOfficeSearchResultsIsPaginated(){
+        getResultsPage().verifyOfficeSearchResultsIsPaginated();
+    }
+
+    @Then("the user should see the offices number of records displayed in the page w.r.t total search results")
+    public void verifyOfficeSearchResultsCounter(){
+        getResultsPage().verifyOfficeSearchResultsCounter();
+    }
+
+    @Then("the user should see the option to navigate to the desired office search results page")
+    public void verifyOfficeSearchResultsNavigation(){
+        getResultsPage().verifySearchResultsNavigation();
+    }
+
+    @Then("the user should see the option to navigate to the desired legal entity search results page")
+    public void verifyLegalEntitySearchResultsNavigation(){
+        getResultsPage().verifySearchResultsNavigation();
+    }
+
+    @When("the user navigates to the $page page on the office search results")
+    public void navigateThroughOfficeSearchResults(@Named("page") String page){
+        getResultsPage().navigateThroughSearchResults(page);
+    }
+
+    @When("the user navigates to the office search results next page")
+    public void navigateToNextOfficeSearchResultsPage(){
+        getResultsPage().navigateToNextOfficeSearchResultsPage();
+    }
+
+    @When("the user navigates to the office search results previous page")
+    public void navigateToPreviousOfficeSearchResultsPage(){
+        getResultsPage().navigateToPreviousOfficeSearchResultsPage();
     }
 }

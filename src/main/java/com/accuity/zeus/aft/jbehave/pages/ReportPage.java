@@ -45,6 +45,11 @@ public class ReportPage extends AbstractPage {
         assertEquals(getDriver().findElement(area_label).getText(),"AREA");
         assertTrue(getDriver().findElement(run_button_disabled).isDisplayed());
         selectItemFromDropdownList(area_css, area);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void selectRequiredMatch(String requiredMatch) {

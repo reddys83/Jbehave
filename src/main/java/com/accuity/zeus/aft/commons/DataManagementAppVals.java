@@ -186,6 +186,7 @@ public class DataManagementAppVals {
             "Qatar",
             "Reunion Island",
             "Romania",
+            "Russian Federation",
             "Rwanda",
             "Saint Helena, Ascension and Tristan da Cunha",
             "Samoa",
@@ -248,7 +249,6 @@ public class DataManagementAppVals {
             "Wallis and Futuna",
             "Western Sahara",
             "Yemen",
-            "Yugoslavia",
             "Zambia",
             "Zimbabwe"
             ));
@@ -274,6 +274,7 @@ public class DataManagementAppVals {
                 "Country Related Place Type",
                 "Default SWIFT BIC Pairings",
                 "Demographics Metrics",
+                "Domestic-With Place Type",
                 "Edit Type",
                 "Federal Home Loan Bank Districts",
                 "Federal Reserve Branch Districts",
@@ -302,6 +303,7 @@ public class DataManagementAppVals {
                 "Status",
                 "Telecom Type",
                 "Time Zones",
-                "Trading Regions"
+                "Trading Regions",
+                "Units of Measurement"
         ));
 }

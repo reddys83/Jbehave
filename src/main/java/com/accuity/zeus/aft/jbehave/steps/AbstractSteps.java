@@ -28,7 +28,8 @@ public abstract class AbstractSteps {
 	private static LoginPage loginPage;
 	private static DataPage dataPage;
 	private static AdminPage adminPage;
-
+	private static LegalEntityPage legalEntityPage;
+	private static OfficesPage officesPage;
 
 	@Autowired
 	protected WebDriverState webDriverState;
@@ -46,7 +47,9 @@ public abstract class AbstractSteps {
 	private String uri;
 	
 	public String getDataManagementWebappUrl() {
-		return buildUriString(null, null);
+		//return buildUriString(null, null);
+
+		return host;
 	}
 
 	public String getDataManagementWebappUrl(String path) {
@@ -150,7 +153,22 @@ public abstract class AbstractSteps {
 
 	public void setAdminPage(AdminPage adminPage) {
 		this.adminPage = adminPage;
+	}
 
+	public LegalEntityPage getLegalEntityPage() {
+		return legalEntityPage;
+	}
+
+	public void setLegalEntityPage(LegalEntityPage legalEntityPage) {
+		this.legalEntityPage = legalEntityPage;
+	}
+
+	public OfficesPage getOfficesPage() {
+		return officesPage;
+	}
+
+	public void setOfficesPage(OfficesPage officesPage) {
+		this.officesPage = officesPage;
 	}
 
 }
