@@ -2,8 +2,19 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 
 import com.accuity.zeus.aft.commons.DataManagementAppVals;
+import com.accuity.zeus.aft.commons.XqueryMap;
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.model.ExamplesTable;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.w3c.dom.Document;
 import org.openqa.selenium.*;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -234,6 +245,7 @@ public class DataPage extends AbstractPage {
     private By searchResults_headOffice_address_xpath =By.xpath(".//*[@id='cssTempFixId']/header//p");
     private By searchResults_header_fid_xpath = By.xpath(".//*[@id='cssTempFixId']/header/table//tr[th='FID']/td");
     private By searchResults_header_tfpid_xpath = By.xpath(".//*[@id='cssTempFixId']/header/table//tr[th='TFPID']/td");
+
     @Override
     public String getPageUrl() {
         return null;
@@ -356,8 +368,34 @@ public class DataPage extends AbstractPage {
     }
 
     //=CHAR(34)&A1&CHAR(34)&","
-    public void verifyCountryListValues() {
+    public void verifyCountryListValues(Database database, ApacheHttpClient apacheHttpClient, String xqueryName) {
+        XqueryMap xqueryMap = new XqueryMap();
+        ArrayList<String> myList = new ArrayList<>();
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(xqueryMap.getXquery(xqueryName), database);
         List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listBox_value_xpath).getText().split("\n")));
+        for (int i=0;i<=document.getElementsByTagName("a").getLength();i++){
+            //this prepares the list for comparision
+            myList.add(document.getElementsByTagName("result").item(i).getTextContent());
+            System.out.println("Added values in the list are: " + document.getElementsByTagName("result").item(i).getTextContent());
+        }
+        assertTrue(myList.size() == retCountryListVal.size());
+        for (int j=0;j<=myList.size()-1;j++)
+        {
+            if (retCountryListVal.get(j).equals(myList.get(j))) {
+                continue;
+            }
+
+            else {
+                System.out.println("The returned country list has the value " + retCountryListVal.get(j) + " but the expected country list has the value " + myList.get(j));
+                assertTrue(false);
+                break;
+            }
+
+        }
+
+
+
+      /*  List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listBox_value_xpath).getText().split("\n")));
         assertTrue(DataManagementAppVals.expCountryListVal.size() == retCountryListVal.size());
         for (int i = 0; i <=DataManagementAppVals.expCountryListVal.size()-1; i++) {
             if (retCountryListVal.get(i).equals(DataManagementAppVals.expCountryListVal.get(i))) {
@@ -368,7 +406,7 @@ public class DataPage extends AbstractPage {
                 assertTrue(false);
                 break;
             }
-        }
+        } */
     }
 
     public void enterValueInCountryTypeAhead(String word) {
