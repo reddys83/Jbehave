@@ -128,6 +128,11 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifyOfficeSearchResults(officeSearchResults);
     }
 
+    @When("the user clicks on the column name")
+    public void clickOnColumnName(){
+        getResultsPage().clickOnColumnName();
+    }
+
     @Then("the user should see the office search results paginated")
     public void verifyOfficeSearchResultsIsPaginated(){
         getResultsPage().verifyOfficeSearchResultsIsPaginated();

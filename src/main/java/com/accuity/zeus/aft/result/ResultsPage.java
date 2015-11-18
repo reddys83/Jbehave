@@ -63,6 +63,7 @@ public class ResultsPage extends AbstractPage {
 	private By office_search_results_navigation_xpath = By.xpath("//*[@id='pages-navigation-list']");
 	private By office_search_results_next_page_classname = By.className("next-page");
 	private By office_search_results_previous_page_classname = By.className("previous-page");
+    private By office_search_results_column_name_xpath= By.xpath(".//*[@id='content'][@class='data-content']//thead//th[@id='name']");
 
 
 	public ResultsPage(WebDriver driver, String urlPrefix) {
@@ -337,5 +338,9 @@ public class ResultsPage extends AbstractPage {
 	public void navigateToPreviousOfficeSearchResultsPage() {
 		attemptClick(office_search_results_previous_page_classname);
 	}
+
+    public void clickOnColumnName() {
+        attemptClick(office_search_results_column_name_xpath);
+    }
 
 }
