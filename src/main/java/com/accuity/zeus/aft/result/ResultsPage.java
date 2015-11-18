@@ -294,7 +294,7 @@ public class ResultsPage extends AbstractPage {
 		}
 	}
 
-	public void verifyOfficeSearchResultsNavigation() {
+	public void verifySearchResultsNavigation() {
 		if(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) > 7){
 			if(Integer.parseInt(getOfficeSearchResultsCurrentPage()) <= 4){
 				assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 2 3 4 5 ... " + getOfficeSearchResultsLastNavigationPage() + " Next");
@@ -322,7 +322,7 @@ public class ResultsPage extends AbstractPage {
 		}
 	}
 
-	public void navigateThroughOfficeSearchResults(String page) {
+	public void navigateThroughSearchResults(String page) {
 		if(page.equals("last")){
 			navigateToOfficeLastSearchResultsPage();
 		} else {
