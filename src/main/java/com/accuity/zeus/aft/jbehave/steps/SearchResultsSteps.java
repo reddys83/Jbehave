@@ -128,7 +128,7 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifyOfficeSearchResults(officeSearchResults);
     }
 
-    @When("the user clicks on the column name")
+    @When("the user clicks on the office search results column name")
     public void clickOnColumnName(){
         getResultsPage().clickOnColumnName();
     }
