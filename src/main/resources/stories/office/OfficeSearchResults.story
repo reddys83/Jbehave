@@ -27,13 +27,16 @@ Then the user should see the office search results paginated
 And the user should see the offices number of records displayed in the page w.r.t total search results
 And the user should see the option to navigate to the desired office search results page
 
-When the user clicks on the column fid
-Then the user should see the office search results card for the searched legal entity
-|ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
-|951-4|Flughofstrasse|Flughofstrasse 35|Glattbrugg|Zürich|Switzerland|Head Office Branch|active|
-|951-0|Flughofstrasse|Flughofstrasse 35|Glattbrugg|Zürich|Switzerland|Head Office|active|
+When the user clicks on the office search results fid column
 
-When the user clicks on the column fid
+Then the user should see the office search results cards which sort descending order by office fid from the database
+
+!--Then the user should see the office search results card for the searched legal entity
+!-- |ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
+!-- |951-4|Flughofstrasse|Flughofstrasse 35|Glattbrugg|Zürich|Switzerland|Head Office Branch|active|
+!-- |951-0|Flughofstrasse|Flughofstrasse 35|Glattbrugg|Zürich|Switzerland|Head Office|active|
+
+When the user clicks on the office search results fid column
 Then the user should see the office search results card for the searched legal entity
 |ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
 |951-0|Flughofstrasse|Flughofstrasse 35|Glattbrugg|Zürich|Switzerland|Head Office|active|
@@ -43,6 +46,32 @@ Then the user should see the office search results card for the searched legal e
 Examples:
 |entity|searchBy|fid|
 |951|FID|951|
+
+Scenario: Verify the sorting office results by FID
+Meta:
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
+
+When the user clicks on the office search results fid column
+
+Then the user should see the office search results cards sorted descending order by office fid from the database
+
+When the user clicks on the office search results fid column
+
+Then the user should see the office search results cards sorted ascending order by office fid from the database
+
+
+Examples:
+|entity|searchBy|fid|headOfficeAddress|tfpid|
+|Bank of America National Association|Name|1038|Charlotte, North Carolina, USA|10077420|
+
 
 Scenario: Verify Office Results Pagination and Counter
 Given a user is on the search page
@@ -78,7 +107,7 @@ Then the user should see the office search results paginated
 And the user should see the offices number of records displayed in the page w.r.t total search results
 And the user should see the option to navigate to the desired office search results page
 
-When the user clicks on the column fid
+When the user clicks on the office search results fid column
 Then the user should see the office search results card for the searched legal entity
 |ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
 |189457-0||PO Box 8036|Zürich||Switzerland|Head Office|active|
@@ -152,7 +181,7 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 When the user navigates to the 5th page on the office search results
-When the user clicks on the column fid
+When the user clicks on the office search results fid column
 Then the user should see the 1st page on the office search results
 
 

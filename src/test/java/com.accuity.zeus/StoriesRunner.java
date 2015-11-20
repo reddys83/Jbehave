@@ -58,7 +58,7 @@ public class StoriesRunner extends InjectableEmbedder {
     @Before
     public void loadXquery() {
         try {
-            FileUtils.deleteDirectory(new File("C:\\Program Files\\MarkLogic\\Modules\\addn\\zeus"));
+            FileUtils.deleteDirectory(new File("C:\\Program Files\\MarkLogic\\Modules\\addn\\zeusQA"));
             File srcFolder = new File("./src/main/resources/xqueries");
             File destFolder = new File("C:\\Program Files\\MarkLogic\\Modules\\addn");
             FileUtils.copyDirectoryToDirectory(srcFolder, destFolder);

@@ -1,5 +1,8 @@
 package com.accuity.zeus.aft.result;
 
+import com.accuity.zeus.aft.commons.XqueryMap;
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.jbehave.pages.AbstractPage;
 import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 import org.jbehave.core.model.ExamplesTable;
@@ -8,6 +11,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.w3c.dom.Document;
 
 import java.util.*;
 
@@ -370,6 +374,21 @@ public class ResultsPage extends AbstractPage {
            for (String Handle : getDriver().getWindowHandles()) {
                getDriver().switchTo().window(Handle);
            }
+    }
+
+    public void verifyDescOrderByOfficeFid(Database database, ApacheHttpClient apacheHttpClient,String xqueryName)
+    {
+        XqueryMap xqueryMap = new XqueryMap();
+        ArrayList<String> myList = new ArrayList<>();
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(xqueryMap.getXquery(xqueryName), database);
+        // need to implement this
+    }
+
+    public void verifyAscOrderByOfficeFid(Database database, ApacheHttpClient apacheHttpClient, String xqueryName)
+    {
+        XqueryMap xqueryMap = new XqueryMap();
+        ArrayList<String> myList = new ArrayList<>();
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(xqueryMap.getXquery(xqueryName), database);
     }
 
 

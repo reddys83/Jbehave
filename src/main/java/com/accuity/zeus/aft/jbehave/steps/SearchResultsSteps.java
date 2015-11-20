@@ -1,16 +1,24 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.NoSuchElementException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static org.junit.Assert.*;
 
 @Component
 public class SearchResultsSteps extends AbstractSteps{
+
+    @Autowired
+    ApacheHttpClient apacheHttpClient;
+    @Autowired
+    Database database;
 
     @Then("the user should see the search results paginated for the searched entity")
     public void thenUserShouldSeeCorrectResults() {
@@ -128,13 +136,18 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifyOfficeSearchResults(officeSearchResults);
     }
 
-    @When("the user clicks on the column fid")
+    @When("the user clicks on the office search results fid column")
     public void clickOnColumnFid(){
         getResultsPage().clickOnColumnFid();
     }
 
+    @Then("the user should see the office search results cards sorted $xqueryName from the database")
+    public void verifyDescOrderByOfficeFid(String xqueryName) {
+        getResultsPage().verifyDescOrderByOfficeFid(database, apacheHttpClient, xqueryName);
+    }
+
     @Then("the user should see the office search results paginated")
-    public void verifyOfficeSearchResultsIsPaginated(){
+    public void verifyOfficeSearchResultsIsPaginated() {
         getResultsPage().verifyOfficeSearchResultsIsPaginated();
     }
 
