@@ -162,4 +162,9 @@ public class SearchResultsSteps extends AbstractSteps{
     public void navigateToPreviousOfficeSearchResultsPage(){
         getResultsPage().navigateToPreviousOfficeSearchResultsPage();
     }
+
+    @When("the user right clicks on the office <officeFid> in the office search results")
+    public void rightClicksOnOfficeID(@Named("officeFid") String officeFid) {
+        getResultsPage().rightClicksOnOfficeID(officeFid);
+    }
 }

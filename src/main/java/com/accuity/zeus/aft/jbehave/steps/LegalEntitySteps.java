@@ -192,4 +192,6 @@ public class LegalEntitySteps extends AbstractSteps{
     public void clickOnOfficesLink(){
         setOfficesPage(getLegalEntityPage().clickOnOfficesLink());
     }
+
+
 }
