@@ -15,6 +15,7 @@ Scenario:
 4. Verify that the list contains countries by their full name
 5. Verify that the names are sorted Alphabetically
 6. Verify that the user can type in the filter to display names matching the characters input by the user
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

@@ -6,6 +6,7 @@ I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-430 - User view list of offices in legal entity
 JIRA ID - ZEUS-549 - User can sort office results by FID [Which includes ZEUS - 666]
+JIRA ID - ZEUS-559 - User can open multiple offices in new tabs from results
 
 Scenario: Verify Office Results
 Meta:
@@ -158,3 +159,23 @@ Then the user should see the 1st page on the office search results
 Examples:
 |entity|searchBy|fid|
 |1038|FID|1038|1038|
+
+
+Scenario: Verify the user can open multiple offices in new tabs from results
+Meta:@Run
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user right clicks on the office <officeFid> in the office search results
+
+Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>
+
+Examples:
+|entity|searchBy|fid|officeFid|headOfficeAddress|tfpid|
+|Bank of America National Association|Name|1038|1038-51|Charlotte, North Carolina, USA||
+

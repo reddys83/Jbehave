@@ -79,18 +79,9 @@ public class SearchResultsSteps extends AbstractSteps{
         }
     }
 
-    @When("the user navigates to the $page search results page")
-    public void whenUserNavigatesThroughSearchResultsPage(@Named("page") String page){
-        if(page.equals("last")){
-            getResultsPage().goToLastSearchResultsPage().click();
-        }else{
-            getResultsPage().navigateToDesiredSearchResultsPage(page).click();
-        }
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    @When("the user navigates to the $page page on the legal entity search results page")
+    public void navigateThroughLegalEntitySearchResultsPage(@Named("page") String page){
+        getResultsPage().navigateThroughSearchResults(page);
     }
 
     @When("the user clicks on the next page link")
@@ -154,12 +145,17 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @Then("the user should see the option to navigate to the desired office search results page")
     public void verifyOfficeSearchResultsNavigation(){
-        getResultsPage().verifyOfficeSearchResultsNavigation();
+        getResultsPage().verifySearchResultsNavigation();
+    }
+
+    @Then("the user should see the option to navigate to the desired legal entity search results page")
+    public void verifyLegalEntitySearchResultsNavigation(){
+        getResultsPage().verifySearchResultsNavigation();
     }
 
     @When("the user navigates to the $page page on the office search results")
     public void navigateThroughOfficeSearchResults(@Named("page") String page){
-        getResultsPage().navigateThroughOfficeSearchResults(page);
+        getResultsPage().navigateThroughSearchResults(page);
     }
 
     @Then("the user should see the $page page on the office search results")
@@ -175,5 +171,10 @@ public class SearchResultsSteps extends AbstractSteps{
     @When("the user navigates to the office search results previous page")
     public void navigateToPreviousOfficeSearchResultsPage(){
         getResultsPage().navigateToPreviousOfficeSearchResultsPage();
+    }
+
+    @When("the user right clicks on the office <officeFid> in the office search results")
+    public void rightClicksOnOfficeID(@Named("officeFid") String officeFid) {
+        getResultsPage().rightClicksOnOfficeID(officeFid);
     }
 }

@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.jbehave.steps.DetailsSteps;
 import com.accuity.zeus.aft.jbehave.steps.SearchResultsSteps;
 import com.accuity.zeus.aft.jbehave.steps.SearchSteps;
 import com.accuity.zeus.utils.FilesUtils;
+import org.apache.commons.io.FileUtils;
 import org.jbehave.core.InjectableEmbedder;
 import org.jbehave.core.annotations.Configure;
 import org.jbehave.core.annotations.UsingEmbedder;
@@ -19,6 +20,7 @@ import org.jbehave.core.junit.spring.SpringAnnotatedEmbedderRunner;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.ParameterConverters;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -52,6 +54,19 @@ import static com.google.common.collect.Lists.newArrayList;
 @UsingSteps(instances = {SearchSteps.class, SearchResultsSteps.class, DetailsSteps.class})
 @UsingSpring(resources = {"classpath:/applicationContext.xml"})
 public class StoriesRunner extends InjectableEmbedder {
+
+    @Before
+    public void loadXquery() {
+        try {
+            FileUtils.deleteDirectory(new File("C:\\Program Files\\MarkLogic\\Modules\\addn\\zeus"));
+            File srcFolder = new File("./src/main/resources/xqueries");
+            File destFolder = new File("C:\\Program Files\\MarkLogic\\Modules\\addn");
+            FileUtils.copyDirectoryToDirectory(srcFolder, destFolder);
+        } catch (IOException e) {
+            System.out.println("The error message " + e.getMessage());
+        }
+    }
+
 
     @After
     public void styleReports() {

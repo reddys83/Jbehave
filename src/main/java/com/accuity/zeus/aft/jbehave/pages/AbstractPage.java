@@ -41,7 +41,6 @@ public abstract class AbstractPage {
 				System.out.println("SSL not handled");
 			}
 		}
-		//validatePage();
 	}
 
 	public void validatePage() {
@@ -51,9 +50,7 @@ public abstract class AbstractPage {
 			e.printStackTrace();
 		}
 		assertNotNull(driver);
-		//Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(2, TimeUnit.SECONDS);
 		assertTrue(driver.findElement(contentLocator).isEnabled());
-		//wait.until(ExpectedConditions.presenceOfElementLocated(contentLocator));
 	}
 
 	public void validatePage(By by) {

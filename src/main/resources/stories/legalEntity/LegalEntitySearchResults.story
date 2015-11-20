@@ -1,4 +1,4 @@
-Meta:@SearchResults
+Meta:@LegalEntitySearchResults @LegalEntity
 
 Narrative:
 As a user
@@ -84,10 +84,10 @@ Meta:@verifyBuild
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
 Then the user should see the option to navigate to the desired page
-When the user navigates to the 4th search results page
+When the user navigates to the 4th page on the legal entity search results page
 Then the user should see the search results paginated for the searched entity
 Then the user should see the option to navigate to the desired page
-When the user navigates to the last search results page
+When the user navigates to the 5th page on the legal entity search results page
 Then the user should see the search results paginated for the searched entity
 Then the user should see the option to navigate to the desired page
 
@@ -99,10 +99,10 @@ Scenario: search by name and navigate through different search results
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
 Then the user should see the option to navigate to the desired page
-When the user navigates to the 5th search results page
+When the user navigates to the 5th page on the legal entity search results page
 Then the user should see the search results paginated for the searched entity
 Then the user should see the option to navigate to the desired page
-When the user navigates to the last search results page
+When the user navigates to the last page on the legal entity search results page
 Then the user should see the search results paginated for the searched entity
 Then the user should see the option to navigate to the desired page
 
@@ -114,10 +114,10 @@ Scenario: search by name and verify no search results
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
 Then the user should see the option to navigate to the desired page
-When the user navigates to the 5th search results page
+When the user navigates to the 5th page on the legal entity search results page
 Then the user should see the search results paginated for the searched entity
 Then the user should see the option to navigate to the desired page
-When the user navigates to the last search results page
+When the user navigates to the last page on the legal entity search results page
 Then the user should see the search results paginated for the searched entity
 Then the user should see the option to navigate to the desired page
 

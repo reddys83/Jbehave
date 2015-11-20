@@ -50,4 +50,3 @@ Then the user should see the office's statistics as:
 Examples:
 |entity|searchBy|fid|officeFid|
 |MPS Capital Services Banca per le Imprese SpA|Name|3314|3314-0|
-

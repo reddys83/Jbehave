@@ -4,12 +4,12 @@ import com.accuity.zeus.aft.jbehave.pages.AbstractPage;
 import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -63,8 +63,12 @@ public class ResultsPage extends AbstractPage {
 	private By office_search_results_navigation_xpath = By.xpath("//*[@id='pages-navigation-list']");
 	private By office_search_results_next_page_classname = By.className("next-page");
 	private By office_search_results_previous_page_classname = By.className("previous-page");
+
     private By office_search_results_column_fid_xpath = By.xpath(".//*[@id='content'][@class='data-content']//thead//th[@id='fid']");
-        private By office_search_current_page_xpath= By.xpath(".//li[contains(@class,'current-page')]");
+    private By office_search_current_page_xpath= By.xpath(".//li[contains(@class,'current-page')]");
+    private String office_search_results_select_officeByFid_xpath= ".//a[contains(text(),'";
+    protected WebDriver webDriver;
+
 
 
 	public ResultsPage(WebDriver driver, String urlPrefix) {
@@ -236,7 +240,7 @@ public class ResultsPage extends AbstractPage {
 	}
 
 	public void verifyOfficeSearchResultsColumn(){
-		assertEquals("FID NAME ADDRESS CITY AREA COUNTRY TYPE STATUS",getDriver().findElement(office_search_results_table_head_xpath).getText());
+		assertEquals("FID NAME ADDRESS CITY AREA COUNTRY TYPE STATUS", getDriver().findElement(office_search_results_table_head_xpath).getText());
 	}
 
 	public void verifyOfficeHeading(){
@@ -300,7 +304,7 @@ public class ResultsPage extends AbstractPage {
 		}
 	}
 
-	public void verifyOfficeSearchResultsNavigation() {
+	public void verifySearchResultsNavigation() {
 		if(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) > 7){
 			if(Integer.parseInt(getOfficeSearchResultsCurrentPage()) <= 4){
 				assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 2 3 4 5 ... " + getOfficeSearchResultsLastNavigationPage() + " Next");
@@ -328,6 +332,7 @@ public class ResultsPage extends AbstractPage {
 		}
 	}
 
+
     public void verifyCurrentPageOnSearchResults(String page) {
         try {
             Thread.sleep(1000L);
@@ -337,7 +342,7 @@ public class ResultsPage extends AbstractPage {
                assertTrue(getDriver().findElement(office_search_current_page_xpath).getText().contains(page.replace("st", "").replace("nd", "").replace("rd", "").replace("th", "")));
             }
 
-	public void navigateThroughOfficeSearchResults(String page) {
+	public void navigateThroughSearchResults(String page) {
 		if(page.equals("last")){
 			navigateToOfficeLastSearchResultsPage();
 		} else {
@@ -352,5 +357,20 @@ public class ResultsPage extends AbstractPage {
 	public void navigateToPreviousOfficeSearchResultsPage() {
 		attemptClick(office_search_results_previous_page_classname);
 	}
+
+    public void rightClicksOnOfficeID(String officeFid) {
+
+          Actions action = new Actions(getDriver());
+          WebElement element = getDriver().findElement(By.xpath(office_search_results_select_officeByFid_xpath + officeFid + "')]"));
+          action.moveToElement(element);
+         // Rigth click and select the option ' Open in new window'
+          action.contextClick(element).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build().perform();
+
+           // Switch to new window
+           for (String Handle : getDriver().getWindowHandles()) {
+               getDriver().switchTo().window(Handle);
+           }
+    }
+
 
 }
