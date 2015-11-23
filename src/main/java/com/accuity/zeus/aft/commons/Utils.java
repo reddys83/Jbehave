@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft.commons;
 
+import com.accuity.zeus.aft.rest.uri.UriBuilder;
 import org.apache.http.client.utils.URIBuilder;
 
 import java.io.IOException;
@@ -48,15 +49,34 @@ public class Utils {
         return setToReturn;
     }
 
-    public String constructURL(String scheme, String host, int port, String path){
+    public String constructURL(String scheme, String host, int port){
         URIBuilder builder = new URIBuilder();
 
         try {
-            return builder.setScheme(scheme).setHost(host).setPort(port).setPath(path).build().toString();
+            return builder.setScheme(scheme).setHost(host).setPort(port).build().toString();
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return null;
         }
     }
+
+
+    public String constructURLWithParameter(String scheme, String host, int port, String xquery, String fid ) {
+        XqueryMap xqueryMap = new XqueryMap();
+        URIBuilder builder = new URIBuilder();
+        try {
+           return builder.setScheme(scheme)
+                         .setHost(host)
+                         .setPort(port)
+                         .setPath("/search/v0.2/qa/"+ xqueryMap.getXquery(xquery))
+                         .addParameter("fid", fid).build().toString();
+         //  return builder.setScheme(scheme).setHost(host).setPort(port).addParameter("fid", fid).build().toString();
+           
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 }

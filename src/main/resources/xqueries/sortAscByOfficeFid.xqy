@@ -1,4 +1,4 @@
-let $fid := xs:string(xdmp:get-request-field("fid")):)
+let $fid := xs:string(xdmp:get-request-field("fid"))
 let $legalEntity := cts:search(fn:collection('source-trusted')/legalEntity,
         cts:and-query((
             cts:element-attribute-range-query(xs:QName("legalEntity"), xs:QName("fid"), "=", $fid)
@@ -15,3 +15,4 @@ let $officeResults := (
     return $officeInfo)
 
 return <offices>{$officeResults}</offices>
+

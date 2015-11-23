@@ -27,28 +27,12 @@ Then the user should see the office search results paginated
 And the user should see the offices number of records displayed in the page w.r.t total search results
 And the user should see the option to navigate to the desired office search results page
 
-When the user clicks on the office search results fid column
-
-Then the user should see the office search results cards which sort descending order by office fid from the database
-
-!--Then the user should see the office search results card for the searched legal entity
-!-- |ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
-!-- |951-4|Flughofstrasse|Flughofstrasse 35|Glattbrugg|Zürich|Switzerland|Head Office Branch|active|
-!-- |951-0|Flughofstrasse|Flughofstrasse 35|Glattbrugg|Zürich|Switzerland|Head Office|active|
-
-When the user clicks on the office search results fid column
-Then the user should see the office search results card for the searched legal entity
-|ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
-|951-0|Flughofstrasse|Flughofstrasse 35|Glattbrugg|Zürich|Switzerland|Head Office|active|
-|951-4|Flughofstrasse|Flughofstrasse 35|Glattbrugg|Zürich|Switzerland|Head Office Branch|active|
-
-
 Examples:
 |entity|searchBy|fid|
 |951|FID|951|
 
 Scenario: Verify the sorting office results by FID
-Meta:
+Meta:@RunTubati
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -61,11 +45,11 @@ Then the user should see the legal entity header with <entity>, <headOfficeAddre
 
 When the user clicks on the office search results fid column
 
-Then the user should see the office search results cards sorted descending order by office fid from the database
+Then the user should see the office search results cards sorted descending order by office fid with fid 1038 from the database
 
 When the user clicks on the office search results fid column
 
-Then the user should see the office search results cards sorted ascending order by office fid from the database
+Then the user should see the office search results cards sorted ascending order by office fid with fid 1038 from the database
 
 
 Examples:
@@ -171,7 +155,7 @@ Examples:
 |1038|FID|1038|1038|
 
 Scenario: Navigate through search results and verify pagination
-Meta:@RunTubati
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -191,7 +175,7 @@ Examples:
 
 
 Scenario: Verify the user can open multiple offices in new tabs from results
-Meta:@Run
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
