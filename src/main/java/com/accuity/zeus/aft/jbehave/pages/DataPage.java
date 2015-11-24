@@ -367,7 +367,7 @@ public class DataPage extends AbstractPage {
 
     }
 
-    /*
+
     //=CHAR(34)&A1&CHAR(34)&","
     public void verifyCountryListValues(Database database, ApacheHttpClient apacheHttpClient, String xqueryName) {
         XqueryMap xqueryMap = new XqueryMap();
@@ -380,20 +380,17 @@ public class DataPage extends AbstractPage {
             System.out.println("Added values in the list are: " + document.getElementsByTagName("result").item(i).getTextContent());
         }
         assertTrue(myList.size() == retCountryListVal.size());
-        for (int j=0;j<=myList.size()-1;j++)
-        {
+        for (int j=0;j<=myList.size()-1;j++) {
             if (retCountryListVal.get(j).equals(myList.get(j))) {
                 continue;
-            }
-
-            else {
+            } else {
                 System.out.println("The returned country list has the value " + retCountryListVal.get(j) + " but the expected country list has the value " + myList.get(j));
                 assertTrue(false);
                 break;
             }
-
         }
-
+        }
+       /*
         List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listBox_value_xpath).getText().split("\n")));
         assertTrue(DataManagementAppVals.expCountryListVal.size() == retCountryListVal.size());
         for (int i = 0; i <=DataManagementAppVals.expCountryListVal.size()-1; i++) {

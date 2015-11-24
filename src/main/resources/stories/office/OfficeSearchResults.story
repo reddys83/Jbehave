@@ -5,9 +5,11 @@ As a user
 I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-430 - User view list of offices in legal entity
+JIRA ID - ZEUS-549 - User can sort office results by FID [Which includes ZEUS - 666]
 JIRA ID - ZEUS-559 - User can open multiple offices in new tabs from results
 
 Scenario: Verify Office Results
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -28,6 +30,32 @@ And the user should see the option to navigate to the desired office search resu
 Examples:
 |entity|searchBy|fid|
 |951|FID|951|
+
+Scenario: Verify the sorting office results by FID
+Meta:@RunTubati
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
+
+When the user clicks on the office search results fid column
+
+Then the user should see the office search results cards sorted descending order by office fid with fid 1038 from the database
+
+When the user clicks on the office search results fid column
+
+Then the user should see the office search results cards sorted ascending order by office fid with fid 1038 from the database
+
+
+Examples:
+|entity|searchBy|fid|headOfficeAddress|tfpid|
+|Bank of America National Association|Name|1038|Charlotte, North Carolina, USA|10077420|
+
 
 Scenario: Verify Office Results Pagination and Counter
 Given a user is on the search page
@@ -62,6 +90,12 @@ Then the user should see the office search results card for the searched legal e
 Then the user should see the office search results paginated
 And the user should see the offices number of records displayed in the page w.r.t total search results
 And the user should see the option to navigate to the desired office search results page
+
+When the user clicks on the office search results fid column
+Then the user should see the office search results card for the searched legal entity
+|ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
+|189457-0||PO Box 8036|Zürich||Switzerland|Head Office|active|
+
 
 Examples:
 |entity|searchBy|fid|
@@ -120,8 +154,28 @@ Examples:
 |entity|searchBy|fid|
 |1038|FID|1038|1038|
 
+Scenario: Navigate through search results and verify pagination
+Meta:
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+When the user navigates to the 5th page on the office search results
+When the user clicks on the office search results fid column
+Then the user should see the 1st page on the office search results
+
+
+Examples:
+|entity|searchBy|fid|
+|1038|FID|1038|1038|
+
+
 Scenario: Verify the user can open multiple offices in new tabs from results
-Meta:@Run
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -134,8 +188,7 @@ And the user right clicks on the office <officeFid> in the office search results
 
 Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>
 
-
-
 Examples:
 |entity|searchBy|fid|officeFid|headOfficeAddress|tfpid|
 |Bank of America National Association|Name|1038|1038-51|Charlotte, North Carolina, USA||
+

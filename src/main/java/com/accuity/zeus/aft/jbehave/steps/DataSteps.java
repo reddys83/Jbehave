@@ -112,12 +112,13 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryTypeAheadAndListBox();
     }
 
-    /*
+
     @Then("the countries list matches the $xqueryName from the database")
      public void verifyCountryListMatchesExpectedList(String xqueryName) {
          getDataPage().verifyCountryListValues(database, apacheHttpClient, xqueryName);
      }
 
+    /*
      @Then("the user should see the country list matching the expected country list and sorted alphabetically")
      public void verifyCountryListMatchesExpectedList() {
          getDataPage().verifyCountryListValues();
