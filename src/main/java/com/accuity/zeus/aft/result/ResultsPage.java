@@ -228,6 +228,11 @@ public class ResultsPage extends AbstractPage {
 
     public void clickOnColumnFid() {
         attemptClick(office_search_results_column_fid_xpath);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void verifyOfficeSearchResults(ExamplesTable officeSearchResults) {
@@ -379,7 +384,6 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifySortOrderByOfficeFid(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
-
         List<WebElement> FidList = getDriver().findElements(office_id_locator_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, fid);
         for (int i = 0; i < FidList.size(); i++) {

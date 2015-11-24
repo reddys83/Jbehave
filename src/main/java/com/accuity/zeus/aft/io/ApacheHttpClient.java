@@ -66,7 +66,7 @@ public class ApacheHttpClient {
         try {
             client.executeMethod(method);
             document = new XmlDocument().convertFromString(method.getResponseBodyAsString());
-            Thread.sleep(2000L);
+            Thread.sleep(1000L);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
