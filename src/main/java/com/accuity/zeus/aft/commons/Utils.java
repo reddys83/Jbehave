@@ -61,17 +61,16 @@ public class Utils {
     }
 
 
-    public String constructURLWithParameter(String scheme, String host, int port, String xquery, String fid ) {
+    public String constructURLWithParameter(String scheme, String host, int port, String path, String xquery, String fid ) {
         XqueryMap xqueryMap = new XqueryMap();
         URIBuilder builder = new URIBuilder();
         try {
            return builder.setScheme(scheme)
                          .setHost(host)
                          .setPort(port)
-                         .setPath("/search/v0.2/qa/"+ xqueryMap.getXquery(xquery))
-                         .addParameter("fid", fid).build().toString();
+                         .setPath(path + xqueryMap.getXquery(xquery))
+                         .addParameter( "fid", fid).build().toString();
          //  return builder.setScheme(scheme).setHost(host).setPort(port).addParameter("fid", fid).build().toString();
-           
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return null;

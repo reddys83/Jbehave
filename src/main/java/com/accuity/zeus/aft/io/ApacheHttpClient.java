@@ -62,7 +62,7 @@ public class ApacheHttpClient {
         client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 
         //  HttpMethod method = new GetMethod(utils.constructURL(database.getScheme(), database.getHost(), database.getPort(), folderPath) + "/" + xquery);
-        HttpMethod method = new GetMethod(utils.constructURLWithParameter(database.getScheme(), database.getHost(), database.getPort(),xquery,fid));
+        HttpMethod method = new GetMethod(utils.constructURLWithParameter(database.getScheme(), database.getHost(), database.getPort(), database.getPath(), xquery, fid));
         try {
             client.executeMethod(method);
             document = new XmlDocument().convertFromString(method.getResponseBodyAsString());
