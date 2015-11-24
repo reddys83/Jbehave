@@ -8,6 +8,7 @@ JIRA ID - ZEUS-430 - User view list of offices in legal entity
 JIRA ID - ZEUS-549 - User can sort office results by FID [Which includes ZEUS - 666]
 JIRA ID - ZEUS-559 - User can open multiple offices in new tabs from results
 
+
 Scenario: Verify Office Results
 Meta:
 Given a user is on the search page
@@ -32,7 +33,7 @@ Examples:
 |951|FID|951|
 
 Scenario: Verify the sorting office results by FID
-Meta:@RunTubati
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area

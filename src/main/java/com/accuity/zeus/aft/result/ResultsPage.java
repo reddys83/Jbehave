@@ -72,6 +72,7 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_column_fid_xpath = By.xpath(".//*[@id='content'][@class='data-content']//thead//th[@id='fid']");
     private By office_search_current_page_xpath = By.xpath(".//li[contains(@class,'current-page')]");
     private String office_search_results_select_officeByFid_xpath = ".//a[contains(text(),'";
+    String office_search_results_select_officeTypes_xpath=".//*[@class='subEntityList-container']//table//tbody//tr[td='";
     protected WebDriver webDriver;
 
 
@@ -389,5 +390,11 @@ public class ResultsPage extends AbstractPage {
         for (int i = 0; i < FidList.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), FidList.get(i).getText());
              }
+    }
+
+    public void verifyMultipleOfficeTypesAlphabetically(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
+        WebElement multipleOfficeTypes = getDriver().findElement(By.xpath(office_search_results_select_officeTypes_xpath+fid + "']/td[7]"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, fid);
+        assertEquals(document.getElementsByTagName("offices").item(0).getTextContent(), multipleOfficeTypes.getText());
     }
 }
