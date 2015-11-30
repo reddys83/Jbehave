@@ -19,7 +19,6 @@ public class SearchResultsSteps extends AbstractSteps{
     ApacheHttpClient apacheHttpClient;
     @Autowired
     Database database;
-
     private String searchedEntity;
 
     @Then("the user should see the search results paginated for the searched entity")
@@ -145,8 +144,18 @@ public class SearchResultsSteps extends AbstractSteps{
     }
 
     @Then("the user should see the office search results cards sorted $xqueryName with fid $fid from the database")
-    public void verifyDescOrderByOfficeFid(String xqueryName, String fid) {
+    public void verifySortOrderByOfficeFid(String xqueryName, String fid) {
         getResultsPage().verifySortOrderByOfficeFid(database, apacheHttpClient, xqueryName, fid);
+    }
+
+    @Then("the user should see the office search results cards sorted ascending order by office status")
+    public void verifyOfficeIsSortedAscByStatus(){
+        getResultsPage().verifyOfficeIsSortedAscByStatus(database, apacheHttpClient, searchedEntity);
+    }
+
+    @Then("the user should see the office search results cards sorted descending order by office status")
+    public void verifyOfficeIsSortedDescByStatus(){
+        getResultsPage().verifyOfficeIsSortedDescByStatus(database, apacheHttpClient, searchedEntity);
     }
 
     @Then("the user should see the office search results paginated")
@@ -204,8 +213,28 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().selectOfficeTypeFilterDomestic();
     }
 
-    @Then("the user should see the domestic offices in the office search results")
-    public void verifyDomesticOfficesSearchResults(){
+    @When("the user selects the office type filter foreign")
+    public void selectOfficeTypeFilterForeign(){
+        getResultsPage().selectOfficeTypeFilterForeign();
+    }
+
+    @Then("the user should see the list of domestic offices in the office search results")
+    public void verifyDomesticOfficesSearchResults() {
         getResultsPage().verifyDomesticOfficesSearchResults(database, apacheHttpClient, searchedEntity);
+    }
+
+    @Then("the user should see the list of foreign offices in the office search results")
+    public void verifyForeignOfficesSearchResults() {
+        getResultsPage().verifyForeignOfficesSearchResults(database, apacheHttpClient, searchedEntity);
+    }
+
+    @When("the user clicks on the office search results status column")
+    public void clickOnOfficeSearchResultsStatus(){
+        getResultsPage().clickOnOfficeSearchResultsStatus();
+    }
+
+    @Then("the user should see office search results reset to page 1")
+    public void verifyOfficeSearchResultIsResetToPage1(){
+        getResultsPage().verifyOfficeSearchResultIsResetToPage1();
     }
 }
