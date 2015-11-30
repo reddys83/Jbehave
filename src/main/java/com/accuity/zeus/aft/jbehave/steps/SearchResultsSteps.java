@@ -19,6 +19,7 @@ public class SearchResultsSteps extends AbstractSteps{
     ApacheHttpClient apacheHttpClient;
     @Autowired
     Database database;
+    private String searchedEntity;
 
     @Then("the user should see the search results paginated for the searched entity")
     public void thenUserShouldSeeCorrectResults() {
@@ -118,6 +119,7 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @When("the user clicks on the search results card with fid <fid>")
     public void clickOnResultCard(@Named("fid") String fid){
+        searchedEntity = fid;
         setLegalEntityPage(getResultsPage().clickOnResultCard(getResultsPage().getFidElements(fid)));
     }
 
@@ -147,8 +149,13 @@ public class SearchResultsSteps extends AbstractSteps{
     }
 
     @Then("the user should see the office search results cards sorted ascending order by office status")
-    public void verifySortOrderByOfficeStatus(){
+    public void verifyOfficeIsSortedAscByStatus(){
+        getResultsPage().verifyOfficeIsSortedAscByStatus(database, apacheHttpClient, searchedEntity);
+    }
 
+    @Then("the user should see the office search results cards sorted descending order by office status")
+    public void verifyOfficeIsSortedDescByStatus(){
+        getResultsPage().verifyOfficeIsSortedDescByStatus(database, apacheHttpClient, searchedEntity);
     }
 
     @Then("the user should see the office search results paginated")
