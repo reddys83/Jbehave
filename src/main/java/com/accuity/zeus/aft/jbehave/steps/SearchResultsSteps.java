@@ -237,4 +237,9 @@ public class SearchResultsSteps extends AbstractSteps{
     public void verifyOfficeSearchResultIsResetToPage1(){
         getResultsPage().verifyOfficeSearchResultIsResetToPage1();
     }
+
+    @Then("the user should see the message your search returned 0 results.")
+    public void verifySearchReturned0Results(){
+        getResultsPage().verifySearchReturned0Results();
+    }
 }

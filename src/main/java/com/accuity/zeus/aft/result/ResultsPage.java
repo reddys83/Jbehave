@@ -81,6 +81,7 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_fid_col_xpath = By.xpath("//tr/td[1]/a");
 
     protected WebDriver webDriver;
+    private By office_search_results_0_results_xpath = By.xpath("//*[@class='search-results-module']/div/p");
 
     public ResultsPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -477,5 +478,9 @@ public class ResultsPage extends AbstractPage {
 
     public void selectOfficeTypeFilterForeign() {
         attemptClick(office_type_filter_foreign_id);
+    }
+
+    public void verifySearchReturned0Results() {
+        assertEquals("Your search returned 0 results.", getDriver().findElement(office_search_results_0_results_xpath).getText());
     }
 }
