@@ -203,6 +203,31 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().rightClicksOnOfficeID(officeFid);
     }
 
+    @Then("the user should see the office type filter default to all")
+    public void verifyDefaultOfficeTypeFilterIsAll(){
+        getResultsPage().verifyDefaultOfficeTypeFilterIsAll();
+    }
+
+    @When("the user selects the office type filter domestic")
+    public void selectOfficeTypeFilterDomestic(){
+        getResultsPage().selectOfficeTypeFilterDomestic();
+    }
+
+    @When("the user selects the office type filter foreign")
+    public void selectOfficeTypeFilterForeign(){
+        getResultsPage().selectOfficeTypeFilterForeign();
+    }
+
+    @Then("the user should see the list of domestic offices in the office search results")
+    public void verifyDomesticOfficesSearchResults() {
+        getResultsPage().verifyDomesticOfficesSearchResults(database, apacheHttpClient, searchedEntity);
+    }
+
+    @Then("the user should see the list of foreign offices in the office search results")
+    public void verifyForeignOfficesSearchResults() {
+        getResultsPage().verifyForeignOfficesSearchResults(database, apacheHttpClient, searchedEntity);
+    }
+
     @When("the user clicks on the office search results status column")
     public void clickOnOfficeSearchResultsStatus(){
         getResultsPage().clickOnOfficeSearchResultsStatus();
@@ -211,5 +236,10 @@ public class SearchResultsSteps extends AbstractSteps{
     @Then("the user should see office search results reset to page 1")
     public void verifyOfficeSearchResultIsResetToPage1(){
         getResultsPage().verifyOfficeSearchResultIsResetToPage1();
+    }
+
+    @Then("the user should see the message your search returned 0 results.")
+    public void verifySearchReturned0Results(){
+        getResultsPage().verifySearchReturned0Results();
     }
 }
