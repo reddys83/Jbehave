@@ -16,6 +16,7 @@ public class XqueryMap {
         hashMap.put("descending order by office fid","sortDescByOfficeFid.xqy");
         hashMap.put("ascending order by office fid", "sortAscByOfficeFid.xqy");
         hashMap.put("list of countries","listOfCountries.xqy");
+        hashMap.put("domestic offices list", "getDomesticOfficesList.xqy");
     }
 
     public String getXquery(String key){

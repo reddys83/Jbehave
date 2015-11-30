@@ -20,6 +20,8 @@ public class SearchResultsSteps extends AbstractSteps{
     @Autowired
     Database database;
 
+    private String searchedEntity;
+
     @Then("the user should see the search results paginated for the searched entity")
     public void thenUserShouldSeeCorrectResults() {
         if(Integer.parseInt(getResultsPage().getNumResultsValue().getText()) < 10) {
@@ -118,6 +120,7 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @When("the user clicks on the search results card with fid <fid>")
     public void clickOnResultCard(@Named("fid") String fid){
+        searchedEntity = fid;
         setLegalEntityPage(getResultsPage().clickOnResultCard(getResultsPage().getFidElements(fid)));
     }
 
@@ -189,5 +192,20 @@ public class SearchResultsSteps extends AbstractSteps{
     @When("the user right clicks on the office <officeFid> in the office search results")
     public void rightClicksOnOfficeID(@Named("officeFid") String officeFid) {
         getResultsPage().rightClicksOnOfficeID(officeFid);
+    }
+
+    @Then("the user should see the office type filter default to all")
+    public void verifyDefaultOfficeTypeFilterIsAll(){
+        getResultsPage().verifyDefaultOfficeTypeFilterIsAll();
+    }
+
+    @When("the user selects the office type filter domestic")
+    public void selectOfficeTypeFilterDomestic(){
+        getResultsPage().selectOfficeTypeFilterDomestic();
+    }
+
+    @Then("the user should see the domestic offices in the office search results")
+    public void verifyDomesticOfficesSearchResults(){
+        getResultsPage().verifyDomesticOfficesSearchResults(database, apacheHttpClient, searchedEntity);
     }
 }
