@@ -32,7 +32,7 @@ Examples:
 |entity|searchBy|fid|
 |951|FID|951|
 
-<<<<<<< HEAD
+
 Scenario: Verify the sorting office results by FID
 Meta:
 Given a user is on the search page
@@ -59,8 +59,6 @@ Examples:
 |Bank of America National Association|Name|1038|Charlotte, North Carolina, USA|10077420|
 
 
-=======
->>>>>>> develop
 Scenario: Verify Office Results Pagination and Counter
 Given a user is on the search page
 When the user clicks on the data tab in the search page
