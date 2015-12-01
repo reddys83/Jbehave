@@ -73,9 +73,10 @@ public class ResultsPage extends AbstractPage {
     private By office_search_current_page_xpath = By.xpath("//li[contains(@class,'current-page')]");
     private String office_search_results_select_officeByFid_xpath = ".//a[contains(text(),'";
     private By office_search_results_status_xpath = By.xpath("//tr/th[@id='status']");
+    private By office_search_results_type_xpath = By.xpath("//tr/th[@id='type']");
     private By office_search_results_status_col_xpath = By.xpath("//tr/td[8]");
-    private By office_search_results_fid_col_xpath = By.xpath("//tr/td[1]/a");
-    protected WebDriver webDriver;
+
+      protected WebDriver webDriver;
 
 
 
@@ -399,8 +400,30 @@ public class ResultsPage extends AbstractPage {
              }
     }
 
+    public void verifySortOrderByOfficeType(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
+        try {
+            Thread.sleep(1000L);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        List<WebElement> typeList = getDriver().findElements(office_type_locator_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, fid);
+        for (int i=0; i< typeList.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), typeList.get(i).getText());
+        }
+    }
+
     public void clickOnOfficeSearchResultsStatus() {
         attemptClick(office_search_results_status_xpath);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clickOnOfficesSearchResultsType() {
+        attemptClick(office_search_results_type_xpath);
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -437,5 +460,7 @@ public class ResultsPage extends AbstractPage {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), status.get(i).getText());
         }
     }
+
+
 
 }
