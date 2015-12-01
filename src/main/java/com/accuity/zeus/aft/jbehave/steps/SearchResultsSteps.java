@@ -148,6 +148,11 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifySortOrderByOfficeFid(database, apacheHttpClient, xqueryName, fid);
     }
 
+    @Then("the office search results should sort by type which sorted $xqueryName with fid $fid from the database")
+    public void verifySortOrderByOfficeType(String xqueryName, String fid) {
+        getResultsPage().verifySortOrderByOfficeType(database, apacheHttpClient, xqueryName, fid);
+    }
+
     @Then("the user should see the office search results cards sorted ascending order by office status")
     public void verifyOfficeIsSortedAscByStatus(){
         getResultsPage().verifyOfficeIsSortedAscByStatus(database, apacheHttpClient, searchedEntity);
@@ -235,6 +240,11 @@ public class SearchResultsSteps extends AbstractSteps{
     @When("the user clicks on the office search results status column")
     public void clickOnOfficeSearchResultsStatus(){
         getResultsPage().clickOnOfficeSearchResultsStatus();
+    }
+
+    @When("the user clicks on the office search results type column")
+    public void clickOnOfficesSearchResultsType(){
+        getResultsPage().clickOnOfficesSearchResultsType();
     }
 
     @Then("the user should see office search results reset to page 1")
