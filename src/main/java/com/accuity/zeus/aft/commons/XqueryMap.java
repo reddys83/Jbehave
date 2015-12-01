@@ -23,6 +23,8 @@ public class XqueryMap {
         hashMap.put("descending order by office type","sortDescByOfficeTypes.xqy");
         hashMap.put("domestic offices list", "getDomesticOfficesList.xqy");
         hashMap.put("foreign offices list", "getForeignOfficesList.xqy");
+        hashMap.put("ascending order by office name", "sortAscByOfficeName.xqy");
+        hashMap.put("descending order by office name","sortDescByOfficeName.xqy");
 
     }
 
