@@ -8,6 +8,7 @@ JIRA ID - ZEUS-430 - User view list of offices in legal entity
 JIRA ID - ZEUS-549 - User can sort office results by FID [Which includes ZEUS - 666]
 JIRA ID - ZEUS-559 - User can open multiple offices in new tabs from results
 
+
 Scenario: Verify Office Results
 Meta:
 Given a user is on the search page
@@ -108,7 +109,7 @@ Then the user should see the option to navigate to the desired office search res
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|1038|
+|1038|FID|1038|
 
 Scenario: Verify pagination next and previous navigation link
 Given a user is on the search page
@@ -126,7 +127,7 @@ Then the user should see the option to navigate to the desired office search res
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|1038|
+|1038|FID|1038|
 
 Scenario: Navigate through search results and verify pagination
 Meta:
@@ -141,7 +142,6 @@ And the user clicks on the offices link in the legal entity page
 When the user navigates to the 5th page on the office search results
 When the user clicks on the office search results fid column
 Then the user should see the 1st page on the office search results
-
 
 Examples:
 |entity|searchBy|fid|
@@ -165,4 +165,3 @@ Then the user should see the office header with <entity>, <headOfficeAddress>, <
 Examples:
 |entity|searchBy|fid|officeFid|headOfficeAddress|tfpid|
 |Bank of America National Association|Name|1038|1038-51|Charlotte, North Carolina, USA||
-
