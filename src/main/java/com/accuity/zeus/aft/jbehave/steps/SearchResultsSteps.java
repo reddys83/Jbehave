@@ -217,6 +217,10 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().rightClicksOnOfficeID(officeFid);
     }
 
+    @Then("the user should see the $xqueryName with comma separated for office $fid")
+    public void verifyMultipleOfficeTypesAlphabetically(String xqueryName, String fid) {
+        getResultsPage().verifyMultipleOfficeTypesAlphabetically(database, apacheHttpClient, xqueryName, fid);
+    }
     @Then("the user should see the office type filter default to all")
     public void verifyDefaultOfficeTypeFilterIsAll(){
         getResultsPage().verifyDefaultOfficeTypeFilterIsAll();

@@ -71,6 +71,7 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_column_fid_xpath = By.xpath("//tr/th[@id='fid']");
     private By office_search_current_page_xpath = By.xpath("//li[contains(@class,'current-page')]");
     private String office_search_results_select_officeByFid_xpath = ".//a[contains(text(),'";
+    String office_search_results_select_officeTypes_xpath=".//*[@class='subEntityList-container']//table//tbody//tr[td='";
     private By office_type_default_filter_all_xpath = By.xpath("//*[@id='isForeign-all'][@class='selected']");
     private By office_type_filter_domestic_id = By.id("isForeign-false");
     private By office_type_filter_domestic_selected_xpath = By.xpath("//*[@id='isForeign-false'][@class='selected']");
@@ -79,6 +80,7 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_status_xpath = By.xpath("//tr/th[@id='status']");
     private By office_search_results_type_xpath = By.xpath("//tr/th[@id='type']");
     private By office_search_results_status_col_xpath = By.xpath("//tr/td[8]");
+
 
     protected WebDriver webDriver;
     private By office_search_results_0_results_xpath = By.xpath("//*[@class='search-results-module']/div/p");
@@ -527,5 +529,11 @@ public class ResultsPage extends AbstractPage {
 
     public void verifySearchReturned0Results() {
         assertEquals("Your search returned 0 results.", getDriver().findElement(office_search_results_0_results_xpath).getText());
+    }
+
+    public void verifyMultipleOfficeTypesAlphabetically(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
+        WebElement multipleOfficeTypes = getDriver().findElement(By.xpath(office_search_results_select_officeTypes_xpath+fid + "']/td[7]"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, fid);
+        assertEquals(document.getElementsByTagName("offices").item(0).getTextContent(), multipleOfficeTypes.getText());
     }
 }
