@@ -13,7 +13,16 @@ public class XqueryMap {
     private HashMap<String, String> hashMap = new HashMap<String, String>();
 
     public XqueryMap(){
-        hashMap.put("list of countries","testSample.xqy");
+        hashMap.put("descending order by office fid","sortDescByOfficeFid.xqy");
+        hashMap.put("ascending order by office fid", "sortAscByOfficeFid.xqy");
+        hashMap.put("descending order by office status","sortDescByOfficeStatus.xqy");
+        hashMap.put("ascending order by office status", "sortAscByOfficeStatus.xqy");
+        hashMap.put("list of countries","listOfCountries.xqy");
+        hashMap.put("ascending order by office type","sortAscByOfficeTypes.xqy");
+        hashMap.put("descending order by office type","sortDescByOfficeTypes.xqy");
+        hashMap.put("domestic offices list", "getDomesticOfficesList.xqy");
+        hashMap.put("foreign offices list", "getForeignOfficesList.xqy");
+
     }
 
     public String getXquery(String key){

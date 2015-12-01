@@ -29,7 +29,7 @@ public class ApacheHttpClient {
     @Value("${marklogic.modules.xquery.folderPath}")
     String folderPath;
 
-    public Document executeDatabaseAdminQueryWithResponse(Database database, String xquery) {
+    public Document executeDatabaseAdminQueryWithResponse(String xquery, Database database) {
         Utils utils = new Utils();
         Document document = null;
         HttpClient client = new HttpClient();
@@ -39,7 +39,8 @@ public class ApacheHttpClient {
         authPrefs.add(AuthPolicy.DIGEST);
         client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 
-        HttpMethod method = new GetMethod(utils.constructURL(database.getScheme(), database.getHost(), database.getPort(), folderPath) + "/" + xquery);
+      //  HttpMethod method = new GetMethod(utils.constructURL(database.getScheme(), database.getHost(), database.getPort(), folderPath) + "/" + xquery);
+        HttpMethod method = new GetMethod(utils.constructURL(database.getScheme(), database.getHost(), database.getPort()) + "/search/v0.2/qa/" + xquery);
         try {
             client.executeMethod(method);
             document = new XmlDocument().convertFromString(method.getResponseBodyAsString());
@@ -49,4 +50,32 @@ public class ApacheHttpClient {
         method.releaseConnection();
         return document;
     }
+
+    public Document executeDatabaseAdminQueryWithParameter(Database database, String xquery,  String fid) {
+        Utils utils = new Utils();
+        Document document = null;
+        HttpClient client = new HttpClient();
+        client.getState().setCredentials(new AuthScope(database.getHost(), database.getPort(), "public"), new UsernamePasswordCredentials(database.getUsername(), database.getPassword()));
+
+        List<String> authPrefs = new ArrayList<>();
+        authPrefs.add(AuthPolicy.DIGEST);
+        client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
+
+        //  HttpMethod method = new GetMethod(utils.constructURL(database.getScheme(), database.getHost(), database.getPort(), folderPath) + "/" + xquery);
+        HttpMethod method = new GetMethod(utils.constructURLWithParameter(database.getScheme(), database.getHost(), database.getPort(), database.getPath(), xquery, fid));
+        try {
+            client.executeMethod(method);
+            document = new XmlDocument().convertFromString(method.getResponseBodyAsString());
+            Thread.sleep(1000L);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        method.releaseConnection();
+        return document;
+    }
+
+
 }

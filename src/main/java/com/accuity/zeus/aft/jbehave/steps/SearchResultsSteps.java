@@ -1,16 +1,25 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.NoSuchElementException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static org.junit.Assert.*;
 
 @Component
 public class SearchResultsSteps extends AbstractSteps{
+
+    @Autowired
+    ApacheHttpClient apacheHttpClient;
+    @Autowired
+    Database database;
+    private String searchedEntity;
 
     @Then("the user should see the search results paginated for the searched entity")
     public void thenUserShouldSeeCorrectResults() {
@@ -110,6 +119,7 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @When("the user clicks on the search results card with fid <fid>")
     public void clickOnResultCard(@Named("fid") String fid){
+        searchedEntity = fid;
         setLegalEntityPage(getResultsPage().clickOnResultCard(getResultsPage().getFidElements(fid)));
     }
 
@@ -129,12 +139,36 @@ public class SearchResultsSteps extends AbstractSteps{
     }
 
     @When("the user clicks on the office search results column name")
-    public void clickOnColumnName(){
+    public void clickOnColumnName() {
         getResultsPage().clickOnColumnName();
+    }
+    @When("the user clicks on the office search results fid column")
+    public void clickOnColumnFid(){
+        getResultsPage().clickOnColumnFid();
+    }
+
+    @Then("the user should see the office search results cards sorted $xqueryName with fid $fid from the database")
+    public void verifySortOrderByOfficeFid(String xqueryName, String fid) {
+        getResultsPage().verifySortOrderByOfficeFid(database, apacheHttpClient, xqueryName, fid);
+    }
+
+    @Then("the office search results should sort by type which sorted $xqueryName with fid $fid from the database")
+    public void verifySortOrderByOfficeType(String xqueryName, String fid) {
+        getResultsPage().verifySortOrderByOfficeType(database, apacheHttpClient, xqueryName, fid);
+    }
+
+    @Then("the user should see the office search results cards sorted ascending order by office status")
+    public void verifyOfficeIsSortedAscByStatus(){
+        getResultsPage().verifyOfficeIsSortedAscByStatus(database, apacheHttpClient, searchedEntity);
+    }
+
+    @Then("the user should see the office search results cards sorted descending order by office status")
+    public void verifyOfficeIsSortedDescByStatus(){
+        getResultsPage().verifyOfficeIsSortedDescByStatus(database, apacheHttpClient, searchedEntity);
     }
 
     @Then("the user should see the office search results paginated")
-    public void verifyOfficeSearchResultsIsPaginated(){
+    public void verifyOfficeSearchResultsIsPaginated() {
         getResultsPage().verifyOfficeSearchResultsIsPaginated();
     }
 
@@ -158,6 +192,11 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().navigateThroughSearchResults(page);
     }
 
+    @Then("the user should see the $page page on the office search results")
+    public void verifyCurrentPageOnSearchResults(@Named("page") String page) {
+        getResultsPage().verifyCurrentPageOnSearchResults(page);
+    }
+
     @When("the user navigates to the office search results next page")
     public void navigateToNextOfficeSearchResultsPage(){
         getResultsPage().navigateToNextOfficeSearchResultsPage();
@@ -166,5 +205,55 @@ public class SearchResultsSteps extends AbstractSteps{
     @When("the user navigates to the office search results previous page")
     public void navigateToPreviousOfficeSearchResultsPage(){
         getResultsPage().navigateToPreviousOfficeSearchResultsPage();
+    }
+
+    @When("the user right clicks on the office <officeFid> in the office search results")
+    public void rightClicksOnOfficeID(@Named("officeFid") String officeFid) {
+        getResultsPage().rightClicksOnOfficeID(officeFid);
+    }
+
+    @Then("the user should see the office type filter default to all")
+    public void verifyDefaultOfficeTypeFilterIsAll(){
+        getResultsPage().verifyDefaultOfficeTypeFilterIsAll();
+    }
+
+    @When("the user selects the office type filter domestic")
+    public void selectOfficeTypeFilterDomestic(){
+        getResultsPage().selectOfficeTypeFilterDomestic();
+    }
+
+    @When("the user selects the office type filter foreign")
+    public void selectOfficeTypeFilterForeign(){
+        getResultsPage().selectOfficeTypeFilterForeign();
+    }
+
+    @Then("the user should see the list of domestic offices in the office search results")
+    public void verifyDomesticOfficesSearchResults() {
+        getResultsPage().verifyDomesticOfficesSearchResults(database, apacheHttpClient, searchedEntity);
+    }
+
+    @Then("the user should see the list of foreign offices in the office search results")
+    public void verifyForeignOfficesSearchResults() {
+        getResultsPage().verifyForeignOfficesSearchResults(database, apacheHttpClient, searchedEntity);
+    }
+
+    @When("the user clicks on the office search results status column")
+    public void clickOnOfficeSearchResultsStatus(){
+        getResultsPage().clickOnOfficeSearchResultsStatus();
+    }
+
+    @When("the user clicks on the office search results type column")
+    public void clickOnOfficesSearchResultsType(){
+        getResultsPage().clickOnOfficesSearchResultsType();
+    }
+
+    @Then("the user should see office search results reset to page 1")
+    public void verifyOfficeSearchResultIsResetToPage1(){
+        getResultsPage().verifyOfficeSearchResultIsResetToPage1();
+    }
+
+    @Then("the user should see the message your search returned 0 results.")
+    public void verifySearchReturned0Results(){
+        getResultsPage().verifySearchReturned0Results();
     }
 }
