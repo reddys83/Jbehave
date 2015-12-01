@@ -30,6 +30,7 @@ Examples:
 |entity|searchBy|fid|
 |Joint Stock Company 'Petersburg Social Commercial Bank'|Name|113461|
 
+
 Scenario: Verify the sorting office results by FID
 Meta:
 Given a user is on the search page
