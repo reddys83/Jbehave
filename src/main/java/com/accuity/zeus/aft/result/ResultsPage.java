@@ -1,12 +1,11 @@
 package com.accuity.zeus.aft.result;
 
-import com.accuity.zeus.aft.commons.XqueryMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.jbehave.pages.AbstractPage;
 import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
-import junit.framework.Assert;
 import org.jbehave.core.model.ExamplesTable;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -72,14 +71,17 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_column_fid_xpath = By.xpath("//tr/th[@id='fid']");
     private By office_search_current_page_xpath = By.xpath("//li[contains(@class,'current-page')]");
     private String office_search_results_select_officeByFid_xpath = ".//a[contains(text(),'";
+    private By office_type_default_filter_all_xpath = By.xpath("//*[@id='isForeign-all'][@class='selected']");
+    private By office_type_filter_domestic_id = By.id("isForeign-false");
+    private By office_type_filter_domestic_selected_xpath = By.xpath("//*[@id='isForeign-false'][@class='selected']");
+    private By office_type_filter_foreign_id = By.id("isForeign-true");
+    private By office_type_filter_foreign_selected_xpath = By.xpath("//*[@id='isForeign-true'][@class='selected']");
     private By office_search_results_status_xpath = By.xpath("//tr/th[@id='status']");
     private By office_search_results_type_xpath = By.xpath("//tr/th[@id='type']");
     private By office_search_results_status_col_xpath = By.xpath("//tr/td[8]");
 
-      protected WebDriver webDriver;
-
-
-
+    protected WebDriver webDriver;
+    private By office_search_results_0_results_xpath = By.xpath("//*[@class='search-results-module']/div/p");
 
     public ResultsPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -374,7 +376,6 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void rightClicksOnOfficeID(String officeFid) {
-
         Actions action = new Actions(getDriver());
         WebElement element = getDriver().findElement(By.xpath(office_search_results_select_officeByFid_xpath + officeFid + "')]"));
         action.moveToElement(element);
@@ -397,7 +398,15 @@ public class ResultsPage extends AbstractPage {
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, fid);
         for (int i = 0; i < fidList.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), fidList.get(i).getText());
-             }
+        }
+    }
+
+    public void verifyDefaultOfficeTypeFilterIsAll() {
+        assertTrue(getDriver().findElement(office_type_default_filter_all_xpath).isDisplayed());
+    }
+
+    public void selectOfficeTypeFilterDomestic() {
+        attemptClick(office_type_filter_domestic_id);
     }
 
     public void verifySortOrderByOfficeType(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
@@ -461,6 +470,39 @@ public class ResultsPage extends AbstractPage {
         }
     }
 
+    public void verifyDomesticOfficesSearchResults(Database database, ApacheHttpClient apacheHttpClient, String searchedEntity) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(getDriver().findElement(office_type_filter_domestic_selected_xpath).isDisplayed());
+        List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "domestic offices list", searchedEntity);
+        for (int i = 0; i < fidList.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), fidList.get(i).getText());
+        }
+    }
 
+    public void verifyForeignOfficesSearchResults(Database database, ApacheHttpClient apacheHttpClient, String searchedEntity) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(getDriver().findElement(office_type_filter_foreign_selected_xpath).isDisplayed());
+        List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "foreign offices list", searchedEntity);
+        for (int i = 0; i < fidList.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), fidList.get(i).getText());
+        }
+    }
 
+    public void selectOfficeTypeFilterForeign() {
+        attemptClick(office_type_filter_foreign_id);
+    }
+
+    public void verifySearchReturned0Results() {
+        assertEquals("Your search returned 0 results.", getDriver().findElement(office_search_results_0_results_xpath).getText());
+    }
 }
