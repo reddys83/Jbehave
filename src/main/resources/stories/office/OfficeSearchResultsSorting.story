@@ -46,9 +46,9 @@ When the user navigates to the 4th page on the office search results
 Then the user should see the office search results paginated
 And the user should see the offices number of records displayed in the page w.r.t total search results
 And the user should see the option to navigate to the desired office search results page
-Then the user should see office search results reset to page 1
 When the user clicks on the office search results status column
 Then the user should see the office search results cards sorted descending order by office status
+Then the user should see office search results reset to page 1
 Then the user should see the office search results paginated
 And the user should see the offices number of records displayed in the page w.r.t total search results
 And the user should see the option to navigate to the desired office search results page

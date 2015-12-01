@@ -51,7 +51,7 @@ public class ApacheHttpClient {
         return document;
     }
 
-    public Document executeDatabaseAdminQueryWithParameter(Database database, String xquery,  String fid) {
+    public Document executeDatabaseAdminQueryWithParameter(Database database, String xquery, String param, String paramValue) {
         Utils utils = new Utils();
         Document document = null;
         HttpClient client = new HttpClient();
@@ -62,7 +62,7 @@ public class ApacheHttpClient {
         client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 
         //  HttpMethod method = new GetMethod(utils.constructURL(database.getScheme(), database.getHost(), database.getPort(), folderPath) + "/" + xquery);
-        HttpMethod method = new GetMethod(utils.constructURLWithParameter(database.getScheme(), database.getHost(), database.getPort(), database.getPath(), xquery, fid));
+        HttpMethod method = new GetMethod(utils.constructURLWithParameter(database.getScheme(), database.getHost(), database.getPort(), database.getPath(), xquery, param, paramValue));
         try {
             client.executeMethod(method);
             document = new XmlDocument().convertFromString(method.getResponseBodyAsString());

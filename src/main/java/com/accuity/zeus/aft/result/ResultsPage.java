@@ -388,14 +388,14 @@ public class ResultsPage extends AbstractPage {
         }
     }
 
-    public void verifySortOrderByOfficeFid(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
+    public void verifySortOrderByOfficeFid(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String searchedEntity) {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, fid);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, "fid", searchedEntity);
         for (int i = 0; i < fidList.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), fidList.get(i).getText());
         }
@@ -409,14 +409,14 @@ public class ResultsPage extends AbstractPage {
         attemptClick(office_type_filter_domestic_id);
     }
 
-    public void verifySortOrderByOfficeType(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
+    public void verifySortOrderByOfficeType(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String searchedEntity) {
         try {
             Thread.sleep(1000L);
         }catch (InterruptedException e){
             e.printStackTrace();
         }
         List<WebElement> typeList = getDriver().findElements(office_type_locator_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, fid);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, "fid", searchedEntity);
         for (int i=0; i< typeList.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), typeList.get(i).getText());
         }
@@ -451,7 +451,7 @@ public class ResultsPage extends AbstractPage {
             e.printStackTrace();
         }
         List<WebElement> status = getDriver().findElements(office_search_results_status_col_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "ascending order by office status", searchedEntity);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "ascending order by office status", "fid", searchedEntity);
         for (int i = 0; i < status.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), status.get(i).getText());
         }
@@ -464,7 +464,7 @@ public class ResultsPage extends AbstractPage {
             e.printStackTrace();
         }
         List<WebElement> status = getDriver().findElements(office_search_results_status_col_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "descending order by office status", searchedEntity);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "descending order by office status", "fid", searchedEntity);
         for (int i = 0; i < status.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), status.get(i).getText());
         }
@@ -478,7 +478,7 @@ public class ResultsPage extends AbstractPage {
         }
         assertTrue(getDriver().findElement(office_type_filter_domestic_selected_xpath).isDisplayed());
         List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "domestic offices list", searchedEntity);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "domestic offices list", "fid", searchedEntity);
         for (int i = 0; i < fidList.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), fidList.get(i).getText());
         }
@@ -492,7 +492,7 @@ public class ResultsPage extends AbstractPage {
         }
         assertTrue(getDriver().findElement(office_type_filter_foreign_selected_xpath).isDisplayed());
         List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "foreign offices list", searchedEntity);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "foreign offices list", "fid", searchedEntity);
         for (int i = 0; i < fidList.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), fidList.get(i).getText());
         }

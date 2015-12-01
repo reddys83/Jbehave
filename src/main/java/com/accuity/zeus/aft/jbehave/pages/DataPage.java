@@ -10,8 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 
@@ -245,6 +243,7 @@ public class DataPage extends AbstractPage {
     private By searchResults_headOffice_address_xpath =By.xpath(".//*[@id='cssTempFixId']/header//p");
     private By searchResults_header_fid_xpath = By.xpath(".//*[@id='cssTempFixId']/header/table//tr[th='FID']/td");
     private By searchResults_header_tfpid_xpath = By.xpath(".//*[@id='cssTempFixId']/header/table//tr[th='TFPID']/td");
+    private By currency_use_table_rows_xpath = By.xpath("//*[@id='content']//tbody/tr");
 
     @Override
     public String getPageUrl() {
@@ -264,10 +263,13 @@ public class DataPage extends AbstractPage {
         getDriver().findElement(choose_currency_option_xpath).click();
     }
 
-    public void verifyCurrencyList() {
+    public void verifyCurrencyList(Database database, ApacheHttpClient apacheHttpClient) {
         assertEquals(getDriver().findElement(currency_label_xpath).getText(), "CURRENCY");
         List<WebElement> currencyList = getDriver().findElements(currency_list_xpath);
-        assertTrue(currencyList.size() > 0);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse("currency list", database);
+        for (int i = 0; i < currencyList.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), currencyList.get(i).getText());
+        }
     }
 
     public void enterCurrency(String curr) {
@@ -292,6 +294,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void selectCurrencyFromTypeAhead(String currency) {
+
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -431,6 +434,7 @@ public class DataPage extends AbstractPage {
         }
     }
 
+    /*
     public void verifyCurrencyUse(ExamplesTable currencyUseTable) {
         verifyCurrencyUseTableHeaders();
         for(int i=0; i<currencyUseTable.getRowCount(); i++){
@@ -459,6 +463,19 @@ public class DataPage extends AbstractPage {
                         getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[6]")));
             }
        }
+    }
+    */
+    public void verifyCurrencyUse(Database database, ApacheHttpClient apacheHttpClient, String selectedCurrency) {
+        verifyCurrencyUseTableHeaders();
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "currency uses", "fid", selectedCurrency);
+        for(int i=0; i<getDriver().findElements(currency_use_table_rows_xpath).size(); i++){
+            assertEquals(document.getElementsByTagName("countryName").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[1]")));
+            assertEquals(document.getElementsByTagName("startDate").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[2]")));
+            assertEquals(document.getElementsByTagName("endDate").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[3]")));
+            assertEquals(document.getElementsByTagName("primary").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[4]")));
+            assertEquals(document.getElementsByTagName("replacedBy").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[5]")));
+            assertEquals(document.getElementsByTagName("status").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[6]")));
+        }
     }
 
     public void verifyCurrencyUseTableHeaders() {
@@ -721,13 +738,14 @@ public class DataPage extends AbstractPage {
         }
     }
 
+    /*
     public void verifyCountriesCurrencyUsage(ExamplesTable currencyCountries) {
         assertEquals("USAGE", getDriver().findElement(currency_usage_label_xpath).getText());
         for (int i = 0; i<currencyCountries.getRowCount(); i++){
             assertEquals(currencyCountries.getRow(i).get(currencyCountries.getHeaders().get(0)), getDriver().findElements(currency_usage_xpath).get(i).getText());
         }
     }
-
+    */
     public void clickOnCurrencyUsageCountry(String currencyUsageCountry) {
         selectedEntity = currencyUsageCountry;
         attemptClick(By.linkText(currencyUsageCountry));
