@@ -148,7 +148,7 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifySortOrderByOfficeFid(database, apacheHttpClient, xqueryName, fid);
     }
 
-    @Then("the office search results should sort by type with sorted $xqueryName with fid $fid from the database")
+    @Then("the office search results should sort by type which sorted $xqueryName with fid $fid from the database")
     public void verifySortOrderByOfficeType(String xqueryName, String fid) {
         getResultsPage().verifySortOrderByOfficeType(database, apacheHttpClient, xqueryName, fid);
     }
