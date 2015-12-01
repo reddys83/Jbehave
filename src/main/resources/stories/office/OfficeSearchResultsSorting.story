@@ -7,6 +7,7 @@ So that I can achieve a business goal
 JIRA ID - ZEUS-554 - User can sort office results by status
 JIRA ID - ZEUS-549 - User can sort office results by FID
 JIRA ID - ZEUS-553 - User cna sort office results by type
+JIRA ID - ZEUS-550 - User can sort office results by name
 
 Scenario: Verify the sorting office results by FID
 Meta:
@@ -83,7 +84,7 @@ Examples:
 |1568|FID|1568|
 
 Scenario: Verify the sorting office results by TYPE where the office has multiple types
-Meta:@RunTubati
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -102,3 +103,28 @@ Then the office search results should sort by type which sorted descending order
 Examples:
 |entity|searchBy|fid|
 |113461|FID|113461|
+
+Scenario: Verify Office Results by name
+Meta: @RunTubati
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+
+When the user clicks on the office search results column name
+
+Then the office search results should sort by name which sorted ascending order by office name with fid 3952 from the database
+
+When the user clicks on the office search results column name
+
+Then the office search results should sort by name which sorted descending order by office name with fid 3952 from the database
+
+
+
+Examples:
+|entity|searchBy|fid|
+|3952|FID|3952|

@@ -427,6 +427,24 @@ public class ResultsPage extends AbstractPage {
         }
     }
 
+    public void verifySortOrderByOfficeName(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
+        try {
+            Thread.sleep(1000L);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        List<WebElement> nameList = getDriver().findElements(office_name_locator_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, fid);
+        for (int i=0; i< nameList.size();i++) {
+            try {
+                assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), nameList.get(i).getText());
+            }catch (NullPointerException e){
+                String nullNameList =nameList.get(i).getText();
+                nullNameList=null;
+            }
+        }
+    }
+
     public void clickOnOfficeSearchResultsStatus() {
         attemptClick(office_search_results_status_xpath);
         try {

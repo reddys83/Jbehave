@@ -5,7 +5,6 @@ As a user
 I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-430 - User view list of offices in legal entity
-JIRA ID - ZEUS-550 - User can sort office results by name
 JIRA ID - ZEUS-549 - User can sort office results by FID [Which includes ZEUS - 666]
 JIRA ID - ZEUS-559 - User can open multiple offices in new tabs from results
 
@@ -129,43 +128,6 @@ Then the user should see the option to navigate to the desired office search res
 Examples:
 |entity|searchBy|fid|
 |1038|FID|1038|
-
-Scenario: Verify Office Results by name
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-
-When the user clicks on the office search results column name
-
-Then the user should see the office search results card for the searched legal entity
-|ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
-|3952-5|Croeselaan|Croeselaan 1|Utrecht|Utrecht|Netherlands|Commercial Division, Financial Asset Services, Head Office Branch|active|
-|3952-0|Croeselaan|Croeselaan 1|Utrecht|Utrecht|Netherlands|Head Office|active|
-|3952-10|Financial Markets|SNS Securities, PO Box 727|Amsterdam|Noord Holland|Netherlands|Capital Markets, Representative Office, Treasury Division|active|
-|3952-16|Pettelaarpark|Pettelaarpark 120|'s Hertogenbosch|Noord Brabant|Netherlands|Branch|active|
-|3952-13||PO Box 60|Utrecht|Utrecht|Netherlands|Correspondent Banking|active|
-|3952-15|SNS Securities|SNS Securities, PO Box 235|Amsterdam|Noord Holland|Netherlands|Custodial & Security Services, Representative Office|active|
-
-When the user clicks on the office search results column name
-
-Then the user should see the office search results card for the searched legal entity
-|ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
-|3952-15|SNS Securities|SNS Securities, PO Box 235|Amsterdam|Noord Holland|Netherlands|Custodial & Security Services, Representative Office|active|
-|3952-13||PO Box 60|Utrecht|Utrecht|Netherlands|Correspondent Banking|active|
-|3952-16|Pettelaarpark|Pettelaarpark 120|'s Hertogenbosch|Noord Brabant|Netherlands|Branch|active|
-|3952-10|Financial Markets|SNS Securities, PO Box 727|Amsterdam|Noord Holland|Netherlands|Capital Markets, Representative Office, Treasury Division|active|
-|3952-5|Croeselaan|Croeselaan 1|Utrecht|Utrecht|Netherlands|Commercial Division, Financial Asset Services, Head Office Branch|active|
-|3952-0|Croeselaan|Croeselaan 1|Utrecht|Utrecht|Netherlands|Head Office|active|
-
-
-Examples:
-|entity|searchBy|fid|
-|3952|FID|3952|
 
 Scenario: Navigate through search results and verify pagination
 Meta:
