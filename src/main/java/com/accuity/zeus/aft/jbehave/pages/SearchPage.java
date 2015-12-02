@@ -119,9 +119,11 @@ public class SearchPage extends AbstractPage {
 	}
 
 	public ResultsPage clicksOnSearchIcon() {
-		attemptClick(legalEntity_search_button_id);
-		return new ResultsPage(getDriver(), getPageUrl());
-	}
-
-
+        try {
+            Thread.sleep(1000L);
+            attemptClick(legalEntity_search_button_id);
+            } catch (InterruptedException e) {
+            e.printStackTrace();
+        }  return new ResultsPage(getDriver(), getPageUrl());
+    }
 }

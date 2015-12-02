@@ -10,6 +10,7 @@ public class XqueryMap {
     private HashMap<String, String> queryMap = new HashMap<String, String>();
 
     public XqueryMap(){
+
         queryMap.put("descending order by office fid","sortDescByOfficeFid.xqy");
         queryMap.put("ascending order by office fid", "sortAscByOfficeFid.xqy");
         queryMap.put("descending order by office status","sortDescByOfficeStatus.xqy");
