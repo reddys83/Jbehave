@@ -16,6 +16,7 @@ public class DataSteps extends AbstractSteps {
     ApacheHttpClient apacheHttpClient;
     @Autowired
     Database database;
+    private String selectedCurrency;
 
     @When("the user clicks on the currency tab in the data area")
     public void clickOnCurrencyTab() {
@@ -44,7 +45,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the list of all existing currencies by full name")
     public void verifyCurrencyList() {
-        getDataPage().verifyCurrencyList();
+        getDataPage().verifyCurrencyList(database, apacheHttpClient);
     }
 
     @When("the user starts typing the name of a currency as $curr in the currency input box")
@@ -64,14 +65,16 @@ public class DataSteps extends AbstractSteps {
 
     @When("the user enters the currency <currency> in the typeahead box")
     public void selectCurrencyFromTypeAhead(@Named("currency") String currency) {
+        selectedCurrency = currency;
         getDataPage().selectCurrencyFromTypeAhead(currency);
     }
 
+    /*
     @When("the user enters the currency $currency in the typeahead box")
     public void enterCurrencyInCurrencyTypeAhead(String currency) {
         getDataPage().selectCurrencyFromTypeAhead(currency);
     }
-
+    */
     @Then("the user should see the currency iso code value as <isoCode>")
     public void verifyCurrencyIsoCode(@Named("isoCode") String isoCode) {
         getDataPage().verifyCurrencyIsoCode(isoCode);
@@ -97,9 +100,9 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCurrencyQuantity(quantity);
     }
 
-    @Then("the user should see the country list box displayed")
-    public void verifyCountryListBoxIsDisplayed() {
-        getDataPage().verifyCountryListBoxIsDisplayed();
+    @Then("the user should see the country type-ahead displayed")
+    public void verifyCountryTypeAheadAndListBox() {
+        getDataPage().verifyCountryTypeAheadAndListBox();
     }
 
     @When("the user clicks on the choose a country option")
@@ -108,22 +111,17 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the list of all existing countries by full name")
-    public void verifyCountryTypeAheadAndListBox() {
-        getDataPage().verifyCountryTypeAheadAndListBox();
+    public void verifyCountryList() {
+        getDataPage().verifyCountryList(database, apacheHttpClient);
     }
 
-
+    /*
     @Then("the countries list matches the $xqueryName from the database")
      public void verifyCountryListMatchesExpectedList(String xqueryName) {
-         getDataPage().verifyCountryListValues(database, apacheHttpClient, xqueryName);
-     }
-
-    /*
-     @Then("the user should see the country list matching the expected country list and sorted alphabetically")
-     public void verifyCountryListMatchesExpectedList() {
-         getDataPage().verifyCountryListValues();
+         getDataPage().verifyCurrencyList(database, apacheHttpClient, xqueryName);
      }
     */
+
     @When("the user starts typing the name of a country as $word in the country input box")
     public void enterValueInCountryTypeAhead(String word) {
         getDataPage().enterValueInCountryTypeAhead(word);
@@ -134,14 +132,22 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountriesInListBox(countryList);
     }
 
+    /*
     @Then("the user should see the countries in the currency usage as: $currencyCountries")
     public void verifyCountriesCurrencyUsage(ExamplesTable currencyCountries) {
         getDataPage().verifyCountriesCurrencyUsage(currencyCountries);
     }
-
+    */
+    /*
     @Then("the user should see the currency's uses as: $currencyUseTable")
     public void verifyCurrencyUse(ExamplesTable currencyUseTable) {
         getDataPage().verifyCurrencyUse(currencyUseTable);
+    }
+    */
+
+    @Then("the user should see the currency's uses")
+    public void verifyCurrencyUse() {
+        getDataPage().verifyCurrencyUse(database, apacheHttpClient, selectedCurrency);
     }
 
     @Then("the user should not see the currency's uses")
@@ -993,9 +999,5 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyIdentifiersSectionLabels();
     }
 
-    @Then("the user should see the country list matching the expected country list and sorted alphabetically")
-    public void verifyCountryListMatchesExpectedList() {
-        getDataPage().verifyCountryListValues();
-    }
 }
 
