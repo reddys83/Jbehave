@@ -252,4 +252,30 @@ public class SearchResultsSteps extends AbstractSteps{
     public void verifySearchReturned0Results(){
         getResultsPage().verifySearchReturned0Results();
     }
+
+    @When("the user selects the $count results/page in the office results page")
+    public void selectResultsPerPage(@Named("count") String count){
+        getResultsPage().selectResultsPerPage(count);
+    }
+
+    @Then("the user should see 25 results/page selected by default")
+    public void verifyDefaultSelectionResultPerPage() {
+        getResultsPage().verifyDefaultSelectionResultPerPage();
+    }
+
+    @Then("the user verifies number $count of results displayed")
+    public void verifyResultsDisplayedOnPage(@Named("count") String count){
+        getResultsPage().verifyResultsDisplayedOnPage(count);
+    }
+
+    @Then("user is redirected to first page")
+    public void verifyUserRedirected(){
+        getResultsPage().verifyUserRedirected();
+    }
+
+    @Then("the user verifies pagination when reults/page is $count")
+    public void verifyPagination(@Named("count") String count) throws Exception{
+          getResultsPage().verifyPagination(count);
+    }
+
 }

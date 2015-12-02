@@ -11,11 +11,14 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.w3c.dom.Document;
 
 import java.util.*;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class ResultsPage extends AbstractPage {
@@ -60,7 +63,7 @@ public class ResultsPage extends AbstractPage {
     private By legalEntity_search_results_xpath = By.xpath("//*[@id='search-results-items']/li");
     private By office_total_search_results_count_xpath = By.xpath("//*[@class='search-results-module']//span[3]");
     private By office_current_page_search_results_count_xpath = By.xpath("//*[@id='subEntityList-list']//tbody/tr");
-    private By office_search_results_current_page_xpath = By.className("current-page");
+//    private By office_search_results_current_page_xpath = By.className("current-page");
     private By office_header_counter_xpath = By.xpath("//*[@id='subEntityList-header']//p");
     private By office_footer_counter_xpath = By.xpath("//*[@id='subEntityList-footer']//p");
     private By office_search_results_last_page_xpath = By.xpath("//*[@id='pages-navigation-list']/li[8]");
@@ -82,6 +85,13 @@ public class ResultsPage extends AbstractPage {
 
     protected WebDriver webDriver;
     private By office_search_results_0_results_xpath = By.xpath("//*[@class='search-results-module']/div/p");
+    private String office_search_results_per_page_id = "count-";
+    private By office_search_deault_results_per_page_id = By.id("count-25");
+    private By office_search_results_header_xpath = By.xpath("//*[@id='subEntityList-summary']/div/div/div/p/span[2]");
+    private By office_search_results_displayed_body_xpath = By.xpath("//*[@id='content']/div/ul/li");
+    private By office_search_results_current_page_xpath = By.xpath(".//*[@id='pages-navigation-list']/li[2]");
+    private By office_search_results_fetched_xpath = By.xpath(".//*[@id='subEntityList-summary']/div/div/div/p/span[3]");
+
 
     public ResultsPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -504,5 +514,53 @@ public class ResultsPage extends AbstractPage {
 
     public void verifySearchReturned0Results() {
         assertEquals("Your search returned 0 results.", getDriver().findElement(office_search_results_0_results_xpath).getText());
+    }
+
+    public void selectResultsPerPage(String count) {
+        attemptClick(By.id(office_search_results_per_page_id + count));
+    }
+
+    public void verifyDefaultSelectionResultPerPage(){
+        String className = getDriver().findElement(office_search_deault_results_per_page_id).getAttribute("class");
+        assertEquals("selected", className);
+    }
+
+    public void verifyResultsDisplayedOnPage(String count){
+        try {
+            Thread.sleep(1000L);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        String resultsDisplayed = getDriver().findElement(office_search_results_header_xpath).getText();
+        assertEquals(count, resultsDisplayed);
+        List<WebElement> resultsDisplayedTable =  getDriver().findElement(office_search_results_displayed_body_xpath).findElements(By.tagName("tr"));
+        String resultCountDisplayed = Integer.toString(resultsDisplayedTable.size() - 1);
+        junit.framework.Assert.assertEquals(resultCountDisplayed, count);
+
+    }
+
+    public void verifyUserRedirected(){
+        try {
+            Thread.sleep(1000L);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        String currentPage = getDriver().findElement(office_search_results_current_page_xpath).getAttribute("class");
+        junit.framework.Assert.assertEquals("current-page",currentPage);
+    }
+
+    public void verifyPagination(String count)throws Exception{
+            String totalResultsfetched = getDriver().findElement(office_search_results_fetched_xpath).getText();
+            String resultsDisplayed = getDriver().findElement(office_search_results_header_xpath).getText();
+            int totalRecords = Integer.parseInt(totalResultsfetched);
+            int resultOnPage = Integer.parseInt(resultsDisplayed);
+            int noOfPages = totalRecords / resultOnPage;
+            String lastPageValue = getDriver().findElement(office_search_results_last_page_xpath).getText();
+            int difference = (Integer.parseInt(lastPageValue)) - noOfPages;
+            String diff = Integer.toString(difference);
+            if (diff.equalsIgnoreCase("0") || diff.equalsIgnoreCase("1"))
+                System.out.println("Pagination working as expected");
+            else
+                throw new Exception("Pagination has failed");
     }
 }
