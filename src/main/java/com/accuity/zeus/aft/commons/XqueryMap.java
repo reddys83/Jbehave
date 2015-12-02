@@ -23,6 +23,8 @@ public class XqueryMap {
         queryMap.put("foreign offices list", "getForeignOfficesList.xqy");
         queryMap.put("currency list", "getCurrencyList.xqy");
         queryMap.put("currency uses", "getCurrencyUses.xqy");
+        queryMap.put("ascending order by office name", "sortAscByOfficeName.xqy");
+        queryMap.put("descending order by office name","sortDescByOfficeName.xqy");
     }
 
     public String getXquery(String key){
