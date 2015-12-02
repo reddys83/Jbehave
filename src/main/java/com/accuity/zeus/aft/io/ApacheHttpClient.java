@@ -40,7 +40,7 @@ public class ApacheHttpClient {
         client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 
       //  HttpMethod method = new GetMethod(utils.constructURL(database.getScheme(), database.getHost(), database.getPort(), folderPath) + "/" + xquery);
-        HttpMethod method = new GetMethod(utils.constructURL(database.getScheme(), database.getHost(), database.getPort()) + "/search/v0.2/qa/" + xquery);
+        HttpMethod method = new GetMethod(utils.constructURL(database.getScheme(), database.getHost(), database.getPort(), database.getPath(), xquery));
         try {
             client.executeMethod(method);
             document = new XmlDocument().convertFromString(method.getResponseBodyAsString());
@@ -76,6 +76,4 @@ public class ApacheHttpClient {
         method.releaseConnection();
         return document;
     }
-
-
 }

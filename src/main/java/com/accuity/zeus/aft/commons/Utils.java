@@ -45,11 +45,14 @@ public class Utils {
         return setToReturn;
     }
 
-    public String constructURL(String scheme, String host, int port){
+    public String constructURL(String scheme, String host, int port, String path, String xquery){
         URIBuilder builder = new URIBuilder();
-
+        XqueryMap xqueryMap = new XqueryMap();
         try {
-            return builder.setScheme(scheme).setHost(host).setPort(port).build().toString();
+            return builder.setScheme(scheme)
+                    .setHost(host)
+                    .setPort(port)
+                    .setPath(path + xqueryMap.getXquery(xquery)).build().toString();
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return null;

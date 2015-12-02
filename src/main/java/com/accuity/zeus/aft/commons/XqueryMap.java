@@ -14,7 +14,7 @@ public class XqueryMap {
         queryMap.put("ascending order by office fid", "sortAscByOfficeFid.xqy");
         queryMap.put("descending order by office status","sortDescByOfficeStatus.xqy");
         queryMap.put("ascending order by office status", "sortAscByOfficeStatus.xqy");
-        queryMap.put("list of countries","listOfCountries.xqy");
+        queryMap.put("country list","getCountryList.xqy");
         queryMap.put("ascending order by office type","sortAscByOfficeTypes.xqy");
         queryMap.put("descending order by office type","sortDescByOfficeTypes.xqy");
         queryMap.put("domestic offices list", "getDomesticOfficesList.xqy");

@@ -25,8 +25,8 @@ public class DataPage extends AbstractPage {
     private By currency_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li");
     private By country_tab_xpath=By.xpath("//*[@id='data-navbar']/ul/li[2]");
     private By area_tab_id=By.id("area-nav");
-    private By currency_label_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
-    private By currency_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
+    private By labels_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
+    private By currency_country_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private By legalEntity_tab_id = By.id("legalEntity-nav");
     private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
@@ -264,13 +264,23 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCurrencyList(Database database, ApacheHttpClient apacheHttpClient) {
-        assertEquals(getDriver().findElement(currency_label_xpath).getText(), "CURRENCY");
-        List<WebElement> currencyList = getDriver().findElements(currency_list_xpath);
+        assertEquals(getDriver().findElement(labels_xpath).getText(), "CURRENCY");
+        List<WebElement> currencyList = getDriver().findElements(currency_country_list_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse("currency list", database);
-        for (int i = 0; i < currencyList.size(); i++) {
+        for (int i = 0; i < document.getElementsByTagName("name").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), currencyList.get(i).getText());
         }
     }
+
+    public void verifyCountryList(Database database, ApacheHttpClient apacheHttpClient){
+        assertEquals(getDriver().findElement(labels_xpath).getText(), "COUNTRY");
+        List<WebElement> countryList = getDriver().findElements(currency_country_list_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse("country list", database);
+        for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), countryList.get(i).getText().trim());
+        }
+    }
+
 
     public void enterCurrency(String curr) {
         currencySearchString = curr;
@@ -283,7 +293,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCurrencyDropDownMatchesSearchString() {
-        List<WebElement> currencyList = getDriver().findElements(currency_list_xpath);
+        List<WebElement> currencyList = getDriver().findElements(currency_country_list_xpath);
         for(int i=0; i<currencyList.size(); i++){
             assertTrue(currencyList.get(i).getText().toLowerCase().contains(currencySearchString.toLowerCase()));
         }
@@ -351,7 +361,6 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCountryListBoxIsDisplayed()   {
-
         assertTrue(getDriver().findElement(country_listBox_xpath).isDisplayed());
     }
 
@@ -369,7 +378,6 @@ public class DataPage extends AbstractPage {
         assertFalse(getDriver().findElement(country_listBox_xpath).getText().isEmpty());
 
     }
-
 
     //=CHAR(34)&A1&CHAR(34)&","
     public void verifyCountryListValues(Database database, ApacheHttpClient apacheHttpClient, String xqueryName) {
@@ -407,21 +415,6 @@ public class DataPage extends AbstractPage {
             }
         }
     }*/
-
-    public void verifyCountryListValues() {
-        List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listBox_value_xpath).getText().split("\n")));
-        assertTrue(DataManagementAppVals.expCountryListVal.size() == retCountryListVal.size());
-        for (int i = 0; i <=DataManagementAppVals.expCountryListVal.size()-1; i++) {
-            if (retCountryListVal.get(i).equals(DataManagementAppVals.expCountryListVal.get(i))) {
-                continue;
-            }
-            else {
-                System.out.println("The returned country list has the value " + retCountryListVal.get(i) + " but the expected country list has the value " + DataManagementAppVals.expCountryListVal.get(i));
-                assertTrue(false);
-                break;
-            }
-        }
-    }
 
     public void enterValueInCountryTypeAhead(String word) {
         getDriver().findElement(country_type_ahead_xpath).sendKeys(word);
@@ -467,8 +460,8 @@ public class DataPage extends AbstractPage {
     */
     public void verifyCurrencyUse(Database database, ApacheHttpClient apacheHttpClient, String selectedCurrency) {
         verifyCurrencyUseTableHeaders();
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "currency uses", "fid", selectedCurrency);
-        for(int i=0; i<getDriver().findElements(currency_use_table_rows_xpath).size(); i++){
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "currency uses", "name", selectedCurrency);
+        for(int i=0; i<document.getElementsByTagName("currencyUse").getLength(); i++){
             assertEquals(document.getElementsByTagName("countryName").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[1]")));
             assertEquals(document.getElementsByTagName("startDate").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[2]")));
             assertEquals(document.getElementsByTagName("endDate").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[3]")));
@@ -498,7 +491,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCurrencyInListBox(ExamplesTable currencyList) {
-        List<WebElement> expCurrencyList = getDriver().findElements(currency_list_xpath);
+        List<WebElement> expCurrencyList = getDriver().findElements(currency_country_list_xpath);
         for (int i=0; i<currencyList.getRowCount();i++){
             assertTrue(currencyList.getRow(i).containsValue(expCurrencyList.get(i).getText()));
         }

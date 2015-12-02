@@ -441,6 +441,11 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyOfficeSearchResultIsResetToPage1() {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals("1", getOfficeSearchResultsCurrentPage());
     }
 

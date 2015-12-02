@@ -100,9 +100,9 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCurrencyQuantity(quantity);
     }
 
-    @Then("the user should see the country list box displayed")
-    public void verifyCountryListBoxIsDisplayed() {
-        getDataPage().verifyCountryListBoxIsDisplayed();
+    @Then("the user should see the country type-ahead displayed")
+    public void verifyCountryTypeAheadAndListBox() {
+        getDataPage().verifyCountryTypeAheadAndListBox();
     }
 
     @When("the user clicks on the choose a country option")
@@ -111,15 +111,16 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the list of all existing countries by full name")
-    public void verifyCountryTypeAheadAndListBox() {
-        getDataPage().verifyCountryTypeAheadAndListBox();
+    public void verifyCountryList() {
+        getDataPage().verifyCountryList(database, apacheHttpClient);
     }
 
-
+    /*
     @Then("the countries list matches the $xqueryName from the database")
      public void verifyCountryListMatchesExpectedList(String xqueryName) {
-         getDataPage().verifyCountryListValues(database, apacheHttpClient, xqueryName);
+         getDataPage().verifyCurrencyList(database, apacheHttpClient, xqueryName);
      }
+    */
 
     @When("the user starts typing the name of a country as $word in the country input box")
     public void enterValueInCountryTypeAhead(String word) {
@@ -998,9 +999,5 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyIdentifiersSectionLabels();
     }
 
-    @Then("the user should see the country list matching the expected country list and sorted alphabetically")
-    public void verifyCountryListMatchesExpectedList() {
-        getDataPage().verifyCountryListValues();
-    }
 }
 
