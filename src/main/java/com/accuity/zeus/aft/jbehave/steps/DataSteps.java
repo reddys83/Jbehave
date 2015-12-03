@@ -999,5 +999,10 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyIdentifiersSectionLabels();
     }
 
+    @When("the user clicks on the area parent <areaParent> link for the selected area")
+    public void clickOnAreaParentLink(@Named("areaParent") String areaParent){
+        getDataPage().clickOnAreaParentLink(areaParent);
+    }
+
 }
 

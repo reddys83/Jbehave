@@ -12,9 +12,9 @@ Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
-Then the user should see the country list box displayed
 When the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
+Then the user should see the country type-ahead displayed
+When the user enters the country <country> in the type-ahead box
 Then the user should see the country iso2 as AF
 And the user should see the country iso3 as AFG
 Then the user should see the default country page and display all info
@@ -117,9 +117,9 @@ Scenario: Verify already selected options are preserved when the page is refresh
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
-Then the user should see the country list box displayed
 When the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
+Then the user should see the country type-ahead displayed
+When the user enters the country <country> in the type-ahead box
 When the user clicks on the country basic info link in the navigation bar
 Then the user should see the basic info for the selected country
 When the user clicks on the country languages link in the navigation bar

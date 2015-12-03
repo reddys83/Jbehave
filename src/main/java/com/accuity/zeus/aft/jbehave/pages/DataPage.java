@@ -93,8 +93,6 @@ public class DataPage extends AbstractPage {
     private String basic_info_label_xpath ="//*[@id='content']//li[2]/table/tbody/tr/th[text()='";
     private String basic_info_label_value_xpath = ".//*[@id='content']//table[@class='vertical']/tbody/tr[th='";
 
-    private By currency_usage_label_xpath = By.xpath("//*[@id='content']/div/h3");
-    private By currency_usage_xpath = By.xpath("//*[@id='content']/div/dl[2]/dd/a");
     private By country_holidays_link_id = By.id("countryHolidays");
     private By country_languages_link_id = By.id("countryLanguages");
     private By country_holiday_label_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//span");
@@ -243,7 +241,6 @@ public class DataPage extends AbstractPage {
     private By searchResults_headOffice_address_xpath =By.xpath(".//*[@id='cssTempFixId']/header//p");
     private By searchResults_header_fid_xpath = By.xpath(".//*[@id='cssTempFixId']/header/table//tr[th='FID']/td");
     private By searchResults_header_tfpid_xpath = By.xpath(".//*[@id='cssTempFixId']/header/table//tr[th='TFPID']/td");
-    private By currency_use_table_rows_xpath = By.xpath("//*[@id='content']//tbody/tr");
 
     @Override
     public String getPageUrl() {
@@ -1333,6 +1330,10 @@ public class DataPage extends AbstractPage {
     public void verifyOfficeSortKey(String officeSortKey) {
         assertEquals("Sort Name",getTextOnPage(office_sort_name_label_xpath));
         assertEquals(officeSortKey,getTextOnPage(office_sort_name_value_xpath));
+    }
+
+    public void clickOnAreaParentLink(String areaParent) {
+        attemptClick(By.linkText(areaParent));
     }
 }
 
