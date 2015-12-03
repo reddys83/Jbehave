@@ -62,7 +62,7 @@ public class ResultsPage extends AbstractPage {
     private By legalEntity_search_results_xpath = By.xpath("//*[@id='search-results-items']/li");
     private By office_total_search_results_count_xpath = By.xpath("//*[@class='search-results-module']//span[3]");
     private By office_current_page_search_results_count_xpath = By.xpath("//*[@id='subEntityList-list']//tbody/tr");
-    //    private By office_search_results_current_page_xpath = By.className("current-page");
+    private By office_search_results_current_page_xpath = By.className("current-page");
     private By office_header_counter_xpath = By.xpath("//*[@id='subEntityList-header']//p");
     private By office_footer_counter_xpath = By.xpath("//*[@id='subEntityList-footer']//p");
     private By office_search_results_last_page_xpath = By.xpath("//*[@id='pages-navigation-list']/li[8]");
@@ -91,8 +91,10 @@ public class ResultsPage extends AbstractPage {
     private By office_search_deault_results_per_page_id = By.id("count-25");
     private By office_search_results_header_xpath = By.xpath("//*[@id='subEntityList-summary']/div/div/div/p/span[2]");
     private By office_search_results_displayed_body_xpath = By.xpath("//*[@id='content']/div/ul/li");
-    private By office_search_results_current_page_xpath = By.xpath(".//*[@id='pages-navigation-list']/li[2]");
+    private By office_search_results_current_page_firstPage_xpath = By.xpath(".//*[@id='pages-navigation-list']/li[2]");
     private By office_search_results_fetched_xpath = By.xpath(".//*[@id='subEntityList-summary']/div/div/div/p/span[3]");
+    private By office_search_results_per_page_selection_id = By.id("count");
+    private int resultsDisplayed;
 
 
     public ResultsPage(WebDriver driver, String urlPrefix) {
@@ -277,7 +279,8 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyOfficeSearchResultsIsPaginated() {
-        if (Integer.parseInt(officeTotalResultsCount()) <= 25) {
+
+        if (Integer.parseInt(officeTotalResultsCount()) <= resultsDisplayed) {
             assertEquals(officeTotalResultsCount(), Integer.toString(getOfficeResultsCountInCurrentPage().size()));
         } else {
             navigateToOfficeLastSearchResultsPage();
@@ -303,7 +306,9 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyOfficeSearchResultsCounter() {
-        if (Integer.parseInt(officeTotalResultsCount()) <= 25) {
+        WebElement resultsPerPageFilterValue = getDriver().findElement(office_search_results_per_page_selection_id).findElement(By.className("selected"));
+        int value = Integer.parseInt(resultsPerPageFilterValue.getText());
+        if (Integer.parseInt(officeTotalResultsCount()) <= resultsDisplayed) {
             if (Integer.parseInt(officeTotalResultsCount()) == 1) {
                 assertEquals("1", Integer.toString(getOfficeResultsCountInCurrentPage().size()));
                 assertEquals("1 to 1 of 1 result", getDriver().findElement(office_header_counter_xpath).getText());
@@ -319,9 +324,12 @@ public class ResultsPage extends AbstractPage {
     }
 
     public String getOfficeResultsCountTillCurrentPage() {
-        return Integer.toString(
+        /*WebElement resultsPerPageFilterValue = getDriver().findElement(office_search_results_per_page_selection_id).findElement(By.className("selected"));
+        int value = Integer.parseInt(resultsPerPageFilterValue.getText());*/
+       return Integer.toString(
                 getOfficeResultsCountInCurrentPage().size() + ((
-                        Integer.parseInt(getDriver().findElement(office_search_results_current_page_xpath).getText()) - 1) * 25));
+                        Integer.parseInt(getDriver().findElement(office_search_results_current_page_xpath).getText()) - 1) * resultsDisplayed));
+//        return getDriver().findElement(office_search_results_header_xpath).getText();
     }
 
     public void navigateToOfficeLastSearchResultsPage() {
@@ -405,14 +413,14 @@ public class ResultsPage extends AbstractPage {
         }
     }
 
-    public void verifySortOrderByOfficeFid(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
+    public void verifySortOrderByOfficeFid(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String searchedEntity) {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, fid);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, "fid", searchedEntity);
         for (int i = 0; i < fidList.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), fidList.get(i).getText());
         }
@@ -426,15 +434,15 @@ public class ResultsPage extends AbstractPage {
         attemptClick(office_type_filter_domestic_id);
     }
 
-    public void verifySortOrderByOfficeType(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
+    public void verifySortOrderByOfficeType(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String searchedEntity) {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         List<WebElement> typeList = getDriver().findElements(office_type_locator_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, fid);
-        for (int i = 0; i < typeList.size(); i++) {
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, "fid", searchedEntity);
+        for (int i=0; i< typeList.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), typeList.get(i).getText());
         }
     }
@@ -446,8 +454,8 @@ public class ResultsPage extends AbstractPage {
             e.printStackTrace();
         }
         List<WebElement> nameList = getDriver().findElements(office_name_locator_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, fid);
-        for (int i = 0; i < nameList.size(); i++) {
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, "fid", fid);
+        for (int i=0; i< nameList.size();i++) {
             try {
                 assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), nameList.get(i).getText());
             } catch (NullPointerException e) {
@@ -476,6 +484,11 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyOfficeSearchResultIsResetToPage1() {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals("1", getOfficeSearchResultsCurrentPage());
     }
 
@@ -486,7 +499,7 @@ public class ResultsPage extends AbstractPage {
             e.printStackTrace();
         }
         List<WebElement> status = getDriver().findElements(office_search_results_status_col_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "ascending order by office status", searchedEntity);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "ascending order by office status", "fid", searchedEntity);
         for (int i = 0; i < status.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), status.get(i).getText());
         }
@@ -499,7 +512,7 @@ public class ResultsPage extends AbstractPage {
             e.printStackTrace();
         }
         List<WebElement> status = getDriver().findElements(office_search_results_status_col_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "descending order by office status", searchedEntity);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "descending order by office status", "fid", searchedEntity);
         for (int i = 0; i < status.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), status.get(i).getText());
         }
@@ -513,7 +526,7 @@ public class ResultsPage extends AbstractPage {
         }
         assertTrue(getDriver().findElement(office_type_filter_domestic_selected_xpath).isDisplayed());
         List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "domestic offices list", searchedEntity);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "domestic offices list", "fid", searchedEntity);
         for (int i = 0; i < fidList.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), fidList.get(i).getText());
         }
@@ -527,7 +540,7 @@ public class ResultsPage extends AbstractPage {
         }
         assertTrue(getDriver().findElement(office_type_filter_foreign_selected_xpath).isDisplayed());
         List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "foreign offices list", searchedEntity);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "foreign offices list", "fid", searchedEntity);
         for (int i = 0; i < fidList.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), fidList.get(i).getText());
         }
@@ -543,11 +556,13 @@ public class ResultsPage extends AbstractPage {
 
 
     public void selectResultsPerPage(String count) {
+        resultsDisplayed = Integer.parseInt(count);
         attemptClick(By.id(office_search_results_per_page_id + count));
     }
 
     public void verifyDefaultSelectionResultPerPage() {
         String className = getDriver().findElement(office_search_deault_results_per_page_id).getAttribute("class");
+        resultsDisplayed = 25;
         assertEquals("selected", className);
     }
 
@@ -567,11 +582,11 @@ public class ResultsPage extends AbstractPage {
 
     public void verifyUserRedirected() {
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String currentPage = getDriver().findElement(office_search_results_current_page_xpath).getAttribute("class");
+        String currentPage = getDriver().findElement(office_search_results_current_page_firstPage_xpath).getAttribute("class");
         junit.framework.Assert.assertEquals("current-page", currentPage);
     }
 
@@ -591,8 +606,8 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyMultipleOfficeTypesAlphabetically(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
-        WebElement multipleOfficeTypes = getDriver().findElement(By.xpath(office_search_results_select_officeTypes_xpath + fid + "']/td[7]"));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, fid);
+        WebElement multipleOfficeTypes = getDriver().findElement(By.xpath(office_search_results_select_officeTypes_xpath+fid + "']/td[7]"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, "fid", fid);
         assertEquals(document.getElementsByTagName("offices").item(0).getTextContent(), multipleOfficeTypes.getText());
     }
 }

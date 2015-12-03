@@ -64,16 +64,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-Then the user should see the countries in the currency usage as:
-|COUNTRIES|
-|South Africa|
-|Namibia|
-
-And the user should see the currency's uses as:
-|COUNTRY|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
-|ZAF|1980-01-01||True||Active|
-|NAM|1980-01-01|1993-09-29|True|NAD|Inactive|
-
+Then the user should see the currency's uses
 When the user clicks on the country <currencyUsageCountry> in the currency usage
 Then the user should see the default country page and display all info
 
@@ -89,18 +80,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-Then the user should see the countries in the currency usage as:
-|COUNTRIES|
-|Curaçao|
-|Sint Maarten|
-|Bonaire, Sint Eustatius and Saba|
-
-And the user should see the currency's uses as:
-|COUNTRY|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
-|CUW|1980-01-01||True||Active|
-|SXM|1980-01-01||True||Active|
-|BES|1980-01-01|2010-12-31|True|USD|Inactive|
-
+Then the user should see the currency's uses
 When the user clicks on the country iso3 BES in the currency usage
 Then the user should see the country iso3 as BES
 And the user should see the default country page and display all info
@@ -128,11 +108,8 @@ Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
-And the user enters the currency Rand in the typeahead box
-Then the user should see the currency's uses as:
-|COUNTRY|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
-|ZAF|1980-01-01||True||Active|
-|NAM|1980-01-01|1993-09-29|True|NAD|Inactive|
+And the user enters the currency <currency> in the typeahead box
+Then the user should see the currency's uses
 When the user clicks on the replaced by currency NAD
 Then the user should see the currency iso code value as <isoCode>
 And the user should see the currency name value as <name>
@@ -141,5 +118,5 @@ And the user should see the currency unit value as <unit>
 And the user should see the currency quantity value as <quantity>
 
 Examples:
-|isoCode|name|abbr|unit|quantity|
-|NAD|Namibia Dollar|N$|Cents|100|
+|isoCode|name|abbr|unit|quantity|currency|
+|NAD|Namibia Dollar|N$|Cents|100|Rand|

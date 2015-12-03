@@ -12,7 +12,7 @@ Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
-Then the user should see the country list box displayed
+Then the user should see the country type-ahead displayed
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 Then the user should see the default country page and display all info
@@ -31,7 +31,7 @@ Scenario: Verify Country holiday data. SEPA = False
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
-Then the user should see the country list box displayed
+Then the user should see the country type-ahead displayed
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the country regions link in the navigation bar

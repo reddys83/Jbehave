@@ -10,8 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 
@@ -27,8 +25,8 @@ public class DataPage extends AbstractPage {
     private By currency_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li");
     private By country_tab_xpath=By.xpath("//*[@id='data-navbar']/ul/li[2]");
     private By area_tab_id=By.id("area-nav");
-    private By currency_label_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
-    private By currency_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
+    private By labels_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
+    private By currency_country_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private By legalEntity_tab_id = By.id("legalEntity-nav");
     private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
@@ -95,8 +93,6 @@ public class DataPage extends AbstractPage {
     private String basic_info_label_xpath ="//*[@id='content']//li[2]/table/tbody/tr/th[text()='";
     private String basic_info_label_value_xpath = ".//*[@id='content']//table[@class='vertical']/tbody/tr[th='";
 
-    private By currency_usage_label_xpath = By.xpath("//*[@id='content']/div/h3");
-    private By currency_usage_xpath = By.xpath("//*[@id='content']/div/dl[2]/dd/a");
     private By country_holidays_link_id = By.id("countryHolidays");
     private By country_languages_link_id = By.id("countryLanguages");
     private By country_holiday_label_xpath = By.xpath("//li[contains(h2,'Public Holidays')]//span");
@@ -264,11 +260,24 @@ public class DataPage extends AbstractPage {
         getDriver().findElement(choose_currency_option_xpath).click();
     }
 
-    public void verifyCurrencyList() {
-        assertEquals(getDriver().findElement(currency_label_xpath).getText(), "CURRENCY");
-        List<WebElement> currencyList = getDriver().findElements(currency_list_xpath);
-        assertTrue(currencyList.size() > 0);
+    public void verifyCurrencyList(Database database, ApacheHttpClient apacheHttpClient) {
+        assertEquals(getDriver().findElement(labels_xpath).getText(), "CURRENCY");
+        List<WebElement> currencyList = getDriver().findElements(currency_country_list_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse("currency list", database);
+        for (int i = 0; i < document.getElementsByTagName("name").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), currencyList.get(i).getText());
+        }
     }
+
+    public void verifyCountryList(Database database, ApacheHttpClient apacheHttpClient){
+        assertEquals(getDriver().findElement(labels_xpath).getText(), "COUNTRY");
+        List<WebElement> countryList = getDriver().findElements(currency_country_list_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse("country list", database);
+        for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), countryList.get(i).getText().trim());
+        }
+    }
+
 
     public void enterCurrency(String curr) {
         currencySearchString = curr;
@@ -281,7 +290,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCurrencyDropDownMatchesSearchString() {
-        List<WebElement> currencyList = getDriver().findElements(currency_list_xpath);
+        List<WebElement> currencyList = getDriver().findElements(currency_country_list_xpath);
         for(int i=0; i<currencyList.size(); i++){
             assertTrue(currencyList.get(i).getText().toLowerCase().contains(currencySearchString.toLowerCase()));
         }
@@ -292,6 +301,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void selectCurrencyFromTypeAhead(String currency) {
+
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -348,7 +358,6 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCountryListBoxIsDisplayed()   {
-
         assertTrue(getDriver().findElement(country_listBox_xpath).isDisplayed());
     }
 
@@ -366,7 +375,6 @@ public class DataPage extends AbstractPage {
         assertFalse(getDriver().findElement(country_listBox_xpath).getText().isEmpty());
 
     }
-
 
     //=CHAR(34)&A1&CHAR(34)&","
     public void verifyCountryListValues(Database database, ApacheHttpClient apacheHttpClient, String xqueryName) {
@@ -405,21 +413,6 @@ public class DataPage extends AbstractPage {
         }
     }*/
 
-    public void verifyCountryListValues() {
-        List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listBox_value_xpath).getText().split("\n")));
-        assertTrue(DataManagementAppVals.expCountryListVal.size() == retCountryListVal.size());
-        for (int i = 0; i <=DataManagementAppVals.expCountryListVal.size()-1; i++) {
-            if (retCountryListVal.get(i).equals(DataManagementAppVals.expCountryListVal.get(i))) {
-                continue;
-            }
-            else {
-                System.out.println("The returned country list has the value " + retCountryListVal.get(i) + " but the expected country list has the value " + DataManagementAppVals.expCountryListVal.get(i));
-                assertTrue(false);
-                break;
-            }
-        }
-    }
-
     public void enterValueInCountryTypeAhead(String word) {
         getDriver().findElement(country_type_ahead_xpath).sendKeys(word);
     }
@@ -431,6 +424,7 @@ public class DataPage extends AbstractPage {
         }
     }
 
+    /*
     public void verifyCurrencyUse(ExamplesTable currencyUseTable) {
         verifyCurrencyUseTableHeaders();
         for(int i=0; i<currencyUseTable.getRowCount(); i++){
@@ -460,6 +454,19 @@ public class DataPage extends AbstractPage {
             }
        }
     }
+    */
+    public void verifyCurrencyUse(Database database, ApacheHttpClient apacheHttpClient, String selectedCurrency) {
+        verifyCurrencyUseTableHeaders();
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "currency uses", "name", selectedCurrency);
+        for(int i=0; i<document.getElementsByTagName("currencyUse").getLength(); i++){
+            assertEquals(document.getElementsByTagName("countryName").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[1]")));
+            assertEquals(document.getElementsByTagName("startDate").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[2]")));
+            assertEquals(document.getElementsByTagName("endDate").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[3]")));
+            assertEquals(document.getElementsByTagName("primary").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[4]")));
+            assertEquals(document.getElementsByTagName("replacedBy").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[5]")));
+            assertEquals(document.getElementsByTagName("status").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[6]")));
+        }
+    }
 
     public void verifyCurrencyUseTableHeaders() {
             assertEquals(getTextOnPage(currency_use_table_header_xpath).replace("/n", "").replace("/r", ""), "COUNTRY START DATE END DATE PRIMARY REPLACED BY STATUS");
@@ -481,7 +488,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCurrencyInListBox(ExamplesTable currencyList) {
-        List<WebElement> expCurrencyList = getDriver().findElements(currency_list_xpath);
+        List<WebElement> expCurrencyList = getDriver().findElements(currency_country_list_xpath);
         for (int i=0; i<currencyList.getRowCount();i++){
             assertTrue(currencyList.getRow(i).containsValue(expCurrencyList.get(i).getText()));
         }
@@ -721,13 +728,14 @@ public class DataPage extends AbstractPage {
         }
     }
 
+    /*
     public void verifyCountriesCurrencyUsage(ExamplesTable currencyCountries) {
         assertEquals("USAGE", getDriver().findElement(currency_usage_label_xpath).getText());
         for (int i = 0; i<currencyCountries.getRowCount(); i++){
             assertEquals(currencyCountries.getRow(i).get(currencyCountries.getHeaders().get(0)), getDriver().findElements(currency_usage_xpath).get(i).getText());
         }
     }
-
+    */
     public void clickOnCurrencyUsageCountry(String currencyUsageCountry) {
         selectedEntity = currencyUsageCountry;
         attemptClick(By.linkText(currencyUsageCountry));
@@ -1322,6 +1330,10 @@ public class DataPage extends AbstractPage {
     public void verifyOfficeSortKey(String officeSortKey) {
         assertEquals("Sort Name",getTextOnPage(office_sort_name_label_xpath));
         assertEquals(officeSortKey,getTextOnPage(office_sort_name_value_xpath));
+    }
+
+    public void clickOnAreaParentLink(String areaParent) {
+        attemptClick(By.linkText(areaParent));
     }
 }
 

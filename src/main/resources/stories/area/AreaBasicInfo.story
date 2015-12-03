@@ -111,7 +111,14 @@ When the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area parent <areaParent> link for the selected area
-Then the user should see the
+Then the user should see the area's names as:
+|TYPE|VALUE|
+|Full Name|Atchison|
+|Display Name|Atchison|
+
+Examples:
+|country|area|areaParent|
+|USA|Illinois|Atchison|
 
 Scenario: Verify Area basic info with have no link to another area
 Meta:@runThis

@@ -75,17 +75,17 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 Then the user should see 25 results/page selected by default
-And the user verifies number 25 of results displayed
-And the user verifies pagination when reults/page is 25
+Then the user should see the office search results paginated
+And the user should see the offices number of records displayed in the page w.r.t total search results
 When the user selects the 50 results/page in the office results page
-Then the user verifies number 50 of results displayed
-And the user verifies pagination when reults/page is 50
+Then the user should see the office search results paginated
+And the user should see the offices number of records displayed in the page w.r.t total search results
 When the user selects the 100 results/page in the office results page
-Then the user verifies number 100 of results displayed
-And the user verifies pagination when reults/page is 100
+Then the user should see the office search results paginated
+And the user should see the offices number of records displayed in the page w.r.t total search results
 When the user selects the 200 results/page in the office results page
-Then the user verifies number 200 of results displayed
-And the user verifies pagination when reults/page is 200
+Then the user should see the office search results paginated
+And the user should see the offices number of records displayed in the page w.r.t total search results
 When the user navigates to the 4th page on the office search results
 And the user selects the 25 results/page in the office results page
 Then user is redirected to first page

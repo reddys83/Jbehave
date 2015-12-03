@@ -19,10 +19,9 @@ Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
-Then the user should see the country list box displayed
 When the user clicks on the choose a country option
-Then the countries list matches the list of countries from the database
-And the user should see the country list matching the expected country list and sorted alphabetically
+Then the user should see the country type-ahead displayed
+Then the user should see the list of all existing countries by full name
 When the user starts typing the name of a country as et in the country input box
 Then the user should see the countries in the listbox as:
 |COUNTRY|
@@ -34,9 +33,9 @@ Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
-Then the user should see the country list box displayed
 When the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
+Then the user should see the country type-ahead displayed
+When the user enters the country <country> in the type-ahead box
 Then the user should see the country iso2 as AF
 And the user should see the country iso3 as AFG
 When the user clicks on the country basic info link in the navigation bar
