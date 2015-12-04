@@ -56,3 +56,45 @@ Then the user should see the message your search returned 0 results.
 Examples:
 |entity|searchBy|fid|
 |189457|FID|189457|
+
+Narrative:
+As a user
+I want to perform an action
+So that I can achieve a business goal
+JIRA ID - ZEUS-555 - User can change number of office results per page
+
+
+Scenario: Change number of office results per page
+Meta: @OfficeResultsPerPage
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+Then the user should see 25 results/page selected by default
+Then the user should see the office search results paginated
+And the user should see the offices number of records displayed in the page w.r.t total search results
+When the user selects the 50 results/page in the office results page
+Then the user should see the office search results paginated
+And the user should see the offices number of records displayed in the page w.r.t total search results
+When the user selects the 100 results/page in the office results page
+Then the user should see the office search results paginated
+And the user should see the offices number of records displayed in the page w.r.t total search results
+When the user selects the 200 results/page in the office results page
+Then the user should see the office search results paginated
+And the user should see the offices number of records displayed in the page w.r.t total search results
+When the user navigates to the 4th page on the office search results
+And the user selects the 25 results/page in the office results page
+Then user is redirected to first page
+When the user clicks on the office search results status column
+Then the user should see the office search results cards sorted ascending order by office status
+And the user verifies number 25 of results displayed
+
+
+
+Examples:
+|entity|searchBy|fid|
+|1038|FID|1038|
