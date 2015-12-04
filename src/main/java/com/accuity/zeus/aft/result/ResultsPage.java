@@ -306,8 +306,6 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyOfficeSearchResultsCounter() {
-        WebElement resultsPerPageFilterValue = getDriver().findElement(office_search_results_per_page_selection_id).findElement(By.className("selected"));
-        int value = Integer.parseInt(resultsPerPageFilterValue.getText());
         if (Integer.parseInt(officeTotalResultsCount()) <= resultsDisplayed) {
             if (Integer.parseInt(officeTotalResultsCount()) == 1) {
                 assertEquals("1", Integer.toString(getOfficeResultsCountInCurrentPage().size()));
@@ -324,12 +322,9 @@ public class ResultsPage extends AbstractPage {
     }
 
     public String getOfficeResultsCountTillCurrentPage() {
-        /*WebElement resultsPerPageFilterValue = getDriver().findElement(office_search_results_per_page_selection_id).findElement(By.className("selected"));
-        int value = Integer.parseInt(resultsPerPageFilterValue.getText());*/
        return Integer.toString(
                 getOfficeResultsCountInCurrentPage().size() + ((
                         Integer.parseInt(getDriver().findElement(office_search_results_current_page_xpath).getText()) - 1) * resultsDisplayed));
-//        return getDriver().findElement(office_search_results_header_xpath).getText();
     }
 
     public void navigateToOfficeLastSearchResultsPage() {
@@ -369,7 +364,6 @@ public class ResultsPage extends AbstractPage {
         }
     }
 
-
     public void verifyCurrentPageOnSearchResults(String page) {
         try {
             Thread.sleep(1000L);
@@ -404,7 +398,7 @@ public class ResultsPage extends AbstractPage {
         Actions action = new Actions(getDriver());
         WebElement element = getDriver().findElement(By.xpath(office_search_results_select_officeByFid_xpath + officeFid + "')]"));
         action.moveToElement(element);
-        // Rigth click and select the option ' Open in new window'
+        // Right click and select the option ' Open in new window'
         action.contextClick(element).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build().perform();
 
         // Switch to new window
@@ -432,6 +426,11 @@ public class ResultsPage extends AbstractPage {
 
     public void selectOfficeTypeFilterDomestic() {
         attemptClick(office_type_filter_domestic_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void verifySortOrderByOfficeType(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String searchedEntity) {
@@ -580,6 +579,7 @@ public class ResultsPage extends AbstractPage {
 
     }
 
+    /*
     public void verifyUserRedirected() {
         try {
             Thread.sleep(3000L);
@@ -604,7 +604,7 @@ public class ResultsPage extends AbstractPage {
         else
             throw new Exception("Pagination has failed");
     }
-
+    */
     public void verifyMultipleOfficeTypesAlphabetically(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
         WebElement multipleOfficeTypes = getDriver().findElement(By.xpath(office_search_results_select_officeTypes_xpath+fid + "']/td[7]"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, "fid", fid);
