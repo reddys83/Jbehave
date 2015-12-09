@@ -94,7 +94,7 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_current_page_firstPage_xpath = By.xpath(".//*[@id='pages-navigation-list']/li[2]");
     private By office_search_results_fetched_xpath = By.xpath(".//*[@id='subEntityList-summary']/div/div/div/p/span[3]");
     private By office_search_results_per_page_selection_id = By.id("count");
-    private int resultsDisplayed;
+    private int resultsDisplayed = 25;
 
 
     public ResultsPage(WebDriver driver, String urlPrefix) {
@@ -547,6 +547,11 @@ public class ResultsPage extends AbstractPage {
 
     public void selectOfficeTypeFilterForeign() {
         attemptClick(office_type_filter_foreign_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void verifySearchReturned0Results() {
