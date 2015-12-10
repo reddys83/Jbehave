@@ -276,21 +276,4 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifyDefaultSelectionResultPerPage();
     }
 
-    /*
-    @Then("the user verifies number $count of results displayed")
-    public void verifyResultsDisplayedOnPage(@Named("count") String count){
-        getResultsPage().verifyResultsDisplayedOnPage(count);
-    }
-
-
-    @Then("user is redirected to first page")
-    public void verifyUserRedirected(){
-        getResultsPage().verifyUserRedirected();
-    }
-
-    @Then("the user verifies pagination when reults/page is $count")
-    public void verifyPagination(@Named("count") String count) throws Exception{
-          getResultsPage().verifyPagination(count);
-    }
-*/
 }

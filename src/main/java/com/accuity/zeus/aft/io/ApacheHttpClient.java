@@ -39,7 +39,6 @@ public class ApacheHttpClient {
         authPrefs.add(AuthPolicy.DIGEST);
         client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 
-      //  HttpMethod method = new GetMethod(utils.constructURL(database.getScheme(), database.getHost(), database.getPort(), folderPath) + "/" + xquery);
         HttpMethod method = new GetMethod(utils.constructURL(database.getScheme(), database.getHost(), database.getPort(), database.getPath(), xquery));
         try {
             client.executeMethod(method);
@@ -61,7 +60,6 @@ public class ApacheHttpClient {
         authPrefs.add(AuthPolicy.DIGEST);
         client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 
-        //  HttpMethod method = new GetMethod(utils.constructURL(database.getScheme(), database.getHost(), database.getPort(), folderPath) + "/" + xquery);
         HttpMethod method = new GetMethod(utils.constructURLWithParameter(database.getScheme(), database.getHost(), database.getPort(), database.getPath(), xquery, param, paramValue));
         try {
             client.executeMethod(method);

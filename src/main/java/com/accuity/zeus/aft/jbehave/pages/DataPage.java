@@ -1,8 +1,6 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
 
-import com.accuity.zeus.aft.commons.DataManagementAppVals;
-import com.accuity.zeus.aft.commons.XqueryMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.model.ExamplesTable;
@@ -14,8 +12,6 @@ import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -461,7 +457,6 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-       // assertEquals(selectedCountry, getDriver().findElement(country_name_selected_xpath).getText());
         assertEquals("BASIC INFO", getDriver().findElement(basic_info_xpath).getText());
     }
 

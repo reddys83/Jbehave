@@ -84,16 +84,11 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_type_xpath = By.xpath("//tr/th[@id='type']");
     private By office_search_results_status_col_xpath = By.xpath("//tr/td[8]");
 
-
-    protected WebDriver webDriver;
     private By office_search_results_0_results_xpath = By.xpath("//*[@class='search-results-module']/div/p");
     private String office_search_results_per_page_id = "count-";
     private By office_search_deault_results_per_page_id = By.id("count-25");
     private By office_search_results_header_xpath = By.xpath("//*[@id='subEntityList-summary']/div/div/div/p/span[2]");
     private By office_search_results_displayed_body_xpath = By.xpath("//*[@id='content']/div/ul/li");
-    private By office_search_results_current_page_firstPage_xpath = By.xpath(".//*[@id='pages-navigation-list']/li[2]");
-    private By office_search_results_fetched_xpath = By.xpath(".//*[@id='subEntityList-summary']/div/div/div/p/span[3]");
-    private By office_search_results_per_page_selection_id = By.id("count");
     private int resultsDisplayed = 25;
 
 
@@ -584,32 +579,6 @@ public class ResultsPage extends AbstractPage {
 
     }
 
-    /*
-    public void verifyUserRedirected() {
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        String currentPage = getDriver().findElement(office_search_results_current_page_firstPage_xpath).getAttribute("class");
-        junit.framework.Assert.assertEquals("current-page", currentPage);
-    }
-
-    public void verifyPagination(String count) throws Exception {
-        String totalResultsfetched = getDriver().findElement(office_search_results_fetched_xpath).getText();
-        String resultsDisplayed = getDriver().findElement(office_search_results_header_xpath).getText();
-        int totalRecords = Integer.parseInt(totalResultsfetched);
-        int resultOnPage = Integer.parseInt(resultsDisplayed);
-        int noOfPages = totalRecords / resultOnPage;
-        String lastPageValue = getDriver().findElement(office_search_results_last_page_xpath).getText();
-        int difference = (Integer.parseInt(lastPageValue)) - noOfPages;
-        String diff = Integer.toString(difference);
-        if (diff.equalsIgnoreCase("0") || diff.equalsIgnoreCase("1"))
-            System.out.println("Pagination working as expected");
-        else
-            throw new Exception("Pagination has failed");
-    }
-    */
     public void verifyMultipleOfficeTypesAlphabetically(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
         WebElement multipleOfficeTypes = getDriver().findElement(By.xpath(office_search_results_select_officeTypes_xpath+fid + "']/td[7]"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, "fid", fid);

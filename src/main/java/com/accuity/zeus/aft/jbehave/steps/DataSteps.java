@@ -69,12 +69,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().selectCurrencyFromTypeAhead(currency);
     }
 
-    /*
-    @When("the user enters the currency $currency in the typeahead box")
-    public void enterCurrencyInCurrencyTypeAhead(String currency) {
-        getDataPage().selectCurrencyFromTypeAhead(currency);
-    }
-    */
     @Then("the user should see the currency iso code value as <isoCode>")
     public void verifyCurrencyIsoCode(@Named("isoCode") String isoCode) {
         getDataPage().verifyCurrencyIsoCode(isoCode);
@@ -115,12 +109,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryList(database, apacheHttpClient);
     }
 
-    /*
-    @Then("the countries list matches the $xqueryName from the database")
-     public void verifyCountryListMatchesExpectedList(String xqueryName) {
-         getDataPage().verifyCurrencyList(database, apacheHttpClient, xqueryName);
-     }
-    */
 
     @When("the user starts typing the name of a country as $word in the country input box")
     public void enterValueInCountryTypeAhead(String word) {
@@ -131,19 +119,6 @@ public class DataSteps extends AbstractSteps {
     public void verifyCountriesInListBox(ExamplesTable countryList) {
         getDataPage().verifyCountriesInListBox(countryList);
     }
-
-    /*
-    @Then("the user should see the countries in the currency usage as: $currencyCountries")
-    public void verifyCountriesCurrencyUsage(ExamplesTable currencyCountries) {
-        getDataPage().verifyCountriesCurrencyUsage(currencyCountries);
-    }
-    */
-    /*
-    @Then("the user should see the currency's uses as: $currencyUseTable")
-    public void verifyCurrencyUse(ExamplesTable currencyUseTable) {
-        getDataPage().verifyCurrencyUse(currencyUseTable);
-    }
-    */
 
     @Then("the user should see the currency's uses")
     public void verifyCurrencyUse() {
