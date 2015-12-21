@@ -70,7 +70,6 @@ public class Utils {
                          .setPort(port)
                          .setPath(path + xqueryMap.getXquery(xquery))
                          .addParameter( paramMap.getParam(param), paramValue).build().toString();
-         //  return builder.setScheme(scheme).setHost(host).setPort(port).addParameter("fid", fid).build().toString();
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return null;

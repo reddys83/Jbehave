@@ -84,17 +84,12 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_type_xpath = By.xpath("//tr/th[@id='type']");
     private By office_search_results_status_col_xpath = By.xpath("//tr/td[8]");
 
-
-    protected WebDriver webDriver;
     private By office_search_results_0_results_xpath = By.xpath("//*[@class='search-results-module']/div/p");
     private String office_search_results_per_page_id = "count-";
     private By office_search_deault_results_per_page_id = By.id("count-25");
     private By office_search_results_header_xpath = By.xpath("//*[@id='subEntityList-summary']/div/div/div/p/span[2]");
     private By office_search_results_displayed_body_xpath = By.xpath("//*[@id='content']/div/ul/li");
-    private By office_search_results_current_page_firstPage_xpath = By.xpath(".//*[@id='pages-navigation-list']/li[2]");
-    private By office_search_results_fetched_xpath = By.xpath(".//*[@id='subEntityList-summary']/div/div/div/p/span[3]");
-    private By office_search_results_per_page_selection_id = By.id("count");
-    private int resultsDisplayed;
+    private int resultsDisplayed = 25;
 
 
     public ResultsPage(WebDriver driver, String urlPrefix) {
@@ -306,8 +301,6 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyOfficeSearchResultsCounter() {
-        WebElement resultsPerPageFilterValue = getDriver().findElement(office_search_results_per_page_selection_id).findElement(By.className("selected"));
-        int value = Integer.parseInt(resultsPerPageFilterValue.getText());
         if (Integer.parseInt(officeTotalResultsCount()) <= resultsDisplayed) {
             if (Integer.parseInt(officeTotalResultsCount()) == 1) {
                 assertEquals("1", Integer.toString(getOfficeResultsCountInCurrentPage().size()));
@@ -324,12 +317,9 @@ public class ResultsPage extends AbstractPage {
     }
 
     public String getOfficeResultsCountTillCurrentPage() {
-        /*WebElement resultsPerPageFilterValue = getDriver().findElement(office_search_results_per_page_selection_id).findElement(By.className("selected"));
-        int value = Integer.parseInt(resultsPerPageFilterValue.getText());*/
        return Integer.toString(
                 getOfficeResultsCountInCurrentPage().size() + ((
                         Integer.parseInt(getDriver().findElement(office_search_results_current_page_xpath).getText()) - 1) * resultsDisplayed));
-//        return getDriver().findElement(office_search_results_header_xpath).getText();
     }
 
     public void navigateToOfficeLastSearchResultsPage() {
@@ -369,7 +359,6 @@ public class ResultsPage extends AbstractPage {
         }
     }
 
-
     public void verifyCurrentPageOnSearchResults(String page) {
         try {
             Thread.sleep(1000L);
@@ -404,7 +393,7 @@ public class ResultsPage extends AbstractPage {
         Actions action = new Actions(getDriver());
         WebElement element = getDriver().findElement(By.xpath(office_search_results_select_officeByFid_xpath + officeFid + "')]"));
         action.moveToElement(element);
-        // Rigth click and select the option ' Open in new window'
+        // Right click and select the option ' Open in new window'
         action.contextClick(element).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build().perform();
 
         // Switch to new window
@@ -432,6 +421,11 @@ public class ResultsPage extends AbstractPage {
 
     public void selectOfficeTypeFilterDomestic() {
         attemptClick(office_type_filter_domestic_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void verifySortOrderByOfficeType(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String searchedEntity) {
@@ -548,6 +542,11 @@ public class ResultsPage extends AbstractPage {
 
     public void selectOfficeTypeFilterForeign() {
         attemptClick(office_type_filter_foreign_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void verifySearchReturned0Results() {
@@ -578,31 +577,6 @@ public class ResultsPage extends AbstractPage {
         String resultCountDisplayed = Integer.toString(resultsDisplayedTable.size() - 1);
         junit.framework.Assert.assertEquals(resultCountDisplayed, count);
 
-    }
-
-    public void verifyUserRedirected() {
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        String currentPage = getDriver().findElement(office_search_results_current_page_firstPage_xpath).getAttribute("class");
-        junit.framework.Assert.assertEquals("current-page", currentPage);
-    }
-
-    public void verifyPagination(String count) throws Exception {
-        String totalResultsfetched = getDriver().findElement(office_search_results_fetched_xpath).getText();
-        String resultsDisplayed = getDriver().findElement(office_search_results_header_xpath).getText();
-        int totalRecords = Integer.parseInt(totalResultsfetched);
-        int resultOnPage = Integer.parseInt(resultsDisplayed);
-        int noOfPages = totalRecords / resultOnPage;
-        String lastPageValue = getDriver().findElement(office_search_results_last_page_xpath).getText();
-        int difference = (Integer.parseInt(lastPageValue)) - noOfPages;
-        String diff = Integer.toString(difference);
-        if (diff.equalsIgnoreCase("0") || diff.equalsIgnoreCase("1"))
-            System.out.println("Pagination working as expected");
-        else
-            throw new Exception("Pagination has failed");
     }
 
     public void verifyMultipleOfficeTypesAlphabetically(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {

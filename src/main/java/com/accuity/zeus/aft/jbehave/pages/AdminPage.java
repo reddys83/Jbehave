@@ -1,12 +1,15 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
-import com.accuity.zeus.aft.commons.DataManagementAppVals;
 import com.accuity.zeus.aft.commons.Utils;
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.w3c.dom.Document;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -38,19 +41,12 @@ public class AdminPage extends AbstractPage{
         return null;
     }
 
-    public void verifyTaxonomiesList() {
+    public void verifyTaxonomiesList(Database database, ApacheHttpClient apacheHttpClient) {
         assertEquals("TAXONOMIES", getDriver().findElement(taxonomy_label_xpath).getText());
         List<WebElement> retTaxonomiesListVal = getDriver().findElements(taxonomies_listbox_xpath);
-        assertTrue(DataManagementAppVals.expTaxonomiesListVal.size() == retTaxonomiesListVal.size());
-        for (int i = 0; i <=DataManagementAppVals.expTaxonomiesListVal.size()-1; i++) {
-            if (retTaxonomiesListVal.get(i).getText().equals(DataManagementAppVals.expTaxonomiesListVal.get(i))) {
-                continue;
-            }
-            else {
-                System.out.println("The returned taxonomies list has the value " + retTaxonomiesListVal.get(i) + " but the expected taxonomy list has the value " + DataManagementAppVals.expTaxonomiesListVal.get(i));
-                assertTrue(false);
-                break;
-            }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse("taxonomies list", database);
+        for (int i = 0; i < document.getElementsByTagName("lookupName").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), retTaxonomiesListVal.get(i).getText().trim());
         }
     }
 

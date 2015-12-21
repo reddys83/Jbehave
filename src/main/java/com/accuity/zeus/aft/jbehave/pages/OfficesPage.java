@@ -69,7 +69,6 @@ public class OfficesPage extends AbstractPage {
         }
     }
 
-
     public void verifyOfficesDepartmentTabsInOffice() {
         assertTrue(getDriver().findElement(office_tab_id).isDisplayed());
         assertTrue(getDriver().findElement(office_department_tab_id).isDisplayed());

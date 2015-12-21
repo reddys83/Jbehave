@@ -1,31 +1,40 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AdminSteps extends AbstractSteps{
 
+    @Autowired
+    ApacheHttpClient apacheHttpClient;
+    @Autowired
+    Database database;
+
+
     @Then("the user should see the list of all existing taxonomies by name")
-    public void thenUserShouldSeeListOfAllTaxonomies(){
-        getAdminPage().verifyTaxonomiesList();
+    public void verifyTaxonomiesList(){
+        getAdminPage().verifyTaxonomiesList(database, apacheHttpClient);
     }
 
     @When("the user clicks on the taxonomies tab in the data area")
-    public void whenTheUserClicksOnTheTaxonomiesTab(){
+    public void clickOnTaxonomiesTab(){
         getAdminPage().clickOnTaxonomiesTab();
     }
 
     @When("the user clicks on the choose a taxonomy option")
-    public void whenUserClicksOnChooseTaxonomy(){
+    public void clickOnChooseATaxonomy(){
         getAdminPage().clickOnChooseATaxonomy();
     }
 
     @When("the user starts typing the name of a taxonomy as $taxonomy in the taxonomy input box")
-    public void whenTheUserStartsTypingTaxonomy(@Named("taxonomy") String taxonomy){
+    public void enterTaxonomy(@Named("taxonomy") String taxonomy){
         getAdminPage().enterTaxonomy(taxonomy);
     }
 

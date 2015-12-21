@@ -26,7 +26,7 @@ Then the user should see the drop-down list of the currencies matching the input
 And the user should see the currencies in the listbox as:
 |CURRENCY|
 |afghani|
-|Afghani|
+|Afghani test|
 
 Scenario: Verify no results match
 Given a user is on the search page

@@ -66,7 +66,6 @@ When the user clicks on the legal title in the office headers
 Then the user should see the legal entity's names as:
 |TYPE|VALUE|
 |Legal Title|Bank of America National Association|
-|Former Name|Bank of America National Trust & Savings Association|
 
 Examples:
 |entity|searchBy|fid|officeFid|headOfficeAddress|tfpid|
