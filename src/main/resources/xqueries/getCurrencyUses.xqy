@@ -19,7 +19,7 @@ let $countryName := collection('source-trusted')/country[@resource = $x/place/li
 
 (: let $startDate := fn:concat(functx:day-abbrev-en(xs:date($x/startDate)), ' ', functx:month-abbrev-en(xs:date($x/startDate)), ' ', year-from-date(xs:date($x/startDate))) :)
 
-let $startDateAccuracy = xs:string($x/startDate/@accuracy)
+let $startDateAccuracy := xs:string($x/startDate/@accuracy)
 let $startDate := switch($startDateAccuracy)
         			case "day"   return fn:concat(functx:day-abbrev-en(xs:date($x/startDate)), ' ', functx:month-abbrev-en(xs:date($x/startDate)), ' ', year-from-date(xs:date($x/startDate))) 
         			case "month" return fn:concat(functx:month-abbrev-en(xs:date($x/startDate)), ' ', year-from-date(xs:date($x/startDate))) 
@@ -28,7 +28,7 @@ let $startDate := switch($startDateAccuracy)
         			
 (: let $endDate := fn:concat(functx:day-abbrev-en(xs:date($x/endDate)), ' ', functx:month-abbrev-en(xs:date($x/endDate)), ' ', year-from-date(xs:date($x/endDate))) :)
 
-let $endDateAccuracy = xs:string($x/endDate/@accuracy)
+let $endDateAccuracy := xs:string($x/endDate/@accuracy)
 let $endDate := switch($endDateAccuracy)
         			case "day"   return fn:concat(functx:day-abbrev-en(xs:date($x/endDate)), ' ', functx:month-abbrev-en(xs:date($x/endDate)), ' ', year-from-date(xs:date($x/endDate))) 
         			case "month" return fn:concat(functx:month-abbrev-en(xs:date($x/endDate)), ' ', year-from-date(xs:date($x/endDate))) 
