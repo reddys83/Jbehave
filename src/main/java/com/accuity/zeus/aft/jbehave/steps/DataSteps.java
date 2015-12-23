@@ -983,6 +983,14 @@ public class DataSteps extends AbstractSteps {
     public void clickOnViewHeadOfficeLink(@Named("viewHeadOffice") String viewHeadOffice){
         getDataPage().clickOnViewHeadOfficeLink(viewHeadOffice);
     }
+    
+    @Then("the user should see the office header with <entityName>, <officeAddress>, <officeFid> and <officeTfpid>")
+    public void verifyHeadOfficeHeader(@Named("entityName") String entityName,
+                                       @Named("officeAddress") String officeAddress,
+                                       @Named("officeFid") String officeFid,
+                                       @Named("officeTfpid") String officeTfpid){
+        getDataPage().verifyHeader(entityName, officeAddress, officeFid, officeTfpid);
+    }
 
 }
 
