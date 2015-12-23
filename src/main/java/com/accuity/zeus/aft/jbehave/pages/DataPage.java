@@ -1228,5 +1228,9 @@ public class DataPage extends AbstractPage {
     public void clickOnAreaParentLink(String areaParent) {
         attemptClick(By.linkText(areaParent));
     }
+    
+    public void clickOnViewHeadOfficeLink(String viewHeadOffice) {
+        attemptClick(By.linkText(viewHeadOffice));
+    }
 }
 

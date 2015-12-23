@@ -978,6 +978,11 @@ public class DataSteps extends AbstractSteps {
     public void clickOnAreaParentLink(@Named("areaParent") String areaParent){
         getDataPage().clickOnAreaParentLink(areaParent);
     }
+    
+    @When("the user clicks on the view head office <viewHeadOffice> link for the selected legal entity")
+    public void clickOnViewHeadOfficeLink(@Named("viewHeadOffice") String viewHeadOffice){
+        getDataPage().clickOnViewHeadOfficeLink(viewHeadOffice);
+    }
 
 }
 

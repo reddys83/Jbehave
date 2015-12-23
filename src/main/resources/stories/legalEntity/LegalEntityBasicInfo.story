@@ -6,6 +6,8 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-350 - User can view legal entity's basic info
 JIRA ID - ZEUS-382 - User will see head office address & legal entity title in header of legal entity screen
+JIRA ID - ZEUS-491 - User can follow link to head office from legal entity
+
 
 Scenario: Verify the basic info for legalEntity
 Given a user is on the search page
@@ -106,3 +108,25 @@ Then the user should see the legal entity header with <entity>, <headOfficeAddre
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
 |Bank at Ormond by the Sea|Name|Ormond Beach, Florida, USA|12253||
+
+
+Scenario: Verify the User can follow link to head office from legal entity
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+Then the user should see the message you can search for a legal entity at any time using the header search
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+
+Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
+And the user should see the basic info for selected legal entity
+And the user should see the Head Office of a legal entity as Budapester Strasse 35 Berlin, 10787 Germany(View Head Office)
+And the user clicks on the view head office <viewHeadOffice> link for the selected legal entity
+Then the user should see the office header with <entityName>, <officeAddress>, <officeFid> and <officeTfpid>
+
+Examples:
+|entity|searchBy|headOfficeAddress|fid|tfpid|viewHeadOffice|entityName|officeAddress|officeFid|officeTfpid|
+|1717|FID|Budapester Strasse 35, Berlin, 10787, Germany|1717|20205500|(View Head Office)|Berliner Volksbank eG|Berlin, Germany|1717-0|20205500-0|
