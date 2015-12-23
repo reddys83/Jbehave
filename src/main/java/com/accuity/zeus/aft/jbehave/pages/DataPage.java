@@ -218,11 +218,11 @@ public class DataPage extends AbstractPage {
     private By basic_info_office_type_label_xpath = By.xpath(".//*[@id='content']//li[1]/table[2]/thead/tr/th");
     private By basic_info_office_type_xpath = By.xpath(".//*[@id='content']//li[1]/table[2]/tbody/tr/td");
 
-    private By personnel_label_xpath = By.xpath("//li[h2='Personnel']//h2");
-    private By personnel_type_label_xpath = By.xpath("//li[h2='Personnel']//table/thead//th[1]");
-    private By personnel_value_label_xpath = By.xpath("//li[h2='Personnel']//table/thead//th[2]");
-    private By personnel_type_list_xpath = By.xpath("//li[h2='Personnel']//table/tbody//td[1]");
-    private By personnel_value_list_xpath = By.xpath("//li[h2='Personnel']//table/tbody//td[2]");
+    private By personnel_label_xpath = By.xpath("//li[contains(h1,'Personnel')]/h1/span");
+    private By personnel_type_label_xpath = By.xpath("//li[contains(h1,'Personnel')]//table/thead//th[1]");
+    private By personnel_value_label_xpath = By.xpath("//li[contains(h1,'Personnel')]//table/thead//th[2]");
+    private By personnel_type_list_xpath = By.xpath("//li[contains(h1,'Personnel')]//table/tbody//td[1]");
+    private By personnel_value_list_xpath = By.xpath("//li[contains(h1,'Personnel')]//table/tbody//td[2]");
 
     private By history_label_xpath = By.xpath("//li/h1/span[text()='History']");
     private By history_message_xpath = By.xpath("//li[contains(h1,'History')]/p");
