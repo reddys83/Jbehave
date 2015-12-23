@@ -123,10 +123,10 @@ When the user clicks on the search results card with fid <fid>
 
 Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
 And the user should see the basic info for selected legal entity
-And the user should see the Head Office of a legal entity as Budapester Strasse 35 Berlin, 10787 Germany(View Head Office)
+And the user should see the Head Office of a legal entity as Budapester Strasse 35Berlin, 10787Germany(View Head Office)
 
 When the user clicks on the view head office <viewHeadOffice> link for the selected legal entity
-Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>
+Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <officeTfpid>
 
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|viewHeadOffice|officeAddress|officeFid|officeTfpid|

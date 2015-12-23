@@ -323,11 +323,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
-    @Then("the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>")
+    @Then("the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <officeTfpid>")
     public void verifyOfficeHeader(@Named("entity") String entity,
                                    @Named("headOfficeAddress") String headOfficeAddress,
                                    @Named("officeFid") String fid,
-                                   @Named("tfpid") String tfpid){
+                                   @Named("officeTfpid") String tfpid){
         getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
