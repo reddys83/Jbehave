@@ -70,3 +70,7 @@ task runTaggedTestsRemotly(type: Test){
         systemProperties['remoteBrowser'] = "$remoteBrowser"
     }
 }
+
+clean{
+    delete "target"
+}

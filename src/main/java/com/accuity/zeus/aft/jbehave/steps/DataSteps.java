@@ -796,14 +796,18 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCityEntity();
     }
 
-    @Then("the user should see the city's credit ratings as: $creditRatings")
-    @Aliases(values={"the user should see the legal entity's credit ratings as: $creditRatings",
-                      "the user should see the office's credit ratings as: $creditRatings",
-                      "the user should see the area's credit ratings as: $creditRatings",
-                      "the user should see the country's credit ratings as: $creditRatings",
-                      "the user should see the sub-area's credit ratings as: $creditRatings"})
+    @Then("the user should see the legal entity's credit ratings as: $creditRatings")
+    @Aliases(values={"the user should see the office's credit ratings as: $creditRatings"})
     public void verifyCreditRatings(ExamplesTable creditRatings) {
         getDataPage().verifyCreditRatings(creditRatings);
+    }
+
+    @Then("the user should see the city's credit ratings as: $creditRatings")
+    @Aliases(values={"the user should see the area's credit ratings as: $creditRatings",
+            "the user should see the country's credit ratings as: $creditRatings",
+            "the user should see the sub-area's credit ratings as: $creditRatings"})
+    public void verifyCreditRatingsGeo(ExamplesTable creditRatings) {
+        getDataPage().verifyCreditRatingsGeo(creditRatings);
     }
 
     @Then("the user should see all is selected by default in the navigation bar")
@@ -817,14 +821,18 @@ public class DataSteps extends AbstractSteps {
     }
 
 
-    @Then("the user should not see the city's credit ratings")
-    @Aliases(values= {"the user should not see the legal entity's credit ratings",
-                      "the user should not see the office's credit ratings",
-                      "the user should not see the country's credit ratings",
-                      "the user should not see the area's credit ratings",
-                      "the user should not see the sub-area's credit ratings"})
+    @Then("the user should not see the legal entity's credit ratings")
+    @Aliases(values= {"the user should not see the office's credit ratings"})
     public void verifyNoCreditRatings(){
         getDataPage().verifyNoCreditRatings();
+    }
+
+    @Then("the user should not see the city's credit ratings")
+    @Aliases(values= {"the user should not see the country's credit ratings",
+            "the user should not see the area's credit ratings",
+            "the user should not see the sub-area's credit ratings"})
+    public void verifyNoCreditRatingsGeo(){
+        getDataPage().verifyNoCreditRatingsGeo();
     }
 
     @When("the user enters the city <city> in the type-ahead box")
