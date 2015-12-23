@@ -983,6 +983,11 @@ public class DataSteps extends AbstractSteps {
     public void clickOnViewHeadOfficeLink(@Named("viewHeadOffice") String viewHeadOffice){
         getDataPage().clickOnViewHeadOfficeLink(viewHeadOffice);
     }
+    
+    @Then("the user should not see the legalEntity's headOffice link")
+    public void verifyHeadOfficeInLegalEntityBasicInfo() {
+        getDataPage().verifyHeadOfficeInLegalEntityBasicInfo();
+    }
 
 }
 
