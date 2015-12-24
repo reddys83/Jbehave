@@ -16,8 +16,25 @@ let $currency := xs:string(xdmp:get-request-field("currency"))
 let $currencyUses := collection('source-trusted')/currency[name = $currency]/uses/use
 let $currencyUse := for $x in $currencyUses
 let $countryName := collection('source-trusted')/country[@resource = $x/place/link/@href]/summary/names/name[type = "Country Name"]/value/text()
-let $startDate := fn:concat(functx:day-abbrev-en(xs:date($x/startDate)), ' ', functx:month-abbrev-en(xs:date($x/startDate)), ' ', year-from-date(xs:date($x/startDate)))
-let $endDate := fn:concat(functx:day-abbrev-en(xs:date($x/endDate)), ' ', functx:month-abbrev-en(xs:date($x/endDate)), ' ', year-from-date(xs:date($x/endDate)))
+
+(: let $startDate := fn:concat(functx:day-abbrev-en(xs:date($x/startDate)), ' ', functx:month-abbrev-en(xs:date($x/startDate)), ' ', year-from-date(xs:date($x/startDate))) :)
+
+let $startDateAccuracy := xs:string($x/startDate/@accuracy)
+let $startDate := switch($startDateAccuracy)
+        			case "day"   return fn:concat(functx:day-abbrev-en(xs:date($x/startDate)), ' ', functx:month-abbrev-en(xs:date($x/startDate)), ' ', year-from-date(xs:date($x/startDate))) 
+        			case "month" return fn:concat(functx:month-abbrev-en(xs:date($x/startDate)), ' ', year-from-date(xs:date($x/startDate))) 
+        			case "year"  return xs:string(year-from-date(xs:date($x/startDate)))
+        			default return ""
+        			
+(: let $endDate := fn:concat(functx:day-abbrev-en(xs:date($x/endDate)), ' ', functx:month-abbrev-en(xs:date($x/endDate)), ' ', year-from-date(xs:date($x/endDate))) :)
+
+let $endDateAccuracy := xs:string($x/endDate/@accuracy)
+let $endDate := switch($endDateAccuracy)
+        			case "day"   return fn:concat(functx:day-abbrev-en(xs:date($x/endDate)), ' ', functx:month-abbrev-en(xs:date($x/endDate)), ' ', year-from-date(xs:date($x/endDate))) 
+        			case "month" return fn:concat(functx:month-abbrev-en(xs:date($x/endDate)), ' ', year-from-date(xs:date($x/endDate))) 
+        			case "year"  return xs:string(year-from-date(xs:date($x/endDate)))
+        			default return ""
+
 let $primary := $x/primary
 let $replacedBy := collection('source-trusted')/currency[@resource = $x/replacedBy/link/@href]/isoCode/text()
 let $status := $x/status

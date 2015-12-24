@@ -8,6 +8,7 @@ JIRA ID - ZEUS-241 - User can search for an existing currency by full name
 JIRA ID - ZEUS-189 - User can view a currency
 JIRA ID - ZEUS-242 - User can view a currency's uses
 JIRA ID - ZEUS-222 - User can follow link to another currency when viewing a currency
+JIRA ID - ZEUS-703 - Only display currency use start and end dates to the indicated accuracy
 
 Scenario: Verify currency list
 Given a user is on the search page
