@@ -10,7 +10,6 @@ public class XqueryMap {
     private HashMap<String, String> queryMap = new HashMap<String, String>();
 
     public XqueryMap(){
-
         queryMap.put("descending order by office fid","sortDescByOfficeFid.xqy");
         queryMap.put("ascending order by office fid", "sortAscByOfficeFid.xqy");
         queryMap.put("descending order by office status","sortDescByOfficeStatus.xqy");
@@ -25,6 +24,7 @@ public class XqueryMap {
         queryMap.put("currency uses", "getCurrencyUses.xqy");
         queryMap.put("ascending order by office name", "sortAscByOfficeName.xqy");
         queryMap.put("descending order by office name","sortDescByOfficeName.xqy");
+        queryMap.put("taxonomies list", "getTaxonomiesList.xqy");
     }
 
     public String getXquery(String key){

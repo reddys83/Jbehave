@@ -51,7 +51,7 @@ Then the user should see the taxonomy's entry as:
 
 Examples:
 |taxonomy|
-|Continents|
+|Continent|
 
 Scenario: Filter for taxonomy by name
 Given a user is on the search page
@@ -60,9 +60,9 @@ And the user clicks on the taxonomies tab in the data area
 And the user clicks on the choose a taxonomy option
 And the user enters the taxonomy <taxonomy> in the type-ahead box
 Then the user should see the taxonomy's entry as:
-|RELATIONSHIP TYPE|MODIFY|
-|Government|
-|Banking Association|
+|RELATIONSHIP TYPE|ENTITY TYPE|MODIFY|
+|Government|LegalEntity|
+|Banking Association|LegalEntity|
 
 Examples:
 |taxonomy|

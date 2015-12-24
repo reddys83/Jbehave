@@ -69,12 +69,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().selectCurrencyFromTypeAhead(currency);
     }
 
-    /*
-    @When("the user enters the currency $currency in the typeahead box")
-    public void enterCurrencyInCurrencyTypeAhead(String currency) {
-        getDataPage().selectCurrencyFromTypeAhead(currency);
-    }
-    */
     @Then("the user should see the currency iso code value as <isoCode>")
     public void verifyCurrencyIsoCode(@Named("isoCode") String isoCode) {
         getDataPage().verifyCurrencyIsoCode(isoCode);
@@ -115,12 +109,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryList(database, apacheHttpClient);
     }
 
-    /*
-    @Then("the countries list matches the $xqueryName from the database")
-     public void verifyCountryListMatchesExpectedList(String xqueryName) {
-         getDataPage().verifyCurrencyList(database, apacheHttpClient, xqueryName);
-     }
-    */
 
     @When("the user starts typing the name of a country as $word in the country input box")
     public void enterValueInCountryTypeAhead(String word) {
@@ -131,19 +119,6 @@ public class DataSteps extends AbstractSteps {
     public void verifyCountriesInListBox(ExamplesTable countryList) {
         getDataPage().verifyCountriesInListBox(countryList);
     }
-
-    /*
-    @Then("the user should see the countries in the currency usage as: $currencyCountries")
-    public void verifyCountriesCurrencyUsage(ExamplesTable currencyCountries) {
-        getDataPage().verifyCountriesCurrencyUsage(currencyCountries);
-    }
-    */
-    /*
-    @Then("the user should see the currency's uses as: $currencyUseTable")
-    public void verifyCurrencyUse(ExamplesTable currencyUseTable) {
-        getDataPage().verifyCurrencyUse(currencyUseTable);
-    }
-    */
 
     @Then("the user should see the currency's uses")
     public void verifyCurrencyUse() {
@@ -218,11 +193,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyNames(countryNames);
     }
 
-    @Then("the user should see the area's names as: $Names")
-    @Aliases(values={"the user should see the legal entity's names as: $Names",
-                    "the user should see the sub-area's names as: $Names"})
-    public void verifyAreaNames(ExamplesTable Names) {
-        getDataPage().verifyNames(Names);
+    @Then("the user should see the area's names as: $names")
+    @Aliases(values={"the user should see the legal entity's names as: $names",
+                    "the user should see the sub-area's names as: $names"})
+    public void verifyAreaNames(ExamplesTable names) {
+        getDataPage().verifyNames(names);
     }
 
     @Then("the user should see the office's names as: $Names")
@@ -348,11 +323,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
-    @Then("the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>")
+    @Then("the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <officeTfpid>")
     public void verifyOfficeHeader(@Named("entity") String entity,
                                    @Named("headOfficeAddress") String headOfficeAddress,
                                    @Named("officeFid") String fid,
-                                   @Named("tfpid") String tfpid){
+                                   @Named("officeTfpid") String tfpid){
         getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
@@ -1002,6 +977,16 @@ public class DataSteps extends AbstractSteps {
     @When("the user clicks on the area parent <areaParent> link for the selected area")
     public void clickOnAreaParentLink(@Named("areaParent") String areaParent){
         getDataPage().clickOnAreaParentLink(areaParent);
+    }
+    
+    @When("the user clicks on the view head office <viewHeadOffice> link for the selected legal entity")
+    public void clickOnViewHeadOfficeLink(@Named("viewHeadOffice") String viewHeadOffice){
+        getDataPage().clickOnViewHeadOfficeLink(viewHeadOffice);
+    }
+    
+    @Then("the user should not see the legalEntity's headOffice link")
+    public void verifyHeadOfficeInLegalEntityBasicInfo() {
+        getDataPage().verifyHeadOfficeInLegalEntityBasicInfo();
     }
 
 }

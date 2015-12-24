@@ -1,8 +1,6 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
 
-import com.accuity.zeus.aft.commons.DataManagementAppVals;
-import com.accuity.zeus.aft.commons.XqueryMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.model.ExamplesTable;
@@ -14,8 +12,6 @@ import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -357,10 +353,6 @@ public class DataPage extends AbstractPage {
         return new LegalEntityPage(getDriver(), getUrlPrefix());
     }
 
-    public void verifyCountryListBoxIsDisplayed()   {
-        assertTrue(getDriver().findElement(country_listBox_xpath).isDisplayed());
-    }
-
     public void clickOnCountryListBox() {
         try {
             Thread.sleep(3000L);
@@ -376,42 +368,6 @@ public class DataPage extends AbstractPage {
 
     }
 
-    //=CHAR(34)&A1&CHAR(34)&","
-    public void verifyCountryListValues(Database database, ApacheHttpClient apacheHttpClient, String xqueryName) {
-        XqueryMap xqueryMap = new XqueryMap();
-        ArrayList<String> myList = new ArrayList<>();
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(xqueryMap.getXquery(xqueryName), database);
-        List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listBox_value_xpath).getText().split("\n")));
-        for (int i=0;i<=document.getElementsByTagName("a").getLength();i++){
-            //this prepares the list for comparision
-            myList.add(document.getElementsByTagName("result").item(i).getTextContent());
-            System.out.println("Added values in the list are: " + document.getElementsByTagName("result").item(i).getTextContent());
-        }
-        assertTrue(myList.size() == retCountryListVal.size());
-        for (int j=0;j<=myList.size()-1;j++) {
-            if (retCountryListVal.get(j).equals(myList.get(j))) {
-                continue;
-            } else {
-                System.out.println("The returned country list has the value " + retCountryListVal.get(j) + " but the expected country list has the value " + myList.get(j));
-                assertTrue(false);
-                break;
-            }
-        }
-        }
-       /*
-        List<String> retCountryListVal = new ArrayList<>(Arrays.asList(getDriver().findElement(country_listBox_value_xpath).getText().split("\n")));
-        assertTrue(DataManagementAppVals.expCountryListVal.size() == retCountryListVal.size());
-        for (int i = 0; i <=DataManagementAppVals.expCountryListVal.size()-1; i++) {
-            if (retCountryListVal.get(i).equals(DataManagementAppVals.expCountryListVal.get(i))) {
-                continue;
-            }
-                else {
-                System.out.println("The returned country list has the value " + retCountryListVal.get(i) + " but the expected country list has the value " + DataManagementAppVals.expCountryListVal.get(i));
-                assertTrue(false);
-                break;
-            }
-        }
-    }*/
 
     public void enterValueInCountryTypeAhead(String word) {
         getDriver().findElement(country_type_ahead_xpath).sendKeys(word);
@@ -424,37 +380,6 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    /*
-    public void verifyCurrencyUse(ExamplesTable currencyUseTable) {
-        verifyCurrencyUseTableHeaders();
-        for(int i=0; i<currencyUseTable.getRowCount(); i++){
-
-            assertEquals(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(0)),
-                    getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[1]")));
-
-            assertEquals(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(1)),
-                    getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i+1) + "]/td[2]")));
-
-            if(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(2)).isEmpty()){} else{
-                assertEquals(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(2)),
-                        getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[3]")));
-            }
-
-            assertEquals(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(3)),
-                    getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i+1) + "]/td[4]")));
-
-            if(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(4)).isEmpty()){} else {
-                assertEquals(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(4)),
-                        getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[5]")));
-            }
-
-            if(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(5)).isEmpty()){} else {
-                assertEquals(currencyUseTable.getRow(i).get(currencyUseTable.getHeaders().get(5)),
-                        getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[6]")));
-            }
-       }
-    }
-    */
     public void verifyCurrencyUse(Database database, ApacheHttpClient apacheHttpClient, String selectedCurrency) {
         verifyCurrencyUseTableHeaders();
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "currency uses", "name", selectedCurrency);
@@ -505,17 +430,6 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public LegalEntityPage clicksOnSearchResults(String fidValue) {
-        try {
-            attemptClick(By.xpath(legalEntity_search_results_byFid_xpath_string + fidValue + "']"));
-            Thread.sleep(1000L);
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return new LegalEntityPage(getDriver(), getUrlPrefix());
-    }
-
     public void enterAreaInTypeAhead(String area) {
         selectedEntity = area;
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(area);
@@ -543,7 +457,6 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-       // assertEquals(selectedCountry, getDriver().findElement(country_name_selected_xpath).getText());
         assertEquals("BASIC INFO", getDriver().findElement(basic_info_xpath).getText());
     }
 
@@ -728,14 +641,6 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    /*
-    public void verifyCountriesCurrencyUsage(ExamplesTable currencyCountries) {
-        assertEquals("USAGE", getDriver().findElement(currency_usage_label_xpath).getText());
-        for (int i = 0; i<currencyCountries.getRowCount(); i++){
-            assertEquals(currencyCountries.getRow(i).get(currencyCountries.getHeaders().get(0)), getDriver().findElements(currency_usage_xpath).get(i).getText());
-        }
-    }
-    */
     public void clickOnCurrencyUsageCountry(String currencyUsageCountry) {
         selectedEntity = currencyUsageCountry;
         attemptClick(By.linkText(currencyUsageCountry));
@@ -1150,16 +1055,6 @@ public class DataPage extends AbstractPage {
         assertEquals("DEMOGRAPHICS", getDriver().findElement(area_demographics_label_xpath).getText());
     }
 
-    public void verifyServices(ExamplesTable services, String serviceType){
-        List<WebElement> category = getDriver().findElements(By.xpath(".//li[h2='" + serviceType + "']//tr/td[1]"));
-        List<WebElement> override_details = getDriver().findElements(By.xpath(".//li[h2='" + serviceType + "']//tr/td[2]"));
-
-        for(int i=0;i<services.getRowCount();i++){
-            assertEquals(services.getRow(i).get(services.getHeaders().get(0)),category.get(i).getText());
-            assertEquals(services.getRow(i).get(services.getHeaders().get(1)),override_details.get(i).getText());
-        }
-    }
-
     public void verifyNoDemographics() {
         assertEquals("DEMOGRAPHICS", getDriver().findElement(area_demographics_label_xpath).getText());
         assertEquals("TYPE", getDriver().findElement(area_demographics_type_label_xpath).getText());
@@ -1308,8 +1203,6 @@ public class DataPage extends AbstractPage {
 
     public void verifyHistoryLabel() {
         assertEquals("HISTORY", getTextOnPage(history_label_xpath));
-        //assertEquals("SUMMARY",getTextOnPage(legalEntity_history_summary_label_xpath)); /*Will be removed as part of ZEUS-635*/
-
     }
     public void verifyHistory(ExamplesTable history)
     {
@@ -1334,6 +1227,14 @@ public class DataPage extends AbstractPage {
 
     public void clickOnAreaParentLink(String areaParent) {
         attemptClick(By.linkText(areaParent));
+    }
+    
+    public void clickOnViewHeadOfficeLink(String viewHeadOffice) {
+        attemptClick(By.linkText(viewHeadOffice));
+    }
+    
+    public void verifyHeadOfficeInLegalEntityBasicInfo() {
+        assertFalse(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Head Office']/td")).isSelected());
     }
 }
 

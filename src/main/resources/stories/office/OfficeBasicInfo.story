@@ -19,7 +19,7 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user navigates to the 4th page on the office search results
 And the user clicks on the offices results card with fid <officeFid>
-Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>
+Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <officeTfpid>
 When the user clicks on the office basic info link in the navigation bar
 
 Then the user should see the office's names as:
@@ -45,7 +45,7 @@ And the user should see the Business Hours of an office as Hrs 10-5 Fri 10-6
 And the user should see the Add Info of an office as Al Mankhool Branch - Dubai
 
 Examples:
-|entity|searchBy|fid|officeFid|headOfficeAddress|tfpid|
+|entity|searchBy|fid|officeFid|headOfficeAddress|officeTfpid|
 |Anchor Savings Bank|Name|41031|41031-75|Hewlett, New York, USA|30386260-30364570|
 
 
@@ -60,16 +60,15 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>
+Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <officeTfpid>
 When the user clicks on the legal title in the office headers
 
 Then the user should see the legal entity's names as:
 |TYPE|VALUE|
 |Legal Title|Bank of America National Association|
-|Former Name|Bank of America National Trust & Savings Association|
 
 Examples:
-|entity|searchBy|fid|officeFid|headOfficeAddress|tfpid|
+|entity|searchBy|fid|officeFid|headOfficeAddress|officeTfpid|
 |Bank of America National Association|Name|1038|1038-55|Charlotte, North Carolina, USA||
 
 Scenario: verify the legalTitle link in the office search resutls page should navigate to the default view of legalEntity page.
@@ -106,9 +105,9 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user navigates to the 4th page on the office search results
 And the user clicks on the offices results card with fid <officeFid>
-Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>
+Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <officeTfpid>
 And the user should see the offices and department tabs in the office page
 
 Examples:
-|entity|searchBy|fid|officeFid|headOfficeAddress|tfpid|
+|entity|searchBy|fid|officeFid|headOfficeAddress|officeTfpid|
 |Anchor Savings Bank|Name|41031|41031-75|Hewlett, New York, USA|30386260-30364570|

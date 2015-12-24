@@ -30,6 +30,7 @@ Examples:
 Scenario: Verify no country's credit rating.
 Given a user is on the search page
 When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
 Then the user should see the country type-ahead displayed
 When the user enters the country <country> in the type-ahead box
