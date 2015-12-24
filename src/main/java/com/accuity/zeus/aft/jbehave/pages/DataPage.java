@@ -1228,5 +1228,13 @@ public class DataPage extends AbstractPage {
     public void clickOnAreaParentLink(String areaParent) {
         attemptClick(By.linkText(areaParent));
     }
+    
+    public void clickOnViewHeadOfficeLink(String viewHeadOffice) {
+        attemptClick(By.linkText(viewHeadOffice));
+    }
+    
+    public void verifyHeadOfficeInLegalEntityBasicInfo() {
+        assertFalse(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Head Office']/td")).isSelected());
+    }
 }
 

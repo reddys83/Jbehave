@@ -323,11 +323,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
-    @Then("the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>")
+    @Then("the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <officeTfpid>")
     public void verifyOfficeHeader(@Named("entity") String entity,
                                    @Named("headOfficeAddress") String headOfficeAddress,
                                    @Named("officeFid") String fid,
-                                   @Named("tfpid") String tfpid){
+                                   @Named("officeTfpid") String tfpid){
         getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
@@ -977,6 +977,16 @@ public class DataSteps extends AbstractSteps {
     @When("the user clicks on the area parent <areaParent> link for the selected area")
     public void clickOnAreaParentLink(@Named("areaParent") String areaParent){
         getDataPage().clickOnAreaParentLink(areaParent);
+    }
+    
+    @When("the user clicks on the view head office <viewHeadOffice> link for the selected legal entity")
+    public void clickOnViewHeadOfficeLink(@Named("viewHeadOffice") String viewHeadOffice){
+        getDataPage().clickOnViewHeadOfficeLink(viewHeadOffice);
+    }
+    
+    @Then("the user should not see the legalEntity's headOffice link")
+    public void verifyHeadOfficeInLegalEntityBasicInfo() {
+        getDataPage().verifyHeadOfficeInLegalEntityBasicInfo();
     }
 
 }
