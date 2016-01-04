@@ -37,9 +37,9 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_statistics_link_id = By.id("legalEntityStatistics");
     private By legalEntity_locations_link_id = By.id("legalEntityLocationSummaries");
     private By legalEntity_location_summary_label_xpath = By.xpath(".//*[@id='content']//span[text()='Location Summaries']");
-    private By legalEntity_locationSummaries_type_label_xpath = By.xpath(".//*[@id='content']//li[h2='Location Summaries']//thead/tr/th[text()='Type']");
-    private By legalEntity_locationSummaries_value_lable_xpath= By.xpath(".//*[@id='content']//li[h2='Location Summaries']//thead/tr/th[text()='Value']");
-    private By legalEntity_locationSummaries_list_values_xpath=By.xpath(".//*[@id='content']//li[h2='Location Summaries']//tbody/tr");
+    private By legalEntity_locationSummaries_type_label_xpath = By.xpath(".//*[@id='content']//li[contains(h1,'Location Summaries')]//thead/tr/th[text()='Type']");
+    private By legalEntity_locationSummaries_value_lable_xpath= By.xpath(".//*[@id='content']//li[contains(h1,'Location Summaries')]//thead/tr/th[text()='Value']");
+    private By legalEntity_locationSummaries_list_values_xpath=By.xpath(".//*[@id='content']//li[contains(h1,'Location Summaries')]//tbody/tr");
     private By legalEntity_trustPowers_link_id = By.id("legalEntityTrustPowers");
     private By legalEntity_trustPowers_label_xpath = By.xpath(".//*[@id='content']//h1/span[text()='Trust Powers']");
     private By legalEntity_trustPower_granted_label_xpath = By.xpath(".//*[@id='content']//th[text()='Granted']");
@@ -54,10 +54,10 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_ownership_link_id = By.id("legalEntityOwnershipSummaries");
 
     private By legalEntity_ownership_label_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//h2");
-    private By legalEntity_ownership_type_label_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//table/thead//th[1]");
-    private By legalEntity_ownership_value_label_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//table/thead//th[2]");
-    private By legalEntity_ownership_type_list_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//table/tbody//td[1]");
-    private By legalEntity_ownership_value_list_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//table/tbody//td[2]");
+    private By legalEntity_ownership_type_label_xpath = By.xpath("//li[contains(h1,'Ownership Summaries')]//table/thead//th[1]");
+    private By legalEntity_ownership_value_label_xpath = By.xpath("//li[contains(h1,'Ownership Summaries')]//table/thead//th[2]");
+    private By legalEntity_ownership_type_list_xpath = By.xpath("//li[contains(h1,'Ownership Summaries')]//table/tbody//td[1]");
+    private By legalEntity_ownership_value_list_xpath = By.xpath("//li[contains(h1,'Ownership Summaries')]//table/tbody//td[2]");
     private By legalEntity_history_link_id = By.id("legalEntityHistory");
     private By legalEntity_boardMeeting_link_id = By.id("legalEntityBoardMeetings");
     private By legalEntity_boardMeeting_label_xpath = By.xpath(".//li[h1='Board Meetings'] //h2");
@@ -143,7 +143,6 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyLegalEntityLocationsLabel(){
         assertEquals("LOCATION SUMMARIES",getTextOnPage(legalEntity_location_summary_label_xpath));
-        assertEquals("LOCATION SUMMARIES",getTextOnPage(legalEntity_location_summary_header_xpath));
         assertEquals("TYPE",getTextOnPage(legalEntity_locationSummaries_type_label_xpath));
         assertEquals("VALUE", getTextOnPage(legalEntity_locationSummaries_value_lable_xpath));
     }
@@ -324,7 +323,6 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyOwnershipLabels(){
         assertEquals("OWNERSHIP SUMMARIES", getTextOnPage(legalEntity_ownership_label_xpath));
-        assertEquals("OWNERSHIP SUMMARIES", getTextOnPage(legalEntity_ownership_header_xpath));
         assertEquals("TYPE",getTextOnPage(legalEntity_ownership_type_label_xpath));
         assertEquals("VALUE",getTextOnPage(legalEntity_ownership_value_label_xpath));
     }
