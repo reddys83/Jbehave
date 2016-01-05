@@ -67,7 +67,6 @@ Examples:
 
 
 Scenario: follow link to currency page from country screen.
-Meta:@countrycurrency
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
