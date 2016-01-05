@@ -1,17 +1,27 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
 
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OfficesSteps extends AbstractSteps {
 
+    @Autowired
+    ApacheHttpClient apacheHttpClient;
+    @Autowired
+    Database database;
+    private String selectedOffice;
+
     @When("the user clicks on the offices results card with fid <officeFid>")
     public void clickOnOfficeResultsCard(@Named("officeFid") String officeFid){
+        selectedOffice = officeFid;
         getOfficesPage().clickOnOfficeResultsCard(officeFid);
     }
 
@@ -85,6 +95,16 @@ public class OfficesSteps extends AbstractSteps {
     @Then("the user should see the statistics for the office")
     public void verifyStatisticsLabels(){
         getDataPage().verifyStatisticsLabels();
+    }
+
+    @When("the user clicks on the office locations link in the navigation bar")
+    public void clickOnOfficeLocationsLink(){
+        getOfficesPage().clickOnOfficeLocationsLink();
+    }
+
+    @Then("the user should see the office locations")
+    public void verifyOfficeLocations(){
+        getOfficesPage().verifyOfficeLocations(database, apacheHttpClient, selectedOffice);
     }
 
   }

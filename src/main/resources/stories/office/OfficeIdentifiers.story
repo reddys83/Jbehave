@@ -18,7 +18,7 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office identifier link in the navigation bar
 
-Then the user should see the legal entity's identifiers as:
+Then the user should see the office's identifiers as:
 |TYPE|VALUE|STATUS|
 |FDIC Office Branch|5|active|
 |FDIC Office Branch ID|5|inactive|
