@@ -276,4 +276,28 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifyDefaultSelectionResultPerPage();
     }
 
+    @When("the user selects the office status filter active")
+    public void selectOfficeStatusFilterActive(){
+        getResultsPage().selectOfficeStatusFilterActive();
+    }
+
+    @When("the user selects the office status filter inactive")
+    public void selectOfficeStatusFilterInactive(){
+        getResultsPage().selectOfficeStatusFilterInactive();
+    }
+
+    @Then("the user should see the list of active offices in the office search results")
+    public void verifyActiveOfficesSearchResults() {
+        getResultsPage().verifyActiveOfficesSearchResults(database, apacheHttpClient, searchedEntity);
+    }
+
+    @Then("the user should see the list of inactive offices in the office search results")
+    public void verifyInactiveOfficesSearchResults() {
+        getResultsPage().verifyInactiveOfficesSearchResults(database, apacheHttpClient, searchedEntity);
+    }
+
+    @Then("the user should see the office status filter default to all")
+    public void verifyDefaultOfficeStatusFilterIsAll(){
+        getResultsPage().verifyDefaultOfficeStatusFilterIsAll();
+    }
 }
