@@ -65,7 +65,6 @@ Examples:
 |Wallis and Futuna|
 
 
-
 Scenario: follow link to currency page from country screen.
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -75,10 +74,10 @@ Then the user should see the country type-ahead displayed
 When the user enters the country <country> in the type-ahead box
 Then the user should see the default country page and display all info
 When the user clicks on the currencies link in the navigation bar
-Then the user clicks on iso link
-When the user is navigated to currency page
+When the user clicks on iso link <isoname>
+When the user is navigated to currency page <isoname>
 
 
 Examples:
-|country|
-|Haiti|
+|country|isoname|
+|Haiti|HTG|

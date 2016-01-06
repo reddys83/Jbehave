@@ -997,14 +997,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyHeadOfficeInLegalEntityBasicInfo();
     }
 
-    @Then("the user clicks on iso link")
-    public void clickOnISOLink(){
-        getDataPage().clickOnISOLink();
+    @When("the user clicks on iso link <isoname>")
+    public void clickOnISOLink(@Named("isoname") String isoname){
+        getDataPage().clickOnISOLink(isoname);
     }
 
-    @When("the user is navigated to currency page")
-    public void verifyCurrencyPage(){
-        getDataPage().verifyCurrencyPage();
+    @When("the user is navigated to currency page <isoname>")
+    public void verifyCurrencyPage(@Named("isoname") String isoname){
+        getDataPage().verifyCurrencyPage(isoname);
     }
 
 }

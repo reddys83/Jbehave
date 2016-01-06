@@ -139,6 +139,7 @@ public class DataPage extends AbstractPage {
     private By currency_input_quantity_xpath = By.xpath("//input[@name='quantity']");
     private By currency_iso_xpath = By.xpath(".//*[@id='content']/div/ul/li/table/tbody/tr/td[1]/a");
     private By currency_header_xpath = By.xpath(".//*[@id='selection']/fieldset/h1");
+    private By currency_header_iso_id = By.id("iso-value");
     private By country_places_link_id= By.id("countryPlaces");
     private By places_label_xpath = By.xpath("//li[contains(h1,'Places')]//span");
     private By related_places_label_xpath = By.xpath("//li[contains(h1,'Places')]//h2");
@@ -1259,14 +1260,15 @@ public class DataPage extends AbstractPage {
         assertFalse(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Head Office']/td")).isSelected());
     }
 
-    public void clickOnISOLink(){
-        attemptClick(currency_iso_xpath);
+    public void clickOnISOLink(String isoname){
+        attemptClick(By.linkText(isoname));
     }
 
-    public void verifyCurrencyPage(){
+    public void verifyCurrencyPage(String isoname){
         try{
         Thread.sleep(1500L);
         assertEquals("CURRENCY",getTextOnPage(currency_header_xpath));
+            assertEquals(isoname,getTextOnPage(currency_header_iso_id));
     }catch (Exception e){
 
         }
