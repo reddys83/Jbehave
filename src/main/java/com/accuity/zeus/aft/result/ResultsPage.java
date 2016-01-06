@@ -95,6 +95,8 @@ public class ResultsPage extends AbstractPage {
     private By office_status_filter_active_selected_xpath = By.xpath("//*[@id='status-active'][@class='selected']");
     private By office_status_filter_inactive_selected_xpath = By.xpath("//*[@id='status-inactive'][@class='selected']");
     private By office_status_filter_all_selected_xpath = By.xpath("//*[@id='status-all'][@class='selected']");
+    private By office_type_headoffice_id = By.id("type-Head_Office");
+    private By office_results_list_container_id = By.id("subEntityList-list");
 
     public ResultsPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -628,4 +630,29 @@ public class ResultsPage extends AbstractPage {
     public void verifyDefaultOfficeStatusFilterIsAll() {
         assertTrue(getDriver().findElement(office_status_filter_all_selected_xpath).isDisplayed());
     }
+
+    public void clickHeadOfficeType(){
+        try{
+            getDriver().findElement(office_type_headoffice_id).click();
+            Thread.sleep(1500L);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void verifyResultsDisplayed(String typeOffice, String statusOffice){
+        try{
+            WebElement listContainer = getDriver().findElement(office_results_list_container_id);
+            WebElement tableBodyContainer = listContainer.findElement(By.tagName("section")).findElement(By.tagName("div")).findElement(By.tagName("table")).findElement(By.tagName("tbody"));
+            WebElement type = tableBodyContainer.findElements(By.tagName("td")).get(6);
+            WebElement status = tableBodyContainer.findElements(By.tagName("td")).get(7);
+            assertEquals(typeOffice,type.getText());
+            assertEquals(statusOffice,status.getText());
+
+        }catch(Exception e){
+
+        }
+    }
+
 }

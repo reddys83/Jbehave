@@ -300,4 +300,14 @@ public class SearchResultsSteps extends AbstractSteps{
     public void verifyDefaultOfficeStatusFilterIsAll(){
         getResultsPage().verifyDefaultOfficeStatusFilterIsAll();
     }
+
+    @When("the user selects type as headoffice")
+    public void selectOfficeTypeHeadOffice(){
+        getResultsPage().clickHeadOfficeType();
+    }
+    @Then("the user verifies result displayed <typeOffice> <statusOffice>")
+    public void verifyResultsDisplayed( @Named("typeOffice")String typeOffice , @Named("statusOffice") String statusOffice){
+
+        getResultsPage().verifyResultsDisplayed(typeOffice,statusOffice);
+    }
 }
