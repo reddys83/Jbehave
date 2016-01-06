@@ -107,5 +107,10 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().verifyOfficeLocations(database, apacheHttpClient, selectedOffice);
     }
 
+    @Then("the user should see the office address postal code as $postalCode")
+    public void verifyOfficeAddressPostalCode(@Named("postalCode") String postalCode){
+        getOfficesPage().verifyOfficeAddressPostalCode(postalCode);
+    }
+
   }
 
