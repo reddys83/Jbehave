@@ -84,6 +84,7 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_status_xpath = By.xpath("//tr/th[@id='status']");
     private By office_search_results_type_xpath = By.xpath("//tr/th[@id='type']");
     private By office_search_results_status_col_xpath = By.xpath("//tr/td[8]");
+    private By office_search_results_country_col_xpath = By.xpath("//tr/td[6]");
 
     private By office_search_results_0_results_xpath = By.xpath("//*[@class='search-results-module']/div/p");
     private String office_search_results_per_page_id = "count-";
@@ -645,5 +646,31 @@ public class ResultsPage extends AbstractPage {
 
     public void verifyDefaultOfficeStatusFilterIsAll() {
         assertTrue(getDriver().findElement(office_status_filter_all_selected_xpath).isDisplayed());
+    }
+
+    public void verifyOfficeIsSortedAscByCountry(Database database, ApacheHttpClient apacheHttpClient, String searchedEntity) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<WebElement> country = getDriver().findElements(office_search_results_country_col_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "ascending order by office country", "fid", searchedEntity);
+        for (int i = 0; i < country.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), country.get(i).getText());
+        }
+    }
+
+    public void verifyOfficeIsSortedDescByCountry(Database database, ApacheHttpClient apacheHttpClient, String searchedEntity) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<WebElement> country = getDriver().findElements(office_search_results_country_col_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "descending order by office country", "fid", searchedEntity);
+        for (int i = 0; i < country.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), country.get(i).getText());
+        }
     }
 }

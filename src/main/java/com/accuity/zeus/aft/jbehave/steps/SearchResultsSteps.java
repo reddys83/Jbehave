@@ -310,4 +310,14 @@ public class SearchResultsSteps extends AbstractSteps{
     public void verifyDefaultOfficeStatusFilterIsAll(){
         getResultsPage().verifyDefaultOfficeStatusFilterIsAll();
     }
+
+    @Then("the user should see the office search results cards sorted ascending order by office country")
+    public void verifyOfficeIsSortedAscByCountry(){
+        getResultsPage().verifyOfficeIsSortedAscByCountry(database, apacheHttpClient, searchedEntity);
+    }
+
+    @Then("the user should see the office search results cards sorted descending order by office country")
+    public void verifyOfficeIsSortedDescByCountry(){
+        getResultsPage().verifyOfficeIsSortedDescByCountry(database, apacheHttpClient, searchedEntity);
+    }
 }
