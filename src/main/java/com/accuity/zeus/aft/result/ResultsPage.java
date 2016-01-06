@@ -90,7 +90,11 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_header_xpath = By.xpath("//*[@id='subEntityList-summary']/div/div/div/p/span[2]");
     private By office_search_results_displayed_body_xpath = By.xpath("//*[@id='content']/div/ul/li");
     private int resultsDisplayed = 25;
-
+    private By office_status_filter_active_id = By.id("status-active");
+    private By office_status_filter_inactive_id = By.id("status-inactive");
+    private By office_status_filter_active_selected_xpath = By.xpath("//*[@id='status-active'][@class='selected']");
+    private By office_status_filter_inactive_selected_xpath = By.xpath("//*[@id='status-inactive'][@class='selected']");
+    private By office_status_filter_all_selected_xpath = By.xpath("//*[@id='status-all'][@class='selected']");
 
     public ResultsPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -583,5 +587,45 @@ public class ResultsPage extends AbstractPage {
         WebElement multipleOfficeTypes = getDriver().findElement(By.xpath(office_search_results_select_officeTypes_xpath+fid + "']/td[7]"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, "fid", fid);
         assertEquals(document.getElementsByTagName("offices").item(0).getTextContent(), multipleOfficeTypes.getText());
+    }
+
+    public void selectOfficeStatusFilterActive() {
+        attemptClick(office_status_filter_active_id);
+    }
+
+    public void selectOfficeStatusFilterInactive() {
+        attemptClick(office_status_filter_inactive_id);
+    }
+
+    public void verifyActiveOfficesSearchResults(Database database, ApacheHttpClient apacheHttpClient, String searchedEntity) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(getDriver().findElement(office_status_filter_active_selected_xpath).isDisplayed());
+        List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "active offices list", "fid", searchedEntity);
+        for (int i = 0; i < fidList.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), fidList.get(i).getText());
+        }
+    }
+
+    public void verifyInactiveOfficesSearchResults(Database database, ApacheHttpClient apacheHttpClient, String searchedEntity) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(getDriver().findElement(office_status_filter_inactive_selected_xpath).isDisplayed());
+        List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "inactive offices list", "fid", searchedEntity);
+        for (int i = 0; i < fidList.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), fidList.get(i).getText());
+        }
+    }
+
+    public void verifyDefaultOfficeStatusFilterIsAll() {
+        assertTrue(getDriver().findElement(office_status_filter_all_selected_xpath).isDisplayed());
     }
 }
