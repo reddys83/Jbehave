@@ -25,6 +25,7 @@ public class XqueryMap {
         queryMap.put("ascending order by office name", "sortAscByOfficeName.xqy");
         queryMap.put("descending order by office name","sortDescByOfficeName.xqy");
         queryMap.put("taxonomies list", "getTaxonomiesList.xqy");
+        queryMap.put("office locations", "getOfficeLocations.xqy");
         queryMap.put("ascending order by office area", "sortAscByOfficeArea.xqy");
         queryMap.put("descending order by office area", "sortDescByOfficeArea.xqy");
         queryMap.put("active offices list", "getActiveOfficesList.xqy");
