@@ -147,6 +147,11 @@ public class SearchResultsSteps extends AbstractSteps{
     public void clickOnColumnArea() {
         getResultsPage().clickOnColumnArea();
     }
+
+    @When("the user clicks on the office search results column city")
+    public void clickOnColumnCity() {
+        getResultsPage().clickOnColumnCity();
+    }
     @When("the user clicks on the office search results fid column")
     public void clickOnColumnFid(){
         getResultsPage().clickOnColumnFid();
@@ -170,6 +175,11 @@ public class SearchResultsSteps extends AbstractSteps{
     @Then("the office search results should sort by area which sorted $xqueryName with fid $fid from the database")
     public void verifySortOrderByOfficeArea(String xqueryName, String fid) {
         getResultsPage().verifySortOrderByOfficeArea(database, apacheHttpClient, xqueryName, fid);
+    }
+
+    @Then("the office search results should sort by city which sorted $xqueryName with fid $fid from the database")
+    public void verifySortOrderByOfficeCity(String xqueryName, String fid) {
+        getResultsPage().verifySortOrderByOfficeCity(database, apacheHttpClient, xqueryName, fid);
     }
 
     @Then("the user should see the office search results cards sorted ascending order by office status")
