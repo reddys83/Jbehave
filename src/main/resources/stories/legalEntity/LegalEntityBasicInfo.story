@@ -7,7 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-350 - User can view legal entity's basic info
 JIRA ID - ZEUS-382 - User will see head office address & legal entity title in header of legal entity screen
 JIRA ID - ZEUS-491 - User can follow link to head office from legal entity
-
+JIRA ID - ZEUS-384 - User can view websites of legal entity
 
 Scenario: Verify the basic info for legalEntity
 Given a user is on the search page
