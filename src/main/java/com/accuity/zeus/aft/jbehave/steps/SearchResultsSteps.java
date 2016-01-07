@@ -320,4 +320,9 @@ public class SearchResultsSteps extends AbstractSteps{
     public void verifyOfficeIsSortedDescByCountry(){
         getResultsPage().verifyOfficeIsSortedDescByCountry(database, apacheHttpClient, searchedEntity);
     }
+
+    @When("the user clicks on the office search results country column")
+    public void clickOnOfficeSearchResultsCountry(){
+        getResultsPage().clickOnOfficeSearchResultsCountry();
+    }
 }

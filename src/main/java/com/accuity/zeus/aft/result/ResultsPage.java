@@ -85,7 +85,7 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_type_xpath = By.xpath("//tr/th[@id='type']");
     private By office_search_results_status_col_xpath = By.xpath("//tr/td[8]");
     private By office_search_results_country_col_xpath = By.xpath("//tr/td[6]");
-
+    private By office_search_results_country_xpath = By.xpath("//tr/th[@id='countryName']");
     private By office_search_results_0_results_xpath = By.xpath("//*[@class='search-results-module']/div/p");
     private String office_search_results_per_page_id = "count-";
     private By office_search_deault_results_per_page_id = By.id("count-25");
@@ -280,7 +280,6 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyOfficeSearchResultsIsPaginated() {
-
         if (Integer.parseInt(officeTotalResultsCount()) <= resultsDisplayed) {
             assertEquals(officeTotalResultsCount(), Integer.toString(getOfficeResultsCountInCurrentPage().size()));
         } else {
@@ -673,4 +672,14 @@ public class ResultsPage extends AbstractPage {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), country.get(i).getText());
         }
     }
+
+    public void clickOnOfficeSearchResultsCountry() {
+        attemptClick(office_search_results_country_xpath);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

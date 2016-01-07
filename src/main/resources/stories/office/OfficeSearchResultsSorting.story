@@ -165,21 +165,12 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
-And the user clicks on the office search results status column
+And the user clicks on the office search results country column
 Then the user should see the office search results cards sorted ascending order by office country
-Then the user should see the office search results paginated
-And the user should see the offices number of records displayed in the page w.r.t total search results
-And the user should see the option to navigate to the desired office search results page
-When the user navigates to the 4th page on the office search results
-Then the user should see the office search results paginated
-And the user should see the offices number of records displayed in the page w.r.t total search results
-And the user should see the option to navigate to the desired office search results page
-When the user clicks on the office search results status column
+When the user navigates to the 3rd page on the office search results
+When the user clicks on the office search results country column
 Then the user should see the office search results cards sorted descending order by office country
 Then the user should see office search results reset to page 1
-Then the user should see the office search results paginated
-And the user should see the offices number of records displayed in the page w.r.t total search results
-And the user should see the option to navigate to the desired office search results page
 
 Examples:
 |entity|searchBy|fid|
