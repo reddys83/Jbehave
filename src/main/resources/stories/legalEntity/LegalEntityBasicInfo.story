@@ -47,15 +47,7 @@ And the user should see the legal entity's entity types as:
 
 And the user should see the legal entity's telecoms as:
 |TYPE|RANK|INFO|VALUE|
-|Bank|Bank|Bank|Bank|
-|Commercial Bank|Commercial Bank|Commercial Bank|Commercial Bank|
-|Corporate Bank|Corporate Bank|Corporate Bank|Corporate Bank|
-|Investment Bank|Investment Bank|Investment Bank|Investment Bank|
-|Merchant Bank|Merchant Bank|Merchant Bank|Merchant Bank|
-|Mortgage Bank|Mortgage Bank|Mortgage Bank|Mortgage Bank|
-|Private Bank|Private Bank|Private Bank|Private Bank|
-|Retail Bank|Retail Bank|Retail Bank|Retail Bank|
-|Savings Bank|Savings Bank|Savings Bank|Savings Bank|
+|Website||dnb.no|http://www.dnb.no|
 
 And the user should see the Status of a legal entity as Active
 And the user should see the Claimed Est Date of a legal entity as 01 Jul 1990
@@ -150,3 +142,22 @@ Then the user should not see the legalEntity's headOffice link
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
 |Collins Stewart Europe Limited|Name||271690||
+
+Scenario: Verify the basic info for legalEntity - multiple telecoms
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+Then the user should see the message you can search for a legal entity at any time using the header search
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+Then the user should see the legal entity's telecoms as:
+|TYPE|RANK|INFO|VALUE|
+|Website||dnb.no|http://www.dnb.no|
+|Website||indusval.com.br|http://www.indusval.com.br|
+
+Examples:
+|entity|searchBy|fid|
+|Banco Indusval SA|Name||732|
