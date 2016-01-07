@@ -311,13 +311,12 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifyDefaultOfficeStatusFilterIsAll();
     }
 
-    @When("the user selects type as headoffice")
-    public void selectOfficeTypeHeadOffice(){
-        getResultsPage().clickHeadOfficeType();
+    @When("the user selects the institution type filter $institutionType")
+    public void selectOfficeInstitutionType(@Named("institutionType") String institutionType){
+        getResultsPage().selectOfficeInstitutionType(institutionType);
     }
-    @Then("the user verifies result displayed <typeOffice> <statusOffice>")
-    public void verifyResultsDisplayed( @Named("typeOffice")String typeOffice , @Named("statusOffice") String statusOffice){
-
-        getResultsPage().verifyResultsDisplayed(typeOffice,statusOffice);
+    @Then("the user should see the office results for the applied filters")
+    public void verifyResultsDisplayed(){
+        getResultsPage().verifyOfficeResultsForAppliedFilters();
     }
 }
