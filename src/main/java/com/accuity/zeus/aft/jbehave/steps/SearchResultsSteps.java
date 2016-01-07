@@ -321,6 +321,21 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifyDefaultOfficeStatusFilterIsAll();
     }
 
+    @Then("the user should see the office search results cards sorted ascending order by office country")
+    public void verifyOfficeIsSortedAscByCountry(){
+        getResultsPage().verifyOfficeIsSortedAscByCountry(database, apacheHttpClient, searchedEntity);
+    }
+
+    @Then("the user should see the office search results cards sorted descending order by office country")
+    public void verifyOfficeIsSortedDescByCountry(){
+        getResultsPage().verifyOfficeIsSortedDescByCountry(database, apacheHttpClient, searchedEntity);
+    }
+
+    @When("the user clicks on the office search results country column")
+    public void clickOnOfficeSearchResultsCountry() {
+        getResultsPage().clickOnOfficeSearchResultsCountry();
+    }
+
     @When("the user selects the institution type filter $institutionType")
     public void selectOfficeInstitutionType(@Named("institutionType") String institutionType){
         getResultsPage().selectOfficeInstitutionType(institutionType);
@@ -328,5 +343,6 @@ public class SearchResultsSteps extends AbstractSteps{
     @Then("the user should see the office results for the applied filters")
     public void verifyResultsDisplayed(){
         getResultsPage().verifyOfficeResultsForAppliedFilters();
+
     }
 }

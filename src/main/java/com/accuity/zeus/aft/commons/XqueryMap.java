@@ -30,6 +30,8 @@ public class XqueryMap {
         queryMap.put("descending order by office area", "sortDescByOfficeArea.xqy");
         queryMap.put("active offices list", "getActiveOfficesList.xqy");
         queryMap.put("inactive offices list", "getInactiveOfficesList.xqy");
+        queryMap.put("ascending order by office country", "sortAscByOfficeCountry.xqy");
+        queryMap.put("descending order by office country","sortDescByOfficeCountry.xqy");
         queryMap.put("ascending order by office city", "sortAscByOfficeCity.xqy");
         queryMap.put("descending order by office city", "sortDescByOfficeCity.xqy");
     }

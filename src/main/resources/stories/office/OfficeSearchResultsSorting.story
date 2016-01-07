@@ -158,7 +158,6 @@ Examples:
 |3125|FID|3125|
 
 Scenario: Verify Office Results by City
-Meta:@Runthis
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -175,3 +174,23 @@ Then the office search results should sort by city which sorted descending order
 Examples:
 |entity|searchBy|fid|
 |3125|FID|3125|
+
+Scenario: Verify the sorting office results by country
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the office search results country column
+Then the user should see the office search results cards sorted ascending order by office country
+When the user navigates to the 3rd page on the office search results
+When the user clicks on the office search results country column
+Then the user should see the office search results cards sorted descending order by office country
+Then the user should see office search results reset to page 1
+
+Examples:
+|entity|searchBy|fid|
+|1645|FID|1645|
