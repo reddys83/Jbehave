@@ -1,12 +1,14 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.w3c.dom.Document;
 
-import java.security.PublicKey;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -29,6 +31,40 @@ public class OfficesPage extends AbstractPage {
     private By office_legalTitle_header_link_xpath = By.xpath(".//*[@id='cssTempFixId']/header//a");
     private By office_tab_id = By.id("office-link");
     private By office_department_tab_id = By.id("department-link");
+    private By office_locations_link_id = By.id("officeLocations");
+    private By office_locations_section_xpath = By.xpath("//*[@class='location']");
+    private By office_location_primary_xpath = By.xpath("//*[@class='location']/dl[1]");
+    private By office_location_address_type_xpath = By.xpath("//*[@class='location']/dl[2]");
+    private By office_locations_addresses_title_xpath = By.xpath("//*[@class='location']/h2[1]");
+    private By office_locations_title_xpath = By.xpath("//*[@id='content']//h1[span='Locations']");
+    private By office_locations_address_line_1_xpath = By.xpath("//*[@class='location']//li[1]//tr[1]");
+    private By office_locations_address_line_2_xpath = By.xpath("//*[@class='location']//li[1]//tr[2]");
+    private By office_locations_address_line_3_xpath = By.xpath("//*[@class='location']//li[1]//tr[3]");
+    private By office_locations_address_line_4_xpath = By.xpath("//*[@class='location']//li[1]//tr[4]");
+    private By office_locations_city_xpath = By.xpath("//*[@class='location']//li[2]//tr[1]");
+    private By office_locations_subarea_xpath = By.xpath("//*[@class='location']//li[2]//tr[2]");
+    private By office_locations_area_xpath = By.xpath("//*[@class='location']//li[2]//tr[3]");
+    private By office_locations_country_xpath = By.xpath("//*[@class='location']//li[2]//tr[4]");
+    private By office_locations_postal_code_xpath = By.xpath("//*[@class='location']//li[3]//tr[1]");
+    private By office_locations_postal_code_1_xpath = By.xpath(".//*[@id='content']/div/ul/li/div/ul/li[3]/table/tbody/tr[1]");
+    private By office_locations_postal_code_pos_xpath = By.xpath("//*[@class='location']//li[3]//tr[2]");
+    private By office_locations_postal_code_suffix_xpath = By.xpath("//*[@class='location']//li[3]//tr[3]");
+    private By office_locations_info_xpath = By.xpath("//*[@class='location']//li[3]//tr[4]");
+    private By office_locations_telecoms_title_xpath = By.xpath("//*[@class='location']/h2[2]");
+    private By office_locations_telecoms_table_columns_xpath = By.xpath("//*[@class='location']/table/thead/tr");
+    private By office_locations_telecoms_type_xpath = By.xpath("//*[@class='location']/table/tbody/tr/td[1]");
+    private By office_locations_telecoms_rank_xpath = By.xpath("//*[@class='location']/table/tbody/tr/td[2]");
+    private By office_locations_telecoms_text_before_xpath = By.xpath("//*[@class='location']/table/tbody/tr/td[3]");
+    private By office_locations_telecoms_value_xpath = By.xpath("//*[@class='location']/table/tbody/tr/td[4]");
+    private By office_locations_telecoms_range_limit_xpath = By.xpath("//*[@class='location']/table/tbody/tr/td[5]");
+    private By office_locations_telecoms_ext_xpath = By.xpath("//*[@class='location']/table/tbody/tr/td[6]");
+    private By office_locations_telecoms_text_after_xpath = By.xpath("//*[@class='location']/table/tbody/tr/td[7]");
+    private By office_locations_telecoms_answerback_xpath = By.xpath("//*[@class='location']/table/tbody/tr/td[8]");
+    private By office_locations_summary_title_xpath = By.xpath("//li[h2='Summary']/h2");
+    private By office_locations_summary_column_xpath = By.xpath("//li[h2='Summary']/table/thead/tr");
+    private By office_locations_summary_type_xpath = By.xpath("//li[h2='Summary']/table/tbody/tr/td[1]");
+    private By office_locations_summary_value_xpath = By.xpath("//li[h2='Summary']/table/tbody/tr/td[2]");
+    private By office_locations_summaries_xpath = By.xpath("//li[h2='Summary']/table/tbody/tr");
 
     public OfficesPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -116,5 +152,68 @@ public class OfficesPage extends AbstractPage {
         }catch (NoSuchElementException e){
 
         }
+    }
+
+    public void clickOnOfficeLocationsLink() {
+        attemptClick(office_locations_link_id);
+    }
+
+    public void verifyOfficeLocations(Database database, ApacheHttpClient apacheHttpClient, String selectedOffice) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "office locations", "fid", selectedOffice);
+        for(int i=0; i<getDriver().findElements(office_locations_section_xpath).size(); i++){
+            assertEquals("LOCATIONS", getDriver().findElement(office_locations_title_xpath).getText());
+            verifyOfficeLocationsAddresses(document, i);
+            verifyOfficeLocationsTelecoms(document, i);
+        }
+            verifyOfficeLocationsSummaries(document);
+    }
+
+    public void verifyOfficeLocationsAddresses(Document document, int i){
+        assertEquals(("Primary " + document.getElementsByTagName("primary").item(i).getTextContent()).trim(), getDriver().findElements(office_location_primary_xpath).get(i).getText());
+        assertEquals("ADDRESSES", getDriver().findElements(office_locations_addresses_title_xpath).get(i).getText());
+        assertEquals(("Type " + document.getElementsByTagName("type").item(i).getTextContent()).trim(), getDriver().findElements(office_location_address_type_xpath).get(i).getText());
+        assertEquals(("Address Line 1 " + document.getElementsByTagName("addressLine1").item(i).getTextContent()).trim(), getDriver().findElements(office_locations_address_line_1_xpath).get(i).getText());
+        assertEquals(("Address Line 2 " + document.getElementsByTagName("addressLine2").item(i).getTextContent()).trim(), getDriver().findElements(office_locations_address_line_2_xpath).get(i).getText());
+        assertEquals(("Address Line 3 " + document.getElementsByTagName("addressLine3").item(i).getTextContent()).trim(), getDriver().findElements(office_locations_address_line_3_xpath).get(i).getText());
+        assertEquals(("Address Line 4 " + document.getElementsByTagName("addressLine4").item(i).getTextContent()).trim(), getDriver().findElements(office_locations_address_line_4_xpath).get(i).getText());
+        assertEquals(("City " + document.getElementsByTagName("city").item(i).getTextContent()).trim(), getDriver().findElements(office_locations_city_xpath).get(i).getText());
+        assertEquals(("Subarea " + document.getElementsByTagName("subarea").item(i).getTextContent()).trim(), getDriver().findElements(office_locations_subarea_xpath).get(i).getText());
+        assertEquals(("Area " + document.getElementsByTagName("area").item(i).getTextContent()).trim(), getDriver().findElements(office_locations_area_xpath).get(i).getText());
+        assertEquals(("Country " + document.getElementsByTagName("country").item(i).getTextContent()).trim(), getDriver().findElements(office_locations_country_xpath).get(i).getText());
+        assertEquals(("Postal Code " + document.getElementsByTagName("postalCode").item(i).getTextContent()).trim(), getDriver().findElements(office_locations_postal_code_xpath).get(i).getText());
+        assertEquals(("Postal Code Position " + document.getElementsByTagName("postalCodePos").item(i).getTextContent()).trim(), getDriver().findElements(office_locations_postal_code_pos_xpath).get(i).getText());
+        assertEquals(("Postal Code Suffix " + document.getElementsByTagName("postalSuffix").item(i).getTextContent()).trim(), getDriver().findElements(office_locations_postal_code_suffix_xpath).get(i).getText());
+        //assertEquals(("Info " + document.getElementsByTagName("info").item(i).getTextContent()).trim(), getDriver().findElements(office_locations_info_xpath).get(i).getText());
+    }
+
+    public void verifyOfficeLocationsTelecoms(Document document, int i){
+        assertEquals("TELECOMS", getDriver().findElements(office_locations_telecoms_title_xpath).get(i).getText());
+        assertEquals("TYPE RANK TEXT BEFORE VALUE RANGE LIMIT EXT TEXT AFTER ANSWERBACK", getDriver().findElements(office_locations_telecoms_table_columns_xpath).get(i).getText());
+        assertEquals(document.getElementsByTagName("tType").item(i).getTextContent(),getDriver().findElements(office_locations_telecoms_type_xpath).get(i).getText());
+        assertEquals(document.getElementsByTagName("tRank").item(i).getTextContent(),getDriver().findElements(office_locations_telecoms_rank_xpath).get(i).getText());
+        assertEquals(document.getElementsByTagName("tTextBefore").item(i).getTextContent(),getDriver().findElements(office_locations_telecoms_text_before_xpath).get(i).getText());
+        assertEquals(document.getElementsByTagName("tValue").item(i).getTextContent(),getDriver().findElements(office_locations_telecoms_value_xpath).get(i).getText());
+        assertEquals(document.getElementsByTagName("tRangeLimit").item(i).getTextContent(),getDriver().findElements(office_locations_telecoms_range_limit_xpath).get(i).getText());
+        assertEquals(document.getElementsByTagName("tExt").item(i).getTextContent(),getDriver().findElements(office_locations_telecoms_ext_xpath).get(i).getText());
+        assertEquals(document.getElementsByTagName("tTextAfter").item(i).getTextContent(),getDriver().findElements(office_locations_telecoms_text_after_xpath).get(i).getText());
+        assertEquals(document.getElementsByTagName("tAnswerback").item(i).getTextContent(),getDriver().findElements(office_locations_telecoms_answerback_xpath).get(i).getText());
+    }
+
+    public void verifyOfficeLocationsSummaries(Document document){
+        assertEquals("SUMMARY",getDriver().findElement(office_locations_summary_title_xpath).getText());
+        assertEquals("TYPE VALUE",getDriver().findElement(office_locations_summary_column_xpath).getText());
+        for(int i=0; i<getDriver().findElements(office_locations_summaries_xpath).size(); i++){
+            assertEquals(document.getElementsByTagName("summaryType").item(i).getTextContent(),getDriver().findElements(office_locations_summary_type_xpath).get(i).getText());
+            assertEquals(document.getElementsByTagName("summaryValue").item(i).getTextContent(),getDriver().findElements(office_locations_summary_value_xpath).get(i).getText());
+        }
+    }
+
+    public void verifyOfficeAddressPostalCode(String postalCode) {
+        assertEquals("Postal Code " + postalCode, getDriver().findElement(office_locations_postal_code_1_xpath ).getText());
     }
 }

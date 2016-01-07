@@ -137,6 +137,9 @@ public class DataPage extends AbstractPage {
     private By currency_input_abbr_xpath = By.xpath("//input[@name='abbr']");
     private By currency_input_unit_xpath = By.xpath("//input[@name='unit']");
     private By currency_input_quantity_xpath = By.xpath("//input[@name='quantity']");
+    private By currency_iso_xpath = By.xpath(".//*[@id='content']/div/ul/li/table/tbody/tr/td[1]/a");
+    private By currency_header_xpath = By.xpath(".//*[@id='selection']/fieldset/h1");
+    private By currency_header_iso_id = By.id("iso-value");
     private By country_places_link_id= By.id("countryPlaces");
     private By places_label_xpath = By.xpath("//li[contains(h1,'Places')]//span");
     private By related_places_label_xpath = By.xpath("//li[contains(h1,'Places')]//h2");
@@ -237,6 +240,7 @@ public class DataPage extends AbstractPage {
     private By searchResults_headOffice_address_xpath =By.xpath(".//*[@id='cssTempFixId']/header//p");
     private By searchResults_header_fid_xpath = By.xpath(".//*[@id='cssTempFixId']/header/table//tr[th='FID']/td");
     private By searchResults_header_tfpid_xpath = By.xpath(".//*[@id='cssTempFixId']/header/table//tr[th='TFPID']/td");
+    private String clickedCurrencyIso="";
 
     @Override
     public String getPageUrl() {
@@ -1190,7 +1194,6 @@ public class DataPage extends AbstractPage {
         try {
             assertFalse(getDriver().findElement(identifiers_type_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e) {
-
         }
     }
 
@@ -1206,11 +1209,9 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyPersonnelLabels() {
-
         assertEquals("PERSONNEL", getTextOnPage(personnel_label_xpath));
         assertEquals("TYPE",getTextOnPage(personnel_type_label_xpath));
         assertEquals("VALUE",getTextOnPage(personnel_value_label_xpath));
-
     }
 
     public void verifyNoPersonnel() {
@@ -1236,7 +1237,6 @@ public class DataPage extends AbstractPage {
             assertFalse(getDriver().findElement(history_message_xpath).isDisplayed());
         }catch (NoSuchElementException e)
         {
-
         }
     }
 
@@ -1255,6 +1255,22 @@ public class DataPage extends AbstractPage {
     
     public void verifyHeadOfficeInLegalEntityBasicInfo() {
         assertFalse(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Head Office']/td")).isSelected());
+    }
+
+    public void clickOnISOLink(String isoCode){
+        clickedCurrencyIso = isoCode;
+        attemptClick(By.linkText(isoCode));
+
+    }
+
+    public void verifyCurrencyPage(){
+        try{
+        Thread.sleep(1500L);
+        assertEquals("CURRENCY",getTextOnPage(currency_header_xpath));
+        assertEquals(clickedCurrencyIso,getTextOnPage(currency_header_iso_id));
+    }catch (Exception e){
+
+        }
     }
 }
 

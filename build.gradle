@@ -71,6 +71,6 @@ task runTaggedTestsRemotly(type: Test){
     }
 }
 
-clean{
-    delete "target"
-}
+//clean{
+//    delete "target"
+//}
