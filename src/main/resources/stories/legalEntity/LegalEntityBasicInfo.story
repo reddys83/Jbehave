@@ -165,5 +165,5 @@ When the user clicks on the search results card with fid <fid>
 Then the user should see the Head Office of a legal entity as Gp Building, No.30, Kamala Iind Street, Chinna Chokkikulam 625002(View Head Office)
 
 Examples:
-|entity|searchBy|
-|1|fid|
+|entity|searchBy|fid|
+|1|fid|1|
