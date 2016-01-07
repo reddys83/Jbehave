@@ -97,7 +97,9 @@ public class ResultsPage extends AbstractPage {
     private By office_status_filter_active_selected_xpath = By.xpath("//*[@id='status-active'][@class='selected']");
     private By office_status_filter_inactive_selected_xpath = By.xpath("//*[@id='status-inactive'][@class='selected']");
     private By office_status_filter_all_selected_xpath = By.xpath("//*[@id='status-all'][@class='selected']");
-
+    private By office_search_results_rows_xpath = By.xpath("//*[@class='search-results-module']//tbody/tr");
+    private String appliedStatusFilter = "";
+    private String appliedInstTypeFilter = "";
     public ResultsPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
@@ -625,10 +627,12 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void selectOfficeStatusFilterActive() {
+        appliedStatusFilter = "active";
         attemptClick(office_status_filter_active_id);
     }
 
     public void selectOfficeStatusFilterInactive() {
+        appliedStatusFilter = "inactive";
         attemptClick(office_status_filter_inactive_id);
     }
 
@@ -663,4 +667,22 @@ public class ResultsPage extends AbstractPage {
     public void verifyDefaultOfficeStatusFilterIsAll() {
         assertTrue(getDriver().findElement(office_status_filter_all_selected_xpath).isDisplayed());
     }
+
+    public void selectOfficeInstitutionType(String institutionType){
+        appliedInstTypeFilter = institutionType;
+        try{
+            attemptClick(By.id("type-"+institutionType.replace(" ","_")));
+            Thread.sleep(1000L);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void verifyOfficeResultsForAppliedFilters(){
+        for(int i=0; i<getDriver().findElements(office_search_results_rows_xpath).size(); i++){
+            assertEquals(appliedStatusFilter,getDriver().findElements(office_search_results_status_col_xpath).get(i).getText());
+            assertTrue(getDriver().findElements(office_type_locator_xpath).get(i).getText().contains(appliedInstTypeFilter));
+        }
+    }
+
 }

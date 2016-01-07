@@ -320,4 +320,13 @@ public class SearchResultsSteps extends AbstractSteps{
     public void verifyDefaultOfficeStatusFilterIsAll(){
         getResultsPage().verifyDefaultOfficeStatusFilterIsAll();
     }
+
+    @When("the user selects the institution type filter $institutionType")
+    public void selectOfficeInstitutionType(@Named("institutionType") String institutionType){
+        getResultsPage().selectOfficeInstitutionType(institutionType);
+    }
+    @Then("the user should see the office results for the applied filters")
+    public void verifyResultsDisplayed(){
+        getResultsPage().verifyOfficeResultsForAppliedFilters();
+    }
 }
