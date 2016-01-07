@@ -26,8 +26,12 @@ public class XqueryMap {
         queryMap.put("descending order by office name","sortDescByOfficeName.xqy");
         queryMap.put("taxonomies list", "getTaxonomiesList.xqy");
         queryMap.put("office locations", "getOfficeLocations.xqy");
+        queryMap.put("ascending order by office area", "sortAscByOfficeArea.xqy");
+        queryMap.put("descending order by office area", "sortDescByOfficeArea.xqy");
         queryMap.put("active offices list", "getActiveOfficesList.xqy");
         queryMap.put("inactive offices list", "getInactiveOfficesList.xqy");
+        queryMap.put("ascending order by office city", "sortAscByOfficeCity.xqy");
+        queryMap.put("descending order by office city", "sortDescByOfficeCity.xqy");
     }
 
     public String getXquery(String key){

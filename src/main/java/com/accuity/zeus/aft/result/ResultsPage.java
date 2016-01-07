@@ -70,6 +70,8 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_next_page_classname = By.className("next-page");
     private By office_search_results_previous_page_classname = By.className("previous-page");
     private By office_search_results_column_name_xpath = By.xpath(".//*[@id='content'][@class='data-content']//thead//th[@id='name']");
+    private By office_search_results_column_area_xpath = By.xpath(".//*[@id='content'][@class='data-content']//thead//th[@id='areaName']");
+    private By office_search_results_column_city_xpath = By.xpath(".//*[@id='content'][@class='data-content']//thead//th[@id='cityName']");
 
     private By office_search_results_column_fid_xpath = By.xpath("//tr/th[@id='fid']");
     private By office_search_current_page_xpath = By.xpath("//li[contains(@class,'current-page')]");
@@ -95,7 +97,9 @@ public class ResultsPage extends AbstractPage {
     private By office_status_filter_active_selected_xpath = By.xpath("//*[@id='status-active'][@class='selected']");
     private By office_status_filter_inactive_selected_xpath = By.xpath("//*[@id='status-inactive'][@class='selected']");
     private By office_status_filter_all_selected_xpath = By.xpath("//*[@id='status-all'][@class='selected']");
-
+    private By office_search_results_rows_xpath = By.xpath("//*[@class='search-results-module']//tbody/tr");
+    private String appliedStatusFilter = "";
+    private String appliedInstTypeFilter = "";
     public ResultsPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
@@ -393,6 +397,13 @@ public class ResultsPage extends AbstractPage {
         attemptClick(office_search_results_column_name_xpath);
     }
 
+    public void clickOnColumnArea() {
+        attemptClick(office_search_results_column_area_xpath);
+    }
+
+    public void clickOnColumnCity() {
+        attemptClick(office_search_results_column_city_xpath);
+    }
     public void rightClicksOnOfficeID(String officeFid) {
         Actions action = new Actions(getDriver());
         WebElement element = getDriver().findElement(By.xpath(office_search_results_select_officeByFid_xpath + officeFid + "')]"));
@@ -460,6 +471,32 @@ public class ResultsPage extends AbstractPage {
                 String nullNameList = nameList.get(i).getText();
                 nullNameList = null;
             }
+        }
+    }
+
+    public void verifySortOrderByOfficeArea(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String searchedEntity) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<WebElement> areaList = getDriver().findElements(office_area_locator_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, "fid", searchedEntity);
+        for (int i=0; i< areaList.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), areaList.get(i).getText());
+        }
+    }
+
+    public void verifySortOrderByOfficeCity(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String searchedEntity) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<WebElement> cityList = getDriver().findElements(office_city_locator_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, xQueryName, "fid", searchedEntity);
+        for (int i=0; i< cityList.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), cityList.get(i).getText());
         }
     }
 
@@ -590,10 +627,12 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void selectOfficeStatusFilterActive() {
+        appliedStatusFilter = "active";
         attemptClick(office_status_filter_active_id);
     }
 
     public void selectOfficeStatusFilterInactive() {
+        appliedStatusFilter = "inactive";
         attemptClick(office_status_filter_inactive_id);
     }
 
@@ -628,4 +667,22 @@ public class ResultsPage extends AbstractPage {
     public void verifyDefaultOfficeStatusFilterIsAll() {
         assertTrue(getDriver().findElement(office_status_filter_all_selected_xpath).isDisplayed());
     }
+
+    public void selectOfficeInstitutionType(String institutionType){
+        appliedInstTypeFilter = institutionType;
+        try{
+            attemptClick(By.id("type-"+institutionType.replace(" ","_")));
+            Thread.sleep(1000L);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void verifyOfficeResultsForAppliedFilters(){
+        for(int i=0; i<getDriver().findElements(office_search_results_rows_xpath).size(); i++){
+            assertEquals(appliedStatusFilter,getDriver().findElements(office_search_results_status_col_xpath).get(i).getText());
+            assertTrue(getDriver().findElements(office_type_locator_xpath).get(i).getText().contains(appliedInstTypeFilter));
+        }
+    }
+
 }
