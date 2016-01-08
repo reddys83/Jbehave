@@ -103,3 +103,27 @@ Then the user should see the basic info for the selected country
 Examples:
 |country|replacedByCountry|
 |Afghanistan|Albania|
+
+Scenario: Verify country sections list
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+Then the user should see the below country sections
+|SECTIONS|
+|ALL|
+|BASIC INFO|
+|LANGUAGES|
+|HOLIDAYS|
+|CREDIT RATING|
+|REGIONS|
+|CURRENCIES|
+|PAYMENTS|
+|PLACES|
+|ENTITIES|
+|PEOPLE|
+
+Examples:
+|country|
+|Afghanistan|

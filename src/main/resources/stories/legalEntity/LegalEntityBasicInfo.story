@@ -150,3 +150,32 @@ Then the user should not see the legalEntity's headOffice link
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
 |Collins Stewart Europe Limited|Name||271690||
+
+Scenario: Verify legal entity sections list
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+Then the user should see the message you can search for a legal entity at any time using the header search
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+Then the user should see the below legal entity sections
+|SECTIONS|
+|ALL|
+|BASIC INFO|
+|LOCATIONS|
+|BOARD MEETINGS|
+|SERVICES|
+|CREDIT RATING|
+|STATISTICS|
+|TRUST POWERS|
+|IDENTIFIERS|
+|HISTORY|
+|OWNERSHIP|
+|PERSONNEL|
+
+Examples:
+|entity|searchBy|headOfficeAddress|fid|tfpid|
+|Collins Stewart Europe Limited|Name||271690||

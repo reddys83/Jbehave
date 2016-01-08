@@ -121,7 +121,6 @@ Examples:
 |USA|Illinois|Atchison|
 
 Scenario: Verify Area basic info with have no link to another area
-Meta:@runThis
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -136,4 +135,25 @@ Examples:
 |country|area|
 |Albania|Fier|
 
+Scenario: Verify area sections list
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+Then the user should see the below area sections
+|SECTIONS|
+|ALL|
+|BASIC INFO|
+|DEMOGRAPHICS|
+|CREDIT RATING|
+|REGIONS|
+|PLACES|
+|ENTITIES|
+|PEOPLE|
 
+Examples:
+|country|area|
+|Albania|Fier|
