@@ -128,7 +128,7 @@ Then the user should see the below office sections
 |BASIC INFO|
 |LOCATIONS|
 |SERVICES|
-|CREDIT RATING|
+|CREDIT RATINGS|
 |STATISTICS|
 |HISTORY|
 |IDENTIFIERS|

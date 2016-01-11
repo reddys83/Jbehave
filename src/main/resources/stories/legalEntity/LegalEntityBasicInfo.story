@@ -168,7 +168,7 @@ Then the user should see the below legal entity sections
 |LOCATIONS|
 |BOARD MEETINGS|
 |SERVICES|
-|CREDIT RATING|
+|CREDIT RATINGS|
 |STATISTICS|
 |TRUST POWERS|
 |IDENTIFIERS|
