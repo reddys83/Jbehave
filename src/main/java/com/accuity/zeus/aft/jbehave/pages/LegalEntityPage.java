@@ -95,7 +95,7 @@ public class LegalEntityPage extends AbstractPage {
         }
     }
 
-    public void verifyLegalEntitiesTelecoms(ExamplesTable legalEntitiesTelecoms)
+    public void verifyLegalEntitiesVirtualPresence(ExamplesTable legalEntitiesVirtualPresence)
     {
         assertEquals("TYPE", getDriver().findElement(legalEntity_telecoms_type_label_xpath).getText());
         assertEquals("RANK",getDriver().findElement(legalEntity_telecoms_rank_label_xpath).getText());
@@ -106,11 +106,11 @@ public class LegalEntityPage extends AbstractPage {
         List<WebElement> info = getDriver().findElements(legalEntity_telecoms_info_xpath);
         List<WebElement> value = getDriver().findElements(legalEntity_telecoms_value_xpath);
 
-        for(int i=0;i<legalEntitiesTelecoms.getRowCount();i++){
-            assertEquals(legalEntitiesTelecoms.getRow(i).get(legalEntitiesTelecoms.getHeaders().get(0)),type.get(i).getText());
-            assertEquals(legalEntitiesTelecoms.getRow(i).get(legalEntitiesTelecoms.getHeaders().get(1)),rank.get(i).getText());
-            assertEquals(legalEntitiesTelecoms.getRow(i).get(legalEntitiesTelecoms.getHeaders().get(2)), info.get(i).getText());
-            assertEquals(legalEntitiesTelecoms.getRow(i).get(legalEntitiesTelecoms.getHeaders().get(3)),value.get(i).getText());
+        for(int i=0;i<legalEntitiesVirtualPresence.getRowCount();i++){
+            assertEquals(legalEntitiesVirtualPresence.getRow(i).get(legalEntitiesVirtualPresence.getHeaders().get(0)),type.get(i).getText());
+            assertEquals(legalEntitiesVirtualPresence.getRow(i).get(legalEntitiesVirtualPresence.getHeaders().get(1)),rank.get(i).getText());
+            assertEquals(legalEntitiesVirtualPresence.getRow(i).get(legalEntitiesVirtualPresence.getHeaders().get(2)), info.get(i).getText());
+            assertEquals(legalEntitiesVirtualPresence.getRow(i).get(legalEntitiesVirtualPresence.getHeaders().get(3)),value.get(i).getText());
         }
     }
 

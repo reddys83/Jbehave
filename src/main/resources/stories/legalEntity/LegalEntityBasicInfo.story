@@ -43,7 +43,7 @@ And the user should see the legal entity's entity types as:
 |Commercial Bank|
 |Universal Bank|
 
-And the user should see the legal entity's telecoms as:
+And the user should see the legal entity's virtual presence as:
 |TYPE|RANK|INFO|VALUE|
 |Website||dnb.no|http://www.dnb.no|
 
@@ -129,7 +129,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-Then the user should see the legal entity's telecoms as:
+Then the user should see the legal entity's virtual presence as:
 |TYPE|RANK|INFO|VALUE|
 |Website||bip.b.br|http://www.bip.b.br|
 |Website||indusval.com.br|http://www.indusval.com.br|
