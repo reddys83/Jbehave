@@ -16,8 +16,8 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_entityType_list_xpath = By.xpath(".//*[@id='content']//table[2]//td");
     private By legalEntity_telecoms_type_label_xpath = By.xpath(".//*[@id='content']//table[3]/thead//th[text()='Type']");
     private By legalEntity_telecoms_rank_label_xpath = By.xpath(".//*[@id='content']//table[3]/thead//th[text()='Rank']");
-    private By legalEntity_telecoms_info_label_xpath = By.xpath(".//*[@id='content']//table[3]/thead//th[text()='Info']");
-    private By legalEntity_telecoms_value_label_xpath = By.xpath(".//*[@id='content']//table[3]/thead//th[text()='Value']");
+    private By legalEntity_telecoms_info_label_xpath = By.xpath(".//*[@id='content']//table[3]/thead//th[text()='Name']");
+    private By legalEntity_telecoms_value_label_xpath = By.xpath(".//*[@id='content']//table[3]/thead//th[text()='URL']");
     private By legalEntity_telecoms_type_xpath= By.xpath(".//*[@id='content']//table[3]/tbody//td[1]");
     private By legalEntity_telecoms_rank_xpath = By.xpath(".//*[@id='content']//table[3]/tbody//td[2]");
     private By legalEntity_telecoms_info_xpath = By.xpath(".//*[@id='content']//table[3]/tbody//td[3]");
@@ -99,8 +99,8 @@ public class LegalEntityPage extends AbstractPage {
     {
         assertEquals("TYPE", getDriver().findElement(legalEntity_telecoms_type_label_xpath).getText());
         assertEquals("RANK",getDriver().findElement(legalEntity_telecoms_rank_label_xpath).getText());
-        assertEquals("INFO",getDriver().findElement(legalEntity_telecoms_info_label_xpath).getText());
-        assertEquals("VALUE",getDriver().findElement(legalEntity_telecoms_value_label_xpath).getText());
+        assertEquals("NAME",getDriver().findElement(legalEntity_telecoms_info_label_xpath).getText());
+        assertEquals("URL",getDriver().findElement(legalEntity_telecoms_value_label_xpath).getText());
         List<WebElement> type = getDriver().findElements(legalEntity_telecoms_type_xpath);
         List<WebElement> rank = getDriver().findElements(legalEntity_telecoms_rank_xpath);
         List<WebElement> info = getDriver().findElements(legalEntity_telecoms_info_xpath);
