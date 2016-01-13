@@ -5,6 +5,8 @@ In order to view the city related places
 As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-329 - User can view a city's related places
+JIRA ID - ZEUS - 371 - User can follow link to area from city
+JIRA ID - ZEUS - 372 - User can follow link to country from city
 
 Scenario: Verify city related places.
 Given a user is on the search page
@@ -46,7 +48,7 @@ Examples:
 |country|area|city|
 |Panama|Herrera|Ocu|
 
-Scenario: User can follow link to area from city related place - click sub area in other country
+Scenario: User can follow link to area from city related place - click subarea in other country
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -68,7 +70,7 @@ Examples:
 |country|area|city|
 |USA|Illinois|Chicago|
 
-Scenario: User can follow link to area from city related place - click sub area in same country
+Scenario: User can follow link to area from city related place - click subarea in same country
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -129,6 +131,48 @@ And the user should see the area's names as:
 |TYPE|VALUE|
 |Full Name|Illinois|
 |Display Name|Illinois|
+
+Examples:
+|country|area|city|
+|USA|Illinois|Chicago|
+
+Scenario: User can follow link to country from city related place - click same country
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city related place link USA
+Then the user should see the country page with USA selected
+And the user should see the area's names as:
+|TYPE|VALUE|
+|Country Name|USA|
+
+Examples:
+|country|area|city|
+|USA|Illinois|Chicago|
+
+Scenario: User can follow link to country from city related place - click different country
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city related place link UK
+Then the user should see the country page with UK selected
+And the user should see the area's names as:
+|TYPE|VALUE|
+|Country Name|UK|
 
 Examples:
 |country|area|city|

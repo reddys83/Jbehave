@@ -6,6 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS - 92 - User can view city basic info
 JIRA ID - ZEUS - 371 - User can follow link to area from city
+JIRA ID - ZEUS - 372 - User can follow link to country from city
 
 Scenario: Verify the City basic info
 Meta:@verifyBuild
@@ -84,7 +85,7 @@ Examples:
 |country|area|city|
 |USA|Illinois|Chicago|
 
-Scenario: User can follow link to area from city - click area
+Scenario: User can follow link to area from city - click subarea
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -101,6 +102,27 @@ And the user should see the area's names as:
 |TYPE|VALUE|
 |Full Name|Cook|
 |Display Name|Cook|
+
+Examples:
+|country|area|city|
+|USA|Illinois|Chicago|
+
+Scenario: User can follow link to country from city - click country
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city country link USA
+Then the user should see the country page with USA selected
+And the user should see the area's names as:
+|TYPE|VALUE|
+|Country Name|USA|
 
 Examples:
 |country|area|city|
