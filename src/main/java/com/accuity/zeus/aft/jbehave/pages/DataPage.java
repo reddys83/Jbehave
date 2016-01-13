@@ -237,6 +237,7 @@ public class DataPage extends AbstractPage {
     private String clickedCurrencyIso="";
     private String city_area_link_xpath = "//*[@class='vertical']//tr[5]/td[a='";
     private String city_subarea_link_xpath = "//*[@class='vertical']//tr[6]/td[a='";
+    String city_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
     @Override
     public String getPageUrl() {
         return null;
@@ -1292,5 +1293,10 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
     }
+
+    public void clickOnCityRelatedPlace(String relatedPlace) {
+        attemptClick(By.xpath(city_related_places_place_link_xpath + relatedPlace + "']/td/a"));
+    }
+
 }
 

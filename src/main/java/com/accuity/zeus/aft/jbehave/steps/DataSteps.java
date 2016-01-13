@@ -1021,5 +1021,12 @@ public class DataSteps extends AbstractSteps {
     public void clickOnCitySubArea(@Named("subArea") String subArea){
         getDataPage().clickOnCitySubArea(subArea);
     }
+
+    @When("the user clicks on the city related place link $relatedPlace")
+    public void clickOnCityRelatedPlace(@Named("relatedPlace") String relatedPlace){
+        getDataPage().clickOnCityRelatedPlace(relatedPlace);
+    }
+
+
 }
 
