@@ -8,6 +8,8 @@ JIRA - ID - ZEUS - 565 - User can filter list of offices by domestic/foreign
 JIRA - ID - ZEUS - 555 - User can change number of office results per page
 JIRA - ID - ZEUS - 590 - User can filter list of offices by status
 JIRA - ID - ZEUS - 596 - User can use a combination of filters for office list
+JIRA - ID - ZEUS - 589 - User can filter list of offices by office type
+
 
 Scenario: Filter offices by type - Domestic
 Given a user is on the search page
@@ -159,3 +161,100 @@ Then the user should see the office results for the applied filters
 Examples:
 |entity|searchBy|fid|
 |1038|FID|1038|
+
+Scenario: User should see the types in the type filter should be based on the office search results types
+ ZEUS-589
+Meta:
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+Then the user should see the types in the type filter should be based on the types of office search results
+
+Examples:
+|entity|searchBy|fid|
+|3|FID|3|
+
+Scenario: User selects one of the office type filter in left sidebar should show the list the offices with the selected office type
+Meta:
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+Then the user should see the office type filter default to all
+When the user selects the institution type filter Head Office
+And the user selects the institution type filter Branch
+Then the user should see all is deselected in the office type filter
+Then the user should see the office list for the institution <entity>  with the Head office,Branch office type in the office search results
+
+Examples:
+|entity|searchBy|fid|
+|3|FID|3|
+
+Scenario: Verify the office type filter, When the office has single office type for the institution it should be selected by default and ALL should not be present
+Meta:
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+Then the user should see Head Office is selected by default
+
+Examples:
+|entity|searchBy|fid|
+|189457|FID|189457|
+
+Scenario: User should see the error message if the combination of the selection filter is returning zero results
+Meta:
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+When the user selects the institution type filter Head Office
+When the user selects the office status filter inactive
+Then the user should see the message your search returned 0 results
+
+Examples:
+|entity|searchBy|fid|
+|267124|FID|267124|
+
+Scenario: User selects a column sort and a filter, Both the coulumn sort and filter are applied to the results list
+Meta:@RunThis
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the office search results type column
+And the user selects the institution type filter Marketing Office
+And the user selects the institution type filter Head Office Branch
+Then the user should see the office search results card for the searched legal entity
+|ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
+|3-9|Moorgate|Arab Banking Corporation House||||Branch, Head Office Branch|active|
+|3-15||Nordic Region Marketing Office||||Marketing Office|active|
+|3-14|Marketing Office|UK & Ireland Marketing Office||||Marketing Office|active|
+
+Examples:
+|entity|searchBy|fid|
+|3|FID|3|
+
+
+
