@@ -1332,10 +1332,18 @@ public class DataPage extends AbstractPage {
         }
     }
 
+
     public void verifyBasicInfoLeftSection(ExamplesTable basicInfoLeftSection) {
         List<WebElement> basicInfoLeftSectionFields = getDriver().findElements(basic_info_left_section_xpath);
-        for(int i=0; i<getDriver().findElements(basic_info_left_section_xpath).size(); i++){
-            assertEquals(basicInfoLeftSection.getRow(i).get(basicInfoLeftSection.getHeaders().get(0)),basicInfoLeftSectionFields.get(i).getText());
+        for(int i=0; i<getDriver().findElements(basic_info_left_section_xpath).size(); i++) {
+            assertEquals(basicInfoLeftSection.getRow(i).get(basicInfoLeftSection.getHeaders().get(0)), basicInfoLeftSectionFields.get(i).getText());
+        }
+    }
+
+    public void verifyNoCityAlternativeRegionsSection() {
+        try {
+            assertFalse(getDriver().findElement(regions_label_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e){
         }
     }
 }
