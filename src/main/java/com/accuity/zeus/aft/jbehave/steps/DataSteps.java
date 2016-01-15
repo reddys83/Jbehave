@@ -880,6 +880,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyNoAlternativeRegions();
     }
 
+    @Then("the user should not see the city's alternative regions section")
+    public void verifyNoCityAlternativeRegionsSection() {
+        getDataPage().verifyNoCityAlternativeRegionsSection();
+    }
+
     @When("the user clicks on the area's entity link in the navigation bar")
     public void clickOnAreaEntity() {
         getDataPage().clickOnAreaEntity();

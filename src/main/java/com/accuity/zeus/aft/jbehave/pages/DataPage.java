@@ -1272,5 +1272,13 @@ public class DataPage extends AbstractPage {
 
         }
     }
+
+    public void verifyNoCityAlternativeRegionsSection() {
+        try {
+            assertFalse(getDriver().findElement(regions_label_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e){
+
+        }
+    }
 }
 
