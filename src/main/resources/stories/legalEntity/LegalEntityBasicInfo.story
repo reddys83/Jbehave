@@ -7,6 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-350 - User can view legal entity's basic info
 JIRA ID - ZEUS-382 - User will see head office address & legal entity title in header of legal entity screen
 JIRA ID - ZEUS-491 - User can follow link to head office from legal entity
+JIRA ID - ZEUS-384 - User can view websites of legal entity
 JIRA ID - ZEUS-735 - Code shouldn't assume head office fid is of a specific format
 
 Scenario: Verify the basic info for legalEntity
@@ -43,17 +44,9 @@ And the user should see the legal entity's entity types as:
 |Commercial Bank|
 |Universal Bank|
 
-And the user should see the legal entity's telecoms as:
+And the user should see the legal entity's virtual presence as:
 |TYPE|RANK|INFO|VALUE|
-|Bank|Bank|Bank|Bank|
-|Commercial Bank|Commercial Bank|Commercial Bank|Commercial Bank|
-|Corporate Bank|Corporate Bank|Corporate Bank|Corporate Bank|
-|Investment Bank|Investment Bank|Investment Bank|Investment Bank|
-|Merchant Bank|Merchant Bank|Merchant Bank|Merchant Bank|
-|Mortgage Bank|Mortgage Bank|Mortgage Bank|Mortgage Bank|
-|Private Bank|Private Bank|Private Bank|Private Bank|
-|Retail Bank|Retail Bank|Retail Bank|Retail Bank|
-|Savings Bank|Savings Bank|Savings Bank|Savings Bank|
+|Website||dnb.no|http://www.dnb.no|
 
 And the user should see the Status of a legal entity as Active
 And the user should see the Claimed Est Date of a legal entity as 01 Jul 1990
@@ -83,8 +76,6 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-
-Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
 
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
@@ -122,15 +113,50 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-
-Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
-And the user should see the basic info for selected legal entity
+Then the user should see the basic info for selected legal entity
 Then the user should not see the legalEntity's headOffice link
 
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
 |Collins Stewart Europe Limited|Name||271690||
 
+Scenario: Verify the basic info for legalEntity - multiple telecoms
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+Then the user should see the message you can search for a legal entity at any time using the header search
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+Then the user should see the legal entity's virtual presence as:
+|TYPE|RANK|INFO|VALUE|
+|Website||bip.b.br|http://www.bip.b.br|
+|Website||indusval.com.br|http://www.indusval.com.br|
+
+Examples:
+|entity|searchBy|fid|
+|Banco Indusval SA|Name|732|
+
+Scenario: Verify legal entity headers
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+Then the user should see the message you can search for a legal entity at any time using the header search
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+
+Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
+
+Examples:
+|entity|searchBy|headOfficeAddress|fid|tfpid|
+|Banque Tarneaud|Name|Limoges, Dept 87, France|1645|20172300|
+|Berliner Volksbank eG|Name|Berlin, Germany|1717|20205500|
+|Collins Stewart Europe Limited|Name||271690||
 
 Scenario: Verify the head office address for legalEntity with head office not like -0
 Given a user is on the search page
