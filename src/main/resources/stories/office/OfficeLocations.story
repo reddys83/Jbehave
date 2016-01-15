@@ -18,7 +18,6 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 Then the user should see the office locations
-And the user should see the office address postal code as 28202
 
 Examples:
 |entity|searchBy|fid|officeFid|

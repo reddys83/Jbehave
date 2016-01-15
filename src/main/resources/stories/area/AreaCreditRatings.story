@@ -17,7 +17,7 @@ When the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 When the user clicks on the area's credit rating link in the navigation bar
 Then the user should see the area's credit ratings as:
-|NAME|TYPE|VALUE|Date APPLIED|DATE CONFIRMED|
+|NAME|TYPE|VALUE|DATE APPLIED|DATE CONFIRMED|
 |Fitch|Long Term Sovereign Debt Rating|B|01 Jan 1990|04 Jan 1991|
 |Standard & Poors|Long Term Sovereign Debt Rating|A-|01 Jan 1990|04 Jan 1991|
 ||Chicagos Terrible Credit Rating|F+|||
@@ -40,7 +40,7 @@ When the user clicks on the choose a sub-area option
 And the user enters the sub-area <subArea> in the type-ahead box
 When the user clicks on the sub-area's credit rating link in the navigation bar
 Then the user should see the sub-area's credit ratings as:
-|NAME|TYPE|VALUE|Date APPLIED|DATE CONFIRMED|
+|NAME|TYPE|VALUE|DATE APPLIED|DATE CONFIRMED|
 |Fitch|Long Term Sovereign Debt Rating|B|01 Jan 1990|04 Jan 1991|
 |Standard & Poors|Long Term Sovereign Debt Rating|A-|Jan 1990|04 Jan 1991|
 ||Chicagos Terrible Credit Rating|F+|||

@@ -23,6 +23,11 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @Then("the user should see the search results paginated for the searched entity")
     public void thenUserShouldSeeCorrectResults() {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if(Integer.parseInt(getResultsPage().getNumResultsValue().getText()) < 10) {
             assertEquals(Integer.toString(getResultsPage().getResultsList().size()), getResultsPage().getNumResultsValue().getText());
         } else {
