@@ -6,6 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS - 337 - User can view all city info
 JIRA ID - ZEUS - 436 - User can select a new city when viewing a city
+JIRA ID - ZEUS - 338 - User can select multiple sections of city to view
 
 Scenario: Verify city default section
 Given a user is on the search page
@@ -154,3 +155,45 @@ And the user should see the entities for selected city
 Examples:
 |country|area|city|
 |Albania|Berat|Ura-Vajgurore|
+
+Scenario: Verify city multiple selection
+Meta:@verifyBuild
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+When the user clicks on the city regions link in the navigation bar
+
+Then the user should see the city's alternative regions as:
+|TYPE|VALUE|
+|Metropolitan Statistical Area|16980|
+|Federal Reserve District|7|
+|Federal Home Loan Bank District|7|
+|National Credit Union Administration Region|IV|
+
+When the user clicks on the city's credit rating link in the navigation bar
+
+Then the user should see the city's credit ratings as:
+|NAME|TYPE|VALUE|Date APPLIED|DATE CONFIRMED|
+|Fitch|Long Term Sovereign Debt Rating|B|01 Jan 1990|04 Jan 1991|
+|Standard & Poors|Long Term Sovereign Debt Rating|A-|Jan 1990|04 Jan 1991|
+||Chicagos Terrible Credit Rating|F+|||
+
+When the user clicks on the city's entity link in the navigation bar
+
+Then the user should see the city's entity as:
+|TYPE|ENTITY|DETAILS|
+|Government Type|Illinois Department of Employment Security||
+|Government, city|Illinois Department of Employment Security|City Government, Also known as the IBA|
+
+When the user clicks on the city regions link in the navigation bar
+Then the user should not see the city's alternative regions section
+
+Examples:
+|country|area|city|
+|USA|Illinois|Chicago|

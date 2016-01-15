@@ -53,13 +53,14 @@ And the user should see the currency quantity value as <quantity>
 
 Examples:
 |currency|isoCode|name|abbr|unit|quantity|
-|US Dollar|USD|US Dollar|US$|Cents|100|
+|US Dollar|USD|US Dollar asdf|US$ - new|Cents|100|
 |Icelandic Krona|ISK|Icelandic Krona|ISK|null|null|
 |Sudanese Dinar|SDD|Sudanese Dinar|Dinar|Dirham|null|
 
 Scenario: Verify currency's uses.
 1. Verify sorting order.
 2. Click on usage country link
+3. BUG-ID - ZEUS-753
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area

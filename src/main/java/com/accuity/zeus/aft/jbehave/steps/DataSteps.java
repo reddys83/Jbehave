@@ -100,7 +100,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the choose a country option")
-    public void clickOnCountryListBox() {
+    public void clickOnCountryListBox() throws InterruptedException {
         getDataPage().clickOnCountryListBox();
     }
 
@@ -735,12 +735,12 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the credit ratings for selected sub-area")
     @Alias("the user should see the credit rating for selected city")
     public void verifyCreditRatingsLabel() {
-        getDataPage().verifyCreditRatingsLabels();
+        getDataPage().verifyCreditRatingsLabelsGeo();
     }
 
     @Then("the user should see the credit ratings for selected area")
     public void verifyCreditRatingsForArea() {
-        getDataPage().verifyCreditRatingsLabels();
+        getDataPage().verifyCreditRatingsLabelsGeo();
     }
 
     @Then("the user should see the demographics for selected area")
@@ -880,6 +880,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyNoAlternativeRegions();
     }
 
+    @Then("the user should not see the city's alternative regions section")
+    public void verifyNoCityAlternativeRegionsSection() {
+        getDataPage().verifyNoCityAlternativeRegionsSection();
+    }
+
     @When("the user clicks on the area's entity link in the navigation bar")
     public void clickOnAreaEntity() {
         getDataPage().clickOnAreaEntity();
@@ -966,20 +971,20 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the legal entity's identifiers as: $identifiers")
     @Alias("the user should see the office's identifiers as: $identifiers")
-    public void verifyLegalEntityIdentifiers(ExamplesTable identifiers){
-        getDataPage().verifyIdentifiers(identifiers);
+    public void verifyLegalEntityOfficeIdentifiers(ExamplesTable identifiers){
+        getDataPage().verifyLegalEntityOfficeIdentifiers(identifiers);
     }
 
     @Then("the user should not see the legal entity's identifiers")
     @Alias("the user should not see the office's identifiers")
-    public void verifyNoLegalEntityIdentifiers() {
-        getDataPage().verifyNoIdentifiers();
+    public void verifyNoLegalEntityOfficeIdentifiers() {
+        getDataPage().verifyNoLegalEntityOfficeIdentifiers();
     }
 
     @Then("the user should see the identifiers for the legal entity")
     @Alias("the user should see the identifiers for the office")
-    public void verifyIdentifiersSectionLabels(){
-        getDataPage().verifyIdentifiersSectionLabels();
+    public void verifyLegalEntityOfficeIdentifiersLabels(){
+        getDataPage().verifyLegalEntityOfficeIdentifiersLabels();
     }
 
     @When("the user clicks on the area parent <areaParent> link for the selected area")
@@ -1027,6 +1032,34 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCityRelatedPlace(relatedPlace);
     }
 
+    @Then("the user should see the below country sections $countrySections")
+    public void verifyCountrySections(ExamplesTable countrySections){
+        getDataPage().verifySections(countrySections);
+    }
 
+    @Then("the user should see the below area sections $areaSections")
+    public void verifyAreaSections(ExamplesTable areaSections){
+        getDataPage().verifySections(areaSections);
+    }
+
+    @Then("the user should see the below city sections $citySections")
+    public void verifyCitySections(ExamplesTable citySections){
+        getDataPage().verifySections(citySections);
+    }
+
+    @Then("the user should see the below legal entity sections $legalEntitySections")
+    public void verifyLegalEntitySections(ExamplesTable legalEntitySections){
+        getDataPage().verifySections(legalEntitySections);
+    }
+
+    @Then("the user should see the below office sections $legalEntitySections")
+    public void verifyOfficeSections(ExamplesTable officeSections){
+        getDataPage().verifySections(officeSections);
+    }
+
+    @Then("the user should see the below fields in the country basic info left section $basicInfoLeftSection")
+    public void verifyBasicInfoLeftSection(ExamplesTable basicInfoLeftSection){
+        getDataPage().verifyBasicInfoLeftSection(basicInfoLeftSection);
+    }
 }
 

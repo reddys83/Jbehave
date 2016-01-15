@@ -145,3 +145,18 @@ Then the user should see the search results paginated for the searched entity
 Examples:
 |entity|field|value|
 |legalEntity|name|First National Bank|
+
+Scenario: search by fid and verify legal entity head office (not with fid -0)
+Given a user is on the search page
+When the user searches for <entity> with <field> equals <value>
+
+Then the user should see the legal entity search results card matching the searched entity
+|FID|TFPID|NAME|ADDRESS|STATUS|
+|1||AB Banka as|Gp Building, No.30, Kamala Iind Street, Chinna Chokkikulam, 625002|inactive|
+
+Then the user should see the search results paginated for the searched entity
+And the user should see the number of records displayed in the page w.r.t total search results
+
+Examples:
+|entity|field|value|
+|fid|fid|1|

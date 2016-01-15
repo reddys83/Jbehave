@@ -8,6 +8,7 @@ JIRA ID - ZEUS - 92 - User can view city basic info
 JIRA ID - ZEUS - 371 - User can follow link to area from city
 
 Scenario: Verify the City basic info
+BUG-ID - ZEUS-686
 Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -79,6 +80,30 @@ And the user should see the area's names as:
 |TYPE|VALUE|
 |Full Name|Illinois|
 |Display Name|IL|
+
+Examples:
+|country|area|city|
+|USA|Illinois|Chicago|
+
+Scenario: Verify city sections list
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+Then the user should see the below city sections
+|SECTIONS|
+|ALL|
+|BASIC INFO|
+|CREDIT RATING|
+|REGIONS|
+|PLACES|
+|ENTITIES|
+|PEOPLE|
 
 Examples:
 |country|area|city|

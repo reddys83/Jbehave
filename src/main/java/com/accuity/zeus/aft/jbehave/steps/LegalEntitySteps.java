@@ -14,9 +14,9 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyLegalEntityEntities(legalEntities);
     }
 
-    @Then("the user should see the legal entity's telecoms as: $legalEntityTelecoms")
-    public void verifyLegalEntitiesTelecoms(ExamplesTable legalEntitiesTelecoms){
-        getLegalEntityPage().verifyLegalEntitiesTelecoms(legalEntitiesTelecoms);
+    @Then("the user should see the legal entity's virtual presence as: $legalEntityTelecoms")
+    public void verifyLegalEntitiesVirtualPresence(ExamplesTable legalEntitiesVirtualPresence){
+        getLegalEntityPage().verifyLegalEntitiesVirtualPresence(legalEntitiesVirtualPresence);
     }
 
     @Then("the user should see the legal entity corporate statement as $corporateStatement")

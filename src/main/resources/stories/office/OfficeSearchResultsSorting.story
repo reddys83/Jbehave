@@ -13,6 +13,7 @@ JIRA ID - ZEUS-553 - User cna sort office results by type
 JIRA ID - ZEUS-550 - User can sort office results by name
 JIRA ID - ZEUS-551 - User can sort office results by area
 JIRA ID - ZEUS-548 - User can sort office results by city
+JIRA ID - ZEUS-552 - User can sort office results by country
 
 Scenario: Verify the list of office multiple types should order alphabetically in office search results page
 Meta:
@@ -40,7 +41,6 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
-Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
 When the user clicks on the office search results fid column
 Then the user should see the office search results cards sorted descending order by office fid with fid 1038 from the database
 When the user clicks on the office search results fid column
