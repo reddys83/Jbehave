@@ -247,6 +247,7 @@ public class DataPage extends AbstractPage {
     private String clickedCurrencyIso="";
     private String city_area_link_xpath = "//*[@class='vertical']//tr[5]/td[a='";
     private String city_subarea_link_xpath = "//*[@class='vertical']//tr[6]/td[a='";
+    private String city_country_link_xpath = "//*[@class='vertical']//tr[4]/td[a='";
     String city_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
 
     private By sections_display_xpath = By.xpath("//*[@id='data-side-navbar']//h1");
@@ -1349,6 +1350,29 @@ public class DataPage extends AbstractPage {
 
     public void clickOnCityRelatedPlace(String relatedPlace) {
         attemptClick(By.xpath(city_related_places_place_link_xpath + relatedPlace + "']/td/a"));
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clickOnCityCountry(String country) {
+        attemptClick(By.xpath(city_country_link_xpath + country + "']/td/a"));
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void verifyClickedCountryPage(String country) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(country, getDriver().findElement(country_listBox_xpath).getText());
     }
 
     public void verifySections(ExamplesTable sections) {

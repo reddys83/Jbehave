@@ -1022,9 +1022,19 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyClickedAreaPage(country, area, subArea);
     }
 
+    @Then("the user should see the country page with $country selected")
+    public void verifyClickedCountryPage(@Named("country") String country){
+        getDataPage().verifyClickedCountryPage(country);
+    }
+
     @When("the user clicks on the city subarea link $subArea")
     public void clickOnCitySubArea(@Named("subArea") String subArea){
         getDataPage().clickOnCitySubArea(subArea);
+    }
+
+    @When("the user clicks on the city country link $country")
+    public void clickOnCityCountry(@Named("country") String country){
+        getDataPage().clickOnCityCountry(country);
     }
 
     @When("the user clicks on the city related place link $relatedPlace")
