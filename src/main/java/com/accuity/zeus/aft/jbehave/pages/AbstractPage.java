@@ -4,10 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.*;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -107,6 +104,14 @@ public abstract class AbstractPage {
 			Thread.sleep(STANDARD_WAIT);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void waitForElementToAppear(By by){
+		try{
+			WebDriverWait wait = new WebDriverWait(getDriver(),15);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+		}catch(org.openqa.selenium.NoSuchElementException e){
 		}
 	}
 

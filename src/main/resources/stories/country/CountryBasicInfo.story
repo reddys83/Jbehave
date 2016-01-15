@@ -29,6 +29,7 @@ Then the user should see the countries in the listbox as:
 |St. Pierre et Miquelon|
 
 Scenario: Verify Country basic info
+1. BUG_D - ZEUS-792
 Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -127,3 +128,26 @@ Then the user should see the below country sections
 Examples:
 |country|
 |Afghanistan|
+
+Scenario: Verify basic info left section
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the country basic info link in the navigation bar
+Then the user should see the below fields in the country basic info left section
+|FIELDS|
+|Status|
+|Start Date|
+|End Date|
+|Replaced By|
+|Add Info|
+|Imports|
+|Exports|
+|Political Structure|
+|Intl Dialing Code|
+
+Examples:
+|country|replacedByCountry|
+|Afghanistan|Albania|

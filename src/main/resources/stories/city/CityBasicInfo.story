@@ -7,6 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS - 92 - User can view city basic info
 
 Scenario: Verify the City basic info
+BUG-ID - ZEUS-686
 Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
