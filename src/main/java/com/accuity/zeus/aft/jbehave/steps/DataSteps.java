@@ -100,7 +100,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the choose a country option")
-    public void clickOnCountryListBox() {
+    public void clickOnCountryListBox() throws InterruptedException {
         getDataPage().clickOnCountryListBox();
     }
 
@@ -1010,6 +1010,31 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the currency page for clicked iso name")
     public void verifyCurrencyPage(){
         getDataPage().verifyCurrencyPage();
+    }
+
+    @Then("the user should see the below country sections $countrySections")
+    public void verifyCountrySections(ExamplesTable countrySections){
+        getDataPage().verifySections(countrySections);
+    }
+
+    @Then("the user should see the below area sections $areaSections")
+    public void verifyAreaSections(ExamplesTable areaSections){
+        getDataPage().verifySections(areaSections);
+    }
+
+    @Then("the user should see the below city sections $citySections")
+    public void verifyCitySections(ExamplesTable citySections){
+        getDataPage().verifySections(citySections);
+    }
+
+    @Then("the user should see the below legal entity sections $legalEntitySections")
+    public void verifyLegalEntitySections(ExamplesTable legalEntitySections){
+        getDataPage().verifySections(legalEntitySections);
+    }
+
+    @Then("the user should see the below office sections $legalEntitySections")
+    public void verifyOfficeSections(ExamplesTable officeSections){
+        getDataPage().verifySections(officeSections);
     }
 
     @Then("the user should see the below fields in the country basic info left section $basicInfoLeftSection")
