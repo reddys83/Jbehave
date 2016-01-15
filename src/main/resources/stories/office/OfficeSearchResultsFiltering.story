@@ -200,7 +200,7 @@ Examples:
 |3|FID|3|
 
 Scenario: Verify the office type filter, When the office has single office type for the institution it should be selected by default and ALL should not be present
-Meta:
+Meta:@RunThis
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -234,7 +234,7 @@ Examples:
 |267124|FID|267124|
 
 Scenario: User selects a column sort and a filter, Both the coulumn sort and filter are applied to the results list
-Meta:@RunThis
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
