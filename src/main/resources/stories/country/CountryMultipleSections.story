@@ -8,6 +8,7 @@ JIRA ID - ZEUS-313 - User can select multiple sections of country to view
 JIRA ID - ZEUS-312 - User can view all country info
 
 Scenario: Select and view multiple sections for country.
+BUG_ID - ZEUS-792
 Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page

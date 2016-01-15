@@ -53,7 +53,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_credit_rating_link_id = By.id("legalEntityCreditRating");
     private By legalEntity_ownership_link_id = By.id("legalEntityOwnershipSummaries");
 
-    private By legalEntity_ownership_label_xpath = By.xpath("//li[h2 = 'Ownership Summaries']//h2");
+    private By legalEntity_ownership_label_xpath = By.xpath("//li[h1 = 'Ownership Summaries']//h1/span");
     private By legalEntity_ownership_type_label_xpath = By.xpath("//li[contains(h1,'Ownership Summaries')]//table/thead//th[1]");
     private By legalEntity_ownership_value_label_xpath = By.xpath("//li[contains(h1,'Ownership Summaries')]//table/thead//th[2]");
     private By legalEntity_ownership_type_list_xpath = By.xpath("//li[contains(h1,'Ownership Summaries')]//table/tbody//td[1]");
@@ -347,6 +347,11 @@ public class LegalEntityPage extends AbstractPage {
     }
 
     public OfficesPage clickOnOfficesLink() {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         attemptClick(office_link_xpath);
         return new OfficesPage(getDriver(), getUrlPrefix());
     }
