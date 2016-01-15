@@ -591,6 +591,11 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifySearchReturned0Results() {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals("Your search returned 0 results.", getDriver().findElement(office_search_results_0_results_xpath).getText());
     }
 

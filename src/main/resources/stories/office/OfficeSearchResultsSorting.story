@@ -40,7 +40,6 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
-Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
 When the user clicks on the office search results fid column
 Then the user should see the office search results cards sorted descending order by office fid with fid 1038 from the database
 When the user clicks on the office search results fid column

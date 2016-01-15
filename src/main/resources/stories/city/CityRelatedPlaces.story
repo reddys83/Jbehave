@@ -20,9 +20,13 @@ And the user clicks on the city's places link in the navigation bar
 
 Then the user should see the city's places as:
 |TYPE|PLACE|DETAILS|
-|Area, Test Data|Nassau||
-|Federal Reserve Bank Region|South Valley Stream|Test Data, Test Data|
-|Country|USA|Test Data, Test Data|
+|Country USA|USA|Country, USA|
+|Sub-Area Cook|Cook|Sub-Area, Cook|
+|Sub-Area In Country India|Bilaspur|In Country India|
+|Area Illinois, Area Illinois|Illinois||
+|Country UK|UK|UK|
+|City South Valley Stream|South Valley Stream|City, South Valley Stream|
+|Area Albania|Berat|In Country Albania|
 
 Examples:
 |country|area|city|

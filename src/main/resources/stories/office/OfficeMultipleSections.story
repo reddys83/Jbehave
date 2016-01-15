@@ -73,6 +73,7 @@ And the user navigates to the 4th page on the office search results
 And the user clicks on the offices results card with fid <officeFid>
 Then the user should see the default office page and display basic info
 When the user clicks on the office basic info link in the navigation bar
+And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office services link in the navigation bar
 And the user clicks on the office credit ratings link in the navigation bar
 And the user clicks on the office statistics link in the navigation bar
