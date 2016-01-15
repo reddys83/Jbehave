@@ -13,6 +13,7 @@ JIRA ID - ZEUS-553 - User cna sort office results by type
 JIRA ID - ZEUS-550 - User can sort office results by name
 JIRA ID - ZEUS-551 - User can sort office results by area
 JIRA ID - ZEUS-548 - User can sort office results by city
+JIRA ID - ZEUS-552 - User can sort office results by country
 
 Scenario: Verify the list of office multiple types should order alphabetically in office search results page
 Meta:

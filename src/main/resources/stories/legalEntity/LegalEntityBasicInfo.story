@@ -7,7 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-350 - User can view legal entity's basic info
 JIRA ID - ZEUS-382 - User will see head office address & legal entity title in header of legal entity screen
 JIRA ID - ZEUS-491 - User can follow link to head office from legal entity
-
+JIRA ID - ZEUS-735 - Code shouldn't assume head office fid is of a specific format
 
 Scenario: Verify the basic info for legalEntity
 Given a user is on the search page
@@ -150,3 +150,20 @@ Then the user should not see the legalEntity's headOffice link
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
 |Collins Stewart Europe Limited|Name||271690||
+
+
+Scenario: Verify the head office address for legalEntity with head office not like -0
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+Then the user should see the message you can search for a legal entity at any time using the header search
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+Then the user should see the Head Office of a legal entity as Gp Building, No.30, Kamala Iind Street, Chinna Chokkikulam 625002(View Head Office)
+
+Examples:
+|entity|searchBy|fid|
+|1|fid|1|
