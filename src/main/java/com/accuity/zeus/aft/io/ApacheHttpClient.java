@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.io;
 
 import com.accuity.zeus.aft.commons.Utils;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.steps.SearchResultsSteps;
 import com.accuity.zeus.xml.XmlDocument;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
@@ -13,7 +14,9 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.http.NameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -74,4 +77,30 @@ public class ApacheHttpClient {
         method.releaseConnection();
         return document;
     }
+
+    public Document executeDatabaseAdminQueryWithMultipleParameter(Database database, String xquery, String param, List<NameValuePair> nvPairs) {
+        Utils utils = new Utils();
+        Document document = null;
+        HttpClient client = new HttpClient();
+        client.getState().setCredentials(new AuthScope(database.getHost(), database.getPort(), "public"), new UsernamePasswordCredentials(database.getUsername(), database.getPassword()));
+
+        List<String> authPrefs = new ArrayList<>();
+        authPrefs.add(AuthPolicy.DIGEST);
+        client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
+
+        HttpMethod method = new GetMethod(utils.constructURLWithMultipleParameters(database.getScheme(), database.getHost(), database.getPort(), database.getPath(), xquery, param, nvPairs));
+        try {
+            client.executeMethod(method);
+            document = new XmlDocument().convertFromString(method.getResponseBodyAsString());
+            Thread.sleep(1000L);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        method.releaseConnection();
+        return document;
+    }
+
 }

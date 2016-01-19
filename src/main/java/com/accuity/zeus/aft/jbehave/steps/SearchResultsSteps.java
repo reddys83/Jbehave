@@ -250,6 +250,10 @@ public class SearchResultsSteps extends AbstractSteps{
     public void verifyDefaultOfficeTypeFilterIsAll(){
         getResultsPage().verifyDefaultOfficeTypeFilterIsAll();
     }
+    @Then("the user should see all is deselected in the office type filter")
+    public void verifyAllDeselectedOfficeTypeFilter() {
+        getResultsPage().verifyAllDeselectedOfficeTypeFilter();
+    }
 
     @When("the user selects the office type filter domestic")
     public void selectOfficeTypeFilterDomestic(){
@@ -257,8 +261,7 @@ public class SearchResultsSteps extends AbstractSteps{
     }
 
     @When("the user selects the office type filter foreign")
-    public void selectOfficeTypeFilterForeign(){
-        getResultsPage().selectOfficeTypeFilterForeign();
+    public void selectOfficeTypeFilterForeign(){ getResultsPage().selectOfficeTypeFilterForeign();
     }
 
     @Then("the user should see the list of domestic offices in the office search results")
@@ -331,8 +334,18 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifyOfficeIsSortedAscByCountry(database, apacheHttpClient, searchedEntity);
     }
 
+    @Then("the user should see the types in the type filter should be based on the types of office search results")
+    public void verifyOfficeTypesInTypeFilter() {
+        getResultsPage().verifyOfficeTypesInTypeFilter(database, apacheHttpClient, searchedEntity);
+    }
+
+    @Then("the user should see the office list for the institution <entity> with the $institutionType office type in the office search results")
+    public void officeSearchResultsWithTypeFilter(@Named("institutionType") String institutionType, @Named("entity") String searchedEntity) {
+        getResultsPage().officeSearchResultsWithTypeFilter(database,apacheHttpClient, searchedEntity,institutionType);
+    }
+
     @Then("the user should see the office search results cards sorted descending order by office country")
-    public void verifyOfficeIsSortedDescByCountry(){
+    public void verifyOfficeIsSortedDescByCountry() {
         getResultsPage().verifyOfficeIsSortedDescByCountry(database, apacheHttpClient, searchedEntity);
     }
 
@@ -344,6 +357,10 @@ public class SearchResultsSteps extends AbstractSteps{
     @When("the user selects the institution type filter $institutionType")
     public void selectOfficeInstitutionType(@Named("institutionType") String institutionType){
         getResultsPage().selectOfficeInstitutionType(institutionType);
+    }
+    @Then("the user should see $institutionType is selected by default")
+    public void verifyOfficeTypeSelectedByDefault(@Named("institutionType") String institutionType) {
+        getResultsPage().verifyOfficeTypeSelectedByDefault(institutionType);
     }
     @Then("the user should see the office results for the applied filters")
     public void verifyResultsDisplayed(){

@@ -4,21 +4,22 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.jbehave.pages.AbstractPage;
 import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import junit.framework.Assert;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.w3c.dom.Document;
 
 import java.util.*;
 
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class ResultsPage extends AbstractPage {
@@ -101,6 +102,8 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_rows_xpath = By.xpath("//*[@class='search-results-module']//tbody/tr");
     private String appliedStatusFilter = "";
     private String appliedInstTypeFilter = "";
+    private By office_search_results_type_filter_xpath = By.xpath(".//*[@id='type']/li");
+
     public ResultsPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
     }
@@ -434,6 +437,10 @@ public class ResultsPage extends AbstractPage {
         assertTrue(getDriver().findElement(office_type_default_filter_all_xpath).isDisplayed());
     }
 
+    public void verifyAllDeselectedOfficeTypeFilter() {
+        assertFalse(getDriver().findElement(office_type_default_filter_all_xpath).isDisplayed());
+    }
+
     public void selectOfficeTypeFilterDomestic() {
         attemptClick(office_type_filter_domestic_id);
         try {
@@ -621,7 +628,7 @@ public class ResultsPage extends AbstractPage {
         assertEquals(count, resultsDisplayed);
         List<WebElement> resultsDisplayedTable = getDriver().findElement(office_search_results_displayed_body_xpath).findElements(By.tagName("tr"));
         String resultCountDisplayed = Integer.toString(resultsDisplayedTable.size() - 1);
-        junit.framework.Assert.assertEquals(resultCountDisplayed, count);
+        assertEquals(resultCountDisplayed, count);
 
     }
 
@@ -638,7 +645,12 @@ public class ResultsPage extends AbstractPage {
 
     public void selectOfficeStatusFilterInactive() {
         appliedStatusFilter = "inactive";
+        try{
         attemptClick(office_status_filter_inactive_id);
+            Thread.sleep(2000L);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void verifyActiveOfficesSearchResults(Database database, ApacheHttpClient apacheHttpClient, String searchedEntity) {
@@ -686,6 +698,41 @@ public class ResultsPage extends AbstractPage {
         }
     }
 
+    public void verifyOfficeTypesInTypeFilter(Database database, ApacheHttpClient apacheHttpClient, String searchedEntity) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<WebElement> typeFilter = getDriver().findElements(office_search_results_type_filter_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "office types list", "fid", searchedEntity);
+        for (int i=0; i<typeFilter.size()-1;i++)
+        {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().toUpperCase(), typeFilter.get(i+1).getText());
+        }
+    }
+
+    public void officeSearchResultsWithTypeFilter(Database database, ApacheHttpClient apacheHttpClient, String searchedEntity, String institutionType) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<WebElement> officeFid = getDriver().findElements(office_id_locator_xpath);
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", searchedEntity));
+        nvPairs.add(new BasicNameValuePair("types", institutionType));
+
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "office search results with type filter", "fid", nvPairs);
+        for (int i = 0; i < officeFid.size(); i++)
+        {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), officeFid.get(i).getText());
+        }
+
+    }
+
     public void verifyOfficeIsSortedDescByCountry(Database database, ApacheHttpClient apacheHttpClient, String searchedEntity) {
         try {
             Thread.sleep(1000L);
@@ -712,11 +759,16 @@ public class ResultsPage extends AbstractPage {
         appliedInstTypeFilter = institutionType;
         try{
             attemptClick(By.id("type-"+institutionType.replace(" ","_")));
-            Thread.sleep(1000L);
+            Thread.sleep(2000L);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
+
+    public void verifyOfficeTypeSelectedByDefault(String institutionType) {
+         assertTrue(getDriver().findElement(By.xpath("//*[@id='type-" + institutionType.replace(" ", "_") + "'][@class='selected']")).isDisplayed());
+         }
+
 
     public void verifyOfficeResultsForAppliedFilters(){
         for(int i=0; i<getDriver().findElements(office_search_results_rows_xpath).size(); i++){

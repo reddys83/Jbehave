@@ -1,14 +1,15 @@
 package com.accuity.zeus.aft.commons;
 
+
+import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.message.BasicNameValuePair;
+
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 public class Utils {
 
@@ -69,12 +70,32 @@ public class Utils {
                          .setHost(host)
                          .setPort(port)
                          .setPath(path + xqueryMap.getXquery(xquery))
-                         .addParameter( paramMap.getParam(param), paramValue).build().toString();
+                         .addParameter(paramMap.getParam(param), paramValue).build().toString();
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return null;
         }
     }
+
+    public String constructURLWithMultipleParameters(String scheme, String host, int port, String path, String xquery, String param, List<NameValuePair> nvPairs)
+    {
+        XqueryMap xqueryMap = new XqueryMap();
+        URIBuilder builder = new URIBuilder();
+        try {
+            return builder.setScheme(scheme)
+                    .setHost(host)
+                    .setPort(port)
+                    .setPath(path + xqueryMap.getXquery(xquery))
+                    .addParameters(nvPairs).build().toString();
+        }
+        catch (URISyntaxException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
+    }
+
 
 
 }
