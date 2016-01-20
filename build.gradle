@@ -39,7 +39,7 @@ dependencies {
 	
 	compile group: 'com.accuity', name: 'common-entity', version: '1.0+', changing: true
 
-    compile 'org.seleniumhq.selenium:selenium-java:2.45.0'
+    compile 'org.seleniumhq.selenium:selenium-java:2.48.2'
     compile 'junit:junit:4.+'
     compile 'org.jbehave:jbehave-core:3.9.5'
     compile 'org.springframework:spring-test:4.1.5.RELEASE'

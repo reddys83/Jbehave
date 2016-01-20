@@ -336,7 +336,7 @@ public class ResultsPage extends AbstractPage {
     public void navigateToOfficeLastSearchResultsPage() {
         attemptClick(office_search_results_last_page_xpath);
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -407,6 +407,7 @@ public class ResultsPage extends AbstractPage {
     public void clickOnColumnCity() {
         attemptClick(office_search_results_column_city_xpath);
     }
+
     public void rightClicksOnOfficeID(String officeFid) {
         Actions action = new Actions(getDriver());
         WebElement element = getDriver().findElement(By.xpath(office_search_results_select_officeByFid_xpath + officeFid + "')]"));
@@ -618,6 +619,7 @@ public class ResultsPage extends AbstractPage {
         assertEquals("selected", className);
     }
 
+    /*
     public void verifyResultsDisplayedOnPage(String count) {
         try {
             Thread.sleep(1000L);
@@ -629,8 +631,8 @@ public class ResultsPage extends AbstractPage {
         List<WebElement> resultsDisplayedTable = getDriver().findElement(office_search_results_displayed_body_xpath).findElements(By.tagName("tr"));
         String resultCountDisplayed = Integer.toString(resultsDisplayedTable.size() - 1);
         assertEquals(resultCountDisplayed, count);
-
     }
+    */
 
     public void verifyMultipleOfficeTypesAlphabetically(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String fid) {
         WebElement multipleOfficeTypes = getDriver().findElement(By.xpath(office_search_results_select_officeTypes_xpath+fid + "']/td[7]"));

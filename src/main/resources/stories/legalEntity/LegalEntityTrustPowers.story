@@ -7,7 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-396 User can view legal entity trust powers
 
 Scenario: Verify legalEntity trust powers
-BUG-ID - ZEUS-627
+1. BUG-ID - ZEUS-627
 Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page

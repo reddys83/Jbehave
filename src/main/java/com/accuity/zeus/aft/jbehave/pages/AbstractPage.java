@@ -69,7 +69,7 @@ public abstract class AbstractPage {
 		String text = null;
 		while(true){
 			waitFor();
-			if(!driver.findElement(by).getText().trim().isEmpty() || !driver.findElement(by).getText().trim().equals("")){
+			if(driver.findElement(by).isDisplayed()){
 				text = driver.findElement(by).getText().trim();
 				break;
 			}
