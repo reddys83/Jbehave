@@ -128,9 +128,14 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the currency <currency> details are from trusted document")
     public void verifyCurrencyDetails(@Named("currency") String selectedCurrency) { getDataPage().verifyCurrencyDetails(database, apacheHttpClient, selectedCurrency);}
 
+    @When("the user clicks on the cancel button")
+    public void clickOnCancelButton() {
+        getDataPage().clickOnCancelButton();
+    }
+
     @Then("the user should return to view mode of the currency page")
-    public void verifyCancelButton() {
-        getDataPage().verifyCancelButton();
+    public void verifyCurrencyViewMode() {
+        getDataPage().verifyCurrencyViewMode();
     }
 
     @Then("the user should not see the currency's uses")

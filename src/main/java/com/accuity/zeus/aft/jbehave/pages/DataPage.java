@@ -400,13 +400,16 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyCancelButton() {
+    public void clickOnCancelButton() {
         attemptClick(currency_cancel_button_id);
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void verifyCurrencyViewMode() {
         assertTrue(getDriver().findElement(currency_abbr_xpath).isDisplayed());
         assertTrue(getDriver().findElement(currency_name_xpath).isDisplayed());
         assertTrue(getDriver().findElement(currency_unit_xpath).isDisplayed());

@@ -35,6 +35,7 @@ And the user enters the currency <currency> in the typeahead box
 And the user clicks on the update currency link
 Then the user should see the currency selection is disabled
 Then the user should see the currency <currency> details are from trusted document
+When the user clicks on the cancel button
 Then the user should return to view mode of the currency page
 
 Examples:
