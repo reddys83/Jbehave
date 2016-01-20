@@ -125,6 +125,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCurrencyUse(database, apacheHttpClient, selectedCurrency);
     }
 
+    @Then("the user should see the currency <currency> details are from trusted document")
+    public void verifyCurrencyDetails(@Named("currency") String selectedCurrency) { getDataPage().verifyCurrencyDetails(database, apacheHttpClient, selectedCurrency);}
+
+    @Then("the user should return to view mode of the currency page")
+    public void verifyCancelButton() {
+        getDataPage().verifyCancelButton();
+    }
+
     @Then("the user should not see the currency's uses")
     public void verifyNoCurrencyUse() {
         getDataPage().verifyNoCurrencyUse();
@@ -451,6 +459,10 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCurrencyQuantity(quantity);
     }
 
+    @Then("the user should see the currency selection is disabled")
+    public void verifyCurrencySelectionDisabled() {
+        getDataPage().verifyCurrencySelectionDisabled();
+    }
     @When("the user clicks on the country places link in the navigation bar")
     public void clickOnCountryPlaces() {
         getDataPage().clickOnCountryPlaces();
