@@ -40,9 +40,16 @@ public class DataPage extends AbstractPage {
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By area_listBox_xpath = By.xpath("//*[@id='selection1'] //*[@id='entitySelect_chosen']//span");
     private By subarea_listBox_xpath = By.xpath("//*[@id='selection2'] //*[@id='entitySelect_chosen']//span");
+
+    private By currency_name_edit_xpath= By.xpath(".//*[@id='content']//div[1]/input");
+    private By currency_abbr_edit_xpath=By.xpath(".//*[@id='content']//div[2]/input");
+    private By currency_unit_edit_xpath=By.xpath(".//*[@id='content']//div[3]/input");
+    private By currency_quantity_edit_xpath=By.xpath(".//*[@id='content']//div[4]/input");
+
     //private By country_listBox_xpath= By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private By country_listBox_value_xpath=By.xpath(".//*[@id='selection0'] //*[@class='chosen-drop']//ul");
     private By country_type_ahead_xpath=By.xpath(".//*[@id='selection0'] //*[@id='entitySelect_chosen']//input");
+    private By currency_selection_disabled_xpath=By.xpath(".//*[@id='entitySelect_chosen'][@class='chosen-container chosen-container-single chosen-disabled']");
     private String currencySearchString = null;
     private By country_iso2_label_id = By.id("iso2");
     private By country_iso2_id = By.id("iso2-value");
@@ -137,7 +144,8 @@ public class DataPage extends AbstractPage {
     private By credit_rating_applied_date_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//tbody/tr/td[4]");
     private By credit_rating_confirmed_date_xpath = By.xpath("//li[contains(h1,'Credit Rating')]//tbody/tr/td[5]");
 
-    private By currency_update_link_id = By.id("update-link");
+    private By currency_update_button_id = By.id("update-button");
+    private By currency_cancel_button_id = By.id("cancel-button");
     private By currency_input_name_xpath = By.xpath("//input[@name='name']");
     private By currency_input_abbr_xpath = By.xpath("//input[@name='abbr']");
     private By currency_input_unit_xpath = By.xpath("//input[@name='unit']");
@@ -389,6 +397,34 @@ public class DataPage extends AbstractPage {
         String[] expCountryList = getDriver().findElement(country_listBox_value_xpath).getText().split("\n");
         for (int i=0; i<=countryList.getRowCount()-1;i++){
             assertTrue(countryList.getRow(i).containsValue(expCountryList[i]));
+        }
+    }
+
+    public void clickOnCancelButton() {
+        attemptClick(currency_cancel_button_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void verifyCurrencyViewMode() {
+        assertTrue(getDriver().findElement(currency_abbr_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_name_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_unit_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_quantity_xpath).isDisplayed());
+    }
+
+
+    public void verifyCurrencyDetails(Database database, ApacheHttpClient apacheHttpClient, String selectedEntity) {
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "currency details", "name", selectedEntity);
+        for(int i=0;i<document.getElementsByTagName("currency").getLength();i++) {
+            assertEquals(document.getElementsByTagName("ISO").item(i).getTextContent(), getTextOnPage(currency_iso_code_id));
+            assertEquals(document.getElementsByTagName("Abbr").item(i).getTextContent(), getDriver().findElement(currency_abbr_edit_xpath).getAttribute("value"));
+         // assertEquals(document.getElementsByTagName("Name").item(i).getTextContent(), getDriver().findElement(currency_name_edit_xpath).getAttribute("value"));
+            assertEquals(document.getElementsByTagName("Unit").item(i).getTextContent(), getDriver().findElement(currency_unit_edit_xpath).getAttribute("value"));
+            assertEquals(document.getElementsByTagName("Quantity").item(i).getTextContent(), getDriver().findElement(currency_quantity_edit_xpath).getAttribute("value"));
         }
     }
 
@@ -867,7 +903,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnUpdateCurrencyLink() {
-        attemptClick(currency_update_link_id);
+        attemptClick(currency_update_button_id);
     }
 
     public void enterCurrencyName(String name) {
@@ -888,6 +924,10 @@ public class DataPage extends AbstractPage {
     public void enterCurrencyQuantity(String quantity) {
         getDriver().findElement(currency_input_quantity_xpath).clear();
         getDriver().findElement(currency_input_quantity_xpath).sendKeys(quantity);
+    }
+
+    public void verifyCurrencySelectionDisabled() {
+        assertTrue(getDriver().findElement(currency_selection_disabled_xpath).isDisplayed());
     }
 
     public void clickOnCountryPlaces() {
