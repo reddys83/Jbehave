@@ -62,7 +62,7 @@ And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
-And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city's places link in the navigation bar
 And the user clicks on the city related place link Bilaspur
 Then the user should see the area page with India, Chhattisgarh and Bilaspur selected
 And the user should see the area's names as:
@@ -84,7 +84,7 @@ And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
-And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city's places link in the navigation bar
 And the user clicks on the city related place link Cook
 Then the user should see the area page with USA, Illinois and Cook selected
 And the user should see the area's names as:
@@ -106,7 +106,7 @@ And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
-And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city's places link in the navigation bar
 And the user clicks on the city related place link Berat
 Then the user should see the area page with Albania, Berat and Choose a Subarea selected
 And the user should see the area's names as:
@@ -119,6 +119,7 @@ Examples:
 |USA|Illinois|Chicago|
 
 Scenario: User can follow link to area from city related place - click area in same country
+1. BUG-ID - ZEUS-795
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -128,13 +129,13 @@ And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
-And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city's places link in the navigation bar
 And the user clicks on the city related place link Illinois
 Then the user should see the area page with USA, Illinois and Choose a Subarea selected
 And the user should see the area's names as:
 |TYPE|VALUE|
 |Full Name|Illinois|
-|Display Name|Illinois|
+|Display Name|IL|
 
 Examples:
 |country|area|city|
@@ -150,7 +151,7 @@ And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
-And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city's places link in the navigation bar
 And the user clicks on the city related place link USA
 Then the user should see the country page with USA selected
 And the user should see the area's names as:
@@ -171,7 +172,7 @@ And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
-And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city's places link in the navigation bar
 And the user clicks on the city related place link UK
 Then the user should see the country page with UK selected
 And the user should see the area's names as:

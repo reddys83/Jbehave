@@ -1017,14 +1017,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCityArea(area);
     }
 
-    @Then("the user should see the area page with $country, $area and $subArea selected")
-    public void verifyClickedAreaPage(@Named("country") String country, @Named("area") String area, @Named("subArea") String subArea){
-        getDataPage().verifyClickedAreaPage(country, area, subArea);
+    @Then("the user should see the area page with $countryDropDown, $areaDropDown and $subAreaDropDown selected")
+    public void verifyClickedAreaPage(@Named("countryDropDown") String countryDropDown, @Named("areaDropDown") String areaDropDown, @Named("subAreaDropDown") String subAreaDropDown){
+        getDataPage().verifyClickedAreaPage(countryDropDown, areaDropDown, subAreaDropDown);
     }
 
-    @Then("the user should see the country page with $country selected")
-    public void verifyClickedCountryPage(@Named("country") String country){
-        getDataPage().verifyClickedCountryPage(country);
+    @Then("the user should see the country page with $countryDropDown selected")
+    public void verifyClickedCountryPage(@Named("countryDropDown") String countryDropDown){
+        getDataPage().verifyClickedCountryPage(countryDropDown);
     }
 
     @When("the user clicks on the city subarea link $subArea")

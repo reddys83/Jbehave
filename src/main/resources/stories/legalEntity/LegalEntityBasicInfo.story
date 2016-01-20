@@ -49,8 +49,8 @@ And the user should see the legal entity's virtual presence as:
 |Website||dnb.no|http://www.dnb.no|
 
 And the user should see the Status of a legal entity as Active
-And the user should see the Claimed Est Date of a legal entity as 01 Jul 1990
-And the user should see the Chartered Date of a legal entity  as 01 Jul 1990
+And the user should see the Claimed Est Date of a legal entity as 1990
+And the user should see the Chartered Date of a legal entity  as 1990
 And the user should see the Charter Type of a legal entity as Us State Chartered Bank
 And the user should see the FATCA Status of a legal entity as Inactive
 And the user should see the Insurance Type of a legal entity as PSAIC
@@ -64,7 +64,7 @@ And the user should see the legal entity corporate statement as Ultimate Parent 
 
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
-|DNB Bank ASA|Name|Oslo, Oslo, Norway|4537|96664340|
+|DNB Bank ASA|Name|Dronning Eufemias gate 300191|4537|96664340|
 
 Scenario: Verify legal entity header with UseInAddress = False
 Given a user is on the search page
@@ -197,7 +197,8 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-Then the user should see the Head Office of a legal entity as Gp Building, No.30, Kamala Iind Street, Chinna Chokkikulam 625002(View Head Office)
+Then the user should see the Head Office of a legal entity as Gp Building, No.30, Kamala Iind Street, Chinna Chokkikulam625002(View Head Office)
+
 Examples:
 |entity|searchBy|fid|
 |1|fid|1|

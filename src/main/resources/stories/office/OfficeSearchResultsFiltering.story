@@ -10,7 +10,6 @@ JIRA - ID - ZEUS - 590 - User can filter list of offices by status
 JIRA - ID - ZEUS - 596 - User can use a combination of filters for office list
 JIRA - ID - ZEUS - 589 - User can filter list of offices by office type
 
-
 Scenario: Filter offices by type - Domestic
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -163,7 +162,7 @@ Examples:
 |1038|FID|1038|
 
 Scenario: User should see the types in the type filter should be based on the office search results types
- ZEUS-589
+1. ZEUS-589
 Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page

@@ -10,9 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
-
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -399,12 +396,12 @@ public class DataPage extends AbstractPage {
         verifyCurrencyUseTableHeaders();
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "currency uses", "name", selectedCurrency);
         for(int i=0; i<document.getElementsByTagName("currencyUse").getLength(); i++){
-            assertEquals(document.getElementsByTagName("countryName").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[1]")));
-            assertEquals(document.getElementsByTagName("startDate").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[2]")));
-            assertEquals(document.getElementsByTagName("endDate").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[3]")));
-            assertEquals(document.getElementsByTagName("primary").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[4]")));
-            assertEquals(document.getElementsByTagName("replacedBy").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[5]")));
-            assertEquals(document.getElementsByTagName("status").item(i).getTextContent(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[6]")));
+            assertEquals(document.getElementsByTagName("countryName").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[1]")).trim());
+            assertEquals(document.getElementsByTagName("startDate").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[2]")).trim());
+            assertEquals(document.getElementsByTagName("endDate").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[3]")).trim());
+            assertEquals(document.getElementsByTagName("primary").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[4]")).trim());
+            assertEquals(document.getElementsByTagName("replacedBy").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[5]")).trim());
+            assertEquals(document.getElementsByTagName("status").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[6]")).trim());
         }
     }
 
@@ -1328,15 +1325,15 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyClickedAreaPage(String country, String area, String subArea) {
+    public void verifyClickedAreaPage(String countryDropDown, String areaDropDown, String subAreaDropDown) {
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertEquals(country,getDriver().findElement(country_listBox_xpath).getText());
-        assertEquals(area,getDriver().findElement(area_listBox_xpath).getText());
-        assertEquals(subArea,getDriver().findElement(subarea_listBox_xpath).getText());
+        assertEquals(countryDropDown,getDriver().findElement(country_listBox_xpath).getText());
+        assertEquals(areaDropDown,getDriver().findElement(area_listBox_xpath).getText());
+        assertEquals(subAreaDropDown,getDriver().findElement(subarea_listBox_xpath).getText());
     }
 
     public void clickOnCitySubArea(String subArea) {
@@ -1358,7 +1355,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnCityCountry(String country) {
-        attemptClick(By.xpath(city_country_link_xpath + country + "']/td/a"));
+        attemptClick(By.xpath(city_country_link_xpath + country + "']/a"));
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -1366,13 +1363,13 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyClickedCountryPage(String country) {
+    public void verifyClickedCountryPage(String countryDropDown) {
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertEquals(country, getDriver().findElement(country_listBox_xpath).getText());
+        assertEquals(countryDropDown, getDriver().findElement(country_listBox_xpath).getText());
     }
 
     public void verifySections(ExamplesTable sections) {
