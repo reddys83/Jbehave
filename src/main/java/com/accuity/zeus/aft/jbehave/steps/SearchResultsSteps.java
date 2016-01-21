@@ -341,7 +341,7 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @Then("the user should see the office list for the institution <entity> with the $institutionType office type in the office search results")
     public void officeSearchResultsWithTypeFilter(@Named("institutionType") String institutionType, @Named("entity") String searchedEntity) {
-        getResultsPage().officeSearchResultsWithTypeFilter(database,apacheHttpClient, searchedEntity,institutionType);
+        getResultsPage().officeSearchResultsWithTypeFilter(database, apacheHttpClient, searchedEntity,institutionType);
     }
 
     @Then("the user should see the office search results cards sorted descending order by office country")
