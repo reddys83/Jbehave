@@ -268,8 +268,12 @@ public class DataPage extends AbstractPage {
     private By currency_unit_error_message_xpath = By.xpath("//*[@data-error_id='unitError']");
     private By currency_quantity_error_message_xpath = By.xpath("//*[@data-error_id='quantityError']");
     private By error_message_at_top_xpath = By.xpath("//*[@id='error']/div/div/p");
-    private By confirm_button_id = By.id("confirm-button");
+    private By confirm_button_xpath = By.xpath("//*[@id='modal-region'] //*[@id='confirm-button']");
     private By cancel_yes_button_id = By.id("confirm-button");
+    private By return_button_xpath = By.xpath("//*[@id='modal-region'] //button[@id='cancel-button']");
+    private By confirm_changes_info_xpath = By.xpath("//*[@id='modal-region']/div/p");
+    private By confirm_changes_heading_xpath = By.xpath("//*[@id='modal-region']/div/h1");
+
     private String editedCurrencyName="";
     private String editedCurrencyAbbr="";
     private String editedCurrencyUnit="";
@@ -1525,7 +1529,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnConfirmButton() {
-        attemptClick(confirm_button_id);
+        attemptClick(confirm_button_xpath);
     }
 
     public void revertChangesToCurrency(Database database, ApacheHttpClient apacheHttpClient, String selectedCurrency) {
@@ -1536,6 +1540,29 @@ public class DataPage extends AbstractPage {
 
     public void clickOnCancelYesButton() {
         attemptClick(cancel_yes_button_id);
+    }
+
+    public void verifySaveConfirmationModal() {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals("Confirm Changes", getDriver().findElement(confirm_changes_heading_xpath).getText());
+        assertEquals("Click Confirm to save or Return to continue with your edits.", getDriver().findElement(confirm_changes_info_xpath).getText());
+        assertEquals("RETURN", getDriver().findElement(return_button_xpath).getText());
+        assertEquals("CONFIRM", getDriver().findElement(confirm_button_xpath).getText());
+    }
+
+    public void clickOnReturnButton() {
+        attemptClick(return_button_xpath);
+    }
+
+    public void verifyCurrencyEditMode(){
+        assertTrue(getDriver().findElement(currency_input_name_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_input_abbr_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_input_unit_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_input_quantity_xpath).isDisplayed());
     }
 }
 

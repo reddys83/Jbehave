@@ -7,6 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-190 - User can edit currencies
 JIRA ID - ZEUS-243 - User edits for currency will be validated
 JIRA ID - ZEUS-510 - User can edit a currency
+JIRA ID - ZEUS-240 - User can save edits to existing currency
 
 Scenario: a. Veify the currency selection drop-down is disabled in update mode
 b. Verify the currency details are comming from trusted document
@@ -85,3 +86,19 @@ And the user reverts the changes to the currency
 Examples:
 |currency|abbr|unit|quantity|
 |Afghani-test|AFN-test|Puls-Test|100|
+
+Scenario: verify save confirmation modal
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the return button
+Then the user should return to edit mode of the currency page
+
+Examples:
+|currency|
+|Afghani-test|
