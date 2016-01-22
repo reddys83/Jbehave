@@ -1160,5 +1160,20 @@ public class DataSteps extends AbstractSteps {
     public void verifyCurrencyEditMode(){
         getDataPage().verifyCurrencyEditMode();
     }
+
+    @Then("the user should see the list of all other existing currencies (by name) excluding the currency they are currently viewing")
+    public void verifyReplacedByCurrencyList(){
+        getDataPage().verifyReplacedByCurrencyList(database, apacheHttpClient, selectedCurrency);
+    }
+
+    @Then("the user should see the error $startDateErrorMsg for start date")
+    public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg){
+        getDataPage().verifyStartDateErrorMessage(startDateErrorMsg);
+    }
+
+    @Then("the user should see the error $startDateErrorMsg for end date")
+    public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg){
+        getDataPage().verifyEndDateErrorMessage(endDateErrorMsg);
+    }
 }
 

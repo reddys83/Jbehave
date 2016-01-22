@@ -273,7 +273,9 @@ public class DataPage extends AbstractPage {
     private By return_button_xpath = By.xpath("//*[@id='modal-region'] //button[@id='cancel-button']");
     private By confirm_changes_info_xpath = By.xpath("//*[@id='modal-region']/div/p");
     private By confirm_changes_heading_xpath = By.xpath("//*[@id='modal-region']/div/h1");
-
+    private By currency_replaced_by_xpath = By.xpath("//*[@class='chosen-results']/li");
+    private By currency_start_date_error_msg_xpath = By.xpath("//*[@data-error_id='startDateError']");
+    private By currency_end_date_error_msg_xpath = By.xpath("//*[@data-error_id='endDateError']");
     private String editedCurrencyName="";
     private String editedCurrencyAbbr="";
     private String editedCurrencyUnit="";
@@ -1563,6 +1565,27 @@ public class DataPage extends AbstractPage {
         assertTrue(getDriver().findElement(currency_input_abbr_xpath).isDisplayed());
         assertTrue(getDriver().findElement(currency_input_unit_xpath).isDisplayed());
         assertTrue(getDriver().findElement(currency_input_quantity_xpath).isDisplayed());
+    }
+
+    public void verifyReplacedByCurrencyList(Database database, ApacheHttpClient apacheHttpClient, String selectedCurrency) {
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "currency list");
+        List<String> currencyList = new ArrayList<>();
+        List <WebElement> replacedByCurrenciesList = getDriver().findElements(currency_replaced_by_xpath);
+        for (int i = 0; i < document.getElementsByTagName("name").getLength(); i++) {
+            currencyList.add(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent());
+        }
+        currencyList.remove(selectedCurrency);
+        for(int i=0; i<getDriver().findElements(currency_replaced_by_xpath).size(); i++){
+            assertEquals(currencyList.get(i),replacedByCurrenciesList.get(i).getText());
+        }
+    }
+
+    public void verifyStartDateErrorMessage(String startDateErrorMsg) {
+        assertEquals(startDateErrorMsg.replace("'",""), getDriver().findElement(currency_start_date_error_msg_xpath).getText());
+    }
+
+    public void verifyEndDateErrorMessage(String endDateErrorMsg) {
+        assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(currency_start_date_error_msg_xpath).getText());
     }
 }
 
