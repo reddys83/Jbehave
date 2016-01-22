@@ -41,6 +41,7 @@ public class DataPage extends AbstractPage {
     private By currency_quantity_xpath = By.xpath("//div[@id='content']//dd[4]");
     String currency_use_table_xpath_string = "//*[@id='content']/div/table/tbody/tr[";
     private By currency_use_table_header_xpath = By.xpath("//*[@id='content']/div/table/thead/tr");
+    private By currency_country_editable_xpath = By.xpath(".//*[@id='content']/div/form/fieldset[2]/table/tbody[1]/tr/td[1]/select");
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By area_listBox_xpath = By.xpath("//*[@id='selection1'] //*[@id='entitySelect_chosen']//span");
     private By subarea_listBox_xpath = By.xpath("//*[@id='selection2'] //*[@id='entitySelect_chosen']//span");
@@ -270,6 +271,7 @@ public class DataPage extends AbstractPage {
     private By error_message_at_top_xpath = By.xpath("//*[@id='error']/div/div/p");
     private By confirm_button_id = By.id("confirm-button");
     private By cancel_yes_button_id = By.id("confirm-button");
+    private By cancel_no_button_id = By.id("cancel-button");
     private String editedCurrencyName="";
     private String editedCurrencyAbbr="";
     private String editedCurrencyUnit="";
@@ -424,6 +426,10 @@ public class DataPage extends AbstractPage {
         assertTrue(getDriver().findElement(currency_name_xpath).isDisplayed());
         assertTrue(getDriver().findElement(currency_unit_xpath).isDisplayed());
         assertTrue(getDriver().findElement(currency_quantity_xpath).isDisplayed());
+    }
+
+    public void verifyCurrencyEditMode(){
+        assertTrue(getDriver().findElement(currency_country_editable_xpath).isDisplayed());
     }
 
 
@@ -1536,6 +1542,10 @@ public class DataPage extends AbstractPage {
 
     public void clickOnCancelYesButton() {
         attemptClick(cancel_yes_button_id);
+    }
+
+    public void clickOnCancelNoButton() {
+        attemptClick(cancel_no_button_id);
     }
 }
 

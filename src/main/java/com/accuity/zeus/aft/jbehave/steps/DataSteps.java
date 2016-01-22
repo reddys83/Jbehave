@@ -145,9 +145,19 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCancelYesButton();
     }
 
+    @When("the user clicks on the cancel no button")
+    public void clickOnCancelNoButton() {
+        getDataPage().clickOnCancelNoButton();
+    }
+
     @Then("the user should return to view mode of the currency page")
     public void verifyCurrencyViewMode() {
         getDataPage().verifyCurrencyViewMode();
+    }
+
+    @Then("the user should return to edit mode of currency page")
+    public void verifyCurrencyEditMode(){
+        getDataPage().verifyCurrencyEditMode();
     }
 
     @Then("the user should not see the currency's uses")
