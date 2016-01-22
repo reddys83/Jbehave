@@ -61,6 +61,7 @@ Scenario: Verify currency's uses.
 1. Verify sorting order.
 2. Click on usage country link
 3. BUG-ID - ZEUS-753
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
