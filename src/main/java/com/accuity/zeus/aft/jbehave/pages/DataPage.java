@@ -427,7 +427,7 @@ public class DataPage extends AbstractPage {
     }
 
 
-    public void verifyCurrencyDetails(Database database, ApacheHttpClient apacheHttpClient, String selectedEntity, String source) {
+    public void verifyViewCurrencyDetails(Database database, ApacheHttpClient apacheHttpClient, String selectedEntity, String source) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedEntity));
         nvPairs.add(new BasicNameValuePair("source", source));
@@ -439,15 +439,34 @@ public class DataPage extends AbstractPage {
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "currency details", nvPairs);
         for(int i=0;i<document.getElementsByTagName("currency").getLength();i++) {
             assertEquals("ISO", getTextOnPage(currency_iso_code_label_id));
-            assertEquals(document.getElementsByTagName("iso").item(i).getTextContent(), getTextOnPage(currency_iso_code_id));
+            assertEquals(document.getElementsByTagName("iso").item(i).getTextContent(), getDriver().findElement(currency_iso_code_id).getText());
             assertEquals("Abbr", getTextOnPage(currency_abbr_label_xpath));
-            assertEquals(document.getElementsByTagName("abbr").item(i).getTextContent(), getTextOnPage(currency_abbr_xpath));
+            assertEquals(document.getElementsByTagName("abbr").item(i).getTextContent(), getDriver().findElement(currency_abbr_xpath).getText());
             assertEquals("Name", getTextOnPage(currency_name_label_xpath));
-            assertEquals(document.getElementsByTagName("name").item(i).getTextContent(), getTextOnPage(currency_name_xpath));
+            assertEquals(document.getElementsByTagName("name").item(i).getTextContent(), getDriver().findElement(currency_name_xpath).getText());
             assertEquals("Unit", getTextOnPage(currency_unit_label_xpath));
-            assertEquals(document.getElementsByTagName("unit").item(i).getTextContent(), getTextOnPage(currency_unit_xpath));
+            assertEquals(document.getElementsByTagName("unit").item(i).getTextContent(), getDriver().findElement(currency_unit_xpath).getText());
             assertEquals("Quantity", getTextOnPage(currency_quantity_label_xpath));
-            assertEquals(document.getElementsByTagName("quantity").item(i).getTextContent(), getTextOnPage(currency_quantity_xpath));
+            assertEquals(document.getElementsByTagName("quantity").item(i).getTextContent(), getDriver().findElement(currency_quantity_xpath).getText());
+        }
+    }
+
+    public void verifyEditCurrencyDetails(Database database, ApacheHttpClient apacheHttpClient, String selectedEntity, String source) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "currency details", nvPairs);
+        for(int i=0;i<document.getElementsByTagName("currency").getLength();i++) {
+            assertEquals(document.getElementsByTagName("iso").item(i).getTextContent(), getDriver().findElement(currency_iso_code_id).getText());
+            assertEquals(document.getElementsByTagName("abbr").item(i).getTextContent(), getDriver().findElement(currency_input_abbr_xpath).getAttribute("value"));
+            assertEquals(document.getElementsByTagName("name").item(i).getTextContent(), getDriver().findElement(currency_input_name_xpath).getAttribute("value"));
+            assertEquals(document.getElementsByTagName("unit").item(i).getTextContent(), getDriver().findElement(currency_input_unit_xpath).getAttribute("value"));
+            assertEquals(document.getElementsByTagName("quantity").item(i).getTextContent(), getDriver().findElement(currency_input_quantity_xpath).getAttribute("value"));
         }
     }
 

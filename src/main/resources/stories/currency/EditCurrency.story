@@ -19,7 +19,7 @@ And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
 And the user clicks on the update currency link
 Then the user should see the currency selection disabled
-Then the user should see the currency details from trusted document
+Then the user should see the edit currency details from trusted document
 When the user clicks on the cancel button
 And the user clicks on the cancel yes button
 Then the user should return to view mode of the currency page
@@ -79,7 +79,7 @@ And the user enters the currency quantity value as <quantity>
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the edits to currency in zeus document
-Then the user should see the currency details from trusted document
+Then the user should see the view currency details from trusted document
 And the user reverts the changes to the currency
 
 Examples:
