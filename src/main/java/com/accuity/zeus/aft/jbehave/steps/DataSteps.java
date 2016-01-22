@@ -109,6 +109,8 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryList(database, apacheHttpClient);
     }
 
+    @Then("user should see the list of countries in currency edit mode from trusted document")
+    public void verifyCountryListInCurrencyEditMode() { getDataPage().verifyCountryListInCurrencyEditMode(database, apacheHttpClient);}
 
     @When("the user starts typing the name of a country as $word in the country input box")
     public void enterValueInCountryTypeAhead(String word) {
@@ -135,6 +137,16 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyEditCurrency(database, apacheHttpClient, selectedCurrency, source);
     }
 
+    @Then("the user should see the currency uses in edit mode are from trusted document")
+    public void verifyCurrencyUseInEditMode() {
+        getDataPage().verifyCurrencyUseInEditMode(database, apacheHttpClient, selectedCurrency);
+    }
+
+    /*
+    @Then("the user should see the currency <currency> details are from trusted document")
+    public void verifyCurrencyDetails(@Named("currency") String selectedCurrency) { getDataPage().verifyCurrencyDetails(database, apacheHttpClient, selectedCurrency);}
+    */
+
     @When("the user clicks on the cancel button")
     public void clickOnCancelButton() {
         getDataPage().clickOnCancelButton();
@@ -148,6 +160,16 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should return to view mode of the currency page")
     public void verifyCurrencyViewMode() {
         getDataPage().verifyCurrencyViewMode();
+    }
+
+    @Then("the user should see the currency usage is editable for status active")
+    public void verifyCurrencyUpdateModeForStatusActive() {
+        getDataPage().verifyCurrencyUpdateModeForStatusActive();
+    }
+
+    @Then("the user should see the currency usage is editable for status inactive")
+    public void verifyCurrencyUpdateModeForStatusInactive() {
+        getDataPage().verifyCurrencyUpdateModeForStatusInactive();
     }
 
     @Then("the user should not see the currency's uses")
@@ -1174,6 +1196,46 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the error $startDateErrorMsg for end date")
     public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg){
         getDataPage().verifyEndDateErrorMessage(endDateErrorMsg);
+    }
+
+    @When("the user selects the currency country as <currencyCountry>")
+    public void selectCurrencyCountry(@Named("currencyCountry") String currencyCountry){
+        getDataPage().selectCurrencyCountry(currencyCountry);
+    }
+
+    @When("the user enters the currency start day as <currencyStartDay>")
+    public void enterCurrencyStartDay(@Named("currencyStartDay") String currencyStartDay){
+        getDataPage().enterCurrencyStartDay(currencyStartDay);
+    }
+
+    @When("the user clicks on the currency start month drop-down")
+    public void clickOnCurrencyStartMonthDropDown(){
+        getDataPage().clickOnCurrencyStartMonthDropDown();
+    }
+
+    @When("the user enters the currency start month as <currencyStartMonth>")
+    public void enterCurrencyStartMonth(@Named("currencyStartMonth") String currencyStartMonth){
+        getDataPage().enterCurrencyStartMonth(currencyStartMonth);
+    }
+
+    @When("the user enters the currency start year as <currencyStartYear>")
+    public void enterCurrencyStartYear(@Named("currencyStartYear") String currencyStartYear){
+        getDataPage().enterCurrencyStartYear(currencyStartYear);
+    }
+
+    @When("the user enters the currency end day as <currencyEndDay>")
+    public void enterCurrencyEndDay(@Named("currencyEndDay") String currencyEndDay){
+        getDataPage().enterCurrencyEndDay(currencyEndDay);
+    }
+
+    @When("the user enters the currency end month as <currencyEndMonth>")
+    public void enterCurrencyEndMonth(@Named("currencyEndMonth") String currencyEndMonth){
+        getDataPage().enterCurrencyEndMonth(currencyEndMonth);
+    }
+
+    @When("the user enters the currency end year as <currencyEndYear>")
+    public void enterCurrencyEndYear(@Named("currencyEndYear") String currencyEndYear){
+        getDataPage().enterCurrencyEndYear(currencyEndYear);
     }
 }
 

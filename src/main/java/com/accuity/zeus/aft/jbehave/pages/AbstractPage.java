@@ -117,6 +117,11 @@ public abstract class AbstractPage {
 	}
 
 	public void selectItemFromDropdownList(By by, String value) {
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		Select dropdown = new Select(driver.findElement(by));
 		dropdown.selectByValue(value);
 	}
