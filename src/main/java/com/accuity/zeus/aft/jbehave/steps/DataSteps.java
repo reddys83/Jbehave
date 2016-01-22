@@ -109,6 +109,8 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryList(database, apacheHttpClient);
     }
 
+    @Then("user should see the list of countries in currency edit mode from trusted document")
+    public void verifyCountryListInCurrencyEditMode() { getDataPage().verifyCountryListInCurrencyEditMode(database, apacheHttpClient);}
 
     @When("the user starts typing the name of a country as $word in the country input box")
     public void enterValueInCountryTypeAhead(String word) {
@@ -125,6 +127,10 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCurrencyUse(database, apacheHttpClient, selectedCurrency);
     }
 
+    @Then("the user should see the currency uses in edit mode are from trusted document")
+    public void verifyCurrencyUseInEditMode() {
+        getDataPage().verifyCurrencyUseInEditMode(database, apacheHttpClient, selectedCurrency);
+    }
     @Then("the user should see the currency <currency> details are from trusted document")
     public void verifyCurrencyDetails(@Named("currency") String selectedCurrency) { getDataPage().verifyCurrencyDetails(database, apacheHttpClient, selectedCurrency);}
 
@@ -136,6 +142,16 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should return to view mode of the currency page")
     public void verifyCurrencyViewMode() {
         getDataPage().verifyCurrencyViewMode();
+    }
+
+    @Then("the user should see the currency usage is editable for status active")
+    public void verifyCurrencyUpdateModeForStatusActive() {
+        getDataPage().verifyCurrencyUpdateModeForStatusActive();
+    }
+
+    @Then("the user should see the currency usage is editable for status inactive")
+    public void verifyCurrencyUpdateModeForStatusInactive() {
+        getDataPage().verifyCurrencyUpdateModeForStatusInactive();
     }
 
     @Then("the user should not see the currency's uses")
