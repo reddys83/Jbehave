@@ -9,6 +9,7 @@ JIRA - ID - ZEUS - 555 - User can change number of office results per page
 JIRA - ID - ZEUS - 590 - User can filter list of offices by status
 JIRA - ID - ZEUS - 596 - User can use a combination of filters for office list
 JIRA - ID - ZEUS - 589 - User can filter list of offices by office type
+JIRA - ID - ZEUS - 487 - User can refine list of offices by city23
 
 Scenario: Filter offices by type - Domestic
 Given a user is on the search page
@@ -254,6 +255,24 @@ Then the user should see the office search results card for the searched legal e
 Examples:
 |entity|searchBy|fid|
 |3|FID|3|
+
+
+Scenario: Verify the refine filter for city
+Meta:@refineFilterCity
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user enters Boll in the refine results search bar
+Then the user should see the office search results for city contains the Boll
+
+Examples:
+|entity|searchBy|fid|
+|3125|FID|3125|
 
 
 

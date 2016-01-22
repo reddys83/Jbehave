@@ -182,6 +182,16 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifySortOrderByOfficeArea(database, apacheHttpClient, xqueryName, fid);
     }
 
+    @When("the user enters $searchText in the refine results search bar")
+    public void entersTextInRefineFilterForCity(String searchText) {
+        getResultsPage().entersTextInRefineFilterForCity(searchText);
+    }
+
+    @Then("the user should see the office search results for city contains the $searchText")
+    public void verifyOfficeSearchResultsForCity(String searchText) {
+        getResultsPage().verifyOfficeSearchResultsForCity(searchText);
+    }
+
     @Then("the office search results should sort by city which sorted $xqueryName with fid $fid from the database")
     public void verifySortOrderByOfficeCity(String xqueryName, String fid) {
         getResultsPage().verifySortOrderByOfficeCity(database, apacheHttpClient, xqueryName, fid);

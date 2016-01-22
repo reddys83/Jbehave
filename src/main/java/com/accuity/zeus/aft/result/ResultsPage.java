@@ -103,6 +103,9 @@ public class ResultsPage extends AbstractPage {
     private String appliedStatusFilter = "";
     private String appliedInstTypeFilter = "";
     private By office_search_results_type_filter_xpath = By.xpath(".//*[@id='type']/li");
+    private By office_search_refine_results_searchBox_xpath = By.xpath("//input[@id='refine-input']");
+
+
 
     public ResultsPage(WebDriver driver, String urlPrefix) {
         super(driver, urlPrefix);
@@ -480,6 +483,26 @@ public class ResultsPage extends AbstractPage {
                 nullNameList = null;
             }
         }
+    }
+
+    public void entersTextInRefineFilterForCity(String searchText) {
+
+        getDriver().findElement(office_search_refine_results_searchBox_xpath).sendKeys(searchText);
+        getDriver().findElement(office_search_refine_results_searchBox_xpath).sendKeys(Keys.RETURN);
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void verifyOfficeSearchResultsForCity(String searchText) {
+        List<WebElement> cityList = getDriver().findElements(office_city_locator_xpath);
+        for (int i = 0; i <cityList.size(); i++){
+       assertTrue(cityList.get(i).getText().contains(searchText));
+
+        }
+
     }
 
     public void verifySortOrderByOfficeArea(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String searchedEntity) {
