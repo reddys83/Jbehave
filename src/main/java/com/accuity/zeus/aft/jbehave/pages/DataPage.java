@@ -3,6 +3,8 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -10,6 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -61,7 +65,6 @@ public class DataPage extends AbstractPage {
     private By currency_use_table_replacedBy_disable_edit_xpath = By.xpath("//fieldset[2]//div[@class='chosen-container chosen-container-single chosen-disabled']/a");
     private By currency_use_table_replacedBy_edit_xpath= By.xpath("//fieldset[2]//div[@class='chosen-container chosen-container-single']/a");
     private By currency_use_table_status_edit_xpath = By.xpath("");
-
 
     //private By country_listBox_xpath= By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private By country_listBox_value_xpath=By.xpath(".//*[@id='selection0'] //*[@class='chosen-drop']//ul");
@@ -280,6 +283,22 @@ public class DataPage extends AbstractPage {
     private By subarea_city_dropdown_is_visible_xpath = By.xpath("//*[@id='selection2']//div[@class='chosen-container chosen-container-single']");
     private String area_area_parent_link_xpath = "//table[@class='vertical']//td[a='";
     private By basic_info_left_section_xpath = By.xpath("//table[@class='vertical']/tbody//th");
+    private By save_button_id = By.id("save-button");
+    private By currency_abbr_error_message_xpath = By.xpath("//*[@data-error_id='abbrError']");
+    private By currency_name_error_message_xpath = By.xpath("//*[@data-error_id='nameError']");
+    private By currency_unit_error_message_xpath = By.xpath("//*[@data-error_id='unitError']");
+    private By currency_quantity_error_message_xpath = By.xpath("//*[@data-error_id='quantityError']");
+    private By error_message_at_top_xpath = By.xpath("//*[@id='error']/div/div/p");
+    private By confirm_button_xpath = By.xpath("//*[@id='modal-region'] //*[@id='confirm-button']");
+    private By cancel_yes_button_id = By.id("confirm-button");
+    private By return_button_xpath = By.xpath("//*[@id='modal-region'] //button[@id='cancel-button']");
+    private By confirm_changes_info_xpath = By.xpath("//*[@id='modal-region']/div/p");
+    private By confirm_changes_heading_xpath = By.xpath("//*[@id='modal-region']/div/h1");
+
+    private String editedCurrencyName="";
+    private String editedCurrencyAbbr="";
+    private String editedCurrencyUnit="";
+    private String editedCurrencyQuantity="";
 
     @Override
     public String getPageUrl() {
@@ -302,7 +321,7 @@ public class DataPage extends AbstractPage {
     public void verifyCurrencyList(Database database, ApacheHttpClient apacheHttpClient) {
         assertEquals(getDriver().findElement(labels_xpath).getText(), "CURRENCY");
         List<WebElement> currencyList = getDriver().findElements(currency_country_list_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse("currency list", database);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "currency list");
         for (int i = 0; i < document.getElementsByTagName("name").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), currencyList.get(i).getText());
         }
@@ -311,7 +330,7 @@ public class DataPage extends AbstractPage {
     public void verifyCountryList(Database database, ApacheHttpClient apacheHttpClient){
         assertEquals(getDriver().findElement(labels_xpath).getText(), "COUNTRY");
         List<WebElement> countryList = getDriver().findElements(currency_country_list_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse("country list", database);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,"country list");
         for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), countryList.get(i).getText().trim());
         }
@@ -319,12 +338,11 @@ public class DataPage extends AbstractPage {
 
     public void verifyCountryListInCurrencyEditMode(Database database, ApacheHttpClient apacheHttpClient){
         List<WebElement> countryList = getDriver().findElements(currency_country_list_edit_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse("country list", database);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "country list");
         for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), countryList.get(i).getText().trim());
         }
     }
-
 
     public void enterCurrency(String curr) {
         currencySearchString = curr;
@@ -478,14 +496,49 @@ public class DataPage extends AbstractPage {
     }
 
 
-    public void verifyCurrencyDetails(Database database, ApacheHttpClient apacheHttpClient, String selectedEntity) {
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "currency details", "name", selectedEntity);
+    public void verifyCurrencyDetails(Database database, ApacheHttpClient apacheHttpClient, String selectedEntity, String source) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "currency details", nvPairs);
         for(int i=0;i<document.getElementsByTagName("currency").getLength();i++) {
-            assertEquals(document.getElementsByTagName("ISO").item(i).getTextContent(), getTextOnPage(currency_iso_code_id));
-            assertEquals(document.getElementsByTagName("Abbr").item(i).getTextContent(), getDriver().findElement(currency_abbr_edit_xpath).getAttribute("value"));
-         // assertEquals(document.getElementsByTagName("Name").item(i).getTextContent(), getDriver().findElement(currency_name_edit_xpath).getAttribute("value"));
-            assertEquals(document.getElementsByTagName("Unit").item(i).getTextContent(), getDriver().findElement(currency_unit_edit_xpath).getAttribute("value"));
-            assertEquals(document.getElementsByTagName("Quantity").item(i).getTextContent(), getDriver().findElement(currency_quantity_edit_xpath).getAttribute("value"));
+            assertEquals("ISO", getTextOnPage(currency_iso_code_label_id));
+            assertEquals(document.getElementsByTagName("iso").item(i).getTextContent(), getTextOnPage(currency_iso_code_id));
+            assertEquals("Abbr", getTextOnPage(currency_abbr_label_xpath));
+            assertEquals(document.getElementsByTagName("abbr").item(i).getTextContent(), getTextOnPage(currency_abbr_xpath));
+            assertEquals("Name", getTextOnPage(currency_name_label_xpath));
+            assertEquals(document.getElementsByTagName("name").item(i).getTextContent(), getTextOnPage(currency_name_xpath));
+            assertEquals("Unit", getTextOnPage(currency_unit_label_xpath));
+            assertEquals(document.getElementsByTagName("unit").item(i).getTextContent(), getTextOnPage(currency_unit_xpath));
+            assertEquals("Quantity", getTextOnPage(currency_quantity_label_xpath));
+            assertEquals(document.getElementsByTagName("quantity").item(i).getTextContent(), getTextOnPage(currency_quantity_xpath));
+        }
+    }
+
+    public void verifyEditCurrency(Database database, ApacheHttpClient apacheHttpClient, String selectedEntity, String source){
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "currency details", nvPairs);
+        for(int i=0;i<document.getElementsByTagName("currency").getLength();i++) {
+            if (editedCurrencyName.equals("")){}else{
+            assertEquals(editedCurrencyName, document.getElementsByTagName("name").item(i).getTextContent());}
+            if (editedCurrencyAbbr.equals("")){}else{
+            assertEquals(editedCurrencyAbbr, document.getElementsByTagName("abbr").item(i).getTextContent());}
+            if (editedCurrencyUnit.equals("")){}else{
+            assertEquals(editedCurrencyUnit, document.getElementsByTagName("unit").item(i).getTextContent());}
+            if (editedCurrencyQuantity.equals("")){}else{
+            assertEquals(editedCurrencyQuantity, document.getElementsByTagName("quantity").item(i).getTextContent());}
         }
     }
 
@@ -973,6 +1026,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnUpdateCurrencyLink() {
+
         attemptClick(currency_update_button_id);
         try {
             Thread.sleep(1000L);
@@ -982,21 +1036,37 @@ public class DataPage extends AbstractPage {
     }
 
     public void enterCurrencyName(String name) {
+        editedCurrencyName = name;
+        if(name.length() > 100){
+            modifyHtmlByName("name","maxlength", "");
+        }
         getDriver().findElement(currency_input_name_xpath).clear();
         getDriver().findElement(currency_input_name_xpath).sendKeys(name);
     }
 
     public void enterCurrencyAbbr(String abbr) {
+        editedCurrencyAbbr = abbr;
+        if(abbr.length() > 30){
+            modifyHtmlByName("abbr","maxlength", "");
+        }
         getDriver().findElement(currency_input_abbr_xpath).clear();
         getDriver().findElement(currency_input_abbr_xpath).sendKeys(abbr);
     }
 
     public void enterCurrencyUnit(String unit) {
+        editedCurrencyUnit = unit;
+        if(unit.length() > 100){
+            modifyHtmlByName("unit","maxlength", "");
+        }
         getDriver().findElement(currency_input_unit_xpath).clear();
         getDriver().findElement(currency_input_unit_xpath).sendKeys(unit);
     }
 
     public void enterCurrencyQuantity(String quantity) {
+        editedCurrencyQuantity = quantity;
+        if(Integer.parseInt(quantity) > 10000){
+            modifyHtmlByName("quantity","maxlength", "");
+        }
         getDriver().findElement(currency_input_quantity_xpath).clear();
         getDriver().findElement(currency_input_quantity_xpath).sendKeys(quantity);
     }
@@ -1506,6 +1576,72 @@ public class DataPage extends AbstractPage {
             assertFalse(getDriver().findElement(regions_label_xpath).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e){
         }
+    }
+
+    public void clickOnSaveButton() {
+
+        attemptClick(save_button_id);
+    }
+
+    public void verifyErrorMessageForCurrAbbr() {
+        assertEquals("Please enter up to 30 valid characters for Abbreviation.", getDriver().findElement(currency_abbr_error_message_xpath).getText());
+    }
+
+    public void verifyErrorMessageForCurrName() {
+        assertEquals("Please enter up to 100 valid characters for Name.", getDriver().findElement(currency_name_error_message_xpath).getText());
+    }
+
+    public void verifyErrorMessageForCurrUnit() {
+        assertEquals("Please enter up to 100 valid characters for Unit.", getDriver().findElement(currency_unit_error_message_xpath).getText());
+    }
+
+    public void verifyErrorMessageForCurrQuantity() {
+        assertEquals("Please enter a numeric value up to 10,000 for Quantity.", getDriver().findElement(currency_quantity_error_message_xpath).getText());
+    }
+
+    public void verifyErrorMessageAtTopOfThePage() {
+        assertEquals("The highlighted fields must be addressed before this update can be saved.", getDriver().findElement(error_message_at_top_xpath).getText());
+    }
+
+    public void verifyErrorMessageForRequiredField() {
+        assertEquals("Required", getDriver().findElement(currency_name_error_message_xpath).getText());
+    }
+
+    public void clickOnConfirmButton() {
+        attemptClick(confirm_button_xpath);
+    }
+
+    public void revertChangesToCurrency(Database database, ApacheHttpClient apacheHttpClient, String selectedCurrency) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency",nvPairs);
+    }
+
+    public void clickOnCancelYesButton() {
+        attemptClick(cancel_yes_button_id);
+    }
+
+    public void verifySaveConfirmationModal() {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals("Confirm Changes", getDriver().findElement(confirm_changes_heading_xpath).getText());
+        assertEquals("Click Confirm to save or Return to continue with your edits.", getDriver().findElement(confirm_changes_info_xpath).getText());
+        assertEquals("RETURN", getDriver().findElement(return_button_xpath).getText());
+        assertEquals("CONFIRM", getDriver().findElement(confirm_button_xpath).getText());
+    }
+
+    public void clickOnReturnButton() {
+        attemptClick(return_button_xpath);
+    }
+
+    public void verifyCurrencyEditMode(){
+        assertTrue(getDriver().findElement(currency_input_name_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_input_abbr_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_input_unit_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_input_quantity_xpath).isDisplayed());
     }
 }
 

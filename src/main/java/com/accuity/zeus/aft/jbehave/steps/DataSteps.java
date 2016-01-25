@@ -127,16 +127,29 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCurrencyUse(database, apacheHttpClient, selectedCurrency);
     }
 
+    @Then("the user should see the currency details from $source document")
+    public void verifyCurrencyDetails(@Named("source") String source) {
+        getDataPage().verifyCurrencyDetails(database, apacheHttpClient, selectedCurrency, source);
+    }
+
+    @Then("the user should see the edits to currency in $source document")
+    public void verifyEditCurrency(@Named("source") String source){
+        getDataPage().verifyEditCurrency(database, apacheHttpClient, selectedCurrency, source);
+    }
+
     @Then("the user should see the currency uses in edit mode are from trusted document")
     public void verifyCurrencyUseInEditMode() {
         getDataPage().verifyCurrencyUseInEditMode(database, apacheHttpClient, selectedCurrency);
     }
-    @Then("the user should see the currency <currency> details are from trusted document")
-    public void verifyCurrencyDetails(@Named("currency") String selectedCurrency) { getDataPage().verifyCurrencyDetails(database, apacheHttpClient, selectedCurrency);}
 
     @When("the user clicks on the cancel button")
     public void clickOnCancelButton() {
         getDataPage().clickOnCancelButton();
+    }
+
+    @When("the user clicks on the cancel yes button")
+    public void clickOnCancelYesButton() {
+        getDataPage().clickOnCancelYesButton();
     }
 
     @Then("the user should return to view mode of the currency page")
@@ -480,7 +493,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCurrencyQuantity(quantity);
     }
 
-    @Then("the user should see the currency selection is disabled")
+    @Then("the user should see the currency selection disabled")
     public void verifyCurrencySelectionDisabled() {
         getDataPage().verifyCurrencySelectionDisabled();
     }
@@ -1103,6 +1116,66 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the below fields in the country basic info left section $basicInfoLeftSection")
     public void verifyBasicInfoLeftSection(ExamplesTable basicInfoLeftSection){
         getDataPage().verifyBasicInfoLeftSection(basicInfoLeftSection);
+    }
+
+    @When("the user clicks on the save button")
+    public void clickOnSaveButton(){
+        getDataPage().clickOnSaveButton();
+    }
+
+    @Then("the user should see the save confirmation modal")
+    public void verifySaveConfirmationModal(){
+        getDataPage().verifySaveConfirmationModal();
+    }
+
+    @Then("the user should see the error message please enter up to 30 valid characters for abbreviation")
+    public void verifyErrorMessageForCurrAbbr(){
+        getDataPage().verifyErrorMessageForCurrAbbr();
+    }
+
+    @Then("the user should see the error message please enter up to 100 valid characters for name")
+    public void verifyErrorMessageForCurrName(){
+        getDataPage().verifyErrorMessageForCurrName();
+    }
+
+    @Then("the user should see the error message please enter up to 100 valid characters for unit")
+    public void verifyErrorMessageForCurrUnit(){
+        getDataPage().verifyErrorMessageForCurrUnit();
+    }
+
+    @Then("the user should see the error message please enter a numeric value up to 10,000 for quantity")
+    public void verifyErrorMessageForCurrQuantity(){
+        getDataPage().verifyErrorMessageForCurrQuantity();
+    }
+
+    @Then("the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved")
+    public void verifyErrorMessageAtTopOfThePage(){
+        getDataPage().verifyErrorMessageAtTopOfThePage();
+    }
+
+    @Then("the user should see the error message for the required name field")
+    public void verifyErrorMessageForRequiredField(){
+        getDataPage().verifyErrorMessageForRequiredField();
+    }
+
+    @When("the user clicks on the confirm button")
+    public void clickOnConfirmButton(){
+        getDataPage().clickOnConfirmButton();
+    }
+
+    @When("the user clicks on the return button")
+    public void clickOnReturnButton(){
+        getDataPage().clickOnReturnButton();
+    }
+
+    @Then("the user reverts the changes to the currency")
+    public void revertChangesToCurrency(){
+        getDataPage().revertChangesToCurrency(database, apacheHttpClient, selectedCurrency);
+    }
+
+    @Then("the user should return to edit mode of the currency page")
+    public void verifyCurrencyEditMode(){
+        getDataPage().verifyCurrencyEditMode();
     }
 }
 

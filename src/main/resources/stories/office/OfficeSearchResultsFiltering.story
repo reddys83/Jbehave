@@ -245,6 +245,7 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the office search results type column
 And the user selects the institution type filter Marketing Office
 And the user selects the institution type filter Head Office Branch
+
 Then the user should see the office search results card for the searched legal entity
 |ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
 |3-9|Moorgate|Arab Banking Corporation House||||Branch, Head Office Branch|active|

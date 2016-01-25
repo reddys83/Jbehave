@@ -77,7 +77,7 @@ public class Utils {
         }
     }
 
-    public String constructURLWithMultipleParameters(String scheme, String host, int port, String path, String xquery, String param, List<NameValuePair> nvPairs)
+    public String constructURLWithMultipleParameters(String scheme, String host, int port, String path, String xquery, List<NameValuePair> nvPairs)
     {
         XqueryMap xqueryMap = new XqueryMap();
         URIBuilder builder = new URIBuilder();

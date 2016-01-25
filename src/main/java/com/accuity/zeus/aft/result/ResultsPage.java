@@ -726,8 +726,8 @@ public class ResultsPage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("fid", searchedEntity));
         nvPairs.add(new BasicNameValuePair("types", institutionType));
 
-
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "office search results with type filter", "fid", nvPairs);
+        //Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "office search results with type filter", "fid", nvPairs);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "office search results with type filter", nvPairs);
         for (int i = 0; i < officeFid.size(); i++)
         {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), officeFid.get(i).getText());
