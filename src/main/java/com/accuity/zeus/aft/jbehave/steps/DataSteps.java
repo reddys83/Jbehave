@@ -127,6 +127,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCurrencyUse(database, apacheHttpClient, selectedCurrency);
     }
 
+
     @Then("the user should see the edit currency details from $source document")
     public void verifyEditCurrencyDetails(@Named("source") String source) {
         getDataPage().verifyEditCurrencyDetails(database, apacheHttpClient, selectedCurrency, source);
@@ -135,6 +136,7 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the view currency details from $source document")
     public void verifyViewCurrencyDetails(@Named("source") String source) {
         getDataPage().verifyViewCurrencyDetails(database, apacheHttpClient, selectedCurrency, source);
+
     }
 
     @Then("the user should see the edits to currency in $source document")
@@ -694,7 +696,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyStatisticsLabels();
     }
 
-
     @Then("the user should see the sub-area's demographics as: $subAreaDemographics")
     public void verifySubAreaDemographics(ExamplesTable subAreaDemographics) {
         getDataPage().verifyDemographics(subAreaDemographics);
@@ -1181,6 +1182,61 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should return to edit mode of the currency page")
     public void verifyCurrencyEditMode(){
         getDataPage().verifyCurrencyEditMode();
+    }
+
+    @Then("the user should see the list of all other existing currencies (by name) excluding the currency they are currently viewing")
+    public void verifyReplacedByCurrencyList(){
+        getDataPage().verifyReplacedByCurrencyList(database, apacheHttpClient, selectedCurrency);
+    }
+
+    @Then("the user should see the error $startDateErrorMsg for start date")
+    public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg){
+        getDataPage().verifyStartDateErrorMessage(startDateErrorMsg);
+    }
+
+    @Then("the user should see the error $startDateErrorMsg for end date")
+    public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg){
+        getDataPage().verifyEndDateErrorMessage(endDateErrorMsg);
+    }
+
+    @When("the user selects the currency country as <currencyCountry>")
+    public void selectCurrencyCountry(@Named("currencyCountry") String currencyCountry){
+        getDataPage().selectCurrencyCountry(currencyCountry);
+    }
+
+    @When("the user enters the currency start day as <currencyStartDay>")
+    public void enterCurrencyStartDay(@Named("currencyStartDay") String currencyStartDay){
+        getDataPage().enterCurrencyStartDay(currencyStartDay);
+    }
+
+    @When("the user clicks on the currency start month drop-down")
+    public void clickOnCurrencyStartMonthDropDown(){
+        getDataPage().clickOnCurrencyStartMonthDropDown();
+    }
+
+    @When("the user enters the currency start month as <currencyStartMonth>")
+    public void enterCurrencyStartMonth(@Named("currencyStartMonth") String currencyStartMonth){
+        getDataPage().enterCurrencyStartMonth(currencyStartMonth);
+    }
+
+    @When("the user enters the currency start year as <currencyStartYear>")
+    public void enterCurrencyStartYear(@Named("currencyStartYear") String currencyStartYear){
+        getDataPage().enterCurrencyStartYear(currencyStartYear);
+    }
+
+    @When("the user enters the currency end day as <currencyEndDay>")
+    public void enterCurrencyEndDay(@Named("currencyEndDay") String currencyEndDay){
+        getDataPage().enterCurrencyEndDay(currencyEndDay);
+    }
+
+    @When("the user enters the currency end month as <currencyEndMonth>")
+    public void enterCurrencyEndMonth(@Named("currencyEndMonth") String currencyEndMonth){
+        getDataPage().enterCurrencyEndMonth(currencyEndMonth);
+    }
+
+    @When("the user enters the currency end year as <currencyEndYear>")
+    public void enterCurrencyEndYear(@Named("currencyEndYear") String currencyEndYear){
+        getDataPage().enterCurrencyEndYear(currencyEndYear);
     }
 
     @When("the user clicks on the cancel no button")
