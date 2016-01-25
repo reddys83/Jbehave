@@ -195,9 +195,6 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
 And the user clicks on the update currency link
-And the user enters the currency name value as <name>
-And the user enters the currency abbr value as <abbr>
-And the user enters the currency unit value as <unit>
 And the user enters the currency quantity value as <quantity>
 And the user clicks on the save button
 Then the user should see the error message please enter a numeric value up to 10,000 for quantity
