@@ -20,7 +20,7 @@ And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
 And the user clicks on the update currency link
 Then the user should see the currency selection disabled
-Then the user should see the currency details from trusted document
+Then the user should see the edit currency details from trusted document
 When the user clicks on the cancel button
 And the user clicks on the cancel yes button
 Then the user should return to view mode of the currency page
@@ -80,7 +80,7 @@ And the user enters the currency quantity value as <quantity>
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the edits to currency in zeus document
-Then the user should see the currency details from trusted document
+Then the user should see the view currency details from trusted document
 And the user reverts the changes to the currency
 
 Examples:
@@ -161,23 +161,3 @@ Then the user should return to edit mode of the currency page
 Examples:
 |currency|
 |Afghani-test|
-
-Scenario: Verify edit currency save
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
-And the user enters the currency abbr value as <abbr>
-And the user enters the currency unit value as <unit>
-And the user enters the currency quantity value as <quantity>
-And the user clicks on the save button
-When the user clicks on the confirm button
-Then the user should see the edits to currency in zeus document
-Then the user should see the currency details from trusted document
-And the user reverts the changes to the currency
-
-Examples:
-|currency|abbr|unit|quantity|
-|Afghani-test|AFN-test|Puls-Test|100|

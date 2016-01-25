@@ -127,9 +127,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCurrencyUse(database, apacheHttpClient, selectedCurrency);
     }
 
-    @Then("the user should see the currency details from $source document")
-    public void verifyCurrencyDetails(@Named("source") String source) {
-        getDataPage().verifyCurrencyDetails(database, apacheHttpClient, selectedCurrency, source);
+    @Then("the user should see the edit currency details from $source document")
+    public void verifyEditCurrencyDetails(@Named("source") String source) {
+        getDataPage().verifyEditCurrencyDetails(database, apacheHttpClient, selectedCurrency, source);
+    }
+
+    @Then("the user should see the view currency details from $source document")
+    public void verifyViewCurrencyDetails(@Named("source") String source) {
+        getDataPage().verifyViewCurrencyDetails(database, apacheHttpClient, selectedCurrency, source);
     }
 
     @Then("the user should see the edits to currency in $source document")
