@@ -12,7 +12,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1687,7 +1686,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyEndDateErrorMessage(String endDateErrorMsg) {
-        assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(currency_start_date_error_msg_xpath).getText());
+        assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(currency_end_date_error_msg_xpath).getText());
     }
 
     public void selectCurrencyCountry(String currencyCountry) {
@@ -1702,8 +1701,6 @@ public class DataPage extends AbstractPage {
 
     public void enterCurrencyStartMonth(String currencyStartMonth) {
         editedCurrencyStartMonth = currencyStartMonth;
-        //getDriver().findElement(By.xpath(currency_use_table_startDate_month_edit_xpath)).clear();
-        //getDriver().findElement(By.xpath(currency_use_table_startDate_month_edit_xpath)).sendKeys(currencyStartMonth);
         selectItemFromDropdownList(By.xpath(currency_use_table_startDate_month_edit_xpath), currencyStartMonth);
     }
 
@@ -1721,8 +1718,6 @@ public class DataPage extends AbstractPage {
 
     public void enterCurrencyEndMonth(String currencyEndMonth) {
         editedCurrencyEndMonth = currencyEndMonth;
-        //getDriver().findElement(currency_use_table_endDate_month_edit_xpath).clear();
-        //getDriver().findElement(By.xpath(currency_use_table_endDate_month_edit_xpath)).sendKeys(currencyEndMonth);
         selectItemFromDropdownList(By.xpath(currency_use_table_endDate_month_edit_xpath), currencyEndMonth);
     }
 

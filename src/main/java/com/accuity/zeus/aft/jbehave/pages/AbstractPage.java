@@ -130,7 +130,6 @@ public abstract class AbstractPage {
 		WebElement webElement = getDriver().findElement(By.name(element));
 		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
 		String scriptSetAttrValue = "arguments[0].setAttribute(arguments[1],arguments[2])";
-		//executor.executeScript("document.getElementsByName('" + element + "').setAttribute('" + attribute + "', '" + value + "')");
 		executor.executeScript(scriptSetAttrValue,webElement,attribute,value);
 	}
 
