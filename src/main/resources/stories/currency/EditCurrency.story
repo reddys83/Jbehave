@@ -10,6 +10,7 @@ JIRA ID - ZEUS-510 - User can edit a currency
 JIRA ID - ZEUS-240 - User can save edits to existing currency
 JIRA ID - ZEUS-285 - Users edits for currency use will be validated
 JIRA ID - ZEUS-744 - User will confirm cancel for edit
+JIRA ID - ZEUS-749 - Schematron validation for currency
 
 Scenario: a. Veify the currency selection drop-down is disabled in update mode
 b. Verify the currency details are comming from trusted document
@@ -282,4 +283,38 @@ Then the user should see the error 'Required' for end date
 
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
-|afghani|Albania|||||||
+|afghani|Albania||||||||
+
+Scenario: ZEUS-749
+1. Veifing schematron validation for currency
+2. Verifying error message when currency start date is before 1500CE
+3. Verifying error message when end date for currency is later than todays date
+4. Verifying error message when start date for currency is later than todays date
+5. Verifying error message when end date for currency is before than start date
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+When the user enters the currency start year as <currencyStartYear>
+When the user enters the currency end year as <currencyEndYear>
+When the user clicks on the save button
+Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+And the user should see the error 'Must be after 1500CE.' for start date
+And the user should see the error 'Must be no later than today.' for end date
+When the user enters the currency start year as <currencyStartYear1>
+When the user clicks on the save button
+Then the user should see the error 'Must be no later than today.' for start date
+When the user clicks on the cancel button
+And the user clicks on the cancel yes button
+Then the user should return to view mode of the currency page
+When the user clicks on the update currency link
+When the user enters the currency end year as <currencyEndYear1>
+When the user clicks on the save button
+Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+And the user should see the error 'Must be after start date.' for end date
+
+Examples:
+|currency|currencyStartYear|currencyEndYear|currencyStartYear1|currencyEndYear1|
+|Deutsche Mark|1400|2018|2018|1976|

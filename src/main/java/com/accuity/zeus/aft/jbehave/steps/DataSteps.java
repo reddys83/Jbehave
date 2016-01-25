@@ -1239,6 +1239,16 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCurrencyEndYear(currencyEndYear);
     }
 
+    @When("the user enters the currency end year as <currencyEndYear1>")
+    public void enterCurrencyEndYear1(@Named("currencyEndYear1") String currencyEndYear1){
+        getDataPage().enterCurrencyEndYear(currencyEndYear1);
+    }
+
+    @When("the user enters the currency start year as <currencyStartYear1>")
+    public void enterCurrencyStartYear1(@Named("currencyStartYear1") String currencyStartYear){
+        getDataPage().enterCurrencyStartYear(currencyStartYear);
+    }
+
     @When("the user clicks on the cancel no button")
     public void clickOnCancelNoButton() {
         getDataPage().clickOnCancelNoButton();
