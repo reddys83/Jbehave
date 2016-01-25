@@ -9,6 +9,7 @@ JIRA ID - ZEUS-243 - User edits for currency will be validated
 JIRA ID - ZEUS-510 - User can edit a currency
 JIRA ID - ZEUS-240 - User can save edits to existing currency
 JIRA ID - ZEUS-285 - Users edits for currency use will be validated
+JIRA ID - ZEUS-744 - User will confirm cancel for edit
 
 Scenario: a. Veify the currency selection drop-down is disabled in update mode
 b. Verify the currency details are comming from trusted document
@@ -21,7 +22,7 @@ And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
 And the user clicks on the update currency link
 Then the user should see the currency selection disabled
-Then the user should see the currency details from trusted document
+Then the user should see the edit currency details from trusted document
 When the user clicks on the cancel button
 And the user clicks on the cancel yes button
 Then the user should return to view mode of the currency page
@@ -81,7 +82,7 @@ And the user enters the currency quantity value as <quantity>
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the edits to currency in zeus document
-Then the user should see the currency details from trusted document
+Then the user should see the view currency details from trusted document
 And the user reverts the changes to the currency
 
 Examples:
@@ -118,7 +119,6 @@ Examples:
 |Australian Dollar|
 
 Scenario: Verify user can edit the currency use for status inactive. (currency use should be editable)
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
@@ -131,7 +131,9 @@ Examples:
 |currency|
 |Deutsche Mark|
 
-Scenario: Veirfy user can edit the currency use and the values comes from trusted document
+Scenario: Veirfy user can edit the currency
+1. Veirfy user can edit the currency use and the values comes from trusted document
+2. Veify the country drop-down when the user is editing an existing currency
 Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -140,12 +142,32 @@ And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
 And the user clicks on the update currency link
 Then the user should see the currency uses in edit mode are from trusted document
+Then user should see the list of countries in currency edit mode from trusted document
 
 Examples:
 |currency|
 |Namibia Dollar|
 
-Scenario: Veify the country drop-down when the user is editing an existing currency
+Scenario: verify save confirmation modal
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the return button
+Then the user should return to edit mode of the currency page
+
+Examples:
+|currency|
+|Afghani-test|
+
+Scenario:
+1. Veify whether confirmation modal appears when editing currency
+2. After clicking on Yes from confirmation modal view mode of currency is displayed
+3. After clicking on No from confirmation modal edit mode of currency is displayed
 Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -153,8 +175,108 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
 And the user clicks on the update currency link
-Then user should see the list of countries in currency edit mode from trusted document
+Then the user should see the currency selection disabled
+When the user clicks on the cancel button
+And the user clicks on the cancel yes button
+Then the user should return to view mode of the currency page
+When the user clicks on the update currency link
+When the user clicks on the cancel button
+And the user clicks on the cancel no button
+Then the user should return to edit mode of the currency page
+Then the user should see the currency selection disabled
 
 Examples:
 |currency|
-|Namibia Dollar|
+|afghani|
+
+Scenario: BUG_ID - ZEUS-808
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+And the user enters the currency quantity value as <quantity>
+And the user clicks on the save button
+Then the user should see the error message please enter a numeric value up to 10,000 for quantity
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|currency|quantity|
+|afghani|ab|
+
+Scenario: Verify replaced by currency list
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+Then the user should see the list of all other existing currencies (by name) excluding the currency they are currently viewing
+Examples:
+|currency|
+|afghani|
+
+Scenario: Verify error message for year for start and end date
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+When the user enters the currency start day as <currencyStartDay>
+And the user enters the currency start month as <currencyStartMonth>
+And the user enters the currency start year as <currencyStartYear>
+And the user enters the currency end day as <currencyEndDay>
+And the user enters the currency end month as <currencyEndMonth>
+And the user enters the currency end year as <currencyEndYear>
+Then the user should see the error 'Please enter a year for currency use start date.' for start date
+Then the user should see the error 'Please enter a year for currency use end date.' for end date
+
+Examples:
+|currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
+|afghani|Albania|01||||01|||
+|afghani|Albania||Jan||||Jan||
+|afghani|Albania|01|Jan|||01|Jan||
+
+Scenario: Verify error message for month for start and end date
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+Then the user should see the list of all other existing currencies (by name) excluding the currency they are currently viewing
+When the user enters the currency start day as <currencyStartDay>
+And the user enters the currency start month as <currencyStartMonth>
+And the user enters the currency start year as <currencyStartYear>
+And the user enters the currency end day as <currencyEndDay>
+And the user enters the currency end month as <currencyEndMonth>
+And the user enters the currency end year as <currencyEndYear>
+Then the user should see the error 'Please enter a month for currency use start date.' for end date
+Then the user should see the error 'Please enter a month for currency use start date.' for start date
+
+Examples:
+|currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
+|afghani|Albania|01||1988||01||1988|
+
+Scenario: Verify error message required for start and end date
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+Then the user should see the list of all other existing currencies (by name) excluding the currency they are currently viewing
+When the user enters the currency start day as <currencyStartDay>
+And the user enters the currency start month as <currencyStartMonth>
+And the user enters the currency start year as <currencyStartYear>
+And the user enters the currency end day as <currencyEndDay>
+And the user enters the currency end month as <currencyEndMonth>
+And the user enters the currency end year as <currencyEndYear>
+Then the user should see the error 'Required' for start date
+Then the user should see the error 'Required' for end date
+
+Examples:
+|currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
+|afghani|Albania||||||||
