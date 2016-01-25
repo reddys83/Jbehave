@@ -25,6 +25,7 @@ public class DataPage extends AbstractPage {
     private By area_tab_id=By.id("area-nav");
     private By labels_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
     private By currency_country_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
+    private By currency_country_list_edit_xpath = By.xpath("//fieldset//select[@name='country']/option");
     private By legalEntity_tab_id = By.id("legalEntity-nav");
     private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
@@ -44,6 +45,21 @@ public class DataPage extends AbstractPage {
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By area_listBox_xpath = By.xpath("//*[@id='selection1'] //*[@id='entitySelect_chosen']//span");
     private By subarea_listBox_xpath = By.xpath("//*[@id='selection2'] //*[@id='entitySelect_chosen']//span");
+
+    private By currency_use_table_country_edit_xpath=By.xpath("//select[@name='country']/option[@selected='selected']");
+
+    private By currency_use_table_startDate_day_edit_xpath=By.xpath("//input[@name='began-day']");
+    private By currency_use_table_startDate_month_edit_xpath=By.xpath("//select[@name='began-month']/option[@selected='selected']");
+    private By currency_use_table_startDate_year_edit_xpath=By.xpath("//input[@name='began-year']");
+
+    private By currency_use_table_endDate_day_edit_xpath=By.xpath("//input[@name='end-day']");
+    private By currency_use_table_endDate_month_edit_xpath=By.xpath("//select[@name='end-month']/option[@selected='selected']");
+    private By currency_use_table_endDate_year_edit_xpath=By.xpath("//input[@name='end-year']");
+
+    private By currency_use_table_primary_edit_xpath =By.xpath("//fieldset[@data-edit_id='primary']/input[@checked]");
+    private By currency_use_table_replacedBy_disable_edit_xpath = By.xpath("//fieldset[2]//div[@class='chosen-container chosen-container-single chosen-disabled']/a");
+    private By currency_use_table_replacedBy_edit_xpath= By.xpath("//fieldset[2]//div[@class='chosen-container chosen-container-single']/a");
+    private By currency_use_table_status_edit_xpath = By.xpath("");
 
     //private By country_listBox_xpath= By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private By country_listBox_value_xpath=By.xpath(".//*[@id='selection0'] //*[@class='chosen-drop']//ul");
@@ -262,14 +278,19 @@ public class DataPage extends AbstractPage {
     private By subarea_city_dropdown_is_visible_xpath = By.xpath("//*[@id='selection2']//div[@class='chosen-container chosen-container-single']");
     private String area_area_parent_link_xpath = "//table[@class='vertical']//td[a='";
     private By basic_info_left_section_xpath = By.xpath("//table[@class='vertical']/tbody//th");
+    private By confirm_button_id = By.id("confirm-button");
     private By save_button_id = By.id("save-button");
     private By currency_abbr_error_message_xpath = By.xpath("//*[@data-error_id='abbrError']");
     private By currency_name_error_message_xpath = By.xpath("//*[@data-error_id='nameError']");
     private By currency_unit_error_message_xpath = By.xpath("//*[@data-error_id='unitError']");
     private By currency_quantity_error_message_xpath = By.xpath("//*[@data-error_id='quantityError']");
     private By error_message_at_top_xpath = By.xpath("//*[@id='error']/div/div/p");
-    private By confirm_button_id = By.id("confirm-button");
+    private By confirm_button_xpath = By.xpath("//*[@id='modal-region'] //*[@id='confirm-button']");
     private By cancel_yes_button_id = By.id("confirm-button");
+    private By return_button_xpath = By.xpath("//*[@id='modal-region'] //button[@id='cancel-button']");
+    private By confirm_changes_info_xpath = By.xpath("//*[@id='modal-region']/div/p");
+    private By confirm_changes_heading_xpath = By.xpath("//*[@id='modal-region']/div/h1");
+
     private String editedCurrencyName="";
     private String editedCurrencyAbbr="";
     private String editedCurrencyUnit="";
@@ -306,6 +327,14 @@ public class DataPage extends AbstractPage {
         assertEquals(getDriver().findElement(labels_xpath).getText(), "COUNTRY");
         List<WebElement> countryList = getDriver().findElements(currency_country_list_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,"country list");
+        for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), countryList.get(i).getText().trim());
+        }
+    }
+
+    public void verifyCountryListInCurrencyEditMode(Database database, ApacheHttpClient apacheHttpClient){
+        List<WebElement> countryList = getDriver().findElements(currency_country_list_edit_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "country list");
         for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), countryList.get(i).getText().trim());
         }
@@ -426,6 +455,41 @@ public class DataPage extends AbstractPage {
         assertTrue(getDriver().findElement(currency_quantity_xpath).isDisplayed());
     }
 
+    public void verifyCurrencyUpdateModeForStatusActive() {
+
+        assertTrue(getDriver().findElement(currency_use_table_country_edit_xpath).isDisplayed());
+
+        assertTrue(getDriver().findElement(currency_use_table_startDate_day_edit_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_use_table_startDate_month_edit_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_use_table_startDate_year_edit_xpath).isDisplayed());
+
+        assertFalse(getDriver().findElement(currency_use_table_endDate_day_edit_xpath).isEnabled());
+        assertFalse(getDriver().findElement(currency_use_table_endDate_month_edit_xpath).isEnabled());
+        assertFalse(getDriver().findElement(currency_use_table_endDate_year_edit_xpath).isEnabled());
+
+        assertTrue(getDriver().findElement(currency_use_table_primary_edit_xpath).isDisplayed());
+
+        assertTrue(getDriver().findElement(currency_use_table_replacedBy_disable_edit_xpath).isDisplayed());
+    }
+
+    public void verifyCurrencyUpdateModeForStatusInactive() {
+
+        assertTrue(getDriver().findElement(currency_use_table_country_edit_xpath).isDisplayed());
+
+        assertTrue(getDriver().findElement(currency_use_table_startDate_day_edit_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_use_table_startDate_month_edit_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_use_table_startDate_year_edit_xpath).isDisplayed());
+
+        assertTrue(getDriver().findElement(currency_use_table_endDate_day_edit_xpath).isEnabled());
+        assertTrue(getDriver().findElement(currency_use_table_endDate_month_edit_xpath).isEnabled());
+        assertTrue(getDriver().findElement(currency_use_table_endDate_year_edit_xpath).isEnabled());
+
+        assertTrue(getDriver().findElement(currency_use_table_primary_edit_xpath).isDisplayed());
+
+        assertTrue(getDriver().findElement(currency_use_table_replacedBy_edit_xpath).isDisplayed());
+
+
+    }
 
     public void verifyViewCurrencyDetails(Database database, ApacheHttpClient apacheHttpClient, String selectedEntity, String source) {
         List<NameValuePair> nvPairs = new ArrayList<>();
@@ -505,6 +569,15 @@ public class DataPage extends AbstractPage {
         }
     }
 
+    public void verifyCurrencyUseInEditMode(Database database, ApacheHttpClient apacheHttpClient, String selectedCurrency)
+    {
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "currency uses", "name", selectedCurrency);
+        for(int i=0; i<document.getElementsByTagName("currencyUse").getLength(); i++){
+            assertEquals(document.getElementsByTagName("countryName").item(i).getTextContent().trim(), getDriver().findElement(currency_use_table_country_edit_xpath).getText());
+            assertEquals(document.getElementsByTagName("startDate").item(i).getTextContent().trim(), getDriver().findElement(currency_use_table_startDate_day_edit_xpath).getAttribute("value")+" "+getDriver().findElement(currency_use_table_startDate_month_edit_xpath).getText()+" "+getDriver().findElement(currency_use_table_startDate_year_edit_xpath).getAttribute("value"));
+            assertEquals(document.getElementsByTagName("primary").item(i).getTextContent().trim(), getDriver().findElement(currency_use_table_primary_edit_xpath).getAttribute("value"));
+        }
+    }
     public void verifyCurrencyUseTableHeaders() {
             assertEquals(getTextOnPage(currency_use_table_header_xpath).replace("/n", "").replace("/r", ""), "COUNTRY START DATE END DATE PRIMARY REPLACED BY STATUS");
         }
@@ -969,6 +1042,11 @@ public class DataPage extends AbstractPage {
     public void clickOnUpdateCurrencyLink() {
 
         attemptClick(currency_update_button_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void enterCurrencyName(String name) {
@@ -1556,5 +1634,29 @@ public class DataPage extends AbstractPage {
     public void clickOnCancelYesButton() {
         attemptClick(cancel_yes_button_id);
     }
+
+    public void verifySaveConfirmationModal() {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals("Confirm Changes", getDriver().findElement(confirm_changes_heading_xpath).getText());
+        assertEquals("Click Confirm to save or Return to continue with your edits.", getDriver().findElement(confirm_changes_info_xpath).getText());
+        assertEquals("RETURN", getDriver().findElement(return_button_xpath).getText());
+        assertEquals("CONFIRM", getDriver().findElement(confirm_button_xpath).getText());
+    }
+
+    public void clickOnReturnButton() {
+        attemptClick(return_button_xpath);
+    }
+
+    public void verifyCurrencyEditMode(){
+        assertTrue(getDriver().findElement(currency_input_name_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_input_abbr_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_input_unit_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_input_quantity_xpath).isDisplayed());
+    }
+
 }
 

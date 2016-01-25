@@ -109,6 +109,8 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryList(database, apacheHttpClient);
     }
 
+    @Then("user should see the list of countries in currency edit mode from trusted document")
+    public void verifyCountryListInCurrencyEditMode() { getDataPage().verifyCountryListInCurrencyEditMode(database, apacheHttpClient);}
 
     @When("the user starts typing the name of a country as $word in the country input box")
     public void enterValueInCountryTypeAhead(String word) {
@@ -140,6 +142,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyEditCurrency(database, apacheHttpClient, selectedCurrency, source);
     }
 
+    @Then("the user should see the currency uses in edit mode are from trusted document")
+    public void verifyCurrencyUseInEditMode() {
+        getDataPage().verifyCurrencyUseInEditMode(database, apacheHttpClient, selectedCurrency);
+    }
+
     @When("the user clicks on the cancel button")
     public void clickOnCancelButton() {
         getDataPage().clickOnCancelButton();
@@ -153,6 +160,16 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should return to view mode of the currency page")
     public void verifyCurrencyViewMode() {
         getDataPage().verifyCurrencyViewMode();
+    }
+
+    @Then("the user should see the currency usage is editable for status active")
+    public void verifyCurrencyUpdateModeForStatusActive() {
+        getDataPage().verifyCurrencyUpdateModeForStatusActive();
+    }
+
+    @Then("the user should see the currency usage is editable for status inactive")
+    public void verifyCurrencyUpdateModeForStatusInactive() {
+        getDataPage().verifyCurrencyUpdateModeForStatusInactive();
     }
 
     @Then("the user should not see the currency's uses")
@@ -1149,6 +1166,21 @@ public class DataSteps extends AbstractSteps {
     @Then("the user reverts the changes to the currency")
     public void revertChangesToCurrency(){
         getDataPage().revertChangesToCurrency(database, apacheHttpClient, selectedCurrency);
+    }
+
+    @Then("the user should see the save confirmation modal")
+    public void verifySaveConfirmationModal(){
+        getDataPage().verifySaveConfirmationModal();
+    }
+
+    @When("the user clicks on the return button")
+    public void clickOnReturnButton(){
+        getDataPage().clickOnReturnButton();
+    }
+
+    @Then("the user should return to edit mode of the currency page")
+    public void verifyCurrencyEditMode(){
+        getDataPage().verifyCurrencyEditMode();
     }
 }
 
