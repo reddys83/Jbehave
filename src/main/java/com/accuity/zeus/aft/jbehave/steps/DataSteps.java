@@ -230,7 +230,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the basic info for selected area")
     @Aliases(values={"the user should see the basic info for selected city",
-                    "the user should see the basic info for selected sub-area"})
+            "the user should see the basic info for selected sub-area"})
     public void verifyAreaBasicInfo() {
         getDataPage().verifyBasicInfo();
     }
@@ -242,7 +242,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the area's names as: $names")
     @Aliases(values={"the user should see the legal entity's names as: $names",
-                    "the user should see the sub-area's names as: $names"})
+            "the user should see the sub-area's names as: $names"})
     public void verifyAreaNames(ExamplesTable names) {
         getDataPage().verifyNames(names);
     }
@@ -867,7 +867,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the city's entity as: $cityEntities")
-     public void verifyCityEntities(ExamplesTable cityEntities) {
+    public void verifyCityEntities(ExamplesTable cityEntities) {
         getDataPage().verifyEntities(cityEntities);
     }
 
@@ -900,12 +900,12 @@ public class DataSteps extends AbstractSteps {
     public void verifyDefaultBasicInfo() {
         getDataPage().verifyDefaultBasicInfo();
     }
-    
+
     @When("the user clicks on the city regions link in the navigation bar")
     public void clickOnCityAlternativeRegions(){
         getDataPage().clickOnCityRegionsInNavigationBar();
     }
-    
+
     @Then("the user should see the city's alternative regions as: $citryRegions")
     public void verifyCityRegions(ExamplesTable citryRegions){
         getDataPage().verifyRegions(citryRegions);
@@ -972,7 +972,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyPersonnel(personnel);
     }
 
-     @Then("the user should not see the legal entity's personnel")
+    @Then("the user should not see the legal entity's personnel")
     @Alias("the user should not see the office's personnel")
     public void verifyNoPersonnel() {
         getDataPage().verifyNoPersonnel();
@@ -1042,12 +1042,12 @@ public class DataSteps extends AbstractSteps {
     public void clickOnAreaParentLink(@Named("areaParent") String areaParent){
         getDataPage().clickOnAreaParentLink(areaParent);
     }
-    
+
     @When("the user clicks on the view head office <viewHeadOffice> link for the selected legal entity")
     public void clickOnViewHeadOfficeLink(@Named("viewHeadOffice") String viewHeadOffice){
         getDataPage().clickOnViewHeadOfficeLink(viewHeadOffice);
     }
-    
+
     @Then("the user should not see the legalEntity's headOffice link")
     public void verifyHeadOfficeInLegalEntityBasicInfo() {
         getDataPage().verifyHeadOfficeInLegalEntityBasicInfo();
@@ -1182,5 +1182,9 @@ public class DataSteps extends AbstractSteps {
     public void verifyCurrencyEditMode(){
         getDataPage().verifyCurrencyEditMode();
     }
-}
 
+    @When("the user clicks on the cancel no button")
+    public void clickOnCancelNoButton() {
+        getDataPage().clickOnCancelNoButton();
+    }
+}
