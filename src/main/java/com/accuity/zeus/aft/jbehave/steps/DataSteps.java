@@ -109,6 +109,8 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountryList(database, apacheHttpClient);
     }
 
+    @Then("user should see the list of countries in currency edit mode from trusted document")
+    public void verifyCountryListInCurrencyEditMode() { getDataPage().verifyCountryListInCurrencyEditMode(database, apacheHttpClient);}
 
     @When("the user starts typing the name of a country as $word in the country input box")
     public void enterValueInCountryTypeAhead(String word) {
@@ -125,14 +127,24 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCurrencyUse(database, apacheHttpClient, selectedCurrency);
     }
 
-    @Then("the user should see the currency details from $source document")
-    public void verifyCurrencyDetails(@Named("source") String source) {
-        getDataPage().verifyCurrencyDetails(database, apacheHttpClient, selectedCurrency, source);
+    @Then("the user should see the edit currency details from $source document")
+    public void verifyEditCurrencyDetails(@Named("source") String source) {
+        getDataPage().verifyEditCurrencyDetails(database, apacheHttpClient, selectedCurrency, source);
+    }
+
+    @Then("the user should see the view currency details from $source document")
+    public void verifyViewCurrencyDetails(@Named("source") String source) {
+        getDataPage().verifyViewCurrencyDetails(database, apacheHttpClient, selectedCurrency, source);
     }
 
     @Then("the user should see the edits to currency in $source document")
     public void verifyEditCurrency(@Named("source") String source){
         getDataPage().verifyEditCurrency(database, apacheHttpClient, selectedCurrency, source);
+    }
+
+    @Then("the user should see the currency uses in edit mode are from trusted document")
+    public void verifyCurrencyUseInEditMode() {
+        getDataPage().verifyCurrencyUseInEditMode(database, apacheHttpClient, selectedCurrency);
     }
 
     @When("the user clicks on the cancel button")
@@ -145,19 +157,19 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCancelYesButton();
     }
 
-    @When("the user clicks on the cancel no button")
-    public void clickOnCancelNoButton() {
-        getDataPage().clickOnCancelNoButton();
-    }
-
     @Then("the user should return to view mode of the currency page")
     public void verifyCurrencyViewMode() {
         getDataPage().verifyCurrencyViewMode();
     }
 
-    @Then("the user should return to edit mode of currency page")
-    public void verifyCurrencyEditMode(){
-        getDataPage().verifyCurrencyEditMode();
+    @Then("the user should see the currency usage is editable for status active")
+    public void verifyCurrencyUpdateModeForStatusActive() {
+        getDataPage().verifyCurrencyUpdateModeForStatusActive();
+    }
+
+    @Then("the user should see the currency usage is editable for status inactive")
+    public void verifyCurrencyUpdateModeForStatusInactive() {
+        getDataPage().verifyCurrencyUpdateModeForStatusInactive();
     }
 
     @Then("the user should not see the currency's uses")
@@ -218,7 +230,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the basic info for selected area")
     @Aliases(values={"the user should see the basic info for selected city",
-                    "the user should see the basic info for selected sub-area"})
+            "the user should see the basic info for selected sub-area"})
     public void verifyAreaBasicInfo() {
         getDataPage().verifyBasicInfo();
     }
@@ -230,7 +242,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the area's names as: $names")
     @Aliases(values={"the user should see the legal entity's names as: $names",
-                    "the user should see the sub-area's names as: $names"})
+            "the user should see the sub-area's names as: $names"})
     public void verifyAreaNames(ExamplesTable names) {
         getDataPage().verifyNames(names);
     }
@@ -855,7 +867,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the city's entity as: $cityEntities")
-     public void verifyCityEntities(ExamplesTable cityEntities) {
+    public void verifyCityEntities(ExamplesTable cityEntities) {
         getDataPage().verifyEntities(cityEntities);
     }
 
@@ -888,12 +900,12 @@ public class DataSteps extends AbstractSteps {
     public void verifyDefaultBasicInfo() {
         getDataPage().verifyDefaultBasicInfo();
     }
-    
+
     @When("the user clicks on the city regions link in the navigation bar")
     public void clickOnCityAlternativeRegions(){
         getDataPage().clickOnCityRegionsInNavigationBar();
     }
-    
+
     @Then("the user should see the city's alternative regions as: $citryRegions")
     public void verifyCityRegions(ExamplesTable citryRegions){
         getDataPage().verifyRegions(citryRegions);
@@ -960,7 +972,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyPersonnel(personnel);
     }
 
-     @Then("the user should not see the legal entity's personnel")
+    @Then("the user should not see the legal entity's personnel")
     @Alias("the user should not see the office's personnel")
     public void verifyNoPersonnel() {
         getDataPage().verifyNoPersonnel();
@@ -1030,12 +1042,12 @@ public class DataSteps extends AbstractSteps {
     public void clickOnAreaParentLink(@Named("areaParent") String areaParent){
         getDataPage().clickOnAreaParentLink(areaParent);
     }
-    
+
     @When("the user clicks on the view head office <viewHeadOffice> link for the selected legal entity")
     public void clickOnViewHeadOfficeLink(@Named("viewHeadOffice") String viewHeadOffice){
         getDataPage().clickOnViewHeadOfficeLink(viewHeadOffice);
     }
-    
+
     @Then("the user should not see the legalEntity's headOffice link")
     public void verifyHeadOfficeInLegalEntityBasicInfo() {
         getDataPage().verifyHeadOfficeInLegalEntityBasicInfo();
@@ -1116,6 +1128,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnSaveButton();
     }
 
+    @Then("the user should see the save confirmation modal")
+    public void verifySaveConfirmationModal(){
+        getDataPage().verifySaveConfirmationModal();
+    }
+
     @Then("the user should see the error message please enter up to 30 valid characters for abbreviation")
     public void verifyErrorMessageForCurrAbbr(){
         getDataPage().verifyErrorMessageForCurrAbbr();
@@ -1151,9 +1168,23 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnConfirmButton();
     }
 
+    @When("the user clicks on the return button")
+    public void clickOnReturnButton(){
+        getDataPage().clickOnReturnButton();
+    }
+
     @Then("the user reverts the changes to the currency")
     public void revertChangesToCurrency(){
         getDataPage().revertChangesToCurrency(database, apacheHttpClient, selectedCurrency);
     }
-}
 
+    @Then("the user should return to edit mode of the currency page")
+    public void verifyCurrencyEditMode(){
+        getDataPage().verifyCurrencyEditMode();
+    }
+
+    @When("the user clicks on the cancel no button")
+    public void clickOnCancelNoButton() {
+        getDataPage().clickOnCancelNoButton();
+    }
+}

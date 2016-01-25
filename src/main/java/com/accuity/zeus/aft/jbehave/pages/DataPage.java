@@ -25,6 +25,7 @@ public class DataPage extends AbstractPage {
     private By area_tab_id=By.id("area-nav");
     private By labels_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
     private By currency_country_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
+    private By currency_country_list_edit_xpath = By.xpath("//fieldset//select[@name='country']/option");
     private By legalEntity_tab_id = By.id("legalEntity-nav");
     private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
@@ -41,10 +42,24 @@ public class DataPage extends AbstractPage {
     private By currency_quantity_xpath = By.xpath("//div[@id='content']//dd[4]");
     String currency_use_table_xpath_string = "//*[@id='content']/div/table/tbody/tr[";
     private By currency_use_table_header_xpath = By.xpath("//*[@id='content']/div/table/thead/tr");
-    private By currency_country_editable_xpath = By.xpath(".//*[@id='content']/div/form/fieldset[2]/table/tbody[1]/tr/td[1]/select");
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By area_listBox_xpath = By.xpath("//*[@id='selection1'] //*[@id='entitySelect_chosen']//span");
     private By subarea_listBox_xpath = By.xpath("//*[@id='selection2'] //*[@id='entitySelect_chosen']//span");
+
+    private By currency_use_table_country_edit_xpath=By.xpath("//select[@name='country']/option[@selected='selected']");
+
+    private By currency_use_table_startDate_day_edit_xpath=By.xpath("//input[@name='began-day']");
+    private By currency_use_table_startDate_month_edit_xpath=By.xpath("//select[@name='began-month']/option[@selected='selected']");
+    private By currency_use_table_startDate_year_edit_xpath=By.xpath("//input[@name='began-year']");
+
+    private By currency_use_table_endDate_day_edit_xpath=By.xpath("//input[@name='end-day']");
+    private By currency_use_table_endDate_month_edit_xpath=By.xpath("//select[@name='end-month']/option[@selected='selected']");
+    private By currency_use_table_endDate_year_edit_xpath=By.xpath("//input[@name='end-year']");
+
+    private By currency_use_table_primary_edit_xpath =By.xpath("//fieldset[@data-edit_id='primary']/input[@checked]");
+    private By currency_use_table_replacedBy_disable_edit_xpath = By.xpath("//fieldset[2]//div[@class='chosen-container chosen-container-single chosen-disabled']/a");
+    private By currency_use_table_replacedBy_edit_xpath= By.xpath("//fieldset[2]//div[@class='chosen-container chosen-container-single']/a");
+    private By currency_use_table_status_edit_xpath = By.xpath("");
 
     //private By country_listBox_xpath= By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private By country_listBox_value_xpath=By.xpath(".//*[@id='selection0'] //*[@class='chosen-drop']//ul");
@@ -263,15 +278,20 @@ public class DataPage extends AbstractPage {
     private By subarea_city_dropdown_is_visible_xpath = By.xpath("//*[@id='selection2']//div[@class='chosen-container chosen-container-single']");
     private String area_area_parent_link_xpath = "//table[@class='vertical']//td[a='";
     private By basic_info_left_section_xpath = By.xpath("//table[@class='vertical']/tbody//th");
+    private By confirm_button_id = By.id("confirm-button");
     private By save_button_id = By.id("save-button");
     private By currency_abbr_error_message_xpath = By.xpath("//*[@data-error_id='abbrError']");
     private By currency_name_error_message_xpath = By.xpath("//*[@data-error_id='nameError']");
     private By currency_unit_error_message_xpath = By.xpath("//*[@data-error_id='unitError']");
     private By currency_quantity_error_message_xpath = By.xpath("//*[@data-error_id='quantityError']");
     private By error_message_at_top_xpath = By.xpath("//*[@id='error']/div/div/p");
-    private By confirm_button_id = By.id("confirm-button");
+    private By confirm_button_xpath = By.xpath("//*[@id='modal-region'] //*[@id='confirm-button']");
     private By cancel_yes_button_id = By.id("confirm-button");
+    private By return_button_xpath = By.xpath("//*[@id='modal-region'] //button[@id='cancel-button']");
+    private By confirm_changes_info_xpath = By.xpath("//*[@id='modal-region']/div/p");
+    private By confirm_changes_heading_xpath = By.xpath("//*[@id='modal-region']/div/h1");
     private By cancel_no_button_id = By.id("cancel-button");
+
     private String editedCurrencyName="";
     private String editedCurrencyAbbr="";
     private String editedCurrencyUnit="";
@@ -308,6 +328,14 @@ public class DataPage extends AbstractPage {
         assertEquals(getDriver().findElement(labels_xpath).getText(), "COUNTRY");
         List<WebElement> countryList = getDriver().findElements(currency_country_list_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,"country list");
+        for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), countryList.get(i).getText().trim());
+        }
+    }
+
+    public void verifyCountryListInCurrencyEditMode(Database database, ApacheHttpClient apacheHttpClient){
+        List<WebElement> countryList = getDriver().findElements(currency_country_list_edit_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "country list");
         for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), countryList.get(i).getText().trim());
         }
@@ -428,12 +456,43 @@ public class DataPage extends AbstractPage {
         assertTrue(getDriver().findElement(currency_quantity_xpath).isDisplayed());
     }
 
-    public void verifyCurrencyEditMode(){
-        assertTrue(getDriver().findElement(currency_country_editable_xpath).isDisplayed());
+    public void verifyCurrencyUpdateModeForStatusActive() {
+
+        assertTrue(getDriver().findElement(currency_use_table_country_edit_xpath).isDisplayed());
+
+        assertTrue(getDriver().findElement(currency_use_table_startDate_day_edit_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_use_table_startDate_month_edit_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_use_table_startDate_year_edit_xpath).isDisplayed());
+
+        assertFalse(getDriver().findElement(currency_use_table_endDate_day_edit_xpath).isEnabled());
+        assertFalse(getDriver().findElement(currency_use_table_endDate_month_edit_xpath).isEnabled());
+        assertFalse(getDriver().findElement(currency_use_table_endDate_year_edit_xpath).isEnabled());
+
+        assertTrue(getDriver().findElement(currency_use_table_primary_edit_xpath).isDisplayed());
+
+        assertTrue(getDriver().findElement(currency_use_table_replacedBy_disable_edit_xpath).isDisplayed());
     }
 
+    public void verifyCurrencyUpdateModeForStatusInactive() {
 
-    public void verifyCurrencyDetails(Database database, ApacheHttpClient apacheHttpClient, String selectedEntity, String source) {
+        assertTrue(getDriver().findElement(currency_use_table_country_edit_xpath).isDisplayed());
+
+        assertTrue(getDriver().findElement(currency_use_table_startDate_day_edit_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_use_table_startDate_month_edit_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_use_table_startDate_year_edit_xpath).isDisplayed());
+
+        assertTrue(getDriver().findElement(currency_use_table_endDate_day_edit_xpath).isEnabled());
+        assertTrue(getDriver().findElement(currency_use_table_endDate_month_edit_xpath).isEnabled());
+        assertTrue(getDriver().findElement(currency_use_table_endDate_year_edit_xpath).isEnabled());
+
+        assertTrue(getDriver().findElement(currency_use_table_primary_edit_xpath).isDisplayed());
+
+        assertTrue(getDriver().findElement(currency_use_table_replacedBy_edit_xpath).isDisplayed());
+
+
+    }
+
+    public void verifyViewCurrencyDetails(Database database, ApacheHttpClient apacheHttpClient, String selectedEntity, String source) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedEntity));
         nvPairs.add(new BasicNameValuePair("source", source));
@@ -445,15 +504,34 @@ public class DataPage extends AbstractPage {
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "currency details", nvPairs);
         for(int i=0;i<document.getElementsByTagName("currency").getLength();i++) {
             assertEquals("ISO", getTextOnPage(currency_iso_code_label_id));
-            assertEquals(document.getElementsByTagName("iso").item(i).getTextContent(), getTextOnPage(currency_iso_code_id));
+            assertEquals(document.getElementsByTagName("iso").item(i).getTextContent(), getDriver().findElement(currency_iso_code_id).getText());
             assertEquals("Abbr", getTextOnPage(currency_abbr_label_xpath));
-            assertEquals(document.getElementsByTagName("abbr").item(i).getTextContent(), getTextOnPage(currency_abbr_xpath));
+            assertEquals(document.getElementsByTagName("abbr").item(i).getTextContent(), getDriver().findElement(currency_abbr_xpath).getText());
             assertEquals("Name", getTextOnPage(currency_name_label_xpath));
-            assertEquals(document.getElementsByTagName("name").item(i).getTextContent(), getTextOnPage(currency_name_xpath));
+            assertEquals(document.getElementsByTagName("name").item(i).getTextContent(), getDriver().findElement(currency_name_xpath).getText());
             assertEquals("Unit", getTextOnPage(currency_unit_label_xpath));
-            assertEquals(document.getElementsByTagName("unit").item(i).getTextContent(), getTextOnPage(currency_unit_xpath));
+            assertEquals(document.getElementsByTagName("unit").item(i).getTextContent(), getDriver().findElement(currency_unit_xpath).getText());
             assertEquals("Quantity", getTextOnPage(currency_quantity_label_xpath));
-            assertEquals(document.getElementsByTagName("quantity").item(i).getTextContent(), getTextOnPage(currency_quantity_xpath));
+            assertEquals(document.getElementsByTagName("quantity").item(i).getTextContent(), getDriver().findElement(currency_quantity_xpath).getText());
+        }
+    }
+
+    public void verifyEditCurrencyDetails(Database database, ApacheHttpClient apacheHttpClient, String selectedEntity, String source) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "currency details", nvPairs);
+        for(int i=0;i<document.getElementsByTagName("currency").getLength();i++) {
+            assertEquals(document.getElementsByTagName("iso").item(i).getTextContent(), getDriver().findElement(currency_iso_code_id).getText());
+            assertEquals(document.getElementsByTagName("abbr").item(i).getTextContent(), getDriver().findElement(currency_input_abbr_xpath).getAttribute("value"));
+            assertEquals(document.getElementsByTagName("name").item(i).getTextContent(), getDriver().findElement(currency_input_name_xpath).getAttribute("value"));
+            assertEquals(document.getElementsByTagName("unit").item(i).getTextContent(), getDriver().findElement(currency_input_unit_xpath).getAttribute("value"));
+            assertEquals(document.getElementsByTagName("quantity").item(i).getTextContent(), getDriver().findElement(currency_input_quantity_xpath).getAttribute("value"));
         }
     }
 
@@ -469,13 +547,13 @@ public class DataPage extends AbstractPage {
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "currency details", nvPairs);
         for(int i=0;i<document.getElementsByTagName("currency").getLength();i++) {
             if (editedCurrencyName.equals("")){}else{
-            assertEquals(editedCurrencyName, document.getElementsByTagName("name").item(i).getTextContent());}
+                assertEquals(editedCurrencyName, document.getElementsByTagName("name").item(i).getTextContent());}
             if (editedCurrencyAbbr.equals("")){}else{
-            assertEquals(editedCurrencyAbbr, document.getElementsByTagName("abbr").item(i).getTextContent());}
+                assertEquals(editedCurrencyAbbr, document.getElementsByTagName("abbr").item(i).getTextContent());}
             if (editedCurrencyUnit.equals("")){}else{
-            assertEquals(editedCurrencyUnit, document.getElementsByTagName("unit").item(i).getTextContent());}
+                assertEquals(editedCurrencyUnit, document.getElementsByTagName("unit").item(i).getTextContent());}
             if (editedCurrencyQuantity.equals("")){}else{
-            assertEquals(editedCurrencyQuantity, document.getElementsByTagName("quantity").item(i).getTextContent());}
+                assertEquals(editedCurrencyQuantity, document.getElementsByTagName("quantity").item(i).getTextContent());}
         }
     }
 
@@ -492,9 +570,18 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyCurrencyUseTableHeaders() {
-            assertEquals(getTextOnPage(currency_use_table_header_xpath).replace("/n", "").replace("/r", ""), "COUNTRY START DATE END DATE PRIMARY REPLACED BY STATUS");
+    public void verifyCurrencyUseInEditMode(Database database, ApacheHttpClient apacheHttpClient, String selectedCurrency)
+    {
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "currency uses", "name", selectedCurrency);
+        for(int i=0; i<document.getElementsByTagName("currencyUse").getLength(); i++){
+            assertEquals(document.getElementsByTagName("countryName").item(i).getTextContent().trim(), getDriver().findElement(currency_use_table_country_edit_xpath).getText());
+            assertEquals(document.getElementsByTagName("startDate").item(i).getTextContent().trim(), getDriver().findElement(currency_use_table_startDate_day_edit_xpath).getAttribute("value")+" "+getDriver().findElement(currency_use_table_startDate_month_edit_xpath).getText()+" "+getDriver().findElement(currency_use_table_startDate_year_edit_xpath).getAttribute("value"));
+            assertEquals(document.getElementsByTagName("primary").item(i).getTextContent().trim(), getDriver().findElement(currency_use_table_primary_edit_xpath).getAttribute("value"));
         }
+    }
+    public void verifyCurrencyUseTableHeaders() {
+        assertEquals(getTextOnPage(currency_use_table_header_xpath).replace("/n", "").replace("/r", ""), "COUNTRY START DATE END DATE PRIMARY REPLACED BY STATUS");
+    }
 
     public void verifyNoCurrencyUse() {
         try {
@@ -602,9 +689,9 @@ public class DataPage extends AbstractPage {
             assertEquals(countryDemographics.getRow(i).get(countryDemographics.getHeaders().get(0)),actCountryDemoTypes.get(i).getText());
             assertEquals(countryDemographics.getRow(i).get(countryDemographics.getHeaders().get(1)),actCountryDemoValue.get(i).getText());
             if(countryDemographics.getRow(i).get(countryDemographics.getHeaders().get(2)).isEmpty()){} else {
-            assertEquals(countryDemographics.getRow(i).get(countryDemographics.getHeaders().get(2)),actCountryDemoUnit.get(i).getText());}
+                assertEquals(countryDemographics.getRow(i).get(countryDemographics.getHeaders().get(2)),actCountryDemoUnit.get(i).getText());}
             if(countryDemographics.getRow(i).get(countryDemographics.getHeaders().get(3)).isEmpty()){} else {
-            assertEquals(countryDemographics.getRow(i).get(countryDemographics.getHeaders().get(3)),actCountryDemoDate.get(i).getText());}
+                assertEquals(countryDemographics.getRow(i).get(countryDemographics.getHeaders().get(3)),actCountryDemoDate.get(i).getText());}
         }
     }
 
@@ -733,9 +820,9 @@ public class DataPage extends AbstractPage {
         String replacedBys[] = replacedBy.split(" ");
         int values = getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Replaced By']/td")).getText().split(",").length;
         if(replacedBys.length== values)
-        for(int i=0; i<replacedBys.length; i++){
-            assertTrue(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Replaced By']/td")).getText().contains(replacedBys[i].replace(",", "")));
-        }
+            for(int i=0; i<replacedBys.length; i++){
+                assertTrue(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Replaced By']/td")).getText().contains(replacedBys[i].replace(",", "")));
+            }
     }
 
     public void verifyAreaLinkInBasicInfo() {
@@ -784,9 +871,9 @@ public class DataPage extends AbstractPage {
         for (int i=0; i<countryHolidaysList.getRowCount(); i++){
             assertEquals(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(0)), dates.get(i).getText());
             if(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(1)).isEmpty()){} else{
-            assertEquals(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(1)), description.get(i).getText());}
+                assertEquals(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(1)), description.get(i).getText());}
             if(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(2)).isEmpty()){} else{
-            assertEquals(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(2)), notes.get(i).getText());}
+                assertEquals(countryHolidaysList.getRow(i).get(countryHolidaysList.getHeaders().get(2)), notes.get(i).getText());}
         }
     }
 
@@ -956,6 +1043,11 @@ public class DataPage extends AbstractPage {
     public void clickOnUpdateCurrencyLink() {
 
         attemptClick(currency_update_button_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void enterCurrencyName(String name) {
@@ -1043,7 +1135,7 @@ public class DataPage extends AbstractPage {
         for(int i = 0; i<countryEntities.getRowCount(); i++){
             assertEquals(countryEntities.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
                     getDriver().findElement(
-                        By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryEntities.getRow(i).get(countryEntities.getHeaders().get(0)) + "']")).getText().replace(",","").trim());
+                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryEntities.getRow(i).get(countryEntities.getHeaders().get(0)) + "']")).getText().replace(",","").trim());
         }
     }
 
@@ -1147,9 +1239,9 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyAreaForSelectedCountry(ExamplesTable areas) {
-         List<WebElement> areasCollection = getDriver().findElements(area_area_dropdown_list_xpath);
+        List<WebElement> areasCollection = getDriver().findElements(area_area_dropdown_list_xpath);
         for (int i=0; i<areas.getRowCount(); i++){
-           assertEquals(areas.getRow(i).get(areas.getHeaders().get(0)),areasCollection.get(i).getText());
+            assertEquals(areas.getRow(i).get(areas.getHeaders().get(0)),areasCollection.get(i).getText());
         }
     }
 
@@ -1295,7 +1387,7 @@ public class DataPage extends AbstractPage {
 
         }
     }
-    
+
     public void clickOnCityCreditRatings() {
         attemptClick(city_credit_ratings_link_id);
     }
@@ -1313,11 +1405,11 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-   }
+    }
 
     public void clickOnCityRegionsInNavigationBar() {
         attemptClick(city_region_link_id);
-   }
+    }
 
     public void clickOnCityRelatedPeople() {
         attemptClick(city_people_link_id);
@@ -1399,11 +1491,11 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
     }
-    
+
     public void clickOnViewHeadOfficeLink(String viewHeadOffice) {
         attemptClick(By.linkText(viewHeadOffice));
     }
-    
+
     public void verifyHeadOfficeInLegalEntityBasicInfo() {
         assertFalse(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Head Office']/td")).isSelected());
     }
@@ -1416,10 +1508,10 @@ public class DataPage extends AbstractPage {
 
     public void verifyCurrencyPage(){
         try{
-        Thread.sleep(1500L);
-        assertEquals("CURRENCY",getTextOnPage(currency_header_xpath));
-        assertEquals(clickedCurrencyIso,getTextOnPage(currency_header_iso_id));
-    }catch (Exception e){
+            Thread.sleep(1500L);
+            assertEquals("CURRENCY",getTextOnPage(currency_header_xpath));
+            assertEquals(clickedCurrencyIso,getTextOnPage(currency_header_iso_id));
+        }catch (Exception e){
 
         }
     }
@@ -1531,7 +1623,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnConfirmButton() {
-        attemptClick(confirm_button_id);
+        attemptClick(confirm_button_xpath);
     }
 
     public void revertChangesToCurrency(Database database, ApacheHttpClient apacheHttpClient, String selectedCurrency) {
@@ -1544,8 +1636,30 @@ public class DataPage extends AbstractPage {
         attemptClick(cancel_yes_button_id);
     }
 
+    public void verifySaveConfirmationModal() {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals("Confirm Changes", getDriver().findElement(confirm_changes_heading_xpath).getText());
+        assertEquals("Click Confirm to save or Return to continue with your edits.", getDriver().findElement(confirm_changes_info_xpath).getText());
+        assertEquals("RETURN", getDriver().findElement(return_button_xpath).getText());
+        assertEquals("CONFIRM", getDriver().findElement(confirm_button_xpath).getText());
+    }
+
+    public void clickOnReturnButton() {
+        attemptClick(return_button_xpath);
+    }
+
+    public void verifyCurrencyEditMode(){
+        assertTrue(getDriver().findElement(currency_input_name_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_input_abbr_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_input_unit_xpath).isDisplayed());
+        assertTrue(getDriver().findElement(currency_input_quantity_xpath).isDisplayed());
+    }
+
     public void clickOnCancelNoButton() {
         attemptClick(cancel_no_button_id);
     }
 }
-
