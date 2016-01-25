@@ -127,16 +127,34 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCurrencyUse(database, apacheHttpClient, selectedCurrency);
     }
 
+    @Then("the user should see the edit currency details from $source document")
+    public void verifyEditCurrencyDetails(@Named("source") String source) {
+        getDataPage().verifyEditCurrencyDetails(database, apacheHttpClient, selectedCurrency, source);
+    }
+
+    @Then("the user should see the view currency details from $source document")
+    public void verifyViewCurrencyDetails(@Named("source") String source) {
+        getDataPage().verifyViewCurrencyDetails(database, apacheHttpClient, selectedCurrency, source);
+    }
+
+    @Then("the user should see the edits to currency in $source document")
+    public void verifyEditCurrency(@Named("source") String source){
+        getDataPage().verifyEditCurrency(database, apacheHttpClient, selectedCurrency, source);
+    }
+
     @Then("the user should see the currency uses in edit mode are from trusted document")
     public void verifyCurrencyUseInEditMode() {
         getDataPage().verifyCurrencyUseInEditMode(database, apacheHttpClient, selectedCurrency);
     }
-    @Then("the user should see the currency <currency> details are from trusted document")
-    public void verifyCurrencyDetails(@Named("currency") String selectedCurrency) { getDataPage().verifyCurrencyDetails(database, apacheHttpClient, selectedCurrency);}
 
     @When("the user clicks on the cancel button")
     public void clickOnCancelButton() {
         getDataPage().clickOnCancelButton();
+    }
+
+    @When("the user clicks on the cancel yes button")
+    public void clickOnCancelYesButton() {
+        getDataPage().clickOnCancelYesButton();
     }
 
     @Then("the user should return to view mode of the currency page")
@@ -212,7 +230,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the basic info for selected area")
     @Aliases(values={"the user should see the basic info for selected city",
-                    "the user should see the basic info for selected sub-area"})
+            "the user should see the basic info for selected sub-area"})
     public void verifyAreaBasicInfo() {
         getDataPage().verifyBasicInfo();
     }
@@ -224,7 +242,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the area's names as: $names")
     @Aliases(values={"the user should see the legal entity's names as: $names",
-                    "the user should see the sub-area's names as: $names"})
+            "the user should see the sub-area's names as: $names"})
     public void verifyAreaNames(ExamplesTable names) {
         getDataPage().verifyNames(names);
     }
@@ -480,7 +498,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCurrencyQuantity(quantity);
     }
 
-    @Then("the user should see the currency selection is disabled")
+    @Then("the user should see the currency selection disabled")
     public void verifyCurrencySelectionDisabled() {
         getDataPage().verifyCurrencySelectionDisabled();
     }
@@ -849,7 +867,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the city's entity as: $cityEntities")
-     public void verifyCityEntities(ExamplesTable cityEntities) {
+    public void verifyCityEntities(ExamplesTable cityEntities) {
         getDataPage().verifyEntities(cityEntities);
     }
 
@@ -882,12 +900,12 @@ public class DataSteps extends AbstractSteps {
     public void verifyDefaultBasicInfo() {
         getDataPage().verifyDefaultBasicInfo();
     }
-    
+
     @When("the user clicks on the city regions link in the navigation bar")
     public void clickOnCityAlternativeRegions(){
         getDataPage().clickOnCityRegionsInNavigationBar();
     }
-    
+
     @Then("the user should see the city's alternative regions as: $citryRegions")
     public void verifyCityRegions(ExamplesTable citryRegions){
         getDataPage().verifyRegions(citryRegions);
@@ -954,7 +972,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyPersonnel(personnel);
     }
 
-     @Then("the user should not see the legal entity's personnel")
+    @Then("the user should not see the legal entity's personnel")
     @Alias("the user should not see the office's personnel")
     public void verifyNoPersonnel() {
         getDataPage().verifyNoPersonnel();
@@ -1024,12 +1042,12 @@ public class DataSteps extends AbstractSteps {
     public void clickOnAreaParentLink(@Named("areaParent") String areaParent){
         getDataPage().clickOnAreaParentLink(areaParent);
     }
-    
+
     @When("the user clicks on the view head office <viewHeadOffice> link for the selected legal entity")
     public void clickOnViewHeadOfficeLink(@Named("viewHeadOffice") String viewHeadOffice){
         getDataPage().clickOnViewHeadOfficeLink(viewHeadOffice);
     }
-    
+
     @Then("the user should not see the legalEntity's headOffice link")
     public void verifyHeadOfficeInLegalEntityBasicInfo() {
         getDataPage().verifyHeadOfficeInLegalEntityBasicInfo();
@@ -1104,5 +1122,69 @@ public class DataSteps extends AbstractSteps {
     public void verifyBasicInfoLeftSection(ExamplesTable basicInfoLeftSection){
         getDataPage().verifyBasicInfoLeftSection(basicInfoLeftSection);
     }
-}
 
+    @When("the user clicks on the save button")
+    public void clickOnSaveButton(){
+        getDataPage().clickOnSaveButton();
+    }
+
+    @Then("the user should see the save confirmation modal")
+    public void verifySaveConfirmationModal(){
+        getDataPage().verifySaveConfirmationModal();
+    }
+
+    @Then("the user should see the error message please enter up to 30 valid characters for abbreviation")
+    public void verifyErrorMessageForCurrAbbr(){
+        getDataPage().verifyErrorMessageForCurrAbbr();
+    }
+
+    @Then("the user should see the error message please enter up to 100 valid characters for name")
+    public void verifyErrorMessageForCurrName(){
+        getDataPage().verifyErrorMessageForCurrName();
+    }
+
+    @Then("the user should see the error message please enter up to 100 valid characters for unit")
+    public void verifyErrorMessageForCurrUnit(){
+        getDataPage().verifyErrorMessageForCurrUnit();
+    }
+
+    @Then("the user should see the error message please enter a numeric value up to 10,000 for quantity")
+    public void verifyErrorMessageForCurrQuantity(){
+        getDataPage().verifyErrorMessageForCurrQuantity();
+    }
+
+    @Then("the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved")
+    public void verifyErrorMessageAtTopOfThePage(){
+        getDataPage().verifyErrorMessageAtTopOfThePage();
+    }
+
+    @Then("the user should see the error message for the required name field")
+    public void verifyErrorMessageForRequiredField(){
+        getDataPage().verifyErrorMessageForRequiredField();
+    }
+
+    @When("the user clicks on the confirm button")
+    public void clickOnConfirmButton(){
+        getDataPage().clickOnConfirmButton();
+    }
+
+    @When("the user clicks on the return button")
+    public void clickOnReturnButton(){
+        getDataPage().clickOnReturnButton();
+    }
+
+    @Then("the user reverts the changes to the currency")
+    public void revertChangesToCurrency(){
+        getDataPage().revertChangesToCurrency(database, apacheHttpClient, selectedCurrency);
+    }
+
+    @Then("the user should return to edit mode of the currency page")
+    public void verifyCurrencyEditMode(){
+        getDataPage().verifyCurrencyEditMode();
+    }
+
+    @When("the user clicks on the cancel no button")
+    public void clickOnCancelNoButton() {
+        getDataPage().clickOnCancelNoButton();
+    }
+}

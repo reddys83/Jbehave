@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -118,6 +119,14 @@ public abstract class AbstractPage {
 	public void selectItemFromDropdownList(By by, String value) {
 		Select dropdown = new Select(driver.findElement(by));
 		dropdown.selectByValue(value);
+	}
+
+	public void modifyHtmlByName(String element, String attribute, String value){
+		WebElement webElement = getDriver().findElement(By.name(element));
+		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+		String scriptSetAttrValue = "arguments[0].setAttribute(arguments[1],arguments[2])";
+		//executor.executeScript("document.getElementsByName('" + element + "').setAttribute('" + attribute + "', '" + value + "')");
+		executor.executeScript(scriptSetAttrValue,webElement,attribute,value);
 	}
 
 }

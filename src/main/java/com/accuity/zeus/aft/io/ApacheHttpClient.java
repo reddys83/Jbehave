@@ -32,7 +32,7 @@ public class ApacheHttpClient {
     @Value("${marklogic.modules.xquery.folderPath}")
     String folderPath;
 
-    public Document executeDatabaseAdminQueryWithResponse(String xquery, Database database) {
+    public Document executeDatabaseAdminQueryWithResponse(Database database, String xquery) {
         Utils utils = new Utils();
         Document document = null;
         HttpClient client = new HttpClient();
@@ -51,6 +51,28 @@ public class ApacheHttpClient {
         }
         method.releaseConnection();
         return document;
+    }
+
+    public void executeDatabaseAdminQuery(Database database,String xquery, List<NameValuePair> nvPairs) {
+        Utils utils = new Utils();
+        HttpClient client = new HttpClient();
+        client.getState().setCredentials(new AuthScope(database.getHost(), database.getPort(), "public"), new UsernamePasswordCredentials(database.getUsername(), database.getPassword()));
+
+        List<String> authPrefs = new ArrayList<>();
+        authPrefs.add(AuthPolicy.DIGEST);
+        client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
+
+        HttpMethod method = new GetMethod(utils.constructURLWithMultipleParameters(database.getScheme(), database.getHost(), database.getPort(), database.getPath(), xquery, nvPairs));
+        try {
+            client.executeMethod(method);
+            Thread.sleep(1000L);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        method.releaseConnection();
     }
 
     public Document executeDatabaseAdminQueryWithParameter(Database database, String xquery, String param, String paramValue) {
@@ -78,7 +100,7 @@ public class ApacheHttpClient {
         return document;
     }
 
-    public Document executeDatabaseAdminQueryWithMultipleParameter(Database database, String xquery, String param, List<NameValuePair> nvPairs) {
+    public Document executeDatabaseAdminQueryWithMultipleParameter(Database database, String xquery, List<NameValuePair> nvPairs) {
         Utils utils = new Utils();
         Document document = null;
         HttpClient client = new HttpClient();
@@ -88,7 +110,7 @@ public class ApacheHttpClient {
         authPrefs.add(AuthPolicy.DIGEST);
         client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 
-        HttpMethod method = new GetMethod(utils.constructURLWithMultipleParameters(database.getScheme(), database.getHost(), database.getPort(), database.getPath(), xquery, param, nvPairs));
+        HttpMethod method = new GetMethod(utils.constructURLWithMultipleParameters(database.getScheme(), database.getHost(), database.getPort(), database.getPath(), xquery, nvPairs));
         try {
             client.executeMethod(method);
             document = new XmlDocument().convertFromString(method.getResponseBodyAsString());

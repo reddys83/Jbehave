@@ -44,7 +44,7 @@ public class AdminPage extends AbstractPage{
     public void verifyTaxonomiesList(Database database, ApacheHttpClient apacheHttpClient) {
         assertEquals("TAXONOMIES", getDriver().findElement(taxonomy_label_xpath).getText());
         List<WebElement> retTaxonomiesListVal = getDriver().findElements(taxonomies_listbox_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse("taxonomies list", database);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,"taxonomies list");
         for (int i = 0; i < document.getElementsByTagName("lookupName").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), retTaxonomiesListVal.get(i).getText().trim());
         }
