@@ -1128,6 +1128,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnSaveButton();
     }
 
+    @Then("the user should see the save confirmation modal")
+    public void verifySaveConfirmationModal(){
+        getDataPage().verifySaveConfirmationModal();
+    }
+
     @Then("the user should see the error message please enter up to 30 valid characters for abbreviation")
     public void verifyErrorMessageForCurrAbbr(){
         getDataPage().verifyErrorMessageForCurrAbbr();
@@ -1163,19 +1168,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnConfirmButton();
     }
 
-    @Then("the user reverts the changes to the currency")
-    public void revertChangesToCurrency(){
-        getDataPage().revertChangesToCurrency(database, apacheHttpClient, selectedCurrency);
-    }
-
-    @Then("the user should see the save confirmation modal")
-    public void verifySaveConfirmationModal(){
-        getDataPage().verifySaveConfirmationModal();
-    }
-
     @When("the user clicks on the return button")
     public void clickOnReturnButton(){
         getDataPage().clickOnReturnButton();
+    }
+
+    @Then("the user reverts the changes to the currency")
+    public void revertChangesToCurrency(){
+        getDataPage().revertChangesToCurrency(database, apacheHttpClient, selectedCurrency);
     }
 
     @Then("the user should return to edit mode of the currency page")

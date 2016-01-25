@@ -1622,7 +1622,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnConfirmButton() {
-        attemptClick(confirm_button_id);
+        attemptClick(confirm_button_xpath);
     }
 
     public void revertChangesToCurrency(Database database, ApacheHttpClient apacheHttpClient, String selectedCurrency) {
@@ -1657,6 +1657,5 @@ public class DataPage extends AbstractPage {
         assertTrue(getDriver().findElement(currency_input_unit_xpath).isDisplayed());
         assertTrue(getDriver().findElement(currency_input_quantity_xpath).isDisplayed());
     }
-
 }
 
