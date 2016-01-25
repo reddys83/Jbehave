@@ -102,3 +102,82 @@ Then the user should return to edit mode of the currency page
 Examples:
 |currency|
 |Afghani-test|
+
+Scenario: Verify user can edit the currency use for status active. (currency use should be editable)
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+Then the user should see the currency usage is editable for status active
+
+Examples:
+|currency|
+|Australian Dollar|
+
+Scenario: Verify user can edit the currency use for status inactive. (currency use should be editable)
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+Then the user should see the currency usage is editable for status inactive
+
+Examples:
+|currency|
+|Deutsche Mark|
+
+Scenario: Veirfy user can edit the currency
+1. Veirfy user can edit the currency use and the values comes from trusted document
+2. Veify the country drop-down when the user is editing an existing currency
+Meta:
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+Then the user should see the currency uses in edit mode are from trusted document
+Then user should see the list of countries in currency edit mode from trusted document
+
+Examples:
+|currency|
+|Namibia Dollar|
+
+Scenario: verify save confirmation modal
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the return button
+Then the user should return to edit mode of the currency page
+
+Examples:
+|currency|
+|Afghani-test|
+
+Scenario: Verify edit currency save
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+And the user enters the currency abbr value as <abbr>
+And the user enters the currency unit value as <unit>
+And the user enters the currency quantity value as <quantity>
+And the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the edits to currency in zeus document
+Then the user should see the currency details from trusted document
+And the user reverts the changes to the currency
+
+Examples:
+|currency|abbr|unit|quantity|
+|Afghani-test|AFN-test|Puls-Test|100|
