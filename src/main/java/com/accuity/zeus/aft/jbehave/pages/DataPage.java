@@ -1687,7 +1687,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyEndDateErrorMessage(String endDateErrorMsg) {
-        assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(currency_start_date_error_msg_xpath).getText());
+        assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(currency_end_date_error_msg_xpath).getText());
     }
 
     public void selectCurrencyCountry(String currencyCountry) {
