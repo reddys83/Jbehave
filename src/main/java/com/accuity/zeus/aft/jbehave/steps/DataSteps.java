@@ -1239,6 +1239,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCurrencyEndYear(currencyEndYear);
     }
 
+    @When("the user enters the currency usage primary value as <primary>")
+    public void enterCurrencyPrimary(@Named("primary") String primary){
+        getDataPage().enterCurrencyPrimary(primary);
+    }
+
     @When("the user enters the currency end year as <currencyEndYear1>")
     public void enterCurrencyEndYear1(@Named("currencyEndYear1") String currencyEndYear1){
         getDataPage().enterCurrencyEndYear(currencyEndYear1);

@@ -11,6 +11,7 @@ JIRA ID - ZEUS-240 - User can save edits to existing currency
 JIRA ID - ZEUS-285 - Users edits for currency use will be validated
 JIRA ID - ZEUS-744 - User will confirm cancel for edit
 JIRA ID - ZEUS-749 - Schematron validation for currency
+JIRA ID - ZEUS-286 - User can save edits to currency uses
 
 Scenario: a. Veify the currency selection drop-down is disabled in update mode
 b. Verify the currency details are comming from trusted document
@@ -318,3 +319,34 @@ And the user should see the error 'Must be after start date.' for end date
 Examples:
 |currency|currencyStartYear|currencyEndYear|currencyStartYear1|currencyEndYear1|
 |Deutsche Mark|1400|2018|2018|1976|
+
+Scenario: ZEUS-286
+User can save edits to the currency uses and verify the data is save in the zeus document
+Meta:@CurrencyUsagePrimary
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+
+When the user enters the currency start day as <currencyStartDay>
+And the user enters the currency start month as <currencyStartMonth>
+And the user enters the currency start year as <currencyStartYear>
+And the user enters the currency end day as <currencyEndDay>
+And the user enters the currency end month as <currencyEndMonth>
+And the user enters the currency end year as <currencyEndYear>
+
+And the user enters the currency usage primary value as <primary>
+
+And the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the edits to currency in zeus document
+
+
+Then the user should see the view currency details from trusted document
+And the user reverts the changes to the currency
+
+Examples:
+|currency|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|primary|
+|Afghani-test|23|04|1987|10|08|1999|false|
