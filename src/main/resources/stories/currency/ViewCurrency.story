@@ -67,7 +67,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-Then the user should see the currency's uses
+Then the user should see the view currency use from trusted document
 When the user clicks on the country <currencyUsageCountry> in the currency usage
 Then the user should see the default country page and display all info
 
@@ -83,7 +83,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-Then the user should see the currency's uses
+Then the user should see the view currency use from trusted document
 When the user clicks on the country iso3 BES in the currency usage
 Then the user should see the country iso3 as BES
 And the user should see the default country page and display all info
@@ -112,7 +112,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-Then the user should see the currency's uses
+Then the user should see the view currency use from trusted document
 When the user clicks on the replaced by currency NAD
 Then the user should see the currency iso code value as <isoCode>
 And the user should see the currency name value as <name>

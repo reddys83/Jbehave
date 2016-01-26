@@ -12,30 +12,27 @@ declare function functx:day-abbrev-en
     [day-from-date(xs:date($date))]
 } ;
 
-let $currency := xs:string(xdmp:get-request-field("currency"))
-let $currencyUses := collection('source-trusted')/currency[name = $currency]/uses/use
+declare function local:getDateAsPerAccuracy
+( $date as node() ) {
+    switch($date/@accuracy/string())
+        case "day" return fn:concat(functx:day-abbrev-en(xs:date($date)), ' ', functx:month-abbrev-en(xs:date($date)), ' ', year-from-date(xs:date($date)))
+        case "month" return fn:concat(functx:month-abbrev-en(xs:date($date)), ' ', year-from-date(xs:date($date)))
+        case "year"  return year-from-date(xs:date($date))
+        default return "date not valid"
+};
+
+let $currency := xs:string(xdmp:get-request-field("name"))
+let $source := xs:string(xdmp:get-request-field("source"))
+
+(:let $currency := "Afghani-test-2":)
+(:let $source := "zeus":)
+
+let $currencyUses := collection('current')/currency[@source=$source][name = $currency]/uses/use
 let $currencyUse := for $x in $currencyUses
 let $countryName := collection('source-trusted')/country[@resource = $x/place/link/@href]/summary/names/name[type = "Country Name"]/value/text()
-
-(: let $startDate := fn:concat(functx:day-abbrev-en(xs:date($x/startDate)), ' ', functx:month-abbrev-en(xs:date($x/startDate)), ' ', year-from-date(xs:date($x/startDate))) :)
-
-let $startDateAccuracy := xs:string($x/startDate/@accuracy)
-let $startDate := switch($startDateAccuracy)
-        			case "day"   return fn:concat(functx:day-abbrev-en(xs:date($x/startDate)), ' ', functx:month-abbrev-en(xs:date($x/startDate)), ' ', year-from-date(xs:date($x/startDate))) 
-        			case "month" return fn:concat(functx:month-abbrev-en(xs:date($x/startDate)), ' ', year-from-date(xs:date($x/startDate))) 
-        			case "year"  return xs:string(year-from-date(xs:date($x/startDate)))
-        			default return ""
-        			
-(: let $endDate := fn:concat(functx:day-abbrev-en(xs:date($x/endDate)), ' ', functx:month-abbrev-en(xs:date($x/endDate)), ' ', year-from-date(xs:date($x/endDate))) :)
-
-let $endDateAccuracy := xs:string($x/endDate/@accuracy)
-let $endDate := switch($endDateAccuracy)
-        			case "day"   return fn:concat(functx:day-abbrev-en(xs:date($x/endDate)), ' ', functx:month-abbrev-en(xs:date($x/endDate)), ' ', year-from-date(xs:date($x/endDate))) 
-        			case "month" return fn:concat(functx:month-abbrev-en(xs:date($x/endDate)), ' ', year-from-date(xs:date($x/endDate))) 
-        			case "year"  return xs:string(year-from-date(xs:date($x/endDate)))
-        			default return ""
-
-let $primary := $x/primary
+let $startDate := local:getDateAsPerAccuracy($x/startDate)
+let $endDate := local:getDateAsPerAccuracy($x/endDate)
+let $primary :=  $x/primary
 let $replacedBy := collection('source-trusted')/currency[@resource = $x/replacedBy/link/@href]/isoCode/text()
 let $status := $x/status
 order by $status, $countryName
