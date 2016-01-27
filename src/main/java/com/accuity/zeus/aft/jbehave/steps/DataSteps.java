@@ -122,26 +122,24 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountriesInListBox(countryList);
     }
 
-    @Then("the user should see the currency's uses")
-    public void verifyCurrencyUse() {
-        getDataPage().verifyCurrencyUse(database, apacheHttpClient, selectedCurrency);
+    @Then("the user should see the edit currency details from trusted document")
+    public void verifyEditCurrencyDetailsFromTrusted() {
+        getDataPage().verifyEditCurrencyDetailsFromTrusted(database, apacheHttpClient, selectedCurrency);
     }
 
-
-    @Then("the user should see the edit currency details from $source document")
-    public void verifyEditCurrencyDetails(@Named("source") String source) {
-        getDataPage().verifyEditCurrencyDetails(database, apacheHttpClient, selectedCurrency, source);
+    @Then("the user should see the view currency details from trusted document")
+    public void verifyViewCurrencyDetailsFromTrusted() {
+        getDataPage().verifyViewCurrencyDetailsFromTrusted(database, apacheHttpClient, selectedCurrency);
     }
 
-    @Then("the user should see the view currency details from $source document")
-    public void verifyViewCurrencyDetails(@Named("source") String source) {
-        getDataPage().verifyViewCurrencyDetails(database, apacheHttpClient, selectedCurrency, source);
-
+    @Then("the user should see the view currency use from trusted document")
+    public void verifyViewCurrencyUseFromTrusted() {
+        getDataPage().verifyViewCurrencyUseFromTrusted(database, apacheHttpClient, selectedCurrency);
     }
 
-    @Then("the user should see the edits to currency in $source document")
-    public void verifyEditCurrency(@Named("source") String source){
-        getDataPage().verifyEditCurrency(database, apacheHttpClient, selectedCurrency, source);
+    @Then("the user should see the edits to currency details in zeus document")
+    public void verifyEditCurrencyInZeus(){
+        getDataPage().verifyEditCurrencyInZeus(database, apacheHttpClient, selectedCurrency);
     }
 
     @Then("the user should see the currency uses in edit mode are from trusted document")
@@ -1174,9 +1172,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnReturnButton();
     }
 
-    @Then("the user reverts the changes to the currency")
-    public void revertChangesToCurrency(){
-        getDataPage().revertChangesToCurrency(database, apacheHttpClient, selectedCurrency);
+    @Then("the user reverts the changes to the currency afghani-test")
+    public void revertChangesToCurrencyAfghani(){
+        getDataPage().revertChangesToCurrencyAfghani(database, apacheHttpClient);
+    }
+
+    @Then("the user reverts the changes to the currency asian currency unit")
+    public void revertChangesToCurrencyAsianCurrencyUnit(){
+        getDataPage().revertChangesToCurrencyAsianCurrencyUnit(database, apacheHttpClient);
     }
 
     @Then("the user should return to edit mode of the currency page")
@@ -1239,6 +1242,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCurrencyEndYear(currencyEndYear);
     }
 
+    /*
     @When("the user enters the currency end year as <currencyEndYear1>")
     public void enterCurrencyEndYear1(@Named("currencyEndYear1") String currencyEndYear1){
         getDataPage().enterCurrencyEndYear(currencyEndYear1);
@@ -1248,9 +1252,44 @@ public class DataSteps extends AbstractSteps {
     public void enterCurrencyStartYear1(@Named("currencyStartYear1") String currencyStartYear){
         getDataPage().enterCurrencyStartYear(currencyStartYear);
     }
-
+    */
     @When("the user clicks on the cancel no button")
     public void clickOnCancelNoButton() {
         getDataPage().clickOnCancelNoButton();
+    }
+
+    @When("the user enters the country <addCurrencyountry> in the add country type-ahead box")
+    public void enterCountryInAddCountryTyAhead(@Named("addCurrencyountry") String addCurrencyountry){
+        getDataPage().enterCountryInAddCountryTyAhead(addCurrencyountry);
+    }
+
+    @When("the user clicks on the add country type-ahead option")
+    public void clickOnAddCountryOption(){
+        getDataPage().clickOnAddCountryOption();
+    }
+
+    @Then("the user should see the primary equals to true by default")
+    public void verifyPrimaryTrueByDefault(){
+        getDataPage().verifyPrimaryTrueByDefault();
+    }
+
+    @Then("the user should see the status equals to active by default")
+    public void verifyStatusActiveByDefault(){
+        getDataPage().verifyStatusActiveByDefault();
+    }
+
+    @Then("the user should see the list of all the existing country in add country list")
+    public void verifyAddCountryList(){
+        getDataPage().verifyAddCountryList(database, apacheHttpClient);
+    }
+
+    @When("the user clicks on the delete option for the additional currency use")
+    public void clickOnDeleteUseOption(){
+        getDataPage().clickOnDeleteUseOption();
+    }
+
+    @Then("the user should not see the additional currency use")
+    public void verifyNoAdditionalCurrencyUse(){
+        getDataPage().verifyNoAdditionalCurrencyUse();
     }
 }

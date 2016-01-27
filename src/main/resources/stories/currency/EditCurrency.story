@@ -11,10 +11,11 @@ JIRA ID - ZEUS-240 - User can save edits to existing currency
 JIRA ID - ZEUS-285 - Users edits for currency use will be validated
 JIRA ID - ZEUS-744 - User will confirm cancel for edit
 JIRA ID - ZEUS-749 - Schematron validation for currency
+JIRA-ID - ZEUS-280 - User can add new use for currency
 
 Scenario: a. Veify the currency selection drop-down is disabled in update mode
-b. Verify the currency details are comming from trusted document
-c. verify when user clicks "Cancel" changes are not saved and screen returns to view mode
+1. Verify the currency details are comming from trusted document
+2. verify when user clicks "Cancel" changes are not saved and screen returns to view mode
 Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -82,9 +83,9 @@ And the user enters the currency unit value as <unit>
 And the user enters the currency quantity value as <quantity>
 And the user clicks on the save button
 When the user clicks on the confirm button
-Then the user should see the edits to currency in zeus document
+Then the user should see the edits to currency details in zeus document
 Then the user should see the view currency details from trusted document
-And the user reverts the changes to the currency
+And the user reverts the changes to the currency afghani-test
 
 Examples:
 |currency|abbr|unit|quantity|
@@ -265,12 +266,9 @@ Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
 |afghani|Albania||||||||
 
-Scenario: ZEUS-749
-1. Veifing schematron validation for currency
-2. Verifying error message when currency start date is before 1500CE
-3. Verifying error message when end date for currency is later than todays date
-4. Verifying error message when start date for currency is later than todays date
-5. Verifying error message when end date for currency is before than start date
+Scenario: Veifing schematron validation for currency
+1. Verifying error message when currency start date is before 1500CE
+2. Verifying error message when end date for currency is later than todays date
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
@@ -283,18 +281,104 @@ When the user clicks on the save button
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 And the user should see the error 'Must be after 1500CE.' for start date
 And the user should see the error 'Must be no later than today.' for end date
-When the user enters the currency start year as <currencyStartYear1>
+
+Examples:
+|currency|currencyStartYear|currencyEndYear|
+|Deutsche Mark|1400|2018|
+
+Scenario: Veifing schematron validation for currency
+1. Verifying error message when start date for currency is later than todays date
+2. Verifying error message when end date for currency is before than start date
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+When the user enters the currency start year as <currencyStartYear>
 When the user clicks on the save button
 Then the user should see the error 'Must be no later than today.' for start date
 When the user clicks on the cancel button
 And the user clicks on the cancel yes button
 Then the user should return to view mode of the currency page
 When the user clicks on the update currency link
-When the user enters the currency end year as <currencyEndYear1>
+When the user enters the currency end year as <currencyEndYear>
 When the user clicks on the save button
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 And the user should see the error 'Must be after start date.' for end date
 
 Examples:
-|currency|currencyStartYear|currencyEndYear|currencyStartYear1|currencyEndYear1|
-|Deutsche Mark|1400|2018|2018|1976|
+|currency|currencyStartYear|currencyEndYear|
+|Deutsche Mark|2018|1976|
+
+Scenario: Verify newly added currency use
+1. Verify by default primary = true
+2. Verify by default status = active
+3. Verify delete option
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+And the user clicks on the add country type-ahead option
+Then the user should see the list of all the existing country in add country list
+When the user enters the country <addCurrencyountry> in the add country type-ahead box
+Then the user should see the primary equals to true by default
+And the user should see the status equals to active by default
+When the user clicks on the delete option for the additional currency use
+Then the user should not see the additional currency use
+
+Examples:
+|currency|country|
+|Deutsche Mark|Afghanistan|
+
+Scenario: Save newly added currency use
+1. @accuracy = year
+2. @accuracy = month
+3. @accuracy = day
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+And the user clicks on the add country type-ahead option
+When the user enters the country <addCurrencyountry> in the add country type-ahead box
+When the user enters the currency start day as <currencyStartDay>
+And the user enters the currency start month as <currencyStartMonth>
+And the user enters the currency start year as <currencyStartYear>
+And the user clicks on the save button
+And the user clicks on the confirm button
+Then the user should see the view currency use from trusted document
+And the user reverts the changes to the currency asian currency unit
+
+Examples:
+|currency|addCurrencyountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
+|Asian Currency Unit|Afghanistan|||1988|||1988|
+|Asian Currency Unit|Afghanistan||1|1988||1|1988|
+|Asian Currency Unit|Afghanistan|01|1|1988|01|1|1988|
+
+Scenario: Save updates tp existing currency use
+1. @accuracy = year
+2. @accuracy = month
+3. @accuracy = day
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+When the user enters the currency start day as <currencyStartDay>
+And the user enters the currency start month as <currencyStartMonth>
+And the user enters the currency start year as <currencyStartYear>
+And the user clicks on the save button
+And the user clicks on the confirm button
+Then the user should see the view currency use from trusted document
+And the user reverts the changes to the currency afghani-test
+
+Examples:
+|currency|addCurrencyountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
+|Afghani-test|Albania|||1988|||1988|
+|Afghani-test|Albania||1|1988||1|1988|
+|Afghani-test|Albania|01|1|1988|01|1|1988|

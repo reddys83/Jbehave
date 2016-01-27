@@ -37,7 +37,10 @@ public class XqueryMap {
         queryMap.put("descending order by office city", "sortDescByOfficeCity.xqy");
         queryMap.put("office types list", "getOfficeTypesList.xqy");
         queryMap.put("office search results with type filter","getOfficeSearchByTypeFilter.xqy");
-        queryMap.put("revert changes to currency","updateCurrency.xqy");
+        queryMap.put("revert changes to currency afghani for zeus","updateCurrencyAfghaniZeus.xqy");
+        queryMap.put("revert changes to currency afghani for trusted","updateCurrencyAfghaniTrusted.xqy");
+        queryMap.put("revert changes to currency asian currency unit for zeus","updateCurrencyAsianCurrencyUnitZeus.xqy");
+        queryMap.put("revert changes to currency asian currency unit for trusted","updateCurrencyAsianCurrencyUnitTrusted.xqy");
     }
 
     public String getXquery(String key){
