@@ -116,7 +116,7 @@ public abstract class AbstractPage {
 		}
 	}
 
-	public void selectItemFromDropdownList(By by, String value) {
+	public void selectItemFromDropdownListByValue(By by, String value) {
 		try {
 			Thread.sleep(3000L);
 		} catch (InterruptedException e) {
@@ -126,7 +126,7 @@ public abstract class AbstractPage {
 		dropdown.selectByValue(value);
 	}
 
-    public void selectMonthFromDropdownList(By by, String value) {
+    public void selectItemFromDropdownListByText(By by, String value) {
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {

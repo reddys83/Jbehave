@@ -3,7 +3,6 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
-import org.apache.bcel.generic.RETURN;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -1685,14 +1684,12 @@ public class DataPage extends AbstractPage {
 
     public void revertChangesToCurrencyAfghani(Database database, ApacheHttpClient apacheHttpClient) {
         List<NameValuePair> nvPairs = new ArrayList<>();
-        //nvPairs.add(new BasicNameValuePair("name", selectedCurrency));
         apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus",nvPairs);
         apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for trusted",nvPairs);
     }
 
     public void revertChangesToCurrencyDeutscheMark(Database database, ApacheHttpClient apacheHttpClient) {
         List<NameValuePair> nvPairs = new ArrayList<>();
-        //nvPairs.add(new BasicNameValuePair("name", selectedCurrency));
         apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency Deutsche Mark for zeus",nvPairs);
         apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency Deutsche Mark for trusted",nvPairs);
 
@@ -1700,7 +1697,6 @@ public class DataPage extends AbstractPage {
 
     public void revertChangesToCurrencyAsianCurrencyUnit(Database database, ApacheHttpClient apacheHttpClient) {
         List<NameValuePair> nvPairs = new ArrayList<>();
-        //nvPairs.add(new BasicNameValuePair("name", selectedCurrency));
         apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for zeus",nvPairs);
         apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for trusted",nvPairs);
     }
@@ -1754,7 +1750,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void selectCurrencyCountry(String currencyCountry) {
-        selectItemFromDropdownList(currency_country_list_edit_xpath, currencyCountry);
+        selectItemFromDropdownListByValue(currency_country_list_edit_xpath, currencyCountry);
     }
 
     public void enterCurrencyStartDay(String currencyStartDay) {
@@ -1765,7 +1761,7 @@ public class DataPage extends AbstractPage {
 
     public void enterCurrencyStartMonth(String currencyStartMonth) {
         editedCurrencyStartMonth = currencyStartMonth;
-        selectMonthFromDropdownList(By.xpath(currency_use_table_startDate_month_edit_xpath), currencyStartMonth);
+        selectItemFromDropdownListByText(By.xpath(currency_use_table_startDate_month_edit_xpath), currencyStartMonth);
     }
 
     public void enterCurrencyStartYear(String currencyStartYear) {
@@ -1782,7 +1778,7 @@ public class DataPage extends AbstractPage {
 
     public void enterCurrencyEndMonth(String currencyEndMonth) {
         editedCurrencyEndMonth = currencyEndMonth;
-        selectMonthFromDropdownList(By.xpath(currency_use_table_endDate_month_edit_xpath), currencyEndMonth);
+        selectItemFromDropdownListByText(By.xpath(currency_use_table_endDate_month_edit_xpath), currencyEndMonth);
 
     }
 
