@@ -142,9 +142,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyEditCurrencyInZeus(database, apacheHttpClient, selectedCurrency);
     }
 
+    @Then("the user should see the edits to currency uses in zeus document")
+    public void verifyEditCurrencyUseInZeus() {
+        getDataPage().verifyEditCurrencyUseInZeus(database, apacheHttpClient, selectedCurrency);
+    }
+
     @Then("the user should see the currency uses in edit mode are from trusted document")
     public void verifyCurrencyUseInEditMode() {
-        getDataPage().verifyCurrencyUseInEditMode(database, apacheHttpClient, selectedCurrency);
+        getDataPage().verifyEditCurrencyUseFromTrusted(database, apacheHttpClient, selectedCurrency);
     }
 
     @When("the user clicks on the cancel button")
@@ -921,7 +926,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the city's people as: $cityPeople")
-    public void verifyCityPeople (ExamplesTable cityPeople) {
+    public void verifyCityPeople(ExamplesTable cityPeople) {
         getDataPage().verifyPeople(cityPeople);
     }
 
@@ -1026,7 +1031,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the legal entity's identifiers as: $identifiers")
     @Alias("the user should see the office's identifiers as: $identifiers")
-    public void verifyLegalEntityOfficeIdentifiers(ExamplesTable identifiers){
+    public void verifyLegalEntityOfficeIdentifiers(ExamplesTable identifiers) {
         getDataPage().verifyLegalEntityOfficeIdentifiers(identifiers);
     }
 
@@ -1048,7 +1053,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the view head office <viewHeadOffice> link for the selected legal entity")
-    public void clickOnViewHeadOfficeLink(@Named("viewHeadOffice") String viewHeadOffice){
+    public void clickOnViewHeadOfficeLink(@Named("viewHeadOffice") String viewHeadOffice) {
         getDataPage().clickOnViewHeadOfficeLink(viewHeadOffice);
     }
 
@@ -1073,12 +1078,12 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the area page with $countryDropDown, $areaDropDown and $subAreaDropDown selected")
-    public void verifyClickedAreaPage(@Named("countryDropDown") String countryDropDown, @Named("areaDropDown") String areaDropDown, @Named("subAreaDropDown") String subAreaDropDown){
+    public void verifyClickedAreaPage(@Named("countryDropDown") String countryDropDown, @Named("areaDropDown") String areaDropDown, @Named("subAreaDropDown") String subAreaDropDown) {
         getDataPage().verifyClickedAreaPage(countryDropDown, areaDropDown, subAreaDropDown);
     }
 
     @Then("the user should see the country page with $countryDropDown selected")
-    public void verifyClickedCountryPage(@Named("countryDropDown") String countryDropDown){
+    public void verifyClickedCountryPage(@Named("countryDropDown") String countryDropDown) {
         getDataPage().verifyClickedCountryPage(countryDropDown);
     }
 
@@ -1123,7 +1128,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the below fields in the country basic info left section $basicInfoLeftSection")
-    public void verifyBasicInfoLeftSection(ExamplesTable basicInfoLeftSection){
+    public void verifyBasicInfoLeftSection(ExamplesTable basicInfoLeftSection) {
         getDataPage().verifyBasicInfoLeftSection(basicInfoLeftSection);
     }
 
@@ -1178,8 +1183,13 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user reverts the changes to the currency afghani-test")
-    public void revertChangesToCurrencyAfghani(){
+    public void revertChangesToCurrencyAfghani() {
         getDataPage().revertChangesToCurrencyAfghani(database, apacheHttpClient);
+    }
+
+    @Then("the user reverts the changes to the currency Deutsche Mark")
+    public void revertChangesToCurrencyDeutscheMark(){
+        getDataPage().revertChangesToCurrencyDeutscheMark(database, apacheHttpClient);
     }
 
     @Then("the user reverts the changes to the currency asian currency unit")
@@ -1193,17 +1203,17 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the list of all other existing currencies (by name) excluding the currency they are currently viewing")
-    public void verifyReplacedByCurrencyList(){
+    public void verifyReplacedByCurrencyList() {
         getDataPage().verifyReplacedByCurrencyList(database, apacheHttpClient, selectedCurrency);
     }
 
     @Then("the user should see the error $startDateErrorMsg for start date")
-    public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg){
+    public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg) {
         getDataPage().verifyStartDateErrorMessage(startDateErrorMsg);
     }
 
     @Then("the user should see the error $startDateErrorMsg for end date")
-    public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg){
+    public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg) {
         getDataPage().verifyEndDateErrorMessage(endDateErrorMsg);
     }
 
@@ -1223,12 +1233,12 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user enters the currency start month as <currencyStartMonth>")
-    public void enterCurrencyStartMonth(@Named("currencyStartMonth") String currencyStartMonth){
+    public void enterCurrencyStartMonth(@Named("currencyStartMonth") String currencyStartMonth) {
         getDataPage().enterCurrencyStartMonth(currencyStartMonth);
     }
 
     @When("the user enters the currency start year as <currencyStartYear>")
-    public void enterCurrencyStartYear(@Named("currencyStartYear") String currencyStartYear){
+    public void enterCurrencyStartYear(@Named("currencyStartYear") String currencyStartYear) {
         getDataPage().enterCurrencyStartYear(currencyStartYear);
     }
 
@@ -1247,7 +1257,16 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCurrencyEndYear(currencyEndYear);
     }
 
-    /*
+    @When("the user enters the currency usage primary value as <primary>")
+    public void enterCurrencyPrimary(@Named("primary") String primary){
+        getDataPage().enterCurrencyPrimary(primary);
+    }
+
+    @When("the user enters the currency usage replaced by as <replacedBy>")
+    public void enterCurrencyReplacedBy(@Named("replacedBy") String replacedBy){
+        getDataPage().enterCurrencyReplacedBy(replacedBy);
+    }
+   /*
     @When("the user enters the currency end year as <currencyEndYear1>")
     public void enterCurrencyEndYear1(@Named("currencyEndYear1") String currencyEndYear1){
         getDataPage().enterCurrencyEndYear(currencyEndYear1);
@@ -1263,9 +1282,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCancelNoButton();
     }
 
-    @When("the user enters the country <addCurrencyountry> in the add country type-ahead box")
-    public void enterCountryInAddCountryTyAhead(@Named("addCurrencyountry") String addCurrencyountry){
-        getDataPage().enterCountryInAddCountryTyAhead(addCurrencyountry);
+    @When("the user enters the country <addCurrencyCountry> in the add country type-ahead box")
+    public void enterCountryInAddCountryTyAhead(@Named("addCurrencyCountry") String addCurrencyCountry) {
+        getDataPage().enterCountryInAddCountryTyAhead(addCurrencyCountry);
+    }
+
+    @When("the user enters the country <currencyCountry> in the currency usage")
+    public void enterCountryInCurrencyUsage(@Named("currencyCountry") String currencyCountry) {
+        getDataPage().enterCountryInCurrencyUsage(currencyCountry);
     }
 
     @When("the user clicks on the add country type-ahead option")
@@ -1284,7 +1308,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the list of all the existing country in add country list")
-    public void verifyAddCountryList(){
+    public void verifyAddCountryList() {
         getDataPage().verifyAddCountryList(database, apacheHttpClient);
     }
 

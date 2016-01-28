@@ -11,6 +11,7 @@ JIRA ID - ZEUS-240 - User can save edits to existing currency
 JIRA ID - ZEUS-285 - Users edits for currency use will be validated
 JIRA ID - ZEUS-744 - User will confirm cancel for edit
 JIRA ID - ZEUS-749 - Schematron validation for currency
+JIRA ID - ZEUS-286 - User can save edits to currency uses
 JIRA-ID - ZEUS-280 - User can add new use for currency
 
 Scenario: a. Veify the currency selection drop-down is disabled in update mode
@@ -244,8 +245,13 @@ Then the user should see the error 'Enter a year, month/year or day/month/year.'
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
 |afghani|Albania|01|||01|||
+<<<<<<< HEAD:src/main/resources/stories/edit/currency/EditCurrency.story
 |afghani|Albania||1|||1||
 |afghani|Albania|01|1||01|1||
+=======
+|afghani|Albania||Jan||||Jan||
+|afghani|Albania|01|Jan||01|Jan||
+>>>>>>> develop:src/main/resources/stories/currency/EditCurrency.story
 |afghani|Albania|01||1988|01||1988|
 
 Scenario: Verify error message required for start and end date
@@ -327,7 +333,7 @@ And the user enters the currency <currency> in the typeahead box
 And the user clicks on the update currency link
 And the user clicks on the add country type-ahead option
 Then the user should see the list of all the existing country in add country list
-When the user enters the country <addCurrencyountry> in the add country type-ahead box
+When the user enters the country <addCurrencyCountry> in the add country type-ahead box
 Then the user should see the primary equals to true by default
 And the user should see the status equals to active by default
 When the user clicks on the delete option for the additional currency use
@@ -348,7 +354,7 @@ And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
 And the user clicks on the update currency link
 And the user clicks on the add country type-ahead option
-When the user enters the country <addCurrencyountry> in the add country type-ahead box
+When the user enters the country <addCurrencyCountry> in the add country type-ahead box
 When the user enters the currency start day as <currencyStartDay>
 And the user enters the currency start month as <currencyStartMonth>
 And the user enters the currency start year as <currencyStartYear>
@@ -358,10 +364,10 @@ Then the user should see the view currency use from trusted document
 And the user reverts the changes to the currency asian currency unit
 
 Examples:
-|currency|addCurrencyountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
+|currency|addCurrencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
 |Asian Currency Unit|Afghanistan|||1988|||1988|
-|Asian Currency Unit|Afghanistan||1|1988||1|1988|
-|Asian Currency Unit|Afghanistan|01|1|1988|01|1|1988|
+|Asian Currency Unit|Afghanistan||Jan|1988||Jan|1988|
+|Asian Currency Unit|Afghanistan|01|Jan|1988|01|Jan|1988|
 
 Scenario: Save updates tp existing currency use
 1. @accuracy = year
@@ -384,5 +390,62 @@ And the user reverts the changes to the currency afghani-test
 Examples:
 |currency|addCurrencyountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
 |Afghani-test|Albania|||1988|||1988|
-|Afghani-test|Albania||1|1988||1|1988|
-|Afghani-test|Albania|01|1|1988|01|1|1988|
+|Afghani-test|Albania||Jan|1988||Jan|1988|
+|Afghani-test|Albania|01|Jan|1988|01|Jan|1988|
+
+Scenario: ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Active status )
+1. @accuracy = year
+2. @accuracy = month
+3. @accuracy = day
+Meta:
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+When the user enters the country <currencyCountry> in the currency usage
+When the user enters the currency start day as <currencyStartDay>
+And the user enters the currency start month as <currencyStartMonth>
+And the user enters the currency start year as <currencyStartYear>
+And the user enters the currency usage primary value as <primary>
+And the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the edits to currency uses in zeus document
+And the user reverts the changes to the currency afghani-test
+
+Examples:
+|currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|primary|
+|Afghani-test|Angola|||1987|false|
+|Afghani-test|Angola||Jun|1987|false|
+|Afghani-test|Angola|21|Jun|1987|false|
+
+Scenario: ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Inactive status )
+1. @accuracy = year
+2. @accuracy = month
+3. @accuracy = day
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
+And the user clicks on the update currency link
+When the user enters the country <currencyCountry> in the currency usage
+When the user enters the currency start day as <currencyStartDay>
+And the user enters the currency start month as <currencyStartMonth>
+And the user enters the currency start year as <currencyStartYear>
+And the user enters the currency end day as <currencyEndDay>
+And the user enters the currency end month as <currencyEndMonth>
+And the user enters the currency end year as <currencyEndYear>
+And the user enters the currency usage primary value as <primary>
+And the user enters the currency usage replaced by as <replacedBy>
+And the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the edits to currency uses in zeus document
+And the user reverts the changes to the currency Deutsche Mark
+
+Examples:
+|currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|primary|replacedBy|
+|Deutsche Mark|Angola|||1987|||1999|false|Dram|
+|Deutsche Mark|Angola||Jun|1987||Jun|1999|false|Guyana Dollar|
+|Deutsche Mark|Angola|21|Jun|1987|23|Jun|1999|false|Kwanza|

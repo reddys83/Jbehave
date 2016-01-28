@@ -44,7 +44,7 @@ public class ReportPage extends AbstractPage {
         this.area = area;
         assertEquals(getDriver().findElement(area_label).getText(),"AREA");
         assertTrue(getDriver().findElement(run_button_disabled).isDisplayed());
-        selectItemFromDropdownList(area_css, area);
+        selectItemFromDropdownListByValue(area_css, area);
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -61,7 +61,7 @@ public class ReportPage extends AbstractPage {
         this.requiredMatch = requiredMatch;
         assertFalse(getDriver().findElement(run_button_disabled).isEnabled());
         assertEquals(getDriver().findElement(required_match_label).getText(), "REQUIRED MATCH");
-        selectItemFromDropdownList(required_match_css, requiredMatch);
+        selectItemFromDropdownListByValue(required_match_css, requiredMatch);
     }
 
     public void clickOnRunButton() {

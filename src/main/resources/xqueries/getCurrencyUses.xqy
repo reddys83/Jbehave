@@ -33,15 +33,16 @@ let $countryName := collection('source-trusted')/country[@resource = $x/place/li
 let $startDate := local:getDateAsPerAccuracy($x/startDate)
 let $endDate := local:getDateAsPerAccuracy($x/endDate)
 let $primary :=  $x/primary
-let $replacedBy := collection('source-trusted')/currency[@resource = $x/replacedBy/link/@href]/isoCode/text()
+let $replacedBy := collection('source-trusted')/currency[@resource = $x/replacedBy/link/@href]
 let $status := $x/status
 order by $status, $countryName
 return <currencyUse>
     <countryName>{$countryName}</countryName>
-    <startDate>{$startDate}</startDate>
-    <endDate>{$endDate}</endDate>
+    <startDate>{$x/startDate/@accuracy}{$startDate}</startDate>
+    <endDate>{$x/endDate/@accuracy}{$endDate}</endDate>
     {$primary}
-    <replacedBy>{$replacedBy}</replacedBy>
+    <replacedByISO>{$replacedBy/isoCode/text()}</replacedByISO>
+    <replacedByName>{$replacedBy/name/text()}</replacedByName>
     {$status}
 </currencyUse>
 
