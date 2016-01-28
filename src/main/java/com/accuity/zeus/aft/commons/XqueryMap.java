@@ -41,6 +41,8 @@ public class XqueryMap {
         queryMap.put("revert changes to currency afghani for trusted","updateCurrencyAfghaniTrusted.xqy");
         queryMap.put("revert changes to currency asian currency unit for zeus","updateCurrencyAsianCurrencyUnitZeus.xqy");
         queryMap.put("revert changes to currency asian currency unit for trusted","updateCurrencyAsianCurrencyUnitTrusted.xqy");
+        queryMap.put("revert changes to currency Deutsche Mark for zeus", "updateCurrencyDeutscheMarkZeus.xqy");
+        queryMap.put("revert changes to currency Deutsche Mark for trusted","updateCurrencyDeutscheMarkTrusted.xqy");
     }
 
     public String getXquery(String key){

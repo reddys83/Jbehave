@@ -126,6 +126,21 @@ public abstract class AbstractPage {
 		dropdown.selectByValue(value);
 	}
 
+    public void selectMonthFromDropdownList(By by, String value) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Select dropdown = new Select(driver.findElement(by));
+        if (value.equals(""))
+        {
+            dropdown.selectByValue(value);
+        } else {
+            dropdown.selectByVisibleText(value);
+        }
+    }
+
 	public void modifyHtmlByName(String element, String attribute, String value){
 		WebElement webElement = getDriver().findElement(By.name(element));
 		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
