@@ -116,7 +116,7 @@ public abstract class AbstractPage {
 		}
 	}
 
-	public void selectItemFromDropdownList(By by, String value) {
+	public void selectItemFromDropdownListByValue(By by, String value) {
 		try {
 			Thread.sleep(3000L);
 		} catch (InterruptedException e) {
@@ -125,6 +125,21 @@ public abstract class AbstractPage {
 		Select dropdown = new Select(driver.findElement(by));
 		dropdown.selectByValue(value);
 	}
+
+    public void selectItemFromDropdownListByText(By by, String value) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Select dropdown = new Select(driver.findElement(by));
+        if (value.equals(""))
+        {
+            dropdown.selectByValue(value);
+        } else {
+            dropdown.selectByVisibleText(value);
+        }
+    }
 
 	public void modifyHtmlByName(String element, String attribute, String value){
 		WebElement webElement = getDriver().findElement(By.name(element));
