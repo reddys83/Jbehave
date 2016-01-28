@@ -423,6 +423,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCountryPayments();
     }
 
+    @Then("the user should see the country's payments iban status as $status")
+    public void verifyCountryPaymentsIbanStatus(@Named("status") String status) {
+        getDataPage().verifyCountryPaymentsIbanStatus(status);
+    }
+
     @Then("the user should see the country's payments iban as: $countryPaymentsIban")
     public void verifyCountryPaymentsIban(ExamplesTable countryPaymentsIban) {
         getDataPage().verifyCountryPaymentsIban(countryPaymentsIban);

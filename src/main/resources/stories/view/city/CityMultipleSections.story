@@ -4,9 +4,10 @@ Narrative:
 In order to view and edit the city
 As a user
 I want to cover the requirements mentioned in
-JIRA ID - ZEUS - 337 - User can view all city info
-JIRA ID - ZEUS - 436 - User can select a new city when viewing a city
-JIRA ID - ZEUS - 338 - User can select multiple sections of city to view
+JIRA ID - ZEUS-337 - User can view all city info
+JIRA ID - ZEUS-436 - User can select a new city when viewing a city
+JIRA ID - ZEUS-338 - User can select multiple sections of city to view
+JIRA ID - ZEUS-605 - make grey headers consistent on view screens
 
 Scenario: Verify city default section
 Given a user is on the search page

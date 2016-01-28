@@ -7,7 +7,7 @@ So that I can achieve a business goal
 JIRA ID - ZEUS-430 - User view list of offices in legal entity
 JIRA ID - ZEUS-549 - User can sort office results by FID [Which includes ZEUS - 666]
 JIRA ID - ZEUS-559 - User can open multiple offices in new tabs from results
-
+JIRA ID - ZEUS-617 - list offices types alphabetically when multiple for one office
 
 Scenario: Verify Office Results
 Meta:
@@ -159,9 +159,8 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user right clicks on the office <officeFid> in the office search results
-
-Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <tfpid>
+Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <officeTfpid>
 
 Examples:
-|entity|searchBy|fid|officeFid|headOfficeAddress|tfpid|
+|entity|searchBy|fid|officeFid|headOfficeAddress|officeTfpid|
 |Bank of America National Association|Name|1038|1038-51|Charlotte, North Carolina, USA||

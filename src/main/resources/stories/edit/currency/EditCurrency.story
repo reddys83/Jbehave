@@ -221,6 +221,10 @@ Examples:
 |afghani|
 
 Scenario: Verify error message for year for start and end date
+1. only day
+2. only month
+3. only day and month
+4. only day and year
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
@@ -240,7 +244,7 @@ Then the user should see the error 'Enter a year, month/year or day/month/year.'
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
 |afghani|Albania|01|||01|||
-|afghani|Albania||1||||1||
+|afghani|Albania||1|||1||
 |afghani|Albania|01|1||01|1||
 |afghani|Albania|01||1988|01||1988|
 
@@ -330,7 +334,7 @@ When the user clicks on the delete option for the additional currency use
 Then the user should not see the additional currency use
 
 Examples:
-|currency|country|
+|currency|addCurrencyountry|
 |Deutsche Mark|Afghanistan|
 
 Scenario: Save newly added currency use

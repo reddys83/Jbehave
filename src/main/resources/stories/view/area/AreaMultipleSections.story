@@ -6,6 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-335 - User can view all area info
 JIRA ID - ZEUS-358 - User can select a new area or sub-area when viewing an area
+JIRA ID - ZEUS-605 - make grey headers consistent on view screens
 
 Scenario: Verify area and sub-area's default section.
 Meta:
