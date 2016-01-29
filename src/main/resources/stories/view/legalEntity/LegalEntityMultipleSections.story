@@ -6,6 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS - 402 - User can view all legal entity info
 JIRA ID - ZEUS - 403 - User can select multiple sections of legal entity to view
+JIRA ID - ZEUS-605 - make grey headers consistent on view screens
 
 Scenario: Verify All sections
 Given a user is on the search page

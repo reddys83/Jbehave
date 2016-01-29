@@ -9,6 +9,7 @@ JIRA ID - ZEUS-382 - User will see head office address & legal entity title in h
 JIRA ID - ZEUS-491 - User can follow link to head office from legal entity
 JIRA ID - ZEUS-384 - User can view websites of legal entity
 JIRA ID - ZEUS-735 - Code shouldn't assume head office fid is of a specific format
+JIRA ID - ZEUS-624 - Legal Entity Basic Info - The head office address should respect the UseInAddress.
 
 Scenario: Verify the basic info for legalEntity
 Given a user is on the search page

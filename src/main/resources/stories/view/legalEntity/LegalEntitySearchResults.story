@@ -7,6 +7,9 @@ So that I can view the information I am looking for
 JIRA ID - ZEUS-123 - User will see count of paginated results returned
 JIRA ID - ZEUS-53 - User can search for legal entity by name
 JIRA ID - ZEUS-71 - User can search for legal entity by FID or TFP ID
+JIRA ID - ZEUS-622 - Search Results is not showing office address.
+JIRA ID - ZEUS-490 - Change legal entity search to use ADDN rather than Denorm
+JIRA ID - ZEUS-475 - User can search for legal entity under "Data"
 
 Scenario: search by name and verify search results
 Given a user is on the search page

@@ -5,6 +5,7 @@ In order to view stub entry details
 As a user when I search by Name, FID, TFPID and click on the search results card I can view details
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-155 - Code counts
+JIRA ID - ZEUS-155 - Code counts
 
 Scenario: Verify Code Count
 Meta:@verifyBuild

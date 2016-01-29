@@ -6,6 +6,8 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-313 - User can select multiple sections of country to view
 JIRA ID - ZEUS-312 - User can view all country info
+JIRA ID - ZEUS-605 - make grey headers consistent on view screens
+JIRA ID - ZEUS-420 - carry over selected sections of country when user selects new country to view
 
 Scenario: Select and view multiple sections for country.
 1. BUG_ID - ZEUS-792
@@ -133,3 +135,25 @@ Examples:
 |country|
 |American Samoa|
 
+Scenario: Carry over selected sections of country when user selects new country to view
+Meta:@verifyBuild
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+Then the user should see the country type-ahead displayed
+When the user enters the country <country> in the type-ahead box
+When the user clicks on the country basic info link in the navigation bar
+Then the user should see the list of country's names type and value as:
+|TYPE|VALUE|
+|Country Name|Afghanistan|
+|Former Name|Afghanistan|
+
+When the user enters an another country Åland Islands in the type-ahead box
+Then the user should see the list of country's names type and value as:
+|TYPE|VALUE|
+|Country Name|Åland Islands|
+
+Examples:
+|country|
+|Afghanistan|

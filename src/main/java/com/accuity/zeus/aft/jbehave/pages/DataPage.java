@@ -41,6 +41,7 @@ public class DataPage extends AbstractPage {
     private By currency_quantity_xpath = By.xpath("//div[@id='content']//dd[4]");
     String currency_use_table_xpath_string = "//*[@id='content']/div/table/tbody/tr[";
     private By currency_use_table_header_xpath = By.xpath("//*[@id='content']/div/table/thead/tr");
+    private By currency_use_table_row_xpath = By.xpath("//*[@id='content']/div/table/tbody/tr");
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By area_listBox_xpath = By.xpath("//*[@id='selection1'] //*[@id='entitySelect_chosen']//span");
     private By subarea_listBox_xpath = By.xpath("//*[@id='selection2'] //*[@id='entitySelect_chosen']//span");
@@ -131,12 +132,12 @@ public class DataPage extends AbstractPage {
     private By country_payments_iban_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//h2[1]");
     private By country_payments_status_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[1]");
     private By country_payments_iso_code_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[2]");
-    private By country_payments_registered_date_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[3]");
-    private By country_payments_code_type_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[4]");
-    private By country_payments_status_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]/tbody//tr/td[1]");
+    private By country_payments_registered_date_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[1]");
+    private By country_payments_code_type_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[3]");
+    private By country_payments_status_xpath = By.xpath("//li[contains(h2,'IBAN')]/dl");
     private By country_payments_iso_code_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]/tbody//tr/td[2]");
-    private By country_payments_registered_date_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]/tbody//tr/td[3]");
-    private By country_payments_code_type_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]/tbody//tr/td[4]");
+    private By country_payments_registered_date_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]/tbody//tr/td[1]");
+    private By country_payments_code_type_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]/tbody//tr/td[3]");
     private By country_payments_routing_code_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//h2[2]");
     private By country_payments_routing_codes_types_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[2]//th[1]");
     private By country_payments_routing_code_code_types_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[2]//td");
@@ -626,10 +627,6 @@ public class DataPage extends AbstractPage {
             }else {
                 assertEquals(document.getElementsByTagName("startDate").item(i).getAttributes().getNamedItem("accuracy").getTextContent(),"day");
             }
-
-            // verifying the accuracy for end date
-
-
         }
 
     }
@@ -640,8 +637,9 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyNoCurrencyUse() {
+        verifyCurrencyUseTableHeaders();
         try {
-            assertNull(getDriver().findElement(currency_use_table_header_xpath));
+            assertNull(getDriver().findElement(currency_use_table_row_xpath));
         } catch(Exception NoSuchElementException){}
     }
 
@@ -954,24 +952,20 @@ public class DataPage extends AbstractPage {
     public void verifyCountryPaymentsIban(ExamplesTable countryPaymentsIban) {
         assertEquals("PAYMENTS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(country_payments_label_xpath).getText());
         assertEquals("IBAN", getDriver().findElement(country_payments_iban_label_xpath).getText());
-        assertEquals("STATUS", getDriver().findElement(country_payments_status_label_xpath).getText());
-        assertEquals("ISO CODE", getDriver().findElement(country_payments_iso_code_label_xpath).getText());
         assertEquals("REGISTERED DATE", getDriver().findElement(country_payments_registered_date_label_xpath).getText());
+        assertEquals("ISO CODE", getDriver().findElement(country_payments_iso_code_label_xpath).getText());
         assertEquals("IBAN ROUTING CODE TYPE", getDriver().findElement(country_payments_code_type_label_xpath).getText());
-        List<WebElement> status = getDriver().findElements(country_payments_status_xpath);
         List<WebElement> isoCode = getDriver().findElements(country_payments_iso_code_xpath);
         List<WebElement> registeredDate = getDriver().findElements(country_payments_registered_date_xpath);
         List<WebElement> ibanRoutingCode = getDriver().findElements(country_payments_code_type_xpath);
         for(int i=0; i<countryPaymentsIban.getRowCount(); i++){
-            assertEquals(countryPaymentsIban.getRow(i).get(countryPaymentsIban.getHeaders().get(0)),status.get(i).getText());
+            assertEquals(countryPaymentsIban.getRow(i).get(countryPaymentsIban.getHeaders().get(0)),registeredDate.get(i).getText());
             assertEquals(countryPaymentsIban.getRow(i).get(countryPaymentsIban.getHeaders().get(1)),isoCode.get(i).getText());
-            assertEquals(countryPaymentsIban.getRow(i).get(countryPaymentsIban.getHeaders().get(2)),registeredDate.get(i).getText());
-            assertEquals(countryPaymentsIban.getRow(i).get(countryPaymentsIban.getHeaders().get(3)),ibanRoutingCode.get(i).getText());
+            assertEquals(countryPaymentsIban.getRow(i).get(countryPaymentsIban.getHeaders().get(2)),ibanRoutingCode.get(i).getText());
         }
     }
 
     public void verifyCountryPaymentsRoutingCodesTypes(ExamplesTable countryPaymentsRoutingCodesTypes) {
-        //assertEquals("PAYMENTS", getDriver().findElement(country_payments_label_xpath).getText());
         assertEquals("ROUTING CODE TYPES IN " + selectedEntity.toUpperCase(), getDriver().findElement(country_payments_routing_code_label_xpath).getText());
         assertEquals("TYPES", getDriver().findElement(country_payments_routing_codes_types_label_xpath).getText());
         List<WebElement> types = getDriver().findElements(country_payments_routing_code_code_types_xpath);
@@ -1135,8 +1129,13 @@ public class DataPage extends AbstractPage {
 
     public void enterCurrencyQuantity(String quantity) {
         editedCurrencyQuantity = quantity;
+        /* Catching the NumberFormatException when user inputs alphabets*/
+        try{
         if(Integer.parseInt(quantity) > 10000){
             modifyHtmlByName("quantity","maxlength", "");
+        }
+        } catch (Exception NumberFormatException){
+
         }
         getDriver().findElement(currency_input_quantity_xpath).clear();
         getDriver().findElement(currency_input_quantity_xpath).sendKeys(quantity);
@@ -1868,6 +1867,10 @@ public class DataPage extends AbstractPage {
             assertEquals(document.getElementsByTagName("replacedByISO").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[5]")).trim());
             assertEquals(document.getElementsByTagName("status").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[6]")).trim().toLowerCase());
         }
+    }
+
+    public void verifyCountryPaymentsIbanStatus(String status) {
+        assertEquals("Status " + status, getDriver().findElement(country_payments_status_xpath).getText());
     }
 
     public void verifyAreaList(Database database, ApacheHttpClient apacheHttpClient) {

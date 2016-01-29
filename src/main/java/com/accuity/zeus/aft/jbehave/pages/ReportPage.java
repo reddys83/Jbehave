@@ -74,6 +74,11 @@ public class ReportPage extends AbstractPage {
     }
 
     public void verifyCount(String count) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals(getDriver().findElement(report_type).getText(), "COUNT: " + area + " > " + requiredMatch + " >");
         assertEquals(getDriver().findElement(count_css).getText(), count);
     }

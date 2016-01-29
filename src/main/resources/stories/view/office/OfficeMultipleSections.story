@@ -5,6 +5,7 @@ In order to view and edit the legalEntity
 As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-540 - User can select multiple office sections and view all
+JIRA ID - ZEUS-605 - make grey headers consistent on view screens
 
 Scenario: Verify All sections
 Given a user is on the search page
