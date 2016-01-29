@@ -9,6 +9,7 @@ JIRA ID - ZEUS-189 - User can view a currency
 JIRA ID - ZEUS-242 - User can view a currency's uses
 JIRA ID - ZEUS-222 - User can follow link to another currency when viewing a currency
 JIRA ID - ZEUS-703 - Only display currency use start and end dates to the indicated accuracy
+JIRA ID - ZEUS-321 - ignore special characters in currency, country, area/subarea and city drop-down
 
 Scenario: Verify currency list
 Given a user is on the search page
@@ -22,12 +23,12 @@ Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
-And the user starts typing the name of a currency as Afg in the currency input box
+And the user starts typing the name of a currency as Pa' in the currency input box
 Then the user should see the drop-down list of the currencies matching the input characters
+
 And the user should see the currencies in the listbox as:
 |CURRENCY|
-|afghani|
-|Afghani test|
+|Pa'anga|
 
 Scenario: Verify no results match
 Given a user is on the search page

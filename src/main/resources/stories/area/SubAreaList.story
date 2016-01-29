@@ -5,9 +5,25 @@ In order to view the places of country
 As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-315 - User can search for subArea by full name
+JIRA ID - ZEUS-321 - ignore special characters in currency, country, area/subarea and city drop-down
+
+Scenario: Verify subArea list
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a sub-area option
+Then the user should see the list of all existing subarea for the selected area by full name
+
+Examples:
+|country|area|
+|USA|Illinois|
 
 Scenario: Verify the subarea for selected country.
-Testcase: country and area with multiple subareas.
+1. country and area with multiple subareas.
 Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -27,7 +43,6 @@ Then the user should see the below subareas for the selected country and area:
 |Co. Tyrone|
 |Fermanagh|
 |Londonderry|
-
 
 Examples:
 |country|area|

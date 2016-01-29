@@ -1869,4 +1869,49 @@ public class DataPage extends AbstractPage {
             assertEquals(document.getElementsByTagName("status").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[6]")).trim().toLowerCase());
         }
     }
+
+    public void verifyAreaList(Database database, ApacheHttpClient apacheHttpClient) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list", nvPairs);
+        for(int i=0; i<document.getElementsByTagName("area").getLength(); i++){
+            assertEquals(document.getElementsByTagName("area").item(i).getTextContent(), getDriver().findElements(area_area_dropdown_list_xpath).get(i).getText());
+        }
+    }
+
+    public void verifySubAreaList(Database database, ApacheHttpClient apacheHttpClient) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "subarea list", nvPairs);
+        for(int i=0; i<document.getElementsByTagName("subarea").getLength(); i++){
+            assertEquals(document.getElementsByTagName("subarea").item(i).getTextContent(), getDriver().findElements(area_subarea_dropdown_list_xpath).get(i).getText());
+        }
+    }
+
+    public void verifyCityList(Database database, ApacheHttpClient apacheHttpClient) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "city list", nvPairs);
+        for(int i=0; i<document.getElementsByTagName("city").getLength(); i++){
+            assertEquals(document.getElementsByTagName("city").item(i).getTextContent(), getDriver().findElements(city_city_dropdown_list_xpath).get(i).getText());
+        }
+    }
 }

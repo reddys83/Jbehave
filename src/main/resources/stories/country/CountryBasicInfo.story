@@ -7,6 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-246 - User can search for country by full name
 JIRA ID - ZEUS-93 - User can view basic country info
 JIRA ID - ZEUS-254 - User can view a country's holidays
+JIRA ID - ZEUS-321 - ignore special characters in currency, country, area/subarea and city drop-down
 JIRA ID - ZEUS-792 - Country Basic Info - Demographics - Dates are not displaying.
 
 Scenario:

@@ -1316,4 +1316,19 @@ public class DataSteps extends AbstractSteps {
     public void verifyNoAdditionalCurrencyUse(){
         getDataPage().verifyNoAdditionalCurrencyUse();
     }
+
+    @Then("the user should see the list of all existing area for the selected country by full name")
+    public void verifyAreaList(){
+        getDataPage().verifyAreaList(database, apacheHttpClient);
+    }
+
+    @Then("the user should see the list of all existing subarea for the selected area by full name")
+    public void verifySubAreaList(){
+        getDataPage().verifySubAreaList(database, apacheHttpClient);
+    }
+
+    @Then("the user should see the list of all existing city for the selected area by full name")
+    public void verifyCityList(){
+        getDataPage().verifyCityList(database, apacheHttpClient);
+    }
 }

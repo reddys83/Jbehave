@@ -6,6 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-246 - User can search for country by full name
 JIRA ID - ZEUS-255 - User can view country's payments info
+JIRA ID - ZEUS-669 - Country Payments - Display all routing code types. Currently it is only displaying one.
 
 Scenario: Verify country payments data.
 1. BUG-ID - ZEUS-653
@@ -39,7 +40,6 @@ Then the user should see the country type-ahead displayed
 When the user enters the country <country> in the type-ahead box
 When the user clicks on the country payments link in the navigation bar
 Then the user should not see the country's payments routing codes types
-
 
 Examples:
 |country|
