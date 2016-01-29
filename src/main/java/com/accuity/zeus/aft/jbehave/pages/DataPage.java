@@ -627,10 +627,6 @@ public class DataPage extends AbstractPage {
             }else {
                 assertEquals(document.getElementsByTagName("startDate").item(i).getAttributes().getNamedItem("accuracy").getTextContent(),"day");
             }
-
-            // verifying the accuracy for end date
-
-
         }
 
     }
@@ -1875,5 +1871,50 @@ public class DataPage extends AbstractPage {
 
     public void verifyCountryPaymentsIbanStatus(String status) {
         assertEquals("Status " + status, getDriver().findElement(country_payments_status_xpath).getText());
+    }
+
+    public void verifyAreaList(Database database, ApacheHttpClient apacheHttpClient) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list", nvPairs);
+        for(int i=0; i<document.getElementsByTagName("area").getLength(); i++){
+            assertEquals(document.getElementsByTagName("area").item(i).getTextContent(), getDriver().findElements(area_area_dropdown_list_xpath).get(i).getText());
+        }
+    }
+
+    public void verifySubAreaList(Database database, ApacheHttpClient apacheHttpClient) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "subarea list", nvPairs);
+        for(int i=0; i<document.getElementsByTagName("subarea").getLength(); i++){
+            assertEquals(document.getElementsByTagName("subarea").item(i).getTextContent(), getDriver().findElements(area_subarea_dropdown_list_xpath).get(i).getText());
+        }
+    }
+
+    public void verifyCityList(Database database, ApacheHttpClient apacheHttpClient) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "city list", nvPairs);
+        for(int i=0; i<document.getElementsByTagName("city").getLength(); i++){
+            assertEquals(document.getElementsByTagName("city").item(i).getTextContent(), getDriver().findElements(city_city_dropdown_list_xpath).get(i).getText());
+        }
     }
 }

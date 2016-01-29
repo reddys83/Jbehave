@@ -7,6 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-246 - User can search for country by full name
 JIRA ID - ZEUS-255 - User can view country's payments info
 JIRA ID - ZEUS-440 - multiple IBAN rules for country
+JIRA ID - ZEUS-669 - Country Payments - Display all routing code types. Currently it is only displaying one.
 
 Scenario: Verify country payments data.
 1. BUG-ID - ZEUS-653

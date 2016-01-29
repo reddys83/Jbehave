@@ -5,6 +5,22 @@ In order to view the places of country
 As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-325 - User can search for city by full name
+JIRA ID - ZEUS-321 - ignore special characters in currency, country, area/subarea and city drop-down
+
+Scenario: Verify city list
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+Then the user should see the list of all existing city for the selected area by full name
+
+Examples:
+|country|area|
+|USA|Wyoming|
 
 Scenario: Verify cities for selected area.
 Meta:
