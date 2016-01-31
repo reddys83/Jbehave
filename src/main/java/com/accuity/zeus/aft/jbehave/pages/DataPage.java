@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -10,10 +11,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import static org.junit.Assert.*;
 
@@ -314,6 +321,8 @@ public class DataPage extends AbstractPage {
     private String editedCurrencyPrimary="";
     private String editedCurrencyCountry="";
     private String editedCurrencyReplacedBy="";
+
+    RestClient restClient = new RestClient();
 
     @Override
     public String getPageUrl() {
@@ -1683,9 +1692,11 @@ public class DataPage extends AbstractPage {
     }
 
     public void revertChangesToCurrencyAfghani(Database database, ApacheHttpClient apacheHttpClient) {
+
         List<NameValuePair> nvPairs = new ArrayList<>();
         apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus",nvPairs);
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for trusted",nvPairs);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for currency", nvPairs);
+        restClient.getResultForPatch("currency", "document.");
     }
 
     public void revertChangesToCurrencyDeutscheMark(Database database, ApacheHttpClient apacheHttpClient) {
@@ -1869,4 +1880,6 @@ public class DataPage extends AbstractPage {
             assertEquals(document.getElementsByTagName("status").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[6]")).trim().toLowerCase());
         }
     }
+
+
 }

@@ -18,10 +18,11 @@ public class DataSteps extends AbstractSteps {
     Database database;
     private String selectedCurrency;
 
+
     @When("the user clicks on the currency tab in the data area")
     public void clickOnCurrencyTab() {
         getDataPage().clickOnCurrencyTab();
-    }
+        }
 
     @When("the user clicks on the country tab in the data area")
     public void clickOnCountryTab() {

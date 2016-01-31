@@ -8,10 +8,15 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 
 public class Utils {
+
+    URIBuilder builder = new URIBuilder();
+    XqueryMap xqueryMap = new XqueryMap();
+    ParamMap paramMap = new ParamMap();
 
     public Properties readPropertyFile(){
         Properties prop = new Properties();
@@ -47,8 +52,6 @@ public class Utils {
     }
 
     public String constructURL(String scheme, String host, int port, String path, String xquery){
-        URIBuilder builder = new URIBuilder();
-        XqueryMap xqueryMap = new XqueryMap();
         try {
             return builder.setScheme(scheme)
                     .setHost(host)
@@ -62,10 +65,7 @@ public class Utils {
 
 
     public String constructURLWithParameter(String scheme, String host, int port, String path, String xquery, String param, String paramValue) {
-        XqueryMap xqueryMap = new XqueryMap();
-        ParamMap paramMap = new ParamMap();
-        URIBuilder builder = new URIBuilder();
-        try {
+       try {
            return builder.setScheme(scheme)
                          .setHost(host)
                          .setPort(port)
@@ -77,10 +77,7 @@ public class Utils {
         }
     }
 
-    public String constructURLWithMultipleParameters(String scheme, String host, int port, String path, String xquery, List<NameValuePair> nvPairs)
-    {
-        XqueryMap xqueryMap = new XqueryMap();
-        URIBuilder builder = new URIBuilder();
+    public String constructURLWithMultipleParameters(String scheme, String host, int port, String path, String xquery, List<NameValuePair> nvPairs) {
         try {
             return builder.setScheme(scheme)
                     .setHost(host)
@@ -92,8 +89,19 @@ public class Utils {
             e.printStackTrace();
             return null;
         }
+    }
 
-
+    public String constructURLForHeaApi(String scheme, String host, int port, String path, String endpointWithID) {
+      try {
+          return builder.setScheme(scheme)
+                        .setHost(host)
+                        .setPort(port)
+                        .setPath(path + endpointWithID).build().toString();
+      }
+      catch (URISyntaxException e) {
+          e.printStackTrace();
+          return null;
+      }
     }
 
 
