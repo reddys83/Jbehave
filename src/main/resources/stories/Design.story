@@ -1,4 +1,4 @@
-Meta:@design
+Meta:@Design
 
 Scenario: Save updates tp existing currency use
 1. @accuracy = year

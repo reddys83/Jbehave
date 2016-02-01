@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class HeraApi extends Database {
+public class HeraApi {
 
     public String host;
     public String port;
