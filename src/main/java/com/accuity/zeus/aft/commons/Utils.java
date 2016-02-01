@@ -4,6 +4,7 @@ package com.accuity.zeus.aft.commons;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.springframework.stereotype.Component;
 
 
 import java.io.IOException;
@@ -11,8 +12,8 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
-
-public class Utils {
+@Component
+public class Utils implements  IUtils {
 
     URIBuilder builder = new URIBuilder();
     XqueryMap xqueryMap = new XqueryMap();

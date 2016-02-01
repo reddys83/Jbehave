@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class HeraApi {
+public class HeraApi implements IHeraApi {
 
     public String host;
     public String port;

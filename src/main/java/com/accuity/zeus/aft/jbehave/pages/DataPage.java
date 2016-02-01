@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.rest.IRestClient;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -322,7 +323,9 @@ public class DataPage extends AbstractPage {
     private String editedCurrencyCountry="";
     private String editedCurrencyReplacedBy="";
 
-    RestClient restClient = new RestClient();
+    @Autowired
+    IRestClient restClient;
+
 
     @Override
     public String getPageUrl() {
@@ -1692,11 +1695,12 @@ public class DataPage extends AbstractPage {
     }
 
     public void revertChangesToCurrencyAfghani(Database database, ApacheHttpClient apacheHttpClient) {
-
+        RestClient restClient = new RestClient();
         List<NameValuePair> nvPairs = new ArrayList<>();
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus",nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus", nvPairs);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for currency", nvPairs);
-        restClient.getResultForPatch("currency", "document.");
+        restClient.getResultForPatch("currency", document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("id").getTextContent().toString());
+
     }
 
     public void revertChangesToCurrencyDeutscheMark(Database database, ApacheHttpClient apacheHttpClient) {

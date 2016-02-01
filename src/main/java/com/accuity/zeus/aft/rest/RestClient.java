@@ -15,9 +15,8 @@ import org.springframework.web.client.RestClientException;
  * Created by tubatil on 1/29/2016.
  */
 @Component
-public class RestClient {
+public class RestClient implements IRestClient{
 
-    @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
@@ -26,6 +25,7 @@ public class RestClient {
     @Autowired
     private HeraApi heraApi;
 
+    @Override
     public void getResultForPatch(String endpoint, String ID)
     {
         HttpHeaders headers = new HttpHeaders();
@@ -33,14 +33,17 @@ public class RestClient {
         HttpEntity<?> requestEntity = new HttpEntity<Object> (null, headers);
         String endpointWithID = endpoint+"/"+ID;
 
-        String url = utils.constructURLForHeaApi(heraApi.getScheme(),heraApi.getHost(),heraApi.getPort(),heraApi.getPath(),endpointWithID);
+        String url = utils.constructURLForHeaApi(heraApi.getScheme(), heraApi.getHost(), heraApi.getPort(), heraApi.getPath(), endpointWithID);
 
         ResponseEntity result = restTemplate.exchange(url, HttpMethod.PATCH, requestEntity, String.class);
         result.getStatusCode();
     }
 
+    @Override
     public void put(String id, String endpointWithID)
     {
 
     }
+
 }
+
