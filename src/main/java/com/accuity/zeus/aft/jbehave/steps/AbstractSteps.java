@@ -30,6 +30,7 @@ public abstract class AbstractSteps {
 	private static AdminPage adminPage;
 	private static LegalEntityPage legalEntityPage;
 	private static OfficesPage officesPage;
+	private static CurrencyPage currencyPage;
 
 	@Autowired
 	protected WebDriverState webDriverState;
@@ -45,10 +46,17 @@ public abstract class AbstractSteps {
 	
 	@Value("${data.management.webapp.aft.uri}")
 	private String uri;
-	
+
+	public static CurrencyPage getCurrencyPage() {
+		return currencyPage;
+	}
+
+	public static void setCurrencyPage(CurrencyPage currencyPage) {
+		AbstractSteps.currencyPage = currencyPage;
+	}
+
 	public String getDataManagementWebappUrl() {
 		//return buildUriString(null, null);
-
 		return host;
 	}
 
