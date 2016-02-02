@@ -245,13 +245,8 @@ Then the user should see the error 'Enter a year, month/year or day/month/year.'
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
 |afghani|Albania|01|||01|||
-<<<<<<< HEAD:src/main/resources/stories/edit/currency/EditCurrency.story
-|afghani|Albania||1|||1||
-|afghani|Albania|01|1||01|1||
-=======
 |afghani|Albania||Jan||||Jan||
 |afghani|Albania|01|Jan||01|Jan||
->>>>>>> develop:src/main/resources/stories/currency/EditCurrency.story
 |afghani|Albania|01||1988|01||1988|
 
 Scenario: Verify error message required for start and end date
