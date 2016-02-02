@@ -4,7 +4,9 @@ package com.accuity.zeus.aft.jbehave.pages;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.rest.Response;
 import com.accuity.zeus.aft.rest.RestClient;
+import com.accuity.zeus.xml.XmlDocument;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -319,6 +321,10 @@ public class DataPage extends AbstractPage {
     private String editedCurrencyPrimary="";
     private String editedCurrencyCountry="";
     private String editedCurrencyReplacedBy="";
+
+    private Response response;
+
+    static ResponseEntity responseEntity;
 
     public DataPage(WebDriver driver, String urlPrefix, Database database,  ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi ) {
         super(driver, urlPrefix, database, apacheHttpClient,restClient,heraApi );
@@ -1688,25 +1694,33 @@ public class DataPage extends AbstractPage {
         assertEquals("Required", getDriver().findElement(currency_name_error_message_xpath).getText());
     }
 
-    public void clickOnConfirmButton() {
+    public void clickOnConfirmButton(String selectedCurrency) {
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedCurrency));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for currency", nvPairs);
+
+        responseEntity = restClient.getDocumentByID("currency",document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("id").getTextContent().toString(),heraApi );
+
         attemptClick(confirm_button_xpath);
     }
 
     public void revertChangesToCurrencyAfghani() {
         List<NameValuePair> nvPairs = new ArrayList<>();
+
         apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus", nvPairs);
+
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for currency", nvPairs);
-        String response=restClient.getResultForPatch("currency", document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("id").getTextContent().toString(),heraApi);
-        assertTrue(response.equals("200"));
+
+        int response=restClient.putDocumentByID("currency", document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("id").getTextContent().toString(),heraApi, responseEntity.getBody().toString());
+        //String response=restClient.getResultForPatch("currency", document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("id").getTextContent().toString(),heraApi);
+        //assertTrue(response.equals("200"));
+
+        assertTrue(response==200);
     }
 
-    public void revertChangesToCurrencySpecialDrawingRights() {
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus", nvPairs);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for currency", nvPairs);
-        String response=restClient.getResultForPatch("currency", document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("id").getTextContent().toString(),heraApi);
-        assertTrue(response.equals("200"));
-    }
 
     public void revertChangesToCurrencyDeutscheMark() {
         List<NameValuePair> nvPairs = new ArrayList<>();
@@ -1880,14 +1894,14 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "currency uses", nvPairs);
-        /* for(int i=0; i<document.getElementsByTagName("currencyUse").getLength(); i++){
+         for(int i=0; i<document.getElementsByTagName("currencyUse").getLength(); i++){
             assertEquals(document.getElementsByTagName("countryName").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[1]")).trim());
             assertEquals(document.getElementsByTagName("startDate").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[2]")).trim());
             assertEquals(document.getElementsByTagName("endDate").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[3]")).trim());
             assertEquals(document.getElementsByTagName("primary").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[4]")).trim().toLowerCase());
             assertEquals(document.getElementsByTagName("replacedByISO").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[5]")).trim());
             assertEquals(document.getElementsByTagName("status").item(i).getTextContent().trim(), getTextOnPage(By.xpath(currency_use_table_xpath_string + Integer.toString(i + 1) + "]/td[6]")).trim().toLowerCase());
-        } */
+        }
     }
 
 

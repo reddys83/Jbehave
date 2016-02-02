@@ -1167,7 +1167,7 @@ public class DataSteps extends AbstractSteps {
 
     @When("the user clicks on the confirm button")
     public void clickOnConfirmButton(){
-        getDataPage().clickOnConfirmButton();
+        getDataPage().clickOnConfirmButton(selectedCurrency);
     }
 
     @When("the user clicks on the return button")
