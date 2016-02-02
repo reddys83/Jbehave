@@ -13,7 +13,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 @Component
-public class Utils implements  IUtils {
+public class Utils {
 
     URIBuilder builder = new URIBuilder();
     XqueryMap xqueryMap = new XqueryMap();

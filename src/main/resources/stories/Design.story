@@ -20,6 +20,5 @@ Then the user should see the view currency use from trusted document
 And the user reverts the changes to the currency afghani-test
 
 Examples:
-|currency|addCurrencyountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
-|Afghani-test|Albania|||1988|||1988|
-
+|currency|currencyStartDay|currencyStartMonth|currencyStartYear|
+|Afghani-test|||1988|

@@ -1,5 +1,9 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.rest.RestClient;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -23,8 +27,8 @@ public class ReportPage extends AbstractPage {
     private String area;
     private String requiredMatch;
 
-    public ReportPage(WebDriver driver, String urlPrefix) {
-        super(driver, urlPrefix);
+    public ReportPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
+       super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
     @Override

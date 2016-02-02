@@ -2,12 +2,15 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.rest.RestClient;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -23,11 +26,24 @@ public abstract class AbstractPage {
 
     private String urlPrefix;
 
+    protected Database database;
+
+    protected ApacheHttpClient apacheHttpClient;
+
+    protected HeraApi heraApi;
+
+    protected RestClient restClient;
+
+
     protected By contentLocator = By.xpath("//body/div[@id='content']");
 
-    public AbstractPage(WebDriver driver, String urlPrefix) {
+    public AbstractPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         this.driver = driver;
         this.urlPrefix = urlPrefix;
+        this.database = database;
+        this.apacheHttpClient = apacheHttpClient;
+        this.heraApi = heraApi;
+        this.restClient = restClient;
     }
 
     public abstract String getPageUrl();
@@ -65,6 +81,22 @@ public abstract class AbstractPage {
 
     public String getUrlPrefix() {
         return urlPrefix;
+    }
+
+    public Database getDatabase() {
+        return database;
+    }
+
+  public RestClient getRestClient() {
+      return restClient;
+  }
+
+    public ApacheHttpClient getApacheHttpClient() {
+        return apacheHttpClient;
+    }
+
+    public HeraApi getHeraApi() {
+        return heraApi;
     }
 
     public String getTextOnPage(By by) {

@@ -2,8 +2,10 @@ package com.accuity.zeus.aft.result;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.pages.AbstractPage;
 import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
+import com.accuity.zeus.aft.rest.RestClient;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import junit.framework.Assert;
 import org.apache.http.NameValuePair;
@@ -16,6 +18,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.w3c.dom.Document;
 
+import javax.xml.crypto.Data;
 import java.util.*;
 
 import static junit.framework.Assert.assertFalse;
@@ -106,13 +109,12 @@ public class ResultsPage extends AbstractPage {
     private By office_search_refine_results_searchBox_xpath = By.xpath("//input[@id='refine-input']");
 
 
-
-    public ResultsPage(WebDriver driver, String urlPrefix) {
-        super(driver, urlPrefix);
+    public ResultsPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi ) {
+        super(driver, urlPrefix,database, apacheHttpClient, restClient, heraApi);
     }
 
-    public ResultsPage(WebDriver driver, String urlPrefix, String entity, String field, String value) {
-        this(driver, urlPrefix);
+    public ResultsPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi, String entity, String field, String value) {
+        this(driver, urlPrefix, database, apacheHttpClient,restClient, heraApi);
         this.entity = entity;
         this.field = field;
         this.value = value;
@@ -226,7 +228,7 @@ public class ResultsPage extends AbstractPage {
             e.printStackTrace();
         }
         element.click();
-        return new LegalEntityPage(getDriver(), getUrlPrefix());
+        return new LegalEntityPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public WebElement getFidElements(String fid) {

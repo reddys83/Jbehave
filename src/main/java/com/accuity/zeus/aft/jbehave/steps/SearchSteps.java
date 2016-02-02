@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.jbehave.pages.SearchPage;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
@@ -13,7 +14,7 @@ public class SearchSteps extends AbstractSteps {
 
 	@Given("a user is on the search page")
 	public void SearchPage() {
-		searchPage = new SearchPage(webDriverState.getWebDriver(), getDataManagementWebappUrl());
+		searchPage = new SearchPage(webDriverState.getWebDriver(), getDataManagementWebappUrl(), database, apacheHttpClient, restClient, heraApi);
 		setSearchPage(searchPage.goToSearchPage());
 	}
 
