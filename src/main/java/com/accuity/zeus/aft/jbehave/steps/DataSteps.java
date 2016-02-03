@@ -1,19 +1,20 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.*;
 
 import org.jbehave.core.model.ExamplesTable;
+import org.openqa.selenium.remote.internal.ApacheHttpClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataSteps extends AbstractSteps {
 
-    private String selectedCurrency;
-
-    @When("the user clicks on the currency tab in the data area")
-    public void clickOnCurrencyTab() {
-        getDataPage().clickOnCurrencyTab();
-        }
+    @Autowired
+    com.accuity.zeus.aft.io.ApacheHttpClient apacheHttpClient;
+    @Autowired
+    Database database;
 
     @When("the user clicks on the country tab in the data area")
     public void clickOnCountryTab() {
@@ -30,62 +31,6 @@ public class DataSteps extends AbstractSteps {
         setLegalEntityPage(getDataPage().clickOnLegalEntityTab());
     }
 
-    @When("the user clicks on the choose a currency option")
-    public void clickOnChooseACurrencyOption() {
-        getDataPage().clickOnChooseACurrencyOption();
-    }
-
-    @Then("the user should see the list of all existing currencies by full name")
-    public void verifyCurrencyList() {
-        getDataPage().verifyCurrencyList();
-    }
-
-    @When("the user starts typing the name of a currency as $curr in the currency input box")
-    public void enterCurrency(@Named("curr") String curr) {
-        getDataPage().enterCurrency(curr);
-    }
-
-    @Then("the user should see the drop-down list of the currencies matching the input characters")
-    public void thenUserShouldSeeCurrencyDropDownMatchingTheSearchString() {
-        getDataPage().verifyCurrencyDropDownMatchesSearchString();
-    }
-
-    @Then("the user should see the option no results match for the searched currency string")
-    public void thenTheUSerShouldNoResultsMatchOption() {
-        getDataPage().verifyNoResultsMatchOption();
-    }
-
-    @When("the user enters the currency <currency> in the typeahead box")
-    public void selectCurrencyFromTypeAhead(@Named("currency") String currency) {
-        selectedCurrency = currency;
-        getDataPage().selectCurrencyFromTypeAhead(currency);
-    }
-
-    @Then("the user should see the currency iso code value as <isoCode>")
-    public void verifyCurrencyIsoCode(@Named("isoCode") String isoCode) {
-        getDataPage().verifyCurrencyIsoCode(isoCode);
-    }
-
-    @Then("the user should see the currency name value as <name>")
-    public void verifyCurrencyName(@Named("name") String name) {
-        getDataPage().verifyCurrencyName(name);
-    }
-
-    @Then("the user should see the currency abbr value as <abbr>")
-    public void verifyCurrencyAbbr(@Named("abbr") String abbr) {
-        getDataPage().verifyCurrencyAbbr(abbr);
-    }
-
-    @Then("the user should see the currency unit value as <unit>")
-    public void verifyCurrencyUnit(@Named("unit") String unit) {
-        getDataPage().verifyCurrencyUnit(unit);
-    }
-
-    @Then("the user should see the currency quantity value as <quantity>")
-    public void verifyCurrencyQuantity(@Named("quantity") String quantity) {
-        getDataPage().verifyCurrencyQuantity(quantity);
-    }
-
     @Then("the user should see the country type-ahead displayed")
     public void verifyCountryTypeAheadAndListBox() {
         getDataPage().verifyCountryTypeAheadAndListBox();
@@ -96,13 +41,15 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCountryListBox();
     }
 
+    @Then("the user should see the country's currencies as: $countryCurrencies")
+    public void verifyCountryCurrencies(ExamplesTable countryCurrencies) {
+        getDataPage().verifyCountryCurrencies(countryCurrencies);
+    }
+
     @Then("the user should see the list of all existing countries by full name")
     public void verifyCountryList() {
         getDataPage().verifyCountryList();
     }
-
-    @Then("user should see the list of countries in currency edit mode from trusted document")
-    public void verifyCountryListInCurrencyEditMode() { getDataPage().verifyCountryListInCurrencyEditMode();}
 
     @When("the user starts typing the name of a country as $word in the country input box")
     public void enterValueInCountryTypeAhead(String word) {
@@ -114,35 +61,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyCountriesInListBox(countryList);
     }
 
-    @Then("the user should see the edit currency details from trusted document")
-    public void verifyEditCurrencyDetailsFromTrusted() {
-        getDataPage().verifyEditCurrencyDetailsFromTrusted(selectedCurrency);
-    }
-
-    @Then("the user should see the view currency details from trusted document")
-    public void verifyViewCurrencyDetailsFromTrusted() {
-        getDataPage().verifyViewCurrencyDetailsFromTrusted(selectedCurrency);
-    }
-
-    @Then("the user should see the view currency use from trusted document")
-    public void verifyViewCurrencyUseFromTrusted() {
-        getDataPage().verifyViewCurrencyUseFromTrusted(selectedCurrency);
-    }
-
-    @Then("the user should see the edits to currency details in zeus document")
-    public void verifyEditCurrencyInZeus(){
-        getDataPage().verifyEditCurrencyInZeus(selectedCurrency);
-    }
-
-    @Then("the user should see the edits to currency uses in zeus document")
-    public void verifyEditCurrencyUseInZeus() {
-        getDataPage().verifyEditCurrencyUseInZeus(selectedCurrency);
-    }
-
-    @Then("the user should see the currency uses in edit mode are from trusted document")
-    public void verifyCurrencyUseInEditMode() {
-        getDataPage().verifyEditCurrencyUseFromTrusted(selectedCurrency);
-    }
 
     @When("the user clicks on the cancel button")
     public void clickOnCancelButton() {
@@ -152,36 +70,6 @@ public class DataSteps extends AbstractSteps {
     @When("the user clicks on the cancel yes button")
     public void clickOnCancelYesButton() {
         getDataPage().clickOnCancelYesButton();
-    }
-
-    @Then("the user should return to view mode of the currency page")
-    public void verifyCurrencyViewMode() {
-        getDataPage().verifyCurrencyViewMode();
-    }
-
-    @Then("the user should see the currency usage is editable for status active")
-    public void verifyCurrencyUpdateModeForStatusActive() {
-        getDataPage().verifyCurrencyUpdateModeForStatusActive();
-    }
-
-    @Then("the user should see the currency usage is editable for status inactive")
-    public void verifyCurrencyUpdateModeForStatusInactive() {
-        getDataPage().verifyCurrencyUpdateModeForStatusInactive();
-    }
-
-    @Then("the user should not see the currency's uses")
-    public void verifyNoCurrencyUse() {
-        getDataPage().verifyNoCurrencyUse();
-    }
-
-    @When("the user clicks on the replaced by currency $replacedBy")
-    public void clickOnReplacedByLink(String replacedBy) {
-        getDataPage().clickOnReplacedByLink(replacedBy);
-    }
-
-    @Then("the user should see the currencies in the listbox as: $currencyList")
-    public void verifyCurrencyInListBox(ExamplesTable currencyList) {
-        getDataPage().verifyCurrencyInListBox(currencyList);
     }
 
     @When("the user enters the country <country> in the type-ahead box")
@@ -390,16 +278,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnReplacedByCountry(replacedByCountry);
     }
 
-    @When("the user clicks on the country <currencyUsageCountry> in the currency usage")
-    public void clickOnCurrencyUsageCountry(@Named("currencyUsageCountry") String currencyUsageCountry) {
-        getDataPage().clickOnCurrencyUsageCountry(currencyUsageCountry);
-    }
-
-    @When("the user clicks on the country iso3 $iso3 in the currency usage")
-    public void clickOnCurrencyIso3(@Named("iso3") String iso3) {
-        getDataPage().clickOnCurrencyIso3(iso3);
-    }
-
     @When("the user clicks on the country holidays link in the navigation bar")
     public void clickOnCountryHolidays() {
         getDataPage().clickOnCountryHolidays();
@@ -475,35 +353,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCountryCreditRating();
     }
 
-    @When("the user clicks on the update currency link")
-    public void clickOnUpdateCurrencyLink() {
-        getDataPage().clickOnUpdateCurrencyLink();
-    }
-
-    @When("the user enters the currency name value as <name>")
-    public void enterCurrencyName(@Named("name") String name) {
-        getDataPage().enterCurrencyName(name);
-    }
-
-    @When("the user enters the currency abbr value as <abbr>")
-    public void enterCurrencyAbbr(@Named("abbr") String abbr) {
-        getDataPage().enterCurrencyAbbr(abbr);
-    }
-
-    @When("the user enters the currency unit value as <unit>")
-    public void enterCurrencyUnit(@Named("unit") String unit) {
-        getDataPage().enterCurrencyUnit(unit);
-    }
-
-    @When("the user enters the currency quantity value as <quantity>")
-    public void enterCurrencyQuantity(@Named("quantity") String quantity) {
-        getDataPage().enterCurrencyQuantity(quantity);
-    }
-
-    @Then("the user should see the currency selection disabled")
-    public void verifyCurrencySelectionDisabled() {
-        getDataPage().verifyCurrencySelectionDisabled();
-    }
     @When("the user clicks on the country places link in the navigation bar")
     public void clickOnCountryPlaces() {
         getDataPage().clickOnCountryPlaces();
@@ -584,16 +433,6 @@ public class DataSteps extends AbstractSteps {
     @When("the user refreshes the page")
     public void refreshThePage() {
         getDataPage().refreshThePage();
-    }
-
-    @When("the user clicks on the currencies link in the navigation bar")
-    public void clickOnCountryCurrenciesLink() {
-        getDataPage().clickOnCountryCurrenciesLink();
-    }
-
-    @Then("the user should see the country's currencies as: $countryCurrencies")
-    public void verifyCountryCurrencies(ExamplesTable countryCurrencies) {
-        getDataPage().verifyCountryCurrencies(countryCurrencies);
     }
 
     @When("the user clicks on the choose an area option")
@@ -1059,11 +898,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnISOLink(isoCode);
     }
 
-    @Then("the user should see the currency page for clicked iso name")
-    public void verifyCurrencyPage(){
-        getDataPage().verifyCurrencyPage();
-    }
-
     @When("the user clicks on the city area link $area")
     public void clickOnCityArea(@Named("area") String area){
         getDataPage().clickOnCityArea(area);
@@ -1134,39 +968,9 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifySaveConfirmationModal();
     }
 
-    @Then("the user should see the error message please enter up to 30 valid characters for abbreviation")
-    public void verifyErrorMessageForCurrAbbr(){
-        getDataPage().verifyErrorMessageForCurrAbbr();
-    }
-
-    @Then("the user should see the error message please enter up to 100 valid characters for name")
-    public void verifyErrorMessageForCurrName(){
-        getDataPage().verifyErrorMessageForCurrName();
-    }
-
-    @Then("the user should see the error message please enter up to 100 valid characters for unit")
-    public void verifyErrorMessageForCurrUnit(){
-        getDataPage().verifyErrorMessageForCurrUnit();
-    }
-
-    @Then("the user should see the error message please enter a numeric value up to 10,000 for quantity")
-    public void verifyErrorMessageForCurrQuantity(){
-        getDataPage().verifyErrorMessageForCurrQuantity();
-    }
-
-    @Then("the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved")
-    public void verifyErrorMessageAtTopOfThePage(){
-        getDataPage().verifyErrorMessageAtTopOfThePage();
-    }
-
-    @Then("the user should see the error message for the required name field")
-    public void verifyErrorMessageForRequiredField(){
-        getDataPage().verifyErrorMessageForRequiredField();
-    }
-
     @When("the user clicks on the confirm button")
     public void clickOnConfirmButton(){
-        getDataPage().clickOnConfirmButton(selectedCurrency);
+        getDataPage().clickOnConfirmButton();
     }
 
     @When("the user clicks on the return button")
@@ -1174,150 +978,9 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnReturnButton();
     }
 
-    @Then("the user reverts the changes to the currency")
-    public void revertChangesToCurrency() {
-        getDataPage().revertChangesToCurrency(selectedCurrency);
-    }
-
-    @Then("the user reverts the changes to the currency Deutsche Mark")
-    public void revertChangesToCurrencyDeutscheMark(){
-        getDataPage().revertChangesToCurrencyDeutscheMark();
-    }
-
-    @Then("the user reverts the changes to the currency asian currency unit")
-    public void revertChangesToCurrencyAsianCurrencyUnit(){
-        getDataPage().revertChangesToCurrencyAsianCurrencyUnit();
-    }
-
-    @Then("the user reverts the changes to the currency afghani-test")
-    public void revertChangesToCurrencyAfghani() {
-        getDataPage().revertChangesToCurrencyAfghani(database, apacheHttpClient);
-    }
-
-
-    @Then("the user should return to edit mode of the currency page")
-    public void verifyCurrencyEditMode(){
-        getDataPage().verifyCurrencyEditMode();
-    }
-
-    @Then("the user should see the list of all other existing currencies (by name) excluding the currency they are currently viewing")
-    public void verifyReplacedByCurrencyList() {
-        getDataPage().verifyReplacedByCurrencyList(selectedCurrency);
-    }
-
-    @Then("the user should see the error $startDateErrorMsg for start date")
-    public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg) {
-        getDataPage().verifyStartDateErrorMessage(startDateErrorMsg);
-    }
-
-    @Then("the user should see the error $startDateErrorMsg for end date")
-    public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg) {
-        getDataPage().verifyEndDateErrorMessage(endDateErrorMsg);
-    }
-
-    @When("the user selects the currency country as <currencyCountry>")
-    public void selectCurrencyCountry(@Named("currencyCountry") String currencyCountry){
-        getDataPage().selectCurrencyCountry(currencyCountry);
-    }
-
-    @When("the user enters the currency start day as <currencyStartDay>")
-    public void enterCurrencyStartDay(@Named("currencyStartDay") String currencyStartDay){
-        getDataPage().enterCurrencyStartDay(currencyStartDay);
-    }
-
-    @When("the user clicks on the currency start month drop-down")
-    public void clickOnCurrencyStartMonthDropDown(){
-        getDataPage().clickOnCurrencyStartMonthDropDown();
-    }
-
-    @When("the user enters the currency start month as <currencyStartMonth>")
-    public void enterCurrencyStartMonth(@Named("currencyStartMonth") String currencyStartMonth) {
-        getDataPage().enterCurrencyStartMonth(currencyStartMonth);
-    }
-
-    @When("the user enters the currency start year as <currencyStartYear>")
-    public void enterCurrencyStartYear(@Named("currencyStartYear") String currencyStartYear) {
-        getDataPage().enterCurrencyStartYear(currencyStartYear);
-    }
-
-    @When("the user enters the currency end day as <currencyEndDay>")
-    public void enterCurrencyEndDay(@Named("currencyEndDay") String currencyEndDay){
-        getDataPage().enterCurrencyEndDay(currencyEndDay);
-    }
-
-    @When("the user enters the currency end month as <currencyEndMonth>")
-    public void enterCurrencyEndMonth(@Named("currencyEndMonth") String currencyEndMonth){
-        getDataPage().enterCurrencyEndMonth(currencyEndMonth);
-    }
-
-    @When("the user enters the currency end year as <currencyEndYear>")
-    public void enterCurrencyEndYear(@Named("currencyEndYear") String currencyEndYear){
-        getDataPage().enterCurrencyEndYear(currencyEndYear);
-    }
-
-    @When("the user enters the currency usage primary value as <primary>")
-    public void enterCurrencyPrimary(@Named("primary") String primary){
-        getDataPage().enterCurrencyPrimary(primary);
-    }
-
-    @When("the user enters the currency usage replaced by as <replacedBy>")
-    public void enterCurrencyReplacedBy(@Named("replacedBy") String replacedBy){
-        getDataPage().enterCurrencyReplacedBy(replacedBy);
-    }
-   /*
-    @When("the user enters the currency end year as <currencyEndYear1>")
-    public void enterCurrencyEndYear1(@Named("currencyEndYear1") String currencyEndYear1){
-        getDataPage().enterCurrencyEndYear(currencyEndYear1);
-    }
-
-    @When("the user enters the currency start year as <currencyStartYear1>")
-    public void enterCurrencyStartYear1(@Named("currencyStartYear1") String currencyStartYear){
-        getDataPage().enterCurrencyStartYear(currencyStartYear);
-    }
-    */
     @When("the user clicks on the cancel no button")
     public void clickOnCancelNoButton() {
         getDataPage().clickOnCancelNoButton();
-    }
-
-    @When("the user enters the country <addCurrencyCountry> in the add country type-ahead box")
-    public void enterCountryInAddCountryTyAhead(@Named("addCurrencyCountry") String addCurrencyCountry) {
-        getDataPage().enterCountryInAddCountryTyAhead(addCurrencyCountry);
-    }
-
-    @When("the user enters the country <currencyCountry> in the currency usage")
-    public void enterCountryInCurrencyUsage(@Named("currencyCountry") String currencyCountry) {
-        getDataPage().enterCountryInCurrencyUsage(currencyCountry);
-    }
-
-    @When("the user clicks on the add country type-ahead option")
-    public void clickOnAddCountryOption(){
-        getDataPage().clickOnAddCountryOption();
-    }
-
-    @Then("the user should see the primary equals to true by default")
-    public void verifyPrimaryTrueByDefault(){
-        getDataPage().verifyPrimaryTrueByDefault();
-    }
-
-    @Then("the user should see the status equals to active by default")
-    public void verifyStatusActiveByDefault(){
-        getDataPage().verifyStatusActiveByDefault();
-    }
-
-    @Then("the user should see the list of all the existing country in add country list")
-    public void verifyAddCountryList() {
-        getDataPage().verifyAddCountryList();
-    }
-
-    @When("the user clicks on the delete option for the additional currency use")
-    public void clickOnDeleteUseOption(){
-        getDataPage().clickOnDeleteUseOption();
-    }
-
-    @Then("the user should not see the additional currency use")
-    public void verifyNoAdditionalCurrencyUse(){
-        getDataPage().verifyNoAdditionalCurrencyUse();
     }
 
     @Then("the user should see the list of all existing area for the selected country by full name")
