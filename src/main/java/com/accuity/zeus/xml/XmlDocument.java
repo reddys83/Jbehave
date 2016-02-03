@@ -14,6 +14,8 @@ import org.restlet.ext.xml.DomRepresentation;
 
 public class XmlDocument {
 
+    private Document document;
+
     public Document convertFromString(String s) {
         try {
             StringReader sr = new StringReader(s);
@@ -35,4 +37,6 @@ public class XmlDocument {
         domRep.setDocument(document);
         return domRep;
     }
-}
+
+
+  }

@@ -1,11 +1,15 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.pages.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 import com.accuity.zeus.aft.jbehave.pages.DataPage;
+import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.aft.result.ResultsPage;
 import com.accuity.zeus.aft.web.driver.WebDriverState;
 import org.apache.commons.lang3.StringUtils;
@@ -31,6 +35,18 @@ public abstract class AbstractSteps {
 	private static LegalEntityPage legalEntityPage;
 	private static OfficesPage officesPage;
 	private static CurrencyPage currencyPage;
+
+    @Autowired
+    ApacheHttpClient apacheHttpClient;
+
+    @Autowired
+    HeraApi heraApi;
+
+    @Autowired
+    RestClient restClient;
+
+    @Autowired
+    Database database;
 
 	@Autowired
 	protected WebDriverState webDriverState;

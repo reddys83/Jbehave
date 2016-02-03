@@ -1,10 +1,10 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.*;
 
 import org.jbehave.core.model.ExamplesTable;
+import org.openqa.selenium.remote.internal.ApacheHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class DataSteps extends AbstractSteps {
 
     @Autowired
-    ApacheHttpClient apacheHttpClient;
+    com.accuity.zeus.aft.io.ApacheHttpClient apacheHttpClient;
     @Autowired
     Database database;
 
@@ -48,7 +48,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the list of all existing countries by full name")
     public void verifyCountryList() {
-        getDataPage().verifyCountryList(database, apacheHttpClient);
+        getDataPage().verifyCountryList();
     }
 
     @When("the user starts typing the name of a country as $word in the country input box")
@@ -60,6 +60,7 @@ public class DataSteps extends AbstractSteps {
     public void verifyCountriesInListBox(ExamplesTable countryList) {
         getDataPage().verifyCountriesInListBox(countryList);
     }
+
 
     @When("the user clicks on the cancel button")
     public void clickOnCancelButton() {
@@ -981,7 +982,6 @@ public class DataSteps extends AbstractSteps {
     public void clickOnCancelNoButton() {
         getDataPage().clickOnCancelNoButton();
     }
-
 
     @Then("the user should see the list of all existing area for the selected country by full name")
     public void verifyAreaList(){

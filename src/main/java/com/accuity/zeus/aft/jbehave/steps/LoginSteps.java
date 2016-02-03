@@ -26,7 +26,7 @@ public class LoginSteps extends AbstractSteps {
 
     @Given("user is on the login page")
     public void givenUserOpensLoginPage(){
-        loginPage = new LoginPage(webDriverState.getWebDriver(), getDataManagementWebappUrl());
+        loginPage = new LoginPage(webDriverState.getWebDriver(), getDataManagementWebappUrl(), database, apacheHttpClient, restClient, heraApi);
         loginPage.open();
     }
 
@@ -92,7 +92,7 @@ public class LoginSteps extends AbstractSteps {
     @When("the user refreshes the login page")
     public void whenTheUserRefreshsesLoginPage(){
         loginPage.refreshPage();
-        setLoginPage(new LoginPage(webDriverState.getWebDriver(), getDataManagementWebappUrl()));
+        setLoginPage(new LoginPage(webDriverState.getWebDriver(), getDataManagementWebappUrl(), database, apacheHttpClient, restClient, heraApi));
     }
 
 }

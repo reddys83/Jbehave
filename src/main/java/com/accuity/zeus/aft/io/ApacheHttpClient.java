@@ -32,8 +32,11 @@ public class ApacheHttpClient {
     @Value("${marklogic.modules.xquery.folderPath}")
     String folderPath;
 
+    @Autowired
+    Utils utils;
+
     public Document executeDatabaseAdminQueryWithResponse(Database database, String xquery) {
-        Utils utils = new Utils();
+       // Utils utils = new Utils();
         Document document = null;
         HttpClient client = new HttpClient();
         client.getState().setCredentials(new AuthScope(database.getHost(), database.getPort(), "public"), new UsernamePasswordCredentials(database.getUsername(), database.getPassword()));
@@ -54,7 +57,7 @@ public class ApacheHttpClient {
     }
 
     public void executeDatabaseAdminQuery(Database database,String xquery, List<NameValuePair> nvPairs) {
-        Utils utils = new Utils();
+       // Utils utils = new Utils();
         HttpClient client = new HttpClient();
         client.getState().setCredentials(new AuthScope(database.getHost(), database.getPort(), "public"), new UsernamePasswordCredentials(database.getUsername(), database.getPassword()));
 
@@ -76,7 +79,7 @@ public class ApacheHttpClient {
     }
 
     public Document executeDatabaseAdminQueryWithParameter(Database database, String xquery, String param, String paramValue) {
-        Utils utils = new Utils();
+      //  Utils utils = new Utils();
         Document document = null;
         HttpClient client = new HttpClient();
         client.getState().setCredentials(new AuthScope(database.getHost(), database.getPort(), "public"), new UsernamePasswordCredentials(database.getUsername(), database.getPassword()));
@@ -101,7 +104,7 @@ public class ApacheHttpClient {
     }
 
     public Document executeDatabaseAdminQueryWithMultipleParameter(Database database, String xquery, List<NameValuePair> nvPairs) {
-        Utils utils = new Utils();
+     //   Utils utils = new Utils();
         Document document = null;
         HttpClient client = new HttpClient();
         client.getState().setCredentials(new AuthScope(database.getHost(), database.getPort(), "public"), new UsernamePasswordCredentials(database.getUsername(), database.getPassword()));

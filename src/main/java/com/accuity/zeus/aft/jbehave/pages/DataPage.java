@@ -3,6 +3,10 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.rest.Response;
+import com.accuity.zeus.aft.rest.RestClient;
+import com.accuity.zeus.xml.XmlDocument;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -10,10 +14,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import static org.junit.Assert.*;
 
@@ -26,81 +37,6 @@ public class DataPage extends AbstractPage {
     private By currency_country_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private String clickedCurrencyIso="";
     private By legalEntity_tab_id = By.id("legalEntity-nav");
-    /*
-    private By currency_country_list_edit_xpath = By.xpath("//fieldset//select[@name='country']/option");
-    private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
-    private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
-    private By no_results_match_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
-    private By currency_iso_code_label_id = By.id("iso");
-    private By currency_iso_code_id = By.id("iso-value");
-    private By currency_name_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[1]");
-    private By currency_name_xpath = By.xpath("//*[@id='content']/div/dl[1]/dd[1]");
-    private By currency_abbr_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[2]");
-    private By currency_abbr_xpath = By.xpath("//div[@id='content']//dd[2]");
-    private By currency_unit_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[3]");
-    private By currency_unit_xpath = By.xpath("//*[@id='content']/div/dl[1]/dd[3]");
-    private By currency_quantity_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[4]");
-    private By currency_quantity_xpath = By.xpath("//div[@id='content']//dd[4]");
-    String currency_use_table_xpath_string = "//*[@id='content']/div/table/tbody/tr[";
-    private By currency_use_table_header_xpath = By.xpath("//*[@id='content']/div/table/thead/tr");
-    private By currency_use_table_row_xpath = By.xpath("//*[@id='content']/div/table/tbody/tr");
-    String currency_use_table_country_edit_xpath = "//select[@name='country']";
-
-    private By currency_use_table_startDate_day_edit_xpath=By.xpath("//input[@name='began-day']");
-    String currency_use_table_startDate_month_edit_xpath = "//select[@name='began-month']";
-    private By currency_use_table_startDate_year_edit_xpath=By.xpath("//input[@name='began-year']");
-    private By currency_use_table_endDate_day_edit_xpath=By.xpath("//input[@name='end-day']");
-    String currency_use_table_endDate_month_edit_xpath = "//select[@name='end-month']";
-
-    private By currency_use_table_endDate_year_edit_xpath=By.xpath("//input[@name='end-year']");
-
-  //  private By currency_use_table_primary_edit_xpath =By.xpath("//fieldset[@data-edit_id='primary']/input[@checked]");
-    String currency_use_table_primary_edit_xpath ="//fieldset[@data-edit_id='primary']";
-
-    private By currency_use_table_replacedBy_disable_edit_xpath = By.xpath("//fieldset[2]//div[@class='chosen-container chosen-container-single chosen-disabled']/a");
-    String currency_use_table_replacedBy_edit_xpath= "//fieldset[2]//div[@class='chosen-container chosen-container-single']";
-    private By currency_selection_disabled_xpath=By.xpath(".//*[@id='entitySelect_chosen'][@class='chosen-container chosen-container-single chosen-disabled']");
-    private String currencySearchString = null;
-    private By currency_update_button_id = By.id("update-button");
-    private By currency_input_name_xpath = By.xpath("//input[@name='name']");
-    private By currency_input_abbr_xpath = By.xpath("//input[@name='abbr']");
-    private By currency_input_unit_xpath = By.xpath("//input[@name='unit']");
-    private By currency_input_quantity_xpath = By.xpath("//input[@name='quantity']");
-    private By currency_header_xpath = By.xpath(".//*[@id='selection']/fieldset/h1");
-    private By currency_header_iso_id = By.id("iso-value");
-    private By country_currencies_link_id = By.id("countryCurrencies");
-        private By confirm_button_id = By.id("confirm-button");
-
-    private By currency_abbr_error_message_xpath = By.xpath("//*[@data-error_id='abbrError']");
-    private By currency_name_error_message_xpath = By.xpath("//*[@data-error_id='nameError']");
-    private By currency_unit_error_message_xpath = By.xpath("//*[@data-error_id='unitError']");
-    private By currency_quantity_error_message_xpath = By.xpath("//*[@data-error_id='quantityError']");
-    private By currency_replaced_by_xpath = By.xpath("//*[@class='chosen-results']/li");
-    private By currency_start_date_error_msg_xpath = By.xpath("//*[@data-error_id='startDateError']");
-    private By currency_end_date_error_msg_xpath = By.xpath("//*[@data-error_id='endDateError']");
-    private By currency_start_date_drop_down_xpath = By.xpath("//select[@name='began-month']");
-    private By currency_add_country_option_xpath = By.xpath("//*[@id='add_use_chosen']/a");
-    private By currency_add_country_type_ahead_input_xpath = By.xpath("//*[@id='add_use_chosen']/div/div/input");
-    private By currency_use_table_additional_use_primary_edit_xpath = By.xpath("//*[@id='additionalUses']//fieldset/input[@checked]");
-    private By currency_use_table_additional_use_status_xpath = By.xpath("//*[@id='additionalUses']/tr/td[@class='status']");
-    private By currency_add_country_list_xpath = By.xpath("//*[@id='add_use_chosen'] //ul/li");
-    private By currency_use_table_delete_use_option_xpath = By.xpath("//button[@class='delete-row']");
-    private By currency_use_table_additional_use_row_xpath = By.xpath("//*[@id='additionalUses']");
-
-    private String editedCurrencyName="";
-    private String editedCurrencyAbbr="";
-    private String editedCurrencyUnit="";
-    private String editedCurrencyQuantity="";
-    private String editedCurrencyStartDay="";
-    private String editedCurrencyStartMonth="";
-    private String editedCurrencyStartYear="";
-    private String editedCurrencyEndDay="";
-    private String editedCurrencyEndMonth="";
-    private String editedCurrencyEndYear="";
-    private String editedCurrencyPrimary="";
-    private String editedCurrencyCountry="";
-    private String editedCurrencyReplacedBy="";
-    */
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By area_listBox_xpath = By.xpath("//*[@id='selection1'] //*[@id='entitySelect_chosen']//span");
     private By subarea_listBox_xpath = By.xpath("//*[@id='selection2'] //*[@id='entitySelect_chosen']//span");
@@ -251,10 +187,6 @@ public class DataPage extends AbstractPage {
     private By office_sort_name_label_xpath = By.xpath("//*[@id='content']//li[1]/dl/dt");
     private By office_sort_name_value_xpath = By.xpath("//*[@id='content']//li[1]/dl/dd");
 
-    public DataPage(WebDriver driver, String urlPrefix) {
-        super(driver, urlPrefix);
-    }
-
     private By people_label_xpath = By.xpath("//li[contains(h1,'People')]//span");
     private By people_type_label_xpath = By.xpath("//li[contains(h1,'People for ')]//table/thead//th[1]");
     private By people_entity_label_xpath = By.xpath("//li[contains(h1,'People for ')]//table/thead//th[2]");
@@ -328,6 +260,15 @@ public class DataPage extends AbstractPage {
     private By cancel_no_button_id = By.id("cancel-button");
 
 
+    private Response response;
+
+    static ResponseEntity responseEntity;
+
+    public DataPage(WebDriver driver, String urlPrefix, Database database,  ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi ) {
+        super(driver, urlPrefix, database, apacheHttpClient,restClient,heraApi );
+    }
+
+
     @Override
     public String getPageUrl() {
         return null;
@@ -335,10 +276,19 @@ public class DataPage extends AbstractPage {
 
     public CurrencyPage clickOnCurrencyTab() {
         attemptClick(currency_tab_xpath);
-        return new CurrencyPage(getDriver(), getUrlPrefix());
+        return new CurrencyPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
     }
 
-    public void verifyCountryList(Database database, ApacheHttpClient apacheHttpClient){
+    public void verifyCurrencyList() {
+        assertEquals(getDriver().findElement(labels_xpath).getText(), "CURRENCY");
+        List<WebElement> currencyList = getDriver().findElements(currency_country_list_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "currency list");
+        for (int i = 0; i < document.getElementsByTagName("name").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), currencyList.get(i).getText());
+        }
+    }
+
+    public void verifyCountryList(){
         assertEquals(getDriver().findElement(labels_xpath).getText(), "COUNTRY");
         List<WebElement> countryList = getDriver().findElements(currency_country_list_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,"country list");
@@ -357,7 +307,7 @@ public class DataPage extends AbstractPage {
 
     public LegalEntityPage clickOnLegalEntityTab() {
         attemptClick(legalEntity_tab_id);
-        return new LegalEntityPage(getDriver(), getUrlPrefix());
+        return new LegalEntityPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void clickOnCountryListBox() {

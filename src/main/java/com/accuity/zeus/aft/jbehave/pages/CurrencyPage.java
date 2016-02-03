@@ -2,6 +2,8 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -91,8 +93,8 @@ public class CurrencyPage extends AbstractPage {
     private String editedCurrencyCountry="";
     private String editedCurrencyReplacedBy="";
 
-    public CurrencyPage(WebDriver driver, String urlPrefix) {
-        super(driver, urlPrefix);
+    public CurrencyPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
+        super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
     @Override
