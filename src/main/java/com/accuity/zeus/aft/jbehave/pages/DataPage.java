@@ -1708,14 +1708,17 @@ public class DataPage extends AbstractPage {
         attemptClick(confirm_button_xpath);
     }
 
-    public void revertChangesToCurrencyAfghani() {
+    public void revertChangesToCurrency(String selectedCurrency) {
         List<NameValuePair> nvPairs = new ArrayList<>();
-
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus", nvPairs);
+        nvPairs.add(new BasicNameValuePair("name", selectedCurrency));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+     //   We need the below step to demo patch operation
+     //   apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus", nvPairs);
 
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for currency", nvPairs);
 
         int response=restClient.putDocumentByID(document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("resource").getTextContent().toString(),heraApi, responseEntity.getBody().toString());
+        //   We need the below step to demo patch operation
         //String response=restClient.getResultForPatch("currency", document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("id").getTextContent().toString(),heraApi);
         //assertTrue(response.equals("200"));
 

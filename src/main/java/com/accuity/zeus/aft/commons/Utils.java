@@ -15,7 +15,6 @@ import java.util.*;
 @Component
 public class Utils {
 
-    URIBuilder builder = new URIBuilder();
     XqueryMap xqueryMap = new XqueryMap();
     ParamMap paramMap = new ParamMap();
 
@@ -53,6 +52,8 @@ public class Utils {
     }
 
     public String constructURL(String scheme, String host, int port, String path, String xquery){
+        URIBuilder builder = new URIBuilder();
+
         try {
             return builder.setScheme(scheme)
                     .setHost(host)
@@ -66,7 +67,9 @@ public class Utils {
 
 
     public String constructURLWithParameter(String scheme, String host, int port, String path, String xquery, String param, String paramValue) {
-       try {
+        URIBuilder builder = new URIBuilder();
+
+        try {
            return builder.setScheme(scheme)
                          .setHost(host)
                          .setPort(port)
@@ -79,6 +82,8 @@ public class Utils {
     }
 
     public String constructURLWithMultipleParameters(String scheme, String host, int port, String path, String xquery, List<NameValuePair> nvPairs) {
+        URIBuilder builder = new URIBuilder();
+
         try {
             return builder.setScheme(scheme)
                     .setHost(host)
@@ -93,7 +98,9 @@ public class Utils {
     }
 
     public String constructURLForHeaApi(String scheme, String host, int port, String path, String endpointWithID) {
-      try {
+        URIBuilder builder = new URIBuilder();
+
+        try {
           return builder.setScheme(scheme)
                         .setHost(host)
                         .setPort(port)

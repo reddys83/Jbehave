@@ -38,12 +38,5 @@ public class XmlDocument {
         return domRep;
     }
 
-    public XmlDocument() {
-
-    }
-    public XmlDocument(String s) {
-        this.document = convertFromString(s);
-    }
-
 
   }

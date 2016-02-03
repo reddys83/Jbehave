@@ -1,15 +1,9 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.zeus.aft.io.ApacheHttpClient;
-import com.accuity.zeus.aft.io.Database;
-import com.accuity.zeus.aft.io.HeraApi;
-import com.accuity.zeus.aft.rest.RestClient;
 import org.jbehave.core.annotations.*;
 
 import org.jbehave.core.model.ExamplesTable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 @Component
 public class DataSteps extends AbstractSteps {
@@ -1175,9 +1169,9 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnReturnButton();
     }
 
-    @Then("the user reverts the changes to the currency afghani-test")
-    public void revertChangesToCurrencyAfghani() {
-        getDataPage().revertChangesToCurrencyAfghani();
+    @Then("the user reverts the changes to the currency")
+    public void revertChangesToCurrency() {
+        getDataPage().revertChangesToCurrency(selectedCurrency);
     }
 
     @Then("the user reverts the changes to the currency Deutsche Mark")

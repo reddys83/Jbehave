@@ -17,8 +17,9 @@ And the user enters the currency start year as <currencyStartYear>
 And the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the view currency use from trusted document
-And the user reverts the changes to the currency afghani-test
+And the user reverts the changes to the currency
 
 Examples:
 |currency|currencyStartDay|currencyStartMonth|currencyStartYear|
 |Bahrain Dinar|||1990|
+|Baht|||1990|
