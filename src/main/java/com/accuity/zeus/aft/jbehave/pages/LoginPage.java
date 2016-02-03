@@ -1,5 +1,9 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.rest.RestClient;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import static org.junit.Assert.assertEquals;
@@ -18,8 +22,9 @@ public class LoginPage extends AbstractPage {
     private By forgot_password_link_linkText = By.linkText("Forgot password?");
     private By error_message_css = By.cssSelector(".login-error>p");
 
-    public LoginPage(WebDriver driver, String urlPrefix) {
-        super(driver, urlPrefix);
+
+    public LoginPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
+        super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
     @Override
@@ -52,7 +57,7 @@ public class LoginPage extends AbstractPage {
             e.printStackTrace();
         }
         getDriver().findElement(login_button_name).click();
-        SearchPage searchPage = new SearchPage(getDriver(), getUrlPrefix());
+        SearchPage searchPage = new SearchPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
         return searchPage;
     }
 
@@ -71,7 +76,7 @@ public class LoginPage extends AbstractPage {
 
     public ResetPasswordPage clickOnForgotPasswordLink() {
         getDriver().findElement(forgot_password_link_linkText).click();
-        resetPasswordPage = new ResetPasswordPage(getDriver(), getUrlPrefix());
+        resetPasswordPage = new ResetPasswordPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
         return resetPasswordPage;
     }
 

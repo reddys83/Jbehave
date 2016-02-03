@@ -2,6 +2,8 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.rest.RestClient;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -67,8 +69,8 @@ public class OfficesPage extends AbstractPage {
     private By office_locations_summary_value_xpath = By.xpath("//li[h2='Summary']/table/tbody/tr/td[2]");
     private By office_locations_summaries_xpath = By.xpath("//li[h2='Summary']/table/tbody/tr");
 
-    public OfficesPage(WebDriver driver, String urlPrefix) {
-        super(driver, urlPrefix);
+    public OfficesPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
+       super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
     @Override

@@ -3,6 +3,10 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.rest.Response;
+import com.accuity.zeus.aft.rest.RestClient;
+import com.accuity.zeus.xml.XmlDocument;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -10,10 +14,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import static org.junit.Assert.*;
 
@@ -110,10 +121,6 @@ public class DataPage extends AbstractPage {
     private By office_sort_name_label_xpath = By.xpath("//*[@id='content']//li[1]/dl/dt");
     private By office_sort_name_value_xpath = By.xpath("//*[@id='content']//li[1]/dl/dd");
 
-    public DataPage(WebDriver driver, String urlPrefix) {
-        super(driver, urlPrefix);
-    }
-
     private By people_label_xpath = By.xpath("//li[contains(h1,'People')]//span");
     private By people_type_label_xpath = By.xpath("//li[contains(h1,'People for ')]//table/thead//th[1]");
     private By people_entity_label_xpath = By.xpath("//li[contains(h1,'People for ')]//table/thead//th[2]");
@@ -186,6 +193,15 @@ public class DataPage extends AbstractPage {
     private By country_tab_xpath=By.xpath("//*[@id='data-navbar']/ul/li[2]");
     private By cancel_no_button_id = By.id("cancel-button");
 
+    private Response response;
+
+    static ResponseEntity responseEntity;
+
+    public DataPage(WebDriver driver, String urlPrefix, Database database,  ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi ) {
+        super(driver, urlPrefix, database, apacheHttpClient,restClient,heraApi );
+    }
+
+
     @Override
     public String getPageUrl() {
         return null;
@@ -193,28 +209,17 @@ public class DataPage extends AbstractPage {
 
     public CurrencyPage clickOnCurrencyTab() {
         attemptClick(currency_tab_xpath);
-        return new CurrencyPage(getDriver(), getUrlPrefix());
+        return new CurrencyPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
     }
 
     public void clickOnCountryTab() {
         attemptClick(country_tab_xpath);
     }
 
-    public void enterCountryInTheTypeAheadBox(String country) {
-        selectedEntity = country;
-        getDriver().findElement(country_type_ahead_xpath).sendKeys(country);
-        getDriver().findElement(country_type_ahead_xpath).sendKeys(Keys.RETURN);
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     public CountryPage clickOnCountryListBox() {
         waitForElementToAppear(country_dropdown_is_visible_xpath);
         attemptClick(country_listBox_xpath);
-        return new CountryPage(getDriver(),getUrlPrefix());
+        return new CountryPage(getDriver(),getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
     }
 
     public void clickOnAreaTab() {
@@ -223,11 +228,22 @@ public class DataPage extends AbstractPage {
 
     public LegalEntityPage clickOnLegalEntityTab() {
         attemptClick(legalEntity_tab_id);
-        return new LegalEntityPage(getDriver(), getUrlPrefix());
+        return new LegalEntityPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void clickOnCancelButton() {
         attemptClick(currency_cancel_button_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void enterCountryInTheTypeAheadBox(String country) {
+        selectedEntity = country;
+        getDriver().findElement(country_type_ahead_xpath).sendKeys(country);
+        getDriver().findElement(country_type_ahead_xpath).sendKeys(Keys.RETURN);
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -897,6 +913,57 @@ public class DataPage extends AbstractPage {
 
     public void clickOnConfirmButton() {
         attemptClick(confirm_button_xpath);
+    }
+
+    public void clickOnConfirmButton(String selectedCurrency) {
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedCurrency));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for currency", nvPairs);
+
+        responseEntity = restClient.getDocumentByID(document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("resource").getTextContent().toString(),heraApi );
+        assertTrue(responseEntity.getStatusCode().value()==200);
+
+        attemptClick(confirm_button_xpath);
+    }
+
+    public void revertChangesToCurrency(String selectedCurrency) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedCurrency));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+     //   We need the below step to demo patch operation
+     //   apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus", nvPairs);
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for currency", nvPairs);
+
+        int response=restClient.putDocumentByID(document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("resource").getTextContent().toString(),heraApi, responseEntity.getBody().toString());
+        //   We need the below step to demo patch operation
+        //String response=restClient.getResultForPatch("currency", document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("id").getTextContent().toString(),heraApi);
+        //assertTrue(response.equals("200"));
+
+        assertTrue(response==200);
+    }
+
+
+    public void revertChangesToCurrencyDeutscheMark() {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency Deutsche Mark for zeus",nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency Deutsche Mark for trusted",nvPairs);
+
+    }
+
+    public void revertChangesToCurrencyAsianCurrencyUnit() {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for zeus",nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for trusted",nvPairs);
+    }
+
+    public void revertChangesToCurrencyAfghani(Database database, ApacheHttpClient apacheHttpClient) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus",nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for trusted",nvPairs);
     }
 
     public void clickOnCancelYesButton() {

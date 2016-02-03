@@ -12,7 +12,7 @@ public class DetailsSteps extends AbstractSteps {
 
     @Then("the user should see the details page for the selected institution")
     public void thenUsersIsOnDetailsPage(){
-        detailsPage = new DetailsPage(webDriverState.getWebDriver(), getDataManagementWebappUrl());
+        detailsPage = new DetailsPage(webDriverState.getWebDriver(), getDataManagementWebappUrl(), database, apacheHttpClient, restClient, heraApi);
     }
 
     @Then("the user should see the legal name as <legalName> in the details page")

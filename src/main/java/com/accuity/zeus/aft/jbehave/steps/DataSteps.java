@@ -1,29 +1,23 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.zeus.aft.io.ApacheHttpClient;
-import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.*;
 
 import org.jbehave.core.model.ExamplesTable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataSteps extends AbstractSteps {
 
-    @Autowired
-    ApacheHttpClient apacheHttpClient;
-    @Autowired
-    Database database;
+    private String selectedCurrency;
+
+    @When("the user clicks on the currency tab in the data area")
+    public void clickOnCurrencyTab() {
+        getDataPage().clickOnCurrencyTab();
+    }
 
     @When("the user clicks on the country tab in the data area")
     public void clickOnCountryTab() {
         getDataPage().clickOnCountryTab();
-    }
-
-    @When("the user clicks on the choose a country option")
-    public void clickOnCountryListBox() throws InterruptedException {
-        setCountryPage(getDataPage().clickOnCountryListBox());
     }
 
     @When("the user clicks on the area tab in the data area")
@@ -31,19 +25,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnAreaTab();
     }
 
-    @When("the user enters the country <country> in the type-ahead box")
-    public void enterCountryInTheTypeAheadBox(@Named("country") String country) {
-        getDataPage().enterCountryInTheTypeAheadBox(country);
-    }
-
-    @When("the user enters an another country $anotherCountry in the type-ahead box")
-    public void enterCountryName(@Named("anotherCountry") String anotherCountry) {
-        getDataPage().enterCountryInTheTypeAheadBox(anotherCountry);
-    }
-
     @When("the user clicks on the legal entity tab in the data area")
     public void userClicksOnLegalEntityTab() {
         setLegalEntityPage(getDataPage().clickOnLegalEntityTab());
+    }
+
+    @When("the user clicks on the choose a country option")
+    public void clickOnCountryListBox() throws InterruptedException {
+        getDataPage().clickOnCountryListBox();
     }
 
     @When("the user clicks on the cancel button")
@@ -54,6 +43,16 @@ public class DataSteps extends AbstractSteps {
     @When("the user clicks on the cancel yes button")
     public void clickOnCancelYesButton() {
         getDataPage().clickOnCancelYesButton();
+    }
+
+    @When("the user enters the country <country> in the type-ahead box")
+    public void enterCountryInTheTypeAheadBox(@Named("country") String country) {
+        getDataPage().enterCountryInTheTypeAheadBox(country);
+    }
+
+    @When("the user enters an another country $anotherCountry in the type-ahead box")
+    public void enterCountryName(@Named("anotherCountry") String anotherCountry) {
+        getDataPage().enterCountryInTheTypeAheadBox(anotherCountry);
     }
 
     @When("the user enters the area <area> in the type-ahead box")
@@ -71,11 +70,21 @@ public class DataSteps extends AbstractSteps {
         getDataPage().enterCityInTheTypeAheadBox(anotherCity);
     }
 
+    @Then("the user should see the basic info for the selected country")
+    public void verifyCountryBasicInfo() {
+        getDataPage().verifyBasicInfo();
+    }
+
     @Then("the user should see the basic info for selected area")
     @Aliases(values={"the user should see the basic info for selected city",
             "the user should see the basic info for selected sub-area"})
     public void verifyAreaBasicInfo() {
         getDataPage().verifyBasicInfo();
+    }
+
+    @Then("the user should see the list of country's names type and value as: $countryNames")
+    public void verifyCountryNames(ExamplesTable countryNames) {
+        getDataPage().verifyNames(countryNames);
     }
 
     @Then("the user should see the area's names as: $names")
@@ -106,6 +115,12 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyNames(cityNames);
     }
 
+
+    @Then("the user should see the country's identifiers as: $countryIdentifiers")
+    public void verifyCountryIdentifiers(ExamplesTable countryIdentifiers) {
+        getDataPage().verifyIdentifiers(countryIdentifiers);
+    }
+
     @Then("the user should see the area's identifiers as: $areaIdentifiers")
     @Alias("the user should see the sub-area's identifiers as: $areaIdentifiers")
     public void verifyAreaIdentifiers(ExamplesTable areaIdentifiers) {
@@ -128,6 +143,12 @@ public class DataSteps extends AbstractSteps {
     public void verifyAreaReplaceByLabelValues(@Named("areaReplacedBy") String areaReplacedBy) {
         getDataPage().verifyReplaceByLabelValues(areaReplacedBy);
     }
+
+    @Then("the user should see the countries's replace by as $countryReplacedBy")
+    public void verifyCountryReplaceByLabelValues(@Named("countryReplacedBy") String countryReplacedBy) {
+        getDataPage().verifyReplaceByLabelValues(countryReplacedBy);
+    }
+
 
     @Then("the user should not see the area's area link")
     public void verifyAreaLinkInBasicInfo() {
@@ -176,6 +197,22 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyBasicInfo(label, value);
     }
 
+
+    @Then("the user should see the country's alternative regions as: $countryRegions")
+    public void verifyCountryRegions(ExamplesTable countryRegions) {
+        getDataPage().verifyRegions(countryRegions);
+    }
+
+    @Then("the user should not see the country regions section")
+    public void verifyNoCountryRegionsSection() {
+        getDataPage().verifyNoCountryRegionsSection();
+    }
+
+    @Then("the user should see the country's places as: $countryPlaces")
+    public void verifyCountryPlaces(ExamplesTable countryPlaces) {
+        getDataPage().verifyPlaces(countryPlaces);
+    }
+
     @Then("the user should see the area's places as: $areaPlaces")
     @Alias("the user should see the sub-area's places as: $areaPlaces")
     public void verifyAreaPlaces(ExamplesTable areaPlaces) {
@@ -185,6 +222,11 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the city's places as: $cityPlaces")
     public void verifyCityPlaces(ExamplesTable cityPlaces) {
         getDataPage().verifyPlaces(cityPlaces);
+    }
+
+    @Then("the user should not see the country's places")
+    public void verifyNoCountryPlaces() {
+        getDataPage().verifyNoPlaces();
     }
 
     @Then("the user should not see the area's places")
@@ -198,9 +240,34 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyNoPlaces();
     }
 
+    @Then("the user should see the country's entities as: $countryEntities")
+    public void verifyCountryEntities(ExamplesTable countryEntities) {
+        getDataPage().verifyEntities(countryEntities);
+    }
+
+    @Then("the user should see the country's people as: $countryPeople")
+    public void verifyCountryPeople(ExamplesTable countryPeople) {
+        getDataPage().verifyPeople(countryPeople);
+    }
+
+    @Then("the user should not see the country's entities")
+    public void verifyNoCountryEntities() {
+        getDataPage().verifyNoEntities();
+    }
+
     @Then("the user should not see the city's entity")
     public void verifyNoCityEntities() {
         getDataPage().verifyNoEntities();
+    }
+
+    @Then("the user should not see the country's people")
+    public void verifyNoCountryPeople() {
+        getDataPage().verifyNoPeople();
+    }
+
+    @Then("the user should see the default country page and display all info")
+    public void verifyCountryDefaultToViewAll() {
+        getDataPage().verifyDefaultToViewAll();
     }
 
     @When("the user refreshes the page")
@@ -211,6 +278,11 @@ public class DataSteps extends AbstractSteps {
     @When("the user clicks on the choose an area option")
     public void clickOnAreaDropdown() {
         getDataPage().clickOnAreaDropdown();
+    }
+
+    @Then("the user should see the below subareas for the selected country and area: $subarea")
+    public void verifySubareaForSelectedArea(ExamplesTable subarea) {
+        getDataPage().verifySubareaForSelectedArea(subarea);
     }
 
     @Then("the user should see the area dropdown disabled")
@@ -686,6 +758,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCityRelatedPlace(relatedPlace);
     }
 
+    @Then("the user should see the below country sections $countrySections")
+    public void verifyCountrySections(ExamplesTable countrySections){
+        getDataPage().verifySections(countrySections);
+    }
+
     @Then("the user should see the below area sections $areaSections")
     public void verifyAreaSections(ExamplesTable areaSections){
         getDataPage().verifySections(areaSections);
@@ -706,6 +783,10 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifySections(officeSections);
     }
 
+    @Then("the user should see the below fields in the country basic info left section $basicInfoLeftSection")
+    public void verifyBasicInfoLeftSection(ExamplesTable basicInfoLeftSection) {
+        getDataPage().verifyBasicInfoLeftSection(basicInfoLeftSection);
+    }
 
     @When("the user clicks on the save button")
     public void clickOnSaveButton(){
@@ -717,9 +798,15 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifySaveConfirmationModal();
     }
 
+
+    @Then("the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved")
+    public void verifyErrorMessageAtTopOfThePage(){
+        getDataPage().verifyErrorMessageAtTopOfThePage();
+    }
+
     @When("the user clicks on the confirm button")
     public void clickOnConfirmButton(){
-        getDataPage().clickOnConfirmButton();
+        getDataPage().clickOnConfirmButton(selectedCurrency);
     }
 
     @When("the user clicks on the return button")
@@ -727,10 +814,42 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnReturnButton();
     }
 
+    @Then("the user reverts the changes to the currency")
+    public void revertChangesToCurrency() {
+        getDataPage().revertChangesToCurrency(selectedCurrency);
+    }
+
+    @Then("the user reverts the changes to the currency Deutsche Mark")
+    public void revertChangesToCurrencyDeutscheMark(){
+        getDataPage().revertChangesToCurrencyDeutscheMark();
+    }
+
+    @Then("the user reverts the changes to the currency asian currency unit")
+    public void revertChangesToCurrencyAsianCurrencyUnit(){
+        getDataPage().revertChangesToCurrencyAsianCurrencyUnit();
+    }
+
+    @Then("the user reverts the changes to the currency afghani-test")
+    public void revertChangesToCurrencyAfghani() {
+        getDataPage().revertChangesToCurrencyAfghani(database, apacheHttpClient);
+    }
+
+    /*
+     @When("the user enters the currency end year as <currencyEndYear1>")
+     public void enterCurrencyEndYear1(@Named("currencyEndYear1") String currencyEndYear1){
+         getDataPage().enterCurrencyEndYear(currencyEndYear1);
+     }
+
+     @When("the user enters the currency start year as <currencyStartYear1>")
+     public void enterCurrencyStartYear1(@Named("currencyStartYear1") String currencyStartYear){
+         getDataPage().enterCurrencyStartYear(currencyStartYear);
+     }
+     */
     @When("the user clicks on the cancel no button")
     public void clickOnCancelNoButton() {
         getDataPage().clickOnCancelNoButton();
     }
+
 
     @Then("the user should see the list of all existing area for the selected country by full name")
     public void verifyAreaList(){
@@ -745,10 +864,5 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the list of all existing city for the selected area by full name")
     public void verifyCityList(){
         getDataPage().verifyCityList(database, apacheHttpClient);
-    }
-
-    @Then("the user should see the below subareas for the selected country and area: $subarea")
-    public void verifySubareaForSelectedArea(ExamplesTable subarea) {
-        getDataPage().verifySubareaForSelectedArea(subarea);
     }
 }
