@@ -182,11 +182,6 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().verifyCurrencySelectionDisabled();
     }
 
-    @When("the user clicks on the currencies link in the navigation bar")
-    public void clickOnCountryCurrenciesLink() {
-        getCurrencyPage().clickOnCountryCurrenciesLink();
-    }
-
     @Then("the user should see the currency page for clicked iso name")
     public void verifyCurrencyPage(){
         getCurrencyPage().verifyCurrencyPage();

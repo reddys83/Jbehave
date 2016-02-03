@@ -31,6 +31,7 @@ public abstract class AbstractSteps {
 	private static LegalEntityPage legalEntityPage;
 	private static OfficesPage officesPage;
 	private static CurrencyPage currencyPage;
+	private static CountryPage countryPage;
 
 	@Autowired
 	protected WebDriverState webDriverState;
@@ -53,6 +54,14 @@ public abstract class AbstractSteps {
 
 	public static void setCurrencyPage(CurrencyPage currencyPage) {
 		AbstractSteps.currencyPage = currencyPage;
+	}
+
+	public static CountryPage getCountryPage() {
+		return countryPage;
+	}
+
+	public static void setCountryPage(CountryPage countryPage) {
+		AbstractSteps.countryPage = countryPage;
 	}
 
 	public String getDataManagementWebappUrl() {
