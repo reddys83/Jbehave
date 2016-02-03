@@ -1,12 +1,20 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.*;
 
 import org.jbehave.core.model.ExamplesTable;
+import org.openqa.selenium.remote.internal.ApacheHttpClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataSteps extends AbstractSteps {
+
+    @Autowired
+    com.accuity.zeus.aft.io.ApacheHttpClient apacheHttpClient;
+    @Autowired
+    Database database;
 
     private String selectedCurrency;
 
@@ -806,7 +814,7 @@ public class DataSteps extends AbstractSteps {
 
     @When("the user clicks on the confirm button")
     public void clickOnConfirmButton(){
-        getDataPage().clickOnConfirmButton(selectedCurrency);
+        getDataPage().clickOnConfirmButton();
     }
 
     @When("the user clicks on the return button")
@@ -834,22 +842,10 @@ public class DataSteps extends AbstractSteps {
         getDataPage().revertChangesToCurrencyAfghani(database, apacheHttpClient);
     }
 
-    /*
-     @When("the user enters the currency end year as <currencyEndYear1>")
-     public void enterCurrencyEndYear1(@Named("currencyEndYear1") String currencyEndYear1){
-         getDataPage().enterCurrencyEndYear(currencyEndYear1);
-     }
-
-     @When("the user enters the currency start year as <currencyStartYear1>")
-     public void enterCurrencyStartYear1(@Named("currencyStartYear1") String currencyStartYear){
-         getDataPage().enterCurrencyStartYear(currencyStartYear);
-     }
-     */
     @When("the user clicks on the cancel no button")
     public void clickOnCancelNoButton() {
         getDataPage().clickOnCancelNoButton();
     }
-
 
     @Then("the user should see the list of all existing area for the selected country by full name")
     public void verifyAreaList(){
