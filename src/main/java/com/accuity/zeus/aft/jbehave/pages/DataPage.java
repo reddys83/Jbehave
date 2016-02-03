@@ -1738,6 +1738,12 @@ public class DataPage extends AbstractPage {
         apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for trusted",nvPairs);
     }
 
+    public void revertChangesToCurrencyAfghani(Database database, ApacheHttpClient apacheHttpClient) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus",nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for trusted",nvPairs);
+    }
+
     public void clickOnCancelYesButton() {
         attemptClick(cancel_yes_button_id);
     }

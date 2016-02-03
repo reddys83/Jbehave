@@ -1189,6 +1189,12 @@ public class DataSteps extends AbstractSteps {
         getDataPage().revertChangesToCurrencyAsianCurrencyUnit();
     }
 
+    @Then("the user reverts the changes to the currency afghani-test")
+    public void revertChangesToCurrencyAfghani() {
+        getDataPage().revertChangesToCurrencyAfghani(database, apacheHttpClient);
+    }
+
+
     @Then("the user should return to edit mode of the currency page")
     public void verifyCurrencyEditMode(){
         getDataPage().verifyCurrencyEditMode();
