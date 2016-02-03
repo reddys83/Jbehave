@@ -21,4 +21,4 @@ And the user reverts the changes to the currency afghani-test
 
 Examples:
 |currency|currencyStartDay|currencyStartMonth|currencyStartYear|
-|Afghani-test|||1988|
+|Bahrain Dinar|||1990|

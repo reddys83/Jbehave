@@ -41,7 +41,7 @@ public class RestClient{
         return patchResponse;
     }
 
-    public int putDocumentByID(String endpoint, String ID, HeraApi heraApi, String document)
+    public int putDocumentByID(String endpointWithID, HeraApi heraApi, String document)
     {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", String.valueOf(MediaType.APPLICATION_XML));
@@ -49,8 +49,7 @@ public class RestClient{
         headers.set("source", "zeus");
         HttpEntity<?> requestEntity = new HttpEntity<Object> (document, headers);
 
-        String endpointWithID = endpoint+"/"+ID;
-        String url = utils.constructURLForHeaApi(heraApi.getScheme(), heraApi.getHost(), heraApi.getPort(), heraApi.getPath(), endpointWithID);
+        String url = utils.constructURLForHeaApi(heraApi.getScheme(), heraApi.getHost(), heraApi.getPort(), heraApi.getPath(), endpointWithID.replace("id/",""));
 
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         requestFactory.setConnectTimeout(0);
@@ -60,14 +59,14 @@ public class RestClient{
         return restTemplate.exchange(url, HttpMethod.PUT, requestEntity, String.class).getStatusCode().value();
     }
 
-    public ResponseEntity getDocumentByID(String endpoint, String ID, HeraApi heraApi)
+    public ResponseEntity getDocumentByID(String endpointWithID, HeraApi heraApi)
     {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Accept", String.valueOf(MediaType.APPLICATION_XML));
         headers.set("source", "zeus");
         HttpEntity<?> requestEntity = new HttpEntity<Object> (null, headers);
-        String endpointWithID = endpoint+"/"+ID;
-        String url = utils.constructURLForHeaApi(heraApi.getScheme(), heraApi.getHost(), heraApi.getPort(), heraApi.getPath(), endpointWithID);
+
+        String url = utils.constructURLForHeaApi(heraApi.getScheme(), heraApi.getHost(), heraApi.getPort(), heraApi.getPath(), endpointWithID.replace("id/",""));
 
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         requestFactory.setConnectTimeout(0);
@@ -75,8 +74,6 @@ public class RestClient{
         restTemplate.setRequestFactory(requestFactory);
 
         return restTemplate.exchange(url, HttpMethod.GET, requestEntity, String.class);
-
-                 //return new Response(new XmlDocument(result.getBody().toString()), result.getStatusCode().value());
 
     }
 
