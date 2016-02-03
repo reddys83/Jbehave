@@ -38,4 +38,5 @@ public class RestService implements IRestService {
 		}
 		return restTemplate;
 	}
+
 }

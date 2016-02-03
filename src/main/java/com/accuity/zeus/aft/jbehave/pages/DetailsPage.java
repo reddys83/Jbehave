@@ -1,5 +1,9 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.rest.RestClient;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,8 +24,8 @@ public class DetailsPage extends AbstractPage {
     private By telex_xpath = By.xpath(".//*[@id='content']/div/section/article[2]/dl/dd[7]");
     private By telephone_xpath = By.xpath(".//*[@id='content']/div/section/article[2]/dl/dd[8]");
 
-    public DetailsPage(WebDriver driver, String urlPrefix) {
-        super(driver, urlPrefix);
+    public DetailsPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
+        super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
     @Override

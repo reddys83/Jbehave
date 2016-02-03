@@ -43,6 +43,7 @@ public class XqueryMap {
         queryMap.put("revert changes to currency asian currency unit for trusted","updateCurrencyAsianCurrencyUnitTrusted.xqy");
         queryMap.put("revert changes to currency Deutsche Mark for zeus", "updateCurrencyDeutscheMarkZeus.xqy");
         queryMap.put("revert changes to currency Deutsche Mark for trusted","updateCurrencyDeutscheMarkTrusted.xqy");
+        queryMap.put("get Id for currency","getIdForCurrency.xqy");
         queryMap.put("area list","getAreaList.xqy");
         queryMap.put("subarea list","getSubAreaList.xqy");
         queryMap.put("city list","getCityList.xqy");

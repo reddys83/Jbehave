@@ -1,27 +1,19 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.zeus.aft.io.ApacheHttpClient;
-import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.*;
 
 import org.jbehave.core.model.ExamplesTable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataSteps extends AbstractSteps {
 
-
-    @Autowired
-    ApacheHttpClient apacheHttpClient;
-    @Autowired
-    Database database;
     private String selectedCurrency;
 
     @When("the user clicks on the currency tab in the data area")
     public void clickOnCurrencyTab() {
         getDataPage().clickOnCurrencyTab();
-    }
+        }
 
     @When("the user clicks on the country tab in the data area")
     public void clickOnCountryTab() {
@@ -45,7 +37,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the list of all existing currencies by full name")
     public void verifyCurrencyList() {
-        getDataPage().verifyCurrencyList(database, apacheHttpClient);
+        getDataPage().verifyCurrencyList();
     }
 
     @When("the user starts typing the name of a currency as $curr in the currency input box")
@@ -106,11 +98,11 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the list of all existing countries by full name")
     public void verifyCountryList() {
-        getDataPage().verifyCountryList(database, apacheHttpClient);
+        getDataPage().verifyCountryList();
     }
 
     @Then("user should see the list of countries in currency edit mode from trusted document")
-    public void verifyCountryListInCurrencyEditMode() { getDataPage().verifyCountryListInCurrencyEditMode(database, apacheHttpClient);}
+    public void verifyCountryListInCurrencyEditMode() { getDataPage().verifyCountryListInCurrencyEditMode();}
 
     @When("the user starts typing the name of a country as $word in the country input box")
     public void enterValueInCountryTypeAhead(String word) {
@@ -124,32 +116,32 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the edit currency details from trusted document")
     public void verifyEditCurrencyDetailsFromTrusted() {
-        getDataPage().verifyEditCurrencyDetailsFromTrusted(database, apacheHttpClient, selectedCurrency);
+        getDataPage().verifyEditCurrencyDetailsFromTrusted(selectedCurrency);
     }
 
     @Then("the user should see the view currency details from trusted document")
     public void verifyViewCurrencyDetailsFromTrusted() {
-        getDataPage().verifyViewCurrencyDetailsFromTrusted(database, apacheHttpClient, selectedCurrency);
+        getDataPage().verifyViewCurrencyDetailsFromTrusted(selectedCurrency);
     }
 
     @Then("the user should see the view currency use from trusted document")
     public void verifyViewCurrencyUseFromTrusted() {
-        getDataPage().verifyViewCurrencyUseFromTrusted(database, apacheHttpClient, selectedCurrency);
+        getDataPage().verifyViewCurrencyUseFromTrusted(selectedCurrency);
     }
 
     @Then("the user should see the edits to currency details in zeus document")
     public void verifyEditCurrencyInZeus(){
-        getDataPage().verifyEditCurrencyInZeus(database, apacheHttpClient, selectedCurrency);
+        getDataPage().verifyEditCurrencyInZeus(selectedCurrency);
     }
 
     @Then("the user should see the edits to currency uses in zeus document")
     public void verifyEditCurrencyUseInZeus() {
-        getDataPage().verifyEditCurrencyUseInZeus(database, apacheHttpClient, selectedCurrency);
+        getDataPage().verifyEditCurrencyUseInZeus(selectedCurrency);
     }
 
     @Then("the user should see the currency uses in edit mode are from trusted document")
     public void verifyCurrencyUseInEditMode() {
-        getDataPage().verifyEditCurrencyUseFromTrusted(database, apacheHttpClient, selectedCurrency);
+        getDataPage().verifyEditCurrencyUseFromTrusted(selectedCurrency);
     }
 
     @When("the user clicks on the cancel button")
@@ -1174,7 +1166,7 @@ public class DataSteps extends AbstractSteps {
 
     @When("the user clicks on the confirm button")
     public void clickOnConfirmButton(){
-        getDataPage().clickOnConfirmButton();
+        getDataPage().clickOnConfirmButton(selectedCurrency);
     }
 
     @When("the user clicks on the return button")
@@ -1182,19 +1174,19 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnReturnButton();
     }
 
-    @Then("the user reverts the changes to the currency afghani-test")
-    public void revertChangesToCurrencyAfghani() {
-        getDataPage().revertChangesToCurrencyAfghani(database, apacheHttpClient);
+    @Then("the user reverts the changes to the currency")
+    public void revertChangesToCurrency() {
+        getDataPage().revertChangesToCurrency(selectedCurrency);
     }
 
     @Then("the user reverts the changes to the currency Deutsche Mark")
     public void revertChangesToCurrencyDeutscheMark(){
-        getDataPage().revertChangesToCurrencyDeutscheMark(database, apacheHttpClient);
+        getDataPage().revertChangesToCurrencyDeutscheMark();
     }
 
     @Then("the user reverts the changes to the currency asian currency unit")
     public void revertChangesToCurrencyAsianCurrencyUnit(){
-        getDataPage().revertChangesToCurrencyAsianCurrencyUnit(database, apacheHttpClient);
+        getDataPage().revertChangesToCurrencyAsianCurrencyUnit();
     }
 
     @Then("the user should return to edit mode of the currency page")
@@ -1204,7 +1196,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the list of all other existing currencies (by name) excluding the currency they are currently viewing")
     public void verifyReplacedByCurrencyList() {
-        getDataPage().verifyReplacedByCurrencyList(database, apacheHttpClient, selectedCurrency);
+        getDataPage().verifyReplacedByCurrencyList(selectedCurrency);
     }
 
     @Then("the user should see the error $startDateErrorMsg for start date")
@@ -1309,7 +1301,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the list of all the existing country in add country list")
     public void verifyAddCountryList() {
-        getDataPage().verifyAddCountryList(database, apacheHttpClient);
+        getDataPage().verifyAddCountryList();
     }
 
     @When("the user clicks on the delete option for the additional currency use")

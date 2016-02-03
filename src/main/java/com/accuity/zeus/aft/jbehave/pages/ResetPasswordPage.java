@@ -1,5 +1,9 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.rest.RestClient;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -17,8 +21,8 @@ public class ResetPasswordPage extends AbstractPage {
     private By error_message_id = By.id("error-section");
     private By return_to_login_linkText = By.linkText("Return to Login");
 
-    public ResetPasswordPage(WebDriver driver, String urlPrefix) {
-        super(driver, urlPrefix);
+    public ResetPasswordPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
+        super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
     @Override
@@ -67,7 +71,7 @@ public class ResetPasswordPage extends AbstractPage {
 
     public LoginPage clickOnReturnToLoginLink() {
         getDriver().findElement(return_to_login_linkText).click();
-        return new LoginPage(getDriver(), getUrlPrefix());
+        return new LoginPage(getDriver(), getUrlPrefix(),getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void verifyErrorMsgEnterValidEmailAddress() {

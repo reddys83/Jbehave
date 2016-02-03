@@ -1,5 +1,9 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.rest.RestClient;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -74,8 +78,8 @@ public class LegalEntityPage extends AbstractPage {
     private By office_link_xpath = By.id("office-link");
 
 
-    public LegalEntityPage(WebDriver driver, String urlPrefix) {
-        super(driver, urlPrefix);
+    public LegalEntityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
+     super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
     @Override
@@ -353,6 +357,6 @@ public class LegalEntityPage extends AbstractPage {
             e.printStackTrace();
         }
         attemptClick(office_link_xpath);
-        return new OfficesPage(getDriver(), getUrlPrefix());
+        return new OfficesPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(),getHeraApi());
     }
 }

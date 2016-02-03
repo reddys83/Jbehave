@@ -3,6 +3,8 @@ package com.accuity.zeus.aft.jbehave.pages;
 import com.accuity.zeus.aft.commons.Utils;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.rest.RestClient;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -31,8 +33,8 @@ public class AdminPage extends AbstractPage{
     private String taxonomies_table_rows = "//table[1]/tbody/tr";
     private String taxonomies_table_cols = "//table[1]/thead//th";
 
-    public AdminPage(WebDriver driver, String urlPrefix) {
-        super(driver, urlPrefix);
+    public AdminPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
+        super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
 

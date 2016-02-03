@@ -1,6 +1,10 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
 import com.accuity.zeus.aft.commons.Utils;
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.aft.result.ResultsPage;
 import org.jbehave.core.annotations.AfterStories;
 import org.openqa.selenium.By;
@@ -29,10 +33,10 @@ public class SearchPage extends AbstractPage {
 	private By legalEntity_search_button_id=By.id("search-button");
 	public static String selectedEntity="";
 
-	public SearchPage(WebDriver driver, String urlPrefix) {
-		super(driver, urlPrefix);
+	public SearchPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
+		super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
 	}
-	private LoginPage loginPage = new LoginPage(getDriver(), getUrlPrefix());
+	private LoginPage loginPage = new LoginPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
 
 	@AfterStories
 	public void cleanup() {
@@ -56,20 +60,20 @@ public class SearchPage extends AbstractPage {
         getDriver().findElement(search_by_id).sendKeys(field);
 		getDriver().findElement(search_field_xpath).sendKeys(field);
 		getDriver().findElement(search_button_id).click();
-		ResultsPage resultsPage = new ResultsPage(getDriver(), getUrlPrefix(), entity, field, value);
+		ResultsPage resultsPage = new ResultsPage(getDriver(), getUrlPrefix(),getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi(), entity, field, value);
 		resultsPage.validatePage();
 		return resultsPage;
 	}
 
 	public ReportPage clickOnReportsTab(){
         getDriver().findElement(result_link_id).click();
-        return new ReportPage(getDriver(), getUrlPrefix());
+        return new ReportPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
 	public LoginPage clickOnLogout() {
 		if(!getDriver().getCurrentUrl().contains("#login")) {
 			getDriver().findElement(logout_link_id).click();
-			loginPage = new LoginPage(getDriver(), getUrlPrefix());
+			loginPage = new LoginPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
 			return loginPage;
 		}
 		return null;
@@ -93,18 +97,18 @@ public class SearchPage extends AbstractPage {
 			loginPage.enterPassword(utils.readPropertyFile().getProperty("data.management.webapp.aft.pwd"));
 			return loginPage.clickOnLoginButton();
 		} else {
-            return new SearchPage(getDriver(), getUrlPrefix());
+              return new SearchPage(getDriver(), getUrlPrefix(), getDatabase(),getApacheHttpClient(), getRestClient(), getHeraApi());
         }
     }
 
 	public DataPage clickOnDataTab() {
 		attemptClick(data_tab_xpath);
-		return new DataPage(getDriver(), getUrlPrefix());
+        return new DataPage(getDriver(), getUrlPrefix(), database , apacheHttpClient, restClient, heraApi);
 	}
 
 	public AdminPage clickOnAdminTab() {
 		attemptClick(admin_tab_xpath);
-		return new AdminPage(getDriver(), getUrlPrefix());
+		return new AdminPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
 	}
 
 	public void enterLegalEntityInTypeAheadBox(String entity) {
@@ -124,6 +128,6 @@ public class SearchPage extends AbstractPage {
             attemptClick(legalEntity_search_button_id);
             } catch (InterruptedException e) {
             e.printStackTrace();
-        }  return new ResultsPage(getDriver(), getPageUrl());
+        }  return new ResultsPage(getDriver(), getPageUrl(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 }
