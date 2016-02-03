@@ -9,7 +9,7 @@ JIRA - ID - ZEUS - 555 - User can change number of office results per page
 JIRA - ID - ZEUS - 590 - User can filter list of offices by status
 JIRA - ID - ZEUS - 596 - User can use a combination of filters for office list
 JIRA - ID - ZEUS - 589 - User can filter list of offices by office type
-JIRA - ID - ZEUS - 487 - User can refine list of offices by city23
+JIRA - ID - ZEUS - 487 - User can refine list of offices by city
 
 Scenario: Filter offices by type - Domestic
 Given a user is on the search page
@@ -63,7 +63,6 @@ Examples:
 |189457|FID|189457|
 
 Scenario: Change number of office results per page
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -164,7 +163,6 @@ Examples:
 
 Scenario: User should see the types in the type filter should be based on the office search results types
 1. ZEUS-589
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -180,7 +178,6 @@ Examples:
 |3|FID|3|
 
 Scenario: User selects one of the office type filter in left sidebar should show the list the offices with the selected office type
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -200,7 +197,6 @@ Examples:
 |3|FID|3|
 
 Scenario: Verify the office type filter, When the office has single office type for the institution it should be selected by default and ALL should not be present
-Meta:@RunThis
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -216,7 +212,6 @@ Examples:
 |189457|FID|189457|
 
 Scenario: User should see the error message if the combination of the selection filter is returning zero results
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -234,7 +229,6 @@ Examples:
 |267124|FID|267124|
 
 Scenario: User selects a column sort and a filter, Both the coulumn sort and filter are applied to the results list
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -259,7 +253,6 @@ Examples:
 
 
 Scenario: Verify the refine filter for city
-Meta:@refineFilterCity
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -274,6 +267,3 @@ Then the user should see the office search results for city contains the Boll
 Examples:
 |entity|searchBy|fid|
 |3125|FID|3125|
-
-
-

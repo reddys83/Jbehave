@@ -4,9 +4,9 @@ Narrative:
 In order to view and edit the cities basic info
 As a user
 I want to cover the requirements mentioned in
-JIRA ID - ZEUS - 92 - User can view city basic info
-JIRA ID - ZEUS - 371 - User can follow link to area from city
-JIRA ID - ZEUS - 372 - User can follow link to country from city
+JIRA ID - ZEUS-92 - User can view city basic info
+JIRA ID - ZEUS-371 - User can follow link to area from city
+JIRA ID - ZEUS-372 - User can follow link to country from city
 
 Scenario: Verify the City basic info
 1. BUG-ID - ZEUS-686

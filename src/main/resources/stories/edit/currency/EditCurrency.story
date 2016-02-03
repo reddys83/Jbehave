@@ -222,6 +222,10 @@ Examples:
 |afghani|
 
 Scenario: Verify error message for year for start and end date
+1. only day
+2. only month
+3. only day and month
+4. only day and year
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
@@ -331,7 +335,7 @@ When the user clicks on the delete option for the additional currency use
 Then the user should not see the additional currency use
 
 Examples:
-|currency|addCurrencyCountry|
+|currency|addCurrencyountry|
 |Deutsche Mark|Afghanistan|
 
 Scenario: Save newly added currency use
@@ -440,4 +444,3 @@ Examples:
 |Deutsche Mark|Angola|||1987|||1999|false|Dram|
 |Deutsche Mark|Angola||Jun|1987||Jun|1999|false|Guyana Dollar|
 |Deutsche Mark|Angola|21|Jun|1987|23|Jun|1999|false|Kwanza|
-

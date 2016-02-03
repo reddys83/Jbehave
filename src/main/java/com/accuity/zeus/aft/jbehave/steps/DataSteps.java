@@ -420,6 +420,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCountryPayments();
     }
 
+    @Then("the user should see the country's payments iban status as $status")
+    public void verifyCountryPaymentsIbanStatus(@Named("status") String status) {
+        getDataPage().verifyCountryPaymentsIbanStatus(status);
+    }
+
     @Then("the user should see the country's payments iban as: $countryPaymentsIban")
     public void verifyCountryPaymentsIban(ExamplesTable countryPaymentsIban) {
         getDataPage().verifyCountryPaymentsIban(countryPaymentsIban);
@@ -1308,5 +1313,20 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should not see the additional currency use")
     public void verifyNoAdditionalCurrencyUse(){
         getDataPage().verifyNoAdditionalCurrencyUse();
+    }
+
+    @Then("the user should see the list of all existing area for the selected country by full name")
+    public void verifyAreaList(){
+        getDataPage().verifyAreaList(database, apacheHttpClient);
+    }
+
+    @Then("the user should see the list of all existing subarea for the selected area by full name")
+    public void verifySubAreaList(){
+        getDataPage().verifySubAreaList(database, apacheHttpClient);
+    }
+
+    @Then("the user should see the list of all existing city for the selected area by full name")
+    public void verifyCityList(){
+        getDataPage().verifyCityList(database, apacheHttpClient);
     }
 }

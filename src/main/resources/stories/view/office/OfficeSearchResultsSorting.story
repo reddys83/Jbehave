@@ -6,7 +6,7 @@ I want to perform an action
 So that I can achieve a business goal
 
 JIRA ID - ZEUS-617 - List offices types alphabetically when multiple for one office
-JIRA ID - ZEUS - 554 - User can sort office results by status
+JIRA ID - ZEUS-554 - User can sort office results by status
 JIRA ID - ZEUS-554 - User can sort office results by status
 JIRA ID - ZEUS-549 - User can sort office results by FID
 JIRA ID - ZEUS-553 - User cna sort office results by type

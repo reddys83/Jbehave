@@ -9,6 +9,8 @@ JIRA ID - ZEUS-382 - User will see head office address & legal entity title in h
 JIRA ID - ZEUS-491 - User can follow link to head office from legal entity
 JIRA ID - ZEUS-384 - User can view websites of legal entity
 JIRA ID - ZEUS-735 - Code shouldn't assume head office fid is of a specific format
+JIRA ID - ZEUS-624 - Legal Entity Basic Info - The head office address should respect the UseInAddress.
+JIRA ID - ZEUS-793 - Legal Entity Basic Info - Head Office address should respect the @position for displaying the postal code.
 
 Scenario: Verify the basic info for legalEntity
 Given a user is on the search page
@@ -94,7 +96,7 @@ When the user clicks on the search results card with fid <fid>
 
 Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
 And the user should see the basic info for selected legal entity
-And the user should see the Head Office of a legal entity as Budapester Strasse 35Berlin, 10787Germany(View Head Office)
+And the user should see the Head Office of a legal entity as Budapester Strasse 3510787Berlin, Germany(View Head Office)
 
 When the user clicks on the view head office <viewHeadOffice> link for the selected legal entity
 Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <officeTfpid>
