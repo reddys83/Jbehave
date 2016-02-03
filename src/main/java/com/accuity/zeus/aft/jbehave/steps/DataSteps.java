@@ -1182,7 +1182,6 @@ public class DataSteps extends AbstractSteps {
     @Then("the user reverts the changes to the currency asian currency unit")
     public void revertChangesToCurrencyAsianCurrencyUnit(){
         getDataPage().revertChangesToCurrencyAsianCurrencyUnit();
-        getDataPage().revertChangesToCurrencyAsianCurrencyUnit();
     }
 
     @Then("the user should return to edit mode of the currency page")
