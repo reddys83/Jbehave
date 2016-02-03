@@ -60,7 +60,6 @@ public class CurrencyPage extends AbstractPage {
     private By currency_input_quantity_xpath = By.xpath("//input[@name='quantity']");
     private By currency_header_xpath = By.xpath(".//*[@id='selection']/fieldset/h1");
     private By currency_header_iso_id = By.id("iso-value");
-    private By country_currencies_link_id = By.id("countryCurrencies");
     private By currency_abbr_error_message_xpath = By.xpath("//*[@data-error_id='abbrError']");
     private By currency_name_error_message_xpath = By.xpath("//*[@data-error_id='nameError']");
     private By currency_unit_error_message_xpath = By.xpath("//*[@data-error_id='unitError']");
@@ -466,10 +465,6 @@ public class CurrencyPage extends AbstractPage {
 
     public void verifyCurrencySelectionDisabled() {
         assertTrue(getDriver().findElement(currency_selection_disabled_xpath).isDisplayed());
-    }
-
-    public void clickOnCountryCurrenciesLink() {
-        attemptClick(country_currencies_link_id);
     }
 
     public void verifyCurrencyPage(){
