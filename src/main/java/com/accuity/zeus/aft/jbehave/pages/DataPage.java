@@ -48,7 +48,7 @@ public class DataPage extends AbstractPage {
     private By basic_info_names_value_xpath = By.xpath("//*[@id='content']//li[1]/table[1]/tbody/tr/td[2]");
 
     private By legalEntity_basic_info_link_id = By.id("legalEntityBasicInfo");
-
+    private By currency_update_button_id = By.id("update-button");
 
     private By identifiers_label_xpath = By.xpath("//*[@id='content']//h2[text()='Identifiers']");
     private By identifiers_type_label_xpath = By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//th[1]");
@@ -1054,6 +1054,16 @@ public class DataPage extends AbstractPage {
         List<WebElement> areasCollection = getDriver().findElements(area_area_dropdown_list_xpath);
         for (int i=0; i<areas.getRowCount(); i++){
             assertEquals(areas.getRow(i).get(areas.getHeaders().get(0)),areasCollection.get(i).getText());
+        }
+    }
+
+    public void clickOnUpdateCurrencyLink() {
+
+        attemptClick(currency_update_button_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

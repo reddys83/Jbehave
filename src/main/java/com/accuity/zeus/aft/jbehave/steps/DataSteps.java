@@ -871,4 +871,9 @@ public class DataSteps extends AbstractSteps {
     public void verifyClickedCountryPage(@Named("countryDropDown") String countryDropDown) {
         getDataPage().verifyClickedCountryPage(countryDropDown);
     }
+
+    @When("the user clicks on the update link")
+    public void clickOnUpdateCurrencyLink() {
+        getDataPage().clickOnUpdateCurrencyLink();
+    }
 }

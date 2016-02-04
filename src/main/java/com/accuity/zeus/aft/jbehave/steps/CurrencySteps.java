@@ -152,11 +152,6 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().clickOnCurrencyIso3(iso3);
     }
 
-    @When("the user clicks on the update currency link")
-    public void clickOnUpdateCurrencyLink() {
-        getCurrencyPage().clickOnUpdateCurrencyLink();
-    }
-
     @When("the user enters the currency name value as <name>")
     public void enterCurrencyName(@Named("name") String name) {
         getCurrencyPage().enterCurrencyName(name);

@@ -53,7 +53,6 @@ public class CurrencyPage extends AbstractPage {
     String currency_use_table_replacedBy_edit_xpath= "//fieldset[2]//div[@class='chosen-container chosen-container-single']";
     private By currency_selection_disabled_xpath=By.xpath(".//*[@id='entitySelect_chosen'][@class='chosen-container chosen-container-single chosen-disabled']");
     private String currencySearchString = null;
-    private By currency_update_button_id = By.id("update-button");
     private By currency_input_name_xpath = By.xpath("//input[@name='name']");
     private By currency_input_abbr_xpath = By.xpath("//input[@name='abbr']");
     private By currency_input_unit_xpath = By.xpath("//input[@name='unit']");
@@ -410,16 +409,6 @@ public class CurrencyPage extends AbstractPage {
 
     public void clickOnCurrencyIso3(String iso3) {
         attemptClick(By.linkText(iso3));
-    }
-
-    public void clickOnUpdateCurrencyLink() {
-
-        attemptClick(currency_update_button_id);
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public void enterCurrencyName(String name) {
