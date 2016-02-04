@@ -12,7 +12,6 @@ Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
-Then the user should see the country type-ahead displayed
 When the user enters the country <country> in the type-ahead box
 When the user clicks on the country people link in the navigation bar
 Then the user should see the country's people as:
@@ -29,7 +28,6 @@ Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
-Then the user should see the country type-ahead displayed
 When the user enters the country <country> in the type-ahead box
 When the user clicks on the country people link in the navigation bar
 Then the user should not see the country's people

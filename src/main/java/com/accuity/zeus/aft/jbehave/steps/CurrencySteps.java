@@ -282,22 +282,22 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().verifyNoAdditionalCurrencyUse();
     }
 
-    @Then("the user should see the error message please enter up to 30 valid characters for abbreviation")
+    @Then("the user should see the error message enter up to 30 valid characters for abbreviation")
     public void verifyErrorMessageForCurrAbbr(){
         getCurrencyPage().verifyErrorMessageForCurrAbbr();
     }
 
-    @Then("the user should see the error message please enter up to 100 valid characters for name")
+    @Then("the user should see the error message enter up to 100 valid characters for name")
     public void verifyErrorMessageForCurrName(){
         getCurrencyPage().verifyErrorMessageForCurrName();
     }
 
-    @Then("the user should see the error message please enter up to 100 valid characters for unit")
+    @Then("the user should see the error message enter up to 100 valid characters for unit")
     public void verifyErrorMessageForCurrUnit(){
         getCurrencyPage().verifyErrorMessageForCurrUnit();
     }
 
-    @Then("the user should see the error message please enter a numeric value up to 10,000 for quantity")
+    @Then("the user should see the error message enter a numeric value up to 10,000 for quantity")
     public void verifyErrorMessageForCurrQuantity(){
         getCurrencyPage().verifyErrorMessageForCurrQuantity();
     }

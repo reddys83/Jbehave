@@ -243,16 +243,6 @@ public class CountrySteps extends AbstractSteps{
         getDataPage().verifyDefaultToViewAll();
     }
 
-    @Then("the user should see the below states for the selected country: $areas")
-    public void verifyAreaForSelectedCountry(ExamplesTable areas) {
-        getCountryPage().verifyAreaForSelectedCountry(areas);
-    }
-
-    @Then("the user should see the country page with $countryDropDown selected")
-    public void verifyClickedCountryPage(@Named("countryDropDown") String countryDropDown) {
-        getCountryPage().verifyClickedCountryPage(countryDropDown);
-    }
-
     @Then("the user should see the below country sections $countrySections")
     public void verifyCountrySections(ExamplesTable countrySections){
         getDataPage().verifySections(countrySections);

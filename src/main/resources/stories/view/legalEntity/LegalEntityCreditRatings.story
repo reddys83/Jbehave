@@ -35,7 +35,6 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the legal entity credit rating link in the navigation bar
-
 Then the user should not see the legal entity's credit ratings
 
 Examples:

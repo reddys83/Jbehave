@@ -46,10 +46,10 @@ And the user enters the currency abbr value as <abbr>
 And the user enters the currency unit value as <unit>
 And the user enters the currency quantity value as <quantity>
 And the user clicks on the save button
-Then the user should see the error message please enter up to 100 valid characters for name
-And the user should see the error message please enter up to 30 valid characters for abbreviation
-And the user should see the error message please enter up to 100 valid characters for unit
-And the user should see the error message please enter a numeric value up to 10,000 for quantity
+Then the user should see the error message enter up to 100 valid characters for name
+And the user should see the error message enter up to 30 valid characters for abbreviation
+And the user should see the error message enter up to 100 valid characters for unit
+And the user should see the error message enter a numeric value up to 10,000 for quantity
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:

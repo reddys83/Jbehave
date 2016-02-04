@@ -55,7 +55,7 @@ public class DataSteps extends AbstractSteps {
 
     @When("the user enters the country <country> in the type-ahead box")
     public void enterCountryInTheTypeAheadBox(@Named("country") String country) {
-        getDataPage().enterCountryInTheTypeAheadBox(country);
+        setCountryPage(getDataPage().enterCountryInTheTypeAheadBox(country));
     }
 
     @When("the user enters an another country $anotherCountry in the type-ahead box")
@@ -736,7 +736,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyHeadOfficeInLegalEntityBasicInfo();
     }
 
-    @When("the user clicks on iso link <isoCode>")
+    @When("the user clicks on the currency iso link <isoCode>")
     public void clickOnISOLink(@Named("isoCode") String isoCode){
         getDataPage().clickOnISOLink(isoCode);
     }
@@ -860,5 +860,15 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the list of all existing city for the selected area by full name")
     public void verifyCityList(){
         getDataPage().verifyCityList(database, apacheHttpClient);
+    }
+
+    @Then("the user should see the below states for the selected country: $areas")
+    public void verifyAreaForSelectedCountry(ExamplesTable areas) {
+        getDataPage().verifyAreaForSelectedCountry(areas);
+    }
+
+    @Then("the user should see the country page with $countryDropDown selected")
+    public void verifyClickedCountryPage(@Named("countryDropDown") String countryDropDown) {
+        getDataPage().verifyClickedCountryPage(countryDropDown);
     }
 }

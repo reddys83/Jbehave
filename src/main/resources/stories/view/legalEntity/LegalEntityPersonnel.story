@@ -14,7 +14,6 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-
 When the user clicks on the legal entity personnel link in the navigation bar
 
 Then the user should see the legal entity's personnel as:
@@ -34,9 +33,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-
 When the user clicks on the legal entity personnel link in the navigation bar
-
 Then the user should not see the legal entity's personnel
 
 Examples:

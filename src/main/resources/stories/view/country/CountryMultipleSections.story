@@ -16,7 +16,6 @@ Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
-Then the user should see the country type-ahead displayed
 When the user enters the country <country> in the type-ahead box
 Then the user should see the country iso2 as AF
 And the user should see the country iso3 as AFG
@@ -121,7 +120,6 @@ Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
-Then the user should see the country type-ahead displayed
 When the user enters the country <country> in the type-ahead box
 When the user clicks on the country basic info link in the navigation bar
 Then the user should see the basic info for the selected country
@@ -141,14 +139,13 @@ Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
-Then the user should see the country type-ahead displayed
 When the user enters the country <country> in the type-ahead box
 When the user clicks on the country basic info link in the navigation bar
 Then the user should see the list of country's names type and value as:
 |TYPE|VALUE|
 |Country Name|Afghanistan|
 |Former Name|Afghanistan|
-
+When the user clicks on the choose a country option
 When the user enters an another country Åland Islands in the type-ahead box
 Then the user should see the list of country's names type and value as:
 |TYPE|VALUE|

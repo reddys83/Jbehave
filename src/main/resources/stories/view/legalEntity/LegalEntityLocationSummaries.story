@@ -35,8 +35,6 @@ When the user clicks on the search results card with fid <fid>
 When the user clicks on the legal entity locations link in the navigation bar
 Then the user should not see the legal entity's location summaries
 
-
-
 Examples:
 |entity|searchBy|fid|
 |Associated Commercial Finance Inc|Name|91832|

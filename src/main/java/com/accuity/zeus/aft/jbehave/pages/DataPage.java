@@ -240,7 +240,7 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void enterCountryInTheTypeAheadBox(String country) {
+    public CountryPage enterCountryInTheTypeAheadBox(String country) {
         selectedEntity = country;
         getDriver().findElement(country_type_ahead_xpath).sendKeys(country);
         getDriver().findElement(country_type_ahead_xpath).sendKeys(Keys.RETURN);
@@ -249,6 +249,7 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return new CountryPage(getDriver(), getUrlPrefix(),database, apacheHttpClient ,restClient,heraApi);
     }
 
     public void enterAreaInTypeAhead(String area) {
@@ -833,9 +834,10 @@ public class DataPage extends AbstractPage {
         assertFalse(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Head Office']/td")).isSelected());
     }
 
-    public void clickOnISOLink(String isoCode){
+    public CurrencyPage clickOnISOLink(String isoCode){
         clickedCurrencyIso = isoCode;
         attemptClick(By.linkText(isoCode));
+        return new CurrencyPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
     }
 
     public void clickOnCityArea(String area) {
@@ -883,6 +885,15 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void verifyClickedCountryPage(String countryDropDown) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(countryDropDown, getDriver().findElement(country_listBox_xpath).getText());
     }
 
     public void verifySections(ExamplesTable sections) {
@@ -1037,5 +1048,12 @@ public class DataPage extends AbstractPage {
 
     public void verifyErrorMessageAtTopOfThePage() {
         assertEquals("The highlighted fields must be addressed before this update can be saved.", getDriver().findElement(error_message_at_top_xpath).getText());
+    }
+
+    public void verifyAreaForSelectedCountry(ExamplesTable areas) {
+        List<WebElement> areasCollection = getDriver().findElements(area_area_dropdown_list_xpath);
+        for (int i=0; i<areas.getRowCount(); i++){
+            assertEquals(areas.getRow(i).get(areas.getHeaders().get(0)),areasCollection.get(i).getText());
+        }
     }
 }

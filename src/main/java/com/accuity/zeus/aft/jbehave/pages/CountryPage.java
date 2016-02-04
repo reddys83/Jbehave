@@ -268,7 +268,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyNoCountryHolidays() {
-        assertEquals("HOLIDAYS FOR " + selectedCountry.toUpperCase(), getDriver().findElement(country_holiday_label_xpath).getText());
+        assertEquals("HOLIDAYS FOR " + dataPage.selectedEntity.toUpperCase(), getDriver().findElement(country_holiday_label_xpath).getText());
         assertEquals("DATE DESCRIPTION NOTES", getDriver().findElement(country_holiday_table_header_xpath).getText());
         try {
             assertFalse(getDriver().findElement(country_holiday_date_xpath).isDisplayed());
@@ -321,7 +321,7 @@ public class CountryPage extends AbstractPage {
 
     public void verifyCountryNoRoutingCodeTypes() {
         //assertEquals("PAYMENTS", getDriver().findElement(country_payments_label_xpath).getText());
-        assertEquals("ROUTING CODE TYPES IN " + selectedCountry.toUpperCase(), getDriver().findElement(country_payments_routing_code_label_xpath).getText());
+        assertEquals("ROUTING CODE TYPES IN " + dataPage.selectedEntity.toUpperCase(), getDriver().findElement(country_payments_routing_code_label_xpath).getText());
         assertEquals("TYPES", getDriver().findElement(country_payments_routing_codes_types_label_xpath).getText());
         try {
             assertFalse(getDriver().findElement(country_payments_routing_code_code_types_xpath).isDisplayed());
@@ -364,22 +364,6 @@ public class CountryPage extends AbstractPage {
 
     public void clickOnCountryPeople() {
         attemptClick(country_people_link_id);
-    }
-
-    public void verifyAreaForSelectedCountry(ExamplesTable areas) {
-        List<WebElement> areasCollection = getDriver().findElements(area_area_dropdown_list_xpath);
-        for (int i=0; i<areas.getRowCount(); i++){
-            assertEquals(areas.getRow(i).get(areas.getHeaders().get(0)),areasCollection.get(i).getText());
-        }
-    }
-
-    public void verifyClickedCountryPage(String countryDropDown) {
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        assertEquals(countryDropDown, getDriver().findElement(country_listBox_xpath).getText());
     }
 
     public void clickOnCountryCurrenciesLink() {
