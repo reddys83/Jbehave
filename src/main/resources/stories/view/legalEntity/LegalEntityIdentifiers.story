@@ -1,4 +1,4 @@
-Meta:@LegalEntityIdentifiers @LegalEntity
+Meta:@LegalEntityIdentifiers @LegalEntity @View
 
 Narrative:
 As a user

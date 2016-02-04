@@ -1,4 +1,4 @@
-Meta:@OfficePersonnel @Office
+Meta:@OfficePersonnel @Office @View
 
 Narrative:
 In order to view and edit the city

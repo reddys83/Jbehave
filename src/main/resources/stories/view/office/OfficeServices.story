@@ -1,4 +1,4 @@
-Meta:@OfficeServices  @Office
+Meta:@OfficeServices  @Office @View
 
 Narrative:
 In order to view and edit the office

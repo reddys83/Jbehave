@@ -1,4 +1,4 @@
-Meta:@CountryCreditRatings @Country
+Meta:@CountryCreditRatings @Country @View
 
 Narrative:
 In order to view and edit the currencies

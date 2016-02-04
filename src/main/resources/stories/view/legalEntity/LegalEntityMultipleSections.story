@@ -1,4 +1,4 @@
-Meta:@LegalEntityMultipleSections @LegalEntity
+Meta:@LegalEntityMultipleSections @LegalEntity @View
 
 Narrative:
 In order to view and edit the city

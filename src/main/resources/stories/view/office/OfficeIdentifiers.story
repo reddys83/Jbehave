@@ -1,4 +1,4 @@
-Meta:@OfficeIdentifiers @Office
+Meta:@OfficeIdentifiers @Office @View
 
 Narrative:
 As a user

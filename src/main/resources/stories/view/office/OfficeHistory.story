@@ -1,4 +1,4 @@
-Meta:@OfficeHistory @Office
+Meta:@OfficeHistory @Office @View
 
 Narrative:
 In order to view and edit the legalEntity

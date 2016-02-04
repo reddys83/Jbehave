@@ -1,4 +1,4 @@
-Meta:@LegalEntityBasicInfo @LegalEntity
+Meta:@LegalEntityBasicInfo @LegalEntity @View
 
 Narrative:
 In order to view and edit the legalEntity

@@ -1,4 +1,4 @@
-Meta:@OfficeSearchResults @Office
+Meta:@OfficeSearchResults @Office @View
 
 Narrative:
 As a user

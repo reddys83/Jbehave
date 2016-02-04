@@ -1,4 +1,4 @@
-Meta:@OfficeStatistics  @Office
+Meta:@OfficeStatistics  @Office @View
 
 Narrative:
 In order to view and edit the offices

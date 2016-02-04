@@ -1,4 +1,4 @@
-Meta:@CityRelatedEntities @City
+Meta:@CityRelatedEntities @City @View
 
 Narrative:
 In order to view and edit the city information
