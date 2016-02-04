@@ -94,8 +94,7 @@ public class CountryPage extends AbstractPage {
     private By currency_country_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private String selectedCountry ="";
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
-    private By country_dropdown_is_visible_xpath = By.xpath("//*[@id='selection0']//div[@class='chosen-container chosen-container-single']");
-    private By regions_label_xpath = By.xpath("//li[contains(h1,'Regions for')] //span");
+    private By country_edit_names_type_list_xpath = By.xpath("//*[@id='additionalNames']/tr/td[1]/select");
 
     public CountryPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -368,5 +367,14 @@ public class CountryPage extends AbstractPage {
 
     public void clickOnCountryCurrenciesLink() {
         attemptClick(country_currencies_link_id);
+    }
+
+    public void clickOnCountryNameType() {
+        attemptClick(country_edit_names_type_list_xpath);
+    }
+
+    public void verifyCountryNameTypesList(Database database, ApacheHttpClient apacheHttpClient) {
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country names type");
+
     }
 }

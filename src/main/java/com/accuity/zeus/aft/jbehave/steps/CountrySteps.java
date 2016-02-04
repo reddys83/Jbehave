@@ -257,4 +257,14 @@ public class CountrySteps extends AbstractSteps{
     public void clickOnCountryCurrenciesLink() {
         getCountryPage().clickOnCountryCurrenciesLink();
     }
+
+    @When("the user clicks on the country name type drop-down")
+    public void clickOnCountryNameType(){
+        getCountryPage().clickOnCountryNameType();
+    }
+
+    @Then("the user should see the country name types from lookup COUNTRY_NAME_TYPE")
+    public void verifyCountryNameTypesList(){
+        getCountryPage().verifyCountryNameTypesList(database, apacheHttpClient);
+    }
 }

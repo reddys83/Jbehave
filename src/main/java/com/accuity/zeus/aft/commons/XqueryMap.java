@@ -47,6 +47,7 @@ public class XqueryMap {
         queryMap.put("area list","getAreaList.xqy");
         queryMap.put("subarea list","getSubAreaList.xqy");
         queryMap.put("city list","getCityList.xqy");
+        queryMap.put("get country names type", "getCountryNamesType.xqy");
     }
 
     public String getXquery(String key){
