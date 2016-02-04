@@ -1,4 +1,4 @@
-Meta: @CountryLanguages @Country @View
+Meta:@ViewCountryLanguages @Country @View
 
 Narrative:
 As a user

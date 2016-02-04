@@ -1,37 +1,37 @@
-Meta:@CountryRelatedPlaces @Country @View
+Meta:@ViewCountryRelatedPeople @Country @View
 
 Narrative:
-In order to view the places of country
+In order to view and edit the people information
 As a user
 I want to cover the requirements mentioned in
-JIRA ID - ZEUS-249 - User can view a country's related places
+JIRA ID - ZEUS-258 - User can view a country's related people.
 
-Scenario: Verify country places data.
-Meta:@verifyBuild
+
+Scenario: Verify related people information for country with single records
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
-When the user clicks on the country places link in the navigation bar
-Then the user should see the country's places as:
-|TYPE|PLACE|DETAILS|
-|Capital City|Doha|Capital City|
-|Financial Centre|Doha||
+When the user clicks on the country people link in the navigation bar
+Then the user should see the country's people as:
+|TYPE|PERSON|
+|Financial Institution Board member|Steven Bangert|
+|President, Cheif executor|Yasuo Ueno|
 
 Examples:
 |country|
 |Qatar|
 
-Scenario: Verify the country which have no places
+Scenario: Verify no country related people data.
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
-When the user clicks on the country places link in the navigation bar
-Then the user should not see the country's places
+When the user clicks on the country people link in the navigation bar
+Then the user should not see the country's people
 
 Examples:
 |country|
-|Bonaire, Sint Eustatius and Saba|
+|Nauru|
