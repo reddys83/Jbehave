@@ -267,4 +267,64 @@ public class CountrySteps extends AbstractSteps{
     public void verifyCountryNameTypesList(){
         getCountryPage().verifyCountryNameTypesList(database, apacheHttpClient);
     }
+
+    @When("the user clicks on the add new name button in the basic info country page")
+    public void clickOnAddNewNameButton(){
+        getCountryPage().clickOnAddNewNameButton();
+    }
+
+    @When("the user enters country name as <countryName> in the basic info country page")
+    public void enterCountryName(@Named("countryName") String countryName){
+        getCountryPage().enterCountryName(countryName);
+    }
+
+    @Then("the user should see the error message for the required country name field in the basic info country page")
+    public void verifyErrorMessageForCountryName(){
+        getCountryPage().verifyErrorMessageForCountryName();
+    }
+
+    @Then("the user should see the error message for the required name type field in the basic info country page")
+    public void verifyErrorMessageForRequiredNameType(){
+        getCountryPage().verifyErrorMessageForRequiredNameType();
+    }
+
+    @Then("the user should see the error message for the required name value field in the basic info country page")
+    public void verifyErrorMessageForRequiredValueType(){
+        getCountryPage().verifyErrorMessageForRequiredValueType();
+    }
+
+    @When("the user clicks on the delete name row button in the basic info country page")
+    public void clickOnDeleteNewNameRowButton(){
+        getCountryPage().clickOnDeleteNewNameRowButton();
+    }
+
+    @Then("the user should see the delete row confirmation modal in the country page")
+    public void verifyDeleteConfirmationModal(){
+        getCountryPage().verifyDeleteConfirmationModal();
+    }
+
+    @When("the user clicks on the no button in the delete row confirmation modal in the country page")
+    public void clickOnNoButtonInDeleteConfirmationModal(){
+        getCountryPage().clickOnNoButtonInDeleteConfirmationModal();
+    }
+
+    @When("the user clicks on the yes button in the delete row confirmation modal in the country page")
+    public void clickOnYesButtonInDeleteConfirmationModal(){
+        getCountryPage().clickOnYesButtonInDeleteConfirmationModal();
+    }
+
+    @Then("the user should see the newly added name row in the basic info country page")
+    public void verifyNewlyAddedNameRowIsDisplayed(){
+        getCountryPage().verifyNewlyAddedNameRowIsDisplayed();
+    }
+
+    @Then("the user should not see the newly added name row in the basic info country page")
+    public void verifyNewlyAddedNameRowIsNotDisplayed(){
+        getCountryPage().verifyNewlyAddedNameRowIsNotDisplayed();
+    }
+
+    @Then("the user should see the error message enter up to 50 valid characters for country name value in the basic info country page")
+    public void verifyCountryNameValueErrMsg(){
+        getCountryPage().verifyCountryNameValueErrMsg();
+    }
 }

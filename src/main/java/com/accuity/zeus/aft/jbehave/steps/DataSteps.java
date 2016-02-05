@@ -876,4 +876,5 @@ public class DataSteps extends AbstractSteps {
     public void clickOnUpdateCurrencyLink() {
         getDataPage().clickOnUpdateCurrencyLink();
     }
+
 }

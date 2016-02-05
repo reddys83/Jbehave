@@ -6,7 +6,7 @@ import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
@@ -57,11 +57,19 @@ public class CountryPage extends AbstractPage {
     private By country_holiday_label_xpath = By.xpath("//li[contains(h1,'Holidays for')]//span");
     private By country_languages_label_xpath = By.xpath("//*[@id='content']/div/ul/li/dl/dt");
     private By country_languages_value_xpath = By.xpath("//*[@id='content']/div/ul/li/dl/dd");
-
+    private By country_country_name_input_xpath = By.xpath("//tr[td = 'Country Name']/td[2]/input");
     private By country_holiday_table_header_xpath = By.xpath("//li[contains(h1,'Holidays for')]//thead");
     private By country_holiday_date_xpath = By.xpath("//li[contains(h1,'Holidays for')]//tr/td[1]");
     private By country_holiday_description_xpath = By.xpath("//li[contains(h1,'Holidays for')]//tr/td[2]");
     private By country_holiday_notes_xpath = By.xpath("//li[contains(h1,'Holidays for')]//tr/td[3]");
+    private By country_name_value_required_err_msg_xpath = By.xpath("//tr[td = 'Country Name']/td[2]/p");
+    private By country_names_type_required_err_msg_xpath = By.xpath("//*[@id='additionalNames']/tr/td[1]/p");
+    private By country_names_value_required_err_msg_xpath = By.xpath("//*[@id='additionalNames']/tr/td[2]/p");
+    private By country_delete_new_name_row_button_xpath = By.xpath("//*[@class='delete-row']");
+    private By country_delete_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
+    private By country_delete_no_button_id = By.id("no-button");
+    private By country_delete_yes_button_id = By.id("yes-button");
+    private By country_additional_name_roq_id = By.xpath("//*[@id='additionalNames']/tr");
 
     private By country_payments_link_id = By.id("countryPayments");
     private By country_payments_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//span");
@@ -95,6 +103,8 @@ public class CountryPage extends AbstractPage {
     private String selectedCountry ="";
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By country_edit_names_type_list_xpath = By.xpath("//*[@id='additionalNames']/tr/td[1]/select");
+    private By country_name_type_list_xpath = By.xpath("//*[@data-row_id='nameRow']/tbody/tr/td/select/option");
+    private By country_add_new_name_button_id = By.id("add-names");
 
     public CountryPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -374,7 +384,61 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyCountryNameTypesList(Database database, ApacheHttpClient apacheHttpClient) {
+        List<WebElement> countryNameTypesList = getDriver().findElements(country_name_type_list_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country names type");
+        for (int i = 0; i < document.getElementsByTagName("name").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), countryNameTypesList.get(i).getText());
+        }
+    }
 
+    public void clickOnAddNewNameButton() {
+        attemptClick(country_add_new_name_button_id);
+    }
+
+    public void enterCountryName(String countryName) {
+        getDriver().findElement(country_country_name_input_xpath).clear();
+        getDriver().findElement(country_country_name_input_xpath).sendKeys(countryName);
+    }
+
+    public void verifyErrorMessageForCountryName() {
+        assertEquals("Required", getDriver().findElement(country_name_value_required_err_msg_xpath).getText());
+    }
+
+    public void verifyErrorMessageForRequiredNameType() {
+        assertEquals("Required", getDriver().findElement(country_names_type_required_err_msg_xpath).getText());
+    }
+
+    public void verifyErrorMessageForRequiredValueType() {
+        assertEquals("Required", getDriver().findElement(country_names_value_required_err_msg_xpath).getText());
+    }
+
+    public void clickOnDeleteNewNameRowButton() {
+        attemptClick(country_delete_new_name_row_button_xpath);
+    }
+
+    public void verifyDeleteConfirmationModal() {
+        assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(country_delete_confirmation_modal_xpath).getText());
+    }
+
+    public void clickOnNoButtonInDeleteConfirmationModal() {
+        attemptClick(country_delete_no_button_id);
+    }
+
+    public void clickOnYesButtonInDeleteConfirmationModal() {
+        attemptClick(country_delete_yes_button_id);
+    }
+
+    public void verifyNewlyAddedNameRowIsDisplayed() {
+        assertTrue(getDriver().findElement(country_additional_name_roq_id).isDisplayed());
+    }
+
+    public void verifyNewlyAddedNameRowIsNotDisplayed() {
+        try {
+            assertFalse(getDriver().findElement(country_additional_name_roq_id).isDisplayed());
+        } catch (NoSuchElementException e){}
+    }
+
+    public void verifyCountryNameValueErrMsg() {
+        assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_name_value_required_err_msg_xpath).getText());
     }
 }
