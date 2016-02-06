@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -294,8 +295,9 @@ public class CountrySteps extends AbstractSteps{
     }
 
     @When("the user clicks on the delete name row button in the basic info country page")
-    public void clickOnDeleteNewNameRowButton(){
-        getCountryPage().clickOnDeleteNewNameRowButton();
+    @Alias("the user clicks on the delete time zone row button in the basic info country page")
+    public void clickOnDeleteNewRowButton(){
+        getCountryPage().clickOnDeleteNewRowButton();
     }
 
     @Then("the user should see the delete row confirmation modal in the country page")
@@ -318,13 +320,48 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyNewlyAddedNameRowIsDisplayed();
     }
 
+    @Then("the user should see the newly added time zone row in the basic info country page")
+    public void verifyNewlyAddedTimeZoneRowIsDisplayed(){
+        getCountryPage().verifyNewlyAddedTimeZoneRowIsDisplayed();
+    }
+
     @Then("the user should not see the newly added name row in the basic info country page")
     public void verifyNewlyAddedNameRowIsNotDisplayed(){
         getCountryPage().verifyNewlyAddedNameRowIsNotDisplayed();
     }
 
+    @Then("the user should not see the newly added time zone row in the basic info country page")
+    public void verifyNewlyAddedTimeZoneRowIsNotDisplayed(){
+        getCountryPage().verifyNewlyAddedTimeZoneRowIsNotDisplayed();
+    }
+
     @Then("the user should see the error message enter up to 50 valid characters for country name value in the basic info country page")
     public void verifyCountryNameValueErrMsg(){
         getCountryPage().verifyCountryNameValueErrMsg();
+    }
+
+    @Then("the user should see the error message enter up to 100 valid characters for time zone summary in the basic info country page")
+    public void verifyErrorMessageForTimeZoneSummary(){
+        getCountryPage().verifyErrorMessageForTimeZoneSummary();
+    }
+
+    @When("the user enters time zones summary <timeZoneSummary> in the basic info country page")
+    public void enterTimeZoneSummary(@Named("timeZoneSummary") String timeZoneSummary){
+        getCountryPage().enterTimeZoneSummary(timeZoneSummary);
+    }
+
+    @When("the user clicks on the add new time zone button in the basic info country page")
+    public void clickOnAddNewTimeZone(){
+        getCountryPage().clickOnAddNewTimeZone();
+    }
+
+    @When("the user clicks on the select time zone list in the basic info country page")
+    public void clickOnSelectTimeZone(){
+        getCountryPage().clickOnSelectTimeZone();
+    }
+
+    @Then("the user should see the country time zones from lookup TIME_ZONE")
+    public void verifyCountryTimeZoneSummary(){
+        getCountryPage().verifyCountryTimeZoneSummary();
     }
 }

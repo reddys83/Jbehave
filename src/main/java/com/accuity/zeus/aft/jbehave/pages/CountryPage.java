@@ -65,11 +65,17 @@ public class CountryPage extends AbstractPage {
     private By country_name_value_required_err_msg_xpath = By.xpath("//tr[td = 'Country Name']/td[2]/p");
     private By country_names_type_required_err_msg_xpath = By.xpath("//*[@id='additionalNames']/tr/td[1]/p");
     private By country_names_value_required_err_msg_xpath = By.xpath("//*[@id='additionalNames']/tr/td[2]/p");
-    private By country_delete_new_name_row_button_xpath = By.xpath("//*[@class='delete-row']");
+    private By country_delete_new_row_button_xpath = By.xpath("//*[@class='delete-row']");
     private By country_delete_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
     private By country_delete_no_button_id = By.id("no-button");
     private By country_delete_yes_button_id = By.id("yes-button");
-    private By country_additional_name_roq_id = By.xpath("//*[@id='additionalNames']/tr");
+    private By country_additional_name_row_id = By.xpath("//*[@id='additionalNames']/tr");
+    private By country_time_zone_summary_err_msg_xpath = By.xpath("//*[@data-error_id='timeZonesSummaryError']");
+    private By country_time_zone_summary_input_xpath = By.xpath("//*[@data-edit_id='timeZonesSummary']");
+    private By country_add_new_time_zone_button_id = By.id("add-timeZones");
+    private By country_time_zone_list_box_xpath = By.xpath("//*[@data-row_id='timeZoneRow']/td/select");
+    private By country_time_zone_list_xpath = By.xpath("//*[@data-row_id='timeZoneRow']/td/select/option");
+    private By country_additional_time_zone_row_id = By.xpath("//*[@id='additionalTimeZones']/tr");
 
     private By country_payments_link_id = By.id("countryPayments");
     private By country_payments_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//span");
@@ -386,7 +392,7 @@ public class CountryPage extends AbstractPage {
     public void verifyCountryNameTypesList(Database database, ApacheHttpClient apacheHttpClient) {
         List<WebElement> countryNameTypesList = getDriver().findElements(country_name_type_list_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country names type");
-        for (int i = 0; i < document.getElementsByTagName("name").getLength(); i++) {
+        for (int i = 1; i < document.getElementsByTagName("type").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), countryNameTypesList.get(i).getText());
         }
     }
@@ -412,8 +418,8 @@ public class CountryPage extends AbstractPage {
         assertEquals("Required", getDriver().findElement(country_names_value_required_err_msg_xpath).getText());
     }
 
-    public void clickOnDeleteNewNameRowButton() {
-        attemptClick(country_delete_new_name_row_button_xpath);
+    public void clickOnDeleteNewRowButton() {
+        attemptClick(country_delete_new_row_button_xpath);
     }
 
     public void verifyDeleteConfirmationModal() {
@@ -429,16 +435,53 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyNewlyAddedNameRowIsDisplayed() {
-        assertTrue(getDriver().findElement(country_additional_name_roq_id).isDisplayed());
+        assertTrue(getDriver().findElement(country_additional_name_row_id).isDisplayed());
     }
 
     public void verifyNewlyAddedNameRowIsNotDisplayed() {
         try {
-            assertFalse(getDriver().findElement(country_additional_name_roq_id).isDisplayed());
+            assertFalse(getDriver().findElement(country_additional_name_row_id).isDisplayed());
         } catch (NoSuchElementException e){}
     }
 
     public void verifyCountryNameValueErrMsg() {
         assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_name_value_required_err_msg_xpath).getText());
+    }
+
+    public void verifyErrorMessageForTimeZoneSummary() {
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_time_zone_summary_err_msg_xpath).getText());
+    }
+
+    public void enterTimeZoneSummary(String timeZoneSummary) {
+        getDriver().findElement(country_time_zone_summary_input_xpath).clear();
+        getDriver().findElement(country_time_zone_summary_input_xpath).sendKeys(timeZoneSummary);
+    }
+
+    public void clickOnAddNewTimeZone() {
+        attemptClick(country_add_new_time_zone_button_id);
+    }
+
+    public void clickOnSelectTimeZone() {
+        attemptClick(country_time_zone_list_box_xpath);
+    }
+
+    public void verifyCountryTimeZoneSummary() {
+        List<WebElement> countryTimeZonesList = getDriver().findElements(country_time_zone_list_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country time zones");
+        for (int i = 1; i < document.getElementsByTagName("timeZone").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), countryTimeZonesList.get(i).getText());
+        }
+    }
+
+    public void verifyNewlyAddedTimeZoneRowIsDisplayed() {
+        assertTrue(getDriver().findElement(country_additional_time_zone_row_id).isDisplayed());
+    }
+
+    public void verifyNewlyAddedTimeZoneRowIsNotDisplayed() {
+        try {
+            assertFalse(getDriver().findElement(country_additional_time_zone_row_id).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e){
+
+        }
     }
 }
