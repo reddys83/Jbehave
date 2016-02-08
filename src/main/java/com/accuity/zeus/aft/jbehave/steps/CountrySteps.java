@@ -9,6 +9,7 @@ import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.yecht.Data;
 
 @Component
 public class CountrySteps extends AbstractSteps{
@@ -363,5 +364,70 @@ public class CountrySteps extends AbstractSteps{
     @Then("the user should see the country time zones from lookup TIME_ZONE")
     public void verifyCountryTimeZoneSummary(){
         getCountryPage().verifyCountryTimeZoneSummary();
+    }
+
+    @When("the user enters holiday day <day> in the holidays country page")
+    public void enterCountryHolidayDay(@Named("day") String day){
+        getCountryPage().enterCountryHolidayDay(day);
+    }
+
+    @When("the user enters holiday month <month> in the holidays country page")
+    public void enterCountryHolidayMonth(@Named("month") String month){
+        getCountryPage().enterCountryHolidayMonth(month);
+    }
+
+    @When("the user enters holiday year <year> in the holidays country page")
+    public void enterCountryHolidayYear(@Named("year") String year){
+        getCountryPage().enterCountryHolidayYear(year);
+    }
+
+    @Then("the user should see the error message enter a year, month/year or day/month/year in the holidays country page")
+    public void verifyErrorMsgForCountryHolidayDate(){
+        getCountryPage().verifyErrorMsgForCountryHolidayDate();
+    }
+
+    @Then("the user should see the error message required for holiday date in the holidays country page")
+    public void verifyErrorMsgRequiredForCountryHolidayDate(){
+        getCountryPage().verifyErrorMsgRequiredForCountryHolidayDate();
+    }
+
+    @When("the user clicks on the add new holiday button in the holidays country page")
+    public void clickOnAddNewCountryHolidayButton(){
+        getCountryPage().clickOnAddNewCountryHolidayButton();
+    }
+
+    @When("the user enters holiday description <description> in the holidays country page")
+    public void enterCountryHolidayDescription(@Named("description") String description){
+        getCountryPage().enterCountryHolidayDescription(description);
+    }
+
+    @When("the user enters holiday notes <notes> in the holidays country page")
+    public void enterCountryHolidayNotes(@Named("notes") String notes){
+        getCountryPage().enterCountryHolidayNotes(notes);
+    }
+
+    @Then("the user should see the error message enter up to 100 valid characters for holiday description in the holidays country page")
+    public void verifyCountryHolidaysDescriptionErrMsg(){
+        getCountryPage().verifyCountryHolidaysDescriptionErrMsg();
+    }
+
+    @Then("the user should see the error message enter up to 100 valid characters for holiday notes in the holidays country page")
+    public void verifyCountryHolidaysNotesErrMsg(){
+        getCountryPage().verifyCountryHolidaysNotesErrMsg();
+    }
+
+    @Then("the user should see the newly added holiday row in the holiday country page")
+    public void verifyNewlyAddedHolidayRow(){
+        getCountryPage().verifyNewlyAddedHolidayRow();
+    }
+
+    @Then("the user should not see the newly added holiday row in the holiday country page")
+    public void verifyNoNewlyAddedHolidayRow(){
+        getCountryPage().verifyNoNewlyAddedHolidayRow();
+    }
+
+    @When("the user clicks on the delete holiday row button in the basic info country page")
+    public void clickOnDeleteHolidayRowButton(){
+        getCountryPage().clickOnDeleteNewRowButton();
     }
 }

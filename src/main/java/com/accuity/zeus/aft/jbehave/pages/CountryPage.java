@@ -76,6 +76,16 @@ public class CountryPage extends AbstractPage {
     private By country_time_zone_list_box_xpath = By.xpath("//*[@data-row_id='timeZoneRow']/td/select");
     private By country_time_zone_list_xpath = By.xpath("//*[@data-row_id='timeZoneRow']/td/select/option");
     private By country_additional_time_zone_row_id = By.xpath("//*[@id='additionalTimeZones']/tr");
+    private By country_add_new_holiday_button_id = By.id("add-holidays");
+    private By country_holiday_day_xpath = By.xpath("//*[@data-row_id='holidayRow']//tr[1]/td/fieldset/input[1]");
+    private By country_holiday_month_xpath = By.xpath("//*[@data-row_id='holidayRow']//tr[1]/td/fieldset/select");
+    private By country_holiday_year_xpath = By.xpath("//*[@data-row_id='holidayRow']//tr[1]/td/fieldset/input[2]");
+    private By country_holiday_date_error_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='holidayDateError']");
+    private By country_holiday_description_box_xpath = By.xpath("//*[@data-row_id='holidayRow']//tr[1]/td[2]/input");
+    private By country_holiday_note_box_xpath = By.xpath("//*[@data-row_id='holidayRow']//tr[1]/td[3]/input");
+    private By country_holiday_description_err_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='holidayNameError']");
+    private By country_holiday_notes_err_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='holidayNoteError']");
+    private By country_new_holiday_row_xpath = By.xpath("//*[@id='additionalHolidays']/tr");
 
     private By country_payments_link_id = By.id("countryPayments");
     private By country_payments_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//span");
@@ -481,6 +491,62 @@ public class CountryPage extends AbstractPage {
         try {
             assertFalse(getDriver().findElement(country_additional_time_zone_row_id).isDisplayed());
         } catch (org.openqa.selenium.NoSuchElementException e){
+
+        }
+    }
+
+    public void enterCountryHolidayDay(String day) {
+        getDriver().findElement(country_holiday_day_xpath).clear();
+        getDriver().findElement(country_holiday_day_xpath).sendKeys(day);
+    }
+
+    public void enterCountryHolidayMonth(String month) {
+        selectItemFromDropdownListByText((country_holiday_month_xpath), month);
+    }
+
+    public void enterCountryHolidayYear(String year) {
+        getDriver().findElement(country_holiday_year_xpath).clear();
+        getDriver().findElement(country_holiday_year_xpath).sendKeys(year);
+    }
+
+    public void verifyErrorMsgForCountryHolidayDate() {
+        assertEquals("Enter a year, month/year or day/month/year.", getDriver().findElement(country_holiday_date_error_msg_xpath).getText());
+    }
+
+    public void clickOnAddNewCountryHolidayButton() {
+        attemptClick(country_add_new_holiday_button_id);
+    }
+
+    public void verifyErrorMsgRequiredForCountryHolidayDate() {
+        assertEquals("Required", getDriver().findElement(country_holiday_date_error_msg_xpath).getText());
+    }
+
+    public void enterCountryHolidayDescription(String description) {
+        getDriver().findElement(country_holiday_description_box_xpath).clear();
+        getDriver().findElement(country_holiday_description_box_xpath).sendKeys(description);
+    }
+
+    public void enterCountryHolidayNotes(String notes) {
+        getDriver().findElement(country_holiday_note_box_xpath).clear();
+        getDriver().findElement(country_holiday_note_box_xpath).sendKeys(notes);
+    }
+
+    public void verifyCountryHolidaysDescriptionErrMsg() {
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_holiday_description_err_msg_xpath));
+    }
+
+    public void verifyCountryHolidaysNotesErrMsg() {
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_holiday_notes_err_msg_xpath));
+    }
+
+    public void verifyNewlyAddedHolidayRow() {
+        assertTrue(getDriver().findElement(country_new_holiday_row_xpath).isDisplayed());
+    }
+
+    public void verifyNoNewlyAddedHolidayRow() {
+        try {
+            assertFalse(getDriver().findElement(country_new_holiday_row_xpath).isDisplayed());
+        } catch (NoSuchElementException e){
 
         }
     }
