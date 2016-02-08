@@ -257,4 +257,15 @@ public class CountrySteps extends AbstractSteps{
     public void clickOnCountryCurrenciesLink() {
         getCountryPage().clickOnCountryCurrenciesLink();
     }
+
+
+    @When("the user clicks on language option")
+    public void clickOnLanguageLink(){
+        getCountryPage().clickOnLanguageLink();
+    }
+
+    @When ("the user updates language summary<summary>")
+    public void enterLanguageSummary(@Named("summary")String summary){
+        getCountryPage().enterSummaryLanguage(summary);
+    }
 }

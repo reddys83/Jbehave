@@ -888,13 +888,5 @@ public class DataSteps extends AbstractSteps {
         setCurrencyPage(getDataPage().selectCurrencyFromTypeAhead(currency));
     }
 
-    @When("the user clicks on language option")
-    public void clickOnLanguageLink(){
-        getDataPage().clickOnLanguageLink();
-    }
 
-    @When ("the user updates language summary<summary>")
-    public void enterLanguageSummary(@Named("summary")String summary){
-        getDataPage().enterSummaryLanguage(summary);
-    }
 }

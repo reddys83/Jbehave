@@ -4,6 +4,8 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.rest.RestClient;
+import org.jbehave.core.annotations.Named;
+import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -96,6 +98,8 @@ public class CountryPage extends AbstractPage {
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By country_dropdown_is_visible_xpath = By.xpath("//*[@id='selection0']//div[@class='chosen-container chosen-container-single']");
     private By regions_label_xpath = By.xpath("//li[contains(h1,'Regions for')] //span");
+    private By country_language_link_id = By.id("countryLanguages");
+    private By language_summary_textarea_xpath = By.xpath("//*[@id='content']/div/ul/form/li/dl/dd/textarea");
 
     public CountryPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -368,5 +372,21 @@ public class CountryPage extends AbstractPage {
 
     public void clickOnCountryCurrenciesLink() {
         attemptClick(country_currencies_link_id);
+    }
+
+
+
+
+    public void clickOnLanguageLink() {
+        attemptClick(country_language_link_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void enterSummaryLanguage(String summary) {
+        getDriver().findElement(language_summary_textarea_xpath).sendKeys(summary);
     }
 }
