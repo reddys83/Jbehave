@@ -5,6 +5,7 @@ As a user
 I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-708 - User can edit country names
+JIRA ID - ZEUS-712 - User can edit country timezones
 
 Scenario: Verify country names type from lookup COUNTRY_NAME_TYPE
 Given a user is on the search page
