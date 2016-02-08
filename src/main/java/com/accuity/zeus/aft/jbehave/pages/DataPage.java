@@ -49,6 +49,8 @@ public class DataPage extends AbstractPage {
 
     private By legalEntity_basic_info_link_id = By.id("legalEntityBasicInfo");
     private By currency_update_button_id = By.id("update-button");
+    private By country_language_link_id = By.id("countryLanguages");
+    private By language_summary_textarea_id = By.xpath("//*[@id='content']/div/ul/form/li/dl/dd/textarea");
 
     private By identifiers_label_xpath = By.xpath("//*[@id='content']//h2[text()='Identifiers']");
     private By identifiers_type_label_xpath = By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//th[1]");
@@ -1099,5 +1101,18 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void clickOnLanguageLink() {
+        attemptClick(country_language_link_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void enterSummaryLanguage(String summary) {
+        getDriver().findElement(language_summary_textarea_id).sendKeys(summary);
     }
 }
