@@ -10,7 +10,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 When the user enters the currency start day as <currencyStartDay>
 And the user enters the currency start month as <currencyStartMonth>
 And the user enters the currency start year as <currencyStartYear>

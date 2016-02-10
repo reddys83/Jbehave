@@ -64,21 +64,6 @@ public abstract class AbstractSteps {
 	@Value("${data.management.webapp.aft.uri}")
 	private String uri;
 
-	public static CurrencyPage getCurrencyPage() {
-		return currencyPage;
-	}
-
-	public static void setCurrencyPage(CurrencyPage currencyPage) {
-		AbstractSteps.currencyPage = currencyPage;
-	}
-
-	public static CountryPage getCountryPage() {
-		return countryPage;
-	}
-
-	public static void setCountryPage(CountryPage countryPage) {
-		AbstractSteps.countryPage = countryPage;
-	}
 
 	public String getDataManagementWebappUrl() {
 		//return buildUriString(null, null);
@@ -131,8 +116,20 @@ public abstract class AbstractSteps {
 			throw new RuntimeException(e);
 		}
 	}
+    public static CurrencyPage getCurrencyPage() {
+        return currencyPage;
+    }
 
-	public ReportPage getReportPage() {
+    public static void setCurrencyPage(CurrencyPage currencyPage) {
+        AbstractSteps.currencyPage = currencyPage;
+    }
+
+    public CountryPage getCountryPage() {
+        return countryPage;
+    }
+    public void setCountryPage(CountryPage countryPage) { this.countryPage = countryPage; }
+
+   	public ReportPage getReportPage() {
 		return reportPage;
 	}
 

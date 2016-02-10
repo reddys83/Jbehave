@@ -23,7 +23,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 Then the user should see the currency selection disabled
 Then the user should see the edit currency details from trusted document
 When the user clicks on the cancel button
@@ -62,7 +62,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 And the user enters the currency name value as <name>
 And the user clicks on the save button
 Then the user should see the error message for the required name field
@@ -78,7 +78,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 And the user enters the currency abbr value as <abbr>
 And the user enters the currency unit value as <unit>
 And the user enters the currency quantity value as <quantity>
@@ -98,7 +98,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the return button
@@ -114,7 +114,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 Then the user should see the currency usage is editable for status active
 
 Examples:
@@ -127,7 +127,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 Then the user should see the currency usage is editable for status inactive
 
 Examples:
@@ -143,7 +143,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 Then the user should see the currency uses in edit mode are from trusted document
 Then user should see the list of countries in currency edit mode from trusted document
 
@@ -157,7 +157,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the return button
@@ -177,12 +177,12 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 Then the user should see the currency selection disabled
 When the user clicks on the cancel button
 And the user clicks on the cancel yes button
 Then the user should return to view mode of the currency page
-When the user clicks on the update currency link
+When the user clicks on the update link
 When the user clicks on the cancel button
 And the user clicks on the cancel no button
 Then the user should return to edit mode of the currency page
@@ -198,7 +198,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 And the user enters the currency quantity value as <quantity>
 And the user clicks on the save button
 Then the user should see the error message please enter a numeric value up to 10,000 for quantity
@@ -214,7 +214,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 Then the user should see the list of all other existing currencies (by name) excluding the currency they are currently viewing
 
 Examples:
@@ -231,7 +231,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 When the user enters the currency start day as <currencyStartDay>
 And the user enters the currency start month as <currencyStartMonth>
 And the user enters the currency start year as <currencyStartYear>
@@ -255,7 +255,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 Then the user should see the list of all other existing currencies (by name) excluding the currency they are currently viewing
 When the user enters the currency start day as <currencyStartDay>
 And the user enters the currency start month as <currencyStartMonth>
@@ -279,7 +279,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 When the user enters the currency start year as <currencyStartYear>
 When the user enters the currency end year as <currencyEndYear>
 When the user clicks on the save button
@@ -299,14 +299,14 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 When the user enters the currency start year as <currencyStartYear>
 When the user clicks on the save button
 Then the user should see the error 'Must be no later than today.' for start date
 When the user clicks on the cancel button
 And the user clicks on the cancel yes button
 Then the user should return to view mode of the currency page
-When the user clicks on the update currency link
+When the user clicks on the update link
 When the user enters the currency end year as <currencyEndYear>
 When the user clicks on the save button
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
@@ -325,7 +325,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 And the user clicks on the add country type-ahead option
 Then the user should see the list of all the existing country in add country list
 When the user enters the country <addCurrencyCountry> in the add country type-ahead box
@@ -347,7 +347,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 And the user clicks on the add country type-ahead option
 When the user enters the country <addCurrencyCountry> in the add country type-ahead box
 When the user enters the currency start day as <currencyStartDay>
@@ -373,7 +373,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 When the user enters the currency start day as <currencyStartDay>
 And the user enters the currency start month as <currencyStartMonth>
 And the user enters the currency start year as <currencyStartYear>
@@ -398,7 +398,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 When the user enters the country <currencyCountry> in the currency usage
 When the user enters the currency start day as <currencyStartDay>
 And the user enters the currency start month as <currencyStartMonth>
@@ -419,12 +419,13 @@ Scenario: ZEUS-286 - User can save edits to the currency uses and verify the dat
 1. @accuracy = year
 2. @accuracy = month
 3. @accuracy = day
+Meta:@ASDFADFADWDWED
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 When the user enters the country <currencyCountry> in the currency usage
 When the user enters the currency start day as <currencyStartDay>
 And the user enters the currency start month as <currencyStartMonth>

@@ -19,6 +19,8 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertFalse;
 
+
+
 public class CurrencyPage extends AbstractPage {
 
     private String selectedEntity="";
@@ -51,7 +53,6 @@ public class CurrencyPage extends AbstractPage {
     String currency_use_table_primary_edit_xpath ="//fieldset[@data-edit_id='primary']";
     private By currency_use_table_replacedBy_disable_edit_xpath = By.xpath("//fieldset[2]//div[@class='chosen-container chosen-container-single chosen-disabled']/a");
     String currency_use_table_replacedBy_edit_xpath= "//fieldset[2]//div[@class='chosen-container chosen-container-single']";
-    private By currency_selection_disabled_xpath=By.xpath(".//*[@id='entitySelect_chosen'][@class='chosen-container chosen-container-single chosen-disabled']");
     private String currencySearchString = null;
     private By currency_input_name_xpath = By.xpath("//input[@name='name']");
     private By currency_input_abbr_xpath = By.xpath("//input[@name='abbr']");
@@ -64,8 +65,6 @@ public class CurrencyPage extends AbstractPage {
     private By currency_unit_error_message_xpath = By.xpath("//*[@data-error_id='unitError']");
     private By currency_quantity_error_message_xpath = By.xpath("//*[@data-error_id='quantityError']");
     private By currency_replaced_by_xpath = By.xpath("//*[@class='chosen-results']/li");
-    private By currency_start_date_error_msg_xpath = By.xpath("//*[@data-error_id='startDateError']");
-    private By currency_end_date_error_msg_xpath = By.xpath("//*[@data-error_id='endDateError']");
     private By currency_start_date_drop_down_xpath = By.xpath("//select[@name='began-month']");
     private By currency_add_country_option_xpath = By.xpath("//*[@id='add_use_chosen']/a");
     private By currency_add_country_type_ahead_input_xpath = By.xpath("//*[@id='add_use_chosen']/div/div/input");
@@ -198,7 +197,7 @@ public class CurrencyPage extends AbstractPage {
         }
     }
 
-    public void verifyEditCurrencyDetailsFromTrusted(Database database, ApacheHttpClient apacheHttpClient, String selectedEntity) {
+    public void verifyEditCurrencyDetailsFromTrusted(String selectedEntity) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedEntity));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
@@ -452,10 +451,6 @@ public class CurrencyPage extends AbstractPage {
         getDriver().findElement(currency_input_quantity_xpath).sendKeys(quantity);
     }
 
-    public void verifyCurrencySelectionDisabled() {
-        assertTrue(getDriver().findElement(currency_selection_disabled_xpath).isDisplayed());
-    }
-
     public void verifyCurrencyPage(){
         try{
             Thread.sleep(1500L);
@@ -620,13 +615,4 @@ public class CurrencyPage extends AbstractPage {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), addCountryList.get(i).getText().trim());
         }
     }
-
-    public void verifyStartDateErrorMessage(String startDateErrorMsg) {
-        assertEquals(startDateErrorMsg.replace("'",""), getDriver().findElement(currency_start_date_error_msg_xpath).getText());
-    }
-
-    public void verifyEndDateErrorMessage(String endDateErrorMsg) {
-        assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(currency_end_date_error_msg_xpath).getText());
-    }
-
 }
