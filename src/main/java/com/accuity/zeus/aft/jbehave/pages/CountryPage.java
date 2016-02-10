@@ -510,7 +510,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyErrorMsgForCountryHolidayDate() {
-        assertEquals("Enter a year, month/year or day/month/year.", getDriver().findElement(country_holiday_date_error_msg_xpath).getText());
+        assertEquals("Enter a day/month/year.", getDriver().findElement(country_holiday_date_error_msg_xpath).getText());
     }
 
     public void clickOnAddNewCountryHolidayButton() {
