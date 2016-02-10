@@ -550,19 +550,19 @@ public class CurrencyPage extends AbstractPage {
     }
 
     public void verifyErrorMessageForCurrAbbr() {
-        assertEquals("Enter up to 30 valid characters for Abbreviation.", getDriver().findElement(currency_abbr_error_message_xpath).getText());
+        assertEquals("Enter up to 30 valid characters.", getDriver().findElement(currency_abbr_error_message_xpath).getText());
     }
 
     public void verifyErrorMessageForCurrName() {
-        assertEquals("Enter up to 100 valid characters for Name.", getDriver().findElement(currency_name_error_message_xpath).getText());
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(currency_name_error_message_xpath).getText());
     }
 
     public void verifyErrorMessageForCurrUnit() {
-        assertEquals("Enter up to 100 valid characters for Unit.", getDriver().findElement(currency_unit_error_message_xpath).getText());
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(currency_unit_error_message_xpath).getText());
     }
 
     public void verifyErrorMessageForCurrQuantity() {
-        assertEquals("Enter a numeric value up to 10,000 for Quantity.", getDriver().findElement(currency_quantity_error_message_xpath).getText());
+        assertEquals("Enter a numeric value up to 10,000.", getDriver().findElement(currency_quantity_error_message_xpath).getText());
     }
 
     public void verifyErrorMessageForRequiredField() {

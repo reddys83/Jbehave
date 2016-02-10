@@ -60,8 +60,6 @@ And the user should see the Ownership Type of a legal entity as Corporate Bank
 And the user should see the Lead Institution of a legal entity as False
 And the user should see the Add Info of a legal entity as Ultimate Parent Company: The Bank of Nova Scotia 1709 Hollis Street, Halifax, NS B3J 3B7, Canada
 And the user should see the Country of Operations of a legal entity as Norway
-And the user should see the Head Office of a legal entity as Dronning Eufemias gate 30Oslo, Oslo, 0191Norway(View Head Office)
-
 And the user should see the legal entity corporate statement as Ultimate Parent Company: The Bank of Nova Scotia 1709 Hollis Street, Halifax, NS B3J 3B7, Canada
 
 Examples:
@@ -96,7 +94,7 @@ When the user clicks on the search results card with fid <fid>
 
 Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
 And the user should see the basic info for selected legal entity
-And the user should see the Head Office of a legal entity as Budapester Strasse 3510787Berlin, Germany(View Head Office)
+And the user should see the Head Office of a legal entity as Budapester Strasse 3510787, BerlinGermany(View Head Office)
 
 When the user clicks on the view head office <viewHeadOffice> link for the selected legal entity
 Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <officeTfpid>
@@ -199,7 +197,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-Then the user should see the Head Office of a legal entity as Gp Building, No.30, Kamala Iind Street, Chinna Chokkikulam625002(View Head Office)
+Then the user should see the Head Office of a legal entity as Gp Building, No.30, Kamala Iind Street, Chinna Chokkikulam(View Head Office)
 
 Examples:
 |entity|searchBy|fid|
