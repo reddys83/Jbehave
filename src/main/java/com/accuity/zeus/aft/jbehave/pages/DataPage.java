@@ -50,6 +50,7 @@ public class DataPage extends AbstractPage {
     private By legalEntity_basic_info_link_id = By.id("legalEntityBasicInfo");
     private By currency_update_button_id = By.id("update-button");
 
+
     private By identifiers_label_xpath = By.xpath("//*[@id='content']//h2[text()='Identifiers']");
     private By identifiers_type_label_xpath = By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//th[1]");
     private By identifiers_value_label_xpath = By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//th[2]");
@@ -1100,4 +1101,6 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
     }
+
+
 }

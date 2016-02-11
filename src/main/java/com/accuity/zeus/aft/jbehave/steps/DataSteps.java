@@ -887,4 +887,6 @@ public class DataSteps extends AbstractSteps {
         selectedCurrency = currency;
         setCurrencyPage(getDataPage().selectCurrencyFromTypeAhead(currency));
     }
+
+
 }
