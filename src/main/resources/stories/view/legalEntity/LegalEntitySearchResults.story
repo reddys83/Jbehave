@@ -27,8 +27,8 @@ When the user searches for <entity> with <field> equals <value>
 
 Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
-|1124|10383720|Bank of Montreal|129 Rue St-Jacques, H2Y 1L6|active|
-|312461|10077880|Bank of Montreal|FOUR EMBARCADERO CENTER, 94111-5900|inactive|
+|1124|10383720|Bank of Montreal|129 Rue St-Jacques|active|
+|312461|10077880|Bank of Montreal|FOUR EMBARCADERO CENTER|inactive|
 
 Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results
@@ -43,7 +43,7 @@ When the user searches for <entity> with <field> equals <value>
 
 Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
-|4123|10055000|Société Générale|BP 208, 09, 29 boulevard Hausmann, 75009|active|
+|4123|10055000|Société Générale|BP 208, 09, 29 boulevard Hausmann|active|
 
 Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results
@@ -58,7 +58,7 @@ When the user searches for <entity> with <field> equals <value>
 
 Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
-|12253||Bank at Ormond by the Sea|1400 Ocean Shore Boulevard, 32174|inactive|
+|12253||Bank at Ormond by the Sea|1400 Ocean Shore Boulevard|inactive|
 
 Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results
@@ -73,7 +73,7 @@ When the user searches for <entity> with <field> equals <value>
 
 Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
-|1038|10077420|Bank of America National Association|100 N Tryon St, Ste 170, 28202|active|
+|1038|10077420|Bank of America National Association|100 N Tryon St, Ste 170|active|
 
 Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results
@@ -155,7 +155,7 @@ When the user searches for <entity> with <field> equals <value>
 
 Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
-|1||AB Banka as|Gp Building, No.30, Kamala Iind Street, Chinna Chokkikulam, 625002|inactive|
+|1||AB Banka as|Gp Building, No.30, Kamala Iind Street, Chinna Chokkikulam|inactive|
 
 Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results

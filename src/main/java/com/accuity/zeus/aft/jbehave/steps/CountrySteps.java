@@ -427,7 +427,22 @@ public class CountrySteps extends AbstractSteps{
     }
 
     @When("the user clicks on the delete holiday row button in the basic info country page")
-    public void clickOnDeleteHolidayRowButton(){
+    public void clickOnDeleteHolidayRowButton() {
         getCountryPage().clickOnDeleteNewRowButton();
+    }
+
+    @When("the user clicks on language option")
+    public void clickOnLanguageLink(){
+        getCountryPage().clickOnLanguageLink();
+    }
+
+    @When ("the user enters country languages as <countryLanguages> in the country language country page")
+    public void enterLanguageSummary(@Named("summary")String summary){
+        getCountryPage().enterSummaryLanguage(summary);
+    }
+
+    @Then("the user should see the error message enter upto 100 valid characters for the country language in the country page")
+    public void verifyErrorMsgForCountryLanguage(){
+        getCountryPage().verifyErrorMsgForCountryLanguage();
     }
 }

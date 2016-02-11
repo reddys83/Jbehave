@@ -6,6 +6,7 @@ I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-708 - User can edit country names
 JIRA ID - ZEUS-712 - User can edit country timezones
+JIRA ID - ZEUS-445 - Edit Language Summary for country
 
 Scenario: Verify country names type from lookup COUNTRY_NAME_TYPE
 Given a user is on the search page
@@ -126,3 +127,20 @@ Then the user should not see the newly added time zone row in the basic info cou
 Examples:
 |country|
 |Albania|
+
+Scenario:Error message displayed when tryiing to edit Language summary
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user clicks on language option
+And the user enters country languages as <countryLanguages> in the country language country page
+When the user clicks on the save button
+Then the user should see the error message enter upto 100 valid characters for the country language in the country page
+Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|country|countryLanguages|
+|Albania|abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde1|

@@ -26,8 +26,6 @@ public class CurrencyPage extends AbstractPage {
     private By currency_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li");
     private By currency_country_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private By currency_country_list_edit_xpath = By.xpath("//fieldset//select[@name='country']/option");
-    private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
-    private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
     private By currency_iso_code_label_id = By.id("iso");
     private By currency_iso_code_id = By.id("iso-value");
     private By currency_name_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[1]");
@@ -100,15 +98,6 @@ public class CurrencyPage extends AbstractPage {
         return null;
     }
 
-    public void clickOnChooseACurrencyOption() {
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        getDriver().findElement(choose_currency_option_xpath).click();
-    }
-
     public void verifyCurrencyList(Database database, ApacheHttpClient apacheHttpClient) {
         assertEquals(getDriver().findElement(labels_xpath).getText(), "CURRENCY");
         List<WebElement> currencyList = getDriver().findElements(currency_country_list_xpath);
@@ -116,16 +105,6 @@ public class CurrencyPage extends AbstractPage {
         for (int i = 0; i < document.getElementsByTagName("name").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), currencyList.get(i).getText());
         }
-    }
-
-    public void enterCurrency(String curr) {
-        currencySearchString = curr;
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        getDriver().findElement(currency_input_xpath).sendKeys(curr);
     }
 
     public void verifyCurrencyDropDownMatchesSearchString() {
@@ -144,17 +123,6 @@ public class CurrencyPage extends AbstractPage {
 
     public void verifyNoResultsMatchOption() {
         assertEquals("No results match \"" + currencySearchString + "\"", getDriver().findElement(no_results_match_xpath).getText());
-    }
-
-    public void selectCurrencyFromTypeAhead(String currency) {
-
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        getDriver().findElement(currency_input_xpath).sendKeys(currency);
-        getDriver().findElement(currency_input_xpath).sendKeys(Keys.RETURN);
     }
 
     public void verifyCurrencyIsoCode(String isoCode) {
@@ -582,19 +550,19 @@ public class CurrencyPage extends AbstractPage {
     }
 
     public void verifyErrorMessageForCurrAbbr() {
-        assertEquals("Enter up to 30 valid characters for Abbreviation.", getDriver().findElement(currency_abbr_error_message_xpath).getText());
+        assertEquals("Enter up to 30 valid characters.", getDriver().findElement(currency_abbr_error_message_xpath).getText());
     }
 
     public void verifyErrorMessageForCurrName() {
-        assertEquals("Enter up to 100 valid characters for Name.", getDriver().findElement(currency_name_error_message_xpath).getText());
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(currency_name_error_message_xpath).getText());
     }
 
     public void verifyErrorMessageForCurrUnit() {
-        assertEquals("Enter up to 100 valid characters for Unit.", getDriver().findElement(currency_unit_error_message_xpath).getText());
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(currency_unit_error_message_xpath).getText());
     }
 
     public void verifyErrorMessageForCurrQuantity() {
-        assertEquals("Enter a numeric value up to 10,000 for Quantity.", getDriver().findElement(currency_quantity_error_message_xpath).getText());
+        assertEquals("Enter a numeric value up to 10,000.", getDriver().findElement(currency_quantity_error_message_xpath).getText());
     }
 
     public void verifyErrorMessageForRequiredField() {

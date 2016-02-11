@@ -4,6 +4,8 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.rest.RestClient;
+import org.jbehave.core.annotations.Named;
+import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -86,6 +88,7 @@ public class CountryPage extends AbstractPage {
     private By country_holiday_description_err_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='holidayNameError']");
     private By country_holiday_notes_err_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='holidayNoteError']");
     private By country_new_holiday_row_xpath = By.xpath("//*[@id='additionalHolidays']/tr");
+    private By country_language_err_msg_xpath = By.xpath("//*[@class='notification error'][data-error_id='languagesError']");
 
     private By country_payments_link_id = By.id("countryPayments");
     private By country_payments_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//span");
@@ -121,6 +124,10 @@ public class CountryPage extends AbstractPage {
     private By country_edit_names_type_list_xpath = By.xpath("//*[@id='additionalNames']/tr/td[1]/select");
     private By country_name_type_list_xpath = By.xpath("//*[@data-row_id='nameRow']/tbody/tr/td/select/option");
     private By country_add_new_name_button_id = By.id("add-names");
+    private By country_dropdown_is_visible_xpath = By.xpath("//*[@id='selection0']//div[@class='chosen-container chosen-container-single']");
+    private By regions_label_xpath = By.xpath("//li[contains(h1,'Regions for')] //span");
+    private By country_language_link_id = By.id("countryLanguages");
+    private By language_summary_textarea_xpath = By.xpath("//*[@id='content']/div/ul/form/li/dl/dd/textarea");
 
     public CountryPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -546,8 +553,25 @@ public class CountryPage extends AbstractPage {
     public void verifyNoNewlyAddedHolidayRow() {
         try {
             assertFalse(getDriver().findElement(country_new_holiday_row_xpath).isDisplayed());
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
 
         }
+    }
+
+    public void clickOnLanguageLink() {
+        attemptClick(country_language_link_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void enterSummaryLanguage(String summary) {
+        getDriver().findElement(language_summary_textarea_xpath).sendKeys(summary);
+    }
+
+    public void verifyErrorMsgForCountryLanguage() {
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_language_err_msg_xpath));
     }
 }

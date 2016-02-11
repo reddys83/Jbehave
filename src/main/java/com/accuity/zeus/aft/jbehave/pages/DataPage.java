@@ -50,6 +50,7 @@ public class DataPage extends AbstractPage {
     private By legalEntity_basic_info_link_id = By.id("legalEntityBasicInfo");
     private By currency_update_button_id = By.id("update-button");
 
+
     private By identifiers_label_xpath = By.xpath("//*[@id='content']//h2[text()='Identifiers']");
     private By identifiers_type_label_xpath = By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//th[1]");
     private By identifiers_value_label_xpath = By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//th[2]");
@@ -192,8 +193,10 @@ public class DataPage extends AbstractPage {
     private By confirm_changes_heading_xpath = By.xpath("//*[@id='modal-region']/div/h1");
     private By country_tab_xpath=By.xpath("//*[@id='data-navbar']/ul/li[2]");
     private By cancel_no_button_id = By.id("cancel-button");
-
+    private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private Response response;
+    private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
+    private String currencySearchString = null;
 
     static ResponseEntity responseEntity;
 
@@ -210,6 +213,38 @@ public class DataPage extends AbstractPage {
     public CurrencyPage clickOnCurrencyTab() {
         attemptClick(currency_tab_xpath);
         return new CurrencyPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+    }
+
+    public CurrencyPage selectCurrencyFromTypeAhead(String currency) {
+
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getDriver().findElement(currency_input_xpath).sendKeys(currency);
+        getDriver().findElement(currency_input_xpath).sendKeys(Keys.RETURN);
+        return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
+    }
+
+    public CurrencyPage enterCurrency(String curr) {
+        currencySearchString = curr;
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getDriver().findElement(currency_input_xpath).sendKeys(curr);
+        return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
+    }
+
+    public void clickOnChooseACurrencyOption() {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getDriver().findElement(choose_currency_option_xpath).click();
     }
 
     public void clickOnCountryTab() {
@@ -1066,4 +1101,6 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
     }
+
+
 }

@@ -20,22 +20,17 @@ public class CurrencySteps extends AbstractSteps{
 
     @When("the user clicks on the currency tab in the data area")
     public void clickOnCurrencyTab() {
-        setCurrencyPage(getDataPage().clickOnCurrencyTab());
+        getDataPage().clickOnCurrencyTab();
     }
 
     @When("the user clicks on the choose a currency option")
     public void clickOnChooseACurrencyOption() {
-        getCurrencyPage().clickOnChooseACurrencyOption();
+        getDataPage().clickOnChooseACurrencyOption();
     }
 
     @Then("the user should see the list of all existing currencies by full name")
     public void verifyCurrencyList() {
         getCurrencyPage().verifyCurrencyList(database, apacheHttpClient);
-    }
-
-    @When("the user starts typing the name of a currency as $curr in the currency input box")
-    public void enterCurrency(@Named("curr") String curr) {
-        getCurrencyPage().enterCurrency(curr);
     }
 
     @Then("the user should see the drop-down list of the currencies matching the input characters")
@@ -51,12 +46,6 @@ public class CurrencySteps extends AbstractSteps{
     @Then("the user should see the option no results match for the searched currency string")
     public void thenTheUSerShouldNoResultsMatchOption() {
         getCurrencyPage().verifyNoResultsMatchOption();
-    }
-
-    @When("the user enters the currency <currency> in the typeahead box")
-    public void selectCurrencyFromTypeAhead(@Named("currency") String currency) {
-        selectedCurrency = currency;
-        getCurrencyPage().selectCurrencyFromTypeAhead(currency);
     }
 
     @Then("the user should see the currency iso code value as <isoCode>")
