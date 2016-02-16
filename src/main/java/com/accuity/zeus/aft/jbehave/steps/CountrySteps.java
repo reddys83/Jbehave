@@ -19,6 +19,8 @@ public class CountrySteps extends AbstractSteps{
     @Autowired
     Database database;
 
+    private String selectedCountry;
+
     @Then("the user should see the country type-ahead displayed")
     public void verifyCountryTypeAheadAndListBox() {
         getCountryPage().verifyCountryTypeAheadAndListBox();
@@ -49,11 +51,133 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyCountryIso2(iso2);
     }
 
+    @Then("the country ISO2 should not be editable")
+    public void verifyISO2NotEditable() {
+        getCountryPage().verifyISO2NotEditable();
+    }
+
+    @Then("the country ISO3 should not be editable")
+    public void verifyISO3NotEditable() {
+        getCountryPage().verifyISO3NotEditable();
+    }
+
     @Then("the user should see the country iso3 as $iso3")
     public void verifyCountryIso3(@Named("iso3") String iso3) {
         getCountryPage().verifyCountryIso3(iso3);
     }
 
+    @Then("the user should see the edits to country basic info from trusted dcoument")
+    public void verifyEditCountryBasicInfoFromTrusted(){
+        getCountryPage().verifyEditCountryBasicInfoFromTrusted();
+    }
+
+    @When("the user clicks on replaced by drop down")
+    public void clicksOnReplacedByDropdown() {
+        getCountryPage().clicksOnReplacedByDropdown();
+    }
+
+    @Then("the user should see the list of all active countries except the country the user is currently editing")
+    public void verifyReplacedByDropdownList() {
+        getCountryPage().verifyReplacedByDropdownList();
+    }
+
+    @When("the user enters start date later than today")
+    public void entersCountryBasicInfoStartDate() {
+        getCountryPage().entersCountryBasicInfoStartDate();
+    }
+
+    @When("the user enters more than 500 characters in the country add info")
+    public void enterInvalidCharactersInCountryAddInfo() {
+        getCountryPage().enterInvalidCharactersInCountryAddInfo();
+    }
+
+    @When("the user enters country start year as <countryStartYear>")
+    public void enterCountryStartYear(@Named("countryStartYear") String countryStartYear) {
+        getCountryPage().enterCountryStartYear(countryStartYear);
+    }
+
+    @When("the user enters country end year as <countryEndYear>")
+    public void enterCountryEndYear(@Named("countryEndYear") String countryEndYear) {
+        getCountryPage().enterCountryEndYear(countryEndYear);
+    }
+
+    @When("the user selects replaced by country from the drop down as <countryReplacedBy>")
+    public void enterCountryReplacedBy(@Named("countryReplacedBy") String countryReplacedBy) {
+        getCountryPage().enterCountryReplacedBy(countryReplacedBy);
+    }
+    @When("the user enters country add info as <countryAddInfo>")
+    public void enterCountryAddInfo(@Named("countryAddInfo") String countryAddInfo) {
+        getCountryPage().enterCountryAddInfo(countryAddInfo);
+    }
+    @When("the user enters country imports as <countryImports>")
+    public void enterCountryImports(@Named("countryImports") String countryImports){
+        getCountryPage().enterCountryImports(countryImports);
+    }
+
+    @When("the user enters country exports as <countryExports>")
+    public void enterCountryExports(@Named("countryExports") String countryExports) {
+        getCountryPage().enterCountryExports(countryExports);
+    }
+    @When("the user enters country political structure as <countryPoliticalStructure>")
+    public void enterCountryPoliticalStructure(@Named("countryPoliticalStructure") String countryPoliticalStructure) {
+        getCountryPage().enterCountryPoliticalStructure(countryPoliticalStructure);
+    }
+    @When("the user enters country intl dialing code as <countryIntlDialingCode>")
+    public void enterCountryIntlDialingCode(@Named("countryIntlDialingCode") String countryIntlDialingCode) {
+        getCountryPage().enterCountryIntlDialingCode(countryIntlDialingCode);
+    }
+
+    @When("the user enters more than 200 characters in the country exports")
+    public void enterInvalidCharactersInCountryExports(){
+        getCountryPage().enterInvalidCharactersInCountryExports();
+    }
+
+    @When("the user enters more than 200 characters in the country political structure")
+    public void enterInvalidCharactersInCountryPoliticalStructure() {
+        getCountryPage().enterInvalidCharactersInCountryPoliticalStructure();
+    }
+
+    @When("the user enters more than 5 characters inthe country intl dialing code")
+    public void enterInvalidCharactersInCountryIntlDialingCode() {
+        getCountryPage().enterInvalidCharactersInCountryIntlDialingCode();
+    }
+
+    @Then("the user should see the error message enter uptp 500 valid charecters for addinfo")
+    public void verifyErrorMessageForAddInfo(){
+        getCountryPage().verifyErrorMessageForAddInfo();
+    }
+    @Then("the user should see the error message enter upto 200 valid charecters for imports")
+    public void verifyErrorMessageForImports() {
+        getCountryPage().verifyErrorMessageForImports();
+    }
+    @Then("the user should see the error message enter upto 200 valid charecters for exports")
+    public void verifyErrorMessageForExports() {
+        getCountryPage().verifyErrorMessageForExports();
+    }
+    @Then("the user should see the error message enter upto 200 valid charecters for political structure")
+    public void verifyErrorMessageForPoliticalStructure() {
+        getCountryPage().verifyErrorMessageForPoliticalStructure();
+    }
+    @Then("the user should see the error message enter upto 5 valid charectes for intl dialing code")
+   public void verifyErrorMessageForIntlDialingCode() {
+        getCountryPage().verifyErrorMessageForIntlDialingCode();
+    }
+
+    @When("the user enters end date later than today")
+    public void entersCountryBasicInfoEndDate() {
+        getCountryPage().entersCountryBasicInfoEndDate();
+    }
+
+    @When("the user enters more than 200 characters in the country imports")
+    public void enterInvalidCharactersInCountryImports()
+    {
+        getCountryPage().enterInvalidCharactersInCountryImports();
+    }
+
+    @When("the user enters an another country $anotherCountry in the type-ahead box")
+    public void enterAnotherCountryName(@Named("anotherCountry") String anotherCountry) {
+        getDataPage().enterCountryInTheTypeAheadBox(anotherCountry);
+    }
 
     @Then("the user should see the basic info for the selected country")
     public void verifyCountryBasicInfo() {
@@ -293,7 +417,7 @@ public class CountrySteps extends AbstractSteps{
 
     @When("Identifier Status is active by default")
     public void assertIdentifierStatus(){
-        getCountryPage().verifyIdentifierStatus("active");
+        getCountryPage().verifyIdentifierStatus();
     }
 
     @When("the user enters country name as <countryName> in the basic info country page")

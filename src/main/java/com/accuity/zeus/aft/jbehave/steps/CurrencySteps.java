@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -25,12 +26,17 @@ public class CurrencySteps extends AbstractSteps{
 
     @When("the user clicks on the choose a currency option")
     public void clickOnChooseACurrencyOption() {
-        getDataPage().clickOnChooseACurrencyOption();
+        setCurrencyPage(getDataPage().clickOnChooseACurrencyOption());
     }
 
     @Then("the user should see the list of all existing currencies by full name")
     public void verifyCurrencyList() {
         getCurrencyPage().verifyCurrencyList(database, apacheHttpClient);
+    }
+
+    @When("the user starts typing the name of a currency as $curr in the currency input box")
+    public void enterCurrency(@Named("curr") String curr) {
+        getCurrencyPage().enterCurrency(curr);
     }
 
     @Then("the user should see the drop-down list of the currencies matching the input characters")
@@ -78,7 +84,7 @@ public class CurrencySteps extends AbstractSteps{
 
     @Then("the user should see the edit currency details from trusted document")
     public void verifyEditCurrencyDetailsFromTrusted() {
-        getCurrencyPage().verifyEditCurrencyDetailsFromTrusted(database, apacheHttpClient, selectedCurrency);
+        getCurrencyPage().verifyEditCurrencyDetailsFromTrusted(selectedCurrency);
     }
 
     @Then("the user should see the view currency details from trusted document")
@@ -159,11 +165,6 @@ public class CurrencySteps extends AbstractSteps{
     @When("the user enters the currency quantity value as <quantity>")
     public void enterCurrencyQuantity(@Named("quantity") String quantity) {
         getCurrencyPage().enterCurrencyQuantity(quantity);
-    }
-
-    @Then("the user should see the currency selection disabled")
-    public void verifyCurrencySelectionDisabled() {
-        getCurrencyPage().verifyCurrencySelectionDisabled();
     }
 
     @Then("the user should see the currency page for clicked iso name")
@@ -324,5 +325,11 @@ public class CurrencySteps extends AbstractSteps{
     @Then("the user should see the error $startDateErrorMsg for end date")
     public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg) {
         getCurrencyPage().verifyEndDateErrorMessage(endDateErrorMsg);
+    }
+
+    @When("the user enters the currency <currency> in the typeahead box")
+    public void selectCurrencyFromTypeAhead(@Named("currency") String currency) {
+        selectedCurrency = currency;
+        getCurrencyPage().selectCurrencyFromTypeAhead(currency);
     }
 }

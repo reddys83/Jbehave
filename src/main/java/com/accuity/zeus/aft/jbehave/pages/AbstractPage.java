@@ -26,13 +26,13 @@ public abstract class AbstractPage {
 
     private String urlPrefix;
 
-    protected Database database;
+    protected final Database database;
 
-    protected ApacheHttpClient apacheHttpClient;
+    protected final ApacheHttpClient apacheHttpClient;
 
-    protected HeraApi heraApi;
+    protected final HeraApi heraApi;
 
-    protected RestClient restClient;
+    protected final RestClient restClient;
 
 
     protected By contentLocator = By.xpath("//body/div[@id='content']");
