@@ -38,6 +38,11 @@ public class DataSteps extends AbstractSteps {
         setLegalEntityPage(getDataPage().clickOnLegalEntityTab());
     }
 
+    @When("the user enters the country <country> in the type-ahead box")
+    public void enterCountryInTheTypeAheadBox(@Named("country") String country) {
+        setCountryPage(getDataPage().enterCountryInTheTypeAheadBox(country));
+    }
+
     @When("the user clicks on the choose a country option")
     public void clickOnCountryListBox() throws InterruptedException {
         getDataPage().clickOnCountryListBox();
@@ -53,14 +58,10 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCancelYesButton();
     }
 
-    @When("the user enters the country <country> in the type-ahead box")
-    public void enterCountryInTheTypeAheadBox(@Named("country") String country) {
-        setCountryPage(getDataPage().enterCountryInTheTypeAheadBox(country));
-    }
-
-    @When("the user enters an another country $anotherCountry in the type-ahead box")
-    public void enterCountryName(@Named("anotherCountry") String anotherCountry) {
-        getDataPage().enterCountryInTheTypeAheadBox(anotherCountry);
+    @Then("the user should see the currency selection disabled")
+    @Alias("the user should see the country selection disabled")
+    public void verifyCurrencySelectionDisabled() {
+        getDataPage().verifyCurrencySelectionDisabled();
     }
 
     @When("the user enters the area <area> in the type-ahead box")
@@ -209,6 +210,10 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyBasicInfo(label, value);
     }
 
+    @Then("the country status should not be editable")
+    public void verifyStatusNotEditable() {
+        getDataPage().verifyStatusNotEditable();
+    }
 
     @Then("the user should see the country's alternative regions as: $countryRegions")
     public void verifyCountryRegions(ExamplesTable countryRegions) {
@@ -805,6 +810,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnSaveButton();
     }
 
+    @Then("the user should see the error $startDateErrorMsg for start date")
+    public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg) {
+        getDataPage().verifyStartDateErrorMessage(startDateErrorMsg);
+    }
+    @Then("the user should see the error $startDateErrorMsg for end date")
+    public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg) {
+        getDataPage().verifyEndDateErrorMessage(endDateErrorMsg);
+    }
     @Then("the user should see the save confirmation modal")
     public void verifySaveConfirmationModal() {
         getDataPage().verifySaveConfirmationModal();

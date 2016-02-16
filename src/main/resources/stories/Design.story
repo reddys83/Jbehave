@@ -1,22 +1,25 @@
 Meta:@Design
 
-Scenario: Verify delete confirmation modal
+Scenario: Save updates tp existing currency use
+1. @accuracy = year
+2. @accuracy = month
+3. @accuracy = day
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
-And the user clicks on the country tab in the data area
-When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option
+And the user enters the currency <currency> in the typeahead box
 And the user clicks on the update link
-And the user clicks on the add new time zone button in the basic info country page
-And the user clicks on the select time zone list in the basic info country page
-When the user clicks on the delete time zone row button in the basic info country page
-Then the user should see the delete row confirmation modal in the country page
-When the user clicks on the no button in the delete row confirmation modal in the country page
-Then the user should see the newly added time zone row in the basic info country page
-When the user clicks on the delete name row button in the basic info country page
-When the user clicks on the yes button in the delete row confirmation modal in the country page
-Then the user should not see the newly added time zone row in the basic info country page
+When the user enters the currency start day as <currencyStartDay>
+And the user enters the currency start month as <currencyStartMonth>
+And the user enters the currency start year as <currencyStartYear>
+And the user clicks on the save button
+And the user clicks on the confirm button
+Then the user should see the view currency use from trusted document
+And the user reverts the changes to the currency
 
 Examples:
-|country|
-|Albania|
+|currency|currencyStartDay|currencyStartMonth|currencyStartYear|
+|Bahrain Dinar|||1990|
+|Baht|||1990|

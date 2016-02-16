@@ -419,6 +419,7 @@ Scenario: ZEUS-286 - User can save edits to the currency uses and verify the dat
 1. @accuracy = year
 2. @accuracy = month
 3. @accuracy = day
+Meta:@ASDFADFADWDWED
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
