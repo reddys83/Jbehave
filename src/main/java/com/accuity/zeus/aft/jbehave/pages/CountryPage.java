@@ -7,11 +7,10 @@ import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.jbehave.core.annotations.Named;
+import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.w3c.dom.Document;
 
 import java.util.ArrayList;
@@ -62,11 +61,36 @@ public class CountryPage extends AbstractPage {
     private By country_holiday_label_xpath = By.xpath("//li[contains(h1,'Holidays for')]//span");
     private By country_languages_label_xpath = By.xpath("//*[@id='content']/div/ul/li/dl/dt");
     private By country_languages_value_xpath = By.xpath("//*[@id='content']/div/ul/li/dl/dd");
-
+    private By country_country_name_input_xpath = By.xpath("//tr[td = 'Country Name']/td[2]/input");
     private By country_holiday_table_header_xpath = By.xpath("//li[contains(h1,'Holidays for')]//thead");
     private By country_holiday_date_xpath = By.xpath("//li[contains(h1,'Holidays for')]//tr/td[1]");
     private By country_holiday_description_xpath = By.xpath("//li[contains(h1,'Holidays for')]//tr/td[2]");
     private By country_holiday_notes_xpath = By.xpath("//li[contains(h1,'Holidays for')]//tr/td[3]");
+    private By country_name_value_required_err_msg_xpath = By.xpath("//tr[td = 'Country Name']/td[2]/p");
+    private By country_names_type_required_err_msg_xpath = By.xpath("//*[@id='additionalNames']/tr/td[1]/p");
+    private By country_names_value_required_err_msg_xpath = By.xpath("//*[@id='additionalNames']/tr/td[2]/p");
+    private By country_delete_new_row_button_xpath = By.xpath("//*[@class='delete-row']");
+    private By country_delete_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
+    private By country_delete_no_button_id = By.id("no-button");
+    private By country_delete_yes_button_id = By.id("yes-button");
+    private By country_additional_name_row_id = By.xpath("//*[@id='additionalNames']/tr");
+    private By country_time_zone_summary_err_msg_xpath = By.xpath("//*[@data-error_id='timeZonesSummaryError']");
+    private By country_time_zone_summary_input_xpath = By.xpath("//*[@data-edit_id='timeZonesSummary']");
+    private By country_add_new_time_zone_button_id = By.id("add-timeZones");
+    private By country_time_zone_list_box_xpath = By.xpath("//*[@data-row_id='timeZoneRow']/td/select");
+    private By country_time_zone_list_xpath = By.xpath("//*[@data-row_id='timeZoneRow']/td/select/option");
+    private By country_additional_time_zone_row_id = By.xpath("//*[@id='additionalTimeZones']/tr");
+    private By country_add_new_holiday_button_id = By.id("add-holidays");
+    private By country_holiday_day_xpath = By.xpath("//*[@data-row_id='holidayRow']//tr[1]/td/fieldset/input[1]");
+    private By country_holiday_month_xpath = By.xpath("//*[@data-row_id='holidayRow']//tr[1]/td/fieldset/select");
+    private By country_holiday_year_xpath = By.xpath("//*[@data-row_id='holidayRow']//tr[1]/td/fieldset/input[2]");
+    private By country_holiday_date_error_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='holidayDateError']");
+    private By country_holiday_description_box_xpath = By.xpath("//*[@data-row_id='holidayRow']//tr[1]/td[2]/input");
+    private By country_holiday_note_box_xpath = By.xpath("//*[@data-row_id='holidayRow']//tr[1]/td[3]/input");
+    private By country_holiday_description_err_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='holidayNameError']");
+    private By country_holiday_notes_err_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='holidayNoteError']");
+    private By country_new_holiday_row_xpath = By.xpath("//*[@id='additionalHolidays']/tr");
+    private By country_language_err_msg_xpath = By.xpath("//*[@class='notification error'][data-error_id='languagesError']");
 
     private By country_payments_link_id = By.id("countryPayments");
     private By country_payments_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//span");
@@ -99,8 +123,13 @@ public class CountryPage extends AbstractPage {
     private By currency_country_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private String selectedCountry ="";
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
+    private By country_edit_names_type_list_xpath = By.xpath("//*[@id='additionalNames']/tr/td[1]/select");
+    private By country_name_type_list_xpath = By.xpath("//*[@data-row_id='nameRow']/tbody/tr/td/select/option");
+    private By country_add_new_name_button_id = By.id("add-names");
     private By country_dropdown_is_visible_xpath = By.xpath("//*[@id='selection0']//div[@class='chosen-container chosen-container-single']");
     private By regions_label_xpath = By.xpath("//li[contains(h1,'Regions for')] //span");
+    private By country_language_link_id = By.id("countryLanguages");
+    private By language_summary_textarea_xpath = By.xpath("//*[@id='content']/div/ul/form/li/dl/dd/textarea");
 
     private String basic_info_label_value_xpath = ".//*[@id='content']//table[@class='vertical']/tbody/tr[th='";
 
@@ -579,5 +608,178 @@ public class CountryPage extends AbstractPage {
 
     public void clickOnCountryCurrenciesLink() {
         attemptClick(country_currencies_link_id);
+    }
+
+    public void clickOnCountryNameType() {
+        attemptClick(country_edit_names_type_list_xpath);
+    }
+
+    public void verifyCountryNameTypesList(Database database, ApacheHttpClient apacheHttpClient) {
+        List<WebElement> countryNameTypesList = getDriver().findElements(country_name_type_list_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country names type");
+        for (int i = 1; i < document.getElementsByTagName("type").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), countryNameTypesList.get(i).getText());
+        }
+    }
+
+    public void clickOnAddNewNameButton() {
+        attemptClick(country_add_new_name_button_id);
+    }
+
+    public void enterCountryName(String countryName) {
+        getDriver().findElement(country_country_name_input_xpath).clear();
+        getDriver().findElement(country_country_name_input_xpath).sendKeys(countryName);
+    }
+
+    public void verifyErrorMessageForCountryName() {
+        assertEquals("Required", getDriver().findElement(country_name_value_required_err_msg_xpath).getText());
+    }
+
+    public void verifyErrorMessageForRequiredNameType() {
+        assertEquals("Required", getDriver().findElement(country_names_type_required_err_msg_xpath).getText());
+    }
+
+    public void verifyErrorMessageForRequiredValueType() {
+        assertEquals("Required", getDriver().findElement(country_names_value_required_err_msg_xpath).getText());
+    }
+
+    public void clickOnDeleteNewRowButton() {
+        attemptClick(country_delete_new_row_button_xpath);
+    }
+
+    public void verifyDeleteConfirmationModal() {
+        assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(country_delete_confirmation_modal_xpath).getText());
+    }
+
+    public void clickOnNoButtonInDeleteConfirmationModal() {
+        attemptClick(country_delete_no_button_id);
+    }
+
+    public void clickOnYesButtonInDeleteConfirmationModal() {
+        attemptClick(country_delete_yes_button_id);
+    }
+
+    public void verifyNewlyAddedNameRowIsDisplayed() {
+        assertTrue(getDriver().findElement(country_additional_name_row_id).isDisplayed());
+    }
+
+    public void verifyNewlyAddedNameRowIsNotDisplayed() {
+        try {
+            assertFalse(getDriver().findElement(country_additional_name_row_id).isDisplayed());
+        } catch (NoSuchElementException e){}
+    }
+
+    public void verifyCountryNameValueErrMsg() {
+        assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_name_value_required_err_msg_xpath).getText());
+    }
+
+    public void verifyErrorMessageForTimeZoneSummary() {
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_time_zone_summary_err_msg_xpath).getText());
+    }
+
+    public void enterTimeZoneSummary(String timeZoneSummary) {
+        getDriver().findElement(country_time_zone_summary_input_xpath).clear();
+        getDriver().findElement(country_time_zone_summary_input_xpath).sendKeys(timeZoneSummary);
+    }
+
+    public void clickOnAddNewTimeZone() {
+        attemptClick(country_add_new_time_zone_button_id);
+    }
+
+    public void clickOnSelectTimeZone() {
+        attemptClick(country_time_zone_list_box_xpath);
+    }
+
+    public void verifyCountryTimeZoneSummary() {
+        List<WebElement> countryTimeZonesList = getDriver().findElements(country_time_zone_list_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country time zones");
+        for (int i = 1; i < document.getElementsByTagName("timeZone").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), countryTimeZonesList.get(i).getText());
+        }
+    }
+
+    public void verifyNewlyAddedTimeZoneRowIsDisplayed() {
+        assertTrue(getDriver().findElement(country_additional_time_zone_row_id).isDisplayed());
+    }
+
+    public void verifyNewlyAddedTimeZoneRowIsNotDisplayed() {
+        try {
+            assertFalse(getDriver().findElement(country_additional_time_zone_row_id).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e){
+
+        }
+    }
+
+    public void enterCountryHolidayDay(String day) {
+        getDriver().findElement(country_holiday_day_xpath).clear();
+        getDriver().findElement(country_holiday_day_xpath).sendKeys(day);
+    }
+
+    public void enterCountryHolidayMonth(String month) {
+        selectItemFromDropdownListByText((country_holiday_month_xpath), month);
+    }
+
+    public void enterCountryHolidayYear(String year) {
+        getDriver().findElement(country_holiday_year_xpath).clear();
+        getDriver().findElement(country_holiday_year_xpath).sendKeys(year);
+    }
+
+    public void verifyErrorMsgForCountryHolidayDate() {
+        assertEquals("Enter a day/month/year.", getDriver().findElement(country_holiday_date_error_msg_xpath).getText());
+    }
+
+    public void clickOnAddNewCountryHolidayButton() {
+        attemptClick(country_add_new_holiday_button_id);
+    }
+
+    public void verifyErrorMsgRequiredForCountryHolidayDate() {
+        assertEquals("Required", getDriver().findElement(country_holiday_date_error_msg_xpath).getText());
+    }
+
+    public void enterCountryHolidayDescription(String description) {
+        getDriver().findElement(country_holiday_description_box_xpath).clear();
+        getDriver().findElement(country_holiday_description_box_xpath).sendKeys(description);
+    }
+
+    public void enterCountryHolidayNotes(String notes) {
+        getDriver().findElement(country_holiday_note_box_xpath).clear();
+        getDriver().findElement(country_holiday_note_box_xpath).sendKeys(notes);
+    }
+
+    public void verifyCountryHolidaysDescriptionErrMsg() {
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_holiday_description_err_msg_xpath));
+    }
+
+    public void verifyCountryHolidaysNotesErrMsg() {
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_holiday_notes_err_msg_xpath));
+    }
+
+    public void verifyNewlyAddedHolidayRow() {
+        assertTrue(getDriver().findElement(country_new_holiday_row_xpath).isDisplayed());
+    }
+
+    public void verifyNoNewlyAddedHolidayRow() {
+        try {
+            assertFalse(getDriver().findElement(country_new_holiday_row_xpath).isDisplayed());
+        } catch (NoSuchElementException e) {
+
+        }
+    }
+
+    public void clickOnLanguageLink() {
+        attemptClick(country_language_link_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void enterSummaryLanguage(String summary) {
+        getDriver().findElement(language_summary_textarea_xpath).sendKeys(summary);
+    }
+
+    public void verifyErrorMsgForCountryLanguage() {
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_language_err_msg_xpath));
     }
 }

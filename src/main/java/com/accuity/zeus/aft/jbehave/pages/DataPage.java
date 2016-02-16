@@ -27,7 +27,7 @@ public class DataPage extends AbstractPage {
     private By currency_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li");
 
     private By area_tab_id=By.id("area-nav");
-    private String clickedCurrencyIso="";
+    public static String clickedCurrencyIso="";
     private By legalEntity_tab_id = By.id("legalEntity-nav");
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By area_listBox_xpath = By.xpath("//*[@id='selection1'] //*[@id='entitySelect_chosen']//span");
@@ -43,6 +43,7 @@ public class DataPage extends AbstractPage {
 
     private By legalEntity_basic_info_link_id = By.id("legalEntityBasicInfo");
     private By currency_update_button_id = By.id("update-button");
+
 
     private By identifiers_label_xpath = By.xpath("//*[@id='content']//h2[text()='Identifiers']");
     private By identifiers_type_label_xpath = By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//th[1]");
@@ -189,8 +190,9 @@ public class DataPage extends AbstractPage {
     private By currency_country_selection_disabled_xpath =By.xpath(".//*[@id='entitySelect_chosen'][@class='chosen-container chosen-container-single chosen-disabled']");
     private By start_date_error_msg_xpath = By.xpath("//*[@data-error_id='startDateError']");
     private By end_date_error_msg_xpath = By.xpath("//*[@data-error_id='endDateError']");
-
+    private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private Response response;
+    private String currencySearchString = null;
 
     static ResponseEntity responseEntity;
 
@@ -206,7 +208,17 @@ public class DataPage extends AbstractPage {
 
     public CurrencyPage clickOnCurrencyTab() {
         attemptClick(currency_tab_xpath);
-        return new CurrencyPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+        return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
+    }
+
+    public CurrencyPage clickOnChooseACurrencyOption() {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getDriver().findElement(choose_currency_option_xpath).click();
+        return new CurrencyPage(getDriver(),getUrlPrefix(),getDatabase(),getApacheHttpClient(),getRestClient(),getHeraApi());
     }
 
     public void clickOnCountryTab() {
@@ -216,7 +228,7 @@ public class DataPage extends AbstractPage {
     public CountryPage clickOnCountryListBox() {
         waitForElementToAppear(country_dropdown_is_visible_xpath);
         attemptClick(country_listBox_xpath);
-        return new CountryPage(getDriver(),getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+        return new CountryPage(getDriver(),getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void clickOnAreaTab() {
@@ -246,7 +258,7 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return new CountryPage(getDriver(), getUrlPrefix(),database, apacheHttpClient ,restClient,heraApi);
+        return new CountryPage(getDriver(), getUrlPrefix(),getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void enterAreaInTypeAhead(String area) {

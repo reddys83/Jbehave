@@ -85,7 +85,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the basic info for selected area")
-    @Aliases(values={"the user should see the basic info for selected city",
+    @Aliases(values = {"the user should see the basic info for selected city",
             "the user should see the basic info for selected sub-area"})
     public void verifyAreaBasicInfo() {
         getDataPage().verifyBasicInfo();
@@ -97,22 +97,26 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the area's names as: $names")
-    @Aliases(values={"the user should see the legal entity's names as: $names",
+    @Aliases(values = {"the user should see the legal entity's names as: $names",
             "the user should see the sub-area's names as: $names"})
     public void verifyAreaNames(ExamplesTable names) {
         getDataPage().verifyNames(names);
     }
 
     @Then("the user should see the office's names as: $Names")
-    public void verifyOfficeNames(ExamplesTable Names) { getDataPage().verifyNames(Names);}
+    public void verifyOfficeNames(ExamplesTable Names) {
+        getDataPage().verifyNames(Names);
+    }
 
     @Then("the user should see the office sort key as $officeSortKey")
-    public void verifyOfficeSortKey(@Named("officeSortKey") String officeSortKey){
+    public void verifyOfficeSortKey(@Named("officeSortKey") String officeSortKey) {
         getDataPage().verifyOfficeSortKey(officeSortKey);
     }
 
     @Then("the user should see the office types: $Types")
-    public void verifyOfficeTypes(ExamplesTable Types) { getDataPage().verifyTypes(Types); }
+    public void verifyOfficeTypes(ExamplesTable Types) {
+        getDataPage().verifyTypes(Types);
+    }
 
     @When("the user clicks on the legalEntity basic info link in the navigation bar")
     public void clickOnLegalEntityBasicInfo() {
@@ -184,7 +188,7 @@ public class DataSteps extends AbstractSteps {
     public void verifyLegalEntityHeader(@Named("entity") String entity,
                                         @Named("headOfficeAddress") String headOfficeAddress,
                                         @Named("fid") String fid,
-                                        @Named("tfpid") String tfpid){
+                                        @Named("tfpid") String tfpid) {
         getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
@@ -192,12 +196,12 @@ public class DataSteps extends AbstractSteps {
     public void verifyOfficeHeader(@Named("entity") String entity,
                                    @Named("headOfficeAddress") String headOfficeAddress,
                                    @Named("officeFid") String fid,
-                                   @Named("officeTfpid") String tfpid){
+                                   @Named("officeTfpid") String tfpid) {
         getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
     @Then("the user should see the $label of a city as $value")
-    @Aliases(values={"the user should see the $label of an office as $value",
+    @Aliases(values = {"the user should see the $label of an office as $value",
             "the user should see the $label of an area as $value",
             "the user should see the $label of an sub-area as $value",
             "the user should see the $label of a legal entity as $value",
@@ -379,7 +383,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the statistics for the legal entity")
-    public void verifyLegalEntityStatisticsLabels(){
+    public void verifyLegalEntityStatisticsLabels() {
         getDataPage().verifyStatisticsLabels();
     }
 
@@ -536,13 +540,13 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the legal entity's credit ratings as: $creditRatings")
-    @Aliases(values={"the user should see the office's credit ratings as: $creditRatings"})
+    @Aliases(values = {"the user should see the office's credit ratings as: $creditRatings"})
     public void verifyCreditRatings(ExamplesTable creditRatings) {
         getDataPage().verifyCreditRatings(creditRatings);
     }
 
     @Then("the user should see the city's credit ratings as: $creditRatings")
-    @Aliases(values={"the user should see the area's credit ratings as: $creditRatings",
+    @Aliases(values = {"the user should see the area's credit ratings as: $creditRatings",
             "the user should see the country's credit ratings as: $creditRatings",
             "the user should see the sub-area's credit ratings as: $creditRatings"})
     public void verifyCreditRatingsGeo(ExamplesTable creditRatings) {
@@ -561,21 +565,21 @@ public class DataSteps extends AbstractSteps {
 
 
     @Then("the user should not see the legal entity's credit ratings")
-    @Aliases(values= {"the user should not see the office's credit ratings"})
-    public void verifyNoCreditRatings(){
+    @Aliases(values = {"the user should not see the office's credit ratings"})
+    public void verifyNoCreditRatings() {
         getDataPage().verifyNoCreditRatings();
     }
 
     @Then("the user should not see the city's credit ratings")
-    @Aliases(values= {"the user should not see the country's credit ratings",
+    @Aliases(values = {"the user should not see the country's credit ratings",
             "the user should not see the area's credit ratings",
             "the user should not see the sub-area's credit ratings"})
-    public void verifyNoCreditRatingsGeo(){
+    public void verifyNoCreditRatingsGeo() {
         getDataPage().verifyNoCreditRatingsGeo();
     }
 
     @When("the user enters the city <city> in the type-ahead box")
-    public void enterCityInTheTypeAheadBox(@Named("city") String city){
+    public void enterCityInTheTypeAheadBox(@Named("city") String city) {
         getDataPage().enterCityInTheTypeAheadBox(city);
     }
 
@@ -590,12 +594,12 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the city regions link in the navigation bar")
-    public void clickOnCityAlternativeRegions(){
+    public void clickOnCityAlternativeRegions() {
         getDataPage().clickOnCityRegionsInNavigationBar();
     }
 
     @Then("the user should see the city's alternative regions as: $citryRegions")
-    public void verifyCityRegions(ExamplesTable citryRegions){
+    public void verifyCityRegions(ExamplesTable citryRegions) {
         getDataPage().verifyRegions(citryRegions);
     }
 
@@ -645,12 +649,12 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should not see the area's entities")
-    public void verifyNoAreaEntities () {
+    public void verifyNoAreaEntities() {
         getDataPage().verifyNoEntities();
     }
 
     @Then("the user should not see the sub-area's entities")
-    public void verifyNoSubAreaEntities () {
+    public void verifyNoSubAreaEntities() {
         getDataPage().verifyNoEntities();
     }
 
@@ -680,19 +684,19 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the history for the legal entity")
     @Alias("the user should see the history for the office")
-    public void verifyHistoryLabel(){
+    public void verifyHistoryLabel() {
         getDataPage().verifyHistoryLabel();
     }
 
-    @Then ("the user should not see the legal entity's history")
-    @Alias ("the user should not see the office's history")
+    @Then("the user should not see the legal entity's history")
+    @Alias("the user should not see the office's history")
     public void verifyNoHistory() {
         getDataPage().verifyNoHistory();
     }
 
     @Then("the user should see the default legal entity page and display basic info")
     @Alias("the user should see the default office page and display basic info")
-    public void verifyDefaultSection(){
+    public void verifyDefaultSection() {
         getDataPage().verifyBasicInfo();
     }
 
@@ -722,12 +726,12 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the identifiers for the legal entity")
     @Alias("the user should see the identifiers for the office")
-    public void verifyLegalEntityOfficeIdentifiersLabels(){
+    public void verifyLegalEntityOfficeIdentifiersLabels() {
         getDataPage().verifyLegalEntityOfficeIdentifiersLabels();
     }
 
     @When("the user clicks on the area parent <areaParent> link for the selected area")
-    public void clickOnAreaParentLink(@Named("areaParent") String areaParent){
+    public void clickOnAreaParentLink(@Named("areaParent") String areaParent) {
         getDataPage().clickOnAreaParentLink(areaParent);
     }
 
@@ -742,12 +746,12 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the currency iso link <isoCode>")
-    public void clickOnISOLink(@Named("isoCode") String isoCode){
-        getDataPage().clickOnISOLink(isoCode);
+    public void clickOnISOLink(@Named("isoCode") String isoCode) {
+        setCurrencyPage(getDataPage().clickOnISOLink(isoCode));
     }
 
     @When("the user clicks on the city area link $area")
-    public void clickOnCityArea(@Named("area") String area){
+    public void clickOnCityArea(@Named("area") String area) {
         getDataPage().clickOnCityArea(area);
     }
 
@@ -757,42 +761,42 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the city subarea link $subArea")
-    public void clickOnCitySubArea(@Named("subArea") String subArea){
+    public void clickOnCitySubArea(@Named("subArea") String subArea) {
         getDataPage().clickOnCitySubArea(subArea);
     }
 
     @When("the user clicks on the city country link $country")
-    public void clickOnCityCountry(@Named("country") String country){
+    public void clickOnCityCountry(@Named("country") String country) {
         getDataPage().clickOnCityCountry(country);
     }
 
     @When("the user clicks on the city related place link $relatedPlace")
-    public void clickOnCityRelatedPlace(@Named("relatedPlace") String relatedPlace){
+    public void clickOnCityRelatedPlace(@Named("relatedPlace") String relatedPlace) {
         getDataPage().clickOnCityRelatedPlace(relatedPlace);
     }
 
     @Then("the user should see the below country sections $countrySections")
-    public void verifyCountrySections(ExamplesTable countrySections){
+    public void verifyCountrySections(ExamplesTable countrySections) {
         getDataPage().verifySections(countrySections);
     }
 
     @Then("the user should see the below area sections $areaSections")
-    public void verifyAreaSections(ExamplesTable areaSections){
+    public void verifyAreaSections(ExamplesTable areaSections) {
         getDataPage().verifySections(areaSections);
     }
 
     @Then("the user should see the below city sections $citySections")
-    public void verifyCitySections(ExamplesTable citySections){
+    public void verifyCitySections(ExamplesTable citySections) {
         getDataPage().verifySections(citySections);
     }
 
     @Then("the user should see the below legal entity sections $legalEntitySections")
-    public void verifyLegalEntitySections(ExamplesTable legalEntitySections){
+    public void verifyLegalEntitySections(ExamplesTable legalEntitySections) {
         getDataPage().verifySections(legalEntitySections);
     }
 
     @Then("the user should see the below office sections $legalEntitySections")
-    public void verifyOfficeSections(ExamplesTable officeSections){
+    public void verifyOfficeSections(ExamplesTable officeSections) {
         getDataPage().verifySections(officeSections);
     }
 
@@ -802,7 +806,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the save button")
-    public void clickOnSaveButton(){
+    public void clickOnSaveButton() {
         getDataPage().clickOnSaveButton();
     }
 
@@ -815,23 +819,23 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyEndDateErrorMessage(endDateErrorMsg);
     }
     @Then("the user should see the save confirmation modal")
-    public void verifySaveConfirmationModal(){
+    public void verifySaveConfirmationModal() {
         getDataPage().verifySaveConfirmationModal();
     }
 
 
     @Then("the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved")
-    public void verifyErrorMessageAtTopOfThePage(){
+    public void verifyErrorMessageAtTopOfThePage() {
         getDataPage().verifyErrorMessageAtTopOfThePage();
     }
 
     @When("the user clicks on the confirm button")
-    public void clickOnConfirmButton(){
+    public void clickOnConfirmButton() {
         getDataPage().clickOnConfirmButton();
     }
 
     @When("the user clicks on the return button")
-    public void clickOnReturnButton(){
+    public void clickOnReturnButton() {
         getDataPage().clickOnReturnButton();
     }
 
@@ -841,12 +845,12 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user reverts the changes to the currency Deutsche Mark")
-    public void revertChangesToCurrencyDeutscheMark(){
+    public void revertChangesToCurrencyDeutscheMark() {
         getDataPage().revertChangesToCurrencyDeutscheMark();
     }
 
     @Then("the user reverts the changes to the currency asian currency unit")
-    public void revertChangesToCurrencyAsianCurrencyUnit(){
+    public void revertChangesToCurrencyAsianCurrencyUnit() {
         getDataPage().revertChangesToCurrencyAsianCurrencyUnit();
     }
 
@@ -861,17 +865,17 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the list of all existing area for the selected country by full name")
-    public void verifyAreaList(){
+    public void verifyAreaList() {
         getDataPage().verifyAreaList(database, apacheHttpClient);
     }
 
     @Then("the user should see the list of all existing subarea for the selected area by full name")
-    public void verifySubAreaList(){
+    public void verifySubAreaList() {
         getDataPage().verifySubAreaList(database, apacheHttpClient);
     }
 
     @Then("the user should see the list of all existing city for the selected area by full name")
-    public void verifyCityList(){
+    public void verifyCityList() {
         getDataPage().verifyCityList(database, apacheHttpClient);
     }
 

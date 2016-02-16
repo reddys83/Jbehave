@@ -40,7 +40,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option
 And the user enters the currency <currency> in the typeahead box
-And the user clicks on the update currency link
+And the user clicks on the update link
 And the user enters the currency name value as <name>
 And the user enters the currency abbr value as <abbr>
 And the user enters the currency unit value as <unit>
@@ -201,7 +201,7 @@ And the user enters the currency <currency> in the typeahead box
 And the user clicks on the update link
 And the user enters the currency quantity value as <quantity>
 And the user clicks on the save button
-Then the user should see the error message please enter a numeric value up to 10,000 for quantity
+Then the user should see the error message enter a numeric value up to 10,000 for quantity
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
@@ -245,7 +245,7 @@ Then the user should see the error 'Enter a year, month/year or day/month/year.'
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
 |afghani|Albania|01|||01|||
-|afghani|Albania||Jan||||Jan||
+|afghani|Albania||Jan|||Jan||
 |afghani|Albania|01|Jan||01|Jan||
 |afghani|Albania|01||1988|01||1988|
 
@@ -335,7 +335,7 @@ When the user clicks on the delete option for the additional currency use
 Then the user should not see the additional currency use
 
 Examples:
-|currency|addCurrencyountry|
+|currency|addCurrencyCountry|
 |Deutsche Mark|Afghanistan|
 
 Scenario: Save newly added currency use

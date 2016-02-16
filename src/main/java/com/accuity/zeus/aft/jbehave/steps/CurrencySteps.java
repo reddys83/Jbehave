@@ -21,12 +21,12 @@ public class CurrencySteps extends AbstractSteps{
 
     @When("the user clicks on the currency tab in the data area")
     public void clickOnCurrencyTab() {
-        setCurrencyPage(getDataPage().clickOnCurrencyTab());
+        getDataPage().clickOnCurrencyTab();
     }
 
     @When("the user clicks on the choose a currency option")
     public void clickOnChooseACurrencyOption() {
-        getCurrencyPage().clickOnChooseACurrencyOption();
+        setCurrencyPage(getDataPage().clickOnChooseACurrencyOption());
     }
 
     @Then("the user should see the list of all existing currencies by full name")
@@ -52,12 +52,6 @@ public class CurrencySteps extends AbstractSteps{
     @Then("the user should see the option no results match for the searched currency string")
     public void thenTheUSerShouldNoResultsMatchOption() {
         getCurrencyPage().verifyNoResultsMatchOption();
-    }
-
-    @When("the user enters the currency <currency> in the typeahead box")
-    public void selectCurrencyFromTypeAhead(@Named("currency") String currency) {
-        selectedCurrency = currency;
-        getCurrencyPage().selectCurrencyFromTypeAhead(currency);
     }
 
     @Then("the user should see the currency iso code value as <isoCode>")
@@ -321,5 +315,21 @@ public class CurrencySteps extends AbstractSteps{
     @Then("the user should see the list of all the existing country in add country list")
     public void verifyAddCountryList() {
         getCurrencyPage().verifyAddCountryList(database, apacheHttpClient);
+    }
+
+    @Then("the user should see the error $startDateErrorMsg for start date")
+    public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg) {
+        getCurrencyPage().verifyStartDateErrorMessage(startDateErrorMsg);
+    }
+
+    @Then("the user should see the error $startDateErrorMsg for end date")
+    public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg) {
+        getCurrencyPage().verifyEndDateErrorMessage(endDateErrorMsg);
+    }
+
+    @When("the user enters the currency <currency> in the typeahead box")
+    public void selectCurrencyFromTypeAhead(@Named("currency") String currency) {
+        selectedCurrency = currency;
+        getCurrencyPage().selectCurrencyFromTypeAhead(currency);
     }
 }
