@@ -7,8 +7,8 @@ import com.accuity.zeus.xml.XmlDocument;
  */
 public class Response {
 
-    protected XmlDocument xmlDocument;
-    protected int statusCode;
+    private XmlDocument xmlDocument;
+    private int statusCode;
 
     public Response(XmlDocument xmlDocument, int statusCode) {
         this.xmlDocument = xmlDocument;
