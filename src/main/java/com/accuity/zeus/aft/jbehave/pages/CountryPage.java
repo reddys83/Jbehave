@@ -104,19 +104,20 @@ public class CountryPage extends AbstractPage {
 
     private String basic_info_label_value_xpath = ".//*[@id='content']//table[@class='vertical']/tbody/tr[th='";
 
-    private By country_basic_info_startDate_day_edit_xpath=By.xpath("//input[@name='began-day']");
-    String country_basic_info_startDate_month_edit_xpath = "//select[@name='began-month']";
-    private By country_basic_info_startDate_year_edit_xpath=By.xpath("//input[@name='began-year']");
+    private By country_basic_info_startDate_day_edit_xpath=By.xpath("//input[@name='startDate-day']");
+    String country_basic_info_startDate_month_edit_xpath = "//select[@name='startDate-month']";
+    private By country_basic_info_startDate_year_edit_xpath=By.xpath("//input[@name='startDate-year']");
 
-    private By country_basic_info_endDate_day_edit_xpath=By.xpath("//input[@name='end-day']");
-    String country_basic_info_endDate_month_edit_xpath = "//select[@name='end-month']";
-    private By country_basic_info_endDate_year_edit_xpath=By.xpath("//input[@name='end-year']");
+    private By country_basic_info_endDate_day_edit_xpath=By.xpath("//input[@name='endDate-day']");
+    String country_basic_info_endDate_month_edit_xpath = "//select[@name='endDate-month']";
+    private By country_basic_info_endDate_year_edit_xpath=By.xpath("//input[@name='endDate-year']");
 
     private By country_addInfo_error_message_edit_xpath=By.xpath("//*[@data-error_id='addInfoError']");
     private By country_imports_error_message_edit_xpath=By.xpath("//*[@data-error_id='primaryImportsError']");
     private By country_exports_error_message_edit_xpath=By.xpath("//*[@data-error_id='primaryExportsError']");
     private By country_political_structure_error_message_edit_xpath = By.xpath("//*[@data-error_id='politicalStructureError']");
     private By country_intlDialingCode_error_message_edit_xpath = By.xpath("//*[@data-error_id='telephoneCodeError']");
+    private By country_replacedBy_edit_xpath=By.xpath("//*[@id='content']/div/ul/li[1]/ul/li[2]/fieldset/table/tbody/tr[4]/td/div/ul/li");
 
 
 
@@ -253,10 +254,15 @@ public class CountryPage extends AbstractPage {
     }
 
     public void enterCountryReplacedBy(String countryReplacedBy){
-     /*   getDriver().findElement(By.xpath(".//select[@name='countryReplacedBy']")).click();
+       getDriver().findElement(country_replacedBy_edit_xpath).click();
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getDriver().findElement(By.xpath("//*[@id='content']/div/ul/li[1]/ul/li[2]/fieldset/table/tbody/tr[4]/td/div/ul/li/input")).sendKeys(countryReplacedBy);
+        getDriver().findElement(By.xpath("//*[@id='content']/div/ul/li[1]/ul/li[2]/fieldset/table/tbody/tr[4]/td/div/ul/li/input")).sendKeys(Keys.RETURN);
 
-     //  selectItemFromDropdownListByText(By.xpath(basic_info_label_value_xpath+"Replaced By']/td//div[@class='chosen-drop']/ul"),countryReplacedBy);
-         selectItemFromDropdownListByText(By.xpath(".//select[@name='countryReplacedBy']"),countryReplacedBy); */
     }
 
     public void enterCountryAddInfo(String countryAddInfo){
