@@ -33,7 +33,7 @@ public class DataPage extends AbstractPage {
     private By currency_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li");
 
     private By area_tab_id=By.id("area-nav");
-    private String clickedCurrencyIso="";
+    public static String clickedCurrencyIso="";
     private By legalEntity_tab_id = By.id("legalEntity-nav");
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By area_listBox_xpath = By.xpath("//*[@id='selection1'] //*[@id='entitySelect_chosen']//span");
@@ -195,7 +195,6 @@ public class DataPage extends AbstractPage {
     private By cancel_no_button_id = By.id("cancel-button");
     private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private Response response;
-    private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
     private String currencySearchString = null;
 
     static ResponseEntity responseEntity;
@@ -212,39 +211,17 @@ public class DataPage extends AbstractPage {
 
     public CurrencyPage clickOnCurrencyTab() {
         attemptClick(currency_tab_xpath);
-        return new CurrencyPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
-    }
-
-    public CurrencyPage selectCurrencyFromTypeAhead(String currency) {
-
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        getDriver().findElement(currency_input_xpath).sendKeys(currency);
-        getDriver().findElement(currency_input_xpath).sendKeys(Keys.RETURN);
         return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
-    public CurrencyPage enterCurrency(String curr) {
-        currencySearchString = curr;
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        getDriver().findElement(currency_input_xpath).sendKeys(curr);
-        return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
-    }
-
-    public void clickOnChooseACurrencyOption() {
+    public CurrencyPage clickOnChooseACurrencyOption() {
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         getDriver().findElement(choose_currency_option_xpath).click();
+        return new CurrencyPage(getDriver(),getUrlPrefix(),getDatabase(),getApacheHttpClient(),getRestClient(),getHeraApi());
     }
 
     public void clickOnCountryTab() {
@@ -254,7 +231,7 @@ public class DataPage extends AbstractPage {
     public CountryPage clickOnCountryListBox() {
         waitForElementToAppear(country_dropdown_is_visible_xpath);
         attemptClick(country_listBox_xpath);
-        return new CountryPage(getDriver(),getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+        return new CountryPage(getDriver(),getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void clickOnAreaTab() {
@@ -284,7 +261,7 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return new CountryPage(getDriver(), getUrlPrefix(),database, apacheHttpClient ,restClient,heraApi);
+        return new CountryPage(getDriver(), getUrlPrefix(),getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void enterAreaInTypeAhead(String area) {

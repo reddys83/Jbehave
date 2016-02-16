@@ -74,6 +74,7 @@ public class CurrencyPage extends AbstractPage {
     private By currency_use_table_additional_use_row_xpath = By.xpath("//*[@id='additionalUses']");
     private By labels_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
     private By no_results_match_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
+    private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
 
     private String editedCurrencyName="";
     private String editedCurrencyAbbr="";
@@ -119,6 +120,17 @@ public class CurrencyPage extends AbstractPage {
         for (int i=0; i<currencyList.getRowCount();i++){
             assertTrue(currencyList.getRow(i).containsValue(expCurrencyList.get(i).getText()));
         }
+    }
+
+    public void enterCurrency(String curr) {
+        currencySearchString = curr;
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getDriver().findElement(currency_input_xpath).sendKeys(curr);
+        //return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void verifyNoResultsMatchOption() {
@@ -426,9 +438,9 @@ public class CurrencyPage extends AbstractPage {
 
     public void verifyCurrencyPage(){
         try{
-            Thread.sleep(1500L);
+            Thread.sleep(2000L);
             assertEquals("CURRENCY",getTextOnPage(currency_header_xpath));
-            assertEquals(clickedCurrencyIso,getTextOnPage(currency_header_iso_id));
+            assertEquals(DataPage.clickedCurrencyIso,getTextOnPage(currency_header_iso_id));
         }catch (Exception e){
 
         }
@@ -595,6 +607,18 @@ public class CurrencyPage extends AbstractPage {
 
     public void verifyEndDateErrorMessage(String endDateErrorMsg) {
         assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(currency_end_date_error_msg_xpath).getText());
+    }
+
+    public CurrencyPage selectCurrencyFromTypeAhead(String currency) {
+
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getDriver().findElement(currency_input_xpath).sendKeys(currency);
+        getDriver().findElement(currency_input_xpath).sendKeys(Keys.RETURN);
+        return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
 }

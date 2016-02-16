@@ -9,7 +9,7 @@ import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.yecht.Data;
+
 
 @Component
 public class CountrySteps extends AbstractSteps{

@@ -742,7 +742,7 @@ public class DataSteps extends AbstractSteps {
 
     @When("the user clicks on the currency iso link <isoCode>")
     public void clickOnISOLink(@Named("isoCode") String isoCode) {
-        getDataPage().clickOnISOLink(isoCode);
+        setCurrencyPage(getDataPage().clickOnISOLink(isoCode));
     }
 
     @When("the user clicks on the city area link $area")
@@ -846,11 +846,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().revertChangesToCurrencyAfghani(database, apacheHttpClient);
     }
 
-    @When("the user starts typing the name of a currency as $curr in the currency input box")
-    public void enterCurrency(@Named("curr") String curr) {
-        setCurrencyPage(getDataPage().enterCurrency(curr));
-    }
-
     @When("the user clicks on the cancel no button")
     public void clickOnCancelNoButton() {
         getDataPage().clickOnCancelNoButton();
@@ -884,11 +879,5 @@ public class DataSteps extends AbstractSteps {
     @When("the user clicks on the update link")
     public void clickOnUpdateCurrencyLink() {
         getDataPage().clickOnUpdateCurrencyLink();
-    }
-
-    @When("the user enters the currency <currency> in the typeahead box")
-    public void selectCurrencyFromTypeAhead(@Named("currency") String currency) {
-        selectedCurrency = currency;
-        setCurrencyPage(getDataPage().selectCurrencyFromTypeAhead(currency));
     }
 }

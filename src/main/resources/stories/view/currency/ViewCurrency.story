@@ -56,7 +56,7 @@ And the user should see the currency quantity value as <quantity>
 
 Examples:
 |currency|isoCode|name|abbr|unit|quantity|
-|US Dollar|USD|US Dollar asdf|US$ - new|Cents|100|
+|US Dollar asdf|USD|US Dollar asdf|US$ - new|Cents|100|
 |Icelandic Krona|ISK|Icelandic Krona|ISK|null|null|
 |Sudanese Dinar|SDD|Sudanese Dinar|Dinar|Dirham|null|
 

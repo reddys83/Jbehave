@@ -49,7 +49,7 @@ And the user enters holiday day <day> in the holidays country page
 And the user enters holiday month <month> in the holidays country page
 And the user enters holiday year <year> in the holidays country page
 And the user clicks on the save button
-Then the user should see the error message enter a year, month/year or day/month/year in the holidays country page
+Then the user should see the error message enter a day/month/year in the holidays country page
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:

@@ -245,7 +245,7 @@ Then the user should see the error 'Enter a year, month/year or day/month/year.'
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
 |afghani|Albania|01|||01|||
-|afghani|Albania||Jan||||Jan||
+|afghani|Albania||Jan|||Jan||
 |afghani|Albania|01|Jan||01|Jan||
 |afghani|Albania|01||1988|01||1988|
 
@@ -335,7 +335,7 @@ When the user clicks on the delete option for the additional currency use
 Then the user should not see the additional currency use
 
 Examples:
-|currency|addCurrencyountry|
+|currency|addCurrencyCountry|
 |Deutsche Mark|Afghanistan|
 
 Scenario: Save newly added currency use
