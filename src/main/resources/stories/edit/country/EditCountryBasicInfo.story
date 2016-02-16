@@ -144,3 +144,89 @@ Then the user should see the error message at top of page the highlighted fields
 Examples:
 |country|countryLanguages|
 |Albania|abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde1|
+
+
+
+Scenario:User can edit country identifiers - Verify that an error message is displayed for required and invalid fields for newely added identifier - "Type","Value" and "Status", for new row on Saving.
+Zeus-710
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user clicks on the add new identifier button in the basic info country page
+And Identifier Status is active by default
+And the user clicks on the save button
+Then the user should see the error message for the required Identifier Value field in the basic info identifier page
+Then the user should see the error message for the required Identifier Type field in the basic info identifier page
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+When the user enters identifier type as <identifierType> in the basic info country page
+And the user enters identifier value as <identifierValueIncorrect> in the basic info country page
+And the user clicks on the save button
+Then the user should see the Enter up to 50 valid characters error message for the Identifier Value field in the basic info identifier page
+
+Examples:
+|country|identifierType|identifierValueIncorrect|
+|Albania|Numeric ISO Code|aksjuilrw1aksjuilrw1aksjuilrw1aksjuilrw1aksju%)~12y1|
+
+
+
+Scenario: User can edit country identifiers - Verify country Identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO
+Zeus-710
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user clicks on the add new identifier button in the basic info country page
+And the user clicks on the country Identifier type drop-down
+Then the user should see the country identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO
+
+Examples:
+|country|
+|Albania|
+
+
+Scenario: User can edit country identifiers - Verify deletion message on new row - please confirm - would you like to delete this row?
+Zeus-710
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user clicks on the add new identifier button in the basic info country page
+And the user clicks on the delete name row button in the basic info country page
+Then the user should see the delete row confirmation modal in the country page
+When the user clicks on the no button in the delete row confirmation modal in the country page
+Then the user should see the newly added name row in the basic info country page
+When the user clicks on the delete identifier row button in the basic info country page
+When the user clicks on the yes button in the delete row confirmation modal in the country page
+Then the user should not see the newly added identifier row in the basic info country page
+
+Examples:
+|country|
+|Albania|
+
+
+
+Scenario:User can edit country identifiers-Verify that an error message is displayed for required and invalid fields- "Type","Value" and "Status", for old row on Saving.
+Zeus-710
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+When the user enters identifier type as <identifierType> in the basic info country page
+And the user clears identifier value in the basic info country page
+And the user clicks on the save button
+Then the user should see the error message for the required Identifier Value field in the basic info identifier page
+Then the user should see the error message for the required Identifier Type field in the basic info identifier page
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|country|identifierType|
+|Afghanistan||

@@ -9,7 +9,7 @@ import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.yecht.Data;
+import org.apache.http.HttpStatus;
 
 @Component
 public class CountrySteps extends AbstractSteps{
@@ -265,9 +265,20 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().clickOnCountryNameType();
     }
 
+
+    @When("the user clicks on the country Identifier type drop-down")
+    public void clickOnCountryIdentifierType(){
+        getCountryPage().clickOnCountryIdentifierType();
+    }
+
     @Then("the user should see the country name types from lookup COUNTRY_NAME_TYPE")
     public void verifyCountryNameTypesList(){
         getCountryPage().verifyCountryNameTypesList(database, apacheHttpClient);
+    }
+
+    @Then("the user should see the country identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO")
+    public void verifyCountryIdentifierTypesList(){
+        getCountryPage().verifyCountryIdentifierTypesList(database, apacheHttpClient);
     }
 
     @When("the user clicks on the add new name button in the basic info country page")
@@ -275,9 +286,40 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().clickOnAddNewNameButton();
     }
 
+    @When("the user clicks on the add new identifier button in the basic info country page")
+    public void clickOnAddNewIdentifierButton(){
+        getCountryPage().clickOnAddNewIdentifierButton();
+    }
+
+    @When("Identifier Status is active by default")
+    public void assertIdentifierStatus(){
+        getCountryPage().verifyIdentifierStatus("active");
+    }
+
     @When("the user enters country name as <countryName> in the basic info country page")
     public void enterCountryName(@Named("countryName") String countryName){
         getCountryPage().enterCountryName(countryName);
+    }
+
+
+    @When("the user clears identifier value in the basic info country page")
+    public void clearCountryIdentifierValue(){
+        getCountryPage().clearCountryIdentifierValue();
+    }
+
+    @When("the user clears identifier type in the basic info country page")
+    public void clearCountryIdentifierType(){
+        getCountryPage().clearCountryIdentifierType();
+    }
+
+    @When("the user enters identifier type as <identifierType> in the basic info country page")
+    public void enterIdentifierType(@Named("identifierType") String identifierType) {
+        getCountryPage().enterIdentifierType(identifierType);
+    }
+
+    @When("the user enters identifier value as <identifierValueIncorrect> in the basic info country page")
+    public void enterIdentifierValue(@Named("identifierValueIncorrect") String incorrectIdentifierValue) {
+        getCountryPage().enterIdentifierValue(incorrectIdentifierValue);
     }
 
     @Then("the user should see the error message for the required country name field in the basic info country page")
@@ -289,6 +331,24 @@ public class CountrySteps extends AbstractSteps{
     public void verifyErrorMessageForRequiredNameType(){
         getCountryPage().verifyErrorMessageForRequiredNameType();
     }
+
+
+
+    @Then("the user should see the error message for the required Identifier Value field in the basic info identifier page")
+    public void verifyErrorMessageForRequiredIdentifierValue() {
+        getCountryPage().verifyErrorMessageForRequiredIdentifierValue();
+    }
+
+    @Then("the user should see the Enter up to 50 valid characters error message for the Identifier Value field in the basic info identifier page")
+    public void verifyErrorMessageForLongIdentifierValue() {
+        getCountryPage().verifyErrorMessageForLongIdentifierValue();
+    }
+
+    @Then("the user should see the error message for the required Identifier Type field in the basic info identifier page")
+    public void verifyErrorMessageForRequiredIdentifierType() {
+        getCountryPage().verifyErrorMessageForRequiredIdentifierType();
+    }
+
 
     @Then("the user should see the error message for the required name value field in the basic info country page")
     public void verifyErrorMessageForRequiredValueType(){
@@ -304,6 +364,11 @@ public class CountrySteps extends AbstractSteps{
     @Then("the user should see the delete row confirmation modal in the country page")
     public void verifyDeleteConfirmationModal(){
         getCountryPage().verifyDeleteConfirmationModal();
+    }
+
+    @When("the user clicks on the delete identifier row button in the basic info country page")
+    public void clickOnDeleteNewIdentifierRowButton(){
+        getCountryPage().clickOnDeleteNewRowButton();
     }
 
     @When("the user clicks on the no button in the delete row confirmation modal in the country page")
@@ -329,6 +394,12 @@ public class CountrySteps extends AbstractSteps{
     @Then("the user should not see the newly added name row in the basic info country page")
     public void verifyNewlyAddedNameRowIsNotDisplayed(){
         getCountryPage().verifyNewlyAddedNameRowIsNotDisplayed();
+    }
+
+
+    @Then("the user should not see the newly added identifier row in the basic info country page")
+    public void verifyNewlyAddedIdentifierRowIsNotDisplayed() {
+        getCountryPage().verifyNewlyAddedIdentifierRowIsNotDisplayed();
     }
 
     @Then("the user should not see the newly added time zone row in the basic info country page")

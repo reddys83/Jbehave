@@ -49,6 +49,7 @@ public class XqueryMap {
         queryMap.put("city list","getCityList.xqy");
         queryMap.put("get country names type", "getCountryNamesType.xqy");
         queryMap.put("get country time zones", "getCountryTimeZone.xqy");
+        queryMap.put("get country identifiers", "getCountryIdentifiers.xqy");
     }
 
     public String getXquery(String key){
