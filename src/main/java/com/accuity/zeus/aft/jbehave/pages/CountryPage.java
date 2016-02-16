@@ -4,14 +4,13 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.rest.RestClient;
-import org.apache.commons.lang.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.jbehave.core.annotations.Named;
-import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.*;
 import org.w3c.dom.Document;
+import org.openqa.selenium.support.ui.Select;
+
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -74,6 +73,7 @@ public class CountryPage extends AbstractPage {
     private By country_delete_no_button_id = By.id("no-button");
     private By country_delete_yes_button_id = By.id("yes-button");
     private By country_additional_name_row_id = By.xpath("//*[@id='additionalNames']/tr");
+    private By country_additional_identifiers_row_id = By.xpath("//*[@id='additionalIdentifiers']/tr");
     private By country_time_zone_summary_err_msg_xpath = By.xpath("//*[@data-error_id='timeZonesSummaryError']");
     private By country_time_zone_summary_input_xpath = By.xpath("//*[@data-edit_id='timeZonesSummary']");
     private By country_add_new_time_zone_button_id = By.id("add-timeZones");
@@ -124,13 +124,24 @@ public class CountryPage extends AbstractPage {
     private String selectedCountry ="";
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By country_edit_names_type_list_xpath = By.xpath("//*[@id='additionalNames']/tr/td[1]/select");
+    private By country_edit_identifier_type_list_xpath = By.xpath("//*[@id='additionalIdentifiers']//select");
     private By country_name_type_list_xpath = By.xpath("//*[@data-row_id='nameRow']/tbody/tr/td/select/option");
+    private By country_identifier_type_list_xpath = By.xpath("//*[@id='additionalIdentifiers']//*[@class=\"new\"]//select/option");
+
     private By country_add_new_name_button_id = By.id("add-names");
+    private By country_add_new_identifier_button_id = By.id("add-identifiers");
     private By country_dropdown_is_visible_xpath = By.xpath("//*[@id='selection0']//div[@class='chosen-container chosen-container-single']");
     private By regions_label_xpath = By.xpath("//li[contains(h1,'Regions for')] //span");
     private By country_language_link_id = By.id("countryLanguages");
     private By language_summary_textarea_xpath = By.xpath("//*[@id='content']/div/ul/form/li/dl/dd/textarea");
 
+    private By country_identifier_value_err_msg_xpath=By.xpath(".//*[@class=\"notification error\"][@data-error_id='identifierValueError']");
+    private By country_identifier_type_required_err_msg_xpath=By.xpath(".//*[@class=\"notification error\"][@data-error_id='identifierTypeError']");
+    private By country_identifier_type_input_xpath=By.xpath(".//*[@id='additionalIdentifiers']//*[@data-internal_id='identifierType']");
+    private By country_identifier_value_input_xpath=By.xpath(".//*[@id='additionalIdentifiers']//*[@data-internal_id='identifierValue']");
+    private By country_identifier_status_input_xpath=By.xpath(".//*[@data-row_id='identifierRow']//fieldset/input");
+
+    private By getCountry_basic_info_identifier_default_status=By.xpath(".//*[@data-row_id='identifierRow']//*[@class='new']//fieldset//input[@value='active']");
     private String basic_info_label_value_xpath = ".//*[@id='content']//table[@class='vertical']/tbody/tr[th='";
 
     private By country_basic_info_startDate_day_edit_xpath=By.xpath("//input[@name='startDate-day']");
@@ -147,7 +158,6 @@ public class CountryPage extends AbstractPage {
     private By country_political_structure_error_message_edit_xpath = By.xpath("//*[@data-error_id='politicalStructureError']");
     private By country_intlDialingCode_error_message_edit_xpath = By.xpath("//*[@data-error_id='telephoneCodeError']");
     private By country_replacedBy_edit_xpath=By.xpath("//*[@id='content']/div/ul/li[1]/ul/li[2]/fieldset/table/tbody/tr[4]/td/div/ul/li");
-
 
 
     public CountryPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
@@ -194,7 +204,7 @@ public class CountryPage extends AbstractPage {
     public void verifyCountryList(Database database, ApacheHttpClient apacheHttpClient){
         assertEquals(getDriver().findElement(labels_xpath).getText(), "COUNTRY");
         List<WebElement> countryList = getDriver().findElements(currency_country_list_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,"country list");
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "country list");
         for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), countryList.get(i).getText().trim());
         }
@@ -214,6 +224,10 @@ public class CountryPage extends AbstractPage {
     public void verifyCountryIso2(String iso2) {
         assertEquals("ISO2", getDriver().findElement(country_iso2_label_id).getText());
         assertEquals(iso2, getDriver().findElement(country_iso2_id).getText());
+    }
+
+    public void verifyIdentifierStatus() {
+        assertTrue(getDriver().findElement(getCountry_basic_info_identifier_default_status).isSelected());
     }
 
     public void verifyEditCountryBasicInfoFromTrusted(){
@@ -614,6 +628,11 @@ public class CountryPage extends AbstractPage {
         attemptClick(country_edit_names_type_list_xpath);
     }
 
+
+    public void clickOnCountryIdentifierType() {
+        attemptClick(country_edit_identifier_type_list_xpath);
+    }
+
     public void verifyCountryNameTypesList(Database database, ApacheHttpClient apacheHttpClient) {
         List<WebElement> countryNameTypesList = getDriver().findElements(country_name_type_list_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country names type");
@@ -622,21 +641,105 @@ public class CountryPage extends AbstractPage {
         }
     }
 
+    public void verifyCountryIdentifierTypesList(Database database, ApacheHttpClient apacheHttpClient) {
+        List<WebElement> countryIdentifierTypesList = getDriver().findElements(country_identifier_type_list_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country identifiers");
+        for (int i = 1; i < document.getElementsByTagName("identifier").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), countryIdentifierTypesList.get(i).getText());
+        }
+    }
+
     public void clickOnAddNewNameButton() {
         attemptClick(country_add_new_name_button_id);
     }
+
+
+    public void clickOnAddNewIdentifierButton() {
+        attemptClick(country_add_new_identifier_button_id);
+    }
+
 
     public void enterCountryName(String countryName) {
         getDriver().findElement(country_country_name_input_xpath).clear();
         getDriver().findElement(country_country_name_input_xpath).sendKeys(countryName);
     }
 
-    public void verifyErrorMessageForCountryName() {
+
+
+
+    public void clearCountryIdentifierValue() {
+        try
+        {
+            List<WebElement> webElements = getDriver().findElements(country_identifier_value_input_xpath);
+            int columns_count = webElements.size();
+            WebElement mySelectElm = webElements.get(columns_count - 1);
+            mySelectElm.clear();
+        }
+        catch (Exception e)
+        {
+        }
+
+    }
+
+    public void clearCountryIdentifierType() {
+        getDriver().findElement(country_identifier_type_input_xpath).clear();
+    }
+
+
+
+    public void enterIdentifierType(String identifierType)
+    {
+        try
+        {
+            List<WebElement> webElements = getDriver().findElements(country_identifier_type_input_xpath);
+            int columns_count = webElements.size();
+
+            WebElement mySelectElm = webElements.get(columns_count - 1);
+                    Select mySelect = new Select(mySelectElm);
+            mySelect.selectByValue(identifierType);
+        }
+        catch (Exception e)
+        {
+        }
+    }
+
+
+    public void enterIdentifierValue(String identifierValue)
+    {
+        try
+        {
+
+            List<WebElement> webElements = getDriver().findElements(country_identifier_value_input_xpath);
+            int columns_count = webElements.size();
+            WebElement mySelectElm = webElements.get(columns_count - 1);
+            mySelectElm.sendKeys(identifierValue);
+        }
+        catch (Exception e)
+        {
+
+        }
+    }
+
+        public void verifyErrorMessageForCountryName() {
         assertEquals("Required", getDriver().findElement(country_name_value_required_err_msg_xpath).getText());
     }
 
     public void verifyErrorMessageForRequiredNameType() {
         assertEquals("Required", getDriver().findElement(country_names_type_required_err_msg_xpath).getText());
+    }
+
+    public void verifyErrorMessageForRequiredIdentifierValue() {
+        assertEquals("Required", getDriver().findElement(country_identifier_value_err_msg_xpath).getText());
+    }
+
+
+    public void verifyErrorMessageForLongIdentifierValue() {
+        assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_identifier_value_err_msg_xpath).getText());
+    }
+
+
+    public void verifyErrorMessageForRequiredIdentifierType() {
+        assertEquals("Required", getDriver().findElement(country_identifier_type_required_err_msg_xpath).getText());
     }
 
     public void verifyErrorMessageForRequiredValueType() {
@@ -650,6 +753,12 @@ public class CountryPage extends AbstractPage {
     public void verifyDeleteConfirmationModal() {
         assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(country_delete_confirmation_modal_xpath).getText());
     }
+
+
+    public void verifyIdentifierDeleteConfirmationModal() {
+        assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(country_delete_confirmation_modal_xpath).getText());
+    }
+
 
     public void clickOnNoButtonInDeleteConfirmationModal() {
         attemptClick(country_delete_no_button_id);
@@ -668,6 +777,12 @@ public class CountryPage extends AbstractPage {
             assertFalse(getDriver().findElement(country_additional_name_row_id).isDisplayed());
         } catch (NoSuchElementException e){}
     }
+
+    public void verifyNewlyAddedIdentifierRowIsNotDisplayed() {
+        try {
+            assertFalse(getDriver().findElement(country_additional_identifiers_row_id).isDisplayed());
+        } catch (NoSuchElementException e){}
+        }
 
     public void verifyCountryNameValueErrMsg() {
         assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_name_value_required_err_msg_xpath).getText());
