@@ -481,8 +481,6 @@ public class CountryPage extends AbstractPage {
         {
         }
 
-
-  //      getDriver().findElement(country_country_name_input_xpath).clear();
     }
 
     public void clearCountryIdentifierType() {
@@ -495,22 +493,9 @@ public class CountryPage extends AbstractPage {
     {
         try
         {
-
-//        getDriver().findElement(country_identifier_type_input_xpath).clear();
-//        getDriver().findElement(country_identifier_type_input_xpath).sendKeys(identifierType);
-
-//        WebElement mySelectElm = getDriver().findElement(country_identifier_type_input_xpath);
-//        Select mySelect= new Select(mySelectElm);
-//        mySelect.selectByValue(identifierType);
-
             List<WebElement> webElements = getDriver().findElements(country_identifier_type_input_xpath);
             int columns_count = webElements.size();
 
-//        for (int column=0; column<columns_count; column++){
-//            //To retrieve text from that specific cell.
-//          //  String celtext = webElements.get(column).getText();
-//            System.out.println("the pointer is on "+column+" row now");
-//        }
             WebElement mySelectElm = webElements.get(columns_count - 1);
                     Select mySelect = new Select(mySelectElm);
             mySelect.selectByValue(identifierType);
@@ -535,7 +520,6 @@ public class CountryPage extends AbstractPage {
         {
 
         }
-//        getDriver().findElement(country_identifier_value_input_xpath).sendKeys(identifierValue);
     }
 
         public void verifyErrorMessageForCountryName() {
