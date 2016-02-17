@@ -17,14 +17,14 @@ Scenario: Verify currency list
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
+And the user clicks on the choose a currency option in the currency page
 Then the user should see the list of all existing currencies by full name
 
 Scenario: Verify currency list matches the search string
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
+And the user clicks on the choose a currency option in the currency page
 And the user starts typing the name of a currency as Pa' in the currency input box
 Then the user should see the drop-down list of the currencies matching the input characters
 
@@ -36,7 +36,7 @@ Scenario: Verify no results match
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
+And the user clicks on the choose a currency option in the currency page
 And the user starts typing the name of a currency as dfbhjb in the currency input box
 Then the user should see the option no results match for the searched currency string
 
@@ -46,13 +46,13 @@ Scenario: Verify currency view only information
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
-Then the user should see the currency iso code value as <isoCode>
-And the user should see the currency name value as <name>
-And the user should see the currency abbr value as <abbr>
-And the user should see the currency unit value as <unit>
-And the user should see the currency quantity value as <quantity>
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
+Then the user should see the currency iso code value as <isoCode> in the currency page
+And the user should see the currency name value as <name> in the currency page
+And the user should see the currency abbr value as <abbr> in the currency page
+And the user should see the currency unit value as <unit> in the currency page
+And the user should see the currency quantity value as <quantity> in the currency page
 
 Examples:
 |currency|isoCode|name|abbr|unit|quantity|
@@ -68,8 +68,8 @@ Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 Then the user should see the view currency use from trusted document
 When the user clicks on the country <currencyUsageCountry> in the currency usage
 Then the user should see the default country page and display all info
@@ -82,9 +82,9 @@ Scenario: Verify currency's uses. No uses.
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
-Then the user should not see the currency's uses
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
+Then the user should not see the currency's uses in the currency page
 
 Examples:
 |currency|
@@ -96,15 +96,15 @@ Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 Then the user should see the view currency use from trusted document
-When the user clicks on the replaced by currency NAD
-Then the user should see the currency iso code value as <isoCode>
-And the user should see the currency name value as <name>
-And the user should see the currency abbr value as <abbr>
-And the user should see the currency unit value as <unit>
-And the user should see the currency quantity value as <quantity>
+When the user clicks on the replaced by currency NAD in the currency page
+Then the user should see the currency iso code value as <isoCode> in the currency page
+And the user should see the currency name value as <name> in the currency page
+And the user should see the currency abbr value as <abbr> in the currency page
+And the user should see the currency unit value as <unit> in the currency page
+And the user should see the currency quantity value as <quantity> in the currency page
 
 Examples:
 |isoCode|name|abbr|unit|quantity|currency|

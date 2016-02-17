@@ -862,11 +862,11 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyCountryHolidaysDescriptionErrMsg() {
-        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_holiday_description_err_msg_xpath));
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_holiday_description_err_msg_xpath).getText());
     }
 
     public void verifyCountryHolidaysNotesErrMsg() {
-        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_holiday_notes_err_msg_xpath));
+        assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_holiday_notes_err_msg_xpath).getText());
     }
 
     public void verifyNewlyAddedHolidayRow() {

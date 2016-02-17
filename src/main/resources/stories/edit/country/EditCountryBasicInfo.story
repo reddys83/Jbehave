@@ -155,9 +155,9 @@ When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
 Then the user should see the country selection disabled
-And the country ISO2 should not be editable
-And the country ISO3 should not be editable
-And the country status should not be editable
+And the user should see the country ISO2 not editable
+And the user should see the country ISO3 not editable
+And the user should see the country status not editable
 And the user should see the edits to country basic info from trusted dcoument
 
 Examples:
@@ -250,7 +250,7 @@ When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
 And the user clicks on the add new identifier button in the basic info country page
-And Identifier Status is active by default
+And the user should see the default identifier status as active
 And the user clicks on the save button
 Then the user should see the error message for the required Identifier Value field in the basic info identifier page
 Then the user should see the error message for the required Identifier Type field in the basic info identifier page

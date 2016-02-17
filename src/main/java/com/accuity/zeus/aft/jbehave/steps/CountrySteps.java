@@ -51,12 +51,12 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyCountryIso2(iso2);
     }
 
-    @Then("the country ISO2 should not be editable")
+    @Then("the user should see the country ISO2 not editable")
     public void verifyISO2NotEditable() {
         getCountryPage().verifyISO2NotEditable();
     }
 
-    @Then("the country ISO3 should not be editable")
+    @Then("the user should see the country ISO3 not editable")
     public void verifyISO3NotEditable() {
         getCountryPage().verifyISO3NotEditable();
     }
@@ -415,7 +415,7 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().clickOnAddNewIdentifierButton();
     }
 
-    @When("Identifier Status is active by default")
+    @When("the user should see the default identifier status as active")
     public void assertIdentifierStatus(){
         getCountryPage().verifyIdentifierStatus();
     }

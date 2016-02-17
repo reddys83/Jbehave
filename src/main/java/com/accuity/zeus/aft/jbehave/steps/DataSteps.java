@@ -58,8 +58,8 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCancelYesButton();
     }
 
-    @Then("the user should see the currency selection disabled")
-    @Alias("the user should see the country selection disabled")
+    @Then("the user should see the currency selection disabled in the currency page")
+    @Alias("the user should see the country selection disabled in the currency page")
     public void verifyCurrencySelectionDisabled() {
         getDataPage().verifyCurrencySelectionDisabled();
     }
@@ -210,7 +210,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyBasicInfo(label, value);
     }
 
-    @Then("the country status should not be editable")
+    @Then("the user should see the country status not editable")
     public void verifyStatusNotEditable() {
         getDataPage().verifyStatusNotEditable();
     }
