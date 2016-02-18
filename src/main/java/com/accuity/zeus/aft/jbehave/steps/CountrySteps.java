@@ -640,4 +640,50 @@ public class CountrySteps extends AbstractSteps{
     public void verifyErrorMsgForCountryLanguage(){
         getCountryPage().verifyErrorMsgForCountryLanguage();
     }
+
+    @Then("the user enters applied year  <appliedyear>")
+    public void enterAppliedYear(@Named("appliedyear") String year) {
+        getCountryPage().enterCreditRatingAppliedYear(year);
+    }
+
+    @Then ("the user should see error next to applied year")
+    public void verifyErrorMessageAppliedYearLaterThanToday(){
+        getCountryPage().verifyErrorMessageAppliedYearLaterThanToday();
+    }
+
+    @Then("the user enters confirmed year <confirmedyear>")
+    public void enterConfirmedYear(@Named("confirmedyear") String confirmedYear){
+        getCountryPage().enterCreditRatingConfirmedYear(confirmedYear);
+    }
+
+    @Then("the user should see error next to confirmed year")
+    public void verifyErrorMessageConfirmedYearLaterThanToday(){
+        getCountryPage().verifyErrorMessageConfirmedYearLaterThanToday();
+    }
+
+    @Then("the user should see required error when there is an empty row")
+    public void verifyRequiredErrorMessagae(){
+        getCountryPage().verifyRequiredErrorMessage();
+    }
+
+    @When("the user clicks on add row button verify need row added")
+    public void clickOnAddButton(){
+        getCountryPage().clickAddRowButton();
+        getCountryPage().verifyRowCount();
+    }
+
+    @Then ("the user clicks on remove button to delete row")
+    public void clickOnRemoveButton(){
+        getCountryPage().clickOnRemoveButton();
+    }
+
+    @Then("the user should see the newly added name row on the credit rating page")
+    public void verifyRowCount(){
+        getCountryPage().verifyRowCount();
+    }
+
+    @Then("the user should not see the newly added name row on credit rating page")
+    public void verifyRowCountAfterDelete(){
+        getCountryPage().verifyRowCountAfterDelete();
+    }
 }

@@ -158,6 +158,15 @@ public class CountryPage extends AbstractPage {
     private By country_political_structure_error_message_edit_xpath = By.xpath("//*[@data-error_id='politicalStructureError']");
     private By country_intlDialingCode_error_message_edit_xpath = By.xpath("//*[@data-error_id='telephoneCodeError']");
     private By country_replacedBy_edit_xpath=By.xpath("//*[@id='content']/div/ul/li[1]/ul/li[2]/fieldset/table/tbody/tr[4]/td/div/ul/li");
+    private By country_credit_rating_appliedYear_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[4]/fieldset/input[2]");
+    private By country_credit_rating_appliedyear_errorNolaterThanToday_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[4]/fieldset/p");
+    private By country_credit_rating_confirmedYear_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[2]/td[5]/fieldset/input[2]");
+    private By country_credit_rating_confirmedYear_errorNoLaterThanToday_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[2]/td[5]/fieldset/p");
+    private By country_credit_rating_required_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[3]/td[5]/fieldset/p");
+    private By country_credit_rating_addRow_id = By.id("add-creditRatings");
+    private By country_credit_rating_tableBody_id = By.id("additionalCreditRatings");
+    private By country_credit_rating_deleteButton_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[4]/td[6]/button");
+    private int rowCount;
 
 
     public CountryPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
@@ -897,4 +906,55 @@ public class CountryPage extends AbstractPage {
     public void verifyErrorMsgForCountryLanguage() {
         assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_language_err_msg_xpath));
     }
+
+
+    public void enterCreditRatingAppliedYear (String appliedYear) {
+        getDriver().findElement(country_credit_rating_appliedYear_xpath).clear();
+        getDriver().findElement(country_credit_rating_appliedYear_xpath).sendKeys(appliedYear);
+    }
+
+    public void verifyErrorMessageAppliedYearLaterThanToday() {
+        assertEquals("Must be no later than today.",getDriver().findElement(country_credit_rating_appliedyear_errorNolaterThanToday_xpath).getText());
+    }
+
+    public void enterCreditRatingConfirmedYear (String confirmedYear) {
+        getDriver().findElement(country_credit_rating_confirmedYear_xpath).clear();
+        getDriver().findElement(country_credit_rating_confirmedYear_xpath).sendKeys(confirmedYear);
+    }
+
+    public void verifyErrorMessageConfirmedYearLaterThanToday(){
+        assertEquals("Must be no later than today.",getDriver().findElement(country_credit_rating_confirmedYear_errorNoLaterThanToday_xpath).getText());
+    }
+
+    public void verifyRequiredErrorMessage() {
+        assertEquals("Required",getDriver().findElement(country_credit_rating_required_xpath).getText());
+    }
+
+    public void clickAddRowButton(){
+        rowCount = getDriver().findElement(country_credit_rating_tableBody_id).findElements(By.tagName("tr")).size();
+        getDriver().findElement(country_credit_rating_addRow_id).click();
+    }
+
+    public void verifyRowCount(){
+        rowCount++;
+        assertEquals(rowCount,getDriver().findElement(country_credit_rating_tableBody_id).findElements(By.tagName("tr")).size());
+        rowCount--;
+        assertEquals("new",getDriver().findElement(country_credit_rating_tableBody_id).findElements(By.tagName("tr")).get(rowCount).getAttribute("class"));
+
+    }
+
+    public void clickOnRemoveButton() {
+        getDriver().findElement(country_credit_rating_deleteButton_xpath).click();
+    }
+
+    public void verifyRowCountAfterDelete(){
+        int updatedRows = getDriver().findElement(country_credit_rating_tableBody_id).findElements(By.tagName("tr")).size();
+        for(int i=0;i<updatedRows;i++){
+            assertTrue(getDriver().findElement(country_credit_rating_tableBody_id).findElements(By.tagName("tr")).get(i).getAttribute("class").equals(""));
+        }
+    }
+
+
+
+
 }
