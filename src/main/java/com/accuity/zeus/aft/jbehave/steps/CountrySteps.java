@@ -9,7 +9,6 @@ import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.yecht.Data;
 
 @Component
 public class CountrySteps extends AbstractSteps{
@@ -445,4 +444,15 @@ public class CountrySteps extends AbstractSteps{
     public void verifyErrorMsgForCountryLanguage(){
         getCountryPage().verifyErrorMsgForCountryLanguage();
     }
+
+    @When("the user clicks on the add country banking hours option")
+    public void userClicksOnTheAddCountryBankingHours(){
+        getCountryPage().userClicksOnTheAddCountryBankingHours();
+    }
+
+    @Then("the user should see a new row with day drop-down list with all days and hours with values in half hour increments")
+    public void verifyUserSeesBankingDaysAndHours(){
+        getCountryPage().verifyUserSeeBankingDaysAndHours();
+    }
+
 }

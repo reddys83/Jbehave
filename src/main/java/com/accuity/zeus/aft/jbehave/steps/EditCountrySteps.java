@@ -16,16 +16,6 @@ public class EditCountrySteps extends AbstractSteps {
 
     }
 
-    @When("the user clicks on the add country banking hours option")
-    public void userClicksOnTheAddCountryBankingHours(){
-
-    }
-
-    @Then("the user should see a new row with day drop-down list with $dayKey and hours with values in half hour increments")
-    public void verifyUserSeesBankingDaysAndHours(String dayKey){
-
-    }
-
     @When("the user selects day as $day and hours as $hours")
     public void userSelectsDayAndHour(String day, String hours){
 

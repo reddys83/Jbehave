@@ -5,6 +5,24 @@ As a user
 I want to perform an action
 So that I can achieve a business goal
 
+
+Scenario: When the user edit the country banking hours and verify the day drop down and hours drop down
+TestCase: Where the country which doesn't have any day info
+Meta:@RunThisLaksh
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user clicks on the add country banking hours option
+Then the user should see a new row with day drop-down list with all days and hours with values in half hour increments
+
+Examples:
+|country|
+|Algeria|
+
+
 Scenario:
 a. Assuming no Banking Hours, when user clicks on update then the banking hours is editable
 b. When the user adds summary and saves it, the summary is saved

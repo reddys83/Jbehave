@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
 
+import java.util.Calendar;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -128,6 +129,9 @@ public class CountryPage extends AbstractPage {
     private By regions_label_xpath = By.xpath("//li[contains(h1,'Regions for')] //span");
     private By country_language_link_id = By.id("countryLanguages");
     private By language_summary_textarea_xpath = By.xpath("//*[@id='content']/div/ul/form/li/dl/dd/textarea");
+    private By countryBasicInfo_bankingHours_add_button_id = By.id("add-businessHours");
+    private By countryBasicInfo_bankingHours_day_dropdown_xpath = By.xpath(".//*[@class='new'][@data-row_id='businessHours']//select[@name='bankingDay']");
+
 
     public CountryPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -574,4 +578,15 @@ public class CountryPage extends AbstractPage {
     public void verifyErrorMsgForCountryLanguage() {
         assertEquals("Enter up to 100 valid characters.", getDriver().findElement(country_language_err_msg_xpath));
     }
+
+    public void userClicksOnTheAddCountryBankingHours() {
+        attemptClick(countryBasicInfo_bankingHours_add_button_id);
+    }
+
+    public void verifyUserSeeBankingDaysAndHours() {
+        attemptClick(countryBasicInfo_bankingHours_day_dropdown_xpath);
+        Calendar c = new Calendar();
+
+    }
+
 }
