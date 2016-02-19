@@ -9,6 +9,8 @@ import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.apache.http.HttpStatus;
+
 
 @Component
 public class CountrySteps extends AbstractSteps{
@@ -17,6 +19,8 @@ public class CountrySteps extends AbstractSteps{
     ApacheHttpClient apacheHttpClient;
     @Autowired
     Database database;
+
+    private String selectedCountry;
 
     @Then("the user should see the country type-ahead displayed")
     public void verifyCountryTypeAheadAndListBox() {
@@ -48,11 +52,133 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyCountryIso2(iso2);
     }
 
+    @Then("the user should see the country ISO2 not editable")
+    public void verifyISO2NotEditable() {
+        getCountryPage().verifyISO2NotEditable();
+    }
+
+    @Then("the user should see the country ISO3 not editable")
+    public void verifyISO3NotEditable() {
+        getCountryPage().verifyISO3NotEditable();
+    }
+
     @Then("the user should see the country iso3 as $iso3")
     public void verifyCountryIso3(@Named("iso3") String iso3) {
         getCountryPage().verifyCountryIso3(iso3);
     }
 
+    @Then("the user should see the edits to country basic info from trusted dcoument")
+    public void verifyEditCountryBasicInfoFromTrusted(){
+        getCountryPage().verifyEditCountryBasicInfoFromTrusted();
+    }
+
+    @When("the user clicks on replaced by drop down")
+    public void clicksOnReplacedByDropdown() {
+        getCountryPage().clicksOnReplacedByDropdown();
+    }
+
+    @Then("the user should see the list of all active countries except the country the user is currently editing")
+    public void verifyReplacedByDropdownList() {
+        getCountryPage().verifyReplacedByDropdownList();
+    }
+
+    @When("the user enters start date later than today")
+    public void entersCountryBasicInfoStartDate() {
+        getCountryPage().entersCountryBasicInfoStartDate();
+    }
+
+    @When("the user enters more than 500 characters in the country add info")
+    public void enterInvalidCharactersInCountryAddInfo() {
+        getCountryPage().enterInvalidCharactersInCountryAddInfo();
+    }
+
+    @When("the user enters country start year as <countryStartYear>")
+    public void enterCountryStartYear(@Named("countryStartYear") String countryStartYear) {
+        getCountryPage().enterCountryStartYear(countryStartYear);
+    }
+
+    @When("the user enters country end year as <countryEndYear>")
+    public void enterCountryEndYear(@Named("countryEndYear") String countryEndYear) {
+        getCountryPage().enterCountryEndYear(countryEndYear);
+    }
+
+    @When("the user selects replaced by country from the drop down as <countryReplacedBy>")
+    public void enterCountryReplacedBy(@Named("countryReplacedBy") String countryReplacedBy) {
+        getCountryPage().enterCountryReplacedBy(countryReplacedBy);
+    }
+    @When("the user enters country add info as <countryAddInfo>")
+    public void enterCountryAddInfo(@Named("countryAddInfo") String countryAddInfo) {
+        getCountryPage().enterCountryAddInfo(countryAddInfo);
+    }
+    @When("the user enters country imports as <countryImports>")
+    public void enterCountryImports(@Named("countryImports") String countryImports){
+        getCountryPage().enterCountryImports(countryImports);
+    }
+
+    @When("the user enters country exports as <countryExports>")
+    public void enterCountryExports(@Named("countryExports") String countryExports) {
+        getCountryPage().enterCountryExports(countryExports);
+    }
+    @When("the user enters country political structure as <countryPoliticalStructure>")
+    public void enterCountryPoliticalStructure(@Named("countryPoliticalStructure") String countryPoliticalStructure) {
+        getCountryPage().enterCountryPoliticalStructure(countryPoliticalStructure);
+    }
+    @When("the user enters country intl dialing code as <countryIntlDialingCode>")
+    public void enterCountryIntlDialingCode(@Named("countryIntlDialingCode") String countryIntlDialingCode) {
+        getCountryPage().enterCountryIntlDialingCode(countryIntlDialingCode);
+    }
+
+    @When("the user enters more than 200 characters in the country exports")
+    public void enterInvalidCharactersInCountryExports(){
+        getCountryPage().enterInvalidCharactersInCountryExports();
+    }
+
+    @When("the user enters more than 200 characters in the country political structure")
+    public void enterInvalidCharactersInCountryPoliticalStructure() {
+        getCountryPage().enterInvalidCharactersInCountryPoliticalStructure();
+    }
+
+    @When("the user enters more than 5 characters inthe country intl dialing code")
+    public void enterInvalidCharactersInCountryIntlDialingCode() {
+        getCountryPage().enterInvalidCharactersInCountryIntlDialingCode();
+    }
+
+    @Then("the user should see the error message enter uptp 500 valid charecters for addinfo")
+    public void verifyErrorMessageForAddInfo(){
+        getCountryPage().verifyErrorMessageForAddInfo();
+    }
+    @Then("the user should see the error message enter upto 200 valid charecters for imports")
+    public void verifyErrorMessageForImports() {
+        getCountryPage().verifyErrorMessageForImports();
+    }
+    @Then("the user should see the error message enter upto 200 valid charecters for exports")
+    public void verifyErrorMessageForExports() {
+        getCountryPage().verifyErrorMessageForExports();
+    }
+    @Then("the user should see the error message enter upto 200 valid charecters for political structure")
+    public void verifyErrorMessageForPoliticalStructure() {
+        getCountryPage().verifyErrorMessageForPoliticalStructure();
+    }
+    @Then("the user should see the error message enter upto 5 valid charectes for intl dialing code")
+   public void verifyErrorMessageForIntlDialingCode() {
+        getCountryPage().verifyErrorMessageForIntlDialingCode();
+    }
+
+    @When("the user enters end date later than today")
+    public void entersCountryBasicInfoEndDate() {
+        getCountryPage().entersCountryBasicInfoEndDate();
+    }
+
+    @When("the user enters more than 200 characters in the country imports")
+    public void enterInvalidCharactersInCountryImports()
+    {
+        getCountryPage().enterInvalidCharactersInCountryImports();
+    }
+
+    @When("the user enters an another country $anotherCountry in the type-ahead box")
+    public void enterAnotherCountryName(@Named("anotherCountry") String anotherCountry) {
+        getDataPage().enterCountryInTheTypeAheadBox(anotherCountry);
+    }
 
     @Then("the user should see the basic info for the selected country")
     public void verifyCountryBasicInfo() {
@@ -264,9 +390,20 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().clickOnCountryNameType();
     }
 
+
+    @When("the user clicks on the country Identifier type drop-down")
+    public void clickOnCountryIdentifierType(){
+        getCountryPage().clickOnCountryIdentifierType();
+    }
+
     @Then("the user should see the country name types from lookup COUNTRY_NAME_TYPE")
     public void verifyCountryNameTypesList(){
         getCountryPage().verifyCountryNameTypesList(database, apacheHttpClient);
+    }
+
+    @Then("the user should see the country identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO")
+    public void verifyCountryIdentifierTypesList(){
+        getCountryPage().verifyCountryIdentifierTypesList(database, apacheHttpClient);
     }
 
     @When("the user clicks on the add new name button in the basic info country page")
@@ -274,9 +411,40 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().clickOnAddNewNameButton();
     }
 
+    @When("the user clicks on the add new identifier button in the basic info country page")
+    public void clickOnAddNewIdentifierButton(){
+        getCountryPage().clickOnAddNewIdentifierButton();
+    }
+
+    @When("the user should see the default identifier status as active")
+    public void assertIdentifierStatus(){
+        getCountryPage().verifyIdentifierStatus();
+    }
+
     @When("the user enters country name as <countryName> in the basic info country page")
     public void enterCountryName(@Named("countryName") String countryName){
         getCountryPage().enterCountryName(countryName);
+    }
+
+
+    @When("the user clears identifier value in the basic info country page")
+    public void clearCountryIdentifierValue(){
+        getCountryPage().clearCountryIdentifierValue();
+    }
+
+    @When("the user clears identifier type in the basic info country page")
+    public void clearCountryIdentifierType(){
+        getCountryPage().clearCountryIdentifierType();
+    }
+
+    @When("the user enters identifier type as <identifierType> in the basic info country page")
+    public void enterIdentifierType(@Named("identifierType") String identifierType) {
+        getCountryPage().enterIdentifierType(identifierType);
+    }
+
+    @When("the user enters identifier value as <identifierValueIncorrect> in the basic info country page")
+    public void enterIdentifierValue(@Named("identifierValueIncorrect") String incorrectIdentifierValue) {
+        getCountryPage().enterIdentifierValue(incorrectIdentifierValue);
     }
 
     @Then("the user should see the error message for the required country name field in the basic info country page")
@@ -288,6 +456,24 @@ public class CountrySteps extends AbstractSteps{
     public void verifyErrorMessageForRequiredNameType(){
         getCountryPage().verifyErrorMessageForRequiredNameType();
     }
+
+
+
+    @Then("the user should see the error message for the required Identifier Value field in the basic info identifier page")
+    public void verifyErrorMessageForRequiredIdentifierValue() {
+        getCountryPage().verifyErrorMessageForRequiredIdentifierValue();
+    }
+
+    @Then("the user should see the Enter up to 50 valid characters error message for the Identifier Value field in the basic info identifier page")
+    public void verifyErrorMessageForLongIdentifierValue() {
+        getCountryPage().verifyErrorMessageForLongIdentifierValue();
+    }
+
+    @Then("the user should see the error message for the required Identifier Type field in the basic info identifier page")
+    public void verifyErrorMessageForRequiredIdentifierType() {
+        getCountryPage().verifyErrorMessageForRequiredIdentifierType();
+    }
+
 
     @Then("the user should see the error message for the required name value field in the basic info country page")
     public void verifyErrorMessageForRequiredValueType(){
@@ -303,6 +489,11 @@ public class CountrySteps extends AbstractSteps{
     @Then("the user should see the delete row confirmation modal in the country page")
     public void verifyDeleteConfirmationModal(){
         getCountryPage().verifyDeleteConfirmationModal();
+    }
+
+    @When("the user clicks on the delete identifier row button in the basic info country page")
+    public void clickOnDeleteNewIdentifierRowButton(){
+        getCountryPage().clickOnDeleteNewRowButton();
     }
 
     @When("the user clicks on the no button in the delete row confirmation modal in the country page")
@@ -328,6 +519,12 @@ public class CountrySteps extends AbstractSteps{
     @Then("the user should not see the newly added name row in the basic info country page")
     public void verifyNewlyAddedNameRowIsNotDisplayed(){
         getCountryPage().verifyNewlyAddedNameRowIsNotDisplayed();
+    }
+
+
+    @Then("the user should not see the newly added identifier row in the basic info country page")
+    public void verifyNewlyAddedIdentifierRowIsNotDisplayed() {
+        getCountryPage().verifyNewlyAddedIdentifierRowIsNotDisplayed();
     }
 
     @Then("the user should not see the newly added time zone row in the basic info country page")

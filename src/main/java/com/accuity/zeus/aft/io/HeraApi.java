@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class HeraApi  {
 
-    public String host;
-    public String port;
-    public String path;
-    public String scheme;
+    private String host;
+    private String port;
+    private String path;
+    private String scheme;
 
     @Value("${marklogic.admin.scheme}")
     public void setHeraApiQAScheme(String scheme) { this.scheme = scheme; }

@@ -6,7 +6,6 @@ import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.rest.Response;
 import com.accuity.zeus.aft.rest.RestClient;
-import com.accuity.zeus.xml.XmlDocument;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -14,12 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 import java.util.ArrayList;
@@ -33,7 +27,7 @@ public class DataPage extends AbstractPage {
     private By currency_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li");
 
     private By area_tab_id=By.id("area-nav");
-    private String clickedCurrencyIso="";
+    public static String clickedCurrencyIso="";
     private By legalEntity_tab_id = By.id("legalEntity-nav");
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By area_listBox_xpath = By.xpath("//*[@id='selection1'] //*[@id='entitySelect_chosen']//span");
@@ -193,9 +187,11 @@ public class DataPage extends AbstractPage {
     private By confirm_changes_heading_xpath = By.xpath("//*[@id='modal-region']/div/h1");
     private By country_tab_xpath=By.xpath("//*[@id='data-navbar']/ul/li[2]");
     private By cancel_no_button_id = By.id("cancel-button");
+    private By currency_country_selection_disabled_xpath =By.xpath(".//*[@id='entitySelect_chosen'][@class='chosen-container chosen-container-single chosen-disabled']");
+    private By start_date_error_msg_xpath = By.xpath("//*[@data-error_id='startDateError']");
+    private By end_date_error_msg_xpath = By.xpath("//*[@data-error_id='endDateError']");
     private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private Response response;
-    private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
     private String currencySearchString = null;
 
     static ResponseEntity responseEntity;
@@ -212,39 +208,17 @@ public class DataPage extends AbstractPage {
 
     public CurrencyPage clickOnCurrencyTab() {
         attemptClick(currency_tab_xpath);
-        return new CurrencyPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
-    }
-
-    public CurrencyPage selectCurrencyFromTypeAhead(String currency) {
-
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        getDriver().findElement(currency_input_xpath).sendKeys(currency);
-        getDriver().findElement(currency_input_xpath).sendKeys(Keys.RETURN);
         return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
-    public CurrencyPage enterCurrency(String curr) {
-        currencySearchString = curr;
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        getDriver().findElement(currency_input_xpath).sendKeys(curr);
-        return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
-    }
-
-    public void clickOnChooseACurrencyOption() {
+    public CurrencyPage clickOnChooseACurrencyOption() {
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         getDriver().findElement(choose_currency_option_xpath).click();
+        return new CurrencyPage(getDriver(),getUrlPrefix(),getDatabase(),getApacheHttpClient(),getRestClient(),getHeraApi());
     }
 
     public void clickOnCountryTab() {
@@ -254,7 +228,7 @@ public class DataPage extends AbstractPage {
     public CountryPage clickOnCountryListBox() {
         waitForElementToAppear(country_dropdown_is_visible_xpath);
         attemptClick(country_listBox_xpath);
-        return new CountryPage(getDriver(),getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+        return new CountryPage(getDriver(),getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void clickOnAreaTab() {
@@ -284,7 +258,7 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return new CountryPage(getDriver(), getUrlPrefix(),database, apacheHttpClient ,restClient,heraApi);
+        return new CountryPage(getDriver(), getUrlPrefix(),getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void enterAreaInTypeAhead(String area) {
@@ -392,6 +366,16 @@ public class DataPage extends AbstractPage {
             assertEquals(areaTimeZones.getRow(i).get(areaTimeZones.getHeaders().get(1)), actAreaTimeZoneValue.get(i).getText());
         }
     }
+
+    public void verifyStatusNotEditable() {
+        try {
+            getDriver().findElement(By.xpath(basic_info_label_value_xpath+"Status']/td")).getAttribute("data-edit_id").toString();
+        }catch (Exception e)
+        {
+            assertTrue(e.toString().equals("java.lang.NullPointerException"));
+        }
+    }
+
 
     public void verifyHeader(String entity, String headOfficeAddress, String fid, String tfpid) {
         try {
@@ -1028,6 +1012,11 @@ public class DataPage extends AbstractPage {
         assertEquals("CONFIRM", getDriver().findElement(confirm_button_xpath).getText());
     }
 
+    public void verifyCurrencySelectionDisabled() {
+        assertTrue(getDriver().findElement(currency_country_selection_disabled_xpath).isDisplayed());
+    }
+    
+
     public void clickOnReturnButton() {
         attemptClick(return_button_xpath);
     }
@@ -1102,5 +1091,12 @@ public class DataPage extends AbstractPage {
         }
     }
 
+    public void verifyStartDateErrorMessage(String startDateErrorMsg) {
+        assertEquals(startDateErrorMsg.replace("'",""), getDriver().findElement(start_date_error_msg_xpath).getText());
+    }
+
+    public void verifyEndDateErrorMessage(String endDateErrorMsg) {
+        assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(end_date_error_msg_xpath).getText());
+    }
 
 }

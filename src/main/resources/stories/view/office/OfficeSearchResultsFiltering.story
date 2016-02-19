@@ -243,9 +243,9 @@ And the user selects the institution type filter Head Office Branch
 
 Then the user should see the office search results card for the searched legal entity
 |ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
-|3-9|Moorgate|Arab Banking Corporation House||||Branch, Head Office Branch|active|
-|3-15||Nordic Region Marketing Office||||Marketing Office|active|
-|3-14|Marketing Office|UK & Ireland Marketing Office||||Marketing Office|active|
+|3-9|Moorgate|Arab Banking Corporation House||||Branch, Head Office Branch|Active|
+|3-15||Nordic Region Marketing Office||||Marketing Office|Active|
+|3-14|Marketing Office|UK & Ireland Marketing Office||||Marketing Office|Active|
 
 Examples:
 |entity|searchBy|fid|

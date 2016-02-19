@@ -38,6 +38,11 @@ public class DataSteps extends AbstractSteps {
         setLegalEntityPage(getDataPage().clickOnLegalEntityTab());
     }
 
+    @When("the user enters the country <country> in the type-ahead box")
+    public void enterCountryInTheTypeAheadBox(@Named("country") String country) {
+        setCountryPage(getDataPage().enterCountryInTheTypeAheadBox(country));
+    }
+
     @When("the user clicks on the choose a country option")
     public void clickOnCountryListBox() throws InterruptedException {
         getDataPage().clickOnCountryListBox();
@@ -53,14 +58,10 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCancelYesButton();
     }
 
-    @When("the user enters the country <country> in the type-ahead box")
-    public void enterCountryInTheTypeAheadBox(@Named("country") String country) {
-        setCountryPage(getDataPage().enterCountryInTheTypeAheadBox(country));
-    }
-
-    @When("the user enters an another country $anotherCountry in the type-ahead box")
-    public void enterCountryName(@Named("anotherCountry") String anotherCountry) {
-        getDataPage().enterCountryInTheTypeAheadBox(anotherCountry);
+    @Then("the user should see the currency selection disabled in the currency page")
+    @Alias("the user should see the country selection disabled in the currency page")
+    public void verifyCurrencySelectionDisabled() {
+        getDataPage().verifyCurrencySelectionDisabled();
     }
 
     @When("the user enters the area <area> in the type-ahead box")
@@ -209,6 +210,10 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyBasicInfo(label, value);
     }
 
+    @Then("the user should see the country status not editable")
+    public void verifyStatusNotEditable() {
+        getDataPage().verifyStatusNotEditable();
+    }
 
     @Then("the user should see the country's alternative regions as: $countryRegions")
     public void verifyCountryRegions(ExamplesTable countryRegions) {
@@ -742,7 +747,7 @@ public class DataSteps extends AbstractSteps {
 
     @When("the user clicks on the currency iso link <isoCode>")
     public void clickOnISOLink(@Named("isoCode") String isoCode) {
-        getDataPage().clickOnISOLink(isoCode);
+        setCurrencyPage(getDataPage().clickOnISOLink(isoCode));
     }
 
     @When("the user clicks on the city area link $area")
@@ -805,6 +810,14 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnSaveButton();
     }
 
+    @Then("the user should see the error $startDateErrorMsg for start date")
+    public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg) {
+        getDataPage().verifyStartDateErrorMessage(startDateErrorMsg);
+    }
+    @Then("the user should see the error $startDateErrorMsg for end date")
+    public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg) {
+        getDataPage().verifyEndDateErrorMessage(endDateErrorMsg);
+    }
     @Then("the user should see the save confirmation modal")
     public void verifySaveConfirmationModal() {
         getDataPage().verifySaveConfirmationModal();
@@ -846,11 +859,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().revertChangesToCurrencyAfghani(database, apacheHttpClient);
     }
 
-    @When("the user starts typing the name of a currency as $curr in the currency input box")
-    public void enterCurrency(@Named("curr") String curr) {
-        setCurrencyPage(getDataPage().enterCurrency(curr));
-    }
-
     @When("the user clicks on the cancel no button")
     public void clickOnCancelNoButton() {
         getDataPage().clickOnCancelNoButton();
@@ -884,11 +892,5 @@ public class DataSteps extends AbstractSteps {
     @When("the user clicks on the update link")
     public void clickOnUpdateCurrencyLink() {
         getDataPage().clickOnUpdateCurrencyLink();
-    }
-
-    @When("the user enters the currency <currency> in the typeahead box")
-    public void selectCurrencyFromTypeAhead(@Named("currency") String currency) {
-        selectedCurrency = currency;
-        setCurrencyPage(getDataPage().selectCurrencyFromTypeAhead(currency));
     }
 }

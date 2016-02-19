@@ -569,7 +569,7 @@ public class ResultsPage extends AbstractPage {
         List<WebElement> status = getDriver().findElements(office_search_results_status_col_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "ascending order by office status", "fid", searchedEntity);
         for (int i = 0; i < status.size(); i++) {
-            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), status.get(i).getText());
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), status.get(i).getText().toLowerCase());
         }
     }
 
@@ -582,7 +582,7 @@ public class ResultsPage extends AbstractPage {
         List<WebElement> status = getDriver().findElements(office_search_results_status_col_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "descending order by office status", "fid", searchedEntity);
         for (int i = 0; i < status.size(); i++) {
-            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), status.get(i).getText());
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), status.get(i).getText().toLowerCase());
         }
     }
 
@@ -666,12 +666,12 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void selectOfficeStatusFilterActive() {
-        appliedStatusFilter = "active";
+        appliedStatusFilter = "Active";
         attemptClick(office_status_filter_active_id);
     }
 
     public void selectOfficeStatusFilterInactive() {
-        appliedStatusFilter = "inactive";
+        appliedStatusFilter = "Inactive";
         try{
         attemptClick(office_status_filter_inactive_id);
             Thread.sleep(2000L);
@@ -799,7 +799,7 @@ public class ResultsPage extends AbstractPage {
 
     public void verifyOfficeResultsForAppliedFilters(){
         for(int i=0; i<getDriver().findElements(office_search_results_rows_xpath).size(); i++){
-            assertEquals(appliedStatusFilter,getDriver().findElements(office_search_results_status_col_xpath).get(i).getText());
+            assertEquals(appliedStatusFilter, getDriver().findElements(office_search_results_status_col_xpath).get(i).getText());
             assertTrue(getDriver().findElements(office_type_locator_xpath).get(i).getText().contains(appliedInstTypeFilter));
         }
     }

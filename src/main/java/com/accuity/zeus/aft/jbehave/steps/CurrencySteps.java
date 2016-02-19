@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -23,14 +24,19 @@ public class CurrencySteps extends AbstractSteps{
         getDataPage().clickOnCurrencyTab();
     }
 
-    @When("the user clicks on the choose a currency option")
+    @When("the user clicks on the choose a currency option in the currency page")
     public void clickOnChooseACurrencyOption() {
-        getDataPage().clickOnChooseACurrencyOption();
+        setCurrencyPage(getDataPage().clickOnChooseACurrencyOption());
     }
 
     @Then("the user should see the list of all existing currencies by full name")
     public void verifyCurrencyList() {
         getCurrencyPage().verifyCurrencyList(database, apacheHttpClient);
+    }
+
+    @When("the user starts typing the name of a currency as $curr in the currency input box")
+    public void enterCurrency(@Named("curr") String curr) {
+        getCurrencyPage().enterCurrency(curr);
     }
 
     @Then("the user should see the drop-down list of the currencies matching the input characters")
@@ -48,27 +54,27 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().verifyNoResultsMatchOption();
     }
 
-    @Then("the user should see the currency iso code value as <isoCode>")
+    @Then("the user should see the currency iso code value as <isoCode> in the currency page")
     public void verifyCurrencyIsoCode(@Named("isoCode") String isoCode) {
         getCurrencyPage().verifyCurrencyIsoCode(isoCode);
     }
 
-    @Then("the user should see the currency name value as <name>")
+    @Then("the user should see the currency name value as <name> in the currency page")
     public void verifyCurrencyName(@Named("name") String name) {
         getCurrencyPage().verifyCurrencyName(name);
     }
 
-    @Then("the user should see the currency abbr value as <abbr>")
+    @Then("the user should see the currency abbr value as <abbr> in the currency page")
     public void verifyCurrencyAbbr(@Named("abbr") String abbr) {
         getCurrencyPage().verifyCurrencyAbbr(abbr);
     }
 
-    @Then("the user should see the currency unit value as <unit>")
+    @Then("the user should see the currency unit value as <unit> in the currency page")
     public void verifyCurrencyUnit(@Named("unit") String unit) {
         getCurrencyPage().verifyCurrencyUnit(unit);
     }
 
-    @Then("the user should see the currency quantity value as <quantity>")
+    @Then("the user should see the currency quantity value as <quantity> in the currency page")
     public void verifyCurrencyQuantity(@Named("quantity") String quantity) {
         getCurrencyPage().verifyCurrencyQuantity(quantity);
     }
@@ -78,7 +84,7 @@ public class CurrencySteps extends AbstractSteps{
 
     @Then("the user should see the edit currency details from trusted document")
     public void verifyEditCurrencyDetailsFromTrusted() {
-        getCurrencyPage().verifyEditCurrencyDetailsFromTrusted(database, apacheHttpClient, selectedCurrency);
+        getCurrencyPage().verifyEditCurrencyDetailsFromTrusted(selectedCurrency);
     }
 
     @Then("the user should see the view currency details from trusted document")
@@ -106,7 +112,7 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().verifyEditCurrencyUseFromTrusted(database, apacheHttpClient, selectedCurrency);
     }
 
-    @Then("the user should return to view mode of the currency page")
+    @Then("the user should return to view currency page mode")
     public void verifyCurrencyViewMode() {
         getCurrencyPage().verifyCurrencyViewMode();
     }
@@ -121,12 +127,12 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().verifyCurrencyUpdateModeForStatusInactive();
     }
 
-    @Then("the user should not see the currency's uses")
+    @Then("the user should not see the currency's uses in the currency page")
     public void verifyNoCurrencyUse() {
         getCurrencyPage().verifyNoCurrencyUse();
     }
 
-    @When("the user clicks on the replaced by currency $replacedBy")
+    @When("the user clicks on the replaced by currency $replacedBy in the currency page")
     public void clickOnReplacedByLink(String replacedBy) {
         getCurrencyPage().clickOnReplacedByLink(replacedBy);
     }
@@ -141,29 +147,24 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().clickOnCurrencyIso3(iso3);
     }
 
-    @When("the user enters the currency name value as <name>")
+    @When("the user enters the currency name value as <name> in the currency page")
     public void enterCurrencyName(@Named("name") String name) {
         getCurrencyPage().enterCurrencyName(name);
     }
 
-    @When("the user enters the currency abbr value as <abbr>")
+    @When("the user enters the currency abbr value as <abbr> in the currency page")
     public void enterCurrencyAbbr(@Named("abbr") String abbr) {
         getCurrencyPage().enterCurrencyAbbr(abbr);
     }
 
-    @When("the user enters the currency unit value as <unit>")
+    @When("the user enters the currency unit value as <unit> in the currency page")
     public void enterCurrencyUnit(@Named("unit") String unit) {
         getCurrencyPage().enterCurrencyUnit(unit);
     }
 
-    @When("the user enters the currency quantity value as <quantity>")
+    @When("the user enters the currency quantity value as <quantity> in the currency page")
     public void enterCurrencyQuantity(@Named("quantity") String quantity) {
         getCurrencyPage().enterCurrencyQuantity(quantity);
-    }
-
-    @Then("the user should see the currency selection disabled")
-    public void verifyCurrencySelectionDisabled() {
-        getCurrencyPage().verifyCurrencySelectionDisabled();
     }
 
     @Then("the user should see the currency page for clicked iso name")
@@ -186,7 +187,7 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().revertChangesToCurrencyAsianCurrencyUnit(database, apacheHttpClient);
     }
 
-    @Then("the user should return to edit mode of the currency page")
+    @Then("the user should return to edit currency page mode")
     public void verifyCurrencyEditMode(){
         getCurrencyPage().verifyCurrencyEditMode();
     }
@@ -196,52 +197,52 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().verifyReplacedByCurrencyList(database, apacheHttpClient, selectedCurrency);
     }
 
-    @When("the user selects the currency country as <currencyCountry>")
+    @When("the user selects the currency country as <currencyCountry> in the currency page")
     public void selectCurrencyCountry(@Named("currencyCountry") String currencyCountry){
         getCurrencyPage().selectCurrencyCountry(currencyCountry);
     }
 
-    @When("the user enters the currency start day as <currencyStartDay>")
+    @When("the user enters the currency start day as <currencyStartDay> in the currency page")
     public void enterCurrencyStartDay(@Named("currencyStartDay") String currencyStartDay){
         getCurrencyPage().enterCurrencyStartDay(currencyStartDay);
     }
 
-    @When("the user clicks on the currency start month drop-down")
+    @When("the user clicks on the currency start month drop-down in the currency page")
     public void clickOnCurrencyStartMonthDropDown(){
         getCurrencyPage().clickOnCurrencyStartMonthDropDown();
     }
 
-    @When("the user enters the currency start month as <currencyStartMonth>")
+    @When("the user enters the currency start month as <currencyStartMonth> in the currency page")
     public void enterCurrencyStartMonth(@Named("currencyStartMonth") String currencyStartMonth) {
         getCurrencyPage().enterCurrencyStartMonth(currencyStartMonth);
     }
 
-    @When("the user enters the currency start year as <currencyStartYear>")
+    @When("the user enters the currency start year as <currencyStartYear> in the currency page")
     public void enterCurrencyStartYear(@Named("currencyStartYear") String currencyStartYear) {
         getCurrencyPage().enterCurrencyStartYear(currencyStartYear);
     }
 
-    @When("the user enters the currency end day as <currencyEndDay>")
+    @When("the user enters the currency end day as <currencyEndDay> in the currency page")
     public void enterCurrencyEndDay(@Named("currencyEndDay") String currencyEndDay){
         getCurrencyPage().enterCurrencyEndDay(currencyEndDay);
     }
 
-    @When("the user enters the currency end month as <currencyEndMonth>")
+    @When("the user enters the currency end month as <currencyEndMonth> in the currency page")
     public void enterCurrencyEndMonth(@Named("currencyEndMonth") String currencyEndMonth){
         getCurrencyPage().enterCurrencyEndMonth(currencyEndMonth);
     }
 
-    @When("the user enters the currency end year as <currencyEndYear>")
+    @When("the user enters the currency end year as <currencyEndYear> in the currency page")
     public void enterCurrencyEndYear(@Named("currencyEndYear") String currencyEndYear){
         getCurrencyPage().enterCurrencyEndYear(currencyEndYear);
     }
 
-    @When("the user enters the currency usage primary value as <primary>")
+    @When("the user enters the currency usage primary value as <primary> in the currency page")
     public void enterCurrencyPrimary(@Named("primary") String primary){
         getCurrencyPage().enterCurrencyPrimary(primary);
     }
 
-    @When("the user enters the currency usage replaced by as <replacedBy>")
+    @When("the user enters the currency usage replaced by as <replacedBy> in the currency page")
     public void enterCurrencyReplacedBy(@Named("replacedBy") String replacedBy){
         getCurrencyPage().enterCurrencyReplacedBy(replacedBy);
     }
@@ -266,22 +267,22 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().verifyNoAdditionalCurrencyUse();
     }
 
-    @Then("the user should see the error message enter up to 30 valid characters for abbreviation")
+    @Then("the user should see the error message enter up to 30 valid characters for abbreviation in the currency page")
     public void verifyErrorMessageForCurrAbbr(){
         getCurrencyPage().verifyErrorMessageForCurrAbbr();
     }
 
-    @Then("the user should see the error message enter up to 100 valid characters for name")
+    @Then("the user should see the error message enter up to 100 valid characters for name in the currency page")
     public void verifyErrorMessageForCurrName(){
         getCurrencyPage().verifyErrorMessageForCurrName();
     }
 
-    @Then("the user should see the error message enter up to 100 valid characters for unit")
+    @Then("the user should see the error message enter up to 100 valid characters for unit in the currency page")
     public void verifyErrorMessageForCurrUnit(){
         getCurrencyPage().verifyErrorMessageForCurrUnit();
     }
 
-    @Then("the user should see the error message enter a numeric value up to 10,000 for quantity")
+    @Then("the user should see the error message enter a numeric value up to 10,000 for quantity in the currency page")
     public void verifyErrorMessageForCurrQuantity(){
         getCurrencyPage().verifyErrorMessageForCurrQuantity();
     }
@@ -291,7 +292,7 @@ public class CurrencySteps extends AbstractSteps{
         getDataPage().verifyErrorMessageAtTopOfThePage();
     }
 
-    @Then("the user should see the error message for the required name field")
+    @Then("the user should see the error message for the required name field in the currency page")
     public void verifyErrorMessageForRequiredField(){
         getCurrencyPage().verifyErrorMessageForRequiredField();
     }
@@ -324,5 +325,11 @@ public class CurrencySteps extends AbstractSteps{
     @Then("the user should see the error $startDateErrorMsg for end date")
     public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg) {
         getCurrencyPage().verifyEndDateErrorMessage(endDateErrorMsg);
+    }
+
+    @When("the user enters the currency <currency> in the typeahead box in the currency page")
+    public void selectCurrencyFromTypeAhead(@Named("currency") String currency) {
+        selectedCurrency = currency;
+        getCurrencyPage().selectCurrencyFromTypeAhead(currency);
     }
 }

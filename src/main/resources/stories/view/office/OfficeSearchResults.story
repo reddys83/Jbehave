@@ -21,8 +21,8 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 Then the user should see the office search results card for the searched legal entity
 |ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
-|951-0|Flughofstrasse|Flughofstrasse 35|Glattbrugg|Zürich|Switzerland|Head Office|active|
-|951-4|Flughofstrasse|Flughofstrasse 35|Glattbrugg|Zürich|Switzerland|Head Office Branch|active|
+|951-0|Flughofstrasse|Flughofstrasse 35|Glattbrugg|Zürich|Switzerland|Head Office|Active|
+|951-4|Flughofstrasse|Flughofstrasse 35|Glattbrugg|Zürich|Switzerland|Head Office Branch|Active|
 
 Then the user should see the office search results paginated
 And the user should see the offices number of records displayed in the page w.r.t total search results
@@ -60,7 +60,7 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 Then the user should see the office search results card for the searched legal entity
 |ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
-|189457-0||PO Box 8036|Zürich||Switzerland|Head Office|active|
+|189457-0||PO Box 8036|Zürich||Switzerland|Head Office|Active|
 
 Then the user should see the office search results paginated
 And the user should see the offices number of records displayed in the page w.r.t total search results
@@ -69,7 +69,7 @@ And the user should see the option to navigate to the desired office search resu
 When the user clicks on the office search results fid column
 Then the user should see the office search results card for the searched legal entity
 |ID|NAME|ADDRESS|CITY|AREA|COUNTRY|TYPE|STATUS|
-|189457-0||PO Box 8036|Zürich||Switzerland|Head Office|active|
+|189457-0||PO Box 8036|Zürich||Switzerland|Head Office|Active|
 
 
 Examples:
@@ -163,4 +163,4 @@ Then the user should see the office header with <entity>, <headOfficeAddress>, <
 
 Examples:
 |entity|searchBy|fid|officeFid|headOfficeAddress|officeTfpid|
-|Bank of America National Association|Name|1038|1038-51|Charlotte, North Carolina, USA||
+|Bank of America National Association|Name|1038|1038-51|||

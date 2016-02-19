@@ -21,14 +21,14 @@ Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-Then the user should see the currency selection disabled
+Then the user should see the currency selection disabled in the currency page
 Then the user should see the edit currency details from trusted document
 When the user clicks on the cancel button
 And the user clicks on the cancel yes button
-Then the user should return to view mode of the currency page
+Then the user should return to view currency page mode
 
 Examples:
 |currency|
@@ -38,18 +38,18 @@ Scenario: Verify error message for invalid entry
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user enters the currency name value as <name>
-And the user enters the currency abbr value as <abbr>
-And the user enters the currency unit value as <unit>
-And the user enters the currency quantity value as <quantity>
+And the user enters the currency name value as <name> in the currency page
+And the user enters the currency abbr value as <abbr> in the currency page
+And the user enters the currency unit value as <unit> in the currency page
+And the user enters the currency quantity value as <quantity> in the currency page
 And the user clicks on the save button
-Then the user should see the error message enter up to 100 valid characters for name
-And the user should see the error message enter up to 30 valid characters for abbreviation
-And the user should see the error message enter up to 100 valid characters for unit
-And the user should see the error message enter a numeric value up to 10,000 for quantity
+Then the user should see the error message enter up to 100 valid characters for name in the currency page
+And the user should see the error message enter up to 30 valid characters for abbreviation in the currency page
+And the user should see the error message enter up to 100 valid characters for unit in the currency page
+And the user should see the error message enter a numeric value up to 10,000 for quantity in the currency page
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
@@ -60,12 +60,12 @@ Scenario: Verify error message for required field
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user enters the currency name value as <name>
+And the user enters the currency name value as <name> in the currency page
 And the user clicks on the save button
-Then the user should see the error message for the required name field
+Then the user should see the error message for the required name field in the currency page
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
@@ -76,12 +76,12 @@ Scenario: Verify confirm changes
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user enters the currency abbr value as <abbr>
-And the user enters the currency unit value as <unit>
-And the user enters the currency quantity value as <quantity>
+And the user enters the currency abbr value as <abbr> in the currency page
+And the user enters the currency unit value as <unit> in the currency page
+And the user enters the currency quantity value as <quantity> in the currency page
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the edits to currency details in zeus document
@@ -96,13 +96,13 @@ Scenario: verify save confirmation modal
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the return button
-Then the user should return to edit mode of the currency page
+Then the user should return to edit currency page mode
 
 Examples:
 |currency|
@@ -112,8 +112,8 @@ Scenario: Verify user can edit the currency use for status active. (currency use
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
 Then the user should see the currency usage is editable for status active
 
@@ -125,8 +125,8 @@ Scenario: Verify user can edit the currency use for status inactive. (currency u
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
 Then the user should see the currency usage is editable for status inactive
 
@@ -141,8 +141,8 @@ Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
 Then the user should see the currency uses in edit mode are from trusted document
 Then user should see the list of countries in currency edit mode from trusted document
@@ -155,13 +155,13 @@ Scenario: verify save confirmation modal
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the return button
-Then the user should return to edit mode of the currency page
+Then the user should return to edit currency page mode
 
 Examples:
 |currency|
@@ -175,18 +175,18 @@ Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-Then the user should see the currency selection disabled
+Then the user should see the currency selection disabled in the currency page
 When the user clicks on the cancel button
 And the user clicks on the cancel yes button
-Then the user should return to view mode of the currency page
+Then the user should return to view currency page mode
 When the user clicks on the update link
 When the user clicks on the cancel button
 And the user clicks on the cancel no button
-Then the user should return to edit mode of the currency page
-Then the user should see the currency selection disabled
+Then the user should return to edit currency page mode
+Then the user should see the currency selection disabled in the currency page
 
 Examples:
 |currency|
@@ -196,12 +196,12 @@ Scenario: BUG_ID - ZEUS-808
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user enters the currency quantity value as <quantity>
+And the user enters the currency quantity value as <quantity> in the currency page
 And the user clicks on the save button
-Then the user should see the error message enter a numeric value up to 10,000 for quantity
+Then the user should see the error message enter a numeric value up to 10,000 for quantity in the currency page
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
@@ -212,8 +212,8 @@ Scenario: Verify replaced by currency list
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
 Then the user should see the list of all other existing currencies (by name) excluding the currency they are currently viewing
 
@@ -229,15 +229,15 @@ Scenario: Verify error message for year for start and end date
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-When the user enters the currency start day as <currencyStartDay>
-And the user enters the currency start month as <currencyStartMonth>
-And the user enters the currency start year as <currencyStartYear>
-And the user enters the currency end day as <currencyEndDay>
-And the user enters the currency end month as <currencyEndMonth>
-And the user enters the currency end year as <currencyEndYear>
+When the user enters the currency start day as <currencyStartDay> in the currency page
+And the user enters the currency start month as <currencyStartMonth> in the currency page
+And the user enters the currency start year as <currencyStartYear> in the currency page
+And the user enters the currency end day as <currencyEndDay> in the currency page
+And the user enters the currency end month as <currencyEndMonth> in the currency page
+And the user enters the currency end year as <currencyEndYear> in the currency page
 And the user clicks on the save button
 Then the user should see the error 'Enter a year, month/year or day/month/year.' for start date
 Then the user should see the error 'Enter a year, month/year or day/month/year.' for end date
@@ -245,7 +245,7 @@ Then the user should see the error 'Enter a year, month/year or day/month/year.'
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
 |afghani|Albania|01|||01|||
-|afghani|Albania||Jan||||Jan||
+|afghani|Albania||Jan|||Jan||
 |afghani|Albania|01|Jan||01|Jan||
 |afghani|Albania|01||1988|01||1988|
 
@@ -253,16 +253,16 @@ Scenario: Verify error message required for start and end date
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
 Then the user should see the list of all other existing currencies (by name) excluding the currency they are currently viewing
-When the user enters the currency start day as <currencyStartDay>
-And the user enters the currency start month as <currencyStartMonth>
-And the user enters the currency start year as <currencyStartYear>
-And the user enters the currency end day as <currencyEndDay>
-And the user enters the currency end month as <currencyEndMonth>
-And the user enters the currency end year as <currencyEndYear>
+When the user enters the currency start day as <currencyStartDay> in the currency page
+And the user enters the currency start month as <currencyStartMonth> in the currency page
+And the user enters the currency start year as <currencyStartYear> in the currency page
+And the user enters the currency end day as <currencyEndDay> in the currency page
+And the user enters the currency end month as <currencyEndMonth> in the currency page
+And the user enters the currency end year as <currencyEndYear> in the currency page
 And the user clicks on the save button
 Then the user should see the error 'Required' for start date
 Then the user should see the error 'Required' for end date
@@ -277,11 +277,11 @@ Scenario: Veifing schematron validation for currency
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-When the user enters the currency start year as <currencyStartYear>
-When the user enters the currency end year as <currencyEndYear>
+When the user enters the currency start year as <currencyStartYear> in the currency page
+When the user enters the currency end year as <currencyEndYear> in the currency page
 When the user clicks on the save button
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 And the user should see the error 'Must be after 1500CE.' for start date
@@ -297,17 +297,17 @@ Scenario: Veifing schematron validation for currency
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-When the user enters the currency start year as <currencyStartYear>
+When the user enters the currency start year as <currencyStartYear> in the currency page
 When the user clicks on the save button
 Then the user should see the error 'Must be no later than today.' for start date
 When the user clicks on the cancel button
 And the user clicks on the cancel yes button
-Then the user should return to view mode of the currency page
+Then the user should return to view currency page mode
 When the user clicks on the update link
-When the user enters the currency end year as <currencyEndYear>
+When the user enters the currency end year as <currencyEndYear> in the currency page
 When the user clicks on the save button
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 And the user should see the error 'Must be after start date.' for end date
@@ -323,8 +323,8 @@ Scenario: Verify newly added currency use
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
 And the user clicks on the add country type-ahead option
 Then the user should see the list of all the existing country in add country list
@@ -335,7 +335,7 @@ When the user clicks on the delete option for the additional currency use
 Then the user should not see the additional currency use
 
 Examples:
-|currency|addCurrencyountry|
+|currency|addCurrencyCountry|
 |Deutsche Mark|Afghanistan|
 
 Scenario: Save newly added currency use
@@ -345,14 +345,14 @@ Scenario: Save newly added currency use
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
 And the user clicks on the add country type-ahead option
 When the user enters the country <addCurrencyCountry> in the add country type-ahead box
-When the user enters the currency start day as <currencyStartDay>
-And the user enters the currency start month as <currencyStartMonth>
-And the user enters the currency start year as <currencyStartYear>
+When the user enters the currency start day as <currencyStartDay> in the currency page
+And the user enters the currency start month as <currencyStartMonth> in the currency page
+And the user enters the currency start year as <currencyStartYear> in the currency page
 And the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the view currency use from trusted document
@@ -371,12 +371,12 @@ Scenario: Save updates tp existing currency use
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-When the user enters the currency start day as <currencyStartDay>
-And the user enters the currency start month as <currencyStartMonth>
-And the user enters the currency start year as <currencyStartYear>
+When the user enters the currency start day as <currencyStartDay> in the currency page
+And the user enters the currency start month as <currencyStartMonth> in the currency page
+And the user enters the currency start year as <currencyStartYear> in the currency page
 And the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the view currency use from trusted document
@@ -396,14 +396,14 @@ Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
 When the user enters the country <currencyCountry> in the currency usage
-When the user enters the currency start day as <currencyStartDay>
-And the user enters the currency start month as <currencyStartMonth>
-And the user enters the currency start year as <currencyStartYear>
-And the user enters the currency usage primary value as <primary>
+When the user enters the currency start day as <currencyStartDay> in the currency page
+And the user enters the currency start month as <currencyStartMonth> in the currency page
+And the user enters the currency start year as <currencyStartYear> in the currency page
+And the user enters the currency usage primary value as <primary> in the currency page
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the edits to currency uses in zeus document
@@ -422,18 +422,18 @@ Scenario: ZEUS-286 - User can save edits to the currency uses and verify the dat
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option
-And the user enters the currency <currency> in the typeahead box
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
 When the user enters the country <currencyCountry> in the currency usage
-When the user enters the currency start day as <currencyStartDay>
-And the user enters the currency start month as <currencyStartMonth>
-And the user enters the currency start year as <currencyStartYear>
-And the user enters the currency end day as <currencyEndDay>
-And the user enters the currency end month as <currencyEndMonth>
-And the user enters the currency end year as <currencyEndYear>
-And the user enters the currency usage primary value as <primary>
-And the user enters the currency usage replaced by as <replacedBy>
+When the user enters the currency start day as <currencyStartDay> in the currency page
+And the user enters the currency start month as <currencyStartMonth> in the currency page
+And the user enters the currency start year as <currencyStartYear> in the currency page
+And the user enters the currency end day as <currencyEndDay> in the currency page
+And the user enters the currency end month as <currencyEndMonth> in the currency page
+And the user enters the currency end year as <currencyEndYear> in the currency page
+And the user enters the currency usage primary value as <primary> in the currency page
+And the user enters the currency usage replaced by as <replacedBy> in the currency page
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the edits to currency uses in zeus document
