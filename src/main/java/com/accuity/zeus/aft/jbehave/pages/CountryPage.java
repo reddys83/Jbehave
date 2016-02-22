@@ -167,6 +167,12 @@ public class CountryPage extends AbstractPage {
     private By country_credit_rating_tableBody_id = By.id("additionalCreditRatings");
     private By country_credit_rating_deleteButton_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[4]/td[6]/button");
     private int rowCount;
+    private By country_credit_rating_value_xpath = By.xpath("//*[@id='additionalCreditRatings']/tr[1]/td[3]/input");
+    private By country_credit_value_errorMessage_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[3]/p");
+    private By country_credit_rating_appliedYearMonth_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[4]/fieldset/select");
+    private By country_credit_rating_appliedYear_day_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[4]/fieldset/input[1]");
+
+
 
 
     public CountryPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
@@ -954,7 +960,27 @@ public class CountryPage extends AbstractPage {
         }
     }
 
+    public void enterValue(String value){
+        getDriver().findElement(country_credit_rating_value_xpath).sendKeys(value);
+
+    }
+
+    public void verifyErrorMessageForValidCharacters(){
+        assertEquals("Enter up to 5 valid characters.", getDriver().findElement(country_credit_value_errorMessage_xpath).getText());
+    }
 
 
 
+
+
+    public void enterDatesinAppliedYearCreditRating(String day, String month, String year) {
+        getDriver().findElement(country_credit_rating_appliedYear_day_xpath).clear();
+        getDriver().findElement(country_credit_rating_appliedYear_day_xpath).sendKeys(day);
+        selectItemFromDropdownListByText(country_credit_rating_appliedYearMonth_xpath,month);
+        enterCreditRatingAppliedYear(year);
+    }
+
+    public void verifyErrorMessageYearMonthDay(){
+        assertEquals("Enter a year, month/year or day/month/year.",getDriver().findElement(country_credit_rating_appliedyear_errorNolaterThanToday_xpath).getText());
+    }
 }

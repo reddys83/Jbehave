@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import org.eclipse.jetty.util.annotation.Name;
 import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
@@ -686,4 +687,25 @@ public class CountrySteps extends AbstractSteps{
     public void verifyRowCountAfterDelete(){
         getCountryPage().verifyRowCountAfterDelete();
     }
+
+    @Then("the user enters value <value>")
+    public void userEntersValue(@Named("value")String value){
+        getCountryPage().enterValue(value);
+    }
+
+    @Then("the user should see the error message enter upto 5 valid characters")
+    public void verifyErrorMessageForValidCharacters(){
+            getCountryPage().verifyErrorMessageForValidCharacters();
+    }
+
+    @Then("the user enters data in applied year <day> <month> <year>")
+    public void enterDatesinAppliedYear(@Named("day")String day,@Named("month")String month,@Named("year")String year){
+        getCountryPage().enterDatesinAppliedYearCreditRating(day,month,year);
+    }
+
+    @Then ("the user verifies error message Enter a year, month/year or day/month/year")
+    public void verrifyErrorMessageEnterYearMonthDay(){getCountryPage().verifyErrorMessageYearMonthDay();}
+
+
+
 }
