@@ -4,16 +4,21 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.rest.RestClient;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.w3c.dom.Document;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.DateFormatSymbols;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -135,6 +140,11 @@ public class CountryPage extends AbstractPage {
     private By language_summary_textarea_xpath = By.xpath("//*[@id='content']/div/ul/form/li/dl/dd/textarea");
     private By countryBasicInfo_bankingHours_add_button_id = By.id("add-businessHours");
     private By countryBasicInfo_bankingHours_day_dropdown_xpath = By.xpath(".//*[@class='new'][@data-row_id='businessHours']//select[@name='bankingDay']");
+    private By countryBasicInfo_bankingHours_day_dropdown_values_xpath = By.xpath(".//*[@class='new'][@data-row_id='businessHours']//select[@name='bankingDay']/option");
+    private By countryBasicInfo_bankingHours_existing_day_dropdown_values_xpath = By.xpath(".//*[@data-row_id='businessHours']//select[@name='bankingDay']/option[@selected='selected']");
+    private By countryBasicInfo_bankingHours_startHour_dropdown_xpath = By.xpath(".//*[@class='new'][@data-row_id='businessHours']//select[@name='bankingHour0']/option");
+    private By countryBasicInfo_bankingHours_endHour_dropdown_xpath = By.xpath(".//*[@class='new'][@data-row_id='businessHours']//select[@name='bankingHour1']/option");
+    private By countryBasicInfo_bankingHours_delete_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='businessHours']//button[@class='delete-row']");
 
 
     private By country_identifier_value_err_msg_xpath=By.xpath(".//*[@class=\"notification error\"][@data-error_id='identifierValueError']");
@@ -264,7 +274,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyReplacedByDropdownList() {
-        List<WebElement> replacedBy = getDriver().findElements(By.xpath(basic_info_label_value_xpath+"Replaced By']/td//div[@class='chosen-drop']//li"));
+        List<WebElement> replacedBy = getDriver().findElements(By.xpath(basic_info_label_value_xpath + "Replaced By']/td//div[@class='chosen-drop']//li"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,"country list");
         List<String> countryList = new ArrayList<>();
          for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
@@ -904,9 +914,67 @@ public class CountryPage extends AbstractPage {
         attemptClick(countryBasicInfo_bankingHours_add_button_id);
     }
 
+    public void userClicksOnDeleteCountryBankingHours() {
+        attemptClick(countryBasicInfo_bankingHours_delete_button_xpath);
+    }
+
     public void verifyUserSeeBankingDaysAndHours() {
+        List<String> hours = new ArrayList<>();
         attemptClick(countryBasicInfo_bankingHours_day_dropdown_xpath);
-        Calendar c = new Calendar();
+
+        DateFormatSymbols dateFormatSymbols = new DateFormatSymbols();
+        String[] weekDays = dateFormatSymbols.getWeekdays();
+
+        List<WebElement> dropdownWeeks = getDriver().findElements(countryBasicInfo_bankingHours_day_dropdown_values_xpath);
+        for (int i=0;i<dropdownWeeks.size();i++)
+        {
+            assertTrue(weekDays[i].equals(dropdownWeeks.get(i).getText()));
+        }
+
+            Calendar cal = Calendar.getInstance();
+            cal.clear();
+             hours.add(0," ");
+            for (int i = 1; i <= 48; i++) {
+                int h = cal.get(Calendar.HOUR_OF_DAY);
+                int m = cal.get(Calendar.MINUTE);
+                hours.add(String.format("%02d:%02d", h, m));
+                cal.add(Calendar.MINUTE, 30);
+            }
+
+        List<WebElement> dropdownStartHours = getDriver().findElements(countryBasicInfo_bankingHours_startHour_dropdown_xpath);
+
+        for(int j=0; j< dropdownStartHours.size();j++)
+        {
+            assertTrue(hours.get(j).equals(dropdownStartHours.get(j).getText()));
+        }
+
+        List<WebElement> dropdownEndHours = getDriver().findElements(countryBasicInfo_bankingHours_endHour_dropdown_xpath);
+
+        for(int j=0;j<dropdownEndHours.size();j++)
+        {
+            assertTrue(hours.get(j).equals(dropdownEndHours.get(j).getText()));
+        }
+
+    }
+
+    public void verifyBankingHoursExceptExistingHours() {
+        List<WebElement> ExistingWeekDays = getDriver().findElements(countryBasicInfo_bankingHours_existing_day_dropdown_values_xpath);
+
+        DateFormatSymbols dateFormatSymbols = new DateFormatSymbols();
+        String[] weekDays = dateFormatSymbols.getWeekdays();
+        List<String> weekDaysList =  new ArrayList<>(Arrays.asList(weekDays));
+
+         for(WebElement day : ExistingWeekDays){
+                weekDaysList.remove(day.getText());
+        }
+
+        List<WebElement> newDropdownWeeks = getDriver().findElements(countryBasicInfo_bankingHours_day_dropdown_values_xpath);
+
+        for(int i=0;i<newDropdownWeeks.size();i++)
+        {
+            assertTrue(weekDaysList.get(i).equals(newDropdownWeeks.get(i).getText()));
+        }
+
 
     }
 

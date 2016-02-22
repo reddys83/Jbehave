@@ -647,9 +647,19 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().userClicksOnTheAddCountryBankingHours();
     }
 
+    @When("the user clicks on delete country banking hours option")
+    public void userClicksOnDeleteCountryBankingHours(){
+        getCountryPage().userClicksOnDeleteCountryBankingHours();
+    }
+
     @Then("the user should see a new row with day drop-down list with all days and hours with values in half hour increments")
     public void verifyUserSeesBankingDaysAndHours(){
         getCountryPage().verifyUserSeeBankingDaysAndHours();
     }
+
+    @Then("the user should see a new row with day drop-down list with all days except the day which is already existing")
+    public void verifyBankingHoursExceptExistingHours(){
+        getCountryPage().verifyBankingHoursExceptExistingHours();
+            }
 
 }

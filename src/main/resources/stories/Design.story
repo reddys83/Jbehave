@@ -1,19 +1,16 @@
 Meta:@Design
 
-Scenario: User can use a combination of filters for office list
+Scenario: Please confirm - would you like to delete this row?
 Given a user is on the search page
 When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-When the user selects the office status filter active
-And the user selects the office type filter domestic
-And the user selects the institution type filter Head Office
-Then the user should see the office results for the applied filters
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user clicks on the add country banking hours option
+And the user clicks on delete country banking hours option
+Then the user should see the delete row confirmation modal in the country page
 
 Examples:
-|entity|searchBy|fid|
-|1038|FID|1038|
+|country|
+|Afghanistan|
