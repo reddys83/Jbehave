@@ -90,7 +90,7 @@ And the user reverts the changes to the currency afghani-test
 
 Examples:
 |currency|abbr|unit|quantity|
-|Afghani-test|AFN-test|Puls-Test|100|
+|Afghani-test|AFN|Puls-Test|100|
 
 Scenario: verify save confirmation modal
 Given a user is on the search page

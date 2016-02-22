@@ -59,7 +59,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the currency selection disabled in the currency page")
-    @Alias("the user should see the country selection disabled in the currency page")
+    @Alias("the user should see the country selection disabled in the country page")
     public void verifyCurrencySelectionDisabled() {
         getDataPage().verifyCurrencySelectionDisabled();
     }
