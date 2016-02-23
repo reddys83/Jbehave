@@ -32,7 +32,7 @@ When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
 And the user clicks on the add country banking hours option
-Then the user should see a new row with day drop-down list with all days except the day which is already existing
+Then the user should see a new row with day drop-down list with all days except the day which is already existing and hours with values in half hour increments
 
 Examples:
 |country|

@@ -657,7 +657,7 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyUserSeeBankingDaysAndHours();
     }
 
-    @Then("the user should see a new row with day drop-down list with all days except the day which is already existing")
+    @Then("the user should see a new row with day drop-down list with all days except the day which is already existing and hours with values in half hour increments")
     public void verifyBankingHoursExceptExistingHours(){
         getCountryPage().verifyBankingHoursExceptExistingHours();
             }

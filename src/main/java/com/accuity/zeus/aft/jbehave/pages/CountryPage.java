@@ -958,6 +958,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyBankingHoursExceptExistingHours() {
+        List<String> hours = new ArrayList<>();
         List<WebElement> ExistingWeekDays = getDriver().findElements(countryBasicInfo_bankingHours_existing_day_dropdown_values_xpath);
 
         DateFormatSymbols dateFormatSymbols = new DateFormatSymbols();
@@ -974,6 +975,30 @@ public class CountryPage extends AbstractPage {
         {
             assertTrue(weekDaysList.get(i).equals(newDropdownWeeks.get(i).getText()));
         }
+        Calendar cal = Calendar.getInstance();
+        cal.clear();
+        hours.add(0," ");
+        for (int i = 1; i <= 48; i++) {
+            int h = cal.get(Calendar.HOUR_OF_DAY);
+            int m = cal.get(Calendar.MINUTE);
+            hours.add(String.format("%02d:%02d", h, m));
+            cal.add(Calendar.MINUTE, 30);
+        }
+
+        List<WebElement> dropdownStartHours = getDriver().findElements(countryBasicInfo_bankingHours_startHour_dropdown_xpath);
+
+        for(int j=0; j< dropdownStartHours.size();j++)
+        {
+            assertTrue(hours.get(j).equals(dropdownStartHours.get(j).getText()));
+        }
+
+        List<WebElement> dropdownEndHours = getDriver().findElements(countryBasicInfo_bankingHours_endHour_dropdown_xpath);
+
+        for(int j=0;j<dropdownEndHours.size();j++)
+        {
+            assertTrue(hours.get(j).equals(dropdownEndHours.get(j).getText()));
+        }
+
 
 
     }
