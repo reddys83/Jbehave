@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.apache.http.HttpStatus;
 
+
 @Component
 public class CountrySteps extends AbstractSteps{
 
@@ -645,6 +646,27 @@ public class CountrySteps extends AbstractSteps{
     public void verifyErrorMsgForCountryLanguage(){
         getCountryPage().verifyErrorMsgForCountryLanguage();
     }
+    
+    @When("the user clicks on the add country banking hours option")
+    public void userClicksOnTheAddCountryBankingHours(){
+        getCountryPage().userClicksOnTheAddCountryBankingHours();
+    }
+
+    @When("the user clicks on delete country banking hours option")
+    public void userClicksOnDeleteCountryBankingHours(){
+        getCountryPage().userClicksOnDeleteCountryBankingHours();
+    }
+
+    @Then("the user should see a new row with day drop-down list with all days and hours with values in half hour increments")
+    public void verifyUserSeesBankingDaysAndHours(){
+        getCountryPage().verifyUserSeeBankingDaysAndHours();
+    }
+
+    @Then("the user should see a new row with day drop-down list with all days except the day which is already existing and hours with values in half hour increments")
+    public void verifyBankingHoursExceptExistingHours(){
+        getCountryPage().verifyBankingHoursExceptExistingHours();
+            }
+
 
     @Then("the user enters applied year  <appliedyear>")
     public void enterAppliedYear(@Named("appliedyear") String year) {
