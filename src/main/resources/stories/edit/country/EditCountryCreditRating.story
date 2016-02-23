@@ -68,7 +68,6 @@ When the user clicks on the save button
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 And the user verifies error message Enter a year, month/year or day/month/year
 
-
 Examples:
 |country|day|month|year|
 |Afghanistan|15| | |

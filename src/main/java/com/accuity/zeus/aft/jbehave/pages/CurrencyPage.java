@@ -433,7 +433,7 @@ public class CurrencyPage extends AbstractPage {
         getDriver().findElement(currency_input_quantity_xpath).sendKeys(quantity);
     }
 
-    public void verifyCurrencyPage(){
+    public void verifyCurrencyPageForClickedISOName(){
         try{
             Thread.sleep(2000L);
             assertEquals("CURRENCY",getTextOnPage(currency_header_xpath));
@@ -618,4 +618,7 @@ public class CurrencyPage extends AbstractPage {
         return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
+    public void verifyCurrencyPage() {
+        assertEquals("CURRENCY",getTextOnPage(currency_header_xpath));
+    }
 }
