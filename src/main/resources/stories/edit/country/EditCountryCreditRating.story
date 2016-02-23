@@ -30,10 +30,6 @@ Then the user clicks on remove button to delete row
 When the user clicks on the yes button in the delete row confirmation modal in the country page
 Then the user should not see the newly added name row on credit rating page
 
-
-
-
-
 Examples:
 |country|appliedyear|confirmedyear|
 |Afghanistan|2019|2019|

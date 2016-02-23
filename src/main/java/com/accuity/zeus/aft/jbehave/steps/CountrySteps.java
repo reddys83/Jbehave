@@ -81,7 +81,7 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyReplacedByDropdownList();
     }
 
-    @When("the user enters start date later than today")
+    @When("the user enters the begin date later than today")
     public void entersCountryBasicInfoStartDate() {
         getCountryPage().entersCountryBasicInfoStartDate();
     }
@@ -163,7 +163,7 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyErrorMessageForIntlDialingCode();
     }
 
-    @When("the user enters end date later than today")
+    @When("the user enters the end date later than today")
     public void entersCountryBasicInfoEndDate() {
         getCountryPage().entersCountryBasicInfoEndDate();
     }
@@ -526,6 +526,11 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyNewlyAddedIdentifierRowIsNotDisplayed();
     }
 
+    @Then("the user should see the newly added identifier row in the basic info country page")
+    public void verifyNewlyAddedIdentifierRowIsDisplayed() {
+        getCountryPage().verifyNewlyAddedIdentifierRowIsDisplayed();
+    }
+
     @Then("the user should not see the newly added time zone row in the basic info country page")
     public void verifyNewlyAddedTimeZoneRowIsNotDisplayed(){
         getCountryPage().verifyNewlyAddedTimeZoneRowIsNotDisplayed();
@@ -632,8 +637,8 @@ public class CountrySteps extends AbstractSteps{
     }
 
     @When ("the user enters country languages as <countryLanguages> in the country language country page")
-    public void enterLanguageSummary(@Named("summary")String summary){
-        getCountryPage().enterSummaryLanguage(summary);
+    public void enterLanguageSummary(@Named("countryLanguages")String countryLanguages){
+        getCountryPage().enterSummaryLanguage(countryLanguages);
     }
 
     @Then("the user should see the error message enter upto 100 valid characters for the country language in the country page")
@@ -685,5 +690,20 @@ public class CountrySteps extends AbstractSteps{
     @Then("the user should not see the newly added name row on credit rating page")
     public void verifyRowCountAfterDelete(){
         getCountryPage().verifyRowCountAfterDelete();
+    }
+
+    @Then("the user should not see the cancel update confirmation modal in the country page")
+    public void verifyNoCountryCancelUpdateConfirmationModal(){
+        getDataPage().verifyNoCancelUpdateConfirmationModal();
+    }
+
+    @Then("the user should see the cancel update confirmation modal in the country page")
+    public void verifyCountryCancelUpdateConfirmationModal(){
+        getDataPage().verifyCancelUpdateConfirmationModal();
+    }
+
+    @Then("the user should return to edit country page mode")
+    public void verifyCountryEditPageMode(){
+        getCountryPage().verifyCountryEditPageMode();
     }
 }
