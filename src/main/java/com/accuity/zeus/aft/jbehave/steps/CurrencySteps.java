@@ -2,7 +2,6 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
-import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -168,8 +167,8 @@ public class CurrencySteps extends AbstractSteps{
     }
 
     @Then("the user should see the currency page for clicked iso name")
-    public void verifyCurrencyPage(){
-        getCurrencyPage().verifyCurrencyPage();
+    public void verifyCurrencyPageForClickedISOName(){
+        getCurrencyPage().verifyCurrencyPageForClickedISOName();
     }
 
     @Then("the user reverts the changes to the currency afghani-test")
@@ -331,5 +330,10 @@ public class CurrencySteps extends AbstractSteps{
     public void selectCurrencyFromTypeAhead(@Named("currency") String currency) {
         selectedCurrency = currency;
         getCurrencyPage().selectCurrencyFromTypeAhead(currency);
+    }
+
+    @Then("the user should see the currency page")
+    public void verifyCurrencyPage() {
+        getCurrencyPage().verifyCurrencyPage();
     }
 }

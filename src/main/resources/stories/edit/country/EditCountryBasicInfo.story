@@ -9,6 +9,7 @@ JIRA ID - ZEUS-712 - User can edit country timezones
 JIRA ID - ZEUS-445 - Edit Language Summary for country
 JIRA ID - ZEUS-191 - User can edit country basic info
 JIRA ID - ZEUS-710 - User can edit country identifiers
+JIRA ID - ZEUS-684 - User will get warning if click away from screen they are editing
 
 Scenario: Verify country names type from lookup COUNTRY_NAME_TYPE
 Given a user is on the search page
@@ -17,7 +18,6 @@ And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
-And the user clicks on the add new name button in the basic info country page
 And the user clicks on the country name type drop-down
 Then the user should see the country name types from lookup COUNTRY_NAME_TYPE
 
@@ -154,7 +154,7 @@ And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
-Then the user should see the country selection disabled
+Then the user should see the country selection disabled in the country page
 And the user should see the country ISO2 not editable
 And the user should see the country ISO3 not editable
 And the user should see the country status not editable
@@ -187,10 +187,26 @@ And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
-And the user enters start date later than today
-And the user enters end date later than today
+And the user enters the begin date later than today
+And the user enters the end date later than today
 And the user clicks on the save button
 Then the user should see the error 'Must be no later than today.' for start date
+Then the user should see the error 'Must be after start date.' for end date
+
+Examples:
+|country|
+|Åland Islands|
+
+Scenario: The edit country basic info, The user should see the error messagses for start and end date if the dates are later than today
+Meta:
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user enters the end date later than today
+And the user clicks on the save button
 Then the user should see the error 'Must be no later than today.' for end date
 
 Examples:
@@ -290,7 +306,7 @@ And the user clicks on the add new identifier button in the basic info country p
 And the user clicks on the delete name row button in the basic info country page
 Then the user should see the delete row confirmation modal in the country page
 When the user clicks on the no button in the delete row confirmation modal in the country page
-Then the user should see the newly added name row in the basic info country page
+Then the user should see the newly added identifier row in the basic info country page
 When the user clicks on the delete identifier row button in the basic info country page
 When the user clicks on the yes button in the delete row confirmation modal in the country page
 Then the user should not see the newly added identifier row in the basic info country page
@@ -316,3 +332,27 @@ And the user should see the error message at top of page the highlighted fields 
 Examples:
 |country|identifierType|
 |Afghanistan||
+
+Scenario:User will get warning if click away from screen they are editing
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user clicks on the country basic info link in the navigation bar
+Then the user should not see the cancel update confirmation modal in the country page
+When the user clicks on the currency tab in the data area
+Then the user should see the cancel update confirmation modal in the country page
+When the user clicks on the cancel no button
+Then the user should return to edit country page mode
+When the user clicks on the currency tab in the data area
+Then the user should see the cancel update confirmation modal in the country page
+When the user clicks on the cancel yes button
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
+Then the user should see the currency page
+
+Examples:
+|country|currency|
+|Afghanistan|Rand|

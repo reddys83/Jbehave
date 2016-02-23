@@ -181,18 +181,17 @@ public class DataPage extends AbstractPage {
     private By save_button_id = By.id("save-button");
     private By error_message_at_top_xpath = By.xpath("//*[@id='error']/div/div/p");
     private By confirm_button_xpath = By.xpath("//*[@id='modal-region'] //*[@id='confirm-button']");
-    private By cancel_yes_button_id = By.id("confirm-button");
+    private By cancel_yes_button_xpath = By.xpath("//*[@class='modal-content'] //*[@id='confirm-button']");
     private By return_button_xpath = By.xpath("//*[@id='modal-region'] //button[@id='cancel-button']");
     private By confirm_changes_info_xpath = By.xpath("//*[@id='modal-region']/div/p");
     private By confirm_changes_heading_xpath = By.xpath("//*[@id='modal-region']/div/h1");
     private By country_tab_xpath=By.xpath("//*[@id='data-navbar']/ul/li[2]");
-    private By cancel_no_button_id = By.id("cancel-button");
+    private By cancel_no_button_xpath = By.xpath("//*[@class='modal-content'] //*[@id='cancel-button']");
     private By currency_country_selection_disabled_xpath =By.xpath(".//*[@id='entitySelect_chosen'][@class='chosen-container chosen-container-single chosen-disabled']");
     private By start_date_error_msg_xpath = By.xpath("//*[@data-error_id='startDateError']");
     private By end_date_error_msg_xpath = By.xpath("//*[@data-error_id='endDateError']");
     private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
-    private Response response;
-    private String currencySearchString = null;
+    private By cancel_update_confirmation_modal_xpath = By.xpath("//*[@id='modal-region']/div");
 
     static ResponseEntity responseEntity;
 
@@ -997,7 +996,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnCancelYesButton() {
-        attemptClick(cancel_yes_button_id);
+        attemptClick(cancel_yes_button_xpath);
     }
 
     public void verifySaveConfirmationModal() {
@@ -1022,7 +1021,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnCancelNoButton() {
-        attemptClick(cancel_no_button_id);
+        attemptClick(cancel_no_button_xpath);
     }
 
     public void verifyAreaList(Database database, ApacheHttpClient apacheHttpClient) {
@@ -1099,4 +1098,19 @@ public class DataPage extends AbstractPage {
         assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(end_date_error_msg_xpath).getText());
     }
 
+    public void verifyNoCancelUpdateConfirmationModal() {
+        try {
+            assertFalse(getDriver().findElement(cancel_update_confirmation_modal_xpath).isDisplayed());
+        }catch (NoSuchElementException e){
+        }
+    }
+
+    public void verifyCancelUpdateConfirmationModal() {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals("Cancel UpdateDo you want to leave this update without saving?NO YES", getDriver().findElement(cancel_update_confirmation_modal_xpath).getText().replace("\n",""));
+    }
 }
