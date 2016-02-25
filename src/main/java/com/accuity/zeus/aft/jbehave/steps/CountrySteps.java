@@ -14,7 +14,7 @@ import org.apache.http.HttpStatus;
 
 
 @Component
-public class CountrySteps extends AbstractSteps{
+public class CountrySteps extends AbstractSteps {
 
     @Autowired
     ApacheHttpClient apacheHttpClient;
@@ -69,7 +69,7 @@ public class CountrySteps extends AbstractSteps{
     }
 
     @Then("the user should see the edits to country basic info from trusted dcoument")
-    public void verifyEditCountryBasicInfoFromTrusted(){
+    public void verifyEditCountryBasicInfoFromTrusted() {
         getCountryPage().verifyEditCountryBasicInfoFromTrusted();
     }
 
@@ -107,12 +107,14 @@ public class CountrySteps extends AbstractSteps{
     public void enterCountryReplacedBy(@Named("countryReplacedBy") String countryReplacedBy) {
         getCountryPage().enterCountryReplacedBy(countryReplacedBy);
     }
+
     @When("the user enters country add info as <countryAddInfo>")
     public void enterCountryAddInfo(@Named("countryAddInfo") String countryAddInfo) {
         getCountryPage().enterCountryAddInfo(countryAddInfo);
     }
+
     @When("the user enters country imports as <countryImports>")
-    public void enterCountryImports(@Named("countryImports") String countryImports){
+    public void enterCountryImports(@Named("countryImports") String countryImports) {
         getCountryPage().enterCountryImports(countryImports);
     }
 
@@ -120,17 +122,19 @@ public class CountrySteps extends AbstractSteps{
     public void enterCountryExports(@Named("countryExports") String countryExports) {
         getCountryPage().enterCountryExports(countryExports);
     }
+
     @When("the user enters country political structure as <countryPoliticalStructure>")
     public void enterCountryPoliticalStructure(@Named("countryPoliticalStructure") String countryPoliticalStructure) {
         getCountryPage().enterCountryPoliticalStructure(countryPoliticalStructure);
     }
+
     @When("the user enters country intl dialing code as <countryIntlDialingCode>")
     public void enterCountryIntlDialingCode(@Named("countryIntlDialingCode") String countryIntlDialingCode) {
         getCountryPage().enterCountryIntlDialingCode(countryIntlDialingCode);
     }
 
     @When("the user enters more than 200 characters in the country exports")
-    public void enterInvalidCharactersInCountryExports(){
+    public void enterInvalidCharactersInCountryExports() {
         getCountryPage().enterInvalidCharactersInCountryExports();
     }
 
@@ -145,23 +149,27 @@ public class CountrySteps extends AbstractSteps{
     }
 
     @Then("the user should see the error message enter uptp 500 valid charecters for addinfo")
-    public void verifyErrorMessageForAddInfo(){
+    public void verifyErrorMessageForAddInfo() {
         getCountryPage().verifyErrorMessageForAddInfo();
     }
+
     @Then("the user should see the error message enter upto 200 valid charecters for imports")
     public void verifyErrorMessageForImports() {
         getCountryPage().verifyErrorMessageForImports();
     }
+
     @Then("the user should see the error message enter upto 200 valid charecters for exports")
     public void verifyErrorMessageForExports() {
         getCountryPage().verifyErrorMessageForExports();
     }
+
     @Then("the user should see the error message enter upto 200 valid charecters for political structure")
     public void verifyErrorMessageForPoliticalStructure() {
         getCountryPage().verifyErrorMessageForPoliticalStructure();
     }
+
     @Then("the user should see the error message enter upto 5 valid charectes for intl dialing code")
-   public void verifyErrorMessageForIntlDialingCode() {
+    public void verifyErrorMessageForIntlDialingCode() {
         getCountryPage().verifyErrorMessageForIntlDialingCode();
     }
 
@@ -171,8 +179,7 @@ public class CountrySteps extends AbstractSteps{
     }
 
     @When("the user enters more than 200 characters in the country imports")
-    public void enterInvalidCharactersInCountryImports()
-    {
+    public void enterInvalidCharactersInCountryImports() {
         getCountryPage().enterInvalidCharactersInCountryImports();
     }
 
@@ -372,7 +379,7 @@ public class CountrySteps extends AbstractSteps{
     }
 
     @Then("the user should see the below country sections $countrySections")
-    public void verifyCountrySections(ExamplesTable countrySections){
+    public void verifyCountrySections(ExamplesTable countrySections) {
         getDataPage().verifySections(countrySections);
     }
 
@@ -387,54 +394,54 @@ public class CountrySteps extends AbstractSteps{
     }
 
     @When("the user clicks on the country name type drop-down")
-    public void clickOnCountryNameType(){
+    public void clickOnCountryNameType() {
         getCountryPage().clickOnCountryNameType();
     }
 
 
     @When("the user clicks on the country Identifier type drop-down")
-    public void clickOnCountryIdentifierType(){
+    public void clickOnCountryIdentifierType() {
         getCountryPage().clickOnCountryIdentifierType();
     }
 
     @Then("the user should see the country name types from lookup COUNTRY_NAME_TYPE")
-    public void verifyCountryNameTypesList(){
+    public void verifyCountryNameTypesList() {
         getCountryPage().verifyCountryNameTypesList(database, apacheHttpClient);
     }
 
     @Then("the user should see the country identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO")
-    public void verifyCountryIdentifierTypesList(){
+    public void verifyCountryIdentifierTypesList() {
         getCountryPage().verifyCountryIdentifierTypesList(database, apacheHttpClient);
     }
 
     @When("the user clicks on the add new name button in the basic info country page")
-    public void clickOnAddNewNameButton(){
+    public void clickOnAddNewNameButton() {
         getCountryPage().clickOnAddNewNameButton();
     }
 
     @When("the user clicks on the add new identifier button in the basic info country page")
-    public void clickOnAddNewIdentifierButton(){
+    public void clickOnAddNewIdentifierButton() {
         getCountryPage().clickOnAddNewIdentifierButton();
     }
 
     @When("the user should see the default identifier status as active")
-    public void assertIdentifierStatus(){
+    public void assertIdentifierStatus() {
         getCountryPage().verifyIdentifierStatus();
     }
 
     @When("the user enters country name as <countryName> in the basic info country page")
-    public void enterCountryName(@Named("countryName") String countryName){
+    public void enterCountryName(@Named("countryName") String countryName) {
         getCountryPage().enterCountryName(countryName);
     }
 
 
     @When("the user clears identifier value in the basic info country page")
-    public void clearCountryIdentifierValue(){
+    public void clearCountryIdentifierValue() {
         getCountryPage().clearCountryIdentifierValue();
     }
 
     @When("the user clears identifier type in the basic info country page")
-    public void clearCountryIdentifierType(){
+    public void clearCountryIdentifierType() {
         getCountryPage().clearCountryIdentifierType();
     }
 
@@ -449,18 +456,17 @@ public class CountrySteps extends AbstractSteps{
     }
 
     @Then("the user should see the error message for the required country name field in the basic info country page")
-    public void verifyErrorMessageForCountryName(){
+    public void verifyErrorMessageForCountryName() {
         getCountryPage().verifyErrorMessageForCountryName();
     }
 
     @Then("the user should see the error message for the required name type field in the basic info country page")
-    public void verifyErrorMessageForRequiredNameType(){
+    public void verifyErrorMessageForRequiredNameType() {
         getCountryPage().verifyErrorMessageForRequiredNameType();
     }
 
 
-
-    @Then("the user should see the error message for the required Identifier Value field in the basic info identifier page")
+    @Then("the user should see the error message for the required identifier value field in the basic info identifier page")
     public void verifyErrorMessageForRequiredIdentifierValue() {
         getCountryPage().verifyErrorMessageForRequiredIdentifierValue();
     }
@@ -470,55 +476,54 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyErrorMessageForLongIdentifierValue();
     }
 
-    @Then("the user should see the error message for the required Identifier Type field in the basic info identifier page")
+    @Then("the user should see the error message for the required identifier type field in the basic info identifier page")
     public void verifyErrorMessageForRequiredIdentifierType() {
         getCountryPage().verifyErrorMessageForRequiredIdentifierType();
     }
 
-
     @Then("the user should see the error message for the required name value field in the basic info country page")
-    public void verifyErrorMessageForRequiredValueType(){
+    public void verifyErrorMessageForRequiredValueType() {
         getCountryPage().verifyErrorMessageForRequiredValueType();
     }
 
     @When("the user clicks on the delete name row button in the basic info country page")
     @Alias("the user clicks on the delete time zone row button in the basic info country page")
-    public void clickOnDeleteNewRowButton(){
+    public void clickOnDeleteNewRowButton() {
         getCountryPage().clickOnDeleteNewRowButton();
     }
 
     @Then("the user should see the delete row confirmation modal in the country page")
-    public void verifyDeleteConfirmationModal(){
+    public void verifyDeleteConfirmationModal() {
         getCountryPage().verifyDeleteConfirmationModal();
     }
 
     @When("the user clicks on the delete identifier row button in the basic info country page")
-    public void clickOnDeleteNewIdentifierRowButton(){
+    public void clickOnDeleteNewIdentifierRowButton() {
         getCountryPage().clickOnDeleteNewRowButton();
     }
 
     @When("the user clicks on the no button in the delete row confirmation modal in the country page")
-    public void clickOnNoButtonInDeleteConfirmationModal(){
+    public void clickOnNoButtonInDeleteConfirmationModal() {
         getCountryPage().clickOnNoButtonInDeleteConfirmationModal();
     }
 
     @When("the user clicks on the yes button in the delete row confirmation modal in the country page")
-    public void clickOnYesButtonInDeleteConfirmationModal(){
+    public void clickOnYesButtonInDeleteConfirmationModal() {
         getCountryPage().clickOnYesButtonInDeleteConfirmationModal();
     }
 
     @Then("the user should see the newly added name row in the basic info country page")
-    public void verifyNewlyAddedNameRowIsDisplayed(){
+    public void verifyNewlyAddedNameRowIsDisplayed() {
         getCountryPage().verifyNewlyAddedNameRowIsDisplayed();
     }
 
     @Then("the user should see the newly added time zone row in the basic info country page")
-    public void verifyNewlyAddedTimeZoneRowIsDisplayed(){
+    public void verifyNewlyAddedTimeZoneRowIsDisplayed() {
         getCountryPage().verifyNewlyAddedTimeZoneRowIsDisplayed();
     }
 
     @Then("the user should not see the newly added name row in the basic info country page")
-    public void verifyNewlyAddedNameRowIsNotDisplayed(){
+    public void verifyNewlyAddedNameRowIsNotDisplayed() {
         getCountryPage().verifyNewlyAddedNameRowIsNotDisplayed();
     }
 
@@ -534,97 +539,97 @@ public class CountrySteps extends AbstractSteps{
     }
 
     @Then("the user should not see the newly added time zone row in the basic info country page")
-    public void verifyNewlyAddedTimeZoneRowIsNotDisplayed(){
+    public void verifyNewlyAddedTimeZoneRowIsNotDisplayed() {
         getCountryPage().verifyNewlyAddedTimeZoneRowIsNotDisplayed();
     }
 
     @Then("the user should see the error message enter up to 50 valid characters for country name value in the basic info country page")
-    public void verifyCountryNameValueErrMsg(){
+    public void verifyCountryNameValueErrMsg() {
         getCountryPage().verifyCountryNameValueErrMsg();
     }
 
     @Then("the user should see the error message enter up to 100 valid characters for time zone summary in the basic info country page")
-    public void verifyErrorMessageForTimeZoneSummary(){
+    public void verifyErrorMessageForTimeZoneSummary() {
         getCountryPage().verifyErrorMessageForTimeZoneSummary();
     }
 
     @When("the user enters time zones summary <timeZoneSummary> in the basic info country page")
-    public void enterTimeZoneSummary(@Named("timeZoneSummary") String timeZoneSummary){
+    public void enterTimeZoneSummary(@Named("timeZoneSummary") String timeZoneSummary) {
         getCountryPage().enterTimeZoneSummary(timeZoneSummary);
     }
 
     @When("the user clicks on the add new time zone button in the basic info country page")
-    public void clickOnAddNewTimeZone(){
+    public void clickOnAddNewTimeZone() {
         getCountryPage().clickOnAddNewTimeZone();
     }
 
     @When("the user clicks on the select time zone list in the basic info country page")
-    public void clickOnSelectTimeZone(){
+    public void clickOnSelectTimeZone() {
         getCountryPage().clickOnSelectTimeZone();
     }
 
     @Then("the user should see the country time zones from lookup TIME_ZONE")
-    public void verifyCountryTimeZoneSummary(){
+    public void verifyCountryTimeZoneSummary() {
         getCountryPage().verifyCountryTimeZoneSummary();
     }
 
     @When("the user enters holiday day <day> in the holidays country page")
-    public void enterCountryHolidayDay(@Named("day") String day){
+    public void enterCountryHolidayDay(@Named("day") String day) {
         getCountryPage().enterCountryHolidayDay(day);
     }
 
     @When("the user enters holiday month <month> in the holidays country page")
-    public void enterCountryHolidayMonth(@Named("month") String month){
+    public void enterCountryHolidayMonth(@Named("month") String month) {
         getCountryPage().enterCountryHolidayMonth(month);
     }
 
     @When("the user enters holiday year <year> in the holidays country page")
-    public void enterCountryHolidayYear(@Named("year") String year){
+    public void enterCountryHolidayYear(@Named("year") String year) {
         getCountryPage().enterCountryHolidayYear(year);
     }
 
     @Then("the user should see the error message enter a day/month/year in the holidays country page")
-    public void verifyErrorMsgForCountryHolidayDate(){
+    public void verifyErrorMsgForCountryHolidayDate() {
         getCountryPage().verifyErrorMsgForCountryHolidayDate();
     }
 
     @Then("the user should see the error message required for holiday date in the holidays country page")
-    public void verifyErrorMsgRequiredForCountryHolidayDate(){
+    public void verifyErrorMsgRequiredForCountryHolidayDate() {
         getCountryPage().verifyErrorMsgRequiredForCountryHolidayDate();
     }
 
     @When("the user clicks on the add new holiday button in the holidays country page")
-    public void clickOnAddNewCountryHolidayButton(){
+    public void clickOnAddNewCountryHolidayButton() {
         getCountryPage().clickOnAddNewCountryHolidayButton();
     }
 
     @When("the user enters holiday description <description> in the holidays country page")
-    public void enterCountryHolidayDescription(@Named("description") String description){
+    public void enterCountryHolidayDescription(@Named("description") String description) {
         getCountryPage().enterCountryHolidayDescription(description);
     }
 
     @When("the user enters holiday notes <notes> in the holidays country page")
-    public void enterCountryHolidayNotes(@Named("notes") String notes){
+    public void enterCountryHolidayNotes(@Named("notes") String notes) {
         getCountryPage().enterCountryHolidayNotes(notes);
     }
 
     @Then("the user should see the error message enter up to 100 valid characters for holiday description in the holidays country page")
-    public void verifyCountryHolidaysDescriptionErrMsg(){
+    public void verifyCountryHolidaysDescriptionErrMsg() {
         getCountryPage().verifyCountryHolidaysDescriptionErrMsg();
     }
 
     @Then("the user should see the error message enter up to 100 valid characters for holiday notes in the holidays country page")
-    public void verifyCountryHolidaysNotesErrMsg(){
+    public void verifyCountryHolidaysNotesErrMsg() {
         getCountryPage().verifyCountryHolidaysNotesErrMsg();
     }
 
     @Then("the user should see the newly added holiday row in the holiday country page")
-    public void verifyNewlyAddedHolidayRow(){
+    public void verifyNewlyAddedHolidayRow() {
         getCountryPage().verifyNewlyAddedHolidayRow();
     }
 
     @Then("the user should not see the newly added holiday row in the holiday country page")
-    public void verifyNoNewlyAddedHolidayRow(){
+    public void verifyNoNewlyAddedHolidayRow() {
         getCountryPage().verifyNoNewlyAddedHolidayRow();
     }
 
@@ -634,39 +639,39 @@ public class CountrySteps extends AbstractSteps{
     }
 
     @When("the user clicks on language option")
-    public void clickOnLanguageLink(){
+    public void clickOnLanguageLink() {
         getCountryPage().clickOnLanguageLink();
     }
 
-    @When ("the user enters country languages as <countryLanguages> in the country language country page")
-    public void enterLanguageSummary(@Named("countryLanguages")String countryLanguages){
+    @When("the user enters country languages as <countryLanguages> in the country language country page")
+    public void enterLanguageSummary(@Named("countryLanguages") String countryLanguages) {
         getCountryPage().enterSummaryLanguage(countryLanguages);
     }
 
     @Then("the user should see the error message enter upto 100 valid characters for the country language in the country page")
-    public void verifyErrorMsgForCountryLanguage(){
+    public void verifyErrorMsgForCountryLanguage() {
         getCountryPage().verifyErrorMsgForCountryLanguage();
     }
-    
+
     @When("the user clicks on the add country banking hours option")
-    public void userClicksOnTheAddCountryBankingHours(){
+    public void userClicksOnTheAddCountryBankingHours() {
         getCountryPage().userClicksOnTheAddCountryBankingHours();
     }
 
     @When("the user clicks on delete country banking hours option")
-    public void userClicksOnDeleteCountryBankingHours(){
+    public void userClicksOnDeleteCountryBankingHours() {
         getCountryPage().userClicksOnDeleteCountryBankingHours();
     }
 
     @Then("the user should see a new row with day drop-down list with all days and hours with values in half hour increments")
-    public void verifyUserSeesBankingDaysAndHours(){
+    public void verifyUserSeesBankingDaysAndHours() {
         getCountryPage().verifyUserSeeBankingDaysAndHours();
     }
 
     @Then("the user should see a new row with day drop-down list with all days except the day which is already existing and hours with values in half hour increments")
-    public void verifyBankingHoursExceptExistingHours(){
+    public void verifyBankingHoursExceptExistingHours() {
         getCountryPage().verifyBankingHoursExceptExistingHours();
-            }
+    }
 
 
     @Then("the user enters applied year  <appliedyear>")
@@ -674,44 +679,44 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().enterCreditRatingAppliedYear(year);
     }
 
-    @Then ("the user should see error next to applied year")
-    public void verifyErrorMessageAppliedYearLaterThanToday(){
+    @Then("the user should see error next to applied year")
+    public void verifyErrorMessageAppliedYearLaterThanToday() {
         getCountryPage().verifyErrorMessageAppliedYearLaterThanToday();
     }
 
     @Then("the user enters confirmed year <confirmedyear>")
-    public void enterConfirmedYear(@Named("confirmedyear") String confirmedYear){
+    public void enterConfirmedYear(@Named("confirmedyear") String confirmedYear) {
         getCountryPage().enterCreditRatingConfirmedYear(confirmedYear);
     }
 
     @Then("the user should see error next to confirmed year")
-    public void verifyErrorMessageConfirmedYearLaterThanToday(){
+    public void verifyErrorMessageConfirmedYearLaterThanToday() {
         getCountryPage().verifyErrorMessageConfirmedYearLaterThanToday();
     }
 
     @Then("the user should see required error when there is an empty row")
-    public void verifyRequiredErrorMessagae(){
+    public void verifyRequiredErrorMessagae() {
         getCountryPage().verifyRequiredErrorMessage();
     }
 
     @When("the user clicks on add row button verify need row added")
-    public void clickOnAddButton(){
+    public void clickOnAddButton() {
         getCountryPage().clickAddRowButton();
         getCountryPage().verifyRowCount();
     }
 
-    @Then ("the user clicks on remove button to delete row")
-    public void clickOnRemoveButton(){
+    @Then("the user clicks on remove button to delete row")
+    public void clickOnRemoveButton() {
         getCountryPage().clickOnRemoveButton();
     }
 
     @Then("the user should see the newly added name row on the credit rating page")
-    public void verifyRowCount(){
+    public void verifyRowCount() {
         getCountryPage().verifyRowCount();
     }
 
     @Then("the user should not see the newly added name row on credit rating page")
-    public void verifyRowCountAfterDelete(){
+    public void verifyRowCountAfterDelete() {
         getCountryPage().verifyRowCountAfterDelete();
     }
 
@@ -734,17 +739,118 @@ public class CountrySteps extends AbstractSteps{
     public void verrifyErrorMessageEnterYearMonthDay(){getCountryPage().verifyErrorMessageYearMonthDay();}
 
     @Then("the user should not see the cancel update confirmation modal in the country page")
-    public void verifyNoCountryCancelUpdateConfirmationModal(){
+    public void verifyNoCountryCancelUpdateConfirmationModal() {
         getDataPage().verifyNoCancelUpdateConfirmationModal();
     }
 
     @Then("the user should see the cancel update confirmation modal in the country page")
-    public void verifyCountryCancelUpdateConfirmationModal(){
+    public void verifyCountryCancelUpdateConfirmationModal() {
         getDataPage().verifyCancelUpdateConfirmationModal();
     }
 
     @Then("the user should return to edit country page mode")
-    public void verifyCountryEditPageMode(){
+    public void verifyCountryEditPageMode() {
         getCountryPage().verifyCountryEditPageMode();
     }
+
+    @When("the user enters iban registered day <day> in the payments country page")
+    public void enterIBANRegisteredDay(@Named("day") String day) {
+        getCountryPage().enterIBANRegisteredDay(day);
+    }
+
+    @When("the user selects iban registered month <month> in the payments country page")
+    public void selectIBANRegisteredMonth(@Named("month") String month) {
+        getCountryPage().selectIBANRegisteredMonth(month);
+    }
+
+    @When("the user enters iban registered year <year> in the payments country page")
+    public void enterIBANRegisteredYear(@Named("year") String year) {
+        getCountryPage().enterIBANRegisteredYear(year);
+    }
+
+    @Then("the user should see the error message enter a year, month/year or day/month/year for country payments in the country page")
+    public void verifyErrorMsgForCountryPaymentsRegisteredDate() {
+        getCountryPage().verifyErrorMsgForCountryPaymentsRegisteredDate();
+    }
+
+    @When("the user clicks on the country payments iban routing code types in the country page")
+    public void clickOnIBANRoutingCodeTypes() {
+        getCountryPage().clickOnIBANRoutingCodeTypes();
+    }
+
+    @Then("the user should see the iban routing code type drop-down lists values alphabetically from lookup ROUTING_CODE_TYPE")
+    public void verifyIBANRoutingCodeTypes() {
+        getCountryPage().verifyIBANRoutingCodeTypes();
+    }
+
+    @When("the user clicks on the country payments routing code types in the country page")
+    public void clickOnRoutingCodeTypes() {
+        getCountryPage().clickOnRoutingCodeTypes();
+    }
+
+    @Then("the user should see the routing code type drop-down lists values alphabetically from lookup ROUTING_CODE_TYPE")
+    public void verifyRoutingCodeTypes() {
+        getCountryPage().verifyRoutingCodeTypes();
+    }
+
+    @When("the user clicks on the country payments iso code in the country page")
+    public void clickOnCountryPaymentsIsoCode(){
+        getCountryPage().clickOnCountryPaymentsIsoCode();
+    }
+
+    @Then("the user should see the iban country iso2 code drop-down list sorted alphabetically in the country page")
+    public void verifyCountryPaymentsIso2List(){
+        getCountryPage().verifyCountryPaymentsIso2List();
+    }
+
+    @Then("the user should see the country payments iban info from trusted document")
+    public void verifyCountryIBANInfoFromTrusted(){
+        getCountryPage().verifyCountryIBANInfoFromTrusted(database, apacheHttpClient);
+    }
+
+    @Then("the user should see the country payments routing code types from trusted document")
+    public void verifyCountryRoutingCodeTypesFromTrusted(){
+        getCountryPage().verifyCountryRoutingCodeTypesFromTrusted(database, apacheHttpClient);
+    }
+
+    @When("the user clicks on the add new iban button in the payments country page")
+    public void clickOnAddNewIBANButton(){
+        getCountryPage().clickOnAddNewIBANButton();
+    }
+
+    @When("the user clicks on the add new routing code button in the payments country page")
+    public void clickOnAddNewRoutingCodeButton(){
+        getCountryPage().clickOnAddNewRoutingCodeButton();
+    }
+
+    @When("the user clicks on the delete iban row button in the basic info country page")
+    public void clickOnDeleteIBANRowButton() {
+        getCountryPage().clickOnDeleteNewRowButton();
+    }
+
+    @When("the user clicks on the delete routing code row button in the basic info country page")
+    public void clickOnDeleteRoutingCodeRowButton() {
+        getCountryPage().clickOnDeleteNewRowButton();
+    }
+
+    @Then("the user should see the newly added iban row in the holiday country page")
+    public void verifyNewlyAddedIBANRow() {
+        getCountryPage().verifyNewlyAddedIBANRow();
+    }
+
+    @Then("the user should not see the newly added iban row in the holiday country page")
+    public void verifyNoNewlyAddedIBANRow(){
+        getCountryPage().verifyNoNewlyAddedIBANRow();
+    }
+
+    @Then("the user should see the newly added routing code row in the holiday country page")
+    public void verifyNewlyAddedRoutingCodeRow() {
+        getCountryPage().verifyNewlyAddedRoutingCodeRow();
+    }
+
+    @Then("the user should not see the newly added routing code row in the holiday country page")
+    public void verifyNoNewlyAddedRoutingCodeRow(){
+        getCountryPage().verifyNoNewlyAddedRoutingCodeRow();
+    }
 }
+

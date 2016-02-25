@@ -51,6 +51,10 @@ public class XqueryMap {
         queryMap.put("get country names type", "getCountryNamesType.xqy");
         queryMap.put("get country time zones", "getCountryTimeZone.xqy");
         queryMap.put("get country identifiers", "getCountryIdentifiers.xqy");
+        queryMap.put("get routing code types", "getRoutingCodeTypes.xqy");
+        queryMap.put("get country iso2 list", "getCountryISO2List.xqy");
+        queryMap.put("get country IBAN info", "getCountryIBANInfo.xqy");
+        queryMap.put("get country routing codes", "getCountryRoutingCodes.xqy");
     }
 
     public String getXquery(String key){

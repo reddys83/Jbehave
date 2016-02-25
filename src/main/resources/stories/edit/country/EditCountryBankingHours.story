@@ -1,10 +1,10 @@
-Meta: @EditCountryBasicInfo @Edit @Country
+Meta:@EditCountryBasicInfo @Edit @Country
 
 Narrative:
 As a user
 I want to perform an action
 So that I can achieve a business goal
-
+JIRA ID - ZEUS-711 - User can edit country banking hours
 
 Scenario: When the user edit the country banking hours and verify the day drop down and hours drop down
 TestCase: Where the country which doesn't have any day info

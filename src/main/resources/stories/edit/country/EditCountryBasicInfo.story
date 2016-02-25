@@ -268,8 +268,8 @@ And the user clicks on the update link
 And the user clicks on the add new identifier button in the basic info country page
 And the user should see the default identifier status as active
 And the user clicks on the save button
-Then the user should see the error message for the required Identifier Value field in the basic info identifier page
-Then the user should see the error message for the required Identifier Type field in the basic info identifier page
+Then the user should see the error message for the required identifier value field in the basic info identifier page
+Then the user should see the error message for the required identifier type field in the basic info identifier page
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 When the user enters identifier type as <identifierType> in the basic info country page
 And the user enters identifier value as <identifierValueIncorrect> in the basic info country page
