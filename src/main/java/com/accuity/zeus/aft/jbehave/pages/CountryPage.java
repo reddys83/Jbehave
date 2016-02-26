@@ -4,7 +4,6 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.rest.RestClient;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -169,14 +168,20 @@ public class CountryPage extends AbstractPage {
     private By country_intlDialingCode_error_message_edit_xpath = By.xpath("//*[@data-error_id='telephoneCodeError']");
     private By country_replacedBy_edit_xpath = By.xpath("//*[@id='content']/div/ul/li[1]/ul/li[2]/fieldset/table/tbody/tr[4]/td/div/ul/li");
     private By country_credit_rating_appliedYear_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[4]/fieldset/input[2]");
-    private By country_credit_rating_appliedyear_errorNolaterThanToday_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[4]/fieldset/p");
-    private By country_credit_rating_confirmedYear_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[2]/td[5]/fieldset/input[2]");
-    private By country_credit_rating_confirmedYear_errorNoLaterThanToday_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[2]/td[5]/fieldset/p");
+    private By country_credit_rating_applied_date_error_msg_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[4]/fieldset/p");
+    private By country_credit_rating_confirmed_date_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[2]/td[5]/fieldset/input[2]");
+    private By country_credit_rating_confirmed_date_error_msg_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[2]/td[5]/fieldset/p");
     private By country_credit_rating_required_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[3]/td[5]/fieldset/p");
     private By country_credit_rating_addRow_id = By.id("add-creditRatings");
-    private By country_credit_rating_tableBody_id = By.id("additionalCreditRatings");
-    private By country_credit_rating_deleteButton_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[4]/td[6]/button");
+    private By country_credit_rating_table_body_id = By.id("additionalCreditRatings");
+    private By country_credit_rating_delete_button_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[4]/td[6]/button");
     private int rowCount;
+    private By country_credit_rating_value_xpath = By.xpath("//*[@id='additionalCreditRatings']/tr[1]/td[3]/input");
+    private By country_credit_value_error_msg_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[3]/p");
+    private By country_credit_rating_applied_date_month_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[4]/fieldset/select");
+    private By country_credit_rating_confirmed_year_month_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[5]/fieldset/select");
+    private By country_credit_rating_applied_date_day_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[4]/fieldset/input[1]");
+    private By country_credit_rating_confirmed_date_day_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[5]/fieldset/input[1]");
     private By country_edit_fields_xpath = By.xpath("//*[@id='content'] //*[@type='text']");
     private By countryBasicInfo_Add_demographics_button_edit_id = By.id("add-demographics");
     private By countryBasicInfo_Delete_demographics_button_edit_id = By.xpath(".//*[@class='new'][@data-row_id='demographics']//button[@class='delete-row']");
@@ -194,6 +199,8 @@ public class CountryPage extends AbstractPage {
 
     private String editCountryDemographicType="";
 
+    private By country_credit_rating_confirmed_date_error_no_later_than_today_xpath = By.xpath("//*[@id='additionalCreditRatings']/tr[1]/td[5]/p");
+    private By country_credit_rating_new_row_xpath = By.xpath("//*[@class='new'][@data-row_id='creditRatings']");
 
     public CountryPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -1121,47 +1128,79 @@ public class CountryPage extends AbstractPage {
         getDriver().findElement(country_credit_rating_appliedYear_xpath).sendKeys(appliedYear);
     }
 
-    public void verifyErrorMessageAppliedYearLaterThanToday() {
-        assertEquals("Must be no later than today.", getDriver().findElement(country_credit_rating_appliedyear_errorNolaterThanToday_xpath).getText());
+    public void verifyErrMustBeNoLaterThanTodayForAppliedDate() {
+        assertEquals("Must be no later than today.", getDriver().findElement(country_credit_rating_applied_date_error_msg_xpath).getText());
     }
 
     public void enterCreditRatingConfirmedYear(String confirmedYear) {
-        getDriver().findElement(country_credit_rating_confirmedYear_xpath).clear();
-        getDriver().findElement(country_credit_rating_confirmedYear_xpath).sendKeys(confirmedYear);
+        getDriver().findElement(country_credit_rating_confirmed_date_xpath).clear();
+        getDriver().findElement(country_credit_rating_confirmed_date_xpath).sendKeys(confirmedYear);
     }
 
-    public void verifyErrorMessageConfirmedYearLaterThanToday() {
-        assertEquals("Must be no later than today.", getDriver().findElement(country_credit_rating_confirmedYear_errorNoLaterThanToday_xpath).getText());
+    public void verifyErrMustBeNoLaterThanTodayForConfirmedDate() {
+        assertEquals("Must be no later than today.", getDriver().findElement(country_credit_rating_confirmed_date_error_msg_xpath).getText());
     }
 
-    public void verifyRequiredErrorMessage() {
-        assertEquals("Required", getDriver().findElement(country_credit_rating_required_xpath).getText());
+    public void verifyCreditRatingConfirmedDateRequiredErrorMessage() {
+        assertEquals("Required", getDriver().findElement(country_credit_rating_confirmed_date_error_msg_xpath).getText());
     }
 
     public void clickAddRowButton() {
-        rowCount = getDriver().findElement(country_credit_rating_tableBody_id).findElements(By.tagName("tr")).size();
-        getDriver().findElement(country_credit_rating_addRow_id).click();
+        attemptClick(country_credit_rating_addRow_id);
     }
 
-    public void verifyRowCount() {
-        rowCount++;
-        assertEquals(rowCount, getDriver().findElement(country_credit_rating_tableBody_id).findElements(By.tagName("tr")).size());
-        rowCount--;
-        assertEquals("new", getDriver().findElement(country_credit_rating_tableBody_id).findElements(By.tagName("tr")).get(rowCount).getAttribute("class"));
-
+    public void clickOnDeleteCreditRatingButton() {
+        getDriver().findElement(country_credit_rating_delete_button_xpath).click();
     }
 
-    public void clickOnRemoveButton() {
-        getDriver().findElement(country_credit_rating_deleteButton_xpath).click();
-    }
+    public void verifyNoNewlyAddedCreditRatingRow() {
+        try {
+            assertFalse(getDriver().findElement(country_credit_rating_new_row_xpath).isDisplayed());
+        } catch (NoSuchElementException e){
 
-    public void verifyRowCountAfterDelete() {
-        int updatedRows = getDriver().findElement(country_credit_rating_tableBody_id).findElements(By.tagName("tr")).size();
-        for (int i = 0; i < updatedRows; i++) {
-            assertTrue(getDriver().findElement(country_credit_rating_tableBody_id).findElements(By.tagName("tr")).get(i).getAttribute("class").equals(""));
         }
     }
+
+    public void enterCreditRatingValue(String value){
+        getDriver().findElement(country_credit_rating_value_xpath).sendKeys(value);
+
+    }
+
+    public void verifyErrorMessageForValidCharacters(){
+        assertEquals("Enter up to 5 valid characters.", getDriver().findElement(country_credit_value_error_msg_xpath).getText());
+    }
+
+    public void verifyErrorMessageEnterYearMonthDayForAppliedDate() {
+        assertEquals("Enter a year, month/year or day/month/year.", getDriver().findElement(country_credit_rating_applied_date_error_msg_xpath).getText());
+    }
+
     public void verifyCountryEditPageMode() {
         assertTrue(getDriver().findElements(country_edit_fields_xpath).size() > 1);
+    }
+
+    public void enterCountryCreditRatingAppliedDateDay(String appliedDay) {
+        getDriver().findElement(country_credit_rating_applied_date_day_xpath).clear();
+        getDriver().findElement(country_credit_rating_applied_date_day_xpath).sendKeys(appliedDay);
+    }
+
+    public void enterCountryCreditRatingAppliedDateMonth(String appliedMonth) {
+        selectItemFromDropdownListByText(country_credit_rating_applied_date_month_xpath, appliedMonth);
+    }
+
+    public void enterCountryCreditRatingConfirmedDateMonth(String confirmedMonth) {
+        selectItemFromDropdownListByText(country_credit_rating_confirmed_year_month_xpath, confirmedMonth);
+    }
+
+    public void enterCountryCreditRatingConfirmedDateDay(String confirmedDay) {
+        getDriver().findElement(country_credit_rating_confirmed_date_day_xpath).clear();
+        getDriver().findElement(country_credit_rating_confirmed_date_day_xpath).sendKeys(confirmedDay);
+    }
+
+    public void verifyErrorMessageEnterYearMonthDayForConfirmedDate() {
+        assertEquals("Enter a year, month/year or day/month/year.", getDriver().findElement(country_credit_rating_confirmed_date_error_msg_xpath).getText());
+    }
+
+    public void verifyNewlyAddedCreditRatingRow() {
+        assertTrue(getDriver().findElement(country_credit_rating_new_row_xpath).isDisplayed());
     }
 }
