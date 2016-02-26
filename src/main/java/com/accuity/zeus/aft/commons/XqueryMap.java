@@ -55,6 +55,8 @@ public class XqueryMap {
         queryMap.put("get country iso2 list", "getCountryISO2List.xqy");
         queryMap.put("get country IBAN info", "getCountryIBANInfo.xqy");
         queryMap.put("get country routing codes", "getCountryRoutingCodes.xqy");
+        queryMap.put("get country demographics type","getDemographicsType.xqy");
+        queryMap.put("get country demographics unit","getDemographicsUnit.xqy");
     }
 
     public String getXquery(String key){
