@@ -831,7 +831,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyOfficeSortKey(String officeSortKey) {
-        assertEquals("Sort Name",getTextOnPage(office_sort_name_label_xpath));
+        assertEquals("Sort Name", getTextOnPage(office_sort_name_label_xpath));
         assertEquals(officeSortKey,getTextOnPage(office_sort_name_value_xpath));
     }
 
@@ -972,14 +972,14 @@ public class DataPage extends AbstractPage {
         //String response=restClient.getResultForPatch("currency", document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("id").getTextContent().toString(),heraApi);
         //assertTrue(response.equals("200"));
 
-        assertTrue(response==200);
+        assertTrue(response == 200);
     }
 
 
     public void revertChangesToCurrencyDeutscheMark() {
         List<NameValuePair> nvPairs = new ArrayList<>();
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency Deutsche Mark for zeus",nvPairs);
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency Deutsche Mark for trusted",nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency Deutsche Mark for zeus", nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency Deutsche Mark for trusted", nvPairs);
 
     }
 
@@ -1091,7 +1091,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyStartDateErrorMessage(String startDateErrorMsg) {
-        assertEquals(startDateErrorMsg.replace("'",""), getDriver().findElement(start_date_error_msg_xpath).getText());
+        assertEquals(startDateErrorMsg.replace("'", ""), getDriver().findElement(start_date_error_msg_xpath).getText());
     }
 
     public void verifyEndDateErrorMessage(String endDateErrorMsg) {

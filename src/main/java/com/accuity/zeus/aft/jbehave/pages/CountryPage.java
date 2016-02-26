@@ -4,20 +4,16 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.rest.RestClient;
-import org.apache.commons.lang.time.DateUtils;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.w3c.dom.Document;
 import org.openqa.selenium.support.ui.Select;
 
-import java.text.DateFormat;
 import java.text.DateFormatSymbols;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
@@ -182,6 +178,22 @@ public class CountryPage extends AbstractPage {
     private By country_credit_rating_deleteButton_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[4]/td[6]/button");
     private int rowCount;
     private By country_edit_fields_xpath = By.xpath("//*[@id='content'] //*[@type='text']");
+    private By countryBasicInfo_Add_demographics_button_edit_id = By.id("add-demographics");
+    private By countryBasicInfo_Delete_demographics_button_edit_id = By.xpath(".//*[@class='new'][@data-row_id='demographics']//button[@class='delete-row']");
+    private By countryBasicInfo_demographics_date_year_edit_xpath = By.xpath(".//*[@class='new'][@data-row_id='demographics']//input[@name='demographicDate-year']");
+    private By countryBasicInfo_demographics_date_day_edit_xpath = By.xpath(".//*[@class='new'][@data-row_id='demographics']//input[@name='demographicDate-day']");
+    private By countryBasicInfo_demographics_date_month_edit_xpath = By.xpath(".//*[@class='new'][@data-row_id='demographics']//select[@name='demographicDate-month']");
+    String countryBasicInfo_demographics_type_dropdown_edit_xpath = ".//tr[@class='new'][@data-row_id='demographics']/td/select[@data-internal_id='demographicType']";
+    //private By countryBasicInfo_demographics_type_dropdown_edit_xpath = By.xpath("//*[@class='new']/td/select");
+    String countryBasicInfo_demographics_unit_dropdown_edit_xpath = ".//*[@class='new']//select[@id='demographicUnit']";
+    private By countryBasicInfo_demographics_value_edit_xpath = By.xpath(".//*[@class='new'][@data-row_id='demographics']//input[@data-internal_id='demographicValue']");
+
+    private By countryBasicInfo_demographics_date_error_message_xpath = By.xpath("//*[@class='notification error'][@data-error_id='demographicDateError']");
+    private By countryBasicInfo_demographics_type_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='demographicTypeError']");
+    private By countryBasicInfo_demographics_value_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='demographicValueError']");
+
+    private String editCountryDemographicType="";
+
 
     public CountryPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -669,7 +681,7 @@ public class CountryPage extends AbstractPage {
         attemptClick(country_edit_identifier_type_list_xpath);
     }
 
-    public void verifyCountryNameTypesList(Database database, ApacheHttpClient apacheHttpClient) {
+    public void verifyCountryNameTypesList() {
         List<WebElement> countryNameTypesList = getDriver().findElements(country_name_type_list_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country names type");
         for (int i = 1; i < document.getElementsByTagName("type").getLength(); i++) {
@@ -748,6 +760,102 @@ public class CountryPage extends AbstractPage {
         assertEquals("Required", getDriver().findElement(country_identifier_value_err_msg_xpath).getText());
     }
 
+    public void clickOnAddDemographicsButton() {
+        attemptClick(countryBasicInfo_Add_demographics_button_edit_id);
+    }
+
+    public void veirfyDemograhicsDateErrorMessage() {
+        assertEquals(getDriver().findElement(countryBasicInfo_demographics_date_error_message_xpath).getText(),"Must be no later than today.");
+    }
+
+    public void verifyRequiredErrorMessageForTypeAndValue() {
+        assertEquals(getDriver().findElement(countryBasicInfo_demographics_type_error_message_xpath).getText(),"Required");
+        assertEquals(getDriver().findElement(countryBasicInfo_demographics_value_error_message_xpath).getText(),"Required");
+    }
+
+    public void entersDemographicDateLaterThanToday() {
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        getDriver().findElement(countryBasicInfo_demographics_date_year_edit_xpath).clear();
+        getDriver().findElement(countryBasicInfo_demographics_date_year_edit_xpath).sendKeys(String.valueOf(year + 3));
+    }
+
+    public void clickOnDeleteCountryDemographicsOption() {
+        attemptClick(countryBasicInfo_Delete_demographics_button_edit_id);
+    }
+/*
+    public void clicksOnDemographicsTypeDropdown() {
+        attemptClick(By.xpath(countryBasicInfo_demographics_type_dropdown_edit_xpath));
+    }*/
+
+    public void selectsDemographicsTypesFromDropdown(String demographicType) {
+        editCountryDemographicType = demographicType;
+        attemptClick(By.xpath(countryBasicInfo_demographics_type_dropdown_edit_xpath));
+        List<WebElement> options = getDriver().findElements(By.xpath(countryBasicInfo_demographics_type_dropdown_edit_xpath + "/option"));
+
+            for (WebElement option : options) {
+                if (option.getText().contains(demographicType)) {
+
+                    getDriver().findElement(By.xpath(countryBasicInfo_demographics_type_dropdown_edit_xpath)).click();
+
+                    option.click();
+
+                    break;
+                }
+            }
+         }
+
+    public void entersDemographicsValue(String demographicValue) {
+        getDriver().findElement(countryBasicInfo_demographics_value_edit_xpath).sendKeys(demographicValue);
+    }
+
+    public void entersDemographicsDay(String day) {
+      getDriver().findElement(countryBasicInfo_demographics_date_day_edit_xpath).sendKeys(day);
+    }
+
+    public void entersDemographicMonth(String month) {
+        selectItemFromDropdownListByText(countryBasicInfo_demographics_date_month_edit_xpath,month);
+    }
+
+    public void entersDemographicYear(String year) {
+        getDriver().findElement(countryBasicInfo_demographics_date_year_edit_xpath).sendKeys(year);
+    }
+
+    public void verifyCountryDemographicsUnitDropdownNotExist() {
+        try {
+            getDriver().findElement(By.xpath(countryBasicInfo_demographics_unit_dropdown_edit_xpath)).toString();
+        }catch(NoSuchElementException e)
+        {
+           System.out.println("Element not found");
+        }
+    }
+
+    public void verifyCountryDemographicsDropdownExist() {
+        assertTrue(getDriver().findElement(By.xpath(countryBasicInfo_demographics_unit_dropdown_edit_xpath)).isDisplayed());
+    }
+
+    public void verifyCountryDemographicsTypeDropdownList(){
+
+        List<WebElement> countryDemographicsList = getDriver().findElements(By.xpath(countryBasicInfo_demographics_type_dropdown_edit_xpath +"/option"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country demographics type");
+        for (int i = 1; i < document.getElementsByTagName("type").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), countryDemographicsList.get(i).getText());
+        }
+
+    }
+
+    public void verifyCountryDemographicsUnitDropdownList() {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("unit", editCountryDemographicType.toLowerCase()));
+        attemptClick(By.xpath(countryBasicInfo_demographics_unit_dropdown_edit_xpath));
+        List<WebElement> demographicsUnit = getDriver().findElements(By.xpath(countryBasicInfo_demographics_unit_dropdown_edit_xpath+"/option"));
+
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get country demographics unit", nvPairs);
+        for (int i=0; i<document.getElementsByTagName("unit").getLength();i++)
+        {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), demographicsUnit.get(i+1).getText());
+        }
+    }
 
     public void verifyErrorMessageForLongIdentifierValue() {
         assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_identifier_value_err_msg_xpath).getText());
@@ -864,7 +972,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyErrorMsgForCountryHolidayDate() {
-        assertEquals("Enter a day/month/year.", getDriver().findElement(country_holiday_date_error_msg_xpath).getText());
+        assertEquals("Enter a year, month/year or day/month/year.", getDriver().findElement(countryBasicInfo_demographics_date_error_message_xpath).getText());
     }
 
     public void clickOnAddNewCountryHolidayButton() {

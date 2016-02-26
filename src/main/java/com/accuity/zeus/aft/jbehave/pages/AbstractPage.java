@@ -133,7 +133,6 @@ public abstract class AbstractPage {
             attempts++;
         }
     }
-
     private void waitFor() {
         try {
             Thread.sleep(STANDARD_WAIT);
