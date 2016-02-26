@@ -397,7 +397,7 @@ public class CountrySteps extends AbstractSteps{
 
     @Then("the user should see the country name types from lookup COUNTRY_NAME_TYPE")
     public void verifyCountryNameTypesList(){
-        getCountryPage().verifyCountryNameTypesList(database, apacheHttpClient);
+        getCountryPage().verifyCountryNameTypesList();
     }
 
     @Then("the user should see the country identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO")
@@ -454,6 +454,76 @@ public class CountrySteps extends AbstractSteps{
     @Then("the user should see the error message for the required name type field in the basic info country page")
     public void verifyErrorMessageForRequiredNameType(){
         getCountryPage().verifyErrorMessageForRequiredNameType();
+    }
+
+    @When("the user clicks on the add new demographics button in the country basic info page")
+    public void clickOnAddDemographicsButton() {
+        getCountryPage().clickOnAddDemographicsButton();
+    }
+
+    @When("the user enters the demographic date later than today")
+    public void entersDemographicDateLaterThanToday() {
+        getCountryPage().entersDemographicDateLaterThanToday();
+    }
+
+    @Then("the user should see the error 'Must be no later than today.' for demographics date")
+    public void veirfyDemograhicsDateErrorMessage() {
+        getCountryPage().veirfyDemograhicsDateErrorMessage();
+    }
+
+    @Then("the user should see the error message required for the type and value fields")
+    public void verifyRequiredErrorMessageForTypeAndValue() {
+        getCountryPage().verifyRequiredErrorMessageForTypeAndValue();
+    }
+
+    @When("the user clicks on delete country demographics option")
+    public void clickOnDeleteCountryDemographicsOption() {
+        getCountryPage().clickOnDeleteCountryDemographicsOption();
+    }
+
+    @When("the user selects the demographic types <demographicType> in the country basic info page")
+    public void selectsDemographicsTypesFromDropdown(@Named("demographicType") String demographicType) {
+        getCountryPage().selectsDemographicsTypesFromDropdown(demographicType);
+           }
+
+    @When("the user enter the demographic value <demographicValue> in the country basic info page")
+    public void entersDemographicsValue(@Named("demographicValue") String demographicValue) {
+        getCountryPage().entersDemographicsValue(demographicValue);
+    }
+
+    @When("the user enter demographics day <day> in the demographics country page")
+    public void entersDemographicsDay(@Named("day") String day) {
+        getCountryPage().entersDemographicsDay(day);
+    }
+
+    @When("the user enter demographics month <month> in the demographics country page")
+    public void entersDemographicsMonth(@Named("month") String month) {
+        getCountryPage().entersDemographicMonth(month);
+    }
+
+    @When("the user enter demographics year <year> in the demographics country page")
+    public void entersDemographicYear(@Named("year") String year) {
+        getCountryPage().entersDemographicYear(year);
+    }
+
+    @Then("the user should not see the unit drop down for selected demographic type")
+    public void verifyCountryDemographicsUnitDropdownNotExist(){
+        getCountryPage().verifyCountryDemographicsUnitDropdownNotExist();
+    }
+
+    @Then("the user should see the unit drop down for selected demographic type")
+    public void verifyCountryDemographicsDropdownExist(){
+        getCountryPage().verifyCountryDemographicsDropdownExist();
+    }
+
+    @Then("the user should see the country demographics types from lookup DEMOGRAPHIC_METRIC")
+    public void verifyCountryDemographicsTypeDropdownList() {
+        getCountryPage().verifyCountryDemographicsTypeDropdownList();
+    }
+
+    @Then("the user should see the demographics units are from lookup UNIT_OF_MEASUREMENT")
+    public void verifyCountryDemographicsUnitDropdownList() {
+        getCountryPage().verifyCountryDemographicsUnitDropdownList();
     }
 
     @Then("the user should see the error message for the required Identifier Value field in the basic info identifier page")
@@ -635,7 +705,7 @@ public class CountrySteps extends AbstractSteps{
     }
 
     @When ("the user enters country languages as <countryLanguages> in the country language country page")
-    public void enterLanguageSummary(@Named("countryLanguages")String countryLanguages){
+    public void enterLanguageSummary(@Named("countryLanguages") String countryLanguages){
         getCountryPage().enterSummaryLanguage(countryLanguages);
     }
 

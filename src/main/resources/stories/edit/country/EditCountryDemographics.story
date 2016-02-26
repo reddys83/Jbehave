@@ -1,5 +1,10 @@
-Meta:@Design
+Meta:@EditCountryDemographics @Edit @Country
 
+Narrative:
+As a user
+I want to perform an action
+So that I can achieve a business goal
+JIRA ID - ZEUS-248 - User can edit country demographics
 
 Scenario: The demographic type drop-down lists values should be from DEMORGAPHIC_METRIC
 Meta:
@@ -45,6 +50,7 @@ And the user clicks on the update link
 When the user clicks on the add new demographics button in the country basic info page
 And the user selects the demographic types <demographicType> in the country basic info page
 Then the user should see the unit drop down for selected demographic type
+And the user should see the demographics units are from lookup UNIT_OF_MEASUREMENT
 
 Examples:
 |country|demographicType|

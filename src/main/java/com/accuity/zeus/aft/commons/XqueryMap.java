@@ -51,6 +51,8 @@ public class XqueryMap {
         queryMap.put("get country names type", "getCountryNamesType.xqy");
         queryMap.put("get country time zones", "getCountryTimeZone.xqy");
         queryMap.put("get country identifiers", "getCountryIdentifiers.xqy");
+        queryMap.put("get country demographics type","getDemographicsType.xqy");
+        queryMap.put("get country demographics unit","getDemographicsUnit.xqy");
     }
 
     public String getXquery(String key){
