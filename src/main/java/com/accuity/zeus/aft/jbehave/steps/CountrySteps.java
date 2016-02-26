@@ -2,7 +2,6 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
-import org.eclipse.jetty.util.annotation.Name;
 import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
@@ -10,7 +9,6 @@ import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.apache.http.HttpStatus;
 
 
 @Component
@@ -458,8 +456,6 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyErrorMessageForRequiredNameType();
     }
 
-
-
     @Then("the user should see the error message for the required Identifier Value field in the basic info identifier page")
     public void verifyErrorMessageForRequiredIdentifierValue() {
         getCountryPage().verifyErrorMessageForRequiredIdentifierValue();
@@ -669,69 +665,63 @@ public class CountrySteps extends AbstractSteps{
             }
 
 
-    @Then("the user enters applied year  <appliedyear>")
-    public void enterAppliedYear(@Named("appliedyear") String year) {
-        getCountryPage().enterCreditRatingAppliedYear(year);
+    @When("the user enters applied date year <appliedYear> in the credit rating country page")
+    public void enterCreditRatingAppliedYear(@Named("appliedYear") String appliedYear) {
+        getCountryPage().enterCreditRatingAppliedYear(appliedYear);
     }
 
-    @Then ("the user should see error next to applied year")
-    public void verifyErrorMessageAppliedYearLaterThanToday(){
-        getCountryPage().verifyErrorMessageAppliedYearLaterThanToday();
+    @Then ("the user should see the error message must be no later than today for applied date in the credit rating country page")
+    public void verifyErrMustBeNoLaterThanTodayForAppliedDate(){
+        getCountryPage().verifyErrMustBeNoLaterThanTodayForAppliedDate();
     }
 
-    @Then("the user enters confirmed year <confirmedyear>")
-    public void enterConfirmedYear(@Named("confirmedyear") String confirmedYear){
+    @When("the user enters confirmed date year <confirmedYear> in the credit rating country page")
+    public void enterConfirmedYear(@Named("confirmedYear") String confirmedYear){
         getCountryPage().enterCreditRatingConfirmedYear(confirmedYear);
     }
 
-    @Then("the user should see error next to confirmed year")
-    public void verifyErrorMessageConfirmedYearLaterThanToday(){
-        getCountryPage().verifyErrorMessageConfirmedYearLaterThanToday();
+    @Then("the user should see the error message must be no later than today for confirmed date in the credit rating country page")
+    public void verifyErrMustBeNoLaterThanTodayForConfirmedDate(){
+        getCountryPage().verifyErrMustBeNoLaterThanTodayForConfirmedDate();
     }
 
-    @Then("the user should see required error when there is an empty row")
-    public void verifyRequiredErrorMessagae(){
-        getCountryPage().verifyRequiredErrorMessage();
+    @Then("the user should see required error message for the credit rating confirmed date in the credit rating country page")
+    public void verifyCreditRatingConfirmedDateRequiredErrorMessagae(){
+        getCountryPage().verifyCreditRatingConfirmedDateRequiredErrorMessage();
     }
 
-    @When("the user clicks on add row button verify need row added")
+    @When("the user clicks on add new credit rating button in the credit rating country page")
     public void clickOnAddButton(){
         getCountryPage().clickAddRowButton();
-        getCountryPage().verifyRowCount();
     }
 
-    @Then ("the user clicks on remove button to delete row")
-    public void clickOnRemoveButton(){
-        getCountryPage().clickOnRemoveButton();
+    @Then ("the user clicks on the delete credit rating row button in the basic info country page")
+    public void clickOnDeleteCreditRatingButton(){
+        getCountryPage().clickOnDeleteCreditRatingButton();
     }
 
-    @Then("the user should see the newly added name row on the credit rating page")
-    public void verifyRowCount(){
-        getCountryPage().verifyRowCount();
+    @Then("the user should see the newly added credit rating row in the credit rating country page")
+    public void verifyNewlyAddedCreditRatingRow(){
+        getCountryPage().verifyNewlyAddedCreditRatingRow();
     }
 
-    @Then("the user should not see the newly added name row on credit rating page")
-    public void verifyRowCountAfterDelete(){
-        getCountryPage().verifyRowCountAfterDelete();
+    @Then("the user should not see the newly added credit rating row in the credit rating country page")
+    public void verifyNoNewlyAddedCreditRatingRow(){
+        getCountryPage().verifyNoNewlyAddedCreditRatingRow();
     }
 
-    @Then("the user enters value <value>")
-    public void userEntersValue(@Named("value")String value){
-        getCountryPage().enterValue(value);
+    @Then("the user enters credit rating value <value> in the credit rating country page")
+    public void enterCreditRatingValue(@Named("value")String value){
+        getCountryPage().enterCreditRatingValue(value);
     }
 
-    @Then("the user should see the error message enter upto 5 valid characters")
+    @Then("the user should see the error message enter upto 5 valid characters in the credit rating country page")
     public void verifyErrorMessageForValidCharacters(){
             getCountryPage().verifyErrorMessageForValidCharacters();
     }
 
-    @Then("the user enters data in applied year <day> <month> <year>")
-    public void enterDatesinAppliedYear(@Named("day")String day,@Named("month")String month,@Named("year")String year){
-        getCountryPage().enterDatesinAppliedYearCreditRating(day,month,year);
-    }
-
-    @Then ("the user verifies error message Enter a year, month/year or day/month/year")
-    public void verrifyErrorMessageEnterYearMonthDay(){getCountryPage().verifyErrorMessageYearMonthDay();}
+    @Then ("the user should see the error message enter a year, month/year or day/month/year for applied date in the credit rating country page")
+    public void verifyErrorMessageEnterYearMonthDayForAppliedDate(){getCountryPage().verifyErrorMessageEnterYearMonthDayForAppliedDate();}
 
     @Then("the user should not see the cancel update confirmation modal in the country page")
     public void verifyNoCountryCancelUpdateConfirmationModal(){
@@ -747,4 +737,28 @@ public class CountrySteps extends AbstractSteps{
     public void verifyCountryEditPageMode(){
         getCountryPage().verifyCountryEditPageMode();
     }
+
+    @When("the user enters applied date day <appliedDay> in the credit rating country page")
+    public void enterCountryCreditRatingAppliedDateDay(@Named("appliedDay") String appliedDay){
+        getCountryPage().enterCountryCreditRatingAppliedDateDay(appliedDay);
+    }
+
+    @When("the user selects applied date month <appliedMonth> in the credit rating country page")
+    public void enterCountryCreditRatingAppliedDateMonth(@Named("appliedMonth") String appliedMonth){
+        getCountryPage().enterCountryCreditRatingAppliedDateMonth(appliedMonth);
+    }
+
+    @When("the user selects confirmed date month <confirmedMonth> in the credit rating country page")
+    public void enterCountryCreditRatingConfirmedDateMonth(@Named("confirmedMonth") String confirmedMonth){
+        getCountryPage().enterCountryCreditRatingConfirmedDateMonth(confirmedMonth);
+    }
+
+    @When("the user enters confirmed date day <confirmedDay> in the credit rating country page")
+    public void enterCountryCreditRatingConfirmedDateDay(@Named("confirmedDay") String confirmedDay){
+        getCountryPage().enterCountryCreditRatingConfirmedDateDay(confirmedDay);
+    }
+
+    @Then ("the user should see the error message enter a year, month/year or day/month/year for confirmed date in the credit rating country page")
+    public void verifyErrorMessageEnterYearMonthDayForConfirmedDate(){getCountryPage().verifyErrorMessageEnterYearMonthDayForConfirmedDate();}
+
 }
