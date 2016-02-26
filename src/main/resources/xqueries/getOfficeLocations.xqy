@@ -12,7 +12,7 @@ let $isPrimary := $x/@primary/string()
 let $officeAddresses := for $y in $x/address
 
 let $type := $y/type/text()
-let $info := $y/infos/info/text()
+let $info := string-join($y/infos/info,',')
 let $addressLine1 := $y/streetAddress/addressLine1/text()
 let $addressLine2 := $y/streetAddress/addressLine2/text()
 let $addressLine3 := $y/streetAddress/addressLine3/text()
@@ -26,7 +26,6 @@ let $postalCodePos := $y/postalCode/@position/string()
 let $postalSuffix := $y/postalSuffix/text()
 
 return  <address>
-    <primary>{$isPrimary}</primary>
     <type>{$type}</type>
     <info>{$info}</info>
     <addressLine1>{$addressLine1}</addressLine1>
@@ -71,7 +70,7 @@ return <telecom>
     <tAnswerback>{$tAnswerback}</tAnswerback>
 </telecom>
 
-return <location>{$officeAddresses}{$officeTelecoms}</location>
+return <location><primary>{$isPrimary}</primary>{$officeAddresses}{$officeTelecoms}</location>
 
 let $summaries := for $x in $offices/locations/summaries/summary
 let $summaryType := $x/@type/string()
