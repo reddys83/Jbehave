@@ -36,10 +36,6 @@ public abstract class AbstractSteps {
 	private static OfficesPage officesPage;
 	private static CurrencyPage currencyPage;
 	private static CountryPage countryPage;
-<<<<<<< HEAD
-
-=======
->>>>>>> develop
 
     @Autowired
     ApacheHttpClient apacheHttpClient;
@@ -204,9 +200,5 @@ public abstract class AbstractSteps {
 	public void setOfficesPage(OfficesPage officesPage) {
 		this.officesPage = officesPage;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> develop
 
 }
