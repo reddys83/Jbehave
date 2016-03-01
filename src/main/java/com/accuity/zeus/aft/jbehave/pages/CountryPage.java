@@ -1257,7 +1257,7 @@ public class CountryPage extends AbstractPage {
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get country IBAN info", nvPairs);
         for(int i=0; i<document.getElementsByTagName("iban").getLength(); i++){
             assertEquals(document.getElementsByTagName("iso2").item(i).getTextContent(), isoCodes.get(i).getText());
-            assertEquals(document.getElementsByTagName("registeredDate").item(i).getTextContent(), registeredDay.get(i).getText() + " " + registeredMonth.get(i).getText() + " " + registeredYear.get(i).getText());
+            assertEquals(document.getElementsByTagName("registeredDate").item(i).getTextContent(), registeredDay.get(i).getAttribute("value") + " " + registeredMonth.get(i).getText() + " " + registeredYear.get(i).getAttribute("value"));
             assertEquals(document.getElementsByTagName("routingCodeType").item(i).getTextContent(), routingCodeType.get(i).getText());
         }
         assertEquals(document.getElementsByTagName("status").item(0).getTextContent(), getDriver().findElement(country_payments_status_check_box_xpath).getAttribute("value"));

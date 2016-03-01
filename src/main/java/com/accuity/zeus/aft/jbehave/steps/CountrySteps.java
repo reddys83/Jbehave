@@ -831,4 +831,103 @@ public class CountrySteps extends AbstractSteps{
     @Then ("the user should see the error message enter a year, month/year or day/month/year for confirmed date in the credit rating country page")
     public void verifyErrorMessageEnterYearMonthDayForConfirmedDate(){getCountryPage().verifyErrorMessageEnterYearMonthDayForConfirmedDate();}
 
+    @When("the user enters iban registered day <day> in the payments country page")
+    public void enterIBANRegisteredDay(@Named("day") String day) {
+        getCountryPage().enterIBANRegisteredDay(day);
+    }
+
+    @When("the user selects iban registered month <month> in the payments country page")
+    public void selectIBANRegisteredMonth(@Named("month") String month) {
+        getCountryPage().selectIBANRegisteredMonth(month);
+    }
+
+    @When("the user enters iban registered year <year> in the payments country page")
+    public void enterIBANRegisteredYear(@Named("year") String year) {
+        getCountryPage().enterIBANRegisteredYear(year);
+    }
+
+    @Then("the user should see the error message enter a year, month/year or day/month/year for country payments in the country page")
+    public void verifyErrorMsgForCountryPaymentsRegisteredDate() {
+        getCountryPage().verifyErrorMsgForCountryPaymentsRegisteredDate();
+    }
+
+    @When("the user clicks on the country payments iban routing code types in the country page")
+    public void clickOnIBANRoutingCodeTypes() {
+        getCountryPage().clickOnIBANRoutingCodeTypes();
+    }
+
+    @Then("the user should see the iban routing code type drop-down lists values alphabetically from lookup ROUTING_CODE_TYPE")
+    public void verifyIBANRoutingCodeTypes() {
+        getCountryPage().verifyIBANRoutingCodeTypes();
+    }
+
+    @When("the user clicks on the country payments routing code types in the country page")
+    public void clickOnRoutingCodeTypes() {
+        getCountryPage().clickOnRoutingCodeTypes();
+    }
+
+    @Then("the user should see the routing code type drop-down lists values alphabetically from lookup ROUTING_CODE_TYPE")
+    public void verifyRoutingCodeTypes() {
+        getCountryPage().verifyRoutingCodeTypes();
+    }
+
+    @When("the user clicks on the country payments iso code in the country page")
+    public void clickOnCountryPaymentsIsoCode(){
+        getCountryPage().clickOnCountryPaymentsIsoCode();
+    }
+
+    @Then("the user should see the iban country iso2 code drop-down list sorted alphabetically in the country page")
+    public void verifyCountryPaymentsIso2List(){
+        getCountryPage().verifyCountryPaymentsIso2List();
+    }
+
+    @Then("the user should see the country payments iban info from trusted document")
+    public void verifyCountryIBANInfoFromTrusted(){
+        getCountryPage().verifyCountryIBANInfoFromTrusted(database, apacheHttpClient);
+    }
+
+    @Then("the user should see the country payments routing code types from trusted document")
+    public void verifyCountryRoutingCodeTypesFromTrusted(){
+        getCountryPage().verifyCountryRoutingCodeTypesFromTrusted(database, apacheHttpClient);
+    }
+
+    @When("the user clicks on the add new iban button in the payments country page")
+    public void clickOnAddNewIBANButton(){
+        getCountryPage().clickOnAddNewIBANButton();
+    }
+
+    @When("the user clicks on the add new routing code button in the payments country page")
+    public void clickOnAddNewRoutingCodeButton(){
+        getCountryPage().clickOnAddNewRoutingCodeButton();
+    }
+
+    @When("the user clicks on the delete iban row button in the basic info country page")
+    public void clickOnDeleteIBANRowButton() {
+        getCountryPage().clickOnDeleteNewRowButton();
+    }
+
+    @When("the user clicks on the delete routing code row button in the basic info country page")
+    public void clickOnDeleteRoutingCodeRowButton() {
+        getCountryPage().clickOnDeleteNewRowButton();
+    }
+
+    @Then("the user should see the newly added iban row in the holiday country page")
+    public void verifyNewlyAddedIBANRow() {
+        getCountryPage().verifyNewlyAddedIBANRow();
+    }
+
+    @Then("the user should not see the newly added iban row in the holiday country page")
+    public void verifyNoNewlyAddedIBANRow(){
+        getCountryPage().verifyNoNewlyAddedIBANRow();
+    }
+
+    @Then("the user should see the newly added routing code row in the holiday country page")
+    public void verifyNewlyAddedRoutingCodeRow() {
+        getCountryPage().verifyNewlyAddedRoutingCodeRow();
+    }
+
+    @Then("the user should not see the newly added routing code row in the holiday country page")
+    public void verifyNoNewlyAddedRoutingCodeRow(){
+        getCountryPage().verifyNoNewlyAddedRoutingCodeRow();
+    }
 }
