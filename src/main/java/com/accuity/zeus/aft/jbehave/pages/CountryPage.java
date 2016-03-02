@@ -164,9 +164,9 @@ public class CountryPage extends AbstractPage {
     private By country_intlDialingCode_error_message_edit_xpath = By.xpath("//*[@data-error_id='telephoneCodeError']");
     private By country_replacedBy_edit_xpath = By.xpath("//*[@id='content']/div/ul/li[1]/ul/li[2]/fieldset/table/tbody/tr[4]/td/div/ul/li");
     private By country_credit_rating_appliedYear_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[4]/fieldset/input[2]");
-    private By country_credit_rating_applied_date_error_msg_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[4]/fieldset/p");
+    private By country_credit_rating_applied_date_error_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='creditRatingAppliedDateError']");
     private By country_credit_rating_confirmed_date_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[2]/td[5]/fieldset/input[2]");
-    private By country_credit_rating_confirmed_date_error_msg_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[2]/td[5]/fieldset/p");
+    private By country_credit_rating_confirmed_date_error_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='creditRatingConfirmedDateError']");
     private By country_credit_rating_required_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[3]/td[5]/fieldset/p");
     private By country_credit_rating_addRow_id = By.id("add-creditRatings");
     private By country_credit_rating_table_body_id = By.id("additionalCreditRatings");
@@ -213,6 +213,8 @@ public class CountryPage extends AbstractPage {
     private By countryBasicInfo_demographics_date_error_message_xpath = By.xpath("//*[@class='notification error'][@data-error_id='demographicDateError']");
     private By countryBasicInfo_demographics_type_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='demographicTypeError']");
     private By countryBasicInfo_demographics_value_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='demographicValueError']");
+
+    private By countryBasicInfo_holiday_date_error_message_xpath= By.xpath("//*[@class='notification error'][@data-error_id='holidayDateError']");
 
     private String editCountryDemographicType="";
 
@@ -990,8 +992,12 @@ public class CountryPage extends AbstractPage {
         getDriver().findElement(country_holiday_year_xpath).sendKeys(year);
     }
 
-    public void verifyErrorMsgForCountryHolidayDate() {
+    public void verifyErrorMsgForCountryDemographicsDate() {
         assertEquals("Enter a year, month/year or day/month/year.", getDriver().findElement(countryBasicInfo_demographics_date_error_message_xpath).getText());
+    }
+
+    public void verifyErrorMessageForCountryHolidayDate() {
+        assertEquals("Enter a day/month/year.", getDriver().findElement(countryBasicInfo_holiday_date_error_message_xpath).getText());
     }
 
     public void clickOnAddNewCountryHolidayButton() {

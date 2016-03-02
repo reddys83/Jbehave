@@ -31,12 +31,14 @@ Examples:
 |Afghanistan|1|Jan||
 |Afghanistan|1||1988|
 |Afghanistan||Jan||
+|Afghanistan|abc||abc|
 
 Scenario: Verify error message enter a year, month/year or day/month/year for newly added holiday
 1. only day
 2. only day and month
 3. only day and year
 4. only month
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

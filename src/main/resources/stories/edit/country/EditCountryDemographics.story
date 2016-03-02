@@ -5,6 +5,7 @@ As a user
 I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-248 - User can edit country demographics
+JIRA ID - ZEUS-827 - User can only input numbers in date fields
 
 Scenario: The demographic type drop-down lists values should be from DEMORGAPHIC_METRIC
 Meta:
@@ -107,12 +108,13 @@ And the user enter demographics day <day> in the demographics country page
 And the user enter demographics month <month> in the demographics country page
 And the user enter demographics year <year> in the demographics country page
 And the user clicks on the save button
-Then the user should see the error message enter a day/month/year in the holidays country page
+Then the user should see the error message enter a day/month/year in the demographics country page
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
 |country|day|month|year|
 |Algeria|2||2011|
+|Egypt|abc||abc|
 
 Scenario: User shoud see the confirmation modal for valid input and save
 Meta:

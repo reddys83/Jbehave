@@ -10,6 +10,7 @@ JIRA ID - ZEUS-445 - Edit Language Summary for country
 JIRA ID - ZEUS-191 - User can edit country basic info
 JIRA ID - ZEUS-710 - User can edit country identifiers
 JIRA ID - ZEUS-684 - User will get warning if click away from screen they are editing
+JIRA ID - ZEUS-827 - User can only input number in date fields
 
 Scenario: Verify country names type from lookup COUNTRY_NAME_TYPE
 Given a user is on the search page
@@ -214,27 +215,34 @@ Examples:
 |Åland Islands|
 
 Scenario: The edit country basic info, The user should see the error messages for invalid inputs
+TestCase: ZEUS-827
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
+When the user enters country start year as <countryStartYear>
+And the user enters country end year as <countryEndYear>
 When the user enters more than 500 characters in the country add info
 And the user enters more than 200 characters in the country imports
 And the user enters more than 200 characters in the country exports
 And the user enters more than 200 characters in the country political structure
 And the user enters more than 5 characters inthe country intl dialing code
 And the user clicks on the save button
+Then the user should see the error message enter a day/month/year for startDate in country basic info page
+And the user should see the error message enter a day/month/year for endDate in country basic info page
 Then the user should see the error message enter uptp 500 valid charecters for addinfo
 And the user should see the error message enter upto 200 valid charecters for imports
 And the user should see the error message enter upto 200 valid charecters for exports
 And the user should see the error message enter upto 200 valid charecters for political structure
 And the user should see the error message enter upto 5 valid charectes for intl dialing code
+Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
-|country|
-|Åland Islands|
+|country|countryStartYear|countryEndYear|
+|Åland Islands|abc|abc|
 
 Scenario: The edit country basic info, The user enters valid data should see the confirm modal
 Given a user is on the search page
