@@ -7,12 +7,11 @@ let $legalEntity := cts:search(fn:collection('source-trusted')/legalEntity,
 let $offices := (for $x in cts:search(fn:collection('source-trusted')/office,
         cts:and-query((
             cts:path-range-query("/office/summary/institution/link/@href", "=", $legalEntity/@resource, "collation=http://marklogic.com/collation/")
-                      ))) order by $x/summary/status descending return $x) [1 to 25]
+        ))) order by  $x/locations/location[@primary="true"]/address/country/countrySortKey descending return $x) [1 to 25]
 
 let $officeResults := (
-    let $officeInfo := for $x in $offices
-    return <fid>{$x/summary/status/string()}</fid>
-    return $officeInfo)
+    let $officeCountry := for $x in $offices
+    return <name>{$x/@fid}{$x/locations/location[@primary="true"]/address/country/name/text()}</name>
+    return $officeCountry)
 
 return <offices>{$officeResults}</offices>
-
