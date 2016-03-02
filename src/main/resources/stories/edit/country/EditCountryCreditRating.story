@@ -69,6 +69,7 @@ Scenario: Verifying Verify error message enter a year, month/year or day/month/y
 2. only day and month
 3. only day and year
 4. only month
+Meta:@runasdfas
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -89,6 +90,7 @@ Examples:
 |Afghanistan|15|Jan||
 |Afghanistan|15||2016|
 |Afghanistan||Jan||
+|Afghanistan|abc||abc|
 
 Scenario: Verifying Verify error message enter a year, month/year or day/month/year for confirmed date
 1. only day

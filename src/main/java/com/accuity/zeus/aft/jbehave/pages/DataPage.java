@@ -1094,6 +1094,14 @@ public class DataPage extends AbstractPage {
         assertEquals(startDateErrorMsg.replace("'", ""), getDriver().findElement(start_date_error_msg_xpath).getText());
     }
 
+    public void verifyStartDateErrorMessageForDayMonthYear() {
+        assertEquals("Enter a year, month/year or day/month/year.",getDriver().findElement(start_date_error_msg_xpath).getText());
+    }
+
+    public void verifyEndDateErrorMessageForDayMonthYear() {
+        assertEquals("Enter a year, month/year or day/month/year.",getDriver().findElement(end_date_error_msg_xpath).getText());
+    }
+
     public void verifyEndDateErrorMessage(String endDateErrorMsg) {
         assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(end_date_error_msg_xpath).getText());
     }

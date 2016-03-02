@@ -814,6 +814,17 @@ public class DataSteps extends AbstractSteps {
     public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg) {
         getDataPage().verifyStartDateErrorMessage(startDateErrorMsg);
     }
+
+    @Then("the user should see the error message enter a day/month/year for startDate in country basic info page")
+    public void verifyStartDateErrorMessageForDayMonthYear() {
+        getDataPage().verifyStartDateErrorMessageForDayMonthYear();
+    }
+
+    @Then("the user should see the error message enter a day/month/year for endDate in country basic info page")
+    public void verifyEndDateErrorMessageForDayMonthYear() {
+        getDataPage().verifyEndDateErrorMessageForDayMonthYear();
+    }
+
     @Then("the user should see the error $startDateErrorMsg for end date")
     public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg) {
         getDataPage().verifyEndDateErrorMessage(endDateErrorMsg);

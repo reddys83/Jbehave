@@ -649,9 +649,14 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().enterCountryHolidayYear(year);
     }
 
+    @Then("the user should see the error message enter a day/month/year in the demographics country page")
+    public void verifyErrorMsgForCountryDemographicsDate(){
+        getCountryPage().verifyErrorMsgForCountryDemographicsDate();
+    }
+
     @Then("the user should see the error message enter a day/month/year in the holidays country page")
-    public void verifyErrorMsgForCountryHolidayDate(){
-        getCountryPage().verifyErrorMsgForCountryHolidayDate();
+    public void verifyErrorMsgForCountryHolidayDate() {
+        getCountryPage().verifyErrorMessageForCountryHolidayDate();
     }
 
     @Then("the user should see the error message required for holiday date in the holidays country page")
