@@ -379,6 +379,10 @@ And the user selects the demographic types <demographicType> in the country basi
 And the user enter the demographic value <demographicValue> in the country basic info page
 When the user enters country start year as <countryStartYear>
 And the user enters country end year as <countryEndYear>
+And the user clicks on the add new holiday button in the holidays country page
+And the user enters holiday day <day> in the holidays country page
+And the user enters holiday month <month> in the holidays country page
+And the user enters holiday year <year> in the holidays country page
 When the user clicks on the country credit rating link in the navigation bar
 And the user clicks on add new credit rating button in the credit rating country page
 And the user enters applied date year <appliedYear> in the credit rating country page
@@ -389,9 +393,10 @@ And the user should see the below summary changes in confirmation modal
 |Summary|
 |Basic Info / Demographics|
 |Basic Info|
+|Holidays|
 |Credit Ratings|
 
 
 Examples:
-|country|demographicType|demographicValue|appliedYear|confirmedYear|countryStartYear|countryEndYear|
-|Guam|Largest County Population|34000000|2011|2013|2011|2013|
+|country|demographicType|demographicValue|appliedYear|confirmedYear|countryStartYear|countryEndYear|day|month|year|
+|Guam|Largest County Population|34000000|2011|2013|2011|2013|1|Jan|2015|
