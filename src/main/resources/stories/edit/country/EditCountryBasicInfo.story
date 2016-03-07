@@ -11,6 +11,7 @@ JIRA ID - ZEUS-191 - User can edit country basic info
 JIRA ID - ZEUS-710 - User can edit country identifiers
 JIRA ID - ZEUS-684 - User will get warning if click away from screen they are editing
 JIRA ID - ZEUS-827 - User can only input number in date fields
+JIRA ID - ZEUS-745 - User will see summary of changes made in confirmation modal
 
 Scenario: Verify country names type from lookup COUNTRY_NAME_TYPE
 Given a user is on the search page
@@ -282,7 +283,7 @@ And the user should see the error message at top of page the highlighted fields 
 When the user enters identifier type as <identifierType> in the basic info country page
 And the user enters identifier value as <identifierValueIncorrect> in the basic info country page
 And the user clicks on the save button
-Then the user should see the Enter up to 50 valid characters error message for the Identifier Value field in the basic info identifier page
+Then the user should see the Enter up to 50 valid characters error message for the identifier value field in the basic info identifier page
 
 Examples:
 |country|identifierType|identifierValueIncorrect|
@@ -333,8 +334,8 @@ And the user clicks on the update link
 When the user enters identifier type as <identifierType> in the basic info country page
 And the user clears identifier value in the basic info country page
 And the user clicks on the save button
-Then the user should see the error message for the required Identifier Value field in the basic info identifier page
-Then the user should see the error message for the required Identifier Type field in the basic info identifier page
+Then the user should see the error message for the required identifier value field in the basic info identifier page
+Then the user should see the error message for the required identifier type field in the basic info identifier page
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
@@ -364,3 +365,38 @@ Then the user should see the currency page
 Examples:
 |country|currency|
 |Afghanistan|Rand|
+
+Scenario: User will see summary of changes made in confirmation modal
+Meta:@Runzdfasdf
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+When the user clicks on the add new demographics button in the country basic info page
+And the user selects the demographic types <demographicType> in the country basic info page
+And the user enter the demographic value <demographicValue> in the country basic info page
+When the user enters country start year as <countryStartYear>
+And the user enters country end year as <countryEndYear>
+And the user clicks on the add new holiday button in the holidays country page
+And the user enters holiday day <day> in the holidays country page
+And the user enters holiday month <month> in the holidays country page
+And the user enters holiday year <year> in the holidays country page
+When the user clicks on the country credit rating link in the navigation bar
+And the user clicks on add new credit rating button in the credit rating country page
+And the user enters applied date year <appliedYear> in the credit rating country page
+And the user enters confirmed date year <confirmedYear> in the credit rating country page
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Demographics|
+|Basic Info|
+|Holidays|
+|Credit Ratings|
+
+
+Examples:
+|country|demographicType|demographicValue|appliedYear|confirmedYear|countryStartYear|countryEndYear|day|month|year|
+|Guam|Largest County Population|34000000|2011|2013|2011|2013|1|Jan|2015|
