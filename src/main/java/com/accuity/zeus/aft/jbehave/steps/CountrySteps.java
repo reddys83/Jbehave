@@ -461,6 +461,11 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().clickOnAddDemographicsButton();
     }
 
+    @Then("the user should see the below summary changes in confirmation modal $Summary")
+    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
+        getCountryPage().verifySummaryConfirmationModal(Summary);
+    }
+
     @When("the user enters the demographic date later than today")
     public void entersDemographicDateLaterThanToday() {
         getCountryPage().entersDemographicDateLaterThanToday();
@@ -526,17 +531,17 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyCountryDemographicsUnitDropdownList();
     }
 
-    @Then("the user should see the error message for the required Identifier Value field in the basic info identifier page")
+    @Then("the user should see the error message for the required identifier value field in the basic info identifier page")
     public void verifyErrorMessageForRequiredIdentifierValue() {
         getCountryPage().verifyErrorMessageForRequiredIdentifierValue();
     }
 
-    @Then("the user should see the Enter up to 50 valid characters error message for the Identifier Value field in the basic info identifier page")
+    @Then("the user should see the Enter up to 50 valid characters error message for the identifier value field in the basic info identifier page")
     public void verifyErrorMessageForLongIdentifierValue() {
         getCountryPage().verifyErrorMessageForLongIdentifierValue();
     }
 
-    @Then("the user should see the error message for the required Identifier Type field in the basic info identifier page")
+    @Then("the user should see the error message for the required identifier type field in the basic info identifier page")
     public void verifyErrorMessageForRequiredIdentifierType() {
         getCountryPage().verifyErrorMessageForRequiredIdentifierType();
     }
