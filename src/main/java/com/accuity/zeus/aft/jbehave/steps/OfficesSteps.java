@@ -112,5 +112,10 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().verifyOfficeAddressPostalCode(postalCode);
     }
 
+    @When("the user clicks on address label for sorting offices")
+    public void clickOnAddressLabel(){
+        getOfficesPage().clickOnAddressLabel();
+    }
+
   }
 

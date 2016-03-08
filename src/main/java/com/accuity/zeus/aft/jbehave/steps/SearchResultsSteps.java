@@ -375,6 +375,10 @@ public class SearchResultsSteps extends AbstractSteps{
     @Then("the user should see the office results for the applied filters")
     public void verifyResultsDisplayed(){
         getResultsPage().verifyOfficeResultsForAppliedFilters();
+    }
 
+    @Then("the user should see the office search results sorted ascending by addressLine1 from trusted document")
+    public void verfiyOfficeAddressSorting(){
+        getResultsPage().verifySortAscOrderByAddress(database, apacheHttpClient, searchedEntity);
     }
 }
