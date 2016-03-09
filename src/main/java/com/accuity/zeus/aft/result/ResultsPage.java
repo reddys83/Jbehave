@@ -811,15 +811,30 @@ public class ResultsPage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-//        String xqueryName = "sortAscByOfficeAddressLine1";
-        //WebElement addressTable = getDriver().findElement(By.id("subEntityList-list")).findElement(By.tagName("table"));
-        //List<WebElement> addressList = addressTable.findElements(By.tagName("tr"));
+
         List<WebElement> officeAdd = getDriver().findElements(By.xpath(".//*[@class='search-results-module'] //td[3]"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "ascending order by office address", nvPairs);
+        for (int i = 0; i < officeAdd.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),officeAdd.get(i).getText());
+        }
+    }
+
+    public void verifySortDscOrderByAddress(Database database, ApacheHttpClient apacheHttpClient, String fid) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        List<WebElement> officeAdd = getDriver().findElements(By.xpath(".//*[@class='search-results-module'] //td[3]"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "descending order by office address", nvPairs);
         for (int i = 0; i < officeAdd.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),officeAdd.get(i).getText());
         }

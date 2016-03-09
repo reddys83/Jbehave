@@ -378,7 +378,12 @@ public class SearchResultsSteps extends AbstractSteps{
     }
 
     @Then("the user should see the office search results sorted ascending by addressLine1 from trusted document")
-    public void verfiyOfficeAddressSorting(){
+    public void verfiyOfficeAddressSortingAscending(){
         getResultsPage().verifySortAscOrderByAddress(database, apacheHttpClient, searchedEntity);
+    }
+
+    @Then("the user should see the office search results sorted descending by addressLine1 from trusted document")
+    public void verifyOfficeAddressSortingDescending(){
+        getResultsPage().verifySortDscOrderByAddress(database, apacheHttpClient, searchedEntity);
     }
 }
