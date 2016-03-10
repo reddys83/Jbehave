@@ -5,6 +5,7 @@ As a user
 I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-247 - User can edit country holidays
+JIRA ID - ZEUS-441 - User can save edits to country
 
 Scenario: Verify error message enter a year, month/year or day/month/year for existing holiday
 1. only day
@@ -166,3 +167,25 @@ Then the user should not see the newly added holiday row in the holiday country 
 Examples:
 |country|
 |American Samoa|
+
+Scenario: Save country holidays
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user clicks on the add new holiday button in the holidays country page
+And the user enters holiday day <day> in the holidays country page
+And the user enters holiday month <month> in the holidays country page
+And the user enters holiday year <year> in the holidays country page
+And the user enters holiday description <description> in the holidays country page
+And the user enters holiday notes <notes> in the holidays country page
+And the user clicks on the save button
+And the user clicks on the confirm button
+Then the user should see the edits to country banking hrs in zeus document
+And the user reverts the changes to the country Bosnia-Herzegovina
+
+Examples:
+|country|day|month|year|description|notes|
+|Bosnia-Herzegovina|1|Jan|2016|New Year|New Year 2016|

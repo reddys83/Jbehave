@@ -57,6 +57,10 @@ public class XqueryMap {
         queryMap.put("get country routing codes", "getCountryRoutingCodes.xqy");
         queryMap.put("get country demographics type","getDemographicsType.xqy");
         queryMap.put("get country demographics unit","getDemographicsUnit.xqy");
+        queryMap.put("get country banking hrs","getCountryBankingHrs.xqy");
+        queryMap.put("revert changes to country Bosnia-Herzegovina for zeus", "updateCountryBosniaHerzegovinaZeus.xqy");
+        queryMap.put("revert changes to country Bosnia-Herzegovina for trusted","updateCountryBosniaHerzegovinaTrusted.xqy");
+        queryMap.put("get country holidays", "getCountryHolidays.xqy");
     }
 
     public String getXquery(String key){

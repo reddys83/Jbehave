@@ -12,6 +12,7 @@ JIRA ID - ZEUS-710 - User can edit country identifiers
 JIRA ID - ZEUS-684 - User will get warning if click away from screen they are editing
 JIRA ID - ZEUS-827 - User can only input number in date fields
 JIRA ID - ZEUS-745 - User will see summary of changes made in confirmation modal
+JIRA ID - ZEUS-441 - User can save edits to country
 
 Scenario: Verify country names type from lookup COUNTRY_NAME_TYPE
 Given a user is on the search page
@@ -367,7 +368,7 @@ Examples:
 |Afghanistan|Rand|
 
 Scenario: User will see summary of changes made in confirmation modal
-Meta:@Runzdfasdf
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -400,3 +401,21 @@ And the user should see the below summary changes in confirmation modal
 Examples:
 |country|demographicType|demographicValue|appliedYear|confirmedYear|countryStartYear|countryEndYear|day|month|year|
 |Guam|Largest County Population|34000000|2011|2013|2011|2013|1|Jan|2015|
+
+Scenario: save country basic info
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+When the user enters country start year as <countryStartYear>
+And the user enters country end year as <countryEndYear>
+And the user clicks on the save button
+And the user clicks on the confirm button
+Then the user should see the edits to country basic info in zeus document
+And the user reverts the changes to the country Bosnia-Herzegovina
+
+Examples:
+|country|countryStartYear|countryEndYear|
+|Bosnia-Herzegovina|2014|2015|
