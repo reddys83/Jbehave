@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.pages.AbstractPage;
+import com.accuity.zeus.aft.jbehave.pages.DataPage;
 import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 import com.accuity.zeus.aft.rest.RestClient;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -107,6 +108,7 @@ public class ResultsPage extends AbstractPage {
     private String appliedInstTypeFilter = "";
     private By office_search_results_type_filter_xpath = By.xpath(".//*[@id='type']/li");
     private By office_search_refine_results_searchBox_xpath = By.xpath("//input[@id='refine-input']");
+    private By office_addressList_locator_xpath = By.xpath("//*[@id='subEntityList-list']//tbody");
 
 
     public ResultsPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi ) {
@@ -801,6 +803,40 @@ public class ResultsPage extends AbstractPage {
         for(int i=0; i<getDriver().findElements(office_search_results_rows_xpath).size(); i++){
             assertEquals(appliedStatusFilter, getDriver().findElements(office_search_results_status_col_xpath).get(i).getText());
             assertTrue(getDriver().findElements(office_type_locator_xpath).get(i).getText().contains(appliedInstTypeFilter));
+        }
+    }
+
+    public void verifySortAscOrderByAddress(Database database, ApacheHttpClient apacheHttpClient, String fid) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        List<WebElement> officeAdd = getDriver().findElements(By.xpath(".//*[@class='search-results-module'] //td[3]"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "ascending order by office address", nvPairs);
+        for (int i = 0; i < officeAdd.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),officeAdd.get(i).getText());
+        }
+    }
+
+    public void verifySortDscOrderByAddress(Database database, ApacheHttpClient apacheHttpClient, String fid) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        List<WebElement> officeAdd = getDriver().findElements(By.xpath(".//*[@class='search-results-module'] //td[3]"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "descending order by office address", nvPairs);
+        for (int i = 0; i < officeAdd.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),officeAdd.get(i).getText());
         }
     }
 }

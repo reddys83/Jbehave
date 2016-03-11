@@ -57,6 +57,9 @@ public class XqueryMap {
         queryMap.put("get country routing codes", "getCountryRoutingCodes.xqy");
         queryMap.put("get country demographics type","getDemographicsType.xqy");
         queryMap.put("get country demographics unit","getDemographicsUnit.xqy");
+        queryMap.put("ascending order by office address","sortAscByOfficeAddressLine1.xqy");
+        queryMap.put("descending order by office address","sortDescByOfficeAddressLine1.xqy");
+
     }
 
     public String getXquery(String key){
