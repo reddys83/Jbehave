@@ -108,7 +108,7 @@ public class ResultsPage extends AbstractPage {
     private String appliedInstTypeFilter = "";
     private By office_search_results_type_filter_xpath = By.xpath(".//*[@id='type']/li");
     private By office_search_refine_results_searchBox_xpath = By.xpath("//input[@id='refine-input']");
-    private By office_addressList_locator_xpath = By.xpath("//*[@id='subEntityList-list']//tbody");
+    private By office_addressList_locator_xpath = By.xpath(".//*[@class='search-results-module'] //td[3]");
 
 
     public ResultsPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi ) {
@@ -815,9 +815,13 @@ public class ResultsPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        comparingAddressXpathUI(nvPairs,"ascending order by office address");
 
-        List<WebElement> officeAdd = getDriver().findElements(By.xpath(".//*[@class='search-results-module'] //td[3]"));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "ascending order by office address", nvPairs);
+    }
+
+    public void comparingAddressXpathUI(List<NameValuePair>nvPairs,String xqueryName){
+        List<WebElement> officeAdd = getDriver().findElements(office_addressList_locator_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
         for (int i = 0; i < officeAdd.size(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),officeAdd.get(i).getText());
         }
@@ -832,11 +836,11 @@ public class ResultsPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        List<WebElement> officeAdd = getDriver().findElements(By.xpath(".//*[@class='search-results-module'] //td[3]"));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "descending order by office address", nvPairs);
-        for (int i = 0; i < officeAdd.size(); i++) {
-            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),officeAdd.get(i).getText());
-        }
+        comparingAddressXpathUI(nvPairs,"descending order by office address");
+//        List<WebElement> officeAdd = getDriver().findElements(office_addressList_locator_xpath);
+//        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "descending order by office address", nvPairs);
+//        for (int i = 0; i < officeAdd.size(); i++) {
+//            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),officeAdd.get(i).getText());
+//        }
     }
 }
