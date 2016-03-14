@@ -171,21 +171,6 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().verifyCurrencyPageForClickedISOName();
     }
 
-    @Then("the user reverts the changes to the currency afghani-test")
-    public void revertChangesToCurrencyAfghani() {
-        getCurrencyPage().revertChangesToCurrencyAfghani(database, apacheHttpClient);
-    }
-
-    @Then("the user reverts the changes to the currency Deutsche Mark")
-    public void revertChangesToCurrencyDeutscheMark(){
-        getCurrencyPage().revertChangesToCurrencyDeutscheMark(database, apacheHttpClient);
-    }
-
-    @Then("the user reverts the changes to the currency asian currency unit")
-    public void revertChangesToCurrencyAsianCurrencyUnit(){
-        getCurrencyPage().revertChangesToCurrencyAsianCurrencyUnit(database, apacheHttpClient);
-    }
-
     @Then("the user should return to edit currency page mode")
     public void verifyCurrencyEditMode(){
         getCurrencyPage().verifyCurrencyEditMode();

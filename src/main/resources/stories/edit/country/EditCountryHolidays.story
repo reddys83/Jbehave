@@ -169,13 +169,16 @@ Examples:
 |American Samoa|
 
 Scenario: Save country holidays
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
-And the user clicks on the add new holiday button in the holidays country page
+And the user get the document with get Id for country with the name as Bosnia-Herzegovina from the database
+
+When the user clicks on the add new holiday button in the holidays country page
 And the user enters holiday day <day> in the holidays country page
 And the user enters holiday month <month> in the holidays country page
 And the user enters holiday year <year> in the holidays country page
@@ -184,7 +187,7 @@ And the user enters holiday notes <notes> in the holidays country page
 And the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the edits to country banking hrs in zeus document
-And the user reverts the changes to the country Bosnia-Herzegovina
+And the user reverts the changes to the document
 
 Examples:
 |country|day|month|year|description|notes|

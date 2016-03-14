@@ -966,11 +966,6 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyEditCountryHolidaysInZeus(database, apacheHttpClient, selectedCountry);
     }
 
-    @Then("the user reverts the changes to the country Bosnia-Herzegovina")
-    public void revertChangesToTheCountry(){
-        getCountryPage().revertChangesToTheCountry(database, apacheHttpClient);
-    }
-
     @Then("the user should see the edits to country basic info in zeus document")
     public void verifyEditCountryBasicInfoInZeus(){
         getCountryPage().verifyEditCountryBasicInfoInZeus(database, apacheHttpClient, selectedCountry);

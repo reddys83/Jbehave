@@ -4,7 +4,6 @@ import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.*;
 
 import org.jbehave.core.model.ExamplesTable;
-import org.openqa.selenium.remote.internal.ApacheHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +14,6 @@ public class DataSteps extends AbstractSteps {
     com.accuity.zeus.aft.io.ApacheHttpClient apacheHttpClient;
     @Autowired
     Database database;
-
-    private String selectedCurrency;
 
     @When("the user clicks on the currency tab in the data area")
     public void clickOnCurrencyTab() {
@@ -845,29 +842,19 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnConfirmButton();
     }
 
+    @When("the user get the document with $xqueryName with the name as $name from the database")
+    public void getDocument(String xqueryName, String name) {
+        getDataPage().getDocument(xqueryName, name);
+    }
+
     @When("the user clicks on the return button")
     public void clickOnReturnButton() {
         getDataPage().clickOnReturnButton();
     }
 
-    @Then("the user reverts the changes to the currency")
+    @Then("the user reverts the changes to the document")
     public void revertChangesToCurrency() {
-        getDataPage().revertChangesToCurrency(selectedCurrency);
-    }
-
-    @Then("the user reverts the changes to the currency Deutsche Mark")
-    public void revertChangesToCurrencyDeutscheMark() {
-        getDataPage().revertChangesToCurrencyDeutscheMark();
-    }
-
-    @Then("the user reverts the changes to the currency asian currency unit")
-    public void revertChangesToCurrencyAsianCurrencyUnit() {
-        getDataPage().revertChangesToCurrencyAsianCurrencyUnit();
-    }
-
-    @Then("the user reverts the changes to the currency afghani-test")
-    public void revertChangesToCurrencyAfghani() {
-        getDataPage().revertChangesToCurrencyAfghani(database, apacheHttpClient);
+        getDataPage().revertChangesToDocument();
     }
 
     @When("the user clicks on the cancel no button")

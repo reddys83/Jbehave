@@ -61,6 +61,7 @@ And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
+And the user get the document with get Id for country with the name as Bosnia-Herzegovina from the database
 And the user clicks on the add country banking hours option
 And the user selects country banking hours day as <bankingHrsDay> in the country page
 And the user selects country banking hours start time as <bankingHrsStartTime> in the country page
@@ -68,7 +69,7 @@ And the user selects country banking hours end time as <bankingHrsEndTime> in th
 And the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the edits to country banking hrs in zeus document
-And the user reverts the changes to the country Bosnia-Herzegovina
+And the user reverts the changes to the document
 
 Examples:
 |country|bankingHrsDay|bankingHrsStartTime|bankingHrsEndTime|

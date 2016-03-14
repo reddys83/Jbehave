@@ -1391,12 +1391,6 @@ public class CountryPage extends AbstractPage {
         }
     }
 
-    public void revertChangesToTheCountry(Database database, ApacheHttpClient apacheHttpClient) {
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to country Bosnia-Herzegovina for zeus",nvPairs);
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to country Bosnia-Herzegovina for trusted",nvPairs);
-    }
-
     public void verifyEditCountryHolidaysInZeus(Database database, ApacheHttpClient apacheHttpClient, String selectedCountry) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedCountry));

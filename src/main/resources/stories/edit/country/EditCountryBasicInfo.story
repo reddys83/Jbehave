@@ -409,12 +409,14 @@ And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
+And the user get the document with get Id for country with the name as Bosnia-Herzegovina from the database
+
 When the user enters country start year as <countryStartYear>
 And the user enters country end year as <countryEndYear>
 And the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the edits to country basic info in zeus document
-And the user reverts the changes to the country Bosnia-Herzegovina
+And the user reverts the changes to the document
 
 Examples:
 |country|countryStartYear|countryEndYear|

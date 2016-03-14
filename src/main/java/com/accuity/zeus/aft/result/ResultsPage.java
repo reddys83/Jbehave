@@ -507,7 +507,7 @@ public class ResultsPage extends AbstractPage {
 
     }
 
-    public void verifySortOrderByOfficeArea(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String searchedEntity) {
+    public void verifySortOrderByOfficeArea(String xQueryName, String searchedEntity) {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -520,7 +520,7 @@ public class ResultsPage extends AbstractPage {
         }
     }
 
-    public void verifySortOrderByOfficeCity(Database database, ApacheHttpClient apacheHttpClient, String xQueryName, String searchedEntity) {
+    public void verifySortOrderByOfficeCity(String xQueryName, String searchedEntity) {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {

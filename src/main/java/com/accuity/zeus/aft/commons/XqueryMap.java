@@ -37,12 +37,6 @@ public class XqueryMap {
         queryMap.put("descending order by office city", "sortDescByOfficeCity.xqy");
         queryMap.put("office types list", "getOfficeTypesList.xqy");
         queryMap.put("office search results with type filter","getOfficeSearchByTypeFilter.xqy");
-        queryMap.put("revert changes to currency afghani for zeus","updateCurrencyAfghaniZeus.xqy");
-        queryMap.put("revert changes to currency afghani for trusted","updateCurrencyAfghaniTrusted.xqy");
-        queryMap.put("revert changes to currency asian currency unit for zeus","updateCurrencyAsianCurrencyUnitZeus.xqy");
-        queryMap.put("revert changes to currency asian currency unit for trusted","updateCurrencyAsianCurrencyUnitTrusted.xqy");
-        queryMap.put("revert changes to currency Deutsche Mark for zeus", "updateCurrencyDeutscheMarkZeus.xqy");
-        queryMap.put("revert changes to currency Deutsche Mark for trusted","updateCurrencyDeutscheMarkTrusted.xqy");
         queryMap.put("get Id for currency","getIdForCurrency.xqy");
         queryMap.put("area list","getAreaList.xqy");
         queryMap.put("subarea list","getSubAreaList.xqy");
@@ -58,8 +52,7 @@ public class XqueryMap {
         queryMap.put("get country demographics type","getDemographicsType.xqy");
         queryMap.put("get country demographics unit","getDemographicsUnit.xqy");
         queryMap.put("get country banking hrs","getCountryBankingHrs.xqy");
-        queryMap.put("revert changes to country Bosnia-Herzegovina for zeus", "updateCountryBosniaHerzegovinaZeus.xqy");
-        queryMap.put("revert changes to country Bosnia-Herzegovina for trusted","updateCountryBosniaHerzegovinaTrusted.xqy");
+        queryMap.put("get Id for country","getIdForCountry.xqy");
         queryMap.put("get country holidays", "getCountryHolidays.xqy");
     }
 
