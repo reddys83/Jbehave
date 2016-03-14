@@ -54,7 +54,10 @@ public class XqueryMap {
         queryMap.put("get country banking hrs","getCountryBankingHrs.xqy");
         queryMap.put("get Id for country","getIdForCountry.xqy");
         queryMap.put("get country holidays", "getCountryHolidays.xqy");
-    }
+        queryMap.put("ascending order by office address","sortAscByOfficeAddressLine1.xqy");
+        queryMap.put("descending order by office address","sortDescByOfficeAddressLine1.xqy");
+
+   }
 
     public String getXquery(String key){
         return queryMap.get(key);

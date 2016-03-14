@@ -14,6 +14,7 @@ JIRA ID - ZEUS-550 - User can sort office results by name
 JIRA ID - ZEUS-551 - User can sort office results by area
 JIRA ID - ZEUS-548 - User can sort office results by city
 JIRA ID - ZEUS-552 - User can sort office results by country
+JIRA ID - ZEUS-561 - User can sort office results by addressline1
 
 Scenario: Verify the list of office multiple types should order alphabetically in office search results page
 Meta:
@@ -194,3 +195,25 @@ Then the user should see office search results reset to page 1
 Examples:
 |entity|searchBy|fid|
 |1645|FID|1645|
+
+Scenario: Verify Office Results Pagination and Counter
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+When the user clicks on address label for sorting offices
+Then the user should see the office search results sorted ascending by addressLine1 from trusted document
+When the user clicks on address label for sorting offices
+Then the user should see the office search results sorted descending by addressLine1 from trusted document
+When the user clicks on address label for sorting offices
+Then the user should see the office search results sorted ascending by addressLine1 from trusted document
+
+
+
+Examples:
+|entity|searchBy|fid|
+|1038|FID|1038|

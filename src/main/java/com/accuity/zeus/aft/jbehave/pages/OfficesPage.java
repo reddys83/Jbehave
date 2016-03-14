@@ -68,6 +68,8 @@ public class OfficesPage extends AbstractPage {
     private By office_locations_summary_type_xpath = By.xpath("//li[h2='Summary']/table/tbody/tr/td[1]");
     private By office_locations_summary_value_xpath = By.xpath("//li[h2='Summary']/table/tbody/tr/td[2]");
     private By office_locations_summaries_xpath = By.xpath("//li[h2='Summary']/table/tbody/tr");
+    private By office_address_label_xpath = By.xpath("//*[@id='subEntityList-list']//table/thead/tr/th[3]");
+
 
     public OfficesPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
        super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -242,4 +244,14 @@ public class OfficesPage extends AbstractPage {
     public void verifyOfficeAddressPostalCode(String postalCode) {
         assertEquals("Postal Code " + postalCode, getDriver().findElement(office_locations_postal_code_1_xpath ).getText());
     }
+
+    public void clickOnAddressLabel(){
+        try{
+        Thread.sleep(1000);
+        getDriver().findElement(office_address_label_xpath).click();
+    }catch(InterruptedException e){
+        e.printStackTrace();
+        }
+    }
+
 }
