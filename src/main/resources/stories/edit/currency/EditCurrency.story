@@ -457,7 +457,7 @@ Examples:
 |Deutsche Mark|Angola|21|Jun|1987|23|Jun|1999|false|Kwanza|
 
 Scenario: ZEUS-743 - User will get warning if click away from screen they are editing
-Meta:@RunLasdfasdf
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
