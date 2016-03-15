@@ -936,7 +936,6 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnSaveButton() {
-
         attemptClick(save_button_id);
     }
 
