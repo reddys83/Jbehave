@@ -1000,4 +1000,34 @@ public class CountrySteps extends AbstractSteps{
     public void verifyNoNewlyAddedRoutingCodeRow(){
         getCountryPage().verifyNoNewlyAddedRoutingCodeRow();
     }
+
+    @When("the user selects country banking hours day as <bankingHrsDay> in the country page")
+    public void selectCountryBankingHrsDay(@Named("bankingHrsDay") String bankingHrsDay){
+        getCountryPage().selectCountryBankingHrsDay(bankingHrsDay);
+    }
+
+    @When("the user selects country banking hours end time as <bankingHrsEndTime> in the country page")
+    public void selectCountryBankingHrsEndTime(@Named("bankingHrsEndTime") String bankingHrsEndTime){
+        getCountryPage().selectCountryBankingHrsEndTime(bankingHrsEndTime);
+    }
+
+    @When("the user selects country banking hours start time as <bankingHrsStartTime> in the country page")
+    public void selectCountryBankingHrsStartTime(@Named("bankingHrsStartTime") String bankingHrsStartTime){
+        getCountryPage().selectCountryBankingHrsStartTime(bankingHrsStartTime);
+    }
+
+    @Then("the user should see the edits to country banking hrs in zeus document")
+    public void verifyEditCountryBankingHrsInZeus(){
+        getCountryPage().verifyEditCountryBankingHrsInZeus(database, apacheHttpClient, selectedCountry);
+    }
+
+    @Then("the user should see the edits to country holidays in zeus document")
+    public void verifyEditCountryHolidaysInZeus(){
+        getCountryPage().verifyEditCountryHolidaysInZeus(database, apacheHttpClient, selectedCountry);
+    }
+
+    @Then("the user should see the edits to country basic info in zeus document")
+    public void verifyEditCountryBasicInfoInZeus(){
+        getCountryPage().verifyEditCountryBasicInfoInZeus(database, apacheHttpClient, selectedCountry);
+    }
 }

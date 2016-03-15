@@ -194,6 +194,7 @@ public class DataPage extends AbstractPage {
     private By cancel_update_confirmation_modal_xpath = By.xpath("//*[@id='modal-region']/div");
 
     static ResponseEntity responseEntity;
+    static String endpointWithID;
 
     public DataPage(WebDriver driver, String urlPrefix, Database database,  ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi ) {
         super(driver, urlPrefix, database, apacheHttpClient,restClient,heraApi );
@@ -943,55 +944,23 @@ public class DataPage extends AbstractPage {
         attemptClick(confirm_button_xpath);
     }
 
-    public void clickOnConfirmButton(String selectedCurrency) {
+    public void getDocument(String xqueryName, String name) {
 
         List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("name", selectedCurrency));
+        nvPairs.add(new BasicNameValuePair("name", name));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
 
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for currency", nvPairs);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
+        endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
 
-        responseEntity = restClient.getDocumentByID(document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("resource").getTextContent().toString(),heraApi );
+        responseEntity = restClient.getDocumentByID(endpointWithID,heraApi );
         assertTrue(responseEntity.getStatusCode().value()==200);
-
-        attemptClick(confirm_button_xpath);
     }
 
-    public void revertChangesToCurrency(String selectedCurrency) {
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("name", selectedCurrency));
-        nvPairs.add(new BasicNameValuePair("source", "zeus"));
-     //   We need the below step to demo patch operation
-     //   apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus", nvPairs);
+    public void revertChangesToDocument() {
 
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for currency", nvPairs);
-
-        int response=restClient.putDocumentByID(document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("resource").getTextContent().toString(),heraApi, responseEntity.getBody().toString());
-        //   We need the below step to demo patch operation
-        //String response=restClient.getResultForPatch("currency", document.getElementsByTagName("currency").item(0).getAttributes().getNamedItem("id").getTextContent().toString(),heraApi);
-        //assertTrue(response.equals("200"));
-
+        int response=restClient.putDocumentByID(endpointWithID,heraApi, responseEntity.getBody().toString());
         assertTrue(response == 200);
-    }
-
-
-    public void revertChangesToCurrencyDeutscheMark() {
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency Deutsche Mark for zeus", nvPairs);
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency Deutsche Mark for trusted", nvPairs);
-
-    }
-
-    public void revertChangesToCurrencyAsianCurrencyUnit() {
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for zeus",nvPairs);
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for trusted",nvPairs);
-    }
-
-    public void revertChangesToCurrencyAfghani(Database database, ApacheHttpClient apacheHttpClient) {
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus",nvPairs);
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for trusted",nvPairs);
     }
 
     public void clickOnCancelYesButton() {
