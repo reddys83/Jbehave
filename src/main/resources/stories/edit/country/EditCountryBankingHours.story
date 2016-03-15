@@ -1,4 +1,4 @@
-Meta:@EditCountryBasicInfo @Edit @Country
+Meta:@EditCountryBankingHours @Edit @Country
 
 Narrative:
 As a user

@@ -291,6 +291,7 @@ Examples:
 |Albania|Numeric ISO Code|aksjuilrw1aksjuilrw1aksjuilrw1aksjuilrw1aksju%)~12y1|
 
 Scenario: User can edit country identifiers - Verify country Identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
