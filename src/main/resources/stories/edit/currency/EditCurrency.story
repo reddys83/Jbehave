@@ -13,6 +13,7 @@ JIRA ID - ZEUS-744 - User will confirm cancel for edit
 JIRA ID - ZEUS-749 - Schematron validation for currency
 JIRA ID - ZEUS-286 - User can save edits to currency uses
 JIRA-ID - ZEUS-280 - User can add new use for currency
+JIRA-ID - ZEUS-838 - User will see confirmation message after saving currency edits
 
 Scenario: a. Veify the currency selection drop-down is disabled in update mode
 1. Verify the currency details are comming from trusted document
