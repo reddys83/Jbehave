@@ -13,7 +13,11 @@ JIRA ID - ZEUS-744 - User will confirm cancel for edit
 JIRA ID - ZEUS-749 - Schematron validation for currency
 JIRA ID - ZEUS-286 - User can save edits to currency uses
 JIRA-ID - ZEUS-280 - User can add new use for currency
+<<<<<<< HEAD
 JIRA-ID - ZEUS-838 - User will see confirmation message after saving currency edits
+=======
+JIRA ID - ZEUS-743 - User will get warning if click away from screen they are editing
+>>>>>>> develop
 
 Scenario: a. Veify the currency selection drop-down is disabled in update mode
 1. Verify the currency details are comming from trusted document
@@ -455,6 +459,30 @@ Examples:
 |Deutsche Mark|Angola|||1987|||1999|false|Dram|
 |Deutsche Mark|Angola||Jun|1987||Jun|1999|false|Guyana Dollar|
 |Deutsche Mark|Angola|21|Jun|1987|23|Jun|1999|false|Kwanza|
+
+Scenario: ZEUS-743 - User will get warning if click away from screen they are editing
+Meta:
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
+When the user clicks on the country tab in the data area
+Then the user should see the cancel update confirmation modal
+When the user clicks on the cancel no button
+Then the user should return to edit currency page mode
+When the user clicks on the country tab in the data area
+Then the user should see the cancel update confirmation modal
+When the user clicks on the cancel yes button
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+Then the user should see the basic info for the selected country
+
+Examples:
+|currency|country|
+|Rand|Afghanistan|
+
+
 
 Scenario: ZEUS-838 - User will see confirmation message after saving currency edits
 Given a user is on the search page

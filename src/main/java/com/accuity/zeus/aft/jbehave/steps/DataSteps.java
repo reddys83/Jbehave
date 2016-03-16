@@ -842,6 +842,16 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnConfirmButton();
     }
 
+    @Then("the user should not see the cancel update confirmation modal")
+    public void verifyNoCountryCancelUpdateConfirmationModal(){
+        getDataPage().verifyNoCancelUpdateConfirmationModal();
+    }
+
+    @Then("the user should see the cancel update confirmation modal")
+    public void verifyCountryCancelUpdateConfirmationModal(){
+        getDataPage().verifyCancelUpdateConfirmationModal();
+    }
+
     @When("the user get the document with $xqueryName with the name as $name from the database")
     public void getDocument(String xqueryName, String name) {
         getDataPage().getDocument(xqueryName, name);
