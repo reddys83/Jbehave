@@ -1,17 +1,22 @@
 Meta:@Design
 
-Scenario: Verify Office Results Pagination and Counter
+
+Scenario: save country basic info
 Given a user is on the search page
 When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-When the user clicks on address label for sorting offices
-Then the user should see the office search results sorted ascending by addressLine1 from trusted document
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+When the user enters country start year as <countryStartYear>
+And the user enters country end year as <countryEndYear>
+And the user clicks on the save button
+And the user clicks on the confirm button
+Then the user should see the edits to country basic info in zeus document
+And the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|
-|1038|FID|1038|
+|country|countryStartYear|countryEndYear|
+|Bosnia-Herzegovina|2014|2015|
+
+

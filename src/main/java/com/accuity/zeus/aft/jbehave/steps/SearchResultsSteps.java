@@ -179,7 +179,7 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @Then("the office search results should sort by area which sorted $xqueryName with fid $fid from the database")
     public void verifySortOrderByOfficeArea(String xqueryName, String fid) {
-        getResultsPage().verifySortOrderByOfficeArea(database, apacheHttpClient, xqueryName, fid);
+        getResultsPage().verifySortOrderByOfficeArea(xqueryName, fid);
     }
 
     @When("the user enters $searchText in the refine results search bar")
@@ -194,7 +194,7 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @Then("the office search results should sort by city which sorted $xqueryName with fid $fid from the database")
     public void verifySortOrderByOfficeCity(String xqueryName, String fid) {
-        getResultsPage().verifySortOrderByOfficeCity(database, apacheHttpClient, xqueryName, fid);
+        getResultsPage().verifySortOrderByOfficeCity(xqueryName, fid);
     }
 
     @Then("the user should see the office search results cards sorted ascending order by office status")

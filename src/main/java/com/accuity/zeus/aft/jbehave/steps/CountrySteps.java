@@ -461,6 +461,46 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().clickOnAddDemographicsButton();
     }
 
+    @When("the user clicks on the add new regions button in the country basic info page")
+    public void clickOnAddRegionsButton() {
+        getCountryPage().clickOnAddRegionsButton();
+    }
+
+    @When("the user selects region type as <regionType> in the drop down")
+     public void selectsRegionTypeFromDropdown(@Named("regionType") String regionType) {
+        getCountryPage().selectsRegionTypeFromDropdown(regionType);
+    }
+
+    @When("the user selects region value as <regionValue> in the drop down")
+    public void selectsRegionValueFromDropdown(@Named("regionValue") String regionValue) {
+        getCountryPage().selectsRegionValueFromDropdown(regionValue);
+    }
+
+    @When("the user clicks the value drop down for region type trading region")
+    public void clickOnTradingRegionValuesDropdown() {
+        getCountryPage().clickOnTradingRegionValuesDropdown();
+    }
+
+    @When("the user clicks the value drop down for region type continent")
+    public void clickOnContinentRegionValuesDropdown() {
+        getCountryPage().clickOnContinentRegionValuesDropdown();
+    }
+
+    @Then("the user should see the drop down items from TRADING_REGION look up table")
+    public void verifyTradingRegionsValuesDropdown() {
+        getCountryPage().verifyTradingRegionsValuesDropdown();
+    }
+
+    @Then("the user should see the drop down items from CONTINENT look up table")
+    public void verifyContinentRegionsValuesDropdown() {
+        getCountryPage().verifyContinentRegionsValuesDropdown();
+    }
+
+    @Then("the user should see the values from SEPA_STATUS look up table")
+    public void verifySepaValues() {
+        getCountryPage().verifySepaValues();
+    }
+
     @Then("the user should see the below summary changes in confirmation modal $Summary")
     public void verifySummaryConfirmationModal(ExamplesTable Summary) {
         getCountryPage().verifySummaryConfirmationModal(Summary);
@@ -479,6 +519,16 @@ public class CountrySteps extends AbstractSteps{
     @Then("the user should see the error message required for the type and value fields")
     public void verifyRequiredErrorMessageForTypeAndValue() {
         getCountryPage().verifyRequiredErrorMessageForTypeAndValue();
+    }
+
+    @Then("the user should see the error message required for the region type field")
+    public void verifyRequiredErrorMessageRegionType() {
+        getCountryPage().verifyRequiredErrorMessageRegionType();
+    }
+
+    @Then("the user should see the error message required for the region value field")
+    public void verifyRequiredErrorMessageRegionValue() {
+        getCountryPage().verifyRequiredErrorMessageRegionValue();
     }
 
     @When("the user clicks on delete country demographics option")
@@ -524,6 +574,11 @@ public class CountrySteps extends AbstractSteps{
     @Then("the user should see the country demographics types from lookup DEMOGRAPHIC_METRIC")
     public void verifyCountryDemographicsTypeDropdownList() {
         getCountryPage().verifyCountryDemographicsTypeDropdownList();
+    }
+
+    @Then("the user should see the country regions types from lookup COUNTRY_ALTERNATIVE_REGION excluding which are already existing")
+    public void verifyCountryRegionsTypeDropdownList() {
+        getCountryPage().verifyCountryRegionsTypeDropdownList();
     }
 
     @Then("the user should see the demographics units are from lookup UNIT_OF_MEASUREMENT")
@@ -734,6 +789,11 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().userClicksOnDeleteCountryBankingHours();
     }
 
+    @When("the user clicks on delete country region type")
+    public void userClicksOnDeleteCountryRegionType() {
+        getCountryPage().userClicksOnDeleteCountryRegionType();
+    }
+
     @Then("the user should see a new row with day drop-down list with all days and hours with values in half hour increments")
     public void verifyUserSeesBankingDaysAndHours(){
         getCountryPage().verifyUserSeeBankingDaysAndHours();
@@ -939,5 +999,35 @@ public class CountrySteps extends AbstractSteps{
     @Then("the user should not see the newly added routing code row in the holiday country page")
     public void verifyNoNewlyAddedRoutingCodeRow(){
         getCountryPage().verifyNoNewlyAddedRoutingCodeRow();
+    }
+
+    @When("the user selects country banking hours day as <bankingHrsDay> in the country page")
+    public void selectCountryBankingHrsDay(@Named("bankingHrsDay") String bankingHrsDay){
+        getCountryPage().selectCountryBankingHrsDay(bankingHrsDay);
+    }
+
+    @When("the user selects country banking hours end time as <bankingHrsEndTime> in the country page")
+    public void selectCountryBankingHrsEndTime(@Named("bankingHrsEndTime") String bankingHrsEndTime){
+        getCountryPage().selectCountryBankingHrsEndTime(bankingHrsEndTime);
+    }
+
+    @When("the user selects country banking hours start time as <bankingHrsStartTime> in the country page")
+    public void selectCountryBankingHrsStartTime(@Named("bankingHrsStartTime") String bankingHrsStartTime){
+        getCountryPage().selectCountryBankingHrsStartTime(bankingHrsStartTime);
+    }
+
+    @Then("the user should see the edits to country banking hrs in zeus document")
+    public void verifyEditCountryBankingHrsInZeus(){
+        getCountryPage().verifyEditCountryBankingHrsInZeus(database, apacheHttpClient, selectedCountry);
+    }
+
+    @Then("the user should see the edits to country holidays in zeus document")
+    public void verifyEditCountryHolidaysInZeus(){
+        getCountryPage().verifyEditCountryHolidaysInZeus(database, apacheHttpClient, selectedCountry);
+    }
+
+    @Then("the user should see the edits to country basic info in zeus document")
+    public void verifyEditCountryBasicInfoInZeus(){
+        getCountryPage().verifyEditCountryBasicInfoInZeus(database, apacheHttpClient, selectedCountry);
     }
 }

@@ -79,6 +79,8 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
+And the user get the document with get Id for currency with the name as Afghani-test from the database
+
 And the user enters the currency abbr value as <abbr> in the currency page
 And the user enters the currency unit value as <unit> in the currency page
 And the user enters the currency quantity value as <quantity> in the currency page
@@ -86,7 +88,7 @@ And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the edits to currency details in zeus document
 Then the user should see the view currency details from trusted document
-And the user reverts the changes to the currency afghani-test
+And the user reverts the changes to the document
 
 Examples:
 |currency|abbr|unit|quantity|
@@ -348,6 +350,8 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
+And the user get the document with get Id for currency with the name as Asian Currency Unit from the database
+
 And the user clicks on the add country type-ahead option
 When the user enters the country <addCurrencyCountry> in the add country type-ahead box
 When the user enters the currency start day as <currencyStartDay> in the currency page
@@ -356,7 +360,7 @@ And the user enters the currency start year as <currencyStartYear> in the curren
 And the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the view currency use from trusted document
-And the user reverts the changes to the currency asian currency unit
+And the user reverts the changes to the document
 
 Examples:
 |currency|addCurrencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
@@ -374,13 +378,15 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
+And the user get the document with get Id for currency with the name as Afghani-test from the database
+
 When the user enters the currency start day as <currencyStartDay> in the currency page
 And the user enters the currency start month as <currencyStartMonth> in the currency page
 And the user enters the currency start year as <currencyStartYear> in the currency page
 And the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the view currency use from trusted document
-And the user reverts the changes to the currency afghani-test
+And the user reverts the changes to the document
 
 Examples:
 |currency|addCurrencyountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
@@ -399,6 +405,8 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
+And the user get the document with get Id for currency with the name as Afghani-test from the database
+
 When the user enters the country <currencyCountry> in the currency usage
 When the user enters the currency start day as <currencyStartDay> in the currency page
 And the user enters the currency start month as <currencyStartMonth> in the currency page
@@ -407,7 +415,7 @@ And the user enters the currency usage primary value as <primary> in the currenc
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the edits to currency uses in zeus document
-And the user reverts the changes to the currency afghani-test
+And the user reverts the changes to the document
 
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|primary|
@@ -425,6 +433,8 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
+And the user get the document with get Id for currency with the name as Deutsche Mark from the database
+
 When the user enters the country <currencyCountry> in the currency usage
 When the user enters the currency start day as <currencyStartDay> in the currency page
 And the user enters the currency start month as <currencyStartMonth> in the currency page
@@ -437,7 +447,7 @@ And the user enters the currency usage replaced by as <replacedBy> in the curren
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the edits to currency uses in zeus document
-And the user reverts the changes to the currency Deutsche Mark
+And the user reverts the changes to the document
 
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|primary|replacedBy|

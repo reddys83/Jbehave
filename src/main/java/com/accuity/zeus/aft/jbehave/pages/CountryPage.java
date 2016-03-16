@@ -167,9 +167,7 @@ public class CountryPage extends AbstractPage {
     private By country_credit_rating_applied_date_error_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='creditRatingAppliedDateError']");
     private By country_credit_rating_confirmed_date_xpath = By.xpath(".//*[@data-internal_id='creditRatingConfirmedDate']//input[@name='creditRatingConfirmedDate-year']");
     private By country_credit_rating_confirmed_date_error_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='creditRatingConfirmedDateError']");
-    private By country_credit_rating_required_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[3]/td[5]/fieldset/p");
     private By country_credit_rating_addRow_id = By.id("add-creditRatings");
-    private By country_credit_rating_table_body_id = By.id("additionalCreditRatings");
     private By country_credit_rating_delete_button_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[4]/td[6]/button");
     private int rowCount;
     private By country_credit_rating_value_xpath = By.xpath("//*[@id='additionalCreditRatings']/tr[1]/td[3]/input");
@@ -206,21 +204,40 @@ public class CountryPage extends AbstractPage {
     private By countryBasicInfo_demographics_date_day_edit_xpath = By.xpath(".//*[@class='new'][@data-row_id='demographics']//input[@name='demographicDate-day']");
     private By countryBasicInfo_demographics_date_month_edit_xpath = By.xpath(".//*[@class='new'][@data-row_id='demographics']//select[@name='demographicDate-month']");
     String countryBasicInfo_demographics_type_dropdown_edit_xpath = ".//tr[@class='new'][@data-row_id='demographics']/td/select[@data-internal_id='demographicType']";
-    //private By countryBasicInfo_demographics_type_dropdown_edit_xpath = By.xpath("//*[@class='new']/td/select");
     String countryBasicInfo_demographics_unit_dropdown_edit_xpath = ".//*[@class='new']//select[@id='demographicUnit']";
     private By countryBasicInfo_demographics_value_edit_xpath = By.xpath(".//*[@class='new'][@data-row_id='demographics']//input[@data-internal_id='demographicValue']");
-
     private By countryBasicInfo_demographics_date_error_message_xpath = By.xpath("//*[@class='notification error'][@data-error_id='demographicDateError']");
     private By countryBasicInfo_demographics_type_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='demographicTypeError']");
     private By countryBasicInfo_demographics_value_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='demographicValueError']");
-
     private By countryBasicInfo_holiday_date_error_message_xpath= By.xpath("//*[@class='notification error'][@data-error_id='holidayDateError']");
     private By countryBasicInfo_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
-
     private String editCountryDemographicType="";
-
-    private By country_credit_rating_confirmed_date_error_no_later_than_today_xpath = By.xpath("//*[@id='additionalCreditRatings']/tr[1]/td[5]/p");
     private By country_credit_rating_new_row_xpath = By.xpath("//*[@class='new'][@data-row_id='creditRatings']");
+    private By country_regions_existing_type_xpath = By.xpath(".//*[@id='additionalRegions']/tr[not(@class='new')]/td[1]");
+
+    private By country_add_regions_button_edit_id =By.id("add-regions");
+
+    private By country_sepaRegion_value_xpath = By.xpath(".//*[@id='additionalRegions']//fieldset");
+    private By country_region_type_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='regionTypeError']");
+    private By country_region_value_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='regionValueError']");
+    private By country_region_delete_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='regions']//button[@class='delete-row']");
+    String country_regions_new_type_xpath = ".//*[@id='additionalRegions']/tr[@class='new']/td[1]/select";
+    String country_trading_region_value_dropdown_xpath = ".//*[@id='additionalRegions']//select[@data-error_id='tradingRegionValue']";
+    String country_region_value_dropdown_xpath = ".//*[@id='additionalRegions']//select[@data-error_id='regionValue']";
+    private By country_banking_hrs_day_list_xpath = By.xpath("//*[@class='new'] //*[@id='bankingDay-select']");
+    private By country_banking_hrs_start_time_list_xpath = By.xpath("//*[@class='new'] //*[@data-error_ref_id='bankingHour0Error']");
+    private By country_banking_hrs_end_time_list_xpath = By.xpath("//*[@class='new'] //*[@data-error_ref_id='bankingHour1Error']");
+    private String editedCountryBankingHrsDay ="";
+    private String editedCountryBankingHrsStartTime ="";
+    private String editedCountryBankingHrsEndTime ="";
+    private String editedCountryHolidayDay="";
+    private String editedCountryHolidayMonth="";
+    private String editedCountryHolidayYear="";
+    private String editedCountryHolidayDescription="";
+    private String editedCountryHolidayNotes="";
+    private String editedCountryStartYear = "";
+    private String editedCountryEndYear = "";
+
 
     public CountryPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -350,11 +367,13 @@ public class CountryPage extends AbstractPage {
     }
 
     public void enterCountryStartYear(String countryStartYear) {
+        editedCountryStartYear = countryStartYear;
         getDriver().findElement(country_basic_info_startDate_year_edit_xpath).clear();
         getDriver().findElement(country_basic_info_startDate_year_edit_xpath).sendKeys(countryStartYear);
     }
 
     public void enterCountryEndYear(String countryEndYear) {
+        editedCountryEndYear = countryEndYear;
         getDriver().findElement(country_basic_info_endDate_year_edit_xpath).clear();
         getDriver().findElement(country_basic_info_endDate_year_edit_xpath).sendKeys(countryEndYear);
     }
@@ -792,6 +811,91 @@ public class CountryPage extends AbstractPage {
         attemptClick(countryBasicInfo_Add_demographics_button_edit_id);
     }
 
+    public void clickOnAddRegionsButton() {
+        attemptClick(country_add_regions_button_edit_id);
+    }
+
+    public void clickOnTradingRegionValuesDropdown() {
+        attemptClick(By.xpath(country_trading_region_value_dropdown_xpath));
+    }
+
+    public void clickOnContinentRegionValuesDropdown() {
+        attemptClick(By.xpath(country_region_value_dropdown_xpath));
+    }
+
+    public void selectsRegionTypeFromDropdown(String regionType)
+    {
+        getDriver().findElement(By.xpath(country_regions_new_type_xpath)).click();
+       // attemptClick(By.xpath(country_regions_new_type_xpath));
+      // selectItemFromDropdownListByText((By.xpath(country_regions_new_type_xpath)),regionType);
+        List<WebElement> options = getDriver().findElements(By.xpath(country_regions_new_type_xpath + "/option"));
+
+        for (WebElement option : options) {
+            if (option.getText().contains(regionType)) {
+
+                getDriver().findElement(By.xpath(country_regions_new_type_xpath)).click();
+
+                option.click();
+
+                break;
+            }
+        }
+    }
+
+    public void selectsRegionValueFromDropdown(String regionValue)
+    {
+        getDriver().findElement(By.xpath(country_region_value_dropdown_xpath)).click();
+        List<WebElement> options = getDriver().findElements(By.xpath(country_region_value_dropdown_xpath + "/option"));
+
+        for (WebElement option : options) {
+            if (option.getText().contains(regionValue)) {
+
+                getDriver().findElement(By.xpath(country_region_value_dropdown_xpath)).click();
+
+                option.click();
+
+                break;
+            }
+        }
+    }
+
+    public void verifyContinentRegionsValuesDropdown()
+    {
+        String regionType= "CONTINENT";
+        List<WebElement> continentValues = getDriver().findElements(By.xpath(country_region_value_dropdown_xpath + "/option"));
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("regionType", regionType));
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get values for region type", nvPairs);
+        for (int i=1;i<document.getElementsByTagName("value").getLength();i++)
+        {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), continentValues.get(i).getText());
+        }
+
+    }
+
+    public void verifySepaValues()
+    {
+       assertEquals(getDriver().findElement(country_sepaRegion_value_xpath).getText(), "true false");
+    }
+
+
+
+    public void verifyTradingRegionsValuesDropdown() {
+        String regionType= "TRADING_REGION";
+        List<WebElement> tradingRegionValues = getDriver().findElements(By.xpath(country_trading_region_value_dropdown_xpath+"/option"));
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("regionType", regionType));
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get values for region type", nvPairs);
+        for (int i=1;i<document.getElementsByTagName("value").getLength();i++)
+        {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), tradingRegionValues.get(i).getText());
+        }
+    }
+
     public void verifySummaryConfirmationModal(ExamplesTable Summary) {
      List<WebElement> confirmChanges = getDriver().findElements(countryBasicInfo_confirmationModal_summary_xpath);
         for(int i=0;i<Summary.getRowCount();i++)
@@ -807,6 +911,16 @@ public class CountryPage extends AbstractPage {
     public void verifyRequiredErrorMessageForTypeAndValue() {
         assertEquals(getDriver().findElement(countryBasicInfo_demographics_type_error_message_xpath).getText(),"Required");
         assertEquals(getDriver().findElement(countryBasicInfo_demographics_value_error_message_xpath).getText(),"Required");
+    }
+
+    public void verifyRequiredErrorMessageRegionType() {
+        assertEquals(getDriver().findElement(country_region_type_error_message_xpath).getText(),"Required");
+
+    }
+
+    public void verifyRequiredErrorMessageRegionValue()
+    {
+        assertEquals(getDriver().findElement(country_region_value_error_message_xpath).getText(),"Required");
     }
 
     public void entersDemographicDateLaterThanToday() {
@@ -878,6 +992,25 @@ public class CountryPage extends AbstractPage {
         }
 
     }
+
+    public void verifyCountryRegionsTypeDropdownList() {
+
+       String existingType= getDriver().findElement(country_regions_existing_type_xpath).getText();
+        attemptClick(By.xpath(country_regions_new_type_xpath));
+        List<WebElement> newRegionsType = getDriver().findElements(By.xpath(country_regions_new_type_xpath + "/option"));
+        List<String> alternateRegions = new ArrayList<>();
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country regions type");
+        for (int i=0;i<document.getElementsByTagName("type").getLength();i++)
+        {
+            alternateRegions.add(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent());
+        }
+        alternateRegions.remove(existingType);
+        for(int i=0;i<alternateRegions.size();i++) {
+            assertEquals(alternateRegions.get(i).trim(), newRegionsType.get(i+1).getText().trim());
+        }
+    }
+
 
     public void verifyCountryDemographicsUnitDropdownList() {
         List<NameValuePair> nvPairs = new ArrayList<>();
@@ -988,15 +1121,18 @@ public class CountryPage extends AbstractPage {
     }
 
     public void enterCountryHolidayDay(String day) {
+        editedCountryHolidayDay = day;
         getDriver().findElement(country_holiday_day_xpath).clear();
         getDriver().findElement(country_holiday_day_xpath).sendKeys(day);
     }
 
     public void enterCountryHolidayMonth(String month) {
+        editedCountryHolidayMonth = month;
         selectItemFromDropdownListByText((country_holiday_month_xpath), month);
     }
 
     public void enterCountryHolidayYear(String year) {
+        editedCountryHolidayYear = year;
         getDriver().findElement(country_holiday_year_xpath).clear();
         getDriver().findElement(country_holiday_year_xpath).sendKeys(year);
     }
@@ -1018,11 +1154,13 @@ public class CountryPage extends AbstractPage {
     }
 
     public void enterCountryHolidayDescription(String description) {
+        editedCountryHolidayDescription = description;
         getDriver().findElement(country_holiday_description_box_xpath).clear();
         getDriver().findElement(country_holiday_description_box_xpath).sendKeys(description);
     }
 
     public void enterCountryHolidayNotes(String notes) {
+        editedCountryHolidayNotes = notes;
         getDriver().findElement(country_holiday_note_box_xpath).clear();
         getDriver().findElement(country_holiday_note_box_xpath).sendKeys(notes);
     }
@@ -1070,6 +1208,10 @@ public class CountryPage extends AbstractPage {
 
     public void userClicksOnDeleteCountryBankingHours() {
         attemptClick(countryBasicInfo_bankingHours_delete_button_xpath);
+    }
+
+    public void userClicksOnDeleteCountryRegionType() {
+        attemptClick(country_region_delete_button_xpath);
     }
 
     public void verifyUserSeeBankingDaysAndHours() {
@@ -1345,5 +1487,68 @@ public class CountryPage extends AbstractPage {
 
     public void verifyNewlyAddedCreditRatingRow() {
         assertTrue(getDriver().findElement(country_credit_rating_new_row_xpath).isDisplayed());
+    }
+
+    public void selectCountryBankingHrsDay(String bankingHrsDay) {
+        editedCountryBankingHrsDay = bankingHrsDay;
+        selectItemFromDropdownListByText(country_banking_hrs_day_list_xpath, bankingHrsDay);
+    }
+
+    public void selectCountryBankingHrsStartTime(String bankingHrsStartTime) {
+        editedCountryBankingHrsStartTime = bankingHrsStartTime;
+        selectItemFromDropdownListByText(country_banking_hrs_start_time_list_xpath, bankingHrsStartTime);
+    }
+
+    public void selectCountryBankingHrsEndTime(String bankingHrsEndTime) {
+        editedCountryBankingHrsEndTime = bankingHrsEndTime;
+        selectItemFromDropdownListByText(country_banking_hrs_end_time_list_xpath, bankingHrsEndTime);
+    }
+
+    public void verifyEditCountryBankingHrsInZeus(Database database, ApacheHttpClient apacheHttpClient, String selectedCountry) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedCountry));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get country banking hrs", nvPairs);
+        for(int i=0; i<document.getElementsByTagName("day").getLength(); i++){
+            assertEquals(editedCountryBankingHrsDay, document.getElementsByTagName("name").item(i).getTextContent());
+            assertEquals(editedCountryBankingHrsStartTime, document.getElementsByTagName("startTime").item(i).getTextContent());
+            assertEquals(editedCountryBankingHrsEndTime, document.getElementsByTagName("endTime").item(i).getTextContent());
+        }
+    }
+
+    public void verifyEditCountryHolidaysInZeus(Database database, ApacheHttpClient apacheHttpClient, String selectedCountry) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedCountry));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get country holidays", nvPairs);
+        for(int i=0; i<document.getElementsByTagName("holiday").getLength(); i++){
+            assertEquals(editedCountryHolidayDay + " " + editedCountryHolidayMonth + " " + editedCountryHolidayYear, document.getElementsByTagName("date").item(i).getTextContent());
+            assertEquals(editedCountryHolidayDescription, document.getElementsByTagName("name").item(i).getTextContent());
+            assertEquals(editedCountryHolidayNotes, document.getElementsByTagName("note").item(i).getTextContent());
+        }
+    }
+
+    public void verifyEditCountryBasicInfoInZeus(Database database, ApacheHttpClient apacheHttpClient, String selectedCountry) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedCountry));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "country basic info", nvPairs);
+        assertEquals(editedCountryStartYear, document.getElementsByTagName("BeginDate").item(0).getTextContent());
+        assertEquals(editedCountryEndYear, document.getElementsByTagName("EndDate").item(0).getTextContent());
     }
 }
