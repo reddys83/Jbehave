@@ -863,16 +863,6 @@ public class CountrySteps extends AbstractSteps{
     @Then ("the user should see the error message enter a year, month/year or day/month/year for applied date in the credit rating country page")
     public void verifyErrorMessageEnterYearMonthDayForAppliedDate(){getCountryPage().verifyErrorMessageEnterYearMonthDayForAppliedDate();}
 
-    @Then("the user should not see the cancel update confirmation modal in the country page")
-    public void verifyNoCountryCancelUpdateConfirmationModal(){
-        getDataPage().verifyNoCancelUpdateConfirmationModal();
-    }
-
-    @Then("the user should see the cancel update confirmation modal in the country page")
-    public void verifyCountryCancelUpdateConfirmationModal(){
-        getDataPage().verifyCancelUpdateConfirmationModal();
-    }
-
     @Then("the user should return to edit country page mode")
     public void verifyCountryEditPageMode(){
         getCountryPage().verifyCountryEditPageMode();
