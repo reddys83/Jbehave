@@ -345,6 +345,7 @@ Examples:
 |Afghanistan||
 
 Scenario:User will get warning if click away from screen they are editing
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -352,13 +353,13 @@ When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
 And the user clicks on the country basic info link in the navigation bar
-Then the user should not see the cancel update confirmation modal in the country page
+Then the user should not see the cancel update confirmation modal
 When the user clicks on the currency tab in the data area
-Then the user should see the cancel update confirmation modal in the country page
+Then the user should see the cancel update confirmation modal
 When the user clicks on the cancel no button
 Then the user should return to edit country page mode
 When the user clicks on the currency tab in the data area
-Then the user should see the cancel update confirmation modal in the country page
+Then the user should see the cancel update confirmation modal
 When the user clicks on the cancel yes button
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
