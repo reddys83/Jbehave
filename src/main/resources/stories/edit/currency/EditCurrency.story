@@ -454,3 +454,20 @@ Examples:
 |Deutsche Mark|Angola|||1987|||1999|false|Dram|
 |Deutsche Mark|Angola||Jun|1987||Jun|1999|false|Guyana Dollar|
 |Deutsche Mark|Angola|21|Jun|1987|23|Jun|1999|false|Kwanza|
+
+Scenario: ZEUS-838 - User will see confirmation message after saving currency edits
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
+And the user clicks on the update link
+When the user enters the country <currencyCountry> in the currency usage
+And the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see confirmation message
+And the user should be redirected to view mode
+
+Examples:
+|currency|currencyCountry|
+|Deutsche Mark|Angola|
