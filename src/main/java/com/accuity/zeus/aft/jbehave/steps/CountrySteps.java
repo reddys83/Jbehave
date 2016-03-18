@@ -2,7 +2,6 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
-import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -607,11 +606,15 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyErrorMessageForRequiredValueType();
     }
 
-    @When("the user clicks on the delete name row button in the basic info country page")
-    @Alias("the user clicks on the delete time zone row button in the basic info country page")
-    public void clickOnDeleteNewRowButton(){
-        getCountryPage().clickOnDeleteNewRowButton();
+    @When("the user clicks on the delete time zone row button in the basic info country page")
+    public void clickOnTimeZoneDeleteNewRowButton(){
+        getCountryPage().clickOnTimeZoneDeleteNewRowButton();
     }
+
+     @When("the user clicks on the delete name row button in the basic info country page")
+     public void clickOnDeleteNameRowButton(){
+         getCountryPage().clickOnNameDeleteRowButton();
+     }
 
     @Then("the user should see the delete row confirmation modal in the country page")
     public void verifyDeleteConfirmationModal(){
@@ -620,7 +623,7 @@ public class CountrySteps extends AbstractSteps{
 
     @When("the user clicks on the delete identifier row button in the basic info country page")
     public void clickOnDeleteNewIdentifierRowButton(){
-        getCountryPage().clickOnDeleteNewRowButton();
+        getCountryPage().clickOnIdentifierDeleteNewRowButton();
     }
 
     @When("the user clicks on the no button in the delete row confirmation modal in the country page")
@@ -761,7 +764,7 @@ public class CountrySteps extends AbstractSteps{
 
     @When("the user clicks on the delete holiday row button in the basic info country page")
     public void clickOnDeleteHolidayRowButton() {
-        getCountryPage().clickOnDeleteNewRowButton();
+        getCountryPage().clickOnHolidayDeleteRowButton();
     }
 
     @When("the user clicks on language option")
@@ -943,12 +946,12 @@ public class CountrySteps extends AbstractSteps{
 
     @Then("the user should see the country payments iban info from trusted document")
     public void verifyCountryIBANInfoFromTrusted(){
-        getCountryPage().verifyCountryIBANInfoFromTrusted(database, apacheHttpClient);
+        getCountryPage().verifyCountryIBANInfoFromTrusted();
     }
 
     @Then("the user should see the country payments routing code types from trusted document")
     public void verifyCountryRoutingCodeTypesFromTrusted(){
-        getCountryPage().verifyCountryRoutingCodeTypesFromTrusted(database, apacheHttpClient);
+        getCountryPage().verifyCountryRoutingCodeTypesFromTrusted();
     }
 
     @When("the user clicks on the add new iban button in the payments country page")
@@ -963,12 +966,12 @@ public class CountrySteps extends AbstractSteps{
 
     @When("the user clicks on the delete iban row button in the basic info country page")
     public void clickOnDeleteIBANRowButton() {
-        getCountryPage().clickOnDeleteNewRowButton();
+        getCountryPage().clickOnIbanDeleteNewRowButton();
     }
 
     @When("the user clicks on the delete routing code row button in the basic info country page")
     public void clickOnDeleteRoutingCodeRowButton() {
-        getCountryPage().clickOnDeleteNewRowButton();
+        getCountryPage().clickOnRoutingCodeDeleteNewRowButton();
     }
 
     @Then("the user should see the newly added iban row in the holiday country page")
@@ -1008,16 +1011,16 @@ public class CountrySteps extends AbstractSteps{
 
     @Then("the user should see the edits to country banking hrs in zeus document")
     public void verifyEditCountryBankingHrsInZeus(){
-        getCountryPage().verifyEditCountryBankingHrsInZeus(database, apacheHttpClient, selectedCountry);
+        getCountryPage().verifyEditCountryBankingHrsInZeus(selectedCountry);
     }
 
     @Then("the user should see the edits to country holidays in zeus document")
     public void verifyEditCountryHolidaysInZeus(){
-        getCountryPage().verifyEditCountryHolidaysInZeus(database, apacheHttpClient, selectedCountry);
+        getCountryPage().verifyEditCountryHolidaysInZeus(selectedCountry);
     }
 
     @Then("the user should see the edits to country basic info in zeus document")
     public void verifyEditCountryBasicInfoInZeus(){
-        getCountryPage().verifyEditCountryBasicInfoInZeus(database, apacheHttpClient, selectedCountry);
+        getCountryPage().verifyEditCountryBasicInfoInZeus(selectedCountry);
     }
 }

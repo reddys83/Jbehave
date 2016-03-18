@@ -29,6 +29,7 @@ Examples:
 |Afghanistan|
 
 Scenario: Verify error message required
+Bug ZEUS-898
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -125,7 +126,7 @@ When the user clicks on the delete time zone row button in the basic info countr
 Then the user should see the delete row confirmation modal in the country page
 When the user clicks on the no button in the delete row confirmation modal in the country page
 Then the user should see the newly added time zone row in the basic info country page
-When the user clicks on the delete name row button in the basic info country page
+When the user clicks on the delete time zone row button in the basic info country page
 When the user clicks on the yes button in the delete row confirmation modal in the country page
 Then the user should not see the newly added time zone row in the basic info country page
 
@@ -194,7 +195,7 @@ And the user enters the begin date later than today
 And the user enters the end date later than today
 And the user clicks on the save button
 Then the user should see the error 'Must be no later than today.' for start date
-Then the user should see the error 'Must be after start date.' for end date
+Then the user should see the error 'Must be no later than today.' for end date
 
 Examples:
 |country|
@@ -208,13 +209,13 @@ And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
-And the user enters the end date later than today
+And the user enters country end year as <countryEndYear>
 And the user clicks on the save button
-Then the user should see the error 'Must be no later than today.' for end date
+Then the user should see the error 'Must be after start date.' for end date
 
 Examples:
-|country|
-|Åland Islands|
+|country|countryEndYear|
+|Åland Islands|1814|
 
 Scenario: The edit country basic info, The user should see the error messages for invalid inputs
 TestCase: ZEUS-827
@@ -247,6 +248,7 @@ Examples:
 |Åland Islands|abc|abc|
 
 Scenario: The edit country basic info, The user enters valid data should see the confirm modal
+BUG: ZEUS-900
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -314,7 +316,7 @@ When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
 And the user clicks on the add new identifier button in the basic info country page
-And the user clicks on the delete name row button in the basic info country page
+When the user clicks on the delete identifier row button in the basic info country page
 Then the user should see the delete row confirmation modal in the country page
 When the user clicks on the no button in the delete row confirmation modal in the country page
 Then the user should see the newly added identifier row in the basic info country page

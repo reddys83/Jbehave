@@ -160,7 +160,7 @@ When the user clicks on the delete holiday row button in the basic info country 
 Then the user should see the delete row confirmation modal in the country page
 When the user clicks on the no button in the delete row confirmation modal in the country page
 Then the user should see the newly added holiday row in the holiday country page
-When the user clicks on the delete name row button in the basic info country page
+When the user clicks on the delete holiday row button in the basic info country page
 When the user clicks on the yes button in the delete row confirmation modal in the country page
 Then the user should not see the newly added holiday row in the holiday country page
 
@@ -169,6 +169,7 @@ Examples:
 |American Samoa|
 
 Scenario: Save country holidays
+Bug : ZEUS-900
 Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
