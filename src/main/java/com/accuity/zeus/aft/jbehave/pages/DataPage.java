@@ -499,8 +499,7 @@ public class DataPage extends AbstractPage {
         assertEquals("DETAILS", getDriver().findElement(places_details_label_xpath).getText());
         for(int i = 0; i<placeValues.getRowCount(); i++){
             assertEquals(placeValues.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
-                    getDriver().findElement(
-                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + placeValues.getRow(i).get(placeValues.getHeaders().get(0)) + "']")).getText().replace(",","").trim());
+                    getDriver().findElement(By.xpath("//*[@id='areaPlaces']//table/tbody//tr[td='"+placeValues.getRow(i).get(placeValues.getHeaders().get(0))+"']")).getText().replace(",","").trim());
         }
     }
 
@@ -1059,10 +1058,20 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyStartDateErrorMessage(String startDateErrorMsg) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals(startDateErrorMsg.replace("'", ""), getDriver().findElement(start_date_error_msg_xpath).getText());
     }
 
     public void verifyStartDateErrorMessageForDayMonthYear() {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals("Enter a year, month/year or day/month/year.",getDriver().findElement(start_date_error_msg_xpath).getText());
     }
 

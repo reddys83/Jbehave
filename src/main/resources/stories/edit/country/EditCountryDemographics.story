@@ -117,6 +117,7 @@ Examples:
 |Egypt|abc||abc|
 
 Scenario: User shoud see the confirmation modal for valid input and save
+Bug: ZEUS-900
 Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page

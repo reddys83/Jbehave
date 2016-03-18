@@ -13,6 +13,8 @@ import org.w3c.dom.Document;
 import org.openqa.selenium.support.ui.Select;
 
 import java.text.DateFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
@@ -66,7 +68,12 @@ public class CountryPage extends AbstractPage {
     private By country_name_value_required_err_msg_xpath = By.xpath("//tr[td = 'Country Name']/td[2]/p");
     private By country_names_type_required_err_msg_xpath = By.xpath("//*[@id='additionalNames']/tr/td[1]/p");
     private By country_names_value_required_err_msg_xpath = By.xpath("//*[@id='additionalNames']/tr/td[2]/p");
-    private By country_delete_new_row_button_xpath = By.xpath("//*[@class='delete-row']");
+    private By country_delete_timeZone_new_row_button_xpath = By.xpath(".//*[@data-row_id='timeZones']//button[@class='delete-row']");
+    private By country_delete_identifiers_row_button_xpath = By.xpath(".//*[@data-row_id='identifiers']//button[@class='delete-row']");
+    private By country_delete_names_row_button_xpath = By.xpath(".//*[@data-row_id='names']//button[@class='delete-row']");
+    private By country_delete_holidays_row_button_xpath = By.xpath(".//*[@data-row_id='holidays']//button[@class='delete-row']");
+    private By country_delete_Iban_new_row_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='ibans']//button[@class='delete-row']");
+    private By country_delete_routingCode_new_row_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='codeTypes']//button[@class='delete-row']");
     private By country_delete_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
     private By country_delete_no_button_id = By.id("no-button");
     private By country_delete_yes_button_id = By.id("yes-button");
@@ -93,7 +100,7 @@ public class CountryPage extends AbstractPage {
     private By country_payments_link_id = By.id("countryPayments");
     private By country_payments_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//span");
     private By country_payments_iban_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//h2[1]");
-    private By country_payments_status_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[1]");
+    private By country_payments_status_label_xpath = By.xpath(".//*[@id='countryPayments']/dl/dt");
     private By country_payments_iso_code_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[2]");
     private By country_payments_registered_date_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[1]");
     private By country_payments_code_type_label_xpath = By.xpath("//li[contains(h2,'IBAN')]//table[1]//th[3]");
@@ -362,7 +369,7 @@ public class CountryPage extends AbstractPage {
     public void entersCountryBasicInfoEndDate() {
         int year = Calendar.getInstance().get(Calendar.YEAR);
         getDriver().findElement(country_basic_info_endDate_year_edit_xpath).clear();
-        getDriver().findElement(country_basic_info_endDate_year_edit_xpath).sendKeys(String.valueOf(year + 3));
+        getDriver().findElement(country_basic_info_endDate_year_edit_xpath).sendKeys(String.valueOf(year + 2));
 
     }
 
@@ -659,7 +666,7 @@ public class CountryPage extends AbstractPage {
     public void verifyCountryIBANInfoLabels(){
         assertEquals("PAYMENTS FOR " + dataPage.selectedEntity.toUpperCase(), getDriver().findElement(country_payments_label_xpath).getText());
         assertEquals("IBAN", getDriver().findElement(country_payments_iban_label_xpath).getText());
-        assertEquals("STATUS", getDriver().findElement(country_payments_status_label_xpath).getText());
+        assertEquals("Status", getDriver().findElement(country_payments_status_label_xpath).getText());
         assertEquals("ISO CODE", getDriver().findElement(country_payments_iso_code_label_xpath).getText());
         assertEquals("REGISTERED DATE", getDriver().findElement(country_payments_registered_date_label_xpath).getText());
         assertEquals("IBAN ROUTING CODE TYPE", getDriver().findElement(country_payments_code_type_label_xpath).getText());
@@ -979,8 +986,28 @@ public class CountryPage extends AbstractPage {
         }
     }
 
+    public void clickOnTimeZoneDeleteNewRowButton() {
+        attemptClick(country_delete_timeZone_new_row_button_xpath);
+    }
+
+    public void clickOnIdentifierDeleteNewRowButton() {
+        attemptClick(country_delete_identifiers_row_button_xpath);
+    }
+
+    public void clickOnNameDeleteRowButton() {
+        attemptClick(country_delete_names_row_button_xpath);
+    }
+
+    public void clickOnIbanDeleteNewRowButton() { attemptClick(country_delete_Iban_new_row_button_xpath);}
+
+    public void clickOnRoutingCodeDeleteNewRowButton() { attemptClick(country_delete_routingCode_new_row_button_xpath);}
+
     public void verifyCountryDemographicsDropdownExist() {
         assertTrue(getDriver().findElement(By.xpath(countryBasicInfo_demographics_unit_dropdown_edit_xpath)).isDisplayed());
+    }
+
+    public void clickOnHolidayDeleteRowButton() {
+        attemptClick(country_delete_holidays_row_button_xpath);
     }
 
     public void verifyCountryDemographicsTypeDropdownList(){
@@ -1039,9 +1066,6 @@ public class CountryPage extends AbstractPage {
         assertEquals("Required", getDriver().findElement(country_names_value_required_err_msg_xpath).getText());
     }
 
-    public void clickOnDeleteNewRowButton() {
-        attemptClick(country_delete_new_row_button_xpath);
-    }
 
     public void verifyDeleteConfirmationModal() {
         assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(country_delete_confirmation_modal_xpath).getText());
@@ -1401,7 +1425,7 @@ public class CountryPage extends AbstractPage {
         }
     }
 
-    public void verifyCountryIBANInfoFromTrusted(Database database, ApacheHttpClient apacheHttpClient) {
+    public void verifyCountryIBANInfoFromTrusted() {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", dataPage.selectedEntity));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
@@ -1411,16 +1435,18 @@ public class CountryPage extends AbstractPage {
         List<WebElement> isoCodes = getDriver().findElements(country_payments_iban_row_country_iso2_xpath);
         List<WebElement> routingCodeType = getDriver().findElements(country_payments_iban_row_routing_code_type_xpath);
 
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get country IBAN info", nvPairs);
+         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get country IBAN info", nvPairs);
         for(int i=0; i<document.getElementsByTagName("iban").getLength(); i++){
-            assertEquals(document.getElementsByTagName("iso2").item(i).getTextContent(), isoCodes.get(i).getText());
-            assertEquals(document.getElementsByTagName("registeredDate").item(i).getTextContent(), registeredDay.get(i).getAttribute("value") + " " + registeredMonth.get(i).getText() + " " + registeredYear.get(i).getAttribute("value"));
+
+           assertEquals(document.getElementsByTagName("iso2").item(i).getTextContent(), isoCodes.get(i).getText());
+
+            assertEquals(document.getElementsByTagName("registeredDate").item(i).getTextContent(), String.format("%02d",Integer.parseInt(registeredDay.get(i).getAttribute("value"))) + " " + registeredMonth.get(i).getText() + " " + registeredYear.get(i).getAttribute("value"));
             assertEquals(document.getElementsByTagName("routingCodeType").item(i).getTextContent(), routingCodeType.get(i).getText());
         }
         assertEquals(document.getElementsByTagName("status").item(0).getTextContent(), getDriver().findElement(country_payments_status_check_box_xpath).getAttribute("value"));
     }
 
-    public void verifyCountryRoutingCodeTypesFromTrusted(Database database, ApacheHttpClient apacheHttpClient) {
+    public void verifyCountryRoutingCodeTypesFromTrusted() {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", dataPage.selectedEntity));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
@@ -1504,7 +1530,7 @@ public class CountryPage extends AbstractPage {
         selectItemFromDropdownListByText(country_banking_hrs_end_time_list_xpath, bankingHrsEndTime);
     }
 
-    public void verifyEditCountryBankingHrsInZeus(Database database, ApacheHttpClient apacheHttpClient, String selectedCountry) {
+    public void verifyEditCountryBankingHrsInZeus(String selectedCountry) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedCountry));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
@@ -1521,7 +1547,7 @@ public class CountryPage extends AbstractPage {
         }
     }
 
-    public void verifyEditCountryHolidaysInZeus(Database database, ApacheHttpClient apacheHttpClient, String selectedCountry) {
+    public void verifyEditCountryHolidaysInZeus(String selectedCountry) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedCountry));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
@@ -1538,7 +1564,8 @@ public class CountryPage extends AbstractPage {
         }
     }
 
-    public void verifyEditCountryBasicInfoInZeus(Database database, ApacheHttpClient apacheHttpClient, String selectedCountry) {
+    public void verifyEditCountryBasicInfoInZeus(String selectedCountry) {
+        selectedCountry= DataPage.selectedEntity;
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedCountry));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));

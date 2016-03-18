@@ -22,7 +22,7 @@ Then the user should see the country's payments iban status as True
 Then the user should see the country's payments iban as:
 |REGISTERED DATE|ISO CODE|IBAN ROUTING CODE TYPE|
 |01 Jan 2015|QA|SWIFT BIC|
-|01 Jan 2015|QA|IBAN|
+|01 Jan 2015|QA|IBAN-CH|
 
 And the user should see the country's payments routing code types as:
 |TYPES|
