@@ -227,6 +227,7 @@ public class CountryPage extends AbstractPage {
     private By country_banking_hrs_day_list_xpath = By.xpath("//*[@class='new'] //*[@id='bankingDay-select']");
     private By country_banking_hrs_start_time_list_xpath = By.xpath("//*[@class='new'] //*[@data-error_ref_id='bankingHour0Error']");
     private By country_banking_hrs_end_time_list_xpath = By.xpath("//*[@class='new'] //*[@data-error_ref_id='bankingHour1Error']");
+    private By country_basic_info_domestic_with_xpath = By.xpath("//*[@id='countryBasicInfo']/ul/li[2]/table/tbody/tr[6]/td/a[1]");
     private String editedCountryBankingHrsDay ="";
     private String editedCountryBankingHrsStartTime ="";
     private String editedCountryBankingHrsEndTime ="";
@@ -1550,5 +1551,18 @@ public class CountryPage extends AbstractPage {
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "country basic info", nvPairs);
         assertEquals(editedCountryStartYear, document.getElementsByTagName("BeginDate").item(0).getTextContent());
         assertEquals(editedCountryEndYear, document.getElementsByTagName("EndDate").item(0).getTextContent());
+    }
+
+    public void verifyDomesticWithDataDisplayed(Database database, ApacheHttpClient apacheHttpClient, String selectedCountry) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedCountry));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "country basic info", nvPairs);
+        assertTrue(document.getElementsByTagName("DomesticWith").item(0).getTextContent().contains(getDriver().findElement(country_basic_info_domestic_with_xpath).getText()));
     }
 }
