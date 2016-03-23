@@ -32,7 +32,7 @@ public class CountrySteps extends AbstractSteps{
 
     @Then("the user should see the list of all existing countries by full name")
     public void verifyCountryList() {
-        getCountryPage().verifyCountryList(database, apacheHttpClient);
+        getCountryPage().verifyCountryList();
     }
 
     @When("the user starts typing the name of a country as $word in the country input box")
@@ -45,10 +45,17 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyCountriesInListBox(countryList);
     }
 
+    @Then("the user should see the country basic info from trusted document")
+    public void verifyViewCountryBasicInfoFromTrusted()
+    {
+        getCountryPage().verifyViewCountryBasicInfoFromTrusted();
+    }
+/*
     @Then("the user should see the country iso2 as $iso2")
     public void verifyCountryIso2(@Named("iso2") String iso2) {
         getCountryPage().verifyCountryIso2(iso2);
     }
+    */
 
     @Then("the user should see the country ISO2 not editable")
     public void verifyISO2NotEditable() {
@@ -59,11 +66,11 @@ public class CountrySteps extends AbstractSteps{
     public void verifyISO3NotEditable() {
         getCountryPage().verifyISO3NotEditable();
     }
-
+/*
     @Then("the user should see the country iso3 as $iso3")
     public void verifyCountryIso3(@Named("iso3") String iso3) {
         getCountryPage().verifyCountryIso3(iso3);
-    }
+    } */
 
     @Then("the user should see the edits to country basic info from trusted dcoument")
     public void verifyEditCountryBasicInfoFromTrusted(){
@@ -213,20 +220,20 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyCountryBankingHourSummary(countryBankingHourSummary);
     }
 
-    @Then("the user should see the country's banking hours as: $countryBankingHrSummary")
-    public void verifyCountryBankingHourSummaryDaysAndHrs(ExamplesTable countryBankingHrSummary) {
-        getCountryPage().verifyCountryBankingHourSummaryDaysAndHrs(countryBankingHrSummary);
+    @Then("the user should see country banking hrs from trusted document")
+    public void verifyCountryBankingHourInTrusted() {
+        getCountryPage().verifyCountryBankingHourInTrusted();
     }
 
     @Then("the user should see the country's time zones summary as $countryTimeZonesSummary")
     public void verifyCountryTimeZonesSummary(@Named("countryTimeZonesSummary") String countryTimeZonesSummary) {
         getCountryPage().verifyCountryTimeZonesSummary(countryTimeZonesSummary);
     }
-
+/*
     @Then("the user should see the countries's replace by as $countryReplacedBy")
     public void verifyCountryReplaceByLabelValues(@Named("countryReplacedBy") String countryReplacedBy) {
         getDataPage().verifyReplaceByLabelValues(countryReplacedBy);
-    }
+    } */
 
     @Then("the user should see the country's time zones as: $countryTimeZones")
     public void verifyCountryTimeZones(ExamplesTable countryTimeZones) {
@@ -323,10 +330,11 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().clickOnCountryPlaces();
     }
 
-    @Then("the user should see the country's places as: $countryPlaces")
-    public void verifyCountryPlaces(ExamplesTable countryPlaces) {
-        getDataPage().verifyPlaces(countryPlaces);
+    @Then("the user should see the country related places from trusted document")
+    public void verifyCountryRelatedPlacesFromTrusted() {
+        getDataPage().verifyCountryRelatedPlacesFromTrusted();
     }
+
 
     @Then("the user should not see the country's places")
     public void verifyNoCountryPlaces() {

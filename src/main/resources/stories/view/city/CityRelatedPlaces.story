@@ -20,15 +20,7 @@ When the user clicks on the choose a city option
 When the user enters the city <city> in the type-ahead box
 And the user clicks on the city's places link in the navigation bar
 
-Then the user should see the city's places as:
-|TYPE|PLACE|DETAILS|
-|Country USA|USA|Country, USA|
-|Sub-Area Cook|Cook|Sub-Area, Cook|
-|Sub-Area In Country India|Bilaspur|In Country India|
-|Area Illinois, Area Illinois|Illinois||
-|Country UK|UK|UK|
-|City South Valley Stream|South Valley Stream|City, South Valley Stream|
-|Area Albania|Berat|In Country Albania|
+Then the user should see the city related places from trusted document
 
 Examples:
 |country|area|city|

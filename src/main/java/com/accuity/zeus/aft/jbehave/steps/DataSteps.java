@@ -42,7 +42,7 @@ public class DataSteps extends AbstractSteps {
 
     @When("the user clicks on the choose a country option")
     public void clickOnCountryListBox() throws InterruptedException {
-        getDataPage().clickOnCountryListBox();
+        setCountryPage(getDataPage().clickOnCountryListBox());
     }
 
     @When("the user clicks on the cancel button")
@@ -153,12 +153,12 @@ public class DataSteps extends AbstractSteps {
     public void verifyAreaReplaceByLabelValues(@Named("areaReplacedBy") String areaReplacedBy) {
         getDataPage().verifyReplaceByLabelValues(areaReplacedBy);
     }
-
+/*
     @Then("the user should see the countries's replace by as $countryReplacedBy")
     public void verifyCountryReplaceByLabelValues(@Named("countryReplacedBy") String countryReplacedBy) {
         getDataPage().verifyReplaceByLabelValues(countryReplacedBy);
     }
-
+*/
 
     @Then("the user should not see the area's area link")
     public void verifyAreaLinkInBasicInfo() {
@@ -201,8 +201,7 @@ public class DataSteps extends AbstractSteps {
     @Aliases(values = {"the user should see the $label of an office as $value",
             "the user should see the $label of an area as $value",
             "the user should see the $label of an sub-area as $value",
-            "the user should see the $label of a legal entity as $value",
-            "the user should see the $label of a country as $value"})
+            "the user should see the $label of a legal entity as $value"})
     public void verifyBasicInfo(@Named("label") String label, @Named("value") String value) {
         getDataPage().verifyBasicInfo(label, value);
     }
@@ -222,21 +221,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyNoCountryRegionsSection();
     }
 
-    @Then("the user should see the country's places as: $countryPlaces")
-    public void verifyCountryPlaces(ExamplesTable countryPlaces) {
-        getDataPage().verifyPlaces(countryPlaces);
-    }
-
-    @Then("the user should see the area's places as: $areaPlaces")
-    @Alias("the user should see the sub-area's places as: $areaPlaces")
-    public void verifyAreaPlaces(ExamplesTable areaPlaces) {
-        getDataPage().verifyPlaces(areaPlaces);
-    }
-
-    @Then("the user should see the city's places as: $cityPlaces")
-    public void verifyCityPlaces(ExamplesTable cityPlaces) {
-        getDataPage().verifyPlaces(cityPlaces);
-    }
 
     @Then("the user should not see the country's places")
     public void verifyNoCountryPlaces() {
@@ -324,6 +308,17 @@ public class DataSteps extends AbstractSteps {
     @Alias("the user clicks on the sub-area's places link in the navigation bar")
     public void clickOnAreaRelatedPlaces() {
         getDataPage().clickOnAreaRelatedPlaces();
+    }
+
+    @Then("the user should see the area related places from trusted document")
+    @Alias("the user should see the sub-area's related places from trusted document")
+    public void verifyAreaRelatedPlacesFromTrusted() {
+        getDataPage().verifyAreaRelatedPlacesFromTrusted();
+    }
+
+    @Then("the user should see the city related places from trusted document")
+    public void verifyCityRelatedPlacesFromTrusted() {
+        getDataPage().verifyCityRelatedPlacesFromTrusted();
     }
 
     @When("the user clicks on the city's places link in the navigation bar")

@@ -1,43 +1,22 @@
 Meta:@Design
 
-Scenario: Verify delete confirmation for IBAN
+
+Scenario: Follow link to another currency when viewing a currency
+1. BUG-ID - ZEUS-753
+Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
-And the user clicks on the country tab in the data area
-When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
-And the user clicks on the update link
-And the user clicks on the country payments link in the navigation bar
-And the user clicks on the add new iban button in the payments country page
-When the user clicks on the delete iban row button in the basic info country page
-Then the user should see the delete row confirmation modal in the country page
-When the user clicks on the no button in the delete row confirmation modal in the country page
-Then the user should see the newly added iban row in the holiday country page
-When the user clicks on the delete iban row button in the basic info country page
-When the user clicks on the yes button in the delete row confirmation modal in the country page
-Then the user should not see the newly added iban row in the holiday country page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
+Then the user should see the view currency use from trusted document
+When the user clicks on the replaced by currency NAD in the currency page
+Then the user should see the currency iso code value as <isoCode> in the currency page
+And the user should see the currency name value as <name> in the currency page
+And the user should see the currency abbr value as <abbr> in the currency page
+And the user should see the currency unit value as <unit> in the currency page
+And the user should see the currency quantity value as <quantity> in the currency page
 
 Examples:
-|country|
-|Afghanistan|
-
-Scenario: Verify delete confirmation for routing code
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the country tab in the data area
-When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
-And the user clicks on the update link
-And the user clicks on the country payments link in the navigation bar
-And the user clicks on the add new routing code button in the payments country page
-When the user clicks on the delete routing code row button in the basic info country page
-Then the user should see the delete row confirmation modal in the country page
-When the user clicks on the no button in the delete row confirmation modal in the country page
-Then the user should see the newly added routing code row in the holiday country page
-When the user clicks on the delete routing code row button in the basic info country page
-When the user clicks on the yes button in the delete row confirmation modal in the country page
-Then the user should not see the newly added routing code row in the holiday country page
-
-Examples:
-|country|
-|Afghanistan|
+|isoCode|name|abbr|unit|quantity|currency|
+|NAD|Namibia Dollar|N$|Cents|100|Rand|

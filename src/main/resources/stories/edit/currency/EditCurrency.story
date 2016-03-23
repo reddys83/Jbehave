@@ -73,7 +73,7 @@ Examples:
 |currency|name|
 |afghani||
 
-Scenario: Verify confirm changes
+Scenario: Verify confirm changes STORY:920(failing because of invalid data in database)
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
@@ -355,9 +355,9 @@ And the user get the document with get Id for currency with the name as Asian Cu
 
 And the user clicks on the add country type-ahead option
 When the user enters the country <addCurrencyCountry> in the add country type-ahead box
-When the user enters the currency start day as <currencyStartDay> in the currency page
-And the user enters the currency start month as <currencyStartMonth> in the currency page
-And the user enters the currency start year as <currencyStartYear> in the currency page
+When the user enters the currency new start day as <currencyStartDay> in the currency page
+And the user enters the currency new start month as <currencyStartMonth> in the currency page
+And the user enters the currency new start year as <currencyStartYear> in the currency page
 And the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the view currency use from trusted document
@@ -369,7 +369,7 @@ Examples:
 |Asian Currency Unit|Afghanistan||Jan|1988||Jan|1988|
 |Asian Currency Unit|Afghanistan|01|Jan|1988|01|Jan|1988|
 
-Scenario: Save updates tp existing currency use
+Scenario: Save updates tp existing currency use STORY:920(failing because of invalid data in database)
 1. @accuracy = year
 2. @accuracy = month
 3. @accuracy = day
@@ -395,7 +395,7 @@ Examples:
 |Afghani-test|Albania||Jan|1988||Jan|1988|
 |Afghani-test|Albania|01|Jan|1988|01|Jan|1988|
 
-Scenario: ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Active status )
+Scenario: ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Active status ) STORY:920(failing because of invalid data in database)
 1. @accuracy = year
 2. @accuracy = month
 3. @accuracy = day
@@ -424,7 +424,7 @@ Examples:
 |Afghani-test|Angola||Jun|1987|false|
 |Afghani-test|Angola|21|Jun|1987|false|
 
-Scenario: ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Inactive status )
+Scenario: ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Inactive status ) (AFT implementation issue)
 1. @accuracy = year
 2. @accuracy = month
 3. @accuracy = day

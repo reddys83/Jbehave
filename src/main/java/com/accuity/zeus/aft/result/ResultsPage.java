@@ -297,6 +297,11 @@ public class ResultsPage extends AbstractPage {
             assertEquals(officeTotalResultsCount(), Integer.toString(getOfficeResultsCountInCurrentPage().size()));
         } else {
             navigateToOfficeLastSearchResultsPage();
+            try {
+                Thread.sleep(3000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             assertEquals(officeTotalResultsCount(), getOfficeResultsCountTillCurrentPage());
         }
     }
@@ -353,7 +358,7 @@ public class ResultsPage extends AbstractPage {
         if (Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) > 7) {
             if (Integer.parseInt(getOfficeSearchResultsCurrentPage()) <= 4) {
                 assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 2 3 4 5 ... " + getOfficeSearchResultsLastNavigationPage() + " Next");
-            } else if (Integer.parseInt(getOfficeSearchResultsCurrentPage()) > 5
+            } else if((Integer.parseInt(getOfficeSearchResultsCurrentPage()) >= 5)
                     && Integer.parseInt(getOfficeSearchResultsCurrentPage()) < (Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 3)) {
                 assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 ... " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsCurrentPage()) - 1) + " " +
@@ -446,7 +451,7 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyAllDeselectedOfficeTypeFilter() {
-        assertFalse(getDriver().findElement(office_type_default_filter_all_xpath).isDisplayed());
+        assertFalse(getDriver().findElement(office_type_default_filter_all_xpath).isSelected());
     }
 
     public void selectOfficeTypeFilterDomestic() {

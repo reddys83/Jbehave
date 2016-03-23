@@ -98,12 +98,12 @@ public class CurrencySteps extends AbstractSteps{
 
     @Then("the user should see the edits to currency details in zeus document")
     public void verifyEditCurrencyInZeus(){
-        getCurrencyPage().verifyEditCurrencyInZeus(database, apacheHttpClient, selectedCurrency);
+        getCurrencyPage().verifyEditCurrencyInZeus(selectedCurrency);
     }
 
     @Then("the user should see the edits to currency uses in zeus document")
     public void verifyEditCurrencyUseInZeus() {
-        getCurrencyPage().verifyEditCurrencyUseInZeus(database, apacheHttpClient, selectedCurrency);
+        getCurrencyPage().verifyEditCurrencyUseInZeus(selectedCurrency);
     }
 
     @Then("the user should see the currency uses in edit mode are from trusted document")
@@ -191,6 +191,11 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().enterCurrencyStartDay(currencyStartDay);
     }
 
+    @When("the user enters the currency new start day as <currencyStartDay> in the currency page")
+    public void enterCurrencyNewStartDay(@Named("currencyStartDay") String currencyStartDay){
+        getCurrencyPage().enterCurrencyNewStartDay(currencyStartDay);
+    }
+
     @When("the user clicks on the currency start month drop-down in the currency page")
     public void clickOnCurrencyStartMonthDropDown(){
         getCurrencyPage().clickOnCurrencyStartMonthDropDown();
@@ -205,6 +210,17 @@ public class CurrencySteps extends AbstractSteps{
     public void enterCurrencyStartYear(@Named("currencyStartYear") String currencyStartYear) {
         getCurrencyPage().enterCurrencyStartYear(currencyStartYear);
     }
+
+    @When("the user enters the currency new start month as <currencyStartMonth> in the currency page")
+    public void enterCurrencyNewStartMonth(@Named("currencyStartMonth") String currencyStartMonth) {
+        getCurrencyPage().enterCurrencyNewStartMonth(currencyStartMonth);
+    }
+
+    @When("the user enters the currency new start year as <currencyStartYear> in the currency page")
+    public void enterCurrencyNewStartYear(@Named("currencyStartYear") String currencyStartYear) {
+        getCurrencyPage().enterCurrencyNewStartYear(currencyStartYear);
+    }
+
 
     @When("the user enters the currency end day as <currencyEndDay> in the currency page")
     public void enterCurrencyEndDay(@Named("currencyEndDay") String currencyEndDay){

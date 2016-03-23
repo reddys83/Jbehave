@@ -123,9 +123,10 @@ public class SearchPage extends AbstractPage {
 	}
 
 	public ResultsPage clicksOnSearchIcon() {
+        attemptClick(legalEntity_search_button_id);
         try {
-            Thread.sleep(1000L);
-            attemptClick(legalEntity_search_button_id);
+            Thread.sleep(2000L);
+
             } catch (InterruptedException e) {
             e.printStackTrace();
         }  return new ResultsPage(getDriver(), getPageUrl(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());

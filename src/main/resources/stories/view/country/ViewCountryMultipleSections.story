@@ -17,8 +17,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
-Then the user should see the country iso2 as AF
-And the user should see the country iso3 as AFG
+Then the user should see the country basic info from trusted document
 Then the user should see the default country page and display all info
 When the user refreshes the page
 Then the user should see the default country page and display all info
@@ -42,13 +41,7 @@ And the user should see the country's identifiers as:
 
 And the user should see the country's banking hours summary as Saturday-Wednesday 08.00-16.00
 
-And the user should see the country's banking hours as:
-|DAY|HOURS|
-|Monday|9-5|
-|Tuesday|9-5|
-|Wednesday|9-5|
-|Thursday|9-5|
-|Friday|9-5|
+Then the user should see country banking hrs from trusted document
 
 And the user should see the country's time zones summary as +4½ hours
 
@@ -57,15 +50,6 @@ And the user should see the country's time zones as:
 |UTC|+01:00|
 |UTC|+01:30|
 
-And the user should see the Status of a country as Active
-And the user should see the Start Date of a country as 03 Dec 1818
-And the user should see the End Date of a country as 03 Jul 2776
-And the user should see the countries's replace by as Albania, Algeria
-And the user should see the Add Info of a country as Country
-And the user should see the Imports of a country as Capital goods, food, textiles, petroleum products
-And the user should see the Exports of a country as Natural gas, fruits & nuts, carpets, karakul, wool, cotton, hides and pelts, precious and semiprecious gems
-And the user should see the Intl Dialing Code of a country as +93
-And the user should see the Political Structure of a country as Republic
 When the user clicks on the country holidays link in the navigation bar
 
 Then the user should see the country's holidays list as:
