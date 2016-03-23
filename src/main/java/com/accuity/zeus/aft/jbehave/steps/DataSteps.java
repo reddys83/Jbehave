@@ -732,6 +732,11 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnAreaParentLink(areaParent);
     }
 
+    @When("the user clicks on the Area's city <areaCity> link in the Area view")
+    public void clickOnAreaCityLink(@Named("areaCity") String areaCity) {
+        getDataPage().clickOnAreaCityLink(areaCity);
+    }
+
     @When("the user clicks on the view head office <viewHeadOffice> link for the selected legal entity")
     public void clickOnViewHeadOfficeLink(@Named("viewHeadOffice") String viewHeadOffice) {
         getDataPage().clickOnViewHeadOfficeLink(viewHeadOffice);
