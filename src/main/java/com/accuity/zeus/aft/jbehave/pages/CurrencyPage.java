@@ -76,6 +76,8 @@ public class CurrencyPage extends AbstractPage {
     private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
     private By currency_start_date_error_msg_xpath = By.xpath("//*[@data-error_id='startDateError']");
     private By currency_end_date_error_msg_xpath = By.xpath("//*[@data-error_id='endDateError']");
+    private By currency_save_confirmation_message_id = By.id("saveSuccess");
+
 
     private String editedCurrencyName="";
     private String editedCurrencyAbbr="";
@@ -621,4 +623,10 @@ public class CurrencyPage extends AbstractPage {
     public void verifyCurrencyPage() {
         assertEquals("CURRENCY",getTextOnPage(currency_header_xpath));
     }
+
+    public void verifySaveConfirmationMessage() {
+        assertTrue(getDriver().findElement(currency_save_confirmation_message_id).isDisplayed());
+    }
+
+
 }
