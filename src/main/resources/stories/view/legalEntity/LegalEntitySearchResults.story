@@ -11,7 +11,7 @@ JIRA ID - ZEUS-622 - Search Results is not showing office address.
 JIRA ID - ZEUS-490 - Change legal entity search to use ADDN rather than Denorm
 JIRA ID - ZEUS-475 - User can search for legal entity under "Data"
 
-Scenario: search by name and verify search results
+Scenario: search by name and verify search results BUG:927
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
 Then the user should see the search results paginated for the searched entity
@@ -137,7 +137,7 @@ Examples:
 |entity|field|value|
 |legalEntity|name|bank of greece|
 
-Scenario: search by name and navigate to search results pages using Previous/Next link
+Scenario: search by name and navigate to search results pages using Previous/Next link BUG:927
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
 And the user clicks on the next page link
