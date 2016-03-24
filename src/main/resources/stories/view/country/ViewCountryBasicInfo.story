@@ -9,6 +9,7 @@ JIRA ID - ZEUS-93 - User can view basic country info
 JIRA ID - ZEUS-254 - User can view a country's holidays
 JIRA ID - ZEUS-321 - ignore special characters in currency, country, area/subarea and city drop-down
 JIRA ID - ZEUS-792 - Country Basic Info - Demographics - Dates are not displaying.
+JIRA ID - ZEUS-318 - user can view country's domestic with list
 
 Scenario:
 1. Verify that the country list is displayed and is not empty
@@ -32,7 +33,8 @@ Then the user should see the countries in the listbox as:
 |Vietnam|
 
 Scenario: Verify Country basic info
-1. BUG_D - ZEUS-792
+1. user can view country's domestic with list
+2. BUG_D - ZEUS-792
 Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -83,6 +85,7 @@ And the user should see the Start Date of a country as 03 Dec 1818
 And the user should see the End Date of a country as 03 Jul 2776
 And the user should see the countries's replace by as Albania, Algeria
 And the user should see the Add Info of a country as Country
+And the user should see domestic with data <country>
 And the user should see the Imports of a country as Capital goods, food, textiles, petroleum products
 And the user should see the Exports of a country as Natural gas, fruits & nuts, carpets, karakul, wool, cotton, hides and pelts, precious and semiprecious gems
 And the user should see the Intl Dialing Code of a country as +93
@@ -145,6 +148,7 @@ Then the user should see the below fields in the country basic info left section
 |End Date|
 |Replaced By|
 |Add Info|
+|Domestic with|
 |Imports|
 |Exports|
 |Political Structure|
@@ -154,15 +158,5 @@ Examples:
 |country|replacedByCountry|
 |Afghanistan|Albania|
 
-Scenario: user can view country's domestic with list
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the country tab in the data area
-When the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
-When the user clicks on the country basic info link in the navigation bar
-Then the user should see domestic with data
 
-Examples:
-|country|
-|USA|
+

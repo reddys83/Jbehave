@@ -1021,8 +1021,8 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyEditCountryBasicInfoInZeus(database, apacheHttpClient, selectedCountry);
     }
 
-    @Then("the user should see domestic with data")
-    public void verifyDomesticWithLinkDisplayed(){
-        getCountryPage().verifyDomesticWithDataDisplayed(database, apacheHttpClient, selectedCountry);
+    @Then("the user should see domestic with data <country>")
+    public void verifyDomesticWithLinkDisplayed(@Named("country") String countryName){
+        getCountryPage().verifyDomesticWithDataDisplayed(database, apacheHttpClient, countryName);
     }
 }
