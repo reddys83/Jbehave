@@ -337,4 +337,9 @@ public class CurrencySteps extends AbstractSteps{
     public void verifyCurrencyPage() {
         getCurrencyPage().verifyCurrencyPage();
     }
+
+    @Then("the user should see confirmation message")
+    public void verifyCurrencySaveConfirmationMessage(){getCurrencyPage().verifySaveConfirmationMessage();}
+
+
 }

@@ -896,4 +896,7 @@ public class DataSteps extends AbstractSteps {
     public void clickOnUpdateCurrencyLink() {
         getDataPage().clickOnUpdateCurrencyLink();
     }
+
+    @Then("the user should be redirected to view mode")
+    public void verifyUserRedirectedToViewMode(){getDataPage().verifyUserRedirectedViewMode();}
 }
