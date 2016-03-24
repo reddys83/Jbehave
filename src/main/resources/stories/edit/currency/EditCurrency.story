@@ -15,6 +15,7 @@ JIRA ID - ZEUS-286 - User can save edits to currency uses
 JIRA-ID - ZEUS-280 - User can add new use for currency
 JIRA-ID - ZEUS-838 - User will see confirmation message after saving currency edits
 JIRA ID - ZEUS-743 - User will get warning if click away from screen they are editing
+JIRA ID - ZEUS-802 Accented characters displaying correctly after saving
 
 Scenario: a. Veify the currency selection drop-down is disabled in update mode
 1. Verify the currency details are comming from trusted document
@@ -480,7 +481,23 @@ Examples:
 |currency|country|
 |Rand|Afghanistan|
 
+Scenario: ZEUS-802 Accented characters displaying correctly after saving
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+When the user clicks on the choose a currency option in the currency page
+When the user enters the currency <currency> in the typeahead box in the currency page
+And the user clicks on the update link
+And the user get the document with get Id for currency with the name as Australian Dollar from the database
+When the user enters the currency name value as <name> in the currency page
+And the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the currency name value as <name> in the currency page
+And the user reverts the changes to the document
 
+Examples:
+|currency|name|
+|Australian Dollar|Australian Dóllar|
 
 Scenario: ZEUS-838 - User will see confirmation message after saving currency edits
 Given a user is on the search page
@@ -498,3 +515,4 @@ And the user should be redirected to view mode
 Examples:
 |currency|currencyCountry|
 |Deutsche Mark|Angola|
+
