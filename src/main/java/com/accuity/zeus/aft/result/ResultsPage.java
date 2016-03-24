@@ -543,7 +543,7 @@ public class ResultsPage extends AbstractPage {
     public void clickOnOfficeSearchResultsStatus() {
         attemptClick(office_search_results_status_xpath);
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -568,11 +568,7 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyOfficeIsSortedAscByStatus(Database database, ApacheHttpClient apacheHttpClient, String searchedEntity) {
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         List<WebElement> status = getDriver().findElements(office_search_results_status_col_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "ascending order by office status", "fid", searchedEntity);
         for (int i = 0; i < status.size(); i++) {
@@ -643,6 +639,11 @@ public class ResultsPage extends AbstractPage {
     public void selectResultsPerPage(String count) {
         resultsDisplayed = Integer.parseInt(count);
         attemptClick(By.id(office_search_results_per_page_id + count));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void verifyDefaultSelectionResultPerPage() {

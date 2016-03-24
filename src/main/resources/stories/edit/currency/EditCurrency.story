@@ -452,9 +452,9 @@ And the user reverts the changes to the document
 
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|primary|replacedBy|
-|Deutsche Mark|Angola|||1987|||1999|false|Dram|
-|Deutsche Mark|Angola||Jun|1987||Jun|1999|false|Guyana Dollar|
-|Deutsche Mark|Angola|21|Jun|1987|23|Jun|1999|false|Kwanza|
+|Gold Francs|Venezuela|||1987|||1999|false|Dram|
+|Gold Francs|Venezuela||Jun|1987||Jun|1999|false|Guyana Dollar|
+|Gold Francs|Venezuela|21|Jun|1987|23|Jun|1999|false|Kwanza|
 
 Scenario: ZEUS-743 - User will get warning if click away from screen they are editing
 Meta:
