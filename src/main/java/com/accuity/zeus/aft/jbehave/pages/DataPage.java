@@ -847,11 +847,6 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnAreaCityLink(String areaCity) {
-        try {
-            Thread.sleep(2000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         attemptClick(By.xpath(area_area_city_link_xpath + areaCity + "']/a"));
         try {
             Thread.sleep(2000L);
