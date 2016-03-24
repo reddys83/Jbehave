@@ -501,7 +501,7 @@ public class DataPage extends AbstractPage {
         assertEquals("DETAILS", getDriver().findElement(places_details_label_xpath).getText());
         for(int i = 0; i<placeValues.getRowCount(); i++){
             assertEquals(placeValues.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
-                    getDriver().findElement(By.xpath("//*[@id='countryPlaces']//table/tbody//tr[td='"+placeValues.getRow(i).get(placeValues.getHeaders().get(0))+"']")).getText().replace(",","").trim());
+                    getDriver().findElement(By.xpath("//*[@id='content']//table/tbody//tr[td='"+placeValues.getRow(i).get(placeValues.getHeaders().get(0))+"']")).getText().replace(",","").trim());
         }
     }
 
@@ -847,6 +847,11 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnAreaCityLink(String areaCity) {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         attemptClick(By.xpath(area_area_city_link_xpath + areaCity + "']/a"));
         try {
             Thread.sleep(2000L);
