@@ -1114,4 +1114,13 @@ public class DataPage extends AbstractPage {
         }
         assertEquals("Cancel UpdateDo you want to leave this update without saving?NO YES", getDriver().findElement(cancel_update_confirmation_modal_xpath).getText().replace("\n",""));
     }
+
+    public void verifyUserRedirectedViewMode() {
+        try{
+            Thread.sleep(1000);
+            assertTrue(getDriver().findElement(currency_update_button_id).isDisplayed());
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+    }
 }
