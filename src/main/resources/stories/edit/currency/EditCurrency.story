@@ -15,7 +15,9 @@ JIRA ID - ZEUS-286 - User can save edits to currency uses
 JIRA-ID - ZEUS-280 - User can add new use for currency
 JIRA-ID - ZEUS-838 - User will see confirmation message after saving currency edits
 JIRA ID - ZEUS-743 - User will get warning if click away from screen they are editing
+JIRA ID - ZEUS-828 - User can only input numbers in date field
 JIRA ID - ZEUS-802 Accented characters displaying correctly after saving
+
 
 Scenario: a. Veify the currency selection drop-down is disabled in update mode
 1. Verify the currency details are comming from trusted document
@@ -516,3 +518,36 @@ Examples:
 |currency|currencyCountry|
 |Deutsche Mark|Angola|
 
+Scenario: ZEUS-828 - User can only input numbers in date field for start date
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
+And the user clicks on the update link
+When the user enters the currency start day as <currencyStartDay> in the currency page
+And the user enters the currency start year as <currencyStartYear> in the currency page
+And the user clicks on the save button
+Then the user should see the error 'Enter a year, month/year or day/month/year.' for start date
+Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|currency|currencyStartDay|currencyStartYear|
+|afghani|test|test|
+
+Scenario: ZEUS-828 - User can only input numbers in date field for end date
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
+And the user clicks on the update link
+When the user enters the currency end day as <currencyEndDay> in the currency page
+And the user enters the currency end year as <currencyEndYear> in the currency page
+And the user clicks on the save button
+Then the user should see the error 'Enter a year, month/year or day/month/year.' for end date
+Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|currency|currencyEndDay|currencyEndYear|
+|afghani|test|test|
