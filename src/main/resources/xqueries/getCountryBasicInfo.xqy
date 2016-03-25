@@ -21,36 +21,48 @@ declare function local:getDateAsPerAccuracy
         default return "date not valid"
 };
 
-let $countryName := xs:string(xdmp:get-request-field("name")) 
+let $countryName := xs:string(xdmp:get-request-field("name"))
 let $source := xs:string(xdmp:get-request-field("source"))
-
 
 let $countryDoc := collection('current')/country[@source=$source][summary/names/name[value = $countryName]]
 let $countryDetails := for $x in $countryDoc
+
 let $ISO2 := $x/summary/iso2/text()
 let $ISO3 :=$x/summary/iso3/text()
 let $Status :=$x/summary/status/text()
 let $BeginDate :=local:getDateAsPerAccuracy($x/summary/dates/dateBegan)
 let $EndDate :=local:getDateAsPerAccuracy($x/summary/dates/dateCeased)
-let $ReplacedBy := $x/summary/redirectTo/place/link/text()
+
+let $ReplacedBy := for $y in $x/summary/redirectTo/place/link/@href
+order by fn:doc($y || '_CURR_SRC~trusted')//summary/names/name[type="Country Name"]/value/text()
+return  string-join(fn:doc($y || '_CURR_SRC~trusted')//summary/names/name[type="Country Name"]/value/text())
+
 let $AddInfo :=$x/summary/additionalInfos/additionalInfo/text()
+
 let $Imports :=$x/summary/primaryImports/text()
 let $Exports :=$x/summary/primaryExports/text()
 let $PoliticalStructure :=$x/summary/politicalStructure/text()
 let $IntlDialingCode:=$x/summary/telephoneCode/text()
-return <country>
-<ISO2>{$ISO2}</ISO2>
-<ISO3>{$ISO3}</ISO3>
-<Status>{$Status}</Status>
-<BeginDate>{$BeginDate}</BeginDate>
-<EndDate>{$EndDate}</EndDate>
-<ReplacedBy>{$ReplacedBy}</ReplacedBy>
-<AddInfo>{$AddInfo}</AddInfo>
-<Imports>{$Imports}</Imports>
-<Exports>{$Exports}</Exports>
-<PoliticalStructure>{$PoliticalStructure}</PoliticalStructure>
-<IntlDialingCode>{$IntlDialingCode}</IntlDialingCode>
-</country>
+let $DomesticWith := for $x in /country[@source='trusted'][@resource = $x/summary/domesticWith/place/link/@href]/summary/names/name[type= "Country Name"]/value order by $x return $x
+
+
+return
+    <country>
+        <ISO2>{$ISO2}</ISO2>
+        <ISO3>{$ISO3}</ISO3>
+        <Status>{$Status}</Status>
+        <BeginDate>{$BeginDate}</BeginDate>
+        <EndDate>{$EndDate}</EndDate>
+        <ReplacedBy>{$ReplacedBy}</ReplacedBy>
+        <AddInfo>{$AddInfo}</AddInfo>
+        <DomesticWith>{$DomesticWith}</DomesticWith>
+        <Imports>{$Imports}</Imports>
+        <Exports>{$Exports}</Exports>
+        <PoliticalStructure>{$PoliticalStructure}</PoliticalStructure>
+        <IntlDialingCode>{$IntlDialingCode}</IntlDialingCode>
+
+
+    </country>
 
 return $countryDetails
 
