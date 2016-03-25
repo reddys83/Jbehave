@@ -178,6 +178,8 @@ public class DataPage extends AbstractPage {
     private String area_area_parent_link_xpath = "//table[@class='vertical']//td[a='";
     private By basic_info_left_section_xpath = By.xpath("//table[@class='vertical']/tbody//th");
 
+    private String area_area_city_link_xpath = "//*[@id='areaPlaces']/table/tbody//td[a='";
+
     private By save_button_id = By.id("save-button");
     private By error_message_at_top_xpath = By.xpath("//*[@id='error']/div/div/p");
     private By confirm_button_xpath = By.xpath("//*[@id='modal-region'] //*[@id='confirm-button']");
@@ -497,6 +499,7 @@ public class DataPage extends AbstractPage {
         assertEquals("TYPE", getDriver().findElement(places_type_label_xpath).getText());
         assertEquals("PLACE", getDriver().findElement(places_place_label_xpath).getText());
         assertEquals("DETAILS", getDriver().findElement(places_details_label_xpath).getText());
+<<<<<<< HEAD
 
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedEntity));
@@ -511,6 +514,11 @@ public class DataPage extends AbstractPage {
             assertEquals(document.getElementsByTagName("type").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='countryPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[1]")).getText());
             assertEquals(document.getElementsByTagName("value").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='countryPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[2]")).getText());
             assertEquals(document.getElementsByTagName("details").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='countryPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[3]")).getText());
+=======
+        for(int i = 0; i<placeValues.getRowCount(); i++){
+            assertEquals(placeValues.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
+                    getDriver().findElement(By.xpath("//*[@id='content']//table/tbody//tr[td='"+placeValues.getRow(i).get(placeValues.getHeaders().get(0))+"']")).getText().replace(",","").trim());
+>>>>>>> develop
         }
     }
 
@@ -892,6 +900,15 @@ public class DataPage extends AbstractPage {
 
     public void clickOnAreaParentLink(String areaParent) {
         attemptClick(By.xpath(area_area_parent_link_xpath + areaParent + "']/a"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clickOnAreaCityLink(String areaCity) {
+        attemptClick(By.xpath(area_area_city_link_xpath + areaCity + "']/a"));
         try {
             Thread.sleep(2000L);
         } catch (InterruptedException e) {
