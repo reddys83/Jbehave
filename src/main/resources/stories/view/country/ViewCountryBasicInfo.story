@@ -9,6 +9,7 @@ JIRA ID - ZEUS-93 - User can view basic country info
 JIRA ID - ZEUS-254 - User can view a country's holidays
 JIRA ID - ZEUS-321 - ignore special characters in currency, country, area/subarea and city drop-down
 JIRA ID - ZEUS-792 - Country Basic Info - Demographics - Dates are not displaying.
+JIRA ID - ZEUS-318 - user can view country's domestic with list
 
 Scenario:
 1. Verify that the country list is displayed and is not empty
@@ -32,7 +33,8 @@ Then the user should see the countries in the listbox as:
 |Vietnam|
 
 Scenario: Verify Country basic info
-1. BUG_D - ZEUS-792
+1. user can view country's domestic with list
+2. BUG_D - ZEUS-792
 Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -137,3 +139,6 @@ Then the user should see the below fields in the country basic info left section
 Examples:
 |country|replacedByCountry|
 |Afghanistan|Albania|
+
+
+

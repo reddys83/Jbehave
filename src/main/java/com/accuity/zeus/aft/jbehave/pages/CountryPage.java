@@ -332,12 +332,13 @@ public class CountryPage extends AbstractPage {
             assertEquals(document.getElementsByTagName("Status").item(i).getTextContent().toLowerCase(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Status']/td")).getText().toLowerCase());
             assertEquals(document.getElementsByTagName("BeginDate").item(i).getTextContent().replace(" ", ""), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Start Date']/td")).getText().replace(" ", ""));
             assertEquals(document.getElementsByTagName("EndDate").item(i).getTextContent().replace(" ", ""), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "End Date']/td")).getText().replace(" ", ""));
-            assertEquals(document.getElementsByTagName("ReplacedBy").item(i).getTextContent().replace(" ",""), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Replaced By']/td")).getText().replace(" ", "").replace(",",""));
+            assertEquals(document.getElementsByTagName("ReplacedBy").item(i).getTextContent().replace(" ", ""), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Replaced By']/td")).getText().replace(" ", "").replace(",", ""));
             assertEquals(document.getElementsByTagName("AddInfo").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Add Info']/td")).getText().replace(" ", ""));
-            assertEquals(document.getElementsByTagName("Imports").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Imports']/td")).getText());
+
+            assertTrue(document.getElementsByTagName("DomesticWith").item(0).getTextContent().contains(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Domestic with']/td")).getText()));assertEquals(document.getElementsByTagName("Imports").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Imports']/td")).getText());
             assertEquals(document.getElementsByTagName("Exports").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Exports']/td")).getText());
             assertEquals(document.getElementsByTagName("PoliticalStructure").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Political Structure']/td")).getText());
-            assertEquals(document.getElementsByTagName("IntlDialingCode").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Intl Dialing Code']/td")).getText().replace("+",""));
+            assertEquals(document.getElementsByTagName("IntlDialingCode").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Intl Dialing Code']/td")).getText().replace("+", ""));
         }
     }
 
@@ -365,6 +366,39 @@ public class CountryPage extends AbstractPage {
             assertEquals(document.getElementsByTagName("PoliticalStructure").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Political Structure']/td")).getText());
             assertEquals(document.getElementsByTagName("IntlDialingCode").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Intl Dialing Code']/td/input")).getAttribute("value"));
 
+        }
+    }
+
+
+    public void verifyEditCountryBasicInfoInZeus(String selectedCountry) {
+        selectedCountry= DataPage.selectedEntity;
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedCountry));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "country basic info", nvPairs);
+        assertEquals(editedCountryStartYear, document.getElementsByTagName("BeginDate").item(0).getTextContent());
+        assertEquals(editedCountryEndYear, document.getElementsByTagName("EndDate").item(0).getTextContent());
+    }
+
+    public void verifyEditCountryHolidaysInZeus(String selectedCountry) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedCountry));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get country holidays", nvPairs);
+        for(int i=0; i<document.getElementsByTagName("holiday").getLength(); i++){
+            assertEquals(editedCountryHolidayDay + " " + editedCountryHolidayMonth + " " + editedCountryHolidayYear, document.getElementsByTagName("date").item(i).getTextContent());
+            assertEquals(editedCountryHolidayDescription, document.getElementsByTagName("name").item(i).getTextContent());
+            assertEquals(editedCountryHolidayNotes, document.getElementsByTagName("note").item(i).getTextContent());
         }
     }
 
@@ -964,7 +998,7 @@ public class CountryPage extends AbstractPage {
 
     public void verifyRequiredErrorMessageRegionValue()
     {
-        assertEquals(getDriver().findElement(country_region_value_error_message_xpath).getText(),"Required");
+        assertEquals(getDriver().findElement(country_region_value_error_message_xpath).getText(), "Required");
     }
 
     public void entersDemographicDateLaterThanToday() {
@@ -1007,7 +1041,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void entersDemographicMonth(String month) {
-        selectItemFromDropdownListByText(countryBasicInfo_demographics_date_month_edit_xpath,month);
+        selectItemFromDropdownListByText(countryBasicInfo_demographics_date_month_edit_xpath, month);
     }
 
     public void entersDemographicYear(String year) {
@@ -1049,7 +1083,7 @@ public class CountryPage extends AbstractPage {
 
     public void verifyCountryDemographicsTypeDropdownList(){
 
-        List<WebElement> countryDemographicsList = getDriver().findElements(By.xpath(countryBasicInfo_demographics_type_dropdown_edit_xpath +"/option"));
+        List<WebElement> countryDemographicsList = getDriver().findElements(By.xpath(countryBasicInfo_demographics_type_dropdown_edit_xpath + "/option"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country demographics type");
         for (int i = 1; i < document.getElementsByTagName("type").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), countryDemographicsList.get(i).getText());
@@ -1584,35 +1618,5 @@ public class CountryPage extends AbstractPage {
         }
     }
 
-    public void verifyEditCountryHolidaysInZeus(String selectedCountry) {
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("name", selectedCountry));
-        nvPairs.add(new BasicNameValuePair("source", "zeus"));
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get country holidays", nvPairs);
-        for(int i=0; i<document.getElementsByTagName("holiday").getLength(); i++){
-            assertEquals(editedCountryHolidayDay + " " + editedCountryHolidayMonth + " " + editedCountryHolidayYear, document.getElementsByTagName("date").item(i).getTextContent());
-            assertEquals(editedCountryHolidayDescription, document.getElementsByTagName("name").item(i).getTextContent());
-            assertEquals(editedCountryHolidayNotes, document.getElementsByTagName("note").item(i).getTextContent());
-        }
-    }
 
-    public void verifyEditCountryBasicInfoInZeus(String selectedCountry) {
-        selectedCountry= DataPage.selectedEntity;
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("name", selectedCountry));
-        nvPairs.add(new BasicNameValuePair("source", "zeus"));
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "country basic info", nvPairs);
-        assertEquals(editedCountryStartYear, document.getElementsByTagName("BeginDate").item(0).getTextContent());
-        assertEquals(editedCountryEndYear, document.getElementsByTagName("EndDate").item(0).getTextContent());
-    }
 }
