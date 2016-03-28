@@ -43,13 +43,13 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 When the user clicks on the office search results fid column
-Then the user should see the office search results cards sorted descending order by office fid with fid 1038 from the database
+Then the user should see the office search results cards sorted descending order by office fid with fid 91832 from the database
 When the user clicks on the office search results fid column
-Then the user should see the office search results cards sorted ascending order by office fid with fid 1038 from the database
+Then the user should see the office search results cards sorted ascending order by office fid with fid 91832 from the database
 
 Examples:
 |entity|searchBy|fid|headOfficeAddress|tfpid|
-|Bank of America National Association|Name|1038|Charlotte, North Carolina, USA|10077420|
+|Associated Commercial Finance Inc|Name|91832|112 North Adams St|96691281|
 
 Scenario: Verify the sorting office results by STATUS
 Given a user is on the search page
@@ -65,7 +65,7 @@ Then the user should see the office search results cards sorted ascending order 
 Then the user should see the office search results paginated
 And the user should see the offices number of records displayed in the page w.r.t total search results
 And the user should see the option to navigate to the desired office search results page
-When the user navigates to the 4th page on the office search results
+When the user navigates to the 2nd page on the office search results
 Then the user should see the office search results paginated
 And the user should see the offices number of records displayed in the page w.r.t total search results
 And the user should see the option to navigate to the desired office search results page
@@ -78,7 +78,7 @@ And the user should see the option to navigate to the desired office search resu
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1717|FID|1717|
 
 Scenario: Verify the sorting office results by TYPE
 Meta:
@@ -91,15 +91,15 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the office search results type column
-Then the office search results should sort by type which sorted ascending order by office type with fid 1568 from the database
-When the user navigates to the 4th page on the office search results
+Then the office search results should sort by type which sorted ascending order by office type with fid 1717 from the database
+When the user navigates to the 2nd page on the office search results
 When the user clicks on the office search results type column
 Then the user should see office search results reset to page 1
-Then the office search results should sort by type which sorted descending order by office type with fid 1568 from the database
+Then the office search results should sort by type which sorted descending order by office type with fid 1717 from the database
 
 Examples:
 |entity|searchBy|fid|
-|1568|FID|1568|
+|1717|FID|1717|
 
 Scenario: Verify the sorting office results by TYPE where the office has multiple types
 Meta:
@@ -216,4 +216,4 @@ Then the user should see the office search results sorted ascending by addressLi
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|113461|FID|113461|

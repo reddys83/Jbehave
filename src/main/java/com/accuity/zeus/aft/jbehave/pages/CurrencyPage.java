@@ -79,8 +79,6 @@ public class CurrencyPage extends AbstractPage {
     private By labels_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
     private By no_results_match_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
-    private By currency_start_date_error_msg_xpath = By.xpath("//*[@data-error_id='startDateError']");
-    private By currency_end_date_error_msg_xpath = By.xpath("//*[@data-error_id='endDateError']");
     private By currency_save_confirmation_message_id = By.id("saveSuccess");
 
 
@@ -367,7 +365,7 @@ public class CurrencyPage extends AbstractPage {
         assertTrue(getDriver().findElement(By.xpath(currency_use_table_startDate_month_edit_xpath + "/option[@selected='selected']")).isDisplayed());
         assertTrue(getDriver().findElement(currency_use_table_startDate_year_edit_xpath).isDisplayed());
         assertFalse(getDriver().findElement(currency_use_table_endDate_day_edit_xpath).isEnabled());
-        assertFalse(getDriver().findElement(By.xpath(currency_use_table_endDate_month_edit_xpath+"/option[@selected='selected']")).isEnabled());
+        assertFalse(getDriver().findElement(By.xpath(currency_use_table_endDate_month_edit_xpath + "/option[@selected='selected']")).isEnabled());
         assertFalse(getDriver().findElement(currency_use_table_endDate_year_edit_xpath).isEnabled());
         assertTrue(getDriver().findElement(By.xpath(currency_use_table_primary_edit_xpath + "/input[@checked]")).isDisplayed());
         assertTrue(getDriver().findElement(currency_use_table_replacedBy_disable_edit_xpath).isDisplayed());
@@ -452,8 +450,8 @@ public class CurrencyPage extends AbstractPage {
 
     public void revertChangesToCurrencyAfghani(Database database, ApacheHttpClient apacheHttpClient) {
         List<NameValuePair> nvPairs = new ArrayList<>();
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus",nvPairs);
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for trusted",nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus", nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for trusted", nvPairs);
     }
 
     public void revertChangesToCurrencyDeutscheMark(Database database, ApacheHttpClient apacheHttpClient) {
@@ -465,8 +463,8 @@ public class CurrencyPage extends AbstractPage {
 
     public void revertChangesToCurrencyAsianCurrencyUnit(Database database, ApacheHttpClient apacheHttpClient) {
         List<NameValuePair> nvPairs = new ArrayList<>();
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for zeus",nvPairs);
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for trusted",nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for zeus", nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for trusted", nvPairs);
     }
 
     public void verifyCurrencyEditMode(){
@@ -617,14 +615,6 @@ public class CurrencyPage extends AbstractPage {
         for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), addCountryList.get(i).getText().trim());
         }
-    }
-
-    public void verifyStartDateErrorMessage(String startDateErrorMsg) {
-        assertEquals(startDateErrorMsg.replace("'",""), getDriver().findElement(currency_start_date_error_msg_xpath).getText());
-    }
-
-    public void verifyEndDateErrorMessage(String endDateErrorMsg) {
-        assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(currency_end_date_error_msg_xpath).getText());
     }
 
     public CurrencyPage selectCurrencyFromTypeAhead(String currency) {

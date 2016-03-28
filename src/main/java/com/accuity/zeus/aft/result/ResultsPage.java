@@ -70,7 +70,7 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_current_page_xpath = By.className("current-page");
     private By office_header_counter_xpath = By.xpath("//*[@id='subEntityList-header']//p");
     private By office_footer_counter_xpath = By.xpath("//*[@id='subEntityList-footer']//p");
-    private By office_search_results_last_page_xpath = By.xpath("//*[@id='pages-navigation-list']/li[8]");
+    private By office_search_results_last_page_xpath = By.xpath("//*[@id='pages-navigation-list']/li[last()-1]");
     private By office_search_results_navigation_xpath = By.xpath("//*[@id='pages-navigation-list']");
     private By office_search_results_next_page_classname = By.className("next-page");
     private By office_search_results_previous_page_classname = By.className("previous-page");
@@ -346,7 +346,8 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void navigateToOfficeLastSearchResultsPage() {
-        attemptClick(office_search_results_last_page_xpath);
+       attemptClick(office_search_results_last_page_xpath);
+
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {

@@ -83,14 +83,10 @@ And the user should see the offices number of records displayed in the page w.r.
 When the user selects the 200 results/page in the office results page
 Then the user should see the office search results paginated
 And the user should see the offices number of records displayed in the page w.r.t total search results
-When the user navigates to the 4th page on the office search results
-And the user selects the 25 results/page in the office results page
-When the user clicks on the office search results status column
-Then the user should see the office search results cards sorted ascending order by office status
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1568|FID|1568|
 
 Scenario: Filter offices by status - Active
 Given a user is on the search page

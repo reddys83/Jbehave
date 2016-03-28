@@ -335,7 +335,8 @@ public class CountryPage extends AbstractPage {
             assertEquals(document.getElementsByTagName("ReplacedBy").item(i).getTextContent().replace(" ", ""), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Replaced By']/td")).getText().replace(" ", "").replace(",", ""));
             assertEquals(document.getElementsByTagName("AddInfo").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Add Info']/td")).getText().replace(" ", ""));
 
-            assertTrue(document.getElementsByTagName("DomesticWith").item(0).getTextContent().contains(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Domestic with']/td")).getText()));assertEquals(document.getElementsByTagName("Imports").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Imports']/td")).getText());
+            assertEquals(document.getElementsByTagName("DomesticWith").item(0).getTextContent().replace(" ",""),getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Domestic with']/td")).getText().replace(",","").replace(" ",""));
+            assertEquals(document.getElementsByTagName("Imports").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Imports']/td")).getText());
             assertEquals(document.getElementsByTagName("Exports").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Exports']/td")).getText());
             assertEquals(document.getElementsByTagName("PoliticalStructure").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Political Structure']/td")).getText());
             assertEquals(document.getElementsByTagName("IntlDialingCode").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Intl Dialing Code']/td")).getText().replace("+", ""));

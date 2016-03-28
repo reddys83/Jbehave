@@ -373,7 +373,8 @@ Examples:
 |Asian Currency Unit|Afghanistan||Jan|1988||Jan|1988|
 |Asian Currency Unit|Afghanistan|01|Jan|1988|01|Jan|1988|
 
-Scenario: Save updates tp existing currency use STORY:920(failing because of invalid data in database)
+Scenario: ZEUS-838 - User will see confirmation message after saving currency edits
+Save updates tp existing currency use STORY:920(failing because of invalid data in database)
 1. @accuracy = year
 2. @accuracy = month
 3. @accuracy = day
@@ -390,6 +391,8 @@ And the user enters the currency start month as <currencyStartMonth> in the curr
 And the user enters the currency start year as <currencyStartYear> in the currency page
 And the user clicks on the save button
 And the user clicks on the confirm button
+Then the user should see confirmation message
+And the user should be redirected to view mode
 Then the user should see the view currency use from trusted document
 And the user reverts the changes to the document
 
@@ -399,7 +402,8 @@ Examples:
 |Afghani-test|Albania||Jan|1988||Jan|1988|
 |Afghani-test|Albania|01|Jan|1988|01|Jan|1988|
 
-Scenario: ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Active status ) STORY:920(failing because of invalid data in database)
+Scenario: ZEUS-838 - User will see confirmation message after saving currency edits
+ ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Active status ) STORY:920(failing because of invalid data in database)
 1. @accuracy = year
 2. @accuracy = month
 3. @accuracy = day
@@ -419,6 +423,8 @@ And the user enters the currency start year as <currencyStartYear> in the curren
 And the user enters the currency usage primary value as <primary> in the currency page
 And the user clicks on the save button
 When the user clicks on the confirm button
+Then the user should see confirmation message
+And the user should be redirected to view mode
 Then the user should see the edits to currency uses in zeus document
 And the user reverts the changes to the document
 
@@ -428,7 +434,8 @@ Examples:
 |Afghani-test|Angola||Jun|1987|false|
 |Afghani-test|Angola|21|Jun|1987|false|
 
-Scenario: ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Inactive status ) (AFT implementation issue)
+Scenario: ZEUS-838 - User will see confirmation message after saving currency edits
+ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Inactive status ) (AFT implementation issue)
 1. @accuracy = year
 2. @accuracy = month
 3. @accuracy = day
@@ -451,6 +458,8 @@ And the user enters the currency usage primary value as <primary> in the currenc
 And the user enters the currency usage replaced by as <replacedBy> in the currency page
 And the user clicks on the save button
 When the user clicks on the confirm button
+Then the user should see confirmation message
+And the user should be redirected to view mode
 Then the user should see the edits to currency uses in zeus document
 And the user reverts the changes to the document
 
@@ -501,24 +510,7 @@ Examples:
 |currency|name|
 |Australian Dollar|Australian Dóllar|
 
-Scenario: ZEUS-838 - User will see confirmation message after saving currency edits
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option in the currency page
-And the user enters the currency <currency> in the typeahead box in the currency page
-And the user clicks on the update link
-When the user enters the country <currencyCountry> in the currency usage
-And the user clicks on the save button
-When the user clicks on the confirm button
-Then the user should see confirmation message
-And the user should be redirected to view mode
-
-Examples:
-|currency|currencyCountry|
-|Deutsche Mark|Angola|
-
-Scenario: ZEUS-828 - User can only input numbers in date field for start date
+Scenario: ZEUS-828 - User can only input numbers in date field for start date and end date
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
@@ -527,27 +519,14 @@ And the user enters the currency <currency> in the typeahead box in the currency
 And the user clicks on the update link
 When the user enters the currency start day as <currencyStartDay> in the currency page
 And the user enters the currency start year as <currencyStartYear> in the currency page
-And the user clicks on the save button
-Then the user should see the error 'Enter a year, month/year or day/month/year.' for start date
-Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
-
-Examples:
-|currency|currencyStartDay|currencyStartYear|
-|afghani|test|test|
-
-Scenario: ZEUS-828 - User can only input numbers in date field for end date
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option in the currency page
-And the user enters the currency <currency> in the typeahead box in the currency page
-And the user clicks on the update link
 When the user enters the currency end day as <currencyEndDay> in the currency page
 And the user enters the currency end year as <currencyEndYear> in the currency page
 And the user clicks on the save button
+Then the user should see the error 'Enter a year, month/year or day/month/year.' for start date
 Then the user should see the error 'Enter a year, month/year or day/month/year.' for end date
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
-|currency|currencyEndDay|currencyEndYear|
-|afghani|test|test|
+|currency|currencyStartDay|currencyStartYear|currencyEndDay|currencyEndYear|
+|afghani|test|test|test|test|
+

@@ -317,16 +317,6 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().verifyAddCountryList(database, apacheHttpClient);
     }
 
-    @Then("the user should see the error $startDateErrorMsg for start date")
-    public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg) {
-        getCurrencyPage().verifyStartDateErrorMessage(startDateErrorMsg);
-    }
-
-    @Then("the user should see the error $startDateErrorMsg for end date")
-    public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg) {
-        getCurrencyPage().verifyEndDateErrorMessage(endDateErrorMsg);
-    }
-
     @When("the user enters the currency <currency> in the typeahead box in the currency page")
     public void selectCurrencyFromTypeAhead(@Named("currency") String currency) {
         selectedCurrency = currency;
