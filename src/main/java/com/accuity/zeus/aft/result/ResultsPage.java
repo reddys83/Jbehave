@@ -70,7 +70,7 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_current_page_xpath = By.className("current-page");
     private By office_header_counter_xpath = By.xpath("//*[@id='subEntityList-header']//p");
     private By office_footer_counter_xpath = By.xpath("//*[@id='subEntityList-footer']//p");
-    private By office_search_results_last_page_xpath = By.xpath("//*[@id='pages-navigation-list']/li[8]");
+    private By office_search_results_last_page_xpath = By.xpath("//*[@id='pages-navigation-list']/li[last()-1]");
     private By office_search_results_navigation_xpath = By.xpath("//*[@id='pages-navigation-list']");
     private By office_search_results_next_page_classname = By.className("next-page");
     private By office_search_results_previous_page_classname = By.className("previous-page");
@@ -297,6 +297,11 @@ public class ResultsPage extends AbstractPage {
             assertEquals(officeTotalResultsCount(), Integer.toString(getOfficeResultsCountInCurrentPage().size()));
         } else {
             navigateToOfficeLastSearchResultsPage();
+            try {
+                Thread.sleep(3000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             assertEquals(officeTotalResultsCount(), getOfficeResultsCountTillCurrentPage());
         }
     }
@@ -341,7 +346,8 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void navigateToOfficeLastSearchResultsPage() {
-        attemptClick(office_search_results_last_page_xpath);
+       attemptClick(office_search_results_last_page_xpath);
+
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
@@ -353,7 +359,7 @@ public class ResultsPage extends AbstractPage {
         if (Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) > 7) {
             if (Integer.parseInt(getOfficeSearchResultsCurrentPage()) <= 4) {
                 assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 2 3 4 5 ... " + getOfficeSearchResultsLastNavigationPage() + " Next");
-            } else if (Integer.parseInt(getOfficeSearchResultsCurrentPage()) > 5
+            } else if((Integer.parseInt(getOfficeSearchResultsCurrentPage()) >= 5)
                     && Integer.parseInt(getOfficeSearchResultsCurrentPage()) < (Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 3)) {
                 assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 ... " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsCurrentPage()) - 1) + " " +
@@ -446,7 +452,7 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyAllDeselectedOfficeTypeFilter() {
-        assertFalse(getDriver().findElement(office_type_default_filter_all_xpath).isDisplayed());
+        assertFalse(getDriver().findElement(office_type_default_filter_all_xpath).isSelected());
     }
 
     public void selectOfficeTypeFilterDomestic() {
@@ -538,7 +544,7 @@ public class ResultsPage extends AbstractPage {
     public void clickOnOfficeSearchResultsStatus() {
         attemptClick(office_search_results_status_xpath);
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -563,11 +569,7 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyOfficeIsSortedAscByStatus(Database database, ApacheHttpClient apacheHttpClient, String searchedEntity) {
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         List<WebElement> status = getDriver().findElements(office_search_results_status_col_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "ascending order by office status", "fid", searchedEntity);
         for (int i = 0; i < status.size(); i++) {
@@ -638,6 +640,11 @@ public class ResultsPage extends AbstractPage {
     public void selectResultsPerPage(String count) {
         resultsDisplayed = Integer.parseInt(count);
         attemptClick(By.id(office_search_results_per_page_id + count));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void verifyDefaultSelectionResultPerPage() {

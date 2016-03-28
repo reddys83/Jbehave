@@ -494,14 +494,25 @@ public class DataPage extends AbstractPage {
         } catch (org.openqa.selenium.NoSuchElementException e){}
     }
 
-    public void verifyPlaces(ExamplesTable placeValues)  {
+    public void verifyCountryRelatedPlacesFromTrusted()  {
         verifyPlacesLabel();
         assertEquals("TYPE", getDriver().findElement(places_type_label_xpath).getText());
         assertEquals("PLACE", getDriver().findElement(places_place_label_xpath).getText());
         assertEquals("DETAILS", getDriver().findElement(places_details_label_xpath).getText());
-        for(int i = 0; i<placeValues.getRowCount(); i++){
-            assertEquals(placeValues.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
-                    getDriver().findElement(By.xpath("//*[@id='content']//table/tbody//tr[td='"+placeValues.getRow(i).get(placeValues.getHeaders().get(0))+"']")).getText().replace(",","").trim());
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "country related places", nvPairs);
+        for (int i = 0; i < document.getElementsByTagName("relation").getLength(); i++) {
+            assertEquals(document.getElementsByTagName("type").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='countryPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[1]")).getText());
+            assertEquals(document.getElementsByTagName("value").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='countryPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[2]")).getText());
+            assertEquals(document.getElementsByTagName("details").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='countryPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[3]")).getText());
         }
     }
 
@@ -627,6 +638,50 @@ public class DataPage extends AbstractPage {
         attemptClick(area_related_places_link_id);
     }
 
+    public void verifyAreaRelatedPlacesFromTrusted() {
+        verifyPlacesLabel();
+        assertEquals("TYPE", getDriver().findElement(places_type_label_xpath).getText());
+        assertEquals("PLACE", getDriver().findElement(places_place_label_xpath).getText());
+        assertEquals("DETAILS", getDriver().findElement(places_details_label_xpath).getText());
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area related places", nvPairs);
+        for (int i = 0; i < document.getElementsByTagName("relation").getLength(); i++) {
+            assertEquals(document.getElementsByTagName("type").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='areaPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[1]")).getText());
+            assertEquals(document.getElementsByTagName("value").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='areaPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[2]")).getText());
+            assertEquals(document.getElementsByTagName("details").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='areaPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[3]")).getText());
+        }
+        }
+
+    public void verifyCityRelatedPlacesFromTrusted() {
+        verifyPlacesLabel();
+        assertEquals("TYPE", getDriver().findElement(places_type_label_xpath).getText());
+        assertEquals("PLACE", getDriver().findElement(places_place_label_xpath).getText());
+        assertEquals("DETAILS", getDriver().findElement(places_details_label_xpath).getText());
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "city related places", nvPairs);
+        for (int i = 0; i < document.getElementsByTagName("relation").getLength(); i++) {
+            assertEquals(document.getElementsByTagName("type").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='cityPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[1]")).getText());
+            assertEquals(document.getElementsByTagName("value").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='cityPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[2]")).getText());
+            assertEquals(document.getElementsByTagName("details").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='cityPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[3]")).getText());
+        }
+    }
+
     public void clickOnCityRelatedPlaces() {
         attemptClick(city_related_places_link_id);
     }
@@ -688,8 +743,8 @@ public class DataPage extends AbstractPage {
 
     public void verifyStatisticsLabels(){
         assertEquals("STATISTICS", getTextOnPage(statistics_label_xpath));
-        assertEquals("TYPE",getTextOnPage(statistics_type_label_xpath));
-        assertEquals("VALUE",getTextOnPage(statistics_value_label_xpath));
+        assertEquals("TYPE", getTextOnPage(statistics_type_label_xpath));
+        assertEquals("VALUE", getTextOnPage(statistics_value_label_xpath));
     }
 
     public void clickOnCityTab() {
@@ -948,6 +1003,11 @@ public class DataPage extends AbstractPage {
 
     public void clickOnSaveButton() {
         attemptClick(save_button_id);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void clickOnConfirmButton() {
@@ -964,7 +1024,7 @@ public class DataPage extends AbstractPage {
         endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
 
         responseEntity = restClient.getDocumentByID(endpointWithID,heraApi );
-        assertTrue(responseEntity.getStatusCode().value()==200);
+        assertTrue(responseEntity.getStatusCode().value() == 200);
     }
 
     public void revertChangesToDocument() {
@@ -1070,7 +1130,7 @@ public class DataPage extends AbstractPage {
 
     public void verifyStartDateErrorMessage(String startDateErrorMsg) {
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(2000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -1079,7 +1139,7 @@ public class DataPage extends AbstractPage {
 
     public void verifyStartDateErrorMessageForDayMonthYear() {
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(2000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -1091,6 +1151,11 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyEndDateErrorMessage(String endDateErrorMsg) {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(end_date_error_msg_xpath).getText());
     }
 

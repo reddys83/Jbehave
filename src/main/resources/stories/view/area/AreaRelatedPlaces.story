@@ -17,11 +17,7 @@ And the user enters the country <country> in the type-ahead box
 When the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 When the user clicks on the area's places link in the navigation bar
-Then the user should see the area's places as:
-|TYPE|PLACE|DETAILS|
-|Area, Test Data|Nassau||
-|Federal Reserve Bank Region|South Valley Stream|Test Data, Test Data|
-|Country|USA|Test Data, Test Data|
+Then the user should see the area related places from trusted document
 
 Examples:
 |country|area|
@@ -56,11 +52,7 @@ And the user clicks on the choose a sub-area option
 And the user enters the sub-area <subArea> in the type-ahead box
 When the user clicks on the sub-area's places link in the navigation bar
 
-Then the user should see the sub-area's places as:
-|TYPE|PLACE|DETAILS|
-|Country|USA|Test Data, Test Data|
-|Area, Test Data|Nassau||
-|Federal Reserve Bank Region|South Valley Stream|Test Data, Test Data|
+Then the user should see the sub-area's related places from trusted document
 
 Examples:
 |country|area|subArea|

@@ -45,6 +45,11 @@ public class CurrencyPage extends AbstractPage {
     private By currency_use_table_startDate_day_edit_xpath=By.xpath("//input[@name='began-day']");
     String currency_use_table_startDate_month_edit_xpath = "//select[@name='began-month']";
     private By currency_use_table_startDate_year_edit_xpath=By.xpath("//input[@name='began-year']");
+
+    private By currency_new_use_table_startDate_day_edit_xpath=By.xpath("//*[@class='new']//input[@name='began-day']");
+    String currency_new_use_table_startDate_month_edit_xpath = "//*[@class='new']//select[@name='began-month']";
+    private By currency_new_use_table_startDate_year_edit_xpath=By.xpath("//*[@class='new']//input[@name='began-year']");
+
     private By currency_use_table_endDate_day_edit_xpath=By.xpath("//input[@name='end-day']");
     String currency_use_table_endDate_month_edit_xpath = "//select[@name='end-month']";
     private By currency_use_table_endDate_year_edit_xpath=By.xpath("//input[@name='end-year']");
@@ -74,8 +79,6 @@ public class CurrencyPage extends AbstractPage {
     private By labels_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
     private By no_results_match_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
-    private By currency_start_date_error_msg_xpath = By.xpath("//*[@data-error_id='startDateError']");
-    private By currency_end_date_error_msg_xpath = By.xpath("//*[@data-error_id='endDateError']");
     private By currency_save_confirmation_message_id = By.id("saveSuccess");
 
 
@@ -259,13 +262,13 @@ public class CurrencyPage extends AbstractPage {
     public void clickOnReplacedByLink(String replacedBy) {
         attemptClick(By.linkText(replacedBy));
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(2000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public void verifyEditCurrencyInZeus(Database database, ApacheHttpClient apacheHttpClient, String selectedEntity){
+    public void verifyEditCurrencyInZeus(String selectedEntity){
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedEntity));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
@@ -305,7 +308,7 @@ public class CurrencyPage extends AbstractPage {
         }
     }
 
-    public void verifyEditCurrencyUseInZeus(Database database, ApacheHttpClient apacheHttpClient, String selectedCurrency) {
+    public void verifyEditCurrencyUseInZeus(String selectedCurrency) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedCurrency));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
@@ -362,7 +365,7 @@ public class CurrencyPage extends AbstractPage {
         assertTrue(getDriver().findElement(By.xpath(currency_use_table_startDate_month_edit_xpath + "/option[@selected='selected']")).isDisplayed());
         assertTrue(getDriver().findElement(currency_use_table_startDate_year_edit_xpath).isDisplayed());
         assertFalse(getDriver().findElement(currency_use_table_endDate_day_edit_xpath).isEnabled());
-        assertFalse(getDriver().findElement(By.xpath(currency_use_table_endDate_month_edit_xpath+"/option[@selected='selected']")).isEnabled());
+        assertFalse(getDriver().findElement(By.xpath(currency_use_table_endDate_month_edit_xpath + "/option[@selected='selected']")).isEnabled());
         assertFalse(getDriver().findElement(currency_use_table_endDate_year_edit_xpath).isEnabled());
         assertTrue(getDriver().findElement(By.xpath(currency_use_table_primary_edit_xpath + "/input[@checked]")).isDisplayed());
         assertTrue(getDriver().findElement(currency_use_table_replacedBy_disable_edit_xpath).isDisplayed());
@@ -447,8 +450,8 @@ public class CurrencyPage extends AbstractPage {
 
     public void revertChangesToCurrencyAfghani(Database database, ApacheHttpClient apacheHttpClient) {
         List<NameValuePair> nvPairs = new ArrayList<>();
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus",nvPairs);
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for trusted",nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for zeus", nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency afghani for trusted", nvPairs);
     }
 
     public void revertChangesToCurrencyDeutscheMark(Database database, ApacheHttpClient apacheHttpClient) {
@@ -460,8 +463,8 @@ public class CurrencyPage extends AbstractPage {
 
     public void revertChangesToCurrencyAsianCurrencyUnit(Database database, ApacheHttpClient apacheHttpClient) {
         List<NameValuePair> nvPairs = new ArrayList<>();
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for zeus",nvPairs);
-        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for trusted",nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for zeus", nvPairs);
+        apacheHttpClient.executeDatabaseAdminQuery(database, "revert changes to currency asian currency unit for trusted", nvPairs);
     }
 
     public void verifyCurrencyEditMode(){
@@ -494,15 +497,29 @@ public class CurrencyPage extends AbstractPage {
         getDriver().findElement(currency_use_table_startDate_day_edit_xpath).sendKeys(currencyStartDay);
     }
 
+    public void enterCurrencyNewStartDay(String currencyStartDay) {
+        getDriver().findElement(currency_new_use_table_startDate_day_edit_xpath).clear();
+        getDriver().findElement(currency_new_use_table_startDate_day_edit_xpath).sendKeys(currencyStartDay);
+    }
+
     public void enterCurrencyStartMonth(String currencyStartMonth) {
         editedCurrencyStartMonth = currencyStartMonth;
         selectItemFromDropdownListByText(By.xpath(currency_use_table_startDate_month_edit_xpath), currencyStartMonth);
+    }
+
+    public void enterCurrencyNewStartMonth(String currencyStartMonth) {
+        selectItemFromDropdownListByText(By.xpath(currency_new_use_table_startDate_month_edit_xpath), currencyStartMonth);
     }
 
     public void enterCurrencyStartYear(String currencyStartYear) {
         editedCurrencyStartYear = currencyStartYear;
         getDriver().findElement(currency_use_table_startDate_year_edit_xpath).clear();
         getDriver().findElement(currency_use_table_startDate_year_edit_xpath).sendKeys(currencyStartYear);
+    }
+
+    public void enterCurrencyNewStartYear(String currencyStartYear) {
+        getDriver().findElement(currency_new_use_table_startDate_year_edit_xpath).clear();
+        getDriver().findElement(currency_new_use_table_startDate_year_edit_xpath).sendKeys(currencyStartYear);
     }
 
     public void enterCurrencyEndDay(String currencyEndDay) {
@@ -598,14 +615,6 @@ public class CurrencyPage extends AbstractPage {
         for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), addCountryList.get(i).getText().trim());
         }
-    }
-
-    public void verifyStartDateErrorMessage(String startDateErrorMsg) {
-        assertEquals(startDateErrorMsg.replace("'",""), getDriver().findElement(currency_start_date_error_msg_xpath).getText());
-    }
-
-    public void verifyEndDateErrorMessage(String endDateErrorMsg) {
-        assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(currency_end_date_error_msg_xpath).getText());
     }
 
     public CurrencyPage selectCurrencyFromTypeAhead(String currency) {

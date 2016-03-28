@@ -1,20 +1,16 @@
 Meta:@Design
 
-Scenario: Verify Area related places.
+Scenario: Bug:ZEUS-930- LegalEntity search results are not showing up
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the area tab in the data area
-When the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
-When the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-When the user clicks on the area's places link in the navigation bar
-Then the user should see the area's places as:
-|TYPE|PLACE|DETAILS|
-|Area, Test Data|Nassau||
-|Federal Reserve Bank Region|South Valley Stream|Test Data, Test Data|
-|Country|USA|Test Data, Test Data|
+When the user searches for <entity> with <field> equals <value>
+
+Then the user should see the legal entity search results card matching the searched entity
+|FID|TFPID|NAME|ADDRESS|STATUS|
+|224355||American Life Hayat Sigorta AS||active|
+
+Then the user should see the search results paginated for the searched entity
+And the user should see the number of records displayed in the page w.r.t total search results
 
 Examples:
-|country|area|
-|USA|Illinois|
+|entity|field|value|
+|fid|fid|224355|

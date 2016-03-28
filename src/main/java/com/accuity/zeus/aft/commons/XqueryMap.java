@@ -58,6 +58,9 @@ public class XqueryMap {
         queryMap.put("get values for region type","getCountryAlternateRegionValues.xqy");
         queryMap.put("ascending order by office address","sortAscByOfficeAddressLine1.xqy");
         queryMap.put("descending order by office address","sortDescByOfficeAddressLine1.xqy");
+        queryMap.put("area related places","getAreaRelatedPlaces.xqy");
+        queryMap.put("city related places", "getCityRelatedPlaces.xqy");
+        queryMap.put("country related places", "getCountryRelatedPlaces.xqy");
 
    }
 
