@@ -850,4 +850,8 @@ public class ResultsPage extends AbstractPage {
 //            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),officeAdd.get(i).getText());
 //        }
     }
+
+    public void verifyToolTipClickToView(){
+        assertEquals("Click to view office",getDriver().findElement(office_current_page_search_results_count_xpath).getAttribute("title"));
+    }
 }
