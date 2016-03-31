@@ -7,12 +7,14 @@ So that I can achieve a business goal mentioned in the story
 JIRA ID - ZEUS-259 - Admin can search for taxonomy by name
 JIRA ID - ZEUS-211 - Admin user can view a taxonomy
 JIRA ID - ZEUS-506 - Taxonomies - The taxonomy list is not sorted.
+JIRA ID - ZEUS-501 - The text for "Choose a Taxonomy" should be in black. Currently it is in grey.
 
-Scenario: View for taxonomy by name
+Scenario: View for taxonomy by name and verify "Choose a Taxonomy" text color
 Given a user is on the search page
 When the user clicks on the admin tab in the search page
 And the user clicks on the taxonomies tab in the data area
-And the user clicks on the choose a taxonomy option
+Then the text Choose a Taxonomy should be in black color
+When the user clicks on the choose a taxonomy option
 Then the user should see the list of all existing taxonomies by name
 And the list should not have any duplicates
 
