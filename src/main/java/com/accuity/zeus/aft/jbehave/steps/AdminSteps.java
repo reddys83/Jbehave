@@ -26,7 +26,7 @@ public class AdminSteps extends AbstractSteps{
     @Then("the text Choose a Taxonomy should be in black color")
     public void verifyChooseATaxonomyTextColor(){
         getAdminPage().verifyChooseATaxonomyTextColor();
-    };
+    }
 
     @When("the user clicks on the taxonomies tab in the data area")
     public void clickOnTaxonomiesTab(){
