@@ -1,13 +1,21 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LegalEntitySteps extends AbstractSteps{
+
+    @Autowired
+    ApacheHttpClient apacheHttpClient;
+    @Autowired
+    Database database;
 
     @Then("the user should see the legal entity's entity types as: $legalEntityEntities")
     public void verifyLegalEntityEntities(ExamplesTable legalEntities) {
@@ -59,11 +67,15 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyNoLegalEntityLocations();
     }
 
-    @Then("the user should see the legal entity's trust power as: $legalEntityTrustPowers")
-    public void verifyLegalEntityTrustPowers(ExamplesTable legalEntityTrustPowers) {
-        getLegalEntityPage().verifyLegalEntityTrustPowers(legalEntityTrustPowers);
-    }
+//    @Then("the user should see the legal entity's trust power as: $legalEntityTrustPowers")
+//    public void verifyLegalEntityTrustPowers(ExamplesTable legalEntityTrustPowers) {
+//        getLegalEntityPage().verifyLegalEntityTrustPowers(legalEntityTrustPowers);
+//    }
 
+    @Then("the user should see the legal entity's trust powers")
+    public void verifyLegalEntityTrustPowersfromDB(@Named("fid") String searchedEntity) {
+        getLegalEntityPage().verifyLegalEntityTrustPowersfromDB(database, apacheHttpClient, searchedEntity);
+    }
     @Then("the user should not see the legal entity's trust powers")
     public void verifyNoLegalEntityTrustPowers(){
         getLegalEntityPage().verifyNoLegalEntityTrustPowers();

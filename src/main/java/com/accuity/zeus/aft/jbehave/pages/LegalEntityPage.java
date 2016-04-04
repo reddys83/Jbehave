@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.w3c.dom.Document;
+
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -213,12 +215,26 @@ public class LegalEntityPage extends AbstractPage {
         assertEquals("MIN ACCOUNT SIZE ($)", getTextOnPage(legalEntity_trustPower_minAccountSize_label_xpath));
     }
 
-    public void verifyLegalEntityTrustPowers(ExamplesTable legalEntityTrustPowers)
-    {
-        verifyLegalEntityTrustPowersLabels();
-        assertEquals(legalEntityTrustPowers.getRow(0).values().toString().replace("[", "").replace("]", "").replace(",", "").trim(), getTextOnPage(legalEntity_trustPower_values_list_xpath).replace(",", "").trim());
+//    public void verifyLegalEntityTrustPowers(ExamplesTable legalEntityTrustPowers)
+//    {
+//        verifyLegalEntityTrustPowersLabels();
+//        assertEquals(legalEntityTrustPowers.getRow(0).values().toString().replace("[", "").replace("]", "").replace(",", "").trim(), getTextOnPage(legalEntity_trustPower_values_list_xpath).replace(",", "").trim());
+//
+//    }
 
+    public void verifyLegalEntityTrustPowersfromDB(Database database, ApacheHttpClient apacheHttpClient, String searchedEntity) {
+
+        verifyLegalEntityTrustPowersLabels();
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "get Trust Powers for Legal Entity", "fid", searchedEntity);
+        String powersGrantedValue=getNodeValueByTagName(document,"powersGranted");
+        String powersFullValue=getNodeValueByTagName(document,"powersFull");
+        String powersUsedValue=getNodeValueByTagName(document,"powersUsed");
+        String professionalValue=getNodeValueByTagName(document,"professional");
+        String administrativeValue=getNodeValueByTagName(document,"administrative");
+        String minAccountSizeValue=getNodeValueByTagName(document,"minAccountSize");
+       assertEquals(powersGrantedValue+" "+powersFullValue+" "+powersUsedValue+" "+professionalValue+" "+administrativeValue+" "+minAccountSizeValue,getTextOnPage(legalEntity_trustPower_values_list_xpath).replace(",", "").trim());
     }
+
 
     public void verifyNoLegalEntityTrustPowers() {
         verifyLegalEntityTrustPowersLabels();

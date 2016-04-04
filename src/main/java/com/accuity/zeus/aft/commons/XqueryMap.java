@@ -61,7 +61,7 @@ public class XqueryMap {
         queryMap.put("area related places","getAreaRelatedPlaces.xqy");
         queryMap.put("city related places", "getCityRelatedPlaces.xqy");
         queryMap.put("country related places", "getCountryRelatedPlaces.xqy");
-
+        queryMap.put("get Trust Powers for Legal Entity", "getLegalEntityTrustPowers.xqy");
    }
 
     public String getXquery(String key){
