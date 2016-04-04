@@ -235,7 +235,6 @@ public class LegalEntityPage extends AbstractPage {
        assertEquals(powersGrantedValue+" "+powersFullValue+" "+powersUsedValue+" "+professionalValue+" "+administrativeValue+" "+minAccountSizeValue,getTextOnPage(legalEntity_trustPower_values_list_xpath).replace(",", "").trim());
     }
 
-
     public void verifyNoLegalEntityTrustPowers() {
         verifyLegalEntityTrustPowersLabels();
         try {
