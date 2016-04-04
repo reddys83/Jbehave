@@ -69,6 +69,8 @@ public class OfficesPage extends AbstractPage {
     private By office_locations_summary_value_xpath = By.xpath("//li[h2='Summary']/table/tbody/tr/td[2]");
     private By office_locations_summaries_xpath = By.xpath("//li[h2='Summary']/table/tbody/tr");
     private By office_address_label_xpath = By.xpath("//*[@id='subEntityList-list']//table/thead/tr/th[3]");
+    private By office_locationSummaries_list_values_xpath=By.xpath(".//*[@id='content']//div[contains(@class,'location-summary')]");
+
 
 
     public OfficesPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
@@ -241,17 +243,31 @@ public class OfficesPage extends AbstractPage {
         }
     }
 
+    public void verifyNoOfficeLocationSummary() {
+        try {
+            assertFalse(getDriver().findElement(office_locationSummaries_list_values_xpath).isDisplayed());
+        }catch (NoSuchElementException e){
+
+        }
+    }
     public void verifyOfficeAddressPostalCode(String postalCode) {
         assertEquals("Postal Code " + postalCode, getDriver().findElement(office_locations_postal_code_1_xpath ).getText());
     }
 
     public void clickOnAddressLabel(){
         try{
-        Thread.sleep(1000);
-        getDriver().findElement(office_address_label_xpath).click();
-    }catch(InterruptedException e){
-        e.printStackTrace();
+            Thread.sleep(1000);
+            getDriver().findElement(office_address_label_xpath).click();
+        }catch(InterruptedException e){
+            e.printStackTrace();
         }
+    }
+
+    public void verifyOfficeLocationSummary(ExamplesTable officeLocationSummary) {
+System.out.println(officeLocationSummary.getRow(0).values().toString().replace("[", "").replace("]", "").replace(",", "").trim());
+        System.out.println(getTextOnPage(office_locationSummaries_list_values_xpath).replace(",", "").trim());
+        assertEquals(officeLocationSummary.getRow(0).values().toString().replace("[", "").replace("]", "").replace(",", "").trim(), getTextOnPage(office_locationSummaries_list_values_xpath).replace(",", "").trim());
+
     }
 
 }

@@ -117,5 +117,14 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().clickOnAddressLabel();
     }
 
-  }
+    @Then("the user should see the office's location summary as: $officeLocationSummary")
+    public void verifyOfficeLocationSummary(ExamplesTable officeLocationSummary){
+        getOfficesPage().verifyOfficeLocationSummary(officeLocationSummary);
+    }
+
+    @Then("the user should not see the office's location summary")
+    public void verifyNoOfficeLocationSummary(){
+        getOfficesPage().verifyNoOfficeLocationSummary();
+    }
+}
 
