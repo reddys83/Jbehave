@@ -36,8 +36,8 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 Then the user should see the office's location summary as:
 
-LABEL|TYPE1|VALUE1|TYPE2|VALUE2|
-LOCATION SUMMARY|BranchSummary|USA 3|BranchSummary|USA 4|
+LABEL|TYPE1|VALUE1|TYPE2|VALUE2|TYPE3|VALUE3|TYPE4|VALUE4|TYPE5|VALUE5|TYPE6|VALUE6|
+LOCATION SUMMARY|BranchSummary|This a test Branch Summary|Number Of Branches|10|Branches in City|10|Branches in Country|10|Agency Summary|This is a test summary|Rep Office Summary|This is a test summary|
 
 Examples:
 |entity|searchBy|fid|
