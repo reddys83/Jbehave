@@ -81,30 +81,8 @@ public class LegalEntityPage extends AbstractPage {
     private By credit_rating_section_xpath = By.xpath("//li[h1='Credit Rating']");
 
     private By office_link_xpath = By.id("office-link");
-    private By legalEntity_basicInfo_status_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[1]/th");
-    private By legalEntity_basicInfo_status_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[1]/td");
-    private By legalEntity_basicInfo_claimedDate_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[2]/th");
-    private By legalEntity_basicInfo_claimedDate_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[2]/td");
-    private By legalEntity_basicInfo_charteredDate_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[3]/th");
-    private By legalEntity_basicInfo_charteredDate_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[3]/td");
-    private By legalEntity_basicInfo_charterType_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[4]/th");
-    private By legalEntity_basicInfo_charterType_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[4]/td");
-    private By legalEntity_basicInfo_fatcastatus_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[5]/th");
-    private By legalEntity_basicInfo_fatcastatus_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[5]/td");
-    private By legalEntity_basicInfo_insuranceType_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[6]/th");
-    private By legalEntity_basicInfo_insuranceType_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[6]/td");
-    private By legalEntity_basicInfo_ownershipType_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[7]/th");
-    private By legalEntity_basicInfo_ownershipType_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[7]/td");
     private By legalEntity_basicInfo_leadInstitution_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[8]/th");
     private By legalEntity_basicInfo_leadInstitution_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[8]/td");
-    private By legalEntity_basicInfo_addInfo_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[9]/th");
-    private By legalEntity_basicInfo_addInfo_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[9]/td");
-    private By legalEntity_basicInfo_countryOfOperation_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[10]/th");
-    private By legalEntity_basicInfo_countryOfOperation_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[10]/td");
-    private By legalEntity_basicInfo_headOffice_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[11]/th");
-    private By legalEntity_basicInfo_addressLine1_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[11]/td/ul/li[1]");
-
-
     private By legalEntity_basicInfo_leftContainer_container_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody");
 
 
