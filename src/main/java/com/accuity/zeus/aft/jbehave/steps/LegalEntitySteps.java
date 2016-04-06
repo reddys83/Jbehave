@@ -1,13 +1,22 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 
 @Component
 public class LegalEntitySteps extends AbstractSteps{
+
+    @Autowired
+    com.accuity.zeus.aft.io.ApacheHttpClient apacheHttpClient;
+    @Autowired
+    Database database;
+
 
     @Then("the user should see the legal entity's entity types as: $legalEntityEntities")
     public void verifyLegalEntityEntities(ExamplesTable legalEntities) {
@@ -191,6 +200,16 @@ public class LegalEntitySteps extends AbstractSteps{
     @When("the user clicks on the offices link in the legal entity page")
     public void clickOnOfficesLink(){
         setOfficesPage(getLegalEntityPage().clickOnOfficesLink());
+    }
+
+    @Then("the user verifies lead institution value with database <fid>")
+    public void getDocumentLeadInstitution(@Named("fid") String fid) {
+        getLegalEntityPage().verifyLeadInstitution(fid);
+    }
+
+    @Then("the user verifies basic info for legal entity left column <fid>")
+    public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){
+        getLegalEntityPage().verifyBasicInforLeftColumn(fid);
     }
 
 

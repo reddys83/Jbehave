@@ -11,6 +11,7 @@ JIRA ID - ZEUS-384 - User can view websites of legal entity
 JIRA ID - ZEUS-735 - Code shouldn't assume head office fid is of a specific format
 JIRA ID - ZEUS-624 - Legal Entity Basic Info - The head office address should respect the UseInAddress.
 JIRA ID - ZEUS-793 - Legal Entity Basic Info - Head Office address should respect the @position for displaying the postal code.
+JIRA ID - ZEUS-877 - View Legal Entity - Lead Institution
 
 Scenario: Verify the basic info for legalEntity
 Given a user is on the search page
@@ -202,3 +203,37 @@ Then the user should see the Head Office of a legal entity as Gp Building, No.30
 Examples:
 |entity|searchBy|fid|
 |1|fid|1|
+
+Scenario: Verify the lead institution is been displayed only when there is relatinoship with other legal entity.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+Then the user should see the message you can search for a legal entity at any time using the header search
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+Then the user verifies lead institution value with database <fid>
+
+Examples:
+|entity|searchBy|fid|
+|1038|fid|1038|
+
+
+Scenario: Verifing data displayed on legal entity page left column with database.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+Then the user should see the message you can search for a legal entity at any time using the header search
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+Then the user verifies basic info for legal entity left column <fid>
+
+Examples:
+|entity|searchBy|fid|
+|1038|fid|1038|
+|1717|fid|1717|
