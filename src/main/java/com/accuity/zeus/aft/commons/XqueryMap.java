@@ -61,6 +61,8 @@ public class XqueryMap {
         queryMap.put("area related places","getAreaRelatedPlaces.xqy");
         queryMap.put("city related places", "getCityRelatedPlaces.xqy");
         queryMap.put("country related places", "getCountryRelatedPlaces.xqy");
+        queryMap.put("get country places type", "getCountryPlacesType.xqy");
+        queryMap.put("get country places details","getCountryPlacesDetails.xqy");
 
    }
 

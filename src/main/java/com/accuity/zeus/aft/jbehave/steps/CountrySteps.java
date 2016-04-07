@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -269,7 +270,6 @@ public class CountrySteps extends AbstractSteps{
     public void clickOnCountryPayments() {
         getCountryPage().clickOnCountryPayments();
     }
-
     @Then("the user should see the country's payments iban status as $status")
     public void verifyCountryPaymentsIbanStatus(@Named("status") String status) {
         getCountryPage().verifyCountryPaymentsIbanStatus(status);
@@ -407,6 +407,16 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyCountryNameTypesList();
     }
 
+    @Then("the user should see the values for type dropdown from COUNTRY_RELATED_PLACE_TYPE")
+    public void verifyCountryPlacesTypeList() {
+        getCountryPage().verifyCountryPlacesTypeList();
+    }
+
+    @Then("the user should see the values for details dropdown from COUNTRY_RELATED_PLACE_SUBTYPE")
+    public void verifyCountryPlacesDetailsList() {
+        getCountryPage().verifyCountryplacesDetailsList();
+    }
+
     @Then("the user should see the country identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO")
     public void verifyCountryIdentifierTypesList(){
         getCountryPage().verifyCountryIdentifierTypesList(database, apacheHttpClient);
@@ -471,6 +481,93 @@ public class CountrySteps extends AbstractSteps{
     @When("the user clicks on the add new regions button in the country basic info page")
     public void clickOnAddRegionsButton() {
         getCountryPage().clickOnAddRegionsButton();
+    }
+
+    @When("the user clicks on new country places type drop-down")
+    public void clickOnNewCountryPlaceTypeDropdown() {
+        getCountryPage().clickOnNewCountryPlaceTypeDropdown();
+    }
+
+    @When("the user selects type value as <PlaceType> in the places for country")
+    public void selectsTypeFromDropdown(@Named("PlaceType") String PlaceType) {
+        getCountryPage().selectsPlacesTypeFromDropdwon(PlaceType);
+    }
+
+    @When("the user clicks on the country drop down in the places for country")
+    public void clicksOnCountryInPlacesForCountry() {
+        getCountryPage().clicksOnCountryInPlacesForCountry();
+    }
+
+    @Then("the user should see the list of all existing countries by full name in places for country")
+    public void verifyCountryListInPlacesForCountry() {
+        getCountryPage().verifyCountryListInPlacesForCountry();
+    }
+
+    @Then("the user should see the list of all existing area for the selected country by full name in places for country")
+    public void verifyAreaListInPlacesForCountry() {
+        getCountryPage().verifyAreaListInPlacesForCountry();
+    }
+
+    @Then("the user should see the list of all existing city for the selected area by full name in places for country")
+    public void verifyCityListInPlacesForCountry() {
+        getCountryPage().verifyCityListInPlacesForCountry();
+    }
+
+
+    @When("the user selects the country <countryPlaces> in the places for country")
+    public void selectsCountryInPlacesForCountry(@Named("countryPlaces") String countryPlaces) {
+        getCountryPage().selectsCountryInPlacesForCountry(countryPlaces);
+    }
+
+    @When("the user selects area <areaPlaces> dropdown in places for country")
+    public void selectsAreaInPlacesForCountry(@Named("areaPlaces") String areaPlaces) {
+        getCountryPage().selectsAreaInPlacesForCountry(areaPlaces);
+    }
+
+    @When("the user selects city <cityPlaces> dropdown in the places for country")
+    public void selectsCityInPlacesForCountry(@Named("cityPlaces") String cityPlaces) {
+        getCountryPage().selectsCityInPlacesForCountry(cityPlaces);
+    }
+    @When("the user clicks on go button in places for country")
+     public void clicksOnGoButton() {
+        getCountryPage().clicksOnGoButton();
+    }
+
+    @When("the user clicks on edit button in places for country")
+    public void clicksOnEditButton() {
+        getCountryPage().clicksOnEditButton();
+    }
+
+    @Then("the user should see place as $place in places for country")
+    public void verifyPlaceInPlacesForCountry(@Named("place") String place) {
+        getCountryPage().verifyPlaceInPlacesForCountry(place);
+    }
+
+    @When("the user clicks on area drop down in the places for country")
+    public void clicksOnAreaDropdownInPlacesForCountry() {
+        getCountryPage().clicksOnAreaDropdownInPlacesForCountry();
+    }
+
+    @When("the user clicks on city drop down in the places for country")
+    public void clicksOnCityDropdownInPlacesForCountry() {
+        getCountryPage().clicksOnCityDropdownInPlacesForCountry();
+    }
+
+    @When("the user clicks on new country places details drop-down")
+    public void clickOnNewCountryPlaceDetatilsDropdown() {
+        getCountryPage().clickOnNewCountryPlaceDetatilsDropdown();
+    }
+
+    @When("the user clicks on the add new places button in the places for country")
+    public void clickOnAddPlacesButton() {
+        getCountryPage().clickOnAddPlacesButton();
+    }
+
+    @Then("the user should see the error message required for type in places for country")
+    @Alias("the user should see the error message required for place in places for country")
+    public void verifyRequiredErrorMessageForType()
+    {
+        getCountryPage().verifyRequiredErrorMessageForType();
     }
 
     @When("the user selects region type as <regionType> in the drop down")
@@ -803,6 +900,11 @@ public class CountrySteps extends AbstractSteps{
     @When("the user clicks on delete country region type")
     public void userClicksOnDeleteCountryRegionType() {
         getCountryPage().userClicksOnDeleteCountryRegionType();
+    }
+
+    @When("the user clicks on delete country places type")
+    public void clicksOnDeleteCountryPlacesType() {
+        getCountryPage().clicksOnDeleteCountryPlacesType();
     }
 
     @Then("the user should see a new row with day drop-down list with all days and hours with values in half hour increments")
