@@ -193,6 +193,19 @@ public class LegalEntitySteps extends AbstractSteps{
         setOfficesPage(getLegalEntityPage().clickOnOfficesLink());
     }
 
+    @When("the user selects lead institution value <leadInstitutionflag> in the basicinfo legalentity page")
+    public void selectLegalEntityLeadInstitutionFlag(@Named("leadInstitutionflag") String leadInstitutionflag){
+        getLegalEntityPage().selectLegalEntityLeadInstitutionFlag(leadInstitutionflag);
+    }
 
+    @Then("the user should see the legalentity's lead institution value as in $source document with fid<fid>")
+    public void verifyEditLegalEntityLeadInstitutionFlagInZeus(@Named("fid") String fid,@Named("source") String source){
+        getLegalEntityPage().verifyEditLegalEntityLeadInstitutionFlagInDB(fid,source);
+    }
+
+    @Then("the user should see the legalentity's lead institution value as <leadInstitutionflag>")
+    public void verifyEditLegalEntityLeadInstitutionFlag(@Named("leadInstitutionflag") String leadInstitutionflag){
+        getLegalEntityPage().verifyEditLegalEntityLeadInstitutionFlag(leadInstitutionflag);
+    }
 
 }

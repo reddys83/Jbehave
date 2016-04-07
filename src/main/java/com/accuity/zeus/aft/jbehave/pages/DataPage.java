@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
 
+import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
@@ -1014,10 +1015,10 @@ public class DataPage extends AbstractPage {
         attemptClick(confirm_button_xpath);
     }
 
-    public void getDocument(String xqueryName, String name) {
-
+   public void getDocument(String xqueryName, String param, String searchValue) {
+        ParamMap paramMap = new ParamMap();
         List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("name", name));
+        nvPairs.add(new BasicNameValuePair(paramMap.getParam(param),selectedEntity ));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
 
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
