@@ -393,7 +393,7 @@ public class LegalEntityPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legalentity LeadInstitution flag", nvPairs);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get lead institution from legalEntity", nvPairs);
         assertEquals(getNodeValueByTagName(document,"leadInstitution"),getSelectedRadioValue(legalEntity_leadinstitution_radio_options_xpath));
 
     }
