@@ -1190,7 +1190,6 @@ public class DataPage extends AbstractPage {
         }
     }
     public void verifySummaryConfirmationModal(ExamplesTable Summary) {
-        System.out.println("in verifySummaryConfirmationModal");
         List<WebElement> confirmChanges = getDriver().findElements(countryBasicInfo_confirmationModal_summary_xpath);
         for(int i=0;i<Summary.getRowCount();i++)
         {
