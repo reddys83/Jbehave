@@ -81,8 +81,8 @@ public class LegalEntityPage extends AbstractPage {
     private By credit_rating_section_xpath = By.xpath("//li[h1='Credit Rating']");
 
     private By office_link_xpath = By.id("office-link");
-    private By legalEntity_basicInfo_leadInstitution_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[8]/th");
-    private By legalEntity_basicInfo_leadInstitution_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody/tr[8]/td");
+    private By legalEntity_basicInfo_leadInstitution_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Lead Institution']");
+    private By legalEntity_basicInfo_leadInstitution_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Lead Institution']/td");
     private By legalEntity_basicInfo_leftContainer_container_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody");
 
 
@@ -372,22 +372,43 @@ public class LegalEntityPage extends AbstractPage {
         return new OfficesPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(),getHeraApi());
     }
 
-    public void verifyLeadInstitution(String fid) {
+
+
+
+    public void verifyBasicInforLeftColumn(String fid) {
         try {
-            Thread.sleep(3000L);
+            Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Document document;
-        document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "get legal entity resource", "fid", fid);
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
-        if(document!=null) {
-        Document legalEntity = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,"get lead institution from legalEntity",nvPairs);
-            assertTrue(getDriver().findElement(legalEntity_basicInfo_leadInstitution_label_xpath).isDisplayed());
-            assertEquals(convertingUpperCaseIntialCharacter(legalEntity.getElementsByTagName("leadInstitution").item(0).getTextContent()),getDriver().findElement(legalEntity_basicInfo_leadInstitution_value_xpath).getText());
+        fetchingIndRecordsFromContainerUpperCaseConversion(legalEntity_basicInfo_leftContainer_container_xpath,"status",nvPairs,"status");
+        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Claimed Est Date",nvPairs,"claimedEstDate");
+        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Chartered Date",nvPairs,"characteredDate");
+//        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Charter Type",nvPairs,"charterType");
+        fetchingIndRecordsFromContainerUpperCaseConversion(legalEntity_basicInfo_leftContainer_container_xpath,"FATCA Status",nvPairs,"fatcaStatus");
+        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Insurance Type",nvPairs,"insuranceType");
+        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Ownership Type",nvPairs,"organisationType");
+        fetchingIndRecordsFromContainerUpperCaseConversion(legalEntity_basicInfo_leftContainer_container_xpath,"Lead Institution",nvPairs,"leadInstitution");
+        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Add Info",nvPairs,"additionalinfo");
+        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Country of Operations",nvPairs,"countryOfOperation");
+        fetchingHeadOfficeAddressFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Head Office",nvPairs,"headOfficeaddressLine1");
 
+    }
+    /*
+    *   Need to call this method only when value displayed on the front end has the first letter in upper case
+    *
+    * */
+    public void fetchingIndRecordsFromContainerUpperCaseConversion(By containerPath,String labelText,List<NameValuePair> nvPairs,String xqueryparameterName){
+        List<WebElement> tableContainer = getDriver().findElement(containerPath).findElements(By.tagName("tr"));
+        Document document= apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,"get legal entity basic info left column",nvPairs);
+        for(int i=0;i<tableContainer.size();i++){
+            if(tableContainer.get(i).findElement(By.tagName("th")).getText().equalsIgnoreCase(labelText)){
+            assertEquals(convertingUpperCaseIntialCharacter(document.getElementsByTagName(xqueryparameterName).item(0).getTextContent()), tableContainer.get(i).findElement(By.tagName("td")).getText());
+                break;
+            }
         }
     }
 
@@ -399,43 +420,9 @@ public class LegalEntityPage extends AbstractPage {
         return inputString;
     }
 
-    public void verifyBasicInforLeftColumn(String fid) {
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        fetchingIndRecordsFromContainerUpperCaseConversion(legalEntity_basicInfo_leftContainer_container_xpath,"status",fid,"status");
-        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Claimed Est Date",fid,"claimedEstDate");
-        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Chartered Date",fid,"characteredDate");
-//        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Charter Type",fid,"charterType");
-        fetchingIndRecordsFromContainerUpperCaseConversion(legalEntity_basicInfo_leftContainer_container_xpath,"FATCA Status",fid,"fatcaStatus");
-        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Insurance Type",fid,"insuranceType");
-        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Ownership Type",fid,"organisationType");
-        fetchingIndRecordsFromContainerUpperCaseConversion(legalEntity_basicInfo_leftContainer_container_xpath,"Lead Institution",fid,"leadInstitution");
-        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Add Info",fid,"additionalinfo");
-        fetchingIndRecordsFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Country of Operations",fid,"countryOfOperation");
-        fetchingHeadOfficeAddressFromContainer(legalEntity_basicInfo_leftContainer_container_xpath,"Head Office",fid,"headOfficeaddressLine1");
-
-    }
-    /*
-    *   Need to call this method only when value displayed on the front end has the first letter in upper case
-    *
-    * */
-    public void fetchingIndRecordsFromContainerUpperCaseConversion(By containerPath,String labelText,String fid,String xqueryparameterName){
+    public void fetchingIndRecordsFromContainer(By containerPath,String labelText,List<NameValuePair> nvPairs,String xqueryparameterName){
         List<WebElement> tableContainer = getDriver().findElement(containerPath).findElements(By.tagName("tr"));
-        Document document= apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "get legal entity basic info left column", "fid", fid);
-        for(int i=0;i<tableContainer.size();i++){
-            if(tableContainer.get(i).findElement(By.tagName("th")).getText().equalsIgnoreCase(labelText)){
-            assertEquals(convertingUpperCaseIntialCharacter(document.getElementsByTagName(xqueryparameterName).item(0).getTextContent()), tableContainer.get(i).findElement(By.tagName("td")).getText());
-                break;
-            }
-        }
-    }
-
-    public void fetchingIndRecordsFromContainer(By containerPath,String labelText,String fid,String xqueryparameterName){
-        List<WebElement> tableContainer = getDriver().findElement(containerPath).findElements(By.tagName("tr"));
-        Document document= apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "get legal entity basic info left column", "fid", fid);
+        Document document= apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column",nvPairs);
         for(int i=0;i<tableContainer.size();i++){
             if(tableContainer.get(i).findElement(By.tagName("th")).getText().equalsIgnoreCase(labelText)){
                 assertEquals(document.getElementsByTagName(xqueryparameterName).item(0).getTextContent(), tableContainer.get(i).findElement(By.tagName("td")).getText());
@@ -447,9 +434,9 @@ public class LegalEntityPage extends AbstractPage {
     *
     * This method is used for comparing address lines of head office only
     * */
-    public void fetchingHeadOfficeAddressFromContainer(By containerPath,String labelText,String fid,String xqueryparameterName){
+    public void fetchingHeadOfficeAddressFromContainer(By containerPath,String labelText,List<NameValuePair> nvPairs,String xqueryparameterName){
         List<WebElement> tableContainer = getDriver().findElement(containerPath).findElements(By.tagName("tr"));
-        Document document= apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "get legal entity basic info left column", "fid", fid);
+        Document document= apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column",nvPairs);
         for(int i=0;i<tableContainer.size();i++){
             if(tableContainer.get(i).findElement(By.tagName("th")).getText().equalsIgnoreCase(labelText)){
                 assertTrue(tableContainer.get(i).findElement(By.tagName("td")).getText().contains(document.getElementsByTagName(xqueryparameterName).item(0).getTextContent()));

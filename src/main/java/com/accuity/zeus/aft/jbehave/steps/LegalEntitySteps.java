@@ -202,15 +202,9 @@ public class LegalEntitySteps extends AbstractSteps{
         setOfficesPage(getLegalEntityPage().clickOnOfficesLink());
     }
 
-    @Then("the user verifies lead institution value with database <fid>")
-    public void getDocumentLeadInstitution(@Named("fid") String fid) {
-        getLegalEntityPage().verifyLeadInstitution(fid);
-    }
 
     @Then("the user verifies basic info for legal entity left column <fid>")
-    public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){
-        getLegalEntityPage().verifyBasicInforLeftColumn(fid);
-    }
+    public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getLegalEntityPage().verifyBasicInforLeftColumn(fid);}
 
 
 
