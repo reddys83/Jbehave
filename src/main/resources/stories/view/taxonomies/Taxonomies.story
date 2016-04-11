@@ -13,7 +13,7 @@ Scenario: View for taxonomy by name and verify "Choose a Taxonomy" text color
 Given a user is on the search page
 When the user clicks on the admin tab in the search page
 And the user clicks on the taxonomies tab in the data area
-Then the text Choose a Taxonomy should be in black color
+Then the user should be able to see text choose a taxonomy in black color
 When the user clicks on the choose a taxonomy option
 Then the user should see the list of all existing taxonomies by name
 And the list should not have any duplicates
