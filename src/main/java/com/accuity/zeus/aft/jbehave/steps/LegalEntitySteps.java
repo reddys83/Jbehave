@@ -5,9 +5,16 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.stereotype.Component;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import com.accuity.zeus.aft.io.Database;
 @Component
 public class LegalEntitySteps extends AbstractSteps{
+
+    @Autowired
+    com.accuity.zeus.aft.io.ApacheHttpClient apacheHttpClient;
+    @Autowired
+    Database database;
+
 
     @Then("the user should see the legal entity's entity types as: $legalEntityEntities")
     public void verifyLegalEntityEntities(ExamplesTable legalEntities) {
@@ -197,8 +204,11 @@ public class LegalEntitySteps extends AbstractSteps{
     public void selectLegalEntityLeadInstitutionFlag(@Named("leadInstitutionflag") String leadInstitutionflag){
         getLegalEntityPage().selectLegalEntityLeadInstitutionFlag(leadInstitutionflag);
     }
-
-    @Then("the user should see the legalentity's lead institution value as in $source document with fid<fid>")
+    @When("the user selects lead institution value other than default value in the basicinfo legalentity page")
+    public void changeLegalEntityLeadInstitutionFlag(){
+        getLegalEntityPage().changeLegalEntityLeadInstitutionFlag();
+    }
+    @Then("the user should see the legalentity's lead institution value as in $source document with fid <fid>")
     public void verifyEditLegalEntityLeadInstitutionFlagInZeus(@Named("fid") String fid,@Named("source") String source){
         getLegalEntityPage().verifyEditLegalEntityLeadInstitutionFlagInDB(fid,source);
     }
@@ -208,4 +218,18 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyEditLegalEntityLeadInstitutionFlag(leadInstitutionflag);
     }
 
+    @Then("the user verifies lead institution value with database <fid>")
+    public void getDocumentLeadInstitution(@Named("fid") String fid) {
+        getLegalEntityPage().verifyLeadInstitution(fid);
+    }
+
+    @Then("the user should not see lead institution label and value")
+    public void verifyNoLeadInstitution() {
+        getLegalEntityPage().verifyNoLeadInstitution();
+    }
+
+    @Then("the user should return to edit legalentity page mode")
+    public void verifyLegalEntityEditPageMode(){
+        getLegalEntityPage().verifyLegalEntityEditPageMode();
+    }
 }

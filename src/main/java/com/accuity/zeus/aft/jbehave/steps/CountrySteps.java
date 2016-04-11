@@ -508,10 +508,7 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifySepaValues();
     }
 
-    @Then("the user should see the below summary changes in confirmation modal $Summary")
-    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
-        getCountryPage().verifySummaryConfirmationModal(Summary);
-    }
+
 
     @When("the user enters the demographic date later than today")
     public void entersDemographicDateLaterThanToday() {

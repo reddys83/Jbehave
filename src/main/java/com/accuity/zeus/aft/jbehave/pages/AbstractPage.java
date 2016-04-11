@@ -184,7 +184,11 @@ public abstract class AbstractPage {
 
     public String getNodeValueByTagName(Document document, String tagName)
     {
-        String nodeValue=(document.getElementsByTagName(tagName).getLength()==0?"":document.getElementsByTagName(tagName).item(0).getFirstChild().getNodeValue());
+        String nodeValue="";
+        if(document!=null)
+        {
+            nodeValue=(document.getElementsByTagName(tagName).getLength() == 0 ? "" : document.getElementsByTagName(tagName).item(0).getFirstChild().getNodeValue());
+        }
         return nodeValue;
     }
 
