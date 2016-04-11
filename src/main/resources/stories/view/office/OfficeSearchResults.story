@@ -175,7 +175,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
-Then the user should see the office location summaries for fid <fid>
+Then the user should see the office location summaries for fid <fid> from trusted document
 
 Examples:
 |entity|searchBy|fid|
@@ -191,7 +191,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
-Then the user should see the office location summaries for fid <fid>
+Then the user should see the office location summaries for fid <fid> from trusted document
 
 Examples:
 |entity|searchBy|fid|
