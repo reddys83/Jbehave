@@ -49,9 +49,9 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyLegalEntityOfferedServices(offeredServices);
     }
 
-    @Then("the user should see the legal entity's location summaries as: $legalEntityLocations")
-    public void verifyLegalEntityLocations(ExamplesTable legalEntityLocations){
-        getLegalEntityPage().verifyLegalEntityLocations(legalEntityLocations);
+    @Then("the user should see the legal entity's location summaries for fid <fid> from trusted document")
+    public void verifyLegalEntityLocations(@Named("fid") String fid){
+        getLegalEntityPage().verifyLegalEntityLocations(fid);
     }
 
     @Then("the user should not see the legal entity's location summaries")
