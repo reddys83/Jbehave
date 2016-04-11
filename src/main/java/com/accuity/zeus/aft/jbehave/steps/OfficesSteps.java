@@ -107,6 +107,12 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().verifyOfficeLocations(database, apacheHttpClient, selectedOffice);
     }
 
+    @Then("the user should see the office location summaries for fid <fid>")
+    public void verifyOfficeLocationSummary(@Named("fid") String officeFid){
+        getOfficesPage().verifyOfficeLocationsSummaryOnSearchResultsPage(officeFid);
+    }
+
+
     @Then("the user should see the office address postal code as $postalCode")
     public void verifyOfficeAddressPostalCode(@Named("postalCode") String postalCode){
         getOfficesPage().verifyOfficeAddressPostalCode(postalCode);
@@ -117,10 +123,10 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().clickOnAddressLabel();
     }
 
-    @Then("the user should see the office's location summary as: $officeLocationSummary")
-    public void verifyOfficeLocationSummary(ExamplesTable officeLocationSummary){
-        getOfficesPage().verifyOfficeLocationSummary(officeLocationSummary);
-    }
+//    @Then("the user should see the office's location summary as: $officeLocationSummary")
+//    public void verifyOfficeLocationSummary(ExamplesTable officeLocationSummary){
+//        getOfficesPage().verifyOfficeLocationSummary(officeLocationSummary);
+//    }
 
     @Then("the user should not see the office's location summary")
     public void verifyNoOfficeLocationSummary(){
