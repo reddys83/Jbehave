@@ -277,10 +277,4 @@ public class OfficesPage extends AbstractPage {
         }
     }
 
-//    public void verifyOfficeLocationSummary(ExamplesTable officeLocationSummary) {
-//
-//        assertEquals(officeLocationSummary.getRow(0).values().toString().replace("[", "").replace("]", "").replace(",", "").trim(), getTextOnPage(office_searchresults_locations_summary_title_xpath).replace(",", "").trim());
-//
-//    }
-
 }
