@@ -67,14 +67,9 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyNoLegalEntityLocations();
     }
 
-//    @Then("the user should see the legal entity's trust power as: $legalEntityTrustPowers")
-//    public void verifyLegalEntityTrustPowers(ExamplesTable legalEntityTrustPowers) {
-//        getLegalEntityPage().verifyLegalEntityTrustPowers(legalEntityTrustPowers);
-//    }
-
     @Then("the user should see the legal entity's trust powers")
     public void verifyLegalEntityTrustPowersfromDB(@Named("fid") String searchedEntity) {
-        getLegalEntityPage().verifyLegalEntityTrustPowersfromDB(database, apacheHttpClient, searchedEntity);
+        getLegalEntityPage().verifyLegalEntityTrustPowersfromDB(searchedEntity);
     }
     @Then("the user should not see the legal entity's trust powers")
     public void verifyNoLegalEntityTrustPowers(){
