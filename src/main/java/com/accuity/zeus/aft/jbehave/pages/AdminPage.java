@@ -56,6 +56,16 @@ public class AdminPage extends AbstractPage{
         attemptClick(taxonomies_tab_id);
     }
 
+    public void verifyChooseATaxonomyTextColor()
+    {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(getDriver().findElement(choose_taxonomy_option_xpath).getCssValue("color"),"rgba(0, 0, 0, 1)");
+    }
+
     public void clickOnChooseATaxonomy() {
         try {
             Thread.sleep(3000L);

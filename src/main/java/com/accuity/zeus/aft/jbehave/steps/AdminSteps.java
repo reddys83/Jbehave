@@ -23,6 +23,11 @@ public class AdminSteps extends AbstractSteps{
         getAdminPage().verifyTaxonomiesList(database, apacheHttpClient);
     }
 
+    @Then("the user should be able to see text choose a taxonomy in black color")
+    public void verifyChooseATaxonomyTextColor(){
+        getAdminPage().verifyChooseATaxonomyTextColor();
+    }
+
     @When("the user clicks on the taxonomies tab in the data area")
     public void clickOnTaxonomiesTab(){
         getAdminPage().clickOnTaxonomiesTab();
