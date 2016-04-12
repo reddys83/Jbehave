@@ -213,15 +213,11 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyEditLegalEntityLeadInstitutionFlagInDB(fid,source);
     }
 
-    @Then("the user should see the legalentity's lead institution value as <leadInstitutionflag>")
-    public void verifyEditLegalEntityLeadInstitutionFlag(@Named("leadInstitutionflag") String leadInstitutionflag){
-        getLegalEntityPage().verifyEditLegalEntityLeadInstitutionFlag(leadInstitutionflag);
+    @Then("the user should see leadInstitution value as <leadInstitutionflag> for fid <fid> in $source document")
+    public void getDocumentLeadInstitution(@Named("leadInstitutionflag") String leadInstitutionflag,@Named("fid") String fid,@Named("source") String source) {
+        getLegalEntityPage().verifyLeadInstitutionValuefromDB(leadInstitutionflag,fid,source);
     }
 
-    @Then("the user verifies lead institution value with database <fid>")
-    public void getDocumentLeadInstitution(@Named("fid") String fid) {
-        getLegalEntityPage().verifyLeadInstitution(fid);
-    }
 
     @Then("the user should not see lead institution label and value")
     public void verifyNoLeadInstitution() {

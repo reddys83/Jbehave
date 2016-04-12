@@ -28,8 +28,7 @@ And the user selects lead institution value <leadInstitutionflag> in the basicin
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
-Then the user should see the legalentity's lead institution value as <leadInstitutionflag>
-And the user verifies lead institution value with database <fid>
+Then the user should see leadInstitution value as <leadInstitutionflag> for fid <fid> in zeus document
 And the user reverts the changes to the document
 
 Examples:

@@ -385,6 +385,16 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyEditLegalEntityLeadInstitutionFlagInDB(String fid, String source)
     {
+
+        assertEquals(getLeadInstitutionFlagFromDB(fid,source),getSelectedRadioValue(legalEntity_leadinstitution_radio_options_xpath));
+
+    }
+
+    public void verifyLeadInstitutionValuefromDB(String leadInstitutionflag,String selectedEntity,String source){
+        assertEquals(getLeadInstitutionFlagFromDB(selectedEntity,source),leadInstitutionflag);
+    }
+
+    public String getLeadInstitutionFlagFromDB(String fid, String source){
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", source));
@@ -395,8 +405,7 @@ public class LegalEntityPage extends AbstractPage {
         }
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
         String leadInstitutionDBValue=getNodeValuesByTagName(document,"leadInstitution").size()==0?"":getNodeValuesByTagName(document,"leadInstitution").get(1);
-        assertEquals(leadInstitutionDBValue,getSelectedRadioValue(legalEntity_leadinstitution_radio_options_xpath));
-
+        return leadInstitutionDBValue;
     }
 
     public void verifyEditLegalEntityLeadInstitutionFlag(String leadInstitutionflag)
