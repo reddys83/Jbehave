@@ -15,14 +15,13 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 When the user clicks on the legal entity locations link in the navigation bar
-Then the user should see the legal entity's location summaries as:
-|TYPE|VALUE|
-|NumberOfBranches|76|
+Then the user should see the legal entity's location summaries for fid <fid> from trusted document
 
 
 Examples:
 |entity|searchBy|fid|
 |Kreissparkasse Göppingen|Name|3125|
+|26065|FID|26065|
 
 Scenario: Verify no legalEntity location summary
 Given a user is on the search page
