@@ -9,6 +9,7 @@ import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class LegalEntitySteps extends AbstractSteps{
 
@@ -201,5 +202,7 @@ public class LegalEntitySteps extends AbstractSteps{
     }
 
 
+    @Then("the user verifies basic info for legal entity left column <fid> from trusted document")
+    public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getLegalEntityPage().verifyBasicInforLeftColumn(fid);}
 
 }
