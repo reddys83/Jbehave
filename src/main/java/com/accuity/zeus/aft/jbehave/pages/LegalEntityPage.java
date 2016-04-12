@@ -232,11 +232,18 @@ public class LegalEntityPage extends AbstractPage {
         assertEquals("MIN ACCOUNT SIZE ($)", getTextOnPage(legalEntity_trustPower_minAccountSize_label_xpath));
     }
 
-    public void verifyLegalEntityTrustPowers(ExamplesTable legalEntityTrustPowers)
-    {
-        verifyLegalEntityTrustPowersLabels();
-        assertEquals(legalEntityTrustPowers.getRow(0).values().toString().replace("[", "").replace("]", "").replace(",", "").trim(), getTextOnPage(legalEntity_trustPower_values_list_xpath).replace(",", "").trim());
+    public void verifyLegalEntityTrustPowersfromDB(String searchedEntity) {
 
+        verifyLegalEntityTrustPowersLabels();
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "get Trust Powers for Legal Entity", "fid", searchedEntity);
+        String powersGrantedValue=getNodeValuesByTagName(document,"powersGranted").size()==0?"":getNodeValuesByTagName(document,"powersGranted").get(0);
+        String powersFullValue=getNodeValuesByTagName(document,"powersFull").size()==0?"":getNodeValuesByTagName(document,"powersFull").get(0);
+        String powersUsedValue=getNodeValuesByTagName(document,"powersUsed").size()==0?"":getNodeValuesByTagName(document,"powersUsed").get(0);
+        String professionalValue=getNodeValuesByTagName(document,"professional").size()==0?"":getNodeValuesByTagName(document,"professional").get(0);
+        String administrativeValue=getNodeValuesByTagName(document,"administrative").size()==0?"":getNodeValuesByTagName(document,"administrative").get(0);
+        String minAccountSizeValue=getNodeValuesByTagName(document,"minAccountSize").size()==0?"":getNodeValuesByTagName(document,"minAccountSize").get(0);
+
+       assertEquals(powersGrantedValue+" "+powersFullValue+" "+powersUsedValue+" "+professionalValue+" "+administrativeValue+" "+minAccountSizeValue,getTextOnPage(legalEntity_trustPower_values_list_xpath).replace(",", "").trim());
     }
 
     public void verifyNoLegalEntityTrustPowers() {
