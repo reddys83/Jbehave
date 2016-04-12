@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.w3c.dom.Document;
+
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -44,6 +46,8 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_locationSummaries_type_label_xpath = By.xpath(".//*[@id='content']//li[contains(h1,'Location Summaries')]//thead/tr/th[text()='Type']");
     private By legalEntity_locationSummaries_value_lable_xpath= By.xpath(".//*[@id='content']//li[contains(h1,'Location Summaries')]//thead/tr/th[text()='Value']");
     private By legalEntity_locationSummaries_list_values_xpath=By.xpath(".//*[@id='content']//li[contains(h1,'Location Summaries')]//tbody/tr");
+    private By legalEntity_locations_summary_type_xpath = By.xpath(".//*[@id='content']//li[contains(h1,'Location Summaries')]//tbody/tr/td[1]");
+    private By legalEntity_locations_summary_value_xpath = By.xpath(".//*[@id='content']//li[contains(h1,'Location Summaries')]//tbody/tr/td[2]");
     private By legalEntity_trustPowers_link_id = By.id("legalEntityTrustPowers");
     private By legalEntity_trustPowers_label_xpath = By.xpath(".//*[@id='content']//h1/span[text()='Trust Powers']");
     private By legalEntity_trustPower_granted_label_xpath = By.xpath(".//*[@id='content']//th[text()='Granted']");
@@ -151,15 +155,20 @@ public class LegalEntityPage extends AbstractPage {
         assertEquals("VALUE", getTextOnPage(legalEntity_locationSummaries_value_lable_xpath));
     }
 
-    public void verifyLegalEntityLocations(ExamplesTable legalEntityLocations) {
+    public void verifyLegalEntityLocations(String selectedlegalEntity) {
         verifyLegalEntityLocationsLabel();
-        List<WebElement> legalEntityLocationsSummary = getDriver().findElements(legalEntity_locationSummaries_list_values_xpath);
-        assertTrue(legalEntityLocations.getRowCount() == legalEntityLocationsSummary.size());
-
-        for (int i=0;i<legalEntityLocations.getRowCount();i++)
-        {
-            assertEquals(legalEntityLocations.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(), legalEntityLocationsSummary.get(i).getText().replace(",", "").trim());
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "get Office Location Summary From LegalEntity", "fid", selectedlegalEntity);
+
+        for(int i=0; i<getDriver().findElements(legalEntity_locationSummaries_list_values_xpath).size(); i++){
+            assertEquals(document.getElementsByTagName("summaryType").item(i).getTextContent(),getDriver().findElements(legalEntity_locations_summary_type_xpath).get(i).getText());
+            assertEquals(document.getElementsByTagName("summaryValue").item(i).getTextContent(),getDriver().findElements(legalEntity_locations_summary_value_xpath).get(i).getText());
+        }
+
     }
 
     public void verifyNoLegalEntityLocations() {

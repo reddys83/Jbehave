@@ -8,6 +8,7 @@ JIRA ID - ZEUS-430 - User view list of offices in legal entity
 JIRA ID - ZEUS-549 - User can sort office results by FID [Which includes ZEUS - 666]
 JIRA ID - ZEUS-559 - User can open multiple offices in new tabs from results
 JIRA ID - ZEUS-617 - list offices types alphabetically when multiple for one office
+JIRA ID - ZEUS-690 - Display Location Summary on Office Search screen
 
 Scenario: Verify Office Results
 Meta:
@@ -165,3 +166,50 @@ Then the user should see the office header with <entity>, <headOfficeAddress>, <
 Examples:
 |entity|searchBy|fid|officeFid|headOfficeAddress|officeTfpid|
 |Bank of America National Association|Name|1038|1038-51|||
+
+Scenario: Verify a single Office lcoation summary on Office Search Results page
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+Then the user should see the office location summaries for fid <fid> from trusted document
+
+Examples:
+|entity|searchBy|fid|
+|Kreissparkasse Göppingen|Name|3125|
+
+
+Scenario: Verify multiple Office lcoation summaries on Office Search Results page
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+Then the user should see the office location summaries for fid <fid> from trusted document
+
+Examples:
+|entity|searchBy|fid|
+|26065|FID|26065|
+
+
+Scenario: Verify no Office location summary on Office Search Results page
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+Then the user should not see the office's location summary
+
+Examples:
+|entity|searchBy|fid|
+|Associated Commercial Finance Inc|Name|91832|
