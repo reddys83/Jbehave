@@ -200,8 +200,7 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the $label of a city as $value")
     @Aliases(values = {"the user should see the $label of an office as $value",
             "the user should see the $label of an area as $value",
-            "the user should see the $label of an sub-area as $value",
-            "the user should see the $label of a legal entity as $value"})
+            "the user should see the $label of an sub-area as $value"})
     public void verifyBasicInfo(@Named("label") String label, @Named("value") String value) {
         getDataPage().verifyBasicInfo(label, value);
     }
@@ -698,7 +697,7 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clicksOnAllLink();
     }
 
-    @Then("the user should see the basic info for selected legal entity")
+    @Then("the user should see the basic info label for selected legal entity")
     @Alias("the user should see the basic info for selected office")
     public void verifyBasicInfo() {
         getDataPage().verifyBasicInfo();

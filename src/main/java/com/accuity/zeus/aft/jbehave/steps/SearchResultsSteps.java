@@ -386,4 +386,9 @@ public class SearchResultsSteps extends AbstractSteps{
     public void verifyOfficeAddressSortingDescending(){
         getResultsPage().verifySortDscOrderByAddress(database, apacheHttpClient, searchedEntity);
     }
+
+    @Then("the user should see the click to view tooltip on office search page")
+    public void verifyClickToViewOfficeSearch(){
+        getResultsPage().verifyToolTipClickToView();
+    }
 }

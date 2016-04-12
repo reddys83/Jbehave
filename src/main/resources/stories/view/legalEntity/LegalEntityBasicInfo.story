@@ -13,7 +13,7 @@ JIRA ID - ZEUS-624 - Legal Entity Basic Info - The head office address should re
 JIRA ID - ZEUS-793 - Legal Entity Basic Info - Head Office address should respect the @position for displaying the postal code.
 JIRA ID - ZEUS-877 - View Legal Entity - Lead Institution
 
-Scenario: Verify the basic info for legalEntity
+Scenario: Verify the basic info for legalEntity (BUG : ZEUS-950)
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -24,7 +24,8 @@ And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
 
-Then the user should see the basic info for selected legal entity
+Then the user should see the basic info label for selected legal entity
+Then the user verifies basic info for legal entity left column <fid> from trusted document
 
 And the user should see the legal entity's names as:
 |TYPE|VALUE|
@@ -51,16 +52,6 @@ And the user should see the legal entity's virtual presence as:
 |TYPE|RANK|INFO|VALUE|
 |Website||dnb.no|http://www.dnb.no|
 
-And the user should see the Status of a legal entity as Active
-And the user should see the Claimed Est Date of a legal entity as 1990
-And the user should see the Chartered Date of a legal entity  as 1990
-And the user should see the Charter Type of a legal entity as Us State Chartered Bank
-And the user should see the FATCA Status of a legal entity as Inactive
-And the user should see the Insurance Type of a legal entity as PSAIC
-And the user should see the Ownership Type of a legal entity as Corporate Bank
-And the user should see the Lead Institution of a legal entity as False
-And the user should see the Add Info of a legal entity as Ultimate Parent Company: The Bank of Nova Scotia 1709 Hollis Street, Halifax, NS B3J 3B7, Canada
-And the user should see the Country of Operations of a legal entity as Norway
 And the user should see the legal entity corporate statement as Ultimate Parent Company: The Bank of Nova Scotia 1709 Hollis Street, Halifax, NS B3J 3B7, Canada
 
 Examples:
@@ -94,8 +85,8 @@ Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
 
 Then the user should see the legal entity header with <entity>, <headOfficeAddress>, <fid> and <tfpid>
-And the user should see the basic info for selected legal entity
-And the user should see the Head Office of a legal entity as Budapester Strasse 3510787, BerlinGermany(View Head Office)
+And the user should see the basic info label for selected legal entity
+Then the user verifies basic info for legal entity left column <fid> from trusted document
 
 When the user clicks on the view head office <viewHeadOffice> link for the selected legal entity
 Then the user should see the office header with <entity>, <headOfficeAddress>, <officeFid> and <officeTfpid>
@@ -114,7 +105,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-Then the user should see the basic info for selected legal entity
+Then the user should see the basic info label for selected legal entity
 Then the user should not see the legalEntity's headOffice link
 
 Examples:
@@ -198,7 +189,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-Then the user should see the Head Office of a legal entity as Gp Building, No.30, Kamala Iind Street, Chinna Chokkikulam(View Head Office)
+Then the user verifies basic info for legal entity left column <fid> from trusted document
 
 Examples:
 |entity|searchBy|fid|
@@ -216,7 +207,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-Then the user verifies basic info for legal entity left column <fid>
+Then the user verifies basic info for legal entity left column <fid> from trusted document
 
 Examples:
 |entity|searchBy|fid|
