@@ -13,6 +13,7 @@ Scenario: Verify the default Edit value and Save Lead Institution value for a le
        d. Select the value as False for Lead Institution flag and Save for a legalEntity with a default value as null
        e. Do not select any value and Save for a legalEntity with a default value as null
        f. Verify the save confirmation modal
+       g. Verify default Lead Institution value while editing the legal entity
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -39,7 +40,7 @@ Examples:
 |1165|FID|1165|false|
 |1165|FID|1165||
 
-Scenario: Verify that the Lead Institution label is not shown during edit mode for a legal entity which do not have a legal entity
+Scenario: Verify that the Lead Institution label is not shown during edit mode for a legal entity which do not have a lead Institution
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
