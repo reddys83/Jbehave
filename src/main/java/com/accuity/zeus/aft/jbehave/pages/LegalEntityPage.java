@@ -219,8 +219,6 @@ public class LegalEntityPage extends AbstractPage {
 
         verifyLegalEntityTrustPowersLabels();
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "get Trust Powers for Legal Entity", "fid", searchedEntity);
-         List<String> nodeValues=getNodeValuesByTagName(document,"type");
-
         String powersGrantedValue=getNodeValuesByTagName(document,"powersGranted").size()==0?"":getNodeValuesByTagName(document,"powersGranted").get(0);
         String powersFullValue=getNodeValuesByTagName(document,"powersFull").size()==0?"":getNodeValuesByTagName(document,"powersFull").get(0);
         String powersUsedValue=getNodeValuesByTagName(document,"powersUsed").size()==0?"":getNodeValuesByTagName(document,"powersUsed").get(0);
