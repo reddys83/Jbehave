@@ -17,7 +17,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 When the user clicks on the legal entity tust power link in the navigation bar
-Then the user should see the legal entity's trust powers
+Then the user should see the legal entity's trust powers for fid <fid> from trusted document
 
 Examples:
 |entity|searchBy|fid|

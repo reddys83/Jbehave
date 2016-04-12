@@ -67,7 +67,7 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyNoLegalEntityLocations();
     }
 
-    @Then("the user should see the legal entity's trust powers")
+    @Then("the user should see the legal entity's trust powers for fid <fid> from trusted document")
     public void verifyLegalEntityTrustPowersfromDB(@Named("fid") String searchedEntity) {
         getLegalEntityPage().verifyLegalEntityTrustPowersfromDB(searchedEntity);
     }
