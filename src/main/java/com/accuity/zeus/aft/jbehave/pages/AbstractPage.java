@@ -182,15 +182,20 @@ public abstract class AbstractPage {
         executor.executeScript(scriptSetAttrValue, webElement, attribute, value);
     }
 
-    public String getNodeValueByTagName(Document document, String tagName)
+    public List<String> getNodeValuesByTagName(Document document, String tagName)
     {
-        String nodeValue="";
-        if(document!=null)
+        ArrayList<String> nodeValues=new ArrayList<String>();
+        if((document!=null)&(document.getElementsByTagName(tagName).getLength() >1))
         {
-            nodeValue=(document.getElementsByTagName(tagName).getLength() == 0 ? "" : document.getElementsByTagName(tagName).item(0).getFirstChild().getNodeValue());
+            for (int i=0;i<document.getElementsByTagName(tagName).getLength();i++) {
+
+                nodeValues.add(document.getElementsByTagName(tagName).item(i).getFirstChild().getNodeValue());
+            }
         }
-        return nodeValue;
+        return nodeValues;
     }
+
+
 
     public void selectRadioButtonByValue(By by, String value)
     {
