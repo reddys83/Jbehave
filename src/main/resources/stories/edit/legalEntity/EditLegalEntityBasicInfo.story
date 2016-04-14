@@ -1,3 +1,11 @@
+Meta:@EditLegalEntityBasicInfo @Edit @legalEntity
+
+Narrative:
+As a user
+I want to perform an action
+So that I can achieve a business goal
+JIRA ID - ZEUS-906 - User can edit Legal Entity's Lead Institution flag
+
 Meta:@Design
 
 Scenario: Verify Legal Entity's Status dropdown values from lookup Status in the same order as taxonomy

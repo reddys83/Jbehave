@@ -90,8 +90,8 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_status_list_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='Status']/td/select/option");
     private By legalEntity_basicInfo_status_dropdown_xpath=By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='Status']/td/select");
 
-
-
+    private By legalEntity_leadinstitution_radio_options_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//input[@name='leadInstitution']");
+    private By countryBasicInfo_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
 
 
 
@@ -476,7 +476,10 @@ public class LegalEntityPage extends AbstractPage {
 
 
     public void enterValueInStatusDropdown(String word) {
+        //getDriver().findElement(legalEntity_basicInfo_status_dropdown_xpath).click();
         getDriver().findElement(legalEntity_basicInfo_status_dropdown_xpath).sendKeys(word);
+        //System.out.println("focus value"+getDriver().findElements(legalEntity_basicInfo_status_list_xpath).get(0).getCssValue("focus"));
+
 
     }
 
@@ -488,14 +491,15 @@ public class LegalEntityPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         assertTrue(getSelectedDropdownValue(legalEntity_basicInfo_status_dropdown_xpath).equalsIgnoreCase(status));
 
     }
 
-    public void verifyEditLegalEntityStatusValueFromDB(String fid,String source){
+    public void verifyEditLegalEntityStatusValueFromTrusted(String fid,String source){
 
       assertEquals(getLegalEntityStatusValueFromDB(fid,source),getSelectedDropdownValue(legalEntity_basicInfo_status_dropdown_xpath));
-//System.out.println("Value"+getAttributeValueByXpathFidAndTagname(fid,source,"summary/leadInstitution"));
+
         }
 
     public String getLegalEntityStatusValueFromDB(String fid, String source){
@@ -504,13 +508,55 @@ public class LegalEntityPage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("source", source));
 
         try {
-            Thread.sleep(2000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
         String statusValue=getNodeValuesByTagName(document,"status").size()==0?"":getNodeValuesByTagName(document,"status").get(0);
         return statusValue;
+    }
+
+    public void selectLegalEntityStatusValue(String status) {
+        selectItemFromDropdownListByValue(legalEntity_basicInfo_status_dropdown_xpath, status);
+    }
+
+    public void verifyEditLegalEntityStatusValueFromZeus(String status,String fid,String source){
+
+        assertEquals(getLegalEntityStatusValueFromDB(fid,source),status);
+
+    }
+
+    public void changeLegalEntityStatusValue()
+    {
+        String newStatusValue="";
+        String selectedValue=getSelectedDropdownValue(legalEntity_basicInfo_status_dropdown_xpath);
+        if(selectedValue.equalsIgnoreCase("active"))
+        {
+            newStatusValue="inactive";
+        }
+        else if(selectedValue.equalsIgnoreCase("inactive"))
+        {
+            newStatusValue="active";
+        }
+        else if(selectedValue.equalsIgnoreCase("pending"))
+        {
+            newStatusValue="active";
+        }
+        selectItemFromDropdownListByValue(legalEntity_basicInfo_status_dropdown_xpath, newStatusValue);
+
+    }
+
+    public void verifyLegalEntityEditPageMode() {
+        assertTrue(getDriver().findElements(legalEntity_leadinstitution_radio_options_xpath).size() > 0);
+    }
+
+    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
+        List<WebElement> confirmChanges = getDriver().findElements(countryBasicInfo_confirmationModal_summary_xpath);
+        for(int i=0;i<Summary.getRowCount();i++)
+        {
+            assertEquals(Summary.getRow(i).get(Summary.getHeaders().get(0)), confirmChanges.get(i).getText());
+        }
     }
     }
 

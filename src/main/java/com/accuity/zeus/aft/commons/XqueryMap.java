@@ -66,6 +66,7 @@ public class XqueryMap {
         queryMap.put("get Office Location Summary From LegalEntity", "getOfficeLocationSummaryFromLegalEntity.xqy");
         queryMap.put("get legal entity Status types","getLegalEntityStatusTypes.xqy");
         queryMap.put("abcd","getLegalEntityLeadInstitutionFlag.xqy");
+        queryMap.put("get Id for legalentity","getIdForLegalEntity.xqy");
    }
 
     public String getXquery(String key){

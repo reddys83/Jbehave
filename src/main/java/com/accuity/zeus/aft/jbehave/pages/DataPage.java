@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
 
+import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
@@ -1181,6 +1182,23 @@ public class DataPage extends AbstractPage {
             assertTrue(getDriver().findElement(currency_update_button_id).isDisplayed());
         }catch(InterruptedException e){
             e.printStackTrace();
+        }
+    }
+
+    public void getDocument(String xqueryName, String param, String entity) {
+        ParamMap paramMap= new ParamMap();
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair(paramMap.getParam(param),entity));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
+        if(document!=null) {
+            endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
+            responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
+            assertTrue(responseEntity.getStatusCode().value() == 200);
+        }
+        else{
+            assertFalse("Zeus document with "+param+" as "+entity+" does not exist in the DB",true);
         }
     }
 }

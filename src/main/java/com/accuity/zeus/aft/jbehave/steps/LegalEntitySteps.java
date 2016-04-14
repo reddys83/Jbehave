@@ -228,6 +228,32 @@ public class LegalEntitySteps extends AbstractSteps{
     @Then("the user should see the status value as in $source document with fid <fid>")
 
     public void verifyEditLegalEntityStatusValueFromDB(@Named("fid") String fid,@Named("source") String source){
-        getLegalEntityPage().verifyEditLegalEntityStatusValueFromDB(fid,source);
+        getLegalEntityPage().verifyEditLegalEntityStatusValueFromTrusted(fid,source);
     }
+
+    @When("the user selects value as <status> from Status drop-down in the basicinfo legalentity page")
+    public void selectLegalEntityStatusValue(@Named("status") String status)
+    {
+        getLegalEntityPage().selectLegalEntityStatusValue(status);
+    }
+    @Then("the user should see status value as <status> for fid <fid> in $source document")
+    public void verifyStatusValuefromDB(@Named("status") String status,@Named("fid") String fid,@Named("source") String source) {
+        getLegalEntityPage().verifyEditLegalEntityStatusValueFromZeus(status,fid,source);
+    }
+
+    @When("the user selects a non-default value from Status drop-down in the basicinfo legalentity page")
+    public void changeLegalEntityStatusValue(){
+        getLegalEntityPage().changeLegalEntityStatusValue();
+    }
+
+    @Then("the user should return to edit legalentity page mode")
+    public void verifyLegalEntityEditPageMode(){
+        getLegalEntityPage().verifyLegalEntityEditPageMode();
+    }
+
+    @Then("the user should see the below summary changes in confirmation modal $Summary")
+    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
+        getLegalEntityPage().verifySummaryConfirmationModal(Summary);
+    }
+
 }
