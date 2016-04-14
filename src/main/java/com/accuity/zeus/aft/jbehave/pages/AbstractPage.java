@@ -89,9 +89,9 @@ public abstract class AbstractPage {
         return database;
     }
 
-  public RestClient getRestClient() {
-      return restClient;
-  }
+    public RestClient getRestClient() {
+        return restClient;
+    }
 
     public ApacheHttpClient getApacheHttpClient() {
         return apacheHttpClient;
@@ -135,6 +135,7 @@ public abstract class AbstractPage {
             attempts++;
         }
     }
+
     private void waitFor() {
         try {
             Thread.sleep(STANDARD_WAIT);
@@ -182,12 +183,10 @@ public abstract class AbstractPage {
         executor.executeScript(scriptSetAttrValue, webElement, attribute, value);
     }
 
-    public List<String> getNodeValuesByTagName(Document document, String tagName)
-    {
-        ArrayList<String> nodeValues=new ArrayList<String>();
-        if((document!=null)&(document.getElementsByTagName(tagName).getLength() != 0))
-        {
-            for (int i=0;i<document.getElementsByTagName(tagName).getLength();i++) {
+    public List<String> getNodeValuesByTagName(Document document, String tagName) {
+        ArrayList<String> nodeValues = new ArrayList<String>();
+        if ((document != null) & (document.getElementsByTagName(tagName).getLength() != 0)) {
+            for (int i = 0; i < document.getElementsByTagName(tagName).getLength(); i++) {
 
                 nodeValues.add(document.getElementsByTagName(tagName).item(i).getFirstChild().getNodeValue());
             }
@@ -195,4 +194,10 @@ public abstract class AbstractPage {
         return nodeValues;
     }
 
+
+    public String getSelectedDropdownValue(By by) {
+        Select dropdown = new Select(driver.findElement(by));
+        String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
+        return selectedValue;
+    }
 }

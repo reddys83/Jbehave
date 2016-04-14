@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -86,6 +87,8 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_leadInstitution_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Lead Institution']");
     private By legalEntity_basicInfo_leadInstitution_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Lead Institution']/td");
     private By legalEntity_basicInfo_leftContainer_container_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody");
+    private By legalEntity_basicInfo_status_list_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='Status']/td/select/option");
+    private By legalEntity_basicInfo_status_dropdown_xpath=By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='Status']/td/select");
 
 
 
@@ -458,4 +461,56 @@ public class LegalEntityPage extends AbstractPage {
             }
         }
     }
-}
+
+    public void clickOnStatusType() {
+        attemptClick(legalEntity_basicInfo_status_dropdown_xpath);
+    }
+
+    public void verifyLegalEntityStatusList() {
+        List<WebElement> statusList = getDriver().findElements(legalEntity_basicInfo_status_list_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get legal entity Status types");
+        for (int i = 1; i < document.getElementsByTagName("status").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), statusList.get(i).getAttribute("value"));
+        }
+    }
+
+
+    public void enterValueInStatusDropdown(String word) {
+        getDriver().findElement(legalEntity_basicInfo_status_dropdown_xpath).sendKeys(word);
+
+    }
+
+
+    public void verifyStatusInDropdown(String status) {
+
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(getSelectedDropdownValue(legalEntity_basicInfo_status_dropdown_xpath).equalsIgnoreCase(status));
+
+    }
+
+    public void verifyEditLegalEntityStatusValueFromDB(String fid,String source){
+
+      assertEquals(getLegalEntityStatusValueFromDB(fid,source),getSelectedDropdownValue(legalEntity_basicInfo_status_dropdown_xpath));
+//System.out.println("Value"+getAttributeValueByXpathFidAndTagname(fid,source,"summary/leadInstitution"));
+        }
+
+    public String getLegalEntityStatusValueFromDB(String fid, String source){
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
+        String statusValue=getNodeValuesByTagName(document,"status").size()==0?"":getNodeValuesByTagName(document,"status").get(0);
+        return statusValue;
+    }
+    }
+

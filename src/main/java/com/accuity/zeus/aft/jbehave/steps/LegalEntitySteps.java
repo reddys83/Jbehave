@@ -205,4 +205,29 @@ public class LegalEntitySteps extends AbstractSteps{
     @Then("the user verifies basic info for legal entity left column <fid> from trusted document")
     public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getLegalEntityPage().verifyBasicInforLeftColumn(fid);}
 
+    @When("the user clicks on the Status drop-down in the basicinfo legalentity page")
+    public void clickOnStatusType(){
+        getLegalEntityPage().clickOnStatusType();
+    }
+
+    @Then("the user should see the status values from lookup Status")
+    public void verifyLegalEntityStatusList(){
+        getLegalEntityPage().verifyLegalEntityStatusList();
+    }
+
+    @When("the user starts typing the name of a status as $word in the Status drop-down")
+    public void enterValueInStatusDropdown(String word) {
+        getLegalEntityPage().enterValueInStatusDropdown(word);
+    }
+    @Then("the user should see the selected status in the drop-down as $status")
+    public void verifyStatusInDropdown(String status)
+    {
+        getLegalEntityPage().verifyStatusInDropdown(status);
+    }
+
+    @Then("the user should see the status value as in $source document with fid <fid>")
+
+    public void verifyEditLegalEntityStatusValueFromDB(@Named("fid") String fid,@Named("source") String source){
+        getLegalEntityPage().verifyEditLegalEntityStatusValueFromDB(fid,source);
+    }
 }
