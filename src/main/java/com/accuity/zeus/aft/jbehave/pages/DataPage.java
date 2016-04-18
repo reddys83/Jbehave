@@ -1184,7 +1184,7 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void getDocumentbyFid(String xqueryName, String param, String entity) {
+    public void getDocument(String xqueryName, String param, String entity) {
         ParamMap paramMap= new ParamMap();
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair(paramMap.getParam(param),entity));
