@@ -104,3 +104,21 @@ Examples:
 |1038|FID|1038|International Organisation|
 |1038|FID|1038||
 
+
+Scenario: Verify that the Legal Entity's Fatca Status field is not a required field
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the update link
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+
+Examples:
+|entity|searchBy|fid|
+|1165|FID|1165|
