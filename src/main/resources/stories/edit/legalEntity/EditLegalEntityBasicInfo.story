@@ -4,7 +4,7 @@ Narrative:
 As a user
 I want to perform an action
 So that I can achieve a business goal
-JIRA ID - ZEUS-906 - User can edit Legal Entity's Lead Institution flag
+JIRA ID - ZEUS-905 - User can edit Legal Entity's FATCA status
 
 Scenario: Verify Legal Entity's Fatca Status dropdown values from lookup LEGAL_ENTITY_FATCA_STATUS in the same order as taxonomy
 Given a user is on the search page
