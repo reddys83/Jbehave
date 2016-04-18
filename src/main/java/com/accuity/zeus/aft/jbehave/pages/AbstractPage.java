@@ -12,6 +12,8 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -189,10 +191,22 @@ public abstract class AbstractPage {
         {
             for (int i=0;i<document.getElementsByTagName(tagName).getLength();i++) {
 
-                nodeValues.add(document.getElementsByTagName(tagName).item(i).getFirstChild().getNodeValue());
+                NodeList children=document.getElementsByTagName(tagName).item(i).getChildNodes();
+                for (int j = 0;j < children.getLength();j++) {
+                    if (children.item(j).getNodeType() != Node.ELEMENT_NODE)
+                        nodeValues.add(document.getElementsByTagName(tagName).item(i).getFirstChild().getNodeValue());
+                }
             }
         }
-        return nodeValues;
-    }
 
+        return nodeValues;
+        }
+
+
+
+    public String getSelectedDropdownValue(By by) {
+        Select dropdown = new Select(driver.findElement(by));
+        String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
+        return selectedValue;
+    }
 }

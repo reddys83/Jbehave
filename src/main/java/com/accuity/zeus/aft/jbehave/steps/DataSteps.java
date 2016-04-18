@@ -857,6 +857,13 @@ public class DataSteps extends AbstractSteps {
         getDataPage().getDocument(xqueryName, name);
     }
 
+    @When("the user gets the document with $xqueryName with the $param as <entity> from the database")
+    public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("param") String param,@Named("entity") String entity)
+    {
+        getDataPage().getDocumentbyFid(xqueryName,param,entity);
+
+    }
+
     @When("the user clicks on the return button")
     public void clickOnReturnButton() {
         getDataPage().clickOnReturnButton();

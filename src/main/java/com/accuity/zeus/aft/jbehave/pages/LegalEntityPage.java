@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
 
 import java.util.ArrayList;
@@ -87,9 +88,10 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_leadInstitution_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Lead Institution']/td");
     private By legalEntity_basicInfo_leftContainer_container_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody");
 
-
-
-
+    private By legalEntity_basicInfo_fatcastatus_list_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='FATCA Status']/td/select/option");
+    private By legalEntity_basicInfo_fatcastatus_dropdown_xpath=By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='FATCA Status']/td/select");
+    private By legalEntity_leadinstitution_radio_options_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//input[@name='leadInstitution']");
+    private By countryBasicInfo_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
 
 
     public LegalEntityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
@@ -458,4 +460,104 @@ public class LegalEntityPage extends AbstractPage {
             }
         }
     }
+
+    public void selectLegalEntityFatcaStatusValue(String status) {
+        selectItemFromDropdownListByValue(legalEntity_basicInfo_fatcastatus_dropdown_xpath, status);
+    }
+
+    public void clickOnFatcaStatusType() {
+        attemptClick(legalEntity_basicInfo_fatcastatus_dropdown_xpath);
+    }
+
+    public void verifyLegalEntityFatcaStatusList(String lookupFid) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", lookupFid));
+        List<WebElement> statusList = getDriver().findElements(legalEntity_basicInfo_fatcastatus_list_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity Status types",nvPairs);
+        for (int i = 0; i < document.getElementsByTagName("status").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), statusList.get(i+1).getAttribute("value"));
+        }
+    }
+
+
+    public void enterValueInFatcaStatusDropdown(String word) {
+        //getDriver().findElement(legalEntity_basicInfo_status_dropdown_xpath).click();
+        getDriver().findElement(legalEntity_basicInfo_fatcastatus_dropdown_xpath).sendKeys(word);
+        //System.out.println("focus value"+getDriver().findElements(legalEntity_basicInfo_status_list_xpath).get(0).getCssValue("focus"));
+    }
+
+    public void verifyFatcaStatusInDropdown(String status) {
+
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(getSelectedDropdownValue(legalEntity_basicInfo_fatcastatus_dropdown_xpath).contains(status));
+
+    }
+
+    public void verifyEditLegalEntityFatcaStatusValueFromZeus(String fatcastatus,String tagName,String fid,String source){
+
+        assertEquals(getLegalEntityValuesFromDB(fid,tagName,source),fatcastatus);
+
+    }
+
+    public String getLegalEntityValuesFromDB(String fid, String tagName,String source){
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        String statusValue="";
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
+
+        if(document!=null) {
+             statusValue=getNodeValuesByTagName(document,tagName).size()==0?"":getNodeValuesByTagName(document,tagName).get(0);
+        }
+
+        return statusValue;
+    }
+
+
+    public void verifyEditLegalEntityFatcaStatusValueFromTrusted(String fid,String tagName, String source){
+
+        assertEquals(getLegalEntityValuesFromDB(fid,tagName,source),getSelectedDropdownValue(legalEntity_basicInfo_fatcastatus_dropdown_xpath));
+
+    }
+
+    public void changeLegalEntityFatcaStatusValue()
+    {
+        String valuetobeSelected="";
+        Select dropdown = new Select(getDriver().findElement(legalEntity_basicInfo_fatcastatus_dropdown_xpath));
+        for (WebElement option:dropdown.getOptions())
+        {
+            if(!option.isSelected())
+            {
+                valuetobeSelected= option.getAttribute("value");
+                break;
+            }
+        }
+
+        selectItemFromDropdownListByValue(legalEntity_basicInfo_fatcastatus_dropdown_xpath, valuetobeSelected);
+
+    }
+
+    public void verifyLegalEntityEditPageMode() {
+        assertTrue(getDriver().findElements(legalEntity_leadinstitution_radio_options_xpath).size() > 0);
+    }
+
+    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
+        List<WebElement> confirmChanges = getDriver().findElements(countryBasicInfo_confirmationModal_summary_xpath);
+        for(int i=0;i<Summary.getRowCount();i++)
+        {
+            assertEquals(Summary.getRow(i).get(Summary.getHeaders().get(0)), confirmChanges.get(i).getText());
+        }
+    }
+
+
 }

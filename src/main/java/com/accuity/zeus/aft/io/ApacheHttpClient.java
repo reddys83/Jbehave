@@ -118,6 +118,10 @@ public class ApacheHttpClient {
             client.executeMethod(method);
             document = new XmlDocument().convertFromString(method.getResponseBodyAsString());
             Thread.sleep(1000L);
+            if(((GetMethod) method).getResponseContentLength()!=0) {
+                document = new XmlDocument().convertFromString(method.getResponseBodyAsString());
+                Thread.sleep(1000L);
+            }
         } catch (InterruptedException e){
             e.printStackTrace();
         }
