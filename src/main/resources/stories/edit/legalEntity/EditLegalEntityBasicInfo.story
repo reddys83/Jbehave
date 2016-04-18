@@ -4,9 +4,7 @@ Narrative:
 As a user
 I want to perform an action
 So that I can achieve a business goal
-JIRA ID - ZEUS-906 - User can edit Legal Entity's Lead Institution flag
-
-Meta:@Design
+JIRA ID - ZEUS-903 - User can edit Legal Entity's Status
 
 Scenario: Verify Legal Entity's Status dropdown values from lookup Status in the same order as taxonomy
 Given a user is on the search page
@@ -67,7 +65,6 @@ And the user selects a non-default value from Status drop-down in the basicinfo 
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
-
 |Summary|
 |Basic Info|
 

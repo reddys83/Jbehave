@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
 
 
@@ -496,24 +497,28 @@ public class LegalEntityPage extends AbstractPage {
 
     }
 
-    public void verifyEditLegalEntityStatusValueFromTrusted(String fid,String source){
+    public void verifyEditLegalEntityStatusValueFromTrusted(String fid,String tagName,String source){
 
-      assertEquals(getLegalEntityStatusValueFromDB(fid,source),getSelectedDropdownValue(legalEntity_basicInfo_status_dropdown_xpath));
+        assertEquals(getLegalEntityValuesFromDB(fid,tagName,source),getSelectedDropdownValue(legalEntity_basicInfo_status_dropdown_xpath));
 
-        }
+    }
 
-    public String getLegalEntityStatusValueFromDB(String fid, String source){
+    public String getLegalEntityValuesFromDB(String fid, String tagName,String source){
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", source));
-
+        String statusValue="";
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
-        String statusValue=getNodeValuesByTagName(document,"status").size()==0?"":getNodeValuesByTagName(document,"status").get(0);
+
+        if(document!=null) {
+            statusValue=getNodeValuesByTagName(document,tagName).size()==0?"":getNodeValuesByTagName(document,tagName).get(0);
+        }
+
         return statusValue;
     }
 
@@ -521,29 +526,27 @@ public class LegalEntityPage extends AbstractPage {
         selectItemFromDropdownListByValue(legalEntity_basicInfo_status_dropdown_xpath, status);
     }
 
-    public void verifyEditLegalEntityStatusValueFromZeus(String status,String fid,String source){
+    public void verifyEditLegalEntityStatusValueFromZeus(String status,String tagName,String fid,String source){
 
-        assertEquals(getLegalEntityStatusValueFromDB(fid,source),status);
+        assertEquals(getLegalEntityValuesFromDB(fid,tagName,source),status);
 
     }
 
     public void changeLegalEntityStatusValue()
     {
-        String newStatusValue="";
-        String selectedValue=getSelectedDropdownValue(legalEntity_basicInfo_status_dropdown_xpath);
-        if(selectedValue.equalsIgnoreCase("active"))
+        String valuetobeSelected="";
+
+        Select dropdown = new Select(getDriver().findElement(legalEntity_basicInfo_status_dropdown_xpath));
+        for (WebElement option:dropdown.getOptions())
         {
-            newStatusValue="inactive";
+            if(!option.isSelected())
+            {
+                valuetobeSelected= option.getAttribute("value");
+                break;
+            }
         }
-        else if(selectedValue.equalsIgnoreCase("inactive"))
-        {
-            newStatusValue="active";
-        }
-        else if(selectedValue.equalsIgnoreCase("pending"))
-        {
-            newStatusValue="active";
-        }
-        selectItemFromDropdownListByValue(legalEntity_basicInfo_status_dropdown_xpath, newStatusValue);
+
+        selectItemFromDropdownListByValue(legalEntity_basicInfo_status_dropdown_xpath, valuetobeSelected);
 
     }
 
