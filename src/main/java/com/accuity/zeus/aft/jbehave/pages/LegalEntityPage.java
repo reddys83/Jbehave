@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
 
 import java.util.ArrayList;
@@ -86,6 +87,9 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_leadInstitution_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Lead Institution']");
     private By legalEntity_basicInfo_leadInstitution_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Lead Institution']/td");
     private By legalEntity_basicInfo_leftContainer_container_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody");
+    private By legalEnttity_basicInfo_CharterType_dropdown_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td/select");
+    private By legalEnttity_basicInfo_CharterType_view_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td");
+
 
 
 
@@ -457,5 +461,55 @@ public class LegalEntityPage extends AbstractPage {
                 break;
             }
         }
+    }
+
+    public void verifyCharterTypeOptions() {
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,"get charter type from trusted document");
+        Select charterTypeDropDown = new Select(getDriver().findElement(legalEnttity_basicInfo_CharterType_dropdown_xpath));
+        Integer optionsDisplayed  = charterTypeDropDown.getOptions().size();
+        for(int i=0;i<optionsDisplayed-2;i++){
+            assertEquals(charterTypeDropDown.getOptions().get(i+1).getText(),document.getElementsByTagName("a").item(i).getTextContent());
+        }
+
+    }
+
+    public void verifyCharterTypeDefaultValue(String fid) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        Document document= apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column",nvPairs);
+        Select charterTypeDropDown = new Select(getDriver().findElement(legalEnttity_basicInfo_CharterType_dropdown_xpath));
+        assertEquals(document.getElementsByTagName("charterType").item(0).getTextContent(),charterTypeDropDown.getFirstSelectedOption().getText());
+    }
+
+    public void updateCharterType(String charterType) {
+        Select charterTypeDropDown = new Select(getDriver().findElement(legalEnttity_basicInfo_CharterType_dropdown_xpath));
+        charterTypeDropDown.selectByVisibleText(charterType);
+
+    }
+
+    public void verifyUpdatedCharterTypeBothDocs(String fid) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        Document document= apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column",nvPairs);
+        assertEquals(document.getElementsByTagName("charterType").item(0).getTextContent(),getDriver().findElement(legalEnttity_basicInfo_CharterType_view_xpath).getText());
+
+
+        List<NameValuePair> zeusPairs = new ArrayList<>();
+        zeusPairs.add(new BasicNameValuePair("fid", fid));
+        zeusPairs.add(new BasicNameValuePair("source", "trusted"));
+        document= apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column",zeusPairs);
+        assertEquals(document.getElementsByTagName("charterType").item(0).getTextContent(),getDriver().findElement(legalEnttity_basicInfo_CharterType_view_xpath).getText());
     }
 }
