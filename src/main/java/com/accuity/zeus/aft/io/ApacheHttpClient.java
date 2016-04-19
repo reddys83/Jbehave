@@ -116,8 +116,6 @@ public class ApacheHttpClient {
         HttpMethod method = new GetMethod(utils.constructURLWithMultipleParameters(database.getScheme(), database.getHost(), database.getPort(), database.getPath(), xquery, nvPairs));
         try {
             client.executeMethod(method);
-            document = new XmlDocument().convertFromString(method.getResponseBodyAsString());
-            Thread.sleep(1000L);
             if(((GetMethod) method).getResponseContentLength()!=0) {
                 document = new XmlDocument().convertFromString(method.getResponseBodyAsString());
                 Thread.sleep(1000L);
