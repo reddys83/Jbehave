@@ -61,6 +61,8 @@ public class XqueryMap {
         queryMap.put("area related places","getAreaRelatedPlaces.xqy");
         queryMap.put("city related places", "getCityRelatedPlaces.xqy");
         queryMap.put("country related places", "getCountryRelatedPlaces.xqy");
+        queryMap.put("get country places type", "getCountryPlacesType.xqy");
+        queryMap.put("get country places details","getCountryPlacesDetails.xqy");
         queryMap.put("get Trust Powers for Legal Entity", "getLegalEntityTrustPowers.xqy");
         queryMap.put("get legal entity basic info left column","getLegalEntityBasicInfo.xqy");
         queryMap.put("get Office Location Summary From LegalEntity", "getOfficeLocationSummaryFromLegalEntity.xqy");
