@@ -1,6 +1,7 @@
 Meta:@Design
 
 
+
 Scenario: Verify the user is able to save the documetn with valid inputs
 Meta:
 Given a user is on the search page
@@ -28,3 +29,4 @@ Then the user should see the save confirmation modal
 Examples:
 |country|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|
 |Mayotte Island|Capital City|Algeria|Blida|Bouinan|Judicial Capital|
+
