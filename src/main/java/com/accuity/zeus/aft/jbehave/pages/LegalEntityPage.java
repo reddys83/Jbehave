@@ -419,7 +419,7 @@ public class LegalEntityPage extends AbstractPage {
             e.printStackTrace();
         }
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
-        String leadInstitutionDBValue=getNodeValuesByTagName(document,"leadInstitution").size()==0?"":getNodeValuesByTagName(document,"leadInstitution").get(1);
+      String leadInstitutionDBValue=getNodeValuesByTagName(document,"leadInstitution").size()==0?"":getNodeValuesByTagName(document,"leadInstitution").get(0);
         return leadInstitutionDBValue;
     }
 
