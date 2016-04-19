@@ -217,4 +217,19 @@ public class LegalEntitySteps extends AbstractSteps{
     @Then("the user verifies charter type from trusted and zeus document <fid>")
     public void verifyUpdatedCharterTypeFromBothDocs(@Named("fid") String fid){getLegalEntityPage().verifyUpdatedCharterTypeBothDocs(fid);}
 
+    @When("the user enters day for claimed est date <day>")
+    public void enterDayForClaimedEstDate(@Named("day") String day){getLegalEntityPage().enterDayValueForClaimedEstDate(day);}
+
+    @When("the user enters month for claimed est date <month>")
+    public void enterMonthForClaimedEstDate(@Named("month") String month){getLegalEntityPage().enterMonthValueForClaimedEstDate(month);}
+
+    @When("the user enters year for claimed est date <year>")
+    public void enterYearForClaimedEstMonth(@Named("year") String year){getLegalEntityPage().enterYearValueForClaimedEstDate(year);}
+
+    @Then("the user should see the error message enter a day/month/year on legal entity page")
+    public void verifyErrorMessageDisplayedForClaimedEstDate(){getLegalEntityPage().validateErrorMessageforClaimedEstDate();}
+
+    @Then("the user verifies claimed est date from trusted and zeus document <fid>")
+    public void verifyUpdatedClaimedEstDateFromBothDocs(@Named("fid") String fid){getLegalEntityPage().verifyUpdatedClaimedEstDateBothDocs(fid);}
+
 }
