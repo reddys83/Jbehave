@@ -11,8 +11,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.w3c.dom.Document;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertNotNull;
@@ -180,5 +182,17 @@ public abstract class AbstractPage {
         executor.executeScript(scriptSetAttrValue, webElement, attribute, value);
     }
 
+    public List<String> getNodeValuesByTagName(Document document, String tagName)
+    {
+        ArrayList<String> nodeValues=new ArrayList<String>();
+        if((document!=null)&(document.getElementsByTagName(tagName).getLength() != 0))
+        {
+            for (int i=0;i<document.getElementsByTagName(tagName).getLength();i++) {
+
+                nodeValues.add(document.getElementsByTagName(tagName).item(i).getFirstChild().getNodeValue());
+            }
+        }
+        return nodeValues;
+    }
 
 }

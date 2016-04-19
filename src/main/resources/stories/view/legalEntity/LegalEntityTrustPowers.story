@@ -7,7 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-396 User can view legal entity trust powers
 
 Scenario: Verify legalEntity trust powers
-1. BUG-ID - ZEUS-627
+BUG-ID - ZEUS-627 - Legal Entity Trust Powers - Case transformation should not happen when displaying the values.
 Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -17,9 +17,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 When the user clicks on the legal entity tust power link in the navigation bar
-Then the user should see the legal entity's trust power as:
-|GRANTED|FULL|USED|PROF.EMPLOYEES|ADMIN EMPLOYEES|MIN ACCOUNT SIZE($)|
-|true|true|true|2|1|10000|
+Then the user should see the legal entity's trust powers for fid <fid> from trusted document
 
 Examples:
 |entity|searchBy|fid|
