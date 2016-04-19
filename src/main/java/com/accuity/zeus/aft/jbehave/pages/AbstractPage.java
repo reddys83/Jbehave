@@ -185,7 +185,7 @@ public abstract class AbstractPage {
     public List<String> getNodeValuesByTagName(Document document, String tagName)
     {
         ArrayList<String> nodeValues=new ArrayList<String>();
-        if((document!=null)&(document.getElementsByTagName(tagName).getLength() >1))
+        if((document!=null)&(document.getElementsByTagName(tagName).getLength() != 0))
         {
             for (int i=0;i<document.getElementsByTagName(tagName).getLength();i++) {
 
@@ -194,6 +194,7 @@ public abstract class AbstractPage {
         }
         return nodeValues;
     }
+
 
 
 
@@ -220,5 +221,4 @@ public abstract class AbstractPage {
         }
         return selectedValue;
     }
-
 }

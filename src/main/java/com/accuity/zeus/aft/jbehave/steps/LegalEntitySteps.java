@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -49,9 +50,9 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyLegalEntityOfferedServices(offeredServices);
     }
 
-    @Then("the user should see the legal entity's location summaries as: $legalEntityLocations")
-    public void verifyLegalEntityLocations(ExamplesTable legalEntityLocations){
-        getLegalEntityPage().verifyLegalEntityLocations(legalEntityLocations);
+    @Then("the user should see the legal entity's location summaries for fid <fid> from trusted document")
+    public void verifyLegalEntityLocations(@Named("fid") String fid){
+        getLegalEntityPage().verifyLegalEntityLocations(fid);
     }
 
     @Then("the user should not see the legal entity's location summaries")
@@ -59,11 +60,10 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyNoLegalEntityLocations();
     }
 
-    @Then("the user should see the legal entity's trust power as: $legalEntityTrustPowers")
-    public void verifyLegalEntityTrustPowers(ExamplesTable legalEntityTrustPowers) {
-        getLegalEntityPage().verifyLegalEntityTrustPowers(legalEntityTrustPowers);
+    @Then("the user should see the legal entity's trust powers for fid <fid> from trusted document")
+    public void verifyLegalEntityTrustPowersfromDB(@Named("fid") String searchedEntity) {
+        getLegalEntityPage().verifyLegalEntityTrustPowersfromDB(searchedEntity);
     }
-
     @Then("the user should not see the legal entity's trust powers")
     public void verifyNoLegalEntityTrustPowers(){
         getLegalEntityPage().verifyNoLegalEntityTrustPowers();
@@ -216,6 +216,9 @@ public class LegalEntitySteps extends AbstractSteps{
     public void verifyNoLeadInstitution() {
         getLegalEntityPage().verifyNoLeadInstitution();
     }
+
+    @Then("the user verifies basic info for legal entity left column <fid> from trusted document")
+    public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getLegalEntityPage().verifyLegalEntityBasicInfoLeftColumn(fid);}
 
     @Then("the user should return to edit legalentity page mode")
     public void verifyLegalEntityEditPageMode(){

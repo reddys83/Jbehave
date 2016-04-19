@@ -1064,7 +1064,7 @@ public class DataPage extends AbstractPage {
         attemptClick(cancel_no_button_xpath);
     }
 
-    public void verifyAreaList(Database database, ApacheHttpClient apacheHttpClient) {
+    public void verifyAreaList() {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedEntity));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
@@ -1094,7 +1094,7 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyCityList(Database database, ApacheHttpClient apacheHttpClient) {
+    public void verifyCityList() {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedEntity));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));

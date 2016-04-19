@@ -22,7 +22,8 @@ declare function local:getDateAsPerAccuracy
 };
 
 let $fid := xs:string(xdmp:get-request-field("fid"))
-let $legalEntityS := (/legalEntity[@fid=$fid][@source='trusted'])
+let $source := xs:string(xdmp:get-request-field("source"))
+let $legalEntityS := (/legalEntity[@fid=$fid][@source=$source])
 
 let $status := ($legalEntityS/summary/status/text())
 let $claimedEstDate := local:getDateAsPerAccuracy($legalEntityS/summary/dates/established)
