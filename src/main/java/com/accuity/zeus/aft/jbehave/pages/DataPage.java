@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
 
+import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
@@ -34,6 +35,7 @@ public class DataPage extends AbstractPage {
     private By subarea_listBox_xpath = By.xpath("//*[@id='selection2'] //*[@id='entitySelect_chosen']//span");
     private By regions_label_xpath = By.xpath("//li[contains(h1,'Regions for')] //span");
     private By country_type_ahead_xpath=By.xpath(".//*[@id='selection0'] //*[@id='entitySelect_chosen']//input");
+    private By countryBasicInfo_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
     private By basic_info_xpath = By.xpath("//*[@id='content']/div/ul/li/h1/span");
     private By basic_info_names_label_xpath = By.xpath("//*[@id='content']//li[1]/h2[1]");
     private By basic_info_names_type_label_xpath = By.xpath("//*[@id='content']//table[1]/thead/tr/th[1]");
@@ -1014,18 +1016,22 @@ public class DataPage extends AbstractPage {
         attemptClick(confirm_button_xpath);
     }
 
-    public void getDocument(String xqueryName, String name) {
-
+   public void getDocument(String xqueryName, String param, String entity) {
+       ParamMap paramMap= new ParamMap();
         List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("name", name));
+        nvPairs.add(new BasicNameValuePair(paramMap.getParam(param),entity));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
 
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
-        endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
-
-        responseEntity = restClient.getDocumentByID(endpointWithID,heraApi );
-        assertTrue(responseEntity.getStatusCode().value() == 200);
-    }
+       if(document!=null) {
+           endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
+           responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
+           assertTrue(responseEntity.getStatusCode().value() == 200);
+       }
+       else{
+           assertFalse("Zeus document with "+param+" as "+entity+" does not exist in the DB",true);
+       }
+   }
 
     public void revertChangesToDocument() {
 
@@ -1181,6 +1187,13 @@ public class DataPage extends AbstractPage {
             assertTrue(getDriver().findElement(currency_update_button_id).isDisplayed());
         }catch(InterruptedException e){
             e.printStackTrace();
+        }
+    }
+    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
+        List<WebElement> confirmChanges = getDriver().findElements(countryBasicInfo_confirmationModal_summary_xpath);
+        for(int i=0;i<Summary.getRowCount();i++)
+        {
+            assertEquals(Summary.getRow(i).get(Summary.getHeaders().get(0)), confirmChanges.get(i).getText());
         }
     }
 }
