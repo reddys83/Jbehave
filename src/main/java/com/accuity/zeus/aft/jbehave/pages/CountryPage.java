@@ -1041,6 +1041,22 @@ public class CountryPage extends AbstractPage {
         }
     }
 
+    public void selectsPlacesDetailsFromDropdown(String PlaceDetails)
+    {
+        List<WebElement> options = getDriver().findElements(By.xpath(country_places_details_dropdown_xpath+"/option"));
+
+        for (WebElement option : options) {
+            if (option.getText().contains(PlaceDetails)) {
+
+                getDriver().findElement(By.xpath(country_places_details_dropdown_xpath)).click();
+
+                option.click();
+
+                break;
+            }
+        }
+    }
+
     public void selectsRegionTypeFromDropdown(String regionType)
     {
         getDriver().findElement(By.xpath(country_regions_new_type_xpath)).click();

@@ -493,6 +493,11 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().selectsPlacesTypeFromDropdwon(PlaceType);
     }
 
+    @When("the user selects details value as <PlaceDetails> in the places for country")
+    public void selectsDetailsFromDropdown(@Named("PlaceDetails") String PlaceDetails) {
+        getCountryPage().selectsPlacesDetailsFromDropdown(PlaceDetails);
+    }
+
     @When("the user clicks on the country drop down in the places for country")
     public void clicksOnCountryInPlacesForCountry() {
         getCountryPage().clicksOnCountryInPlacesForCountry();

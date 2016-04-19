@@ -71,12 +71,13 @@ When the user selects area <areaPlaces> dropdown in places for country
 And the user clicks on city drop down in the places for country
 And the user selects city <cityPlaces> dropdown in the places for country
 And the user clicks on go button in places for country
+And the user selects details value as <PlaceDetails> in the places for country
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 
 Examples:
-|country|PlaceType|countryPlaces|areaPlaces|cityPlaces|
-|Mayotte Island|Capital City|Algeria|Blida|Bouinan|
+|country|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|
+|Mayotte Island|Capital City|Algeria|Blida|Bouinan|Judicial Capital|
 
 Scenario: Verify the required messages for type
 Meta:
