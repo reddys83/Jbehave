@@ -7,10 +7,7 @@ import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.w3c.dom.Document;
 
 import java.util.ArrayList;
@@ -27,7 +24,7 @@ public class CurrencyPage extends AbstractPage {
     private String clickedCurrencyIso="";
     private By currency_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li");
     private By currency_country_list_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
-    private By currency_country_list_edit_xpath = By.xpath("//fieldset//select[@name='country']/option");
+    private By currency_country_list_edit_xpath = By.xpath(".//*[@id='add_currencyUses_chosen']//li");
     private By currency_iso_code_label_id = By.id("iso");
     private By currency_iso_code_id = By.id("iso-value");
     private By currency_name_label_xpath = By.xpath("//*[@id='content']/div/dl[1]/dt[1]");
@@ -53,7 +50,7 @@ public class CurrencyPage extends AbstractPage {
     private By currency_use_table_endDate_day_edit_xpath=By.xpath("//input[@name='end-day']");
     String currency_use_table_endDate_month_edit_xpath = "//select[@name='end-month']";
     private By currency_use_table_endDate_year_edit_xpath=By.xpath("//input[@name='end-year']");
-    String currency_use_table_primary_edit_xpath ="//fieldset[@data-edit_id='primary']";
+    String currency_use_table_primary_edit_xpath ="//fieldset[@data-error_id='primary']";
     private By currency_use_table_replacedBy_disable_edit_xpath = By.xpath("//fieldset[2]//div[@class='chosen-container chosen-container-single chosen-disabled']/a");
     String currency_use_table_replacedBy_edit_xpath= "//fieldset[2]//div[@class='chosen-container chosen-container-single']";
     private String currencySearchString = null;
@@ -69,17 +66,21 @@ public class CurrencyPage extends AbstractPage {
     private By currency_quantity_error_message_xpath = By.xpath("//*[@data-error_id='quantityError']");
     private By currency_replaced_by_xpath = By.xpath("//*[@class='chosen-results']/li");
     private By currency_start_date_drop_down_xpath = By.xpath("//select[@name='began-month']");
-    private By currency_add_country_option_xpath = By.xpath("//*[@id='add_use_chosen']/a");
-    private By currency_add_country_type_ahead_input_xpath = By.xpath("//*[@id='add_use_chosen']/div/div/input");
+    private By currency_add_country_option_xpath = By.xpath("//*[@id='add_currencyUses_chosen']/a");
+    private By currency_add_country_type_ahead_input_xpath = By.xpath("//*[@id='add_currencyUses_chosen']/div/div/input");
     private By currency_use_table_additional_use_primary_edit_xpath = By.xpath("//*[@id='additionalUses']//fieldset/input[@checked]");
     private By currency_use_table_additional_use_status_xpath = By.xpath("//*[@id='additionalUses']/tr/td[@class='status']");
-    private By currency_add_country_list_xpath = By.xpath("//*[@id='add_use_chosen'] //ul/li");
+    private By currency_add_country_list_xpath = By.xpath("//*[@id='add_currencyUses_chosen'] //ul/li");
     private By currency_use_table_delete_use_option_xpath = By.xpath("//button[@class='delete-row']");
     private By currency_use_table_additional_use_row_xpath = By.xpath("//*[@id='additionalUses']");
     private By labels_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
     private By no_results_match_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
     private By currency_save_confirmation_message_id = By.id("saveSuccess");
+    private By currency_new_usage_delete_button_xpath=By.xpath(".//*[@id='additionalCurrencyUses']/tr[@class='new']//button");
+    private By currency_delete_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
+    private By currency_delete_no_button_id = By.id("no-button");
+    private By currency_delete_yes_button_id= By.id("yes-button");
 
 
     private String editedCurrencyName="";
@@ -176,7 +177,7 @@ public class CurrencyPage extends AbstractPage {
         }
     }
 
-    public void verifyCountryListInCurrencyEditMode(Database database, ApacheHttpClient apacheHttpClient){
+    public void verifyCountryListInCurrencyEditMode(){
         List<WebElement> countryList = getDriver().findElements(currency_country_list_edit_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "country list");
         for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
@@ -616,6 +617,13 @@ public class CurrencyPage extends AbstractPage {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), addCountryList.get(i).getText().trim());
         }
     }
+    public void clickOnDeleteCurrencyUsage() {
+        attemptClick(currency_new_usage_delete_button_xpath);
+    }
+
+    public void verifyDeleteConfirmationModalInCurrency() {
+        assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(currency_delete_confirmation_modal_xpath).getText());
+    }
 
     public CurrencyPage selectCurrencyFromTypeAhead(String currency) {
 
@@ -637,5 +645,22 @@ public class CurrencyPage extends AbstractPage {
         assertTrue(getDriver().findElement(currency_save_confirmation_message_id).isDisplayed());
     }
 
+    public void clickOnNoButtonInDeleteConfirmationModalInCurrency() {
+        attemptClick(currency_delete_no_button_id);
+    }
 
+    public void clickOnYesButtonInDeleteConfirmationInCurrency() {
+        attemptClick(currency_delete_yes_button_id);
+    }
+
+    public void verifyNewlyAddedCurrencyUsage() {
+        assertTrue(getDriver().findElement(currency_new_use_table_startDate_year_edit_xpath).isDisplayed());
+    }
+
+    public void verifyNoNewlyAddedCurrencyUsage() {
+        try {
+            assertFalse(getDriver().findElement(currency_new_use_table_startDate_year_edit_xpath).isDisplayed());
+        } catch (NoSuchElementException e) {
+        }
+    }
 }

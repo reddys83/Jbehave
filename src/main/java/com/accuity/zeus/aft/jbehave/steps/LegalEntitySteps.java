@@ -1,22 +1,14 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.zeus.aft.io.ApacheHttpClient;
-import com.accuity.zeus.aft.io.Database;
+
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 
 @Component
 public class LegalEntitySteps extends AbstractSteps{
-
-    @Autowired
-    ApacheHttpClient apacheHttpClient;
-    @Autowired
-    Database database;
 
     @Then("the user should see the legal entity's entity types as: $legalEntityEntities")
     public void verifyLegalEntityEntities(ExamplesTable legalEntities) {
@@ -201,9 +193,33 @@ public class LegalEntitySteps extends AbstractSteps{
         setOfficesPage(getLegalEntityPage().clickOnOfficesLink());
     }
 
+    @When("the user selects lead institution value <leadInstitutionflag> in the basicinfo legalentity page")
+    public void selectLegalEntityLeadInstitutionFlag(@Named("leadInstitutionflag") String leadInstitutionflag){
+        getLegalEntityPage().selectLegalEntityLeadInstitutionFlag(leadInstitutionflag);
+    }
+    @When("the user selects lead institution value other than default value in the basicinfo legalentity page")
+    public void changeLegalEntityLeadInstitutionFlag(){
+        getLegalEntityPage().changeLegalEntityLeadInstitutionFlag();
+    }
+    @Then("the user should see the legalentity's lead institution value as in $source document with fid <fid>")
+    public void verifyEditLegalEntityLeadInstitutionFlagInZeus(@Named("fid") String fid,@Named("source") String source){
+        getLegalEntityPage().verifyEditLegalEntityLeadInstitutionFlagInDB(fid,source);
+    }
+
+    @Then("the user should see leadInstitution value as <leadInstitutionflag> for fid <fid> in $source document")
+    public void getDocumentLeadInstitution(@Named("leadInstitutionflag") String leadInstitutionflag,@Named("fid") String fid,@Named("source") String source) {
+        getLegalEntityPage().verifyLeadInstitutionValuefromDB(leadInstitutionflag,fid,source);
+    }
+
+
+    @Then("the user should not see lead institution label and value")
+    public void verifyNoLeadInstitution() {
+        getLegalEntityPage().verifyNoLeadInstitution();
+    }
 
     @Then("the user verifies basic info for legal entity left column <fid> from trusted document")
-    public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getLegalEntityPage().verifyBasicInforLeftColumn(fid);}
+    public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getLegalEntityPage().verifyLegalEntityBasicInfoLeftColumn(fid);}
+
 
     @Then("the user verifies options displayed for charter type from trusted document")
     public void verifyCharterTypeOptions(){getLegalEntityPage().verifyCharterTypeOptions();}
@@ -216,5 +232,11 @@ public class LegalEntitySteps extends AbstractSteps{
 
     @Then("the user verifies charter type from trusted and zeus document <fid>")
     public void verifyUpdatedCharterTypeFromBothDocs(@Named("fid") String fid){getLegalEntityPage().verifyUpdatedCharterTypeBothDocs(fid);}
+
+
+    @Then("the user should return to edit legalentity page mode")
+    public void verifyLegalEntityEditPageMode(){
+        getLegalEntityPage().verifyLegalEntityEditPageMode();
+    }
 
 }
