@@ -17,6 +17,7 @@ JIRA-ID - ZEUS-838 - User will see confirmation message after saving currency ed
 JIRA ID - ZEUS-743 - User will get warning if click away from screen they are editing
 JIRA ID - ZEUS-828 - User can only input numbers in date field
 JIRA ID - ZEUS-802 Accented characters displaying correctly after saving
+JIRA ID - ZEUS-869 - Remove currency use
 
 
 Scenario: a. Veify the currency selection drop-down is disabled in update mode
@@ -152,6 +153,7 @@ And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
 Then the user should see the currency uses in edit mode are from trusted document
+When the user clicks on the add country type-ahead option
 Then user should see the list of countries in currency edit mode from trusted document
 
 Examples:
@@ -530,3 +532,23 @@ Examples:
 |currency|currencyStartDay|currencyStartYear|currencyEndDay|currencyEndYear|
 |afghani|test|test|test|test|
 
+Scenario: ZEUS-869 remove currency use
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
+And the user clicks on the update link
+And the user clicks on the add country type-ahead option
+When the user enters the country <addCurrencyCountry> in the add country type-ahead box
+When the user clicks on delete currency usage
+Then the user should see the delete row confirmation modal in the currency page
+When the user clicks on the no button in the delete row confirmation modal in the currency page
+Then the user should see the newly added usage in the currency page
+When the user clicks on delete currency usage
+When the user clicks on the yes button in the delete row confirmation modal in the currency page
+Then the user should not see the newly added usage in the currency page
+
+Examples:
+|currency|addCurrencyCountry|
+|Ariary|Algeria|
