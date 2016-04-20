@@ -477,11 +477,7 @@ public class LegalEntityPage extends AbstractPage {
 
 
     public void enterValueInStatusDropdown(String word) {
-        //getDriver().findElement(legalEntity_basicInfo_status_dropdown_xpath).click();
         getDriver().findElement(legalEntity_basicInfo_status_dropdown_xpath).sendKeys(word);
-        //System.out.println("focus value"+getDriver().findElements(legalEntity_basicInfo_status_list_xpath).get(0).getCssValue("focus"));
-
-
     }
 
 
