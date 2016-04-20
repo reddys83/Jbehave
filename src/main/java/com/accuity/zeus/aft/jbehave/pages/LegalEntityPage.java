@@ -92,7 +92,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_status_dropdown_xpath=By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='Status']/td/select");
 
     private By legalEntity_leadinstitution_radio_options_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//input[@name='leadInstitution']");
-    private By countryBasicInfo_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
+
 
 
 
@@ -554,12 +554,6 @@ public class LegalEntityPage extends AbstractPage {
         assertTrue(getDriver().findElements(legalEntity_leadinstitution_radio_options_xpath).size() > 0);
     }
 
-    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
-        List<WebElement> confirmChanges = getDriver().findElements(countryBasicInfo_confirmationModal_summary_xpath);
-        for(int i=0;i<Summary.getRowCount();i++)
-        {
-            assertEquals(Summary.getRow(i).get(Summary.getHeaders().get(0)), confirmChanges.get(i).getText());
-        }
-    }
+
     }
 

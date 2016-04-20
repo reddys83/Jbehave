@@ -250,9 +250,5 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyLegalEntityEditPageMode();
     }
 
-    @Then("the user should see the below summary changes in confirmation modal $Summary")
-    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
-        getLegalEntityPage().verifySummaryConfirmationModal(Summary);
-    }
 
 }

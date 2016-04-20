@@ -24,8 +24,8 @@ Examples:
 
 
 Scenario: Verify that the Status drop-down list should highlight the values that contain characters input by user
-a)Type a matching text "i" in the status dropdown and verify that the status "Active" is selected.
-b)Type a matching text "a" in the status dropdown and verify that the status "Inactive" is selected.
+a)Type a matching text "i" in the status dropdown and verify that the status "Inactive" is selected.
+b)Type a matching text "a" in the status dropdown and verify that the status "Active" is selected.
 c)Type a matching text "p" in the status dropdown and verify that the status "Pending" is selected.
 d)Type a unmatching text "x" in the status dropdown and verify that the previously selected status "Pending" is still selected.
 
@@ -45,13 +45,12 @@ When the user starts typing the name of a status as p in the Status drop-down
 Then the user should see the selected status in the drop-down as Pending
 When the user starts typing the name of a status as x in the Status drop-down
 Then the user should see the selected status in the drop-down as Pending
-When the user starts typing the name of a status as a in the Status drop-down
-Then the user should see the selected status in the drop-down as Active
 
 Examples:
 |entity|searchBy|fid|
 |1038|FID|1038|
-Scenario: User will see summary of changes made in confirmation modal
+
+Scenario: User will see summary of changes made in confirmation modal when update the Legal Entity's status
 Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page

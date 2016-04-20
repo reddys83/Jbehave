@@ -26,7 +26,7 @@ import static org.junit.Assert.*;
 public class DataPage extends AbstractPage {
 
     private By currency_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li");
-
+    private By edit_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
     private By area_tab_id=By.id("area-nav");
     public static String clickedCurrencyIso="";
     private By legalEntity_tab_id = By.id("legalEntity-nav");
@@ -1199,6 +1199,14 @@ public class DataPage extends AbstractPage {
         }
         else{
             assertFalse("Zeus document with "+param+" as "+entity+" does not exist in the DB",true);
+        }
+    }
+
+    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
+        List<WebElement> confirmChanges = getDriver().findElements(edit_confirmationModal_summary_xpath);
+        for(int i=0;i<Summary.getRowCount();i++)
+        {
+            assertEquals(Summary.getRow(i).get(Summary.getHeaders().get(0)), confirmChanges.get(i).getText());
         }
     }
 }

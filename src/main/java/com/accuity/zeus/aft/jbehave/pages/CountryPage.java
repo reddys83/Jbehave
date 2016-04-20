@@ -975,14 +975,6 @@ public class CountryPage extends AbstractPage {
         }
     }
 
-    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
-     List<WebElement> confirmChanges = getDriver().findElements(countryBasicInfo_confirmationModal_summary_xpath);
-        for(int i=0;i<Summary.getRowCount();i++)
-        {
-           assertEquals(Summary.getRow(i).get(Summary.getHeaders().get(0)), confirmChanges.get(i).getText());
-        }
-    }
-
     public void veirfyDemograhicsDateErrorMessage() {
         assertEquals(getDriver().findElement(countryBasicInfo_demographics_date_error_message_xpath).getText(),"Must be no later than today.");
     }

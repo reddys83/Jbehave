@@ -910,4 +910,10 @@ public class DataSteps extends AbstractSteps {
     {
         getDataPage().getDocument(xqueryName,param,entity);
     }
+
+    @Then("the user should see the below summary changes in confirmation modal $Summary")
+    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
+        getDataPage().verifySummaryConfirmationModal(Summary);
+    }
+
 }
