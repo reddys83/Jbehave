@@ -220,8 +220,23 @@ public class LegalEntitySteps extends AbstractSteps{
     @Then("the user verifies basic info for legal entity left column <fid> from trusted document")
     public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getLegalEntityPage().verifyLegalEntityBasicInfoLeftColumn(fid);}
 
+
+    @Then("the user verifies options displayed for charter type from trusted document")
+    public void verifyCharterTypeOptions(){getLegalEntityPage().verifyCharterTypeOptions();}
+
+    @Then("the user validates default value for charter type from trusted document <fid>")
+    public void verifyCharterTypeDefaultValue(@Named("fid") String fid){getLegalEntityPage().verifyCharterTypeDefaultValue(fid);}
+
+    @When("the user updates charter type value <chartertype>")
+    public void updateCharterType(@Named("chartertype") String charterType){getLegalEntityPage().updateCharterType(charterType);}
+
+    @Then("the user verifies charter type from trusted and zeus document <fid>")
+    public void verifyUpdatedCharterTypeFromBothDocs(@Named("fid") String fid){getLegalEntityPage().verifyUpdatedCharterTypeBothDocs(fid);}
+
+
     @Then("the user should return to edit legalentity page mode")
     public void verifyLegalEntityEditPageMode(){
         getLegalEntityPage().verifyLegalEntityEditPageMode();
     }
+
 }
