@@ -211,7 +211,6 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyLeadInstitutionValuefromDB(leadInstitutionflag,fid,source);
     }
 
-
     @Then("the user should not see lead institution label and value")
     public void verifyNoLeadInstitution() {
         getLegalEntityPage().verifyNoLeadInstitution();
@@ -220,7 +219,8 @@ public class LegalEntitySteps extends AbstractSteps{
     @Then("the user verifies basic info for legal entity left column <fid> from trusted document")
     public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getLegalEntityPage().verifyLegalEntityBasicInfoLeftColumn(fid);}
 
-    @Then("the user verifies options displayed for charter type from trusted document")
+
+    @Then("the user verifies options displayed for charter type from lookup document")
     public void verifyCharterTypeOptions(){getLegalEntityPage().verifyCharterTypeOptions();}
 
     @Then("the user validates default value for charter type from trusted document <fid>")
@@ -231,6 +231,7 @@ public class LegalEntitySteps extends AbstractSteps{
 
     @Then("the user verifies charter type from trusted and zeus document <fid>")
     public void verifyUpdatedCharterTypeFromBothDocs(@Named("fid") String fid){getLegalEntityPage().verifyUpdatedCharterTypeBothDocs(fid);}
+
 
     @When("the user enters day for claimed est date <day>")
     public void enterDayForClaimedEstDate(@Named("day") String day){getLegalEntityPage().enterDayValueForClaimedEstDate(day);}
@@ -247,8 +248,10 @@ public class LegalEntitySteps extends AbstractSteps{
     @Then("the user verifies claimed est date from trusted and zeus document <fid>")
     public void verifyUpdatedClaimedEstDateFromBothDocs(@Named("fid") String fid){getLegalEntityPage().verifyUpdatedClaimedEstDateBothDocs(fid);}
 
+
     @Then("the user should return to edit legalentity page mode")
     public void verifyLegalEntityEditPageMode(){
         getLegalEntityPage().verifyLegalEntityEditPageMode();
     }
+
 }
