@@ -79,7 +79,7 @@ public class CurrencySteps extends AbstractSteps{
     }
 
     @Then("user should see the list of countries in currency edit mode from trusted document")
-    public void verifyCountryListInCurrencyEditMode() { getCurrencyPage().verifyCountryListInCurrencyEditMode(database, apacheHttpClient);}
+    public void verifyCountryListInCurrencyEditMode() { getCurrencyPage().verifyCountryListInCurrencyEditMode();}
 
     @Then("the user should see the edit currency details from trusted document")
     public void verifyEditCurrencyDetailsFromTrusted() {
@@ -292,6 +292,26 @@ public class CurrencySteps extends AbstractSteps{
         getDataPage().verifyErrorMessageAtTopOfThePage();
     }
 
+    @When("the user clicks on the no button in the delete row confirmation modal in the currency page")
+    public void clickOnNoButtonInDeleteConfirmationModalInCurrency() {
+        getCurrencyPage().clickOnNoButtonInDeleteConfirmationModalInCurrency();
+    }
+
+    @When("the user clicks on the yes button in the delete row confirmation modal in the currency page")
+    public void clickOnYesButtonInDeleteConfirmationInCurrency() {
+        getCurrencyPage().clickOnYesButtonInDeleteConfirmationInCurrency();
+    }
+
+    @Then("the user should see the newly added usage in the currency page")
+    public void verifyNoNewlyAddedCurrencyUsage(){
+        getCurrencyPage().verifyNewlyAddedCurrencyUsage();
+    }
+
+    @Then("the user should not see the newly added usage in the currency page")
+    public void verifyNewlyAddedCurrnecyUsage() {
+        getCurrencyPage().verifyNoNewlyAddedCurrencyUsage();
+    }
+
     @Then("the user should see the error message for the required name field in the currency page")
     public void verifyErrorMessageForRequiredField(){
         getCurrencyPage().verifyErrorMessageForRequiredField();
@@ -322,7 +342,15 @@ public class CurrencySteps extends AbstractSteps{
         selectedCurrency = currency;
         getCurrencyPage().selectCurrencyFromTypeAhead(currency);
     }
+    @Then("the user should see the delete row confirmation modal in the currency page")
+    public void verifyDeleteConfirmationModalInCurrency() {
+        getCurrencyPage().verifyDeleteConfirmationModalInCurrency();
+    }
 
+    @When("the user clicks on delete currency usage")
+      public void clickOnDeleteCurrencyUsage() {
+        getCurrencyPage().clickOnDeleteCurrencyUsage();
+    }
     @Then("the user should see the currency page")
     public void verifyCurrencyPage() {
         getCurrencyPage().verifyCurrencyPage();

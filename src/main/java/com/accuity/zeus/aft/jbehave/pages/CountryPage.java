@@ -13,8 +13,6 @@ import org.w3c.dom.Document;
 import org.openqa.selenium.support.ui.Select;
 
 import java.text.DateFormatSymbols;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
@@ -217,12 +215,13 @@ public class CountryPage extends AbstractPage {
     private By countryBasicInfo_demographics_type_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='demographicTypeError']");
     private By countryBasicInfo_demographics_value_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='demographicValueError']");
     private By countryBasicInfo_holiday_date_error_message_xpath= By.xpath("//*[@class='notification error'][@data-error_id='holidayDateError']");
-    private By countryBasicInfo_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
+
     private String editCountryDemographicType="";
     private By country_credit_rating_new_row_xpath = By.xpath("//*[@class='new'][@data-row_id='creditRatings']");
     private By country_regions_existing_type_xpath = By.xpath(".//*[@id='additionalRegions']/tr[not(@class='new')]/td[1]");
 
     private By country_add_regions_button_edit_id =By.id("add-regions");
+    private By country_add_places_button_edit_id = By.id("add-relatedPlaces");
 
     private By country_sepaRegion_value_xpath = By.xpath(".//*[@id='additionalRegions']//fieldset");
     private By country_region_type_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='regionTypeError']");
@@ -234,6 +233,19 @@ public class CountryPage extends AbstractPage {
     private By country_banking_hrs_day_list_xpath = By.xpath("//*[@class='new'] //*[@id='bankingDay-select']");
     private By country_banking_hrs_start_time_list_xpath = By.xpath("//*[@class='new'] //*[@data-error_ref_id='bankingHour0Error']");
     private By country_banking_hrs_end_time_list_xpath = By.xpath("//*[@class='new'] //*[@data-error_ref_id='bankingHour1Error']");
+    private By country_places_go_button_xpath = By.xpath(".//*[@id='multiSelectRow']/button");
+    private By country_places_required_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='relatedPlacePlaceError']");
+    private By country_places_delete_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='relatedPlaces']//button[@class='delete-row']");
+    private By country_places_place_edit_xpath = By.xpath(".//*[@class='new']/td/input[@id='relatedPlacePlace']");
+    private By country_places_place_edit_button_xpath = By.xpath(".//tr[@class='new']//button[@class='edit-row']");
+    String country_places_type_dropdown_xpath = ".//*[@class='new'][@data-row_id='relatedPlaces']//select[@id='relatedPlaceType']";
+    String country_places_details_dropdown_xpath=".//*[@class='new'][@data-row_id='relatedPlaces']//select[@data-internal_id='relatedPlaceDetails']";
+    String country_places_country_dropDown_xpath=".//*[@id='country_chosen']";
+    String country_places_area_dropdown_xpath = ".//*[@id='area_chosen']";
+    String country_places_city_dropdown_xpath = ".//*[@id='city_chosen']";
+    private By  country_hera_validation_err_msg_xpath=By.xpath("//*[@id='error']//p[@class='notification error']");
+
+
     private String editedCountryBankingHrsDay ="";
     private String editedCountryBankingHrsStartTime ="";
     private String editedCountryBankingHrsEndTime ="";
@@ -244,6 +256,8 @@ public class CountryPage extends AbstractPage {
     private String editedCountryHolidayNotes="";
     private String editedCountryStartYear = "";
     private String editedCountryEndYear = "";
+    private String countryPlacesCountry = "";
+    private String countryPlacesArea = "";
 
 
     public CountryPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
@@ -335,7 +349,7 @@ public class CountryPage extends AbstractPage {
             assertEquals(document.getElementsByTagName("ReplacedBy").item(i).getTextContent().replace(" ", ""), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Replaced By']/td")).getText().replace(" ", "").replace(",", ""));
             assertEquals(document.getElementsByTagName("AddInfo").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Add Info']/td")).getText().replace(" ", ""));
 
-            assertEquals(document.getElementsByTagName("DomesticWith").item(0).getTextContent().replace(" ",""),getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Domestic with']/td")).getText().replace(",","").replace(" ",""));
+            assertEquals(document.getElementsByTagName("DomesticWith").item(0).getTextContent().replace(" ", ""), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Domestic with']/td")).getText().replace(",", "").replace(" ",""));
             assertEquals(document.getElementsByTagName("Imports").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Imports']/td")).getText());
             assertEquals(document.getElementsByTagName("Exports").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Exports']/td")).getText());
             assertEquals(document.getElementsByTagName("PoliticalStructure").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Political Structure']/td")).getText());
@@ -807,8 +821,24 @@ public class CountryPage extends AbstractPage {
         attemptClick(country_edit_identifier_type_list_xpath);
     }
 
+    public void verifyCountryPlacesTypeList() {
+        List<WebElement> countryPlacesTypeList = getDriver().findElements(By.xpath(country_places_type_dropdown_xpath+"/option"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country places type");
+        for (int i=1;i<document.getElementsByTagName("type").getLength();i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), countryPlacesTypeList.get(i).getText());
+        }
+    }
+
+    public void verifyCountryplacesDetailsList() {
+        List<WebElement> countryPlacesDetailsList = getDriver().findElements(By.xpath(country_places_details_dropdown_xpath+"/option"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country places details");
+        for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), countryPlacesDetailsList.get(i).getText());
+        }
+    }
+
     public void verifyCountryNameTypesList() {
-        List<WebElement> countryNameTypesList = getDriver().findElements(country_name_type_list_xpath);
+        List<WebElement> countryNameTypesList = getDriver().findElements(By.xpath(country_name_type_list_xpath + "/option"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country names type");
         for (int i = 1; i < document.getElementsByTagName("type").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), countryNameTypesList.get(i).getText());
@@ -894,6 +924,18 @@ public class CountryPage extends AbstractPage {
         attemptClick(country_add_regions_button_edit_id);
     }
 
+    public void clickOnNewCountryPlaceTypeDropdown() {
+        attemptClick(By.xpath(country_places_type_dropdown_xpath));
+    }
+
+    public void clickOnNewCountryPlaceDetatilsDropdown() {
+        attemptClick(By.xpath(country_places_details_dropdown_xpath));
+    }
+
+    public void clickOnAddPlacesButton() {
+        attemptClick(country_add_places_button_edit_id);
+    }
+
     public void clickOnTradingRegionValuesDropdown() {
         attemptClick(By.xpath(country_trading_region_value_dropdown_xpath));
     }
@@ -902,11 +944,123 @@ public class CountryPage extends AbstractPage {
         attemptClick(By.xpath(country_region_value_dropdown_xpath));
     }
 
+    public void verifyRequiredErrorMessageForType() {
+        assertEquals(getDriver().findElement(country_places_required_error_message_xpath).getText(),"Required");
+    }
+    public void clicksOnCountryInPlacesForCountry() {
+        attemptClick(By.xpath(country_places_country_dropDown_xpath+"//a"));
+    }
+
+    public void verifyCountryListInPlacesForCountry() {
+        List<WebElement> countryList = getDriver().findElements(By.xpath(country_places_country_dropDown_xpath+"//li"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "country list");
+        for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), countryList.get(i).getText().trim());
+        }
+    }
+    public void verifyAreaListInPlacesForCountry() {
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", countryPlacesCountry));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list", nvPairs);
+        if (getDriver().findElements(By.xpath(country_places_area_dropdown_xpath + "//li")).size() > 2) {
+            assertEquals(getDriver().findElement(By.xpath(country_places_area_dropdown_xpath + "//li[1]")).getText(),"No Area");
+            assertEquals(getDriver().findElement(By.xpath(country_places_area_dropdown_xpath + "//li[2]")).getText(),"Return All Cities");
+            for (int i = 0; i < document.getElementsByTagName("area").getLength(); i++) {
+                assertEquals(document.getElementsByTagName("area").item(i).getTextContent(), getDriver().findElements(By.xpath(country_places_area_dropdown_xpath + "//li")).get(i+2).getText());
+            }
+        }
+        else
+        {
+            assertEquals(getDriver().findElement(By.xpath(country_places_area_dropdown_xpath + "//li[1]")).getText(),"No Area");
+            assertEquals(getDriver().findElement(By.xpath(country_places_area_dropdown_xpath + "//li[2]")).getText(),"Return All Cities");
+        }
+    }
+
+    public void verifyCityListInPlacesForCountry() {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", countryPlacesArea));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "city list", nvPairs);
+        for(int i=0; i<document.getElementsByTagName("city").getLength(); i++){
+            assertEquals(document.getElementsByTagName("city").item(i).getTextContent(), getDriver().findElements(By.xpath(country_places_city_dropdown_xpath+"//li")).get(i).getText());
+        }
+    }
+
+    public void clicksOnAreaDropdownInPlacesForCountry() {
+        attemptClick(By.xpath(country_places_area_dropdown_xpath+"//a"));
+    }
+
+    public void clicksOnCityDropdownInPlacesForCountry() {
+        attemptClick(By.xpath(country_places_city_dropdown_xpath+"//a"));
+    }
+
+    public void selectsCountryInPlacesForCountry(String countryPlaces)
+    {
+        countryPlacesCountry = countryPlaces;
+        getDriver().findElement(By.xpath(country_places_country_dropDown_xpath+"//input")).sendKeys(countryPlaces);
+        getDriver().findElement(By.xpath(country_places_country_dropDown_xpath + "//input")).sendKeys(Keys.RETURN);
+    }
+
+    public void selectsAreaInPlacesForCountry(String AreaPlaces) {
+        countryPlacesArea = AreaPlaces;
+        getDriver().findElement(By.xpath(country_places_area_dropdown_xpath+"//input")).sendKeys(AreaPlaces);
+        getDriver().findElement(By.xpath(country_places_area_dropdown_xpath + "//input")).sendKeys(Keys.RETURN);
+    }
+
+    public void selectsCityInPlacesForCountry(String cityPlaces)
+    {
+        getDriver().findElement(By.xpath(country_places_city_dropdown_xpath+"//input")).sendKeys(cityPlaces);
+        getDriver().findElement(By.xpath(country_places_city_dropdown_xpath+"//input")).sendKeys(Keys.RETURN);
+    }
+    public void verifyPlaceInPlacesForCountry(String place)
+    {
+        assertEquals(getDriver().findElement(country_places_place_edit_xpath).getAttribute("value"),place);
+    }
+
+    public void clicksOnGoButton(){
+        getDriver().findElement(country_places_go_button_xpath).click();
+    }
+    public void clicksOnEditButton() {
+        attemptClick(country_places_place_edit_button_xpath);
+    }
+
+    public void selectsPlacesTypeFromDropdwon(String placeType)
+    {
+        List<WebElement> options = getDriver().findElements(By.xpath(country_places_type_dropdown_xpath+"/option"));
+
+        for (WebElement option : options) {
+            if (option.getText().contains(placeType)) {
+
+                getDriver().findElement(By.xpath(country_places_type_dropdown_xpath)).click();
+
+                option.click();
+
+                break;
+            }
+        }
+    }
+
+    public void selectsPlacesDetailsFromDropdown(String PlaceDetails)
+    {
+        List<WebElement> options = getDriver().findElements(By.xpath(country_places_details_dropdown_xpath+"/option"));
+
+        for (WebElement option : options) {
+            if (option.getText().contains(PlaceDetails)) {
+
+                getDriver().findElement(By.xpath(country_places_details_dropdown_xpath)).click();
+
+                option.click();
+
+                break;
+            }
+        }
+    }
+
     public void selectsRegionTypeFromDropdown(String regionType)
     {
         getDriver().findElement(By.xpath(country_regions_new_type_xpath)).click();
-       // attemptClick(By.xpath(country_regions_new_type_xpath));
-      // selectItemFromDropdownListByText((By.xpath(country_regions_new_type_xpath)),regionType);
         List<WebElement> options = getDriver().findElements(By.xpath(country_regions_new_type_xpath + "/option"));
 
         for (WebElement option : options) {
@@ -972,14 +1126,6 @@ public class CountryPage extends AbstractPage {
         for (int i=1;i<document.getElementsByTagName("value").getLength();i++)
         {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), tradingRegionValues.get(i).getText());
-        }
-    }
-
-    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
-     List<WebElement> confirmChanges = getDriver().findElements(countryBasicInfo_confirmationModal_summary_xpath);
-        for(int i=0;i<Summary.getRowCount();i++)
-        {
-           assertEquals(Summary.getRow(i).get(Summary.getHeaders().get(0)), confirmChanges.get(i).getText());
         }
     }
 
@@ -1310,6 +1456,10 @@ public class CountryPage extends AbstractPage {
         attemptClick(country_region_delete_button_xpath);
     }
 
+    public void clicksOnDeleteCountryPlacesType() {
+        attemptClick(country_places_delete_button_xpath);
+    }
+
     public void verifyUserSeeBankingDaysAndHours() {
         List<String> hours = new ArrayList<>();
         attemptClick(countryBasicInfo_bankingHours_day_dropdown_xpath);
@@ -1619,5 +1769,8 @@ public class CountryPage extends AbstractPage {
         }
     }
 
+    public void verifyHeraValidationError() {
+        assertEquals("Technical error. Update not successful. Please contact Accuity Helpdesk", getDriver().findElement(country_hera_validation_err_msg_xpath).getText());
+    }
 
 }

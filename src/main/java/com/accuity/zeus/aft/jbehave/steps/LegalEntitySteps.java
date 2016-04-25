@@ -201,9 +201,110 @@ public class LegalEntitySteps extends AbstractSteps{
         setOfficesPage(getLegalEntityPage().clickOnOfficesLink());
     }
 
+    @When("the user selects lead institution value <leadInstitutionflag> in the basicinfo legalentity page")
+    public void selectLegalEntityLeadInstitutionFlag(@Named("leadInstitutionflag") String leadInstitutionflag){
+        getLegalEntityPage().selectLegalEntityLeadInstitutionFlag(leadInstitutionflag);
+    }
+    @When("the user selects lead institution value other than default value in the basicinfo legalentity page")
+    public void changeLegalEntityLeadInstitutionFlag(){
+        getLegalEntityPage().changeLegalEntityLeadInstitutionFlag();
+    }
+
+    @Then("the user should see the legalentity's lead institution value as in $source document with fid <fid>")
+    public void verifyEditLegalEntityLeadInstitutionFlagInTrusted(@Named("fid") String fid,@Named("source") String source){
+        getLegalEntityPage().verifyEditLegalEntityLeadInstitutionFlagInDB(fid,source);
+    }
+
+    @Then("the user should see leadInstitution value as <leadInstitutionflag> for fid <fid> in $source document")
+    public void getDocumentLeadInstitution(@Named("leadInstitutionflag") String leadInstitutionflag,@Named("fid") String fid,@Named("source") String source) {
+        getLegalEntityPage().verifyLeadInstitutionValuefromDB(leadInstitutionflag,fid,source);
+    }
+
+
+    @Then("the user should not see lead institution label and value")
+    public void verifyNoLeadInstitution() {
+        getLegalEntityPage().verifyNoLeadInstitution();
+    }
+
+    @When("the user clicks on the Status drop-down in the basicinfo legalentity page")
+    public void clickOnStatusType(){
+        getLegalEntityPage().clickOnStatusType();
+    }
+
+    @Then("the user should see the status values from lookup Status")
+    public void verifyLegalEntityStatusList(){
+        getLegalEntityPage().verifyLegalEntityStatusList();
+    }
+
+    @When("the user starts typing the name of a status as $word in the Status drop-down")
+    public void enterValueInStatusDropdown(String word) {
+        getLegalEntityPage().enterValueInStatusDropdown(word);
+    }
+    @Then("the user should see the selected status in the drop-down as $status")
+    public void verifyStatusInDropdown(String status)
+    {
+        getLegalEntityPage().verifyStatusInDropdown(status);
+    }
+
+    @When("the user selects value as <status> from Status drop-down in the basicinfo legalentity page")
+    public void selectLegalEntityStatusValue(@Named("status") String status)
+    {
+        getLegalEntityPage().selectLegalEntityStatusValue(status);
+    }
+
+    @Then("the user should see the status value as in $source document with fid <fid>")
+
+    public void verifyEditLegalEntityStatusValueFromDB(@Named("fid") String fid,@Named("source") String source){
+        getLegalEntityPage().verifyEditLegalEntityStatusValueFromTrusted(fid,"status",source);
+    }
+
+    @Then("the user should see status value as <status> for fid <fid> in $source document")
+    public void verifyStatusValuefromDB(@Named("status") String status,@Named("fid") String fid,@Named("source") String source) {
+        getLegalEntityPage().verifyEditLegalEntityStatusValueFromZeus(status,"status",fid,source);
+    }
+    @When("the user selects a non-default value from Status drop-down in the basicinfo legalentity page")
+    public void changeLegalEntityStatusValue(){
+        getLegalEntityPage().changeLegalEntityStatusValue();
+    }
+
 
     @Then("the user verifies basic info for legal entity left column <fid> from trusted document")
-    public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getLegalEntityPage().verifyBasicInforLeftColumn(fid);}
+    public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getLegalEntityPage().verifyLegalEntityBasicInfoLeftColumn(fid);}
+
+
+    @Then("the user verifies options displayed for charter type from lookup document")
+    public void verifyCharterTypeOptions(){getLegalEntityPage().verifyCharterTypeOptions();}
+
+    @Then("the user validates default value for charter type from trusted document <fid>")
+    public void verifyCharterTypeDefaultValue(@Named("fid") String fid){getLegalEntityPage().verifyCharterTypeDefaultValue(fid);}
+
+    @When("the user updates charter type value <chartertype>")
+    public void updateCharterType(@Named("chartertype") String charterType){getLegalEntityPage().updateCharterType(charterType);}
+
+    @Then("the user verifies charter type from trusted and zeus document <fid>")
+    public void verifyUpdatedCharterTypeFromBothDocs(@Named("fid") String fid){getLegalEntityPage().verifyUpdatedCharterTypeBothDocs(fid);}
+
+
+    @When("the user enters day for claimed est date <day>")
+    public void enterDayForClaimedEstDate(@Named("day") String day){getLegalEntityPage().enterDayValueForClaimedEstDate(day);}
+
+    @When("the user enters month for claimed est date <month>")
+    public void enterMonthForClaimedEstDate(@Named("month") String month){getLegalEntityPage().enterMonthValueForClaimedEstDate(month);}
+
+    @When("the user enters year for claimed est date <year>")
+    public void enterYearForClaimedEstMonth(@Named("year") String year){getLegalEntityPage().enterYearValueForClaimedEstDate(year);}
+
+    @Then("the user should see the error message enter a day/month/year on legal entity page")
+    public void verifyErrorMessageDisplayedForClaimedEstDate(){getLegalEntityPage().validateErrorMessageforClaimedEstDate();}
+
+    @Then("the user verifies claimed est date from trusted and zeus document <fid>")
+    public void verifyUpdatedClaimedEstDateFromBothDocs(@Named("fid") String fid){getLegalEntityPage().verifyUpdatedClaimedEstDateBothDocs(fid);}
+
+
+    @Then("the user should return to edit legalentity page mode")
+    public void verifyLegalEntityEditPageMode(){
+        getLegalEntityPage().verifyLegalEntityEditPageMode();
+    }
 
     @When("the user clicks on the Fatca Status drop-down in the basicinfo legalentity page")
     public void clickOnFatcaStatusType(){
@@ -231,29 +332,19 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().changeLegalEntityFatcaStatusValue();
     }
 
-    @Then("the user should return to edit legalentity page mode")
-    public void verifyLegalEntityEditPageMode(){
-        getLegalEntityPage().verifyLegalEntityEditPageMode();
-    }
+    @Then("the user should see the fatcastatus value as in $source document with fid <fid>")
 
-    @Then("the user should see the $attribute value as in $source document with fid <fid>")
-
-    public void verifyEditLegalEntityFatcaStatusValueFromDB(@Named("fid") String fid,@Named("attribute") String attribute,@Named("source") String source){
-        getLegalEntityPage().verifyEditLegalEntityFatcaStatusValueFromTrusted(fid,attribute,source);
+    public void verifyEditLegalEntityFatcaStatusValueFromDB(@Named("fid") String fid,@Named("source") String source){
+        getLegalEntityPage().verifyEditLegalEntityFatcaStatusValueFromTrusted(fid,"fatcastatus",source);
     }
     @When("the user selects value as <fatcastatus> from Fatca Status drop-down in the basicinfo legalentity page")
     public void selectLegalEntityFatcaStatusValue(@Named("fatcastatus") String fatcaStatus)
     {
         getLegalEntityPage().selectLegalEntityFatcaStatusValue(fatcaStatus);
     }
-    @Then("the user should see $attribute value as <fatcastatus> for fid <fid> in $source document")
-    public void verifyFatcaStatusValuefromDB(@Named("fatcastatus") String fatcastatus,@Named("attribute") String attribute,@Named("fid") String fid,@Named("source") String source) {
-        getLegalEntityPage().verifyEditLegalEntityFatcaStatusValueFromZeus(fatcastatus,attribute,fid,source);
-    }
-
-    @Then("the user should see the below summary changes in confirmation modal $Summary")
-    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
-        getLegalEntityPage().verifySummaryConfirmationModal(Summary);
+    @Then("the user should see fatcaStatus value as <fatcastatus> for fid <fid> in $source document")
+    public void verifyFatcaStatusValuefromDB(@Named("fatcastatus") String fatcastatus,@Named("fid") String fid,@Named("source") String source) {
+        getLegalEntityPage().verifyEditLegalEntityFatcaStatusValueFromZeus(fatcastatus,"fatcastatus",fid,source);
     }
 
 }

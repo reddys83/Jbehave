@@ -25,15 +25,15 @@ import static org.junit.Assert.*;
 public class DataPage extends AbstractPage {
 
     private By currency_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li");
-
-    private By area_tab_id=By.id("area-nav");
-    public static String clickedCurrencyIso="";
+    private By edit_confirmationModal_summary_xpath = By.xpath(".//*[@class='summary']//li");
+    private By area_tab_id = By.id("area-nav");
+    public static String clickedCurrencyIso = "";
     private By legalEntity_tab_id = By.id("legalEntity-nav");
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
     private By area_listBox_xpath = By.xpath("//*[@id='selection1'] //*[@id='entitySelect_chosen']//span");
     private By subarea_listBox_xpath = By.xpath("//*[@id='selection2'] //*[@id='entitySelect_chosen']//span");
     private By regions_label_xpath = By.xpath("//li[contains(h1,'Regions for')] //span");
-    private By country_type_ahead_xpath=By.xpath(".//*[@id='selection0'] //*[@id='entitySelect_chosen']//input");
+    private By country_type_ahead_xpath = By.xpath(".//*[@id='selection0'] //*[@id='entitySelect_chosen']//input");
     private By basic_info_xpath = By.xpath("//*[@id='content']/div/ul/li/h1/span");
     private By basic_info_names_label_xpath = By.xpath("//*[@id='content']//li[1]/h2[1]");
     private By basic_info_names_type_label_xpath = By.xpath("//*[@id='content']//table[1]/thead/tr/th[1]");
@@ -60,7 +60,7 @@ public class DataPage extends AbstractPage {
 
     private By basic_info_time_zones_label_xpath = By.xpath("//*[@id='content']//li[1]//h2[text()='Time Zones']");
 
-    private String basic_info_label_xpath ="//*[@id='content']//li[2]/table/tbody/tr/th[text()='";
+    private String basic_info_label_xpath = "//*[@id='content']//li[2]/table/tbody/tr/th[text()='";
     private String basic_info_label_value_xpath = ".//*[@id='content']//table[@class='vertical']/tbody/tr[th='";
 
     private By regions_type_label_xpath = By.xpath("//li[contains(h1,'Regions for')]//tr/th[1]");
@@ -85,7 +85,7 @@ public class DataPage extends AbstractPage {
     private By places_place_label_xpath = By.xpath("//li[contains(h1,'Places')]//table/thead//th[2]");
     private By places_details_label_xpath = By.xpath("//li[contains(h1,'Places')]//table/thead//th[3]");
     private By country_places_type_xpath = By.xpath("//li[contains(h1,'Places')]//table/tbody//td[1]");
-    public static String selectedEntity="";
+    public static String selectedEntity = "";
 
     private By entities_label_xpath = By.xpath("//li[contains(h1,'Entities')]//span");
     private By entities_type_label_xpath = By.xpath("//li[contains(h1,'Entities for ')]//table/thead//th[1]");
@@ -99,10 +99,10 @@ public class DataPage extends AbstractPage {
     private By area_subarea_dropdown_xpath = By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen'] //a");
 
 
-    private By area_time_zones_summary_label_xpath=By.xpath(".//*[@id='content']//li[1]/dl/dt");
-    private By area_time_zones_summary_xpath=By.xpath(".//*[@id='content']//li[1]/dl/dd");
-    private By area_time_zones_xpath=By.xpath(".//*[@id='content']//li/table[3]/tbody/tr/th");
-    private By area_time_zones_value_xpath= By.xpath(".//*[@id='content']//li/table[3]/tbody/tr/td");
+    private By area_time_zones_summary_label_xpath = By.xpath(".//*[@id='content']//li[1]/dl/dt");
+    private By area_time_zones_summary_xpath = By.xpath(".//*[@id='content']//li[1]/dl/dd");
+    private By area_time_zones_xpath = By.xpath(".//*[@id='content']//li/table[3]/tbody/tr/th");
+    private By area_time_zones_value_xpath = By.xpath(".//*[@id='content']//li/table[3]/tbody/tr/td");
     private By city_tab_id = By.id("city-nav");
     private By city_city_dropdown_xpath = By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen'] //a");
     private By city_city_dropdown_list_xpath = By.xpath(".//*[@id='selection2'] //ul/li");
@@ -127,15 +127,15 @@ public class DataPage extends AbstractPage {
     private By area_basic_info_link_id = By.id("areaBasicInfo");
     private By area_related_places_link_id = By.id("areaPlaces");
     private By area_related_people_link_id = By.id("areaPeople");
-    private By area_demographics_link_id= By.id("areaDemographics");
+    private By area_demographics_link_id = By.id("areaDemographics");
     private By area_demographics_label_xpath = By.xpath("//li[contains(h1, 'Demographics for')]/h1/span");
     private By area_demographics_type_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[1]");
     private By area_demographics_value_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[2]");
     private By area_demographics_unit_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[3]");
     private By area_demographics_date_label_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table/thead//th[4]");
     private By area_demographics_type_xpath = By.xpath("//li[contains(h1, 'Demographics')]//table//tbody//td[1]");
-    private By city_type_ahead_xpath =By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen']//input");
-    private By city_region_link_id =By.id("cityRegions");
+    private By city_type_ahead_xpath = By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen']//input");
+    private By city_region_link_id = By.id("cityRegions");
     public By city_entity_link_id = By.id("cityPresences");
     private By city_basic_info_link_id = By.id("cityBasicInfo");
     private By city_related_places_link_id = By.id("cityPlaces");
@@ -160,7 +160,7 @@ public class DataPage extends AbstractPage {
     private By statistics_value_list_xpath = By.xpath("//li[h1='Statistics'] //table/tbody/tr/td");
 
     private By searchResults_institution_xpath = By.xpath(".//*[@id='cssTempFixId']/header//a");
-    private By searchResults_headOffice_address_xpath =By.xpath(".//*[@id='cssTempFixId']/header//p");
+    private By searchResults_headOffice_address_xpath = By.xpath(".//*[@id='cssTempFixId']/header//p");
     private By searchResults_header_fid_xpath = By.xpath(".//*[@id='cssTempFixId']/header/table//tr[th='FID']/td");
     private By searchResults_header_tfpid_xpath = By.xpath(".//*[@id='cssTempFixId']/header/table//tr[th='TFPID']/td");
 
@@ -187,9 +187,9 @@ public class DataPage extends AbstractPage {
     private By return_button_xpath = By.xpath("//*[@id='modal-region'] //button[@id='cancel-button']");
     private By confirm_changes_info_xpath = By.xpath("//*[@id='modal-region']/div/p");
     private By confirm_changes_heading_xpath = By.xpath("//*[@id='modal-region']/div/h1");
-    private By country_tab_xpath=By.xpath("//*[@id='data-navbar']/ul/li[2]");
+    private By country_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li[2]");
     private By cancel_no_button_xpath = By.xpath("//*[@class='modal-content'] //*[@id='cancel-button']");
-    private By currency_country_selection_disabled_xpath =By.xpath(".//*[@id='entitySelect_chosen'][@class='chosen-container chosen-container-single chosen-disabled']");
+    private By currency_country_selection_disabled_xpath = By.xpath(".//*[@id='entitySelect_chosen'][@class='chosen-container chosen-container-single chosen-disabled']");
     private By start_date_error_msg_xpath = By.xpath("//*[@data-error_id='startDateError']");
     private By end_date_error_msg_xpath = By.xpath("//*[@data-error_id='endDateError']");
     private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
@@ -198,8 +198,8 @@ public class DataPage extends AbstractPage {
     static ResponseEntity responseEntity;
     static String endpointWithID;
 
-    public DataPage(WebDriver driver, String urlPrefix, Database database,  ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi ) {
-        super(driver, urlPrefix, database, apacheHttpClient,restClient,heraApi );
+    public DataPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
+        super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
 
@@ -220,7 +220,7 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
         getDriver().findElement(choose_currency_option_xpath).click();
-        return new CurrencyPage(getDriver(),getUrlPrefix(),getDatabase(),getApacheHttpClient(),getRestClient(),getHeraApi());
+        return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void clickOnCountryTab() {
@@ -230,7 +230,7 @@ public class DataPage extends AbstractPage {
     public CountryPage clickOnCountryListBox() {
         waitForElementToAppear(country_dropdown_is_visible_xpath);
         attemptClick(country_listBox_xpath);
-        return new CountryPage(getDriver(),getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
+        return new CountryPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void clickOnAreaTab() {
@@ -260,7 +260,7 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return new CountryPage(getDriver(), getUrlPrefix(),getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
+        return new CountryPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void enterAreaInTypeAhead(String area) {
@@ -289,7 +289,7 @@ public class DataPage extends AbstractPage {
         assertEquals("VALUE", getDriver().findElement(basic_info_names_value_label_xpath).getText());
         List<WebElement> actNameTypes = getDriver().findElements(basic_info_names_type_xpath);
         List<WebElement> actNameValue = getDriver().findElements(basic_info_names_value_xpath);
-        for(int i = 0; i<namesList.getRowCount(); i++){
+        for (int i = 0; i < namesList.getRowCount(); i++) {
             assertEquals(namesList.getRow(i).get(namesList.getHeaders().get(0)), actNameTypes.get(i).getText());
             assertEquals(namesList.getRow(i).get(namesList.getHeaders().get(1)), actNameValue.get(i).getText());
         }
@@ -299,7 +299,7 @@ public class DataPage extends AbstractPage {
         assertEquals("OFFICE TYPES", getDriver().findElement(basic_info_office_names_label_xpath).getText());
         assertEquals("TYPE", getDriver().findElement(basic_info_office_type_label_xpath).getText());
         List<WebElement> officeTypes = getDriver().findElements(basic_info_office_type_xpath);
-        for(int i=0; i<types.getRowCount(); i++){
+        for (int i = 0; i < types.getRowCount(); i++) {
             assertEquals(types.getRow(i).get(types.getHeaders().get(0)), officeTypes.get(i).getText());
         }
     }
@@ -312,49 +312,47 @@ public class DataPage extends AbstractPage {
         verifyIdentifiersLabels();
         List<WebElement> IdentifiersTypeVal = getDriver().findElements(identifiers_type_xpath);
         assertTrue(identifiers.getRowCount() == IdentifiersTypeVal.size());
-        for(int i = 0; i<identifiers.getRowCount(); i++)
-        {
+        for (int i = 0; i < identifiers.getRowCount(); i++) {
             assertEquals(identifiers.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").replace(" ", "").trim(),
                     getDriver().findElement(
                             By.xpath("//li[h2='Identifiers']/table[thead/tr[contains(.,'Status')]]//tr[td='" + identifiers.getRow(i)
-                                    .get(identifiers.getHeaders().get(0)) + "']")).getText().replace(",","").replace(" ", "").trim());
+                                    .get(identifiers.getHeaders().get(0)) + "']")).getText().replace(",", "").replace(" ", "").trim());
         }
     }
 
-    public void verifyIdentifiersLabels(){
+    public void verifyIdentifiersLabels() {
         assertEquals("IDENTIFIERS", getDriver().findElement(identifiers_label_xpath).getText());
         assertEquals("TYPE", getDriver().findElement(identifiers_type_label_xpath).getText());
         assertEquals("VALUE", getDriver().findElement(identifiers_value_label_xpath).getText());
         assertEquals("STATUS", getDriver().findElement(identifiers_status_label_xpath).getText());
     }
 
-    public void verifyLegalEntityOfficeIdentifiers(ExamplesTable identifiers){
+    public void verifyLegalEntityOfficeIdentifiers(ExamplesTable identifiers) {
         verifyLegalEntityOfficeIdentifiersLabels();
         List<WebElement> IdentifiersTypeVal = getDriver().findElements(legal_entity_office_identifiers_type_xpath);
         assertTrue(identifiers.getRowCount() == IdentifiersTypeVal.size());
-        for(int i = 0; i<identifiers.getRowCount(); i++)
-        {
+        for (int i = 0; i < identifiers.getRowCount(); i++) {
             assertEquals(identifiers.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").replace(" ", "").trim(),
                     getDriver().findElement(
                             By.xpath("//li[contains(h1,'Identifiers')]/table[thead/tr[contains(.,'Status')]]//tr[td='" + identifiers.getRow(i)
-                                    .get(identifiers.getHeaders().get(0)) + "']")).getText().replace(",","").replace(" ", "").trim());
+                                    .get(identifiers.getHeaders().get(0)) + "']")).getText().replace(",", "").replace(" ", "").trim());
 
         }
     }
 
-    public void verifyLegalEntityOfficeIdentifiersLabels(){
+    public void verifyLegalEntityOfficeIdentifiersLabels() {
         assertEquals("IDENTIFIERS", getDriver().findElement(legal_entity_office_identifiers_label_xpath).getText());
         assertEquals("TYPE", getDriver().findElement(legal_entity_office_identifiers_type_label_xpath).getText());
         assertEquals("VALUE", getDriver().findElement(legal_entity_office_identifiers_value_label_xpath).getText());
         assertEquals("STATUS", getDriver().findElement(legal_entity_office_identifiers_status_label_xpath).getText());
     }
 
-    public void verifyIdentifiersSectionLabels(){
+    public void verifyIdentifiersSectionLabels() {
         verifyIdentifiersLabels();
         assertEquals("IDENTIFIERS", getDriver().findElement(identifiers_header_xpath).getText());
     }
 
-    public void verifyAreaTimeZonesSummary(String areaTimeZonesSummary){
+    public void verifyAreaTimeZonesSummary(String areaTimeZonesSummary) {
         assertEquals("Summary", getDriver().findElement(area_time_zones_summary_label_xpath).getText());
         assertEquals(areaTimeZonesSummary, getDriver().findElement(area_time_zones_summary_xpath).getText());
     }
@@ -363,7 +361,7 @@ public class DataPage extends AbstractPage {
         assertEquals("TIME ZONES", getDriver().findElement(basic_info_time_zones_label_xpath).getText());
         List<WebElement> actAreaTimeZone = getDriver().findElements(area_time_zones_xpath);
         List<WebElement> actAreaTimeZoneValue = getDriver().findElements(area_time_zones_value_xpath);
-        for(int i = 0; i<areaTimeZones.getRowCount(); i++) {
+        for (int i = 0; i < areaTimeZones.getRowCount(); i++) {
             assertEquals(areaTimeZones.getRow(i).get(areaTimeZones.getHeaders().get(0)), actAreaTimeZone.get(i).getText());
             assertEquals(areaTimeZones.getRow(i).get(areaTimeZones.getHeaders().get(1)), actAreaTimeZoneValue.get(i).getText());
         }
@@ -371,9 +369,8 @@ public class DataPage extends AbstractPage {
 
     public void verifyStatusNotEditable() {
         try {
-            getDriver().findElement(By.xpath(basic_info_label_value_xpath+"Status']/td")).getAttribute("data-edit_id").toString();
-        }catch (Exception e)
-        {
+            getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Status']/td")).getAttribute("data-edit_id").toString();
+        } catch (Exception e) {
             assertTrue(e.toString().equals("java.lang.NullPointerException"));
         }
     }
@@ -391,8 +388,8 @@ public class DataPage extends AbstractPage {
         assertEquals(tfpid, getDriver().findElement(searchResults_header_tfpid_xpath).getText());
     }
 
-    public void verifyBasicInfo(String label,String value) {
-        assertEquals(label, getDriver().findElement(By.xpath(basic_info_label_xpath +label+"']")).getText());
+    public void verifyBasicInfo(String label, String value) {
+        assertEquals(label, getDriver().findElement(By.xpath(basic_info_label_xpath + label + "']")).getText());
         assertEquals(value, getDriver().findElement(By.xpath(basic_info_label_value_xpath + label + "']/td")).getText().replace("\n", ""));
     }
 
@@ -400,8 +397,8 @@ public class DataPage extends AbstractPage {
         assertEquals("Replaced By", getDriver().findElement(By.xpath(basic_info_label_xpath + "Replaced By']")).getText());
         String replacedBys[] = replacedBy.split(" ");
         int values = getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Replaced By']/td")).getText().split(",").length;
-        if(replacedBys.length== values)
-            for(int i=0; i<replacedBys.length; i++){
+        if (replacedBys.length == values)
+            for (int i = 0; i < replacedBys.length; i++) {
                 assertTrue(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Replaced By']/td")).getText().contains(replacedBys[i].replace(",", "")));
             }
     }
@@ -424,7 +421,7 @@ public class DataPage extends AbstractPage {
         assertEquals("VALUE", getDriver().findElement(regions_value_label_xpath).getText());
         List<WebElement> regionType = getDriver().findElements(regions_type_xpath);
         List<WebElement> regionValue = getDriver().findElements(regions_value_xpath);
-        for(int i=0; i<regions.getRowCount(); i++){
+        for (int i = 0; i < regions.getRowCount(); i++) {
             assertEquals(regions.getRow(i).get(regions.getHeaders().get(0)), regionType.get(i).getText());
             assertEquals(regions.getRow(i).get(regions.getHeaders().get(1)), regionValue.get(i).getText());
         }
@@ -433,7 +430,7 @@ public class DataPage extends AbstractPage {
     public void verifyNoCountryRegionsSection() {
         try {
             assertFalse(getDriver().findElement(regions_label_xpath).isDisplayed());
-        } catch (org.openqa.selenium.NoSuchElementException e){
+        } catch (org.openqa.selenium.NoSuchElementException e) {
 
         }
     }
@@ -444,12 +441,12 @@ public class DataPage extends AbstractPage {
         List<WebElement> value = getDriver().findElements(credit_rating_value_xpath);
         List<WebElement> appliedDate = getDriver().findElements(credit_rating_applied_date_xpath);
         List<WebElement> confirmedDate = getDriver().findElements(credit_rating_confirmed_date_xpath);
-        for (int i=0; i<creditRatings.getRowCount(); i++){
-            assertEquals(creditRatings.getRow(i).get(creditRatings.getHeaders().get(0)),agency.get(i).getText());
-            assertEquals(creditRatings.getRow(i).get(creditRatings.getHeaders().get(1)),type.get(i).getText());
-            assertEquals(creditRatings.getRow(i).get(creditRatings.getHeaders().get(2)),value.get(i).getText());
-            assertEquals(creditRatings.getRow(i).get(creditRatings.getHeaders().get(3)),appliedDate.get(i).getText());
-            assertEquals(creditRatings.getRow(i).get(creditRatings.getHeaders().get(4)),confirmedDate.get(i).getText());
+        for (int i = 0; i < creditRatings.getRowCount(); i++) {
+            assertEquals(creditRatings.getRow(i).get(creditRatings.getHeaders().get(0)), agency.get(i).getText());
+            assertEquals(creditRatings.getRow(i).get(creditRatings.getHeaders().get(1)), type.get(i).getText());
+            assertEquals(creditRatings.getRow(i).get(creditRatings.getHeaders().get(2)), value.get(i).getText());
+            assertEquals(creditRatings.getRow(i).get(creditRatings.getHeaders().get(3)), appliedDate.get(i).getText());
+            assertEquals(creditRatings.getRow(i).get(creditRatings.getHeaders().get(4)), confirmedDate.get(i).getText());
         }
     }
 
@@ -468,7 +465,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCreditRatingsLabelsGeo() {
-        if(SearchPage.selectedEntity !=""){
+        if (SearchPage.selectedEntity != "") {
             selectedEntity = SearchPage.selectedEntity;
         }
         assertEquals("CREDIT RATING FOR " + selectedEntity.toUpperCase(), getDriver().findElement(credit_rating_label_xpath).getText());
@@ -484,17 +481,19 @@ public class DataPage extends AbstractPage {
         verifyCreditRatingsLabels();
         try {
             assertFalse(getDriver().findElement(credit_rating_agency_xpath).isDisplayed());
-        } catch (org.openqa.selenium.NoSuchElementException e){}
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
     }
 
     public void verifyNoCreditRatingsGeo() {
         verifyCreditRatingsLabelsGeo();
         try {
             assertFalse(getDriver().findElement(credit_rating_agency_xpath).isDisplayed());
-        } catch (org.openqa.selenium.NoSuchElementException e){}
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
     }
 
-    public void verifyCountryRelatedPlacesFromTrusted()  {
+    public void verifyCountryRelatedPlacesFromTrusted() {
         verifyPlacesLabel();
         assertEquals("TYPE", getDriver().findElement(places_type_label_xpath).getText());
         assertEquals("PLACE", getDriver().findElement(places_place_label_xpath).getText());
@@ -537,10 +536,10 @@ public class DataPage extends AbstractPage {
         assertEquals("TYPE", getDriver().findElement(entities_type_label_xpath).getText());
         assertEquals("ENTITY", getDriver().findElement(entities_entity_label_xpath).getText());
         assertEquals("DETAILS", getDriver().findElement(entities_details_label_xpath).getText());
-        for(int i = 0; i<countryEntities.getRowCount(); i++){
+        for (int i = 0; i < countryEntities.getRowCount(); i++) {
             assertEquals(countryEntities.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
                     getDriver().findElement(
-                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryEntities.getRow(i).get(countryEntities.getHeaders().get(0)) + "']")).getText().replace(",","").trim());
+                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryEntities.getRow(i).get(countryEntities.getHeaders().get(0)) + "']")).getText().replace(",", "").trim());
         }
     }
 
@@ -584,7 +583,7 @@ public class DataPage extends AbstractPage {
         verifyPeopleLabel();
         assertEquals("TYPE", getDriver().findElement(people_type_label_xpath).getText());
         assertEquals("PERSON", getDriver().findElement(people_entity_label_xpath).getText());
-        for(int i = 0; i<countryPeople.getRowCount(); i++){
+        for (int i = 0; i < countryPeople.getRowCount(); i++) {
             assertEquals(countryPeople.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
                     getDriver().findElement(
                             By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryPeople.getRow(i).get(countryPeople.getHeaders().get(0)) + "']")).getText().replace(",", "").trim());
@@ -613,8 +612,8 @@ public class DataPage extends AbstractPage {
     public void verifySubareaForSelectedArea(ExamplesTable subarea) {
         attemptClick(area_subarea_dropdown_xpath);
         List<WebElement> subareaCollection = getDriver().findElements(area_subarea_dropdown_list_xpath);
-        for(int i=0;i<subarea.getRowCount();i++){
-            assertEquals(subarea.getRow(i).get(subarea.getHeaders().get(0)),subareaCollection.get(i).getText());
+        for (int i = 0; i < subarea.getRowCount(); i++) {
+            assertEquals(subarea.getRow(i).get(subarea.getHeaders().get(0)), subareaCollection.get(i).getText());
         }
     }
 
@@ -658,7 +657,7 @@ public class DataPage extends AbstractPage {
             assertEquals(document.getElementsByTagName("value").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='areaPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[2]")).getText());
             assertEquals(document.getElementsByTagName("details").item(i).getTextContent(), getDriver().findElement(By.xpath("//*[@id='areaPlaces']//table//tbody/tr[td='" + document.getElementsByTagName("type").item(i).getTextContent() + "']/td[3]")).getText());
         }
-        }
+    }
 
     public void verifyCityRelatedPlacesFromTrusted() {
         verifyPlacesLabel();
@@ -689,6 +688,7 @@ public class DataPage extends AbstractPage {
     public void clickOnAreaRelatedPeople() {
         attemptClick(area_related_people_link_id);
     }
+
     public void clickOnDemographics() {
         attemptClick(area_demographics_link_id);
     }
@@ -701,17 +701,16 @@ public class DataPage extends AbstractPage {
         assertEquals("DATE", getDriver().findElement(area_demographics_date_label_xpath).getText());
         List<WebElement> areaDemographicsTypeVal = getDriver().findElements(area_demographics_type_xpath);
         assertTrue(areaDemographics.getRowCount() == areaDemographicsTypeVal.size());
-        for(int i = 0; i<areaDemographics.getRowCount(); i++)
-        {
-            assertEquals(areaDemographics.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").replace(" ","").trim(),
+        for (int i = 0; i < areaDemographics.getRowCount(); i++) {
+            assertEquals(areaDemographics.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").replace(" ", "").trim(),
                     getDriver().findElement(
-                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + areaDemographics.getRow(i).get(areaDemographics.getHeaders().get(0)) + "']")).getText().replace(",", "").replace(" ","").trim());
+                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + areaDemographics.getRow(i).get(areaDemographics.getHeaders().get(0)) + "']")).getText().replace(",", "").replace(" ", "").trim());
 
         }
     }
 
     public void verifyDemographicsLabel() {
-        if(SearchPage.selectedEntity !=""){
+        if (SearchPage.selectedEntity != "") {
             selectedEntity = SearchPage.selectedEntity;
         }
         assertEquals("DEMOGRAPHICS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(area_demographics_label_xpath).getText());
@@ -730,18 +729,18 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyStatistics(ExamplesTable statistics){
+    public void verifyStatistics(ExamplesTable statistics) {
         verifyStatisticsLabels();
         List<WebElement> type = getDriver().findElements(statistics_type_list_xpath);
         List<WebElement> value = getDriver().findElements(statistics_value_list_xpath);
 
-        for(int i=0;i<statistics.getRowCount();i++){
-            assertEquals(statistics.getRow(i).get(statistics.getHeaders().get(0)),type.get(i).getText());
-            assertEquals(statistics.getRow(i).get(statistics.getHeaders().get(1)),value.get(i).getText());
+        for (int i = 0; i < statistics.getRowCount(); i++) {
+            assertEquals(statistics.getRow(i).get(statistics.getHeaders().get(0)), type.get(i).getText());
+            assertEquals(statistics.getRow(i).get(statistics.getHeaders().get(1)), value.get(i).getText());
         }
     }
 
-    public void verifyStatisticsLabels(){
+    public void verifyStatisticsLabels() {
         assertEquals("STATISTICS", getTextOnPage(statistics_label_xpath));
         assertEquals("TYPE", getTextOnPage(statistics_type_label_xpath));
         assertEquals("VALUE", getTextOnPage(statistics_value_label_xpath));
@@ -758,8 +757,8 @@ public class DataPage extends AbstractPage {
 
     public void verifyCitiesForSelectedArea(ExamplesTable cities) {
         List<WebElement> areasCollection = getDriver().findElements(city_city_dropdown_list_xpath);
-        for (int i=0; i<cities.getRowCount(); i++){
-            assertEquals(cities.getRow(i).get(cities.getHeaders().get(0)),areasCollection.get(i).getText());
+        for (int i = 0; i < cities.getRowCount(); i++) {
+            assertEquals(cities.getRow(i).get(cities.getHeaders().get(0)), areasCollection.get(i).getText());
         }
     }
 
@@ -824,7 +823,7 @@ public class DataPage extends AbstractPage {
         attemptClick(city_people_link_id);
     }
 
-    public void clickOnAreaEntity(){
+    public void clickOnAreaEntity() {
         attemptClick(area_entities_link_id);
     }
 
@@ -849,16 +848,16 @@ public class DataPage extends AbstractPage {
         List<WebElement> type = getDriver().findElements(personnel_type_list_xpath);
         List<WebElement> value = getDriver().findElements(personnel_value_list_xpath);
 
-        for(int i=0;i<personnel.getRowCount();i++){
-            assertEquals(personnel.getRow(i).get(personnel.getHeaders().get(0)),type.get(i).getText());
-            assertEquals(personnel.getRow(i).get(personnel.getHeaders().get(1)),value.get(i).getText());
+        for (int i = 0; i < personnel.getRowCount(); i++) {
+            assertEquals(personnel.getRow(i).get(personnel.getHeaders().get(0)), type.get(i).getText());
+            assertEquals(personnel.getRow(i).get(personnel.getHeaders().get(1)), value.get(i).getText());
         }
     }
 
     public void verifyPersonnelLabels() {
         assertEquals("PERSONNEL", getTextOnPage(personnel_label_xpath));
-        assertEquals("TYPE",getTextOnPage(personnel_type_label_xpath));
-        assertEquals("VALUE",getTextOnPage(personnel_value_label_xpath));
+        assertEquals("TYPE", getTextOnPage(personnel_type_label_xpath));
+        assertEquals("VALUE", getTextOnPage(personnel_value_label_xpath));
     }
 
     public void verifyNoPersonnel() {
@@ -872,24 +871,23 @@ public class DataPage extends AbstractPage {
     public void verifyHistoryLabel() {
         assertEquals("HISTORY", getTextOnPage(history_label_xpath));
     }
-    public void verifyHistory(ExamplesTable history)
-    {
+
+    public void verifyHistory(ExamplesTable history) {
         verifyHistoryLabel();
         assertEquals(history.getRow(0).get(history.getHeaders().get(0)), getTextOnPage(history_message_xpath));
     }
 
     public void verifyNoHistory() {
         verifyHistoryLabel();
-        try{
+        try {
             assertFalse(getDriver().findElement(history_message_xpath).isDisplayed());
-        }catch (NoSuchElementException e)
-        {
+        } catch (NoSuchElementException e) {
         }
     }
 
     public void verifyOfficeSortKey(String officeSortKey) {
         assertEquals("Sort Name", getTextOnPage(office_sort_name_label_xpath));
-        assertEquals(officeSortKey,getTextOnPage(office_sort_name_value_xpath));
+        assertEquals(officeSortKey, getTextOnPage(office_sort_name_value_xpath));
     }
 
     public void clickOnAreaParentLink(String areaParent) {
@@ -918,7 +916,7 @@ public class DataPage extends AbstractPage {
         assertFalse(getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Head Office']/td")).isSelected());
     }
 
-    public CurrencyPage clickOnISOLink(String isoCode){
+    public CurrencyPage clickOnISOLink(String isoCode) {
         clickedCurrencyIso = isoCode;
         attemptClick(By.linkText(isoCode));
         return new CurrencyPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
@@ -939,9 +937,9 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertEquals(countryDropDown,getDriver().findElement(country_listBox_xpath).getText());
-        assertEquals(areaDropDown,getDriver().findElement(area_listBox_xpath).getText());
-        assertEquals(subAreaDropDown,getDriver().findElement(subarea_listBox_xpath).getText());
+        assertEquals(countryDropDown, getDriver().findElement(country_listBox_xpath).getText());
+        assertEquals(areaDropDown, getDriver().findElement(area_listBox_xpath).getText());
+        assertEquals(subAreaDropDown, getDriver().findElement(subarea_listBox_xpath).getText());
     }
 
     public void clickOnCitySubArea(String subArea) {
@@ -981,15 +979,15 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifySections(ExamplesTable sections) {
-        assertEquals("DISPLAY:",getDriver().findElement(sections_display_xpath).getText());
-        for(int i=0; i<getDriver().findElements(sections_list_xpath).size(); i++) {
+        assertEquals("DISPLAY:", getDriver().findElement(sections_display_xpath).getText());
+        for (int i = 0; i < getDriver().findElements(sections_list_xpath).size(); i++) {
             assertEquals(sections.getRow(i).get(sections.getHeaders().get(0)), getDriver().findElements(sections_list_xpath).get(i).getText());
         }
     }
 
     public void verifyBasicInfoLeftSection(ExamplesTable basicInfoLeftSection) {
         List<WebElement> basicInfoLeftSectionFields = getDriver().findElements(basic_info_left_section_xpath);
-        for(int i=0; i<getDriver().findElements(basic_info_left_section_xpath).size(); i++) {
+        for (int i = 0; i < getDriver().findElements(basic_info_left_section_xpath).size(); i++) {
             assertEquals(basicInfoLeftSection.getRow(i).get(basicInfoLeftSection.getHeaders().get(0)), basicInfoLeftSectionFields.get(i).getText());
         }
     }
@@ -997,7 +995,7 @@ public class DataPage extends AbstractPage {
     public void verifyNoCityAlternativeRegionsSection() {
         try {
             assertFalse(getDriver().findElement(regions_label_xpath).isDisplayed());
-        } catch (org.openqa.selenium.NoSuchElementException e){
+        } catch (org.openqa.selenium.NoSuchElementException e) {
         }
     }
 
@@ -1014,6 +1012,22 @@ public class DataPage extends AbstractPage {
         attemptClick(confirm_button_xpath);
     }
 
+    public void getDocument(String xqueryName, String param, String entity) {
+        ParamMap paramMap = new ParamMap();
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair(paramMap.getParam(param), entity));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
+        if (document != null) {
+            endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
+            responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
+            assertTrue(responseEntity.getStatusCode().value() == 200);
+        } else {
+            assertFalse("Zeus document with " + param + " as " + entity + " does not exist in the DB", true);
+        }
+    }
+
     public void getDocument(String xqueryName, String name) {
 
         List<NameValuePair> nvPairs = new ArrayList<>();
@@ -1023,13 +1037,13 @@ public class DataPage extends AbstractPage {
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
         endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
 
-        responseEntity = restClient.getDocumentByID(endpointWithID,heraApi );
+        responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
         assertTrue(responseEntity.getStatusCode().value() == 200);
     }
 
     public void revertChangesToDocument() {
 
-        int response=restClient.putDocumentByID(endpointWithID,heraApi, responseEntity.getBody().toString());
+        int response = restClient.putDocumentByID(endpointWithID, heraApi, responseEntity.getBody().toString());
         assertTrue(response == 200);
     }
 
@@ -1052,7 +1066,7 @@ public class DataPage extends AbstractPage {
     public void verifyCurrencySelectionDisabled() {
         assertTrue(getDriver().findElement(currency_country_selection_disabled_xpath).isDisplayed());
     }
-    
+
 
     public void clickOnReturnButton() {
         attemptClick(return_button_xpath);
@@ -1062,7 +1076,7 @@ public class DataPage extends AbstractPage {
         attemptClick(cancel_no_button_xpath);
     }
 
-    public void verifyAreaList(Database database, ApacheHttpClient apacheHttpClient) {
+    public void verifyAreaList() {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedEntity));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
@@ -1072,7 +1086,7 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list", nvPairs);
-        for(int i=0; i<document.getElementsByTagName("area").getLength(); i++){
+        for (int i = 0; i < document.getElementsByTagName("area").getLength(); i++) {
             assertEquals(document.getElementsByTagName("area").item(i).getTextContent(), getDriver().findElements(area_area_dropdown_list_xpath).get(i).getText());
         }
     }
@@ -1087,12 +1101,12 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "subarea list", nvPairs);
-        for(int i=0; i<document.getElementsByTagName("subarea").getLength(); i++){
+        for (int i = 0; i < document.getElementsByTagName("subarea").getLength(); i++) {
             assertEquals(document.getElementsByTagName("subarea").item(i).getTextContent(), getDriver().findElements(area_subarea_dropdown_list_xpath).get(i).getText());
         }
     }
 
-    public void verifyCityList(Database database, ApacheHttpClient apacheHttpClient) {
+    public void verifyCityList() {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedEntity));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
@@ -1102,7 +1116,7 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "city list", nvPairs);
-        for(int i=0; i<document.getElementsByTagName("city").getLength(); i++){
+        for (int i = 0; i < document.getElementsByTagName("city").getLength(); i++) {
             assertEquals(document.getElementsByTagName("city").item(i).getTextContent(), getDriver().findElements(city_city_dropdown_list_xpath).get(i).getText());
         }
     }
@@ -1113,8 +1127,8 @@ public class DataPage extends AbstractPage {
 
     public void verifyAreaForSelectedCountry(ExamplesTable areas) {
         List<WebElement> areasCollection = getDriver().findElements(area_area_dropdown_list_xpath);
-        for (int i=0; i<areas.getRowCount(); i++){
-            assertEquals(areas.getRow(i).get(areas.getHeaders().get(0)),areasCollection.get(i).getText());
+        for (int i = 0; i < areas.getRowCount(); i++) {
+            assertEquals(areas.getRow(i).get(areas.getHeaders().get(0)), areasCollection.get(i).getText());
         }
     }
 
@@ -1143,11 +1157,11 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertEquals("Enter a year, month/year or day/month/year.",getDriver().findElement(start_date_error_msg_xpath).getText());
+        assertEquals("Enter a year, month/year or day/month/year.", getDriver().findElement(start_date_error_msg_xpath).getText());
     }
 
     public void verifyEndDateErrorMessageForDayMonthYear() {
-        assertEquals("Enter a year, month/year or day/month/year.",getDriver().findElement(end_date_error_msg_xpath).getText());
+        assertEquals("Enter a year, month/year or day/month/year.", getDriver().findElement(end_date_error_msg_xpath).getText());
     }
 
     public void verifyEndDateErrorMessage(String endDateErrorMsg) {
@@ -1156,13 +1170,13 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertEquals(endDateErrorMsg.replace("'",""), getDriver().findElement(end_date_error_msg_xpath).getText());
+        assertEquals(endDateErrorMsg.replace("'", ""), getDriver().findElement(end_date_error_msg_xpath).getText());
     }
 
     public void verifyNoCancelUpdateConfirmationModal() {
         try {
             assertFalse(getDriver().findElement(cancel_update_confirmation_modal_xpath).isDisplayed());
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
         }
     }
 
@@ -1172,32 +1186,22 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertEquals("Cancel UpdateDo you want to leave this update without saving?NO YES", getDriver().findElement(cancel_update_confirmation_modal_xpath).getText().replace("\n",""));
+        assertEquals("Cancel UpdateDo you want to leave this update without saving?NO YES", getDriver().findElement(cancel_update_confirmation_modal_xpath).getText().replace("\n", ""));
     }
 
     public void verifyUserRedirectedViewMode() {
-        try{
+        try {
             Thread.sleep(1000);
             assertTrue(getDriver().findElement(currency_update_button_id).isDisplayed());
-        }catch(InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public void getDocument(String xqueryName, String param, String entity) {
-        ParamMap paramMap= new ParamMap();
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair(paramMap.getParam(param),entity));
-        nvPairs.add(new BasicNameValuePair("source", "zeus"));
-
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
-        if(document!=null) {
-            endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
-            responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
-            assertTrue(responseEntity.getStatusCode().value() == 200);
-        }
-        else{
-            assertFalse("Zeus document with "+param+" as "+entity+" does not exist in the DB",true);
+    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
+        List<WebElement> confirmChanges = getDriver().findElements(edit_confirmationModal_summary_xpath);
+        for (int i = 0; i < Summary.getRowCount(); i++) {
+            assertEquals(Summary.getRow(i).get(Summary.getHeaders().get(0)), confirmChanges.get(i).getText());
         }
     }
 }

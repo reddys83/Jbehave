@@ -881,7 +881,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the list of all existing area for the selected country by full name")
     public void verifyAreaList() {
-        getDataPage().verifyAreaList(database, apacheHttpClient);
+        getDataPage().verifyAreaList();
     }
 
     @Then("the user should see the list of all existing subarea for the selected area by full name")
@@ -891,7 +891,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the list of all existing city for the selected area by full name")
     public void verifyCityList() {
-        getDataPage().verifyCityList(database, apacheHttpClient);
+        getDataPage().verifyCityList();
     }
 
     @Then("the user should see the below states for the selected country: $areas")
@@ -911,4 +911,10 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should be redirected to view mode")
     public void verifyUserRedirectedToViewMode(){getDataPage().verifyUserRedirectedViewMode();}
+
+    @Then("the user should see the below summary changes in confirmation modal $Summary")
+    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
+        getDataPage().verifySummaryConfirmationModal(Summary);
+    }
+
 }
