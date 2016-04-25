@@ -215,7 +215,7 @@ public class CountryPage extends AbstractPage {
     private By countryBasicInfo_demographics_type_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='demographicTypeError']");
     private By countryBasicInfo_demographics_value_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='demographicValueError']");
     private By countryBasicInfo_holiday_date_error_message_xpath= By.xpath("//*[@class='notification error'][@data-error_id='holidayDateError']");
-    private By countryBasicInfo_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
+
     private String editCountryDemographicType="";
     private By country_credit_rating_new_row_xpath = By.xpath("//*[@class='new'][@data-row_id='creditRatings']");
     private By country_regions_existing_type_xpath = By.xpath(".//*[@id='additionalRegions']/tr[not(@class='new')]/td[1]");
