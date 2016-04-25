@@ -13,6 +13,7 @@ JIRA ID - ZEUS-684 - User will get warning if click away from screen they are ed
 JIRA ID - ZEUS-827 - User can only input number in date fields
 JIRA ID - ZEUS-745 - User will see summary of changes made in confirmation modal
 JIRA ID - ZEUS-441 - User can save edits to country
+JIRA ID - ZEUS-920 - Properly handle Hera validation errors
 
 Scenario: Verify country names type from lookup COUNTRY_NAME_TYPE
 Given a user is on the search page
@@ -426,3 +427,22 @@ And the user reverts the changes to the document
 Examples:
 |country|countryStartYear|countryEndYear|
 |Bosnia-Herzegovina|2014|2015|
+
+Scenario: User will see the message "Technical error. Update not successful. Please contact Accuity Helpdesk"
+when tries to update the Country and experiences an error resulting in Hera failure to update the document(s)
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user enters time zones summary <timeZoneSummary> in the basic info country page
+And the user clicks on the save button
+And the user clicks on the confirm button
+Then the user should see the hera validation error in the country page
+
+Examples:
+|country|timeZoneSummary|
+|Puerto Rico|+1 hour
+

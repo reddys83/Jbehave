@@ -1136,4 +1136,9 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyEditCountryBasicInfoInZeus(selectedCountry);
     }
 
+    @Then("the user should see the hera validation error in the country page")
+    public void verifyHeraValidationError(){
+        getCountryPage().verifyHeraValidationError();
+    }
+
 }

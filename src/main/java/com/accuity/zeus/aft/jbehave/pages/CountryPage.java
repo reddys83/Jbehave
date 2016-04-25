@@ -243,6 +243,7 @@ public class CountryPage extends AbstractPage {
     String country_places_country_dropDown_xpath=".//*[@id='country_chosen']";
     String country_places_area_dropdown_xpath = ".//*[@id='area_chosen']";
     String country_places_city_dropdown_xpath = ".//*[@id='city_chosen']";
+    private By  country_hera_validation_err_msg_xpath=By.xpath("//*[@id='error']//p[@class='notification error']");
 
 
     private String editedCountryBankingHrsDay ="";
@@ -1770,5 +1771,8 @@ public class CountryPage extends AbstractPage {
         }
     }
 
+    public void verifyHeraValidationError() {
+        assertEquals("Technical error. Update not successful. Please contact Accuity Helpdesk", getDriver().findElement(country_hera_validation_err_msg_xpath).getText());
+    }
 
 }
