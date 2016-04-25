@@ -91,9 +91,9 @@ public abstract class AbstractPage {
         return database;
     }
 
-    public RestClient getRestClient() {
-        return restClient;
-    }
+  public RestClient getRestClient() {
+      return restClient;
+  }
 
     public ApacheHttpClient getApacheHttpClient() {
         return apacheHttpClient;
@@ -137,7 +137,6 @@ public abstract class AbstractPage {
             attempts++;
         }
     }
-
     private void waitFor() {
         try {
             Thread.sleep(STANDARD_WAIT);
@@ -199,16 +198,38 @@ public abstract class AbstractPage {
                 }
             }
         }
-
         return nodeValues;
     }
 
 
+    public void selectRadioButtonByValue(By by, String value)
+    {
+        List<WebElement> radioButtons=getDriver().findElements(by);
+        for (WebElement radioButton:radioButtons) {
+            if (radioButton.getAttribute("value").equals(value)) {
+                radioButton.click();
+                break;
+            }
+        }
+    }
 
+    public String getSelectedRadioValue(By by)
+    {
+        String selectedValue="";
+        List<WebElement> radioButtons=getDriver().findElements(by);
+        for (WebElement radioButton:radioButtons) {
+            if (radioButton.isSelected())
+            {
+                selectedValue= radioButton.getAttribute("value");
+            }
+        }
+        return selectedValue;
+    }
 
     public String getSelectedDropdownValue(By by) {
         Select dropdown = new Select(driver.findElement(by));
         String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
         return selectedValue;
     }
+
 }

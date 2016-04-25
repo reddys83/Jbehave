@@ -1015,6 +1015,23 @@ public class DataPage extends AbstractPage {
         attemptClick(confirm_button_xpath);
     }
 
+   public void getDocument(String xqueryName, String param, String entity) {
+       ParamMap paramMap= new ParamMap();
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair(paramMap.getParam(param),entity));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
+        if(document!=null) {
+            endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
+            responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
+            assertTrue(responseEntity.getStatusCode().value() == 200);
+        }
+       else{
+            assertFalse("Zeus document with "+param+" as "+entity+" does not exist in the DB",true);
+        }
+    }
+
     public void getDocument(String xqueryName, String name) {
 
         List<NameValuePair> nvPairs = new ArrayList<>();
@@ -1063,7 +1080,7 @@ public class DataPage extends AbstractPage {
         attemptClick(cancel_no_button_xpath);
     }
 
-    public void verifyAreaList(Database database, ApacheHttpClient apacheHttpClient) {
+    public void verifyAreaList() {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedEntity));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
@@ -1093,7 +1110,7 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyCityList(Database database, ApacheHttpClient apacheHttpClient) {
+    public void verifyCityList() {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", selectedEntity));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
@@ -1184,24 +1201,6 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
     }
-
-    public void getDocument(String xqueryName, String param, String entity) {
-        ParamMap paramMap= new ParamMap();
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair(paramMap.getParam(param),entity));
-        nvPairs.add(new BasicNameValuePair("source", "zeus"));
-
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
-        if(document!=null) {
-            endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
-            responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
-            assertTrue(responseEntity.getStatusCode().value() == 200);
-        }
-        else{
-            assertFalse("Zeus document with "+param+" as "+entity+" does not exist in the DB",true);
-        }
-    }
-
     public void verifySummaryConfirmationModal(ExamplesTable Summary) {
         List<WebElement> confirmChanges = getDriver().findElements(edit_confirmationModal_summary_xpath);
         for(int i=0;i<Summary.getRowCount();i++)
