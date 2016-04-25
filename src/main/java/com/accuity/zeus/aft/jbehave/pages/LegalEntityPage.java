@@ -89,6 +89,13 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_leadInstitution_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Lead Institution']/th");
     private By legalEntity_basicInfo_leadInstitution_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Lead Institution']/td");
     private By legalEntity_basicInfo_leftContainer_container_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody");
+    private By legalEnttity_basicInfo_CharterType_dropdown_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td/select");
+    private By legalEnttity_basicInfo_CharterType_view_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td");
+    private By legalEntity_basicInfo_day_Claimed_est_date_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Claimed Est Date']/td/input[1]");
+    private By legalEntity_basicInfo_year_Claimed_est_date_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Claimed Est Date']/td/input[2]");
+    private By legalEntity_basicInfo_Month__Claimed_est_date_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Claimed Est Date']/td/select");
+    private By countryBasicInfo_claimedEst_date_error_message_xpath= By.xpath("//*[@class='notification error'][@data-error_id='establishedDateError']");
+    private By legalEntity_basicInfo_claimedEstDate_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Claimed Est Date']/td");
     private By legalEntity_basicInfo_CharterType_dropdown_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td/select");
     private By legalEntity_basicInfo_CharterType_view_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td");
 
@@ -516,11 +523,9 @@ public class LegalEntityPage extends AbstractPage {
         }
     }
 
-
     public void verifyCharterTypeOptions() {
 
-//        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,"get charter type from trusted document");
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database,"get charter type from trusted document","source","source-trusted");
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database,"get charter type from lookup document","source","source-trusted");
         Select charterTypeDropDown = new Select(getDriver().findElement(legalEntity_basicInfo_CharterType_dropdown_xpath));
         Integer optionsDisplayed  = charterTypeDropDown.getOptions().size();
         for(int i=0;i<optionsDisplayed-2;i++){
@@ -568,7 +573,50 @@ public class LegalEntityPage extends AbstractPage {
         document= apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column",zeusPairs);
         assertEquals(document.getElementsByTagName("charterType").item(0).getTextContent(),getDriver().findElement(legalEntity_basicInfo_CharterType_view_xpath).getText());
     }
+
+    public void enterDayValueForClaimedEstDate(String day) {
+        getDriver().findElement(legalEntity_basicInfo_day_Claimed_est_date_xpath).click();
+        getDriver().findElement(legalEntity_basicInfo_day_Claimed_est_date_xpath).clear();
+        getDriver().findElement(legalEntity_basicInfo_day_Claimed_est_date_xpath).sendKeys(day);
+    }
+
+    public void enterMonthValueForClaimedEstDate(String month) {
+        Select monthDropdown = new Select(getDriver().findElement(legalEntity_basicInfo_Month__Claimed_est_date_xpath));
+        monthDropdown.selectByValue(month);
+    }
+
+    public void enterYearValueForClaimedEstDate(String year) {
+        getDriver().findElement(legalEntity_basicInfo_year_Claimed_est_date_xpath).click();
+        getDriver().findElement(legalEntity_basicInfo_year_Claimed_est_date_xpath).clear();
+        getDriver().findElement(legalEntity_basicInfo_year_Claimed_est_date_xpath).sendKeys(year);
+    }
+
+    public void validateErrorMessageforClaimedEstDate() {
+        assertEquals("Enter a year, month/year or day/month/year.", getDriver().findElement(countryBasicInfo_claimedEst_date_error_message_xpath).getText());
+    }
+
+    public void verifyUpdatedClaimedEstDateBothDocs(String fid) {
+        try {
+            Thread.sleep(1000L);
+            List<NameValuePair> nvPairs = new ArrayList<>();
+            nvPairs.add(new BasicNameValuePair("fid", fid));
+            nvPairs.add(new BasicNameValuePair("source", "trusted"));
+            Thread.sleep(5000L);
+            Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
+            assertEquals(document.getElementsByTagName("claimedEstDate").item(0).getTextContent(), getDriver().findElement(legalEntity_basicInfo_claimedEstDate_xpath).getText());
+
+
+            List<NameValuePair> zeusPairs = new ArrayList<>();
+            zeusPairs.add(new BasicNameValuePair("fid", fid));
+            zeusPairs.add(new BasicNameValuePair("source", "zeus"));
+            Thread.sleep(5000L);
+            document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", zeusPairs);
+            assertEquals(document.getElementsByTagName("claimedEstDate").item(0).getTextContent(), getDriver().findElement(legalEntity_basicInfo_claimedEstDate_xpath).getText());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
-
-
 
