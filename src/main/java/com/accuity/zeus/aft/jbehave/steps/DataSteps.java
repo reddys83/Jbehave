@@ -851,21 +851,10 @@ public class DataSteps extends AbstractSteps {
     public void verifyCountryCancelUpdateConfirmationModal(){
         getDataPage().verifyCancelUpdateConfirmationModal();
     }
-   /*
-    @When("the user get the document with $xqueryName with the $searchby as  <fid> from the database")
-    public void getDocument(String xqueryName, String searchby, @Named("searchvalue") String searchvalue ) {
-        getDataPage().getDocument(xqueryName, searchby, searchvalue);
-    } */
 
-    @When("the user get the document with $xqueryName with the $param as $name from the database")
-    public void getDocumentByName(String xqueryName,String param,String name) {
-        getDataPage().getDocument(xqueryName,param, name);
-    }
-
-    @When("the user gets the document with $xqueryName with the $param as <entity> from the database")
-    public void getDocumentByFid(@Named("xqueryName") String xqueryName,@Named("param") String param, @Named("entity") String entity)
-    {
-        getDataPage().getDocument(xqueryName,param,entity);
+    @When("the user get the document with $xqueryName with the name as $name from the database")
+    public void getDocument(String xqueryName, String name) {
+        getDataPage().getDocument(xqueryName, name);
     }
 
     @When("the user clicks on the return button")
@@ -916,9 +905,15 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should be redirected to view mode")
     public void verifyUserRedirectedToViewMode(){getDataPage().verifyUserRedirectedViewMode();}
 
+    @When("the user gets the document with $xqueryName with the $param as <entity> from the database")
+    public void getDocumentByFid(@Named("xqueryName") String xqueryName,@Named("param") String param, @Named("entity") String entity)
+    {
+        getDataPage().getDocument(xqueryName,param,entity);
+    }
+
     @Then("the user should see the below summary changes in confirmation modal $Summary")
     public void verifySummaryConfirmationModal(ExamplesTable Summary) {
         getDataPage().verifySummaryConfirmationModal(Summary);
     }
 
-  }
+}

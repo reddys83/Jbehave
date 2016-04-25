@@ -416,7 +416,6 @@ When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
 And the user get the document with get Id for country with the name as Bosnia-Herzegovina from the database
 
-
 When the user enters country start year as <countryStartYear>
 And the user enters country end year as <countryEndYear>
 And the user clicks on the save button

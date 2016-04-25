@@ -187,10 +187,12 @@ public abstract class AbstractPage {
     public List<String> getNodeValuesByTagName(Document document, String tagName)
     {
         ArrayList<String> nodeValues=new ArrayList<String>();
-        if((document!=null)&(document.getElementsByTagName(tagName).getLength() != 0)) {
-            for (int i = 0; i < document.getElementsByTagName(tagName).getLength(); i++) {
-                NodeList children = document.getElementsByTagName(tagName).item(i).getChildNodes();
-                for (int j = 0; j < children.getLength(); j++) {
+        if((document!=null)&(document.getElementsByTagName(tagName).getLength() != 0))
+        {
+            for (int i=0;i<document.getElementsByTagName(tagName).getLength();i++) {
+
+                NodeList children=document.getElementsByTagName(tagName).item(i).getChildNodes();
+                for (int j = 0;j < children.getLength();j++) {
                     if (children.item(j).getNodeType() != Node.ELEMENT_NODE)
                         nodeValues.add(document.getElementsByTagName(tagName).item(i).getFirstChild().getNodeValue());
                 }
@@ -198,8 +200,6 @@ public abstract class AbstractPage {
         }
         return nodeValues;
     }
-
-
 
 
     public void selectRadioButtonByValue(By by, String value)
@@ -225,4 +225,11 @@ public abstract class AbstractPage {
         }
         return selectedValue;
     }
+
+    public String getSelectedDropdownValue(By by) {
+        Select dropdown = new Select(driver.findElement(by));
+        String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
+        return selectedValue;
+    }
+
 }

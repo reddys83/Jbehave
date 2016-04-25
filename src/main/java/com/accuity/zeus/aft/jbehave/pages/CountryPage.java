@@ -1129,8 +1129,6 @@ public class CountryPage extends AbstractPage {
         }
     }
 
-
-
     public void veirfyDemograhicsDateErrorMessage() {
         assertEquals(getDriver().findElement(countryBasicInfo_demographics_date_error_message_xpath).getText(),"Must be no later than today.");
     }

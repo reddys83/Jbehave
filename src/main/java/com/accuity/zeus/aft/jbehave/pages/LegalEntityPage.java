@@ -83,12 +83,13 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_location_summary_header_xpath = By.xpath("//li[h1='Location Summaries'] //span");
     private By legalEntity_ownership_header_xpath = By.xpath("//li[h1='Ownership Summaries'] //span");
     private By credit_rating_section_xpath = By.xpath("//li[h1='Credit Rating']");
-    private By legalEntity_leadinstitution_radio_options_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//input[@name='leadInstitution']");
     private By office_link_xpath = By.id("office-link");
-
+    private By legalEntity_basicInfo_leftContainer_container_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody");
+    private By legalEntity_basicInfo_status_list_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='Status']/td/select/option");
+    private By legalEntity_basicInfo_status_dropdown_xpath=By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='Status']/td/select");
+    private By legalEntity_leadinstitution_radio_options_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//input[@name='leadInstitution']");
     private By legalEntity_basicInfo_leadInstitution_label_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Lead Institution']/th");
     private By legalEntity_basicInfo_leadInstitution_value_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Lead Institution']/td");
-    private By legalEntity_basicInfo_leftContainer_container_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody");
     private By legalEnttity_basicInfo_CharterType_dropdown_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td/select");
     private By legalEnttity_basicInfo_CharterType_view_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td");
     private By legalEntity_basicInfo_day_Claimed_est_date_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Claimed Est Date']/td/input[1]");
@@ -98,6 +99,8 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_claimedEstDate_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Claimed Est Date']/td");
     private By legalEntity_basicInfo_CharterType_dropdown_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td/select");
     private By legalEntity_basicInfo_CharterType_view_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td");
+
+
 
     public LegalEntityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -234,7 +237,6 @@ public class LegalEntityPage extends AbstractPage {
         assertEquals("ADMIN EMPLOYEES", getTextOnPage(legalEntity_trustPower_adminEmployees_label_xpath));
         assertEquals("MIN ACCOUNT SIZE ($)", getTextOnPage(legalEntity_trustPower_minAccountSize_label_xpath));
     }
-
 
     public void verifyLegalEntityTrustPowersfromDB(String searchedEntity) {
 
@@ -523,18 +525,100 @@ public class LegalEntityPage extends AbstractPage {
         }
     }
 
+    public void clickOnStatusType() {
+        attemptClick(legalEntity_basicInfo_status_dropdown_xpath);
+    }
+
     public void verifyCharterTypeOptions() {
 
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database,"get charter type from lookup document","source","source-trusted");
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "get charter type from lookup document", "source", "source-trusted");
         Select charterTypeDropDown = new Select(getDriver().findElement(legalEntity_basicInfo_CharterType_dropdown_xpath));
-        Integer optionsDisplayed  = charterTypeDropDown.getOptions().size();
-        for(int i=0;i<optionsDisplayed-2;i++){
-            assertEquals(charterTypeDropDown.getOptions().get(i+1).getText(),document.getElementsByTagName("a").item(i).getTextContent());
+        Integer optionsDisplayed = charterTypeDropDown.getOptions().size();
+        for (int i = 0; i < optionsDisplayed - 2; i++) {
+            assertEquals(charterTypeDropDown.getOptions().get(i + 1).getText(), document.getElementsByTagName("a").item(i).getTextContent());
         }
+    }
+
+    public void verifyLegalEntityStatusList() {
+        List<WebElement> statusList = getDriver().findElements(legalEntity_basicInfo_status_list_xpath);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get legal entity Status types");
+        for (int i = 1; i < document.getElementsByTagName("status").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), statusList.get(i).getAttribute("value"));
+        }
+    }
+
+
+    public void enterValueInStatusDropdown(String word) {
+        getDriver().findElement(legalEntity_basicInfo_status_dropdown_xpath).sendKeys(word);
+    }
+
+
+    public void verifyStatusInDropdown(String status) {
+
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(getSelectedDropdownValue(legalEntity_basicInfo_status_dropdown_xpath).equalsIgnoreCase(status));
 
     }
 
-    public void verifyCharterTypeDefaultValue(String fid) {
+    public void verifyEditLegalEntityStatusValueFromTrusted(String fid,String tagName,String source){
+
+        assertEquals(getLegalEntityValuesFromDB(fid,tagName,source),getSelectedDropdownValue(legalEntity_basicInfo_status_dropdown_xpath));
+
+    }
+
+    public String getLegalEntityValuesFromDB(String fid, String tagName,String source){
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        String statusValue="";
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
+
+        if(document!=null) {
+            statusValue=getNodeValuesByTagName(document,tagName).size()==0?"":getNodeValuesByTagName(document,tagName).get(0);
+        }
+
+        return statusValue;
+    }
+
+    public void selectLegalEntityStatusValue(String status) {
+        selectItemFromDropdownListByValue(legalEntity_basicInfo_status_dropdown_xpath, status);
+    }
+
+    public void verifyEditLegalEntityStatusValueFromZeus(String status,String tagName,String fid,String source){
+
+        assertEquals(getLegalEntityValuesFromDB(fid,tagName,source),status);
+
+    }
+
+    public void changeLegalEntityStatusValue()
+    {
+        String valuetobeSelected="";
+
+        Select dropdown = new Select(getDriver().findElement(legalEntity_basicInfo_status_dropdown_xpath));
+        for (WebElement option:dropdown.getOptions())
+        {
+            if(!option.isSelected())
+            {
+                valuetobeSelected= option.getAttribute("value");
+                break;
+            }
+        }
+
+        selectItemFromDropdownListByValue(legalEntity_basicInfo_status_dropdown_xpath, valuetobeSelected);
+
+    }
+
+     public void verifyCharterTypeDefaultValue(String fid) {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {

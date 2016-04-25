@@ -98,8 +98,8 @@ public class ApacheHttpClient {
 
         } catch (InterruptedException e){
             e.printStackTrace();
-
-         }catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
         method.releaseConnection();
@@ -123,7 +123,6 @@ public class ApacheHttpClient {
                 document = new XmlDocument().convertFromString(method.getResponseBodyAsString());
                 Thread.sleep(1000L);
             }
-
         } catch (InterruptedException e){
             e.printStackTrace();
         }

@@ -1,14 +1,22 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 
 @Component
 public class LegalEntitySteps extends AbstractSteps{
+
+    @Autowired
+    ApacheHttpClient apacheHttpClient;
+    @Autowired
+    Database database;
 
     @Then("the user should see the legal entity's entity types as: $legalEntityEntities")
     public void verifyLegalEntityEntities(ExamplesTable legalEntities) {
@@ -201,8 +209,9 @@ public class LegalEntitySteps extends AbstractSteps{
     public void changeLegalEntityLeadInstitutionFlag(){
         getLegalEntityPage().changeLegalEntityLeadInstitutionFlag();
     }
+
     @Then("the user should see the legalentity's lead institution value as in $source document with fid <fid>")
-    public void verifyEditLegalEntityLeadInstitutionFlagInZeus(@Named("fid") String fid,@Named("source") String source){
+    public void verifyEditLegalEntityLeadInstitutionFlagInTrusted(@Named("fid") String fid,@Named("source") String source){
         getLegalEntityPage().verifyEditLegalEntityLeadInstitutionFlagInDB(fid,source);
     }
 
@@ -211,10 +220,53 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyLeadInstitutionValuefromDB(leadInstitutionflag,fid,source);
     }
 
+
     @Then("the user should not see lead institution label and value")
     public void verifyNoLeadInstitution() {
         getLegalEntityPage().verifyNoLeadInstitution();
     }
+
+    @When("the user clicks on the Status drop-down in the basicinfo legalentity page")
+    public void clickOnStatusType(){
+        getLegalEntityPage().clickOnStatusType();
+    }
+
+    @Then("the user should see the status values from lookup Status")
+    public void verifyLegalEntityStatusList(){
+        getLegalEntityPage().verifyLegalEntityStatusList();
+    }
+
+    @When("the user starts typing the name of a status as $word in the Status drop-down")
+    public void enterValueInStatusDropdown(String word) {
+        getLegalEntityPage().enterValueInStatusDropdown(word);
+    }
+    @Then("the user should see the selected status in the drop-down as $status")
+    public void verifyStatusInDropdown(String status)
+    {
+        getLegalEntityPage().verifyStatusInDropdown(status);
+    }
+
+    @When("the user selects value as <status> from Status drop-down in the basicinfo legalentity page")
+    public void selectLegalEntityStatusValue(@Named("status") String status)
+    {
+        getLegalEntityPage().selectLegalEntityStatusValue(status);
+    }
+
+    @Then("the user should see the status value as in $source document with fid <fid>")
+
+    public void verifyEditLegalEntityStatusValueFromDB(@Named("fid") String fid,@Named("source") String source){
+        getLegalEntityPage().verifyEditLegalEntityStatusValueFromTrusted(fid,"status",source);
+    }
+
+    @Then("the user should see $attribute value as <status> for fid <fid> in $source document")
+    public void verifyStatusValuefromDB(@Named("status") String status,@Named("attribute") String attribute,@Named("fid") String fid,@Named("source") String source) {
+        getLegalEntityPage().verifyEditLegalEntityStatusValueFromZeus(status,attribute,fid,source);
+    }
+    @When("the user selects a non-default value from Status drop-down in the basicinfo legalentity page")
+    public void changeLegalEntityStatusValue(){
+        getLegalEntityPage().changeLegalEntityStatusValue();
+    }
+
 
     @Then("the user verifies basic info for legal entity left column <fid> from trusted document")
     public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getLegalEntityPage().verifyLegalEntityBasicInfoLeftColumn(fid);}

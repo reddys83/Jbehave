@@ -610,8 +610,6 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifySepaValues();
     }
 
-
-
     @When("the user enters the demographic date later than today")
     public void entersDemographicDateLaterThanToday() {
         getCountryPage().entersDemographicDateLaterThanToday();
