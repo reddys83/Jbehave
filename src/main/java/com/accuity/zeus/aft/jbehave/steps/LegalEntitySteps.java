@@ -18,6 +18,8 @@ public class LegalEntitySteps extends AbstractSteps{
     @Autowired
     Database database;
 
+    public static String selectedEntity="";
+
     @Then("the user should see the legal entity's entity types as: $legalEntityEntities")
     public void verifyLegalEntityEntities(ExamplesTable legalEntities) {
         getLegalEntityPage().verifyLegalEntityEntities(legalEntities);
@@ -345,6 +347,87 @@ public class LegalEntitySteps extends AbstractSteps{
     @Then("the user should see fatcaStatus value as <fatcastatus> for fid <fid> in $source document")
     public void verifyFatcaStatusValuefromDB(@Named("fatcastatus") String fatcastatus,@Named("fid") String fid,@Named("source") String source) {
         getLegalEntityPage().verifyEditLegalEntityFatcaStatusValueFromZeus(fatcastatus,"fatcastatus",fid,source);
+    }
+
+    @When("the user clicks on the add new name button in the basic info legal entity page")
+    public void clicksAddLegalEntityNames() {
+        getLegalEntityPage().clicksAddLegalEntityNames();
+    }
+
+    @When("the user enters more than 200 characters in legal entity names value")
+    public void entersInvalidCharactersForValueInNames()
+    {
+        getLegalEntityPage().entersInvalidCharactersForValueInNames();
+    }
+
+    @When("the user clicks on new legal entity names type drop-down")
+    public void clicksLegalEntityNamesTypeDropdown() {
+        getLegalEntityPage().clicksLegalEntityNamesTypeDropdown();
+    }
+
+    @Then("the user should see the legal entity names types from lookup LEGAL_ENTITY_NAME_TYPE")
+    public void verifyLegalEntityNamesTypeDropdown() {
+        getLegalEntityPage().verifyLegalEntityNamesTypeDropdown();
+    }
+
+    @When("the user selects names type <legalEntityNameType> in the basic info legal entity page")
+    public void selectLegalEntityNamesType(@Named("legalEntityNameType") String legalEntityNameType) {
+        getLegalEntityPage().selectLegalEntityNamesType(legalEntityNameType);
+    }
+
+    @When("the user enters names value <legalEntityNameValue> in the basic info legal entity page")
+    public void enterLegalEntityNamesValue(@Named("legalEntityNameValue") String legalEntityNameValue) {
+        getLegalEntityPage().enterLegalEntityNamesValue(legalEntityNameValue);
+    }
+
+    @Then("the user should see the edits to legal entity names in zeus document")
+    public void verifyEditLegalEntityNamesInZeus()
+    {
+     getLegalEntityPage().verifyEditLegalEntityNamesInZeus(selectedEntity);
+    }
+    @When("the user clicks on delete legal entity names option")
+    public void clicksOnDeleteLegalEntityNames()
+    {
+        getLegalEntityPage().clicksOnDeleteLegalEntityNames();
+    }
+
+    @Then("the user should see the delete row confirmation modal in the legal entity page")
+    public void verifyDeleteConfirmationModalInlegalEntity() {
+        getLegalEntityPage().verifyDeleteConfirmationModalInlegalEntity();
+    }
+
+    @When("the user clicks on the no button in the delete row confirmation modal in the legal entity basic info page")
+    public void clickOnNoButtonInDeleteConfirmationModalInLegalEntity() {
+        getLegalEntityPage().clickOnNoButtonInDeleteConfirmationModalInLegalEntity();
+    }
+
+    @When("the user clicks on the yes button in the delete row confirmation modal in the legal entity basic info page")
+    public void clickOnYesButtonInDeleteConfirmationModalInLegalEntity() {
+        getLegalEntityPage().clickOnYesButtonInDeleteConfirmationModalInLegalEntity();
+    }
+
+    @Then("the user should see the newly added names in the legal entity basic info page")
+    public void verifyNewlyAddedNames() {
+        getLegalEntityPage().verifyNewlyAddedNames();
+    }
+
+    @Then("the user should not see the newly added names in the legal entity basic info page")
+    public void verifyNoNewlyAddedNames() {
+        getLegalEntityPage().verifyNoNewlyAddedNames();
+    }
+    @Then("the user should not see the delete button for legal tiltle in names for legal entity")
+    public void verifyDeleteButtonForLegalTitle() {
+           getLegalEntityPage().verifyDeleteButtonForLegalTitle();
+     }
+
+    @Then("the user should see the error message required for the type and value fields of legal entity names")
+    public void verifyRequiredErrorMessageForTypesAndValues() {
+        getLegalEntityPage().verifyRequiredErrorMessageForTypesAndValues();
+    }
+
+    @Then("the user should see the error message enter up to 200 valid characters for value in the legal entity page")
+    public void verifyErrorMessageForValue() {
+        getLegalEntityPage().verifyErrorMessageForValue();
     }
 
 }

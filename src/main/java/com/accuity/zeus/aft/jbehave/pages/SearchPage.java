@@ -118,8 +118,8 @@ public class SearchPage extends AbstractPage {
 	}
 
 	public void enterSearchByOption(String searchBy) {
-		getDriver().findElement(legalEntity_search_option_type_dropdown_id).sendKeys(searchBy);
 
+		getDriver().findElement(legalEntity_search_option_type_dropdown_id).sendKeys(searchBy);
 	}
 
 	public ResultsPage clicksOnSearchIcon() {
