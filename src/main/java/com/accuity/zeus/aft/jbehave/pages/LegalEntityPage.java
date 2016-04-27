@@ -5,15 +5,15 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.rest.RestClient;
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
+import org.openqa.selenium.JavascriptExecutor;
+import org.w3c.dom.xpath.XPathResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +103,9 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_fatcastatus_list_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='FATCA Status']/td/select/option");
     private By legalEntity_basicInfo_fatcastatus_dropdown_xpath=By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='FATCA Status']/td/select");
     private By countryBasicInfo_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
+    private By legalEntity_basicInfo_AdditionalInfo_textarea_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Add Info']/td/textarea");
+    private By legalEntity_basicInfo_AdditionalInfos_err_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='addInfoError']");
+
     public LegalEntityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
@@ -759,6 +762,51 @@ public class LegalEntityPage extends AbstractPage {
 
         selectItemFromDropdownListByValue(legalEntity_basicInfo_fatcastatus_dropdown_xpath, valuetobeSelected);
 
+    }
+
+    public void enterLegalEntityAdditionalInfo(String additionalInfoText)
+    {
+        getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).clear();
+        getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).sendKeys(additionalInfoText);
+    }
+
+    public void verifyEditLegalEntityAdditionalInfoValueFromZeus(String additionalInfoText,String tagName,String fid,String source){
+
+        assertEquals(getLegalEntityValuesFromDB(fid,tagName,source),additionalInfoText);
+
+    }
+
+    public void verifyAdditionalInfoValueWithMaxLengthFromZeus(String tagName,String fid,String source){
+
+        assertEquals(getLegalEntityValuesFromDB(fid,tagName,source),bigString);
+
+    }
+
+    public void verifyAdditionalInfoTextAreaLength(String fid)
+    {
+        assertEquals(getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).getAttribute("maxlength"),"10000");
+    }
+
+
+    public void enter10001CharactersInLegalEntityAdditionalInfo(String fid)
+    {
+        String strBigString=createBigString(10000);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].setAttribute('maxlength','10001')",getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath));
+        getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='"+strBigString+"'",getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath));
+        getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).sendKeys("1");
+    }
+
+    public void enter10000CharactersInLegalEntityAdditionalInfo(String fid)
+    {
+        String strBigString=createBigString(10000);
+        getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='"+strBigString+"'",getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath));
+    }
+
+    public void verifyLegalEntityAdditionalInfoErrorMessageForMaxLength()
+    {
+        assertEquals(getDriver().findElement(legalEntity_basicInfo_AdditionalInfos_err_msg_xpath).getText(),"Enter up to 10000 valid characters.");
     }
 
 }
