@@ -62,7 +62,8 @@ When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
 And the user get the document with get Id for country with the name as Bosnia-Herzegovina from the database
-And the user clicks on the add country banking hours option
+Then the user reverts the changes to the document
+When the user clicks on the add country banking hours option
 And the user selects country banking hours day as <bankingHrsDay> in the country page
 And the user selects country banking hours start time as <bankingHrsStartTime> in the country page
 And the user selects country banking hours end time as <bankingHrsEndTime> in the country page
@@ -73,4 +74,4 @@ And the user reverts the changes to the document
 
 Examples:
 |country|bankingHrsDay|bankingHrsStartTime|bankingHrsEndTime|
-|Bosnia-Herzegovina|Monday|00:00|23:30|
+|Bosnia-Herzegovina|Wednesday|00:00|23:30|
