@@ -347,4 +347,12 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyEditLegalEntityFatcaStatusValueFromZeus(fatcastatus,"fatcastatus",fid,source);
     }
 
+    @When("the user updates corporate statement <value>")
+    public void entersCorporateStatement(@Named("value") String corporateStatement){
+        getLegalEntityPage().enterValueForCorporateStatement(corporateStatement);
+    }
+
+    @Then("the user verifies corporate summary from zeus document <fid> <value>")
+    public void verifyUpdatedCorporateSummary(@Named("fid") String fid,@Named("value") String corporateStatement){getLegalEntityPage().verifyUpdatedCorporateSummary(fid,corporateStatement);}
+
 }

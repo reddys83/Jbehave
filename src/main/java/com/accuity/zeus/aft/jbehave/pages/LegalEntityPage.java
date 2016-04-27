@@ -103,6 +103,9 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_fatcastatus_list_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='FATCA Status']/td/select/option");
     private By legalEntity_basicInfo_fatcastatus_dropdown_xpath=By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='FATCA Status']/td/select");
     private By countryBasicInfo_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
+    private By corporateSummary_textarea_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/dl/dd/textarea");
+
+
     public LegalEntityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
@@ -761,5 +764,23 @@ public class LegalEntityPage extends AbstractPage {
 
     }
 
+    public void enterValueForCorporateStatement(String corporateStatement) {
+        getDriver().findElement(corporateSummary_textarea_xpath).clear();
+        getDriver().findElement(corporateSummary_textarea_xpath).sendKeys(corporateStatement);
+    }
+
+    public void verifyUpdatedCorporateSummary(String fid,String corporateStatement) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        List<NameValuePair> zeusPairs = new ArrayList<>();
+        zeusPairs.add(new BasicNameValuePair("fid", fid));
+        zeusPairs.add(new BasicNameValuePair("source", "zeus"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", zeusPairs);
+        assertEquals(document.getElementsByTagName("corporateStatement").item(0).getTextContent(), corporateStatement);
+    }
 }
 
