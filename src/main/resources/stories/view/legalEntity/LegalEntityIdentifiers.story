@@ -27,6 +27,8 @@ Then the user should see the legal entity's identifiers as:
 |Moodys Organisation ID|600011442|active|
 |US Tax ID|94-1687665|active|
 |Fitch ID|80089060|active|
+|The Global Markets Entity Identifier (GMEI)|B4TYDEB6GKMZO031MB27|active|
+|Global Intermediary Identification Number|K613SZ.99999.SL.840|active|
 
 Examples:
 |entity|searchBy|fid|
