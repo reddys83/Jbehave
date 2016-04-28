@@ -21,7 +21,7 @@ Then the user should see the legal entity's location summaries for fid <fid> fro
 Examples:
 |entity|searchBy|fid|
 |Kreissparkasse Göppingen|Name|3125|
-|26065|FID|26065|
+|1038|FID|1038|
 
 Scenario: Verify no legalEntity location summary
 Given a user is on the search page
