@@ -341,7 +341,7 @@ When the user enters the country <addCurrencyCountry> in the add country type-ah
 Then the user should see the primary equals to true by default
 And the user should see the status equals to active by default
 When the user clicks on the delete option for the additional currency use
-Then the user should not see the additional currency use
+
 
 Examples:
 |currency|addCurrencyCountry|
