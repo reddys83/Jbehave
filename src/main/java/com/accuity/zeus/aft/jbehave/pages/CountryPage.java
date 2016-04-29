@@ -244,7 +244,7 @@ public class CountryPage extends AbstractPage {
     String country_places_area_dropdown_xpath = ".//*[@id='area_chosen']";
     String country_places_city_dropdown_xpath = ".//*[@id='city_chosen']";
     private By country_hera_validation_err_msg_xpath = By.xpath("//*[@id='error']//p[@class='notification error']");
-    private By country_places_details_cropdown_xpath = By.xpath("//*[@id='additionalRelatedPlaces']/tr[3]/td[4]/select");
+    private By country_places_details_Select_dropdown_xpath = By.xpath("//*[@id='additionalRelatedPlaces']/tr[@class='new']/td[4]/select");
 
 
     private String editedCountryBankingHrsDay = "";
@@ -1042,7 +1042,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void selectsPlacesDetailsFromDropdown(String PlaceDetails) {
-        /*List<WebElement> options = getDriver().findElements(By.xpath(country_places_details_dropdown_xpath + "/option"));
+   /*     List<WebElement> options = getDriver().findElements(By.xpath(country_places_details_dropdown_xpath + "/option"));
 
         for (WebElement option : options) {
             if (option.getText().contains(PlaceDetails)) {
@@ -1057,7 +1057,7 @@ public class CountryPage extends AbstractPage {
                 }
             }
         }*/
-        selectItemFromDropdownListByText(country_places_details_cropdown_xpath ,PlaceDetails);
+        selectItemFromDropdownListByText(country_places_details_Select_dropdown_xpath ,PlaceDetails);
     }
 
     public void selectsRegionTypeFromDropdown(String regionType) {
