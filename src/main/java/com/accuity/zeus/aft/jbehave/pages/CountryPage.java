@@ -1077,19 +1077,9 @@ public class CountryPage extends AbstractPage {
     }
 
     public void selectsRegionValueFromDropdown(String regionValue) {
-        getDriver().findElement(By.xpath(country_region_value_dropdown_xpath)).click();
-        List<WebElement> options = getDriver().findElements(By.xpath(country_region_value_dropdown_xpath + "/option"));
 
-        for (WebElement option : options) {
-            if (option.getText().contains(regionValue)) {
-
-                getDriver().findElement(By.xpath(country_region_value_dropdown_xpath)).click();
-
-                option.click();
-
-                break;
-            }
-        }
+        By regionDropDown  = By.xpath(country_region_value_dropdown_xpath);
+        selectItemFromDropdownListByValue(regionDropDown,regionValue);
     }
 
     public void verifyContinentRegionsValuesDropdown() {
@@ -1139,7 +1129,13 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyRequiredErrorMessageRegionValue() {
-        assertEquals(getDriver().findElement(country_region_value_error_message_xpath).getText(), "Required");
+        try {
+            Thread.sleep(2000L);
+            assertEquals(getDriver().findElement(country_region_value_error_message_xpath).getText(), "Required");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void entersDemographicDateLaterThanToday() {

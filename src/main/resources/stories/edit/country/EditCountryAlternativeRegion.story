@@ -70,7 +70,6 @@ Examples:
 |Angola|SEPA|
 
 Scenario: The user should see the save confirmation upon valid inputs
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -83,9 +82,10 @@ And the user selects region value as <regionValue> in the drop down
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 
+
 Examples:
 |country|regionType|regionValue|
-|Mayotte Island|Continent|Asia|
+|Netherlands|Continent|Asia|
 
 Scenario:The user should see reguired message when user save with empty region values
 Meta:
@@ -105,7 +105,6 @@ Examples:
 |Mayotte Island|
 
 Scenario:The user should see reguired message when user save with empty region values
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -120,7 +119,7 @@ And the user should see the error message at top of page the highlighted fields 
 
 Examples:
 |country|regionType|
-|Mayotte Island|Continent|
+|Netherlands|Continent|
 
 Scenario: The user should see the confirmation modal to delete region row message Please confirm - would you like to delete this row?
 Meta:
