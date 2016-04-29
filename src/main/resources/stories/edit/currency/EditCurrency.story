@@ -274,7 +274,7 @@ And the user enters the currency end month as <currencyEndMonth> in the currency
 And the user enters the currency end year as <currencyEndYear> in the currency page
 And the user clicks on the save button
 Then the user should see the error 'Required' for start date
-Then the user should see the error 'Required' for end date
+
 
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
