@@ -235,8 +235,8 @@ And the user enters more than 200 characters in the country exports
 And the user enters more than 200 characters in the country political structure
 And the user enters more than 5 characters inthe country intl dialing code
 And the user clicks on the save button
-Then the user should see the error message enter a day/month/year for startDate in country basic info page
-And the user should see the error message enter a day/month/year for endDate in country basic info page
+Then the user should see the error Invalid Date for start date
+And the user should see the error Invalid Date for end date
 Then the user should see the error message enter uptp 500 valid charecters for addinfo
 And the user should see the error message enter upto 200 valid charecters for imports
 And the user should see the error message enter upto 200 valid charecters for exports
