@@ -76,6 +76,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_boardMeeting_label_xpath = By.xpath(".//li[h1='Board Meetings'] //h2");
     private By legalEntity_boardMeeting_summary_label_xpath = By.xpath("//li[h1='Board Meetings']//dt");
     private By legalEntity_boardMeeting_summary_value_xpath = By.xpath("//li[h1='Board Meetings']//dd");
+    private By getLegalEntity_boardMeeting_type_value_xpath = By.xpath("//*[@id='legalEntityBoardMeetings']/table/tbody/tr/td[1]");
     private By legalEntity_boardMeeting_type_label_xpath = By.xpath("//li[h1='Board Meetings']//th[1]");
     private By legalEntity_boardMeeting_value_label_xpath = By.xpath("//li[h1='Board Meetings']//th[2]");
     String legalEntity_boardMeeting_type_values_xpath = ("//li[h1='Board Meetings']//tr[td='");
@@ -312,7 +313,7 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyBoardMeetingsSummary(String SummaryValue) {
         verifyBoardMeetingsLabels();
-        assertEquals(SummaryValue, getTextOnPage(legalEntity_boardMeeting_summary_value_xpath));
+        assertEquals(SummaryValue, getDriver().findElement(getLegalEntity_boardMeeting_type_value_xpath).getText());
     }
 
     public void verifyNoBoardMeetingsSummary() {
