@@ -146,7 +146,7 @@ Then the user should see the legal entity header with <entity>, <headOfficeAddre
 
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
-|Banque Tarneaud|Name|Limoges, Dept 87, France|1645|20172300|
+|Banque Tarneaud|Name||1645|20172300|
 |Berliner Volksbank eG|Name|Berlin, Germany|1717|20205500|
 |Collins Stewart Europe Limited|Name||271690||
 
@@ -193,7 +193,7 @@ Then the user verifies basic info for legal entity left column <fid> from truste
 
 Examples:
 |entity|searchBy|fid|
-|1|fid|1|
+|1038|fid|1038|
 
 
 Scenario: Verifing data displayed on legal entity page left column with database.

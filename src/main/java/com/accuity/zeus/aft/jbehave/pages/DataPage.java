@@ -1136,7 +1136,7 @@ public class DataPage extends AbstractPage {
 
         attemptClick(currency_update_button_id);
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
