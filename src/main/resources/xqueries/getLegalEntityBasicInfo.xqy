@@ -42,6 +42,7 @@ let $officeDoc := (/office[@source='trusted'][@resource=$headOffice])
 let $officeAddress := ($officeDoc/locations/location[@primary='true']/address[type='physical'])
 let $addressLine1 := ($officeAddress/streetAddress/addressLine1)
 let $postalCode := ($officeAddress/postalCode)
+let $entitytypes:= ($legalEntityS/summary/types/type)
 
 
 return <legalEntity>
@@ -57,4 +58,5 @@ return <legalEntity>
     <additionalinfo>{$additionalinfo}</additionalinfo>
     <headOfficeaddressLine1>{$addressLine1}</headOfficeaddressLine1>
     <postalCode>{$postalCode}</postalCode>
+    <entitytype>{$entitytypes}</entitytype>
 </legalEntity>

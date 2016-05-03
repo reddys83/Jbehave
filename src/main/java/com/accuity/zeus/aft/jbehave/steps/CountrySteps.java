@@ -721,25 +721,25 @@ public class CountrySteps extends AbstractSteps{
          getCountryPage().clickOnNameDeleteRowButton();
      }
 
-    @Then("the user should see the delete row confirmation modal in the country page")
-    public void verifyDeleteConfirmationModal(){
-        getCountryPage().verifyDeleteConfirmationModal();
-    }
+//    @Then("the user should see the delete row confirmation modal in the country page")
+//    public void verifyDeleteConfirmationModal(){
+//        getCountryPage().verifyDeleteConfirmationModal();
+//    }
 
     @When("the user clicks on the delete identifier row button in the basic info country page")
     public void clickOnDeleteNewIdentifierRowButton(){
         getCountryPage().clickOnIdentifierDeleteNewRowButton();
     }
 
-    @When("the user clicks on the no button in the delete row confirmation modal in the country page")
-    public void clickOnNoButtonInDeleteConfirmationModal(){
-        getCountryPage().clickOnNoButtonInDeleteConfirmationModal();
-    }
-
-    @When("the user clicks on the yes button in the delete row confirmation modal in the country page")
-    public void clickOnYesButtonInDeleteConfirmationModal(){
-        getCountryPage().clickOnYesButtonInDeleteConfirmationModal();
-    }
+//    @When("the user clicks on the no button in the delete row confirmation modal in the country page")
+//    public void clickOnNoButtonInDeleteConfirmationModal(){
+//        getCountryPage().clickOnNoButtonInDeleteConfirmationModal();
+//    }
+//
+//    @When("the user clicks on the yes button in the delete row confirmation modal in the country page")
+//    public void clickOnYesButtonInDeleteConfirmationModal(){
+//        getCountryPage().clickOnYesButtonInDeleteConfirmationModal();
+//    }
 
     @Then("the user should see the newly added name row in the basic info country page")
     public void verifyNewlyAddedNameRowIsDisplayed(){
