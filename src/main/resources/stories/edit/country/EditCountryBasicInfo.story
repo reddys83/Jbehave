@@ -216,7 +216,7 @@ Then the user should see the error 'Must be after start date.' for end date
 
 Examples:
 |country|countryEndYear|
-|Åland Islands|1814|
+|Afghanistan|1814|
 
 Scenario: The edit country basic info, The user should see the error messages for invalid inputs
 TestCase: ZEUS-827
