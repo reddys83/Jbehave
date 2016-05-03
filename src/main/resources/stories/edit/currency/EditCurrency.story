@@ -371,9 +371,9 @@ And the user reverts the changes to the document
 
 Examples:
 |currency|addCurrencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
-|Asian Currency Unit|Afghanistan|||1988|||1988|
-|Asian Currency Unit|Afghanistan||Jan|1988||Jan|1988|
-|Asian Currency Unit|Afghanistan|01|Jan|1988|01|Jan|1988|
+|Asian Currency Unit|Algeria|||1988|||1988|
+|Asian Currency Unit|Algeria||Jan|1988||Jan|1988|
+|Asian Currency Unit|Algeria|01|Jan|1988|01|Jan|1988|
 
 Scenario: ZEUS-838 - User will see confirmation message after saving currency edits
 Save updates tp existing currency use STORY:920(failing because of invalid data in database)
@@ -440,7 +440,7 @@ Scenario: ZEUS-838 - User will see confirmation message after saving currency ed
 ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Inactive status ) (AFT implementation issue)
 1. @accuracy = year
 2. @accuracy = month
-3. @accuracy = day
+3. @accuracy = day (BUG : 1028 & 1029)
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
@@ -524,8 +524,8 @@ And the user enters the currency start year as <currencyStartYear> in the curren
 When the user enters the currency end day as <currencyEndDay> in the currency page
 And the user enters the currency end year as <currencyEndYear> in the currency page
 And the user clicks on the save button
-Then the user should see the error 'Enter a year, month/year or day/month/year.' for start date
-Then the user should see the error 'Enter a year, month/year or day/month/year.' for end date
+Then the user should see the error Invalid Date for start date
+Then the user should see the error Invalid Date for end date
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
