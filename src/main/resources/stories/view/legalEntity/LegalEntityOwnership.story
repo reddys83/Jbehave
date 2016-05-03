@@ -19,7 +19,7 @@ And the user clicks on the legal entity ownership link in the navigation bar
 Then the user should see the legal entity's ownership as:
 |TYPE|VALUE|
 |replacement|Common shareholders resident in Canada 85.6%; United States 10.4% and other countries 4.0%|
-|replacement|Common shareholders resident in Canada 85.6%; United States 10.4% and other countries 4.0%|
+
 
 Examples:
 |entity|searchBy|fid|
