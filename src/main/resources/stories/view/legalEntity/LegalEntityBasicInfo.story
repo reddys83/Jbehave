@@ -71,7 +71,7 @@ When the user clicks on the search results card with fid <fid>
 
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
-|Bank of America National Association|Name|Charlotte, North Carolina, USA|1038|10077420|
+|Berliner Volksbank eG|Name|Budapester Strasse 35, 10787, Berlin, Germany|1717|20205500|
 
 Scenario: Verify the User can follow link to head office from legal entity
 Given a user is on the search page
