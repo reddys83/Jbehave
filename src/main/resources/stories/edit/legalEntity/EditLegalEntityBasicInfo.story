@@ -9,6 +9,7 @@ JIRA ID - ZUES- 84 - User can update a legal entity's charter type
 JIRA ID - ZEUS- 904 - User can edit legal entity's claimed established date
 JIRA ID - ZEUS-903 - User can edit Legal Entity's Status
 JIRA ID - ZEUS-905 - User can edit Legal Entity's FATCA status
+JIRA ID - ZEUS-907 - User can edit Legal Entity's Additional Info
 
 Scenario: Verify the default Edit value and Save Lead Institution value for a legal entity on legalEntity page
        a. Select the value as True for Lead Institution flag and Save for a legalEntity with a default value as True or False
