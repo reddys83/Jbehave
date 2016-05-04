@@ -1139,4 +1139,10 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyHeraValidationError();
     }
 
+    @When("the user should see go button in disabled state in the related places section")
+    public void verifyDisabledGoButtonStatus()
+    {
+        getCountryPage().verifyDisabledGoButtonStatus();
+    }
+
 }
