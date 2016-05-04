@@ -238,6 +238,7 @@ public class CountryPage extends AbstractPage {
     private By country_places_delete_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='relatedPlaces']//button[@class='delete-row']");
     private By country_places_place_edit_xpath = By.xpath(".//*[@class='new']/td/input[@id='relatedPlacePlace']");
     private By country_places_place_edit_button_xpath = By.xpath(".//tr[@class='new']//button[@class='edit-row']");
+    private By country_places_existing_place_edit_button_xpath = By.xpath(".//tr//button[@class='edit-row']");
     String country_places_type_dropdown_xpath = ".//*[@class='new'][@data-row_id='relatedPlaces']//select[@id='relatedPlaceType']";
     String country_places_details_dropdown_xpath = ".//*[@class='new'][@data-row_id='relatedPlaces']//select[@data-internal_id='relatedPlaceDetails']";
     String country_places_country_dropDown_xpath = ".//*[@id='country_chosen']";
@@ -1024,6 +1025,10 @@ public class CountryPage extends AbstractPage {
 
     public void clicksOnEditButton() {
         attemptClick(country_places_place_edit_button_xpath);
+    }
+
+    public void clicksOnExistingEditPlacesButton() {
+        attemptClick(country_places_existing_place_edit_button_xpath);
     }
 
     public void selectsPlacesTypeFromDropdwon(String placeType) {

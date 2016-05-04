@@ -543,6 +543,12 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().clicksOnEditButton();
     }
 
+    @When("the user clicks on edit button in existing places for country")
+    public void clicksOnExistingEditPlacesButton() {
+        getCountryPage().clicksOnExistingEditPlacesButton();
+    }
+
+
     @Then("the user should see place as $place in places for country")
     public void verifyPlaceInPlacesForCountry(@Named("place") String place) {
         getCountryPage().verifyPlaceInPlacesForCountry(place);
