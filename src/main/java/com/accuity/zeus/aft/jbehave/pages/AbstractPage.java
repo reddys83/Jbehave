@@ -37,6 +37,7 @@ public abstract class AbstractPage {
     protected final HeraApi heraApi;
 
     protected final RestClient restClient;
+    public String bigString="";
 
 
     protected By contentLocator = By.xpath("//body/div[@id='content']");
@@ -230,6 +231,18 @@ public abstract class AbstractPage {
         Select dropdown = new Select(driver.findElement(by));
         String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
         return selectedValue;
+    }
+
+    public String createBigString(int stringSize)
+    {
+
+        StringBuilder builder = new StringBuilder();
+        while(builder.toString().length()<stringSize) {
+            builder.append("abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345");
+        }
+        bigString=builder.toString();
+        return bigString;
+
     }
 
 }

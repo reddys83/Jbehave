@@ -8,10 +8,7 @@ import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
 
@@ -104,6 +101,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_fatcastatus_dropdown_xpath=By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='FATCA Status']/td/select");
     private By countryBasicInfo_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
     private By corporateSummary_textarea_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/dl/dd/textarea");
+    private By corporateSummary_textarea_maxLenght_error_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/dl/dd/p");
 
 
     public LegalEntityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
@@ -781,6 +779,31 @@ public class LegalEntityPage extends AbstractPage {
         zeusPairs.add(new BasicNameValuePair("source", "zeus"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", zeusPairs);
         assertEquals(document.getElementsByTagName("corporateStatement").item(0).getTextContent(), corporateStatement);
+    }
+
+    public void verifyMaxLengthCorporateActionTextArea() {
+        assertEquals(getDriver().findElement(corporateSummary_textarea_xpath).getAttribute("maxlength"),"10000");
+    }
+
+
+    public void enter10001CharactersInLegalEntityCorporateAction()
+    {
+        String strBigString=createBigString(10000);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].setAttribute('maxlength','10001')",getDriver().findElement(corporateSummary_textarea_xpath));
+        getDriver().findElement(corporateSummary_textarea_xpath).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='"+strBigString+"'",getDriver().findElement(corporateSummary_textarea_xpath));
+        getDriver().findElement(corporateSummary_textarea_xpath).sendKeys("1");
+    }
+
+    public void enter10000CharactersInLegalEntityCorporateAction()
+    {
+        String strBigString=createBigString(10000);
+        getDriver().findElement(corporateSummary_textarea_xpath).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='"+strBigString+"'",getDriver().findElement(corporateSummary_textarea_xpath));
+    }
+
+    public void verifyLegalEntityCorporateActionErrorMessageForMaxLength() {
+        assertEquals(getDriver().findElement(corporateSummary_textarea_maxLenght_error_xpath).getText(),"Enter up to 10000 valid characters.");
     }
 }
 

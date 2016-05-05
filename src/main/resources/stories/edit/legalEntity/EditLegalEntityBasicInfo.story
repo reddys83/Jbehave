@@ -29,6 +29,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the update link
+Then the user should see the fatcastatus value as in trusted document with fid <fid>
 Then the user should see the legalentity's lead institution value as in trusted document with fid <fid>
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user selects lead institution value <leadInstitutionflag> in the basicinfo legalentity page
@@ -435,6 +436,32 @@ Examples:
 |entity|searchBy|fid|value|
 |1038|fid|1038|CorporateValue|
 |1038|fid|1038| |
+
+
+Scenario: Verify that the Legal Entity's Corporatea Action field max length is 10000 characters only.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the update link
+Then the user verifies corporate action text area field length as 10000
+When the user gets the document with get Id for legalentity with the fid as <entity> from the database
+Then the user enters 10000 characters in corporate action text area
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user reverts the changes to the document
+When the user clicks on the update link
+And the user enters 10001 characters in the corporate action text area
+And the user clicks on the save button
+Then the user should see the error message enter up to 10000 valid characters for corporate action value in the basic info legal entity page
+
+Examples:
+|entity|searchBy|fid|
+|1038|FID|1038|
 
 
 
