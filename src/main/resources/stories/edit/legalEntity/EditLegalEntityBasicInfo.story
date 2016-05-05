@@ -462,14 +462,19 @@ When the user gets the document with get Id for legalentity with the fid as <ent
 And the user selects entity type value as <entityTypeValue> from existing Entity Type drop-down in the basicinfo legalentity page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Entity Types|
+|Basic Info|
+
 When the user clicks on the confirm button
 Then the user should see entityType value as <entityTypeValue> for fid <fid> in zeus document
 Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|entityTypeValue|
-|1038|FID|1038|ATM Network|
-|1038|FID|1038||
+|1165|FID|1165|ATM Network|
+|1165|FID|1165||
 
 Scenario: Add a new legal entity type row and Save
 a) Select a non-Blank value and Save. Verify the value is saved in Zeus document
@@ -494,8 +499,8 @@ Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|entityTypeValue|
-|1038|FID|1038|ATM Network|
-|1038|FID|1038||
+|1165|FID|1165|ATM Network|
+|1165|FID|1165||
 
 Scenario:
 a) Verify that the delete button is disabled for the first row of legal entity type
@@ -527,7 +532,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1165|FID|1165|
 
 Scenario:
 a) Verify that the user should get the confirmation window for deleting new entity type rows and user clicks No button
@@ -552,7 +557,7 @@ Then the user should not see the new row of legal entity types
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1165|FID|1165|
 
 Scenario: Verify that the user should get the Required field message when saving an entity type value to null and that is the only entity type exists on the page.
 
