@@ -17,12 +17,12 @@ Then the user should see the default country page and display all info
 When the user clicks on the currencies link in the navigation bar
 Then the user should see the country's currencies as:
 |ISO|NAME|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
-|ZWL|Zimbabwe Dollar|01 Feb 2009||true||active|
 |ZWD|Zimbabwe Dollar|2007||true||active|
 |ZWR|Zimbabwe Dollar|01 Aug 2008|31 Jan 2009|true|ZWL|inactive|
 |ZWN|Zimbabwe Dollar|01 Aug 2006|31 Jul 2008|true|ZWR|inactive|
 |ZWD|Zimbabwe Dollar|01 Jan 1980|31 Jul 2006|true|ZWN|inactive|
 |ZWD|Zimbabwe Dollar|Jan 1970|Jan 1979|true|NAD|inactive|
+
 
 Examples:
 |country|

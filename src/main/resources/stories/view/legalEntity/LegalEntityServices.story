@@ -18,9 +18,7 @@ When the user clicks on the legal entity services link in the navigation bar
 Then the user should see the legal entity's offered services as:
 |CATEGORY|OVERRIDE|
 |Asset Management|Wealth Management|
-|Asset Management|Retirement Planning|
 |Cash Services|Checking|
-|Cash Services|Cash Management|
 |Commercial Banking||
 |Loans||
 |Trust Administration|Estate Management|
@@ -28,12 +26,19 @@ Then the user should see the legal entity's offered services as:
 |Payment Services|Wire Transfers|
 |Internet Banking||
 |Savings Accounts - Personal||
-|Savings Accounts - Personal|Savings Accounts - Business|
+
 
 Then the user should see the legal entity's financial services as:
 |FINANCIAL CATEGORY|FINANCIAL DETAILS|
+|Fixed Income-Short Term|Certificates of Deposit-Domestic|
+|Municipal|General Obligation Bonds|
+|Fixed Income-Medium to Long Term|Treasury Notes and Bonds|
+|Fixed Income-Medium to Long Term|Preferred Stock|
 |Equities|Mutual Funds|
-|Equities|Mutual Funds|
+|Fixed Income-Short Term|Money Market Funds|
+|Fixed Income-Medium to Long Term|Commercial Mortgage-Backed Securities|
+|Consumer Credit|Visa|
+|Municipal|Industrial Revenue Bonds|
 
 Examples:
 |entity|searchBy|fid|

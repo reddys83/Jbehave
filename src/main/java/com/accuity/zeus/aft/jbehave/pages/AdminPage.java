@@ -33,6 +33,7 @@ public class AdminPage extends AbstractPage{
     private String taxonomies_table_rows = "//table[1]/tbody/tr";
     private String taxonomies_table_cols = "//table[1]/thead//th";
 
+
     public AdminPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
@@ -101,8 +102,21 @@ public class AdminPage extends AbstractPage{
     }
 
     public void enterTaxonomyInTheTypeAheadBox(String taxonomy) {
-        getDriver().findElement(taxonomy_input_xpath).sendKeys(taxonomy);
-        getDriver().findElement(taxonomy_input_xpath).sendKeys(Keys.RETURN);
+        /*getDriver().findElement(taxonomy_input_xpath).sendKeys(taxonomy);
+        getDriver().findElement(taxonomy_input_xpath).sendKeys(Keys.RETURN);*/
+        List<WebElement> options = getDriver().findElements(By.xpath("//*[@id='entitySelect_chosen']/div//li"));
+        for(WebElement option:options){
+            if(option.getText().contains(taxonomy)){
+                option.click();
+                break;
+            }
+        }
+
+
+
+
+
+
     }
 
     public void verifyTaxonomiesEntry(ExamplesTable taxonomyEntry) {

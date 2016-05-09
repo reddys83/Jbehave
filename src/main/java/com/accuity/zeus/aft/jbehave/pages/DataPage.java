@@ -1136,7 +1136,7 @@ public class DataPage extends AbstractPage {
 
         attemptClick(currency_update_button_id);
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -1153,7 +1153,7 @@ public class DataPage extends AbstractPage {
 
     public void verifyStartDateErrorMessageForDayMonthYear() {
         try {
-            Thread.sleep(2000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -1166,7 +1166,7 @@ public class DataPage extends AbstractPage {
 
     public void verifyEndDateErrorMessage(String endDateErrorMsg) {
         try {
-            Thread.sleep(2000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

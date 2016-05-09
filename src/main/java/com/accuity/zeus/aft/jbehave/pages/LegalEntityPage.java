@@ -76,6 +76,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_boardMeeting_label_xpath = By.xpath(".//li[h1='Board Meetings'] //h2");
     private By legalEntity_boardMeeting_summary_label_xpath = By.xpath("//li[h1='Board Meetings']//dt");
     private By legalEntity_boardMeeting_summary_value_xpath = By.xpath("//li[h1='Board Meetings']//dd");
+    private By getLegalEntity_boardMeeting_type_value_xpath = By.xpath("//*[@id='legalEntityBoardMeetings']/table/tbody/tr/td[1]");
     private By legalEntity_boardMeeting_type_label_xpath = By.xpath("//li[h1='Board Meetings']//th[1]");
     private By legalEntity_boardMeeting_value_label_xpath = By.xpath("//li[h1='Board Meetings']//th[2]");
     String legalEntity_boardMeeting_type_values_xpath = ("//li[h1='Board Meetings']//tr[td='");
@@ -103,6 +104,10 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_fatcastatus_list_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='FATCA Status']/td/select/option");
     private By legalEntity_basicInfo_fatcastatus_dropdown_xpath=By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='FATCA Status']/td/select");
     private By countryBasicInfo_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
+    private By corporateSummary_textarea_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/dl/dd/textarea");
+    private By corporateSummary_textarea_maxLenght_error_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/dl/dd/p");
+
+
     private By legalEntity_basicInfo_AdditionalInfo_textarea_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Add Info']/td/textarea");
     private By legalEntity_basicInfo_AdditionalInfos_err_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='addInfoError']");
 
@@ -315,7 +320,7 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyBoardMeetingsSummary(String SummaryValue) {
         verifyBoardMeetingsLabels();
-        assertEquals(SummaryValue, getTextOnPage(legalEntity_boardMeeting_summary_value_xpath));
+        assertEquals(SummaryValue, getDriver().findElement(getLegalEntity_boardMeeting_type_value_xpath).getText());
     }
 
     public void verifyNoBoardMeetingsSummary() {
@@ -764,6 +769,50 @@ public class LegalEntityPage extends AbstractPage {
 
     }
 
+    public void enterValueForCorporateStatement(String corporateStatement) {
+        getDriver().findElement(corporateSummary_textarea_xpath).clear();
+        getDriver().findElement(corporateSummary_textarea_xpath).sendKeys(corporateStatement);
+    }
+
+    public void verifyUpdatedCorporateSummary(String fid,String corporateStatement) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        List<NameValuePair> zeusPairs = new ArrayList<>();
+        zeusPairs.add(new BasicNameValuePair("fid", fid));
+        zeusPairs.add(new BasicNameValuePair("source", "zeus"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", zeusPairs);
+        assertEquals(document.getElementsByTagName("corporateStatement").item(0).getTextContent(), corporateStatement);
+    }
+
+    public void verifyMaxLengthCorporateActionTextArea() {
+        assertEquals(getDriver().findElement(corporateSummary_textarea_xpath).getAttribute("maxlength"),"10000");
+    }
+
+
+    public void enter10001CharactersInLegalEntityCorporateAction()
+    {
+        String strBigString=createBigString(10000);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].setAttribute('maxlength','10001')",getDriver().findElement(corporateSummary_textarea_xpath));
+        getDriver().findElement(corporateSummary_textarea_xpath).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='"+strBigString+"'",getDriver().findElement(corporateSummary_textarea_xpath));
+        getDriver().findElement(corporateSummary_textarea_xpath).sendKeys("1");
+    }
+
+    public void enter10000CharactersInLegalEntityCorporateAction()
+    {
+        String strBigString=createBigString(10000);
+        getDriver().findElement(corporateSummary_textarea_xpath).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='"+strBigString+"'",getDriver().findElement(corporateSummary_textarea_xpath));
+    }
+
+    public void verifyLegalEntityCorporateActionErrorMessageForMaxLength() {
+        assertEquals(getDriver().findElement(corporateSummary_textarea_maxLenght_error_xpath).getText(),"Enter up to 10000 valid characters.");
+    }
+
     public void enterLegalEntityAdditionalInfo(String additionalInfoText)
     {
         getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).clear();
@@ -808,6 +857,5 @@ public class LegalEntityPage extends AbstractPage {
     {
         assertEquals(getDriver().findElement(legalEntity_basicInfo_AdditionalInfos_err_msg_xpath).getText(),"Enter up to 10000 valid characters.");
     }
-
 }
 

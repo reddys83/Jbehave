@@ -37,10 +37,9 @@ public abstract class AbstractPage {
     protected final HeraApi heraApi;
 
     protected final RestClient restClient;
-
-
-    protected By contentLocator = By.xpath("//body/div[@id='content']");
     public String bigString="";
+    protected By contentLocator = By.xpath("//body/div[@id='content']");
+
 
     public AbstractPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         this.driver = driver;
