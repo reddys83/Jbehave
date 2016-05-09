@@ -332,10 +332,10 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().changeLegalEntityFatcaStatusValue();
     }
 
-    @Then("the user should see the fatcastatus value as in $source document with fid <fid>")
+    @Then("the user should see the fatcaStatus value as in $source document with fid <fid>")
 
     public void verifyEditLegalEntityFatcaStatusValueFromDB(@Named("fid") String fid,@Named("source") String source){
-        getLegalEntityPage().verifyEditLegalEntityFatcaStatusValueFromTrusted(fid,"fatcastatus",source);
+        getLegalEntityPage().verifyEditLegalEntityFatcaStatusValueFromTrusted(fid,"fatcaStatus",source);
     }
     @When("the user selects value as <fatcastatus> from Fatca Status drop-down in the basicinfo legalentity page")
     public void selectLegalEntityFatcaStatusValue(@Named("fatcastatus") String fatcaStatus)
@@ -344,7 +344,65 @@ public class LegalEntitySteps extends AbstractSteps{
     }
     @Then("the user should see fatcaStatus value as <fatcastatus> for fid <fid> in $source document")
     public void verifyFatcaStatusValuefromDB(@Named("fatcastatus") String fatcastatus,@Named("fid") String fid,@Named("source") String source) {
-        getLegalEntityPage().verifyEditLegalEntityFatcaStatusValueFromZeus(fatcastatus,"fatcastatus",fid,source);
+        getLegalEntityPage().verifyEditLegalEntityFatcaStatusValueFromZeus(fatcastatus,"fatcaStatus",fid,source);
+    }
+
+    @When("the user enters the <additionalInfoText> in the additional info text area")
+    public void enterLegalEntityAdditionalInfo(@Named("additionalInfoText") String additionalInfoText)
+    {
+        getLegalEntityPage().enterLegalEntityAdditionalInfo(additionalInfoText);
+    }
+
+    @Then("the user should see additional info text value as <additionalInfoText> for fid <fid> in $source document")
+    public void verifyAdditionalInfoValuefromDB(@Named("additionalInfoText") String additionalInfoText,@Named("fid") String fid,@Named("source") String source) {
+        getLegalEntityPage().verifyEditLegalEntityAdditionalInfoValueFromZeus(additionalInfoText,"additionalInfo",fid,source);
+    }
+
+    @Then("the user should see additional info text value with 10000 characters for fid <fid> in $source document")
+    public void verifyAdditionalInfoValueWithMaxLengthFromDB(@Named("fid") String fid,@Named("source") String source) {
+        getLegalEntityPage().verifyAdditionalInfoValueWithMaxLengthFromZeus("additionalInfo",fid,source);
+    }
+
+    @Then("the user should see the additional info text area field length as 10000")
+    public void verifyAdditionalInfoTextAreaLength(@Named("fid") String fid) {
+        getLegalEntityPage().verifyAdditionalInfoTextAreaLength(fid);
+    }
+
+    @When("the user enters 10001 characters in the additional info text area")
+    public void enter10001CharactersInLegalEntityAdditionalInfo(@Named("fid") String fid) {
+        getLegalEntityPage().enter10001CharactersInLegalEntityAdditionalInfo(fid);
+    }
+
+    @When("the user enters 10000 characters in the additional info text area")
+    public void enter10000CharactersInLegalEntityAdditionalInfo(@Named("fid") String fid) {
+        getLegalEntityPage().enter10000CharactersInLegalEntityAdditionalInfo(fid);
+    }
+
+    @Then("the user should see the error message enter up to 10000 valid characters for additional info value in the basic info legal entity page")
+    public void verifyLegalEntityAdditionalInfoErrorMessageForMaxLength() {
+        getLegalEntityPage().verifyLegalEntityAdditionalInfoErrorMessageForMaxLength();
+    }
+
+    @When("the user updates corporate statement <value>")
+    public void entersCorporateStatement(@Named("value") String corporateStatement){
+        getLegalEntityPage().enterValueForCorporateStatement(corporateStatement);
+    }
+
+    @Then("the user verifies corporate summary from zeus document <fid> <value>")
+    public void verifyUpdatedCorporateSummary(@Named("fid") String fid,@Named("value") String corporateStatement){getLegalEntityPage().verifyUpdatedCorporateSummary(fid,corporateStatement);}
+
+    @Then("the user verifies corporate action text area field length as 10000")
+    public void verifyMaXlengthCorporateActionTextArea(){getLegalEntityPage().verifyMaxLengthCorporateActionTextArea();}
+
+    @Then("the user enters 10000 characters in corporate action text area")
+    public void enter10000CharactersInCorporateActionTextArea(){getLegalEntityPage().enter10000CharactersInLegalEntityCorporateAction();}
+
+    @When("the user enters 10001 characters in the corporate action text area")
+    public void enter10001CharctersCorporateActionTextArea(){getLegalEntityPage().enter10001CharactersInLegalEntityCorporateAction();}
+
+    @Then("the user should see the error message enter up to 10000 valid characters for corporate action value in the basic info legal entity page")
+    public void verifyLegalEntityCorporateActionErrorMessageForMaxLength() {
+        getLegalEntityPage().verifyLegalEntityCorporateActionErrorMessageForMaxLength();
     }
 
     @When("the user clicks on the existing Entity Type drop-down in the basicinfo legalentity page")

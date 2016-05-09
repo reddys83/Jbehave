@@ -5,23 +5,23 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.rest.RestClient;
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
 import org.apache.commons.collections.ListUtils;
+import org.openqa.selenium.JavascriptExecutor;
+import org.w3c.dom.xpath.XPathResult;
 
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import java.util.*;
+
 
 public class LegalEntityPage extends AbstractPage {
     private By legalEntity_entityType_label_xpath = By.xpath(".//*[@id='content']//h2[2]");
@@ -78,6 +78,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_boardMeeting_label_xpath = By.xpath(".//li[h1='Board Meetings'] //h2");
     private By legalEntity_boardMeeting_summary_label_xpath = By.xpath("//li[h1='Board Meetings']//dt");
     private By legalEntity_boardMeeting_summary_value_xpath = By.xpath("//li[h1='Board Meetings']//dd");
+    private By getLegalEntity_boardMeeting_type_value_xpath = By.xpath("//*[@id='legalEntityBoardMeetings']/table/tbody/tr/td[1]");
     private By legalEntity_boardMeeting_type_label_xpath = By.xpath("//li[h1='Board Meetings']//th[1]");
     private By legalEntity_boardMeeting_value_label_xpath = By.xpath("//li[h1='Board Meetings']//th[2]");
     String legalEntity_boardMeeting_type_values_xpath = ("//li[h1='Board Meetings']//tr[td='");
@@ -110,6 +111,13 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_entitytypes_new_row_delete_button_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr[@class='new']/td[@class='delete']/button");
     private By legalEntity_basicInfo_add_new_entitytype_button_id = By.id("add-types");
     private By countryBasicInfo_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
+    private By corporateSummary_textarea_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/dl/dd/textarea");
+    private By corporateSummary_textarea_maxLenght_error_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/dl/dd/p");
+
+
+    private By legalEntity_basicInfo_AdditionalInfo_textarea_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Add Info']/td/textarea");
+    private By legalEntity_basicInfo_AdditionalInfos_err_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='addInfoError']");
+
     private By delete_confirmation_yes_button_id = By.id("yes-button");
     private By legalEntity_entity_type_error_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='legalEntityTypeError']");
 
@@ -323,7 +331,7 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyBoardMeetingsSummary(String SummaryValue) {
         verifyBoardMeetingsLabels();
-        assertEquals(SummaryValue, getTextOnPage(legalEntity_boardMeeting_summary_value_xpath));
+        assertEquals(SummaryValue, getDriver().findElement(getLegalEntity_boardMeeting_type_value_xpath).getText());
     }
 
     public void verifyNoBoardMeetingsSummary() {
@@ -772,6 +780,95 @@ public class LegalEntityPage extends AbstractPage {
 
     }
 
+    public void enterValueForCorporateStatement(String corporateStatement) {
+        getDriver().findElement(corporateSummary_textarea_xpath).clear();
+        getDriver().findElement(corporateSummary_textarea_xpath).sendKeys(corporateStatement);
+    }
+
+    public void verifyUpdatedCorporateSummary(String fid,String corporateStatement) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        List<NameValuePair> zeusPairs = new ArrayList<>();
+        zeusPairs.add(new BasicNameValuePair("fid", fid));
+        zeusPairs.add(new BasicNameValuePair("source", "zeus"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", zeusPairs);
+        assertEquals(document.getElementsByTagName("corporateStatement").item(0).getTextContent(), corporateStatement);
+    }
+
+    public void verifyMaxLengthCorporateActionTextArea() {
+        assertEquals(getDriver().findElement(corporateSummary_textarea_xpath).getAttribute("maxlength"),"10000");
+    }
+
+
+    public void enter10001CharactersInLegalEntityCorporateAction()
+    {
+        String strBigString=createBigString(10000);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].setAttribute('maxlength','10001')",getDriver().findElement(corporateSummary_textarea_xpath));
+        getDriver().findElement(corporateSummary_textarea_xpath).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='"+strBigString+"'",getDriver().findElement(corporateSummary_textarea_xpath));
+        getDriver().findElement(corporateSummary_textarea_xpath).sendKeys("1");
+    }
+
+    public void enter10000CharactersInLegalEntityCorporateAction()
+    {
+        String strBigString=createBigString(10000);
+        getDriver().findElement(corporateSummary_textarea_xpath).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='"+strBigString+"'",getDriver().findElement(corporateSummary_textarea_xpath));
+    }
+
+    public void verifyLegalEntityCorporateActionErrorMessageForMaxLength() {
+        assertEquals(getDriver().findElement(corporateSummary_textarea_maxLenght_error_xpath).getText(),"Enter up to 10000 valid characters.");
+    }
+
+    public void enterLegalEntityAdditionalInfo(String additionalInfoText)
+    {
+        getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).clear();
+        getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).sendKeys(additionalInfoText);
+    }
+
+    public void verifyEditLegalEntityAdditionalInfoValueFromZeus(String additionalInfoText,String tagName,String fid,String source){
+
+        assertEquals(getLegalEntityValuesFromDB(fid,tagName,source),additionalInfoText);
+
+    }
+
+    public void verifyAdditionalInfoValueWithMaxLengthFromZeus(String tagName,String fid,String source){
+
+        assertEquals(getLegalEntityValuesFromDB(fid,tagName,source),bigString);
+
+    }
+
+    public void verifyAdditionalInfoTextAreaLength(String fid)
+    {
+        assertEquals(getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).getAttribute("maxlength"),"10000");
+    }
+
+
+    public void enter10001CharactersInLegalEntityAdditionalInfo(String fid)
+    {
+        String strBigString=createBigString(10000);
+        modifyHtmlByName("addInfo", "maxlength", "10001");
+        //((JavascriptExecutor) getDriver()).executeScript("arguments[0].setAttribute('maxlength','10001')",getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath));
+        getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='"+strBigString+"'",getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath));
+        getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).sendKeys("1");
+    }
+
+    public void enter10000CharactersInLegalEntityAdditionalInfo(String fid)
+    {
+        String strBigString=createBigString(10000);
+        getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='"+strBigString+"'",getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath));
+    }
+
+    public void verifyLegalEntityAdditionalInfoErrorMessageForMaxLength()
+    {
+        assertEquals(getDriver().findElement(legalEntity_basicInfo_AdditionalInfos_err_msg_xpath).getText(),"Enter up to 10000 valid characters.");
+    }
 
     public void clickOnExistingEntityTypeDropDown()
     {

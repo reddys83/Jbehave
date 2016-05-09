@@ -543,6 +543,12 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().clicksOnEditButton();
     }
 
+    @When("the user clicks on edit button in existing places for country")
+    public void clicksOnExistingEditPlacesButton() {
+        getCountryPage().clicksOnExistingEditPlacesButton();
+    }
+
+
     @Then("the user should see place as $place in places for country")
     public void verifyPlaceInPlacesForCountry(@Named("place") String place) {
         getCountryPage().verifyPlaceInPlacesForCountry(place);
@@ -741,6 +747,10 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyNewlyAddedNameRowIsNotDisplayed();
     }
 
+    @When("the user presses enter button to delete row")
+    public void pressEnterButtonInDeleteConfirmationModal(){
+        getCountryPage().pressEnterButtonInDeleteConfirmationModal();
+    }
 
     @Then("the user should not see the newly added identifier row in the basic info country page")
     public void verifyNewlyAddedIdentifierRowIsNotDisplayed() {
@@ -1122,6 +1132,12 @@ public class CountrySteps extends AbstractSteps{
     @Then("the user should see the hera validation error in the country page")
     public void verifyHeraValidationError(){
         getCountryPage().verifyHeraValidationError();
+    }
+
+    @When("the user should see go button in disabled state in the related places section")
+    public void verifyDisabledGoButtonStatus()
+    {
+        getCountryPage().verifyDisabledGoButtonStatus();
     }
 
 }
