@@ -1280,19 +1280,6 @@ public class CountryPage extends AbstractPage {
         assertEquals("Required", getDriver().findElement(country_names_value_required_err_msg_xpath).getText());
     }
 
-
-    public void verifyDeleteConfirmationModal() {
-        assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(country_delete_confirmation_modal_xpath).getText());
-    }
-
-    public void clickOnNoButtonInDeleteConfirmationModal() {
-        attemptClick(country_delete_no_button_id);
-    }
-
-    public void clickOnYesButtonInDeleteConfirmationModal() {
-        attemptClick(country_delete_yes_button_id);
-    }
-
     public void verifyNewlyAddedNameRowIsDisplayed() {
         assertTrue(getDriver().findElement(country_additional_name_row_id).isDisplayed());
     }

@@ -50,6 +50,7 @@ let $leadInstitution := if (fn:exists ($relationshipDoc))
 then $legalEntityS/summary/leadInstitution
 else ""
 
+let $entitytypes:= ($legalEntityS/summary/types/type)
 
 
 return <legalEntity>
@@ -66,6 +67,7 @@ return <legalEntity>
     <headOfficeaddressLine1>{$addressLine1}</headOfficeaddressLine1>
     <postalCode>{$postalCode}</postalCode>
     <corporateStatement>{$corporateStatement}</corporateStatement>
+    <entitytype>{$entitytypes}</entitytype>
 </legalEntity>
 
 (:return $legalEntityS:)

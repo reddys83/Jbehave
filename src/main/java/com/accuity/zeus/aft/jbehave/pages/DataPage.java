@@ -194,6 +194,9 @@ public class DataPage extends AbstractPage {
     private By end_date_error_msg_xpath = By.xpath("//*[@data-error_id='endDateError']");
     private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private By cancel_update_confirmation_modal_xpath = By.xpath("//*[@id='modal-region']/div");
+    private By delete_row_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
+    private By delete_confirmation_no_button_id = By.id("no-button");
+    private By delete_confirmation_yes_button_id = By.id("yes-button");
 
     static ResponseEntity responseEntity;
     static String endpointWithID;
@@ -1133,7 +1136,11 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnUpdateCurrencyLink() {
-
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         attemptClick(currency_update_button_id);
         try {
             Thread.sleep(5000L);
@@ -1204,4 +1211,18 @@ public class DataPage extends AbstractPage {
             assertEquals(Summary.getRow(i).get(Summary.getHeaders().get(0)), confirmChanges.get(i).getText());
         }
     }
+
+    public void verifyDeleteConfirmationModal() {
+        assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(delete_row_confirmation_modal_xpath).getText());
+    }
+
+    public void clickOnNoButtonInDeleteConfirmationModal() {
+        attemptClick(delete_confirmation_no_button_id);
+    }
+
+    public void clickOnYesButtonInDeleteConfirmationModal() {
+        attemptClick(delete_confirmation_yes_button_id);
+    }
+
+
 }

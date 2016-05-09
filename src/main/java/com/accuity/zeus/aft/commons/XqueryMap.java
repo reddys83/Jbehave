@@ -70,8 +70,7 @@ public class XqueryMap {
         queryMap.put("get legal entity Status types","getLegalEntityStatusTypes.xqy");
         queryMap.put("abcd","getLegalEntityLeadInstitutionFlag.xqy");
         queryMap.put("get Id for legalentity","getIdForLegalEntity.xqy");
-
-
+        queryMap.put("get legal entity entity types","getLegalEntityEntityTypes.xqy");
 
    }
 
