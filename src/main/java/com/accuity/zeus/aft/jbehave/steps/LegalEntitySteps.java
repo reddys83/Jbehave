@@ -347,4 +347,26 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyEditLegalEntityFatcaStatusValueFromZeus(fatcastatus,"fatcastatus",fid,source);
     }
 
+    @When("the user updates corporate statement <value>")
+    public void entersCorporateStatement(@Named("value") String corporateStatement){
+        getLegalEntityPage().enterValueForCorporateStatement(corporateStatement);
+    }
+
+    @Then("the user verifies corporate summary from zeus document <fid> <value>")
+    public void verifyUpdatedCorporateSummary(@Named("fid") String fid,@Named("value") String corporateStatement){getLegalEntityPage().verifyUpdatedCorporateSummary(fid,corporateStatement);}
+
+    @Then("the user verifies corporate action text area field length as 10000")
+    public void verifyMaXlengthCorporateActionTextArea(){getLegalEntityPage().verifyMaxLengthCorporateActionTextArea();}
+
+    @Then("the user enters 10000 characters in corporate action text area")
+    public void enter10000CharactersInCorporateActionTextArea(){getLegalEntityPage().enter10000CharactersInLegalEntityCorporateAction();}
+
+    @When("the user enters 10001 characters in the corporate action text area")
+    public void enter10001CharctersCorporateActionTextArea(){getLegalEntityPage().enter10001CharactersInLegalEntityCorporateAction();}
+
+    @Then("the user should see the error message enter up to 10000 valid characters for corporate action value in the basic info legal entity page")
+    public void verifyLegalEntityAdditionalInfoErrorMessageForMaxLength() {
+        getLegalEntityPage().verifyLegalEntityCorporateActionErrorMessageForMaxLength();
+    }
+
 }

@@ -1770,6 +1770,9 @@ public class CountryPage extends AbstractPage {
         assertEquals("Technical error. Update not successful. Please contact Accuity Helpdesk", getDriver().findElement(country_hera_validation_err_msg_xpath).getText());
     }
 
+    public void pressEnterButtonInDeleteConfirmationModal() {
+        getDriver().findElement(country_delete_yes_button_id).sendKeys(Keys.ENTER);
+    }
     public void verifyDisabledGoButtonStatus()
     {
         assertFalse(getDriver().findElement(country_places_go_button_xpath).isEnabled());
