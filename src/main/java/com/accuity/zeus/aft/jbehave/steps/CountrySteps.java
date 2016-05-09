@@ -741,6 +741,12 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().clickOnYesButtonInDeleteConfirmationModal();
     }
 
+    @When("the user presses enter button to delete row")
+    public void pressEnterButtonInDeleteConfirmationModal(){
+        getCountryPage().pressEnterButtonInDeleteConfirmationModal();
+    }
+
+
     @Then("the user should see the newly added name row in the basic info country page")
     public void verifyNewlyAddedNameRowIsDisplayed(){
         getCountryPage().verifyNewlyAddedNameRowIsDisplayed();
