@@ -10,7 +10,7 @@ JIRA ID - ZEUS- 904 - User can edit legal entity's claimed established date
 JIRA ID - ZEUS-903 - User can edit Legal Entity's Status
 JIRA ID - ZEUS-905 - User can edit Legal Entity's FATCA status
 JIRA ID - ZEUS-908 - User can edit Legal Entity's Corporate Statement
-
+JIRA ID - ZEUS-907 - User can edit Legal Entity's Additional Info
 
 Scenario: Verify the default Edit value and Save Lead Institution value for a legal entity on legalEntity page
        a. Select the value as True for Lead Institution flag and Save for a legalEntity with a default value as True or False
@@ -377,7 +377,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the update link
-Then the user should see the fatcastatus value as in trusted document with fid <fid>
+Then the user should see the fatcaStatus value as in trusted document with fid <fid>
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user selects value as <fatcastatus> from Fatca Status drop-down in the basicinfo legalentity page
 And the user clicks on the save button
@@ -464,5 +464,78 @@ Examples:
 |1038|FID|1038|
 
 
+Scenario: Verify that the Legal Entity's Additional Info can be saved
+    a. Save with a new value different from the current value
+    b. Save with same value as current
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the update link
+Then the user should see the legalentity's lead institution value as in trusted document with fid <fid>
+When the user gets the document with get Id for legalentity with the fid as <entity> from the database
+And the user enters the <additionalInfoText> in the additional info text area
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see additional info text value as <additionalInfoText> for fid <fid> in zeus document
+And the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|additionalInfoText|
+|1165|FID|1165|xyz|
+|1165|FID|1165|xyz|
+
+Scenario: Verify that the Legal Entity's Additional Info is not a required field and the value can be blank.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the update link
+Then the user should see the legalentity's lead institution value as in trusted document with fid <fid>
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see additional info text value as <additionalInfoText> for fid <fid> in zeus document
+
+Examples:
+|entity|searchBy|fid|additionalInfoText
+|1165|FID|1165||
 
 
+Scenario: Verify that the Legal Entity's Additional Info field max length is 10000 characters only.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the update link
+Then the user should see the additional info text area field length as 10000
+When the user gets the document with get Id for legalentity with the fid as <entity> from the database
+And the user enters 10000 characters in the additional info text area
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+
+When the user clicks on the confirm button
+Then the user should see additional info text value with 10000 characters for fid <fid> in zeus document
+And the user reverts the changes to the document
+When the user clicks on the update link
+And the user enters 10001 characters in the additional info text area
+And the user clicks on the save button
+Then the user should see the error message enter up to 10000 valid characters for additional info value in the basic info legal entity page
+
+Examples:
+|entity|searchBy|fid|
+|1165|FID|1165|
