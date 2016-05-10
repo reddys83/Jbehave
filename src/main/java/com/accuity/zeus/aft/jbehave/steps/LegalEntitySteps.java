@@ -43,6 +43,11 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().clickOnLegalEntityLocations();
     }
 
+    @When("the user enters more than 10000 characters in value for legalEntity location summary")
+    public void enterInvalidCharactersInLegalEntityLocationsValue() {
+        getLegalEntityPage().enterInvalidCharactersInLegalEntityLocationsValue();
+    }
+
     @When("the user clicks on the type dropdown in legalEntity locations")
     public void clickOnLegalEntityLocationTypeDropDwon() {
         getLegalEntityPage().clickOnLegalEntityLocationTypeDropDwon();

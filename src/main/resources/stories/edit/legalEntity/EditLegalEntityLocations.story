@@ -26,7 +26,7 @@ Examples:
 |entity|searchBy|fid|
 |1717|FID|1717|
 
-Scenario: Verify the Required error message for legalEntity location type drop down
+Scenario: Verify the Required error message for legalEntity location type drop down for new and existing row
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -58,6 +58,9 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 When the user clicks on the legal entity locations link in the navigation bar
 And the user clicks on the update link
+And the user enters more than 10000 characters in value for legalEntity location summary
+And the user clicks on the save button
+Then the user should see the error message enter up to 10000 valid characters for value in the legalentity location
 And the user clicks on the add new location summary button in legalentity location
 And the user enters more than 10000 characters in value for legalEntity location summary
 And the user clicks on the save button

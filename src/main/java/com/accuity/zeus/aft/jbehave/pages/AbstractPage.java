@@ -161,6 +161,7 @@ public abstract class AbstractPage {
         }
         Select dropdown = new Select(driver.findElement(by));
         dropdown.selectByValue(value);
+
     }
 
     public void selectItemFromDropdownListByText(By by, String value) {
@@ -234,7 +235,6 @@ public abstract class AbstractPage {
 
     public String createBigString(int stringSize)
     {
-
         StringBuilder builder = new StringBuilder();
         while(builder.toString().length()<stringSize) {
             builder.append("abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345");

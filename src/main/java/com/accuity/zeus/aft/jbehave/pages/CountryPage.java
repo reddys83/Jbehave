@@ -1047,21 +1047,6 @@ public class CountryPage extends AbstractPage {
     }
 
     public void selectsPlacesDetailsFromDropdown(String PlaceDetails) {
-   /*     List<WebElement> options = getDriver().findElements(By.xpath(country_places_details_dropdown_xpath + "/option"));
-
-        for (WebElement option : options) {
-            if (option.getText().contains(PlaceDetails)) {
-                try {
-                    Thread.sleep(2000L);
-                    getDriver().findElement(By.xpath(country_places_details_dropdown_xpath)).click();
-                    option.click();
-                    Thread.sleep(2000L);
-                    break;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }*/
         selectItemFromDropdownListByText(country_places_details_Select_dropdown_xpath ,PlaceDetails);
     }
 

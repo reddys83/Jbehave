@@ -171,7 +171,19 @@ public class LegalEntityPage extends AbstractPage {
     public void selectsTypeInLegalEntityLocationSummary(String type)
     {
         attemptClick(By.xpath(legalEntity_locations_summary_type_edit_xpath));
-        selectItemFromDropdownListByValue(By.xpath(legalEntity_locations_summary_type_edit_xpath),type);
+      //  selectItemFromDropdownListByText(By.xpath(legalEntity_locations_summary_type_edit_xpath),type);
+        List<WebElement> options = getDriver().findElements(By.xpath(legalEntity_locations_summary_type_edit_xpath + "/option"));
+
+        for (WebElement option : options) {
+            if (option.getText().contains(type)) {
+
+                getDriver().findElement(By.xpath(legalEntity_locations_summary_type_edit_xpath)).click();
+
+                option.click();
+
+                break;
+            }
+        }
     }
 
     public void entersLegalEntityValueInLocationSummary(String value) {
@@ -184,7 +196,7 @@ public class LegalEntityPage extends AbstractPage {
 
     public void clickOnLegalEntityLocations() {
         attemptClick(legalEntity_locations_link_id);
-    }
+     }
 
     public void clickOnLegalEntityLocationTypeDropDwon() {
         attemptClick(By.xpath(legalEntity_locations_summary_type_edit_xpath));
@@ -196,6 +208,11 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyRequiredErrorMessageForTypeInLegalEntityLocations() {
         assertEquals(getDriver().findElement(legalEntity_location_type_error_message_xpath).getText(), "Required");
+    }
+
+    public void enterInvalidCharactersInLegalEntityLocationsValue() {
+        String strBigString=createBigString(10000);
+       
     }
 
     public void verifyLegalEntityLocationsTypeValues() {
