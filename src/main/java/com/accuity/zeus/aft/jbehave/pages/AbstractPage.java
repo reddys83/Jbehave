@@ -177,8 +177,8 @@ public abstract class AbstractPage {
         }
     }
 
-    public void modifyHtmlByName(String element, String attribute, String value) {
-        WebElement webElement = getDriver().findElement(By.name(element));
+    public void modifyHtmlByName(By element, String attribute, String value) {
+        WebElement webElement = getDriver().findElement(element);
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         String scriptSetAttrValue = "arguments[0].setAttribute(arguments[1],arguments[2])";
         executor.executeScript(scriptSetAttrValue, webElement, attribute, value);
