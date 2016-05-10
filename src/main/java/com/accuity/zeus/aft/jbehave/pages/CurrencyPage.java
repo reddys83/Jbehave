@@ -401,7 +401,7 @@ public class CurrencyPage extends AbstractPage {
     public void enterCurrencyName(String name) {
         editedCurrencyName = name;
         if(name.length() > 100){
-            modifyHtmlByName("name","maxlength", "");
+            modifyHtmlByName(currency_input_name_xpath,"maxlength", "");
         }
         getDriver().findElement(currency_input_name_xpath).clear();
         getDriver().findElement(currency_input_name_xpath).sendKeys(name);
@@ -410,7 +410,7 @@ public class CurrencyPage extends AbstractPage {
     public void enterCurrencyAbbr(String abbr) {
         editedCurrencyAbbr = abbr;
         if(abbr.length() > 30){
-            modifyHtmlByName("abbr","maxlength", "");
+            modifyHtmlByName(currency_input_abbr_xpath,"maxlength", "");
         }
         getDriver().findElement(currency_input_abbr_xpath).clear();
         getDriver().findElement(currency_input_abbr_xpath).sendKeys(abbr);
@@ -419,7 +419,7 @@ public class CurrencyPage extends AbstractPage {
     public void enterCurrencyUnit(String unit) {
         editedCurrencyUnit = unit;
         if(unit.length() > 100){
-            modifyHtmlByName("unit","maxlength", "");
+            modifyHtmlByName(currency_input_unit_xpath,"maxlength", "");
         }
         getDriver().findElement(currency_input_unit_xpath).clear();
         getDriver().findElement(currency_input_unit_xpath).sendKeys(unit);
@@ -430,7 +430,7 @@ public class CurrencyPage extends AbstractPage {
         /* Catching the NumberFormatException when user inputs alphabets*/
         try{
             if(Integer.parseInt(quantity) > 10000){
-                modifyHtmlByName("quantity","maxlength", "");
+                modifyHtmlByName(currency_input_quantity_xpath,"maxlength", "");
             }
         } catch (Exception NumberFormatException){
 
@@ -575,6 +575,11 @@ public class CurrencyPage extends AbstractPage {
         attemptClick(currency_delete_yes_button_id);
     }
 
+<<<<<<< HEAD
+    public void verifyNoAdditionalCurrencyUse() {
+        assertTrue(getDriver().findElement(currency_use_table_additional_use_row_xpath).isDisplayed());
+    }
+=======
     public void verifyNoAdditionalCurrencyUse(){
         try{
           assertFalse(getDriver().findElement(currency_use_table_additional_use_row_xpath).isDisplayed());
@@ -582,6 +587,7 @@ public class CurrencyPage extends AbstractPage {
     }catch(NoSuchElementException e){
         e.printStackTrace();
     }}
+>>>>>>> develop
 
     public void verifyErrorMessageForCurrAbbr() {
         assertEquals("Enter up to 30 valid characters.", getDriver().findElement(currency_abbr_error_message_xpath).getText());
@@ -611,7 +617,7 @@ public class CurrencyPage extends AbstractPage {
         assertEquals("true", getDriver().findElement(currency_use_table_additional_use_primary_edit_xpath).getAttribute("value"));
     }
 
-    public void verifyStatusActiveByDefault(){
+    public void verifyStatusActiveByDefault() {
         assertEquals("Active", getDriver().findElement(currency_use_table_additional_use_status_xpath).getText());
     }
 
