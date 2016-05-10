@@ -427,7 +427,7 @@ public class LegalEntitySteps extends AbstractSteps{
     }
 
     @When("the user selects entity type value as <entityTypeValue> from $rowIdentifier in the basicinfo legalentity page")
-    public void selectEntityType(@Named("entityTypeValue") String entityTypeValue,String rowIdentifier)
+    public void selectEntityType(@Named("entityTypeValue") String entityTypeValue, @Named("rowIdentifier")String rowIdentifier)
     {
         getLegalEntityPage().selectEntityType(entityTypeValue,rowIdentifier);
     }

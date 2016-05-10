@@ -738,7 +738,7 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the update link
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user enters null value for all the entity type rows
-And the user selects entity type value as <entityTypeValue> from first existing entitytype dropdown in the basicinfo legalentity page
+And the user selects entity type value as <entityTypeValue> from first_existing_entitytype_dropdown in the basicinfo legalentity page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button

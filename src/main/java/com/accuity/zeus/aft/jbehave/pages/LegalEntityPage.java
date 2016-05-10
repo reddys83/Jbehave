@@ -3,7 +3,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
-import com.accuity.zeus.aft.jbehave.xpaths.LegalEntityXpaths;
+import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -122,12 +122,11 @@ public class LegalEntityPage extends AbstractPage {
     private By delete_confirmation_yes_button_id = By.id("yes-button");
     private By legalEntity_entity_type_error_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='legalEntityTypeError']");
 
-    public String selectedEntityTypeValue="";
     public LegalEntityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
-    LegalEntityXpaths xpaths = new LegalEntityXpaths();
+    LegalEntityIdentifiers identifiers = new LegalEntityIdentifiers();
 
     @Override
     public String getPageUrl() {
@@ -936,8 +935,7 @@ public class LegalEntityPage extends AbstractPage {
     public void selectEntityType(String entityTypeValue,String rowIdentifier)
     {
 
-        Select dropdown = new Select(getDriver().findElements(xpaths.getXpath(rowIdentifier)).get(0));
-        selectedEntityTypeValue=dropdown.getFirstSelectedOption().getText();
+        Select dropdown = new Select(getDriver().findElements(identifiers.getObjectIdentifier(rowIdentifier)).get(0));
         dropdown.selectByVisibleText(entityTypeValue);
 
     }
@@ -968,12 +966,10 @@ public class LegalEntityPage extends AbstractPage {
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
         if (document != null && !entityTypeValue.isEmpty()) {
            assertTrue(getNodeValuesByTagName(document, tagName).contains(entityTypeValue));
-            assertFalse(getNodeValuesByTagName(document, tagName).contains(selectedEntityTypeValue));
 
         }
         else if (document != null && entityTypeValue.isEmpty()) {
             assertFalse(getNodeValuesByTagName(document, tagName).contains(entityTypeValue));
-            assertFalse(getNodeValuesByTagName(document, tagName).contains(selectedEntityTypeValue));
         }
 
     }
@@ -989,7 +985,7 @@ public class LegalEntityPage extends AbstractPage {
         {
             getDriver().findElements(legalEntity_basicInfo_entitytypes_delete_button_xpath).get(rowNumber).click();
             Select dropdown = new Select(getDriver().findElements(legalEntity_basicInfo_entitytypes_dropdown_xpath).get(rowNumber));
-            selectedEntityTypeValue=dropdown.getFirstSelectedOption().getText();
+            //selectedEntityTypeValue=dropdown.getFirstSelectedOption().getText();
         }
         else
         {
@@ -1003,16 +999,16 @@ public class LegalEntityPage extends AbstractPage {
         assertTrue(getDriver().findElements(legalEntity_basicInfo_entitytypes_dropdown_xpath).get(rowNumber).isDisplayed());
         assertTrue(getDriver().findElements(legalEntity_basicInfo_entitytypes_delete_button_xpath).get(rowNumber).isDisplayed());
         Select dropdown = new Select(getDriver().findElements(legalEntity_basicInfo_entitytypes_dropdown_xpath).get(rowNumber));
-        assertEquals(dropdown.getFirstSelectedOption().getText(),selectedEntityTypeValue);
+        //assertEquals(dropdown.getFirstSelectedOption().getText(),selectedEntityTypeValue);
     }
 
     public void verifyNoExistingEntityTypeRow(int rowNumber)
     {
         Select dropdown = new Select(getDriver().findElements(legalEntity_basicInfo_entitytypes_dropdown_xpath).get(rowNumber));
-        assertFalse(dropdown.getFirstSelectedOption().getText().equalsIgnoreCase(selectedEntityTypeValue));
+        //assertFalse(dropdown.getFirstSelectedOption().getText().equalsIgnoreCase(selectedEntityTypeValue));
 
     }
-    public void verifyEntityTypeNotPresentInZeus(String source, String fid,String tagName)
+    public void verifyEntityTypeNotPresentInZeus(String source, String fid,String tagName, String value)
     {
 
         try {
@@ -1025,7 +1021,7 @@ public class LegalEntityPage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", source));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
-        assertFalse(getNodeValuesByTagName(document, tagName).contains(selectedEntityTypeValue));
+        assertFalse(getNodeValuesByTagName(document, tagName).contains(value));
     }
 
     public void clickonDeleteNewEntityTypeRowButton()
