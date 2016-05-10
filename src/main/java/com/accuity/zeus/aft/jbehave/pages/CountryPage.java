@@ -238,6 +238,7 @@ public class CountryPage extends AbstractPage {
     private By country_places_delete_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='relatedPlaces']//button[@class='delete-row']");
     private By country_places_place_edit_xpath = By.xpath(".//*[@class='new']/td/input[@id='relatedPlacePlace']");
     private By country_places_place_edit_button_xpath = By.xpath(".//tr[@class='new']//button[@class='edit-row']");
+    private By country_places_existing_place_edit_button_xpath = By.xpath(".//tr//button[@class='edit-row']");
     String country_places_type_dropdown_xpath = ".//*[@class='new'][@data-row_id='relatedPlaces']//select[@id='relatedPlaceType']";
     String country_places_details_dropdown_xpath = ".//*[@class='new'][@data-row_id='relatedPlaces']//select[@data-internal_id='relatedPlaceDetails']";
     String country_places_country_dropDown_xpath = ".//*[@id='country_chosen']";
@@ -1026,6 +1027,10 @@ public class CountryPage extends AbstractPage {
         attemptClick(country_places_place_edit_button_xpath);
     }
 
+    public void clicksOnExistingEditPlacesButton() {
+        attemptClick(country_places_existing_place_edit_button_xpath);
+    }
+
     public void selectsPlacesTypeFromDropdwon(String placeType) {
         List<WebElement> options = getDriver().findElements(By.xpath(country_places_type_dropdown_xpath + "/option"));
 
@@ -1273,19 +1278,6 @@ public class CountryPage extends AbstractPage {
 
     public void verifyErrorMessageForRequiredValueType() {
         assertEquals("Required", getDriver().findElement(country_names_value_required_err_msg_xpath).getText());
-    }
-
-
-    public void verifyDeleteConfirmationModal() {
-        assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(country_delete_confirmation_modal_xpath).getText());
-    }
-
-    public void clickOnNoButtonInDeleteConfirmationModal() {
-        attemptClick(country_delete_no_button_id);
-    }
-
-    public void clickOnYesButtonInDeleteConfirmationModal() {
-        attemptClick(country_delete_yes_button_id);
     }
 
     public void verifyNewlyAddedNameRowIsDisplayed() {
@@ -1765,4 +1757,11 @@ public class CountryPage extends AbstractPage {
         assertEquals("Technical error. Update not successful. Please contact Accuity Helpdesk", getDriver().findElement(country_hera_validation_err_msg_xpath).getText());
     }
 
+    public void pressEnterButtonInDeleteConfirmationModal() {
+        getDriver().findElement(country_delete_yes_button_id).sendKeys(Keys.ENTER);
+    }
+    public void verifyDisabledGoButtonStatus()
+    {
+        assertFalse(getDriver().findElement(country_places_go_button_xpath).isEnabled());
+    }
 }

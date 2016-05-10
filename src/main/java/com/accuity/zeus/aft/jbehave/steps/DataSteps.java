@@ -916,4 +916,18 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifySummaryConfirmationModal(Summary);
     }
 
+    @Then("the user should see the delete row confirmation modal in the $pagename page")
+    public void verifyDeleteConfirmationModal(){
+        getDataPage().verifyDeleteConfirmationModal();
+    }
+
+    @When("the user clicks on the no button in the delete row confirmation modal in the $pagename page")
+    public void clickOnNoButtonInDeleteConfirmationModal(){
+        getDataPage().clickOnNoButtonInDeleteConfirmationModal();
+    }
+
+    @When("the user clicks on the yes button in the delete row confirmation modal in the $pagename page")
+    public void clickOnYesButtonInDeleteConfirmationModal(){
+        getDataPage().clickOnYesButtonInDeleteConfirmationModal();
+    }
 }

@@ -31,7 +31,7 @@ let $characteredDate := local:getDateAsPerAccuracy($legalEntityS/summary/dates/c
 let $charterType := ($legalEntityS/summary/charterType)
 let $insuranceType := ($legalEntityS/summary/insuranceType)
 let $ownershipType := ($legalEntityS/summary/organisationType)
-let $leadInstitution :=($legalEntityS/summary/leadInstitution)
+
 let $countryOfOperation := ($legalEntityS/summary/countryOfOperations/link/@href)
 let $countryDoc := (/country[@source='trusted'])[@resource/string()= $countryOfOperation]
 let $countryName := ($countryDoc/summary/names/name[type='Country Name']/value)
@@ -42,6 +42,15 @@ let $officeDoc := (/office[@source='trusted'][@resource=$headOffice])
 let $officeAddress := ($officeDoc/locations/location[@primary='true']/address[type='physical'])
 let $addressLine1 := ($officeAddress/streetAddress/addressLine1)
 let $postalCode := ($officeAddress/postalCode)
+let $corporateStatement := ($legalEntityS/summary/corporateStatement)
+let $resourceLink := (/legalEntity[@fid=$fid][@source='trusted'])
+let $resourceValue := <resource>{$resourceLink/@resource/string()}</resource>
+let $relationshipDoc := (/relationship[@source='trusted'][status='active'][relationshipType='ownership'][parties/party[partyType="owned"]/entityReference/link/@href = $resourceValue])
+let $leadInstitution := if (fn:exists ($relationshipDoc))
+then $legalEntityS/summary/leadInstitution
+else ""
+
+let $entitytypes:= ($legalEntityS/summary/types/type)
 
 
 return <legalEntity>
@@ -57,4 +66,11 @@ return <legalEntity>
     <additionalinfo>{$additionalinfo}</additionalinfo>
     <headOfficeaddressLine1>{$addressLine1}</headOfficeaddressLine1>
     <postalCode>{$postalCode}</postalCode>
+    <corporateStatement>{$corporateStatement}</corporateStatement>
+    <entitytype>{$entitytypes}</entitytype>
 </legalEntity>
+
+(:return $legalEntityS:)
+
+
+
