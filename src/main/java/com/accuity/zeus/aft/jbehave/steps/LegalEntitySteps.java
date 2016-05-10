@@ -43,6 +43,35 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().clickOnLegalEntityLocations();
     }
 
+    @When("the user clicks on the type dropdown in legalEntity locations")
+    public void clickOnLegalEntityLocationTypeDropDwon() {
+        getLegalEntityPage().clickOnLegalEntityLocationTypeDropDwon();
+    }
+
+    @When("the user select type as <type> in the legalentity location summary")
+    public void selectsTypeInLegalEntityLocationSummary(@Named("type") String type){
+        getLegalEntityPage().selectsTypeInLegalEntityLocationSummary(type);
+    }
+
+    @When("the user enters value as <value> in the legalentity location summary")
+    public void entersLegalEntityValueInLocationSummary(@Named("value") String value){
+        getLegalEntityPage().entersLegalEntityValueInLocationSummary(value);
+    }
+    @When("the user clicks on the add new location summary button in legalentity location")
+    public void clickNewLegalEntityLocations() {
+         getLegalEntityPage().clickNewLegalEntityLocations();
+    }
+
+    @Then("the user should see the error message required for the type in legalentity location summary")
+    public void verifyRequiredErrorMessageForTypeInLegalEntityLocations() {
+        getLegalEntityPage().verifyRequiredErrorMessageForTypeInLegalEntityLocations();
+    }
+
+    @Then("the user should see the legalentity's location summary type values from lookup LOCATION_SUMMARY_TEXT_TYPE")
+    public void verifyLegalEntityLocationsTypeValues() {
+        getLegalEntityPage().verifyLegalEntityLocationsTypeValues();
+    }
+
     @When("the user clicks on the legal entity statistics link in the navigation bar")
     public void clickOnLegalEntityStatistics(){
         getLegalEntityPage().clickOnLegalEntityStatistics();

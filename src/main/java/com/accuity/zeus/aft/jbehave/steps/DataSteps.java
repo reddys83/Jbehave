@@ -860,7 +860,7 @@ public class DataSteps extends AbstractSteps {
     @When("the user gets the document with $xqueryName with the $param as <entity> from the database")
     public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("param") String param,@Named("entity") String entity)
     {
-        getDataPage().getDocument(xqueryName,param,entity);
+        getDataPage().getDocument(xqueryName, param, entity);
 
     }
 
@@ -908,7 +908,6 @@ public class DataSteps extends AbstractSteps {
     public void clickOnUpdateCurrencyLink() {
         getDataPage().clickOnUpdateCurrencyLink();
     }
-
     @Then("the user should be redirected to view mode")
     public void verifyUserRedirectedToViewMode(){getDataPage().verifyUserRedirectedViewMode();}
 

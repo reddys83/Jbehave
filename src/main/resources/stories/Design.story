@@ -1,16 +1,23 @@
 Meta:@Design
 
-Scenario: Bug:ZEUS-930- LegalEntity search results are not showing up
+Scenario: Verify the Required error message for legalEntity location type drop down
 Given a user is on the search page
-When the user searches for <entity> with <field> equals <value>
-
-Then the user should see the legal entity search results card matching the searched entity
-|FID|TFPID|NAME|ADDRESS|STATUS|
-|224355||American Life Hayat Sigorta AS||active|
-
-Then the user should see the search results paginated for the searched entity
-And the user should see the number of records displayed in the page w.r.t total search results
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+When the user clicks on the legal entity locations link in the navigation bar
+And the user clicks on the update link
+And the user select type as <type> in the legalentity location summary
+And the user clicks on the save button
+Then the user should see the error message required for the type in legalentity location summary
+When the user clicks on the add new location summary button in legalentity location
+And the user enters value as <value> in the legalentity location summary
+And the user clicks on the save button
+Then the user should see the error message required for the type in legalentity location summary
 
 Examples:
-|entity|field|value|
-|fid|fid|224355|
+|entity|searchBy|fid|type|value|
+|1717|FID|1717||Berlin/Brandenburg 100|
