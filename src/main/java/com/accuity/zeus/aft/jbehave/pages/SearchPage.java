@@ -113,6 +113,7 @@ public class SearchPage extends AbstractPage {
 
 	public void enterLegalEntityInTypeAheadBox(String entity) {
 		selectedEntity = entity;
+		getDriver().findElement(legalEntity_type_ahead_xpath).clear();
 		getDriver().findElement(legalEntity_type_ahead_xpath).sendKeys(entity);
 		getDriver().findElement(legalEntity_type_ahead_xpath).sendKeys(Keys.RETURN);
 	}

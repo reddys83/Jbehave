@@ -68,11 +68,11 @@ public class CurrencyPage extends AbstractPage {
     private By currency_start_date_drop_down_xpath = By.xpath("//select[@name='began-month']");
     private By currency_add_country_option_xpath = By.xpath("//*[@id='add_currencyUses_chosen']/a");
     private By currency_add_country_type_ahead_input_xpath = By.xpath("//*[@id='add_currencyUses_chosen']/div/div/input");
-    private By currency_use_table_additional_use_primary_edit_xpath = By.xpath("//*[@id='additionalUses']//fieldset/input[@checked]");
-    private By currency_use_table_additional_use_status_xpath = By.xpath("//*[@id='additionalUses']/tr/td[@class='status']");
+    private By currency_use_table_additional_use_primary_edit_xpath = By.xpath("//*[@id='additionalCurrencyUses']/tr[@class='new'] //fieldset/input[@checked]");
+    private By currency_use_table_additional_use_status_xpath = By.xpath("//*[@id='additionalCurrencyUses']/tr[@class='new']/td[@class='status']");
     private By currency_add_country_list_xpath = By.xpath("//*[@id='add_currencyUses_chosen'] //ul/li");
-    private By currency_use_table_delete_use_option_xpath = By.xpath("//button[@class='delete-row']");
-    private By currency_use_table_additional_use_row_xpath = By.xpath("//*[@id='additionalUses']");
+    private By currency_use_table_delete_use_option_xpath = By.xpath("//*[@id='additionalCurrencyUses']/tr[@class='new']/td[@class='delete']/button[@class='delete-row']");
+    private By currency_use_table_additional_use_row_xpath = By.xpath("//*[@id='additionalCurrencyUses']/tr[@class='new']");
     private By labels_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
     private By no_results_match_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
     private By currency_input_xpath = By.xpath("//*[@class='chosen-search']/input");
@@ -572,11 +572,22 @@ public class CurrencyPage extends AbstractPage {
 
     public void clickOnDeleteUseOption() {
         attemptClick(currency_use_table_delete_use_option_xpath);
+        attemptClick(currency_delete_yes_button_id);
     }
 
+<<<<<<< HEAD
     public void verifyNoAdditionalCurrencyUse() {
         assertTrue(getDriver().findElement(currency_use_table_additional_use_row_xpath).isDisplayed());
     }
+=======
+    public void verifyNoAdditionalCurrencyUse(){
+        try{
+          assertFalse(getDriver().findElement(currency_use_table_additional_use_row_xpath).isDisplayed());
+
+    }catch(NoSuchElementException e){
+        e.printStackTrace();
+    }}
+>>>>>>> develop
 
     public void verifyErrorMessageForCurrAbbr() {
         assertEquals("Enter up to 30 valid characters.", getDriver().findElement(currency_abbr_error_message_xpath).getText());
@@ -628,7 +639,7 @@ public class CurrencyPage extends AbstractPage {
     public CurrencyPage selectCurrencyFromTypeAhead(String currency) {
 
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

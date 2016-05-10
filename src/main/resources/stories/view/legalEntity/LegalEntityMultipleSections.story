@@ -18,7 +18,7 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 Then the user should see the default legal entity page and display basic info
 When the user clicks on the legal entity all link in the navigation bar
-Then the user should see the basic info for selected legal entity
+Then the user verifies basic info for legal entity left column <fid> from trusted document
 And the user should see the board meetings for the legal entity
 And the user should see the credit rating for the legal entity
 And the user should see the history for the legal entity
@@ -33,7 +33,7 @@ And the user should see the trust powers for the legal entity
 
 Examples:
 |entity|searchBy|fid|
-|Bank of America National Association|Name|1038|
+|1038|fid|1038|
 
 Scenario: Verify multiple sections
 Meta:
@@ -68,13 +68,15 @@ Then the user should see the legal entity's identifiers as:
 |Moodys Organisation ID|600011442|active|
 |US Tax ID|94-1687665|active|
 |Fitch ID|80089060|active|
+|The Global Markets Entity Identifier (GMEI)|B4TYDEB6GKMZO031MB27|active|
+|Global Intermediary Identification Number|K613SZ.99999.SL.840|active|
 
 When the user clicks on the legal entity credit rating link in the navigation bar
 Then the user should not see the legal entity's credit ratings section
 
 Examples:
 |entity|searchBy|fid|
-|Bank of America National Association|Name|1038|
+|1038|fid|1038|
 
 Scenario: Verify All sections
 Given a user is on the search page
@@ -94,7 +96,7 @@ When the user clicks on the legal entity personnel link in the navigation bar
 When the user clicks on the legal entity services link in the navigation bar
 When the user clicks on the legal entity statistics link in the navigation bar
 When the user clicks on the legal entity tust power link in the navigation bar
-Then the user should see the basic info for selected legal entity
+Then the user verifies basic info for legal entity left column <fid> from trusted document
 And the user should see the board meetings for the legal entity
 And the user should see the credit rating for the legal entity
 And the user should see the history for the legal entity
@@ -110,4 +112,4 @@ Then the user should see all is selected by default in the navigation bar
 
 Examples:
 |entity|searchBy|fid|
-|Bank of America National Association|Name|1038|
+|1038|fid|1038|

@@ -5,6 +5,7 @@ As a user
 I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-448 - User can edit country related places
+JIRA ID - ZEUS-943 - Go button disabled - Country Related Places
 
 Scenario: Verify the list of type dropdown are from COUNTRY_RELATED_PLACE_TYPE and details dropdown from COUNTRY_RELATED_PLACE_SUBTYPE
 Meta:
@@ -180,3 +181,48 @@ Then the user should see place as Bouinan in places for country
 Examples:
 |country|PlaceType|countryPlaces|areaPlaces|cityPlaces|
 |Mayotte Island|Capital City|Algeria|Blida|Bouinan|
+
+
+Scenario: Go button should be disabled when user selects "No Area" or "Return All Cities" as the value for 'area' while adding a new related place
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+When the user clicks on the country places link in the navigation bar
+And the user clicks on the update link
+And the user clicks on the add new places button in the places for country
+And the user clicks on new country places type drop-down
+And the user selects type value as <PlaceType> in the places for country
+When the user clicks on edit button in places for country
+And the user clicks on the country drop down in the places for country
+When the user selects the country <countryPlaces> in the places for country
+And the user clicks on area drop down in the places for country
+When the user selects area <areaPlaces> dropdown in places for country
+And the user should see go button in disabled state in the related places section
+
+Examples:
+|country|PlaceType|countryPlaces|areaPlaces|
+|USA|Capital City|USA|No Area|
+|USA|Financial Centre|USA|Return All Cities|
+
+
+Scenario: Go button should be disabled when user selects "No Area" or "Return All Cities" as the value for 'area' while editing an existing related place
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+When the user clicks on the country places link in the navigation bar
+And the user clicks on the update link
+And the user clicks on edit button in existing places for country
+And the user clicks on the country drop down in the places for country
+When the user selects the country <countryPlaces> in the places for country
+And the user clicks on area drop down in the places for country
+When the user selects area <areaPlaces> dropdown in places for country
+And the user should see go button in disabled state in the related places section
+
+Examples:
+|country|countryPlaces|areaPlaces|
+|USA|USA|No Area|
+|USA|USA|Return All Cities|

@@ -11,7 +11,7 @@ JIRA ID - ZEUS-622 - Search Results is not showing office address.
 JIRA ID - ZEUS-490 - Change legal entity search to use ADDN rather than Denorm
 JIRA ID - ZEUS-475 - User can search for legal entity under "Data"
 
-Scenario: search by name and verify search results BUG:927
+Scenario: search by name and verify search results
 Given a user is on the search page
 When the user searches for <entity> with <field> equals <value>
 Then the user should see the search results paginated for the searched entity
@@ -27,8 +27,8 @@ When the user searches for <entity> with <field> equals <value>
 
 Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
-|1124|10383720|Bank of Montreal|129 Rue St-Jacques|active|
-|312461|10077880|Bank of Montreal|FOUR EMBARCADERO CENTER|inactive|
+|1124|10383720|Bank of Montreal||active|
+|312461|10077880|Bank of Montreal||inactive|
 
 Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results
@@ -43,7 +43,7 @@ When the user searches for <entity> with <field> equals <value>
 
 Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
-|4123|10055000|Société Générale|BP 208, 09, 29 boulevard Hausmann|active|
+|4123|10055000|Société Générale||active|
 
 Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results

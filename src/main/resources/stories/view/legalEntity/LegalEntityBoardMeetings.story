@@ -15,7 +15,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the legal entity board meetings link in the navigation bar
-Then the user should see the legal entity's summary as Yearly
+Then the user should see the legal entity's summary as month
 Then the user should see the legal entity's board meetings as:
 |TYPE|VALUE|
 |month|3|

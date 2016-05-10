@@ -19,7 +19,7 @@ When the user clicks on the legal entity personnel link in the navigation bar
 Then the user should see the legal entity's personnel as:
 |TYPE|VALUE|
 |InstitutionEmployees|46628|
-|Institution Employees|46628|
+
 
 Examples:
 |entity|searchBy|fid|
