@@ -15,6 +15,7 @@ import org.apache.commons.collections.ListUtils;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -103,13 +104,8 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_CharterType_view_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td");
     private By legalEntity_basicInfo_fatcastatus_list_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='FATCA Status']/td/select/option");
     private By legalEntity_basicInfo_fatcastatus_dropdown_xpath=By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='FATCA Status']/td/select");
-
     private By legalEntity_basicInfo_entitytypes_dropdown_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr/td/select[@id='legalEntityType']");
-    private By legalEntity_basicInfo_entitytypes_new_dropdown_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr[@class='new']/td/select[@id='legalEntityType']");
-
-
     private By legalEntity_basicInfo_entitytypes_delete_button_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr/td[@class='delete']/button");
-    private By legalEntity_basicInfo_entitytypes_new_row_delete_button_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr[@class='new']/td[@class='delete']/button");
     private By legalEntity_basicInfo_add_new_entitytype_button_id = By.id("add-types");
     private By countryBasicInfo_confirmationModal_summary_xpath= By.xpath(".//*[@class='summary']//li");
     private By corporateSummary_textarea_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/dl/dd/textarea");
@@ -872,31 +868,15 @@ public class LegalEntityPage extends AbstractPage {
         assertEquals(getDriver().findElement(legalEntity_basicInfo_AdditionalInfos_err_msg_xpath).getText(),"Enter up to 10000 valid characters.");
     }
 
-    public void clickOnExistingEntityTypeDropDown()
-    {
-        getDriver().findElements(legalEntity_basicInfo_entitytypes_dropdown_xpath).get(0).click();
+    public void clickOnNewEntityTypeDropDown(String rowIdentifier) {
+        getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)).click();
     }
 
-    public void clickOnNewEntityTypeDropDown() {
-        getDriver().findElements(legalEntity_basicInfo_entitytypes_new_dropdown_xpath).get(0).click();
-    }
-
-    public void verifyLegalEntityEntityTypeListFromLookup(String lookupFid, String dropdownStatus) {
+    public void verifyLegalEntityEntityTypeListFromLookup(String lookupFid, String rowIdentifier) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         List<String> dropdownValuesList = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", lookupFid));
-        By xpath;
-
-        if(dropdownStatus.equalsIgnoreCase("existing"))
-        {
-            xpath=legalEntity_basicInfo_entitytypes_dropdown_xpath;
-        }
-        else
-        {
-            xpath=legalEntity_basicInfo_entitytypes_new_dropdown_xpath;
-        }
-        // finding the list of values from the first entity type dropdown excluding the selected value and null value
-        Select dropdown=new Select(getDriver().findElements(xpath).get(0));
+        Select dropdown=new Select(getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)));
         String selectedValue=dropdown.getFirstSelectedOption().getText();
         for (WebElement option:dropdown.getOptions()){
             dropdownValuesList.add(option.getText());
@@ -910,7 +890,7 @@ public class LegalEntityPage extends AbstractPage {
         // finding the list of values from the taxonomy and subtracting the values which are selected in other dropdowns
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity entity types",nvPairs);
         List resultList = ListUtils.subtract(getNodeValuesByTagName(document,"EntityType"), getAlreadySelectedEntityTypes());
-        assertEquals(dropdownValuesList,resultList);
+        assertEquals(dropdownValuesList, resultList);
 
     }
 
@@ -974,38 +954,27 @@ public class LegalEntityPage extends AbstractPage {
 
     }
 
-    public void verifyDeleteLegalEntityTypeButtonStatus()
+    public void verifyDeleteLegalEntityTypeButtonStatus(String deleteButton)
     {
-        assertFalse(getDriver().findElements(legalEntity_basicInfo_entitytypes_delete_button_xpath).get(0).isEnabled());
+        assertFalse(getDriver().findElement(identifiers.getObjectIdentifier(deleteButton)).isEnabled());
     }
 
-    public void clickonDeleteEntityTypeRowButton(int rowNumber)
+    public void clickonDeleteEntityTypeRowButton(String rowIdentifier)
     {
-        if(getDriver().findElements(legalEntity_basicInfo_entitytypes_delete_button_xpath).size()>rowNumber)
-        {
-            getDriver().findElements(legalEntity_basicInfo_entitytypes_delete_button_xpath).get(rowNumber).click();
-            Select dropdown = new Select(getDriver().findElements(legalEntity_basicInfo_entitytypes_dropdown_xpath).get(rowNumber));
-            //selectedEntityTypeValue=dropdown.getFirstSelectedOption().getText();
-        }
-        else
-        {
-            assertFalse("Could not find the row to delete",true);
-        }
-
+        getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)).click();
     }
 
-    public void verifyExistingEntityTypeRow(int rowNumber)
+    public void verifyExistingEntityTypeRow(String rowIdentifier,String dropdownvalue)
     {
-        assertTrue(getDriver().findElements(legalEntity_basicInfo_entitytypes_dropdown_xpath).get(rowNumber).isDisplayed());
-        assertTrue(getDriver().findElements(legalEntity_basicInfo_entitytypes_delete_button_xpath).get(rowNumber).isDisplayed());
-        Select dropdown = new Select(getDriver().findElements(legalEntity_basicInfo_entitytypes_dropdown_xpath).get(rowNumber));
-        //assertEquals(dropdown.getFirstSelectedOption().getText(),selectedEntityTypeValue);
+        assertTrue(getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        Select dropdown = new Select(getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)));
+        assertEquals(dropdown.getFirstSelectedOption().getText(),dropdownvalue);
     }
 
-    public void verifyNoExistingEntityTypeRow(int rowNumber)
+    public void verifyNoExistingEntityTypeRow(String rowIdentifier,String dropdownvalue)
     {
-        Select dropdown = new Select(getDriver().findElements(legalEntity_basicInfo_entitytypes_dropdown_xpath).get(rowNumber));
-        //assertFalse(dropdown.getFirstSelectedOption().getText().equalsIgnoreCase(selectedEntityTypeValue));
+        Select dropdown = new Select(getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)));
+        assertFalse(dropdown.getFirstSelectedOption().getText().equalsIgnoreCase(dropdownvalue));
 
     }
     public void verifyEntityTypeNotPresentInZeus(String source, String fid,String tagName, String value)
@@ -1024,19 +993,14 @@ public class LegalEntityPage extends AbstractPage {
         assertFalse(getNodeValuesByTagName(document, tagName).contains(value));
     }
 
-    public void clickonDeleteNewEntityTypeRowButton()
+       public void verifyNewEntityTypeRow(String rowIdentifier)
     {
-        getDriver().findElement(legalEntity_basicInfo_entitytypes_new_row_delete_button_xpath).click();
+        assertTrue(getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
     }
 
-    public void verifyNewEntityTypeRow()
-    {
-        assertTrue(getDriver().findElement(legalEntity_basicInfo_entitytypes_new_row_delete_button_xpath).isDisplayed());
-    }
-
-    public void verifyNoNewEntityTypeRow()
+    public void verifyNoNewEntityTypeRow(String rowIdentifier)
     {try {
-        assertFalse(getDriver().findElement(legalEntity_basicInfo_entitytypes_new_row_delete_button_xpath).isDisplayed());
+        assertFalse(getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
     }catch(NoSuchElementException e){}
 
     }
