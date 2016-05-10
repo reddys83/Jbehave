@@ -727,7 +727,7 @@ Examples:
 |1165|FID|1165||
 
 Scenario: Verify that the user should NOT get the Required field message when user enters null value for all the entity type rows except one row
-
+Meta: @runThis
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -738,7 +738,7 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the update link
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user enters null value for all the entity type rows
-And the user selects entity type value as <entityTypeValue> from existing Entity Type drop-down in the basicinfo legalentity page
+And the user selects entity type value as <entityTypeValue> from first existing entitytype dropdown in the basicinfo legalentity page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button

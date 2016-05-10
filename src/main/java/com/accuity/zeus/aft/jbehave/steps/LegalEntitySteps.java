@@ -426,10 +426,10 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().clickOnNewEntityTypeDropDown();
     }
 
-    @When("the user selects entity type value as <entityTypeValue> from $dropdownStatus Entity Type drop-down in the basicinfo legalentity page")
-    public void selectEntityType(@Named("entityTypeValue") String entityTypeValue,@Named("dropdownStatus") String dropdownStatus)
+    @When("the user selects entity type value as <entityTypeValue> from $rowIdentifier in the basicinfo legalentity page")
+    public void selectEntityType(@Named("entityTypeValue") String entityTypeValue,String rowIdentifier)
     {
-        getLegalEntityPage().selectEntityType(dropdownStatus,entityTypeValue);
+        getLegalEntityPage().selectEntityType(entityTypeValue,rowIdentifier);
     }
 
     @Then("the user should see the entityType value as in $source document with fid <fid>")

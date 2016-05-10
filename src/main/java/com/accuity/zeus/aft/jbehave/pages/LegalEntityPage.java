@@ -1,11 +1,10 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
-import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.xpaths.LegalEntityXpaths;
 import com.accuity.zeus.aft.rest.RestClient;
-import org.apache.commons.codec.binary.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -14,7 +13,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
 import org.apache.commons.collections.ListUtils;
 import org.openqa.selenium.JavascriptExecutor;
-import org.w3c.dom.xpath.XPathResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,8 +103,11 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_basicInfo_CharterType_view_xpath = By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td");
     private By legalEntity_basicInfo_fatcastatus_list_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='FATCA Status']/td/select/option");
     private By legalEntity_basicInfo_fatcastatus_dropdown_xpath=By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='FATCA Status']/td/select");
+
     private By legalEntity_basicInfo_entitytypes_dropdown_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr/td/select[@id='legalEntityType']");
     private By legalEntity_basicInfo_entitytypes_new_dropdown_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr[@class='new']/td/select[@id='legalEntityType']");
+
+
     private By legalEntity_basicInfo_entitytypes_delete_button_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr/td[@class='delete']/button");
     private By legalEntity_basicInfo_entitytypes_new_row_delete_button_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr[@class='new']/td[@class='delete']/button");
     private By legalEntity_basicInfo_add_new_entitytype_button_id = By.id("add-types");
@@ -125,6 +126,8 @@ public class LegalEntityPage extends AbstractPage {
     public LegalEntityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
+
+    LegalEntityXpaths xpaths = new LegalEntityXpaths();
 
     @Override
     public String getPageUrl() {
@@ -930,19 +933,10 @@ public class LegalEntityPage extends AbstractPage {
         attemptClick(legalEntity_basicInfo_add_new_entitytype_button_id);
     }
 
-    public void selectEntityType(String dropdownStatus,String entityTypeValue)
+    public void selectEntityType(String entityTypeValue,String rowIdentifier)
     {
-        By xpath;
-        if(dropdownStatus.equalsIgnoreCase("existing"))
-        {
-            xpath=legalEntity_basicInfo_entitytypes_dropdown_xpath;
-        }
-        else
-        {
-            xpath=legalEntity_basicInfo_entitytypes_new_dropdown_xpath;
-        }
 
-        Select dropdown = new Select(getDriver().findElements(xpath).get(0));
+        Select dropdown = new Select(getDriver().findElements(xpaths.getXpath(rowIdentifier)).get(0));
         selectedEntityTypeValue=dropdown.getFirstSelectedOption().getText();
         dropdown.selectByVisibleText(entityTypeValue);
 
