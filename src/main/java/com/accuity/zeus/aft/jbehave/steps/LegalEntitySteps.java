@@ -589,4 +589,16 @@ public class LegalEntitySteps extends AbstractSteps{
     {
         getLegalEntityPage().enterNullValueForAllEntityTypeRows();
     }
+
+    @Then("the user updates Chartered date <day> <month> <year>")
+    public void updateCharteredDate(@Named("day") String day,@Named("month") String month,@Named("year") String year){getLegalEntityPage().updateCharteredDate(day,month,year);}
+
+    @Then("the user verifies chartered date <fid>")
+    public void verifyCharteredDate(@Named("fid") String fid){getLegalEntityPage().verifyUpdatedCharteredDate(fid);}
+
+    @Then("the user should see the error $startDateErrorMsg for chartered date")
+    public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg) {
+        getLegalEntityPage().verifyErrorMessageCharteredDate(startDateErrorMsg);
+    }
+
 }
