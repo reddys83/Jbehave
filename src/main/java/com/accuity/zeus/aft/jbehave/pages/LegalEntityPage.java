@@ -973,7 +973,7 @@ public class LegalEntityPage extends AbstractPage {
     public void enter10001CharactersInLegalEntityAdditionalInfo(String fid)
     {
         String strBigString=createBigString(10000);
-        modifyHtmlByName("addInfo", "maxlength", "10001");
+        modifyHtmlByName(legalEntity_basicInfo_AdditionalInfo_textarea_xpath, "maxlength", "10001");
         //((JavascriptExecutor) getDriver()).executeScript("arguments[0].setAttribute('maxlength','10001')",getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath));
         getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).clear();
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='"+strBigString+"'",getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath));

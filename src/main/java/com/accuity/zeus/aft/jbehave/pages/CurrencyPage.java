@@ -575,11 +575,9 @@ public class CurrencyPage extends AbstractPage {
         attemptClick(currency_delete_yes_button_id);
     }
 
-<<<<<<< HEAD
-    public void verifyNoAdditionalCurrencyUse() {
-        assertTrue(getDriver().findElement(currency_use_table_additional_use_row_xpath).isDisplayed());
-    }
-=======
+
+
+
     public void verifyNoAdditionalCurrencyUse(){
         try{
           assertFalse(getDriver().findElement(currency_use_table_additional_use_row_xpath).isDisplayed());
@@ -587,7 +585,7 @@ public class CurrencyPage extends AbstractPage {
     }catch(NoSuchElementException e){
         e.printStackTrace();
     }}
->>>>>>> develop
+
 
     public void verifyErrorMessageForCurrAbbr() {
         assertEquals("Enter up to 30 valid characters.", getDriver().findElement(currency_abbr_error_message_xpath).getText());

@@ -1224,5 +1224,13 @@ public class DataPage extends AbstractPage {
         attemptClick(delete_confirmation_yes_button_id);
     }
 
+    public void loadDocument(String xqueryName) {
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,xqueryName);
+        assertTrue(document!=null);
+
+
+    }
+
 
 }
