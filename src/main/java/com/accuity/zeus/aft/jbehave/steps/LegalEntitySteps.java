@@ -487,14 +487,9 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyLegalEntityCorporateActionErrorMessageForMaxLength();
     }
 
-    @When("the user clicks on the existing Entity Type drop-down in the basicinfo legalentity page")
-    public void clickOnEntityTypeDropDown(){
-        getLegalEntityPage().clickOnExistingEntityTypeDropDown();
-    }
-
-    @Then("the user should see the $dropdownStatus Entity Type values from lookup $fid except the values that are selected already")
-    public void verifyLegalEntityEntityTypeList(String dropdownStatus,String fid){
-    getLegalEntityPage().verifyLegalEntityEntityTypeListFromLookup(fid,dropdownStatus);
+    @Then("the user should see the $dropdown values from lookup $fid except the values that are selected already")
+    public void verifyLegalEntityEntityTypeList(String dropdown,String fid){
+    getLegalEntityPage().verifyLegalEntityEntityTypeListFromLookup(fid,dropdown);
     }
 
     @When("the user clicks on the add new entity type button")
@@ -503,15 +498,15 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().clickOnAddNewEntityTypeButton();
     }
 
-    @When("the user clicks on the new Entity Type drop-down in the basicinfo legalentity page")
-    public void clickOnNewEntityTypeDropDown(){
-        getLegalEntityPage().clickOnNewEntityTypeDropDown();
+    @When("the user clicks on the $entitytype_dropdown in the basicinfo legalentity page")
+    public void clickOnNewEntityTypeDropDown(String entitytype_dropdown ){
+        getLegalEntityPage().clickOnNewEntityTypeDropDown(entitytype_dropdown);
     }
 
-    @When("the user selects entity type value as <entityTypeValue> from $dropdownStatus Entity Type drop-down in the basicinfo legalentity page")
-    public void selectEntityType(@Named("entityTypeValue") String entityTypeValue,@Named("dropdownStatus") String dropdownStatus)
+    @When("the user selects entity type value as <entityTypeValue> from $rowIdentifier in the basicinfo legalentity page")
+    public void selectEntityType(@Named("entityTypeValue") String entityTypeValue, @Named("rowIdentifier")String rowIdentifier)
     {
-        getLegalEntityPage().selectEntityType(dropdownStatus,entityTypeValue);
+        getLegalEntityPage().selectEntityType(entityTypeValue,rowIdentifier);
     }
 
     @Then("the user should see the entityType value as in $source document with fid <fid>")
@@ -525,52 +520,47 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().verifyEditLegalEntityEntityTypeValueFromZeus(entityTypeValue,"type",fid,source);
     }
 
-    @Then("the user should see the delete button disabled for the first row of the entity types")
-    public void verifyDeleteLegalEntityTypeButtonStatus()
+    @Then("the user should see the $delete_button in disabled state in entity types section")
+    public void verifyDeleteLegalEntityTypeButtonStatus(@Named("delete_button") String delete_button)
     {
-        getLegalEntityPage().verifyDeleteLegalEntityTypeButtonStatus();
+        getLegalEntityPage().verifyDeleteLegalEntityTypeButtonStatus(delete_button);
     }
 
-    @When("the user clicks on the delete button on row $rowNumber of existing legal entity types")
-    public void clickonDeleteEntityTypeRowButton(int rowNumber)
+    @When("the user clicks on the $deletebutton in entity types section")
+    public void clickonDeleteEntityTypeRowButton(String deletebutton)
     {
-        getLegalEntityPage().clickonDeleteEntityTypeRowButton(rowNumber);
+        getLegalEntityPage().clickonDeleteEntityTypeRowButton(deletebutton);
     }
 
-    @Then("the user should still see the row $rowNumber of existing legal entity types")
-    public void verifyExistingEntityTypeRow(int rowNumber)
+    @Then("the user should still see the $dropdown with value $dropdownvalue")
+    public void verifyExistingEntityTypeRow(String dropdown,String dropdownvalue)
     {
-        getLegalEntityPage().verifyExistingEntityTypeRow(rowNumber);
+        getLegalEntityPage().verifyExistingEntityTypeRow(dropdown,dropdownvalue);
     }
 
-    @Then("the user should not see the row $rowNumber of existing legal entity types")
-    public void verifyNoExistingEntityTypeRow(int rowNumber)
+    @Then("the user should not see the $dropdown with value $dropdownvalue")
+    public void verifyNoExistingEntityTypeRow(String dropdown,String dropdownvalue)
     {
-        getLegalEntityPage().verifyNoExistingEntityTypeRow(rowNumber);
+        getLegalEntityPage().verifyNoExistingEntityTypeRow(dropdown,dropdownvalue);
     }
 
-    @Then("the user should not see the deleted entity type in the $source document for fid <fid>")
-    public void verifyEntityTypeNotPresentInZeus(@Named("source") String source,@Named("fid") String fid)
+    @Then("the user should not see the deleted entity type value $value in the $source document for fid <fid>")
+    public void verifyEntityTypeNotPresentInZeus(@Named("value") String value,@Named("source") String source,@Named("fid") String fid)
     {
-        getLegalEntityPage().verifyEntityTypeNotPresentInZeus(source,fid,"type");
+        getLegalEntityPage().verifyEntityTypeNotPresentInZeus(source,fid,"type",value);
     }
 
-    @When("the user clicks on the delete button on new row of legal entity types")
-    public void clickonDeleteNewEntityTypeRowButton()
+    @Then("the user should still see the $dropdown in the new row")
+    public void verifyNewEntityTypeRow(String dropdown)
     {
-        getLegalEntityPage().clickonDeleteNewEntityTypeRowButton();
+        getLegalEntityPage().verifyNewEntityTypeRow(dropdown);
     }
 
-    @Then("the user should still see the new row of legal entity types")
-    public void verifyNewEntityTypeRow()
-    {
-        getLegalEntityPage().verifyNewEntityTypeRow();
-    }
+    @Then("the user should not see the $dropdown in the new row")
 
-    @Then("the user should not see the new row of legal entity types")
-    public void verifyNoNewEntityTypeRow()
+    public void verifyNoNewEntityTypeRow(String dropdown)
     {
-        getLegalEntityPage().verifyNoNewEntityTypeRow();
+        getLegalEntityPage().verifyNoNewEntityTypeRow(dropdown);
     }
 
     @When("the user selects to delete all the entity type rows except the first one")
