@@ -510,6 +510,8 @@ Then the user should see additional info text value as <additionalInfoText> for 
 Examples:
 |entity|searchBy|fid|additionalInfoText
 |1165|FID|1165||
+
+
 Scenario: Verify that the Legal Entity's Additional Info field max length is 10000 characters only.
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -550,8 +552,8 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the update link
-And the user clicks on the existing Entity Type drop-down in the basicinfo legalentity page
-Then the user should see the existing Entity Type values from lookup LEGAL_ENTITY_CATEGORY except the values that are selected already
+And the user clicks on the first_existing_entitytype_dropdown in the basicinfo legalentity page
+Then the user should see the first_existing_entitytype_dropdown values from lookup LEGAL_ENTITY_CATEGORY except the values that are selected already
 
 Examples:
 |entity|searchBy|fid|
@@ -568,8 +570,8 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the update link
 And the user clicks on the add new entity type button
-And the user clicks on the new Entity Type drop-down in the basicinfo legalentity page
-Then the user should see the new Entity Type values from lookup LEGAL_ENTITY_CATEGORY except the values that are selected already
+And the user clicks on the first_new_entitytype_dropdown in the basicinfo legalentity page
+Then the user should see the first_new_entitytype_dropdown values from lookup LEGAL_ENTITY_CATEGORY except the values that are selected already
 
 Examples:
 |entity|searchBy|fid|
@@ -589,7 +591,7 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the update link
 Then the user should see the entityType value as in trusted document with fid <fid>
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
-And the user selects entity type value as <entityTypeValue> from existing Entity Type drop-down in the basicinfo legalentity page
+And the user selects entity type value as <entityTypeValue> from first_existing_entitytype_dropdown in the basicinfo legalentity page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
@@ -599,6 +601,7 @@ And the user should see the below summary changes in confirmation modal
 
 When the user clicks on the confirm button
 Then the user should see entityType value as <entityTypeValue> for fid <fid> in zeus document
+Then the user should not see the deleted entity type value Bank in the zeus document for fid <fid>
 Then the user reverts the changes to the document
 
 Examples:
@@ -620,7 +623,7 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the update link
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user clicks on the add new entity type button
-And the user selects entity type value as <entityTypeValue> from new Entity Type drop-down in the basicinfo legalentity page
+And the user selects entity type value as <entityTypeValue> from first_new_entitytype_dropdown in the basicinfo legalentity page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
@@ -646,18 +649,18 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the update link
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
-Then the user should see the delete button disabled for the first row of the entity types
-When the user clicks on the delete button on row 1 of existing legal entity types
+Then the user should see the first_row_existing_entitytype_delete_button in disabled state in entity types section
+When the user clicks on the second_row_existing_entitytype_delete_button in entity types section
 Then the user should see the delete row confirmation modal in the legal entity page
 When the user clicks on the no button in the delete row confirmation modal in the legal entity page
-Then the user should still see the row 1 of existing legal entity types
-When the user clicks on the delete button on row 1 of existing legal entity types
+Then the user should still see the second_existing_entitytype_dropdown with value Commercial Bank
+When the user clicks on the second_row_existing_entitytype_delete_button in entity types section
 When the user clicks on the yes button in the delete row confirmation modal in the legal entity page
-Then the user should not see the row 1 of existing legal entity types
+Then the user should not see the second_existing_entitytype_dropdown with value Commercial Bank
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
-Then the user should not see the deleted entity type in the zeus document for fid <fid>
+Then the user should not see the deleted entity type value Commercial Bank in the zeus document for fid <fid>
 Then the user reverts the changes to the document
 
 Examples:
@@ -677,13 +680,13 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the update link
 And the user clicks on the add new entity type button
-When the user clicks on the delete button on new row of legal entity types
+When the user clicks on the first_new_entitytype_delete_button in entity types section
 Then the user should see the delete row confirmation modal in the legal entity page
 When the user clicks on the no button in the delete row confirmation modal in the legal entity page
-Then the user should still see the new row of legal entity types
-When the user clicks on the delete button on new row of legal entity types
+Then the user should still see the first_new_entitytype_dropdown in the new row
+When the user clicks on the first_new_entitytype_delete_button in entity types section
 When the user clicks on the yes button in the delete row confirmation modal in the legal entity page
-Then the user should not see the new row of legal entity types
+Then the user should not see the first_new_entitytype_dropdown in the new row
 
 Examples:
 |entity|searchBy|fid|
@@ -700,7 +703,7 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the update link
 And the user selects to delete all the entity type rows except the first one
-And the user selects entity type value as <entityTypeValue> from existing Entity Type drop-down in the basicinfo legalentity page
+And the user selects entity type value as <entityTypeValue> from first_existing_entitytype_dropdown in the basicinfo legalentity page
 And the user clicks on the save button
 Then the user should see the error message for the required entity type field in the basic info legal entity page
 
@@ -738,7 +741,7 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the update link
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user enters null value for all the entity type rows
-And the user selects entity type value as <entityTypeValue> from existing Entity Type drop-down in the basicinfo legalentity page
+And the user selects entity type value as <entityTypeValue> from first_existing_entitytype_dropdown in the basicinfo legalentity page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
