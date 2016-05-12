@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.Database;
+import org.eclipse.jetty.util.annotation.Name;
 import org.jbehave.core.annotations.*;
 
 import org.jbehave.core.model.ExamplesTable;
@@ -930,4 +931,10 @@ public class DataSteps extends AbstractSteps {
     public void clickOnYesButtonInDeleteConfirmationModal(){
         getDataPage().clickOnYesButtonInDeleteConfirmationModal();
     }
+
+    @Given("the user loads area test data for nightly runs in database <xqueryName>")
+        public void clickloadTestData(@Name("xqueryName") String xqueryName){
+            getDataPage().loadDocument(xqueryName);
+
+        }
 }

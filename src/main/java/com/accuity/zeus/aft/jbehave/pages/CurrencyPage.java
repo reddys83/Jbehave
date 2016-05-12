@@ -583,6 +583,7 @@ public class CurrencyPage extends AbstractPage {
         e.printStackTrace();
     }
     }
+
     public void verifyErrorMessageForCurrAbbr() {
         assertEquals("Enter up to 30 valid characters.", getDriver().findElement(currency_abbr_error_message_xpath).getText());
     }
