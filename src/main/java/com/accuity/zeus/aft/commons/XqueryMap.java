@@ -54,7 +54,6 @@ public class XqueryMap {
         queryMap.put("get country demographics unit","getDemographicsUnit.xqy");
         queryMap.put("get country banking hrs","getCountryBankingHrs.xqy");
         queryMap.put("get Id for country","getIdForCountry.xqy");
-        queryMap.put("get Id for legalEntity","");
         queryMap.put("get country holidays", "getCountryHolidays.xqy");
         queryMap.put("get country regions type","getCountryAlternativeRegions.xqy");
         queryMap.put("get values for region type","getCountryAlternateRegionValues.xqy");
