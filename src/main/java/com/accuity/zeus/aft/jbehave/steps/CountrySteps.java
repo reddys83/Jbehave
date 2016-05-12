@@ -346,9 +346,9 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().clickOnCountryEntity();
     }
 
-    @Then("the user should see the country's entities from trusted document")
-    public void verifyRelatedEntitiesFromTrusted(){
-        getCountryPage().verifyRelatedEntitiesFromTrusted();
+    @Then("the user should see the related entities for the country <country> from $source document")
+    public void verifyRelatedEntitiesFromTrusted(@Named("country") String countryname,@Named("source")String source){
+        getCountryPage().verifyRelatedEntitiesFromTrusted(countryname,source);
     }
 
     @When("the user clicks on the country people link in the navigation bar")

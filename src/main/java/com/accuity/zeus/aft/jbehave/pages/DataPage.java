@@ -535,12 +535,17 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyEntities(ExamplesTable countryEntities) {
-         for (int i = 0; i < getDriver().findElements(By.xpath("//*[@id='content']//*[@id='countryPresences']/table/tbody/tr")).size(); i++) {
+        verifyEntitiesLabel();
+        assertEquals("TYPE", getDriver().findElement(entities_type_label_xpath).getText());
+        assertEquals("ENTITY", getDriver().findElement(entities_entity_label_xpath).getText());
+        assertEquals("DETAILS", getDriver().findElement(entities_details_label_xpath).getText());
+        for (int i = 0; i < countryEntities.getRowCount(); i++) {
             assertEquals(countryEntities.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(),
                     getDriver().findElement(
-
+                            By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryEntities.getRow(i).get(countryEntities.getHeaders().get(0)) + "']")).getText().replace(",", "").trim());
         }
     }
+
 
 
     public void verifyEntitiesLabel() {

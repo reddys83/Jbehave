@@ -6,6 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-246 - User can search for country by full name
 JIRA ID - ZEUS-256 - User can view a country's related entities
+JIRA ID - ZEUS-876 - Country Related Entity - Presence expansion
 
 Scenario: Verify country entities data with legalEntity and office
 Meta:@verifyBuild
@@ -54,3 +55,16 @@ Then the user should not see the country's entities
 Examples:
 |country|
 |Nauru|
+
+Scenario: Verify country office entities entity value is displayed in the format "Legal Title [Office]", "Full Name [City]", "Full name [Area]"
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+When the user clicks on the country entity link in the navigation bar
+Then the user should see the related entities for the country <country> from trusted document
+
+Examples:
+|country|
+|Bermuda|
