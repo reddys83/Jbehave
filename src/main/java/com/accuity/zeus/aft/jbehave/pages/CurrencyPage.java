@@ -43,9 +43,9 @@ public class CurrencyPage extends AbstractPage {
     String currency_use_table_startDate_month_edit_xpath = "//select[@name='began-month']";
     private By currency_use_table_startDate_year_edit_xpath=By.xpath("//input[@name='began-year']");
 
-    private By currency_new_use_table_startDate_day_edit_xpath=By.xpath("//*[@class='new']//input[@name='began-day']");
-    String currency_new_use_table_startDate_month_edit_xpath = "//*[@class='new']//select[@name='began-month']";
-    private By currency_new_use_table_startDate_year_edit_xpath=By.xpath("//*[@class='new']//input[@name='began-year']");
+    private By currency_new_use_table_startDate_day_edit_xpath=By.xpath("//*[@id='additionalCurrencyUses']//tr[last()]//input[@name='began-day']");
+    String currency_new_use_table_startDate_month_edit_xpath = "//*[@id='additionalCurrencyUses']//tr[last()]//select[@name='began-month']";
+    private By currency_new_use_table_startDate_year_edit_xpath=By.xpath("//*[@id='additionalCurrencyUses']//tr[last()]//input[@name='began-year']");
 
     private By currency_use_table_endDate_day_edit_xpath=By.xpath("//input[@name='end-day']");
     String currency_use_table_endDate_month_edit_xpath = "//select[@name='end-month']";
