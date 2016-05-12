@@ -40,3 +40,20 @@ Then the user should not see the legal entity's history
 Examples:
 |entity|searchBy|fid|
 |Associated Commercial Finance Inc|Name|91832|
+
+Scenario: Verify that the history is the default section for an inactive legal entity. User can select other sections
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+Then the user should see the history for the legal entity
+When the user clicks on the basic info link in the navigation bar
+Then the user should see the basic info label for selected legal entity
+
+Examples:
+|entity|searchBy|fid|
+|295783|FID|295783|

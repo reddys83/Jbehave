@@ -45,6 +45,11 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().clickOnLegalEntityLocations();
     }
 
+    @When("the user clicks on the basic info link in the navigation bar")
+    public void clickOnLegalEntityBasicInfo(){
+        getLegalEntityPage().clickOnLegalEntityBasicInfo();
+    }
+
     @When("the user clicks on the legal entity statistics link in the navigation bar")
     public void clickOnLegalEntityStatistics(){
         getLegalEntityPage().clickOnLegalEntityStatistics();
@@ -579,4 +584,5 @@ public class LegalEntitySteps extends AbstractSteps{
     {
         getLegalEntityPage().enterNullValueForAllEntityTypeRows();
     }
-}
+
+ }
