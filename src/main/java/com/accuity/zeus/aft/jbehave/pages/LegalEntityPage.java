@@ -56,8 +56,10 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_locations_summary_type_xpath = By.xpath(".//*[@id='content']//li[contains(h1,'Location Summaries')]//tbody/tr/td[1]");
     String legalEntity_locations_summary_type_edit_xpath = "//*[@id='additionalLocationSummaries']/tr[last()]//td/select[@id='locationSummaryType']";
     private By legalEntity_locations_summary_value_edit_xpath = By.xpath("//*[@id='additionalLocationSummaries']/tr[last()]//td//textarea");
+    private By legalEntity_new_locations_summary_value_edit_xpath = By.xpath("//*[@id='additionalLocationSummaries']/tr[@class='new']//td//textarea");
     private By legalEntity_new_locations_summary_id =By.id("add-locationSummaries");
     private By legalEntity_location_type_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='locationSummaryTypeError']");
+    private By legalEntity_location_value_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='locationSummaryValueError']");
     private By legalEntity_locations_summary_value_xpath = By.xpath(".//*[@id='content']//li[contains(h1,'Location Summaries')]//tbody/tr/td[2]");
     private By legalEntity_trustPowers_link_id = By.id("legalEntityTrustPowers");
     private By legalEntity_trustPowers_label_xpath = By.xpath(".//*[@id='content']//h1/span[text()='Trust Powers']");
@@ -126,6 +128,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_delete_yes_button_id= By.id("yes-button");
     private By legalEntity_new_names_type_edit_xpath = By.xpath(".//*[@id='additionalNames']//tr[@class='new'][@data-row_id='names']");
     private By legalEntity_delete_button_for_legalTitle_edit_xpath = By.xpath(".//*[@id='additionalNames']//tr[td='Legal Title']//button[@class='delete-row']");
+    private By legalEntity_delete_button_legalEntity_location_edit_xpath = By.xpath(".//*[@id='additionalLocationSummaries']//tr[@class='new']//td[@class='delete']/button");
 
 
     private String editLegalEntityNameValue = "";
@@ -141,6 +144,8 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_entity_type_error_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='legalEntityTypeError']");
 
     public String selectedEntityTypeValue="";
+    public String EditLegalEntityLocationsType="";
+    public String EditLegalEntityLocationsValue="";
 
     public LegalEntityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -186,6 +191,7 @@ public class LegalEntityPage extends AbstractPage {
 
     public void selectsTypeInLegalEntityLocationSummary(String type)
     {
+        EditLegalEntityLocationsType = type;
         attemptClick(By.xpath(legalEntity_locations_summary_type_edit_xpath));
       //  selectItemFromDropdownListByText(By.xpath(legalEntity_locations_summary_type_edit_xpath),type);
         List<WebElement> options = getDriver().findElements(By.xpath(legalEntity_locations_summary_type_edit_xpath + "/option"));
@@ -202,9 +208,39 @@ public class LegalEntityPage extends AbstractPage {
         }
     }
 
+    public void verifyLegalEntityLocationSummaryInZeusDocument(String fid) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legalEntity Locations", nvPairs);
+        assertTrue(getNodeValuesByTagName(document, "type").contains(EditLegalEntityLocationsType));
+       assertTrue(getNodeValuesByTagName(document, "value").contains(EditLegalEntityLocationsValue));
+       }
+
     public void entersLegalEntityValueInLocationSummary(String value) {
+        EditLegalEntityLocationsValue=value;
+        getDriver().findElement(legalEntity_locations_summary_value_edit_xpath).clear();
         getDriver().findElement(legalEntity_locations_summary_value_edit_xpath).sendKeys(value);
     }
+
+    public void clickOnDeleteButtonInLegalEntityLocationSummary() {
+        attemptClick(legalEntity_delete_button_legalEntity_location_edit_xpath);
+    }
+
+    public void verifyNewlyAddLegalEntityLocations() {
+        assertTrue(getDriver().findElement(legalEntity_new_locations_summary_value_edit_xpath).isDisplayed());
+    }
+
+    public void verifyNoNewlyAddedLegalEntityLocations() {
+                try {
+        assertFalse(getDriver().findElement(legalEntity_new_locations_summary_value_edit_xpath).isDisplayed());
+        } catch (NoSuchElementException e) {
+        }}
 
     public void clickOnLegalEntityServices() {
         attemptClick(legalEntity_services_link_id);
@@ -227,8 +263,15 @@ public class LegalEntityPage extends AbstractPage {
     }
 
     public void enterInvalidCharactersInLegalEntityLocationsValue() {
-        String strBigString=createBigString(10000);
-       
+        String strBigString=createBigString(10001);
+        modifyHtmlByName(legalEntity_locations_summary_value_edit_xpath,"maxlength", "");
+
+        getDriver().findElement(legalEntity_locations_summary_value_edit_xpath).clear();
+        getDriver().findElement(legalEntity_locations_summary_value_edit_xpath).sendKeys(strBigString);
+    }
+
+    public void verifyErrorMessageForInvalidCharacter() {
+        assertEquals(getDriver().findElement(legalEntity_location_value_error_message_xpath).getText() ,"Enter up to 10000 valid characters.");
     }
 
     public void verifyLegalEntityLocationsTypeValues() {
@@ -1024,7 +1067,7 @@ public class LegalEntityPage extends AbstractPage {
     public void enter10001CharactersInLegalEntityAdditionalInfo(String fid)
     {
         String strBigString=createBigString(10000);
-        modifyHtmlByName("addInfo", "maxlength", "10001");
+      //  modifyHtmlByName("addInfo", "maxlength", "10001");
         //((JavascriptExecutor) getDriver()).executeScript("arguments[0].setAttribute('maxlength','10001')",getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath));
         getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath).clear();
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='"+strBigString+"'",getDriver().findElement(legalEntity_basicInfo_AdditionalInfo_textarea_xpath));

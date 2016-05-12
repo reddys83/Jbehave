@@ -50,6 +50,11 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().enterInvalidCharactersInLegalEntityLocationsValue();
     }
 
+    @Then("the user should see the error message enter up to 10000 valid characters for value in the legalentity location")
+    public void verifyErrorMessageForInvalidCharacter() {
+        getLegalEntityPage().verifyErrorMessageForInvalidCharacter();
+    }
+
     @When("the user clicks on the type dropdown in legalEntity locations")
     public void clickOnLegalEntityLocationTypeDropDwon() {
         getLegalEntityPage().clickOnLegalEntityLocationTypeDropDwon();
@@ -64,6 +69,26 @@ public class LegalEntitySteps extends AbstractSteps{
     public void entersLegalEntityValueInLocationSummary(@Named("value") String value){
         getLegalEntityPage().entersLegalEntityValueInLocationSummary(value);
     }
+    @When("the user clicks on delete button for legal entity location summary")
+    public void clickOnDeleteButtonInLegalEntityLocationSummary() {
+        getLegalEntityPage().clickOnDeleteButtonInLegalEntityLocationSummary();
+    }
+
+    @Then("the user should see the newly added legalentity location summary")
+    public void verifyNewlyAddLegalEntityLocations() {
+         getLegalEntityPage().verifyNewlyAddLegalEntityLocations();
+    }
+
+    @Then("the user should not see the newly added legalentity location summary")
+    public void verifyNoNewlyAddedLegalEntityLocations() {
+        getLegalEntityPage().verifyNoNewlyAddedLegalEntityLocations();
+    }
+
+    @Then("the user should see the edits to legal entity location summary for fid <fid> in zeus document")
+    public void verifyLegalEntityLocationSummaryInZeusDocument(@Named("fid") String fid) {
+        getLegalEntityPage().verifyLegalEntityLocationSummaryInZeusDocument(fid);
+    }
+
     @When("the user clicks on the add new location summary button in legalentity location")
     public void clickNewLegalEntityLocations() {
          getLegalEntityPage().clickNewLegalEntityLocations();
