@@ -11,6 +11,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.w3c.dom.Document;
 import org.openqa.selenium.support.ui.Select;
+import org.w3c.dom.NodeList;
 
 import java.text.DateFormatSymbols;
 import java.util.*;
@@ -806,6 +807,32 @@ public class CountryPage extends AbstractPage {
         attemptClick(country_entity_link_id);
     }
 
+    public void verifyRelatedEntitiesFromTrusted()
+    {
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "get country related entities", "fid", "Bermuda");
+String legalTitle="";
+        List citynames=getNodeValuesByTagName(document,"cityname");
+        List areanames=getNodeValuesByTagName(document, "areaname");
+        List legalTitles=getNodeValuesByTagName(document, "legalTitle");
+        List types=getNodeValuesByTagName(document, "type");
+        for (int i=0;i<legalTitles.size();i++){
+            legalTitle = legalTitles.get(i).toString();
+            String cityname=citynames.get(i).toString();
+            String areaname=areanames.get(i).toString();
+            String type=types.get(i).toString();
+            if(!cityname.equals("null") && !areaname.equals("null"))
+            legalTitle=legalTitle+","+cityname+","+areaname;
+            else if(!cityname.equals("null") && areaname.equals("null"))
+                legalTitle=legalTitle+","+cityname;
+            assertEquals(getDriver().findElements(By.xpath("//*[@id='content']//*[@id='countryPresences']/table/tbody/tr[td=type]/td{2]")),
+                        getDriver().findElement(
+                                By.xpath("//*[@id='content']//table/tbody//tr[td='" + countryEntities.getRow(i).get(countryEntities.getHeaders().get(0)) + "']")).getText().replace(",", "").trim());
+            }
+
+
+        }
+        System.out.println(legalTitle);
+    }
     public void clickOnCountryPeople() {
         attemptClick(country_people_link_id);
     }

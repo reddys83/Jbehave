@@ -346,6 +346,11 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().clickOnCountryEntity();
     }
 
+    @Then("the user should see the country's entities from trusted document")
+    public void verifyRelatedEntitiesFromTrusted(){
+        getCountryPage().verifyRelatedEntitiesFromTrusted();
+    }
+
     @When("the user clicks on the country people link in the navigation bar")
     public void clickOnCountryPeople() {
         getCountryPage().clickOnCountryPeople();

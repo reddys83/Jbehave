@@ -191,7 +191,7 @@ public abstract class AbstractPage {
         {
             for (int i=0;i<document.getElementsByTagName(tagName).getLength();i++) {
 
-                NodeList children=document.getElementsByTagName(tagName).item(i).getChildNodes();
+             NodeList children=document.getElementsByTagName(tagName).item(i).getChildNodes();
                 for (int j = 0;j < children.getLength();j++) {
                     if (children.item(j).getNodeType() != Node.ELEMENT_NODE)
                         nodeValues.add(document.getElementsByTagName(tagName).item(i).getFirstChild().getNodeValue());
