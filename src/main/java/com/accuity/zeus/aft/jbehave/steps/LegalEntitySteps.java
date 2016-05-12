@@ -579,4 +579,15 @@ public class LegalEntitySteps extends AbstractSteps{
     {
         getLegalEntityPage().enterNullValueForAllEntityTypeRows();
     }
+
+    @Then("the user verifies options displayed for insurance type from lookup document")
+    public void verifyInsuranceTypeOptions(){getLegalEntityPage().verifyInsuranceTypeOptions();}
+
+    @Then("the user updates the value of insurance type <insuranceValue>")
+    public void updateInsuranceType(@Named("insuranceValue") String insuranceType){getLegalEntityPage().updateInsuranceType(insuranceType);}
+
+    @When("the user verifies if the update for successful in zeus document <insuranceValue> <fid>")
+    public void verifyInsuranceTypeValueFromZeusDoc(@Named("insuranceValue") String insuranceValue, @Named("fid") String fid){getLegalEntityPage().verifyInsuranceTypeValueFromDocument(insuranceValue, fid);}
+
+
 }

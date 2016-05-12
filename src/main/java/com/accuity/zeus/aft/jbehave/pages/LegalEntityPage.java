@@ -1152,5 +1152,38 @@ public class LegalEntityPage extends AbstractPage {
             dropdown.selectByVisibleText("");
         }
     }
+
+    public void verifyInsuranceTypeOptions() {
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("source","source-trusted"));
+        nvPairs.add(new BasicNameValuePair("fidValue","LEGAL_ENTITY_INSURANCE_TYPE"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,"get data from lookup table",nvPairs);
+        Select insuranceTypeDropDown = new Select(getDriver().findElement(identifiers.getObjectIdentifier("edit_legalEntity_insuranceType_dropdown")));
+        Integer optionsDisplayed = insuranceTypeDropDown.getOptions().size();
+        for (int i = 0; i < optionsDisplayed - 2; i++) {
+            assertEquals(insuranceTypeDropDown.getOptions().get(i + 1).getText(), document.getElementsByTagName("a").item(i).getTextContent());
+        }
+    }
+
+    public void updateInsuranceType(String insuranceType) {
+        Select insuranceTypeDropDown = new Select(getDriver().findElement(identifiers.getObjectIdentifier("edit_legalEntity_insuranceType_dropdown")));
+        insuranceTypeDropDown.selectByValue(insuranceType);
+    }
+
+    public void verifyInsuranceTypeValueFromDocument(String insuranceType,String fid ) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
+        assertEquals(document.getElementsByTagName("insuranceType").item(0).getTextContent(), insuranceType);
+    }
+
+
 }
 

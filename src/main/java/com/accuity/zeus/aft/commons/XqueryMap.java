@@ -71,11 +71,11 @@ public class XqueryMap {
         queryMap.put("abcd","getLegalEntityLeadInstitutionFlag.xqy");
         queryMap.put("get Id for legalentity","getIdForLegalEntity.xqy");
         queryMap.put("get legal entity entity types","getLegalEntityEntityTypes.xqy");
-
         queryMap.put("load test data for Area illinois","loadTestDataAreaIL.xqy");
         queryMap.put("load test data for City Chicago","loadTestDataCityChicago.xqy");
         queryMap.put("load test data for Currency","loadTestDataCurrency.xqy");
         queryMap.put("load test data for sub area Cook","loadTestDataSubAreaCook.xqy");
+        queryMap.put("get data from lookup table","getValueFromLookupTable.xqy");
 
 
    }
