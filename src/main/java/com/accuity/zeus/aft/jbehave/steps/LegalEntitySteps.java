@@ -589,5 +589,15 @@ public class LegalEntitySteps extends AbstractSteps{
     @When("the user verifies if the update for successful in zeus document <insuranceValue> <fid>")
     public void verifyInsuranceTypeValueFromZeusDoc(@Named("insuranceValue") String insuranceValue, @Named("fid") String fid){getLegalEntityPage().verifyInsuranceTypeValueFromDocument(insuranceValue, fid);}
 
+    @Then("the user verifies options displayed for ownership type from lookup document")
+    public void verifyOwnershipTypeOptions(){getLegalEntityPage().verifyOwnershipTypeOptionsFromLookup();}
+
+    @Then("the user updates the value of insurance type <ownershipType>")
+    public void updateOwnershipType(@Named("ownershipType") String ownershipType){getLegalEntityPage().updateOwnershipType(ownershipType);}
+
+    @When("the user verifies if the update for successful in zeus document <ownershipType> <fid>")
+    public void verifyOwnershipTypeValueFromZeusDoc(@Named("ownershipType") String ownershipType, @Named("fid") String fid){getLegalEntityPage().verifyOwnershipTypeValueFromDocument(ownershipType, fid);}
+
+
 
 }

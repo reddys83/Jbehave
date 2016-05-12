@@ -14,6 +14,7 @@ JIRA ID - ZEUS-908 - User can edit Legal Entity's Corporate Statement
 JIRA ID - ZEUS-907 - User can edit Legal Entity's Additional Info
 JIRA ID - ZEUS-86 - User can update a legal entity's type
 JIRA ID - ZEUS-85 - User can update legal entity's insurance type
+JIRA ID - ZEUS-83 - User can update legal entity's ownership type
 
 Scenario: Verify the default Edit value and Save Lead Institution value for a legal entity on legalEntity page
        a. Select the value as True for Lead Institution flag and Save for a legalEntity with a default value as True or False
@@ -897,5 +898,49 @@ Examples:
 |entity|searchBy|fid|insuranceValue|
 |1038|fid|1038|American Share Insurance (OH CU's)|
 |1038|fid|1038||
+
+Scenario: User updates Ownership type
+Verifying the options displayed for Ownership type are same as those in lookup document.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+Then the user should see the message you can search for a legal entity at any time using the header search
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the update link
+Then the user verifies options displayed for ownership type from lookup document
+
+Examples:
+|entity|searchBy|fid|
+|1038|fid|1038|
+
+Scenario: User updates Ownership type
+Verifying the value updated by user is reflected in Zeus document
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+Then the user should see the message you can search for a legal entity at any time using the header search
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the update link
+Then the user updates the value of insurance type <ownershipType>
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+And the user verifies if the update for successful in zeus document <ownershipType> <fid>
+
+Examples:
+|entity|searchBy|fid|ownershipType|
+|1038|fid|1038|Government Bank|
+|1038|fid|1038||
+|1038|fid|1038|Corporate Bank|
 
 

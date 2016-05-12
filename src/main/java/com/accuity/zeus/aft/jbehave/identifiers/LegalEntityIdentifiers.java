@@ -22,6 +22,7 @@ public class LegalEntityIdentifiers {
         hmap.put("second_row_existing_entitytype_delete_button", By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr[2]/td[@class='delete']/button"));
         hmap.put("first_new_entitytype_delete_button", By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr[@class='new']/td[@class='delete']/button"));
         hmap.put("edit_legalEntity_insuranceType_dropdown",By.xpath("//table[@class='vertical']/tbody/tr[6]/td/select"));
+        hmap.put("edit_legalEntity_ownershipType_dropdown",By.xpath("//table[@class='vertical']/tbody/tr[7]/td/select"));
     }
 
 
