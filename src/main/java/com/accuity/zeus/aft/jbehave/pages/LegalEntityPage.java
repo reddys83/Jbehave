@@ -128,12 +128,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_delete_yes_button_id = By.id("yes-button");
     private By legalEntity_new_names_type_edit_xpath = By.xpath(".//*[@id='additionalNames']//tr[@class='new'][@data-row_id='names']");
     private By legalEntity_delete_button_for_legalTitle_edit_xpath = By.xpath(".//*[@id='additionalNames']//tr[td='Legal Title']//button[@class='delete-row']");
-<<<<<<< HEAD
-=======
     private By legalEntity_delete_button_legalEntity_location_edit_xpath = By.xpath(".//*[@id='additionalLocationSummaries']//tr[@class='new']//td[@class='delete']/button");
-
-
->>>>>>> develop
     private String editLegalEntityNameValue = "";
     private By corporateSummary_textarea_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/dl/dd/textarea");
     private By corporateSummary_textarea_maxLenght_error_xpath = By.xpath("//*[@id='legalEntityBasicInfo']/dl/dd/p");
@@ -1247,7 +1242,7 @@ public class LegalEntityPage extends AbstractPage {
         }
     }
 
-<<<<<<< HEAD
+
     public void updateCharteredDate(String day, String month, String year) {
         getDriver().findElement(legalEntity_basicInfo_charteredDate_day_xpath).clear();
         getDriver().findElement(legalEntity_basicInfo_charteredDate_day_xpath).sendKeys(day);
@@ -1279,7 +1274,7 @@ public class LegalEntityPage extends AbstractPage {
         }
         assertEquals(startDateErrorMsg.replace("'", ""), getDriver().findElement(legalEntity_basicInfo_charteredDate_errorMessage_xpath).getText());
     }
-=======
+
     public void verifyInsuranceTypeOptions() {
         String source = "source-trusted";
         String fidValue = "LEGAL_ENTITY_INSURANCE_TYPE";
@@ -1314,7 +1309,7 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyOwnershipTypeValueFromDocument(String ownershipType,String fid ) {
         String xqueryName = "get legal entity basic info left column";
-        String tagName = "ownership";
+        String tagName = "ownershipType";
         String source = "zeus";
         verifyingDataFromMLDocs(ownershipType, fid,xqueryName,tagName,source);
     }
@@ -1359,6 +1354,6 @@ public class LegalEntityPage extends AbstractPage {
     }
 
 
->>>>>>> develop
+
 }
 

@@ -3,7 +3,6 @@ package com.accuity.zeus.aft.jbehave.steps;
 import com.accuity.zeus.aft.io.Database;
 import org.eclipse.jetty.util.annotation.Name;
 import org.jbehave.core.annotations.*;
-
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,11 +48,6 @@ public class DataSteps extends AbstractSteps {
     @When("the user clicks on the cancel button")
     public void clickOnCancelButton() {
         getDataPage().clickOnCancelButton();
-    }
-
-    @When("the user clicks on the cancel yes button")
-    public void clickOnCancelYesButton() {
-        getDataPage().clickOnCancelYesButton();
     }
 
     @Then("the user should see the currency selection disabled in the currency page")
@@ -154,12 +148,6 @@ public class DataSteps extends AbstractSteps {
     public void verifyAreaReplaceByLabelValues(@Named("areaReplacedBy") String areaReplacedBy) {
         getDataPage().verifyReplaceByLabelValues(areaReplacedBy);
     }
-/*
-    @Then("the user should see the countries's replace by as $countryReplacedBy")
-    public void verifyCountryReplaceByLabelValues(@Named("countryReplacedBy") String countryReplacedBy) {
-        getDataPage().verifyReplaceByLabelValues(countryReplacedBy);
-    }
-*/
 
     @Then("the user should not see the area's area link")
     public void verifyAreaLinkInBasicInfo() {
@@ -221,7 +209,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyNoCountryRegionsSection();
     }
 
-
     @Then("the user should not see the country's places")
     public void verifyNoCountryPlaces() {
         getDataPage().verifyNoPlaces();
@@ -280,8 +267,7 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the below subareas for the selected country and area: $subarea")
     public void verifySubareaForSelectedArea(ExamplesTable subarea) {
-        getDataPage().verifySubareaForSelectedArea(subarea);
-    }
+        getDataPage().verifySubareaForSelectedArea(subarea);}
 
     @Then("the user should see the area dropdown disabled")
     public void verifyAreaDropdownDisabled() {
@@ -803,11 +789,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyBasicInfoLeftSection(basicInfoLeftSection);
     }
 
-    @When("the user clicks on the save button")
-    public void clickOnSaveButton() {
-        getDataPage().clickOnSaveButton();
-    }
-
     @Then("the user should see the error $startDateErrorMsg for start date")
     public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg) {
         getDataPage().verifyStartDateErrorMessage(startDateErrorMsg);
@@ -827,30 +808,10 @@ public class DataSteps extends AbstractSteps {
     public void verifyEndDateErrorMessage(@Named("endDateErrorMsg") String endDateErrorMsg) {
         getDataPage().verifyEndDateErrorMessage(endDateErrorMsg);
     }
-    @Then("the user should see the save confirmation modal")
-    public void verifySaveConfirmationModal() {
-        getDataPage().verifySaveConfirmationModal();
-    }
-
-
-    @Then("the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved")
-    public void verifyErrorMessageAtTopOfThePage() {
-        getDataPage().verifyErrorMessageAtTopOfThePage();
-    }
-
-    @When("the user clicks on the confirm button")
-    public void clickOnConfirmButton() {
-        getDataPage().clickOnConfirmButton();
-    }
 
     @Then("the user should not see the cancel update confirmation modal")
     public void verifyNoCountryCancelUpdateConfirmationModal(){
         getDataPage().verifyNoCancelUpdateConfirmationModal();
-    }
-
-    @Then("the user should see the cancel update confirmation modal")
-    public void verifyCountryCancelUpdateConfirmationModal(){
-        getDataPage().verifyCancelUpdateConfirmationModal();
     }
 
     @When("the user get the document with $xqueryName with the name as $name from the database")
@@ -858,27 +819,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().getDocument(xqueryName, name);
     }
 
-    @When("the user gets the document with $xqueryName with the $param as <entity> from the database")
-    public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("param") String param,@Named("entity") String entity)
-    {
-        getDataPage().getDocument(xqueryName, param, entity);
-
-    }
-
-    @When("the user clicks on the return button")
-    public void clickOnReturnButton() {
-        getDataPage().clickOnReturnButton();
-    }
-
-    @Then("the user reverts the changes to the document")
-    public void revertChangesToCurrency() {
-        getDataPage().revertChangesToDocument();
-    }
-
-    @When("the user clicks on the cancel no button")
-    public void clickOnCancelNoButton() {
-        getDataPage().clickOnCancelNoButton();
-    }
 
     @Then("the user should see the list of all existing area for the selected country by full name")
     public void verifyAreaList() {
@@ -905,31 +845,12 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyClickedCountryPage(countryDropDown);
     }
 
-    @When("the user clicks on the update link")
-    public void clickOnUpdateCurrencyLink() {
-        getDataPage().clickOnUpdateCurrencyLink();
-    }
     @Then("the user should be redirected to view mode")
     public void verifyUserRedirectedToViewMode(){getDataPage().verifyUserRedirectedViewMode();}
-
-    @Then("the user should see the below summary changes in confirmation modal $Summary")
-    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
-        getDataPage().verifySummaryConfirmationModal(Summary);
-    }
 
     @Then("the user should see the delete row confirmation modal in the $pagename page")
     public void verifyDeleteConfirmationModal(){
         getDataPage().verifyDeleteConfirmationModal();
-    }
-
-    @When("the user clicks on the no button in the delete row confirmation modal in the $pagename page")
-    public void clickOnNoButtonInDeleteConfirmationModal(){
-        getDataPage().clickOnNoButtonInDeleteConfirmationModal();
-    }
-
-    @When("the user clicks on the yes button in the delete row confirmation modal in the $pagename page")
-    public void clickOnYesButtonInDeleteConfirmationModal(){
-        getDataPage().clickOnYesButtonInDeleteConfirmationModal();
     }
 
     @Given("the user loads area test data for nightly runs in database <xqueryName>")
