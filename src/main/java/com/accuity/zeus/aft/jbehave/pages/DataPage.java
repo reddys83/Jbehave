@@ -190,8 +190,8 @@ public class DataPage extends AbstractPage {
     private By country_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li[2]");
     private By cancel_no_button_xpath = By.xpath("//*[@class='modal-content'] //*[@id='cancel-button']");
     private By currency_country_selection_disabled_xpath = By.xpath(".//*[@id='entitySelect_chosen'][@class='chosen-container chosen-container-single chosen-disabled']");
-    private By start_date_error_msg_xpath = By.xpath("//*[@data-error_id='startDateError']");
-    private By end_date_error_msg_xpath = By.xpath("//*[@data-error_id='endDateError']");
+    private By start_date_error_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='startDateError']");
+    private By end_date_error_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='endDateError']");
     private By choose_currency_option_xpath = By.xpath("//*[@id='entitySelect_chosen']/a/span");
     private By cancel_update_confirmation_modal_xpath = By.xpath("//*[@id='modal-region']/div");
     private By delete_row_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
