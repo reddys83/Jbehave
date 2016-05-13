@@ -45,6 +45,65 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().clickOnLegalEntityLocations();
     }
 
+    @When("the user enters more than 10000 characters in value for legalEntity location summary")
+    public void enterInvalidCharactersInLegalEntityLocationsValue() {
+        getLegalEntityPage().enterInvalidCharactersInLegalEntityLocationsValue();
+    }
+
+    @Then("the user should see the error message enter up to 10000 valid characters for value in the legalentity location")
+    public void verifyErrorMessageForInvalidCharacter() {
+        getLegalEntityPage().verifyErrorMessageForInvalidCharacter();
+    }
+
+    @When("the user clicks on the type dropdown in legalEntity locations")
+    public void clickOnLegalEntityLocationTypeDropDwon() {
+        getLegalEntityPage().clickOnLegalEntityLocationTypeDropDwon();
+    }
+
+    @When("the user select type as <type> in the legalentity location summary")
+    public void selectsTypeInLegalEntityLocationSummary(@Named("type") String type){
+        getLegalEntityPage().selectsTypeInLegalEntityLocationSummary(type);
+    }
+
+    @When("the user enters value as <value> in the legalentity location summary")
+    public void entersLegalEntityValueInLocationSummary(@Named("value") String value){
+        getLegalEntityPage().entersLegalEntityValueInLocationSummary(value);
+    }
+    @When("the user clicks on delete button for legal entity location summary")
+    public void clickOnDeleteButtonInLegalEntityLocationSummary() {
+        getLegalEntityPage().clickOnDeleteButtonInLegalEntityLocationSummary();
+    }
+
+    @Then("the user should see the newly added legalentity location summary")
+    public void verifyNewlyAddLegalEntityLocations() {
+         getLegalEntityPage().verifyNewlyAddLegalEntityLocations();
+    }
+
+    @Then("the user should not see the newly added legalentity location summary")
+    public void verifyNoNewlyAddedLegalEntityLocations() {
+        getLegalEntityPage().verifyNoNewlyAddedLegalEntityLocations();
+    }
+
+    @Then("the user should see the edits to legal entity location summary for fid <fid> in zeus document")
+    public void verifyLegalEntityLocationSummaryInZeusDocument(@Named("fid") String fid) {
+        getLegalEntityPage().verifyLegalEntityLocationSummaryInZeusDocument(fid);
+    }
+
+    @When("the user clicks on the add new location summary button in legalentity location")
+    public void clickNewLegalEntityLocations() {
+         getLegalEntityPage().clickNewLegalEntityLocations();
+    }
+
+    @Then("the user should see the error message required for the type in legalentity location summary")
+    public void verifyRequiredErrorMessageForTypeInLegalEntityLocations() {
+        getLegalEntityPage().verifyRequiredErrorMessageForTypeInLegalEntityLocations();
+    }
+
+    @Then("the user should see the legalentity's location summary type values from lookup LOCATION_SUMMARY_TEXT_TYPE")
+    public void verifyLegalEntityLocationsTypeValues() {
+        getLegalEntityPage().verifyLegalEntityLocationsTypeValues();
+    }
+
     @When("the user clicks on the legal entity statistics link in the navigation bar")
     public void clickOnLegalEntityStatistics(){
         getLegalEntityPage().clickOnLegalEntityStatistics();
@@ -580,6 +639,7 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().enterNullValueForAllEntityTypeRows();
     }
 
+
     @Then("the user updates Chartered date <day> <month> <year>")
     public void updateCharteredDate(@Named("day") String day,@Named("month") String month,@Named("year") String year){getLegalEntityPage().updateCharteredDate(day,month,year);}
 
@@ -590,5 +650,26 @@ public class LegalEntitySteps extends AbstractSteps{
     public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg) {
         getLegalEntityPage().verifyErrorMessageCharteredDate(startDateErrorMsg);
     }
+
+    @Then("the user verifies options displayed for insurance type from lookup document")
+    public void verifyInsuranceTypeOptions(){getLegalEntityPage().verifyInsuranceTypeOptions();}
+
+    @Then("the user updates the value of insurance type <insuranceValue>")
+    public void updateInsuranceType(@Named("insuranceValue") String insuranceType){getLegalEntityPage().updateInsuranceType(insuranceType);}
+
+    @When("the user verifies if the update for successful in zeus document <insuranceValue> <fid>")
+    public void verifyInsuranceTypeValueFromZeusDoc(@Named("insuranceValue") String insuranceValue, @Named("fid") String fid){getLegalEntityPage().verifyInsuranceTypeValueFromDocument(insuranceValue, fid);}
+
+    @Then("the user verifies options displayed for ownership type from lookup document")
+    public void verifyOwnershipTypeOptions(){getLegalEntityPage().verifyOwnershipTypeOptionsFromLookup();}
+
+    @Then("the user updates the value of insurance type <ownershipType>")
+    public void updateOwnershipType(@Named("ownershipType") String ownershipType){getLegalEntityPage().updateOwnershipType(ownershipType);}
+
+    @When("the user verifies if the update for successful in zeus document <ownershipType> <fid>")
+    public void verifyOwnershipTypeValueFromZeusDoc(@Named("ownershipType") String ownershipType, @Named("fid") String fid){getLegalEntityPage().verifyOwnershipTypeValueFromDocument(ownershipType, fid);}
+
+
+
 
 }

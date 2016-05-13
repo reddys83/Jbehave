@@ -43,9 +43,9 @@ public class CurrencyPage extends AbstractPage {
     String currency_use_table_startDate_month_edit_xpath = "//select[@name='began-month']";
     private By currency_use_table_startDate_year_edit_xpath=By.xpath("//input[@name='began-year']");
 
-    private By currency_new_use_table_startDate_day_edit_xpath=By.xpath("//*[@class='new']//input[@name='began-day']");
-    String currency_new_use_table_startDate_month_edit_xpath = "//*[@class='new']//select[@name='began-month']";
-    private By currency_new_use_table_startDate_year_edit_xpath=By.xpath("//*[@class='new']//input[@name='began-year']");
+    private By currency_new_use_table_startDate_day_edit_xpath=By.xpath("//*[@id='additionalCurrencyUses']//tr[last()]//input[@name='began-day']");
+    String currency_new_use_table_startDate_month_edit_xpath = "//*[@id='additionalCurrencyUses']//tr[last()]//select[@name='began-month']";
+    private By currency_new_use_table_startDate_year_edit_xpath=By.xpath("//*[@id='additionalCurrencyUses']//tr[last()]//input[@name='began-year']");
 
     private By currency_use_table_endDate_day_edit_xpath=By.xpath("//input[@name='end-day']");
     String currency_use_table_endDate_month_edit_xpath = "//select[@name='end-month']";
@@ -575,17 +575,14 @@ public class CurrencyPage extends AbstractPage {
         attemptClick(currency_delete_yes_button_id);
     }
 
-
-
-
     public void verifyNoAdditionalCurrencyUse(){
         try{
           assertFalse(getDriver().findElement(currency_use_table_additional_use_row_xpath).isDisplayed());
 
     }catch(NoSuchElementException e){
         e.printStackTrace();
-    }}
-
+    }
+    }
 
     public void verifyErrorMessageForCurrAbbr() {
         assertEquals("Enter up to 30 valid characters.", getDriver().findElement(currency_abbr_error_message_xpath).getText());
