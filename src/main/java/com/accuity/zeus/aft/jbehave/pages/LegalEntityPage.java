@@ -1247,5 +1247,85 @@ public class LegalEntityPage extends AbstractPage {
             dropdown.selectByVisibleText("");
         }
     }
+
+    public void verifyInsuranceTypeOptions() {
+        String source = "source-trusted";
+        String fidValue = "LEGAL_ENTITY_INSURANCE_TYPE";
+        String webElement = "edit_legalEntity_insuranceType_dropdown";
+        verifyingValuesFromLookUpDoc(source,fidValue,webElement);
+    }
+
+    public void updateInsuranceType(String insuranceType) {
+        Select insuranceTypeDropDown = new Select(getDriver().findElement(identifiers.getObjectIdentifier("edit_legalEntity_insuranceType_dropdown")));
+        insuranceTypeDropDown.selectByValue(insuranceType);
+    }
+
+    public void verifyInsuranceTypeValueFromDocument(String insuranceType,String fid ) {
+        String xqueryName = "get legal entity basic info left column";
+        String tagName = "insuranceType";
+        String source = "zeus";
+        verifyingDataFromMLDocs(insuranceType, fid,xqueryName,tagName,source);
+    }
+
+
+    public void verifyOwnershipTypeOptionsFromLookup() {
+        String source = "source-trusted";
+        String fidValue = "LEGAL_ENTITY_ORGANISATION_TYPE";
+        String webElement = "edit_legalEntity_ownershipType_dropdown";
+        verifyingValuesFromLookUpDoc(source,fidValue,webElement);
+    }
+
+    public void updateOwnershipType(String ownershipType) {
+        Select insuranceTypeDropDown = new Select(getDriver().findElement(identifiers.getObjectIdentifier("edit_legalEntity_ownershipType_dropdown")));
+        insuranceTypeDropDown.selectByValue(ownershipType);
+    }
+
+    public void verifyOwnershipTypeValueFromDocument(String ownershipType,String fid ) {
+        String xqueryName = "get legal entity basic info left column";
+        String tagName = "ownership";
+        String source = "zeus";
+        verifyingDataFromMLDocs(ownershipType, fid,xqueryName,tagName,source);
+    }
+
+    /**
+     * This method can be used when we are verifying specific value from front end with any marklogic document
+     * @param valueToBeVerified String value which is to be compared
+     * @param fid fid
+     * @param xqueryName xquery to be executed
+     * @param tagName name of the tag from the xquery results with which front end value is to be compared
+     * @param source source of document
+     */
+    private void verifyingDataFromMLDocs(String valueToBeVerified, String fid, String xqueryName, String tagName, String source) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,xqueryName , nvPairs);
+        assertEquals(document.getElementsByTagName(tagName).item(0).getTextContent(), valueToBeVerified);
+    }
+
+    /**
+     * This method is created to verify the options displayed in dropdown of any field with respective lookup document
+     * @param source source of document
+     * @param fidValue fid value of lookup table
+     * @param webElement drop down whose options are to be verified
+     */
+    private void verifyingValuesFromLookUpDoc(String source, String fidValue,String webElement) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("source",source));
+        nvPairs.add(new BasicNameValuePair("fidValue",fidValue));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,"get data from lookup table",nvPairs);
+        Select webElementDropDown = new Select(getDriver().findElement(identifiers.getObjectIdentifier(webElement)));
+        Integer optionsDisplayed = webElementDropDown.getOptions().size();
+        for (int i = 0; i < optionsDisplayed - 2; i++) {
+            assertEquals(webElementDropDown.getOptions().get(i + 1).getText(), document.getElementsByTagName("a").item(i).getTextContent());
+        }
+    }
+
+
 }
 
