@@ -13,12 +13,10 @@ JIRA ID - ZEUS-77 - User can update legal entity's names
 JIRA ID - ZEUS-908 - User can edit Legal Entity's Corporate Statement
 JIRA ID - ZEUS-907 - User can edit Legal Entity's Additional Info
 JIRA ID - ZEUS-86 - User can update a legal entity's type
-<<<<<<< HEAD
 JIRA ID - ZEUS-919 - User can edit Legal Entity's Chartered Date
-=======
 JIRA ID - ZEUS-85 - User can update legal entity's insurance type
 JIRA ID - ZEUS-83 - User can update legal entity's ownership type
->>>>>>> develop
+
 
 Scenario: Verify the default Edit value and Save Lead Institution value for a legal entity on legalEntity page
        a. Select the value as True for Lead Institution flag and Save for a legalEntity with a default value as True or False
