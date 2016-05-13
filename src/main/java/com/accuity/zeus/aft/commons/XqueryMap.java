@@ -35,6 +35,7 @@ public class XqueryMap {
         queryMap.put("descending order by office country","sortDescByOfficeCountry.xqy");
         queryMap.put("ascending order by office city", "sortAscByOfficeCity.xqy");
         queryMap.put("descending order by office city", "sortDescByOfficeCity.xqy");
+        queryMap.put("get legalEntity Locations","getLegalEntityLocations.xqy");
         queryMap.put("office types list", "getOfficeTypesList.xqy");
         queryMap.put("office search results with type filter","getOfficeSearchByTypeFilter.xqy");
         queryMap.put("get Id for currency","getIdForCurrency.xqy");

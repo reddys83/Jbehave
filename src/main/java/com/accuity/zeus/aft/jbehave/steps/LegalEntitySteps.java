@@ -45,6 +45,65 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().clickOnLegalEntityLocations();
     }
 
+    @When("the user enters more than 10000 characters in value for legalEntity location summary")
+    public void enterInvalidCharactersInLegalEntityLocationsValue() {
+        getLegalEntityPage().enterInvalidCharactersInLegalEntityLocationsValue();
+    }
+
+    @Then("the user should see the error message enter up to 10000 valid characters for value in the legalentity location")
+    public void verifyErrorMessageForInvalidCharacter() {
+        getLegalEntityPage().verifyErrorMessageForInvalidCharacter();
+    }
+
+    @When("the user clicks on the type dropdown in legalEntity locations")
+    public void clickOnLegalEntityLocationTypeDropDwon() {
+        getLegalEntityPage().clickOnLegalEntityLocationTypeDropDwon();
+    }
+
+    @When("the user select type as <type> in the legalentity location summary")
+    public void selectsTypeInLegalEntityLocationSummary(@Named("type") String type){
+        getLegalEntityPage().selectsTypeInLegalEntityLocationSummary(type);
+    }
+
+    @When("the user enters value as <value> in the legalentity location summary")
+    public void entersLegalEntityValueInLocationSummary(@Named("value") String value){
+        getLegalEntityPage().entersLegalEntityValueInLocationSummary(value);
+    }
+    @When("the user clicks on delete button for legal entity location summary")
+    public void clickOnDeleteButtonInLegalEntityLocationSummary() {
+        getLegalEntityPage().clickOnDeleteButtonInLegalEntityLocationSummary();
+    }
+
+    @Then("the user should see the newly added legalentity location summary")
+    public void verifyNewlyAddLegalEntityLocations() {
+         getLegalEntityPage().verifyNewlyAddLegalEntityLocations();
+    }
+
+    @Then("the user should not see the newly added legalentity location summary")
+    public void verifyNoNewlyAddedLegalEntityLocations() {
+        getLegalEntityPage().verifyNoNewlyAddedLegalEntityLocations();
+    }
+
+    @Then("the user should see the edits to legal entity location summary for fid <fid> in zeus document")
+    public void verifyLegalEntityLocationSummaryInZeusDocument(@Named("fid") String fid) {
+        getLegalEntityPage().verifyLegalEntityLocationSummaryInZeusDocument(fid);
+    }
+
+    @When("the user clicks on the add new location summary button in legalentity location")
+    public void clickNewLegalEntityLocations() {
+         getLegalEntityPage().clickNewLegalEntityLocations();
+    }
+
+    @Then("the user should see the error message required for the type in legalentity location summary")
+    public void verifyRequiredErrorMessageForTypeInLegalEntityLocations() {
+        getLegalEntityPage().verifyRequiredErrorMessageForTypeInLegalEntityLocations();
+    }
+
+    @Then("the user should see the legalentity's location summary type values from lookup LOCATION_SUMMARY_TEXT_TYPE")
+    public void verifyLegalEntityLocationsTypeValues() {
+        getLegalEntityPage().verifyLegalEntityLocationsTypeValues();
+    }
+
     @When("the user clicks on the legal entity statistics link in the navigation bar")
     public void clickOnLegalEntityStatistics(){
         getLegalEntityPage().clickOnLegalEntityStatistics();
