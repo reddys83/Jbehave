@@ -639,6 +639,18 @@ public class LegalEntitySteps extends AbstractSteps{
         getLegalEntityPage().enterNullValueForAllEntityTypeRows();
     }
 
+
+    @Then("the user updates Chartered date <day> <month> <year>")
+    public void updateCharteredDate(@Named("day") String day,@Named("month") String month,@Named("year") String year){getLegalEntityPage().updateCharteredDate(day,month,year);}
+
+    @Then("the user verifies chartered date <fid>")
+    public void verifyCharteredDate(@Named("fid") String fid){getLegalEntityPage().verifyUpdatedCharteredDate(fid);}
+
+    @Then("the user should see the error $startDateErrorMsg for chartered date")
+    public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg) {
+        getLegalEntityPage().verifyErrorMessageCharteredDate(startDateErrorMsg);
+    }
+
     @Then("the user verifies options displayed for insurance type from lookup document")
     public void verifyInsuranceTypeOptions(){getLegalEntityPage().verifyInsuranceTypeOptions();}
 
@@ -656,6 +668,7 @@ public class LegalEntitySteps extends AbstractSteps{
 
     @When("the user verifies if the update for successful in zeus document <ownershipType> <fid>")
     public void verifyOwnershipTypeValueFromZeusDoc(@Named("ownershipType") String ownershipType, @Named("fid") String fid){getLegalEntityPage().verifyOwnershipTypeValueFromDocument(ownershipType, fid);}
+
 
 
 
