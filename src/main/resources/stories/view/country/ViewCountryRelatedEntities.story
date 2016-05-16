@@ -56,7 +56,8 @@ Examples:
 |country|
 |Nauru|
 
-Scenario: Verify country office entities entity value is displayed in the format "Legal Title [Office]", "Full Name [City]", "Full name [Area]"
+Scenario: Verify for a country, office entity's entity value is displayed in the format "Legal Title [Office]", "Full Name [City]", "Full name [Area]"
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
