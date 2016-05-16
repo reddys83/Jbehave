@@ -11,7 +11,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.w3c.dom.Document;
 import org.openqa.selenium.support.ui.Select;
-import org.w3c.dom.NodeList;
 
 import java.text.DateFormatSymbols;
 import java.util.*;
