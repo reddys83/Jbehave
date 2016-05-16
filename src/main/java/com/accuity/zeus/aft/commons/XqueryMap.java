@@ -35,6 +35,7 @@ public class XqueryMap {
         queryMap.put("descending order by office country","sortDescByOfficeCountry.xqy");
         queryMap.put("ascending order by office city", "sortAscByOfficeCity.xqy");
         queryMap.put("descending order by office city", "sortDescByOfficeCity.xqy");
+        queryMap.put("get legalEntity Locations","getLegalEntityLocations.xqy");
         queryMap.put("office types list", "getOfficeTypesList.xqy");
         queryMap.put("office search results with type filter","getOfficeSearchByTypeFilter.xqy");
         queryMap.put("get Id for currency","getIdForCurrency.xqy");
@@ -71,11 +72,11 @@ public class XqueryMap {
         queryMap.put("abcd","getLegalEntityLeadInstitutionFlag.xqy");
         queryMap.put("get Id for legalentity","getIdForLegalEntity.xqy");
         queryMap.put("get legal entity entity types","getLegalEntityEntityTypes.xqy");
-
         queryMap.put("load test data for Area illinois","loadTestDataAreaIL.xqy");
         queryMap.put("load test data for City Chicago","loadTestDataCityChicago.xqy");
         queryMap.put("load test data for Currency","loadTestDataCurrency.xqy");
         queryMap.put("load test data for sub area Cook","loadTestDataSubAreaCook.xqy");
+        queryMap.put("get data from lookup table","getValueFromLookupTable.xqy");
 
 
    }
