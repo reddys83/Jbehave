@@ -15,10 +15,10 @@ public class LegalEntityStepsEdit extends AbstractSteps{
     public static String selectedEntity="";
 
     @Then("the user updates the value of insurance type <ownershipType>")
-    public void updateOwnershipType(@Named("ownershipType") String ownershipType){getLegalEntityPage().updateOwnershipType(ownershipType);}
+    public void updateOwnershipType(@Named("ownershipType") String ownershipType){getEditLegalEntityPage().updateOwnershipType(ownershipType);}
 
     @When("the user verifies if the update for successful in zeus document <ownershipType> <fid>")
-    public void verifyOwnershipTypeValueFromZeusDoc(@Named("ownershipType") String ownershipType, @Named("fid") String fid){getLegalEntityPage().verifyOwnershipTypeValueFromDocument(ownershipType, fid);}
+    public void verifyOwnershipTypeValueFromZeusDoc(@Named("ownershipType") String ownershipType, @Named("fid") String fid){getEditLegalEntityPage().verifyOwnershipTypeValueFromDocument(ownershipType, fid);}
 
     @Then("the user should see the fatcaStatus value as in $source document with fid <fid>")
 
@@ -129,8 +129,7 @@ public class LegalEntityStepsEdit extends AbstractSteps{
     }
 
 
-    @Then("the user verifies basic info for legal entity left column <fid> from trusted document")
-    public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getEditLegalEntityPage().verifyLegalEntityBasicInfoLeftColumn(fid);}
+
     @When("the user clicks on the Fatca Status drop-down in the basicinfo legalentity page")
     public void clickOnFatcaStatusType(){
         getEditLegalEntityPage().clickOnFatcaStatusType();
@@ -152,10 +151,6 @@ public class LegalEntityStepsEdit extends AbstractSteps{
         getEditLegalEntityPage().verifyFatcaStatusInDropdown(status);
     }
 
-    @When("the user selects a non-default value from Fatca Status drop-down in the basicinfo legalentity page")
-    public void changeLegalEntityFatcaStatusValue(){
-        getEditLegalEntityPage().changeLegalEntityFatcaStatusValue();
-    }
 
 
     @When("the user selects value as <fatcastatus> from Fatca Status drop-down in the basicinfo legalentity page")
@@ -167,6 +162,13 @@ public class LegalEntityStepsEdit extends AbstractSteps{
     @Then("the user should see fatcaStatus value as <fatcastatus> for fid <fid> in $source document")
     public void verifyFatcaStatusValuefromDB(@Named("fatcastatus") String fatcastatus,@Named("fid") String fid,@Named("source") String source) {
         getEditLegalEntityPage().verifyEditLegalEntityFatcaStatusValueFromZeus(fatcastatus,"fatcaStatus",fid,source);
+    }
+
+   /*  @Then("the user verifies basic info for legal entity left column <fid> from trusted document")
+    public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getEditLegalEntityPage().verifyLegalEntityBasicInfoLeftColumn(fid);}
+    @When("the user selects a non-default value from Fatca Status drop-down in the basicinfo legalentity page")
+    public void changeLegalEntityFatcaStatusValue(){
+        getEditLegalEntityPage().changeLegalEntityFatcaStatusValue();
     }
 
     @When("the user updates corporate statement <value>")
@@ -189,8 +191,9 @@ public class LegalEntityStepsEdit extends AbstractSteps{
     @Then("the user should see the error message enter up to 200 valid characters for value in the legal entity page")
     public void verifyErrorMessageForValue() {
         getEditLegalEntityPage().verifyErrorMessageForValue();
-    }
-    @When("the user enters the <additionalInfoText> in the additional info text area")
+    }*/
+
+ /*   @When("the user enters the <additionalInfoText> in the additional info text area")
     public void enterLegalEntityAdditionalInfo(@Named("additionalInfoText") String additionalInfoText)
     {
         getEditLegalEntityPage().enterLegalEntityAdditionalInfo(additionalInfoText);
@@ -204,9 +207,9 @@ public class LegalEntityStepsEdit extends AbstractSteps{
     @Then("the user should see additional info text value with 10000 characters for fid <fid> in $source document")
     public void verifyAdditionalInfoValueWithMaxLengthFromDB(@Named("fid") String fid,@Named("source") String source) {
         getEditLegalEntityPage().verifyAdditionalInfoValueWithMaxLengthFromZeus("additionalInfo",fid,source);
-    }
+    }*/
 
-    @Then("the user should see the additional info text area field length as 10000")
+  /*  @Then("the user should see the additional info text area field length as 10000")
     public void verifyAdditionalInfoTextAreaLength(@Named("fid") String fid) {
         getEditLegalEntityPage().verifyAdditionalInfoTextAreaLength(fid);
     }
@@ -214,9 +217,9 @@ public class LegalEntityStepsEdit extends AbstractSteps{
     @When("the user enters 10001 characters in the additional info text area")
     public void enter10001CharactersInLegalEntityAdditionalInfo(@Named("fid") String fid) {
         getEditLegalEntityPage().enter10001CharactersInLegalEntityAdditionalInfo(fid);
-    }
+    }*/
 
-    @When("the user enters 10000 characters in the additional info text area")
+   /* @When("the user enters 10000 characters in the additional info text area")
     public void enter10000CharactersInLegalEntityAdditionalInfo(@Named("fid") String fid) {
         getEditLegalEntityPage().enter10000CharactersInLegalEntityAdditionalInfo(fid);
     }
@@ -224,9 +227,9 @@ public class LegalEntityStepsEdit extends AbstractSteps{
     @Then("the user should see the error message enter up to 10000 valid characters for additional info value in the basic info legal entity page")
     public void verifyLegalEntityAdditionalInfoErrorMessageForMaxLength() {
         getEditLegalEntityPage().verifyLegalEntityAdditionalInfoErrorMessageForMaxLength();
-    }
+    }*/
 
-
+/*
     @Then("the user verifies corporate action text area field length as 10000")
     public void verifyMaXlengthCorporateActionTextArea(){getEditLegalEntityPage().verifyMaxLengthCorporateActionTextArea();}
 
@@ -244,18 +247,18 @@ public class LegalEntityStepsEdit extends AbstractSteps{
     @Then("the user should see the $dropdown values from lookup $fid except the values that are selected already")
     public void verifyLegalEntityEntityTypeList(String dropdown,String fid){
         getEditLegalEntityPage().verifyLegalEntityEntityTypeListFromLookup(fid,dropdown);
-    }
+    }*/
 
     @When("the user clicks on the add new entity type button")
     public void clickOnAddNewEntityTypeButton()
     {
         getEditLegalEntityPage().clickOnAddNewEntityTypeButton();
     }
-    @Then("the user should see the entityType value as in $source document with fid <fid>")
 
+    /*@Then("the user should see the entityType value as in $source document with fid <fid>")
     public void verifyEditLegalEntityEntityTypeValueFromTrusted(@Named("fid") String fid,@Named("source") String source){
         getEditLegalEntityPage().verifyEditLegalEntityEntityTypeValueFromTrusted(fid,"type",source);
-    }
+    }*/
 
     @Then("the user should see entityType value as <entityTypeValue> for fid <fid> in $source document")
     public void verifyEditLegalEntityEntityTypeValueFromZeus(@Named("entityTypeValue") String entityTypeValue,@Named("fid") String fid,@Named("source") String source) {
@@ -368,18 +371,19 @@ public class LegalEntityStepsEdit extends AbstractSteps{
     {
         getEditLegalEntityPage().clicksOnDeleteLegalEntityNames();
     }
-    @Then("the user should see the newly added names in the legal entity basic info page")
-    public void verifyNewlyAddedNames() {
-        getEditLegalEntityPage().verifyNewlyAddedNames();
-    }
+
     @When("the user clicks on the yes button in the delete row confirmation modal in the legal entity basic info page")
     public void clickOnYesButtonInDeleteConfirmationModalInLegalEntity() {
         getEditLegalEntityPage().clickOnYesButtonInDeleteConfirmationModalInLegalEntity();
     }
+    /*@Then("the user should see the newly added names in the legal entity basic info page")
+    public void verifyNewlyAddedNames() {
+        getEditLegalEntityPage().verifyNewlyAddedNames();
+    }
     @Then("the user should not see the newly added names in the legal entity basic info page")
     public void verifyNoNewlyAddedNames() {
         getEditLegalEntityPage().verifyNoNewlyAddedNames();
-    }
+    }*/
     @Then("the user updates Chartered date <day> <month> <year>")
     public void updateCharteredDate(@Named("day") String day,@Named("month") String month,@Named("year") String year){getEditLegalEntityPage().updateCharteredDate(day,month,year);}
     @Then("the user verifies chartered date <fid>")

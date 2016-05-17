@@ -100,7 +100,7 @@ public class EditLegalEntityPage extends AbstractPage {
 
     }
 
-    public void verifyEditLegalEntityEntityTypeValueFromTrusted(String fid, String tagName, String source) {
+   /* public void verifyEditLegalEntityEntityTypeValueFromTrusted(String fid, String tagName, String source) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", source));
@@ -109,7 +109,7 @@ public class EditLegalEntityPage extends AbstractPage {
             assertEquals(getNodeValuesByTagName(document, tagName), getAlreadySelectedEntityTypes());
         }
 
-    }
+    }*/
 
     public void verifyEditLegalEntityEntityTypeValueFromZeus(String entityTypeValue, String tagName, String fid, String source) {
         try {
@@ -557,23 +557,7 @@ public class EditLegalEntityPage extends AbstractPage {
         attemptClick(identifiers.getObjectIdentifier("legalEntity_delete_yes_button_id"));
     }
 
-    public void verifyNewlyAddedNames() {
-        assertTrue(getDriver().findElement(legalEntity_new_names_type_edit_xpath).isDisplayed());
-    }
 
-    public void verifyNoNewlyAddedNames() {
-        try {
-            assertFalse(getDriver().findElement(legalEntity_new_names_type_edit_xpath).isDisplayed());
-        } catch (NoSuchElementException e) {
-        }
-    }
-
-    public void verifyDeleteButtonForLegalTitle() {
-        try {
-            assertFalse(getDriver().findElement(legalEntity_delete_button_for_legalTitle_edit_xpath).isDisplayed());
-        } catch (NoSuchElementException e) {
-        }
-    }
 
     public void verifyEditLegalEntityNamesInZeus(String selectedEntity) {
         List<NameValuePair> nvPairs = new ArrayList<>();
@@ -590,7 +574,36 @@ public class EditLegalEntityPage extends AbstractPage {
         }
     }
 
+    public void verifyUpdatedCorporateSummary(String fid, String corporateStatement) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> zeusPairs = new ArrayList<>();
+        zeusPairs.add(new BasicNameValuePair("fid", fid));
+        zeusPairs.add(new BasicNameValuePair("source", "zeus"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", zeusPairs);
+        assertEquals(document.getElementsByTagName("corporateStatement").item(0).getTextContent(), corporateStatement);
+    }
 
+   /* public void verifyNewlyAddedNames() {
+        assertTrue(getDriver().findElement(legalEntity_new_names_type_edit_xpath).isDisplayed());
+    }
+
+    public void verifyNoNewlyAddedNames() {
+        try {
+            assertFalse(getDriver().findElement(legalEntity_new_names_type_edit_xpath).isDisplayed());
+        } catch (NoSuchElementException e) {
+        }
+    }
+
+    public void verifyDeleteButtonForLegalTitle() {
+        try {
+            assertFalse(getDriver().findElement(legalEntity_delete_button_for_legalTitle_edit_xpath).isDisplayed());
+        } catch (NoSuchElementException e) {
+        }
+    }
     public void verifyRequiredErrorMessageForTypesAndValues() {
         assertEquals(getDriver().findElement(legalEntityBasicInfo_type_required_error_message_xpath).getText(), "Required");
         assertEquals(getDriver().findElement(legalEntityBasicInfo_value_required_error_message_xpath).getText(), "Required");
@@ -618,18 +631,7 @@ public class EditLegalEntityPage extends AbstractPage {
         getDriver().findElement(corporateSummary_textarea_xpath).sendKeys(corporateStatement);
     }
 
-    public void verifyUpdatedCorporateSummary(String fid, String corporateStatement) {
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        List<NameValuePair> zeusPairs = new ArrayList<>();
-        zeusPairs.add(new BasicNameValuePair("fid", fid));
-        zeusPairs.add(new BasicNameValuePair("source", "zeus"));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", zeusPairs);
-        assertEquals(document.getElementsByTagName("corporateStatement").item(0).getTextContent(), corporateStatement);
-    }
+
 
     public void verifyMaxLengthCorporateActionTextArea() {
         assertEquals(getDriver().findElement(corporateSummary_textarea_xpath).getAttribute("maxlength"), "10000");
@@ -696,14 +698,14 @@ public class EditLegalEntityPage extends AbstractPage {
 
     public void clickOnExistingEntityTypeDropDown() {
         getDriver().findElements(legalEntity_basicInfo_entitytypes_dropdown_xpath).get(0).click();
-    }
+    }*/
 
     public void clickOnNewEntityTypeDropDown(String rowIdentifier) {
         getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)).click();
 
     }
 
-    public void verifyLegalEntityEntityTypeListFromLookup(String lookupFid, String rowIdentifier) {
+     /* public void verifyLegalEntityEntityTypeListFromLookup(String lookupFid, String rowIdentifier) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         List<String> dropdownValuesList = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", lookupFid));
@@ -723,7 +725,7 @@ public class EditLegalEntityPage extends AbstractPage {
 
     }
 
-    public void verifyLegalEntityBasicInfoLeftColumn(String fid) {
+  public void verifyLegalEntityBasicInfoLeftColumn(String fid) {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -745,6 +747,16 @@ public class EditLegalEntityPage extends AbstractPage {
         fetchingHeadOfficeAddressFromContainer(legalEntity_basicInfo_leftContainer_container_xpath, "Head Office", nvPairs, "headOfficeaddressLine1");
 
     }
+
+    public List<String> getAlreadySelectedEntityTypes() {
+        ArrayList<String> selectedValueList = new ArrayList();
+        for (WebElement entityTypeDropDown : getDriver().findElements(legalEntity_basicInfo_entitytypes_dropdown_xpath)) {
+            Select dropdown = new Select(entityTypeDropDown);
+            String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
+            selectedValueList.add(selectedValue);
+        }
+        return selectedValueList;
+    }*/
 
     /*
     *   Need to call this method only when value displayed on the front end has the first letter in upper case
@@ -796,15 +808,7 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
 
-    public List<String> getAlreadySelectedEntityTypes() {
-        ArrayList<String> selectedValueList = new ArrayList();
-        for (WebElement entityTypeDropDown : getDriver().findElements(legalEntity_basicInfo_entitytypes_dropdown_xpath)) {
-            Select dropdown = new Select(entityTypeDropDown);
-            String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
-            selectedValueList.add(selectedValue);
-        }
-        return selectedValueList;
-    }
+
 
     @Override
     public String getPageUrl() {

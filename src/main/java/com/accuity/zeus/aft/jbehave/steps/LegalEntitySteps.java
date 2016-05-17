@@ -269,7 +269,7 @@ public class LegalEntitySteps extends AbstractSteps{
 
     @When("the user clicks on the no button in the delete row confirmation modal in the legal entity basic info page")
     public void clickOnNoButtonInDeleteConfirmationModalInLegalEntity() {
-        getLegalEntityPage().clickOnNoButtonInDeleteConfirmationModalInLegalEntity();
+        getEditLegalEntityPage().clickOnNoButtonInDeleteConfirmationModalInLegalEntity();
     }
 
 }

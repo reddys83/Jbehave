@@ -82,7 +82,7 @@ public class DataStepsEdit extends AbstractSteps {
 
     @Then("the user should see the error $startDateErrorMsg for chartered date")
     public void verifyStartDateErrorMessage(@Named("startDateErrorMsg") String startDateErrorMsg) {
-        getLegalEntityPage().verifyErrorMessageCharteredDate(startDateErrorMsg);
+        getEditLegalEntityPage().verifyErrorMessageCharteredDate(startDateErrorMsg);
     }
 
 }
