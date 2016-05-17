@@ -1351,7 +1351,5 @@ public class LegalEntityPage extends AbstractPage {
             assertEquals(webElementDropDown.getOptions().get(i + 1).getText(), document.getElementsByTagName("a").item(i).getTextContent());
         }
     }
-
-
 }
 
