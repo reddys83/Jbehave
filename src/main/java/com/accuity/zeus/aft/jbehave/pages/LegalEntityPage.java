@@ -93,6 +93,7 @@ public class LegalEntityPage extends AbstractPage {
     public String EditLegalEntityLocationsType = "";
     public String EditLegalEntityLocationsValue = "";
 
+
     public LegalEntityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
@@ -485,14 +486,10 @@ public class LegalEntityPage extends AbstractPage {
     public void verifyEditLegalEntityLeadInstitutionFlag(String leadInstitutionflag) {
         assertEquals(leadInstitutionflag, getSelectedRadioValue(legalEntity_leadinstitution_radio_options_xpath));
     }
-
-
-
-
-
     public EditLegalEntityPage createEditLegalEntityPage() {
         return new EditLegalEntityPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
     }
+
 
 
 }
