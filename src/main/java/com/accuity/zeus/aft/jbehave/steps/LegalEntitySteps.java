@@ -342,8 +342,8 @@ public class LegalEntitySteps extends AbstractSteps{
     @When("the user updates charter type value <chartertype>")
     public void updateCharterType(@Named("chartertype") String charterType){getLegalEntityPage().updateCharterType(charterType);}
 
-    @Then("the user verifies charter type from trusted and zeus document <fid>")
-    public void verifyUpdatedCharterTypeFromBothDocs(@Named("fid") String fid){getLegalEntityPage().verifyUpdatedCharterTypeBothDocs(fid);}
+    @Then("the user verifies charter type <chartertype> from zeus document for fid <fid>")
+    public void verifyUpdatedCharterTypeFromBothDocs(@Named("chartertype") String chartertype,@Named("fid") String fid){getLegalEntityPage().verifyUpdatedCharterTypeBothDocs(chartertype,fid);}
 
 
     @When("the user enters day for claimed est date <day>")

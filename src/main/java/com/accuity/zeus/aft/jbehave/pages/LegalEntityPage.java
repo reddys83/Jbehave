@@ -575,7 +575,7 @@ public class LegalEntityPage extends AbstractPage {
     }
 
     public void verifyLegalEntityEditPageMode() {
-        assertTrue(getDriver().findElements(legalEntity_leadinstitution_radio_options_xpath).size() > 0);
+        assertTrue(getDriver().findElements(legalEntity_basicInfo_status_dropdown_xpath).size() > 0);
     }
 
 
@@ -761,24 +761,17 @@ public class LegalEntityPage extends AbstractPage {
 
     }
 
-    public void verifyUpdatedCharterTypeBothDocs(String fid) {
+    public void verifyUpdatedCharterTypeBothDocs(String chartertype,String fid) {
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(2000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("fid", fid));
-        nvPairs.add(new BasicNameValuePair("source", "trusted"));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
-        assertEquals(document.getElementsByTagName("charterType").item(0).getTextContent(), getDriver().findElement(legalEntity_basicInfo_CharterType_view_xpath).getText());
-
-
         List<NameValuePair> zeusPairs = new ArrayList<>();
         zeusPairs.add(new BasicNameValuePair("fid", fid));
         zeusPairs.add(new BasicNameValuePair("source", "zeus"));
-        document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", zeusPairs);
-        assertEquals(document.getElementsByTagName("charterType").item(0).getTextContent(), getDriver().findElement(legalEntity_basicInfo_CharterType_view_xpath).getText());
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", zeusPairs);
+        assertEquals(document.getElementsByTagName("charterType").item(0).getTextContent(), chartertype);
     }
 
     public void enterDayValueForClaimedEstDate(String day) {
@@ -804,7 +797,7 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyUpdatedClaimedEstDateBothDocs(String fid) {
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(2000L);
             List<NameValuePair> nvPairs = new ArrayList<>();
             nvPairs.add(new BasicNameValuePair("fid", fid));
             nvPairs.add(new BasicNameValuePair("source", "trusted"));
@@ -1308,7 +1301,7 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyOwnershipTypeValueFromDocument(String ownershipType,String fid ) {
         String xqueryName = "get legal entity basic info left column";
-        String tagName = "ownership";
+        String tagName = "ownershipType";
         String source = "zeus";
         verifyingDataFromMLDocs(ownershipType, fid,xqueryName,tagName,source);
     }
