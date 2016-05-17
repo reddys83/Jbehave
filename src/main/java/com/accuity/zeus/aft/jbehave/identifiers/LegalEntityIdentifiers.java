@@ -40,7 +40,6 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_basicInfo_status_dropdown_xpath",By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='Status']/td/select"));
         hmap.put("legalEntity_basicInfo_CharterType_dropdown_xpath",By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td/select"));
         hmap.put("legalEntity_basicInfo_status_list_xpath",By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='Status']/td/select/option"));
-        hmap.put("legalEntity_basicInfo_CharterType_dropdown_xpath", By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td/select"));
         hmap.put("legalEntity_basicInfo_CharterType_view_xpath",By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td"));
         hmap.put("legalEntity_basicInfo_day_Claimed_est_date_xpath",By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Claimed Est Date']/td/input[1]"));
         hmap.put("legalEntity_basicInfo_Month__Claimed_est_date_xpath",By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Claimed Est Date']/td/select"));
@@ -56,6 +55,16 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntityBasicInfo_delete_confirmation_modal_xpath",By.xpath("//*[@colspan='10']"));
         hmap.put("legalEntity_delete_no_button_id",By.id("no-button"));
         hmap.put("legalEntity_delete_yes_button_id",By.id("yes-button"));
+        hmap.put("legalEntity_new_names_type_edit_xpath",By.xpath(".//*[@id='additionalNames']//tr[@class='new'][@data-row_id='names']"));
+        hmap.put("legalEntity_delete_button_for_legalTitle_edit_xpath",By.xpath(".//*[@id='additionalNames']//tr[td='Legal Title']//button[@class='delete-row']"));
+        hmap.put("legalEntityBasicInfo_type_required_error_message_xpath",By.xpath(".//*[@class='notification error'][@data-error_id='nameTypeError']"));
+        hmap.put("legalEntityBasicInfo_value_required_error_message_xpath", By.xpath(".//*[@class='notification error'][@data-error_id='nameValueError']"));
+        hmap.put("corporateSummary_textarea_xpath",By.xpath("//*[@id='legalEntityBasicInfo']/dl/dd/textarea"));
+        hmap.put("legalEntity_basicInfo_AdditionalInfo_textarea_xpath",By.xpath("//*[@id='legalEntityBasicInfo']//tr[th='Add Info']/td/textarea"));
+        hmap.put("corporateSummary_textarea_maxLenght_error_xpath",By.xpath("//*[@id='legalEntityBasicInfo']/dl/dd/p"));
+        hmap.put("legalEntity_basicInfo_AdditionalInfos_err_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='addInfoError']"));
+        hmap.put("legalEntity_basicInfo_leftContainer_container_xpath",By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody"));
+
 
 
         
