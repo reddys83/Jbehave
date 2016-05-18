@@ -11,7 +11,6 @@ import com.accuity.zeus.aft.jbehave.pages.EditLegalEntityPage;
 @Component
 public class EditLegalEntitySteps extends AbstractSteps{
 
-
     public static String selectedEntity="";
 
     @Then("the user updates the value of insurance type <ownershipType>")
@@ -165,7 +164,13 @@ public class EditLegalEntitySteps extends AbstractSteps{
     }
 
      @Then("the user verifies basic info for legal entity left column <fid> from trusted document")
-    public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){getEditLegalEntityPage().verifyLegalEntityBasicInfoLeftColumn(fid);}
+    public void getLegalEntityBasicinfoLeftColumn(@Named("fid") String fid){
+         if(editLegalEntityPage==null){
+             editLegalEntityPage = getLegalEntityPage().createEditLegalEntityPage();
+         }
+         getEditLegalEntityPage().verifyLegalEntityBasicInfoLeftColumn(fid);}
+
+
     @When("the user selects a non-default value from Fatca Status drop-down in the basicinfo legalentity page")
     public void changeLegalEntityFatcaStatusValue(){
         getEditLegalEntityPage().changeLegalEntityFatcaStatusValue();
@@ -403,8 +408,9 @@ public class EditLegalEntitySteps extends AbstractSteps{
     @When("the user clicks on the legalEntity update link")
     public void clickOnUpdateCurrencyLink() {
         getDataPage().clickOnUpdateCurrencyLink();
+        if(editLegalEntityPage==null){
         editLegalEntityPage = getLegalEntityPage().createEditLegalEntityPage();
-    }
+    }}
 
 
 

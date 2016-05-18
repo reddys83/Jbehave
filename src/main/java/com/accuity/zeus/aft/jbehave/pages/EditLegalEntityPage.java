@@ -719,6 +719,7 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
   public void verifyLegalEntityBasicInfoLeftColumn(String fid) {
+
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
