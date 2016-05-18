@@ -95,7 +95,7 @@ Examples:
 
 
 Scenario: User will see summary of changes made in confirmation modal
-Meta:
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -121,6 +121,7 @@ Examples:
 
 
 Scenario: Verifying error message displayed for wrong format of claimes est date
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -148,6 +149,7 @@ Examples:
 |1038|fid|1038|10.5| |1994.6|
 
 Scenario: Verifying user can update claimed est date in trusted and zeus document.
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -179,6 +181,7 @@ Examples:
 Scenario: User updates Charter type
 Veriyfing if charter type values are updated in Zeus and Trusted documents.
 Verifying the options displayed for charter type are same as those in lookup document.
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -195,7 +198,7 @@ When the user updates charter type value <chartertype>
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
-Then the user verifies charter type from trusted and zeus document <fid>
+Then the user verifies charter type <chartertype> from zeus document for fid <fid>
 
 
 
@@ -249,7 +252,7 @@ Examples:
 |1038|FID|1038|
 
 Scenario: User will see summary of changes made in confirmation modal when update the Legal Entity's status
-Meta:
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -270,7 +273,7 @@ Then the user should return to edit legalentity page mode
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1717|FID|1717|
 
 Scenario: Edit and Save Legal Entity's Status value in the basicinfo legalentity page
 a) Veriy that the default value of status during edit matches with the status of the trusted document
@@ -346,7 +349,7 @@ Examples:
 |1038|FID|1038|
 
 Scenario: User will see summary of changes made for Fatca status in confirmation modal
-Meta:
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -367,7 +370,7 @@ Then the user should return to edit legalentity page mode
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1717|FID|1717|
 
 Scenario: Edit and Save Legal Entity's Fatca Status value (including blank value) in the basicinfo legalentity page
 a) Veriy that the default value of Fatca status during edit matches with the Fatca status of the trusted document
@@ -419,7 +422,6 @@ Examples:
 
 
 Scenario: User can edit legal Entity's corporate statement
-Meta: @CheckValues
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -446,6 +448,7 @@ Examples:
 
 
 Scenario: Verify that the Legal Entity's Corporatea Action field max length is 10000 characters only.
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -474,6 +477,7 @@ Examples:
 Scenario: Verify that the Legal Entity's Additional Info can be saved
     a. Save with a new value different from the current value
     b. Save with same value as current
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -506,7 +510,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the legalEntity update link
-Then the user should see the legalentity's lead institution value as in trusted document with fid <fid>
+And the user enters the <additionalInfoText> in the additional info text area
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
@@ -518,6 +522,7 @@ Examples:
 
 
 Scenario: Verify that the Legal Entity's Additional Info field max length is 10000 characters only.
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -783,7 +788,8 @@ Examples:
 |entity|searchBy|fid|legalEntityNameType|legalEntityNameValue|
 |1165|FID|1165|Former Name|Collins|
 
-Scenario: verify the required message for legalEntiy names type, value.
+Scenario: verify no required message for legalEntiy names type, value when both are null for a new row.
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -797,13 +803,14 @@ And the user clicks on new legal entity names type drop-down
 When the user selects names type <legalEntityNameType> in the basic info legal entity page
 And the user enters names value <legalEntityNameValue> in the basic info legal entity page
 And the user clicks on the save button
-Then the user should see the error message required for the type and value fields of legal entity names
+Then the user should see the save confirmation modal
 
 Examples:
 |entity|searchBy|fid|legalEntityNameType|legalEntityNameValue|
-|11621|FID|11621|||
+|1165|FID|1165|||
 
 Scenario: Verify the delete confirmation modal
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -824,9 +831,10 @@ Then the user should not see the newly added names in the legal entity basic inf
 
 Examples:
 |entity|searchBy|fid|
-|11621|FID|11621|
+|1165|FID|1165|
 
 Scenario: Verify the delete icon should not present for type Legal Title
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -839,9 +847,10 @@ Then the user should not see the delete button for legal tiltle in names for leg
 
 Examples:
 |entity|searchBy|fid|
-|11621|FID|11621|
+|1165|FID|1165|
 
 Scenario: verify the length for value and user should see the validation error when user enters more than 200 charecters
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -857,7 +866,7 @@ Then the user should see the error message enter up to 200 valid characters for 
 
 Examples:
 |entity|searchBy|fid|
-|11621|FID|11621|
+|1165|FID|1165|
 
 Scenario: User updates Chartered date
 Verifying updated date is been is saved in zeus document.
