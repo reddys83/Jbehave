@@ -198,7 +198,7 @@ When the user updates charter type value <chartertype>
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
-Then the user verifies charter type <chartertype> from zeus document for fid <fid>
+Then the user verifies charter type from trusted and zeus document <fid>
 
 
 

@@ -1,4 +1,4 @@
-Meta:@EditLegalEntityLocations @Edit @legalEntity
+Meta:@EditLegalEntityLocations @Edit @LegalEntity
 
 Narrative:
 As a user
