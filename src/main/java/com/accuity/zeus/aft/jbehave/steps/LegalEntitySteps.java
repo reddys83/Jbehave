@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class LegalEntitySteps extends AbstractSteps{
+public class LegalEntitySteps extends AbstractSteps {
 
-    public static String selectedEntity="";
+    public static String selectedEntity = "";
     @Autowired
     ApacheHttpClient apacheHttpClient;
     @Autowired
@@ -25,7 +25,7 @@ public class LegalEntitySteps extends AbstractSteps{
     }
 
     @Then("the user should see the legal entity's virtual presence as: $legalEntityTelecoms")
-    public void verifyLegalEntitiesVirtualPresence(ExamplesTable legalEntitiesVirtualPresence){
+    public void verifyLegalEntitiesVirtualPresence(ExamplesTable legalEntitiesVirtualPresence) {
         getLegalEntityPage().verifyLegalEntitiesVirtualPresence(legalEntitiesVirtualPresence);
     }
 
@@ -35,96 +35,38 @@ public class LegalEntitySteps extends AbstractSteps{
     }
 
     @When("the user clicks on the legal entity services link in the navigation bar")
-    public void clickOnLegalEntityServices(){
+    public void clickOnLegalEntityServices() {
         getLegalEntityPage().clickOnLegalEntityServices();
     }
 
     @When("the user clicks on the legal entity locations link in the navigation bar")
-    public void clickOnLegalEntityLocations(){
+    public void clickOnLegalEntityLocations() {
         getLegalEntityPage().clickOnLegalEntityLocations();
     }
 
-    @When("the user enters more than 10000 characters in value for legalEntity location summary")
-    public void enterInvalidCharactersInLegalEntityLocationsValue() {
-        getLegalEntityPage().enterInvalidCharactersInLegalEntityLocationsValue();
-    }
-
-    @Then("the user should see the error message enter up to 10000 valid characters for value in the legalentity location")
-    public void verifyErrorMessageForInvalidCharacter() {
-        getLegalEntityPage().verifyErrorMessageForInvalidCharacter();
-    }
-
-    @When("the user clicks on the type dropdown in legalEntity locations")
-    public void clickOnLegalEntityLocationTypeDropDwon() {
-        getLegalEntityPage().clickOnLegalEntityLocationTypeDropDwon();
-    }
-
-    @When("the user select type as <type> in the legalentity location summary")
-    public void selectsTypeInLegalEntityLocationSummary(@Named("type") String type){
-        getLegalEntityPage().selectsTypeInLegalEntityLocationSummary(type);
-    }
-
-    @When("the user enters value as <value> in the legalentity location summary")
-    public void entersLegalEntityValueInLocationSummary(@Named("value") String value){
-        getLegalEntityPage().entersLegalEntityValueInLocationSummary(value);
-    }
-    @When("the user clicks on delete button for legal entity location summary")
-    public void clickOnDeleteButtonInLegalEntityLocationSummary() {
-        getLegalEntityPage().clickOnDeleteButtonInLegalEntityLocationSummary();
-    }
-
-    @Then("the user should see the newly added legalentity location summary")
-    public void verifyNewlyAddLegalEntityLocations() {
-         getLegalEntityPage().verifyNewlyAddLegalEntityLocations();
-    }
-
-    @Then("the user should not see the newly added legalentity location summary")
-    public void verifyNoNewlyAddedLegalEntityLocations() {
-        getLegalEntityPage().verifyNoNewlyAddedLegalEntityLocations();
-    }
-
-    @Then("the user should see the edits to legal entity location summary for fid <fid> in zeus document")
-    public void verifyLegalEntityLocationSummaryInZeusDocument(@Named("fid") String fid) {
-        getLegalEntityPage().verifyLegalEntityLocationSummaryInZeusDocument(fid);
-    }
-
-    @When("the user clicks on the add new location summary button in legalentity location")
-    public void clickNewLegalEntityLocations() {
-         getLegalEntityPage().clickNewLegalEntityLocations();
-    }
-
-    @Then("the user should see the error message required for the type in legalentity location summary")
-    public void verifyRequiredErrorMessageForTypeInLegalEntityLocations() {
-        getLegalEntityPage().verifyRequiredErrorMessageForTypeInLegalEntityLocations();
-    }
-
-    @Then("the user should see the legalentity's location summary type values from lookup LOCATION_SUMMARY_TEXT_TYPE")
-    public void verifyLegalEntityLocationsTypeValues() {
-        getLegalEntityPage().verifyLegalEntityLocationsTypeValues();
-    }
 
     @When("the user clicks on the legal entity statistics link in the navigation bar")
-    public void clickOnLegalEntityStatistics(){
+    public void clickOnLegalEntityStatistics() {
         getLegalEntityPage().clickOnLegalEntityStatistics();
     }
 
     @When("the user clicks on the legal entity tust power link in the navigation bar")
-    public void clickOnLegalEntityTrustPowers(){
+    public void clickOnLegalEntityTrustPowers() {
         getLegalEntityPage().clickOnLegalEntityTrustPowers();
     }
 
     @Then("the user should see the legal entity's offered services as: $offeredServices")
-    public void verifyLegalEntityOfferedServices(ExamplesTable offeredServices){
+    public void verifyLegalEntityOfferedServices(ExamplesTable offeredServices) {
         getLegalEntityPage().verifyLegalEntityOfferedServices(offeredServices);
     }
 
     @Then("the user should see the legal entity's location summaries for fid <fid> from trusted document")
-    public void verifyLegalEntityLocations(@Named("fid") String fid){
+    public void verifyLegalEntityLocations(@Named("fid") String fid) {
         getLegalEntityPage().verifyLegalEntityLocations(fid);
     }
 
     @Then("the user should not see the legal entity's location summaries")
-    public void verifyNoLegalEntityLocations(){
+    public void verifyNoLegalEntityLocations() {
         getLegalEntityPage().verifyNoLegalEntityLocations();
     }
 
@@ -132,33 +74,34 @@ public class LegalEntitySteps extends AbstractSteps{
     public void verifyLegalEntityTrustPowersfromDB(@Named("fid") String searchedEntity) {
         getLegalEntityPage().verifyLegalEntityTrustPowersfromDB(searchedEntity);
     }
+
     @Then("the user should not see the legal entity's trust powers")
-    public void verifyNoLegalEntityTrustPowers(){
+    public void verifyNoLegalEntityTrustPowers() {
         getLegalEntityPage().verifyNoLegalEntityTrustPowers();
     }
 
     @Then("the user should see the legal entity's financial services as: $financialServices")
-    public void verifyLegalEntityFinancialServices(ExamplesTable financialServices){
+    public void verifyLegalEntityFinancialServices(ExamplesTable financialServices) {
         getLegalEntityPage().verifyLegalEntityFinancialServices(financialServices);
     }
 
     @Then("the user should see the message you can search for a legal entity at any time using the header search")
-    public void verifyLegalEntitySearchMsg(){
+    public void verifyLegalEntitySearchMsg() {
         getLegalEntityPage().verifyLegalEntitySearchMsg();
     }
 
     @Then("the user should not see the legal entity's offered services")
-    public void verifyNoLegalEntityOfferedServices(){
+    public void verifyNoLegalEntityOfferedServices() {
         getLegalEntityPage().verifyNoLegalEntityOfferedServices();
     }
 
     @Then("the user should not see the legal entity's financial services")
-    public void verifyNoLegalEntityFinancialServices(){
+    public void verifyNoLegalEntityFinancialServices() {
         getLegalEntityPage().verifyNoLegalEntityFinancialServices();
     }
 
     @When("the user clicks on the legal entity identifier link in the navigation bar")
-    public void clickOnLegalEntityIdentifierLink(){
+    public void clickOnLegalEntityIdentifierLink() {
         getLegalEntityPage().clickOnLegalEntityIdentifierLink();
     }
 
@@ -173,16 +116,17 @@ public class LegalEntitySteps extends AbstractSteps{
     }
 
     @When("the user clicks on the legal entity history link in the navigation bar")
-    public void clickOnLegalEntityHistory(){
+    public void clickOnLegalEntityHistory() {
         getLegalEntityPage().clickOnLegalEntityHistory();
     }
 
     @When("the user clicks on the legal entity board meetings link in the navigation bar")
-    public void clickOnLegalEntityBoardMeetings(){
+    public void clickOnLegalEntityBoardMeetings() {
         getLegalEntityPage().clickOnLegalEntityBoardMeetings();
     }
+
     @Then("the user should see the legal entity's summary as $SummaryValue")
-    public void verifyBoardMeetingsSummary(@Named("SummaryValue") String SummaryValue){
+    public void verifyBoardMeetingsSummary(@Named("SummaryValue") String SummaryValue) {
         getLegalEntityPage().verifyBoardMeetingsSummary(SummaryValue);
     }
 
@@ -212,58 +156,58 @@ public class LegalEntitySteps extends AbstractSteps{
     }
 
     @Then("the user should not see the legal entity's ownership")
-    public void verifyNoLegalEntityOwnership(){
+    public void verifyNoLegalEntityOwnership() {
         getLegalEntityPage().verifyNoLegalEntityOwnership();
     }
 
     @Then("the user should see the board meetings for the legal entity")
-    public void verifyBoardMeetingsLabels(){
+    public void verifyBoardMeetingsLabels() {
         getLegalEntityPage().verifyBoardMeetingsLabels();
     }
 
     @Then("the user should see the credit rating for the legal entity")
-    public void verifyCreditRatingsLabel(){
+    public void verifyCreditRatingsLabel() {
         getDataPage().verifyCreditRatingsLabels();
     }
 
     @Then("the user should see the location summaries for the legal entity")
-    public void verifyLegalEntityLocationsLabel(){
+    public void verifyLegalEntityLocationsLabel() {
         getLegalEntityPage().verifyLegalEntityLocationsLabel();
     }
 
     @Then("the user should see the ownership summaries for the legal entity")
-    public void verifyOwnershipLabels(){
+    public void verifyOwnershipLabels() {
         getLegalEntityPage().verifyOwnershipLabels();
     }
 
     @Then("the user should see the offered services for the legal entity")
-    public void verifyLegalEntityOfferedServicesLabels(){
+    public void verifyLegalEntityOfferedServicesLabels() {
         getLegalEntityPage().verifyLegalEntityOfferedServicesLabels();
     }
 
     @Then("the user should see the financial services for the legal entity")
-    public void verifyLegalEntityFinancialServicesLabels(){
+    public void verifyLegalEntityFinancialServicesLabels() {
         getLegalEntityPage().verifyLegalEntityFinancialServicesLabels();
     }
 
     @Then("the user should see the trust powers for the legal entity")
-    public void verifyLegalEntityTrustPowersLabels(){
+    public void verifyLegalEntityTrustPowersLabels() {
         getLegalEntityPage().verifyLegalEntityTrustPowersLabels();
     }
 
     @Then("the user should not see the legal entity's credit ratings section")
-    public void verifyNoLegalEntityCreditRatingsSection(){
+    public void verifyNoLegalEntityCreditRatingsSection() {
         getLegalEntityPage().verifyNoLegalEntityCreditRatingsSection();
     }
 
     @When("the user clicks on the offices link in the legal entity page")
-    public void clickOnOfficesLink(){
+    public void clickOnOfficesLink() {
         setOfficesPage(getLegalEntityPage().clickOnOfficesLink());
     }
 
 
     @When("the user selects lead institution value other than default value in the basicinfo legalentity page")
-    public void changeLegalEntityLeadInstitutionFlag(){
+    public void changeLegalEntityLeadInstitutionFlag() {
         getLegalEntityPage().changeLegalEntityLeadInstitutionFlag();
     }
 

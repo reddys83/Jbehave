@@ -85,4 +85,9 @@ public class DataStepsEdit extends AbstractSteps {
         getEditLegalEntityPage().verifyErrorMessageCharteredDate(startDateErrorMsg);
     }
 
+    @Then("the user should see the delete row confirmation modal in the $pagename page")
+    public void verifyDeleteConfirmationModal(){
+        getDataPage().verifyDeleteConfirmationModal();
+    }
+
 }

@@ -412,6 +412,64 @@ public class EditLegalEntitySteps extends AbstractSteps{
         editLegalEntityPage = getLegalEntityPage().createEditLegalEntityPage();
     }}
 
+    @When("the user clicks on the type dropdown in legalEntity locations")
+    public void clickOnLegalEntityLocationTypeDropDwon() {
+        getEditLegalEntityPage().clickOnLegalEntityLocationTypeDropDwon();
+    }
+    @Then("the user should see the legalentity's location summary type values from lookup LOCATION_SUMMARY_TEXT_TYPE")
+    public void verifyLegalEntityLocationsTypeValues() {
+        getEditLegalEntityPage().verifyLegalEntityLocationsTypeValues();
+    }
+
+    @When("the user clicks on the add new location summary button in legalentity location")
+    public void clickNewLegalEntityLocations() {
+        getEditLegalEntityPage().clickNewLegalEntityLocations();
+    }
+
+    @When("the user select type as <type> in the legalentity location summary")
+    public void selectsTypeInLegalEntityLocationSummary(@Named("type") String type){
+        getEditLegalEntityPage().selectsTypeInLegalEntityLocationSummary(type);
+    }
+
+    @Then("the user should see the edits to legal entity location summary for fid <fid> in zeus document")
+    public void verifyLegalEntityLocationSummaryInZeusDocument(@Named("fid") String fid) {
+        getEditLegalEntityPage().verifyLegalEntityLocationSummaryInZeusDocument(fid);
+    }
+
+    @Then("the user should see the error message required for the type in legalentity location summary")
+    public void verifyRequiredErrorMessageForTypeInLegalEntityLocations() {
+        getEditLegalEntityPage().verifyRequiredErrorMessageForTypeInLegalEntityLocations();
+    }
+
+    @When("the user enters more than 10000 characters in value for legalEntity location summary")
+    public void enterInvalidCharactersInLegalEntityLocationsValue() {
+        getEditLegalEntityPage().enterInvalidCharactersInLegalEntityLocationsValue();
+    }
+
+    @Then("the user should see the error message enter up to 10000 valid characters for value in the legalentity location")
+    public void verifyErrorMessageForInvalidCharacter() {
+        getEditLegalEntityPage().verifyErrorMessageForInvalidCharacter();
+    }
+
+    @When("the user enters value as <value> in the legalentity location summary")
+    public void entersLegalEntityValueInLocationSummary(@Named("value") String value){
+        getEditLegalEntityPage().entersLegalEntityValueInLocationSummary(value);
+    }
+
+    @When("the user clicks on delete button for legal entity location summary")
+    public void clickOnDeleteButtonInLegalEntityLocationSummary() {
+        getEditLegalEntityPage().clickOnDeleteButtonInLegalEntityLocationSummary();
+    }
+    @Then("the user should see the newly added legalentity location summary")
+    public void verifyNewlyAddLegalEntityLocations() {
+        getEditLegalEntityPage().verifyNewlyAddLegalEntityLocations();
+    }
+
+    @Then("the user should not see the newly added legalentity location summary")
+    public void verifyNoNewlyAddedLegalEntityLocations() {
+        getEditLegalEntityPage().verifyNoNewlyAddedLegalEntityLocations();
+    }
+
 
 
 

@@ -15,7 +15,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 When the user clicks on the legal entity locations link in the navigation bar
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user clicks on the type dropdown in legalEntity locations
 Then the user should see the legalentity's location summary type values from lookup LOCATION_SUMMARY_TEXT_TYPE
 When the user clicks on the add new location summary button in legalentity location
@@ -35,7 +35,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 When the user clicks on the legal entity locations link in the navigation bar
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user select type as <type> in the legalentity location summary
 And the user clicks on the save button
 Then the user should see the error message required for the type in legalentity location summary
@@ -57,7 +57,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 When the user clicks on the legal entity locations link in the navigation bar
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user enters more than 10000 characters in value for legalEntity location summary
 And the user clicks on the save button
 Then the user should see the error message enter up to 10000 valid characters for value in the legalentity location
@@ -79,7 +79,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 When the user clicks on the legal entity locations link in the navigation bar
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user select type as <type> in the legalentity location summary
 And the user enters value as <value> in the legalentity location summary
@@ -102,7 +102,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 When the user clicks on the legal entity locations link in the navigation bar
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 When the user clicks on the add new location summary button in legalentity location
 And the user select type as <type> in the legalentity location summary
@@ -126,7 +126,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 When the user clicks on the legal entity locations link in the navigation bar
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 When the user clicks on the add new location summary button in legalentity location
 And the user select type as <type> in the legalentity location summary
