@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class LegalEntityIdentifiers {
 
-    private HashMap<String, By> hmap = new HashMap<String, By>();
+    private static HashMap<String, By> hmap = new HashMap<String, By>();
 
     public LegalEntityIdentifiers(){
         hmap.put("first_existing_entitytype_dropdown", By.xpath(("//tbody[@id='additionalTypes']/tr[1]/td[1]/select")));
@@ -64,19 +64,9 @@ public class LegalEntityIdentifiers {
         hmap.put("corporateSummary_textarea_maxLenght_error_xpath",By.xpath("//*[@id='legalEntityBasicInfo']/dl/dd/p"));
         hmap.put("legalEntity_basicInfo_AdditionalInfos_err_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='addInfoError']"));
         hmap.put("legalEntity_basicInfo_leftContainer_container_xpath",By.xpath("//*[@id='legalEntityBasicInfo']/ul/li[2]/table/tbody"));
-
-
-
-        
-
-
-
-
     }
 
-
-
-    public By getObjectIdentifier(String key) {
+    public static By getObjectIdentifier(String key) {
 
         return hmap.get(key);
 
