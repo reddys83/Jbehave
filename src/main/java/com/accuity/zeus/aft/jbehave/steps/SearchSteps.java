@@ -1,6 +1,5 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.jbehave.pages.SearchPage;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
