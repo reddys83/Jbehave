@@ -63,12 +63,12 @@ public class EditLegalEntityPage extends AbstractPage {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
         try {
-            Thread.sleep(2000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
         String leadInstitutionDBValue = getNodeValuesByTagName(document, "leadInstitution").size() == 0 ? "" : getNodeValuesByTagName(document, "leadInstitution").get(0);
         return leadInstitutionDBValue;
     }
@@ -79,6 +79,7 @@ public class EditLegalEntityPage extends AbstractPage {
 
     public void verifyLeadInstitutionValuefromDB(String leadInstitutionflag, String selectedEntity, String source) {
         assertEquals(getLeadInstitutionFlagFromDB(selectedEntity, source), leadInstitutionflag);
+
     }
 
     public void verifyNoLeadInstitution() {
@@ -90,7 +91,7 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyLegalEntityEditPageMode() {
-        assertTrue(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_leadinstitution_radio_options_xpath")).size() > 0);
+        assertTrue(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_status_dropdown_xpath")).size()>0);
     }
 
     public void clickOnAddNewEntityTypeButton() {
@@ -399,20 +400,25 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyUpdatedCharterTypeBothDocs(String fid) {
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals(document.getElementsByTagName("charterType").item(0).getTextContent(), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_CharterType_view_xpath")).getText());
         List<NameValuePair> zeusPairs = new ArrayList<>();
         zeusPairs.add(new BasicNameValuePair("fid", fid));
         zeusPairs.add(new BasicNameValuePair("source", "zeus"));
         document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", zeusPairs);
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals(document.getElementsByTagName("charterType").item(0).getTextContent(), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_CharterType_view_xpath")).getText());
     }
 
