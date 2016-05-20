@@ -1,7 +1,24 @@
 Meta:@Regression
 
-Scenario: Ensuring current build has most of the features running perfectly.
-View Currency scenario verifies if searched currency is displayed and by clicking on Country name its navigating to country page.
+
+Narrative: Ensuring current build has most of the features running perfectly.
+This story covers following scenarios:
+View Scenarios :
+    View Currency scenario verifies if searched currency is displayed and by clicking on Country name its navigating to country page.
+    Verify Country holiday data.
+    Verify Area basic info.
+    Verifying error message displayed for wrong format of claimes est date
+Edit Scenarios :
+    User can edit legal Entity's corporate statement
+    User can save edits to the currency uses and verify the data is save in the zeus document
+Filtering :
+    Filter offices by type - Domestic
+Sorting :
+    Verify the sorting office results by FID
+
+
+
+Scenario: View Currency scenario verifies if searched currency is displayed and by clicking on Country name its navigating to country page.
 Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
