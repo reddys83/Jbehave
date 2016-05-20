@@ -448,6 +448,11 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyDefaultOfficeTypeFilterIsAll() {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertTrue(getDriver().findElement(office_type_default_filter_all_xpath).isDisplayed());
     }
 
