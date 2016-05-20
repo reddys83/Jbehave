@@ -246,7 +246,7 @@ public class CountryPage extends AbstractPage {
     String country_places_city_dropdown_xpath = ".//*[@id='city_chosen']";
     private By country_hera_validation_err_msg_xpath = By.xpath("//*[@id='error']//p[@class='notification error']");
     private By country_places_details_Select_dropdown_xpath = By.xpath("//*[@id='additionalRelatedPlaces']/tr[@class='new']/td[4]/select");
-
+    String country_relatedentity_list_table_xpath= "//*[@id='countryPresences']//tr[td='";
 
     private String editedCountryBankingHrsDay = "";
     private String editedCountryBankingHrsStartTime = "";
@@ -806,6 +806,34 @@ public class CountryPage extends AbstractPage {
         attemptClick(country_entity_link_id);
     }
 
+    public void verifyRelatedEntitiesFromTrusted(String countryname,String source) {
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", countryname));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get country related entities", nvPairs);
+        List legalTitles = getNodeValuesByTagName(document, "legalTitle");
+        List types = getNodeValuesByTagName(document, "type");
+        List details = getNodeValuesByTagName(document, "details");
+        String detail="";
+        for (int i = 0; i < legalTitles.size(); i++) {
+            String legalTitle = legalTitles.get(i).toString();
+            String type = types.get(i).toString();
+            if(details.size()!=0)
+            {
+                detail=details.get(i).toString();
+            }
+            assertTrue(getDriver().findElement(By.xpath(country_relatedentity_list_table_xpath+type+"']/td[2]")).getText().equals(legalTitle));
+            assertTrue(getDriver().findElement(By.xpath(country_relatedentity_list_table_xpath+type+"']/td[3]")).getText().replace(", ","").equals(detail));
+        }
+
+
+    }
     public void clickOnCountryPeople() {
         attemptClick(country_people_link_id);
     }
