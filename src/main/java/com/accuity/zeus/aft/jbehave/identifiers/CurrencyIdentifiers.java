@@ -15,6 +15,7 @@ public class CurrencyIdentifiers {
         hmap.put("first_existing_row_currency_primary_radio_button", By.xpath(("//tr[1]//fieldset[@data-error_id='primary']/input")));
         hmap.put("first_new_row_currency_primary_radio_button", By.xpath(("//tr[@class='new'][1]//fieldset[@data-error_id='primary']/input")));
         hmap.put("second_new_row_currency_primary_radio_button", By.xpath(("//tr[@class='new'][2]//fieldset[@data-error_id='primary']/input")));
+        hmap.put("duplicate_primary_currency_error_message",By.xpath("//*[@data-error_id='primaryError'][@class='notification error']"));
     }
 
     public By getObjectIdentifier(String key) {

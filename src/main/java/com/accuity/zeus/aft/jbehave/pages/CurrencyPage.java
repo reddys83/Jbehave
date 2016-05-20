@@ -65,7 +65,6 @@ public class CurrencyPage extends AbstractPage {
     private By currency_name_error_message_xpath = By.xpath("//*[@data-error_id='nameError']");
     private By currency_unit_error_message_xpath = By.xpath("//*[@data-error_id='unitError']");
     private By currency_quantity_error_message_xpath = By.xpath("//*[@data-error_id='quantityError']");
-    private By currency_duplicate_primary_error_message_xpath = By.xpath("//*[@data-error_id='primaryError'][@class='notification error']");
     private By currency_replaced_by_xpath = By.xpath("//*[@class='chosen-results']/li");
     private By currency_start_date_drop_down_xpath = By.xpath("//select[@name='began-month']");
     private By currency_add_country_option_xpath = By.xpath("//*[@id='add_currencyUses_chosen']/a");
@@ -104,7 +103,7 @@ public class CurrencyPage extends AbstractPage {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
-    CurrencyIdentifiers identifiers = new CurrencyIdentifiers();
+    CurrencyIdentifiers CurrencyIdentifiers=new CurrencyIdentifiers();
 
     @Override
     public String getPageUrl() {
@@ -548,7 +547,7 @@ public class CurrencyPage extends AbstractPage {
 
     public void enterCurrencyPrimary(String rowIdentifier,String primary) {
         editedCurrencyPrimary=primary;
-        selectRadioButtonByValue(identifiers.getObjectIdentifier(rowIdentifier),primary);
+        selectRadioButtonByValue(CurrencyIdentifiers.getObjectIdentifier(rowIdentifier),primary);
     }
 
     public void enterCurrencyReplacedBy(String replacedBy) {
@@ -675,14 +674,14 @@ public class CurrencyPage extends AbstractPage {
         }
     }
 
-    public void verifyDuplicatePrimaryCurrencyErrorMessage(String duplicateErrorMsg, int numberOfRows){
+    public void verifyDuplicatePrimaryCurrencyErrorMessage(String duplicatePrimaryError,String duplicateErrorMsg, int numberOfRows){
 
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertEquals(getDriver().findElements(currency_duplicate_primary_error_message_xpath).size(),numberOfRows);
-        assertEquals(duplicateErrorMsg, getDriver().findElement(currency_duplicate_primary_error_message_xpath).getText());
+        assertEquals(getDriver().findElements(CurrencyIdentifiers.getObjectIdentifier(duplicatePrimaryError)).size(),numberOfRows);
+        assertEquals(duplicateErrorMsg, getDriver().findElement(CurrencyIdentifiers.getObjectIdentifier(duplicatePrimaryError)).getText());
     }
 }

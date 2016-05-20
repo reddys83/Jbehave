@@ -617,7 +617,7 @@ And the user enters the currency new start month as <currencyStartMonth> in the 
 And the user enters the currency new start year as <currencyStartYear> in the currency page
 And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
 And the user clicks on the save button
-Then the user should see the error Duplicate primary currency exists for 1 rows
+Then the user should see the duplicate_primary_currency_error_message as Duplicate primary currency exists for 1 rows
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
@@ -673,7 +673,7 @@ And the user enters the currency new start month as <currencyStartMonth> in the 
 And the user enters the currency new start year as <currencyStartYear> in the currency page
 And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
 And the user clicks on the save button
-Then the user should see the error Duplicate primary currency exists for 2 rows
+Then the user should see the duplicate_primary_currency_error_message as Duplicate primary currency exists for 2 rows
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
@@ -701,7 +701,7 @@ And the user enters the first_new_row_currency_primary_radio_button value as <pr
 And the user clicks on the save button
 Then the user should see the error Currency may not be used in a country more than once in the same date range for start date
 Then the user should see the error Currency may not be used in a country more than once in the same date range for end date
-Then the user should see the error Duplicate primary currency exists for 1 rows
+Then the user should see the duplicate_primary_currency_error_message as Duplicate primary currency exists for 2 rows
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:

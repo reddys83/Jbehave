@@ -366,9 +366,9 @@ public class CurrencySteps extends AbstractSteps{
     @Then("the user should see confirmation message")
     public void verifyCurrencySaveConfirmationMessage(){getCurrencyPage().verifySaveConfirmationMessage();}
 
-    @Then("the user should see the error $duplicateErrorMsg for $numberOfRows rows")
-    public void verifyDuplicatePrimaryCurrencyErrorMessage(@Named("duplicateErrorMsg") String duplicateErrorMsg,@Named("numberOfRows") int numberOfRows) {
-        getCurrencyPage().verifyDuplicatePrimaryCurrencyErrorMessage(duplicateErrorMsg,numberOfRows);
+    @Then("the user should see the $duplicatePrimaryError as $duplicateErrorMsg for $numberOfRows rows")
+    public void verifyDuplicatePrimaryCurrencyErrorMessage(@Named("duplicatePrimayError") String duplicatePrimaryError,@Named("duplicateErrorMsg") String duplicateErrorMsg,@Named("numberOfRows") int numberOfRows) {
+        getCurrencyPage().verifyDuplicatePrimaryCurrencyErrorMessage(duplicatePrimaryError,duplicateErrorMsg,numberOfRows);
     }
 
 }
