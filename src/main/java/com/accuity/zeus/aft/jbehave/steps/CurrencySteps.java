@@ -287,10 +287,7 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().verifyErrorMessageForCurrQuantity();
     }
 
-    @Then("the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved")
-    public void verifyErrorMessageAtTopOfThePage(){
-        getDataPage().verifyErrorMessageAtTopOfThePage();
-    }
+
 
     @When("the user clicks on the no button in the delete row confirmation modal in the currency page")
     public void clickOnNoButtonInDeleteConfirmationModalInCurrency() {

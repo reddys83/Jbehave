@@ -1,4 +1,4 @@
-Meta:@EditLegalEntityBasicInfo @Edit @legalEntity
+Meta:@EditLegalEntityBasicInfo @Edit @LegalEntity
 
 Narrative:
 As a user
@@ -34,7 +34,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user should see the fatcaStatus value as in trusted document with fid <fid>
 Then the user should see the legalentity's lead institution value as in trusted document with fid <fid>
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
@@ -61,7 +61,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user should not see lead institution label and value
 
 Examples:
@@ -77,7 +77,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 When the user clicks on the currency tab in the data area
 Then the user should see the cancel update confirmation modal
 When the user clicks on the cancel no button
@@ -103,7 +103,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user selects lead institution value other than default value in the basicinfo legalentity page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -131,7 +131,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 When the user enters day for claimed est date <day>
 And the user enters month for claimed est date <month>
 And the user enters year for claimed est date <year>
@@ -159,7 +159,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 When the user enters day for claimed est date <day>
 And the user enters month for claimed est date <month>
 And the user enters year for claimed est date <year>
@@ -191,14 +191,14 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user verifies options displayed for charter type from lookup document
 And the user validates default value for charter type from trusted document <fid>
 When the user updates charter type value <chartertype>
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
-Then the user verifies charter type <chartertype> from zeus document for fid <fid>
+Then the user verifies charter type from trusted and zeus document <fid>
 
 
 
@@ -215,7 +215,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user clicks on the Status drop-down in the basicinfo legalentity page
 Then the user should see the status values from lookup Status
 
@@ -237,7 +237,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user starts typing the name of a status as i in the Status drop-down
 Then the user should see the selected status in the drop-down as Inactive
 When the user starts typing the name of a status as a in the Status drop-down
@@ -260,7 +260,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user selects a non-default value from Status drop-down in the basicinfo legalentity page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -288,7 +288,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user should see the status value as in trusted document with fid <fid>
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user selects value as <status> from Status drop-down in the basicinfo legalentity page
@@ -312,7 +312,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user clicks on the Fatca Status drop-down in the basicinfo legalentity page
 Then the user should see the Fatca status values from lookup LEGAL_ENTITY_FATCA_STATUS
 
@@ -334,7 +334,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user starts typing the name of a status as Non-Repo in the Fatca Status drop-down
 Then the user should see the selected Fatca status in the drop-down as Non-Reporting IGA FFI
 When the user starts typing the name of a status as Non-Par in the Fatca Status drop-down
@@ -357,7 +357,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user selects a non-default value from Fatca Status drop-down in the basicinfo legalentity page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -385,7 +385,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user should see the fatcaStatus value as in trusted document with fid <fid>
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user selects value as <fatcastatus> from Fatca Status drop-down in the basicinfo legalentity page
@@ -411,7 +411,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
@@ -420,8 +420,8 @@ Examples:
 |entity|searchBy|fid|
 |1165|FID|1165|
 
-Scenario: User can edit legal Entity's corporate statement
 
+Scenario: User can edit legal Entity's corporate statement
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -431,7 +431,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 When the user updates corporate statement <value>
 And the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -456,7 +456,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user verifies corporate action text area field length as 10000
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 Then the user enters 10000 characters in corporate action text area
@@ -464,7 +464,7 @@ When the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user reverts the changes to the document
-When the user clicks on the update link
+When the user clicks on the legalEntity update link
 And the user enters 10001 characters in the corporate action text area
 And the user clicks on the save button
 Then the user should see the error message enter up to 10000 valid characters for corporate action value in the basic info legal entity page
@@ -485,7 +485,8 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
+Then the user should see the legalentity's lead institution value as in trusted document with fid <fid>
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user enters the <additionalInfoText> in the additional info text area
 And the user clicks on the save button
@@ -508,7 +509,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user enters the <additionalInfoText> in the additional info text area
 When the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -529,7 +530,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user should see the additional info text area field length as 10000
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user enters 10000 characters in the additional info text area
@@ -542,7 +543,7 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see additional info text value with 10000 characters for fid <fid> in zeus document
 And the user reverts the changes to the document
-When the user clicks on the update link
+When the user clicks on the legalEntity update link
 And the user enters 10001 characters in the additional info text area
 And the user clicks on the save button
 Then the user should see the error message enter up to 10000 valid characters for additional info value in the basic info legal entity page
@@ -560,7 +561,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user clicks on the first_existing_entitytype_dropdown in the basicinfo legalentity page
 Then the user should see the first_existing_entitytype_dropdown values from lookup LEGAL_ENTITY_CATEGORY except the values that are selected already
 
@@ -577,7 +578,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user clicks on the add new entity type button
 And the user clicks on the first_new_entitytype_dropdown in the basicinfo legalentity page
 Then the user should see the first_new_entitytype_dropdown values from lookup LEGAL_ENTITY_CATEGORY except the values that are selected already
@@ -597,7 +598,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user should see the entityType value as in trusted document with fid <fid>
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user selects entity type value as <entityTypeValue> from first_existing_entitytype_dropdown in the basicinfo legalentity page
@@ -629,7 +630,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user clicks on the add new entity type button
 And the user selects entity type value as <entityTypeValue> from first_new_entitytype_dropdown in the basicinfo legalentity page
@@ -656,7 +657,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 Then the user should see the first_row_existing_entitytype_delete_button in disabled state in entity types section
 When the user clicks on the second_row_existing_entitytype_delete_button in entity types section
@@ -687,7 +688,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user clicks on the add new entity type button
 When the user clicks on the first_new_entitytype_delete_button in entity types section
 Then the user should see the delete row confirmation modal in the legal entity page
@@ -710,7 +711,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user selects to delete all the entity type rows except the first one
 And the user selects entity type value as <entityTypeValue> from first_existing_entitytype_dropdown in the basicinfo legalentity page
 And the user clicks on the save button
@@ -729,7 +730,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user enters null value for all the entity type rows
 And the user clicks on the save button
 Then the user should see the error message for the required entity type field in the basic info legal entity page
@@ -747,7 +748,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user enters null value for all the entity type rows
 And the user selects entity type value as <entityTypeValue> from first_existing_entitytype_dropdown in the basicinfo legalentity page
@@ -770,7 +771,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user clicks on the add new name button in the basic info legal entity page
 And the user clicks on new legal entity names type drop-down
@@ -796,7 +797,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user clicks on the add new name button in the basic info legal entity page
 And the user clicks on new legal entity names type drop-down
 When the user selects names type <legalEntityNameType> in the basic info legal entity page
@@ -817,7 +818,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user clicks on the add new name button in the basic info legal entity page
 And the user clicks on new legal entity names type drop-down
 And the user clicks on delete legal entity names option
@@ -841,7 +842,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user should not see the delete button for legal tiltle in names for legal entity
 
 Examples:
@@ -857,7 +858,7 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 And the user clicks on the add new name button in the basic info legal entity page
 And the user enters more than 200 characters in legal entity names value
 And the user clicks on the save button
@@ -879,7 +880,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user updates Chartered date <day> <month> <year>
 When the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -905,7 +906,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user updates Chartered date <day> <month> <year>
 When the user clicks on the save button
 Then the user should see the error 'Enter a year, month/year or day/month/year.' for chartered date
@@ -929,7 +930,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user updates Chartered date <day> <month> <year>
 When the user clicks on the save button
 Then the user should see the error 'Invalid Date' for chartered date
@@ -954,7 +955,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user verifies options displayed for insurance type from lookup document
 
 Examples:
@@ -973,7 +974,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user updates the value of insurance type <insuranceValue>
 When the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -997,7 +998,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user verifies options displayed for ownership type from lookup document
 
 Examples:
@@ -1016,7 +1017,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-And the user clicks on the update link
+And the user clicks on the legalEntity update link
 Then the user updates the value of insurance type <ownershipType>
 When the user clicks on the save button
 Then the user should see the save confirmation modal
