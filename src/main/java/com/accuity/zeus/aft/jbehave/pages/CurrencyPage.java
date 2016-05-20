@@ -103,7 +103,7 @@ public class CurrencyPage extends AbstractPage {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
-    CurrencyIdentifiers CurrencyIdentifiers=new CurrencyIdentifiers();
+
 
     @Override
     public String getPageUrl() {

@@ -684,7 +684,7 @@ Scenario: Verify user should get the multiple errors "Duplicate primary currency
 "Currency may not be used in a country more than once in the same date range for start date" and
 "Currency may not be used in a country more than once in the same date range for end date"
 when updating a currency use for a country which is having a primary currency already and the date ranges are overlapping with previous one.
-
+Meta:@runme
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
