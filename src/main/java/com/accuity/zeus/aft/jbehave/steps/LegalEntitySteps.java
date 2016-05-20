@@ -217,4 +217,9 @@ public class LegalEntitySteps extends AbstractSteps {
         getEditLegalEntityPage().clickOnNoButtonInDeleteConfirmationModalInLegalEntity();
     }
 
+    @When("the user clicks on the basic info link in the navigation bar")
+    public void clickOnLegalEntityBasicInfo(){
+        getLegalEntityPage().clickOnLegalEntityBasicInfo();
+    }
+
 }

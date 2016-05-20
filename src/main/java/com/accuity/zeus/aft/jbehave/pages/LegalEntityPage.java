@@ -46,6 +46,7 @@ public class LegalEntityPage extends AbstractPage {
     private By legalEntity_identifiers_link_id = By.id("legalEntityIdentifiers");
     private By legalEntity_statistics_link_id = By.id("legalEntityStatistics");
     private By legalEntity_locations_link_id = By.id("legalEntityLocationSummaries");
+    private By legalEntity_basicinfo_link_id = By.id("legalEntityBasicInfo");
     private By legalEntity_location_summary_label_xpath = By.xpath(".//*[@id='content']//span[text()='Location Summaries']");
     private By legalEntity_locationSummaries_type_label_xpath = By.xpath(".//*[@id='content']//li[contains(h1,'Location Summaries')]//thead/tr/th[text()='Type']");
     private By legalEntity_locationSummaries_value_lable_xpath = By.xpath(".//*[@id='content']//li[contains(h1,'Location Summaries')]//thead/tr/th[text()='Value']");
@@ -143,6 +144,10 @@ public class LegalEntityPage extends AbstractPage {
 
     public void clickOnLegalEntityTrustPowers() {
         attemptClick(legalEntity_trustPowers_link_id);
+    }
+
+    public void clickOnLegalEntityBasicInfo() {
+        attemptClick(legalEntity_basicinfo_link_id);
     }
 
     public void verifyLegalEntityOfferedServices(ExamplesTable offeredServices) {
@@ -405,4 +410,5 @@ public class LegalEntityPage extends AbstractPage {
 
 
 }
+
 
