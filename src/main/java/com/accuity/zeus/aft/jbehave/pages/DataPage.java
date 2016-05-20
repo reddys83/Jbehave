@@ -1232,5 +1232,10 @@ public class DataPage extends AbstractPage {
 
     }
 
+    public EditCityPage createEditCityPage() {
+        return new EditCityPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+
+    }
+
 
 }
