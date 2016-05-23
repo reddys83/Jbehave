@@ -14,7 +14,7 @@ public class LegalEntityIdentifiers {
 
     private static HashMap<String, By> hmap = new HashMap<String, By>();
 
-    public LegalEntityIdentifiers(){
+    public static void setIdentifiers(){
         hmap.put("first_existing_entitytype_dropdown", By.xpath(("//tbody[@id='additionalTypes']/tr[1]/td[1]/select")));
         hmap.put("second_existing_entitytype_dropdown", By.xpath(("//tbody[@id='additionalTypes']/tr[2]/td[1]/select")));
         hmap.put("first_new_entitytype_dropdown", By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr[@class='new']/td/select[@id='legalEntityType']"));
@@ -75,8 +75,10 @@ public class LegalEntityIdentifiers {
 
     }
 
-    public static By getObjectIdentifier(String key) {
 
+
+    public static By getObjectIdentifier(String key) {
+        setIdentifiers();
         return hmap.get(key);
 
     }

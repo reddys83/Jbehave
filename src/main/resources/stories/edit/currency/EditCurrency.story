@@ -18,6 +18,7 @@ JIRA ID - ZEUS-743 - User will get warning if click away from screen they are ed
 JIRA ID - ZEUS-828 - User can only input numbers in date field
 JIRA ID - ZEUS-802 Accented characters displaying correctly after saving
 JIRA ID - ZEUS-869 - Remove currency use
+JIRA ID - ZEUS-924 - User can't add duplicate primary currencies for a country
 
 
 Scenario: a. Veify the currency selection drop-down is disabled in update mode
@@ -422,7 +423,7 @@ When the user enters the country <currencyCountry> in the currency usage
 When the user enters the currency start day as <currencyStartDay> in the currency page
 And the user enters the currency start month as <currencyStartMonth> in the currency page
 And the user enters the currency start year as <currencyStartYear> in the currency page
-And the user enters the currency usage primary value as <primary> in the currency page
+And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see confirmation message
@@ -456,7 +457,7 @@ And the user enters the currency start year as <currencyStartYear> in the curren
 And the user enters the currency end day as <currencyEndDay> in the currency page
 And the user enters the currency end month as <currencyEndMonth> in the currency page
 And the user enters the currency end year as <currencyEndYear> in the currency page
-And the user enters the currency usage primary value as <primary> in the currency page
+And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
 And the user enters the currency usage replaced by as <replacedBy> in the currency page
 And the user clicks on the save button
 When the user clicks on the confirm button
@@ -599,3 +600,110 @@ Then the user should see the error message at top of page the highlighted fields
 Examples:
 |currency|
 |Ariary|
+
+Scenario: Verify user should get the error "Duplicate primary currency exists" when updating a currency use for a country which is having a primary currency already.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
+And the user clicks on the update link
+And the user clicks on the add country type-ahead option
+When the user enters the country <addCurrencyCountry> in the add country type-ahead box
+
+When the user enters the currency new start day as <currencyStartDay> in the currency page
+And the user enters the currency new start month as <currencyStartMonth> in the currency page
+And the user enters the currency new start year as <currencyStartYear> in the currency page
+And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
+And the user clicks on the save button
+Then the user should see the duplicate_primary_currency_error_message as Duplicate primary currency exists for 1 rows
+Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|currency|addCurrencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|primary|
+|Indian Rupee|USA|01|Jan|1980|true|
+
+
+
+Scenario: Verify user can add a new non-primary currency for a country which is having a primary currency already.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
+And the user clicks on the update link
+And the user get the document with get Id for currency with the name as Australian Dóllar from the database
+And the user clicks on the add country type-ahead option
+When the user enters the country <addCurrencyCountry> in the add country type-ahead box
+When the user enters the currency new start day as <currencyStartDay> in the currency page
+And the user enters the currency new start month as <currencyStartMonth> in the currency page
+And the user enters the currency new start year as <currencyStartYear> in the currency page
+And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
+And the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see confirmation message
+And the user should be redirected to view mode
+And the user reverts the changes to the document
+
+Examples:
+|currency|addCurrencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|primary|
+|Australian Dóllar|USA|01|Jan|1980|false|
+
+Scenario: Verify user should get the error "Duplicate primary currency exists" for multiple rows when updating a currency use for multiple countries which are having a primary currency already.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
+And the user clicks on the update link
+And the user get the document with get Id for currency with the name as Australian Dóllar from the database
+And the user clicks on the add country type-ahead option
+When the user enters the country <addCurrencyCountry> in the add country type-ahead box
+When the user enters the currency new start day as <currencyStartDay> in the currency page
+And the user enters the currency new start month as <currencyStartMonth> in the currency page
+And the user enters the currency new start year as <currencyStartYear> in the currency page
+And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
+And the user clicks on the add country type-ahead option
+When the user enters the country <addSecondCurrencyCountry> in the add country type-ahead box
+When the user enters the currency new start day as <currencyStartDay> in the currency page
+And the user enters the currency new start month as <currencyStartMonth> in the currency page
+And the user enters the currency new start year as <currencyStartYear> in the currency page
+And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
+And the user clicks on the save button
+Then the user should see the duplicate_primary_currency_error_message as Duplicate primary currency exists for 2 rows
+Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|currency|addCurrencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|primary|addSecondCurrencyCountry|
+|Australian Dóllar|USA|01|Jan|1980|true|UK|
+
+Scenario: Verify user should get the multiple errors "Duplicate primary currency exists",
+"Currency may not be used in a country more than once in the same date range for start date" and
+"Currency may not be used in a country more than once in the same date range for end date"
+when updating a currency use for a country which is having a primary currency already and the date ranges are overlapping with previous one.
+Meta:@runme
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the currency tab in the data area
+And the user clicks on the choose a currency option in the currency page
+And the user enters the currency <currency> in the typeahead box in the currency page
+And the user clicks on the update link
+And the user get the document with get Id for currency with the name as Australian Dóllar from the database
+And the user clicks on the add country type-ahead option
+When the user enters the country <addCurrencyCountry> in the add country type-ahead box
+When the user enters the currency new start day as <currencyStartDay> in the currency page
+And the user enters the currency new start month as <currencyStartMonth> in the currency page
+And the user enters the currency new start year as <currencyStartYear> in the currency page
+And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
+And the user clicks on the save button
+Then the user should see the error Currency may not be used in a country more than once in the same date range for start date
+Then the user should see the error Currency may not be used in a country more than once in the same date range for end date
+Then the user should see the duplicate_primary_currency_error_message as Duplicate primary currency exists for 2 rows
+Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|currency|addCurrencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|primary|
+|Afghani-test|Angola|01|Jan|1980|true|

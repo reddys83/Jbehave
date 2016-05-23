@@ -27,6 +27,7 @@ Examples:
 
 
 Scenario: Verify no history for legalEntity
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
