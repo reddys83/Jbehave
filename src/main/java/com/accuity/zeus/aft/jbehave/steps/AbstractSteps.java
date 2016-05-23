@@ -37,6 +37,14 @@ public abstract class AbstractSteps {
 	private static CurrencyPage currencyPage;
 	private static CountryPage countryPage;
 
+
+
+	public static EditLegalEntityPage editLegalEntityPage;
+
+
+
+	public static EditCityPage editCityPage;
+
     @Autowired
     ApacheHttpClient apacheHttpClient;
 
@@ -199,6 +207,22 @@ public abstract class AbstractSteps {
 
 	public void setOfficesPage(OfficesPage officesPage) {
 		this.officesPage = officesPage;
+	}
+
+	public static EditLegalEntityPage getEditLegalEntityPage() {
+		return editLegalEntityPage;
+	}
+
+	public static void setEditLegalEntityPage(EditLegalEntityPage editLegalEntityPage) {
+		AbstractSteps.editLegalEntityPage = editLegalEntityPage;
+	}
+
+	public static EditCityPage getEditCityPage() {
+		return editCityPage;
+	}
+
+	public static void setEditCityPage(EditCityPage editCityPage) {
+		AbstractSteps.editCityPage = editCityPage;
 	}
 
 }

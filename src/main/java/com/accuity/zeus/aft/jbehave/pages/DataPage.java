@@ -1137,7 +1137,7 @@ public class DataPage extends AbstractPage {
 
     public void clickOnUpdateCurrencyLink() {
         try {
-            Thread.sleep(3000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -1229,6 +1229,11 @@ public class DataPage extends AbstractPage {
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,xqueryName);
         assertTrue(document!=null);
 
+
+    }
+
+    public EditCityPage createEditCityPage() {
+        return new EditCityPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
 
     }
 
