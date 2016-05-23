@@ -151,8 +151,6 @@ public class LegalEntityPage extends AbstractPage {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
-    LegalEntityIdentifiers identifiers = new LegalEntityIdentifiers();
-
     @Override
     public String getPageUrl() {
         return null;
@@ -1083,7 +1081,7 @@ public class LegalEntityPage extends AbstractPage {
     }
 
     public void clickOnNewEntityTypeDropDown(String rowIdentifier) {
-        getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)).click();
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
 
     }
 
@@ -1092,7 +1090,7 @@ public class LegalEntityPage extends AbstractPage {
         List<String> dropdownValuesList = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", lookupFid));
 
-        Select dropdown=new Select(getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)));
+        Select dropdown=new Select(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)));
         String selectedValue=dropdown.getFirstSelectedOption().getText();
         for (WebElement option:dropdown.getOptions()){
             dropdownValuesList.add(option.getText());
@@ -1131,7 +1129,7 @@ public class LegalEntityPage extends AbstractPage {
     public void selectEntityType(String entityTypeValue,String rowIdentifier)
     {
 
-        Select dropdown = new Select(getDriver().findElements(identifiers.getObjectIdentifier(rowIdentifier)).get(0));
+        Select dropdown = new Select(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).get(0));
         dropdown.selectByVisibleText(entityTypeValue);
 
     }
@@ -1171,24 +1169,24 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyDeleteLegalEntityTypeButtonStatus(String deleteButton)
     {
-        assertFalse(getDriver().findElement(identifiers.getObjectIdentifier(deleteButton)).isEnabled());
+        assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(deleteButton)).isEnabled());
     }
 
     public void clickonDeleteEntityTypeRowButton(String rowIdentifier)
     {
-        getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)).click();
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
     }
 
     public void verifyExistingEntityTypeRow(String rowIdentifier,String dropdownvalue)
     {
-        assertTrue(getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
-        Select dropdown = new Select(getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)));
+        assertTrue(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        Select dropdown = new Select(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)));
         assertEquals(dropdown.getFirstSelectedOption().getText(),dropdownvalue);
     }
 
     public void verifyNoExistingEntityTypeRow(String rowIdentifier,String dropdownvalue)
     {
-        Select dropdown = new Select(getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)));
+        Select dropdown = new Select(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)));
         assertFalse(dropdown.getFirstSelectedOption().getText().equalsIgnoreCase(dropdownvalue));
 
     }
@@ -1211,12 +1209,12 @@ public class LegalEntityPage extends AbstractPage {
 
        public void verifyNewEntityTypeRow(String rowIdentifier)
     {
-        assertTrue(getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        assertTrue(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
     }
 
     public void verifyNoNewEntityTypeRow(String rowIdentifier)
     {try {
-        assertFalse(getDriver().findElement(identifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
     }catch(NoSuchElementException e){}
 
     }
@@ -1282,7 +1280,7 @@ public class LegalEntityPage extends AbstractPage {
     }
 
     public void updateInsuranceType(String insuranceType) {
-        Select insuranceTypeDropDown = new Select(getDriver().findElement(identifiers.getObjectIdentifier("edit_legalEntity_insuranceType_dropdown")));
+        Select insuranceTypeDropDown = new Select(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("edit_legalEntity_insuranceType_dropdown")));
         insuranceTypeDropDown.selectByValue(insuranceType);
     }
 
@@ -1302,7 +1300,7 @@ public class LegalEntityPage extends AbstractPage {
     }
 
     public void updateOwnershipType(String ownershipType) {
-        Select insuranceTypeDropDown = new Select(getDriver().findElement(identifiers.getObjectIdentifier("edit_legalEntity_ownershipType_dropdown")));
+        Select insuranceTypeDropDown = new Select(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("edit_legalEntity_ownershipType_dropdown")));
         insuranceTypeDropDown.selectByValue(ownershipType);
     }
 
@@ -1345,7 +1343,7 @@ public class LegalEntityPage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("source",source));
         nvPairs.add(new BasicNameValuePair("fidValue",fidValue));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,"get data from lookup table",nvPairs);
-        Select webElementDropDown = new Select(getDriver().findElement(identifiers.getObjectIdentifier(webElement)));
+        Select webElementDropDown = new Select(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(webElement)));
         Integer optionsDisplayed = webElementDropDown.getOptions().size();
         for (int i = 0; i < optionsDisplayed - 2; i++) {
             assertEquals(webElementDropDown.getOptions().get(i + 1).getText(), document.getElementsByTagName("a").item(i).getTextContent());
