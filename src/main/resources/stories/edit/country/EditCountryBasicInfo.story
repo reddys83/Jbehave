@@ -279,7 +279,7 @@ And the user clicks on the country tab in the data area
 When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 And the user clicks on the update link
-And the user clicks on the add new identifier button in the basic info country page
+When the user clicks on the add new identifier button in the basic info country page
 And the user should see the default identifier status as active
 And the user clicks on the save button
 Then the user should see the error message for the required identifier value field in the basic info identifier page
