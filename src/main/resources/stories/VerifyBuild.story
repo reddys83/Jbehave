@@ -1,4 +1,4 @@
-Meta:@Regression
+Meta:@Smoke
 
 
 Narrative: Ensuring current build has most of the features running perfectly.

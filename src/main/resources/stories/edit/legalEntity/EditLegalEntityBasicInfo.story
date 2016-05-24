@@ -1,4 +1,4 @@
-Meta:@EditLegalEntityBasicInfo @Edit @LegalEntity
+Meta:@EditLegalEntityBasicInfo @Edit @LegalEntity @AllStories
 
 Narrative:
 As a user

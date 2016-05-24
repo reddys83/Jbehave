@@ -1,4 +1,4 @@
-Meta:@EditCurrency @Currency @Edit
+Meta:@EditCurrency @Currency @Edit @AllStories
 
 Narrative:
 In order to view and edit the currencies

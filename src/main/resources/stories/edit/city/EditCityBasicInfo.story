@@ -1,4 +1,4 @@
-Meta: @EditCityBasicInfo @Edit @City
+Meta: @EditCityBasicInfo @Edit @City @AllStories
 
 Narrative:
 As a user

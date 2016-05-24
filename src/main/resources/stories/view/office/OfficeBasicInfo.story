@@ -1,4 +1,4 @@
-Meta:@OfficeBasicInfo  @Office @View
+Meta:@OfficeBasicInfo  @Office @View @AllStories
 
 Narrative:
 In order to view and edit the office

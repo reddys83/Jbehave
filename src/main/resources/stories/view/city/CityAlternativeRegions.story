@@ -1,4 +1,4 @@
-Meta:@CityAlternativeRegions @City @View
+Meta:@CityAlternativeRegions @City @View @AllStories
 
 Narrative:
 In order to view and edit the cities
