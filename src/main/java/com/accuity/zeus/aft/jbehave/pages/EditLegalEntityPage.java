@@ -891,6 +891,23 @@ public class EditLegalEntityPage extends AbstractPage {
         }
     }
 
+    public void verifyCreditRatingValuesFromLookup(String rowIdentifier,String lookupFid)
+    {   List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", lookupFid));
+        List<WebElement> creditRatingsList = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
+
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legalEntity CreditRatings From Lookup", nvPairs);
+        for (int i = 1; i < document.getElementsByTagName("CreditRatings").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), creditRatingsList.get(i).getAttribute("value"));
+        }
+
+    }
+
 
     @Override
     public String getPageUrl() {

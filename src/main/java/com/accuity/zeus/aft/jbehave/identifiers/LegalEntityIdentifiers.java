@@ -72,7 +72,7 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_location_value_error_message_xpath",By.xpath(".//*[@class='notification error'][@data-error_id='locationSummaryValueError']"));
         hmap.put("legalEntity_delete_button_legalEntity_location_edit_xpath",By.xpath(".//*[@id='additionalLocationSummaries']//tr[@class='new']//td[@class='delete']/button"));
         hmap.put("legalEntity_new_locations_summary_value_edit_xpath",By.xpath("//*[@id='additionalLocationSummaries']/tr[@class='new']//td//textarea"));
-
+        hmap.put("first_existing_creditrating_Agency_dropdown",By.xpath("//*[@id='additionalCreditRatings']//tr[1]//select[@data-internal_id='creditRatingAgency']"));
     }
 
 

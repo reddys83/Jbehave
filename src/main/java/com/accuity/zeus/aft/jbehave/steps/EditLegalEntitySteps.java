@@ -471,7 +471,9 @@ public class EditLegalEntitySteps extends AbstractSteps{
     }
 
 
-
-
+    @Then("the user should see the $creditratings_rowIdentifier values in credit rating's section from lookup $lookup")
+    public void verifyCreditRatingValuesFromLookup(@Named("creditratings_rowIdentifier") String creditratings_rowIdentifier,@Named("lookup") String lookup) {
+        getEditLegalEntityPage().verifyCreditRatingValuesFromLookup(creditratings_rowIdentifier,lookup);
+    }
 
 }
