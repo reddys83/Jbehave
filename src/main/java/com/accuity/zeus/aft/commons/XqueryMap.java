@@ -79,6 +79,7 @@ public class XqueryMap {
         queryMap.put("get data from lookup table","getValueFromLookupTable.xqy");
 
         queryMap.put("get country related entities","getCountryRelatedEntities.xqy");
+        queryMap.put("get legal entity credit ratings from trusted","getLegalEntityCreditRatings.xqy");
    }
 
     public String getXquery(String key){
