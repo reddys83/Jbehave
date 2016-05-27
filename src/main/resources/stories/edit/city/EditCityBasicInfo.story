@@ -17,10 +17,11 @@ When the user enters the area <area> in the type-ahead box
 When the user clicks on the choose a city option
 When the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
-And the user clicks on the update link
+And the user clicks on the city update link
 And the user enters the <addInfoText> in the add info text area
+When the user clicks on the save button
+And the user clicks on the confirm button
 Then the user should be able to verify the values are entered in the add info field
-And the user reverts the changes to the document
 
 Examples:
 |country|area|city|addInfoText|
@@ -37,16 +38,15 @@ When the user enters the area <area> in the type-ahead box
 When the user clicks on the choose a city option
 When the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
-And the user clicks on the update link
+And the user clicks on the city update link
 And the user enters the <addInfoText> in the add info text area
 When the user clicks on the save button
 And the user clicks on the confirm button
-When the user clicks on the update link
+And the user clicks on the city update link
 And the user enters the <addDifferentInfoText> in the add info text area
 When the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
-And the user reverts the changes to the document
 
 Examples:
 |country|area|city|addInfoText|addDifferentInfoText|
@@ -63,12 +63,10 @@ When the user enters the area <area> in the type-ahead box
 When the user clicks on the choose a city option
 When the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
-And the user clicks on the update link
+And the user clicks on the city update link
 And the user enters values which is beyond 500 unicode characters in the add info field
-When the user clicks on the save button
-And the user clicks on the confirm button
+And the user clicks on the save button
 Then the user should be able to view the error message 'Enter up to 500 valid characters'
-And the user reverts the changes to the document
 
 Examples:
 |country|area|city|
@@ -85,16 +83,15 @@ When the user enters the area <area> in the type-ahead box
 When the user clicks on the choose a city option
 When the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
-And the user clicks on the update link
+And the user clicks on the city update link
 And the user enters the <addInfoText> in the add info text area
 When the user clicks on the save button
 And the user clicks on the confirm button
-When the user clicks on the update link
+And the user clicks on the city update link
 And the user enters the <addInfoText> in the add info text area
 And the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
-And the user reverts the changes to the document
 
 Examples:
 |country|area|city|addInfoText|addInfoText|
