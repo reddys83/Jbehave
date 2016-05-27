@@ -4,37 +4,50 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
+
+import junit.framework.Assert;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.w3c.dom.Document;
 
-/**
- * Created by shahc1 on 5/19/2016.
- */
-public class EditCityPage extends AbstractPage  {
 
-    public EditCityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
-        super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
-    }
+public class EditCityPage extends AbstractPage {
 
-    @Override
-    public String getPageUrl() {
-        return null;
-    }
+	
+	private By city_add_info_text_xpath = By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[10]/td/textarea");
+	
+	public EditCityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
+			RestClient restClient, HeraApi heraApi) {
+		super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
+	}
 
 	public void verifyTextInAddInfo(String addInfoText) {
 		// TODO Auto-generated method stub
 		 assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText(), addInfoText);
 	}
 
-	public void enterCityAddInfo(String addInfoText) {
+	public void enterTextCityAddInfo(String addInfoText) {
 		// TODO Auto-generated method stub
+		/*System.out.println("Inside enterCityAddInfo");
+		System.out.println("Inside enterCityAddInfo"+addInfoText);*/
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath"),addInfoText);
+		//getDriver().findElement(city_add_info_text_xpath).clear();
+        //getDriver().findElement(city_add_info_text_xpath).sendKeys(addInfoText);
 	}
 	
 	public void enterDifferentCityAddInfo(String addDifferentInfoText) {
@@ -47,6 +60,7 @@ public class EditCityPage extends AbstractPage  {
 	}
 	
 	public void clearAndEnterValue(By webElement, String value) {
+		System.out.println("Inside clearAndEnterValue" + value);
         getDriver().findElement(webElement).clear();
         getDriver().findElement(webElement).sendKeys(value);
 
@@ -66,5 +80,10 @@ public class EditCityPage extends AbstractPage  {
 	public void verifyErrorMessageInCityAddInfo() {
 		// TODO Auto-generated method stub
 		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_addInfo_error_message_edit_xpath")).getText(), "Enter up to 500 valid characters.");
+	}
+
+	@Override
+	public String getPageUrl() {
+		return null;
 	}
 }

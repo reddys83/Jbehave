@@ -1,15 +1,22 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import org.jbehave.core.annotations.Named;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
+import org.eclipse.jetty.util.annotation.Name;
+import org.jbehave.core.annotations.*;
+import org.jbehave.core.model.ExamplesTable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-/**
- * Created by shahc1 on 5/19/2016.
- */
-public class EditCitySteps extends AbstractSteps{
+@Component
+public class EditCitySteps extends AbstractSteps {
 
-    @When("the user clicks on the city update link")
+	@Autowired
+	ApacheHttpClient apacheHttpClient;
+	@Autowired
+	Database database;
+
+	@When("the user clicks on the city update link")
     public void clickOnUpdateCurrencyLink() {
         getDataPage().clickOnUpdateCurrencyLink();
         if(editCityPage==null){
@@ -18,7 +25,7 @@ public class EditCitySteps extends AbstractSteps{
     
     @When("the user enters the <addInfoText> in the add info text area")
     public void enterCityAddInfo(@Named("addInfoText") String addInfoText) {
-    	getEditCityPage().enterCityAddInfo(addInfoText);
+    	getEditCityPage().enterTextCityAddInfo(addInfoText);
     }
     
     @When("the user enters the <addDifferentInfoText> in the add info text area")
