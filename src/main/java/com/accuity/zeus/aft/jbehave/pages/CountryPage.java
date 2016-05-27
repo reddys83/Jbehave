@@ -868,7 +868,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyCountryNameTypesList() {
-        List<WebElement> countryNameTypesList = getDriver().findElements(By.xpath(country_name_type_list_xpath + "/option"));
+        List<WebElement> countryNameTypesList = getDriver().findElements(country_name_type_list_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country names type");
         for (int i = 1; i < document.getElementsByTagName("type").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), countryNameTypesList.get(i).getText());

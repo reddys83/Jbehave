@@ -369,6 +369,11 @@ public class LegalEntityPage extends AbstractPage {
             e.printStackTrace();
         }
         attemptClick(office_link_xpath);
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return new OfficesPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 

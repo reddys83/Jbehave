@@ -468,9 +468,6 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCreditRatingsLabelsGeo() {
-        if (SearchPage.selectedEntity != "") {
-            selectedEntity = SearchPage.selectedEntity;
-        }
         assertEquals("CREDIT RATING FOR " + selectedEntity.toUpperCase(), getDriver().findElement(credit_rating_label_xpath).getText());
         verifyCreditRatingsLabelsInternal();
     }
@@ -713,10 +710,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyDemographicsLabel() {
-        if (SearchPage.selectedEntity != "") {
-            selectedEntity = SearchPage.selectedEntity;
-        }
-        assertEquals("DEMOGRAPHICS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(area_demographics_label_xpath).getText());
+       assertEquals("DEMOGRAPHICS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(area_demographics_label_xpath).getText());
     }
 
     public void verifyNoDemographics() {

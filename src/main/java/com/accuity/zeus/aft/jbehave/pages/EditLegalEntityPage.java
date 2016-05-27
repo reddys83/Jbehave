@@ -78,6 +78,11 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyLeadInstitutionValuefromDB(String leadInstitutionflag, String selectedEntity, String source) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals(getLeadInstitutionFlagFromDB(selectedEntity, source), leadInstitutionflag);
 
     }
