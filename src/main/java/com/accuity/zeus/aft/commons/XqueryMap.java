@@ -43,6 +43,7 @@ public class XqueryMap {
         queryMap.put("subarea list","getSubAreaList.xqy");
         queryMap.put("city list","getCityList.xqy");
         queryMap.put("country basic info","getCountryBasicInfo.xqy");
+        queryMap.put("get LegalEntity BoardMeeting","getLegalEntityBoardMeetings.xqy");
         queryMap.put("get country names type", "getCountryNamesType.xqy");
         queryMap.put("get country time zones", "getCountryTimeZone.xqy");
         queryMap.put("get country identifiers", "getCountryIdentifiers.xqy");

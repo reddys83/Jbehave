@@ -32,6 +32,7 @@ public class EditLegalEntityPage extends AbstractPage {
     public String EditLegalEntityLocationsValue = "";
     public String EditLegalEntityBoardMeetingsType="";
     public String EditLegalEntityBoardMeetingValue="";
+    public String EditLEgalEntityBoardmeetingSummary="";
 
 
     public EditLegalEntityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
@@ -831,11 +832,11 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyLegalEntityBoardMeetingType(ExamplesTable boardMeetingType) {
-        assertEquals("Board Meetings", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_label_xpath")));
+        assertEquals("BOARD MEETINGS", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_label_xpath")).getText());
         List<WebElement> types = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_type_dropdown_options_xpath"));
         for (int i=0; i<boardMeetingType.getRowCount();i++)
         {
-            assertEquals(boardMeetingType.getRow(i).get(boardMeetingType.getHeaders().get(0)),types.get(i).getText());
+            assertEquals(boardMeetingType.getRow(i).get(boardMeetingType.getHeaders().get(0)),types.get(i+1).getText());
         }
     }
 
@@ -843,7 +844,7 @@ public class EditLegalEntityPage extends AbstractPage {
         List<WebElement> values = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_value_dropdown_options_xpath"));
         for (int i=0; i<boardMeetingValue.getRowCount();i++)
         {
-            assertEquals(boardMeetingValue.getRow(i).get(boardMeetingValue.getHeaders().get(0)),values.get(i).getText());
+            assertEquals(boardMeetingValue.getRow(i).get(boardMeetingValue.getHeaders().get(0)),values.get(i+1).getText());
         }
     }
 
@@ -864,6 +865,7 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void enterSummaryInLegalEntityBoardMeeting(String summary) {
+        EditLEgalEntityBoardmeetingSummary= summary;
         getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_summary_xpath")).clear();
         getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_summary_xpath")).sendKeys(summary);
         getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_summary_xpath")).sendKeys(Keys.RETURN);
@@ -931,7 +933,10 @@ public class EditLegalEntityPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity BoardMeeting", nvPairs);
+        assertTrue(getNodeValuesByTagName(document, "summary").contains(EditLEgalEntityBoardmeetingSummary));
+        assertTrue(getNodeValuesByTagName(document, "type").contains(EditLegalEntityBoardMeetingsType));
+        assertTrue(getNodeValuesByTagName(document, "value").contains(EditLegalEntityBoardMeetingValue));
     }
 
     public void entersLegalEntityValueInLocationSummary(String value) {

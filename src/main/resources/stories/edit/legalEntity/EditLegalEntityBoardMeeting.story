@@ -48,8 +48,8 @@ Then the user should see the below options for legalEntity board meeting value d
 |Mar|
 |Apr|
 |May|
-|June|
-|July|
+|Jun|
+|Jul|
 |Aug|
 |Sep|
 |Oct|
