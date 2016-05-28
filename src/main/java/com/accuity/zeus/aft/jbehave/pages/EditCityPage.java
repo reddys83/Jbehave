@@ -5,12 +5,19 @@ import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.w3c.dom.Document;
+
 
 public class EditCityPage extends AbstractPage {
 
@@ -57,6 +64,34 @@ public class EditCityPage extends AbstractPage {
 		assertEquals(getDriver()
 				.findElement(CityIdentifiers.getObjectIdentifier("city_addInfo_error_message_edit_xpath")).getText(),
 				"Enter up to 500 valid characters.");
+	}
+	
+	public void verifyCityAddInfoValueFromTrusted(String country, String area, String city, String tagName,
+			String source) {
+		assertEquals(getCityAddInfoValueFromDB(country, area, city, tagName, source),
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_entered_xpath")).getText());
+
+	}
+	
+	public String getCityAddInfoValueFromDB(String country, String area, String city, String tagName, String source) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("city", city));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		String statusValue = "";
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get city basic info", nvPairs);
+		if (document != null) {
+			statusValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+					: getNodeValuesByTagName(document, tagName).get(0);
+		}
+		return statusValue;
 	}
 
 	@Override

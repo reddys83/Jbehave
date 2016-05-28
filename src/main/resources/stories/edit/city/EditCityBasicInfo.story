@@ -84,15 +84,12 @@ When the user clicks on the choose a city option
 When the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 And the user clicks on the city update link
+Then the user should see the add info value as in trusted document
 And the user enters the <addInfoText> in the add info text area
 When the user clicks on the save button
 And the user clicks on the confirm button
-And the user clicks on the city update link
-And the user enters the <addInfoText> in the add info text area
-And the user clicks on the save button
-And the user clicks on the confirm button
-Then the user should see the successful update message at top of the page
+Then the user should see the add info value as in zeus document
 
 Examples:
-|country|area|city|addInfoText|addInfoText|
-|Afghanistan|Badakshan|Panj Shair|Sample text|Sample text|
+|country|area|city|addInfoText|
+|Afghanistan|Badakshan|Panj Shair|Sample text|
