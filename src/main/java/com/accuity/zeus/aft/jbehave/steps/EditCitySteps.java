@@ -22,7 +22,7 @@ public class EditCitySteps extends AbstractSteps {
 	}
 
 	@When("the user enters the <addInfoText> in the add info text area")
-	public void enterTextCityAddInfo(@Named("addInfoText") String addInfoText) {
+	public void enterTextInCityAddInfo(@Named("addInfoText") String addInfoText) {
 		getEditCityPage().enterTextCityAddInfo(addInfoText);
 	}
 
@@ -50,10 +50,28 @@ public class EditCitySteps extends AbstractSteps {
 	public void verifyErrorMessageInCityAddInfo() {
 		getEditCityPage().verifyErrorMessageInCityAddInfo();
 	}
-	
-	@Then("the user should see the add info value as in $source document")
+
+	@Then("the user should see the addInfoText value same as in $source document")
 	public void verifyCityAddInfoValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source) {
-		getEditCityPage().verifyCityAddInfoValueFromTrusted(country, area, city, "status", source);
+		getEditCityPage().verifyCityAddInfoValueFromTrusted(country, area, city, "additionalinfo", source);
 	}
+
+	@Then("the user should see the $addInfoText value as in $source document")
+	public void verifyCityAddInfoValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source, @Named("addInfoText") String addInfoText) {
+		getEditCityPage().verifyCityInfoFromDB(country, area, city, "additionalinfo", source, addInfoText);
+	}
+
+	@When("the user gets the document with $xqueryName with the <city> from the database")
+	public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("city") String param) {
+		getDataPage().getDocument(xqueryName, param);
+
+	}
+
+	@When("the user clicks on the save button in city page")
+	public void clickOnSaveButton() {
+		getEditCityPage().clickOnSaveButton();
+	}
+
 }

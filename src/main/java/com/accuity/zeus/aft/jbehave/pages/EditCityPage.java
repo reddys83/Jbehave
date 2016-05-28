@@ -14,10 +14,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
-
 
 public class EditCityPage extends AbstractPage {
 
@@ -27,8 +24,8 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public void verifyTextInAddInfo() {
-		assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_entered_xpath"))
-				.isDisplayed());
+		assertTrue(
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).isDisplayed());
 	}
 
 	public void enterTextCityAddInfo(String addInfoText) {
@@ -65,14 +62,14 @@ public class EditCityPage extends AbstractPage {
 				.findElement(CityIdentifiers.getObjectIdentifier("city_addInfo_error_message_edit_xpath")).getText(),
 				"Enter up to 500 valid characters.");
 	}
-	
+
 	public void verifyCityAddInfoValueFromTrusted(String country, String area, String city, String tagName,
 			String source) {
 		assertEquals(getCityAddInfoValueFromDB(country, area, city, tagName, source),
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_entered_xpath")).getText());
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText());
 
 	}
-	
+
 	public String getCityAddInfoValueFromDB(String country, String area, String city, String tagName, String source) {
 		List<NameValuePair> nvPairs = new ArrayList<>();
 		nvPairs.add(new BasicNameValuePair("country", country));
@@ -92,6 +89,39 @@ public class EditCityPage extends AbstractPage {
 					: getNodeValuesByTagName(document, tagName).get(0);
 		}
 		return statusValue;
+	}
+
+	public String getCityInfoFromDB(String country, String area, String city, String tagName, String source) {
+
+		String tagValue = null;
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("city", city));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get city basic info", nvPairs);
+		if (document != null) {
+			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+					: getNodeValuesByTagName(document, tagName).get(0);
+		}
+		return tagValue;
+	}
+
+	public void verifyCityInfoFromDB(String country, String area, String city, String tagName, String source,
+			String valueTobeverifed) {
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), valueTobeverifed);
+	}
+
+	public DataPage clickOnSaveButton() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("save_button_id"));
+		return new DataPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
 	}
 
 	@Override
