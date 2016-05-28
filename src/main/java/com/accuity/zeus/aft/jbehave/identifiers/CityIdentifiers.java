@@ -4,19 +4,19 @@ import org.openqa.selenium.By;
 
 import java.util.HashMap;
 
-/**
- * Created by shahc1 on 5/19/2016.
- */
 public class CityIdentifiers {
 
-    private static HashMap<String, By> hmap = new HashMap<String, By>();
+	private static HashMap<String, By> hmap = new HashMap<String, By>();
 
-    public CityIdentifiers(){
+	public static void setIdentifiers() {
+		
+		hmap.put("city_status_identifier_dropdown_xpath", By.xpath(("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[1]/td/select")));
+		hmap.put("city_status_identifier_dropdown_options_xpath", By.xpath(("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[1]/td/select/option")));
+		hmap.put("save_button_id", By.xpath("//*[@id='save-button']"));
+	}
 
-    }
-    public static By getObjectIdentifier(String key) {
-
-        return hmap.get(key);
-
-    }
+	public static By getObjectIdentifier(String key) {
+		setIdentifiers();
+		return hmap.get(key);
+	}
 }
