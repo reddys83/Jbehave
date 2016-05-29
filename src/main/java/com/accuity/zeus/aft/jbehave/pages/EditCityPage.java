@@ -25,15 +25,11 @@ public class EditCityPage extends AbstractPage {
 
 	public void verifyTextInPopulation() {
 		assertTrue(
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).isDisplayed());
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).isDisplayed());
 	}
 
-	public void enterTextCityAddInfo(String addInfoText) {
-		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath"), addInfoText);
-	}
-
-	public void enterDifferentTextInCityAddInfo(String addDifferentInfoText) {
-		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath"), addDifferentInfoText);
+	public void entervalueInPopulationField(String value) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_population_input_id"), value);
 	}
 
 	public void verifySuccessfulUpdatedMessage() {
@@ -47,50 +43,43 @@ public class EditCityPage extends AbstractPage {
 
 	}
 
-	public void enterInvalidCharactersInCityAddInfo() {
-		char c = 'a';
-		String invalidData = "";
-		for (int i = 0; i <= 500; i++) {
-			invalidData += c;
+	public int getRandomNumber(int limit) {
+		int invalidData = 0;
+		for (int i = 0; i <= limit; i++) {
+			invalidData += 1;
 		}
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).clear();
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).sendKeys(invalidData);
+		return invalidData;
 	}
 
-	public void verifyErrorMessageInCityAddInfo() {
-		assertEquals(getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_addInfo_error_message_edit_xpath")).getText(),
-				"Enter up to 500 valid characters.");
+	public void enterCharactersInCityPopulation() {
+		int data = getRandomNumber(50);
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).clear();
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id"))
+				.sendKeys(String.valueOf(data));
+		;
 	}
 
-	public void verifyCityAddInfoValueFromTrusted(String country, String area, String city, String tagName,
+	public void verifyErrorMessageInCityPopulation() {
+		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_error_message_id"))
+				.getText(), "Enter up to 500 valid characters.");
+	}
+
+	public void verifyCityPopulationValueFromTrusted(String country, String area, String city, String tagName,
 			String source) {
-		assertEquals(getCityAddInfoValueFromDB(country, area, city, tagName, source),
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText());
-
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).getText());
 	}
 
-	public String getCityAddInfoValueFromDB(String country, String area, String city, String tagName, String source) {
-		List<NameValuePair> nvPairs = new ArrayList<>();
-		nvPairs.add(new BasicNameValuePair("country", country));
-		nvPairs.add(new BasicNameValuePair("area", area));
-		nvPairs.add(new BasicNameValuePair("city", city));
-		nvPairs.add(new BasicNameValuePair("source", source));
-		String statusValue = "";
-		try {
-			Thread.sleep(3000L);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-				"get city basic info", nvPairs);
-		if (document != null) {
-			statusValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
-					: getNodeValuesByTagName(document, tagName).get(0);
-		}
-		return statusValue;
-	}
-
+	/**
+	 * This method is used to get the city information from DB
+	 * 
+	 * @param country
+	 * @param area
+	 * @param city
+	 * @param tagName
+	 * @param source
+	 * @return value of the tagname passed to it
+	 */
 	public String getCityInfoFromDB(String country, String area, String city, String tagName, String source) {
 
 		String tagValue = null;
