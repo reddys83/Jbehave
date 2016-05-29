@@ -8,8 +8,13 @@ let $country := /country[@source = $source][summary/names/name[type = "Country N
 let $area := /area[@source = $source][summary/names/name[type = "Full Name"]/value = $area][within/place/link/@href=$country/@resource]
 let $city := /city[@source = $source][summary/names/name[type = "Full Name"]/value = $city][within/place/link/@href=$area/@resource]
 
-let $status := ($city/summary/status/text())
+  
+let $cityStatus := ($city/summary/status/text())
+let $cityadditionalinfo := ($city/summary/additionalInfos/additionalInfo/text())
 
-return <city>
-    <status>{$status}</status>
+return
+
+<city>
+<status>{$cityStatus}</status>
+<additionalinfo>{$cityadditionalinfo}</additionalinfo>
 </city>
