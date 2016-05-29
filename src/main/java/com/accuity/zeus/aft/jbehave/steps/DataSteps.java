@@ -22,7 +22,6 @@ public class DataSteps extends AbstractSteps {
 
     @When("the user clicks on the city update link")
     public void clickOnUpdateCurrencyLink() {
-    	System.out.println("testig update");
         getDataPage().clickOnUpdateCurrencyLink();
         setEditCityPage(getDataPage().createEditCityPage());
         }

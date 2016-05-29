@@ -16,9 +16,16 @@ public class EditCitySteps extends AbstractSteps {
 	@Autowired
 	Database database;
 
+	@When("the user clicks on the city tab update link")
+	public void clickOnUpdateCurrencyLink() {
+		getDataPage().clickOnUpdateCurrencyLink();
+		if (editCityPage == null)
+			setEditCityPage(getDataPage().createEditCityPage());
+	}
+	
 	@When("the user clicks on the add new identifier button in the basic info city page")
-	public void clickOnAddNewIdentifirButton() {
-		getEditCityPage().clickOnAddNewIdentifirButton();
+	public void clickOnAddNewIdentifierButton() {
+		getEditCityPage().clickOnAddNewIdentifierButton();
 	}
 
 	 @When("the user enters identifier type as <identifierType> in the basic info city page")
@@ -47,7 +54,7 @@ public class EditCitySteps extends AbstractSteps {
 		 getEditCityPage().verifyDeleteConfirmationModal();
 	    }
 	 
-	 @When("the user enters identifier value as <identifierValueIncorrect> in the basic info city page")
+	 @When("the user enters an incorrect identifier value as <identifierValueIncorrect> in the basic info city page")
 	    public void enterIdentifierValue(@Named("identifierValueIncorrect") String incorrectIdentifierValue) {
 		 getEditCityPage().enterIdentifierValue(incorrectIdentifierValue);
 	    }
@@ -73,4 +80,43 @@ public class EditCitySteps extends AbstractSteps {
 		  getEditCityPage().verifyUpdateSuccessIdentifiers(identifierType,identifierValue,identifierStatus);
 	    }
 	 
+	 @Then("the user should see the error message for the required identifier value field in the city basic info page")
+	    public void verifyErrorMessageForRequiredCityIdentifierValue() {
+	        getEditCityPage().verifyErrorMessageForRequiredCityIdentifierValue();
+	    }
+	 
+	 @Then("the user should see the error message for the required identifier type field in the city basic info page")
+	    public void verifyErrorMessageForRequiredCityIdentifierType() {
+	        getEditCityPage().verifyErrorMessageForRequiredCityIdentifierType();
+	    }
+	 
+	 @Then("the user should see the error message for the required identifier status field in the city basic info page")
+	    public void verifyErrorMessageForRequiredCityIdentifierStatus() {
+		 getEditCityPage().verifyErrorMessageForRequiredCityIdentifierStatus();
+	 }
+	 
+	 @Then("the user should see the Enter up to 50 valid characters error message for the identifier value field in the city basic info page")
+	    public void verifyErrorMessageForLongCityIdentifierValue() {
+	        getEditCityPage().verifyErrorMessageForLongCityIdentifierValue();
+	    }
+	 
+	 @When("the user presses enter button to delete row in city basic info page")
+	    public void pressEnterButtonInDeleteConfirmationModalForCity(){
+	        getEditCityPage().pressEnterButtonInDeleteConfirmationModalForCity();
+	    }
+	 
+	 @When("the user clicks on the No button to cancel the deletion of row")
+	 public void clickNoButtonInDeleteConfirmationModalForCity() {
+		 getEditCityPage().clickNoButtonInDeleteConfirmationModalForCity();
+	 }
+	 
+	 @When("the user clicks on the Yes button to cancel the deletion of row")
+	 public void clickYesButtonInDeleteConfirmationModalForCity() {
+		 getEditCityPage().clickYesButtonInDeleteConfirmationModalForCity();
+	 }
+	 
+	 @Then("the user should not see delete row confirmation modal in the city page")
+	 public void verifyNoDeleteConfirmationModal(){
+		 getEditCityPage().verifyNoDeleteConfirmationModal();
+	    }
 }
