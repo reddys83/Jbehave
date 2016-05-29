@@ -2,9 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
-import org.eclipse.jetty.util.annotation.Name;
 import org.jbehave.core.annotations.*;
-import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,8 +43,8 @@ public class EditCitySteps extends AbstractSteps {
 	    }
 	 
 	 @Then("the user should not see the newly added identifier row in the basic info city page")
-	    public void verifyNewlyAdedIdentifierRowIsNotDisplayed() {
-		 getEditCityPage().verifyNewlyAdedIdentifierRowIsNotDisplayed();
+	    public void verifyNewlyAddedIdentifierRowIsNotDisplayed() {
+		 getEditCityPage().verifyNewlyAddedIdentifierRowIsNotDisplayed();
 	    }
 	 
 	   @Then("the user should see delete row confirmation modal in the city page")
@@ -116,7 +114,7 @@ public class EditCitySteps extends AbstractSteps {
 	 }
 	 
 	 @Then("the user should not see delete row confirmation modal in the city page")
-	 public void verifyNoDeleteConfirmationModal(){
-		 getEditCityPage().verifyNoDeleteConfirmationModal();
+	 public void verifyDeleteConfirmationModalIsNotDisplayed(){
+		 getEditCityPage().verifyDeleteConfirmationModalIsNotDisplayed();
 	    }
 }
