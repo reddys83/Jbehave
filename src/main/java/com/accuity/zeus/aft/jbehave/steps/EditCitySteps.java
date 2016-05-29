@@ -55,7 +55,7 @@ public class EditCitySteps extends AbstractSteps {
 	@Then("the user should see the status value same as in $source document")
 	public void verifyCityStatusValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source) {
-		getEditCityPage().verifyCityInfoFromTrustedDB(country, area, city, "status", source);
+		getEditCityPage().verifyCityStatusInfoFromTrustedDB(country, area, city, "status", source);
 	}
 
 	@Then("the user should see the $status value as in $source document")
@@ -79,4 +79,6 @@ public class EditCitySteps extends AbstractSteps {
 		getDataPage().getDocument(xqueryName, param);
 
 	}
+	
+		
 }

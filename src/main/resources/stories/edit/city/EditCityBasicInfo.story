@@ -82,8 +82,7 @@ Examples:
 Scenario: Edit and Save City's Status value in the City Basic Info page
 a) Veriy that the default value of status during edit matches with the status of the trusted document
 b) Upate the status with a new value and verify it is updated in zeus document
-c) Upate the status with the same existing value and verify the existing value in zeus document
-d) verify that the status can be changed to all 3 values active,inactive and pending
+c) verify that the status can be changed to all 3 values active,inactive and pending
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
