@@ -27,7 +27,7 @@ public class EditCityPage extends AbstractPage {
 	 * This method is used to click the city status drop-down
 	 */
 	public void clickOnCityStatusDropDown() {
-		attemptClick(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_options_xpath"));
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_options"));
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class EditCityPage extends AbstractPage {
 	 */
 	public void verifyCityStatusList() {
 		List<WebElement> statusList = getDriver()
-				.findElements(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_options_xpath"));
+				.findElements(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_options"));
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city Status types");
 		for (int i = 1; i < document.getElementsByTagName("status").getLength(); i++) {
 			assertEquals(
@@ -92,7 +92,7 @@ public class EditCityPage extends AbstractPage {
 	public void verifyCityStatusInfoFromTrustedDB(String country, String area, String city, String tagName,
 			String source) {
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
-				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath")));
+				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown")));
 
 	}
 
@@ -123,7 +123,7 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 		assertTrue(
-				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"))
+				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown"))
 						.equalsIgnoreCase(status));
 
 	}
@@ -134,7 +134,7 @@ public class EditCityPage extends AbstractPage {
 	 *            hold the value to be entered in the drop-down
 	 */
 	public void enterValueInStatusDropdown(String word) {
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"))
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown"))
 				.sendKeys(word);
 	}
 
@@ -145,14 +145,14 @@ public class EditCityPage extends AbstractPage {
 	public void changeCityStatusValue() {
 		String valuetobeSelected = "";
 		Select dropdown = new Select(
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath")));
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown")));
 		for (WebElement option : dropdown.getOptions()) {
 			if (!option.isSelected()) {
 				valuetobeSelected = option.getAttribute("value");
 				break;
 			}
 		}
-		selectItemFromDropdownListByValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"),
+		selectItemFromDropdownListByValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown"),
 				valuetobeSelected);
 
 	}
@@ -162,7 +162,7 @@ public class EditCityPage extends AbstractPage {
 	 */
 	public void verifyCityEditPageMode() {
 		assertTrue(getDriver()
-				.findElements(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath")).size() > 0);
+				.findElements(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown")).size() > 0);
 	}
 
 	/**
@@ -170,7 +170,7 @@ public class EditCityPage extends AbstractPage {
 	 * @param status
 	 */
 	public void selectCityStatusValue(String status) {
-		selectItemFromDropdownListByValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"),
+		selectItemFromDropdownListByValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown"),
 				status);
 	}
 

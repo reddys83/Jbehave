@@ -10,8 +10,8 @@ public class CityIdentifiers {
 
 	public static void setIdentifiers() {
 		
-		hmap.put("city_status_identifier_dropdown_xpath", By.xpath(("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[1]/td/select")));
-		hmap.put("city_status_identifier_dropdown_options_xpath", By.xpath(("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[1]/td/select/option")));
+		hmap.put("city_status_identifier_dropdown", By.cssSelector("select[data-edit_id='status']"));
+		hmap.put("city_status_identifier_dropdown_options", By.cssSelector("select[data-edit_id='status'] > option"));
 		hmap.put("save_button_id", By.xpath("//*[@id='save-button']"));
 	}
 
