@@ -10,6 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
@@ -23,15 +24,25 @@ public class EditCityPage extends AbstractPage {
 		super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
 	}
 
+	/**
+	 * This method is to verify the value displayed in the population field
+	 */
 	public void verifyTextInPopulation() {
 		assertTrue(
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).isDisplayed());
 	}
 
+	/**
+	 * THis method is to enter the value in population text field
+	 * @param value
+	 */
 	public void entervalueInPopulationField(String value) {
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_population_input_id"), value);
 	}
 
+	/**
+	 * This method is to verify whether the successful message is generated after saving the city page.
+	 */
 	public void verifySuccessfulUpdatedMessage() {
 		assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_save_confirmation_message_id"))
 				.isDisplayed());
@@ -43,27 +54,60 @@ public class EditCityPage extends AbstractPage {
 
 	}
 
-	public int getRandomNumber(int limit) {
-		int invalidData = 0;
-		for (int i = 0; i <= limit; i++) {
-			invalidData += 1;
-		}
-		return invalidData;
+	/**
+	 * This method is to generate a random numeric number in specified range
+	 * @param limit
+	 * @return the generated random number
+	 */
+	public String getRandomNumericString(int limit) {
+		int randomNum = 0;
+		String randomString = "";
+		Random ran = new Random();
+		for(int index =0 ; index < limit ; index++)
+		{
+			randomNum = ran.nextInt(9);
+			randomString += randomNum;
+		}	    	
+		return randomString;
 	}
 
-	public void enterCharactersInCityPopulation() {
-		int data = getRandomNumber(50);
+	/**
+	 * This method is to enter the random number of range (50) in population field
+	 */
+	public void enterCharactersInCityPopulation(int limit) {
+		String value = getRandomNumericString(limit);
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).clear();
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id"))
-				.sendKeys(String.valueOf(data));
-		;
+				.sendKeys(value);		
 	}
+	
+	/**
+	 * This method is to enter the random number of range (51) in population field
+	 */
+	public void enterCharactersBeyondThelimitInCityPopulation(int limit) {
+		String value = getRandomNumericString(limit+1);
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).clear();
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id"))
+				.sendKeys(value);		
+	}
+	
 
+	/**
+	 * This is to verify error message is displayed for population field as expected
+	 */
 	public void verifyErrorMessageInCityPopulation() {
 		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_error_message_id"))
-				.getText(), "Enter up to 500 valid characters.");
+				.getText(), "Enter up to 50 valid characters.");
 	}
 
+	/**
+	 * This method is used to verify the value in trusted DB is same as UI value.
+	 * @param country
+	 * @param area
+	 * @param city
+	 * @param tagName
+	 * @param source
+	 */
 	public void verifyCityPopulationValueFromTrusted(String country, String area, String city, String tagName,
 			String source) {
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
@@ -103,6 +147,14 @@ public class EditCityPage extends AbstractPage {
 		return tagValue;
 	}
 
+	/**This method is to verify the specified value 'valueToBeVerified' is present in specified 'source' DB
+	 * @param country
+	 * @param area
+	 * @param city
+	 * @param tagName
+	 * @param source
+	 * @param valueTobeverifed
+	 */
 	public void verifyCityInfoFromDB(String country, String area, String city, String tagName, String source,
 			String valueTobeverifed) {
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), valueTobeverifed);

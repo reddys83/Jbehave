@@ -36,12 +36,17 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifySuccessfulUpdatedMessage();
 	}
 
-	@When("the user enters values which is beyond 50 unicode characters in the population field")
-	public void enterInvalidCharactersInCityPopulation() {
-		getEditCityPage().enterCharactersInCityPopulation();
+	@When("the user enters values which is beyond $limit unicode characters in the population field")
+	public void enterCharactersBeyondThelimitInCityPopulation(int limit) {
+		getEditCityPage().enterCharactersBeyondThelimitInCityPopulation(limit);
 	}
 
-	@Then("the user should be able to view the error message 'Enter up to 500 valid characters'")
+	@When("the user enters values which is $limit unicode characters in the population field")
+	public void enterCharactersInCityPopulation(int limit) {
+		getEditCityPage().enterCharactersInCityPopulation(limit);
+	}
+	
+	@Then("the user should be able to view the error message 'Enter up to 50 valid characters'")
 	public void verifyErrorMessageInCityPopulation() {
 		getEditCityPage().verifyErrorMessageInCityPopulation();
 	}
@@ -57,7 +62,7 @@ public class EditCitySteps extends AbstractSteps {
 			@Named("city") String city, @Named("source") String source, @Named("value") String population) {
 		getEditCityPage().verifyCityInfoFromDB(country, area, city, "population", source, population);
 	}
-	
+
 	@Then("the user should see the population <previousValue> should be same in $source document")
 	public void verifyCityExpectedPopulationValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source, @Named("previousValue") String population) {
