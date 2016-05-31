@@ -1,4 +1,4 @@
-Meta:@EditLegalEntityBasicInfo @Edit @LegalEntity
+Meta:@EditLegalEntityBasicInfo @Edit @LegalEntity @AllStories
 
 Narrative:
 As a user
@@ -553,7 +553,7 @@ Examples:
 |1165|FID|1165|
 
 Scenario: Verify for an existing row, Legal Entity's Entity Type dropdown values from lookup LEGAL_ENTITY_CATEGORY in the same order as taxonomy except those that have already been selected for this Legal Entity
-
+Meta:@runme
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area

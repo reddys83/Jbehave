@@ -1,4 +1,4 @@
-Meta:@LegalEntityOwnership @LegalEntity @View
+Meta:@LegalEntityOwnership @LegalEntity @View @AllStories
 
 Narrative:
 As a user

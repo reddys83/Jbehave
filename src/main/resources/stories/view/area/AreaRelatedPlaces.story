@@ -1,4 +1,4 @@
-Meta:@AreaRelatedPlaces @Area @View
+Meta:@AreaRelatedPlaces @Area @View @AllStories
 
 Narrative:
 In order to view the area basic info

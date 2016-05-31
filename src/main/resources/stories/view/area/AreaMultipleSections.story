@@ -1,4 +1,4 @@
-Meta:@AreaMultipleSections @Area @View
+Meta:@AreaMultipleSections @Area @View @AllStories
 
 Narrative:
 In order to view and edit the currencies

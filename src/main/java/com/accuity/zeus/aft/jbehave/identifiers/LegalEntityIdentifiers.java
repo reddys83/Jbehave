@@ -14,7 +14,7 @@ public class LegalEntityIdentifiers {
 
     private static HashMap<String, By> hmap = new HashMap<String, By>();
 
-    public LegalEntityIdentifiers(){
+    public static void setIdentifiers(){
         hmap.put("first_existing_entitytype_dropdown", By.xpath(("//tbody[@id='additionalTypes']/tr[1]/td[1]/select")));
         hmap.put("second_existing_entitytype_dropdown", By.xpath(("//tbody[@id='additionalTypes']/tr[2]/td[1]/select")));
         hmap.put("first_new_entitytype_dropdown", By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr[@class='new']/td/select[@id='legalEntityType']"));
@@ -32,11 +32,11 @@ public class LegalEntityIdentifiers {
         hmap.put("delete_confirmation_yes_button_id",By.id("yes-button"));
         hmap.put("legalEntity_entity_type_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='legalEntityTypeError']"));
         hmap.put("legalEntity_basicInfo_entitytypes_dropdown_xpath",By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr/td/select[@id='legalEntityType']"));
-        hmap.put(" legalEntity_basicInfo_charteredDate_view_xpath",By.xpath("//table[@class='vertical']/tbody/tr[3]/td"));
-        hmap.put(" legalEntity_basicInfo_charteredDate_day_xpath",By.xpath("//table[@class='vertical']/tbody/tr[3]/td/input[1]"));
-        hmap.put(" legalEntity_basicInfo_charteredDate_month_xpath",By.xpath("//table[@class='vertical']/tbody/tr[3]/td/select"));
-        hmap.put(" legalEntity_basicInfo_charteredDate_year_xpath",By.xpath("//table[@class='vertical']/tbody/tr[3]/td/input[2]"));
-        hmap.put(" legalEntity_basicInfo_charteredDate_errorMessage_xpath",By.xpath("//*[@data-error_id='charteredDateError']"));
+        hmap.put("legalEntity_basicInfo_charteredDate_view_xpath",By.xpath("//table[@class='vertical']/tbody/tr[3]/td"));
+        hmap.put("legalEntity_basicInfo_charteredDate_day_xpath",By.xpath("//table[@class='vertical']/tbody/tr[3]/td/input[1]"));
+        hmap.put("legalEntity_basicInfo_charteredDate_month_xpath",By.xpath("//table[@class='vertical']/tbody/tr[3]/td/select"));
+        hmap.put("legalEntity_basicInfo_charteredDate_year_xpath",By.xpath("//table[@class='vertical']/tbody/tr[3]/td/input[2]"));
+        hmap.put("legalEntity_basicInfo_charteredDate_errorMessage_xpath",By.xpath("//*[@data-error_id='charteredDateError']"));
         hmap.put("legalEntity_basicInfo_status_dropdown_xpath",By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='Status']/td/select"));
         hmap.put("legalEntity_basicInfo_CharterType_dropdown_xpath",By.xpath("//*[@id='legalEntityBasicInfo'] //table/tbody/tr[th='Charter Type']/td/select"));
         hmap.put("legalEntity_basicInfo_status_list_xpath",By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody/tr[th='Status']/td/select/option"));
@@ -75,8 +75,10 @@ public class LegalEntityIdentifiers {
 
     }
 
-    public static By getObjectIdentifier(String key) {
 
+
+    public static By getObjectIdentifier(String key) {
+        setIdentifiers();
         return hmap.get(key);
 
     }

@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -237,9 +238,9 @@ public class CurrencySteps extends AbstractSteps{
         getCurrencyPage().enterCurrencyEndYear(currencyEndYear);
     }
 
-    @When("the user enters the currency usage primary value as <primary> in the currency page")
-    public void enterCurrencyPrimary(@Named("primary") String primary){
-        getCurrencyPage().enterCurrencyPrimary(primary);
+    @When("the user enters the $primary_radio_button value as <primary> in the currency page")
+    public void enterCurrencyPrimary(@Named("primary_radio_button") String primary_radio_button,@Named("primary") String primary){
+        getCurrencyPage().enterCurrencyPrimary(primary_radio_button,primary);
     }
 
     @When("the user enters the currency usage replaced by as <replacedBy> in the currency page")
@@ -251,6 +252,12 @@ public class CurrencySteps extends AbstractSteps{
     public void enterCountryInAddCountryTyAhead(@Named("addCurrencyCountry") String addCurrencyCountry) {
         getCurrencyPage().enterCountryInAddCountryTyAhead(addCurrencyCountry);
     }
+
+    @When("the user enters the country <addSecondCurrencyCountry> in the add country type-ahead box")
+    public void enterSecondCountryInAddCountryTyAhead(@Named("addSecondCurrencyCountry") String addSecondCurrencyCountry) {
+        getCurrencyPage().enterCountryInAddCountryTyAhead(addSecondCurrencyCountry);
+    }
+
 
     @When("the user enters the country <currencyCountry> in the currency usage")
     public void enterCountryInCurrencyUsage(@Named("currencyCountry") String currencyCountry) {
@@ -356,5 +363,9 @@ public class CurrencySteps extends AbstractSteps{
     @Then("the user should see confirmation message")
     public void verifyCurrencySaveConfirmationMessage(){getCurrencyPage().verifySaveConfirmationMessage();}
 
+    @Then("the user should see the $duplicatePrimaryError as $duplicateErrorMsg for $numberOfRows rows")
+    public void verifyDuplicatePrimaryCurrencyErrorMessage(@Named("duplicatePrimayError") String duplicatePrimaryError,@Named("duplicateErrorMsg") String duplicateErrorMsg,@Named("numberOfRows") int numberOfRows) {
+        getCurrencyPage().verifyDuplicatePrimaryCurrencyErrorMessage(duplicatePrimaryError,duplicateErrorMsg,numberOfRows);
+    }
 
 }

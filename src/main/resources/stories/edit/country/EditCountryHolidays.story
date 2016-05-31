@@ -1,4 +1,4 @@
-Meta:@EditCountryHolidays @Edit @Country
+Meta:@EditCountryHolidays @Edit @Country @AllStories
 
 Narrative:
 As a user

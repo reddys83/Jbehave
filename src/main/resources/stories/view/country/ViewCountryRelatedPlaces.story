@@ -1,4 +1,4 @@
-Meta:@ViewCountryRelatedPlaces @Country @View
+Meta:@ViewCountryRelatedPlaces @Country @View @AllStories
 
 Narrative:
 In order to view the places of country

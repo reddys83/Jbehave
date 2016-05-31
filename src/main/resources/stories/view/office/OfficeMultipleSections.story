@@ -1,4 +1,4 @@
-Meta:@OfficeMultipleSections @Office @View
+Meta:@OfficeMultipleSections @Office @View @AllStories
 
 Narrative:
 In order to view and edit the legalEntity

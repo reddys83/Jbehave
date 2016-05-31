@@ -1,4 +1,4 @@
-Meta:@CityCreditRatings @City @View
+Meta:@CityCreditRatings @City @View @AllStories
 
 Narrative:
 In order to view and edit the cities

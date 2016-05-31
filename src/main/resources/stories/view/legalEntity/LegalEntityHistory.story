@@ -1,4 +1,4 @@
-Meta:@LegalEntityHistory @LegalEntity @View
+Meta:@LegalEntityHistory @LegalEntity @View @AllStories
 
 Narrative:
 In order to view and edit the legalEntity
@@ -27,6 +27,7 @@ Examples:
 
 
 Scenario: Verify no history for legalEntity
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area

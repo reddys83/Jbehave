@@ -1,4 +1,4 @@
-Meta:@OfficeCreditRatings  @Office @View
+Meta:@OfficeCreditRatings  @Office @View @AllStories
 
 Narrative:
 In order to view and edit the office

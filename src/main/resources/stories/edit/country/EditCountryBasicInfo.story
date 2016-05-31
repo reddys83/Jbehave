@@ -1,4 +1,4 @@
-Meta:@EditCountryBasicInfo @Edit @Country
+Meta:@EditCountryBasicInfo @Edit @Country @AllStories
 
 Narrative:
 As a user
