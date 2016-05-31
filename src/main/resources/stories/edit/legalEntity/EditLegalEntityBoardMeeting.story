@@ -132,7 +132,7 @@ Examples:
 |entity|searchBy|fid|
 |1717|FID|1717|
 
-Scenario: Verify the duplicate error message for type and value in the legalEntity board meeting
+Scenario: Verify legalEntity board meeting value dropdown for type MONTH
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -147,13 +147,13 @@ And the user clicks on the add new board meeting button in legalEntity
 And the user enters summary <summary> in the legalEntity boardMeeting
 And the user clicks on the type dropdown in legalEntity board meeting for legalEntity_boardMeetings_first_new_type_dropdown
 And the user selects type <type> in the legalEntity board meeting for legalEntity_boardMeetings_first_new_type_dropdown
-And the user clicks on the value dropdown in legalEntity board meeting for legalEntity_boardMeetings_first_new_type_dropdown
-And the user selects value <value> in the legalEntity board meeting for legalEntity_boardMeetings_first_new_type_dropdown
+And the user clicks on the value dropdown in legalEntity board meeting for legalEntity_boardMeetings_first_new_value_dropdown
+And the user selects value <value> in the legalEntity board meeting for legalEntity_boardMeetings_first_new_value_dropdown
 And the user clicks on the add new board meeting button in legalEntity
 And the user clicks on the type dropdown in legalEntity board meeting for legalEntity_boardMeetings_second_new_type_dropdown
 And the user selects type <type> in the legalEntity board meeting for legalEntity_boardMeetings_second_new_type_dropdown
-And the user clicks on the value dropdown in legalEntity board meeting for legalEntity_boardMeetings_second_new_type_dropdown
-And the user selects value <value> in the legalEntity board meeting for legalEntity_boardMeetings_second_new_type_dropdown
+And the user clicks on the value dropdown in legalEntity board meeting for legalEntity_boardMeetings_second_new_value_dropdown
+And the user selects value <value> in the legalEntity board meeting for legalEntity_boardMeetings_second_new_value_dropdown
 And the user clicks on the save button
 Then user should see the duplicate error message for value dropdown in legalEntity board meeting
 
@@ -161,5 +161,3 @@ Then user should see the duplicate error message for value dropdown in legalEnti
 Examples:
 |entity|searchBy|fid|summary|type|value|
 |1717|FID|1717|Stock Exchange Interim Entity Identifier|Month|Jan|
-
-

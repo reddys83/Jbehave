@@ -969,7 +969,7 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyDuplicateErrorMessageForLegalEntityBoardMeeting() {
-        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeeting_duplicate_error_message_xpath")),"Duplicate Board Meeting");
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeeting_duplicate_error_message_xpath")).getText(),"Duplicate Board Meeting");
     }
 
     public void clickOnDeleteButtonInLegalEntityLocationSummary() {

@@ -27,8 +27,8 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_boardMeetings_first_new_value_dropdown", By.xpath("//tr[@class='new'][1]//td/select[@id='boardMeetingValue']"));
         hmap.put("legalEntity_boardMeetings_second_new_type_dropdown", By.xpath("//tr[@class='new'][2]//td/select[@id='boardMeetingType']"));
         hmap.put("legalEntity_boardMeetings_second_new_value_dropdown",By.xpath("//tr[@class='new'][2]//td/select[@id='boardMeetingValue']"));
-        hmap.put("legalEntity_boardMeetings_type_dropdown_options_xpath", By.xpath(".//*[@id='boardMeetingType']//option"));
-        hmap.put("legalEntity_boardMeetings_value_dropdown_options_xpath", By.xpath(".//*[@id='boardMeetingValue']//option"));
+        hmap.put("legalEntity_boardMeetings_type_dropdown_options_xpath", By.xpath(".//tr[@data-row_id='boardMeetings'][last()]//select[@id='boardMeetingType']//option"));
+        hmap.put("legalEntity_boardMeetings_value_dropdown_options_xpath", By.xpath(".//tr[@data-row_id='boardMeetings'][last()]//select[@id='boardMeetingValue']//option"));
         hmap.put("legalEntity_boardMeetings_summary_xpath", By.xpath(".//*[@id='legalEntityBoardMeetings']//textarea"));
         hmap.put("legalEntity_boardMeetings_second_new_type_dropdown", By.xpath("//tr[@class='new'][2]//td/select[@id='boardMeetingType']"));
         hmap.put("legalEntity_boardMeetings_add_button_id", By.id("add-boardMeetings"));
