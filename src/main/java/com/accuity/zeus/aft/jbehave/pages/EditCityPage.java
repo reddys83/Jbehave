@@ -1,4 +1,5 @@
 package com.accuity.zeus.aft.jbehave.pages;
+
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
@@ -27,34 +28,24 @@ public class EditCityPage extends AbstractPage {
 	 * This method is used to click the city status drop-down
 	 */
 	public void clickOnCityStatusDropDown() {
-		attemptClick(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_options"));
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_options_xpath"));
 	}
 
 	/**
-	 * This method is used to verify the look up data values available for city status drop-down
+	 * This method is used to verify the look up data values available for city
+	 * status drop-down
 	 */
-	public void verifyCityStatusList() {
+   public void verifyCityStatusList() {
 		List<WebElement> statusList = getDriver()
-				.findElements(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_options"));
+				.findElements(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_options_xpath"));
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city Status types");
 		for (int i = 1; i < document.getElementsByTagName("status").getLength(); i++) {
 			assertEquals(
-					document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().toLowerCase(),
-					statusList.get(i).getAttribute("value").toLowerCase());
+					document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					statusList.get(i).getAttribute("value"));
 		}
 
 	}
-
-	/**
-	 * This method is used to get the city info value from DB based on the tagname
-	 * 
-	 * @param country
-	 * @param area
-	 * @param city
-	 * @param tagName
-	 * @param source
-	 * @return will return the value fetched from the DB
-	 */
 
 	public String getCityInfoFromDB(String country, String area, String city, String tagName, String source) {
 
@@ -79,42 +70,25 @@ public class EditCityPage extends AbstractPage {
 		return tagValue;
 	}
 
-	/**
-	 * This method is to verify the selected value in city status drop-down is
-	 * correctly matching with the trusted DB
-	 * 
-	 * @param country
-	 * @param area
-	 * @param city
-	 * @param tagName
-	 * @param source
-	 */
-	public void verifyCityStatusInfoFromTrustedDB(String country, String area, String city, String tagName,
-			String source) {
+	public void verifyCityInfoFromTrustedDB(String country, String area, String city, String tagName, String source) {
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
-				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown")));
+				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath")));
 
 	}
 
-	/**
-	 * This method is used to verify whether the value in UI is matching with Zeus DB.
-	 * 
-	 * @param country
-	 * @param area
-	 * @param city
-	 * @param tagName
-	 * @param source
-	 * @param valueTobeVerified
-	 */
 	public void verifyCityInfoFromZeusDB(String country, String area, String city, String tagName, String source,
-			String valueTobeVerified) {
-		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), valueTobeVerified);
+			String status) {
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), status);
 
 	}
 
 	/**
-	 * This method is used to verify the passing status is selected in the city status drop-down 
-	 * @param status will hold the value to be verified with city status drop-down selection
+	 * This method is used to verify the passing status is selected in the city
+	 * status drop-down
+	 * 
+	 * @param status
+	 *            will hold the value to be verified with city status drop-down
+	 *            selection
 	 */
 	public void verifyStatusInDropdown(String status) {
 		try {
@@ -123,61 +97,36 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 		assertTrue(
-				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown"))
+				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"))
 						.equalsIgnoreCase(status));
 
 	}
 
 	/**
-	 * This method is used to enter the value in city status drop-down 
+	 * This method is used to enter the value in city status drop-down
+	 * 
 	 * @param will
 	 *            hold the value to be entered in the drop-down
 	 */
 	public void enterValueInStatusDropdown(String word) {
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown"))
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"))
 				.sendKeys(word);
 	}
 
-	/**
-	 * This method is used to change the city status drop-down value other than
-	 * default value
-	 */
-	public void changeCityStatusValue() {
-		String valuetobeSelected = "";
-		Select dropdown = new Select(
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown")));
-		for (WebElement option : dropdown.getOptions()) {
-			if (!option.isSelected()) {
-				valuetobeSelected = option.getAttribute("value");
-				break;
-			}
-		}
-		selectItemFromDropdownListByValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown"),
-				valuetobeSelected);
-
-	}
-
+	
 	/**
 	 * This method is used to check whether the driver stays on city edit page.
 	 */
 	public void verifyCityEditPageMode() {
 		assertTrue(getDriver()
-				.findElements(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown")).size() > 0);
+				.findElements(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath")).size() > 0);
 	}
 
-	/**
-	 * This method is to select the status from city status drop-down 
-	 * @param status
-	 */
 	public void selectCityStatusValue(String status) {
-		selectItemFromDropdownListByValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown"),
+		selectItemFromDropdownListByValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"),
 				status);
 	}
 
-	/**
-	 * This method is used to click the save button in edit page 
-	 * @return the DataPage
-	 */
 	public DataPage clickOnSaveButton() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("save_button_id"));
 		return new DataPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);

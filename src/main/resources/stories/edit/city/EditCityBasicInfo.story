@@ -82,7 +82,8 @@ Examples:
 Scenario: Edit and Save City's Status value in the City Basic Info page
 a) Veriy that the default value of status during edit matches with the status of the trusted document
 b) Upate the status with a new value and verify it is updated in zeus document
-c) verify that the status can be changed to all 3 values active,inactive and pending
+c) Upate the status with the same existing value and verify the existing value in zeus document
+d) verify that the status can be changed to all 3 values active,inactive and pending
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -95,13 +96,13 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
-Then the user should see the status value same as in trusted document
+Then the user should see the city status value same as in trusted document
 When the user gets the document with get document id for city with the <city> from the database
 When the user selects value as <status> from Status drop-down in the city basicinfo page
 And the user clicks on the save button in city page
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
-Then the user should see the <status> value as in zeus document
+Then the user should see the city <status> value as in zeus document
 Then the user reverts the changes to the document
 Examples:
 |country|area|city|status|
@@ -123,15 +124,14 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
-Then the user should see the status value same as in trusted document
+Then the user should see the city status value same as in trusted document
 When the user clicks on the save button in city page
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
-Then the user should see the <status> value as in zeus document
+Then the user should see the city <status> value as in zeus document
 Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|status|
 |USA|Georgia|Adel|active|
-
 

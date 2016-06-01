@@ -42,23 +42,18 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyStatusInDropdown(status);
 	}
 
-	@When("the user selects a non-default value from City Status drop-down in the City basicinfo page")
-	public void changeCityStatusValue() {
-		getEditCityPage().changeCityStatusValue();
-	}
-
 	@Then("the user should return to edit city page mode")
 	public void verifyCityEditPageMode() {
 		getEditCityPage().verifyCityEditPageMode();
 	}
 
-	@Then("the user should see the status value same as in $source document")
+	@Then("the user should see the city status value same as in $source document")
 	public void verifyCityStatusValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source) {
-		getEditCityPage().verifyCityStatusInfoFromTrustedDB(country, area, city, "status", source);
+		getEditCityPage().verifyCityInfoFromTrustedDB(country, area, city, "status", source);
 	}
 
-	@Then("the user should see the $status value as in $source document")
+	@Then("the user should see the city $status value as in $source document")
 	public void verifyCityStatusValueFromZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source, @Named("status") String status) {
 		getEditCityPage().verifyCityInfoFromZeusDB(country, area, city, "status", source, status);
@@ -79,6 +74,4 @@ public class EditCitySteps extends AbstractSteps {
 		getDataPage().getDocument(xqueryName, param);
 
 	}
-	
-		
 }
