@@ -10,7 +10,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.*;
-import org.openqa.selenium.net.LinuxEphemeralPortRangeDetector;
 import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
 
