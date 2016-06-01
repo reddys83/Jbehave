@@ -123,6 +123,14 @@ public class EditCityPage extends AbstractPage {
 		attemptClick(CityIdentifiers.getObjectIdentifier("save_button_id"));
 		return new DataPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
 	}
+	
+	public void verifyDifferentTextInTextArea(String addDifferentInfoText) {
+		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_added_text_xpath")).getText(), addDifferentInfoText);
+	}
+	
+	public void verifySameTextInTextArea(String addInfoText) {
+		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_added_text_xpath")).getText(), addInfoText);
+	}
 
 	@Override
 	public String getPageUrl() {

@@ -35,6 +35,16 @@ public class EditCitySteps extends AbstractSteps {
 	public void enterDifferentTextInCityAddInfo(@Named("addDifferentInfoText") String addDifferentInfoText) {
 		getEditCityPage().enterDifferentTextInCityAddInfo(addDifferentInfoText);
 	}
+	
+	@Then("the user should verify that <addDifferentInfoText> has been entered in the text area")
+	public void verifyDifferentTextInTextArea(@Named("addDifferentInfoText") String addDifferentInfoText) {
+		getEditCityPage().verifyDifferentTextInTextArea(addDifferentInfoText);
+	}
+	
+	@Then("the user should verify that same <addInfoText> has been entered in the text area")
+	public void verifySameTextInTextArea(@Named("addInfoText") String addInfoText) {
+		getEditCityPage().verifySameTextInTextArea(addInfoText);
+	}
 
 	@Then("the user should see the successful update message at top of the page")
 	public void verifySuccessfulUpdatedMessage() {
@@ -61,6 +71,12 @@ public class EditCitySteps extends AbstractSteps {
 	public void verifyCityAddInfoValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source, @Named("addInfoText") String addInfoText) {
 		getEditCityPage().verifyCityInfoFromDB(country, area, city, "additionalinfo", source, addInfoText);
+	}
+	
+	@Then("the user should see different $addDifferentInfoText value as in $source document")
+	public void verifyCityAddInfoDifferentValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source, @Named("addDifferentInfoText") String addDifferentInfoText) {
+		getEditCityPage().verifyCityInfoFromDB(country, area, city, "additionalinfo", source, addDifferentInfoText);
 	}
 
 	@When("the user gets the document with $xqueryName with the <city> from the database")
