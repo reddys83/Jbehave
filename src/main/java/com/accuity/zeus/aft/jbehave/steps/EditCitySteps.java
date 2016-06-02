@@ -75,7 +75,7 @@ public class EditCitySteps extends AbstractSteps {
 
 	}
 	
-	 @Then("the user should not see <ConfirmationSummary> message in the confirmation modal")
+	 @Then("the user should not see the <ConfirmationSummary> changes in confirmation modal")
 	    public void verifyNoChangeConfirmationMsg(@Named("ConfirmationSummary") String ConfirmationSummary) {
 		 getEditCityPage().verifyNoChangeConfirmationMsg(ConfirmationSummary);
 	 }
