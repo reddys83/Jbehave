@@ -7,7 +7,8 @@ import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.NameValuePair;
@@ -113,6 +114,15 @@ public class EditCityPage extends AbstractPage {
 				.sendKeys(word);
 	}
 
+	/**
+	 * This method is used to check there are no Confirmation Summary (no changes) in the confirmation modal
+	 * 
+	 * @param will
+	 *            check if the required confirmation changes message is not present in confirmation modal
+	 */
+	  public void verifyNoChangeConfirmationMsg(String ConfirmationSummary) {
+		  assertThat("Summary: Basic Info", is(not(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_status_confirmation_changes_xpath")).getText())));  
+	  }
 	
 	/**
 	 * This method is used to check whether the driver stays on city edit page.

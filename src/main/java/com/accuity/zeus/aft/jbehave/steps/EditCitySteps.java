@@ -74,4 +74,9 @@ public class EditCitySteps extends AbstractSteps {
 		getDataPage().getDocument(xqueryName, param);
 
 	}
+	
+	 @Then("the user should not see <ConfirmationSummary> message in the confirmation modal")
+	    public void verifyNoChangeConfirmationMsg(@Named("ConfirmationSummary") String ConfirmationSummary) {
+		 getEditCityPage().verifyNoChangeConfirmationMsg(ConfirmationSummary);
+	 }
 }
