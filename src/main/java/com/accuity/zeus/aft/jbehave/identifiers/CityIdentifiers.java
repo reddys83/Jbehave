@@ -14,6 +14,7 @@ public class CityIdentifiers {
 		hmap.put("city_save_confirmation_message_id", By.xpath(("//*[@id='saveSuccess']")));
 		hmap.put("city_addInfo_error_message_edit_xpath", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[10]/td/p[@data-error_id='addInfoError']"));		
 		hmap.put("save_button_id", By.xpath("//*[@id='save-button']"));
+		hmap.put("no_summary_confirmation_modal_xpath", By.xpath("//*[@id='modal-region']/div/div[1]/ul/li"));
 	}
 
 	public static By getObjectIdentifier(String key) {

@@ -26,21 +26,16 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().enterTextCityAddInfo(addInfoText);
 	}
 
+	@Then("the user reverts the changes to the add info text area")
+	public void clearAddInfoTextArea() {
+		getEditCityPage().clearAddInfoTextArea();
+	}
+
 	@Then("the user should be able to verify the values are entered in the add info field")
 	public void verifyTextInAddInfo() {
 		getEditCityPage().verifyTextInAddInfo();
 	}
 
-	@When("the user enters the <addDifferentInfoText> in the add info text area")
-	public void enterDifferentTextInCityAddInfo(@Named("addDifferentInfoText") String addDifferentInfoText) {
-		getEditCityPage().enterDifferentTextInCityAddInfo(addDifferentInfoText);
-	}
-	
-	@Then("the user should verify that <addDifferentInfoText> has been entered in the text area")
-	public void verifyDifferentTextInTextArea(@Named("addDifferentInfoText") String addDifferentInfoText) {
-		getEditCityPage().verifyDifferentTextInTextArea(addDifferentInfoText);
-	}
-	
 	@Then("the user should verify that same <addInfoText> has been entered in the text area")
 	public void verifySameTextInTextArea(@Named("addInfoText") String addInfoText) {
 		getEditCityPage().verifySameTextInTextArea(addInfoText);
@@ -72,12 +67,6 @@ public class EditCitySteps extends AbstractSteps {
 			@Named("city") String city, @Named("source") String source, @Named("addInfoText") String addInfoText) {
 		getEditCityPage().verifyCityInfoFromDB(country, area, city, "additionalinfo", source, addInfoText);
 	}
-	
-	@Then("the user should see different $addDifferentInfoText value as in $source document")
-	public void verifyCityAddInfoDifferentValueFromDB(@Named("country") String country, @Named("area") String area,
-			@Named("city") String city, @Named("source") String source, @Named("addDifferentInfoText") String addDifferentInfoText) {
-		getEditCityPage().verifyCityInfoFromDB(country, area, city, "additionalinfo", source, addDifferentInfoText);
-	}
 
 	@When("the user gets the document with $xqueryName with the <city> from the database")
 	public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("city") String param) {
@@ -85,9 +74,29 @@ public class EditCitySteps extends AbstractSteps {
 
 	}
 
+	@When("the user gets the value already present in the text box")
+	public void getTextInTextArea() {
+		getEditCityPage().getTextInTextArea();
+	}
+
 	@When("the user clicks on the save button in city page")
 	public void clickOnSaveButton() {
 		getEditCityPage().clickOnSaveButton();
+	}
+
+	@Then("the user verifies whether the new value <addInfoText> is different from previous value")
+	public void newValueCheck(@Named("addInfoText") String addInfoText) {
+		getEditCityPage().newValueCheck(addInfoText);
+	}
+
+	@Then("the user should see no summary changes in the save confirmation modal")
+	public void verifyNoSummaryInConfirmationModal() {
+		getEditCityPage().verifyNoSummaryInConfirmationModal();
+	}
+
+	@Then("the user should be able to view that only 500 unicode characters are saved")
+	public void viewValidCharacterLength() {
+		getEditCityPage().viewValidCharacterLength();
 	}
 
 }
