@@ -121,7 +121,7 @@ public class EditCityPage extends AbstractPage {
 	 *            check if the required confirmation changes message is not present in confirmation modal
 	 */
 	  public void verifyNoChangeConfirmationMsg(String ConfirmationSummary) {
-		  assertThat("Summary: Basic Info", is(not(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_status_confirmation_changes_xpath")).getText())));  
+		  assertThat(ConfirmationSummary, is(not(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_status_confirmation_changes_xpath")).getText())));  
 	  }
 	
 	/**
