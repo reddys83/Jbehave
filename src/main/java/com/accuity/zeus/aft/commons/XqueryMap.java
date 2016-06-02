@@ -79,6 +79,7 @@ public class XqueryMap {
         queryMap.put("get data from lookup table","getValueFromLookupTable.xqy");
 
         queryMap.put("get country related entities","getCountryRelatedEntities.xqy");
+        queryMap.put("verify trust power section display","checkConditionForTrustPowersSection.xqy");
    }
 
     public String getXquery(String key){
