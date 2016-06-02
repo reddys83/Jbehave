@@ -19,14 +19,11 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 And the user clicks on the city update link
-When the user deletes the existing identifier rows
-When the user gets the document with get document id for city with the <city> from the database
 When the user clicks on the add new identifier button in the basic info city page
 And the user clicks on the city Identifier type drop-down
 Then the user should see the city identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO
 When the user clicks on the city Identifier status drop-down
 Then the user should see the city identifier status from lookup STATUS
-Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|
@@ -137,7 +134,6 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 And the user clicks on the city update link
-When the user gets the document with get document id for city with the <city> from the database
 When the user clicks on the add new identifier button in the basic info city page
 When the user clicks on the delete identifier row button in the basic info city page
 Then the user should see delete row confirmation modal in the city page
@@ -161,7 +157,6 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 And the user clicks on the city update link
-When the user gets the document with get document id for city with the <city> from the database
 When the user clicks on the add new identifier button in the basic info city page
 When the user clicks on the delete identifier row button in the basic info city page
 Then the user should see delete row confirmation modal in the city page
