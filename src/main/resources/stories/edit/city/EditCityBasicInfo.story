@@ -75,8 +75,8 @@ Then the user should see the successful update message at top of the page
 Then the user should see no summary changes in the save confirmation modal
 
 Examples:
-|country|area|city|addInfoText|value|
-|Afghanistan|Badakshan|Panj Shair|This is a different text| |
+|country|area|city|addInfoText|
+|Afghanistan|Badakshan|Panj Shair|This is a different text|
 
 Scenario: To view whether the text entered in the 'Add Info' field is not beyond 500 unicode characters after saving
 Given a user is on the search page
