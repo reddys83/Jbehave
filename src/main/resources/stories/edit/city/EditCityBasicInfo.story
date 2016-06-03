@@ -23,13 +23,17 @@ When the user gets the document with get document id for city with the <city> fr
 When the user enters the <value> in the population field
 When the user clicks on the save button in city page
 And the user clicks on the confirm button
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+
 Then the user should see the successful update message at top of the page
 Then the user should see the new population <value> in City page
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|city|previousValue|value|
-|Afghanistan|Badakshan|Panj Shair|15|10|
+|country|area|city|previousValue|value|Summary|
+|Afghanistan|Badakshan|Panj Shair|15|10|Basic Info|
 
 Scenario: User is updating a City's Basic Info and has entered a value for 'Population' that is no different to the current value
 Given a user is on the search page
