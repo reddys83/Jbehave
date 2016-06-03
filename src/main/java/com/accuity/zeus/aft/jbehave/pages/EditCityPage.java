@@ -7,7 +7,6 @@ import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
@@ -54,22 +53,6 @@ public class EditCityPage extends AbstractPage {
 
 	}
 
-	/**
-	 * This method is to generate a random numeric number in specified range
-	 * @param limit
-	 * @return the generated random number
-	 */
-	public String getRandomNumericString(int limit) {
-		int randomNum = 0;
-		String randomString = "";
-		Random ran = new Random();
-		for(int index =0 ; index < limit ; index++)
-		{
-			randomNum = ran.nextInt(9);
-			randomString += randomNum;
-		}	    	
-		return randomString;
-	}
 
 	/**
 	 * This method is to enter the random number of range (50) in population field
@@ -159,7 +142,16 @@ public class EditCityPage extends AbstractPage {
 			String valueTobeverifed) {
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), valueTobeverifed);
 	}
-
+    
+	/**This method is to verify the specified value is displayed in the population field
+	 * @param value
+	 */
+	public void verifyPopulationValueCityPage(String value) {
+			assertEquals(getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("city_population_xpath")).getText(),value);
+	}
+	
+	
 	public DataPage clickOnSaveButton() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("save_button_id"));
 		return new DataPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);

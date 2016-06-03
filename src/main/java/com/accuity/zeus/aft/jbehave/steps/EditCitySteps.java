@@ -78,5 +78,10 @@ public class EditCitySteps extends AbstractSteps {
 	public void clickOnSaveButton() {
 		getDataPage().clickOnSaveButton();
 	}
+	
+	@Then("the user should see the new population <value> in City page")
+	public void verifyPopulationValueCityPage(@Named("value") String value) {
+		getEditCityPage().verifyPopulationValueCityPage(value);
+	}
 
 }

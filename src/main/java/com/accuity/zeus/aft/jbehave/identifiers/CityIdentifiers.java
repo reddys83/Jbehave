@@ -12,7 +12,8 @@ public class CityIdentifiers {
 		hmap.put("city_population_input_id", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[8]/td/input"));	
 		hmap.put("city_save_confirmation_message_id", By.xpath("//p[@id='saveSuccess']"));				
 		hmap.put("save_button_id",By.xpath("//button[@id='save-button']"));
-		hmap.put("city_population_error_message_id", By.xpath("//li[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[8]/td/p"));		
+		hmap.put("city_population_error_message_id", By.xpath("//li[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[8]/td/p[data-error_id='populationError']"));		
+	    hmap.put("city_population_xpath", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[8]/td"));
 	}
 
 	public static By getObjectIdentifier(String key) {
