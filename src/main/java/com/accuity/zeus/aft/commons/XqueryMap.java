@@ -77,7 +77,7 @@ public class XqueryMap {
         queryMap.put("load test data for Currency","loadTestDataCurrency.xqy");
         queryMap.put("load test data for sub area Cook","loadTestDataSubAreaCook.xqy");
         queryMap.put("get data from lookup table","getValueFromLookupTable.xqy");
-
+        queryMap.put("get LegalEntity statistics flag","getLegalEntityStatisticsFlag.xqy");
         queryMap.put("get country related entities","getCountryRelatedEntities.xqy");
    }
 
