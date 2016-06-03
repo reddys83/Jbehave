@@ -8,15 +8,11 @@ import com.accuity.zeus.aft.rest.RestClient;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.w3c.dom.Document;
 
 public class EditCityPage extends AbstractPage {
@@ -30,9 +26,20 @@ public class EditCityPage extends AbstractPage {
 	String text = "";
 	Integer len = null;
 
-	public void verifyTextInAddInfo() {
-		assertTrue(
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).isDisplayed());
+	public void verifyTextInAddInfo(String addInfoText) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals(addInfoText, getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_add_info_xpath_after_save")).getText());
+
+	}
+
+	public void verifyMaximumChracterEnteredInAddInfo() {
+		assertEquals(addInfoMaximumCharacterString.subSequence(0, 500), getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_add_info_xpath_after_save")).getText());
 	}
 
 	public void enterTextCityAddInfo(String addInfoText) {
@@ -50,6 +57,8 @@ public class EditCityPage extends AbstractPage {
 
 	}
 
+	String addInfoMaximumCharacterString = null;
+
 	public void enterInvalidCharactersInCityAddInfo() {
 		char c = 'a';
 		String invalidData = "";
@@ -58,6 +67,7 @@ public class EditCityPage extends AbstractPage {
 		}
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).clear();
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).sendKeys(invalidData);
+		addInfoMaximumCharacterString = invalidData;
 	}
 
 	public void verifyErrorMessageInCityAddInfo() {
@@ -140,16 +150,6 @@ public class EditCityPage extends AbstractPage {
 		assertNotEquals(prevText, addInfoText);
 	}
 
-	public void verifyNoSummaryInConfirmationModal() {
-		try {
-			assertFalse(
-					getDriver().findElement(CityIdentifiers.getObjectIdentifier("no_summary_confirmation_modal_xpath"))
-							.isDisplayed());
-		} catch (NoSuchElementException e) {
-
-		}
-	}
-
 	public void clearAddInfoTextArea() {
 		clearValue(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath"));
 	}
@@ -159,9 +159,27 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public void viewValidCharacterLength() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 		text = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_added_text_xpath")).getText();
 		len = text.length();
 		assertEquals(len.toString(), "500");
+	}
+
+	public void verifyNoSummaryConfirmationModal(String summaryText) {
+		try {
+			WebElement confirmChanges = getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
+			String confirmationText = confirmChanges.getText();
+			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
+		} catch (Exception e) {
+			assertTrue(true);
+		}
+
 	}
 
 	@Override

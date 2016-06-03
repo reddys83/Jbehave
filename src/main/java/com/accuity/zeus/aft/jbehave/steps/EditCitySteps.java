@@ -32,8 +32,13 @@ public class EditCitySteps extends AbstractSteps {
 	}
 
 	@Then("the user should be able to verify the values are entered in the add info field")
-	public void verifyTextInAddInfo() {
-		getEditCityPage().verifyTextInAddInfo();
+	public void verifyTextInAddInfo(@Named("addInfoText") String addInfoText) {
+		getEditCityPage().verifyTextInAddInfo(addInfoText);
+	}
+	
+	@Then("the user should be able to verify the maximum values are entered in the add info field")
+	public void verifyMaximumTextInAddInfo() {
+		getEditCityPage().verifyMaximumChracterEnteredInAddInfo();
 	}
 
 	@Then("the user should verify that same <addInfoText> has been entered in the text area")
@@ -89,9 +94,9 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().newValueCheck(addInfoText);
 	}
 
-	@Then("the user should see no summary changes in the save confirmation modal")
-	public void verifyNoSummaryInConfirmationModal() {
-		getEditCityPage().verifyNoSummaryInConfirmationModal();
+	@Then("the user should see no summary changes in the city save confirmation modal")
+	public void verifyNoSummaryInConfirmationModal(@Named("Summary") String summaryText) {
+		getEditCityPage().verifyNoSummaryConfirmationModal(summaryText);
 	}
 
 	@Then("the user should be able to view that only 500 unicode characters are saved")
