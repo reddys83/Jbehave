@@ -855,4 +855,11 @@ public class DataSteps extends AbstractSteps {
             getDataPage().loadDocument(xqueryName);
 
         }
+    @When("the user clicks on the area related place link $relatedPlace")
+    public void clickOnAreaRelatedPlace(@Named("relatedPlace") String relatedPlace) {
+        getDataPage().clickOnAreaRelatedPlace(relatedPlace);
+    }
+
+    @When("the user clicks on the Country link in the area basic info")
+    public void clickOnCountryLink(){ getDataPage().clickOnCountryLink();}
 }
