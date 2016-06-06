@@ -78,8 +78,12 @@ public class XqueryMap {
         queryMap.put("load test data for Currency","loadTestDataCurrency.xqy");
         queryMap.put("load test data for sub area Cook","loadTestDataSubAreaCook.xqy");
         queryMap.put("get data from lookup table","getValueFromLookupTable.xqy");
-
         queryMap.put("get country related entities","getCountryRelatedEntities.xqy");
+        queryMap.put("get city basic info","getCityBasicInfo.xqy");
+        queryMap.put("get document id for city","getIdForCity.xqy");
+        queryMap.put("get city identifiers", "getCountryIdentifiers.xqy");
+        queryMap.put("get Status types","getCityStatusTypes.xqy");
+        
    }
 
     public String getXquery(String key){
