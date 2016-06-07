@@ -1,4 +1,4 @@
-Meta:@EditLegalEntityBasicInfo @Edit @LegalEntity
+Meta:@EditLegalEntityBasicInfo @Edit @LegalEntity @AllStories
 
 Narrative:
 As a user
@@ -51,7 +51,7 @@ Examples:
 |1038|FID|1038|false|
 |1165|FID|1165|true|
 |1165|FID|1165|false|
-|1165|FID|1165||
+
 
 Scenario: Verify that the Lead Institution label is not shown during edit mode for a legal entity which do not have a lead Institution
 Given a user is on the search page
@@ -313,7 +313,7 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the legalEntity update link
-And the user clicks on the Fatca Status drop-down in the basicinfo legalentity page
+And the user clicks on the legalEntity_basicInfo_fatcastatus_list_xpath in the basicinfo legalentity page
 Then the user should see the Fatca status values from lookup LEGAL_ENTITY_FATCA_STATUS
 
 Examples:
@@ -553,7 +553,7 @@ Examples:
 |1165|FID|1165|
 
 Scenario: Verify for an existing row, Legal Entity's Entity Type dropdown values from lookup LEGAL_ENTITY_CATEGORY in the same order as taxonomy except those that have already been selected for this Legal Entity
-
+Meta:@runme
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area

@@ -8,6 +8,7 @@ import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.commons.collections.ListUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
@@ -28,6 +29,9 @@ public class EditLegalEntityPage extends AbstractPage {
     private String editLegalEntityNameValue = "";
     public String EditLegalEntityLocationsType = "";
     public String EditLegalEntityLocationsValue = "";
+    public String EditLegalEntityBoardMeetingsType="";
+    public String EditLegalEntityBoardMeetingValue="";
+    public String EditLEgalEntityBoardmeetingSummary="";
 
 
     public EditLegalEntityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
@@ -63,12 +67,12 @@ public class EditLegalEntityPage extends AbstractPage {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
         try {
-            Thread.sleep(2000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
         String leadInstitutionDBValue = getNodeValuesByTagName(document, "leadInstitution").size() == 0 ? "" : getNodeValuesByTagName(document, "leadInstitution").get(0);
         return leadInstitutionDBValue;
     }
@@ -78,7 +82,13 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyLeadInstitutionValuefromDB(String leadInstitutionflag, String selectedEntity, String source) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals(getLeadInstitutionFlagFromDB(selectedEntity, source), leadInstitutionflag);
+
     }
 
     public void verifyNoLeadInstitution() {
@@ -90,7 +100,7 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyLegalEntityEditPageMode() {
-        assertTrue(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_leadinstitution_radio_options_xpath")).size() > 0);
+        assertTrue(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_status_dropdown_xpath")).size()>0);
     }
 
     public void clickOnAddNewEntityTypeButton() {
@@ -399,20 +409,25 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyUpdatedCharterTypeBothDocs(String fid) {
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals(document.getElementsByTagName("charterType").item(0).getTextContent(), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_CharterType_view_xpath")).getText());
         List<NameValuePair> zeusPairs = new ArrayList<>();
         zeusPairs.add(new BasicNameValuePair("fid", fid));
         zeusPairs.add(new BasicNameValuePair("source", "zeus"));
         document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", zeusPairs);
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals(document.getElementsByTagName("charterType").item(0).getTextContent(), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_CharterType_view_xpath")).getText());
     }
 
@@ -812,6 +827,31 @@ public class EditLegalEntityPage extends AbstractPage {
         attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_locations_summary_type_edit_xpath"));
     }
 
+    public void clickOnLegalEntityBoardMeetingsTypeDropdown(String webElement) {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier(webElement));
+    }
+
+    public void clickOnLegalEntityBoardMeetingsValueDropdown(String webElement) {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier(webElement));
+    }
+
+    public void verifyLegalEntityBoardMeetingType(ExamplesTable boardMeetingType) {
+        assertEquals("BOARD MEETINGS", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_label_xpath")).getText());
+        List<WebElement> types = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_type_dropdown_options_xpath"));
+        for (int i=0; i<boardMeetingType.getRowCount();i++)
+        {
+            assertEquals(boardMeetingType.getRow(i).get(boardMeetingType.getHeaders().get(0)),types.get(i+1).getText());
+        }
+    }
+
+    public void verifyLegalEntityBoardMeetingValue(ExamplesTable boardMeetingValue) {
+        List<WebElement> values = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_value_dropdown_options_xpath"));
+        for (int i=0; i<boardMeetingValue.getRowCount();i++)
+        {
+            assertEquals(boardMeetingValue.getRow(i).get(boardMeetingValue.getHeaders().get(0)),values.get(i+1).getText());
+        }
+    }
+
     public void verifyLegalEntityLocationsTypeValues() {
         List<WebElement> legalEntityLocationType = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_locations_summary_type_dropdown_edit_xpath"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "getLegalEntityLocationSummaryTypesFromLookup.xqy");
@@ -822,6 +862,43 @@ public class EditLegalEntityPage extends AbstractPage {
 
     public void clickNewLegalEntityLocations() {
         attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_new_locations_summary_id"));
+    }
+
+    public void clickNewLegalEntityBoardMeetings() {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_add_button_id"));
+    }
+
+    public void enterSummaryInLegalEntityBoardMeeting(String summary) {
+        EditLEgalEntityBoardmeetingSummary= summary;
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_summary_xpath")).clear();
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_summary_xpath")).sendKeys(summary);
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_summary_xpath")).sendKeys(Keys.RETURN);
+    }
+
+    public void selectsTypeInLegalEntityBoardMeeting(String type, String webElement) {
+        EditLegalEntityBoardMeetingsType = type;
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier(webElement));
+        List<WebElement> options = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_type_dropdown_options_xpath"));
+        for (WebElement option : options) {
+            if (option.getText().contains(type)) {
+                getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(webElement)).click();
+                option.click();
+                break;
+            }
+        }
+    }
+
+    public void selectsValueInLegalEntityBoardMeeting(String value, String webElement) {
+        EditLegalEntityBoardMeetingValue = value;
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier(webElement));
+        List<WebElement> options = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_value_dropdown_options_xpath"));
+        for (WebElement option : options) {
+            if (option.getText().contains(value)) {
+                getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(webElement)).click();
+                option.click();
+                break;
+            }
+        }
     }
 
     public void selectsTypeInLegalEntityLocationSummary(String type) {
@@ -851,6 +928,21 @@ public class EditLegalEntityPage extends AbstractPage {
         assertTrue(getNodeValuesByTagName(document, "value").contains(EditLegalEntityLocationsValue));
     }
 
+    public void verifyLegalEntityBoardMeetingInZeus(String fid) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity BoardMeeting", nvPairs);
+        assertTrue(getNodeValuesByTagName(document, "summary").contains(EditLEgalEntityBoardmeetingSummary));
+        assertTrue(getNodeValuesByTagName(document, "type").contains(EditLegalEntityBoardMeetingsType));
+        assertTrue(getNodeValuesByTagName(document, "value").contains(EditLegalEntityBoardMeetingValue));
+    }
+
     public void entersLegalEntityValueInLocationSummary(String value) {
         EditLegalEntityLocationsValue = value;
         clearAndEnterValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_locations_summary_value_edit_xpath"), value);
@@ -858,6 +950,12 @@ public class EditLegalEntityPage extends AbstractPage {
 
     public void verifyRequiredErrorMessageForTypeInLegalEntityLocations() {
         assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_location_type_error_message_xpath")).getText(), "Required");
+    }
+
+    public void enterInvalidCharactersInLegalEntityBoardMeetingSummary() {
+        String strBigString = createBigString(10001);
+        modifyHtmlByName(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_summary_xpath"), "maxlength", "");
+        clearAndEnterValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_summary_xpath"), strBigString);
     }
 
     public void enterInvalidCharactersInLegalEntityLocationsValue() {
@@ -868,6 +966,14 @@ public class EditLegalEntityPage extends AbstractPage {
 
     public void verifyErrorMessageForInvalidCharacter() {
         assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_location_value_error_message_xpath")).getText(), "Enter up to 10000 valid characters.");
+    }
+
+    public void verifyErrorMessageForLegalEntitySummaryBoardMeeting() {
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_summary_error_message_xpath")).getText(),"Enter up to 10000 valid characters.");
+    }
+
+    public void verifyDuplicateErrorMessageForLegalEntityBoardMeeting() {
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeeting_duplicate_error_message_xpath")).getText(),"Duplicate Board Meeting");
     }
 
     public void clickOnDeleteButtonInLegalEntityLocationSummary() {

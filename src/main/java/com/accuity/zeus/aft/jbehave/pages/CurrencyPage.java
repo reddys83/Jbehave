@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.CurrencyIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -83,6 +84,7 @@ public class CurrencyPage extends AbstractPage {
     private By currency_delete_yes_button_id= By.id("yes-button");
 
 
+
     private String editedCurrencyName="";
     private String editedCurrencyAbbr="";
     private String editedCurrencyUnit="";
@@ -100,6 +102,8 @@ public class CurrencyPage extends AbstractPage {
     public CurrencyPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
+
+
 
     @Override
     public String getPageUrl() {
@@ -314,7 +318,7 @@ public class CurrencyPage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("name", selectedCurrency));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
         try {
-            Thread.sleep(3000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -541,9 +545,9 @@ public class CurrencyPage extends AbstractPage {
         getDriver().findElement(currency_use_table_endDate_year_edit_xpath).sendKeys(currencyEndYear);
     }
 
-    public void enterCurrencyPrimary(String primary) {
+    public void enterCurrencyPrimary(String rowIdentifier,String primary) {
         editedCurrencyPrimary=primary;
-        getDriver().findElement(By.xpath(currency_use_table_primary_edit_xpath+"/input[@value='"+editedCurrencyPrimary.toLowerCase()+"']")).click();
+        selectRadioButtonByValue(CurrencyIdentifiers.getObjectIdentifier(rowIdentifier),primary);
     }
 
     public void enterCurrencyReplacedBy(String replacedBy) {
@@ -668,5 +672,16 @@ public class CurrencyPage extends AbstractPage {
             assertFalse(getDriver().findElement(currency_new_use_table_startDate_year_edit_xpath).isDisplayed());
         } catch (NoSuchElementException e) {
         }
+    }
+
+    public void verifyDuplicatePrimaryCurrencyErrorMessage(String duplicatePrimaryError,String duplicateErrorMsg, int numberOfRows){
+
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(getDriver().findElements(CurrencyIdentifiers.getObjectIdentifier(duplicatePrimaryError)).size(),numberOfRows);
+        assertEquals(duplicateErrorMsg, getDriver().findElement(CurrencyIdentifiers.getObjectIdentifier(duplicatePrimaryError)).getText());
     }
 }

@@ -1,4 +1,4 @@
-Meta:@OfficeLocations @Office @View
+Meta:@OfficeLocations @Office @View @AllStories
 
 Narrative:
 As a user

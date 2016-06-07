@@ -1,4 +1,4 @@
-Meta:@OfficeSearchResultsSorting @Office @View
+Meta:@OfficeSearchResultsSorting @Office @View @AllStories
 
 Narrative:
 As a user

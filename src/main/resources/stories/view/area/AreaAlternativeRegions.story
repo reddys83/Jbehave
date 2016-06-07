@@ -1,4 +1,4 @@
-Meta:@AreaAlternativeRegions @Area @View
+Meta:@AreaAlternativeRegions @Area @View @AllStories
 
 Narrative:
 In order to view and edit the currencies

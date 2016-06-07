@@ -1,4 +1,4 @@
-Meta:@ViewCountryRelatedPeople @Country @View
+Meta:@ViewCountryRelatedPeople @Country @View @AllStories
 
 Narrative:
 In order to view and edit the people information

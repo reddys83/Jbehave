@@ -1,4 +1,4 @@
-Meta:@ViewCountryHolidays @Country @View
+Meta:@ViewCountryHolidays @Country @View @AllStories
 
 Narrative:
 In order to view and edit the currencies

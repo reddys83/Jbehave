@@ -1,4 +1,4 @@
-Meta:@CityRelatedPlaces @City @View
+Meta:@CityRelatedPlaces @City @View @AllStories
 
 Narrative:
 In order to view the city related places

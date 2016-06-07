@@ -1,4 +1,4 @@
-Meta:@AreaCreditRatings @Area @View
+Meta:@AreaCreditRatings @Area @View @AllStories
 
 Narrative:
 In order to view and edit the currencies

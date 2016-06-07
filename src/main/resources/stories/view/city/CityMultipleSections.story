@@ -1,4 +1,4 @@
-Meta:@CityMultipleSections @City @View
+Meta:@CityMultipleSections @City @View @AllStories
 
 Narrative:
 In order to view and edit the city
