@@ -69,6 +69,8 @@ And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
 Then the user should not see the legal entity statistics for fid <fid>
+When the user clicks on the legal entity all link in the navigation bar
+Then the user should not see the legal entity statistics for fid <fid>
 
 Examples:
 |entity|searchBy|fid|
