@@ -143,6 +143,25 @@ public class LegalEntityPage extends AbstractPage {
         attemptClick(legalEntity_statistics_link_id);
     }
 
+    public void verifyStatisticsInLegalEntity(String fid) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity statistics flag", nvPairs);
+        if(getNodeValuesByTagName(document, "flag").get(0).equals("true")) {
+            assertTrue(getDriver().findElement(legalEntity_statistics_link_id).isDisplayed());
+        }
+        else
+        {
+            assertFalse(getDriver().findElement(legalEntity_statistics_link_id).isDisplayed());
+        }
+    }
+
     public void clickOnLegalEntityTrustPowers() {
         attemptClick(legalEntity_trustPowers_link_id);
     }
