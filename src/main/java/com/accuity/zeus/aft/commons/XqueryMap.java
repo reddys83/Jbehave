@@ -83,7 +83,7 @@ public class XqueryMap {
         queryMap.put("get document id for city","getIdForCity.xqy");
         queryMap.put("get city identifiers", "getCountryIdentifiers.xqy");
         queryMap.put("get Status types","getCityStatusTypes.xqy");
-        
+		queryMap.put("get city Status types","getCityStatusTypes.xqy"); 
    }
 
     public String getXquery(String key){
