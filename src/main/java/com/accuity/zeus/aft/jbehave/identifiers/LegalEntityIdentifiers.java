@@ -85,6 +85,13 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_first_row_existing_creditrating_Agency_ConfirmedDateDay",By.xpath("//*[@id='additionalCreditRatings']//tr[1]//input[@name='creditRatingConfirmedDate-day']"));
         hmap.put("legalEntity_first_row_existing_creditrating_Agency_ConfirmedDateMonth",By.xpath("//*[@id='additionalCreditRatings']//tr[1]//select[@name='creditRatingConfirmedDate-month']"));
         hmap.put("legalEntity_first_row_existing_creditrating_Agency_ConfirmedDateYear",By.xpath("//*[@id='additionalCreditRatings']//tr[1]//input[@name='creditRatingConfirmedDate-year']"));
+        hmap.put("legalEntity_first_row_new_creditrating_Agency_Value",By.xpath("//*[@id='additionalCreditRatings']//tr[@class='new'][1]//input[@name='creditRatingValue']"));
+        hmap.put("legalEntity_first_row_new_creditrating_Agency_AppliedDateDay",By.xpath("//*[@id='additionalCreditRatings']//tr[@class='new'][1]//input[@name='creditRatingAppliedDate-day']"));
+        hmap.put("legalEntity_first_row_new_creditrating_Agency_AppliedDateMonth",By.xpath("//*[@id='additionalCreditRatings']//tr[@class='new'][1]//select[@name='creditRatingAppliedDate-month']"));
+        hmap.put("legalEntity_first_row_new_creditrating_Agency_AppliedDateYear",By.xpath("//*[@id='additionalCreditRatings']//tr[@class='new'][1]//input[@name='creditRatingAppliedDate-year']"));
+        hmap.put("legalEntity_first_row_new_creditrating_Agency_ConfirmedDateDay",By.xpath("//*[@id='additionalCreditRatings']//tr[@class='new'][1]//input[@name='creditRatingConfirmedDate-day']"));
+        hmap.put("legalEntity_first_row_new_creditrating_Agency_ConfirmedDateMonth",By.xpath("//*[@id='additionalCreditRatings']//tr[@class='new'][1]//select[@name='creditRatingConfirmedDate-month']"));
+        hmap.put("legalEntity_first_row_new_creditrating_Agency_ConfirmedDateYear",By.xpath("//*[@id='additionalCreditRatings']//tr[@class='new'][1]//input[@name='creditRatingConfirmedDate-year']"));
     }
 
 

@@ -34,10 +34,10 @@ Examples:
 |1717|FID|1717|
 
 Scenario: Update and Save existing credit ratings
-a) Select a non-Blank value and Save. Verify the value is saved in Zeus document
-b) Select a null value and Save. Verify that null value is not saved.
+a) User selects a new value for Agency, Type, Value, Applied Date and Confirmed Date and click Save. Updated Credit rating should be saved in Zeus document
+b) User selects a new value for Agency, Type, Value and no values for Applied Date and Confirmed Date and click Save. Updated Credit rating should be saved in Zeus document
 
-Meta:@runme1
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -66,7 +66,46 @@ Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|agencyName|type|value|AppliedDateDay|AppliedDateMonth|AppliedDateYear|ConfirmedDateDay|ConfirmedDateMonth|ConfirmedDateYear|
+|1165|FID|1165|Standard & Poors|Short Term Rating|B-|||||||
 |1165|FID|1165|Standard & Poors|Short Term Rating|B-|7|Oct|2014|9|Mar|2016|
+
+
+Scenario: Update and Save existing credit ratings
+a) User selects a new value for Agency, Type, Value, Applied Date and Confirmed Date and click Save. Updated Credit rating should be saved in Zeus document
+b) User selects a new value for Agency, Type, Value and no values for Applied Date and Confirmed Date and click Save. Updated Credit rating should be saved in Zeus document
+
+Meta:@runme1
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the legal entity credit rating link in the navigation bar
+And the user clicks on the legalEntity update link
+When the user gets the document with get Id for legalentity with the fid as <entity> from the database
+And the user clicks on add new credit rating button in the credit rating legal Entity page
+And the user selects agency legalEntity_first_row_new_creditrating_Agency_dropdown value as <agencyName>
+And the user selects agency type legalEntity_first_row_new_creditrating_Type_dropdown value as <type>
+And the user enters agency value legalEntity_first_row_new_creditrating_Agency_Value value as <value>
+And the user enters agency AppliedDate day legalEntity_first_row_new_creditrating_Agency_AppliedDateDay value as <AppliedDateDay>
+And the user selects agency AppliedDate month legalEntity_first_row_new_creditrating_Agency_AppliedDateMonth value as <AppliedDateMonth>
+And the user enters agency AppliedDate year legalEntity_first_row_new_creditrating_Agency_AppliedDateYear value as <AppliedDateYear>
+And the user enters agency ConfirmedDate day legalEntity_first_row_new_creditrating_Agency_ConfirmedDateDay value as <ConfirmedDateDay>
+And the user selects agency ConfirmedDate month legalEntity_first_row_new_creditrating_Agency_ConfirmedDateMonth value as <ConfirmedDateMonth>
+And the user enters agency ConfirmedDate year legalEntity_first_row_new_creditrating_Agency_ConfirmedDateYear value as <ConfirmedDateYear>
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see creditratings values as <agencyName><type><value><AppliedDateDay><AppliedDateMonth><AppliedDateYear><ConfirmedDateDay><ConfirmedDateMonth><ConfirmedDateYear> for fid <fid> in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|agencyName|type|value|AppliedDateDay|AppliedDateMonth|AppliedDateYear|ConfirmedDateDay|ConfirmedDateMonth|ConfirmedDateYear|
+|1165|FID|1165|Standard & Poors|Short Term Rating|B-|||||||
+|1165|FID|1165|Standard & Poors|Short Term Rating|B-|7|Oct|2014|9|Mar|2016|
+
 
 Scenario: Add a new legal entity type row and Save
 a) Select a non-Blank value and Save. Verify the value is saved in Zeus document

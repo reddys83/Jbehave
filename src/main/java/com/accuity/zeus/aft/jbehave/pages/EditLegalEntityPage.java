@@ -162,13 +162,18 @@ public class EditLegalEntityPage extends AbstractPage {
                 assertEquals(agencyNameList.get(i),(new Select(agencyName)).getFirstSelectedOption().getText());
                 assertEquals(typeList.get(i),(new Select(type)).getFirstSelectedOption().getText());
                 assertEquals(valueList.get(i),value.getAttribute("value"));
-                assertEquals(dateAppliedList.get(i).toString().replace(" ",""),appliedDateDay.getAttribute("value")+(new Select(appliedDateMonth)).getFirstSelectedOption().getText()+appliedDateYear.getAttribute("value"));
-                String confirmedDateDaystring=confirmedDateDay.getAttribute("value")+(new Select(confirmedDateMonth)).getFirstSelectedOption().getText()+confirmedDateYear.getAttribute("value");
-                if(confirmedDateDaystring.equals(" "))
+                String appliedDatestring=appliedDateDay.getAttribute("value")+(new Select(appliedDateMonth)).getFirstSelectedOption().getText()+appliedDateYear.getAttribute("value");
+                if(appliedDatestring.equals(" "))
                 {
-                    confirmedDateDaystring="null";
+                    appliedDatestring="null";
                 }
-                assertEquals(dateConfirmedList.get(i).toString().replace(" ",""),confirmedDateDaystring);
+                assertEquals(dateAppliedList.get(i).toString().replace(" ",""),appliedDatestring);
+                String confirmedDatestring=confirmedDateDay.getAttribute("value")+(new Select(confirmedDateMonth)).getFirstSelectedOption().getText()+confirmedDateYear.getAttribute("value");
+                if(confirmedDatestring.equals(" "))
+                {
+                    confirmedDatestring="null";
+                }
+                assertEquals(dateConfirmedList.get(i).toString().replace(" ",""),confirmedDatestring);
             }
         }
 
