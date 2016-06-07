@@ -232,4 +232,25 @@ public class LegalEntitySteps extends AbstractSteps {
         getLegalEntityPage().clickOnLegalEntityBasicInfo();
     }
 
+    @Then("the user should see the trust power section visible for fid <fid>")
+    public void checkTrustPowerSectionExists(@Named("fid") String fid ){
+        getLegalEntityPage().checkTrustPowerSectionExists(fid);
+    }
+
+    @Then("the user should see the trust power section not visible for fid <fid>")
+    public void checkTrustPowerSectionNotExists(@Named("fid") String fid ){
+        getLegalEntityPage().checkTrustPowerSectionNotExists(fid);
+    }
+
+    @Then("the user should see the trust power section in the All page of the legal Entity page")
+    public void verifyTrustPowerSectionExistsInAllPage()
+    {
+        getLegalEntityPage().verifyTrustPowerSectionExistsInAllPage();
+    }
+
+    @Then("the user should not see the trust power section in the All page of the legal Entity page")
+    public void verifyTrustPowerSectionNotExistsInAllPage()
+    {
+        getLegalEntityPage().verifyTrustPowerSectionNotExistsInAllPage();
+    }
 }

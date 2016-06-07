@@ -433,6 +433,57 @@ public class LegalEntityPage extends AbstractPage {
 
     }
 
+    public void checkTrustPowerSectionExists(String fid){
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "verify trust power section display", nvPairs);
+        if(getNodeValuesByTagName(document, "flag").get(0).equals("true")) {
+            assertTrue(getDriver().findElement(legalEntity_trustPowers_link_id).isDisplayed());
+        }
+        else
+        {
+            assertFalse("Data Error...Please correct the data",true);
+        }
+
+    }
+
+    public void checkTrustPowerSectionNotExists(String fid){
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "verify trust power section display", nvPairs);
+        if(getNodeValuesByTagName(document, "flag").get(0).equals("false")) {
+            assertFalse(getDriver().findElement(legalEntity_trustPowers_link_id).isDisplayed());
+        }
+        else
+        {
+            assertFalse("Data Error...Please correct the data",true);
+        }
+
+    }
+
+    public void verifyTrustPowerSectionExistsInAllPage()
+    {
+    assertTrue(getDriver().findElement(legalEntity_trustPowers_label_xpath).isDisplayed());
+    }
+
+    public void verifyTrustPowerSectionNotExistsInAllPage(){
+        assertFalse(getDriver().findElement(legalEntity_trustPowers_label_xpath).isDisplayed());
+    }
+
 
 }
 
