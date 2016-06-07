@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 public class CityIdentifiers {
 
-<<<<<<< HEAD
 	private static HashMap<String, By> hmap = new HashMap<String, By>();
 
 	public static void setIdentifiers() {
@@ -15,13 +14,7 @@ public class CityIdentifiers {
 		hmap.put("city_population_error_message_id", By.xpath("//li[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[8]/td/p[data-error_id='populationError']"));		
 	    hmap.put("city_population_xpath", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[8]/td"));
 	    hmap.put("city_add_identifier_xpath", By.xpath(("//button[@id='add-identifiers']")));
-=======
-    private static HashMap<String, By> hmap = new HashMap<String, By>();
-
-    public static void setIdentifiers(){
-        hmap.put("city_add_identifier_xpath", By.xpath(("//button[@id='add-identifiers']")));
->>>>>>> develop
-        hmap.put("city_identifier_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalIdentifiers']/tr/td[2]/*[@data-error_id='identifierValueError']")));
+	    hmap.put("city_identifier_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalIdentifiers']/tr/td[2]/*[@data-error_id='identifierValueError']")));
         hmap.put("city_identifier_type_req_err_msg_xpath", By.xpath(("//*[@id='additionalIdentifiers']/tr/td[1]/*[@data-error_id='identifierTypeError']")));
         hmap.put("city_identifier_status_req_err_msg_xpath", By.xpath(("//*[@id='additionalIdentifiers']/tr/td[3]/*[@data-error_id='identifierStatusError']")));
         hmap.put("city_identifier_value_max_length_err_msg_xpath", By.xpath(("//*[@id='additionalIdentifiers']/tr/td[2]/p")));
@@ -44,22 +37,11 @@ public class CityIdentifiers {
     	hmap.put("cityIdentifier_type_id", By.cssSelector("#identifierType"));
     	hmap.put("cityIdentifier_status_id", By.cssSelector("#identifierStatus"));
     	hmap.put("city_AdditionalIdentifiers", By.xpath("#additionalIdentifiers"));
-<<<<<<< HEAD
 	}
 
 	public static By getObjectIdentifier(String key) {
 		setIdentifiers();
 		return hmap.get(key);
+
 	}
 }
-=======
-    	
-    	    	
-    }
-    public static By getObjectIdentifier(String key) {
-        setIdentifiers();
-        return hmap.get(key);
-
-    }
-}
->>>>>>> develop
