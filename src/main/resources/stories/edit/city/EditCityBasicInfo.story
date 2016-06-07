@@ -127,8 +127,8 @@ When the user clicks on the city update link
 Then the user should see the city status value same as in trusted document
 When the user clicks on the save button in city page
 Then the user should see the save confirmation modal
-When the user clicks on the confirm button
 Then the user should not see the <ConfirmationSummary> changes in confirmation modal
+When the user clicks on the confirm button
 Then the user should see the city <status> value as in zeus document
 Then the user reverts the changes to the document
 
