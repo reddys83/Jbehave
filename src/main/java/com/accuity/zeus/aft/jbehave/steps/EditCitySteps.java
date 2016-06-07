@@ -20,6 +20,7 @@ public class EditCitySteps extends AbstractSteps {
 		if (editCityPage == null)
 			setEditCityPage(getDataPage().createEditCityPage());
 	}
+<<<<<<< HEAD
 	
 	@When("the user enters the <value> in the population field")
 	public void entervalueInPopulationField(@Named("value") String value) {
@@ -73,6 +74,8 @@ public class EditCitySteps extends AbstractSteps {
 	public void verifyPopulationValueCityPage(@Named("value") String value) {
 		getEditCityPage().verifyPopulationValueCityPage(value);
 	}
+=======
+>>>>>>> develop
 
 	@When("the user clicks on the add new identifier button in the basic info city page")
 	public void clickOnAddNewIdentifierButton() {
@@ -244,4 +247,8 @@ public class EditCitySteps extends AbstractSteps {
 	{
 		getEditCityPage().deleteAllIdentifierRows();
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> develop

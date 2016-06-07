@@ -5,6 +5,7 @@ import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
+<<<<<<< HEAD
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -22,6 +23,27 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+=======
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.w3c.dom.Document;
+
+/**
+ * Created by shahc1 on 5/19/2016.
+ */
+>>>>>>> develop
 public class EditCityPage extends AbstractPage {
 
 	public EditCityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
@@ -30,6 +52,7 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * This method is to verify the value displayed in the population field
 	 */
 	public void verifyTextInPopulation() {
@@ -157,6 +180,8 @@ public class EditCityPage extends AbstractPage {
 	}
 	
 	/**
+=======
+>>>>>>> develop
 	 * This method is used to click on the Identifier button for adding a new
 	 * row
 	 */
@@ -529,6 +554,41 @@ public class EditCityPage extends AbstractPage {
 				.isDisplayed());
 	}
 
+<<<<<<< HEAD
+=======
+	/**
+	 * This method is used to get the city information from DB
+	 * 
+	 * @param country
+	 * @param area
+	 * @param city
+	 * @param tagName
+	 * @param source
+	 * @return value of the tag name passed to it
+	 */
+	public String getCityInfoFromDB(String country, String area, String city, String tagName, String source) {
+
+		String tagValue = null;
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("city", city));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get city basic info", nvPairs);
+		if (document != null) {
+			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+					: getNodeValuesByTagName(document, tagName).get(0);
+		}
+		return tagValue;
+	}
+>>>>>>> develop
 
 	/**
 	 * This method is used to verify the value in trusted DB is same as UI
@@ -622,9 +682,16 @@ public class EditCityPage extends AbstractPage {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_identifier_type_input_xpath"));
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
 	@Override
 	public String getPageUrl() {
 		return null;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> develop

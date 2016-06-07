@@ -5,6 +5,7 @@ In order to view and edit the city page
 As a user
 I want to cover the requirements mentioned in
 
+<<<<<<< HEAD
 JIRA ID - ZEUS-968 - User can edit City's Population
 JIRA ID - ZEUS-972 -User can edit City's Identifiers
 
@@ -128,6 +129,10 @@ Examples:
 |Afghanistan|Badakshan|Panj Shair|stringvalue|
 
 
+=======
+JIRA ID - ZEUS-972 -User can edit City's Identifiers
+
+>>>>>>> develop
 Scenario: User can edit country identifiers - Verify country Identifier types are same as from lookup THIRD_PARTY_IDENTIFIER_GEO
 Given a user is on the search page
 When the user clicks on the data tab in the search page
