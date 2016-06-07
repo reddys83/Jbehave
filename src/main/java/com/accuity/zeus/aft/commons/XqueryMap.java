@@ -43,6 +43,7 @@ public class XqueryMap {
         queryMap.put("subarea list","getSubAreaList.xqy");
         queryMap.put("city list","getCityList.xqy");
         queryMap.put("country basic info","getCountryBasicInfo.xqy");
+        queryMap.put("get LegalEntity BoardMeeting","getLegalEntityBoardMeetings.xqy");
         queryMap.put("get country names type", "getCountryNamesType.xqy");
         queryMap.put("get country time zones", "getCountryTimeZone.xqy");
         queryMap.put("get country identifiers", "getCountryIdentifiers.xqy");
@@ -78,9 +79,11 @@ public class XqueryMap {
         queryMap.put("load test data for sub area Cook","loadTestDataSubAreaCook.xqy");
         queryMap.put("get data from lookup table","getValueFromLookupTable.xqy");
         queryMap.put("get country related entities","getCountryRelatedEntities.xqy");
-        queryMap.put("get city Status types","getCityStatusTypes.xqy"); 
         queryMap.put("get city basic info","getCityBasicInfo.xqy");
         queryMap.put("get document id for city","getIdForCity.xqy");
+        queryMap.put("get city identifiers", "getCountryIdentifiers.xqy");
+        queryMap.put("get Status types","getCityStatusTypes.xqy");
+		queryMap.put("get city Status types","getCityStatusTypes.xqy"); 
    }
 
     public String getXquery(String key){
