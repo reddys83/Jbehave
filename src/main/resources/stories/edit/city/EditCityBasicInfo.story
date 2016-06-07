@@ -134,4 +134,4 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|status|ConfirmationSummary|
-|USA|Georgia|Adel|active|Basic Info|
+|USA|Georgia|Adel|active|Summary|
