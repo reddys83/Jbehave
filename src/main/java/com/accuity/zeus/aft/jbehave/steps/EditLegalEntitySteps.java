@@ -5,6 +5,7 @@ import com.accuity.zeus.aft.jbehave.steps.AbstractSteps;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
 import org.springframework.stereotype.Component;
 import com.accuity.zeus.aft.jbehave.pages.EditLegalEntityPage;
 
@@ -416,6 +417,39 @@ public class EditLegalEntitySteps extends AbstractSteps{
     public void clickOnLegalEntityLocationTypeDropDwon() {
         getEditLegalEntityPage().clickOnLegalEntityLocationTypeDropDwon();
     }
+    @When("the user clicks on the type dropdown in legalEntity board meeting for $webElement")
+    public void clickOnLegalEntityBoardMeetingsTypeDropdown(@Named("webElement") String webElement) {
+        getEditLegalEntityPage().clickOnLegalEntityBoardMeetingsTypeDropdown(webElement);
+    }
+    @When("the user clicks on the value dropdown in legalEntity board meeting for $webElement")
+    public void clickOnLegalEntityBoardMeetingsValueDropdown(@Named("webElement") String webElement) {
+        getEditLegalEntityPage().clickOnLegalEntityBoardMeetingsValueDropdown(webElement);
+    }
+
+    @Then("the user should see the below options for legalEntity board meeting type dropdown as: $boardMeetingType")
+    public void verifyLegalEntityBoardMeetingType(ExamplesTable boardMeetingType) {
+        getEditLegalEntityPage().verifyLegalEntityBoardMeetingType(boardMeetingType);
+    }
+
+    @Then("the user should see the below options for legalEntity board meeting value dropdown as: $boardMeetingValue")
+    public void verifyLegalEntityBoardMeetingValue(ExamplesTable boardMeetingValue) {
+        getEditLegalEntityPage().verifyLegalEntityBoardMeetingValue(boardMeetingValue);
+    }
+
+    @When("the user enters summary <summary> in the legalEntity boardMeeting")
+    public void enterSummaryInLegalEntityBoardMeeting(@Named("summary") String summary) {
+        getEditLegalEntityPage().enterSummaryInLegalEntityBoardMeeting(summary);
+    }
+    @When("the user selects type <type> in the legalEntity board meeting for $webElement")
+    public void selectsTypeInLegalEntityBoardMeeting(@Named("type") String type, @Named("webElement") String webElement){
+        getEditLegalEntityPage().selectsTypeInLegalEntityBoardMeeting(type,webElement);
+    }
+
+    @When("the user selects value <value> in the legalEntity board meeting for $webElement")
+    public void selectsValueInLegalEntityBoardMeeting(@Named("value") String value, @Named("webElement") String webElement){
+        getEditLegalEntityPage().selectsValueInLegalEntityBoardMeeting(value,webElement);
+    }
+
     @Then("the user should see the legalentity's location summary type values from lookup LOCATION_SUMMARY_TEXT_TYPE")
     public void verifyLegalEntityLocationsTypeValues() {
         getEditLegalEntityPage().verifyLegalEntityLocationsTypeValues();
@@ -424,6 +458,11 @@ public class EditLegalEntitySteps extends AbstractSteps{
     @When("the user clicks on the add new location summary button in legalentity location")
     public void clickNewLegalEntityLocations() {
         getEditLegalEntityPage().clickNewLegalEntityLocations();
+    }
+
+    @When("the user clicks on the add new board meeting button in legalEntity")
+    public void clickNewLegalEntityBoardMeetings() {
+        getEditLegalEntityPage().clickNewLegalEntityBoardMeetings();
     }
 
     @When("the user select type as <type> in the legalentity location summary")
@@ -436,6 +475,11 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyLegalEntityLocationSummaryInZeusDocument(fid);
     }
 
+    @Then("the user should see the edits to legal entity board meeting for fid <fid> in zeus document")
+    public void verifyLegalEntityBoardMeetingInZeusDocument(@Named("") String fid) {
+        getEditLegalEntityPage().verifyLegalEntityBoardMeetingInZeus(fid);
+    }
+
     @Then("the user should see the error message required for the type in legalentity location summary")
     public void verifyRequiredErrorMessageForTypeInLegalEntityLocations() {
         getEditLegalEntityPage().verifyRequiredErrorMessageForTypeInLegalEntityLocations();
@@ -446,9 +490,24 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().enterInvalidCharactersInLegalEntityLocationsValue();
     }
 
+    @When("the user enters more than 10000 character in summary for legalEntity boardMeetings")
+    public void enterInvalidCharactersInLegalEntityBoardMeetingSummary() {
+        getEditLegalEntityPage().enterInvalidCharactersInLegalEntityBoardMeetingSummary();
+    }
+
     @Then("the user should see the error message enter up to 10000 valid characters for value in the legalentity location")
     public void verifyErrorMessageForInvalidCharacter() {
         getEditLegalEntityPage().verifyErrorMessageForInvalidCharacter();
+    }
+
+    @Then("the user should see the error message enter up to 10000 valid characters for summary in legalentity boardMeeting")
+    public void verifyErrorMessageForLegalEntitySummaryBoardMeeting() {
+        getEditLegalEntityPage().verifyErrorMessageForLegalEntitySummaryBoardMeeting();
+    }
+
+    @Then("user should see the duplicate error message for value dropdown in legalEntity board meeting")
+    public void verifyDuplicateErrorMessageForLegalEntityBoardMeeting() {
+        getEditLegalEntityPage().verifyDuplicateErrorMessageForLegalEntityBoardMeeting();
     }
 
     @When("the user enters value as <value> in the legalentity location summary")
