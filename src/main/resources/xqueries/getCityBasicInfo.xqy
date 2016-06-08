@@ -17,16 +17,17 @@ return
   <type>{$cityIdentifierType} </type>
   <value>{$cityIdentifierValue} </value>
   <identifierStatus>{$cityIdentifierStatus} </identifierStatus>
- </identifier>
+  </identifier>
   
 let $cityStatus := ($city/summary/status/text())
 let $cityadditionalinfo := ($city/summary/additionalInfos/additionalInfo/text())
 let $cityPopulation := ($city/summary/demographics/metric/value/text())
 return
 
-                <city>
-                <status>{$cityStatus}</status>
-                <identifiers> {$cityIdentifierList}               </identifiers> 
-                <additionalinfo>{$cityadditionalinfo}</additionalinfo>
-                <population>{$cityPopulation}</population>
-                </city>
+	<city>
+	<status>{$cityStatus}</status>
+	<identifiers> {$cityIdentifierList}	</identifiers> 
+	<additionalinfo>{$cityadditionalinfo}</additionalinfo>
+	<population>{$cityPopulation}</population>
+	</city>
+
