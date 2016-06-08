@@ -65,6 +65,7 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
 When the user starts typing the name of a status as p in the City Status drop-down
 Then the user should see the selected status in the City Status drop-down as Pending
 When the user clicks on the save button
@@ -74,6 +75,7 @@ And the user should see the below summary changes in confirmation modal
 |Basic Info|
 When the user clicks on the return button
 Then the user should return to edit city page mode
+Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|
@@ -131,7 +133,7 @@ Then the user should see the save confirmation modal
 Then the user should not see the <ConfirmationSummary> changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the city <status> value as in zeus document
-Then the user reverts the changes to the document
+
 
 Examples:
 |country|area|city|status|ConfirmationSummary|
@@ -150,6 +152,7 @@ When the user clicks on the choose a city option
 When the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
 And the user gets the value already present in the text box
 And the user enters the <addInfoText> in the add info text area
 When the user clicks on the save button in city page
@@ -160,6 +163,7 @@ When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user should be able to verify the values are entered in the add info field
 Then the user verifies whether the new value <addInfoText> is different from previous value
+Then the user reverts the changes to the document
 
 
 Examples:
@@ -183,6 +187,7 @@ When the user enters the <addInfoText> in the add info text area
 When the user clicks on the save button in city page
 And the user clicks on the confirm button
 Then the user should see the city addinfo value <addInfoText> as in zeus document
+
 
 Examples:
 |country|area|city|addInfoText|
@@ -387,7 +392,7 @@ When the user clicks on the delete identifier row button in the basic info city 
 Then the user should see delete row confirmation modal in the city page
 When the user clicks on the No button to cancel the deletion of row
 Then the user should see the newly added identifier row in the basic info city page
-Then the user reverts the changes to the document
+
 
 Examples:
 |country|area|city|
