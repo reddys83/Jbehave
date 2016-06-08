@@ -3,21 +3,11 @@ let $area := xs:string(xdmp:get-request-field("area"))
 let $city := xs:string(xdmp:get-request-field("city"))
 let $source := xs:string(xdmp:get-request-field("source")) 
 
-
-<<<<<<< HEAD
-let $country := /country[@source = $source][summary/names/name[type = "Country Name"]/value = $country]
-let $area := /area[@source = $source][summary/names/name[type = "Full Name"]/value = $area][within/place/link/@href=$country/@resource]
-let $city := /city[@source = $source][summary/names/name[type = "Full Name"]/value = $city][within/place/link/@href=$area/@resource]
-
-  
-let $cityStatus := ($city/summary/status/text())
-let $cityadditionalinfo := ($city/summary/additionalInfos/additionalInfo/text())
-
-=======
 let $country := /country[@source = 'trusted'][summary/names/name[type = "Country Name"]/value = $country]
 let $area := /area[@source = 'trusted'][summary/names/name[type = "Full Name"]/value = $area][within/place/link/@href=$country/@resource]
 let $city := /city[@source = $source][summary/names/name[type = "Full Name"]/value = $city][within/place/link/@href=$area/@resource]  
   
+
 let $cityIdentifierList := for $x in ($city/summary/identifiers/identifier)
   let $cityIdentifierType := $x/type/text()
   let $cityIdentifierValue := ($x/value/text())
@@ -28,26 +18,16 @@ return
   <value>{$cityIdentifierValue} </value>
   <identifierStatus>{$cityIdentifierStatus} </identifierStatus>
   </identifier>
-
-
-
+  
 let $cityStatus := ($city/summary/status/text())
 let $cityadditionalinfo := ($city/summary/additionalInfos/additionalInfo/text())
 let $cityPopulation := ($city/summary/demographics/metric/value/text())
->>>>>>> develop
 return
 
-<city>
-<status>{$cityStatus}</status>
-<<<<<<< HEAD
-<additionalinfo>{$cityadditionalinfo}</additionalinfo>
-</city>
-=======
-<identifiers>
- {$cityIdentifierList}
-</identifiers> 
-<additionalinfo>{$cityadditionalinfo}</additionalinfo>
-<population>{$cityPopulation}</population>
-</city>
- 
->>>>>>> develop
+	<city>
+	<status>{$cityStatus}</status>
+	<identifiers> {$cityIdentifierList}	</identifiers> 
+	<additionalinfo>{$cityadditionalinfo}</additionalinfo>
+	<population>{$cityPopulation}</population>
+	</city>
+
