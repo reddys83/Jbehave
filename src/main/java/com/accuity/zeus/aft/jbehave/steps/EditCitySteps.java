@@ -14,14 +14,6 @@ public class EditCitySteps extends AbstractSteps {
 	@Autowired
 	Database database;
 
-	@When("the user clicks on the city update link")
-	@Alias("the user clicks on the city tab update link")
-	public void clickOnUpdateCurrencyLink() {
-		getDataPage().clickOnUpdateCurrencyLink();
-		if (editCityPage == null)
-			setEditCityPage(getDataPage().createEditCityPage());
-	}
-
 	@When("the user enters the <addInfoText> in the add info text area")
 	public void enterTextInCityAddInfo(@Named("addInfoText") String addInfoText) {
 		getEditCityPage().enterTextCityAddInfo(addInfoText);
