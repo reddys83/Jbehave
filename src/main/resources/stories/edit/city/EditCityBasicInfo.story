@@ -23,7 +23,6 @@ When the user clicks on the city update link
 And the user clicks on the Status drop-down in the basicinfo city page
 Then the user should see the status values from City Status dropdown
 
-
 Examples:
 |country|area|city|
 |USA|Georgia|Adel|
@@ -151,7 +150,6 @@ When the user clicks on the choose a city option
 When the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
-When the user gets the document with get document id for city with the <city> from the database
 And the user gets the value already present in the text box
 And the user enters the <addInfoText> in the add info text area
 When the user clicks on the save button in city page
@@ -228,7 +226,6 @@ And the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user should be able to view that only 500 unicode characters are saved
 Then the user should be able to verify the maximum values are entered in the add info field
-Then the user reverts the changes to the document
 
 
 Examples:
@@ -333,7 +330,6 @@ And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 When the user clicks on the city update link
-When the user gets the document with get document id for city with the <city> from the database
 When the user clicks on the add new identifier button in the basic info city page
 When the user clicks on the save button
 Then the user should see the error message for the required identifier value field in the city basic info page
@@ -343,7 +339,7 @@ And the user should see the error message at top of page the highlighted fields 
 When the user enters an incorrect identifier value as <identifierValueIncorrect> in the basic info city page
 When the user clicks on the save button
 Then the user should see the Enter up to 50 valid characters error message for the identifier value field in the city basic info page
-Then the user reverts the changes to the document
+
 
 Examples:
 |country|area|city|identifierValueIncorrect|
