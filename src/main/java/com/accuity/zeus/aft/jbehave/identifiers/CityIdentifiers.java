@@ -6,17 +6,24 @@ import java.util.HashMap;
 
 public class CityIdentifiers {
 
-
 	private static HashMap<String, By> hmap = new HashMap<String, By>();
 	
-    public static void setIdentifiers(){
-    	hmap.put("city_add_info_text_xpath", By.xpath(("//*[@id='cityBasicInfo']//textarea[@name='addInfo']")));	
+
+	public static void setIdentifiers() {
+		
+		hmap.put("city_add_info_text_xpath", By.xpath(("//*[@id='cityBasicInfo']//textarea[@name='addInfo']")));	
 		hmap.put("city_add_info_added_text_xpath",By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[10]/td"));
 		hmap.put("city_save_confirmation_message_id", By.xpath(("//*[@id='saveSuccess']")));
 		hmap.put("city_addInfo_error_message_edit_xpath", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[10]/td/p[@data-error_id='addInfoError']"));		
 		hmap.put("save_button_id", By.xpath("//*[@id='save-button']"));
 		hmap.put("confirmation_modal_xpath", By.xpath("//*[@id='modal-region']"));
 		hmap.put("city_add_info_xpath_after_save", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[10]/td"));
+		
+		hmap.put("city_status_identifier_dropdown_xpath", By.xpath(("//*[@id='cityBasicInfo']//tr[th='Status']//select")));
+		hmap.put("city_status_identifier_dropdown_options_xpath", By.xpath(("//*[@id='cityBasicInfo']//tr[th='Status']//select/option")));
+		hmap.put("save_button_id", By.xpath("//*[@id='save-button']"));
+		hmap.put("confirmation_modal_xpath", By.xpath("//*[@id='modal-region']"));
+
         hmap.put("city_add_identifier_xpath", By.xpath(("//button[@id='add-identifiers']")));
         hmap.put("city_identifier_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalIdentifiers']/tr/td[2]/*[@data-error_id='identifierValueError']")));
         hmap.put("city_identifier_type_req_err_msg_xpath", By.xpath(("//*[@id='additionalIdentifiers']/tr/td[1]/*[@data-error_id='identifierTypeError']")));
@@ -40,14 +47,14 @@ public class CityIdentifiers {
     	hmap.put("city_save_confirmation_message_id", By.xpath(("//*[@id='saveSuccess']")));
     	hmap.put("cityIdentifier_type_id", By.cssSelector("#identifierType"));
     	hmap.put("cityIdentifier_status_id", By.cssSelector("#identifierStatus"));
-    	hmap.put("city_AdditionalIdentifiers", By.xpath("#additionalIdentifiers"));
-    	
-    	    	
-    }
-    public static By getObjectIdentifier(String key) {
-        setIdentifiers();
-        return hmap.get(key);
+    	hmap.put("city_AdditionalIdentifiers", By.xpath("#additionalIdentifiers"));    	    	
+    
+	}
 
-    }
+
+	public static By getObjectIdentifier(String key) {
+		setIdentifiers();
+		return hmap.get(key);
+	}
 
 }

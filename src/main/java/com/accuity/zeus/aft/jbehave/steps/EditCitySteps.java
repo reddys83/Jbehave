@@ -39,6 +39,107 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifySameTextInTextArea(addInfoText);
 	}
 
+	@When("the user clicks on the Status drop-down in the basicinfo city page")
+	public void clickOnCityStatusDropDown() {
+		getEditCityPage().clickOnCityStatusDropDown();
+	}
+
+	@When("the user enters values which is beyond 500 unicode characters in the add info field")
+	public void enterInvalidCharactersInCityAddInfo() {
+		getEditCityPage().enterInvalidCharactersInCityAddInfo();
+	}
+
+	@Then("the user should be able to view the error message 'Enter up to 500 valid characters'")
+	public void verifyErrorMessageInCityAddInfo() {
+		getEditCityPage().verifyErrorMessageInCityAddInfo();
+	}
+
+	@Then("the user should see the addInfoText value same as in $source document")
+	public void verifyCityAddInfoValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source) {
+		getEditCityPage().verifyCityAddInfoValueFromTrusted(country, area, city, "additionalinfo", source);
+	}
+
+	@Then("the user should see the city addinfo value $addInfoText as in $source document")
+	public void verifyCityAddInfoValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source, @Named("addInfoText") String addInfoText) {
+		getEditCityPage().verifyCityInfoFromDB(country, area, city, "additionalinfo", source, addInfoText);
+	}
+
+	@When("the user gets the value already present in the text box")
+	public void getTextInTextArea() {
+		getEditCityPage().getTextInTextArea();
+	}
+
+	@Then("the user verifies whether the new value <addInfoText> is different from previous value")
+	public void newValueCheck(@Named("addInfoText") String addInfoText) {
+		getEditCityPage().newValueCheck(addInfoText);
+	}
+
+	@Then("the user should see no summary changes in the city save confirmation modal")
+	public void verifyNoSummaryInConfirmationModal(@Named("Summary") String summaryText) {
+		getEditCityPage().verifyNoSummaryConfirmationModal(summaryText);
+	}
+
+	@Then("the user should be able to view that only 500 unicode characters are saved")
+	public void viewValidCharacterLength() {
+		getEditCityPage().viewValidCharacterLength();
+	}
+
+	@Then("the user should see the status values from City Status dropdown")
+	public void verifyCityStatusList() {
+		getEditCityPage().verifyCityStatusList();
+	}
+
+	@When("the user starts typing the name of a status as $word in the City Status drop-down")
+	public void enterValueInStatusDropdown(String word) {
+		getEditCityPage().enterValueInStatusDropdown(word);
+
+	}
+
+	@Then("the user should see the selected status in the City Status drop-down as $status")
+	public void verifyStatusInDropdown(String status) {
+		getEditCityPage().verifyStatusInDropdown(status);
+	}
+
+	@Then("the user should return to edit city page mode")
+	public void verifyCityEditPageMode() {
+		getEditCityPage().verifyCityEditPageMode();
+	}
+
+	@Then("the user should see the city status value same as in $source document")
+	public void verifyCityStatusValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source) {
+		getEditCityPage().verifyCityInfoFromTrustedDB(country, area, city, "status", source);
+	}
+
+	@Then("the user should see the city $status value as in $source document")
+	public void verifyCityStatusValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source, @Named("status") String status) {
+		getEditCityPage().verifyCityInfoFromZeusDB(country, area, city, "status", source, status);
+	}
+
+	@When("the user selects value as $status from Status drop-down in the city basicinfo page")
+	public void selectCityStatusValue(@Named("status") String status) {
+		getEditCityPage().selectCityStatusValue(status);
+	}
+
+	@When("the user clicks on the save button in city page")
+	public void clickOnSaveButton() {
+		getEditCityPage().clickOnSaveButton();
+	}
+
+	@When("the user gets the document with $xqueryName with the <city> from the database")
+	public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("city") String param) {
+		getDataPage().getDocument(xqueryName, param);
+
+	}
+
+	@Then("the user should not see the <ConfirmationSummary> changes in confirmation modal")
+	public void verifyNoChangeConfirmationMsg(@Named("ConfirmationSummary") String ConfirmationSummary) {
+		getEditCityPage().verifyNoChangeConfirmationMsg(ConfirmationSummary);
+	}
+
 	@When("the user clicks on the add new identifier button in the basic info city page")
 	public void clickOnAddNewIdentifierButton() {
 		getEditCityPage().clickOnAddNewIdentifierButton();
@@ -69,59 +170,6 @@ public class EditCitySteps extends AbstractSteps {
 	@Then("the user should see the successful update message at top of the page")
 	public void verifySuccessfulUpdatedMessage() {
 		getEditCityPage().verifySuccessfulUpdatedMessage();
-	}
-
-	@When("the user enters values which is beyond 500 unicode characters in the add info field")
-	public void enterInvalidCharactersInCityAddInfo() {
-		getEditCityPage().enterInvalidCharactersInCityAddInfo();
-	}
-
-	@Then("the user should be able to view the error message 'Enter up to 500 valid characters'")
-	public void verifyErrorMessageInCityAddInfo() {
-		getEditCityPage().verifyErrorMessageInCityAddInfo();
-	}
-
-	@Then("the user should see the addInfoText value same as in $source document")
-	public void verifyCityAddInfoValueFromDB(@Named("country") String country, @Named("area") String area,
-			@Named("city") String city, @Named("source") String source) {
-		getEditCityPage().verifyCityAddInfoValueFromTrusted(country, area, city, "additionalinfo", source);
-	}
-
-	@Then("the user should see the $addInfoText value as in $source document")
-	public void verifyCityAddInfoValueFromDB(@Named("country") String country, @Named("area") String area,
-			@Named("city") String city, @Named("source") String source, @Named("addInfoText") String addInfoText) {
-		getEditCityPage().verifyCityInfoFromDB(country, area, city, "additionalinfo", source, addInfoText);
-	}
-
-	@When("the user gets the document with $xqueryName with the <city> from the database")
-	public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("city") String param) {
-		getDataPage().getDocument(xqueryName, param);
-
-	}
-
-	@When("the user gets the value already present in the text box")
-	public void getTextInTextArea() {
-		getEditCityPage().getTextInTextArea();
-	}
-
-	@When("the user clicks on the save button in city page")
-	public void clickOnSaveButton() {
-		getEditCityPage().clickOnSaveButton();
-	}
-
-	@Then("the user verifies whether the new value <addInfoText> is different from previous value")
-	public void newValueCheck(@Named("addInfoText") String addInfoText) {
-		getEditCityPage().newValueCheck(addInfoText);
-	}
-
-	@Then("the user should see no summary changes in the city save confirmation modal")
-	public void verifyNoSummaryInConfirmationModal(@Named("Summary") String summaryText) {
-		getEditCityPage().verifyNoSummaryConfirmationModal(summaryText);
-	}
-
-	@Then("the user should be able to view that only 500 unicode characters are saved")
-	public void viewValidCharacterLength() {
-		getEditCityPage().viewValidCharacterLength();
 	}
 
 	@When("the user clicks on the delete identifier row button in the basic info city page")
@@ -255,4 +303,5 @@ public class EditCitySteps extends AbstractSteps {
 	public void deleteAllIdentifiers() {
 		getEditCityPage().deleteAllIdentifierRows();
 	}
+
 }
