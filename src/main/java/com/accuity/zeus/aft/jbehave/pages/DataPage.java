@@ -1199,13 +1199,18 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
-        List<WebElement> confirmChanges = getDriver().findElements(edit_confirmationModal_summary_xpath);
-        for (int i = 0; i < Summary.getRowCount(); i++) {
-            assertEquals(Summary.getRow(i).get(Summary.getHeaders().get(0)), confirmChanges.get(i).getText());
-        }
-    }
-
+	public void verifySummaryConfirmationModal(ExamplesTable Summary) {
+		try {
+			Thread.sleep(1000);
+			List<WebElement> confirmChanges = getDriver().findElements(edit_confirmationModal_summary_xpath);
+			for (int i = 0; i < Summary.getRowCount(); i++) {
+				assertEquals(Summary.getRow(i).get(Summary.getHeaders().get(0)), confirmChanges.get(i).getText());
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+  
     public void verifyDeleteConfirmationModal() {
         assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(delete_row_confirmation_modal_xpath).getText());
     }
