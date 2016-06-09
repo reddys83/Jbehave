@@ -7,6 +7,7 @@ I want to cover the requirements mentioned in
 
 JIRA ID - ZEUS-962 - User can view City status and can edit the city status
 JIRA ID - ZEUS-968 - User can edit City's Population
+JIRA ID - ZEUS-969 -User can edit City's Add info
 JIRA ID - ZEUS-972 -User can edit City's Identifiers
 
 Scenario: Verify City Status dropdown values from lookup Status
@@ -66,6 +67,7 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
 When the user starts typing the name of a status as p in the City Status drop-down
 Then the user should see the selected status in the City Status drop-down as Pending
 When the user clicks on the save button
@@ -75,6 +77,7 @@ And the user should see the below summary changes in confirmation modal
 |Basic Info|
 When the user clicks on the return button
 Then the user should return to edit city page mode
+Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|
@@ -132,13 +135,111 @@ Then the user should see the save confirmation modal
 Then the user should not see the <ConfirmationSummary> changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the city <status> value as in zeus document
-Then the user reverts the changes to the document
+
 
 Examples:
 |country|area|city|status|ConfirmationSummary|
 |USA|Georgia|Adel|active|Summary|
 
-Scenario: User is updating a City's Basic Info and has entered a value for 'Population' that is exceeding the maximum limit 50 characters from the current value
+
+Scenario: The user can edit the value in the Add Info field and save it and see it on the front end(Front End Validation)
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+And the user gets the value already present in the text box
+And the user enters the <addInfoText> in the add info text area
+When the user clicks on the save button in city page
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should be able to verify the values are entered in the add info field
+Then the user verifies whether the new value <addInfoText> is different from previous value
+Then the user reverts the changes to the document
+
+
+Examples:
+|country|area|city|addInfoText|
+|Afghanistan|Badakshan|Panj Shair|Sample text|
+
+Scenario: To update the City's 'Basic Info' by entering a value for 'Add Info' that is different from the current value(Back End validation)
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+Then the user should see the addInfoText value same as in trusted document
+When the user enters the <addInfoText> in the add info text area
+When the user clicks on the save button in city page
+And the user clicks on the confirm button
+Then the user should see the city addinfo value <addInfoText> as in zeus document
+
+
+Examples:
+|country|area|city|addInfoText|
+|Afghanistan|Badakshan|Panj Shair|This is a different text|
+
+Scenario: To view that there is no change in value when the user has entered a value for 'Add Info' that is no different to the current value(Front End Validation)
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user enters the <addInfoText> in the add info text area
+When the user clicks on the save button in city page
+Then the user should see no summary changes in the city save confirmation modal
+
+Examples:
+|country|area|city|addInfoText|Summary|
+|Afghanistan|Badakshan|Panj Shair|This is a different text|Basic Info|
+
+Scenario: To view whether the text entered in the 'Add Info' field is not beyond 500 unicode characters after saving the page
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user enters values which is beyond 500 unicode characters in the add info field
+When the user clicks on the save button in city page
+And the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should be able to view that only 500 unicode characters are saved
+Then the user should be able to verify the maximum values are entered in the add info field
+
+
+Examples:
+|country|area|city|
+|Afghanistan|Badakshan|Panj Shair|
+
+Scenario: User is updating City's 'Basic Info' by entering a value for 'Population' and verifies the confirmation dialog is having summary Basic Info
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -151,15 +252,101 @@ When the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 And the user clicks on the city update link
 When the user gets the document with get document id for city with the <city> from the database
-When the user enters values which is beyond 50 unicode characters in the population field
+When the user enters the <value> in the population field
 When the user clicks on the save button in city page
-Then the user should be able to view maximum 50 characters are saved in population field
+And the user clicks on the confirm button
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+
+Then the user should see the successful update message at top of the page
+Then the user reverts the changes to the document
 
 Examples:
-|country|area|city|error message|
-|Afghanistan|Badakshan|Panj Shair|Enter up to 50 valid characters|
+|country|area|city|value|
+|Afghanistan|Badakshan|Panj Shair|12345|
 
-Scenario: 	User is updating a City's Basic Info and has entered a string value for 'Population', then error message shou be displayed.
+Scenario: User is updating a City's Basic Info and has entered a same value for 'Population', verifies the confirmation dialog is not having summary info and Zeus Doc having same value
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user enters the <value> in the population field
+When the user clicks on the save button in city page
+And the user clicks on the confirm button
+When the user clicks on the city update link
+When the user enters the <value> in the population field
+When the user clicks on the save button in city page
+Then the user should not see the <ConfirmationSummary> changes in confirmation modal
+When the user clicks on the confirm button
+Then the user should see the population <value> as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|value|ConfirmationSummary|
+|Afghanistan|Badakshan|Panj Shair|123457|Summary|
+
+
+
+Scenario: User is updating a City's Basic Info and has entered a value for 'Population' and verify the value is updated in Zeus DB
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+And the user enters the <value> in the population field
+When the user clicks on the save button in city page
+And the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should see the population <value> as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|value|
+|Afghanistan|Badakshan|Panj Shair|10678|
+
+
+Scenario: User is updating a City's Basic Info and has entered a value for 'Population' that is not exceeding the maximum limit 50 characters
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user enters the <value> in the population field
+When the user clicks on the save button in city page
+And the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should see the population <value> as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|value|
+|Afghanistan|Badakshan|Panj Shair|24513450000000000000000000000000000000000000000000|
+
+
+Scenario: 	User is updating a City's Basic Info and has entered a string value value for 'Population', then error message should be displayed.(Negative Validation)
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -173,12 +360,11 @@ And the user clicks on the city basic info link in the navigation bar
 And the user clicks on the city update link
 And the user enters the <value> in the population field
 When the user clicks on the save button in city page
-Then the user should be able to view the error message 'Enter up to 50 valid characters'
+Then the user should be able to view the error message 'Enter up to 50 valid numbers'
 
 Examples:
 |country|area|city|value|
 |Afghanistan|Badakshan|Panj Shair|stringvalue|
-
 
 Scenario: User can edit country identifiers - Verify country Identifier types are same as from lookup THIRD_PARTY_IDENTIFIER_GEO
 Given a user is on the search page
@@ -200,7 +386,7 @@ Then the user should see the city identifier status from lookup STATUS
 
 Examples:
 |country|area|city|
-|USA|Alabama|Alexander City|
+|Chad|No Area|Doba|
 
 
 Scenario:User can edit city identifiers- Verify if User can add New City identifiers-Verify that all fields- "Type","Value" and "Status" are updated successfully
@@ -234,9 +420,9 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|identifierType|identifierValue|identifierStatus|identifierType2|identifierValue2|identifierStatus2|
-|USA|New York|Brooklyn|Numeric ISO Code|H4Testing|active|FIPS Place Code|H4Testing|pending|
-|USA|New York|Brooklyn|FIPS Place Code|H4Testing|pending|Numeric ISO Code|H4Testing|inactive|
-|USA|New York|Brooklyn|FIPS Place Code|H4Testing|pending|Numeric ISO Code|H4Testing|active|
+|USA|New York|Brooklyn|Numeric ISO Code|H4Testing|Active|FIPS Place Code|H4Testing|Pending|
+|USA|New York|Brooklyn|FIPS Place Code|H4Testing|Pending|Numeric ISO Code|H4Testing|Inactive|
+|USA|New York|Brooklyn|FIPS Place Code|H4Testing|Pending|Numeric ISO Code|H4Testing|Active|
 
 
 Scenario: Verifying row can be deleted by click on the yes button in delete confirmation section.
@@ -265,8 +451,7 @@ Examples:
 |country|area|city|
 |Tajikistan|Leninabadskaya Oblast|Gafurov|
 
-
-Scenario: User can edit city identifiers - Verify that an error message is displayed for required and invalid fields for newely added identifier - "Type","Value" and "Status", for new row on Saving.
+Scenario: User can edit city identifiers - Verify that an error message is displayed for when user enters the more than 50 characters.
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -277,21 +462,95 @@ And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 When the user clicks on the city update link
-When the user gets the document with get document id for city with the <city> from the database
 When the user clicks on the add new identifier button in the basic info city page
 When the user clicks on the save button
-Then the user should see the error message for the required identifier value field in the city basic info page
-Then the user should see the error message for the required identifier type field in the city basic info page
-Then the user should see the error message for the required identifier status field in the city basic info page
-And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button in city page
+When the user clicks on the city update link
+When the user clicks on the add new identifier button in the basic info city page
 When the user enters an incorrect identifier value as <identifierValueIncorrect> in the basic info city page
 When the user clicks on the save button
 Then the user should see the Enter up to 50 valid characters error message for the identifier value field in the city basic info page
-Then the user reverts the changes to the document
+
 
 Examples:
 |country|area|city|identifierValueIncorrect|
 |Albania|Fier|Patos|aksjuilrw1aksjuilrw1aksjuilrw1aksjuilrw1aksju%)~12y1|
+
+Scenario: User can edit city identifiers - Verify that an error message 'Required' is displayed when user left identifier Type blank and enters value in identifier 'Value' and 'Status'
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user deletes the existing identifier rows
+When the user clicks on the add new identifier button in the basic info city page
+When the user enters identifier type as <identifierType> in the basic info city page
+When the user enters identifier value as <identifierValue> in the basic info city page
+When the user enters identifier status as <identifierStatus> in the basic info city page
+When the user clicks on the save button
+Then the user should see the error message for the required identifier type field in the city basic info page
+
+Examples:
+|country|area|city|identifierType|identifierValue|identifierStatus|
+|USA|New York|Brooklyn||H4Testing|Active|
+
+Scenario: User can edit city identifiers - Verify that an error message 'Enter up to 50 valid characters.' is displayed when user left identifier value blank and enters value in identifier 'Type' and 'Status'
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user deletes the existing identifier rows
+When the user clicks on the add new identifier button in the basic info city page
+When the user enters identifier type as <identifierType> in the basic info city page
+When the user enters identifier value as <identifierValue> in the basic info city page
+When the user enters identifier status as <identifierStatus> in the basic info city page
+When the user clicks on the save button
+Then the user should see the error message for the required identifier value field in the city basic info page
+
+Examples:
+|country|area|city|identifierType|identifierValue|identifierStatus|
+|USA|New York|Brooklyn|Numeric ISO Code||Active|
+
+Scenario: User can edit city identifiers - Verify that an error message 'Required' is displayed when user left identifier status blank and enters value in identifier 'Type' and 'Value'
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user deletes the existing identifier rows
+When the user clicks on the add new identifier button in the basic info city page
+When the user enters identifier type as <identifierType> in the basic info city page
+When the user enters identifier value as <identifierValue> in the basic info city page
+When the user enters identifier status as <identifierStatus> in the basic info city page
+When the user clicks on the save button
+Then the user should see the error message for the required identifier status field in the city basic info page
+
+Examples:
+|country|area|city|identifierType|identifierValue|identifierStatus|
+|USA|New York|Brooklyn|Numeric ISO Code|H4Testing||
 
 
 Scenario: User can edit city identifiers- Verify if User can delete identifiers( "Type","Value" and "Status") by clicking on 'Yes' , then after saving it should be removed.
@@ -317,7 +576,6 @@ Examples:
 |country|area|city|
 |Chad|No Area|Doba|
 
-
 Scenario: User can edit city identifiers- Verify if User can delete identifiers( "Type","Value" and "Status") by clicking on 'cancel', then after saving the identifier should not get deleted.
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -335,7 +593,6 @@ When the user clicks on the delete identifier row button in the basic info city 
 Then the user should see delete row confirmation modal in the city page
 When the user clicks on the No button to cancel the deletion of row
 Then the user should see the newly added identifier row in the basic info city page
-Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|

@@ -1,38 +1,24 @@
 package com.accuity.zeus.aft.jbehave.pages;
+
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.*;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.*;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-
 import org.openqa.selenium.NoSuchElementException;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.w3c.dom.Document;
-import org.openqa.selenium.NoSuchElementException;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-
-
+import org.apache.commons.lang.StringUtils;
 
 public class EditCityPage extends AbstractPage {
 
@@ -40,7 +26,6 @@ public class EditCityPage extends AbstractPage {
 			RestClient restClient, HeraApi heraApi) {
 		super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
 	}
-
 
 	/**
 	 * This method is to verify the value displayed in the population field
@@ -52,14 +37,12 @@ public class EditCityPage extends AbstractPage {
 
 	/**
 	 * THis method is to enter the value in population text field
+	 * 
 	 * @param value
 	 */
 	public void entervalueInPopulationField(String value) {
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_population_input_id"), value);
 	}
-
-	
-
 
 	String prevText = "";
 	String text = "";
@@ -83,16 +66,13 @@ public class EditCityPage extends AbstractPage {
 
 	public void enterTextCityAddInfo(String addInfoText) {
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath"), addInfoText);
-	}	
-
+	}
 
 	public void clearAndEnterValue(By webElement, String value) {
 		getDriver().findElement(webElement).clear();
 		getDriver().findElement(webElement).sendKeys(value);
 
 	}
-
-
 
 	String addInfoMaximumCharacterString = null;
 
@@ -107,41 +87,43 @@ public class EditCityPage extends AbstractPage {
 		addInfoMaximumCharacterString = invalidData;
 	}
 
-
 	/**
-	 * This method is to enter the random number of range (50) in population field
+	 * This method is to enter the random number of range (50) in population
+	 * field
 	 */
 	public void enterCharactersInCityPopulation(int limit) {
 		String value = getRandomNumericString(limit);
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).clear();
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id"))
-				.sendKeys(value);		
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).sendKeys(value);
 	}
-	
+
 	/**
-	 * This method is to enter the random number of range (51) in population field
+	 * This method is to enter the random number of range (51) in population
+	 * field
 	 */
 	String populationMaximumValue = null;
-	public void enterCharactersBeyondThelimitInCityPopulation(int limit) {
-		String value = getRandomNumericString(limit+1);
+
+	public void enterCharactersMaximumlimitInCityPopulation(int limit) {
+		String value = getRandomNumericString(limit);
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).clear();
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id"))
-				.sendKeys(value);
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).sendKeys(value);
 		populationMaximumValue = value;
 	}
-	
 
 	/**
-	 * This is to verify error message is displayed for population field as expected
+	 * This is to verify error message is displayed for population field as
+	 * expected
 	 */
 	public void verifyErrorMessageInCityPopulation() {
+
 		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_error_message_id"))
-				.getText(), "Enter up to 50 valid characters.");
+				.getText(), "Enter up to 50 valid numbers.");
 	}
 
-
 	/**
-	 * This method is used to verify the value in trusted DB is same as UI value.
+	 * This method is used to verify the value in trusted DB is same as UI
+	 * value.
+	 * 
 	 * @param country
 	 * @param area
 	 * @param city
@@ -154,8 +136,10 @@ public class EditCityPage extends AbstractPage {
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).getText());
 	}
 
-	
-	/**This method is to verify the specified value 'valueToBeVerified' is present in specified 'source' DB
+	/**
+	 * This method is to verify the specified value 'valueToBeVerified' is
+	 * present in specified 'source' DB
+	 * 
 	 * @param country
 	 * @param area
 	 * @param city
@@ -167,19 +151,20 @@ public class EditCityPage extends AbstractPage {
 			String valueTobeverifed) {
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), valueTobeverifed);
 	}
-    
-	/**This method is to verify the specified value is displayed in the population field
+
+	/**
+	 * This method is to verify the specified value is displayed in the
+	 * population field
+	 * 
 	 * @param value
 	 */
 	public void verifyPopulationValueCityPage(String value) {
-			assertEquals(getDriver()
-					.findElement(CityIdentifiers.getObjectIdentifier("city_population_xpath")).getText(),value);
+		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_xpath")).getText(),
+				value);
 	}
-	
-	
-  
-	/**
 
+	/**
+	 * 
 	 * This method is used to click the city status drop-down
 	 */
 	public void clickOnCityStatusDropDown() {
@@ -190,19 +175,17 @@ public class EditCityPage extends AbstractPage {
 	 * This method is used to verify the look up data values available for city
 	 * status drop-down
 	 */
-   public void verifyCityStatusList() {
+	public void verifyCityStatusList() {
 		List<WebElement> statusList = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_options_xpath"));
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city Status types");
 		for (int i = 1; i < document.getElementsByTagName("status").getLength(); i++) {
-			assertEquals(
-					document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					statusList.get(i).getAttribute("value"));
 		}
 
 	}
 
-	
 	public void verifyCityInfoFromTrustedDB(String country, String area, String city, String tagName, String source) {
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
 				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath")));
@@ -247,23 +230,25 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	/**
-	 * This method is used to check there are no Confirmation Summary (no changes) in the confirmation modal
+	 * This method is used to check there are no Confirmation Summary (no
+	 * changes) in the confirmation modal
 	 * 
 	 * @param will
-	 *            check if the required confirmation changes message is not present in confirmation modal
+	 *            check if the required confirmation changes message is not
+	 *            present in confirmation modal
 	 */
-	  public void verifyNoChangeConfirmationMsg(String summaryText) {
-		  
-		  try {
-				WebElement confirmChanges = getDriver()
-						.findElement(CityIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
-				String confirmationText = confirmChanges.getText();
-				assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
-			} catch (Exception e) {
-				assertTrue(true);
-			}
-	  }
-	
+	public void verifyNoChangeConfirmationMsg(String summaryText) {
+
+		try {
+			WebElement confirmChanges = getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
+			String confirmationText = confirmChanges.getText();
+			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
+		} catch (Exception e) {
+			assertTrue(true);
+		}
+	}
+
 	/**
 	 * This method is used to check whether the driver stays on city edit page.
 	 */
@@ -278,13 +263,10 @@ public class EditCityPage extends AbstractPage {
 
 	}
 
-
 	public DataPage clickOnSaveButton() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("save_button_id"));
 		return new DataPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
 	}
-
-	
 
 	/**
 	 * This method is used to click on the Identifier button for adding a new
@@ -307,13 +289,15 @@ public class EditCityPage extends AbstractPage {
 	 */
 	public void enterIdentifierType(String identifierType) {
 		try {
-			List<WebElement> identifierDropDowns = getDriver()
-					.findElements(CityIdentifiers.getObjectIdentifier("city_identifier_type_input_xpath"));
-			Select dropdown = new Select(identifierDropDowns.get(0));
-			if (identifierType.equals("")) {
-				dropdown.selectByValue(identifierType);
-			} else {
-				dropdown.selectByVisibleText(identifierType);
+			if (identifierType != null) {
+				List<WebElement> identifierDropDowns = getDriver()
+						.findElements(CityIdentifiers.getObjectIdentifier("city_identifier_type_input_xpath"));
+				Select dropdown = new Select(identifierDropDowns.get(0));
+				if (identifierType.equals("")) {
+					dropdown.selectByValue(identifierType);
+				} else {
+					dropdown.selectByVisibleText(identifierType);
+				}
 			}
 
 		} catch (Exception e) {
@@ -376,14 +360,15 @@ public class EditCityPage extends AbstractPage {
 	 */
 	public void enterIdentifierStatus(String identifierStatus) {
 		try {
-
-			List<WebElement> identifierDropDowns = getDriver()
-					.findElements(CityIdentifiers.getObjectIdentifier("city_identifier_status_input_xpath"));
-			Select dropdown = new Select(identifierDropDowns.get(0));
-			if (identifierStatus.equals("")) {
-				dropdown.selectByValue(identifierStatus);
-			} else {
-				dropdown.selectByVisibleText(identifierStatus);
+			if (identifierStatus != null) {
+				List<WebElement> identifierDropDowns = getDriver()
+						.findElements(CityIdentifiers.getObjectIdentifier("city_identifier_status_input_xpath"));
+				Select dropdown = new Select(identifierDropDowns.get(0));
+				if (identifierStatus.equals("")) {
+					dropdown.selectByValue(identifierStatus);
+				} else {
+					dropdown.selectByVisibleText(identifierStatus);
+				}
 			}
 
 		} catch (Exception e) {
@@ -406,7 +391,7 @@ public class EditCityPage extends AbstractPage {
 	 * 
 	 */
 	public void deleteAllIdentifierRows() {
-		attemptClick(CityIdentifiers.getObjectIdentifier("city_delete_identifiers_row_button_xpath"));
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_add_new_identifier_button_id"));
 		List<WebElement> deleteRows = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("city_delete_identifiers_row_button_xpath"));
 
@@ -458,27 +443,26 @@ public class EditCityPage extends AbstractPage {
 	/**
 	 * This method verifies whether the confirmation model is not present.
 	 */
-	public void verifyNewlyAddedIdentifierRowIsNotDisplayed() {	
+	public void verifyNewlyAddedIdentifierRowIsNotDisplayed() {
 
-		try
-		{
-			WebElement identifier = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_AdditionalIdentifiers"));
-			assertTrue(identifier==null);
-		}
-		catch(Exception e)
-		{
+		try {
+			WebElement identifier = getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("city_AdditionalIdentifiers"));
+			assertTrue(identifier == null);
+		} catch (Exception e) {
 			assertTrue(true);
 		}
-		
+
 	}
 
 	/**
 	 * This method verifies whether the confirmation model is present.
 	 */
-	public void verifyNewlyAddedIdentifierRowIsDisplayed(){
-		
-			WebElement identifier = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_identifier_type_input_xpath"));
-			assertTrue(identifier!=null);		
+	public void verifyNewlyAddedIdentifierRowIsDisplayed() {
+
+		WebElement identifier = getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_identifier_type_input_xpath"));
+		assertTrue(identifier != null);
 
 	}
 
@@ -535,10 +519,13 @@ public class EditCityPage extends AbstractPage {
 	 */
 	public void enterIdentifierValue(String identifierValue) {
 		try {
-			List<WebElement> identifierDropDowns = getDriver()
-					.findElements(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"));
-			identifierDropDowns.get(0).clear();
-			identifierDropDowns.get(0).sendKeys(identifierValue);
+			if (identifierValue != null) {
+
+				List<WebElement> identifierDropDowns = getDriver()
+						.findElements(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"));
+				identifierDropDowns.get(0).clear();
+				identifierDropDowns.get(0).sendKeys(identifierValue);
+			}
 
 		} catch (Exception e) {
 
@@ -551,7 +538,7 @@ public class EditCityPage extends AbstractPage {
 	 * 
 	 */
 	public void verifyErrorMessageForRequiredCityIdentifierValue() {
-		assertEquals("Required", getDriver()
+		assertEquals("Enter up to 50 valid characters.", getDriver()
 				.findElement(CityIdentifiers.getObjectIdentifier("city_identifier_value_req_err_msg_xpath")).getText());
 	}
 
@@ -691,7 +678,7 @@ public class EditCityPage extends AbstractPage {
 					: getNodeValuesByTagName(document, tagName).get(0);
 		}
 		return tagValue;
-	}	
+	}
 
 	public void verifySameTextInTextArea(String addInfoText) {
 		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_added_text_xpath"))
@@ -735,7 +722,7 @@ public class EditCityPage extends AbstractPage {
 		} catch (Exception e) {
 			assertTrue(true);
 		}
-	}	
+	}
 
 	/**
 	 * This method is used to verify the value in trusted DB is same as UI
@@ -779,8 +766,10 @@ public class EditCityPage extends AbstractPage {
 									.getChildNodes().item(childNode).getTextContent(), identifierValue[i]);
 							break;
 						case "identifierStatus":
-							assertEquals(document.getElementsByTagName("identifiers").item(0).getChildNodes().item(i)
-									.getChildNodes().item(childNode).getTextContent(), identifierStatus[i]);
+							assertEquals(
+									StringUtils.capitalize(document.getElementsByTagName("identifiers").item(0)
+											.getChildNodes().item(i).getChildNodes().item(childNode).getTextContent()),
+									identifierStatus[i]);
 							break;
 
 						}
@@ -815,19 +804,20 @@ public class EditCityPage extends AbstractPage {
 		List<WebElement> options = cityIdentifierTypesList.get(0).findElements(By.cssSelector("option"));
 		for (int indexOfOption = 0; indexOfOption < document.getElementsByTagName("status")
 				.getLength(); indexOfOption++) {
-			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent()
-					.toLowerCase(), options.get(indexOfOption + 1).getText().trim());
+			assertEquals(StringUtils.capitalize(
+					document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent()),
+					options.get(indexOfOption + 1).getText().trim());
 		}
 
 	}
-	
+
 	public void verifyCityAddInfoValueFromTrusted(String country, String area, String city, String tagName,
 			String source) {
 		assertEquals(getCityAddInfoValueFromDB(country, area, city, tagName, source),
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText());
 
 	}
-	
+
 	public String getCityAddInfoValueFromDB(String country, String area, String city, String tagName, String source) {
 		List<NameValuePair> nvPairs = new ArrayList<>();
 		nvPairs.add(new BasicNameValuePair("country", country));
@@ -856,19 +846,18 @@ public class EditCityPage extends AbstractPage {
 	public void clickOnCityIdentifierType() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_identifier_type_input_xpath"));
 	}
-	
-	public void verifyMaximumChracterEnteredInPopulation() {
-		assertEquals(populationMaximumValue.subSequence(0, 50), getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).getText());
+
+	public void verifyMaximumChracterEnteredInPopulation(String expectedValue) {
+
+		String actualPopulation = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_xpath"))
+				.getText();
+		assertEquals(expectedValue, actualPopulation);
+
 	}
-	
+
 	@Override
 	public String getPageUrl() {
 		return null;
 	}
 
-
-
 }
-
-

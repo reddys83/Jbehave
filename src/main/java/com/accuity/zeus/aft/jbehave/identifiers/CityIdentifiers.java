@@ -40,8 +40,8 @@ public class CityIdentifiers {
     	hmap.put("cityIdentifier_status_id", By.cssSelector("#identifierStatus"));
     	hmap.put("city_AdditionalIdentifiers", By.xpath("#additionalIdentifiers"));
     	hmap.put("city_AdditionalIdentifiers", By.xpath("#additionalIdentifiers"));
-    	hmap.put("city_population_input_id", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[8]/td/input"));					
-		hmap.put("city_population_error_message_id", By.xpath("//li[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[8]/td/p[data-error_id='populationError']"));		
+    	hmap.put("city_population_input_id", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]//input[@name='population']"));					
+		hmap.put("city_population_error_message_id", By.xpath("//*[@id='cityBasicInfo']//*[@data-error_id='populationError']"));		
 	    hmap.put("city_population_xpath", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[8]/td"));		
 		hmap.put("city_add_info_text_xpath", By.xpath(("//*[@id='cityBasicInfo']//textarea[@name='addInfo']")));	
 		hmap.put("city_add_info_added_text_xpath",By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[10]/td"));

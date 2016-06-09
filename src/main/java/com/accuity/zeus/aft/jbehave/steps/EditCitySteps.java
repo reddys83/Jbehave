@@ -24,9 +24,9 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyTextInPopulation();
 	}
 
-	@When("the user enters values which is beyond $limit unicode characters in the population field")
-	public void enterCharactersBeyondThelimitInCityPopulation(int limit) {
-		getEditCityPage().enterCharactersBeyondThelimitInCityPopulation(limit);
+	@When("the user enters values which is $limit unicode characters in the population field")
+	public void enterCharactersMaximumlimitInCityPopulation(int limit) {
+		getEditCityPage().enterCharactersMaximumlimitInCityPopulation(limit);
 	}
 
 	@When("the user enters the <addInfoText> in the add info text area")
@@ -64,7 +64,7 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().enterCharactersInCityPopulation(limit);
 	}
 
-	@Then("the user should be able to view the error message 'Enter up to 50 valid characters'")
+	@Then("the user should be able to view the error message 'Enter up to 50 valid numbers'")
 	public void verifyErrorMessageInCityPopulation() {
 		getEditCityPage().verifyErrorMessageInCityPopulation();
 	}
@@ -348,9 +348,10 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyCityAddInfoValueFromTrusted(country, area, city, "additionalinfo", source);
 	}
 	
-	@Then("the user should be able to view maximum 50 characters are saved in population field")
-	public void verifyMaximumValueInPopulation() {
-		getEditCityPage().verifyMaximumChracterEnteredInPopulation();
+	@Then("the user should be able to view <expectedValue> are saved in population field")
+	public void verifyMaximumValueInPopulation(@Named("expectedValue") String expectedValue) {
+		getEditCityPage().verifyMaximumChracterEnteredInPopulation(expectedValue);
 	}
-
+	
+	
 }
