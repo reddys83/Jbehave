@@ -24,7 +24,7 @@ JIRA ID - ZEUS-924 - User can't add duplicate primary currencies for a country
 Scenario: a. Veify the currency selection drop-down is disabled in update mode
 1. Verify the currency details are comming from trusted document
 2. verify when user clicks "Cancel" changes are not saved and screen returns to view mode
-
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
@@ -42,7 +42,6 @@ Examples:
 |afghani|
 
 Scenario: Verify error message for invalid entry
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
@@ -331,7 +330,6 @@ Scenario: Verify newly added currency use
 1. Verify by default primary = true
 2. Verify by default status = active
 3. Verify delete option
-Meta:@runme0
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
@@ -354,7 +352,6 @@ Scenario: Save newly added currency use
 1. @accuracy = year
 2. @accuracy = month
 3. @accuracy = day
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
@@ -499,7 +496,6 @@ Examples:
 |Rand|Afghanistan|
 
 Scenario: ZEUS-802 Accented characters displaying correctly after saving
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area

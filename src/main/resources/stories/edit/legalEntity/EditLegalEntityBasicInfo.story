@@ -422,8 +422,6 @@ Examples:
 
 
 Scenario: User can edit legal Entity's corporate statement
-
-Meta:@runThis1
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area

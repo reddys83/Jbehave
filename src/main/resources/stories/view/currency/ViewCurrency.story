@@ -92,7 +92,7 @@ Examples:
 
 Scenario: Follow link to another currency when viewing a currency
 1. BUG-ID - ZEUS-753
-Meta:@verifyBuild @test6
+Meta:@verifyBuild
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area

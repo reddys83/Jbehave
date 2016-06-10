@@ -8,8 +8,6 @@ JIRA ID - ZEUS-246 - User can view country's currencies
 JIRA ID - ZEUS-314 - User can follow link to currency from county screen
 
 Scenario: Verify country's currencies. Sorting order.
-
-Meta:@runThis4
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

@@ -17,7 +17,7 @@ JIRA ID - ZEUS-552 - User can sort office results by country
 JIRA ID - ZEUS-561 - User can sort office results by addressline1
 
 Scenario: Verify the list of office multiple types should order alphabetically in office search results page
-
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -197,7 +197,6 @@ Examples:
 |1645|FID|1645|
 
 Scenario: Verify Office Results Pagination and Counter
-Meta:@runThis3
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area

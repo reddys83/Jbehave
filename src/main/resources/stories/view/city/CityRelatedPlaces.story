@@ -89,7 +89,6 @@ Examples:
 |USA|Illinois|Chicago|
 
 Scenario: User can follow link to area from city related place - click area in other country
-Meta:@runme7
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
