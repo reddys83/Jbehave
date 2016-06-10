@@ -1096,6 +1096,24 @@ public class EditLegalEntityPage extends AbstractPage {
         assertEquals(errorMsg, getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(xpathIdentifier)).getText());
     }
 
+    public void verifyAppliedDateErrorMessage(String appliedDateErrorMsg) {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(appliedDateErrorMsg.replace("'", ""), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_appliedDate_errorMessage_xpath")).getText());
+    }
+
+    public void verifyConfirmedDateErrorMessage(String confirmedDateErrorMsg) {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(confirmedDateErrorMsg.replace("'", ""), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_confirmedDate_errorMessage_xpath")).getText());
+    }
+
     @Override
     public String getPageUrl() {
         return null;

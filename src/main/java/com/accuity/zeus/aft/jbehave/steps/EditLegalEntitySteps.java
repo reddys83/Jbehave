@@ -590,7 +590,13 @@ public class EditLegalEntitySteps extends AbstractSteps{
     {
         getEditLegalEntityPage().verifyCreditRatingsErrorMessage("legalEntity_creditRating_agency_error_msg_xpath",errorMsg);
     }
+    @Then("the user should see the error $appliedDateErrorMsg for Applied date")
+    public void verifyAppliedDateErrorMessage(@Named("appliedDateErrorMsg") String appliedDateErrorMsg) {
+        getEditLegalEntityPage().verifyAppliedDateErrorMessage(appliedDateErrorMsg);
+    }
 
-
-
+    @Then("the user should see the error $confirmedDateErrorMsg for Confirmed date")
+    public void verifyConfirmedDateErrorMessage(@Named("confirmedDateErrorMsg ") String confirmedDateErrorMsg) {
+        getEditLegalEntityPage().verifyConfirmedDateErrorMessage(confirmedDateErrorMsg);
+    }
 }

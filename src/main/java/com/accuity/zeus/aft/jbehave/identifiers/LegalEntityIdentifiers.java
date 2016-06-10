@@ -97,7 +97,8 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_creditRating_agency_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingAgencyError']"));
         hmap.put("legalEntity_creditRating_type_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingTypeError']"));
         hmap.put("legalEntity_creditRating_value_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingValueError']"));
-
+        hmap.put("legalEntity_basicInfo_appliedDate_errorMessage_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingAppliedDateError']"));
+                hmap.put("legalEntity_basicInfo_confirmedDate_errorMessage_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingConfirmedDateError']"));
     }
 
 
