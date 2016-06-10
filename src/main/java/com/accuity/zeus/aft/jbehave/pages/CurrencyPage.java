@@ -267,7 +267,7 @@ public class CurrencyPage extends AbstractPage {
     public void clickOnReplacedByLink(String replacedBy) {
         attemptClick(By.linkText(replacedBy));
         try {
-            Thread.sleep(2000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

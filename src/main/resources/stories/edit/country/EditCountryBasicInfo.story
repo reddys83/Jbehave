@@ -374,7 +374,7 @@ Examples:
 |Afghanistan|Rand|
 
 Scenario: User will see summary of changes made in confirmation modal
-Meta:
+Meta:@runtest123
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -447,6 +447,7 @@ Examples:
 |Puerto Rico|+1 hour
 
 Scenario: Verifying row can be deleted by click on enter on the yes button in delete confirmation section.
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

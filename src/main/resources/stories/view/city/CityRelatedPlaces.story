@@ -89,6 +89,7 @@ Examples:
 |USA|Illinois|Chicago|
 
 Scenario: User can follow link to area from city related place - click area in other country
+Meta:@runme7
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -126,8 +127,8 @@ And the user clicks on the city related place link Illinois
 Then the user should see the area page with USA, Illinois and Choose a Subarea selected
 And the user should see the area's names as:
 |TYPE|VALUE|
-|Full Name|Illinois|
-|Display Name|IL|
+|Full Name|Atchison|
+|Display Name|Atchison|
 
 Examples:
 |country|area|city|

@@ -83,6 +83,7 @@ And the user clicks on the offices link in the legal entity page
 When the user clicks on the legal title in the office headers
 
 Then the user should see the legal entity's names as:
+|TYPE|VALUE|
 |Legal Title|Bank of Taiwan|
 |Former Name|Collins|
 
@@ -109,6 +110,7 @@ Examples:
 |Anchor Savings Bank|Name|41031|41031-75|Hewlett, New York, USA|30386260-30364570|
 
 Scenario: Verify legal entity sections list
+Meta:@runThis2
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area

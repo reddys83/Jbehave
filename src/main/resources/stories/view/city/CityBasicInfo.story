@@ -29,7 +29,7 @@ And the user should see the city's names as:
 
 And the user should see the city's identifiers as:
 |TYPE|VALUE|STATUS|
-|FIPS Place Code|14000|active|
+|FIPS Place Code|14000|Active|
 
 And the user should see the Status of a city as Active
 And the user should see the Began Date of a city as 03 Dec 1818

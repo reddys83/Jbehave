@@ -11,7 +11,9 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.w3c.dom.Document;
 import org.apache.commons.collections.ListUtils;
 import org.openqa.selenium.JavascriptExecutor;
@@ -369,11 +371,7 @@ public class LegalEntityPage extends AbstractPage {
             e.printStackTrace();
         }
         attemptClick(office_link_xpath);
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        (new WebDriverWait(getDriver(), 30)).until(ExpectedConditions.presenceOfElementLocated(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_office_page_offices_label_xpath")));
         return new OfficesPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 

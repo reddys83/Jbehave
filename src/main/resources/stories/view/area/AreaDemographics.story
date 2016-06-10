@@ -17,7 +17,7 @@ And the user enters the area <area> in the type-ahead box
 When the user clicks on the area's demographics link in the navigation bar
 Then the user should see the area's demographics as:
 |TYPE|VALUE|UNIT|DATE|
-|Number of Counties|1|mi²|2015|
+|Number of Counties|1|miles2|2015|
 |Persons per Household|2.65||2015|
 |Largest MSA Population|9,729,825||2015|
 
@@ -38,7 +38,7 @@ And the user enters the sub-area <subArea> in the type-ahead box
 And the user clicks on the sub-area's demographics link in the navigation bar
 Then the user should see the sub-area's demographics as:
 |TYPE|VALUE|UNIT|DATE|
-|Number of Counties|1|mi²|2015|
+|Number of Counties|1|miles2|2015|
 |Persons per Household|2.65||2015|
 |Largest MSA Population|9,729,825||2015|
 
