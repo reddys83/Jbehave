@@ -92,6 +92,12 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_first_row_new_creditrating_Agency_ConfirmedDateDay",By.xpath("//*[@id='additionalCreditRatings']//tr[@class='new'][1]//input[@name='creditRatingConfirmedDate-day']"));
         hmap.put("legalEntity_first_row_new_creditrating_Agency_ConfirmedDateMonth",By.xpath("//*[@id='additionalCreditRatings']//tr[@class='new'][1]//select[@name='creditRatingConfirmedDate-month']"));
         hmap.put("legalEntity_first_row_new_creditrating_Agency_ConfirmedDateYear",By.xpath("//*[@id='additionalCreditRatings']//tr[@class='new'][1]//input[@name='creditRatingConfirmedDate-year']"));
+        hmap.put("legalEntity_first_new_row_creditrating_delete_button",By.xpath("//*[@id='additionalCreditRatings']//tr[@class='new'][1]//button"));
+        hmap.put("legalEntity_first_existing_row_creditrating_delete_button",By.xpath("//*[@id='additionalCreditRatings']//tr[1]//button"));
+        hmap.put("legalEntity_creditRating_agency_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingAgencyError']"));
+        hmap.put("legalEntity_creditRating_type_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingTypeError']"));
+        hmap.put("legalEntity_creditRating_value_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingValueError']"));
+
     }
 
 

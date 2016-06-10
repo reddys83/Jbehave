@@ -8,6 +8,7 @@ import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.commons.collections.ListUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
@@ -179,7 +180,7 @@ public class EditLegalEntityPage extends AbstractPage {
 
     }
 
-    public void verifyEditLegalEntityCreditRatingsValuesFromZeus(String agencyName,
+    public boolean checkEditLegalEntityCreditRatingsValuesFromZeus(String agencyName,
                                                                  String type,
                                                                  String value,
                                                                  String AppliedDateDay,
@@ -199,10 +200,21 @@ public class EditLegalEntityPage extends AbstractPage {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", source));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity credit ratings from trusted", nvPairs);
-        String creditRatings=agencyName+type+value+AppliedDateDay+AppliedDateMonth+AppliedDateYear+ConfirmedDateDay+ConfirmedDateMonth+ConfirmedDateYear;
-        if (document != null) {
+        String appliedDate="null";
+        String confirmedDate="null";
         Boolean flag=false;
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity credit ratings from trusted", nvPairs);
+        if(!AppliedDateDay.equals("") &&!AppliedDateMonth.equals("")&&!AppliedDateYear.equals(""))
+        {
+            appliedDate=AppliedDateDay+AppliedDateMonth+AppliedDateYear;
+        }
+        if(!ConfirmedDateDay.equals("") &&!ConfirmedDateMonth.equals("")&&!ConfirmedDateYear.equals(""))
+        {
+            confirmedDate=ConfirmedDateDay+ConfirmedDateMonth+ConfirmedDateYear;
+        }
+        String creditRatings=agencyName+type+value+appliedDate+confirmedDate;
+        if (document != null) {
+
             List agencyNameList =getNodeValuesByTagName(document, "agencyName");
             List typeList = getNodeValuesByTagName(document, "type");
             List valueList =getNodeValuesByTagName(document, "value");
@@ -217,12 +229,30 @@ public class EditLegalEntityPage extends AbstractPage {
                     break;
                 }
             }
-            flag=true;
-            assertTrue(flag);
-        }
-        else{assertFalse(true);}
-        }
 
+        }
+        return flag;
+    }
+
+    public void verifyEditLegalEntityCreditRatingsValuesExistInZeus(String agencyName,
+                                                                 String type,
+                                                                 String value,
+                                                                 String AppliedDateDay,
+                                                                 String AppliedDateMonth,
+                                                                 String AppliedDateYear,
+                                                                 String ConfirmedDateDay,
+                                                                 String ConfirmedDateMonth,
+                                                                 String ConfirmedDateYear,
+                                                                 String fid,
+                                                                 String source)
+    {
+        assertTrue(checkEditLegalEntityCreditRatingsValuesFromZeus(agencyName,type,value,AppliedDateDay,AppliedDateMonth,AppliedDateYear,ConfirmedDateDay,ConfirmedDateMonth,ConfirmedDateYear,fid,source));
+    }
+
+    public void verifyEditLegalEntityCreditRatingsValuesNotExistInZeus(ExamplesTable ex, String fid, String source)
+    {
+        assertFalse(checkEditLegalEntityCreditRatingsValuesFromZeus(ex.getRow(0).get("agencyName"),ex.getRow(0).get("type"),ex.getRow(0).get("value"),ex.getRow(0).get("AppliedDateDay"),ex.getRow(0).get("AppliedDateMonth"),ex.getRow(0).get("AppliedDateYear"),ex.getRow(0).get("ConfirmedDateDay"),ex.getRow(0).get("ConfirmedDateMonth"),ex.getRow(0).get("ConfirmedDateYear"),fid,source));
+    }
 
     public void verifyDeleteLegalEntityTypeButtonStatus(String deleteButton) {
         assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(deleteButton)).isEnabled());
@@ -231,6 +261,11 @@ public class EditLegalEntityPage extends AbstractPage {
     public void clickonDeleteEntityTypeRowButton(String rowIdentifier) {
         getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
     }
+
+    public void clickonDeleteCreditRatingsRowButton(String rowIdentifier) {
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+    }
+
 
     public void verifyExistingEntityTypeRow(String rowIdentifier, String dropdownvalue) {
         assertTrue(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
@@ -263,6 +298,18 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyNoNewEntityTypeRow(String rowIdentifier) {
+        try {
+            assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        } catch (NoSuchElementException e) {
+        }
+
+    }
+
+    public void verifyNewCreditRatingsRow(String rowIdentifier) {
+        assertTrue(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+    }
+
+    public void verifyNoNewCreditRatingsRow(String rowIdentifier) {
         try {
             assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
         } catch (NoSuchElementException e) {
@@ -733,6 +780,10 @@ public class EditLegalEntityPage extends AbstractPage {
         assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("corporateSummary_textarea_xpath")).getAttribute("maxlength"), "10000");
     }
 
+    public void verifyMaxLengthCreditRatingsValueText(String maxSize,String rowIdentifier) {
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);
+    }
+
 
     public void enter10001CharactersInLegalEntityCorporateAction() {
         String strBigString = createBigString(10000);
@@ -1039,6 +1090,11 @@ public class EditLegalEntityPage extends AbstractPage {
         getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(agencyConfirmedDateYearRowIdentifier)).sendKeys(ConfirmedDateYear);
     }
 
+    public void verifyCreditRatingsErrorMessage(String xpathIdentifier,String errorMsg)
+    {
+        assertEquals(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(xpathIdentifier)).size(), 1);
+        assertEquals(errorMsg, getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(xpathIdentifier)).getText());
+    }
 
     @Override
     public String getPageUrl() {
