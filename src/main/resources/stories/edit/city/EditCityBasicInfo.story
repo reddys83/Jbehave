@@ -67,9 +67,12 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
-When the user gets the document with get document id for city with the <city> from the database
-When the user starts typing the name of a status as p in the City Status drop-down
-Then the user should see the selected status in the City Status drop-down as Pending
+When the user selects value as <status> from Status drop-down in the city basicinfo page
+And the user clicks on the save button in city page
+When the user clicks on the confirm button
+When the user clicks on the city update link
+When the user starts typing the name of a status as i in the City Status drop-down
+Then the user should see the selected status in the City Status drop-down as inactive
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
@@ -77,11 +80,11 @@ And the user should see the below summary changes in confirmation modal
 |Basic Info|
 When the user clicks on the return button
 Then the user should return to edit city page mode
-Then the user reverts the changes to the document
+
 
 Examples:
-|country|area|city|
-|USA|Georgia|Adel|
+|country|area|city|status|
+|USA|Georgia|Adel|active|
 
 
 Scenario: Edit and Save City's Status value in the City Basic Info page
@@ -109,6 +112,7 @@ Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the city <status> value as in zeus document
 Then the user reverts the changes to the document
+
 Examples:
 |country|area|city|status|
 |USA|Georgia|Adel|active|
@@ -136,11 +140,9 @@ Then the user should not see the <ConfirmationSummary> changes in confirmation m
 When the user clicks on the confirm button
 Then the user should see the city <status> value as in zeus document
 
-
 Examples:
 |country|area|city|status|ConfirmationSummary|
 |USA|Georgia|Adel|active|Summary|
-
 
 Scenario: The user can edit the value in the Add Info field and save it and see it on the front end(Front End Validation)
 Given a user is on the search page
@@ -252,19 +254,21 @@ When the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 And the user clicks on the city update link
 When the user gets the document with get document id for city with the <city> from the database
+Then the user should see the addInfoText value same as in trusted document
 When the user enters the <value> in the population field
 When the user clicks on the save button in city page
-And the user clicks on the confirm button
 Then the user should see the below summary changes in confirmation modal
 |Summary|
 |Basic Info|
 
+When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
+Then the user should see the population <value> as in zeus document
 Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|value|
-|Afghanistan|Badakshan|Panj Shair|12345|
+|USA|Georgia|Adel|12345|
 
 Scenario: User is updating a City's Basic Info and has entered a same value for 'Population', verifies the confirmation dialog is not having summary info and Zeus Doc having same value
 Given a user is on the search page
@@ -292,11 +296,10 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|value|ConfirmationSummary|
-|Afghanistan|Badakshan|Panj Shair|123457|Summary|
+|USA|Georgia|Adel|123457|Summary|
 
 
-
-Scenario: User is updating a City's Basic Info and has entered a value for 'Population' and verify the value is updated in Zeus DB
+Scenario: User is updating a City's Basic Info and has entered a value for 'Population' that is not exceeding the maximum limit 50 characters and verify the value is updated in Zeus DB
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -318,32 +321,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|value|
-|Afghanistan|Badakshan|Panj Shair|10678|
-
-
-Scenario: User is updating a City's Basic Info and has entered a value for 'Population' that is not exceeding the maximum limit 50 characters
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
-When the user clicks on the choose an area option
-When the user enters the area <area> in the type-ahead box
-When the user clicks on the choose a city option
-When the user enters the city <city> in the type-ahead box
-And the user clicks on the city basic info link in the navigation bar
-And the user clicks on the city update link
-When the user gets the document with get document id for city with the <city> from the database
-When the user enters the <value> in the population field
-When the user clicks on the save button in city page
-And the user clicks on the confirm button
-Then the user should see the successful update message at top of the page
-Then the user should see the population <value> as in zeus document
-Then the user reverts the changes to the document
-
-Examples:
-|country|area|city|value|
-|Afghanistan|Badakshan|Panj Shair|24513450000000000000000000000000000000000000000000|
+|USA|Georgia|Adel|24513450000000000000000000000000000000000000000000|
 
 
 Scenario: 	User is updating a City's Basic Info and has entered a string value value for 'Population', then error message should be displayed.(Negative Validation)
@@ -361,10 +339,11 @@ And the user clicks on the city update link
 And the user enters the <value> in the population field
 When the user clicks on the save button in city page
 Then the user should be able to view the error message 'Enter up to 50 valid numbers'
+Then the user should see maximum length of population is limited to 50
 
 Examples:
 |country|area|city|value|
-|Afghanistan|Badakshan|Panj Shair|stringvalue|
+|USA|Georgia|Adel|stringvalue|
 
 Scenario: User can edit country identifiers - Verify country Identifier types are same as from lookup THIRD_PARTY_IDENTIFIER_GEO
 Given a user is on the search page
@@ -554,6 +533,7 @@ Examples:
 
 
 Scenario: User can edit city identifiers- Verify if User can delete identifiers( "Type","Value" and "Status") by clicking on 'Yes' , then after saving it should be removed.
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -570,7 +550,6 @@ When the user clicks on the delete identifier row button in the basic info city 
 Then the user should see delete row confirmation modal in the city page
 When the user clicks on the Yes button to cancel the deletion of row
 Then the user should not see the newly added identifier row in the basic info city page
-Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|

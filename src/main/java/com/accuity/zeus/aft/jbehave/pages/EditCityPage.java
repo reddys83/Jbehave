@@ -28,15 +28,7 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	/**
-	 * This method is to verify the value displayed in the population field
-	 */
-	public void verifyTextInPopulation() {
-		assertTrue(
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).isDisplayed());
-	}
-
-	/**
-	 * THis method is to enter the value in population text field
+	 * This method is to enter the value in population text field
 	 * 
 	 * @param value
 	 */
@@ -44,57 +36,23 @@ public class EditCityPage extends AbstractPage {
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_population_input_id"), value);
 	}
 
-	String prevText = "";
-	String text = "";
-	Integer len = null;
-
-	public void verifyTextInAddInfo(String addInfoText) {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		assertEquals(addInfoText, getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_add_info_xpath_after_save")).getText());
-
-	}
-
-	public void verifyMaximumChracterEnteredInAddInfo() {
-		assertEquals(addInfoMaximumCharacterString.subSequence(0, 500), getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_add_info_xpath_after_save")).getText());
-	}
-
-	public void enterTextCityAddInfo(String addInfoText) {
-		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath"), addInfoText);
-	}
-
+	/**
+	 * This method is to clear and enter the value in text field
+	 * 
+	 * @param webElement
+	 * @param value
+	 */
 	public void clearAndEnterValue(By webElement, String value) {
 		getDriver().findElement(webElement).clear();
 		getDriver().findElement(webElement).sendKeys(value);
-
-	}
-
-	String addInfoMaximumCharacterString = null;
-
-	public void enterInvalidCharactersInCityAddInfo() {
-		char c = 'a';
-		String invalidData = "";
-		for (int i = 0; i <= 500; i++) {
-			invalidData += c;
-		}
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).clear();
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).sendKeys(invalidData);
-		addInfoMaximumCharacterString = invalidData;
 	}
 
 	/**
-	 * This method is to enter the random number of range (50) in population
-	 * field
+	 * This method is to verify the value displayed in the population field
 	 */
-	public void enterCharactersInCityPopulation(int limit) {
-		String value = getRandomNumericString(limit);
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).clear();
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).sendKeys(value);
+	public void verifyTextInPopulation() {
+		assertTrue(
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).isDisplayed());
 	}
 
 	/**
@@ -111,6 +69,64 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	/**
+	 * This method is to enter the value in addInfo text field
+	 * 
+	 * @param addInfoText
+	 */
+	public void enterTextCityAddInfo(String addInfoText) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath"), addInfoText);
+	}
+
+	/**
+	 * This method is to verify the value in addInfo text field to equal to
+	 * expected.
+	 * 
+	 * @param addInfoText
+	 */
+	public void verifyTextInAddInfo(String addInfoText) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals(addInfoText, getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_add_info_xpath_after_save")).getText());
+	}
+
+	/**
+	 * This method is to verify maximum characters entered in additional info
+	 * text box is 500
+	 */
+	String addInfoMaximumCharacterString = null;
+
+	public void enterInvalidCharactersInCityAddInfo() {
+		char c = 'a';
+		String invalidData = "";
+		for (int i = 0; i <= 500; i++) {
+			invalidData += c;
+		}
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).clear();
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).sendKeys(invalidData);
+		addInfoMaximumCharacterString = invalidData;
+	}
+
+	/**
+	 * This method is to verify maximum characters entered in additional info
+	 * text box is 500
+	 */
+	public void verifyMaximumChracterEnteredInAddInfo() {
+		assertEquals(addInfoMaximumCharacterString.subSequence(0, 500), getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_add_info_xpath_after_save")).getText());
+	}
+
+	/**
+	 * This method is used to click the city status drop-down
+	 */
+	public void clickOnCityStatusDropDown() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_options_xpath"));
+	}
+
+	/**
 	 * This is to verify error message is displayed for population field as
 	 * expected
 	 */
@@ -121,19 +137,12 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	/**
-	 * This method is used to verify the value in trusted DB is same as UI
-	 * value.
-	 * 
-	 * @param country
-	 * @param area
-	 * @param city
-	 * @param tagName
-	 * @param source
+	 * This is to verify maximum length of population field is 50
 	 */
-	public void verifyCityPopulationValueFromTrusted(String country, String area, String city, String tagName,
-			String source) {
-		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).getText());
+	public void verifyMaxLengthInCityPopulation(String maxLength) {
+
+		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id"))
+				.getAttribute("maxlength"), maxLength);
 	}
 
 	/**
@@ -153,22 +162,72 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	/**
-	 * This method is to verify the specified value is displayed in the
-	 * population field
+	 * This method is used to get the city information from DB
 	 * 
-	 * @param value
+	 * @param country
+	 * @param area
+	 * @param city
+	 * @param tagName
+	 * @param source
+	 * @return value of the tag name passed to it
 	 */
-	public void verifyPopulationValueCityPage(String value) {
-		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_xpath")).getText(),
-				value);
+
+	public String getCityInfoFromDB(String country, String area, String city, String tagName, String source) {
+
+		String tagValue = null;
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("city", city));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(7000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get city basic info", nvPairs);
+		if (document != null) {
+			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+					: getNodeValuesByTagName(document, tagName).get(0);
+		}
+		return tagValue;
 	}
 
-	/**
-	 * 
-	 * This method is used to click the city status drop-down
-	 */
-	public void clickOnCityStatusDropDown() {
-		attemptClick(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_options_xpath"));
+	String prevText = "";
+	String text = "";
+	Integer len = null;
+
+	public void getTextInFromAddInfoTextArea() {
+		prevText = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText();
+	}
+
+	public void compareAddInfoPreviousTextWithCurrent(String addInfoText) {
+		assertNotEquals(prevText, addInfoText);
+	}
+
+	public void verifyNoSummaryConfirmationModal(String summaryText) {
+		try {
+			WebElement confirmChanges = getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
+			String confirmationText = confirmChanges.getText();
+			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
+		} catch (Exception e) {
+			assertTrue(false);
+		}
+	}
+
+	public void viewValidCharacterLength() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		text = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_xpath_after_save")).getText();
+		len = text.length();
+		assertEquals(len.toString(), "500");
 	}
 
 	/**
@@ -186,38 +245,6 @@ public class EditCityPage extends AbstractPage {
 
 	}
 
-	public void verifyCityInfoFromTrustedDB(String country, String area, String city, String tagName, String source) {
-		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
-				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath")));
-
-	}
-
-	public void verifyCityInfoFromZeusDB(String country, String area, String city, String tagName, String source,
-			String status) {
-		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), status);
-
-	}
-
-	/**
-	 * This method is used to verify the passing status is selected in the city
-	 * status drop-down
-	 * 
-	 * @param status
-	 *            will hold the value to be verified with city status drop-down
-	 *            selection
-	 */
-	public void verifyStatusInDropdown(String status) {
-		try {
-			Thread.sleep(1000L);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		assertTrue(
-				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"))
-						.equalsIgnoreCase(status));
-
-	}
-
 	/**
 	 * This method is used to enter the value in city status drop-down
 	 * 
@@ -230,23 +257,22 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	/**
-	 * This method is used to check there are no Confirmation Summary (no
-	 * changes) in the confirmation modal
+	 * This method is used to verify the passing status is selected in the city
+	 * status drop-down
 	 * 
-	 * @param will
-	 *            check if the required confirmation changes message is not
-	 *            present in confirmation modal
+	 * @param status
+	 *            will hold the value to be verified with city status drop-down
+	 *            selection
 	 */
-	public void verifyNoChangeConfirmationMsg(String summaryText) {
-
+	public void verifyCityStatusInDropdown(String status) {
 		try {
-			WebElement confirmChanges = getDriver()
-					.findElement(CityIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
-			String confirmationText = confirmChanges.getText();
-			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
-		} catch (Exception e) {
-			assertTrue(true);
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		assertTrue(
+				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"))
+						.equalsIgnoreCase(status));
 	}
 
 	/**
@@ -257,10 +283,21 @@ public class EditCityPage extends AbstractPage {
 				.findElements(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath")).size() > 0);
 	}
 
+	public void verifyCityStatusInfoFromTrustedDB(String country, String area, String city, String tagName,
+			String source) {
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
+				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath")));
+
+	}
+
+	public void verifyCityInfoFromZeusDB(String country, String area, String city, String tagName, String source,
+			String status) {
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), status);
+	}
+
 	public void selectCityStatusValue(String status) {
 		selectItemFromDropdownListByValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"),
 				status);
-
 	}
 
 	public DataPage clickOnSaveButton() {
@@ -283,7 +320,7 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	/**
-	 * This method is used to enter the Identifier type
+	 * This method is used to enter the Identifier type *
 	 * 
 	 * @param identifierType
 	 */
@@ -328,7 +365,30 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * This method is used to enter the Identifier status
+	 * 
+	 * @param identifierStatus
+	 */
+	public void enterIdentifierStatus(String identifierStatus) {
+		try {
+			if (identifierStatus != null) {
+				List<WebElement> identifierDropDowns = getDriver()
+						.findElements(CityIdentifiers.getObjectIdentifier("city_identifier_status_input_xpath"));
+				Select dropdown = new Select(identifierDropDowns.get(0));
+				if (identifierStatus.equals("")) {
+					dropdown.selectByValue(identifierStatus);
+				} else {
+					dropdown.selectByVisibleText(identifierStatus);
+				}
+			}
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * This method is used to enter the Identifier status
 	 * 
@@ -352,30 +412,16 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-
+	
 	/**
-	 * This method is used to enter the Identifier status
-	 * 
-	 * @param identifierStatus
+	 * This method is to verify whether the successful message is generated
+	 * after saving the city page.
 	 */
-	public void enterIdentifierStatus(String identifierStatus) {
-		try {
-			if (identifierStatus != null) {
-				List<WebElement> identifierDropDowns = getDriver()
-						.findElements(CityIdentifiers.getObjectIdentifier("city_identifier_status_input_xpath"));
-				Select dropdown = new Select(identifierDropDowns.get(0));
-				if (identifierStatus.equals("")) {
-					dropdown.selectByValue(identifierStatus);
-				} else {
-					dropdown.selectByVisibleText(identifierStatus);
-				}
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void verifySuccessfulUpdatedMessage() {
+		assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_save_confirmation_message_id"))
+				.isDisplayed());
 	}
-
+	
 	/**
 	 * This method is used for performing the delete operation for a Identifier
 	 * row by clicking on the delete row button
@@ -384,65 +430,7 @@ public class EditCityPage extends AbstractPage {
 	public void clickOnDeleteNewIdentifierRowButtonCity() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_delete_identifiers_row_button_xpath"));
 	}
-
-	/**
-	 * This method is used for performing the delete all identifier rows row by
-	 * clicking on the delete row button
-	 * 
-	 */
-	public void deleteAllIdentifierRows() {
-		attemptClick(CityIdentifiers.getObjectIdentifier("city_add_new_identifier_button_id"));
-		List<WebElement> deleteRows = getDriver()
-				.findElements(CityIdentifiers.getObjectIdentifier("city_delete_identifiers_row_button_xpath"));
-
-		for (int index = 0; index < deleteRows.size(); index++) {
-			WebElement currentInstance = getDriver()
-					.findElements(CityIdentifiers.getObjectIdentifier("city_delete_identifiers_row_button_xpath"))
-					.get(0);
-			if (currentInstance != null) {
-				currentInstance.click();
-				verifyDeleteConfirmationModal();
-				pressEnterButtonInDeleteConfirmationModalForCity();
-			}
-
-		}
-
-	}
-
-	/**
-	 * This method is used to verify whether the delete confirmation table is
-	 * present upon clicking the delete row button
-	 * 
-	 */
-	public void verifyDeleteConfirmationModal() {
-		assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_xpath")).getText());
-	}
-
-	/**
-	 * This method is used to verify whether data is present in the Identifiers
-	 * as mentioned below
-	 * 
-	 * @param identifierType
-	 * @param identifierValue
-	 * @param identifierStatus
-	 * @throws Exception
-	 */
-	public void verifyUpdateSuccessIdentifiers(String identifierType, String identifierValue, String identifierStatus)
-			throws Exception {
-		Thread.sleep(6000);
-		assertEquals(identifierType, getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_get_identifier_type_value")).getText());
-		assertEquals(identifierValue,
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_identifier_value")).getText());
-		assertEquals(identifierStatus, getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_get_identifier_status_value")).getText());
-
-	}
-
-	/**
-	 * This method verifies whether the confirmation model is not present.
-	 */
+	
 	public void verifyNewlyAddedIdentifierRowIsNotDisplayed() {
 
 		try {
@@ -454,10 +442,7 @@ public class EditCityPage extends AbstractPage {
 		}
 
 	}
-
-	/**
-	 * This method verifies whether the confirmation model is present.
-	 */
+	
 	public void verifyNewlyAddedIdentifierRowIsDisplayed() {
 
 		WebElement identifier = getDriver()
@@ -465,144 +450,7 @@ public class EditCityPage extends AbstractPage {
 		assertTrue(identifier != null);
 
 	}
-
-	/**
-	 * This method is used to clear the data present in the Identifier value
-	 * text box
-	 * 
-	 */
-	public void clearCityIdentifierValue() {
-		try {
-			List<WebElement> webElements = getDriver()
-					.findElements(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"));
-			int columns_count = webElements.size();
-			WebElement mySelectElm = webElements.get(columns_count - 1);
-			mySelectElm.clear();
-		} catch (Exception e) {
-		}
-	}
-
-	/**
-	 * This method is used to click on the 'Confirm' button after saving
-	 * 
-	 * @throws Exception
-	 */
-	public void clickOnConfirmButtonCity() throws Exception {
-		Thread.sleep(3000);
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_confirm_button")).click();
-		Thread.sleep(3000);
-	}
-
-	/**
-	 * This method is used to enter the Identifier value
-	 * 
-	 * @param identifierValue
-	 */
-	public void enterIdentifierValue_Row(String identifierValue, int rowNo) {
-		try {
-			List<WebElement> identifierDropDowns = getDriver()
-					.findElements(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"));
-			if (rowNo <= identifierDropDowns.size()) {
-				identifierDropDowns.get(rowNo - 1).clear();
-				identifierDropDowns.get(rowNo - 1).sendKeys(identifierValue);
-			}
-
-		} catch (Exception e) {
-
-		}
-	}
-
-	/**
-	 * This method is used to enter the Identifier value
-	 * 
-	 * @param identifierValue
-	 */
-	public void enterIdentifierValue(String identifierValue) {
-		try {
-			if (identifierValue != null) {
-
-				List<WebElement> identifierDropDowns = getDriver()
-						.findElements(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"));
-				identifierDropDowns.get(0).clear();
-				identifierDropDowns.get(0).sendKeys(identifierValue);
-			}
-
-		} catch (Exception e) {
-
-		}
-	}
-
-	/**
-	 * This method is used to verify whether we get an error message after
-	 * clicking save without entering any text for Identifier Value
-	 * 
-	 */
-	public void verifyErrorMessageForRequiredCityIdentifierValue() {
-		assertEquals("Enter up to 50 valid characters.", getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_identifier_value_req_err_msg_xpath")).getText());
-	}
-
-	/**
-	 * This method is used to verify whether we get an error message after
-	 * clicking save without entering any text for Identifier Type
-	 * 
-	 */
-	public void verifyErrorMessageForRequiredCityIdentifierType() {
-		assertEquals("Required", getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_identifier_type_req_err_msg_xpath")).getText());
-	}
-
-	/**
-	 * This method is used to verify whether we get an error message after
-	 * clicking save without entering any text for Identifier Status
-	 * 
-	 */
-	public void verifyErrorMessageForRequiredCityIdentifierStatus() {
-		assertEquals("Required",
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_identifier_status_req_err_msg_xpath"))
-						.getText());
-	}
-
-	/**
-	 * This method is used to verify whether we get an error message for
-	 * entering a text beyond 50 characters for Identifier Value
-	 * 
-	 */
-	public void verifyErrorMessageForLongCityIdentifierValue() {
-		assertEquals("Enter up to 50 valid characters.",
-				getDriver()
-						.findElement(
-								CityIdentifiers.getObjectIdentifier("city_identifier_value_max_length_err_msg_xpath"))
-						.getText());
-	}
-
-	/**
-	 * This method is used for pressing the Enter key in the delete confirmation
-	 * modal
-	 * 
-	 */
-	public void pressEnterButtonInDeleteConfirmationModalForCity() {
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_delete_yes_button_id")).sendKeys(Keys.ENTER);
-	}
-
-	/**
-	 * This method is used for clicking the 'No' button in the delete
-	 * confirmation modal
-	 * 
-	 */
-	public void clickNoButtonInDeleteConfirmationModalForCity() {
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_delete_no_button_id_click")).click();
-	}
-
-	/**
-	 * This method is used for clicking the 'Yes' button in the delete
-	 * confirmation modal
-	 * 
-	 */
-	public void clickYesButtonInDeleteConfirmationModalForCity() {
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_delete_yes_button_id_click")).click();
-	}
-
+	
 	/**
 	 * This method is used to verify that delete confirmation modal is not
 	 * displayed
@@ -619,111 +467,114 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-
+	
 	/**
-	 * This method is used to verify that delete confirmation modal is not
-	 * displayed
+	 * This method is used to verify whether the delete confirmation table is
+	 * present upon clicking the delete row button
 	 * 
 	 */
-	public void verifyDeleteConfirmationModalIsDisplayed() {
-		try {
-
-			assertTrue(
-					getDriver().findElement(CityIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_xpath"))
-							.isDisplayed());
-
-		} catch (NoSuchElementException e) {
-			e.printStackTrace();
-		}
+	public void verifyDeleteConfirmationModal() {
+		assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_xpath")).getText());
 	}
-
+	
 	/**
-	 * This method is to verify whether the successful message is generated
-	 * after saving the city page.
-	 */
-	public void verifySuccessfulUpdatedMessage() {
-		assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_save_confirmation_message_id"))
-				.isDisplayed());
-	}
-
-	/**
-	 * This method is used to get the city information from DB
+	 * This method is used to enter the Identifier value
 	 * 
-	 * @param country
-	 * @param area
-	 * @param city
-	 * @param tagName
-	 * @param source
-	 * @return value of the tag name passed to it
+	 * @param identifierValue
 	 */
-
-	public String getCityInfoFromDB(String country, String area, String city, String tagName, String source) {
-
-		String tagValue = null;
-		List<NameValuePair> nvPairs = new ArrayList<>();
-		nvPairs.add(new BasicNameValuePair("country", country));
-		nvPairs.add(new BasicNameValuePair("area", area));
-		nvPairs.add(new BasicNameValuePair("city", city));
-		nvPairs.add(new BasicNameValuePair("source", source));
+	public void enterIdentifierValue(String identifierValue) {
 		try {
-			Thread.sleep(3000L);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+			if (identifierValue != null) {
 
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-				"get city basic info", nvPairs);
-		if (document != null) {
-			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
-					: getNodeValuesByTagName(document, tagName).get(0);
-		}
-		return tagValue;
-	}
+				List<WebElement> identifierDropDowns = getDriver()
+						.findElements(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"));
+				identifierDropDowns.get(0).clear();
+				identifierDropDowns.get(0).sendKeys(identifierValue);
+			}
 
-	public void verifySameTextInTextArea(String addInfoText) {
-		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_added_text_xpath"))
-				.getText(), addInfoText);
-	}
-
-	public void getTextInTextArea() {
-		prevText = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText();
-	}
-
-	public void newValueCheck(String addInfoText) {
-		assertNotEquals(prevText, addInfoText);
-	}
-
-	public void clearAddInfoTextArea() {
-		clearValue(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath"));
-	}
-
-	public void clearValue(By webElement) {
-		getDriver().findElement(webElement).clear();
-	}
-
-	public void viewValidCharacterLength() {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		text = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_added_text_xpath")).getText();
-		len = text.length();
-		assertEquals(len.toString(), "500");
-	}
-
-	public void verifyNoSummaryConfirmationModal(String summaryText) {
-		try {
-			WebElement confirmChanges = getDriver()
-					.findElement(CityIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
-			String confirmationText = confirmChanges.getText();
-			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
 		} catch (Exception e) {
-			assertTrue(true);
+			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * This method is used to enter the Identifier value
+	 * @param rowNo
+	 * @param identifierValue
+	 */
+	public void enterIdentifierValue_Row(String identifierValue, int rowNo) {
+		try {
+			List<WebElement> identifierDropDowns = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"));
+			if (rowNo <= identifierDropDowns.size()) {
+				identifierDropDowns.get(rowNo - 1).clear();
+				identifierDropDowns.get(rowNo - 1).sendKeys(identifierValue);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * This method is used to click on the 'Confirm' button after saving
+	 * 
+	 * @throws Exception
+	 */
+	public void clickOnConfirmButtonCity() throws Exception {
+		Thread.sleep(3000);
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_confirm_button")).click();
+		Thread.sleep(3000);
+	}
+	
+
+	/**
+	 * This method is used to verify whether the error message in identifier value field	  
+	 */
+	public void verifyErrorMessageForRequiredCityIdentifierValue() {
+		assertEquals("Enter up to 50 valid characters.", getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_identifier_value_req_err_msg_xpath")).getText());
+	}
+	
+	
+	/**
+	 * This method is used to verify whether we get an error message after
+	 * clicking save without entering any text for Identifier Type
+	 * 
+	 */
+	public void verifyErrorMessageForRequiredCityIdentifierType() {
+		assertEquals("Required", getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_identifier_type_req_err_msg_xpath")).getText());
+	}
+	
+	/**
+	 * This method is used to verify whether we get an error message after
+	 * clicking save without entering any text for Identifier Status
+	 */
+	public void verifyErrorMessageForRequiredCityIdentifierStatus() {
+		assertEquals("Required",
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_identifier_status_req_err_msg_xpath"))
+						.getText());
+	}
+	
+	/**
+	 * This method is used for clicking the 'No' button in the delete
+	 * confirmation modal
+	 * 
+	 */
+	public void clickNoButtonInDeleteConfirmationModalForCity() {
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_delete_no_button_id_click")).click();
+	}
+	
+	/**
+	 * This method is used for clicking the 'Yes' button in the delete
+	 * confirmation modal 
+	 */
+	public void clickYesButtonInDeleteConfirmationModalForCity() {
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_delete_yes_button_id_click")).click();
+	}
+	
 	/**
 	 * This method is used to verify the value in trusted DB is same as UI
 	 * value.
@@ -781,6 +632,14 @@ public class EditCityPage extends AbstractPage {
 		}
 	}
 
+	public void clickOnCityIdentifierType() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_identifier_type_input_xpath"));
+	}
+	
+	public void clickOnCityIdentifierStatus() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_identifier_status_input_xpath"));
+	}
+	
 	public void verifyCityIdentifierTypesList_forOneRow() {
 
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city identifiers");
@@ -810,51 +669,47 @@ public class EditCityPage extends AbstractPage {
 		}
 
 	}
+	
+	/**
+	 * This method is used for performing the delete all identifier rows row by
+	 * clicking on the delete row button
+	 * 
+	 */
+	public void deleteAllIdentifierRows() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_add_new_identifier_button_id"));
+		List<WebElement> deleteRows = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_delete_identifiers_row_button_xpath"));
+
+		for (int index = 0; index < deleteRows.size(); index++) {
+			WebElement currentInstance = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_delete_identifiers_row_button_xpath"))
+					.get(0);
+			if (currentInstance != null) {
+				currentInstance.click();
+				verifyDeleteConfirmationModal();
+				pressEnterButtonInDeleteConfirmationModalForCity();
+			}
+
+		}
+
+	}
+	
+	/**
+	 * This method is used for pressing the Enter key in the delete confirmation
+	 * modal
+	 */
+	public void pressEnterButtonInDeleteConfirmationModalForCity() {
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_delete_yes_button_id")).sendKeys(Keys.ENTER);
+	}
 
 	public void verifyCityAddInfoValueFromTrusted(String country, String area, String city, String tagName,
 			String source) {
-		assertEquals(getCityAddInfoValueFromDB(country, area, city, tagName, source),
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText());
 
 	}
-
-	public String getCityAddInfoValueFromDB(String country, String area, String city, String tagName, String source) {
-		List<NameValuePair> nvPairs = new ArrayList<>();
-		nvPairs.add(new BasicNameValuePair("country", country));
-		nvPairs.add(new BasicNameValuePair("area", area));
-		nvPairs.add(new BasicNameValuePair("city", city));
-		nvPairs.add(new BasicNameValuePair("source", source));
-		String statusValue = "";
-		try {
-			Thread.sleep(3000L);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-				"get city basic info", nvPairs);
-		if (document != null) {
-			statusValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
-					: getNodeValuesByTagName(document, tagName).get(0);
-		}
-		return statusValue;
-	}
-
-	public void clickOnCityIdentifierStatus() {
-		attemptClick(CityIdentifiers.getObjectIdentifier("city_identifier_status_input_xpath"));
-	}
-
-	public void clickOnCityIdentifierType() {
-		attemptClick(CityIdentifiers.getObjectIdentifier("city_identifier_type_input_xpath"));
-	}
-
-	public void verifyMaximumChracterEnteredInPopulation(String expectedValue) {
-
-		String actualPopulation = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_xpath"))
-				.getText();
-		assertEquals(expectedValue, actualPopulation);
-
-	}
-
+	
+	
 	@Override
 	public String getPageUrl() {
 		return null;
