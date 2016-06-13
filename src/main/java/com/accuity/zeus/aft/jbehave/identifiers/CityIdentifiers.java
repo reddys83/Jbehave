@@ -40,7 +40,7 @@ public class CityIdentifiers {
 		hmap.put("city_save_confirmation_message_id", By.xpath(("//*[@id='saveSuccess']")));
 		hmap.put("city_addInfo_error_message_edit_xpath", By.xpath("//*[@id='cityBasicInfo']//*[@data-error_id='addInfoError']"));		
 		hmap.put("save_button_id", By.xpath("//*[@id='save-button']"));		
-		
+		hmap.put("city_add_info_xpath_after_save", By.xpath("//*[@id='cityBasicInfo']//table/tbody/tr[10]/td")); // there is no unique property after saving the city page.
 	}
 
 
