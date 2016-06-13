@@ -47,7 +47,18 @@ public class CityIdentifiers {
     	hmap.put("city_save_confirmation_message_id", By.xpath(("//*[@id='saveSuccess']")));
     	hmap.put("cityIdentifier_type_id", By.cssSelector("#identifierType"));
     	hmap.put("cityIdentifier_status_id", By.cssSelector("#identifierStatus"));
-    	hmap.put("city_AdditionalIdentifiers", By.xpath("#additionalIdentifiers"));    	    	
+    	hmap.put("city_AdditionalIdentifiers", By.xpath("#additionalIdentifiers")); 
+    	hmap.put("city_end_date_info_text_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='End Date']/td"));
+    	hmap.put("city_day_end_date_xpath", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[3]/td/input[1]"));
+        hmap.put("city_month_end_date_xpath", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[3]/td/select")); 
+        hmap.put("city_year_end_date_xpath", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[3]/td/input[2]"));
+        hmap.put("city_save_confirmation_message_id", By.xpath(("//*[@id='saveSuccess']")));
+        hmap.put("city_began_date_xpath",By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[2]/td"));
+        hmap.put("city_error_for_invalid_date", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[3]/td/p")); 
+        hmap.put("city_day_began_date_xpath", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[2]/td/input[1]"));
+        hmap.put("city_month_began_date_xpath", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[2]/td/select"));
+        hmap.put("city_year_began_date_xpath", By.xpath("//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[2]/td/input[2]"));
+        hmap.put("city_error_msg_at_top_page", By.xpath("//*[@id='error']/div/div/p"));
     
 	}
 

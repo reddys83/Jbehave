@@ -10,7 +10,12 @@ import static org.junit.Assert.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.NoSuchElementException;
 import org.apache.http.NameValuePair;
@@ -759,7 +764,146 @@ public class EditCityPage extends AbstractPage {
 	public void clickOnCityIdentifierType() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_identifier_type_input_xpath"));
 	}
+	
+	public void verifyCityEndDateValueFromTrusted(String country, String area, String city, String tagName,
+			String source) {
+		System.out.println("test: "+getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_end_date_info_text_xpath")).getText());
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_end_date_info_text_xpath")).getText());
 
+	}
+	
+	public void enterDayInBeganDate(String day) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_day_began_date_xpath"), day);
+	}
+	
+	public void enterMonthInBeganDate(String month) {
+		try {
+			List<WebElement> monthDropDowns = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_month_began_date_xpath"));
+			Select dropdown = new Select(monthDropDowns.get(0));			
+			if (month.equals("")) {
+				dropdown.selectByValue(month);
+			} else {
+			    month = month.substring(0, 3);
+				dropdown.selectByVisibleText(month);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void enterYearInBeganDate(String year) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_year_began_date_xpath"), year);
+	}
+	
+	public void enterDayInEndDate(String day) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_day_end_date_xpath"), day);
+	}
+	
+	public void enterMonthInEndDate(String month) {
+		try {
+			List<WebElement> monthDropDowns = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_month_end_date_xpath"));
+			Select dropdown = new Select(monthDropDowns.get(0));			
+			if (month.equals("")) {
+				dropdown.selectByValue(month);
+			} else {
+			    month = month.substring(0, 3);
+				dropdown.selectByVisibleText(month);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void enterYearInEndDate(String year) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_year_end_date_xpath"), year);
+	}
+	
+	public void verifyMonthInChronologicalOrder() {
+		List<String> monthInOrder = new ArrayList<String>();
+		monthInOrder.add(" ");
+		monthInOrder.add("Jan");
+		monthInOrder.add("Feb");
+		monthInOrder.add("Mar");
+		monthInOrder.add("Apr");
+		monthInOrder.add("May");
+		monthInOrder.add("Jun");
+		monthInOrder.add("Jul");
+		monthInOrder.add("Aug");
+		monthInOrder.add("Sep");
+		monthInOrder.add("Oct");
+		monthInOrder.add("Nov");
+		monthInOrder.add("Dec");
+
+		List<WebElement> monthDropDownList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_month_end_date_xpath"));
+
+		Select monthDropdown = new Select(monthDropDownList.get(0));
+		
+		List<String> monthListInString = new ArrayList<String>();
+		for (WebElement monthWebelement : monthDropdown.getOptions()) {
+			monthListInString.add(monthWebelement.getText());
+		}
+
+		assertTrue(monthInOrder.equals(monthListInString));
+	}
+	
+	public void verifyGregorianCalendarFormat(String day, String month, String year) {
+		String s = day + "/" + month + "/" + year;
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMMM/yyyy");
+		try {
+			Date date = simpleDateFormat.parse(s);
+			assertTrue(true);			
+		} catch (Exception ex) {
+			assertTrue(false);
+		}
+	}
+	
+	public void verifyDateIsBeforeToday(String day, String month, String year) throws ParseException {
+
+		String enteredDate = day + "/" + month + "/" + year;
+		SimpleDateFormat dateFormatObj = new SimpleDateFormat("dd/MMMM/yyyy");
+		Date date = dateFormatObj.parse(enteredDate);
+		Calendar cal = Calendar.getInstance();
+		if (date.compareTo(dateFormatObj.parse(dateFormatObj.format(cal.getTime()))) > 0) {
+			assertTrue(false);
+		} else {
+			assertTrue(true);
+		}
+
+	}
+	
+	public void verifyErrorMessageForEndDate(String errMsg) {
+		assertEquals(
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_error_for_invalid_date")).getText(),
+				errMsg);
+	}
+	
+	public void verifyDateLaterThanToday() throws ParseException  {		
+		SimpleDateFormat dateFormatObj = new SimpleDateFormat("dd/MMMM/yyyy");		
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.YEAR, 1);
+	    Date futureDate = dateFormatObj.parse(dateFormatObj.format(cal.getTime()));	   
+        String futureYear = Integer.toString(futureDate.getYear()+1900);
+        enterYearInEndDate(futureYear);      
+        
+	}
+	
+	public void clearBeganDate() {
+		clearValue(CityIdentifiers.getObjectIdentifier("city_day_began_date_xpath"));
+		enterMonthInBeganDate("");
+		clearValue(CityIdentifiers.getObjectIdentifier("city_year_began_date_xpath"));
+	}
+	
+	public void checkErrMsgAtTopPage(String errMsg) {
+		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_error_msg_at_top_page")).getText(), 
+				errMsg);
+	}
+		
 	@Override
 	public String getPageUrl() {
 		return null;
