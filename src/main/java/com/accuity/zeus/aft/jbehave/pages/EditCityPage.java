@@ -46,27 +46,7 @@ public class EditCityPage extends AbstractPage {
 		getDriver().findElement(webElement).clear();
 		getDriver().findElement(webElement).sendKeys(value);
 	}
-
-	/**
-	 * This method is to verify the value displayed in the population field
-	 */
-	public void verifyTextInPopulation() {
-		assertTrue(
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).isDisplayed());
-	}
-
-	/**
-	 * This method is to enter the random number of range (51) in population
-	 * field
-	 */
-	String populationMaximumValue = null;
-
-	public void enterCharactersMaximumlimitInCityPopulation(int limit) {
-		String value = getRandomNumericString(limit);
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).clear();
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id")).sendKeys(value);
-		populationMaximumValue = value;
-	}
+	
 
 	/**
 	 * This method is to enter the value in addInfo text field
