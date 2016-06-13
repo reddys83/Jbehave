@@ -92,6 +92,7 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_personnel_add_button_id", By.id("add-personnel"));
         hmap.put("legalEntity_personnel_type_error_message_xpath", By.xpath(".//*[@id='additionalPersonnel']//p[@class='notification error']"));
         hmap.put("legalEntity_personnel_value_error_message_xpath", By.xpath(".//*[@id='additionalPersonnel']//p[@data-error_id='personnelValueError']"));
+        hmap.put("legalEntity_office_page_offices_label_xpath",By.xpath("//div[@id='subEntityList-summary']//span[text()='offices']"));
     }
 
 
