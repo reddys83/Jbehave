@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.rest.Response;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
@@ -13,11 +14,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.springframework.http.ResponseEntity;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 import static org.junit.Assert.*;
@@ -197,6 +200,7 @@ public class DataPage extends AbstractPage {
     private By delete_row_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
     private By delete_confirmation_no_button_id = By.id("no-button");
     private By delete_confirmation_yes_button_id = By.id("yes-button");
+    private By save_success_message_id=By.id("saveSuccess");
 
     static ResponseEntity responseEntity;
     static String endpointWithID;
@@ -950,6 +954,7 @@ public class DataPage extends AbstractPage {
 
     public void clickOnCityRelatedPlace(String relatedPlace) {
         attemptClick(By.xpath(city_related_places_place_link_xpath + relatedPlace + "']/td/a"));
+        waitForElementToAppear(area_listBox_xpath);
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -1007,6 +1012,8 @@ public class DataPage extends AbstractPage {
 
     public void clickOnConfirmButton() {
         attemptClick(confirm_button_xpath);
+        (new WebDriverWait(getDriver(), 30)).until(ExpectedConditions.presenceOfElementLocated(save_success_message_id));
+
     }
 
     public void getDocument(String xqueryName, String param, String entity) {
