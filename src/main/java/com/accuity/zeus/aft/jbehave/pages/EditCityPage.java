@@ -189,8 +189,8 @@ public class EditCityPage extends AbstractPage {
 		Select monthDropdown = new Select(monthDropDownList.get(0));
 
 		List<String> monthListInString = new ArrayList<String>();
-		for (WebElement monthWebelement : monthDropdown.getOptions()) {
-			monthListInString.add(monthWebelement.getText());
+		for (WebElement monthoption : monthDropdown.getOptions()) {
+			monthListInString.add(monthoption.getText());
 		}
 
 		assertTrue(monthInOrder.equals(monthListInString));
