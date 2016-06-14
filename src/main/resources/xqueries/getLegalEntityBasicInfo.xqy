@@ -51,6 +51,10 @@ then $legalEntityS/summary/leadInstitution
 else ""
 
 let $entitytypes:= ($legalEntityS/summary/types/type)
+let $history:=if(fn:exists($legalEntityS/history/summaries/summary))
+then "null"
+else $legalEntityS/history/summaries/summary/text()
+
 
 
 return <legalEntity>
@@ -68,6 +72,7 @@ return <legalEntity>
     <postalCode>{$postalCode}</postalCode>
     <corporateStatement>{$corporateStatement}</corporateStatement>
     <entitytype>{$entitytypes}</entitytype>
+    <history>{$history}</history>
 </legalEntity>
 
 (:return $legalEntityS:)

@@ -711,6 +711,11 @@ public class EditLegalEntityPage extends AbstractPage {
         assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_AdditionalInfos_err_msg_xpath")).getText(), "Enter up to 10000 valid characters.");
     }
 
+    public void verifyHistoryTextAreaLength(String fid) {
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_history_value_edit_xpath")).getAttribute("maxlength"), "10000");
+    }
+
+
 
     public void clickOnExistingEntityTypeDropDown() {
         getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_entitytypes_dropdown_xpath")).get(0).click();
@@ -928,6 +933,23 @@ public class EditLegalEntityPage extends AbstractPage {
         assertTrue(getNodeValuesByTagName(document, "value").contains(EditLegalEntityLocationsValue));
     }
 
+    public void verifyLegalEntityHistoryInZeusDocument(String fid,String historyValue) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
+        if (historyValue.equals(""))
+        {
+            historyValue="null";
+        }
+        assertTrue(getNodeValuesByTagName(document, "history").contains(historyValue));
+    }
+
     public void verifyLegalEntityBoardMeetingInZeus(String fid) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
@@ -948,6 +970,10 @@ public class EditLegalEntityPage extends AbstractPage {
         clearAndEnterValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_locations_summary_value_edit_xpath"), value);
     }
 
+    public void enterValueInLegalEntityHistoryTextField(String value)
+    {
+        clearAndEnterValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_history_value_edit_xpath"), value);
+    }
     public void verifyRequiredErrorMessageForTypeInLegalEntityLocations() {
         assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_location_type_error_message_xpath")).getText(), "Required");
     }

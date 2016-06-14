@@ -21,6 +21,7 @@ import java.util.List;
 
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
 public class DataPage extends AbstractPage {
 
@@ -1210,6 +1211,18 @@ public class DataPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
+    public void verifyNoSummaryConfirmationModal(ExamplesTable Summary) {
+        try {
+            Thread.sleep(1000);
+            List<WebElement> confirmChanges = getDriver().findElements(edit_confirmationModal_summary_xpath);
+            for (int i = 0; i < Summary.getRowCount(); i++) {
+                assertFalse(Summary.getRow(i).get(Summary.getHeaders().get(0)).equals(confirmChanges.get(i).getText()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            assertTrue(true);
+        }
+    }
   
     public void verifyDeleteConfirmationModal() {
         assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(delete_row_confirmation_modal_xpath).getText());
