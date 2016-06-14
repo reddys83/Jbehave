@@ -399,7 +399,6 @@ Examples:
 |country|area|city|
 |Chad|No Area|Doba|
 
-
 Scenario: 
 User is updating a City's Basic Info - 
 User verifies the default value is from trusted and Then user has entered an 'End Date' that is different from the current value. 
@@ -417,7 +416,7 @@ And the user clicks on the city basic info link in the navigation bar
 Then the user should see city end date value same as in trusted document
 When the user clicks on the city update link
 When the user gets the document with get document id for city with the <city> from the database
-When the user enters the day <began_day> in the text box for Began Date
+When the user enters the day <beganDay> in the text box for Began Date
 When the user enters the month <beganMonth> in the drop down box for Began Date
 When the user enters the year <beganYear> in the text box for Began Date
 When the user enters the day <endDay> in the text box for End Date
@@ -460,7 +459,7 @@ And the user clicks on the city basic info link in the navigation bar
 Then the user should see city end date value same as in trusted document
 When the user clicks on the city update link
 When the user gets the document with get document id for city with the <city> from the database
-When the user enters the day <began_day> in the text box for Began Date
+When the user enters the day <beganDay> in the text box for Began Date
 When the user enters the month <beganMonth> in the drop down box for Began Date
 When the user enters the year <beganYear> in the text box for Began Date
 When the user enters the day <endDay> in the text box for End Date
@@ -496,7 +495,7 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
-When the user enters the day <began_day> in the text box for Began Date
+When the user enters the day <beganDay> in the text box for Began Date
 When the user enters the month <beganMonth> in the drop down box for Began Date
 When the user enters the year <beganYear> in the text box for Began Date
 When the user enters the day <endDay> in the text box for End Date
@@ -526,7 +525,7 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
-When the user enters the day <began_day> in the text box for Began Date
+When the user enters the day <beganDay> in the text box for Began Date
 When the user enters the month <beganMonth> in the drop down box for Began Date
 When the user enters the year <beganYear> in the text box for Began Date
 When the user enters the future date in the text box for End Date
@@ -550,7 +549,7 @@ And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
 When the user gets the document with get document id for city with the <city> from the database
-When the user enters the day <began_day> in the text box for Began Date
+When the user enters the day <beganDay> in the text box for Began Date
 When the user enters the month <beganMonth> in the drop down box for Began Date
 When the user enters the year <beganYear> in the text box for Began Date
 When the user enters the day <endDay> in the text box for End Date
@@ -586,7 +585,7 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
-When the user enters the day <began_day> in the text box for Began Date
+When the user enters the day <beganDay> in the text box for Began Date
 When the user enters the month <beganMonth> in the drop down box for Began Date
 When the user enters the year <beganYear> in the text box for Began Date
 When the user enters the day <endDay> in the text box for End Date

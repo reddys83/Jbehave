@@ -310,8 +310,8 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().deleteAllIdentifierRows();
 	}
 	
-	@When("the user enters the day <began_day> in the text box for Began Date")
-	public void enterDayInBeganDate(@Named("began_day") String beganDay) {
+	@When("the user enters the day <beganDay> in the text box for Began Date")
+	public void enterDayInBeganDate(@Named("beganDay") String beganDay) {
 		getEditCityPage().enterDayInBeganDate(beganDay);
 	}
 
