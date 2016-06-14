@@ -254,7 +254,6 @@ When the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 And the user clicks on the city update link
 When the user gets the document with get document id for city with the <city> from the database
-Then the user should see the addInfoText value same as in trusted document
 When the user enters the <value> in the population field
 When the user clicks on the save button in city page
 Then the user should see the below summary changes in confirmation modal

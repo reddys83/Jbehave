@@ -39,7 +39,8 @@ public class CityIdentifiers {
 		hmap.put("city_add_info_text_xpath", By.xpath(("//*[@id='cityBasicInfo']//textarea[@name='addInfo']")));		
 		hmap.put("city_save_confirmation_message_id", By.xpath(("//*[@id='saveSuccess']")));
 		hmap.put("city_addInfo_error_message_edit_xpath", By.xpath("//*[@id='cityBasicInfo']//*[@data-error_id='addInfoError']"));		
-		hmap.put("save_button_id", By.xpath("//*[@id='save-button']"));		
+		hmap.put("save_button_id", By.xpath("//*[@id='save-button']"));	
+		hmap.put("city_add_info_xpath_after_save", By.xpath("//*[@id='cityBasicInfo']//tr[th='Add Info']/td"));
 		
 	}
 
