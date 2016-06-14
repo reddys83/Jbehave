@@ -37,6 +37,7 @@ public class EditCitySteps extends AbstractSteps {
 	@Then("the user should see city end date value same as in $source document")
 	public void verifyCityEndDateValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source) {
+		setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().verifyCityEndDateValueFromTrusted(country, area, city, "EndDate", source);
 	}
 	
@@ -93,7 +94,7 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyDateIsBeforeToday(day, month, year);
 	}
 	
-	@Then("the user verifies whether error message <errMsg> is displayed")
+	@Then("the user verifies whether error message <errMsg> is displayed for End Date")
 	public void verifyErrorMessageForEndDate(@Named("errMsg") String errMsg) {
 		getEditCityPage().verifyErrorMessageForEndDate(errMsg);
 	}
@@ -113,9 +114,9 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().enterYearInEndDate(year);
 	}
 	
-	@When("the user enters the future year in the text box for End Date")
-	public void verifyDateLaterThanToday() throws ParseException {
-		getEditCityPage().verifyDateLaterThanToday();
+	@When("the user enters the future date in the text box for End Date")
+	public void enterDateLaterThanToday() throws ParseException {
+		getEditCityPage().enterDateLaterThanToday();
 	}
 	
 	@When("the user clears the day, month and year values for Began Date")
@@ -123,9 +124,5 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().clearBeganDate();
 	}
 	
-	@Then("the user checks the error message <errMsg> is displayed at the top of the page")
-	public void checkErrMsgAtTopPage(@Named("errMsg") String errMsg) {
-		getEditCityPage().checkErrMsgAtTopPage(errMsg);
-	}
 
 }

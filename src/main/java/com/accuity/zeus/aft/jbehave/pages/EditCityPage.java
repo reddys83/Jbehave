@@ -1,4 +1,5 @@
 package com.accuity.zeus.aft.jbehave.pages;
+
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
@@ -21,6 +22,7 @@ import org.w3c.dom.Document;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import java.text.Format;
 
 
 public class EditCityPage extends AbstractPage {
@@ -33,9 +35,8 @@ public class EditCityPage extends AbstractPage {
 	public void clearAndEnterValue(By webElement, String value) {
 		getDriver().findElement(webElement).clear();
 		getDriver().findElement(webElement).sendKeys(value);
-
 	}
-	
+
 	/**
 	 * This method is to verify whether the successful message is generated
 	 * after saving the city page.
@@ -79,12 +80,11 @@ public class EditCityPage extends AbstractPage {
 		return tagValue;
 	}
 
-
 	public void verifyCityInfoFromDB(String country, String area, String city, String tagName, String source,
 			String valueTobeverifed) {
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), valueTobeverifed);
 	}
-	
+
 	public void clearValue(By webElement) {
 		getDriver().findElement(webElement).clear();
 	}
@@ -98,7 +98,7 @@ public class EditCityPage extends AbstractPage {
 		} catch (Exception e) {
 			assertTrue(true);
 		}
-	}	
+	}
 
 	/**
 	 * This method is used to verify the value in trusted DB is same as UI
@@ -109,27 +109,27 @@ public class EditCityPage extends AbstractPage {
 	 * @param city
 	 * @param tagName
 	 * @param source
-	 */		
+	 */
 	public void verifyCityEndDateValueFromTrusted(String country, String area, String city, String tagName,
-			String source) {		
-		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_end_date_info_text_xpath")).getText());
+			String source) {
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_end_date_info_text_xpath")).getText());
 
 	}
-	
+
 	public void enterDayInBeganDate(String day) {
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_day_began_date_xpath"), day);
 	}
-	
+
 	public void enterMonthInBeganDate(String month) {
 		try {
 			List<WebElement> monthDropDowns = getDriver()
 					.findElements(CityIdentifiers.getObjectIdentifier("city_month_began_date_xpath"));
-			Select dropdown = new Select(monthDropDowns.get(0));			
+			Select dropdown = new Select(monthDropDowns.get(0));
 			if (month.equals("")) {
 				dropdown.selectByValue(month);
 			} else {
-			    month = month.substring(0, 3);
+				month = month.substring(0, 3);
 				dropdown.selectByVisibleText(month);
 			}
 
@@ -141,20 +141,20 @@ public class EditCityPage extends AbstractPage {
 	public void enterYearInBeganDate(String year) {
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_year_began_date_xpath"), year);
 	}
-	
+
 	public void enterDayInEndDate(String day) {
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_day_end_date_xpath"), day);
 	}
-	
+
 	public void enterMonthInEndDate(String month) {
 		try {
 			List<WebElement> monthDropDowns = getDriver()
 					.findElements(CityIdentifiers.getObjectIdentifier("city_month_end_date_xpath"));
-			Select dropdown = new Select(monthDropDowns.get(0));			
+			Select dropdown = new Select(monthDropDowns.get(0));
 			if (month.equals("")) {
 				dropdown.selectByValue(month);
 			} else {
-			    month = month.substring(0, 3);
+				month = month.substring(0, 3);
 				dropdown.selectByVisibleText(month);
 			}
 
@@ -166,7 +166,7 @@ public class EditCityPage extends AbstractPage {
 	public void enterYearInEndDate(String year) {
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_year_end_date_xpath"), year);
 	}
-	
+
 	public void verifyMonthInChronologicalOrder() {
 		List<String> monthInOrder = new ArrayList<String>();
 		monthInOrder.add(" ");
@@ -187,7 +187,7 @@ public class EditCityPage extends AbstractPage {
 				.findElements(CityIdentifiers.getObjectIdentifier("city_month_end_date_xpath"));
 
 		Select monthDropdown = new Select(monthDropDownList.get(0));
-		
+
 		List<String> monthListInString = new ArrayList<String>();
 		for (WebElement monthWebelement : monthDropdown.getOptions()) {
 			monthListInString.add(monthWebelement.getText());
@@ -195,18 +195,18 @@ public class EditCityPage extends AbstractPage {
 
 		assertTrue(monthInOrder.equals(monthListInString));
 	}
-	
+
 	public void verifyGregorianCalendarFormat(String day, String month, String year) {
 		String s = day + "/" + month + "/" + year;
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMMM/yyyy");
 		try {
 			Date date = simpleDateFormat.parse(s);
-			assertTrue(true);			
+			assertTrue(date!=null);
 		} catch (Exception ex) {
 			assertTrue(false);
 		}
 	}
-	
+
 	public void verifyDateIsBeforeToday(String day, String month, String year) throws ParseException {
 
 		String enteredDate = day + "/" + month + "/" + year;
@@ -220,38 +220,31 @@ public class EditCityPage extends AbstractPage {
 		}
 
 	}
-	
+
 	public void verifyErrorMessageForEndDate(String errMsg) {
 		assertEquals(
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_error_for_invalid_date")).getText(),
 				errMsg);
 	}
-	
-	public void verifyDateLaterThanToday() throws ParseException  {		
-		SimpleDateFormat dateFormatObj = new SimpleDateFormat("dd/MMMM/yyyy");		
+
+	public void enterDateLaterThanToday() throws ParseException {
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.YEAR, 1);
-	    Date futureDate = dateFormatObj.parse(dateFormatObj.format(cal.getTime()));	   
-        String futureYear = Integer.toString(futureDate.getYear()+1900);
-        enterYearInEndDate(futureYear);      
-        
+		enterDayInEndDate(Integer.toString(cal.get(Calendar.DATE) + 1));
+		Format formatter = new SimpleDateFormat("MMMM"); 
+	    String month = formatter.format(new Date());
+		enterMonthInEndDate(month);
+		enterYearInEndDate(Integer.toString(cal.get(Calendar.YEAR) + 1));		
 	}
-	
+
 	public void clearBeganDate() {
 		clearValue(CityIdentifiers.getObjectIdentifier("city_day_began_date_xpath"));
 		enterMonthInBeganDate("");
 		clearValue(CityIdentifiers.getObjectIdentifier("city_year_began_date_xpath"));
 	}
 	
-	public void checkErrMsgAtTopPage(String errMsg) {
-		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_error_msg_at_top_page")).getText(), 
-				errMsg);
-	}
-		
 	@Override
 	public String getPageUrl() {
 		return null;
 	}
 
 }
-
