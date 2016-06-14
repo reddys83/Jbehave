@@ -43,13 +43,13 @@ return
   </identifier>
   
 (: Taking Begin Date and End Date:)
-let $DateFields := for $x in $city
-let $BeginDate :=local:getDateAsPerAccuracy($x/summary/dates/dateBegan)
-let $EndDate :=local:getDateAsPerAccuracy($x/summary/dates/dateCeased)
+let $dateFields := for $x in $city
+let $beginDate :=local:getDateAsPerAccuracy($x/summary/dates/dateBegan)
+let $endDate :=local:getDateAsPerAccuracy($x/summary/dates/dateCeased)
 return
     <cityDate>     
-        <BeginDate>{$BeginDate}</BeginDate>
-        <EndDate>{$EndDate}</EndDate>
+        <BeginDate>{$beginDate}</BeginDate>
+        <EndDate>{$endDate}</EndDate>
     </cityDate>
     
 let $cityStatus := ($city/summary/status/text())
@@ -59,7 +59,7 @@ return
   <city>
   <status>{$cityStatus}</status>
   <identifiers> {$cityIdentifierList} </identifiers> 
-  <dateFields>{$DateFields}</dateFields>
+  <dateFields>{$dateFields}</dateFields>
   <additionalinfo>{$cityadditionalinfo}</additionalinfo>
   <population>{$cityPopulation}</population>
   </city>
