@@ -1,19 +1,22 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.zeus.aft.io.ApacheHttpClient;
-import com.accuity.zeus.aft.io.Database;
-
 import java.text.ParseException;
 
-import org.jbehave.core.annotations.*;
+import org.jbehave.core.annotations.Named;
+import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 
 @Component
 public class EditCitySteps extends AbstractSteps {
 
 	@Autowired
 	ApacheHttpClient apacheHttpClient;
+	
 	@Autowired
 	Database database;
 

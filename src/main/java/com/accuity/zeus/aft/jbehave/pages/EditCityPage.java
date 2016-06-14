@@ -1,31 +1,33 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
-import com.accuity.zeus.aft.io.ApacheHttpClient;
-import com.accuity.zeus.aft.io.Database;
-import com.accuity.zeus.aft.io.HeraApi;
-import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
-import com.accuity.zeus.aft.rest.RestClient;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import org.openqa.selenium.NoSuchElementException;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.w3c.dom.Document;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import java.text.Format;
+import org.w3c.dom.Document;
+
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
+import com.accuity.zeus.aft.rest.RestClient;
 
 
 public class EditCityPage extends AbstractPage {
@@ -58,7 +60,8 @@ public class EditCityPage extends AbstractPage {
 
 	public void enterTextCityAddInfo(String addInfoText) {
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath"), addInfoText);
-	}	
+	}
+	
 	public void clearAndEnterValue(By webElement, String value) {
 		getDriver().findElement(webElement).clear();
 		getDriver().findElement(webElement).sendKeys(value);
