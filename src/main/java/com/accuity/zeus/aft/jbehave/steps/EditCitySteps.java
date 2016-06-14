@@ -309,6 +309,11 @@ public class EditCitySteps extends AbstractSteps {
 	public void deleteAllIdentifiers() {
 		getEditCityPage().deleteAllIdentifierRows();
 	}
+	
+	@When("the user enters the day <began_day> in the text box for Began Date")
+	public void enterDayInBeganDate(@Named("began_day") String beganDay) {
+		getEditCityPage().enterDayInBeganDate(beganDay);
+	}
 
 	@When("the user enters the month <beganMonth> in the drop down box for Began Date")
 	public void enterMonthInBeganDate(@Named("beganMonth") String month) {
@@ -386,6 +391,15 @@ public class EditCitySteps extends AbstractSteps {
 	@When("the user clears the day, month and year values for Began Date")
 	public void clearBeganDate() {
 		getEditCityPage().clearBeganDate();
+	}
+	
+	@Then("the user should see city end date value same as in $source document")
+	public void verifyCityEndDateValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source) {
+		    setEditCityPage(getDataPage().createEditCityPage());
+			getEditCityPage().verifyCityEndDateFromTrustedDB(country, area, city, "EndDate", source);	
+		
+		
 	}
 	
 

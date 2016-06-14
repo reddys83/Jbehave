@@ -911,6 +911,13 @@ public class EditCityPage extends AbstractPage {
 		clearValue(CityIdentifiers.getObjectIdentifier("city_year_began_date_xpath"));
 	}
 	
+public void verifyCityEndDateFromTrustedDB(String country, String area, String city, String tagName, String source) {
+		
+		
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_end_date_info_text_xpath")).getText());
+
+	}
+	
 	@Override
 	public String getPageUrl() {
 		return null;
