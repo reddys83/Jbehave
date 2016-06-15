@@ -325,4 +325,51 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyCityInfoFromDB(country, area, city, "population", source, population);
 	}	
 
+	@When("the user enters began date day <day> in the edit basic info city page")
+	public void enterDayBeganDate(@Named("day") String day)
+	{
+		getEditCityPage().enterDayBeganDate(day);
+	}
+	
+	@When("the user enters began date year <year> in the edit basic info city page")
+	public void enterYearBeganDate(@Named("year") String year)
+	{
+		getEditCityPage().enterYearBeganDate(year);
+	}
+	
+	@When("the user enters began date month <month> in the edit basic info city page")
+	public void selectMonthBeganDate(@Named("month") String month)
+	{
+		getEditCityPage().selectMonthBeganDate(month);
+	}
+	
+	@Then("the user should see the error $beganDateErrorMsg for began date")
+	public void verifyErrorMessageBeganDate(@Named("beganDateErrorMsg") String beganDateErrorMsg)
+	{
+		getEditCityPage().verifyErrorMessageBeganDate(beganDateErrorMsg);
+	}
+	
+	@Then("the user should see the entered <day> <month> <year> in city page")
+	public void verifyDayMonthYearInCityPage(@Named("day") String day,@Named("month") String month,@Named("year") String year)
+	{
+		getEditCityPage().verifyDayMonthYearInCityPage(day,month,year);
+	}
+	
+	@Then("the user should see the city began date <day><month><year> value in $source document")
+	public void verifyCityBeganDateValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city,@Named("day") String day,@Named("month") String month,@Named("year") String year,@Named("source") String source) {
+		    getEditCityPage().verifyCityBeganDateFromZeusDB(country, area, city, "BeginDate", source, day,month,year);
+	}
+	
+	@Then("the user verifies whether all the months in the drop down option are in MMM format & are sorted in the chronological order")
+       public void verifyMonthInChronologicalOrder() {
+              getEditCityPage().verifyMonthInChronologicalOrder();
+       }
+	
+	@Then("the user should see the began date value in city page is same as in $source document")
+	public void verifyCityBeganDateValueFromDB(@Named("country") String country, @Named("area") String area,
+					@Named("city") String city, @Named("source") String source) {
+	
+		getEditCityPage().verifyCityBeganDateFromTrustedDB(country, area, city, "BeginDate", source);
+	}
 }

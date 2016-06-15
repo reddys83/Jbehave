@@ -50,7 +50,12 @@ public class CityIdentifiers {
     	hmap.put("city_AdditionalIdentifiers", By.xpath("#additionalIdentifiers"));    	 
     	
     	hmap.put("city_population_input_id", By.xpath("//*[@id='cityBasicInfo']//*[@name='population']"));					
-		hmap.put("city_population_error_message_id", By.xpath("//*[@id='cityBasicInfo']//*[@data-error_id='populationError']"));	
+		hmap.put("city_population_error_message_id", By.xpath("//*[@id='cityBasicInfo']//*[@data-error_id='populationError']"));
+		hmap.put("city_begandate_day_input_xpath", By.xpath("//input[@name='startDate-day']"));
+    	hmap.put("city_begandate_year_input_xpath", By.xpath("//input[@name='startDate-year']"));
+    	hmap.put("city_begandate_month_dropdown_xpath", By.xpath("//select[@name='startDate-month']"));
+    	hmap.put("city_begandate_errorMessage_xpath",By.xpath("//*[@data-error_id='startDateError']"));    	
+    	hmap.put("city_get_beganDate_value_xpath",By.xpath("//*[@id='cityBasicInfo']//tr[th='Began Date']/td"));
     
 	}
 
