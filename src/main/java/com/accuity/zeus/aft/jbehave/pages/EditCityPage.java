@@ -760,6 +760,35 @@ public class EditCityPage extends AbstractPage {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_identifier_type_input_xpath"));
 	}
 
+	/**
+	 * This method is to enter the value in population text field
+	 * 
+	 * @param value
+	 */
+	public void entervalueInPopulationField(String value) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_population_input_id"), value);
+	}
+	
+	/**
+	 * This is to verify error message is displayed for population field as
+	 * expected
+	 */
+	public void verifyErrorMessageInCityPopulation() {
+
+		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_error_message_id"))
+				.getText(), "Enter up to 50 valid numbers.");
+	}
+		
+	/**
+	 * This is to verify maximum length of population field is 50
+	 */
+	public void verifyMaxLengthInCityPopulation(String maxLength) {
+
+		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id"))
+				.getAttribute("maxlength"), maxLength);
+	}
+	
+	
 	@Override
 	public String getPageUrl() {
 		return null;

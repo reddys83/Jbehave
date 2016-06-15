@@ -303,5 +303,26 @@ public class EditCitySteps extends AbstractSteps {
 	public void deleteAllIdentifiers() {
 		getEditCityPage().deleteAllIdentifierRows();
 	}
+	
+	@When("the user enters the <value> in the population field")
+	public void entervalueInPopulationField(@Named("value") String value) {
+		getEditCityPage().entervalueInPopulationField(value);
+	}
+
+	@Then("the user should be able to view the error message 'Enter up to 50 valid numbers'")
+	public void verifyErrorMessageInCityPopulation() {
+		getEditCityPage().verifyErrorMessageInCityPopulation();
+	}	
+
+	@Then("the user should see maximum length of population is limited to $maxLength")
+	public void verifyMaxLengthInCityPopulation(String maxLength) {
+		getEditCityPage().verifyMaxLengthInCityPopulation(maxLength);
+	}
+	
+	@Then("the user should see the population $value as in $source document")
+	public void verifyCityPopulationValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source, @Named("value") String population) {
+		getEditCityPage().verifyCityInfoFromDB(country, area, city, "population", source, population);
+	}	
 
 }

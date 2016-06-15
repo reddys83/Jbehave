@@ -47,7 +47,10 @@ public class CityIdentifiers {
     	hmap.put("city_save_confirmation_message_id", By.xpath(("//*[@id='saveSuccess']")));
     	hmap.put("cityIdentifier_type_id", By.cssSelector("#identifierType"));
     	hmap.put("cityIdentifier_status_id", By.cssSelector("#identifierStatus"));
-    	hmap.put("city_AdditionalIdentifiers", By.xpath("#additionalIdentifiers"));    	    	
+    	hmap.put("city_AdditionalIdentifiers", By.xpath("#additionalIdentifiers"));    	 
+    	
+    	hmap.put("city_population_input_id", By.xpath("//*[@id='cityBasicInfo']//*[@name='population']"));					
+		hmap.put("city_population_error_message_id", By.xpath("//*[@id='cityBasicInfo']//*[@data-error_id='populationError']"));	
     
 	}
 
