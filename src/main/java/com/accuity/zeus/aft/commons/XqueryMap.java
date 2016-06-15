@@ -86,6 +86,8 @@ public class XqueryMap {
         queryMap.put("get city identifiers", "getCountryIdentifiers.xqy");        
 		queryMap.put("get city Status types","getCityStatusTypes.xqy");
 		queryMap.put("get city basic info","getCityBasicInfo.xqy");
+        queryMap.put("get LegalEntity IdentifierTypes From Lookup","getLegalEntityIdentifierTypesFromLookup.xqy");
+        queryMap.put("get LegalEntity IdentifierStatus From Lookup","getLegalEntityIdentifierStatusFromLookup.xqy");
 
    }
 

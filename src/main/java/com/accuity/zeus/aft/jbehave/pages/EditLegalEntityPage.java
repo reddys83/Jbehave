@@ -120,7 +120,7 @@ public class EditLegalEntityPage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("source", source));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
         if (document != null) {
-            assertEquals(getNodeValuesByTagName(document, tagName), getAlreadySelectedEntityTypes());
+            assertEquals(getNodeValuesByTagName(document, tagName), getAlreadySelectedEntityTypes("legalEntity_basicInfo_entitytypes_dropdown_xpath"));
         }
 
     }
@@ -736,7 +736,7 @@ public class EditLegalEntityPage extends AbstractPage {
         }
         // finding the list of values from the taxonomy and subtracting the values which are selected in other dropdowns
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity entity types", nvPairs);
-        List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "EntityType"), getAlreadySelectedEntityTypes());
+        List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "EntityType"), getAlreadySelectedEntityTypes("legalEntity_basicInfo_entitytypes_dropdown_xpath"));
         assertEquals(dropdownValuesList, resultList);
 
     }
@@ -764,9 +764,9 @@ public class EditLegalEntityPage extends AbstractPage {
 
     }
 
-    public List<String> getAlreadySelectedEntityTypes() {
+    public List<String> getAlreadySelectedEntityTypes(String identifier) {
         ArrayList<String> selectedValueList = new ArrayList();
-        for (WebElement entityTypeDropDown : getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_entitytypes_dropdown_xpath"))) {
+        for (WebElement entityTypeDropDown : getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(identifier))) {
             Select dropdown = new Select(entityTypeDropDown);
             String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
             selectedValueList.add(selectedValue);
@@ -998,32 +998,23 @@ public class EditLegalEntityPage extends AbstractPage {
     public void clickOnIdentifierStatusDropDown(String rowIdentifier) {
         getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
     }
-    public void verifyLegalEntityIdentifierTypesListFromLookup(String rowIdentifier,String lookupFid) {
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("fid", lookupFid));
-        List<WebElement> identifierTypesList = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
+    public void verifyLegalEntityIdentifierTypesListFromLookup(String rowIdentifier) {
 
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity IdentifierTypes From Lookup", nvPairs);
-        for (int i = 1; i < document.getElementsByTagName("IdentifierType").getLength(); i++) {
-            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), identifierTypesList.get(i).getAttribute("value"));
-        }
+        List<String> dropdownValuesList = returnAllListValues(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity IdentifierTypes From Lookup", null);
+        // finding the list of values from the taxonomy and subtracting the values which are selected in other dropdowns
+        List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "IdentifierType"), getAlreadySelectedEntityTypes("legalEntity_Identifier_All_Types_dropdown_xpath"));
+        assertEquals(dropdownValuesList, resultList);
 
     }
     public void clickOnLegalEntityIdentifierStatus() {
         attemptClick(LegalEntityIdentifiers.getObjectIdentifier("LegalEntity_Identifier_status_xpath"));
     }
 
-    public void verifyLegalEntityIdentifierStatusList(Database database, ApacheHttpClient apacheHttpClient) {
-        List<WebElement> legalEntityIdentifierStatusList = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Identifier_status_list_xpath"));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get LegalEntity IdentifierStatus From Lookup");
-        for (int i = 1; i < document.getElementsByTagName("IdentifierStatus").getLength(); i++) {
-            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), legalEntityIdentifierStatusList.get(i).getText());
-        }
+    public void verifyLegalEntityIdentifierStatusList(String rowIdentifier) {
+        List<String> dropdownValuesList = returnAllListValues(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity IdentifierStatus From Lookup", null);
+        assertEquals(dropdownValuesList, getNodeValuesByTagName(document, "IdentifierStatus"));
     }
 
     public void clickOnAddNewIdentifiersButton() {

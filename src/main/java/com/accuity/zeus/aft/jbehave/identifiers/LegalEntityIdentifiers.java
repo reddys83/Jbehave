@@ -87,8 +87,9 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_new_locations_summary_value_edit_xpath",By.xpath("//*[@id='additionalLocationSummaries']/tr[@class='new']//td//textarea"));
         hmap.put("legalEntity_office_page_offices_label_xpath",By.xpath("//div[@id='subEntityList-summary']//span[text()='offices']"));
         hmap.put("legalEntity_Identifier_link_Navigation_xpath",By.xpath(".//*[@id='legalEntityIdentifiers']"));
-        hmap.put("first_row_existing_identifier_type_drodpdown",By.xpath(".//*[@id='additionalIdentifiers']/tr[1]/td[1]/select"));
-        hmap.put("first_row_existing_identifier_status_drodpdown",By.xpath(".//*[@id='additionalIdentifiers']/tr[1]/td[3]/select"));
+        hmap.put("first_row_existing_identifier_type_dropdown",By.xpath("//*[@id='additionalIdentifiers']/tr[1]/td[1]/select"));
+        hmap.put("first_row_existing_identifier_status_dropdown",By.xpath("//*[@id='additionalIdentifiers']/tr[1]/td[3]/select"));
+        hmap.put("legalEntity_Identifier_All_Types_dropdown_xpath", By.xpath("//*[@id='additionalIdentifiers']/tr/td/select[@id='identifierType']"));
         hmap.put("legalEntity_Identifier_type_list_xpath",By.xpath("//*[@id='additionalIdentifiers']//*[@class=\"new\"]//select/option"));
         hmap.put("LegalEntity_Identifier_status_xpath",By.xpath(".//*[@id='additionalIdentifiers']/tr[1]/td[3]/select"));
         hmap.put("legalEntity_delete_identifiers_row_button_xpath",By.xpath(".//*[@id='additionalIdentifiers']/tr[1]/td[4]/button"));

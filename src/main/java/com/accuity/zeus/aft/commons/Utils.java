@@ -85,11 +85,16 @@ public class Utils {
         URIBuilder builder = new URIBuilder();
 
         try {
-            return builder.setScheme(scheme)
+            return nvPairs != null ? builder.setScheme(scheme)
                     .setHost(host)
                     .setPort(port)
                     .setPath(path + xqueryMap.getXquery(xquery))
-                    .addParameters(nvPairs).build().toString();
+                    .addParameters(nvPairs).build().toString() :
+                    builder.setScheme(scheme)
+                            .setHost(host)
+                            .setPort(port)
+                            .setPath(path + xqueryMap.getXquery(xquery))
+                            .build().toString();
         }
         catch (URISyntaxException e) {
             e.printStackTrace();

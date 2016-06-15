@@ -536,8 +536,8 @@ public class EditLegalEntitySteps extends AbstractSteps{
     }
 
     @Then("the user should see the identifier values for $row_Identifier from lookup $lookup except the values that are selected already")
-    public void verifyLegalEntityIdentifierTypesListFromLookup(@Named("row_Identifier") String row_Identifier, @Named("lookup") String lookup) {
-        getEditLegalEntityPage().verifyLegalEntityIdentifierTypesListFromLookup(row_Identifier, lookup);
+    public void verifyLegalEntityIdentifierTypesListFromLookup(@Named("row_Identifier") String row_Identifier, @Named("lookup") String lookupFid) {
+        getEditLegalEntityPage().verifyLegalEntityIdentifierTypesListFromLookup(row_Identifier);
     }
 
     @When("the user clicks on the $rowIdentifier in the legalentity identifier status section")
@@ -545,9 +545,9 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().clickOnIdentifierStatusDropDown(rowIdentifier);
     }
 
-    @Then("the user should see the legal entity identifier status from lookup STATUS")
-    public void verifyLegalEntityIdentifierStatusList() {
-        getEditLegalEntityPage().verifyLegalEntityIdentifierStatusList(database, apacheHttpClient);
+    @Then("the user should see the status values for $rowIdentifer from lookup $lookupFid")
+    public void verifyLegalEntityIdentifierStatusList(String rowIdentifer, String lookupFid) {
+        getEditLegalEntityPage().verifyLegalEntityIdentifierStatusList(rowIdentifer);
     }
     @When("the user clicks on the add new identifiers button")
     public void clickOnAddNewIdentifiersButton() {
