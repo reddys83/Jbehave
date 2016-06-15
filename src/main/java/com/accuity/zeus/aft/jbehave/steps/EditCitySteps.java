@@ -17,12 +17,12 @@ public class EditCitySteps extends AbstractSteps {
 	@When("the user enters the <value> in the population field")
 	public void entervalueInPopulationField(@Named("value") String value) {
 		getEditCityPage().entervalueInPopulationField(value);
-	}	
+	}
 
 	@When("the user enters the <addInfoText> in the add info text area")
 	public void enterTextInCityAddInfo(@Named("addInfoText") String addInfoText) {
 		getEditCityPage().enterTextCityAddInfo(addInfoText);
-	}	
+	}
 
 	@Then("the user should be able to verify the values are entered in the add info field")
 	public void verifyTextInAddInfo(@Named("addInfoText") String addInfoText) {
@@ -37,19 +37,18 @@ public class EditCitySteps extends AbstractSteps {
 	@When("the user clicks on the Status drop-down in the basicinfo city page")
 	public void clickOnCityStatusDropDown() {
 		getEditCityPage().clickOnCityStatusDropDown();
-	}	
+	}
 
 	@Then("the user should be able to view the error message 'Enter up to 50 valid numbers'")
 	public void verifyErrorMessageInCityPopulation() {
 		getEditCityPage().verifyErrorMessageInCityPopulation();
 	}
-	
 
 	@Then("the user should see maximum length of population is limited to $maxLength")
 	public void verifyMaxLengthInCityPopulation(String maxLength) {
 		getEditCityPage().verifyMaxLengthInCityPopulation(maxLength);
 	}
-	
+
 	@Then("the user should see the population $value as in $source document")
 	public void verifyCityPopulationValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source, @Named("value") String population) {
@@ -60,16 +59,6 @@ public class EditCitySteps extends AbstractSteps {
 	public void verifyCityAddInfoValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source, @Named("addInfoText") String addInfoText) {
 		getEditCityPage().verifyCityInfoFromDB(country, area, city, "additionalinfo", source, addInfoText);
-	}
-
-	@When("the user gets the value already present in the text box")
-	public void getTextInFromAddInfoTextArea() {
-		getEditCityPage().getTextInFromAddInfoTextArea();
-	}
-
-	@Then("the user verifies whether the new value <addInfoText> is different from previous value")
-	public void compareAddInfoPreviousTextWithCurrent(@Named("addInfoText") String addInfoText) {
-		getEditCityPage().compareAddInfoPreviousTextWithCurrent(addInfoText);
 	}
 
 	@Then("the user should see no summary changes in the city save confirmation modal")
@@ -193,7 +182,7 @@ public class EditCitySteps extends AbstractSteps {
 	public void enterIdentifierValue(@Named("identifierValueIncorrect") String incorrectIdentifierValue) {
 		getEditCityPage().enterIdentifierValue(incorrectIdentifierValue);
 	}
-	
+
 	@When("the user enters identifier value as <identifierValue> in the basic info city page")
 	public void enterIdentifierValues(@Named("identifierValue") String identifierValue) {
 		getEditCityPage().enterIdentifierValue(identifierValue);
@@ -209,7 +198,6 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().clickOnConfirmButtonCity();
 	}
 
-	
 	@Then("the user should see the error message for the required identifier value field in the city basic info page")
 	public void verifyErrorMessageForRequiredCityIdentifierValue() {
 		getEditCityPage().verifyErrorMessageForRequiredCityIdentifierValue();
@@ -289,12 +277,11 @@ public class EditCitySteps extends AbstractSteps {
 	public void enterInvalidCharactersInCityAddInfo() {
 		getEditCityPage().enterInvalidCharactersInCityAddInfo();
 	}
-	
+
 	@Then("the user should see the addInfoText value same as in $source document")
 	public void verifyCityAddInfoValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source) {
 		getEditCityPage().verifyCityAddInfoValueFromTrusted(country, area, city, "additionalinfo", source);
-	}	
-	
-	
+	}
+
 }

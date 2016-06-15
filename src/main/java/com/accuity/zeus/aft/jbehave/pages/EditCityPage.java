@@ -46,7 +46,6 @@ public class EditCityPage extends AbstractPage {
 		getDriver().findElement(webElement).clear();
 		getDriver().findElement(webElement).sendKeys(value);
 	}
-	
 
 	/**
 	 * This method is to enter the value in addInfo text field
@@ -175,18 +174,6 @@ public class EditCityPage extends AbstractPage {
 		return tagValue;
 	}
 
-	String prevText = "";
-	String text = "";
-	Integer len = null;
-
-	public void getTextInFromAddInfoTextArea() {
-		prevText = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText();
-	}
-
-	public void compareAddInfoPreviousTextWithCurrent(String addInfoText) {
-		assertNotEquals(prevText, addInfoText);
-	}
-
 	public void verifyNoSummaryConfirmationModal(String summaryText) {
 		try {
 			WebElement confirmChanges = getDriver()
@@ -204,7 +191,8 @@ public class EditCityPage extends AbstractPage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		String text = "";
+		Integer len = null;
 		text = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_xpath_after_save")).getText();
 		len = text.length();
 		assertEquals(len.toString(), "500");
@@ -345,7 +333,7 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method is used to enter the Identifier status
 	 * 
@@ -368,7 +356,7 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method is used to enter the Identifier status
 	 * 
@@ -392,7 +380,7 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method is to verify whether the successful message is generated
 	 * after saving the city page.
@@ -401,7 +389,7 @@ public class EditCityPage extends AbstractPage {
 		assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_save_confirmation_message_id"))
 				.isDisplayed());
 	}
-	
+
 	/**
 	 * This method is used for performing the delete operation for a Identifier
 	 * row by clicking on the delete row button
@@ -410,7 +398,7 @@ public class EditCityPage extends AbstractPage {
 	public void clickOnDeleteNewIdentifierRowButtonCity() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_delete_identifiers_row_button_xpath"));
 	}
-	
+
 	public void verifyNewlyAddedIdentifierRowIsNotDisplayed() {
 
 		try {
@@ -422,7 +410,7 @@ public class EditCityPage extends AbstractPage {
 		}
 
 	}
-	
+
 	public void verifyNewlyAddedIdentifierRowIsDisplayed() {
 
 		WebElement identifier = getDriver()
@@ -430,7 +418,7 @@ public class EditCityPage extends AbstractPage {
 		assertTrue(identifier != null);
 
 	}
-	
+
 	/**
 	 * This method is used to verify that delete confirmation modal is not
 	 * displayed
@@ -447,7 +435,7 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method is used to verify whether the delete confirmation table is
 	 * present upon clicking the delete row button
@@ -457,7 +445,7 @@ public class EditCityPage extends AbstractPage {
 		assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver()
 				.findElement(CityIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_xpath")).getText());
 	}
-	
+
 	/**
 	 * This method is used to enter the Identifier value
 	 * 
@@ -480,6 +468,7 @@ public class EditCityPage extends AbstractPage {
 
 	/**
 	 * This method is used to enter the Identifier value
+	 * 
 	 * @param rowNo
 	 * @param identifierValue
 	 */
@@ -496,7 +485,7 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method is used to click on the 'Confirm' button after saving
 	 * 
@@ -507,17 +496,16 @@ public class EditCityPage extends AbstractPage {
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_confirm_button")).click();
 		Thread.sleep(3000);
 	}
-	
 
 	/**
-	 * This method is used to verify whether the error message in identifier value field	  
+	 * This method is used to verify whether the error message in identifier
+	 * value field
 	 */
 	public void verifyErrorMessageForRequiredCityIdentifierValue() {
 		assertEquals("Enter up to 50 valid characters.", getDriver()
 				.findElement(CityIdentifiers.getObjectIdentifier("city_identifier_value_req_err_msg_xpath")).getText());
 	}
-	
-	
+
 	/**
 	 * This method is used to verify whether we get an error message after
 	 * clicking save without entering any text for Identifier Type
@@ -527,7 +515,7 @@ public class EditCityPage extends AbstractPage {
 		assertEquals("Required", getDriver()
 				.findElement(CityIdentifiers.getObjectIdentifier("city_identifier_type_req_err_msg_xpath")).getText());
 	}
-	
+
 	/**
 	 * This method is used to verify whether we get an error message after
 	 * clicking save without entering any text for Identifier Status
@@ -537,7 +525,7 @@ public class EditCityPage extends AbstractPage {
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_identifier_status_req_err_msg_xpath"))
 						.getText());
 	}
-	
+
 	/**
 	 * This method is used for clicking the 'No' button in the delete
 	 * confirmation modal
@@ -546,15 +534,15 @@ public class EditCityPage extends AbstractPage {
 	public void clickNoButtonInDeleteConfirmationModalForCity() {
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_delete_no_button_id_click")).click();
 	}
-	
+
 	/**
 	 * This method is used for clicking the 'Yes' button in the delete
-	 * confirmation modal 
+	 * confirmation modal
 	 */
 	public void clickYesButtonInDeleteConfirmationModalForCity() {
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_delete_yes_button_id_click")).click();
 	}
-	
+
 	/**
 	 * This method is used to verify the value in trusted DB is same as UI
 	 * value.
@@ -615,11 +603,11 @@ public class EditCityPage extends AbstractPage {
 	public void clickOnCityIdentifierType() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_identifier_type_input_xpath"));
 	}
-	
+
 	public void clickOnCityIdentifierStatus() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_identifier_status_input_xpath"));
 	}
-	
+
 	public void verifyCityIdentifierTypesList_forOneRow() {
 
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city identifiers");
@@ -649,7 +637,7 @@ public class EditCityPage extends AbstractPage {
 		}
 
 	}
-	
+
 	/**
 	 * This method is used for performing the delete all identifier rows row by
 	 * clicking on the delete row button
@@ -673,7 +661,7 @@ public class EditCityPage extends AbstractPage {
 		}
 
 	}
-	
+
 	/**
 	 * This method is used for pressing the Enter key in the delete confirmation
 	 * modal
@@ -688,8 +676,7 @@ public class EditCityPage extends AbstractPage {
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText());
 
 	}
-	
-	
+
 	@Override
 	public String getPageUrl() {
 		return null;

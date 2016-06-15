@@ -88,7 +88,7 @@ public class SearchPage extends AbstractPage {
 	public SearchPage goToSearchPage(){
 		open();
 		try {
-			Thread.sleep(1000L);
+			Thread.sleep(5000L);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
