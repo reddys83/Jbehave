@@ -13,7 +13,7 @@ b) Verify for an existing Legal Entity's identifiers row, the Legal Entity's ide
 c) Verify for a new Legal Entity's identifiers row, the Legal Entity's identifier Type values are from THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY
 c) Verify for a new Legal Entity's identifiers row, the Legal Entity's identifier Status values are from STATUS
 
-Meta:@runraju
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -27,15 +27,17 @@ And the user clicks on the first_row_existing_identifier_type_dropdown in the le
 Then the user should see the identifier values for first_row_existing_identifier_type_dropdown from lookup THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY except the values that are selected already
 When the user clicks on the first_row_existing_identifier_status_dropdown in the legalentity identifier status section
 Then the user should see the status values for first_row_existing_identifier_status_dropdown from lookup STATUS
+When the user clicks on the add new identifiers button
 
 Examples:
 |entity|searchBy|fid|
 |1010|fid|1010|
 
+
+
 Scenario: Update and Save existing legal Entity identifier type
 a) Select a non-Blank value and Save. Verify the value is saved in Zeus document
-b) Select a null value and Save. Verify that null value is not saved.
-
+Meta: @runraju
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -43,31 +45,26 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
+And the user clicks on the legalEntity update link
 And the user clicks on the legal entity identifier link in the navigation bar
-And the user clicks on the update link
-When the user gets the document with get Id for legalentity with the fid as <entity> from the database
-And the user selects Identifier type value as <identifierTypeValue> from first_new_entitytype_dropdown in the legalentity page
+And the user selects Identifier type as <identifierType> from first_row_existing_identifier_type_dropdown in the legalentity page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
 |Summary|
-|Basic Info /identifier Types|
-|Basic Info|
-
+|Identifiers|
 When the user clicks on the confirm button
 Then the user should see identifierType value as <identifierTypeValue> for fid <fid> in zeus document
-Then the user should not see the deleted entity type value Bank in the zeus document for fid <fid>
 Then the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|identifierTypeValue|
-|1010|FID|1010|CUNA ID Number|
-|1010|FID|1010||
+|entity|searchBy|fid|identifierType|
+|91832|FID|91832|National Settlement Depository (LEIRU)|
 
 Scenario: Add a new legal entity type row and Save
 a) Select a non-Blank value and Save. Verify the value is saved in Zeus document
 b) Select a null value and Save. Verify that null value is not saved.
-Meta:@runraju1
+Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area

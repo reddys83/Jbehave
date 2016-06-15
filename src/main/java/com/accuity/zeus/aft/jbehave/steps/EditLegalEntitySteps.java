@@ -267,7 +267,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
     @Then("the user should see entityType value as <entityTypeValue> for fid <fid> in $source document")
     public void verifyEditLegalEntityEntityTypeValueFromZeus(@Named("entityTypeValue") String entityTypeValue,@Named("fid") String fid,@Named("source") String source) {
-        getEditLegalEntityPage().verifyEditLegalEntityEntityTypeValueFromZeus(entityTypeValue,"type",fid,source);
+        getEditLegalEntityPage().verifyLegalEntityDocumentInZeus(entityTypeValue, "type", fid, source, "get legal entity basic info left column");
     }
 
     @Then("the user should see the $delete_button in disabled state in entity types section")
@@ -554,14 +554,14 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().clickOnAddNewIdentifiersButton();
     }
 
-    @When("the user selects Identifier type value as <identifierTypeValue> from first_new_entitytype_dropdown in the legalentity page")
-    public void identifierType(@Named("identifierTypeValue") String identifierTypeValue, @Named("rowIdentifier") String rowIdentifier) {
-        getEditLegalEntityPage().selectIdentifierType(identifierTypeValue, rowIdentifier);
+    @When("the user selects Identifier type as <identifierType> from $rowIdentifier in the legalentity page")
+    public void identifierType(@Named("identifierType") String identifierType, @Named("rowIdentifier") String rowIdentifier) {
+        getEditLegalEntityPage().selectIdentifierType(identifierType, rowIdentifier);
     }
 
     @Then("the user should see identifierType value as <identifierTypeValue> for fid <fid> in $source document")
     public void verifyEditLegalEntityIdentifierTypeValueFromZeus(@Named("entityTypeValue") String identifierTypeValue, @Named("fid") String fid, @Named("source") String source) {
-        getEditLegalEntityPage().verifyEditLegalEntityIdentifierTypeValueFromZeus(identifierTypeValue, "type", fid, source);
+        getEditLegalEntityPage().verifyLegalEntityDocumentInZeus(identifierTypeValue, "legalEntityIdentifierType", fid, source, "get legal entity basic info left column");
     }
 
     @Then("the user should see the identifier type as in trusted document with fid <fid>")

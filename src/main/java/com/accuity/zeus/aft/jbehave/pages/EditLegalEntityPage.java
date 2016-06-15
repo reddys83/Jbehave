@@ -125,7 +125,7 @@ public class EditLegalEntityPage extends AbstractPage {
 
     }
 
-    public void verifyEditLegalEntityEntityTypeValueFromZeus(String entityTypeValue, String tagName, String fid, String source) {
+    public void verifyLegalEntityDocumentInZeus(String entityTypeValue, String tagName, String fid, String source, String xqueryName) {
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
@@ -134,7 +134,7 @@ public class EditLegalEntityPage extends AbstractPage {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", source));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
         if (document != null && !entityTypeValue.isEmpty()) {
             assertTrue(getNodeValuesByTagName(document, tagName).contains(entityTypeValue));
 
@@ -1022,8 +1022,10 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void selectIdentifierType(String identifierTypeValue, String rowIdentifier) {
-        Select dropdown = new Select(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).get(0));
-        dropdown.selectByVisibleText(identifierTypeValue);
+        Select dropdown = new Select(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)));
+        if (dropdown.getFirstSelectedOption().getText()!=identifierTypeValue) {
+            dropdown.selectByVisibleText(identifierTypeValue);
+        } else {assertFalse("dropdown selection value passed from story is the same as the one on the webpage",true);}
 
     }
 
