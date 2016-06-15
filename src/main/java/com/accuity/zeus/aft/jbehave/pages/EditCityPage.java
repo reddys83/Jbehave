@@ -1,4 +1,5 @@
 package com.accuity.zeus.aft.jbehave.pages;
+
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
@@ -20,14 +21,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-
 public class EditCityPage extends AbstractPage {
 
 	public EditCityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
 		super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
 	}
-
 
 	String prevText = "";
 	String text = "";
@@ -51,7 +50,7 @@ public class EditCityPage extends AbstractPage {
 
 	public void enterTextCityAddInfo(String addInfoText) {
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath"), addInfoText);
-	}	
+	}
 
 	public void clearAndEnterValue(By webElement, String value) {
 		getDriver().findElement(webElement).clear();
@@ -106,7 +105,6 @@ public class EditCityPage extends AbstractPage {
 		return statusValue;
 	}
 
-
 	/**
 	 * This method is used to click the city status drop-down
 	 */
@@ -118,19 +116,17 @@ public class EditCityPage extends AbstractPage {
 	 * This method is used to verify the look up data values available for city
 	 * status drop-down
 	 */
-   public void verifyCityStatusList() {
+	public void verifyCityStatusList() {
 		List<WebElement> statusList = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_options_xpath"));
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city Status types");
 		for (int i = 1; i < document.getElementsByTagName("status").getLength(); i++) {
-			assertEquals(
-					document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					statusList.get(i).getAttribute("value"));
 		}
 
 	}
 
-	
 	public void verifyCityInfoFromTrustedDB(String country, String area, String city, String tagName, String source) {
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
 				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath")));
@@ -175,23 +171,25 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	/**
-	 * This method is used to check there are no Confirmation Summary (no changes) in the confirmation modal
+	 * This method is used to check there are no Confirmation Summary (no
+	 * changes) in the confirmation modal
 	 * 
 	 * @param will
-	 *            check if the required confirmation changes message is not present in confirmation modal
+	 *            check if the required confirmation changes message is not
+	 *            present in confirmation modal
 	 */
-	  public void verifyNoChangeConfirmationMsg(String summaryText) {
-		  
-		  try {
-				WebElement confirmChanges = getDriver()
-						.findElement(CityIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
-				String confirmationText = confirmChanges.getText();
-				assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
-			} catch (Exception e) {
-				assertTrue(true);
-			}
-	  }
-	
+	public void verifyNoChangeConfirmationMsg(String summaryText) {
+
+		try {
+			WebElement confirmChanges = getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
+			String confirmationText = confirmChanges.getText();
+			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
+		} catch (Exception e) {
+			assertTrue(true);
+		}
+	}
+
 	/**
 	 * This method is used to check whether the driver stays on city edit page.
 	 */
@@ -203,8 +201,7 @@ public class EditCityPage extends AbstractPage {
 	public void selectCityStatusValue(String status) {
 		selectItemFromDropdownListByValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"),
 				status);
-	}	
-	
+	}
 
 	/**
 	 * This method is used to click on the Identifier button for adding a new
@@ -378,27 +375,26 @@ public class EditCityPage extends AbstractPage {
 	/**
 	 * This method verifies whether the confirmation model is not present.
 	 */
-	public void verifyNewlyAddedIdentifierRowIsNotDisplayed() {	
+	public void verifyNewlyAddedIdentifierRowIsNotDisplayed() {
 
-		try
-		{
-			WebElement identifier = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_AdditionalIdentifiers"));
-			assertTrue(identifier==null);
-		}
-		catch(Exception e)
-		{
+		try {
+			WebElement identifier = getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("city_AdditionalIdentifiers"));
+			assertTrue(identifier == null);
+		} catch (Exception e) {
 			assertTrue(true);
 		}
-		
+
 	}
 
 	/**
 	 * This method verifies whether the confirmation model is present.
 	 */
-	public void verifyNewlyAddedIdentifierRowIsDisplayed(){
-		
-			WebElement identifier = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_identifier_type_input_xpath"));
-			assertTrue(identifier!=null);		
+	public void verifyNewlyAddedIdentifierRowIsDisplayed() {
+
+		WebElement identifier = getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_identifier_type_input_xpath"));
+		assertTrue(identifier != null);
 
 	}
 
@@ -613,7 +609,6 @@ public class EditCityPage extends AbstractPage {
 		return tagValue;
 	}
 
-
 	public void verifyCityInfoFromDB(String country, String area, String city, String tagName, String source,
 			String valueTobeverifed) {
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), valueTobeverifed);
@@ -666,7 +661,7 @@ public class EditCityPage extends AbstractPage {
 		} catch (Exception e) {
 			assertTrue(true);
 		}
-	}	
+	}
 
 	/**
 	 * This method is used to verify the value in trusted DB is same as UI
@@ -768,7 +763,7 @@ public class EditCityPage extends AbstractPage {
 	public void entervalueInPopulationField(String value) {
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_population_input_id"), value);
 	}
-	
+
 	/**
 	 * This is to verify error message is displayed for population field as
 	 * expected
@@ -778,7 +773,7 @@ public class EditCityPage extends AbstractPage {
 		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_error_message_id"))
 				.getText(), "Enter up to 50 valid numbers.");
 	}
-		
+
 	/**
 	 * This is to verify maximum length of population field is 50
 	 */
@@ -787,127 +782,130 @@ public class EditCityPage extends AbstractPage {
 		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_population_input_id"))
 				.getAttribute("maxlength"), maxLength);
 	}
-	
+
 	/**
 	 * 
 	 * This method is used to verify the Began Date value from Zeus DB
 	 * 
 	 */
-	  public void verifyCityBeganDateFromZeusDB(String country, String area, String city, String tagName, String source,String day,String month,String year) {	
-		  if((day.isEmpty()) && (month.isEmpty()) && (year.isEmpty())){
-			  assertEquals("",getCityInfoFromDB(country, area, city, tagName, source));
-	        }
-		  else if((day.isEmpty()) && (month.isEmpty())){
-			  String expectedBeganDate=year;
-			  assertEquals(expectedBeganDate,getCityInfoFromDB(country, area, city, tagName, source));
-	        }
-		  else if((day.isEmpty())){
-			  String expectedBeganDate=month+" "+year;
-			  assertEquals(expectedBeganDate,getCityInfoFromDB(country, area, city, tagName, source));
-	        }
-		  else{
-			    String setBeganDate=day+" "+month+" "+year;
-				assertEquals(getCityInfoFromDB(country, area, city, tagName, source), setBeganDate);  
-		      }
-		  
+	public void verifyCityBeganDateFromZeusDB(String country, String area, String city, String tagName, String source,
+			String day, String month, String year) {
+		if ((day.isEmpty()) && (month.isEmpty()) && (year.isEmpty())) {
+			assertEquals("", getCityInfoFromDB(country, area, city, tagName, source));
+		} else if ((day.isEmpty()) && (month.isEmpty())) {
+			String expectedBeganDate = year;
+			assertEquals(expectedBeganDate, getCityInfoFromDB(country, area, city, tagName, source));
+		} else if ((day.isEmpty())) {
+			String expectedBeganDate = month + " " + year;
+			assertEquals(expectedBeganDate, getCityInfoFromDB(country, area, city, tagName, source));
+		} else {
+			String setBeganDate = day + " " + month + " " + year;
+			assertEquals(getCityInfoFromDB(country, area, city, tagName, source), setBeganDate);
+		}
+
 	}
-    
-	  public void enterDayBeganDate(String day) {
-			 clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_begandate_day_input_xpath"),day);
-		}
-		
-		public void enterYearBeganDate(String year) {
-			 clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_begandate_year_input_xpath"),year);
-		}
-		
-		public void selectMonthBeganDate(String month) {
 
-			try {
-				List<WebElement> monthDropDowns = getDriver()
-						.findElements(CityIdentifiers.getObjectIdentifier("city_begandate_month_dropdown_xpath"));
-				Select dropdown = new Select(monthDropDowns.get(0));
-				if (month.equals("")) {
-					dropdown.selectByValue(month);
-				} else {
-					dropdown.selectByVisibleText(month);
-				}
+	public void enterDayBeganDate(String day) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_begandate_day_input_xpath"), day);
+	}
 
-			} catch (Exception e) {
-				e.printStackTrace();
+	public void enterYearBeganDate(String year) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_begandate_year_input_xpath"), year);
+	}
+
+	public void selectMonthBeganDate(String month) {
+
+		try {
+			List<WebElement> monthDropDowns = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_begandate_month_dropdown_xpath"));
+			Select dropdown = new Select(monthDropDowns.get(0));
+			if (month.equals("")) {
+				dropdown.selectByValue(month);
+			} else {
+				dropdown.selectByVisibleText(month);
 			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		public void verifyErrorMessageBeganDate(String beganDateErrorMsg) {
-	        try {
-	            Thread.sleep(2000L);
-	        } catch (InterruptedException e) {
-	            e.printStackTrace();
-	        }
-	        assertEquals(beganDateErrorMsg, getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_begandate_errorMessage_xpath")).getText());
-	    }
-		
-		public void verifyDayMonthYearInCityPage(String day,String month,String year) {
-	        try {
-	            Thread.sleep(3000L);
-	        } catch (InterruptedException e) {
-	            e.printStackTrace();
-	        }
-	        
-	        if((day.isEmpty()) && (month.isEmpty()) && (year.isEmpty())){
-	        	assertEquals("",getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
-	        }
-	        
-	        else if((day.isEmpty()) && (month.isEmpty())){
-	        	assertEquals(year,getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
-	        }
-	        
-	        else if((day.isEmpty())){
-	        	String getExpectedDate=month+" "+year;
-	        	assertEquals(getExpectedDate,getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
-	        }
-	        
-	        else{
-	        	String getExpectedDate=day+" "+month+" "+year;
-	            assertEquals(getExpectedDate,getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
-	        }  
-	    }
-		
-		public void verifyMonthInChronologicalOrder() {
-	        List<String> monthInOrder = new ArrayList<String>();
-	        monthInOrder.add(" ");
-	        monthInOrder.add("Jan");
-	        monthInOrder.add("Feb");
-	        monthInOrder.add("Mar");
-	        monthInOrder.add("Apr");
-	        monthInOrder.add("May");
-	        monthInOrder.add("Jun");
-	        monthInOrder.add("Jul");
-	        monthInOrder.add("Aug");
-	        monthInOrder.add("Sep");
-	        monthInOrder.add("Oct");
-	        monthInOrder.add("Nov");
-	        monthInOrder.add("Dec");
+	}
 
-	        List<WebElement> monthDropDowns = getDriver()
-	                      .findElements(CityIdentifiers.getObjectIdentifier("city_begandate_month_dropdown_xpath"));
-	        Select dropdown = new Select(monthDropDowns.get(0));
-	               List<String> monthListInString = new ArrayList<String>();
-	        for (WebElement monthoption : dropdown.getOptions()) {
-	               monthListInString.add(monthoption.getText());
-	        }
-	        assertTrue(monthInOrder.equals(monthListInString));
-	   }
+	public void verifyErrorMessageBeganDate(String beganDateErrorMsg) {
+		try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals(beganDateErrorMsg, getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_begandate_errorMessage_xpath")).getText());
+	}
 
-		public void verifyCityBeganDateFromTrustedDB(String country, String area, String city, String tagName, String source) {
-			assertEquals(getCityInfoFromDB(country, area, city, tagName, source),getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
-			
+	public void verifyDayMonthYearInCityPage(String day, String month, String year) {
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
-		}  
-	
+		if ((day.isEmpty()) && (month.isEmpty()) && (year.isEmpty())) {
+			assertEquals("", getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
+		}
+
+		else if ((day.isEmpty()) && (month.isEmpty())) {
+			assertEquals(year, getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
+		}
+
+		else if ((day.isEmpty())) {
+			String getExpectedDate = month + " " + year;
+			assertEquals(getExpectedDate, getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
+		}
+
+		else {
+			String getExpectedDate = day + " " + month + " " + year;
+			assertEquals(getExpectedDate, getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
+		}
+	}
+
+	public void verifyMonthInChronologicalOrder() {
+		List<String> monthInOrder = new ArrayList<String>();
+		monthInOrder.add(" ");
+		monthInOrder.add("Jan");
+		monthInOrder.add("Feb");
+		monthInOrder.add("Mar");
+		monthInOrder.add("Apr");
+		monthInOrder.add("May");
+		monthInOrder.add("Jun");
+		monthInOrder.add("Jul");
+		monthInOrder.add("Aug");
+		monthInOrder.add("Sep");
+		monthInOrder.add("Oct");
+		monthInOrder.add("Nov");
+		monthInOrder.add("Dec");
+
+		List<WebElement> monthDropDowns = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_begandate_month_dropdown_xpath"));
+		Select dropdown = new Select(monthDropDowns.get(0));
+		List<String> monthListInString = new ArrayList<String>();
+		for (WebElement monthoption : dropdown.getOptions()) {
+			monthListInString.add(monthoption.getText());
+		}
+		assertTrue(monthInOrder.equals(monthListInString));
+	}
+
+	public void verifyCityBeganDateFromTrustedDB(String country, String area, String city, String tagName,
+			String source) {
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
+
+	}
+
 	@Override
 	public String getPageUrl() {
 		return null;
 	}
 
 }
-
