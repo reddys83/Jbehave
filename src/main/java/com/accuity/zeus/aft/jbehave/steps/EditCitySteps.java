@@ -325,6 +325,13 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyCityInfoFromDB(country, area, city, "population", source, population);
 	}	
 
+	@Then("the user should see the began date value in city page is same as in $source document")
+	public void verifyCityBeganDateValueFromDB(@Named("country") String country, @Named("area") String area,
+					@Named("city") String city, @Named("source") String source) {
+		setEditCityPage(getDataPage().createEditCityPage());
+		getEditCityPage().verifyCityBeganDateFromTrustedDB(country, area, city, "BeginDate", source);
+	}
+	
 	@When("the user enters began date day <day> in the edit basic info city page")
 	public void enterDayBeganDate(@Named("day") String day)
 	{
@@ -365,11 +372,4 @@ public class EditCitySteps extends AbstractSteps {
        public void verifyMonthInChronologicalOrder() {
               getEditCityPage().verifyMonthInChronologicalOrder();
        }
-	
-	@Then("the user should see the began date value in city page is same as in $source document")
-	public void verifyCityBeganDateValueFromDB(@Named("country") String country, @Named("area") String area,
-					@Named("city") String city, @Named("source") String source) {
-	
-		getEditCityPage().verifyCityBeganDateFromTrustedDB(country, area, city, "BeginDate", source);
-	}
 }

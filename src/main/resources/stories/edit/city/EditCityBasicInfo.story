@@ -590,29 +590,6 @@ Examples:
 |Tajikistan|Leninabadskaya Oblast|Gafurov|45|Sep|4568|
 
 
-Scenario: User can edit city Began Date - Verify if User can see an error message in City basic info edit page when Year & Day is entered in an invalid length
-
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-And the user clicks on the choose a city option
-And the user enters the city <city> in the type-ahead box
-And the user clicks on the city basic info link in the navigation bar
-And the user clicks on the city update link
-When the user enters began date day <day> in the edit basic info city page
-When the user enters began date month <month> in the edit basic info city page
-When the user enters began date year <year> in the edit basic info city page
-When the user clicks on the save button
-Then the user should see the error Invalid Date for began date
-
-Examples:
-|country|area|city|day|month|year|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|454845|Sep|4568821|
-
 Scenario: User can edit city Began Date - Verify if
 a)User can see Success message in City Page
 b)User can see entered values updated in City Page
