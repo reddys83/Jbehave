@@ -530,7 +530,126 @@ public class EditLegalEntitySteps extends AbstractSteps{
     }
 
 
+    @When("the user clicks on the $rowIdentifier in the legalentity identifier type section")
+    public void clickOnIdentifierTypeDropDown(String rowIdentifier) {
+        getEditLegalEntityPage().clickOnIdentifierTypeDropDown(rowIdentifier);
+    }
+
+    @Then("the user should see the identifier values for $row_Identifier from lookup $lookup except the values that are selected already")
+    public void verifyLegalEntityIdentifierTypesListFromLookup(@Named("row_Identifier") String row_Identifier, @Named("lookup") String lookup) {
+        getEditLegalEntityPage().verifyLegalEntityIdentifierTypesListFromLookup(row_Identifier, lookup);
+    }
+
+    @When("the user clicks on the $rowIdentifier in the legalentity identifier status section")
+    public void clickOnIdentifierStatusDropDown(String rowIdentifier) {
+        getEditLegalEntityPage().clickOnIdentifierStatusDropDown(rowIdentifier);
+    }
+
+    @Then("the user should see the legal entity identifier status from lookup STATUS")
+    public void verifyLegalEntityIdentifierStatusList() {
+        getEditLegalEntityPage().verifyLegalEntityIdentifierStatusList(database, apacheHttpClient);
+    }
+    @When("the user clicks on the add new identifiers button")
+    public void clickOnAddNewIdentifiersButton() {
+        getEditLegalEntityPage().clickOnAddNewIdentifiersButton();
+    }
+
+    @When("the user selects Identifier type value as <identifierTypeValue> from first_new_entitytype_dropdown in the legalentity page")
+    public void identifierType(@Named("identifierTypeValue") String identifierTypeValue, @Named("rowIdentifier") String rowIdentifier) {
+        getEditLegalEntityPage().selectIdentifierType(identifierTypeValue, rowIdentifier);
+    }
+
+    @Then("the user should see identifierType value as <identifierTypeValue> for fid <fid> in $source document")
+    public void verifyEditLegalEntityIdentifierTypeValueFromZeus(@Named("entityTypeValue") String identifierTypeValue, @Named("fid") String fid, @Named("source") String source) {
+        getEditLegalEntityPage().verifyEditLegalEntityIdentifierTypeValueFromZeus(identifierTypeValue, "type", fid, source);
+    }
+
+    @Then("the user should see the identifier type as in trusted document with fid <fid>")
+    public void verifyEditLegalEntityIdentifierTypeValuesFromTrusted(@Named("fid") String fid, @Named("source") String source) {
+        getEditLegalEntityPage().verifyEditLegalEntityIdentifierTypeValuesFromTrusted(fid, source);
+    }
+
+    @When("the user selects identifier status as <identifierStatus> from first_row_existing_status_dropdown in the legalentity page")
+    public void identifierStatus(@Named("identifierStatus") String identifierStatus, @Named("rowIdentifier") String rowIdentifier) {
+        getEditLegalEntityPage().selectIdentifierStatus(identifierStatus, rowIdentifier);
+    }
+
+    @When("the user enters identifier value $identifierValueRowIdentifier value as <value>")
+    public void IdentifierValue(@Named("identifierValueRowIdentifier") String identifierValueRowIdentifier, @Named("value") String value) {
+        getEditLegalEntityPage().enterIdentifierValue(identifierValueRowIdentifier, value);
+
+    }
+
+    @Then("the user should see identifier values as <type><value><status> for fid <fid> in zeus document")
+    public void verifyEditLegalEntityIdentifierValuesFromZeus(@Named("type") String type,
+                                                              @Named("status") String status,
+                                                              @Named("value") String value,
+                                                              @Named("fid") String fid,
+                                                              @Named("source") String source) {
+        getEditLegalEntityPage().verifyEditLegalEntityIdentifierValuesFromZeus(status, type, value, fid, source);
+    }
+
+    @When("the user clicks on the delete identifier row button in the legal entity basic info page")
+    public void clickOnDeleteNewIdentifierRowButton() {
+        getEditLegalEntityPage().clickOnIdentifierDeleteNewRowButton();
+    }
+
+    @When("the user clicks yes button to delete row")
+    public void pressEnterButtonInDeleteConfirmationModal(){
+        getCountryPage().pressEnterButtonInDeleteConfirmationModal();
+    }
+
+    @Then("the user should not see the newly added identifier row in the basic info legal entity page")
+    public void verifyNewlyAddedIdentifierRowIsNotDisplayed(String dropdown) {
+        getEditLegalEntityPage().verifyNewlyAddedIdentifierRowIsNotDisplayed(dropdown);
+    }
+
+    @When("the user clicks no button not to delete row")
+    public void pressNoButtonInDeleteConfirmationModal() {
+        getEditLegalEntityPage().pressNoButtonInDeleteConfirmationModal();
+    }
+
+    @Then("the user should see the newly added identifier row in the basic info legal entity page")
+    public void verifyNewlyAddedIdentifierRowIsDisplayed(String dropdown) {
+        getEditLegalEntityPage().verifyNewlyAddedIdentifierRowIsDisplayed(dropdown);
+    }
+
+    @Then("the user enters 50 characters in the identifier value on the legal entity page")
+    public void enter50CharactersInIdentifierValueField() {
+        getEditLegalEntityPage().enter50CharactersInIdentifierValueField();
+    }
+
+    @Then("the user enters 51 characters in the identifier value on the legal entity page")
+    public void enter51CharactersInIdentifierValueField() {
+        getEditLegalEntityPage().enter51CharactersInIdentifierValueField();
+    }
+
+    @Then("the user should see the error message enter only 50 valid characters for identifier value in the legal entity page")
+    public void verifyLegalEntityIdentifierValueErrorMessageForMaxLength() {
+        getEditLegalEntityPage().verifyLegalEntityIdentifierValueErrorMessageForMaxLength();
+    }
 
 
+    @Then("the user should see the error message $errorMsg for the identifier value field")
+    public void verifyIdentifierValueErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditLegalEntityPage().verifyIdentifierValueErrorMessage("legalEntity_identifier_value_error_msg_xpath", errorMsg);
+    }
+
+
+    @Then("the user should see the error message $errorMsg for the identifier status field")
+    public void verifyIdentifierStatusErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditLegalEntityPage().verifyIdentifierStatusErrorMessage("legalEntity_identifier_status_error_msg_xpath", errorMsg);
+    }
+
+    @When("the user clicks on new row delete legal entity identifier button for the row $deletebutton_Row")
+    public void clickonDeleteidentifierRowButton(String deletebutton_Row)
+    {
+        getEditLegalEntityPage().clickonDeleteidentifierRowButton(deletebutton_Row);
+    }
+
+    @Then("the user should see the error message $errorMsg for the identifier type field")
+    public void verifyIdentifierTypeErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditLegalEntityPage().verifyIdentifierTypeErrorMessage("legalEntity_creditRating_type_error_msg_xpath", errorMsg);
+    }
 
 }

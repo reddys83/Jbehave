@@ -991,7 +991,206 @@ public class EditLegalEntityPage extends AbstractPage {
         }
     }
 
+    public void clickOnIdentifierTypeDropDown(String rowIdentifier) {
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+    }
 
+    public void clickOnIdentifierStatusDropDown(String rowIdentifier) {
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+    }
+    public void verifyLegalEntityIdentifierTypesListFromLookup(String rowIdentifier,String lookupFid) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", lookupFid));
+        List<WebElement> identifierTypesList = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
+
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity IdentifierTypes From Lookup", nvPairs);
+        for (int i = 1; i < document.getElementsByTagName("IdentifierType").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), identifierTypesList.get(i).getAttribute("value"));
+        }
+
+    }
+    public void clickOnLegalEntityIdentifierStatus() {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier("LegalEntity_Identifier_status_xpath"));
+    }
+
+    public void verifyLegalEntityIdentifierStatusList(Database database, ApacheHttpClient apacheHttpClient) {
+        List<WebElement> legalEntityIdentifierStatusList = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Identifier_status_list_xpath"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get LegalEntity IdentifierStatus From Lookup");
+        for (int i = 1; i < document.getElementsByTagName("IdentifierStatus").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), legalEntityIdentifierStatusList.get(i).getText());
+        }
+    }
+
+    public void clickOnAddNewIdentifiersButton() {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_add_new_identifiers_button_xpath"));
+    }
+
+    public void selectIdentifierType(String identifierTypeValue, String rowIdentifier) {
+        Select dropdown = new Select(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).get(0));
+        dropdown.selectByVisibleText(identifierTypeValue);
+
+    }
+
+    public void verifyEditLegalEntityIdentifierTypeValueFromZeus(String identifierTypeValue, String tagName, String fid, String source) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
+        if (document != null && !identifierTypeValue.isEmpty()) {
+            assertTrue(getNodeValuesByTagName(document, tagName).contains(identifierTypeValue));
+
+        } else if (document != null && identifierTypeValue.isEmpty()) {
+            assertFalse(getNodeValuesByTagName(document, tagName).contains(identifierTypeValue));
+        }
+
+    }
+
+    public void verifyEditLegalEntityIdentifierTypeValuesFromTrusted(String fid, String source) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity identifiers from trusted", nvPairs);
+
+        if (document != null) {
+            List typeList =getNodeValuesByTagName(document, "legalEntityIdentifierType");
+            List valueList = getNodeValuesByTagName(document, "legalEntityIdentifierValue");
+            List statusList =getNodeValuesByTagName(document, "legalEntityIdentifierStatus");
+
+            for(int i=0;i<typeList.size();i++)
+            {
+                WebElement type=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Basic_Info_Table")).get(i).findElement(By.xpath("td[1]/select"));
+                WebElement value=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Basic_Info_Table")).get(i).findElement(By.xpath("td[2]/select"));
+                WebElement status=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Basic_Info_Table")).get(i).findElement(By.xpath("td[3]/input"));
+                assertEquals(typeList.get(i),(new Select(type)).getFirstSelectedOption().getText());
+                assertEquals(statusList.get(i),(new Select(status)).getFirstSelectedOption().getText());
+                assertEquals(valueList.get(i),value.getAttribute("value"));
+            }
+        }
+
+    }
+
+    public void selectIdentifierStatus(String identifierStatus, String rowIdentifier) {
+        Select dropdown = new Select(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).get(0));
+        dropdown.selectByVisibleText(identifierStatus);
+
+    }
+
+    public void enterIdentifierValue(String identifierValueRowIdentifier,String value){
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(identifierValueRowIdentifier)).clear();
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(identifierValueRowIdentifier)).sendKeys(value);
+    }
+
+    public void verifyEditLegalEntityIdentifierValuesFromZeus(String type,
+                                                              String value,
+                                                              String status,
+                                                              String fid,
+                                                              String source)
+    {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity identifiers from trusted", nvPairs);
+        String identifiers=type+value+status;
+        if (document != null) {
+            Boolean flag=false;
+            List typeList =getNodeValuesByTagName(document, "legalEntityIdentifierType");
+            List valueList = getNodeValuesByTagName(document, "legalEntityIdentifierTypeValue");
+            List statusList =getNodeValuesByTagName(document, "legalEntityIdentifierStatus");
+
+            for(int i=0;i<typeList.size();i++)
+            {
+                String identifiersFromZeus=typeList.get(i).toString()+valueList.get(i).toString()+statusList;
+                if(identifiersFromZeus.equals(identifiers)) {
+                    flag=true;
+                    break;
+                }
+            }
+            flag=true;
+            assertTrue(flag);
+        }
+        else{assertFalse(true);}
+    }
+
+    public void clickOnIdentifierDeleteNewRowButton() {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_delete_identifiers_row_button_xpath"));
+    }
+
+    public void pressEnterButtonInDeleteConfirmationModal() {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_identifier_delete_yes_button_id"));
+    }
+
+    public void verifyNewlyAddedIdentifierRowIsNotDisplayed(String rowIdentifier) {
+        try {
+            assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        } catch (NoSuchElementException e) {
+        }
+
+    }
+
+    public void pressNoButtonInDeleteConfirmationModal() {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legal_entity_delete_no_identifiers_button_xpath"));
+    }
+
+    public void verifyNewlyAddedIdentifierRowIsDisplayed(String rowIdentifier) {
+        try {
+            assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        } catch (NoSuchElementException e) {
+        }
+    }
+
+    public void enter50CharactersInIdentifierValueField() {
+        String strBigString = createBigString(50);
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_identifier_value_xpath")).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + strBigString + "'", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_identifier_value_xpath")));
+    }
+
+    public void enter51CharactersInIdentifierValueField() {
+        String strBigString = createBigString(51);
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_identifier_value_xpath")).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + strBigString + "'", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_identifier_value_xpath")));
+    }
+
+    public void verifyLegalEntityIdentifierValueErrorMessageForMaxLength() {
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_identifier_value_error_xpath")).getText(), "Enter up to 50 valid characters.");
+    }
+
+    public void verifyIdentifierValueErrorMessage(String xpathIdentifier,String errorMsg)
+    {
+        assertEquals(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(xpathIdentifier)).size(), 1);
+        assertEquals(errorMsg, getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(xpathIdentifier)).getText());
+
+    }
+
+    public void verifyIdentifierStatusErrorMessage(String xpathIdentifier,String errorMsg)
+    {
+        assertEquals(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(xpathIdentifier)).size(), 1);
+        assertEquals(errorMsg, getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(xpathIdentifier)).getText());
+    }
+
+    public void clickonDeleteidentifierRowButton(String rowIdentifier) {
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+    }
+
+    public void verifyIdentifierTypeErrorMessage(String xpathIdentifier,String errorMsg)
+    {
+        assertEquals(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(xpathIdentifier)).size(), 1);
+        assertEquals(errorMsg, getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(xpathIdentifier)).getText());
+    }
     @Override
     public String getPageUrl() {
         return null;
