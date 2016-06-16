@@ -6,9 +6,7 @@ I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-914 - User can edit Legal Entity's Identifiers
 
-Scenario:User can edit Legal Entity's identifiers
-Verify Legal Entity's identifiers Type and Status dropdown values are
-from lookup THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY and STATUS respectively in the same order as taxonomy
+Scenario: For existing rows verify Legal Entity's identifiers Type and Status dropdown values are from lookup THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY and STATUS respectively in the same order as taxonomy
 a) Verify for an existing Legal Entity's identifiers row, the Legal Entity's identifier Type values are from THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY
 b) Verify for an existing Legal Entity's identifiers row, the Legal Entity's identifier Status values are from STATUS
 
@@ -32,9 +30,7 @@ Examples:
 |entity|searchBy|fid|
 |1010|fid|1010|
 
-Scenario:User can edit Legal Entity's identifiers
-Verify Legal Entity's identifiers Type and Status dropdown values are
-from lookup THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY and STATUS respectively in the same order as taxonomy
+Scenario: For new rows verify Legal Entity's identifiers Type and Status dropdown values are from lookup THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY and STATUS respectively in the same order as taxonomy
 a) Verify for a new Legal Entity's identifiers row, the Legal Entity's identifier Type values are from THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY
 b) Verify for a new Legal Entity's identifiers row, the Legal Entity's identifier Status values are from STATUS
 
@@ -57,7 +53,7 @@ Examples:
 |entity|searchBy|fid|
 |1010|fid|1010|
 
-Scenario: Update and Save existing Identifiers-User selects a new value for Type, Value,and Status and click Save. Updated Identifier should be saved in Zeus document
+Scenario: For existing rows, update the Type, Value,and Status and click Save. Updated Identifier is verified zeus document
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -84,8 +80,7 @@ Examples:
 |1010|FID|1010|OCC|Z01RQ8BXBEV51Q8XKV43|Active|
 
 
-Scenario: Add a new legal entity type row and Save
-a) Select a non-Blank value and Save. Verify the value is saved in Zeus document
+Scenario: For new row, add the Type, Value,and Status and click Save. Updated Identifier is verified zeus document
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -113,7 +108,7 @@ Examples:
 
 
 
-Scenario: User can edit Legal Entity's identifiers- Verifying existing row should be deleted by clicking on the yes button in delete confirmation section.
+Scenario: For existing rows, verify row can be deleted by clicking on the yes button in delete confirmation section.
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
