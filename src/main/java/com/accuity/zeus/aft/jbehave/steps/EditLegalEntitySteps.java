@@ -531,7 +531,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
 
     @When("the user clicks on the $rowIdentifier in the legalentity identifier type section")
-    public void clickOnIdentifierTypeDropDown(String rowIdentifier) {
+        public void clickOnIdentifierTypeDropDown(String rowIdentifier) {
         getEditLegalEntityPage().clickOnIdentifierTypeDropDown(rowIdentifier);
     }
 
@@ -554,7 +554,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().clickOnAddNewIdentifiersButton();
     }
 
-    @When("the user selects Identifier type as <identifierType> from $rowIdentifier in the legalentity page")
+    @When("the user selects identifier type as <identifierType> from $rowIdentifier in the legalentity page")
     public void identifierType(@Named("identifierType") String identifierType, @Named("rowIdentifier") String rowIdentifier) {
         getEditLegalEntityPage().selectIdentifierType(identifierType, rowIdentifier);
     }
@@ -564,34 +564,34 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyLegalEntityDocumentInZeus(identifierTypeValue, "legalEntityIdentifierType", fid, source, "get legal entity basic info left column");
     }
 
-    @Then("the user should see the identifier type as in trusted document with fid <fid>")
+    @Then("the user should see the identifier type as in $source document with fid <fid>")
     public void verifyEditLegalEntityIdentifierTypeValuesFromTrusted(@Named("fid") String fid, @Named("source") String source) {
         getEditLegalEntityPage().verifyEditLegalEntityIdentifierTypeValuesFromTrusted(fid, source);
     }
 
-    @When("the user selects identifier status as <identifierStatus> from first_row_existing_status_dropdown in the legalentity page")
+    @When("the user selects identifier status as <identifierStatus> from $rowIdentifier in the legalentity page")
     public void identifierStatus(@Named("identifierStatus") String identifierStatus, @Named("rowIdentifier") String rowIdentifier) {
         getEditLegalEntityPage().selectIdentifierStatus(identifierStatus, rowIdentifier);
     }
 
-    @When("the user enters identifier value $identifierValueRowIdentifier value as <value>")
+    @When("the user enters identifier value as <value> for $identifierValueRowIdentifier")
     public void IdentifierValue(@Named("identifierValueRowIdentifier") String identifierValueRowIdentifier, @Named("value") String value) {
         getEditLegalEntityPage().enterIdentifierValue(identifierValueRowIdentifier, value);
 
     }
 
-    @Then("the user should see identifier values as <type><value><status> for fid <fid> in zeus document")
-    public void verifyEditLegalEntityIdentifierValuesFromZeus(@Named("type") String type,
-                                                              @Named("status") String status,
+    @Then("the user should see identifier values as <identifierType><value><identifierStatus> for fid <fid> in $source document")
+    public void verifyEditLegalEntityIdentifierValuesFromZeus(@Named("identifierType") String identifierType,
+                                                              @Named("identifierStatus") String identifierStatus,
                                                               @Named("value") String value,
                                                               @Named("fid") String fid,
                                                               @Named("source") String source) {
-        getEditLegalEntityPage().verifyEditLegalEntityIdentifierValuesFromZeus(status, type, value, fid, source);
+        getEditLegalEntityPage().verifyEditLegalEntityIdentifierValuesFromZeus(identifierType,identifierStatus,value, fid, source);
     }
 
-    @When("the user clicks on the delete identifier row button in the legal entity basic info page")
-    public void clickOnDeleteNewIdentifierRowButton() {
-        getEditLegalEntityPage().clickOnIdentifierDeleteNewRowButton();
+    @When("the user clicks on the delete button $rowIdentifier in the legal entity identifiers section")
+        public void clickOnDeleteIdentifierRowButton(String rowIdentifier) {
+        getEditLegalEntityPage().clickOnIdentifierDeleteRowButton(rowIdentifier);
     }
 
     @When("the user clicks yes button to delete row")
@@ -599,9 +599,9 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getCountryPage().pressEnterButtonInDeleteConfirmationModal();
     }
 
-    @Then("the user should not see the newly added identifier row in the basic info legal entity page")
-    public void verifyNewlyAddedIdentifierRowIsNotDisplayed(String dropdown) {
-        getEditLegalEntityPage().verifyNewlyAddedIdentifierRowIsNotDisplayed(dropdown);
+    @Then("the user should not see identifier values for fid <fid> in $source document as: $identifiers")
+    public void verifyIdentifierValuesNotExistInZEUS(@Named("fid") String fid,@Named("source") String source,@Named("identifiers") ExamplesTable identifiers) {
+        getEditLegalEntityPage().verifyIdentifierValuesNotExistInZEUS(fid,source,identifiers);
     }
 
     @When("the user clicks no button not to delete row")

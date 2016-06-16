@@ -250,7 +250,19 @@ public abstract class AbstractPage {
         Select dropdown = new Select(getDriver().findElement(by));
         String selectedValue = dropdown.getFirstSelectedOption().getText();
         for (WebElement option : dropdown.getOptions()) {
-            dropdownValuesList.add(option.getText());
+            if(!option.getText().equals("")){
+            dropdownValuesList.add(option.getAttribute("value"));}
+        }
+
+               return dropdownValuesList;
+    }
+
+    public List returnAllDropDownUnselectedValues(By by){
+        List<String> dropdownValuesList = new ArrayList<>();
+        Select dropdown = new Select(getDriver().findElement(by));
+        String selectedValue = dropdown.getFirstSelectedOption().getText();
+        for (WebElement option : dropdown.getOptions()) {
+            dropdownValuesList.add(option.getAttribute("value"));
         }
         dropdownValuesList.remove(selectedValue);
         if (dropdownValuesList.get(0).equals("")) {

@@ -1000,7 +1000,7 @@ public class EditLegalEntityPage extends AbstractPage {
     }
     public void verifyLegalEntityIdentifierTypesListFromLookup(String rowIdentifier) {
 
-        List<String> dropdownValuesList = returnAllListValues(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
+        List<String> dropdownValuesList = returnAllDropDownUnselectedValues(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity IdentifierTypes From Lookup", null);
         // finding the list of values from the taxonomy and subtracting the values which are selected in other dropdowns
         List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "IdentifierType"), getAlreadySelectedEntityTypes("legalEntity_Identifier_All_Types_dropdown_xpath"));
@@ -1052,7 +1052,7 @@ public class EditLegalEntityPage extends AbstractPage {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", source));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity identifiers from trusted", nvPairs);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
 
         if (document != null) {
             List typeList =getNodeValuesByTagName(document, "legalEntityIdentifierType");
@@ -1062,10 +1062,10 @@ public class EditLegalEntityPage extends AbstractPage {
             for(int i=0;i<typeList.size();i++)
             {
                 WebElement type=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Basic_Info_Table")).get(i).findElement(By.xpath("td[1]/select"));
-                WebElement value=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Basic_Info_Table")).get(i).findElement(By.xpath("td[2]/select"));
-                WebElement status=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Basic_Info_Table")).get(i).findElement(By.xpath("td[3]/input"));
-                assertEquals(typeList.get(i),(new Select(type)).getFirstSelectedOption().getText());
-                assertEquals(statusList.get(i),(new Select(status)).getFirstSelectedOption().getText());
+                WebElement value=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Basic_Info_Table")).get(i).findElement(By.xpath("td[2]/input"));
+                WebElement status=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Basic_Info_Table")).get(i).findElement(By.xpath("td[3]/select"));
+                assertEquals(typeList.get(i),(new Select(type)).getFirstSelectedOption().getAttribute("value"));
+                assertEquals(statusList.get(i),(new Select(status)).getFirstSelectedOption().getAttribute("value"));
                 assertEquals(valueList.get(i),value.getAttribute("value"));
             }
         }
@@ -1083,11 +1083,11 @@ public class EditLegalEntityPage extends AbstractPage {
         getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(identifierValueRowIdentifier)).sendKeys(value);
     }
 
-    public void verifyEditLegalEntityIdentifierValuesFromZeus(String type,
-                                                              String value,
-                                                              String status,
-                                                              String fid,
-                                                              String source)
+    public boolean checkEditLegalEntityIdentifierValuesFromZeus(String type,
+                                                               String status,
+                                                               String value,
+                                                               String fid,
+                                                               String source)
     {
         try {
             Thread.sleep(3000L);
@@ -1097,43 +1097,48 @@ public class EditLegalEntityPage extends AbstractPage {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", source));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity identifiers from trusted", nvPairs);
-        String identifiers=type+value+status;
+        Boolean flag=false;
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
+        String identifiersFromUI=type+value+status;
         if (document != null) {
-            Boolean flag=false;
+
             List typeList =getNodeValuesByTagName(document, "legalEntityIdentifierType");
-            List valueList = getNodeValuesByTagName(document, "legalEntityIdentifierTypeValue");
+            List valueList = getNodeValuesByTagName(document, "legalEntityIdentifierValue");
             List statusList =getNodeValuesByTagName(document, "legalEntityIdentifierStatus");
 
             for(int i=0;i<typeList.size();i++)
             {
-                String identifiersFromZeus=typeList.get(i).toString()+valueList.get(i).toString()+statusList;
-                if(identifiersFromZeus.equals(identifiers)) {
+                String identifiersFromZeus=typeList.get(i).toString()+valueList.get(i).toString()+statusList.get(i).toString();
+                if(identifiersFromZeus.equals(identifiersFromUI)) {
                     flag=true;
                     break;
                 }
             }
-            flag=true;
-            assertTrue(flag);
+
+
         }
-        else{assertFalse(true);}
+        return flag;
     }
 
-    public void clickOnIdentifierDeleteNewRowButton() {
-        attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_delete_identifiers_row_button_xpath"));
+    public void verifyEditLegalEntityIdentifierValuesFromZeus(String type,String status,String value,String fid,String source)
+    {
+        assertTrue(checkEditLegalEntityIdentifierValuesFromZeus(type,status,value,fid,source));
+    }
+
+    public void clickOnIdentifierDeleteRowButton(String rowIdentifier) {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
     }
 
     public void pressEnterButtonInDeleteConfirmationModal() {
         attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_identifier_delete_yes_button_id"));
     }
 
-    public void verifyNewlyAddedIdentifierRowIsNotDisplayed(String rowIdentifier) {
-        try {
-            assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
-        } catch (NoSuchElementException e) {
-        }
+    public void verifyIdentifierValuesNotExistInZEUS(String fid,String source,ExamplesTable identifiers) {
+        assertFalse(checkEditLegalEntityIdentifierValuesFromZeus(identifiers.getRow(0).get("identifierType"),identifiers.getRow(0).get("value"),identifiers.getRow(0).get("identifierStatus"),fid,source));
 
     }
+
+
 
     public void pressNoButtonInDeleteConfirmationModal() {
         attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legal_entity_delete_no_identifiers_button_xpath"));

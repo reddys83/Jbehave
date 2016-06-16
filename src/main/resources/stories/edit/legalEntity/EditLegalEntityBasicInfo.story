@@ -16,7 +16,7 @@ JIRA ID - ZEUS-86 - User can update a legal entity's type
 JIRA ID - ZEUS-919 - User can edit Legal Entity's Chartered Date
 JIRA ID - ZEUS-85 - User can update legal entity's insurance type
 JIRA ID - ZEUS-83 - User can update legal entity's ownership type
-JIRA ID - ZEUS-914 - User can edit Legal Entity's Identifiers
+
 
 
 Scenario: Verify the default Edit value and Save Lead Institution value for a legal entity on legalEntity page
