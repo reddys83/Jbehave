@@ -148,8 +148,8 @@ When the user clicks no button not to delete row
 Then the user should see the newly added identifier row in the basic info legal entity page
 
 Examples:
-|entity|SearchBy|fid|
-|1010|fid|1010|
+|entity|searchBy|fid|
+|1010|FID|1010|
 
 Scenario: User can edit Legal Entity's identifiers- Verifying new row can be deleted by click on enter on the yes button in delete confirmation section.
 Given a user is on the search page
@@ -162,7 +162,7 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the legal entity identifier link in the navigation bar
 And the user clicks on the legalEntity update link
 And the user clicks on the add new identifiers button
-When the user clicks on the delete button legalEntity_first_row_existing_delete_identifiers_button in the legal entity identifiers section
+When the user clicks on the delete button legalEntity_first_row_new_delete_identifiers_button in the legal entity identifiers section
 Then the user should see the delete row confirmation modal in the legal entity page
 When the user clicks on the yes button in the delete row confirmation modal in the legal entity basic info page
 And the user clicks on the save button
@@ -194,19 +194,20 @@ When the user clicks no button not to delete row
 Then the user should not see the newly added identifier row in the basic info country page
 
 Examples:
-|entity|SearchBy|fid|
-|1010|fid|1010|
+|entity|searchBy|fid|
+|1010|FID|1010|
 
 Scenario: User can edit Legal Entity's identifiers- Verify Legal Entity's identifier value field max length is 50 error message for enter up to 50 unicode characters only
 Given a user is on the search page
 When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
+And the user clicks on the country tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the legal entity identifier link in the navigation bar
 And the user clicks on the legalEntity update link
+And the user clicks on the add new identifiers button
 Then the user enters 50 characters in the identifier value on the legal entity page
 When the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -217,51 +218,50 @@ Then the user enters 51 characters in the identifier value on the legal entity p
 When the user clicks on the save button
 Then the user should see the error message enter only 50 valid characters for identifier value in the legal entity page
 
+Examples:Scenario: User can edit Legal Entity's identifiers-Verify error message required for both value and status fields
+         Verify that the User should see Required error message for both value and status fields when selects a value for type but keeps the value and status as blank
+         User should see Required error message for both type and status when enters a value for value but keeps the type and status as blank
+         User should see Required error message for both value and type when selects a status for Value but keeps the Agency and Type as blank
 
-Examples:
-|entity|SearchBy|fid|
-|1010|fid|1010|
+         Given a user is on the search page
+         When the user clicks on the data tab in the search page
+         And the user clicks on the legal entity tab in the data area
+         When the user enters the <entity> in the typeahead
+         And the user selects the <searchBy> from the dropdown
+         And the user clicks on the search button
+         When the user clicks on the search results card with fid <fid>
+         And the user clicks on the legal entity identifier link in the navigation bar
+         And the user clicks on the legalEntity update link
+         When the user gets the document with get Id for legalentity with the fid as <entity> from the database
+         And the user clicks on the add new identifiers button
+         And the user selects identifier type as <identifierType> from legalEntity_first_row_new_identifier_type_dropdown in the legalentity page
+         And the user clicks on the save button
+         Then the user should see the error message Enter up to 50 valid characters for the identifier value field
+         And the user should see the error message required for the identifier status field
+         And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+         When the user clicks on new row delete legal entity identifier button for the row deletebutton Row
+         And the user clicks on the yes button in the delete row confirmation modal in the legal entity basic info page
+         And the user clicks on the add new identifiers button
+         And the user enters identifier value as <value> for legalEntity_first_row_new_identifier_value
+         And the user clicks on the save button
+         Then the user should see the error message Enter up to 50 valid characters for the identifier type field
+         And the user should see the error message required for the identifier status field
+         When the user clicks on new row delete legal entity identifier button for the row deletebutton Row
+         And the user clicks on the yes button in the delete row confirmation modal in the legal entity basic info page
+         And the user clicks on the add new identifiers button
+         And the user selects identifier status as <identifierStatus> from first_row_existing_status_dropdown in the legalentity page
+         And the user clicks on the save button
+         Then the user should see the error message required for the identifier type field
+         And the user should see the error message Enter up to 50 valid characters for the identifier value field
 
-Scenario: User can edit Legal Entity's identifiers-Verify error message required for both value and status fields
-Verify that the User should see Required error message for both value and status fields when selects a value for type but keeps the value and status as blank
-User should see Required error message for both type and status when enters a value for value but keeps the type and status as blank
-User should see Required error message for both value and type when selects a status for Value but keeps the Agency and Type as blank
+         Examples:
+         |entity|searchBy|fid|identifierTypeValue|identifierValueValue|identifierstatusValue|
+         |1010|FID|1010|CertificateNo|||||
+         |1010|FID|1010|||r4t5b4h544|||
+         |1010|FID|1010|||||Active|
+|entity|searchBy|fid|
+|1010|FID|1010|
 
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the legal entity identifier link in the navigation bar
-And the user clicks on the legalEntity update link
-When the user gets the document with get Id for legalentity with the fid as <entity> from the database
-And the user clicks on the add new identifiers button
-And the user selects identifier type as <identifierType> from legalEntity_first_row_new_identifier_type_dropdown in the legalentity page
-And the user clicks on the save button
-Then the user should see the error message Enter up to 50 valid characters for the identifier value field
-And the user should see the error message required for the identifier status field
-And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
-When the user clicks on new row delete legal entity identifier button for the row deletebutton Row
-And the user clicks on the yes button in the delete row confirmation modal in the legal entity basic info page
-And the user clicks on the add new identifiers button
-And the user enters identifier value as <value> for legalEntity_first_row_new_identifier_value
-And the user clicks on the save button
-Then the user should see the error message Enter up to 50 valid characters for the identifier type field
-And the user should see the error message required for the identifier status field
-When the user clicks on new row delete legal entity identifier button for the row deletebutton Row
-And the user clicks on the yes button in the delete row confirmation modal in the legal entity basic info page
-And the user clicks on the add new identifiers button
-And the user selects identifier status as <identifierStatus> from first_row_existing_status_dropdown in the legalentity page
-And the user clicks on the save button
-Then the user should see the error message required for the identifier type field
-And the user should see the error message Enter up to 50 valid characters for the identifier value field
 
-Examples:
-|entity|searchBy|fid|identifierTypeValue|identifierValueValue|identifierstatusValue|
-|1010|FID|1010|CertificateNo|||||
-|1010|FID|1010|||r4t5b4h544|||
-|1010|FID|1010|||||Active|
 
 

@@ -614,6 +614,10 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyNewlyAddedIdentifierRowIsDisplayed(dropdown);
     }
 
+    @Then("the user verifies the identifier value maxlength is $maxSize for the $rowIdentifier")
+    public void verifyMaxlengthIdentifierValueText(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditLegalEntityPage().verifyMaxlengthIdentifierValueText(maxSize,rowIdentifier);}
+
+
     @Then("the user enters 50 characters in the identifier value on the legal entity page")
     public void enter50CharactersInIdentifierValueField() {
         getEditLegalEntityPage().enter50CharactersInIdentifierValueField();
@@ -632,7 +636,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
     @Then("the user should see the error message $errorMsg for the identifier value field")
     public void verifyIdentifierValueErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditLegalEntityPage().verifyIdentifierValueErrorMessage("legalEntity_identifier_value_error_msg_xpath", errorMsg);
+        getEditLegalEntityPage().verifyIdentifierValueErrorMessage("legalEntity_new_identifier_value_error_msg_xpath", errorMsg);
     }
 
 

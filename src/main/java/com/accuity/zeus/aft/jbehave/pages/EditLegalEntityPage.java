@@ -1153,18 +1153,21 @@ public class EditLegalEntityPage extends AbstractPage {
 
     public void enter50CharactersInIdentifierValueField() {
         String strBigString = createBigString(50);
-        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_identifier_value_xpath")).clear();
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + strBigString + "'", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_identifier_value_xpath")));
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_first_row_new_identifier_value")).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + strBigString + "'", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_first_row_new_identifier_value")));
     }
 
+    public void verifyMaxlengthIdentifierValueText(String maxSize,String rowIdentifier) {
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);
+    }
     public void enter51CharactersInIdentifierValueField() {
         String strBigString = createBigString(51);
-        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_identifier_value_xpath")).clear();
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + strBigString + "'", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_identifier_value_xpath")));
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_first_row_new_identifier_value")).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + strBigString + "'", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_first_row_new_identifier_value")));
     }
 
     public void verifyLegalEntityIdentifierValueErrorMessageForMaxLength() {
-        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_identifier_value_error_xpath")).getText(), "Enter up to 50 valid characters.");
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_first_row_new_identifier_value")).getText(), "Enter up to 50 valid characters.");
     }
 
     public void verifyIdentifierValueErrorMessage(String xpathIdentifier,String errorMsg)
