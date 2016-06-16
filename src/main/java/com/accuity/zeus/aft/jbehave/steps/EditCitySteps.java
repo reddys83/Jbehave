@@ -327,13 +327,21 @@ public class EditCitySteps extends AbstractSteps {
 			@Named("city") String city, @Named("source") String source, @Named("endDate") String endDate) {
 		getEditCityPage().verifyCityInfoFromDB(country, area, city, "EndDate", source, endDate);
 	}
+	
+	@Then("the user should see the $endDay2 $endMonth2 $endYear2 value as in $source document")
+	public void verifyCityEndDate2ValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source, @Named("endDay2") String day2,
+			@Named("endMonth2") String month2, @Named("endYear2") String year2) {
+		String endDate = day2 +" " + month2 + " " + year2;
+		getEditCityPage().verifyCityInfoFromDB(country, area, city, "EndDate", source, endDate);
+	}
 
 	@Then("the user verifies whether error message $errMsg is displayed for End Date")
 	public void verifyErrorMessageForEndDate(@Named("errMsg") String errMsg) {
 		getEditCityPage().verifyErrorMessageForEndDate(errMsg);
 	}
 
-	@When("the user enters day $endDay2 , month $endMonth2 , year $endYear2 for End Date values")
+	@When("the user enters $endDay2 $endMonth2 $endYear2 for End Date values")
 	public void enterEndDate(@Named("endDay2") String endDay2, @Named("endMonth2") String endMonth2,@Named("endYear2") String endYear2) {
 		getEditCityPage().enterEndDate(endDay2, endMonth2, endYear2);
 	}

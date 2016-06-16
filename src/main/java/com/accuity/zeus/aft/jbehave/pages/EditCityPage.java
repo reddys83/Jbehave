@@ -734,8 +734,7 @@ public class EditCityPage extends AbstractPage {
 			Select dropdown = new Select(monthDropDowns.get(0));
 			if (month.equals("")) {
 				dropdown.selectByValue(month);
-			} else {
-				month = month.substring(0, 3);
+			} else {				
 				dropdown.selectByVisibleText(month);
 			}
 
