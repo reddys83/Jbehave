@@ -769,3 +769,29 @@ Then the user verifies whether error message Must be after Began date. is displa
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|Summary|
 |Afghanistan|Badakshan|Badakhshan|1|Jun|2016|1|Jun|2015|Basic Info|
+
+Scenario: User enters End Date values when the Began Date values are empty
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+And the user clears the day, month and year values for Began Date
+When the user enters the day <endDay> in the text box for End Date
+When the user enters the month <endMonth> in the drop down box for End Date
+When the user enters the year <endYear> in the text box for End Date
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|endDay|endMonth|endYear|
+|USA|Alabama|Alexander City|6|Jun|2010|
