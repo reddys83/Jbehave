@@ -787,6 +787,7 @@ public class EditCityPage extends AbstractPage {
 		enterDayInEndDate(Integer.toString(cal.get(Calendar.DATE) + 1));
 		Format formatter = new SimpleDateFormat("MMMM");
 		String month = formatter.format(new Date());
+		month = month.substring(0, 3);
 		enterMonthInEndDate(month);
 		enterYearInEndDate(Integer.toString(cal.get(Calendar.YEAR) + 1));
 	}

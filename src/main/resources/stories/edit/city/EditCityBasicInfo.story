@@ -661,7 +661,6 @@ Examples:
 |Afghanistan|Badakshan|Panj Shair|1|Jun|2016|6|||
 
 Scenario: User is entering invalid inputs - The user enters the day with alphabets (not in Gregorian calendar format)
-Meta: @EditCityBasicInfo1
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -683,7 +682,7 @@ When the user clicks on the save button
 Then the user verifies whether error message Invalid Date is displayed for End Date
 
 Examples:
-|country|area|city|beganDay|beganMonth|beganYear|
+|country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|
 |Afghanistan|Badakshan|Panj Shair|1|Jun|2016|6Rdseth765|Jun|2016|
 
 Scenario: User gets an error message when entering a date that is later than today 
