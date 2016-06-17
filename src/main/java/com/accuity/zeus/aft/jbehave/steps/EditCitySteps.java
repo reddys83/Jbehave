@@ -283,5 +283,37 @@ public class EditCitySteps extends AbstractSteps {
 			@Named("city") String city, @Named("source") String source) {
 		getEditCityPage().verifyCityAddInfoValueFromTrusted(country, area, city, "additionalinfo", source);
 	}
+	
 
+	 @When("the user clicks on the add button for adding new places for city page")
+	    public void clickOnAddPlacesButton() {
+		 getEditCityPage().clickOnAddPlacesButton();
+	  }
+     
+	/* @When("the user clicks on country places type drop-down")
+	    public void clickOnCountryPlaceTypeDropdown() {
+		 getEditCityPage().clickOnCountryPlaceTypeDropdown();
+	   }
+	 
+	 @When("the user selects type value as <PlaceType> in the places for city")
+	    public void selectsTypeFromDropdown(@Named("PlaceType") String PlaceType) {
+		 getEditCityPage().selectsTypeFromDropdown(PlaceType);
+	   }*/
+	 
+	 @Then("the user should see the error message required for type in places for city")
+	    public void verifyRequiredErrorMessageForType()
+	    {
+		 getEditCityPage().verifyRequiredErrorMessageForType();
+	    }
+	 
+	 @Then("the user should see the error message required for place in places for city")
+	    public void verifyRequiredErrorMessageForPlace()
+	    {
+		 getEditCityPage().verifyRequiredErrorMessageForPlace();
+	    }
+	 
+	 @When("the user clicks on the city places link in the navigation bar")
+	    public void clickOnCitylaces() {
+		 getEditCityPage().clickOnCityPlaces();
+	    }
 }

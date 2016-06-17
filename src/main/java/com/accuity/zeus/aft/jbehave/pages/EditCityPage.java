@@ -14,6 +14,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.jbehave.core.annotations.When;
 import org.w3c.dom.Document;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -676,7 +677,23 @@ public class EditCityPage extends AbstractPage {
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText());
 
 	}
-
+	
+	 public void clickOnCityPlaces() {
+        attemptClick(CityIdentifiers.getObjectIdentifier("city_places_link_id"));
+	}
+	
+	 public void clickOnAddPlacesButton() {
+	        attemptClick(CityIdentifiers.getObjectIdentifier("city_add_places_button_edit_id"));
+	    }
+	 
+	 public void verifyRequiredErrorMessageForType() {
+	        assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_type_required_error_message_xpath")).getText(), "Required");
+	    }
+	 
+	 public void verifyRequiredErrorMessageForPlace() {
+	        assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_required_error_message_xpath")).getText(), "Required");
+	    }
+	 
 	@Override
 	public String getPageUrl() {
 		return null;
