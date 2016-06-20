@@ -10,6 +10,7 @@ JIRA ID - ZEUS-969 -User can edit City's Add info
 JIRA ID - ZEUS-972 -User can edit City's Identifiers
 JIRA ID - ZEUS-968 - User can edit City's Population
 JIRA ID - ZEUS-964 - User can edit City's END Date
+JIRA ID - ZEUS-980 - User can edit City's Use In Address Flag
 
 Scenario: Verify City Status dropdown values from lookup Status
 Given a user is on the search page
@@ -795,3 +796,68 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|city|endDay|endMonth|endYear|
 |USA|Alabama|Alexander City|6|Jun|2010|
+
+Scenario: User is updating  City's Basic Info  page and  entered  value for 'Use in Address' that is different from the current value
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user clicks on True option for Use in Address
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+When the user clicks on the city update link
+When the user clicks on False option for Use in Address
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should see the address flag value same as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|
+
+Scenario: User is updating  City's Basic Info  page and  entered  value for 'Use in Address' that is no different from the current value
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user clicks on False option for Use in Address
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+When the user clicks on the city update link
+When the user clicks on False option for Use in Address
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+Then the user should see no summary changes in the city save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|Summary|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|Basic Info|
