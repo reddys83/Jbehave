@@ -55,6 +55,8 @@ return
 let $cityStatus := ($city/summary/status/text())
 let $cityadditionalinfo := ($city/summary/additionalInfos/additionalInfo/text())
 let $cityPopulation := ($city/summary/demographics/metric/value/text())
+let $cityAddressFlag := ($city/summary/useInAddress/text())
+
 return
   <city>
   <status>{$cityStatus}</status>
@@ -62,4 +64,5 @@ return
   <dateFields>{$DateFields}</dateFields>
   <additionalinfo>{$cityadditionalinfo}</additionalinfo>
   <population>{$cityPopulation}</population>
-  </city>
+  <addressFlag>{$cityAddressFlag}</addressFlag>
+  </city>   
