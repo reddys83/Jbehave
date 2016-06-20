@@ -752,6 +752,10 @@ public class EditCityPage extends AbstractPage {
 	    public void selectsPlacesDetailsFromDropdown(String PlaceDetails) {
 	    	 selectItemFromDropdownListByText(CityIdentifiers.getObjectIdentifier("city_places_details_Select_dropdown_xpath") ,PlaceDetails);
 	    }
+	    
+	    public void verifyPlaceInPlacesForCity(String place) {
+	    	assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_edit_xpath")).getText(), place);
+	    }
 	@Override
 	public String getPageUrl() {
 		return null;

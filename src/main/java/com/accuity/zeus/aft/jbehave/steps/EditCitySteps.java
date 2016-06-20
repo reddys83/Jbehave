@@ -371,4 +371,9 @@ public class EditCitySteps extends AbstractSteps {
 	    public void selectsDetailsFromDropdown(@Named("PlaceDetails") String PlaceDetails) {
 		  getEditCityPage().selectsPlacesDetailsFromDropdown(PlaceDetails);
 	    }
+	  
+	  @Then("the user should see place as $place in places for city")
+	    public void verifyPlaceInPlacesForCity(@Named("place") String place) {
+		  getEditCityPage().verifyPlaceInPlacesForCity(place);
+	    }
 }

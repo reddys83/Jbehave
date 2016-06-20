@@ -56,7 +56,7 @@ public class CityIdentifiers {
 		hmap.put("city_places_city_dropdown_input_xpath", By.xpath(".//*[@id='city_chosen']//input"));
 		hmap.put("city_places_go_button_xpath", By.xpath(".//*[@id='multiSelectRow']/button"));
 		hmap.put("city_places_details_Select_dropdown_xpath",By.xpath("//*[@id='additionalRelatedPlaces']/tr[@class='new']/td[4]/select"));
-	
+		hmap.put("city_places_place_edit_xpath",By.xpath(".//*[@class='new']/td/input[@id='relatedPlacePlace']"));
 		
 		
 	}
