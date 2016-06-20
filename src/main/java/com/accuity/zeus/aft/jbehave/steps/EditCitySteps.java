@@ -2,6 +2,9 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+
+import java.text.ParseException;
+
 import org.jbehave.core.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -284,6 +287,83 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyCityAddInfoValueFromTrusted(country, area, city, "additionalinfo", source);
 	}
 	
+	@When("the user enters the day <beganDay> in the text box for Began Date")
+	public void enterDayInBeganDate(@Named("beganDay") String beganDay) {
+		getEditCityPage().enterDayInBeganDate(beganDay);
+	}
+
+	@When("the user enters the month <beganMonth> in the drop down box for Began Date")
+	public void enterMonthInBeganDate(@Named("beganMonth") String month) {
+		getEditCityPage().enterMonthInBeganDate(month);
+	}
+
+	@When("the user enters the year <beganYear> in the text box for Began Date")
+	public void enterYearInBeganDate(@Named("beganYear") String year) {
+		getEditCityPage().enterYearInBeganDate(year);
+	}
+
+	@When("the user enters the day <endDay> in the text box for End Date")
+	public void enterDayInEndDate(@Named("endDay") String day) {
+		getEditCityPage().enterDayInEndDate(day);
+	}
+
+	@When("the user enters the month <endMonth> in the drop down box for End Date")
+	public void enterMonthInEndDate(@Named("endMonth") String month) {
+		getEditCityPage().enterMonthInEndDate(month);
+	}
+
+	@When("the user enters the year <endYear> in the text box for End Date")
+	public void enterYearInEndDate(@Named("endYear") String year) {
+		getEditCityPage().enterYearInEndDate(year);
+	}
+
+	@Then("the user verifies whether all the months in the drop down option are present in chronological order")
+	public void verifyMonthInChronologicalOrder() {
+		getEditCityPage().verifyMonthInChronologicalOrder();
+	}
+
+	@Then("the user should see the <endDate> value as in $source document")
+	public void verifyCityEndDateValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source, @Named("endDate") String endDate) {
+		getEditCityPage().verifyCityInfoFromDB(country, area, city, "EndDate", source, endDate);
+	}
+	
+	@Then("the user should see the $endDay2 $endMonth2 $endYear2 value as in $source document")
+	public void verifyCityEndDate2ValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source, @Named("endDay2") String day2,
+			@Named("endMonth2") String month2, @Named("endYear2") String year2) {
+		String endDate = day2 +" " + month2 + " " + year2;
+		getEditCityPage().verifyCityInfoFromDB(country, area, city, "EndDate", source, endDate);
+	}
+
+	@Then("the user verifies whether error message $errMsg is displayed for End Date")
+	public void verifyErrorMessageForEndDate(@Named("errMsg") String errMsg) {
+		getEditCityPage().verifyErrorMessageForEndDate(errMsg);
+	}
+
+	@When("the user enters $endDay2 $endMonth2 $endYear2 for End Date values")
+	public void enterEndDate(@Named("endDay2") String endDay2, @Named("endMonth2") String endMonth2,@Named("endYear2") String endYear2) {
+		getEditCityPage().enterEndDate(endDay2, endMonth2, endYear2);
+	}
+
+	@When("the user enters the future date in the text box for End Date")
+	public void enterDateLaterThanToday() throws ParseException {
+		getEditCityPage().enterDateLaterThanToday();
+	}
+
+	@When("the user clears the day, month and year values for Began Date")
+	public void clearBeganDate() {
+		getEditCityPage().clearBeganDate();
+	}
+
+	@Then("the user should see city end date value same as in $source document")
+	public void verifyCityEndDateValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source) {
+		setEditCityPage(getDataPage().createEditCityPage());
+		getEditCityPage().verifyCityEndDateFromTrustedDB(country, area, city, "EndDate", source);
+
+	}
+	
 	@Then("the user should see the began date value in city page is same as in $source document")
 	public void verifyCityBeganDateValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source) {
@@ -322,11 +402,6 @@ public class EditCitySteps extends AbstractSteps {
 			@Named("city") String city, @Named("day") String day, @Named("month") String month,
 			@Named("year") String year, @Named("source") String source) {
 		getEditCityPage().verifyCityBeganDateFromZeusDB(country, area, city, "BeginDate", source, day, month, year);
-	}
-
-	@Then("the user verifies whether all the months in the drop down option are in MMM format & are sorted in the chronological order")
-	public void verifyMonthInChronologicalOrder() {
-		getEditCityPage().verifyMonthInChronologicalOrder();
 	}
 
 }
