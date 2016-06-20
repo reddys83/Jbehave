@@ -50,6 +50,16 @@ public class LegalEntitySteps extends AbstractSteps {
         getLegalEntityPage().clickOnLegalEntityStatistics();
     }
 
+    @Then("the user should see the statistics section for fid <fid>")
+    public void verifyStatisticsInLegalEntity(@Named("fid") String fid) {
+        getLegalEntityPage().verifyStatisticsInLegalEntity(fid);
+    }
+
+    @Then("the user should not see the legal entity statistics for fid <fid>")
+    public void verifyLegalEntityStatisticsNoShown(@Named("fid") String fid) {
+        getLegalEntityPage().verifyStatisticsInLegalEntity(fid);
+    }
+
     @When("the user clicks on the legal entity tust power link in the navigation bar")
     public void clickOnLegalEntityTrustPowers() {
         getLegalEntityPage().clickOnLegalEntityTrustPowers();
@@ -222,4 +232,25 @@ public class LegalEntitySteps extends AbstractSteps {
         getLegalEntityPage().clickOnLegalEntityBasicInfo();
     }
 
+    @Then("the user should see the trust power section visible for fid <fid>")
+    public void checkTrustPowerSectionExists(@Named("fid") String fid ){
+        getLegalEntityPage().checkTrustPowerSectionExists(fid);
+    }
+
+    @Then("the user should see the trust power section not visible for fid <fid>")
+    public void checkTrustPowerSectionNotExists(@Named("fid") String fid ){
+        getLegalEntityPage().checkTrustPowerSectionNotExists(fid);
+    }
+
+    @Then("the user should see the trust power section in the All page of the legal Entity page")
+    public void verifyTrustPowerSectionExistsInAllPage()
+    {
+        getLegalEntityPage().verifyTrustPowerSectionExistsInAllPage();
+    }
+
+    @Then("the user should not see the trust power section in the All page of the legal Entity page")
+    public void verifyTrustPowerSectionNotExistsInAllPage()
+    {
+        getLegalEntityPage().verifyTrustPowerSectionNotExistsInAllPage();
+    }
 }

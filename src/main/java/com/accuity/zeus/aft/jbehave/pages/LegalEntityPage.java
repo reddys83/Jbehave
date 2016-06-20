@@ -11,7 +11,9 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.w3c.dom.Document;
 import org.apache.commons.collections.ListUtils;
 import org.openqa.selenium.JavascriptExecutor;
@@ -141,6 +143,25 @@ public class LegalEntityPage extends AbstractPage {
 
     public void clickOnLegalEntityStatistics() {
         attemptClick(legalEntity_statistics_link_id);
+    }
+
+    public void verifyStatisticsInLegalEntity(String fid) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity statistics flag", nvPairs);
+        if(getNodeValuesByTagName(document, "flag").get(0).equals("true")) {
+            assertTrue(getDriver().findElement(legalEntity_statistics_link_id).isDisplayed());
+        }
+        else
+        {
+            assertFalse(getDriver().findElement(legalEntity_statistics_link_id).isDisplayed());
+        }
     }
 
     public void clickOnLegalEntityTrustPowers() {
@@ -369,11 +390,7 @@ public class LegalEntityPage extends AbstractPage {
             e.printStackTrace();
         }
         attemptClick(office_link_xpath);
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        (new WebDriverWait(getDriver(), 30)).until(ExpectedConditions.presenceOfElementLocated(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_office_page_offices_label_xpath")));
         return new OfficesPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
@@ -412,6 +429,57 @@ public class LegalEntityPage extends AbstractPage {
     public EditLegalEntityPage createEditLegalEntityPage() {
         return new EditLegalEntityPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
 
+    }
+
+    public void checkTrustPowerSectionExists(String fid){
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "verify trust power section display", nvPairs);
+        if(getNodeValuesByTagName(document, "flag").get(0).equals("true")) {
+            assertTrue(getDriver().findElement(legalEntity_trustPowers_link_id).isDisplayed());
+        }
+        else
+        {
+            assertFalse("Data Error...Please correct the data",true);
+        }
+
+    }
+
+    public void checkTrustPowerSectionNotExists(String fid){
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "verify trust power section display", nvPairs);
+        if(getNodeValuesByTagName(document, "flag").get(0).equals("false")) {
+            assertFalse(getDriver().findElement(legalEntity_trustPowers_link_id).isDisplayed());
+        }
+        else
+        {
+            assertFalse("Data Error...Please correct the data",true);
+        }
+
+    }
+
+    public void verifyTrustPowerSectionExistsInAllPage()
+    {
+    assertTrue(getDriver().findElement(legalEntity_trustPowers_label_xpath).isDisplayed());
+    }
+
+    public void verifyTrustPowerSectionNotExistsInAllPage(){
+        assertFalse(getDriver().findElement(legalEntity_trustPowers_label_xpath).isDisplayed());
     }
 
 

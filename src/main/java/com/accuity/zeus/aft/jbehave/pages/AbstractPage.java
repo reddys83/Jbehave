@@ -17,6 +17,7 @@ import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertNotNull;
@@ -243,5 +244,22 @@ public abstract class AbstractPage {
         return bigString;
 
     }
+    
+    /**
+	 * This method is to generate a random numeric number in specified range
+	 * @param limit
+	 * @return the generated random number
+	 */
+	public String getRandomNumericString(int limit) {
+		int randomNum = 0;
+		String randomString = "";
+		Random ran = new Random();
+		for(int index =0 ; index < limit ; index++)
+		{
+			randomNum = ran.nextInt(9);
+			randomString += randomNum;
+		}	    	
+		return randomString;
+	}
 
 }

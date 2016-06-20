@@ -76,4 +76,4 @@ Then the user should see the currency page for clicked iso name
 
 Examples:
 |country|isoCode|
-|Haiti|HTG|
+|Madagascar|MGA|
