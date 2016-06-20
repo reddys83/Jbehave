@@ -774,7 +774,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void clickOnSubAreaDropDown() {
-       // waitForElementToAppear(subarea_city_dropdown_is_visible_xpath);
+        waitForElementToAppear(subarea_city_dropdown_is_visible_xpath);
         attemptClick(area_subarea_dropdown_xpath);
     }
 
