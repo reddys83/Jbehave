@@ -604,18 +604,12 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyIdentifierValuesNotExistInZEUS(fid,source,identifiers);
     }
 
-    @When("the user clicks no button not to delete row")
-    public void pressNoButtonInDeleteConfirmationModal() {
-        getEditLegalEntityPage().pressNoButtonInDeleteConfirmationModal();
-    }
 
     @Then("the user should see the newly added identifier row in the basic info legal entity page")
     public void verifyNewlyAddedIdentifierRowIsDisplayed(String dropdown) {
         getEditLegalEntityPage().verifyNewlyAddedIdentifierRowIsDisplayed(dropdown);
     }
 
-    @Then("the user verifies the identifier value maxlength is $maxSize for the $rowIdentifier")
-    public void verifyMaxlengthIdentifierValueText(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditLegalEntityPage().verifyMaxlengthIdentifierValueText(maxSize,rowIdentifier);}
 
 
     @Then("the user enters 50 characters in the identifier value on the legal entity page")
@@ -623,22 +617,18 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().enter50CharactersInIdentifierValueField();
     }
 
-    @Then("the user enters 51 characters in the identifier value on the legal entity page")
-    public void enter51CharactersInIdentifierValueField() {
-        getEditLegalEntityPage().enter51CharactersInIdentifierValueField();
-    }
-
     @Then("the user should see the error message enter only 50 valid characters for identifier value in the legal entity page")
     public void verifyLegalEntityIdentifierValueErrorMessageForMaxLength() {
         getEditLegalEntityPage().verifyLegalEntityIdentifierValueErrorMessageForMaxLength();
     }
 
-
     @Then("the user should see the error message $errorMsg for the identifier value field")
     public void verifyIdentifierValueErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditLegalEntityPage().verifyIdentifierValueErrorMessage("legalEntity_new_identifier_value_error_msg_xpath", errorMsg);
+        getEditLegalEntityPage().verifyIdentifierValueErrorMessage("legalEntity_identifier_value_error_msg_xpath", errorMsg);
     }
 
+    @Then("the user verifies the identifier value maxlength is $maxSize for the $rowIdentifier")
+        public void verifyMaxlengthIdentifierValueText(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditLegalEntityPage().verifyMaxlengthIdentifierValueText(maxSize,rowIdentifier);}
 
     @Then("the user should see the error message $errorMsg for the identifier status field")
     public void verifyIdentifierStatusErrorMessage(@Named("errorMsg") String errorMsg) {
@@ -653,7 +643,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
     @Then("the user should see the error message $errorMsg for the identifier type field")
     public void verifyIdentifierTypeErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditLegalEntityPage().verifyIdentifierTypeErrorMessage("legalEntity_creditRating_type_error_msg_xpath", errorMsg);
+        getEditLegalEntityPage().verifyIdentifierTypeErrorMessage("legalEntity_identifier_type_error_msg_xpath", errorMsg);
     }
 
 }

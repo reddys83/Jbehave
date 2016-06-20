@@ -1074,7 +1074,7 @@ public class EditLegalEntityPage extends AbstractPage {
 
     public void selectIdentifierStatus(String identifierStatus, String rowIdentifier) {
         Select dropdown = new Select(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).get(0));
-        dropdown.selectByVisibleText(identifierStatus);
+        dropdown.selectByValue(identifierStatus);
 
     }
 
@@ -1139,11 +1139,6 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
 
-
-    public void pressNoButtonInDeleteConfirmationModal() {
-        attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legal_entity_delete_no_identifiers_button_xpath"));
-    }
-
     public void verifyNewlyAddedIdentifierRowIsDisplayed(String rowIdentifier) {
         try {
             assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
@@ -1160,14 +1155,11 @@ public class EditLegalEntityPage extends AbstractPage {
     public void verifyMaxlengthIdentifierValueText(String maxSize,String rowIdentifier) {
         assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);
     }
-    public void enter51CharactersInIdentifierValueField() {
-        String strBigString = createBigString(51);
-        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_first_row_new_identifier_value")).clear();
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + strBigString + "'", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_first_row_new_identifier_value")));
-    }
+
 
     public void verifyLegalEntityIdentifierValueErrorMessageForMaxLength() {
-        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_first_row_new_identifier_value")).getText(), "Enter up to 50 valid characters.");
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_first_row_new_identifier_value")).getText(), "Enter up to 50 valid characters");
+
     }
 
     public void verifyIdentifierValueErrorMessage(String xpathIdentifier,String errorMsg)
@@ -1192,6 +1184,9 @@ public class EditLegalEntityPage extends AbstractPage {
         assertEquals(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(xpathIdentifier)).size(), 1);
         assertEquals(errorMsg, getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(xpathIdentifier)).getText());
     }
+
+
+
     @Override
     public String getPageUrl() {
         return null;
