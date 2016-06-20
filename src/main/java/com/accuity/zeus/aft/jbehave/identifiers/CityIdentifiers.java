@@ -41,6 +41,15 @@ public class CityIdentifiers {
 		hmap.put("city_addInfo_error_message_edit_xpath", By.xpath("//*[@id='cityBasicInfo']//*[@data-error_id='addInfoError']"));
 		hmap.put("save_button_id", By.xpath("//*[@id='save-button']"));
 		hmap.put("city_add_info_xpath_after_save", By.xpath("//*[@id='cityBasicInfo']//tr[th='Add Info']/td"));
+		hmap.put("city_creditRating", By.xpath("//*[@id='cityCreditRating']"));
+		hmap.put("city_credit_rating_applied_date_day_xpath", By.xpath("//input[@name='creditRatingAppliedDate-day']"));
+		hmap.put("city_credit_rating_applied_date_month_xpath", By.xpath("//*[@name='creditRatingAppliedDate-month']"));
+		hmap.put("city_credit_rating_confirmed_date_month_xpath", By.xpath("//*[@name='creditRatingConfirmedDate-month']"));
+		hmap.put("city_credit_rating_confirmed_date_day_xpath", By.xpath("//input[@name='creditRatingConfirmedDate-day']"));
+		hmap.put("city_credit_rating_appliedYear_xpath", By.xpath("//input[@name='creditRatingAppliedDate-year']"));
+		hmap.put("city_credit_rating_applied_date_error_msg_xpath", By.xpath("//*[@data-error_id='creditRatingAppliedDateError']"));
+		hmap.put("city_credit_rating_confirmed_date_year_xpath", By.xpath("//input[@name='creditRatingConfirmedDate-year']"));
+		hmap.put("city_credit_rating_addRow_id", By.xpath("//*[@id='add-creditRatings']"));
 		
 	}
 

@@ -283,5 +283,52 @@ public class EditCitySteps extends AbstractSteps {
 			@Named("city") String city, @Named("source") String source) {
 		getEditCityPage().verifyCityAddInfoValueFromTrusted(country, area, city, "additionalinfo", source);
 	}
+	
+	@When("the user clicks on the city credit rating link in the navigation bar")
+    public void clickOnCityCreditRating() {
+		setEditCityPage(getDataPage().createEditCityPage());
+		getEditCityPage().clickOnCityCreditRating();
+    }
+	
+	@When("the user enters applied date day <appliedDay> in the credit rating city page")
+	public void enterCityCreditRatingAppliedDateDay(@Named("appliedDay") String appliedDay) {
+		getEditCityPage().enterCityCreditRatingAppliedDateDay(appliedDay);
+	}
+
+	@When("the user selects applied date month <appliedMonth> in the credit rating city page")
+	public void enterCountryCreditRatingAppliedDateMonth(@Named("appliedMonth") String appliedMonth) {
+		getEditCityPage().enterCityCreditRatingAppliedDateMonth(appliedMonth);
+	}
+
+	@When("the user enters applied date year <appliedYear> in the credit rating city page")
+	public void enterCreditRatingAppliedYear(@Named("appliedYear") String appliedYear) {
+		getEditCityPage().enterCreditRatingAppliedYear(appliedYear);
+	}
+	
+	@When("the user selects confirmed date month <confirmedMonth> in the credit rating city page")
+	public void enterCityCreditRatingConfirmedDateMonth(@Named("confirmedMonth") String confirmedMonth) {
+		getEditCityPage().enterCityCreditRatingConfirmedDateMonth(confirmedMonth);
+	}
+	
+	@When("the user enters confirmed date year <confirmedYear> in the credit rating city page")
+	public void enterConfirmedYear(@Named("confirmedYear") String confirmedYear) {
+		getEditCityPage().enterCreditRatingConfirmedYear(confirmedYear);
+	}
+
+	@When("the user enters confirmed date day <confirmedDay> in the credit rating city page")
+	public void enterCityCreditRatingConfirmedDateDay(@Named("confirmedDay") String confirmedDay) {
+		getEditCityPage().enterCityCreditRatingConfirmedDateDay(confirmedDay);
+	}
+	
+
+	@Then("the user should see the error message enter a year, month/year or day/month/year for applied date in the credit rating city page")
+	public void verifyErrorMessageEnterYearMonthDayForAppliedDate() {
+		getEditCityPage().verifyErrorMessageEnterYearMonthDayForAppliedDate();
+	}
+	
+	@When("the user clicks on add new credit rating button in the credit rating city page")
+	public void clickOnAddButton() {
+		getEditCityPage().clickAddRowButton();
+	}
 
 }

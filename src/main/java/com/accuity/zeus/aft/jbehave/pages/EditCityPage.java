@@ -676,6 +676,47 @@ public class EditCityPage extends AbstractPage {
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText());
 
 	}
+	
+	public void clickOnCityCreditRating() {
+        attemptClick(CityIdentifiers.getObjectIdentifier("city_creditRating"));
+    }
+	
+	public void enterCityCreditRatingAppliedDateDay(String appliedDay) {
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_day_xpath")).clear();
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_day_xpath")).sendKeys(appliedDay);
+	}	
+
+	public void enterCityCreditRatingAppliedDateMonth(String appliedMonth) {
+		selectItemFromDropdownListByText(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_month_xpath"), appliedMonth);
+	}
+
+	public void enterCityCreditRatingConfirmedDateMonth(String confirmedMonth) {
+		selectItemFromDropdownListByText(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_year_month_xpath"), confirmedMonth);
+	}
+
+	public void enterCityCreditRatingConfirmedDateDay(String confirmedDay) {
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_day_xpath")).clear();
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_day_xpath")).sendKeys(confirmedDay);
+	}
+	
+	public void enterCreditRatingAppliedYear(String appliedYear) {
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_appliedYear_xpath")).clear();
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_appliedYear_xpath"))
+				.sendKeys(appliedYear);
+	}
+	
+	public void verifyErrorMessageEnterYearMonthDayForAppliedDate() {
+        assertEquals("Enter a year, month/year or day/month/year.", getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_error_msg_xpath")).getText());
+    }
+	
+	public void enterCreditRatingConfirmedYear(String confirmedYear) {
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_year_xpath")).clear();
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_year_xpath")).sendKeys(confirmedYear);
+	}
+	
+	public void clickAddRowButton() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_credit_rating_addRow_id"));
+	}
 
 	@Override
 	public String getPageUrl() {
