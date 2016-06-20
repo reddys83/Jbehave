@@ -774,6 +774,7 @@ public class EditLegalEntityPage extends AbstractPage {
         return selectedValueList;
     }
 
+
     /*
     *   Need to call this method only when value displayed on the front end has the first letter in upper case
     *
@@ -991,6 +992,30 @@ public class EditLegalEntityPage extends AbstractPage {
         }
     }
 
+    public void verifyCategoryDropdownValuesFromLookup(String row_Identifier,String lookupFid){
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        List<String> dropdownValuesList = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", lookupFid));
+        Select dropdown = new Select(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(row_Identifier)));
+        String selectedValue = dropdown.getFirstSelectedOption().getText();
+        for (WebElement option : dropdown.getOptions()) {
+            dropdownValuesList.add(option.getAttribute("value"));
+        }
+        dropdownValuesList.remove(selectedValue);
+        if (dropdownValuesList.get(0).equals("")) {
+            dropdownValuesList.remove(0);
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legalEntity Services From Lookup", nvPairs);
+        List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "serviceCategory"), getAlreadySelectedValuesInAllRowsForADropdown(LegalEntityIdentifiers.getObjectIdentifier(row_Identifier)));
+        assertEquals(dropdownValuesList, resultList);
+
+        }
+
+//    public void verifyFinancialCategoryDropdownValuesFromLookup(String row_Identifier,String lookup){}
+//    public void verifyFinancialDetailsDropdownValuesFromLookup(String row_Identifier,String lookup){}
+//    public void clickAddOfferedServiceButton(){}
+//    public void clickAddFinancialServiceButton(){}
+//    public void selectFinancialCategoryValue(String row_Identifier,String financialCategory){}
 
     @Override
     public String getPageUrl() {

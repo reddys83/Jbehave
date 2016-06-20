@@ -529,6 +529,30 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyNoNewlyAddedLegalEntityLocations();
     }
 
+    @Then("the user should see the category dropdown i.e $row_Identifier values from lookup $lookup")
+    public void verifyCategoryDropdownValuesFromLookup(@Named("row_Identifier") String row_Identifier,@Named("lookup") String lookup) {
+        getEditLegalEntityPage().verifyCategoryDropdownValuesFromLookup(row_Identifier,lookup);
+    }
+  /*  @Then("the user should see the financial category dropdown i.e $row_Identifier values from lookup $lookup")
+    public void verifyFinancialCategoryDropdownValuesFromLookup(@Named("row_Identifier") String row_Identifier,@Named("lookup") String lookup) {
+        getEditLegalEntityPage().verifyFinancialCategoryDropdownValuesFromLookup(row_Identifier,lookup);
+    }
+    @Then("the user should see the financial details dropdown i.e $row_Identifier values from lookup $lookup")
+    public void verifyFinancialDetailsDropdownValuesFromLookup(@Named("row_Identifier") String row_Identifier,@Named("lookup") String lookup) {
+        getEditLegalEntityPage().verifyFinancialDetailsDropdownValuesFromLookup(row_Identifier,lookup);
+    }
+    @When("the user clicks on add new offered services button in the services section of legal Entity page")
+    public void clickAddOfferedServiceButton() {
+        getEditLegalEntityPage().clickAddOfferedServiceButton();
+    }
+    @When("the user clicks on add new financial services button in the services section of legal Entity page")
+    public void clickAddFinancialServiceButton() {
+        getEditLegalEntityPage().clickAddFinancialServiceButton();
+    }
+    @When("the user selects financial category i.e $row_Identifier value as <financialCategory>")
+    public void selectFinancialCategoryValue(@Named("row_Identifier") String row_Identifier,@Named("financialCategory") String financialCategory) {
+        getEditLegalEntityPage().selectFinancialCategoryValue(row_Identifier,financialCategory);
+    }*/
 
 
 

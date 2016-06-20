@@ -86,6 +86,18 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_delete_button_legalEntity_location_edit_xpath",By.xpath(".//*[@id='additionalLocationSummaries']//tr[@class='new']//td[@class='delete']/button"));
         hmap.put("legalEntity_new_locations_summary_value_edit_xpath",By.xpath("//*[@id='additionalLocationSummaries']/tr[@class='new']//td//textarea"));
         hmap.put("legalEntity_office_page_offices_label_xpath",By.xpath("//div[@id='subEntityList-summary']//span[text()='offices']"));
+        hmap.put("legalEntity_first_row_existing_offeredservices_category_dropdown",By.xpath("//*[@id='additionalOfferedServices']/tr[1]/td/select[@id='offeredServiceCategory']"));
+        hmap.put("legalEntity_first_row_existing_offeredservices_Override",By.xpath("//*[@id='additionalOfferedServices']/tr[1]/td/input"));
+        hmap.put("legalEntity_first_row_existing_financial_category_dropdown",By.xpath("//*[@id='additionalOfferedServices']/tr[1]/td/select[@id='financialServiceCategory']"));
+        hmap.put("legalEntity_first_row_existing_financial_details_dropdown",By.xpath("//*[@id='additionalOfferedServices']/tr[1]/td/select[@id='financialServiceDetail']"));
+        hmap.put("legalEntity_first_row_new_offeredservices_category_dropdown",By.xpath("//*[@id='additionalOfferedServices']/tr[@class='new']/td/select[@id='offeredServiceCategory']"));
+        hmap.put("legalEntity_first_row_new_offeredservices_Override",By.xpath("//*[@id='additionalOfferedServices']/tr[@class='new']/td/input"));
+        hmap.put("legalEntity_first_row_new_financial_category_dropdown",By.xpath("//*[@id='additionalOfferedServices']/tr[@class='new']/td/select[@id='financialServiceCategory']"));
+        hmap.put("legalEntity_first_row_new_financial_details_dropdown",By.xpath("//*[@id='additionalOfferedServices']/tr[@class='new']/td/select[@id='financialServiceDetail']"));
+
+        hmap.put("legalEntity_add_oferedservices_button",By.xpath("//*[@id='add-offeredServices']"));
+        hmap.put("legalEntity_add_financialservices_button",By.xpath("//*[@id='add-financialServices']"));
+
 
     }
 
