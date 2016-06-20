@@ -816,22 +816,18 @@ public class EditCityPage extends AbstractPage {
 		enterYearInEndDate(year);
 	}
 	
-	public void enterTrueForUseInAddress() {
-		clickValueForUseInAddress(CityIdentifiers.getObjectIdentifier("city_use_in_address_true"));
+	public void selectTrueForUseInAddress() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_use_in_address_true"));
 	}
-	
-	public void clickValueForUseInAddress(By webElement) {
-		getDriver().findElement(webElement).click();
+
+	public void selectFalseForUseInAddress() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_use_in_address_false"));
 	}
-	
-	public void enterFalseForUseInAddress() {
-		clickValueForUseInAddress(CityIdentifiers.getObjectIdentifier("city_use_in_address_false"));
-	}
-	
+
 	public void verifyCityAddressFlagFromZeusDB(String country, String area, String city, String tagName,
 			String source) {
-		assertEquals(StringUtils.capitalize(getCityInfoFromDB(country, area, city, tagName, source)), getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_address_flag_xpath")).getText());
+		assertEquals(StringUtils.capitalize(getCityInfoFromDB(country, area, city, tagName, source)),
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_address_flag_xpath")).getText());
 
 	}
 

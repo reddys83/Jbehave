@@ -365,13 +365,13 @@ public class EditCitySteps extends AbstractSteps {
 	}
 	
 	@When("the user clicks on True option for Use in Address") 
-	public void enterTrueForUseInAddress() {
-		getEditCityPage().enterTrueForUseInAddress();
+	public void selectTrueForUseInAddress() {
+		getEditCityPage().selectTrueForUseInAddress();
 	}
 	
 	@When("the user clicks on False option for Use in Address") 
-	public void enterFalseForUseInAddress() {
-		getEditCityPage().enterFalseForUseInAddress();
+	public void selectFalseForUseInAddress() {
+		getEditCityPage().selectFalseForUseInAddress();
 	}
 	
 	@Then("the user should see the address flag value same as in $source document")
