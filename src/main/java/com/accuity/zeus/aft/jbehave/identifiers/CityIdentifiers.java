@@ -58,6 +58,12 @@ public class CityIdentifiers {
 		hmap.put("city_credit_rating_applied_date_error_msg_xpath", By.xpath("//*[@data-error_id='creditRatingAppliedDateError']"));
 		hmap.put("city_credit_rating_confirmed_date_year_xpath", By.xpath("//input[@name='creditRatingConfirmedDate-year']"));
 		hmap.put("city_credit_rating_addRow_id", By.xpath("//*[@id='add-creditRatings']"));
+		hmap.put("city_credit_rating_type_dropdown_xpath", By.xpath("//*[@id='additionalCreditRatings']//select[@data-internal_id='creditRatingType']"));
+		hmap.put("city_credit_rating_agency_dropdown_xpath", By.xpath("//*[@id='additionalCreditRatings']//select[@data-internal_id='creditRatingAgency']"));
+		
+		
+		
+		
 
 
 	}

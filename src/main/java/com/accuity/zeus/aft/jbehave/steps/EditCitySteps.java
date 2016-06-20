@@ -410,5 +410,30 @@ public class EditCitySteps extends AbstractSteps {
 	public void clickOnAddButton() {
 		getEditCityPage().clickAddRowButton();
 	}
+	
+	@When("the user clicks on the Agency names drop-down in the basicinfo city page")
+	public void clickOnCityAgencyDropDown() {
+		getEditCityPage().clickOnAgencyDropDown();
+	}
+	
+	@Then("the user should see the city Agency names from look up $LookUpName")
+	public void verifyCityAgencyList() {
+		getEditCityPage().verifyCityAgencyList();
+	}
+	
+	@When("the user clicks on the Agency types drop-down in the basicinfo city page")
+	public void clickOnCityAgencyTypeDropDown() {
+		getEditCityPage().clickOnAgencyTypeDropDown();
+	}
+	
+	@Then("the user should see the city Agency types from look up $LookUpName")
+	public void verifyCityAgencyTypList() {
+		getEditCityPage().verifyCityCreditRatingTypeList();
+	}
+	
+	@When("the user enters credit rating type as <creditRatingType> in the basic info city page")
+	public void enterCreditRatingType(@Named("creditRatingType") String creditRatingType) {
+		getEditCityPage().enterCreditRatingType(creditRatingType);
+	}
 
 }

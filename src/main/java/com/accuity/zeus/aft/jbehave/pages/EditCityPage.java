@@ -856,7 +856,75 @@ public class EditCityPage extends AbstractPage {
 	public void clickAddRowButton() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_credit_rating_addRow_id"));
 	}
+	
+	/**
+	 * This method is used to click the city Agency drop-down
+	 */
+	public void clickOnAgencyDropDown() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_options_xpath"));
+	}
+	
+	/**
+	 * This method is used to click the city Agency drop-down
+	 */
+	public void clickOnAgencyTypeDropDown() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"));
+	}
 
+	/**
+	 * This method is used to verify the look up data values available for city
+	 * agency drop-down
+	 */
+	public void verifyCityAgencyList() {
+		List<WebElement> agencyList = getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath")).findElements(By.tagName("option"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city credit look up values");
+		for (int i = 1; i < document.getElementsByTagName("creditRatingAgency").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					agencyList.get(i).getAttribute("value"));
+		}
+
+	}
+	
+	/**
+	 * This method is used to verify the look up data values available for city
+	 * agency drop-down
+	 */
+	public void verifyCityCreditRatingTypeList() {
+		List<WebElement> typeList = getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath")).findElements(By.tagName("option"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city credit look up values");
+		for (int i = 1; i < document.getElementsByTagName("creditRatingType").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					typeList.get(i).getAttribute("value"));
+		}
+
+	}
+	
+	
+	/**
+	 * This method is used to enter the CreditRatingType  *
+	 * 
+	 * @param CreditRatingType
+	 */
+	public void enterCreditRatingType(String creditRatingType) {
+		try {
+			if (creditRatingType != null) {
+				List<WebElement> identifierDropDowns = getDriver()
+						.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath")).findElements(By.tagName("option"));
+				Select dropdown = new Select(identifierDropDowns.get(0));
+				if (creditRatingType.equals("")) {
+					dropdown.selectByValue(creditRatingType);
+				} else {
+					dropdown.selectByVisibleText(creditRatingType);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public String getPageUrl() {
 		return null;
