@@ -213,3 +213,17 @@ Examples:
 |entity|searchBy|fid|
 |1038|fid|1038|
 |1717|fid|1717|
+
+Scenario: Verify the charter type is displayed properly (without case transformation) from trusted document (Bug - ZEUS-950)
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+Then the user verifies basic info for legal entity left column <fid> from trusted document
+
+Examples:
+|entity|searchBy|fid|
+|930|fid|930|
