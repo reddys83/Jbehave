@@ -316,4 +316,59 @@ public class EditCitySteps extends AbstractSteps {
 	    public void clickOnCitylaces() {
 		 getEditCityPage().clickOnCityPlaces();
 	    }
+	 
+	  @When("the user clicks on new country places type drop-down for city")
+	    public void clickAddPlacesButton() {
+		  getEditCityPage().clickAddPlacesButton();
+	    }
+	  
+	  @When("the user selects type value as <PlaceType> in the places for city")
+	    public void selectsTypeFromDropdown(@Named("PlaceType") String PlaceType) {
+		  getEditCityPage().selectsPlacesTypeFromDropdwon(PlaceType);
+	    }
+	  
+	  @When("the user clicks on edit button in places for city")
+	    public void clicksOnEditButton() {
+		  getEditCityPage().clicksOnEditButton();
+	    }
+	  
+	  @When("the user clicks on the country drop down in the places for city")
+	    public void clicksOnCountryInPlacesForCity() {
+		  getEditCityPage().clicksOnCountryInPlacesForCity();
+	    }
+	  
+	  @When("the user selects the country <countryPlaces> in the places for city")
+	    public void selectsCountryInPlacesForCity(@Named("countryPlaces") String countryPlaces) {
+		  getEditCityPage().selectsCountryInPlacesForCity(countryPlaces);
+	    }
+	  
+	  @When("the user clicks on area drop down in the places for city")
+	    public void clicksOnAreaDropdownInPlacesForCity() {
+		  getEditCityPage().clicksOnAreaDropdownInPlacesForCity();
+	    }
+	  
+	  @When("the user selects area <areaPlaces> dropdown in places for city")
+	    public void selectsAreaInPlacesForCity(@Named("areaPlaces") String areaPlaces) {
+		  getEditCityPage().selectsAreaInPlacesForCity(areaPlaces);
+	    }
+	  
+	  @When("the user clicks on city drop down in the places for city")
+	    public void clicksOnCityDropdownInPlacesForCity() {
+		  getEditCityPage().clicksOnCityDropdownInPlacesForCity();
+	    }
+	  
+	  @When("the user selects city <cityPlaces> dropdown in the places for city")
+	    public void selectsCityInPlacesForCountry(@Named("cityPlaces") String cityPlaces) {
+		  getEditCityPage().selectsCityInPlacesForCountry(cityPlaces);
+	    }
+	  
+	  @When("the user clicks on go button in places for city")
+	     public void clicksOnGoButton() {
+		  getEditCityPage().clicksOnGoButton();
+	    }
+	  
+	  @When("the user selects details value as <PlaceDetails> in the places for city")
+	    public void selectsDetailsFromDropdown(@Named("PlaceDetails") String PlaceDetails) {
+		  getEditCityPage().selectsPlacesDetailsFromDropdown(PlaceDetails);
+	    }
 }

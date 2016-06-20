@@ -565,6 +565,8 @@ public class DataSteps extends AbstractSteps {
     @When("the user enters the city <city> in the type-ahead box")
     public void enterCityInTheTypeAheadBox(@Named("city") String city) {
         getDataPage().enterCityInTheTypeAheadBox(city);
+        setEditCityPage(getDataPage().createEditCityPage());
+        
     }
 
     @When("the user clicks on the city all link in the navigation bar")
