@@ -5,6 +5,10 @@ import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
+
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -675,6 +679,141 @@ public class EditCityPage extends AbstractPage {
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText());
 
+	}
+	
+	/**
+	 * This method is used to verify the value in trusted DB is same as UI
+	 * value.
+	 * 
+	 * @param country
+	 * @param area
+	 * @param city
+	 * @param tagName
+	 * @param source
+	 */
+	public void verifyCityEndDateValueFromTrusted(String country, String area, String city, String tagName,
+			String source) {
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_end_date_info_text_xpath")).getText());
+
+	}
+
+	public void enterDayInBeganDate(String day) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_day_began_date_xpath"), day);
+	}
+
+	public void enterMonthInBeganDate(String month) {
+		try {
+			List<WebElement> monthDropDowns = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_month_began_date_xpath"));
+			Select dropdown = new Select(monthDropDowns.get(0));
+			if (month.equals("")) {
+				dropdown.selectByValue(month);
+			} else {
+				month = month.substring(0, 3);
+				dropdown.selectByVisibleText(month);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void enterYearInBeganDate(String year) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_year_began_date_xpath"), year);
+	}
+
+	public void enterDayInEndDate(String day) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_day_end_date_xpath"), day);
+	}
+
+	public void enterMonthInEndDate(String month) {
+		try {
+			List<WebElement> monthDropDowns = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_month_end_date_xpath"));
+			Select dropdown = new Select(monthDropDowns.get(0));
+			if (month.equals("")) {
+				dropdown.selectByValue(month);
+			} else {				
+				dropdown.selectByVisibleText(month);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void enterYearInEndDate(String year) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_year_end_date_xpath"), year);
+	}
+
+	public void verifyMonthInChronologicalOrder() {
+		List<String> monthInOrder = new ArrayList<String>();
+		monthInOrder.add(" ");
+		monthInOrder.add("Jan");
+		monthInOrder.add("Feb");
+		monthInOrder.add("Mar");
+		monthInOrder.add("Apr");
+		monthInOrder.add("May");
+		monthInOrder.add("Jun");
+		monthInOrder.add("Jul");
+		monthInOrder.add("Aug");
+		monthInOrder.add("Sep");
+		monthInOrder.add("Oct");
+		monthInOrder.add("Nov");
+		monthInOrder.add("Dec");
+
+		List<WebElement> monthDropDownList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_month_end_date_xpath"));
+
+		Select monthDropdown = new Select(monthDropDownList.get(0));
+
+		List<String> monthListInString = new ArrayList<String>();
+		for (WebElement monthoption : monthDropdown.getOptions()) {
+			monthListInString.add(monthoption.getText());
+		}
+
+		assertTrue(monthInOrder.equals(monthListInString));
+	}
+
+	public void verifyErrorMessageForEndDate(String errMsg) {
+		assertEquals(
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_error_for_invalid_date")).getText(),
+				errMsg);
+	}
+
+	public void enterDateLaterThanToday() throws ParseException {
+		Calendar cal = Calendar.getInstance();
+		enterDayInEndDate(Integer.toString(cal.get(Calendar.DATE) + 1));
+		Format formatter = new SimpleDateFormat("MMMM");
+		String month = formatter.format(new Date());
+		month = month.substring(0, 3);
+		enterMonthInEndDate(month);
+		enterYearInEndDate(Integer.toString(cal.get(Calendar.YEAR) + 1));
+	}
+
+	public void clearBeganDate() {
+		clearValue(CityIdentifiers.getObjectIdentifier("city_day_began_date_xpath"));
+		enterMonthInBeganDate("");
+		clearValue(CityIdentifiers.getObjectIdentifier("city_year_began_date_xpath"));
+	}
+
+	public void clearValue(By webElement) {
+		getDriver().findElement(webElement).clear();
+	}
+
+	public void verifyCityEndDateFromTrustedDB(String country, String area, String city, String tagName,
+			String source) {
+
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_end_date_info_text_xpath")).getText());
+
+	}
+
+	public void enterEndDate(String day, String month, String year) {
+		enterDayInEndDate(day);
+		enterMonthInEndDate(month);
+		enterYearInEndDate(year);
 	}
 	
 	public void clickOnCityCreditRating() {
