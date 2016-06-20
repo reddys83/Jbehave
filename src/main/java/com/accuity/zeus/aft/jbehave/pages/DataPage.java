@@ -197,7 +197,6 @@ public class DataPage extends AbstractPage {
     private By delete_row_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
     private By delete_confirmation_no_button_id = By.id("no-button");
     private By delete_confirmation_yes_button_id = By.id("yes-button");
-    private By area_country_title = By.xpath(".//*[@id='selection']/fieldset/h1");
     private By area_basic_info_country_link_xpath = By.xpath(".//*//tr[th='Country']/td/a");
     private String area_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
 
@@ -1233,13 +1232,6 @@ public class DataPage extends AbstractPage {
     public EditCityPage createEditCityPage() {
         return new EditCityPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
 
-    }
-
-
-    public void verifyAreaRelatedPlaces()
-
-    {
-        assertFalse(getDriver().findElement(area_country_title).isDisplayed());
     }
 
     public void clickOnCountryLink() {
