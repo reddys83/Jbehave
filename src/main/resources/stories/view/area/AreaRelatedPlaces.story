@@ -176,7 +176,7 @@ Examples:
 |country|area|
 |USA|Illinois|
 
-Scenario: Verify User can follow link to country from Sub-area related place
+Scenario: Verify User can follow link to  another area from Sub-area related place
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
