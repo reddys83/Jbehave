@@ -216,11 +216,6 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyErrorMessageForRequiredCityIdentifierStatus();
 	}
 
-	@Then("the user should see the Enter up to 50 valid characters error message for the identifier value field in the city basic info page")
-	public void verifyErrorMessageForLongCityIdentifierValue() {
-		getEditCityPage().verifyErrorMessageForRequiredCityIdentifierValue();
-	}
-
 	@When("the user clicks on the No button to cancel the deletion of row")
 	public void clickNoButtonInDeleteConfirmationModalForCity() {
 		getEditCityPage().clickNoButtonInDeleteConfirmationModalForCity();

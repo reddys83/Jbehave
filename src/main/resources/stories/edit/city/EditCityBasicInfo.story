@@ -341,16 +341,20 @@ When the user clicks on the add new identifier button in the basic info city pag
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button in city page
+Then the user should see the successful update message at top of the page
 When the user clicks on the city update link
 When the user clicks on the add new identifier button in the basic info city page
+When the user enters identifier type as <identifierType> in the basic info city page
 When the user enters an incorrect identifier value as <identifierValueIncorrect> in the basic info city page
+When the user enters identifier status as <identifierStatus> in the basic info city page
 When the user clicks on the save button
-Then the user should see the Enter up to 50 valid characters error message for the identifier value field in the city basic info page
+When the user clicks on the confirm button in city page
+Then the user should see the successful update message at top of the page
 
 
 Examples:
-|country|area|city|identifierValueIncorrect|
-|Albania|Fier|Patos|aksjuilrw1aksjuilrw1aksjuilrw1aksjuilrw1aksju%)~12y1|
+|country|area|city|identifierType|identifierValueIncorrect|identifierStatus|
+|Albania|Fier|Patos|Numeric ISO Code|aksjuilrw1aksjuilrw1aksjuilrw1aksjuilrw1aksju%)~12y1|Active|
 
 Scenario: User can edit city identifiers - Verify that an error message 'Required' is displayed when user left identifier Type blank and enters value in identifier 'Value' and 'Status'
 Given a user is on the search page
