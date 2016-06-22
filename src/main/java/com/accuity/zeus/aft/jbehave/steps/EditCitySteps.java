@@ -541,5 +541,10 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyNewlyAddedCreditRatingRowIsDisplayed();
 	}	
 	
+	@Then("the user should see delete row confirmation modal in credit rating")
+	public void verifyDeleteConfirmationModalCreditRating() {
+		getEditCityPage().verifyCreditRatingDeleteConfirmationModal();
+	}
+	
 
 }
