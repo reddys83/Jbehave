@@ -193,3 +193,4 @@ Then the user should see the city's names as:
 Examples:
 |country|area|city|
 |USA|Illinois|Chicago|
+
