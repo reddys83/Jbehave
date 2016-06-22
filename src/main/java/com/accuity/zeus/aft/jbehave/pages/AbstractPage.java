@@ -178,6 +178,20 @@ public abstract class AbstractPage {
             dropdown.selectByVisibleText(value);
         }
     }
+    
+    public void selectItemFromDropdownListByText(WebElement obj, String value) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Select dropdown = new Select(obj);
+        if (value.equals("")) {
+            dropdown.selectByValue(value);
+        } else {
+            dropdown.selectByVisibleText(value);
+        }
+    }
 
     public void modifyHtmlByName(By element, String attribute, String value) {
         WebElement webElement = getDriver().findElement(element);
