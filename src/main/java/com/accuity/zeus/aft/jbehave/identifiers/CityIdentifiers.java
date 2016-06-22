@@ -49,7 +49,10 @@ public class CityIdentifiers {
 		hmap.put("city_day_began_date_xpath", By.xpath("//*[@id='cityBasicInfo']//input[@name='startDate-day']"));
 		hmap.put("city_month_began_date_xpath", By.xpath("//*[@id='cityBasicInfo']//select[@name='startDate-month']"));
 		hmap.put("city_year_began_date_xpath", By.xpath("//*[@id='cityBasicInfo']//input[@name='startDate-year']"));
-		
+		hmap.put("city_use_in_address_true", By.xpath("//*[@id='cityBasicInfo']//input[@value='true']"));
+		hmap.put("city_use_in_address_false", By.xpath("//*[@id='cityBasicInfo']//input[@value='false']"));
+		hmap.put("city_address_flag_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Use In Address']/td"));
+
 		// adding values for city names
 		hmap.put("city_names_full_name_xpath", By.xpath("//*[@id='additionalNames']//td[text() = 'Full Name']"));
 		hmap.put("city_names_full_name_value_xpath", By.xpath("//*[@id='additionalNames']//input[@name='fixedNameValue']"));
@@ -62,8 +65,7 @@ public class CityIdentifiers {
         hmap.put("city_name_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalNames']//*[@data-error_id='nameValueError']")));
         hmap.put("city_delete_name_row_button_xpath", By.xpath(".//*[@data-row_id='names']//button[@class='delete-row']"));
         hmap.put("delete_row_confirmation_modal_xpath", By.xpath("//*[@id='additionalNames']/tr[3]"));
-    }
-
+	}
 
 	public static By getObjectIdentifier(String key) {
 		setIdentifiers();

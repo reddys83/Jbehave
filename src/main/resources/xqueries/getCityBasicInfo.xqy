@@ -77,4 +77,3 @@ return
   <population>{$cityPopulation}</population>
   <addressFlag>{$cityAddressFlag}</addressFlag>
   </city>
-   
