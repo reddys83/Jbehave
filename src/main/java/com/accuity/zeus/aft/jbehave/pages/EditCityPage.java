@@ -1,28 +1,37 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
-
-import java.text.Format;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.w3c.dom.Document;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.WebDriver;
-import org.apache.commons.lang.StringUtils;
 
 public class EditCityPage extends AbstractPage {
 
@@ -546,7 +555,7 @@ public class EditCityPage extends AbstractPage {
 	public void clickYesButtonInDeleteConfirmationModalForCity() {
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_delete_yes_button_id_click")).click();
 	}
-
+	
 	/**
 	 * This method is used to verify the value in trusted DB is same as UI
 	 * value.
@@ -815,10 +824,168 @@ public class EditCityPage extends AbstractPage {
 		enterMonthInEndDate(month);
 		enterYearInEndDate(year);
 	}
+	
+	// Suresh TODO: Start of city names
+	public void verifyFullNameFieldNotEditable() {
+		assertNull(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_names_full_name_xpath")).getAttribute("data-edit_id"));
+	}
+
+	public void enterValueInFullTypeNameField(String value) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_names_full_name_value_xpath"), value);
+	}
+
+	public void verifyNameValueInDB(Map<String, String> cityNameMap, String newNameType, String newNameValue) {
+		assertTrue(cityNameMap.containsKey(newNameType));
+		assertEquals(cityNameMap.get(newNameType), newNameValue);
+	}
+
+	public void verifyCityValueDeletedFromDB(Map<String, String> cityNameMap, String newNameType) {
+		assertFalse(cityNameMap.containsKey(newNameType));
+	}
+
+	public Map<String, String> getCityNameMap(String country, String area, String city, String source) {
+		Map<String, String> cityNameMap = new HashMap<String, String>();
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("city", city));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get city basic info", nvPairs);
+		if (document != null) {
+			NodeList nodeList = document.getElementsByTagName("name");
+			for(int index = 0; index < nodeList.getLength(); index++)  {
+				NodeList childNodeList = nodeList.item(index).getChildNodes();
+				System.out.println("Value of Type " + childNodeList.item(0).getNodeName());
+				System.out.println("Value of Value " + childNodeList.item(0).getTextContent());
+				System.out.println("Value of Value " + childNodeList.item(1).getTextContent());
+				cityNameMap.put(childNodeList.item(0).getTextContent(), childNodeList.item(1).getTextContent());
+			}
+		}
+		
+		return cityNameMap;
+	}
+	/**
+	 * This method is used to click on the name button for adding a new row
+	 */
+	public void clickOnAddNewNameButton() {
+		try {
+			Thread.sleep(7000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_add_new_name_button_id"));
+	}
+
+	public void clickOnCityNameType() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_name_type_input_xpath"));
+	}
+
+	public void verifyCityNameTypesList_forOneRow() {
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city name types");
+		List<WebElement> cityNameTypesList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_name_type_input_xpath"));
+		List<WebElement> options = cityNameTypesList.get(0).findElements(By.cssSelector("option"));
+
+		System.out.println("Value of length 1 = " + document.getElementsByTagName("type").getLength());
+        for (int i = 1; i < options.size(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), 
+            		options.get(i).getText().trim());
+        }
+	}
+	
+	public void verifyTextInNameValue(String nameValue) {
+		assertEquals(nameValue, getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_names_full_name_value_view_xpath")).getText());
+	}
+	
+	public void verifyNameTypeInSecondRow(String nameType) {
+		try {
+			WebElement newNameTypeElement = getDriver().findElement(By.xpath("//*[@id='cityBasicInfo']//tr[td='" + nameType + "']"));
+			assertTrue(newNameTypeElement != null);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void verifyNameValueTextInSecondRow(String nameType, String nameValue) {
+		try {
+			WebElement newNameValueElement = getDriver().findElement(By.xpath("//*[@id='cityBasicInfo']//tr[td='" + nameType + "']/td[2]"));
+			assertEquals(newNameValueElement.getText(), nameValue);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+
+	}
+	
+
+	public void verifyNamesEmptyRow(String country, String area, String city, String source) {
+		Map<String, String> cityNameMap = getCityNameMap(country, area, city, source);
+		for(String key : cityNameMap.keySet()) {
+			assertTrue(key != null);
+			assertTrue(cityNameMap.get(key) != null);
+		}
+	}
+	
+	public void enterNameType(String nameType) {
+		try {
+			if (nameType != null) {
+				List<WebElement> identifierDropDowns = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_name_type_input_xpath"));
+				Select dropdown = new Select(identifierDropDowns.get(0));
+				if (nameType.equals("")) {
+					dropdown.selectByValue(nameType);
+				} else {
+					dropdown.selectByVisibleText(nameType);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void enterNameValue(String newNameValue) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_name_value_input_xpath"), newNameValue);
+	}
+	
+	public void verifyErrorMessageForRequiredCityNameType() {
+		System.out.println(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_name_type_req_err_msg_xpath")).getText());
+		assertEquals("Required", getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_name_type_req_err_msg_xpath")).getText());
+	}
+	
+	public void verifyErrorMessageForRequiredCityNameValue() {
+		System.out.println(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_name_value_req_err_msg_xpath")).getText());
+		assertEquals("Enter up to 75 valid characters.", getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_name_value_req_err_msg_xpath")).getText());
+	}
+
+	public void clickOnDeleteNameRowButtonCity() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_delete_name_row_button_xpath"));
+	}
+
+	public void verifyNamesDeleteConfirmationModal() {
+		System.out.println(getDriver().findElement(CityIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_xpath")).getText());
+		assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_xpath")).getText());
+	}
+
+	public void verifyCityNameTypeInNewlyAddedRow(String newNameType) {
+		List<WebElement> cityNameTypesList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_name_type_input_xpath"));
+		List<WebElement> options = cityNameTypesList.get(1).findElements(By.cssSelector("option"));
+
+        for (int i = 1; i < options.size(); i++) {
+            assertTrue(!newNameType.equals(options.get(i).getText().trim()));
+        }
+	}
+	// Suresh TODO: End of city names
 
 	@Override
 	public String getPageUrl() {
 		return null;
 	}
-
 }

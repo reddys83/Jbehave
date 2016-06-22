@@ -1039,10 +1039,15 @@ public class DataPage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
 
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
-        endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
-
-        responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
-        assertTrue(responseEntity.getStatusCode().value() == 200);
+        if(document != null) {
+	        endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
+	        
+	        responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
+	        assertTrue(responseEntity.getStatusCode().value() == 200);
+	    }
+	    else {
+            assertFalse("Zeus document with name " + name + " does not exist in the DB", true);
+	    }
     }
 
     public void revertChangesToDocument() {
