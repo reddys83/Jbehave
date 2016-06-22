@@ -23,6 +23,8 @@ import org.apache.commons.lang.StringUtils;
 
 public class EditCityPage extends AbstractPage {
 	
+	private String countryPlacesCountry = "";
+	private String countryPlacesArea = "";
 	public EditCityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
 		super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -693,7 +695,7 @@ public class EditCityPage extends AbstractPage {
 	 public void verifyRequiredErrorMessageForPlace() {
 	        assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_required_error_message_xpath")).getText(), "Required");
 	    }
-	    public void clickAddPlacesButton() {
+	    public void clickCityPlaceType() {
 	        attemptClick(CityIdentifiers.getObjectIdentifier("city_places_type_dropdown_xpath"));
 	    }
 	    
@@ -754,8 +756,165 @@ public class EditCityPage extends AbstractPage {
 	    }
 	    
 	    public void verifyPlaceInPlacesForCity(String place) {
-	    	assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_edit_xpath")).getText(), place);
+	    	assertEquals(place,getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_edit_xpath")).getAttribute("value"));
 	    }
+	    
+	    public void clicksOnDeleteCityPlacesType() {
+	    	attemptClick(CityIdentifiers.getObjectIdentifier("city_places_delete_button_xpath"));
+	    }
+	    
+	    public void verifyDrawerClosed(){
+	    	try{
+	    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_xpath")).isDisplayed()); 
+	    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_xpath")).isDisplayed()); 
+	    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_city_dropdown_xpath")).isDisplayed()); 
+	    	}
+	    	   catch(org.openqa.selenium.NoSuchElementException e)
+	    	{
+	    		
+	    	}
+	    }
+	    
+	    public void verifyGoButtonDisabled(){
+	    	try{
+	    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_go_button_xpath")).isEnabled());
+	    }
+	    	catch(org.openqa.selenium.NoSuchElementException e)
+	    	{
+	    		
+	    	}
+	    }
+	    
+	    public void verifyEditButtonDisabled(){
+	    	try{
+	    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_edit_button_xpath")).isEnabled());
+	    }
+	    	
+	    catch(org.openqa.selenium.NoSuchElementException e)
+    	{
+    		
+    	}
+	    } 
+	    
+	    public void verifyDeleteButtonDisabled(){
+	    	try{
+	    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_delete_button_xpath")).isEnabled());
+	    	}
+	    	
+	    	catch(org.openqa.selenium.NoSuchElementException e)
+	    	{
+	    		
+	    	}
+	    }
+	    
+	    public void clickDetailsDropDown() {
+	        attemptClick(CityIdentifiers.getObjectIdentifier("city_places_details_Select_dropdown_xpath"));
+	    }
+	    
+	    public void verifyCityPlacesTypeList() {
+	        List<WebElement> cityPlacesTypeList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_type_options_dropdown_xpath"));
+	        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city places type");
+	        for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
+	            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), cityPlacesTypeList.get(i).getText());
+	        }
+	    }
+	    
+	    public void verifyCityPlacesDetailsList() {
+	        List<WebElement> cityPlacesDetailsList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_details_options_dropdown_xpath"));
+	        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city places detail");
+	        for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
+	            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), cityPlacesDetailsList.get(i).getText());
+	        }
+	    }
+	    
+	    public void verifyCountryListInPlacesForCity() {
+	    	try{
+	    	Thread.sleep(3000);
+	    	}
+	    	catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+	        List<WebElement> countryList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list_xpath"));
+	        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "country list");
+	       
+	        for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
+	        	System.out.println(i); 
+	        	
+	 	        System.out.println("db"+document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim());
+	 	       System.out.println("UI"+ countryList.get(i).getText().trim());
+	            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), countryList.get(i).getText().trim());
+	        }
+	    }
+	    
+	    public void verifyAreaListInPlacesForCity() {
+	    	
+	        List<NameValuePair> nvPairs = new ArrayList<>();
+	        nvPairs.add(new BasicNameValuePair("name", countryPlacesCountry));
+	        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+	        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list", nvPairs);
+	        if (getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list_xpath")).size() > 2) {
+	            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list1_xpath")).getText(), "No Area");
+	            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list2_xpath")).getText(), "Return All Cities");
+	            for (int i = 0; i < document.getElementsByTagName("area").getLength(); i++) {
+	                assertEquals(document.getElementsByTagName("area").item(i).getTextContent(), getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list_xpath")).get(i + 2).getText());
+	            }
+	        } else {
+	            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list1_xpath")).getText(), "No Area");
+	            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list2_xpath")).getText(), "Return All Cities");
+	        }
+	    }
+	    
+	    public void verifyCityListInPlacesForCity() {
+	        List<NameValuePair> nvPairs = new ArrayList<>();
+	        nvPairs.add(new BasicNameValuePair("name", countryPlacesArea));
+	        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+	        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "city list", nvPairs);
+	        for (int i = 0; i < document.getElementsByTagName("city").getLength(); i++) {
+	            assertEquals(document.getElementsByTagName("city").item(i).getTextContent(), getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_city_dropDown_list_xpath")).get(i).getText());
+	        }
+	    }
+	    
+	    public void verifyRelatedPlacesInCityPage(String type, String place, String details) {
+	    	try{
+	    		Thread.sleep(3000);
+	    	}
+	    	catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+	    	assertEquals(type, getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_relatedplace_typevalue_xpath")).getText());
+	    	assertEquals(place, getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_relatedplace_placevalue_xpath")).getText());
+	    	assertEquals(details, getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_relatedplace_detailsvalue_xpath")).getText());
+		}
+	    
+	    public void verifyCityRelatedValueFromZeusDB(String country,String area,String city,String type, String place, String details,String source) {
+	    	assertEquals(getCityRelatedInfoFromDB(country, area, city,"RelatedPlaceType", source), type);
+	    	assertEquals(getCityRelatedInfoFromDB(country, area, city,"RelatedPlacePlace", source), place);
+	    	assertEquals(getCityRelatedInfoFromDB(country, area, city,"RelatedPlaceDetail", source), details);
+	    	
+	    }
+	    
+	    public String getCityRelatedInfoFromDB(String country, String area, String city, String tagName, String source) {
+
+			String tagValue = null;
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			nvPairs.add(new BasicNameValuePair("city", city));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			try {
+				Thread.sleep(7000L);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get city related place info", nvPairs);
+			if (document != null) {
+				tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+						: getNodeValuesByTagName(document, tagName).get(0);
+			}
+			return tagValue;
+		}
 	@Override
 	public String getPageUrl() {
 		return null;

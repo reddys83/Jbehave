@@ -290,16 +290,7 @@ public class EditCitySteps extends AbstractSteps {
 		 getEditCityPage().clickOnAddPlacesButton();
 	  }
      
-	/* @When("the user clicks on country places type drop-down")
-	    public void clickOnCountryPlaceTypeDropdown() {
-		 getEditCityPage().clickOnCountryPlaceTypeDropdown();
-	   }
-	 
-	 @When("the user selects type value as <PlaceType> in the places for city")
-	    public void selectsTypeFromDropdown(@Named("PlaceType") String PlaceType) {
-		 getEditCityPage().selectsTypeFromDropdown(PlaceType);
-	   }*/
-	 
+		 
 	 @Then("the user should see the error message required for type in places for city")
 	    public void verifyRequiredErrorMessageForType()
 	    {
@@ -317,9 +308,9 @@ public class EditCitySteps extends AbstractSteps {
 		 getEditCityPage().clickOnCityPlaces();
 	    }
 	 
-	  @When("the user clicks on new country places type drop-down for city")
-	    public void clickAddPlacesButton() {
-		  getEditCityPage().clickAddPlacesButton();
+	  @When("the user clicks on new city places type drop-down for city")
+	    public void clickCityPlaceType() {
+		  getEditCityPage().clickCityPlaceType();
 	    }
 	  
 	  @When("the user selects type value as <PlaceType> in the places for city")
@@ -376,4 +367,72 @@ public class EditCitySteps extends AbstractSteps {
 	    public void verifyPlaceInPlacesForCity(@Named("place") String place) {
 		  getEditCityPage().verifyPlaceInPlacesForCity(place);
 	    }
+	  
+
+	    @When("the user clicks on delete city places type")
+	    public void clicksOnDeleteCityPlacesType() {
+	    	getEditCityPage().clicksOnDeleteCityPlacesType();
+	    }
+	    
+	    @Then("the user should see that drawer is closed")
+	    public void verifyDrawerClosed() {
+	    	getEditCityPage().verifyDrawerClosed();
+	    }
+	    
+	    @Then("the user should see 'Go' button disabled until value for $value is selected")
+	    public void verifyGoButtonDisabled() {
+	    	getEditCityPage().verifyGoButtonDisabled();
+	    }
+	    
+	    @Then("the user should see Edit button for place field is disabled until drawer closes")
+	    public void verifyEditButtonDisabled() {
+	    	getEditCityPage().verifyEditButtonDisabled();
+	    }
+	    
+	    @Then("the user should see the delte option is  disabled until drawer closes")
+	    public void verifyDeleteButtonDisabled() {
+	    	getEditCityPage().verifyDeleteButtonDisabled();
+	    }
+	    
+	    @When("the user clicks on new city places details drop-down for city")
+	    public void clickDetailsDropDown() {
+		  getEditCityPage().clickDetailsDropDown();
+	    }
+	    
+	    @Then("the user should see the values for type dropdown from lookup CITY_RELATED_PLACE_TYPE")
+	    public void verifyCityPlacesTypeList() {
+	    	getEditCityPage().verifyCityPlacesTypeList();
+	    }
+	    
+	    @Then("the user should see the values for details dropdown from lookup CITY_RELATED_PLACE_SUBTYPE")
+	    public void verifyCityPlacesDetailsList() {
+	    	getEditCityPage().verifyCityPlacesDetailsList();
+	    }
+	    
+	    @Then("the user should see the list of all existing countries by full name in places for city")
+	    public void verifyCountryListInPlacesForCity() {
+	    	getEditCityPage().verifyCountryListInPlacesForCity();
+	    }
+	    
+	    @Then("the user should see the list of all existing area for the selected country by full name in places for city")
+	    public void verifyAreaListInPlacesForCity() {
+	    	getEditCityPage().verifyAreaListInPlacesForCity();
+	    }
+	    
+	    @Then("the user should see the list of all existing city for the selected area by full name in places for city")
+	    public void verifyCityListInPlacesForCity() {
+	    	getEditCityPage().verifyCityListInPlacesForCity();
+	    }
+	    
+	    @Then("the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in city related place")
+	    public void verifyRelatedPlacesInCityPage(@Named("PlaceType") String cityPlacesType,@Named("cityPlaces") String cityPlacesPlace,@Named("PlaceDetails") String cityPlacesDetails) {
+	    	getEditCityPage().verifyRelatedPlacesInCityPage(cityPlacesType,cityPlacesPlace,cityPlacesDetails);
+	    }
+	    
+	    @Then("the user should see the city related place date <PlaceType> <cityPlaces> <PlaceDetails> value in $source document")
+		public void verifyCityRelatedValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+				@Named("city") String city,@Named("PlaceType") String type, @Named("cityPlaces") String place,
+				@Named("PlaceDetails") String details, @Named("source") String source) {
+			getEditCityPage().verifyCityRelatedValueFromZeusDB(country,area,city,type, place, details, source);
+		}
 }
