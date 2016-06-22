@@ -7,6 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-92 - User can view city basic info
 JIRA ID - ZEUS-371 - User can follow link to area from city
 JIRA ID - ZEUS-372 - User can follow link to country from city
+JIRA ID - ZEUS-379 - User can follow link to city from another city
 
 Scenario: Verify the City basic info
 1. BUG-ID - ZEUS-686
@@ -148,6 +149,46 @@ Then the user should see the country page with USA selected
 And the user should see the area's names as:
 |TYPE|VALUE|
 |Country Name|USA|
+
+Examples:
+|country|area|city|
+|USA|Illinois|Chicago|
+
+Scenario: Verify User can follow link to city from another city
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city replaced by link <replacedBy>
+Then the user should see the area's names as:
+|TYPE|VALUE|
+|Full Name|Barajyolu|
+
+
+Examples:
+|country|area|city|
+|USA|Illinois|Chicago|
+
+Scenario: Verify User can follow link to city from another city
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city replaced by link Chester
+Then the user should see the city's names as:
+
+|TYPE|VALUE|
+|Full Name|Chester|
 
 Examples:
 |country|area|city|

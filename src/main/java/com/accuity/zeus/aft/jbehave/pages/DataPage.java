@@ -171,6 +171,7 @@ public class DataPage extends AbstractPage {
     private String city_subarea_link_xpath = "//*[@class='vertical']//tr[6]/td[a='";
     private String city_country_link_xpath = "//*[@class='vertical']//tr[4]/td[a='";
     String city_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
+    private String city_replaced_by_link_xpath = ".//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[7]/td//a[1]";
 
     private By sections_display_xpath = By.xpath("//*[@id='data-side-navbar']//h1");
     private By sections_list_xpath = By.xpath("//*[@id='data-side-navbar']//ul/li");
@@ -955,6 +956,15 @@ public class DataPage extends AbstractPage {
         }
     }
 
+    public void clickOnCityReplacedBy()
+    {
+        attemptClick(By.xpath(city_replaced_by_link_xpath));
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
     public void clickOnCityRelatedPlace(String relatedPlace) {
         attemptClick(By.xpath(city_related_places_place_link_xpath + relatedPlace + "']/td/a"));
         waitForElementToAppear(area_listBox_xpath);
