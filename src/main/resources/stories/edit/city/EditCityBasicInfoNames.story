@@ -47,6 +47,7 @@ And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
+Then the user should see city name value same as in trusted document
 When the user clicks on the city update link
 And the user gets the document with get document id for city with the <city> from the database
 When the user clicks on the add new name button in the basic info city page
