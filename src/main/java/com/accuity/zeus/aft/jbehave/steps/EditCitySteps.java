@@ -384,46 +384,53 @@ public class EditCitySteps extends AbstractSteps {
 	}
 
 	// Suresh TODO: Start of city names
+	@Then("the user should see city name value same as in $source document")
+	public void verifyCityNameTypeAndValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+												 @Named("source") String source) {
+		setEditCityPage(getDataPage().createEditCityPage());
+		Map<String, String> cityNameValueMap = getEditCityPage().getCityNameValueMapFromDB(country, area, city, source);
+		getEditCityPage().verifyCityNameTypeAndValueFromDB(cityNameValueMap, "Full Name");
+	}
+	
 	@When("the user should see the full name is not editable")
 	public void verifyFullNameFieldNotEditable() {
 		getEditCityPage().verifyFullNameFieldNotEditable();
 	}
 
-	@When("the user enters the <nameValue> in the full name field")
-	public void enterValueInFullTypeNameField(@Named("nameValue") String nameValue) {
-		System.out.println("Value of value = " + nameValue);
-		getEditCityPage().enterValueInFullTypeNameField(nameValue);
+	@When("the user enters the <newNameValue> in the full name field")
+	public void enterValueInFullTypeNameField(@Named("newNameValue") String newNameValue) {
+		getEditCityPage().enterValueInFullTypeNameField(newNameValue);
 	}
 	
-	@Then("the user should see the full name $nameValue as in $source document")
-	public void verifyCityFullNameValueFromDB(@Named("country") String country, @Named("area") String area,
-			@Named("city") String city, @Named("source") String source, @Named("nameValue") String fullNameValue) {
-		Map<String, String> cityNameMap = getEditCityPage().getCityNameMap(country, area, fullNameValue, source);
-		getEditCityPage().verifyNameValueInDB(cityNameMap, "Full Name", fullNameValue);
+	@Then("the user should see the full name <newNameValue> as in $source document")
+	public void verifyCityFullNameValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+											  @Named("source") String source, @Named("newNameValue") String fullNameValue) {
+		Map<String, String> cityNameValueMap = getEditCityPage().getCityNameValueMapFromDB(country, area, fullNameValue, source);
+		getEditCityPage().verifyNameValueInDB(cityNameValueMap, "Full Name", fullNameValue);
 	}
 	
 	@Then("the user should see the value updated in $source document")
-	public void verifyCityValueFromDB(@Named("country") String country, @Named("area") String area,
-			@Named("city") String city, @Named("source") String source, @Named("newNameType") String newNameType, 
-			@Named("newNameValue") String newNameValue) {
-		Map<String, String> cityNameMap = getEditCityPage().getCityNameMap(country, area, city, source);
-		getEditCityPage().verifyNameValueInDB(cityNameMap, newNameType, newNameValue);
+	public void verifyCityValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+									  @Named("source") String source, @Named("newNameType") String newNameType, 
+									  @Named("newNameValue") String newNameValue) {
+		Map<String, String> cityNameValueMap = getEditCityPage().getCityNameValueMapFromDB(country, area, city, source);
+		getEditCityPage().verifyNameValueInDB(cityNameValueMap, newNameType, newNameValue);
 	}
 	
 	@Then("the user should see the value not present in $source document")
-	public void verifyCityValueDeletedFromDB(@Named("country") String country, @Named("area") String area,
-			@Named("city") String city, @Named("source") String source, @Named("newNameType") String newNameType, 
-			@Named("newNameValue") String newNameValue) {
-		Map<String, String> cityNameMap = getEditCityPage().getCityNameMap(country, area, city, source);
-		getEditCityPage().verifyCityValueDeletedFromDB(cityNameMap, newNameType);
+	public void verifyCityValueDeletedFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+											 @Named("source") String source, @Named("newNameType") String newNameType, 
+											 @Named("newNameValue") String newNameValue) {
+		Map<String, String> cityNameValueMap = getEditCityPage().getCityNameValueMapFromDB(country, area, city, source);
+		getEditCityPage().verifyCityValueDeletedFromDB(cityNameValueMap, newNameType);
 	}
 	
 	@Then("the user should see the value newly updated in $source document")
-	public void verifyNewlyEnteredCityValueFromDB(@Named("country") String country, @Named("area") String area,
-			@Named("city") String city, @Named("source") String source, @Named("newNameType") String newNameType, 
-			@Named("newNameValue2") String newNameValue) {
-		Map<String, String> cityNameMap = getEditCityPage().getCityNameMap(country, area, city, source);
-		getEditCityPage().verifyNameValueInDB(cityNameMap, newNameType, newNameValue);
+	public void verifyNewlyEnteredCityValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+												  @Named("source") String source, @Named("newNameType") String newNameType, 
+												  @Named("newNameValue2") String newNameValue2) {
+		Map<String, String> cityNameValueMap = getEditCityPage().getCityNameValueMapFromDB(country, area, city, source);
+		getEditCityPage().verifyNameValueInDB(cityNameValueMap, newNameType, newNameValue2);
 	}
 	
 	@When("the user clicks on the add new name button in the basic info city page")
@@ -438,26 +445,24 @@ public class EditCitySteps extends AbstractSteps {
 
 	@Then("the user should see the city name types from lookup PLACE_NAME_TYPE")
 	public void verifyCityNameTypesList() {
-		getEditCityPage().verifyCityNameTypesList_forOneRow();
+		getEditCityPage().verifyCityNameTypesList();
 	}
 
-	@Then("the user should be able to verify the <nameValue> is updated in name value field")
-	public void verifyTextInNameValue(@Named("nameValue") String nameValue) {
-		getEditCityPage().verifyTextInNameValue(nameValue);
+	@Then("the user should be able to verify the <newNameValue> is updated in full name value field")
+	public void verifyTextInNameValue(@Named("newNameValue") String newNameValue) {
+		getEditCityPage().verifyTextInFullNameValue(newNameValue);
 	}
 	
 	@Then("the user should see the city name type and value updated in UI")
 	public void verityCityNameTypeAndValue(@Named("newNameType") String newNameType, 
 										   @Named("newNameValue") String newNameValue) {
-		getEditCityPage().verifyNameTypeInSecondRow(newNameType);
-		getEditCityPage().verifyNameValueTextInSecondRow(newNameType, newNameValue);
+		getEditCityPage().verifyNameType(newNameType);
+		getEditCityPage().verifyNameValue(newNameType, newNameValue);
 	}
 	
-	
-	@Then("the user should be able to verify empty rows not added in zeus document")
-	public void verifyNamesEmptyRow(@Named("country") String country, @Named("area") String area,
-			@Named("city") String city, @Named("source") String source) {
-		//Suresh TODO: can we avaoid the source input mentioned in the example for this step
+	@Then("the user should be able to verify empty rows not added in $source document")
+	public void verifyNamesEmptyRow(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+									@Named("source") String source) {
 		getEditCityPage().verifyNamesEmptyRow(country, area, city, source);
 	}
 
@@ -467,12 +472,12 @@ public class EditCitySteps extends AbstractSteps {
 	}
 
 	@When("the user enters name value as <newNameValue> in the basic info city page")
-	public void enterNameValues(@Named("newNameValue") String newNameValue) {
+	public void enterNameValue(@Named("newNameValue") String newNameValue) {
 		getEditCityPage().enterNameValue(newNameValue);
 	}
 	
 	@When("the user enters name value as <newNameValue2> in the basic info city page")
-	public void enterNameValues2(@Named("newNameValue2") String newNameValue2) {
+	public void enterNameValue2(@Named("newNameValue2") String newNameValue2) {
 		getEditCityPage().enterNameValue(newNameValue2);
 	}
 	
