@@ -364,6 +364,22 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyCityEndDateFromTrustedDB(country, area, city, "EndDate", source);
 
 	}
+	
+	@When("the user clicks on True option for Use in Address") 
+	public void selectTrueForUseInAddress() {
+		getEditCityPage().selectTrueForUseInAddress();
+	}
+	
+	@When("the user clicks on False option for Use in Address") 
+	public void selectFalseForUseInAddress() {
+		getEditCityPage().selectFalseForUseInAddress();
+	}
+	
+	@Then("the user should see the address flag value same as in $source document")
+	public void verifyCityAddressFlagFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source) {
+		getEditCityPage().verifyCityAddressFlagFromZeusDB(country, area, city, "addressFlag", source);
+	}
 
 	@When("the user clicks on the city credit rating link in the navigation bar")
 	public void clickOnCityCreditRating() {

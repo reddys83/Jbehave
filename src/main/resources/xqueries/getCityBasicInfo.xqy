@@ -73,6 +73,7 @@ return
         <creditDateConfirmed>{$cityCreditDateConfirmed}</creditDateConfirmed>
      </creditRating> 
 
+
 return
   <city>
   <status>{$cityStatus}</status>  
@@ -82,5 +83,4 @@ return
   <population>{$cityPopulation}</population>
   <addressFlag>{$cityAddressFlag}</addressFlag>
   <creditRatings>{$cityCreditRating}</creditRatings>
-  </city>
-   
+  </city>   

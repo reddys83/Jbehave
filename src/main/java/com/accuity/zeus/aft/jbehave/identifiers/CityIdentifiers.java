@@ -49,6 +49,7 @@ public class CityIdentifiers {
 		hmap.put("city_day_began_date_xpath", By.xpath("//*[@id='cityBasicInfo']//input[@name='startDate-day']"));
 		hmap.put("city_month_began_date_xpath", By.xpath("//*[@id='cityBasicInfo']//select[@name='startDate-month']"));
 		hmap.put("city_year_began_date_xpath", By.xpath("//*[@id='cityBasicInfo']//input[@name='startDate-year']"));
+
 		hmap.put("city_creditRating", By.xpath("//*[@id='cityCreditRating']"));
 		hmap.put("city_credit_rating_applied_date_day_xpath", By.xpath("//input[@name='creditRatingAppliedDate-day']"));
 		hmap.put("city_credit_rating_applied_date_month_xpath", By.xpath("//*[@name='creditRatingAppliedDate-month']"));
@@ -67,7 +68,11 @@ public class CityIdentifiers {
 		hmap.put("city_credit_rating_type_error_xpath", By.xpath("//*[@id='additionalCreditRatings']//*[@data-error_id='creditRatingTypeError']"));
 		hmap.put("city_credit_rating_value_error_xpath", By.xpath("//*[@id='additionalCreditRatings']//*[@data-error_id='creditRatingValueError']"));
 		hmap.put("city_credit_rating_row_xpath", By.xpath("//*[@id='additionalCreditRatings']"));
-		
+
+		hmap.put("city_use_in_address_true", By.xpath("//*[@id='cityBasicInfo']//input[@value='true']"));
+		hmap.put("city_use_in_address_false", By.xpath("//*[@id='cityBasicInfo']//input[@value='false']"));
+		hmap.put("city_address_flag_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Use In Address']/td"));
+
 	}
 
 
