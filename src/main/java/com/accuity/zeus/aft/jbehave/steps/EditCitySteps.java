@@ -374,5 +374,10 @@ public class EditCitySteps extends AbstractSteps {
 			@Named("city") String city, @Named("source") String source) {
 		getEditCityPage().verifyCityAddressFlagFromZeusDB(country, area, city, "addressFlag", source);
 	}
+	
+	@Then("the user should see maximum length of identifier value is limited to $maxLength")
+	public void verifyMaxLengthInCityIdentifierValue(@Named("maxLength") String maxLength) {
+		getEditCityPage().verifyMaxLengthInCityIdentifierValue(maxLength);
+	}
 
 }

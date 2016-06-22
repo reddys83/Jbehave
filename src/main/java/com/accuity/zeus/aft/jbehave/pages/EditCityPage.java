@@ -830,6 +830,12 @@ public class EditCityPage extends AbstractPage {
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_address_flag_xpath")).getText());
 
 	}
+	
+	public void verifyMaxLengthInCityIdentifierValue(String maxLength) {
+		 assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"))
+                 .getAttribute("maxlength"), maxLength);
+
+	}
 
 	@Override
 	public String getPageUrl() {
