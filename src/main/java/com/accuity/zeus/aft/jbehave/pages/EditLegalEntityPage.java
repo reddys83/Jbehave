@@ -32,6 +32,8 @@ public class EditLegalEntityPage extends AbstractPage {
     public String EditLegalEntityBoardMeetingsType="";
     public String EditLegalEntityBoardMeetingValue="";
     public String EditLEgalEntityBoardmeetingSummary="";
+    public String EditLegalEntityPersonnelValue="";
+    public String EditLegalEntityPersonnelType= "";
 
 
     public EditLegalEntityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
@@ -827,6 +829,10 @@ public class EditLegalEntityPage extends AbstractPage {
         attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_locations_summary_type_edit_xpath"));
     }
 
+    public void clickOnLegalEntityPersonnelTypeDropdown(String webElement) {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier(webElement));
+    }
+
     public void clickOnLegalEntityBoardMeetingsTypeDropdown(String webElement) {
         attemptClick(LegalEntityIdentifiers.getObjectIdentifier(webElement));
     }
@@ -860,12 +866,25 @@ public class EditLegalEntityPage extends AbstractPage {
         }
     }
 
+    public void verifyLegalEntityPersonnelTypeValues() {
+        List<WebElement> legalEntityPersonnelType = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_personnel_type_dropdown_edit_xpath"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,"getLegalEntityPersonnelTypesFromLookup.xqy");
+        for (int i=1;i<document.getElementsByTagName("type").getLength();i++)
+        {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), legalEntityPersonnelType.get(i).getText());
+        }
+    }
+
     public void clickNewLegalEntityLocations() {
         attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_new_locations_summary_id"));
     }
 
     public void clickNewLegalEntityBoardMeetings() {
         attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_add_button_id"));
+    }
+
+    public void clickNewLegalEntityPersonnel() {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_personnel_add_button_id"));
     }
 
     public void enterSummaryInLegalEntityBoardMeeting(String summary) {
@@ -886,6 +905,21 @@ public class EditLegalEntityPage extends AbstractPage {
                 break;
             }
         }
+    }
+
+    public void selectsTypeInLegalEntityPersonnel(String type, String webElement)
+    {
+        EditLegalEntityPersonnelType = type;
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier(webElement));
+        List<WebElement> options = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_personnel_type_dropdown_edit_xpath"));
+        for (WebElement option : options) {
+            if (option.getText().contains(type)) {
+                getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(webElement)).click();
+                option.click();
+                break;
+            }
+        }
+
     }
 
     public void selectsValueInLegalEntityBoardMeeting(String value, String webElement) {
@@ -943,9 +977,28 @@ public class EditLegalEntityPage extends AbstractPage {
         assertTrue(getNodeValuesByTagName(document, "value").contains(EditLegalEntityBoardMeetingValue));
     }
 
+    public void verifyLegalEntityPersonnelInZeus(String fid) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity personnel", nvPairs);
+        assertTrue(getNodeValuesByTagName(document, "type").contains(EditLegalEntityPersonnelType));
+        assertTrue(getNodeValuesByTagName(document, "value").contains(EditLegalEntityPersonnelValue));
+    }
+
     public void entersLegalEntityValueInLocationSummary(String value) {
         EditLegalEntityLocationsValue = value;
         clearAndEnterValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_locations_summary_value_edit_xpath"), value);
+    }
+
+    public void entersLegalEntityValueInPersonnel(String value) {
+        EditLegalEntityPersonnelValue = value;
+        clearAndEnterValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_personnel_value_xpath"), value);
     }
 
     public void verifyRequiredErrorMessageForTypeInLegalEntityLocations() {
@@ -958,6 +1011,12 @@ public class EditLegalEntityPage extends AbstractPage {
         clearAndEnterValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_summary_xpath"), strBigString);
     }
 
+    public void enterInvalidCharactersInLegalEntityPersonnelValue() {
+        String strBigString = createBigString(10001);
+        modifyHtmlByName(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_personnel_value_xpath"), "maxlength", "");
+        clearAndEnterValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_personnel_value_xpath"), strBigString);
+    }
+
     public void enterInvalidCharactersInLegalEntityLocationsValue() {
         String strBigString = createBigString(10001);
         modifyHtmlByName(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_locations_summary_value_edit_xpath"), "maxlength", "");
@@ -968,8 +1027,16 @@ public class EditLegalEntityPage extends AbstractPage {
         assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_location_value_error_message_xpath")).getText(), "Enter up to 10000 valid characters.");
     }
 
+    public void verifyErrorMessageForLegalEntityValuePersonnel() {
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_personnel_value_error_message_xpath")).getText(),"Enter up to 10000 valid characters.");
+    }
+
     public void verifyErrorMessageForLegalEntitySummaryBoardMeeting() {
         assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardMeetings_summary_error_message_xpath")).getText(),"Enter up to 10000 valid characters.");
+    }
+
+    public void verifyRequiredErrorMessageForTypeInLegalEntityPersonnel() {
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_personnel_type_error_message_xpath")).getText(),"Required");
     }
 
     public void verifyDuplicateErrorMessageForLegalEntityBoardMeeting() {

@@ -10,7 +10,6 @@ Scenario: For existing rows verify Legal Entity's identifiers Type and Status dr
 a) Verify for an existing Legal Entity's identifiers row, the Legal Entity's identifier Type values are from THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY
 b) Verify for an existing Legal Entity's identifiers row, the Legal Entity's identifier Status values are from STATUS
 
-Meta:@runraju
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
