@@ -567,5 +567,10 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyCreditRatingDeleteConfirmationModal();
 	}
 	
+	@Then("the user should not see the city credit rating values in $source document")
+	public void verifyCityCreditRatingValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source, @Named("row") int row) {
+		getEditCityPage().verifyCityCreditRatingValuesAreNullFromDB(country, area, city, source, row);
+	}
 
 }

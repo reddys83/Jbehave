@@ -265,7 +265,6 @@ Examples:
 
 
 Scenario: User can edit city identifiers- Verify if User can delete credit rating by clicking on 'Yes' , then after saving it should be removed.
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -276,7 +275,8 @@ And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 When the user clicks on the city credit rating link in the navigation bar
-And the user clicks on the city update link
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
 When the user deletes the existing credit rating rows
 When the user clicks on add new credit rating button in the credit rating city page
 When the user enters credit rating agency as <agency> in the basic info city page
@@ -291,15 +291,18 @@ When the user clicks on the city update link
 When the user clicks on the delete credit rating row button in the basic info city page
 Then the user should see delete row confirmation modal in credit rating
 When the user clicks on the Yes button to cancel the deletion of row
+When the user clicks on the save button
+And the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
 Then the user should not see the newly added credit rating row in the basic info city page
-
+Then the user should not see the city credit rating values in zeus document
+Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|agency|type|value|appliedDate|confirmedDate|row|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|14 Jan 2016|17 Jan 2016|0|
+|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|15 Jan 2016|17 Jan 2016|0|
 
 Scenario: User can edit city identifiers- Verify if User can delete credit rating by clicking on 'cancel', then after saving the credit rating row should not get deleted.
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -311,6 +314,8 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 When the user clicks on the city credit rating link in the navigation bar
 And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user deletes the existing credit rating rows
 When the user clicks on add new credit rating button in the credit rating city page
 When the user enters credit rating agency as <agency> in the basic info city page
 When the user enters credit rating type as <type> in the basic info city page
@@ -325,7 +330,9 @@ When the user clicks on the delete credit rating row button in the basic info ci
 Then the user should see delete row confirmation modal in credit rating
 When the user clicks on the No button to cancel the deletion of row
 Then the user should see the newly added credit rating row in the basic info city page
+Then the user should see the city credit rating values as in zeus document
+Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|agency|type|value|appliedDate|confirmedDate|row|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|14 Jan 2016|17 Jan 2016|0|
+|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|15 Jan 2016|17 Jan 2016|0|

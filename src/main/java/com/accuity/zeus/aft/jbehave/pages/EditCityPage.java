@@ -1019,6 +1019,29 @@ public class EditCityPage extends AbstractPage {
 	}
 	
 	
+	public void verifyCityCreditRatingValuesAreNullFromDB(String country, String area, String city, String source,
+			int row) {
+
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			nvPairs.add(new BasicNameValuePair("city", city));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get city basic info", nvPairs);
+
+			if (document != null) {
+				assertTrue(!(document.getElementsByTagName("creditRating").getLength() > row));
+			} else {
+				assertFalse("zeus document is not retireved", true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 		
 	/**
 	 * This method is used to verify the value in trusted DB is same as UI
@@ -1136,11 +1159,11 @@ public class EditCityPage extends AbstractPage {
 	public void verifyNewlyAddedCreditRatingRowIsNotDisplayed() {
 
 		try {
-			WebElement identifier = getDriver()
-					.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_row_xpath")).findElement(By.tagName("tr"));
-			assertTrue(identifier == null);
+			
+			assertTrue(getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).size()==1);			
+			
 		} catch (Exception e) {
-			assertTrue(true);
+			e.printStackTrace();
 		}
 
 	}
@@ -1149,7 +1172,7 @@ public class EditCityPage extends AbstractPage {
 
 		try {
 			WebElement identifier = getDriver()
-					.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_row_xpath"));
+					.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_row_xpath")).findElement(By.tagName("tr"));
 			assertTrue(identifier !=null);
 		} catch (Exception e) {
 			assertTrue(false);
