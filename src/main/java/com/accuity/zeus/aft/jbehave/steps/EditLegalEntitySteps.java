@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 
 import com.accuity.zeus.aft.jbehave.steps.AbstractSteps;
+import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -417,6 +418,10 @@ public class EditLegalEntitySteps extends AbstractSteps{
     public void clickOnLegalEntityLocationTypeDropDwon() {
         getEditLegalEntityPage().clickOnLegalEntityLocationTypeDropDwon();
     }
+    @When("the user clicks on the type dropdown in legalEntity personnel for $webElement")
+    public void clickOnLegalEntityPersonnelTypeDropdown(@Named("webElement") String webElement) {
+        getEditLegalEntityPage().clickOnLegalEntityPersonnelTypeDropdown(webElement);
+    }
     @When("the user clicks on the type dropdown in legalEntity board meeting for $webElement")
     public void clickOnLegalEntityBoardMeetingsTypeDropdown(@Named("webElement") String webElement) {
         getEditLegalEntityPage().clickOnLegalEntityBoardMeetingsTypeDropdown(webElement);
@@ -445,6 +450,11 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().selectsTypeInLegalEntityBoardMeeting(type,webElement);
     }
 
+    @When("the user selects type <type> in the legalEntity personnel for $webElement")
+    public void selectsTypeInLegalEntityPersonnel(@Named("type") String type, @Named("webElement") String webElement) {
+        getEditLegalEntityPage().selectsTypeInLegalEntityPersonnel(type, webElement);
+    }
+
     @When("the user selects value <value> in the legalEntity board meeting for $webElement")
     public void selectsValueInLegalEntityBoardMeeting(@Named("value") String value, @Named("webElement") String webElement){
         getEditLegalEntityPage().selectsValueInLegalEntityBoardMeeting(value,webElement);
@@ -455,6 +465,11 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyLegalEntityLocationsTypeValues();
     }
 
+    @Then("the user should see the legalEntity personnel type values from lookup PERSONNEL_SUMMARY_TEXT_TYPE")
+    public void verifyLegalEntityPersonnelTypeValues() {
+        getEditLegalEntityPage().verifyLegalEntityPersonnelTypeValues();
+    }
+
     @When("the user clicks on the add new location summary button in legalentity location")
     public void clickNewLegalEntityLocations() {
         getEditLegalEntityPage().clickNewLegalEntityLocations();
@@ -463,6 +478,11 @@ public class EditLegalEntitySteps extends AbstractSteps{
     @When("the user clicks on the add new board meeting button in legalEntity")
     public void clickNewLegalEntityBoardMeetings() {
         getEditLegalEntityPage().clickNewLegalEntityBoardMeetings();
+    }
+
+    @When("the user clicks on the add new personnel button in legalEntity")
+    public void clickNewLegalEntityPersonnel() {
+        getEditLegalEntityPage().clickNewLegalEntityPersonnel();
     }
 
     @When("the user select type as <type> in the legalentity location summary")
@@ -476,8 +496,13 @@ public class EditLegalEntitySteps extends AbstractSteps{
     }
 
     @Then("the user should see the edits to legal entity board meeting for fid <fid> in zeus document")
-    public void verifyLegalEntityBoardMeetingInZeusDocument(@Named("") String fid) {
+    public void verifyLegalEntityBoardMeetingInZeusDocument(@Named("fid") String fid) {
         getEditLegalEntityPage().verifyLegalEntityBoardMeetingInZeus(fid);
+    }
+
+    @Then("the user should see the edits to legal entity personnel for fid <fid> in zeus document")
+    public void verifyLegalEntityPersonnelInZeusDocument(@Named("fid") String fid) {
+        getEditLegalEntityPage().verifyLegalEntityPersonnelInZeus(fid);
     }
 
     @Then("the user should see the error message required for the type in legalentity location summary")
@@ -495,6 +520,11 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().enterInvalidCharactersInLegalEntityBoardMeetingSummary();
     }
 
+    @When("the user enters more than 10000 character in value for legalEntity personnel")
+    public void enterInvalidCharactersInLegalEntityPersonnelValue() {
+        getEditLegalEntityPage().enterInvalidCharactersInLegalEntityPersonnelValue();
+    }
+
     @Then("the user should see the error message enter up to 10000 valid characters for value in the legalentity location")
     public void verifyErrorMessageForInvalidCharacter() {
         getEditLegalEntityPage().verifyErrorMessageForInvalidCharacter();
@@ -505,6 +535,11 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyErrorMessageForLegalEntitySummaryBoardMeeting();
     }
 
+    @Then("the user should see the error message enter up to 10000 valid characters for value in legalentity personnel")
+    public void verifyErrorMessageForLegalEntityValuePersonnel() {
+        getEditLegalEntityPage().verifyErrorMessageForLegalEntityValuePersonnel();
+    }
+
     @Then("user should see the duplicate error message for value dropdown in legalEntity board meeting")
     public void verifyDuplicateErrorMessageForLegalEntityBoardMeeting() {
         getEditLegalEntityPage().verifyDuplicateErrorMessageForLegalEntityBoardMeeting();
@@ -513,6 +548,16 @@ public class EditLegalEntitySteps extends AbstractSteps{
     @When("the user enters value as <value> in the legalentity location summary")
     public void entersLegalEntityValueInLocationSummary(@Named("value") String value){
         getEditLegalEntityPage().entersLegalEntityValueInLocationSummary(value);
+    }
+
+    @When("the user enters value as <value> in the legalEntity personnel")
+    public void entersLegalEntityValueInPersonnel(@Named("value") String value){
+        getEditLegalEntityPage().entersLegalEntityValueInPersonnel(value);
+    }
+
+    @Then("the user should see the error message required for type in legalEntity personnel")
+    public void verifyRequiredErrorMessageForTypeInLegalEntityPersonnel() {
+        getEditLegalEntityPage().verifyRequiredErrorMessageForTypeInLegalEntityPersonnel();
     }
 
     @When("the user clicks on delete button for legal entity location summary")
