@@ -93,9 +93,27 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_personnel_type_error_message_xpath", By.xpath(".//*[@id='additionalPersonnel']//p[@class='notification error']"));
         hmap.put("legalEntity_personnel_value_error_message_xpath", By.xpath(".//*[@id='additionalPersonnel']//p[@data-error_id='personnelValueError']"));
         hmap.put("legalEntity_office_page_offices_label_xpath",By.xpath("//div[@id='subEntityList-summary']//span[text()='offices']"));
+        hmap.put("legalEntity_Identifier_link_Navigation_xpath",By.xpath(".//*[@id='legalEntityIdentifiers']"));
+        hmap.put("legalEntity_first_row_existing_identifier_type_dropdown",By.xpath("//*[@id='additionalIdentifiers']/tr[1]/td[1]/select"));
+        hmap.put("legalEntity_first_row_existing_identifier_status_dropdown",By.xpath("//*[@id='additionalIdentifiers']/tr[1]/td[3]/select"));
+        hmap.put("legalEntity_Identifier_All_Types_dropdown_xpath", By.xpath("//*[@id='additionalIdentifiers']/tr/td/select[@id='identifierType']"));
+        hmap.put("legalEntity_Identifier_type_list_xpath",By.xpath("//*[@id='additionalIdentifiers']//*[@class=\"new\"]//select/option"));
+        hmap.put("LegalEntity_Identifier_status_xpath",By.xpath(".//*[@id='additionalIdentifiers']/tr[1]/td[3]/select"));
+        hmap.put("legalEntity_first_row_new_identifier_type_dropdown",By.xpath("//*[@id='additionalIdentifiers']//tr[@class='new'][1]//select[@data-internal_id='identifierType']"));
+        hmap.put("legalEntity_first_row_new_identifier_status_dropdown",By.xpath("//*[@id='additionalIdentifiers']//tr[@class='new'][1]//select[@data-internal_id='identifierStatus']"));
+        hmap.put("legalEntity_first_row_existing_delete_identifiers_button",By.xpath(".//*[@id='additionalIdentifiers']//tr[1]//button[@class='delete-row']"));
+        hmap.put("legalEntity_first_row_existing_identifier_value",By.xpath(".//*[@id='additionalIdentifiers']/tr[1]/td[2]/input"));
+        //hmap.put("legalEntity_first_row_new_identifier_value",By.xpath(".//*[@id='additionalIdentifiers']/tr[@class='new']/td[2]/input"));
+        hmap.put("legalEntity_first_row_new_identifier_value",By.xpath(".//*[@id='additionalIdentifiers']/tr[@class='new'][1]//input[@name='identifierValue']"));
+        //hmap.put("legalEntity_identifier_value_error_xpath",By.xpath(".//*[@id='additionalIdentifiers']/tr[3]/td[2]/p"));
+        hmap.put("legalEntity_Basic_Info_Table",By.xpath("//*[@id='additionalIdentifiers']//tr[@data-row_id='identifiers']"));
+        hmap.put("legalEntity_basicInfo_add_new_identifiers_button_xpath",By.xpath(".//*[@id='legalEntityIdentifiers']/div/div"));
+        hmap.put("legalEntity_identifier_type_error_msg_xpath",By.xpath(".//*[@class='notification error'][@data-error_id='identifierTypeError']"));
+        hmap.put("legalEntity_identifier_value_error_msg_xpath",By.xpath(".//*[@class='notification error'][@data-error_id='identifierValueError']"));
+        hmap.put("legalEntity_identifier_status_error_msg_xpath",By.xpath(".//*[@class='notification error'][@data-error_id='identifierStatusError']"));
+        hmap.put("legalEntity_first_row_new_delete_identifiers_button", By.xpath("//*[@id='additionalIdentifiers']//tr[@class='new']//button[@class='delete-row']"));
+        hmap.put("legalEntity_identifier_delete_yes_button_id", By.id("yes-button"));
     }
-
-
 
     public static By getObjectIdentifier(String key) {
         setIdentifiers();
