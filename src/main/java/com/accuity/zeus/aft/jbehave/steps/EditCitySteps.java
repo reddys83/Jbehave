@@ -383,13 +383,12 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyCityAddressFlagFromZeusDB(country, area, city, "addressFlag", source);
 	}
 
-	// Suresh TODO: Start of city names
 	@Then("the user should see city name value same as in $source document")
 	public void verifyCityNameTypeAndValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
 												 @Named("source") String source) {
 		setEditCityPage(getDataPage().createEditCityPage());
 		Map<String, String> cityNameValueMap = getEditCityPage().getCityNameValueMapFromDB(country, area, city, source);
-		getEditCityPage().verifyCityNameTypeAndValueFromDB(cityNameValueMap, "Full Name");
+		getEditCityPage().verifyFullTypeNameValue(cityNameValueMap.get("Full Name"));
 	}
 	
 	@When("the user should see the full name is not editable")
@@ -505,5 +504,4 @@ public class EditCitySteps extends AbstractSteps {
 	public void verifyCityNameTypeInNewlyAddedRow(@Named("newNameType") String newNameType) {
 		getEditCityPage().verifyCityNameTypeInNewlyAddedRow(newNameType);
 	}
-	// Suresh TODO: End of city names
 }

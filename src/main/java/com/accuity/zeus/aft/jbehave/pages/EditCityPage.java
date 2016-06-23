@@ -840,13 +840,16 @@ public class EditCityPage extends AbstractPage {
 
 	}
 
-	// Suresh TODO: Start of city names
-	public void verifyCityNameTypeAndValueFromDB(Map<String, String> cityNameValueMap, String nameType) {
-		verifyNameValue(nameType, cityNameValueMap.get(nameType));
+	public void verifyFullNameFieldNotEditable() {
+		try {
+			getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_names_full_name_xpath")).findElement(By.cssSelector("input"));
+		} catch(NoSuchElementException ex) {
+			assertTrue("Full Name is not editable", true);
+		}
 	}
 	
-	public void verifyFullNameFieldNotEditable() {
-		assertNull(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_names_full_name_xpath")).getAttribute("data-edit_id"));
+	public void verifyFullTypeNameValue(String nameValue) {
+		assertEquals(nameValue, getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_names_full_name_value_xpath")).getAttribute("value"));
 	}
 
 	public void enterValueInFullTypeNameField(String value) {
@@ -892,7 +895,7 @@ public class EditCityPage extends AbstractPage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		attemptClick(CityIdentifiers.getObjectIdentifier("city_add_new_name_button_id"));
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_add_new_name_button_xpath"));
 	}
 
 	public void clickOnCityNameType() {
@@ -963,6 +966,7 @@ public class EditCityPage extends AbstractPage {
 		}
 	}
 	
+	
 	public void enterNameValue(String newNameValue) {
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_name_value_input_xpath"), newNameValue);
 	}
@@ -983,7 +987,7 @@ public class EditCityPage extends AbstractPage {
 
 	public void verifyNamesDeleteConfirmationModal() {
 		assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_xpath")).getText());
+				.findElement(CityIdentifiers.getObjectIdentifier("delete_names_row_confirmation_modal_xpath")).getText());
 	}
 
 	public void verifyCityNameTypeInNewlyAddedRow(String newNameType) {
@@ -995,7 +999,6 @@ public class EditCityPage extends AbstractPage {
             assertTrue(!newNameType.equals(options.get(i).getText().trim()));
         }
 	}
-	// Suresh TODO: End of city names
 
 	@Override
 	public String getPageUrl() {
