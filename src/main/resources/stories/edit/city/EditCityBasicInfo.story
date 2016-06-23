@@ -875,6 +875,7 @@ And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
 Then the user should see the began date value in city page is same as in trusted document
 
 Examples:

@@ -920,8 +920,14 @@ public class EditCityPage extends AbstractPage {
 
 	public void verifyCityBeganDateFromTrustedDB(String country, String area, String city, String tagName,
 			String source) {
-		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
+		List<WebElement> appliedMonthList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_month_began_date_xpath"));
+		String day = getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_day_began_date_xpath")).getAttribute("value");
+		String month =  new Select(appliedMonthList.get(0)).getFirstSelectedOption().getText();
+		String year = getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_year_began_date_xpath")).getAttribute("value");
+		String beganDate = day + " " + month + " " + year;
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), beganDate);
 
 	}
 
