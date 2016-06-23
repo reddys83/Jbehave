@@ -68,6 +68,7 @@ public class CityIdentifiers {
 		hmap.put("city_credit_rating_type_error_xpath", By.xpath("//*[@id='additionalCreditRatings']//*[@data-error_id='creditRatingTypeError']"));
 		hmap.put("city_credit_rating_value_error_xpath", By.xpath("//*[@id='additionalCreditRatings']//*[@data-error_id='creditRatingValueError']"));
 		hmap.put("city_credit_rating_row_xpath", By.xpath("//*[@id='additionalCreditRatings']"));
+		hmap.put("city_credit_rating_confirmed_date_error_msg_xpath", By.xpath("//*[@data-error_id='creditRatingConfirmedDateError']"));
 
 		hmap.put("city_use_in_address_true", By.xpath("//*[@id='cityBasicInfo']//input[@value='true']"));
 		hmap.put("city_use_in_address_false", By.xpath("//*[@id='cityBasicInfo']//input[@value='false']"));

@@ -850,10 +850,18 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public void verifyErrorMessageEnterYearMonthDayForAppliedDate() {
-		assertEquals("Enter a year, month/year or day/month/year.",
+		assertEquals("Enter a day/month/year.",
 				getDriver()
 						.findElement(
 								CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_error_msg_xpath"))
+						.getText());
+	}
+	
+	public void verifyErrorMessageEnterYearMonthDayForConfirmedDate() {
+		assertEquals("Enter a day/month/year.",
+				getDriver()
+						.findElement(
+								CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_error_msg_xpath"))
 						.getText());
 	}
 
@@ -1129,7 +1137,7 @@ public class EditCityPage extends AbstractPage {
 
 		try {
 			WebElement identifier = getDriver()
-					.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_row_xpath"));
+					.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_row_xpath")).findElement(By.tagName("tr"));
 			assertTrue(identifier == null);
 		} catch (Exception e) {
 			assertTrue(true);

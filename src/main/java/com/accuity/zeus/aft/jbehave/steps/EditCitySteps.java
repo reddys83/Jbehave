@@ -387,11 +387,16 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().clickOnCityCreditRating();
 	}
 
-	@Then("the user should see the error message enter a year, month/year or day/month/year for applied date in the credit rating city page")
+	@Then("the user should see the error message enter a day/month/year for applied date in the credit rating city page")
 	public void verifyErrorMessageEnterYearMonthDayForAppliedDate() {
 		getEditCityPage().verifyErrorMessageEnterYearMonthDayForAppliedDate();
 	}
-
+	
+	@Then("the user should see the error message enter a day/month/year for confirmed date in the credit rating city page")
+	public void verifyErrorMessageEnterYearMonthDayForConfirmedDate() {
+		getEditCityPage().verifyErrorMessageEnterYearMonthDayForConfirmedDate();
+	}
+	
 	@When("the user clicks on add new credit rating button in the credit rating city page")
 	public void clickOnAddButton() {
 		getEditCityPage().clickAddRowButton();
