@@ -88,7 +88,7 @@ public class XqueryMap {
 		queryMap.put("get city Status types","getCityStatusTypes.xqy");
 		queryMap.put("get city basic info","getCityBasicInfo.xqy");
         queryMap.put("get legalEntity Services From Lookup","getLegalEntityServicesFromLookup.xqy");
-
+        queryMap.put("get legalEntity Services From DB","getLegalEntityServicesFromDB.xqy");
 
    }
 

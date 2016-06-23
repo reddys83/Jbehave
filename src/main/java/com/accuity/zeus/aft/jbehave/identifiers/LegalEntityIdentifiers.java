@@ -87,16 +87,30 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_new_locations_summary_value_edit_xpath",By.xpath("//*[@id='additionalLocationSummaries']/tr[@class='new']//td//textarea"));
         hmap.put("legalEntity_office_page_offices_label_xpath",By.xpath("//div[@id='subEntityList-summary']//span[text()='offices']"));
         hmap.put("legalEntity_first_row_existing_offeredservices_category_dropdown",By.xpath("//*[@id='additionalOfferedServices']/tr[1]/td/select[@id='offeredServiceCategory']"));
+        hmap.put("legalEntity_offeredservices_category_dropdown",By.xpath("//*[@id='additionalOfferedServices']/tr/td/select[@id='offeredServiceCategory']"));
+        hmap.put("legalEntity_offeredservices_override_text_field",By.xpath("//*[@id='additionalOfferedServices']/tr/td/input"));
+        hmap.put("legalEntity_first_row_existing_offeredservices_override_text_field",By.xpath("//*[@id='additionalOfferedServices']/tr[1]/td/input"));
+        hmap.put("legalEntity_first_row_new_offeredservices_override_text_field",By.xpath("//*[@id='additionalOfferedServices']/tr[@class='new']/td/input"));
+        hmap.put("legalEntity_offeredservices_table",By.xpath("//*[@id='additionalOfferedServices']/tr"));
+        hmap.put("legalEntity_financialservices_table",By.xpath("//*[@id='additionalFinancialServices']/tr"));
         hmap.put("legalEntity_first_row_existing_offeredservices_Override",By.xpath("//*[@id='additionalOfferedServices']/tr[1]/td/input"));
-        hmap.put("legalEntity_first_row_existing_financial_category_dropdown",By.xpath("//*[@id='additionalOfferedServices']/tr[1]/td/select[@id='financialServiceCategory']"));
-        hmap.put("legalEntity_first_row_existing_financial_details_dropdown",By.xpath("//*[@id='additionalOfferedServices']/tr[1]/td/select[@id='financialServiceDetail']"));
+        hmap.put("legalEntity_first_row_existing_financial_category_dropdown",By.xpath("//*[@id='additionalFinancialServices']/tr[1]/td/select[@id='financialServiceCategory']"));
+        hmap.put("legalEntity_first_row_existing_delete_financialServices_button",By.xpath("//*[@id='additionalFinancialServices']/tr[1]/td/button"));
+        hmap.put("legalEntity_first_row_new_delete_financialServices_button",By.xpath("//*[@id='additionalFinancialServices']/tr[@class='new']/td/button"));
+        hmap.put("legalEntity_first_row_existing_delete_offeredServices_button",By.xpath("//*[@id='additionalOfferedServices']/tr[1]/td/button"));
+        hmap.put("legalEntity_first_row_new_delete_offeredServices_button",By.xpath("//*[@id='additionalOfferedServices']/tr[@class='new']/td/button"));
+        hmap.put("legalEntity_financial_category_dropdown",By.xpath("//*[@id='additionalFinancialServices']/tr/td/select[@id='financialServiceCategory']"));
+        hmap.put("legalEntity_first_row_existing_financial_details_dropdown",By.xpath("//*[@id='additionalFinancialServices']/tr[1]/td/select[@id='financialServiceDetail']"));
+        hmap.put("legalEntity_financial_details_dropdown",By.xpath("//*[@id='additionalFinancialServices']/tr/td/select[@id='financialServiceDetail']"));
         hmap.put("legalEntity_first_row_new_offeredservices_category_dropdown",By.xpath("//*[@id='additionalOfferedServices']/tr[@class='new']/td/select[@id='offeredServiceCategory']"));
         hmap.put("legalEntity_first_row_new_offeredservices_Override",By.xpath("//*[@id='additionalOfferedServices']/tr[@class='new']/td/input"));
-        hmap.put("legalEntity_first_row_new_financial_category_dropdown",By.xpath("//*[@id='additionalOfferedServices']/tr[@class='new']/td/select[@id='financialServiceCategory']"));
-        hmap.put("legalEntity_first_row_new_financial_details_dropdown",By.xpath("//*[@id='additionalOfferedServices']/tr[@class='new']/td/select[@id='financialServiceDetail']"));
+        hmap.put("legalEntity_first_row_new_financial_category_dropdown",By.xpath("//*[@id='additionalFinancialServices']/tr[@class='new']/td/select[@id='financialServiceCategory']"));
+        hmap.put("legalEntity_first_row_new_financial_details_dropdown",By.xpath("//*[@id='additionalFinancialServices']/tr[@class='new']/td/select[@id='financialServiceDetail']"));
 
         hmap.put("legalEntity_add_oferedservices_button",By.xpath("//*[@id='add-offeredServices']"));
         hmap.put("legalEntity_add_financialservices_button",By.xpath("//*[@id='add-financialServices']"));
+        hmap.put("legalEntity_entity_offeredservices_category_required_error_msg",By.xpath("//*[@class='notification error'][@data-error_id='offeredServiceCategoryError']"));
+        hmap.put("legalEntity_entity_financialdetails_required_error_msg",By.xpath("//*[@class='notification error'][@data-error_id='financialServiceDetailError']"));
 
 
     }

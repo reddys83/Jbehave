@@ -1006,20 +1006,178 @@ public class EditLegalEntityPage extends AbstractPage {
             dropdownValuesList.remove(0);
         }
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legalEntity Services From Lookup", nvPairs);
-        List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "serviceCategory"), getAlreadySelectedValuesInAllRowsForADropdown(LegalEntityIdentifiers.getObjectIdentifier(row_Identifier)));
+        List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "serviceCategory"), getAlreadySelectedValuesInAllRowsForADropdown(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_offeredservices_category_dropdown")));
         assertEquals(dropdownValuesList, resultList);
 
         }
 
-//    public void verifyFinancialCategoryDropdownValuesFromLookup(String row_Identifier,String lookup){}
-//    public void verifyFinancialDetailsDropdownValuesFromLookup(String row_Identifier,String lookup){}
-//    public void clickAddOfferedServiceButton(){}
-//    public void clickAddFinancialServiceButton(){}
-//    public void selectFinancialCategoryValue(String row_Identifier,String financialCategory){}
+        public void verifyFinancialCategoryDropdownValuesFromLookup(String row_Identifier,String lookup){
+            List<NameValuePair> nvPairs = new ArrayList<>();
+            List<String> dropdownValuesList = new ArrayList<>();
+            nvPairs.add(new BasicNameValuePair("fid", lookup));
+            Select dropdown = new Select(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(row_Identifier)));
+            String selectedValue = dropdown.getFirstSelectedOption().getText();
+            for (WebElement option : dropdown.getOptions()) {
+                dropdownValuesList.add(option.getAttribute("value"));
+            }
+            dropdownValuesList.remove(selectedValue);
+            if (dropdownValuesList.get(0).equals("")) {
+                dropdownValuesList.remove(0);
+            }
+            Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legalEntity Services From Lookup", nvPairs);
+            List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "FinancialCategory"), getAlreadySelectedValuesInAllRowsForADropdown(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_financial_category_dropdown")));
+            assertEquals(dropdownValuesList, resultList);
+        }
+        public void verifyFinancialDetailsDropdownValuesFromLookup(String row_Identifier,String lookup,String categoryLookup){
+            List<String> financialCategoryDropdowndropDownValues = new ArrayList<>();
+            Select financialCategoryDropdown = new Select(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(categoryLookup)));
 
+            for (WebElement option1 : financialCategoryDropdown.getOptions()) {
+                financialCategoryDropdowndropDownValues.add(option1.getText());
+            }
+            for(int i=0;i<financialCategoryDropdowndropDownValues.size();i++){
+                List<String> dropdownValuesList = new ArrayList<>();
+                if(!financialCategoryDropdowndropDownValues.get(i).equals("")) {
+                    financialCategoryDropdown.selectByVisibleText(financialCategoryDropdowndropDownValues.get(i));
+                    List<NameValuePair> nvPairs = new ArrayList<>();
+                    nvPairs.add(new BasicNameValuePair("fid", lookup));
+                    nvPairs.add(new BasicNameValuePair("financialCategory",financialCategoryDropdowndropDownValues.get(i)));
+                    Select financialDetailsDropdown = new Select(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(row_Identifier)));
+                    for (WebElement option : financialDetailsDropdown.getOptions()) {
+                        dropdownValuesList.add(option.getAttribute("value"));
+                    }
+                    if (dropdownValuesList.get(0).equals("")) {
+                        dropdownValuesList.remove(0);
+                    }
+                    Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legalEntity Services From Lookup", nvPairs);
+                    List test=getAlreadySelectedValuesInAllRowsForADropdown(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_financial_details_dropdown"));
+                    test.remove(financialDetailsDropdown.getFirstSelectedOption().getAttribute("value"));
+                    List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "FinancialCategoryDetails"), test);
+                    assertEquals(dropdownValuesList, resultList);
+                }
+            }
+
+
+        }
+        public void clickAddOfferedServiceButton(){
+            attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_add_oferedservices_button"));
+        }
+        public void clickAddFinancialServiceButton(){
+            attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_add_financialservices_button"));
+        }
+        public void selectFinancialCategoryValue(String row_Identifier,String financialCategory){}
+
+        public void verifyLegalEntityServiceValuesFromTrusted(String fid,String source)
+        {
+            List<NameValuePair> nvPairs = new ArrayList<>();
+            nvPairs.add(new BasicNameValuePair("fid", fid));
+            nvPairs.add(new BasicNameValuePair("source", source));
+            Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legalEntity Services From DB", nvPairs);
+
+            if (document != null) {
+                List serviceCategoryList =getNodeValuesByTagName(document, "serviceCategory");
+                List overrideList = getNodeValuesByTagName(document, "customDescription");
+                List financialCategoryList =getNodeValuesByTagName(document, "financialCategory");
+                List financialDetailsList =getNodeValuesByTagName(document, "detail");
+                String overrideValue;
+                for(int i=0;i<serviceCategoryList.size();i++) {
+                    WebElement serviceCategory = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_offeredservices_table")).get(i).findElement(By.xpath("td/select"));
+                    WebElement override = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_offeredservices_table")).get(i).findElement(By.xpath("td/input"));
+                    overrideValue=overrideList.get(i).toString();
+                    if(overrideValue.equals("null"))
+                    {
+                        overrideValue="";
+                    }
+                    assertEquals(serviceCategoryList.get(i), (new Select(serviceCategory)).getFirstSelectedOption().getText());
+                    assertEquals(overrideValue, override.getAttribute("value"));
+                }
+
+                for(int i=0;i<financialCategoryList.size();i++) {
+                    WebElement financialCategory = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_financialservices_table")).get(i).findElement(By.xpath("td[1]/select"));
+                    WebElement financialDetails = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_financialservices_table")).get(i).findElement(By.xpath("td[2]/select"));
+                    assertEquals(financialCategoryList.get(i), (new Select(financialCategory)).getFirstSelectedOption().getText());
+                    assertEquals(financialDetailsList.get(i), (new Select(financialDetails)).getFirstSelectedOption().getText());
+                }
+
+            }
+        }
+
+        public void selectlegalEntityServices(String category,String rowIdentifier){
+            selectItemFromDropdownListByText(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier),category);
+        }
+
+        public void enterlegalEntityServicesOverride(String category,String rowIdentifier){
+            getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).clear();
+            getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).sendKeys(category);
+        }
+
+    public boolean checkLegalEntityServiceValuesFromZeus(String fid,String source,String category,String override,String financialCategory,String financialDetails){
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Boolean offeredServicesflag=false;
+        Boolean financialServicesflag=false;
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legalEntity Services From DB", nvPairs);
+        List serviceCategoryList = getNodeValuesByTagName(document, "serviceCategory");
+        List overrideList = getNodeValuesByTagName(document, "customDescription");
+        List financialCategoryList = getNodeValuesByTagName(document, "financialCategory");
+        List financialDetailsList = getNodeValuesByTagName(document, "detail");
+        for (int i = 0; i < serviceCategoryList.size(); i++) {
+
+                String categoryAndOverridePair = serviceCategoryList.get(i).toString() + overrideList.get(i).toString();
+                if (categoryAndOverridePair.equals(category.toString() + override.toString())) {
+                    offeredServicesflag = true;
+                    break;
+                }
+            }
+        for (int i = 0; i < financialCategoryList.size(); i++) {
+
+            String financialcategoryAndDetailsPair=financialCategoryList.get(i).toString()+financialDetailsList.get(i).toString();
+            if (financialcategoryAndDetailsPair.equals(financialCategory.toString() + financialDetails.toString())) {
+                financialServicesflag = true;
+                break;
+            }
+        }
+        return offeredServicesflag&financialServicesflag;
+
+    }
+
+    public void verifyLegalEntityServiceValuesFromZeus(String fid,String source,String category,String override,String financialCategory,String financialDetails) {
+        assertTrue(checkLegalEntityServiceValuesFromZeus(fid, source, category, override, financialCategory, financialDetails));
+    }
+
+    public void verifyLegalEntityServiceValuesNotExistInZeus(String fid,String source,String category,String override,String financialCategory,String financialDetails) {
+        assertFalse(checkLegalEntityServiceValuesFromZeus(fid, source, category, override, financialCategory, financialDetails));
+    }
+
+    public void clickServicesDeleteRowButton(String rowIdentifier)
+    {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
+    }
+
+    public void verifyNoNewServicesRow(String rowIdentifier){
+        try {
+            assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        } catch (NoSuchElementException e) {
+
+        }
+
+    }
+
+    public void verifyRequiredMessage(String reqMessage,String reqMsgXpath)
+    {
+        assertTrue(reqMessage.equals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(reqMsgXpath)).getText()));
+    }
+
+    public void verifyMaxLengthForOverrideTextField(String maxlength,String rowIdentifier)
+    {
+        assertEquals(maxlength,getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"));
+    }
     @Override
     public String getPageUrl() {
         return null;
     }
+
 
 }
