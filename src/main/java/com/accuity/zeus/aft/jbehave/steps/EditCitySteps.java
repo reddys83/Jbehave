@@ -435,4 +435,9 @@ public class EditCitySteps extends AbstractSteps {
 				@Named("PlaceDetails") String details, @Named("source") String source) {
 			getEditCityPage().verifyCityRelatedValueFromZeusDB(country,area,city,type, place, details, source);
 		}
+	    
+	    @When("the user deletes the existing related places rows")
+		public void deleteAllRelatedPlaces() {
+			getEditCityPage().deleteAllRelatedPlaces();
+		}
 }

@@ -723,7 +723,7 @@ public class EditCityPage extends AbstractPage {
 	    	getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_input_xpath")).sendKeys(countryPlaces);
 	    	getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_input_xpath")).sendKeys(Keys.RETURN);
 	    	try {
-	            Thread.sleep(2000L);
+	            Thread.sleep(3000L);
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
 	        }
@@ -876,7 +876,7 @@ public class EditCityPage extends AbstractPage {
 	    
 	    public void verifyRelatedPlacesInCityPage(String type, String place, String details) {
 	    	try{
-	    		Thread.sleep(3000);
+	    		Thread.sleep(6000);
 	    	}
 	    	catch(Exception e){
 	    		e.printStackTrace();
@@ -914,6 +914,40 @@ public class EditCityPage extends AbstractPage {
 						: getNodeValuesByTagName(document, tagName).get(0);
 			}
 			return tagValue;
+		}
+	    
+	    /**
+		 * This method is used for performing the delete all related places rows row by
+		 * clicking on the delete row button
+		 * 
+		 */
+		public void deleteAllRelatedPlaces() {
+			attemptClick(CityIdentifiers.getObjectIdentifier("city_add_places_button_edit_id"));
+			List<WebElement> deleteRows = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_places_delete_button_xpath"));
+
+			for (int index = 0; index < deleteRows.size(); index++) {
+				WebElement currentInstance = getDriver()
+						.findElements(CityIdentifiers.getObjectIdentifier("city_places_delete_button_xpath"))
+						.get(0);
+				if (currentInstance != null) {
+					currentInstance.click();
+					verifyDeleteConfirmationModalRelatedPlace();
+					pressEnterButtonInDeleteConfirmationModalForCity();
+				}
+
+			}
+
+		}
+		
+		/**
+		 * This method is used to verify whether the delete confirmation table in related place  is
+		 * present upon clicking the delete row button
+		 * 
+		 */
+		public void verifyDeleteConfirmationModalRelatedPlace() {
+			assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_relatedplace_xpath")).getText());
 		}
 	@Override
 	public String getPageUrl() {

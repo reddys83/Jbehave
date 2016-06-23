@@ -58,7 +58,8 @@ public class CityIdentifiers {
 		hmap.put("city_places_details_Select_dropdown_xpath",By.xpath("//*[@id='additionalRelatedPlaces']/tr[@class='new']/td[4]/select"));
 		hmap.put("city_places_details_options_dropdown_xpath",By.xpath(".//*[@class='new'][@data-row_id='relatedPlaces']//select[@data-internal_id='relatedPlaceDetails']/option"));
 		hmap.put("city_places_place_edit_xpath",By.xpath("//input[@id='relatedPlacePlace']"));
-		hmap.put("city_places_delete_button_xpath",By.xpath("//*[@id='additionalRelatedPlaces']/tr/td[5]/button"));
+		hmap.put("delete_row_confirmation_modal_relatedplace_xpath", By.xpath("//*[@colspan='10']"));
+		hmap.put("city_places_delete_button_xpath", By.xpath(".//*[@data-row_id='relatedPlaces']//button[@class='delete-row']"));
 		hmap.put("city_places_country_dropDown_list_xpath", By.xpath(".//*[@id='country_chosen']//li"));
 		hmap.put("city_places_area_dropDown_list_xpath", By.xpath(".//*[@id='area_chosen']//li"));
 		hmap.put("city_places_area_dropDown_list1_xpath", By.xpath(".//*[@id='area_chosen']//li[1]"));
@@ -67,6 +68,8 @@ public class CityIdentifiers {
 		hmap.put("city_get_relatedplace_typevalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td"));
 		hmap.put("city_get_relatedplace_placevalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td[2]/a"));
 		hmap.put("city_get_relatedplace_detailsvalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td[3]"));
+		
+
 		
 	}
 
