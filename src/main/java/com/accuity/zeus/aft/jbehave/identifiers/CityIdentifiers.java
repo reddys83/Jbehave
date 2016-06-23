@@ -47,7 +47,7 @@ public class CityIdentifiers {
 		hmap.put("city_places_place_required_error_message_xpath", By.xpath(".//*[@class='notification error'][@data-error_id='relatedPlacePlaceError']"));
 		hmap.put("city_places_type_dropdown_xpath", By.xpath(".//*[@class='new'][@data-row_id='relatedPlaces']//select[@id='relatedPlaceType']"));
 		hmap.put("city_places_type_options_dropdown_xpath", By.xpath(".//*[@class='new'][@data-row_id='relatedPlaces']//select[@id='relatedPlaceType']/option"));
-		hmap.put("city_places_place_edit_button_xpath", By.xpath(".//tr[@class='new']//button[@class='edit-row']"));
+		hmap.put("city_places_place_edit_button_xpath", By.xpath("//button[@class='edit-row']"));
 		hmap.put("city_places_country_dropDown_xpath", By.xpath(".//*[@id='country_chosen']//a"));
 		hmap.put("city_places_country_dropDown_input_xpath", By.xpath(".//*[@id='country_chosen']//input"));
 		hmap.put("city_places_area_dropdown_xpath", By.xpath(".//*[@id='area_chosen']//a"));
@@ -55,7 +55,7 @@ public class CityIdentifiers {
 		hmap.put("city_places_city_dropdown_xpath", By.xpath(".//*[@id='city_chosen']//a"));
 		hmap.put("city_places_city_dropdown_input_xpath", By.xpath(".//*[@id='city_chosen']//input"));
 		hmap.put("city_places_go_button_xpath", By.xpath(".//*[@id='multiSelectRow']/button"));
-		hmap.put("city_places_details_Select_dropdown_xpath",By.xpath("//*[@id='additionalRelatedPlaces']/tr[@class='new']/td[4]/select"));
+		hmap.put("city_places_details_Select_dropdown_xpath",By.xpath("//*[@id='additionalRelatedPlaces']/tr/td[4]/select"));
 		hmap.put("city_places_details_options_dropdown_xpath",By.xpath(".//*[@class='new'][@data-row_id='relatedPlaces']//select[@data-internal_id='relatedPlaceDetails']/option"));
 		hmap.put("city_places_place_edit_xpath",By.xpath("//input[@id='relatedPlacePlace']"));
 		hmap.put("delete_row_confirmation_modal_relatedplace_xpath", By.xpath("//*[@colspan='10']"));
@@ -68,6 +68,7 @@ public class CityIdentifiers {
 		hmap.put("city_get_relatedplace_typevalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td"));
 		hmap.put("city_get_relatedplace_placevalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td[2]/a"));
 		hmap.put("city_get_relatedplace_detailsvalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td[3]"));
+		hmap.put("city_get_relatedplace_entirevalue_xpath", By.xpath("//*[@id='cityPlaces']//tbody"));
 		
 
 		

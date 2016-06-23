@@ -415,8 +415,8 @@ public class EditCitySteps extends AbstractSteps {
 	    }
 	    
 	    @Then("the user should see the list of all existing area for the selected country by full name in places for city")
-	    public void verifyAreaListInPlacesForCity() {
-	    	getEditCityPage().verifyAreaListInPlacesForCity();
+	    public void verifyAreaListInPlacesForCity(@Named("countryPlaces") String country) {
+	    	getEditCityPage().verifyAreaListInPlacesForCity(country);
 	    }
 	    
 	    @Then("the user should see the list of all existing city for the selected area by full name in places for city")
@@ -439,5 +439,16 @@ public class EditCitySteps extends AbstractSteps {
 	    @When("the user deletes the existing related places rows")
 		public void deleteAllRelatedPlaces() {
 			getEditCityPage().deleteAllRelatedPlaces();
+		}
+	    
+	    @Then("the user should not see <PlaceType> <cityPlaces> <PlaceDetails> updated in city related place")
+		public void verifyDeletedRelatedPlaces(@Named("PlaceType") String type, @Named("cityPlaces") String place,
+				@Named("PlaceDetails") String details) {
+			getEditCityPage().verifyDeletedRelatedPlaces(type,place,details);
+		}
+	    @Then("the user should not see the city related place value in $source document")
+	    public void verifyDeletedCityRelatedValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+				@Named("city") String city,@Named("source") String source) {
+			getEditCityPage().verifyDeletedCityRelatedValueFromZeusDB(country,area,city,source);
 		}
 }

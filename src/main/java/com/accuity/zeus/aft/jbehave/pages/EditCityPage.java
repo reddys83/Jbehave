@@ -23,7 +23,6 @@ import org.apache.commons.lang.StringUtils;
 
 public class EditCityPage extends AbstractPage {
 	
-	private String countryPlacesCountry = "";
 	private String countryPlacesArea = "";
 	public EditCityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
@@ -752,7 +751,13 @@ public class EditCityPage extends AbstractPage {
 	    }
 	    
 	    public void selectsPlacesDetailsFromDropdown(String PlaceDetails) {
-	    	 selectItemFromDropdownListByText(CityIdentifiers.getObjectIdentifier("city_places_details_Select_dropdown_xpath") ,PlaceDetails);
+	    	try{
+	    		Thread.sleep(4000);
+	    	}
+	    	catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+	    	selectItemFromDropdownListByText(CityIdentifiers.getObjectIdentifier("city_places_details_Select_dropdown_xpath") ,PlaceDetails);
 	    }
 	    
 	    public void verifyPlaceInPlacesForCity(String place) {
@@ -838,30 +843,32 @@ public class EditCityPage extends AbstractPage {
 	        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "country list");
 	       
 	        for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
-	        	System.out.println(i); 
-	        	
-	 	        System.out.println("db"+document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim());
-	 	       System.out.println("UI"+ countryList.get(i).getText().trim());
 	            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), countryList.get(i).getText().trim());
 	        }
 	    }
 	    
-	    public void verifyAreaListInPlacesForCity() {
-	    	
+	    public void verifyAreaListInPlacesForCity(String countryPlacesCountry) {
+	    	try{
 	        List<NameValuePair> nvPairs = new ArrayList<>();
 	        nvPairs.add(new BasicNameValuePair("name", countryPlacesCountry));
 	        nvPairs.add(new BasicNameValuePair("source", "trusted"));
 	        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list", nvPairs);
 	        if (getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list_xpath")).size() > 2) {
-	            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list1_xpath")).getText(), "No Area");
-	            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list2_xpath")).getText(), "Return All Cities");
+	            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list1_xpath")).getText(), "No Area");
+	            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list2_xpath")).getText(), "Return All Cities");
 	            for (int i = 0; i < document.getElementsByTagName("area").getLength(); i++) {
-	                assertEquals(document.getElementsByTagName("area").item(i).getTextContent(), getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list_xpath")).get(i + 2).getText());
+	            	assertEquals(document.getElementsByTagName("area").item(i).getTextContent(), getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list_xpath")).get(i + 2).getText());
 	            }
 	        } else {
-	            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list1_xpath")).getText(), "No Area");
-	            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list2_xpath")).getText(), "Return All Cities");
+	            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list1_xpath")).getText(), "No Area");
+	            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list2_xpath")).getText(), "Return All Cities");
 	        }
+	        
+	    	}
+	    	catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+	    	
 	    }
 	    
 	    public void verifyCityListInPlacesForCity() {
@@ -949,6 +956,24 @@ public class EditCityPage extends AbstractPage {
 			assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver()
 					.findElement(CityIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_relatedplace_xpath")).getText());
 		}
+		
+		
+			public void verifyDeletedRelatedPlaces(String type, String place, String details) {
+		    	try{
+		    		Thread.sleep(6000);
+		    	}
+		    	catch(Exception e){
+		    		e.printStackTrace();
+		    	}
+		    	assertEquals("",getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_relatedplace_entirevalue_xpath")).getText());	    	
+			}
+			
+			 public void verifyDeletedCityRelatedValueFromZeusDB(String country,String area,String city,String source) {
+		    	assertEquals(getCityRelatedInfoFromDB(country, area, city,"RelatedPlaceType", source), "");
+		    	assertEquals(getCityRelatedInfoFromDB(country, area, city,"RelatedPlacePlace", source), "");
+		    	assertEquals(getCityRelatedInfoFromDB(country, area, city,"RelatedPlaceDetail", source), "");
+		    	
+		    }
 	@Override
 	public String getPageUrl() {
 		return null;
