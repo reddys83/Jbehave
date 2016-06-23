@@ -11,6 +11,7 @@ JIRA ID - ZEUS-972 -User can edit City's Identifiers
 JIRA ID - ZEUS-968 - User can edit City's Population
 JIRA ID - ZEUS-964 - User can edit City's END Date
 JIRA ID - ZEUS-980 - User can edit City's Use In Address Flag
+JIRA ID - ZEUS-963 - User can edit City's Began Date
 
 Scenario: Verify City Status dropdown values from lookup Status
 Given a user is on the search page
@@ -861,3 +862,216 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|city|Summary|
 |Tajikistan|Leninabadskaya Oblast|Gafurov|Basic Info|
+
+Scenario: User can edit city Began Date - Verify if User can see Current value of the Month,Day & Year is retrieved from trusted document.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+Then the user should see the began date value in city page is same as in trusted document
+
+Examples:
+|country|area|city|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|
+
+Scenario: User can edit city Began Date - 
+a)Verify if user can see all the months in month dropdown (Began Date) are in MMM format
+b)Verify if user can see that all the months are sorted as per chronological order
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+Then the user verifies whether all the months in the drop down option are in MMM format & are sorted in the chronological order
+
+Examples:
+|country|area|city|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|
+
+Scenario: User can edit city Began Date - Verify if User can see an error message in City basic info edit page when began date is entered in an invalid format
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+Then the user should see the error Enter a year, month/year or day/month/year. for began date
+
+Examples:
+|country|area|city|day|month|year|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|28||2016|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|28|||
+|Tajikistan|Leninabadskaya Oblast|Gafurov|28|Mar||
+
+Scenario: User can edit city Began Date - Verify if User can see an error message in City basic info edit page when future began date is entered
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+Then the user should see the error Must be no later than today. for began date
+
+Examples:
+|country|area|city|day|month|year|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|28|Sep|2019|
+
+Scenario: User can edit city Began Date - Verify if User can see an error message in City basic info edit page when invalid Year & inavlid Day is entered
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+Then the user should see the error Invalid Date for began date
+
+Examples:
+|country|area|city|day|month|year|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|45|Sep|4568|
+
+
+Scenario: User can edit city Began Date - Verify if
+a)User can see Success message in City Page
+b)User can see entered values updated in City Page
+c)User can see entered values updated in Zeus document
+d)User can see Basic info changes are updated in Confirmation Modal
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should see the entered <day> <month> <year> in city page
+Then the user should see the city began date <day><month><year> value in zeus document
+Then the user reverts the changes to the document
+
+
+Examples:
+|country|area|city|day|month|year|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|||2016|
+|Tajikistan|Leninabadskaya Oblast|Gafurov||Oct|2015|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|01|Sep|2015|
+
+Scenario: User can edit city Began Date - Verify if User can see a message in City basic info edit page when Day,Month & Year which is no different than current value entered
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+Then the user should not see the <ConfirmationSummary> changes in confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should see the entered <day> <month> <year> in city page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|day|month|year|ConfirmationSummary|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|25|Sep|1902|Summary|
+
+Scenario: User can edit city Began Date - Verify if User can see Began date getting saved in City Page & Zeus document  when Day,Month & Year are entered as blank values
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should see the entered <day> <month> <year> in city page
+Then the user should see the city began date <day><month><year> value in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|day|month|year|
+|Tajikistan|Leninabadskaya Oblast|Gafurov||||
