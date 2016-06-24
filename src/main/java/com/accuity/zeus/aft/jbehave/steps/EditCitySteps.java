@@ -6,6 +6,7 @@ import com.accuity.zeus.aft.io.Database;
 import java.text.ParseException;
 
 import org.jbehave.core.annotations.*;
+import java.lang.StringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -364,17 +365,17 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyCityEndDateFromTrustedDB(country, area, city, "EndDate", source);
 
 	}
-	
-	@When("the user clicks on True option for Use in Address") 
+
+	@When("the user clicks on True option for Use in Address")
 	public void selectTrueForUseInAddress() {
 		getEditCityPage().selectTrueForUseInAddress();
 	}
-	
-	@When("the user clicks on False option for Use in Address") 
+
+	@When("the user clicks on False option for Use in Address")
 	public void selectFalseForUseInAddress() {
 		getEditCityPage().selectFalseForUseInAddress();
 	}
-	
+
 	@Then("the user should see the address flag value same as in $source document")
 	public void verifyCityAddressFlagFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source) {
@@ -391,12 +392,12 @@ public class EditCitySteps extends AbstractSteps {
 	public void verifyErrorMessageEnterYearMonthDayForAppliedDate() {
 		getEditCityPage().verifyErrorMessageEnterYearMonthDayForAppliedDate();
 	}
-	
+
 	@Then("the user should see the error message enter a day/month/year for confirmed date in the credit rating city page")
 	public void verifyErrorMessageEnterYearMonthDayForConfirmedDate() {
 		getEditCityPage().verifyErrorMessageEnterYearMonthDayForConfirmedDate();
 	}
-	
+
 	@When("the user clicks on add new credit rating button in the credit rating city page")
 	public void clickOnAddButton() {
 		getEditCityPage().clickAddRowButton();
@@ -407,25 +408,30 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().clickOnAgencyDropDown();
 	}
 
-	@Then("the user should see the city Agency names from look up $LookUpName")
-	public void verifyCityAgencyList() {
-		getEditCityPage().verifyCityAgencyList();
+	@Then("the user should see the city Agency names from look up $LookUpName in existing creditRating row $rowNumber")
+	public void verifyCityAgencyListExistingRow(@Named("rowNumber") int rowNumber) {
+		getEditCityPage().verifyCityAgencyListFromLookup(rowNumber);
 	}
 
-	@When("the user clicks on the Agency types drop-down in the basicinfo city page")
-	public void clickOnCityAgencyTypeDropDown() {
-		getEditCityPage().clickOnAgencyTypeDropDown();
+	@Then("the user should see the city Agency types from look up $LookUpName in existing creditRating row $rowNumber")
+	public void verifyCityAgencyTypListExistingRow(@Named("rowNumber") int rowNumber) {
+		getEditCityPage().verifyCityCreditRatingTypeList(rowNumber);
 	}
 
-	@Then("the user should see the city Agency types from look up $LookUpName")
-	public void verifyCityAgencyTypList() {
-		getEditCityPage().verifyCityCreditRatingTypeList();
+	@Then("the user should see the city Agency names from look up $LookUpName in new creditRating row $rowNumber")
+	public void verifyCityAgencyList(@Named("rowNumber") int rowNumber) {
+		getEditCityPage().verifyCityAgencyListFromLookup(rowNumber);
+	}
+
+	@Then("the user should see the city Agency types from look up $LookUpName in new creditRating row $rowNumber")
+	public void verifyCityAgencyTypList(@Named("rowNumber") int rowNumber) {
+		getEditCityPage().verifyCityCreditRatingTypeList(rowNumber);
 	}
 
 	@When("the user enters applied date day $appliedDay $appliedMonth $appliedYear in the credit rating city page")
 	public void enterCityCreditRatingAppliedDateDay(@Named("appliedDay") String appliedDay,
 			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
-			@Named("row") int row) {
+			@Named("rowNumber") int row) {
 		getEditCityPage().enterCityCreditRatingAppliedDateDay(appliedDay, row);
 		getEditCityPage().enterCityCreditRatingAppliedDateMonth(appliedMonth, row);
 		getEditCityPage().enterCreditRatingAppliedYear(appliedYear, row);
@@ -434,39 +440,39 @@ public class EditCitySteps extends AbstractSteps {
 	@When("the user enters confirmed date day $confirmedDay $confirmedMonth $confirmedYear in the credit rating city page")
 	public void enterCityCreditRatingConfirmedDateDay(@Named("confirmedDay") String confirmedDay,
 			@Named("confirmedMonth") String confirmedMonth, @Named("confirmedYear") String confirmedYear,
-			@Named("row") int row) {
+			@Named("rowNumber") int row) {
 		getEditCityPage().enterCityCreditRatingConfirmedDateDay(confirmedDay, row);
 		getEditCityPage().enterCityCreditRatingConfirmedDateMonth(confirmedMonth, row);
 		getEditCityPage().enterCreditRatingConfirmedYear(confirmedYear, row);
 	}
 
-	@When("the user enters credit rating type as <type> in the basic info city page")
-	public void enterCreditRatingType(@Named("type") String creditRatingType, @Named("row") int row) {
+	@When("the user enters credit rating type as <type> in credit rating row $rowNumber in the basic info city page")
+	public void enterCreditRatingType(@Named("type") String creditRatingType, @Named("rowNumber") int row) {
 		getEditCityPage().enterCreditRatingType(creditRatingType, row);
 	}
 
-	@When("the user enters credit rating agency as <agency> in the basic info city page")
-	public void enterCreditRatingAgency(@Named("agency") String agency, @Named("row") int row) {
+	@When("the user enters credit rating agency as <agency> in credit rating row $rowNumber in the basic info city page")
+	public void enterCreditRatingAgency(@Named("agency") String agency, @Named("rowNumber") int row) {
 		getEditCityPage().enterCreditRatingAgency(agency, row);
 	}
 
-	@When("the user enters credit rating <value> in the basic info city page")
-	public void enterCityCreditRatingValue(@Named("value") String value, @Named("row") int row) {
+	@When("the user enters credit rating <value> in credit rating row $rowNumber in the basic info city page")
+	public void enterCityCreditRatingValue(@Named("value") String value, @Named("rowNumber") int row) {
 		getEditCityPage().enterCityCreditRatingValue(value, row);
 	}
 
-	@When("the user enters credit rating type as <type2> in the basic info city page")
-	public void enterCreditRatingType2(@Named("type2") String creditRatingType, @Named("row") int row) {
+	@When("the user enters credit rating type as <type2> in credit rating row $rowNumber in the basic info city page")
+	public void enterCreditRatingType2(@Named("type2") String creditRatingType, @Named("rowNumber") int row) {
 		getEditCityPage().enterCreditRatingType(creditRatingType, row);
 	}
 
-	@When("the user enters credit rating agency as <agency2> in the basic info city page")
-	public void enterCreditRatingAgency2(@Named("agency2") String agency, @Named("row") int row) {
+	@When("the user enters credit rating agency as <agency2> in credit rating row $rowNumber in the basic info city page")
+	public void enterCreditRatingAgency2(@Named("agency2") String agency, @Named("rowNumber") int row) {
 		getEditCityPage().enterCreditRatingAgency(agency, row);
 	}
 
-	@When("the user enters credit rating <value2> in the basic info city page")
-	public void enterCityCreditRatingValue2(@Named("value2") String value, @Named("row") int row) {
+	@When("the user enters credit rating <value2> in credit rating row $rowNumber in the basic info city page")
+	public void enterCityCreditRatingValue2(@Named("value2") String value, @Named("rowNumber") int row) {
 		getEditCityPage().enterCityCreditRatingValue(value, row);
 	}
 
@@ -479,51 +485,62 @@ public class EditCitySteps extends AbstractSteps {
 	@Then("the user should see the city credit rating values as in $source document")
 	public void verifyCityCreditRatingValueFromZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source, @Named("agency") String agency,
-			@Named("type") String type, @Named("value") String value, @Named("appliedDate") String appliedDate,
-			@Named("confirmedDate") String confirmedDate, @Named("row") int row) {
+			@Named("type") String type, @Named("value") String value, @Named("appliedDay") String appliedDay,
+			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
+			@Named("confirmedDay") String confirmedDay, @Named("confirmedMonth") String confirmedMonth,
+			@Named("confirmedYear") String confirmedYear, @Named("rowNumber") int row) {
+
+		String appliedDate = appliedDay + " " + appliedMonth + " " + appliedYear;
+		String confirmedDate = confirmedDay + " " + confirmedMonth + " " + confirmedYear;
 		getEditCityPage().verifyCityCreditRatingValuesFromDB(country, area, city, source, agency, type, value,
 				appliedDate, confirmedDate, row);
 	}
 
 	@Then("the user should see the updated city credit rating values as in $source document")
-	public void verifyCityCreditRatingValue2FromZeusDB(@Named("country") String country, @Named("area") String area,
-			@Named("city") String city, @Named("source") String source, @Named("agency2") String agency,
-			@Named("type2") String type, @Named("value2") String value, @Named("appliedDate") String appliedDate,
-			@Named("confirmedDate") String confirmedDate, @Named("row") int row) {
+	public void verifyCityCreditRatingUpdatedValuesFromZeusDB(@Named("country") String country,
+			@Named("area") String area, @Named("city") String city, @Named("source") String source,
+			@Named("agency2") String agency, @Named("type2") String type, @Named("value2") String value,
+			@Named("appliedDay") String appliedDay, @Named("appliedMonth") String appliedMonth,
+			@Named("appliedYear") String appliedYear, @Named("confirmedDay") String confirmedDay,
+			@Named("confirmedMonth") String confirmedMonth, @Named("confirmedYear") String confirmedYear,
+			@Named("rowNumber") int row) {
+
+		String appliedDate = appliedDay + " " + appliedMonth + " " + appliedYear;
+		String confirmedDate = confirmedDay + " " + confirmedMonth + " " + confirmedYear;
 		getEditCityPage().verifyCityCreditRatingValuesFromDB(country, area, city, source, agency, type, value,
 				appliedDate, confirmedDate, row);
 	}
 
 	@When("the user enters applied date day <appliedDay> in the credit rating city page")
-	public void enterCityCreditRatingAppliedDay(@Named("appliedDay") String appliedDay, @Named("row") int row) {
+	public void enterCityCreditRatingAppliedDay(@Named("appliedDay") String appliedDay, @Named("rowNumber") int row) {
 		getEditCityPage().enterCityCreditRatingAppliedDateDay(appliedDay, row);
 	}
 
 	@When("the user selects applied date month <appliedMonth> in the credit rating city page")
 	public void enterCityCreditRatingAppliedDateMonth(@Named("appliedMonth") String appliedMonth,
-			@Named("row") int row) {
+			@Named("rowNumber") int row) {
 		getEditCityPage().enterCityCreditRatingAppliedDateMonth(appliedMonth, row);
 	}
 
 	@When("the user enters applied date year <appliedYear> in the credit rating city page")
-	public void enterCreditRatingAppliedYear(@Named("appliedYear") String appliedYear, @Named("row") int row) {
+	public void enterCreditRatingAppliedYear(@Named("appliedYear") String appliedYear, @Named("rowNumber") int row) {
 		getEditCityPage().enterCreditRatingAppliedYear(appliedYear, row);
 	}
 
 	@When("the user enters confirmed date day <confirmedDay> in the credit rating city page")
 	public void enterCityCreditRatingConfirmedDateDay(@Named("confirmedDay") String confirmedDay,
-			@Named("row") int row) {
+			@Named("rowNumber") int row) {
 		getEditCityPage().enterCityCreditRatingConfirmedDateDay(confirmedDay, row);
 	}
 
 	@When("the user selects confirmed date month <confirmedMonth> in the credit rating city page")
 	public void enterCityCreditRatingConfirmedDateMonth(@Named("confirmedMonth") String confirmedMonth,
-			@Named("row") int row) {
+			@Named("rowNumber") int row) {
 		getEditCityPage().enterCityCreditRatingConfirmedDateMonth(confirmedMonth, row);
 	}
 
 	@When("the user enters confirmed date year <confirmedYear> in the credit rating city page")
-	public void enterConfirmedYear(@Named("confirmedYear") String confirmedYear, @Named("row") int row) {
+	public void enterConfirmedYear(@Named("confirmedYear") String confirmedYear, @Named("rowNumber") int row) {
 		getEditCityPage().enterCreditRatingConfirmedYear(confirmedYear, row);
 	}
 
@@ -546,31 +563,80 @@ public class EditCitySteps extends AbstractSteps {
 	public void verifyErrorMessageInCityCreditRatingValue(@Named("errorMsg") String errorMsg) {
 		getEditCityPage().verifyErrorMessageInCityCreditRatingValue(errorMsg);
 	}
-	
+
 	@When("the user clicks on the delete credit rating row button in the basic info city page")
 	public void clickOnDeleteNewCreditRatingRowButtonCity() {
 		getEditCityPage().clickOnDeleteNewCreditRatingRowButtonCity();
 	}
-	
+
 	@Then("the user should not see the newly added credit rating row in the basic info city page")
 	public void verifyNewlyAddedCreditRatingRowIsNotDisplayed() throws Exception {
 		getEditCityPage().verifyNewlyAddedCreditRatingRowIsNotDisplayed();
 	}
-	
+
 	@Then("the user should see the newly added credit rating row in the basic info city page")
 	public void verifyNewlyAddedCreditRatingRowIsDisplayed() throws Exception {
 		getEditCityPage().verifyNewlyAddedCreditRatingRowIsDisplayed();
-	}	
-	
+	}
+
 	@Then("the user should see delete row confirmation modal in credit rating")
 	public void verifyDeleteConfirmationModalCreditRating() {
 		getEditCityPage().verifyCreditRatingDeleteConfirmationModal();
 	}
-	
+
 	@Then("the user should not see the city credit rating values in $source document")
 	public void verifyCityCreditRatingValueFromZeusDB(@Named("country") String country, @Named("area") String area,
-			@Named("city") String city, @Named("source") String source, @Named("row") int row) {
+			@Named("city") String city, @Named("source") String source, @Named("rowNumber") int row) {
 		getEditCityPage().verifyCityCreditRatingValuesAreNullFromDB(country, area, city, source, row);
+	}
+
+	@Then("the user should see the entered city credit rating values are saved in UI in the row number $rowNumber")
+	public void verifyCityCreditRatingValueFromUI(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("agency") String agency, @Named("type") String type,
+			@Named("value") String value, @Named("appliedDay") String appliedDay,
+			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
+			@Named("confirmedDay") String confirmedDay, @Named("confirmedMonth") String confirmedMonth,
+			@Named("confirmedYear") String confirmedYear, @Named("rowNumber") int row) {
+
+		String appliedDate = appliedDay + " " + appliedMonth + " " + appliedYear;
+		String confirmedDate = confirmedDay + " " + confirmedMonth + " " + confirmedYear;
+		getEditCityPage().verifyCityCreditRatingValuesFromUI(country, area, city, agency, type, value, appliedDate,
+				confirmedDate, row);
+	}
+
+	@Then("the user should see the entered city credit rating values are updated in UI in the row number $rowNumber")
+	public void verifyCityCreditRatingUpdatedValueFromUI(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("agency2") String agency, @Named("type2") String type,
+			@Named("value2") String value, @Named("appliedDay") String appliedDay,
+			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
+			@Named("confirmedDay") String confirmedDay, @Named("confirmedMonth") String confirmedMonth,
+			@Named("confirmedYear") String confirmedYear, @Named("rowNumber") int row) {
+
+		String appliedDate = appliedDay + " " + appliedMonth + " " + appliedYear;
+		String confirmedDate = confirmedDay + " " + confirmedMonth + " " + confirmedYear;
+		getEditCityPage().verifyCityCreditRatingValuesFromUI(country, area, city, agency, type, value, appliedDate,
+				confirmedDate, row);
+	}
+
+	@When("the user enters applied date that is later than today")
+	public void enterAppliedDateLaterThanToday(@Named("row") int row) {
+		getEditCityPage().enterAppliedDateLaterThanToday(row);
+	}
+
+	@When("the user enters confirmed date that is later than today")
+	public void enterConfirmedDateLaterThanToday(@Named("row") int row) {
+		getEditCityPage().enterConfirmedDateLaterThanToday(row);
+	}
+
+	@Then("the user should see the error text $appliedDateErrorMsg for applied date in the credit rating city page")
+	public void verifyErrorMessageForAppliedDate(@Named("appliedDateErrorMsg") String appliedDateErrorMsg) {
+		getEditCityPage().verifyErrorMessageForAppliedDate(appliedDateErrorMsg);
+	}
+
+	@Then("the user should see the error text $confirmedDateErrorMsg for confirmed date in the credit rating city page")
+	public void verifyInvalidDateErrorMessageForConfirmedDate(
+			@Named("confirmedDateErrorMsg ") String confirmedDateErrorMsg) {
+		getEditCityPage().verifyErrorMessageForConfirmedDate(confirmedDateErrorMsg);
 	}
 
 }

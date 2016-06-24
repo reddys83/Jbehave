@@ -822,31 +822,32 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public void enterCityCreditRatingAppliedDateDay(String appliedDay, int row) {
-		List<WebElement> appliedDateList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_day_xpath"));		
-		appliedDateList.get(row).sendKeys(appliedDay);					
+		List<WebElement> appliedDateList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_day_xpath"));
+		appliedDateList.get(row-1).clear();
+		appliedDateList.get(row-1).sendKeys(appliedDay);					
 	}
 	
 
 	public void enterCityCreditRatingAppliedDateMonth(String appliedMonth, int row) {
 		List<WebElement> appliedMonthList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_month_xpath"));
-		selectItemFromDropdownListByText(appliedMonthList.get(row), appliedMonth);
+		selectItemFromDropdownListByText(appliedMonthList.get(row-1), appliedMonth);
 	}
 
 	public void enterCityCreditRatingConfirmedDateMonth(String confirmedMonth, int row) {
 		List<WebElement> confirmedDateList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_month_xpath"));
-		selectItemFromDropdownListByText(confirmedDateList.get(row), confirmedMonth);
+		selectItemFromDropdownListByText(confirmedDateList.get(row-1), confirmedMonth);
 	}
 
 	public void enterCityCreditRatingConfirmedDateDay(String confirmedDay, int row) {
 		List<WebElement> confirmedMonth = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_day_xpath"));
-		confirmedMonth.get(row).clear();				
-		confirmedMonth.get(row).sendKeys(confirmedDay);
+		confirmedMonth.get(row-1).clear();				
+		confirmedMonth.get(row-1).sendKeys(confirmedDay);
 	}
 
 	public void enterCreditRatingAppliedYear(String appliedYear, int row) {
 		List<WebElement> appliedYearList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_appliedYear_xpath"));
-		appliedYearList.get(row).clear();
-		appliedYearList.get(row).sendKeys(appliedYear);
+		appliedYearList.get(row-1).clear();
+		appliedYearList.get(row-1).sendKeys(appliedYear);
 	}
 
 	public void verifyErrorMessageEnterYearMonthDayForAppliedDate() {
@@ -867,8 +868,8 @@ public class EditCityPage extends AbstractPage {
 
 	public void enterCreditRatingConfirmedYear(String confirmedYear, int row) {
 		List<WebElement> confirmedYearList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_year_xpath"));
-		confirmedYearList.get(row).clear();
-		confirmedYearList.get(row).sendKeys(confirmedYear);
+		confirmedYearList.get(row-1).clear();
+		confirmedYearList.get(row-1).sendKeys(confirmedYear);
 	}
 
 	public void clickAddRowButton() {
@@ -880,28 +881,23 @@ public class EditCityPage extends AbstractPage {
 	 */
 	public void clickOnAgencyDropDown() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"));
-	}
-
-	/**
-	 * This method is used to click the city Agency drop-down
-	 */
-	public void clickOnAgencyTypeDropDown() {
-		attemptClick(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath"));
-	}
+	}	
 
 	/**
 	 * This method is used to verify the look up data values available for city
 	 * agency drop-down
 	 */
-	public void verifyCityAgencyList() {
+	public void verifyCityAgencyListFromLookup(int row) {
 		List<WebElement> agencyList = getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"))
-				.findElements(By.tagName("option"));
+				.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"));
+		assertTrue(agencyList.size()>=row);
+		List<WebElement> agencyListOptions = agencyList.get(row-1).findElements(By.tagName("option"));
+				
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
 				"get city credit look up values");
 		for (int i = 0; i < document.getElementsByTagName("creditRatingAgency").getLength(); i++) {
 			assertEquals(document.getElementsByTagName("creditRatingAgency").item(i).getTextContent(),
-					agencyList.get(i + 1).getAttribute("value"));
+					agencyListOptions.get(i + 1).getAttribute("value"));
 		}
 
 	}
@@ -910,15 +906,16 @@ public class EditCityPage extends AbstractPage {
 	 * This method is used to verify the look up data values available for city
 	 * agency drop-down
 	 */
-	public void verifyCityCreditRatingTypeList() {
-		List<WebElement> typeList = getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath"))
-				.findElements(By.tagName("option"));
+	public void verifyCityCreditRatingTypeList(int row) {
+		List<WebElement> typeList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath"));
+		assertTrue(typeList.size()>=row);
+		List<WebElement> typeListOptions = typeList.get(row-1).findElements(By.tagName("option"));
+				
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
 				"get city credit look up values");
 		for (int i = 0; i < document.getElementsByTagName("creditRatingType").getLength(); i++) {
 			assertEquals(document.getElementsByTagName("creditRatingType").item(i).getTextContent(),
-					typeList.get(i + 1).getAttribute("value"));
+					typeListOptions.get(i + 1).getAttribute("value"));
 		}
 
 	}
@@ -931,7 +928,7 @@ public class EditCityPage extends AbstractPage {
 	public void enterCreditRatingType(String creditRatingType, int row) {
 
 		List<WebElement> typeDropDownList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath"));
-		selectItemFromDropdownListByText(typeDropDownList.get(row),creditRatingType);
+		selectItemFromDropdownListByText(typeDropDownList.get(row-1),creditRatingType);
 
 	}
 
@@ -943,7 +940,7 @@ public class EditCityPage extends AbstractPage {
 	public void enterCreditRatingAgency(String creditRatingAgency, int row) {
 		try {
 			List<WebElement> agencyDropDownList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"));
-			selectItemFromDropdownListByText(agencyDropDownList.get(row),creditRatingAgency);
+			selectItemFromDropdownListByText(agencyDropDownList.get(row-1),creditRatingAgency);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -952,8 +949,8 @@ public class EditCityPage extends AbstractPage {
 	
 	public void enterCityCreditRatingValue(String appliedDay,int row) {
 		List<WebElement> valueTextboxList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_value_xpath"));
-		valueTextboxList.get(row).clear();		
-		valueTextboxList.get(row).sendKeys(appliedDay);
+		valueTextboxList.get(row-1).clear();		
+		valueTextboxList.get(row-1).sendKeys(appliedDay);
 	}
 	
 	/**
@@ -980,38 +977,49 @@ public class EditCityPage extends AbstractPage {
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get city basic info", nvPairs);
 
-			if (document != null && document.getElementsByTagName("creditRating").getLength() > row) {
+			if (document != null && document.getElementsByTagName("creditRating").getLength() >= row) {
 
-				for (int childNode = 0; childNode < document.getElementsByTagName("creditRating").item(row)
+				for (int childNode = 0; childNode < document.getElementsByTagName("creditRating").item(row-1)
 						.getChildNodes().getLength(); childNode++) {
 
-					switch (document.getElementsByTagName("creditRating").item(row).getChildNodes().item(childNode)
+					switch (document.getElementsByTagName("creditRating").item(row-1).getChildNodes().item(childNode)
 							.getNodeName()) {
 					case "creditRatingAgencyName":
-						assertEquals(document.getElementsByTagName("creditRating").item(row).getChildNodes()
+						assertEquals(document.getElementsByTagName("creditRating").item(row-1).getChildNodes()
 								.item(childNode).getTextContent(), agency);
 						break;
 					case "creditRatingType":
-						assertEquals(document.getElementsByTagName("creditRating").item(row).getChildNodes()
+						assertEquals(document.getElementsByTagName("creditRating").item(row-1).getChildNodes()
 								.item(childNode).getTextContent(), type);
 						break;
 					case "creditRatingValue":
-						assertEquals(document.getElementsByTagName("creditRating").item(row).getChildNodes()
+						assertEquals(document.getElementsByTagName("creditRating").item(row-1).getChildNodes()
 								.item(childNode).getTextContent(), value);
 						break;
 					case "creditDateApplied":
-						assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row).getChildNodes()
-								.item(childNode).getTextContent()), appliedDate);
+						if(!appliedDate.isEmpty() && !(document.getElementsByTagName("creditRating").item(row-1).getChildNodes().item(childNode).getTextContent().isEmpty()))
+						{
+							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row-1)
+									.getChildNodes().item(childNode).getTextContent()), appliedDate);
+						}					
+						
 						break;
 					case "creditDateConfirmed":
-						assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row).getChildNodes()
-								.item(childNode).getTextContent()), confirmedDate);
+						if(!appliedDate.isEmpty() && !(document.getElementsByTagName("creditRating").item(row-1).getChildNodes().item(childNode).getTextContent().isEmpty()))
+						{
+							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row-1)
+									.getChildNodes().item(childNode).getTextContent()), confirmedDate);
+						}					
+						
 						break;
 
 					}
 
 				}
 
+			} else {
+				assertFalse("The creditRating rows in " + source + " DB is not matching with credit rating rows in UI",
+						true);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1057,31 +1065,38 @@ public class EditCityPage extends AbstractPage {
 	{	
 
 		try {		
-			    //to avoid the driver finding time when there are no rows, clicking row button. so that at least one web element will be exist.
-				clickAddRowButton();
-				List<WebElement> agencyDropDownList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"));
-				List<WebElement> typeDropDownList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath"));
-				List<WebElement> appliedDateList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_day_xpath"));
-				List<WebElement> appliedMonthList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_month_xpath"));
-				List<WebElement> appliedYearList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_appliedYear_xpath"));
-				List<WebElement> confirmedDateList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_day_xpath"));
-				List<WebElement> confirmedMonth = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_month_xpath"));
-				List<WebElement> confirmedYearList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_year_xpath"));			
-				List<WebElement> valueTextboxList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_value_xpath"));
-				
-				for(int index =0;index<agencyDropDownList.size();index++)
-				{					
-					String agency = new Select(agencyDropDownList.get(index)).getFirstSelectedOption().getText().trim();
-					String type =  new Select(typeDropDownList.get(index)).getFirstSelectedOption().getText();
-					String value = valueTextboxList.get(index).getAttribute("value");
-					String appliedDate =  new Select(appliedMonthList.get(index)).getFirstSelectedOption().getText() +" "+ appliedYearList.get(index).getAttribute("value");
-					String confirmedDate = new Select(confirmedMonth.get(index)).getFirstSelectedOption().getText() +" "+ confirmedYearList.get(index).getAttribute("value");
-					if(!appliedDateList.get(index).getAttribute("value").isEmpty() && !confirmedDateList.get(index).getAttribute("value").isEmpty()){
-						 appliedDate = String.format("%02d",Integer.parseInt(appliedDateList.get(index).getAttribute("value"))) + " " +  appliedDate;
-						 confirmedDate = String.format("%02d",Integer.parseInt(confirmedDateList.get(index).getAttribute("value"))) + " " + confirmedDate;	
-					}										    
-					verifyCityCreditRatingValuesFromDB(country, area, city, source, agency, type, value, appliedDate, confirmedDate, index);	
+			    				
+				if(getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).size()>1)
+				{
+					List<WebElement> agencyDropDownList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"));
+					List<WebElement> typeDropDownList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath"));
+					List<WebElement> appliedDateList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_day_xpath"));
+					List<WebElement> appliedMonthList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_month_xpath"));
+					List<WebElement> appliedYearList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_appliedYear_xpath"));
+					List<WebElement> confirmedDateList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_day_xpath"));
+					List<WebElement> confirmedMonth = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_month_xpath"));
+					List<WebElement> confirmedYearList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_year_xpath"));			
+					List<WebElement> valueTextboxList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_value_xpath"));
+					
+					for(int index =0;index<agencyDropDownList.size();index++)
+					{					
+						String agency = new Select(agencyDropDownList.get(index)).getFirstSelectedOption().getText().trim();
+						String type =  new Select(typeDropDownList.get(index)).getFirstSelectedOption().getText();
+						String value = valueTextboxList.get(index).getAttribute("value");
+						String appliedDate =  new Select(appliedMonthList.get(index)).getFirstSelectedOption().getText() +" "+ appliedYearList.get(index).getAttribute("value");
+						String confirmedDate = new Select(confirmedMonth.get(index)).getFirstSelectedOption().getText() +" "+ confirmedYearList.get(index).getAttribute("value");
+						if(!appliedDateList.get(index).getAttribute("value").isEmpty() && !confirmedDateList.get(index).getAttribute("value").isEmpty()){
+							 appliedDate = String.format("%02d",Integer.parseInt(appliedDateList.get(index).getAttribute("value"))) + " " +  appliedDate;
+							 confirmedDate = String.format("%02d",Integer.parseInt(confirmedDateList.get(index).getAttribute("value"))) + " " + confirmedDate;	
+						}										    
+						verifyCityCreditRatingValuesFromDB(country, area, city, source, agency, type, value, appliedDate, confirmedDate, index+1);	
+					}
 				}
+				else
+				{
+					assertTrue("There is no existing values in credit rating section",true);
+				}
+				
 			
 			
 		} catch (Exception e) {
@@ -1192,6 +1207,85 @@ public class EditCityPage extends AbstractPage {
 		assertEquals(StringUtils.capitalize(getCityInfoFromDB(country, area, city, tagName, source)),
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_address_flag_xpath")).getText());
 
+	}
+	
+	/**
+	 * This method is used to verify the credit rating values in UI value.
+	 * 
+	 * @param country
+	 * @param area
+	 * @param city
+	 * @param tagName
+	 * @param source
+	 */
+	public void verifyCityCreditRatingValuesFromUI(String country, String area, String city, String agency, String type,
+			String value, String appliedDate, String confirmedDate, int rowNumber) {
+
+		try {
+
+			// to avoid the driver finding time when there are no rows, clicking
+			// row button. so that at least one web element will be exist.
+			assertFalse("No rows exist in credit rating section", getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).size() == 1);
+			List<WebElement> rowColums = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).get(rowNumber).findElements(By.tagName("td"));
+
+			String agencyInUI = rowColums.get(0).getText();
+			String typeInUI = rowColums.get(1).getText();
+			String valueInUI = rowColums.get(2).getText();
+			String appliedDateInUI = rowColums.get(3).getText();
+			String confirmedDateInUI = rowColums.get(4).getText();
+
+			assertEquals(agencyInUI, agency);
+			assertEquals(typeInUI, type);
+			assertEquals(valueInUI, value);
+			if(!appliedDateInUI.isEmpty() && !appliedDate.isEmpty())
+			{
+				assertEquals(appliedDateInUI, appliedDate);				
+			}
+			if(!confirmedDateInUI.isEmpty() && !confirmedDate.isEmpty())
+			{
+				assertEquals(confirmedDateInUI, confirmedDate);
+			}
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void enterAppliedDateLaterThanToday(int row) {
+		Calendar cal = Calendar.getInstance();
+		enterCityCreditRatingAppliedDateDay(Integer.toString(cal.get(Calendar.DATE) + 1), row);
+		Format formatter = new SimpleDateFormat("MMMM");
+		String month = formatter.format(new Date());
+		month = month.substring(0, 3);
+		enterCityCreditRatingAppliedDateMonth(month, row);
+		enterCreditRatingAppliedYear(Integer.toString(cal.get(Calendar.YEAR) + 1), row);
+	}
+
+	public void enterConfirmedDateLaterThanToday(int row) {
+		Calendar cal = Calendar.getInstance();
+		enterCityCreditRatingConfirmedDateDay(Integer.toString(cal.get(Calendar.DATE) + 1), row);
+		Format formatter = new SimpleDateFormat("MMMM");
+		String month = formatter.format(new Date());
+		month = month.substring(0, 3);
+		enterCityCreditRatingConfirmedDateMonth(month, row);
+		enterCreditRatingConfirmedYear(Integer.toString(cal.get(Calendar.YEAR) + 1), row);
+	}	
+
+	public void verifyErrorMessageForAppliedDate(String errorMsg) {
+		assertEquals(errorMsg,
+				getDriver()
+						.findElement(
+								CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_error_msg_xpath"))
+						.getText());
+	}
+
+	public void verifyErrorMessageForConfirmedDate(String errorMsg) {
+		assertEquals(errorMsg,
+				getDriver().findElement(
+						CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_error_msg_xpath"))
+						.getText());
 	}
 
 	@Override
