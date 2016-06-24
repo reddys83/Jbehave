@@ -173,6 +173,7 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the legalEntity update link
 And the user clicks on the legal entity ownership link in the navigation bar
+When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user deletes all the existing ownership summary rows
 And the user clicks on the save button
 Then the user should see the save confirmation modal
