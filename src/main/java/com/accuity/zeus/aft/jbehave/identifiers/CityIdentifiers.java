@@ -10,7 +10,6 @@ public class CityIdentifiers {
 	
 
 	public static void setIdentifiers() {		
-
 		hmap.put("city_status_identifier_dropdown_xpath", By.xpath(("//*[@id='cityBasicInfo']//tr[th='Status']//select")));
 		hmap.put("city_status_identifier_dropdown_options_xpath", By.xpath(("//*[@id='cityBasicInfo']//tr[th='Status']//select/option")));		
 		hmap.put("confirmation_modal_xpath", By.xpath("//*[@id='modal-region']"));
@@ -41,6 +40,22 @@ public class CityIdentifiers {
 		hmap.put("city_addInfo_error_message_edit_xpath", By.xpath("//*[@id='cityBasicInfo']//*[@data-error_id='addInfoError']"));
 		hmap.put("save_button_id", By.xpath("//*[@id='save-button']"));
 		hmap.put("city_add_info_xpath_after_save", By.xpath("//*[@id='cityBasicInfo']//tr[th='Add Info']/td"));
+		hmap.put("city_end_date_info_text_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='End Date']/td"));
+		hmap.put("city_day_end_date_xpath", By.xpath("//*[@id='cityBasicInfo']//input[@name='endDate-day']"));
+		hmap.put("city_month_end_date_xpath", By.xpath("//*[@id='cityBasicInfo']//select[@name='endDate-month']"));
+		hmap.put("city_year_end_date_xpath", By.xpath("//*[@id='cityBasicInfo']//input[@name='endDate-year']"));
+		hmap.put("city_error_for_invalid_date", By.xpath("//*[@id='cityBasicInfo']//*[@data-error_id='endDateError']"));
+		hmap.put("city_day_began_date_xpath", By.xpath("//*[@id='cityBasicInfo']//input[@name='startDate-day']"));
+		hmap.put("city_month_began_date_xpath", By.xpath("//*[@id='cityBasicInfo']//select[@name='startDate-month']"));
+		hmap.put("city_year_began_date_xpath", By.xpath("//*[@id='cityBasicInfo']//input[@name='startDate-year']"));
+		hmap.put("city_begandate_day_input_xpath", By.xpath("//input[@name='startDate-day']"));
+    	hmap.put("city_begandate_year_input_xpath", By.xpath("//input[@name='startDate-year']"));
+    	hmap.put("city_begandate_month_dropdown_xpath", By.xpath("//select[@name='startDate-month']"));
+    	hmap.put("city_begandate_errorMessage_xpath",By.xpath("//*[@data-error_id='startDateError']"));    	
+    	hmap.put("city_get_beganDate_value_xpath",By.xpath("//*[@id='cityBasicInfo']//tr[th='Began Date']/td"));
+		hmap.put("city_use_in_address_true", By.xpath("//*[@id='cityBasicInfo']//input[@value='true']"));
+		hmap.put("city_use_in_address_false", By.xpath("//*[@id='cityBasicInfo']//input[@value='false']"));
+		hmap.put("city_address_flag_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Use In Address']/td"));
 		hmap.put("city_places_link_id", By.xpath("//*[@id='cityPlaces']"));
 		hmap.put("city_add_places_button_edit_id", By.xpath("//button[@id='add-relatedPlaces']"));
 		hmap.put("city_places_type_required_error_message_xpath", By.xpath(".//*[@class='notification error'][@data-error_id='relatedPlaceTypeError']"));
@@ -69,9 +84,6 @@ public class CityIdentifiers {
 		hmap.put("city_get_relatedplace_placevalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td[2]/a"));
 		hmap.put("city_get_relatedplace_detailsvalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td[3]"));
 		hmap.put("city_get_relatedplace_entirevalue_xpath", By.xpath("//*[@id='cityPlaces']//tbody"));
-		
-
-		
 	}
 
 
