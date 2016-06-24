@@ -90,6 +90,7 @@ public class XqueryMap {
         queryMap.put("get LegalEntity personnel", "getLegalEntityPersonnel.xqy");
         queryMap.put("get LegalEntity IdentifierTypes From Lookup","getLegalEntityIdentifierTypesFromLookup.xqy");
         queryMap.put("get LegalEntity IdentifierStatus From Lookup","getLegalEntityIdentifierStatusFromLookup.xqy");
+        queryMap.put("get LegalEntity OwnershipType From Lookup","getLegalEntityOwnershipSummariesFromLookup.xqy");
 
    }
 
