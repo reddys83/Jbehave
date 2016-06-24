@@ -26,6 +26,7 @@ import org.apache.commons.lang.StringUtils;
 
 public class EditCityPage extends AbstractPage {
 	private String countryPlacesArea = "";
+
 	public EditCityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
 		super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -680,7 +681,7 @@ public class EditCityPage extends AbstractPage {
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText());
 
 	}
-	
+
 	/**
 	 * This method is used to verify the value in trusted DB is same as UI
 	 * value.
@@ -734,7 +735,7 @@ public class EditCityPage extends AbstractPage {
 			Select dropdown = new Select(monthDropDowns.get(0));
 			if (month.equals("")) {
 				dropdown.selectByValue(month);
-			} else {				
+			} else {
 				dropdown.selectByVisibleText(month);
 			}
 
@@ -815,7 +816,7 @@ public class EditCityPage extends AbstractPage {
 		enterMonthInEndDate(month);
 		enterYearInEndDate(year);
 	}
-	
+
 	public void selectTrueForUseInAddress() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_use_in_address_true"));
 	}
@@ -830,10 +831,10 @@ public class EditCityPage extends AbstractPage {
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_address_flag_xpath")).getText());
 
 	}
-	
+
 	public void verifyMaxLengthInCityIdentifierValue(String maxLength) {
-		 assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"))
-                 .getAttribute("maxlength"), maxLength);
+		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"))
+				.getAttribute("maxlength"), maxLength);
 
 	}
 
@@ -926,398 +927,448 @@ public class EditCityPage extends AbstractPage {
 
 	public void verifyCityBeganDateFromTrustedDB(String country, String area, String city, String tagName,
 			String source) {
-		List<WebElement> appliedMonthList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_month_began_date_xpath"));
-		String day = getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_day_began_date_xpath")).getAttribute("value");
-		String month =  new Select(appliedMonthList.get(0)).getFirstSelectedOption().getText();
-		String year = getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_year_began_date_xpath")).getAttribute("value");
+		List<WebElement> appliedMonthList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_month_began_date_xpath"));
+		String day = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_day_began_date_xpath"))
+				.getAttribute("value");
+		String month = new Select(appliedMonthList.get(0)).getFirstSelectedOption().getText();
+		String year = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_year_began_date_xpath"))
+				.getAttribute("value");
 		String beganDate = day + " " + month + " " + year;
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), beganDate);
 
 	}
-	
-	 public void clickOnCityPlaces() {
-	        attemptClick(CityIdentifiers.getObjectIdentifier("city_places_link_id"));
+
+	public void clickOnCityPlaces() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_places_link_id"));
+	}
+
+	public void clickOnAddPlacesButton() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_add_places_button_edit_id"));
+	}
+
+	public void verifyRequiredErrorMessageForType() {
+		assertEquals(getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_places_type_required_error_message_xpath"))
+				.getText(), "Required");
+	}
+
+	public void verifyRequiredErrorMessageForPlace() {
+		assertEquals(getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_places_place_required_error_message_xpath"))
+				.getText(), "Required");
+	}
+
+	public void clickCityPlaceType() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_places_type_dropdown_xpath"));
+	}
+
+	public void selectsPlacesTypeFromDropdwon(String placeType) {
+		List<WebElement> options = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_places_type_options_dropdown_xpath"));
+
+		for (WebElement option : options) {
+			if (option.getText().contains(placeType)) {
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_type_options_dropdown_xpath"))
+						.click();
+				option.click();
+				break;
+			}
 		}
-		
-		 public void clickOnAddPlacesButton() {
-		        attemptClick(CityIdentifiers.getObjectIdentifier("city_add_places_button_edit_id"));
-		    }
-		 
-		 public void verifyRequiredErrorMessageForType() {
-		        assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_type_required_error_message_xpath")).getText(), "Required");
-		    }
-		 
-		 public void verifyRequiredErrorMessageForPlace() {
-		        assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_required_error_message_xpath")).getText(), "Required");
-		    }
-		    public void clickCityPlaceType() {
-		        attemptClick(CityIdentifiers.getObjectIdentifier("city_places_type_dropdown_xpath"));
-		    }
-		    
-		    public void selectsPlacesTypeFromDropdwon(String placeType) {
-		        List<WebElement> options = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_type_options_dropdown_xpath"));
-		        
-		        for (WebElement option : options) {
-		            if (option.getText().contains(placeType)) {
-		                getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_type_options_dropdown_xpath")).click();
-		                option.click();
-		                break;
-		            }
-		        }
-		    }
-		    
-		    public void clicksOnEditButton() {
-		    	attemptClick(CityIdentifiers.getObjectIdentifier("city_places_place_edit_button_xpath"));
-		    }
-		    
-		    public void clicksOnCountryInPlacesForCity() {
-		    	attemptClick(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_xpath"));
-		    }
-		    
-		    public void selectsCountryInPlacesForCity(String countryPlaces) {
-		    	getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_input_xpath")).sendKeys(countryPlaces);
-		    	getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_input_xpath")).sendKeys(Keys.RETURN);
-		    	try {
-		            Thread.sleep(3000L);
-		        } catch (InterruptedException e) {
-		            e.printStackTrace();
-		        }
-		    }
-		    
-		    public void clicksOnAreaDropdownInPlacesForCity() {
-		        attemptClick(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_xpath"));
-		    }
-		    
-		    public void selectsAreaInPlacesForCity(String areaPlaces) {
-		    	getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_input_xpath")).sendKeys(areaPlaces);
-		    	getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_input_xpath")).sendKeys(Keys.RETURN);
-		    }
-		    
-		    public void clicksOnCityDropdownInPlacesForCity() {
-		    	attemptClick(CityIdentifiers.getObjectIdentifier("city_places_city_dropdown_xpath"));
-		    }
-		    
-		    public void selectsCityInPlacesForCountry(String cityPlaces) {
-		    	getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_city_dropdown_input_xpath")).sendKeys(cityPlaces);
-		    	getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_city_dropdown_input_xpath")).sendKeys(Keys.RETURN);
-		    }
-		    
-		    public void clicksOnGoButton() {
-		    	getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_go_button_xpath")).click();
-		    }
-		    
-		    public void selectsPlacesDetailsFromDropdown(String PlaceDetails) {
-		    	try{
-		    		Thread.sleep(4000);
-		    	}
-		    	catch(Exception e){
-		    		e.printStackTrace();
-		    	}
-		    	selectItemFromDropdownListByText(CityIdentifiers.getObjectIdentifier("city_places_details_Select_dropdown_xpath") ,PlaceDetails);
-		    }
-		    
-		    public void verifyPlaceInPlacesForCity(String place) {
-		    	try{
-		    		Thread.sleep(3000);
-		    	}
-		    	catch(Exception e){
-		    		e.printStackTrace();
-		    	}
-		    	assertEquals(place,getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_edit_xpath")).getAttribute("value"));
-		    }
-		    
-		    public void clicksOnDeleteCityPlacesType() {
-		    	attemptClick(CityIdentifiers.getObjectIdentifier("city_places_delete_button_xpath"));
-		    }
-		    
-		    public void verifyDrawerClosed(){
-		    	try{
-		    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_xpath")).isDisplayed()); 
-		    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_xpath")).isDisplayed()); 
-		    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_city_dropdown_xpath")).isDisplayed()); 
-		    	}
-		    	   catch(org.openqa.selenium.NoSuchElementException e)
-		    	{
-		    		
-		    	}
-		    }
-		    
-		    public void verifyGoButtonDisabled(){
-		    	try{
-		    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_go_button_xpath")).isEnabled());
-		    }
-		    	catch(org.openqa.selenium.NoSuchElementException e)
-		    	{
-		    		e.printStackTrace();
-		    	}
-		    }
-		    
-		    public void verifyEditButtonDisabled(){
-		    	try{
-		    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_edit_button_xpath")).isEnabled());
-		    }
-		    	
-		    catch(org.openqa.selenium.NoSuchElementException e)
-	    	{
-		    	e.printStackTrace();
-	    	}
-		    } 
-		    
-		    public void verifyDeleteButtonDisabled(){
-		    	try{
-		    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_delete_button_xpath")).isEnabled());
-		    	}
-		    	
-		    	catch(org.openqa.selenium.NoSuchElementException e)
-		    	{
-		    		e.printStackTrace();
-		    	}
-		    }
-		    
-		    public void clickDetailsDropDown() {
-		        attemptClick(CityIdentifiers.getObjectIdentifier("city_places_details_Select_dropdown_xpath"));
-		    }
-		    
-		    public void verifyCityPlacesTypeList() {
-		        List<WebElement> cityPlacesTypeList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_type_options_dropdown_xpath"));
-		        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city places type");
-		        for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
-		            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), cityPlacesTypeList.get(i).getText());
-		        }
-		    }
-		    
-		    public void verifyCityPlacesDetailsList() {
-		        List<WebElement> cityPlacesDetailsList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_details_options_dropdown_xpath"));
-		        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city places detail");
-		        for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
-		            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), cityPlacesDetailsList.get(i).getText());
-		        }
-		    }
-		    
-		    public void verifyCountryListInPlacesForCity() {
-		    	try{
-		    	Thread.sleep(3000);
-		    	}
-		    	catch(Exception e){
-		    		e.printStackTrace();
-		    	}
-		        List<WebElement> countryList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list_xpath"));
-		        Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "country list");
-		       
-		        for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
-		            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(), countryList.get(i).getText().trim());
-		        }
-		    }
-		    
-		    public void verifyAreaListInPlacesForCity(String countryPlacesCountry) {
-		    	try{
-		        List<NameValuePair> nvPairs = new ArrayList<>();
-		        nvPairs.add(new BasicNameValuePair("name", countryPlacesCountry));
-		        nvPairs.add(new BasicNameValuePair("source", "trusted"));
-		        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list", nvPairs);
-		        if (getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list_xpath")).size() > 2) {
-		            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list1_xpath")).getText(), "No Area");
-		            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list2_xpath")).getText(), "Return All Cities");
-		            for (int i = 0; i < document.getElementsByTagName("area").getLength(); i++) {
-		            	assertEquals(document.getElementsByTagName("area").item(i).getTextContent(), getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list_xpath")).get(i + 2).getText());
-		            }
-		        } else {
-		            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list1_xpath")).getText(), "No Area");
-		            assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list2_xpath")).getText(), "Return All Cities");
-		        }
-		        
-		    	}
-		    	catch(Exception e){
-		    		e.printStackTrace();
-		    	}
-		    	
-		    }
-		    
-		    public void verifyCityListInPlacesForCity() {
-		        List<NameValuePair> nvPairs = new ArrayList<>();
-		        nvPairs.add(new BasicNameValuePair("name", countryPlacesArea));
-		        nvPairs.add(new BasicNameValuePair("source", "trusted"));
-		        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "city list", nvPairs);
-		        for (int i = 0; i < document.getElementsByTagName("city").getLength(); i++) {
-		            assertEquals(document.getElementsByTagName("city").item(i).getTextContent(), getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_city_dropDown_list_xpath")).get(i).getText());
-		        }
-		    }
-		    
-		    public void verifyRelatedPlacesInCityPage(String type, String place, String details) {
-		    	try{
-		    		Thread.sleep(6000);
-		    	}
-		    	catch(Exception e){
-		    		e.printStackTrace();
-		    	}
-		    	assertEquals(type, getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_relatedplace_typevalue_xpath")).getText());
-		    	assertEquals(place, getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_relatedplace_placevalue_xpath")).getText());
-		    	assertEquals(details, getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_relatedplace_detailsvalue_xpath")).getText());
-			}
-		    
-		    public void verifyCityRelatedValueFromZeusDB(String country,String area,String city,String type, String place, String details,String source) {
-		    	assertEquals(getCityRelatedInfoFromDB(country, area, city,"RelatedPlaceType", source), type);
-		    	assertEquals(getCityRelatedInfoFromDB(country, area, city,"RelatedPlacePlace", source), place);
-		    	assertEquals(getCityRelatedInfoFromDB(country, area, city,"RelatedPlaceDetail", source), details);
-		    	
-		    }
-		    
-		    public String getCityRelatedInfoFromDB(String country, String area, String city, String tagName, String source) {
+	}
 
-				String tagValue = null;
-				List<NameValuePair> nvPairs = new ArrayList<>();
-				nvPairs.add(new BasicNameValuePair("country", country));
-				nvPairs.add(new BasicNameValuePair("area", area));
-				nvPairs.add(new BasicNameValuePair("city", city));
-				nvPairs.add(new BasicNameValuePair("source", source));
-				try {
-					Thread.sleep(7000L);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+	public void clicksOnEditButton() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_places_place_edit_button_xpath"));
+	}
+
+	public void clicksOnCountryInPlacesForCity() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_xpath"));
+	}
+
+	public void selectsCountryInPlacesForCity(String countryPlaces) {
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_input_xpath"))
+				.sendKeys(countryPlaces);
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_input_xpath"))
+				.sendKeys(Keys.RETURN);
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void clicksOnAreaDropdownInPlacesForCity() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_xpath"));
+	}
+
+	public void selectsAreaInPlacesForCity(String areaPlaces) {
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_input_xpath"))
+				.sendKeys(areaPlaces);
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_input_xpath"))
+				.sendKeys(Keys.RETURN);
+	}
+
+	public void clicksOnCityDropdownInPlacesForCity() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_places_city_dropdown_xpath"));
+	}
+
+	public void selectsCityInPlacesForCountry(String cityPlaces) {
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_city_dropdown_input_xpath"))
+				.sendKeys(cityPlaces);
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_city_dropdown_input_xpath"))
+				.sendKeys(Keys.RETURN);
+	}
+
+	public void clicksOnGoButton() {
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_go_button_xpath")).click();
+	}
+
+	public void selectsPlacesDetailsFromDropdown(String PlaceDetails) {
+		try {
+			Thread.sleep(4000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		selectItemFromDropdownListByText(
+				CityIdentifiers.getObjectIdentifier("city_places_details_Select_dropdown_xpath"), PlaceDetails);
+	}
+
+	public void verifyPlaceInPlacesForCity(String place) {
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertEquals(place, getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_edit_xpath"))
+				.getAttribute("value"));
+	}
+
+	public void clicksOnDeleteCityPlacesType() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_places_delete_button_xpath"));
+	}
+
+	public void verifyDrawerClosed() {
+		try {
+			assertFalse(
+					getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_xpath"))
+							.isDisplayed());
+			assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_xpath"))
+					.isDisplayed());
+			assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_city_dropdown_xpath"))
+					.isDisplayed());
+		} catch (org.openqa.selenium.NoSuchElementException e) {
+
+		}
+	}
+
+	public void verifyGoButtonDisabled() {
+		try {
+			assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_go_button_xpath"))
+					.isEnabled());
+		} catch (org.openqa.selenium.NoSuchElementException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyEditButtonDisabled() {
+		try {
+			assertFalse(
+					getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_edit_button_xpath"))
+							.isEnabled());
+		}
+
+		catch (org.openqa.selenium.NoSuchElementException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyDeleteButtonDisabled() {
+		try {
+			assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_delete_button_xpath"))
+					.isEnabled());
+		}
+
+		catch (org.openqa.selenium.NoSuchElementException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void clickDetailsDropDown() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_places_details_Select_dropdown_xpath"));
+	}
+
+	public void verifyCityPlacesTypeList() {
+		List<WebElement> cityPlacesTypeList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_places_type_options_dropdown_xpath"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city places type");
+		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					cityPlacesTypeList.get(i).getText());
+		}
+	}
+
+	public void verifyCityPlacesDetailsList() {
+		List<WebElement> cityPlacesDetailsList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_places_details_options_dropdown_xpath"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city places detail");
+		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					cityPlacesDetailsList.get(i).getText());
+		}
+	}
+
+	public void verifyCountryListInPlacesForCity() {
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<WebElement> countryList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list_xpath"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "country list");
+
+		for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(),
+					countryList.get(i).getText().trim());
+		}
+	}
+
+	public void verifyAreaListInPlacesForCity(String countryPlacesCountry) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("name", countryPlacesCountry));
+			nvPairs.add(new BasicNameValuePair("source", "trusted"));
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list",
+					nvPairs);
+			if (getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list_xpath"))
+					.size() > 2) {
+				assertEquals(getDriver()
+						.findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list1_xpath"))
+						.getText(), "No Area");
+				assertEquals(getDriver()
+						.findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list2_xpath"))
+						.getText(), "Return All Cities");
+				for (int i = 0; i < document.getElementsByTagName("area").getLength(); i++) {
+					assertEquals(document.getElementsByTagName("area").item(i).getTextContent(),
+							getDriver()
+									.findElements(
+											CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list_xpath"))
+									.get(i + 2).getText());
 				}
-
-				Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-						"get city related place info", nvPairs);
-				if (document != null) {
-					tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
-							: getNodeValuesByTagName(document, tagName).get(0);
-				}
-				return tagValue;
+			} else {
+				assertEquals(getDriver()
+						.findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list1_xpath"))
+						.getText(), "No Area");
+				assertEquals(getDriver()
+						.findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list2_xpath"))
+						.getText(), "Return All Cities");
 			}
-		    
-		    /**
-			 * This method is used for performing the delete all related places rows row by
-			 * clicking on the delete row button
-			 * 
-			 */
-			public void deleteAllRelatedPlaces() {
-				attemptClick(CityIdentifiers.getObjectIdentifier("city_add_places_button_edit_id"));
-				List<WebElement> deleteRows = getDriver()
-						.findElements(CityIdentifiers.getObjectIdentifier("city_places_delete_button_xpath"));
 
-				for (int index = 0; index < deleteRows.size(); index++) {
-					WebElement currentInstance = getDriver()
-							.findElements(CityIdentifiers.getObjectIdentifier("city_places_delete_button_xpath"))
-							.get(0);
-					if (currentInstance != null) {
-						currentInstance.click();
-						verifyDeleteConfirmationModalRelatedPlace();
-						pressEnterButtonInDeleteConfirmationModalForCity();
-					}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-				}
+	}
 
+	public void verifyCityListInPlacesForCity() {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("name", countryPlacesArea));
+		nvPairs.add(new BasicNameValuePair("source", "trusted"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "city list",
+				nvPairs);
+		for (int i = 0; i < document.getElementsByTagName("city").getLength(); i++) {
+			assertEquals(document.getElementsByTagName("city").item(i).getTextContent(),
+					getDriver()
+							.findElements(CityIdentifiers.getObjectIdentifier("city_places_city_dropDown_list_xpath"))
+							.get(i).getText());
+		}
+	}
+
+	public void verifyRelatedPlacesInCityPage(String type, String place, String details) {
+		try {
+			Thread.sleep(6000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertEquals(type, getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_get_relatedplace_typevalue_xpath")).getText());
+		assertEquals(place, getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_get_relatedplace_placevalue_xpath")).getText());
+		assertEquals(details,
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_relatedplace_detailsvalue_xpath"))
+						.getText());
+	}
+
+	public void verifyCityRelatedValueFromZeusDB(String country, String area, String city, String type, String place,
+			String details, String source) {
+		assertEquals(getCityRelatedInfoFromDB(country, area, city, "RelatedPlaceType", source), type);
+		assertEquals(getCityRelatedInfoFromDB(country, area, city, "RelatedPlacePlace", source), place);
+		assertEquals(getCityRelatedInfoFromDB(country, area, city, "RelatedPlaceDetail", source), details);
+
+	}
+
+	public String getCityRelatedInfoFromDB(String country, String area, String city, String tagName, String source) {
+
+		String tagValue = null;
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("city", city));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(7000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get city related place info", nvPairs);
+		if (document != null) {
+			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+					: getNodeValuesByTagName(document, tagName).get(0);
+		}
+		return tagValue;
+	}
+
+	/**
+	 * This method is used for performing the delete all related places rows row
+	 * by clicking on the delete row button
+	 * 
+	 */
+	public void deleteAllRelatedPlaces() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_add_places_button_edit_id"));
+		List<WebElement> deleteRows = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_places_delete_button_xpath"));
+
+		for (int index = 0; index < deleteRows.size(); index++) {
+			WebElement currentInstance = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_places_delete_button_xpath")).get(0);
+			if (currentInstance != null) {
+				currentInstance.click();
+				verifyDeleteConfirmationModalRelatedPlace();
+				pressEnterButtonInDeleteConfirmationModalForCity();
 			}
-			
-			/**
-			 * This method is used to verify whether the delete confirmation table in related place  is
-			 * present upon clicking the delete row button
-			 * 
-			 */
-			public void verifyDeleteConfirmationModalRelatedPlace() {
-				assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver()
-						.findElement(CityIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_relatedplace_xpath")).getText());
-			}
-			
-			
-				public void verifyDeletedRelatedPlaces(String type, String place, String details) {
-			    	try{
-			    		Thread.sleep(6000);
-			    	}
-			    	catch(Exception e){
-			    		e.printStackTrace();
-			    	}
-			    	assertEquals("",getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_get_relatedplace_entirevalue_xpath")).getText());	    	
-				}
-				
-				 public void verifyDeletedCityRelatedValueFromZeusDB(String country,String area,String city,String source) {
-			    	assertEquals(getCityRelatedInfoFromDB(country, area, city,"RelatedPlaceType", source), "");
-			    	assertEquals(getCityRelatedInfoFromDB(country, area, city,"RelatedPlacePlace", source), "");
-			    	assertEquals(getCityRelatedInfoFromDB(country, area, city,"RelatedPlaceDetail", source), "");
-			    	
-			    }
-				 
-				 public void verifyEditButtonEnabled(){
-				    	try{
-				    	assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_edit_button_xpath")).isEnabled());
-				    }
-				    	
-				    catch(NoSuchElementException e)
-			    	{
-			    		e.printStackTrace();
-			    	}
-				  } 
-				 
-				 public void verifyDefaultValueCountry(){
-					 assertEquals("Choose a Country",getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_xpath")).getText());
-				 }
-				 
-				 public void verifyAreaDisabled(){
-				    	try{
-				    		
-				    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_input_xpath")).isDisplayed());
-				    }
-				    	
-				    catch(NoSuchElementException e)
-			    	{
-			    		e.printStackTrace();
-			    	}
-				  }
-				 
-				 public void verifyCityDisabled(){
-				    	try{
-				    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_input_xpath")).isDisplayed());
-				    }
-				    	
-				    catch(NoSuchElementException e)
-			    	{
-			    		e.printStackTrace();
-			    	}
-				  } 
-				 
-				 public void verifyDefaultCountryOptionNotSelectable(){
-					 List<WebElement> countryList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list_xpath"));
-					 for (int i = 0; i < countryList.size(); i++) {
-				           assertNotEquals(countryList.get(i).getText(),"Choose a Country");
-				        } 
-				 }
-				    	
-				 public void verifyDefaultValueArea(){
-					 assertEquals("Choose an Area",getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_xpath")).getText());
-				 }
-				 
-				 public void verifyDefaultValueCity(){
-					 assertEquals("Choose a City",getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_city_dropdown_xpath")).getText());
-				 }
-				 
-				 public void verifyDefaultAreaOptionNotSelectable(){
-					 List<WebElement> AreaList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list_xpath"));
-					 for (int i = 0; i < AreaList.size(); i++) {
-				           assertNotEquals(AreaList.get(i).getText(),"Choose an Area");
-				           
-				        } 
-				 }
-				 
-				 public void verifyDefaultCityOptionNotSelectable(){
-					 List<WebElement> CityList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_city_dropDown_list_xpath"));
-					 for (int i = 0; i < CityList.size(); i++) {
-				           assertNotEquals(CityList.get(i).getText(),"Choose a City");
-				           
-				        } 
-				 }
-				 
-				 public void verifyGoButtonEnabled(){
-				    	try{
-				    	assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_go_button_xpath")).isEnabled());
-				    }
-				    	catch(org.openqa.selenium.NoSuchElementException e)
-				    	{
-				    		e.printStackTrace();
-				    	}
-				    }
 
+		}
+
+	}
+
+	/**
+	 * This method is used to verify whether the delete confirmation table in
+	 * related place is present upon clicking the delete row button
+	 * 
+	 */
+	public void verifyDeleteConfirmationModalRelatedPlace() {
+		assertEquals("Please confirm - would you like to delete this row? NO YES",
+				getDriver()
+						.findElement(
+								CityIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_relatedplace_xpath"))
+						.getText());
+	}
+
+	public void verifyDeletedRelatedPlaces(String type, String place, String details) {
+		try {
+			Thread.sleep(6000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertEquals("", getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_get_relatedplace_entirevalue_xpath")).getText());
+	}
+
+	public void verifyDeletedCityRelatedValueFromZeusDB(String country, String area, String city, String source) {
+		assertEquals(getCityRelatedInfoFromDB(country, area, city, "RelatedPlaceType", source), "");
+		assertEquals(getCityRelatedInfoFromDB(country, area, city, "RelatedPlacePlace", source), "");
+		assertEquals(getCityRelatedInfoFromDB(country, area, city, "RelatedPlaceDetail", source), "");
+
+	}
+
+	public void verifyEditButtonEnabled() {
+		try {
+			assertTrue(
+					getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_edit_button_xpath"))
+							.isEnabled());
+		}
+
+		catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyDefaultValueCountry() {
+		assertEquals("Choose a Country", getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_xpath")).getText());
+	}
+
+	public void verifyAreaDisabled() {
+		try {
+
+			assertFalse(getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_input_xpath"))
+					.isDisplayed());
+		}
+
+		catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyCityDisabled() {
+		try {
+			assertFalse(getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_input_xpath"))
+					.isDisplayed());
+		}
+
+		catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyDefaultCountryOptionNotSelectable() {
+		List<WebElement> countryList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list_xpath"));
+		for (int i = 0; i < countryList.size(); i++) {
+			assertNotEquals(countryList.get(i).getText(), "Choose a Country");
+		}
+	}
+
+	public void verifyDefaultValueArea() {
+		assertEquals("Choose an Area", getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_xpath")).getText());
+	}
+
+	public void verifyDefaultValueCity() {
+		assertEquals("Choose a City", getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_places_city_dropdown_xpath")).getText());
+	}
+
+	public void verifyDefaultAreaOptionNotSelectable() {
+		List<WebElement> AreaList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list_xpath"));
+		for (int i = 0; i < AreaList.size(); i++) {
+			assertNotEquals(AreaList.get(i).getText(), "Choose an Area");
+
+		}
+	}
+
+	public void verifyDefaultCityOptionNotSelectable() {
+		List<WebElement> CityList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_places_city_dropDown_list_xpath"));
+		for (int i = 0; i < CityList.size(); i++) {
+			assertNotEquals(CityList.get(i).getText(), "Choose a City");
+
+		}
+	}
+
+	public void verifyGoButtonEnabled() {
+		try {
+			assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_go_button_xpath"))
+					.isEnabled());
+		} catch (org.openqa.selenium.NoSuchElementException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public String getPageUrl() {
