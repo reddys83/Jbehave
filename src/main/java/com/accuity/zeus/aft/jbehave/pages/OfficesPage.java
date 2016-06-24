@@ -276,5 +276,14 @@ public class OfficesPage extends AbstractPage {
             e.printStackTrace();
         }
     }
+    public EditOfficePage createEditOfficePage() {
+        EditOfficePage xx=null;
+        try {
+            xx= new EditOfficePage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+        }
+        catch(Exception e)
+        {e.printStackTrace();}
+        return xx;
+    }
 
 }
