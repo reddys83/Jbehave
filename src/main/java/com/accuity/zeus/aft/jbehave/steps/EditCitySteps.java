@@ -379,7 +379,7 @@ public class EditCitySteps extends AbstractSteps {
 	    	getEditCityPage().verifyDrawerClosed();
 	    }
 	    
-	    @Then("the user should see 'Go' button disabled until value for $value is selected")
+	   @Then("the user should see 'Go' button disabled until value for $value is selected")
 	    public void verifyGoButtonDisabled() {
 	    	getEditCityPage().verifyGoButtonDisabled();
 	    }

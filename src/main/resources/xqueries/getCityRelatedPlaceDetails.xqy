@@ -6,7 +6,7 @@ let $city := xs:string(xdmp:get-request-field("city"))
 let $source := xs:string(xdmp:get-request-field("source")) 
 
 let $country := /country[@source = 'trusted'][summary/names/name[type = "Country Name"]/value = $country]
-let $area := /area[@source = 'trusted'][summary/names/name[type = "Full Name"]/value = $area][within/place/link/@href=$country/@resource]
+let $area := /city[@source = 'trusted'][summary/names/name[type = "Full Name"]/value = $area][within/place/link/@href=$country/@resource]
 let $city := /city[@source = $source][summary/names/name[type = "Full Name"]/value = $city][within/place/link/@href=$area/@resource] 
 
 let $cityRelatedPlaceType := ($city/relatedPlaces/relation/type/text())
