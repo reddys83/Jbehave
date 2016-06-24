@@ -30,6 +30,7 @@ let $country := /country[@source = 'trusted'][summary/names/name[type = "Country
 let $area := /area[@source = 'trusted'][summary/names/name[type = "Full Name"]/value = $area][within/place/link/@href=$country/@resource]
 let $city := /city[@source = $source][summary/names/name[type = "Full Name"]/value = $city][within/place/link/@href=$area/@resource] 
 
+
 (: Taking identifier List :)
 let $cityIdentifierList := for $x in ($city/summary/identifiers/identifier)
   let $cityIdentifierType := $x/type/text()
@@ -57,12 +58,29 @@ let $cityadditionalinfo := ($city/summary/additionalInfos/additionalInfo/text())
 let $cityPopulation := ($city/summary/demographics/metric/value/text())
 let $cityAddressFlag := ($city/summary/useInAddress/text())
 
+let $cityCreditRating := for $x in ($city/creditRatings/rating)
+let $cityCreditAgencyName := $x/agencyName/text()
+let $cityCreditType := $x/type/text()
+let $cityCreditValue := $x/value/text()  
+let $cityCreditDateApplied := $x/dateApplied/text()  
+let $cityCreditDateConfirmed := $x/dateConfirmed/text() 
+return
+      <creditRating>       
+        <creditRatingAgencyName>{$cityCreditAgencyName}</creditRatingAgencyName>
+        <creditRatingType>{$cityCreditType}</creditRatingType>
+        <creditRatingValue>{$cityCreditValue}</creditRatingValue>
+        <creditDateApplied>{$cityCreditDateApplied}</creditDateApplied>
+        <creditDateConfirmed>{$cityCreditDateConfirmed}</creditDateConfirmed>
+     </creditRating> 
+
+
 return
   <city>
-  <status>{$cityStatus}</status>
+  <status>{$cityStatus}</status>  
   <identifiers> {$cityIdentifierList} </identifiers> 
   <dateFields>{$DateFields}</dateFields>
   <additionalinfo>{$cityadditionalinfo}</additionalinfo>
   <population>{$cityPopulation}</population>
   <addressFlag>{$cityAddressFlag}</addressFlag>
+  <creditRatings>{$cityCreditRating}</creditRatings>
   </city>   
