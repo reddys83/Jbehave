@@ -546,7 +546,7 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyNamesDeleteConfirmationModal();
 	}
 	
-	@Then("the user checks whether the newly added row does not contain already selected name type")
+	@Then("the user checks whether the newly added row does not contain <newNameType> name type")
 	public void verifyCityNameTypeInNewlyAddedRow(@Named("newNameType") String newNameType) {
 		getEditCityPage().verifyCityNameTypeInNewlyAddedRow(newNameType);
 	}

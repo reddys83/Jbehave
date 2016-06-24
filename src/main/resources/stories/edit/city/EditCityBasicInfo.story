@@ -1095,7 +1095,6 @@ And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
 When the user clicks on the add new name button in the basic info city page
-And the user clicks on the city name type drop-down
 Then the user should see the city name types from lookup PLACE_NAME_TYPE
 
 Examples:
@@ -1133,7 +1132,6 @@ Examples:
 |Belgium|Limburg|Bree|Panj Shair|
 
 Scenario: User adds new name type and value, checks the confirmation summary modal and saves the data to DB
-Meta: sureshtest1
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -1148,7 +1146,6 @@ When the user clicks on the city update link
 Then the user should see city name value same as in trusted document
 When the user gets the document with get document id for city with the <city> from the database
 And the user clicks on the add new name button in the basic info city page
-And the user clicks on the city name type drop-down
 And the user enters name type as <newNameType> in the basic info city page
 And the user enters name value as <newNameValue> in the basic info city page
 And the user clicks on the save button in city page
@@ -1180,10 +1177,9 @@ And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
 When the user clicks on the add new name button in the basic info city page
-And the user clicks on the city name type drop-down
 And the user enters name type as <newNameType> in the basic info city page
 And the user clicks on the add new name button in the basic info city page
-Then the user checks whether the newly added row does not contain already selected name type
+Then the user checks whether the newly added row does not contain <newNameType> name type
 
 Examples:
 |country|area|city|newNameType|
@@ -1268,7 +1264,6 @@ And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
 And the user gets the document with get document id for city with the <city> from the database
 When the user clicks on the add new name button in the basic info city page
-And the user clicks on the city name type drop-down
 And the user enters name type as <newNameType> in the basic info city page
 And the user enters name value as <newNameValue> in the basic info city page
 And the user clicks on the save button in city page
@@ -1303,7 +1298,6 @@ And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
 And the user gets the document with get document id for city with the <city> from the database
 When the user clicks on the add new name button in the basic info city page
-And the user clicks on the city name type drop-down
 And the user enters name type as <newNameType> in the basic info city page
 And the user enters name value as <newNameValue> in the basic info city page
 And the user clicks on the save button in city page
@@ -1340,7 +1334,6 @@ And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
 And the user gets the document with get document id for city with the <city> from the database
 When the user clicks on the add new name button in the basic info city page
-And the user clicks on the city name type drop-down
 And the user enters name type as <newNameType> in the basic info city page
 And the user enters name value as <newNameValue> in the basic info city page
 And the user clicks on the save button in city page
