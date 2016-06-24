@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
 
+import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.jbehave.steps.AbstractSteps;
 import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.jbehave.core.annotations.Named;
@@ -742,5 +743,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyRequiredErrorMsgForOwnershipSummary(reqMsg,rowIdentifier);
     }
 
+    @When("the user deletes all the existing ownership summary rows")
+    public void deleteAllLegalEntityRows(){getEditLegalEntityPage().deleteAllLegalEntityRows(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_ownership_summary_delete_button"));}
 
 }

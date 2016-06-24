@@ -121,6 +121,7 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_ownershipsummaries_add_button_id", By.id("add-ownershipSummaries"));
         hmap.put("legalEntity_Edit_OwnershipSummary_Table",By.xpath("//*[@id='additionalOwnershipSummaries']//tr[@data-row_id='ownershipSummaries']"));
         hmap.put("legalEntity_first_row_existing_ownership_summary_delete_button",By.xpath(".//*[@id='additionalOwnershipSummaries']//tr[1]/td/button"));
+        hmap.put("legalEntity_ownership_summary_delete_button",By.xpath(".//*[@id='additionalOwnershipSummaries']//tr/td/button"));
         hmap.put("legalEntity_first_row_new_ownership_summary_delete_button",By.xpath(".//*[@id='additionalOwnershipSummaries']//tr[@class='new']/td/button"));
         hmap.put("legalEntity_ownership_summary_type_Required_error_message_xpath", By.xpath(".//*[@class='notification error'][@data-error_id='ownershipSummaryTypeError']"));
         hmap.put("legalEntity_ownership_summary_value_Required_error_message_xpath", By.xpath(".//*[@class='notification error'][@data-error_id='ownershipSummaryValueError']"));

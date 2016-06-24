@@ -163,3 +163,27 @@ Examples:
 |entity|searchBy|fid|ownershipType|value|
 |1717|FID|1717|additional||
 
+Scenario: Verify the changes are recognized when deleted all ownership summary rows and the changes are saved in Zeus document
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the legalEntity update link
+And the user clicks on the legal entity ownership link in the navigation bar
+And the user deletes all the existing ownership summary rows
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Ownership Summaries|
+When the user clicks on the confirm button
+Then the user should not see ownership summary values for fid <fid> in zeus document as:
+|ownershipType|value|
+|replacement|Co-operative Banking Society with over 103,500 shareholders|
+Then the user reverts the changes to the document
+Examples:
+|entity|searchBy|fid|
+|1717|FID|1717|

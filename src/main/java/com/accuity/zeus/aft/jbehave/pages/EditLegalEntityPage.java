@@ -1344,6 +1344,14 @@ public class EditLegalEntityPage extends AbstractPage {
     public void verifyRequiredErrorMsgForOwnershipSummary(String reqMsg,String rowIdentifier){
         assertEquals(reqMsg,getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).getText());
     }
+
+    public void deleteAllLegalEntityRows(By by) {
+        int numberOfRows = getDriver().findElements(by).size();
+        for (int buttonCount = 0; buttonCount < numberOfRows; buttonCount++) {
+            getDriver().findElements(by).get(0).click();
+            attemptClick(LegalEntityIdentifiers.getObjectIdentifier("delete_confirmation_yes_button_id"));
+        }
+    }
     @Override
     public String getPageUrl() {
         return null;
