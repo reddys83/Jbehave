@@ -216,11 +216,6 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyErrorMessageForRequiredCityIdentifierStatus();
 	}
 
-	@Then("the user should see the Enter up to 50 valid characters error message for the identifier value field in the city basic info page")
-	public void verifyErrorMessageForLongCityIdentifierValue() {
-		getEditCityPage().verifyErrorMessageForRequiredCityIdentifierValue();
-	}
-
 	@When("the user clicks on the No button to cancel the deletion of row")
 	public void clickNoButtonInDeleteConfirmationModalForCity() {
 		getEditCityPage().clickNoButtonInDeleteConfirmationModalForCity();
@@ -424,6 +419,11 @@ public class EditCitySteps extends AbstractSteps {
 			@Named("city") String city, @Named("source") String source) {
 		getEditCityPage().verifyCityAddressFlagFromZeusDB(country, area, city, "addressFlag", source);
 
+	}
+	
+	@Then("the user should see maximum length of identifier value is limited to $maxLength")
+	public void verifyMaxLengthInCityIdentifierValue(@Named("maxLength") String maxLength) {
+		getEditCityPage().verifyMaxLengthInCityIdentifierValue(maxLength);
 	}
 
 }
