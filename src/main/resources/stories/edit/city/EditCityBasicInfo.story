@@ -5,506 +5,1078 @@ In order to view and edit the city page
 As a user
 I want to cover the requirements mentioned in
 
-Scenario: Verify whether User is able to see error message "Required" when input values are blank for 'type' field
+JIRA ID - ZEUS-962 - User can view City status and can edit the city status
+JIRA ID - ZEUS-969 -User can edit City's Add info
+JIRA ID - ZEUS-972 -User can edit City's Identifiers
+JIRA ID - ZEUS-968 - User can edit City's Population
+JIRA ID - ZEUS-964 - User can edit City's END Date
+JIRA ID - ZEUS-980 - User can edit City's Use In Address Flag
+JIRA ID - ZEUS-963 - User can edit City's Began Date
+
+Scenario: Verify City Status dropdown values from lookup Status
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
+And the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
-When the user clicks on the city places link in the navigation bar
-And the user clicks on the update link
-And the user clicks on the add button for adding new places for city page
-And the user clicks on the save button
-Then the user should see the error message required for type in places for city
-Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+And the user clicks on the Status drop-down in the basicinfo city page
+Then the user should see the status values from City Status dropdown
 
 Examples:
 |country|area|city|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|
+|USA|Georgia|Adel|
 
-Scenario: Verify whether User is able to see error message "Required" when input values are blank for 'place' field
+Scenario: Verify that the City Status drop-down list should highlight the values that contain characters input by user
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
+And the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
-When the user clicks on the city places link in the navigation bar
-And the user clicks on the update link
-And the user clicks on the add button for adding new places for city page
-And the user clicks on the save button
-Then the user should see the error message required for place in places for city
-Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+And the user starts typing the name of a status as i in the City Status drop-down
+Then the user should see the selected status in the City Status drop-down as Inactive
+When the user starts typing the name of a status as a in the City Status drop-down
+Then the user should see the selected status in the City Status drop-down as Active
+When the user starts typing the name of a status as p in the City Status drop-down
+Then the user should see the selected status in the City Status drop-down as Pending
+When the user starts typing the name of a status as x in the City Status drop-down
+Then the user should see the selected status in the City Status drop-down as Pending
 
 Examples:
 |country|area|city|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|
+|USA|Georgia|Adel|
 
+Scenario: User will see summary of changes made in confirmation modal when update the City status
 
-
-Scenario: Verify the list of type dropdown are from CITY_RELATED_PLACE_TYPE and details dropdown from CITY_RELATED_PLACE_SUBTYPE
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
-When the user clicks on the city places link in the navigation bar
-And the user clicks on the update link
-And the user clicks on the add button for adding new places for city page
-When the user clicks on new city places type drop-down for city
-Then the user should see the values for type dropdown from lookup CITY_RELATED_PLACE_TYPE
-When the user clicks on new city places details drop-down for city
-Then the user should see the values for details dropdown from lookup CITY_RELATED_PLACE_SUBTYPE
-
-Examples:
-|country|area|city|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|
-
-Scenario: 
-a)Verify whether user is able to add a City Related place  successfully in City Web page
-b)Verify whether user is able to view the added related place in Zeus Document
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-And the user clicks on the choose a city option
-And the user enters the city <city> in the type-ahead box
-When the user clicks on the city places link in the navigation bar
-And the user clicks on the update link
-When the user gets the document with get document id for city with the <city> from the database
-When the user deletes the existing related places rows
-And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
-And the user selects type value as <PlaceType> in the places for city
-When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
-And the user clicks on go button in places for city
-And the user selects details value as <PlaceDetails> in the places for city
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Related Places|
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user selects value as <status> from Status drop-down in the city basicinfo page
+And the user clicks on the save button in city page
 When the user clicks on the confirm button
-Then the user should see the successful update message at top of the page
-Then the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in city related place
-Then the user should see the city related place date <PlaceType> <cityPlaces> <PlaceDetails> value in zeus document
-Then the user reverts the changes to the document
-
-
-Examples:
-|country|area|city|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Twin City|Afghanistan|Badakshan|Badakshan|Capital City|
-
-Scenario: 
-a)Verify whether user is able to update an existing  City Related place  successfully in City Web page
-b)Verify whether user is able to view the updated related place in Zeus Document
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-And the user clicks on the choose a city option
-And the user enters the city <city> in the type-ahead box
-When the user clicks on the city places link in the navigation bar
-And the user clicks on the update link
-When the user gets the document with get document id for city with the <city> from the database
-When the user deletes the existing related places rows
-And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
-And the user selects type value as <PlaceType> in the places for city
-When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
-And the user clicks on go button in places for city
-And the user selects details value as <PlaceDetails> in the places for city
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Related Places|
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the page
-Then the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in city related place
-Then the user should see the city related place date <PlaceType> <cityPlaces> <PlaceDetails> value in zeus document
-Then the user reverts the changes to the document
-
-
-Examples:
-|country|area|city|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Twin City|Afghanistan|Badakshan|Badakshan|Capital City|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Capital City|Angola|Bengo|Caxito|Judicial Capital|
-
-Scenario: 
-a)Verify whether user is able to delete an existing  City Related place successfully in City Web page
-b)Verify whether user is not able to view the deleted related place in Zeus Document
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-And the user clicks on the choose a city option
-And the user enters the city <city> in the type-ahead box
-When the user clicks on the city places link in the navigation bar
-And the user clicks on the update link
-When the user gets the document with get document id for city with the <city> from the database
-When the user deletes the existing related places rows
-And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
-And the user selects type value as <PlaceType> in the places for city
-When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
-And the user clicks on go button in places for city
-And the user selects details value as <PlaceDetails> in the places for city
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the page
-Then the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in city related place
-When the user clicks on the update link
-When the user clicks on delete city places type
-Then the user should see the delete row confirmation modal in the city page
-When the user clicks on the Yes button to cancel the deletion of row
+When the user clicks on the city update link
+When the user starts typing the name of a status as i in the City Status drop-down
+Then the user should see the selected status in the City Status drop-down as inactive
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
 |Summary|
-|Related Places|
+|Basic Info|
+When the user clicks on the return button
+Then the user should return to edit city page mode
+
+Examples:
+|country|area|city|status|
+|USA|Georgia|Adel|active|
+
+
+Scenario: Edit and Save City's Status value in the City Basic Info page
+a) Veriy that the default value of status during edit matches with the status of the trusted document
+b) Upate the status with a new value and verify it is updated in zeus document
+c) Upate the status with the same existing value and verify the existing value in zeus document
+d) verify that the status can be changed to all 3 values active,inactive and pending
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+Then the user should see the city status value same as in trusted document
+When the user gets the document with get document id for city with the <city> from the database
+When the user selects value as <status> from Status drop-down in the city basicinfo page
+And the user clicks on the save button in city page
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the city <status> value as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|status|
+|USA|Georgia|Adel|active|
+|USA|Georgia|Adel|pending|
+|USA|Georgia|Adel|inactive|
+
+
+Scenario: No changes should happen to City's Status value in the City Basic Info page when user selects save button with out doing any changes 
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+Then the user should see the city status value same as in trusted document
+When the user clicks on the save button in city page
+Then the user should see the save confirmation modal
+Then the user should not see the <ConfirmationSummary> changes in confirmation modal
+When the user clicks on the confirm button
+Then the user should see the city <status> value as in zeus document
+
+Examples:
+|country|area|city|status|ConfirmationSummary|
+|USA|Georgia|Adel|active|Summary|
+
+Scenario: The user can edit the value in the Add Info field and save it and see it on the front end(Front End Validation)
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+And the user enters the <addInfoText> in the add info text area
+When the user clicks on the save button in city page
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should be able to verify the values are entered in the add info field
+Then the user reverts the changes to the document
+
+
+Examples:
+|country|area|city|addInfoText|
+|Afghanistan|Badakshan|Panj Shair|Sample text|
+
+Scenario: To update the City's 'Basic Info' by entering a value for 'Add Info' that is different from the current value(Back End validation)
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+Then the user should see the addInfoText value same as in trusted document
+When the user enters the <addInfoText> in the add info text area
+When the user clicks on the save button in city page
+And the user clicks on the confirm button
+Then the user should see the city addinfo value <addInfoText> as in zeus document
+
+
+Examples:
+|country|area|city|addInfoText|
+|Afghanistan|Badakshan|Panj Shair|This is a different text|
+
+Scenario: To view that there is no change in value when the user has entered a value for 'Add Info' that is no different to the current value(Front End Validation)
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user enters the <addInfoText> in the add info text area
+When the user clicks on the save button in city page
+Then the user should see no summary changes in the city save confirmation modal
+
+Examples:
+|country|area|city|addInfoText|Summary|
+|Afghanistan|Badakshan|Panj Shair|This is a different text|Basic Info|
+
+Scenario: To view whether the text entered in the 'Add Info' field is not beyond 500 unicode characters after saving the page
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user enters values which is beyond 500 unicode characters in the add info field
+When the user clicks on the save button in city page
+And the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should be able to view that only 500 unicode characters are saved
+Then the user should be able to verify the maximum values are entered in the add info field
+
+
+Examples:
+|country|area|city|
+|Afghanistan|Badakshan|Panj Shair|
+
+
+Scenario: User can edit country identifiers - Verify country Identifier types are same as from lookup THIRD_PARTY_IDENTIFIER_GEO
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user clicks on the add new identifier button in the basic info city page
+And the user clicks on the city Identifier type drop-down
+Then the user should see the city identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO
+When the user clicks on the city Identifier status drop-down
+Then the user should see the city identifier status from lookup STATUS
+
+Examples:
+|country|area|city|
+|Chad|No Area|Doba|
+
+
+Scenario:User can edit city identifiers- Verify if User can add New City identifiers-Verify that all fields- "Type","Value" and "Status" are updated successfully
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user deletes the existing identifier rows
+When the user clicks on the add new identifier button in the basic info city page
+When the user enters identifier type as <identifierType> in the basic info city page
+When the user enters identifier value as <identifierValue> in the basic info city page
+When the user enters identifier status as <identifierStatus> in the basic info city page
+When the user clicks on the add new identifier button in the basic info city page
+When the user enters identifier type as <identifierType2> in the basic info city page
+When the user enters identifier value as <identifierValue2> in the basic info city page
+When the user enters identifier status as <identifierStatus2> in the basic info city page
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should see the identifier <value> as in zeus document $identifierType $identifierValue $identifierStatus and $identifierType2 $identifierValue2 $identifierStatus2
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|identifierType|identifierValue|identifierStatus|identifierType2|identifierValue2|identifierStatus2|
+|USA|New York|Brooklyn|Numeric ISO Code|H4Testing|Active|FIPS Place Code|H4Testing|Pending|
+|USA|New York|Brooklyn|FIPS Place Code|H4Testing|Pending|Numeric ISO Code|H4Testing|Inactive|
+|USA|New York|Brooklyn|FIPS Place Code|H4Testing|Pending|Numeric ISO Code|H4Testing|Active|
+
+
+Scenario: Verifying row can be deleted by click on the yes button in delete confirmation section.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user deletes the existing identifier rows
+When the user clicks on the add new identifier button in the basic info city page
+When the user clicks on the delete identifier row button in the basic info city page
+Then the user should see delete row confirmation modal in the city page
+When the user clicks on the Yes button to cancel the deletion of row
+Then the user should not see the newly added identifier row in the basic info city page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button in city page
+
+Examples:
+|country|area|city|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|
+
+Scenario: User can edit city identifiers - Verify whether the text entered in the Identifier 'Value' field is not beyond 50 unicode characters.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+When the user clicks on the city update link
+When the user clicks on the add new identifier button in the basic info city page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
 When the user clicks on the confirm button in city page
 Then the user should see the successful update message at top of the page
-Then the user should not see <PlaceType> <cityPlaces> <PlaceDetails> updated in city related place
-Then the user should not see the city related place value in zeus document
-Then the user reverts the changes to the document
+When the user clicks on the city update link
+When the user clicks on the add new identifier button in the basic info city page
+When the user enters identifier type as <identifierType> in the basic info city page
+When the user enters an incorrect identifier value as <identifierValueIncorrect> in the basic info city page
+Then the user should see maximum length of identifier value is limited to 50
+When the user enters identifier status as <identifierStatus> in the basic info city page
+When the user clicks on the save button
+When the user clicks on the confirm button in city page
+Then the user should see the successful update message at top of the page
+
 
 Examples:
-|country|area|city|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Twin City|Angola|Bengo|Caxito|Judicial Capital|
+|country|area|city|identifierType|identifierValueIncorrect|identifierStatus|
+|Albania|Fier|Patos|Numeric ISO Code|aksjuilrw1aksjuilrw1aksjuilrw1aksjuilrw1aksju%)~12y1|Active|
+
+Scenario: User can edit city identifiers - Verify that an error message 'Required' is displayed when user left identifier Type blank and enters value in identifier 'Value' and 'Status'
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user deletes the existing identifier rows
+When the user clicks on the add new identifier button in the basic info city page
+When the user enters identifier type as <identifierType> in the basic info city page
+When the user enters identifier value as <identifierValue> in the basic info city page
+When the user enters identifier status as <identifierStatus> in the basic info city page
+When the user clicks on the save button
+Then the user should see the error message for the required identifier type field in the city basic info page
+
+Examples:
+|country|area|city|identifierType|identifierValue|identifierStatus|
+|USA|New York|Brooklyn||H4Testing|Active|
+
+Scenario: User can edit city identifiers - Verify that an error message 'Enter up to 50 valid characters.' is displayed when user left identifier value blank and enters value in identifier 'Type' and 'Status'
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user deletes the existing identifier rows
+When the user clicks on the add new identifier button in the basic info city page
+When the user enters identifier type as <identifierType> in the basic info city page
+When the user enters identifier value as <identifierValue> in the basic info city page
+When the user enters identifier status as <identifierStatus> in the basic info city page
+When the user clicks on the save button
+Then the user should see the error message for the required identifier value field in the city basic info page
+
+Examples:
+|country|area|city|identifierType|identifierValue|identifierStatus|
+|USA|New York|Brooklyn|Numeric ISO Code||Active|
+
+Scenario: User can edit city identifiers - Verify that an error message 'Required' is displayed when user left identifier status blank and enters value in identifier 'Type' and 'Value'
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user deletes the existing identifier rows
+When the user clicks on the add new identifier button in the basic info city page
+When the user enters identifier type as <identifierType> in the basic info city page
+When the user enters identifier value as <identifierValue> in the basic info city page
+When the user enters identifier status as <identifierStatus> in the basic info city page
+When the user clicks on the save button
+Then the user should see the error message for the required identifier status field in the city basic info page
+
+Examples:
+|country|area|city|identifierType|identifierValue|identifierStatus|
+|USA|New York|Brooklyn|Numeric ISO Code|H4Testing||
 
 
-Scenario: 
-a)Verify whether user is able to update an existing  City Related place (no different to the current value) with same values successfully
-b)Verify whether user should get no changes in confirmation modal
+Scenario: User can edit city identifiers- Verify if User can delete identifiers( "Type","Value" and "Status") by clicking on 'Yes' , then after saving it should be removed.
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
 When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
+And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
-When the user clicks on the city places link in the navigation bar
-And the user clicks on the update link
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user clicks on the add new identifier button in the basic info city page
+When the user clicks on the delete identifier row button in the basic info city page
+Then the user should see delete row confirmation modal in the city page
+When the user clicks on the Yes button to cancel the deletion of row
+Then the user should not see the newly added identifier row in the basic info city page
+
+Examples:
+|country|area|city|
+|Chad|No Area|Doba|
+
+Scenario: User can edit city identifiers- Verify if User can delete identifiers( "Type","Value" and "Status") by clicking on 'cancel', then after saving the identifier should not get deleted.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user clicks on the add new identifier button in the basic info city page
+When the user clicks on the delete identifier row button in the basic info city page
+Then the user should see delete row confirmation modal in the city page
+When the user clicks on the No button to cancel the deletion of row
+Then the user should see the newly added identifier row in the basic info city page
+
+Examples:
+|country|area|city|
+|Chad|No Area|Doba|
+
+
+
+Scenario: User is updating City's 'Basic Info' by entering a value for 'Population' and verifies the confirmation dialog is having summary Basic Info
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
 When the user gets the document with get document id for city with the <city> from the database
-When the user deletes the existing related places rows
-And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
-And the user selects type value as <PlaceType> in the places for city
-When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
-And the user clicks on go button in places for city
-And the user selects details value as <PlaceDetails> in the places for city
-And the user clicks on the save button
-Then the user should see the save confirmation modal
+When the user enters the <value> in the population field
+When the user clicks on the save button in city page
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
-Then the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in city related place
-When the user clicks on the update link
-And the user selects type value as <PlaceType> in the places for city
-When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
-And the user clicks on go button in places for city
-And the user selects details value as <PlaceDetails> in the places for city
-And the user clicks on the save button
+Then the user should see the population <value> as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|value|
+|USA|Georgia|Adel|12345|
+|USA|Georgia|Adel|24513450000000000000000000000000000000000000000000|
+
+Scenario: User is updating a City's Basic Info and has entered a same value for 'Population', verifies the confirmation dialog is not having summary info and Zeus Doc having same value
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user enters the <value> in the population field
+When the user clicks on the save button in city page
+And the user clicks on the confirm button
+When the user clicks on the city update link
+When the user enters the <value> in the population field
+When the user clicks on the save button in city page
 Then the user should not see the <ConfirmationSummary> changes in confirmation modal
 When the user clicks on the confirm button
-Then the user should see the successful update message at top of the page
-Then the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in city related place
-Then the user reverts the changes to the document
-
-
-Examples:
-|country|area|city|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|ConfirmationSummary|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Capital City|Angola|Bengo|Caxito|Legislative Capital|Summary|
-
-Scenario: Verify whether the list in country, Area and city dropdown is displaying as expected
-
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-And the user clicks on the choose a city option
-And the user enters the city <city> in the type-ahead box
-When the user clicks on the city places link in the navigation bar
-And the user clicks on the update link
-When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-Then the user should see the list of all existing area for the selected country by full name in places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-Then the user should see the list of all existing city for the selected area by full name in places for city
-
-Examples:
-|country|area|city|countryPlaces|areaPlaces|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Algeria|Blida|
-
-Scenario: User is verifying whether all expected Fields are disabled/Enabled at Related Place section
-
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-And the user clicks on the choose a city option
-And the user enters the city <city> in the type-ahead box
-When the user clicks on the city places link in the navigation bar
-And the user clicks on the update link
-When the user deletes the existing related places rows
-And the user clicks on the add button for adding new places for city page
-When the user clicks on edit button in places for city
-Then the user should see the default value for country is Choose a country
-Then the user should see the area dropdown is disabled
-Then the user should see the city dropdown is disabled
-Then the user should see Edit button for place field is disabled
-Then the user should see the delete option is  disabled until drawer closes
-When the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on the country drop down in the places for city
-Then the user should see Choose a country option is not selectable
-Then the user should see the default value for area is Choose an area
-When the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-When the user clicks on area drop down in the places for city
-Then the user should see Choose an area option is not selectable
-Then the user should see the default value for area is Choose a city
-When the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
-When the user clicks on city drop down in the places for city
-Then the user should see Choose a City option is not selectable
-When the user clicks on go button in places for city
-Then the user should see that drawer is closed
-Then the user should see that Edit button for place field is enabled
-Examples:
-|country|area|city|PlaceType|countryPlaces|areaPlaces|cityPlaces|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Capital City|Algeria|Blida|Bouinan|
-
-Scenario: Verify whether User is able to see Go Button is disabled when
-User should see Go Button is disabled when
-a)Country not selected ("Choose a Country")
-b)Country selected. Area selected and = "Return All Cities" or "No area". City not selected ("Choose a City")
-
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-And the user clicks on the choose a city option
-And the user enters the city <city> in the type-ahead box
-When the user clicks on the city places link in the navigation bar
-And the user clicks on the update link
-When the user deletes the existing related places rows
-And the user clicks on the add button for adding new places for city page
-When the user clicks on edit button in places for city
-Then the user should see 'Go' button disabled until value for City is selected
-When the user clicks on the country drop down in the places for city
-And the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-And the user selects area <areaPlaces> dropdown in places for city
-Then the user should see 'Go' button disabled until value for City is selected
-
-Examples:
-|country|area|city|countryPlaces|areaPlaces|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Algeria|No Area|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Algeria|Return All Cities|
-
-Scenario: Verify whether User is able to see Go Button is disabled when (while adding a new related place)
-User should see Go Button is Enabled when
-a)Country selected. Area not selected ("Choose an Area") & Country should be updated in place
-b)Country selected. Area selected and <> "Return All Areas" or "NO area". City not selected ("Choose a City") & Area should be updated in place
-
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-And the user clicks on the choose a city option
-And the user enters the city <city> in the type-ahead box
-When the user clicks on the city places link in the navigation bar
-And the user clicks on the update link
-When the user deletes the existing related places rows
-And the user clicks on the add button for adding new places for city page
-When the user clicks on edit button in places for city
-When the user clicks on the country drop down in the places for city
-And the user selects the country <countryPlaces> in the places for city
-Then the user should see Go button enabled
-When the user clicks on go button in places for city
-Then the user should see place as Tajikistan in places for city
-When the user clicks on edit button in places for city
-When the user clicks on the country drop down in the places for city
-And the user selects the country <countryPlaces> in the places for city
-When the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-Then the user should see Go button enabled
-When the user clicks on go button in places for city
-Then the user should see place as Leninabadskaya Oblast in places for city
-
-Examples:
-|country|area|city|countryPlaces|areaPlaces|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Tajikistan|Leninabadskaya Oblast|
-
-Scenario: Verify whether User is able to see Go Button is disabled when (while updating existing related place)
-User should see Go Button is Enabled when
-a)Country selected. Area not selected ("Choose an Area") & Country should be updated in place
-b)Country selected. Area selected and <> "Return All Areas" or "NO area". City not selected ("Choose a City") & Area should be updated in place
-
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-And the user clicks on the choose a city option
-And the user enters the city <city> in the type-ahead box
-When the user clicks on the city places link in the navigation bar
-And the user clicks on the update link
-When the user gets the document with get document id for city with the <city> from the database
-When the user deletes the existing related places rows
-And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
-And the user selects type value as <PlaceType> in the places for city
-When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
-And the user clicks on go button in places for city
-And the user selects details value as <PlaceDetails> in the places for city
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the page
-When the user clicks on the update link
-When the user clicks on edit button in places for city
-When the user clicks on the country drop down in the places for city
-And the user selects the country <countryPlaces> in the places for city
-Then the user should see Go button enabled
-When the user clicks on go button in places for city
-Then the user should see place as Tajikistan in places for city
-When the user clicks on edit button in places for city
-When the user clicks on the country drop down in the places for city
-And the user selects the country <countryPlaces> in the places for city
-When the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-Then the user should see Go button enabled
-When the user clicks on go button in places for city
-Then the user should see place as Leninabadskaya Oblast in places for city
+Then the user should see the population <value> as in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|city|countryPlaces|areaPlaces|cityPlaces|PlaceType|PlaceDetails|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Tajikistan|Leninabadskaya Oblast|Gafurov|Twin City|Capital City|
+|country|area|city|value|ConfirmationSummary|
+|USA|Georgia|Adel|123457|Summary|
+
+Scenario: 	User is updating a City's Basic Info and has entered a string value value for 'Population', then error message should be displayed.(Negative Validation)
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+When the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a city option
+When the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+And the user enters the <value> in the population field
+When the user clicks on the save button in city page
+Then the user should be able to view the error message 'Enter up to 50 valid numbers'
+Then the user should see maximum length of population is limited to 50
+
+Examples:
+|country|area|city|value|
+|USA|Georgia|Adel|stringvalue|
 
 Scenario: 
-Verify whether user is able to view the related place in city page when 'no' button is clicked in delete confirmation dialog
+User is updating a City's Basic Info - 
+User verifies the default value is from trusted and Then user has entered an 'End Date' that is different from the current value. 
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
-When the user clicks on the choose a country option
-When the user enters the country <country> in the type-ahead box
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
-When the user clicks on the city places link in the navigation bar
-And the user clicks on the update link
+And the user clicks on the city basic info link in the navigation bar
+Then the user should see city end date value same as in trusted document
+When the user clicks on the city update link
 When the user gets the document with get document id for city with the <city> from the database
-When the user deletes the existing related places rows
-And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
-And the user selects type value as <PlaceType> in the places for city
-When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
-And the user clicks on go button in places for city
-And the user selects details value as <PlaceDetails> in the places for city
-And the user clicks on the save button
+When the user enters the day <beganDay> in the text box for Began Date
+When the user enters the month <beganMonth> in the drop down box for Began Date
+When the user enters the year <beganYear> in the text box for Began Date
+When the user enters the day <endDay> in the text box for End Date
+When the user enters the month <endMonth> in the drop down box for End Date
+When the user enters the year <endYear> in the text box for End Date
+When the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
-Then the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in city related place
-When the user clicks on the update link
-When the user clicks on delete city places type
-Then the user should see the delete row confirmation modal in the city page
-When the user clicks on the No button to cancel the deletion of row
+When the user clicks on the city update link
+When the user enters $endDay2 $endMonth2 $endYear2 for End Date values
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-Then the user should not see the <ConfirmationSummary> changes in confirmation modal
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
-Then the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in city related place
+Then the user should see the $endDay2 $endMonth2 $endYear2 value as in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|city|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|ConfirmationSummary|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Twin City|Angola|Bengo|Caxito|Judicial Capital|Summary|
+|country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|endDay2|endMonth2|endYear2|
+|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|5|Jun|2016|10|Jun|2016|
+
+Scenario: User is updating a City's Basic Info - The user has entered all blank values for 'End Date'
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+Then the user should see city end date value same as in trusted document
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+Then the user verifies whether all the months in the drop down option are present in chronological order
+When the user enters the day <beganDay> in the text box for Began Date
+When the user enters the month <beganMonth> in the drop down box for Began Date
+When the user enters the year <beganYear> in the text box for Began Date
+When the user enters the day <endDay> in the text box for End Date
+When the user enters the month <endMonth> in the drop down box for End Date
+When the user enters the year <endYear> in the text box for End Date
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should see the <endDate> value as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|endDate|
+|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|||||
+
+
+Scenario: User is entering invalid inputs - 
+a)The user does not enter the month.
+b)The user does not enter the year.
+c)The user does not enter the day and year.
+d)The user does not enter the month and year.
+e)The user enters the day with alphabets (not in Gregorian calendar format)
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user enters the day <beganDay> in the text box for Began Date
+When the user enters the month <beganMonth> in the drop down box for Began Date
+When the user enters the year <beganYear> in the text box for Began Date
+When the user enters the day <endDay> in the text box for End Date
+When the user enters the month <endMonth> in the drop down box for End Date
+When the user enters the year <endYear> in the text box for End Date
+When the user clicks on the save button
+Then the user verifies whether error message Enter a year, month/year or day/month/year. is displayed for End Date
+
+Examples:
+|country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|
+|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|6||2016|
+|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|6|Jun||
+|Afghanistan|Badakshan|Panj Shair|1|Jun|2016||Jun||
+|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|6|||
+
+Scenario: User is entering invalid inputs - The user enters the day with alphabets (not in Gregorian calendar format)
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user enters the day <beganDay> in the text box for Began Date
+When the user enters the month <beganMonth> in the drop down box for Began Date
+When the user enters the year <beganYear> in the text box for Began Date
+When the user enters the day <endDay> in the text box for End Date
+When the user enters the month <endMonth> in the drop down box for End Date
+When the user enters the year <endYear> in the text box for End Date
+When the user clicks on the save button
+Then the user verifies whether error message Invalid Date is displayed for End Date
+
+Examples:
+|country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|
+|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|6Rdseth765|Jun|2016|
+
+Scenario: User gets an error message when entering a date that is later than today 
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user enters the day <beganDay> in the text box for Began Date
+When the user enters the month <beganMonth> in the drop down box for Began Date
+When the user enters the year <beganYear> in the text box for Began Date
+When the user enters the future date in the text box for End Date
+When the user clicks on the save button
+Then the user verifies whether error message Must be no later than today. is displayed for End Date
+
+Examples:
+|country|area|city|beganDay|beganMonth|beganYear|
+|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|
+
+Scenario: User is updating a City's Basic Info and has entered an 'End Date' that is no different to the current value
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user enters the day <beganDay> in the text box for Began Date
+When the user enters the month <beganMonth> in the drop down box for Began Date
+When the user enters the year <beganYear> in the text box for Began Date
+When the user enters the day <endDay> in the text box for End Date
+When the user enters the month <endMonth> in the drop down box for End Date
+When the user enters the year <endYear> in the text box for End Date
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+When the user clicks on the city update link
+When the user enters the day <endDay> in the text box for End Date
+When the user enters the month <endMonth> in the drop down box for End Date
+When the user enters the year <endYear> in the text box for End Date
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+Then the user should see no summary changes in the city save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|Summary|
+|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|5|Jun|2016|Basic Info| 
+
+Scenario: User is updating a City's Basic Info and has entered an 'End Date' that is before the 'Began Date'
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user enters the day <beganDay> in the text box for Began Date
+When the user enters the month <beganMonth> in the drop down box for Began Date
+When the user enters the year <beganYear> in the text box for Began Date
+When the user enters the day <endDay> in the text box for End Date
+When the user enters the month <endMonth> in the drop down box for End Date
+When the user enters the year <endYear> in the text box for End Date
+When the user clicks on the save button
+Then the user verifies whether error message Must be after Began date. is displayed for End Date
+
+Examples:
+|country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|Summary|
+|Afghanistan|Badakshan|Badakhshan|1|Jun|2016|1|Jun|2015|Basic Info|
+
+Scenario: User enters End Date values when the Began Date values are empty
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+And the user clears the day, month and year values for Began Date
+When the user enters the day <endDay> in the text box for End Date
+When the user enters the month <endMonth> in the drop down box for End Date
+When the user enters the year <endYear> in the text box for End Date
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|endDay|endMonth|endYear|
+|USA|Alabama|Alexander City|6|Jun|2010|
+
+Scenario: User is updating  City's Basic Info  page and  entered  value for 'Use in Address' that is different from the current value
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user clicks on True option for Use in Address
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+When the user clicks on the city update link
+When the user clicks on False option for Use in Address
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should see the address flag value same as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|
+
+Scenario: User is updating  City's Basic Info  page and  entered  value for 'Use in Address' that is no different from the current value
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user clicks on False option for Use in Address
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+When the user clicks on the city update link
+When the user clicks on False option for Use in Address
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+Then the user should see no summary changes in the city save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|Summary|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|Basic Info|
+
+Scenario: User can edit city Began Date - Verify if User can see Current value of the Month,Day & Year is retrieved from trusted document.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+Then the user should see the began date value in city page is same as in trusted document
+
+Examples:
+|country|area|city|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|
+
+Scenario: User can edit city Began Date - 
+a)Verify if user can see all the months in month dropdown (Began Date) are in MMM format
+b)Verify if user can see that all the months are sorted as per chronological order
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+Then the user verifies whether all the months in the drop down option are in MMM format & are sorted in the chronological order
+
+Examples:
+|country|area|city|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|
+
+Scenario: User can edit city Began Date - Verify if User can see an error message in City basic info edit page when began date is entered in an invalid format
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+Then the user should see the error Enter a year, month/year or day/month/year. for began date
+
+Examples:
+|country|area|city|day|month|year|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|28||2016|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|28|||
+|Tajikistan|Leninabadskaya Oblast|Gafurov|28|Mar||
+
+Scenario: User can edit city Began Date - Verify if User can see an error message in City basic info edit page when future began date is entered
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+Then the user should see the error Must be no later than today. for began date
+
+Examples:
+|country|area|city|day|month|year|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|28|Sep|2019|
+
+Scenario: User can edit city Began Date - Verify if User can see an error message in City basic info edit page when invalid Year & inavlid Day is entered
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+Then the user should see the error Invalid Date for began date
+
+Examples:
+|country|area|city|day|month|year|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|45|Sep|4568|
+
+
+Scenario: User can edit city Began Date - Verify if
+a)User can see Success message in City Page
+b)User can see entered values updated in City Page
+c)User can see entered values updated in Zeus document
+d)User can see Basic info changes are updated in Confirmation Modal
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should see the entered <day> <month> <year> in city page
+Then the user should see the city began date <day><month><year> value in zeus document
+Then the user reverts the changes to the document
+
+
+Examples:
+|country|area|city|day|month|year|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|||2016|
+|Tajikistan|Leninabadskaya Oblast|Gafurov||Oct|2015|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|01|Sep|2015|
+
+Scenario: User can edit city Began Date - Verify if User can see a message in City basic info edit page when Day,Month & Year which is no different than current value entered
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+Then the user should not see the <ConfirmationSummary> changes in confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should see the entered <day> <month> <year> in city page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|day|month|year|ConfirmationSummary|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|25|Sep|1902|Summary|
+
+Scenario: User can edit city Began Date - Verify if User can see Began date getting saved in City Page & Zeus document  when Day,Month & Year are entered as blank values
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user enters began date day <day> in the edit basic info city page
+When the user enters began date month <month> in the edit basic info city page
+When the user enters began date year <year> in the edit basic info city page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should see the entered <day> <month> <year> in city page
+Then the user should see the city began date <day><month><year> value in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|city|day|month|year|
+|Tajikistan|Leninabadskaya Oblast|Gafurov||||
