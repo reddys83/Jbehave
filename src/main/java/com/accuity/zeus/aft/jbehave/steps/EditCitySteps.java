@@ -384,12 +384,12 @@ public class EditCitySteps extends AbstractSteps {
 	    	getEditCityPage().verifyGoButtonDisabled();
 	    }
 	    
-	    @Then("the user should see Edit button for place field is disabled until drawer closes")
+	    @Then("the user should see Edit button for place field is disabled")
 	    public void verifyEditButtonDisabled() {
 	    	getEditCityPage().verifyEditButtonDisabled();
 	    }
 	    
-	    @Then("the user should see the delte option is  disabled until drawer closes")
+	    @Then("the user should see the delete option is  disabled until drawer closes")
 	    public void verifyDeleteButtonDisabled() {
 	    	getEditCityPage().verifyDeleteButtonDisabled();
 	    }
@@ -451,4 +451,54 @@ public class EditCitySteps extends AbstractSteps {
 				@Named("city") String city,@Named("source") String source) {
 			getEditCityPage().verifyDeletedCityRelatedValueFromZeusDB(country,area,city,source);
 		}
+	    
+	    @Then("the user should see that Edit button for place field is enabled")
+	    public void verifyEditButtonEnabled() {
+	    	getEditCityPage().verifyEditButtonEnabled();
+	    }
+	    
+	    @Then("the user should see the default value for country is Choose a country")
+	    public void verifyDefaultValueCountry() {
+	    	getEditCityPage().verifyDefaultValueCountry();
+	    }
+	  
+	    @Then("the user should see the area dropdown is disabled")
+	    public void verifyAreaDisabled() {
+	    	getEditCityPage().verifyAreaDisabled();
+	    }
+	    
+	    @Then("the user should see the city dropdown is disabled")
+	    public void verifyCityDisabled() {
+	    	getEditCityPage().verifyCityDisabled();
+	    }
+	    
+	    @Then("the user should see Choose a country option is not selectable")
+	    public void verifyDefaultCountryOptionNotSelectable() {
+	    	getEditCityPage().verifyDefaultCountryOptionNotSelectable();
+	    }
+	    
+	    @Then("the user should see the default value for area is Choose an area")
+	    public void verifyDefaultValueArea() {
+	    	getEditCityPage().verifyDefaultValueArea();
+	    }
+	    
+	    @Then("the user should see the default value for area is Choose a city")
+	    public void verifyDefaultValueCity() {
+	    	getEditCityPage().verifyDefaultValueCity();
+	    }
+	    
+	    @Then("the user should see Choose an area option is not selectable")
+	    public void verifyDefaultAreaOptionNotSelectable() {
+	    	getEditCityPage().verifyDefaultAreaOptionNotSelectable();
+	    }
+	    
+	    @Then("the user should see Choose a City option is not selectable")
+	    public void verifyDefaultCityOptionNotSelectable() {
+	    	getEditCityPage().verifyDefaultCityOptionNotSelectable();
+	    }
+	    
+	    @Then("the user should see Go button enabled")
+	    public void verifyGoButtonEnabled() {
+	    	getEditCityPage().verifyGoButtonEnabled();
+	    }
 }

@@ -761,6 +761,12 @@ public class EditCityPage extends AbstractPage {
 	    }
 	    
 	    public void verifyPlaceInPlacesForCity(String place) {
+	    	try{
+	    		Thread.sleep(3000);
+	    	}
+	    	catch(Exception e){
+	    		e.printStackTrace();
+	    	}
 	    	assertEquals(place,getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_edit_xpath")).getAttribute("value"));
 	    }
 	    
@@ -974,6 +980,86 @@ public class EditCityPage extends AbstractPage {
 		    	assertEquals(getCityRelatedInfoFromDB(country, area, city,"RelatedPlaceDetail", source), "");
 		    	
 		    }
+			 
+			 public void verifyEditButtonEnabled(){
+			    	try{
+			    	assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_place_edit_button_xpath")).isEnabled());
+			    }
+			    	
+			    catch(NoSuchElementException e)
+		    	{
+		    		e.printStackTrace();
+		    	}
+			  } 
+			 
+			 public void verifyDefaultValueCountry(){
+				 assertEquals("Choose a Country",getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_xpath")).getText());
+			 }
+			 
+			 public void verifyAreaDisabled(){
+			    	try{
+			    		
+			    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_input_xpath")).isDisplayed());
+			    }
+			    	
+			    catch(NoSuchElementException e)
+		    	{
+		    		e.printStackTrace();
+		    	}
+			  }
+			 
+			 public void verifyCityDisabled(){
+			    	try{
+			    	assertFalse(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_input_xpath")).isDisplayed());
+			    }
+			    	
+			    catch(NoSuchElementException e)
+		    	{
+		    		e.printStackTrace();
+		    	}
+			  } 
+			 
+			 public void verifyDefaultCountryOptionNotSelectable(){
+				 List<WebElement> countryList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_list_xpath"));
+				 for (int i = 0; i < countryList.size(); i++) {
+			           assertNotEquals(countryList.get(i).getText(),"Choose a Country");
+			        } 
+			 }
+			    	
+			 public void verifyDefaultValueArea(){
+				 assertEquals("Choose an Area",getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_xpath")).getText());
+			 }
+			 
+			 public void verifyDefaultValueCity(){
+				 assertEquals("Choose a City",getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_city_dropdown_xpath")).getText());
+			 }
+			 
+			 public void verifyDefaultAreaOptionNotSelectable(){
+				 List<WebElement> AreaList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_area_dropDown_list_xpath"));
+				 for (int i = 0; i < AreaList.size(); i++) {
+			           assertNotEquals(AreaList.get(i).getText(),"Choose an Area");
+			           
+			        } 
+			 }
+			 
+			 public void verifyDefaultCityOptionNotSelectable(){
+				 List<WebElement> CityList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_places_city_dropDown_list_xpath"));
+				 for (int i = 0; i < CityList.size(); i++) {
+			           assertNotEquals(CityList.get(i).getText(),"Choose a City");
+			           
+			        } 
+			 }
+			 
+			 public void verifyGoButtonEnabled(){
+			    	try{
+			    	assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_go_button_xpath")).isEnabled());
+			    }
+			    	catch(org.openqa.selenium.NoSuchElementException e)
+			    	{
+			    		
+			    	}
+			    }
+			 
 	@Override
 	public String getPageUrl() {
 		return null;
