@@ -814,9 +814,114 @@ public class EditCityPage extends AbstractPage {
 		enterDayInEndDate(day);
 		enterMonthInEndDate(month);
 		enterYearInEndDate(year);
+	}	
+	
+	public void verifyMaxLengthInCityIdentifierValue(String maxLength) {
+		 assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"))
+                 .getAttribute("maxlength"), maxLength);
+
+	}
+
+	/**
+	 * 
+	 * This method is used to verify the Began Date value from Zeus DB
+	 * 
+	 */
+	public void verifyCityBeganDateFromZeusDB(String country, String area, String city, String tagName, String source,
+			String day, String month, String year) {
+		if ((day.isEmpty()) && (month.isEmpty()) && (year.isEmpty())) {
+			assertEquals("", getCityInfoFromDB(country, area, city, tagName, source));
+		} else if ((day.isEmpty()) && (month.isEmpty())) {
+			String expectedBeganDate = year;
+			assertEquals(expectedBeganDate, getCityInfoFromDB(country, area, city, tagName, source));
+		} else if ((day.isEmpty())) {
+			String expectedBeganDate = month + " " + year;
+			assertEquals(expectedBeganDate, getCityInfoFromDB(country, area, city, tagName, source));
+		} else {
+			String setBeganDate = day + " " + month + " " + year;
+			assertEquals(getCityInfoFromDB(country, area, city, tagName, source), setBeganDate);
+		}
+
+	}
+
+	public void enterDayBeganDate(String day) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_begandate_day_input_xpath"), day);
+	}
+
+	public void enterYearBeganDate(String year) {
+		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_begandate_year_input_xpath"), year);
+	}
+
+	public void selectMonthBeganDate(String month) {
+
+		try {
+			List<WebElement> monthDropDowns = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_begandate_month_dropdown_xpath"));
+			Select dropdown = new Select(monthDropDowns.get(0));
+			if (month.equals("")) {
+				dropdown.selectByValue(month);
+			} else {
+				dropdown.selectByVisibleText(month);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyErrorMessageBeganDate(String beganDateErrorMsg) {
+		try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals(beganDateErrorMsg, getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_begandate_errorMessage_xpath")).getText());
+	}
+
+	public void verifyDayMonthYearInCityPage(String day, String month, String year) {
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		if ((day.isEmpty()) && (month.isEmpty()) && (year.isEmpty())) {
+			assertEquals("", getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
+		}
+
+		else if ((day.isEmpty()) && (month.isEmpty())) {
+			assertEquals(year, getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
+		}
+
+		else if ((day.isEmpty())) {
+			String getExpectedDate = month + " " + year;
+			assertEquals(getExpectedDate, getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
+		}
+
+		else {
+			String getExpectedDate = day + " " + month + " " + year;
+			assertEquals(getExpectedDate, getDriver()
+					.findElement(CityIdentifiers.getObjectIdentifier("city_get_beganDate_value_xpath")).getText());
+		}
+	}
+
+	public void verifyCityBeganDateFromTrustedDB(String country, String area, String city, String tagName,
+			String source) {
+		List<WebElement> appliedMonthList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_month_began_date_xpath"));
+		String day = getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_day_began_date_xpath")).getAttribute("value");
+		String month =  new Select(appliedMonthList.get(0)).getFirstSelectedOption().getText();
+		String year = getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_year_began_date_xpath")).getAttribute("value");
+		String beganDate = day + " " + month + " " + year;
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), beganDate);
+
 	}
 	
-
 	public void clickOnCityCreditRating() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_creditRating"));
 	}
