@@ -349,7 +349,7 @@ Examples:
 |Afghanistan||
 
 Scenario:User will get warning if click away from screen they are editing
-Meta:
+Meta:test10
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -374,7 +374,7 @@ Examples:
 |Afghanistan|Rand|
 
 Scenario: User will see summary of changes made in confirmation modal
-Meta:
+Meta:@test11
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

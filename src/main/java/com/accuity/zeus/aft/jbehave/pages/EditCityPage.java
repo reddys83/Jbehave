@@ -33,7 +33,7 @@ public class EditCityPage extends AbstractPage {
 
 	/**
 	 * This method is to enter the value in population text field
-	 * 
+	 *
 	 * @param value
 	 */
 	public void entervalueInPopulationField(String value) {
@@ -42,7 +42,7 @@ public class EditCityPage extends AbstractPage {
 
 	/**
 	 * This method is to clear and enter the value in text field
-	 * 
+	 *
 	 * @param webElement
 	 * @param value
 	 */
@@ -53,7 +53,7 @@ public class EditCityPage extends AbstractPage {
 
 	/**
 	 * This method is to enter the value in addInfo text field
-	 * 
+	 *
 	 * @param addInfoText
 	 */
 	public void enterTextCityAddInfo(String addInfoText) {
@@ -63,7 +63,7 @@ public class EditCityPage extends AbstractPage {
 	/**
 	 * This method is to verify the value in addInfo text field to equal to
 	 * expected.
-	 * 
+	 *
 	 * @param addInfoText
 	 */
 	public void verifyTextInAddInfo(String addInfoText) {
@@ -131,7 +131,7 @@ public class EditCityPage extends AbstractPage {
 	/**
 	 * This method is to verify the specified value 'valueToBeVerified' is
 	 * present in specified 'source' DB
-	 * 
+	 *
 	 * @param country
 	 * @param area
 	 * @param city
@@ -146,7 +146,7 @@ public class EditCityPage extends AbstractPage {
 
 	/**
 	 * This method is used to get the city information from DB
-	 * 
+	 *
 	 * @param country
 	 * @param area
 	 * @param city
@@ -219,7 +219,7 @@ public class EditCityPage extends AbstractPage {
 
 	/**
 	 * This method is used to enter the value in city status drop-down
-	 * 
+	 *
 	 * @param will
 	 *            hold the value to be entered in the drop-down
 	 */
@@ -452,7 +452,7 @@ public class EditCityPage extends AbstractPage {
 
 	/**
 	 * This method is used to enter the Identifier value
-	 * 
+	 *
 	 * @param identifierValue
 	 */
 	public void enterIdentifierValue(String identifierValue) {
@@ -554,8 +554,7 @@ public class EditCityPage extends AbstractPage {
 	 * @param country
 	 * @param area
 	 * @param city
-	 * @param tagName
-	 * @param source
+
 	 */
 	public void verifyCityIdentifierValuesFromTrusted(String country, String area, String city, String[] identifierType,
 			String[] identifierValue, String[] identifierStatus) {
@@ -638,6 +637,7 @@ public class EditCityPage extends AbstractPage {
 			assertEquals(StringUtils.capitalize(
 					document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent()),
 					options.get(indexOfOption + 1).getText().trim());
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(), options.get(indexOfOption + 1).getAttribute("value").trim());
 		}
 
 	}
@@ -645,7 +645,7 @@ public class EditCityPage extends AbstractPage {
 	/**
 	 * This method is used for performing the delete all identifier rows row by
 	 * clicking on the delete row button
-	 * 
+	 *
 	 */
 	public void deleteAllIdentifierRows() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_add_new_identifier_button_id"));
@@ -680,11 +680,11 @@ public class EditCityPage extends AbstractPage {
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText());
 
 	}
-	
+
 	/**
 	 * This method is used to verify the value in trusted DB is same as UI
 	 * value.
-	 * 
+	 *
 	 * @param country
 	 * @param area
 	 * @param city
@@ -734,7 +734,7 @@ public class EditCityPage extends AbstractPage {
 			Select dropdown = new Select(monthDropDowns.get(0));
 			if (month.equals("")) {
 				dropdown.selectByValue(month);
-			} else {				
+			} else {
 				dropdown.selectByVisibleText(month);
 			}
 
@@ -814,8 +814,8 @@ public class EditCityPage extends AbstractPage {
 		enterDayInEndDate(day);
 		enterMonthInEndDate(month);
 		enterYearInEndDate(year);
-	}	
-	
+	}
+
 	public void verifyMaxLengthInCityIdentifierValue(String maxLength) {
 		 assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"))
                  .getAttribute("maxlength"), maxLength);
@@ -823,9 +823,9 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	/**
-	 * 
+	 *
 	 * This method is used to verify the Began Date value from Zeus DB
-	 * 
+	 *
 	 */
 	public void verifyCityBeganDateFromZeusDB(String country, String area, String city, String tagName, String source,
 			String day, String month, String year) {
@@ -921,7 +921,7 @@ public class EditCityPage extends AbstractPage {
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), beganDate);
 
 	}
-	
+
 	public void clickOnCityCreditRating() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_creditRating"));
 	}
@@ -929,9 +929,9 @@ public class EditCityPage extends AbstractPage {
 	public void enterCityCreditRatingAppliedDateDay(String appliedDay, int row) {
 		List<WebElement> appliedDateList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_day_xpath"));
 		appliedDateList.get(row-1).clear();
-		appliedDateList.get(row-1).sendKeys(appliedDay);					
+		appliedDateList.get(row-1).sendKeys(appliedDay);
 	}
-	
+
 
 	public void enterCityCreditRatingAppliedDateMonth(String appliedMonth, int row) {
 		List<WebElement> appliedMonthList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_month_xpath"));
@@ -945,7 +945,7 @@ public class EditCityPage extends AbstractPage {
 
 	public void enterCityCreditRatingConfirmedDateDay(String confirmedDay, int row) {
 		List<WebElement> confirmedMonth = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_day_xpath"));
-		confirmedMonth.get(row-1).clear();				
+		confirmedMonth.get(row-1).clear();
 		confirmedMonth.get(row-1).sendKeys(confirmedDay);
 	}
 
@@ -962,7 +962,7 @@ public class EditCityPage extends AbstractPage {
 								CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_error_msg_xpath"))
 						.getText());
 	}
-	
+
 	public void verifyErrorMessageEnterYearMonthDayForConfirmedDate() {
 		assertEquals("Enter a day/month/year.",
 				getDriver()
@@ -986,7 +986,7 @@ public class EditCityPage extends AbstractPage {
 	 */
 	public void clickOnAgencyDropDown() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"));
-	}	
+	}
 
 	/**
 	 * This method is used to verify the look up data values available for city
@@ -997,7 +997,7 @@ public class EditCityPage extends AbstractPage {
 				.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"));
 		assertTrue(agencyList.size()>=row);
 		List<WebElement> agencyListOptions = agencyList.get(row-1).findElements(By.tagName("option"));
-				
+
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
 				"get city credit look up values");
 		for (int i = 0; i < document.getElementsByTagName("creditRatingAgency").getLength(); i++) {
@@ -1015,7 +1015,7 @@ public class EditCityPage extends AbstractPage {
 		List<WebElement> typeList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath"));
 		assertTrue(typeList.size()>=row);
 		List<WebElement> typeListOptions = typeList.get(row-1).findElements(By.tagName("option"));
-				
+
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
 				"get city credit look up values");
 		for (int i = 0; i < document.getElementsByTagName("creditRatingType").getLength(); i++) {
@@ -1027,7 +1027,7 @@ public class EditCityPage extends AbstractPage {
 
 	/**
 	 * This method is used to enter the CreditRatingType *
-	 * 
+	 *
 	 * @param CreditRatingType
 	 */
 	public void enterCreditRatingType(String creditRatingType, int row) {
@@ -1039,7 +1039,7 @@ public class EditCityPage extends AbstractPage {
 
 	/**
 	 * This method is used to enter the CreditRatingAgency *
-	 * 
+	 *
 	 * @param CreditRatingAgency
 	 */
 	public void enterCreditRatingAgency(String creditRatingAgency, int row) {
@@ -1051,17 +1051,17 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void enterCityCreditRatingValue(String appliedDay,int row) {
 		List<WebElement> valueTextboxList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_value_xpath"));
-		valueTextboxList.get(row-1).clear();		
+		valueTextboxList.get(row-1).clear();
 		valueTextboxList.get(row-1).sendKeys(appliedDay);
 	}
-	
+
 	/**
 	 * This method is used to verify the value in trusted DB is same as UI
 	 * value.
-	 * 
+	 *
 	 * @param country
 	 * @param area
 	 * @param city
@@ -1106,16 +1106,16 @@ public class EditCityPage extends AbstractPage {
 						{
 							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row-1)
 									.getChildNodes().item(childNode).getTextContent()), appliedDate);
-						}					
-						
+						}
+
 						break;
 					case "creditDateConfirmed":
 						if(!appliedDate.isEmpty() && !(document.getElementsByTagName("creditRating").item(row-1).getChildNodes().item(childNode).getTextContent().isEmpty()))
 						{
 							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row-1)
 									.getChildNodes().item(childNode).getTextContent()), confirmedDate);
-						}					
-						
+						}
+
 						break;
 
 					}
@@ -1130,8 +1130,8 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
 	public void verifyCityCreditRatingValuesAreNullFromDB(String country, String area, String city, String source,
 			int row) {
 
@@ -1155,11 +1155,11 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-		
+
 	/**
 	 * This method is used to verify the value in trusted DB is same as UI
 	 * value.
-	 * 
+	 *
 	 * @param country
 	 * @param area
 	 * @param city
@@ -1167,10 +1167,10 @@ public class EditCityPage extends AbstractPage {
 	 * @param source
 	 */
 	public void verifyCityCreditRatingValuesFromTrustedDB(String country, String area, String city, String source)
-	{	
+	{
 
-		try {		
-			    				
+		try {
+
 				if(getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).size()>1)
 				{
 					List<WebElement> agencyDropDownList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"));
@@ -1180,11 +1180,11 @@ public class EditCityPage extends AbstractPage {
 					List<WebElement> appliedYearList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_appliedYear_xpath"));
 					List<WebElement> confirmedDateList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_day_xpath"));
 					List<WebElement> confirmedMonth = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_month_xpath"));
-					List<WebElement> confirmedYearList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_year_xpath"));			
+					List<WebElement> confirmedYearList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_year_xpath"));
 					List<WebElement> valueTextboxList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_value_xpath"));
-					
+
 					for(int index =0;index<agencyDropDownList.size();index++)
-					{					
+					{
 						String agency = new Select(agencyDropDownList.get(index)).getFirstSelectedOption().getText().trim();
 						String type =  new Select(typeDropDownList.get(index)).getFirstSelectedOption().getText();
 						String value = valueTextboxList.get(index).getAttribute("value");
@@ -1192,27 +1192,27 @@ public class EditCityPage extends AbstractPage {
 						String confirmedDate = new Select(confirmedMonth.get(index)).getFirstSelectedOption().getText() +" "+ confirmedYearList.get(index).getAttribute("value");
 						if(!appliedDateList.get(index).getAttribute("value").isEmpty() && !confirmedDateList.get(index).getAttribute("value").isEmpty()){
 							 appliedDate = String.format("%02d",Integer.parseInt(appliedDateList.get(index).getAttribute("value"))) + " " +  appliedDate;
-							 confirmedDate = String.format("%02d",Integer.parseInt(confirmedDateList.get(index).getAttribute("value"))) + " " + confirmedDate;	
-						}										    
-						verifyCityCreditRatingValuesFromDB(country, area, city, source, agency, type, value, appliedDate, confirmedDate, index+1);	
+							 confirmedDate = String.format("%02d",Integer.parseInt(confirmedDateList.get(index).getAttribute("value"))) + " " + confirmedDate;
+						}
+						verifyCityCreditRatingValuesFromDB(country, area, city, source, agency, type, value, appliedDate, confirmedDate, index+1);
 					}
 				}
 				else
 				{
 					assertTrue("There is no existing values in credit rating section",true);
 				}
-				
-			
-			
+
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method is used for performing the delete all credit rating rows row by
 	 * clicking on the delete row button
-	 * 
+	 *
 	 */
 	public void deleteExistingCreditRatingRows() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_credit_rating_addRow_id"));
@@ -1232,17 +1232,17 @@ public class EditCityPage extends AbstractPage {
 		}
 
 	}
-	
+
 	/**
 	 * This method is used to verify whether the delete confirmation table is
 	 * present upon clicking the delete row button
-	 * 
+	 *
 	 */
 	public void verifyCreditRatingDeleteConfirmationModal() {
 		assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver()
 				.findElement(CityIdentifiers.getObjectIdentifier("city_delete_credit_rating_row_confirmation_modal_xpath")).getText());
 	}
-	
+
 	/**
 	 * This method is used to verify whether we get an error message after
 	 * clicking save without entering any text for credit rating agency
@@ -1252,7 +1252,7 @@ public class EditCityPage extends AbstractPage {
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_error_xpath"))
 						.getText());
 	}
-	
+
 	/**
 	 * This method is used to verify whether we get an error message after
 	 * clicking save without entering any text for credit rating type
@@ -1261,7 +1261,7 @@ public class EditCityPage extends AbstractPage {
 		assertEquals("Required",
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_error_xpath")).getText());
 	}
-	
+
 	/**
 	 * This is to verify error message is displayed for credit rating value field as
 	 * expected
@@ -1271,23 +1271,23 @@ public class EditCityPage extends AbstractPage {
 		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_value_error_xpath"))
 				.getText(), errorMsg);
 	}
-	
+
 	public void clickOnDeleteNewCreditRatingRowButtonCity() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_delete_credit_rating_row_button_xpath"));
 	}
-	
+
 	public void verifyNewlyAddedCreditRatingRowIsNotDisplayed() {
 
 		try {
-			
-			assertTrue(getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).size()==1);			
-			
+
+			assertTrue(getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).size()==1);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	public void verifyNewlyAddedCreditRatingRowIsDisplayed() {
 
 		try {
@@ -1313,10 +1313,10 @@ public class EditCityPage extends AbstractPage {
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_address_flag_xpath")).getText());
 
 	}
-	
+
 	/**
 	 * This method is used to verify the credit rating values in UI value.
-	 * 
+	 *
 	 * @param country
 	 * @param area
 	 * @param city
@@ -1345,19 +1345,19 @@ public class EditCityPage extends AbstractPage {
 			assertEquals(valueInUI, value);
 			if(!appliedDateInUI.isEmpty() && !appliedDate.isEmpty())
 			{
-				assertEquals(appliedDateInUI, appliedDate);				
+				assertEquals(appliedDateInUI, appliedDate);
 			}
 			if(!confirmedDateInUI.isEmpty() && !confirmedDate.isEmpty())
 			{
 				assertEquals(confirmedDateInUI, confirmedDate);
 			}
-			
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void enterAppliedDateLaterThanToday(int row) {
 		Calendar cal = Calendar.getInstance();
 		enterCityCreditRatingAppliedDateDay(Integer.toString(cal.get(Calendar.DATE) + 1), row);
@@ -1376,7 +1376,7 @@ public class EditCityPage extends AbstractPage {
 		month = month.substring(0, 3);
 		enterCityCreditRatingConfirmedDateMonth(month, row);
 		enterCreditRatingConfirmedYear(Integer.toString(cal.get(Calendar.YEAR) + 1), row);
-	}	
+	}
 
 	public void verifyErrorMessageForAppliedDate(String errorMsg) {
 		assertEquals(errorMsg,
