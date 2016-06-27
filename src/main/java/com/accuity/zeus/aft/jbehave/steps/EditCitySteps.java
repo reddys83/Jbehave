@@ -641,5 +641,48 @@ public class EditCitySteps extends AbstractSteps {
 	public void verifyGoButtonEnabled() {
 		getEditCityPage().verifyGoButtonEnabled();
 	}
+	
+	@When("the user clicks on the all link in the navigation bar")
+	public void clickOnAll() {
+		getEditCityPage().clickOnAll();
+	}
+	
+	@When("the user selects type value as <PlaceType2> in the places for city")
+	public void selectsType2FromDropdown(@Named("PlaceType2") String PlaceType) {
+		getEditCityPage().selectsPlacesTypeFromDropdwon(PlaceType);
+	}
+	
+	@When("the user selects the country <countryPlaces2> in the places for city")
+	public void selectsCountryInPlaces2ForCity(@Named("countryPlaces2") String countryPlaces) {
+		getEditCityPage().selectsCountryInPlacesForCity(countryPlaces);
+	}
+	
+	@When("the user selects details value as <PlaceDetails2> in the places for city")
+	public void selectsDetails2FromDropdown(@Named("PlaceDetails2") String PlaceDetails) {
+		getEditCityPage().selectsPlacesDetailsFromDropdown(PlaceDetails);
+	}
+	
+	@When("the user selects city <cityPlaces2> dropdown in the places for city")
+	public void selectsCityInPlaces2ForCountry(@Named("cityPlaces2") String cityPlaces) {
+		getEditCityPage().selectsCityInPlacesForCountry(cityPlaces);
+	}
+	
+	@When("the user selects area <areaPlaces2> dropdown in places for city")
+	public void selectsArea2InPlacesForCity(@Named("areaPlaces2") String areaPlaces) {
+		getEditCityPage().selectsAreaInPlacesForCity(areaPlaces);
+	}
+	
+	@Then("the user should see <PlaceType2> <cityPlaces2> <PlaceDetails2> updated in city related place")
+	public void verifyRelatedPlacesCityPage2(@Named("PlaceType2") String cityPlacesType,@Named("cityPlaces2") String cityPlacesPlace, @Named("PlaceDetails2") String cityPlacesDetails) {
+		getEditCityPage().verifyRelatedPlacesInCityPage(cityPlacesType, cityPlacesPlace, cityPlacesDetails);
+	}
+	
+	@Then("the user should see the city related place date <PlaceType2> <cityPlaces2> <PlaceDetails2> value in $source document")
+	public void verifyCityRelatedValueFromZeusDB2(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("PlaceType2") String type, @Named("cityPlaces2") String place,
+			@Named("PlaceDetails2") String details, @Named("source") String source) {
+		getEditCityPage().verifyCityRelatedValueFromZeusDB(country, area, city, type, place, details, source);
+	}
+	
 
 }

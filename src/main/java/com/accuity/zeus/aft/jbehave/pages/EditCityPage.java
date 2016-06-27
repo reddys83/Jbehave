@@ -991,7 +991,7 @@ public class EditCityPage extends AbstractPage {
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_input_xpath"))
 				.sendKeys(Keys.RETURN);
 		try {
-			Thread.sleep(3000L);
+			Thread.sleep(6000L);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -1006,6 +1006,12 @@ public class EditCityPage extends AbstractPage {
 				.sendKeys(areaPlaces);
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_area_dropdown_input_xpath"))
 				.sendKeys(Keys.RETURN);
+		
+		try {
+			Thread.sleep(4000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void clicksOnCityDropdownInPlacesForCity() {
@@ -1368,6 +1374,10 @@ public class EditCityPage extends AbstractPage {
 		} catch (org.openqa.selenium.NoSuchElementException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void clickOnAll() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_All_link_id"));
 	}
 
 	@Override

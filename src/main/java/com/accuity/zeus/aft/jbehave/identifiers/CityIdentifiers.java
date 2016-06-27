@@ -101,6 +101,7 @@ public class CityIdentifiers {
 		hmap.put("city_get_relatedplace_placevalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td[2]/a"));
 		hmap.put("city_get_relatedplace_detailsvalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td[3]"));
 		hmap.put("city_get_relatedplace_entirevalue_xpath", By.xpath("//*[@id='cityPlaces']//tbody"));
+		hmap.put("city_All_link_id", By.xpath("//*[@id='all']"));
 	}
 
 	public static By getObjectIdentifier(String key) {
