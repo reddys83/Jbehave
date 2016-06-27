@@ -93,7 +93,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Twin City|Afghanistan|Badakshan|Badakshan|Capital City|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|Twin City|Angola|Bengo|Caxito|Capital City|
 
 Scenario: 
 a)Verify whether user is able to update an existing  City Related place  successfully in City Web page
@@ -136,7 +136,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Twin City|Afghanistan|Badakshan|Badakshan|Capital City|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|Capital City|Angola|Bengo|Caxito|Legislative Capital|Summary|
 |Tajikistan|Leninabadskaya Oblast|Gafurov|Capital City|Angola|Bengo|Caxito|Judicial Capital|
 
 Scenario: 
