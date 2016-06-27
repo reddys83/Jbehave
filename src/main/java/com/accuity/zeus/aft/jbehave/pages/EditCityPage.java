@@ -675,8 +675,7 @@ public class EditCityPage extends AbstractPage {
 	 * @param country
 	 * @param area
 	 * @param city
-	 * @param tagName
-	 * @param source
+
 	 */
 	public void verifyCityIdentifierValuesFromTrusted(String country, String area, String city, String[] identifierType,
 			String[] identifierValue, String[] identifierStatus) {
@@ -746,8 +745,7 @@ public class EditCityPage extends AbstractPage {
 		List<WebElement> options = cityIdentifierTypesList.get(0).findElements(By.cssSelector("option"));
 		for (int indexOfOption = 0; indexOfOption < document.getElementsByTagName("status")
 				.getLength(); indexOfOption++) {
-			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent()
-					.toLowerCase(), options.get(indexOfOption + 1).getText().trim());
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(), options.get(indexOfOption + 1).getAttribute("value").trim());
 		}
 
 	}

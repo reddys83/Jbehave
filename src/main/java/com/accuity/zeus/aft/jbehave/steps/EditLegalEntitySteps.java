@@ -476,7 +476,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
     }
 
     @Then("the user should see the edits to legal entity board meeting for fid <fid> in zeus document")
-    public void verifyLegalEntityBoardMeetingInZeusDocument(@Named("") String fid) {
+    public void verifyLegalEntityBoardMeetingInZeusDocument(@Named("fid") String fid) {
         getEditLegalEntityPage().verifyLegalEntityBoardMeetingInZeus(fid);
     }
 
