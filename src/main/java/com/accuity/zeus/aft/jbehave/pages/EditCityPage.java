@@ -1547,11 +1547,6 @@ public class EditCityPage extends AbstractPage {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_delete_name_row_button_xpath"));
 	}
 
-	public void verifyNamesDeleteConfirmationModal() {
-		assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("delete_names_row_confirmation_modal_xpath")).getText());
-	}
-
 	public void verifyCityNameTypeInNewlyAddedRow(String newNameType) {
 		List<WebElement> cityNameTypesList = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("city_name_type_input_xpath"));
@@ -1560,6 +1555,10 @@ public class EditCityPage extends AbstractPage {
         for (int i = 1; i < options.size(); i++) {
             assertTrue(!newNameType.equals(options.get(i).getText().trim()));
         }
+	}
+	
+	public void verifyCityNameValueMaxlength(String maxValue) {
+		assertEquals(maxValue, getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_names_full_name_value_xpath")).getAttribute("maxlength"));	
 	}
 
 	@Override

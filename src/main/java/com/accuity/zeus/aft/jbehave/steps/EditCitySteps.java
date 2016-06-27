@@ -799,13 +799,13 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().clickOnDeleteNameRowButtonCity();
 	}
 
-	@Then("the user should see delete names row confirmation modal in the city page")
-	public void verifyNamesDeleteConfirmationModal() {
-		getEditCityPage().verifyNamesDeleteConfirmationModal();
-	}
-	
 	@Then("the user checks whether the newly added row does not contain <newNameType> name type")
 	public void verifyCityNameTypeInNewlyAddedRow(@Named("newNameType") String newNameType) {
 		getEditCityPage().verifyCityNameTypeInNewlyAddedRow(newNameType);
+	}
+	
+	@Then("the user should see the maxlength of name value field set to $maxValue")
+	public void verifyCityNameValueMaxLength(@Named("maxValue") String maxValue) {
+		getEditCityPage().verifyCityNameValueMaxlength(maxValue);
 	}
 }

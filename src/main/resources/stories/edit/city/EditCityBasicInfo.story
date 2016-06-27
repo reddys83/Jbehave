@@ -1308,7 +1308,7 @@ When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 When the user clicks on the city update link
 When the user clicks on the delete name row button in the basic info city page
-Then the user should see delete names row confirmation modal in the city page
+Then the user should see the delete row confirmation modal in the city page
 When the user clicks on the No button to cancel the deletion of row
 And the user clicks on the save button in city page
 When the user clicks on the confirm button
@@ -1344,7 +1344,7 @@ When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 When the user clicks on the city update link
 When the user clicks on the delete name row button in the basic info city page
-Then the user should see delete names row confirmation modal in the city page
+Then the user should see the delete row confirmation modal in the city page
 When the user clicks on the Yes button to cancel the deletion of row
 And the user clicks on the save button in city page
 When the user clicks on the confirm button
@@ -1355,3 +1355,22 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|city|newNameType|newNameValue|
 |Belgium|Limburg|Bree|Alternative Name|Panj Shair|
+
+Scenario: 	User is updating a City's Basic Info and checked whether name value has maxlength attribute set to 75
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+And the user clicks on the add new name button in the basic info city page
+Then the user should see the maxlength of name value field set to 75
+
+Examples:
+|country|area|city|
+|Belgium|Limburg|Bree|
