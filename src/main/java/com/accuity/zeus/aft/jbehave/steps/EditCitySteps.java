@@ -815,8 +815,8 @@ public class EditCitySteps extends AbstractSteps {
 	}
 
 	@Then("the user should see the list of all existing city for the selected area by full name in places for city")
-	public void verifyCityListInPlacesForCity() {
-		getEditCityPage().verifyCityListInPlacesForCity();
+	public void verifyCityListInPlacesForCity(@Named("areaPlaces") String countryareaPlaces) {
+		getEditCityPage().verifyCityListInPlacesForCity(countryareaPlaces);
 	}
 
 	@Then("the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in city related place")

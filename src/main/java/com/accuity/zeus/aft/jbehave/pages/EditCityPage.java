@@ -25,7 +25,7 @@ import org.openqa.selenium.WebDriver;
 import org.apache.commons.lang.StringUtils;
 
 public class EditCityPage extends AbstractPage {
-	private String countryPlacesArea = "";
+
 
 	public EditCityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
@@ -1631,7 +1631,7 @@ public class EditCityPage extends AbstractPage {
 
 	}
 
-	public void verifyCityListInPlacesForCity() {
+	public void verifyCityListInPlacesForCity(String countryPlacesArea) {
 		List<NameValuePair> nvPairs = new ArrayList<>();
 		nvPairs.add(new BasicNameValuePair("name", countryPlacesArea));
 		nvPairs.add(new BasicNameValuePair("source", "trusted"));

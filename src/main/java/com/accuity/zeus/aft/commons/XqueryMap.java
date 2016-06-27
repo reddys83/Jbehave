@@ -86,7 +86,6 @@ public class XqueryMap {
         queryMap.put("get document id for city","getIdForCity.xqy");
         queryMap.put("get city identifiers", "getCountryIdentifiers.xqy");        
 		queryMap.put("get city Status types","getCityStatusTypes.xqy");
-		queryMap.put("get city basic info","getCityBasicInfo.xqy");
 		queryMap.put("get city places type","getCityRelatedPlacesType.xqy");
 		queryMap.put("get city places detail","getCityRelatedPlacesDetails.xqy");
 		queryMap.put("get city related place info","getCityRelatedPlaceDetails.xqy");
