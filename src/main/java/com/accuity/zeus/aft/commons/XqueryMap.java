@@ -90,9 +90,12 @@ public class XqueryMap {
 		queryMap.put("get city places type","getCityRelatedPlacesType.xqy");
 		queryMap.put("get city places detail","getCityRelatedPlacesDetails.xqy");
 		queryMap.put("get city related place info","getCityRelatedPlaceDetails.xqy");
+		queryMap.put("get city basic info","getCityBasicInfo.xqy");		
         queryMap.put("get LegalEntity personnel", "getLegalEntityPersonnel.xqy");
         queryMap.put("get LegalEntity IdentifierTypes From Lookup","getLegalEntityIdentifierTypesFromLookup.xqy");
         queryMap.put("get LegalEntity IdentifierStatus From Lookup","getLegalEntityIdentifierStatusFromLookup.xqy");
+        queryMap.put("get city credit look up values","getCityCreditRatingLookUpValues.xqy");
+
 
    }
 
