@@ -5,7 +5,8 @@ In order to view the area basic info
 As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-187 - User can view basic area info
-
+and
+JIRA ID - ZEUS-368 - User can follow link to country from area
 
 Scenario: Verify Area basic info.
 Given a user is on the search page
@@ -157,3 +158,40 @@ Then the user should see the below area sections
 Examples:
 |country|area|
 |Albania|Fier|
+
+Scenario: Verify User can follow link to country from area
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the Country link in the area basic info
+Then the user should see the country page with USA selected
+And the user should see the area's names as:
+|TYPE|VALUE|
+|Country Name|USA|
+
+Examples:
+|country|area
+|USA|Illinois
+
+Scenario: Verify User can follow link to country from sub-area
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a sub-area option
+And the user enters the sub-area <subArea> in the type-ahead box
+When the user clicks on the Country link in the area basic info
+Then the user should see the country page with USA selected
+And the user should see the area's names as:
+|TYPE|VALUE|
+|Country Name|USA|
+Examples:
+|country|area|sub-area
+|USA|Illinois|Cook
