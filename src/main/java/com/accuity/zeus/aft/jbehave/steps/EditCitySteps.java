@@ -1,14 +1,16 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import com.accuity.zeus.aft.io.ApacheHttpClient;
-import com.accuity.zeus.aft.io.Database;
-
 import java.text.ParseException;
+import java.util.Map;
 
-import org.jbehave.core.annotations.*;
-import java.lang.StringBuilder;
+import org.jbehave.core.annotations.Named;
+import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 
 @Component
 public class EditCitySteps extends AbstractSteps {
@@ -685,4 +687,125 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyErrorMessageForConfirmedDate(confirmedDateErrorMsg);
 	}
 
+	@Then("the user should see city name value same as in $source document")
+	public void verifyCityNameTypeAndValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+												 @Named("source") String source) {
+		setEditCityPage(getDataPage().createEditCityPage());
+		Map<String, String> cityNameValueMap = getEditCityPage().getCityNameValueMapFromDB(country, area, city, source);
+		getEditCityPage().verifyFullTypeNameValue(cityNameValueMap.get("Full Name"));
+	}
+	
+	@When("the user should see the full name is not editable")
+	public void verifyFullNameFieldNotEditable() {
+		getEditCityPage().verifyFullNameFieldNotEditable();
+	}
+
+	@When("the user enters the <newNameValue> in the full name field")
+	public void enterValueInFullTypeNameField(@Named("newNameValue") String newNameValue) {
+		getEditCityPage().enterValueInFullTypeNameField(newNameValue);
+	}
+	
+	@Then("the user should see the full name <newNameValue> as in $source document")
+	public void verifyCityFullNameValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+											  @Named("source") String source, @Named("newNameValue") String fullNameValue) {
+		Map<String, String> cityNameValueMap = getEditCityPage().getCityNameValueMapFromDB(country, area, fullNameValue, source);
+		getEditCityPage().verifyNameValueInDB(cityNameValueMap, "Full Name", fullNameValue);
+	}
+	
+	@Then("the user should see the value updated in $source document")
+	public void verifyCityValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+									  @Named("source") String source, @Named("newNameType") String newNameType, 
+									  @Named("newNameValue") String newNameValue) {
+		Map<String, String> cityNameValueMap = getEditCityPage().getCityNameValueMapFromDB(country, area, city, source);
+		getEditCityPage().verifyNameValueInDB(cityNameValueMap, newNameType, newNameValue);
+	}
+	
+	@Then("the user should see the value not present in $source document")
+	public void verifyCityValueDeletedFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+											 @Named("source") String source, @Named("newNameType") String newNameType, 
+											 @Named("newNameValue") String newNameValue) {
+		Map<String, String> cityNameValueMap = getEditCityPage().getCityNameValueMapFromDB(country, area, city, source);
+		getEditCityPage().verifyCityValueDeletedFromDB(cityNameValueMap, newNameType);
+	}
+	
+	@Then("the user should see the value newly updated in $source document")
+	public void verifyNewlyEnteredCityValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+												  @Named("source") String source, @Named("newNameType") String newNameType, 
+												  @Named("newNameValue2") String newNameValue2) {
+		Map<String, String> cityNameValueMap = getEditCityPage().getCityNameValueMapFromDB(country, area, city, source);
+		getEditCityPage().verifyNameValueInDB(cityNameValueMap, newNameType, newNameValue2);
+	}
+	
+	@When("the user clicks on the add new name button in the basic info city page")
+	public void clickOnAddNewNameButton() {
+		getEditCityPage().clickOnAddNewNameButton();
+	}
+	
+	@When("the user clicks on the city name type drop-down")
+	public void clickOnCityNameType() {
+		getEditCityPage().clickOnCityNameType();
+	}
+
+	@Then("the user should see the city name types from lookup PLACE_NAME_TYPE")
+	public void verifyCityNameTypesList() {
+		getEditCityPage().verifyCityNameTypesList();
+	}
+
+	@Then("the user should be able to verify the <newNameValue> is updated in full name value field")
+	public void verifyTextInNameValue(@Named("newNameValue") String newNameValue) {
+		getEditCityPage().verifyTextInFullNameValue(newNameValue);
+	}
+	
+	@Then("the user should see the city name type and value updated in UI")
+	public void verityCityNameTypeAndValue(@Named("newNameType") String newNameType, 
+										   @Named("newNameValue") String newNameValue) {
+		getEditCityPage().verifyNameType(newNameType);
+		getEditCityPage().verifyNameValue(newNameType, newNameValue);
+	}
+	
+	@Then("the user should be able to verify empty rows not added in $source document")
+	public void verifyNamesEmptyRow(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+									@Named("source") String source) {
+		getEditCityPage().verifyNamesEmptyRow(country, area, city, source);
+	}
+
+	@When("the user enters name type as <newNameType> in the basic info city page")
+	public void enterNameType(@Named("newNameType") String newNameType) {
+		getEditCityPage().enterNameType(newNameType);
+	}
+
+	@When("the user enters name value as <newNameValue> in the basic info city page")
+	public void enterNameValue(@Named("newNameValue") String newNameValue) {
+		getEditCityPage().enterNameValue(newNameValue);
+	}
+	
+	@When("the user enters name value as <newNameValue2> in the basic info city page")
+	public void enterNameValue2(@Named("newNameValue2") String newNameValue2) {
+		getEditCityPage().enterNameValue(newNameValue2);
+	}
+	
+	@Then("the user should see the error message for the required name type field in the city basic info page")
+	public void verifyErrorMessageForRequiredCityNameType() {
+		getEditCityPage().verifyErrorMessageForRequiredCityNameType();
+	}	
+	
+	@Then("the user should see the error message for the required name value field in the city basic info page")
+	public void verifyErrorMessageForRequiredCityNameValue() {
+		getEditCityPage().verifyErrorMessageForRequiredCityNameValue();
+	}
+	
+	@When("the user clicks on the delete name row button in the basic info city page")
+	public void clickOnDeleteNameRowButtonCity() {
+		getEditCityPage().clickOnDeleteNameRowButtonCity();
+	}
+
+	@Then("the user checks whether the newly added row does not contain <newNameType> name type")
+	public void verifyCityNameTypeInNewlyAddedRow(@Named("newNameType") String newNameType) {
+		getEditCityPage().verifyCityNameTypeInNewlyAddedRow(newNameType);
+	}
+	
+	@Then("the user should see the maxlength of name value field set to $maxValue")
+	public void verifyCityNameValueMaxLength(@Named("maxValue") String maxValue) {
+		getEditCityPage().verifyCityNameValueMaxlength(maxValue);
+	}
 }
