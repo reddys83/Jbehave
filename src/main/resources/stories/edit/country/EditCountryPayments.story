@@ -73,7 +73,7 @@ Examples:
 |country|
 |Qatar|
 
-Scenario: Verify country payments info from trusted document
+Scenario: Verify country payments info from trusted document - Bug - ZEUS-1224
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -87,7 +87,7 @@ Examples:
 |country|
 |Qatar|
 
-Scenario: Verify country payments routing codes from trusted document
+Scenario: Verify country payments routing codes from trusted document - Bug - ZEUS-1224
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

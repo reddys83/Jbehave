@@ -669,7 +669,7 @@ public class CurrencyPage extends AbstractPage {
 
     public void verifyNoNewlyAddedCurrencyUsage() {
         try {
-            assertFalse(getDriver().findElement(currency_new_use_table_startDate_year_edit_xpath).isDisplayed());
+            assertFalse(getDriver().findElement(currency_new_usage_delete_button_xpath).isDisplayed());
         } catch (NoSuchElementException e) {
         }
     }

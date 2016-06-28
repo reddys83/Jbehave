@@ -721,8 +721,7 @@ Examples:
 |entity|searchBy|fid|entityTypeValue|
 |1165|FID|1165||
 
-Scenario: Verify that the user should see the Required field message against the first row only when user enters null value for all the entity type rows
-
+Scenario: Verify that the user should see the Required field message against the first row only when user enters null value for all the entity type rows - Bug - ZEUS-1138
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
