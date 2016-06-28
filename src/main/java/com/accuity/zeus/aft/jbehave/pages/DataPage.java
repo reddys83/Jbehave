@@ -1250,6 +1250,10 @@ public class DataPage extends AbstractPage {
         return new EditCityPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
 
     }
+    
+    public EditAreaPage createEditAreaPage() {
+        return new EditAreaPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+    }
 
     public void clickOnCountryLink() {
         attemptClick(area_basic_info_country_link_xpath);
