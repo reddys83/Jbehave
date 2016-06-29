@@ -157,15 +157,6 @@ public class EditAreaPage extends AbstractPage {
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_begandate_errorMessage_xpath")).getText());
 	}
 	
-	/**
-	 * This method is to verify whether the successful message is generated
-	 * after saving the area page.
-	 */
-	public void verifySuccessfulUpdatedMessage() {
-		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_save_confirmation_message_id"))
-				.isDisplayed());
-	}
-	
 	public void verifyDayMonthYearInAreaPage(String day, String month, String year) {
 		try {
 			Thread.sleep(3000L);
@@ -215,20 +206,7 @@ public class EditAreaPage extends AbstractPage {
 			String setBeganDate = day + " " + month + " " + year;
 			assertEquals(getAreaInfoFromDB(country, area, tagName, source), setBeganDate);
 		}
-
 	}
-	
-	public void verifyNoSummaryConfirmationModal(String summaryText) {
-		try {
-			WebElement confirmChanges = getDriver()
-					.findElement(AreaIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
-			String confirmationText = confirmChanges.getText();
-			assertTrue(!(confirmationText.contains(summaryText)));
-		} catch (Exception e) {
-			assertTrue(false);
-		}
-	}
-	
 
 	@Override
 	public String getPageUrl() {

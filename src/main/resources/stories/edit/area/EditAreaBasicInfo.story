@@ -11,6 +11,8 @@ JIRA ID - ZEUS-1026 - User can edit Area's Began Date
 Scenario: User can edit area Began Date - 
 a)Verify if user can see all the months in month dropdown (Began Date) are in MMM format
 b)Verify if user can see that all the months are sorted as per chronological order
+c)Verify if User can see Current value of the Month,Day & Year is retrieved from trusted document
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -21,36 +23,17 @@ And the user enters the area <area> in the type-ahead box
 When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 Then the user verifies whether all the months in the drop down option for area are in MMM format & are sorted in the chronological order
-
-Examples:
-|country|area|
-|Angola|Cabinda|
-
-Scenario: User can edit Area Began Date - Verify if User can see Current value of the Month,Day & Year is retrieved from trusted document.
-
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the area tab in the data area
-When the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-When the user clicks on the area basic info link in the navigation bar
-And the user clicks on the area update link
 Then the user should see area began date value same as in trusted document
 
 Examples:
 |country|area|
 |Angola|Cabinda|
 
-
 Scenario: User can edit area Began Date - User has entered an 'Began Date' that is different from the current value, verify if
 a)User can see Success message in Area Page
 b)User can see entered values updated in Area Page
 c)User can see entered values updated in Zeus document
 d)User can see Basic info changes are updated in Confirmation Modal
-
-Meta: @EditAreaWithValidBeganDates
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -65,7 +48,6 @@ When the user gets the document with get document id for area with the <area> fr
 When the user enters <day2> <month2> <year2> Began Date in the edit basic info area page
 When the user clicks on the save button
 When the user clicks on the confirm button
-Then the user should see the successful update message at top of the area page
 When the user clicks on the area update link
 When the user enters began date day <day> in the edit basic info area page
 When the user enters began date month <month> in the edit basic info area page
@@ -76,7 +58,6 @@ And the user should see the below summary changes in confirmation modal
 |Summary|
 |Basic Info|
 When the user clicks on the confirm button
-Then the user should see the successful update message at top of the area page
 Then the user should see the entered <day> <month> <year> in area page
 Then the user should see the area began date <day> <month> <year> value in zeus document
 Then the user reverts the changes to the document
@@ -92,8 +73,6 @@ b)User can see entered values updated in Area Page
 c)User can see entered values updated in Zeus document
 d)User can see Basic info changes are updated in Confirmation Modal
 
-Meta: @EditAreaWithValidBeganDates
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -109,7 +88,6 @@ When the user enters began date month <month> in the edit basic info area page
 When the user enters began date year <year> in the edit basic info area page
 When the user clicks on the save button
 When the user clicks on the confirm button
-Then the user should see the successful update message at top of the area page
 Then the user should see the entered <day> <month> <year> in area page
 Then the user should see the area began date <day> <month> <year> value in zeus document
 Then the user reverts the changes to the document
@@ -123,8 +101,6 @@ Examples:
 
 Scenario: User can edit area Began Date - Verify if User can see Began date getting saved in Area Page & Zeus document  when Day,Month & Year are entered as blank values
 
-Meta: @EditAreaWithBlankBeganDates
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -140,7 +116,6 @@ When the user enters began date month <month> in the edit basic info area page
 When the user enters began date year <year> in the edit basic info area page
 When the user clicks on the save button
 When the user clicks on the confirm button
-Then the user should see the successful update message at top of the area page
 Then the user should see the entered <day> <month> <year> in area page
 Then the user should see the area began date <day> <month> <year> value in zeus document
 Then the user reverts the changes to the document
@@ -219,8 +194,6 @@ Examples:
 
 Scenario: User can edit area Began Date - Verify if User can see a success message in Area basic info edit page when Day,Month & Year which is no different than current value entered
 
-Meta: @EditAreaWithSameBeganDates
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -236,7 +209,6 @@ When the user enters began date month <month> in the edit basic info area page
 When the user enters began date year <year> in the edit basic info area page
 When the user clicks on the save button
 When the user clicks on the confirm button
-Then the user should see the successful update message at top of the area page
 When the user clicks on the area update link
 When the user enters began date day <day> in the edit basic info area page
 When the user enters began date month <month> in the edit basic info area page
@@ -244,7 +216,6 @@ When the user enters began date year <year> in the edit basic info area page
 When the user clicks on the save button
 Then the user should not see the <ConfirmationSummary> changes in confirmation modal for area
 When the user clicks on the confirm button
-Then the user should see the successful update message at top of the area page
 Then the user should see the entered <day> <month> <year> in area page
 Then the user should see the area began date <day> <month> <year> value in zeus document
 Then the user reverts the changes to the document

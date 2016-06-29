@@ -63,11 +63,6 @@ public class EditAreaSteps extends AbstractSteps {
 		enterYearInBeganDate(year2);
 	}
 	
-	@Then("the user should see the successful update message at top of the area page")
-	public void verifySuccessfulUpdatedMessage() {
-		getEditAreaPage().verifySuccessfulUpdatedMessage();
-	}
-	
 	@Then("the user should see the entered <day> <month> <year> in area page")
 	public void verifyDayMonthYearInAreaPage(@Named("day") String day, @Named("month") String month,
 			@Named("year") String year) {
@@ -83,7 +78,7 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@Then("the user should not see the <ConfirmationSummary> changes in confirmation modal for area")
 	public void verifyNoChangeConfirmationMsg(@Named("ConfirmationSummary") String ConfirmationSummary) {
-		getEditAreaPage().verifyNoSummaryConfirmationModal(ConfirmationSummary);
+		getDataPage().verifyNoSummaryConfirmationModal(ConfirmationSummary);
 	}
 
 }
