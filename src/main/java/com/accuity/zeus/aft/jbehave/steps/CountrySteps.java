@@ -1140,4 +1140,8 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyDisabledGoButtonStatus();
     }
 
+    @When("the user deletes the existing banking hours rows")
+    public void deleteAllBankingHours() {
+        getCountryPage().deleteAllBankingHours();
+    }
 }

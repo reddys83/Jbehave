@@ -233,6 +233,8 @@ public class CountryPage extends AbstractPage {
     private By country_banking_hrs_day_list_xpath = By.xpath("//*[@class='new'] //*[@id='bankingDay-select']");
     private By country_banking_hrs_start_time_list_xpath = By.xpath("//*[@class='new'] //*[@data-error_ref_id='bankingHour0Error']");
     private By country_banking_hrs_end_time_list_xpath = By.xpath("//*[@class='new'] //*[@data-error_ref_id='bankingHour1Error']");
+    private By country_banking_hours_row_delete_button_xpath = By.xpath(".//*[@id='additionalBusinessHours']//button[@class='delete-row']");
+    private By country_banking_hours_delete_row_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
     private By country_places_go_button_xpath = By.xpath(".//*[@id='multiSelectRow']/button");
     private By country_places_required_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='relatedPlacePlaceError']");
     private By country_places_delete_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='relatedPlaces']//button[@class='delete-row']");
@@ -246,7 +248,7 @@ public class CountryPage extends AbstractPage {
     String country_places_city_dropdown_xpath = ".//*[@id='city_chosen']";
     private By country_hera_validation_err_msg_xpath = By.xpath("//*[@id='error']//p[@class='notification error']");
     private By country_places_details_Select_dropdown_xpath = By.xpath("//*[@id='additionalRelatedPlaces']/tr[@class='new']/td[4]/select");
-    String country_relatedentity_list_table_xpath= "//*[@id='countryPresences']//tr[td='";
+    String country_relatedentity_list_table_xpath = "//*[@id='countryPresences']//tr[td='";
 
     private String editedCountryBankingHrsDay = "";
     private String editedCountryBankingHrsStartTime = "";
@@ -373,8 +375,8 @@ public class CountryPage extends AbstractPage {
             assertEquals(document.getElementsByTagName("ISO2").item(i).getTextContent(), getDriver().findElement(country_iso2_id).getText());
             assertEquals(document.getElementsByTagName("ISO3").item(i).getTextContent(), getDriver().findElement(country_iso3_id).getText());
             assertEquals(document.getElementsByTagName("Status").item(i).getTextContent().toLowerCase(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Status']/td")).getText().toLowerCase());
-            assertEquals(document.getElementsByTagName("BeginDate").item(i).getTextContent().replace(" ", "").replaceFirst("^0+(?!$)", ""), getDriver().findElement(country_basic_info_startDate_day_edit_xpath).getAttribute("value") + getDriver().findElement(By.xpath(country_basic_info_startDate_month_edit_xpath + "/option[@selected='selected']")).getText().replace(" ","") + getDriver().findElement(country_basic_info_startDate_year_edit_xpath).getAttribute("value").replace(" ", ""));
-            assertEquals(document.getElementsByTagName("EndDate").item(i).getTextContent().replace(" ", "").replaceFirst("^0+(?!$)", ""), getDriver().findElement(country_basic_info_endDate_day_edit_xpath).getAttribute("value") + getDriver().findElement(By.xpath(country_basic_info_endDate_month_edit_xpath + "/option[@selected='selected']")).getText().replace(" ","") + getDriver().findElement(country_basic_info_endDate_year_edit_xpath).getAttribute("value").replace(" ", ""));
+            assertEquals(document.getElementsByTagName("BeginDate").item(i).getTextContent().replace(" ", "").replaceFirst("^0+(?!$)", ""), getDriver().findElement(country_basic_info_startDate_day_edit_xpath).getAttribute("value") + getDriver().findElement(By.xpath(country_basic_info_startDate_month_edit_xpath + "/option[@selected='selected']")).getText().replace(" ", "") + getDriver().findElement(country_basic_info_startDate_year_edit_xpath).getAttribute("value").replace(" ", ""));
+            assertEquals(document.getElementsByTagName("EndDate").item(i).getTextContent().replace(" ", "").replaceFirst("^0+(?!$)", ""), getDriver().findElement(country_basic_info_endDate_day_edit_xpath).getAttribute("value") + getDriver().findElement(By.xpath(country_basic_info_endDate_month_edit_xpath + "/option[@selected='selected']")).getText().replace(" ", "") + getDriver().findElement(country_basic_info_endDate_year_edit_xpath).getAttribute("value").replace(" ", ""));
 
             assertEquals(document.getElementsByTagName("ReplacedBy").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Replaced By']/td")).getText());
             assertEquals(document.getElementsByTagName("AddInfo").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Add Info']/td")).getText());
@@ -806,7 +808,7 @@ public class CountryPage extends AbstractPage {
         attemptClick(country_entity_link_id);
     }
 
-    public void verifyRelatedEntitiesFromTrusted(String countryname,String source) {
+    public void verifyRelatedEntitiesFromTrusted(String countryname, String source) {
 
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", countryname));
@@ -820,20 +822,20 @@ public class CountryPage extends AbstractPage {
         List legalTitles = getNodeValuesByTagName(document, "legalTitle");
         List types = getNodeValuesByTagName(document, "type");
         List details = getNodeValuesByTagName(document, "details");
-        String detail="";
+        String detail = "";
         for (int i = 0; i < legalTitles.size(); i++) {
             String legalTitle = legalTitles.get(i).toString();
             String type = types.get(i).toString();
-            if(details.size()!=0)
-            {
-                detail=details.get(i).toString();
+            if (details.size() != 0) {
+                detail = details.get(i).toString();
             }
-            assertTrue(getDriver().findElement(By.xpath(country_relatedentity_list_table_xpath+type+"']/td[2]")).getText().equals(legalTitle));
-            assertTrue(getDriver().findElement(By.xpath(country_relatedentity_list_table_xpath+type+"']/td[3]")).getText().replace(", ","").equals(detail));
+            assertTrue(getDriver().findElement(By.xpath(country_relatedentity_list_table_xpath + type + "']/td[2]")).getText().equals(legalTitle));
+            assertTrue(getDriver().findElement(By.xpath(country_relatedentity_list_table_xpath + type + "']/td[3]")).getText().replace(", ", "").equals(detail));
         }
 
 
     }
+
     public void clickOnCountryPeople() {
         attemptClick(country_people_link_id);
     }
@@ -1075,7 +1077,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void selectsPlacesDetailsFromDropdown(String PlaceDetails) {
-        selectItemFromDropdownListByText(country_places_details_Select_dropdown_xpath ,PlaceDetails);
+        selectItemFromDropdownListByText(country_places_details_Select_dropdown_xpath, PlaceDetails);
     }
 
     public void selectsRegionTypeFromDropdown(String regionType) {
@@ -1096,8 +1098,8 @@ public class CountryPage extends AbstractPage {
 
     public void selectsRegionValueFromDropdown(String regionValue) {
 
-        By regionDropDown  = By.xpath(country_region_value_dropdown_xpath);
-        selectItemFromDropdownListByValue(regionDropDown,regionValue);
+        By regionDropDown = By.xpath(country_region_value_dropdown_xpath);
+        selectItemFromDropdownListByValue(regionDropDown, regionValue);
     }
 
     public void verifyContinentRegionsValuesDropdown() {
@@ -1768,12 +1770,32 @@ public class CountryPage extends AbstractPage {
     public void pressEnterButtonInDeleteConfirmationModal() {
         getDriver().findElement(country_delete_yes_button_id).sendKeys(Keys.ENTER);
     }
-    public void verifyDisabledGoButtonStatus()
-    { try {
-        Thread.sleep(2000L);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
+
+    public void verifyDisabledGoButtonStatus() {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertFalse(getDriver().findElement(country_places_go_button_xpath).isEnabled());
     }
-}
+
+    public void verifyDeleteConfirmationModal() {
+        assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(country_banking_hours_delete_row_confirmation_modal_xpath).getText());
+    }
+
+
+    public void deleteAllBankingHours() {
+
+        List<WebElement> deleteRows = getDriver().findElements(country_banking_hours_row_delete_button_xpath);
+        for (int i = 0; i < deleteRows.size(); i++) {
+            WebElement currentInstance = getDriver().findElements((country_banking_hours_row_delete_button_xpath)).get(0);
+             if (currentInstance != null) {
+              currentInstance.click();
+        }
+                verifyDeleteConfirmationModal();
+                pressEnterButtonInDeleteConfirmationModal();
+            }
+        }
+    }
+
