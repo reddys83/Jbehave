@@ -19,7 +19,6 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -50,24 +49,8 @@ public class EditAreaPage extends AbstractPage {
 
 	}
 	
-
 	/**
-	 * This method is to verify the specified value 'valueToBeVerified' is
-	 * present in specified 'source' DB
-	 * 
-	 * @param country
-	 * @param area
-	 * @param tagName
-	 * @param source
-	 * @param valueTobeverifed
-	 */
-	public void verifyAreaInfoFromDB(String country, String area, String tagName, String source,
-			String valueTobeverifed) {
-		assertEquals(getAreaInfoFromDB(country, area, tagName, source), valueTobeverifed);
-	}
-
-	/**
-	 * This method is used to get the city information from DB
+	 * This method is used to get the area information from DB
 	 * 
 	 * @param country
 	 * @param area
@@ -176,14 +159,14 @@ public class EditAreaPage extends AbstractPage {
 	
 	/**
 	 * This method is to verify whether the successful message is generated
-	 * after saving the city page.
+	 * after saving the area page.
 	 */
 	public void verifySuccessfulUpdatedMessage() {
 		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_save_confirmation_message_id"))
 				.isDisplayed());
 	}
 	
-	public void verifyDayMonthYearInCityPage(String day, String month, String year) {
+	public void verifyDayMonthYearInAreaPage(String day, String month, String year) {
 		try {
 			Thread.sleep(3000L);
 		} catch (InterruptedException e) {
@@ -233,6 +216,17 @@ public class EditAreaPage extends AbstractPage {
 			assertEquals(getAreaInfoFromDB(country, area, tagName, source), setBeganDate);
 		}
 
+	}
+	
+	public void verifyNoSummaryConfirmationModal(String summaryText) {
+		try {
+			WebElement confirmChanges = getDriver()
+					.findElement(AreaIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
+			String confirmationText = confirmChanges.getText();
+			assertTrue(!(confirmationText.contains(summaryText)));
+		} catch (Exception e) {
+			assertTrue(false);
+		}
 	}
 	
 

@@ -56,11 +56,11 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyErrorMessageBeganDate(beganDateErrorMsg);
 	}
 	
-	@When("the user enters $beganDay $beganMonth $beganYear for Began Date values for area")
-	public void enterBeganDate(@Named("beganDay") String beganDay, @Named("beganMonth") String beganMonth, @Named("beganYear") String beganYear) {
-		enterDayInBeganDate(beganDay);
-		enterMonthInBeganDate(beganMonth);
-		enterYearInBeganDate(beganYear);
+	@When("the user enters <day2> <month2> <year2> Began Date in the edit basic info area page")
+	public void enterBeganDate(@Named("day2") String day2, @Named("month2") String month2, @Named("year2") String year2) {
+		enterDayInBeganDate(day2);
+		enterMonthInBeganDate(month2);
+		enterYearInBeganDate(year2);
 	}
 	
 	@Then("the user should see the successful update message at top of the area page")
@@ -69,9 +69,9 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@Then("the user should see the entered <day> <month> <year> in area page")
-	public void verifyDayMonthYearInCityPage(@Named("day") String day, @Named("month") String month,
+	public void verifyDayMonthYearInAreaPage(@Named("day") String day, @Named("month") String month,
 			@Named("year") String year) {
-		getEditAreaPage().verifyDayMonthYearInCityPage(day, month, year);
+		getEditAreaPage().verifyDayMonthYearInAreaPage(day, month, year);
 	}
 	
 	@Then("the user should see the area began date <day> <month> <year> value in $source document")
@@ -79,6 +79,11 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("source") String source, @Named("day") String day,
 			@Named("month") String month, @Named("year") String year) {
 		getEditAreaPage().verifyAreaBeganDateFromZeusDB(country, area, "BeganDate", source, day, month, year);
+	}
+	
+	@Then("the user should not see the <ConfirmationSummary> changes in confirmation modal for area")
+	public void verifyNoChangeConfirmationMsg(@Named("ConfirmationSummary") String ConfirmationSummary) {
+		getEditAreaPage().verifyNoSummaryConfirmationModal(ConfirmationSummary);
 	}
 
 }

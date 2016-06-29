@@ -16,6 +16,7 @@ public class AreaIdentifiers {
 		hmap.put("area_began_date_info_text_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='Began Date']/td"));
 		hmap.put("area_begandate_errorMessage_xpath",By.xpath("//*[@data-error_id='startDateError']"));
 		hmap.put("area_save_confirmation_message_id", By.xpath(("//*[@id='saveSuccess']")));
+		hmap.put("confirmation_modal_xpath", By.xpath("//*[@id='modal-region']"));
 	}
 
 	public static By getObjectIdentifier(String key) {
