@@ -13,7 +13,6 @@ public class SearchSteps extends AbstractSteps {
 
 	@Given("a user is on the search page")
 	public void SearchPage() {
-
 		searchPage = new SearchPage(webDriverState.getWebDriver(), getDataManagementWebappUrl(), database, apacheHttpClient, restClient, heraApi);
 		setSearchPage(searchPage.goToSearchPage());
 	}
