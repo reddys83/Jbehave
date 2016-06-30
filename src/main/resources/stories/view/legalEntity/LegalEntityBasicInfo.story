@@ -74,6 +74,7 @@ Examples:
 |Berliner Volksbank eG|Name|Budapester Strasse 35, 10787, Berlin, Germany|1717|20205500|
 
 Scenario: Verify the User can follow link to head office from legal entity
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -177,7 +178,7 @@ Then the user should see the below legal entity sections
 
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
-|Collins Stewart Europe Limited|Name||271690||
+|Bank of America National Association|Name||1038||
 
 Scenario: Verify the head office address for legalEntity with head office not like -0
 Given a user is on the search page
