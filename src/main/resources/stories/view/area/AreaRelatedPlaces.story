@@ -7,6 +7,8 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-305 - User can view an area's related places
 and
 JIRA ID - ZEUS-370 - User can follow link to city from area
+and
+JIRA ID - ZEUS-368 - User can follow link to country from area
 
 Scenario: Verify Area related places.
 Given a user is on the search page
@@ -157,3 +159,48 @@ And the user should see the city's names as:
 Examples:
 |country|area|subArea|areaCity|
 |USA|Illinois|Cook|South Valley Stream|
+
+
+Scenario: Verify User can follow link to country from area related place- click same country
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the area's places link in the navigation bar
+And the user clicks on the area related place link USA
+Then the user should see the country page with USA selected
+And the user should see the area's names as:
+|TYPE|VALUE|
+|Country Name|USA|
+
+
+Examples:
+|country|area|
+|USA|ILLINOIS|
+
+
+Scenario: Verify User can follow link to country from Sub-area related place
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a sub-area option
+And the user enters the sub-area <subArea> in the type-ahead box
+And the user clicks on the area's places link in the navigation bar
+And the user clicks on the area related place link USA
+Then the user should see the country page with USA selected
+And the user should see the area's names as:
+|TYPE|VALUE|
+|Country Name|USA|
+
+Examples:
+|country|area|subArea|
+|USA|ILLINOIS|Cook
+
+

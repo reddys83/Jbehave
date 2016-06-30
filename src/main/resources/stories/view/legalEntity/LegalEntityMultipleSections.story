@@ -36,7 +36,6 @@ Examples:
 |1038|fid|1038|
 
 Scenario: Verify multiple sections
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -48,28 +47,29 @@ And the user clicks on the legal entity credit rating link in the navigation bar
 
 Then the user should see the legal entity's credit ratings as:
 |NAME|TYPE|VALUE|Date APPLIED|DATE CONFIRMED|
-|Fitch |Long Term Rating|A+|07 Oct 2015||
-|Fitch |Short Term Rating|F1|07 Oct 2015||
-|Moody's|Long Term Rating|A1|02 Sep 2015||
-|Moody's|Short Term Rating|P-1|02 Sep 2015||
+|Capital Intelligence|Long Term Rating|A+|07 Oct 2015||
 |Standard & Poors|Long Term Rating|A|02 Dec 2011||
 |Standard & Poors|Short Term Rating|A-1|02 Dec 2011||
+|Fitch|Long Term Rating|A+|07 Oct 2015||
+|Fitch|Short Term Rating|F1|07 Oct 2015||
+|Capital Intelligence|Short Term Rating|F1|07 Oct 2015||
+|Japan Credit Rating Agency|Long Term Rating|A+|07 Oct 2015||
+|Moody's|Long Term Rating|A1|02 Sep 2015||
+|Moody's|Short Term Rating|P-1|02 Sep 2015||
 
 When the user clicks on the legal entity identifier link in the navigation bar
 
 Then the user should see the legal entity's identifiers as:
 |TYPE|VALUE|STATUS|
-|The Global Markets Entity Identifier (GMEI)|B4TYDEB6GKMZO031MB27|active|
-|S and P Identification Number (SPID)|105940|active|
-|RSSD|480228|active|
-|FDIC|3510|active|
-|OCC|13044|active|
-|Global Intermediary Identification Number|K613SZ.99999.SL.840|active|
-|Moodys Organisation ID|600011442|active|
-|US Tax ID|94-1687665|active|
-|Fitch ID|80089060|active|
-|The Global Markets Entity Identifier (GMEI)|B4TYDEB6GKMZO031MB27|active|
-|Global Intermediary Identification Number|K613SZ.99999.SL.840|active|
+|Bronnoysundregistrene (Norwegian LEIs) (EINO)|B4TYDEB6GKMZO031MB27|Active|
+|S and P Identification Number (SPID)|105940|Active|
+|FDIC|3510|Active|
+|US Tax ID|94-1687665|Active|
+|Fitch ID|80089060|Active|
+|Chinese Bank Serial Number|Lan Testing|Inactive|
+|National Settlement Depository (LEIRU)|12345678901234567890123456789012345678901234567890|Pending|
+|OCC|13044|Active|
+|Irish Stock Exchange (LEIIE)|Lan Iris Stock Exchange|Inactive|
 
 When the user clicks on the legal entity credit rating link in the navigation bar
 Then the user should not see the legal entity's credit ratings section

@@ -684,14 +684,19 @@ Scenario: Verify user should get the multiple errors "Duplicate primary currency
 "Currency may not be used in a country more than once in the same date range for start date" and
 "Currency may not be used in a country more than once in the same date range for end date"
 when updating a currency use for a country which is having a primary currency already and the date ranges are overlapping with previous one.
-Meta:@runme
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user get the document with get Id for currency with the name as Australian Dollar from the database
+And the user clicks on the add country type-ahead option
+When the user enters the country <addCurrencyCountry> in the add country type-ahead box
+When the user enters the currency new start day as <currencyStartDay> in the currency page
+And the user enters the currency new start month as <currencyStartMonth> in the currency page
+And the user enters the currency new start year as <currencyStartYear> in the currency page
+And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
 And the user clicks on the add country type-ahead option
 When the user enters the country <addCurrencyCountry> in the add country type-ahead box
 When the user enters the currency new start day as <currencyStartDay> in the currency page
