@@ -1,4 +1,4 @@
-Meta:@CityRelatedPlaces @City @View
+Meta:@CityRelatedPlaces @City @View @AllStories
 
 Narrative:
 In order to view the city related places
@@ -126,8 +126,8 @@ And the user clicks on the city related place link Illinois
 Then the user should see the area page with USA, Illinois and Choose a Subarea selected
 And the user should see the area's names as:
 |TYPE|VALUE|
-|Full Name|Illinois|
-|Display Name|IL|
+|Full Name|Atchison|
+|Display Name|Atchison|
 
 Examples:
 |country|area|city|

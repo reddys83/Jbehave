@@ -1,4 +1,4 @@
-Meta:@Regression
+Meta:@Smoke
 
 
 Narrative: Ensuring current build has most of the features running perfectly.
@@ -184,7 +184,7 @@ When the user enters the country <currencyCountry> in the currency usage
 When the user enters the currency start day as <currencyStartDay> in the currency page
 And the user enters the currency start month as <currencyStartMonth> in the currency page
 And the user enters the currency start year as <currencyStartYear> in the currency page
-And the user enters the currency usage primary value as <primary> in the currency page
+And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see confirmation message

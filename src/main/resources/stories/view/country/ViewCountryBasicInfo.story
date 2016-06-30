@@ -1,4 +1,4 @@
-Meta:@ViewCountryBasicInfo @Country @View
+Meta:@ViewCountryBasicInfo @Country @View @AllStories
 
 Narrative:
 In order to view and edit the currencies
@@ -48,7 +48,8 @@ And the user should see the country basic info from trusted document
 And the user should see the list of country's names type and value as:
 |TYPE|VALUE|
 |Country Name|Afghanistan|
-|Former Name|Afghanistan|
+|Display Name|Afghanistan|
+|Alternative Name|Afghanistan|
 
 And the user should see the country's demographics info as:
 |TYPE|VALUE|UNIT|DATE|
@@ -58,6 +59,8 @@ And the user should see the country's demographics info as:
 
 And the user should see the country's identifiers as:
 |TYPE|VALUE|STATUS|
+|Numeric ISO Code|ASDF|Inactive|
+|FIPS Place Code|Test Identifier|Inactive|
 |ISO 3166-1 Numeric Identifier|24601|Active|
 |ISO 3166-1 Identifier|ASDF|Inactive|
 |FIPS Code|Test Identifier|Inactive|
@@ -71,7 +74,6 @@ And the user should see the country's time zones summary as +4½ hours
 And the user should see the country's time zones as:
 |ZONE|VALUE|
 |UTC|+01:00|
-|UTC|+01:30|
 
 Examples:
 |country|

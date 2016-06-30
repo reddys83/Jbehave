@@ -20,6 +20,12 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCurrencyTab();
     }
 
+	@When("the user clicks on the city update link")
+	public void clickOnUpdateCurrencyLink() {
+		getDataPage().clickOnUpdateCurrencyLink();
+		setEditCityPage(getDataPage().createEditCityPage());
+	}
+
     @When("the user clicks on the country tab in the data area")
     public void clickOnCountryTab() {
         getDataPage().clickOnCountryTab();
@@ -855,4 +861,11 @@ public class DataSteps extends AbstractSteps {
             getDataPage().loadDocument(xqueryName);
 
         }
+    @When("the user clicks on the area related place link $relatedPlace")
+    public void clickOnAreaRelatedPlace(@Named("relatedPlace") String relatedPlace) {
+        getDataPage().clickOnAreaRelatedPlace(relatedPlace);
+    }
+
+    @When("the user clicks on the Country link in the area basic info")
+    public void clickOnCountryLink(){ getDataPage().clickOnCountryLink();}
 }

@@ -373,8 +373,8 @@ public class CountryPage extends AbstractPage {
             assertEquals(document.getElementsByTagName("ISO2").item(i).getTextContent(), getDriver().findElement(country_iso2_id).getText());
             assertEquals(document.getElementsByTagName("ISO3").item(i).getTextContent(), getDriver().findElement(country_iso3_id).getText());
             assertEquals(document.getElementsByTagName("Status").item(i).getTextContent().toLowerCase(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Status']/td")).getText().toLowerCase());
-            assertEquals(document.getElementsByTagName("BeginDate").item(i).getTextContent().replace(" ", ""), getDriver().findElement(country_basic_info_startDate_day_edit_xpath).getAttribute("value") + getDriver().findElement(By.xpath(country_basic_info_startDate_month_edit_xpath + "/option[@selected='selected']")).getText().replace(" ","") + getDriver().findElement(country_basic_info_startDate_year_edit_xpath).getAttribute("value").replace(" ", ""));
-            assertEquals(document.getElementsByTagName("EndDate").item(i).getTextContent().replace(" ", ""), getDriver().findElement(country_basic_info_endDate_day_edit_xpath).getAttribute("value") + getDriver().findElement(By.xpath(country_basic_info_endDate_month_edit_xpath + "/option[@selected='selected']")).getText().replace(" ","") + getDriver().findElement(country_basic_info_endDate_year_edit_xpath).getAttribute("value").replace(" ", ""));
+            assertEquals(document.getElementsByTagName("BeginDate").item(i).getTextContent().replace(" ", "").replaceFirst("^0+(?!$)", ""), getDriver().findElement(country_basic_info_startDate_day_edit_xpath).getAttribute("value") + getDriver().findElement(By.xpath(country_basic_info_startDate_month_edit_xpath + "/option[@selected='selected']")).getText().replace(" ","") + getDriver().findElement(country_basic_info_startDate_year_edit_xpath).getAttribute("value").replace(" ", ""));
+            assertEquals(document.getElementsByTagName("EndDate").item(i).getTextContent().replace(" ", "").replaceFirst("^0+(?!$)", ""), getDriver().findElement(country_basic_info_endDate_day_edit_xpath).getAttribute("value") + getDriver().findElement(By.xpath(country_basic_info_endDate_month_edit_xpath + "/option[@selected='selected']")).getText().replace(" ","") + getDriver().findElement(country_basic_info_endDate_year_edit_xpath).getAttribute("value").replace(" ", ""));
 
             assertEquals(document.getElementsByTagName("ReplacedBy").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Replaced By']/td")).getText());
             assertEquals(document.getElementsByTagName("AddInfo").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Add Info']/td")).getText());
@@ -868,7 +868,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyCountryNameTypesList() {
-        List<WebElement> countryNameTypesList = getDriver().findElements(By.xpath(country_name_type_list_xpath + "/option"));
+        List<WebElement> countryNameTypesList = getDriver().findElements(country_name_type_list_xpath);
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get country names type");
         for (int i = 1; i < document.getElementsByTagName("type").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), countryNameTypesList.get(i).getText());
@@ -1573,17 +1573,12 @@ public class CountryPage extends AbstractPage {
         }
     }
 
-    public void enterCreditRatingValue(String value) {
-        getDriver().findElement(country_credit_rating_value_xpath).sendKeys(value);
-
+    public void VerifyCreditRatingValueMaxLength(String maxLength) {
+        assertEquals(getDriver().findElement(country_credit_rating_value_xpath).getAttribute("maxlength"), maxLength);
     }
 
-    public void verifyErrorMessageForValidCharacters() {
-        assertEquals("Enter up to 5 valid characters.", getDriver().findElement(country_credit_value_error_msg_xpath).getText());
-    }
-
-    public void verifyErrorMessageEnterYearMonthDayForAppliedDate() {
-        assertEquals("Enter a year, month/year or day/month/year.", getDriver().findElement(country_credit_rating_applied_date_error_msg_xpath).getText());
+    public void verifyErrorMessageEnterYearMonthDayForAppliedDate(String errorMsg) {
+        assertEquals(errorMsg, getDriver().findElement(country_credit_rating_applied_date_error_msg_xpath).getText());
     }
 
     public void verifyCountryEditPageMode() {
@@ -1726,8 +1721,8 @@ public class CountryPage extends AbstractPage {
         getDriver().findElement(country_credit_rating_confirmed_date_day_xpath).sendKeys(confirmedDay);
     }
 
-    public void verifyErrorMessageEnterYearMonthDayForConfirmedDate() {
-        assertEquals("Enter a year, month/year or day/month/year.", getDriver().findElement(country_credit_rating_confirmed_date_error_msg_xpath).getText());
+    public void verifyErrorMessageEnterYearMonthDayForConfirmedDate(String errorMsgForDate) {
+        assertEquals(errorMsgForDate, getDriver().findElement(country_credit_rating_confirmed_date_error_msg_xpath).getText());
     }
 
     public void verifyNewlyAddedCreditRatingRow() {
@@ -1774,7 +1769,11 @@ public class CountryPage extends AbstractPage {
         getDriver().findElement(country_delete_yes_button_id).sendKeys(Keys.ENTER);
     }
     public void verifyDisabledGoButtonStatus()
-    {
+    { try {
+        Thread.sleep(2000L);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
         assertFalse(getDriver().findElement(country_places_go_button_xpath).isEnabled());
     }
 }

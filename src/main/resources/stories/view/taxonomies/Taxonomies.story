@@ -1,4 +1,4 @@
-Meta:@Taxonomies @View
+Meta:@Taxonomies @View @AllStories
 
 Narrative:
 As a user

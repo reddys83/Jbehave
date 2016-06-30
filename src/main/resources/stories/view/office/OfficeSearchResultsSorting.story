@@ -1,4 +1,4 @@
-Meta:@OfficeSearchResultsSorting @Office @View
+Meta:@OfficeSearchResultsSorting @Office @View @AllStories
 
 Narrative:
 As a user
@@ -30,7 +30,7 @@ Then the user should see the multiple office types sorted alphabetically with co
 
 Examples:
 |entity|searchBy|fid|
-|Joint Stock Company 'Petersburg Social Commercial Bank'|Name|113461|
+|Petersburg Social Commercial Bank Open Joint Stock Company|Name|113461|
 
 Scenario: Verify the sorting office results by FID
 Meta:

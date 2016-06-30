@@ -1,4 +1,4 @@
-Meta:@Report @View
+Meta:@Report @View @AllStories
 
 Narrative:
 In order to view stub entry details

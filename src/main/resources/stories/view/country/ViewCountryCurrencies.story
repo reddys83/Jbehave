@@ -1,4 +1,4 @@
-Meta:@ViewCountryCurrencies @Country @View
+Meta:@ViewCountryCurrencies @Country @View @AllStories
 
 Narrative:
 In order to view and edit the currencies
@@ -40,7 +40,6 @@ When the user clicks on the currencies link in the navigation bar
 Then the user should see the country's currencies as:
 |ISO|NAME|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
 |KPW|Korean People's Won|19 Sep 2001||true||active|
-|KPW|Korean People's Won|01 Jan 1980||true||active|
 
 Examples:
 |country|
@@ -57,7 +56,6 @@ When the user clicks on the currencies link in the navigation bar
 Then the user should see the country's currencies as:
 |ISO|NAME|START DATE|END DATE|PRIMARY|REPLACED BY|STATUS|
 |XPF|Franc CFP|02 Jan 2002||true||active|
-|XPF|Franc CFP|01 Jan 1980|31 Dec 2001|true|EUR|inactive|
 
 Examples:
 |country|
@@ -76,4 +74,4 @@ Then the user should see the currency page for clicked iso name
 
 Examples:
 |country|isoCode|
-|Haiti|HTG|
+|Madagascar|MGA|

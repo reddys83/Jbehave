@@ -1,4 +1,4 @@
-Meta:@SubAreaList @Area @View
+Meta:@SubAreaList @Area @View @AllStories
 
 Narrative:
 In order to view the places of country

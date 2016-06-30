@@ -1,4 +1,4 @@
-Meta:@ViewCurrency @Currency @View
+Meta:@ViewCurrency @Currency @View @AllStories
 
 Narrative:
 In order to view and edit the currencies
@@ -56,7 +56,7 @@ And the user should see the currency quantity value as <quantity> in the currenc
 
 Examples:
 |currency|isoCode|name|abbr|unit|quantity|
-|US Dollar asdt|USD|US Dollar asdf|US$ - new|Cents|100|
+|US Dollar asdt|USD|US Dollar asdt|US$ - new|Cents|100|
 |Icelandic Krona|ISK|Icelandic Krona|ISK|null|null|
 |Sudanese Dinar|SDD|Sudanese Dinar|Dinar|Dirham|null|
 

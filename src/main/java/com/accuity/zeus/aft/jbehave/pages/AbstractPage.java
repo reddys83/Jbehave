@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,6 +18,7 @@ import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertNotNull;
@@ -177,6 +179,20 @@ public abstract class AbstractPage {
             dropdown.selectByVisibleText(value);
         }
     }
+    
+    public void selectItemFromDropdownListByText(WebElement obj, String value) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Select dropdown = new Select(obj);
+        if (value.equals("")) {
+            dropdown.selectByValue(value);
+        } else {
+            dropdown.selectByVisibleText(value);
+        }
+    }
 
     public void modifyHtmlByName(By element, String attribute, String value) {
         WebElement webElement = getDriver().findElement(element);
@@ -242,6 +258,49 @@ public abstract class AbstractPage {
         bigString=builder.toString();
         return bigString;
 
+    }
+    
+    /**
+	 * This method is to generate a random numeric number in specified range
+	 * @param limit
+	 * @return the generated random number
+	 */
+	public String getRandomNumericString(int limit) {
+		int randomNum = 0;
+		String randomString = "";
+		Random ran = new Random();
+		for(int index =0 ; index < limit ; index++)
+		{
+			randomNum = ran.nextInt(9);
+			randomString += randomNum;
+		}	    	
+		return randomString;
+	}
+
+    public List returnAllListValues(By by){
+        List<String> dropdownValuesList = new ArrayList<>();
+        Select dropdown = new Select(getDriver().findElement(by));
+        String selectedValue = dropdown.getFirstSelectedOption().getText();
+        for (WebElement option : dropdown.getOptions()) {
+            if(!option.getText().equals("")){
+            dropdownValuesList.add(option.getAttribute("value"));}
+        }
+
+               return dropdownValuesList;
+    }
+
+    public List returnAllDropDownUnselectedValues(By by){
+        List<String> dropdownValuesList = new ArrayList<>();
+        Select dropdown = new Select(getDriver().findElement(by));
+        String selectedValue = dropdown.getFirstSelectedOption().getText();
+        for (WebElement option : dropdown.getOptions()) {
+            dropdownValuesList.add(option.getAttribute("value"));
+        }
+        dropdownValuesList.remove(selectedValue);
+        if (dropdownValuesList.get(0).equals("")) {
+            dropdownValuesList.remove(0);
+        }
+        return dropdownValuesList;
     }
 
 }

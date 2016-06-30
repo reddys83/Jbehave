@@ -1,4 +1,4 @@
-Meta:@LegalEntityBoardMeetings @LegalEntity @View
+Meta:@LegalEntityBoardMeetings @LegalEntity @View @AllStories
 
 Narrative:
 In order to view and edit the legalEntity

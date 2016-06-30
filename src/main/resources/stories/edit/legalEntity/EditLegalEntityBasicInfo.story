@@ -1,4 +1,4 @@
-Meta:@EditLegalEntityBasicInfo @Edit @LegalEntity
+Meta:@EditLegalEntityBasicInfo @Edit @LegalEntity @AllStories
 
 Narrative:
 As a user
@@ -16,6 +16,7 @@ JIRA ID - ZEUS-86 - User can update a legal entity's type
 JIRA ID - ZEUS-919 - User can edit Legal Entity's Chartered Date
 JIRA ID - ZEUS-85 - User can update legal entity's insurance type
 JIRA ID - ZEUS-83 - User can update legal entity's ownership type
+
 
 
 Scenario: Verify the default Edit value and Save Lead Institution value for a legal entity on legalEntity page
@@ -553,7 +554,6 @@ Examples:
 |1165|FID|1165|
 
 Scenario: Verify for an existing row, Legal Entity's Entity Type dropdown values from lookup LEGAL_ENTITY_CATEGORY in the same order as taxonomy except those that have already been selected for this Legal Entity
-Meta:@runme
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -721,8 +721,7 @@ Examples:
 |entity|searchBy|fid|entityTypeValue|
 |1165|FID|1165||
 
-Scenario: Verify that the user should see the Required field message against the first row only when user enters null value for all the entity type rows
-
+Scenario: Verify that the user should see the Required field message against the first row only when user enters null value for all the entity type rows - Bug - ZEUS-1138
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -1029,5 +1028,3 @@ Examples:
 |1038|fid|1038|Government Bank|
 |1038|fid|1038||
 |1038|fid|1038|Corporate Bank|
-
-

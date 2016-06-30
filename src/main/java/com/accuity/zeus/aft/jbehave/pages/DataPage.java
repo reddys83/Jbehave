@@ -4,8 +4,10 @@ import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.rest.Response;
 import com.accuity.zeus.aft.rest.RestClient;
+import com.accuity.zeus.utils.SimpleCacheManager;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -13,11 +15,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.springframework.http.ResponseEntity;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 import static org.junit.Assert.*;
@@ -197,6 +201,10 @@ public class DataPage extends AbstractPage {
     private By delete_row_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
     private By delete_confirmation_no_button_id = By.id("no-button");
     private By delete_confirmation_yes_button_id = By.id("yes-button");
+    private By save_success_message_id=By.id("saveSuccess");
+    private By area_basic_info_country_link_xpath = By.xpath(".//*//tr[th='Country']/td/a");
+    private String area_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
+
 
     static ResponseEntity responseEntity;
     static String endpointWithID;
@@ -255,6 +263,7 @@ public class DataPage extends AbstractPage {
     }
 
     public CountryPage enterCountryInTheTypeAheadBox(String country) {
+        SimpleCacheManager.getInstance().put("selectedCountry",country);
         selectedEntity = country;
         getDriver().findElement(country_type_ahead_xpath).sendKeys(country);
         getDriver().findElement(country_type_ahead_xpath).sendKeys(Keys.RETURN);
@@ -267,6 +276,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void enterAreaInTypeAhead(String area) {
+        SimpleCacheManager.getInstance().put("selectedArea",area);
         selectedEntity = area;
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(area);
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
@@ -468,9 +478,6 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyCreditRatingsLabelsGeo() {
-        if (SearchPage.selectedEntity != "") {
-            selectedEntity = SearchPage.selectedEntity;
-        }
         assertEquals("CREDIT RATING FOR " + selectedEntity.toUpperCase(), getDriver().findElement(credit_rating_label_xpath).getText());
         verifyCreditRatingsLabelsInternal();
     }
@@ -713,10 +720,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyDemographicsLabel() {
-        if (SearchPage.selectedEntity != "") {
-            selectedEntity = SearchPage.selectedEntity;
-        }
-        assertEquals("DEMOGRAPHICS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(area_demographics_label_xpath).getText());
+       assertEquals("DEMOGRAPHICS FOR " + selectedEntity.toUpperCase(), getDriver().findElement(area_demographics_label_xpath).getText());
     }
 
     public void verifyNoDemographics() {
@@ -808,6 +812,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void enterCityInTheTypeAheadBox(String city) {
+        SimpleCacheManager.getInstance().put("selectedCity",city);
         selectedEntity = city;
         getDriver().findElement(city_type_ahead_xpath).sendKeys(city);
         getDriver().findElement(city_type_ahead_xpath).sendKeys(Keys.RETURN);
@@ -956,6 +961,7 @@ public class DataPage extends AbstractPage {
 
     public void clickOnCityRelatedPlace(String relatedPlace) {
         attemptClick(By.xpath(city_related_places_place_link_xpath + relatedPlace + "']/td/a"));
+        waitForElementToAppear(area_listBox_xpath);
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -1013,6 +1019,8 @@ public class DataPage extends AbstractPage {
 
     public void clickOnConfirmButton() {
         attemptClick(confirm_button_xpath);
+        (new WebDriverWait(getDriver(), 30)).until(ExpectedConditions.presenceOfElementLocated(save_success_message_id));
+
     }
 
     public void getDocument(String xqueryName, String param, String entity) {
@@ -1038,10 +1046,15 @@ public class DataPage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
 
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
-        endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
-
-        responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
-        assertTrue(responseEntity.getStatusCode().value() == 200);
+        if(document != null) {
+	        endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
+	        
+	        responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
+	        assertTrue(responseEntity.getStatusCode().value() == 200);
+	    }
+	    else {
+            assertFalse("Zeus document with name " + name + " does not exist in the DB", true);
+	    }
     }
 
     public void revertChangesToDocument() {
@@ -1205,12 +1218,17 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifySummaryConfirmationModal(ExamplesTable Summary) {
-        List<WebElement> confirmChanges = getDriver().findElements(edit_confirmationModal_summary_xpath);
-        for (int i = 0; i < Summary.getRowCount(); i++) {
-            assertEquals(Summary.getRow(i).get(Summary.getHeaders().get(0)), confirmChanges.get(i).getText());
-        }
-    }
+	public void verifySummaryConfirmationModal(ExamplesTable Summary) {
+		try {
+			Thread.sleep(1000);
+			List<WebElement> confirmChanges = getDriver().findElements(edit_confirmationModal_summary_xpath);
+			for (int i = 0; i < Summary.getRowCount(); i++) {
+				assertEquals(Summary.getRow(i).get(Summary.getHeaders().get(0)), confirmChanges.get(i).getText());
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
     public void verifyDeleteConfirmationModal() {
         assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(delete_row_confirmation_modal_xpath).getText());
@@ -1237,5 +1255,19 @@ public class DataPage extends AbstractPage {
 
     }
 
+    public void clickOnCountryLink() {
+        attemptClick(area_basic_info_country_link_xpath);
+    }
+
+
+
+    public void clickOnAreaRelatedPlace(String relatedPlace) {
+        attemptClick(By.xpath(area_related_places_place_link_xpath + relatedPlace + "']/td/a"));
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

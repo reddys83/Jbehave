@@ -63,12 +63,12 @@ When the user clicks on the legal title in the office headers
 
 Then the user should see the legal entity's names as:
 |TYPE|VALUE|
-|Legal Title|Bank of America National Association|
-|Former Name|Bank of America National Trust & Savings Association|
+|Legal Title|Bank of Taiwan|
+|Former Name|Collins|
 
 Examples:
-|entity|searchBy|fid|officeFid|headOfficeAddress|officeTfpid|
-|Bank of America National Association|Name|1038|1038-55|Charlotte, North Carolina, USA||
+|entity|searchBy|fid|officeFid|
+|Bank of Taiwan|Name|1165|1165-12|
 
 Scenario: verify the legalTitle link in the office search resutls page should navigate to the default view of legalEntity page.
 Given a user is on the search page
@@ -84,12 +84,12 @@ When the user clicks on the legal title in the office headers
 
 Then the user should see the legal entity's names as:
 |TYPE|VALUE|
-|Legal Title|Bank of America National Association|
-|Former Name|Bank of America National Trust & Savings Association|
+|Legal Title|Bank of Taiwan|
+|Former Name|Collins|
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1165|FID|1165|
 
 Scenario: The office and department tabs should be present in the offices default view page.
 Given a user is on the search page

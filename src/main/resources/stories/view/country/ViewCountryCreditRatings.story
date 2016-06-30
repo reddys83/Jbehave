@@ -1,4 +1,4 @@
-Meta:@ViewCountryCreditRatings @Country @View
+Meta:@ViewCountryCreditRatings @Country @View @AllStories
 
 Narrative:
 In order to view and edit the currencies
@@ -19,7 +19,7 @@ When the user clicks on the country credit rating link in the navigation bar
 Then the user should see the country's credit ratings as:
 |AGENCY|TYPE|VALUE|APPLIED DATE|CONFIRMED DATE|
 |Fitch|Long Term Sovereign Debt Rating|B|01 Jan 1990|04 Jan 1991|
-|Standard & Poors|Long Term Sovereign Debt Rating|A-|Jan 1990|04 Jan 1991|
+|Standard & Poors|Long Term Sovereign Debt Rating|A-|01 Jan 1990|04 Jan 1991|
 ||Chicagos Terrible Credit Rating|F+||
 
 Examples:

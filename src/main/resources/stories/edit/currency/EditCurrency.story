@@ -1,4 +1,4 @@
-Meta:@EditCurrency @Currency @Edit
+Meta:@EditCurrency @Currency @Edit @AllStories
 
 Narrative:
 In order to view and edit the currencies
@@ -358,7 +358,7 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user get the document with get Id for currency with the name as Asian Currency Unit from the database
+And the user get the document with get Id for currency with the name as Afghani-test from the database
 
 And the user clicks on the add country type-ahead option
 When the user enters the country <addCurrencyCountry> in the add country type-ahead box
@@ -372,9 +372,9 @@ And the user reverts the changes to the document
 
 Examples:
 |currency|addCurrencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
-|Asian Currency Unit|Algeria|||1988|||1988|
-|Asian Currency Unit|Algeria||Jan|1988||Jan|1988|
-|Asian Currency Unit|Algeria|01|Jan|1988|01|Jan|1988|
+|Afghani-test|Algeria|||1988|||1988|
+|Afghani-test|Algeria||Jan|1988||Jan|1988|
+|Afghani-test|Algeria|01|Jan|1988|01|Jan|1988|
 
 Scenario: ZEUS-838 - User will see confirmation message after saving currency edits
 Save updates tp existing currency use STORY:920(failing because of invalid data in database)
@@ -634,7 +634,7 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user get the document with get Id for currency with the name as Australian Dóllar from the database
+And the user get the document with get Id for currency with the name as Australian Dollar from the database
 And the user clicks on the add country type-ahead option
 When the user enters the country <addCurrencyCountry> in the add country type-ahead box
 When the user enters the currency new start day as <currencyStartDay> in the currency page
@@ -649,7 +649,7 @@ And the user reverts the changes to the document
 
 Examples:
 |currency|addCurrencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|primary|
-|Australian Dóllar|USA|01|Jan|1980|false|
+|Australian Dollar|USA|01|Jan|1980|false|
 
 Scenario: Verify user should get the error "Duplicate primary currency exists" for multiple rows when updating a currency use for multiple countries which are having a primary currency already.
 
@@ -659,7 +659,7 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user get the document with get Id for currency with the name as Australian Dóllar from the database
+And the user get the document with get Id for currency with the name as Australian Dollar from the database
 And the user clicks on the add country type-ahead option
 When the user enters the country <addCurrencyCountry> in the add country type-ahead box
 When the user enters the currency new start day as <currencyStartDay> in the currency page
@@ -678,20 +678,25 @@ Then the user should see the error message at top of page the highlighted fields
 
 Examples:
 |currency|addCurrencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|primary|addSecondCurrencyCountry|
-|Australian Dóllar|USA|01|Jan|1980|true|UK|
+|Australian Dollar|USA|01|Jan|1980|true|UK|
 
 Scenario: Verify user should get the multiple errors "Duplicate primary currency exists",
 "Currency may not be used in a country more than once in the same date range for start date" and
 "Currency may not be used in a country more than once in the same date range for end date"
 when updating a currency use for a country which is having a primary currency already and the date ranges are overlapping with previous one.
-Meta:@runme
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user get the document with get Id for currency with the name as Australian Dóllar from the database
+And the user clicks on the add country type-ahead option
+When the user enters the country <addCurrencyCountry> in the add country type-ahead box
+When the user enters the currency new start day as <currencyStartDay> in the currency page
+And the user enters the currency new start month as <currencyStartMonth> in the currency page
+And the user enters the currency new start year as <currencyStartYear> in the currency page
+And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
 And the user clicks on the add country type-ahead option
 When the user enters the country <addCurrencyCountry> in the add country type-ahead box
 When the user enters the currency new start day as <currencyStartDay> in the currency page

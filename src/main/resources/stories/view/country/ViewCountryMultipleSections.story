@@ -1,4 +1,4 @@
-Meta:@ViewCountryMultipleSections @Country @View
+Meta:@ViewCountryMultipleSections @Country @View @AllStories
 
 Narrative:
 In order to view and edit the currencies
@@ -25,7 +25,8 @@ When the user clicks on the country basic info link in the navigation bar
 Then the user should see the list of country's names type and value as:
 |TYPE|VALUE|
 |Country Name|Afghanistan|
-|Former Name|Afghanistan|
+|Display Name|Afghanistan|
+|Alternative Name|Afghanistan|
 
 And the user should see the country's demographics info as:
 |TYPE|VALUE|UNIT|DATE|
@@ -35,6 +36,8 @@ And the user should see the country's demographics info as:
 
 And the user should see the country's identifiers as:
 |TYPE|VALUE|STATUS|
+|Numeric ISO Code|ASDF|Inactive|
+|FIPS Place Code|Test Identifier|Inactive|
 |ISO 3166-1 Numeric Identifier|24601|Active|
 |ISO 3166-1 Identifier|ASDF|Inactive|
 |FIPS Code|Test Identifier|Inactive|
@@ -48,7 +51,6 @@ And the user should see the country's time zones summary as +4½ hours
 And the user should see the country's time zones as:
 |ZONE|VALUE|
 |UTC|+01:00|
-|UTC|+01:30|
 
 When the user clicks on the country holidays link in the navigation bar
 
@@ -72,14 +74,6 @@ Then the user should see the country's holidays list as:
 |15 Feb 2016|Liberation Day||
 |21 Mar 2016|Noruz (New Year) 1||
 |28 Apr 2016|Victory Day||
-|06 Jun 2016|Ramadan||
-|06 Jul 2016|Eid ul Fitr 1||
-|07 Jul 2016|Eid ul Fitr 2||
-|12 Sep 2016|Eid ul Adha 1||
-|13 Sep 2016|Eid ul Adha 2||
-|14 Sep 2016|Eid ul Adha 3||
-|11 Oct 2016|Ashoora||
-|12 Dec 2016|Mohemmed's Birthday||
 
 When the user clicks on the country regions link in the navigation bar
 Then the user should see the country's alternative regions as:
@@ -128,7 +122,8 @@ When the user clicks on the country basic info link in the navigation bar
 Then the user should see the list of country's names type and value as:
 |TYPE|VALUE|
 |Country Name|Afghanistan|
-|Former Name|Afghanistan|
+|Display Name|Afghanistan|
+|Alternative Name|Afghanistan|
 When the user clicks on the choose a country option
 When the user enters an another country Åland Islands in the type-ahead box
 Then the user should see the list of country's names type and value as:

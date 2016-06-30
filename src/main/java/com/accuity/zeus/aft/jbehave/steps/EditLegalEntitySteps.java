@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 
 import com.accuity.zeus.aft.jbehave.steps.AbstractSteps;
+import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
@@ -268,7 +269,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
     @Then("the user should see entityType value as <entityTypeValue> for fid <fid> in $source document")
     public void verifyEditLegalEntityEntityTypeValueFromZeus(@Named("entityTypeValue") String entityTypeValue,@Named("fid") String fid,@Named("source") String source) {
-        getEditLegalEntityPage().verifyEditLegalEntityEntityTypeValueFromZeus(entityTypeValue,"type",fid,source);
+        getEditLegalEntityPage().verifyLegalEntityDocumentInZeus(entityTypeValue, "type", fid, source, "get legal entity basic info left column");
     }
 
     @Then("the user should see creditratings values as <agencyName><type><value><AppliedDateDay><AppliedDateMonth><AppliedDateYear><ConfirmedDateDay><ConfirmedDateMonth><ConfirmedDateYear> for fid <fid> in $source document")
@@ -454,14 +455,71 @@ public class EditLegalEntitySteps extends AbstractSteps{
     public void clickOnLegalEntityLocationTypeDropDwon() {
         getEditLegalEntityPage().clickOnLegalEntityLocationTypeDropDwon();
     }
+    @When("the user clicks on the type dropdown in legalEntity personnel for $webElement")
+    public void clickOnLegalEntityPersonnelTypeDropdown(@Named("webElement") String webElement) {
+        getEditLegalEntityPage().clickOnLegalEntityPersonnelTypeDropdown(webElement);
+    }
+    @When("the user clicks on the type dropdown in legalEntity board meeting for $webElement")
+    public void clickOnLegalEntityBoardMeetingsTypeDropdown(@Named("webElement") String webElement) {
+        getEditLegalEntityPage().clickOnLegalEntityBoardMeetingsTypeDropdown(webElement);
+    }
+    @When("the user clicks on the value dropdown in legalEntity board meeting for $webElement")
+    public void clickOnLegalEntityBoardMeetingsValueDropdown(@Named("webElement") String webElement) {
+        getEditLegalEntityPage().clickOnLegalEntityBoardMeetingsValueDropdown(webElement);
+    }
+
+    @Then("the user should see the below options for legalEntity board meeting type dropdown as: $boardMeetingType")
+    public void verifyLegalEntityBoardMeetingType(ExamplesTable boardMeetingType) {
+        getEditLegalEntityPage().verifyLegalEntityBoardMeetingType(boardMeetingType);
+    }
+
+    @Then("the user should see the below options for legalEntity board meeting value dropdown as: $boardMeetingValue")
+    public void verifyLegalEntityBoardMeetingValue(ExamplesTable boardMeetingValue) {
+        getEditLegalEntityPage().verifyLegalEntityBoardMeetingValue(boardMeetingValue);
+    }
+
+    @When("the user enters summary <summary> in the legalEntity boardMeeting")
+    public void enterSummaryInLegalEntityBoardMeeting(@Named("summary") String summary) {
+        getEditLegalEntityPage().enterSummaryInLegalEntityBoardMeeting(summary);
+    }
+    @When("the user selects type <type> in the legalEntity board meeting for $webElement")
+    public void selectsTypeInLegalEntityBoardMeeting(@Named("type") String type, @Named("webElement") String webElement){
+        getEditLegalEntityPage().selectsTypeInLegalEntityBoardMeeting(type,webElement);
+    }
+
+    @When("the user selects type <type> in the legalEntity personnel for $webElement")
+    public void selectsTypeInLegalEntityPersonnel(@Named("type") String type, @Named("webElement") String webElement) {
+        getEditLegalEntityPage().selectsTypeInLegalEntityPersonnel(type, webElement);
+    }
+
+    @When("the user selects value <value> in the legalEntity board meeting for $webElement")
+    public void selectsValueInLegalEntityBoardMeeting(@Named("value") String value, @Named("webElement") String webElement){
+        getEditLegalEntityPage().selectsValueInLegalEntityBoardMeeting(value,webElement);
+    }
+
     @Then("the user should see the legalentity's location summary type values from lookup LOCATION_SUMMARY_TEXT_TYPE")
     public void verifyLegalEntityLocationsTypeValues() {
         getEditLegalEntityPage().verifyLegalEntityLocationsTypeValues();
     }
 
+    @Then("the user should see the legalEntity personnel type values from lookup PERSONNEL_SUMMARY_TEXT_TYPE")
+    public void verifyLegalEntityPersonnelTypeValues() {
+        getEditLegalEntityPage().verifyLegalEntityPersonnelTypeValues();
+    }
+
     @When("the user clicks on the add new location summary button in legalentity location")
     public void clickNewLegalEntityLocations() {
         getEditLegalEntityPage().clickNewLegalEntityLocations();
+    }
+
+    @When("the user clicks on the add new board meeting button in legalEntity")
+    public void clickNewLegalEntityBoardMeetings() {
+        getEditLegalEntityPage().clickNewLegalEntityBoardMeetings();
+    }
+
+    @When("the user clicks on the add new personnel button in legalEntity")
+    public void clickNewLegalEntityPersonnel() {
+        getEditLegalEntityPage().clickNewLegalEntityPersonnel();
     }
 
     @When("the user select type as <type> in the legalentity location summary")
@@ -474,6 +532,16 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyLegalEntityLocationSummaryInZeusDocument(fid);
     }
 
+    @Then("the user should see the edits to legal entity board meeting for fid <fid> in zeus document")
+    public void verifyLegalEntityBoardMeetingInZeusDocument(@Named("fid") String fid) {
+        getEditLegalEntityPage().verifyLegalEntityBoardMeetingInZeus(fid);
+    }
+
+    @Then("the user should see the edits to legal entity personnel for fid <fid> in zeus document")
+    public void verifyLegalEntityPersonnelInZeusDocument(@Named("fid") String fid) {
+        getEditLegalEntityPage().verifyLegalEntityPersonnelInZeus(fid);
+    }
+
     @Then("the user should see the error message required for the type in legalentity location summary")
     public void verifyRequiredErrorMessageForTypeInLegalEntityLocations() {
         getEditLegalEntityPage().verifyRequiredErrorMessageForTypeInLegalEntityLocations();
@@ -484,14 +552,49 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().enterInvalidCharactersInLegalEntityLocationsValue();
     }
 
+    @When("the user enters more than 10000 character in summary for legalEntity boardMeetings")
+    public void enterInvalidCharactersInLegalEntityBoardMeetingSummary() {
+        getEditLegalEntityPage().enterInvalidCharactersInLegalEntityBoardMeetingSummary();
+    }
+
+    @When("the user enters more than 10000 character in value for legalEntity personnel")
+    public void enterInvalidCharactersInLegalEntityPersonnelValue() {
+        getEditLegalEntityPage().enterInvalidCharactersInLegalEntityPersonnelValue();
+    }
+
     @Then("the user should see the error message enter up to 10000 valid characters for value in the legalentity location")
     public void verifyErrorMessageForInvalidCharacter() {
         getEditLegalEntityPage().verifyErrorMessageForInvalidCharacter();
     }
 
+    @Then("the user should see the error message enter up to 10000 valid characters for summary in legalentity boardMeeting")
+    public void verifyErrorMessageForLegalEntitySummaryBoardMeeting() {
+        getEditLegalEntityPage().verifyErrorMessageForLegalEntitySummaryBoardMeeting();
+    }
+
+    @Then("the user should see the error message enter up to 10000 valid characters for value in legalentity personnel")
+    public void verifyErrorMessageForLegalEntityValuePersonnel() {
+        getEditLegalEntityPage().verifyErrorMessageForLegalEntityValuePersonnel();
+    }
+
+    @Then("user should see the duplicate error message for value dropdown in legalEntity board meeting")
+    public void verifyDuplicateErrorMessageForLegalEntityBoardMeeting() {
+        getEditLegalEntityPage().verifyDuplicateErrorMessageForLegalEntityBoardMeeting();
+    }
+
     @When("the user enters value as <value> in the legalentity location summary")
     public void entersLegalEntityValueInLocationSummary(@Named("value") String value){
         getEditLegalEntityPage().entersLegalEntityValueInLocationSummary(value);
+    }
+
+    @When("the user enters value as <value> in the legalEntity personnel")
+    public void entersLegalEntityValueInPersonnel(@Named("value") String value){
+        getEditLegalEntityPage().entersLegalEntityValueInPersonnel(value);
+    }
+
+    @Then("the user should see the error message required for type in legalEntity personnel")
+    public void verifyRequiredErrorMessageForTypeInLegalEntityPersonnel() {
+        getEditLegalEntityPage().verifyRequiredErrorMessageForTypeInLegalEntityPersonnel();
     }
 
     @When("the user clicks on delete button for legal entity location summary")
@@ -513,10 +616,18 @@ public class EditLegalEntitySteps extends AbstractSteps{
     public void verifyCreditRatingValuesFromLookup(@Named("creditratings_rowIdentifier") String creditratings_rowIdentifier,@Named("lookup") String lookup) {
         getEditLegalEntityPage().verifyCreditRatingValuesFromLookup(creditratings_rowIdentifier,lookup);
     }
+    @When("the user clicks on the $rowIdentifier in the legalentity identifier type section")
+        public void clickOnIdentifierTypeDropDown(String rowIdentifier) {
+        getEditLegalEntityPage().clickOnIdentifierTypeDropDown(rowIdentifier);
+    }
 
     @When("the user clicks on add new credit rating button in the credit rating legal Entity page")
     public void clickOnAddButton(){
         getEditLegalEntityPage().clickAddRowButton();
+    }
+    @Then("the user should see the identifier values for $row_Identifier from lookup $lookup except the values that are selected already")
+    public void verifyLegalEntityIdentifierTypesListFromLookup(@Named("row_Identifier") String row_Identifier, @Named("lookup") String lookupFid) {
+        getEditLegalEntityPage().verifyLegalEntityIdentifierTypesListFromLookup(row_Identifier);
     }
 
     @When("the user selects agency $agencyRowIdentifier value as <agencyName>")
@@ -524,7 +635,112 @@ public class EditLegalEntitySteps extends AbstractSteps{
     {
         getEditLegalEntityPage().selectCreditRatingsAgencyName(agencyRowIdentifier,agencyName);
     }
-    @When("the user selects agency type $agencyTypeRowIdentifier value as <type>")
+
+    @When("the user clicks on the $rowIdentifier in the legalentity identifier status section")
+    public void clickOnIdentifierStatusDropDown(String rowIdentifier) {
+        getEditLegalEntityPage().clickOnIdentifierStatusDropDown(rowIdentifier);
+    }
+
+    @Then("the user should see the status values for $rowIdentifer from lookup $lookupFid")
+    public void verifyLegalEntityIdentifierStatusList(String rowIdentifer, String lookupFid) {
+        getEditLegalEntityPage().verifyLegalEntityIdentifierStatusList(rowIdentifer);
+    }
+    @When("the user clicks on the add new identifiers button")
+    public void clickOnAddNewIdentifiersButton() {
+        getEditLegalEntityPage().clickOnAddNewIdentifiersButton();
+    }
+
+    @When("the user selects identifier type as <identifierType> from $rowIdentifier in the legalentity page")
+    public void identifierType(@Named("identifierType") String identifierType, @Named("rowIdentifier") String rowIdentifier) {
+        getEditLegalEntityPage().selectIdentifierType(identifierType, rowIdentifier);
+    }
+
+    @Then("the user should see identifierType value as <identifierTypeValue> for fid <fid> in $source document")
+    public void verifyEditLegalEntityIdentifierTypeValueFromZeus(@Named("entityTypeValue") String identifierTypeValue, @Named("fid") String fid, @Named("source") String source) {
+        getEditLegalEntityPage().verifyLegalEntityDocumentInZeus(identifierTypeValue, "legalEntityIdentifierType", fid, source, "get legal entity basic info left column");
+    }
+
+    @Then("the user should see the identifier type as in $source document with fid <fid>")
+    public void verifyEditLegalEntityIdentifierTypeValuesFromTrusted(@Named("fid") String fid, @Named("source") String source) {
+        getEditLegalEntityPage().verifyEditLegalEntityIdentifierTypeValuesFromTrusted(fid, source);
+    }
+
+    @When("the user selects identifier status as <identifierStatus> from $rowIdentifier in the legalentity page")
+    public void identifierStatus(@Named("identifierStatus") String identifierStatus, @Named("rowIdentifier") String rowIdentifier) {
+        getEditLegalEntityPage().selectIdentifierStatus(identifierStatus, rowIdentifier);
+    }
+
+    @When("the user enters identifier value as <value> for $identifierValueRowIdentifier")
+    public void IdentifierValue(@Named("identifierValueRowIdentifier") String identifierValueRowIdentifier, @Named("value") String value) {
+        getEditLegalEntityPage().enterIdentifierValue(identifierValueRowIdentifier, value);
+
+    }
+
+    @Then("the user should see identifier values as <identifierType><value><identifierStatus> for fid <fid> in $source document")
+    public void verifyEditLegalEntityIdentifierValuesFromZeus(@Named("identifierType") String identifierType,
+                                                              @Named("identifierStatus") String identifierStatus,
+                                                              @Named("value") String value,
+                                                              @Named("fid") String fid,
+                                                              @Named("source") String source) {
+        getEditLegalEntityPage().verifyEditLegalEntityIdentifierValuesFromZeus(identifierType,identifierStatus,value, fid, source);
+    }
+
+    @When("the user clicks on the delete button $rowIdentifier in the legal entity identifiers section")
+        public void clickOnDeleteIdentifierRowButton(String rowIdentifier) {
+        getEditLegalEntityPage().clickOnIdentifierDeleteRowButton(rowIdentifier);
+    }
+
+    @When("the user clicks yes button to delete row")
+    public void pressEnterButtonInDeleteConfirmationModal(){
+        getCountryPage().pressEnterButtonInDeleteConfirmationModal();
+    }
+
+    @Then("the user should not see identifier values for fid <fid> in $source document as: $identifiers")
+    public void verifyIdentifierValuesNotExistInZEUS(@Named("fid") String fid,@Named("source") String source,@Named("identifiers") ExamplesTable identifiers) {
+        getEditLegalEntityPage().verifyIdentifierValuesNotExistInZEUS(fid,source,identifiers);
+    }
+
+
+    @Then("the user should see the newly added identifier row in the basic info legal entity page")
+    public void verifyNewlyAddedIdentifierRowIsDisplayed(String dropdown) {
+        getEditLegalEntityPage().verifyNewlyAddedIdentifierRowIsDisplayed(dropdown);
+    }
+
+
+
+    @Then("the user enters 50 characters in the identifier value on the legal entity page")
+    public void enter50CharactersInIdentifierValueField() {
+        getEditLegalEntityPage().enter50CharactersInIdentifierValueField();
+    }
+
+    @Then("the user should see the error message enter only 50 valid characters for identifier value in the legal entity page")
+    public void verifyLegalEntityIdentifierValueErrorMessageForMaxLength() {
+        getEditLegalEntityPage().verifyLegalEntityIdentifierValueErrorMessageForMaxLength();
+    }
+
+    @Then("the user should see the error message $errorMsg for the identifier value field")
+    public void verifyIdentifierValueErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditLegalEntityPage().verifyIdentifierValueErrorMessage("legalEntity_identifier_value_error_msg_xpath", errorMsg);
+    }
+
+    @Then("the user verifies the identifier value maxlength is $maxSize for the $rowIdentifier")
+        public void verifyMaxlengthIdentifierValueText(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditLegalEntityPage().verifyMaxlengthIdentifierValueText(maxSize,rowIdentifier);}
+
+    @Then("the user should see the error message $errorMsg for the identifier status field")
+    public void verifyIdentifierStatusErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditLegalEntityPage().verifyIdentifierStatusErrorMessage("legalEntity_identifier_status_error_msg_xpath", errorMsg);
+    }
+
+    @When("the user clicks on new row delete legal entity identifier button for the row $deletebutton_Row")
+    public void clickonDeleteidentifierRowButton(String deletebutton_Row)
+    {
+        getEditLegalEntityPage().clickonDeleteidentifierRowButton(deletebutton_Row);
+    }
+
+    @Then("the user should see the error message $errorMsg for the identifier type field")
+    public void verifyIdentifierTypeErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditLegalEntityPage().verifyIdentifierTypeErrorMessage("legalEntity_identifier_type_error_msg_xpath", errorMsg);
+    }
 
     public void selectCreditRatingsAgencyType(@Named("agencyTypeRowIdentifier") String agencyTypeRowIdentifier,@Named("type") String type)
     {getEditLegalEntityPage().selectCreditRatingsAgencyType(agencyTypeRowIdentifier,type);

@@ -1,4 +1,4 @@
-Meta:@AreaRelatedPeople @Area @View
+Meta:@AreaRelatedPeople @Area @View @AllStories
 
 Narrative:
 In order to view and edit the people information
