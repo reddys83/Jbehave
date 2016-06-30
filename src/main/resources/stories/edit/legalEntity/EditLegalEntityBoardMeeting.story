@@ -85,7 +85,7 @@ Examples:
 |entity|searchBy|fid|type|
 |1717|FID|1717|Quarter|
 
-Scenario: Veirfy the valid inputs for legalEntity Board meeting
+Scenario: Veirfy the valid inputs for legalEntity Board meeting - Bug-ZEUS-1225
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -98,7 +98,7 @@ And the user clicks on the legalEntity update link
 When the user gets the document with get Id for legalentity with the fid as <entity> from the database
 And the user clicks on the add new board meeting button in legalEntity
 And the user enters summary <summary> in the legalEntity boardMeeting
-And the user clicks on the type dropdown in legalEntity board meeting for legalEntity_boardMeetings_first_new_type_dropdownor
+And the user clicks on the type dropdown in legalEntity board meeting for legalEntity_boardMeetings_first_new_type_dropdown
 And the user selects type <type> in the legalEntity board meeting for legalEntity_boardMeetings_first_new_type_dropdown
 And the user clicks on the value dropdown in legalEntity board meeting for legalEntity_boardMeetings_first_new_type_dropdown
 And the user selects value <value> in the legalEntity board meeting for legalEntity_boardMeetings_first_new_type_dropdown

@@ -32,6 +32,19 @@ let $charterType := ($legalEntityS/summary/charterType)
 let $insuranceType := ($legalEntityS/summary/insuranceType)
 let $ownershipType := ($legalEntityS/summary/organisationType)
 
+let $legalEntityIdentifierType:= ($legalEntityS/summary/identifiers/identifier/type)
+let $legalEntityIdentifierValue:= ($legalEntityS/summary/identifiers/identifier/value)
+let $legalEntityIdentifierStatus:= ($legalEntityS/summary/identifiers/identifier/status)
+
+let $legalEntityIdentifierTypes:=for $x in $legalEntityIdentifierType
+return <legalEntityIdentifierType>{$x/text()}</legalEntityIdentifierType>
+
+let $legalEntityIdentifierValues:=for $x in $legalEntityIdentifierValue
+return <legalEntityIdentifierValue>{$x/text()}</legalEntityIdentifierValue>
+
+let $legalEntityIdentifierStatuss:=for $x in $legalEntityIdentifierStatus
+return <legalEntityIdentifierStatus>{$x/text()}</legalEntityIdentifierStatus>
+
 let $countryOfOperation := ($legalEntityS/summary/countryOfOperations/link/@href)
 let $countryDoc := (/country[@source='trusted'])[@resource/string()= $countryOfOperation]
 let $countryName := ($countryDoc/summary/names/name[type='Country Name']/value)
@@ -57,6 +70,7 @@ else $legalEntityS/history/summaries/summary/text()
 
 
 
+
 return <legalEntity>
     <status>{$status}</status>
     <claimedEstDate>{$claimedEstDate}</claimedEstDate>
@@ -72,10 +86,12 @@ return <legalEntity>
     <postalCode>{$postalCode}</postalCode>
     <corporateStatement>{$corporateStatement}</corporateStatement>
     <entitytype>{$entitytypes}</entitytype>
+    <legalEntityIdentifierTypes>{$legalEntityIdentifierTypes}</legalEntityIdentifierTypes>
+    <legalEntityIdentifierValues>{$legalEntityIdentifierValues}</legalEntityIdentifierValues>
+    <legalEntityIdentifierStatuses>{$legalEntityIdentifierStatuss}</legalEntityIdentifierStatuses>
+
+
     <history>{$history}</history>
 </legalEntity>
-
-(:return $legalEntityS:)
-
 
 

@@ -170,7 +170,6 @@ Examples:
 
 Scenario: Save country holidays
 Bug : ZEUS-900
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
