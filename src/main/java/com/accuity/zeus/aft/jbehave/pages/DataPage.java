@@ -1269,5 +1269,15 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
     }
+    public void changeBrowserUrlAndNavigate(String id){
+        String curentUrl=getDriver().getCurrentUrl();
+        String[]currentUrl=curentUrl.split("country/");
+        curentUrl=currentUrl[0]+"country/"+id;
+        getDriver().navigate().to(curentUrl);
+    }
+
+    public void verifyViewModeForEntity(){
+        assertTrue(getDriver().findElement(currency_update_button_id).isDisplayed());
+    }
 
 }
