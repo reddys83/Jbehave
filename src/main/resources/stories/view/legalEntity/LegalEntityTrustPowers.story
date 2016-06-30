@@ -36,7 +36,7 @@ Then the user should not see the legal entity's trust powers
 
 Examples:
 |entity|searchBy|fid|
-|Federation Nationale des Caisse d'Epargne|Name|153965|
+|Nodus International Bank Inc|Name|223191|
 
 Scenario: Veirfy LegalEntity trust powers section will appear for the entities that will match below criteria:
 Legal entity type is one of the values Bank, Building Society, Credit Union, Government, Savings & Loan Association, Savings Bank, Trust Company
