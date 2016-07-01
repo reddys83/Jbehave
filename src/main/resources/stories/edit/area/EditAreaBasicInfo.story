@@ -69,7 +69,6 @@ Then the user should see the save confirmation modal
 Then the user should not see the area <ConfirmationSummary> changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
-Then the user should see the updated <status> in area web page
 
 Examples:
 |country|Area|ConfirmationSummary|

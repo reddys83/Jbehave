@@ -10,6 +10,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
@@ -124,8 +125,7 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void verifyAreaStatusFromZeusDB(String country,String area,String tagName, String source,
 			String status) {
-		System.out.println(tagName+country+area+source);
-		assertEquals(getAreaInfoFromDB(country, area, tagName, source), status);
+		assertEquals(getAreaInfoFromDB(country, area, tagName, source), status.toLowerCase());
 	}
 	
 	/**
@@ -158,182 +158,25 @@ public class EditAreaPage extends AbstractPage {
 						.equalsIgnoreCase(status));
 	}
 	
-	///**
-	// * This method is to clear and enter the value in text field
-	// *
-	// * @param webElement
-	// * @param value
-	// *//*
-	/*public void clearAndEnterValue(By webElement, String value) {
-		getDriver().findElement(webElement).clear();
-		getDriver().findElement(webElement).sendKeys(value);
-	}
-*/
 	
-	
-	
-	
-	
-	
-	/*public void verifyNoSummaryConfirmationModal(String summaryText) {
+	public void verifyNoSummaryConfirmationModal(String summaryText) {
 		try {
 			WebElement confirmChanges = getDriver()
-					.findElement(CityIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
+					.findElement(AreaIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
 			String confirmationText = confirmChanges.getText();
 			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
 		} catch (Exception e) {
 			assertTrue(false);
 		}
-	}*/
-
+	}
 	
-
-	/**
-	 * This method is used to enter the value in city status drop-down
-	 *
-	 * @param will
-	 *            hold the value to be entered in the drop-down
-	 *//*
-	public void enterValueInStatusDropdown(String word) {
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"))
-				.sendKeys(word);
-	}
-
-	*//**
-	 * This method is used to verify the passing status is selected in the city
-	 * status drop-down
-	 * 
-	 * @param status
-	 *            will hold the value to be verified with city status drop-down
-	 *            selection
-	 *//*
-	public void verifyCityStatusInDropdown(String status) {
-		try {
-			Thread.sleep(1000L);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		assertTrue(
-				getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"))
-						.equalsIgnoreCase(status));
-	}
-
-	public void verifyCityStatusInfoFromTrustedDB(String country, String area, String city, String tagName,
+	public void verifyAreaFromTrustedDB(String country, String area, String tagName,
 			String source) {
-		//assertEquals(getCityInfoFromDB(country, area, city, tagName, source),
-				//getSelectedDropdownValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath")));
-
-	}
-
-	
-	public void selectCityStatusValue(String status) {
-		selectItemFromDropdownListByValue(CityIdentifiers.getObjectIdentifier("city_status_identifier_dropdown_xpath"),
-				status);
-	}
-
-	public DataPage clickOnSaveButton() {
-		attemptClick(CityIdentifiers.getObjectIdentifier("save_button_id"));
-		return new DataPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
-	}
-
-	*//**
-	 * This method is to verify whether the successful message is generated
-	 * after saving the city page.
-	 *//*
-	public void verifySuccessfulUpdatedMessage() {
-		assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_save_confirmation_message_id"))
-				.isDisplayed());
-	}*/
-
-	/**
-	 * This method is used to verify that delete confirmation modal is not
-	 * displayed
-	 * 
-	 *//*
-	public void verifyDeleteConfirmationModalIsNotDisplayed() {
-		try {
-
-			assertFalse(
-					getDriver().findElement(CityIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_xpath"))
-							.isDisplayed());
-
-		} catch (NoSuchElementException e) {
-			e.printStackTrace();
-		}
-	}
-
-	*//**
-	 * This method is used to click on the 'Confirm' button after saving
-	 * 
-	 * @throws Exception
-	 *//*
-	public void clickOnConfirmButtonCity() throws Exception {
-		Thread.sleep(3000);
-		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_confirm_button")).click();
-		Thread.sleep(3000);
-	}
-
 		
-	*//**
-	 * This method is used to verify the value in trusted DB is same as UI
-	 * value.
-	 * 
-	 * @param country
-	 * @param area
-	 * @param city
+		String getStatusFromUI =getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_options_xpath")).getText().toLowerCase();
+		assertEquals(getAreaInfoFromDB(country, area, tagName, source), getStatusFromUI);
 
-	 *//*
-	public void verifyCityIdentifierValuesFromTrusted(String country, String area, String city, String[] identifierType,
-			String[] identifierValue, String[] identifierStatus) {
-
-		try {
-			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("country", country));
-			nvPairs.add(new BasicNameValuePair("area", area));
-			nvPairs.add(new BasicNameValuePair("city", city));
-			nvPairs.add(new BasicNameValuePair("source", "trusted"));
-			Thread.sleep(3000L);
-
-			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"get city basic info", nvPairs);
-
-			if (document != null) {
-				for (int i = 0; i < document.getElementsByTagName("identifiers").item(0).getChildNodes()
-						.getLength(); i++) {
-
-					for (int childNode = 0; childNode < document.getElementsByTagName("identifiers").item(0)
-							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
-
-						switch (document.getElementsByTagName("identifiers").item(0).getChildNodes().item(0)
-								.getChildNodes().item(childNode).getNodeName()) {
-						case "type":
-							assertEquals(document.getElementsByTagName("identifiers").item(0).getChildNodes().item(i)
-									.getChildNodes().item(childNode).getTextContent(), identifierType[i]);
-							break;
-						case "value":
-							assertEquals(document.getElementsByTagName("identifiers").item(0).getChildNodes().item(i)
-									.getChildNodes().item(childNode).getTextContent(), identifierValue[i]);
-							break;
-						case "identifierStatus":
-							assertEquals(
-									StringUtils.capitalize(document.getElementsByTagName("identifiers").item(0)
-											.getChildNodes().item(i).getChildNodes().item(childNode).getTextContent()),
-									identifierStatus[i]);
-							break;
-
-						}
-					}
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
-
-	public void clearValue(By webElement) {
-		getDriver().findElement(webElement).clear();
-	}*/
-
 	
 	@Override
 	public String getPageUrl() {
