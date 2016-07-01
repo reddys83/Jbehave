@@ -875,4 +875,10 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the $entity page in the view mode")
     public void verifyViewModeForEntity(){getDataPage().verifyViewModeForEntity();}
+    
+    @When("the user clicks on the area update link")
+    public void clickOnUpdateAreaLink() {
+        getDataPage().clickOnUpdateCurrencyLink();
+        setEditAreaPage(getDataPage().createEditAreaPage());
+    }
 }
