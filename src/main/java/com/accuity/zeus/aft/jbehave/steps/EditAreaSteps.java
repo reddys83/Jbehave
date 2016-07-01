@@ -31,7 +31,7 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 
 	@When("the user clicks on the area update link")
-	public void clickOnUpdateCurrencyLink() {
+	public void clickOnUpdate() {
 		getEditAreaPage().clickOnUpdate();
 	}
 
@@ -48,7 +48,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on the save button in area page")
 	public void clickOnSaveButton() {
-		getEditAreaPage().clickOnSaveButton();
+		getDataPage().clickOnSaveButton();
 	}
 
 	@Then("the user should see the successful update message at top of the area page")
@@ -85,7 +85,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should not see the area <ConfirmationSummary> changes in confirmation modal")
 	public void verifyNoChangeConfirmationMsg(@Named("ConfirmationSummary") String ConfirmationSummary) {
-		getEditAreaPage().verifyNoSummaryConfirmationModal(ConfirmationSummary);
+		getDataPage().verifyNoSummaryConfirmationModal(ConfirmationSummary);
 	}
 
 	@Then("the user should see the status value in area page is same as in $source document")

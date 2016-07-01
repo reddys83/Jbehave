@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.WebDriver;
@@ -41,12 +42,16 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyAreaStatusList() {
 		List<WebElement> statusList = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_options_xpath"));
+		try {
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area Status types");
 		for (int i = 1; i < document.getElementsByTagName("status").getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					statusList.get(i).getAttribute("value"));
 		}
-
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	public void clickOnUpdate() {
@@ -68,10 +73,6 @@ public class EditAreaPage extends AbstractPage {
 				status);
 	}
 	
-	public DataPage clickOnSaveButton() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("save_button_xpath"));
-		return new DataPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
-	}
 	
 	/**
 	 * This method is to verify whether the successful message is generated
@@ -158,23 +159,11 @@ public class EditAreaPage extends AbstractPage {
 						.equalsIgnoreCase(status));
 	}
 	
-	
-	public void verifyNoSummaryConfirmationModal(String summaryText) {
-		try {
-			WebElement confirmChanges = getDriver()
-					.findElement(AreaIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
-			String confirmationText = confirmChanges.getText();
-			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
-		} catch (Exception e) {
-			assertTrue(false);
-		}
-	}
-	
 	public void verifyAreaFromTrustedDB(String country, String area, String tagName,
 			String source) {
 		
-		String getStatusFromUI =getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_options_xpath")).getText().toLowerCase();
-		assertEquals(getAreaInfoFromDB(country, area, tagName, source), getStatusFromUI);
+		String getStatusFromUI =getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_options_xpath")).getText();
+		assertEquals(StringUtils.capitalize(getAreaInfoFromDB(country, area, tagName, source)), getStatusFromUI);
 
 	}
 	
