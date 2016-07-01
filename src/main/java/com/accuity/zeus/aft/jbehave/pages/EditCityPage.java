@@ -1587,17 +1587,8 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public void selectsPlacesTypeFromDropdwon(String placeType) {
-		List<WebElement> options = getDriver()
-				.findElements(CityIdentifiers.getObjectIdentifier("city_places_type_options_dropdown_xpath"));
-
-		for (WebElement option : options) {
-			if (option.getText().contains(placeType)) {
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_type_options_dropdown_xpath"))
-						.click();
-				option.click();
-				break;
-			}
-		}
+		selectItemFromDropdownListByText(CityIdentifiers.getObjectIdentifier("city_places_type_dropdown_xpath"),
+				placeType);
 	}
 
 	public void clicksOnEditButton() {
@@ -1609,6 +1600,7 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public void selectsCountryInPlacesForCity(String countryPlaces) {
+		
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_input_xpath"))
 				.sendKeys(countryPlaces);
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_places_country_dropDown_input_xpath"))
@@ -1653,14 +1645,10 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public void selectsPlacesDetailsFromDropdown(String PlaceDetails) {
-		try {
-			Thread.sleep(4000);
-		} catch (Exception e) {
-			e.printStackTrace();
+		
+		selectItemFromDropdownListByText(CityIdentifiers.getObjectIdentifier("city_places_details_Select_dropdown_xpath"),
+				PlaceDetails);
 		}
-		selectItemFromDropdownListByText(
-				CityIdentifiers.getObjectIdentifier("city_places_details_Select_dropdown_xpath"), PlaceDetails);
-	}
 
 	public void verifyPlaceInPlacesForCity(String place) {
 		try {

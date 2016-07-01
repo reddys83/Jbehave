@@ -68,15 +68,14 @@ And the user clicks on the update link
 When the user gets the document with get document id for city with the <city> from the database
 When the user deletes the existing related places rows
 And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
 And the user selects type value as <PlaceType> in the places for city
 When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
+And the user clicks on the country option in the places for city
+When the user enters the country <countryPlaces> in type-ahead box for city related places
+And the user clicks on area option in the places for city
+When the user enters area <areaPlaces> in the type-ahead box for city related places
+And the user clicks on city options in the places for city
+And the user enters city <cityPlaces> in the type-ahead box for city related places
 And the user clicks on go button in places for city
 And the user selects details value as <PlaceDetails> in the places for city
 And the user clicks on the save button
@@ -96,8 +95,8 @@ Examples:
 |Tajikistan|Leninabadskaya Oblast|Gafurov|Twin City|Angola|Bengo|Caxito|Capital City|
 
 Scenario: 
-a)Verify whether user is able to update an existing  City Related place (no different to the current value) with same values successfully
-b)Verify whether user should get no changes in confirmation modal
+a)Verify whether user is able to update an existing  City Related place (different to the current value) with same values successfully
+b)Verify whether user should get  changes in confirmation modal
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -112,15 +111,14 @@ And the user clicks on the update link
 When the user gets the document with get document id for city with the <city> from the database
 When the user deletes the existing related places rows
 And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
 And the user selects type value as <PlaceType> in the places for city
 When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
+And the user clicks on the country option in the places for city
+When the user enters the country <countryPlaces> in type-ahead box for city related places
+And the user clicks on area option in the places for city
+When the user enters area <areaPlaces> in the type-ahead box for city related places
+And the user clicks on city options in the places for city
+And the user enters city <cityPlaces> in the type-ahead box for city related places
 And the user clicks on go button in places for city
 And the user selects details value as <PlaceDetails> in the places for city
 And the user clicks on the save button
@@ -130,15 +128,14 @@ Then the user should see the successful update message at top of the page
 When the user clicks on the update link
 When the user deletes the existing related places rows
 And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
 When the user selects type value as <PlaceType2> in the places for city
 When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces2> in the places for city
-And the user clicks on area drop down in the places for city
-And the user selects area <areaPlaces2> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces2> dropdown in the places for city
+And the user clicks on the country option in the places for city
+When the user enters the country <countryPlaces2> in type-ahead box for city related places
+And the user clicks on area option in the places for city
+And the user enters area <areaPlaces2> in the type-ahead box for city related places
+And the user clicks on city options in the places for city
+And the user enters city <cityPlaces2> in the type-ahead box for city related places
 And the user clicks on go button in places for city
 And the user selects details value as <PlaceDetails2> in the places for city
 And the user clicks on the save button
@@ -155,7 +152,6 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|city|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|PlaceType2|countryPlaces2|areaPlaces2|cityPlaces2|PlaceDetails2|
 |Tajikistan|Leninabadskaya Oblast|Gafurov|Capital City|Angola|Luanda|Palanca|Legislative Capital|Twin City|Bolivia|Beni|Trinidad|Judicial Capital|
-
 
 Scenario: 
 a)Verify whether user is able to update an existing  City Related place (no different to the current value) with same values successfully
@@ -174,15 +170,14 @@ And the user clicks on the update link
 When the user gets the document with get document id for city with the <city> from the database
 When the user deletes the existing related places rows
 And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
 And the user selects type value as <PlaceType> in the places for city
 When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
+And the user clicks on the country option in the places for city
+When the user enters the country <countryPlaces> in type-ahead box for city related places
+And the user clicks on area option in the places for city
+And the user enters area <areaPlaces> in the type-ahead box for city related places
+And the user clicks on city options in the places for city
+And the user enters city <cityPlaces> in the type-ahead box for city related places
 And the user clicks on go button in places for city
 And the user selects details value as <PlaceDetails> in the places for city
 And the user clicks on the save button
@@ -192,15 +187,14 @@ Then the user should see the successful update message at top of the page
 When the user clicks on the update link
 When the user deletes the existing related places rows
 And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
 When the user selects type value as <PlaceType2> in the places for city
 When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces2> in the places for city
-And the user clicks on area drop down in the places for city
-And the user selects area <areaPlaces2> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces2> dropdown in the places for city
+And the user clicks on the country option in the places for city
+When the user enters the country <countryPlaces2> in type-ahead box for city related places
+And the user clicks on area option in the places for city
+And the user enters area <areaPlaces2> in the type-ahead box for city related places
+And the user clicks on city options in the places for city
+And the user enters city <cityPlaces2> in the type-ahead box for city related places
 And the user clicks on go button in places for city
 And the user selects details value as <PlaceDetails2> in the places for city
 And the user clicks on the save button
@@ -236,23 +230,24 @@ Then the user should see the area dropdown is disabled
 Then the user should see the city dropdown is disabled
 Then the user should see Edit button for place field is disabled
 Then the user should see the delete option is  disabled until drawer closes
-When the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on the country drop down in the places for city
+When the user clicks on the country option in the places for city
+When the user enters the country <countryPlaces> in type-ahead box for city related places
+And the user clicks on the country option in the places for city
 Then the user should see Choose a country option is not selectable
 Then the user should see the default value for area is Choose an area
-When the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-When the user clicks on area drop down in the places for city
+When the user clicks on area option in the places for city
+When the user enters area <areaPlaces> in the type-ahead box for city related places
+When the user clicks on area option in the places for city
 Then the user should see Choose an area option is not selectable
 Then the user should see the default value for area is Choose a city
-When the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
-When the user clicks on city drop down in the places for city
+When the user clicks on city options in the places for city
+And the user enters city <cityPlaces> in the type-ahead box for city related places
+When the user clicks on city options in the places for city
 Then the user should see Choose a City option is not selectable
 When the user clicks on go button in places for city
 Then the user should see that drawer is closed
 Then the user should see that Edit button for place field is enabled
+
 Examples:
 |country|area|city|PlaceType|countryPlaces|areaPlaces|cityPlaces|
 |Tajikistan|Leninabadskaya Oblast|Gafurov|Capital City|Algeria|Blida|Bouinan|
@@ -272,13 +267,13 @@ When the user clicks on the all link in the navigation bar
 When the user clicks on the city places link in the navigation bar
 And the user clicks on the update link
 When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
+And the user clicks on the country option in the places for city
 Then the user should see the list of all existing countries by full name in places for city
-When the user selects the country <countryPlaces> in the places for city
-When the user clicks on area drop down in the places for city
+When the user enters the country <countryPlaces> in type-ahead box for city related places
+When the user clicks on area option in the places for city
 Then the user should see the list of all existing area for the selected country by full name in places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
+When the user enters area <areaPlaces> in the type-ahead box for city related places
+And the user clicks on city options in the places for city
 Then the user should see the list of all existing city for the selected area by full name in places for city
 
 Examples:
@@ -305,10 +300,10 @@ When the user deletes the existing related places rows
 And the user clicks on the add button for adding new places for city page
 When the user clicks on edit button in places for city
 Then the user should see 'Go' button disabled until value for City is selected
-When the user clicks on the country drop down in the places for city
-And the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-And the user selects area <areaPlaces> dropdown in places for city
+When the user clicks on the country option in the places for city
+And the user enters the country <countryPlaces> in type-ahead box for city related places
+And the user clicks on area option in the places for city
+And the user enters area <areaPlaces> in the type-ahead box for city related places
 Then the user should see 'Go' button disabled until value for City is selected
 
 Examples:
@@ -335,16 +330,16 @@ And the user clicks on the update link
 When the user deletes the existing related places rows
 And the user clicks on the add button for adding new places for city page
 When the user clicks on edit button in places for city
-When the user clicks on the country drop down in the places for city
-And the user selects the country <countryPlaces> in the places for city
+When the user clicks on the country option in the places for city
+And the user enters the country <countryPlaces> in type-ahead box for city related places
 Then the user should see Go button enabled
 When the user clicks on go button in places for city
 Then the user should see place as Angola in places for city
 When the user clicks on edit button in places for city
-When the user clicks on the country drop down in the places for city
-And the user selects the country <countryPlaces> in the places for city
-When the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
+When the user clicks on the country option in the places for city
+And the user enters the country <countryPlaces> in type-ahead box for city related places
+When the user clicks on area option in the places for city
+When the user enters area <areaPlaces> in the type-ahead box for city related places
 Then the user should see Go button enabled
 When the user clicks on go button in places for city
 Then the user should see place as Moxico in places for city
@@ -352,6 +347,7 @@ Then the user should see place as Moxico in places for city
 Examples:
 |country|area|city|countryPlaces|areaPlaces|
 |Tajikistan|Leninabadskaya Oblast|Gafurov|Angola|Moxico|
+
 
 Scenario: Verify whether User is able to see Go Button is disabled when (while updating existing related place)
 User should see Go Button is Enabled when
@@ -372,15 +368,14 @@ And the user clicks on the update link
 When the user gets the document with get document id for city with the <city> from the database
 When the user deletes the existing related places rows
 And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
 And the user selects type value as <PlaceType> in the places for city
 When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
+And the user clicks on the country option in the places for city
+When the user enters the country <countryPlaces> in type-ahead box for city related places
+And the user clicks on area option in the places for city
+When the user enters area <areaPlaces> in the type-ahead box for city related places
+And the user clicks on city options in the places for city
+And the user enters city <cityPlaces> in the type-ahead box for city related places
 And the user clicks on go button in places for city
 And the user selects details value as <PlaceDetails> in the places for city
 And the user clicks on the save button
@@ -389,16 +384,16 @@ When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 When the user clicks on the update link
 When the user clicks on edit button in places for city
-When the user clicks on the country drop down in the places for city
-And the user selects the country <countryPlaces> in the places for city
+When the user clicks on the country option in the places for city
+And the user enters the country <countryPlaces> in type-ahead box for city related places
 Then the user should see Go button enabled
 When the user clicks on go button in places for city
 Then the user should see place as Angola in places for city
 When the user clicks on edit button in places for city
-When the user clicks on the country drop down in the places for city
-And the user selects the country <countryPlaces> in the places for city
-When the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
+When the user clicks on the country option in the places for city
+And the user enters the country <countryPlaces> in type-ahead box for city related places
+When the user clicks on area option in the places for city
+When the user enters area <areaPlaces> in the type-ahead box for city related places
 Then the user should see Go button enabled
 When the user clicks on go button in places for city
 Then the user should see place as Namibe in places for city
@@ -407,6 +402,7 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|city|countryPlaces|areaPlaces|cityPlaces|PlaceType|PlaceDetails|
 |Tajikistan|Leninabadskaya Oblast|Gafurov|Angola|Namibe|Bibala|Twin City|Capital City|
+
 
 Scenario: 
 a)Verify whether user is able to delete an existing  City Related place successfully in City Web page
@@ -425,15 +421,14 @@ And the user clicks on the update link
 When the user gets the document with get document id for city with the <city> from the database
 When the user deletes the existing related places rows
 And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
 And the user selects type value as <PlaceType> in the places for city
 When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
+And the user clicks on the country option in the places for city
+When the user enters the country <countryPlaces> in type-ahead box for city related places
+And the user clicks on area option in the places for city
+When the user enters area <areaPlaces> in the type-ahead box for city related places
+And the user clicks on city options in the places for city
+And the user enters city <cityPlaces> in the type-ahead box for city related places
 And the user clicks on go button in places for city
 And the user selects details value as <PlaceDetails> in the places for city
 And the user clicks on the save button
@@ -477,15 +472,14 @@ And the user clicks on the update link
 When the user gets the document with get document id for city with the <city> from the database
 When the user deletes the existing related places rows
 And the user clicks on the add button for adding new places for city page
-And the user clicks on new city places type drop-down for city
 And the user selects type value as <PlaceType> in the places for city
 When the user clicks on edit button in places for city
-And the user clicks on the country drop down in the places for city
-When the user selects the country <countryPlaces> in the places for city
-And the user clicks on area drop down in the places for city
-When the user selects area <areaPlaces> dropdown in places for city
-And the user clicks on city drop down in the places for city
-And the user selects city <cityPlaces> dropdown in the places for city
+And the user clicks on the country option in the places for city
+When the user enters the country <countryPlaces> in type-ahead box for city related places
+And the user clicks on area option in the places for city
+When the user enters area <areaPlaces> in the type-ahead box for city related places
+And the user clicks on city options in the places for city
+And the user enters city <cityPlaces> in the type-ahead box for city related places
 And the user clicks on go button in places for city
 And the user selects details value as <PlaceDetails> in the places for city
 And the user clicks on the save button
@@ -528,4 +522,3 @@ Then the user should see the error message at top of page the highlighted fields
 Examples:
 |country|area|city|
 |Tajikistan|Leninabadskaya Oblast|Gafurov|
-

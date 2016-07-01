@@ -721,32 +721,32 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().clicksOnEditButton();
 	}
 
-	@When("the user clicks on the country drop down in the places for city")
+	@When("the user clicks on the country option in the places for city")
 	public void clicksOnCountryInPlacesForCity() {
 		getEditCityPage().clicksOnCountryInPlacesForCity();
 	}
 
-	@When("the user selects the country <countryPlaces> in the places for city")
+	@When("the user enters the country <countryPlaces> in type-ahead box for city related places")
 	public void selectsCountryInPlacesForCity(@Named("countryPlaces") String countryPlaces) {
 		getEditCityPage().selectsCountryInPlacesForCity(countryPlaces);
 	}
 
-	@When("the user clicks on area drop down in the places for city")
+	@When("the user clicks on area option in the places for city")
 	public void clicksOnAreaDropdownInPlacesForCity() {
 		getEditCityPage().clicksOnAreaDropdownInPlacesForCity();
 	}
 
-	@When("the user selects area <areaPlaces> dropdown in places for city")
+	@When("the user enters area <areaPlaces> in the type-ahead box for city related places")
 	public void selectsAreaInPlacesForCity(@Named("areaPlaces") String areaPlaces) {
 		getEditCityPage().selectsAreaInPlacesForCity(areaPlaces);
 	}
 
-	@When("the user clicks on city drop down in the places for city")
+	@When("the user clicks on city options in the places for city")
 	public void clicksOnCityDropdownInPlacesForCity() {
 		getEditCityPage().clicksOnCityDropdownInPlacesForCity();
 	}
 
-	@When("the user selects city <cityPlaces> dropdown in the places for city")
+	@When("the user enters city <cityPlaces> in the type-ahead box for city related places")
 	public void selectsCityInPlacesForCountry(@Named("cityPlaces") String cityPlaces) {
 		getEditCityPage().selectsCityInPlacesForCountry(cityPlaces);
 	}
@@ -911,7 +911,7 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().selectsPlacesTypeFromDropdwon(PlaceType);
 	}
 	
-	@When("the user selects the country <countryPlaces2> in the places for city")
+	@When("the user enters the country <countryPlaces2> in type-ahead box for city related places")
 	public void selectsCountryInPlaces2ForCity(@Named("countryPlaces2") String countryPlaces) {
 		getEditCityPage().selectsCountryInPlacesForCity(countryPlaces);
 	}
@@ -921,12 +921,12 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().selectsPlacesDetailsFromDropdown(PlaceDetails);
 	}
 	
-	@When("the user selects city <cityPlaces2> dropdown in the places for city")
+	@When("the user enters city <cityPlaces2> in the type-ahead box for city related places")
 	public void selectsCityInPlaces2ForCountry(@Named("cityPlaces2") String cityPlaces) {
 		getEditCityPage().selectsCityInPlacesForCountry(cityPlaces);
 	}
 	
-	@When("the user selects area <areaPlaces2> dropdown in places for city")
+	@When("the user enters area <areaPlaces2> in the type-ahead box for city related places")
 	public void selectsArea2InPlacesForCity(@Named("areaPlaces2") String areaPlaces) {
 		getEditCityPage().selectsAreaInPlacesForCity(areaPlaces);
 	}
@@ -943,8 +943,6 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyCityRelatedValueFromZeusDB(country, area, city, type, place, details, source);
 	}
 	
-
-
 	@Then("the user should see city name value same as in $source document")
 	public void verifyCityNameTypeAndValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
 												 @Named("source") String source) {
