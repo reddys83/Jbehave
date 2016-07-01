@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
+import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
@@ -11,6 +12,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.http.ResponseEntity;
+
+
 import org.w3c.dom.Document;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,9 @@ import static org.junit.Assert.*;
 
 
 public class EditOfficePage extends AbstractPage {
+
+    static ResponseEntity responseEntity;
+    static String endpointWithID;
 
      public EditOfficePage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
      super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -59,7 +66,7 @@ public class EditOfficePage extends AbstractPage {
         zeusPairs.add(new BasicNameValuePair("source", "zeus"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", zeusPairs);
         assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent(), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_view_xpath")).getText());
-    }
+         }
 
     public void verifyOpenedDateErrorMessage(String openedDateErrorMsg) {
         try {
@@ -69,8 +76,21 @@ public class EditOfficePage extends AbstractPage {
         }
         assertEquals(openedDateErrorMsg.replace("'", ""), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_errorMessage_xpath")).getText());
     }
+    public void getDocument(String xqueryName, String param, String offices) {
+        ParamMap paramMap = new ParamMap();
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair(paramMap.getParam(param),offices));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
 
-
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
+        if (document != null) {
+            endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
+            responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
+            assertTrue(responseEntity.getStatusCode().value() == 200);
+        } else {
+            assertFalse("Zeus document with " + param + " as " + offices + " does not exist in the DB", true);
+        }
+    }
 
     @Override
     public String getPageUrl() {

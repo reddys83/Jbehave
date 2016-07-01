@@ -15,9 +15,9 @@ public class OfficeIdentifiers {
 
     public static void setIdentifiers() {
         hmap.put("office_basicInfo_openedDate_view_xpath",By.xpath("//table[@class='vertical']/tbody/tr[5]/td"));
-        hmap.put("office_basicInfo_openedDate_day_xpath", By.xpath("//table[@class='vertical']/tbody/tr[5]/td/input[1]"));
-        hmap.put("office_basicInfo_openedDate_month_xpath", By.xpath("//table[@class='vertical']/tbody/tr[5]/td/select"));
-        hmap.put("office_basicInfo_openedDate_year_xpath", By.xpath("//table[@class='vertical']/tbody/tr[5]/td/input[2]"));
+        hmap.put("office_basicInfo_openedDate_day_xpath", By.xpath("//*[@id='officeBasicInfo']//input[@name='openedDate-day']"));
+        hmap.put("office_basicInfo_openedDate_month_xpath", By.xpath("//*[@id='officeBasicInfo']//select[@name='openedDate-month']"));
+        hmap.put("office_basicInfo_openedDate_year_xpath", By.xpath("//*[@id='officeBasicInfo']//input[@name='openedDate-year']"));
         hmap.put("office_basicInfo_openedDate_errorMessage_xpath",By.xpath("//*[@data-error_id='openedDateError']"));
     }
 
