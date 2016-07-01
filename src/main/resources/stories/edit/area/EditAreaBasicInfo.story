@@ -14,14 +14,14 @@ And the user clicks on the area tab in the data area
 And the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
+And the user enters the <Area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user clicks on the Status drop-down in the basicinfo area page
 Then the user should see the area status values from lookup AREA
 
 Examples:
-|country|area|
+|country|Area|
 |USA|Alabama|
 
 Scenario: Edit and Save Area's Status value in the Area Basic Info page
@@ -82,7 +82,7 @@ And the user clicks on the area tab in the data area
 And the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
+And the user enters the <Area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 And the user starts typing the name of a status as i in the Area Status drop-down
@@ -95,7 +95,7 @@ When the user starts typing the name of a status as x in the Area Status drop-do
 Then the user should see the selected status in the Area Status drop-down as Pending
 
 Examples:
-|country|area|
+|country|Area|
 |USA|Alabama|
 
 Scenario: Verify whether Area Status value in Area Web Page is retrieved from trusted document.
