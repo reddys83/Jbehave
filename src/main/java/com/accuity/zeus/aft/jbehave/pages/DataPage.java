@@ -278,7 +278,7 @@ public class DataPage extends AbstractPage {
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(area);
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -1255,8 +1255,7 @@ public class DataPage extends AbstractPage {
         attemptClick(area_basic_info_country_link_xpath);
     }
 
-
-
+    
     public void clickOnAreaRelatedPlace(String relatedPlace) {
         attemptClick(By.xpath(area_related_places_place_link_xpath + relatedPlace + "']/td/a"));
         try {
@@ -1264,6 +1263,11 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    
+    public EditAreaPage createEditAreaPage() {
+        return new EditAreaPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+
     }
 
 }

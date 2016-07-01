@@ -289,6 +289,7 @@ public class DataSteps extends AbstractSteps {
     @Alias("the user clicks on the sub-area basic info link in the navigation bar")
     public void clickOnAreaBasicInfoInNavigationBar() {
         getDataPage().clickOnAreaBasicInfoInNavigationBar();
+        setEditAreaPage(getDataPage().createEditAreaPage());
     }
 
     @When("the user clicks on the city basic info link in the navigation bar")
