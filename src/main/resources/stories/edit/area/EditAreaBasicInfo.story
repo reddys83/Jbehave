@@ -72,7 +72,7 @@ Examples:
 
 
 
-Scenario: User can edit area Began Date - Verify end date get saved even if all values are blank.
+Scenario: User can edit area End Date - Verify end date get saved even if all values are blank.
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -231,7 +231,7 @@ Examples:
 |Angola|Cabinda|06|Jun|2015|05|Jun|2015|
 
 
-Scenario: User can edit area Began Date - Verify end date get saved even if began date is empty.
+Scenario: User can edit area End Date - Verify end date get saved even if began date is empty.
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
