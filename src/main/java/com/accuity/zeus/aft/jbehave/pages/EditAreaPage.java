@@ -148,10 +148,11 @@ public class EditAreaPage extends AbstractPage {
 	 */
 	public void verifyAreaStatusInDropdown(String status) {
 		try {
-			Thread.sleep(1000L);
+			Thread.sleep(2000L);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+
 		assertTrue(
 				getSelectedDropdownValue(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_xpath"))
 						.equalsIgnoreCase(status));
@@ -159,10 +160,8 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyAreaFromTrustedDB(String country, String area, String tagName, String source) {
 
-		String getStatusFromUI = getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_options_xpath"))
-				.getText();
-		assertEquals(StringUtils.capitalize(getAreaInfoFromDB(country, area, tagName, source)), getStatusFromUI);
+		assertEquals((getAreaInfoFromDB(country, area, tagName, source)),
+				getSelectedDropdownValue(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_xpath")));
 
 	}
 
