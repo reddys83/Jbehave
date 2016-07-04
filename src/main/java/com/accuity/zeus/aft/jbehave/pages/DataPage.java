@@ -7,6 +7,7 @@ import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.rest.Response;
 import com.accuity.zeus.aft.rest.RestClient;
+import com.accuity.zeus.utils.SimpleCacheManager;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -263,6 +264,7 @@ public class DataPage extends AbstractPage {
     }
 
     public CountryPage enterCountryInTheTypeAheadBox(String country) {
+        SimpleCacheManager.getInstance().put("selectedCountry",country);
         selectedEntity = country;
         getDriver().findElement(country_type_ahead_xpath).sendKeys(country);
         getDriver().findElement(country_type_ahead_xpath).sendKeys(Keys.RETURN);
@@ -275,6 +277,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void enterAreaInTypeAhead(String area) {
+        SimpleCacheManager.getInstance().put("selectedArea",area);
         selectedEntity = area;
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(area);
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
@@ -810,6 +813,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void enterCityInTheTypeAheadBox(String city) {
+        SimpleCacheManager.getInstance().put("selectedCity",city);
         selectedEntity = city;
         getDriver().findElement(city_type_ahead_xpath).sendKeys(city);
         getDriver().findElement(city_type_ahead_xpath).sendKeys(Keys.RETURN);
@@ -1280,5 +1284,16 @@ public class DataPage extends AbstractPage {
 			assertTrue(false);
 		}
 	}
+
+    public void changeBrowserUrlAndNavigate(String id){
+        String curentUrl=getDriver().getCurrentUrl();
+        String[]currentUrl=curentUrl.split("country/");
+        curentUrl=currentUrl[0]+"country/"+id;
+        getDriver().navigate().to(curentUrl);
+    }
+
+    public void verifyViewModeForEntity(){
+        assertTrue(getDriver().findElement(currency_update_button_id).isDisplayed());
+    }
 
 }
