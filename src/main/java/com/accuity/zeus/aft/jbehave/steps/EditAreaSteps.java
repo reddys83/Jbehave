@@ -46,11 +46,6 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().selectAreaStatusValue(status);
 	}
 
-	@When("the user clicks on the save button in area page")
-	public void clickOnSaveButton() {
-		getDataPage().clickOnSaveButton();
-	}
-
 	@Then("the user should see the successful update message at top of the area page")
 	public void verifySuccessfulUpdatedMessage() {
 		getEditAreaPage().verifySuccessfulUpdatedMessage();

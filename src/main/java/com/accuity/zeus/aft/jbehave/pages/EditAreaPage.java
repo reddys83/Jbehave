@@ -27,7 +27,6 @@ public class EditAreaPage extends AbstractPage {
 		super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
 	}
 
-	
 	/**
 	 * This method is used to click the area status drop-down
 	 */
@@ -43,61 +42,61 @@ public class EditAreaPage extends AbstractPage {
 		List<WebElement> statusList = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_options_xpath"));
 		try {
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area Status types");
-		for (int i = 1; i < document.getElementsByTagName("status").getLength(); i++) {
-			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
-					statusList.get(i).getAttribute("value"));
-		}
-		}
-		catch(Exception e){
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
+					"get area Status types");
+			for (int i = 1; i < document.getElementsByTagName("status").getLength(); i++) {
+				assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+						statusList.get(i).getAttribute("value"));
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void clickOnUpdate() {
-        try {
-            Thread.sleep(5000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        attemptClick(AreaIdentifiers.getObjectIdentifier("area_update_button_xpath"));
-        try {
-            Thread.sleep(5000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-	
+		try {
+			Thread.sleep(5000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_update_button_xpath"));
+		try {
+			Thread.sleep(5000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void selectAreaStatusValue(String status) {
 		selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_xpath"),
 				status);
 	}
-	
-	
+
 	/**
 	 * This method is to verify whether the successful message is generated
-	 * after saving the city page.
+	 * after saving the area page.
 	 */
 	public void verifySuccessfulUpdatedMessage() {
 		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_save_confirmation_message_xpath"))
 				.isDisplayed());
 	}
-	
+
 	public void verifyStatusInAreaPage(String status) {
 		try {
 			Thread.sleep(5000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals(status, getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_status_value_xpath")).getText());
+		assertEquals(status,
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_status_value_xpath")).getText());
 	}
-	
+
 	/**
-	 * This method is used to get the city information from DB
+	 * This method is used to get the area information from DB
 	 *
 	 * @param country
 	 * @param area
-	 * 	 * @param tagName
+	 *            * @param tagName
 	 * @param source
 	 * @return value of the tag name passed to it
 	 */
@@ -115,20 +114,19 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}
 
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-				"get areastatus", nvPairs);
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get areastatus",
+				nvPairs);
 		if (document != null) {
 			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
 					: getNodeValuesByTagName(document, tagName).get(0);
 		}
 		return tagValue;
 	}
-	
-	public void verifyAreaStatusFromZeusDB(String country,String area,String tagName, String source,
-			String status) {
+
+	public void verifyAreaStatusFromZeusDB(String country, String area, String tagName, String source, String status) {
 		assertEquals(getAreaInfoFromDB(country, area, tagName, source), status.toLowerCase());
 	}
-	
+
 	/**
 	 * This method is used to enter the value in Area status drop-down
 	 *
@@ -139,13 +137,13 @@ public class EditAreaPage extends AbstractPage {
 		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_xpath"))
 				.sendKeys(word);
 	}
-	
+
 	/**
 	 * This method is used to verify the passing status is selected in the Area
 	 * status drop-down
 	 * 
 	 * @param status
-	 *            will hold the value to be verified with city status drop-down
+	 *            will hold the value to be verified with area status drop-down
 	 *            selection
 	 */
 	public void verifyAreaStatusInDropdown(String status) {
@@ -158,15 +156,16 @@ public class EditAreaPage extends AbstractPage {
 				getSelectedDropdownValue(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_xpath"))
 						.equalsIgnoreCase(status));
 	}
-	
-	public void verifyAreaFromTrustedDB(String country, String area, String tagName,
-			String source) {
-		
-		String getStatusFromUI =getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_options_xpath")).getText();
+
+	public void verifyAreaFromTrustedDB(String country, String area, String tagName, String source) {
+
+		String getStatusFromUI = getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_options_xpath"))
+				.getText();
 		assertEquals(StringUtils.capitalize(getAreaInfoFromDB(country, area, tagName, source)), getStatusFromUI);
 
 	}
-	
+
 	@Override
 	public String getPageUrl() {
 		return null;

@@ -1278,7 +1278,7 @@ public class DataPage extends AbstractPage {
     public void verifyNoSummaryConfirmationModal(String summaryText) {
 		try {
 			WebElement confirmChanges = getDriver()
-					.findElement(AreaIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
+					.findElement(cancel_update_confirmation_modal_xpath);
 			String confirmationText = confirmChanges.getText();
 			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
 		} catch (Exception e) {

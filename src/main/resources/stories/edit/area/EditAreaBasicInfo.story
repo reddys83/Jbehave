@@ -6,7 +6,6 @@ As a user
 I want to cover the requirements mentioned in
 
 JIRA ID - ZEUS-1025 - User can edit Area's Status
-
 Scenario: Verify Area Status dropdown values from lookup Status
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -39,7 +38,7 @@ And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
 When the user selects value as <status> from Status drop-down in the area basicinfo page
-And the user clicks on the save button in area page
+And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
@@ -64,7 +63,7 @@ And the user clicks on the choose an area option
 And the user enters the <Area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
-And the user clicks on the save button in area page
+And the user clicks on the save button
 Then the user should see the save confirmation modal
 Then the user should not see the area <ConfirmationSummary> changes in confirmation modal
 When the user clicks on the confirm button
@@ -128,14 +127,14 @@ And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
 When the user selects value as <status> from Status drop-down in the area basicinfo page
-And the user clicks on the save button in area page
+And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should see the updated <status> in area web page
 When the user clicks on the area update link
 When the user selects value as <status2> from Status drop-down in the area basicinfo page
-And the user clicks on the save button in area page
+And the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
 |Summary|
