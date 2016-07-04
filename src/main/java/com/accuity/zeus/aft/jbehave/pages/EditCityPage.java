@@ -1717,7 +1717,7 @@ public class EditCityPage extends AbstractPage {
 	public void verifyCityPlacesTypeList() {
 		List<WebElement> cityPlacesTypeList = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("city_places_type_options_dropdown_xpath"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city places type");
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city places type lookup");
 		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					cityPlacesTypeList.get(i).getText());
@@ -1727,7 +1727,7 @@ public class EditCityPage extends AbstractPage {
 	public void verifyCityPlacesDetailsList() {
 		List<WebElement> cityPlacesDetailsList = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("city_places_details_options_dropdown_xpath"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city places detail");
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city places detail lookup");
 		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					cityPlacesDetailsList.get(i).getText());
@@ -1818,9 +1818,9 @@ public class EditCityPage extends AbstractPage {
 
 	public void verifyCityRelatedValueFromZeusDB(String country, String area, String city, String type, String place,
 			String details, String source) {
-		assertEquals(getCityRelatedInfoFromDB(country, area, city, "RelatedPlaceType", source), type);
-		assertEquals(getCityRelatedInfoFromDB(country, area, city, "RelatedPlacePlace", source), place);
-		assertEquals(getCityRelatedInfoFromDB(country, area, city, "RelatedPlaceDetail", source), details);
+		assertEquals(getCityRelatedInfoFromDB(country, area, city, "type", source), type);
+		assertEquals(getCityRelatedInfoFromDB(country, area, city, "value", source), place);
+		assertEquals(getCityRelatedInfoFromDB(country, area, city, "details", source), details);
 
 	}
 
@@ -1828,9 +1828,7 @@ public class EditCityPage extends AbstractPage {
 
 		String tagValue = null;
 		List<NameValuePair> nvPairs = new ArrayList<>();
-		nvPairs.add(new BasicNameValuePair("country", country));
-		nvPairs.add(new BasicNameValuePair("area", area));
-		nvPairs.add(new BasicNameValuePair("city", city));
+		nvPairs.add(new BasicNameValuePair("name", city));
 		nvPairs.add(new BasicNameValuePair("source", source));
 		try {
 			Thread.sleep(7000L);
@@ -1894,9 +1892,9 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public void verifyDeletedCityRelatedValueFromZeusDB(String country, String area, String city, String source) {
-		assertEquals(getCityRelatedInfoFromDB(country, area, city, "RelatedPlaceType", source), "");
-		assertEquals(getCityRelatedInfoFromDB(country, area, city, "RelatedPlacePlace", source), "");
-		assertEquals(getCityRelatedInfoFromDB(country, area, city, "RelatedPlaceDetail", source), "");
+		assertEquals(getCityRelatedInfoFromDB(country, area, city, "type", source), "");
+		assertEquals(getCityRelatedInfoFromDB(country, area, city, "value", source), "");
+		assertEquals(getCityRelatedInfoFromDB(country, area, city, "details", source), "");
 
 	}
 
