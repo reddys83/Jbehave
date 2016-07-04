@@ -148,6 +148,7 @@ Examples:
 |USA|Georgia|Adel|active|Summary|
 
 Scenario: The user can edit the value in the Add Info field and save it and see it on the front end(Front End Validation)
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -173,7 +174,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|addInfoText|
-|Afghanistan|Badakshan|Panj Shair|Sample text|
+|USA|Georgia|Adel|Sample text|
 
 Scenario: To update the City's 'Basic Info' by entering a value for 'Add Info' that is different from the current value(Back End validation)
 Given a user is on the search page
@@ -196,9 +197,10 @@ Then the user should see the city addinfo value <addInfoText> as in zeus documen
 
 Examples:
 |country|area|city|addInfoText|
-|Afghanistan|Badakshan|Panj Shair|This is a different text|
+|USA|Georgia|Adel|This is a different text|
 
 Scenario: To view that there is no change in value when the user has entered a value for 'Add Info' that is no different to the current value(Front End Validation)
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -216,7 +218,7 @@ Then the user should see no summary changes in the city save confirmation modal
 
 Examples:
 |country|area|city|addInfoText|Summary|
-|Afghanistan|Badakshan|Panj Shair|This is a different text|Basic Info|
+|USA|Georgia|Adel|This is a different text|Basic Info|
 
 Scenario: To view whether the text entered in the 'Add Info' field is not beyond 500 unicode characters after saving the page
 Given a user is on the search page
@@ -240,7 +242,7 @@ Then the user should be able to verify the maximum values are entered in the add
 
 Examples:
 |country|area|city|
-|Afghanistan|Badakshan|Panj Shair|
+|USA|Georgia|Adel|
 
 
 Scenario: User can edit country identifiers - Verify country Identifier types are same as from lookup THIRD_PARTY_IDENTIFIER_GEO
@@ -600,7 +602,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|endDay2|endMonth2|endYear2|
-|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|5|Jun|2016|10|Jun|2016|
+|USA|Georgia|Adel|1|Jun|2016|5|Jun|2016|10|Jun|2016|
 
 Scenario: User is updating a City's Basic Info - The user has entered all blank values for 'End Date'
 Given a user is on the search page
@@ -632,7 +634,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|endDate|
-|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|||||
+|USA|Georgia|Adel|1|Jun|2016|||||
 
 
 Scenario: User is entering invalid inputs - 
@@ -663,10 +665,10 @@ Then the user verifies whether error message Enter a year, month/year or day/mon
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|
-|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|6||2016|
-|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|6|Jun||
-|Afghanistan|Badakshan|Panj Shair|1|Jun|2016||Jun||
-|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|6|||
+|USA|Georgia|Adel|1|Jun|2016|6||2016|
+|USA|Georgia|Adel|1|Jun|2016|6|Jun||
+|USA|Georgia|Adel|1|Jun|2016||Jun||
+|USA|Georgia|Adel|1|Jun|2016|6|||
 
 Scenario: User is entering invalid inputs - The user enters the day with alphabets (not in Gregorian calendar format)
 Given a user is on the search page
@@ -691,7 +693,7 @@ Then the user verifies whether error message Invalid Date is displayed for End D
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|
-|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|6Rdseth765|Jun|2016|
+|USA|Georgia|Adel|1|Jun|2016|6Rdseth765|Jun|2016|
 
 Scenario: User gets an error message when entering a date that is later than today 
 Given a user is on the search page
@@ -714,7 +716,7 @@ Then the user verifies whether error message Must be no later than today. is dis
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|
-|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|
+|USA|Georgia|Adel|1|Jun|2016|
 
 Scenario: User is updating a City's Basic Info and has entered an 'End Date' that is no different to the current value
 Given a user is on the search page
@@ -751,7 +753,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|Summary|
-|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|5|Jun|2016|Basic Info| 
+|USA|Georgia|Adel|1|Jun|2016|5|Jun|2016|Basic Info| 
 
 Scenario: User is updating a City's Basic Info and has entered an 'End Date' that is before the 'Began Date'
 Given a user is on the search page
@@ -776,7 +778,7 @@ Then the user verifies whether error message Must be after Began date. is displa
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|Summary|
-|Afghanistan|Badakshan|Badakhshan|1|Jun|2016|1|Jun|2015|Basic Info|
+|USA|Alabama|Alexander City|1|Jun|2016|1|Jun|2015|Basic Info|
 
 Scenario: User enters End Date values when the Began Date values are empty
 Given a user is on the search page
