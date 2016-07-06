@@ -1144,4 +1144,9 @@ public class CountrySteps extends AbstractSteps{
     public void deleteAllBankingHours() {
         getCountryPage().deleteAllBankingHours();
     }
+
+    @Then("the user should not see the banking hours rows")
+    public void verifyNoBankingHoursRows() {
+        getCountryPage().verifyNoBankingHoursRows();
+    }
 }
