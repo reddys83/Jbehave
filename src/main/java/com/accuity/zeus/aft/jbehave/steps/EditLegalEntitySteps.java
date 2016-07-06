@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.jbehave.steps.AbstractSteps;
 import com.sun.org.glassfish.gmbal.ParameterNames;
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -277,6 +278,30 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyLegalEntityDocumentInZeus(entityTypeValue, "type", fid, source, "get legal entity basic info left column");
     }
 
+    @Then("the user should see creditratings values as <agencyName><type><value><AppliedDateDay><AppliedDateMonth><AppliedDateYear><ConfirmedDateDay><ConfirmedDateMonth><ConfirmedDateYear> for fid <fid> in $source document")
+    public void verifyEditLegalEntityCreditRatingsValuesExistInZeus(@Named("agencyName") String agencyName,
+                                                                 @Named("type") String type,
+                                                                 @Named("value") String value,
+                                                                 @Named("AppliedDateDay") String AppliedDateDay,
+                                                                 @Named("AppliedDateMonth") String AppliedDateMonth,
+                                                                 @Named("AppliedDateYear") String AppliedDateYear,
+                                                                 @Named("ConfirmedDateDay") String ConfirmedDateDay,
+                                                                 @Named("ConfirmedDateMonth") String ConfirmedDateMonth,
+                                                                 @Named("ConfirmedDateYear") String ConfirmedDateYear,
+                                                                 @Named("fid") String fid,
+                                                                 @Named("source") String source) {
+        getEditLegalEntityPage().verifyEditLegalEntityCreditRatingsValuesExistInZeus(agencyName,type,value,AppliedDateDay,AppliedDateMonth,AppliedDateYear,ConfirmedDateDay,ConfirmedDateMonth,ConfirmedDateYear,fid,source);
+    }
+    @Then("the user should not see creditratings values for fid <fid> in $source document as: $creditRatings")
+    public void verifyEditLegalEntityCreditRatingsValuesNotExistInZeus1(@Named("creditRatings") ExamplesTable creditRatings,@Named("fid") String fid,@Named("source") String source)
+    {
+        getEditLegalEntityPage().verifyEditLegalEntityCreditRatingsValuesNotExistInZeus(creditRatings,fid,source);
+    }
+    @Then("the user should see the credit ratings values as in $source document with fid <fid>")
+    public void verifyEditLegalEntityCreditRatingsValuesFromTrusted(@Named("fid") String fid,@Named("source") String source){
+        getEditLegalEntityPage().verifyEditLegalEntityCreditRatingsValuesFromTrusted(fid,source);
+    }
+
     @Then("the user should see the $delete_button in disabled state in entity types section")
     public void verifyDeleteLegalEntityTypeButtonStatus(@Named("delete_button") String delete_button)
     {
@@ -326,6 +351,18 @@ public class EditLegalEntitySteps extends AbstractSteps{
     public void verifyNoNewEntityTypeRow(String dropdown)
     {
         getEditLegalEntityPage().verifyNoNewEntityTypeRow(dropdown);
+    }
+    @Then("the user should still see the new credit ratings row with $dropdown")
+    public void verifyNewCreditRatingsRow(String dropdown)
+    {
+        getEditLegalEntityPage().verifyNewCreditRatingsRow(dropdown);
+    }
+
+    @Then("the user should not see the new credit ratings row with $dropdown")
+
+    public void verifyNoNewCreditRatingsRow(String dropdown)
+    {
+        getEditLegalEntityPage().verifyNoNewCreditRatingsRow(dropdown);
     }
     @When("the user selects to delete all the entity type rows except the first one")
     public void deleteAllEntityTypeRowsExceptRow1()
@@ -590,14 +627,28 @@ public class EditLegalEntitySteps extends AbstractSteps{
     }
 
 
+    @Then("the user should see the $creditratings_rowIdentifier values in credit rating's section from lookup $lookup")
+    public void verifyCreditRatingValuesFromLookup(@Named("creditratings_rowIdentifier") String creditratings_rowIdentifier,@Named("lookup") String lookup) {
+        getEditLegalEntityPage().verifyCreditRatingValuesFromLookup(creditratings_rowIdentifier,lookup);
+    }
     @When("the user clicks on the $rowIdentifier in the legalentity identifier type section")
         public void clickOnIdentifierTypeDropDown(String rowIdentifier) {
         getEditLegalEntityPage().clickOnIdentifierTypeDropDown(rowIdentifier);
     }
 
+    @When("the user clicks on add new credit rating button in the credit rating legal Entity page")
+    public void clickOnAddButton(){
+        getEditLegalEntityPage().clickAddRowButton();
+    }
     @Then("the user should see the identifier values for $row_Identifier from lookup $lookup except the values that are selected already")
     public void verifyLegalEntityIdentifierTypesListFromLookup(@Named("row_Identifier") String row_Identifier, @Named("lookup") String lookupFid) {
         getEditLegalEntityPage().verifyLegalEntityIdentifierTypesListFromLookup(row_Identifier);
+    }
+
+    @When("the user selects agency $agencyRowIdentifier value as <agencyName>")
+    public void selectCreditRatingsAgencyName(@Named("agencyRowIdentifier") String agencyRowIdentifier,@Named("agencyName") String agencyName)
+    {
+        getEditLegalEntityPage().selectCreditRatingsAgencyName(agencyRowIdentifier,agencyName);
     }
 
     @When("the user clicks on the $rowIdentifier in the legalentity identifier status section")
@@ -706,4 +757,77 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyIdentifierTypeErrorMessage("legalEntity_identifier_type_error_msg_xpath", errorMsg);
     }
 
+    public void selectCreditRatingsAgencyType(@Named("agencyTypeRowIdentifier") String agencyTypeRowIdentifier,@Named("type") String type)
+    {getEditLegalEntityPage().selectCreditRatingsAgencyType(agencyTypeRowIdentifier,type);
+    }
+    @When("the user enters agency value $agencyValueRowIdentifier value as <value>")
+    public void enterCreditRatingsAgencyValue(@Named("agencyValueRowIdentifier") String agencyValueRowIdentifier,@Named("value") String value)
+    {
+        getEditLegalEntityPage().enterCreditRatingsAgencyValue(agencyValueRowIdentifier,value);
+    }
+    @When("the user enters agency AppliedDate day $agencyAppliedDateDayRowIdentifier value as <AppliedDateDay>")
+    public void enterCreditRatingsAgencyAppliedDateDay(@Named("agencyAppliedDateDayRowIdentifier") String agencyAppliedDateDayRowIdentifier,@Named("AppliedDateDay") String AppliedDateDay)
+    {
+        getEditLegalEntityPage().enterCreditRatingsAgencyAppliedDateDay(agencyAppliedDateDayRowIdentifier,AppliedDateDay);
+    }
+    @When("the user selects agency AppliedDate month $agencyAppliedDateMonthRowIdentifier value as <AppliedDateMonth>")
+    public void selectCreditRatingsAgencyAppliedDateMonth(@Named("agencyAppliedDateMonthRowIdentifier") String agencyAppliedDateMonthRowIdentifier,@Named("AppliedDateMonth") String AppliedDateMonth)
+    {
+        getEditLegalEntityPage().selectCreditRatingsAgencyAppliedDateMonth(agencyAppliedDateMonthRowIdentifier,AppliedDateMonth);
+    }
+    @When("the user enters agency AppliedDate year $agencyAppliedDateYearRowIdentifier value as <AppliedDateYear>")
+    public void enterCreditRatingsAgencyAppliedDateYear(@Named("agencyAppliedDateYearRowIdentifier") String agencyAppliedDateYearRowIdentifier,@Named("AppliedDateYear") String AppliedDateYear)
+    {
+        getEditLegalEntityPage().enterCreditRatingsAgencyAppliedDateYear(agencyAppliedDateYearRowIdentifier,AppliedDateYear);
+    }
+    @When("the user enters agency ConfirmedDate day $agencyConfirmedDateDayRowIdentifier value as <ConfirmedDateDay>")
+    public void enterCreditRatingsAgencyConfirmedDateDay(@Named("agencyConfirmedDateDayRowIdentifier") String agencyConfirmedDateDayRowIdentifier,@Named("ConfirmedDateDay") String ConfirmedDateDay)
+    {
+        getEditLegalEntityPage().enterCreditRatingsAgencyConfirmedDateDay(agencyConfirmedDateDayRowIdentifier,ConfirmedDateDay);
+    }
+    @When("the user selects agency ConfirmedDate month $agencyConfirmedDateMonthRowIdentifier value as <ConfirmedDateMonth>")
+    public void selectCreditRatingsAgencyConfirmedDateMonth(@Named("agencyConfirmedDateMonthRowIdentifier") String agencyConfirmedDateMonthRowIdentifier,@Named("ConfirmedDateMonth") String ConfirmedDateMonth)
+    {
+        getEditLegalEntityPage().selectCreditRatingsAgencyConfirmedDateMonth(agencyConfirmedDateMonthRowIdentifier,ConfirmedDateMonth);
+    }
+    @When("the user enters agency ConfirmedDate year $agencyConfirmedDateYearRowIdentifier value as <ConfirmedDateYear>")
+    public void enterCreditRatingsAgencyConfirmedDateyear(@Named("agencyConfirmedDateYearRowIdentifier") String agencyConfirmedDateYearRowIdentifier,@Named("ConfirmedDateYear") String ConfirmedDateYear)
+    {
+        getEditLegalEntityPage().enterCreditRatingsAgencyConfirmedDateyear(agencyConfirmedDateYearRowIdentifier,ConfirmedDateYear);
+    }
+
+    @When("the user clicks on delete legal entity credit rating row button for the row $deletebutton_Row")
+    public void clickonDeleteCreditRatingsRowButton(String deletebutton_Row)
+    {
+        getEditLegalEntityPage().clickonDeleteCreditRatingsRowButton(deletebutton_Row);
+    }
+    @Then("the user verifies the credit ratings value maxlength is $maxSize for the row $rowIdentifier")
+    public void verifyMaXlengthCreditRatingsValueText(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditLegalEntityPage().verifyMaxLengthCreditRatingsValueText(maxSize,rowIdentifier);}
+
+    @Then("the user should see the error message $errorMsg for the credit ratings agency value field")
+    public void verifyCreditRatingsAgencyValueErrorMessage(@Named("errorMsg") String errorMsg)
+    {
+        getEditLegalEntityPage().verifyCreditRatingsErrorMessage("legalEntity_creditRating_value_error_msg_xpath",errorMsg);
+    }
+
+    @Then("the user should see the error message $errorMsg for the credit ratings agency type field")
+    public void verifyCreditRatingsAgencyTypeErrorMessage(@Named("errorMsg") String errorMsg)
+    {
+        getEditLegalEntityPage().verifyCreditRatingsErrorMessage("legalEntity_creditRating_type_error_msg_xpath",errorMsg);
+    }
+
+    @Then("the user should see the error message $errorMsg for the credit ratings agency name field")
+    public void verifyCreditRatingsAgencyNameErrorMessage(@Named("errorMsg") String errorMsg)
+    {
+        getEditLegalEntityPage().verifyCreditRatingsErrorMessage("legalEntity_creditRating_agency_error_msg_xpath",errorMsg);
+    }
+    @Then("the user should see the error $appliedDateErrorMsg for Applied date")
+    public void verifyAppliedDateErrorMessage(@Named("appliedDateErrorMsg") String appliedDateErrorMsg) {
+        getEditLegalEntityPage().verifyAppliedDateErrorMessage(appliedDateErrorMsg);
+    }
+
+    @Then("the user should see the error $confirmedDateErrorMsg for Confirmed date")
+    public void verifyConfirmedDateErrorMessage(@Named("confirmedDateErrorMsg ") String confirmedDateErrorMsg) {
+        getEditLegalEntityPage().verifyConfirmedDateErrorMessage(confirmedDateErrorMsg);
+    }
 }

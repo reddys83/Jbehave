@@ -183,6 +183,8 @@ public class DataPage extends AbstractPage {
     private By basic_info_left_section_xpath = By.xpath("//table[@class='vertical']/tbody//th");
 
     private String area_area_city_link_xpath = "//*[@id='areaPlaces']/table/tbody//td[a='";
+    private String area_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
+    private By select_places_view_xpath = By.xpath(".//*[@id='areaPlaces']/h1/span']");
 
     private By save_button_id = By.id("save-button");
     private By error_message_at_top_xpath = By.xpath("//*[@id='error']/div/div/p");
@@ -1281,6 +1283,28 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    public void changeBrowserUrlAndNavigate(String id){
+        String curentUrl=getDriver().getCurrentUrl();
+        String[]currentUrl=curentUrl.split("country/");
+        curentUrl=currentUrl[0]+"country/"+id;
+        getDriver().navigate().to(curentUrl);
+    }
+
+    public void verifyViewModeForEntity(){
+        assertTrue(getDriver().findElement(currency_update_button_id).isDisplayed());
+    }
+    public void clickOnAreaRelatedPlace(String relatedPlace) {
+        attemptClick(By.xpath(area_related_places_place_link_xpath + relatedPlace + "']/td/a"));
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void verifyAreaPlacesView() {
+        assertTrue(getDriver().findElement(select_places_view_xpath).isDisplayed());
     }
 
 }
