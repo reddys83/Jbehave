@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
 
+import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.jbehave.steps.AbstractSteps;
 import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.jbehave.core.annotations.Alias;
@@ -819,6 +820,60 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyLegalEntityServiceValuesNotExistInZeus(fid,source,category,override,financialCategory,financialDetails);
     }
 
+    @Then("the user should see the ownership type values for $rowIdentifier from lookup $lookup")
+    public void verifyOwnershipTypeFromLookup(@Named("rowIdentifier") String rowIdentifier,@Named("lookup") String lookup){
+        getEditLegalEntityPage().verifyOwnershipTypeFromLookup(rowIdentifier,lookup);
+    }
+    @When("the user clicks on add new ownership summaries button")
+    public void clickAddNewOwnershipButton(){
+        getEditLegalEntityPage().clickAddNewOwnershipButton();
+    }
+
+    @Then("the user should see the ownership summary values as in $source document with fid <fid>")
+    public void verifyOwnershipSummaryFromTrusted(@Named("source") String source,@Named("fid") String fid)
+    {
+        getEditLegalEntityPage().verifyOwnershipSummaryFromTrusted(source,fid);
+    }
+    @When("the user selects ownership type as <ownershipType> from $rowIdentifier in the legalentity page")
+    public void selectOwnershipType(@Named("ownershipType") String ownershipType,@Named("rowIdentifier") String rowIdentifier)
+    {
+        getEditLegalEntityPage().selectOwnershipType(ownershipType,rowIdentifier);
+    }
+    @When("the user enters ownership value as <value> for $rowIdentifier")
+        public void enterOwnershipValue(@Named("value") String value,@Named("rowIdentifier") String rowIdentifier)
+    {
+        getEditLegalEntityPage().enterOwnershipValue(value,rowIdentifier);
+    }
+
+    @Then("the user should see ownership summary values as <ownershipType><value> for fid <fid> in $source document")
+    public void verifyOwnershipSummaryFromZeus(@Named("ownershipType") String ownershipType,@Named("value") String value,@Named("fid") String fid,@Named("source") String source)
+    {
+        getEditLegalEntityPage().verifyOwnershipSummaryFromZeus(ownershipType,value,fid,source);
+    }
+
+    @When("the user clicks on the delete button $rowIdentifier in the legal entity ownership summary section")
+    public void clickOnDeleteOwnershipSummaryButton(String rowIdentifier) {
+        getEditLegalEntityPage().clickOnDeleteOwnershipSummaryButton(rowIdentifier);
+    }
+    @Then("the user should not see ownership summary values for fid <fid> in $source document as: $ownershipSummaries")
+    public void verifyOwnershipSummaryValuesNotExistInZEUS(@Named("fid") String fid,@Named("source") String source,@Named("ownershipSummaries") ExamplesTable ownershipSummaries) {
+        getEditLegalEntityPage().verifyOwnershipSummaryValuesNotExistInZEUS(fid,source,ownershipSummaries);
+    }
+
+    @Then("the user should see the ownership summary text area maxlength as $maxlength characters for the $rowIdentifier")
+
+    public void verifyOwnershipSummaryValueMaxLength(@Named("maxlength") String maxlength,@Named("rowIdentifier") String rowIdentifier) {
+        getEditLegalEntityPage().verifyOwnershipSummaryValueMaxLength(maxlength,rowIdentifier);
+    }
+
+    @Then("the user should see the error message $reqMsg for the ownership summary field $rowIdentifier")
+    public void verifyRequiredErrorMsgForOwnershipSummary(@Named("reqMsg") String reqMsg,@Named("rowIdentifier") String rowIdentifier){
+        getEditLegalEntityPage().verifyRequiredErrorMsgForOwnershipSummary(reqMsg,rowIdentifier);
+    }
+
+    @When("the user deletes all the existing ownership summary rows")
+    public void deleteAllLegalEntityRows(){getEditLegalEntityPage().deleteAllLegalEntityRows(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_ownership_summary_delete_button"));}
+
     @Then("the user should not see the new offered services row with $rowIdentifier")
     @Alias("the user should not see the new financial services row with $rowIdentifier")
     public void verifyNoNewServicesRow(String rowIdentifier) {
@@ -916,4 +971,5 @@ public class EditLegalEntitySteps extends AbstractSteps{
     public void verifyConfirmedDateErrorMessage(@Named("confirmedDateErrorMsg ") String confirmedDateErrorMsg) {
         getEditLegalEntityPage().verifyConfirmedDateErrorMessage(confirmedDateErrorMsg);
     }
+
 }

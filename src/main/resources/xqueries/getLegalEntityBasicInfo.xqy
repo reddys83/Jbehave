@@ -64,13 +64,14 @@ then $legalEntityS/summary/leadInstitution
 else ""
 
 let $entitytypes:= ($legalEntityS/summary/types/type)
+let $ownershipSummaryType:= for $x in $legalEntityS/ownership/summaries/summary
+return <ownershipSummaryType>{$x/@type/string()}</ownershipSummaryType>
 let $history:=if(fn:exists($legalEntityS/history/summaries/summary))
 then "null"
 else $legalEntityS/history/summaries/summary/text()
 
-
-
-
+let $ownershipValue:=for $x in $legalEntityS/ownership/summaries/summary
+return <ownershipSummaryValue>{($x/text())}</ownershipSummaryValue>
 return <legalEntity>
     <status>{$status}</status>
     <claimedEstDate>{$claimedEstDate}</claimedEstDate>
@@ -89,8 +90,7 @@ return <legalEntity>
     <legalEntityIdentifierTypes>{$legalEntityIdentifierTypes}</legalEntityIdentifierTypes>
     <legalEntityIdentifierValues>{$legalEntityIdentifierValues}</legalEntityIdentifierValues>
     <legalEntityIdentifierStatuses>{$legalEntityIdentifierStatuss}</legalEntityIdentifierStatuses>
-
-
+    <ownershipSummary>{$ownershipSummaryType}{$ownershipValue}</ownershipSummary>
     <history>{$history}</history>
 </legalEntity>
 
