@@ -266,7 +266,6 @@ Examples:
 
 
 Scenario: Filter offices by status - User verifies whether the third page of 'Active' filter has 'Active' status for all fids
-Meta: @test1
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
