@@ -7,6 +7,7 @@ import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.rest.Response;
 import com.accuity.zeus.aft.rest.RestClient;
+import com.accuity.zeus.utils.SimpleCacheManager;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -203,6 +204,9 @@ public class DataPage extends AbstractPage {
     private By delete_confirmation_no_button_id = By.id("no-button");
     private By delete_confirmation_yes_button_id = By.id("yes-button");
     private By save_success_message_id=By.id("saveSuccess");
+    private By area_basic_info_country_link_xpath = By.xpath(".//*//tr[th='Country']/td/a");
+    private String area_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
+
 
     static ResponseEntity responseEntity;
     static String endpointWithID;
@@ -261,6 +265,7 @@ public class DataPage extends AbstractPage {
     }
 
     public CountryPage enterCountryInTheTypeAheadBox(String country) {
+        SimpleCacheManager.getInstance().put("selectedCountry",country);
         selectedEntity = country;
         getDriver().findElement(country_type_ahead_xpath).sendKeys(country);
         getDriver().findElement(country_type_ahead_xpath).sendKeys(Keys.RETURN);
@@ -273,6 +278,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void enterAreaInTypeAhead(String area) {
+        SimpleCacheManager.getInstance().put("selectedArea",area);
         selectedEntity = area;
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(area);
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
@@ -808,6 +814,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void enterCityInTheTypeAheadBox(String city) {
+        SimpleCacheManager.getInstance().put("selectedCity",city);
         selectedEntity = city;
         getDriver().findElement(city_type_ahead_xpath).sendKeys(city);
         getDriver().findElement(city_type_ahead_xpath).sendKeys(Keys.RETURN);
@@ -1041,10 +1048,15 @@ public class DataPage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
 
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
-        endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
+        if(document != null) {
+	        endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
 
-        responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
-        assertTrue(responseEntity.getStatusCode().value() == 200);
+	        responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
+	        assertTrue(responseEntity.getStatusCode().value() == 200);
+	    }
+	    else {
+            assertFalse("Zeus document with name " + name + " does not exist in the DB", true);
+	    }
     }
 
     public void revertChangesToDocument() {
@@ -1219,7 +1231,7 @@ public class DataPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-  
+
     public void verifyDeleteConfirmationModal() {
         assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(delete_row_confirmation_modal_xpath).getText());
     }
@@ -1245,6 +1257,30 @@ public class DataPage extends AbstractPage {
 
     }
 
+    public void clickOnCountryLink() {
+        attemptClick(area_basic_info_country_link_xpath);
+    }
+
+
+
+    public void clickOnAreaRelatedPlace(String relatedPlace) {
+        attemptClick(By.xpath(area_related_places_place_link_xpath + relatedPlace + "']/td/a"));
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    public void changeBrowserUrlAndNavigate(String id){
+        String curentUrl=getDriver().getCurrentUrl();
+        String[]currentUrl=curentUrl.split("country/");
+        curentUrl=currentUrl[0]+"country/"+id;
+        getDriver().navigate().to(curentUrl);
+    }
+
+    public void verifyViewModeForEntity(){
+        assertTrue(getDriver().findElement(currency_update_button_id).isDisplayed());
+    }
     public void clickOnAreaRelatedPlace(String relatedPlace) {
         attemptClick(By.xpath(area_related_places_place_link_xpath + relatedPlace + "']/td/a"));
         try {

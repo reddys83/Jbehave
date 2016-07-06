@@ -859,4 +859,18 @@ public class DataSteps extends AbstractSteps {
             getDataPage().loadDocument(xqueryName);
 
         }
+    @When("the user clicks on the area related place link $relatedPlace")
+    public void clickOnAreaRelatedPlace(@Named("relatedPlace") String relatedPlace) {
+        getDataPage().clickOnAreaRelatedPlace(relatedPlace);
+    }
+
+    @When("the user clicks on the Country link in the area basic info")
+    public void clickOnCountryLink(){ getDataPage().clickOnCountryLink();}
+
+
+    @When("the user updates the browser url to new $entity id <entityID>")
+    public void changeBrowserUrlAndNavigate(@Named("entityID") String countryID){getDataPage().changeBrowserUrlAndNavigate(countryID);}
+
+    @Then("the user should see the $entity page in the view mode")
+    public void verifyViewModeForEntity(){getDataPage().verifyViewModeForEntity();}
 }

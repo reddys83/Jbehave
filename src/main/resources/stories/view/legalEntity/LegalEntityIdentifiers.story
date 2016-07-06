@@ -18,17 +18,15 @@ And the user clicks on the legal entity identifier link in the navigation bar
 
 Then the user should see the legal entity's identifiers as:
 |TYPE|VALUE|STATUS|
-|The Global Markets Entity Identifier (GMEI)|B4TYDEB6GKMZO031MB27|active|
-|S and P Identification Number (SPID)|105940|active|
-|RSSD|480228|active|
-|FDIC|3510|active|
-|OCC|13044|active|
-|Global Intermediary Identification Number|K613SZ.99999.SL.840|active|
-|Moodys Organisation ID|600011442|active|
-|US Tax ID|94-1687665|active|
-|Fitch ID|80089060|active|
-|The Global Markets Entity Identifier (GMEI)|B4TYDEB6GKMZO031MB27|active|
-|Global Intermediary Identification Number|K613SZ.99999.SL.840|active|
+|Bronnoysundregistrene (Norwegian LEIs) (EINO)|B4TYDEB6GKMZO031MB27|Active|
+|S and P Identification Number (SPID)|105940|Active|
+|FDIC|3510|Active|
+|US Tax ID|94-1687665|Active|
+|Fitch ID|80089060|Active|
+|Chinese Bank Serial Number|Lan Testing|Inactive|
+|National Settlement Depository (LEIRU)|12345678901234567890123456789012345678901234567890|Pending|
+|OCC|13044|Active|
+|Irish Stock Exchange (LEIIE)|Lan Iris Stock Exchange|Inactive|
 
 Examples:
 |entity|searchBy|fid|
