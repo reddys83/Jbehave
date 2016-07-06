@@ -179,7 +179,7 @@ public abstract class AbstractPage {
             dropdown.selectByVisibleText(value);
         }
     }
-    
+
     public void selectItemFromDropdownListByText(WebElement obj, String value) {
         try {
             Thread.sleep(3000L);
@@ -303,4 +303,13 @@ public abstract class AbstractPage {
         return dropdownValuesList;
     }
 
+    public List<String> getAlreadySelectedValuesInAllRowsForADropdown(By by) {
+        ArrayList<String> selectedValueList = new ArrayList();
+        for (WebElement WebElement : getDriver().findElements(by)) {
+            Select dropdown = new Select(WebElement);
+            String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
+            selectedValueList.add(selectedValue);
+        }
+        return selectedValueList;
+    }
 }
