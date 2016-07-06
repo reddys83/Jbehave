@@ -232,6 +232,12 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().enter10000CharactersInLegalEntityAdditionalInfo(fid);
     }
 
+    @Then("the user should see the history text area field length as 10000")
+    public void verifyHistoryTextAreaLength(@Named("fid") String fid) {
+        getEditLegalEntityPage().verifyHistoryTextAreaLength(fid);
+    }
+
+
     @Then("the user should see the error message enter up to 10000 valid characters for additional info value in the basic info legal entity page")
     public void verifyLegalEntityAdditionalInfoErrorMessageForMaxLength() {
         getEditLegalEntityPage().verifyLegalEntityAdditionalInfoErrorMessageForMaxLength();
@@ -532,6 +538,11 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyLegalEntityLocationSummaryInZeusDocument(fid);
     }
 
+    @Then("the user should see the edits to legal entity history as <historyValue> for fid <fid> in zeus document")
+    public void verifyLegalEntityHistoryInZeusDocument(@Named("fid") String fid,@Named("historyValue") String historyValue) {
+        getEditLegalEntityPage().verifyLegalEntityHistoryInZeusDocument(fid,historyValue);
+    }
+
     @Then("the user should see the edits to legal entity board meeting for fid <fid> in zeus document")
     public void verifyLegalEntityBoardMeetingInZeusDocument(@Named("fid") String fid) {
         getEditLegalEntityPage().verifyLegalEntityBoardMeetingInZeus(fid);
@@ -609,6 +620,10 @@ public class EditLegalEntitySteps extends AbstractSteps{
     @Then("the user should not see the newly added legalentity location summary")
     public void verifyNoNewlyAddedLegalEntityLocations() {
         getEditLegalEntityPage().verifyNoNewlyAddedLegalEntityLocations();
+    }
+    @When("the user enters value as <historyValue> in the legalentity history field")
+    public void enterValueInLegalEntityHistoryTextField(@Named("historyValue") String historyValue){
+    getEditLegalEntityPage().enterValueInLegalEntityHistoryTextField(historyValue);
     }
 
 

@@ -113,6 +113,7 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_identifier_status_error_msg_xpath",By.xpath(".//*[@class='notification error'][@data-error_id='identifierStatusError']"));
         hmap.put("legalEntity_first_row_new_delete_identifiers_button", By.xpath("//*[@id='additionalIdentifiers']//tr[@class='new']//button[@class='delete-row']"));
         hmap.put("legalEntity_identifier_delete_yes_button_id", By.id("yes-button"));
+        hmap.put("legalEntity_history_value_edit_xpath",By.xpath("//*[@id='legalEntityHistory']/textarea"));
         hmap.put("legalEntity_first_row_existing_creditrating_Agency_dropdown",By.xpath("//*[@id='additionalCreditRatings']//tr[1]//select[@data-internal_id='creditRatingAgency']"));
         hmap.put("legalEntity_first_row_new_creditrating_Agency_dropdown",By.xpath("//*[@id='additionalCreditRatings']//tr[@class='new'][1]//select[@data-internal_id='creditRatingAgency']"));
         hmap.put("legalEntity_first_row_existing_creditrating_Agency_Type_dropdown",By.xpath("//*[@id='additionalCreditRatings']//tr[1]//select[@data-internal_id='creditRatingType']"));
@@ -139,7 +140,7 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_creditRating_type_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingTypeError']"));
         hmap.put("legalEntity_creditRating_value_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingValueError']"));
         hmap.put("legalEntity_basicInfo_appliedDate_errorMessage_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingAppliedDateError']"));
-                hmap.put("legalEntity_basicInfo_confirmedDate_errorMessage_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingConfirmedDateError']"));
+        hmap.put("legalEntity_basicInfo_confirmedDate_errorMessage_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingConfirmedDateError']"));
     }
 
     public static By getObjectIdentifier(String key) {
