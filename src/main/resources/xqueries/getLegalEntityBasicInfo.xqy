@@ -23,7 +23,7 @@ declare function local:getDateAsPerAccuracy
 
 let $fid := xs:string(xdmp:get-request-field("fid"))
 let $source := xs:string(xdmp:get-request-field("source"))
-let $legalEntityS := (/legalEntity[@fid="1010"][@source="zeus"])
+let $legalEntityS := (/legalEntity[@fid=$fid][@source=$source])
 
 let $status := ($legalEntityS/summary/status/text())
 let $claimedEstDate := local:getDateAsPerAccuracy($legalEntityS/summary/dates/established)
@@ -64,6 +64,10 @@ then $legalEntityS/summary/leadInstitution
 else ""
 
 let $entitytypes:= ($legalEntityS/summary/types/type)
+let $history:=if(fn:exists($legalEntityS/history/summaries/summary))
+then "null"
+else $legalEntityS/history/summaries/summary/text()
+
 
 
 
@@ -87,6 +91,7 @@ return <legalEntity>
     <legalEntityIdentifierStatuses>{$legalEntityIdentifierStatuss}</legalEntityIdentifierStatuses>
 
 
+    <history>{$history}</history>
 </legalEntity>
 
 

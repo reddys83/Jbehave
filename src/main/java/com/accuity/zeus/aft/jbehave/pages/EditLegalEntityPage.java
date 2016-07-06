@@ -146,6 +146,123 @@ public class EditLegalEntityPage extends AbstractPage {
 
     }
 
+    public void verifyEditLegalEntityCreditRatingsValuesFromTrusted(String fid, String source) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity credit ratings from trusted", nvPairs);
+
+        if (document != null) {
+            List agencyNameList =getNodeValuesByTagName(document, "agencyName");
+            List typeList = getNodeValuesByTagName(document, "type");
+            List valueList =getNodeValuesByTagName(document, "value");
+            List dateAppliedList =getNodeValuesByTagName(document, "dateApplied");
+            List dateConfirmedList =getNodeValuesByTagName(document, "dateConfirmed");
+
+            for(int i=0;i<agencyNameList.size();i++)
+            {
+                WebElement agencyName=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Edit_creditratings_Table")).get(i).findElement(By.xpath("td[1]/select"));
+                WebElement type=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Edit_creditratings_Table")).get(i).findElement(By.xpath("td[2]/select"));
+                WebElement value=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Edit_creditratings_Table")).get(i).findElement(By.xpath("td[3]/input"));
+                WebElement appliedDateDay=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Edit_creditratings_Table")).get(i).findElement(By.xpath("td[4]/fieldset/input[1]"));
+                WebElement appliedDateMonth=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Edit_creditratings_Table")).get(i).findElement(By.xpath("td[4]/fieldset/select"));
+                WebElement appliedDateYear=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Edit_creditratings_Table")).get(i).findElement(By.xpath("td[4]/fieldset/input[2]"));
+                WebElement confirmedDateDay=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Edit_creditratings_Table")).get(i).findElement(By.xpath("td[5]/fieldset/input[1]"));
+                WebElement confirmedDateMonth=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Edit_creditratings_Table")).get(i).findElement(By.xpath("td[5]/fieldset/select"));
+                WebElement confirmedDateYear=getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_Edit_creditratings_Table")).get(i).findElement(By.xpath("td[5]/fieldset/input[2]"));
+                assertEquals(agencyNameList.get(i),(new Select(agencyName)).getFirstSelectedOption().getText());
+                assertEquals(typeList.get(i),(new Select(type)).getFirstSelectedOption().getText());
+                assertEquals(valueList.get(i),value.getAttribute("value"));
+                String appliedDatestring=appliedDateDay.getAttribute("value")+(new Select(appliedDateMonth)).getFirstSelectedOption().getText()+appliedDateYear.getAttribute("value");
+                if(appliedDatestring.equals(" "))
+                {
+                    appliedDatestring="null";
+                }
+                assertEquals(dateAppliedList.get(i).toString().replace(" ",""),appliedDatestring);
+                String confirmedDatestring=confirmedDateDay.getAttribute("value")+(new Select(confirmedDateMonth)).getFirstSelectedOption().getText()+confirmedDateYear.getAttribute("value");
+                if(confirmedDatestring.equals(" "))
+                {
+                    confirmedDatestring="null";
+                }
+                assertEquals(dateConfirmedList.get(i).toString().replace(" ",""),confirmedDatestring);
+            }
+        }
+
+    }
+
+    public boolean checkEditLegalEntityCreditRatingsValuesFromZeus(String agencyName,
+                                                                 String type,
+                                                                 String value,
+                                                                 String AppliedDateDay,
+                                                                 String AppliedDateMonth,
+                                                                 String AppliedDateYear,
+                                                                 String ConfirmedDateDay,
+                                                                 String ConfirmedDateMonth,
+                                                                 String ConfirmedDateYear,
+                                                                 String fid,
+                                                                 String source)
+    {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        String appliedDate="null";
+        String confirmedDate="null";
+        Boolean flag=false;
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity credit ratings from trusted", nvPairs);
+        if(!AppliedDateDay.equals("") &&!AppliedDateMonth.equals("")&&!AppliedDateYear.equals(""))
+        {
+            appliedDate=AppliedDateDay+AppliedDateMonth+AppliedDateYear;
+        }
+        if(!ConfirmedDateDay.equals("") &&!ConfirmedDateMonth.equals("")&&!ConfirmedDateYear.equals(""))
+        {
+            confirmedDate=ConfirmedDateDay+ConfirmedDateMonth+ConfirmedDateYear;
+        }
+        String creditRatings=agencyName+type+value+appliedDate+confirmedDate;
+        if (document != null) {
+
+            List agencyNameList =getNodeValuesByTagName(document, "agencyName");
+            List typeList = getNodeValuesByTagName(document, "type");
+            List valueList =getNodeValuesByTagName(document, "value");
+            List dateAppliedList =getNodeValuesByTagName(document, "dateApplied");
+            List dateConfirmedList =getNodeValuesByTagName(document, "dateConfirmed");
+
+            for(int i=0;i<agencyNameList.size();i++)
+            {
+                String creditRatingsFromZeus=agencyNameList.get(i).toString()+typeList.get(i).toString()+valueList.get(i).toString()+(dateAppliedList.get(i).toString().replace(" ","").toString())+(dateConfirmedList.get(i).toString().replace(" ","").toString());
+                if(creditRatingsFromZeus.equals(creditRatings)) {
+                    flag=true;
+                    break;
+                }
+            }
+
+        }
+        return flag;
+    }
+
+    public void verifyEditLegalEntityCreditRatingsValuesExistInZeus(String agencyName,
+                                                                 String type,
+                                                                 String value,
+                                                                 String AppliedDateDay,
+                                                                 String AppliedDateMonth,
+                                                                 String AppliedDateYear,
+                                                                 String ConfirmedDateDay,
+                                                                 String ConfirmedDateMonth,
+                                                                 String ConfirmedDateYear,
+                                                                 String fid,
+                                                                 String source)
+    {
+        assertTrue(checkEditLegalEntityCreditRatingsValuesFromZeus(agencyName,type,value,AppliedDateDay,AppliedDateMonth,AppliedDateYear,ConfirmedDateDay,ConfirmedDateMonth,ConfirmedDateYear,fid,source));
+    }
+
+    public void verifyEditLegalEntityCreditRatingsValuesNotExistInZeus(ExamplesTable ex, String fid, String source)
+    {
+        assertFalse(checkEditLegalEntityCreditRatingsValuesFromZeus(ex.getRow(0).get("agencyName"),ex.getRow(0).get("type"),ex.getRow(0).get("value"),ex.getRow(0).get("AppliedDateDay"),ex.getRow(0).get("AppliedDateMonth"),ex.getRow(0).get("AppliedDateYear"),ex.getRow(0).get("ConfirmedDateDay"),ex.getRow(0).get("ConfirmedDateMonth"),ex.getRow(0).get("ConfirmedDateYear"),fid,source));
+    }
 
     public void verifyDeleteLegalEntityTypeButtonStatus(String deleteButton) {
         assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(deleteButton)).isEnabled());
@@ -154,6 +271,11 @@ public class EditLegalEntityPage extends AbstractPage {
     public void clickonDeleteEntityTypeRowButton(String rowIdentifier) {
         getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
     }
+
+    public void clickonDeleteCreditRatingsRowButton(String rowIdentifier) {
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+    }
+
 
     public void verifyExistingEntityTypeRow(String rowIdentifier, String dropdownvalue) {
         assertTrue(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
@@ -186,6 +308,18 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyNoNewEntityTypeRow(String rowIdentifier) {
+        try {
+            assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        } catch (NoSuchElementException e) {
+        }
+
+    }
+
+    public void verifyNewCreditRatingsRow(String rowIdentifier) {
+        assertTrue(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+    }
+
+    public void verifyNoNewCreditRatingsRow(String rowIdentifier) {
         try {
             assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
         } catch (NoSuchElementException e) {
@@ -656,6 +790,10 @@ public class EditLegalEntityPage extends AbstractPage {
         assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("corporateSummary_textarea_xpath")).getAttribute("maxlength"), "10000");
     }
 
+    public void verifyMaxLengthCreditRatingsValueText(String maxSize,String rowIdentifier) {
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);
+    }
+
 
     public void enter10001CharactersInLegalEntityCorporateAction() {
         String strBigString = createBigString(10000);
@@ -712,6 +850,11 @@ public class EditLegalEntityPage extends AbstractPage {
     public void verifyLegalEntityAdditionalInfoErrorMessageForMaxLength() {
         assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_AdditionalInfos_err_msg_xpath")).getText(), "Enter up to 10000 valid characters.");
     }
+
+    public void verifyHistoryTextAreaLength(String fid) {
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_history_value_edit_xpath")).getAttribute("maxlength"), "10000");
+    }
+
 
 
     public void clickOnExistingEntityTypeDropDown() {
@@ -963,6 +1106,23 @@ public class EditLegalEntityPage extends AbstractPage {
         assertTrue(getNodeValuesByTagName(document, "value").contains(EditLegalEntityLocationsValue));
     }
 
+    public void verifyLegalEntityHistoryInZeusDocument(String fid,String historyValue) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
+        if (historyValue.equals(""))
+        {
+            historyValue="null";
+        }
+        assertTrue(getNodeValuesByTagName(document, "history").contains(historyValue));
+    }
+
     public void verifyLegalEntityBoardMeetingInZeus(String fid) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
@@ -1002,6 +1162,10 @@ public class EditLegalEntityPage extends AbstractPage {
         clearAndEnterValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_personnel_value_xpath"), value);
     }
 
+    public void enterValueInLegalEntityHistoryTextField(String value)
+    {
+        clearAndEnterValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_history_value_edit_xpath"), value);
+    }
     public void verifyRequiredErrorMessageForTypeInLegalEntityLocations() {
         assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_location_type_error_message_xpath")).getText(), "Required");
     }
@@ -1254,6 +1418,7 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
 
+
     public void verifyCategoryDropdownValuesFromLookup(String row_Identifier,String lookupFid){
         List<NameValuePair> nvPairs = new ArrayList<>();
         List<String> dropdownValuesList = new ArrayList<>();
@@ -1293,7 +1458,6 @@ public class EditLegalEntityPage extends AbstractPage {
         public void verifyFinancialDetailsDropdownValuesFromLookup(String row_Identifier,String lookup,String categoryLookup){
             List<String> financialCategoryDropdowndropDownValues = new ArrayList<>();
             Select financialCategoryDropdown = new Select(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(categoryLookup)));
-
             for (WebElement option1 : financialCategoryDropdown.getOptions()) {
                 financialCategoryDropdowndropDownValues.add(option1.getText());
             }
@@ -1318,10 +1482,93 @@ public class EditLegalEntityPage extends AbstractPage {
                     assertEquals(dropdownValuesList, resultList);
                 }
             }
-
-
         }
-        public void clickAddOfferedServiceButton(){
+
+    public void verifyCreditRatingValuesFromLookup(String rowIdentifier,String lookupFid)
+    {   List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", lookupFid));
+        List<WebElement> creditRatingsList = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
+
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legalEntity CreditRatings From Lookup", nvPairs);
+        for (int i = 1; i < document.getElementsByTagName("CreditRatings").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), creditRatingsList.get(i).getAttribute("value"));
+        }
+
+
+    }
+    public void clickAddRowButton() {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_credit_rating_addRow_id"));
+    }
+
+    public void selectCreditRatingsAgencyName(String agencyRowIdentifier,String agencyName){
+        selectItemFromDropdownListByText(LegalEntityIdentifiers.getObjectIdentifier(agencyRowIdentifier),agencyName);
+    }
+
+    public void selectCreditRatingsAgencyType(String agencyTypeRowIdentifier,String agencyType){
+        selectItemFromDropdownListByText(LegalEntityIdentifiers.getObjectIdentifier(agencyTypeRowIdentifier),agencyType);
+    }
+
+    public void enterCreditRatingsAgencyValue(String agencyValueRowIdentifier,String value){
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(agencyValueRowIdentifier)).clear();
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(agencyValueRowIdentifier)).sendKeys(value);
+    }
+
+    public void enterCreditRatingsAgencyAppliedDateDay(String agencyAppliedDateDayRowIdentifier,String AppliedDateDay){
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(agencyAppliedDateDayRowIdentifier)).clear();
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(agencyAppliedDateDayRowIdentifier)).sendKeys(AppliedDateDay);
+    }
+    public void selectCreditRatingsAgencyAppliedDateMonth(String agencyAppliedDateMonthRowIdentifier,String AppliedDateMonth){
+        selectItemFromDropdownListByText(LegalEntityIdentifiers.getObjectIdentifier(agencyAppliedDateMonthRowIdentifier),AppliedDateMonth);
+    }
+    public void enterCreditRatingsAgencyAppliedDateYear(String agencyAppliedDateYearRowIdentifier,String AppliedDateYear){
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(agencyAppliedDateYearRowIdentifier)).clear();
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(agencyAppliedDateYearRowIdentifier)).sendKeys(AppliedDateYear);
+
+    }
+    public void enterCreditRatingsAgencyConfirmedDateDay(String agencyConfirmedDateDayRowIdentifier,String ConfirmedDateDay){
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(agencyConfirmedDateDayRowIdentifier)).clear();
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(agencyConfirmedDateDayRowIdentifier)).sendKeys(ConfirmedDateDay);
+
+    }
+    public void selectCreditRatingsAgencyConfirmedDateMonth(String agencyConfirmedDateMonthRowIdentifier,String ConfirmedDateMonth){
+        selectItemFromDropdownListByText(LegalEntityIdentifiers.getObjectIdentifier(agencyConfirmedDateMonthRowIdentifier),ConfirmedDateMonth);
+    }
+    public void enterCreditRatingsAgencyConfirmedDateyear(String agencyConfirmedDateYearRowIdentifier,String ConfirmedDateYear){
+
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(agencyConfirmedDateYearRowIdentifier)).clear();
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(agencyConfirmedDateYearRowIdentifier)).sendKeys(ConfirmedDateYear);
+    }
+
+    public void verifyCreditRatingsErrorMessage(String xpathIdentifier,String errorMsg)
+    {
+        assertEquals(getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier(xpathIdentifier)).size(), 1);
+        assertEquals(errorMsg, getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(xpathIdentifier)).getText());
+    }
+
+    public void verifyAppliedDateErrorMessage(String appliedDateErrorMsg) {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(appliedDateErrorMsg.replace("'", ""), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_appliedDate_errorMessage_xpath")).getText());
+    }
+
+    public void verifyConfirmedDateErrorMessage(String confirmedDateErrorMsg) {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(confirmedDateErrorMsg.replace("'", ""), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_confirmedDate_errorMessage_xpath")).getText());
+    }
+
+    public void clickAddOfferedServiceButton(){
             attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_add_oferedservices_button"));
         }
         public void clickAddFinancialServiceButton(){
@@ -1440,5 +1687,4 @@ public class EditLegalEntityPage extends AbstractPage {
     public String getPageUrl() {
         return null;
     }
-
 }
