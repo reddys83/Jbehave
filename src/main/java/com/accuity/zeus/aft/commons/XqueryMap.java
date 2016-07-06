@@ -94,6 +94,7 @@ public class XqueryMap {
 		queryMap.put("get city name types","getCityNameTypes.xqy");
 
         queryMap.put("get legal entity credit ratings from trusted","getLegalEntityCreditRatings.xqy");
+        queryMap.put("active office test list","getActiveOfficeFidTest.xqy");
    }
 
     public String getXquery(String key){

@@ -263,3 +263,22 @@ Then the user should see the office search results for city contains the Boll
 Examples:
 |entity|searchBy|fid|
 |3125|FID|3125|
+
+
+Scenario: Filter offices by status - User verifies whether the third page of 'Active' filter has 'Active' status for all fids
+Meta: @test1
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+Then the user should see the office status filter default to all
+When the user selects the office status filter active
+Then the user should see the list of <status> offices till the page <pageNumber> of office search results
+
+Examples:
+|entity|searchBy|fid|pageNumber|allPages|status|
+|1038|FID|1038|3|false|Active|
