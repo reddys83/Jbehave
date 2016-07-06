@@ -9,7 +9,6 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.stereotype.Component;
-import com.accuity.zeus.aft.jbehave.pages.EditLegalEntityPage;
 
 @Component
 public class EditLegalEntitySteps extends AbstractSteps{
@@ -626,6 +625,30 @@ public class EditLegalEntitySteps extends AbstractSteps{
     getEditLegalEntityPage().enterValueInLegalEntityHistoryTextField(historyValue);
     }
 
+    @Then("the user should see the category dropdown i.e $row_Identifier values from lookup $lookup")
+    public void verifyCategoryDropdownValuesFromLookup(@Named("row_Identifier") String row_Identifier,@Named("lookup") String lookup) {
+        getEditLegalEntityPage().verifyCategoryDropdownValuesFromLookup(row_Identifier,lookup);
+    }
+    @Then("the user should see the financial category dropdown i.e $row_Identifier values from lookup $lookup")
+    public void verifyFinancialCategoryDropdownValuesFromLookup(@Named("row_Identifier") String row_Identifier,@Named("lookup") String lookup) {
+        getEditLegalEntityPage().verifyFinancialCategoryDropdownValuesFromLookup(row_Identifier,lookup);
+    }
+    @Then("the user should see the financial details dropdown i.e $row_Identifier values from lookup $lookup based on the selected value in $categoryLookup")
+    public void verifyFinancialDetailsDropdownValuesFromLookup(@Named("row_Identifier") String row_Identifier,@Named("lookup") String lookup,@Named("categoryLookup") String categoryLookup) {
+        getEditLegalEntityPage().verifyFinancialDetailsDropdownValuesFromLookup(row_Identifier,lookup,categoryLookup);
+    }
+    @When("the user clicks on add new offered services button in the services section of legal Entity page")
+    public void clickAddOfferedServiceButton() {
+        getEditLegalEntityPage().clickAddOfferedServiceButton();
+    }
+    @When("the user clicks on add new financial services button in the services section of legal Entity page")
+    public void clickAddFinancialServiceButton() {
+        getEditLegalEntityPage().clickAddFinancialServiceButton();
+    }
+    @When("the user selects financial category i.e $row_Identifier value as <financialCategory>")
+    public void selectFinancialCategoryValue(@Named("row_Identifier") String row_Identifier,@Named("financialCategory") String financialCategory) {
+        getEditLegalEntityPage().selectFinancialCategoryValue(row_Identifier,financialCategory);
+    }
 
     @Then("the user should see the $creditratings_rowIdentifier values in credit rating's section from lookup $lookup")
     public void verifyCreditRatingValuesFromLookup(@Named("creditratings_rowIdentifier") String creditratings_rowIdentifier,@Named("lookup") String lookup) {
@@ -635,6 +658,10 @@ public class EditLegalEntitySteps extends AbstractSteps{
         public void clickOnIdentifierTypeDropDown(String rowIdentifier) {
         getEditLegalEntityPage().clickOnIdentifierTypeDropDown(rowIdentifier);
     }
+    @Then("the user should see the legal entity service values as in $source document with fid <fid>")
+    public void verifyLegalEntityServiceValuesFromTrusted(@Named("fid") String fid,@Named("source") String source){
+        getEditLegalEntityPage().verifyLegalEntityServiceValuesFromTrusted(fid,source);
+    }
 
     @When("the user clicks on add new credit rating button in the credit rating legal Entity page")
     public void clickOnAddButton(){
@@ -643,6 +670,26 @@ public class EditLegalEntitySteps extends AbstractSteps{
     @Then("the user should see the identifier values for $row_Identifier from lookup $lookup except the values that are selected already")
     public void verifyLegalEntityIdentifierTypesListFromLookup(@Named("row_Identifier") String row_Identifier, @Named("lookup") String lookupFid) {
         getEditLegalEntityPage().verifyLegalEntityIdentifierTypesListFromLookup(row_Identifier);
+    }
+    @When("the user selects category value as <category> for $rowIdentifier")
+    public void selectlegalEntityServicesCategory(@Named("category") String category,@Named("rowIdentifier") String rowIdentifier)
+    {
+        getEditLegalEntityPage().selectlegalEntityServices(category,rowIdentifier);
+    }
+    @When("the user enters override value as <override> for $rowIdentifier")
+    public void enterlegalEntityServicesOverride(@Named("override") String override,@Named("rowIdentifier") String rowIdentifier)
+    {
+        getEditLegalEntityPage().enterlegalEntityServicesOverride(override,rowIdentifier);
+    }
+    @When("the user selects financialCategory value as <financialCategory> for $rowIdentifier")
+    public void selectlegalEntityServicesFinancialCategory(@Named("financialCategory") String financialCategory,@Named("rowIdentifier") String rowIdentifier)
+    {
+        getEditLegalEntityPage().selectlegalEntityServices(financialCategory,rowIdentifier);
+    }
+    @When("the user selects financialDetails value as <financialDetails> for $rowIdentifier")
+    public void selectlegalEntityServicesFinancialDetails(@Named("financialDetails") String financialDetails,@Named("rowIdentifier") String rowIdentifier)
+    {
+        getEditLegalEntityPage().selectlegalEntityServices(financialDetails,rowIdentifier);
     }
 
     @When("the user selects agency $agencyRowIdentifier value as <agencyName>")
@@ -756,6 +803,45 @@ public class EditLegalEntitySteps extends AbstractSteps{
     public void verifyIdentifierTypeErrorMessage(@Named("errorMsg") String errorMsg) {
         getEditLegalEntityPage().verifyIdentifierTypeErrorMessage("legalEntity_identifier_type_error_msg_xpath", errorMsg);
     }
+    @Then("the user should see the legal entity service values for fid <fid> in the $source document as <category><override><financialCategory><financialDetails>")
+    public void verifyLegalEntityServiceValuesFromZeus(@Named("fid") String fid,@Named("source") String source,@Named("category") String category,@Named("override") String override,@Named("financialCategory") String financialCategory,@Named("financialDetails") String financialDetails){
+        getEditLegalEntityPage().verifyLegalEntityServiceValuesFromZeus(fid,source,category,override,financialCategory,financialDetails);
+    }
+
+    @When("the user clicks on delete legal entity offered services button $rowIdentifier")
+    @Alias("the user clicks on delete legal entity financial services button $rowIdentifier")
+    public void clickServicesDeleteRowButton(String rowIdentifier){
+        getEditLegalEntityPage().clickServicesDeleteRowButton(rowIdentifier);
+    }
+
+    @Then("the user should not see legal entity service values for fid <fid> in $source document as <category><override><financialCategory><financialDetails>")
+    public void verifyLegalEntityServiceValuesNotExistInZeus(@Named("fid") String fid,@Named("source") String source,@Named("category") String category,@Named("override") String override,@Named("financialCategory") String financialCategory,@Named("financialDetails") String financialDetails){
+        getEditLegalEntityPage().verifyLegalEntityServiceValuesNotExistInZeus(fid,source,category,override,financialCategory,financialDetails);
+    }
+
+    @Then("the user should not see the new offered services row with $rowIdentifier")
+    @Alias("the user should not see the new financial services row with $rowIdentifier")
+    public void verifyNoNewServicesRow(String rowIdentifier) {
+        getEditLegalEntityPage().verifyNoNewServicesRow(rowIdentifier);
+
+    }
+
+    @Then("the user should see the $reqMsg message for offered service category field")
+    public void verifyRequiredMessageForServiceCategory(@Named("reqMsg") String reqMsg)
+    {
+        getEditLegalEntityPage().verifyRequiredMessage(reqMsg,"legalEntity_entity_offeredservices_category_required_error_msg");
+    }
+
+    @Then("the user should see the $reqMsg message for financial details field")
+    public void verifyRequiredMessageForFinancialDetails(@Named("reqMsg") String reqMsg)
+    {
+        getEditLegalEntityPage().verifyRequiredMessage(reqMsg,"legalEntity_entity_financialdetails_required_error_msg");
+    }
+
+
+    @Then("the user verifies the override value maxlength is $maxlength for the row $rowIdentifier")
+    public void verifyMaxLengthForOverrideTextField(@Named("maxlength") String maxlength,@Named("rowIdentifier") String rowIdentifier)
+    {getEditLegalEntityPage().verifyMaxLengthForOverrideTextField(maxlength,rowIdentifier);}
 
     public void selectCreditRatingsAgencyType(@Named("agencyTypeRowIdentifier") String agencyTypeRowIdentifier,@Named("type") String type)
     {getEditLegalEntityPage().selectCreditRatingsAgencyType(agencyTypeRowIdentifier,type);
