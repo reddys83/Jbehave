@@ -854,8 +854,6 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should be redirected to view mode")
     public void verifyUserRedirectedToViewMode(){getDataPage().verifyUserRedirectedViewMode();}
 
-
-
     @Given("the user loads area test data for nightly runs in database <xqueryName>")
         public void clickloadTestData(@Name("xqueryName") String xqueryName){
             getDataPage().loadDocument(xqueryName);
