@@ -755,9 +755,9 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCitySubArea(subArea);
     }
 
-    @When("the user clicks on the city replaced by link $replacedBy")
-    public void clickOnCityReplacedBy(@Named("replacedBy") String replacedBy) {
-        getDataPage().clickOnCityReplacedBy();
+    @When("the user clicks on the city replaced by link $city")
+    public void clickOnCityNameLink(@Named("city") String city) {
+        getDataPage().clickOnCityNameLink();
     }
     @When("the user clicks on the city country link $country")
     public void clickOnCityCountry(@Named("country") String country) {

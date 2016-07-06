@@ -157,26 +157,6 @@ Examples:
 Scenario: Verify User can follow link to city from another city
 Given a user is on the search page
 When the user clicks on the data tab in the search page
-And the user clicks on the area tab in the data area
-When the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
-When the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-And the user clicks on the choose a city option
-And the user enters the city <city> in the type-ahead box
-And the user clicks on the city replaced by link <replacedBy>
-Then the user should see the area's names as:
-|TYPE|VALUE|
-|Full Name|Barajyolu|
-
-
-Examples:
-|country|area|city|
-|USA|Illinois|Chicago|
-
-Scenario: Verify User can follow link to city from another city
-Given a user is on the search page
-When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
@@ -184,11 +164,11 @@ When the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
-And the user clicks on the city replaced by link Chester
-Then the user should see the city's names as:
-
+And the user clicks on the city replaced by link <city>
+Then the user should see the area's names as:
 |TYPE|VALUE|
 |Full Name|Chester|
+
 
 Examples:
 |country|area|city|
