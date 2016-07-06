@@ -55,19 +55,6 @@ public class EditOfficePage extends AbstractPage {
         clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_year_xpath"), year);
     }
 
-    public void verifyUpdatedOfficeOpenedDate(String fid) {
-        try {
-            Thread.sleep(5000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        List<NameValuePair> zeusPairs = new ArrayList<>();
-        zeusPairs.add(new BasicNameValuePair("fid", fid));
-        zeusPairs.add(new BasicNameValuePair("source", "zeus"));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", zeusPairs);
-        assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent(), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_view_xpath")).getText());
-         }
-
     public void verifyOpenedDateErrorMessage(String openedDateErrorMsg) {
         try {
             Thread.sleep(2000L);
@@ -76,21 +63,22 @@ public class EditOfficePage extends AbstractPage {
         }
         assertEquals(openedDateErrorMsg.replace("'", ""), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_errorMessage_xpath")).getText());
     }
-    public void getDocument(String xqueryName, String param, String offices) {
-        ParamMap paramMap = new ParamMap();
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair(paramMap.getParam(param),offices));
-        nvPairs.add(new BasicNameValuePair("source", "zeus"));
 
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
-        if (document != null) {
-            endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
-            responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
-            assertTrue(responseEntity.getStatusCode().value() == 200);
-        } else {
-            assertFalse("Zeus document with " + param + " as " + offices + " does not exist in the DB", true);
+
+    public void verifyUpdatedOfficeOpenedDate(String fid, String day, String month, String year) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        List<NameValuePair> zeusPairs = new ArrayList<>();
+        zeusPairs.add(new BasicNameValuePair("fid", fid));
+        zeusPairs.add(new BasicNameValuePair("source", "zeus"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", zeusPairs);
+        assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent(), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_view_xpath")).getText());
+        assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent().replace(" ",""), day+month+year);
     }
+
 
     @Override
     public String getPageUrl() {

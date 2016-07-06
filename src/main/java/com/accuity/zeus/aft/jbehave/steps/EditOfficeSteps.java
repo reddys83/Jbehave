@@ -20,14 +20,11 @@ public class EditOfficeSteps extends AbstractSteps{
     public void updateOfficeOpenedDate(@Named("day") String day,@Named("month") String month,@Named("year") String year)
     {getEditOfficePage().updateOfficeOpenedDate(day,month,year);}
 
-    @When("the user gets the document with $xqueryName with the $param as <offices> from the database")
-    public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("param") String param, @Named("offices")String offices) {
-        getEditOfficePage().getDocument(xqueryName, param,offices);
+    @When("the user gets the document with $xqueryName with the <officeFid> from the database")
+    public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("officeFid") String officeFid) {
+        getDataPage().getDocument(xqueryName, "fid",officeFid);
 
     }
-
-    @Then("the user verifies office opened date <fid> in the zeus document")
-    public void verifyUpdatedOfficeOpenedDate(@Named("fid") String fid){getEditOfficePage().verifyUpdatedOfficeOpenedDate(fid);}
 
     @Then("the user should see the error $openedDateErrorMsg for opened date")
     public void verifyOpenedDateErrorMessage(@Named("openedDateErrorMsg") String openedDateErrorMsg) {
@@ -44,6 +41,9 @@ public class EditOfficeSteps extends AbstractSteps{
     public void updateNullOfficeOpenedDate(@Named("day") String day,@Named("month") String month,@Named("year") String year)
     {getEditOfficePage().updateNullOfficeOpenedDate(day,month,year);}
 
+
+    @Then("the user verifies office opened date from zeus document <fid> <day> <month> <year>")
+    public void verifyUpdatedOfficeOpenedDate(@Named("fid") String fid,@Named("day") String day,@Named("month") String month,@Named("year") String year){getEditOfficePage().verifyUpdatedOfficeOpenedDate(fid,day,month,year);}
 }
 
 

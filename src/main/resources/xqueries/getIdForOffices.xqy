@@ -1,7 +1,7 @@
-let $name :=xs:string(xdmp:get-request-field("name"))
+let $name :=xs:string(xdmp:get-request-field("fid"))
 
-for $x in collection('current')/offices[@source='zeus']
-where $x/summary/names/name/value=$name
+for $x in collection('current')/office[@source='zeus']
+where $x/@fid=$name
 return <documentIdwithEndpoint>
     {$x/@resource}
 </documentIdwithEndpoint>
