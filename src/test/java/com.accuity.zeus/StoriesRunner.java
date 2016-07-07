@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.jbehave.steps.DetailsSteps;
 import com.accuity.zeus.aft.jbehave.steps.SearchResultsSteps;
 import com.accuity.zeus.aft.jbehave.steps.SearchSteps;
 import com.accuity.zeus.utils.FilesUtils;
+import com.accuity.zeus.utils.SimpleCacheManager;
 import org.apache.commons.io.FileUtils;
 import org.jbehave.core.InjectableEmbedder;
 import org.jbehave.core.annotations.Configure;

@@ -963,18 +963,13 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyNoNewlyAddedCreditRatingRow();
     }
 
-    @Then("the user enters credit rating value <value> in the credit rating country page")
-    public void enterCreditRatingValue(@Named("value")String value){
-        getCountryPage().enterCreditRatingValue(value);
+    @Then("the user verifies credit rating value text field max length as $maxlength")
+    public void VerifyCreditRatingValueMaxLength(String maxlength){
+        getCountryPage().VerifyCreditRatingValueMaxLength(maxlength);
     }
 
-    @Then("the user should see the error message enter upto 5 valid characters in the credit rating country page")
-    public void verifyErrorMessageForValidCharacters(){
-        getCountryPage().verifyErrorMessageForValidCharacters();
-    }
-
-    @Then ("the user should see the error message enter a year, month/year or day/month/year for applied date in the credit rating country page")
-    public void verifyErrorMessageEnterYearMonthDayForAppliedDate(){getCountryPage().verifyErrorMessageEnterYearMonthDayForAppliedDate();}
+    @Then ("the user should see the error message $errorMsgForDate for applied date in the credit rating country page")
+    public void verifyErrorMessageEnterYearMonthDayForAppliedDate(String errorMsgForDate){getCountryPage().verifyErrorMessageEnterYearMonthDayForAppliedDate(errorMsgForDate);}
 
     @Then("the user should return to edit country page mode")
     public void verifyCountryEditPageMode(){
@@ -1001,8 +996,8 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().enterCountryCreditRatingConfirmedDateDay(confirmedDay);
     }
 
-    @Then ("the user should see the error message enter a year, month/year or day/month/year for confirmed date in the credit rating country page")
-    public void verifyErrorMessageEnterYearMonthDayForConfirmedDate(){getCountryPage().verifyErrorMessageEnterYearMonthDayForConfirmedDate();}
+    @Then ("the user should see the error message $errorMsgForDate for confirmed date in the credit rating country page")
+    public void verifyErrorMessageEnterYearMonthDayForConfirmedDate(String errorMsgForDate){getCountryPage().verifyErrorMessageEnterYearMonthDayForConfirmedDate(errorMsgForDate);}
 
     @When("the user enters iban registered day <day> in the payments country page")
     public void enterIBANRegisteredDay(@Named("day") String day) {
@@ -1145,4 +1140,13 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyDisabledGoButtonStatus();
     }
 
+    @When("the user deletes the existing banking hours rows")
+    public void deleteAllBankingHours() {
+        getCountryPage().deleteAllBankingHours();
+    }
+
+    @Then("the user should not see the banking hours rows")
+    public void verifyNoBankingHoursRows() {
+        getCountryPage().verifyNoBankingHoursRows();
+    }
 }

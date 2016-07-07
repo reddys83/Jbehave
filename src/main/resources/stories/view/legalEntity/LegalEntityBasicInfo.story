@@ -74,6 +74,7 @@ Examples:
 |Berliner Volksbank eG|Name|Budapester Strasse 35, 10787, Berlin, Germany|1717|20205500|
 
 Scenario: Verify the User can follow link to head office from legal entity
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -177,7 +178,7 @@ Then the user should see the below legal entity sections
 
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
-|Collins Stewart Europe Limited|Name||271690||
+|Bank of America National Association|Name||1038||
 
 Scenario: Verify the head office address for legalEntity with head office not like -0
 Given a user is on the search page
@@ -213,3 +214,17 @@ Examples:
 |entity|searchBy|fid|
 |1038|fid|1038|
 |1717|fid|1717|
+
+Scenario: Verify the charter type is displayed properly (without case transformation) from trusted document (Bug - ZEUS-950)
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+Then the user verifies basic info for legal entity left column <fid> from trusted document
+
+Examples:
+|entity|searchBy|fid|
+|930|fid|930|

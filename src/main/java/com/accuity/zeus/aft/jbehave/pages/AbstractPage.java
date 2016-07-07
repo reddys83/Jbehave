@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -179,6 +180,20 @@ public abstract class AbstractPage {
         }
     }
 
+    public void selectItemFromDropdownListByText(WebElement obj, String value) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Select dropdown = new Select(obj);
+        if (value.equals("")) {
+            dropdown.selectByValue(value);
+        } else {
+            dropdown.selectByVisibleText(value);
+        }
+    }
+
     public void modifyHtmlByName(By element, String attribute, String value) {
         WebElement webElement = getDriver().findElement(element);
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
@@ -262,4 +277,39 @@ public abstract class AbstractPage {
 		return randomString;
 	}
 
+    public List returnAllListValues(By by){
+        List<String> dropdownValuesList = new ArrayList<>();
+        Select dropdown = new Select(getDriver().findElement(by));
+        String selectedValue = dropdown.getFirstSelectedOption().getText();
+        for (WebElement option : dropdown.getOptions()) {
+            if(!option.getText().equals("")){
+            dropdownValuesList.add(option.getAttribute("value"));}
+        }
+
+               return dropdownValuesList;
+    }
+
+    public List returnAllDropDownUnselectedValues(By by){
+        List<String> dropdownValuesList = new ArrayList<>();
+        Select dropdown = new Select(getDriver().findElement(by));
+        String selectedValue = dropdown.getFirstSelectedOption().getText();
+        for (WebElement option : dropdown.getOptions()) {
+            dropdownValuesList.add(option.getAttribute("value"));
+        }
+        dropdownValuesList.remove(selectedValue);
+        if (dropdownValuesList.get(0).equals("")) {
+            dropdownValuesList.remove(0);
+        }
+        return dropdownValuesList;
+    }
+
+    public List<String> getAlreadySelectedValuesInAllRowsForADropdown(By by) {
+        ArrayList<String> selectedValueList = new ArrayList();
+        for (WebElement WebElement : getDriver().findElements(by)) {
+            Select dropdown = new Select(WebElement);
+            String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
+            selectedValueList.add(selectedValue);
+        }
+        return selectedValueList;
+    }
 }
