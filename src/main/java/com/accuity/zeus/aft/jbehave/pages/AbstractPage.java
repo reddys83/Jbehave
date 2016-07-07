@@ -302,5 +302,16 @@ public abstract class AbstractPage {
         }
         return dropdownValuesList;
     }
+    
+    public void selectItemFromDropdownListByindex(By by, int i) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Select dropdown = new Select(driver.findElement(by));
+        dropdown.selectByIndex(i);
+
+    }
 
 }

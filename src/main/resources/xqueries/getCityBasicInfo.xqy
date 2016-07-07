@@ -71,8 +71,8 @@ let $cityCreditRating := for $x in ($city/creditRatings/rating)
 let $cityCreditAgencyName := $x/agencyName/text()
 let $cityCreditType := $x/type/text()
 let $cityCreditValue := $x/value/text()  
-let $cityCreditDateApplied := $x/dateApplied/text()  
-let $cityCreditDateConfirmed := $x/dateConfirmed/text() 
+let $cityCreditDateApplied := local:getDateAsPerAccuracy($x/dateApplied)
+let $cityCreditDateConfirmed := local:getDateAsPerAccuracy($x/dateConfirmed)
 return
       <creditRating>       
         <creditRatingAgencyName>{$cityCreditAgencyName}</creditRatingAgencyName>
@@ -83,7 +83,16 @@ return
      </creditRating> 
 
 
+(: to get Area , SubArea details:)
+
+let $withinLink := ($city/within/place/link/@href)
+let $area := /area[@source = "trusted"][@resource = $withinLink]/summary[type = "area" ]/names/name[1]/value/text()
+let $subAreaList := for $x in (/area[@source = "trusted"][@resource = $withinLink]/summary[type = "subarea" ])  
+let $subArea := ($x/names/name[1]/value/text())
+return <subArea>{$subArea}</subArea>
+
 return
+
   <city>
   <names>{$cityNameList}</names>
   <status>{$cityStatus}</status>  
@@ -92,5 +101,7 @@ return
   <additionalinfo>{$cityadditionalinfo}</additionalinfo>
   <population>{$cityPopulation}</population>
   <addressFlag>{$cityAddressFlag}</addressFlag>
-  <creditRatings>{$cityCreditRating}</creditRatings>
+  <creditRatings>{$cityCreditRating}</creditRatings> 
+  <area>{$area}</area>
+  <subArea>{$subAreaList}</subArea>
   </city>   

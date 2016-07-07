@@ -6,6 +6,8 @@ import java.util.Map;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.annotations.*;
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -807,5 +809,146 @@ public class EditCitySteps extends AbstractSteps {
 	@Then("the user should see the maxlength of name value field set to $maxValue")
 	public void verifyCityNameValueMaxLength(@Named("maxValue") String maxValue) {
 		getEditCityPage().verifyCityNameValueMaxlength(maxValue);
+	}
+	
+	@Then("the user should see all the list of countries in city page are in Alphabetical order")
+	public void verifyCountryListInPlacesFortheCountry() {
+		getEditCityPage().verifyCountryListInPlacesForCountry();
+	}
+
+	@Then("user should see the list of Area options in city page are in Alphabetical order")
+	@Alias("user should see the list of Area options are refreshed pointing to selected <country2>")
+	public void verifyAreaListInPlacesForCountry(@Named("country2") String country2) {
+		getEditCityPage().verifyAreaListInPlacesForCountry(country2);
+	}
+
+	@Then("user should see the list of Sub area options in city page are in Alphabetical order")
+	@Alias("user should see the list of Sub area options are refreshed pointing to selected <area2>")
+	public void verifysubAreaListInPlacesForCountry(@Named("area2") String area2) throws InterruptedException {
+		getEditCityPage().clickOnSubAreaDropdown();
+		getEditCityPage().verifySubAreaListInPlacesForCountry(area2);
+	}
+
+	@When("user changes the <country2> in the country drop downfield of city basic page")
+	public void userChangesCountryDropdownValue(@Named("country2") String country) throws InterruptedException {
+		getEditCityPage().changeCountryValue(country);
+	}
+
+	@Then("the user verify the Area dropdown is populating with 'Choose an Area'as a option")
+	public void userverifyareadropdown() {
+		getEditCityPage().userVerifyAreadropdown();
+	}
+
+	@Then("the user verify the SubArea dropdown is populating with 'Choose a SubArea' as a option")
+	public void userVerifySubareadropdown() {
+		getEditCityPage().userVerifySubAreaDropdown();
+	}
+
+	@Then("user changes the area <area2> in the area dropdown field in city basic page")
+	public void userChangesAreaDropdownvalue(@Named("area2") String area2) throws InterruptedException {
+		getEditCityPage().changeAreaValue(area2);
+	}
+
+	@Then("the user should verfiy that the 'No Area' option is available at the top of the area dropdown option")
+	public void userVerifiesNoArea() {
+		getEditCityPage().userVerifiesNoArea();
+	}
+
+	@Then("the user should verfiy that the 'No Area' option is available at the top of the Subarea dropdown option")
+	public void userVerifyNoSubarea() {
+		getEditCityPage().verifyNoSubarea();
+	}
+
+	@Then("user selects $noArea in area dropdown field in city basic page")
+	public void userSelectNoAreaInAreaDrodown(@Named("noArea") String area) throws InterruptedException {
+		getEditCityPage().changeAreaValue(area);
+	}
+
+	@When("the user clicks on the choose a subarea option of city basic page")
+	public void clicksOnSubAreaDropdown() throws InterruptedException {
+		getEditCityPage().clickOnSubAreaDropdown();
+	}
+
+	@Then("the user should verfiy that the 'No Area' option is only option exist in Subarea dropdown option")
+	public void verifyNoAreaIsOnlyOptionInSubarea() {
+		getEditCityPage().verifyNoAreaOptionOnlyExistInSubArea();
+	}
+
+	@Then("user selects Subarea <Subarea> in the subarea multiselect dropdown")
+	public void userSelectsSubarea1(@Named("Subarea") String Subarea) throws InterruptedException {
+		getEditCityPage().userSelectsSubarea(Subarea);
+	}
+
+	@Then("the user checks whether this subarea1 <Subarea1> are not reselectable")
+	public void verifySubAreaIsNotReselectable(@Named("Subarea1") String Subarea1) {
+		getEditCityPage().verifySubAreaIsNotReselectable(Subarea1);
+	}
+
+	@Then("user selects Subarea2 <Subarea2> in the subarea multiselect dropdown")
+	public void userSelectsSubarea2(@Named("Subarea2") String Subarea2) throws InterruptedException {
+		getEditCityPage().userSelectsSubarea(Subarea2);
+	}
+
+	@Then("the user checks whether this subarea <Subarea2> are not reselectable")
+	public void verifySubArea2IsNotReselectable(@Named("Subarea2") String Subarea2) {
+		getEditCityPage().verifySubAreaIsNotReselectable(Subarea2);
+	}
+
+	@Then("verify $source document whether the city is updated with newly added SubArea <Subarea>, SubArea <Subarea2>")
+	public void verifyZeusDBIsNotHavingAreaValue(@Named("source") String source, @Named("city") String city,
+			@Named("country2") String country2, @Named("area2") String area2, @Named("Subarea") String subarea,
+			@Named("Subarea2") String subarea2) throws InterruptedException {
+		List<String> citySubAreaListInDB = getEditCityPage().getListFromDB(country2, area2, city, source, "subArea");
+		List<String> citySubAreaListInUI = new ArrayList<String>();
+		citySubAreaListInUI.add(subarea);
+		citySubAreaListInUI.add(subarea2);
+		getEditCityPage().verifySubAreaValue(citySubAreaListInUI, citySubAreaListInDB);
+
+	}
+
+	@Then("verify UI whether city is updated with newly added SubArea <Subarea>, SubArea <Subarea2>")
+	public void verifyCityIsUpdatedWithSubAreaInUI(@Named("Subarea") String subarea,
+			@Named("Subarea2") String subarea2) {
+		List<String> citySubAreaListInUI = new ArrayList<String>();
+		citySubAreaListInUI.add(subarea);
+		citySubAreaListInUI.add(subarea2);
+		getEditCityPage().verifySubAreaIsUpdatedInUI(citySubAreaListInUI);
+	}
+
+	@Then("the user checks whether the header dropdown updates with <country2>, <area2>, <city>")
+	public void checksHeaderdropdownValues(@Named("country2") String country, @Named("area2") String area,
+			@Named("city") String city) throws InterruptedException {
+		getEditCityPage().checksHeaderdropdownValues(country, area, city);
+	}
+
+	@Then("the user checks whether the Address bar url is updated  with <country2>, <area2>")
+	public void checksAddressBar() throws InterruptedException {
+		getEditCityPage().checksAddressBarIsHavingNewCountryAreaIds();
+	}
+
+	@Then("user verify the city dropdown does not have city <city> value mapped to old country and area")
+	public void verfyCityDropdown(@Named("city") String city) throws InterruptedException {
+		getEditCityPage().verfyCityDropdown(city);
+	}
+
+	@Then("verify $source document whether <city> is mapped to newly added <country2> and <area2>")
+	public void verifyZeusDocument(@Named("source") String source, @Named("city") String city,
+			@Named("country2") String country2, @Named("area") String area, @Named("area2") String area2)
+			throws InterruptedException {
+		getEditCityPage().verifyCityInfoFromZeusDB(country2, area2, city, "area", source, area2);
+
+	}
+	
+	@Then("verify $source document whether the city is not updated with newly added SubArea <subarea>")
+	public void verifyZeusDBIsNotHavingAreaValue(@Named("source") String source, @Named("city") String city,
+			@Named("country2") String country2, @Named("area2") String area2, @Named("Subarea") String subarea)
+			throws InterruptedException {
+		getEditCityPage().verifyCityInfoFromZeusDB(country2, area2, city, "subArea", source, subarea);
+
+	}
+	
+	@Then("user verify the city is not updated with newly added subarea(null)")
+	public void verfySubAreaIsNullInUI(@Named("city") String city) throws InterruptedException {
+		getEditCityPage().verfySubAreaIsNullInUI(city);
 	}
 }

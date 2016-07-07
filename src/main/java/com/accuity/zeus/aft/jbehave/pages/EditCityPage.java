@@ -35,6 +35,9 @@ import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditCityPage extends AbstractPage {
 
+	public static String selectedCountryID = null;
+	public static String selectedAreaID = null;
+
 	public EditCityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
 		super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -555,7 +558,7 @@ public class EditCityPage extends AbstractPage {
 	public void clickYesButtonInDeleteConfirmationModalForCity() {
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_delete_yes_button_id_click")).click();
 	}
-	
+
 	/**
 	 * This method is used to verify the value in trusted DB is same as UI
 	 * value.
@@ -563,7 +566,7 @@ public class EditCityPage extends AbstractPage {
 	 * @param country
 	 * @param area
 	 * @param city
-
+	 * 
 	 */
 	public void verifyCityIdentifierValuesFromTrusted(String country, String area, String city, String[] identifierType,
 			String[] identifierValue, String[] identifierStatus) {
@@ -646,7 +649,8 @@ public class EditCityPage extends AbstractPage {
 			assertEquals(StringUtils.capitalize(
 					document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent()),
 					options.get(indexOfOption + 1).getText().trim());
-			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(), options.get(indexOfOption + 1).getAttribute("value").trim());
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(),
+					options.get(indexOfOption + 1).getAttribute("value").trim());
 		}
 
 	}
@@ -826,8 +830,8 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public void verifyMaxLengthInCityIdentifierValue(String maxLength) {
-		 assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"))
-                 .getAttribute("maxlength"), maxLength);
+		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_identifier_value_input_xpath"))
+				.getAttribute("maxlength"), maxLength);
 
 	}
 
@@ -920,12 +924,13 @@ public class EditCityPage extends AbstractPage {
 
 	public void verifyCityBeganDateFromTrustedDB(String country, String area, String city, String tagName,
 			String source) {
-		List<WebElement> appliedMonthList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_month_began_date_xpath"));
-		String day = getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_day_began_date_xpath")).getAttribute("value");
-		String month =  new Select(appliedMonthList.get(0)).getFirstSelectedOption().getText();
-		String year = getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_year_began_date_xpath")).getAttribute("value");
+		List<WebElement> appliedMonthList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_month_began_date_xpath"));
+		String day = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_day_began_date_xpath"))
+				.getAttribute("value");
+		String month = new Select(appliedMonthList.get(0)).getFirstSelectedOption().getText();
+		String year = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_year_began_date_xpath"))
+				.getAttribute("value");
 		String beganDate = day + " " + month + " " + year;
 		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), beganDate);
 
@@ -936,32 +941,36 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public void enterCityCreditRatingAppliedDateDay(String appliedDay, int row) {
-		List<WebElement> appliedDateList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_day_xpath"));
-		appliedDateList.get(row-1).clear();
-		appliedDateList.get(row-1).sendKeys(appliedDay);
+		List<WebElement> appliedDateList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_day_xpath"));
+		appliedDateList.get(row - 1).clear();
+		appliedDateList.get(row - 1).sendKeys(appliedDay);
 	}
 
-
 	public void enterCityCreditRatingAppliedDateMonth(String appliedMonth, int row) {
-		List<WebElement> appliedMonthList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_month_xpath"));
-		selectItemFromDropdownListByText(appliedMonthList.get(row-1), appliedMonth);
+		List<WebElement> appliedMonthList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_month_xpath"));
+		selectItemFromDropdownListByText(appliedMonthList.get(row - 1), appliedMonth);
 	}
 
 	public void enterCityCreditRatingConfirmedDateMonth(String confirmedMonth, int row) {
-		List<WebElement> confirmedDateList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_month_xpath"));
-		selectItemFromDropdownListByText(confirmedDateList.get(row-1), confirmedMonth);
+		List<WebElement> confirmedDateList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_month_xpath"));
+		selectItemFromDropdownListByText(confirmedDateList.get(row - 1), confirmedMonth);
 	}
 
 	public void enterCityCreditRatingConfirmedDateDay(String confirmedDay, int row) {
-		List<WebElement> confirmedMonth = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_day_xpath"));
-		confirmedMonth.get(row-1).clear();
-		confirmedMonth.get(row-1).sendKeys(confirmedDay);
+		List<WebElement> confirmedMonth = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_day_xpath"));
+		confirmedMonth.get(row - 1).clear();
+		confirmedMonth.get(row - 1).sendKeys(confirmedDay);
 	}
 
 	public void enterCreditRatingAppliedYear(String appliedYear, int row) {
-		List<WebElement> appliedYearList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_appliedYear_xpath"));
-		appliedYearList.get(row-1).clear();
-		appliedYearList.get(row-1).sendKeys(appliedYear);
+		List<WebElement> appliedYearList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_appliedYear_xpath"));
+		appliedYearList.get(row - 1).clear();
+		appliedYearList.get(row - 1).sendKeys(appliedYear);
 	}
 
 	public void verifyErrorMessageEnterYearMonthDayForAppliedDate() {
@@ -974,16 +983,16 @@ public class EditCityPage extends AbstractPage {
 
 	public void verifyErrorMessageEnterYearMonthDayForConfirmedDate() {
 		assertEquals("Enter a day/month/year.",
-				getDriver()
-						.findElement(
-								CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_error_msg_xpath"))
+				getDriver().findElement(
+						CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_error_msg_xpath"))
 						.getText());
 	}
 
 	public void enterCreditRatingConfirmedYear(String confirmedYear, int row) {
-		List<WebElement> confirmedYearList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_year_xpath"));
-		confirmedYearList.get(row-1).clear();
-		confirmedYearList.get(row-1).sendKeys(confirmedYear);
+		List<WebElement> confirmedYearList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_year_xpath"));
+		confirmedYearList.get(row - 1).clear();
+		confirmedYearList.get(row - 1).sendKeys(confirmedYear);
 	}
 
 	public void clickAddRowButton() {
@@ -1004,8 +1013,8 @@ public class EditCityPage extends AbstractPage {
 	public void verifyCityAgencyListFromLookup(int row) {
 		List<WebElement> agencyList = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"));
-		assertTrue(agencyList.size()>=row);
-		List<WebElement> agencyListOptions = agencyList.get(row-1).findElements(By.tagName("option"));
+		assertTrue(agencyList.size() >= row);
+		List<WebElement> agencyListOptions = agencyList.get(row - 1).findElements(By.tagName("option"));
 
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
 				"get city credit look up values");
@@ -1021,9 +1030,10 @@ public class EditCityPage extends AbstractPage {
 	 * agency drop-down
 	 */
 	public void verifyCityCreditRatingTypeList(int row) {
-		List<WebElement> typeList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath"));
-		assertTrue(typeList.size()>=row);
-		List<WebElement> typeListOptions = typeList.get(row-1).findElements(By.tagName("option"));
+		List<WebElement> typeList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath"));
+		assertTrue(typeList.size() >= row);
+		List<WebElement> typeListOptions = typeList.get(row - 1).findElements(By.tagName("option"));
 
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
 				"get city credit look up values");
@@ -1041,8 +1051,9 @@ public class EditCityPage extends AbstractPage {
 	 */
 	public void enterCreditRatingType(String creditRatingType, int row) {
 
-		List<WebElement> typeDropDownList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath"));
-		selectItemFromDropdownListByText(typeDropDownList.get(row-1),creditRatingType);
+		List<WebElement> typeDropDownList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath"));
+		selectItemFromDropdownListByText(typeDropDownList.get(row - 1), creditRatingType);
 
 	}
 
@@ -1053,18 +1064,20 @@ public class EditCityPage extends AbstractPage {
 	 */
 	public void enterCreditRatingAgency(String creditRatingAgency, int row) {
 		try {
-			List<WebElement> agencyDropDownList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"));
-			selectItemFromDropdownListByText(agencyDropDownList.get(row-1),creditRatingAgency);
+			List<WebElement> agencyDropDownList = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"));
+			selectItemFromDropdownListByText(agencyDropDownList.get(row - 1), creditRatingAgency);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void enterCityCreditRatingValue(String appliedDay,int row) {
-		List<WebElement> valueTextboxList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_value_xpath"));
-		valueTextboxList.get(row-1).clear();
-		valueTextboxList.get(row-1).sendKeys(appliedDay);
+	public void enterCityCreditRatingValue(String appliedDay, int row) {
+		List<WebElement> valueTextboxList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_value_xpath"));
+		valueTextboxList.get(row - 1).clear();
+		valueTextboxList.get(row - 1).sendKeys(appliedDay);
 	}
 
 	/**
@@ -1093,35 +1106,35 @@ public class EditCityPage extends AbstractPage {
 
 			if (document != null && document.getElementsByTagName("creditRating").getLength() >= row) {
 
-				for (int childNode = 0; childNode < document.getElementsByTagName("creditRating").item(row-1)
+				for (int childNode = 0; childNode < document.getElementsByTagName("creditRating").item(row - 1)
 						.getChildNodes().getLength(); childNode++) {
 
-					switch (document.getElementsByTagName("creditRating").item(row-1).getChildNodes().item(childNode)
+					switch (document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode)
 							.getNodeName()) {
 					case "creditRatingAgencyName":
-						assertEquals(document.getElementsByTagName("creditRating").item(row-1).getChildNodes()
+						assertEquals(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes()
 								.item(childNode).getTextContent(), agency);
 						break;
 					case "creditRatingType":
-						assertEquals(document.getElementsByTagName("creditRating").item(row-1).getChildNodes()
+						assertEquals(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes()
 								.item(childNode).getTextContent(), type);
 						break;
 					case "creditRatingValue":
-						assertEquals(document.getElementsByTagName("creditRating").item(row-1).getChildNodes()
+						assertEquals(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes()
 								.item(childNode).getTextContent(), value);
 						break;
 					case "creditDateApplied":
-						if(!appliedDate.isEmpty() && !(document.getElementsByTagName("creditRating").item(row-1).getChildNodes().item(childNode).getTextContent().isEmpty()))
-						{
-							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row-1)
+						if (!appliedDate.isEmpty() && !(document.getElementsByTagName("creditRating").item(row - 1)
+								.getChildNodes().item(childNode).getTextContent().isEmpty())) {
+							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row - 1)
 									.getChildNodes().item(childNode).getTextContent()), appliedDate);
 						}
 
 						break;
 					case "creditDateConfirmed":
-						if(!appliedDate.isEmpty() && !(document.getElementsByTagName("creditRating").item(row-1).getChildNodes().item(childNode).getTextContent().isEmpty()))
-						{
-							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row-1)
+						if (!appliedDate.isEmpty() && !(document.getElementsByTagName("creditRating").item(row - 1)
+								.getChildNodes().item(childNode).getTextContent().isEmpty())) {
+							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row - 1)
 									.getChildNodes().item(childNode).getTextContent()), confirmedDate);
 						}
 
@@ -1139,7 +1152,6 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-
 
 	public void verifyCityCreditRatingValuesAreNullFromDB(String country, String area, String city, String source,
 			int row) {
@@ -1175,43 +1187,53 @@ public class EditCityPage extends AbstractPage {
 	 * @param tagName
 	 * @param source
 	 */
-	public void verifyCityCreditRatingValuesFromTrustedDB(String country, String area, String city, String source)
-	{
+	public void verifyCityCreditRatingValuesFromTrustedDB(String country, String area, String city, String source) {
 
 		try {
 
-				if(getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).size()>1)
-				{
-					List<WebElement> agencyDropDownList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"));
-					List<WebElement> typeDropDownList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath"));
-					List<WebElement> appliedDateList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_day_xpath"));
-					List<WebElement> appliedMonthList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_month_xpath"));
-					List<WebElement> appliedYearList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_appliedYear_xpath"));
-					List<WebElement> confirmedDateList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_day_xpath"));
-					List<WebElement> confirmedMonth = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_month_xpath"));
-					List<WebElement> confirmedYearList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_year_xpath"));
-					List<WebElement> valueTextboxList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_value_xpath"));
+			if (getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath"))
+					.size() > 1) {
+				List<WebElement> agencyDropDownList = getDriver()
+						.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_dropdown_xpath"));
+				List<WebElement> typeDropDownList = getDriver()
+						.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_dropdown_xpath"));
+				List<WebElement> appliedDateList = getDriver()
+						.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_day_xpath"));
+				List<WebElement> appliedMonthList = getDriver().findElements(
+						CityIdentifiers.getObjectIdentifier("city_credit_rating_applied_date_month_xpath"));
+				List<WebElement> appliedYearList = getDriver()
+						.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_appliedYear_xpath"));
+				List<WebElement> confirmedDateList = getDriver().findElements(
+						CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_day_xpath"));
+				List<WebElement> confirmedMonth = getDriver().findElements(
+						CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_month_xpath"));
+				List<WebElement> confirmedYearList = getDriver().findElements(
+						CityIdentifiers.getObjectIdentifier("city_credit_rating_confirmed_date_year_xpath"));
+				List<WebElement> valueTextboxList = getDriver()
+						.findElements(CityIdentifiers.getObjectIdentifier("city_credit_rating_value_xpath"));
 
-					for(int index =0;index<agencyDropDownList.size();index++)
-					{
-						String agency = new Select(agencyDropDownList.get(index)).getFirstSelectedOption().getText().trim();
-						String type =  new Select(typeDropDownList.get(index)).getFirstSelectedOption().getText();
-						String value = valueTextboxList.get(index).getAttribute("value");
-						String appliedDate =  new Select(appliedMonthList.get(index)).getFirstSelectedOption().getText() +" "+ appliedYearList.get(index).getAttribute("value");
-						String confirmedDate = new Select(confirmedMonth.get(index)).getFirstSelectedOption().getText() +" "+ confirmedYearList.get(index).getAttribute("value");
-						if(!appliedDateList.get(index).getAttribute("value").isEmpty() && !confirmedDateList.get(index).getAttribute("value").isEmpty()){
-							 appliedDate = String.format("%02d",Integer.parseInt(appliedDateList.get(index).getAttribute("value"))) + " " +  appliedDate;
-							 confirmedDate = String.format("%02d",Integer.parseInt(confirmedDateList.get(index).getAttribute("value"))) + " " + confirmedDate;
-						}
-						verifyCityCreditRatingValuesFromDB(country, area, city, source, agency, type, value, appliedDate, confirmedDate, index+1);
+				for (int index = 0; index < agencyDropDownList.size(); index++) {
+					String agency = new Select(agencyDropDownList.get(index)).getFirstSelectedOption().getText().trim();
+					String type = new Select(typeDropDownList.get(index)).getFirstSelectedOption().getText();
+					String value = valueTextboxList.get(index).getAttribute("value");
+					String appliedDate = new Select(appliedMonthList.get(index)).getFirstSelectedOption().getText()
+							+ " " + appliedYearList.get(index).getAttribute("value");
+					String confirmedDate = new Select(confirmedMonth.get(index)).getFirstSelectedOption().getText()
+							+ " " + confirmedYearList.get(index).getAttribute("value");
+					if (!appliedDateList.get(index).getAttribute("value").isEmpty()
+							&& !confirmedDateList.get(index).getAttribute("value").isEmpty()) {
+						appliedDate = String.format("%02d",
+								Integer.parseInt(appliedDateList.get(index).getAttribute("value"))) + " " + appliedDate;
+						confirmedDate = String.format("%02d",
+								Integer.parseInt(confirmedDateList.get(index).getAttribute("value"))) + " "
+								+ confirmedDate;
 					}
+					verifyCityCreditRatingValuesFromDB(country, area, city, source, agency, type, value, appliedDate,
+							confirmedDate, index + 1);
 				}
-				else
-				{
-					assertTrue("There is no existing values in credit rating section",true);
-				}
-
-
+			} else {
+				assertTrue("There is no existing values in credit rating section", true);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1219,8 +1241,8 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	/**
-	 * This method is used for performing the delete all credit rating rows row by
-	 * clicking on the delete row button
+	 * This method is used for performing the delete all credit rating rows row
+	 * by clicking on the delete row button
 	 *
 	 */
 	public void deleteExistingCreditRatingRows() {
@@ -1248,8 +1270,11 @@ public class EditCityPage extends AbstractPage {
 	 *
 	 */
 	public void verifyCreditRatingDeleteConfirmationModal() {
-		assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("city_delete_credit_rating_row_confirmation_modal_xpath")).getText());
+		assertEquals("Please confirm - would you like to delete this row? NO YES",
+				getDriver()
+						.findElement(CityIdentifiers
+								.getObjectIdentifier("city_delete_credit_rating_row_confirmation_modal_xpath"))
+						.getText());
 	}
 
 	/**
@@ -1257,9 +1282,8 @@ public class EditCityPage extends AbstractPage {
 	 * clicking save without entering any text for credit rating agency
 	 */
 	public void verifyErrorMessageForRequiredCityCreditRatingAgency() {
-		assertEquals("Required",
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_error_xpath"))
-						.getText());
+		assertEquals("Required", getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_agency_error_xpath")).getText());
 	}
 
 	/**
@@ -1267,18 +1291,19 @@ public class EditCityPage extends AbstractPage {
 	 * clicking save without entering any text for credit rating type
 	 */
 	public void verifyErrorMessageForRequiredCityCreditRatingType() {
-		assertEquals("Required",
-				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_error_xpath")).getText());
+		assertEquals("Required", getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_type_error_xpath")).getText());
 	}
 
 	/**
-	 * This is to verify error message is displayed for credit rating value field as
-	 * expected
+	 * This is to verify error message is displayed for credit rating value
+	 * field as expected
 	 */
 	public void verifyErrorMessageInCityCreditRatingValue(String errorMsg) {
 
-		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_value_error_xpath"))
-				.getText(), errorMsg);
+		assertEquals(getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_value_error_xpath")).getText(),
+				errorMsg);
 	}
 
 	public void clickOnDeleteNewCreditRatingRowButtonCity() {
@@ -1289,7 +1314,8 @@ public class EditCityPage extends AbstractPage {
 
 		try {
 
-			assertTrue(getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).size()==1);
+			assertTrue(getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath"))
+					.size() == 1);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1301,8 +1327,9 @@ public class EditCityPage extends AbstractPage {
 
 		try {
 			WebElement identifier = getDriver()
-					.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_row_xpath")).findElement(By.tagName("tr"));
-			assertTrue(identifier !=null);
+					.findElement(CityIdentifiers.getObjectIdentifier("city_credit_rating_row_xpath"))
+					.findElement(By.tagName("tr"));
+			assertTrue(identifier != null);
 		} catch (Exception e) {
 			assertTrue(false);
 		}
@@ -1341,7 +1368,9 @@ public class EditCityPage extends AbstractPage {
 			// row button. so that at least one web element will be exist.
 			assertFalse("No rows exist in credit rating section", getDriver()
 					.findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).size() == 1);
-			List<WebElement> rowColums = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).get(rowNumber).findElements(By.tagName("td"));
+			List<WebElement> rowColums = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).get(rowNumber)
+					.findElements(By.tagName("td"));
 
 			String agencyInUI = rowColums.get(0).getText();
 			String typeInUI = rowColums.get(1).getText();
@@ -1352,15 +1381,12 @@ public class EditCityPage extends AbstractPage {
 			assertEquals(agencyInUI, agency);
 			assertEquals(typeInUI, type);
 			assertEquals(valueInUI, value);
-			if(!appliedDateInUI.isEmpty() && !appliedDate.isEmpty())
-			{
+			if (!appliedDateInUI.isEmpty() && !appliedDate.isEmpty()) {
 				assertEquals(appliedDateInUI, appliedDate);
 			}
-			if(!confirmedDateInUI.isEmpty() && !confirmedDate.isEmpty())
-			{
+			if (!confirmedDateInUI.isEmpty() && !confirmedDate.isEmpty()) {
 				assertEquals(confirmedDateInUI, confirmedDate);
 			}
-
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1404,14 +1430,17 @@ public class EditCityPage extends AbstractPage {
 
 	public void verifyFullNameFieldNotEditable() {
 		try {
-			getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_names_full_name_xpath")).findElement(By.cssSelector("input"));
-		} catch(NoSuchElementException ex) {
+			getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_names_full_name_xpath"))
+					.findElement(By.cssSelector("input"));
+		} catch (NoSuchElementException ex) {
 			assertTrue("Full Name is not editable", true);
 		}
 	}
-	
+
 	public void verifyFullTypeNameValue(String nameValue) {
-		assertEquals(nameValue, getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_names_full_name_value_xpath")).getAttribute("value"));
+		assertEquals(nameValue,
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_names_full_name_value_xpath"))
+						.getAttribute("value"));
 	}
 
 	public void enterValueInFullTypeNameField(String value) {
@@ -1440,17 +1469,18 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get city basic info", nvPairs);
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get city basic info", nvPairs);
 		if (document != null) {
 			NodeList nodeList = document.getElementsByTagName("name");
-			for(int index = 0; index < nodeList.getLength(); index++)  {
+			for (int index = 0; index < nodeList.getLength(); index++) {
 				NodeList childNodeList = nodeList.item(index).getChildNodes();
 				cityNameMap.put(childNodeList.item(0).getTextContent(), childNodeList.item(1).getTextContent());
 			}
 		}
 		return cityNameMap;
 	}
-	
+
 	public void clickOnAddNewNameButton() {
 		try {
 			Thread.sleep(2000);
@@ -1472,45 +1502,49 @@ public class EditCityPage extends AbstractPage {
 
 		// verifiying whether values in dropdown is matching the value from DB
 		// ignoring the first item, as it will be blank value
-        for (int i = 1; i < options.size(); i++) {
-            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), 
-            			 options.get(i).getText().trim());
-        }
+		for (int i = 1; i < options.size(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					options.get(i).getText().trim());
+		}
 	}
-	
+
 	public void verifyTextInFullNameValue(String nameValue) {
 		assertEquals(nameValue, getDriver()
 				.findElement(CityIdentifiers.getObjectIdentifier("city_names_full_name_value_view_xpath")).getText());
 	}
-	
+
 	public void verifyNameType(String nameType) {
 		try {
-			// appending the name type to the xpath to retrieve corresponding row in view mode
-			WebElement newNameTypeElement = getDriver().findElement(By.xpath("//*[@id='cityBasicInfo']//tr[td='" + nameType + "']"));
+			// appending the name type to the xpath to retrieve corresponding
+			// row in view mode
+			WebElement newNameTypeElement = getDriver()
+					.findElement(By.xpath("//*[@id='cityBasicInfo']//tr[td='" + nameType + "']"));
 			assertTrue(newNameTypeElement != null);
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	public void verifyNameValue(String nameType, String nameValue) {
 		try {
-			// appending the name type to the xpath to retrieve the corresponding row in view mode
-			WebElement newNameValueElement = getDriver().findElement(By.xpath("//*[@id='cityBasicInfo']//tr[td='" + nameType + "']/td[2]"));
+			// appending the name type to the xpath to retrieve the
+			// corresponding row in view mode
+			WebElement newNameValueElement = getDriver()
+					.findElement(By.xpath("//*[@id='cityBasicInfo']//tr[td='" + nameType + "']/td[2]"));
 			assertEquals(newNameValueElement.getText(), nameValue);
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	public void verifyNamesEmptyRow(String country, String area, String city, String source) {
 		Map<String, String> cityNameMap = getCityNameValueMapFromDB(country, area, city, source);
-		for(String key : cityNameMap.keySet()) {
+		for (String key : cityNameMap.keySet()) {
 			assertTrue(key != null);
 			assertTrue(cityNameMap.get(key) != null);
 		}
 	}
-	
+
 	public void enterNameType(String nameType) {
 		try {
 			if (nameType != null) {
@@ -1527,17 +1561,16 @@ public class EditCityPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public void enterNameValue(String newNameValue) {
 		clearAndEnterValue(CityIdentifiers.getObjectIdentifier("city_name_value_input_xpath"), newNameValue);
 	}
-	
+
 	public void verifyErrorMessageForRequiredCityNameType() {
 		assertEquals("Required", getDriver()
 				.findElement(CityIdentifiers.getObjectIdentifier("city_name_type_req_err_msg_xpath")).getText());
 	}
-	
+
 	public void verifyErrorMessageForRequiredCityNameValue() {
 		assertEquals("Enter up to 75 valid characters.", getDriver()
 				.findElement(CityIdentifiers.getObjectIdentifier("city_name_value_req_err_msg_xpath")).getText());
@@ -1552,13 +1585,230 @@ public class EditCityPage extends AbstractPage {
 				.findElements(CityIdentifiers.getObjectIdentifier("city_name_type_input_xpath"));
 		List<WebElement> options = cityNameTypesList.get(1).findElements(By.cssSelector("option"));
 
-        for (int i = 1; i < options.size(); i++) {
-            assertTrue(!newNameType.equals(options.get(i).getText().trim()));
-        }
+		for (int i = 1; i < options.size(); i++) {
+			assertTrue(!newNameType.equals(options.get(i).getText().trim()));
+		}
 	}
-	
+
 	public void verifyCityNameValueMaxlength(String maxValue) {
-		assertEquals(maxValue, getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_names_full_name_value_xpath")).getAttribute("maxlength"));	
+		assertEquals(maxValue,
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_names_full_name_value_xpath"))
+						.getAttribute("maxlength"));
+	}
+
+	// 966
+	public void verifyAreaListInPlacesForCountry(String country) {
+
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("name", country));
+		nvPairs.add(new BasicNameValuePair("source", "trusted"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list",
+				nvPairs);
+		List<WebElement> areaList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_area_dropdown_xpath"));
+
+		if (areaList != null) {
+			assertEquals(areaList.get(0).getText(), "Choose an Area");
+			assertEquals(areaList.get(1).getText(), "No Area");
+			for (int i = 0; i < document.getElementsByTagName("area").getLength() && areaList.size() > 2; i++) {
+				assertEquals(document.getElementsByTagName("area").item(i).getTextContent(),
+						areaList.get(i + 2).getText());
+			}
+		} else {
+			assertTrue("area list is not displayed", false);
+		}
+
+	}
+
+	public void changeCountryValue(String country) throws InterruptedException {
+		try {
+			List<WebElement> drpList = getDriver().findElements(
+					CityIdentifiers.getObjectIdentifier("country_places_country_dropDown_select_option_xpath"));
+			for (int i = 0; i < drpList.size(); i++) {
+				if (drpList.get(i).getText().equals(country)) {
+					selectItemFromDropdownListByindex(
+							CityIdentifiers.getObjectIdentifier("country_places_country_dropDown_select_xpath"), i);
+					selectedCountryID = drpList.get(i).getAttribute("value");
+					break;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void userVerifyAreadropdown() {
+		assertEquals("Choose an Area", getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_area_dropdown_xpath")).get(0).getText());
+
+	}
+
+	public void userVerifySubAreaDropdown() {
+
+		WebElement subAreaMultiSelectBox = getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("area_subarea_xpath"))
+				.findElement(By.xpath("//*[@class='search-field']/input"));
+		assertEquals("Choose a Sub Area", subAreaMultiSelectBox.getAttribute("value"));
+	}
+
+	public void changeAreaValue(String area) throws InterruptedException {
+
+		try {
+
+			List<WebElement> drpList = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("country_places_areas_option_dropdown_xpath"));
+			for (int i = 0; i < drpList.size(); i++) {
+				if (drpList.get(i).getText().equals(area)) {
+					selectItemFromDropdownListByindex(
+							CityIdentifiers.getObjectIdentifier("country_places_areas_dropdown_xpath"), i);
+					selectedAreaID = drpList.get(i).getAttribute("value");
+					break;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void userVerifiesNoArea() {
+		assertEquals("No Area", getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_area_dropdown_xpath")).get(0).getText());
+	}
+
+	public void verifyNoSubarea() {
+		assertEquals("No Area", getDriver().findElements(CityIdentifiers.getObjectIdentifier("area_subarea_list_xpath"))
+				.get(0).getText());
+	}
+
+	public void clickOnSubAreaDropdown() throws InterruptedException {
+		attemptClick(CityIdentifiers.getObjectIdentifier("area_subarea_xpath"));
+	}
+
+	public void verifyNoAreaOptionOnlyExistInSubArea() {
+		assertEquals("No Area", getDriver().findElements(CityIdentifiers.getObjectIdentifier("area_subarea_list_xpath"))
+				.get(0).getText());
+		assertEquals(getDriver().findElements(CityIdentifiers.getObjectIdentifier("area_subarea_list_xpath")).size(),
+				1);
+	}
+
+	public void userSelectsSubarea(String Subarea1) throws InterruptedException {
+		attemptClick(CityIdentifiers.getObjectIdentifier("area_subareas_typeahead_xpath"));
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("area_subareas_typeahead_xpath"))
+				.sendKeys(Subarea1);
+		getDriver().findElement(CityIdentifiers.getObjectIdentifier("area_subareas_typeahead_xpath"))
+				.sendKeys(Keys.RETURN);
+
+	}
+
+	public void verifySubAreaIsNotReselectable(String Subarea) {
+
+		List<WebElement> subAreaChoices = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("subareas_choices_xpath"));
+		List<String> selectedOptions = new ArrayList<String>();
+		for (int j = 0; j < subAreaChoices.size(); j++) {
+			selectedOptions.add((subAreaChoices.get(j)).getText());
+		}
+		assertTrue(selectedOptions.contains(Subarea));
+	}
+
+	public void verifySubAreaValue(List<String> subAreaListInUI, List<String> subAreaListInDB) {
+		assertEquals(subAreaListInUI, subAreaListInDB);
+	}
+
+	public void verifySubAreaIsUpdatedInUI(List<String> subAreaList) {
+
+		List<WebElement> subAreaChoices = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("subareas_choices_xpath"));
+		List<String> selectedOptions = new ArrayList<String>();
+		for (int j = 0; j < subAreaChoices.size(); j++) {
+			selectedOptions.add((subAreaChoices.get(j)).getText());
+		}
+		assertEquals(selectedOptions, subAreaList);
+	}
+
+	public void checksHeaderdropdownValues(String country, String area, String city) throws InterruptedException {
+		Thread.sleep(10000);
+		assertEquals(country,
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("country_current_value_xpath")).getText());
+		assertEquals(area,
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("area_current_value_xpath")).getText());
+		assertEquals(city,
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_current_value_xpath")).getText());
+
+	}
+
+	public void checksAddressBarIsHavingNewCountryAreaIds() throws InterruptedException {
+		String[] urlPartitions = getDriver().getCurrentUrl().split("/");
+		String countryID = urlPartitions[6];
+		String areaID = urlPartitions[7];
+		assertEquals(countryID, selectedCountryID);
+		assertEquals(areaID, selectedAreaID);
+	}
+
+	public void verfyCityDropdown(String city) throws InterruptedException {
+		List<WebElement> cityListValues = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_List_value_xpath"));
+		List<String> citylist = new ArrayList<String>();
+		for (int j = 0; j < cityListValues.size(); j++) {
+			citylist.add((cityListValues.get(j)).getText());
+		}
+		assertFalse(citylist.contains(city));
+	}
+
+	public void verfySubAreaIsNullInUI(String city) throws InterruptedException {
+		assertNull(getDriver().findElement(CityIdentifiers.getObjectIdentifier("subarea_noarea_xpath")).getText());
+	}
+
+	public List<String> getListFromDB(String country, String area, String city, String source, String tagName) {
+		List<String> cityList = new ArrayList<String>();
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("city", city));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get city basic info", nvPairs);
+		if (document != null) {
+			NodeList nodeList = document.getElementsByTagName(tagName);
+			for (int index = 0; index < nodeList.getLength(); index++) {
+				NodeList childNodeList = nodeList.item(index).getChildNodes();
+				cityList.add(childNodeList.item(0).getTextContent());
+			}
+		} else {
+			assertFalse("Zeus document is null", true);
+		}
+		return cityList;
+	}
+
+	public void verifySubAreaListInPlacesForCountry(String area) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("name", area));
+		nvPairs.add(new BasicNameValuePair("source", "trusted"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "subarea list",
+				nvPairs);
+		List<WebElement> subAreaList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("area_subarea_list_xpath"));
+		for (int i = 1; i < (document.getElementsByTagName("subarea").getLength()) - 1; i++) {
+			assertEquals(document.getElementsByTagName("subarea").item(i).getTextContent(),
+					subAreaList.get(i + 1).getText());
+
+		}
+	}
+
+	public void verifyCountryListInPlacesForCountry() {
+		List<WebElement> countryList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("country_places_country_dropDown_xpath"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "country list");
+		for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(),
+					countryList.get(i + 1).getText().trim());
+		}
 	}
 
 	@Override
