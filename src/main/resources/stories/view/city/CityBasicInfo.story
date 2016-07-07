@@ -164,13 +164,13 @@ When the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
-And the user clicks on the city replaced by link <city>
+And the user clicks on the city replaced by link <subCity>
 Then the user should see the area's names as:
 |TYPE|VALUE|
 |Full Name|Chester|
 
 
 Examples:
-|country|area|city|
-|USA|Illinois|Chicago|
+|country|area|city|subCity
+|USA|Illinois|Chicago|Chester
 
