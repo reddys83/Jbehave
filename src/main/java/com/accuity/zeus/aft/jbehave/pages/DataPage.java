@@ -171,7 +171,8 @@ public class DataPage extends AbstractPage {
     private String city_subarea_link_xpath = "//*[@class='vertical']//tr[6]/td[a='";
     private String city_country_link_xpath = "//*[@class='vertical']//tr[4]/td[a='";
     String city_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
-    private String city_name_link_xpath = ".//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[7]/td//a[text()='Chester']";
+    //private String city_name_link_xpath = ".//*[@id='cityBasicInfo']/ul/li[2]/table/tbody/tr[7]/td//a[text()='Chester']";
+    private String city_name_link_xpath = "//*[@id='cityBasicInfo']//tbody/tr[th='Replaced By']//a";
 
     private By sections_display_xpath = By.xpath("//*[@id='data-side-navbar']//h1");
     private By sections_list_xpath = By.xpath("//*[@id='data-side-navbar']//ul/li");
@@ -958,6 +959,7 @@ public class DataPage extends AbstractPage {
 
     public void clickOnCityNameLink()
     {
+
         attemptClick(By.xpath(city_name_link_xpath));
         try {
             Thread.sleep(1000L);
@@ -965,6 +967,21 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
     }
+/*
+    public void clickOnCityNameLink(String cityLink) {
+        assertEquals(document.getElementsByTagName("ReplacedBy").item(i).getTextContent(), getDriver().findElement(By.xpath(basic_info_label_value_xpath + "Replaced By']/td")).getText());
+        cityLink = Chester,Barajyolu;
+        attemptClick(By.xpath(city_name_link_xpath));
+        List<WebElement> options = getDriver().findElements(cityLink);
+        for (WebElement option : options) {
+            if (option.getText().contains(cityLink)) {
+                getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_locations_summary_type_edit_xpath")).click();
+                option.click();
+                break;
+            }
+        }
+    }
+    */
     public void clickOnCityRelatedPlace(String relatedPlace) {
         attemptClick(By.xpath(city_related_places_place_link_xpath + relatedPlace + "']/td/a"));
         waitForElementToAppear(area_listBox_xpath);
