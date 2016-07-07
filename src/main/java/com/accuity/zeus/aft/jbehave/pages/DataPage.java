@@ -183,6 +183,8 @@ public class DataPage extends AbstractPage {
     private By basic_info_left_section_xpath = By.xpath("//table[@class='vertical']/tbody//th");
 
     private String area_area_city_link_xpath = "//*[@id='areaPlaces']/table/tbody//td[a='";
+    private String area_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
+    private By select_places_view_xpath = By.xpath(".//*[@id='areaPlaces']/h1/span']");
 
     private By save_button_id = By.id("save-button");
     private By error_message_at_top_xpath = By.xpath("//*[@id='error']/div/div/p");
@@ -1048,7 +1050,7 @@ public class DataPage extends AbstractPage {
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
         if(document != null) {
 	        endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
-	        
+
 	        responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
 	        assertTrue(responseEntity.getStatusCode().value() == 200);
 	    }
@@ -1230,6 +1232,19 @@ public class DataPage extends AbstractPage {
 		}
 	}
 
+    public void verifyNoSummaryConfirmationModal(ExamplesTable Summary) {
+        try {
+            Thread.sleep(1000);
+            List<WebElement> confirmChanges = getDriver().findElements(edit_confirmationModal_summary_xpath);
+            for (int i = 0; i < Summary.getRowCount(); i++) {
+                assertFalse(Summary.getRow(i).get(Summary.getHeaders().get(0)).equals(confirmChanges.get(i).getText()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            assertTrue(true);
+        }
+    }
+
     public void verifyDeleteConfirmationModal() {
         assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(delete_row_confirmation_modal_xpath).getText());
     }
@@ -1278,6 +1293,18 @@ public class DataPage extends AbstractPage {
 
     public void verifyViewModeForEntity(){
         assertTrue(getDriver().findElement(currency_update_button_id).isDisplayed());
+    }
+    public void clickOnAreaRelatedPlace(String relatedPlace) {
+        attemptClick(By.xpath(area_related_places_place_link_xpath + relatedPlace + "']/td/a"));
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void verifyAreaPlacesView() {
+        assertTrue(getDriver().findElement(select_places_view_xpath).isDisplayed());
     }
 
 }
