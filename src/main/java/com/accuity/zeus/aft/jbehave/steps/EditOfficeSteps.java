@@ -34,10 +34,6 @@ public class EditOfficeSteps extends AbstractSteps{
             editOfficePage = getOfficesPage().createEditOfficePage();
         }}
 
-    @When("the user updates null office Opened <day> <month> <year>")
-    public void updateNullOfficeOpenedDate(@Named("day") String day,@Named("month") String month,@Named("year") String year)
-    {getEditOfficePage().updateNullOfficeOpenedDate(day,month,year);}
-
 }
 
 

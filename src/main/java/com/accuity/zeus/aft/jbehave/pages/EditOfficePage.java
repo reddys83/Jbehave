@@ -35,18 +35,9 @@ public class EditOfficePage extends AbstractPage {
     public void updateOfficeOpenedDate(String day, String month, String year) {
 
         clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_day_xpath"), day);
-        Select monthDropDown = new Select(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_month_xpath")));
-        monthDropDown.selectByVisibleText(month);
+        selectItemFromDropdownListByText(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_month_xpath"),month);
         clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_year_xpath"), year);
         }
-
-    public void updateNullOfficeOpenedDate(String day, String month, String year) {
-
-        clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_day_xpath"), day);
-        Select monthDropDown = new Select(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_month_xpath")));
-        monthDropDown.selectByValue(month);
-        clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_year_xpath"), year);
-    }
 
     public void verifyUpdatedOfficeOpenedDate(String fid) {
         try {
