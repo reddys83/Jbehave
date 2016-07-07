@@ -35,6 +35,9 @@ import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditCityPage extends AbstractPage {
+	
+	public static String selectedCountryID = null;
+	public static String selectedAreaID = null;
 
 	public EditCityPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
