@@ -88,6 +88,10 @@ And the user get the document with get Id for country with the name as Bosnia-He
 And the user deletes the existing banking hours rows
 And the user clicks on the save button
 Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Banking Hours|
+|Payments / Iban|
 When the user clicks on the confirm button
 Then the user should not see the banking hours rows
 Then the user should see the edits to country banking hrs in zeus document
