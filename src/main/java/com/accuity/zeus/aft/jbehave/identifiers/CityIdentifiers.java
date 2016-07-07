@@ -77,7 +77,9 @@ public class CityIdentifiers {
 		hmap.put("city_credit_rating_type_error_xpath", By.xpath("//*[@id='additionalCreditRatings']//*[@data-error_id='creditRatingTypeError']"));
 		hmap.put("city_credit_rating_value_error_xpath", By.xpath("//*[@id='additionalCreditRatings']//*[@data-error_id='creditRatingValueError']"));
 		hmap.put("city_credit_rating_row_xpath", By.xpath("//*[@id='additionalCreditRatings']"));
-		hmap.put("city_credit_rating_confirmed_date_error_msg_xpath", By.xpath("//*[@data-error_id='creditRatingConfirmedDateError']"));		
+		hmap.put("city_credit_rating_confirmed_date_error_msg_xpath", By.xpath("//*[@data-error_id='creditRatingConfirmedDateError']"));
+		
+		
 
 		// adding values for city names
 		hmap.put("city_names_full_name_xpath", By.xpath("//*[@id='additionalNames']//td[text() = 'Full Name']"));
@@ -91,6 +93,7 @@ public class CityIdentifiers {
         hmap.put("city_name_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalNames']//*[@data-error_id='nameValueError']")));
         hmap.put("city_delete_name_row_button_xpath", By.xpath(".//*[@data-row_id='names']//button[@class='delete-row']"));
         hmap.put("delete_names_row_confirmation_modal_xpath", By.xpath("//*[@id='additionalNames']/tr[3]"));
+        
 		hmap.put("city_places_link_id", By.xpath("//*[@id='cityPlaces']"));
 		hmap.put("city_add_places_button_edit_id", By.xpath("//button[@id='add-relatedPlaces']"));
 		hmap.put("city_places_type_required_error_message_xpath",
@@ -128,7 +131,7 @@ public class CityIdentifiers {
 		hmap.put("city_get_relatedplace_entirevalue_xpath", By.xpath("//*[@id='cityPlaces']//tbody"));
 		hmap.put("city_All_link_id", By.xpath("//*[@id='all']"));
 		
-		  //locators for Country, area and sub area elements
+		 //locators for Country, area and sub area elements
         hmap.put("country_places_country_dropDown_xpath", By.xpath(".//*[@id='country']//option"));  		
         hmap.put("country_places_country_dropDown_select_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Country']//select"));
         hmap.put("country_places_country_dropDown_select_option_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Country']//select/option"));  
@@ -145,7 +148,6 @@ public class CityIdentifiers {
         hmap.put("city_current_value_xpath", By.xpath("(.//*[@class='chosen-single'])[3]//span")); 
         hmap.put("city_List_value_xpath", By.xpath("(//*[@id='entitySelect_chosen'])[3]//li"));      
         hmap.put("subarea_noarea_xpath", By.xpath(".//*[@id='cityBasicInfo']//tr[th='Sub Area']/td"));
-
 	}
 
 	public static By getObjectIdentifier(String key) {
