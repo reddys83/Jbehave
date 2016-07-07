@@ -206,8 +206,6 @@ public class DataPage extends AbstractPage {
     private By delete_confirmation_yes_button_id = By.id("yes-button");
     private By save_success_message_id=By.id("saveSuccess");
     private By area_basic_info_country_link_xpath = By.xpath(".//*//tr[th='Country']/td/a");
-    private String area_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
-
 
     static ResponseEntity responseEntity;
     static String endpointWithID;
@@ -1304,14 +1302,6 @@ public class DataPage extends AbstractPage {
 
     public void verifyViewModeForEntity(){
         assertTrue(getDriver().findElement(currency_update_button_id).isDisplayed());
-    }
-    public void clickOnAreaRelatedPlace(String relatedPlace) {
-        attemptClick(By.xpath(area_related_places_place_link_xpath + relatedPlace + "']/td/a"));
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public void verifyAreaPlacesView() {
