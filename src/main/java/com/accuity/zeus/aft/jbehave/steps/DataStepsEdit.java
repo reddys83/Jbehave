@@ -60,6 +60,11 @@ public class DataStepsEdit extends AbstractSteps {
 		getDataPage().verifySummaryConfirmationModal(Summary);
 	}
 
+	@Then("the user should not see the below summary changes in confirmation modal $Summary")
+	public void verifyNoSummaryConfirmationModal(ExamplesTable Summary) {
+		getDataPage().verifyNoSummaryConfirmationModal(Summary);
+	}
+
 	@When("the user clicks on the return button")
 	public void clickOnReturnButton() {
 		getDataPage().clickOnReturnButton();
@@ -90,4 +95,13 @@ public class DataStepsEdit extends AbstractSteps {
 		getDataPage().verifyDeleteConfirmationModal();
 	}
 
+	@When("the user clicks on the area related places link $relatedPlace")
+	public void clickOnAreaRelatedPlace(@Named("relatedPlace") String relatedPlace) {
+		getDataPage().clickOnAreaRelatedPlace(relatedPlace);
+	}
+
+	@Then("the user should see the places view page")
+	public void verifyAreaPlacesView() {
+		getDataPage().verifyAreaPlacesView();
+	}
 }
