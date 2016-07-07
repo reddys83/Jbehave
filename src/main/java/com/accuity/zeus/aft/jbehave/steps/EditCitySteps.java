@@ -1064,9 +1064,8 @@ public class EditCitySteps extends AbstractSteps {
 	public void verifyCityNameValueMaxLength(@Named("maxValue") String maxValue) {
 		getEditCityPage().verifyCityNameValueMaxlength(maxValue);
 	}
-<<<<<<< HEAD
-}
-=======
+
+
 }
 
->>>>>>> develop
+
