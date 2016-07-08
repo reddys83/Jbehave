@@ -1071,7 +1071,7 @@ public class DataPage extends AbstractPage {
     public void revertChangesToDocument() {
 
         int response = restClient.putDocumentByID(endpointWithID, heraApi, responseEntity.getBody().toString());
-        assertTrue(response == 200);
+        assertTrue(response == 200||response == 202);
     }
 
     public void clickOnCancelYesButton() {
