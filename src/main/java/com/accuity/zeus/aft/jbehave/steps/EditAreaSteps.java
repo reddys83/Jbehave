@@ -78,11 +78,6 @@ public class EditAreaSteps extends AbstractSteps {
 		getDataPage().enterAreaInTypeAhead(area);
 	}
 
-	@Then("the user should not see the area <ConfirmationSummary> changes in confirmation modal")
-	public void verifyNoChangeConfirmationMsg(@Named("ConfirmationSummary") String ConfirmationSummary) {
-		getDataPage().verifyNoSummaryConfirmationModal(ConfirmationSummary);
-	}
-
 	@Then("the user should see the status value in area page is same as in $source document")
 	public void verifyCityBeganDateValueFromDB(@Named("country") String country, @Named("Area") String area,
 			@Named("source") String source) {

@@ -52,27 +52,6 @@ Examples:
 |USA|Alabama|Pending|
 |USA|Alabama|Inactive|
 
-Scenario: No changes should happen to Area `s Status value in the Area Basic Info page when user selects save button with out doing any changes 
-
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the area tab in the data area
-And the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
-And the user enters the <Area> in the type-ahead box
-And the user clicks on the area basic info link in the navigation bar
-And the user clicks on the area update link
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-Then the user should not see the area <ConfirmationSummary> changes in confirmation modal
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the area page
-
-Examples:
-|country|Area|ConfirmationSummary|
-|USA|Alabama|Summary|
-
 Scenario:  Verify that the Area Status drop-down list should highlight the values that contain characters input by user
 
 Given a user is on the search page
@@ -114,7 +93,7 @@ Examples:
 |country|Area|
 |USA|Alabama|
 
-Scenario: User will see summary of changes made in confirmation modal when update the City status
+Scenario: User will see summary of changes made in confirmation modal when update the Area status
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
