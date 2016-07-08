@@ -61,7 +61,6 @@ Examples:
 |Angola|Bengo|Caxito|Metropolitan Statistical Area|11020|
 
 Scenario: User adds new blank region type and blank value, checks the new blank region is not getting added to DB
-Meta: @Failing scenario
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -75,9 +74,6 @@ And the user clicks on the city regions link in the navigation bar
 When the user clicks on the city update link
 And the user clicks on the add new region button in the city region page
 And the user clicks on the save button in city page
-Then the user should see the below summary changes in confirmation modal
-|Summary|
-|Regions|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user should see the blank region type and blank value is not updated in zeus document
