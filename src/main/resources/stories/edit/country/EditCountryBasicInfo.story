@@ -15,6 +15,7 @@ JIRA ID - ZEUS-745 - User will see summary of changes made in confirmation modal
 JIRA ID - ZEUS-441 - User can save edits to country
 JIRA ID - ZEUS-920 - Properly handle Hera validation errors
 JIRA ID - ZEUS-953 - Item deletion, Confirmation Message
+JIRA ID - ZEUS-1001- When the user is on the country edit page and try to change the id in the URL , Then the modified country page should be in view mode
 
 Scenario: Verify country names type from lookup COUNTRY_NAME_TYPE
 Given a user is on the search page
@@ -469,4 +470,18 @@ Then the user should not see the newly added identifier row in the basic info co
 Examples:
 |country|
 |Albania|
+
+Scenario: ZEUS-1001 When the user is on the country edit page and try to change the id in the URL , Then the modified country page should be in view mode
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user updates the browser url to new $entity id <entityID>
+Then the user should see the country page in the view mode
+
+Examples:
+|country|enityID|
+|Albania|21b69329-6bc2-4e43-aac7-9a18c937324e|
 

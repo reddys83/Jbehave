@@ -235,6 +235,9 @@ public class CountryPage extends AbstractPage {
     private By country_banking_hrs_day_list_xpath = By.xpath("//*[@class='new'] //*[@id='bankingDay-select']");
     private By country_banking_hrs_start_time_list_xpath = By.xpath("//*[@class='new'] //*[@data-error_ref_id='bankingHour0Error']");
     private By country_banking_hrs_end_time_list_xpath = By.xpath("//*[@class='new'] //*[@data-error_ref_id='bankingHour1Error']");
+    private By country_banking_hours_row_delete_button_xpath = By.xpath(".//*[@id='additionalBusinessHours']//button[@class='delete-row']");
+    private By country_banking_hours_delete_row_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
+    private By country_bankingHours_rows_xpath= By.xpath(".//*[@id='countryBasicInfo']//*[@data-row-id='businessHours']");
     private By country_places_go_button_xpath = By.xpath(".//*[@id='multiSelectRow']/button");
     private By country_places_required_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='relatedPlacePlaceError']");
     private By country_places_delete_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='relatedPlaces']//button[@class='delete-row']");
@@ -1790,8 +1793,34 @@ public class CountryPage extends AbstractPage {
         assertFalse(getDriver().findElement(country_places_go_button_xpath).isEnabled());
     }
 
+    public void verifyDeleteConfirmationModal() {
+        assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(country_banking_hours_delete_row_confirmation_modal_xpath).getText());
+    }
+
     public void selectCreditRatingAgency(String agency) {
         selectItemFromDropdownListByValue(country_credit_rating_agency_xpath, agency);
+    }
+
+
+    public void deleteAllBankingHours() {
+
+        List<WebElement> deleteRows = getDriver().findElements(country_banking_hours_row_delete_button_xpath);
+        for (int i = 0; i < deleteRows.size(); i++) {
+            WebElement currentInstance = getDriver().findElements((country_banking_hours_row_delete_button_xpath)).get(0);
+            if (currentInstance != null) {
+                currentInstance.click();
+            }
+            verifyDeleteConfirmationModal();
+            pressEnterButtonInDeleteConfirmationModal();
+        }
+    }
+
+    public void verifyNoBankingHoursRows() {
+
+        try {
+            assertFalse(getDriver().findElement(country_bankingHours_rows_xpath).isDisplayed());
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
     }
 
     public void selectCreditRatingType(String type) {
