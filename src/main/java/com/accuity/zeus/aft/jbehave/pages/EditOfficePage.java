@@ -71,6 +71,19 @@ public class EditOfficePage extends AbstractPage {
         assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent().replace(" ",""), day+month+year);
     }
 
+    public void enterValueinTextField(String identifier,String value){
+
+        clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier(identifier),value);
+    }
+    public void verifyPrefixSuffixAndOverrideValuesFromZeus(String fid)
+    {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
+        assertEquals(document.getElementsByTagName("officePrefixValue").item(0).getTextContent(), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_view_xpath")).getText());
+        assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent().replace(" ",""), day+month+year);
+    }
 
     @Override
     public String getPageUrl() {
