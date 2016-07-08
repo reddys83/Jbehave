@@ -1450,7 +1450,31 @@ public class EditCityPage extends AbstractPage {
 		}
 		return cityNameMap;
 	}
-	
+
+	public Map<String, String> getCityRegionValueMapFromDB(String country, String area, String city, String source) {
+		Map<String, String> cityNameMap = new HashMap<String, String>();
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("city", city));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get city basic info", nvPairs);
+		if (document != null) {
+			NodeList nodeList = document.getElementsByTagName("region");
+			for(int index = 0; index < nodeList.getLength(); index++)  {
+				NodeList childNodeList = nodeList.item(index).getChildNodes();
+				cityNameMap.put(childNodeList.item(0).getTextContent(), childNodeList.item(1).getTextContent());
+			}
+		}
+		return cityNameMap;
+	}
+
 	public void clickOnAddNewNameButton() {
 		try {
 			Thread.sleep(2000);
@@ -1565,4 +1589,85 @@ public class EditCityPage extends AbstractPage {
 	public String getPageUrl() {
 		return null;
 	}
+
+	public void verifyCityRegionTypeList() {
+		List<WebElement> statusList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_region_type_identifier_dropdown_options_xpath"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city region types");
+		
+		System.out.println("######");
+		for(int i=0; i < statusList.size(); i++) {
+			System.out.println(statusList.get(i).getAttribute("value"));
+		}
+		System.out.println("######");
+		
+		for (int i = 1; i < document.getElementsByTagName("regiontype").getLength(); i++) {
+			System.out.println(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent());
+			System.out.println(statusList.get(i).getAttribute("value"));
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					statusList.get(i).getAttribute("value"));
+		}
+	}
+	
+	public void clickOnAddNewRegionButton() {
+		try {
+			Thread.sleep(7000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_add_new_region_button_id"));
+	}
+	
+	public void enterRegionType(String regionType) {
+		selectItemFromDropdownListByValue(CityIdentifiers.getObjectIdentifier("city_region_type_dropdown_xpath"), regionType);
+	}
+	
+	public void enterRegionValue(String regionValue) {
+		selectItemFromDropdownListByValue(CityIdentifiers.getObjectIdentifier("city_region_value_dropdown_xpath"), regionValue);
+	}
+	
+	public void verifyRegionValueInDB(Map<String, String> cityRegionMap, String newRegionType, String newRegionValue) {
+		assertTrue(cityRegionMap.containsKey(newRegionType));
+		assertEquals(cityRegionMap.get(newRegionType), newRegionValue);
+	}
+	
+	public void verifyRegionType(String regionType) {
+		try {
+			// appending the name type to the xpath to retrieve corresponding row in view mode
+			WebElement newNameTypeElement = getDriver().findElement(By.xpath("//*[@id='cityRegions']//tr[td='" + regionType + "']"));
+			assertTrue(newNameTypeElement != null);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void verifyRegionValue(String regionType, String regionValue) {
+		try {
+			// appending the name type to the xpath to retrieve the corresponding row in view mode
+			WebElement newNameValueElement = getDriver().findElement(By.xpath("//*[@id='cityRegions']//tr[td='" + regionType + "']/td[2]"));
+			assertEquals(newNameValueElement.getText(), regionValue);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public void verifyCityRegionForBlankValue(Map<String, String> cityRegionValueMap) {
+		assertEquals(cityRegionValueMap.keySet().size(), 0);
+	}
+	
+	public void verifyErrorMessageForRequiredCityRegionValue() {
+		assertEquals("Required", getDriver()
+				.findElement(CityIdentifiers.getObjectIdentifier("city_region_value_req_err_msg_xpath")).getText());
+	}
+	
+	public void clickOnDeleteRegionRowButtonCity() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_delete_region_row_button_xpath"));
+	}
+
+	public void verifyCityRegionDeletedFromDB(Map<String, String> cityRegionMap, String newRegionType) {
+		assertFalse(cityRegionMap.containsKey(newRegionType));
+	}
+
+	
 }
