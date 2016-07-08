@@ -38,7 +38,7 @@ public abstract class AbstractSteps {
 	private static CountryPage countryPage;
 
 
-
+    public static EditOfficePage editOfficePage;
 	public static EditLegalEntityPage editLegalEntityPage;
 
 
@@ -209,6 +209,13 @@ public abstract class AbstractSteps {
 		this.officesPage = officesPage;
 	}
 
+	public static EditOfficePage getEditOfficePage(){
+		return editOfficePage;
+	}
+
+	public static void setEditOfficePage(EditOfficePage editOfficePage) {
+		AbstractSteps.editOfficePage = editOfficePage;
+	}
 	public static EditLegalEntityPage getEditLegalEntityPage() {
 		return editLegalEntityPage;
 	}
