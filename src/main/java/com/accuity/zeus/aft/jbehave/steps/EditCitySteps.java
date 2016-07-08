@@ -1155,7 +1155,5 @@ public class EditCitySteps extends AbstractSteps {
 		Map<String, String> cityRegionValueMap = getEditCityPage().getCityRegionValueMapFromDB(country, area, city, source);
 		getEditCityPage().verifyCityRegionDeletedFromDB(cityRegionValueMap, newRegionType);
 	}
-		
-	
 }
 

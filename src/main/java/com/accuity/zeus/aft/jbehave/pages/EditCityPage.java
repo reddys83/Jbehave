@@ -2,9 +2,8 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.text.Format;
 import java.text.ParseException;
@@ -2012,26 +2011,13 @@ public class EditCityPage extends AbstractPage {
 	public void clickOnAll() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_All_link_id"));
 	}
-
-	@Override
-	public String getPageUrl() {
-		return null;
-	}
-
+	
 	public void verifyCityRegionTypeList() {
 		List<WebElement> statusList = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("city_region_type_identifier_dropdown_options_xpath"));
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city region types");
 		
-		System.out.println("######");
-		for(int i=0; i < statusList.size(); i++) {
-			System.out.println(statusList.get(i).getAttribute("value"));
-		}
-		System.out.println("######");
-		
 		for (int i = 1; i < document.getElementsByTagName("regiontype").getLength(); i++) {
-			System.out.println(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent());
-			System.out.println(statusList.get(i).getAttribute("value"));
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					statusList.get(i).getAttribute("value"));
 		}
@@ -2041,7 +2027,6 @@ public class EditCityPage extends AbstractPage {
 		try {
 			Thread.sleep(7000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_add_new_region_button_id"));
@@ -2097,5 +2082,8 @@ public class EditCityPage extends AbstractPage {
 		assertFalse(cityRegionMap.containsKey(newRegionType));
 	}
 
-	
+	@Override
+	public String getPageUrl() {
+		return null;
+	}
 }
