@@ -127,5 +127,7 @@ public class OfficesSteps extends AbstractSteps {
     public void verifyNoOfficeLocationSummary(){
         getOfficesPage().verifyNoOfficeLocationSummary();
     }
+
+
 }
 

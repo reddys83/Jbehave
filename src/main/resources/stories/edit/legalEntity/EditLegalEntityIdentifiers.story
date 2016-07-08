@@ -74,6 +74,7 @@ When the user clicks on the confirm button
 Then the user should see identifier values as <identifierType><value><identifierStatus> for fid <fid> in zeus document
 Then the user reverts the changes to the document
 
+
 Examples:
 |entity|searchBy|fid|identifierType|value|identifierStatus|
 |1010|FID|1010|OCC|Z01RQ8BXBEV51Q8XKV43|active|
