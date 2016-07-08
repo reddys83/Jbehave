@@ -44,7 +44,7 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_basicInfo_add_new_entitytype_button_id",By.id("add-types"));
         hmap.put("legalEntity_basicInfo_entitytypes_delete_button_xpath",By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr/td[@class='delete']/button"));
         hmap.put("delete_confirmation_yes_button_id",By.id("yes-button"));
-        hmap.put("legalEntity_entity_type_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='legalEntityTypeError']"));
+        hmap.put("legalEntity_entity_type_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='fixedlegalEntityTypeError']"));
         hmap.put("legalEntity_basicInfo_entitytypes_dropdown_xpath",By.xpath("//*[@id='legalEntityBasicInfo']//table/tbody[@id='additionalTypes']/tr/td/select[@id='legalEntityType' or @id='fixedlegalEntityType']"));
         hmap.put("legalEntity_basicInfo_charteredDate_view_xpath",By.xpath("//table[@class='vertical']/tbody/tr[3]/td"));
         hmap.put("legalEntity_basicInfo_charteredDate_day_xpath",By.xpath("//table[@class='vertical']/tbody/tr[3]/td/input[1]"));

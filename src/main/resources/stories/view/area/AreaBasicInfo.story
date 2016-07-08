@@ -193,5 +193,5 @@ And the user should see the area's names as:
 |TYPE|VALUE|
 |Country Name|USA|
 Examples:
-|country|area|sub-area
+|country|area|subArea
 |USA|Illinois|Cook

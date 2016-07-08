@@ -155,6 +155,21 @@ public abstract class AbstractPage {
         }
     }
 
+    public void waitForElementToDisappear(By by) {
+        try {
+            try {
+                Thread.sleep(STANDARD_WAIT);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
+        catch (org.openqa.selenium.StaleElementReferenceException e) {
+        }
+    }
+
     public void selectItemFromDropdownListByValue(By by, String value) {
         try {
             Thread.sleep(3000L);

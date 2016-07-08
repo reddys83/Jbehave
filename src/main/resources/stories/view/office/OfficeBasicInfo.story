@@ -92,6 +92,7 @@ Examples:
 |1165|FID|1165|
 
 Scenario: The office and department tabs should be present in the offices default view page.
+Meta:@test123
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -135,7 +136,7 @@ Examples:
 |entity|searchBy|fid|officeFid|headOfficeAddress|officeTfpid|
 |Bank of America National Association|Name|1038|1038-55|Charlotte, North Carolina, USA||
 
-Scenario: Verify office headers
+Scenario: Verify office headers - Bug-ZEUS-1313
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
