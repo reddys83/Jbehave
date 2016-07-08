@@ -57,7 +57,8 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|city|newRegionType|newRegionValue|
 |Angola|Bengo|Caxito|Federal Reserve District|10|
-
+|Angola|Bengo|Caxito|National Credit Union Administration Region|IV|
+|Angola|Bengo|Caxito|Metropolitan Statistical Area|11020|
 
 Scenario: User adds new blank region type and blank value, checks the new blank region is not getting added to DB
 Meta: @Failing scenario
@@ -98,7 +99,6 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city regions link in the navigation bar
 When the user clicks on the city update link
-And the user gets the document with get document id for city with the <city> from the database
 And the user clicks on the add new region button in the city region page
 And the user enters region type as <newRegionType> in the region city page
 And the user clicks on the save button in city page
@@ -210,7 +210,7 @@ When the user clicks on the Yes button to cancel the deletion of row
 And the user clicks on the save button in city page
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
-Then the user should see the region not present in $source document
+Then the user should see the region not present in zeus document
 Then the user reverts the changes to the document
 
 Examples:
