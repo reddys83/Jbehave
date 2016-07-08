@@ -5,6 +5,7 @@ import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -55,10 +56,10 @@ public class EditOfficeSteps extends AbstractSteps{
     {
         getEditOfficePage().enterValueinTextField("office_basicInfo_edit_override_xpath",prefix);
     }
-    @Then("the user should verify the prefix,suffix and override values for fid <officeFid> as:")
-    public void verifyPrefixSuffixAndOverrideValuesFromZeus(String officeFid)
+    @Then("the user should verify the prefix,suffix and override values for fid <officeFid> as:$values")
+    public void verifyPrefixSuffixAndOverrideValuesFromZeus(@Named("officeFid") String officeFid, @Named("values")ExamplesTable values)
     {
-        getEditOfficePage().verifyPrefixSuffixAndOverrideValuesFromZeus(officeFid);
+        getEditOfficePage().verifyPrefixSuffixAndOverrideValuesFromZeus(officeFid,values);
     }
 
 }

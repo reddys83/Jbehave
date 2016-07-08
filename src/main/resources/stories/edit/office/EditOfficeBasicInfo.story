@@ -160,7 +160,7 @@ And the user enters the office override value as <override>
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
-Then the user should verify the prefix,suffix and override values as:
+Then the user should verify the prefix,suffix and override values for fid <officeFid> as:
 |prefix|suffix|override|
 |testprefix|testsuffix||
 
@@ -185,7 +185,7 @@ And the user enters the office override value as <override>
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
-Then the user should verify the prefix,suffix and override values as:
+Then the user should verify the prefix,suffix and override values for fid <officeFid> as:
 |prefix|suffix|override|
 ||testsuffix||
 
@@ -210,7 +210,7 @@ And the user enters the office override value as <override>
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
-Then the user should verify the prefix,suffix and override values as:
+Then the user should verify the prefix,suffix and override values for fid <officeFid> as:
 |prefix|suffix|override|
 |testprefix|||
 
@@ -235,7 +235,7 @@ And the user enters the office override value as <override>
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
-Then the user should verify the prefix,suffix and override values for fid <>as:
+Then the user should verify the prefix,suffix and override values for fid <officeFid> as:
 |prefix|suffix|override|
 |testprefix|testsuffix||
 

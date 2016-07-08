@@ -75,14 +75,16 @@ public class EditOfficePage extends AbstractPage {
 
         clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier(identifier),value);
     }
-    public void verifyPrefixSuffixAndOverrideValuesFromZeus(String fid)
+    public void verifyPrefixSuffixAndOverrideValuesFromZeus(String fid,ExamplesTable values)
     {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
-        assertEquals(document.getElementsByTagName("officePrefixValue").item(0).getTextContent(), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_view_xpath")).getText());
-        assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent().replace(" ",""), day+month+year);
+       // assertEquals(document.getElementsByTagName("officePrefixValue").item(0).getTextContent(), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_edit_prefix_xpath")).getText());
+        assertEquals(document.getElementsByTagName("officePrefixValue").item(0).getTextContent(), values.getRow(0).get("prefix"));
+        assertEquals(document.getElementsByTagName("officeSuffixValue").item(0).getTextContent(), values.getRow(0).get("suffix"));
+        assertEquals(document.getElementsByTagName("officeOverrideValue").item(0).getTextContent(), values.getRow(0).get("override"));
     }
 
     @Override
