@@ -49,7 +49,7 @@ public class RestClient{
         headers.set("source", "zeus");
         HttpEntity<?> requestEntity = new HttpEntity<Object> (document, headers);
 
-        String url = utils.constructURLForHeaApi(heraApi.getScheme(), heraApi.getHost(), heraApi.getPort(), heraApi.getPath(), endpointWithID.replace("id/",""));
+        String url = utils.constructURLForHeaApi(heraApi.getScheme(), heraApi.getHost(), heraApi.getPort(), heraApi.getPath(), endpointWithID.replace("id/", ""));
 
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         requestFactory.setConnectTimeout(0);
