@@ -1078,7 +1078,7 @@ public class EditCitySteps extends AbstractSteps {
 	@When("the user enters region type as <newRegionType> in the region city page")
 	public void enterRegionType(@Named("newRegionType") String newRegionType) {
         try {
-            Thread.sleep(5000L);
+            Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

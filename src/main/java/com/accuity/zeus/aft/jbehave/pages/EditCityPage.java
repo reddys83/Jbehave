@@ -1452,7 +1452,7 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public Map<String, String> getCityRegionValueMapFromDB(String country, String area, String city, String source) {
-		Map<String, String> cityNameMap = new HashMap<String, String>();
+		Map<String, String> cityRegionMap = new HashMap<String, String>();
 		List<NameValuePair> nvPairs = new ArrayList<>();
 		nvPairs.add(new BasicNameValuePair("country", country));
 		nvPairs.add(new BasicNameValuePair("area", area));
@@ -1469,10 +1469,10 @@ public class EditCityPage extends AbstractPage {
 			NodeList nodeList = document.getElementsByTagName("region");
 			for(int index = 0; index < nodeList.getLength(); index++)  {
 				NodeList childNodeList = nodeList.item(index).getChildNodes();
-				cityNameMap.put(childNodeList.item(0).getTextContent(), childNodeList.item(1).getTextContent());
+				cityRegionMap.put(childNodeList.item(0).getTextContent(), childNodeList.item(1).getTextContent());
 			}
 		}
-		return cityNameMap;
+		return cityRegionMap;
 	}
 
 	public void clickOnAddNewNameButton() {
@@ -2013,13 +2013,13 @@ public class EditCityPage extends AbstractPage {
 	}
 	
 	public void verifyCityRegionTypeList() {
-		List<WebElement> statusList = getDriver()
+		List<WebElement> regionTypeList = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("city_region_type_identifier_dropdown_options_xpath"));
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city region types");
 		
 		for (int i = 1; i < document.getElementsByTagName("regiontype").getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
-					statusList.get(i).getAttribute("value"));
+					regionTypeList.get(i).getAttribute("value"));
 		}
 	}
 	
@@ -2047,7 +2047,7 @@ public class EditCityPage extends AbstractPage {
 	
 	public void verifyRegionTypeNotPresentInUI(String regionType) {
 		try {
-			// appending the name type to the xpath to retrieve corresponding row in view mode
+			// appending the region type to the xpath to retrieve corresponding row in view mode
 			getDriver().findElement(By.xpath("//*[@id='cityRegions']//tr[td='" + regionType + "']"));
 		} catch(Exception ex) {
 			assertTrue("Region Type is not present in the UI", true);
@@ -2056,7 +2056,7 @@ public class EditCityPage extends AbstractPage {
 	
 	public void verifyRegionType(String regionType) {
 		try {
-			// appending the name type to the xpath to retrieve corresponding row in view mode
+			// appending the region type to the xpath to retrieve corresponding row in view mode
 			WebElement newNameTypeElement = getDriver().findElement(By.xpath("//*[@id='cityRegions']//tr[td='" + regionType + "']"));
 			assertTrue(newNameTypeElement != null);
 		} catch(Exception ex) {
@@ -2066,7 +2066,7 @@ public class EditCityPage extends AbstractPage {
 	
 	public void verifyRegionValue(String regionType, String regionValue) {
 		try {
-			// appending the name type to the xpath to retrieve the corresponding row in view mode
+			// appending the region type to the xpath to retrieve the corresponding row in view mode
 			WebElement newNameValueElement = getDriver().findElement(By.xpath("//*[@id='cityRegions']//tr[td='" + regionType + "']/td[2]"));
 			assertEquals(newNameValueElement.getText(), regionValue);
 		} catch(Exception ex) {
