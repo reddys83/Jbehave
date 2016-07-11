@@ -78,13 +78,32 @@ public class EditOfficePage extends AbstractPage {
     public void verifyPrefixSuffixAndOverrideValuesFromZeus(String fid,ExamplesTable values)
     {
         List<NameValuePair> nvPairs = new ArrayList<>();
+        String prefixValue_zeus="";
+        String suffixValue_zeus="";
+        String overrideValue_zeus="";
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
-       // assertEquals(document.getElementsByTagName("officePrefixValue").item(0).getTextContent(), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_edit_prefix_xpath")).getText());
-        assertEquals(document.getElementsByTagName("officePrefixValue").item(0).getTextContent(), values.getRow(0).get("prefix"));
-        assertEquals(document.getElementsByTagName("officeSuffixValue").item(0).getTextContent(), values.getRow(0).get("suffix"));
-        assertEquals(document.getElementsByTagName("officeOverrideValue").item(0).getTextContent(), values.getRow(0).get("override"));
+        if (document != null) {
+         prefixValue_zeus = getNodeValuesByTagName(document, "officePrefixValue").size() == 0 ? "" : getNodeValuesByTagName(document, "officePrefixValue").get(0);
+         suffixValue_zeus = getNodeValuesByTagName(document, "officeSuffixValue").size() == 0 ? "" : getNodeValuesByTagName(document, "officeSuffixValue").get(0);
+         overrideValue_zeus = getNodeValuesByTagName(document, "officeOverrideValue").size() == 0 ? "" : getNodeValuesByTagName(document, "officeOverrideValue").get(0);
+    }
+       // check the values from zeus document with the expected values
+        assertEquals(prefixValue_zeus.toString(), values.getRow(0).get("prefix"));
+        assertEquals(suffixValue_zeus.toString(), values.getRow(0).get("suffix"));
+        assertEquals(overrideValue_zeus.toString(), values.getRow(0).get("override"));
+
+        // check the values from UI with the expected values
+
+        assertEquals(getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_view_prefix_xpath")), values.getRow(0).get("prefix"));
+        assertEquals(getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_view_suffix_xpath")), values.getRow(0).get("suffix"));
+        assertEquals(getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_view_override_xpath")), values.getRow(0).get("override"));
+
+    }
+
+    public void verifyMaxLength(String identifier,String maxLength){
+        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(identifier)).getAttribute("maxLength"),maxLength);
     }
 
     @Override

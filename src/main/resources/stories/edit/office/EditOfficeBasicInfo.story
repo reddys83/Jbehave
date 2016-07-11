@@ -141,7 +141,7 @@ Then the user should verify the prefix,suffix and override values for fid <offic
 
 Examples:
 |entity|searchBy|fid|officeFid|prefix|suffix|override|
-|1010|FID|1010|1010-44|testprefix|testsuffix|testoverride|
+|1165|FID|1165|1165-14|testprefix|testsuffix|testoverride|
 
 Scenario: User updates the Prefix, Suffix fields and keeps override as blank. Verifies that Override value is null and Prefix and Suffix values are saved in Zeus document.
 Given a user is on the search page
@@ -166,7 +166,7 @@ Then the user should verify the prefix,suffix and override values for fid <offic
 
 Examples:
 |entity|searchBy|fid|officeFid|prefix|suffix|override|
-|1010|FID|1010|1010-44|testprefix|testsuffix||
+|1165|FID|1165|1165-14|testprefix|testsuffix||
 
 Scenario: User updates the suffix value and keeps prefix and Override value as blank. Verifies that suffix value is saved and prefix and Override values are null in Zeus document.
 Given a user is on the search page
@@ -191,7 +191,7 @@ Then the user should verify the prefix,suffix and override values for fid <offic
 
 Examples:
 |entity|searchBy|fid|officeFid|prefix|suffix|override|
-|1010|FID|1010|1010-44||testsuffix||
+|1165|FID|1165|1165-14||testsuffix||
 
 Scenario: User updates the prefix value and keeps suffix and Override value as blank. Verifies that prefix value is saved and suffix and Override values are null in Zeus document.
 Given a user is on the search page
@@ -216,9 +216,11 @@ Then the user should verify the prefix,suffix and override values for fid <offic
 
 Examples:
 |entity|searchBy|fid|officeFid|prefix|suffix|override|
-|1010|FID|1010|1010-44|testprefix|||
+|1165|FID|1165|1165-14|testprefix|||
 
 Scenario: User updates the prefix and suffix values and enters blank spaces in the Override field. Verifies that prefix and suffix values are saved and Override value is null in Zeus document.
+Verify the max length for prefix, Suffix and override fiels as 200 characters.
+Meta:@rest123
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -229,7 +231,11 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office update link
-And the user enters the office prefix value as <prefix>
+When the user gets the document with get id for offices with the <officeFid> from the database
+Then the user should see the maxlength of prefix field set to 200
+And the user should see the maxlength of suffix field set to 200
+And the user should see the maxlength of override field set to 200
+When the user enters the office prefix value as <prefix>
 And the user enters the office suffix value as <suffix>
 And the user enters the office override value as <override>
 And the user clicks on the save button
@@ -238,7 +244,8 @@ When the user clicks on the confirm button
 Then the user should verify the prefix,suffix and override values for fid <officeFid> as:
 |prefix|suffix|override|
 |testprefix|testsuffix||
+And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|prefix|suffix|override|
-|1010|FID|1010|1010-44|testprefix|testsuffix|     |
+|1165|FID|1165|1165-14|testprefix|testsuffix|     |

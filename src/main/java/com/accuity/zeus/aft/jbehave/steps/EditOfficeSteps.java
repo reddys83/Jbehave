@@ -42,19 +42,19 @@ public class EditOfficeSteps extends AbstractSteps{
     public void verifyUpdatedOfficeOpenedDate(@Named("fid") String fid,@Named("day") String day,@Named("month") String month,@Named("year") String year){getEditOfficePage().verifyUpdatedOfficeOpenedDate(fid,day,month,year);}
 
     @When("the user enters the office prefix value as <prefix>")
-    public void enterOfficePrefixValue(String prefix)
+    public void enterOfficePrefixValue(@Named("prefix") String prefix)
     {
         getEditOfficePage().enterValueinTextField("office_basicInfo_edit_prefix_xpath",prefix);
     }
     @When("the user enters the office suffix value as <suffix>")
-    public void enterOfficeSuffixValue(String prefix)
+    public void enterOfficeSuffixValue(@Named("suffix") String suffix)
     {
-        getEditOfficePage().enterValueinTextField("office_basicInfo_edit_suffix_xpath",prefix);
+        getEditOfficePage().enterValueinTextField("office_basicInfo_edit_suffix_xpath",suffix);
     }
     @When("the user enters the office override value as <override>")
-    public void enterOfficeOverrideValue(String prefix)
+    public void enterOfficeOverrideValue(@Named("override") String override)
     {
-        getEditOfficePage().enterValueinTextField("office_basicInfo_edit_override_xpath",prefix);
+        getEditOfficePage().enterValueinTextField("office_basicInfo_edit_override_xpath",override);
     }
     @Then("the user should verify the prefix,suffix and override values for fid <officeFid> as:$values")
     public void verifyPrefixSuffixAndOverrideValuesFromZeus(@Named("officeFid") String officeFid, @Named("values")ExamplesTable values)
@@ -62,6 +62,18 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyPrefixSuffixAndOverrideValuesFromZeus(officeFid,values);
     }
 
+    @Then("the user should see the maxlength of prefix field set to $maxlength")
+    public void verifyPrefixMaxLength(String maxlength){
+        getEditOfficePage().verifyMaxLength("office_basicInfo_edit_prefix_xpath",maxlength);
+    }
+    @Then("the user should see the maxlength of suffix field set to $maxlength")
+    public void verifySuffixMaxLength(String maxlength){
+        getEditOfficePage().verifyMaxLength("office_basicInfo_edit_suffix_xpath",maxlength);
+    }
+    @Then("the user should see the maxlength of override field set to $maxlength")
+    public void verifyOverrideMaxLength(String maxlength){
+        getEditOfficePage().verifyMaxLength("office_basicInfo_edit_override_xpath",maxlength);
+    }
 }
 
 

@@ -27,15 +27,18 @@ let $office := (/office[@fid=$fid][@source=$source])
 
 
 let $officeOpenedDate := local:getDateAsPerAccuracy($office/summary/dates/opened)
-let $officePrefixValue := $office/summary/names/officeTitlePrefix
-let $officeSuffixValue := $office/summary/names/officeTitleSuffix
-let $officeOverrideValue := $office/summary/names/officeTitleOverride
+let $officePrefixValue := $office/summary/names/officeTitlePrefix/text()
+let $officeSuffixValue := if (fn:exists($office/summary/names/officeTitleSuffix))
+then $office/summary/names/officeTitleSuffix/text()
+else ""
+let $officeOverrideValue := if(fn:exists($office/summary/names/officeTitleOverride))
+then $office/summary/names/officeTitleOverride/text()
+else ""
 
 return <office>
     <officeOpenedDate>{$officeOpenedDate}</officeOpenedDate>
-    <officePrefixValue>$officePrefixValue</officePrefixValue>
-    <officeSuffixValue>$officeSuffixValue</officeSuffixValue>
-    <officeOverrideValue>$officeOverrideValue</officeOverrideValue>
+    <officePrefixValue>{$officePrefixValue}</officePrefixValue>
+    <officeSuffixValue>{$officeSuffixValue}</officeSuffixValue>
+    <officeOverrideValue>{$officeOverrideValue}</officeOverrideValue>
     </office>
 
-    (:return $office:)
