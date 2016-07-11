@@ -2048,8 +2048,7 @@ public class EditCityPage extends AbstractPage {
 	public void verifyRegionTypeNotPresentInUI(String regionType) {
 		try {
 			// appending the name type to the xpath to retrieve corresponding row in view mode
-			WebElement newNameTypeElement = getDriver().findElement(By.xpath("//*[@id='cityRegions']//tr[td='" + regionType + "']"));
-			assertTrue(newNameTypeElement == null);
+			getDriver().findElement(By.xpath("//*[@id='cityRegions']//tr[td='" + regionType + "']"));
 		} catch(Exception ex) {
 			assertTrue("Region Type is not present in the UI", true);
 		}
