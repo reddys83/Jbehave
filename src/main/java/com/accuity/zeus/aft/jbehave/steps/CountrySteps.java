@@ -1140,4 +1140,25 @@ public class CountrySteps extends AbstractSteps{
         getCountryPage().verifyDisabledGoButtonStatus();
     }
 
+    @When("the user deletes the existing banking hours rows")
+    public void deleteAllBankingHours() {
+        getCountryPage().deleteAllBankingHours();
+    }
+
+    @Then("the user should not see the banking hours rows")
+    public void verifyNoBankingHoursRows() {
+        getCountryPage().verifyNoBankingHoursRows();
+    }
+    @When("the user selects credit rating agency as <agency> in the country page")
+    public void selectCreditRatingAgency(@Named("agency") String agency){
+        getCountryPage().selectCreditRatingAgency(agency);
+    }
+    @When("the user selects credit rating type as <type> in the country page")
+    public void selectCreditRatingType(@Named("type") String type){
+        getCountryPage().selectCreditRatingType(type);
+    }
+    @When("the user enters credit rating value as <value> in the country page")
+    public void enterCreditRatingValue(@Named("value") String value){
+        getCountryPage().enterCreditRatingValue(value);
+    }
 }

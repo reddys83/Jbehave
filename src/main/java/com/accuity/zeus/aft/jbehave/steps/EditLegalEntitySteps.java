@@ -3,7 +3,6 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.jbehave.steps.AbstractSteps;
-import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
@@ -544,8 +543,8 @@ public class EditLegalEntitySteps extends AbstractSteps{
     }
 
     @Then("the user should see the edits to legal entity board meeting for fid <fid> in zeus document")
-    public void verifyLegalEntityBoardMeetingInZeusDocument(@Named("fid") String fid) {
-        getEditLegalEntityPage().verifyLegalEntityBoardMeetingInZeus(fid);
+    public void verifyLegalEntityBoardMeetingInZeusDocument(@Named("fid") String fid,@Named("monthNumber") String monthNumber) {
+        getEditLegalEntityPage().verifyLegalEntityBoardMeetingInZeus(fid,monthNumber);
     }
 
     @Then("the user should see the edits to legal entity personnel for fid <fid> in zeus document")

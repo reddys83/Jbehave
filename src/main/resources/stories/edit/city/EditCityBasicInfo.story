@@ -1544,3 +1544,4 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|city|country2|area2|Subarea|
 |Ecuador|Carchi|Mira|India|Tamil Nadu|No Area|
+
