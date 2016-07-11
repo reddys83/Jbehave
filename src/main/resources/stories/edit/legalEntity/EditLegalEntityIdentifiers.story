@@ -7,9 +7,8 @@ So that I can achieve a business goal
 JIRA ID - ZEUS-914 - User can edit Legal Entity's Identifiers
 
 Scenario: For existing rows verify Legal Entity's identifiers Type and Status dropdown values are from lookup THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY and STATUS respectively in the same order as taxonomy
-a) Verify for an existing Legal Entity's identifiers row, the Legal Entity's identifier Type values are from THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY
+a) Verify for an existing Legal Entity's identifiers row, the Legal Entity's ientifier Type values are from THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY
 b) Verify for an existing Legal Entity's identifiers row, the Legal Entity's identifier Status values are from STATUS
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area

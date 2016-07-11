@@ -826,6 +826,11 @@ public class DataPage extends AbstractPage {
 
     public void clickOnCityRegionsInNavigationBar() {
         attemptClick(city_region_link_id);
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void clickOnCityRelatedPeople() {
@@ -938,6 +943,7 @@ public class DataPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        waitForElementToAppear(basic_info_xpath);
     }
 
     public void verifyClickedAreaPage(String countryDropDown, String areaDropDown, String subAreaDropDown) {
@@ -1071,7 +1077,7 @@ public class DataPage extends AbstractPage {
     public void revertChangesToDocument() {
 
         int response = restClient.putDocumentByID(endpointWithID, heraApi, responseEntity.getBody().toString());
-        assertTrue(response == 200);
+        assertTrue(response == 200||response == 202);
     }
 
     public void clickOnCancelYesButton() {

@@ -92,15 +92,6 @@ public class AdminPage extends AbstractPage{
         assertEquals("No results match \"" + taxonomySearchString + "\"", getDriver().findElement(no_results_match_xpath).getText());
     }
 
-    public void verifyNoDuplicatesInList() {
-        Utils utils = new Utils();
-        List<String> retTaxonomiesListVal = new ArrayList<>();
-        for (Iterator<WebElement> it = getDriver().findElements(taxonomies_listbox_xpath).iterator(); it.hasNext();){
-            retTaxonomiesListVal.add(it.next().getText());
-        }
-        assertTrue(utils.findDuplicates(retTaxonomiesListVal).size() == 0);
-    }
-
     public void enterTaxonomyInTheTypeAheadBox(String taxonomy) {
         /*getDriver().findElement(taxonomy_input_xpath).sendKeys(taxonomy);
         getDriver().findElement(taxonomy_input_xpath).sendKeys(Keys.RETURN);*/
