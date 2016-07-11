@@ -132,7 +132,6 @@ Examples:
 |1038|FID|1038|
 
 Scenario: Navigate through search results and verify pagination
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -196,7 +195,7 @@ Then the user should see the office location summaries for fid <fid> from truste
 
 Examples:
 |entity|searchBy|fid|
-|26065|FID|26065|
+|1350|FID|1350|
 
 
 Scenario: Verify no Office location summary on Office Search Results page

@@ -16,7 +16,6 @@ And the user clicks on the taxonomies tab in the data area
 Then the user should be able to see text choose a taxonomy in black color
 When the user clicks on the choose a taxonomy option
 Then the user should see the list of all existing taxonomies by name
-And the list should not have any duplicates
 
 Scenario: Filter for taxonomy by name
 Given a user is on the search page
