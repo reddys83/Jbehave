@@ -1144,38 +1144,17 @@ public class EditCitySteps extends AbstractSteps {
 	@Then("the user checks whether this subarea1 <Subarea> are not reselectable")
 	public void verifySubAreaIsNotReselectable(@Named("Subarea") String Subarea1) {
 		getEditCityPage().verifySubAreaIsNotReselectable(Subarea1);
+	}	
+
+	@Then("verify $source document whether the city is updated with newly added SubArea <Subarea>")
+	public void verifyZeusDBIsUpdatedWithNewValue(@Named("source") String source, @Named("city") String city,
+			@Named("country2") String country2, @Named("area2") String area2, @Named("Subarea") String subarea) {		 
+		getEditCityPage().verifySubAreaValue(country2, area2, city, "subArea", source, subarea);
 	}
 
-	@Then("user selects Subarea2 <Subarea2> in the subarea multiselect dropdown")
-	public void userSelectsSubarea2(@Named("Subarea2") String Subarea2) throws InterruptedException {
-		getEditCityPage().userSelectsSubarea(Subarea2);
-	}
-
-	@Then("the user checks whether this subarea <Subarea2> are not reselectable")
-	public void verifySubArea2IsNotReselectable(@Named("Subarea2") String Subarea2) {
-		getEditCityPage().verifySubAreaIsNotReselectable(Subarea2);
-	}
-
-	@Then("verify $source document whether the city is updated with newly added SubArea <Subarea>, SubArea <Subarea2>")
-	public void verifyZeusDBIsNotHavingAreaValue(@Named("source") String source, @Named("city") String city,
-			@Named("country2") String country2, @Named("area2") String area2, @Named("Subarea") String subarea,
-			@Named("Subarea2") String subarea2) throws InterruptedException {
-		setEditCityPage(getDataPage().createEditCityPage());
-		List<String> citySubAreaListInDB = getEditCityPage().getListFromDB(country2, area2, city, source, "subArea");
-		List<String> citySubAreaListInUI = new ArrayList<String>();
-		citySubAreaListInUI.add(subarea);
-		citySubAreaListInUI.add(subarea2);
-		getEditCityPage().verifySubAreaValue(citySubAreaListInUI, citySubAreaListInDB);
-
-	}
-
-	@Then("verify UI whether city is updated with newly added SubArea <Subarea>, SubArea <Subarea2>")
-	public void verifyCityIsUpdatedWithSubAreaInUI(@Named("Subarea") String subarea,
-			@Named("Subarea2") String subarea2) {
-		List<String> citySubAreaListInUI = new ArrayList<String>();
-		citySubAreaListInUI.add(subarea);
-		citySubAreaListInUI.add(subarea2);
-		getEditCityPage().verifySubAreaIsUpdatedInUI(citySubAreaListInUI);
+	@Then("verify UI whether city is updated with newly added SubArea <Subarea>")
+	public void verifyCityIsUpdatedWithSubAreaInUI(@Named("Subarea") String subarea) {	
+		getEditCityPage().verifySubAreaIsUpdatedInUI(subarea);
 	}
 
 	@Then("the user checks whether the header dropdown updates with <country2>, <area2>, <city>")
@@ -1202,13 +1181,14 @@ public class EditCitySteps extends AbstractSteps {
 
 	}
 	
-	@Then("verify $source document whether the city is not updated with newly added SubArea <subarea>")
-	public void verifyZeusDBIsNotHavingAreaValue(@Named("source") String source, @Named("city") String city,
-			@Named("country2") String country2, @Named("area2") String area2, @Named("Subarea") String subarea)
+	@Then("verify $source document whether the city is not updated with newly added SubArea")
+	public void verifyZeusDBIsNull(@Named("source") String source, @Named("city") String city,
+			@Named("country2") String country2, @Named("area2") String area2)
 			throws InterruptedException {
-		getEditCityPage().verifyCityInfoFromZeusDB(country2, area2, city, "subArea", source, subarea);
+		getEditCityPage().verifyZeusDBIsEmpty(country2, area2, city, "subArea", source);
 
 	}
+
 	
 	@Then("user verify the city is not updated with newly added subarea(null)")
 	public void verfySubAreaIsNullInUI(@Named("city") String city) throws InterruptedException {

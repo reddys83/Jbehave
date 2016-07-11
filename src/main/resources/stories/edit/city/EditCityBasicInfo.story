@@ -1376,8 +1376,8 @@ Examples:
 |Belgium|Limburg|Bree|
 
 
-Scenario: User views the city basic page,selects the update button and verify the country, area, subarea list are in Alphabetical order
 
+Scenario: User views the city basic page,selects the update button and verify the country, area, subarea list are in Alphabetical order
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -1389,14 +1389,15 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
+When user changes the <country2> in the country drop downfield of city basic page
 Then the user should see all the list of countries in city page are in Alphabetical order
 Then user should see the list of Area options in city page are in Alphabetical order
+Then user changes the area <area2> in the area dropdown field in city basic page
 Then user should see the list of Sub area options in city page are in Alphabetical order
 
-
 Examples:
-|country|area|city|
-|Ecuador|Carchi|Mira|
+|country|area|city|country2|area2|
+|USA|California|Alamo|India|Tamil Nadu|
 
 
 Scenario: User views the city basic page,changes the country and area 
@@ -1427,16 +1428,15 @@ Then user selects No Area in area dropdown field in city basic page
 When the user clicks on the choose a subarea option of city basic page
 Then the user should verfiy that the 'No Area' option is only option exist in Subarea dropdown option
 
-
 Examples:
 |country|area|city|country2|area2|
-|Ecuador|Carchi|Mira|India|Tamil Nadu|
+|USA|California|Alamo|USA|Arizona|
 
 
 Scenario: User updates the city basic page info by changing the country,area,subarea options
 1- Verify whether the selected sub area is not reselectable for another sub area.
 
-Meta: @EditBasic
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -1455,26 +1455,23 @@ When the user clicks on the choose a subarea option of city basic page
 When the user clears subarea options in city basic page
 Then user selects Subarea <Subarea> in the subarea multiselect dropdown
 Then the user checks whether this subarea1 <Subarea> are not reselectable
-Then user selects Subarea2 <Subarea2> in the subarea multiselect dropdown
-Then the user checks whether this subarea <Subarea2> are not reselectable
 When the user clicks on the save button in city page
 When the user clicks on the confirm button in city page
 Then the user should see the successful update message at top of the page
-Then verify zeus document whether the city is updated with newly added SubArea <Subarea>, SubArea <Subarea2>
-Then verify UI whether city is updated with newly added SubArea <Subarea>, SubArea <Subarea2>
+Then verify zeus document whether the city is updated with newly added SubArea <Subarea>
+When the user clicks on the city update link
+Then verify UI whether city is updated with newly added SubArea <Subarea>
 Then the user reverts the changes to the document
-
 
 
 Examples:
 |country|area|city|country2|area2|Subarea|
-|USA|California|Alamo|UK|Scotland|Angus|
+|USA|California|Alamo|USA|Arizona|Gila|
 
 
 Scenario: User is updating a City's Basic Info and has set values for each of 'Country', 'Area' and 'Sub Area
 1 - Verify city is mapped under newly added country2 and area2
 2 - Verify the Zesu DB whether the city is mapped under newly added country2 and area2
-3 - Verify city is mapped under 'no area' if the area selected as 'no area'
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -1509,15 +1506,12 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|country2|area2|Subarea|
-|Ecuador|Carchi|Mira|India|Tamil Nadu|Chennai|
-|Ecuador|Carchi|Mira|India|No Area|No Area|
-
-
+|USA|California|Alamo|USA|Arizona|Gila|
 
 Scenario: User is updating a City's Basic Info and has set values for each of 'Country', 'Area' and 'Sub Area as 'No Area'
 1 - Verify whether the city is not updated to newly added sub area(null)
 2 - Verify whether the zeus DB is having Sub area value as null
-          
+        
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -1538,10 +1532,10 @@ When the user clicks on the save button in city page
 When the user clicks on the confirm button in city page
 Then the user should see the successful update message at top of the page
 Then user verify the city is not updated with newly added subarea(null)
-Then verify zeus document whether the city is not updated with newly added SubArea <subarea>
+Then verify zeus document whether the city is not updated with newly added SubArea
 Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|country2|area2|Subarea|
-|Ecuador|Carchi|Mira|India|Tamil Nadu|No Area|
+|USA|California|Alamo|USA|Arizona|No Area|
 
