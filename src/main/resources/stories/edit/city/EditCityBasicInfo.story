@@ -31,7 +31,7 @@ Then the user should see the status values from City Status dropdown
 
 Examples:
 |country|area|city|
-|USA|Georgia|Adel|
+|USA|Georgia|Adrian|
 
 Scenario: Verify that the City Status drop-down list should highlight the values that contain characters input by user
 Given a user is on the search page
@@ -56,10 +56,9 @@ Then the user should see the selected status in the City Status drop-down as Pen
 
 Examples:
 |country|area|city|
-|USA|Georgia|Adel|
+|USA|Georgia|Adrian|
 
 Scenario: User will see summary of changes made in confirmation modal when update the City status
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -87,7 +86,7 @@ Then the user should return to edit city page mode
 
 Examples:
 |country|area|city|status|
-|USA|Georgia|Adel|active|
+|USA|Georgia|Adrian|active|
 
 
 Scenario: Edit and Save City's Status value in the City Basic Info page
@@ -118,9 +117,9 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|status|
-|USA|Georgia|Adel|active|
-|USA|Georgia|Adel|pending|
-|USA|Georgia|Adel|inactive|
+|USA|Georgia|Adrian|active|
+|USA|Georgia|Adrian|pending|
+|USA|Georgia|Adrian|inactive|
 
 
 Scenario: No changes should happen to City's Status value in the City Basic Info page when user selects save button with out doing any changes 
@@ -145,7 +144,7 @@ Then the user should see the city <status> value as in zeus document
 
 Examples:
 |country|area|city|status|ConfirmationSummary|
-|USA|Georgia|Adel|active|Summary|
+|USA|Georgia|Adrian|active|Summary|
 
 Scenario: The user can edit the value in the Add Info field and save it and see it on the front end(Front End Validation)
 
@@ -174,7 +173,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|addInfoText|
-|USA|Georgia|Adel|Sample text|
+|USA|Georgia|Adrian|Sample text|
 
 Scenario: To update the City's 'Basic Info' by entering a value for 'Add Info' that is different from the current value(Back End validation)
 Given a user is on the search page
@@ -197,7 +196,7 @@ Then the user should see the city addinfo value <addInfoText> as in zeus documen
 
 Examples:
 |country|area|city|addInfoText|
-|USA|Georgia|Adel|This is a different text|
+|USA|Georgia|Adrian|This is a different text|
 
 Scenario: To view that there is no change in value when the user has entered a value for 'Add Info' that is no different to the current value(Front End Validation)
 
@@ -218,7 +217,7 @@ Then the user should see no summary changes in the city save confirmation modal
 
 Examples:
 |country|area|city|addInfoText|Summary|
-|USA|Georgia|Adel|This is a different text|Basic Info|
+|USA|Georgia|Adrian|This is a different text|Basic Info|
 
 Scenario: To view whether the text entered in the 'Add Info' field is not beyond 500 unicode characters after saving the page
 Given a user is on the search page
@@ -242,7 +241,7 @@ Then the user should be able to verify the maximum values are entered in the add
 
 Examples:
 |country|area|city|
-|USA|Georgia|Adel|
+|USA|Georgia|Adrian|
 
 
 Scenario: User can edit country identifiers - Verify country Identifier types are same as from lookup THIRD_PARTY_IDENTIFIER_GEO
@@ -510,8 +509,8 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|value|
-|USA|Georgia|Adel|12345|
-|USA|Georgia|Adel|24513450000000000000000000000000000000000000000000|
+|USA|Georgia|Adrian|12345|
+|USA|Georgia|Adrian|24513450000000000000000000000000000000000000000000|
 
 Scenario: User is updating a City's Basic Info and has entered a same value for 'Population', verifies the confirmation dialog is not having summary info and Zeus Doc having same value
 Given a user is on the search page
@@ -539,7 +538,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|value|ConfirmationSummary|
-|USA|Georgia|Adel|123457|Summary|
+|USA|Georgia|Adrian|123457|Summary|
 
 Scenario: 	User is updating a City's Basic Info and has entered a string value value for 'Population', then error message should be displayed.(Negative Validation)
 Given a user is on the search page
@@ -560,7 +559,7 @@ Then the user should see maximum length of population is limited to 50
 
 Examples:
 |country|area|city|value|
-|USA|Georgia|Adel|stringvalue|
+|USA|Georgia|Adrian|stringvalue|
 
 Scenario: 
 User is updating a City's Basic Info - 
@@ -602,7 +601,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|endDay2|endMonth2|endYear2|
-|USA|Georgia|Adel|1|Jun|2016|5|Jun|2016|10|Jun|2016|
+|USA|Georgia|Adrian|1|Jun|2016|5|Jun|2016|10|Jun|2016|
 
 Scenario: User is updating a City's Basic Info - The user has entered all blank values for 'End Date'
 Given a user is on the search page
@@ -634,7 +633,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|endDate|
-|USA|Georgia|Adel|1|Jun|2016|||||
+|USA|Georgia|Adrian|1|Jun|2016|||||
 
 
 Scenario: User is entering invalid inputs - 
@@ -665,10 +664,10 @@ Then the user verifies whether error message Enter a year, month/year or day/mon
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|
-|USA|Georgia|Adel|1|Jun|2016|6||2016|
-|USA|Georgia|Adel|1|Jun|2016|6|Jun||
-|USA|Georgia|Adel|1|Jun|2016||Jun||
-|USA|Georgia|Adel|1|Jun|2016|6|||
+|USA|Georgia|Adrian|1|Jun|2016|6||2016|
+|USA|Georgia|Adrian|1|Jun|2016|6|Jun||
+|USA|Georgia|Adrian|1|Jun|2016||Jun||
+|USA|Georgia|Adrian|1|Jun|2016|6|||
 
 Scenario: User is entering invalid inputs - The user enters the day with alphabets (not in Gregorian calendar format)
 Given a user is on the search page
@@ -693,7 +692,7 @@ Then the user verifies whether error message Invalid Date is displayed for End D
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|
-|USA|Georgia|Adel|1|Jun|2016|6Rdseth765|Jun|2016|
+|USA|Georgia|Adrian|1|Jun|2016|6Rdseth765|Jun|2016|
 
 Scenario: User gets an error message when entering a date that is later than today 
 Given a user is on the search page
@@ -716,7 +715,7 @@ Then the user verifies whether error message Must be no later than today. is dis
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|
-|USA|Georgia|Adel|1|Jun|2016|
+|USA|Georgia|Adrian|1|Jun|2016|
 
 Scenario: User is updating a City's Basic Info and has entered an 'End Date' that is no different to the current value
 Given a user is on the search page
@@ -753,7 +752,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|Summary|
-|USA|Georgia|Adel|1|Jun|2016|5|Jun|2016|Basic Info| 
+|USA|Georgia|Adrian|1|Jun|2016|5|Jun|2016|Basic Info| 
 
 Scenario: User is updating a City's Basic Info and has entered an 'End Date' that is before the 'Began Date'
 Given a user is on the search page
@@ -778,7 +777,7 @@ Then the user verifies whether error message Must be after Began date. is displa
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|Summary|
-|USA|Alabama|Alexander City|1|Jun|2016|1|Jun|2015|Basic Info|
+|USA|Alabama|Altoona|1|Jun|2016|1|Jun|2015|Basic Info|
 
 Scenario: User enters End Date values when the Began Date values are empty
 Given a user is on the search page
@@ -804,7 +803,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|endDay|endMonth|endYear|
-|USA|Alabama|Alexander City|6|Jun|2010|
+|USA|Alabama|Altoona|6|Jun|2010|
 
 Scenario: User is updating  City's Basic Info  page and  entered  value for 'Use in Address' that is different from the current value
 Given a user is on the search page

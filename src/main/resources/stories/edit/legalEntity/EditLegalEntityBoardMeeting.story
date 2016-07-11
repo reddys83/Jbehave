@@ -86,6 +86,7 @@ Examples:
 |1717|FID|1717|Quarter|
 
 Scenario: Veirfy the valid inputs for legalEntity Board meeting - Bug-ZEUS-1225
+Meta:@test99
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -110,8 +111,8 @@ Then the user reverts the changes to the document
 
 
 Examples:
-|entity|searchBy|fid|summary|type|value|
-|1717|FID|1717|Stock Exchange Interim Entity Identifier|Month|Jan|
+|entity|searchBy|fid|summary|type|value|monthNumber|
+|1717|FID|1717|Stock Exchange Interim Entity Identifier|Month|Jan|1|
 
 
 Scenario: Verify the error message for summary field.

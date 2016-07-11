@@ -565,6 +565,8 @@ public class DataSteps extends AbstractSteps {
     @When("the user enters the city <city> in the type-ahead box")
     public void enterCityInTheTypeAheadBox(@Named("city") String city) {
         getDataPage().enterCityInTheTypeAheadBox(city);
+        setEditCityPage(getDataPage().createEditCityPage());
+        
     }
 
     @When("the user clicks on the city all link in the navigation bar")
@@ -755,6 +757,10 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clickOnCitySubArea(subArea);
     }
 
+    @When("the user clicks on the city replaced by link $subCity")
+    public void clickOnCityNameLink(@Named("subCity") String subCity) {
+        getDataPage().clickOnCityNameLink(subCity);
+    }
     @When("the user clicks on the city country link $country")
     public void clickOnCityCountry(@Named("country") String country) {
         getDataPage().clickOnCityCountry(country);
@@ -853,8 +859,6 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should be redirected to view mode")
     public void verifyUserRedirectedToViewMode(){getDataPage().verifyUserRedirectedViewMode();}
-
-
 
     @Given("the user loads area test data for nightly runs in database <xqueryName>")
         public void clickloadTestData(@Name("xqueryName") String xqueryName){
