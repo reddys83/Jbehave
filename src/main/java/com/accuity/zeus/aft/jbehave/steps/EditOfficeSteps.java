@@ -37,8 +37,8 @@ public class EditOfficeSteps extends AbstractSteps{
             editOfficePage = getOfficesPage().createEditOfficePage();
         }}
 
-    @Then("the user verifies office opened date from zeus document <fid> <day> <month> <year>")
-    public void verifyUpdatedOfficeOpenedDate(@Named("fid") String fid,@Named("day") String day,@Named("month") String month,@Named("year") String year){getEditOfficePage().verifyUpdatedOfficeOpenedDate(fid,day,month,year);}
+    @Then("the user verifies office opened date from $source document <officeFid> <day> <month> <year>")
+    public void verifyUpdatedOfficeOpenedDate(@Named("officeFid") String officeFid,@Named("day") String day,@Named("month") String month,@Named("year") String year,@Named("source") String source){getEditOfficePage().verifyUpdatedOfficeOpenedDate(officeFid,day,month,year,source);}
 
 
     @When("the user selects lead location value <leadLocationflag> in the basicinfo office page")
@@ -46,11 +46,21 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().selectOfficeLeadLocationFlag(leadLocationflag);
     }
 
-    @Then("the user should see leadLocation value as <leadLocationflag> for fid <fid> in $source document")
-    public void getDocumentLeadLocation(@Named("leadLocationflag") String leadLocationflag,@Named("fid") String fid,@Named("source") String source) {
-        getEditOfficePage().verifyLeadLocationValuefromDB(leadLocationflag,fid,source);
+    @Then("the user should see leadLocation value as <leadLocationflag> for fid <officeFid> in $source document")
+    public void getDocumentLeadLocation(@Named("leadLocationflag") String leadLocationflag,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyLeadLocationValuefromDB(leadLocationflag,officeFid,source);
     }
 
+
+    @When("the user selects lead location value other than default value in the basicinfo office page")
+    public void changeOfficeLeadLocationFlag() {
+        getEditOfficePage().changeOfficeLeadLocationFlag();
+    }
+
+    @Then("the user should return to edit office page mode")
+    public void verifyOfficeEditPageMode(){
+        getEditOfficePage().verifyOfficeEditPageMode();
+    }
 
 }
 

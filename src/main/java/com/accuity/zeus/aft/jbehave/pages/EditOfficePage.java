@@ -57,15 +57,15 @@ public class EditOfficePage extends AbstractPage {
     }
 
 
-    public void verifyUpdatedOfficeOpenedDate(String fid, String day, String month, String year) {
+    public void verifyUpdatedOfficeOpenedDate(String officeFid, String day, String month, String year , String source) {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         List<NameValuePair> zeusPairs = new ArrayList<>();
-        zeusPairs.add(new BasicNameValuePair("fid", fid));
-        zeusPairs.add(new BasicNameValuePair("source", "zeus"));
+        zeusPairs.add(new BasicNameValuePair("fid", officeFid));
+        zeusPairs.add(new BasicNameValuePair("source", source));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", zeusPairs);
         assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent(), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_view_xpath")).getText());
         assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent().replace(" ",""), day+month+year);
@@ -85,9 +85,9 @@ public class EditOfficePage extends AbstractPage {
 
     }
 
-    public String getLeadLocationFlagFromDB(String fid, String source) {
+    public String getLeadLocationFlagFromDB(String officeFid, String source) {
         List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
         nvPairs.add(new BasicNameValuePair("source", source));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
         try {
@@ -97,6 +97,21 @@ public class EditOfficePage extends AbstractPage {
         }
         String leadLocationDBValue = getNodeValuesByTagName(document, "leadLocation").size() == 0 ? "" : getNodeValuesByTagName(document, "leadLocation").get(0);
         return leadLocationDBValue;
+    }
+
+    public void changeOfficeLeadLocationFlag() {
+        String newleadInstitutionflag = "";
+        String selectedRadioValue = getSelectedRadioValue(OfficeIdentifiers.getObjectIdentifier("office_leadlocation_radio_options_xpath"));
+        if (selectedRadioValue.equalsIgnoreCase("true")) {
+            newleadInstitutionflag = "false";
+        } else if (selectedRadioValue.equalsIgnoreCase("false")) {
+            newleadInstitutionflag = "true";
+        }
+        selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier("office_leadlocation_radio_options_xpath"), newleadInstitutionflag);
+    }
+
+    public void verifyOfficeEditPageMode() {
+        assertTrue(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_status_xpath")).size()>0);
     }
     @Override
     public String getPageUrl() {

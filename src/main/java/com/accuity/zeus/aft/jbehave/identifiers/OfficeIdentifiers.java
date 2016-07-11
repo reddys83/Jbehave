@@ -21,6 +21,7 @@ public class OfficeIdentifiers {
         hmap.put("office_basicInfo_openedDate_year_xpath", By.xpath("//*[@id='officeBasicInfo']//input[@name='openedDate-year']"));
         hmap.put("office_basicInfo_openedDate_errorMessage_xpath",By.xpath("//*[@data-error_id='openedDateError']"));
         hmap.put("office_leadlocation_radio_options_xpath", By.xpath("//*[@id='officeBasicInfo']//input[@name='leadLocation']"));
+        hmap.put("office_basicInfo_status_xpath", By.xpath(".//*[@id='officeBasicInfo']//tr[td='inactive']"));
     }
 
     public static By getObjectIdentifier(String key) {
