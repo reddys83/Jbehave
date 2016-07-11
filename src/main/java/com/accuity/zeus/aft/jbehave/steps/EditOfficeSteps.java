@@ -40,6 +40,18 @@ public class EditOfficeSteps extends AbstractSteps{
     @Then("the user verifies office opened date from zeus document <fid> <day> <month> <year>")
     public void verifyUpdatedOfficeOpenedDate(@Named("fid") String fid,@Named("day") String day,@Named("month") String month,@Named("year") String year){getEditOfficePage().verifyUpdatedOfficeOpenedDate(fid,day,month,year);}
 
+
+    @When("the user selects lead location value <leadLocationflag> in the basicinfo office page")
+    public void selectOfficeLeadLocationFlag(@Named("leadLocationflag") String leadLocationflag){
+        getEditOfficePage().selectOfficeLeadLocationFlag(leadLocationflag);
+    }
+
+    @Then("the user should see leadLocation value as <leadLocationflag> for fid <fid> in $source document")
+    public void getDocumentLeadLocation(@Named("leadLocationflag") String leadLocationflag,@Named("fid") String fid,@Named("source") String source) {
+        getEditOfficePage().verifyLeadLocationValuefromDB(leadLocationflag,fid,source);
+    }
+
+
 }
 
 

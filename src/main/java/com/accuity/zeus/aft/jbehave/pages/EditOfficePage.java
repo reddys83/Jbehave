@@ -71,7 +71,33 @@ public class EditOfficePage extends AbstractPage {
         assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent().replace(" ",""), day+month+year);
     }
 
+    public void selectOfficeLeadLocationFlag(String leadLocationflag) {
+        selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier("office_leadlocation_radio_options_xpath"), leadLocationflag);
+    }
 
+    public void verifyLeadLocationValuefromDB(String leadLocationflag, String selectedEntity, String source) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(getLeadLocationFlagFromDB(selectedEntity, source), leadLocationflag);
+
+    }
+
+    public String getLeadLocationFlagFromDB(String fid, String source) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String leadLocationDBValue = getNodeValuesByTagName(document, "leadLocation").size() == 0 ? "" : getNodeValuesByTagName(document, "leadLocation").get(0);
+        return leadLocationDBValue;
+    }
     @Override
     public String getPageUrl() {
         return null;

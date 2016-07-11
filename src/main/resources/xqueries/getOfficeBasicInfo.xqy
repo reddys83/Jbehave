@@ -27,10 +27,14 @@ let $office := (/office[@fid="1010-44"][@source="zeus"])
 
 
 let $officeOpenedDate := local:getDateAsPerAccuracy($office/summary/dates/opened)
+let $officeClosedDate := local:getDateAsPerAccuracy($office/summary/dates/closed)
+let $LeadLocation := ($office/summary/leadLocation)
 
 
 return <office>
     <officeOpenedDate>{$officeOpenedDate}</officeOpenedDate>
+    <officeClosedDate>{$officeClosedDate}</officeClosedDate>
+   <LeadLocation>{$LeadLocation}</LeadLocation>
     </office>
 
     (:return $office:)
