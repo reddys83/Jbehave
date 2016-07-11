@@ -34,7 +34,7 @@ Then the user should see the city Agency types from look up CREDIT_RATING_TYPE i
 
 Examples:
 |country|area|city|rowNumber|
-|USA|Alabama|Alexander City|1|
+|USA|Alabama|Alexandria|1|
 
 Scenario: Update and Save existing credit ratings
 a) User selects a new value for Agency, Type, Value, Applied Date and Confirmed Date and click Save. Updated Credit rating should be saved in Zeus document
@@ -68,8 +68,8 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|agency|type|value|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|||||||1|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|1|
+|USA|Alabama|Alexandria|Standard & Poors|Long Term Rating|1234|||||||1|
+|USA|Alabama|Alexandria|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|1|
 
 
 Scenario: User has selected to update the existing credit rating row, verifies the Zeus app and DB.
@@ -111,7 +111,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|agency|type|value|agency2|type2|value2|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|Moody's|Long Term Sovereign Debt Rating|12457|15|Jan|2016|17|Jan|2016|1|
+|USA|Alabama|Alexandria|Standard & Poors|Long Term Rating|1234|Moody's|Long Term Sovereign Debt Rating|12457|15|Jan|2016|17|Jan|2016|1|
 
 Scenario: User has selected to add credit rating row and saving without entering any values, it should be saved successfully.
 Given a user is on the search page
@@ -138,7 +138,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|agency|type|value|rowNumber|
-|USA|Alabama|Alexander City||||1|
+|USA|Alabama|Alexandria||||1|
 
 Scenario: User has selected to add credit rating row and entering one of the agency dropdown and also value, error message should be thrown while saving
 
@@ -163,7 +163,7 @@ Then user should see Required error message in credit rating type field
 
 Examples:
 |country|area|city|agency|type|value|rowNumber|
-|USA|Alabama|Alexander City|Standard & Poors||789|1|
+|USA|Alabama|Alexandria|Standard & Poors||789|1|
 
 Scenario: User has selected to add credit rating row and entering credit rating type dropdown and also value, error message should thrown while saving
 Given a user is on the search page
@@ -188,7 +188,7 @@ Then user should see Required error message in credit rating agency field
 
 Examples:
 |country|area|city|agency|type|value|rowNumber|
-|USA|Alabama|Alexander City||Long Term Rating|789|1|
+|USA|Alabama|Alexandria||Long Term Rating|789|1|
 
 Scenario: User has selected to add credit rating row and entering one of the agency dropdown and also type dropdown, error message should be thrown while saving
 Given a user is on the search page
@@ -212,7 +212,7 @@ Then the user should be able to view the error message Enter up to 5 valid chara
 
 Examples:
 |country|area|city|agency|type|value|rowNumber|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating||1|
+|USA|Alabama|Alexandria|Standard & Poors|Long Term Rating||1|
 
 Scenario: Verifying error message enter a day/month/year for applied date
 1. only day
@@ -241,10 +241,10 @@ And the user should see the error message enter a day/month/year for applied dat
 
 Examples:
 |country|area|city|appliedDay|appliedMonth|appliedYear|rowNumber|
-|USA|Alabama|Alexander City|15|||1|
-|USA|Alabama|Alexander City|15|Jan||1|
-|USA|Alabama|Alexander City|15||2016|1|
-|USA|Alabama|Alexander City||Jan||1|
+|USA|Alabama|Alexandria|15|||1|
+|USA|Alabama|Alexandria|15|Jan||1|
+|USA|Alabama|Alexandria|15||2016|1|
+|USA|Alabama|Alexandria||Jan||1|
 
 
 Scenario: Verifying Verify error message enter a year, month/year or day/month/year for confirmed date
@@ -275,10 +275,10 @@ And the user should see the error message enter a day/month/year for confirmed d
 
 Examples:
 |country|area|city|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
-|USA|Alabama|Alexander City|15|||1|
-|USA|Alabama|Alexander City|15|Jan||1|
-|USA|Alabama|Alexander City|15||2016|1|
-|USA|Alabama|Alexander City||Jan||1|
+|USA|Alabama|Alexandria|15|||1|
+|USA|Alabama|Alexandria|15|Jan||1|
+|USA|Alabama|Alexandria|15||2016|1|
+|USA|Alabama|Alexandria||Jan||1|
 
 Scenario: Verify that Applied Date and Confirmed Date can not be later than today
 
@@ -303,7 +303,7 @@ Then the user should see the error text Must be no later than today. for confirm
 
 Examples:
 |country|area|city|row|
-|USA|Alabama|Alexander City|1|
+|USA|Alabama|Alexandria|1|
 
 Scenario: User updates invalid Applied date and Confirmed date
 Verifying error message displaying Invalid Date when invalid date entered
@@ -333,7 +333,7 @@ Then the user should see the error text Invalid Date for confirmed date in the c
 
 Examples:
 |country|area|city|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
-|USA|Alabama|Alexander City|15|Dec|abcd|15|Dec|abcd|1|
+|USA|Alabama|Alexandria|15|Dec|abcd|15|Dec|abcd|1|
 
 Scenario: User can edit city identifiers- Verify if User can delete credit rating by clicking on 'Yes' , then after saving it should be removed.
 Given a user is on the search page
@@ -371,7 +371,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|agency|type|value|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|1|
+|USA|Alabama|Alexandria|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|1|
 
 Scenario: User can edit city identifiers- Verify if User can delete credit rating by clicking on 'cancel', then after saving the credit rating row should not get deleted.
 
@@ -407,4 +407,4 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|agency|type|value|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|1|
+|USA|Alabama|Alexandria|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|1|

@@ -31,7 +31,7 @@ Then the user should see the status values from City Status dropdown
 
 Examples:
 |country|area|city|
-|USA|Georgia|Adel|
+|USA|Georgia|Adrian|
 
 Scenario: Verify that the City Status drop-down list should highlight the values that contain characters input by user
 Given a user is on the search page
@@ -56,10 +56,9 @@ Then the user should see the selected status in the City Status drop-down as Pen
 
 Examples:
 |country|area|city|
-|USA|Georgia|Adel|
+|USA|Georgia|Adrian|
 
 Scenario: User will see summary of changes made in confirmation modal when update the City status
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -87,7 +86,7 @@ Then the user should return to edit city page mode
 
 Examples:
 |country|area|city|status|
-|USA|Georgia|Adel|active|
+|USA|Georgia|Adrian|active|
 
 
 Scenario: Edit and Save City's Status value in the City Basic Info page
@@ -118,9 +117,9 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|status|
-|USA|Georgia|Adel|active|
-|USA|Georgia|Adel|pending|
-|USA|Georgia|Adel|inactive|
+|USA|Georgia|Adrian|active|
+|USA|Georgia|Adrian|pending|
+|USA|Georgia|Adrian|inactive|
 
 
 Scenario: No changes should happen to City's Status value in the City Basic Info page when user selects save button with out doing any changes 
@@ -145,9 +144,10 @@ Then the user should see the city <status> value as in zeus document
 
 Examples:
 |country|area|city|status|ConfirmationSummary|
-|USA|Georgia|Adel|active|Summary|
+|USA|Georgia|Adrian|active|Summary|
 
 Scenario: The user can edit the value in the Add Info field and save it and see it on the front end(Front End Validation)
+Meta:ted10
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -508,8 +508,8 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|value|
-|USA|Georgia|Adel|12345|
-|USA|Georgia|Adel|24513450000000000000000000000000000000000000000000|
+|USA|Georgia|Adrian|12345|
+|USA|Georgia|Adrian|24513450000000000000000000000000000000000000000000|
 
 Scenario: User is updating a City's Basic Info and has entered a same value for 'Population', verifies the confirmation dialog is not having summary info and Zeus Doc having same value
 Given a user is on the search page
@@ -537,7 +537,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|value|ConfirmationSummary|
-|USA|Georgia|Adel|123457|Summary|
+|USA|Georgia|Adrian|123457|Summary|
 
 Scenario: 	User is updating a City's Basic Info and has entered a string value value for 'Population', then error message should be displayed.(Negative Validation)
 Given a user is on the search page
@@ -558,7 +558,7 @@ Then the user should see maximum length of population is limited to 50
 
 Examples:
 |country|area|city|value|
-|USA|Georgia|Adel|stringvalue|
+|USA|Georgia|Adrian|stringvalue|
 
 Scenario: 
 User is updating a City's Basic Info - 

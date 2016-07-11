@@ -1123,7 +1123,7 @@ public class EditLegalEntityPage extends AbstractPage {
         assertTrue(getNodeValuesByTagName(document, "history").contains(historyValue));
     }
 
-    public void verifyLegalEntityBoardMeetingInZeus(String fid) {
+    public void verifyLegalEntityBoardMeetingInZeus(String fid,String monthNumber) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
@@ -1135,7 +1135,7 @@ public class EditLegalEntityPage extends AbstractPage {
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity BoardMeeting", nvPairs);
         assertTrue(getNodeValuesByTagName(document, "summary").get(0).contains(EditLEgalEntityBoardmeetingSummary));
         assertTrue(getNodeValuesByTagName(document, "type").contains(EditLegalEntityBoardMeetingsType));
-        assertTrue(getNodeValuesByTagName(document, "value").contains(EditLegalEntityBoardMeetingValue));
+        assertTrue(getNodeValuesByTagName(document, "value").contains(monthNumber));
     }
 
     public void verifyLegalEntityPersonnelInZeus(String fid) {
@@ -1230,10 +1230,12 @@ public class EditLegalEntityPage extends AbstractPage {
     public void clickOnIdentifierStatusDropDown(String rowIdentifier) {
         getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
     }
-    public void verifyLegalEntityIdentifierTypesListFromLookup(String rowIdentifier) {
-
+    public void
+    verifyLegalEntityIdentifierTypesListFromLookup(String rowIdentifier) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", "THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY"));
         List<String> dropdownValuesList = returnAllDropDownUnselectedValues(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity IdentifierTypes From Lookup", null);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity IdentifierTypes From Lookup", nvPairs);
         // finding the list of values from the taxonomy and subtracting the values which are selected in other dropdowns
         List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "IdentifierType"), getAlreadySelectedEntityTypes("legalEntity_Identifier_All_Types_dropdown_xpath"));
         assertEquals(dropdownValuesList, resultList);
@@ -1244,8 +1246,10 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyLegalEntityIdentifierStatusList(String rowIdentifier) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", "STATUS"));
         List<String> dropdownValuesList = returnAllListValues(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity IdentifierStatus From Lookup", null);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity IdentifierStatus From Lookup", nvPairs);
         assertEquals(dropdownValuesList, getNodeValuesByTagName(document, "IdentifierStatus"));
     }
 
