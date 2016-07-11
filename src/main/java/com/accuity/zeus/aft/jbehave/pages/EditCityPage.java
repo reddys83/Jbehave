@@ -285,7 +285,8 @@ public class EditCityPage extends AbstractPage {
 				status);
 	}
 
-	public DataPage clickOnSaveButton() {
+	public DataPage clickOnSaveButton() {	
+		
 		attemptClick(CityIdentifiers.getObjectIdentifier("save_button_id"));
 		return new DataPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
 	}
@@ -2024,6 +2025,7 @@ public class EditCityPage extends AbstractPage {
 					selectItemFromDropdownListByindex(
 							CityIdentifiers.getObjectIdentifier("country_places_country_dropDown_select_xpath"), i);
 					selectedCountryID = drpList.get(i).getAttribute("value");
+					Thread.sleep(5000);
 					break;
 				}
 			}
@@ -2050,6 +2052,7 @@ public class EditCityPage extends AbstractPage {
 
 		try {
 
+			attemptClick(CityIdentifiers.getObjectIdentifier("country_places_areas_dropdown_xpath"));
 			List<WebElement> drpList = getDriver()
 					.findElements(CityIdentifiers.getObjectIdentifier("country_places_areas_option_dropdown_xpath"));
 			for (int i = 0; i < drpList.size(); i++) {
@@ -2057,6 +2060,7 @@ public class EditCityPage extends AbstractPage {
 					selectItemFromDropdownListByindex(
 							CityIdentifiers.getObjectIdentifier("country_places_areas_dropdown_xpath"), i);
 					selectedAreaID = drpList.get(i).getAttribute("value");
+					Thread.sleep(5000);					
 					break;
 				}
 			}
@@ -2076,7 +2080,16 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public void clickOnSubAreaDropdown() throws InterruptedException {
-		attemptClick(CityIdentifiers.getObjectIdentifier("area_subarea_xpath"));
+		attemptClick(CityIdentifiers.getObjectIdentifier("area_subarea_xpath"));		
+	}
+
+	public void clearSubAreaOptions() throws InterruptedException {
+		List<WebElement> subAreaOptions = getDriver().findElements(CityIdentifiers.getObjectIdentifier("area_subarea_choosenList"));	
+		while(subAreaOptions.size()>1)
+		{			
+			getDriver().findElement(CityIdentifiers.getObjectIdentifier("area_subareas_typeahead_xpath")).sendKeys(Keys.BACK_SPACE);
+			subAreaOptions = getDriver().findElements(CityIdentifiers.getObjectIdentifier("area_subarea_choosenList"));
+		}
 	}
 
 	public void verifyNoAreaOptionOnlyExistInSubArea() {
@@ -2094,7 +2107,7 @@ public class EditCityPage extends AbstractPage {
 				.sendKeys(Keys.RETURN);
 
 	}
-
+	
 	public void verifySubAreaIsNotReselectable(String Subarea) {
 
 		List<WebElement> subAreaChoices = getDriver()

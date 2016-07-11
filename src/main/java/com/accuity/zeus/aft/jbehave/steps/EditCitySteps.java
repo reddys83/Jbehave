@@ -119,6 +119,7 @@ public class EditCitySteps extends AbstractSteps {
 
 	@When("the user clicks on the save button in city page")
 	public void clickOnSaveButton() {
+		
 		getEditCityPage().clickOnSaveButton();
 	}
 
@@ -1124,6 +1125,11 @@ public class EditCitySteps extends AbstractSteps {
 	public void clicksOnSubAreaDropdown() throws InterruptedException {
 		getEditCityPage().clickOnSubAreaDropdown();
 	}
+	
+	@When("the user clears subarea options in city basic page")
+	public void clearSubAreaDropdown() throws InterruptedException {
+		getEditCityPage().clearSubAreaOptions();
+	}
 
 	@Then("the user should verfiy that the 'No Area' option is only option exist in Subarea dropdown option")
 	public void verifyNoAreaIsOnlyOptionInSubarea() {
@@ -1135,8 +1141,8 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().userSelectsSubarea(Subarea);
 	}
 
-	@Then("the user checks whether this subarea1 <Subarea1> are not reselectable")
-	public void verifySubAreaIsNotReselectable(@Named("Subarea1") String Subarea1) {
+	@Then("the user checks whether this subarea1 <Subarea> are not reselectable")
+	public void verifySubAreaIsNotReselectable(@Named("Subarea") String Subarea1) {
 		getEditCityPage().verifySubAreaIsNotReselectable(Subarea1);
 	}
 
@@ -1154,6 +1160,7 @@ public class EditCitySteps extends AbstractSteps {
 	public void verifyZeusDBIsNotHavingAreaValue(@Named("source") String source, @Named("city") String city,
 			@Named("country2") String country2, @Named("area2") String area2, @Named("Subarea") String subarea,
 			@Named("Subarea2") String subarea2) throws InterruptedException {
+		setEditCityPage(getDataPage().createEditCityPage());
 		List<String> citySubAreaListInDB = getEditCityPage().getListFromDB(country2, area2, city, source, "subArea");
 		List<String> citySubAreaListInUI = new ArrayList<String>();
 		citySubAreaListInUI.add(subarea);

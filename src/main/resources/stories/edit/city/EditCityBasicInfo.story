@@ -13,7 +13,6 @@ JIRA ID - ZEUS-964 - User can edit City's END Date
 JIRA ID - ZEUS-980 - User can edit City's Use In Address Flag
 JIRA ID - ZEUS-963 - User can edit City's Began Date
 JIRA ID - ZEUS-970 - User can edit City's Names
-JIRA ID - ZEUS-966 - User can edit City's Country, area and sub area
 
 Scenario: Verify City Status dropdown values from lookup Status
 Given a user is on the search page
@@ -32,7 +31,7 @@ Then the user should see the status values from City Status dropdown
 
 Examples:
 |country|area|city|
-|USA|Georgia|Adel|
+|USA|Georgia|Adrian|
 
 Scenario: Verify that the City Status drop-down list should highlight the values that contain characters input by user
 Given a user is on the search page
@@ -57,10 +56,9 @@ Then the user should see the selected status in the City Status drop-down as Pen
 
 Examples:
 |country|area|city|
-|USA|Georgia|Adel|
+|USA|Georgia|Adrian|
 
 Scenario: User will see summary of changes made in confirmation modal when update the City status
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -88,7 +86,7 @@ Then the user should return to edit city page mode
 
 Examples:
 |country|area|city|status|
-|USA|Georgia|Adel|active|
+|USA|Georgia|Adrian|active|
 
 
 Scenario: Edit and Save City's Status value in the City Basic Info page
@@ -119,9 +117,9 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|status|
-|USA|Georgia|Adel|active|
-|USA|Georgia|Adel|pending|
-|USA|Georgia|Adel|inactive|
+|USA|Georgia|Adrian|active|
+|USA|Georgia|Adrian|pending|
+|USA|Georgia|Adrian|inactive|
 
 
 Scenario: No changes should happen to City's Status value in the City Basic Info page when user selects save button with out doing any changes 
@@ -146,9 +144,10 @@ Then the user should see the city <status> value as in zeus document
 
 Examples:
 |country|area|city|status|ConfirmationSummary|
-|USA|Georgia|Adel|active|Summary|
+|USA|Georgia|Adrian|active|Summary|
 
 Scenario: The user can edit the value in the Add Info field and save it and see it on the front end(Front End Validation)
+Meta:ted10
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -509,8 +508,8 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|value|
-|USA|Georgia|Adel|12345|
-|USA|Georgia|Adel|24513450000000000000000000000000000000000000000000|
+|USA|Georgia|Adrian|12345|
+|USA|Georgia|Adrian|24513450000000000000000000000000000000000000000000|
 
 Scenario: User is updating a City's Basic Info and has entered a same value for 'Population', verifies the confirmation dialog is not having summary info and Zeus Doc having same value
 Given a user is on the search page
@@ -538,7 +537,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|value|ConfirmationSummary|
-|USA|Georgia|Adel|123457|Summary|
+|USA|Georgia|Adrian|123457|Summary|
 
 Scenario: 	User is updating a City's Basic Info and has entered a string value value for 'Population', then error message should be displayed.(Negative Validation)
 Given a user is on the search page
@@ -559,7 +558,7 @@ Then the user should see maximum length of population is limited to 50
 
 Examples:
 |country|area|city|value|
-|USA|Georgia|Adel|stringvalue|
+|USA|Georgia|Adrian|stringvalue|
 
 Scenario: 
 User is updating a City's Basic Info - 
@@ -1376,6 +1375,7 @@ Examples:
 |country|area|city|
 |Belgium|Limburg|Bree|
 
+
 Scenario: User views the city basic page,selects the update button and verify the country, area, subarea list are in Alphabetical order
 
 Given a user is on the search page
@@ -1436,7 +1436,7 @@ Examples:
 Scenario: User updates the city basic page info by changing the country,area,subarea options
 1- Verify whether the selected sub area is not reselectable for another sub area.
 
-
+Meta: @EditBasic
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -1448,11 +1448,13 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
 When user changes the <country2> in the country drop downfield of city basic page
 Then user changes the area <area2> in the area dropdown field in city basic page
 When the user clicks on the choose a subarea option of city basic page
+When the user clears subarea options in city basic page
 Then user selects Subarea <Subarea> in the subarea multiselect dropdown
-Then the user checks whether this subarea1 <Subarea1> are not reselectable
+Then the user checks whether this subarea1 <Subarea> are not reselectable
 Then user selects Subarea2 <Subarea2> in the subarea multiselect dropdown
 Then the user checks whether this subarea <Subarea2> are not reselectable
 When the user clicks on the save button in city page
@@ -1460,12 +1462,14 @@ When the user clicks on the confirm button in city page
 Then the user should see the successful update message at top of the page
 Then verify zeus document whether the city is updated with newly added SubArea <Subarea>, SubArea <Subarea2>
 Then verify UI whether city is updated with newly added SubArea <Subarea>, SubArea <Subarea2>
+Then the user reverts the changes to the document
 
 
 
 Examples:
-|country|area|city|country2|area2|Subarea|Subarea2|
-|Ecuador|Carchi|Mira|India|Tamil Nadu|Chennai|Coimbatore|
+|country|area|city|country2|area2|Subarea|
+|USA|California|Alamo|UK|Scotland|Angus|
+
 
 Scenario: User is updating a City's Basic Info and has set values for each of 'Country', 'Area' and 'Sub Area
 1 - Verify city is mapped under newly added country2 and area2
@@ -1493,13 +1497,13 @@ When the user clicks on the confirm button in city page
 Then the user should see the successful update message at top of the page
 Then the user checks whether the header dropdown updates with <country2>, <area2>, <city>
 Then the user checks whether the Address bar url is updated  with <country2>, <area2>
+Then verify zeus document whether <city> is mapped to newly added <country2> and <area2>
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the choose a city option
 Then user verify the city dropdown does not have city <city> value mapped to old country and area
-Then verify zeus document whether <city> is mapped to newly added <country2> and <area2>
 Then the user reverts the changes to the document
 
 

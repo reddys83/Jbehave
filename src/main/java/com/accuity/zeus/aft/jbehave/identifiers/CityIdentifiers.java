@@ -139,7 +139,8 @@ public class CityIdentifiers {
         hmap.put("country_places_areas_option_dropdown_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Area']//select/option"));       
         hmap.put("city_area_dropdown_xpath", By.xpath("//select[@id='area']/option"));     
         hmap.put("area_subarea_xpath", By.id("subArea_chosen"));
-        hmap.put("area_subarea_list_xpath", By.xpath("//*[@class='chosen-results']/li"));    
+        hmap.put("area_subarea_list_xpath", By.xpath("//*[@class='chosen-results']/li"));  
+        hmap.put("area_subarea_choosenList", By.xpath(".//*[@class='chosen-choices']//li"));    
         hmap.put("area_subareas_typeahead_xpath", By.xpath(".//*[@class='chosen-choices']//input"));
         hmap.put("subareas_choices_xpath", By.xpath("//*[@id='subArea_chosen']//li[@class='search-choice']"));
         hmap.put("subarea_noarea_xpath", By.xpath(".//*[@id='cityBasicInfo']//tr[th='Sub Area']/td"));
