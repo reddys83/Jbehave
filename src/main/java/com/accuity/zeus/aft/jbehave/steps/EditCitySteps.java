@@ -1123,6 +1123,18 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyRegionValue(newRegionType, newRegionValue);
 	}
 	
+	@Then("the user should see the city region type 2 and value 2 updated in UI")
+	public void verifyCityRegionType2AndValue2(@Named("newRegionType2") String newRegionType2, 
+										     @Named("newRegionValue2") String newRegionValue2) {
+		getEditCityPage().verifyRegionType(newRegionType2);
+		getEditCityPage().verifyRegionValue(newRegionType2, newRegionValue2);
+	}
+	
+	@Then("the user should see the city region type and value deleted in UI")
+	public void verifyCityRegionTypeDeleted(@Named("newRegionType") String newRegionType) {
+		getEditCityPage().verifyRegionTypeNotPresentInUI(newRegionType);
+	}
+	
 	@Then("the user should see city region value same as in $source document")
 	public void verifyCityRegionTypeAndValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
 												 @Named("source") String source,  @Named("newRegionType") String newRegionType, 

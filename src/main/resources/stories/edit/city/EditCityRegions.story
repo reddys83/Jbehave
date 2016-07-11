@@ -105,7 +105,7 @@ Examples:
 |Angola|Bengo|Caxito|Federal Reserve District|
 
 
-Scenario: User adds new region type and value, checks the confirmation summary modal and saves the data to DB
+Scenario: User updates existing region type and value, checks the confirmation summary modal and saves the data to DB
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -133,6 +133,7 @@ Then the user should see the below summary changes in confirmation modal
 |Regions|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
+Then the user should see the city region type 2 and value 2 updated in UI
 Then the user should see the region type 2 and value 2 updated in zeus document
 Then the user reverts the changes to the document
 
@@ -170,6 +171,7 @@ When the user clicks on the No button to cancel the deletion of row
 And the user clicks on the save button in city page
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
+Then the user should see the city region type and value updated in UI
 Then the user should see the region type and value updated in zeus document
 Then the user reverts the changes to the document
 
@@ -206,6 +208,7 @@ When the user clicks on the Yes button to cancel the deletion of row
 And the user clicks on the save button in city page
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
+Then the user should see the city region type and value deleted in UI
 Then the user should see the region not present in zeus document
 Then the user reverts the changes to the document
 
