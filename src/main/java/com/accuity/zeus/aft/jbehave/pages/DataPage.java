@@ -1313,5 +1313,17 @@ public class DataPage extends AbstractPage {
     public void verifyAreaPlacesView() {
         assertTrue(getDriver().findElement(select_places_view_xpath).isDisplayed());
     }
+    
+    
+    public void verifyNoSummaryConfirmnModal(String summaryText) {
+		try {
+			WebElement confirmChanges = getDriver()
+					.findElement(cancel_update_confirmation_modal_xpath);
+			String confirmationText = confirmChanges.getText();
+			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
+		} catch (Exception e) {
+			assertTrue(false);
+		}
+	}
 
 }

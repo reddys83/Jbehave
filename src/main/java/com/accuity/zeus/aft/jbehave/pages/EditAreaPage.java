@@ -166,20 +166,21 @@ public class EditAreaPage extends AbstractPage {
 	}
 	
 	public void selectTrueForUseInAddress() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("city_use_in_address_true"));
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_use_in_address_true"));
 	}
 
 	public void selectFalseForUseInAddress() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("city_use_in_address_false"));
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_use_in_address_false"));
 	}
 
 	public void verifyAreaAddressFlagFromZeusDB(String country, String area, String city, String tagName,
 			String source) {
-		assertEquals(StringUtils.capitalize(getAreaInfoFromDB(country, area, city, tagName, source)),
+		assertEquals(StringUtils.capitalize(getAreaInfoFromDB(country, area,  tagName, source)),
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_xpath")).getText());
 
 	}
 
+		
 	@Override
 	public String getPageUrl() {
 		return null;

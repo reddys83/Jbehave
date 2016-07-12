@@ -42,7 +42,7 @@ public abstract class AbstractSteps {
 	public static EditLegalEntityPage editLegalEntityPage;
 
 
-
+	public static EditAreaPage editAreaPage;
 	public static EditCityPage editCityPage;
 
     @Autowired
@@ -232,4 +232,11 @@ public abstract class AbstractSteps {
 		AbstractSteps.editCityPage = editCityPage;
 	}
 
+	public static EditAreaPage getEditAreaPage() {
+		return editAreaPage;
+	}
+
+	public static void setEditAreaPage(EditAreaPage editAreaPage) {
+		AbstractSteps.editAreaPage = editAreaPage;
+	}
 }

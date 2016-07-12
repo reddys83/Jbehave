@@ -98,4 +98,10 @@ public class EditAreaSteps extends AbstractSteps {
 	public void selectTrueForUseInAddress() {
 		getEditAreaPage().selectTrueForUseInAddress();
 	}
+	
+
+	@When("the user should see no <summary> changes in area save confirmation modal")
+	public void verifyNoSummaryConfirmationModal(@Named("summary") String summary) {
+		getDataPage().verifyNoSummaryConfirmnModal(summary);
+	}
 }

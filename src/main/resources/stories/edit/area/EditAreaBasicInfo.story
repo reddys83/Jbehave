@@ -59,11 +59,11 @@ When the user clicks on the city update link
 When the user clicks on False option for Use in Address
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-Then the user should see no summary changes in area save confirmation modal
+Then the user should see no <summary> changes in area save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|city|Summary|
+|country|area|city|summary|
 |Tajikistan|Leninabadskaya Oblast|Gafurov|Basic Info|
