@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.rest.Response;
 import com.accuity.zeus.aft.rest.RestClient;
@@ -282,7 +283,7 @@ public class DataPage extends AbstractPage {
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(area);
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -1289,8 +1290,7 @@ public class DataPage extends AbstractPage {
         attemptClick(area_basic_info_country_link_xpath);
     }
 
-
-
+    
     public void clickOnAreaRelatedPlace(String relatedPlace) {
         attemptClick(By.xpath(area_related_places_place_link_xpath + relatedPlace + "']/td/a"));
         try {
@@ -1299,6 +1299,23 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
     }
+    
+    public EditAreaPage createEditAreaPage() {
+        return new EditAreaPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+
+    }
+    
+    public void verifyNoSummaryConfirmationModal(String summaryText) {
+		try {
+			WebElement confirmChanges = getDriver()
+					.findElement(cancel_update_confirmation_modal_xpath);
+			String confirmationText = confirmChanges.getText();
+			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
+		} catch (Exception e) {
+			assertTrue(false);
+		}
+	}
+
     public void changeBrowserUrlAndNavigate(String id){
         String curentUrl=getDriver().getCurrentUrl();
         String[]currentUrl=curentUrl.split("country/");
@@ -1313,5 +1330,6 @@ public class DataPage extends AbstractPage {
     public void verifyAreaPlacesView() {
         assertTrue(getDriver().findElement(select_places_view_xpath).isDisplayed());
     }
+
 
 }
