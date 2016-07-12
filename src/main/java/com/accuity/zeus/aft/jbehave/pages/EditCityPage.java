@@ -2170,6 +2170,11 @@ public class EditCityPage extends AbstractPage {
 		assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("subarea_noarea_xpath")).getText()
 				.isEmpty());
 	}
+	
+	public void verfyAreaIsNullInUI(String city) throws InterruptedException {
+		assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("area_noarea_xpath")).getText()
+				.isEmpty());
+	}
 
 	public void verifySubAreaListInPlacesForCountry(String area) {
 		List<NameValuePair> nvPairs = new ArrayList<>();
@@ -2208,8 +2213,43 @@ public class EditCityPage extends AbstractPage {
 
 	}
 
-	public void verifySubAreaIsEmpty(String country, String area, String city, String tagName, String source) {
+	public void verifyNodeValueIsEmpty(String country, String area, String city, String tagName, String source) {
 		assertTrue(getCityInfoFromDB(country, area, city, tagName, source).isEmpty());
+	}
+	
+	public void VerifySubAreaListInDB(String country, String area, String city, String tagName, String source,
+			List<String> subAreaList) {
+		
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("city", city));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		List<String> subAreaListInDB = getListFromDB(nvPairs, "get city basic info" , "subArea");
+		
+		assertEquals(subAreaListInDB, subAreaList);
+	}
+	
+	public List<String> getListFromDB(List<NameValuePair> nvPairs, String xqueryKey, String tagName) {
+		List<String> cityList = new ArrayList<String>();
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryKey,
+				nvPairs);
+		if (document != null) {
+			NodeList nodeList = document.getElementsByTagName(tagName);
+			for (int index = 0; index < nodeList.getLength(); index++) {
+				NodeList childNodeList = nodeList.item(index).getChildNodes();
+				cityList.add(childNodeList.item(0).getTextContent());
+			}
+		} else {
+			assertFalse("Zeus document is null", true);
+		}
+		return cityList;
 	}
 
 	@Override

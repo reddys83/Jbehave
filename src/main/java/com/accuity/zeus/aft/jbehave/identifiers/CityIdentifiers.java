@@ -149,6 +149,7 @@ public class CityIdentifiers {
         hmap.put("city_current_value_xpath", By.xpath("(.//*[@class='chosen-single'])[3]//span")); 
         hmap.put("city_List_value_xpath", By.xpath("(//*[@id='entitySelect_chosen'])[3]//li"));      
         hmap.put("subarea_noarea_xpath", By.xpath(".//*[@id='cityBasicInfo']//tr[th='Sub Area']/td"));
+        hmap.put("area_noarea_xpath", By.xpath(".//*[@id='cityBasicInfo']//tr[th='Area']/td"));
         hmap.put("subarea_dropdrown", By.xpath("(//*[@id='entitySelect_chosen'])[3]"));
 	}
 

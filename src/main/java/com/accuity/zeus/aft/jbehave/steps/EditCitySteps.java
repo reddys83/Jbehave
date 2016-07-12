@@ -10,7 +10,6 @@ import org.jbehave.core.annotations.*;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 
@@ -1136,24 +1135,29 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyNoAreaOptionOnlyExistInSubArea();
 	}
 
-	@Then("user selects Subarea <Subarea> in the subarea multiselect dropdown")
-	public void userSelectsSubarea1(@Named("Subarea") String Subarea) throws InterruptedException {
+	@Then("user selects Subarea <Subarea1> in the subarea multiselect dropdown")
+	public void userSelectsSubarea1(@Named("Subarea1") String Subarea) throws InterruptedException {
+		getEditCityPage().userSelectsSubarea(Subarea);
+	}
+	
+	@Then("user selects Subarea <Subarea2> in the subarea multiselect dropdown")
+	public void userSelectsSubarea2(@Named("Subarea2") String Subarea) throws InterruptedException {
 		getEditCityPage().userSelectsSubarea(Subarea);
 	}
 
 	@Then("the user checks whether this subarea1 <Subarea> are not reselectable")
-	public void verifySubAreaIsNotReselectable(@Named("Subarea") String Subarea) {
+	public void verifySubAreaIsNotReselectable(@Named("Subarea1") String Subarea) {
 		getEditCityPage().verifySubAreaIsNotReselectable(Subarea);
 	}	
 
-	@Then("verify $source document whether the city is updated with newly added SubArea <Subarea>")
+	@Then("verify $source document whether the city is updated with newly added SubArea <Subarea1>")
 	public void verifyZeusDBIsUpdatedWithNewValue(@Named("source") String source, @Named("city") String city,
-			@Named("country2") String country2, @Named("area2") String area2, @Named("Subarea") String subarea) {		 
+			@Named("country2") String country2, @Named("area2") String area2, @Named("Subarea1") String subarea) {		 
 		getEditCityPage().verifySubAreaValue(country2, area2, city, "subArea", source, subarea);
 	}
 
-	@Then("verify UI whether city is updated with newly added SubArea <Subarea>")
-	public void verifyCityIsUpdatedWithSubAreaInUI(@Named("Subarea") String subarea) {	
+	@Then("verify UI whether city is updated with newly added SubArea <Subarea1>")
+	public void verifyCityIsUpdatedWithSubAreaInUI(@Named("Subarea1") String subarea) {	
 		getEditCityPage().verifySubAreaIsUpdatedInUI(subarea);
 	}
 
@@ -1180,15 +1184,40 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyCityInfoFromZeusDB(country2, area2, city, "area", source, area2);
 	}
 	
-	@Then("verify $source document whether the city is not updated with newly added SubArea")
+	@Then("verify $source document whether the city is not updated with newly added area and subArea")
 	public void verifyZeusDBIsNull(@Named("source") String source, @Named("city") String city,
 			@Named("country2") String country2, @Named("area2") String area2)
 			throws InterruptedException {
-		getEditCityPage().verifySubAreaIsEmpty(country2, area2, city, "subArea", source);
+		getEditCityPage().verifyNodeValueIsEmpty(country2, area2, city, "area", source);
+		getEditCityPage().verifyNodeValueIsEmpty(country2, area2, city, "subArea", source);
+	}
+	
+	@Then("verify $source document whether the city is not updated with newly SubArea")
+	public void verifySubAreaIsNull(@Named("source") String source, @Named("city") String city,
+			@Named("country2") String country2, @Named("area2") String area2)
+			throws InterruptedException {		
+		getEditCityPage().verifyNodeValueIsEmpty(country2, area2, city, "subArea", source);
 	}
 	
 	@Then("user verify the city is not updated with newly added subarea(null)")
 	public void verfySubAreaIsNullInUI(@Named("city") String city) throws InterruptedException {
 		getEditCityPage().verfySubAreaIsNullInUI(city);
+	}
+	
+	@Then("user verify the city is not updated with newly added area(null)")
+	public void verfyAreaIsNullInUI(@Named("city") String city) throws InterruptedException {
+		getEditCityPage().verfyAreaIsNullInUI(city);
+	}
+	
+	@Then("verify $source document whether <city> is mapped to <Subarea1> and <Subarea2>")
+	public void verifySubareasInZeusDocument(@Named("source") String source, @Named("city") String city,
+			@Named("country2") String country2, @Named("area") String area, @Named("area2") String area2,
+			@Named("Subarea1") String subArea1, @Named("Subarea2") String subArea2) throws InterruptedException {	
+		
+		List<String> citySubAreaList = new ArrayList<String>();
+		citySubAreaList.add(subArea2);
+		citySubAreaList.add(subArea1);
+		getEditCityPage().VerifySubAreaListInDB(country2, area2, city, "subArea", source, citySubAreaList);
+		
 	}
 }

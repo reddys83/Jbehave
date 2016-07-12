@@ -103,5 +103,5 @@ return
   <addressFlag>{$cityAddressFlag}</addressFlag>
   <creditRatings>{$cityCreditRating}</creditRatings> 
   <area>{$area}</area>
-  <subArea>{$subAreaList}</subArea>
+  <subAreas>{$subAreaList}</subAreas>
   </city>   
