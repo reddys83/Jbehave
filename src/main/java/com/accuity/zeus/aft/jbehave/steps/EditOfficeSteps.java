@@ -40,6 +40,11 @@ public class EditOfficeSteps extends AbstractSteps{
     @Then("the user verifies office opened date from zeus document <fid> <day> <month> <year>")
     public void verifyUpdatedOfficeOpenedDate(@Named("fid") String fid,@Named("day") String day,@Named("month") String month,@Named("year") String year){getEditOfficePage().verifyUpdatedOfficeOpenedDate(fid,day,month,year);}
 
+    @When("the user updates principal office flag to <principalFlag>")
+    public void updatePrincipalFlag(@Named("principalFlag") String principalFlag){
+        editOfficePage.setPrincipalOffice(principalFlag);
+    }
+
 }
 
 

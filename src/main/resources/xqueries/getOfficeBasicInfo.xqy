@@ -23,14 +23,25 @@ declare function local:getDateAsPerAccuracy
 
 let $fid := xs:string(xdmp:get-request-field("fid"))
 let $source := xs:string(xdmp:get-request-field("source"))
-let $office := (/office[@fid="1010-44"][@source="zeus"])
+let $office := (/office[@fid=$fid][@source=$source])
 
 
 let $officeOpenedDate := local:getDateAsPerAccuracy($office/summary/dates/opened)
-
+let $LeadLocation := ($office/summary/leadLocation)
+let $officePrefixValue := $office/summary/names/officeTitlePrefix/text()
+let $officeSuffixValue := if (fn:exists($office/summary/names/officeTitleSuffix))
+then $office/summary/names/officeTitleSuffix/text()
+else ""
+let $officeOverrideValue := if(fn:exists($office/summary/names/officeTitleOverride))
+then $office/summary/names/officeTitleOverride/text()
+else ""
+let $principalOffice:= $office/summary/principalOffice
 
 return <office>
     <officeOpenedDate>{$officeOpenedDate}</officeOpenedDate>
+    <LeadLocations>{$LeadLocation}</LeadLocations>
+    <officePrefixValue>{$officePrefixValue}</officePrefixValue>
+    <officeSuffixValue>{$officeSuffixValue}</officeSuffixValue>
+    <officeOverrideValue>{$officeOverrideValue}</officeOverrideValue>
+    <principalOffice>{$principalOffice}</principalOffice>
     </office>
-
-    (:return $office:)

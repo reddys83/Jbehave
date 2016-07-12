@@ -1070,7 +1070,7 @@ public class DataPage extends AbstractPage {
 
     public void revertChangesToDocument() {
 
-        int response = restClient.putDocumentByID(endpointWithID, heraApi, responseEntity.getBody().toString());
+        int response = restClient.putDocumentByID(endpointWithID, heraApi, responseEntity.getBody().toString(),"");
         assertTrue(response == 200);
     }
 
@@ -1311,7 +1311,7 @@ public class DataPage extends AbstractPage {
     public void updateDocument(String endpoint, String entityFid) {
         XmlDocument xmlDocument = getTestDataXml(endpoint, entityFid);
         String url = getResourceURL(endpoint, entityFid);
-        int response = restClient.putDocumentByID(endpoint, heraApi, xmlDocument.toString());
-        assertTrue(response == 200);
+        int response = restClient.putDocumentByID(endpoint, heraApi, xmlDocument.toString(),url);
+        assertTrue(response == 202);
     }
 }

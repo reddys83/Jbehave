@@ -76,4 +76,10 @@ public class EditOfficePage extends AbstractPage {
     public String getPageUrl() {
         return null;
     }
+
+    public void setPrincipalOffice(String principalFlag) {
+        if (principalFlag.equalsIgnoreCase("true")) {
+            getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_principalFlag_name")).get(0).click();
+        } else getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_principalFlag_name")).get(1).click();
+    }
 }

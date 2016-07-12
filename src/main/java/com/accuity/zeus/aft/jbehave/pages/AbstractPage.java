@@ -335,7 +335,7 @@ public abstract class AbstractPage {
             e.printStackTrace();
         }
         Document document =  XmlDocumentLoader.getDocument(filePath);
-        return document.getAttributes().getNamedItem("resource").getTextContent().toString();
+        return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("resource").getNodeValue();
     }
 
 }
