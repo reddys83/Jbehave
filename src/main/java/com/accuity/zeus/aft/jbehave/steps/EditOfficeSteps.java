@@ -40,6 +40,26 @@ public class EditOfficeSteps extends AbstractSteps{
     @Then("the user verifies office opened date from zeus document <fid> <day> <month> <year>")
     public void verifyUpdatedOfficeOpenedDate(@Named("fid") String fid,@Named("day") String day,@Named("month") String month,@Named("year") String year){getEditOfficePage().verifyUpdatedOfficeOpenedDate(fid,day,month,year);}
 
+    @When("the user selects foreign office value <foreignOfficeflag> in the basicinfo office page")
+    public void selectForeignOfficeFlag(@Named("foreignOfficeflag") String foreignOfficeflag){
+        getEditOfficePage().selectForeignOfficeFlag(foreignOfficeflag);
+    }
+
+    @Then("the user should see foreignOffice value as <foreignOfficeflag> for fid <officeFid> in $source document")
+    public void verifyForeignOfficeValuefromDB(@Named("foreignOfficeflag") String foreignOfficeflag,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyForeignOfficeValuefromDB(foreignOfficeflag,officeFid,source);
+    }
+
+
+    @When("the user selects foreign office value other than default value in the basicinfo office page")
+    public void changeForeignOfficeFlag() {
+        getEditOfficePage().changeForeignOfficeFlag();
+    }
+
+    @Then("the user should return to edit office page mode")
+    public void verifyOfficeEditPageMode(){
+        getEditOfficePage().verifyOfficeEditPageMode();
+    }
 }
 
 

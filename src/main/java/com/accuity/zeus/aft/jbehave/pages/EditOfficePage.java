@@ -72,6 +72,48 @@ public class EditOfficePage extends AbstractPage {
     }
 
 
+    public void selectForeignOfficeFlag(String foreignOfficeflag) {
+        selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier("office_foreignoffice_radio_options_xpath"), foreignOfficeflag);
+    }
+
+    public void verifyForeignOfficeValuefromDB(String foreignOfficeflag, String selectedEntity, String source) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(getForeignOfficeFlagFromDB(selectedEntity, source), foreignOfficeflag);
+
+    }
+
+    public String getForeignOfficeFlagFromDB(String officeFid, String source) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String leadLocationDBValue = getNodeValuesByTagName(document, "foreignOffice").size() == 0 ? "" : getNodeValuesByTagName(document, "foreignOffice").get(0);
+        return leadLocationDBValue;
+    }
+
+    public void changeForeignOfficeFlag() {
+        String newleadInstitutionflag = "";
+        String selectedRadioValue = getSelectedRadioValue(OfficeIdentifiers.getObjectIdentifier("office_foreignoffice_radio_options_xpath"));
+        if (selectedRadioValue.equalsIgnoreCase("true")) {
+            newleadInstitutionflag = "false";
+        } else if (selectedRadioValue.equalsIgnoreCase("false")) {
+            newleadInstitutionflag = "true";
+        }
+        selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier("office_foreignoffice_radio_options_xpath"), newleadInstitutionflag);
+    }
+
+    public void verifyOfficeEditPageMode() {
+        assertTrue(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_status_xpath")).size()>0);
+    }
     @Override
     public String getPageUrl() {
         return null;
