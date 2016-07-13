@@ -206,7 +206,7 @@ public class DataPage extends AbstractPage {
     private By save_success_message_id=By.id("saveSuccess");
     private By area_basic_info_country_link_xpath = By.xpath(".//*//tr[th='Country']/td/a");
     private String area_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
-
+    private By confirmation_modal_xpath = By.xpath("//*[@id='modal-region']");
 
     static ResponseEntity responseEntity;
     static String endpointWithID;

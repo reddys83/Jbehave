@@ -104,10 +104,11 @@ public class XqueryMap {
         queryMap.put("get legalEntity Services From Lookup","getLegalEntityServicesFromLookup.xqy");
         queryMap.put("get legalEntity Services From DB","getLegalEntityServicesFromDB.xqy");
         queryMap.put("get legal entity credit ratings from trusted","getLegalEntityCreditRatings.xqy");
+        queryMap.put("get document id for area","getIdForArea.xqy");
         queryMap.put("get city name types","getCityNameTypes.xqy");
 		queryMap.put("get area Status types","getCityStatusTypes.xqy");
-		queryMap.put("get document id for area","getIdForArea.xqy");
 		queryMap.put("get areastatus","getAreaStatus.xqy");
+		queryMap.put("get area basic info","getAreaBasicInfo.xqy");
    }
 
     public String getXquery(String key){

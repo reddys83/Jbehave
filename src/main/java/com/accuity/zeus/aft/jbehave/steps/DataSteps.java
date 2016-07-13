@@ -886,4 +886,5 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the $entity page in the view mode")
     public void verifyViewModeForEntity(){getDataPage().verifyViewModeForEntity();}
+
 }

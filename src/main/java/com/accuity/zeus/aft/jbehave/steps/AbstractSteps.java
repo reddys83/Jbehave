@@ -44,7 +44,7 @@ public abstract class AbstractSteps {
 
 
 	public static EditCityPage editCityPage;
-	public static EditAreaPage editAreaPage;
+	private static EditAreaPage editAreaPage;
 
     @Autowired
     ApacheHttpClient apacheHttpClient;
@@ -240,5 +240,6 @@ public abstract class AbstractSteps {
 	public static EditAreaPage getEditAreaPage() {
 		return editAreaPage;
 	}
+	
 
 }
