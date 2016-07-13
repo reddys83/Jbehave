@@ -266,6 +266,7 @@ Examples:
 
 
 Scenario: Filter offices by status - User verifies whether the third page of 'Active' filter has 'Active' status for all fids
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -280,4 +281,5 @@ Then the user should see the list of <status> offices till the page <pageNumber>
 
 Examples:
 |entity|searchBy|fid|pageNumber|allPages|status|
-|1038|FID|1038|3|false|Active|
+|1038|FID|1038|5|false|Active|
+|1038|FID|1038|3|true|Active|
