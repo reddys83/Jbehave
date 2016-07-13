@@ -87,14 +87,26 @@ public class XqueryMap {
         queryMap.put("get city identifiers", "getCountryIdentifiers.xqy");
 		queryMap.put("get city Status types","getCityStatusTypes.xqy");
 		queryMap.put("get city basic info","getCityBasicInfo.xqy");
+        queryMap.put("get office basic info","getOfficeBasicInfo.xqy");
+        queryMap.put("get id for offices", "getIdForOffices.xqy");
+
+		queryMap.put("get city places type lookup","getCityRelatedPlacesTypeFromLookup.xqy");
+		queryMap.put("get city places detail lookup","getCityRelatedPlacesDetailsFromLookup.xqy");
+		queryMap.put("get city related place info","getCityRelatedPlaces.xqy");
+		queryMap.put("get city basic info","getCityBasicInfo.xqy");
         queryMap.put("get LegalEntity personnel", "getLegalEntityPersonnel.xqy");
         queryMap.put("get LegalEntity IdentifierTypes From Lookup","getLegalEntityIdentifierTypesFromLookup.xqy");
         queryMap.put("get LegalEntity IdentifierStatus From Lookup","getLegalEntityIdentifierStatusFromLookup.xqy");
-        queryMap.put("get city credit look up values","getCityCreditRatingLookUpValues.xqy");
-		queryMap.put("get city name types","getCityNameTypes.xqy");
-
+        queryMap.put("get city credit look up values","getCityCreditRatingLookUpValues.xqy");		
+        queryMap.put("get LegalEntity OwnershipType From Lookup","getLegalEntityOwnershipSummariesFromLookup.xqy");
+		queryMap.put("get city basic info","getCityBasicInfo.xqy");
+        queryMap.put("get legalEntity Services From Lookup","getLegalEntityServicesFromLookup.xqy");
+        queryMap.put("get legalEntity Services From DB","getLegalEntityServicesFromDB.xqy");
         queryMap.put("get legal entity credit ratings from trusted","getLegalEntityCreditRatings.xqy");
-        queryMap.put("active office test list","getActiveOfficeFidTest.xqy");
+        queryMap.put("get city name types","getCityNameTypes.xqy");
+		queryMap.put("get area Status types","getCityStatusTypes.xqy");
+		queryMap.put("get document id for area","getIdForArea.xqy");
+		queryMap.put("get areastatus","getAreaStatus.xqy");
    }
 
     public String getXquery(String key){

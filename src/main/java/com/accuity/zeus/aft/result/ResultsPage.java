@@ -206,6 +206,7 @@ public class ResultsPage extends AbstractPage {
     }
 
     public WebElement navigateToDesiredSearchResultsPage(String page) {
+
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -266,7 +267,7 @@ public class ResultsPage extends AbstractPage {
     public void clickOnColumnFid() {
         attemptClick(office_search_results_column_fid_xpath);
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -300,12 +301,7 @@ public class ResultsPage extends AbstractPage {
             assertEquals(officeTotalResultsCount(), Integer.toString(getOfficeResultsCountInCurrentPage().size()));
         } else {
             navigateToOfficeLastSearchResultsPage();
-            try {
-                Thread.sleep(3000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            assertEquals(officeTotalResultsCount(), getOfficeResultsCountTillCurrentPage());
+           assertEquals(officeTotalResultsCount(), getOfficeResultsCountTillCurrentPage());
         }
     }
 
@@ -350,12 +346,7 @@ public class ResultsPage extends AbstractPage {
 
     public void navigateToOfficeLastSearchResultsPage() {
        attemptClick(office_search_results_last_page_xpath);
-
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitForElementToDisappear(By.id("loader"));
     }
 
     public void verifySearchResultsNavigation() {
@@ -392,6 +383,7 @@ public class ResultsPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println("abcdefg"+getDriver().findElement(office_search_current_page_xpath).getText());
         assertTrue(getDriver().findElement(office_search_current_page_xpath).getText().contains(page.replace("st", "").replace("nd", "").replace("rd", "").replace("th", "")));
     }
 
@@ -400,15 +392,18 @@ public class ResultsPage extends AbstractPage {
             navigateToOfficeLastSearchResultsPage();
         } else {
             navigateToDesiredSearchResultsPage(Integer.toString(Integer.parseInt(page.replace("st", "").replace("nd", "").replace("rd", "").replace("th", "")) + 1)).click();
+            waitForElementToDisappear(By.id("loader"));
         }
     }
 
     public void navigateToNextOfficeSearchResultsPage() {
         attemptClick(office_search_results_next_page_classname);
+        waitForElementToDisappear(By.id("loader"));
     }
 
     public void navigateToPreviousOfficeSearchResultsPage() {
         attemptClick(office_search_results_previous_page_classname);
+        waitForElementToDisappear(By.id("loader"));
     }
 
 
