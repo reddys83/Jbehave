@@ -229,16 +229,16 @@ public abstract class AbstractSteps {
 		return editCityPage;
 	}
 
-	public static EditAreaPage getEditAreaPage() {
-		return editAreaPage;
+	public static void setEditCityPage(EditCityPage editCityPage) {
+		AbstractSteps.editCityPage = editCityPage;
 	}
-
+	
 	public static void setEditAreaPage(EditAreaPage editAreaPage) {
 		AbstractSteps.editAreaPage = editAreaPage;
 	}
 	
-	public static void setEditCityPage(EditCityPage editCityPage) {
-		AbstractSteps.editCityPage = editCityPage;
+	public static EditAreaPage getEditAreaPage() {
+		return editAreaPage;
 	}
 	
 

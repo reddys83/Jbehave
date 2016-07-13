@@ -4,7 +4,6 @@ import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
-import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.rest.Response;
 import com.accuity.zeus.aft.rest.RestClient;
@@ -208,7 +207,6 @@ public class DataPage extends AbstractPage {
     private By area_basic_info_country_link_xpath = By.xpath(".//*//tr[th='Country']/td/a");
     private String area_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
     private By confirmation_modal_xpath = By.xpath("//*[@id='modal-region']");
-
 
     static ResponseEntity responseEntity;
     static String endpointWithID;

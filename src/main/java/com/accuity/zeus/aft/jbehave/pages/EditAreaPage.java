@@ -28,18 +28,18 @@ public class EditAreaPage extends AbstractPage {
 		super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
 	}
 
-	
+
 	public void verifyAreaEndDateFromTrustedDB(String country, String area, String tagName,
 			String source) {
-		
+
 		List<WebElement> appliedMonthList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_month_end_date_xpath"));
 		String day = getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_day_end_date_xpath")).getAttribute("value");
-		
+
 		if(StringUtils.isNotBlank(day) && StringUtils.length(day) < 2) {
 			day = "0" + day;
 		}
-		
+
 		String month =  new Select(appliedMonthList.get(0)).getFirstSelectedOption().getText();
 		String year = getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_year_end_date_xpath")).getAttribute("value");
@@ -49,10 +49,10 @@ public class EditAreaPage extends AbstractPage {
 		assertEquals(expectedEndDate, actualEndDate);
 
 	}
-	
+
 	/**
 	 * This method is used to get the area basic information from DB
-	 * 
+	 *
 	 * @param country
 	 * @param area
 	 * @param tagName
@@ -80,7 +80,7 @@ public class EditAreaPage extends AbstractPage {
 		}
 		return tagValue;
 	}
-	
+
 	public void verifyMonthInChronologicalOrder() {
 		List<String> monthInOrder = new ArrayList<String>();
 		monthInOrder.add(" ");
@@ -109,7 +109,7 @@ public class EditAreaPage extends AbstractPage {
 
 		assertTrue(monthInOrder.equals(monthListInString));
 	}
-	
+
 	public void enterDayInBeganDate(String day) {
 		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_day_began_date_xpath"), day);
 	}
@@ -134,9 +134,9 @@ public class EditAreaPage extends AbstractPage {
 	public void enterYearInBeganDate(String year) {
 		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_year_began_date_xpath"), year);
 	}
-	
-	
-	
+
+
+
 	public void enterDayInEndDate(String day) {
 		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_day_end_date_xpath"), day);
 	}
@@ -161,10 +161,10 @@ public class EditAreaPage extends AbstractPage {
 	public void enterYearInEndDate(String year) {
 		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_year_end_date_xpath"), year);
 	}
-	
+
 	/**
 	 * This method is to clear and enter the value in text field
-	 * 
+	 *
 	 * @param webElement
 	 * @param value
 	 */
@@ -172,7 +172,7 @@ public class EditAreaPage extends AbstractPage {
 		getDriver().findElement(webElement).clear();
 		getDriver().findElement(webElement).sendKeys(value);
 	}
-	
+
 	public void verifyErrorMessageEndDate(String endDateErrorMsg) {
 		try {
 			Thread.sleep(2000L);
@@ -182,7 +182,7 @@ public class EditAreaPage extends AbstractPage {
 		assertEquals(endDateErrorMsg, getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_enddate_errorMessage_xpath")).getText());
 	}
-	
+
 	public void verifyEndDateInAreaPage(String day, String month, String year) {
 		try {
 			Thread.sleep(3000L);
@@ -212,7 +212,7 @@ public class EditAreaPage extends AbstractPage {
 					.findElement(AreaIdentifiers.getObjectIdentifier("area_end_date_info_text_xpath")).getText());
 		}
 	}
-	
+
 	/**
 	 *
 	 * This method is used to verify the End Date value from Zeus DB
@@ -233,7 +233,88 @@ public class EditAreaPage extends AbstractPage {
 			assertEquals(setEndDate, getAreaBasicInfoFromDB(country, area, tagName, source).trim());
 		}
 	}
-	
+
+
+	public void verifyAreaBeganDateFromTrustedDB(String country, String area, String tagName,
+			String source) {
+
+		List<WebElement> appliedMonthList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_month_began_date_xpath"));
+		String day = getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_day_began_date_xpath")).getAttribute("value");
+
+		if(StringUtils.isNotBlank(day) && StringUtils.length(day) < 2) {
+			day = "0" + day;
+		}
+
+		String month =  new Select(appliedMonthList.get(0)).getFirstSelectedOption().getText();
+		String year = getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_year_began_date_xpath")).getAttribute("value");
+		String beganDate = day + " " + month + " " + year;
+
+		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source), beganDate);
+
+	}
+	public void verifyErrorMessageBeganDate(String beganDateErrorMsg) {
+		try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals(beganDateErrorMsg, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_begandate_errorMessage_xpath")).getText());
+	}
+
+	public void verifyDayMonthYearInAreaPage(String day, String month, String year) {
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		if ((day.isEmpty()) && (month.isEmpty()) && (year.isEmpty())) {
+			assertEquals("", getDriver()
+					.findElement(AreaIdentifiers.getObjectIdentifier("area_began_date_info_text_xpath")).getText());
+		}
+
+		else if ((day.isEmpty()) && (month.isEmpty())) {
+			assertEquals(year, getDriver()
+					.findElement(AreaIdentifiers.getObjectIdentifier("area_began_date_info_text_xpath")).getText());
+		}
+
+		else if ((day.isEmpty())) {
+			String getExpectedDate = month + " " + year;
+			assertEquals(getExpectedDate, getDriver()
+					.findElement(AreaIdentifiers.getObjectIdentifier("area_began_date_info_text_xpath")).getText());
+		}
+
+		else {
+			String getExpectedDate = day + " " + month + " " + year;
+			assertEquals(getExpectedDate, getDriver()
+					.findElement(AreaIdentifiers.getObjectIdentifier("area_began_date_info_text_xpath")).getText());
+		}
+	}
+
+	/**
+	 *
+	 * This method is used to verify the Began Date value from Zeus DB
+	 *
+	 */
+	public void verifyAreaBeganDateFromZeusDB(String country, String area, String tagName, String source,
+			String day, String month, String year) {
+		if ((day.isEmpty()) && (month.isEmpty()) && (year.isEmpty())) {
+			assertEquals("", getAreaBasicInfoFromDB(country, area, tagName, source));
+		} else if ((day.isEmpty()) && (month.isEmpty())) {
+			String expectedBeganDate = year;
+			assertEquals(expectedBeganDate, getAreaBasicInfoFromDB(country, area, tagName, source));
+		} else if ((day.isEmpty())) {
+			String expectedBeganDate = month + " " + year;
+			assertEquals(expectedBeganDate, getAreaBasicInfoFromDB(country, area, tagName, source));
+		} else {
+			String setBeganDate = day + " " + month + " " + year;
+			assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source), setBeganDate);
+		}
+	}
+
 	/**
 	 * This method is used to click the area status drop-down
 	 */
@@ -371,15 +452,16 @@ public class EditAreaPage extends AbstractPage {
 				getSelectedDropdownValue(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_xpath")));
 
 	}
-	
+
 
 	@Override
 	public String getPageUrl() {
 		return null;
 	}
-	
-	
-	
-	
+
+
+
+
+
 
 }
