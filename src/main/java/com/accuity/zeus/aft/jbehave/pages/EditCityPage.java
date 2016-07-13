@@ -1290,7 +1290,7 @@ public class EditCityPage extends AbstractPage {
 
 		try {
 
-			assertTrue(getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).size()==1);
+			assertTrue(getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_new_row_xpath")).size()==0);
 
 		} catch (Exception e) {
 			e.printStackTrace();

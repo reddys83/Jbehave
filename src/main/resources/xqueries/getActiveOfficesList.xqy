@@ -4,10 +4,9 @@ let $legalEntity := cts:search(fn:collection('source-trusted')/legalEntity,
             cts:element-attribute-range-query(xs:QName("legalEntity"), xs:QName("fid"), "=", $fid)
         )))
 
-let $offices := (for $x in cts:search(fn:collection('source-trusted')/office,
+let $offices := (for $x in cts:search(fn:collection('source-trusted')/office[@source="trusted" and /office/summary/status="active"],
         cts:and-query((
-            cts:path-range-query("/office/summary/institution/link/@href", "=", $legalEntity/@resource, "collation=http://marklogic.com/collation/"),
-            cts:path-range-query("/office/summary/status", "=", "active", "collation=http://marklogic.com/collation/")
+            cts:path-range-query("/office/summary/institution/link/@href", "=", $legalEntity/@resource, "collation=http://marklogic.com/collation/")
         ))) order by xs:long(fn:tokenize($x/@fid, '-')[last()]) return $x) [1 to 25]
 
 let $officeResults := (

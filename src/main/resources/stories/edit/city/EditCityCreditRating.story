@@ -336,6 +336,7 @@ Examples:
 |USA|Alabama|Alexandria|15|Dec|abcd|15|Dec|abcd|1|
 
 Scenario: User can edit city identifiers- Verify if User can delete credit rating by clicking on 'Yes' , then after saving it should be removed.
+Meta:@test88
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area

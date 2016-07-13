@@ -349,21 +349,21 @@ public class ResultsPage extends AbstractPage {
     public void verifySearchResultsNavigation() {
         if (Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) > 7) {
             if (Integer.parseInt(getOfficeSearchResultsCurrentPage()) <= 4) {
-                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 2 3 4 5 … " + getOfficeSearchResultsLastNavigationPage() + " Next");
+                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText().toString().replace("â€¦","").replace("…",""), "Previous 1 2 3 4 5  " + getOfficeSearchResultsLastNavigationPage() + " Next");
             } else if((Integer.parseInt(getOfficeSearchResultsCurrentPage()) >= 5)
                     && Integer.parseInt(getOfficeSearchResultsCurrentPage()) < (Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 3)) {
-                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 … " +
+                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText().toString().replace("â€¦","").replace("…",""), "Previous 1  " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsCurrentPage()) - 1) + " " +
                         getOfficeSearchResultsCurrentPage() + " " +
-                        Integer.toString(Integer.parseInt(getOfficeSearchResultsCurrentPage()) + 1) + " … " +
+                        Integer.toString(Integer.parseInt(getOfficeSearchResultsCurrentPage()) + 1) + "  " +
                         getOfficeSearchResultsLastNavigationPage() + " Next");
             } else {
-                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 … " +
+                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText().toString().replace("â€¦","").replace("…",""), "Previous 1  " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 4) + " " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 3) + " " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 2) + " " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 1) + " " +
-                        getOfficeSearchResultsLastNavigationPage() + " Next");
+                        getOfficeSearchResultsLastNavigationPage() + " Next".replace("…",""));
             }
         } else {
             assertTrue(getDriver().findElement(office_search_results_navigation_xpath).getText().contains("Previous"));
@@ -373,6 +373,7 @@ public class ResultsPage extends AbstractPage {
             }
         }
     }
+
 
     public void verifyCurrentPageOnSearchResults(String page) {
         try {

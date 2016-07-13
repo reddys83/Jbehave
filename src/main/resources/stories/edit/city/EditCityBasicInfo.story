@@ -776,7 +776,7 @@ Then the user verifies whether error message Must be after Began date. is displa
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|Summary|
-|Afghanistan|Badakshan|Badakhshan|1|Jun|2016|1|Jun|2015|Basic Info|
+|Afghanistan|Badakshan|Panj Shair|1|Jun|2016|1|Jun|2015|Basic Info|
 
 Scenario: User enters End Date values when the Began Date values are empty
 Given a user is on the search page
@@ -802,7 +802,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|endDay|endMonth|endYear|
-|USA|Alabama|Alexander City|6|Jun|2010|
+|USA|Georgia|Adrian|6|Jun|2010|
 
 Scenario: User is updating  City's Basic Info  page and  entered  value for 'Use in Address' that is different from the current value
 Given a user is on the search page
