@@ -40,6 +40,41 @@ public class EditOfficeSteps extends AbstractSteps{
     @Then("the user verifies office opened date from zeus document <fid> <day> <month> <year>")
     public void verifyUpdatedOfficeOpenedDate(@Named("fid") String fid,@Named("day") String day,@Named("month") String month,@Named("year") String year){getEditOfficePage().verifyUpdatedOfficeOpenedDate(fid,day,month,year);}
 
+    @When("the user enters the <additionalInfoText> in the office additional info text area")
+    public void enterOfficeAdditionalInfo(@Named("additionalInfoText") String additionalInfoText)
+    {
+        getEditOfficePage().enterOfficeAdditionalInfo(additionalInfoText);
+    }
+
+    @Then("the user should see office additional info text value as <additionalInfoText> for fid <officeFid> in $source document")
+    public void verifyAdditionalInfoValuefromDB(@Named("additionalInfoText") String additionalInfoText,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficeAdditionalInfoValueFromZeus(additionalInfoText,officeFid,source);
+    }
+
+    @Then("the user should see the office additional info text area field length as 10000")
+    public void verifyOfficeAdditionalInfoTextAreaLength(@Named("officeFid") String officeFid) {
+        getEditOfficePage().verifyOfficeAdditionalInfoTextAreaLength(officeFid);
+    }
+
+    @When("the user enters 10001 characters in the office additional info text area")
+    public void enter10001CharactersInOfficeAdditionalInfo(@Named("officeFid") String officeFid) {
+        getEditOfficePage().enter10001CharactersInOfficeAdditionalInfo(officeFid);
+    }
+
+    @When("the user enters 10000 characters in the office additional info text area")
+    public void enter10000CharactersInOfficeAdditionalInfo(@Named("officeFid") String officeFid) {
+        getEditOfficePage().enter10000CharactersInOfficeAdditionalInfo(officeFid);
+    }
+
+    @Then("the user should see the error message enter up to 10000 valid characters for additional info value in the basic info office page")
+    public void verifyOfficeAdditionalInfoErrorMessageForMaxLength() {
+        getEditOfficePage().verifyOfficeAdditionalInfoErrorMessageForMaxLength();
+    }
+
+    @Then("the user should see the office additional info text value with 10000 characters for fid <officeFid> in $source document")
+    public void verifyAdditionalInfoValueWithMaxLengthFromDB(@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyAdditionalInfoValueWithMaxLengthFromZeus("additionalInfo",officeFid,source);
+    }
 }
 
 

@@ -71,7 +71,65 @@ public class EditOfficePage extends AbstractPage {
         assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent().replace(" ",""), day+month+year);
     }
 
+    public String getOfficeValuesFromDB(String officeFid, String source) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        String statusValue = "";
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+                if (document != null) {
+             statusValue = getNodeValuesByTagName(document, "additionalInfo").size() == 0 ? "" : getNodeValuesByTagName(document, "additionalInfo").get(0);
+        }
+        return statusValue;
+    }
 
+    public void enterOfficeAdditionalInfo(String additionalInfoText) {
+        clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_xpath"),additionalInfoText);
+
+    }
+
+    public void verifyEditOfficeAdditionalInfoValueFromZeus(String additionalInfoText, String selectedEntity, String source) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(getOfficeValuesFromDB(selectedEntity, source), additionalInfoText);
+
+    }
+
+    public void verifyOfficeAdditionalInfoTextAreaLength(String officeFid) {
+        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_xpath")).getAttribute("maxlength"), "10000");
+    }
+
+    public void enter10000CharactersInOfficeAdditionalInfo(String officeFid) {
+        String strBigString = createBigString(10000);
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_xpath")).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + strBigString + "'", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_xpath")));
+    }
+
+    public void enter10001CharactersInOfficeAdditionalInfo(String officeFid) {
+        String strBigString = createBigString(10000);
+        modifyHtmlByName(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_xpath"), "maxlength", "10001");
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_xpath")).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + strBigString + "'", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_xpath")));
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_xpath")).sendKeys("1");
+    }
+
+    public void verifyOfficeAdditionalInfoErrorMessageForMaxLength() {
+        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfos_err_msg_xpath")).getText(), "Enter up to 10000 valid characters.");
+    }
+
+
+    public void verifyAdditionalInfoValueWithMaxLengthFromZeus(String officeFid, String selectedEntity, String source){
+        assertEquals(getOfficeValuesFromDB(selectedEntity, source), bigString);
+
+    }
     @Override
     public String getPageUrl() {
         return null;
