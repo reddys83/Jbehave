@@ -1087,7 +1087,7 @@ public class EditCityPage extends AbstractPage {
 			nvPairs.add(new BasicNameValuePair("area", area));
 			nvPairs.add(new BasicNameValuePair("city", city));
 			nvPairs.add(new BasicNameValuePair("source", source));
-			Thread.sleep(3000L);
+			Thread.sleep(5000L);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get city basic info", nvPairs);
@@ -1289,7 +1289,7 @@ public class EditCityPage extends AbstractPage {
 	public void verifyNewlyAddedCreditRatingRowIsNotDisplayed() {
 
 		try {
-
+			Thread.sleep(5000L);
 			assertTrue(getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).size()==1);
 
 		} catch (Exception e) {
