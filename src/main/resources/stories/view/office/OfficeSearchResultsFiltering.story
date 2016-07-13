@@ -266,7 +266,7 @@ Examples:
 |3125|FID|3125|
 
 
-Scenario: Filter offices by status - User verifies whether the third page of 'Active' filter has 'Active' status for all fids
+Scenario: Filter offices by status - User verifies whether first 10 pages of 'Active' filter has 'Active' status for all fids
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -284,7 +284,7 @@ Examples:
 |entity|searchBy|fid|pageNumber|status|
 |1038|FID|1038|10|Active|
 
-Scenario: Filter offices by status - User verifies whether the third page of 'Active' filter has 'Active' status for all fids
+Scenario: Filter offices by status - User verifies whether All pages of 'Active' filter has 'Active' status for all fids
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
