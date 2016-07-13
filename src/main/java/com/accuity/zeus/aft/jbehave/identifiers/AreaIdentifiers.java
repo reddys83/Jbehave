@@ -17,6 +17,8 @@ public class AreaIdentifiers {
 		hmap.put("area_update_button_xpath", By.xpath("//*[@id='update-button']"));
 		hmap.put("area_save_confirmation_message_xpath", By.xpath(("//*[@id='saveSuccess']")));
 		hmap.put("area_get_status_value_xpath", By.xpath(("//*[@id='areaBasicInfo']//tr[th='Status']/td")));
+		hmap.put("area_add_info_text_xpath", By.xpath(("//*[@id='areaBasicInfo']//textarea[@name='addInfo']")));
+		hmap.put("area_add_info_xpath_after_save", By.xpath("//*[@id='areaBasicInfo']//tr[th='Add Info']/td"));
 	}
 
 	public static By getObjectIdentifier(String key) {

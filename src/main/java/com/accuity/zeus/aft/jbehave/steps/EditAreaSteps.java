@@ -88,4 +88,34 @@ public class EditAreaSteps extends AbstractSteps {
 	public void selectAreaStatusValue2(@Named("status2") String status) {
 		getEditAreaPage().selectAreaStatusValue(status);
 	}
+	
+	@When("the user enters the <addInfoText> in the area add info text area")
+	public void enterTextAreaAddInfo(@Named("addInfoText") String addInfoText) {
+		getEditAreaPage().enterTextAreaAddInfo(addInfoText);
+	}
+	
+	@Then("the user should be able to verify the values are entered in the area add info field")
+	public void verifyAreaTextInAddInfo(@Named("addInfoText") String addInfoText) {
+		getEditAreaPage().verifyAreaTextInAddInfo(addInfoText);
+	}
+	
+	@Then("the user should not see the <ConfirmationSummary> changes in area confirmation modal")
+	public void verifyNoChangeConfirmationMsg(@Named("ConfirmationSummary") String ConfirmationSummary) {
+		getDataPage().verifyNoSummaryConfirmationModal(ConfirmationSummary);
+	}
+	
+	@When("the user enters values which is beyond 500 unicode characters in the area add info field")
+	public void enterInvalidCharactersInAreaAddInfo() {
+		getEditAreaPage().enterInvalidCharactersInAreaAddInfo();
+	}
+	
+	@Then("the user should be able to view that only 500 unicode characters are saved in area add info")
+	public void viewValidCharacterLength() {
+		getEditAreaPage().viewValidCharacterLength();
+	}
+	
+	@Then("the user should be able to verify the maximum values are entered in the area add info field")
+	public void verifyMaximumTextInAddInfo() {
+		getEditAreaPage().verifyMaximumChracterEnteredInAddInfo();
+	}
 }

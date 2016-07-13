@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -164,7 +165,82 @@ public class EditAreaPage extends AbstractPage {
 				getSelectedDropdownValue(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_xpath")));
 
 	}
+	
+	/**
+	 * This method is to enter the value in Area addInfo text field
+	 *
+	 * @param addInfoText
+	 */
+	public void enterTextAreaAddInfo(String addInfoText) {
+		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath"), addInfoText);
+	}
 
+	/**
+	 * This method is to clear and enter the value in text field
+	 *
+	 * @param webElement
+	 * @param value
+	 */
+	public void clearAndEnterValue(By webElement, String value) {
+		getDriver().findElement(webElement).clear();
+		getDriver().findElement(webElement).sendKeys(value);
+	}
+	
+	/**
+	 * This method is to verify the value in area addInfo text field to equal to
+	 * expected.
+	 *
+	 * @param addInfoText
+	 */
+	public void verifyAreaTextInAddInfo(String addInfoText) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals(addInfoText, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_xpath_after_save")).getText());
+	}
+	
+	/**
+	 * This method is to verify maximum characters entered in area additional info
+	 * text box is 500
+	 */
+	String addInfoMaximumCharacterString = null;
+
+	public void enterInvalidCharactersInAreaAddInfo() {
+		char c = 'a';
+		String invalidData = "";
+		for (int i = 0; i <= 500; i++) {
+			invalidData += c;
+		}
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath")).clear();
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath")).sendKeys(invalidData);
+		addInfoMaximumCharacterString = invalidData;
+	}
+	
+	public void viewValidCharacterLength() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		String text = "";
+		Integer len = null;
+		text = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_xpath_after_save")).getText();
+		len = text.length();
+		assertEquals(len.toString(), "500");
+	}
+	
+	/**
+	 * This method is to verify maximum characters entered in area additional info
+	 * text box is 500
+	 */
+	public void verifyMaximumChracterEnteredInAddInfo() {
+		assertEquals(addInfoMaximumCharacterString.subSequence(0, 500), getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_xpath_after_save")).getText());
+	}
+	
 	@Override
 	public String getPageUrl() {
 		return null;
