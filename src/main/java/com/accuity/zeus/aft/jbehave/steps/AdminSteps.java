@@ -53,11 +53,6 @@ public class AdminSteps extends AbstractSteps{
         getAdminPage().verifyNoResultsMatchOption();
     }
 
-    @Then("the list should not have any duplicates")
-    public void verifyNoDuplicatesInList(){
-        getAdminPage().verifyNoDuplicatesInList();
-    }
-
     @When("the user enters the taxonomy <taxonomy> in the type-ahead box")
     public void enterTaxonomyInTheTypeAheadBox(@Named("taxonomy") String taxonomy){
         getAdminPage().enterTaxonomyInTheTypeAheadBox(taxonomy);
