@@ -393,16 +393,15 @@ public class SearchResultsSteps extends AbstractSteps{
     }
 
 	@Then("the user should see the list of <status> offices till the page <pageNumber> of office search results")
-	public void verifyActiveOfficesSearchResultsInThirdPage(@Named("pageNumber") int pageNumber,
-			@Named("entity") String searchedEntity, @Named("status") String status,
-			@Named("allPages") Boolean allPages) {		
-		if(allPages)
-		{
-			getResultsPage().verifyActiveOfficesSearchResultsForAllPages(allPages, status);						
-		}
-		else
-		{
-			getResultsPage().verifyActiveOfficesSearchResultsForLimitedPages(searchedEntity,pageNumber, status);
-		}	
+	public void verifyActiveOfficesSearchResultsInLimitedPages(@Named("pageNumber") int pageNumber,
+			@Named("entity") String searchedEntity, @Named("status") String status) {
+		getResultsPage().verifyActiveOfficesSearchResultsForLimitedPages(searchedEntity, pageNumber, status);
 	}
+
+	@Then("the user should see the list of <status> offices in All result pages")
+	public void verifyActiveOfficesSearchResultsInAllPages(@Named("entity") String searchedEntity,
+			@Named("status") String status, @Named("allPages") Boolean allPages) {
+		getResultsPage().verifyActiveOfficesSearchResultsForAllPages(searchedEntity, allPages, status);
+	}
+
 }

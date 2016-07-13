@@ -112,6 +112,7 @@ public class ResultsPage extends AbstractPage {
     private By office_search_results_type_filter_xpath = By.xpath(".//*[@id='type']/li");
     private By office_search_refine_results_searchBox_xpath = By.xpath("//input[@id='refine-input']");
     private By office_addressList_locator_xpath = By.xpath(".//*[@class='search-results-module'] //td[3]");
+    private By office_search_total_number_of_results_xpath = By.xpath("//*[@id='subEntityList-header']");
 
 
     public ResultsPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi ) {
@@ -858,63 +859,90 @@ public class ResultsPage extends AbstractPage {
         assertEquals("Click to view office",getDriver().findElement(office_current_page_search_results_count_xpath).getAttribute("title"));
     }    
 
-	
-	public void verifyActiveOfficesSearchResultsForAllPages(Boolean allPages, String status) {
+	public void verifyActiveOfficesSearchResultsForAllPages(String searchedEntity, Boolean allPages, String status) {
 		try {
 			Thread.sleep(1000L);
 			assertTrue(getDriver().findElement(office_status_filter_active_selected_xpath).isDisplayed());
+			WebElement searchHeader = getDriver().findElement(office_search_total_number_of_results_xpath);
+			String fidCount = searchHeader.getText().split("of")[1].split("results")[0].trim();
 			WebElement nextPage = getDriver().findElement(office_search_results_next_page_classname);
+			int pageCount = 1;
+			int comparedFidsCount = 0;
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("fid", searchedEntity));
+			nvPairs.add(new BasicNameValuePair("fidCount", fidCount));
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"active office test list", nvPairs);
 			while (nextPage != null && allPages) {
 				Thread.sleep(5000L);
 				List<WebElement> resultList = getDriver().findElements(office_search_results_rows_xpath);
-				for (int i = 0; i < resultList.size(); i++) {
+				List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
+
+				for (int i = 0; i < resultList.size() && i < document.getElementsByTagName("fid").getLength(); i++) {
+
 					assertTrue(resultList.get(i).getText().contains(status));
+
+					assertEquals(document.getElementsByTagName("fid").item(i + (25 * (pageCount - 1))).getTextContent(),
+							fidList.get(i).getText());
+					comparedFidsCount++;
 				}
-				nextPage = getDriver().findElement(office_search_results_next_page_classname);
-				if (nextPage != null)
-					nextPage.click();
+				if (comparedFidsCount <= Integer.parseInt(fidCount)) {
+					nextPage = getDriver().findElement(office_search_results_next_page_classname);
+					if (nextPage != null) {
+						nextPage.click();
+					}
+				}
+				pageCount++;
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	public void verifyActiveOfficesSearchResultsForLimitedPages(String searchedEntity, int pageNumber, String status) {
-		try {			
+		try {
 			Thread.sleep(1000L);
 			assertTrue(getDriver().findElement(office_status_filter_active_selected_xpath).isDisplayed());
+			WebElement searchHeader = getDriver().findElement(office_search_total_number_of_results_xpath);
+			String fidCount = searchHeader.getText().split("of")[1].split("results")[0].trim();
 			WebElement nextPage = getDriver().findElement(office_search_results_next_page_classname);
 			int pageCount = 1;
-			  List<NameValuePair> nvPairs = new ArrayList<>();
-		      nvPairs.add(new BasicNameValuePair("fid", searchedEntity));
-			while (nextPage != null && pageCount<=pageNumber) {
+			int comparedFidsCount = 0;
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("fid", searchedEntity));
+			nvPairs.add(new BasicNameValuePair("fidCount", fidCount));
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"active office test list", nvPairs);
+			while (nextPage != null && pageCount <= pageNumber) {
 				Thread.sleep(5000L);
 				List<WebElement> resultList = getDriver().findElements(office_search_results_rows_xpath);
 				List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
-				Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "active office test list", nvPairs);
-				for (int i = 0; i < resultList.size() && i<document.getElementsByTagName("fid").getLength(); i++) {
-					
-					//Verifying the status in UI
-					assertTrue("result list is having status :"+status,resultList.get(i).getText().contains(status));
-					
-					//Comparing the Fids from UI with DB
-					assertEquals(document.getElementsByTagName("fid").item(i+(25*(pageCount-1))).getTextContent(), fidList.get(i).getText());
-					
-				}				
-				nextPage = getDriver().findElement(office_search_results_next_page_classname);
-				if (nextPage != null && pageCount < pageNumber)
-				{
-					nextPage.click();
+				for (int i = 0; i < resultList.size() && i < document.getElementsByTagName("fid").getLength(); i++) {
+
+					// Verifying the status in UI
+					assertTrue("result list is having status :" + status, resultList.get(i).getText().contains(status));
+
+					// Comparing the office ids from UI with DB
+					assertEquals(document.getElementsByTagName("fid").item(i + (25 * (pageCount - 1))).getTextContent(),
+							fidList.get(i).getText());
+					comparedFidsCount++;
+
 				}
-				pageCount ++;
-			}		
-			
+				if (comparedFidsCount <= Integer.parseInt(fidCount)) {
+					nextPage = getDriver().findElement(office_search_results_next_page_classname);
+					if (nextPage != null && pageCount < pageNumber) {
+						nextPage.click();
+					}
+				}
+				pageCount++;
+
+			}
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
 	}
-
 
 }
