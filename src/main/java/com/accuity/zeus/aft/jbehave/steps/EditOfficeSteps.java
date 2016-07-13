@@ -56,20 +56,12 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyOfficeAdditionalInfoTextAreaLength(officeFid);
     }
 
-    @When("the user enters 10001 characters in the office additional info text area")
-    public void enter10001CharactersInOfficeAdditionalInfo(@Named("officeFid") String officeFid) {
-        getEditOfficePage().enter10001CharactersInOfficeAdditionalInfo(officeFid);
-    }
 
     @When("the user enters 10000 characters in the office additional info text area")
     public void enter10000CharactersInOfficeAdditionalInfo(@Named("officeFid") String officeFid) {
         getEditOfficePage().enter10000CharactersInOfficeAdditionalInfo(officeFid);
     }
 
-    @Then("the user should see the error message enter up to 10000 valid characters for additional info value in the basic info office page")
-    public void verifyOfficeAdditionalInfoErrorMessageForMaxLength() {
-        getEditOfficePage().verifyOfficeAdditionalInfoErrorMessageForMaxLength();
-    }
 
     @Then("the user should see the office additional info text value with 10000 characters for fid <officeFid> in $source document")
     public void verifyAdditionalInfoValueWithMaxLengthFromDB(@Named("officeFid") String officeFid,@Named("source") String source) {

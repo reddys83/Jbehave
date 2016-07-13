@@ -113,19 +113,6 @@ public class EditOfficePage extends AbstractPage {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + strBigString + "'", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_xpath")));
     }
 
-    public void enter10001CharactersInOfficeAdditionalInfo(String officeFid) {
-        String strBigString = createBigString(10000);
-        modifyHtmlByName(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_xpath"), "maxlength", "10001");
-        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_xpath")).clear();
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + strBigString + "'", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_xpath")));
-        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_xpath")).sendKeys("1");
-    }
-
-    public void verifyOfficeAdditionalInfoErrorMessageForMaxLength() {
-        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfos_err_msg_xpath")).getText(), "Enter up to 10000 valid characters.");
-    }
-
-
     public void verifyAdditionalInfoValueWithMaxLengthFromZeus(String officeFid, String selectedEntity, String source){
         assertEquals(getOfficeValuesFromDB(selectedEntity, source), bigString);
 

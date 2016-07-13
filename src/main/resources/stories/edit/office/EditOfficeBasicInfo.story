@@ -207,10 +207,6 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the office additional info text value with 10000 characters for fid <officeFid> in zeus document
 And the user reverts the changes to the document
-When the user clicks on the office update link
-And the user enters 10001 characters in the office additional info text area
-And the user clicks on the save button
-Then the user should see the error message enter up to 10000 valid characters for additional info value in the basic info office page
 
 Examples:
 |entity|searchBy|fid|officeFid|
