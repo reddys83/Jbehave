@@ -82,8 +82,8 @@ let $cityCreditRating := for $x in ($city/creditRatings/rating)
 let $cityCreditAgencyName := $x/agencyName/text()
 let $cityCreditType := $x/type/text()
 let $cityCreditValue := $x/value/text()  
-let $cityCreditDateApplied := $x/dateApplied/text()  
-let $cityCreditDateConfirmed := $x/dateConfirmed/text() 
+let $cityCreditDateApplied := local:getDateAsPerAccuracy($x/dateApplied)
+let $cityCreditDateConfirmed := local:getDateAsPerAccuracy($x/dateConfirmed) 
 return
       <creditRating>       
         <creditRatingAgencyName>{$cityCreditAgencyName}</creditRatingAgencyName>

@@ -1168,4 +1168,3 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyCityRegionDeletedFromDB(cityRegionValueMap, newRegionType);
 	}
 }
-

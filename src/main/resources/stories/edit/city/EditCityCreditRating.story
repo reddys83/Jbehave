@@ -25,16 +25,25 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 When the user clicks on the city credit rating link in the navigation bar
 And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user clicks on add new credit rating button in the credit rating city page
+When the user enters credit rating agency as <agency> in credit rating row $rowNumber in the basic info city page
+When the user enters credit rating type as <type> in credit rating row $rowNumber in the basic info city page
+When the user enters credit rating <value> in credit rating row $rowNumber in the basic info city page
+When the user clicks on the save button
+When the user clicks on the confirm button
+And the user clicks on the city update link
 Then the user should see the city Agency names from look up CREDIT_RATING_AGENCY in existing creditRating row $rowNumber
 Then the user should see the city Agency types from look up CREDIT_RATING_TYPE in existing creditRating row $rowNumber
 When the user deletes the existing credit rating rows
 When the user clicks on add new credit rating button in the credit rating city page
 Then the user should see the city Agency names from look up CREDIT_RATING_AGENCY in new creditRating row $rowNumber
 Then the user should see the city Agency types from look up CREDIT_RATING_TYPE in new creditRating row $rowNumber
+Then the user reverts the changes to the document
 
 Examples:
-|country|area|city|rowNumber|
-|USA|Alabama|Alexandria|1|
+|country|area|city|agency|type|value|rowNumber|
+|USA|Alabama|Altoona|Standard & Poors|Long Term Rating|1234|1|
 
 Scenario: Update and Save existing credit ratings
 a) User selects a new value for Agency, Type, Value, Applied Date and Confirmed Date and click Save. Updated Credit rating should be saved in Zeus document
@@ -374,7 +383,6 @@ Examples:
 |USA|Alabama|Alexandria|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|1|
 
 Scenario: User can edit city identifiers- Verify if User can delete credit rating by clicking on 'cancel', then after saving the credit rating row should not get deleted.
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
