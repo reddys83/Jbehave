@@ -259,5 +259,17 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyNameType(newNameType);
 		getEditAreaPage().verifyNameValue(newNameType, newNameValue);
 	}
+	
+	@Then("the user should not see the $nameType <value> in $source document")
+	public void verifyBlankAreaNameValueNotUpdatedInDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("nameType") String nameType, @Named("value") String nameValue) {
+		getEditAreaPage().verifyBlankAreaNameValueNotUpdatedInDB(country, area, nameType, source, nameValue);
+	}
+	
+	@Then("the user should see not the area name type and value updated in in the area basic info page")
+	public void verityNoBlankCityNameTypeAndValue(@Named("type") String newNameType, 
+										   @Named("value") String newNameValue) {
+		getEditAreaPage().verifyNameTypeNotPresent(newNameType);
+	}
 }
 

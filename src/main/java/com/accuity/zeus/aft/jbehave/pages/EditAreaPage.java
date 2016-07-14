@@ -650,6 +650,23 @@ public class EditAreaPage extends AbstractPage {
 			ex.printStackTrace();
 		}
 	}
+	
+	public void verifyNameTypeNotPresent(String nameType) {
+		try {
+			// appending the name type to the xpath to retrieve corresponding row in view mode
+			WebElement newNameTypeElement = getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']"));
+			newNameTypeElement.getText();
+			assertTrue(newNameTypeElement == null);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void verifyBlankAreaNameValueNotUpdatedInDB(String country, String area, String nameType, String source, String nameValue) {		
+		Map<String, String> cityNameValueMap = getAreaNameValueMapFromDB(country, area, source);
+		assertTrue(!cityNameValueMap.containsKey(nameType));
+		assertTrue(!cityNameValueMap.values().contains(nameValue));
+	}
 
 	@Override
 	public String getPageUrl() {
