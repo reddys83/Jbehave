@@ -23,6 +23,7 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -579,6 +580,75 @@ public class EditAreaPage extends AbstractPage {
 		}
 		assertEquals(nameValue, getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier(nameValuePath)).getText());
+	}
+	
+	public void clickOnAddNewNameButton() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_names_add_names_button_xpath"));
+	}
+	
+	public void verifyNewRowAreaNameTypesList() {
+		
+		List<String> names = getAreaNameTypesFromLookup();
+		
+		List<String> newRowNameTypes = new ArrayList<String>();
+		newRowNameTypes.add("");
+		newRowNameTypes.addAll(names);
+		newRowNameTypes.remove("Full Name");
+		newRowNameTypes.remove("Display Name");
+		
+		List<WebElement> areaNameTypesList = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_name_type_input_xpath"));
+		List<WebElement> options = areaNameTypesList.get(0).findElements(By.cssSelector("option"));
+		for (int i = 0; i < options.size(); i++) {
+            assertEquals(newRowNameTypes.get(i), 
+            			 options.get(i).getText().trim());
+        }
+	}
+	
+	public void enterNameType(String nameType) {
+		try {
+			if (nameType != null) {
+				List<WebElement> identifierDropDowns = getDriver()
+						.findElements(AreaIdentifiers.getObjectIdentifier("area_name_type_input_xpath"));
+				Select dropdown = new Select(identifierDropDowns.get(0));
+				if (nameType.equals("")) {
+					dropdown.selectByValue(nameType);
+				} else {
+					dropdown.selectByVisibleText(nameType);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void enterNameValue(String newNameValue) {
+		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_name_value_input_xpath"), newNameValue);
+	}
+	
+	public void verifyNameType(String nameType) {
+		try {
+			// appending the name type to the xpath to retrieve corresponding row in view mode
+			WebElement newNameTypeElement = getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']"));
+			assertTrue(newNameTypeElement != null);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void verifyNameValue(String nameType, String nameValue) {
+		try {
+			// appending the name type to the xpath to retrieve the corresponding row in view mode
+			WebElement newNameValueElement = getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']/td[2]"));
+			assertEquals(newNameValueElement.getText(), nameValue);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	@Override

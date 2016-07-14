@@ -232,5 +232,32 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyTextInNameValue(@Named("value") String nameValue, @Named("nameType") String nameType) {
 		getEditAreaPage().verifyTextInNameValue(nameValue, nameType);
 	}
+	
+	@When("the user clicks on the add names button in the area basic info page")
+	public void clickOnAddNewNameButton() {
+		getEditAreaPage().clickOnAddNewNameButton();
+	}
+	
+	@Then("the user should see the area name types from lookup PLACE_NAME_TYPE")
+	public void verifyNewRowAreaNameTypesList() {
+		getEditAreaPage().verifyNewRowAreaNameTypesList();
+	}
+	
+	@When("the user enters name type as <type> in the area basic info page")
+	public void enterNameType(@Named("type") String newNameType) {
+		getEditAreaPage().enterNameType(newNameType);
+	}
+	
+	@When("the user enters name value as <value> in the area basic info page")
+	public void enterNameValue(@Named("value") String newNameValue) {
+		getEditAreaPage().enterNameValue(newNameValue);
+	}
+	
+	@Then("the user should see the area name type and value updated in in the area basic info page")
+	public void verityCityNameTypeAndValue(@Named("type") String newNameType, 
+										   @Named("value") String newNameValue) {
+		getEditAreaPage().verifyNameType(newNameType);
+		getEditAreaPage().verifyNameValue(newNameType, newNameValue);
+	}
 }
 
