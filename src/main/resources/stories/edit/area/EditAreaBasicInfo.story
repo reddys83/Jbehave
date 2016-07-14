@@ -16,7 +16,7 @@ And the user clicks on the area tab in the data area
 And the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
-And the user enters the <Area> in the type-ahead box
+And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
@@ -41,7 +41,7 @@ And the user clicks on the area tab in the data area
 And the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
-And the user enters the <Area> in the type-ahead box
+And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 Then the user should see the area addInfoText value same as in trusted document
@@ -63,7 +63,7 @@ And the user clicks on the area tab in the data area
 And the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
-And the user enters the <Area> in the type-ahead box
+And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
@@ -75,7 +75,7 @@ Then the user should be able to verify the values are entered in the area add in
 When the user clicks on the area update link
 When the user enters the <addInfoText> in the area add info text area
 And the user clicks on the save button
-Then the user should not see the <ConfirmationSummary> changes in area confirmation modal
+Then the user should not see the <ConfirmationSummary> changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user should be able to verify the values are entered in the area add info field
@@ -92,7 +92,7 @@ And the user clicks on the area tab in the data area
 And the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
-And the user enters the <Area> in the type-ahead box
+And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user enters values which is beyond 500 unicode characters in the area add info field
