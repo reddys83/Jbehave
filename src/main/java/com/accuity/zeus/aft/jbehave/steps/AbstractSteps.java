@@ -8,7 +8,7 @@ import com.accuity.zeus.aft.jbehave.pages.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
-import com.accuity.zeus.aft.jbehave.pages.DataPage;
+
 import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.aft.result.ResultsPage;
 import com.accuity.zeus.aft.web.driver.WebDriverState;
@@ -44,7 +44,7 @@ public abstract class AbstractSteps {
 
 
 	public static EditCityPage editCityPage;
-	public static EditAreaPage editAreaPage;
+	private static EditAreaPage editAreaPage;
 
     @Autowired
     ApacheHttpClient apacheHttpClient;
@@ -229,16 +229,17 @@ public abstract class AbstractSteps {
 		return editCityPage;
 	}
 
-	public static EditAreaPage getEditAreaPage() {
-		return editAreaPage;
+	public static void setEditCityPage(EditCityPage editCityPage) {
+		AbstractSteps.editCityPage = editCityPage;
 	}
-
+	
 	public static void setEditAreaPage(EditAreaPage editAreaPage) {
 		AbstractSteps.editAreaPage = editAreaPage;
 	}
 	
-	public static void setEditCityPage(EditCityPage editCityPage) {
-		AbstractSteps.editCityPage = editCityPage;
+	public static EditAreaPage getEditAreaPage() {
+		return editAreaPage;
 	}
+	
 
 }
