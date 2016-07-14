@@ -10,7 +10,7 @@ JIRA ID - ZEUS-1025 - User can edit Area's Status
 JIRA ID - ZEUS-1027 - User can edit Area's End Date
 
 JIRA ID - ZEUS-1026 - User can edit Area's Began Date
-Jira ID - ZEUS-1173 - Error handling when error is in section not currently displayed
+JIRA ID - ZEUS-1173 - Error handling when error is in section not currently displayed
 
 
 Scenario: User can edit area Began Date -

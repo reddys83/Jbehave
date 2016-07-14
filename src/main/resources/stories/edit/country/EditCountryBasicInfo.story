@@ -16,7 +16,7 @@ JIRA ID - ZEUS-441 - User can save edits to country
 JIRA ID - ZEUS-920 - Properly handle Hera validation errors
 JIRA ID - ZEUS-953 - Item deletion, Confirmation Message
 JIRA ID - ZEUS-1001- When the user is on the country edit page and try to change the id in the URL , Then the modified country page should be in view mode
-Jira ID - ZEUS-1173 - Error handling when error is in section not currently displayed
+JIRA ID - ZEUS-1173 - Error handling when error is in section not currently displayed
 
 Scenario: Verify country names type from lookup COUNTRY_NAME_TYPE
 Given a user is on the search page

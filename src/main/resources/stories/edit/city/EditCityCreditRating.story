@@ -6,6 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 
 JIRA ID - ZEUS-973 - User can view City Credit Ratings
+JIRA ID - ZEUS-1173 - Error handling when error is in section not currently displayed
 
 Scenario: Verify City's Credit Ratings Agency and Type dropdown values are
 from lookup CREDIT_RATING_AGENCY and CREDIT_RATING_TYPE respectively in the same order as taxonomy

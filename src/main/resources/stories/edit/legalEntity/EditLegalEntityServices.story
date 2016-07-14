@@ -5,7 +5,8 @@ As a user
 I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-918 - User can edit Legal Entity's Services
-Jira ID - ZEUS-1173 - Error handling when error is in section not currently displayed
+JIRA ID - ZEUS-1173 - Error handling when error is in section not currently displayed
+
 Scenario: Verify legalEntity services category,Override,Financial Category and Financial Details values are coming from SERVICE_CATEGORY, FINANCIAL_SERVICE look up tables for new and existing row
 Given a user is on the search page
 When the user clicks on the data tab in the search page
