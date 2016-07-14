@@ -88,4 +88,22 @@ public class EditAreaSteps extends AbstractSteps {
 	public void selectAreaStatusValue2(@Named("status2") String status) {
 		getEditAreaPage().selectAreaStatusValue(status);
 	}
+	
+	@Then("the user should see the $nameType type is from PLACE_NAME_TYPE lookup")
+	public void verifyAreaNameTypeFromLookup(@Named("nameType") String nameType) {
+		getEditAreaPage().verifyAreaNameTypeFromLookup(nameType);
+	}
+	
+	@Then("the user should see the $nameType value in area page is same as in $source document")
+	public void verifyAreaNameValueFromDB(@Named("country") String country, @Named("Area") String area,
+			@Named("source") String source, @Named("nameType") String nameType) {
+		getEditAreaPage().verifyAreaNameFromTrustedDB(country, area, nameType, source);
+	}
+	
+	@Then("the user should see the $nameType is not editable")
+	public void verifyFixedNameNotEditable(@Named("nameType") String nameType) {
+		getEditAreaPage().verifyFixedNameTypeNotEditable(nameType);
+	}
+	
+	
 }

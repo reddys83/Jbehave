@@ -4,15 +4,21 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
@@ -163,6 +169,72 @@ public class EditAreaPage extends AbstractPage {
 		assertEquals((getAreaInfoFromDB(country, area, tagName, source)),
 				getSelectedDropdownValue(AreaIdentifiers.getObjectIdentifier("area_status_identifier_dropdown_xpath")));
 
+	}
+	
+	public Map<String, String> getAreaNameValueMapFromDB(String country, String area, String source) {
+		Map<String, String> cityNameMap = new HashMap<String, String>();
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area basic info", nvPairs);
+		if (document != null) {
+			NodeList nodeList = document.getElementsByTagName("name");
+			for(int index = 0; index < nodeList.getLength(); index++)  {
+				NodeList childNodeList = nodeList.item(index).getChildNodes();
+				cityNameMap.put(childNodeList.item(0).getTextContent(), childNodeList.item(1).getTextContent());
+			}
+		}
+		return cityNameMap;
+	}
+	
+	public List<String> getAreaNameTypesFromLookup() {
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		List<String> nameTypes = new ArrayList<String>();
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area name types");
+		if (document != null) {
+			NodeList nodeList = document.getElementsByTagName("types");
+			for(int index = 0; index < nodeList.getLength(); index++)  {
+				NodeList childNodeList = nodeList.item(index).getChildNodes();
+				nameTypes.add(childNodeList.item(0).getTextContent());
+			}
+		}
+		return nameTypes;
+	}
+	
+	public void verifyAreaNameFromTrustedDB(String country, String area, String nameType, String source) {
+		Map<String, String> cityNameValueMap = getAreaNameValueMapFromDB(country, area, source);
+
+		assertEquals(cityNameValueMap.get(nameType),
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("area_names_full_name_type_xpath")));
+
+	}
+	
+	public void verifyAreaNameTypeFromLookup(String nameType) {
+		List<String> names = getAreaNameTypesFromLookup();
+		assertTrue(names.contains(
+				getDriver().findElement(CityIdentifiers.getObjectIdentifier("area_names_full_name_value_xpath")).getAttribute("value")));
+
+	}
+	
+	public void verifyFixedNameTypeNotEditable(String nameType) {
+		try {
+			getDriver().findElement(CityIdentifiers.getObjectIdentifier("area_names_full_name_type_xpath")).findElement(By.cssSelector("input"));
+		} catch(NoSuchElementException ex) {
+			assertTrue("Full Name is not editable", true);
+		}
 	}
 
 	@Override
