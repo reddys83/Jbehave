@@ -33,5 +33,6 @@ let $DateFields :=
     
 return
   <area>
+      { $areaDoc/summary/names }
       <dateFields>{$DateFields}</dateFields>
   </area>

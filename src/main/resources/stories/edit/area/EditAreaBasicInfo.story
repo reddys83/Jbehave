@@ -596,6 +596,32 @@ Examples:
 |country|area|beganDay1|beganMonth1|beganYear1|day|month|year|
 |Angola|Cabinda||||06|Jun|2015|
 
+Scenario: User has selected to update Full Name in Area's Basic Info
+Meta: @AreaFullName
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+Then the user should see the Full Name type is from PLACE_NAME_TYPE lookup
+Then the user should see the Full Name value in area page is same as in trusted document
+And the user should see the Full Name is not editable
+Then the user enters the name <value> in the Full Name field
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Names|
+When the user clicks on the confirm button
+Then the user should see the Full Name <value> in zeus document
+Then the user should be able see the <value> is updated in Full Name value field
+Then the user reverts the changes to the document
 
-
-
+Examples:
+|country|area|value|
+|Angola|Cabinda|Cabinda1|

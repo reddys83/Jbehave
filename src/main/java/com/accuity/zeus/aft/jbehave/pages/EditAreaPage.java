@@ -491,7 +491,7 @@ public class EditAreaPage extends AbstractPage {
 
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area name types");
 		if (document != null) {
-			NodeList nodeList = document.getElementsByTagName("types");
+			NodeList nodeList = document.getElementsByTagName("type");
 			for(int index = 0; index < nodeList.getLength(); index++)  {
 				NodeList childNodeList = nodeList.item(index).getChildNodes();
 				nameTypes.add(childNodeList.item(0).getTextContent());
@@ -504,14 +504,14 @@ public class EditAreaPage extends AbstractPage {
 		Map<String, String> cityNameValueMap = getAreaNameValueMapFromDB(country, area, source);
 
 		assertEquals(cityNameValueMap.get(nameType),
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_names_full_name_type_xpath")));
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_names_full_name_value_xpath")).getAttribute("value"));
 
 	}
 	
 	public void verifyAreaNameTypeFromLookup(String nameType) {
 		List<String> names = getAreaNameTypesFromLookup();
 		assertTrue(names.contains(
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_names_full_name_value_xpath")).getAttribute("value")));
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_names_full_name_type_xpath")).getText()));
 
 	}
 	
@@ -521,6 +521,20 @@ public class EditAreaPage extends AbstractPage {
 		} catch(NoSuchElementException ex) {
 			assertTrue("Full Name is not editable", true);
 		}
+	}
+	
+	public void enterValueInNameField(String nameType, String value) {
+		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_names_full_name_value_xpath"), value);
+	}
+	
+	public void verifyUpdatedAreaNameInDB(String country, String area, String nameType, String source, String nameValue) {
+		Map<String, String> cityNameValueMap = getAreaNameValueMapFromDB(country, area, source);
+		assertEquals(cityNameValueMap.get(nameType), nameValue);
+	}
+	
+	public void verifyTextInNameValue(String nameValue, String nameType) {
+		assertEquals(nameValue, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_names_full_name_value_view_xpath")).getText());
 	}
 
 	@Override

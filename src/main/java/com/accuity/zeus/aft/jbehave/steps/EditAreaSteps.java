@@ -216,5 +216,21 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyFixedNameNotEditable(@Named("nameType") String nameType) {
 		getEditAreaPage().verifyFixedNameTypeNotEditable(nameType);
 	}
+	
+	@Then("the user enters the name <value> in the $nameType field")
+	public void enterValueInNameField(@Named("value") String nameValue, @Named("nameType") String nameType) {
+		getEditAreaPage().enterValueInNameField(nameType, nameValue);
+	}
+	
+	@Then("the user should see the $nameType <value> in $source document")
+	public void verifyUpdatedAreaNameValueInDB(@Named("country") String country,
+			@Named("source") String source, @Named("nameType") String nameType, @Named("value") String nameValue) {
+		getEditAreaPage().verifyUpdatedAreaNameInDB(country, nameValue, nameType, source, nameValue);
+	}
+	
+	@Then("the user should be able see the <value> is updated in $nameType value field")
+	public void verifyTextInNameValue(@Named("value") String nameValue, @Named("nameType") String nameType) {
+		getEditAreaPage().verifyTextInNameValue(nameValue, nameType);
+	}
 }
 
