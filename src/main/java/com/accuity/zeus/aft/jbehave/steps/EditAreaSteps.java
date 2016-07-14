@@ -223,9 +223,9 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@Then("the user should see the $nameType <value> in $source document")
-	public void verifyUpdatedAreaNameValueInDB(@Named("country") String country,
+	public void verifyUpdatedAreaNameValueInDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source, @Named("nameType") String nameType, @Named("value") String nameValue) {
-		getEditAreaPage().verifyUpdatedAreaNameInDB(country, nameValue, nameType, source, nameValue);
+		getEditAreaPage().verifyUpdatedAreaNameInDB(country, area, nameType, source, nameValue);
 	}
 	
 	@Then("the user should be able see the <value> is updated in $nameType value field")

@@ -503,38 +503,82 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyAreaNameFromTrustedDB(String country, String area, String nameType, String source) {
 		Map<String, String> cityNameValueMap = getAreaNameValueMapFromDB(country, area, source);
 
+        String nameValuePath = "";
+		
+		if("Full Name".equals(nameType)) {
+			nameValuePath = "area_names_full_name_value_xpath";
+		} else if("Display Name".equals(nameType)) {
+			nameValuePath = "area_names_display_name_value_xpath";
+		}
+		
 		assertEquals(cityNameValueMap.get(nameType),
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_names_full_name_value_xpath")).getAttribute("value"));
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier(nameValuePath)).getAttribute("value"));
 
 	}
 	
 	public void verifyAreaNameTypeFromLookup(String nameType) {
 		List<String> names = getAreaNameTypesFromLookup();
+		
+		String nameTypePath = "";
+		
+		if("Full Name".equals(nameType)) {
+			nameTypePath = "area_names_full_name_type_xpath";
+		} else if("Display Name".equals(nameType)) {
+			nameTypePath = "area_names_display_name_type_xpath";
+		}
 		assertTrue(names.contains(
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_names_full_name_type_xpath")).getText()));
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier(nameTypePath)).getText()));
 
 	}
 	
 	public void verifyFixedNameTypeNotEditable(String nameType) {
+		
+        String nameTypePath = "";
+		
+		if("Full Name".equals(nameType)) {
+			nameTypePath = "area_names_full_name_type_xpath";
+		} else if("Display Name".equals(nameType)) {
+			nameTypePath = "area_names_display_name_type_xpath";
+		}
+		
 		try {
-			getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_names_full_name_type_xpath")).findElement(By.cssSelector("input"));
+			getDriver().findElement(AreaIdentifiers.getObjectIdentifier(nameTypePath)).findElement(By.cssSelector("input"));
 		} catch(NoSuchElementException ex) {
 			assertTrue("Full Name is not editable", true);
 		}
 	}
 	
 	public void enterValueInNameField(String nameType, String value) {
-		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_names_full_name_value_xpath"), value);
+        
+		String nameValuePath = "";
+		
+		if("Full Name".equals(nameType)) {
+			nameValuePath = "area_names_full_name_value_xpath";
+		} else if("Display Name".equals(nameType)) {
+			nameValuePath = "area_names_display_name_value_xpath";
+		}
+		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier(nameValuePath), value);
 	}
 	
 	public void verifyUpdatedAreaNameInDB(String country, String area, String nameType, String source, String nameValue) {
+		if("Full Name".equals(nameType)) {
+			area = nameValue;
+		}			
 		Map<String, String> cityNameValueMap = getAreaNameValueMapFromDB(country, area, source);
 		assertEquals(cityNameValueMap.get(nameType), nameValue);
 	}
 	
 	public void verifyTextInNameValue(String nameValue, String nameType) {
+		
+        String nameValuePath = "";
+		
+		if("Full Name".equals(nameType)) {
+			nameValuePath = "area_names_full_name_value_view_xpath";
+		} else if("Display Name".equals(nameType)) {
+			nameValuePath = "area_names_display_name_value_view_xpath";
+		}
 		assertEquals(nameValue, getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_names_full_name_value_view_xpath")).getText());
+				.findElement(AreaIdentifiers.getObjectIdentifier(nameValuePath)).getText());
 	}
 
 	@Override
