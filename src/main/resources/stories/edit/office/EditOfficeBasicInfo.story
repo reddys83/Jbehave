@@ -5,6 +5,8 @@ As a user
 I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-1066 - User can edit Office's Opened Date
+and
+JIRA ID - ZEUS-1073 - User can edit Office's Names
 
 Scenario: Update and Save office Opened date
 Verify User updates a value for Opened Date and click Save. Updated Office opened date should be saved in Zeus document
@@ -116,3 +118,27 @@ Then the user verifies office opened date from zeus document <fid> <day> <month>
 Examples:
 |entity|searchBy|fid|officeFid|day|month|year|
 |1010|FID|1010|1010-44||||
+
+Scenario: Verify Office Name Type dropdown values are from lookup OFFICE_NAME_TYPE
+a) Verify for an existing Office Name row, the Office Type values are from OFFICE_NAME_TYPE
+b) Verify for a new Office Name row, the Office Type values are from OFFICE_NAME_TYPE
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office update link
+Then the user should see the office_first_row_existing_office_name_type_dropdown values in office's section from lookup OFFICE_NAME_TYPE
+When the user clicks on add new office name button in the office name page
+Then the user should see the office_first_row_existing_office_name_type_dropdown values in office's section from lookup OFFICE_NAME_TYPE
+
+Examples:
+|entity|searchBy|fid|officeFid|
+|1010|FID|1010|1010-44|
+
+

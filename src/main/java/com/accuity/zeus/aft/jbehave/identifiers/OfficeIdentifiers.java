@@ -20,6 +20,9 @@ public class OfficeIdentifiers {
         hmap.put("office_basicInfo_openedDate_month_xpath", By.xpath("//*[@id='officeBasicInfo']//select[@name='openedDate-month']"));
         hmap.put("office_basicInfo_openedDate_year_xpath", By.xpath("//*[@id='officeBasicInfo']//input[@name='openedDate-year']"));
         hmap.put("office_basicInfo_openedDate_errorMessage_xpath",By.xpath("//*[@data-error_id='openedDateError']"));
+        hmap.put("office_first_row_existing_office_name_dropdown",By.xpath("//*[@id='additionalOfficeNames]//tr[1]//select[@data-internal_id='OfficeName']"));
+        hmap.put("office_name_addRow_id",By.id("add-officeName"));
+
     }
 
     public static By getObjectIdentifier(String key) {

@@ -40,6 +40,16 @@ public class EditOfficeSteps extends AbstractSteps{
     @Then("the user verifies office opened date from zeus document <fid> <day> <month> <year>")
     public void verifyUpdatedOfficeOpenedDate(@Named("fid") String fid,@Named("day") String day,@Named("month") String month,@Named("year") String year){getEditOfficePage().verifyUpdatedOfficeOpenedDate(fid,day,month,year);}
 
+
+    @Then("the user should see the $office_rowIdentifier values in office's section from lookup $lookup")
+    public void verifyOfficesNameTypesFromLookup(@Named("offices_rowIdentifier") String offices_rowIdentifier,@Named("lookup") String lookup) {
+        getEditOfficePage().verifyOfficesNameTypesFromLookup(offices_rowIdentifier,lookup);
+    }
+
+    @When("the user clicks on add new office name button in the office name page")
+    public void clickOnAddButton(){
+        getEditOfficePage().clickAddRowButton();
+    }
 }
 
 

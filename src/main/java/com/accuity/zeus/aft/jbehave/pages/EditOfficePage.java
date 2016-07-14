@@ -72,6 +72,27 @@ public class EditOfficePage extends AbstractPage {
     }
 
 
+    public void verifyOfficesNameTypesFromLookup(String rowIdentifier,String lookupFid)
+    {   List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", lookupFid));
+        List<WebElement> creditRatingsList = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier(rowIdentifier));
+
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office names From Lookup", nvPairs);
+        for (int i = 1; i < document.getElementsByTagName("OfficeNames").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), creditRatingsList.get(i).getAttribute("value"));
+        }
+
+    }
+
+    public void clickAddRowButton() {
+        attemptClick(OfficeIdentifiers.getObjectIdentifier("legalEntity_credit_rating_addRow_id"));
+    }
+
     @Override
     public String getPageUrl() {
         return null;
