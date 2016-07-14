@@ -118,4 +118,10 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyMaximumTextInAddInfo() {
 		getEditAreaPage().verifyMaximumChracterEnteredInAddInfo();
 	}
+	
+	@Then("the user should see the area addInfoText value same as in $source document")
+	public void verifyCityAddInfoValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("city") String city, @Named("source") String source) {
+		getEditCityPage().verifyCityAddInfoValueFromTrusted(country, area, city, "additionalinfo", source);
+	}
 }

@@ -241,6 +241,13 @@ public class EditAreaPage extends AbstractPage {
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_xpath_after_save")).getText());
 	}
 	
+	public void verifyAreaAddInfoValueFromTrusted(String country, String area, String city, String tagName,
+			String source) {
+		//assertEquals(getAreaInfoFromDB(country, area, city, tagName, source),
+				//getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText());
+
+	}
+	
 	@Override
 	public String getPageUrl() {
 		return null;
