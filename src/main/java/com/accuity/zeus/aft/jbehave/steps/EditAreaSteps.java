@@ -229,7 +229,7 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user should see the area addInfoText value same as in $source document")
 	public void verifyCityAddInfoValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("city") String city, @Named("source") String source) {
-		getEditCityPage().verifyCityAddInfoValueFromTrusted(country, area, city, "additionalinfo", source);
+		getEditAreaPage().verifyAreaAddInfoValueFromTrusted(country, area, "AdditionalInfo", source);
 	}
 
 }

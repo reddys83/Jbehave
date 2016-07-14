@@ -19,6 +19,7 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -462,17 +463,7 @@ public class EditAreaPage extends AbstractPage {
 		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath"), addInfoText);
 	}
 
-	/**
-	 * This method is to clear and enter the value in text field
-	 *
-	 * @param webElement
-	 * @param value
-	 */
-	public void clearAndEnterValue(By webElement, String value) {
-		getDriver().findElement(webElement).clear();
-		getDriver().findElement(webElement).sendKeys(value);
-	}
-	
+		
 	/**
 	 * This method is to verify the value in area addInfo text field to equal to
 	 * expected.
@@ -528,10 +519,10 @@ public class EditAreaPage extends AbstractPage {
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_xpath_after_save")).getText());
 	}
 	
-	public void verifyAreaAddInfoValueFromTrusted(String country, String area, String city, String tagName,
+	public void verifyAreaAddInfoValueFromTrusted(String country, String area, String tagName,
 			String source) {
-		//assertEquals(getAreaInfoFromDB(country, area, city, tagName, source),
-				//getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_add_info_text_xpath")).getText());
+		assertEquals(getAreaInfoFromDB(country, area, tagName, source),
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath")).getText());
 
 	}
 	

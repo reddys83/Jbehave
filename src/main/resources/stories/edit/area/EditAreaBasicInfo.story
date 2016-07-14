@@ -31,8 +31,8 @@ Then the user should be able to verify the values are entered in the area add in
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|city|addInfoText|
-|USA|Georgia|Adrian|Sample text|
+|country|area|addInfoText|
+|USA|Georgia|Sample text|
 
 Scenario: To update the Area`s 'Basic Info' by entering a value for 'Add Info' that is different from the current value(Back End validation)
 Given a user is on the search page
@@ -52,8 +52,8 @@ Then the user should see the city addinfo value <addInfoText> as in zeus documen
 
 
 Examples:
-|country|area|city|addInfoText|
-|USA|Georgia|Adrian|This is a different text|
+|country|area|addInfoText|
+|USA|Georgia|This is a different text|
 
 Scenario: To view that there is no change in value when the user has entered a value for 'Add Info' that is no different to the current value in Area page(Front End Validation)
 
@@ -82,8 +82,8 @@ Then the user should be able to verify the values are entered in the area add in
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|city|addInfoText|ConfirmationSummary|
-|USA|Georgia|Adrian|This is a different text|Basic Info|
+|country|area|addInfoText|ConfirmationSummary|
+|USA|Georgia|This is a different text|Basic Info|
 
 Scenario: To view whether the text entered in the 'Add Info' field is not beyond 500 unicode characters after saving the Area page
 Given a user is on the search page
@@ -104,5 +104,5 @@ Then the user should be able to verify the maximum values are entered in the are
 
 
 Examples:
-|country|area|city|
-|USA|Georgia|Adrian|
+|country|area|
+|USA|Georgia|

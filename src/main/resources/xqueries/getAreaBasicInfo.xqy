@@ -23,17 +23,24 @@ let $source := xs:string(xdmp:get-request-field("source"))
 let $countryDoc := /country[@source = $source][summary/names/name[type = "Country Name"]/value = $country]
 let $areaDoc := /area[@source = $source][summary/names/name[type = "Full Name"]/value = $area][within/place/link/@href=$countryDoc/@resource]
 
-(: Taking End Date :)
-let $DateFields :=
-    <areaDate>
-        <EndDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateCeased)}</EndDate>
+(: Taking End Date :)        
 (: Taking Begin Date :)
 let $DateFields :=
     <areaDate>
-        <BeganDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateBegan)}</BeganDate>
+	    <BeganDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateBegan)}</BeganDate>
+		<EndDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateCeased)}</EndDate>        
     </areaDate>
-    
+  (: Taking Add Info :)
+ let $areaadditionalinfo := ($areaDoc/summary/additionalInfos/additionalInfo/text())
 return
   <area>
+      { $areaDoc/summary/names }
       <dateFields>{$DateFields}</dateFields>
+      <AdditionalInfo>{$areaadditionalinfo}</AdditionalInfo>
   </area>
+  
+
+  
+  
+  
+  
