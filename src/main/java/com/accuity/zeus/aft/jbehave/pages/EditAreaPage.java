@@ -667,6 +667,16 @@ public class EditAreaPage extends AbstractPage {
 		assertTrue(!cityNameValueMap.containsKey(nameType));
 		assertTrue(!cityNameValueMap.values().contains(nameValue));
 	}
+	
+	public void verifyErrorMessageRequiredForAreaNameType() {
+		assertEquals("Required", getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_name_type_error_msg_xpath")).getText());
+	}
+	
+	public void verifyErrorMessageForRequiredAreaNameValue() {
+		assertEquals("Enter up to 75 valid characters.", getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_name_value_error_msg_xpath")).getText());
+	}
 
 	@Override
 	public String getPageUrl() {

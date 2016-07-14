@@ -36,6 +36,8 @@ public class AreaIdentifiers {
 		hmap.put("area_names_add_names_button_xpath", By.xpath("//*[@id='areaBasicInfo']//*[@id='add-names']"));
 		hmap.put("area_name_type_input_xpath", By.xpath(".//*[@id='additionalNames']//*[@data-internal_id='nameType']"));
 		hmap.put("area_name_value_input_xpath", By.xpath(".//*[@id='additionalNames']//*[@data-internal_id='nameValue']"));
+		hmap.put("area_name_type_error_msg_xpath", By.xpath(("//*[@id='additionalNames']//*[@data-error_id='nameTypeError']")));
+		hmap.put("area_name_value_error_msg_xpath", By.xpath(("//*[@id='additionalNames']//*[@data-error_id='nameValueError']")));
 
 	}
 

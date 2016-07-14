@@ -271,5 +271,15 @@ public class EditAreaSteps extends AbstractSteps {
 										   @Named("value") String newNameValue) {
 		getEditAreaPage().verifyNameTypeNotPresent(newNameType);
 	}
+	
+	@Then("the user should see the error message for the required name type field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaNameType() {
+		getEditAreaPage().verifyErrorMessageRequiredForAreaNameType();
+	}
+	
+	@Then("the user should see the error message for the required name value field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaNameValue() {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaNameValue();
+	}
 }
 

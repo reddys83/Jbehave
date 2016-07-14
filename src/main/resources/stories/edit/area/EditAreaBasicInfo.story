@@ -682,8 +682,8 @@ Then the user should see the area name type and value updated in in the area bas
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|value|type|value|
-|Angola|Cabinda|Cabinda1|Alternative Name|test|
+|country|area|type|value|
+|Angola|Cabinda|Alternative Name|test|
 
 Scenario: User has selected to add New Name Rows in Area's Basic Info - Check if ALternative name can be selected again after selecting once
 Meta: @AreaAlternateName
@@ -704,8 +704,8 @@ When the user clicks on the add names button in the area basic info page
 Then the user should see the area name types from lookup PLACE_NAME_TYPE
 
 Examples:
-|country|area|value|type|value|
-|Angola|Cabinda|Cabinda1|Alternative Name|test|
+|country|area|type|value|
+|Angola|Cabinda|Alternative Name|test|
 
 Scenario: User has selected to add New Name Row in Area's Basic Info - check save is successful when all blank values are selected and document is not updated
 Meta: @AreaBlankName
@@ -731,7 +731,48 @@ Then the user should not see the   <value> in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|value|type|value|ConfirmationSummary|
-|Angola|Cabinda|Cabinda1|||Summary|
+|country|area|type|value|ConfirmationSummary|
+|Angola|Cabinda|||Summary|
 
+Scenario: User has selected to add New Name Row in Area's Basic Info - error message "Required" is displayed when type is not entered but value is entered
+Meta: @AreaNameError
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user clicks on the add names button in the area basic info page
+Then the user should see the area name types from lookup PLACE_NAME_TYPE
+When the user enters name value as <value> in the area basic info page
+When the user clicks on the save button
+Then the user should see the error message for the required name type field in the area basic info page
+
+Examples:
+|country|area|value|
+|Angola|Cabinda|test|
+
+Scenario: User has selected to add New Name Row in Area's Basic Info - error message is displayed when type is entered but value is not entered
+Meta: @AreaNameError2
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user clicks on the add names button in the area basic info page
+Then the user should see the area name types from lookup PLACE_NAME_TYPE
+When the user enters name type as <type> in the area basic info page
+When the user clicks on the save button
+Then the user should see the error message for the required name value field in the area basic info page
+
+Examples:
+|country|area|type|
+|Angola|Cabinda|Alternative Name|
 
