@@ -107,6 +107,7 @@ Examples:
 |1038|FID|1038|
 
 Scenario: Filter offices by status - Inactive
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -226,6 +227,7 @@ Examples:
 |267124|FID|267124|
 
 Scenario: User selects a column sort and a filter, Both the coulumn sort and filter are applied to the results list
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -250,6 +252,7 @@ Examples:
 
 
 Scenario: Verify the refine filter for city
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -284,6 +287,7 @@ Examples:
 |entity|searchBy|fid|pageNumber|status|
 |1038|FID|1038|10|Active|
 
+
 Scenario: Filter offices by status - User verifies whether All pages of 'Active' filter has 'Active' status for all fids
 
 Given a user is on the search page
@@ -301,4 +305,3 @@ Then the user should see the list of <status> offices in All result pages
 Examples:
 |entity|searchBy|fid|allPages|status|
 |1038|FID|1038|true|Active|
-

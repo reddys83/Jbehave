@@ -499,25 +499,32 @@ public class ResultsPage extends AbstractPage {
         }
     }
 
-    public void entersTextInRefineFilterForCity(String searchText) {
+	public void entersTextInRefineFilterForCity(String searchText) {
 
-        getDriver().findElement(office_search_refine_results_searchBox_xpath).sendKeys(searchText);
-        getDriver().findElement(office_search_refine_results_searchBox_xpath).sendKeys(Keys.RETURN);
-        try {
-            Thread.sleep(2000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+		try {
+			Thread.sleep(5000L);
+			getDriver().findElement(office_search_refine_results_searchBox_xpath).sendKeys(searchText);
+			getDriver().findElement(office_search_refine_results_searchBox_xpath).sendKeys(Keys.RETURN);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
-    public void verifyOfficeSearchResultsForCity(String searchText) {
-        List<WebElement> cityList = getDriver().findElements(office_city_locator_xpath);
-        for (int i = 0; i <cityList.size(); i++){
-       assertTrue(cityList.get(i).getText().contains(searchText));
+	public void verifyOfficeSearchResultsForCity(String searchText) {
+		try {
+			Thread.sleep(5000L);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-        }
+		List<WebElement> cityList = getDriver().findElements(office_city_locator_xpath);
+		for (int i = 0; i < cityList.size(); i++) {
+			assertTrue(cityList.get(i).getText().contains(searchText));
 
-    }
+		}
+
+	}
 
     public void verifySortOrderByOfficeArea(String xQueryName, String searchedEntity) {
         try {
