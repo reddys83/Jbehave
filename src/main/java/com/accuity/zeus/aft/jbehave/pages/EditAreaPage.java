@@ -179,8 +179,7 @@ public class EditAreaPage extends AbstractPage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		assertEquals(endDateErrorMsg, getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_enddate_errorMessage_xpath")).getText());
+		assertEquals(endDateErrorMsg, getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_enddate_errorMessage_xpath")).getText());
 	}
 
 	public void verifyEndDateInAreaPage(String day, String month, String year) {

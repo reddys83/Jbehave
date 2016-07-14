@@ -545,6 +545,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see all is selected by default in the navigation bar")
+    @Alias("the user should see the user is navigated to All section view")
     public void verifyDefaultToViewAll() {
         getDataPage().verifyDefaultToViewAll();
     }

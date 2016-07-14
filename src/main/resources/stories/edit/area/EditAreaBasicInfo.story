@@ -10,6 +10,7 @@ JIRA ID - ZEUS-1025 - User can edit Area's Status
 JIRA ID - ZEUS-1027 - User can edit Area's End Date
 
 JIRA ID - ZEUS-1026 - User can edit Area's Began Date
+Jira ID - ZEUS-1173 - Error handling when error is in section not currently displayed
 
 
 Scenario: User can edit area Began Date -
@@ -597,5 +598,23 @@ Examples:
 |Angola|Cabinda||||06|Jun|2015|
 
 
+Scenario: ZEUS-1173- Verify when user is viewing a section other than Basic Info and Basic Info section has some errors, upon saving the Area,
+the user should automatically navigate to All section and should scroll to the first error message in All view.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the area update link
+When the user enters <beganDay1> <beganMonth1> <beganYear1> Began Date in the edit basic info area page
+When the user clicks on the area's demographics link in the navigation bar
+When the user clicks on the save button
+Then the user should see the user is navigated to All section view
+Then the user should see the error Enter a year, month/year or day/month/year. for area began date
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
-
+Examples:
+|country|area|beganDay1|beganMonth1|beganYear1|
+|Angola|Cabinda|05||2015|
