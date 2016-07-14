@@ -27,10 +27,12 @@ let $office := (/office[@fid="1010-44"][@source="zeus"])
 
 
 let $officeOpenedDate := local:getDateAsPerAccuracy($office/summary/dates/opened)
+let $officeType := ($office/summary/types/type)
 
 
 return <office>
     <officeOpenedDate>{$officeOpenedDate}</officeOpenedDate>
+    <officeType<{$officeType}</officeType>
     </office>
 
     (:return $office:)

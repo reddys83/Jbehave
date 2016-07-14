@@ -5,6 +5,8 @@ As a user
 I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-1066 - User can edit Office's Opened Date
+and
+JIRA ID - ZEUS-1074 - USer can edit Office's Types
 
 Scenario: Update and Save office Opened date
 Verify User updates a value for Opened Date and click Save. Updated Office opened date should be saved in Zeus document
@@ -116,3 +118,78 @@ Then the user verifies office opened date from zeus document <fid> <day> <month>
 Examples:
 |entity|searchBy|fid|officeFid|day|month|year|
 |1010|FID|1010|1010-44||||
+
+Scenario: Verify for an existing row, Office's Office Type dropdown values from lookup OFFICE_TYPE in the same order as taxonomy except those that have already been selected for this Office
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office update link
+And the user clicks on the first_existing_officetype_dropdown in the basicinfo office page
+Then the user should see the first_existing_officetype_dropdown values from lookup OFFICE_TYPE except the values that are selected already
+
+Examples:
+|entity|searchBy|fid|officeFid|
+|1010|FID|1010|1010-44|
+
+Scenario: Verify for a new row, Offices's Office Type dropdown values from lookup OFFICE_TYPE in the same order as taxonomy except those that have already been selected for this Office
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office update link
+And the user clicks on the add new office type button
+And the user clicks on the first_new_officetype_dropdown in the basicinfo office page
+Then the user should see the officetype first_new_officetype_dropdown values from lookup OFFICE_TYPE except the values that are selected already
+
+Examples:
+|entity|searchBy|fid|officeFid|
+|1010|FID|1010|1010-44|
+
+Scenario: Update and Save existing office type
+a) Select a non-Blank value and Save. Verify the value is saved in Zeus document
+b) Select a null value and Save. Verify that null value is not saved.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office update link
+Then the user should see the officeType value as in trusted document with fid <officeFid>
+When the user gets the document with get id for offices with the <officeFid> from the database
+And the user selects office type value as <officeTypeValue> from first_existing_officetype_dropdown in the basicinfo office page
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Office Types|
+|Basic Info|
+
+When the user clicks on the confirm button
+Then the user should see officeType value as <officeTypeValue> for fid <officeFid> in zeus document
+Then the user should not see the deleted entity type value Bank in the zeus document for fid <fid>
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|officeTypeValue|
+|1010|FID|1010|1010-44|ATM Network|
+|1010|FID|1010|1010-44||
+
+
+

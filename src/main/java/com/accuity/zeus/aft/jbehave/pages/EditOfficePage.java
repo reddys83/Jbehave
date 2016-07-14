@@ -71,6 +71,95 @@ public class EditOfficePage extends AbstractPage {
         assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent().replace(" ",""), day+month+year);
     }
 
+    public void clickOnNewOfficeTypeDropDown(String rowIdentifier) {
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+
+    }
+
+    public List<String> getAlreadySelectedOfficeTypes(String identifier) {
+        ArrayList<String> selectedValueList = new ArrayList();
+        for (WebElement officeTypeDropDown : getDriver().findElements(OfficeIdentifiers.getObjectIdentifier(identifier))) {
+            Select dropdown = new Select(officeTypeDropDown);
+            String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
+            selectedValueList.add(selectedValue);
+        }
+        return selectedValueList;
+    }
+
+    public void verifyOfficeTypeListFromLookup(String lookupFid, String rowIdentifier) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        List<String> dropdownValuesList = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", lookupFid));
+        Select dropdown = new Select(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)));
+        String selectedValue = dropdown.getFirstSelectedOption().getText();
+        for (WebElement option : dropdown.getOptions()) {
+            dropdownValuesList.add(option.getText());
+        }
+        dropdownValuesList.remove(selectedValue);
+        if (dropdownValuesList.get(0).equals("")) {
+            dropdownValuesList.remove(0);
+        }
+        // finding the list of values from the taxonomy and subtracting the values which are selected in other dropdowns
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get offices office types", nvPairs);
+        List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "OfficeType"), getAlreadySelectedOfficeTypes("office_basicInfo_officetypes_dropdown_xpath"));
+        assertEquals(dropdownValuesList, resultList);
+
+    }
+
+    public void clickOnAddNewOfficeTypeButton() {
+        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_add_new_officetype_button_id"));
+    }
+
+
+    public void verifyEditOfficesOfficeTypeValueFromTrusted(String officeFid, String tagName, String source) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal office basic info", nvPairs);
+        if (document != null) {
+            assertEquals(getNodeValuesByTagName(document, tagName), getAlreadySelectedOfficeTypes("office_basicInfo_officetypes_dropdown_xpath"));
+        }
+
+    }
+
+    public void selectOfficeType(String officeTypeValue, String rowIdentifier) {
+        Select dropdown = new Select(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).get(0));
+        dropdown.selectByVisibleText(officeTypeValue);
+
+    }
+
+
+    public void verifyEditOfficesOfficeTypeValueFromZeus(String officeTypeValue, String tagName, String officeFid, String source, String xqueryName) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
+        if (document != null && !officeTypeValue.isEmpty()) {
+            assertTrue(getNodeValuesByTagName(document, tagName).contains(officeTypeValue));
+
+        } else if (document != null && officeTypeValue.isEmpty()) {
+            assertFalse(getNodeValuesByTagName(document, tagName).contains(officeTypeValue));
+        }
+
+    }
+
+    public void verifyOfficeTypeNotPresentInZeus(String source, String officeFid, String tagName, String value) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
+        assertFalse(getNodeValuesByTagName(document, tagName).contains(value));
+    }
 
     @Override
     public String getPageUrl() {
