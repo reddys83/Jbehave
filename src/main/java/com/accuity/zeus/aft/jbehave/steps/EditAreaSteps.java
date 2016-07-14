@@ -31,8 +31,8 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 
 
-	@When("the user gets the document with $xqueryName with the <area> from the database")
-	public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("area") String param) {
+	@When("the user gets the document with $xqueryName with the <Area> from the database")
+	public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("Area") String param) {
 		getDataPage().getDocument(xqueryName, param);
 	}
 
@@ -185,8 +185,8 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaStatusInDropdown(status);
 	}
 
-	@When("the user enters the <area> in the type-ahead box")
-	public void enterAreaInTypeAhead(@Named("area") String area) {
+	@When("the user enters the <Area> in the type-ahead box")
+	public void enterAreaInTypeAhead(@Named("Area") String area) {
 		getDataPage().enterAreaInTypeAhead(area);
 	}
 
@@ -227,9 +227,14 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@Then("the user should see the area addInfoText value same as in $source document")
-	public void verifyCityAddInfoValueFromDB(@Named("country") String country, @Named("area") String area,
-			@Named("city") String city, @Named("source") String source) {
+	public void verifyAreaAddInfoValueFromDB(@Named("country") String country, @Named("Area") String area, @Named("source") String source) {
 		getEditAreaPage().verifyAreaAddInfoValueFromTrusted(country, area, "AdditionalInfo", source);
 	}
+	
+	@Then("the user should see the area addinfo value $addInfoText as in $source document")
+	public void verifyAreaAddInfoFromDB(@Named("country") String country, @Named("Area") String area, @Named("source") String source, @Named("addInfoText") String addInfoText) {
+		getEditAreaPage().verifyAreaAddInfoValueFromZeus(country, area, "AdditionalInfo", source,addInfoText);
+	}
+	
 
 }
