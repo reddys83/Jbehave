@@ -89,7 +89,6 @@ public class XqueryMap {
 		queryMap.put("get city basic info","getCityBasicInfo.xqy");
         queryMap.put("get office basic info","getOfficeBasicInfo.xqy");
         queryMap.put("get id for offices", "getIdForOffices.xqy");
-
 		queryMap.put("get city places type lookup","getCityRelatedPlacesTypeFromLookup.xqy");
 		queryMap.put("get city places detail lookup","getCityRelatedPlacesDetailsFromLookup.xqy");
 		queryMap.put("get city related place info","getCityRelatedPlaces.xqy");
