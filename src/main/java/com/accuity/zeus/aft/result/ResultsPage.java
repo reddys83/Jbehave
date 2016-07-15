@@ -866,7 +866,7 @@ public class ResultsPage extends AbstractPage {
         assertEquals("Click to view office",getDriver().findElement(office_current_page_search_results_count_xpath).getAttribute("title"));
     }    
 
-	public void verifyActiveOfficesSearchResultsForAllPages(String searchedEntity, Boolean allPages, String status) {
+	public void verifyActiveOfficesSearchResultsForAllPages(String searchedEntity, String status, int paginationCount) {
 		try {
 			Thread.sleep(1000L);
 			assertTrue(getDriver().findElement(office_status_filter_active_selected_xpath).isDisplayed());
@@ -880,8 +880,8 @@ public class ResultsPage extends AbstractPage {
 			nvPairs.add(new BasicNameValuePair("fidCount", fidCount));
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"active office test list", nvPairs);
-			while (nextPage != null && allPages) {
-				Thread.sleep(5000L);
+			while (nextPage != null) {
+				Thread.sleep(15000L);
 				List<WebElement> resultList = getDriver().findElements(office_search_results_rows_xpath);
 				List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
 
@@ -889,17 +889,20 @@ public class ResultsPage extends AbstractPage {
 
 					assertTrue(resultList.get(i).getText().contains(status));
 
-					assertEquals(document.getElementsByTagName("fid").item(i + (25 * (pageCount - 1))).getTextContent(),
-							fidList.get(i).getText());
+					assertEquals(document.getElementsByTagName("fid").item(i + (paginationCount * (pageCount - 1)))
+							.getTextContent(), fidList.get(i).getText());
 					comparedFidsCount++;
 				}
-				if (comparedFidsCount <= Integer.parseInt(fidCount)) {
+				if (comparedFidsCount < Integer.parseInt(fidCount)) {
 					nextPage = getDriver().findElement(office_search_results_next_page_classname);
 					if (nextPage != null) {
 						nextPage.click();
 					}
+				} else {
+					break;
 				}
 				pageCount++;
+
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -907,7 +910,8 @@ public class ResultsPage extends AbstractPage {
 
 	}
 
-	public void verifyActiveOfficesSearchResultsForLimitedPages(String searchedEntity, int pageNumber, String status) {
+	public void verifyActiveOfficesSearchResultsForLimitedPages(String searchedEntity, int pageNumber, String status,
+			int paginationCount) {
 		try {
 			Thread.sleep(1000L);
 			assertTrue(getDriver().findElement(office_status_filter_active_selected_xpath).isDisplayed());
@@ -931,8 +935,8 @@ public class ResultsPage extends AbstractPage {
 					assertTrue("result list is having status :" + status, resultList.get(i).getText().contains(status));
 
 					// Comparing the office ids from UI with DB
-					assertEquals(document.getElementsByTagName("fid").item(i + (25 * (pageCount - 1))).getTextContent(),
-							fidList.get(i).getText());
+					assertEquals(document.getElementsByTagName("fid").item(i + (paginationCount * (pageCount - 1)))
+							.getTextContent(), fidList.get(i).getText());
 					comparedFidsCount++;
 
 				}

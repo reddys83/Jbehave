@@ -26,7 +26,7 @@ Then the user should see the list of domestic offices in the office search resul
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1176|FID|1176|
 
 Scenario: Filter offices by type - Foreign
 Given a user is on the search page
@@ -43,7 +43,7 @@ Then the user should see the list of foreign offices in the office search result
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1176|FID|1176|
 
 Scenario: Search returned 0 results
 Given a user is on the search page
@@ -104,7 +104,7 @@ Then the user should see the list of active offices in the office search results
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1176|FID|1176|
 
 Scenario: Filter offices by status - Inactive
 
@@ -122,7 +122,7 @@ Then the user should see the list of inactive offices in the office search resul
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1176|FID|1176|
 
 Scenario: Search returned 0 results for status filter
 Given a user is on the search page
@@ -157,7 +157,7 @@ Then the user should see the office results for the applied filters
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1176|FID|1176|
 
 Scenario: User should see the types in the type filter should be based on the office search results types
 1. ZEUS-589
@@ -269,7 +269,7 @@ Examples:
 |3125|FID|3125|
 
 
-Scenario: Filter offices by status - User verifies whether first 10 pages of 'Active' filter has 'Active' status for all fids
+Scenario: Filter offices by status - User verifies whether initial pages of 'Active' filter has 'Active' status for all fids
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -279,13 +279,14 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
+When the user selects the count results/page in the office results page
 Then the user should see the office status filter default to all
 When the user selects the office status filter active
 Then the user should see the list of <status> offices till the page <pageNumber> of office search results
 
 Examples:
-|entity|searchBy|fid|pageNumber|status|
-|1038|FID|1038|10|Active|
+|entity|searchBy|fid|pageNumber|status|count|
+|1176|FID|1176|1|Active|200|
 
 
 Scenario: Filter offices by status - User verifies whether All pages of 'Active' filter has 'Active' status for all fids
@@ -298,10 +299,11 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
+When the user selects the count results/page in the office results page
 Then the user should see the office status filter default to all
 When the user selects the office status filter active
 Then the user should see the list of <status> offices in All result pages
 
 Examples:
-|entity|searchBy|fid|allPages|status|
-|1038|FID|1038|true|Active|
+|entity|searchBy|fid|status|count|
+|1176|FID|1176|Active|200|
