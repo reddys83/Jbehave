@@ -31,8 +31,8 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 
 
-	@When("the user gets the document with $xqueryName with the <Area> from the database")
-	public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("Area") String param) {
+	@When("the user gets the document with $xqueryName with the <area> from the database")
+	public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("area") String param) {
 		getDataPage().getDocument(xqueryName, param);
 	}
 
@@ -185,8 +185,8 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaStatusInDropdown(status);
 	}
 
-	@When("the user enters the <Area> in the type-ahead box")
-	public void enterAreaInTypeAhead(@Named("Area") String area) {
+	@When("the user enters the <area> in the type-ahead box")
+	public void enterAreaInTypeAhead(@Named("area") String area) {
 		getDataPage().enterAreaInTypeAhead(area);
 	}
 
@@ -236,5 +236,19 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaAddInfoValueFromZeus(country, area, "AdditionalInfo", source,addInfoText);
 	}
 	
+	@When("the user enters the <addInfoText2> in the area add info text area")
+	public void enterTextAreaAddInfo2(@Named("addInfoText2") String addInfoText) {
+		getEditAreaPage().enterTextAreaAddInfo(addInfoText);
+	}
+	
+	@When("the user enters the <Area> in the type-ahead box")
+	public void enterAreaInTypeAheadBox(@Named("Area") String area) {
+		getDataPage().enterAreaInTypeAhead(area);
+	}
+	
+	@When("the user gets the document with $xqueryName with the <Area> from the database")
+	public void getDocumentByFidArea(@Named("xqueryName") String xqueryName, @Named("Area") String param) {
+		getDataPage().getDocument(xqueryName, param);
+	}
 
 }

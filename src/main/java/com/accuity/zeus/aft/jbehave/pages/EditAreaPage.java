@@ -521,8 +521,6 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void verifyAreaAddInfoValueFromTrusted(String country, String area, String tagName,
 			String source) {
-		System.out.println(getAreaBasicInfoFromDB(country, area, tagName, source)+" db");
-		System.out.println(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath")).getText()+ " ui");
 		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source),
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath")).getText());
 	}
