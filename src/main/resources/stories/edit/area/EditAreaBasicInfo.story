@@ -608,10 +608,10 @@ And the user clicks on the area tab in the data area
 And the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
-And the user enters the <Area> in the type-ahead box
+And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
-When the user gets the document with get document id for area with the <Area> from the database
+When the user gets the document with get document id for area with the <area> from the database
 Then the user should see the area addInfoText value same as in trusted document
 When the user enters the <addInfoDiffText> in the area add info text area
 And the user clicks on the save button
@@ -630,7 +630,7 @@ Then the user should see the area addinfo value <addInfoText> as in zeus documen
 Then the user reverts the changes to the document
 
 Examples:
-|country|Area|addInfoDiffText|addInfoText|
+|country|area|addInfoDiffText|addInfoText|
 |USA|Georgia|This is a sample text|This is a different text|
 
 Scenario: To view that there is no change in value when the user has entered a value for 'Add Info' that is no different to the current value in Area page
@@ -645,10 +645,10 @@ And the user clicks on the area tab in the data area
 And the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
-And the user enters the <Area> in the type-ahead box
+And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
-When the user gets the document with get document id for area with the <Area> from the database
+When the user gets the document with get document id for area with the <area> from the database
 When the user enters the <addInfoText> in the area add info text area
 And the user clicks on the save button
 When the user clicks on the confirm button
@@ -664,8 +664,8 @@ Then the user should be able to verify the values are entered in the area add in
 Then the user reverts the changes to the document
 
 Examples:
-|country|Area|city|addInfoText|ConfirmationSummary|
-|USA|Georgia|Adrian|This is a same text|Basic Info|
+|country|area|addInfoText|ConfirmationSummary|
+|USA|Georgia|This is a same text|Basic Info|
 
 Scenario: User verifies that add info field is limited to 500 unicode characters in Area basic info Page
 Given a user is on the search page
@@ -674,10 +674,10 @@ And the user clicks on the area tab in the data area
 And the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
-And the user enters the <Area> in the type-ahead box
+And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
-When the user gets the document with get document id for area with the <Area> from the database
+When the user gets the document with get document id for area with the <area> from the database
 When the user enters values which is beyond 500 unicode characters in the area add info field
 And the user clicks on the save button
 And the user clicks on the confirm button
@@ -687,5 +687,5 @@ Then the user should be able to verify the maximum values are entered in the are
 Then the user reverts the changes to the document
 
 Examples:
-|country|Area|
+|country|area|
 |USA|Georgia|
