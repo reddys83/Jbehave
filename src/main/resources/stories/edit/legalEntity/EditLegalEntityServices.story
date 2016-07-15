@@ -164,7 +164,6 @@ Examples:
 
 Scenario: ZEUS-1173- Verify when user is viewing a section other than Services and Services section has some errors, upon saving the legal entity,
 the user should automatically navigate to All section and should scroll to the first error message in All view.
-Meta:@red99
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -186,3 +185,32 @@ And the user should see the error message at top of page the highlighted fields 
 Examples:
 |entity|searchBy|fid|category|override|
 |1717|FID|1717||testoverride|
+
+Scenario: ZEUS-1173- Verify when user is viewing Services section and Services and Basic info sections have some errors, upon saving the legal entity,
+the user should automatically navigate to All section and should scroll to the first error message in All view.
+Meta:@red99
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+When the user clicks on the legal entity services link in the navigation bar
+And the user clicks on the legalEntity basic info link in the navigation bar
+And the user clicks on the legalEntity update link
+And the user selects category value as <category> for legalEntity_first_row_existing_offeredservices_category_dropdown
+And the user enters override value as <override> for legalEntity_first_row_existing_offeredservices_override_text_field
+When the user clicks on the legal entity personnel link in the navigation bar
+And the user clicks on the add new personnel button in legalEntity
+And the user enters value as <value> in the legalEntity personnel
+And the user clicks on the legal entity personnel link in the navigation bar
+And the user clicks on the save button
+Then the user should see the user is navigated to All section view
+And the user should see the Required message for offered service category field
+Then the user should see the error message required for type in legalEntity personnel
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|entity|searchBy|fid|category|override|value|
+|1717|FID|1717||testoverride|200|
