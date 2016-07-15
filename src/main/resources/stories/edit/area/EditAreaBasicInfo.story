@@ -1,4 +1,4 @@
-Meta: @EditAreaBasicInfo @Edit @area @AllStories
+Meta: @EditAreaBasicInfo @Edit @Area @AllStories
 
 Narrative:
 In order to view and edit the area page
@@ -613,7 +613,7 @@ And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <Area> from the database
 Then the user should see the area addInfoText value same as in trusted document
-When the user enters the <addInfoText2> in the area add info text area
+When the user enters the <addInfoDiffText> in the area add info text area
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
@@ -630,11 +630,11 @@ Then the user should see the area addinfo value <addInfoText> as in zeus documen
 Then the user reverts the changes to the document
 
 Examples:
-|country|Area|addInfoText2|addInfoText|
+|country|Area|addInfoDiffText|addInfoText|
 |USA|Georgia|This is a sample text|This is a different text|
 
 Scenario: To view that there is no change in value when the user has entered a value for 'Add Info' that is no different to the current value in Area page
-a)User verifies Area Basic Info changes has not  been updated in confirmation modal
+a)User verifies Area Basic Info changes has not been updated in confirmation modal
 b)User verifies 'Your Changes have been saved' message is displayed after save
 c)User verified Add Info value is updated correctly in area basic info page
 d)User verifies Add Info values in Zeus Document
@@ -667,7 +667,7 @@ Examples:
 |country|Area|city|addInfoText|ConfirmationSummary|
 |USA|Georgia|Adrian|This is a same text|Basic Info|
 
-Scenario: To view whether the text entered in the 'Add Info' field is not beyond 500 unicode characters after saving the Area page
+Scenario: User verifies that add info field is limited to 500 unicode characters in Area basic info Page
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
