@@ -236,9 +236,9 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaAddInfoValueFromZeus(country, area, "AdditionalInfo", source,addInfoText);
 	}
 	
-	@When("the user enters the <addInfoText2> in the area add info text area")
-	public void enterTextAreaAddInfo2(@Named("addInfoText2") String addInfoText) {
-		getEditAreaPage().enterTextAreaAddInfo(addInfoText);
+	@When("the user enters the <addInfoDiffText> in the area add info text area")
+	public void enterTextAreaAddInfo2(@Named("addInfoDiffText") String addInfoDiffText) {
+		getEditAreaPage().enterTextAreaAddInfo(addInfoDiffText);
 	}
 	
 	@When("the user enters the <Area> in the type-ahead box")

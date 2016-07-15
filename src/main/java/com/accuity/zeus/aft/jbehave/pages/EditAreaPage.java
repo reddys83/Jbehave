@@ -19,11 +19,10 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
-
+   public static String addInfoMaximumCharacterString=null;
 	public EditAreaPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
 		super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -483,17 +482,17 @@ public class EditAreaPage extends AbstractPage {
 	 * This method is to verify maximum characters entered in area additional
 	 * info text box is 500
 	 */
-	String addInfoMaximumCharacterString = null;
+	
 
 	public void enterInvalidCharactersInAreaAddInfo() {
-		char c = 'a';
-		String invalidData = "";
+		char addCharToAddInfo = 'a';
+		String addInfoRandomText = null;
 		for (int i = 0; i <= 500; i++) {
-			invalidData += c;
+			addInfoRandomText += addCharToAddInfo;
 		}
 		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath")).clear();
-		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath")).sendKeys(invalidData);
-		addInfoMaximumCharacterString = invalidData;
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath")).sendKeys(addInfoRandomText);
+		addInfoMaximumCharacterString = addInfoRandomText;
 	}
 
 	public void viewValidCharacterLength() {
@@ -502,11 +501,9 @@ public class EditAreaPage extends AbstractPage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		String text = "";
-		Integer len = null;
-		text = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_xpath_after_save")).getText();
-		len = text.length();
-		assertEquals(len.toString(), "500");
+		
+		Integer addInfoLength = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_xpath_after_save")).getText().length();
+		assertEquals(addInfoLength.toString(), "500");
 	}
 
 	/**
