@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -29,7 +30,6 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyEndDateMonthChronologicalOrder() {
 		getEditAreaPage().verifyMonthInChronologicalOrder();
 	}
-
 
 	@When("the user gets the document with $xqueryName with the <area> from the database")
 	public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("area") String param) {
@@ -72,19 +72,20 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 
 	@When("the user enters <beganDay1> <beganMonth1> <beganYear1> Began Date in the edit basic info area page")
-	public void enterBeganDate(@Named("beganDay1") String beganDay1, @Named("beganMonth1") String beganMonth1, @Named("beganYear1") String beganYear1) {
+	public void enterBeganDate(@Named("beganDay1") String beganDay1, @Named("beganMonth1") String beganMonth1,
+			@Named("beganYear1") String beganYear1) {
 		enterDayInBeganDate(beganDay1);
 		enterMonthInBeganDate(beganMonth1);
 		enterYearInBeganDate(beganYear1);
 	}
 
 	@When("the user enters <endDay1> <endMonth1> <endYear1> End Date in the edit basic info area page")
-	public void enterEndDate(@Named("endDay1") String endDay1, @Named("endMonth1") String endMonth1, @Named("endYear1") String endYear1) {
+	public void enterEndDate(@Named("endDay1") String endDay1, @Named("endMonth1") String endMonth1,
+			@Named("endYear1") String endYear1) {
 		enterDayInEndDate(endDay1);
 		enterMonthInEndDate(endMonth1);
 		enterYearInEndDate(endYear1);
 	}
-
 
 	@Then("the user should see the entered end date <day> <month> <year> in area page")
 	public void verifyEndDateInAreaPage(@Named("day") String day, @Named("month") String month,
@@ -94,8 +95,8 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should see the area end date <day> <month> <year> value in $source document")
 	public void verifyAreaEndDateValueFromDB(@Named("country") String country, @Named("area") String area,
-			@Named("source") String source, @Named("day") String day,
-			@Named("month") String month, @Named("year") String year) {
+			@Named("source") String source, @Named("day") String day, @Named("month") String month,
+			@Named("year") String year) {
 		getEditAreaPage().verifyAreaEndDateFromZeusDB(country, area, "EndDate", source, day, month, year);
 	}
 
@@ -112,14 +113,14 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyMonthInChronologicalOrder();
 	}
 
-
 	@Then("the user should see the error $beganDateErrorMsg for area began date")
 	public void verifyErrorMessageBeganDate(@Named("beganDateErrorMsg") String beganDateErrorMsg) {
 		getEditAreaPage().verifyErrorMessageBeganDate(beganDateErrorMsg);
 	}
 
 	@When("the user enters <day2> <month2> <year2> Began Date in the edit basic info area page")
-	public void enterBeganDates(@Named("day2") String day2, @Named("month2") String month2, @Named("year2") String year2) {
+	public void enterBeganDates(@Named("day2") String day2, @Named("month2") String month2,
+			@Named("year2") String year2) {
 		enterDayInBeganDate(day2);
 		enterMonthInBeganDate(month2);
 		enterYearInBeganDate(year2);
@@ -133,8 +134,8 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should see the area began date <day> <month> <year> value in $source document")
 	public void verifyAreaBeganDateValueFromDB(@Named("country") String country, @Named("area") String area,
-			@Named("source") String source, @Named("day") String day,
-			@Named("month") String month, @Named("year") String year) {
+			@Named("source") String source, @Named("day") String day, @Named("month") String month,
+			@Named("year") String year) {
 		getEditAreaPage().verifyAreaBeganDateFromZeusDB(country, area, "BeganDate", source, day, month, year);
 	}
 
@@ -199,6 +200,109 @@ public class EditAreaSteps extends AbstractSteps {
 	@When("the user selects value as <status2> from Status drop-down in the area basicinfo page")
 	public void selectAreaStatusValue2(@Named("status2") String status) {
 		getEditAreaPage().selectAreaStatusValue(status);
+	}
+
+	@When("user changes the <country2> in the country drop downfield of area basic page")
+	public void userChangesCountryDropdownValue(@Named("country2") String country2) throws InterruptedException {
+		getEditAreaPage().changeCountryValue(country2);
+	}
+
+	@Then("user changes the area <Area parent> in the area dropdown field in area basic page")
+	public void userChangesAreaDropdownvalue(@Named("Area parent") String Areaparent) throws InterruptedException {
+		getEditAreaPage().changeAreaValue(Areaparent);
+
+	}
+
+	@Then("the user checks whether the header dropdown updates with <country2>, <Area parent>, <subArea>")
+	public void checksHeaderdropdownValues(@Named("country2") String country, @Named("Area parent") String Areaparent,
+			@Named("subArea") String subArea) throws InterruptedException {
+		getEditAreaPage().checksHeaderdropdownValues(country, Areaparent, subArea);
+	}
+
+	@Then("the user checks whether the Address bar url is updated  with <country2>, <Area parent>")
+	public void checksAddressBar(@Named("country2") String country, @Named("Area parent") String Areaparent)
+			throws InterruptedException {
+		getEditAreaPage().checksAddressBarIsHavingNewCountryAreaIds(country, Areaparent);
+	}
+
+	@Then("verify $source document whether <subArea> is mapped to newly added <country2> and <Area parent>")
+	public void verifySubAreaInfoFromZeusDocument(@Named("source") String source, @Named("subArea") String subArea,
+			@Named("country2") String country2, @Named("area") String area, @Named("Area parent") String Areaparent)
+			throws InterruptedException {
+		getEditAreaPage().verifySubAreaInfoFromZeusDB(country2, Areaparent, subArea, "subarea", source, subArea);
+	}
+
+	@Then("user verify the subArea dropdown does not have subArea <subArea> value mapped to old country and area")
+	public void verifySubAreaDropdown(@Named("subArea") String subArea) throws InterruptedException {
+		getEditAreaPage().verifySubAreaDropdown(subArea);
+	}
+
+	@Then("user should see the list of Area parent options in Area page is Empty")
+	public void verifyParentAreaListIsEmpty(@Named("country2") String country2) {
+		getEditAreaPage().verifyParentAreaListInPlaceForCountry(country2);
+	}
+
+	@Then("the user should verfiy that the 'Choose and area' option is populated in the Area Parent dropdown")
+	public void userVerifyNoSubarea() throws InterruptedException {
+		getEditAreaPage().verifyChooseAnAreaOptionInAreaparent();
+	}
+
+	@Then("user should see the list of Area parent options in Area page are in Alphabetical order")
+	@Alias("user should see the list of Area parent options are refreshed pointing to selected <country2> in area basic info page")
+	public void verifyParentAreaListInPlacesForCountry(@Named("country2") String country) {
+		getEditAreaPage().verifyAreaListInPlacesForCountry(country);
+	}
+
+	@Then("the user should user verify the header dropdowns are disabled")
+	public void userVerifyHeaderDropdownValuesDisabled() throws InterruptedException {
+		getEditAreaPage().userVerifyHeaderDropdownValuesDisabled();
+	}
+
+	@Then("the user verify the country dropdown is populating with default country <country> as a option")
+	public void userVerifyCountryDropdownDefaultValue(@Named("country") String country) {
+		getEditAreaPage().userVerifyCountryDropdownDefaultValue(country);
+	}
+
+	@Then("the user should see all the list of existing countries by full name in Alphabetical order in area basic info page")
+	public void verifyCountryListInPlacesFortheCountry() {
+		getEditAreaPage().verifyCountryListInPlacesForCountry();
+	}
+
+	@Then("the user should see the error message for the required identifier type field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaparentIdentifierType() throws InterruptedException {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaparentIdentifierType();
+	}
+
+	@Then("the user checks whether the header dropdown updates with <country2>, <area>")
+	public void checksHeaderdropdownValue(@Named("country2") String country, @Named("area") String area)
+			throws InterruptedException {
+		getEditAreaPage().checksHeaderdropdownValue(country, area);
+	}
+
+	@Then("verify $source document whether <area> is mapped to newly added <country2>")
+	public void verifyZeusDocument(@Named("source") String source, @Named("area") String area,
+			@Named("country2") String country2, @Named("area") String area1) throws InterruptedException {
+		getEditAreaPage().verifyAreaInfoFromZeusDB(country2, area, "area", source, area1);
+	}
+
+	@Then("the user verify the parent area dropdown is populating with default area <area> as a option")
+	public void userVerifyAreaParentDropdownDefaultValue(@Named("Area") String Area) {
+		getEditAreaPage().userVerifyAreaParentDropdownDefaultValue(Area);
+	}
+
+	@When("the user click on the choose an area parent option of area basic page")
+	public void clicksOnAreaDropdown() throws InterruptedException {
+		getEditAreaPage().clickOnAreaDropdown();
+	}
+
+	@Then("user should see the list of Area parent options are pointing to selected <country> in area basic info page")
+	public void verifyParentAreaListInPlaceForCountry(@Named("country") String country) {
+		getEditAreaPage().verifyAreaListInPlacesForCountry(country);
+	}
+
+	@Then("user verify the list of Area pareant options do not have No Value or Null")
+	public void verifyParentAreaListDontHaveNullNovalue() {
+		getEditAreaPage().verifyParentAreaDropdownDontHaveNullNovalue();
 	}
 
 }
