@@ -463,7 +463,6 @@ public class EditAreaPage extends AbstractPage {
 		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath"), addInfoText);
 	}
 
-		
 	/**
 	 * This method is to verify the value in area addInfo text field to equal to
 	 * expected.
@@ -479,10 +478,10 @@ public class EditAreaPage extends AbstractPage {
 		assertEquals(addInfoText, getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_xpath_after_save")).getText());
 	}
-	
+
 	/**
-	 * This method is to verify maximum characters entered in area additional info
-	 * text box is 500
+	 * This method is to verify maximum characters entered in area additional
+	 * info text box is 500
 	 */
 	String addInfoMaximumCharacterString = null;
 
@@ -496,7 +495,7 @@ public class EditAreaPage extends AbstractPage {
 		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath")).sendKeys(invalidData);
 		addInfoMaximumCharacterString = invalidData;
 	}
-	
+
 	public void viewValidCharacterLength() {
 		try {
 			Thread.sleep(2000);
@@ -509,36 +508,30 @@ public class EditAreaPage extends AbstractPage {
 		len = text.length();
 		assertEquals(len.toString(), "500");
 	}
-	
+
 	/**
-	 * This method is to verify maximum characters entered in area additional info
-	 * text box is 500
+	 * This method is to verify maximum characters entered in area additional
+	 * info text box is 500
 	 */
 	public void verifyMaximumChracterEnteredInAddInfo() {
 		assertEquals(addInfoMaximumCharacterString.subSequence(0, 500), getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_xpath_after_save")).getText());
 	}
-	
-	public void verifyAreaAddInfoValueFromTrusted(String country, String area, String tagName,
-			String source) {
+
+	public void verifyAreaAddInfoValueFromTrusted(String country, String area, String tagName, String source) {
 		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source),
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath")).getText());
 	}
-	
-	public void verifyAreaAddInfoValueFromZeus(String country, String area, String tagName,
-			String source,String addInfoText) {
-		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source),addInfoText);
+
+	public void verifyAreaAddInfoValueFromZeus(String country, String area, String tagName, String source,
+			String addInfoText) {
+		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source), addInfoText);
 
 	}
-	
+
 	@Override
 	public String getPageUrl() {
 		return null;
 	}
-
-
-
-
-
 
 }
