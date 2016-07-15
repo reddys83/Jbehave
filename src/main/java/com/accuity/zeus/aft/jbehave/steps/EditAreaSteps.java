@@ -286,8 +286,8 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 
 	@Then("the user verify the parent area dropdown is populating with default area <area> as a option")
-	public void userVerifyAreaParentDropdownDefaultValue(@Named("Area") String Area) {
-		getEditAreaPage().userVerifyAreaParentDropdownDefaultValue(Area);
+	public void userVerifyAreaParentDropdownDefaultValue(@Named("area") String area) {
+		getEditAreaPage().userVerifyAreaParentDropdownDefaultValue(area);
 	}
 
 	@When("the user click on the choose an area parent option of area basic page")

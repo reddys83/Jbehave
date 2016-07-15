@@ -603,7 +603,7 @@ Scenario: User views the Area basic page,selects the update button with subarea=
 3- verify the country list are in Alphabetical order
 4- verify the Area parent list is empty
 
-Meta: @karthikone
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -635,7 +635,7 @@ Scenario: User views the Area basic page,selects the update button with subarea
 5- verify the Area parent list are in Alphabetical order and list shows all areas related to the Country
 6- verify the Area parent option do not have 'No Value or 'Null Value'
 
-Meta: @karthikone
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -664,7 +664,7 @@ Scenario: User views the area basic page,selects the update button with subarea 
 1- verify the Area Parent value is defaulted with null
 2- verify the Area parent list is empty
 
-Meta: @karthikone
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -690,7 +690,7 @@ Scenario: User views the area basic page,selects the update button with subarea,
 1- verify the Area parent showing default value as 'Null' 
 2- verify the Area parent is in Alphabetical order and list shows all areas related to the country2
 
-Meta: @karthikone
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -719,7 +719,7 @@ each of 'Country' ,'Area Parent','Sub Area',change the country2,'Area Parent'
 3- Verify the Zesu DB whether the subarea is mapped under newly added country2 and parent area
 4 -Verify subarea is not mapped to country and area
 
-Meta: @karthikone
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -760,7 +760,7 @@ each of 'Country' ,'Area','Sub Area' as 'No Area',change the country with 'Area 
 1- Verify the header dropdowns are updated with country2 and area
 2 -Verify the Zeus DB whether the subarea is mapped under newly added country2 and area parent
 
-Meta: @karthikone
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -796,7 +796,7 @@ each of 'Country' ,'Area Parent','Sub Area',change the country with 'Area Parent
 1 - Verify Area Parent dropdown is populated with NULL 
 2 - Verify the 'Area Parent' field is showing 'Required' validation message
 
-Meta: @karthikone
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area

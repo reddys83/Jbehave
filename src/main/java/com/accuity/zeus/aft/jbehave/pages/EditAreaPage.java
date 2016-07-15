@@ -600,7 +600,7 @@ public class EditAreaPage extends AbstractPage {
 						getDriver()
 								.findElements(
 										AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"))
-								.get(i + 1).getText());
+								.get(i).getText());
 			}
 		}
 
@@ -684,7 +684,7 @@ public class EditAreaPage extends AbstractPage {
 
 	public void clickOnAreaDropdown() throws InterruptedException {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("Areaparent_currentvalue_xpath"));
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 	}
 
 	public void verifyParentAreaDropdownDontHaveNullNovalue() {
