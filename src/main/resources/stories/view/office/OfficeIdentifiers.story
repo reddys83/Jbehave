@@ -6,7 +6,7 @@ I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-406 - User can view office identifiers
 
-Scenario: Verify office's identifier
+Scenario: Verify office's identifier - Bug-ZEUS-1314
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area

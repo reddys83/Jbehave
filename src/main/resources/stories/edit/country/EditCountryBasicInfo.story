@@ -15,6 +15,7 @@ JIRA ID - ZEUS-745 - User will see summary of changes made in confirmation modal
 JIRA ID - ZEUS-441 - User can save edits to country
 JIRA ID - ZEUS-920 - Properly handle Hera validation errors
 JIRA ID - ZEUS-953 - Item deletion, Confirmation Message
+JIRA ID - ZEUS-1001- When the user is on the country edit page and try to change the id in the URL , Then the modified country page should be in view mode
 
 Scenario: Verify country names type from lookup COUNTRY_NAME_TYPE
 Given a user is on the search page
@@ -371,7 +372,7 @@ Then the user should see the currency page
 
 Examples:
 |country|currency|
-|Afghanistan|Rand|
+|Afghanistan|Baht|
 
 Scenario: User will see summary of changes made in confirmation modal
 Meta:@test11
@@ -392,7 +393,14 @@ And the user enters holiday month <month> in the holidays country page
 And the user enters holiday year <year> in the holidays country page
 When the user clicks on the country credit rating link in the navigation bar
 And the user clicks on add new credit rating button in the credit rating country page
+And the user selects credit rating agency as <agency> in the country page
+And the user selects credit rating type as <type> in the country page
+And the user enters credit rating value as <value> in the country page
+And the user enters applied date day <appliedDay> in the credit rating country page
+And the user selects applied date month <appliedMonth> in the credit rating country page
 And the user enters applied date year <appliedYear> in the credit rating country page
+And the user enters confirmed date day <confirmedDay> in the credit rating country page
+And the user selects confirmed date month <confirmedMonth> in the credit rating country page
 And the user enters confirmed date year <confirmedYear> in the credit rating country page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -405,8 +413,8 @@ And the user should see the below summary changes in confirmation modal
 
 
 Examples:
-|country|demographicType|demographicValue|appliedYear|confirmedYear|countryStartYear|countryEndYear|day|month|year|
-|Guam|Largest County Population|34000000|2011|2013|2011|2013|1|Jan|2015|
+|country|demographicType|demographicValue|countryStartYear|countryEndYear|day|month|year|agency|type|value|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|
+|Guam|Largest County Population|34000000|2011|2013|1|Jan|2015|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|
 
 Scenario: save country basic info
 Given a user is on the search page
@@ -462,4 +470,18 @@ Then the user should not see the newly added identifier row in the basic info co
 Examples:
 |country|
 |Albania|
+
+Scenario: ZEUS-1001 When the user is on the country edit page and try to change the id in the URL , Then the modified country page should be in view mode
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user updates the browser url to new $entity id <entityID>
+Then the user should see the country page in the view mode
+
+Examples:
+|country|enityID|
+|Albania|21b69329-6bc2-4e43-aac7-9a18c937324e|
 

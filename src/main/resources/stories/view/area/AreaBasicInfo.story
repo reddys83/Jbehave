@@ -5,8 +5,10 @@ In order to view the area basic info
 As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-187 - User can view basic area info
-and
 JIRA ID - ZEUS-368 - User can follow link to country from area
+and
+JIRA ID - ZEUS-369 - User can follow link to another area from area
+
 
 Scenario: Verify Area basic info.
 Given a user is on the search page
@@ -193,5 +195,27 @@ And the user should see the area's names as:
 |TYPE|VALUE|
 |Country Name|USA|
 Examples:
-|country|area|sub-area
+|country|area|subArea
 |USA|Illinois|Cook
+
+Scenario: Verify User can follow link to another area from sub-area
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the choose a sub-area option
+And the user enters the sub-area <subArea> in the type-ahead box
+And the user clicks on the area parent <areaParent> link for the selected area
+Then the user should see the area's names as:
+|TYPE|VALUE|
+|Full Name|Michigan|
+|Display Name|MI|
+
+Examples:
+|country|area|subArea|areaParent
+|USA|Michigan|Alger|Michigan
+
+

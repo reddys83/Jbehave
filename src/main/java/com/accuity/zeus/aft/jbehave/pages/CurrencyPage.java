@@ -40,17 +40,17 @@ public class CurrencyPage extends AbstractPage {
     private By currency_use_table_header_xpath = By.xpath("//*[@id='content']/div/table/thead/tr");
     private By currency_use_table_row_xpath = By.xpath("//*[@id='content']/div/table/tbody/tr");
     String currency_use_table_country_edit_xpath = "//select[@name='country']";
-    private By currency_use_table_startDate_day_edit_xpath=By.xpath("//input[@name='began-day']");
-    String currency_use_table_startDate_month_edit_xpath = "//select[@name='began-month']";
-    private By currency_use_table_startDate_year_edit_xpath=By.xpath("//input[@name='began-year']");
+    private By currency_use_table_startDate_day_edit_xpath=By.xpath("//input[@name='startDate-day']");
+    String currency_use_table_startDate_month_edit_xpath = "//select[@name='startDate-month']";
+    private By currency_use_table_startDate_year_edit_xpath=By.xpath("//input[@name='startDate-year']");
 
-    private By currency_new_use_table_startDate_day_edit_xpath=By.xpath("//*[@id='additionalCurrencyUses']//tr[last()]//input[@name='began-day']");
-    String currency_new_use_table_startDate_month_edit_xpath = "//*[@id='additionalCurrencyUses']//tr[last()]//select[@name='began-month']";
-    private By currency_new_use_table_startDate_year_edit_xpath=By.xpath("//*[@id='additionalCurrencyUses']//tr[last()]//input[@name='began-year']");
+    private By currency_new_use_table_startDate_day_edit_xpath=By.xpath("//*[@id='additionalCurrencyUses']//tr[last()]//input[@name='startDate-day']");
+    String currency_new_use_table_startDate_month_edit_xpath = "//*[@id='additionalCurrencyUses']//tr[last()]//select[@name='startDate-month']";
+    private By currency_new_use_table_startDate_year_edit_xpath=By.xpath("//*[@id='additionalCurrencyUses']//tr[last()]//input[@name='startDate-year']");
 
-    private By currency_use_table_endDate_day_edit_xpath=By.xpath("//input[@name='end-day']");
-    String currency_use_table_endDate_month_edit_xpath = "//select[@name='end-month']";
-    private By currency_use_table_endDate_year_edit_xpath=By.xpath("//input[@name='end-year']");
+    private By currency_use_table_endDate_day_edit_xpath=By.xpath("//input[@name='endDate-day']");
+    String currency_use_table_endDate_month_edit_xpath = "//select[@name='endDate-month']";
+    private By currency_use_table_endDate_year_edit_xpath=By.xpath("//input[@name='endDate-year']");
     String currency_use_table_primary_edit_xpath ="//fieldset[@data-error_id='primary']";
     private By currency_use_table_replacedBy_disable_edit_xpath = By.xpath("//fieldset[2]//div[@class='chosen-container chosen-container-single chosen-disabled']/a");
     String currency_use_table_replacedBy_edit_xpath= "//fieldset[2]//div[@class='chosen-container chosen-container-single']";
@@ -66,7 +66,7 @@ public class CurrencyPage extends AbstractPage {
     private By currency_unit_error_message_xpath = By.xpath("//*[@data-error_id='unitError']");
     private By currency_quantity_error_message_xpath = By.xpath("//*[@data-error_id='quantityError']");
     private By currency_replaced_by_xpath = By.xpath("//*[@class='chosen-results']/li");
-    private By currency_start_date_drop_down_xpath = By.xpath("//select[@name='began-month']");
+    private By currency_start_date_drop_down_xpath = By.xpath("//select[@name='startDate-month']");
     private By currency_add_country_option_xpath = By.xpath("//*[@id='add_currencyUses_chosen']/a");
     private By currency_add_country_type_ahead_input_xpath = By.xpath("//*[@id='add_currencyUses_chosen']/div/div/input");
     private By currency_use_table_additional_use_primary_edit_xpath = By.xpath("//*[@id='additionalCurrencyUses']/tr[@class='new'] //fieldset/input[@checked]");
