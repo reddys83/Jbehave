@@ -26,6 +26,8 @@ public class EditOfficePage extends AbstractPage {
 
     static ResponseEntity responseEntity;
     static String endpointWithID;
+    public String EditSortNameValue = "";
+    public String EditOfficeSortName = "";
 
      public EditOfficePage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
      super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -194,6 +196,34 @@ public class EditOfficePage extends AbstractPage {
     public void verifyMaxlengthOfficeNameValueText(String maxSize,String rowIdentifier) {
         assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);
     }
+
+    public void verifyMaxlengthOfficeNameSortNameText(String maxSize) {
+        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_name_sort_name_xpath")).getAttribute("maxlength"), maxSize);
+    }
+
+    public void entersSortNameInOfficeName(String sortName) {
+        EditSortNameValue = sortName;
+        clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_name_sort_name_xpath"), sortName);
+    }
+
+    public void verifyOfficeSortNameInZeusDocument(String officeFid,String sortName) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
+        if (sortName.equals(""))
+        {
+            sortName="null";
+        }
+        assertTrue(getNodeValuesByTagName(document, "officeSortKey").contains(sortName));
+
+    }
+
 
     @Override
     public String getPageUrl() {

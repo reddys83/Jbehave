@@ -106,7 +106,20 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @Then("the user verifies the office name value maxlength is $maxSize for the $rowIdentifier")
     public void verifyMaxlengthOfficeNameValueText(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeNameValueText(maxSize,rowIdentifier);}
-  }
 
 
+    @Then("the user verifies the office name sort name maxlength is $maxSize for the sortName")
+    public void verifyMaxlengthOfficeNameSortNameText(@Named("maxSize") String maxSize){getEditOfficePage().verifyMaxlengthOfficeNameSortNameText(maxSize);}
+
+    @When("the user enters sort name as $sortName in the office name")
+    public void entersSortNameInOfficeName(@Named("sortName") String sortName){
+        getEditOfficePage().entersSortNameInOfficeName(sortName);
+    }
+
+    @Then("the user should see the edits to office sort name as <sortName> for fid <officeFid> in zeus document")
+    public void verifyOfficeSortNameInZeusDocument(@Named("officeFid") String officeFid,@Named("sortName") String sortName) {
+        getEditOfficePage().verifyOfficeSortNameInZeusDocument(officeFid,sortName);
+    }
+
+}
 
