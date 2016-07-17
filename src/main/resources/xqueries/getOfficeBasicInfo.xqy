@@ -25,12 +25,20 @@ let $fid := xs:string(xdmp:get-request-field("fid"))
 let $source := xs:string(xdmp:get-request-field("source"))
 let $office := (/office[@fid="1010-44"][@source="zeus"])
 
-
+let $officeSortName := ($office/summary/names/officeSortKey)
 let $officeOpenedDate := local:getDateAsPerAccuracy($office/summary/dates/opened)
+let $officeTypes := for $x in ($office/summary/names/name/type)
+return <officeType>{$x/text()}</officeType>
+let $officeValues := for $x in ($office/summary/names/name/value)
+return <officeValue>{$x/text()}</officeValue>
+
 
 
 return <office>
     <officeOpenedDate>{$officeOpenedDate}</officeOpenedDate>
+    <officeTypes>{$officeTypes}</officeTypes>
+    <officeValues>{$officeValues}</officeValues>
+    <officeSortName>{$officeSortName}</officeSortName>
     </office>
 
     (:return $office:)

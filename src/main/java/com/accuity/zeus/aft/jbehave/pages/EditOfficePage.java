@@ -75,22 +75,124 @@ public class EditOfficePage extends AbstractPage {
     public void verifyOfficesNameTypesFromLookup(String rowIdentifier,String lookupFid)
     {   List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", lookupFid));
-        List<WebElement> creditRatingsList = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier(rowIdentifier));
+        List<WebElement> officeTypesList = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier(rowIdentifier));
 
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office names From Lookup", nvPairs);
-        for (int i = 1; i < document.getElementsByTagName("OfficeNames").getLength(); i++) {
-            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), creditRatingsList.get(i).getAttribute("value"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office name types from Lookup", nvPairs);
+        for (int i = 1; i < document.getElementsByTagName("officeNameTypes").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), officeTypesList.get(i).getAttribute("value"));
         }
 
     }
 
     public void clickAddRowButton() {
-        attemptClick(OfficeIdentifiers.getObjectIdentifier("legalEntity_credit_rating_addRow_id"));
+        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_name_addRow_id"));
+    }
+
+    public void verifyEditOfficeNameValuesFromTrusted(String officeFid, String source) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
+
+        if (document != null) {
+            List typeList = getNodeValuesByTagName(document, "officeType");
+            List valueList = getNodeValuesByTagName(document, "officeValue");
+
+            for (int i = 1; i < typeList.size(); i++) {
+                WebElement type = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_Edit_officenames_Table")).get(i+1).findElement(By.xpath("td/select"));
+                WebElement value = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_Edit_officenames_Table")).get(i+1).findElement(By.xpath("td/input"));
+                assertEquals(typeList.get(i), (new Select(type)).getFirstSelectedOption().getText());
+                assertEquals(valueList.get(i), value.getAttribute("value"));
+            }
+            assertEquals(typeList.get(0), getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_Edit_officenames_Table")).get(1).findElement(By.xpath("td")).getText());
+            assertEquals(valueList.get(0), getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_Edit_officenames_Table")).get(1).findElement(By.xpath("td/input")).getAttribute("value"));
+
+        }
+    }
+
+    public void selectOfficeNameType(String officeNameTypeRowIdentifier, String type) {
+        selectItemFromDropdownListByText(OfficeIdentifiers.getObjectIdentifier(officeNameTypeRowIdentifier),type);
+    }
+
+    public void enterOfficeNameValue(String officeNameValueRowIdentifier, String value) {
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(officeNameValueRowIdentifier)).clear();
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(officeNameValueRowIdentifier)).sendKeys(value);
+    }
+
+
+    public void verifyEditOfficeNameValuesExistInZeus(String type, String value, String officeFid, String source) {
+
+        assertTrue(checkEditOfficeNameValuesFromZeus(type,value,officeFid,source));
+    }
+
+    public boolean checkEditOfficeNameValuesFromZeus(String type,String value,String officeFid,String source) {
+
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Boolean flag=false;
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
+        String officeName=type+value;
+                if (document != null) {
+
+            List typeList = getNodeValuesByTagName(document, "officeType");
+            List valueList =getNodeValuesByTagName(document, "officeValue");
+
+            for(int i=0;i<typeList.size();i++)
+            {
+                String officeNameFromZeus=typeList.get(i).toString()+valueList.get(i).toString();
+                if(officeNameFromZeus.equals(officeName)) {
+                    flag=true;
+                    break;
+                }
+            }
+
+        }
+        return flag;
+    }
+
+    public void verifyOfficeNameValueErrorMessage(String xpathIdentifier,String errorMsg)
+    {
+        assertEquals(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier(xpathIdentifier)).size(), 1);
+        assertEquals(errorMsg, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(xpathIdentifier)).getText());
+    }
+
+    public void clickonDeleteOfficeNamesRowButton(String rowIdentifier) {
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+    }
+
+    public void verifyEditOfficeNameValuesNotExistInZeus(String officeFid,String source,ExamplesTable names) {
+        assertFalse(checkEditOfficeNameValuesFromZeus(names.getRow(0).get("type"),names.getRow(0).get("value"),officeFid,source));
+
+    }
+
+    public void verifyNoNewOfficeNameRow(String rowIdentifier) {
+        try {
+            assertFalse(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        } catch (NoSuchElementException e) {
+        }
+
+    }
+
+    public void verifyDeleteButtonForOfficeLegalTitle() {
+        try {
+            assertFalse(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_name_delete_button_for_legalTitle_edit_xpath")).isDisplayed());
+        } catch (NoSuchElementException e) {
+        }
+    }
+
+    public void verifyMaxlengthOfficeNameValueText(String maxSize,String rowIdentifier) {
+        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);
     }
 
     @Override
