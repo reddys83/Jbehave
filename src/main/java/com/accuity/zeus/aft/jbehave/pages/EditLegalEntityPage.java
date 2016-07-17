@@ -1423,16 +1423,6 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyOwnershipTypeFromLookup(String rowIdentifier,String lookupfid){
-    public void verifyTrustPowersInEditModeFromTrusted(String source,String fid)
-    {
-        HashMap<String, String> hmap = new HashMap<String, String>();
-        hmap=getTrustPowersValuesFromDB(source,fid);
-        assertEquals(hmap.get("powersGrantedValue"),getSelectedDropdownValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_granted_dropdown")));
-        assertEquals(hmap.get("powersFullValue"),getSelectedRadioValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_full_radio")));
-        assertEquals(hmap.get("powersUsedValue"),getSelectedRadioValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_used_radio")));
-        assertEquals(hmap.get("professionalValue"), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_professional_textbox")).getAttribute("value"));
-        assertEquals(hmap.get("administrativeValue"),getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_admin_textbox")).getAttribute("value"));
-        assertEquals(hmap.get("minAccountSizeValue"),getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_minAccountSize_textbox")).getAttribute("value"));
 
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("lookupfid", lookupfid));
@@ -1441,6 +1431,16 @@ public class EditLegalEntityPage extends AbstractPage {
         assertEquals(dropdownValuesList, getNodeValuesByTagName(document, "OwnershipType"));
     }
 
+    public void verifyTrustPowersInEditModeFromTrusted(String source,String fid) {
+        HashMap<String, String> hmap = new HashMap<String, String>();
+        hmap = getTrustPowersValuesFromDB(source, fid);
+        assertEquals(hmap.get("powersGrantedValue"), getSelectedDropdownValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_granted_dropdown")));
+        assertEquals(hmap.get("powersFullValue"), getSelectedRadioValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_full_radio")));
+        assertEquals(hmap.get("powersUsedValue"), getSelectedRadioValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_used_radio")));
+        assertEquals(hmap.get("professionalValue"), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_professional_textbox")).getAttribute("value"));
+        assertEquals(hmap.get("administrativeValue"), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_admin_textbox")).getAttribute("value"));
+        assertEquals(hmap.get("minAccountSizeValue"), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_minAccountSize_textbox")).getAttribute("value"));
+    }
     public void clickAddNewOwnershipButton(){
         attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_ownershipsummaries_add_button_id"));
     }
@@ -1798,7 +1798,7 @@ public class EditLegalEntityPage extends AbstractPage {
             attemptClick(LegalEntityIdentifiers.getObjectIdentifier("delete_confirmation_yes_button_id"));
         }
     }
-    }
+
 
     public void verifyDisabledTrustPowersFromTrusted(String source,String fid)
     {
