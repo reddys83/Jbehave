@@ -727,7 +727,7 @@ When the user clicks on the save button
 Then the user should see the save confirmation modal
 Then the user should not see the <ConfirmationSummary> changes in confirmation modal for area
 When the user clicks on the confirm button
-Then the user should not see the   <value> in zeus document
+Then the user should not see the <type> <value> in zeus document
 Then the user reverts the changes to the document
 
 Examples:
@@ -809,4 +809,100 @@ Examples:
 |country|area|type|value|ConfirmationSummary|
 |Angola|Cabinda|Alternative Name|test|Summary|
 
+Scenario: User has selected to delete an area name - and chooses yes option - verify the names are modified
+Meta: @AreaAlternateNameYes
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user clicks on the add names button in the area basic info page
+Then the user should see the area name types from lookup PLACE_NAME_TYPE
+When the user enters name type as <type> in the area basic info page
+And the user enters name value as <value> in the area basic info page
+When the user clicks on the save button
+When the user clicks on the confirm button
+And the user clicks on the area update link
+When the user clicks on the delete name row button in the area basic info page
+Then the user should see the delete row confirmation modal in the area page
+When the user clicks on the yes button in the delete row confirmation modal in the area page
+When the user clicks on the save button
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Names|
+When the user clicks on the confirm button
+Then the user should not see the <type> <value> in zeus document
+Then the user should see not the area name type and value updated in the area basic info page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|type|value|
+|Angola|Cabinda|Alternative Name|test|
+
+Scenario: User has selected to add an area name - clicks delete and chooses no option - verify the names are modified
+Meta: @AreaNewAlternateNameYesNo
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user clicks on the add names button in the area basic info page
+Then the user should see the area name types from lookup PLACE_NAME_TYPE
+When the user enters name type as <type> in the area basic info page
+And the user enters name value as <value> in the area basic info page
+When the user clicks on the delete name row button in the area basic info page
+Then the user should see the delete row confirmation modal in the area page
+When the user clicks on the no button in the delete row confirmation modal in the area page
+When the user clicks on the save button
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Names|
+When the user clicks on the confirm button
+Then the user should see the Alternative Name <value> in zeus document
+Then the user should see the area name type and value updated in in the area basic info page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|type|value|
+|Angola|Cabinda|Alternative Name|test|
+
+Scenario: User has selected to add an area name - clicks delete and chooses yes option - verify the names are not modified
+Meta: @AreaNewAlternateNameYesNo
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user clicks on the add names button in the area basic info page
+Then the user should see the area name types from lookup PLACE_NAME_TYPE
+When the user enters name type as <type> in the area basic info page
+And the user enters name value as <value> in the area basic info page
+When the user clicks on the delete name row button in the area basic info page
+Then the user should see the delete row confirmation modal in the area page
+When the user clicks on the yes button in the delete row confirmation modal in the area page
+When the user clicks on the save button
+Then the user should not see the <ConfirmationSummary> changes in confirmation modal for area
+When the user clicks on the confirm button
+Then the user should not see the <type> <value> in zeus document
+Then the user should see not the area name type and value updated in the area basic info page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|type|value|ConfirmationSummary|
+|Angola|Cabinda|Alternative Name|test|Summary|
 

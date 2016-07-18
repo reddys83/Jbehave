@@ -662,7 +662,7 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 	
-	public void verifyBlankAreaNameValueNotUpdatedInDB(String country, String area, String nameType, String source, String nameValue) {		
+	public void verifyAreaNameValueNotUpdatedInDB(String country, String area, String nameType, String source, String nameValue) {		
 		Map<String, String> cityNameValueMap = getAreaNameValueMapFromDB(country, area, source);
 		assertTrue(!cityNameValueMap.containsKey(nameType));
 		assertTrue(!cityNameValueMap.values().contains(nameValue));
