@@ -281,5 +281,10 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyErrorMessageForRequiredAreaNameValue() {
 		getEditAreaPage().verifyErrorMessageForRequiredAreaNameValue();
 	}
+	
+	@When("the user clicks on the delete name row button in the area basic info page")
+	public void clickOnDeleteNameRowButton() {
+		getEditAreaPage().clickOnDeleteNameRowButton();
+	}
 }
 

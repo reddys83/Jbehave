@@ -677,6 +677,10 @@ public class EditAreaPage extends AbstractPage {
 		assertEquals("Enter up to 75 valid characters.", getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_name_value_error_msg_xpath")).getText());
 	}
+	
+	public void clickOnDeleteNameRowButton() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_name_row_button_xpath"));
+	}
 
 	@Override
 	public String getPageUrl() {
