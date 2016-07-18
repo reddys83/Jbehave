@@ -487,7 +487,7 @@ Examples:
 |Albania|21b69329-6bc2-4e43-aac7-9a18c937324e|
 
 Scenario: ZEUS-1173- Verify when user is viewing a section other than Basic Info and Basic Info section has some errors, upon saving the country,
-the user should automatically navigate to All section and should scroll to the first error message in All view.
+the user should automatically navigate to All section.
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

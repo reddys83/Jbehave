@@ -420,9 +420,7 @@ Examples:
 
 
 Scenario: ZEUS-1173- Verify when user is viewing a section other than Credit ratings section and cedit rating section has some errors, upon saving the City,
-the user should automatically navigate to All section and should scroll to the first error message in All view.
-Meta:@test111
-
+the user should automatically navigate to All section
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area

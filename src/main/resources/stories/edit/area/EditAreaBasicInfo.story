@@ -599,7 +599,7 @@ Examples:
 
 
 Scenario: ZEUS-1173- Verify when user is viewing a section other than Basic Info and Basic Info section has some errors, upon saving the Area,
-the user should automatically navigate to All section and should scroll to the first error message in All view.
+the user should automatically navigate to All section
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
