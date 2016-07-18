@@ -23,7 +23,6 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -610,12 +609,12 @@ public class EditAreaPage extends AbstractPage {
         }
 	}
 	
-	public void enterNameType(String nameType) {
+	public void enterNameType(String nameType, int index) {
 		try {
 			if (nameType != null) {
 				List<WebElement> identifierDropDowns = getDriver()
 						.findElements(AreaIdentifiers.getObjectIdentifier("area_name_type_input_xpath"));
-				Select dropdown = new Select(identifierDropDowns.get(0));
+				Select dropdown = new Select(identifierDropDowns.get(index));
 				if (nameType.equals("")) {
 					dropdown.selectByValue(nameType);
 				} else {
@@ -631,21 +630,21 @@ public class EditAreaPage extends AbstractPage {
 		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_name_value_input_xpath"), newNameValue);
 	}
 	
-	public void verifyNameType(String nameType) {
+	public void verifyNameType(String nameType, int index) {
 		try {
 			// appending the name type to the xpath to retrieve corresponding row in view mode
-			WebElement newNameTypeElement = getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']"));
-			assertTrue(newNameTypeElement != null);
+			List<WebElement> newNameTypeElements = getDriver().findElements(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']"));
+			assertTrue(newNameTypeElements.get(index) != null);
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 	
-	public void verifyNameValue(String nameType, String nameValue) {
+	public void verifyNameValue(String nameType, String nameValue, int index) {
 		try {
 			// appending the name type to the xpath to retrieve the corresponding row in view mode
-			WebElement newNameValueElement = getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']/td[2]"));
-			assertEquals(newNameValueElement.getText(), nameValue);
+			List<WebElement> newNameValueElements = getDriver().findElements(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']/td[2]"));
+			assertEquals(newNameValueElements.get(index).getText(), nameValue);
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
@@ -655,7 +654,6 @@ public class EditAreaPage extends AbstractPage {
 		try {
 			// appending the name type to the xpath to retrieve corresponding row in view mode
 			WebElement newNameTypeElement = getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']"));
-			newNameTypeElement.getText();
 			assertTrue(newNameTypeElement == null);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -680,6 +678,61 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void clickOnDeleteNameRowButton() {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_name_row_button_xpath"));
+	}
+	
+	public void checkDeleteRowButtonNotExist(String nameType) {
+		try {
+			// appending the name type to the xpath to retrieve corresponding row in view mode
+			WebElement newNameTypeElement = getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']/td[@class='delete']"));
+			assertTrue(newNameTypeElement == null);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void enterSecondNameValue(String newNameValue) {
+		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_second_name_value_input_xpath"), newNameValue);
+	}
+	
+	public Map<String, List<String>> getAreaNameMultipleValueMapFromDB(String country, String area, String source) {
+		Map<String, List<String>> cityNameMap = new HashMap<String, List<String>>();
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area basic info", nvPairs);
+		if (document != null) {
+			NodeList nodeList = document.getElementsByTagName("name");
+			for(int index = 0; index < nodeList.getLength(); index++)  {
+				NodeList childNodeList = nodeList.item(index).getChildNodes();
+				if(cityNameMap.containsKey(childNodeList.item(0).getTextContent())) {
+					List<String> values = cityNameMap.get(childNodeList.item(0).getTextContent());
+					values.add(childNodeList.item(1).getTextContent());
+					cityNameMap.put(childNodeList.item(0).getTextContent(), values);
+				} else {
+					List<String> values = new ArrayList<String>();
+					values.add(childNodeList.item(1).getTextContent());
+					cityNameMap.put(childNodeList.item(0).getTextContent(), values);
+				}
+				
+			}
+		}
+		return cityNameMap;
+	}
+	
+	public void verifyUpdatedMultipleAreaNamesInDB(String country, String area, String nameType, String source, String nameValue, String nameValue2) {
+		if("Full Name".equals(nameType)) {
+			area = nameValue;
+		}			
+		Map<String, List<String>> cityNameValueMap = getAreaNameMultipleValueMapFromDB(country, area, source);
+		assertTrue(cityNameValueMap.get(nameType).contains(nameValue));
+		assertTrue(cityNameValueMap.get(nameType).contains(nameValue));
 	}
 
 	@Override

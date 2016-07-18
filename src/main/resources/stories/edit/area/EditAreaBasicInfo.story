@@ -596,7 +596,7 @@ Examples:
 |Angola|Cabinda||||06|Jun|2015|
 
 Scenario: User has selected to update Full Name in Area's Basic Info
-Meta: @AreaFullName
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -626,7 +626,7 @@ Examples:
 |Angola|Cabinda|Cabinda1|
 
 Scenario: User has selected to update Display Name in Area's Basic Info
-Meta: @AreaDispName
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -656,7 +656,7 @@ Examples:
 |Angola|Cabinda|Cabinda1|
 
 Scenario: User has selected to add Alternative Name in Area's Basic Info
-Meta: @AreaAlternateName
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -686,7 +686,7 @@ Examples:
 |Angola|Cabinda|Alternative Name|test|
 
 Scenario: User has selected to add New Name Rows in Area's Basic Info - Check if ALternative name can be selected again after selecting once
-Meta: @AreaAlternateName
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -708,7 +708,7 @@ Examples:
 |Angola|Cabinda|Alternative Name|test|
 
 Scenario: User has selected to add New Name Row in Area's Basic Info - check save is successful when all blank values are selected and document is not updated
-Meta: @AreaBlankName
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -735,7 +735,7 @@ Examples:
 |Angola|Cabinda|||Summary|
 
 Scenario: User has selected to add New Name Row in Area's Basic Info - error message "Required" is displayed when type is not entered but value is entered
-Meta: @AreaNameError
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -756,7 +756,7 @@ Examples:
 |Angola|Cabinda|test|
 
 Scenario: User has selected to add New Name Row in Area's Basic Info - error message is displayed when type is entered but value is not entered
-Meta: @AreaNameError2
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -777,7 +777,7 @@ Examples:
 |Angola|Cabinda|Alternative Name|
 
 Scenario: User has selected to delete an area name - and chooses no option - verify the names are not modified
-Meta: @AreaAlternateNameNo
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -810,7 +810,7 @@ Examples:
 |Angola|Cabinda|Alternative Name|test|Summary|
 
 Scenario: User has selected to delete an area name - and chooses yes option - verify the names are modified
-Meta: @AreaAlternateNameYes
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -845,7 +845,7 @@ Examples:
 |Angola|Cabinda|Alternative Name|test|
 
 Scenario: User has selected to add an area name - clicks delete and chooses no option - verify the names are modified
-Meta: @AreaNewAlternateNameYesNo
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -877,7 +877,7 @@ Examples:
 |Angola|Cabinda|Alternative Name|test|
 
 Scenario: User has selected to add an area name - clicks delete and chooses yes option - verify the names are not modified
-Meta: @AreaNewAlternateNameYesNo
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -905,4 +905,58 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|type|value|ConfirmationSummary|
 |Angola|Cabinda|Alternative Name|test|Summary|
+
+Scenario: User has selected to update area name - verify that Full Name and Display Name cannot be deleted
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+Then the user should not see delete row button against <type>
+
+Examples:
+|country|area|type|
+|Angola|Cabinda|Full Name|
+|Angola|Cabinda|Display Name|
+
+Scenario: User has selected to add multiple Alternative Name in Area's Basic Info
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user clicks on the add names button in the area basic info page
+Then the user should see the area name types from lookup PLACE_NAME_TYPE
+When the user enters name type as <type> in the area basic info page
+And the user enters name value as <value> in the area basic info page
+When the user clicks on the add names button in the area basic info page
+Then the user should see the area name types from lookup PLACE_NAME_TYPE
+When the user enters second name type as <type> in the area basic info page
+And the user enters second name value as <value2> in the area basic info page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Names|
+When the user clicks on the confirm button
+Then the user should see the Alternative Name <value> and <value2> in zeus document
+Then the user should see the area name type and value updated in in the area basic info page
+Then the user should see the second area name type and value updated in in the area basic info page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|type|value|value2|
+|Angola|Cabinda|Alternative Name|test|test2|
+
 
