@@ -93,13 +93,14 @@ public class EditOfficePage extends AbstractPage {
 
     }
 
-    public void verifyEditOfficeAdditionalInfoValueFromZeus(String additionalInfoText, String selectedEntity, String source) {
+    public void verifyEditOfficeAdditionalInfoValueFromZeusDocumentAndUI(String additionalInfoText, String selectedEntity, String source) {
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         assertEquals(getOfficeValuesFromDB(selectedEntity, source), additionalInfoText);
+        assertEquals(additionalInfoText,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_AdditionalInfo_textarea_view_xpath")));
 
     }
 

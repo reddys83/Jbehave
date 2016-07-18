@@ -46,9 +46,9 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().enterOfficeAdditionalInfo(additionalInfoText);
     }
 
-    @Then("the user should see office additional info text value as <additionalInfoText> for fid <officeFid> in $source document")
-    public void verifyAdditionalInfoValuefromDB(@Named("additionalInfoText") String additionalInfoText,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficeAdditionalInfoValueFromZeus(additionalInfoText,officeFid,source);
+    @Then("the user should see office additional info text value as <additionalInfoText> for fid <officeFid> in $source document and in zeus UI")
+    public void verifyEditOfficeAdditionalInfoValueFromZeusDocumentAndUI(@Named("additionalInfoText") String additionalInfoText,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficeAdditionalInfoValueFromZeusDocumentAndUI(additionalInfoText,officeFid,source);
     }
 
     @Then("the user should see the office additional info text area field length as 10000")

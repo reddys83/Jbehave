@@ -141,7 +141,7 @@ And the user should see the below summary changes in confirmation modal
 |Summary|
 |Basic Info|
 When the user clicks on the confirm button
-Then the user should see office additional info text value as <additionalInfoText> for fid <officeFid> in zeus document
+Then the user should see office additional info text value as <additionalInfoText> for fid <officeFid> in zeus document and in zeus UI
 When the user clicks on the office update link
 And the user enters the <additionalInfoText> in the office additional info text area
 And the user clicks on the save button
@@ -150,7 +150,7 @@ And the user should not see the below summary changes in confirmation modal
 |Summary|
 |Basic Info|
 When the user clicks on the confirm button
-Then the user should see office additional info text value as <additionalInfoText> for fid <officeFid> in zeus document
+Then the user should see office additional info text value as <additionalInfoText> for fid <officeFid> in zeus document and in zeus UI
 And the user reverts the changes to the document
 
 Examples:
@@ -177,7 +177,7 @@ And the user should see the below summary changes in confirmation modal
 |Summary|
 |Basic Info|
 When the user clicks on the confirm button
-Then the user should see office additional info text value as <additionalInfoText> for fid <officeFid> in zeus document
+Then the user should see office additional info text value as <additionalInfoText> for fid <officeFid> in zeus document and in zeus UI
 And the user reverts the changes to the document
 
 Examples:
