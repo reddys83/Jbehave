@@ -35,6 +35,11 @@ public class EditAreaSteps extends AbstractSteps {
 	public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("area") String param) {
 		getDataPage().getDocument(xqueryName, param);
 	}
+	
+	@When("the user gets the document with $xqueryName with the <subArea> from the database")
+	public void getDocumentByFidSubArea(@Named("xqueryName") String xqueryName, @Named("subArea") String subArea,@Named("country") String country,@Named("area") String area) {
+		getDataPage().getDocumentforSubArea(xqueryName, subArea, country, area);
+	}
 
 	@When("the user enters began date day <day> in the edit basic info area page")
 	public void enterDayInBeganDate(@Named("day") String day) {
@@ -232,7 +237,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifySubAreaInfoFromZeusDB(country2, Areaparent, subArea, "subarea", source, subArea);
 	}
 
-	@Then("user verify the subArea dropdown does not have subArea <subArea> value mapped to old country and area")
+	@Then("user should verify the subArea dropdown does not have subArea <subArea> value mapped to old country and area")
 	public void verifySubAreaDropdown(@Named("subArea") String subArea) throws InterruptedException {
 		getEditAreaPage().verifySubAreaDropdown(subArea);
 	}
@@ -240,6 +245,11 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("user should see the list of Area parent options in Area page is Empty")
 	public void verifyParentAreaListIsEmpty(@Named("country2") String country2) {
 		getEditAreaPage().verifyParentAreaListInPlaceForCountry(country2);
+	}
+	
+	@Then("user should see the list of Area parent options in area page is Empty")
+	public void verifyParentAreasListIsEmpty(@Named("country") String country) {
+		getEditAreaPage().verifyParentAreaListInPlaceForCountry(country);
 	}
 
 	@Then("the user should verfiy that the 'Choose and area' option is populated in the Area Parent dropdown")
@@ -250,15 +260,15 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("user should see the list of Area parent options in Area page are in Alphabetical order")
 	@Alias("user should see the list of Area parent options are refreshed pointing to selected <country2> in area basic info page")
 	public void verifyParentAreaListInPlacesForCountry(@Named("country2") String country) {
-		getEditAreaPage().verifyAreaListInPlacesForCountry(country);
+		getEditAreaPage().verifyAreaListInPlaceForCountry(country);
 	}
 
-	@Then("the user should user verify the header dropdowns are disabled")
+	@Then("the user should verify the header dropdowns are disabled")
 	public void userVerifyHeaderDropdownValuesDisabled() throws InterruptedException {
 		getEditAreaPage().userVerifyHeaderDropdownValuesDisabled();
 	}
 
-	@Then("the user verify the country dropdown is populating with default country <country> as a option")
+	@Then("the user should verify the country dropdown is populating with default country <country> as a option")
 	public void userVerifyCountryDropdownDefaultValue(@Named("country") String country) {
 		getEditAreaPage().userVerifyCountryDropdownDefaultValue(country);
 	}
@@ -281,11 +291,12 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("verify $source document whether <area> is mapped to newly added <country2>")
 	public void verifyZeusDocument(@Named("source") String source, @Named("area") String area,
-			@Named("country2") String country2, @Named("area") String area1) throws InterruptedException {
+			@Named("country2") String country2, @Named("area") String area1) throws InterruptedException {		
+		Thread.sleep(4000);
 		getEditAreaPage().verifyAreaInfoFromZeusDB(country2, area, "area", source, area1);
 	}
 
-	@Then("the user verify the parent area dropdown is populating with default area <area> as a option")
+	@Then("the user should verify the parent area dropdown is populating with default area <area> as a option")
 	public void userVerifyAreaParentDropdownDefaultValue(@Named("area") String area) {
 		getEditAreaPage().userVerifyAreaParentDropdownDefaultValue(area);
 	}
@@ -300,9 +311,9 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaListInPlacesForCountry(country);
 	}
 
-	@Then("user verify the list of Area pareant options do not have No Value or Null")
+	@Then("user verify the list of Area pareant options do not have No Area")
 	public void verifyParentAreaListDontHaveNullNovalue() {
-		getEditAreaPage().verifyParentAreaDropdownDontHaveNullNovalue();
+		getEditAreaPage().verifyParentAreaDropdownDontHaveNoArea();
 	}
 
 }

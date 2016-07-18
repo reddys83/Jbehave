@@ -16,24 +16,58 @@ declare function local:getDateAsPerAccuracy( $date as node() ) {
         default return "date not valid"
 };
 
+
 let $country := xs:string(xdmp:get-request-field("country"))
 let $area := xs:string(xdmp:get-request-field("area"))
+let $subarea := xs:string(xdmp:get-request-field("subarea"))
 let $source := xs:string(xdmp:get-request-field("source"))
 
-let $countryDoc := /country[@source = $source][summary/names/name[type = "Country Name"]/value = $country]
-let $areaDoc := /area[@source = $source][summary/names/name[type = "Full Name"]/value = $area][within/place/link/@href=$countryDoc/@resource]
 
-(: Taking End Date :)
-let $DateFields :=
-    <areaDate>
-        <EndDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateCeased)}</EndDate>
+let $countryDoc := /country[@source = 'trusted'][summary/names/name[type = "Country Name"]/value = $country]
+let $areaDoc := /area[@source = 'trusted'][summary/names/name[type = "Full Name"]/value = $area][within/place/link/@href=$countryDoc/@resource]
+let $subareaDoc := /area[@source = $source][summary/names/name[type = "Full Name"]/value = $subarea][within/place/link/@href=$areaDoc/@resource]
+
+(: Taking End Date :)        
 (: Taking Begin Date :)
 let $DateFields :=
     <areaDate>
-        <BeganDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateBegan)}</BeganDate>
+	    <BeganDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateBegan)}</BeganDate>
+		<EndDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateCeased)}</EndDate>        
     </areaDate>
-    
+  (: Taking Add Info :)
+ let $areaadditionalinfo := ($areaDoc/summary/additionalInfos/additionalInfo/text())
+ 
+ (: Get area and Subarea value :) 
+let $areavalue := ($areaDoc/summary/names/name[1]/value/text()) 
+
+let $subareavalue := ($subareaDoc/summary/names/name[1]/value/text()) 
+
+(: Taking identifier List :)
+let $areaIdentifierList := for $x in ($areaDoc/summary/identifiers/identifier)
+  let $areaIdentifierType := $x/type/text()
+  let $areaIdentifierValue := ($x/value/text())
+  let $areaIdentifierStatus := ($x/status/text())
+return 
+  <identifier>
+  <type>{$areaIdentifierType} </type>
+  <value>{$areaIdentifierValue} </value>
+  <identifierStatus>{$areaIdentifierStatus} </identifierStatus>
+  </identifier>
+
+
 return
-  <area>
+  <Area>
+      { $areaDoc/summary/names }
       <dateFields>{$DateFields}</dateFields>
-  </area>
+      <AdditionalInfo>{$areaadditionalinfo}</AdditionalInfo>
+      <area>{$areavalue}</area>
+      <subarea>{$subareavalue}</subarea>
+      <identifiers> {$areaIdentifierList} </identifiers> 
+  </Area>
+  
+  
+
+  
+  
+  
+  

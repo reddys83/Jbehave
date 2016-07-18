@@ -575,12 +575,12 @@ public class EditAreaPage extends AbstractPage {
 		}
 
 		else {
-			throw new AssertionError("Area parent has more than one record");
+			throw new AssertionError("Area parent List is not Empty");
 		}
 	}
 
 	public void verifyChooseAnAreaOptionInAreaparent() throws InterruptedException {
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 		assertEquals("Choose an Area",
 				getDriver()
 						.findElements(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"))
@@ -633,7 +633,7 @@ public class EditAreaPage extends AbstractPage {
 	}
 
 	public void verifyErrorMessageForRequiredAreaparentIdentifierType() throws InterruptedException {
-		Thread.sleep(6000);
+		Thread.sleep(12000);
 		assertEquals("Required", getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_req_err_msg_xpath")).getText());
 	}
@@ -647,7 +647,9 @@ public class EditAreaPage extends AbstractPage {
 
 	}
 
-	public void verifyAreaInfoFromZeusDB(String country, String area, String tagName, String source, String status) {
+	public void verifyAreaInfoFromZeusDB(String country, String area, String tagName, String source, String status) throws InterruptedException {	
+		
+		Thread.sleep(4000);
 		assertEquals(getAreasInfoFromDB(country, area, tagName, source), status);
 	}
 
@@ -687,7 +689,7 @@ public class EditAreaPage extends AbstractPage {
 		Thread.sleep(6000);
 	}
 
-	public void verifyParentAreaDropdownDontHaveNullNovalue() {
+	public void verifyParentAreaDropdownDontHaveNoArea() {
 
 		List<WebElement> list = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"));
@@ -697,7 +699,26 @@ public class EditAreaPage extends AbstractPage {
 		for (int j = 0; j < size; j++) {
 			areaparentlist.add((list.get(j)).getText());
 		}
-		assertFalse(areaparentlist.contains("NULL") || areaparentlist.contains("No Value"));
+		assertFalse(areaparentlist.contains("NULL") || areaparentlist.contains("No Area"));
+	}
+	
+	public void verifyAreaListInPlaceForCountry(String Country) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("name", Country));
+		nvPairs.add(new BasicNameValuePair("source", "trusted"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list",
+				nvPairs);
+		if (getDriver().findElements(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"))
+				.size() > 2) {
+			for (int i = 0; i < document.getElementsByTagName("area").getLength(); i++) {
+				assertEquals(document.getElementsByTagName("area").item(i).getTextContent(),
+						getDriver()
+								.findElements(
+										AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"))
+								.get(i+1).getText());
+			}
+		}
+
 	}
 
 	@Override
