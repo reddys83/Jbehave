@@ -75,13 +75,15 @@ public class EditOfficePage extends AbstractPage {
         selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier("office_leadlocation_radio_options_xpath"), leadLocationflag);
     }
 
-    public void verifyLeadLocationValuefromDB(String leadLocationflag, String selectedEntity, String source) {
+    public void verifyLeadLocationValuefromZeusDocumentAndUI(String leadLocationflag, String selectedEntity, String source) {
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         assertEquals(getLeadLocationFlagFromDB(selectedEntity, source), leadLocationflag);
+        assertEquals(leadLocationflag,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_view_leadlocation_xpath")));
+
 
     }
 
@@ -99,15 +101,15 @@ public class EditOfficePage extends AbstractPage {
         return leadLocationDBValue;
     }
 
-    public void changeOfficeLeadLocationFlag() {
+    public void changeAlternateRadioButtonValue(String identifier) {
         String newleadInstitutionflag = "";
-        String selectedRadioValue = getSelectedRadioValue(OfficeIdentifiers.getObjectIdentifier("office_leadlocation_radio_options_xpath"));
+        String selectedRadioValue = getSelectedRadioValue(OfficeIdentifiers.getObjectIdentifier(identifier));
         if (selectedRadioValue.equalsIgnoreCase("true")) {
             newleadInstitutionflag = "false";
         } else if (selectedRadioValue.equalsIgnoreCase("false")) {
             newleadInstitutionflag = "true";
         }
-        selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier("office_leadlocation_radio_options_xpath"), newleadInstitutionflag);
+        selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier(identifier), newleadInstitutionflag);
     }
 
     public void verifyOfficeEditPageMode() {

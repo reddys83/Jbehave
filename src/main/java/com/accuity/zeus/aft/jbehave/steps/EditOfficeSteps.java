@@ -46,15 +46,15 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().selectOfficeLeadLocationFlag(leadLocationflag);
     }
 
-    @Then("the user should see leadLocation value as <leadLocationflag> for fid <officeFid> in $source document")
+    @Then("the user should see leadLocation value as <leadLocationflag> for fid <officeFid> in $source document and in zeus UI")
     public void getDocumentLeadLocation(@Named("leadLocationflag") String leadLocationflag,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyLeadLocationValuefromDB(leadLocationflag,officeFid,source);
+        getEditOfficePage().verifyLeadLocationValuefromZeusDocumentAndUI(leadLocationflag,officeFid,source);
     }
 
 
     @When("the user selects lead location value other than default value in the basicinfo office page")
     public void changeOfficeLeadLocationFlag() {
-        getEditOfficePage().changeOfficeLeadLocationFlag();
+        getEditOfficePage().changeAlternateRadioButtonValue("office_leadlocation_radio_options_xpath");
     }
 
     @Then("the user should return to edit office page mode")

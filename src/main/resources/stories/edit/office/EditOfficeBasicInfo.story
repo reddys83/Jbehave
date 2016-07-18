@@ -139,7 +139,7 @@ And the user selects lead location value <leadLocationflag> in the basicinfo off
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
-Then the user should see leadLocation value as <leadLocationflag> for fid <officeFid> in zeus document
+Then the user should see leadLocation value as <leadLocationflag> for fid <officeFid> in zeus document and in zeus UI
 And the user reverts the changes to the document
 
 Examples:
