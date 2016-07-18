@@ -121,8 +121,8 @@ Examples:
 
 
 Scenario: Verify the default Edit value and Save Foreign Office value for an office
-       a. Select the value as True for Foreign Office flag and Save for an office with a default value as True or False
-       b. Select the value as False for Foreign Office flag and Save for an office with a default value as True or False
+       a. Select the value as True for Foreign Office flag and Save for an office
+       b. Select the value as False for Foreign Office flag and Save for an office
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -139,7 +139,7 @@ And the user selects foreign office value <foreignOfficeflag> in the basicinfo o
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
-Then the user should see foreignOffice value as <foreignOfficeflag> for fid <officeFid> in zeus document
+Then the user should see foreignOffice value as <foreignOfficeflag> for fid <officeFid> in zeus document and in zeus UI
 And the user reverts the changes to the document
 
 Examples:

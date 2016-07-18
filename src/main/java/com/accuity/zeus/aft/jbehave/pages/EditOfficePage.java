@@ -76,13 +76,14 @@ public class EditOfficePage extends AbstractPage {
         selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier("office_foreignoffice_radio_options_xpath"), foreignOfficeflag);
     }
 
-    public void verifyForeignOfficeValuefromDB(String foreignOfficeflag, String selectedEntity, String source) {
+    public void verifyForeignOfficeValuefromZeusDocumentandUI(String foreignOfficeflag, String selectedEntity, String source) {
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         assertEquals(getForeignOfficeFlagFromDB(selectedEntity, source), foreignOfficeflag);
+        assertEquals(foreignOfficeflag,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_view_foreignoffice_xpath")));
 
     }
 
@@ -100,19 +101,19 @@ public class EditOfficePage extends AbstractPage {
         return leadLocationDBValue;
     }
 
-    public void changeForeignOfficeFlag() {
+    public void changeAlternateRadioButtonValue(String identifier) {
         String newleadInstitutionflag = "";
-        String selectedRadioValue = getSelectedRadioValue(OfficeIdentifiers.getObjectIdentifier("office_foreignoffice_radio_options_xpath"));
+        String selectedRadioValue = getSelectedRadioValue(OfficeIdentifiers.getObjectIdentifier(identifier));
         if (selectedRadioValue.equalsIgnoreCase("true")) {
             newleadInstitutionflag = "false";
         } else if (selectedRadioValue.equalsIgnoreCase("false")) {
             newleadInstitutionflag = "true";
         }
-        selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier("office_foreignoffice_radio_options_xpath"), newleadInstitutionflag);
+        selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier(identifier), newleadInstitutionflag);
     }
 
     public void verifyOfficeEditPageMode() {
-        assertTrue(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_status_xpath")).size()>0);
+        assertTrue(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_view_xpath")).size()>0);
     }
     @Override
     public String getPageUrl() {
