@@ -161,6 +161,60 @@ public class EditOfficePage extends AbstractPage {
         assertFalse(getNodeValuesByTagName(document, tagName).contains(value));
     }
 
+    public void verifyDeleteOfficeTypeButtonStatus(String deleteButton) {
+        assertFalse(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(deleteButton)).isEnabled());
+    }
+
+    public void clickonDeleteOfficeTypeRowButton(String rowIdentifier) {
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+    }
+
+    public void verifyExistingOfficeTypeRow(String rowIdentifier, String dropdownvalue) {
+        assertTrue(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        Select dropdown = new Select(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)));
+        assertEquals(dropdown.getFirstSelectedOption().getText(), dropdownvalue);
+    }
+
+    public void verifyNoExistingOfficeTypeRow(String rowIdentifier, String dropdownvalue) {
+        Select dropdown = new Select(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)));
+        assertFalse(dropdown.getFirstSelectedOption().getText().equalsIgnoreCase(dropdownvalue));
+
+    }
+
+    public void verifyNewOfficeTypeRow(String rowIdentifier) {
+        assertTrue(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+    }
+
+    public void verifyNoNewOfficeTypeRow(String rowIdentifier) {
+        try {
+            assertFalse(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        } catch (NoSuchElementException e) {
+        }
+
+    }
+
+    public void deleteAllOfficeTypeRowsExceptRow1() {
+        int numberOfRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_officetypes_delete_button_xpath")).size();
+        for (int buttonCount = 1; buttonCount < numberOfRows; buttonCount++) {
+            getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_officetypes_delete_button_xpath")).get(1).click();
+            attemptClick(OfficeIdentifiers.getObjectIdentifier("delete_confirmation_yes_button_id"));
+        }
+    }
+
+    public void verifyErrorMsgRequiredForOfficeType() {
+        assertEquals(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_office_type_error_msg_xpath")).size(), 1);
+        assertEquals("Required", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_office_type_error_msg_xpath")).getText());
+    }
+
+    public void enterNullValueForAllOfficeTypeRows() {
+        int numberOfRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_officetypes_dropdown_xpath")).size();
+        for (int entityTypesCount = 0; entityTypesCount < numberOfRows; entityTypesCount++) {
+            Select dropdown = new Select(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_officetypes_dropdown_xpath")).get(entityTypesCount));
+            dropdown.selectByVisibleText("");
+        }
+    }
+
+
     @Override
     public String getPageUrl() {
         return null;

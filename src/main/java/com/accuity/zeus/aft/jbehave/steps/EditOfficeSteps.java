@@ -45,7 +45,7 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().clickOnNewOfficeTypeDropDown(officetype_dropdown);
     }
 
-    @Then("the user should see the officetype $dropdown values from lookup $fid except the values that are selected already")
+    @Then("the user should see the $dropdown values from lookup $fid except the values that are selected already in office")
     public void verifyOfficeTypeListFromLookup(String dropdown,String fid){
         getEditOfficePage().verifyOfficeTypeListFromLookup(fid,dropdown);
     }
@@ -78,6 +78,60 @@ public class EditOfficeSteps extends AbstractSteps{
     {
         getEditOfficePage().verifyOfficeTypeNotPresentInZeus(source,officeFid,"type",value);
     }
+
+    @Then("the user should see the $delete_button in disabled state in office types section")
+    public void verifyDeleteOfficeTypeButtonStatus(@Named("delete_button") String delete_button)
+    {
+        getEditOfficePage().verifyDeleteOfficeTypeButtonStatus(delete_button);
+    }
+
+    @When("the user clicks on the $deletebutton in office types section")
+    public void clickonDeleteOfficeTypeRowButton(String deletebutton)
+    {
+        getEditOfficePage().clickonDeleteOfficeTypeRowButton(deletebutton);
+    }
+
+    @Then("the user should still see the office $dropdown with value $dropdownvalue in office type in office page")
+    public void verifyExistingOfficeTypeRow(String dropdown,String dropdownvalue)
+    {
+        getEditOfficePage().verifyExistingOfficeTypeRow(dropdown,dropdownvalue);
+    }
+
+    @Then("the user should not see the office $dropdown with value $dropdownvalue in office type in office page")
+    public void verifyNoExistingOfficeTypeRow(String dropdown,String dropdownvalue)
+    {
+        getEditOfficePage().verifyNoExistingOfficeTypeRow(dropdown,dropdownvalue);
+    }
+
+    @Then("the user should still see the office $dropdown in the new office type row")
+    public void verifyNewOfficeTypeRow(String dropdown)
+    {
+        getEditOfficePage().verifyNewOfficeTypeRow(dropdown);
+    }
+
+    @Then("the user should not see the office $dropdown in the new office type row")
+    public void verifyNoNewOfficeTypeRow(String dropdown)
+    {
+        getEditOfficePage().verifyNoNewOfficeTypeRow(dropdown);
+    }
+
+    @When("the user selects to delete all the office type rows except the first one in office types")
+    public void deleteAllOfficeTypeRowsExceptRow1()
+    {
+        getEditOfficePage().deleteAllOfficeTypeRowsExceptRow1();
+    }
+
+    @Then("the user should see the error message for the required office type field in the basic info office page")
+    public void verifyErrorMsgRequiredForOfficeType(){
+        getEditOfficePage().verifyErrorMsgRequiredForOfficeType();
+    }
+
+    @When("the user enters null value for all the office type rows")
+    public void enterNullValueForAllOfficeTypeRows()
+    {
+        getEditOfficePage().enterNullValueForAllOfficeTypeRows();
+    }
+
 }
 
 
