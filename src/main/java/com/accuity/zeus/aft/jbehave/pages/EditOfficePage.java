@@ -113,7 +113,7 @@ public class EditOfficePage extends AbstractPage {
     }
 
     public void verifyOfficeEditPageMode() {
-        assertTrue(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_view_xpath")).size()>0);
+        assertTrue(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_month_xpath")).size()>0);
     }
     @Override
     public String getPageUrl() {
