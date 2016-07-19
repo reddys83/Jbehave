@@ -637,7 +637,6 @@ Scenario: To view that there is no change in value when the user has entered a v
 a)User verifies Area Basic Info changes has not been updated in confirmation modal
 b)User verifies 'Your Changes have been saved' message is displayed after save
 c)User verified Add Info value is updated correctly in area basic info page
-d)User verifies Add Info values in Zeus Document
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -705,7 +704,7 @@ And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
-When the user enters the <addInfoDiffText> in the area add info text area
+When the user enters the <addInfoText> in the area add info text area
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
