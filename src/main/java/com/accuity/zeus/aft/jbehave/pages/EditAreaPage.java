@@ -22,7 +22,9 @@ import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
-
+	
+   public static String addInfoMaximumCharacterString=null;
+   
 	public EditAreaPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
 		super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -453,15 +455,82 @@ public class EditAreaPage extends AbstractPage {
 
 	}
 
+	/**
+	 * This method is to enter the value in Area addInfo text field
+	 *
+	 * @param addInfoText
+	 */
+	public void enterTextAreaAddInfo(String addInfoText) {
+		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath"), addInfoText);
+	}
+
+	/**
+	 * This method is to verify the value in area addInfo text field to equal to
+	 * expected.
+	 *
+	 * @param addInfoText
+	 */
+	public void verifyAreaTextInAddInfo(String addInfoText) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals(addInfoText, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_xpath_after_save")).getText());
+	}
+
+	/**
+	 * This method is to verify maximum characters entered in area additional
+	 * info text box is 500
+	 */
+	
+
+	public void enterInvalidCharactersInAreaAddInfo() {
+		char addCharToAddInfo = 'a';
+		String addInfoRandomText = null;
+		for (int i = 0; i <= 500; i++) {
+			addInfoRandomText += addCharToAddInfo;
+		}
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath")).clear();
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath")).sendKeys(addInfoRandomText);
+		addInfoMaximumCharacterString = addInfoRandomText;
+	}
+
+	public void viewValidCharacterLength() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		Integer addInfoLength = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_xpath_after_save")).getText().length();
+		assertEquals(addInfoLength.toString(), "500");
+	}
+
+	/**
+	 * This method is to verify maximum characters entered in area additional
+	 * info text box is 500
+	 */
+	public void verifyMaximumChracterEnteredInAddInfo() {
+		assertEquals(addInfoMaximumCharacterString.subSequence(0, 500), getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_xpath_after_save")).getText());
+	}
+
+	public void verifyAreaAddInfoValueFromTrusted(String country, String area, String tagName, String source) {
+		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source),
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_info_text_xpath")).getText());
+	}
+
+	public void verifyAreaAddInfoValueFromZeus(String country, String area, String tagName, String source,
+			String addInfoText) {
+		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source), addInfoText);
+
+	}
 
 	@Override
 	public String getPageUrl() {
 		return null;
 	}
-
-
-
-
-
 
 }
