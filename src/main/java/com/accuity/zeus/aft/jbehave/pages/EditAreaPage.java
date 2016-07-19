@@ -13,7 +13,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.w3c.dom.Document;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
@@ -24,10 +26,9 @@ import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
 
-	private String countryPlacesCountry = "";
-	private String countryPlacesArea = "";
-	private String newcountryvalue = "";
-	private String newareavalue = "";
+	
+	private static String selectedCountryID = "";
+	private static  String selectedAreaID = "";
 
 	public EditAreaPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
@@ -456,16 +457,15 @@ public class EditAreaPage extends AbstractPage {
 
 	}
 
-	public void changeCountryValue(String country) throws InterruptedException {
+	public void selectCountryValue(String country) throws InterruptedException {
 		try {
 
 			attemptClick(AreaIdentifiers.getObjectIdentifier("country_header_value_xpath"));
-
 			List<WebElement> drpList = getDriver().findElements(
 					AreaIdentifiers.getObjectIdentifier("country_places_country_dropDown_select_option_xpath"));
 			for (int i = 0; i < drpList.size(); i++) {
 				if (drpList.get(i).getText().equals(country)) {
-					newcountryvalue = drpList.get(i).getAttribute("value");
+					selectedCountryID = drpList.get(i).getAttribute("value");
 					selectItemFromDropdownListByindex(
 							AreaIdentifiers.getObjectIdentifier("country_places_country_dropDown_select_xpath"), i);
 					break;
@@ -474,19 +474,27 @@ public class EditAreaPage extends AbstractPage {
 		} catch (Exception e) {
 
 		}
-		Thread.sleep(5000);// Time required for next action in the script
+		Thread.sleep(3000);// Time required for area parent dropdown to ReLoad
 
 	}
+	
+	
+	 public void textToBePresentInElement(WebElement element) {
+	        try {
+	            WebDriverWait wait = new WebDriverWait(getDriver(), 25);
+	            wait.until(ExpectedConditions.textToBePresentInElement(element, "Required"));
+	        } catch (org.openqa.selenium.NoSuchElementException e) {
+	        }
+	    }
 
-	public void changeAreaValue(String Areaparent) throws InterruptedException {
+	public void selectAreaValue(String areaParent) throws InterruptedException {
 		try {
-			attemptClick(AreaIdentifiers.getObjectIdentifier("Areaparent_currentvalue_xpath"));
-			Thread.sleep(4000);
+			attemptClick(AreaIdentifiers.getObjectIdentifier("areaParent_currentValue_xpath"));
 			List<WebElement> drpList = getDriver()
 					.findElements(AreaIdentifiers.getObjectIdentifier("country_places_areas_option_dropdown_xpath"));
 			for (int i = 0; i < drpList.size(); i++) {
-				if (drpList.get(i).getText().equals(Areaparent)) {
-					newareavalue = drpList.get(i).getAttribute("value");
+				if (drpList.get(i).getText().equals(areaParent)) {
+					selectedAreaID = drpList.get(i).getAttribute("value");
 					selectItemFromDropdownListByindex(
 							AreaIdentifiers.getObjectIdentifier("country_places_areas_dropdown_xpath"), i);
 					break;
@@ -495,32 +503,27 @@ public class EditAreaPage extends AbstractPage {
 		} catch (Exception e) {
 
 		}
-		Thread.sleep(5000);
-
 	}
 
-	public void checksHeaderdropdownValues(String country1, String Areaparent, String subArea)
+	public void verifyHeaderDropDownValues(String country, String areaParent, String subArea)
 			throws InterruptedException {
-		Thread.sleep(10000);
-		assertEquals(country1,
+		Thread.sleep(2000);//wait time for Header drop down to reload
+		assertEquals(country,
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("country_current_value_xpath")).getText());
-		assertEquals(Areaparent,
+		assertEquals(areaParent,
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_current_value_xpath")).getText());
 		assertEquals(subArea,
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("subarea_current_value_xpath")).getText());
 
 	}
 
-	public void checksAddressBarIsHavingNewCountryAreaIds(String country1, String Areaparent)
+	public void checksAddressBarIsHavingNewCountryAreaIds(String country, String areaParent)
 			throws InterruptedException {
-		String url = getDriver().getCurrentUrl();
-		String[] retval = url.split("/");
-		String countryvalue = retval[6];
-		String areavalue = retval[7];
-		String subareavalue = retval[8];
-		assertEquals(countryvalue, newcountryvalue);
-		assertEquals(areavalue, newareavalue);
-		Thread.sleep(5000);
+		String [] urlPartitions = getDriver().getCurrentUrl().split("/");		
+		String countryID = urlPartitions[6];
+		String areaID = urlPartitions[7];
+		assertEquals(countryID, selectedCountryID);
+		assertEquals(areaID, selectedAreaID);
 	}
 
 	public void verifySubAreaInfoFromZeusDB(String country, String area, String subarea, String tagName, String source,
@@ -561,17 +564,17 @@ public class EditAreaPage extends AbstractPage {
 		assertFalse(subarealist.contains(subArea));
 	}
 
-	public void verifyParentAreaListInPlaceForCountry(String Country) {
+	public void verifyParentAreaListInPlaceForCountry(String country) {
 		List<NameValuePair> nvPairs = new ArrayList<>();
-		nvPairs.add(new BasicNameValuePair("name", Country));
+		nvPairs.add(new BasicNameValuePair("name", country));
 		nvPairs.add(new BasicNameValuePair("source", "trusted"));
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list",
 				nvPairs);
 		if (getDriver().findElements(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"))
 				.size() == 1) {
-			assertEquals(getDriver()
+			assertTrue(getDriver()
 					.findElement(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"))
-					.getText(), "");
+					.getText().isEmpty());
 		}
 
 		else {
@@ -579,22 +582,19 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 
-	public void verifyChooseAnAreaOptionInAreaparent() throws InterruptedException {
-		Thread.sleep(6000);
+	public void verifyChooseAnAreaOptionInAreaparent() throws InterruptedException {		
 		assertEquals("Choose an Area",
 				getDriver()
 						.findElements(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"))
 						.get(0).getText());
 	}
 
-	public void verifyAreaListInPlacesForCountry(String Country) {
+	public void verifyAreaListInPlacesForCountry(String country) {
 		List<NameValuePair> nvPairs = new ArrayList<>();
-		nvPairs.add(new BasicNameValuePair("name", Country));
+		nvPairs.add(new BasicNameValuePair("name", country));
 		nvPairs.add(new BasicNameValuePair("source", "trusted"));
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list",
 				nvPairs);
-		if (getDriver().findElements(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"))
-				.size() > 2) {
 			for (int i = 0; i < document.getElementsByTagName("area").getLength(); i++) {
 				assertEquals(document.getElementsByTagName("area").item(i).getTextContent(),
 						getDriver()
@@ -604,7 +604,6 @@ public class EditAreaPage extends AbstractPage {
 			}
 		}
 
-	}
 
 	public void userVerifyHeaderDropdownValuesDisabled() throws InterruptedException {
 		assertFalse(
@@ -633,13 +632,13 @@ public class EditAreaPage extends AbstractPage {
 	}
 
 	public void verifyErrorMessageForRequiredAreaparentIdentifierType() throws InterruptedException {
-		Thread.sleep(12000);
+		textToBePresentInElement(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_req_err_msg_xpath")));
 		assertEquals("Required", getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_req_err_msg_xpath")).getText());
 	}
 
 	public void checksHeaderdropdownValue(String country1, String area) throws InterruptedException {
-		Thread.sleep(10000);
+		Thread.sleep(2000);//wait for header dropdowns to reload
 		assertEquals(country1,
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("country_current_value_xpath")).getText());
 		assertEquals(area,
@@ -647,9 +646,8 @@ public class EditAreaPage extends AbstractPage {
 
 	}
 
-	public void verifyAreaInfoFromZeusDB(String country, String area, String tagName, String source, String status) throws InterruptedException {	
-		
-		Thread.sleep(4000);
+	public void verifyAreaInfoFromZeusDB(String country, String area, String tagName, String source, String status) throws InterruptedException {		
+
 		assertEquals(getAreasInfoFromDB(country, area, tagName, source), status);
 	}
 
@@ -685,21 +683,20 @@ public class EditAreaPage extends AbstractPage {
 	}
 
 	public void clickOnAreaDropdown() throws InterruptedException {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("Areaparent_currentvalue_xpath"));
-		Thread.sleep(6000);
+		attemptClick(AreaIdentifiers.getObjectIdentifier("areaParent_currentValue_xpath"));
 	}
 
 	public void verifyParentAreaDropdownDontHaveNoArea() {
 
 		List<WebElement> list = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"));
-		List<String> areaparentlist = new ArrayList<String>();
+		List<String> areaParentList = new ArrayList<String>();
 		int size = (getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath")).size());
 		for (int j = 0; j < size; j++) {
-			areaparentlist.add((list.get(j)).getText());
+			areaParentList.add((list.get(j)).getText());
 		}
-		assertFalse(areaparentlist.contains("NULL") || areaparentlist.contains("No Area"));
+		assertFalse(areaParentList.contains("NULL") || areaParentList.contains("No Area"));
 	}
 	
 	public void verifyAreaListInPlaceForCountry(String Country) {

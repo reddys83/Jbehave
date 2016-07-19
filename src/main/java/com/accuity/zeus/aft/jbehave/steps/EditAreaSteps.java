@@ -209,32 +209,32 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("user changes the <country2> in the country drop downfield of area basic page")
 	public void userChangesCountryDropdownValue(@Named("country2") String country2) throws InterruptedException {
-		getEditAreaPage().changeCountryValue(country2);
+		getEditAreaPage().selectCountryValue(country2);
 	}
 
-	@Then("user changes the area <Area parent> in the area dropdown field in area basic page")
-	public void userChangesAreaDropdownvalue(@Named("Area parent") String Areaparent) throws InterruptedException {
-		getEditAreaPage().changeAreaValue(Areaparent);
+	@Then("user changes the area <areaParent> in the area dropdown field in area basic page")
+	public void userChangesAreaDropdownvalue(@Named("areaParent") String areaParent) throws InterruptedException {
+		getEditAreaPage().selectAreaValue(areaParent);
 
 	}
 
-	@Then("the user checks whether the header dropdown updates with <country2>, <Area parent>, <subArea>")
-	public void checksHeaderdropdownValues(@Named("country2") String country, @Named("Area parent") String Areaparent,
+	@Then("the user checks whether the header dropdown updates with <country2>, <areaParent>, <subArea>")
+	public void checksHeaderdropdownValues(@Named("country2") String country, @Named("areaParent") String areaParent,
 			@Named("subArea") String subArea) throws InterruptedException {
-		getEditAreaPage().checksHeaderdropdownValues(country, Areaparent, subArea);
+		getEditAreaPage().verifyHeaderDropDownValues(country, areaParent, subArea);
 	}
 
-	@Then("the user checks whether the Address bar url is updated  with <country2>, <Area parent>")
-	public void checksAddressBar(@Named("country2") String country, @Named("Area parent") String Areaparent)
+	@Then("the user checks whether the Address bar url is updated  with <country2>, <areaParent>")
+	public void checksAddressBar(@Named("country2") String country, @Named("areaParent") String areaParent)
 			throws InterruptedException {
-		getEditAreaPage().checksAddressBarIsHavingNewCountryAreaIds(country, Areaparent);
+		getEditAreaPage().checksAddressBarIsHavingNewCountryAreaIds(country, areaParent);
 	}
 
-	@Then("verify $source document whether <subArea> is mapped to newly added <country2> and <Area parent>")
+	@Then("verify $source document whether <subArea> is mapped to newly added <country2> and <areaParent>")
 	public void verifySubAreaInfoFromZeusDocument(@Named("source") String source, @Named("subArea") String subArea,
-			@Named("country2") String country2, @Named("area") String area, @Named("Area parent") String Areaparent)
+			@Named("country2") String country2, @Named("area") String area, @Named("areaParent") String areaParent)
 			throws InterruptedException {
-		getEditAreaPage().verifySubAreaInfoFromZeusDB(country2, Areaparent, subArea, "subarea", source, subArea);
+		getEditAreaPage().verifySubAreaInfoFromZeusDB(country2, areaParent, subArea, "subarea", source, subArea);
 	}
 
 	@Then("user should verify the subArea dropdown does not have subArea <subArea> value mapped to old country and area")
@@ -242,23 +242,23 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifySubAreaDropdown(subArea);
 	}
 
-	@Then("user should see the list of Area parent options in Area page is Empty")
+	@Then("user should see the list of area parent options in Area page is Empty")
 	public void verifyParentAreaListIsEmpty(@Named("country2") String country2) {
 		getEditAreaPage().verifyParentAreaListInPlaceForCountry(country2);
 	}
 	
-	@Then("user should see the list of Area parent options in area page is Empty")
+	@Then("user should see the list of area parent options in area page is Empty")
 	public void verifyParentAreasListIsEmpty(@Named("country") String country) {
 		getEditAreaPage().verifyParentAreaListInPlaceForCountry(country);
 	}
 
-	@Then("the user should verfiy that the 'Choose and area' option is populated in the Area Parent dropdown")
+	@Then("the user should verfiy that the 'Choose and area' option is populated in the area parent dropdown")
 	public void userVerifyNoSubarea() throws InterruptedException {
 		getEditAreaPage().verifyChooseAnAreaOptionInAreaparent();
 	}
 
 	@Then("user should see the list of Area parent options in Area page are in Alphabetical order")
-	@Alias("user should see the list of Area parent options are refreshed pointing to selected <country2> in area basic info page")
+	@Alias("user should see the list of area parent options are refreshed pointing to selected <country2> in area basic info page")
 	public void verifyParentAreaListInPlacesForCountry(@Named("country2") String country) {
 		getEditAreaPage().verifyAreaListInPlaceForCountry(country);
 	}
@@ -291,8 +291,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("verify $source document whether <area> is mapped to newly added <country2>")
 	public void verifyZeusDocument(@Named("source") String source, @Named("area") String area,
-			@Named("country2") String country2, @Named("area") String area1) throws InterruptedException {		
-		Thread.sleep(4000);
+			@Named("country2") String country2, @Named("area") String area1) throws InterruptedException {
 		getEditAreaPage().verifyAreaInfoFromZeusDB(country2, area, "area", source, area1);
 	}
 
@@ -306,12 +305,12 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().clickOnAreaDropdown();
 	}
 
-	@Then("user should see the list of Area parent options are pointing to selected <country> in area basic info page")
+	@Then("user should see the list of area parent options are pointing to selected <country> in area basic info page")
 	public void verifyParentAreaListInPlaceForCountry(@Named("country") String country) {
 		getEditAreaPage().verifyAreaListInPlacesForCountry(country);
 	}
 
-	@Then("user verify the list of Area pareant options do not have No Area")
+	@Then("user verify the list of area pareant options do not have No Area")
 	public void verifyParentAreaListDontHaveNullNovalue() {
 		getEditAreaPage().verifyParentAreaDropdownDontHaveNoArea();
 	}
