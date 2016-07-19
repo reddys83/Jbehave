@@ -487,7 +487,7 @@ public class EditAreaPage extends AbstractPage {
 	        }
 	    }
 
-	public void selectAreaValue(String areaParent) throws InterruptedException {
+	public void userChangesAreaDropdownvalue(String areaParent) throws InterruptedException {
 		try {
 			attemptClick(AreaIdentifiers.getObjectIdentifier("areaParent_currentValue_xpath"));
 			List<WebElement> drpList = getDriver()

@@ -214,7 +214,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("user changes the area <areaParent> in the area dropdown field in area basic page")
 	public void userChangesAreaDropdownvalue(@Named("areaParent") String areaParent) throws InterruptedException {
-		getEditAreaPage().selectAreaValue(areaParent);
+		getEditAreaPage().userChangesAreaDropdownvalue(areaParent);
 
 	}
 
