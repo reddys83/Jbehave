@@ -881,7 +881,7 @@ public class ResultsPage extends AbstractPage {
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"active office test list", nvPairs);
 			while (nextPage != null) {
-				Thread.sleep(15000L);
+				Thread.sleep(5000L); //there is no unique element in next page, hence using direct wait
 				List<WebElement> resultList = getDriver().findElements(office_search_results_rows_xpath);
 				List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
 
