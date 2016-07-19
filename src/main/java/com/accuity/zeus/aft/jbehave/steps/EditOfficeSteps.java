@@ -70,9 +70,9 @@ public class EditOfficeSteps extends AbstractSteps{
     }
 
     @Then("the user should see officename values as <type><value> for fid <officeFid> in $source document")
-    public void verifyEditOfficeNameValuesExistInZeus(@Named("type") String type,@Named("value") String value,@Named("officeFid") String officeFid,@Named("source") String source){
+    public void verifyEditOfficeNameValuesExistInZeusAndUI(@Named("type") String type,@Named("value") String value,@Named("officeFid") String officeFid,@Named("source") String source){
 
-        getEditOfficePage().verifyEditOfficeNameValuesExistInZeus(type,value,officeFid,source);
+        getEditOfficePage().verifyEditOfficeNameValuesExistInZeusAndUI(type,value,officeFid,source);
     }
 
     @When("the user clicks on delete office names row button for the row $deletebutton_Row")

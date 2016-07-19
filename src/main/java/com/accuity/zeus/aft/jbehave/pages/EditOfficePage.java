@@ -127,9 +127,10 @@ public class EditOfficePage extends AbstractPage {
     }
 
 
-    public void verifyEditOfficeNameValuesExistInZeus(String type, String value, String officeFid, String source) {
+    public void verifyEditOfficeNameValuesExistInZeusAndUI(String type, String value, String officeFid, String source) {
 
         assertTrue(checkEditOfficeNameValuesFromZeus(type,value,officeFid,source));
+        assertEquals(type+value,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_view_foreignoffice_xpath")));
     }
 
     public boolean checkEditOfficeNameValuesFromZeus(String type,String value,String officeFid,String source) {
