@@ -267,7 +267,7 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@Then("the user should see not the area name type and value updated in the area basic info page")
-	public void verityNoBlankCityNameTypeAndValue(@Named("type") String newNameType, 
+	public void verityCityNameTypeAndValueNotPresent(@Named("type") String newNameType, 
 										   @Named("value") String newNameValue) {
 		getEditAreaPage().verifyNameTypeNotPresent(newNameType);
 	}

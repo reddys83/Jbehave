@@ -28,10 +28,10 @@ public class AreaIdentifiers {
 		hmap.put("area_end_date_info_text_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='End Date']/td"));
 		hmap.put("area_enddate_errorMessage_xpath",By.xpath("//*[@data-error_id='endDateError']"));
 		hmap.put("area_names_full_name_type_xpath", By.xpath("//*[@id='additionalNames']//td[text() = 'Full Name']"));
-		hmap.put("area_names_full_name_value_xpath", By.xpath("//*[@id='additionalNames']//input[@name='fixedFullNameValue']"));
+		hmap.put("area_names_full_name_value_xpath", By.xpath("//*[@id='additionalNames']//input[@name='fixedFullName']"));
 		hmap.put("area_names_full_name_value_view_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[td='Full Name']/td[2]"));
 		hmap.put("area_names_display_name_type_xpath", By.xpath("//*[@id='additionalNames']//td[text() = 'Display Name']"));
-		hmap.put("area_names_display_name_value_xpath", By.xpath("//*[@id='additionalNames']//input[@name='fixedDisplayNameValue']"));
+		hmap.put("area_names_display_name_value_xpath", By.xpath("//*[@id='additionalNames']//input[@name='fixedDisplayName']"));
 		hmap.put("area_names_display_name_value_view_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[td='Display Name']/td[2]"));
 		hmap.put("area_names_add_names_button_xpath", By.xpath("//*[@id='areaBasicInfo']//*[@id='add-names']"));
 		hmap.put("area_name_type_input_xpath", By.xpath(".//*[@id='additionalNames']//*[@data-internal_id='nameType']"));

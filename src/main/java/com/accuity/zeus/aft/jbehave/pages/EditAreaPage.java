@@ -653,10 +653,9 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyNameTypeNotPresent(String nameType) {
 		try {
 			// appending the name type to the xpath to retrieve corresponding row in view mode
-			WebElement newNameTypeElement = getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']"));
-			assertTrue(newNameTypeElement == null);
-		} catch(Exception ex) {
-			ex.printStackTrace();
+			getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']"));
+		} catch(NoSuchElementException ex) {
+			assertTrue(nameType + "not present", true);
 		}
 	}
 	
@@ -682,11 +681,9 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void checkDeleteRowButtonNotExist(String nameType) {
 		try {
-			// appending the name type to the xpath to retrieve corresponding row in view mode
-			WebElement newNameTypeElement = getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']/td[@class='delete']"));
-			assertTrue(newNameTypeElement == null);
-		} catch(Exception ex) {
-			ex.printStackTrace();
+			getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']/td[@class='delete']"));
+		} catch(NoSuchElementException ex) {
+			assertTrue("Delete Row button not present", true);
 		}
 	}
 	
@@ -727,9 +724,6 @@ public class EditAreaPage extends AbstractPage {
 	}
 	
 	public void verifyUpdatedMultipleAreaNamesInDB(String country, String area, String nameType, String source, String nameValue, String nameValue2) {
-		if("Full Name".equals(nameType)) {
-			area = nameValue;
-		}			
 		Map<String, List<String>> cityNameValueMap = getAreaNameMultipleValueMapFromDB(country, area, source);
 		assertTrue(cityNameValueMap.get(nameType).contains(nameValue));
 		assertTrue(cityNameValueMap.get(nameType).contains(nameValue));
