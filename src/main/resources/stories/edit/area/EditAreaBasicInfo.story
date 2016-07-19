@@ -596,6 +596,36 @@ Examples:
 |country|area|beganDay1|beganMonth1|beganYear1|day|month|year|
 |Angola|Cabinda||||06|Jun|2015|
 
+Scenario: User can edit  'Interest Rate Limit' that is different from the current value
+a) User verifies whether updated 'Interest Rate Limit; is reflecting in Area Web page
+b)User verifies whether updated 'Interest rate limit' is reflecting in zeus document
+
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user enters <InterestRate> value in area page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the entered <InterestRate> in area page
+When the user clicks on the area update link
+When the user enters <InterestRateNew> value in area page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the entered <InterestRate> in area page
+Then the user should see the enteres <InterestRate> in zeus document
+
+Examples:
+|country|area|InterestRate|InterestRateNew|
+|Angola|Cabinda|10|15|
+
 
 
 
