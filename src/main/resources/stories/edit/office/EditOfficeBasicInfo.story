@@ -165,7 +165,7 @@ And the user should see the below summary changes in confirmation modal
 |Summary|
 |Basic Info / Names|
 When the user clicks on the confirm button
-Then the user should see officename values as <type><value> for fid <officeFid> in zeus document
+Then the user should see officename values as <type><value> for fid <officeFid> in zeus document and in UI
 And the user reverts the changes to the document
 
 Examples:
@@ -364,7 +364,7 @@ Examples:
 |1010|FID|1010|1010-44|
 
 Scenario: Update and Save Sort Name
-User selects a value for a sort name and click Save. Updated sort name should be saved in Zeus document
+User selects a value for a sort name and verify the length for sort name field and click Save. Updated sort name should be saved in Zeus document
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -379,40 +379,16 @@ And the user clicks on the office update link
 Then the user should see the office name values as in trusted document with fid <officeFid>
 When the user gets the document with get id for offices with the <officeFid> from the database
 When the user enters sort name as <sortName> in the office name
-And the user clicks on the save button
+Then the user verifies the office name sort name maxlength is 75 for the sortName
+When the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
 |Summary|
 |Basic Info / Names|
 When the user clicks on the confirm button
-Then the user should see the edits to office sort name as <sortName> for fid <officeFid> in zeus document
+Then the user should see the edits to office sort name as <sortName> for fid <officeFid> in zeus document and in UI
 And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|sortName|
 |1010|FID|1010|1010-44|affhjdhskfh|
-
-
-Scenario: verify the length for sort name field
-
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-When the user gets the document with get id for offices with the <officeFid> from the database
-And the user clicks on the office update link
-When the user clicks on add new office name button in the office name page
-Then the user verifies the office name sort name maxlength is 75 for the sortName
-When the user clicks on the save button
-Then the user should see the save confirmation modal
-When the user clicks on the confirm button
-Then the user reverts the changes to the document
-
-Examples:
-|entity|searchBy|fid|officeFid|
-|1010|FID|1010|1010-44|

@@ -69,7 +69,7 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().enterOfficeNameValue(officeNameValueRowIdentifier,value);
     }
 
-    @Then("the user should see officename values as <type><value> for fid <officeFid> in $source document")
+    @Then("the user should see officename values as <type><value> for fid <officeFid> in $source document and in UI")
     public void verifyEditOfficeNameValuesExistInZeusAndUI(@Named("type") String type,@Named("value") String value,@Named("officeFid") String officeFid,@Named("source") String source){
 
         getEditOfficePage().verifyEditOfficeNameValuesExistInZeusAndUI(type,value,officeFid,source);
@@ -116,9 +116,9 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().entersSortNameInOfficeName(sortName);
     }
 
-    @Then("the user should see the edits to office sort name as <sortName> for fid <officeFid> in zeus document")
-    public void verifyOfficeSortNameInZeusDocument(@Named("officeFid") String officeFid,@Named("sortName") String sortName) {
-        getEditOfficePage().verifyOfficeSortNameInZeusDocument(officeFid,sortName);
+    @Then("the user should see the edits to office sort name as <sortName> for fid <officeFid> in zeus document and in UI")
+    public void verifyOfficeSortNameInZeusDocumentAndInUI(@Named("officeFid") String officeFid,@Named("sortName") String sortName) {
+        getEditOfficePage().verifyOfficeSortNameInZeusDocumentAndInUI(officeFid,sortName);
     }
 
 }

@@ -130,7 +130,8 @@ public class EditOfficePage extends AbstractPage {
     public void verifyEditOfficeNameValuesExistInZeusAndUI(String type, String value, String officeFid, String source) {
 
         assertTrue(checkEditOfficeNameValuesFromZeus(type,value,officeFid,source));
-        assertEquals(type+value,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_view_foreignoffice_xpath")));
+        assertEquals(type,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_name_second_row_existing_office_type_dropdown")));
+        assertEquals(value,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_name_second_row_existing_office_value")));
     }
 
     public boolean checkEditOfficeNameValuesFromZeus(String type,String value,String officeFid,String source) {
@@ -207,7 +208,7 @@ public class EditOfficePage extends AbstractPage {
         clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_name_sort_name_xpath"), sortName);
     }
 
-    public void verifyOfficeSortNameInZeusDocument(String officeFid,String sortName) {
+    public void verifyOfficeSortNameInZeusDocumentAndInUI(String officeFid,String sortName) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", officeFid));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
@@ -222,6 +223,7 @@ public class EditOfficePage extends AbstractPage {
             sortName="null";
         }
         assertTrue(getNodeValuesByTagName(document, "officeSortKey").contains(sortName));
+        assertEquals(sortName,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_name_sort_name_xpath")));
 
     }
 
