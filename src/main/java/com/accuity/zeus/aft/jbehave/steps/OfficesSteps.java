@@ -128,6 +128,25 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().verifyNoOfficeLocationSummary();
     }
 
+    @Then("the user should see the statistics section not visible for office fid <fid>")
+    public void checkStatisticsSectionNotExists(@Named("fid") String fid) {
+        getOfficesPage().checkStatisticsSectionNotExists(fid);
+    }
+    @Then("the user should not see the statistics section in the All page of the office page")
+    public void verifyStatisticsSectionNotExistsInAllPage()
+    {
+        getOfficesPage().verifyStatisticsSectionNotExistsInAllPage();
+    }
 
+    @Then("the user should see the statistics section visible for fid <fid>")
+    public void checkStatisticsSectionExists(@Named("fid") String fid ){
+        getOfficesPage().checkStatisticsSectionExists(fid);
+    }
+
+    @Then("the user should see the statistics section in the All page of the office page")
+    public void verifyStatisticsSectionExistsInAllPage()
+    {
+        getOfficesPage().verifyStatisticsSectionExistsInAllPage();
+    }
 }
 
