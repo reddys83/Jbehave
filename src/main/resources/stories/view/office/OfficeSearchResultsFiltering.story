@@ -26,7 +26,7 @@ Then the user should see the list of domestic offices in the office search resul
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1176|FID|1176|
 
 Scenario: Filter offices by type - Foreign
 Given a user is on the search page
@@ -43,7 +43,7 @@ Then the user should see the list of foreign offices in the office search result
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1176|FID|1176|
 
 Scenario: Search returned 0 results
 Given a user is on the search page
@@ -89,7 +89,7 @@ Examples:
 |1568|FID|1568|
 
 Scenario: Filter offices by status - Active
-Meta:@test64
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -104,9 +104,10 @@ Then the user should see the list of active offices in the office search results
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1176|FID|1176|
 
 Scenario: Filter offices by status - Inactive
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -121,7 +122,7 @@ Then the user should see the list of inactive offices in the office search resul
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1176|FID|1176|
 
 Scenario: Search returned 0 results for status filter
 Given a user is on the search page
@@ -156,7 +157,7 @@ Then the user should see the office results for the applied filters
 
 Examples:
 |entity|searchBy|fid|
-|1038|FID|1038|
+|1176|FID|1176|
 
 Scenario: User should see the types in the type filter should be based on the office search results types
 1. ZEUS-589
@@ -226,6 +227,7 @@ Examples:
 |267124|FID|267124|
 
 Scenario: User selects a column sort and a filter, Both the coulumn sort and filter are applied to the results list
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -250,6 +252,7 @@ Examples:
 
 
 Scenario: Verify the refine filter for city
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -264,3 +267,22 @@ Then the user should see the office search results for city contains the Boll
 Examples:
 |entity|searchBy|fid|
 |3125|FID|3125|
+
+Scenario: Filter offices by status - User verifies whether All pages of 'Active' filter has 'Active' status for all fids
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+When the user selects the 200 results/page in the office results page
+Then the user should see the office status filter default to all
+When the user selects the office status filter active
+Then the user should see the list of <status> offices in All result pages
+
+Examples:
+|entity|searchBy|fid|status|count|
+|1176|FID|1176|Active|200|
