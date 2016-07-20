@@ -10,7 +10,7 @@ JIRA ID - ZEUS-1027 - User can edit Area's End Date
 
 JIRA ID - ZEUS-1026 - User can edit Area's Began Date
 JIRA ID - ZEUS-1034 - User can edit Area's Add Info
-JIRA ID - ZEUS-1031 - User can edit Area's Country & Area Parent
+JIRA ID - ZEUS-1031 - User can edit Area's Country & Area
 
 
 Scenario: User can edit area Began Date -
