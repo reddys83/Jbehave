@@ -338,4 +338,12 @@ public abstract class AbstractPage {
         dropdown.selectByIndex(i);
 
     }
+    
+    public void textToBePresentInElement(WebElement requiredMessage) {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), 25);
+            wait.until(ExpectedConditions.textToBePresentInElement(requiredMessage,"Required"));
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
+    }
 }

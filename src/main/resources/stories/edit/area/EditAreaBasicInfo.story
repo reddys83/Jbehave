@@ -715,3 +715,227 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|addInfoText|
 |USA|Georgia||
+
+Scenario: User views the Area basic page,selects the update button with subarea='No Value' 
+
+1- verify the header dropdowns are Disabled
+2- verify country dropdown is populating with header country value
+3- verify the country list are in Alphabetical order
+4- verify the Area parent list is empty
+Meta: @smoke
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+When the user clicks on the choose a sub-area option
+When the user enters the sub-area <subArea> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+Then the user should verify the header dropdowns are disabled
+Then the user should verify the country dropdown is populating with default country <country> as a option
+Then the user should see all the list of existing countries by full name in Alphabetical order in area basic info page
+Then user should see the list of area parent options in area page is Empty
+
+
+Examples:
+|country|area|subArea|
+|USA|Alabama|choose a Subarea|
+
+
+Scenario: User views the Area basic page,selects the update button with subarea
+
+1- verify the header dropdowns are Disabled
+2- verify country dropdown is populating with header country value
+3- verify the country list are in Alphabetical order
+4- verify parent dropdown is populating with header area value
+5- verify the Area parent list are in Alphabetical order and list shows all areas related to the Country
+6- verify the Area parent option do not have 'No Value or 'Null Value'
+
+Meta: @smoke
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+When the user clicks on the choose a sub-area option
+When the user enters the sub-area <subArea> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+Then the user should verify the header dropdowns are disabled
+Then the user should verify the country dropdown is populating with default country <country> as a option
+Then the user should see all the list of existing countries by full name in Alphabetical order in area basic info page
+Then the user should verify the parent area dropdown is populating with default area <area> as a option
+When the user click on the choose an area parent option of area basic page
+Then user should see the list of area parent options are pointing to selected <country> in area basic info page
+Then user verify the list of area pareant options do not have No Area
+
+Examples:
+|country|area|subArea|
+|USA|Alabama|Bibb|
+
+Scenario: User views the area basic page,selects the update button with subarea = 'No Value',changes the country2
+ 
+1- verify the Area Parent value is defaulted with null
+2- verify the Area parent list is empty
+Meta: @smoke
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+When the user clicks on the choose a sub-area option
+When the user enters the sub-area <subArea> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When user changes the <country2> in the country drop downfield of area basic page
+Then user should see the list of area parent options in Area page is Empty
+
+
+Examples:
+|country|area|subArea|country2|
+|USA|Alabama|Choose a Subarea|India|
+
+
+Scenario: User views the area basic page,selects the update button with subarea,changes the country2
+ 
+1- verify the Area parent showing default value as 'Null' 
+2- verify the Area parent is in Alphabetical order and list shows all areas related to the country2
+Meta: @smoke
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+When the user clicks on the choose a sub-area option
+When the user enters the sub-area <subArea> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When user changes the <country2> in the country drop downfield of area basic page
+Then the user should verfiy that the 'Choose and area' option is populated in the area parent dropdown
+Then user should see the list of area parent options are refreshed pointing to selected <country2> in area basic info page
+
+
+Examples:
+|country|area|subArea|country2|
+|USA|Alabama|Bibb|India|
+
+Scenario: User is updating a Areas's Basic Info and has set values for 
+each of 'Country' ,'Area Parent','Sub Area',change the country2,'Area Parent'
+
+1- Verify the header dropdowns are updated with country2 and parent area
+2- Verify the Address bar url is updated with country2 and paent area
+3- Verify the Zesu DB whether the subarea is mapped under newly added country2 and parent area
+4 -Verify subarea is not mapped to country and area
+
+Meta: @smoke
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+When the user clicks on the choose a sub-area option
+When the user enters the sub-area <subArea> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for subarea with the <subArea> from the database
+When user changes the <country2> in the country drop downfield of area basic page
+Then user changes the area <areaParent> in the area dropdown field in area basic page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user checks whether the header dropdown updates with <country2>, <areaParent>, <subArea>
+Then the user checks whether the Address bar url is updated  with <country2>, <areaParent>
+Then verify zeus document whether <subArea> is mapped to newly added <country2> and <areaParent>
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a sub-area option
+Then user should verify the subArea dropdown does not have subArea <subArea> value mapped to old country and area
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|subArea|country2|areaParent|
+|USA|Alabama|Bibb|India|Tamil Nadu|
+
+
+Scenario: User is updating a Areas's Basic Info and has set values for 
+each of 'Country' ,'Area','Sub Area' as 'No Area',change the country with 'Area Parent' as 'null'
+
+1- Verify the header dropdowns are updated with country2 and area
+2 -Verify the Zeus DB whether the area is mapped under newly added country2
+Meta: @smoke
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+When the user clicks on the choose a sub-area option
+When the user enters the sub-area <subArea> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When user changes the <country2> in the country drop downfield of area basic page
+Then user should see the list of area parent options in Area page is Empty
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user checks whether the header dropdown updates with <country2>, <area>
+Then verify zeus document whether <area> is mapped to newly added <country2>
+Then the user reverts the changes to the document
+
+
+Examples:
+|country|area|subArea|country2|
+|USA|Alabama|No Area|India|
+
+
+
+Scenario: User is updating a Areas's Basic Info and has set values for 
+each of 'Country' ,'Area Parent','Sub Area',change the country with 'Area Parent' as 'null'
+
+1 - Verify Area Parent dropdown is populated with Choose and area 
+2 - Verify the 'Area Parent' field is showing 'Required' validation message
+Meta: @smoke
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+When the user clicks on the choose a sub-area option
+When the user enters the sub-area <subArea> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When user changes the <country2> in the country drop downfield of area basic page
+Then user verify the list of area pareant options do not have No Area
+Then the user should verfiy that the 'Choose and area' option is populated in the area parent dropdown
+Then user changes the area <areaParent> in the area dropdown field in area basic page
+When the user clicks on the save button
+Then the user should see the error message for the required identifier type field in the area basic info page
+
+
+Examples:
+|country|area|subArea|country2|areaParent|
+|USA|Alabama|Bibb|India|choose an area|
