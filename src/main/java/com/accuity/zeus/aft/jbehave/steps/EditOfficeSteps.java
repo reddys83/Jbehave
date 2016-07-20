@@ -57,11 +57,26 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().changeAlternateRadioButtonValue("office_leadlocation_radio_options_xpath");
     }
 
+    @When("the user selects foreign office value <foreignOfficeflag> in the basicinfo office page")
+    public void selectForeignOfficeFlag(@Named("foreignOfficeflag") String foreignOfficeflag){
+        getEditOfficePage().selectForeignOfficeFlag(foreignOfficeflag);
+    }
+
+    @Then("the user should see foreignOffice value as <foreignOfficeflag> for fid <officeFid> in $source document and in zeus UI")
+    public void verifyForeignOfficeValuefromZeusDocumentandUI(@Named("foreignOfficeflag") String foreignOfficeflag,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyForeignOfficeValuefromZeusDocumentandUI(foreignOfficeflag,officeFid,source);
+    }
+
+
+    @When("the user selects foreign office value other than default value in the basicinfo office page")
+    public void changeForeignOfficeFlag() {
+        getEditOfficePage().changeAlternateRadioButtonValue("office_foreignoffice_radio_options_xpath");
+    }
+
     @Then("the user should return to edit office page mode")
     public void verifyOfficeEditPageMode(){
         getEditOfficePage().verifyOfficeEditPageMode();
     }
-
 }
 
 

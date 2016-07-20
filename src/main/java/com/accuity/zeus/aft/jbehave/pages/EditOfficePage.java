@@ -115,6 +115,35 @@ public class EditOfficePage extends AbstractPage {
     public void verifyOfficeEditPageMode() {
         assertTrue(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_month_xpath")).size()>0);
     }
+    public void selectForeignOfficeFlag(String foreignOfficeflag) {
+        selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier("office_foreignoffice_radio_options_xpath"), foreignOfficeflag);
+    }
+
+    public void verifyForeignOfficeValuefromZeusDocumentandUI(String foreignOfficeflag, String selectedEntity, String source) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(getForeignOfficeFlagFromDB(selectedEntity, source), foreignOfficeflag);
+        assertEquals(foreignOfficeflag,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_view_foreignoffice_xpath")));
+
+    }
+
+    public String getForeignOfficeFlagFromDB(String officeFid, String source) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String leadLocationDBValue = getNodeValuesByTagName(document, "foreignOffice").size() == 0 ? "" : getNodeValuesByTagName(document, "foreignOffice").get(0);
+        return leadLocationDBValue;
+    }
+
     @Override
     public String getPageUrl() {
         return null;
