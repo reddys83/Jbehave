@@ -715,3 +715,215 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|addInfoText|
 |USA|Georgia||
+
+Scenario: User can edit area identifiers - Verify area Identifier types are same as from lookup THIRD_PARTY_IDENTIFIER_GEO
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user clicks on the add new identifier button in the basic info area page
+Then the user should see the area identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO
+Then the user should see the area identifier status from lookup STATUS
+
+Examples:
+|country|area|
+|Algeria|Constantine|
+
+Scenario:User can edit area identifiers- Verify if User can add New Area identifiers-Verify that all fields- "Type","Value" and "Status" are updated successfully
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area identifier rows
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters identifier value as <identifierValue> in the basic info area page
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType2> in the basic info area page
+When the user enters identifier value as <identifierValue2> in the basic info area page
+When the user enters identifier status as <identifierStatus2> in the basic info area page
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should see the area identifier values as in zeus document $identifierType $identifierValue $identifierStatus and $identifierType2 $identifierValue2 $identifierStatus2
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|identifierType|identifierValue|identifierStatus|identifierType2|identifierValue2|identifierStatus2|
+|Algeria|Constantine|Numeric ISO Code|H4Testing|Active|FIPS Place Code|H4Testing|Pending|
+|Algeria|Constantine|FIPS Place Code|H4Testing|Pending|Numeric ISO Code|H4Testing|Inactive|
+|Algeria|Constantine|FIPS Place Code|H4Testing|Pending|Numeric ISO Code|H4Testing|Active|
+
+
+Scenario: Verifying that area identifier row in not added when blank values are entered for 'Type', 'Value' and 'Status'
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user deletes the existing area identifier rows
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters identifier value as <identifierValue> in the basic info area page
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should not see the newly added identifier row in the basic info area page
+Then the user verifies that no values are entered in zeus document
+
+Examples:
+|country|area|identifierType|identifierValue|identifierStatus|
+|Algeria|Constantine||||
+
+Scenario: User can edit area identifiers - Verify whether the text entered in the Identifier 'Value' field is not beyond 50 unicode characters.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters an incorrect identifier value as <identifierValueIncorrect> in the basic info area page
+Then the user should see maximum length of area identifier value is limited to 50 
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+
+
+Examples:
+|country|area|identifierType|identifierValueIncorrect|identifierStatus|
+|Algeria|Constantine|Numeric ISO Code|aksjuilrw1aksjuilrw1aksjuilrw1aksjuilrw1aksju%)~12y1|Active|
+
+Scenario: User can edit area identifiers - Verify that an error message 'Required' is displayed when user leaves identifier Type as blank and enters value in identifier 'Value' and 'Status'
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area identifier rows
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters identifier value as <identifierValue> in the basic info area page
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the save button
+Then the user should see the error message for the required identifier value field in the area basic info page
+
+Examples:
+|country|area|identifierType|identifierValue|identifierStatus|
+|Algeria|Constantine|Numeric ISO Code||Active|
+
+Scenario: User can edit area identifiers - Verify that an error message 'Required' is displayed when user left identifier status blank and enters value in identifier 'Type' and 'Value'
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area identifier rows
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters identifier value as <identifierValue> in the basic info area page
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the save button
+Then the user should see the error message for the required identifier status field in the area basic info page
+
+Examples:
+|country|area|identifierType|identifierValue|identifierStatus|
+|Algeria|Constantine|Numeric ISO Code|H4Testing||
+
+Scenario: User can edit area identifiers- Verify if User can delete identifiers( "Type","Value" and "Status") by clicking on 'Yes' , then after saving it should be removed.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user clicks on the add new identifier button in the basic info area page
+When the user clicks on the delete identifier row button in the basic info area page
+Then the user should see delete row confirmation modal in the area page
+When the user clicks on the Yes button to delete the row in basic info area page
+Then the user should not see the newly added identifier row in the basic info area page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user verifies that the deleted row for area identifier does not exist in zeus document
+
+Examples:
+|country|area|
+|Algeria|Constantine|
+
+Scenario: User can edit area identifiers- Verify if User can prevent deleting identifiers( "Type","Value" and "Status") by clicking on 'cancel'.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area identifier rows
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters identifier value as <identifierValue> in the basic info area page
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+When the user clicks on the area update link
+When the user clicks on the delete identifier row button in the basic info area page
+Then the user should see delete row confirmation modal in the area page
+When the user clicks on the No button to cancel the deletion of row in basic info area page
+Then the user should see the newly added identifier row in the basic info area page
+Then the user verifies that the row values for area identifier entered exists in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|identifierType|identifierValue|identifierStatus|
+|Algeria|Constantine|Numeric ISO Code|H4Testing|Active|FIPS Place Code|H4Testing|Pending|
