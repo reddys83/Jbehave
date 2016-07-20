@@ -570,13 +570,12 @@ public class EditAreaPage extends AbstractPage {
 	}
 
 	public void verifySubAreaDropdown(String subArea) throws InterruptedException {
-		List<WebElement> list = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_List_value_xpath"));
-		List<String> subarealist = new ArrayList<String>();
-		int size = (getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_List_value_xpath")).size());
-		for (int j = 0; j < size; j++) {
-			subarealist.add((list.get(j)).getText());
+		List<WebElement> subAreaList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_List_value_xpath"));
+		List<String> subAreasTextlist = new ArrayList<String>();
+		for (int j = 0; j < subAreaList.size(); j++) {
+			subAreasTextlist.add((subAreaList.get(j)).getText());
 		}
-		assertFalse(subarealist.contains(subArea));
+		assertFalse(subAreasTextlist.contains(subArea));
 	}
 
 	public void verifyParentAreaListInPlaceForCountry(String country) {
@@ -703,13 +702,11 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyParentAreaDropdownDontHaveNoArea() {
 
-		List<WebElement> list = getDriver()
+		List<WebElement> listArea = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"));
 		List<String> areaParentList = new ArrayList<String>();
-		int size = (getDriver()
-				.findElements(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath")).size());
-		for (int j = 0; j < size; j++) {
-			areaParentList.add((list.get(j)).getText());
+		for (int j = 0; j < listArea.size(); j++) {
+			areaParentList.add((listArea.get(j)).getText());
 		}
 		assertFalse(areaParentList.contains("NULL") || areaParentList.contains("No Area"));
 	}
