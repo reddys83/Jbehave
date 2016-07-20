@@ -679,7 +679,7 @@ And the user should see the below summary changes in confirmation modal
 |Basic Info / Names|
 When the user clicks on the confirm button
 Then the user should see the Alternative Name <value> in zeus document
-Then the user should see the area name type and value updated in in the area basic info page
+Then the user should see the area name type and value updated in the area basic info page
 Then the user reverts the changes to the document
 
 Examples:
@@ -750,7 +750,7 @@ When the user clicks on the add names button in the area basic info page
 Then the user should see the area name types from lookup PLACE_NAME_TYPE
 When the user enters name value as <value> in the area basic info page
 When the user clicks on the save button
-Then the user should see the error message for the required name type field in the area basic info page
+Then the user should see the error message Required for the required name type field in the area basic info page
 
 Examples:
 |country|area|value|
@@ -771,13 +771,13 @@ When the user clicks on the add names button in the area basic info page
 Then the user should see the area name types from lookup PLACE_NAME_TYPE
 When the user enters name type as <type> in the area basic info page
 When the user clicks on the save button
-Then the user should see the error message for the required name value field in the area basic info page
+Then the user should see the error message Enter up to 75 valid characters. for the required name value field in the area basic info page
 
 Examples:
 |country|area|type|
 |Angola|Cabinda|Alternative Name|
 
-Scenario: User has selected to delete an area name - and chooses no option - verify the names are not modified
+Scenario: User has selected to delete an existing area name - and chooses no option - verify the names are not modified
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -803,14 +803,14 @@ When the user clicks on the save button
 Then the user should not see the <ConfirmationSummary> changes in confirmation modal for area
 When the user clicks on the confirm button
 Then the user should see the Alternative Name <value> in zeus document
-Then the user should see the area name type and value updated in in the area basic info page
+Then the user should see the area name type and value updated in the area basic info page
 Then the user reverts the changes to the document
 
 Examples:
 |country|area|type|value|ConfirmationSummary|
 |Angola|Cabinda|Alternative Name|test|Summary|
 
-Scenario: User has selected to delete an area name - and chooses yes option - verify the names are modified
+Scenario: User has selected to delete an existing area name - and chooses yes option - verify the names are modified
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -870,7 +870,7 @@ Then the user should see the below summary changes in confirmation modal
 |Basic Info / Names|
 When the user clicks on the confirm button
 Then the user should see the Alternative Name <value> in zeus document
-Then the user should see the area name type and value updated in in the area basic info page
+Then the user should see the area name type and value updated in the area basic info page
 Then the user reverts the changes to the document
 
 Examples:
@@ -952,8 +952,8 @@ And the user should see the below summary changes in confirmation modal
 |Basic Info / Names|
 When the user clicks on the confirm button
 Then the user should see the Alternative Name <value> and <value2> in zeus document
-Then the user should see the area name type and value updated in in the area basic info page
-Then the user should see the second area name type and value updated in in the area basic info page
+Then the user should see the area name type and value updated in the area basic info page
+Then the user should see the second area name type and value updated in the area basic info page
 Then the user reverts the changes to the document
 
 Examples:

@@ -253,7 +253,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().enterNameValue(newNameValue);
 	}
 	
-	@Then("the user should see the area name type and value updated in in the area basic info page")
+	@Then("the user should see the area name type and value updated in the area basic info page")
 	public void verityCityNameTypeAndValue(@Named("type") String newNameType, 
 										   @Named("value") String newNameValue) {
 		getEditAreaPage().verifyNameType(newNameType, 0);
@@ -272,14 +272,14 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyNameTypeNotPresent(newNameType);
 	}
 	
-	@Then("the user should see the error message for the required name type field in the area basic info page")
-	public void verifyErrorMessageForRequiredAreaNameType() {
-		getEditAreaPage().verifyErrorMessageRequiredForAreaNameType();
+	@Then("the user should see the error message $errorMessage for the required name type field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaNameType(@Named("errorMessage") String errorMessage) {
+		getEditAreaPage().verifyErrorMessageRequiredForAreaNameType(errorMessage);
 	}
 	
-	@Then("the user should see the error message for the required name value field in the area basic info page")
-	public void verifyErrorMessageForRequiredAreaNameValue() {
-		getEditAreaPage().verifyErrorMessageForRequiredAreaNameValue();
+	@Then("the user should see the error message $errorMessage for the required name value field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaNameValue(@Named("errorMessage") String errorMessage) {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaNameValue(errorMessage);
 	}
 	
 	@When("the user clicks on the delete name row button in the area basic info page")
@@ -308,7 +308,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyUpdatedMultipleAreaNamesInDB(country, area, nameType, source, nameValue, nameValue2);
 	}
 	
-	@Then("the user should see the second area name type and value updated in in the area basic info page")
+	@Then("the user should see the second area name type and value updated in the area basic info page")
 	public void veritySecondCityNameTypeAndValue(@Named("type") String newNameType, 
 										   @Named("value2") String newNameValue) {
 		getEditAreaPage().verifyNameType(newNameType, 1);

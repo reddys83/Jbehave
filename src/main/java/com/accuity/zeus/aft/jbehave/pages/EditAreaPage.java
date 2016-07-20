@@ -27,6 +27,8 @@ import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
 	
+   private static final String DISPLAY_NAME = "Display Name";
+   private static final String FULL_NAME = "Full Name";
    public static String addInfoMaximumCharacterString=null;
    
 	public EditAreaPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
@@ -558,9 +560,9 @@ public class EditAreaPage extends AbstractPage {
 
         String nameValuePath = "";
 		
-		if("Full Name".equals(nameType)) {
+		if(FULL_NAME.equals(nameType)) {
 			nameValuePath = "area_names_full_name_value_xpath";
-		} else if("Display Name".equals(nameType)) {
+		} else if(DISPLAY_NAME.equals(nameType)) {
 			nameValuePath = "area_names_display_name_value_xpath";
 		}
 		
@@ -574,9 +576,9 @@ public class EditAreaPage extends AbstractPage {
 		
 		String nameTypePath = "";
 		
-		if("Full Name".equals(nameType)) {
+		if(FULL_NAME.equals(nameType)) {
 			nameTypePath = "area_names_full_name_type_xpath";
-		} else if("Display Name".equals(nameType)) {
+		} else if(DISPLAY_NAME.equals(nameType)) {
 			nameTypePath = "area_names_display_name_type_xpath";
 		}
 		assertTrue(names.contains(
@@ -586,11 +588,11 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void verifyFixedNameTypeNotEditable(String nameType) {
 		
-        String nameTypePath = "";
+        String nameTypePath = null;
 		
-		if("Full Name".equals(nameType)) {
+		if(FULL_NAME.equals(nameType)) {
 			nameTypePath = "area_names_full_name_type_xpath";
-		} else if("Display Name".equals(nameType)) {
+		} else if(DISPLAY_NAME.equals(nameType)) {
 			nameTypePath = "area_names_display_name_type_xpath";
 		}
 		
@@ -603,18 +605,18 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void enterValueInNameField(String nameType, String value) {
         
-		String nameValuePath = "";
+		String nameValuePath = null;
 		
-		if("Full Name".equals(nameType)) {
+		if(FULL_NAME.equals(nameType)) {
 			nameValuePath = "area_names_full_name_value_xpath";
-		} else if("Display Name".equals(nameType)) {
+		} else if(DISPLAY_NAME.equals(nameType)) {
 			nameValuePath = "area_names_display_name_value_xpath";
 		}
 		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier(nameValuePath), value);
 	}
 	
 	public void verifyUpdatedAreaNameInDB(String country, String area, String nameType, String source, String nameValue) {
-		if("Full Name".equals(nameType)) {
+		if(FULL_NAME.equals(nameType)) {
 			area = nameValue;
 		}			
 		Map<String, String> cityNameValueMap = getAreaNameValueMapFromDB(country, area, source);
@@ -623,11 +625,11 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void verifyTextInNameValue(String nameValue, String nameType) {
 		
-        String nameValuePath = "";
+        String nameValuePath = null;
 		
-		if("Full Name".equals(nameType)) {
+		if(FULL_NAME.equals(nameType)) {
 			nameValuePath = "area_names_full_name_value_view_xpath";
-		} else if("Display Name".equals(nameType)) {
+		} else if(DISPLAY_NAME.equals(nameType)) {
 			nameValuePath = "area_names_display_name_value_view_xpath";
 		}
 		assertEquals(nameValue, getDriver()
@@ -650,8 +652,8 @@ public class EditAreaPage extends AbstractPage {
 		List<String> newRowNameTypes = new ArrayList<String>();
 		newRowNameTypes.add("");
 		newRowNameTypes.addAll(names);
-		newRowNameTypes.remove("Full Name");
-		newRowNameTypes.remove("Display Name");
+		newRowNameTypes.remove(FULL_NAME);
+		newRowNameTypes.remove(DISPLAY_NAME);
 		
 		List<WebElement> areaNameTypesList = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_name_type_input_xpath"));
@@ -718,13 +720,13 @@ public class EditAreaPage extends AbstractPage {
 		assertTrue(!cityNameValueMap.values().contains(nameValue));
 	}
 	
-	public void verifyErrorMessageRequiredForAreaNameType() {
-		assertEquals("Required", getDriver()
+	public void verifyErrorMessageRequiredForAreaNameType(String errorMessage) {
+		assertEquals(errorMessage, getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_name_type_error_msg_xpath")).getText());
 	}
 	
-	public void verifyErrorMessageForRequiredAreaNameValue() {
-		assertEquals("Enter up to 75 valid characters.", getDriver()
+	public void verifyErrorMessageForRequiredAreaNameValue(String errorMessage) {
+		assertEquals(errorMessage, getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_name_value_error_msg_xpath")).getText());
 	}
 	
