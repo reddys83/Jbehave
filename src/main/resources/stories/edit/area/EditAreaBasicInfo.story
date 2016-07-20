@@ -10,6 +10,7 @@ JIRA ID - ZEUS-1027 - User can edit Area's End Date
 
 JIRA ID - ZEUS-1026 - User can edit Area's Began Date
 JIRA ID - ZEUS-1034 - User can edit Area's Add Info
+JIRA ID - ZEUS-1040 - User can edit Area's Identifiers
 
 Scenario: User can edit area Began Date -
 a)Verify if user can see all the months in month dropdown (Began Date) are in MMM format
