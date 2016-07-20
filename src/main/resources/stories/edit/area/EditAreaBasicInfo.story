@@ -823,7 +823,31 @@ Examples:
 |country|area|identifierType|identifierValueIncorrect|identifierStatus|
 |Algeria|Constantine|Numeric ISO Code|aksjuilrw1aksjuilrw1aksjuilrw1aksjuilrw1aksju%)~12y1|Active|
 
-Scenario: User can edit area identifiers - Verify that an error message 'Required' is displayed when user leaves identifier Type as blank and enters value in identifier 'Value' and 'Status'
+Scenario: User can edit area identifiers - Verify that an error message 'Required' is displayed when user left identifier Type blank and enters value in identifier 'Value' and 'Status'
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area identifier rows
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters identifier value as <identifierValue> in the basic info area page
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the save button
+Then the user should see the error message for the required identifier type field in the area basic info page
+
+Examples:
+|country|area|identifierType|identifierValue|identifierStatus|
+|Algeria|Constantine||H4Testing|Inactive|
+
+Scenario: User can edit area identifiers - Verify that an error message 'Required' is displayed when user leaves identifier Value as blank and enters value in identifier 'Type' and 'Status'
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page

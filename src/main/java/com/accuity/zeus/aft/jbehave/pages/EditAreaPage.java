@@ -861,6 +861,12 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
+	
+	public void verifyErrorMessageForRequiredAreaIdentifierType() {
+		assertEquals("Required",
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_req_err_msg_xpath"))
+						.getText());
+	}
 
 	@Override
 	public String getPageUrl() {

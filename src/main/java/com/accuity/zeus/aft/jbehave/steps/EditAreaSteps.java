@@ -376,5 +376,10 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyAreaIdentifierRowNotPresentInZeusDB(@Named("country") String country, @Named("area") String area, @Named("source") String source) {
 		getEditAreaPage().verifyIdentifierRowNotPresentInZeusDB(country, area, source);
 	}
+	
+	@Then("the user should see the error message for the required identifier type field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaIdentifierType() {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierType();
+	}
 
 }
