@@ -30,9 +30,17 @@ let $DateFields :=
 	    <BeganDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateBegan)}</BeganDate>
 		<EndDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateCeased)}</EndDate>        
     </areaDate>
-    
+  (: Taking Add Info :)
+ let $areaadditionalinfo := ($areaDoc/summary/additionalInfos/additionalInfo/text())
 return
   <area>
       { $areaDoc/summary/names }
       <dateFields>{$DateFields}</dateFields>
+      <AdditionalInfo>{$areaadditionalinfo}</AdditionalInfo>
   </area>
+  
+
+  
+  
+  
+  

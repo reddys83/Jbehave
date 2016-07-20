@@ -107,8 +107,9 @@ public class XqueryMap {
         queryMap.put("get city name types","getCityNameTypes.xqy");
 		queryMap.put("get area Status types","getCityStatusTypes.xqy");
 		queryMap.put("get areastatus","getAreaStatus.xqy");
-		queryMap.put("get area basic info","getAreaBasicInfo.xqy");
 		queryMap.put("get area name types","getAreaNameTypes.xqy");
+		queryMap.put("get area basic info","getAreaBasicInfo.xqy");		
+		queryMap.put("active office test list","getActiveOfficeFidTest.xqy");
    }
 
     public String getXquery(String key){

@@ -314,5 +314,44 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyNameType(newNameType, 1);
 		getEditAreaPage().verifyNameValue(newNameType, newNameValue, 1);
 	}
-}
 
+	@When("the user enters the <addInfoText> in the area add info text area")
+	public void enterTextAreaAddInfo(@Named("addInfoText") String addInfoText) {
+		getEditAreaPage().enterTextAreaAddInfo(addInfoText);
+	}
+	
+	@Then("the user should be able to verify the values are entered in the area add info field")
+	public void verifyAreaTextInAddInfo(@Named("addInfoText") String addInfoText) {
+		getEditAreaPage().verifyAreaTextInAddInfo(addInfoText);
+	}
+	
+	@When("the user enters values which is beyond 500 unicode characters in the area add info field")
+	public void enterInvalidCharactersInAreaAddInfo() {
+		getEditAreaPage().enterInvalidCharactersInAreaAddInfo();
+	}
+	
+	@Then("the user should be able to view that only 500 unicode characters are saved in area add info")
+	public void viewValidCharacterLength() {
+		getEditAreaPage().viewValidCharacterLength();
+	}
+	
+	@Then("the user should be able to verify the maximum values are entered in the area add info field")
+	public void verifyMaximumTextInAddInfo() {
+		getEditAreaPage().verifyMaximumChracterEnteredInAddInfo();
+	}
+	
+	@Then("the user should see the area addInfoText value same as in $source document")
+	public void verifyAreaAddInfoValueFromDB(@Named("country") String country, @Named("area") String area, @Named("source") String source) {
+		getEditAreaPage().verifyAreaAddInfoValueFromTrusted(country, area, "AdditionalInfo", source);
+	}
+	
+	@Then("the user should see the area addinfo value $addInfoText as in $source document")
+	public void verifyAreaAddInfoFromDB(@Named("country") String country, @Named("area") String area, @Named("source") String source, @Named("addInfoText") String addInfoText) {
+		getEditAreaPage().verifyAreaAddInfoValueFromZeus(country, area, "AdditionalInfo", source,addInfoText);
+	}
+	
+	@When("the user enters the <addInfoDiffText> in the area add info text area")
+	public void enterTextAreaAddInfo2(@Named("addInfoDiffText") String addInfoDiffText) {
+		getEditAreaPage().enterTextAreaAddInfo(addInfoDiffText);
+	}
+}
