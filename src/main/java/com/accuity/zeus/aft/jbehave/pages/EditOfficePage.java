@@ -57,21 +57,64 @@ public class EditOfficePage extends AbstractPage {
     }
 
 
-    public void verifyUpdatedOfficeOpenedDate(String fid, String day, String month, String year) {
+    public void verifyUpdatedOfficeOpenedDate(String officeFid, String day, String month, String year , String source) {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         List<NameValuePair> zeusPairs = new ArrayList<>();
-        zeusPairs.add(new BasicNameValuePair("fid", fid));
-        zeusPairs.add(new BasicNameValuePair("source", "zeus"));
+        zeusPairs.add(new BasicNameValuePair("fid", officeFid));
+        zeusPairs.add(new BasicNameValuePair("source", source));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", zeusPairs);
         assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent(), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_view_xpath")).getText());
         assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent().replace(" ",""), day+month+year);
     }
 
+    public void selectOfficeLeadLocationFlag(String leadLocationflag) {
+        selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier("office_leadlocation_radio_options_xpath"), leadLocationflag);
+    }
 
+    public void verifyLeadLocationValuefromZeusDocumentAndUI(String leadLocationflag, String selectedEntity, String source) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(getLeadLocationFlagFromDB(selectedEntity, source), leadLocationflag);
+        assertEquals(leadLocationflag,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_view_leadlocation_xpath")));
+
+
+    }
+
+    public String getLeadLocationFlagFromDB(String officeFid, String source) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String leadLocationDBValue = getNodeValuesByTagName(document, "leadLocation").size() == 0 ? "" : getNodeValuesByTagName(document, "leadLocation").get(0);
+        return leadLocationDBValue;
+    }
+
+    public void changeAlternateRadioButtonValue(String identifier) {
+        String newleadInstitutionflag = "";
+        String selectedRadioValue = getSelectedRadioValue(OfficeIdentifiers.getObjectIdentifier(identifier));
+        if (selectedRadioValue.equalsIgnoreCase("true")) {
+            newleadInstitutionflag = "false";
+        } else if (selectedRadioValue.equalsIgnoreCase("false")) {
+            newleadInstitutionflag = "true";
+        }
+        selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier(identifier), newleadInstitutionflag);
+    }
+
+    public void verifyOfficeEditPageMode() {
+        assertTrue(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_month_xpath")).size()>0);
+    }
     public void selectForeignOfficeFlag(String foreignOfficeflag) {
         selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier("office_foreignoffice_radio_options_xpath"), foreignOfficeflag);
     }
@@ -101,20 +144,6 @@ public class EditOfficePage extends AbstractPage {
         return leadLocationDBValue;
     }
 
-    public void changeAlternateRadioButtonValue(String identifier) {
-        String newleadInstitutionflag = "";
-        String selectedRadioValue = getSelectedRadioValue(OfficeIdentifiers.getObjectIdentifier(identifier));
-        if (selectedRadioValue.equalsIgnoreCase("true")) {
-            newleadInstitutionflag = "false";
-        } else if (selectedRadioValue.equalsIgnoreCase("false")) {
-            newleadInstitutionflag = "true";
-        }
-        selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier(identifier), newleadInstitutionflag);
-    }
-
-    public void verifyOfficeEditPageMode() {
-        assertTrue(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_month_xpath")).size()>0);
-    }
     @Override
     public String getPageUrl() {
         return null;

@@ -184,7 +184,6 @@ public class DataPage extends AbstractPage {
     private By basic_info_left_section_xpath = By.xpath("//table[@class='vertical']/tbody//th");
 
     private String area_area_city_link_xpath = "//*[@id='areaPlaces']/table/tbody//td[a='";
-    private String area_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
     private By select_places_view_xpath = By.xpath(".//*[@id='areaPlaces']/h1/span']");
 
     private By save_button_id = By.id("save-button");
@@ -206,6 +205,8 @@ public class DataPage extends AbstractPage {
     private By delete_confirmation_yes_button_id = By.id("yes-button");
     private By save_success_message_id=By.id("saveSuccess");
     private By area_basic_info_country_link_xpath = By.xpath(".//*//tr[th='Country']/td/a");
+    private String area_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
+    private By confirmation_modal_xpath = By.xpath("//*[@id='modal-region']");
 
     static ResponseEntity responseEntity;
     static String endpointWithID;
@@ -282,7 +283,7 @@ public class DataPage extends AbstractPage {
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(area);
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -976,7 +977,7 @@ public class DataPage extends AbstractPage {
         }
     }
 
-        public void clickOnCityRelatedPlace(String relatedPlace) {
+    public void clickOnCityRelatedPlace(String relatedPlace) {
         attemptClick(By.xpath(city_related_places_place_link_xpath + relatedPlace + "']/td/a"));
         waitForElementToAppear(area_listBox_xpath);
         try {
@@ -1289,8 +1290,7 @@ public class DataPage extends AbstractPage {
         attemptClick(area_basic_info_country_link_xpath);
     }
 
-
-
+    
     public void clickOnAreaRelatedPlace(String relatedPlace) {
         attemptClick(By.xpath(area_related_places_place_link_xpath + relatedPlace + "']/td/a"));
         try {
@@ -1299,6 +1299,23 @@ public class DataPage extends AbstractPage {
             e.printStackTrace();
         }
     }
+    
+    public EditAreaPage createEditAreaPage() {
+        return new EditAreaPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+
+    }
+    
+    public void verifyNoSummaryConfirmationModal(String summaryText) {
+		try {
+			WebElement confirmChanges = getDriver()
+					.findElement(cancel_update_confirmation_modal_xpath);
+			String confirmationText = confirmChanges.getText();
+			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
+		} catch (Exception e) {
+			assertTrue(false);
+		}
+	}
+
     public void changeBrowserUrlAndNavigate(String id){
         String curentUrl=getDriver().getCurrentUrl();
         String[]currentUrl=curentUrl.split("country/");
@@ -1313,5 +1330,6 @@ public class DataPage extends AbstractPage {
     public void verifyAreaPlacesView() {
         assertTrue(getDriver().findElement(select_places_view_xpath).isDisplayed());
     }
+
 
 }
