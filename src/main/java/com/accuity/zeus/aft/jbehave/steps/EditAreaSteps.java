@@ -1,6 +1,5 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
-import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -31,14 +30,10 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyMonthInChronologicalOrder();
 	}
 
+
 	@When("the user gets the document with $xqueryName with the <area> from the database")
 	public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("area") String param) {
 		getDataPage().getDocument(xqueryName, param);
-	}
-	
-	@When("the user gets the document with $xqueryName with the <subArea> from the database")
-	public void getDocumentByFidSubArea(@Named("xqueryName") String xqueryName, @Named("subArea") String subArea,@Named("country") String country,@Named("area") String area) {
-		getDataPage().getDocumentforSubArea(xqueryName, subArea, country, area);
 	}
 
 	@When("the user enters began date day <day> in the edit basic info area page")
@@ -77,20 +72,19 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 
 	@When("the user enters <beganDay1> <beganMonth1> <beganYear1> Began Date in the edit basic info area page")
-	public void enterBeganDate(@Named("beganDay1") String beganDay1, @Named("beganMonth1") String beganMonth1,
-			@Named("beganYear1") String beganYear1) {
+	public void enterBeganDate(@Named("beganDay1") String beganDay1, @Named("beganMonth1") String beganMonth1, @Named("beganYear1") String beganYear1) {
 		enterDayInBeganDate(beganDay1);
 		enterMonthInBeganDate(beganMonth1);
 		enterYearInBeganDate(beganYear1);
 	}
 
 	@When("the user enters <endDay1> <endMonth1> <endYear1> End Date in the edit basic info area page")
-	public void enterEndDate(@Named("endDay1") String endDay1, @Named("endMonth1") String endMonth1,
-			@Named("endYear1") String endYear1) {
+	public void enterEndDate(@Named("endDay1") String endDay1, @Named("endMonth1") String endMonth1, @Named("endYear1") String endYear1) {
 		enterDayInEndDate(endDay1);
 		enterMonthInEndDate(endMonth1);
 		enterYearInEndDate(endYear1);
 	}
+
 
 	@Then("the user should see the entered end date <day> <month> <year> in area page")
 	public void verifyEndDateInAreaPage(@Named("day") String day, @Named("month") String month,
@@ -100,8 +94,8 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should see the area end date <day> <month> <year> value in $source document")
 	public void verifyAreaEndDateValueFromDB(@Named("country") String country, @Named("area") String area,
-			@Named("source") String source, @Named("day") String day, @Named("month") String month,
-			@Named("year") String year) {
+			@Named("source") String source, @Named("day") String day,
+			@Named("month") String month, @Named("year") String year) {
 		getEditAreaPage().verifyAreaEndDateFromZeusDB(country, area, "EndDate", source, day, month, year);
 	}
 
@@ -118,14 +112,14 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyMonthInChronologicalOrder();
 	}
 
+
 	@Then("the user should see the error $beganDateErrorMsg for area began date")
 	public void verifyErrorMessageBeganDate(@Named("beganDateErrorMsg") String beganDateErrorMsg) {
 		getEditAreaPage().verifyErrorMessageBeganDate(beganDateErrorMsg);
 	}
 
 	@When("the user enters <day2> <month2> <year2> Began Date in the edit basic info area page")
-	public void enterBeganDates(@Named("day2") String day2, @Named("month2") String month2,
-			@Named("year2") String year2) {
+	public void enterBeganDates(@Named("day2") String day2, @Named("month2") String month2, @Named("year2") String year2) {
 		enterDayInBeganDate(day2);
 		enterMonthInBeganDate(month2);
 		enterYearInBeganDate(year2);
@@ -139,8 +133,8 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should see the area began date <day> <month> <year> value in $source document")
 	public void verifyAreaBeganDateValueFromDB(@Named("country") String country, @Named("area") String area,
-			@Named("source") String source, @Named("day") String day, @Named("month") String month,
-			@Named("year") String year) {
+			@Named("source") String source, @Named("day") String day,
+			@Named("month") String month, @Named("year") String year) {
 		getEditAreaPage().verifyAreaBeganDateFromZeusDB(country, area, "BeganDate", source, day, month, year);
 	}
 
@@ -206,113 +200,45 @@ public class EditAreaSteps extends AbstractSteps {
 	public void selectAreaStatusValue2(@Named("status2") String status) {
 		getEditAreaPage().selectAreaStatusValue(status);
 	}
-
-	@When("user changes the <country2> in the country drop downfield of area basic page")
-	public void userChangesCountryDropdownValue(@Named("country2") String country2) throws InterruptedException {
-		getEditAreaPage().selectCountryValue(country2);
-	}
-
-	@Then("user changes the area <areaParent> in the area dropdown field in area basic page")
-	public void userChangesAreaDropdownvalue(@Named("areaParent") String areaParent) throws InterruptedException {
-		getEditAreaPage().userChangesAreaDropdownvalue(areaParent);
-
-	}
-
-	@Then("the user checks whether the header dropdown updates with <country2>, <areaParent>, <subArea>")
-	public void checksHeaderdropdownValues(@Named("country2") String country, @Named("areaParent") String areaParent,
-			@Named("subArea") String subArea) throws InterruptedException {
-		getEditAreaPage().verifyHeaderDropDownValues(country, areaParent, subArea);
-	}
-
-	@Then("the user checks whether the Address bar url is updated  with <country2>, <areaParent>")
-	public void checksAddressBar(@Named("country2") String country, @Named("areaParent") String areaParent)
-			throws InterruptedException {
-		getEditAreaPage().checksAddressBarIsHavingNewCountryAreaIds(country, areaParent);
-	}
-
-	@Then("verify $source document whether <subArea> is mapped to newly added <country2> and <areaParent>")
-	public void verifySubAreaInfoFromZeusDocument(@Named("source") String source, @Named("subArea") String subArea,
-			@Named("country2") String country2, @Named("area") String area, @Named("areaParent") String areaParent)
-			throws InterruptedException {
-		getEditAreaPage().verifySubAreaInfoFromZeusDB(country2, areaParent, subArea, "subarea", source, subArea);
-	}
-
-	@Then("user should verify the subArea dropdown does not have subArea <subArea> value mapped to old country and area")
-	public void verifySubAreaDropdown(@Named("subArea") String subArea) throws InterruptedException {
-		getEditAreaPage().verifySubAreaDropdown(subArea);
-	}
-
-	@Then("user should see the list of area parent options in Area page is Empty")
-	public void verifyParentAreaListIsEmpty(@Named("country2") String country2) {
-		getEditAreaPage().verifyParentAreaListInPlaceForCountry(country2);
+	
+	@When("the user enters the <addInfoText> in the area add info text area")
+	public void enterTextAreaAddInfo(@Named("addInfoText") String addInfoText) {
+		getEditAreaPage().enterTextAreaAddInfo(addInfoText);
 	}
 	
-	@Then("user should see the list of area parent options in area page is Empty")
-	public void verifyParentAreasListIsEmpty(@Named("country") String country) {
-		getEditAreaPage().verifyParentAreaListInPlaceForCountry(country);
+	@Then("the user should be able to verify the values are entered in the area add info field")
+	public void verifyAreaTextInAddInfo(@Named("addInfoText") String addInfoText) {
+		getEditAreaPage().verifyAreaTextInAddInfo(addInfoText);
 	}
-
-	@Then("the user should verfiy that the 'Choose and area' option is populated in the area parent dropdown")
-	public void userVerifyNoSubarea() throws InterruptedException {
-		getEditAreaPage().verifyChooseAnAreaOptionInAreaparent();
+	
+	@When("the user enters values which is beyond 500 unicode characters in the area add info field")
+	public void enterInvalidCharactersInAreaAddInfo() {
+		getEditAreaPage().enterInvalidCharactersInAreaAddInfo();
 	}
-
-	@Then("user should see the list of Area parent options in Area page are in Alphabetical order")
-	@Alias("user should see the list of area parent options are refreshed pointing to selected <country2> in area basic info page")
-	public void verifyParentAreaListInPlacesForCountry(@Named("country2") String country) {
-		getEditAreaPage().verifyAreaListInPlaceForCountry(country);
+	
+	@Then("the user should be able to view that only 500 unicode characters are saved in area add info")
+	public void viewValidCharacterLength() {
+		getEditAreaPage().viewValidCharacterLength();
 	}
-
-	@Then("the user should verify the header dropdowns are disabled")
-	public void userVerifyHeaderDropdownValuesDisabled() throws InterruptedException {
-		getEditAreaPage().userVerifyHeaderDropdownValuesDisabled();
+	
+	@Then("the user should be able to verify the maximum values are entered in the area add info field")
+	public void verifyMaximumTextInAddInfo() {
+		getEditAreaPage().verifyMaximumChracterEnteredInAddInfo();
 	}
-
-	@Then("the user should verify the country dropdown is populating with default country <country> as a option")
-	public void userVerifyCountryDropdownDefaultValue(@Named("country") String country) {
-		getEditAreaPage().userVerifyCountryDropdownDefaultValue(country);
+	
+	@Then("the user should see the area addInfoText value same as in $source document")
+	public void verifyAreaAddInfoValueFromDB(@Named("country") String country, @Named("area") String area, @Named("source") String source) {
+		getEditAreaPage().verifyAreaAddInfoValueFromTrusted(country, area, "AdditionalInfo", source);
 	}
-
-	@Then("the user should see all the list of existing countries by full name in Alphabetical order in area basic info page")
-	public void verifyCountryListInPlacesFortheCountry() {
-		getEditAreaPage().verifyCountryListInPlacesForCountry();
+	
+	@Then("the user should see the area addinfo value $addInfoText as in $source document")
+	public void verifyAreaAddInfoFromDB(@Named("country") String country, @Named("area") String area, @Named("source") String source, @Named("addInfoText") String addInfoText) {
+		getEditAreaPage().verifyAreaAddInfoValueFromZeus(country, area, "AdditionalInfo", source,addInfoText);
 	}
-
-	@Then("the user should see the error message for the required identifier type field in the area basic info page")
-	public void verifyErrorMessageForRequiredAreaparentIdentifierType() throws InterruptedException {
-		getEditAreaPage().verifyErrorMessageForRequiredAreaparentIdentifierType();
-	}
-
-	@Then("the user checks whether the header dropdown updates with <country2>, <area>")
-	public void checksHeaderdropdownValue(@Named("country2") String country, @Named("area") String area)
-			throws InterruptedException {
-		getEditAreaPage().checksHeaderdropdownValue(country, area);
-	}
-
-	@Then("verify $source document whether <area> is mapped to newly added <country2>")
-	public void verifyZeusDocument(@Named("source") String source, @Named("area") String area,
-			@Named("country2") String country2, @Named("area") String area1) throws InterruptedException {
-		getEditAreaPage().verifyAreaInfoFromZeusDB(country2, area, "area", source, area1);
-	}
-
-	@Then("the user should verify the parent area dropdown is populating with default area <area> as a option")
-	public void userVerifyAreaParentDropdownDefaultValue(@Named("area") String area) {
-		getEditAreaPage().userVerifyAreaParentDropdownDefaultValue(area);
-	}
-
-	@When("the user click on the choose an area parent option of area basic page")
-	public void clicksOnAreaDropdown() throws InterruptedException {
-		getEditAreaPage().clickOnAreaDropdown();
-	}
-
-	@Then("user should see the list of area parent options are pointing to selected <country> in area basic info page")
-	public void verifyParentAreaListInPlaceForCountry(@Named("country") String country) {
-		getEditAreaPage().verifyAreaListInPlacesForCountry(country);
-	}
-
-	@Then("user verify the list of area pareant options do not have No Area")
-	public void verifyParentAreaListDontHaveNullNovalue() {
-		getEditAreaPage().verifyParentAreaDropdownDontHaveNoArea();
+	
+	@When("the user enters the <addInfoDiffText> in the area add info text area")
+	public void enterTextAreaAddInfo2(@Named("addInfoDiffText") String addInfoDiffText) {
+		getEditAreaPage().enterTextAreaAddInfo(addInfoDiffText);
 	}
 
 }
