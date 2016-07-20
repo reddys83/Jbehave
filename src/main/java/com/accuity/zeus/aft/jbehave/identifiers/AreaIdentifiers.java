@@ -42,10 +42,11 @@ public class AreaIdentifiers {
 	    hmap.put("country_places_areas_dropdown_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='Area Parent']//select"));
 	    hmap.put("country_places_country_dropDown_select_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='Country']//select"));
 	    hmap.put("country_places_areas_option_dropdown_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='Area Parent']//select//option"));	   
-	    hmap.put("country_current_value_xpath", By.xpath("(.//*[@class='chosen-single'])[1]//span"));
-        hmap.put("area_current_value_xpath", By.xpath("(.//*[@class='chosen-single'])[2]//span"));                
-        hmap.put("areaparent_current_value_xpath", By.xpath("(.//*[@class='chosen-single'])[2]//span"));
-        hmap.put("area_List_value_xpath", By.xpath("(//*[@id='entitySelect_chosen'])[3]//li"));
+            
+	    hmap.put("country_current_value_xpath", By.xpath(".//*[@id='selection0']//span"));
+        hmap.put("area_current_value_xpath", By.xpath(".//*[@id='selection1']//span")); 
+
+        hmap.put("area_List_value_xpath", By.xpath(".//*[@id='selection2']/div //*[@id='entitySelect_chosen']//li"));        
         hmap.put("country_places_country_dropDown_xpath", By.xpath(".//*[@id='country']//option"));
         hmap.put("area_identifier_type_req_err_msg_xpath", By.xpath(("//*[@data-error_id='areaParentError']")));       
         hmap.put("country_places_areaparent_dropdown_xpath", By.xpath(".//*[@id='areaParent']//option"));
@@ -59,7 +60,7 @@ public class AreaIdentifiers {
         hmap.put("area_area_dropdown_typeAhead_xpath", By.xpath(".//*[@id='selection1'] /div //*[@id='entitySelect_chosen']//input"));
         hmap.put("area_subarea_dropdown_typeAhead_xpath", By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen']//input")); 
         hmap.put("areaParent_currentValue_xpath", By.xpath(".//*[@id='areaParent']"));
-        hmap.put("subarea_current_value_xpath", By.xpath("(.//*[@class='chosen-single'])[3]//span"));
+        hmap.put("subarea_current_value_xpath", By.xpath(".//*[@id='selection2']//span"));
 	}
 
 	public static By getObjectIdentifier(String key) {
