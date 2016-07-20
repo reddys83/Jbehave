@@ -77,6 +77,33 @@ public class EditOfficeSteps extends AbstractSteps{
     public void verifyOfficeEditPageMode(){
         getEditOfficePage().verifyOfficeEditPageMode();
     }
+    @When("the user enters the <additionalInfoText> in the office additional info text area")
+    public void enterOfficeAdditionalInfo(@Named("additionalInfoText") String additionalInfoText)
+    {
+        getEditOfficePage().enterOfficeAdditionalInfo(additionalInfoText);
+    }
+
+    @Then("the user should see office additional info text value as <additionalInfoText> for fid <officeFid> in $source document and in zeus UI")
+    public void verifyEditOfficeAdditionalInfoValueFromZeusDocumentAndUI(@Named("additionalInfoText") String additionalInfoText,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficeAdditionalInfoValueFromZeusDocumentAndUI(additionalInfoText,officeFid,source);
+    }
+
+    @Then("the user should see the office additional info text area field length as 10000")
+    public void verifyOfficeAdditionalInfoTextAreaLength(@Named("officeFid") String officeFid) {
+        getEditOfficePage().verifyOfficeAdditionalInfoTextAreaLength(officeFid);
+    }
+
+
+    @When("the user enters 10000 characters in the office additional info text area")
+    public void enter10000CharactersInOfficeAdditionalInfo(@Named("officeFid") String officeFid) {
+        getEditOfficePage().enter10000CharactersInOfficeAdditionalInfo(officeFid);
+    }
+
+
+    @Then("the user should see the office additional info text value with 10000 characters for fid <officeFid> in $source document")
+    public void verifyAdditionalInfoValueWithMaxLengthFromDB(@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyAdditionalInfoValueWithMaxLengthFromZeus("additionalInfo",officeFid,source);
+    }
 }
 
 

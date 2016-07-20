@@ -30,6 +30,8 @@ let $officeOpenedDate := local:getDateAsPerAccuracy($office/summary/dates/opened
 let $officeClosedDate := local:getDateAsPerAccuracy($office/summary/dates/closed)
 let $LeadLocation := ($office/summary/leadLocation)
 let $foreignOffice := ($office/summary/foreignOffice)
+let $additionalInfo := ($office/summary/additionalInfos/additionalInfo)
+
 
 
 return <office>
@@ -37,6 +39,8 @@ return <office>
     <officeClosedDate>{$officeClosedDate}</officeClosedDate>
    <LeadLocation>{$LeadLocation}</LeadLocation>
     <foreignOffice>{$foreignOffice}</foreignOffice>
+    <additionalInfos>{$additionalInfo}</additionalInfos>
     </office>
 
     (:return $office:)
+
