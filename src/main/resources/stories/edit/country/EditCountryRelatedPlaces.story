@@ -118,7 +118,6 @@ Examples:
 |Mayotte Island|Capital City|
 
 Scenario: The user should see the confirmation modal to delete places row message Please confirm - would you like to delete this row?
-Meta:@dest1
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -148,8 +147,6 @@ Scenario: User selects country , area or city  then only those should appear in 
 TestCase - user selects country and hit go button, then country should display
 TestCase - user selects country and area and hit go button, then area should display
 TestCase - user selects country and area and city and hit go button, then city should display
-
-Meta:@dest1
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -184,8 +181,6 @@ Examples:
 
 
 Scenario: Go button should be disabled when user selects "No Area" or "Return All Cities" as the value for 'area' while adding a new related place
-
-Meta:@dest1
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
