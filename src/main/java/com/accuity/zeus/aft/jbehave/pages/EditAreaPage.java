@@ -531,12 +531,6 @@ public class EditAreaPage extends AbstractPage {
 	}
 	
 	public void clickOnAreaAddNewIdentifierButton() {
-		try {
-			Thread.sleep(7000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_new_identifier_button_id"));
 	}
 	
@@ -739,6 +733,8 @@ public class EditAreaPage extends AbstractPage {
 					}
 				}
 			}
+			else
+				assert false : source+" document is null";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -771,61 +767,15 @@ public class EditAreaPage extends AbstractPage {
 
 	}
 
-	public void verifyErrorMessageForRequiredAreaIdentifierValue() {
-		assertEquals("Enter up to 50 valid characters.", getDriver()
+	public void verifyErrorMessageForRequiredAreaIdentifierValue(String errMsg) {
+		assertEquals(errMsg, getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_value_req_err_msg_xpath")).getText());
 	}
 	
-	public void verifyErrorMessageForRequiredAreaIdentifierStatus() {
-		assertEquals("Required",
+	public void verifyErrorMessageForRequiredAreaIdentifierStatus(String errMsg) {
+		assertEquals(errMsg,
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_status_req_err_msg_xpath"))
 						.getText());
-	}
-	
-	public void verifyAreaIdentifierRowValuesFromZeusDB(String country, String area, String identifierType,
-			String identifierValue, String identifierStatus, String source) {
-
-		try {
-			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("country", country));
-			nvPairs.add(new BasicNameValuePair("area", area));
-			nvPairs.add(new BasicNameValuePair("source", source));
-			Thread.sleep(3000L);
-
-			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"get area basic info", nvPairs);
-
-			if (document != null) {
-				for (int i = 0; i < document.getElementsByTagName("identifiers").item(0).getChildNodes()
-						.getLength(); i++) {
-
-					for (int childNode = 0; childNode < document.getElementsByTagName("identifiers").item(0)
-							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
-
-						switch (document.getElementsByTagName("identifiers").item(0).getChildNodes().item(0)
-								.getChildNodes().item(childNode).getNodeName()) {
-						case "identifierType":
-							assertEquals(document.getElementsByTagName("identifiers").item(0).getChildNodes().item(i)
-									.getChildNodes().item(childNode).getTextContent(), identifierType);
-							break;
-						case "identifierValue":
-							assertEquals(document.getElementsByTagName("identifiers").item(0).getChildNodes().item(i)
-									.getChildNodes().item(childNode).getTextContent(), identifierValue);
-							break;
-						case "identifierStatus":
-							assertEquals(
-									StringUtils.capitalize(document.getElementsByTagName("identifiers").item(0)
-											.getChildNodes().item(i).getChildNodes().item(childNode).getTextContent()),
-									identifierStatus);
-							break;
-
-						}
-					}
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public void verifyNewlyAddedAreaIdentifierRowIsDisplayed() {
@@ -856,16 +806,34 @@ public class EditAreaPage extends AbstractPage {
 					assertNull(document.getElementsByTagName("identifierValue").item(0));
 					assertNull(document.getElementsByTagName("identifierStatus").item(0));
 				}
+			else
+				assert false : source+" document is null";;
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void verifyErrorMessageForRequiredAreaIdentifierType() {
-		assertEquals("Required",
+	public void verifyErrorMessageForRequiredAreaIdentifierType(String errMsg) {
+		assertEquals(errMsg,
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_req_err_msg_xpath"))
 						.getText());
+	}
+	
+	public void verifyAreaIdentifierParametersInUI(String[] identifierTypes, String[] identifierValues, String[] identifierStatusValues) {
+		List<WebElement> identifierTypeDropDowns = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_type_input_xpath"));
+		List<WebElement> identifierValueDropDowns = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_value_input_xpath"));
+		List<WebElement> identifierStatusDropDowns = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_status_input_xpath"));
+		
+		for(int i=0; i<identifierTypeDropDowns.size(); i++) {
+			assertEquals(identifierTypes[i], identifierTypeDropDowns.get(i).getText());
+			assertEquals(identifierValues[i], identifierValueDropDowns.get(i).getText());
+			assertEquals(identifierStatusValues[i], identifierStatusDropDowns.get(i).getText());
+		}
+		
 	}
 
 	@Override

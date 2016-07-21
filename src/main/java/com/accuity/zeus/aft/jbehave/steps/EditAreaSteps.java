@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -291,7 +292,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().enterAreaIdentifierStatus_Row(identifierStatus, 2);
 	}
 	
-	@Then("the user should see the area identifier values as in $source document $identifierType $identifierValue $identifierStatus and $identifierType2 $identifierValue2 $identifierStatus2")
+	@Then("the user should see the area identifier values as in $source document")
 	public void verifyAreaIdentifierValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
 	        @Named("identifierType") String identifierType,
 			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus,
@@ -336,22 +337,27 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyMaxLengthInAreaIdentifierValue(maxLength);
 	}
 	
-	@Then("the user should see the error message for the required identifier value field in the area basic info page")
-	public void verifyErrorMessageForRequiredAreaIdentifierValue() {
-		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierValue();
+	@Then("the user should see the error message <errMsg> for identifier value field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaIdentifierValue(@Named("errMsg") String errMsg) {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierValue(errMsg);
 	}
 	
-	@Then("the user should see the error message for the required identifier status field in the area basic info page")
-	public void verifyErrorMessageForRequiredAreaIdentifierStatus() {
-		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierStatus();
+	@Then("the user should see the error message <errMsg> for identifier status field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaIdentifierStatus(@Named("errMsg") String errMsg) {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierStatus(errMsg);
 	}
 		
 	@Then("the user verifies that the row values for area identifier entered exists in $source document")
+	@Alias("the user verifies that no values are entered in $source document")
 	public void verifyAreaIdentifierRowValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
 	        @Named("identifierType") String identifierType,
 			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus, @Named("source") String source) {
-		getEditAreaPage().verifyAreaIdentifierRowValuesFromZeusDB(country, area, identifierType, identifierValue,
-				identifierStatus, source);
+		String[] identifierTypes = { identifierType };
+		String[] identifierValues = { identifierValue};
+		String[] identifierStatusValues = { identifierStatus };
+
+		getEditAreaPage().verifyAreaIdentifierValuesFromZeusDB(country, area, identifierTypes, identifierValues,
+				identifierStatusValues, source);
 	}	
 	
 	@When("the user clicks on the No button to cancel the deletion of row in basic info area page")
@@ -364,22 +370,27 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyNewlyAddedAreaIdentifierRowIsDisplayed();
 	}
 	
-	@Then("the user verifies that no values are entered in $source document")
-	public void verifyBlankAreaIdentifierValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
-	        @Named("identifierType") String identifierType,
-			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus, @Named("source") String source) {
-		getEditAreaPage().verifyAreaIdentifierRowValuesFromZeusDB(country, area, identifierType, identifierValue,
-				identifierStatus, source);
-	}
-	
 	@Then("the user verifies that the deleted row for area identifier does not exist in $source document")
 	public void verifyAreaIdentifierRowNotPresentInZeusDB(@Named("country") String country, @Named("area") String area, @Named("source") String source) {
 		getEditAreaPage().verifyIdentifierRowNotPresentInZeusDB(country, area, source);
 	}
 	
-	@Then("the user should see the error message for the required identifier type field in the area basic info page")
-	public void verifyErrorMessageForRequiredAreaIdentifierType() {
-		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierType();
+	@Then("the user should see the error message <errMsg> for identifier type field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaIdentifierType(@Named("errMsg") String errMsg) {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierType(errMsg);
+	}
+	
+	@Then("the user verifier that the area identifiers parameters are entered in the basic info area page")
+	public void verifyAreaIdentifierParametersInUI( @Named("identifierType") String identifierType,
+			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus,
+			@Named("identifierType2") String identifierType2, @Named("identifierValue2") String identifierValue2,
+			@Named("identifierStatus2") String identifierStatus2) {
+		
+		String[] identifierTypes = { identifierType, identifierType2 };
+		String[] identifierValues = { identifierValue, identifierValue2 };
+		String[] identifierStatusValues = { identifierStatus, identifierStatus2 };
+		
+		getEditAreaPage().verifyAreaIdentifierParametersInUI(identifierTypes, identifierValues, identifierStatusValues);
 	}
 
 }
