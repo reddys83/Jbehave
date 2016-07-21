@@ -23,14 +23,24 @@ declare function local:getDateAsPerAccuracy
 
 let $fid := xs:string(xdmp:get-request-field("fid"))
 let $source := xs:string(xdmp:get-request-field("source"))
-let $office := (/office[@fid="1010-44"][@source="zeus"])
+let $office := (/office[@fid=$fid][@source=$source])
 
 
 let $officeOpenedDate := local:getDateAsPerAccuracy($office/summary/dates/opened)
+let $officeClosedDate := local:getDateAsPerAccuracy($office/summary/dates/closed)
+let $LeadLocation := ($office/summary/leadLocation)
+let $foreignOffice := ($office/summary/foreignOffice)
+let $additionalInfo := ($office/summary/additionalInfos/additionalInfo)
+
 
 
 return <office>
     <officeOpenedDate>{$officeOpenedDate}</officeOpenedDate>
+    <officeClosedDate>{$officeClosedDate}</officeClosedDate>
+   <LeadLocation>{$LeadLocation}</LeadLocation>
+    <foreignOffice>{$foreignOffice}</foreignOffice>
+    <additionalInfos>{$additionalInfo}</additionalInfos>
     </office>
 
     (:return $office:)
+
