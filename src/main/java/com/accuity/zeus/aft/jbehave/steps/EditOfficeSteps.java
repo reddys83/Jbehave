@@ -37,9 +37,73 @@ public class EditOfficeSteps extends AbstractSteps{
             editOfficePage = getOfficesPage().createEditOfficePage();
         }}
 
-    @Then("the user verifies office opened date from zeus document <fid> <day> <month> <year>")
-    public void verifyUpdatedOfficeOpenedDate(@Named("fid") String fid,@Named("day") String day,@Named("month") String month,@Named("year") String year){getEditOfficePage().verifyUpdatedOfficeOpenedDate(fid,day,month,year);}
+    @Then("the user verifies office opened date from $source document <officeFid> <day> <month> <year>")
+    public void verifyUpdatedOfficeOpenedDate(@Named("officeFid") String officeFid,@Named("day") String day,@Named("month") String month,@Named("year") String year,@Named("source") String source){getEditOfficePage().verifyUpdatedOfficeOpenedDate(officeFid,day,month,year,source);}
 
+
+    @When("the user selects lead location value <leadLocationflag> in the basicinfo office page")
+    public void selectOfficeLeadLocationFlag(@Named("leadLocationflag") String leadLocationflag){
+        getEditOfficePage().selectOfficeLeadLocationFlag(leadLocationflag);
+    }
+
+    @Then("the user should see leadLocation value as <leadLocationflag> for fid <officeFid> in $source document and in zeus UI")
+    public void getDocumentLeadLocation(@Named("leadLocationflag") String leadLocationflag,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyLeadLocationValuefromZeusDocumentAndUI(leadLocationflag,officeFid,source);
+    }
+
+
+    @When("the user selects lead location value other than default value in the basicinfo office page")
+    public void changeOfficeLeadLocationFlag() {
+        getEditOfficePage().changeAlternateRadioButtonValue("office_leadlocation_radio_options_xpath");
+    }
+
+    @When("the user selects foreign office value <foreignOfficeflag> in the basicinfo office page")
+    public void selectForeignOfficeFlag(@Named("foreignOfficeflag") String foreignOfficeflag){
+        getEditOfficePage().selectForeignOfficeFlag(foreignOfficeflag);
+    }
+
+    @Then("the user should see foreignOffice value as <foreignOfficeflag> for fid <officeFid> in $source document and in zeus UI")
+    public void verifyForeignOfficeValuefromZeusDocumentandUI(@Named("foreignOfficeflag") String foreignOfficeflag,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyForeignOfficeValuefromZeusDocumentandUI(foreignOfficeflag,officeFid,source);
+    }
+
+
+    @When("the user selects foreign office value other than default value in the basicinfo office page")
+    public void changeForeignOfficeFlag() {
+        getEditOfficePage().changeAlternateRadioButtonValue("office_foreignoffice_radio_options_xpath");
+    }
+
+    @Then("the user should return to edit office page mode")
+    public void verifyOfficeEditPageMode(){
+        getEditOfficePage().verifyOfficeEditPageMode();
+    }
+    @When("the user enters the <additionalInfoText> in the office additional info text area")
+    public void enterOfficeAdditionalInfo(@Named("additionalInfoText") String additionalInfoText)
+    {
+        getEditOfficePage().enterOfficeAdditionalInfo(additionalInfoText);
+    }
+
+    @Then("the user should see office additional info text value as <additionalInfoText> for fid <officeFid> in $source document and in zeus UI")
+    public void verifyEditOfficeAdditionalInfoValueFromZeusDocumentAndUI(@Named("additionalInfoText") String additionalInfoText,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficeAdditionalInfoValueFromZeusDocumentAndUI(additionalInfoText,officeFid,source);
+    }
+
+    @Then("the user should see the office additional info text area field length as 10000")
+    public void verifyOfficeAdditionalInfoTextAreaLength(@Named("officeFid") String officeFid) {
+        getEditOfficePage().verifyOfficeAdditionalInfoTextAreaLength(officeFid);
+    }
+
+
+    @When("the user enters 10000 characters in the office additional info text area")
+    public void enter10000CharactersInOfficeAdditionalInfo(@Named("officeFid") String officeFid) {
+        getEditOfficePage().enter10000CharactersInOfficeAdditionalInfo(officeFid);
+    }
+
+
+    @Then("the user should see the office additional info text value with 10000 characters for fid <officeFid> in $source document")
+    public void verifyAdditionalInfoValueWithMaxLengthFromDB(@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyAdditionalInfoValueWithMaxLengthFromZeus("additionalInfo",officeFid,source);
+    }
 }
 
 

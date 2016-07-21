@@ -1087,7 +1087,7 @@ public class EditCityPage extends AbstractPage {
 			nvPairs.add(new BasicNameValuePair("area", area));
 			nvPairs.add(new BasicNameValuePair("city", city));
 			nvPairs.add(new BasicNameValuePair("source", source));
-			Thread.sleep(3000L);
+			Thread.sleep(5000L);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get city basic info", nvPairs);
