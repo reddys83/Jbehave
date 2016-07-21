@@ -115,7 +115,7 @@ public class EditOfficePage extends AbstractPage {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", officeFid));
         nvPairs.add(new BasicNameValuePair("source", source));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal office basic info", nvPairs);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
         if (document != null) {
             assertEquals(getNodeValuesByTagName(document, tagName), getAlreadySelectedOfficeTypes("office_basicInfo_officetypes_dropdown_xpath"));
         }
@@ -129,7 +129,7 @@ public class EditOfficePage extends AbstractPage {
     }
 
 
-    public void verifyEditOfficesOfficeTypeValueFromZeus(String officeTypeValue, String tagName, String officeFid, String source, String xqueryName) {
+    public void verifyEditOfficesOfficeTypeValueFromZeusAndInUI(String officeTypeValue, String tagName, String officeFid, String source, String xqueryName) {
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
@@ -142,13 +142,29 @@ public class EditOfficePage extends AbstractPage {
         if (document != null && !officeTypeValue.isEmpty()) {
             assertTrue(getNodeValuesByTagName(document, tagName).contains(officeTypeValue));
 
+            Boolean flag=false;
+            List<WebElement> officeTypes = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("basic_info_office_type_xpath"));
+
+                for (int j=0;j<officeTypes.size();j++){
+                    if(officeTypeValue.equals(officeTypes.get(j).getText()))
+                    {
+                        flag=true;
+                        break;
+                    }
+                    assertTrue(flag);
+                }
+
+
+            //assertEquals(officeTypeValue,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("first_existing_officetype_dropdown")));
+
         } else if (document != null && officeTypeValue.isEmpty()) {
             assertFalse(getNodeValuesByTagName(document, tagName).contains(officeTypeValue));
+           assertEquals(officeTypeValue,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("basic_info_office_type_xpath")));
         }
 
     }
 
-    public void verifyOfficeTypeNotPresentInZeus(String source, String officeFid, String tagName, String value) {
+    public void verifyOfficeTypeNotPresentInZeusAndInUI(String source, String officeFid, String tagName, String officeTypeValue) {
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
@@ -158,11 +174,23 @@ public class EditOfficePage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("fid", officeFid));
         nvPairs.add(new BasicNameValuePair("source", source));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
-        assertFalse(getNodeValuesByTagName(document, tagName).contains(value));
-    }
 
-    public void verifyDeleteOfficeTypeButtonStatus(String deleteButton) {
-        assertFalse(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(deleteButton)).isEnabled());
+            assertFalse(getNodeValuesByTagName(document, tagName).contains(officeTypeValue));
+
+            Boolean flag = false;
+            List<WebElement> officeTypes = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("basic_info_office_type_xpath"));
+
+            for (int j = 0; j < officeTypes.size(); j++) {
+                if (officeTypeValue.equals(officeTypes.get(j).getText())) {
+                    flag = true;
+                    break;
+                }
+                assertFalse(flag);
+            }
+        }
+
+     public void verifyDeleteOfficeTypeButtonStatus(String delete_button) {
+        assertFalse(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(delete_button)).isEnabled());
     }
 
     public void clickonDeleteOfficeTypeRowButton(String rowIdentifier) {
@@ -215,7 +243,7 @@ public class EditOfficePage extends AbstractPage {
     }
 
 
-    @Override
+     @Override
     public String getPageUrl() {
         return null;
     }

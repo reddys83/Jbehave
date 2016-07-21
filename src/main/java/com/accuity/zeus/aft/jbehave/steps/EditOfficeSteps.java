@@ -68,16 +68,17 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().selectOfficeType(officeTypeValue,rowIdentifier);
     }
 
-    @Then("the user should see officeType value as <officeTypeValue> for fid <officeFid> in $source document")
-    public void verifyEditOfficesOfficeTypeValueFromZeus(@Named("officeTypeValue") String officeTypeValue,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficesOfficeTypeValueFromZeus(officeTypeValue, "type", officeFid, source, "get office basic info");
+    @Then("the user should see officeType value as <officeTypeValue> for fid <officeFid> in $source document and in UI")
+    public void verifyEditOfficesOfficeTypeValueFromZeusAndInUI(@Named("officeTypeValue") String officeTypeValue,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficesOfficeTypeValueFromZeusAndInUI(officeTypeValue, "type", officeFid, source, "get office basic info");
     }
 
-    @Then("the user should not see the deleted office type value $value in the $source document for fid <officeFid>")
-    public void verifyOfficeTypeNotPresentInZeus(@Named("value") String value,@Named("source") String source,@Named("officeFid") String officeFid)
+    @Then("the user should not see the deleted office type value $officeTypeValue in the $source document and in UI for fid <officeFid>")
+    public void verifyOfficeTypeNotPresentInZeusAndInUI(@Named("officeTypeValue") String officeTypeValue,@Named("source") String source,@Named("officeFid") String officeFid)
     {
-        getEditOfficePage().verifyOfficeTypeNotPresentInZeus(source,officeFid,"type",value);
+        getEditOfficePage().verifyOfficeTypeNotPresentInZeusAndInUI(source,officeFid,"type",officeTypeValue);
     }
+
 
     @Then("the user should see the $delete_button in disabled state in office types section")
     public void verifyDeleteOfficeTypeButtonStatus(@Named("delete_button") String delete_button)
@@ -131,6 +132,8 @@ public class EditOfficeSteps extends AbstractSteps{
     {
         getEditOfficePage().enterNullValueForAllOfficeTypeRows();
     }
+
+
 
 }
 
