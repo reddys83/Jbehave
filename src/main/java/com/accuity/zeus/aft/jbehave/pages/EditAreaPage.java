@@ -752,6 +752,7 @@ public class EditAreaPage extends AbstractPage {
 				}
 			}
 		} catch (Exception e) {
+		  e.printStackTrace();	
 		}
 		Thread.sleep(4000);// Time required for area parent dropdowns to ReLoad
 	}
@@ -770,7 +771,7 @@ public class EditAreaPage extends AbstractPage {
 				}
 			}
 		} catch (Exception e) {
-
+		  e.printStackTrace();
 		}
 	}
 
