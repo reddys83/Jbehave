@@ -80,13 +80,14 @@ Examples:
 |afghani||
 
 Scenario: Verify confirm changes STORY:920(failing because of invalid data in database)
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user get the document with get Id for currency with the name as Afghani-test from the database
+And the user get the document with get Id for currency with the name as Asian Currency Unit from the database
 
 And the user enters the currency abbr value as <abbr> in the currency page
 And the user enters the currency unit value as <unit> in the currency page
@@ -99,7 +100,7 @@ And the user reverts the changes to the document
 
 Examples:
 |currency|abbr|unit|quantity|
-|Afghani-test|AFN|Puls-Test|100|
+|Asian Currency Unit|AFN|Puls-Test|100|
 
 Scenario: verify save confirmation modal
 Given a user is on the search page
@@ -115,7 +116,7 @@ Then the user should return to edit currency page mode
 
 Examples:
 |currency|
-|Afghani-test|
+|Asian Currency Unit|
 
 Scenario: Verify user can edit the currency use for status active. (currency use should be editable)
 Given a user is on the search page
@@ -160,22 +161,6 @@ Then user should see the list of countries in currency edit mode from trusted do
 Examples:
 |currency|
 |Namibia Dollar|
-
-Scenario: verify save confirmation modal
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the currency tab in the data area
-And the user clicks on the choose a currency option in the currency page
-And the user enters the currency <currency> in the typeahead box in the currency page
-And the user clicks on the update link
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-When the user clicks on the return button
-Then the user should return to edit currency page mode
-
-Examples:
-|currency|
-|Afghani-test|
 
 Scenario:
 1. Veify whether confirmation modal appears when editing currency
@@ -358,7 +343,7 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user get the document with get Id for currency with the name as Afghani-test from the database
+And the user get the document with get Id for currency with the name as Asian Currency Unit from the database
 
 And the user clicks on the add country type-ahead option
 When the user enters the country <addCurrencyCountry> in the add country type-ahead box
@@ -372,9 +357,9 @@ And the user reverts the changes to the document
 
 Examples:
 |currency|addCurrencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
-|Afghani-test|Algeria|||1988|||1988|
-|Afghani-test|Algeria||Jan|1988||Jan|1988|
-|Afghani-test|Algeria|01|Jan|1988|01|Jan|1988|
+|Asian Currency Unit|Algeria|||1988|||1988|
+|Asian Currency Unit|Algeria||Jan|1988||Jan|1988|
+|Asian Currency Unit|Algeria|01|Jan|1988|01|Jan|1988|
 
 Scenario: ZEUS-838 - User will see confirmation message after saving currency edits
 Save updates tp existing currency use STORY:920(failing because of invalid data in database)
@@ -387,8 +372,7 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user get the document with get Id for currency with the name as Afghani-test from the database
-
+And the user get the document with get Id for currency with the name as Asian Currency Unit from the database
 When the user enters the currency start day as <currencyStartDay> in the currency page
 And the user enters the currency start month as <currencyStartMonth> in the currency page
 And the user enters the currency start year as <currencyStartYear> in the currency page
@@ -401,29 +385,28 @@ And the user reverts the changes to the document
 
 Examples:
 |currency|addCurrencyountry|currencyStartDay|currencyStartMonth|currencyStartYear|currencyEndDay|currencyEndMonth|currencyEndYear|
-|Afghani-test|Albania|||1988|||1988|
-|Afghani-test|Albania||Jan|1988||Jan|1988|
-|Afghani-test|Albania|01|Jan|1988|01|Jan|1988|
+|Asian Currency Unit|Albania|||1988|||1988|
+|Asian Currency Unit|Albania||Jan|1988||Jan|1988|
+|Asian Currency Unit|Albania|01|Jan|1988|01|Jan|1988|
 
 Scenario: ZEUS-838 - User will see confirmation message after saving currency edits
  ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Active status ) STORY:920(failing because of invalid data in database)
 1. @accuracy = year
 2. @accuracy = month
 3. @accuracy = day
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user get the document with get Id for currency with the name as Afghani-test from the database
+And the user get the document with get Id for currency with the name as Asian Currency Unit from the database
 
 When the user enters the country <currencyCountry> in the currency usage
 When the user enters the currency start day as <currencyStartDay> in the currency page
 And the user enters the currency start month as <currencyStartMonth> in the currency page
 And the user enters the currency start year as <currencyStartYear> in the currency page
-And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
+And the user enters the first_existing_row_currency_primary_radio_button value as <primary> in the currency page
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see confirmation message
@@ -433,9 +416,9 @@ And the user reverts the changes to the document
 
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|primary|
-|Afghani-test|Angola|||1987|false|
-|Afghani-test|Angola||Jun|1987|false|
-|Afghani-test|Angola|21|Jun|1987|false|
+|Asian Currency Unit|Angola|||1987|false|
+|Asian Currency Unit|Angola||Jun|1987|false|
+|Asian Currency Unit|Angola|21|Jun|1987|false|
 
 Scenario: ZEUS-838 - User will see confirmation message after saving currency edits
 ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Inactive status ) (AFT implementation issue)
@@ -448,8 +431,7 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user get the document with get Id for currency with the name as Deutsche Mark from the database
-
+And the user get the document with get Id for currency with the name as Gold Francs from the database
 When the user enters the country <currencyCountry> in the currency usage
 When the user enters the currency start day as <currencyStartDay> in the currency page
 And the user enters the currency start month as <currencyStartMonth> in the currency page
@@ -684,7 +666,7 @@ Scenario: Verify user should get the multiple errors "Duplicate primary currency
 "Currency may not be used in a country more than once in the same date range for start date" and
 "Currency may not be used in a country more than once in the same date range for end date"
 when updating a currency use for a country which is having a primary currency already and the date ranges are overlapping with previous one.
-
+Meta:@red65
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
@@ -711,4 +693,4 @@ Then the user should see the error message at top of page the highlighted fields
 
 Examples:
 |currency|addCurrencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|primary|
-|Afghani-test|Angola|01|Jan|1980|true|
+|Asian Currency Unit|Angola|01|Jan|1980|true|

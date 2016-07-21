@@ -48,7 +48,6 @@ When the user clicks on the choose a city option
 Then the user should see the below cities for the selected area:
 |CITIES|
 |Club Morgan Ridge|
-|Hastings|
 |Oistins|
 |Rendezvous|
 |Rockley|

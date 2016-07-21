@@ -226,12 +226,7 @@ public class DataPage extends AbstractPage {
     }
 
     public CurrencyPage clickOnChooseACurrencyOption() {
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        getDriver().findElement(choose_currency_option_xpath).click();
+        attemptClick(choose_currency_option_xpath);
         return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 

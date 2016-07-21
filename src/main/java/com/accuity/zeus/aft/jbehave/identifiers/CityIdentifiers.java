@@ -84,7 +84,7 @@ public class CityIdentifiers {
 
 		// adding values for city names
 		hmap.put("city_names_full_name_xpath", By.xpath("//*[@id='additionalNames']//td[text() = 'Full Name']"));
-		hmap.put("city_names_full_name_value_xpath", By.xpath("//*[@id='additionalNames']//input[@name='fixedNameValue']"));
+		hmap.put("city_names_full_name_value_xpath", By.xpath("//*[@id='additionalNames']//input[@name='fixedName']"));
 		hmap.put("city_add_new_name_button_xpath", By.xpath("//*[@id='cityBasicInfo']//*[@id='add-names']"));
         hmap.put("city_name_type_input_xpath", By.xpath(".//*[@id='additionalNames']//*[@data-internal_id='nameType']"));
 		hmap.put("city_names_full_name_value_view_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[td='Full Name']/td[2]"));
