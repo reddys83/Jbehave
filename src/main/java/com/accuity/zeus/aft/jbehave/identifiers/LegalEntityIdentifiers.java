@@ -180,6 +180,10 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_creditRating_value_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingValueError']"));
         hmap.put("legalEntity_basicInfo_appliedDate_errorMessage_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingAppliedDateError']"));
         hmap.put("legalEntity_basicInfo_confirmedDate_errorMessage_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingConfirmedDateError']"));
+        hmap.put("legalEntity_first_existing_row_boardmeeting_delete_button",By.xpath("//*[@id='additionalBoardMeetings']/tr[1]//button"));
+
+
+
     }
 
     public static By getObjectIdentifier(String key) {

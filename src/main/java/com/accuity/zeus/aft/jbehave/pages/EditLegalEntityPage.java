@@ -1788,6 +1788,46 @@ public class EditLegalEntityPage extends AbstractPage {
         }
     }
 
+    public void clickonDeleteBoardMeetingsRowButton(String rowIdentifier) {
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+    }
+
+       public void verifyEditLegalEntityBoardMeetingsValuesNotExistInZeus(ExamplesTable ex, String fid, String source)
+    {
+        assertFalse(checkEditLegalEntityBoardMeetingsValuesFromZeus(ex.getRow(0).get("type"),ex.getRow(0).get("value"),fid,source));
+    }
+
+    public boolean checkEditLegalEntityBoardMeetingsValuesFromZeus(String type,String value,String fid,String source)
+    {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Boolean flag=false;
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity board meetings", nvPairs);
+        String boardMeetings=type+value;
+        if (document != null) {
+
+            List typeList = getNodeValuesByTagName(document, "type");
+            List valueList =getNodeValuesByTagName(document, "value");
+
+            for(int i=0;i<typeList.size();i++)
+            {
+                String boardMeetingsfromZeus=typeList.get(i).toString()+valueList.get(i).toString();
+                if(boardMeetingsfromZeus.equals(boardMeetings)) {
+                    flag=true;
+                    break;
+                }
+            }
+
+        }
+         return flag;
+
+    }
     @Override
     public String getPageUrl() {
         return null;
