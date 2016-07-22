@@ -1092,7 +1092,7 @@ public class EditCitySteps extends AbstractSteps {
 
 	@Then("the user verify the Area dropdown is populating with 'Choose an Area'as a option")
 	public void userverifyareadropdown() {
-		getEditCityPage().userVerifyAreadropdown();
+		getEditCityPage().userVerifyAreaDropdown();
 	}
 
 	@Then("the user verify the SubArea dropdown is populating with 'Choose a SubArea' as a option")
@@ -1135,36 +1135,36 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyNoAreaOptionOnlyExistInSubArea();
 	}
 
-	@Then("user selects Subarea <Subarea1> in the subarea multiselect dropdown")
-	public void userSelectsSubarea1(@Named("Subarea1") String Subarea) throws InterruptedException {
-		getEditCityPage().userSelectsSubarea(Subarea);
+	@Then("user selects subarea <subarea1> in the subarea multiselect dropdown")
+	public void userSelectsSubarea1(@Named("subarea1") String subarea) throws InterruptedException {
+		getEditCityPage().userSelectsSubarea(subarea);
 	}
 	
-	@Then("user selects Subarea <Subarea2> in the subarea multiselect dropdown")
-	public void userSelectsSubarea2(@Named("Subarea2") String Subarea) throws InterruptedException {
-		getEditCityPage().userSelectsSubarea(Subarea);
+	@Then("user selects subarea <subarea2> in the subarea multiselect dropdown")
+	public void userSelectsSubarea2(@Named("subarea2") String subarea) throws InterruptedException {
+		getEditCityPage().userSelectsSubarea(subarea);
 	}
 
-	@Then("the user checks whether this subarea1 <Subarea> are not reselectable")
-	public void verifySubAreaIsNotReselectable(@Named("Subarea1") String Subarea) {
-		getEditCityPage().verifySubAreaIsNotReselectable(Subarea);
+	@Then("the user checks whether this subarea1 <subarea1> are not reselectable")
+	public void verifySubAreaIsNotReselectable(@Named("subarea1") String subarea) {
+		getEditCityPage().verifySubAreaIsNotReselectable(subarea);
 	}	
 
-	@Then("verify $source document whether the city is updated with newly added SubArea <Subarea1>")
+	@Then("verify $source document whether the city is updated with newly added SubArea <subarea1>")
 	public void verifyZeusDBIsUpdatedWithNewValue(@Named("source") String source, @Named("city") String city,
-			@Named("country2") String country2, @Named("area2") String area2, @Named("Subarea1") String subarea) {		 
+			@Named("country2") String country2, @Named("area2") String area2, @Named("subarea1") String subarea) {		 
 		getEditCityPage().verifySubAreaValue(country2, area2, city, "subArea", source, subarea);
 	}
 
-	@Then("verify UI whether city is updated with newly added SubArea <Subarea1>")
-	public void verifyCityIsUpdatedWithSubAreaInUI(@Named("Subarea1") String subarea) {	
+	@Then("verify UI whether city is updated with newly added SubArea <subarea1>")
+	public void verifyCityIsUpdatedWithSubAreaInUI(@Named("subarea1") String subarea) {	
 		getEditCityPage().verifySubAreaIsUpdatedInUI(subarea);
 	}
 
 	@Then("the user checks whether the header dropdown updates with <country2>, <area2>, <city>")
-	public void checksHeaderdropdownValues(@Named("country2") String country, @Named("area2") String area,
+	public void checksHeaderDropdownValues(@Named("country2") String country, @Named("area2") String area,
 			@Named("city") String city) throws InterruptedException {
-		getEditCityPage().checksHeaderdropdownValues(country, area, city);
+		getEditCityPage().checksHeaderDropdownValues(country, area, city);
 	}
 
 	@Then("the user checks whether the Address bar url is updated  with <country2>, <area2>")
@@ -1209,10 +1209,10 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verfyAreaIsNullInUI(city);
 	}
 	
-	@Then("verify $source document whether <city> is mapped to <Subarea1> and <Subarea2>")
+	@Then("verify $source document whether <city> is mapped to <subarea1> and <subarea2>")
 	public void verifySubareasInZeusDocument(@Named("source") String source, @Named("city") String city,
 			@Named("country2") String country2, @Named("area") String area, @Named("area2") String area2,
-			@Named("Subarea1") String subArea1, @Named("Subarea2") String subArea2) throws InterruptedException {	
+			@Named("subarea1") String subArea1, @Named("subarea2") String subArea2) throws InterruptedException {	
 		
 		List<String> citySubAreaList = new ArrayList<String>();
 		citySubAreaList.add(subArea2);

@@ -2034,7 +2034,7 @@ public class EditCityPage extends AbstractPage {
 		}
 	}
 
-	public void userVerifyAreadropdown() {
+	public void userVerifyAreaDropdown() {
 		assertEquals("Choose an Area", getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("city_area_dropdown_xpath")).get(0).getText());
 
@@ -2100,16 +2100,16 @@ public class EditCityPage extends AbstractPage {
 				1);
 	}
 
-	public void userSelectsSubarea(String Subarea1) throws InterruptedException {
+	public void userSelectsSubarea(String subarea) throws InterruptedException {
 		attemptClick(CityIdentifiers.getObjectIdentifier("area_subareas_typeahead_xpath"));
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("area_subareas_typeahead_xpath"))
-				.sendKeys(Subarea1);
+				.sendKeys(subarea);
 		getDriver().findElement(CityIdentifiers.getObjectIdentifier("area_subareas_typeahead_xpath"))
 				.sendKeys(Keys.RETURN);
 
 	}
 
-	public void verifySubAreaIsNotReselectable(String Subarea) {
+	public void verifySubAreaIsNotReselectable(String subarea) {
 
 		List<WebElement> subAreaChoices = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("subareas_choices_xpath"));
@@ -2117,12 +2117,12 @@ public class EditCityPage extends AbstractPage {
 		for (int j = 0; j < subAreaChoices.size(); j++) {
 			selectedOptions.add((subAreaChoices.get(j)).getText());
 		}
-		assertTrue(selectedOptions.contains(Subarea));
+		assertTrue(selectedOptions.contains(subarea));
 	}
 
 	public void verifySubAreaValue(String country, String area, String city, String tagName, String source,
-			String areaToBeverified) {
-		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), areaToBeverified);
+			String areaToBeVerified) {
+		assertEquals(getCityInfoFromDB(country, area, city, tagName, source), areaToBeVerified);
 	}
 
 	public void verifySubAreaIsUpdatedInUI(String subArea) {
@@ -2136,7 +2136,7 @@ public class EditCityPage extends AbstractPage {
 		assertTrue(selectedOptions.contains(subArea));
 	}
 
-	public void checksHeaderdropdownValues(String country, String area, String city) throws InterruptedException {
+	public void checksHeaderDropdownValues(String country, String area, String city) throws InterruptedException {
 		Thread.sleep(10000);
 		assertEquals(country,
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("country_current_value_xpath")).getText());
