@@ -380,7 +380,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierType(errMsg);
 	}
 	
-	@Then("the user verifier that the area identifiers parameters are entered in the basic info area page")
+	@Then("the user verifies that the area identifiers parameters are entered in the basic info area page")
 	public void verifyAreaIdentifierParametersInUI( @Named("identifierType") String identifierType,
 			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus,
 			@Named("identifierType2") String identifierType2, @Named("identifierValue2") String identifierValue2,

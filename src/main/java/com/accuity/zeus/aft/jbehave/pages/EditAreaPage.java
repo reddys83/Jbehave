@@ -829,9 +829,9 @@ public class EditAreaPage extends AbstractPage {
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_status_input_xpath"));
 		
 		for(int i=0; i<identifierTypeDropDowns.size(); i++) {
-			assertEquals(identifierTypes[i], identifierTypeDropDowns.get(i).getText());
-			assertEquals(identifierValues[i], identifierValueDropDowns.get(i).getText());
-			assertEquals(identifierStatusValues[i], identifierStatusDropDowns.get(i).getText());
+			assertEquals(identifierTypes[i], new Select(identifierTypeDropDowns.get(i)).getAllSelectedOptions().get(0).getText());
+			assertEquals(identifierValues[i], identifierValueDropDowns.get(i).getAttribute("value"));
+			assertEquals(identifierStatusValues[i], new Select(identifierStatusDropDowns.get(i)).getAllSelectedOptions().get(0).getText());
 		}
 		
 	}
