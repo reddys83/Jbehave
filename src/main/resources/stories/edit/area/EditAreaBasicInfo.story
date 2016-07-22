@@ -798,7 +798,7 @@ Examples:
 
 Scenario: User views the area basic page,selects the update button with subarea,changes the country2 
 1- User verifies whether Area parent showing default value as 'Choose an Area' 
-2- User verifies the Area parent is in Alphabetical order and list shows all areas related to the country2
+2- User verifies the Area parent is in Alphabetical order and list shows all areas related to country2
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -820,7 +820,7 @@ Examples:
 |USA|Alabama|Bibb|India|
 
 Scenario: User is updating a Areas's Basic Info and has set values for 
-each of 'Country' ,'Area Parent','Sub Area',change the country2,'Area Parent'
+each of 'Country','Area Parent','Sub Area',change the country2,'Area Parent'
 1- User verifies the header dropdowns are updated with country2 and areaparent
 2- User verifies Address bar url is updated with country2 and areaparent
 3- User verifies Zeus DB whether the subarea is mapped under newly added country2 and areaparent
@@ -892,8 +892,8 @@ Examples:
 |USA|Alabama|Choose a Subarea|India|
 
 Scenario: User is updating a Areas's Basic Info and has set values for 
-each of 'Country' ,'Area Parent','Sub Area',change the 'country' with 'Area Parent' as 'Choose an Area'
-1 - User verifies Area Parent dropdown is populated with Choose and area 
+each of 'Country','Area Parent','Sub Area',change the 'country' with 'Area Parent' as 'Choose an Area'
+1 - User verifies Area Parent dropdown is populated with 'Choose an area'
 2 - User verifies the 'Area Parent' field is showing 'Required' validation message
 
 Given a user is on the search page
