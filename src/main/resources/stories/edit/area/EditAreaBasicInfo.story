@@ -771,7 +771,7 @@ And the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
 |Summary|
-|Basic Info|
+|Basic Info / Identifiers|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 When the user clicks on the area update link
