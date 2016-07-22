@@ -717,7 +717,11 @@ Examples:
 |country|area|addInfoText|
 |USA|Georgia||
 
-Scenario: User can edit area identifiers - Verify area Identifier types are same as from lookup THIRD_PARTY_IDENTIFIER_GEO
+
+Scenario: User can edit area identifiers -
+1- Verify area Identifier types are same as from lookup THIRD_PARTY_IDENTIFIER_GEO
+2- Verify area Identifier status are from lookup STATUS
+3- Verify existing identifier values are from trusted 
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -728,15 +732,20 @@ And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
+Then the user should see the identifier values same as in trusted document
 When the user clicks on the add new identifier button in the basic info area page
 Then the user should see the area identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO
 Then the user should see the area identifier status from lookup STATUS
 
 Examples:
-|country|area|
-|Algeria|Constantine|
+|country|area| 
+|Algeria|Constantine| 
 
-Scenario:User can edit area identifiers- Verify if User can add New Area identifiers-Verify that all fields- "Type","Value" and "Status" are updated successfully
+Scenario: User can edit area identifiers- Verify if User can add New Area identifiers-Verify that all fields- "Type","Value" and "Status" are updated successfully
+1 - Verify two identifer rows are added
+2 - Verify previously selected Identifer Type is not listed in identifer type dropdown of next row
+3 - Verify Zeus Area page is updated with entered identifier values
+4 - Verify Zeus DB is updated with entered identifier values
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -754,15 +763,19 @@ When the user enters identifier type as <identifierType> in the basic info area 
 When the user enters identifier value as <identifierValue> in the basic info area page
 When the user enters identifier status as <identifierStatus> in the basic info area page
 When the user clicks on the add new identifier button in the basic info area page
+Then the user verifies that previously selected <identifierType> is not present in the new identifier row
 When the user enters identifier type as <identifierType2> in the basic info area page
 When the user enters identifier value as <identifierValue2> in the basic info area page
 When the user enters identifier status as <identifierStatus2> in the basic info area page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 When the user clicks on the area update link
-Then the user verifier that the area identifiers parameters are entered in the basic info area page
+Then the user verifies that the area identifiers parameters are entered in the basic info area page
 Then the user should see the area identifier values as in zeus document
 Then the user reverts the changes to the document
 
@@ -813,6 +826,7 @@ And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
 When the user clicks on the add new identifier button in the basic info area page
 When the user enters identifier type as <identifierType> in the basic info area page
 When the user enters an incorrect identifier value as <identifierValueIncorrect> in the basic info area page
@@ -821,13 +835,15 @@ When the user enters identifier status as <identifierStatus> in the basic info a
 When the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
+Then the user reverts the changes to the document
 
 
 Examples:
 |country|area|identifierType|identifierValueIncorrect|identifierStatus|
 |Algeria|Constantine|Numeric ISO Code|aksjuilrw1aksjuilrw1aksjuilrw1aksjuilrw1aksju%)~12y1|Active|
 
-Scenario: User can edit area identifiers - Verify that an error message 'Required' is displayed when user left identifier Type blank and enters value in identifier 'Value' and 'Status'
+Scenario: User can edit area identifiers 
+1 - Verify that an error message 'Required' is displayed when user left identifier Type blank and enters value in identifier 'Value' and 'Status'
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -844,13 +860,14 @@ When the user enters identifier type as <identifierType> in the basic info area 
 When the user enters identifier value as <identifierValue> in the basic info area page
 When the user enters identifier status as <identifierStatus> in the basic info area page
 When the user clicks on the save button
-Then the user should see the error message <errMsg> for identifier type field in the area basic info page
+Then the user should see the error message Required for identifier type field in the area basic info page
 
 Examples:
-|country|area|identifierType|identifierValue|identifierStatus|errMsg|
-|Algeria|Constantine||H4Testing|Inactive|Required|
+|country|area|identifierType|identifierValue|identifierStatus|
+|Algeria|Constantine||H4Testing|Inactive|
 
-Scenario: User can edit area identifiers - Verify that an error message 'Required' is displayed when user leaves identifier Value as blank and enters value in identifier 'Type' and 'Status'
+Scenario: User can edit area identifiers 
+1 - Verify that an error message 'Required' is displayed when user leaves identifier Value as blank and enters value in identifier 'Type' and 'Status'
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -867,13 +884,14 @@ When the user enters identifier type as <identifierType> in the basic info area 
 When the user enters identifier value as <identifierValue> in the basic info area page
 When the user enters identifier status as <identifierStatus> in the basic info area page
 When the user clicks on the save button
-Then the user should see the error message <errMsg> for identifier value field in the area basic info page
+Then the user should see the error message Enter up to 50 valid characters. for identifier value field in the area basic info page
 
 Examples:
-|country|area|identifierType|identifierValue|identifierStatus|errMsg|
-|Algeria|Constantine|Numeric ISO Code||Active|Enter up to 50 valid characters.|
+|country|area|identifierType|identifierValue|identifierStatus| 
+|Algeria|Constantine|Numeric ISO Code||Active|
 
-Scenario: User can edit area identifiers - Verify that an error message 'Required' is displayed when user left identifier status blank and enters value in identifier 'Type' and 'Value'
+Scenario: User can edit area identifiers
+1 - Verify that an error message 'Required' is displayed when user left identifier status blank and enters value in identifier 'Type' and 'Value'
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -890,13 +908,14 @@ When the user enters identifier type as <identifierType> in the basic info area 
 When the user enters identifier value as <identifierValue> in the basic info area page
 When the user enters identifier status as <identifierStatus> in the basic info area page
 When the user clicks on the save button
-Then the user should see the error message <errMsg> for identifier status field in the area basic info page
+Then the user should see the error message Required for identifier status field in the area basic info page
 
 Examples:
-|country|area|identifierType|identifierValue|identifierStatus|errMsg|
-|Algeria|Constantine|Numeric ISO Code|H4Testing||Required|
+|country|area|identifierType|identifierValue|identifierStatus| 
+|Algeria|Constantine|Numeric ISO Code|H4Testing|| 
 
-Scenario: User can edit area identifiers- Verify if User can delete identifiers( "Type","Value" and "Status") by clicking on 'Yes' , then after saving it should be removed.
+Scenario: User can edit area identifiers
+1 - Verify if User can delete identifiers( "Type","Value" and "Status") by clicking on 'Yes' , then after saving it should be removed.
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -907,6 +926,8 @@ And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area identifier rows
 When the user clicks on the add new identifier button in the basic info area page
 When the user clicks on the delete identifier row button in the basic info area page
 Then the user should see delete row confirmation modal in the area page
@@ -917,12 +938,14 @@ When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should not see the newly added identifier row in the basic info area page
 Then the user verifies that the deleted row for area identifier does not exist in zeus document
+Then the user reverts the changes to the document
 
 Examples:
 |country|area|
 |Algeria|Constantine|
 
-Scenario: User can edit area identifiers- Verify if User can prevent deleting identifiers( "Type","Value" and "Status") by clicking on 'cancel'.
+Scenario: User can edit area identifiers
+1 - Verify if User can prevent deleting identifiers( "Type","Value" and "Status") by clicking on 'No'.
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
