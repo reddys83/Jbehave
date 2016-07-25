@@ -6,14 +6,16 @@ let $legalEntity := cts:search(fn:collection('source-trusted')/legalEntity,
 
 let $offices := (for $x in cts:search(fn:collection('source-trusted')/office,
         cts:and-query((
-            cts:path-range-query("/office/summary/institution/link/@href", "=", $legalEntity/@resource, "collation=http://marklogic.com/collation/")   
-            
-        ))) order by xs:long(fn:tokenize($x/@fid, '-')[last()]) return $x) 
+            cts:path-range-query("/office/summary/institution/link/@href", "=", $legalEntity/@resource, "collation=http://marklogic.com/collation/")
+
+        ))) order by xs:long(fn:tokenize($x/@fid, '-')[last()]) return $x)
 let $offices := for $x in $offices return if($x/summary/status eq "active") then $x else ()
+            cts:path-range-query("/office/summary/institution/link/@href", "=", $legalEntity/@resource, "collation=http://marklogic.com/collation/")
+        ))) order by xs:long(fn:tokenize($x/@fid, '-')[last()]) return $x) [1 to 25]
 
 let $officeResults := (
     let $officeInfo := for $x in $offices[1 to 25]
     return <fid>{$x/@fid/string()}</fid>
     return $officeInfo)
 
-return <offices>{$officeResults}</offices>  
+return <offices>{$officeResults}</offices>

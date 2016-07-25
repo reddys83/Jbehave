@@ -104,7 +104,7 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user navigates to the 4th page on the office search results
 And the user clicks on the offices results card with fid <officeFid>
-Then the user should see the offices and department tabs in the office page
+Then the user should see the offices tab in the office page
 
 Examples:
 |entity|searchBy|fid|officeFid|headOfficeAddress|officeTfpid|
