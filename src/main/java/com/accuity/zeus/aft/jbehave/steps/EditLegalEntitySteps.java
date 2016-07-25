@@ -983,4 +983,9 @@ public class EditLegalEntitySteps extends AbstractSteps{
     {
         getEditLegalEntityPage().verifyEditLegalEntityBoardMeetingsValuesNotExistInZeus(boardMeetings,fid,source);
     }
+
+    @Then("the user should not see the board meeting row in the basic info legal entity page")
+    public void verifyNewlyAddedBoardMeetingRowIsNotDisplayed() throws Exception {
+        getEditLegalEntityPage().verifyNewlyAddedBoardMeetingRowIsNotDisplayed();
+    }
 }

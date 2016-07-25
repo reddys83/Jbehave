@@ -187,7 +187,8 @@ When the user clicks on the confirm button
 Then the user should not see boardmeetings values for fid <fid> in zeus document as:
 |type|value|
 |Month|July|
-Then the user reverts the changes to the document
+And the user should not see the board meeting row in the basic info legal entity page
+And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|

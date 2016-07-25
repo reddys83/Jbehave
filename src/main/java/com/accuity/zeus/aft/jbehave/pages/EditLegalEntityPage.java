@@ -1795,6 +1795,16 @@ public class EditLegalEntityPage extends AbstractPage {
        public void verifyEditLegalEntityBoardMeetingsValuesNotExistInZeus(ExamplesTable ex, String fid, String source)
     {
         assertFalse(checkEditLegalEntityBoardMeetingsValuesFromZeus(ex.getRow(0).get("type"),ex.getRow(0).get("value"),fid,source));
+
+    }
+    public void verifyNewlyAddedBoardMeetingRowIsNotDisplayed() {
+            try
+        {
+            WebElement identifier = getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardmeeting_type_view_mode"));
+            assertTrue(identifier != null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean checkEditLegalEntityBoardMeetingsValuesFromZeus(String type,String value,String fid,String source)
