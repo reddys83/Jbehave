@@ -201,4 +201,26 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().selectAreaStatusValue(status);
 	}
 
+	@When("the user enters <interestRate> value in area page")
+	public void enterAreaInterestRate(@Named("interestRate") String interestRate) {
+		getEditAreaPage().enterAreaInterestRate(interestRate);
+	}
+	
+	@Then("the user should see the entered <interestRate> in area page")
+	public void verifyAreaInterestRate(@Named("interestRate") String interestRate) {
+		getEditAreaPage().verifyAreaInterestRate(interestRate);
+	}
+	
+	@When("the user enters <interestRateNew> value in area page")
+	public void enterAreaInterestRateNew(@Named("interestRateNew") String interestRateNew) {
+		getEditAreaPage().enterAreaInterestRate(interestRateNew);
+	}
+	
+	
+	@Then("the user should see the entered <interestRate> in $source document")
+	public void enterAreaInterestRateNew(@Named("country") String country,@Named("area") String area,@Named("interestRate") String interestRate,@Named("source") String source) {
+		getEditAreaPage().verifyAreaInterestRateZeus(country,area,"InterestRate",source,interestRate);
+	}
+	
+	
 }

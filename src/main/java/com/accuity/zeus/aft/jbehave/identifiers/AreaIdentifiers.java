@@ -30,6 +30,8 @@ public class AreaIdentifiers {
 		hmap.put("area_year_end_date_xpath", By.xpath("//*[@id='areaBasicInfo']//input[@name='endDate-year']"));
 		hmap.put("area_end_date_info_text_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='End Date']/td"));
 		hmap.put("area_enddate_errorMessage_xpath",By.xpath("//*[@data-error_id='endDateError']"));
+		hmap.put("area_intrest_rate_xpath_after_save",By.xpath(""));
+		hmap.put("area_intrest_rate_text_xpath",By.xpath(""));
 	}
 
 	public static By getObjectIdentifier(String key) {

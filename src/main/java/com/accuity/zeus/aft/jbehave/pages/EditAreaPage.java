@@ -454,6 +454,41 @@ public class EditAreaPage extends AbstractPage {
 	}
 
 
+	/**
+	 * This method is used to enter interest rate value  in the Area
+	 * Interest rate text box
+	 * 
+	 * @param interestRate
+	 *            
+	 */
+	public void enterAreaInterestRate(String interestRate) {
+		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_text_xpath"), interestRate);
+	}
+    
+	/**
+	 * This method is used to verify the interest rate value  in the Area
+	 * Web page
+	 * 
+	 * @param interestRate
+	 *            
+	 */
+	
+	public void verifyAreaInterestRate(String interestRate) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals(interestRate, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_xpath_after_save")).getText());
+	}
+	
+	public void verifyAreaInterestRateZeus(String country, String area, String tagName, String source,
+			String interestRate) {
+		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source), interestRate);
+
+	}
+
 	@Override
 	public String getPageUrl() {
 		return null;
