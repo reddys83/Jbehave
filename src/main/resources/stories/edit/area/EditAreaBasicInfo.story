@@ -717,7 +717,6 @@ Examples:
 |country|area|addInfoText|
 |USA|Georgia||
 
-
 Scenario: User can edit area identifiers -
 1- Verify area Identifier types are same as from lookup THIRD_PARTY_IDENTIFIER_GEO
 2- Verify area Identifier status are from lookup STATUS
@@ -780,9 +779,9 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|identifierType|identifierValue|identifierStatus|identifierType2|identifierValue2|identifierStatus2|
-|Algeria|Constantine|Numeric ISO Code|H4Testing|Active|FIPS Place Code|H4Testing|Pending|
-|Algeria|Constantine|FIPS Place Code|H4Testing|Pending|Numeric ISO Code|H4Testing|Inactive|
-|Algeria|Constantine|FIPS Place Code|H4Testing|Pending|Numeric ISO Code|H4Testing|Active|
+|Algeria|Constantine|Numeric ISO Code|QATesting|Active|FIPS Place Code|QATesting|Pending|
+|Algeria|Constantine|FIPS Place Code|QATesting|Pending|Numeric ISO Code|QATesting|Inactive|
+|Algeria|Constantine|FIPS Place Code|QATesting|Active|Numeric ISO Code|QATesting|Active|
 
 
 Scenario: Verifying that area identifier row in not added when blank values are entered for 'Type', 'Value' and 'Status'
