@@ -196,7 +196,7 @@ And the user should see the below summary changes in confirmation modal
 |Summary|
 |Basic Info / Names|
 When the user clicks on the confirm button
-Then the user should see officename values as <type><value> for fid <officeFid> in zeus document
+Then the user should see officename values as <type><value> for fid <officeFid> in zeus document and in UI
 And the user reverts the changes to the document
 
 Examples:

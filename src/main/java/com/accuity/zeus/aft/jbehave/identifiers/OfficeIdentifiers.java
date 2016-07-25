@@ -23,6 +23,10 @@ public class OfficeIdentifiers {
         hmap.put("office_name_type_first_row_existing_office_name_value",By.xpath("//*[@id='additionalNames']//input[@name='fixedName']"));
         hmap.put("office_name_second_row_existing_office_type_dropdown",By.xpath(".//*[@id='additionalNames']//select[@name='nameType']"));
         hmap.put("office_name_second_row_existing_office_value",By.xpath(".//*[@id='additionalNames']//input[@data-internal_id='nameValue']"));
+        hmap.put("office_name_second_row_type_view",By.xpath(".//*[@id='officeBasicInfo']/ul/li[1]/table[1]/tbody/tr[2]/td[1]"));
+        hmap.put("office_name_second_row_value_view",By.xpath(".//*[@id='officeBasicInfo']/ul/li[1]/table[1]/tbody/tr[2]/td[2]"));
+        hmap.put("office_basic_info_names_type_xpath",By.xpath("//*[@id='content']//li[1]/table[1]/tbody/tr/td[1]"));
+        hmap.put("office_basic_info_names_value_xpath",By.xpath("//*[@id='content']//li[1]/table[1]/tbody/tr/td[2]"));
         hmap.put("office_name_addRow_id",By.id("add-names"));
         hmap.put("office_Edit_officenames_Table",By.xpath(".//*[@data-edit_id='names']//tr"));
         hmap.put("office_name_type_first_row_new_office_name_type_dropdown",By.xpath(".//*[@id='additionalNames']//tr[@class='new'][1]//select[@name='nameType']"));
@@ -33,6 +37,9 @@ public class OfficeIdentifiers {
         hmap.put("office_name_delete_button_for_legalTitle_edit_xpath",By.xpath(".//*[@id='additionalNames']//tr[td='Legal Title']//button[@class='delete-row']"));
         hmap.put("office_name_basicInfo_names_value_edit_xpath",By.xpath(".//*[@id='additionalNames']//tr[@class='new']//input"));
         hmap.put("office_name_sort_name_xpath",By.xpath(".//*[@id='officeBasicInfo']//input[@name='officeSortName']"));
+        hmap.put("office_name_sort_name_view",By.xpath(".//*[@id='officeBasicInfo']/ul/li[1]/dl/dd"));
+        hmap.put("office_name_former_name_value_xpath_view", By.xpath(".//*[@id='officeBasicInfo']/ul/li[1]/table[1]//td[text()='Former Name']/following-sibling::td"));
+        hmap.put("office_name_office_name_value_xpath_view", By.xpath(".//*[@id='officeBasicInfo']/ul/li[1]/table[1]//td[text()='Office Name']/following-sibling::td"));
     }
 
     public static By getObjectIdentifier(String key) {
