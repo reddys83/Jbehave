@@ -806,9 +806,14 @@ public class EditAreaPage extends AbstractPage {
 	}
 	
 	public void verifyNewlyAddedAreaIdentifierRowExists() {
-		WebElement identifier = getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_view_mode"));
-		assertTrue(identifier != null);
+		try
+		{
+			WebElement identifier = getDriver()
+					.findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_view_mode"));
+			assertTrue(identifier != null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	

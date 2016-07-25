@@ -927,26 +927,16 @@ When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
 When the user deletes the existing area identifier rows
-When the user clicks on the add new identifier button in the basic info area page
-When the user enters identifier type as <identifierType> in the basic info area page
-When the user enters identifier value as <identifierValue> in the basic info area page
-When the user enters identifier status as <identifierStatus> in the basic info area page
-When the user clicks on the save button
-When the user clicks on the confirm button
-When the user clicks on the area update link
-When the user clicks on the delete identifier row button in the basic info area page
-Then the user should see delete row confirmation modal in the area page
-When the user clicks on the Yes button to delete the row in basic info area page
 When the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
-Then the user should not see the newly added identifier row in the basic info area page
+Then the user should not see the identifier row in the basic info area page
 Then the user verifies that the deleted row for area identifier does not exist in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|identifierType|identifierValue|identifierStatus|
-|Algeria|Constantine|FIPS Place Code|H4Testing|Inactive|
+|country|area|
+|Algeria|Constantine|
 
 Scenario: User can edit area identifiers
 1 - Verify if User can prevent deleting identifiers( "Type","Value" and "Status") by clicking on 'No'.

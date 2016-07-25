@@ -338,6 +338,7 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@Then("the user should not see the newly added identifier row in the basic info area page")
+	@Alias("the user should not see the identifier row in the basic info area page")
 	public void verifyNewlyAddedAreaIdentifierRowIsNotDisplayed() throws Exception {
 		getEditAreaPage().verifyNewlyAddedAreaIdentifierRowIsNotDisplayed();
 	}
