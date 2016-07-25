@@ -826,6 +826,7 @@ And the user enters the area <area> in the type-ahead box
 When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area identifier rows
 When the user clicks on the add new identifier button in the basic info area page
 When the user enters identifier type as <identifierType> in the basic info area page
 When the user enters an incorrect identifier value as <identifierValueIncorrect> in the basic info area page
