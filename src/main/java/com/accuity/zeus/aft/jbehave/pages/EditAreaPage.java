@@ -685,6 +685,24 @@ public class EditAreaPage extends AbstractPage {
 		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_name_value_input_xpath"), newNameValue);
 	}
 	
+	public void verifyNameTypeInEditMode(String nameType, int index) {
+		try {
+			if (nameType != null) {
+				List<WebElement> identifierDropDowns = getDriver()
+						.findElements(AreaIdentifiers.getObjectIdentifier("area_name_type_input_xpath"));
+				Select dropdown = new Select(identifierDropDowns.get(index));
+				assertEquals(nameType, dropdown.getFirstSelectedOption().getText());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyNameValueInEditMode(String newNameValue) {
+		WebElement nameValueElement =  getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_name_value_input_xpath"));
+		assertEquals(newNameValue, nameValueElement.getAttribute("value"));
+	}
+	
 	public void verifyNameType(String nameType, int index) {
 		try {
 			// appending the name type to the xpath to retrieve corresponding row in view mode
@@ -711,6 +729,16 @@ public class EditAreaPage extends AbstractPage {
 			getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']"));
 		} catch(NoSuchElementException ex) {
 			assertTrue(nameType + "not present", true);
+		}
+	}
+	
+	public void verifyNameTypeNotPresent(String nameType, int index) {
+		try {
+			// appending the name type to the xpath to retrieve corresponding row in view mode
+			List<WebElement> newNameTypeElements = getDriver().findElements(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']"));
+			assertTrue(newNameTypeElements.size() <= index);
+		} catch(Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 	
