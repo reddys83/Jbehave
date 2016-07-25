@@ -558,7 +558,7 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyAreaNameFromTrustedDB(String country, String area, String nameType, String source) {
 		Map<String, String> cityNameValueMap = getAreaNameValueMapFromDB(country, area, source);
 
-        String nameValuePath = "";
+        String nameValuePath = null;
 		
 		if(FULL_NAME.equals(nameType)) {
 			nameValuePath = "area_names_full_name_value_xpath";
@@ -574,7 +574,7 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyAreaNameTypeFromLookup(String nameType) {
 		List<String> names = getAreaNameTypesFromLookup();
 		
-		String nameTypePath = "";
+		String nameTypePath = null;
 		
 		if(FULL_NAME.equals(nameType)) {
 			nameTypePath = "area_names_full_name_type_xpath";

@@ -879,7 +879,7 @@ Examples:
 |Angola|Cabinda|Alternative Name|test|test2|
 
 Scenario: User has selected to add multiple Alternative Name in Area's Basic Info with same values
-Meta: @AreaNamesEdit
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
