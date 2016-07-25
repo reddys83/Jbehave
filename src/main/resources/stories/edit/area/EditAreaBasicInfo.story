@@ -912,7 +912,7 @@ Then user verify the list of area pareant options do not have No Area
 Then the user should verfiy that the 'Choose an Area' option is populated in the area parent dropdown
 Then user changes the area <areaParent> in the area dropdown field in area basic page
 When the user clicks on the save button
-Then the user should see the Required error message for the required identifier type field in the area basic page
+Then the user should see the Required error message for the required area parent field in the area basic page
 
 Examples:
 |country|area|subArea|country2|areaParent|

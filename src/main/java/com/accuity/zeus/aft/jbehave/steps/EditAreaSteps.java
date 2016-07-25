@@ -257,9 +257,9 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyCountryListInPlacesForCountry();
 	}
 
-	@Then("the user should see the $errorMessage error message for the required identifier type field in the area basic page")
-	public void verifyErrorMessageForRequiredAreaparentIdentifierType(@Named("errorMessage") String errorMessage) throws InterruptedException {
-		getEditAreaPage().verifyErrorMessageForRequiredAreaparentIdentifierType(errorMessage);
+	@Then("the user should see the $errorMessage error message for the required area parent field in the area basic page")
+	public void verifyErrorMessageForRequiredAreaparentField(@Named("errorMessage") String errorMessage) throws InterruptedException {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaparentField(errorMessage);
 	}
 
 	@Then("the user checks whether the header dropdown updates with <country2>, <area>")

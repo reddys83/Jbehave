@@ -650,7 +650,7 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 
-	public void verifyErrorMessageForRequiredAreaparentIdentifierType(String errorMessage) throws InterruptedException {
+	public void verifyErrorMessageForRequiredAreaparentField(String errorMessage) throws InterruptedException {
 		textToBePresentInElement(
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_req_err_msg_xpath")));
 		assertEquals(errorMessage, getDriver()
