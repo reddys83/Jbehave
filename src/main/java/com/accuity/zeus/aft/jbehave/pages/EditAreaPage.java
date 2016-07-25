@@ -367,8 +367,14 @@ public class EditAreaPage extends AbstractPage {
 	 * after saving the area page.
 	 */
 	public void verifySuccessfulUpdatedMessage() {
-		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_save_confirmation_message_xpath"))
-				.isDisplayed());
+		try {
+			assertTrue(
+					getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_save_confirmation_message_xpath"))
+							.isDisplayed());
+			Thread.sleep(5000); // to wait for page get refresh
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void verifyStatusInAreaPage(String status) {
