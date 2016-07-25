@@ -782,14 +782,12 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyAreaIdentifierParametersInUI(String[] identifierTypes, String[] identifierValues,
 			String[] identifierStatusValues) {
 		
-		List<WebElement> identifierTypeDropDowns = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_type_input_xpath"));
-		List<WebElement> identifierValueDropDowns = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_value_input_xpath"));
-		List<WebElement> identifierStatusDropDowns = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_status_input_xpath"));
-
-		for (int i = 0; i < identifierTypeDropDowns.size(); i++) {
-			assertEquals(identifierTypes[i], new Select(identifierTypeDropDowns.get(i)).getAllSelectedOptions().get(0).getText());
-			assertEquals(identifierValues[i], identifierValueDropDowns.get(i).getAttribute("value"));
-			assertEquals(identifierStatusValues[i], new Select(identifierStatusDropDowns.get(i)).getAllSelectedOptions().get(0).getText());
+		List<WebElement> identifierRows = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_type_view_mode"));
+		
+		for (int i = 0; i < identifierRows.size(); i++) {
+			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(identifierTypes[i]));
+			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(identifierValues[i]));
+			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(identifierStatusValues[i]));
 		}
 	}
 
@@ -806,6 +804,13 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
+	
+	public void verifyNewlyAddedAreaIdentifierRowExists() {
+		WebElement identifier = getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_view_mode"));
+		assertTrue(identifier != null);
+	}
+	
 	
 	@Override
 	public String getPageUrl() {

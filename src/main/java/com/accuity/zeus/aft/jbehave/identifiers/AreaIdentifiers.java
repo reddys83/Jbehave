@@ -46,6 +46,7 @@ public class AreaIdentifiers {
 		hmap.put("area_identifier_status_req_err_msg_xpath", By.xpath(("//*[@id='additionalIdentifiers']//*[@data-error_id='identifierStatusError']")));
 		hmap.put("area_delete_no_button_id_click", By.xpath("//*[@id='no-button']"));
 		hmap.put("area_identifier_type_req_err_msg_xpath", By.xpath("//*[@id='additionalIdentifiers']//*[@data-error_id='identifierTypeError']"));
+		hmap.put("area_identifier_type_view_mode", By.xpath("//*[@id='areaBasicInfo']//table[2]//tbody/tr"));
 	}
 
 	public static By getObjectIdentifier(String key) {

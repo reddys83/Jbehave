@@ -415,5 +415,10 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifySelectedIdentifierTypeNotInNewRow(@Named("identifierType") String identifierType) {
 		getEditAreaPage().verifySelectedIdentifierTypeNotInNewRow(identifierType, 2);
 	}
+	
+	@Then("the user verifies that the newly added identifier row values exists in the basic info area page")
+	public void verifyNewlyAddedAreaIdentifierRowExists() {
+		getEditAreaPage().verifyNewlyAddedAreaIdentifierRowExists();
+	}
 
 }
