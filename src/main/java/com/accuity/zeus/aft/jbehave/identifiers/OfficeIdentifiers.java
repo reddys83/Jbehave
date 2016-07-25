@@ -40,6 +40,7 @@ public class OfficeIdentifiers {
         hmap.put("office_name_sort_name_view",By.xpath(".//*[@id='officeBasicInfo']/ul/li[1]/dl/dd"));
         hmap.put("office_name_former_name_value_xpath_view", By.xpath(".//*[@id='officeBasicInfo']/ul/li[1]/table[1]//td[text()='Former Name']/following-sibling::td"));
         hmap.put("office_name_office_name_value_xpath_view", By.xpath(".//*[@id='officeBasicInfo']/ul/li[1]/table[1]//td[text()='Office Name']/following-sibling::td"));
+        hmap.put("office_names_type_mode",By.xpath("//*[@id='officeBasicInfo']/ul/li[1]//table[1]//tbody/tr"));
     }
 
     public static By getObjectIdentifier(String key) {

@@ -58,22 +58,23 @@ public class EditOfficeSteps extends AbstractSteps{
     }
 
     @When("the user selects office name type $officeNameTypeRowIdentifier value as <type>")
-    public void selectOfficeNameType(@Named("officeNameTypeRowIdentifier") String officeNameTypeRowIdentifier,@Named("type") String type)
+    public void selectOfficeNameType(@Named("officeNameTypeRowIdentifier") String officeNameTypeRowIdentifier,@Named("type") String type1)
     {
-        getEditOfficePage().selectOfficeNameType(officeNameTypeRowIdentifier,type);
+        getEditOfficePage().selectOfficeNameType(officeNameTypeRowIdentifier,type1);
     }
 
     @When("the user enters office name value $officeNameValueRowIdentifier as <value>")
-    public void enterOfficeNameValue(@Named("officeNameValueRowIdentifier") String officeNameValueRowIdentifier,@Named("value") String value)
+    public void enterOfficeNameValue(@Named("officeNameValueRowIdentifier") String officeNameValueRowIdentifier,@Named("value") String value1)
     {
-        getEditOfficePage().enterOfficeNameValue(officeNameValueRowIdentifier,value);
+        getEditOfficePage().enterOfficeNameValue(officeNameValueRowIdentifier,value1);
     }
 
     @Then("the user should see officename values as <type><value> for fid <officeFid> in $source document and in UI")
-    public void verifyEditOfficeNameValuesExistInZeusAndUI(@Named("type") String type,@Named("value") String value,@Named("officeFid") String officeFid,@Named("source") String source){
+    public void verifyEditOfficeNameValuesExistInZeusandinUI(@Named("type") String type,@Named("value") String value,@Named("officeFid") String officeFid,@Named("source") String source){
 
-        getEditOfficePage().verifyEditOfficeNameValuesExistInZeusAndUI(type,value,officeFid,source);
+        getEditOfficePage().verifyEditOfficeNameValuesExistInZeusandinUI(type,value,officeFid,source);
     }
+
 
     @When("the user clicks on delete office names row button for the row $deletebutton_Row")
     public void clickonDeleteOfficeNamesRowButton(String deletebutton_Row)

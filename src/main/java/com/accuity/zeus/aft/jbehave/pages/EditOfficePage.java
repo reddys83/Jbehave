@@ -29,10 +29,9 @@ public class EditOfficePage extends AbstractPage {
     public String EditSortNameValue = "";
     public String EditOfficeSortName = "";
 
-     public EditOfficePage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
-     super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
+    public EditOfficePage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
+        super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
-
 
 
     public void clearAndEnterValue(By webElement, String value) {
@@ -44,9 +43,9 @@ public class EditOfficePage extends AbstractPage {
     public void updateOfficeOpenedDate(String day, String month, String year) {
 
         clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_day_xpath"), day);
-        selectItemFromDropdownListByText(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_month_xpath"),month);
+        selectItemFromDropdownListByText(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_month_xpath"), month);
         clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_year_xpath"), year);
-        }
+    }
 
     public void verifyOpenedDateErrorMessage(String openedDateErrorMsg) {
 
@@ -70,12 +69,12 @@ public class EditOfficePage extends AbstractPage {
         zeusPairs.add(new BasicNameValuePair("source", "zeus"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", zeusPairs);
         assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent(), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_openedDate_view_xpath")).getText());
-        assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent().replace(" ",""), day+month+year);
+        assertEquals(document.getElementsByTagName("officeOpenedDate").item(0).getTextContent().replace(" ", ""), day + month + year);
     }
 
 
-    public void verifyOfficesNameTypesFromLookup(String rowIdentifier,String lookupFid)
-    {   List<NameValuePair> nvPairs = new ArrayList<>();
+    public void verifyOfficesNameTypesFromLookup(String rowIdentifier, String lookupFid) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", lookupFid));
         List<WebElement> officeTypesList = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier(rowIdentifier));
 
@@ -106,8 +105,8 @@ public class EditOfficePage extends AbstractPage {
             List valueList = getNodeValuesByTagName(document, "officeValue");
 
             for (int i = 1; i < typeList.size(); i++) {
-                WebElement type = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_Edit_officenames_Table")).get(i+1).findElement(By.xpath("td/select"));
-                WebElement value = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_Edit_officenames_Table")).get(i+1).findElement(By.xpath("td/input"));
+                WebElement type = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_Edit_officenames_Table")).get(i + 1).findElement(By.xpath("td/select"));
+                WebElement value = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_Edit_officenames_Table")).get(i + 1).findElement(By.xpath("td/input"));
                 assertEquals(typeList.get(i), (new Select(type)).getFirstSelectedOption().getText());
                 assertEquals(valueList.get(i), value.getAttribute("value"));
             }
@@ -118,7 +117,7 @@ public class EditOfficePage extends AbstractPage {
     }
 
     public void selectOfficeNameType(String officeNameTypeRowIdentifier, String type) {
-        selectItemFromDropdownListByText(OfficeIdentifiers.getObjectIdentifier(officeNameTypeRowIdentifier),type);
+        selectItemFromDropdownListByText(OfficeIdentifiers.getObjectIdentifier(officeNameTypeRowIdentifier), type);
     }
 
     public void enterOfficeNameValue(String officeNameValueRowIdentifier, String value) {
@@ -127,13 +126,27 @@ public class EditOfficePage extends AbstractPage {
     }
 
 
-    public void verifyEditOfficeNameValuesExistInZeusAndUI(String type, String value, String officeFid, String source) {
+    public void verifyEditOfficeNameValuesExistInZeusandinUI(String type, String value, String officeFid, String source) {
+        assertTrue(checkEditOfficeNameValuesFromZeus(type, value, officeFid, source));
 
-        assertTrue(checkEditOfficeNameValuesFromZeus(type,value,officeFid,source));
+      /*  List<WebElement> officeNameRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_names_type_mode"));
+        for (int i = 0; i < officeNameRows.size(); i++) {
 
-        assertEquals(type,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_name_second_row_type_view")));
-        assertEquals(value,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_name_second_row_value_view")));
+            assertTrue(officeNameRows.get(i).findElements(By.tagName("tr")).get(0).getText().contains(type));
+            assertTrue(officeNameRows.get(i).findElements(By.tagName("tr")).get(0).getText().contains(value));
+
+        }
     }
+   */
+
+      assertTrue(getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_names_type_mode")).contains(type));
+       assertTrue(getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_name_former_name_value_xpath_view")).contains(value));
+
+   }
+   // assertEquals(type,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_name_second_row_type_view")));
+    //assertEquals(value,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_name_second_row_value_view")));
+
+
 
     public boolean checkEditOfficeNameValuesFromZeus(String type,String value,String officeFid,String source) {
 
