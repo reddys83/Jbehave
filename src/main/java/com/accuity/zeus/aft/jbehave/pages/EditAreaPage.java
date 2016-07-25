@@ -1,7 +1,6 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -367,8 +367,14 @@ public class EditAreaPage extends AbstractPage {
 	 * after saving the area page.
 	 */
 	public void verifySuccessfulUpdatedMessage() {
-		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_save_confirmation_message_xpath"))
-				.isDisplayed());
+		try {
+			assertTrue(
+					getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_save_confirmation_message_xpath"))
+							.isDisplayed());
+			Thread.sleep(5000); // to wait for page get refresh
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void verifyStatusInAreaPage(String status) {
@@ -527,7 +533,296 @@ public class EditAreaPage extends AbstractPage {
 		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source), addInfoText);
 
 	}
+	
+	public void clickOnAreaAddNewIdentifierButton() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_new_identifier_button_id"));
+	}
 
+	public void verifyAreaIdentifierTypesList() {
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area identifiers");
+		List<WebElement> areaIdentifierTypesList = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("areaIdentifier_type_id"));
+
+		List<WebElement> options = areaIdentifierTypesList.get(0).findElements(By.cssSelector("option"));
+		for (int indexOfOption = 1; indexOfOption < options.size(); indexOfOption++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(),
+					options.get(indexOfOption).getText().trim());
+		}
+	}
+
+	public void verifyAreaIdentifierStatusList() {
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area Status types");
+		List<WebElement> areaIdentifierStatusList = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_status_input_xpath"));
+
+		List<WebElement> options = areaIdentifierStatusList.get(0).findElements(By.cssSelector("option"));
+		for (int indexOfOption = 0; indexOfOption < document.getElementsByTagName("status")
+				.getLength(); indexOfOption++) {
+			assertEquals(StringUtils.capitalize(
+					document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent()),
+					options.get(indexOfOption + 1).getText().trim());
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(),
+					options.get(indexOfOption + 1).getAttribute("value").trim());
+		}
+	}
+
+	public void deleteAllAreaIdentifierRows() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_new_identifier_button_id"));
+		List<WebElement> deleteRows = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_delete_identifiers_row_button_xpath"));
+
+		for (int index = 0; index < deleteRows.size(); index++) {
+			WebElement currentInstance = getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("area_delete_identifiers_row_button_xpath"))
+					.get(0);
+			if (currentInstance != null) {
+				currentInstance.click();
+				verifyAreaIdentifierRowDeleteConfirmationModal();
+				pressEnterButtonInDeleteConfirmationModalForArea();
+			}
+		}
+	}
+
+	public void verifyAreaIdentifierRowDeleteConfirmationModal() {
+		assertEquals("Please confirm - would you like to delete this row? NO YES",
+				getDriver().findElement(
+						AreaIdentifiers.getObjectIdentifier("delete_area_identifier_row_confirmation_modal_xpath"))
+						.getText());
+	}
+
+	public void pressEnterButtonInDeleteConfirmationModalForArea() {
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_delete_yes_button_id")).sendKeys(Keys.ENTER);
+	} 
+
+	public void enterAreaIdentifierType(String identifierType, int rowNo) {
+		try {
+			List<WebElement> identifierDropDowns = getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_type_input_xpath"));
+			if (rowNo <= identifierDropDowns.size()) {
+				Select dropdown = new Select(identifierDropDowns.get(rowNo - 1));
+				if (identifierType.equals("")) {
+					dropdown.selectByValue(identifierType);
+				} else {
+					dropdown.selectByVisibleText(identifierType);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void enterAreaIdentifierValue(String identifierValue, int rowNo) {
+		try {
+			List<WebElement> identifierValues = getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_value_input_xpath"));
+			if (rowNo <= identifierValues.size()) {
+				identifierValues.get(rowNo - 1).clear();
+				identifierValues.get(rowNo - 1).sendKeys(identifierValue);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void enterAreaIdentifierStatus(String identifierStatus, int rowNo) {
+		try {
+			List<WebElement> identifierDropDowns = getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_status_input_xpath"));
+			if (rowNo <= identifierDropDowns.size()) {
+				Select dropdown = new Select(identifierDropDowns.get(rowNo - 1));
+				if (identifierStatus.equals("")) {
+					dropdown.selectByValue(identifierStatus);
+				} else {
+					dropdown.selectByVisibleText(identifierStatus);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyAreaIdentifierValuesFromDB(String country, String area, List<String> identifierType,
+			List<String> identifierValue, List<String> identifierStatus, String source) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get area basic info", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("identifiers").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("identifiers").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						switch (document.getElementsByTagName("identifiers").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "identifierType":
+							assertEquals(document.getElementsByTagName("identifiers").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), identifierType.get(i));
+							break;
+						case "identifierValue":
+							assertEquals(document.getElementsByTagName("identifiers").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), identifierValue.get(i));
+							break;
+						case "identifierStatus":
+							assertEquals(
+									StringUtils.capitalize(document.getElementsByTagName("identifiers").item(0)
+											.getChildNodes().item(i).getChildNodes().item(childNode).getTextContent()),
+									identifierStatus.get(i));
+							break;
+						}
+					}
+				}
+			} else
+				assertTrue(source+ "document is null",false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void clickOnDeleteNewAreaIdentifierRowButton() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_identifiers_row_button_xpath"));
+	}
+
+	public void verifyDeleteConfirmationModal() {
+		assertEquals("Please confirm - would you like to delete this row? NO YES",
+				getDriver().findElement(
+						AreaIdentifiers.getObjectIdentifier("delete_area_identifier_row_confirmation_modal_xpath"))
+						.getText());
+	}
+
+	public void verifyNewlyAddedAreaIdentifierRowIsNotDisplayed() {
+		try {
+			WebElement identifier = getDriver()
+					.findElement(AreaIdentifiers.getObjectIdentifier("area_AdditionalIdentifiers"));
+			assertTrue(identifier == null);
+		} catch (Exception e) {
+			assertTrue(true);
+		}
+	}
+	
+	public void verifyAreaIdentifierValuesFromTrustedDB(String country, String area, String source) {
+		try {
+			attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_new_identifier_button_id"));
+			List<String> identifierTypes = new ArrayList<>();
+			List<String> identifierValues = new ArrayList<>();
+			List<String> identifierStatusValues = new ArrayList<>();
+			List<WebElement> identifierTypeDropDowns = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_type_input_xpath"));
+			
+			if (identifierTypeDropDowns.size() > 0) {
+				List<WebElement> identifierValueDropDowns = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_value_input_xpath"));
+				List<WebElement> identifierStatusDropDowns = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_status_input_xpath"));
+				
+				for (int index = 0; index < identifierTypeDropDowns.size(); index++) {					
+					identifierTypes.add(new Select(identifierTypeDropDowns.get(index)).getAllSelectedOptions().get(0).getText());
+					identifierValues.add(identifierValueDropDowns.get(index).getAttribute("value"));
+					identifierStatusValues.add(new Select(identifierStatusDropDowns.get(index)).getAllSelectedOptions().get(0).getText());
+				}
+				
+				verifyAreaIdentifierValuesFromDB(country, area, identifierTypes, identifierValues,
+						identifierStatusValues, source);
+			} else {
+				assertTrue("There is no existing values in Identifier section", true);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyMaxLengthInAreaIdentifierValue(String maxLength) {
+		assertEquals(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_value_input_xpath"))
+				.getAttribute("maxlength"), maxLength);
+	}
+
+	public void verifyErrorMessageForRequiredAreaIdentifierValue(String errMsg) {
+		assertEquals(errMsg, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_value_req_err_msg_xpath")).getText());
+	}
+
+	public void verifyErrorMessageForRequiredAreaIdentifierStatus(String errMsg) {
+		assertEquals(errMsg,
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_status_req_err_msg_xpath"))
+						.getText());
+	}
+
+	public void verifyNewlyAddedAreaIdentifierRowIsDisplayed() {
+		WebElement identifier = getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_input_xpath"));
+		assertTrue(identifier != null);
+	}
+
+	public void pressNoButtonInDeleteConfirmationModalForArea() {
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_delete_no_button_id_click")).click();
+	}
+
+	public void verifyIdentifierRowNotPresentInZeusDB(String country, String area, String source) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area basic info", nvPairs);
+			if (document != null) {
+				assertNull(document.getElementsByTagName("identifierType").item(0));
+				assertNull(document.getElementsByTagName("identifierValue").item(0));
+				assertNull(document.getElementsByTagName("identifierStatus").item(0));
+			} else
+				assert false : source + " document is null";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyErrorMessageForRequiredAreaIdentifierType(String errMsg) {
+		assertEquals(errMsg, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_req_err_msg_xpath")).getText());
+	}
+
+	public void verifyAreaIdentifierParametersInUI(String[] identifierTypes, String[] identifierValues,
+			String[] identifierStatusValues) {
+		
+		List<WebElement> identifierRows = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_type_view_mode"));
+		
+		for (int i = 0; i < identifierRows.size(); i++) {
+			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(identifierTypes[i]));
+			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(identifierValues[i]));
+			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(identifierStatusValues[i]));
+		}
+	}
+
+	public void verifySelectedIdentifierTypeNotInNewRow(String identifierType, int rowNo) {
+		try {
+			List<WebElement> identifierDropDowns = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_identifier_type_input_xpath"));
+			if (rowNo <= identifierDropDowns.size()) {
+				Select dropdown = new Select(identifierDropDowns.get(rowNo - 1));
+				for (int index = 0; index < dropdown.getOptions().size(); index++) {
+					assertTrue(!dropdown.getOptions().get(index).getText().contains(identifierType));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyNewlyAddedAreaIdentifierRowExists() {
+		try
+		{
+			WebElement identifier = getDriver()
+					.findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_view_mode"));
+			assertTrue(identifier != null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	
 	@Override
 	public String getPageUrl() {
 		return null;
