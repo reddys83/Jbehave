@@ -30,7 +30,7 @@ public class OfficeIdentifiers {
         hmap.put("first_new_row_officetype_delete_button", By.xpath("//*[@id='officeBasicInfo']//tbody[@id='additionalTypes']/tr[@class='new']/td[@class='delete']/button"));
         hmap.put("office_basicInfo_officetypes_delete_button_xpath",By.xpath("//*[@id='officeBasicInfo']//table/tbody[@id='additionalTypes']/tr/td[@class='delete']/button"));
         hmap.put("delete_confirmation_yes_button_id",By.id("yes-button"));
-        hmap.put("office_office_type_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='fixedofficeTypeError']"));
+        hmap.put("office_office_type_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='firstOfficeTypeError']"));
         hmap.put("basic_info_office_type_xpath", By.xpath(".//*[@id='content']//li[1]/table[2]/tbody/tr/td"));
 
     }

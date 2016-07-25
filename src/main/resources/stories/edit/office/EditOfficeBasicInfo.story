@@ -171,7 +171,7 @@ And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|officeTypeValue|
-|1010|FID|1010|1010-44|Trust Branch|
+|1010|FID|1010|1010-44|Agency|
 
 
 
@@ -350,6 +350,7 @@ And the user selects to delete all the office type rows except the first one in 
 And the user selects office type value as <officeTypeValue> from first_existing_officetype_dropdown in the basicinfo office page
 And the user clicks on the save button
 Then the user should see the error message for the required office type field in the basic info office page
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
 |entity|searchBy|fid|officeFid|officeTypeValue
@@ -370,6 +371,7 @@ And the user clicks on the office update link
 And the user enters null value for all the office type rows
 And the user clicks on the save button
 Then the user should see the error message for the required office type field in the basic info office page
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
 |entity|searchBy|fid|officeFid|officeTypeValue
