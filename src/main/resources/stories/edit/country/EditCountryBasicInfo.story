@@ -43,8 +43,6 @@ And the user clicks on the add new name button in the basic info country page
 And the user enters country name as <countryName> in the basic info country page
 And the user clicks on the save button
 Then the user should see the error message for the required country name field in the basic info country page
-Then the user should see the error message for the required name type field in the basic info country page
-Then the user should see the error message for the required name value field in the basic info country page
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
@@ -296,7 +294,6 @@ Examples:
 |Albania|Numeric ISO Code|aksjuilrw1aksjuilrw1aksjuilrw1aksjuilrw1aksju%)~12y1|
 
 Scenario: User can edit country identifiers - Verify country Identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -350,7 +347,7 @@ Examples:
 |Afghanistan||
 
 Scenario:User will get warning if click away from screen they are editing
-Meta:test10
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -375,7 +372,7 @@ Examples:
 |Afghanistan|Baht|
 
 Scenario: User will see summary of changes made in confirmation modal
-Meta:@test11
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

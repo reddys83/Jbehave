@@ -23,17 +23,38 @@ let $source := xs:string(xdmp:get-request-field("source"))
 let $countryDoc := /country[@source = $source][summary/names/name[type = "Country Name"]/value = $country]
 let $areaDoc := /area[@source = $source][summary/names/name[type = "Full Name"]/value = $area][within/place/link/@href=$countryDoc/@resource]
 
-(: Taking End Date :)
-let $DateFields :=
-    <areaDate>
-        <EndDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateCeased)}</EndDate>
+(: Taking End Date :)        
 (: Taking Begin Date :)
 let $DateFields :=
     <areaDate>
-        <BeganDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateBegan)}</BeganDate>
+	    <BeganDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateBegan)}</BeganDate>
+		<EndDate>{local:getDateAsPerAccuracy($areaDoc/summary/dates/dateCeased)}</EndDate>        
     </areaDate>
-    
+  (: Taking Add Info :)
+ let $areaadditionalinfo := ($areaDoc/summary/additionalInfos/additionalInfo/text())
+ 
+ (: Taking identifier List :)
+let $areaIdentifierList := for $x in ($areaDoc/summary/identifiers/identifier)
+  let $areaIdentifierType := $x/type/text()
+  let $areaIdentifierValue := ($x/value/text())
+  let $areaIdentifierStatus := ($x/status/text())
+return 
+  <identifier>
+  <identifierType>{$areaIdentifierType} </identifierType>
+  <identifierValue>{$areaIdentifierValue} </identifierValue>
+  <identifierStatus>{$areaIdentifierStatus} </identifierStatus>
+  </identifier>
+ 
 return
   <area>
+      { $areaDoc/summary/names }
       <dateFields>{$DateFields}</dateFields>
+      <AdditionalInfo>{$areaadditionalinfo}</AdditionalInfo>
+      <identifiers>{$areaIdentifierList}</identifiers> 
   </area>
+  
+
+  
+  
+  
+  

@@ -1,6 +1,5 @@
 Meta: @EditAreaBasicInfo @Edit @Area @AllStories
 
-
 Narrative:
 In order to view and edit the area page
 As a user
@@ -10,7 +9,8 @@ JIRA ID - ZEUS-1025 - User can edit Area's Status
 JIRA ID - ZEUS-1027 - User can edit Area's End Date
 
 JIRA ID - ZEUS-1026 - User can edit Area's Began Date
-
+JIRA ID - ZEUS-1034 - User can edit Area's Add Info
+JIRA ID - ZEUS-1040 - User can edit Area's Identifiers
 
 Scenario: User can edit  'Interest Rate Limit' that is different from the current value
 a)User verifies 'Your Changes have been saved' message is displayed after save

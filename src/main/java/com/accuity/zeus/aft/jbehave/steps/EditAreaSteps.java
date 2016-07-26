@@ -1,5 +1,9 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -199,6 +203,223 @@ public class EditAreaSteps extends AbstractSteps {
 	@When("the user selects value as <status2> from Status drop-down in the area basicinfo page")
 	public void selectAreaStatusValue2(@Named("status2") String status) {
 		getEditAreaPage().selectAreaStatusValue(status);
+	}
+	
+	@When("the user enters the <addInfoText> in the area add info text area")
+	public void enterTextAreaAddInfo(@Named("addInfoText") String addInfoText) {
+		getEditAreaPage().enterTextAreaAddInfo(addInfoText);
+	}
+	
+	@Then("the user should be able to verify the values are entered in the area add info field")
+	public void verifyAreaTextInAddInfo(@Named("addInfoText") String addInfoText) {
+		getEditAreaPage().verifyAreaTextInAddInfo(addInfoText);
+	}
+	
+	@When("the user enters values which is beyond 500 unicode characters in the area add info field")
+	public void enterInvalidCharactersInAreaAddInfo() {
+		getEditAreaPage().enterInvalidCharactersInAreaAddInfo();
+	}
+	
+	@Then("the user should be able to view that only 500 unicode characters are saved in area add info")
+	public void viewValidCharacterLength() {
+		getEditAreaPage().viewValidCharacterLength();
+	}
+	
+	@Then("the user should be able to verify the maximum values are entered in the area add info field")
+	public void verifyMaximumTextInAddInfo() {
+		getEditAreaPage().verifyMaximumChracterEnteredInAddInfo();
+	}
+	
+	@Then("the user should see the area addInfoText value same as in $source document")
+	public void verifyAreaAddInfoValueFromDB(@Named("country") String country, @Named("area") String area, @Named("source") String source) {
+		getEditAreaPage().verifyAreaAddInfoValueFromTrusted(country, area, "AdditionalInfo", source);
+	}
+	
+	@Then("the user should see the area addinfo value $addInfoText as in $source document")
+	public void verifyAreaAddInfoFromDB(@Named("country") String country, @Named("area") String area, @Named("source") String source, @Named("addInfoText") String addInfoText) {
+		getEditAreaPage().verifyAreaAddInfoValueFromZeus(country, area, "AdditionalInfo", source,addInfoText);
+	}
+	
+	@When("the user enters the <addInfoDiffText> in the area add info text area")
+	public void enterTextAreaAddInfo2(@Named("addInfoDiffText") String addInfoDiffText) {
+		getEditAreaPage().enterTextAreaAddInfo(addInfoDiffText);
+	}
+	
+	@When("the user clicks on the add new identifier button in the basic info area page")
+	public void clickOnAreaAddNewIdentifierButton() {
+		getEditAreaPage().clickOnAreaAddNewIdentifierButton();
+	}
+	
+	@Then("the user should see the area identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO")
+	public void verifyAreaIdentifierTypesList() {
+		getEditAreaPage().verifyAreaIdentifierTypesList();
+	}
+	
+	@Then("the user should see the area identifier status from lookup STATUS")
+	public void verifyAreaIdentifierStatusList() {
+		getEditAreaPage().verifyAreaIdentifierStatusList();
+	}
+	
+	@When("the user deletes the existing area identifier rows")
+	public void deleteAllAreaIdentifiers() {
+		getEditAreaPage().deleteAllAreaIdentifierRows();
+	}
+	
+	@Then("the user should see the identifier values same as in $source document")
+	public void verifyAreaIdentifierValuesFromTrustedDB(@Named("country") String country, @Named("area") String area, @Named("source") String source) { 		 
+
+		getEditAreaPage().verifyAreaIdentifierValuesFromTrustedDB(country, area, source);
+	}
+	
+	@When("the user enters identifier type as <identifierType> in the basic info area page")
+	public void enterAreaIdentifierType(@Named("identifierType") String identifierType) {
+		getEditAreaPage().enterAreaIdentifierType(identifierType, 1);
+	}
+	
+	@When("the user enters identifier value as <identifierValue> in the basic info area page")
+	public void enterAreaIdentifierValue(@Named("identifierValue") String identifierValue) {
+		getEditAreaPage().enterAreaIdentifierValue(identifierValue, 1);
+	}
+	
+	@When("the user enters identifier status as <identifierStatus> in the basic info area page")
+	public void enterAreaIdentifierStatus(@Named("identifierStatus") String identifierStatus) {
+		getEditAreaPage().enterAreaIdentifierStatus(identifierStatus, 1);
+	}
+	
+	@When("the user enters identifier type as <identifierType2> in the basic info area page")
+	public void enterAreaIdentifierType2(@Named("identifierType2") String identifierType) {
+		getEditAreaPage().enterAreaIdentifierType(identifierType, 2);
+	}
+	
+	@When("the user enters identifier value as <identifierValue2> in the basic info area page")
+	public void enterAreaIdentifierValues2(@Named("identifierValue2") String identifierValue) {
+		getEditAreaPage().enterAreaIdentifierValue(identifierValue, 2);
+	}
+	
+	@When("the user enters identifier status as <identifierStatus2> in the basic info area page")
+	public void enterAreaIdentifierStatus2(@Named("identifierStatus2") String identifierStatus) {
+		getEditAreaPage().enterAreaIdentifierStatus(identifierStatus, 2);
+	}
+	
+	@Then("the user should see the area identifier values as in $source document")
+	public void verifyAreaIdentifierValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
+	        @Named("identifierType") String identifierType,
+			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus,
+			@Named("identifierType2") String identifierType2, @Named("identifierValue2") String identifierValue2,
+			@Named("identifierStatus2") String identifierStatus2, @Named("source") String source) {
+ 
+		List<String> identifierTypes = new ArrayList<>();
+		List<String> identifierValues = new ArrayList<>();
+		List<String> identifierStatusValues = new ArrayList<>();		
+		identifierTypes.add(identifierType);		
+		identifierValues.add(identifierValue);
+		identifierStatusValues.add(identifierStatus);		
+		identifierTypes.add(identifierType2);
+		identifierValues.add(identifierValue2);
+		identifierStatusValues.add(identifierStatus2);
+		
+		getEditAreaPage().verifyAreaIdentifierValuesFromDB(country, area, identifierTypes, identifierValues,
+				identifierStatusValues, source);
+	}
+	
+	@When("the user clicks on the delete identifier row button in the basic info area page")
+	public void clickOnDeleteNewAreaIdentifierRowButton() {
+		getEditAreaPage().clickOnDeleteNewAreaIdentifierRowButton();
+	}
+	
+	@Then("the user should see delete row confirmation modal in the area page")
+	public void verifyDeleteConfirmationModal() {
+		getEditAreaPage().verifyDeleteConfirmationModal();
+	}
+	
+	@When("the user clicks on the Yes button to delete the row in basic info area page")
+	public void pressEnterButtonInDeleteConfirmationModalForArea() {
+		getEditAreaPage().pressEnterButtonInDeleteConfirmationModalForArea();
+	}
+	
+	@Then("the user should not see the newly added identifier row in the basic info area page")
+	@Alias("the user should not see the identifier row in the basic info area page")
+	public void verifyNewlyAddedAreaIdentifierRowIsNotDisplayed() throws Exception {
+		getEditAreaPage().verifyNewlyAddedAreaIdentifierRowIsNotDisplayed();
+	}
+	
+	@When("the user enters an incorrect identifier value as <identifierValueIncorrect> in the basic info area page")
+	public void enterIncorrectAreaIdentifierValue(@Named("identifierValueIncorrect") String incorrectIdentifierValue) {
+		getEditAreaPage().enterAreaIdentifierValue(incorrectIdentifierValue, 1);
+	}
+	
+	@Then("the user should see maximum length of area identifier value is limited to $maxLength")
+	public void verifyMaxLengthInAreaIdentifierValue(@Named("maxLength") String maxLength) {
+		getEditAreaPage().verifyMaxLengthInAreaIdentifierValue(maxLength);
+	}
+	
+	@Then("the user should see the error message $errMsg for identifier value field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaIdentifierValue(@Named("errMsg") String errMsg) {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierValue(errMsg);
+	}
+	
+	@Then("the user should see the error message $errMsg for identifier status field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaIdentifierStatus(@Named("errMsg") String errMsg) {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierStatus(errMsg);
+	}
+		
+	@Then("the user verifies that the row values for area identifier entered exists in $source document")
+	@Alias("the user verifies that no values are entered in $source document")
+	public void verifyAreaIdentifierRowValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
+	        @Named("identifierType") String identifierType,
+			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus, @Named("source") String source) {
+		List<String> identifierTypes = new ArrayList<>();
+		List<String> identifierValues = new ArrayList<>();
+		List<String> identifierStatusValues = new ArrayList<>();
+		identifierTypes.add(identifierType);		
+		identifierValues.add(identifierValue);		
+		identifierStatusValues.add(identifierStatus);
+		
+		getEditAreaPage().verifyAreaIdentifierValuesFromDB(country, area, identifierTypes, identifierValues,
+				identifierStatusValues, source);
+	}	
+	
+	@When("the user clicks on the No button to cancel the deletion of row in basic info area page")
+	public void pressNoButtonInDeleteConfirmationModalForArea() {
+		getEditAreaPage().pressNoButtonInDeleteConfirmationModalForArea();
+	}
+	
+	@Then("the user should see the newly added identifier row in the basic info area page")
+	public void verifyNewlyAddedAreaIdentifierRowIsDisplayed() throws Exception {
+		getEditAreaPage().verifyNewlyAddedAreaIdentifierRowIsDisplayed();
+	}
+	
+	@Then("the user verifies that the deleted row for area identifier does not exist in $source document")
+	public void verifyAreaIdentifierRowNotPresentInZeusDB(@Named("country") String country, @Named("area") String area, @Named("source") String source) {
+		getEditAreaPage().verifyIdentifierRowNotPresentInZeusDB(country, area, source);
+	}
+	
+	@Then("the user should see the error message $errMsg for identifier type field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaIdentifierType(@Named("errMsg") String errMsg) {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierType(errMsg);
+	}
+	
+	@Then("the user verifies that the area identifiers parameters are entered in the basic info area page")
+	public void verifyAreaIdentifierParametersInUI( @Named("identifierType") String identifierType,
+			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus,
+			@Named("identifierType2") String identifierType2, @Named("identifierValue2") String identifierValue2,
+			@Named("identifierStatus2") String identifierStatus2) {
+		
+		String[] identifierTypes = { identifierType, identifierType2 };
+		String[] identifierValues = { identifierValue, identifierValue2 };
+		String[] identifierStatusValues = { identifierStatus, identifierStatus2 };
+		
+		getEditAreaPage().verifyAreaIdentifierParametersInUI(identifierTypes, identifierValues, identifierStatusValues);
+	}
+	
+	@Then("the user verifies that previously selected <identifierType> is not present in the new identifier row")
+	public void verifySelectedIdentifierTypeNotInNewRow(@Named("identifierType") String identifierType) {
+		getEditAreaPage().verifySelectedIdentifierTypeNotInNewRow(identifierType, 2);
+	}
+	
+	@Then("the user verifies that the newly added identifier row values exists in the basic info area page")
+	public void verifyNewlyAddedAreaIdentifierRowExists() {
+		getEditAreaPage().verifyNewlyAddedAreaIdentifierRowExists();
 	}
 
 	@When("the user enters <interestRate> value in area page")

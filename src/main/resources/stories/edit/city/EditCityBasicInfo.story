@@ -752,7 +752,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|beganDay|beganMonth|beganYear|endDay|endMonth|endYear|Summary|
-|USA|Georgia|Adrian|1|Jun|2016|5|Jun|2016|Basic Info| 
+|USA|Georgia|Adrian|1|Jun|2016|5|Jun|2016|Basic Info|
 
 Scenario: User is updating a City's Basic Info and has entered an 'End Date' that is before the 'Began Date'
 Given a user is on the search page
