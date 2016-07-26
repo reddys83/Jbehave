@@ -128,25 +128,19 @@ public class EditOfficePage extends AbstractPage {
 
     public void verifyEditOfficeNameValuesExistInZeusandinUI(String type, String value, String officeFid, String source) {
         assertTrue(checkEditOfficeNameValuesFromZeus(type, value, officeFid, source));
-
-      /*  List<WebElement> officeNameRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_names_type_mode"));
+        boolean flag=false;
+       List<WebElement> officeNameRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_names_type_mode"));
         for (int i = 0; i < officeNameRows.size(); i++) {
 
-            assertTrue(officeNameRows.get(i).findElements(By.tagName("tr")).get(0).getText().contains(type));
-            assertTrue(officeNameRows.get(i).findElements(By.tagName("tr")).get(0).getText().contains(value));
+          if(type.equals(officeNameRows.get(i).findElements(By.tagName("td")).get(0).getText())){
+               if(value.equals(officeNameRows.get(i).findElements(By.tagName("td")).get(1).getText())) {
+                  flag=true;
+              }
+            }
 
-        }
+             }
+        assertTrue(flag);
     }
-   */
-
-      assertTrue(getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_names_type_mode")).contains(type));
-       assertTrue(getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_name_former_name_value_xpath_view")).contains(value));
-
-   }
-   // assertEquals(type,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_name_second_row_type_view")));
-    //assertEquals(value,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_name_second_row_value_view")));
-
-
 
     public boolean checkEditOfficeNameValuesFromZeus(String type,String value,String officeFid,String source) {
 
