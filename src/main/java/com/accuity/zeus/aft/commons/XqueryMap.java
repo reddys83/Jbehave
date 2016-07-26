@@ -89,6 +89,7 @@ public class XqueryMap {
 		queryMap.put("get city basic info","getCityBasicInfo.xqy");
         queryMap.put("get office basic info","getOfficeBasicInfo.xqy");
         queryMap.put("get id for offices", "getIdForOffices.xqy");
+
 		queryMap.put("get city places type lookup","getCityRelatedPlacesTypeFromLookup.xqy");
 		queryMap.put("get city places detail lookup","getCityRelatedPlacesDetailsFromLookup.xqy");
 		queryMap.put("get city related place info","getCityRelatedPlaces.xqy");
@@ -107,7 +108,9 @@ public class XqueryMap {
         queryMap.put("get city name types","getCityNameTypes.xqy");
 		queryMap.put("get area Status types","getCityStatusTypes.xqy");
 		queryMap.put("get areastatus","getAreaStatus.xqy");
-		queryMap.put("get area basic info","getAreaBasicInfo.xqy");
+		queryMap.put("get area basic info","getAreaBasicInfo.xqy");		
+		queryMap.put("active office test list","getActiveOfficeFidTest.xqy");
+		queryMap.put("get area identifiers","getCountryIdentifiers.xqy");
 		queryMap.put("get city region types","getCityRegionTypes.xqy");
    }
 
