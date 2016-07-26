@@ -222,5 +222,9 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaInterestRateZeus(country,area,"InterestRate",source,interestRate);
 	}
 	
-	
+	@Then("the user should see an error message Enter up to 256 valid characters")
+	public void verifyErrorMessageInterestRate() {
+		getEditAreaPage().verifyErrorMessageInterestRate();
+		
+	}
 }

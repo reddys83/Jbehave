@@ -488,6 +488,16 @@ public class EditAreaPage extends AbstractPage {
 		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source), interestRate);
 
 	}
+	
+	public void verifyErrorMessageInterestRate() {
+		try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals("Enter up to 256 valid characters", getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_errorMessage_xpath")).getText());
+	}
 
 	@Override
 	public String getPageUrl() {
