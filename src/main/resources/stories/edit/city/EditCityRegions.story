@@ -73,6 +73,7 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city regions link in the navigation bar
 When the user clicks on the city update link
+When the user deletes the existing city regions
 And the user clicks on the add new region button in the city region page
 And the user clicks on the save button in city page
 When the user clicks on the confirm button
