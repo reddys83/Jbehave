@@ -821,7 +821,19 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}		
 	}
-	    
+	
+	/**
+	 * This method is used to enter interest rate value  in the Area
+	 * Interest rate text box
+	 * 
+	 * @param interestRate
+	 *   
+	 */
+	              
+	public void enterAreaInterestRate(String interestRate) {
+		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_text_xpath"), interestRate);
+	}
+	
 	/**
 	 * This method is used to verify the interest rate value  in the Area
 	 * Web page

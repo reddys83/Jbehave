@@ -427,20 +427,24 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().enterAreaInterestRate(interestRate);
 	}
 	
+	@When("the user enters <interestRateOld> value in area page")
+	public void enterAreaInterestRateNew(@Named("interestRateOld") String interestRateNew) {
+		getEditAreaPage().enterAreaInterestRate(interestRateNew);
+	}
+	
 	@Then("the user should see the entered <interestRate> in area page")
 	public void verifyAreaInterestRate(@Named("interestRate") String interestRate) {
 		getEditAreaPage().verifyAreaInterestRate(interestRate);
 	}
 	
-	@When("the user enters <interestRateNew> value in area page")
-	public void enterAreaInterestRateNew(@Named("interestRateNew") String interestRateNew) {
-		getEditAreaPage().enterAreaInterestRate(interestRateNew);
+	@Then("the user should see the entered <interestRateOld> in area page")
+	public void verifyAreaInterestRateOld(@Named("interestRateOld") String interestRate) {
+		getEditAreaPage().verifyAreaInterestRate(interestRate);
 	}
-	
-	
+		
 	@Then("the user should see the entered <interestRate> in $source document")
 	public void enterAreaInterestRateNew(@Named("country") String country,@Named("area") String area,@Named("interestRate") String interestRate,@Named("source") String source) {
-		getEditAreaPage().verifyAreaInterestRateZeus(country,area,"InterestRate",source,interestRate);
+		getEditAreaPage().verifyAreaInterestRateZeus(country,area,"areaInterestRate",source,interestRate);
 	}
 	
 	@Then("the user should see an error message Enter up to 256 valid characters")
