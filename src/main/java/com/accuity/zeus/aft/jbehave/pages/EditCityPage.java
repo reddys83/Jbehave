@@ -2040,6 +2040,22 @@ public class EditCityPage extends AbstractPage {
 		selectItemFromDropdownListByValue(CityIdentifiers.getObjectIdentifier("city_region_value_dropdown_xpath"), regionValue);
 	}
 	
+	public void verifyRegionValueInTrusted(Map<String, String> cityRegionMap) {
+		try {
+			attemptClick(CityIdentifiers.getObjectIdentifier("city_add_new_region_button_id"));
+			List<WebElement> newNameTypeElement = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_region_type_dropdown_xpath"));
+			String regionType = null;
+			List<WebElement> newNameValueElement = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_region_value_dropdown_xpath"));
+			for(int i = 0; i <cityRegionMap.size();i++){
+				regionType = new Select(newNameTypeElement.get(i)).getFirstSelectedOption().getText();
+				assertTrue(cityRegionMap.containsKey(regionType));
+				assertEquals(cityRegionMap.get(regionType), new Select(newNameValueElement.get(i)).getFirstSelectedOption().getText());	
+			}			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
 	public void verifyRegionValueInDB(Map<String, String> cityRegionMap, String newRegionType, String newRegionValue) {
 		assertTrue(cityRegionMap.containsKey(newRegionType));
 		assertEquals(cityRegionMap.get(newRegionType), newRegionValue);
@@ -2089,6 +2105,23 @@ public class EditCityPage extends AbstractPage {
 
 	public void verifyCityRegionDeletedFromDB(Map<String, String> cityRegionMap, String newRegionType) {
 		assertFalse(cityRegionMap.containsKey(newRegionType));
+	}
+	
+	public void deleteAllCityRegions() {
+		attemptClick(CityIdentifiers.getObjectIdentifier("city_add_new_region_button_id"));
+		List<WebElement> deleteRows = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_delete_region_row_button_xpath"));
+
+		for (int index = 0; index < deleteRows.size(); index++) {
+			WebElement currentInstance = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_delete_region_row_button_xpath")).get(0);
+			if (currentInstance != null) {
+				currentInstance.click();
+				verifyDeleteConfirmationModalRelatedPlace();
+				pressEnterButtonInDeleteConfirmationModalForCity();
+			}
+
+		}
 	}
 
 	@Override

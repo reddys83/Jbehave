@@ -1065,7 +1065,7 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyCityNameValueMaxlength(maxValue);
 	}
 	
-	@Then("the user should see the region type from region type dropdown")
+	@Then("the user should see the region type from 'CITY_ALTERNATIVE_REGION' look up")
 	public void verifyCityRegionTypeList() {
 		getEditCityPage().verifyCityRegionTypeList();
 	}
@@ -1137,10 +1137,9 @@ public class EditCitySteps extends AbstractSteps {
 	
 	@Then("the user should see city region value same as in $source document")
 	public void verifyCityRegionTypeAndValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
-												 @Named("source") String source,  @Named("newRegionType") String newRegionType, 
-												  @Named("newRegionValue") String newRegionValue) {
+												 @Named("source") String source) {
 		Map<String, String> cityRegionValueMap = getEditCityPage().getCityRegionValueMapFromDB(country, area, city, source);
-		getEditCityPage().verifyRegionValueInDB(cityRegionValueMap, newRegionType, newRegionValue);
+		getEditCityPage().verifyRegionValueInTrusted(cityRegionValueMap);
 	}
 	
 	@Then("the user should see the blank region type and blank value is not updated in $source document")
@@ -1166,5 +1165,10 @@ public class EditCitySteps extends AbstractSteps {
 											  @Named("newRegionValue") String newRegionValue) {
 		Map<String, String> cityRegionValueMap = getEditCityPage().getCityRegionValueMapFromDB(country, area, city, source);
 		getEditCityPage().verifyCityRegionDeletedFromDB(cityRegionValueMap, newRegionType);
+	}
+	
+	@When("the user deletes the existing city regions")
+	public void deleteAllCityRegions() {
+		getEditCityPage().deleteAllCityRegions();
 	}
 }

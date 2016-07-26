@@ -6,7 +6,7 @@ I want to cover the requirements mentioned in
 
 JIRA ID - ZEUS-975 - User can edit City's Regions
 
-Scenario: Verify City Region type dropdown values from lookup Status
+Scenario: Verify City Region type dropdown values from lookup CITY_ALTERNATIVE_REGION
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -19,7 +19,7 @@ And the user enters the city <city> in the type-ahead box
 And the user clicks on the city regions link in the navigation bar
 When the user clicks on the city update link
 And the user clicks on the add new region button in the city region page
-Then the user should see the region type from region type dropdown
+Then the user should see the region type from 'CITY_ALTERNATIVE_REGION' look up
 
 Examples:
 |country|area|city|
@@ -27,6 +27,7 @@ Examples:
 
 
 Scenario: User adds new region type and value, checks the confirmation summary modal and saves the data to DB
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -38,8 +39,10 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city regions link in the navigation bar
 When the user clicks on the city update link
-And the user gets the document with get document id for city with the <city> from the database
-And the user clicks on the add new region button in the city region page
+When the user gets the document with get document id for city with the <city> from the database
+Then the user should see city region value same as in trusted document
+When the user deletes the existing city regions
+When the user clicks on the add new region button in the city region page
 And the user enters region type as <newRegionType> in the region city page
 And the user enters region value as <newRegionValue> in the region city page
 And the user clicks on the save button in city page
@@ -50,8 +53,6 @@ When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user should see the region type and value updated in zeus document
 Then the user should see the city region type and value updated in UI
-When the user clicks on the city update link
-Then the user should see city region value same as in trusted document
 Then the user reverts the changes to the document
 
 Examples:
@@ -118,6 +119,7 @@ And the user enters the city <city> in the type-ahead box
 And the user clicks on the city regions link in the navigation bar
 When the user clicks on the city update link
 And the user gets the document with get document id for city with the <city> from the database
+When the user deletes the existing city regions
 And the user clicks on the add new region button in the city region page
 And the user enters region type as <newRegionType> in the region city page
 And the user enters region value as <newRegionValue> in the region city page
@@ -142,7 +144,10 @@ Examples:
 |Angola|Bengo|Caxito|Federal Reserve District|10|Metropolitan Statistical Area|10260|
 
 
-Scenario: User can edit city region - Verify if User can delete city region row and clicks no on confirmation modal, on save the region should not get deleted.
+Scenario: User can edit city region - 
+1 - Verify if User can delete city region row and clicks no on confirmation modal, on save the region should not get deleted.
+2 - Verify if User can delete city region row and clicks yes on confirmation modal, on save the region should get deleted.
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -155,6 +160,7 @@ And the user enters the city <city> in the type-ahead box
 And the user clicks on the city regions link in the navigation bar
 When the user clicks on the city update link
 And the user gets the document with get document id for city with the <city> from the database
+When the user deletes the existing city regions
 And the user clicks on the add new region button in the city region page
 And the user enters region type as <newRegionType> in the region city page
 And the user enters region value as <newRegionValue> in the region city page
@@ -173,34 +179,6 @@ When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user should see the city region type and value updated in UI
 Then the user should see the region type and value updated in zeus document
-Then the user reverts the changes to the document
-
-Examples:
-|country|area|city|newRegionType|newRegionValue|
-|Angola|Bengo|Caxito|Federal Reserve District|10|
-
-Scenario: User can edit city region - Verify if User can delete city region row and clicks yes on confirmation modal, on save the region should get deleted.
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the city tab in the data area
-And the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-And the user clicks on the choose a city option
-And the user enters the city <city> in the type-ahead box
-And the user clicks on the city regions link in the navigation bar
-When the user clicks on the city update link
-And the user gets the document with get document id for city with the <city> from the database
-And the user clicks on the add new region button in the city region page
-And the user enters region type as <newRegionType> in the region city page
-And the user enters region value as <newRegionValue> in the region city page
-And the user clicks on the save button in city page
-Then the user should see the below summary changes in confirmation modal
-|Summary|
-|Regions|
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the page
 When the user clicks on the city update link
 When the user clicks on the delete region row button in the region city page
 Then the user should see the delete row confirmation modal in the city page
@@ -212,6 +190,8 @@ Then the user should see the city region type and value deleted in UI
 Then the user should see the region not present in zeus document
 Then the user reverts the changes to the document
 
+
 Examples:
 |country|area|city|newRegionType|newRegionValue|
 |Angola|Bengo|Caxito|Federal Reserve District|10|
+
