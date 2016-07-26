@@ -110,6 +110,7 @@ public class XqueryMap {
 		queryMap.put("get area name types","getAreaNameTypes.xqy");
 		queryMap.put("get area basic info","getAreaBasicInfo.xqy");		
 		queryMap.put("active office test list","getActiveOfficeFidTest.xqy");
+		queryMap.put("get area identifiers","getCountryIdentifiers.xqy");
    }
 
     public String getXquery(String key){
