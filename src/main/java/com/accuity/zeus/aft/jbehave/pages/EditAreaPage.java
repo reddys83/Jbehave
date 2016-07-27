@@ -24,6 +24,7 @@ import com.accuity.zeus.aft.rest.RestClient;
 public class EditAreaPage extends AbstractPage {
 	
    public static String addInfoMaximumCharacterString=null;
+   public static String interestRateMaximumCharacterString=null;
    
 	public EditAreaPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
@@ -858,17 +859,47 @@ public class EditAreaPage extends AbstractPage {
 
 	}
 	
-	public void verifyErrorMessageInterestRate() {
+	/**
+	 * This method is to verify maximum characters entered in area interest 
+	 * rate text box is 256
+	 */
+	
+
+	public void enterInvalidCharactersInAreaInterestRate() {
+		char addCharToInterestRate = 'i';
+		String interestRateRandomText = null;
+		for (int i = 0; i <= 256; i++) {
+			interestRateRandomText += addCharToInterestRate;
+		}
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_text_xpath")).clear();
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_text_xpath")).sendKeys(interestRateRandomText);
+		interestRateMaximumCharacterString = interestRateRandomText;
+	}
+	
+	public void viewValidCharacterLengthInterestRate() {
 		try {
-			Thread.sleep(2000L);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		assertEquals("Enter up to 256 valid characters", getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_errorMessage_xpath")).getText());
+		
+		Integer addInfoLength = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_xpath_after_save")).getText().length();
+		assertEquals(addInfoLength.toString(), "256");
 	}
-
+		
+	/**
+	 * This method is to verify maximum characters entered in area interest rate
+	 * info text box is 256
+	 */
+	public void verifyMaximumTextInInterestRate() {
+		assertEquals(interestRateMaximumCharacterString.subSequence(0, 256), getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_xpath_after_save")).getText());
+	}
 	
+	public void verifyAreaInterestRateFromTrustedDB(String country, String area, String tagName, String source) {
+		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source),
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_text_xpath")).getText());
+	}
 	@Override
 	public String getPageUrl() {
 		return null;

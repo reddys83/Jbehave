@@ -447,9 +447,24 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaInterestRateZeus(country,area,"areaInterestRate",source,interestRate);
 	}
 	
-	@Then("the user should see an error message Enter up to 256 valid characters")
-	public void verifyErrorMessageInterestRate() {
-		getEditAreaPage().verifyErrorMessageInterestRate();
-		
+	@When("the user enters values which is beyond 256 unicode characters in the area Interest Rate field")
+	public void enterInvalidCharactersInAreaInterestRate() {
+		getEditAreaPage().enterInvalidCharactersInAreaInterestRate();
+	}
+	
+	@Then("the user should be able to view that only 256 unicode characters are saved in area Interest Rate field")
+	public void viewValidCharacterLengthInterestRate() {
+		getEditAreaPage().viewValidCharacterLengthInterestRate();
+	} 
+	
+	@Then("the user should be able to verify the maximum values are entered in the area Interest Rate field")
+	public void verifyMaximumTextInInterestRate() {
+		getEditAreaPage().verifyMaximumTextInInterestRate();
+	}
+	
+	@Then("the user should see the Interest Rate value in area page is same as in $source document")
+	public void verifyAreaInterestRateFromTrustedDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source) {
+		getEditAreaPage().verifyAreaInterestRateFromTrustedDB(country, area, "areaInterestRate", source);
 	}
 }
