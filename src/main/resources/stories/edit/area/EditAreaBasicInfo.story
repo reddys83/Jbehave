@@ -985,9 +985,11 @@ Examples:
 |Algeria|Constantine|FIPS Place Code|H4Testing|Pending|
 
 Scenario: User can edit  'Interest Rate Limit' that is different from the current value
-a)User verifies 'Your Changes have been saved' message is displayed after save
-b) User verifies whether updated 'Interest Rate Limit; is reflecting in Area Web page
-c)User verifies whether updated 'Interest rate limit' is reflecting in zeus document
+a)User verifies existing 'Interest Rate Limit' existing interest rate values are retrieved  from trusted doc 
+b)User verifies 'Your Changes have been saved' message is displayed after save
+c)User verifies Area Basic Info has been updated in confirmation modal
+d) User verifies whether updated 'Interest Rate Limit; is reflecting in Area Web page
+e)User verifies whether updated 'Interest rate limit' is reflecting in zeus document
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -1018,13 +1020,13 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|interestRateOld|interestRate|
-|Angola|Cabinda|10|15|
+|Angola|Cabinda|10%|15%|
 
 Scenario: User can edit  'Interest Rate Limit' that is no different from the current value
 a)User verifies 'Your Changes have been saved' message is displayed after save
-b)User verifies whether updated 'Interest Rate Limit; is reflecting in Area Web page
-c)User verifies whether updated 'Interest rate limit' is reflecting in zeus document
-d)User verifies Area Interest Rate changes has not been updated in confirmation modal
+b)User verifies Area Interest Rate changes has not been updated in confirmation modal
+c)User verifies whether updated 'Interest Rate Limit' is reflecting in Area Web page
+d)User verifies whether updated 'Interest rate limit' is reflecting in zeus document
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -1052,7 +1054,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|interestRateOld|interestRate|ConfirmationSummary|
-|Angola|Cabinda|10|10|Basic Info|
+|Angola|Cabinda|10%|10%|Basic Info|
 
 Scenario: User can save  'Interest Rate Limit' successfully when blank value is entered (Blank/Null)
 a)User verifies 'Your Changes have been saved' message is displayed after save
