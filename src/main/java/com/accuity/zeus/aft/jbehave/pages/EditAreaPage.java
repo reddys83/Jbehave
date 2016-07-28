@@ -832,7 +832,7 @@ public class EditAreaPage extends AbstractPage {
 	 */
 	              
 	public void enterAreaInterestRate(String interestRate) {
-		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_text_xpath"), interestRate);
+		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath"), interestRate);
 	}
 	
 	/**
@@ -850,7 +850,7 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}
 		assertEquals(interestRate, getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_xpath_after_save")).getText());
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_xpath_after_save")).getText());
 	}
 	
 	public void verifyAreaInterestRateZeus(String country, String area, String tagName, String source,
@@ -871,8 +871,8 @@ public class EditAreaPage extends AbstractPage {
 		for (int i = 0; i <= 256; i++) {
 			interestRateRandomText += addCharToInterestRate;
 		}
-		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_text_xpath")).clear();
-		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_text_xpath")).sendKeys(interestRateRandomText);
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).clear();
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).sendKeys(interestRateRandomText);
 		interestRateMaximumCharacterString = interestRateRandomText;
 	}
 	
@@ -883,7 +883,7 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}
 		
-		Integer addInfoLength = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_xpath_after_save")).getText().length();
+		Integer addInfoLength = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_xpath_after_save")).getText().length();
 		assertEquals(addInfoLength.toString(), "256");
 	}
 		
@@ -893,12 +893,12 @@ public class EditAreaPage extends AbstractPage {
 	 */
 	public void verifyMaximumTextInInterestRate() {
 		assertEquals(interestRateMaximumCharacterString.subSequence(0, 256), getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_xpath_after_save")).getText());
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_xpath_after_save")).getText());
 	}
 	
 	public void verifyAreaInterestRateFromTrustedDB(String country, String area, String tagName, String source) {
 		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source),
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_intrest_rate_text_xpath")).getText());
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).getText());
 	}
 	@Override
 	public String getPageUrl() {
