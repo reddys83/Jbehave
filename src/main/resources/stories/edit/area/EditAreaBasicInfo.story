@@ -984,6 +984,7 @@ Examples:
 |country|area|identifierType|identifierValue|identifierStatus|
 |Algeria|Constantine|FIPS Place Code|H4Testing|Pending|
 
+
 Scenario: User has selected to update Full Name in Area's Basic Info
 
 Given a user is on the search page
@@ -1073,7 +1074,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|type|value|
-|Angola|Namibe|Alternative Name|test|
+|Angola|Namibe|Alternative Name|testing|
 
 Scenario: User has selected to add New Name Row in Area's Basic Info - check save is successful when all blank values are selected and document is not updated
 
@@ -1088,6 +1089,12 @@ When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
 When the user deletes the existing area names rows
+When the user clicks on the add names button in the area basic info page
+When the user enters name type as <type> in the area basic info page
+And the user enters name value as <value> in the area basic info page
+When the user clicks on the save button
+When the user clicks on the confirm button
+And the user clicks on the area update link
 When the user clicks on the add names button in the area basic info page
 When the user enters name type as <type> in the area basic info page
 And the user enters name value as <value> in the area basic info page
@@ -1113,6 +1120,7 @@ And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
+When the user deletes the existing area names rows
 When the user clicks on the add names button in the area basic info page
 When the user enters name value as <value> in the area basic info page
 When the user clicks on the save button
@@ -1120,7 +1128,7 @@ Then the user should see the error message Required for the required name type f
 
 Examples:
 |country|area|value|
-|Angola|Namibe|test|
+|Angola|Namibe|testing|
 
 Scenario: User has selected to add New Name Row in Area's Basic Info - error message is displayed when type is entered but value is not entered
 
@@ -1133,6 +1141,7 @@ And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
+When the user deletes the existing area names rows
 When the user clicks on the add names button in the area basic info page
 When the user enters name type as <type> in the area basic info page
 When the user clicks on the save button
@@ -1209,7 +1218,6 @@ When the user clicks on the delete name row button in the area basic info page
 Then the user should see the delete row confirmation modal in the area page
 When the user clicks on the yes button in the delete row confirmation modal in the area page
 When the user clicks on the save button
-Then the user should not see the <ConfirmationSummary> changes in confirmation modal for area
 When the user clicks on the confirm button
 Then the user should not see the <type> <value> in zeus document
 Then the user should not see the area name type and value updated in the area basic info page
@@ -1249,6 +1257,7 @@ And the user enters the area <area> in the type-ahead box
 When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area names rows
 When the user clicks on the add names button in the area basic info page
 When the user enters name type as <type> in the area basic info page
 And the user enters name value as <value> in the area basic info page
@@ -1282,6 +1291,7 @@ And the user enters the area <area> in the type-ahead box
 When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area names rows
 When the user clicks on the add names button in the area basic info page
 When the user enters name type as <type> in the area basic info page
 And the user enters name value as <value> in the area basic info page
@@ -1301,4 +1311,4 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|type|value|value2|
-|Angola|Namibe|Alternative Name|test|test|
+|Angola|Namibe|Alternative Name|testing|testing|

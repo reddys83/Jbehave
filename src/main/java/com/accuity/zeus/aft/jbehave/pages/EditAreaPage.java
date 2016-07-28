@@ -594,18 +594,17 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void verifyFixedNameTypeNotEditable(String nameType) {
 		
-        String nameTypePath = null;
-		
-		if(FULL_NAME.equals(nameType)) {
-			nameTypePath = "area_names_full_name_type_xpath";
-		} else if(DISPLAY_NAME.equals(nameType)) {
-			nameTypePath = "area_names_display_name_type_xpath";
-		}
-		
+        String nameTypePath = null;		
 		try {
-			getDriver().findElement(AreaIdentifiers.getObjectIdentifier(nameTypePath)).findElement(By.cssSelector("input"));
-		} catch(NoSuchElementException ex) {
-			assertTrue("Full Name is not editable", true);
+			
+			if(FULL_NAME.equals(nameType)) {
+				nameTypePath = "area_names_full_name_type_parent";
+			} else if(DISPLAY_NAME.equals(nameType)) {
+				nameTypePath = "area_names_display_name_type_parent";
+			}
+			assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier(nameTypePath)).findElement(By.cssSelector("input")).getAttribute("name").contains("fixed"));
+		} catch(Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 	
@@ -790,7 +789,15 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void checkDeleteRowButtonNotExist(String nameType) {
 		try {
-			getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']/td[@class='delete']"));
+			String nameTypeParent = null;
+			if(FULL_NAME.equals(nameType)) {
+				nameTypeParent = "area_names_full_name_type_parent";
+			} else if(DISPLAY_NAME.equals(nameType)) {
+				nameTypeParent = "area_names_display_name_type_parent";
+			}
+			// First two columns for Type and value, delete button exist in 3rd column, if we verify only two columns exist in Full and Display name then delete button will not be present.
+			assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier(nameTypeParent)).findElements(By.tagName("td")).size()==2);
+			
 		} catch(NoSuchElementException ex) {
 			assertTrue("Delete Row button not present", true);
 		}
