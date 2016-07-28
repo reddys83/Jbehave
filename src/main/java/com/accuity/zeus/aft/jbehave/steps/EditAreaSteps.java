@@ -277,7 +277,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaNameValueNotUpdatedInDB(country, area, nameType, source, nameValue);
 	}
 	
-	@Then("the user should see not the area name type and value updated in the area basic info page")
+	@Then("the user should not see the area name type and value updated in the area basic info page")
 	public void verityCityNameTypeAndValueNotPresent(@Named("type") String newNameType, 
 										   @Named("value") String newNameValue) {
 		getEditAreaPage().verifyNameTypeNotPresent(newNameType);

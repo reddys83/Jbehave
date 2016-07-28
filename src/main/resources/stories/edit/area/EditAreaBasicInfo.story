@@ -754,8 +754,8 @@ Examples:
 |Angola|Namibe|Alternative Name|
 
 Scenario: User has selected to delete an existing area name -
-a) chooses no option - verify the existing name is available in UI
-b) chooses yes option - verify the names are modified
+a) verify if User can delete area name row and clicks no on confirmation modal, the existing name is available in UI
+b) verify if User can delete area name row and clicks yes on confirmation modal, on save the existing name is removed
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -786,7 +786,7 @@ Then the user should see the below summary changes in confirmation modal
 |Basic Info / Names|
 When the user clicks on the confirm button
 Then the user should not see the <type> <value> in zeus document
-Then the user should see not the area name type and value updated in the area basic info page
+Then the user should not see the area name type and value updated in the area basic info page
 Then the user reverts the changes to the document
 
 Examples:
@@ -794,8 +794,8 @@ Examples:
 |Angola|Namibe|Alternative Name|test|Summary|
 
 Scenario: User has selected to add an area name -
-a) clicks delete and chooses no option - verify the newly added name is available in UI
-b) clicks delete and chooses yes option - verify the names are not modified
+a) verify if User can delete area name row and clicks no on confirmation modal, the newly added name is available in UI
+b) verify if User can delete area name row and clicks yes on confirmation modal, on save the newly added name is removed
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -821,7 +821,7 @@ When the user clicks on the save button
 Then the user should not see the <ConfirmationSummary> changes in confirmation modal for area
 When the user clicks on the confirm button
 Then the user should not see the <type> <value> in zeus document
-Then the user should see not the area name type and value updated in the area basic info page
+Then the user should not see the area name type and value updated in the area basic info page
 Then the user reverts the changes to the document
 
 Examples:
