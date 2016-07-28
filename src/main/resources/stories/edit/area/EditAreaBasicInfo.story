@@ -625,7 +625,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|value|
-|Angola|Cabinda|Cabinda1|
+|Angola|Namibe|Namibe1|
 
 Scenario: User has selected to update Display Name in Area's Basic Info
 
@@ -655,7 +655,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|value|
-|Angola|Cabinda|Cabinda1|
+|Angola|Namibe|Namibe1|
 
 Scenario: User has selected to add Alternative Name in Area's Basic Info
 
@@ -685,7 +685,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|type|value|
-|Angola|Cabinda|Alternative Name|test|
+|Angola|Namibe|Alternative Name|test|
 
 Scenario: User has selected to add New Name Row in Area's Basic Info - check save is successful when all blank values are selected and document is not updated
 
@@ -711,7 +711,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|type|value|ConfirmationSummary|
-|Angola|Cabinda|||Summary|
+|Angola|Namibe|||Summary|
 
 Scenario: User has selected to add New Name Row in Area's Basic Info - error message "Required" is displayed when type is not entered but value is entered
 
@@ -731,7 +731,7 @@ Then the user should see the error message Required for the required name type f
 
 Examples:
 |country|area|value|
-|Angola|Cabinda|test|
+|Angola|Namibe|test|
 
 Scenario: User has selected to add New Name Row in Area's Basic Info - error message is displayed when type is entered but value is not entered
 
@@ -751,7 +751,7 @@ Then the user should see the error message Enter up to 75 valid characters. for 
 
 Examples:
 |country|area|type|
-|Angola|Cabinda|Alternative Name|
+|Angola|Namibe|Alternative Name|
 
 Scenario: User has selected to delete an existing area name -
 a) chooses no option - verify the existing name is available in UI
@@ -791,7 +791,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|type|value|ConfirmationSummary|
-|Angola|Cabinda|Alternative Name|test|Summary|
+|Angola|Namibe|Alternative Name|test|Summary|
 
 Scenario: User has selected to add an area name -
 a) clicks delete and chooses no option - verify the newly added name is available in UI
@@ -826,7 +826,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|type|value|ConfirmationSummary|
-|Angola|Cabinda|Alternative Name|test|Summary|
+|Angola|Namibe|Alternative Name|test|Summary|
 
 Scenario: User has selected to update area name - verify that Full Name and Display Name cannot be deleted
 
@@ -843,8 +843,8 @@ Then the user should not see delete row button against <type>
 
 Examples:
 |country|area|type|
-|Angola|Cabinda|Full Name|
-|Angola|Cabinda|Display Name|
+|Angola|Namibe|Full Name|
+|Angola|Namibe|Display Name|
 
 Scenario: User has selected to add multiple Alternative Name in Area's Basic Info with different values
 
@@ -877,7 +877,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|type|value|value2|
-|Angola|Cabinda|Alternative Name|test|test2|
+|Angola|Namibe|Alternative Name|test|test2|
 
 Scenario: User has selected to add multiple Alternative Name in Area's Basic Info with same values
 
@@ -910,7 +910,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|type|value|value2|
-|Angola|Cabinda|Alternative Name|test|test|
+|Angola|Namibe|Alternative Name|test|test|
 
 Scenario:  To update the Area`s 'Basic Info' by entering a value for 'Add Info' that is different from the current value
 a)User verifies whether current value of Add Info is same as in trusted document.
