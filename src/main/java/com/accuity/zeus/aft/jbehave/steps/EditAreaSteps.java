@@ -468,4 +468,9 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("source") String source) {
 		getEditAreaPage().verifyAreaInterestRateFromTrustedDB(country, area, "areaInterestRate", source);
 	}
+	
+	@Then("the user should see maximum length of interest rate value is limited to $maxLength")
+	public void verifyMaxLengthInterestRate(@Named("maxLength") String maxLength) {
+		getEditAreaPage().verifyMaxLengthInterestRate(maxLength);
+	}
 }

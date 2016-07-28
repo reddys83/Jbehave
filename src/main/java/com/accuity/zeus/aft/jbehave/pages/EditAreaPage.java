@@ -900,6 +900,12 @@ public class EditAreaPage extends AbstractPage {
 		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source),
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).getText());
 	}
+	
+	public void verifyMaxLengthInterestRate(String maxLength) {
+		 assertEquals(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath"))
+                .getAttribute("maxlength"), maxLength);
+	}
+	
 	@Override
 	public String getPageUrl() {
 		return null;

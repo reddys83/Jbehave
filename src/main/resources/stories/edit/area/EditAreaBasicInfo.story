@@ -988,7 +988,7 @@ Scenario: User can edit  'Interest Rate Limit' that is different from the curren
 a)User verifies existing 'Interest Rate Limit' existing interest rate values are retrieved  from trusted doc 
 b)User verifies 'Your Changes have been saved' message is displayed after save
 c)User verifies Area Basic Info has been updated in confirmation modal
-d) User verifies whether updated 'Interest Rate Limit; is reflecting in Area Web page
+d)User verifies whether updated 'Interest Rate Limit is reflecting in Area Web page
 e)User verifies whether updated 'Interest rate limit' is reflecting in zeus document
 
 Given a user is on the search page
@@ -1096,7 +1096,8 @@ And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
 When the user enters values which is beyond 256 unicode characters in the area Interest Rate field
-And the user clicks on the save button
+Then the user should see maximum length of interest rate value is limited to 256
+When the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should be able to view that only 256 unicode characters are saved in area Interest Rate field
