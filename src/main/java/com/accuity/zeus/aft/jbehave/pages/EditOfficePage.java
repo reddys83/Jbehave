@@ -6,6 +6,7 @@ import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
+import com.accuity.zeus.utils.SimpleCacheManager;
 import org.apache.commons.collections.ListUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -26,7 +27,7 @@ public class EditOfficePage extends AbstractPage {
 
     static ResponseEntity responseEntity;
     static String endpointWithID;
-
+    public static String selectedEntity = "";
      public EditOfficePage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
      super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
@@ -188,6 +189,260 @@ public class EditOfficePage extends AbstractPage {
 
     public void verifyAdditionalInfoValueWithMaxLengthFromZeus(String officeFid, String selectedEntity, String source){
         assertEquals(getOfficeValuesFromDB(selectedEntity, source), bigString);
+
+    }
+
+    public void clickAddRowButton() {
+        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_location_addRow_id"));
+    }
+
+    public void verifyAddOfficeLocationButtonStatus(String add_button) {
+        assertFalse(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(add_button)).isEnabled());
+    }
+
+    public void clickonDeleteOfficeLocationsRowButton(String rowIdentifier) {
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+    }
+
+    public void verifyOfficeLocationRowIsNotDisplayed() {
+        try
+        {
+            WebElement identifier = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_location_delete_row_edit_mode"));
+            assertTrue(identifier != null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void verifyNoNewOfficeLocationRow(String rowIdentifier) {
+        try {
+            assertFalse(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        } catch (NoSuchElementException e) {
+        }
+
+    }
+
+    public void selectPrimaryFlag(String primaryFlag) {
+        selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier("office_location_primary_flag_radio_options"), primaryFlag);
+    }
+
+    public void clickOnAddAddressRowButton() {
+        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_address_addRow_id"));
+    }
+
+    public void selectOfficeAddressType(String typeRowIdentifier,String Type){
+        selectItemFromDropdownListByText(OfficeIdentifiers.getObjectIdentifier(typeRowIdentifier),Type);
+
+    }
+
+    public void enterofficeAddressLine1(String addressLine1RowIdentifier,String AddressLine1){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(addressLine1RowIdentifier)).clear();
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(addressLine1RowIdentifier)).sendKeys(AddressLine1);
+
+    }
+
+    public void enterofficeAddressLine2(String addressLine2RowIdentifier,String AddressLine2){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(addressLine2RowIdentifier)).clear();
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(addressLine2RowIdentifier)).sendKeys(AddressLine2);
+
+    }
+
+    public void enterofficeAddressLine3(String addressLine3RowIdentifier,String AddressLine3){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(addressLine3RowIdentifier)).clear();
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(addressLine3RowIdentifier)).sendKeys(AddressLine3);
+
+    }
+
+    public void enterofficeAddressLine4(String addressLine4RowIdentifier,String AddressLine4){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(addressLine4RowIdentifier)).clear();
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(addressLine4RowIdentifier)).sendKeys(AddressLine4);
+
+    }
+
+    public CountryPage enterOfficeCountryInTheTypeAheadBox(String country) {
+        SimpleCacheManager.getInstance().put("selectedCountry",country);
+        selectedEntity = country;
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_address_country_type_ahead_xpath")).sendKeys(country);
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_address_country_type_ahead_xpath")).sendKeys(Keys.RETURN);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new CountryPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
+    }
+
+    public void verifyOfficeAreaList() {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list", nvPairs);
+        for (int i = 0; i < document.getElementsByTagName("area").getLength(); i++) {
+            assertEquals(document.getElementsByTagName("area").item(i).getTextContent(), getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_list_xpath")).get(i).getText());
+
+        }
+    }
+
+    public void enterOfficeAreaInTypeAhead(String area) {
+        SimpleCacheManager.getInstance().put("selectedArea",area);
+        selectedEntity = area;
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_typeAhead_xpath")).sendKeys(area);
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_typeAhead_xpath")).sendKeys(Keys.RETURN);
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void verifyOfficeSubAreaList(Database database, ApacheHttpClient apacheHttpClient) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "subarea list", nvPairs);
+        for (int i = 0; i < document.getElementsByTagName("subarea").getLength(); i++) {
+            assertEquals(document.getElementsByTagName("subarea").item(i).getTextContent(), getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown_list_xpath")).get(i).getText());
+        }
+    }
+
+
+    public void enterOfficeSubAreaInTypeAhead(String subarea) {
+        SimpleCacheManager.getInstance().put("selectedSubArea",subarea);
+        selectedEntity = subarea;
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown_typeAhead_xpath")).sendKeys(subarea);
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown_typeAhead_xpath")).sendKeys(Keys.RETURN);
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void verifyCitiesForSelectedSubArea(ExamplesTable cities) {
+        List<WebElement> subareasCollection = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_city_dropdown_list_xpath"));
+        for (int i = 0; i < cities.getRowCount(); i++) {
+            assertEquals(cities.getRow(i).get(cities.getHeaders().get(0)), subareasCollection.get(i).getText());
+        }
+    }
+
+
+    public void verifyAreaForSelectedCountry(ExamplesTable areas) {
+        List<WebElement> areasCollection = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_list_xpath"));
+        for (int i = 0; i < areas.getRowCount(); i++) {
+            assertEquals(areas.getRow(i).get(areas.getHeaders().get(0)), areasCollection.get(i).getText());
+        }
+    }
+
+
+    public void clickOnAreaDropdown() {
+        //waitForElementToAppear(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_typeAhead_xpath"));
+        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_list_xpath"));
+    }
+
+    public void verifyOfficeCityList() {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "city list", nvPairs);
+        for (int i = 0; i < document.getElementsByTagName("city").getLength(); i++) {
+            assertEquals(document.getElementsByTagName("city").item(i).getTextContent(), getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_city_dropdown_list_xpath")).get(i).getText());
+        }
+    }
+
+    public void clickonDeleteOfficeAddressRowButton(String rowIdentifier) {
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+    }
+
+    public void verifyOfficeAddressRowIsNotDisplayed() {
+        try
+        {
+            WebElement identifier = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_address_delete_row_view"));
+            assertTrue(identifier != null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clickOnAddTelecomsRowButton() {
+        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_telecoms_addRow_id"));
+    }
+
+    public void selectOfficeTelecomsType(String typeRowIdentifier,String Type){
+        selectItemFromDropdownListByText(OfficeIdentifiers.getObjectIdentifier(typeRowIdentifier),Type);
+
+    }
+
+    public void enterOfficeTelecomsRank(String rankRowIdentifier,String Rank){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rankRowIdentifier)).sendKeys(Rank);
+
+    }
+
+    public void enterOfficeTelecomsTextBefore(String textBeforeRowIdentifier,String TextBefore){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(textBeforeRowIdentifier)).sendKeys(TextBefore);
+
+    }
+
+    public void enterOfficeTelecomsValue(String valueRowIdentifier,String Value){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(valueRowIdentifier)).sendKeys(Value);
+
+    }
+
+    public void enterOfficeTelecomsRangeLimit(String rangeLimitRowIdentifier,String RangeLimit){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rangeLimitRowIdentifier)).sendKeys(RangeLimit);
+
+    }
+
+    public void enterOfficeTelecomsExt(String extRowIdentifier,String Ext){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(extRowIdentifier)).sendKeys(Ext);
+
+    }
+
+    public void enterOfficeTelecomsTextAfter(String textAfterRowIdentifier,String TextAfter){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(textAfterRowIdentifier)).sendKeys(TextAfter);
+
+    }
+
+    public void enterOfficeTelecomsAnswerBack(String answerBackRowIdentifier,String AnswerBack){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(answerBackRowIdentifier)).sendKeys(AnswerBack);
+
+    }
+
+    public void verifyOfficeTelecomsRowIsNotDisplayed() {
+        try
+        {
+            WebElement identifier = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_telecoms_delete_row_view"));
+            assertTrue(identifier != null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+        public void enterOfficeAddressPostalCode(String postalCodeRowIdentifier,String PostalCode){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(postalCodeRowIdentifier)).sendKeys(PostalCode);
+
+    }
+
+    public void enterOfficeAddressPostalCodeSuffix(String postalCodeSuffixRowIdentifier,String PostalCodeSuffix){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(postalCodeSuffixRowIdentifier)).sendKeys(PostalCodeSuffix);
+
+    }
+    public void enterOfficeAddressInfo(String infoRowIdentifier,String Info){
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(infoRowIdentifier)).sendKeys(Info);
 
     }
     @Override
