@@ -258,17 +258,15 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@Then("the user should see the area name type and value updated in the area basic info page")
-	public void verityCityNameTypeAndValue(@Named("type") String newNameType, 
+	public void verityAreaNameTypeAndValue(@Named("type") String newNameType, 
 										   @Named("value") String newNameValue) {
-		getEditAreaPage().verifyNameType(newNameType, 0);
-		getEditAreaPage().verifyNameValue(newNameType, newNameValue, 0);
+		getEditAreaPage().verifyNameTypeAndValueInViewMode(newNameType, newNameValue);
 	}
 	
 	@Then("the user should see the area name type and value in the edit area basic info page")
-	public void verityCityNameTypeAndValueInEditMode(@Named("type") String newNameType, 
-										   @Named("value") String newNameValue) {
-		getEditAreaPage().verifyNameTypeInEditMode(newNameType, 0);
-		getEditAreaPage().verifyNameValueInEditMode(newNameValue);
+	public void verityAreaNameTypeAndValueInEditMode(@Named("type") String newNameType, 
+										   @Named("value") String newNameValue) {		
+		getEditAreaPage().verifyNameValueInEditMode(newNameType, newNameValue);
 	}
 	
 	@Then("the user should not see the <type> <value> in $source document")
@@ -278,9 +276,14 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@Then("the user should not see the area name type and value updated in the area basic info page")
-	public void verityCityNameTypeAndValueNotPresent(@Named("type") String newNameType, 
+	public void verityAreaNameTypeAndValueNotPresent(@Named("type") String newNameType, 
 										   @Named("value") String newNameValue) {
-		getEditAreaPage().verifyNameTypeNotPresent(newNameType);
+		getEditAreaPage().verifyNameTypeNotPresent(newNameType, newNameValue);
+	}
+	
+	@When("the user deletes the existing area names rows")
+	public void deleteAllAreaNameRows() {
+		getEditAreaPage().deleteAllAreaNameRows();
 	}
 	
 	@Then("the user should see the error message $errorMessage for the required name type field in the area basic info page")
@@ -320,16 +323,15 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@Then("the user should see the second area name type and value updated in the area basic info page")
-	public void veritySecondCityNameTypeAndValue(@Named("type") String newNameType, 
+	public void veritySecondAreaNameTypeAndValue(@Named("type") String newNameType, 
 			@Named("value2") String newNameValue) {
-		getEditAreaPage().verifyNameType(newNameType, 1);
-		getEditAreaPage().verifyNameValue(newNameType, newNameValue, 1);
+		getEditAreaPage().verifyNameTypeAndValueInViewMode(newNameType, newNameValue);
 	}
 	
 	@Then("the user should not see the second area name type and value updated in the area basic info page")
-	public void veritySecondCityNameTypeAndValueNotPresent(@Named("type") String newNameType, 
+	public void veritySecondAreaNameTypeAndValueNotPresent(@Named("type") String newNameType, 
 			@Named("value2") String newNameValue) {
-		getEditAreaPage().verifyNameTypeNotPresent(newNameType, 1);
+		getEditAreaPage().verifyDuplicateNameTypeNotPresent(newNameType, newNameValue);
 	}
 
 	@When("the user enters the <addInfoText> in the area add info text area")

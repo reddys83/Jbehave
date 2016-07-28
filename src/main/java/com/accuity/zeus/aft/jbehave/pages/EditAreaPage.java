@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.*;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
@@ -689,65 +689,85 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void enterNameValue(String newNameValue) {
 		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_name_value_input_xpath"), newNameValue);
-	}
+	}	
 	
-	public void verifyNameTypeInEditMode(String nameType, int index) {
+	public void verifyNameValueInEditMode(String nameType, String newNameValue) {
 		try {
-			if (nameType != null) {
-				List<WebElement> identifierDropDowns = getDriver()
-						.findElements(AreaIdentifiers.getObjectIdentifier("area_name_type_input_xpath"));
-				Select dropdown = new Select(identifierDropDowns.get(index));
-				assertEquals(nameType, dropdown.getFirstSelectedOption().getText());
-			}
+			Boolean nameTypeAndValueFound = false;			
+			List<WebElement> dropDown = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_name_type_input_xpath"));
+			List<WebElement> nameValues = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_name_value_input_xpath"));
+			for (int i = 0; i < dropDown.size(); i++) {
+				Select dropdown = new Select(dropDown.get(i));
+				if (nameType.equals(dropdown.getFirstSelectedOption().getText()) && newNameValue.equals(nameValues.get(i).getAttribute("value"))) {
+					nameTypeAndValueFound = true;	
+					break;
+				}				
+			}	
+			assertTrue(nameTypeAndValueFound);
+
 		} catch (Exception e) {
 			e.printStackTrace();
+		}		
+	}
+	
+	public void verifyNameTypeAndValueInViewMode(String nameType, String nameValue) {
+		try {
+			WebElement areaNameTable = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_NameTable"));
+			List<WebElement> areaNameRows = areaNameTable.findElements(By.tagName("tr"));
+			Boolean nameValueFound = false;
+			for (int i = 0; i < areaNameRows.size(); i++) {
+				if(areaNameRows.get(i).getText().contains(nameType) && areaNameRows.get(i).getText().contains(nameValue)){				
+					List<WebElement> areaNameRowsColumns = areaNameRows.get(i).findElements(By.tagName("td"));					
+					if (areaNameRowsColumns.get(0).getText().equals(nameType) && areaNameRowsColumns.get(1).getText().equals(nameValue)) {				
+						nameValueFound = true;
+						break;
+					}
+				}				
+			}
+			assertTrue(nameValueFound);
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
-	
-	public void verifyNameValueInEditMode(String newNameValue) {
-		WebElement nameValueElement =  getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_name_value_input_xpath"));
-		assertEquals(newNameValue, nameValueElement.getAttribute("value"));
-	}
-	
-	public void verifyNameType(String nameType, int index) {
+		
+	public void verifyNameTypeNotPresent(String nameType, String nameValue) {
 		try {
-			// appending the name type to the xpath to retrieve corresponding row in view mode
-			List<WebElement> newNameTypeElements = getDriver().findElements(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']"));
-			assertTrue(newNameTypeElements.get(index) != null);
-		} catch(Exception ex) {
+			WebElement areaNameTable = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_NameTable"));
+			List<WebElement> areaNameRows = areaNameTable.findElements(By.tagName("tr"));		
+			Boolean nameNotFound = true;
+			for (int i = 0; i < areaNameRows.size(); i++) {		
+				if(areaNameRows.get(i).getText().contains(nameType) && areaNameRows.get(i).getText().contains(nameValue)){				
+					List<WebElement> areaNameRowsColumns = areaNameRows.get(i).findElements(By.tagName("td"));					
+					if (areaNameRowsColumns.get(0).getText().equals(nameType) && areaNameRowsColumns.get(1).getText().equals(nameValue)) {				
+						nameNotFound = false;
+					}
+				}	
+			}
+			assertTrue(nameNotFound);
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 	
-	public void verifyNameValue(String nameType, String nameValue, int index) {
+	public void verifyDuplicateNameTypeNotPresent(String nameType, String nameValue) {
 		try {
-			// appending the name type to the xpath to retrieve the corresponding row in view mode
-			List<WebElement> newNameValueElements = getDriver().findElements(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']/td[2]"));
-			assertEquals(newNameValueElements.get(index).getText(), nameValue);
-		} catch(Exception ex) {
+			WebElement areaNameTable = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_NameTable"));
+			List<WebElement> areaNameRows = areaNameTable.findElements(By.tagName("tr"));		
+			int duplicateNameCount = 0;
+			for (int i = 0; i < areaNameRows.size(); i++) {		
+				if(areaNameRows.get(i).getText().contains(nameType) && areaNameRows.get(i).getText().contains(nameValue)){				
+					List<WebElement> areaNameRowsColumns = areaNameRows.get(i).findElements(By.tagName("td"));					
+					if (areaNameRowsColumns.get(0).getText().equals(nameType) && areaNameRowsColumns.get(1).getText().equals(nameValue)) {				
+						duplicateNameCount ++;
+					}
+				}	
+			}
+			assertTrue(duplicateNameCount==1);
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
-	
-	public void verifyNameTypeNotPresent(String nameType) {
-		try {
-			// appending the name type to the xpath to retrieve corresponding row in view mode
-			getDriver().findElement(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']"));
-		} catch(NoSuchElementException ex) {
-			assertTrue(nameType + "not present", true);
-		}
-	}
-	
-	public void verifyNameTypeNotPresent(String nameType, int index) {
-		try {
-			// appending the name type to the xpath to retrieve corresponding row in view mode
-			List<WebElement> newNameTypeElements = getDriver().findElements(By.xpath("//*[@id='areaBasicInfo']//tr[td='" + nameType + "']"));
-			assertTrue(newNameTypeElements.size() <= index);
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-	
+		
 	public void verifyAreaNameValueNotUpdatedInDB(String country, String area, String nameType, String source, String nameValue) {		
 		Map<String, String> cityNameValueMap = getAreaNameValueMapFromDB(country, area, source);
 		assertTrue(!cityNameValueMap.containsKey(nameType));
@@ -774,6 +794,27 @@ public class EditAreaPage extends AbstractPage {
 		} catch(NoSuchElementException ex) {
 			assertTrue("Delete Row button not present", true);
 		}
+	}
+	
+	public void deleteAllAreaNameRows() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_names_add_names_button_xpath"));
+		List<WebElement> deleteRows = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_delete_name_row_button_xpath"));
+
+		for (int index = 0; index < deleteRows.size(); index++) {
+			WebElement currentInstance = getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("area_delete_name_row_button_xpath"))
+					.get(0);
+			if (currentInstance != null) {
+				currentInstance.click();
+				verifyDeleteConfirmationModalInAreaPage();
+				pressEnterButtonInDeleteConfirmationModalForArea();
+			}
+		}
+	}	
+	
+	public void verifyDeleteConfirmationModalInAreaPage() {
+		 assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(AreaIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_xpath")).getText());
 	}
 	
 	public void enterSecondNameValue(String newNameValue) {
@@ -1117,8 +1158,7 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyNewlyAddedAreaIdentifierRowExists() {
 		try
 		{
-			WebElement identifier = getDriver()
-					.findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_view_mode"));
+			WebElement identifier = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_view_mode"));
 			assertTrue(identifier != null);
 		} catch (Exception e) {
 			e.printStackTrace();
