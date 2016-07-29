@@ -88,7 +88,7 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office identifier link in the navigation bar
 And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
+When the user gets the document with get doc id for offices with the <officeFid> from the trusted database
 When the user deletes the existing office identifier rows
 When the user clicks on the add new identifier button in the office identifier page
 When the user enters identifier type as <identifierType> in the office identifier page
@@ -127,7 +127,7 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office identifier link in the navigation bar
 And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
+When the user gets the document with get doc id for offices with the <officeFid> from the trusted database
 When the user deletes the existing office identifier rows
 When the user clicks on the add new identifier button in the office identifier page
 When the user enters identifier type as <identifierType> in the office identifier page
@@ -143,8 +143,8 @@ Then the user verifies that no values are entered in zeus document for office id
 Then the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|identifierType|identifierValue|identifierStatus|
-|1038|FID|1038|1038-51||||
+|entity|searchBy|fid|officeFid|identifierType|identifierValue|identifierStatus|ConfirmationSummary|
+|1038|FID|1038|1038-51||||Summary|
 
 Scenario: User can edit office's identifiers - Verify whether the text entered in the Identifier 'Value' field is not beyond 50 unicode characters.
 
@@ -159,7 +159,7 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office identifier link in the navigation bar
 And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
+When the user gets the document with get doc id for offices with the <officeFid> from the trusted database
 When the user deletes the existing office identifier rows
 When the user clicks on the add new identifier button in the office identifier page
 When the user enters identifier type as <identifierType> in the office identifier page
@@ -267,7 +267,7 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office identifier link in the navigation bar
 And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
+When the user gets the document with get doc id for offices with the <officeFid> from the trusted database
 When the user deletes the existing office identifier rows
 When the user clicks on the save button
 When the user clicks on the confirm button
@@ -281,7 +281,43 @@ Examples:
 |1038|FID|1038|1038-51|
 
 Scenario: User can edit office's identifiers
-1 - Verify if User can prevent deleting identifiers( "Type","Value" and "Status") by clicking on 'No' after saving.
+1 - Verify if User can prevent deleting identifiers( "Type","Value" and "Status") by clicking on 'No' before saving.
+2 - Verify if User can delete identifiers( "Type","Value" and "Status") by clicking on 'Yes' before saving.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office identifier link in the navigation bar
+And the user clicks on the office update link
+When the user deletes the existing office identifier rows
+When the user clicks on the add new identifier button in the office identifier page
+When the user enters identifier type as <identifierType> in the office identifier page
+When the user enters identifier value as <identifierValue> in the office identifier page
+When the user enters identifier status as <identifierStatus> in the office identifier page
+When the user clicks on the save button
+When the user clicks on the confirm button
+And the user clicks on the office update link
+When the user clicks on the delete identifier row button in the office identifiers page
+Then the user should see delete row confirmation modal in the office identifiers page
+When the user clicks on the No button to cancel the deletion of row in the office identifiers page
+Then the user should see the newly added identifier row in the office identifiers page
+When the user clicks on the delete identifier row button in the office identifiers page
+Then the user should see delete row confirmation modal in the office identifiers page
+When the user clicks on the Yes button to delete the row in the office identifiers page
+Then the user should not see the newly added identifier row in the office identifiers page
+
+Examples:
+|entity|searchBy|fid|officeFid|identifierType|identifierValue|identifierStatus|
+|1038|FID|1038|1038-51|FDIC Office Branch ID|QATest|Inactive|
+
+Scenario: User can edit office's identifiers
+1 - Verify if User can prevent deleting identifiers( "Type","Value" and "Status") by clicking on 'No' , then after saving the identifier row should be available.
 2 - Verify if User can delete identifiers( "Type","Value" and "Status") by clicking on 'Yes' , then after saving it should be removed.
 
 Given a user is on the search page
@@ -295,7 +331,7 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office identifier link in the navigation bar
 And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
+When the user gets the document with get doc id for offices with the <officeFid> from the trusted database
 When the user deletes the existing office identifier rows
 When the user clicks on the add new identifier button in the office identifier page
 When the user enters identifier type as <identifierType> in the office identifier page
