@@ -474,7 +474,6 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
-And the user clicks on add new office address button in the office locations
 When the user enters the office country <country> in the type-ahead box
 Then the user should see the list of all existing area for the selected country by full name in office address
 When the user enters the office area <area> in the type-ahead box
@@ -507,7 +506,6 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
-And the user clicks on add new office address button in the office locations
 And the user enters the office country <country> in the type-ahead box
 When the user clicks on the choose an area option
 Then the user should see the below states for the selected country:
@@ -515,7 +513,7 @@ Then the user should see the below states for the selected country:
 |Return All Cities|
 |No Area|
 When the user enters the office area <area> in the type-ahead box
-Then the user should see the list of all existing subarea for the selected area by full name in office address
+Then the user should see the list of all existing city for the selected area by full name in office address
 
 Examples:
 |entity|searchBy|fid|officeFid|country|area|
@@ -555,6 +553,7 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on the add new office location button in the office page
 And the user clicks on add new office address button in the office locations
 And the user clicks on delete office address row button for the row office_first_new_row_address_delete_button
 Then the user should see the delete row confirmation modal in the office page
@@ -570,7 +569,7 @@ And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|
-|1010|FID|1010|1010-45|
+|249093|FID|249093|249093-0|
 
 Scenario: a)Verify that the user should be able to Add new telecoms row for an office location
           b)Verify User can select a new value for Type,Rank,TextBefore,Value,RangeLimit,Ext,TextAfter,AnswerBack
@@ -613,8 +612,8 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
-And the user clicks on add new office address button in the office locations
-And the user clicks on delete office address row button for the row office_first_new_row_address_delete_button
+And the user clicks on add new office telecoms button in the office locations
+And the user clicks on delete office telecoms row button for the row office_first_new_row_telecoms_delete_button
 Then the user should see the delete row confirmation modal in the office page
 When the user clicks on the yes button in the delete row confirmation modal in the office page
 And the user clicks on the save button

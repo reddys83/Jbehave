@@ -300,6 +300,11 @@ public class EditOfficeSteps extends AbstractSteps{
     {
         getEditOfficePage().enterOfficeAddressInfo(infoRowIdentifier,Info);
     }
+    @When("the user clicks on delete office telecoms row button for the row $deletebutton_Row")
+    public void clickonDeleteOfficeTelecomsRowButton(String deletebutton_Row)
+    {
+        getEditOfficePage().clickonDeleteOfficeTelecomsRowButton(deletebutton_Row);
+    }
 }
 
 

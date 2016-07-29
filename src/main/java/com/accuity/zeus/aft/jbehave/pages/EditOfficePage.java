@@ -445,6 +445,10 @@ public class EditOfficePage extends AbstractPage {
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(infoRowIdentifier)).sendKeys(Info);
 
     }
+
+    public void clickonDeleteOfficeTelecomsRowButton(String rowIdentifier) {
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+    }
     @Override
     public String getPageUrl() {
         return null;
