@@ -4,9 +4,12 @@ import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.commons.collections.ListUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -190,6 +193,303 @@ public class EditOfficePage extends AbstractPage {
         assertEquals(getOfficeValuesFromDB(selectedEntity, source), bigString);
 
     }
+    
+    public void verifyOfficeIdentifierValuesFromTrustedDB(String source, String officeFid) {
+    	try {
+			attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_new_identifier_button_id"));
+			List<String> identifierTypes = new ArrayList<>();
+			List<String> identifierValues = new ArrayList<>();
+			List<String> identifierStatusValues = new ArrayList<>();
+			List<WebElement> identifierTypeDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_input_xpath"));
+			
+			if (identifierTypeDropDowns.size() > 0) {
+				List<WebElement> identifierValueDropDowns = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("office_identifier_value_input_xpath"));
+				List<WebElement> identifierStatusDropDowns = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("office_identifier_status_input_xpath"));
+				
+				for (int index = 0; index < identifierTypeDropDowns.size(); index++) {					
+					identifierTypes.add(new Select(identifierTypeDropDowns.get(index)).getAllSelectedOptions().get(0).getText());
+					identifierValues.add(identifierValueDropDowns.get(index).getAttribute("value"));
+					identifierStatusValues.add(new Select(identifierStatusDropDowns.get(index)).getAllSelectedOptions().get(0).getText());
+				}
+				
+				verifyOfficeIdentifierValuesFromDB(source, officeFid, identifierTypes, identifierValues,
+						identifierStatusValues);
+			} else {
+				assertTrue("There is no existing values in Identifier section", true);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
+    public void verifyOfficeIdentifierValuesFromDB(String source, String officeFid, List<String> identifierType,
+			List<String> identifierValue, List<String> identifierStatus) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get office identifiers values", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("identifiers").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("identifiers").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						switch (document.getElementsByTagName("identifiers").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "identifierType":
+							assertEquals(document.getElementsByTagName("identifiers").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), identifierType.get(i));
+							break;
+						case "identifierValue":
+							assertEquals(document.getElementsByTagName("identifiers").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), identifierValue.get(i));
+							break;
+						case "identifierStatus":
+							assertEquals(
+									StringUtils.capitalize(document.getElementsByTagName("identifiers").item(0)
+											.getChildNodes().item(i).getChildNodes().item(childNode).getTextContent()),
+									identifierStatus.get(i));
+							break;
+						}
+					}
+				}
+			} else
+				assertTrue(source+ "document is null",false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void clickOnOfficeAddNewIdentifierButton() {
+		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_new_identifier_button_id"));
+	}
+    
+    public void verifyOfficeIdentifierTypesList() {
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get office identifiers type list");
+		List<WebElement> officeIdentifierTypesList = getDriver()
+				.findElements(OfficeIdentifiers.getObjectIdentifier("officeIdentifier_type_id"));
+
+		List<WebElement> options = officeIdentifierTypesList.get(0).findElements(By.cssSelector("option"));
+		for (int indexOfOption = 1; indexOfOption < options.size(); indexOfOption++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(),
+					options.get(indexOfOption).getText().trim());
+		}
+	}
+    
+    public void verifyOfficeIdentifierStatusList() {
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get office Status types");
+		List<WebElement> officeIdentifierStatusList = getDriver()
+				.findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_status_input_xpath"));
+
+		List<WebElement> options = officeIdentifierStatusList.get(0).findElements(By.cssSelector("option"));
+		for (int indexOfOption = 0; indexOfOption < document.getElementsByTagName("status")
+				.getLength(); indexOfOption++) {
+			assertEquals(StringUtils.capitalize(
+					document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent()),
+					options.get(indexOfOption + 1).getText().trim());
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(),
+					options.get(indexOfOption + 1).getAttribute("value").trim());
+		}
+	}
+    
+    public void deleteAllOfficeIdentifierRows() {
+		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_new_identifier_button_id"));
+		List<WebElement> deleteRows = getDriver()
+				.findElements(OfficeIdentifiers.getObjectIdentifier("office_delete_identifiers_row_button_xpath"));
+
+		for (int index = 0; index < deleteRows.size(); index++) {
+			WebElement currentInstance = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_delete_identifiers_row_button_xpath"))
+					.get(0);
+			if (currentInstance != null) {
+				currentInstance.click();
+				verifyOfficeIdentifierRowDeleteConfirmationModal();
+				pressEnterButtonInDeleteConfirmationModalForOfficeIdentifiers();
+			}
+		}
+	}
+    
+    public void verifyOfficeIdentifierRowDeleteConfirmationModal() {
+		assertEquals("Please confirm - would you like to delete this row? NO YES",
+				getDriver().findElement(
+						OfficeIdentifiers.getObjectIdentifier("delete_office_identifier_row_confirmation_modal_xpath"))
+						.getText());
+	}
+    
+    public void pressEnterButtonInDeleteConfirmationModalForOfficeIdentifiers() {
+		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_delete_yes_button_id")).sendKeys(Keys.ENTER);
+	} 
+    
+    public void enterOfficeIdentifierType(String identifierType, int rowNo) {
+		try {
+			List<WebElement> identifierDropDowns = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_input_xpath"));
+			if (rowNo <= identifierDropDowns.size()) {
+				Select dropdown = new Select(identifierDropDowns.get(rowNo - 1));
+				if (identifierType.equals("")) {
+					dropdown.selectByValue(identifierType);
+				} else {
+					dropdown.selectByVisibleText(identifierType);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void enterOfficeIdentifierValue(String identifierValue, int rowNo) {
+		try {
+			List<WebElement> identifierValues = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_value_input_xpath"));
+			if (rowNo <= identifierValues.size()) {
+				identifierValues.get(rowNo - 1).clear();
+				identifierValues.get(rowNo - 1).sendKeys(identifierValue);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void enterOfficeIdentifierStatus(String identifierStatus, int rowNo) {
+		try {
+			List<WebElement> identifierDropDowns = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_status_input_xpath"));
+			if (rowNo <= identifierDropDowns.size()) {
+				Select dropdown = new Select(identifierDropDowns.get(rowNo - 1));
+				if (identifierStatus.equals("")) {
+					dropdown.selectByValue(identifierStatus);
+				} else {
+					dropdown.selectByVisibleText(identifierStatus);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void verifySelectedOfficeIdentifierTypeNotInNewRow(String identifierType, int rowNo) {
+		try {
+			List<WebElement> identifierDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_input_xpath"));
+			if (rowNo <= identifierDropDowns.size()) {
+				Select dropdown = new Select(identifierDropDowns.get(rowNo - 1));
+				for (int index = 0; index < dropdown.getOptions().size(); index++) {
+					assertTrue(!dropdown.getOptions().get(index).getText().contains(identifierType));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void verifySuccessfulUpdatedMessage() {
+		try {
+			assertTrue(
+					getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_save_confirmation_message_xpath"))
+							.isDisplayed());
+			Thread.sleep(5000); // to wait for page get refresh
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void verifyOfficeIdentifierParametersInUI(String[] identifierTypes, String[] identifierValues,
+			String[] identifierStatusValues) {
+		
+		List<WebElement> identifierRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_view_mode"));
+		
+		for (int i = 0; i < identifierRows.size(); i++) {
+			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(identifierTypes[i]));
+			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(identifierValues[i]));
+			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(identifierStatusValues[i]));
+		}
+	}
+    
+    public void verifyNoSummaryConfirmationModal(String summaryText) {
+		try {
+			WebElement confirmChanges = getDriver()
+					.findElement(OfficeIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
+			String confirmationText = confirmChanges.getText();
+			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
+		} catch (Exception e) {
+			assertTrue(false);
+		}
+	}
+    
+    public void verifyNewlyAddedOfficeIdentifierRowIsNotDisplayed() {
+		try {
+			WebElement identifier = getDriver()
+					.findElement(OfficeIdentifiers.getObjectIdentifier("office_AdditionalIdentifiers"));
+			assertTrue(identifier == null);
+		} catch (Exception e) {
+			assertTrue(true);
+		}
+	}
+    
+    public void verifyMaxLengthInOfficeIdentifierValue(String maxLength) {
+		assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_identifier_value_input_xpath"))
+				.getAttribute("maxlength"), maxLength);
+	}
+    
+    public void verifyErrorMessageForRequiredOfficeIdentifierType(String errMsg) {
+		assertEquals(errMsg, getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_req_err_msg_xpath")).getText());
+	}
+    
+    public void verifyErrorMessageForRequiredOfficeIdentifierValue(String errMsg) {
+		assertEquals(errMsg, getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_identifier_value_req_err_msg_xpath")).getText());
+	}
+    
+    public void verifyErrorMessageForRequiredOfficeIdentifierStatus(String errMsg) {
+		assertEquals(errMsg,
+				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_identifier_status_req_err_msg_xpath"))
+						.getText());
+	}
+    
+    public void verifyIdentifierRowNotPresentInZeusDB(String source, String officeFid) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
+			Thread.sleep(3000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office identifiers values", nvPairs);
+			if (document != null) {
+				assertNull(document.getElementsByTagName("identifierType").item(0));
+				assertNull(document.getElementsByTagName("identifierValue").item(0));
+				assertNull(document.getElementsByTagName("identifierStatus").item(0));
+			} else
+				assert false : source + " document is null";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void clickOnDeleteNewOfficeIdentifierRowButton() {
+		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_delete_identifiers_row_button_xpath"));
+	}
+    
+    public void pressNoButtonInDeleteConfirmationModalForOfficeIdentifiers() {
+		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_delete_no_button_id_click")).click();
+	}
+    
+    public void verifyNewlyAddedOfficeIdentifierRowExists() {
+		try
+		{
+			WebElement identifier = getDriver()
+					.findElement(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_view_mode"));
+			assertTrue(identifier != null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+    
+
     @Override
     public String getPageUrl() {
         return null;

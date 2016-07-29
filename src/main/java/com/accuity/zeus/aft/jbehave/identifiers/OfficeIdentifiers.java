@@ -27,6 +27,22 @@ public class OfficeIdentifiers {
         hmap.put("office_basicInfo_view_foreignoffice_xpath", By.xpath(".//*[@id='officeBasicInfo']//tr[th='Foreign Office']/td"));
         hmap.put("office_basicInfo_AdditionalInfo_textarea_xpath",By.xpath(".//*[@id='officeBasicInfo']//tr[th='Add Info']/td/textarea"));
         hmap.put("office_basicInfo_AdditionalInfo_textarea_view_xpath",By.xpath(".//*[@id='officeBasicInfo']//tr[th='Add Info']/td"));
+        hmap.put("office_add_new_identifier_button_id", By.id(""));
+        hmap.put("office_identifier_type_input_xpath", By.xpath(""));
+        hmap.put("office_identifier_value_input_xpath", By.xpath(""));
+        hmap.put("office_identifier_status_input_xpath", By.xpath(""));
+        hmap.put("officeIdentifier_type_id", By.xpath(""));
+        hmap.put("office_save_confirmation_message_xpath", By.xpath("//*[@id='saveSuccess']"));
+        hmap.put("office_identifier_type_view_mode", By.xpath(""));
+        hmap.put("confirmation_modal_xpath", By.xpath("//*[@id='modal-region']"));
+        hmap.put("office_AdditionalIdentifiers", By.xpath("#additionalIdentifiers"));
+        hmap.put("office_identifier_type_req_err_msg_xpath", By.xpath(""));
+        hmap.put("office_identifier_value_req_err_msg_xpath", By.xpath(""));
+        hmap.put("office_identifier_status_req_err_msg_xpath", By.xpath(""));
+        hmap.put("delete_office_identifier_row_confirmation_modal_xpath", By.xpath(""));
+        hmap.put("office_delete_yes_button_id", By.xpath(""));
+        hmap.put("office_delete_identifiers_row_button_xpath", By.xpath(""));
+        hmap.put("office_delete_no_button_id_click", By.xpath(""));
 
     }
 
