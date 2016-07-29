@@ -111,7 +111,6 @@ public class XqueryMap {
 		queryMap.put("get area basic info","getAreaBasicInfo.xqy");
 		queryMap.put("active office test list","getActiveOfficeFidTest.xqy");
 		queryMap.put("get area identifiers","getCountryIdentifiers.xqy");
-		queryMap.put("get area basic info","getAreaBasicInfo.xqy");
         queryMap.put("get offices office types","getOfficesOfficeTypes.xqy");
    }
 
