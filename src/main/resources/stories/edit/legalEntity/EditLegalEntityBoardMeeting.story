@@ -86,7 +86,7 @@ Examples:
 |1717|FID|1717|Quarter|
 
 Scenario: Veirfy the valid inputs for legalEntity Board meeting - Bug-ZEUS-1225
-Meta:@test99
+Meta:@test995
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area

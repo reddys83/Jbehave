@@ -347,7 +347,6 @@ Examples:
 |Afghanistan||
 
 Scenario:User will get warning if click away from screen they are editing
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

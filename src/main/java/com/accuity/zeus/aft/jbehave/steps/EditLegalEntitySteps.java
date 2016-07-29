@@ -897,6 +897,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
     public void verifyMaxLengthForOverrideTextField(@Named("maxlength") String maxlength,@Named("rowIdentifier") String rowIdentifier)
     {getEditLegalEntityPage().verifyMaxLengthForOverrideTextField(maxlength,rowIdentifier);}
 
+    @When("the user selects agency type $agencyTypeRowIdentifier value as <type>")
     public void selectCreditRatingsAgencyType(@Named("agencyTypeRowIdentifier") String agencyTypeRowIdentifier,@Named("type") String type)
     {getEditLegalEntityPage().selectCreditRatingsAgencyType(agencyTypeRowIdentifier,type);
     }
