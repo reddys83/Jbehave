@@ -1119,20 +1119,19 @@ public class EditCitySteps extends AbstractSteps {
 	@Then("the user should see the city region type and value updated in UI")
 	public void verifyCityRegionTypeAndValue(@Named("newRegionType") String newRegionType, 
 										     @Named("newRegionValue") String newRegionValue) {
-		getEditCityPage().verifyRegionType(newRegionType);
-		getEditCityPage().verifyRegionValue(newRegionType, newRegionValue);
+		getEditCityPage().verifyRegionTypeAndValue(newRegionType, newRegionValue);		
 	}
 	
 	@Then("the user should see the city region type 2 and value 2 updated in UI")
-	public void verifyCityRegionType2AndValue2(@Named("newRegionType2") String newRegionType2, 
-										     @Named("newRegionValue2") String newRegionValue2) {
-		getEditCityPage().verifyRegionType(newRegionType2);
-		getEditCityPage().verifyRegionValue(newRegionType2, newRegionValue2);
+	public void verifyCityRegionType2AndValue2(@Named("newRegionType2") String newRegionType, 
+										     @Named("newRegionValue2") String newRegionValue) {
+		getEditCityPage().verifyRegionTypeAndValue(newRegionType, newRegionValue);
 	}
-	
+
 	@Then("the user should see the city region type and value deleted in UI")
-	public void verifyCityRegionTypeDeleted(@Named("newRegionType") String newRegionType) {
-		getEditCityPage().verifyRegionTypeNotPresentInUI(newRegionType);
+	public void verifyCityRegionTypeDeleted(@Named("newRegionType") String newRegionType,
+			@Named("newRegionValue") String newRegionValue) {
+		getEditCityPage().verifyRegionTypeNotPresentInUI(newRegionType, newRegionValue);
 	}
 	
 	@Then("the user should see city region value same as in $source document")

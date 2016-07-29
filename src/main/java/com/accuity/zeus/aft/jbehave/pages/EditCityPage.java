@@ -399,8 +399,15 @@ public class EditCityPage extends AbstractPage {
 	 * after saving the city page.
 	 */
 	public void verifySuccessfulUpdatedMessage() {
-		assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_save_confirmation_message_id"))
-				.isDisplayed());
+		try {
+			assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_save_confirmation_message_id"))
+					.isDisplayed());
+			Thread.sleep(5000);// wait for page to get refreshed
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -2061,34 +2068,47 @@ public class EditCityPage extends AbstractPage {
 		assertEquals(cityRegionMap.get(newRegionType), newRegionValue);
 	}
 	
-	public void verifyRegionTypeNotPresentInUI(String regionType) {
-		try {
-			// appending the region type to the xpath to retrieve corresponding row in view mode
-			getDriver().findElement(By.xpath("//*[@id='cityRegions']//tr[td='" + regionType + "']"));
+	public void verifyRegionTypeNotPresentInUI(String regionType, String regionValue) {
+		try {			
+			WebElement regionTable = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_region_table"));
+			List<WebElement> regionRows = regionTable.findElements(By.tagName("tr"));		
+			Boolean regionTypeAndValueNotFound = true;
+			for (int i = 0; i < regionRows.size(); i++) {		
+				if(regionRows.get(i).getText().contains(regionType) && regionRows.get(i).getText().contains(regionValue)){				
+					List<WebElement> regionRowColumns = regionRows.get(i).findElements(By.tagName("td"));					
+					if (regionRowColumns.get(0).getText().equals(regionType) && regionRowColumns.get(1).getText().equals(regionValue)) {				
+						regionTypeAndValueNotFound = false;
+					}
+				}	
+			}
+			assertTrue(regionTypeAndValueNotFound);
+			
 		} catch(Exception ex) {
 			assertTrue("Region Type is not present in the UI", true);
 		}
 	}
 	
-	public void verifyRegionType(String regionType) {
+	public void verifyRegionTypeAndValue(String regionType, String regionValue) {
 		try {
-			// appending the region type to the xpath to retrieve corresponding row in view mode
-			WebElement newNameTypeElement = getDriver().findElement(By.xpath("//*[@id='cityRegions']//tr[td='" + regionType + "']"));
-			assertTrue(newNameTypeElement != null);
+			Boolean regionAndValueFound = false;
+			WebElement regionTable = getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_region_table"));
+			List<WebElement> regionRows = regionTable.findElements(By.tagName("tr"));
+			for(int i=1;i<regionRows.size();i++)
+			{
+				if(regionRows.get(i).getText().contains(regionType) && regionRows.get(i).getText().contains(regionValue)){				
+					List<WebElement> regionRowColumns = regionRows.get(i).findElements(By.tagName("td"));					
+					if (regionRowColumns.get(0).getText().equals(regionType) && regionRowColumns.get(1).getText().equals(regionValue)) {				
+						regionAndValueFound = true;
+						break;
+					}
+				}		
+			}
+			assertTrue(regionAndValueFound);
+			
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
-	}
-	
-	public void verifyRegionValue(String regionType, String regionValue) {
-		try {
-			// appending the region type to the xpath to retrieve the corresponding row in view mode
-			WebElement newNameValueElement = getDriver().findElement(By.xpath("//*[@id='cityRegions']//tr[td='" + regionType + "']/td[2]"));
-			assertEquals(newNameValueElement.getText(), regionValue);
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		}
-	}
+	}	
 
 	public void verifyCityRegionForBlankValue(Map<String, String> cityRegionValueMap) {
 		assertEquals(cityRegionValueMap.keySet().size(), 0);
