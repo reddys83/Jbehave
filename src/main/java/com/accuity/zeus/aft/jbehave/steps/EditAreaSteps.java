@@ -24,6 +24,7 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user should see area end date value same as in $source document")
 	public void verifyAreaEndDateValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
+		setEditAreaPage(getDataPage().createEditAreaPage());
 		getEditAreaPage().verifyAreaEndDateFromTrustedDB(country, area, "EndDate", source);
 
 	}
@@ -105,7 +106,8 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user should see area began date value same as in $source document")
 	public void verifyAreaBeganDateValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
-				getEditAreaPage().verifyAreaBeganDateFromTrustedDB(country, area, "BeganDate", source);
+		setEditAreaPage(getDataPage().createEditAreaPage());
+		getEditAreaPage().verifyAreaBeganDateFromTrustedDB(country, area, "BeganDate", source);
 
 	}
 
@@ -142,7 +144,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should not see the <ConfirmationSummary> changes in confirmation modal for area")
 	public void verifyNoChangeConfirmationMsg(@Named("ConfirmationSummary") String ConfirmationSummary) {
-		getDataPage().verifyNoSummaryConfirmnModal(ConfirmationSummary);
+		getDataPage().verifyNoSummaryConfirmationModal(ConfirmationSummary);
 	}
 
 	@When("the user clicks on the Status drop-down in the basicinfo area page")

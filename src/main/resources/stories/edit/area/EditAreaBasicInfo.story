@@ -5,6 +5,7 @@ In order to view and edit the area page
 As a user
 I want to cover the requirements mentioned in
 
+
 JIRA ID - User can edit Area's Use In Address Flag
 
 Scenario: User is updating  Area's Basic Info  page and  entered  value for 'Use in Address' that is different from the current value
@@ -35,7 +36,7 @@ Then the user should see the address flag value same as in zeus document
 
 Examples:
 |country|area|
-|Angola|Luanda|
+|Angola|Bengo|
 
 Scenario: User is updating  Area's Basic Info  page and  entered  value for 'Use in Address' that is no different from the current value
 Given a user is on the search page
@@ -64,4 +65,4 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|
-|Angola|Luanda|
+|Angola|Bengo|

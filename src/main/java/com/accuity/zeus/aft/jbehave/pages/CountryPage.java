@@ -945,7 +945,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyErrorMessageForCountryName() {
-        assertEquals("Required", getDriver().findElement(country_name_value_required_err_msg_xpath).getText());
+        assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_name_value_required_err_msg_xpath).getText());
     }
 
     public void verifyErrorMessageForRequiredNameType() {
@@ -1047,7 +1047,7 @@ public class CountryPage extends AbstractPage {
         getDriver().findElement(By.xpath(country_places_area_dropdown_xpath + "//input")).sendKeys(AreaPlaces);
         getDriver().findElement(By.xpath(country_places_area_dropdown_xpath + "//input")).sendKeys(Keys.RETURN);
         try {
-            Thread.sleep(2000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
