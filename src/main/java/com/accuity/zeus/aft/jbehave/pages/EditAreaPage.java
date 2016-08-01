@@ -1015,16 +1015,16 @@ public class EditAreaPage extends AbstractPage {
 		assertTrue(getAreaTimeZoneInfoFromDB(country, area, tagName, source).isEmpty());
 	}
 
-	public void userSelectsTimeZoneDropDownValue(String identifierType, int rowNo) {
+	public void userSelectsTimeZoneDropDownValue(String timeZoneType, int rowNo) {
 		try {
-			List<WebElement> identifierDropDowns = getDriver()
+			List<WebElement> timezoneDropDowns = getDriver()
 					.findElements(AreaIdentifiers.getObjectIdentifier("timezone_utc_default_value_xpath"));
-			if (rowNo <= identifierDropDowns.size()) {
-				Select dropdown = new Select(identifierDropDowns.get(rowNo - 1));
-				if (identifierType.equals("")) {
-					dropdown.selectByValue(identifierType);
+			if (rowNo <= timezoneDropDowns.size()) {
+				Select dropdown = new Select(timezoneDropDowns.get(rowNo - 1));
+				if (timeZoneType.equals("")) {
+					dropdown.selectByValue(timeZoneType);
 				} else {
-					dropdown.selectByVisibleText(identifierType);
+					dropdown.selectByVisibleText(timeZoneType);
 				}
 			}
 		} catch (Exception e) {
@@ -1032,16 +1032,16 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 	
-	public void userSelectsTimeZoneValue(String identifierType, int rowNo) {
+	public void userSelectsTimeZoneValue(String timeZoneType, int rowNo) {
 		try {		
-			List<WebElement> identifierDropDowns = getDriver()
+			List<WebElement> timezoneDropDowns = getDriver()
 					.findElements(AreaIdentifiers.getObjectIdentifier("timezone_utc_default_value_xpath"));
-			if (rowNo <= identifierDropDowns.size()) {
-				Select dropdown = new Select(identifierDropDowns.get(rowNo - 1));
-				if (identifierType.equals("")) {
-					dropdown.selectByValue(identifierType);
+			if (rowNo <= timezoneDropDowns.size()) {
+				Select dropdown = new Select(timezoneDropDowns.get(rowNo - 1));
+				if (timeZoneType.equals("")) {
+					dropdown.selectByValue(timeZoneType);
 				} else {
-					dropdown.selectByVisibleText(identifierType);
+					dropdown.selectByVisibleText(timeZoneType);
 				}
 			}
 		} catch (Exception e) {

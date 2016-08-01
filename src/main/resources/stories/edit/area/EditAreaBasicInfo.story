@@ -988,7 +988,7 @@ Scenario: User views the Area basic page,selects the update button and clicks on
 1- User verifies the timezone dropdown shows all Hera IDs in the lookup matches with the timezone lookup
 2- User verifies whether default value for timezone is blank
 3- User verifies whether the current value in timezone is defaulted from trusted
-
+Meta: @smoke2
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1020,7 +1020,7 @@ Scenario: User is updating a Areas's Basic Info and has set values for
 each of 'Country','Area',clicks the add new timezone button and saves with empty timezone
 1- User verifies area is not updated with newly added timezone 'timezone' as empty
 2- User verifies Zeus DB whether the area is not updated with newly added timezone 'timezone' as empty 
-
+Meta: @smoke2
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1050,7 +1050,7 @@ each of 'Country','Area',clicks the add new timezone button,selects 'timezone' v
 1-User verifies whether the time zone list displays all time zone's except those that have been already selected for this area
 2- User verifies area is updated with newly added timezone 
 3- User verifies Zeus DB whether the area is updated with newly added timezone
-
+Meta: @smoke2
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1083,7 +1083,7 @@ Scenario: User is updating a Areas's Basic Info and has set values for
 each of 'Country','Area',clicks the add new timezone button,updates the existing 'timezone' value
 1- User verifies area is updated with newly updated timezone 'timezone'
 2- User verifies Zeus DB whether the area is updated with newly updated timezone 'timezone'
-
+Meta: @smoke2
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1111,7 +1111,7 @@ Scenario: User is updating a Areas's Basic Info and has set values for
 each of 'Country','Area',enters timezone summary as 'Null'
 1- User verifies area is updated with newly added timezone summary
 2- User verifies Zeus DB whether the area is updated with newly added timezone summary
-
+Meta: @smoke2
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1139,7 +1139,7 @@ Scenario: User is updating a Areas's Basic Info and has set values for
 each of 'Country','Area',user updates the existing timezone summary with new summary value
 1- User verifies area is updated with newly updated timezone 'summary1' value
 2- User verifies Zeus DB whether the area is updated with newly updated timezone 'summary1' value
-
+Meta: @smoke2
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1167,7 +1167,7 @@ Scenario: User is updating a Areas's Basic Info and has set values for
 each of 'Country','Area',enters the 'summary' value exceeding 100 unicode characters
 1- User verifies the timezone 'summary' field is having max lenght attribute as '100'
 2- User verifies the timezone 'summary' field is limited to '100' unicode characters
-
+Meta: @smoke2
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1194,7 +1194,7 @@ Examples:
 Scenario: User can edit area timezone and tries to delete the timezone before saving the area basic page 
 1 - Verify if User can prevent deleting timezone by clicking on 'No'.
 2 - Verify if User can delete timezone by clicking on 'Yes' , then after saving it should be removed.
-
+Meta: @smoke2
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1230,7 +1230,7 @@ Examples:
 Scenario: User can edit area timezone and tries to delete the timezone after saving the area basic page
 1 - Verify if User can prevent deleting timezone by clicking on 'No'.
 2 - Verify if User can delete timezone by clicking on 'Yes' , then after saving it should be removed.
-
+Meta: @smoke2
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
