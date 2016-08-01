@@ -39,6 +39,13 @@ let $officeValues := for $x in ($office/summary/names/name/value)
 return <officeValue>{$x/text()}</officeValue>
 
 
+let $officePrefixValue := $office/summary/names/officeTitlePrefix/text()
+let $officeSuffixValue := if (fn:exists($office/summary/names/officeTitleSuffix))
+then $office/summary/names/officeTitleSuffix/text()
+else ""
+let $officeOverrideValue := if(fn:exists($office/summary/names/officeTitleOverride))
+then $office/summary/names/officeTitleOverride/text()
+else ""
 
 return <office>
     <officeOpenedDate>{$officeOpenedDate}</officeOpenedDate>
@@ -50,7 +57,11 @@ return <office>
     <officeTypes>{$officeTypes}</officeTypes>
     <officeValues>{$officeValues}</officeValues>
     <officeSortName>{$officeSortName}</officeSortName>
+    <officePrefixValue>{$officePrefixValue}</officePrefixValue>
+    <officeSuffixValue>{$officeSuffixValue}</officeSuffixValue>
+    <officeOverrideValue>{$officeOverrideValue}</officeOverrideValue>
     </office>
 
-    (:return $office:)
+
+
 
