@@ -18,6 +18,7 @@ public class DataStepsEdit extends AbstractSteps {
 	@When("the user clicks on the update link")
 	public void clickOnUpdateCurrencyLink() {
 		getDataPage().clickOnUpdateCurrencyLink();
+		setEditAreaPage(getDataPage().createEditAreaPage());
 	}
 
 	@When("the user clicks on the save button")

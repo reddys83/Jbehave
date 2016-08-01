@@ -4,12 +4,16 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -820,6 +824,273 @@ public class EditAreaPage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
+	}
+	
+	public void verifyTimeZoneDropdownListAgainstTimeZoneLookup() throws InterruptedException {
+		List<WebElement> timeZoneList = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_timezone_utc_dropDown_xpath"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get utc list");
+		attemptClick(AreaIdentifiers.getObjectIdentifier("timezone_utc_default_value_xpath"));
+		if (timeZoneList != null) {
+			for (int i = 1; i < document.getElementsByTagName("utcid").getLength(); i++) {
+				assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(),
+						timeZoneList.get(i).getText().trim());
+			}
+		} else {
+			assertTrue("timezone list is not displayed", false);
+		}
+	}
+
+	public void userVerifyTimeZoneDropDownDefaultValueFromTrusted(String country, String area, String tagName,
+			String source) {
+		assertEquals(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("timezone_utc_current_value_xpath"))
+				.getText(), getAreaTimeZoneInfoFromDB(country, area, tagName, source));
+
+	}
+
+	public void userVerifyAddTimeZoneIsDisplayed() {
+		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("timezone_utc_add_timezone_xpath"))
+				.isDisplayed());
+	}
+
+	public void userVerifyTimeZoneDropdownIsDisplayed() {
+		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("timezone_utc_dropdown_xpath"))
+				.isDisplayed());
+	}
+
+	public void userClickOnAddNewTimeZoneButton() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("timezone_utc_add_timezone_xpath"));
+	}
+
+	public void userVerifiesTimeZoneDefaultValueIsBlank() {
+		assertTrue((getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("timezone_utc_default_value_addrows_xpath")).getText())
+						.isEmpty());
+	}
+
+	public void verifyTimeZoneDropDownListDisplaysUnSelectedTimeZones(String timZone) {
+
+		List<WebElement> subAreaChoices = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_timezone_utc_dropDown_new_xpath"));
+		List<String> selectedOptions = new ArrayList<String>();
+		for (int j = 0; j < subAreaChoices.size(); j++) {
+			selectedOptions.add((subAreaChoices.get(j)).getText());
+		}
+		assertFalse(selectedOptions.contains(timZone));
+	}
+
+	public void verifyExisitngTimeZoneHasOptionToDelete(String timeZone) {
+		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("timezone_utc_dropdown_xpath"))
+				.isDisplayed());
+	}
+
+	public void userEntersSummaryValue(String summary) {
+		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_summary_timezone_xpath"), summary);
+	}
+
+	public void clickOnDeleteAreaTimZoneRowButton() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_timezone_row_button_xpath"));
+	}
+
+	public void verifyNewlyAddedAreaTimeZoneRowIsDisplayed() {
+		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_timezone_input_xpath"))
+				.isDisplayed());
+	}
+
+	public void verifyNewlyAddedAreaTimeZoneRowExists() {
+		try {
+			WebElement timeZone = getDriver()
+					.findElement(AreaIdentifiers.getObjectIdentifier("area_timezone_type_view_mode"));
+			assertTrue(timeZone != null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyNewlyAddedAreaTimeZoneRowIsNotDisplayed() {
+		try {
+			assertFalse(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_timezone_input_xpath"))
+					.isDisplayed());
+		} catch (NoSuchElementException e) {
+			assertTrue(true);
+		}
+	}
+
+	public void verifyAreaTimeZoneValuesFromDB(String country, String area, String tagName, String source,
+			String timeZone) {
+		assertEquals(getAreaTimeZoneInfoFromDB(country, area, tagName, source), timeZone);
+	}
+
+	public String getAreaTimeZoneInfoFromDB(String country, String area, String tagName, String source) {
+
+		String tagValue = null;
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(7000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get area basic info", nvPairs);
+		if (document != null) {
+			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+					: getNodeValuesByTagName(document, tagName).get(0);
+		}
+		return tagValue;
+	}
+
+	public void verifyAreaTimeZoneRowNotPresentInZeusDB(String country, String area, String source) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get area basic info", nvPairs);
+			if (document != null) {
+				assertNull(document.getElementsByTagName("UTC").item(0));
+			} else
+				assert false : source + " document is null";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyAreaSummaryValuesFromZeusDB(String country, String area, String tagName, String source,
+			String summary) {
+		assertEquals(getAreaTimeZoneInfoFromDB(country, area, tagName, source), summary);
+	}
+
+	public void verifyAreaSummaryValueInUI(String summary) throws InterruptedException {
+		assertEquals(summary, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("summary_current_value_viewmode_xpath")).getText());
+	}
+
+	public void verifyAreasTimeZoneValueInUI(String timeZone) throws InterruptedException {
+		assertEquals(timeZone,
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("utc_current_value_xpath")).getText());
+	}
+
+	public void verifyAreasTimeZoneValuesFromZeusDB(String country, String area, String tagName, String source,
+			String timeZone) {
+		assertEquals(getAreaTimeZoneInfoFromDB(country, area, tagName, source), timeZone);
+	}
+	
+	public void verifyAreasTimeZoneValueNotUpdatedInUI() throws InterruptedException {
+		try {
+			assertFalse(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("utc_current_value_xpath"))
+					.isDisplayed());
+		} catch (NoSuchElementException e) {
+			assertTrue(true);
+		}
+	}
+
+	public void verifyAreasTimeZoneValueNotUpdatedInZeusDB(String country, String area, String tagName, String source) {
+		assertTrue((getAreaTimeZoneInfoFromDB(country, area, tagName, source).isEmpty()));
+	}
+
+	public void verifyAreasTimeZoneSummaryMaxLenghtAttribute(String maxLength) {
+		assertEquals((getDriver().findElement(AreaIdentifiers.getObjectIdentifier("summary_current_value_xpath"))
+				.getAttribute("maxlength")), maxLength);
+	}
+
+	public void verifySummaryFieldLimit(int maxLength) throws InterruptedException {
+		assertEquals(
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("summary_current_value_viewmode_xpath"))
+						.getText().length(),
+				maxLength);
+	}
+
+	public void clickOnTimeZoneDropDown() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("utc_current_value_xpath"));
+	}
+
+	public void verifyAreaTimeZoneRowValueNotPresentInZeusDB(String country, String area, String tagName,
+			String source) {
+		assertTrue(getAreaTimeZoneInfoFromDB(country, area, tagName, source).isEmpty());
+	}
+
+	public void userSelectsTimeZoneDropDownValue(String identifierType, int rowNo) {
+		try {
+			List<WebElement> identifierDropDowns = getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("timezone_utc_default_value_xpath"));
+			if (rowNo <= identifierDropDowns.size()) {
+				Select dropdown = new Select(identifierDropDowns.get(rowNo - 1));
+				if (identifierType.equals("")) {
+					dropdown.selectByValue(identifierType);
+				} else {
+					dropdown.selectByVisibleText(identifierType);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void userSelectsTimeZoneValue(String identifierType, int rowNo) {
+		try {		
+			List<WebElement> identifierDropDowns = getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("timezone_utc_default_value_xpath"));
+			if (rowNo <= identifierDropDowns.size()) {
+				Select dropdown = new Select(identifierDropDowns.get(rowNo - 1));
+				if (identifierType.equals("")) {
+					dropdown.selectByValue(identifierType);
+				} else {
+					dropdown.selectByVisibleText(identifierType);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyAreaTimeZoneValuesInUI(String[] timeZoneValues) {
+
+		List<WebElement> timeZoneRows = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("timezone_row_value_viewmode_xpath"));
+
+		for (int i = 0; i < timeZoneRows.size(); i++) {
+			assertTrue(timeZoneRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(timeZoneValues[i]));
+		}
+	}
+	
+	public void verifyDeleteConfirmationModals() {
+		assertEquals("Please confirm - would you like to delete this row? NO YES",
+				getDriver().findElement(
+						AreaIdentifiers.getObjectIdentifier("delete_area_timezone_row_confirmation_modal_xpath"))
+						.getText());
+	}
+
+	public void verifyAreasTimeZoneValuesFromDB(String country, String area, List<String> timeZoneValues,
+			String source) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get area basic info", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("timezoneutc").item(0).getChildNodes()
+						.getLength(); i++) {
+					for (int childNode = 0; childNode < document.getElementsByTagName("timezoneutc").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+						assertEquals(document.getElementsByTagName("timezoneutc").item(0).getChildNodes().item(i)
+								.getChildNodes().item(childNode).getTextContent(), timeZoneValues.get(i));
+					}
+				}
+			} else
+				assertTrue(source + "document is null", false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

@@ -111,6 +111,7 @@ public class XqueryMap {
 		queryMap.put("get area basic info","getAreaBasicInfo.xqy");		
 		queryMap.put("active office test list","getActiveOfficeFidTest.xqy");
 		queryMap.put("get area identifiers","getCountryIdentifiers.xqy");
+		queryMap.put("get utc list","getUtcList.xqy");
    }
 
     public String getXquery(String key){
