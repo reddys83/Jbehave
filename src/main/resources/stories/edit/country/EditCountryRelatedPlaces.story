@@ -118,7 +118,6 @@ Examples:
 |Mayotte Island|Capital City|
 
 Scenario: The user should see the confirmation modal to delete places row message Please confirm - would you like to delete this row?
-Meta:@test30
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

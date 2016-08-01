@@ -277,11 +277,11 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
-When the user selects the 50 results/page in the office results page
+When the user selects the 200 results/page in the office results page
 Then the user should see the office status filter default to all
 When the user selects the office status filter active
 Then the user should see the list of <status> offices in All result pages
 
 Examples:
 |entity|searchBy|fid|status|count|
-|1176|FID|1176|Active|50|
+|1176|FID|1176|Active|200|

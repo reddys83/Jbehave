@@ -78,7 +78,6 @@ Examples:
 
 
 Scenario: User deletes all rows of banking hours and verify if the rows are deleted from Zeus document
-Meta:@red9889
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

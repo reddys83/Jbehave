@@ -34,7 +34,6 @@ Examples:
 |951|FID|951|
 
 Scenario: Verify Office Results Pagination and Counter
-Meta:@test40
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -96,7 +95,6 @@ Examples:
 |41031|FID|41031|
 
 Scenario: Navigate through search results and verify pagination
-Meta:@test40
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -116,7 +114,6 @@ Examples:
 |1038|FID|1038|
 
 Scenario: Verify pagination next and previous navigation link
-Meta:@test40
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
