@@ -7,7 +7,6 @@ So that I can achieve a business goal
 JIRA ID - ZEUS-397 - User can view legal entity identifiers
 
 Scenario: Verify legal entity's identifier
-Meta:@test777
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -25,7 +24,7 @@ Then the user should see the legal entity's identifiers as:
 |US Tax ID|94-1687665|Active|
 |Fitch ID|80089060|Active|
 |Chinese Bank Serial Number|Lan Testing|Inactive|
-|National Settlement Depository (LEIRU)|12345678901234567890123456789012345678901234567890|Pending|
+|National Settlement Depository (LEIRU)|123456789012345678901|Pending|
 |OCC|13044|Active|
 |Irish Stock Exchange (LEIIE)|Lan Iris Stock Exchange|Inactive|
 

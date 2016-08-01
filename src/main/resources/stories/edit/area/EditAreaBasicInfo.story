@@ -1,6 +1,5 @@
 Meta: @EditAreaBasicInfo @Edit @Area @AllStories
 
-
 Narrative:
 In order to view and edit the area page
 As a user
@@ -10,13 +9,14 @@ JIRA ID - ZEUS-1025 - User can edit Area's Status
 JIRA ID - ZEUS-1027 - User can edit Area's End Date
 
 JIRA ID - ZEUS-1026 - User can edit Area's Began Date
-
+JIRA ID - ZEUS-1034 - User can edit Area's Add Info
+JIRA ID - ZEUS-1040 - User can edit Area's Identifiers
+JIRA ID - ZEUS-1039 - User can edit Area's Names
 
 Scenario: User can edit area Began Date -
 a)Verify if user can see all the months in month dropdown (Began Date) are in MMM format
 b)Verify if user can see that all the months are sorted as per chronological order
 c)Verify if User can see Current value of the Month,Day & Year is retrieved from trusted document
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -596,6 +596,718 @@ Examples:
 |country|area|beganDay1|beganMonth1|beganYear1|day|month|year|
 |Angola|Cabinda||||06|Jun|2015|
 
+Scenario:  To update the Area`s 'Basic Info' by entering a value for 'Add Info' that is different from the current value
+a)User verifies whether current value of Add Info is same as in trusted document.
+b)User verifies Area Basic Info has been updated in confirmation modal
+c)User verifies 'Your Changes have been saved' message is displayed after save
+d)User verified Add Info value is updated correctly in area basic info page
+e)User verifies Add Info values in Zeus Document
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+Then the user should see the area addInfoText value same as in trusted document
+When the user enters the <addInfoDiffText> in the area add info text area
+And the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+When the user clicks on the area update link
+When the user enters the <addInfoText> in the area add info text area
+And the user clicks on the save button
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should be able to verify the values are entered in the area add info field
+Then the user should see the area addinfo value <addInfoText> as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|addInfoDiffText|addInfoText|
+|USA|Georgia|This is a sample text|This is a different text|
+
+Scenario: To view that there is no change in value when the user has entered a value for 'Add Info' that is no different to the current value in Area page
+a)User verifies Area Basic Info changes has not been updated in confirmation modal
+b)User verifies 'Your Changes have been saved' message is displayed after save
+c)User verified Add Info value is updated correctly in area basic info page
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user enters the <addInfoText> in the area add info text area
+And the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should be able to verify the values are entered in the area add info field
+When the user clicks on the area update link
+When the user enters the <addInfoText> in the area add info text area
+And the user clicks on the save button
+Then the user should not see the <ConfirmationSummary> changes in confirmation modal for area
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should be able to verify the values are entered in the area add info field
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|addInfoText|ConfirmationSummary|
+|USA|Georgia|This is a same text|Basic Info|
+
+Scenario: User verifies that add info field is limited to 500 unicode characters in Area basic info Page
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user enters values which is beyond 500 unicode characters in the area add info field
+And the user clicks on the save button
+And the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should be able to view that only 500 unicode characters are saved in area add info
+Then the user should be able to verify the maximum values are entered in the area add info field
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|
+|USA|Georgia|
+
+Scenario:  To update the Area`s 'Basic Info' by entering a blnak value for 'Add Info' 
+a)User verifies whether blank value for Add Info is saved successfully in area basic info web page
+b)User verifies 'Your Changes have been saved' message is displayed after save
+d)User verifies Blank Add Info values updated  in Zeus Document
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user enters the <addInfoText> in the area add info text area
+And the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should be able to verify the values are entered in the area add info field
+Then the user should see the area addinfo value <addInfoText> as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|addInfoText|
+|USA|Georgia||
+
+Scenario: User can edit area identifiers -
+1- Verify area Identifier types are same as from lookup THIRD_PARTY_IDENTIFIER_GEO
+2- Verify area Identifier status are from lookup STATUS
+3- Verify existing identifier values are from trusted 
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+Then the user should see the identifier values same as in trusted document
+When the user clicks on the add new identifier button in the basic info area page
+Then the user should see the area identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO
+Then the user should see the area identifier status from lookup STATUS
+
+Examples:
+|country|area| 
+|Algeria|Constantine| 
+
+Scenario: User can edit area identifiers- Verify if User can add New Area identifiers-Verify that all fields- "Type","Value" and "Status" are updated successfully
+1 - Verify two identifer rows are added
+2 - Verify previously selected Identifer Type is not listed in identifer type dropdown of next row
+3 - Verify Zeus Area page is updated with entered identifier values
+4 - Verify Zeus DB is updated with entered identifier values
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area identifier rows
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters identifier value as <identifierValue> in the basic info area page
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the add new identifier button in the basic info area page
+Then the user verifies that previously selected <identifierType> is not present in the new identifier row
+When the user enters identifier type as <identifierType2> in the basic info area page
+When the user enters identifier value as <identifierValue2> in the basic info area page
+When the user enters identifier status as <identifierStatus2> in the basic info area page
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Identifiers|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user verifies that the area identifiers parameters are entered in the basic info area page
+Then the user should see the area identifier values as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|identifierType|identifierValue|identifierStatus|identifierType2|identifierValue2|identifierStatus2|
+|Algeria|Constantine|Numeric ISO Code|QATesting|Active|FIPS Place Code|QATesting|Pending|
+|Algeria|Constantine|FIPS Place Code|QATesting|Pending|Numeric ISO Code|QATesting|Inactive|
+|Algeria|Constantine|FIPS Place Code|QATesting|Active|Numeric ISO Code|QATesting|Active|
 
 
+Scenario: Verifying that area identifier row in not added when blank values are entered for 'Type', 'Value' and 'Status'
 
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area identifier rows
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters identifier value as <identifierValue> in the basic info area page
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should not see the newly added identifier row in the basic info area page
+Then the user verifies that no values are entered in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|identifierType|identifierValue|identifierStatus|
+|Algeria|Constantine||||
+
+Scenario: User can edit area identifiers - Verify whether the text entered in the Identifier 'Value' field is not beyond 50 unicode characters.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area identifier rows
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters an incorrect identifier value as <identifierValueIncorrect> in the basic info area page
+Then the user should see maximum length of area identifier value is limited to 50 
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user reverts the changes to the document
+
+
+Examples:
+|country|area|identifierType|identifierValueIncorrect|identifierStatus|
+|Algeria|Constantine|Numeric ISO Code|aksjuilrw1aksjuilrw1aksjuilrw1aksjuilrw1aksju%)~12y1|Active|
+
+Scenario: User can edit area identifiers 
+1 - Verify that an error message 'Required' is displayed when user left identifier Type blank and enters value in identifier 'Value' and 'Status'
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user deletes the existing area identifier rows
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters identifier value as <identifierValue> in the basic info area page
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the save button
+Then the user should see the error message Required for identifier type field in the area basic info page
+
+Examples:
+|country|area|identifierType|identifierValue|identifierStatus|
+|Algeria|Constantine||H4Testing|Inactive|
+
+Scenario: User can edit area identifiers 
+1 - Verify that an error message 'Required' is displayed when user leaves identifier Value as blank and enters value in identifier 'Type' and 'Status'
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user deletes the existing area identifier rows
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters identifier value as <identifierValue> in the basic info area page
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the save button
+Then the user should see the error message Enter up to 50 valid characters. for identifier value field in the area basic info page
+
+Examples:
+|country|area|identifierType|identifierValue|identifierStatus| 
+|Algeria|Constantine|Numeric ISO Code||Active|
+
+Scenario: User can edit area identifiers
+1 - Verify that an error message 'Required' is displayed when user left identifier status blank and enters value in identifier 'Type' and 'Value'
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user deletes the existing area identifier rows
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters identifier value as <identifierValue> in the basic info area page
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the save button
+Then the user should see the error message Required for identifier status field in the area basic info page
+
+Examples:
+|country|area|identifierType|identifierValue|identifierStatus| 
+|Algeria|Constantine|Numeric ISO Code|H4Testing|| 
+
+Scenario: User can edit area identifiers
+1 - Verify if User can delete exisiting identifiers( "Type","Value" and "Status").
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area identifier rows
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should not see the identifier row in the basic info area page
+Then the user verifies that the deleted row for area identifier does not exist in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|
+|Algeria|Constantine|
+
+Scenario: User can edit area identifiers
+1 - Verify if User can prevent deleting identifiers( "Type","Value" and "Status") by clicking on 'No'.
+2 - Verify if User can delete identifiers( "Type","Value" and "Status") by clicking on 'Yes' , then after saving it should be removed.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area identifier rows
+When the user clicks on the add new identifier button in the basic info area page
+When the user enters identifier type as <identifierType> in the basic info area page
+When the user enters identifier value as <identifierValue> in the basic info area page
+When the user enters identifier status as <identifierStatus> in the basic info area page
+When the user clicks on the save button
+When the user clicks on the confirm button
+When the user clicks on the area update link
+When the user clicks on the delete identifier row button in the basic info area page
+Then the user should see delete row confirmation modal in the area page
+When the user clicks on the No button to cancel the deletion of row in basic info area page
+Then the user should see the newly added identifier row in the basic info area page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user verifies that the newly added identifier row values exists in the basic info area page
+Then the user verifies that the row values for area identifier entered exists in zeus document
+When the user clicks on the area update link
+When the user clicks on the delete identifier row button in the basic info area page
+Then the user should see delete row confirmation modal in the area page
+When the user clicks on the Yes button to delete the row in basic info area page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should not see the newly added identifier row in the basic info area page
+Then the user verifies that the deleted row for area identifier does not exist in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|identifierType|identifierValue|identifierStatus|
+|Algeria|Constantine|FIPS Place Code|H4Testing|Pending|
+
+
+Scenario: User has selected to update Full Name in Area's Basic Info
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+Then the user should see the Full Name type is from PLACE_NAME_TYPE lookup
+Then the user should see the Full Name value in area page is same as in trusted document
+And the user should see the Full Name is not editable
+Then the user enters the name <value> in the Full Name field
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Names|
+When the user clicks on the confirm button
+Then the user should see the Full Name <value> in zeus document
+Then the user should be able see the <value> is updated in Full Name value field
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|value|
+|Angola|Namibe|Namibe1|
+
+Scenario: User has selected to update Display Name in Area's Basic Info
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+Then the user should see the Display Name type is from PLACE_NAME_TYPE lookup
+Then the user should see the Display Name value in area page is same as in trusted document
+And the user should see the Display Name is not editable
+Then the user enters the name <value> in the Display Name field
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Names|
+When the user clicks on the confirm button
+Then the user should see the Display Name <value> in zeus document
+Then the user should be able see the <value> is updated in Display Name value field
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|value|
+|Angola|Namibe|Namibe1|
+
+Scenario: User has selected to add Alternative Name in Area's Basic Info
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area names rows
+When the user clicks on the add names button in the area basic info page
+Then the user should see the area name types from lookup PLACE_NAME_TYPE
+When the user enters name type as <type> in the area basic info page
+And the user enters name value as <value> in the area basic info page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Names|
+When the user clicks on the confirm button
+Then the user should see the Alternative Name <value> in zeus document
+Then the user should see the area name type and value updated in the area basic info page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|type|value|
+|Angola|Namibe|Alternative Name|testing|
+
+Scenario: User has selected to add New Name Row in Area's Basic Info - check save is successful when all blank values are selected and document is not updated
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area names rows
+When the user clicks on the add names button in the area basic info page
+When the user enters name type as <type> in the area basic info page
+And the user enters name value as <value> in the area basic info page
+When the user clicks on the save button
+When the user clicks on the confirm button
+And the user clicks on the area update link
+When the user clicks on the add names button in the area basic info page
+When the user enters name type as <type> in the area basic info page
+And the user enters name value as <value> in the area basic info page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+Then the user should not see the <ConfirmationSummary> changes in confirmation modal for area
+When the user clicks on the confirm button
+Then the user should not see the <type> <value> in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|type|value|ConfirmationSummary|
+|Angola|Namibe|||Summary|
+
+Scenario: User has selected to add New Name Row in Area's Basic Info - error message "Required" is displayed when type is not entered but value is entered
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user deletes the existing area names rows
+When the user clicks on the add names button in the area basic info page
+When the user enters name value as <value> in the area basic info page
+When the user clicks on the save button
+Then the user should see the error message Required for the required name type field in the area basic info page
+
+Examples:
+|country|area|value|
+|Angola|Namibe|testing|
+
+Scenario: User has selected to add New Name Row in Area's Basic Info - error message is displayed when type is entered but value is not entered
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user deletes the existing area names rows
+When the user clicks on the add names button in the area basic info page
+When the user enters name type as <type> in the area basic info page
+When the user clicks on the save button
+Then the user should see the error message Enter up to 75 valid characters. for the required name value field in the area basic info page
+
+Examples:
+|country|area|type|
+|Angola|Namibe|Alternative Name|
+
+Scenario: User has selected to delete an existing area name -
+a) verify if User can delete area name row and clicks no on confirmation modal, the existing name is available in UI
+b) verify if User can delete area name row and clicks yes on confirmation modal, on save the existing name is removed
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area names rows
+When the user clicks on the add names button in the area basic info page
+When the user enters name type as <type> in the area basic info page
+And the user enters name value as <value> in the area basic info page
+When the user clicks on the save button
+When the user clicks on the confirm button
+And the user clicks on the area update link
+When the user clicks on the delete name row button in the area basic info page
+Then the user should see the delete row confirmation modal in the area page
+When the user clicks on the no button in the delete row confirmation modal in the area page
+Then the user should see the area name type and value in the edit area basic info page
+When the user clicks on the delete name row button in the area basic info page
+Then the user should see the delete row confirmation modal in the area page
+When the user clicks on the yes button in the delete row confirmation modal in the area page
+When the user clicks on the save button
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Names|
+When the user clicks on the confirm button
+Then the user should not see the <type> <value> in zeus document
+Then the user should not see the area name type and value updated in the area basic info page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|type|value|ConfirmationSummary|
+|Angola|Namibe|Alternative Name|test|Summary|
+
+Scenario: User has selected to add an area name -
+a) verify if User can delete area name row and clicks no on confirmation modal, the newly added name is available in UI
+b) verify if User can delete area name row and clicks yes on confirmation modal, on save the newly added name is removed
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area names rows
+When the user clicks on the add names button in the area basic info page
+When the user enters name type as <type> in the area basic info page
+And the user enters name value as <value> in the area basic info page
+When the user clicks on the delete name row button in the area basic info page
+Then the user should see the delete row confirmation modal in the area page
+When the user clicks on the no button in the delete row confirmation modal in the area page
+Then the user should see the area name type and value in the edit area basic info page
+When the user clicks on the delete name row button in the area basic info page
+Then the user should see the delete row confirmation modal in the area page
+When the user clicks on the yes button in the delete row confirmation modal in the area page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should not see the <type> <value> in zeus document
+Then the user should not see the area name type and value updated in the area basic info page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|type|value|ConfirmationSummary|
+|Angola|Namibe|Alternative Name|test|Summary|
+
+Scenario: User has selected to update area name - verify that Full Name and Display Name cannot be deleted
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+Then the user should not see delete row button against <type>
+
+Examples:
+|country|area|type|
+|Angola|Namibe|Full Name|
+|Angola|Namibe|Display Name|
+
+Scenario: User has selected to add multiple Alternative Name in Area's Basic Info with different values
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area names rows
+When the user clicks on the add names button in the area basic info page
+When the user enters name type as <type> in the area basic info page
+And the user enters name value as <value> in the area basic info page
+When the user clicks on the add names button in the area basic info page
+When the user enters second name type as <type> in the area basic info page
+And the user enters second name value as <value2> in the area basic info page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Names|
+When the user clicks on the confirm button
+Then the user should see the Alternative Name <value> and <value2> in zeus document
+Then the user should see the area name type and value updated in the area basic info page
+Then the user should see the second area name type and value updated in the area basic info page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|type|value|value2|
+|Angola|Namibe|Alternative Name|test|test2|
+
+Scenario: User has selected to add multiple Alternative Name in Area's Basic Info with same values
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area names rows
+When the user clicks on the add names button in the area basic info page
+When the user enters name type as <type> in the area basic info page
+And the user enters name value as <value> in the area basic info page
+When the user clicks on the add names button in the area basic info page
+When the user enters second name type as <type> in the area basic info page
+And the user enters second name value as <value2> in the area basic info page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Names|
+When the user clicks on the confirm button
+Then the user should see the Alternative Name <value> and <value2> in zeus document
+Then the user should see the area name type and value updated in the area basic info page
+Then the user should not see the second area name type and value updated in the area basic info page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|type|value|value2|
+|Angola|Namibe|Alternative Name|testing|testing|

@@ -897,6 +897,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
     public void verifyMaxLengthForOverrideTextField(@Named("maxlength") String maxlength,@Named("rowIdentifier") String rowIdentifier)
     {getEditLegalEntityPage().verifyMaxLengthForOverrideTextField(maxlength,rowIdentifier);}
 
+    @When("the user selects agency type $agencyTypeRowIdentifier value as <type>")
     public void selectCreditRatingsAgencyType(@Named("agencyTypeRowIdentifier") String agencyTypeRowIdentifier,@Named("type") String type)
     {getEditLegalEntityPage().selectCreditRatingsAgencyType(agencyTypeRowIdentifier,type);
     }
@@ -971,6 +972,12 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyConfirmedDateErrorMessage(confirmedDateErrorMsg);
     }
 
+
+    @When("the user clicks on delete legal entity board meetings row button for the row $deletebutton_Row")
+    public void clickonDeleteBoardMeetingsRowButton(String deletebutton_Row)
+    {
+        getEditLegalEntityPage().clickonDeleteBoardMeetingsRowButton(deletebutton_Row);
+    }
     @Then("the user should see the trust power values as in $source document with fid <fid> in edit mode")
     public void verifyTrustPowersInEditModeFromTrusted(@Named("source") String source,@Named("fid") String fid){
         getEditLegalEntityPage().verifyTrustPowersInEditModeFromTrusted(source, fid);
@@ -1067,5 +1074,17 @@ public class EditLegalEntitySteps extends AbstractSteps{
     public void verifyErrorMsgForminAccountSize(@Named("errMsg") String errMsg)
     {
         getEditLegalEntityPage().verifyErrorMsgForTrustPowers("legalEntity_trustPower_MinAccountSize_error_message_xpath",errMsg);
+    }
+
+
+    @Then("the user should not see boardmeetings values for fid <fid> in $source document as: $boardMeetings")
+    public void verifyEditLegalEntityBoardMeetingsValuesNotExistInZeus(@Named("boardMeetings") ExamplesTable boardMeetings,@Named("fid") String fid,@Named("source") String source)
+    {
+        getEditLegalEntityPage().verifyEditLegalEntityBoardMeetingsValuesNotExistInZeus(boardMeetings,fid,source);
+    }
+
+    @Then("the user should not see the board meeting row in the basic info legal entity page")
+    public void verifyNewlyAddedBoardMeetingRowIsNotDisplayed() throws Exception {
+        getEditLegalEntityPage().verifyNewlyAddedBoardMeetingRowIsNotDisplayed();
     }
 }
