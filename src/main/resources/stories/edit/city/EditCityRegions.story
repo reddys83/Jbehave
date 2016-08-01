@@ -1,4 +1,5 @@
 Meta: @EditCityRegions
+
 Narrative:
 In order to view and edit the city page
 As a user
@@ -18,12 +19,19 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city regions link in the navigation bar
 When the user clicks on the city update link
-And the user clicks on the add new region button in the city region page
+When the user clicks on the add new region button in the city region page
+And the user enters region type as <newRegionType> in the region city page
 Then the user should see the region type from 'CITY_ALTERNATIVE_REGION' look up
+Then the user should see the region value from <regionValueLookUp>
 
 Examples:
-|country|area|city|
-|Angola|Bengo|Caxito|
+|country|area|city|newRegionType|regionValueLookUp|
+|Angola|Bengo|Caxito|Federal Reserve District|FEDERAL_RESERVE_DISTRICT|
+|Angola|Bengo|Caxito|Federal Reserve Sub District|FEDERAL_RESERVE_BRANCH_DISTRICT|
+|Angola|Bengo|Caxito|Federal Home Loan Bank District|FEDERAL_HOME_LOAN_BANK_DISTRICT|
+|Angola|Bengo|Caxito|National Credit Union Administration Region|NCUA_REGION|
+|Angola|Bengo|Caxito|Metropolitan Statistical Area|MSA|
+
 
 
 Scenario: User adds new region type and value, checks the confirmation summary modal and saves the data to DB
@@ -170,12 +178,7 @@ When the user clicks on the city update link
 When the user clicks on the delete region row button in the region city page
 Then the user should see the delete row confirmation modal in the city page
 When the user clicks on the No button to cancel the deletion of row
-And the user clicks on the save button in city page
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the page
-Then the user should see the city region type and value updated in UI
-Then the user should see the region type and value updated in zeus document
-When the user clicks on the city update link
+Then the user should see the city region type and value updated in edit city page
 When the user clicks on the delete region row button in the region city page
 Then the user should see the delete row confirmation modal in the city page
 When the user clicks on the Yes button to cancel the deletion of row

@@ -402,8 +402,7 @@ public class EditCityPage extends AbstractPage {
 		try {
 			assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_save_confirmation_message_id"))
 					.isDisplayed());
-			Thread.sleep(5000);// wait for page to get refreshed
-
+			Thread.sleep(3000);// wait for page to get refreshed with newly saved values
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -2022,20 +2021,30 @@ public class EditCityPage extends AbstractPage {
 	public void verifyCityRegionTypeList() {
 		List<WebElement> regionTypeList = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("city_region_type_identifier_dropdown_options_xpath"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city region types");
 		
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city region types");
+		assertTrue(document.getElementsByTagName("regiontype").getLength()>1);
 		for (int i = 1; i < document.getElementsByTagName("regiontype").getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					regionTypeList.get(i).getAttribute("value"));
 		}
 	}
 	
-	public void clickOnAddNewRegionButton() {
-		try {
-			Thread.sleep(7000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+	public void verifyCityRegionValueList(String regionValueLookUp) {		
+		List<WebElement> regionValueList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_region_value_dropdown_option"));
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("fid", regionValueLookUp));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get city region values", nvPairs);
+	
+		assertTrue("DB values are empty", document.getElementsByTagName("regionvalue").getLength()>1);
+		for (int i = 1; i < document.getElementsByTagName("regionvalue").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					regionValueList.get(i).getAttribute("value"));
 		}
+	}
+	
+	public void clickOnAddNewRegionButton() {
 		attemptClick(CityIdentifiers.getObjectIdentifier("city_add_new_region_button_id"));
 	}
 	
@@ -2109,6 +2118,24 @@ public class EditCityPage extends AbstractPage {
 			ex.printStackTrace();
 		}
 	}	
+	
+	public void verifyCityRegionTypeAndValueInEditMode(String regionType, String regionValue) {
+		try {
+			Boolean regionAndValueFound = false;			
+			List<WebElement> regionRows = getDriver().findElements(By.xpath("//*[@id='additionalRegions']/tr"));
+			for (int i = 0; i < regionRows.size(); i++) {
+				List<WebElement> newNameTypeElement = regionRows.get(i).findElements(CityIdentifiers.getObjectIdentifier("city_region_type_dropdown_xpath"));
+				List<WebElement> newNameValueElement = regionRows.get(i).findElements(CityIdentifiers.getObjectIdentifier("city_region_value_dropdown_xpath"));			
+				if (new Select(newNameTypeElement.get(i)).getFirstSelectedOption().getText().equals(regionType)	&& new Select(newNameValueElement.get(i)).getFirstSelectedOption().getText().equals(regionValue)) {
+					regionAndValueFound = true;
+					break;
+				}				
+			}
+			assertTrue(regionAndValueFound);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 
 	public void verifyCityRegionForBlankValue(Map<String, String> cityRegionValueMap) {
 		assertEquals(cityRegionValueMap.keySet().size(), 0);

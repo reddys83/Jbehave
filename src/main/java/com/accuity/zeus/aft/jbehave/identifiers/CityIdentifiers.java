@@ -136,6 +136,7 @@ public class CityIdentifiers {
 		hmap.put("city_add_new_region_button_id", By.id("add-regions"));
 		hmap.put("city_region_type_dropdown_xpath", By.xpath(".//*[@id='regionType']"));
 		hmap.put("city_region_value_dropdown_xpath", By.xpath(".//select[@id='regionValue']"));
+		hmap.put("city_region_value_dropdown_option", By.xpath(".//select[@id='regionValue']/option"));
 		hmap.put("city_region_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalRegions']//*[@data-error_id='regionValueError']")));
 		hmap.put("city_delete_region_row_button_xpath", By.xpath(".//*[@data-row_id='regions']//button[@class='delete-row']"));
 		hmap.put("city_region_table", By.xpath("//*[@id='cityRegions']//table"));

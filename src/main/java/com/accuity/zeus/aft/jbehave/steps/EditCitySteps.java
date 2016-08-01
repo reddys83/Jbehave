@@ -1070,6 +1070,11 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyCityRegionTypeList();
 	}
 	
+	@Then("the user should see the region value from <regionValueLookUp>")
+	public void verifyCityRegionValueList(@Named("regionValueLookUp") String regionValueLookUp) {
+		getEditCityPage().verifyCityRegionValueList(regionValueLookUp);
+	}
+	
 	@When("the user clicks on the add new region button in the city region page")
 	public void clickOnAddNewRegionButton() {
 		getEditCityPage().clickOnAddNewRegionButton();
@@ -1120,6 +1125,12 @@ public class EditCitySteps extends AbstractSteps {
 	public void verifyCityRegionTypeAndValue(@Named("newRegionType") String newRegionType, 
 										     @Named("newRegionValue") String newRegionValue) {
 		getEditCityPage().verifyRegionTypeAndValue(newRegionType, newRegionValue);		
+	}
+	
+	@Then("the user should see the city region type and value updated in edit city page")
+	public void verifyCityRegionTypeAndValueInEditMode(@Named("newRegionType") String newRegionType, 
+										     @Named("newRegionValue") String newRegionValue) {
+		getEditCityPage().verifyCityRegionTypeAndValueInEditMode(newRegionType, newRegionValue);		
 	}
 	
 	@Then("the user should see the city region type 2 and value 2 updated in UI")
