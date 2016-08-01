@@ -112,6 +112,9 @@ public class XqueryMap {
 		queryMap.put("active office test list","getActiveOfficeFidTest.xqy");
 		queryMap.put("get area identifiers","getCountryIdentifiers.xqy");
         queryMap.put("get offices office types","getOfficesOfficeTypes.xqy");
+        queryMap.put("get office identifiers values", "getOfficeIdentifiers.xqy");
+		queryMap.put("get office identifiers type list", "getOfficeIdentifiersTypes.xqy");
+		queryMap.put("get office Status types", "getCityStatusTypes.xqy");
    }
 
     public String getXquery(String key){

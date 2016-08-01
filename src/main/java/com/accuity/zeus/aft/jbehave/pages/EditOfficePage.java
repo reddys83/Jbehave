@@ -4,8 +4,6 @@ import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
-import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.commons.collections.ListUtils;
@@ -374,8 +372,8 @@ public class EditOfficePage extends AbstractPage {
 			List<WebElement> identifierTypeDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_input_xpath"));
 			
 			if (identifierTypeDropDowns.size() > 0) {
-				List<WebElement> identifierValueDropDowns = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("office_identifier_value_input_xpath"));
-				List<WebElement> identifierStatusDropDowns = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("office_identifier_status_input_xpath"));
+				List<WebElement> identifierValueDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_value_input_xpath"));
+				List<WebElement> identifierStatusDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_status_input_xpath"));
 				
 				for (int index = 0; index < identifierTypeDropDowns.size(); index++) {					
 					identifierTypes.add(new Select(identifierTypeDropDowns.get(index)).getAllSelectedOptions().get(0).getText());
@@ -494,7 +492,7 @@ public class EditOfficePage extends AbstractPage {
 	}
     
     public void pressEnterButtonInDeleteConfirmationModalForOfficeIdentifiers() {
-		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_delete_yes_button_id")).sendKeys(Keys.ENTER);
+		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("delete_confirmation_yes_button_id")).sendKeys(Keys.ENTER);
 	} 
     
     public void enterOfficeIdentifierType(String identifierType, int rowNo) {
@@ -646,18 +644,17 @@ public class EditOfficePage extends AbstractPage {
 	}
     
     public void pressNoButtonInDeleteConfirmationModalForOfficeIdentifiers() {
-		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_delete_no_button_id_click")).click();
+		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_delete_no_button_click_xpath")).click();
 	}
     
-    public void verifyNewlyAddedOfficeIdentifierRowExists() {
-		try
-		{
+    public void verifyNewlyAddedOfficeIdentifierRowIsDisplayed() {
+		try {
 			WebElement identifier = getDriver()
-					.findElement(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_view_mode"));
+					.findElement(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_input_xpath"));
 			assertTrue(identifier != null);
 		} catch (Exception e) {
-			e.printStackTrace();
-		}		
+			assertTrue(false);
+		}
 	}
     
 
