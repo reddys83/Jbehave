@@ -32,6 +32,7 @@ let $LeadLocation := ($office/summary/leadLocation)
 let $foreignOffice := ($office/summary/foreignOffice)
 let $additionalInfo := ($office/summary/additionalInfos/additionalInfo)
 
+let $officeOfficeTypes := ($office/summary/types/type)
 
 
 return <office>
@@ -40,6 +41,7 @@ return <office>
    <LeadLocation>{$LeadLocation}</LeadLocation>
     <foreignOffice>{$foreignOffice}</foreignOffice>
     <additionalInfos>{$additionalInfo}</additionalInfos>
+    <officeOfficeTypes>{$officeOfficeTypes}</officeOfficeTypes>
     </office>
 
     (:return $office:)
