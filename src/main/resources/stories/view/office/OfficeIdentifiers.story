@@ -20,8 +20,8 @@ And the user clicks on the office identifier link in the navigation bar
 
 Then the user should see the office's identifiers as:
 |TYPE|VALUE|STATUS|
-|FDIC Office Branch|5|active|
-|FDIC Office Branch ID|5|inactive|
+|FDIC Office Branch|5|Active|
+|FDIC Office Branch ID|5|Inactive|
 
 Examples:
 |entity|searchBy|fid|officeFid|
