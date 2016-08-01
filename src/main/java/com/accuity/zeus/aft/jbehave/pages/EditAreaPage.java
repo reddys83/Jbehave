@@ -1187,6 +1187,24 @@ public class EditAreaPage extends AbstractPage {
 
 	}
 	
+	
+	public void verifyUseInAddressInAreaPage(String useInAddress) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals(useInAddress, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_xpath")).getText());
+	}
+	
+	
+	public void verifyUseInAddressAreaFromZeusDB(String country, String area, String tagName, String source) {
+		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source),
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_xpath")).getText());
+	}
+	
+	
 	@Override
 	public String getPageUrl() {
 		return null;
