@@ -2,11 +2,6 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -109,183 +104,101 @@ public class EditOfficeSteps extends AbstractSteps{
     public void verifyAdditionalInfoValueWithMaxLengthFromDB(@Named("officeFid") String officeFid,@Named("source") String source) {
         getEditOfficePage().verifyAdditionalInfoValueWithMaxLengthFromZeus("additionalInfo",officeFid,source);
     }
-    
-    @Then("the user should see the office's identifier values same as in $source document")
-	public void verifyOfficeIdentifierValuesFromTrustedDB(@Named("source") String source, @Named("officeFid") String officeFid) { 		 
+    @When("the user clicks on the $officetype_dropdown in the basicinfo office page")
+    public void clickOnNewOfficeTypeDropDown(String officetype_dropdown ){
+        getEditOfficePage().clickOnNewOfficeTypeDropDown(officetype_dropdown);
+    }
 
-    	getEditOfficePage().verifyOfficeIdentifierValuesFromTrustedDB(source, officeFid);
-	}
-    
-    @When("the user clicks on the add new identifier button in the office identifier page")
-    public void clickOnOfficeAddNewIdentifierButton() {
-    	getEditOfficePage().clickOnOfficeAddNewIdentifierButton();
-	} 
-    
-    @Then("the user should see the office identifier types from lookup THIRD_PARTY_IDENTIFIER_OFFICE")
-	public void verifyOfficeIdentifierTypesList() {
-    	getEditOfficePage().verifyOfficeIdentifierTypesList();
-	}
-    
-    @Then("the user should see the office identifier status from lookup STATUS")
-	public void verifyOfficeIdentifierStatusList() {
-    	getEditOfficePage().verifyOfficeIdentifierStatusList();
-	}
-    
-    @When("the user deletes the existing office identifier rows")
-    public void deleteAllOfficeIdentifiers() {
-    	getEditOfficePage().deleteAllOfficeIdentifierRows();
-	} 
-    
-    @When("the user enters identifier type as <identifierType> in the office identifier page")
-	public void enterOfficeIdentifierType(@Named("identifierType") String identifierType) {
-    	getEditOfficePage().enterOfficeIdentifierType(identifierType, 1);
-	}
-    
-    @When("the user enters identifier value as <identifierValue> in the office identifier page")
-	public void enterOfficeIdentifierValue(@Named("identifierValue") String identifierValue) {
-    	getEditOfficePage().enterOfficeIdentifierValue(identifierValue, 1);
-	}
-    
-    @When("the user enters identifier status as <identifierStatus> in the office identifier page")
-	public void enterOfficeIdentifierStatus(@Named("identifierStatus") String identifierStatus) {
-    	getEditOfficePage().enterOfficeIdentifierStatus(identifierStatus, 1);
-	}
-    
-    @Then("the user verifies that previously selected <identifierType> is not present in the new office identifier row")
-	public void verifySelectedOfficeIdentifierTypeNotInNewRow(@Named("identifierType") String identifierType) {
-    	getEditOfficePage().verifySelectedOfficeIdentifierTypeNotInNewRow(identifierType, 2);
-	}
-    
-    @When("the user enters identifier type as <identifierType2> in the office identifier page")
-	public void enterOfficeIdentifierType2(@Named("identifierType2") String identifierType) {
-    	getEditOfficePage().enterOfficeIdentifierType(identifierType, 2);
-	}
-    
-    @When("the user enters identifier value as <identifierValue2> in the office identifier page")
-	public void enterAreaIdentifierValues2(@Named("identifierValue2") String identifierValue) {
-    	getEditOfficePage().enterOfficeIdentifierValue(identifierValue, 2);
-	}
-    
-    @When("the user enters identifier status as <identifierStatus2> in the office identifier page")
-	public void enterAreaIdentifierStatus2(@Named("identifierStatus2") String identifierStatus) {
-    	getEditOfficePage().enterOfficeIdentifierStatus(identifierStatus, 2);
-	}
-    
-    @Then("the user should see the successful update message at top of the office page")
-	public void verifySuccessfulUpdatedMessage() {
-    	getEditOfficePage().verifySuccessfulUpdatedMessage();
-	}
-    
-    @Then("the user verifies that the identifiers parameters are entered in the office identifiers page")
-	public void verifyOfficeIdentifierParametersInUI( @Named("identifierType") String identifierType,
-			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus,
-			@Named("identifierType2") String identifierType2, @Named("identifierValue2") String identifierValue2,
-			@Named("identifierStatus2") String identifierStatus2) {
-		
-		String[] identifierTypes = { identifierType, identifierType2 };
-		String[] identifierValues = { identifierValue, identifierValue2 };
-		String[] identifierStatusValues = { identifierStatus, identifierStatus2 };
-		
-		getEditOfficePage().verifyOfficeIdentifierParametersInUI(identifierTypes, identifierValues, identifierStatusValues);
-	}
-    
-    @Then("the user should see the office identifier values as in $source document")
-	public void verifyOfficeIdentifierValuesFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid,
-	        @Named("identifierType") String identifierType,
-			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus,
-			@Named("identifierType2") String identifierType2, @Named("identifierValue2") String identifierValue2,
-			@Named("identifierStatus2") String identifierStatus2) {
- 
-		List<String> identifierTypes = new ArrayList<>();
-		List<String> identifierValues = new ArrayList<>();
-		List<String> identifierStatusValues = new ArrayList<>();		
-		identifierTypes.add(identifierType);		
-		identifierValues.add(identifierValue);
-		identifierStatusValues.add(identifierStatus);		
-		identifierTypes.add(identifierType2);
-		identifierValues.add(identifierValue2);
-		identifierStatusValues.add(identifierStatus2);
-		
-		getEditOfficePage().verifyOfficeIdentifierValuesFromDB(source, officeFid, identifierTypes, identifierValues,
-				identifierStatusValues);
-	}
-    
-    @Then("the user should not see the <ConfirmationSummary> changes in confirmation modal in the office identifiers page")
-	public void verifyNoChangeConfirmationMsg(@Named("ConfirmationSummary") String ConfirmationSummary) {
-    	getEditOfficePage().verifyNoSummaryConfirmationModal(ConfirmationSummary);
-	}
-    
-    @Then("the user should not see the newly added identifier row in the office identifiers page")
-    @Alias("the user should not see the identifier row in the office identifiers page")
-	public void verifyNewlyAddedAreaIdentifierRowIsNotDisplayed() throws Exception {
-    	getEditOfficePage().verifyNewlyAddedOfficeIdentifierRowIsNotDisplayed();
-	}
-    
-    @Then("the user verifies that no values are entered in $source document for office identifiers")
-    @Alias("the user verifies that the row values for office identifier entered exists in $source document")
-    public void verifyOfficeIdentifierRowValuesFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid,
-	        @Named("identifierType") String identifierType,
-			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus) {
-		List<String> identifierTypes = new ArrayList<>();
-		List<String> identifierValues = new ArrayList<>();
-		List<String> identifierStatusValues = new ArrayList<>();
-		identifierTypes.add(identifierType);		
-		identifierValues.add(identifierValue);		
-		identifierStatusValues.add(identifierStatus);
-		
-		getEditOfficePage().verifyOfficeIdentifierValuesFromDB(source, officeFid, identifierTypes, identifierValues,
-				identifierStatusValues);
-	}	
-    
-    @Then("the user should see maximum length of office identifier value is limited to $maxLength")
-	public void verifyMaxLengthInOfficeIdentifierValue(@Named("maxLength") String maxLength) {
-    	getEditOfficePage().verifyMaxLengthInOfficeIdentifierValue(maxLength);
-	}
-    
-    @Then("the user should see the error message $errMsg for identifier type field in the office identifiers page")
-	public void verifyErrorMessageForRequiredOfficeIdentifierType(@Named("errMsg") String errMsg) {
-    	getEditOfficePage().verifyErrorMessageForRequiredOfficeIdentifierType(errMsg);
-	}
-    
-    @Then("the user should see the error message $errMsg for identifier value field in the office identifiers page")
-	public void verifyErrorMessageForRequiredOfficeIdentifierValue(@Named("errMsg") String errMsg) {
-    	getEditOfficePage().verifyErrorMessageForRequiredOfficeIdentifierValue(errMsg);
-	}
-    
-    @Then("the user should see the error message $errMsg for identifier status field in the office identifiers page")
-	public void verifyErrorMessageForRequiredOfficeIdentifierStatus(@Named("errMsg") String errMsg) {
-    	getEditOfficePage().verifyErrorMessageForRequiredOfficeIdentifierStatus(errMsg);
-	}
-    
-    @Then("the user verifies that the deleted row for office identifier does not exist in $source document")
-	public void verifyOfficeIdentifierRowNotPresentInZeusDB(@Named("source") String source, @Named("officeFid") String officeFid) {
-    	getEditOfficePage().verifyIdentifierRowNotPresentInZeusDB(source, officeFid);
-	}
-    
-    @When("the user clicks on the delete identifier row button in the office identifiers page")
-	public void clickOnDeleteNewOfficeIdentifierRowButton() {
-    	getEditOfficePage().clickOnDeleteNewOfficeIdentifierRowButton();
-	}
-    
-    @Then("the user should see delete row confirmation modal in the office identifiers page")
-	public void verifyDeleteConfirmationModal() {
-    	getEditOfficePage().verifyOfficeIdentifierRowDeleteConfirmationModal();
-	}
-    
-    @When("the user clicks on the No button to cancel the deletion of row in the office identifiers page")
-	public void pressNoButtonInDeleteConfirmationModalForOfficeIdentifiers() {
-    	getEditOfficePage().pressNoButtonInDeleteConfirmationModalForOfficeIdentifiers();
-	}
-    
-    @Then("the user verifies that the newly added identifier row values exists in the office identifiers page")
-	public void verifyNewlyAddedOfficeIdentifierRowExists() {
-    	getEditOfficePage().verifyNewlyAddedOfficeIdentifierRowExists();
-	}
-    
-    @When("the user clicks on the Yes button to delete the row in the office identifiers page")
-	public void pressEnterButtonInDeleteConfirmationModalForOfficeIdentifiers() {
-    	getEditOfficePage().pressEnterButtonInDeleteConfirmationModalForOfficeIdentifiers();
-	}
+    @Then("the user should see the $dropdown values from lookup $fid except the values that are selected already in office")
+    public void verifyOfficeTypeListFromLookup(String dropdown,String fid){
+        getEditOfficePage().verifyOfficeTypeListFromLookup(fid,dropdown);
+    }
+
+
+    @When("the user clicks on the add new office type button")
+    public void clickOnAddNewOfficeTypeButton()
+    {
+        getEditOfficePage().clickOnAddNewOfficeTypeButton();
+    }
+
+    @Then("the user should see the officeType value as in $source document with fid <officeFid>")
+    public void verifyEditOfficesOfficeTypeValueFromTrusted(@Named("officeFid") String officeFid,@Named("source") String source){
+        getEditOfficePage().verifyEditOfficesOfficeTypeValueFromTrusted(officeFid,"type",source);
+    }
+
+    @When("the user selects office type value as <officeTypeValue> from $rowIdentifier in the basicinfo office page")
+    public void selectOfficeType(@Named("officeTypeValue") String officeTypeValue, @Named("rowIdentifier")String rowIdentifier)
+    {
+        getEditOfficePage().selectOfficeType(officeTypeValue,rowIdentifier);
+    }
+
+    @Then("the user should see officeType value as <officeTypeValue> for fid <officeFid> in $source document and in UI")
+    public void verifyEditOfficesOfficeTypeValueFromZeusAndInUI(@Named("officeTypeValue") String officeTypeValue,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficesOfficeTypeValueFromZeusAndInUI(officeTypeValue, "type", officeFid, source, "get office basic info");
+    }
+
+    @Then("the user should not see the deleted office type value $officeTypeValue in the $source document and in UI for fid <officeFid>")
+    public void verifyOfficeTypeNotPresentInZeusAndInUI(@Named("officeTypeValue") String officeTypeValue,@Named("source") String source,@Named("officeFid") String officeFid)
+    {
+        getEditOfficePage().verifyOfficeTypeNotPresentInZeusAndInUI(source,officeFid,"type",officeTypeValue);
+    }
+
+
+    @Then("the user should see the $delete_button in disabled state in office types section")
+    public void verifyDeleteOfficeTypeButtonStatus(@Named("delete_button") String delete_button)
+    {
+        getEditOfficePage().verifyDeleteOfficeTypeButtonStatus(delete_button);
+    }
+
+    @When("the user clicks on the $deletebutton in office types section")
+    public void clickonDeleteOfficeTypeRowButton(String deletebutton)
+    {
+        getEditOfficePage().clickonDeleteOfficeTypeRowButton(deletebutton);
+    }
+
+    @Then("the user should still see the office $dropdown with value $dropdownvalue in office type in office page")
+    public void verifyExistingOfficeTypeRow(String dropdown,String dropdownvalue)
+    {
+        getEditOfficePage().verifyExistingOfficeTypeRow(dropdown,dropdownvalue);
+    }
+
+    @Then("the user should not see the office $dropdown with value $dropdownvalue in office type in office page")
+    public void verifyNoExistingOfficeTypeRow(String dropdown,String dropdownvalue)
+    {
+        getEditOfficePage().verifyNoExistingOfficeTypeRow(dropdown,dropdownvalue);
+    }
+
+    @Then("the user should still see the office $dropdown in the new office type row")
+    public void verifyNewOfficeTypeRow(String dropdown)
+    {
+        getEditOfficePage().verifyNewOfficeTypeRow(dropdown);
+    }
+
+    @Then("the user should not see the office $dropdown in the new office type row")
+    public void verifyNoNewOfficeTypeRow(String dropdown)
+    {
+        getEditOfficePage().verifyNoNewOfficeTypeRow(dropdown);
+    }
+
+    @When("the user selects to delete all the office type rows except the first one in office types")
+    public void deleteAllOfficeTypeRowsExceptRow1()
+    {
+        getEditOfficePage().deleteAllOfficeTypeRowsExceptRow1();
+    }
+
+    @Then("the user should see the error message for the required office type field in the basic info office page")
+    public void verifyErrorMsgRequiredForOfficeType(){
+        getEditOfficePage().verifyErrorMsgRequiredForOfficeType();
+    }
+
+    @When("the user enters null value for all the office type rows")
+    public void enterNullValueForAllOfficeTypeRows()
+    {
+        getEditOfficePage().enterNullValueForAllOfficeTypeRows();
+    }
+
+
+
 }
 
 
