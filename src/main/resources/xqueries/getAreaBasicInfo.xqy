@@ -32,11 +32,25 @@ let $DateFields :=
     </areaDate>
   (: Taking Add Info :)
  let $areaadditionalinfo := ($areaDoc/summary/additionalInfos/additionalInfo/text())
+ 
+ (: Taking identifier List :)
+let $areaIdentifierList := for $x in ($areaDoc/summary/identifiers/identifier)
+  let $areaIdentifierType := $x/type/text()
+  let $areaIdentifierValue := ($x/value/text())
+  let $areaIdentifierStatus := ($x/status/text())
+return 
+  <identifier>
+  <identifierType>{$areaIdentifierType} </identifierType>
+  <identifierValue>{$areaIdentifierValue} </identifierValue>
+  <identifierStatus>{$areaIdentifierStatus} </identifierStatus>
+  </identifier>
+ 
 return
   <area>
       { $areaDoc/summary/names }
       <dateFields>{$DateFields}</dateFields>
       <AdditionalInfo>{$areaadditionalinfo}</AdditionalInfo>
+      <identifiers>{$areaIdentifierList}</identifiers> 
   </area>
   
 

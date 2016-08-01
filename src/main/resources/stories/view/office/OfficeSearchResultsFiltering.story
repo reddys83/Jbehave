@@ -26,7 +26,7 @@ Then the user should see the list of domestic offices in the office search resul
 
 Examples:
 |entity|searchBy|fid|
-|1176|FID|1176|
+|1038|FID|1038|
 
 Scenario: Filter offices by type - Foreign
 Given a user is on the search page
@@ -43,7 +43,7 @@ Then the user should see the list of foreign offices in the office search result
 
 Examples:
 |entity|searchBy|fid|
-|1176|FID|1176|
+|1038|FID|1038|
 
 Scenario: Search returned 0 results
 Given a user is on the search page
@@ -157,7 +157,7 @@ Then the user should see the office results for the applied filters
 
 Examples:
 |entity|searchBy|fid|
-|1176|FID|1176|
+|1038|FID|1038|
 
 Scenario: User should see the types in the type filter should be based on the office search results types
 1. ZEUS-589
@@ -269,7 +269,6 @@ Examples:
 |3125|FID|3125|
 
 Scenario: Filter offices by status - User verifies whether All pages of 'Active' filter has 'Active' status for all fids
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area

@@ -346,28 +346,30 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void navigateToOfficeLastSearchResultsPage() {
+       // String currentPageNumber=getDriver().findElement(office_search_results_current_page_xpath).getText();
        attemptClick(office_search_results_last_page_xpath);
         waitForElementToDisappear(By.id("loader"));
+       // waitForElementToDisappear(By.xpath("//*[@id='pages-navigation-list']//li[@class='current-page' and text()='"+currentPageNumber+"']"));
     }
 
     public void verifySearchResultsNavigation() {
         if (Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) > 7) {
             if (Integer.parseInt(getOfficeSearchResultsCurrentPage()) <= 4) {
-                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 2 3 4 5 … " + getOfficeSearchResultsLastNavigationPage() + " Next");
+                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), ("Previous 1 2 3 4 5 … " + getOfficeSearchResultsLastNavigationPage() + " Next"));
             } else if((Integer.parseInt(getOfficeSearchResultsCurrentPage()) >= 5)
                     && Integer.parseInt(getOfficeSearchResultsCurrentPage()) < (Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 3)) {
-                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 … " +
+                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), ("Previous 1 … " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsCurrentPage()) - 1) + " " +
                         getOfficeSearchResultsCurrentPage() + " " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsCurrentPage()) + 1) + " … " +
-                        getOfficeSearchResultsLastNavigationPage() + " Next");
+                        getOfficeSearchResultsLastNavigationPage() + " Next"));
             } else {
-                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 … " +
+                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), ("Previous 1 … " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 4) + " " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 3) + " " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 2) + " " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 1) + " " +
-                        getOfficeSearchResultsLastNavigationPage() + " Next");
+                        getOfficeSearchResultsLastNavigationPage() + " Next"));
             }
         } else {
             assertTrue(getDriver().findElement(office_search_results_navigation_xpath).getText().contains("Previous"));
@@ -377,6 +379,7 @@ public class ResultsPage extends AbstractPage {
             }
         }
     }
+
 
     public void verifyCurrentPageOnSearchResults(String page) {
         try {
@@ -392,19 +395,27 @@ public class ResultsPage extends AbstractPage {
         if (page.equals("last")) {
             navigateToOfficeLastSearchResultsPage();
         } else {
+            //String currentPageNumber=getDriver().findElement(office_search_results_current_page_xpath).getText();
             navigateToDesiredSearchResultsPage(Integer.toString(Integer.parseInt(page.replace("st", "").replace("nd", "").replace("rd", "").replace("th", "")) + 1)).click();
             waitForElementToDisappear(By.id("loader"));
+            //waitForElementToDisappear(By.xpath("//*[@id='pages-navigation-list']//li[@class='current-page' and text()='"+currentPageNumber+"']"));
+
         }
     }
 
     public void navigateToNextOfficeSearchResultsPage() {
+        //String currentPageNumber=getDriver().findElement(office_search_results_current_page_xpath).getText();
         attemptClick(office_search_results_next_page_classname);
         waitForElementToDisappear(By.id("loader"));
+        //waitForElementToDisappear(By.xpath("//*[@id='pages-navigation-list']//li[@class='current-page' and text()='"+currentPageNumber+"']"));
+
     }
 
     public void navigateToPreviousOfficeSearchResultsPage() {
+        //String currentPageNumber=getDriver().findElement(office_search_results_current_page_xpath).getText();
         attemptClick(office_search_results_previous_page_classname);
         waitForElementToDisappear(By.id("loader"));
+       // waitForElementToDisappear(By.xpath("//*[@id='pages-navigation-list']//li[@class='current-page' and text()='"+currentPageNumber+"']"));
     }
 
 
@@ -881,7 +892,8 @@ public class ResultsPage extends AbstractPage {
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"active office test list", nvPairs);
 			while (nextPage != null) {
-				Thread.sleep(5000L); //there is no unique element in next page, hence using direct wait
+
+				//Thread.sleep(5000L); //there is no unique element in next page, hence using direct wait
 				List<WebElement> resultList = getDriver().findElements(office_search_results_rows_xpath);
 				List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
 
@@ -896,7 +908,9 @@ public class ResultsPage extends AbstractPage {
 				if (comparedFidsCount < Integer.parseInt(fidCount)) {
 					nextPage = getDriver().findElement(office_search_results_next_page_classname);
 					if (nextPage != null) {
+                        String currentPageNumber=getDriver().findElement(office_search_results_current_page_xpath).getText();
 						nextPage.click();
+                        waitForElementToDisappear(By.xpath("//*[@id='pages-navigation-list']//li[@class='current-page' and text()='"+currentPageNumber+"']"));
 					}
 				} else {
 					break;

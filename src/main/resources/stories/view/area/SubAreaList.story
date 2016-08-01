@@ -42,7 +42,6 @@ Then the user should see the below subareas for the selected country and area:
 |Co. Londonderry|
 |Co. Tyrone|
 |Fermanagh|
-|Londonderry|
 
 Examples:
 |country|area|
