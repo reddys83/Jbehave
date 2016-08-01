@@ -557,8 +557,8 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@Then("the user verifies whether timezone dropdown list shows all Hera IDs matches with the timezone lookup")
-	public void verifyTimeZoneDropdownListAgainstTimeZoneLookup() throws InterruptedException {
-		getEditAreaPage().verifyTimeZoneDropdownListAgainstTimeZoneLookup();
+	public void verifyTimeZoneDropdownListMatchesWithLookup() throws InterruptedException {
+		getEditAreaPage().verifyTimeZoneDropdownListMatchesWithLookup();
 	}
 
 	@Then("the user verifies the current value in timezone is defaulted from $source")
@@ -589,27 +589,22 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("user verifies whether timezone dropdown displays time zone's except selected timezone<timeZone>")
 	public void verifyTimeZoneDropDownListDisplaysUnSelectedTimeZones(@Named("timeZone") String timeZone) {
-		getEditAreaPage().verifyTimeZoneDropDownListDisplaysUnSelectedTimeZones(timeZone);
+		getEditAreaPage().verifyTimeZoneDropDownIsNotHavingSelectedTimeZone(timeZone);
 	}
 
-	@Then("user selects the timezone<timeZone> in the timezone dropdown of area basic page")
+	@Then("user selects the timezone <timeZone> in the timezone dropdown of area basic page")
 	public void userSelectsTimeZoneDropDownValue(@Named("timeZone") String timeZone) throws InterruptedException {
 		getEditAreaPage().userSelectsTimeZoneDropDownValue(timeZone, 1);
 	}
 
-	@Then("user selects the timezone<timeZone1> in the timezone dropdown of area basic page")
+	@Then("user selects the timezone <timeZone1> in the timezone dropdown of area basic page")
 	public void userSelectsTimeZoneDropDownValues(@Named("timeZone1") String timeZone1) throws InterruptedException {
 		getEditAreaPage().userSelectsTimeZoneDropDownValue(timeZone1, 2);
 	}
 
-	@Then("user verifies whether the existing timezone for timezone<timeZone> has option to delete")
-	public void verifyExisitngTimeZoneHasOptionToDelete(@Named("timeZone") String timeZone) {
-		getEditAreaPage().verifyExisitngTimeZoneHasOptionToDelete(timeZone);
-	}
-
 	@Then("user changes the <timeZone1> in the timezone dropdown of area basic page")
 	public void userSelectTimeZoneValue(@Named("timeZone1") String timeZone1) throws InterruptedException {
-		getEditAreaPage().userSelectsTimeZoneValue(timeZone1, 1);
+		getEditAreaPage().userSelectsTimeZoneDropDownValue(timeZone1, 1);
 	}
 
 	@Then("the user enters the summary as <summary>")
@@ -624,7 +619,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on the delete timezone row button in the basic info area page")
 	public void clickOnDeleteAreaTimZoneRowButton() {
-		getEditAreaPage().clickOnDeleteAreaTimZoneRowButton();
+		getEditAreaPage().clickOnDeleteAreaTimeZoneRowButton();
 	}
 
 	@Then("the user should see the newly added timezone row in the basic info area page")
@@ -666,6 +661,12 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyAreaSummaryValueFromZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source, @Named("summary1") String summary1) {
 		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary1);
+	}
+	
+	@Then("the user verifies the $source document whether the newly updated summary is limited to $maxLength unicode characters")
+	public void verifySummaryFieldLimitInZeus(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("maxLength") int maxLength) {
+		getEditAreaPage().verifySummaryFieldLimitInZeusDB(country, area, "summary", source, maxLength);
 	}
 
 	@Then("the user verifies  whether the Area is updated with the newly updated summary")
@@ -739,6 +740,11 @@ public class EditAreaSteps extends AbstractSteps {
 		timeZoneValues.add(timeZone);
 		timeZoneValues.add(timeZone1);
 		getEditAreaPage().verifyAreasTimeZoneValuesFromDB(country, area, timeZoneValues, source);
+	}
+	
+	@When("the user deletes the existing area timezone rows")
+	public void deleteAllAreaTimeZoneRows() {
+		getEditAreaPage().deleteAllAreaTimeZoneRows();
 	}
 
 }

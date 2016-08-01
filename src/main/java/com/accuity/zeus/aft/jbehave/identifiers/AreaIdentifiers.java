@@ -84,6 +84,8 @@ public class AreaIdentifiers {
 		hmap.put("summary_current_value_viewmode_xpath", By.xpath("//*[@id='areaBasicInfo']//dd"));
 		hmap.put("timezone_current_value_viewmode_xpath", By.xpath("//*[@class='vertical2']//td"));
 		hmap.put("timezone_row_value_viewmode_xpath", By.xpath("//*[@class='vertical2']"));
+		hmap.put("area_timezone_add_names_button_xpath", By.xpath("//*[@id='areaBasicInfo']//*[@id='add-timeZones']"));
+		hmap.put("area_delete_timezone_row_button_xpath", By.xpath(".//*[@data-row_id='timeZones']//button[@class='delete-row']"));			
 	}
 
 	public static By getObjectIdentifier(String key) {

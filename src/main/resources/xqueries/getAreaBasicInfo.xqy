@@ -39,6 +39,9 @@ let $DateFields :=
  
  (: Taking Area Interest Rate :)
   let $areaInterestRate := ($areaDoc/summary/maxConsumerRate/text())
+  
+  (: Taking Area Use In Address :)
+  let $areaUseInAddress := ($areaDoc/summary/useInAddress/text())
  
  (: Get area and Subarea value :) 
 let $areavalue := ($areaDoc/summary/names/name[1]/value/text()) 
@@ -51,7 +54,6 @@ return
  <utcvalues>
  <utcvalue>{$utc} </utcvalue>
  </utcvalues>
-
 
 let $summary := ($areaDoc/summary/timeZones/summaries/summary/text())
 let $UTC := ($areaDoc/summary/timeZones/zone/text())
@@ -78,8 +80,9 @@ return
       <subarea>{$subareavalue}</subarea>
       <identifiers> {$areaIdentifierList} </identifiers> 
       <areaInterestRate>{$areaInterestRate}</areaInterestRate>
+	    <areaUseInAddress>{$areaUseInAddress}</areaUseInAddress>
       <summary>{$summary}</summary>
       <UTC>{$UTC}</UTC>
-      <timezoneutc>{$UTClist}</timezoneutc>      
+      <UTCvalues>{$UTClist}</UTCvalues>
   </Area>
  
