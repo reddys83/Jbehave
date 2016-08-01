@@ -1209,7 +1209,7 @@ When the user gets the document with get document id for area with the <area> fr
 Then the user clicks on add new timezone button
 Then user selects the timezone<timeZone> in the timezone dropdown of area basic page
 When the user clicks on the delete timezone row button in the basic info area page
-Then the user should see delete row confirmation modal in the area page
+Then the user should see delete row confirmation modal in the area basic page
 When the user clicks on the No button to cancel the deletion of row in basic info area page
 Then the user should see the newly added timezone row in the basic info area page
 When the user clicks on the delete timezone row button in the basic info area page
@@ -1250,7 +1250,7 @@ When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 When the user clicks on the area update link
 When the user clicks on the delete timezone row button in the basic info area page
-Then the user should see delete row confirmation modal in the area page
+Then the user should see delete row confirmation modal in the area basic page
 When the user clicks on the No button to cancel the deletion of row in basic info area page
 Then the user should see the newly added timezone row in the basic info area page
 When the user clicks on the save button
