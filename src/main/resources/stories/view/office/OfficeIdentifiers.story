@@ -129,6 +129,9 @@ And the user clicks on the office identifier link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get doc id for offices with the <officeFid> from the trusted database
 When the user deletes the existing office identifier rows
+When the user clicks on the save button
+When the user clicks on the confirm button
+And the user clicks on the office update link
 When the user clicks on the add new identifier button in the office identifier page
 When the user enters identifier type as <identifierType> in the office identifier page
 When the user enters identifier value as <identifierValue> in the office identifier page
