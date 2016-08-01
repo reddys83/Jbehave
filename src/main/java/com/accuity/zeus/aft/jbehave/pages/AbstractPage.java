@@ -149,7 +149,7 @@ public abstract class AbstractPage {
 
     public void waitForElementToAppear(By by) {
         try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), 15);
+            WebDriverWait wait = new WebDriverWait(getDriver(), 30);
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         } catch (org.openqa.selenium.NoSuchElementException e) {
         }
