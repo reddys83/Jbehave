@@ -1017,10 +1017,10 @@ public class EditAreaPage extends AbstractPage {
 
 	public void userSelectsTimeZoneDropDownValue(String timeZoneType, int rowNo) {
 		try {
-			List<WebElement> timezoneDropDowns = getDriver()
+			List<WebElement> timeZoneDropDowns = getDriver()
 					.findElements(AreaIdentifiers.getObjectIdentifier("timezone_utc_default_value_xpath"));
-			if (rowNo <= timezoneDropDowns.size()) {
-				Select dropdown = new Select(timezoneDropDowns.get(rowNo - 1));
+			if (rowNo <= timeZoneDropDowns.size()) {
+				Select dropdown = new Select(timeZoneDropDowns.get(rowNo - 1));
 				if (timeZoneType.equals("")) {
 					dropdown.selectByValue(timeZoneType);
 				} else {
@@ -1034,10 +1034,10 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void userSelectsTimeZoneValue(String timeZoneType, int rowNo) {
 		try {		
-			List<WebElement> timezoneDropDowns = getDriver()
+			List<WebElement> timeZoneDropDowns = getDriver()
 					.findElements(AreaIdentifiers.getObjectIdentifier("timezone_utc_default_value_xpath"));
-			if (rowNo <= timezoneDropDowns.size()) {
-				Select dropdown = new Select(timezoneDropDowns.get(rowNo - 1));
+			if (rowNo <= timeZoneDropDowns.size()) {
+				Select dropdown = new Select(timeZoneDropDowns.get(rowNo - 1));
 				if (timeZoneType.equals("")) {
 					dropdown.selectByValue(timeZoneType);
 				} else {
