@@ -17,7 +17,6 @@ Scenario: User can edit area Began Date -
 a)Verify if user can see all the months in month dropdown (Began Date) are in MMM format
 b)Verify if user can see that all the months are sorted as per chronological order
 c)Verify if User can see Current value of the Month,Day & Year is retrieved from trusted document
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area

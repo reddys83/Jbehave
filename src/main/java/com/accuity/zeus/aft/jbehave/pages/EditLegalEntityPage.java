@@ -1134,8 +1134,8 @@ public class EditLegalEntityPage extends AbstractPage {
         }
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity BoardMeeting", nvPairs);
         assertTrue(getNodeValuesByTagName(document, "summary").get(0).contains(EditLEgalEntityBoardmeetingSummary));
-        assertTrue(getNodeValuesByTagName(document, "type").contains(EditLegalEntityBoardMeetingsType));
-        assertTrue(getNodeValuesByTagName(document, "value").contains(monthNumber));
+        assertTrue(getNodeValuesByTagName(document, "meetingType").contains(EditLegalEntityBoardMeetingsType.toLowerCase()));
+        assertTrue(getNodeValuesByTagName(document, "meetingValue").contains(monthNumber));
     }
 
     public void verifyLegalEntityPersonnelInZeus(String fid) {
