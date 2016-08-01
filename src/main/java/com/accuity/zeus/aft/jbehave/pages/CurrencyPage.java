@@ -644,6 +644,7 @@ public class CurrencyPage extends AbstractPage {
         }
         getDriver().findElement(currency_input_xpath).sendKeys(currency);
         getDriver().findElement(currency_input_xpath).sendKeys(Keys.RETURN);
+        waitForElementToAppear(By.xpath("//*[@id='entitySelect_chosen']/a/span[text()='"+currency+"']"));
         return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 

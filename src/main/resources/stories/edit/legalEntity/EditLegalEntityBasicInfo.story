@@ -27,7 +27,6 @@ Scenario: Verify the default Edit value and Save Lead Institution value for a le
        e. Do not select any value and Save for a legalEntity with a default value as null
        f. Verify the save confirmation modal
        g. Verify default Lead Institution value while editing the legal entity
-Meta:@run44
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
