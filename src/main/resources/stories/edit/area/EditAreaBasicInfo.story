@@ -48,7 +48,7 @@ And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
 And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
-And the user clicks on the area update link
+When the user clicks on the update link
 When the user gets the document with get document id for area with the <area> from the database
 When the user clicks on False option for Use in Address
 When the user clicks on the save button
@@ -59,7 +59,7 @@ When the user clicks on the city update link
 When the user clicks on False option for Use in Address
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-Then the user should see no <summary> changes in area save confirmation modal
+Then the user should not see the <ConfirmationSummary> changes in confirmation modal for area
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user reverts the changes to the document
