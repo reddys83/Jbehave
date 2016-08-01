@@ -61,6 +61,29 @@ public class AreaIdentifiers {
 		hmap.put("area_delete_no_button_id_click", By.xpath("//*[@id='no-button']"));
 		hmap.put("area_identifier_type_req_err_msg_xpath", By.xpath("//*[@id='additionalIdentifiers']//*[@data-error_id='identifierTypeError']"));
 		hmap.put("area_identifier_type_view_mode", By.xpath("//*[@id='areaBasicInfo']//table[2]//tbody/tr"));		
+		hmap.put("area_timezone_utc_dropDown_xpath", By.xpath("//*[@name='utc3']/option"));
+		hmap.put("area_timezone_utc_dropDown_new_xpath", By.xpath("(//*[@name='utc3'])[2]//option"));	
+		hmap.put("timezone_utc_add_timezone_xpath", By.xpath("//*[@id='add-timeZones']"));		
+		hmap.put("timezone_utc_dropdown_xpath", By.xpath("//*[@id='areaBasicInfo']//table[2]//tbody/tr"));		
+		hmap.put("timezone_utc_default_value_xpath", By.xpath("//*[@name='utc3']"));		
+		hmap.put("timezone_utc_default_value_add_xpath", By.xpath("//*[@name='utc3']"));
+		hmap.put("timezone_utc_default_value_addrows_xpath", By.xpath("//*[@name='utc3']/option"));
+		hmap.put("utc_timezone_dropDown_select_option_xpath", By.xpath("//*[@id='additionalTimeZones']//select/option"));
+		hmap.put("utc_timezone_dropDown_select_xpath", By.xpath("//*[@id='additionalTimeZones']//select"));		
+		hmap.put("existing_timezone_utc_delete_xpath", By.xpath("//*[@id='areaBasicInfo']//table[2]//tbody/tr"));		
+		hmap.put("area_summary_timezone_xpath", By.xpath("//*[@name='timeZonesSummary']"));
+		hmap.put("summary_req_err_msg_xpath", By.xpath("//*[@id='areaBasicInfo']//table[2]//tbody/tr"));
+		hmap.put("area_delete_timezone_row_button_xpath", By.xpath("//*[@id='additionalTimeZones']//*[@class='delete-row']"));
+		hmap.put("area_timezone_input_xpath", By.xpath("//*[@id='additionalTimeZones']/tr"));
+		hmap.put("area_timezone_type_view_mode", By.xpath("//*[@id='areaBasicInfo']//*[@class='vertical2']"));
+		hmap.put("area_TimeZone", By.xpath("//*[@id='areaBasicInfo']//table[2]//tbody/tr"));
+		hmap.put("summary_current_value_xpath", By.xpath("//*[@name='timeZonesSummary']"));		
+		hmap.put("utc_current_value_xpath", By.xpath("//*[@class='vertical2']//td"));
+		hmap.put("timezone_utc_current_value_xpath", By.xpath("//*[@name='utc3']//option[@selected='selected']"));
+		hmap.put("delete_area_timezone_row_confirmation_modal_xpath", By.xpath("//*[@id='additionalTimeZones']/tr[2]"));
+		hmap.put("summary_current_value_viewmode_xpath", By.xpath("//*[@id='areaBasicInfo']//dd"));
+		hmap.put("timezone_current_value_viewmode_xpath", By.xpath("//*[@class='vertical2']//td"));
+		hmap.put("timezone_row_value_viewmode_xpath", By.xpath("//*[@class='vertical2']"));
 	}
 
 	public static By getObjectIdentifier(String key) {
