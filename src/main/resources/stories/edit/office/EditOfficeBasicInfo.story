@@ -370,9 +370,6 @@ Then the user should see the delete row confirmation modal in the office page
 When the user clicks on the yes button in the delete row confirmation modal in the office page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info|
 When the user clicks on the confirm button
 Then the user should not see the office location row in the locations office page
 And the user reverts the changes to the document
@@ -402,9 +399,6 @@ Then the user should see the delete row confirmation modal in the office page
 When the user clicks on the yes button in the delete row confirmation modal in the office page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info|
 When the user clicks on the confirm button
 Then the user should not see the office location row in the locations office page
 And the user reverts the changes to the document
@@ -560,9 +554,6 @@ Then the user should see the delete row confirmation modal in the office page
 When the user clicks on the yes button in the delete row confirmation modal in the office page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info|
 When the user clicks on the confirm button
 Then the user should not see the office address row in the locations office page
 And the user reverts the changes to the document
@@ -618,9 +609,6 @@ Then the user should see the delete row confirmation modal in the office page
 When the user clicks on the yes button in the delete row confirmation modal in the office page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info|
 When the user clicks on the confirm button
 Then the user should not see the office telecoms row in the locations office page
 And the user reverts the changes to the document
@@ -628,6 +616,33 @@ And the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|officeFid|
 |1010|FID|1010|1010-45|
+
+
+Scenario:  Verify Office Locations Type dropdown values are from lookup  ADDRESS_TYPE
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on add new office address button in the office locations
+Then the user should see the office_addressType_first_row_new_address_type_dropdown values in office location's section from lookup ADDRESS_TYPE
+
+Examples:
+|entity|searchBy|fid|officeFid|
+|1010|FID|1010|1010-44|
+
+
+
+
+
+
 
 
 

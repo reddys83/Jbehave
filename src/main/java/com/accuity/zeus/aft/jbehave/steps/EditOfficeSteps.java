@@ -305,6 +305,11 @@ public class EditOfficeSteps extends AbstractSteps{
     {
         getEditOfficePage().clickonDeleteOfficeTelecomsRowButton(deletebutton_Row);
     }
+
+    @Then("the user should see the $officeaddress_rowIdentifier values in office location's section from lookup $lookup")
+    public void verifyOfficeAddressTypesFromLookup(@Named("officeaddress_rowIdentifier") String officeaddress_rowIdentifier,@Named("lookup") String lookup) {
+        getEditOfficePage().verifyOfficeAddressTypesFromLookup(officeaddress_rowIdentifier,lookup);
+    }
 }
 
 

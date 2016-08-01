@@ -449,6 +449,24 @@ public class EditOfficePage extends AbstractPage {
     public void clickonDeleteOfficeTelecomsRowButton(String rowIdentifier) {
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).click();
     }
+
+    public void verifyOfficeAddressTypesFromLookup(String rowIdentifier,String lookupFid)
+    {   List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", lookupFid));
+        List<WebElement> officeLocationsList = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier(rowIdentifier));
+
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office address type from lookup", nvPairs);
+        for (int i = 1; i < document.getElementsByTagName("officeAddressTypes").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), officeLocationsList.get(i).getAttribute("value"));
+        }
+
+
+    }
     @Override
     public String getPageUrl() {
         return null;

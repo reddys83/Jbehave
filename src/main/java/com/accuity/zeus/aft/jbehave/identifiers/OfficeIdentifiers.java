@@ -31,8 +31,8 @@ public class OfficeIdentifiers {
         hmap.put("office_first_row_existing_location_add_button", By.id("add-location"));
         hmap.put("office_first_existing_row_location_delete_button",By.id("delete-location"));
         hmap.put("office_first_new_row_location_delete_button",By.id("delete-location"));
-        hmap.put("office_location_delete_row_edit_mode",By.xpath(".//*[@id='officeLocations']/div[1]/h1"));
-        hmap.put("office_location_primary_flag_radio_options", By.xpath("//*[@id='locationDiv']//input[@name='primaryLocation-1']"));
+        hmap.put("",By.xpath(".//*[@id='officeLocations']/div[1]/h1"));
+        hmap.put("office_location_primaryoffice_location_delete_row_edit_mode_flag_radio_options", By.xpath("//*[@id='locationDiv']//input[@name='primaryLocation-1']"));
         hmap.put("office_address_addRow_id", By.xpath(".//*[@id='add-locationAddresses-0']"));
         //hmap.put("office_address_addRow_id", By.xpath("//*[@id='locationDiv']//button[@class='addRowButton addAddress']"));
         hmap.put("office_addressType_first_row_new_address_type_dropdown", By.xpath(".//*[@id='locationDiv']//li[@class='address new']//select[@id='addressType-0']"));
