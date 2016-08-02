@@ -567,23 +567,13 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 
 	@Then("the user should see updated Use in address value in $source document")
-	public void verifyUseInAddressAreaFromZeusDB(@Named("country") String country, @Named("Area") String area,
+	public void verifyUseInAddressAreaFromZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
 		getEditAreaPage().verifyUseInAddressAreaFromZeusDB(country, area, "areaUseInAddress", source);
 	}
 
-	@When("the user enters the <Area> in the type-ahead box")
-	public void enterAreaInTypeAheadBox(@Named("Area") String area) {
-		getDataPage().enterAreaInTypeAhead(area);
-	}
-
-	@When("the user gets the document with $xqueryName with the <Area> from the database")
-	public void getDocumentByFidArea(@Named("xqueryName") String xqueryName, @Named("Area") String param) {
-		getDataPage().getDocument(xqueryName, param);
-	}
-
 	@Then("the user should see Use in address value is retrieved from $source document")
-	public void verifyUseInAddressAreaFromTrustedDB(@Named("country") String country, @Named("Area") String area,
+	public void verifyUseInAddressAreaFromTrustedDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
 		getEditAreaPage().verifyUseInAddressAreaFromTrustedDB(country, area, "areaUseInAddress", source);
 	}
