@@ -1338,7 +1338,7 @@ Scenario: User views the Area basic page, selects the update button and clicks o
 1- User verifies the timezone dropdown shows all Hera IDs in the lookup matches with the timezone lookup
 2- User verifies whether default value for timezone is blank
 3- User verifies whether the current value in timezone is defaulted from trusted
-Meta: @smoke
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1349,7 +1349,7 @@ And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
-Then the user verifies the current value in timezone is defaulted from trusted
+Then the user should see the timezone values same as in trusted document
 When the user deletes the existing area timezone rows
 Then the user clicks on add new timezone button
 Then user verifies whether default value for timezone is blank
@@ -1357,9 +1357,6 @@ Then the user verifies whether timezone dropdown list shows all Hera IDs matches
 Then user selects the timezone <timeZone> in the timezone dropdown of area basic page
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info / Time Zones|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user reverts the changes to the document
@@ -1372,7 +1369,7 @@ Scenario: User is updating a Areas's Basic Info and has set values for
 each of 'Country', 'Area', clicks the add new timezone button and saves with empty timezone
 1- User verifies area is not updated with newly added timezone 'timezone' as empty
 2- User verifies Zeus DB whether the area is not updated with newly added timezone 'timezone' as empty 
-Meta: @smoke
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1387,12 +1384,9 @@ When the user deletes the existing area timezone rows
 Then the user clicks on add new timezone button
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info / Time Zones|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
-Then the user verifies  whether the Area is not updated with the newly added timezone
+Then the user verifies area page is not updated with Null time zone
 Then the user verifies the zeus document whether the Area is not updated with the newly added timezone
 Then the user reverts the changes to the document
 
@@ -1405,7 +1399,7 @@ each of 'Country', 'Area', clicks the add new timezone button, selects 'timezone
 1- User verifies whether the time zone list displays all time zone's except those that have been already selected for this area
 2- User verifies area is updated with newly added timezone 
 3- User verifies Zeus DB whether the area is updated with newly added timezone
-Meta: @smoke
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1424,9 +1418,6 @@ Then user verifies whether timezone dropdown displays time zone's except selecte
 Then user selects the timezone <timeZone1> in the timezone dropdown of area basic page
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info / Time Zones|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user verifies that the area timezone values are updated in the basic info area page
@@ -1441,7 +1432,7 @@ Scenario: User is updating a Areas's Basic Info and has set values for
 each of 'Country', 'Area', clicks the add new timezone button,updates the existing 'timezone' value
 1- User verifies area is updated with newly updated timezone 'timezone'
 2- User verifies Zeus DB whether the area is updated with newly updated timezone 'timezone'
-Meta: @smoke
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1457,9 +1448,6 @@ Then the user clicks on add new timezone button
 Then user selects the timezone <timeZone> in the timezone dropdown of area basic page
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info / Time Zones|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 When the user clicks on the area update link
@@ -1472,7 +1460,7 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user verifies  whether the Area is updated with the newly updated timezone
-Then the user verifies the zeus document whether the Area is updated with the newly updated timezone
+Then the user verifies the newly added timezone is updated in zeus document
 Then the user reverts the changes to the document
 
 Examples:
@@ -1482,7 +1470,7 @@ Examples:
 Scenario: User can edit area timezone and tries to delete the timezone before and after saving the area basic page 
 1- Verify if User can prevent deleting timezone by clicking on 'No'.
 2- Verify if User can delete timezone by clicking on 'Yes' , then after saving it should be removed.
-Meta: @smoke
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1521,8 +1509,8 @@ Examples:
 Scenario: User is updating a Areas's Basic Info and has set values for 
 each of 'Country', 'Area', enters timezone summary as 'Null'
 1- User verifies area is updated with newly added timezone summary
-2- User verifies Zeus DB whether the area is updated with newly added timezone summary
-Meta: @smoke
+2- User verifies Zeus DB whether the area is updated with timezone summary as 'NULL'
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1536,13 +1524,10 @@ When the user gets the document with get document id for area with the <area> fr
 Then the user enters the summary as <summary>
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info / Time Zones|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
-Then the user verifies  whether the Area is updated with the newly added summary
-Then the user verifies the zeus document whether the Area is updated with the newly added summary
+Then the user verifies the Area page is updated with the timezone summary
+Then user verifies newly added timezone summary is updated in zeus document
 Then the user reverts the changes to the document
 
 Examples:
@@ -1553,7 +1538,7 @@ Scenario: User is updating a Areas's Basic Info and has set values for
 each of 'Country', 'Area', user updates the existing timezone summary with new summary value
 1- User verifies area is updated with newly updated timezone 'summary1' value
 2- User verifies Zeus DB whether the area is updated with newly updated timezone 'summary1' value
-Meta: @smoke
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1573,12 +1558,9 @@ When the user clicks on the area update link
 Then the user enters the summary as <summary1>
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info / Time Zones|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
-Then the user verifies  whether the Area is updated with the newly updated summary
+Then the user verifies the Area page is updated with the new timezone summary
 Then the user verifies the zeus document whether the Area is updated with the newly updated summary
 Then the user reverts the changes to the document
 
@@ -1590,7 +1572,7 @@ Scenario: User is updating a Areas's Basic Info and has set values for
 each of 'Country', 'Area', enters the 'summary' value exceeding 100 unicode characters
 1- User verifies the timezone 'summary' field is having max lenght attribute as '100'
 2- User verifies the timezone 'summary' field is limited to '100' unicode characters
-Meta: @smoke
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1605,9 +1587,6 @@ Then the user enters the summary as <summary>
 Then the user verifies summary max length attribute is 100
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info / Time Zones|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user verifies the summary field is limited to 100 unicode characters
@@ -1617,6 +1596,4 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|summary|
 |USA|Alabama|Coordinated Universal Time is the primary time standard by which the world regulates clocks and time1|
-
-
 

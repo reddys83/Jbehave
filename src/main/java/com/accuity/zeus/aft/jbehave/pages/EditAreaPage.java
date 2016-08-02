@@ -1179,7 +1179,7 @@ public class EditAreaPage extends AbstractPage {
 		List<WebElement> timeZoneList = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_timezone_utc_dropDown_xpath"));
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get utc list");
-		attemptClick(AreaIdentifiers.getObjectIdentifier("timezone_utc_default_value_xpath"));
+		attemptClick(AreaIdentifiers.getObjectIdentifier("timezone_utc_dropdown_xpath"));
 		if (timeZoneList != null) {
 			assertTrue("time zone values are empty",document.getElementsByTagName("utcid").getLength() >= 1);
 			for (int i = 1; i < document.getElementsByTagName("utcid").getLength(); i++) {
@@ -1214,14 +1214,14 @@ public class EditAreaPage extends AbstractPage {
 
 	public void userVerifiesTimeZoneDefaultValueIsBlank() {
 		assertTrue((getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("timezone_utc_default_value_addrows_xpath")).getText())
+				.findElement(AreaIdentifiers.getObjectIdentifier("timezone_utc_dropdown_option")).getText())
 						.isEmpty());
 	}
 
 	public void verifyTimeZoneDropDownIsNotHavingSelectedTimeZone(String timeZone) {
 
 		List<WebElement> subAreaChoices = getDriver()
-				.findElements(AreaIdentifiers.getObjectIdentifier("area_timezone_utc_dropDown_new_xpath"));
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_timezone_utc_second_dropDown"));
 		List<String> selectedOptions = new ArrayList<String>();
 		for (int j = 0; j < subAreaChoices.size(); j++) {
 			selectedOptions.add((subAreaChoices.get(j)).getText());
@@ -1327,7 +1327,7 @@ public class EditAreaPage extends AbstractPage {
 	public void userSelectsTimeZoneDropDownValue(String timeZoneType, int rowNo) {
 		try {
 			List<WebElement> timeZoneDropDowns = getDriver()
-					.findElements(AreaIdentifiers.getObjectIdentifier("timezone_utc_default_value_xpath"));
+					.findElements(AreaIdentifiers.getObjectIdentifier("timezone_utc_dropdown_xpath"));
 			if (rowNo <= timeZoneDropDowns.size()) {
 				Select dropdown = new Select(timeZoneDropDowns.get(rowNo - 1));
 				if (timeZoneType.equals("")) {
