@@ -15,7 +15,6 @@ JIRA ID - ZEUS-1039 - User can edit Area's Names
 JIRA ID - ZEUS-1173 - Error handling when error is in section not currently displayed
 JIRA ID - ZEUS-1032 - User can edit Area's Use In Address Flag
 
-
 Scenario: User can edit area Began Date -
 a)Verify if user can see all the months in month dropdown (Began Date) are in MMM format
 b)Verify if user can see that all the months are sorted as per chronological order
@@ -1348,11 +1347,11 @@ And the user clicks on the area tab in the data area
 And the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
-And the user enters the <Area> in the type-ahead box
+And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 Then the user should see Use in address value is retrieved from trusted document
-When the user gets the document with get document id for area with the <Area> from the database
+When the user gets the document with get document id for area with the <area> from the database
 When the user clicks on True option for Area Use in Address
 When the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -1372,7 +1371,7 @@ Then the user should see updated Use in address value in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|country|Area|useInAddress|
+|country|area|useInAddress|
 |Angola|Cabinda|False|
 
 Scenario: User is updating  Area's Basic Info  page and  entered  value for 'Use in Address' that is no different from the current value
@@ -1386,10 +1385,10 @@ And the user clicks on the area tab in the data area
 And the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
-And the user enters the <Area> in the type-ahead box
+And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
-When the user gets the document with get document id for area with the <Area> from the database
+When the user gets the document with get document id for area with the <area> from the database
 When the user clicks on True option for Area Use in Address
 When the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -1405,5 +1404,5 @@ Then the user should see the updated <useInAddress> in area web page
 Then the user reverts the changes to the document
 
 Examples:
-|country|Area|useInAddress|ConfirmationSummary|
+|country|area|useInAddress|ConfirmationSummary|
 |Angola|Cabinda|True|Basic Info|
