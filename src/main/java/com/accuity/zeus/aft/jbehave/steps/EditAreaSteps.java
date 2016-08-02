@@ -648,7 +648,6 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyAreaTimeZoneRowNotPresentInZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
 		getEditAreaPage().verifyAreaTimeZoneRowValueNotPresentInZeusDB(country, area, "UTC", source);
-
 	}
 
 	@Then("the user verifies the $source document whether the Area is updated with the newly added summary")
@@ -746,5 +745,4 @@ public class EditAreaSteps extends AbstractSteps {
 	public void deleteAllAreaTimeZoneRows() {
 		getEditAreaPage().deleteAllAreaTimeZoneRows();
 	}
-
 }
