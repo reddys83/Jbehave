@@ -555,7 +555,7 @@ public class EditAreaSteps extends AbstractSteps {
 	public void selectFalseForUseInAddress() {
 		getEditAreaPage().selectFalseForUseInAddress();
 	}
-	
+
 	@When("the user clicks on True option for Area Use in Address")
 	public void selectTrueForUseInAddress() {
 		getEditAreaPage().selectTrueForUseInAddress();
@@ -565,24 +565,26 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyUseInAddressInAreaPage(@Named("useInAddress") String useInAddress) {
 		getEditAreaPage().verifyUseInAddressInAreaPage(useInAddress);
 	}
-	
+
 	@Then("the user should see updated Use in address value in $source document")
-	public void verifyUseInAddressAreaFromZeusDB(@Named("country") String country, @Named("Area") String area, @Named("source") String source) {
+	public void verifyUseInAddressAreaFromZeusDB(@Named("country") String country, @Named("Area") String area,
+			@Named("source") String source) {
 		getEditAreaPage().verifyUseInAddressAreaFromZeusDB(country, area, "areaUseInAddress", source);
 	}
-	
+
 	@When("the user enters the <Area> in the type-ahead box")
 	public void enterAreaInTypeAheadBox(@Named("Area") String area) {
 		getDataPage().enterAreaInTypeAhead(area);
 	}
-	
+
 	@When("the user gets the document with $xqueryName with the <Area> from the database")
 	public void getDocumentByFidArea(@Named("xqueryName") String xqueryName, @Named("Area") String param) {
 		getDataPage().getDocument(xqueryName, param);
 	}
 
 	@Then("the user should see Use in address value is retrieved from $source document")
-	public void verifyUseInAddressAreaFromTrustedDB(@Named("country") String country, @Named("Area") String area, @Named("source") String source) {
+	public void verifyUseInAddressAreaFromTrustedDB(@Named("country") String country, @Named("Area") String area,
+			@Named("source") String source) {
 		getEditAreaPage().verifyUseInAddressAreaFromTrustedDB(country, area, "areaUseInAddress", source);
 	}
 	
