@@ -56,6 +56,32 @@ public class OfficeIdentifiers {
         hmap.put("office_delete_identifiers_row_button_xpath", By.xpath(".//*[@data-row_id='identifiers']//button[@class='delete-row']"));
         hmap.put("office_delete_no_button_click_xpath", By.xpath("//*[@id='no-button']"));
 
+        hmap.put("office_name_type_first_row_existing_office_name_value",By.xpath("//*[@id='additionalNames']//input[@name='fixedName']"));
+        hmap.put("office_name_second_row_existing_office_type_dropdown",By.xpath(".//*[@id='additionalNames']//select[@name='nameType']"));
+        hmap.put("office_name_second_row_existing_office_value",By.xpath(".//*[@id='additionalNames']//input[@data-internal_id='nameValue']"));
+        hmap.put("office_name_second_row_type_view",By.xpath(".//*[@id='officeBasicInfo']/ul/li[1]/table[1]/tbody/tr[2]/td[1]"));
+        hmap.put("office_name_second_row_value_view",By.xpath(".//*[@id='officeBasicInfo']/ul/li[1]/table[1]/tbody/tr[2]/td[2]"));
+        hmap.put("office_basic_info_names_type_xpath",By.xpath("//*[@id='content']//li[1]/table[1]/tbody/tr/td[1]"));
+        hmap.put("office_basic_info_names_value_xpath",By.xpath("//*[@id='content']//li[1]/table[1]/tbody/tr/td[2]"));
+        hmap.put("office_name_addRow_id",By.id("add-names"));
+        hmap.put("office_Edit_officenames_Table",By.xpath(".//*[@data-edit_id='names']//tr"));
+        hmap.put("office_name_type_first_row_new_office_name_type_dropdown",By.xpath(".//*[@id='additionalNames']//tr[@class='new'][1]//select[@name='nameType']"));
+        hmap.put("office_name_first_row_new_office_value",By.xpath(".//*[@id='additionalNames']//tr[@class='new'][1]//input[@data-internal_id='nameValue']"));
+        hmap.put("office_name_value_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='nameValueError']"));
+        hmap.put("office_name_first_row_new_delete_button",By.xpath("//*[@id='additionalNames']//tr[@class='new'][1]//button"));
+        hmap.put("office_name_second_row_existing_delete_button",By.xpath("//*[@id='additionalNames']//tr[2]//button"));
+        hmap.put("office_name_delete_button_for_legalTitle_edit_xpath",By.xpath(".//*[@id='additionalNames']//tr[td='Legal Title']//button[@class='delete-row']"));
+        hmap.put("office_name_basicInfo_names_value_edit_xpath",By.xpath(".//*[@id='additionalNames']//tr[@class='new']//input"));
+        hmap.put("office_name_sort_name_xpath",By.xpath(".//*[@id='officeBasicInfo']//input[@name='officeSortName']"));
+        hmap.put("office_name_sort_name_view",By.xpath(".//*[@id='officeBasicInfo']/ul/li[1]/dl/dd"));
+        hmap.put("office_names_type_mode",By.xpath("//*[@id='officeBasicInfo']/ul/li[1]//table[1]//tbody/tr"));
+        hmap.put("legalEntity_statistics_label_xpath",By.xpath(".//*[@id='content']//h1/span[text()='Statistics']"));
+        hmap.put("office_basicInfo_edit_prefix_xpath", By.xpath("//*[@id='officeBasicInfo']//input[@name='officeTitlePrefix']"));
+        hmap.put("office_basicInfo_edit_suffix_xpath", By.xpath("//*[@id='officeBasicInfo']//input[@name='officeTitleSuffix']"));
+        hmap.put("office_basicInfo_edit_override_xpath", By.xpath("//*[@id='officeBasicInfo']//input[@name='officeTitleOverride']"));
+        hmap.put("office_basicInfo_view_prefix_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Prefix']/td"));
+        hmap.put("office_basicInfo_view_suffix_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Suffix']/td"));
+        hmap.put("office_basicInfo_view_override_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Override']/td"));
     }
 
     public static By getObjectIdentifier(String key) {

@@ -269,7 +269,6 @@ Examples:
 |3125|FID|3125|
 
 Scenario: Filter offices by status - User verifies whether All pages of 'Active' filter has 'Active' status for all fids
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area

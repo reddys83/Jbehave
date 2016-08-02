@@ -482,6 +482,10 @@ public class LegalEntityPage extends AbstractPage {
         assertFalse(getDriver().findElement(legalEntity_trustPowers_label_xpath).isDisplayed());
     }
 
+    public void verifyServicesSection() {
+        assertTrue(getDriver().findElement(legalEntity_services_link_id).getAttribute("class").equals("selected"));
+    }
+
 
 }
 
