@@ -5,6 +5,7 @@ import com.accuity.zeus.aft.io.Database;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,6 +46,40 @@ public class EditOfficeSteps extends AbstractSteps{
     public void selectOfficeLeadLocationFlag(@Named("leadLocationflag") String leadLocationflag){
         getEditOfficePage().selectOfficeLeadLocationFlag(leadLocationflag);
     }
+    @When("the user enters the office prefix value as <prefix>")
+    public void enterOfficePrefixValue(@Named("prefix") String prefix)
+    {
+        getEditOfficePage().enterValueinTextField("office_basicInfo_edit_prefix_xpath",prefix);
+    }
+    @When("the user enters the office suffix value as <suffix>")
+    public void enterOfficeSuffixValue(@Named("suffix") String suffix)
+    {
+        getEditOfficePage().enterValueinTextField("office_basicInfo_edit_suffix_xpath",suffix);
+    }
+    @When("the user enters the office override value as <override>")
+    public void enterOfficeOverrideValue(@Named("override") String override)
+    {
+        getEditOfficePage().enterValueinTextField("office_basicInfo_edit_override_xpath",override);
+    }
+    @Then("the user should verify the prefix,suffix and override values for fid <officeFid> as:$values")
+    public void verifyPrefixSuffixAndOverrideValuesFromZeus(@Named("officeFid") String officeFid, @Named("values")ExamplesTable values)
+    {
+        getEditOfficePage().verifyPrefixSuffixAndOverrideValuesFromZeus(officeFid,values);
+    }
+
+    @Then("the user should see the maxlength of prefix field set to $maxlength")
+    public void verifyPrefixMaxLength(String maxlength){
+        getEditOfficePage().verifyMaxLength("office_basicInfo_edit_prefix_xpath",maxlength);
+    }
+    @Then("the user should see the maxlength of suffix field set to $maxlength")
+    public void verifySuffixMaxLength(String maxlength){
+        getEditOfficePage().verifyMaxLength("office_basicInfo_edit_suffix_xpath",maxlength);
+    }
+    @Then("the user should see the maxlength of override field set to $maxlength")
+    public void verifyOverrideMaxLength(String maxlength){
+        getEditOfficePage().verifyMaxLength("office_basicInfo_edit_override_xpath",maxlength);
+    }
+
 
     @Then("the user should see leadLocation value as <leadLocationflag> for fid <officeFid> in $source document and in zeus UI")
     public void getDocumentLeadLocation(@Named("leadLocationflag") String leadLocationflag,@Named("officeFid") String officeFid,@Named("source") String source) {
@@ -199,7 +234,86 @@ public class EditOfficeSteps extends AbstractSteps{
 
 
 
+
+    @Then("the user should see the $office_rowIdentifier values in office's section from lookup $lookup")
+    public void verifyOfficesNameTypesFromLookup(@Named("offices_rowIdentifier") String offices_rowIdentifier,@Named("lookup") String lookup) {
+        getEditOfficePage().verifyOfficesNameTypesFromLookup(offices_rowIdentifier,lookup);
+    }
+
+    @When("the user clicks on add new office name button in the office name page")
+    public void clickOnAddButton(){
+        getEditOfficePage().clickAddRowButton();
+    }
+
+    @Then("the user should see the office name values as in $source document with fid <officeFid>")
+    public void verifyEditOfficeNameValuesFromTrusted(@Named("officeFid") String officeFid,@Named("source") String source){
+        getEditOfficePage().verifyEditOfficeNameValuesFromTrusted(officeFid,source);
+    }
+
+    @When("the user selects office name type $officeNameTypeRowIdentifier value as <type>")
+    public void selectOfficeNameType(@Named("officeNameTypeRowIdentifier") String officeNameTypeRowIdentifier,@Named("type") String type1)
+    {
+        getEditOfficePage().selectOfficeNameType(officeNameTypeRowIdentifier,type1);
+    }
+
+    @When("the user enters office name value $officeNameValueRowIdentifier as <value>")
+    public void enterOfficeNameValue(@Named("officeNameValueRowIdentifier") String officeNameValueRowIdentifier,@Named("value") String value1)
+    {
+        getEditOfficePage().enterOfficeNameValue(officeNameValueRowIdentifier,value1);
+    }
+
+    @Then("the user should see officename values as <type><value> for fid <officeFid> in $source document and in UI")
+    public void verifyEditOfficeNameValuesExistInZeusandinUI(@Named("type") String type,@Named("value") String value,@Named("officeFid") String officeFid,@Named("source") String source){
+
+        getEditOfficePage().verifyEditOfficeNameValuesExistInZeusandinUI(type,value,officeFid,source);
+    }
+
+
+    @When("the user clicks on delete office names row button for the row $deletebutton_Row")
+    public void clickonDeleteOfficeNamesRowButton(String deletebutton_Row)
+    {
+        getEditOfficePage().clickonDeleteOfficeNamesRowButton(deletebutton_Row);
+    }
+    @Then("the user should see the error message $errorMsg for the office name value field")
+    public void verifyOfficeNameValueErrorMessage(@Named("errorMsg") String errorMsg)
+    {
+        getEditOfficePage().verifyOfficeNameValueErrorMessage("office_name_value_error_msg_xpath",errorMsg);
+    }
+
+    @Then("the user should not see officename values for fid <officeFid> in $source document as: $names")
+    public void verifyEditOfficeNameValuesNotExistInZeus(@Named("officeFid") String officeFid,@Named("source") String source,@Named("names") ExamplesTable names)
+    {
+        getEditOfficePage().verifyEditOfficeNameValuesNotExistInZeus(officeFid,source,names);
+    }
+
+    @Then("the user should not see the new office name row with $dropdown")
+    public void verifyNoNewOfficeNameRow(String dropdown)
+    {
+        getEditOfficePage().verifyNoNewOfficeNameRow(dropdown);
+    }
+
+    @Then("the user should not see the delete button for legal title in names for office")
+    public void verifyDeleteButtonForOfficeLegalTitle() {
+        getEditOfficePage().verifyDeleteButtonForOfficeLegalTitle();
+    }
+
+
+    @Then("the user verifies the office name value maxlength is $maxSize for the $rowIdentifier")
+    public void verifyMaxlengthOfficeNameValueText(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeNameValueText(maxSize,rowIdentifier);}
+
+
+    @Then("the user verifies the office name sort name maxlength is $maxSize for the sortName")
+    public void verifyMaxlengthOfficeNameSortNameText(@Named("maxSize") String maxSize){getEditOfficePage().verifyMaxlengthOfficeNameSortNameText(maxSize);}
+
+    @When("the user enters sort name as $sortName in the office name")
+    public void entersSortNameInOfficeName(@Named("sortName") String sortName){
+        getEditOfficePage().entersSortNameInOfficeName(sortName);
+    }
+
+    @Then("the user should see the edits to office sort name as <sortName> for fid <officeFid> in zeus document and in UI")
+    public void verifyOfficeSortNameInZeusDocumentAndInUI(@Named("officeFid") String officeFid,@Named("sortName") String sortName) {
+        getEditOfficePage().verifyOfficeSortNameInZeusDocumentAndInUI(officeFid,sortName);
+    }
+
 }
-
-
 
