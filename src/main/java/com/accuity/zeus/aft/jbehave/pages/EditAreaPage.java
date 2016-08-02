@@ -1179,14 +1179,6 @@ public class EditAreaPage extends AbstractPage {
 	public void selectFalseForUseInAddress() {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_use_in_address_false"));
 	}
-
-	public void verifyAreaAddressFlagFromZeusDB(String country, String area, String city, String tagName,
-			String source) {
-		assertEquals(StringUtils.capitalize(getAreaInfoFromDB(country, area,  tagName, source)),
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_xpath")).getText());
-
-	}
-	
 	
 	public void verifyUseInAddressInAreaPage(String useInAddress) {
 		try {
@@ -1200,10 +1192,15 @@ public class EditAreaPage extends AbstractPage {
 	
 	
 	public void verifyUseInAddressAreaFromZeusDB(String country, String area, String tagName, String source) {
-		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source),
+		assertEquals(StringUtils.capitalize(getAreaBasicInfoFromDB(country, area, tagName, source)),
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_xpath")).getText());
+		
 	}
 	
+	public void verifyUseInAddressAreaFromTrustedDB(String country, String area, String tagName, String source) {
+		assertEquals((getAreaBasicInfoFromDB(country, area, tagName, source)),
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_xpath_edit")).getAttribute("value"));
+	}
 	
 	@Override
 	public String getPageUrl() {

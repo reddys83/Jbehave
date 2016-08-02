@@ -36,9 +36,6 @@ let $DateFields :=
     </areaDate>
   (: Taking Add Info :)
  let $areaadditionalinfo := ($areaDoc/summary/additionalInfos/additionalInfo/text())
- 
- (: Taking Area Interest Rate :)
-  let $areaInterestRate := ($areaDoc/summary/maxConsumerRate/text())
   
   (: Taking Area Use In Address :)
   let $areaUseInAddress := ($areaDoc/summary/useInAddress/text())
@@ -69,7 +66,6 @@ return
       <area>{$areavalue}</area>
       <subarea>{$subareavalue}</subarea>
       <identifiers> {$areaIdentifierList} </identifiers> 
-      <areaInterestRate>{$areaInterestRate}</areaInterestRate>
 	  <areaUseInAddress>{$areaUseInAddress}</areaUseInAddress>
   </Area>
  

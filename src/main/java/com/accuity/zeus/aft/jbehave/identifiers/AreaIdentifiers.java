@@ -63,7 +63,8 @@ public class AreaIdentifiers {
 		hmap.put("area_identifier_type_view_mode", By.xpath("//*[@id='areaBasicInfo']//table[2]//tbody/tr"));		
 		hmap.put("area_use_in_address_true", By.xpath("//*[@id='areaBasicInfo']//input[@value='true']"));
 		hmap.put("area_use_in_address_false", By.xpath("//*[@id='areaBasicInfo']//input[@value='false']"));
-		hmap.put("area_address_flag_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='Use In Address']/td"));
+		hmap.put("area_address_flag_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='Use in Address']/td"));
+		hmap.put("area_address_flag_xpath_edit", By.xpath("//input[@name='useInAddress']"));
 	}
 
 	public static By getObjectIdentifier(String key) {
