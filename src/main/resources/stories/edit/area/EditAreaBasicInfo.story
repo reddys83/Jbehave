@@ -1350,7 +1350,7 @@ And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
-Then the user should see the Interest Rate value in area page is same as in trusted document
+Then the user should see the Interest Rate value in area page is same as per trusted document
 When the user gets the document with get document id for area with the <area> from the database
 When the user enters <interestRateOld> value in area page
 When the user clicks on the save button

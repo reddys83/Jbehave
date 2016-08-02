@@ -592,7 +592,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyMaximumTextInInterestRate();
 	}
 
-	@Then("the user should see the Interest Rate value in area page is same as in $source document")
+	@Then("the user should see the Interest Rate value in area page is same as per $source document")
 	public void verifyAreaInterestRateFromTrustedDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
 		getEditAreaPage().verifyAreaInterestRateFromTrustedDB(country, area, "areaInterestRate", source);
