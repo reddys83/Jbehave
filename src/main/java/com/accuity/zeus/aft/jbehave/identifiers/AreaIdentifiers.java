@@ -63,19 +63,17 @@ public class AreaIdentifiers {
 		hmap.put("area_identifier_type_view_mode", By.xpath("//*[@id='areaBasicInfo']//table[2]//tbody/tr"));		
 		hmap.put("area_timezone_utc_dropDown_xpath", By.xpath("//*[@name='utc3']/option"));
 		hmap.put("area_timezone_utc_second_dropDown", By.xpath("(//*[@name='utc3'])[2]//option"));	
-		hmap.put("timezone_utc_add_timezone_xpath", By.xpath("//*[@id='add-timeZones']"));		
-		hmap.put("timezone_utc_dropdown_xpath", By.xpath("//*[@id='areaBasicInfo']//table[2]//tbody/tr"));		
+		hmap.put("timezone_utc_add_timezone_xpath", By.xpath("//*[@id='add-timeZones']"));	
 		hmap.put("timezone_utc_dropdown_xpath", By.xpath("//*[@name='utc3']"));
 		hmap.put("timezone_utc_dropdown_option", By.xpath("//*[@name='utc3']/option"));		
 		hmap.put("area_summary_timezone_xpath", By.xpath("//*[@name='timeZonesSummary']"));
 		hmap.put("area_delete_timezone_row_button_xpath", By.xpath("//*[@id='additionalTimeZones']//*[@class='delete-row']"));
 		hmap.put("area_timezone_input_xpath", By.xpath("//*[@id='additionalTimeZones']/tr"));
 		hmap.put("area_timezone_type_view_mode", By.xpath("//*[@id='areaBasicInfo']//*[@class='vertical2']"));
-		hmap.put("summary_current_value_xpath", By.xpath("//*[@name='timeZonesSummary']"));		
-		hmap.put("utc_current_value_xpath", By.xpath("//*[@class='vertical2']//td"));
+		hmap.put("utc_current_value_xpath", By.xpath("//*[@class='vertical2']//tr[th='UTC']/td"));
 		hmap.put("timezone_utc_current_value_xpath", By.xpath("//*[@name='utc3']//option[@selected='selected']"));
 		hmap.put("delete_area_timezone_row_confirmation_modal_xpath", By.xpath("//*[@id='additionalTimeZones']/tr[2]"));
-		hmap.put("summary_current_value_viewmode_xpath", By.xpath("//*[@id='areaBasicInfo']//dd"));
+		hmap.put("summary_current_value_viewmode_xpath", By.xpath("//*[@id='areaBasicInfo']//dl[dt='Summary']/dd"));
 		hmap.put("timezone_row_value_viewmode_xpath", By.xpath("//*[@class='vertical2']"));
 		hmap.put("area_timezone_add_names_button_xpath", By.xpath("//*[@id='areaBasicInfo']//*[@id='add-timeZones']"));			
 	}

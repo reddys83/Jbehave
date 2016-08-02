@@ -650,7 +650,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaTimeZoneRowValueNotPresentInZeusDB(country, area, "UTC", source);
 	}
 
-	@Then("user verifies newly added timezone summary is updated in zeus document")
+	@Then("user verifies newly added timezone summary is updated in $source document")
 	public void verifyAreaSummaryValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source, @Named("summary") String summary) {
 		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary);
@@ -714,11 +714,6 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user verifies the summary field is limited to $maxLength unicode characters")
 	public void verifySummaryFieldLimit(@Named("maxLength") int maxLength) throws InterruptedException {
 		getEditAreaPage().verifySummaryFieldLimit(maxLength);
-	}
-
-	@When("the user clicks on the timezone option")
-	public void clickOnTimeZoneDropDown() {
-		getEditAreaPage().clickOnTimeZoneDropDown();
 	}
 
 	@Then("the user verifies that the area timezone values are updated in the basic info area page")

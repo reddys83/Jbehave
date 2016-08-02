@@ -1304,7 +1304,7 @@ public class EditAreaPage extends AbstractPage {
 	}
 
 	public void verifyAreasTimeZoneSummaryMaxLenghtAttribute(String maxLength) {
-		assertEquals((getDriver().findElement(AreaIdentifiers.getObjectIdentifier("summary_current_value_xpath"))
+		assertEquals((getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_summary_timezone_xpath"))
 				.getAttribute("maxlength")), maxLength);
 	}
 
@@ -1313,10 +1313,6 @@ public class EditAreaPage extends AbstractPage {
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("summary_current_value_viewmode_xpath"))
 						.getText().length(),
 				maxLength);
-	}
-
-	public void clickOnTimeZoneDropDown() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("utc_current_value_xpath"));
 	}
 
 	public void verifyAreaTimeZoneRowValueNotPresentInZeusDB(String country, String area, String tagName,
