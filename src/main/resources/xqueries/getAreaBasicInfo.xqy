@@ -16,16 +16,12 @@ declare function local:getDateAsPerAccuracy( $date as node() ) {
         default return "date not valid"
 };
 
-
 let $country := xs:string(xdmp:get-request-field("country"))
 let $area := xs:string(xdmp:get-request-field("area"))
-let $subarea := xs:string(xdmp:get-request-field("subarea"))
 let $source := xs:string(xdmp:get-request-field("source"))
 
-
-let $countryDoc := /country[@source = 'trusted'][summary/names/name[type = "Country Name"]/value = $country]
-let $areaDoc := /area[@source = 'trusted'][summary/names/name[type = "Full Name"]/value = $area][within/place/link/@href=$countryDoc/@resource]
-let $subareaDoc := /area[@source = $source][summary/names/name[type = "Full Name"]/value = $subarea][within/place/link/@href=$areaDoc/@resource]
+let $countryDoc := /country[@source = $source][summary/names/name[type = "Country Name"]/value = $country]
+let $areaDoc := /area[@source = $source][summary/names/name[type = "Full Name"]/value = $area][within/place/link/@href=$countryDoc/@resource]
 
 (: Taking End Date :)        
 (: Taking Begin Date :)
@@ -37,15 +33,10 @@ let $DateFields :=
   (: Taking Add Info :)
  let $areaadditionalinfo := ($areaDoc/summary/additionalInfos/additionalInfo/text())
  
- (: Taking Area Interest Rate :)
+  (: Taking Area Interest Rate :)
   let $areaInterestRate := ($areaDoc/summary/maxConsumerRate/text())
- 
- (: Get area and Subarea value :) 
-let $areavalue := ($areaDoc/summary/names/name[1]/value/text()) 
-
-let $subareavalue := ($subareaDoc/summary/names/name[1]/value/text()) 
-
-(: Taking identifier List :)
+  
+ (: Taking identifier List :)
 let $areaIdentifierList := for $x in ($areaDoc/summary/identifiers/identifier)
   let $areaIdentifierType := $x/type/text()
   let $areaIdentifierValue := ($x/value/text())
@@ -56,16 +47,12 @@ return
   <identifierValue>{$areaIdentifierValue} </identifierValue>
   <identifierStatus>{$areaIdentifierStatus} </identifierStatus>
   </identifier>
-
-
+ 
 return
-  <Area>
+  <area>
       { $areaDoc/summary/names }
       <dateFields>{$DateFields}</dateFields>
       <AdditionalInfo>{$areaadditionalinfo}</AdditionalInfo>
-      <area>{$areavalue}</area>
-      <subarea>{$subareavalue}</subarea>
-      <identifiers> {$areaIdentifierList} </identifiers> 
-      <areaInterestRate>{$areaInterestRate}</areaInterestRate>
-  </Area>
- 
+      <identifiers>{$areaIdentifierList}</identifiers> 
+	  <areaInterestRate>{$areaInterestRate}</areaInterestRate>
+  </area>

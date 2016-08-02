@@ -205,6 +205,135 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().selectAreaStatusValue(status);
 	}
 	
+	@Then("the user should see the $nameType type is from PLACE_NAME_TYPE lookup")
+	public void verifyAreaNameTypeFromLookup(@Named("nameType") String nameType) {
+		getEditAreaPage().verifyAreaNameTypeFromLookup(nameType);
+	}
+	
+	@Then("the user should see the $nameType value in area page is same as in $source document")
+	public void verifyAreaNameValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("nameType") String nameType) {
+		getEditAreaPage().verifyAreaNameFromTrustedDB(country, area, nameType, source);
+	}
+	
+	@Then("the user should see the $nameType is not editable")
+	public void verifyFixedNameNotEditable(@Named("nameType") String nameType) {
+		getEditAreaPage().verifyFixedNameTypeNotEditable(nameType);
+	}
+	
+	@Then("the user enters the name <value> in the $nameType field")
+	public void enterValueInNameField(@Named("value") String nameValue, @Named("nameType") String nameType) {
+		getEditAreaPage().enterValueInNameField(nameType, nameValue);
+	}
+	
+	@Then("the user should see the $nameType <value> in $source document")
+	public void verifyUpdatedAreaNameValueInDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("nameType") String nameType, @Named("value") String nameValue) {
+		getEditAreaPage().verifyUpdatedAreaNameInDB(country, area, nameType, source, nameValue);
+	}
+	
+	@Then("the user should be able see the <value> is updated in $nameType value field")
+	public void verifyTextInNameValue(@Named("value") String nameValue, @Named("nameType") String nameType) {
+		getEditAreaPage().verifyTextInNameValue(nameValue, nameType);
+	}
+	
+	@When("the user clicks on the add names button in the area basic info page")
+	public void clickOnAddNewNameButton() {
+		getEditAreaPage().clickOnAddNewNameButton();
+	}
+	
+	@Then("the user should see the area name types from lookup PLACE_NAME_TYPE")
+	public void verifyNewRowAreaNameTypesList() {
+		getEditAreaPage().verifyNewRowAreaNameTypesList();
+	}
+	
+	@When("the user enters name type as <type> in the area basic info page")
+	public void enterNameType(@Named("type") String newNameType) {
+		getEditAreaPage().enterNameType(newNameType, 0);
+	}
+	
+	@When("the user enters name value as <value> in the area basic info page")
+	public void enterNameValue(@Named("value") String newNameValue) {
+		getEditAreaPage().enterNameValue(newNameValue);
+	}
+	
+	@Then("the user should see the area name type and value updated in the area basic info page")
+	public void verityAreaNameTypeAndValue(@Named("type") String newNameType, 
+										   @Named("value") String newNameValue) {
+		getEditAreaPage().verifyNameTypeAndValueInViewMode(newNameType, newNameValue);
+	}
+	
+	@Then("the user should see the area name type and value in the edit area basic info page")
+	public void verityAreaNameTypeAndValueInEditMode(@Named("type") String newNameType, 
+										   @Named("value") String newNameValue) {		
+		getEditAreaPage().verifyNameValueInEditMode(newNameType, newNameValue);
+	}
+	
+	@Then("the user should not see the <type> <value> in $source document")
+	public void verifyAreaNameValueNotUpdatedInDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("type") String nameType, @Named("value") String nameValue) {
+		getEditAreaPage().verifyAreaNameValueNotUpdatedInDB(country, area, nameType, source, nameValue);
+	}
+	
+	@Then("the user should not see the area name type and value updated in the area basic info page")
+	public void verityAreaNameTypeAndValueNotPresent(@Named("type") String newNameType, 
+										   @Named("value") String newNameValue) {
+		getEditAreaPage().verifyNameTypeNotPresent(newNameType, newNameValue);
+	}
+	
+	@When("the user deletes the existing area names rows")
+	public void deleteAllAreaNameRows() {
+		getEditAreaPage().deleteAllAreaNameRows();
+	}
+	
+	@Then("the user should see the error message $errorMessage for the required name type field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaNameType(@Named("errorMessage") String errorMessage) {
+		getEditAreaPage().verifyErrorMessageRequiredForAreaNameType(errorMessage);
+	}
+	
+	@Then("the user should see the error message $errorMessage for the required name value field in the area basic info page")
+	public void verifyErrorMessageForRequiredAreaNameValue(@Named("errorMessage") String errorMessage) {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaNameValue(errorMessage);
+	}
+	
+	@When("the user clicks on the delete name row button in the area basic info page")
+	public void clickOnDeleteNameRowButton() {
+		getEditAreaPage().clickOnDeleteNameRowButton();
+	}
+	
+	@Then("the user should not see delete row button against <type>")
+	public void checkDeleteRowButtonNotExist(@Named("type") String nameType) {
+		getEditAreaPage().checkDeleteRowButtonNotExist(nameType);
+	}
+	
+	@When("the user enters second name type as <type> in the area basic info page")
+	public void enterSecondNameType(@Named("type") String newNameType) {
+		getEditAreaPage().enterNameType(newNameType, 1);
+	}
+	
+	@When("the user enters second name value as <value2> in the area basic info page")
+	public void enterSecondNameValue(@Named("value2") String newNameValue) {
+		getEditAreaPage().enterSecondNameValue(newNameValue);
+	}
+	
+	@Then("the user should see the $nameType <value> and <value2> in $source document")
+	public void verifyUpdatedMultipleAreaNameValuesInDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("nameType") String nameType, @Named("value") String nameValue, @Named("value2") String nameValue2) {
+		getEditAreaPage().verifyUpdatedMultipleAreaNamesInDB(country, area, nameType, source, nameValue, nameValue2);
+	}
+	
+	@Then("the user should see the second area name type and value updated in the area basic info page")
+	public void veritySecondAreaNameTypeAndValue(@Named("type") String newNameType, 
+			@Named("value2") String newNameValue) {
+		getEditAreaPage().verifyNameTypeAndValueInViewMode(newNameType, newNameValue);
+	}
+	
+	@Then("the user should not see the second area name type and value updated in the area basic info page")
+	public void veritySecondAreaNameTypeAndValueNotPresent(@Named("type") String newNameType, 
+			@Named("value2") String newNameValue) {
+		getEditAreaPage().verifyDuplicateNameTypeNotPresent(newNameType, newNameValue);
+	}
+
 	@When("the user enters the <addInfoText> in the area add info text area")
 	public void enterTextAreaAddInfo(@Named("addInfoText") String addInfoText) {
 		getEditAreaPage().enterTextAreaAddInfo(addInfoText);
@@ -421,7 +550,7 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyNewlyAddedAreaIdentifierRowExists() {
 		getEditAreaPage().verifyNewlyAddedAreaIdentifierRowExists();
 	}
-
+	
 	@When("the user enters <interestRate> value in area page")
 	public void enterAreaInterestRate(@Named("interestRate") String interestRate) {
 		getEditAreaPage().enterAreaInterestRate(interestRate);

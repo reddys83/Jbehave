@@ -25,14 +25,27 @@ let $fid := xs:string(xdmp:get-request-field("fid"))
 let $source := xs:string(xdmp:get-request-field("source"))
 let $office := (/office[@fid=$fid][@source=$source])
 
-
+let $officeSortName := ($office/summary/names/officeSortKey)
 let $officeOpenedDate := local:getDateAsPerAccuracy($office/summary/dates/opened)
 let $officeClosedDate := local:getDateAsPerAccuracy($office/summary/dates/closed)
 let $LeadLocation := ($office/summary/leadLocation)
 let $foreignOffice := ($office/summary/foreignOffice)
 let $additionalInfo := ($office/summary/additionalInfos/additionalInfo)
 
+let $officeOfficeTypes := ($office/summary/types/type)
+let $officeTypes := for $x in ($office/summary/names/name/type)
+return <officeType>{$x/text()}</officeType>
+let $officeValues := for $x in ($office/summary/names/name/value)
+return <officeValue>{$x/text()}</officeValue>
 
+
+let $officePrefixValue := $office/summary/names/officeTitlePrefix/text()
+let $officeSuffixValue := if (fn:exists($office/summary/names/officeTitleSuffix))
+then $office/summary/names/officeTitleSuffix/text()
+else ""
+let $officeOverrideValue := if(fn:exists($office/summary/names/officeTitleOverride))
+then $office/summary/names/officeTitleOverride/text()
+else ""
 
 return <office>
     <officeOpenedDate>{$officeOpenedDate}</officeOpenedDate>
@@ -40,7 +53,15 @@ return <office>
    <LeadLocation>{$LeadLocation}</LeadLocation>
     <foreignOffice>{$foreignOffice}</foreignOffice>
     <additionalInfos>{$additionalInfo}</additionalInfos>
+    <officeOfficeTypes>{$officeOfficeTypes}</officeOfficeTypes>
+    <officeTypes>{$officeTypes}</officeTypes>
+    <officeValues>{$officeValues}</officeValues>
+    <officeSortName>{$officeSortName}</officeSortName>
+    <officePrefixValue>{$officePrefixValue}</officePrefixValue>
+    <officeSuffixValue>{$officeSuffixValue}</officeSuffixValue>
+    <officeOverrideValue>{$officeOverrideValue}</officeOverrideValue>
     </office>
 
-    (:return $office:)
+
+
 
