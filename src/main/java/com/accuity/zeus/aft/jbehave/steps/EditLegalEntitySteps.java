@@ -897,6 +897,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
     public void verifyMaxLengthForOverrideTextField(@Named("maxlength") String maxlength,@Named("rowIdentifier") String rowIdentifier)
     {getEditLegalEntityPage().verifyMaxLengthForOverrideTextField(maxlength,rowIdentifier);}
 
+    @When("the user selects agency type $agencyTypeRowIdentifier value as <type>")
     public void selectCreditRatingsAgencyType(@Named("agencyTypeRowIdentifier") String agencyTypeRowIdentifier,@Named("type") String type)
     {getEditLegalEntityPage().selectCreditRatingsAgencyType(agencyTypeRowIdentifier,type);
     }
@@ -977,6 +978,104 @@ public class EditLegalEntitySteps extends AbstractSteps{
     {
         getEditLegalEntityPage().clickonDeleteBoardMeetingsRowButton(deletebutton_Row);
     }
+    @Then("the user should see the trust power values as in $source document with fid <fid> in edit mode")
+    public void verifyTrustPowersInEditModeFromTrusted(@Named("source") String source,@Named("fid") String fid){
+        getEditLegalEntityPage().verifyTrustPowersInEditModeFromTrusted(source, fid);
+    }
+
+    @When("the user selects the trust powers granted value as <grantedValue>")
+    public void selectTrustPowersGrantedValue(@Named("grantedValue") String grantedValue)
+    {
+        getEditLegalEntityPage().selectTrustPowersGrantedValue(grantedValue);
+    }
+    @When("the user selects the trust powers granted value as <grantedValue1>")
+    public void selectTrustPowersGrantedValue1(@Named("grantedValue1") String grantedValue1)
+    {
+        getEditLegalEntityPage().selectTrustPowersGrantedValue(grantedValue1);
+    }
+    @When("the user selects the trust powers full value as <fullValue>")
+    public void selectTrustPowersFullValue(@Named("fullValue") String fullValue)
+    {
+        getEditLegalEntityPage().selectTrustPowersFullValue(fullValue);
+    }
+    @When("the user selects the trust powers used value as <usedValue>")
+    public void selectTrustPowersUsedValue(@Named("usedValue") String usedValue)
+    {
+        getEditLegalEntityPage().selectTrustPowersUsedValue(usedValue);
+    }
+    @When("the user enters the trust powers professional employees value as <profEmployees>")
+    public void enterTrustPowersProfessionalValue(@Named("profEmployees") String profEmployees)
+    {
+        getEditLegalEntityPage().enterTrustPowersProfessionalValue(profEmployees);
+    }
+    @When("the user enters the trust powers admin employees value as <adminEmployees>")
+    public void enterTrustPowersAdminEmployeesValue(@Named("adminEmployees") String adminEmployees)
+    {
+        getEditLegalEntityPage().enterTrustPowersAdminEmployeesValue(adminEmployees);
+    }
+    @When("the user enters the trust powers min account size value as <minacctSize>")
+    public void enterTrustPowersMinAccountSize(@Named("minacctSize") String minacctSize)
+    {
+        getEditLegalEntityPage().enterTrustPowersMinAccountSize(minacctSize);
+    }
+
+    @Then("the user should see trust power values as <grantedValue><fullValue><usedValue><profEmployees><adminEmployees><minacctSize> for fid <fid> in $source document")
+    public void verifyEditTrustPowerValuesInZeusDocument(@Named("grantedValue") String grantedValue,@Named("fullValue") String fullValue,
+                                                         @Named("usedValue") String usedValue,@Named("profEmployees") String profEmployees,
+                                                         @Named("adminEmployees") String adminEmployees,
+                                                         @Named("minacctSize") String minacctSize,@Named("fid") String fid,
+                                                         @Named("source") String source
+                                                         ){
+        getEditLegalEntityPage().verifyEditTrustPowerValuesInZeusDocument(grantedValue,fullValue,usedValue,profEmployees,adminEmployees,minacctSize,fid,source);
+    }
+
+    @Then("the user should see the other trust power fields in disabled state")
+    public void verifyTrustPowerFieldsStatus(){
+        getEditLegalEntityPage().verifyTrustPowerFieldsStatus();
+    }
+    @Then("the user should see the other trust power fields in enabled state")
+    public void verifyTrustPowerFieldsEnabledStatus(){
+        getEditLegalEntityPage().verifyTrustPowerFieldsEnabledStatus();
+    }
+
+    @Then("the user should see the $status trust power values same as in $source document with fid <fid> in edit mode")
+    public void verifyDisabledTrustPowersFromTrusted(@Named("source") String source,@Named("fid") String fid){
+        getEditLegalEntityPage().verifyDisabledTrustPowersFromTrusted(source, fid);
+    }
+
+    @Then("the user verifies the trust powers professional employees value maxlength is $maxSize")
+    public void verifyMaxLengthForTrustedPowersProfessionalEmployees(String maxSize)
+    {getEditLegalEntityPage().verifyMaxLengthForTrustedPowers("legalEntity_edit_trustpowers_professional_textbox",maxSize);
+
+    }
+
+    @Then("the user verifies the trust powers admin employees value maxlength is $maxSize")
+    public void verifyMaxLengthForTrustedPowersAdminEmployees(String maxSize)
+    {getEditLegalEntityPage().verifyMaxLengthForTrustedPowers("legalEntity_edit_trustpowers_admin_textbox",maxSize);
+
+    }
+    @Then("the user verifies the trust powers min account size value maxlength is $maxSize")
+    public void verifyMaxLengthForTrustedPowersMinAcctSize(String maxSize)
+    {
+        getEditLegalEntityPage().verifyMaxLengthForTrustedPowers("legalEntity_edit_trustpowers_minAccountSize_textbox",maxSize);
+    }
+
+    @Then("the user should see the error message $errMsg for prof Employees field")
+    public void verifyErrorMsgForprofEmployee(@Named("errMsg") String errMsg)
+    {
+        getEditLegalEntityPage().verifyErrorMsgForTrustPowers("legalEntity_trustPower_Professional_error_message_xpath",errMsg);
+    }
+    @Then("the user should see the error message $errMsg for prof Admin field")
+    public void verifyErrorMsgForprofAdmin(@Named("errMsg") String errMsg)
+    {
+        getEditLegalEntityPage().verifyErrorMsgForTrustPowers("legalEntity_trustPower_admin_error_message_xpath",errMsg);
+    }
+    @Then("the user should see the error message $errMsg for min account size field")
+    public void verifyErrorMsgForminAccountSize(@Named("errMsg") String errMsg)
+    {
+        getEditLegalEntityPage().verifyErrorMsgForTrustPowers("legalEntity_trustPower_MinAccountSize_error_message_xpath",errMsg);
+    }
+
 
     @Then("the user should not see boardmeetings values for fid <fid> in $source document as: $boardMeetings")
     public void verifyEditLegalEntityBoardMeetingsValuesNotExistInZeus(@Named("boardMeetings") ExamplesTable boardMeetings,@Named("fid") String fid,@Named("source") String source)

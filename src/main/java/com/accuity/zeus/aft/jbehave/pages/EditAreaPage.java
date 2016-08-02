@@ -187,8 +187,7 @@ public class EditAreaPage extends AbstractPage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		assertEquals(endDateErrorMsg, getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_enddate_errorMessage_xpath")).getText());
+		assertEquals(endDateErrorMsg, getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_enddate_errorMessage_xpath")).getText());
 	}
 
 	public void verifyEndDateInAreaPage(String day, String month, String year) {
@@ -244,22 +243,23 @@ public class EditAreaPage extends AbstractPage {
 
 
 	public void verifyAreaBeganDateFromTrustedDB(String country, String area, String tagName,
-			String source) {
+			String source)
+	{
 
 		List<WebElement> appliedMonthList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_month_began_date_xpath"));
 		String day = getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_day_began_date_xpath")).getAttribute("value");
 
-		if(StringUtils.isNotBlank(day) && StringUtils.length(day) < 2) {
+		if(StringUtils.isNotBlank(day) && StringUtils.length(day) < 2)
+		{
 			day = "0" + day;
 		}
 
 		String month =  new Select(appliedMonthList.get(0)).getFirstSelectedOption().getText();
-		String year = getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_year_began_date_xpath")).getAttribute("value");
-		String beganDate = day + " " + month + " " + year;
+		String year = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_year_began_date_xpath")).getAttribute("value");
+		String beganDate = (day+month+year).replace(" ","");
 
-		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source), beganDate);
+		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source).replace(" ",""), beganDate);
 
 	}
 	public void verifyErrorMessageBeganDate(String beganDateErrorMsg) {
