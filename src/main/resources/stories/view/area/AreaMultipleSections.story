@@ -10,7 +10,6 @@ JIRA ID - ZEUS-605 - make grey headers consistent on view screens
 JIRA ID - ZEUS-336 - User can select multiple sections of area to view
 
 Scenario: Verify area and sub-area's default section.
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area

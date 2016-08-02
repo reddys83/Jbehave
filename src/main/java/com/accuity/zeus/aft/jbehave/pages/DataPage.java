@@ -34,6 +34,7 @@ public class DataPage extends AbstractPage {
     public static String clickedCurrencyIso = "";
     private By legalEntity_tab_id = By.id("legalEntity-nav");
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
+    private By country_listBox_Choose_A_Country_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span[text()='Choose a Country']");
     private By area_listBox_xpath = By.xpath("//*[@id='selection1'] //*[@id='entitySelect_chosen']//span");
     private By subarea_listBox_xpath = By.xpath("//*[@id='selection2'] //*[@id='entitySelect_chosen']//span");
     private By regions_label_xpath = By.xpath("//li[contains(h1,'Regions for')] //span");
@@ -783,6 +784,11 @@ public class DataPage extends AbstractPage {
         selectedEntity = subArea;
         getDriver().findElement(area_subarea_dropdown_typeAhead_xpath).sendKeys(subArea);
         getDriver().findElement(area_subarea_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void clickOnAreasAlternativeRegions() {
@@ -974,9 +980,8 @@ public class DataPage extends AbstractPage {
 
     public void clickOnCityRelatedPlace(String relatedPlace) {
         attemptClick(By.xpath(city_related_places_place_link_xpath + relatedPlace + "']/td/a"));
-        waitForElementToAppear(area_listBox_xpath);
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -992,11 +997,13 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyClickedCountryPage(String countryDropDown) {
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(3000L);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        waitForElementToAppear(country_listBox_xpath);
+        waitForElementToDisappear(country_listBox_Choose_A_Country_xpath);
         assertEquals(countryDropDown, getDriver().findElement(country_listBox_xpath).getText());
     }
 
@@ -1251,7 +1258,6 @@ public class DataPage extends AbstractPage {
                 assertFalse(Summary.getRow(i).get(Summary.getHeaders().get(0)).equals(confirmChanges.get(i).getText()));
             }
         } catch (Exception e) {
-            e.printStackTrace();
             assertTrue(true);
         }
     }
