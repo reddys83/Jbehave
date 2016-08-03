@@ -640,7 +640,7 @@ public class EditOfficePage extends AbstractPage {
     public void verifyOfficeIdentifierTypesList() {
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get office identifiers type list");
 		List<WebElement> officeIdentifierTypesList = getDriver()
-				.findElements(OfficeIdentifiers.getObjectIdentifier("officeIdentifier_type_id"));
+				.findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_id"));
 
 		List<WebElement> options = officeIdentifierTypesList.get(0).findElements(By.cssSelector("option"));
 		for (int indexOfOption = 1; indexOfOption < options.size(); indexOfOption++) {
@@ -671,11 +671,11 @@ public class EditOfficePage extends AbstractPage {
 				.findElements(OfficeIdentifiers.getObjectIdentifier("office_delete_identifiers_row_button_xpath"));
 
 		for (int index = 0; index < deleteRows.size(); index++) {
-			WebElement currentInstance = getDriver()
+			WebElement currentIdentifierRow = getDriver()
 					.findElements(OfficeIdentifiers.getObjectIdentifier("office_delete_identifiers_row_button_xpath"))
 					.get(0);
-			if (currentInstance != null) {
-				currentInstance.click();
+			if (currentIdentifierRow != null) {
+				currentIdentifierRow.click();
 				verifyOfficeIdentifierRowDeleteConfirmationModal();
 				pressEnterButtonInDeleteConfirmationModalForOfficeIdentifiers();
 			}
@@ -685,7 +685,7 @@ public class EditOfficePage extends AbstractPage {
     public void verifyOfficeIdentifierRowDeleteConfirmationModal() {
 		assertEquals("Please confirm - would you like to delete this row? NO YES",
 				getDriver().findElement(
-						OfficeIdentifiers.getObjectIdentifier("delete_office_identifier_row_confirmation_modal_xpath"))
+						OfficeIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_xpath"))
 						.getText());
 	}
     
@@ -693,12 +693,12 @@ public class EditOfficePage extends AbstractPage {
 		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("delete_confirmation_yes_button_id")).sendKeys(Keys.ENTER);
 	} 
     
-    public void enterOfficeIdentifierType(String identifierType, int rowNo) {
+    public void enterOfficeIdentifierType(String identifierType, int rowNumber) {
 		try {
 			List<WebElement> identifierDropDowns = getDriver()
 					.findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_input_xpath"));
-			if (rowNo <= identifierDropDowns.size()) {
-				Select dropdown = new Select(identifierDropDowns.get(rowNo - 1));
+			if (rowNumber <= identifierDropDowns.size()) {
+				Select dropdown = new Select(identifierDropDowns.get(rowNumber - 1));
 				if (identifierType.equals("")) {
 					dropdown.selectByValue(identifierType);
 				} else {
@@ -710,25 +710,25 @@ public class EditOfficePage extends AbstractPage {
 		}
 	}
     
-    public void enterOfficeIdentifierValue(String identifierValue, int rowNo) {
+    public void enterOfficeIdentifierValue(String identifierValue, int rowNumber) {
 		try {
 			List<WebElement> identifierValues = getDriver()
 					.findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_value_input_xpath"));
-			if (rowNo <= identifierValues.size()) {
-				identifierValues.get(rowNo - 1).clear();
-				identifierValues.get(rowNo - 1).sendKeys(identifierValue);
+			if (rowNumber <= identifierValues.size()) {
+				identifierValues.get(rowNumber - 1).clear();
+				identifierValues.get(rowNumber - 1).sendKeys(identifierValue);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
     
-    public void enterOfficeIdentifierStatus(String identifierStatus, int rowNo) {
+    public void enterOfficeIdentifierStatus(String identifierStatus, int rowNumber) {
 		try {
 			List<WebElement> identifierDropDowns = getDriver()
 					.findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_status_input_xpath"));
-			if (rowNo <= identifierDropDowns.size()) {
-				Select dropdown = new Select(identifierDropDowns.get(rowNo - 1));
+			if (rowNumber <= identifierDropDowns.size()) {
+				Select dropdown = new Select(identifierDropDowns.get(rowNumber - 1));
 				if (identifierStatus.equals("")) {
 					dropdown.selectByValue(identifierStatus);
 				} else {
@@ -740,11 +740,11 @@ public class EditOfficePage extends AbstractPage {
 		}
 	}
     
-    public void verifySelectedOfficeIdentifierTypeNotInNewRow(String identifierType, int rowNo) {
+    public void verifySelectedOfficeIdentifierTypeNotInNewRow(String identifierType, int rowNumber) {
 		try {
 			List<WebElement> identifierDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_input_xpath"));
-			if (rowNo <= identifierDropDowns.size()) {
-				Select dropdown = new Select(identifierDropDowns.get(rowNo - 1));
+			if (rowNumber <= identifierDropDowns.size()) {
+				Select dropdown = new Select(identifierDropDowns.get(rowNumber - 1));
 				for (int index = 0; index < dropdown.getOptions().size(); index++) {
 					assertTrue(!dropdown.getOptions().get(index).getText().contains(identifierType));
 				}
@@ -759,7 +759,7 @@ public class EditOfficePage extends AbstractPage {
 			assertTrue(
 					getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_save_confirmation_message_xpath"))
 							.isDisplayed());
-			Thread.sleep(5000); // to wait for page get refresh
+			Thread.sleep(2000); // to wait for page get refresh with saved data
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -803,18 +803,18 @@ public class EditOfficePage extends AbstractPage {
 				.getAttribute("maxlength"), maxLength);
 	}
     
-    public void verifyErrorMessageForRequiredOfficeIdentifierType(String errMsg) {
-		assertEquals(errMsg, getDriver()
+    public void verifyErrorMessageForRequiredOfficeIdentifierType(String errorMessage) {
+		assertEquals(errorMessage, getDriver()
 				.findElement(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_req_err_msg_xpath")).getText());
 	}
     
-    public void verifyErrorMessageForRequiredOfficeIdentifierValue(String errMsg) {
-		assertEquals(errMsg, getDriver()
+    public void verifyErrorMessageForRequiredOfficeIdentifierValue(String errorMessage) {
+		assertEquals(errorMessage, getDriver()
 				.findElement(OfficeIdentifiers.getObjectIdentifier("office_identifier_value_req_err_msg_xpath")).getText());
 	}
     
-    public void verifyErrorMessageForRequiredOfficeIdentifierStatus(String errMsg) {
-		assertEquals(errMsg,
+    public void verifyErrorMessageForRequiredOfficeIdentifierStatus(String errorMessage) {
+		assertEquals(errorMessage,
 				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_identifier_status_req_err_msg_xpath"))
 						.getText());
 	}
@@ -824,7 +824,7 @@ public class EditOfficePage extends AbstractPage {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("source", source));
 			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
-			Thread.sleep(3000L);
+			Thread.sleep(1000L);
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office identifiers values", nvPairs);
 			if (document != null) {
 				assertNull(document.getElementsByTagName("identifierType").item(0));

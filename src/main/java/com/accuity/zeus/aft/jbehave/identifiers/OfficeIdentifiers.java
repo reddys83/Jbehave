@@ -44,15 +44,15 @@ public class OfficeIdentifiers {
         hmap.put("office_identifier_type_input_xpath", By.xpath(".//*[@id='additionalIdentifiers']//*[@data-internal_id='identifierType']"));
         hmap.put("office_identifier_value_input_xpath", By.xpath(".//*[@id='additionalIdentifiers']//*[@data-internal_id='identifierValue']"));
         hmap.put("office_identifier_status_input_xpath", By.xpath(".//*[@id='additionalIdentifiers']//*[@data-internal_id='identifierStatus']"));
-        hmap.put("officeIdentifier_type_id", By.xpath("//*[@id='identifierType']"));
+        hmap.put("office_identifier_type_id", By.xpath("//*[@id='identifierType']"));
         hmap.put("office_save_confirmation_message_xpath", By.xpath("//*[@id='saveSuccess']"));
         hmap.put("office_identifier_type_view_mode", By.xpath("//*[@id='officeIdentifiers']//tbody/tr"));
         hmap.put("confirmation_modal_xpath", By.xpath("//*[@id='modal-region']"));
         hmap.put("office_AdditionalIdentifiers", By.xpath("#additionalIdentifiers"));
         hmap.put("office_identifier_type_req_err_msg_xpath", By.xpath("//*[@id='additionalIdentifiers']//*[@data-error_id='identifierTypeError']"));
         hmap.put("office_identifier_value_req_err_msg_xpath", By.xpath("//*[@id='additionalIdentifiers']//*[@data-error_id='identifierValueError']"));
-        hmap.put("office_identifier_status_req_err_msg_xpath", By.xpath("//*[@id='additionalIdentifiers']//*[@data-error_id='identifierStatusError']"));
-        hmap.put("delete_office_identifier_row_confirmation_modal_xpath", By.xpath("//*[@id='additionalIdentifiers']/tr[2]"));
+        hmap.put("office_identifier_status_req_err_msg_xpath", By.xpath("//*[@id='additionalIdentifiers']//*[@data-error_id='identifierStatusError']"));        
+        hmap.put("delete_row_confirmation_modal_xpath", By.xpath("//*[@colspan='10']"));
         hmap.put("office_delete_identifiers_row_button_xpath", By.xpath(".//*[@data-row_id='identifiers']//button[@class='delete-row']"));
         hmap.put("office_delete_no_button_click_xpath", By.xpath("//*[@id='no-button']"));
 

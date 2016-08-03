@@ -451,19 +451,19 @@ public class EditOfficeSteps extends AbstractSteps{
     	getEditOfficePage().verifyMaxLengthInOfficeIdentifierValue(maxLength);
 	}
     
-    @Then("the user should see the error message $errMsg for identifier type field in the office identifiers page")
-	public void verifyErrorMessageForRequiredOfficeIdentifierType(@Named("errMsg") String errMsg) {
-    	getEditOfficePage().verifyErrorMessageForRequiredOfficeIdentifierType(errMsg);
+    @Then("the user should see the error message $errorMessage for identifier type field in the office identifiers page")
+	public void verifyErrorMessageForRequiredOfficeIdentifierType(@Named("errorMessage") String errorMessage) {
+    	getEditOfficePage().verifyErrorMessageForRequiredOfficeIdentifierType(errorMessage);
 	}
     
-    @Then("the user should see the error message $errMsg for identifier value field in the office identifiers page")
-	public void verifyErrorMessageForRequiredOfficeIdentifierValue(@Named("errMsg") String errMsg) {
-    	getEditOfficePage().verifyErrorMessageForRequiredOfficeIdentifierValue(errMsg);
+    @Then("the user should see the error message $errorMessage for identifier value field in the office identifiers page")
+	public void verifyErrorMessageForRequiredOfficeIdentifierValue(@Named("errorMessage") String errorMessage) {
+    	getEditOfficePage().verifyErrorMessageForRequiredOfficeIdentifierValue(errorMessage);
 	}
     
-    @Then("the user should see the error message $errMsg for identifier status field in the office identifiers page")
-	public void verifyErrorMessageForRequiredOfficeIdentifierStatus(@Named("errMsg") String errMsg) {
-    	getEditOfficePage().verifyErrorMessageForRequiredOfficeIdentifierStatus(errMsg);
+    @Then("the user should see the error message $errorMessage for identifier status field in the office identifiers page")
+	public void verifyErrorMessageForRequiredOfficeIdentifierStatus(@Named("errorMessage") String errorMessage) {
+    	getEditOfficePage().verifyErrorMessageForRequiredOfficeIdentifierStatus(errorMessage);
 	}
     
     @Then("the user verifies that the deleted row for office identifier does not exist in $source document")
