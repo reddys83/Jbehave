@@ -30,7 +30,7 @@ public class EditAreaPage extends AbstractPage {
    private static final String DISPLAY_NAME = "Display Name";
    private static final String FULL_NAME = "Full Name";
    public static String addInfoMaximumCharacterString=null;
-   public static String interestRateMaximumCharacterString=null;
+   public static String interestRateMaximumCharacter=null;
    
 	public EditAreaPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
@@ -1172,27 +1172,11 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}		
 	}
-	
-	/**
-	 * This method is used to enter interest rate value  in the Area
-	 * Interest rate text box
-	 * 
-	 * @param interestRate
-	 *   
-	 */
-	              
+		              
 	public void enterAreaInterestRate(String interestRate) {
 		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath"), interestRate);
 	}
-	
-	/**
-	 * This method is used to verify the interest rate value  in the Area
-	 * Web page
-	 * 
-	 * @param interestRate
-	 *            
-	 */
-	
+		
 	public void verifyAreaInterestRate(String interestRate) {
 		try {
 			Thread.sleep(2000);
@@ -1206,24 +1190,13 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyAreaInterestRateZeus(String country, String area, String tagName, String source,
 			String interestRate) {
 		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source), interestRate);
-
 	}
-	
-	/**
-	 * This method is to verify maximum characters entered in area interest 
-	 * rate text box is 256
-	 */
-	
 
 	public void enterInvalidCharactersInAreaInterestRate() {
-		char addCharToInterestRate = 'i';
-		String interestRateRandomText = null;
-		for (int i = 0; i <= 256; i++) {
-			interestRateRandomText += addCharToInterestRate;
-		}
+		String getCharText=returnCharacterText(256);
 		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).clear();
-		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).sendKeys(interestRateRandomText);
-		interestRateMaximumCharacterString = interestRateRandomText;
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).sendKeys(getCharText);
+		interestRateMaximumCharacter = getCharText;
 	}
 	
 	public void viewValidCharacterLengthInterestRate() {
@@ -1233,16 +1206,12 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}
 		
-		Integer addInfoLength = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_xpath_after_save")).getText().length();
-		assertEquals(addInfoLength.toString(), "256");
+		Integer interestRateLength = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_xpath_after_save")).getText().length();
+		assertEquals(interestRateLength.toString(), "256");
 	}
 		
-	/**
-	 * This method is to verify maximum characters entered in area interest rate
-	 * info text box is 256
-	 */
 	public void verifyMaximumTextInInterestRate() {
-		assertEquals(interestRateMaximumCharacterString.subSequence(0, 256), getDriver()
+		assertEquals(interestRateMaximumCharacter.subSequence(0, 256), getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_xpath_after_save")).getText());
 	}
 	
