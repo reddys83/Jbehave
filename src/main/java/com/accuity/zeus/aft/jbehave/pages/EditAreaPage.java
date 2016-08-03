@@ -1178,11 +1178,11 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyTimeZoneDropdownListMatchesWithLookup() throws InterruptedException {
 		List<WebElement> timeZoneList = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_timezone_utc_dropDown_xpath"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get utc list");
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area timezones");
 		attemptClick(AreaIdentifiers.getObjectIdentifier("timezone_utc_dropdown_xpath"));
 		if (timeZoneList != null) {
-			assertTrue("time zone values are empty",document.getElementsByTagName("utcid").getLength() >= 1);
-			for (int i = 1; i < document.getElementsByTagName("utcid").getLength(); i++) {
+			assertTrue("time zone values are empty",document.getElementsByTagName("timeZone").getLength() >= 1);
+			for (int i = 1; i < document.getElementsByTagName("timeZone").getLength(); i++) {
 				assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(),
 						timeZoneList.get(i).getText().trim());
 			}

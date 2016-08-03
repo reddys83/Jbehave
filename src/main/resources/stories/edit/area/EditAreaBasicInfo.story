@@ -1348,18 +1348,11 @@ And the user clicks on the choose an area option
 And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
-When the user gets the document with get document id for area with the <area> from the database
 Then the user should see the timezone values same as in trusted document
 When the user deletes the existing area timezone rows
 Then the user clicks on add new timezone button
 Then user verifies whether default value for timezone is blank
 Then the user verifies whether timezone dropdown list shows all Hera IDs matches with the timezone lookup
-Then user selects the timezone <timeZone> in the timezone dropdown of area basic page
-When the user clicks on the save button
-Then the user should see the save confirmation modal
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the area page
-Then the user reverts the changes to the document
 
 Examples:
 |country|area|timeZone|

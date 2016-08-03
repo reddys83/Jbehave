@@ -113,7 +113,7 @@ public class XqueryMap {
 		queryMap.put("get area identifiers","getCountryIdentifiers.xqy");
         queryMap.put("get offices office types","getOfficesOfficeTypes.xqy");
         queryMap.put("get office name types from lookup","getOfficeNameTypesFromLookup.xqy");
-        queryMap.put("get utc list","getUtcList.xqy");
+        queryMap.put("get area timezones","getCountryTimeZone.xqy");
    }
 
     public String getXquery(String key){
