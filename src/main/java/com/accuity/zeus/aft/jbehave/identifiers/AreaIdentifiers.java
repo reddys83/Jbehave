@@ -67,7 +67,7 @@ public class AreaIdentifiers {
 		hmap.put("timezone_utc_dropdown_option", By.xpath("//*[@name='utc3']/option"));		
 		hmap.put("area_summary_timezone_xpath", By.xpath("//*[@name='timeZonesSummary']"));
 		hmap.put("area_delete_timezone_row_button_xpath", By.xpath("//*[@id='additionalTimeZones']//*[@class='delete-row']"));
-		hmap.put("area_timezone_input_xpath", By.xpath("//*[@id='additionalTimeZones']/tr"));
+		hmap.put("area_timezone_dropdown_xpath", By.xpath("//*[@id='additionalTimeZones']/tr"));
 		hmap.put("area_timezone_type_view_mode", By.xpath("//*[@id='additionalTimeZones']"));		
 		hmap.put("utc_current_value_xpath", By.xpath("(//*[@id='areaBasicInfo'])[2]//tr[th='UTC']/td"));		
 		hmap.put("timezone_utc_current_value_xpath", By.xpath("//*[@name='utc3']//option[@selected='selected']"));

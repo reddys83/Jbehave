@@ -1335,9 +1335,9 @@ Examples:
 |Angola|Cabinda|05||2015|
 
 Scenario: User views the Area basic page, selects the update button and clicks on add new timezone button
-1- User verifies the timezone dropdown shows all Hera IDs in the lookup matches with the timezone lookup
+1- User verifies whether the current value in timezone is defaulted from trusted
 2- User verifies whether default value for timezone is blank
-3- User verifies whether the current value in timezone is defaulted from trusted
+3- User verifies the timezone values from timezone lookup
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -1348,6 +1348,7 @@ And the user clicks on the choose an area option
 And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
+Then the user clicks on add new timezone button
 Then the user should see the timezone values same as in trusted document
 When the user deletes the existing area timezone rows
 Then the user clicks on add new timezone button
@@ -1355,8 +1356,8 @@ Then user verifies whether default value for timezone is blank
 Then the user should see the timezone values from TIME_ZONE lookup
 
 Examples:
-|country|area|timeZone|
-|USA|Alabama|+10:00|
+|country|area|
+|USA|Alabama|
 
 Scenario: User is updating a Areas's Basic Info and has set values for 
 each of 'Country', 'Area', clicks the add new timezone button and saves with empty timezone
@@ -1497,7 +1498,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|timeZone|
-|USA|Alabama|+10:00|
+|USA|Arizona|+10:00|
 
 Scenario: User is updating a Areas's Basic Info and has set values for 
 each of 'Country', 'Area', enters timezone summary as 'Null'
