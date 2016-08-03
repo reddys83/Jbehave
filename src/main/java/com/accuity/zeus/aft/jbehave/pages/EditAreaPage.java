@@ -30,7 +30,7 @@ public class EditAreaPage extends AbstractPage {
    private static final String DISPLAY_NAME = "Display Name";
    private static final String FULL_NAME = "Full Name";
    public static String addInfoMaximumCharacterString=null;
-   public static String interestRateMaximumCharacter=null;
+   public static String interestRateMaximumCharacter = null;
    
 	public EditAreaPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
@@ -1193,7 +1193,7 @@ public class EditAreaPage extends AbstractPage {
 	}
 
 	public void enterInvalidCharactersInAreaInterestRate() {
-		String getCharText=returnCharacterText(256);
+		String getCharText = getBigStringOfGivenLength(256);
 		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).clear();
 		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).sendKeys(getCharText);
 		interestRateMaximumCharacter = getCharText;
@@ -1206,7 +1206,8 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}
 		
-		Integer interestRateLength = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_xpath_after_save")).getText().length();
+		Integer interestRateLength = getDriver().findElement(AreaIdentifiers
+				.getObjectIdentifier("area_interest_rate_xpath_after_save")).getText().length();
 		assertEquals(interestRateLength.toString(), "256");
 	}
 		
@@ -1223,6 +1224,14 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyMaxLengthInterestRate(String maxLength) {
 		 assertEquals(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath"))
                 .getAttribute("maxlength"), maxLength);
+	}
+	
+	private String getBigStringOfGivenLength(int length) {
+		StringBuilder returnCharText = new StringBuilder();
+		for (int i = 0; i <= length; i++) {
+			returnCharText.append("i");
+		}
+		return returnCharText.toString();
 	}
 	
 	@Override

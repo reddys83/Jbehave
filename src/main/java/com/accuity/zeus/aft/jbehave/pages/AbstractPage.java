@@ -327,12 +327,4 @@ public abstract class AbstractPage {
         }
         return selectedValueList;
     }
-    
-	public String returnCharacterText(int length) {
-		StringBuilder returnCharText = new StringBuilder();
-		for (int i = 0; i <= length; i++) {
-			returnCharText.append("i");
-		}
-		return returnCharText.toString();
-	}
 }
