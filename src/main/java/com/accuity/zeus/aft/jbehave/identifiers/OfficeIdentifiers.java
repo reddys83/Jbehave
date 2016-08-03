@@ -60,6 +60,13 @@ public class OfficeIdentifiers {
         hmap.put("office_name_sort_name_xpath",By.xpath(".//*[@id='officeBasicInfo']//input[@name='officeSortName']"));
         hmap.put("office_name_sort_name_view",By.xpath(".//*[@id='officeBasicInfo']/ul/li[1]/dl/dd"));
         hmap.put("office_names_type_mode",By.xpath("//*[@id='officeBasicInfo']/ul/li[1]//table[1]//tbody/tr"));
+        hmap.put("legalEntity_statistics_label_xpath",By.xpath(".//*[@id='content']//h1/span[text()='Statistics']"));
+        hmap.put("office_basicInfo_edit_prefix_xpath", By.xpath("//*[@id='officeBasicInfo']//input[@name='officeTitlePrefix']"));
+        hmap.put("office_basicInfo_edit_suffix_xpath", By.xpath("//*[@id='officeBasicInfo']//input[@name='officeTitleSuffix']"));
+        hmap.put("office_basicInfo_edit_override_xpath", By.xpath("//*[@id='officeBasicInfo']//input[@name='officeTitleOverride']"));
+        hmap.put("office_basicInfo_view_prefix_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Prefix']/td"));
+        hmap.put("office_basicInfo_view_suffix_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Suffix']/td"));
+        hmap.put("office_basicInfo_view_override_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Override']/td"));
     }
 
     public static By getObjectIdentifier(String key) {
