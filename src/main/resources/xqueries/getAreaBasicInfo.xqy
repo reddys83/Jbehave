@@ -20,6 +20,7 @@ let $country := xs:string(xdmp:get-request-field("country"))
 let $area := xs:string(xdmp:get-request-field("area"))
 let $source := xs:string(xdmp:get-request-field("source"))
 
+
 let $countryDoc := /country[@source = $source][summary/names/name[type = "Country Name"]/value = $country]
 let $areaDoc := /area[@source = $source][summary/names/name[type = "Full Name"]/value = $area][within/place/link/@href=$countryDoc/@resource]
 
@@ -34,15 +35,14 @@ let $DateFields :=
  let $areaadditionalinfo := ($areaDoc/summary/additionalInfos/additionalInfo/text())
 
  (: Get summary and utc value :) 
-let $UTClist := for $x in ($areaDoc/summary/timeZones/zone)
+let $utcList := for $x in ($areaDoc/summary/timeZones/zone)
 let $utc := $x/text()
 return 
- <utcvalues>
- <utcvalue>{$utc}</utcvalue>
- </utcvalues>
+ <utcValue>{$utc}</utcValue>
+ 
  
 let $summary := ($areaDoc/summary/timeZones/summaries/summary/text())
-let $UTC := ($areaDoc/summary/timeZones/zone/text())
+
 
  (: Taking identifier List :)
 let $areaIdentifierList := for $x in ($areaDoc/summary/identifiers/identifier)
@@ -62,9 +62,8 @@ return
       <dateFields>{$DateFields}</dateFields>
       <AdditionalInfo>{$areaadditionalinfo}</AdditionalInfo>
       <identifiers>{$areaIdentifierList}</identifiers> 
-      <summary>{$summary}</summary>
-      <UTC>{$UTC}</UTC>
-      <timezoneutc>{$UTClist}</timezoneutc>
+      <summary>{$summary}</summary>     
+      <timeZoneUtc>{$utcList}</timeZoneUtc>
   </area>
   
 

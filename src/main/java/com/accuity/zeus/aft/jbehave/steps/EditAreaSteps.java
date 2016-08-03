@@ -556,15 +556,15 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyDeleteConfirmationModals();
 	}
 	
-	@Then("the user verifies whether timezone dropdown list shows all Hera IDs matches with the timezone lookup")
+	@Then("the user should see the timezone values from TIME_ZONE lookup")
 	public void verifyTimeZoneDropdownListMatchesWithLookup() throws InterruptedException {
 		getEditAreaPage().verifyTimeZoneDropdownListMatchesWithLookup();
 	}
 
-	@Then("the user should see the timezone values same as in trusted $source")
+	@Then("the user should see the timezone values same as in $source document")
 	public void userVerifyTimeZoneDropDownDefaultValueFromTrusted(@Named("country") String country,
 			@Named("area") String area, @Named("source") String source) {
-		getEditAreaPage().userVerifyTimeZoneDropDownDefaultValueFromTrusted(country, area, "UTC", source);
+		getEditAreaPage().userVerifyTimeZoneDefaultValueFromTrusted(country, area, "UTC","summary", source);
 	}
 
 	@Then("the user verifies that option to add another time zone is displayed")
@@ -644,12 +644,6 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaTimeZoneValuesFromDB(country, area, "UTC", source, timeZone);
 	}
 
-	@Then("the user verifies that the deleted row for area timezone does not exist in $source document")
-	public void verifyAreaTimeZoneRowNotPresentInZeusDB(@Named("country") String country, @Named("area") String area,
-			@Named("source") String source) {
-		getEditAreaPage().verifyAreaTimeZoneRowValueNotPresentInZeusDB(country, area, "UTC", source);
-	}
-
 	@Then("user verifies newly added timezone summary is updated in $source document")
 	public void verifyAreaSummaryValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source, @Named("summary") String summary) {
@@ -678,32 +672,14 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaSummaryValueInUI(summary);
 	}
 
-	@Then("the user verifies the $source document whether the Area is updated with the newly added timezone")
-	public void verifyAreaTimeZoneValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
-			@Named("source") String source, @Named("timeZone") String timeZone) {
-		getEditAreaPage().verifyAreasTimeZoneValuesFromZeusDB(country, area, "UTC", source, timeZone);
-	}
-
 	@Then("the user verifies  whether the Area is updated with the newly updated timezone")
 	public void verifyAreasTimeZoneValueInUI(@Named("timeZone1") String timeZone1) throws InterruptedException {
 		getEditAreaPage().verifyAreasTimeZoneValueInUI(timeZone1);
 	}
 
-	@Then("the user verifies the newly added timezone is updated in $source document")
-	public void verifyAreasTimeZoneValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
-			@Named("source") String source, @Named("timeZone1") String timeZone1) {
-		getEditAreaPage().verifyAreasTimeZoneValuesFromZeusDB(country, area, "UTC", source, timeZone1);
-	}
-
 	@Then("the user verifies area page is not updated with Null time zone")
 	public void verifyAreasTimeZoneValueNotUpdatedInUI() throws InterruptedException {
 		getEditAreaPage().verifyAreasTimeZoneValueNotUpdatedInUI();
-	}
-
-	@Then("the user verifies the $source document whether the Area is not updated with the newly added timezone")
-	public void verifyAreasTimeZoneValueNotUpdatedInZeusDB(@Named("country") String country, @Named("area") String area,
-			@Named("source") String source) {
-		getEditAreaPage().verifyAreasTimeZoneValueNotUpdatedInZeusDB(country, area, "UTC", source);
 	}
 
 	@Then("the user verifies summary max length attribute is $maxLength")
@@ -731,8 +707,32 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreasTimeZoneValuesFromDB(country, area, timeZoneValues, source);
 	}
 	
+	@Then("the user should see the area timezone value as in $source document")
+	public void verifyAreaTimeZoneValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("timeZone1") String timeZone1, @Named("source") String source) {
+		List<String> timeZoneValue = new ArrayList<>();
+		timeZoneValue.add(timeZone1);	
+		getEditAreaPage().verifyAreasTimeZoneValuesFromDB(country, area, timeZoneValue, source);
+	}
+	
 	@When("the user deletes the existing area timezone rows")
 	public void deleteAllAreaTimeZoneRows() {
 		getEditAreaPage().deleteAllAreaTimeZoneRows();
+	}
+	
+	@Then("the user verifies the $source document whether the Area is not updated with the newly added timezone")
+	public void verifyAreasTimeZoneValueNotUpdatedInZeusDB(@Named("country") String country, @Named("area") String area,
+			 @Named("source") String source) {
+		List<String> timeZoneValues = new ArrayList<>();
+		timeZoneValues.add("");		
+		getEditAreaPage().verifyAreasTimeZoneValuesFromDB(country, area, timeZoneValues, source);
+	}
+	
+	@Then("the user verifies that the deleted row for area timezone does not exist in $source document")
+	public void verifyAreaTimeZoneRowNotPresentInZeusDB(@Named("country") String country, @Named("area") String area,
+			 @Named("source") String source) {
+		List<String> timeZoneValues = new ArrayList<>();
+		timeZoneValues.add("");		
+		getEditAreaPage().verifyAreasTimeZoneValuesFromDB(country, area, timeZoneValues, source);
 	}
 }

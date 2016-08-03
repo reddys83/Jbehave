@@ -1352,11 +1352,11 @@ Then the user should see the timezone values same as in trusted document
 When the user deletes the existing area timezone rows
 Then the user clicks on add new timezone button
 Then user verifies whether default value for timezone is blank
-Then the user verifies whether timezone dropdown list shows all Hera IDs matches with the timezone lookup
+Then the user should see the timezone values from TIME_ZONE lookup
 
 Examples:
 |country|area|timeZone|
-|USA|Arizona|+10:00|
+|USA|Alabama|+10:00|
 
 Scenario: User is updating a Areas's Basic Info and has set values for 
 each of 'Country', 'Area', clicks the add new timezone button and saves with empty timezone
@@ -1453,7 +1453,7 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user verifies  whether the Area is updated with the newly updated timezone
-Then the user verifies the newly added timezone is updated in zeus document
+And the user should see the area timezone value as in zeus document
 Then the user reverts the changes to the document
 
 Examples:
@@ -1589,4 +1589,5 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|summary|
 |USA|Alabama|Coordinated Universal Time is the primary time standard by which the world regulates clocks and time1|
+
 
