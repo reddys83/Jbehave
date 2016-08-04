@@ -1502,6 +1502,7 @@ And the user clicks on the choose an area option
 And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
+When the user deletes the existing area timezone rows
 Then the user clicks on add new timezone button
 Then the user should see the timezone values same as in trusted document
 Then the user should see the timezone values from TIME_ZONE lookup
@@ -1707,7 +1708,7 @@ Then the user enters the summary as <summary1>
 When the user clicks on the save button
 Then the user should see the below summary changes in confirmation modal
 |Summary|
-|Basic Info / Names|
+|Basic Info / Time Zones|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user verifies the Area page is updated with the new timezone summary
@@ -1740,7 +1741,7 @@ When the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
-Then the user verifies the Area page is updated with the new timezone summary
+Then the user verifies the Area page is updated with the timezone summary
 Then the user verifies the summary field is limited to 100 unicode characters
 Then the user verifies the zeus document whether the Area is updated with the newly updated summary
 Then the user reverts the changes to the document
