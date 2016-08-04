@@ -1492,7 +1492,7 @@ Scenario: User views the Area basic page, selects the update button and clicks o
 1- User verifies whether the current value in timezone is defaulted from trusted
 2- User verifies whether default value for timezone is blank
 3- User verifies the timezone values from timezone lookup
- 
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1741,9 +1741,9 @@ When the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
-Then the user verifies the Area page is updated with the timezone summary
+Then the user verifies the area time zone summary is updated with the maximum characters
 Then the user verifies the summary field is limited to 100 unicode characters
-Then user verifies newly added timezone summary is updated in zeus document
+Then the user verifies the area time zone summary is updated with the maximum characters in zeus document
 Then the user reverts the changes to the document
 
 Examples:

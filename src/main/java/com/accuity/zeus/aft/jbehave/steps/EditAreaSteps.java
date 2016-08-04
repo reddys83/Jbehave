@@ -631,6 +631,12 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("user verifies newly added timezone summary is updated in $source document")
 	public void verifyAreaSummaryValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source, @Named("summary") String summary) {
+		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary);
+	}
+	
+	@Then("the user verifies the area time zone summary is updated with the maximum characters in $source document")
+	public void verifySummaryMaxCharacterValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("summary") String summary) {
 		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary.substring(0, 100));
 	}
 
@@ -647,6 +653,11 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user verifies the Area page is updated with the timezone summary")
 	public void verifyAreaSummaryValueInUI(@Named("summary") String summary) throws InterruptedException {
+		getEditAreaPage().verifyAreaSummaryValueInUI(summary);
+	}
+	
+	@Then("the user verifies the area time zone summary is updated with the maximum characters")
+	public void verifySummaryMaxCharacterValueInUI(@Named("summary") String summary) throws InterruptedException {
 		getEditAreaPage().verifyAreaSummaryValueInUI(summary.substring(0, 100));
 	}
 
