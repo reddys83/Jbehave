@@ -27,7 +27,7 @@ public class SearchPage extends AbstractPage {
 	private By admin_tab_xpath = By.xpath("//header/nav[1]/ul/li[5]");
 	private By search_field_xpath = By.xpath(".//header/form/select[@name='idType']");
 	private By search_button_id = By.id("search-button");
-	private By data_tab_xpath = By.xpath("//header/nav[1]/ul/li[1]");
+	private By data_tab_xpath = By.xpath("//header/nav[1]/ul/li[2]");
 	private By legalEntity_type_ahead_xpath = By.xpath(".//*[@id='main-header']//input[2]");
 	private By legalEntity_search_option_type_dropdown_id= By.id("search-type");
 	private By legalEntity_search_button_id=By.id("search-button");

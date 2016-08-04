@@ -33,6 +33,9 @@ let $DateFields :=
   (: Taking Add Info :)
  let $areaadditionalinfo := ($areaDoc/summary/additionalInfos/additionalInfo/text())
  
+  (: Taking Area Interest Rate :)
+  let $areaInterestRate := ($areaDoc/summary/maxConsumerRate/text())
+  
  (: Taking identifier List :)
 let $areaIdentifierList := for $x in ($areaDoc/summary/identifiers/identifier)
   let $areaIdentifierType := $x/type/text()
@@ -51,10 +54,5 @@ return
       <dateFields>{$DateFields}</dateFields>
       <AdditionalInfo>{$areaadditionalinfo}</AdditionalInfo>
       <identifiers>{$areaIdentifierList}</identifiers> 
+	  <areaInterestRate>{$areaInterestRate}</areaInterestRate>
   </area>
-  
-
-  
-  
-  
-  
