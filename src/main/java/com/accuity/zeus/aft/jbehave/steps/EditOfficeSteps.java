@@ -106,7 +106,7 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyAdditionalInfoValueWithMaxLengthFromZeus("additionalInfo",officeFid,source);
     }
 
-    @When("the user clicks on the add new office location button in the office page")
+   @When("the user clicks on the add new office location button in the office page")
     public void clickOnAddButton(){
         getEditOfficePage().clickAddRowButton();
     }
@@ -115,6 +115,13 @@ public class EditOfficeSteps extends AbstractSteps{
     public void verifyAddOfficeLocationButtonStatus(@Named("add_button") String add_button)
     {
         getEditOfficePage().verifyAddOfficeLocationButtonStatus(add_button);
+    }
+
+
+    @Then("the user should see the $delete_button in disabled state in location address section")
+    public void verifyDeleteOfficeAddressButtonStatus(@Named("delete_button") String delete_button)
+    {
+        getEditOfficePage().verifyDeleteOfficeAddressButtonStatus(delete_button);
     }
 
     @When("the user clicks on delete office locations row button for the row $deletebutton_Row")
@@ -149,6 +156,7 @@ public class EditOfficeSteps extends AbstractSteps{
     {
         getEditOfficePage().selectOfficeAddressType(typeRowIdentifier,Type);
     }
+
     @When("the user enters office address address line 1 $addressLine1RowIdentifier value as <AddressLine1>")
     public void enterofficeAddressLine1(@Named("addressLine1RowIdentifier") String addressLine1RowIdentifier,@Named("AddressLine1") String AddressLine1)
     {
@@ -172,19 +180,35 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().enterofficeAddressLine4(addressLine4RowIdentifier,AddressLine4);
     }
 
-    @When("the user enters the office country <country> in the type-ahead box")
-    public void enterOfficeCountryInTheTypeAheadBox(@Named("country") String country) {
-        getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(country);
+    @When("the user clicks on the choose a country option in the office locations")
+    public void clickOnCountryListBox() throws InterruptedException {
+        getEditOfficePage().clickOnCountryListBox();
     }
 
+    @When("the user enters the office country <Country> in the type-ahead box")
+    public void enterOfficeCountryInTheTypeAheadBox(@Named("Country") String Country) {
+        getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(Country);
+    }
+/*
+    @When("the user enters the office country <Country> in the type-ahead box")
+    public void enterOfficeCountryInTheTypeAheadBox(@Named("Country") String Country)
+    {
+        getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(Country);
+    }
+*/
     @Then("the user should see the list of all existing area for the selected country by full name in office address")
     public void verifyOfficeAreaList() {
         getEditOfficePage().verifyOfficeAreaList();
     }
 
-    @When("the user enters the office area <area> in the type-ahead box")
-    public void enterOfficeAreaInTypeAhead(@Named("area") String area) {
-        getEditOfficePage().enterOfficeAreaInTypeAhead(area);
+    @When("the user clicks on the choose an area option in the office locations")
+    public void clickOnAreaListBox() throws InterruptedException {
+        getEditOfficePage().clickOnAreaListBox();
+    }
+
+    @When("the user enters the office area <Area> in the type-ahead box")
+    public void enterOfficeAreaInTypeAhead(@Named("Area") String Area) {
+        getEditOfficePage().enterOfficeAreaInTypeAhead(Area);
     }
 
 
@@ -193,29 +217,47 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyOfficeSubAreaList(database, apacheHttpClient);
     }
 
-    @When("the user enters the office subarea <subarea> in the type-ahead box")
-    public void enterOfficeSubAreaInTypeAhead(@Named("subarea") String subarea) {
-        getEditOfficePage().enterOfficeSubAreaInTypeAhead(subarea);
+
+    @When("the user clicks on the choose a subarea option in the office locations")
+    public void clickOnSubAreaListBox() throws InterruptedException {
+        getEditOfficePage().clickOnSubAreaListBox();
     }
-    @Then("the user should see the below cities for the selected subarea: $cities")
+    @When("the user enters the office subarea <subArea> in the type-ahead box")
+    public void enterOfficeSubAreaInTypeAhead(@Named("subArea") String subArea) {
+        getEditOfficePage().enterOfficeSubAreaInTypeAhead(subArea);
+    }
+    @Then("the user should see the below office cities for the selected subarea: $cities")
     public void verifyCitiesForSelectedSubArea(ExamplesTable cities) {
         getEditOfficePage().verifyCitiesForSelectedSubArea(cities);
     }
 
-    @Then("the user should see the below states for the selected country: $areas")
+    @Then("the user should see the below office states for the selected country: $areas")
     public void verifyAreaForSelectedCountry(ExamplesTable areas) {
         getEditOfficePage().verifyAreaForSelectedCountry(areas);
+
     }
+    @Then("the user should see the below office cities for the selected area: $cities")
+    public void verifyCitiesForSelectedArea(ExamplesTable cities) {
+        getEditOfficePage().verifyCitiesForSelectedArea(cities);
+    }
+
 
     @When("the user clicks on the choose an area option")
     public void clickOnAreaDropdown() {
         getEditOfficePage().clickOnAreaDropdown();
     }
 
+    @When("the user clicks on the choose a city option in the office locations")
+    public void clickOnCityDropdown() {
+        getEditOfficePage().clickOnCityDropdown();
+    }
+
     @Then("the user should see the list of all existing city for the selected area by full name in office address")
     public void verifyOfficeCityList() {
         getEditOfficePage().verifyOfficeCityList();
-    }
+
+            }
+
 
     @When("the user clicks on delete office address row button for the row $deletebutton_Row")
     public void clickonDeleteOfficeAddressRowButton(String deletebutton_Row)
@@ -251,10 +293,22 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().enterOfficeTelecomsTextBefore(textBeforeRowIdentifier,TextBefore);
     }
 
-    @When("the user enters office telecoms value $valueRowIdentifier value as <Value>")
-     public void enterOfficeTelecomsValue(@Named("valueRowIdentifier") String valueRowIdentifier,@Named("Value") String Value)
+    @When("the user enters office telecoms value $valueRowIdentifier value as <Value1>")
+     public void enterOfficeTelecomsValue1(@Named("valueRowIdentifier") String valueRowIdentifier,@Named("Value1") String Value1)
     {
-        getEditOfficePage().enterOfficeTelecomsValue(valueRowIdentifier,Value);
+        getEditOfficePage().enterOfficeTelecomsValue1(valueRowIdentifier,Value1);
+    }
+
+    @When("the user enters office telecoms value $valueRowIdentifier value as <Value2>")
+    public void enterOfficeTelecomsValue2(@Named("valueRowIdentifier") String valueRowIdentifier,@Named("Value2") String Value2)
+    {
+        getEditOfficePage().enterOfficeTelecomsValue2(valueRowIdentifier,Value2);
+    }
+
+    @When("the user enters office telecoms value $valueRowIdentifier value as <Value3>")
+    public void enterOfficeTelecomsValue3(@Named("valueRowIdentifier") String valueRowIdentifier,@Named("Value3") String Value3)
+    {
+        getEditOfficePage().enterOfficeTelecomsValue3(valueRowIdentifier,Value3);
     }
 
     @When("the user enters office telecoms range limit $rangeLimitRowIdentifier value as <RangeLimit>")
@@ -309,6 +363,95 @@ public class EditOfficeSteps extends AbstractSteps{
     @Then("the user should see the $officeaddress_rowIdentifier values in office location's section from lookup $lookup")
     public void verifyOfficeAddressTypesFromLookup(@Named("officeaddress_rowIdentifier") String officeaddress_rowIdentifier,@Named("lookup") String lookup) {
         getEditOfficePage().verifyOfficeAddressTypesFromLookup(officeaddress_rowIdentifier,lookup);
+    }
+
+    @Then("the user should see the error message $errorMsg for the office address type field")
+    public void verifyOfficeAddressTypeErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditOfficePage().verifyOfficeErrorMessage("office_address_type_error_msg_xpath", errorMsg);
+
+    }
+/*
+    @Then("the user verifies the office address line 1 maxlength is $maxSize for the $rowIdentifier")
+    public void verifyMaxlengthAddressLine1Text(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);}
+
+
+    @Then("the user verifies the office address line 2 maxlength is $maxSize for the $rowIdentifier")
+    public void verifyMaxlengthAddressLine2Text(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);}
+
+
+    @Then("the user verifies the office address line 3 maxlength is $maxSize for the $rowIdentifier")
+    public void verifyMaxlengthAddressLine3Text(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);}
+
+    @Then("the user verifies the office address line 4 maxlength is $maxSize for the $rowIdentifier")
+    public void verifyMaxlengthAddressLine4Text(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);}
+
+*/
+    @Then("the user verifies the $officeAddressField  maxlength is $maxSize for the $rowIdentifier")
+    public void verifyMaxlengthOfficeAddressText(@Named("$officeAddressField") String officeAddressField,@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);}
+
+    @Then("the user should see office address line 1 text value as <AddressLine1> for fid <officeFid> in $source document and in zeus UI")
+    public void verifyEditOfficeAddressLine1ValueFromZeusDocumentAndUI(@Named("AddressLine1") String AddressLine1,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficeAddressLine1ValueFromZeusDocumentAndUI(AddressLine1,officeFid,source);
+    }
+
+    @Then("the user should see office address line 2 text value as <AddressLine2> for fid <officeFid> in $source document and in zeus UI")
+    public void verifyEditOfficeAddressLine2ValueFromZeusDocumentAndUI(@Named("AddressLine2") String AddressLine2,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficeAddressLine2ValueFromZeusDocumentAndUI(AddressLine2,officeFid,source);
+    }
+
+    @Then("the user should see office address line 3 text value as <AddressLine3> for fid <officeFid> in $source document and in zeus UI")
+    public void verifyEditOfficeAddressLine3ValueFromZeusDocumentAndUI(@Named("AddressLine3") String AddressLine3,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficeAddressLine3ValueFromZeusDocumentAndUI(AddressLine3,officeFid,source);
+    }
+
+    @Then("the user should see office address line 4 text value as <AddressLine4> for fid <officeFid> in $source document and in zeus UI")
+    public void verifyEditOfficeAddressLine4ValueFromZeusDocumentAndUI(@Named("AddressLine4") String AddressLine4,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficeAddressLine4ValueFromZeusDocumentAndUI(AddressLine4,officeFid,source);
+    }
+
+    @Then("the user should see office location primary flag value as <primaryFlag> for fid <officeFid> in $source document and in zeus UI")
+    public void getDocumentPrimaryFlag(@Named("primaryFlag") String primaryFlag,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyPrimaryFlagValuefromZeusDocumentAndUI(primaryFlag,officeFid,source);
+    }
+
+    @Then("the user should see office postal code value as <postalCode> for fid <officeFid> in $source document and in zeus UI")
+    public void verifyEditOfficePostalCodeValueFromZeusDocumentAndUI(@Named("postalCode") String postalCode,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficePostalCodeValueFromZeusDocumentAndUI(postalCode,officeFid,source);
+    }
+    @Then("the user should see office postal code suffix value as <postalCodeSuffix> for fid <officeFid> in $source document and in zeus UI")
+    public void verifyEditOfficepostalCodeSuffixValueFromZeusDocumentAndUI(@Named("postalCodeSuffix") String postalCodeSuffix,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficepostalCodeSuffixValueFromZeusDocumentAndUI(postalCodeSuffix,officeFid,source);
+    }
+
+    @Then("the user should see office locations info value as <Info> for fid <officeFid> in $source document and in zeus UI")
+    public void verifyEditOfficeLocationsInfoValueFromZeusDocumentAndUI(@Named("Info") String Info,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficeLocationsInfoValueFromZeusDocumentAndUI(Info,officeFid,source);
+    }
+
+    @Then("the user should see office country value as <Country> for fid <officeFid> in $source document and in UI")
+    public void verifyEditOfficeLocationsCountryValueFromZeusDocumentAndUI(@Named("Country") String Country,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficeLocationsCountryValueFromZeusDocumentAndUI(Country, "type", officeFid, source, "get office basic info");
+    }
+
+    @Then("the user should see office area value as <Area> for fid <officeFid> in $source document and in UI")
+    public void verifyEditOfficeLocationsAreaValueFromZeusDocumentAndUI(@Named("Area") String Area,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficeLocationsAreaValueFromZeusDocumentAndUI(Area, "type", officeFid, source, "get office basic info");
+    }
+
+    @Then("the user should see office area value as <SubArea> for fid <officeFid> in $source document and in UI")
+    public void verifyEditOfficeLocationsSubAreaValueFromZeusDocumentAndUI(@Named("SubArea") String SubArea,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficeLocationsSubAreaValueFromZeusDocumentAndUI(SubArea, "type", officeFid, source, "get office basic info");
+    }
+
+    @Then("the user should see office city value as <City> for fid <officeFid> in $source document and in UI")
+    public void verifyEditOfficeLocationsCityValueFromZeusDocumentAndUI(@Named("City") String City,@Named("officeFid") String officeFid,@Named("source") String source) {
+        getEditOfficePage().verifyEditOfficeLocationsCityValueFromZeusDocumentAndUI(City, "type", officeFid, source, "get office basic info");
+    }
+
+    @Then("the user should see the error message $errorMsg for the office country field")
+    public void verifyOfficeCountryErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditOfficePage().verifyOfficeErrorMessage("office_address_country_error_msg_xpath", errorMsg);
+
     }
 }
 
