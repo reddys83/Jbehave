@@ -1479,6 +1479,10 @@ When the user gets the document with get document id for area with the <area> fr
 When the user deletes the existing area timezone rows
 Then the user clicks on add new timezone button
 Then user selects the timezone <timeZone> in the timezone dropdown of area basic page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+And the user clicks on the area update link
 When the user clicks on the delete timezone row button in the basic info area page
 Then the user should see delete row confirmation modal in the area basic page
 When the user clicks on the No button to cancel the deletion of row in basic info area page
@@ -1487,7 +1491,6 @@ When the user clicks on the delete timezone row button in the basic info area pa
 Then the user should see delete row confirmation modal in the area basic page
 When the user clicks on the Yes button to delete the row in basic info area page
 Then the user should not see the newly added timezone row in the basic info area page
-Then the user verifies that the deleted row for area timezone does not exist in zeus document
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
@@ -1495,6 +1498,7 @@ Then the user should see the successful update message at top of the area page
 Then the user should not see the newly added timezone row in the basic info area page
 Then the user verifies that the deleted row for area timezone does not exist in zeus document
 Then the user reverts the changes to the document
+
 
 Examples:
 |country|area|timeZone|
