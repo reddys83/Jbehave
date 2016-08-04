@@ -1492,7 +1492,7 @@ Scenario: User views the Area basic page, selects the update button and clicks o
 1- User verifies whether the current value in timezone is defaulted from trusted
 2- User verifies whether default value for timezone is blank
 3- User verifies the timezone values from timezone lookup
-
+ 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1748,6 +1748,6 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|summary|
-|USA|Alabama|Coordinated Universal Time is the primary time standard by which the world regulates clocks and time1|
-|USA|Alabama|83456783465268456153416842315648423165456834567834652684561534168423156484231654563483456783465454557|
-|USA|Alabama|@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&|
+|USA|Alabama|Coordinated Universal Time is the primary time standard by which the world regulates clocks and tim|
+|USA|Alabama|834567834652684561534168423156484231654568345678346526845615341684231564842316545634834567834654545|
+|USA|Alabama|@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^|

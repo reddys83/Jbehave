@@ -1268,10 +1268,8 @@ public class EditAreaPage extends AbstractPage {
 						"get area basic info", nvPairs);
 				if (document != null) {
 					for (int index = 0; index < document.getElementsByTagName("timeZoneUtc").item(0).getChildNodes().getLength(); index++) {
-						for (int childNode = 0; childNode < document.getElementsByTagName("timeZoneUtc").item(0).getChildNodes().item(index).getChildNodes().getLength(); childNode++) {
-							assertEquals(document.getElementsByTagName("timeZoneUtc").item(0).getChildNodes().item(index).getChildNodes().item(childNode).getTextContent(),
+							assertEquals(document.getElementsByTagName("timeZoneUtc").item(0).getChildNodes().item(index).getChildNodes().item(0).getTextContent(),
 									timeZoneDropDownList.get(index).getText().trim());
-						}
 					}
 				} else {
 					assertTrue(source + "document is null", false);
@@ -1401,9 +1399,7 @@ public class EditAreaPage extends AbstractPage {
 					"get area basic info", nvPairs);
 			if (document != null) {
 				for (int index = 0; index < document.getElementsByTagName("timeZoneUtc").item(0).getChildNodes().getLength(); index++) {
-					for (int childNode = 0; childNode < document.getElementsByTagName("timeZoneUtc").item(0).getChildNodes().item(index).getChildNodes().getLength(); childNode++) {
-						assertEquals(document.getElementsByTagName("timeZoneUtc").item(0).getChildNodes().item(index).getChildNodes().item(childNode).getTextContent(), timeZoneValues.get(index));
-					}
+						assertEquals(document.getElementsByTagName("timeZoneUtc").item(0).getChildNodes().item(index).getChildNodes().item(0).getTextContent(), timeZoneValues.get(index));
 				}
 			}
 			else {
@@ -1427,9 +1423,7 @@ public class EditAreaPage extends AbstractPage {
 			if (document != null) {
 				{
 					for (int index = 0; index < document.getElementsByTagName("timeZoneUtc").item(0).getChildNodes().getLength(); index++) {
-						for (int childNode = 0; childNode < document.getElementsByTagName("timeZoneUtc").item(0).getChildNodes().item(index).getChildNodes().getLength(); childNode++) {
-							assertNull((document.getElementsByTagName("timeZoneUtc").item(index).getChildNodes().item(0).getChildNodes().item(childNode).getTextContent()));
-						}
+							assertNull((document.getElementsByTagName("timeZoneUtc").item(index).getChildNodes().item(0).getChildNodes().item(0).getTextContent()));
 					}
 				}
 			} else {
