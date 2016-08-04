@@ -550,5 +550,56 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyNewlyAddedAreaIdentifierRowExists() {
 		getEditAreaPage().verifyNewlyAddedAreaIdentifierRowExists();
 	}
+	
+	@When("the user enters <interestRate> value in area page")
+	public void enterAreaInterestRate(@Named("interestRate") String interestRate) {
+		getEditAreaPage().enterAreaInterestRate(interestRate);
+	}
 
+	@When("the user enters <interestRateOld> value in area page")
+	public void enterAreaInterestRateNew(@Named("interestRateOld") String interestRateNew) {
+		getEditAreaPage().enterAreaInterestRate(interestRateNew);
+	}
+
+	@Then("the user should see the entered <interestRate> in area page")
+	public void verifyAreaInterestRate(@Named("interestRate") String interestRate) {
+		getEditAreaPage().verifyAreaInterestRate(interestRate);
+	}
+
+	@Then("the user should see the entered <interestRateOld> in area page")
+	public void verifyAreaInterestRateOld(@Named("interestRateOld") String interestRate) {
+		getEditAreaPage().verifyAreaInterestRate(interestRate);
+	}
+
+	@Then("the user should see the entered <interestRate> in $source document")
+	public void enterAreaInterestRateNew(@Named("country") String country, @Named("area") String area,
+			@Named("interestRate") String interestRate, @Named("source") String source) {
+		getEditAreaPage().verifyAreaInterestRateZeus(country, area, "areaInterestRate", source, interestRate);
+	}
+
+	@When("the user enters values which is beyond 256 unicode characters in the area Interest Rate field")
+	public void enterInvalidCharactersInAreaInterestRate() {
+		getEditAreaPage().enterInvalidCharactersInAreaInterestRate();
+	}
+
+	@Then("the user should be able to view that only 256 unicode characters are saved in area Interest Rate field")
+	public void viewValidCharacterLengthInterestRate() {
+		getEditAreaPage().viewValidCharacterLengthInterestRate();
+	}
+
+	@Then("the user should be able to verify the maximum values are entered in the area Interest Rate field")
+	public void verifyMaximumTextInInterestRate() {
+		getEditAreaPage().verifyMaximumTextInInterestRate();
+	}
+
+	@Then("the user should see the Interest Rate value in area page is same as per $source document")
+	public void verifyAreaInterestRateFromTrustedDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source) {
+		getEditAreaPage().verifyAreaInterestRateFromTrustedDB(country, area, "areaInterestRate", source);
+	}
+	
+	@Then("the user should see maximum length of interest rate value is limited to $maxLength")
+	public void verifyMaxLengthInterestRate(@Named("maxLength") String maxLength) {
+		getEditAreaPage().verifyMaxLengthInterestRate(maxLength);
+	}
 }
