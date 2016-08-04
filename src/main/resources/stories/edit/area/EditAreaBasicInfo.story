@@ -1337,9 +1337,6 @@ Examples:
 |country|area|type|value|value2|
 |Angola|Namibe|Alternative Name|testing|testing|
 
-Examples:
-|country|area|beganDay1|beganMonth1|beganYear1|
-|Angola|Cabinda|05||2015|
 
 Scenario: User can edit  'Interest Rate Limit' that is different from the current value
 a)User verifies existing 'Interest Rate Limit' existing interest rate values are retrieved  from trusted doc 
