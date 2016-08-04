@@ -1250,7 +1250,7 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 
-	public void userVerifyTimeZoneDefaultValueFromTrusted(String country, String area, String tagName, String source) {
+	public void verifyTimeZoneDefaultValueFromTrusted(String country, String area, String tagName, String source) {
 		assertEquals(getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("summary_current_value_view_mode_xpath")).getText(),
 				getAreaBasicInfoFromDB(country, area, tagName, source));
@@ -1279,11 +1279,11 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 	 
-	public void userClickOnAddNewTimeZoneButton() {
+	public void clickOnAddNewTimeZoneButton() {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("timezone_utc_add_timezone_xpath"));
 	}
 
-	public void userVerifiesTimeZoneDefaultValueIsBlank() {
+	public void verifiesTimeZoneDefaultValueIsBlank() {
 		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("timezone_utc_dropdown_option")).getText().isEmpty());
 	}
 
@@ -1296,7 +1296,7 @@ public class EditAreaPage extends AbstractPage {
 		assertFalse(selectedOptions.contains(timeZone));
 	}
 
-	public void userEntersSummaryValue(String summary) {
+	public void entersSummaryValue(String summary) {
 		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_summary_timezone_xpath"), summary);
 	}
 
@@ -1360,7 +1360,7 @@ public class EditAreaPage extends AbstractPage {
 				.getText().length(), maxLength);
 	}
 
-	public void userSelectsTimeZoneDropDownValue(String timeZoneType, int rowNumber) {
+	public void selectsTimeZoneDropDownValue(String timeZoneType, int rowNumber) {
 		try {
 			List<WebElement> timeZoneDropDowns = getDriver()
 					.findElements(AreaIdentifiers.getObjectIdentifier("timezone_utc_dropdown_xpath"));

@@ -1743,11 +1743,11 @@ When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user verifies the Area page is updated with the timezone summary
 Then the user verifies the summary field is limited to 100 unicode characters
-Then the user verifies the zeus document whether the Area is updated with the newly updated summary
+Then user verifies newly added timezone summary is updated in zeus document
 Then the user reverts the changes to the document
 
 Examples:
 |country|area|summary|
-|USA|Alabama|Coordinated Universal Time is the primary time standard by which the world regulates clocks and tim|
-|USA|Alabama|834567834652684561534168423156484231654568345678346526845615341684231564842316545634834567834654545|
-|USA|Alabama|@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^|
+|USA|Alabama|Coordinated Universal Time is the primary time standard by which the world regulates clocks and tim3442|
+|USA|Alabama|8345678346526845615341684231564842316545683456783465268456153416842315648423165456348345678346545454223|
+|USA|Alabama|@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^fdf3|

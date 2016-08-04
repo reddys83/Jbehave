@@ -564,17 +564,17 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user should see the timezone values same as in $source document")
 	public void userVerifyTimeZoneDropDownDefaultValueFromTrusted(@Named("country") String country,
 			@Named("area") String area, @Named("source") String source) {
-		getEditAreaPage().userVerifyTimeZoneDefaultValueFromTrusted(country, area, "summary", source);
+		getEditAreaPage().verifyTimeZoneDefaultValueFromTrusted(country, area, "summary", source);
 	}	 
 
 	@Then("the user clicks on add new timezone button")
 	public void userClickOnAddNewTimeZoneButton() {
-		getEditAreaPage().userClickOnAddNewTimeZoneButton();
+		getEditAreaPage().clickOnAddNewTimeZoneButton();
 	}
 
 	@Then("user verifies whether default value for timezone is blank")
 	public void userVerifiesTimeZoneDefaultValueIsBlank() {
-		getEditAreaPage().userVerifiesTimeZoneDefaultValueIsBlank();
+		getEditAreaPage().verifiesTimeZoneDefaultValueIsBlank();
 	}
 
 	@Then("user verifies whether timezone dropdown displays time zone's except selected timezone <timeZone>")
@@ -584,27 +584,27 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("user selects the timezone <timeZone> in the timezone dropdown of area basic page")
 	public void userSelectsTimeZoneDropDownValue(@Named("timeZone") String timeZone) throws InterruptedException {
-		getEditAreaPage().userSelectsTimeZoneDropDownValue(timeZone, 1);
+		getEditAreaPage().selectsTimeZoneDropDownValue(timeZone, 1);
 	}
 
 	@Then("user selects the timezone <timeZone1> in the timezone dropdown of area basic page")
 	public void userSelectsTimeZoneDropDownValues(@Named("timeZone1") String timeZone1) throws InterruptedException {
-		getEditAreaPage().userSelectsTimeZoneDropDownValue(timeZone1, 2);
+		getEditAreaPage().selectsTimeZoneDropDownValue(timeZone1, 2);
 	}
 
 	@Then("user changes the <timeZone1> in the timezone dropdown of area basic page")
 	public void userSelectTimeZoneValue(@Named("timeZone1") String timeZone1) throws InterruptedException {
-		getEditAreaPage().userSelectsTimeZoneDropDownValue(timeZone1, 1);
+		getEditAreaPage().selectsTimeZoneDropDownValue(timeZone1, 1);
 	}
 
 	@Then("the user enters the summary as <summary>")
 	public void userEntersSummaryValue(@Named("summary") String summary) throws InterruptedException {
-		getEditAreaPage().userEntersSummaryValue(summary);
+		getEditAreaPage().entersSummaryValue(summary);
 	}
 
 	@Then("the user enters the summary as <summary1>")
 	public void userEnterSummaryValue(@Named("summary1") String summary1) throws InterruptedException {
-		getEditAreaPage().userEntersSummaryValue(summary1);
+		getEditAreaPage().entersSummaryValue(summary1);
 	}
 
 	@When("the user clicks on the delete timezone row button in the basic info area page")
@@ -631,7 +631,7 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("user verifies newly added timezone summary is updated in $source document")
 	public void verifyAreaSummaryValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source, @Named("summary") String summary) {
-		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary);
+		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary.substring(0, 100));
 	}
 
 	@Then("the user verifies the $source document whether the Area is updated with the newly updated summary")
@@ -647,7 +647,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user verifies the Area page is updated with the timezone summary")
 	public void verifyAreaSummaryValueInUI(@Named("summary") String summary) throws InterruptedException {
-		getEditAreaPage().verifyAreaSummaryValueInUI(summary);
+		getEditAreaPage().verifyAreaSummaryValueInUI(summary.substring(0, 100));
 	}
 
 	@Then("the user verifies whether the Area is updated with the newly updated timezone")
