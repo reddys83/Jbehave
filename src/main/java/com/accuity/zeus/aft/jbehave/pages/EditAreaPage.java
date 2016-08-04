@@ -1287,15 +1287,12 @@ public class EditAreaPage extends AbstractPage {
 	}
 
 	public void userVerifiesTimeZoneDefaultValueIsBlank() {
-		assertTrue(
-				(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("timezone_utc_dropdown_option")).getText())
-						.isEmpty());
+		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("timezone_utc_dropdown_option")).getText().isEmpty());
 	}
 
 	public void verifyTimeZoneDropDownIsNotHavingSelectedTimeZone(String timeZone) {
 
-		List<WebElement> subAreaChoices = getDriver()
-				.findElements(AreaIdentifiers.getObjectIdentifier("area_timezone_utc_second_dropDown"));
+		List<WebElement> subAreaChoices = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_timezone_utc_second_dropDown"));
 		List<String> selectedOptions = new ArrayList<String>();
 		for (int index = 0; index < subAreaChoices.size(); index++) {
 			selectedOptions.add((subAreaChoices.get(index)).getText());
@@ -1423,7 +1420,7 @@ public class EditAreaPage extends AbstractPage {
 			nvPairs.add(new BasicNameValuePair("country", country));
 			nvPairs.add(new BasicNameValuePair("area", area));
 			nvPairs.add(new BasicNameValuePair("source", source));
-			Thread.sleep(1000L);
+			Thread.sleep(3000L);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get area basic info", nvPairs);
