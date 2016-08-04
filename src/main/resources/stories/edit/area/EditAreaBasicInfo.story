@@ -1350,9 +1350,6 @@ And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 Then the user clicks on add new timezone button
 Then the user should see the timezone values same as in trusted document
-When the user deletes the existing area timezone rows
-Then the user clicks on add new timezone button
-Then user verifies whether default value for timezone is blank
 Then the user should see the timezone values from TIME_ZONE lookup
 
 Examples:
@@ -1381,7 +1378,7 @@ Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user verifies area page is not updated with Null time zone
-Then the user verifies the zeus document whether the Area is not updated with the newly added timezone
+Then the user verifies the area is updated with timezone as null in zeus document
 Then the user reverts the changes to the document
 
 Examples:
@@ -1408,7 +1405,8 @@ When the user deletes the existing area timezone rows
 Then the user clicks on add new timezone button
 Then user selects the timezone <timeZone> in the timezone dropdown of area basic page
 Then the user clicks on add new timezone button
-Then user verifies whether timezone dropdown displays time zone's except selected timezone<timeZone>
+Then user verifies whether default value for timezone is blank
+Then user verifies whether timezone dropdown displays time zone's except selected timezone <timeZone>
 Then user selects the timezone <timeZone1> in the timezone dropdown of area basic page
 When the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -1422,10 +1420,10 @@ Examples:
 |country|area|timeZone|timeZone1|
 |USA|Alabama|+10:00|+12:00|
 
-Scenario: User is updating a Areas's Basic Info and has set values for 
-each of 'Country', 'Area', clicks the add new timezone button,updates the existing 'timezone' value
-1- User verifies area is updated with newly updated timezone 'timezone'
-2- User verifies Zeus DB whether the area is updated with newly updated timezone 'timezone'
+Scenario: User is updating a Areas's Basic Info and has set values for each of 'Country', 'Area', clicks the add new timezone button, updates the existing 'timezone' value
+1- User verifies existing timezone can be updated with new 'timezone'
+2- User verifies Zeus DB whether the area is updated with newly updated timezone.
+3- User verifies confirmation dialog modal has summary change text as 'Basic Info / Time Zones'
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -1463,7 +1461,7 @@ Examples:
 
 Scenario: User can edit area timezone and tries to delete the timezone before and after saving the area basic page 
 1- Verify if User can prevent deleting timezone by clicking on 'No'.
-2- Verify if User can delete timezone by clicking on 'Yes' , then after saving it should be removed.
+2- Verify if User can delete timezone by clicking on 'Yes', then after saving it should be removed.
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -1472,7 +1470,6 @@ When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
-When the user clicks on the choose a sub-area option
 When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
@@ -1496,7 +1493,7 @@ Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should not see the newly added timezone row in the basic info area page
-Then the user verifies that the deleted row for area timezone does not exist in zeus document
+Then the user verifies the deleted timezone does not exist in zeus document
 Then the user reverts the changes to the document
 
 
@@ -1532,9 +1529,8 @@ Examples:
 |country|area|summary|
 |USA|Alabama||
 
-Scenario: User is updating a Areas's Basic Info and has set values for 
-each of 'Country', 'Area', user updates the existing timezone summary with new summary value
-1- User verifies area is updated with newly updated timezone 'summary1' value
+Scenario: User is updating a Areas's Basic Info and has set values for each of 'Country', 'Area', user updates the existing timezone summary with new summary value
+1- User verifies existing timezone 'summary' value is updated with 'summary1'
 2- User verifies Zeus DB whether the area is updated with newly updated timezone 'summary1' value
 
 Given a user is on the search page
@@ -1555,7 +1551,9 @@ Then the user should see the successful update message at top of the area page
 When the user clicks on the area update link
 Then the user enters the summary as <summary1>
 When the user clicks on the save button
-Then the user should see the save confirmation modal
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Names|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user verifies the Area page is updated with the new timezone summary
@@ -1565,10 +1563,11 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|summary|summary1|
 |USA|Alabama||Coordinated Universal Time|
+|USA|Alabama|Universal Time|Coordinated Universal Time|
+|USA|Alabama|123456|!#$^^%^&*^&*(%&*(%&*(%&*($^&*#$^&%&*^*#^&$&|
 
-Scenario: User is updating a Areas's Basic Info and has set values for 
-each of 'Country', 'Area', enters the 'summary' value exceeding 100 unicode characters
-1- User verifies the timezone 'summary' field is having max lenght attribute as '100'
+Scenario: User is updating a Areas's Basic Info and has set values for each of 'Country', 'Area', enters the 'summary' value exceeding 100 unicode characters
+1- User verifies the timezone 'summary' field is having max length attribute as '100'
 2- User verifies the timezone 'summary' field is limited to '100' unicode characters
 
 Given a user is on the search page
@@ -1587,12 +1586,13 @@ When the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
+Then the user verifies the Area page is updated with the new timezone summary
 Then the user verifies the summary field is limited to 100 unicode characters
-Then the user verifies the zeus document whether the newly updated summary is limited to 100 unicode characters
+Then the user verifies the zeus document whether the Area is updated with the newly updated summary
 Then the user reverts the changes to the document
 
 Examples:
 |country|area|summary|
 |USA|Alabama|Coordinated Universal Time is the primary time standard by which the world regulates clocks and time1|
-
-
+|USA|Alabama|83456783465268456153416842315648423165456834567834652684561534168423156484231654563483456783465454557|
+|USA|Alabama|@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&|
