@@ -11,8 +11,8 @@ import org.apache.commons.lang3.*;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -30,6 +30,7 @@ public class EditAreaPage extends AbstractPage {
    private static final String DISPLAY_NAME = "Display Name";
    private static final String FULL_NAME = "Full Name";
    public static String addInfoMaximumCharacterString=null;
+   public static String interestRateMaximumCharacter = null;
    
 	public EditAreaPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
@@ -1171,6 +1172,67 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}		
 	}
+		              
+	public void enterAreaInterestRate(String interestRate) {
+		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath"), interestRate);
+	}
+		
+	public void verifyAreaInterestRate(String interestRate) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals(interestRate, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_xpath_after_save")).getText());
+	}
+	
+	public void verifyAreaInterestRateZeus(String country, String area, String tagName, String source,
+			String interestRate) {
+		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source), interestRate);
+	}
+
+	public void enterInvalidCharactersInAreaInterestRate() {
+		String getCharText = getBigStringOfGivenLength(256);
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).clear();
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).sendKeys(getCharText);
+		interestRateMaximumCharacter = getCharText;
+	}
+	
+	public void viewValidCharacterLengthInterestRate() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		Integer interestRateLength = getDriver().findElement(AreaIdentifiers
+				.getObjectIdentifier("area_interest_rate_xpath_after_save")).getText().length();
+		assertEquals(interestRateLength.toString(), "256");
+	}
+		
+	public void verifyMaximumTextInInterestRate() {
+		assertEquals(interestRateMaximumCharacter.subSequence(0, 256), getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_xpath_after_save")).getText());
+	}
+	
+	public void verifyAreaInterestRateFromTrustedDB(String country, String area, String tagName, String source) {
+		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source),
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).getText());
+	}
+	
+	public void verifyMaxLengthInterestRate(String maxLength) {
+		 assertEquals(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath"))
+                .getAttribute("maxlength"), maxLength);
+	}
+	
+	private String getBigStringOfGivenLength(int length) {
+		StringBuilder returnCharText = new StringBuilder();
+		for (int i = 0; i <= length; i++) {
+			returnCharText.append("i");
+		}
+		return returnCharText.toString();
+	}
 	
 	public void verifyTimeZoneDropdownListMatchesWithLookup() throws InterruptedException {
 		List<WebElement> timeZoneList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("timezone_utc_dropdown_option"));
@@ -1393,7 +1455,7 @@ public class EditAreaPage extends AbstractPage {
 				pressEnterButtonInDeleteConfirmationModalForArea();
 			}
 		}
-	}	
+	}
 	
 	@Override
 	public String getPageUrl() {

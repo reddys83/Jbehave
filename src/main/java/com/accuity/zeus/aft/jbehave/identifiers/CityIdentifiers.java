@@ -131,6 +131,16 @@ public class CityIdentifiers {
 		hmap.put("city_get_relatedplace_detailsvalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td[3]"));
 		hmap.put("city_get_relatedplace_entirevalue_xpath", By.xpath("//*[@id='cityPlaces']//tbody"));
 		hmap.put("city_All_link_id", By.xpath("//*[@id='all']"));
+	    //city regions
+		hmap.put("city_region_type_identifier_dropdown_options_xpath", By.xpath(("//*[@id='cityRegions']//*[@id='regionType']/option")));
+		hmap.put("city_add_new_region_button_id", By.id("add-regions"));
+		hmap.put("city_region_type_dropdown_xpath", By.xpath(".//*[@id='regionType']"));
+		hmap.put("city_region_value_dropdown_xpath", By.xpath(".//select[@id='regionValue']"));
+		hmap.put("city_region_value_dropdown_option", By.xpath(".//select[@id='regionValue']/option"));
+		hmap.put("city_region_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalRegions']//*[@data-error_id='regionValueError']")));
+		hmap.put("city_delete_region_row_button_xpath", By.xpath(".//*[@data-row_id='regions']//button[@class='delete-row']"));
+		hmap.put("city_region_table", By.xpath("//*[@id='cityRegions']//table"));
+		
 	}
 
 	public static By getObjectIdentifier(String key) {

@@ -1064,8 +1064,121 @@ public class EditCitySteps extends AbstractSteps {
 	public void verifyCityNameValueMaxLength(@Named("maxValue") String maxValue) {
 		getEditCityPage().verifyCityNameValueMaxlength(maxValue);
 	}
+	
+	@Then("the user should see the region type from 'CITY_ALTERNATIVE_REGION' look up")
+	public void verifyCityRegionTypeList() {
+		getEditCityPage().verifyCityRegionTypeList();
+	}
+	
+	@Then("the user should see the region value from <regionValueLookUp>")
+	public void verifyCityRegionValueList(@Named("regionValueLookUp") String regionValueLookUp) {
+		getEditCityPage().verifyCityRegionValueList(regionValueLookUp);
+	}
+	
+	@When("the user clicks on the add new region button in the city region page")
+	public void clickOnAddNewRegionButton() {
+		getEditCityPage().clickOnAddNewRegionButton();
+	}
+	
+	@When("the user enters region type as <newRegionType> in the region city page")
+	public void enterRegionType(@Named("newRegionType") String newRegionType) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+		getEditCityPage().enterRegionType(newRegionType);
+	}
+	
+	@When("the user enters region value as <newRegionValue> in the region city page")
+	public void enterRegionValue(@Named("newRegionValue") String newRegionValue) {
+		getEditCityPage().enterRegionValue(newRegionValue);
+	}
+	
+	@When("the user enters region type as <newRegionType2> in the region city page")
+	public void enterRegionType2(@Named("newRegionType2") String newRegionType) {
+		getEditCityPage().enterRegionType(newRegionType);
+	}
+	
+	@When("the user enters region value as <newRegionValue2> in the region city page")
+	public void enterRegionValue2(@Named("newRegionValue2") String newRegionValue) {
+		getEditCityPage().enterRegionValue(newRegionValue);
+	}
+	
+	@Then("the user should see the region type and value updated in $source document")
+	public void verifyCityRegionValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+									  @Named("source") String source, @Named("newRegionType") String newRegionType, 
+									  @Named("newRegionValue") String newRegionValue) {
+		Map<String, String> cityRegionValueMap = getEditCityPage().getCityRegionValueMapFromDB(country, area, city, source);
+		getEditCityPage().verifyRegionValueInDB(cityRegionValueMap, newRegionType, newRegionValue);
+	}
+	
+	@Then("the user should see the region type 2 and value 2 updated in $source document")
+	public void verifyCityRegion2ValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+									  @Named("source") String source, @Named("newRegionType2") String newRegionType2, 
+									  @Named("newRegionValue2") String newRegionValue2) {
+		Map<String, String> cityRegionValueMap = getEditCityPage().getCityRegionValueMapFromDB(country, area, city, source);
+		getEditCityPage().verifyRegionValueInDB(cityRegionValueMap, newRegionType2, newRegionValue2);
+	}
 
+	@Then("the user should see the city region type and value updated in UI")
+	public void verifyCityRegionTypeAndValue(@Named("newRegionType") String newRegionType, 
+										     @Named("newRegionValue") String newRegionValue) {
+		getEditCityPage().verifyRegionTypeAndValue(newRegionType, newRegionValue);		
+	}
+	
+	@Then("the user should see the city region type and value updated in edit city page")
+	public void verifyCityRegionTypeAndValueInEditMode(@Named("newRegionType") String newRegionType, 
+										     @Named("newRegionValue") String newRegionValue) {
+		getEditCityPage().verifyCityRegionTypeAndValueInEditMode(newRegionType, newRegionValue);		
+	}
+	
+	@Then("the user should see the city region type 2 and value 2 updated in UI")
+	public void verifyCityRegionType2AndValue2(@Named("newRegionType2") String newRegionType, 
+										     @Named("newRegionValue2") String newRegionValue) {
+		getEditCityPage().verifyRegionTypeAndValue(newRegionType, newRegionValue);
+	}
 
+	@Then("the user should see the city region type and value deleted in UI")
+	public void verifyCityRegionTypeDeleted(@Named("newRegionType") String newRegionType,
+			@Named("newRegionValue") String newRegionValue) {
+		getEditCityPage().verifyRegionTypeNotPresentInUI(newRegionType, newRegionValue);
+	}
+	
+	@Then("the user should see city region value same as in $source document")
+	public void verifyCityRegionTypeAndValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+												 @Named("source") String source) {
+		Map<String, String> cityRegionValueMap = getEditCityPage().getCityRegionValueMapFromDB(country, area, city, source);
+		getEditCityPage().verifyRegionValueInTrusted(cityRegionValueMap);
+	}
+	
+	@Then("the user should see the blank region type and blank value is not updated in $source document")
+	public void verifyCityRegionForBlankValue(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+									  @Named("source") String source) {
+		Map<String, String> cityRegionValueMap = getEditCityPage().getCityRegionValueMapFromDB(country, area, city, source);
+		getEditCityPage().verifyCityRegionForBlankValue(cityRegionValueMap);
+	}
+	
+	@Then("the user should see the error message for the required region value field in the city region page")
+	public void verifyErrorMessageForRequiredCityRegionValue() {
+		getEditCityPage().verifyErrorMessageForRequiredCityRegionValue();
+	}	
+	
+	@When("the user clicks on the delete region row button in the region city page")
+	public void clickOnDeleteRegionRowButtonCity() {
+		getEditCityPage().clickOnDeleteRegionRowButtonCity();
+	}
+	
+	@Then("the user should see the region not present in $source document")
+	public void verifyCityRegionDeletedFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+											  @Named("source") String source, @Named("newRegionType") String newRegionType, 
+											  @Named("newRegionValue") String newRegionValue) {
+		Map<String, String> cityRegionValueMap = getEditCityPage().getCityRegionValueMapFromDB(country, area, city, source);
+		getEditCityPage().verifyCityRegionDeletedFromDB(cityRegionValueMap, newRegionType);
+	}
+	
+	@When("the user deletes the existing city regions")
+	public void deleteAllCityRegions() {
+		getEditCityPage().deleteAllCityRegions();
+	}
 }
-
-
