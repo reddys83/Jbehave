@@ -641,28 +641,28 @@ public class EditAreaSteps extends AbstractSteps {
 	}
  
 	@Then("the user verifies the Area page is updated with the new timezone summary")
-	public void verifyAreaSummaryValueInUI(@Named("summary1") String summary1) throws InterruptedException {
+	public void verifyAreaSummary1ValueInUI(@Named("summary1") String summary1) throws InterruptedException {
 		getEditAreaPage().verifyAreaSummaryValueInUI(summary1);
 	}
 
 	@Then("the user verifies the Area page is updated with the timezone summary")
-	public void verifyAreasSummaryValueInUI(@Named("summary") String summary) throws InterruptedException {
+	public void verifyAreaSummaryValueInUI(@Named("summary") String summary) throws InterruptedException {
 		getEditAreaPage().verifyAreaSummaryValueInUI(summary);
 	}
 
 	@Then("the user verifies whether the Area is updated with the newly updated timezone")
-	public void verifyAreasTimeZoneValueInUI(@Named("timeZone1") String timeZone1) throws InterruptedException {
-		getEditAreaPage().verifyAreasTimeZoneValueInUI(timeZone1);
+	public void verifyAreaTimeZoneValueInUI(@Named("timeZone1") String timeZone1) throws InterruptedException {
+		getEditAreaPage().verifyAreaTimeZoneValueInUI(timeZone1);
 	}
 
 	@Then("the user verifies area page is not updated with Null time zone")
-	public void verifyAreasTimeZoneValueNotUpdatedInUI() throws InterruptedException {
-		getEditAreaPage().verifyAreasTimeZoneValueNotUpdatedInUI();
+	public void verifyAreaTimeZoneValueNotUpdatedInUI() throws InterruptedException {
+		getEditAreaPage().verifyAreaTimeZoneValueNotUpdatedInUI();
 	}
 
 	@Then("the user verifies summary max length attribute is $maxLength")
-	public void verifyAreasTimeZoneSummaryMaxLenghtAttribute(@Named("maxLength") String maxLength) {
-		getEditAreaPage().verifyAreasTimeZoneSummaryMaxLenghtAttribute(maxLength);
+	public void verifyAreaTimeZoneSummaryMaxLenghtAttribute(@Named("maxLength") String maxLength) {
+		getEditAreaPage().verifyAreaTimeZoneSummaryMaxLenghtAttribute(maxLength);
 	}
 
 	@Then("the user verifies the summary field is limited to $maxLength unicode characters")
@@ -682,7 +682,7 @@ public class EditAreaSteps extends AbstractSteps {
 		List<String> timeZoneValues = new ArrayList<>();
 		timeZoneValues.add(timeZone);
 		timeZoneValues.add(timeZone1);
-		getEditAreaPage().verifyAreasTimeZoneValuesFromDB(country, area, timeZoneValues, source);
+		getEditAreaPage().verifyAreaTimeZoneValuesFromDB(country, area, timeZoneValues, source);
 	}
 
 	@Then("the user should see the area timezone value as in $source document")
@@ -690,7 +690,7 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("timeZone1") String timeZone1, @Named("source") String source) {
 		List<String> timeZoneValue = new ArrayList<>();
 		timeZoneValue.add(timeZone1);
-		getEditAreaPage().verifyAreasTimeZoneValuesFromDB(country, area, timeZoneValue, source);
+		getEditAreaPage().verifyAreaTimeZoneValuesFromDB(country, area, timeZoneValue, source);
 	}
 
 	@When("the user deletes the existing area timezone rows")
@@ -702,7 +702,7 @@ public class EditAreaSteps extends AbstractSteps {
 	@Alias("the user verifies the deleted timezone does not exist in $source document")
 	public void verifyAreasTimeZoneValueNotUpdatedInZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
-		getEditAreaPage().verifyAreasTimeZoneValueIsNullFromDB(country, area, source);
+		getEditAreaPage().verifyAreaTimeZoneValueIsNullFromDB(country, area, source);
 	}
 
 	@When("the user enters <interestRate> value in area page")
@@ -755,6 +755,5 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user should see maximum length of interest rate value is limited to $maxLength")
 	public void verifyMaxLengthInterestRate(@Named("maxLength") String maxLength) {
 		getEditAreaPage().verifyMaxLengthInterestRate(maxLength);
-
 	}
 }

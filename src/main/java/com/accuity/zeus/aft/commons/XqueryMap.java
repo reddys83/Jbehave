@@ -116,7 +116,6 @@ public class XqueryMap {
         queryMap.put("get area timezones","getCountryTimeZone.xqy");
         queryMap.put("get city region types","getCityRegionTypes.xqy");
 		queryMap.put("get city region values","getCityRegionValues.xqy");
-
    }
 
     public String getXquery(String key){
