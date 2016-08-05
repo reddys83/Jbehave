@@ -663,36 +663,8 @@ public class EditOfficePage extends AbstractPage {
 			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(),
 					options.get(indexOfOption + 1).getAttribute("value").trim());
 		}
-	}
-    
-    public void deleteAllOfficeIdentifierRows() {
-		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_new_identifier_button_id"));
-		List<WebElement> deleteRows = getDriver()
-				.findElements(OfficeIdentifiers.getObjectIdentifier("office_delete_identifiers_row_button_xpath"));
-
-		for (int index = 0; index < deleteRows.size(); index++) {
-			WebElement currentIdentifierRow = getDriver()
-					.findElements(OfficeIdentifiers.getObjectIdentifier("office_delete_identifiers_row_button_xpath"))
-					.get(0);
-			if (currentIdentifierRow != null) {
-				currentIdentifierRow.click();
-				verifyOfficeIdentifierRowDeleteConfirmationModal();
-				pressEnterButtonInDeleteConfirmationModalForOfficeIdentifiers();
-			}
-		}
-	}
-    
-    public void verifyOfficeIdentifierRowDeleteConfirmationModal() {
-		assertEquals("Please confirm - would you like to delete this row? NO YES",
-				getDriver().findElement(
-						OfficeIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_xpath"))
-						.getText());
-	}
-    
-    public void pressEnterButtonInDeleteConfirmationModalForOfficeIdentifiers() {
-		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("delete_confirmation_yes_button_id")).sendKeys(Keys.ENTER);
-	} 
-    
+	}    
+  
     public void enterOfficeIdentifierType(String identifierType, int rowNumber) {
 		try {
 			List<WebElement> identifierDropDowns = getDriver()
@@ -752,18 +724,7 @@ public class EditOfficePage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-    
-    public void verifySuccessfulUpdatedMessage() {
-		try {
-			assertTrue(
-					getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_save_confirmation_message_xpath"))
-							.isDisplayed());
-			Thread.sleep(2000); // to wait for page get refresh with saved data
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	} 
     
     public void verifyOfficeIdentifierParametersInUI(String[] identifierTypes, String[] identifierValues,
 			String[] identifierStatusValues) {

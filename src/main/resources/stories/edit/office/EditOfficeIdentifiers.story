@@ -61,9 +61,6 @@ When the user enters identifier value as <identifierValue2> in the office identi
 When the user enters identifier status as <identifierStatus2> in the office identifier page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Identifiers|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 Then the user verifies that the identifiers parameters are entered in the office identifiers page
@@ -72,6 +69,49 @@ Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|identifierType|identifierValue|identifierStatus|identifierType2|identifierValue2|identifierStatus2|
+|1038|FID|1038|1038-51|Global Intermediary Identification Number|QATesting|Inactive|S and P Identification Number (SPID)|QATesting|Active|
+
+Scenario: User can edit existin office's identifiers- Verify if User can add New Office identifiers-Verify that all fields- "Type","Value" and "Status" are updated successfully
+1 - Verify two identifer rows are added
+2 - Verify previously selected Identifer Type is not listed in identifer type dropdown of next row
+3 - Verify Zeus Office's Identifiers page is updated with entered identifier values
+4 - Verify Zeus DB is updated with entered identifier values
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office identifier link in the navigation bar
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office identifier rows
+When the user clicks on the add new identifier button in the office identifier page
+When the user enters identifier type as <identifierType> in the office identifier page
+When the user enters identifier value as <identifierValue> in the office identifier page
+When the user enters identifier status as <identifierStatus> in the office identifier page
+And the user clicks on the save button
+When the user clicks on the confirm button
+And the user clicks on the office update link
+When the user enters identifier type as <newIdentifierType> in the office identifier page
+When the user enters identifier value as <newIdentifierValue> in the office identifier page
+When the user enters identifier status as <newIdentifierStatus> in the office identifier page
+When the user clicks on the save button
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Identifiers|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+Then the user verifies existing offices identifiers parameters are updated with new office identifiers
+Then the user verifies that office identifier values are updated in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|identifierType|identifierValue|identifierStatus|newIdentifierType|newIdentifierValue|newIdentifierStatus|
 |1038|FID|1038|1038-51|Global Intermediary Identification Number|QATesting|Inactive|S and P Identification Number (SPID)|QATesting|Active|
 
 Scenario: Verifying that office's identifier row in not added after saving when blank values are entered for 'Type', 'Value' and 'Status'
@@ -268,15 +308,12 @@ When the user clicks on the save button
 When the user clicks on the confirm button
 And the user clicks on the office update link
 When the user clicks on the delete identifier row button in the office identifiers page
-Then the user should see delete row confirmation modal in the office identifiers page
-When the user clicks on the No button to cancel the deletion of row in the office identifiers page
+Then the user should see the delete row confirmation modal in the office page
+When the user clicks on the no button in the delete row confirmation modal in the office page
 Then the user should see the newly added identifier row in the office identifiers page
-When the user clicks on the save button
-When the user clicks on the confirm button
-When the user clicks on the office update link
 When the user clicks on the delete identifier row button in the office identifiers page
-Then the user should see delete row confirmation modal in the office identifiers page
-When the user clicks on the Yes button to delete the row in the office identifiers page
+Then the user should see the delete row confirmation modal in the office page
+When the user clicks on the yes button in the delete row confirmation modal in the office page
 Then the user should not see the newly added identifier row in the office identifiers page
 When the user clicks on the save button
 When the user clicks on the confirm button
