@@ -291,6 +291,20 @@ public class EditOfficePage extends AbstractPage {
            return new CountryPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
        }
 
+
+    public void enterOfficeCityInTheTypeAheadBox(String City) {
+        SimpleCacheManager.getInstance().put("selectedCity", City);
+        selectedEntity = City;
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_address_city_type_ahead_xpath")).sendKeys(City);
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_address_city_type_ahead_xpath")).sendKeys(Keys.RETURN);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void clickOnAreaListBox() {
         attemptClick(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_xpath"));
     }
@@ -451,18 +465,18 @@ public class EditOfficePage extends AbstractPage {
 
     }
 
-    public void enterOfficeTelecomsValue1(String valueRowIdentifier, String Value1) {
-        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(valueRowIdentifier)).sendKeys(Value1);
+    public void enterOfficeTelecomsCountryCode(String valueRowIdentifier, String CountryCode) {
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(valueRowIdentifier)).sendKeys(CountryCode);
 
     }
 
-    public void enterOfficeTelecomsValue2(String valueRowIdentifier, String Value2) {
-        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(valueRowIdentifier)).sendKeys(Value2);
+    public void enterOfficeTelecomsAreaCode(String valueRowIdentifier, String AreaCode) {
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(valueRowIdentifier)).sendKeys(AreaCode);
 
     }
 
-    public void enterOfficeTelecomsValue3(String valueRowIdentifier, String Value3) {
-        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(valueRowIdentifier)).sendKeys(Value3);
+    public void enterOfficeTelecomsNumber(String valueRowIdentifier, String Number) {
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(valueRowIdentifier)).sendKeys(Number);
 
     }
 
@@ -513,7 +527,7 @@ public class EditOfficePage extends AbstractPage {
     public void clickonDeleteOfficeTelecomsRowButton(String rowIdentifier) {
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).click();
     }
-
+/*
     public void verifyOfficeAddressTypesFromLookup(String rowIdentifier, String lookupFid) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", lookupFid));
@@ -530,6 +544,28 @@ public class EditOfficePage extends AbstractPage {
         }
     }
 
+*/
+    public void verifyOfficeAddressTypesFromLookup(String officeaddress_rowIdentifier,String lookupFid) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", "lookupFid"));
+        List<String> dropdownValuesList = returnAllDropDownUnselectedValues(OfficeIdentifiers.getObjectIdentifier(officeaddress_rowIdentifier));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office address type from lookup", nvPairs);
+        // finding the list of values from the taxonomy and subtracting the values which are selected in other dropdowns
+        List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "AddressType"), getAlreadySelectedAddressTypes("office_addressType_first_row_existing_address_type_dropdown"));
+        assertEquals(dropdownValuesList, resultList);
+
+    }
+
+    public List<String> getAlreadySelectedAddressTypes(String identifier) {
+        ArrayList<String> selectedValueList = new ArrayList();
+        for (WebElement addressTypeDropDown : getDriver().findElements(OfficeIdentifiers.getObjectIdentifier(identifier))) {
+            Select dropdown = new Select(addressTypeDropDown);
+            String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
+            selectedValueList.add(selectedValue);
+        }
+        return selectedValueList;
+    }
+
     public void verifyOfficeErrorMessage(String xpathIdentifier, String errorMsg) {
         assertEquals(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier(xpathIdentifier)).size(), 1);
         assertEquals(errorMsg, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(xpathIdentifier)).getText());
@@ -537,7 +573,185 @@ public class EditOfficePage extends AbstractPage {
 
 
     public void verifyMaxlengthOfficeAddressText(String maxSize, String rowIdentifier) {
-        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);
+        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);}
+/*
+    public void verifyEditOfficeAddressLinesExistInZeusandinUI(String AddressLine1, String AddressLine2, String AddressLine3, String AddressLine4 ,String officeFid, String source) {
+         assertTrue(checkEditOfficeAddressLinesValuesFromZeus(AddressLine1, AddressLine2, AddressLine3,AddressLine4, officeFid, source));
+            boolean flag=false;
+            List<WebElement> officeNameRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_names_type_mode"));
+            for (int i = 0; i < officeNameRows.size(); i++) {
+
+                if(type.equals(officeNameRows.get(i).findElements(By.tagName("td")).get(0).getText())){
+                    if(value.equals(officeNameRows.get(i).findElements(By.tagName("td")).get(1).getText())) {
+                        flag=true;
+                    }
+                }
+
+            }
+            assertTrue(flag);
+        }
+    }
+
+    public boolean checkEditOfficeAddressLinesValuesFromZeus(String AddressLine1,String AddressLine2, String AddressLine3, String AddressLine4,String officeFid,String source) {
+
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Boolean flag=false;
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
+        String officeName=type+value;
+        if (document != null) {
+
+            List typeList = getNodeValuesByTagName(document, "officeType");
+            List valueList =getNodeValuesByTagName(document, "officeValue");
+
+            for(int i=0;i<typeList.size();i++)
+            {
+                String officeNameFromZeus=typeList.get(i).toString()+valueList.get(i).toString();
+                if(officeNameFromZeus.equals(officeName)) {
+                    flag=true;
+                    break;
+                }
+            }
+
+        }
+        return flag;
+    }
+*/
+
+    public void verifyOfficeAddressLinesAddressesInUI(String Type,String AddressLine1, String AddressLine2, String AddressLine3, String AddressLine4, String Country, String Area, String Subarea, String City, String PostalCode, String PostalCodeSuffix,String PostalCodePosition, String Info) {
+/*
+        List<WebElement> AddressRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_AddressLines_textarea_view"));
+
+        for (int i = 0; i < AddressRows.size(); i++) {
+            assertTrue(AddressRows.get(i).findElements(By.tagName("th")).get(0).getText().contains(AddressLine1));
+            assertTrue(AddressRows.get(i).findElements(By.tagName("th")).get(1).getText().contains(AddressLine2));
+            assertTrue(AddressRows.get(i).findElements(By.tagName("th")).get(2).getText().contains(AddressLine3));
+            assertTrue(AddressRows.get(i).findElements(By.tagName("th")).get(2).getText().contains(AddressLine4));
+        }
+    }
+    */
+            assertEquals(Type, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_Address_type_textarea_view")));
+            assertEquals(AddressLine1, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_AddressLine1_textarea_view")));
+            assertEquals(AddressLine2, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_AddressLine2_textarea_view")));
+            assertEquals(AddressLine3, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_AddressLine3_textarea_view")));
+            assertEquals(AddressLine4, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_AddressLine4_textarea_view")));
+            assertEquals(Country, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_country_dropdown_list_xpath")));
+            assertEquals(Area, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_xpath")));
+            assertEquals(Subarea, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown_xpath")));
+            assertEquals(City, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_city_dropdown_xpath")));
+            assertEquals(PostalCode, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_postalCode")));
+            assertEquals(PostalCodeSuffix, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_postalCodeSuffix")));
+            assertEquals(PostalCodePosition, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_address_postalCodePosition")));
+            assertEquals(Info, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_info")));
+
+
+        }
+
+    public boolean verifyOfficeAddressLinesAddressesFromDB(String Type,String AddressLine1,String AddressLine2, String AddressLine3, String AddressLine4,String PostalCode,String PostalCodeSuffix,String PostalCodePosition,String Info,String Country,String Area,String Subarea, String City,String officeFid,String source) {
+
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Boolean flag=false;
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office locations", nvPairs);
+        String officeAddressLines=Type+AddressLine1+AddressLine2+AddressLine3+AddressLine4+PostalCode+PostalCodeSuffix+PostalCodePosition+Info+Country+Area+Subarea+City;
+        if (document != null) {
+
+            List TypeList = getNodeValuesByTagName(document, "addressType");
+            List AddressLine1List = getNodeValuesByTagName(document, "addressLine1");
+            List AddressLine2List =getNodeValuesByTagName(document, "addressLine2");
+            List AddressLine3List =getNodeValuesByTagName(document, "addressLine3");
+            List AddressLine4List =getNodeValuesByTagName(document, "addressLine4");
+            List PostalCodeList =getNodeValuesByTagName(document, "postalCode");
+            List PostalCodeSuffixList =getNodeValuesByTagName(document, "postalCodeSuffix");
+            List PostalCodePositionList= getNodeValuesByTagName(document, "postalCodePosition");
+            List InfoList =getNodeValuesByTagName(document, "info");
+            List CountryList=getNodeValuesByTagName(document, "country");
+            List AreaList=getNodeValuesByTagName(document, "area");
+            List SubareaList=getNodeValuesByTagName(document, "subarea");
+            List CityList=getNodeValuesByTagName(document, "city");
+
+        for(int i=0;i<TypeList.size();i++)
+            {
+        String officeAddressLinesFromZeus=TypeList.get(i).toString()+AddressLine1List.get(i).toString()+AddressLine2List.get(i).toString()+AddressLine3List.get(i).toString()+AddressLine4List.get(i).toString()+PostalCodeList.get(i).toString()+PostalCodeSuffixList.get(i).toString()+InfoList.get(i).toString()+CountryList.get(i).toString()+AreaList.get(i).toString()+SubareaList.get(i).toString()+CityList.get(i).toString()+PostalCodePositionList.get(i).toString();
+                if(officeAddressLinesFromZeus.equals(officeAddressLines)) {
+                    flag=true;
+                    break;
+            }
+            }
+
+        }
+        return flag;
+
+    }
+
+    public void verifyOfficeTelecommFieldsInUI(String Type,String Rank,String TextBefore,String CountryCode,String AreaCode,String Number,String RangeLimit,String Ext,String TextAfter,String AnswerBack){
+
+        assertEquals(Type, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_telecoms_type_textarea_view")));
+        assertEquals(Rank, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_telecoms_rank_textarea_view")));
+        assertEquals(TextBefore, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_telecoms_textBefore_textarea_view")));
+        assertEquals(CountryCode, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_telecoms_value_textarea_view")));
+        assertEquals(AreaCode, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_telecoms_value_textarea_view")));
+        assertEquals(Number, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_telecoms_value_textarea_view")));
+        assertEquals(RangeLimit, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_telecoms_rangeLimit_textarea_view")));
+        assertEquals(Ext, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_telecoms_ext_textarea_view")));
+        assertEquals(TextAfter, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_telecoms_textAfter_textarea_view")));
+        assertEquals(AnswerBack, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_telecoms_answerback_textarea_view")));
+
+    }
+
+    public boolean verifyOfficeTelecommFieldsFromDB(String Type,String Rank,String TextBefore, String CountryCode, String AreaCode,String Number,String RangeLimit,String Ext,String TextAfter,String AnswerBack,String officeFid,String source) {
+
+
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Boolean flag=false;
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office locations", nvPairs);
+        String officeTelecomFields=Type+Rank+TextBefore+CountryCode+AreaCode+Number+RangeLimit+Ext+TextAfter+AnswerBack;
+
+        if (document != null) {
+
+            List TypeList = getNodeValuesByTagName(document, "telecomType");
+            List RankList = getNodeValuesByTagName(document, "rank");
+            List TextBeforeList =getNodeValuesByTagName(document, "textBefore");
+            List CountryCodeList =getNodeValuesByTagName(document, "countryCode");
+            List AreaCodeList =getNodeValuesByTagName(document, "areaCode");
+            List NumberList =getNodeValuesByTagName(document, "phoneNumber");
+            List RangeLimitList =getNodeValuesByTagName(document, "rangeLimit");
+            List ExtList= getNodeValuesByTagName(document, "extension");
+            List TextAfterList =getNodeValuesByTagName(document, "textAfter");
+            List AnswerBackList=getNodeValuesByTagName(document, "answerBack");
+
+
+            for(int i=0;i<TypeList.size();i++)
+            {
+                String officeTelecomFieldsFromZeus=TypeList.get(i).toString()+RankList.get(i).toString()+TextBeforeList.get(i).toString()+CountryCodeList.get(i).toString()+AreaCodeList.get(i).toString()+NumberList.get(i).toString()+RangeLimitList.get(i).toString()+ExtList.get(i).toString()+TextAfterList.get(i).toString()+AnswerBackList.get(i).toString();
+                if(officeTelecomFieldsFromZeus.equals(officeTelecomFields)) {
+                    flag=true;
+                    break;
+                }
+            }
+
+        }
+        return flag;
+
     }
 
     public void verifyEditOfficeAddressLine1ValueFromZeusDocumentAndUI(String AddressLine1, String selectedEntity, String source) {
@@ -751,6 +965,26 @@ public class EditOfficePage extends AbstractPage {
         }
     }
 
+
+
+    public void verifyNoNewOfficeNameRow(String rowIdentifier) {
+        try {
+            assertFalse(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
+        } catch (NoSuchElementException e) {
+        }
+
+    }
+
+    public void verifySuccessfulUpdatedMessage() {
+        try {
+            assertTrue(
+                    getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_locations_save_confirmation_message_xpath"))
+                            .isDisplayed());
+            Thread.sleep(5000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
         @Override
