@@ -138,7 +138,9 @@ When the user enters identifier value as <identifierValue> in the office identif
 When the user enters identifier status as <identifierStatus> in the office identifier page
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-Then the user should not see the below summary changes in confirmation modal <ConfirmationSummary>
+Then the user should not see the below summary changes in confirmation modal
+|Summary|
+|Identifiers|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 Then the user should not see the newly added identifier row in the office identifiers page
@@ -146,8 +148,8 @@ Then the user verifies that no values are entered in zeus document for office id
 Then the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|identifierType|identifierValue|identifierStatus|ConfirmationSummary|
-|1038|FID|1038|1038-51||||Summary|
+|entity|searchBy|fid|officeFid|identifierType|identifierValue|identifierStatus|
+|1038|FID|1038|1038-51||||
 
 Scenario: User can edit office's identifiers - Verify whether the text entered in the Identifier 'Value' field is not beyond 50 unicode characters.
 
