@@ -1384,11 +1384,6 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 
-	public void verifyDeleteConfirmationModals() {
-		assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(
-						AreaIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_xpath")).getText());
-	}
-
 	public void verifyAreaTimeZoneValuesFromDB(String country, String area, List<String> timeZoneValues, String source) {
 		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();

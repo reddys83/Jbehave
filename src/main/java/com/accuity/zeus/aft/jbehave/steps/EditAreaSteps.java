@@ -553,7 +553,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should see delete row confirmation modal in the area basic page")
 	public void verifyDeleteConfirmationModals() {
-		getEditAreaPage().verifyDeleteConfirmationModals();
+		getEditAreaPage().verifyDeleteConfirmationModal();
 	}
 	
 	@Then("the user should see the timezone values from TIME_ZONE lookup")

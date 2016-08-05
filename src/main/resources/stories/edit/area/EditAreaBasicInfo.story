@@ -1636,12 +1636,12 @@ Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 And the user clicks on the area update link
 When the user clicks on the delete timezone row button in the basic info area page
-Then the user should see delete row confirmation modal in the area basic page
-When the user clicks on the No button to cancel the deletion of row in basic info area page
+Then the user should see the delete row confirmation modal in the area page
+When the user clicks on the no button in the delete row confirmation modal in the area page
 Then the user should see the newly added timezone row in the basic info area page
 When the user clicks on the delete timezone row button in the basic info area page
-Then the user should see delete row confirmation modal in the area basic page
-When the user clicks on the Yes button to delete the row in basic info area page
+Then the user should see the delete row confirmation modal in the area page
+When the user clicks on the yes button in the delete row confirmation modal in the area page
 Then the user should not see the newly added timezone row in the basic info area page
 When the user clicks on the save button
 Then the user should see the save confirmation modal
