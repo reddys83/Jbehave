@@ -138,7 +138,7 @@ When the user enters identifier value as <identifierValue> in the office identif
 When the user enters identifier status as <identifierStatus> in the office identifier page
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-Then the user should not see the <ConfirmationSummary> changes in confirmation modal in the office identifiers page
+Then the user should not see the below summary changes in confirmation modal <ConfirmationSummary>
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 Then the user should not see the newly added identifier row in the office identifiers page

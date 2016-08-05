@@ -434,11 +434,6 @@ public class EditOfficeSteps extends AbstractSteps{
 				identifierStatusValues);
 	}
 
-	@Then("the user should not see the <ConfirmationSummary> changes in confirmation modal in the office identifiers page")
-	public void verifyNoChangeConfirmationMsg(@Named("ConfirmationSummary") String ConfirmationSummary) {
-		getEditOfficePage().verifyNoSummaryConfirmationModal(ConfirmationSummary);
-	}
-
 	@Then("the user should not see the newly added identifier row in the office identifiers page")
 	@Alias("the user should not see the identifier row in the office identifiers page")
 	public void verifyNewlyAddedOfficeIdentifierRowIsNotDisplayed() throws Exception {

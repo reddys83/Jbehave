@@ -736,18 +736,7 @@ public class EditOfficePage extends AbstractPage {
 			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(identifierValues[i]));
 			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(identifierStatusValues[i]));
 		}
-	}
-    
-    public void verifyNoSummaryConfirmationModal(String summaryText) {
-		try {
-			WebElement confirmChanges = getDriver()
-					.findElement(OfficeIdentifiers.getObjectIdentifier("confirmation_modal_xpath"));
-			String confirmationText = confirmChanges.getText();
-			assertTrue(!(confirmationText.contains("Summary")) && !(confirmationText.contains(summaryText)));
-		} catch (Exception e) {
-			assertTrue(false);
-		}
-	}
+	}   
     
     public void verifyNewlyAddedOfficeIdentifierRowIsNotDisplayed() {
 		try {
@@ -801,11 +790,7 @@ public class EditOfficePage extends AbstractPage {
     public void clickOnDeleteNewOfficeIdentifierRowButton() {
 		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_delete_identifiers_row_button_xpath"));
 	}
-    
-    public void pressNoButtonInDeleteConfirmationModalForOfficeIdentifiers() {
-		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_delete_no_button_click_xpath")).click();
-	}
-    
+      
     public void verifyNewlyAddedOfficeIdentifierRowIsDisplayed() {
 		try {
 			WebElement identifier = getDriver()
