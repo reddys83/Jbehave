@@ -631,6 +631,12 @@ Then the user should see the successful update message at top of the area page
 Then the user should be able to verify the values are entered in the area add info field
 Then the user should see the area addinfo value <addInfoText> as in zeus document
 Then the user reverts the changes to the document
+Examples:
+|country|area|addInfoDiffText|addInfoText|
+|USA|Georgia|This is a sample text|This is a different text|
+
+
+
 Scenario: ZEUS-1173- Verify when user is viewing a section other than Basic Info and Basic Info section has some errors, upon saving the Area,
 the user should automatically navigate to All section
 Given a user is on the search page
@@ -649,8 +655,9 @@ Then the user should see the error Enter a year, month/year or day/month/year. f
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
-|country|area|addInfoDiffText|addInfoText|
-|USA|Georgia|This is a sample text|This is a different text|
+|country|area|beganDay1|beganMonth1|beganYear1|
+|Angola|Cabinda|05||2015|
+
 
 Scenario: To view that there is no change in value when the user has entered a value for 'Add Info' that is no different to the current value in Area page
 a)User verifies Area Basic Info changes has not been updated in confirmation modal
@@ -1330,9 +1337,6 @@ Examples:
 |country|area|type|value|value2|
 |Angola|Namibe|Alternative Name|testing|testing|
 
-Examples:
-|country|area|beganDay1|beganMonth1|beganYear1|
-|Angola|Cabinda|05||2015|
 
 Scenario: User can edit  'Interest Rate Limit' that is different from the current value
 a)User verifies existing 'Interest Rate Limit' existing interest rate values are retrieved  from trusted doc 
