@@ -5,6 +5,7 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.commons.collections.ListUtils;
@@ -595,13 +596,25 @@ public class EditOfficePage extends AbstractPage {
 			e.printStackTrace();
 		}
 		assertEquals(officeHistoryValue, getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("office_history_text_xpath_after_save")).getText());
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath_after_save")).getText());
 	}
     
     public void verifyOfficeHistoryZeus(String source,
 			String officeFid) {
 		assertEquals(getOfficeHistoryFromDB(source, officeFid), officeFid);
 	}
+    
+    public void verifySuccessfulUpdatedMessage() {
+		try {
+			assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_save_confirmation_message_id"))
+					.isDisplayed());
+			Thread.sleep(3000);// wait for page to get refreshed with newly saved values
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+    
     @Override
     public String getPageUrl() {
         return null;
