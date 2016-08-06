@@ -320,9 +320,8 @@ public class EditOfficeSteps extends AbstractSteps{
     }
 
     @Then("the user should see the Office History value in area page is same as per $source document")
-	public void verifyOfficeHistoryFromTrustedDB(@Named("country") String country, @Named("area") String area,
-			@Named("source") String source) {
-    	getEditOfficePage().verifyOfficeHistoryFromTrustedDB(country, area, "areaInterestRate", source);
+	public void verifyOfficeHistoryFromTrustedDB(@Named("source") String source, @Named("officeFid") String officeFid) {
+    	getEditOfficePage().verifyOfficeHistoryFromTrustedDB(source,officeFid);
 	}
 	
     @When("the user enters <officeHistoryOld> value in office page")
