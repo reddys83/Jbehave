@@ -1011,3 +1011,88 @@ And the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|officeFid|prefix|suffix|override|
 |1165|FID|1165|1165-14|testprefix|testsuffix|     |
+
+Scenario: User can edit  'Office History' that is different from the current value
+a)User verifies existing 'Office History' existing interest rate values are retrieved  from trusted doc 
+b)User verifies 'Your Changes have been saved' message is displayed after save
+c)User verifies Office History has been updated in confirmation modal
+d)User verifies whether updated 'Office History' is reflecting in Office Web page
+e)User verifies whether updated 'Office History' is reflecting in zeus document
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office update link
+Then the user should see the Office History value in area page is same as per trusted document
+When the user gets the document with get id for offices with the <officeFid> from the database
+When the user enters <officeHistoryOld> value in office page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should see the entered <officeHistoryOld> in Office page
+When the user clicks on the office update link
+When the user enters <officeHistory> value in Office page
+When the user clicks on the save button
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the entered <officeHistory> in Office page
+Then the user should see the entered <officeHistory> in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|officeHistoryOld|officeHistory|
+|1038|FID|1038|1038-51|This is sample old text|this is new text|
+
+Scenario: User can edit  'Office History' that is No different from the current value
+a)User verifies 'Your Changes have been saved' message is displayed after save
+b)User verifies Office History has been not been updated in confirmation modal
+d)User verifies whether updated 'Office History' is reflecting in Office Web page
+e)User verifies whether updated 'Office History' is reflecting in zeus document
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+When the user enters <officeHistoryOld> value in office page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should see the entered <officeHistoryOld> in Office page
+When the user clicks on the office update link
+When the user enters <officeHistory> value in Office page
+When the user clicks on the save button
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the entered <officeHistory> in Office page
+Then the user should see the entered <officeHistory> in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|officeHistoryOld|officeHistory|
+|1038|FID|1038|1038-51|This is sample old text|This is sample old text|
+
+
+
+
+
+
+
+
+

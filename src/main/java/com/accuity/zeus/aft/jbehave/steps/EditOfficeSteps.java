@@ -2,6 +2,10 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+
+import static org.junit.Assert.assertEquals;
+
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -315,5 +319,35 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyOfficeSortNameInZeusDocumentAndInUI(officeFid,sortName);
     }
 
+    @Then("the user should see the Office History value in area page is same as per $source document")
+	public void verifyOfficeHistoryFromTrustedDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source) {
+    	getEditOfficePage().verifyOfficeHistoryFromTrustedDB(country, area, "areaInterestRate", source);
+	}
+	
+    @When("the user enters <officeHistoryOld> value in office page")
+    public void enterOfficeHistoryOld(@Named("officeHistoryOld") String officeHistoryOld) {
+    	getEditOfficePage().enterOfficeHistory(officeHistoryOld);
+	}
+    
+    @Then("the user should see the entered <officeHistoryOld> in Office page")
+    public void verifyOfficeHistoryOld(@Named("officeHistoryOld") String officeHistoryOld) {
+    	getEditOfficePage().verifyOfficeHistory(officeHistoryOld);
+	}
+    
+    @When("the user enters <officeHistory> value in Office page")
+    public void enterOfficeHistory(@Named("officeHistory") String officeHistory) {
+    	getEditOfficePage().enterOfficeHistory(officeHistory);
+	}
+    
+    @Then("the user should see the entered <officeHistory> in Office page")
+    public void verifyOfficeHistory(@Named("officeHistory") String officeHistory) {
+    	getEditOfficePage().verifyOfficeHistory(officeHistory);
+	}
+    
+    @Then("the user should see the entered <officeHistory> in $source document")
+	public void verifyOfficeHistoryZeus(@Named("source") String source, @Named("officeFid") String officeFid) {
+    	getEditOfficePage().verifyOfficeHistoryZeus(source,officeFid);
+	}
 }
 

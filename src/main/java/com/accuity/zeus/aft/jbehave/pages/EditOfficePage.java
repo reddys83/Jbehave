@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.commons.collections.ListUtils;
@@ -559,6 +560,48 @@ public class EditOfficePage extends AbstractPage {
         assertEquals(getOfficeValuesFromDB(selectedEntity, source), bigString);
 
     }
+    
+    public String getOfficeHistoryFromDB(String officeFid,String source) {
+
+		String tagValue = null;
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(7000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get office history", nvPairs);
+		if (document != null) {
+			
+		}
+		return tagValue;
+	}
+
+    public void verifyOfficeHistoryFromTrustedDB(String source,String officeFid) {
+		assertEquals(getOfficeHistoryFromDB(officeFid, source),
+				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath")).getText());
+	}
+    
+    public void enterOfficeHistory(String officeHistoryValue) {
+		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath"), officeHistoryValue);
+	}
+    
+    public void verifyOfficeHistory(String officeHistoryValue) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals(officeHistoryValue, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("office_history_text_xpath_after_save")).getText());
+	}
+    
+    public void verifyOfficeHistoryZeus(String source,
+			String officeFid) {
+		assertEquals(getOfficeHistoryFromDB(source, officeFid), officeFid);
+	}
     @Override
     public String getPageUrl() {
         return null;
