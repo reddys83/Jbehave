@@ -613,8 +613,8 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 
 	@Then("the user should see the newly added timezone row in the basic info area page")
-	public void verifyNewlyAddedAreaTimeZoneRowIsDisplayed() throws Exception {
-		getEditAreaPage().verifyNewlyAddedAreaTimeZoneRowIsDisplayed();
+	public void verifyNewlyAddedAreaTimeZoneRowIsDisplayed(@Named("timeZone1") String timeZone1) throws Exception {
+		getEditAreaPage().verifyNewlyAddedAreaTimeZoneRowIsDisplayed(timeZone1);
 	}
 
 	@Then("the user verifies that the newly added timezone row values exists in the basic info area page")
@@ -634,13 +634,13 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary);
 	}
 	
-	@Then("the user verifies the $source document whether the Area is updated with the newly updated summary")
+	@Then("the user verifies the $source document whether the area is updated with the newly updated summary")
 	public void verifyAreaSummaryValueFromZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source, @Named("summary1") String summary1) {
 		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary1);
 	}
  
-	@Then("the user verifies the Area page is updated with the new timezone summary")
+	@Then("the user verifies the area page is updated with the new timezone summary")
 	public void verifyAreaSummary1ValueInUI(@Named("summary1") String summary1) throws InterruptedException {
 		getEditAreaPage().verifyAreaSummaryValueInUI(summary1);
 	}

@@ -1608,7 +1608,7 @@ And the user should see the below summary changes in confirmation modal
 |Basic Info / Time Zones|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
-Then the user verifies  whether the Area is updated with the newly updated timezone
+Then the user verifies whether the Area is updated with the newly updated timezone
 And the user should see the area timezone value as in zeus document
 When the user clicks on the area update link
 When the user clicks on the delete timezone row button in the basic info area page
@@ -1662,8 +1662,8 @@ Then the user should see the below summary changes in confirmation modal
 |Basic Info / Time Zones|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
-Then the user verifies the Area page is updated with the new timezone summary
-Then the user verifies the zeus document whether the Area is updated with the newly updated summary
+Then the user verifies the area page is updated with the new timezone summary
+Then the user verifies the zeus document whether the area is updated with the newly updated summary
 Then the user reverts the changes to the document
 
 Examples:
@@ -1673,7 +1673,4 @@ Examples:
 |USA|Alabama|test|834567834652684561534168423156484231654568345678346526845615341684231564842316545634834567834654545|
 |USA|Alabama|,.;:|@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^|
 |USA|Alabama|test||
-
-
-
 

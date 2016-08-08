@@ -1304,8 +1304,17 @@ public class EditAreaPage extends AbstractPage {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_timezone_row_button_xpath"));
 	}
 
-	public void verifyNewlyAddedAreaTimeZoneRowIsDisplayed() {
+	public void verifyNewlyAddedAreaTimeZoneRowIsDisplayed(String timeZone) {
 		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_timezone_dropdown_xpath")).isDisplayed());
+		if(getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_timezone_dropdown_xpath")).size() > 0)
+		{		
+		assertEquals(timeZone,
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("timezone_utc_current_value_xpath")).getText());
+		}
+		else
+		{
+			assertTrue("Timezone rows are not available", false);
+		}
 	}
 
 	public void verifyNewlyAddedAreaTimeZoneRowExists() {
