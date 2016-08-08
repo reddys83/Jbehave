@@ -8,6 +8,8 @@ So that I can achieve a business goal
 JIRA ID - ZEUS-1075 - User can select to edit Office's Locations
 and
 JIRA ID - ZEUS-1299 - User can edit Office's Locations(Addresses)
+and
+JIRA ID - ZEUS-1300 - User can edit Office's Locations(Telecoms)
 
 Scenario: Verify that the add button is disabled for the first row of office location when there is a location
 
@@ -480,6 +482,9 @@ And the user verifies the office <AddressLine4> maxlength is 70 for the office_a
 And the user verifies the office <PostalCode> maxlength is 70 for the office_address_first_row_new_postalCode
 And the user verifies the office <PostalCodeSuffix> maxlength is 20 for the office_address_first_row_new_postalCodeSuffix
 And the user verifies the office <Info> maxlength is 50 for the office_address_first_row_new_info
+
+
+
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user reverts the changes to the document
@@ -554,8 +559,30 @@ Examples:
 |entity|searchBy|fid|officeFid|Type|Country|
 |1010|FID|1010|1010-44|Mailing|USA||
 
+Scenario:  Verify Office Telecoms Type dropdown values are from lookup TELECOM_TYPE
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on add new office telecoms button in the office locations
+Then the user should see the office_telecoms_first_row_new_telecoms_type_dropdown values in office telecoms's section from lookup TELECOM_TYPE
+
+Examples:
+|entity|searchBy|fid|officeFid|
+|1010|FID|1010|1010-44|
+
 Scenario: a)Verify that the user should be able to Add new telecoms row for an office location
-          b)Verify User can select a new value for Type,Rank,TextBefore,Value,RangeLimit,Ext,TextAfter,AnswerBack
+          b)Verify user can select a new value for Telecom Type as telephone and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,RangeLimit,Ext,TextAfter,AnswerBack
+          c)Verify user can select a new value for Telecom Type as fax and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,RangeLimit,Ext,TextAfter,AnswerBack
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -591,9 +618,248 @@ And the user verifies that the office telecom fields are entered in the office l
 And the user should see the office telecomm fields as in zeus document
 And the user reverts the changes to the document
 
+
 Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|TextBefore|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|
 |1010|FID|1010|1010-45|telephone|1|5 pm|708|298|3125|20|123|9 am|1 hr|
+|1010|FID|1010|1010-45|fax|1|5 pm|708|298|3142|20|123|9 am|1 hr|
+
+
+
+Scenario: a)Verify user can select a new value for Telecom Type as email and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value
+          b)Verify user can select a new value for Telecom Type as website and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value
+
+iven a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on add new office telecoms button in the office locations
+And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
+And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
+And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
+And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Office Locations|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+And the user verifies that the office telecom fields are entered in the office locations page
+And the user should see the office telecomm fields as in zeus document
+And the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|
+|1010|FID|1010|1010-45|email|1|5 pm|abc||||||||
+|1010|FID|1010|1010-45|website|4|5 pm|xyz||||||||
+
+
+
+Scenario: a)Verify user can select a new value for Telecom Type as telex and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
+          b)Verify user can select a new value for Telecom Type as reuters and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
+          c)Verify user can select a new value for Telecom Type as cable and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on add new office telecoms button in the office locations
+And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
+And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
+And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
+And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
+And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
+And the user enters office telecoms answer back office_telecoms_first_row_new_answerBack value as <AnswerBack>
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Office Locations|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+And the user verifies that the office telecom fields are entered in the office locations page
+And the user should see the office telecomm fields as in zeus document
+And the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|
+|1010|FID|1010|1010-45|telex|1|5 pm|abc||||||9 am|1 hr|
+|1010|FID|1010|1010-45|reuters|1|5 pm|afv||||||9 am|1 hr|
+|1010|FID|1010|1010-45|cable|1|5 pm|hsn||||||9 am|1 hr|
+
+
+
+Scenario: a) Verify that the error message Enter upto valid characters is displayed when the Telecom Rank,Country Code, Number is left blank
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on add new office telecoms button in the office locations
+And the user selects office address type office_addressType_first_row_new_address_type_dropdown value as <Type>
+When the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
+And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
+And the user enters office telecoms value office_telecoms_first_row_new_CountryCode value as <CountryCode>
+And the user enters office telecoms value office_telecoms_first_row_new_AreaCode value as <AreaCode>
+And the user enters office telecoms value office_telecoms_first_row_new_Number value as <Number>
+And the user enters office telecoms range limit office_telecoms_first_row_new_rangeLimit value as <RangeLimit>
+And the user enters office telecoms ext office_telecoms_first_row_new_ext value as <Ext>
+And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
+And the user enters office telecoms answer back office_telecoms_first_row_new_answerBack value as <AnswerBack>
+And the user clicks on the save button
+And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
+Then the user should see the error message Enter up to valid characters. for the office telecom Rank,Country Code, Number field
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|
+|1010|FID|1010|1010-44|telephone|||||||||||
+
+Scenario: a) Verify that the error message Enter upto 100 valid characters is displayed when the value field is left blank when telecom type is email
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+When the user clicks on the office update link
+And the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on add new office telecoms button in the office locations
+And the user selects office address type office_addressType_first_row_new_address_type_dropdown value as <Type>
+And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
+And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
+And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
+And the user clicks on the save button
+Then the user should see the error message Enter up to valid 100 characters. for the office value field
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|
+|1010|FID|1010|1010-44|email|2|||
+
+
+Scenario: Verify office Telecom Rank,Text Before,Value, Country Code, Area Code, Number,Range Limit, Ext, Text After, AnswerBack fields max length
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on add new office telecoms button in the office locations
+Then the user verifies the office <Rank> maxlength is 4 for the office_telecoms_first_row_new_rank in the telecom section
+And the user verifies the office <TextBefore> maxlength is 50 for the office_telecoms_first_row_new_textBefore
+And the user verifies the office <Value> maxlength is 100 for the office_telecoms_first_row_new_value
+And the user verifies the office <CountryCode> maxlength is 5 for the office_telecoms_first_row_new_CountryCode
+And the user verifies the office <AreaCode> maxlength is 70 for the office_telecoms_first_row_new_AreaCode
+And the user verifies the office <Number> maxlength is 20 for the office_telecoms_first_row_new_Number
+And the user verifies the office <RangeLimit> maxlength is 20 for the office_telecoms_first_row_new_rangeLimit
+And the user verifies the office <Ext> maxlength is 10 for the office_telecoms_first_row_new_ext
+And the user verifies the office <TextAfter> maxlength is 50 for the office_telecoms_first_row_new_textAfter
+And the user verifies the office <AnswerBack> maxlength is 20 for the office_telecoms_first_row_new_answerBack
+And the user verifies the office <Value> maxlength is 100 for the office_telecoms_first_row_new_value
+
+Examples:
+|entity|searchBy|fid|officeFid|Type|
+|1010|FID|1010|1010-44|telephone|
+
+
+
+Scenario: a)Verify Office telecoms country code, Area code, Number,Rangelimit, allows only number and spaces and verify an error message Invalid characters: "Numbers and spaces allowed only" is displayed
+          b) Verify Office ext field allows only numbers,hypens and spaces
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on add new office telecoms button in the office locations
+And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
+And the user enters office telecoms value office_telecoms_first_row_new_CountryCode value as <CountryCode>
+And the user enters office telecoms value office_telecoms_first_row_new_AreaCode value as <AreaCode>
+And the user enters office telecoms value office_telecoms_first_row_new_Number value as <Number>
+And the user enters office telecoms ext office_telecoms_first_row_new_ext value as <Ext>
+And the user clicks on the save button
+Then the user should see the error message Invalid characters: "Numbers and spaces allowed only". for the office telecom type field
+When the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
+Then the user should see the error message Invalid characters: "Numbers and spaces allowed only". for the office telecom type field
+
+Examples:
+|entity|searchBy|fid|officeFid|Type|value|CountryCode|AreaCode|Number|Ext|
+|1010|FID|1010|1010-44|telephone|hnv 1|qwrgw88ji|gwqeywjij002349=|638-283wesr|
+|1010|FID|1010|1010-44|email|1yqwg2kjg|
+
+
+
+Scenario: a) Verify that the error message required is displayed when the the Address Type dropdown is left blank
+          b) Verify that the error message required is not displayed when the Address Line1,Address Line2, Address Line3, Address Line 4, Postal Code, Postal Code Suffix, Info are left blank
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on add new office address button in the office locations
+And the user selects office address type office_addressType_first_row_new_address_type_dropdown value as <Type>
+And the user enters office address address line 1 office_address_first_row_new_addressLine1 value as <AddressLine1>
+And the user enters office address address line 2 office_address_first_row_new_addressLine2 value as <AddressLine2>
+And the user enters office address address line 3 office_address_first_row_new_addressLine3 value as <AddressLine3>
+And the user enters office address address line 4 office_address_first_row_new_addressLine4 value as <AddressLine4>
+And the user enters office address postal code office_address_first_row_new_postalCode value as <PostalCode>
+And the user enters office address postal code suffix office_address_first_row_new_postalCodeSuffix value as <PostalCodeSuffix>
+And the user enters office address info office_address_first_row_new_Info value as <Info>
+And the user clicks on the save button
+Then the user should see the error message Required. for the office address type field
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|entity|searchBy|fid|officeFid|Type|AddressLine1|AddressLine2|AddressLine3|AddressLine4|PostalCode|PostalCodeSuffix|Info|
+|1010|FID|1010|1010-44|||||||||
 
 Scenario: Verify that the user should be able to delete a new office telecoms row
 
@@ -612,7 +878,15 @@ And the user gets the document with get id for offices with the <officeFid> from
 And the user clicks on add new office telecoms button in the office locations
 And the user clicks on delete office telecoms row button for the row office_first_row_telecoms_delete_button
 And the user clicks on the yes button in the delete row confirmation modal in the office page
-Then the user should not see the office telecoms row in the locations office page
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Office Locations|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+And the user should not see the office telecoms row in the locations office page
+
 
 Examples:
 |entity|searchBy|fid|officeFid|

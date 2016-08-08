@@ -342,6 +342,12 @@ public class EditOfficeSteps extends AbstractSteps{
     {
         getEditOfficePage().enterOfficeTelecomsAnswerBack(answerBackRowIdentifier,AnswerBack);
     }
+
+    @When("the user enters office telecoms value $valueRowIdentifier value as <Value>")
+     public void enterOfficeTelecomsValue(@Named("valueRowIdentifier") String valueRowIdentifier,@Named("Value") String Value)
+    {
+        getEditOfficePage().enterOfficeTelecomsValue(valueRowIdentifier,Value);
+    }
     @Then("the user should not see the office telecoms row in the locations office page")
     public void verifyOfficeTelecomsRowIsNotDisplayed() throws Exception {
         getEditOfficePage().verifyOfficeTelecomsRowIsNotDisplayed();
@@ -377,6 +383,11 @@ public class EditOfficeSteps extends AbstractSteps{
     public void verifyOfficeAddressTypeErrorMessage(@Named("errorMsg") String errorMsg) {
         getEditOfficePage().verifyOfficeErrorMessage("office_address_type_error_msg_xpath", errorMsg);
 
+    }
+
+    @Then("the user should see the $officetelecom_rowIdentifier values in office telecoms's section from lookup $lookup")
+    public void verifyOfficeTelecomTypesFromLookup(@Named("$officetelecom_rowIdentifier") String officetelecom_rowIdentifier,@Named("lookupFid") String lookupFid) {
+        getEditOfficePage().verifyOfficeTelecomTypesFromLookup(officetelecom_rowIdentifier, lookupFid);
     }
 /*
     @Then("the user verifies the office address line 1 maxlength is $maxSize for the $rowIdentifier")
@@ -429,10 +440,10 @@ public class EditOfficeSteps extends AbstractSteps{
                                                       @Named("TextBefore") String TextBefore,
                                                       @Named("CountryCode") String CountryCode,@Named("AreaCode") String AreaCode,
                                                       @Named("Number") String Number,@Named("RangeLimit") String RangeLimit,
-                                                      @Named("Ext") String Ext,@Named("TextAfter") String TextAfter,@Named("AnswerBack") String AnswerBack)
+                                                      @Named("Ext") String Ext,@Named("TextAfter") String TextAfter,@Named("AnswerBack") String AnswerBack,@Named("Value" ) String Value)
                                                       {
 
-        getEditOfficePage().verifyOfficeTelecommFieldsInUI(Type, Rank, TextBefore, CountryCode,AreaCode,Number,RangeLimit,Ext,TextAfter,AnswerBack);
+        getEditOfficePage().verifyOfficeTelecommFieldsInUI(Type, Rank, TextBefore, CountryCode,AreaCode,Number,RangeLimit,Ext,TextAfter,AnswerBack,Value);
     }
 
 
@@ -443,9 +454,10 @@ public class EditOfficeSteps extends AbstractSteps{
                                                         @Named("AreaCode") String AreaCode,@Named("Number") String Number,
                                                         @Named("RangeLimit") String RangeLimit,@Named("Ext") String Ext,
                                                         @Named("TextAfter") String TextAfter,@Named("AnswerBack") String AnswerBack,
+                                                        @Named("Value" ) String Value,
                                                         @Named("officeFid") String officeFid,@Named("source") String source) {
 
-        getEditOfficePage().verifyOfficeTelecommFieldsFromDB(Type, Rank, TextBefore, CountryCode,AreaCode,Number,RangeLimit,Ext,TextAfter,AnswerBack,officeFid,source);
+        getEditOfficePage().verifyOfficeTelecommFieldsFromDB(Type, Rank, TextBefore, CountryCode,AreaCode,Number,RangeLimit,Ext,TextAfter,AnswerBack,Value,officeFid,source);
 
     }
 
@@ -522,6 +534,21 @@ public class EditOfficeSteps extends AbstractSteps{
     @Then("the user should see the error message $errorMsg for the office city field")
     public void verifyOfficeCityErrorMessage(@Named("errorMsg") String errorMsg) {
         getEditOfficePage().verifyOfficeErrorMessage("office_address_country_error_msg_xpath", errorMsg);
+
+    }
+
+    @Then("the user verifies the office $officeTelecomField  maxlength is $maxSize for the $rowIdentifier in the telecom section")
+    public void verifyMaxlengthOfficeTelecomsText(@Named("officeTelecomField") String officeTelecomField,@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);}
+
+
+    @Then("the user should see the error message $errorMsg for the office telecom type field")
+    public void verifyOfficeTelecomTypeErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditOfficePage().verifyOfficeErrorMessage("xpathIdentifier", errorMsg);
+
+    }
+    @Then("the user should see the error message $errorMsg for the office value field")
+    public void verifyOfficeTelecomValueErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditOfficePage().verifyOfficeErrorMessage("xpathIdentifier", errorMsg);
 
     }
 }
