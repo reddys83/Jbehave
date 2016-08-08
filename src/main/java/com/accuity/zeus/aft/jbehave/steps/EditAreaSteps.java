@@ -634,12 +634,6 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary);
 	}
 	
-	@Then("the user verifies the area time zone summary is updated with the maximum characters in $source document")
-	public void verifySummaryMaxCharacterValueFromZeusDB(@Named("country") String country, @Named("area") String area,
-			@Named("source") String source, @Named("summary") String summary) {
-		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary.substring(0, 100));
-	}
-
 	@Then("the user verifies the $source document whether the Area is updated with the newly updated summary")
 	public void verifyAreaSummaryValueFromZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source, @Named("summary1") String summary1) {
@@ -655,11 +649,6 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyAreaSummaryValueInUI(@Named("summary") String summary) throws InterruptedException {
 		getEditAreaPage().verifyAreaSummaryValueInUI(summary);
 	}
-	
-	@Then("the user verifies the area time zone summary is updated with the maximum characters")
-	public void verifySummaryMaxCharacterValueInUI(@Named("summary") String summary) throws InterruptedException {
-		getEditAreaPage().verifyAreaSummaryValueInUI(summary.substring(0, 100));
-	}
 
 	@Then("the user verifies whether the Area is updated with the newly updated timezone")
 	public void verifyAreaTimeZoneValueInUI(@Named("timeZone1") String timeZone1) throws InterruptedException {
@@ -674,11 +663,6 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user verifies summary max length attribute is $maxLength")
 	public void verifyAreaTimeZoneSummaryMaxLenghtAttribute(@Named("maxLength") String maxLength) {
 		getEditAreaPage().verifyAreaTimeZoneSummaryMaxLenghtAttribute(maxLength);
-	}
-
-	@Then("the user verifies the summary field is limited to $maxLength unicode characters")
-	public void verifySummaryFieldLimit(@Named("maxLength") int maxLength) throws InterruptedException {		
-		getEditAreaPage().verifySummaryFieldLimit(maxLength);
 	}
 
 	@Then("the user verifies that the area timezone values are updated in the basic info area page")
@@ -709,7 +693,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().deleteAllAreaTimeZoneRows();
 	}
 
-	@Then("the user verifies the area is updated with timezone as null in $source document")
+	@Then("the user verifies timezone is not updated in $source document")
 	@Alias("the user verifies the deleted timezone does not exist in $source document")
 	public void verifyAreasTimeZoneValueNotUpdatedInZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {

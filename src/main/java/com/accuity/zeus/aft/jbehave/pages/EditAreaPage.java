@@ -1355,11 +1355,6 @@ public class EditAreaPage extends AbstractPage {
 				.getAttribute("maxlength")), maxLength);
 	}
 
-	public void verifySummaryFieldLimit(int maxLength) throws InterruptedException {
-		assertEquals(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("summary_current_value_view_mode_xpath"))
-				.getText().length(), maxLength);
-	}
-
 	public void selectsTimeZoneDropDownValue(String timeZoneType, int rowNumber) {
 		try {
 			List<WebElement> timeZoneDropDowns = getDriver()
@@ -1419,10 +1414,7 @@ public class EditAreaPage extends AbstractPage {
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get area basic info", nvPairs);
 			if (document != null) {
-				for (int index = 0; index < document.getElementsByTagName("timeZoneUtc").item(0).getChildNodes().getLength(); index++) {
-						assertNull((document.getElementsByTagName("timeZoneUtc")
-								.item(index).getChildNodes().item(0).getChildNodes().item(0).getTextContent()));
-				}
+				assertNull((document.getElementsByTagName("timeZoneUtc").item(0).getChildNodes().item(0)));
 			} else {
 				assertTrue(source + "document is null", false);
 			}
