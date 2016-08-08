@@ -47,6 +47,14 @@ return
   <identifierValue>{$areaIdentifierValue} </identifierValue>
   <identifierStatus>{$areaIdentifierStatus} </identifierStatus>
   </identifier>
+  
+(: Get summary and utc value :) 
+let $utcList := for $x in ($areaDoc/summary/timeZones/zone)
+let $utc := $x/text()
+return 
+ <utcValue>{$utc}</utcValue>
+ 
+let $summary := ($areaDoc/summary/timeZones/summaries/summary/text())
  
 return
   <area>
@@ -55,4 +63,6 @@ return
       <AdditionalInfo>{$areaadditionalinfo}</AdditionalInfo>
       <identifiers>{$areaIdentifierList}</identifiers> 
 	  <areaInterestRate>{$areaInterestRate}</areaInterestRate>
+	  <summary>{$summary}</summary>     
+      <timeZoneUtc>{$utcList}</timeZoneUtc>
   </area>

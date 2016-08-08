@@ -14,6 +14,7 @@ JIRA ID - ZEUS-1040 - User can edit Area's Identifiers
 JIRA ID - ZEUS-1039 - User can edit Area's Names
 JIRA ID - ZEUS-1173 - Error handling when error is in section not currently displayed
 JIRA ID - ZEUS-1033 - User can edit Area's Interest Rate Limit
+JIRA ID - ZEUS-1041 - User can edit Area's Timezone
 
 Scenario: User can edit area Began Date -
 a)Verify if user can see all the months in month dropdown (Began Date) are in MMM format
@@ -1489,3 +1490,191 @@ Examples:
 |country|area|interestRate|
 |Angola|Cabinda|qwertyfhfyndsak|
 |Angola|Cabinda|!@#$%^&*()_+}{|":>?<?.,|
+
+
+Scenario: User views the Area basic page, selects the update button and clicks on add new timezone button
+1- User verifies whether the current value in timezone is defaulted from trusted
+2- User verifies whether default value for timezone is blank
+3- User verifies the timezone values from timezone lookup
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user deletes the existing area timezone rows
+Then the user clicks on add new timezone button
+Then the user should see the timezone values same as in trusted document
+Then the user should see the timezone values from TIME_ZONE lookup
+
+Examples:
+|country|area|
+|USA|Alabama|
+
+Scenario: User is updating a Areas's Basic Info and has set values for 
+each of 'Country', 'Area', clicks the add new timezone button and saves with empty timezone
+1- User verifies area is not updated with newly added timezone 'timezone' as empty
+2- User verifies Zeus DB whether the area is not updated with newly added timezone 'timezone' as empty 
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area timezone rows
+Then the user clicks on add new timezone button
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user verifies area page is not updated with Null time zone
+Then the user verifies timezone is not updated in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|
+|USA|Alabama|
+
+Scenario: User is updating a Areas's Basic Info and has set values for 
+each of 'Country', 'Area', clicks the add new timezone button, selects 'timezone' value
+1- User verifies whether the time zone list displays all time zone's except those that have been already selected for this area
+2- User verifies area is updated with newly added timezone 
+3- User verifies Zeus DB whether the area is updated with newly added timezone
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area timezone rows
+Then the user clicks on add new timezone button
+Then user selects the timezone <timeZone> in the timezone dropdown of area basic page
+Then the user clicks on add new timezone button
+Then user verifies whether default value for timezone is blank
+Then user verifies whether timezone dropdown displays time zone's except selected timezone <timeZone>
+Then user selects the timezone <timeZone1> in the timezone dropdown of area basic page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user verifies that the area timezone values are updated in the basic info area page
+And the user should see the area timezone values as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|timeZone|timeZone1|
+|USA|Alabama|+10:00|+12:00|
+
+Scenario: User is updating a Areas's Basic Info and has set values for each of 'Country', 'Area', clicks the add new timezone button, updates the existing 'timezone' value
+1- User verifies existing timezone can be updated with new 'timezone'
+2- User verifies Zeus DB whether the area is updated with newly updated timezone.
+3- User verifies confirmation dialog modal has summary change text as 'Basic Info / Time Zones'
+4- Verify if User can prevent deleting timezone by clicking on 'No'.
+5- Verify if User can delete timezone by clicking on 'Yes', then after saving it should be removed.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area timezone rows
+Then the user clicks on add new timezone button
+Then user selects the timezone <timeZone> in the timezone dropdown of area basic page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+When the user clicks on the area update link
+Then user changes the <timeZone1> in the timezone dropdown of area basic page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Time Zones|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user verifies whether the Area is updated with the newly updated timezone
+And the user should see the area timezone value as in zeus document
+When the user clicks on the area update link
+When the user clicks on the delete timezone row button in the basic info area page
+Then the user should see the delete row confirmation modal in the area page
+When the user clicks on the no button in the delete row confirmation modal in the area page
+Then the user should see the newly added timezone row in the basic info area page
+When the user clicks on the delete timezone row button in the basic info area page
+Then the user should see the delete row confirmation modal in the area page
+When the user clicks on the yes button in the delete row confirmation modal in the area page
+Then the user should not see the newly added timezone row in the basic info area page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should not see the newly added timezone row in the basic info area page
+Then the user verifies the deleted timezone does not exist in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|timeZone|timeZone1|
+|USA|Alabama|+10:00|+11:00|
+
+Scenario: User is updating a Areas's Basic Info and has set values for each of 'Country', 'Area', user updates the existing timezone summary with new summary value
+1- User verifies existing timezone 'summary' value is updated with 'summary1'
+2- User verifies Zeus DB whether the area is updated with newly updated timezone 'summary1' value
+3- User verifies area is updated with newly added timezone summary
+4- User verifies Zeus DB whether the area is updated with timezone summary as 'NULL'
+5- User verifies summary max length attribute is 100
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+Then the user enters the summary as <summary>
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+When the user clicks on the area update link
+Then the user enters the summary as <summary1>
+Then the user verifies summary max length attribute is 100
+When the user clicks on the save button
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info / Time Zones|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user verifies the area page is updated with the new timezone summary
+Then the user verifies the zeus document whether the area is updated with the newly updated summary
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|summary|summary1|
+|USA|Alabama||Coordinated Universal Time|
+|USA|Alabama|Coordinated Universal Time is the primary time standard by which the world regulates clocks and tim|1234|
+|USA|Alabama|test|834567834652684561534168423156484231654568345678346526845615341684231564842316545634834567834654545|
+|USA|Alabama|,.;:|@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^&&^&*%@#$%$%^%^|
+|USA|Alabama|test||
+
