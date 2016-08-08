@@ -1492,7 +1492,7 @@ Examples:
 |Angola|Cabinda|!@#$%^&*()_+}{|":>?<?.,|
 
 Scenario: User is updating  Area's Basic Info  page and  entered  value for 'Use in Address' that is different from the current value
-a)User verifies existing 'Use in Address' existing interest rate values are retrieved  from trusted doc 
+a)User verifies existing 'Use in Address' values are retrieved  from trusted doc 
 b)User verifies 'Your Changes have been saved' message is displayed after save
 c)User verifies Area Basic Info has been updated in confirmation modal
 d)User verifies whether updated 'Use in Address' is reflecting in Area Web page
@@ -1554,12 +1554,13 @@ Then the user should see the successful update message at top of the area page
 When the user clicks on the area update link
 When the user clicks on True option for Area Use in Address
 When the user clicks on the save button
-Then the user should not see the <ConfirmationSummary> changes in confirmation modal for area
+Then the user should not see the below summary changes in confirmation modal Basic Info
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should see the updated <useInAddress> in area web page
+Then the user should see updated Use in address value in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|useInAddress|ConfirmationSummary|
-|Angola|Cabinda|True|Basic Info|
+|country|area|useInAddress|
+|Angola|Cabinda|True|
