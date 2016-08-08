@@ -13,6 +13,7 @@ JIRA ID - ZEUS-1034 - User can edit Area's Add Info
 JIRA ID - ZEUS-1040 - User can edit Area's Identifiers
 JIRA ID - ZEUS-1039 - User can edit Area's Names
 JIRA ID - ZEUS-1173 - Error handling when error is in section not currently displayed
+JIRA ID - ZEUS-1033 - User can edit Area's Interest Rate Limit
 JIRA ID - ZEUS-1032 - User can edit Area's Use In Address Flag
 
 Scenario: User can edit area Began Date -
@@ -631,6 +632,12 @@ Then the user should see the successful update message at top of the area page
 Then the user should be able to verify the values are entered in the area add info field
 Then the user should see the area addinfo value <addInfoText> as in zeus document
 Then the user reverts the changes to the document
+Examples:
+|country|area|addInfoDiffText|addInfoText|
+|USA|Georgia|This is a sample text|This is a different text|
+
+
+
 Scenario: ZEUS-1173- Verify when user is viewing a section other than Basic Info and Basic Info section has some errors, upon saving the Area,
 the user should automatically navigate to All section
 Given a user is on the search page
@@ -649,8 +656,9 @@ Then the user should see the error Enter a year, month/year or day/month/year. f
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
-|country|area|addInfoDiffText|addInfoText|
-|USA|Georgia|This is a sample text|This is a different text|
+|country|area|beganDay1|beganMonth1|beganYear1|
+|Angola|Cabinda|05||2015|
+
 
 Scenario: To view that there is no change in value when the user has entered a value for 'Add Info' that is no different to the current value in Area page
 a)User verifies Area Basic Info changes has not been updated in confirmation modal
@@ -1330,9 +1338,158 @@ Examples:
 |country|area|type|value|value2|
 |Angola|Namibe|Alternative Name|testing|testing|
 
+
+Scenario: User can edit  'Interest Rate Limit' that is different from the current value
+a)User verifies existing 'Interest Rate Limit' existing interest rate values are retrieved  from trusted doc 
+b)User verifies 'Your Changes have been saved' message is displayed after save
+c)User verifies Area Basic Info has been updated in confirmation modal
+d)User verifies whether updated 'Interest Rate Limit is reflecting in Area Web page
+e)User verifies whether updated 'Interest rate limit' is reflecting in zeus document
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+Then the user should see the Interest Rate value in area page is same as per trusted document
+When the user gets the document with get document id for area with the <area> from the database
+When the user enters <interestRateOld> value in area page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should see the entered <interestRateOld> in area page
+When the user clicks on the area update link
+When the user enters <interestRate> value in area page
+When the user clicks on the save button
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the entered <interestRate> in area page
+Then the user should see the entered <interestRate> in zeus document
+Then the user reverts the changes to the document
+
 Examples:
-|country|area|beganDay1|beganMonth1|beganYear1|
-|Angola|Cabinda|05||2015|
+|country|area|interestRateOld|interestRate|
+|Angola|Cabinda|10%|15%|
+
+Scenario: User can edit  'Interest Rate Limit' that is no different from the current value
+a)User verifies 'Your Changes have been saved' message is displayed after save
+b)User verifies Area Interest Rate changes has not been updated in confirmation modal
+c)User verifies whether updated 'Interest Rate Limit' is reflecting in Area Web page
+d)User verifies whether updated 'Interest rate limit' is reflecting in zeus document
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user enters <interestRateOld> value in area page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should see the entered <interestRateOld> in area page
+When the user clicks on the area update link
+When the user enters <interestRate> value in area page
+When the user clicks on the save button
+Then the user should not see the <ConfirmationSummary> changes in confirmation modal for area
+When the user clicks on the confirm button
+Then the user should see the entered <interestRate> in area page
+Then the user should see the entered <interestRate> in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|interestRateOld|interestRate|ConfirmationSummary|
+|Angola|Cabinda|10%|10%|Basic Info|
+
+Scenario: User can save  'Interest Rate Limit' successfully when blank value is entered (Blank/Null)
+a)User verifies 'Your Changes have been saved' message is displayed after save
+b)User verifies whether blank 'Interest Rate Limit value is reflecting in Area Web page
+c)User verifies whether blank 'Interest rate limit' is reflecting in zeus document
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user enters <interestRate> value in area page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should see the entered <interestRate> in area page
+Then the user should see the entered <interestRate> in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|interestRate|
+|Angola|Cabinda||
+
+Scenario: User verifies that Interest Rate  field is limited to 256 unicode characters in Area basic info Page
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the <area> in the type-ahead box
+And the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user enters values which is beyond 256 unicode characters in the area Interest Rate field
+Then the user should see maximum length of interest rate value is limited to 256
+When the user clicks on the save button
+And the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should be able to view that only 256 unicode characters are saved in area Interest Rate field
+Then the user should be able to verify the maximum values are entered in the area Interest Rate field
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|
+|Angola|Cabinda|
+
+Scenario: User is updating an Area's Basic Info and has entered characters & Symbols as a  value for 'Interest Rate Limit' 
+a)User verifies 'Your Changes have been saved' message is displayed after save
+b)User verifies whether characters & symbols are saved as 'Interest Rate Limit value & is reflecting in Area Web page
+c)User verifies whether updated 'Interest rate limit' is reflecting in zeus document
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+When the user clicks on the area basic info link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user enters <interestRate> value in area page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should see the entered <interestRate> in area page
+Then the user should see the entered <interestRate> in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|interestRate|
+|Angola|Cabinda|qwertyfhfyndsak|
+|Angola|Cabinda|!@#$%^&*()_+}{|":>?<?.,|
 
 Scenario: User is updating  Area's Basic Info  page and  entered  value for 'Use in Address' that is different from the current value
 a)User verifies existing 'Use in Address' existing interest rate values are retrieved  from trusted doc 
