@@ -30,6 +30,7 @@ public class EditOfficePage extends AbstractPage {
     static String endpointWithID;
     public String EditSortNameValue = "";
     public String EditOfficeSortName = "";
+    public static String officeHistoryMaximumCharacter = null;
 
     public EditOfficePage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -562,10 +563,11 @@ public class EditOfficePage extends AbstractPage {
 
     }
     
-    public String getOfficeHistoryFromDB(String officeFid,String source) {
+    public String getOfficeHistoryFromDB(String source,String tagName,String officeFid) {
 
 		String tagValue = null;
 		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
 		nvPairs.add(new BasicNameValuePair("source", source));
 		try {
 			Thread.sleep(7000L);
@@ -573,15 +575,16 @@ public class EditOfficePage extends AbstractPage {
 			e.printStackTrace();
 		}
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-				"get office history", nvPairs);
+				"get office history details", nvPairs);
 		if (document != null) {
-			
+			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+					: getNodeValuesByTagName(document, tagName).get(0);
 		}
 		return tagValue;
 	}
 
-    public void verifyOfficeHistoryFromTrustedDB(String source,String officeFid) {
-		assertEquals(getOfficeHistoryFromDB(officeFid, source),
+    public void verifyOfficeHistoryFromTrustedDB(String source,String tagName,String officeFid) {
+		assertEquals(getOfficeHistoryFromDB(source,tagName ,officeFid),
 				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath")).getText());
 	}
     
@@ -599,20 +602,56 @@ public class EditOfficePage extends AbstractPage {
 				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath_after_save")).getText());
 	}
     
-    public void verifyOfficeHistoryZeus(String source,
-			String officeFid) {
-		assertEquals(getOfficeHistoryFromDB(source, officeFid), officeFid);
+    public void verifyOfficeHistoryZeus(String source,String tagName,String officeFid) {
+    	assertEquals(getOfficeHistoryFromDB(source,tagName ,officeFid),
+				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath_after_save")).getText());
 	}
     
     public void verifySuccessfulUpdatedMessage() {
 		try {
-			assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_save_confirmation_message_id"))
+			assertTrue(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_save_confirmation_message_id"))
 					.isDisplayed());
 			Thread.sleep(3000);// wait for page to get refreshed with newly saved values
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+	}
+    
+    private String getBigStringOfGivenLength(int length) {
+		StringBuilder returnCharText = new StringBuilder();
+		for (int i = 0; i <= length; i++) {
+			returnCharText.append("i");
+		}
+		return returnCharText.toString();
+	}
+    
+    public void enterCharactersInOfficeHistory() {
+		String getCharText = getBigStringOfGivenLength(10000);
+		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath")).clear();
+		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath")).sendKeys(getCharText);
+		officeHistoryMaximumCharacter = getCharText;
+	}
+    
+    public void verifyMaxLengthOfficeHistory(String maxLength) {
+		 assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath"))
+               .getAttribute("maxlength"), maxLength);
+	}
+    
+    public void viewValidCharacterLengthOfficeHistory() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		Integer officeHistoryLength = getDriver().findElement(OfficeIdentifiers
+				.getObjectIdentifier("office_history_text_xpath_after_save")).getText().length();
+		assertEquals(officeHistoryLength.toString(), "10000");
+	}
+    
+    public void verifyMaximumTextInOfficeHistory() {
+		assertEquals(officeHistoryMaximumCharacter.subSequence(0, 10000), getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath_after_save")).getText());
 	}
     
     @Override

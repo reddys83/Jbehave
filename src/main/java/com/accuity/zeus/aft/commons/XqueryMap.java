@@ -115,6 +115,7 @@ public class XqueryMap {
         queryMap.put("get office name types from lookup","getOfficeNameTypesFromLookup.xqy");
         queryMap.put("get city region types","getCityRegionTypes.xqy");
 		queryMap.put("get city region values","getCityRegionValues.xqy");
+		queryMap.put("get office history details","getOfficeHistory.xqy");
    }
 
     public String getXquery(String key){

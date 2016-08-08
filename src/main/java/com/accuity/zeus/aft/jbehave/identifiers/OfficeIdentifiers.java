@@ -71,6 +71,8 @@ public class OfficeIdentifiers {
         hmap.put("office_history_text_xpath", By.xpath("//*[@id='officeHistory']/textarea"));
         hmap.put("office_history_link", By.xpath("//*[@id='legalEntityHistory']"));
         hmap.put("office_history_text_xpath_after_save", By.xpath("//*[@id='officeHistory']/p"));
+        hmap.put("office_save_confirmation_message_id", By.xpath(("//*[@id='saveSuccess']")));
+        
         
     }
 

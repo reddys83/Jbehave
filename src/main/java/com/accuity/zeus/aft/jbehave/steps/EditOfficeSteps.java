@@ -319,9 +319,9 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyOfficeSortNameInZeusDocumentAndInUI(officeFid,sortName);
     }
 
-    @Then("the user should see the Office History value in area page is same as per $source document")
-	public void verifyOfficeHistoryFromTrustedDB(@Named("source") String source, @Named("officeFid") String officeFid) {
-    	getEditOfficePage().verifyOfficeHistoryFromTrustedDB(source,officeFid);
+    @Then("the user should see the Office History value in office page is same as per $source document")
+	public void verifyOfficeHistoryFromTrustedDB(@Named("officeFid") String officeFid,@Named("source") String source) {
+    	getEditOfficePage().verifyOfficeHistoryFromTrustedDB(source,"officeHistory",officeFid);
 	}
 	
     @When("the user enters <officeHistoryOld> value in office page")
@@ -344,9 +344,35 @@ public class EditOfficeSteps extends AbstractSteps{
     	getEditOfficePage().verifyOfficeHistory(officeHistory);
 	}
     
-    @Then("the user should see the entered <officeHistory> in $source document")
-	public void verifyOfficeHistoryZeus(@Named("source") String source, @Named("officeFid") String officeFid) {
-    	getEditOfficePage().verifyOfficeHistoryZeus(source,officeFid);
+    @Then("the user should see the entered Office History in $source document")
+	public void verifyOfficeHistoryZeus(@Named("officeFid") String officeFid,@Named("source") String source) {
+    	getEditOfficePage().verifyOfficeHistoryZeus(source,"officeHistory",officeFid);
 	}
+    
+    @Then("the user should see the successful update message at top of the office page")
+	public void verifySuccessfulUpdatedMessage() {
+    	getEditOfficePage().verifySuccessfulUpdatedMessage();
+	}
+    
+    @When("the user enters values which is beyond 10000 unicode characters in the Office History field")
+	public void enterCharactersInOfficeHistory() {
+    	getEditOfficePage().enterCharactersInOfficeHistory();
+	}
+    
+    @Then("the user should see maximum length of office history is limited to $maxLength")
+	public void verifyMaxLengthOfficeHistory(@Named("maxLength") String maxLength) {
+    	getEditOfficePage().verifyMaxLengthOfficeHistory(maxLength);
+	}
+    
+    @Then("the user should be able to view that only 10000 unicode characters are saved in Office History field")
+	public void viewValidCharacterLengthInterestRate() {
+    	getEditOfficePage().viewValidCharacterLengthOfficeHistory();
+	}
+    
+    @Then("the user should be able to verify the maximum values are entered in the Office History field")
+	public void verifyMaximumTextInInterestRate() {
+    	getEditOfficePage().verifyMaximumTextInOfficeHistory();
+	}
+    
 }
 
