@@ -315,54 +315,57 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyOfficeSortNameInZeusDocumentAndInUI(officeFid,sortName);
     }
     
-    @Then("the user should see the office's business hours value same as in $source document")
-    public void verifyOfficeBusinessHoursFromTrustedDB(@Named("officeFid") String officeFid,@Named("source") String source) {
-    	getEditOfficePage().verifyOfficeBusinessHoursFromTrustedDB(officeFid, source);
-    }
-    
-    @When("the user enters the <businessHourText> in the office business hour text area")
-    public void enterOfficeBusinessHourText(@Named("businessHourText") String businessHourText) {
-    	getEditOfficePage().enterOfficeBusinessHourText(businessHourText);
-    }
-    
-    @When("the user enters the <businessHourDiffText> in the office business hour text area")
-    public void enterOfficeBusinessHourDiffText(@Named("businessHourDiffText") String businessHourDiffText) {
-    	getEditOfficePage().enterOfficeBusinessHourText(businessHourDiffText);
-    }
-    
-    @Then("the user should be able to verify the values are entered in the office business hour field")
-    public void verifyTextInOfficeBusinessHour(@Named("businessHourText") String businessHourText) {
-    	getEditOfficePage().verifyTextInOfficeBusinessHour(businessHourText);
-    }
-    
-    @Then("the user should see the office business hours value same as in $source document")
-    public void verifyOfficeBusinessHourValueFromZeus(@Named("officeFid") String officeFid,@Named("source") String source) {
-    	getEditOfficePage().verifyOfficeBusinessHourValueFromZeus(officeFid, source);
-    }
-    
-    @Then("the user should see the successful update message at top of the office page")
-	public void verifySuccessfulUpdatedMessage() {
-    	getEditOfficePage().verifySuccessfulUpdatedMessage();
+	@Then("the user should see the office's business hours value same as in $source document")
+	public void verifyOfficeBusinessHourValueFromTrustedDB(@Named("officeFid") String officeFid,
+			@Named("source") String source) {
+		getEditOfficePage().verifyOfficeBusinessHourValueFromTrustedDB(officeFid, source);
 	}
-    
-    @Then("the user should not see the <ConfirmationSummary> changes in confirmation modal for office")
-	public void verifyNoChangeConfirmationMsg(@Named("ConfirmationSummary") String ConfirmationSummary) {
+
+	@When("the user enters the <businessHourText> in the office business hour text area")
+	public void enterOfficeBusinessHourText(@Named("businessHourText") String businessHourText) {
+		getEditOfficePage().enterOfficeBusinessHourText(businessHourText);
+	}
+
+	@When("the user enters the <businessHourDiffText> in the office business hour text area")
+	public void enterOfficeBusinessHourDiffText(@Named("businessHourDiffText") String businessHourDiffText) {
+		getEditOfficePage().enterOfficeBusinessHourText(businessHourDiffText);
+	}
+
+	@Then("the user should be able to verify the values are entered in the office business hour field")
+	public void verifyOfficeBusinessHourTextInUI(@Named("businessHourText") String businessHourText) {
+		getEditOfficePage().verifyOfficeBusinessHourTextInUI(businessHourText);
+	}
+
+	@Then("the user should see the office business hours value same as in $source document")
+	public void verifyOfficeBusinessHourValueFromZeusDB(@Named("officeFid") String officeFid,
+			@Named("source") String source) {
+		getEditOfficePage().verifyOfficeBusinessHourValueFromZeusDB(officeFid, source);
+	}
+
+	@Then("the user should see the successful update message at top of the office page")
+	public void verifySuccessfulUpdatedMessage() {
+		setEditCityPage(getDataPage().createEditCityPage());
+		getEditCityPage().verifySuccessfulUpdatedMessage();
+	}
+
+	@Then("the user should not see the <ConfirmationSummary> changes in confirmation modal for office basic info page")
+	public void verifyNoChangeConfirmationMessage(@Named("ConfirmationSummary") String ConfirmationSummary) {
 		getDataPage().verifyNoSummaryConfirmationModal(ConfirmationSummary);
 	}
-    
-    @When("the user enters values which is beyond 200 unicode characters in the office business hours field")
+
+	@When("the user enters values which is beyond 200 unicode characters in the office business hours field")
 	public void enterInvalidCharactersInOfficeBusinessHours() {
-    	getEditOfficePage().enterInvalidCharactersInOfficeBusinessHours();
+		getEditOfficePage().enterInvalidCharactersInOfficeBusinessHours();
 	}
-    
-    @Then("the user should be able to view that only 200 unicode characters are saved in office business hours")
+
+	@Then("the user should be able to view that only 200 unicode characters are saved in office business hours")
 	public void viewOfficeBusinessHoursValidCharacterLength() {
-    	getEditOfficePage().viewOfficeBusinessHoursValidCharacterLength();
+		getEditOfficePage().viewOfficeBusinessHoursValidCharacterLength();
 	}
-    
-    @Then("the user should be able to verify the maximum values are entered in the office business hours field")
+
+	@Then("the user should be able to verify the maximum values are entered in the office business hours field")
 	public void verifyMaximumTextInOfficeBusinessHours() {
-    	getEditOfficePage().verifyMaximumTextInOfficeBusinessHours();
+		getEditOfficePage().verifyMaximumTextInOfficeBusinessHours();
 	}
 
 }

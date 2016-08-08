@@ -46,6 +46,7 @@ else ""
 let $officeOverrideValue := if(fn:exists($office/summary/names/officeTitleOverride))
 then $office/summary/names/officeTitleOverride/text()
 else ""
+let $businessHours := ($office/summary/hours)
 
 return <office>
     <officeOpenedDate>{$officeOpenedDate}</officeOpenedDate>
@@ -60,6 +61,7 @@ return <office>
     <officePrefixValue>{$officePrefixValue}</officePrefixValue>
     <officeSuffixValue>{$officeSuffixValue}</officeSuffixValue>
     <officeOverrideValue>{$officeOverrideValue}</officeOverrideValue>
+    <officeBusinessHours>{$businessHours}</officeBusinessHours>
     </office>
 
 

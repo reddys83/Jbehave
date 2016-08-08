@@ -561,12 +561,14 @@ public class EditOfficePage extends AbstractPage {
 
     }
     
-    public void verifyOfficeBusinessHoursFromTrustedDB(String officeFid, String source) {
-    	assertEquals(getOfficeBusinessHoursInfoFromDB(officeFid, source, "officeBusinessHours"), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_xpath")).getText());
-    }
-    
-    public String getOfficeBusinessHoursInfoFromDB(String officeFid, String source, String tagName) {
-    	String tagValue = null;
+	public void verifyOfficeBusinessHourValueFromTrustedDB(String officeFid, String source) {
+		assertEquals(getOfficeBusinessHoursInfoFromDB(officeFid, source, "hours"),
+				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_xpath"))
+						.getAttribute("value"));
+	}
+
+	public String getOfficeBusinessHoursInfoFromDB(String officeFid, String source, String tagName) {
+		String tagValue = null;
 		List<NameValuePair> nvPairs = new ArrayList<>();
 		nvPairs.add(new BasicNameValuePair("fid", officeFid));
 		nvPairs.add(new BasicNameValuePair("source", source));
@@ -582,63 +584,65 @@ public class EditOfficePage extends AbstractPage {
 					: getNodeValuesByTagName(document, tagName).get(0);
 		}
 		return tagValue;
-	
-    }
-    
-    public void enterOfficeBusinessHourText(String businessHourText) {
-    	clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_xpath"), businessHourText);
-    }
-    
-    public void verifyTextInOfficeBusinessHour(String businessHourText) {
-    	try {
+
+	}
+
+	public void enterOfficeBusinessHourText(String businessHourText) {
+		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_xpath"), businessHourText);
+	}
+
+	public void verifyOfficeBusinessHourTextInUI(String businessHourText) {
+		try {
 			Thread.sleep(5000L);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		assertEquals(businessHourText, getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode_xpath")).getText());
-    }
-    
-    public void verifyOfficeBusinessHourValueFromZeus(String officeFid, String source) {
-    	assertEquals(getOfficeBusinessHoursInfoFromDB(officeFid, source, "officeBusinessHours"), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode_xpath")).getText());
-    }
-    
-    public void verifySuccessfulUpdatedMessage() {
-		try {
-			assertTrue(
-					getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_save_confirmation_message_xpath"))
-							.isDisplayed());
-			Thread.sleep(2000); // to wait for page get refresh with saved data
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		assertEquals(businessHourText,
+				getDriver()
+						.findElement(
+								OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode_xpath"))
+						.getText());
 	}
-    
-    public void enterInvalidCharactersInOfficeBusinessHours() {
+
+	public void verifyOfficeBusinessHourValueFromZeusDB(String officeFid, String source) {
+		assertEquals(getOfficeBusinessHoursInfoFromDB(officeFid, source, "hours"),
+				getDriver()
+						.findElement(
+								OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode_xpath"))
+						.getText());
+	}
+
+	public void enterInvalidCharactersInOfficeBusinessHours() {
 		char addCharToBusinessHours = 'a';
 		String businessHoursRandomText = null;
 		for (int i = 0; i <= 200; i++) {
 			businessHoursRandomText += addCharToBusinessHours;
 		}
 		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_xpath")).clear();
-		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_xpath")).sendKeys(businessHoursRandomText);
+		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_xpath"))
+				.sendKeys(businessHoursRandomText);
 		businessHoursMaximumCharacterString = businessHoursRandomText;
 	}
-    
-    public void viewOfficeBusinessHoursValidCharacterLength() {
+
+	public void viewOfficeBusinessHoursValidCharacterLength() {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		Integer businessHoursLength = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode_xpath")).getText().length();
-		assertEquals(businessHoursLength.toString(), "200");
+
+		Integer businessHoursTextLength = getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode_xpath"))
+				.getText().length();
+		assertEquals(businessHoursTextLength.toString(), "200");
 	}
-    
-    public void verifyMaximumTextInOfficeBusinessHours() {
-		assertEquals(businessHoursMaximumCharacterString.subSequence(0, 200), getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode_xpath")).getText());
+
+	public void verifyMaximumTextInOfficeBusinessHours() {
+		assertEquals(businessHoursMaximumCharacterString.subSequence(0, 200),
+				getDriver()
+						.findElement(
+								OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode_xpath"))
+						.getText());
 	}
     
     @Override

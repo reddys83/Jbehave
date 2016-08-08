@@ -1015,8 +1015,8 @@ Examples:
 
 Scenario:  To update the Office`s 'Basic Info' by entering a value for 'Business Hours' that is different from the current value
 a)User verifies whether current value of Business Hours is same as in trusted document.
-b)User verifies Business Hours value is updated correctly in area basic info page
-c)User verifies Business Hours values in Zeus Document
+b)User verifies Business Hours value is updated in Office basic info page
+c)User verifies Business Hours value is updated in Zeus Document
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -1071,7 +1071,7 @@ Then the user should see the successful update message at top of the office page
 When the user clicks on the office update link
 When the user enters the <businessHourText> in the office business hour text area
 And the user clicks on the save button
-Then the user should not see the <ConfirmationSummary> changes in confirmation modal for office
+Then the user should not see the <ConfirmationSummary> changes in confirmation modal for office basic info page
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 Then the user should be able to verify the values are entered in the office business hour field
