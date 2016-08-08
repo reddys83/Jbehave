@@ -1554,7 +1554,9 @@ Then the user should see the successful update message at top of the area page
 When the user clicks on the area update link
 When the user clicks on True option for Area Use in Address
 When the user clicks on the save button
-Then the user should not see the below summary changes in confirmation modal Basic Info
+Then the user should not see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should see the updated <useInAddress> in area web page
