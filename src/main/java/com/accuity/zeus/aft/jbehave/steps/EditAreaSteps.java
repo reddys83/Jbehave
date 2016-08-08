@@ -550,7 +550,156 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyNewlyAddedAreaIdentifierRowExists() {
 		getEditAreaPage().verifyNewlyAddedAreaIdentifierRowExists();
 	}
+
+	@Then("the user should see delete row confirmation modal in the area basic page")
+	public void verifyDeleteConfirmationModals() {
+		getEditAreaPage().verifyDeleteConfirmationModal();
+	}
 	
+	@Then("the user should see the timezone values from TIME_ZONE lookup")
+	public void verifyTimeZoneDropdownListMatchesWithLookup() throws InterruptedException {
+		getEditAreaPage().verifyTimeZoneDropdownListMatchesWithLookup();
+	}
+
+	@Then("the user should see the timezone values same as in $source document")
+	public void userVerifyTimeZoneDropDownDefaultValueFromTrusted(@Named("country") String country,
+			@Named("area") String area, @Named("source") String source) {
+		getEditAreaPage().verifyTimeZoneDefaultValueFromTrusted(country, area, "summary", source);
+	}	 
+
+	@Then("the user clicks on add new timezone button")
+	public void userClickOnAddNewTimeZoneButton() {
+		getEditAreaPage().clickOnAddNewTimeZoneButton();
+	}
+
+	@Then("user verifies whether default value for timezone is blank")
+	public void userVerifiesTimeZoneDefaultValueIsBlank() {
+		getEditAreaPage().verifiesTimeZoneDefaultValueIsBlank();
+	}
+
+	@Then("user verifies whether timezone dropdown displays time zone's except selected timezone <timeZone>")
+	public void verifyTimeZoneDropDownListDisplaysUnSelectedTimeZones(@Named("timeZone") String timeZone) {
+		getEditAreaPage().verifyTimeZoneDropDownIsNotHavingSelectedTimeZone(timeZone);
+	}
+
+	@Then("user selects the timezone <timeZone> in the timezone dropdown of area basic page")
+	public void userSelectsTimeZoneDropDownValue(@Named("timeZone") String timeZone) throws InterruptedException {
+		getEditAreaPage().selectsTimeZoneDropDownValue(timeZone, 1);
+	}
+
+	@Then("user selects the timezone <timeZone1> in the timezone dropdown of area basic page")
+	public void userSelectsTimeZoneDropDownValues(@Named("timeZone1") String timeZone1) throws InterruptedException {
+		getEditAreaPage().selectsTimeZoneDropDownValue(timeZone1, 2);
+	}
+
+	@Then("user changes the <timeZone1> in the timezone dropdown of area basic page")
+	public void userSelectTimeZoneValue(@Named("timeZone1") String timeZone1) throws InterruptedException {
+		getEditAreaPage().selectsTimeZoneDropDownValue(timeZone1, 1);
+	}
+
+	@Then("the user enters the summary as <summary>")
+	public void userEntersSummaryValue(@Named("summary") String summary) throws InterruptedException {
+		getEditAreaPage().entersSummaryValue(summary);
+	}
+
+	@Then("the user enters the summary as <summary1>")
+	public void userEnterSummaryValue(@Named("summary1") String summary1) throws InterruptedException {
+		getEditAreaPage().entersSummaryValue(summary1);
+	}
+
+	@When("the user clicks on the delete timezone row button in the basic info area page")
+	public void clickOnDeleteAreaTimeZoneRowButton() {
+		getEditAreaPage().clickOnDeleteAreaTimeZoneRowButton();
+	}
+
+	@Then("the user should see the newly added timezone row in the basic info area page")
+	public void verifyNewlyAddedAreaTimeZoneRowIsDisplayed(@Named("timeZone1") String timeZone1) throws Exception {
+		getEditAreaPage().verifyNewlyAddedAreaTimeZoneRowIsDisplayed(timeZone1);
+	}
+
+	@Then("the user verifies that the newly added timezone row values exists in the basic info area page")
+	public void verifyNewlyAddedAreaTimeZoneRowExists() {
+		getEditAreaPage().verifyNewlyAddedAreaTimeZoneRowExists();
+	}
+
+	@Then("the user should not see the newly added timezone row in the basic info area page")
+	@Alias("the user should not see the timezone row in the basic info area page")
+	public void verifyNewlyAddedAreaTimeZoneRowIsNotDisplayed() throws Exception {
+		getEditAreaPage().verifyNewlyAddedAreaTimeZoneRowIsNotDisplayed();
+	}
+	 
+	@Then("user verifies newly added timezone summary is updated in $source document")
+	public void verifyAreaSummaryValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("summary") String summary) {
+		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary);
+	}
+	
+	@Then("the user verifies the $source document whether the area is updated with the newly updated summary")
+	public void verifyAreaSummaryValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("summary1") String summary1) {
+		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary1);
+	}
+ 
+	@Then("the user verifies the area page is updated with the new timezone summary")
+	public void verifyAreaSummary1ValueInUI(@Named("summary1") String summary1) throws InterruptedException {
+		getEditAreaPage().verifyAreaSummaryValueInUI(summary1);
+	}
+
+	@Then("the user verifies the Area page is updated with the timezone summary")
+	public void verifyAreaSummaryValueInUI(@Named("summary") String summary) throws InterruptedException {
+		getEditAreaPage().verifyAreaSummaryValueInUI(summary);
+	}
+
+	@Then("the user verifies whether the Area is updated with the newly updated timezone")
+	public void verifyAreaTimeZoneValueInUI(@Named("timeZone1") String timeZone1) throws InterruptedException {
+		getEditAreaPage().verifyAreaTimeZoneValueInUI(timeZone1);
+	}
+
+	@Then("the user verifies area page is not updated with Null time zone")
+	public void verifyAreaTimeZoneValueNotUpdatedInUI() throws InterruptedException {
+		getEditAreaPage().verifyAreaTimeZoneValueNotUpdatedInUI();
+	}
+
+	@Then("the user verifies summary max length attribute is $maxLength")
+	public void verifyAreaTimeZoneSummaryMaxLenghtAttribute(@Named("maxLength") String maxLength) {
+		getEditAreaPage().verifyAreaTimeZoneSummaryMaxLenghtAttribute(maxLength);
+	}
+
+	@Then("the user verifies that the area timezone values are updated in the basic info area page")
+	public void verifyAreaTimeZoneInUI(@Named("timeZone") String timeZone, @Named("timeZone1") String timeZone1) {
+		String[] timeZoneValues = { timeZone, timeZone1 };
+		getEditAreaPage().verifyAreaTimeZoneValuesInUI(timeZoneValues);
+	}
+
+	@Then("the user should see the area timezone values as in $source document")
+	public void verifyAreaTimeZoneValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("timeZone") String timeZone, @Named("timeZone1") String timeZone1, @Named("source") String source) {
+		List<String> timeZoneValues = new ArrayList<>();
+		timeZoneValues.add(timeZone);
+		timeZoneValues.add(timeZone1);
+		getEditAreaPage().verifyAreaTimeZoneValuesFromDB(country, area, timeZoneValues, source);
+	}
+
+	@Then("the user should see the area timezone value as in $source document")
+	public void verifyAreaTimeZoneValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("timeZone1") String timeZone1, @Named("source") String source) {
+		List<String> timeZoneValue = new ArrayList<>();
+		timeZoneValue.add(timeZone1);
+		getEditAreaPage().verifyAreaTimeZoneValuesFromDB(country, area, timeZoneValue, source);
+	}
+
+	@When("the user deletes the existing area timezone rows")
+	public void deleteAllAreaTimeZoneRows() {
+		getEditAreaPage().deleteAllAreaTimeZoneRows();
+	}
+
+	@Then("the user verifies timezone is not updated in $source document")
+	@Alias("the user verifies the deleted timezone does not exist in $source document")
+	public void verifyAreasTimeZoneValueNotUpdatedInZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source) {
+		getEditAreaPage().verifyAreaTimeZoneValueIsNullFromDB(country, area, source);
+	}
+
 	@When("the user enters <interestRate> value in area page")
 	public void enterAreaInterestRate(@Named("interestRate") String interestRate) {
 		getEditAreaPage().enterAreaInterestRate(interestRate);
