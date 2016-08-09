@@ -1331,4 +1331,6 @@ public class DataPage extends AbstractPage {
     public void verifyAreaPlacesView() {
         assertTrue(getDriver().findElement(select_places_view_xpath).isDisplayed());
     }
+
+
 }
