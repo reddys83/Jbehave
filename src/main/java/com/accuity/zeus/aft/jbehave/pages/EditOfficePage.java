@@ -1,6 +1,5 @@
 package com.accuity.zeus.aft.jbehave.pages;
 
-import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
@@ -17,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.*;
@@ -713,17 +714,7 @@ public class EditOfficePage extends AbstractPage {
 	}
     
     public void verifySelectedOfficeIdentifierTypeNotInNewRow(String identifierType, int rowNumber) {
-		try {
-			List<WebElement> identifierDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_input_xpath"));
-			if (rowNumber <= identifierDropDowns.size()) {
-				Select dropdown = new Select(identifierDropDowns.get(rowNumber - 1));
-				for (int index = 0; index < dropdown.getOptions().size(); index++) {
-					assertTrue(!dropdown.getOptions().get(index).getText().contains(identifierType));
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		verifySelectedTypeNotInNewRow(identifierType, rowNumber, OfficeIdentifiers.getObjectIdentifier("office_identifier_type_input_xpath"));
 	} 
     
     public void verifyOfficeIdentifierParametersInUI(String[] identifierTypes, String[] identifierValues,
@@ -801,7 +792,128 @@ public class EditOfficePage extends AbstractPage {
 		}
 	}
     
+    // personnel
+    
+    public void clickOnOfficeAddNewPersonnelButton() {
+		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_new_personnel_button_id"));
+	}
+    
+    public void verifyOfficePersonnelTypesList() {
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get office personnel type list");
+		List<WebElement> officePersonnelTypesList = getDriver()
+				.findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_input_xpath"));
 
+		List<WebElement> options = officePersonnelTypesList.get(0).findElements(By.cssSelector("option"));
+		for (int indexOfOption = 1; indexOfOption < options.size(); indexOfOption++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(),
+					options.get(indexOfOption).getText().trim());
+		}
+	}
+    
+    public void enterOfficePersonnelType(String personnelType, int rowNumber) {
+		try {
+			List<WebElement> personnelTypeDropDowns = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_input_xpath"));
+			if (rowNumber <= personnelTypeDropDowns.size()) {
+				Select dropdown = new Select(personnelTypeDropDowns.get(rowNumber - 1));
+				if (personnelType.equals("")) {
+					dropdown.selectByValue(personnelType);
+				} else {
+					dropdown.selectByVisibleText(personnelType);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void enterOfficePersonnelValue(String personnelValue, int rowNumber) {
+		try {
+			List<WebElement> personnelValues = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath"));
+			if (rowNumber <= personnelValues.size()) {
+				personnelValues.get(rowNumber - 1).clear();
+				personnelValues.get(rowNumber - 1).sendKeys(personnelValue);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void verifyOfficePersonnelValuesFromTrustedDB(String source, String officeFid) {
+    	try {
+			List<String> personnelTypes = new ArrayList<>();
+			List<String> personnelValues = new ArrayList<>();
+			List<WebElement> personnelTypeDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_input_xpath"));
+			
+			if (personnelTypeDropDowns.size() > 0) {
+				List<WebElement> personnelValueDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath"));
+				for (int index = 0; index < personnelTypeDropDowns.size(); index++) {					
+					personnelTypes.add(new Select(personnelTypeDropDowns.get(index)).getAllSelectedOptions().get(0).getText());
+					personnelValues.add(personnelValueDropDowns.get(index).getAttribute("value"));
+				}
+				verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
+			} else {
+				assertTrue("There is no existing values in personnel section", true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
+	public void verifyOfficePersonnelValuesFromDB(String source, String officeFid, List<String> personnelTypes,
+			List<String> personnelValues) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get office personnel values", nvPairs);
+			if (document != null) {				
+				NodeList nodeList = document.getElementsByTagName("personnel");
+				for(int index = 0; index < nodeList.getLength(); index++)  {
+					NodeList childNodeList = nodeList.item(index).getChildNodes();
+					assertEquals(childNodeList.item(0).getTextContent(), personnelTypes.get(index));
+					assertEquals(childNodeList.item(1).getTextContent(), personnelValues.get(index));
+				}
+			} else
+				assertTrue(source + "document is not available", false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifySelectedOfficePersonnelTypeNotInNewRow(String personnelType, int rowNumber) {
+		verifySelectedTypeNotInNewRow(personnelType, rowNumber, OfficeIdentifiers.getObjectIdentifier("office_personnel_type_input_xpath"));
+	}
+
+
+	private void verifySelectedTypeNotInNewRow(String selectedType, int rowNumber, By by) {
+		try {
+			List<WebElement> typeDropDowns = getDriver().findElements(by);
+			if (rowNumber <= typeDropDowns.size()) {
+				Select dropdown = new Select(typeDropDowns.get(rowNumber - 1));
+				for (int index = 0; index < dropdown.getOptions().size(); index++) {
+					assertTrue(!dropdown.getOptions().get(index).getText().contains(selectedType));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyOfficePersonnelParametersInUI(List<String> personnelTypes, List<String> personnelValues) {
+		
+		List<WebElement> identifierRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_view_mode"));
+		
+		for (int i = 0; i < identifierRows.size(); i++) {
+			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(personnelTypes.get(i)));
+			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(personnelValues.get(i)));
+		}
+	} 
+	
     @Override
     public String getPageUrl() {
         return null;

@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -518,6 +519,81 @@ public class EditOfficeSteps extends AbstractSteps{
 	@Then("the user should see the newly added identifier row in the office identifiers page")
 	public void verifyNewlyAddedOfficeIdentifierRowIsDisplayed() throws Exception {
 		getEditOfficePage().verifyNewlyAddedOfficeIdentifierRowIsDisplayed();
+	}
+	
+	@When("the user clicks on the add new personnel button in the office personnel page")
+    public void clickOnOfficeAddNewPersonnelButton() {
+    	getEditOfficePage().clickOnOfficeAddNewPersonnelButton();
+	}
+	
+	@Then("the user should see the office personnel types from lookup PERSONNEL_SUMMARY_TEXT_TYPE")
+	public void verifyOfficePersonnelTypesList() {
+    	getEditOfficePage().verifyOfficePersonnelTypesList();
+	}
+	
+	@When("the user enters personnel type as <personnelType> in the office personnel page")
+	public void enterOfficePersonnelType(@Named("personnelType") String personnelType) {
+		getEditOfficePage().enterOfficePersonnelType(personnelType, 1);
+	}
+
+	@When("the user enters personnel value as <personnelValue> in the office personnel page")
+	public void enterOfficePersonnelValue(@Named("personnelValue") String personnelValue) {
+		getEditOfficePage().enterOfficePersonnelValue(personnelValue, 1);
+	}
+	
+	@When("the user enters personnel type as <personnelType2> in the office personnel page")
+	public void enterOfficePersonnelType2(@Named("personnelType2") String personnelType) {
+		getEditOfficePage().enterOfficePersonnelType(personnelType, 2);
+	}
+
+	@When("the user enters personnel value as <personnelValue2> in the office personnel page")
+	public void enterOfficePersonnelValue2(@Named("personnelValue2") String personnelValue) {
+		getEditOfficePage().enterOfficePersonnelValue(personnelValue, 2);
+	}
+	
+	@Then("the user should see the office's personnel values same as in $source document")
+	public void verifyOfficePersonnelValuesFromDB(@Named("source") String source, @Named("officeFid") String officeFid) {
+    	getEditOfficePage().verifyOfficePersonnelValuesFromTrustedDB(source, officeFid);
+	}
+	
+	@When("the user deletes the existing office personnel rows")
+    public void deleteAllOfficePersonnel() {
+		setEditLegalEntityPage(getLegalEntityPage().createEditLegalEntityPage());
+		getEditLegalEntityPage().deleteAllLegalEntityRows(OfficeIdentifiers.getObjectIdentifier("office_delete_personnel_row_button_xpath"));
+	}
+	
+	@Then("the user verifies that previously selected <personnelType> is not present in the new office personnel row")
+	public void verifySelectedOfficePersonnelTypeNotInNewRow(@Named("personnelType") String personnelType) {
+		getEditOfficePage().verifySelectedOfficePersonnelTypeNotInNewRow(personnelType, 2);
+	}
+	
+	@Then("the user verifies that the personnel parameters are present in the office identifiers page")
+	public void verifyOfficePersonnelParametersInUI(@Named("personnelType") String personnelType, @Named("personnelValue") String personnelValue, 
+			@Named("personnelType2") String personnelType2, @Named("personnelValue2") String personnelValue2) {
+
+		List<String> personnelTypes = new ArrayList<>();
+		personnelTypes.add(personnelType);
+		personnelTypes.add(personnelType2);
+		List<String> personnelValues = new ArrayList<>();
+		personnelValues.add(personnelValue);
+		personnelValues.add(personnelValue2);
+		
+		getEditOfficePage().verifyOfficePersonnelParametersInUI(personnelTypes, personnelValues);
+	}
+
+	@Then("the user should see the office personnel values as in $source document")
+	public void verifyOfficePersonnelValuesFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid,
+			@Named("personnelType") String personnelType, @Named("personnelValue") String personnelValue, 
+			@Named("personnelType2") String personnelType2, @Named("personnelValue2") String personnelValue2) {
+
+		List<String> personnelTypes = new ArrayList<>();
+		personnelTypes.add(personnelType);
+		personnelTypes.add(personnelType2);
+		List<String> personnelValues = new ArrayList<>();
+		personnelValues.add(personnelValue);
+		personnelValues.add(personnelValue2);
+
+		getEditOfficePage().verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
 	}
 
 }

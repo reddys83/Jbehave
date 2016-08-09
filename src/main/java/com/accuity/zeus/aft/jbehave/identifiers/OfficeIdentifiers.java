@@ -78,6 +78,12 @@ public class OfficeIdentifiers {
         hmap.put("office_basicInfo_view_prefix_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Prefix']/td"));
         hmap.put("office_basicInfo_view_suffix_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Suffix']/td"));
         hmap.put("office_basicInfo_view_override_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Override']/td"));
+        // personnel
+        hmap.put("office_add_new_personnel_button_id", By.id("add-personnel"));
+        hmap.put("office_personnel_type_input_xpath", By.xpath(".//*[@id='additionalPersonnel']//*[@data-internal_id='personnelType']"));
+        hmap.put("office_personnel_value_input_xpath", By.xpath(".//*[@id='additionalPersonnel']//*[@data-internal_id='personnelValue']"));
+        hmap.put("office_delete_personnel_row_button_xpath", By.xpath(".//*[@data-row_id='personnel']//button[@class='delete-row']"));
+        hmap.put("office_personnel_type_view_mode", By.xpath("//*[@id='officePersonnel']//tbody/tr"));     
     }
 
     public static By getObjectIdentifier(String key) {
