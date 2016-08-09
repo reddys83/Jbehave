@@ -34,6 +34,7 @@ Examples:
 
 Scenario: Verify error message required
 Bug ZEUS-898
+Meta:@wed123
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

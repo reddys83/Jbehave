@@ -24,7 +24,7 @@ public class SearchPage extends AbstractPage {
 	private By logout_link_id = By.id("logout");
 	private By settings_icon_id = By.cssSelector("#user-menu>span");
 	private Utils utils = new Utils();
-	private By admin_tab_xpath = By.xpath("//header/nav[1]/ul/li[5]");
+	private By admin_tab_xpath = By.xpath("//header/nav[1]/ul/li[4]");
 	private By search_field_xpath = By.xpath(".//header/form/select[@name='idType']");
 	private By search_button_id = By.id("search-button");
 	private By data_tab_xpath = By.xpath("//header/nav[1]/ul/li[2]");
