@@ -192,13 +192,6 @@ public class EditOfficeSteps extends AbstractSteps{
     public void enterOfficeCountryInTheTypeAheadBox(@Named("Country") String Country) {
         getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(Country);
     }
-/*
-    @When("the user enters the office country <Country> in the type-ahead box")
-    public void enterOfficeCountryInTheTypeAheadBox(@Named("Country") String Country)
-    {
-        getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(Country);
-    }
-*/
 
     @When("the user enters the office city <City> in the type-ahead box")
     public void enterOfficeCityInTheTypeAheadBox(@Named("City") String City) {
@@ -353,6 +346,10 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyOfficeTelecomsRowIsNotDisplayed();
     }
 
+    @Then("the user should not see the newly added locations row in the office locations page")
+    public void verifyOfficeLocationsRowIsNotDisplayed() throws Exception {
+        getEditOfficePage().verifyOfficeLocationsRowIsNotDisplayed();
+    }
     @When("the user enters office address postal code $postalCodeRowIdentifier value as <PostalCode>")
     public void enterOfficeAddressPostalCode(@Named("postalCodeRowIdentifier") String postalCodeRowIdentifier,@Named("PostalCode") String PostalCode)
     {
@@ -381,7 +378,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @Then("the user should see the error message $errorMsg for the office address type field")
     public void verifyOfficeAddressTypeErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditOfficePage().verifyOfficeErrorMessage("office_address_type_error_msg_xpath", errorMsg);
+        getEditOfficePage().verifyOfficeErrorMessage("office_address_type_error_msg", errorMsg);
 
     }
 
@@ -389,22 +386,6 @@ public class EditOfficeSteps extends AbstractSteps{
     public void verifyOfficeTelecomTypesFromLookup(@Named("$officetelecom_rowIdentifier") String officetelecom_rowIdentifier,@Named("lookupFid") String lookupFid) {
         getEditOfficePage().verifyOfficeTelecomTypesFromLookup(officetelecom_rowIdentifier, lookupFid);
     }
-/*
-    @Then("the user verifies the office address line 1 maxlength is $maxSize for the $rowIdentifier")
-    public void verifyMaxlengthAddressLine1Text(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);}
-
-
-    @Then("the user verifies the office address line 2 maxlength is $maxSize for the $rowIdentifier")
-    public void verifyMaxlengthAddressLine2Text(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);}
-
-
-    @Then("the user verifies the office address line 3 maxlength is $maxSize for the $rowIdentifier")
-    public void verifyMaxlengthAddressLine3Text(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);}
-
-    @Then("the user verifies the office address line 4 maxlength is $maxSize for the $rowIdentifier")
-    public void verifyMaxlengthAddressLine4Text(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);}
-
-*/
     @Then("the user verifies the $officeAddressField  maxlength is $maxSize for the $rowIdentifier")
     public void verifyMaxlengthOfficeAddressText(@Named("$officeAddressField") String officeAddressField,@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);}
 
@@ -461,71 +442,47 @@ public class EditOfficeSteps extends AbstractSteps{
 
     }
 
-    @Then("the user should see office address line 1 text value as <AddressLine1> for fid <officeFid> in $source document and in zeus UI")
-    public void verifyEditOfficeAddressLine1ValueFromZeusDocumentAndUI(@Named("AddressLine1") String  AddressLine1,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficeAddressLine1ValueFromZeusDocumentAndUI(AddressLine1,officeFid,source);
-    }
-
-    @Then("the user should see office address line 2 text value as <AddressLine2> for fid <officeFid> in $source document and in zeus UI")
-    public void verifyEditOfficeAddressLine2ValueFromZeusDocumentAndUI(@Named("AddressLine2") String AddressLine2,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficeAddressLine2ValueFromZeusDocumentAndUI(AddressLine2,officeFid,source);
-    }
-
-    @Then("the user should see office address line 3 text value as <AddressLine3> for fid <officeFid> in $source document and in zeus UI")
-    public void verifyEditOfficeAddressLine3ValueFromZeusDocumentAndUI(@Named("AddressLine3") String AddressLine3,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficeAddressLine3ValueFromZeusDocumentAndUI(AddressLine3,officeFid,source);
-    }
-
-    @Then("the user should see office address line 4 text value as <AddressLine4> for fid <officeFid> in $source document and in zeus UI")
-    public void verifyEditOfficeAddressLine4ValueFromZeusDocumentAndUI(@Named("AddressLine4") String AddressLine4,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficeAddressLine4ValueFromZeusDocumentAndUI(AddressLine4,officeFid,source);
-    }
 
     @Then("the user should see office location primary flag value as <primaryFlag> for fid <officeFid> in $source document and in zeus UI")
     public void getDocumentPrimaryFlag(@Named("primaryFlag") String primaryFlag,@Named("officeFid") String officeFid,@Named("source") String source) {
         getEditOfficePage().verifyPrimaryFlagValuefromZeusDocumentAndUI(primaryFlag,officeFid,source);
     }
 
-    @Then("the user should see office postal code value as <postalCode> for fid <officeFid> in $source document and in zeus UI")
-    public void verifyEditOfficePostalCodeValueFromZeusDocumentAndUI(@Named("postalCode") String postalCode,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficePostalCodeValueFromZeusDocumentAndUI(postalCode,officeFid,source);
-    }
-    @Then("the user should see office postal code suffix value as <postalCodeSuffix> for fid <officeFid> in $source document and in zeus UI")
-    public void verifyEditOfficepostalCodeSuffixValueFromZeusDocumentAndUI(@Named("postalCodeSuffix") String postalCodeSuffix,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficepostalCodeSuffixValueFromZeusDocumentAndUI(postalCodeSuffix,officeFid,source);
-    }
-
-    @Then("the user should see office locations info value as <Info> for fid <officeFid> in $source document and in zeus UI")
-    public void verifyEditOfficeLocationsInfoValueFromZeusDocumentAndUI(@Named("Info") String Info,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficeLocationsInfoValueFromZeusDocumentAndUI(Info,officeFid,source);
-    }
-
-    @Then("the user should see office country value as <Country> for fid <officeFid> in $source document and in UI")
-    public void verifyEditOfficeLocationsCountryValueFromZeusDocumentAndUI(@Named("Country") String Country,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficeLocationsCountryValueFromZeusDocumentAndUI(Country, "type", officeFid, source, "get office basic info");
-    }
-
-    @Then("the user should see office area value as <Area> for fid <officeFid> in $source document and in UI")
-    public void verifyEditOfficeLocationsAreaValueFromZeusDocumentAndUI(@Named("Area") String Area,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficeLocationsAreaValueFromZeusDocumentAndUI(Area, "type", officeFid, source, "get office basic info");
-    }
-
-    @Then("the user should see office area value as <SubArea> for fid <officeFid> in $source document and in UI")
-    public void verifyEditOfficeLocationsSubAreaValueFromZeusDocumentAndUI(@Named("SubArea") String SubArea,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficeLocationsSubAreaValueFromZeusDocumentAndUI(SubArea, "type", officeFid, source, "get office basic info");
-    }
-
-    @Then("the user should see office city value as <City> for fid <officeFid> in $source document and in UI")
-    public void verifyEditOfficeLocationsCityValueFromZeusDocumentAndUI(@Named("City") String City,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficeLocationsCityValueFromZeusDocumentAndUI(City, "type", officeFid, source, "get office basic info");
-    }
 
     @Then("the user should see the error message $errorMsg for the office country field")
     public void verifyOfficeCountryErrorMessage(@Named("errorMsg") String errorMsg) {
         getEditOfficePage().verifyOfficeErrorMessage("office_address_country_error_msg_xpath", errorMsg);
 
     }
+    @Then("the user should see the error message $errorMsg for the office country code field")
+    public void verifyOfficeCountryCodeErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_countryCode_error_msg", errorMsg);
 
+    }
+
+    @Then("the user should see the error message $errorMsg for the office area code field")
+    public void verifyOfficeAreaCodeErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_areaCode_error_msg", errorMsg);
+
+    }
+
+    @Then("the user should see the error message $errorMsg for the office number field")
+    public void verifyOfficeNumberErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_number_error_msg", errorMsg);
+
+    }
+
+    @Then("the user should see the error message $errorMsg for the office range limit field")
+    public void verifyOfficeRangeLimitErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_rangeLimit_error_msg", errorMsg);
+
+    }
+
+    @Then("the user should see the error message $errorMsg for the office ext field")
+    public void verifyOfficeExttErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_ext_error_msg", errorMsg);
+
+    }
     @Then("the user should see the successful update message at top of the office page")
     public void verifySuccessfulUpdatedMessage() {
         getEditOfficePage().verifySuccessfulUpdatedMessage();
@@ -533,7 +490,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @Then("the user should see the error message $errorMsg for the office city field")
     public void verifyOfficeCityErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditOfficePage().verifyOfficeErrorMessage("office_address_country_error_msg_xpath", errorMsg);
+        getEditOfficePage().verifyOfficeErrorMessage("office_address_country_error_msg", errorMsg);
 
     }
 
@@ -543,14 +500,21 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @Then("the user should see the error message $errorMsg for the office telecom type field")
     public void verifyOfficeTelecomTypeErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditOfficePage().verifyOfficeErrorMessage("xpathIdentifier", errorMsg);
+        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_type_error_msg", errorMsg);
 
     }
     @Then("the user should see the error message $errorMsg for the office value field")
     public void verifyOfficeTelecomValueErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditOfficePage().verifyOfficeErrorMessage("xpathIdentifier", errorMsg);
+        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_value_error_msg", errorMsg);
 
     }
+
+    @Then("the user should see the error message $errorMsg for the office telecom rank field")
+    public void verifyOfficeTelecomRankErrorMessage(@Named("errorMsg") String errorMsg) {
+        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_value_error_msg", errorMsg);
+
+    }
+
 }
 
 
