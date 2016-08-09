@@ -396,6 +396,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
 	@Then("the user should see the successful update message at top of the office page")
 	public void verifySuccessfulUpdatedMessage() {
+		setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().verifySuccessfulUpdatedMessage();
 	}
 
