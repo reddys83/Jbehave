@@ -1,4 +1,4 @@
-Meta:@EditOfficeBasicInfo @Edit @Office @AllStories
+Meta:@EditOfficeHistory @Edit @Office @AllStories
 
 Narrative:
 As a user
@@ -7,7 +7,7 @@ So that I can achieve a business goal
 JIRA ID - ZEUS-1082 - User can edit Office's History
 
 Scenario: User can edit  'Office History' that is different from the current value
-a)User verifies existing 'Office History' existing interest rate values are retrieved  from trusted doc 
+a)User verifies existing 'Office History' values are retrieved  from trusted doc 
 b)User verifies 'Your Changes have been saved' message is displayed after save
 c)User verifies Office History has been updated in confirmation modal
 d)User verifies whether updated 'Office History' is reflecting in Office Web page
@@ -115,7 +115,7 @@ Examples:
 |entity|searchBy|fid|officeFid|officeHistory|
 |1038|FID|1038|1038-51||
 
-Scenario: User verifies that Interest Rate  field is limited to 10000 unicode characters & verifies the max length attribute is restricted to 10000 in Area basic info Page
+Scenario: User verifies that Office History  field is limited to 10000 unicode characters & verifies the max length attribute is restricted to 10000 in Office Page
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
