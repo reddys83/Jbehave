@@ -906,11 +906,11 @@ public class EditOfficePage extends AbstractPage {
 	
 	public void verifyOfficePersonnelParametersInUI(List<String> personnelTypes, List<String> personnelValues) {
 		
-		List<WebElement> identifierRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_view_mode"));
+		List<WebElement> personnelRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_view_mode"));
 		
-		for (int i = 0; i < identifierRows.size(); i++) {
-			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(personnelTypes.get(i)));
-			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(personnelValues.get(i)));
+		for (int i = 0; i < personnelRows.size(); i++) {
+			assertTrue(personnelRows.get(i).findElements(By.tagName("td")).get(0).getText().equals(personnelTypes.get(i)));
+			assertTrue(personnelRows.get(i).findElements(By.tagName("td")).get(1).getText().equals(personnelValues.get(i)));
 		}
 	} 
 	

@@ -595,6 +595,40 @@ public class EditOfficeSteps extends AbstractSteps{
 
 		getEditOfficePage().verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
 	}
+	
+	@When("the user enters personnel type as <newPersonnelType> in the office personnel page")
+	public void editOfficePersonnelType(@Named("newPersonnelType") String personnelType) {
+		getEditOfficePage().enterOfficePersonnelType(personnelType, 1);
+	}
+
+	@When("the user enters personnel value as <newPersonnelValue> in the office personnel page")
+	public void editOfficePersonnelValue(@Named("newPersonnelValue") String personnelValue) {
+		getEditOfficePage().enterOfficePersonnelValue(personnelValue, 1);
+	}
+	
+	@Then("the user verifies that the existing personnel parameters are updated present in the office identifiers page")
+	public void verifyUpdatedOfficePersonnelParametersInUI(@Named("newPersonnelType") String personnelType,
+			@Named("newPersonnelValue") String personnelValue) {
+
+		List<String> personnelTypes = new ArrayList<>();
+		personnelTypes.add(personnelType);
+		List<String> personnelValues = new ArrayList<>();
+		personnelValues.add(personnelValue);
+		
+		getEditOfficePage().verifyOfficePersonnelParametersInUI(personnelTypes, personnelValues);
+	}
+	
+	@Then("the user should see the upadated office personnel values as in $source document")
+	public void verifyUpdatedOfficePersonnelValuesFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid,
+			@Named("newPersonnelType") String personnelType, @Named("newPersonnelValue") String personnelValue) {
+
+		List<String> personnelTypes = new ArrayList<>();
+		personnelTypes.add(personnelType);
+		List<String> personnelValues = new ArrayList<>();
+		personnelValues.add(personnelValue);
+
+		getEditOfficePage().verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
+	}
 
 }
 
