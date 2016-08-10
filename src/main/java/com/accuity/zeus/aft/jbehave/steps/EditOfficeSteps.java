@@ -548,25 +548,19 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().verifyOfficeBusinessHourValueFromZeusDB(officeFid, source);
 	}
 
-	@Then("the user should not see the <ConfirmationSummary> changes in confirmation modal for office basic info page")
-	public void verifyNoChangeConfirmationMessage(@Named("ConfirmationSummary") String ConfirmationSummary) {
-		getDataPage().verifyNoSummaryConfirmationModal(ConfirmationSummary);
-	}
-
-	@When("the user enters values which is beyond 200 unicode characters in the office business hours field")
-	public void enterInvalidCharactersInOfficeBusinessHours() {
-		getEditOfficePage().enterInvalidCharactersInOfficeBusinessHours();
+	@When("the user enters 200 unicode characters in the office business hours field")
+	public void enterMaximumCharactersInOfficeBusinessHours() {
+		getEditOfficePage().enterMaximumCharactersInOfficeBusinessHours();
 	}
 
 	@Then("the user should be able to view that only 200 unicode characters are saved in office business hours")
 	public void viewOfficeBusinessHoursValidCharacterLength() {
 		getEditOfficePage().viewOfficeBusinessHoursValidCharacterLength();
 	}
-
-	@Then("the user should be able to verify the maximum values are entered in the office business hours field")
-	public void verifyMaximumTextInOfficeBusinessHours() {
-		getEditOfficePage().verifyMaximumTextInOfficeBusinessHours();
+	
+	@Then("the user verifies business hours max length attribute is $maxLength")
+	public void verifyOfficeBusinessHoursMaxLenghtAttribute(@Named("maxLength") String maxLength) {
+		getEditOfficePage().verifyOfficeBusinessHoursMaxLenghtAttribute(maxLength);
 	}
-
 }
 

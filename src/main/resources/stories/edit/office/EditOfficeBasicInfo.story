@@ -1017,6 +1017,8 @@ Scenario:  To update the Office`s 'Basic Info' by entering a value for 'Business
 a)User verifies whether current value of Business Hours is same as in trusted document.
 b)User verifies Business Hours value is updated in Office basic info page
 c)User verifies Business Hours value is updated in Zeus Document
+d)User verifies whether blank value for Business Hours is saved successfully in office basic info page
+e)User verifies blank Business Hours value updated in Zeus Document
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -1048,6 +1050,7 @@ Then the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|officeFid|businessHourDiffText|businessHourText|
 |1038|FID|1038|1038-51|Sample text|Alternative text|
+|1038|FID|1038|1038-51|Sample text||
 
 Scenario: To view that there is no change in value when the user has entered a value for 'Business Hours' that is no different to the current value in Office Basic Info page
 a)User verifies Office Basic Info changes has not been updated in confirmation modal
@@ -1071,57 +1074,9 @@ Then the user should see the successful update message at top of the office page
 When the user clicks on the office update link
 When the user enters the <businessHourText> in the office business hour text area
 And the user clicks on the save button
-Then the user should not see the <ConfirmationSummary> changes in confirmation modal for office basic info page
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-Then the user should be able to verify the values are entered in the office business hour field
-Then the user should see the office business hours value same as in zeus document
-Then the user reverts the changes to the document
-
-Examples:
-|entity|searchBy|fid|officeFid|businessHourText|ConfirmationSummary|
-|1038|FID|1038|1038-51|Sample text|Basic Info|
-
-Scenario: User verifies that business hours field is limited to 200 unicode characters in Office basic info Page
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
-When the user enters values which is beyond 200 unicode characters in the office business hours field
-And the user clicks on the save button
-And the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-Then the user should be able to view that only 200 unicode characters are saved in office business hours
-Then the user should be able to verify the maximum values are entered in the office business hours field
-Then the user reverts the changes to the document
-
-Examples:
-|entity|searchBy|fid|officeFid|
-|1038|FID|1038|1038-51|
-
-Scenario:  To update the Office`s 'Basic Info' by entering a blank value for 'Business Hours'
-a)User verifies whether blank value for Business Hours is saved successfully in office basic info page
-b)User verifies Blank Business Hours values updated in Zeus Document
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
-When the user enters the <businessHourText> in the office business hour text area
-And the user clicks on the save button
+Then the user should not see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 Then the user should be able to verify the values are entered in the office business hour field
@@ -1130,4 +1085,29 @@ Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|businessHourText|
-|1038|FID|1038|1038-51||
+|1038|FID|1038|1038-51|Sample text|
+
+Scenario: User verifies that business hours field is limited to 200 unicode characters in Office basic info Page
+a)User verifies that the maxlength attribute is 200.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+When the user enters 200 unicode characters in the office business hours field
+Then the user verifies business hours max length attribute is 200
+When the user clicks on the save button
+And the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+Then the user should be able to view that only 200 unicode characters are saved in office business hours
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|
+|1038|FID|1038|1038-51|
