@@ -104,7 +104,7 @@ Then the user should see the below summary changes in confirmation modal
 |Summary|
 |Personnel|
 When the user clicks on the confirm button
-Then the user verifies that the existing personnel parameters are updated present in the office identifiers page
+Then the user verifies that the existing personnel parameters are updated in the office identifiers page
 And the user should see the upadated office personnel values as in zeus document
 Then the user reverts the changes to the document
 

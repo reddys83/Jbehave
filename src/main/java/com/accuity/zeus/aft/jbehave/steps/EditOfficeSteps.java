@@ -606,7 +606,7 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().enterOfficePersonnelValue(personnelValue, 1);
 	}
 	
-	@Then("the user verifies that the existing personnel parameters are updated present in the office identifiers page")
+	@Then("the user verifies that the existing personnel parameters are updated in the office identifiers page")
 	public void verifyUpdatedOfficePersonnelParametersInUI(@Named("newPersonnelType") String personnelType,
 			@Named("newPersonnelValue") String personnelValue) {
 
