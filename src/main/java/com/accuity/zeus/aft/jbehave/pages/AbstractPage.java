@@ -327,4 +327,12 @@ public abstract class AbstractPage {
         }
         return selectedValueList;
     }
+    
+    public void textToBePresentInElement(WebElement errMsg) {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), 25);
+            wait.until(ExpectedConditions.textToBePresentInElement(errMsg,"Enter up to 8 valid numbers."));
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
+    }
 }

@@ -520,5 +520,114 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().verifyNewlyAddedOfficeIdentifierRowIsDisplayed();
 	}
 
-}
+	@Then("the user should see the statistics values same as in $source document for fid <officeFid>")
+	public void verifyEditOfficeStatisticsValueFromTrusted(@Named("officeFid") String officeFid,
+			@Named("source") String source) throws InterruptedException {
+		getEditOfficePage().verifyEditOfficeStatisticsValueFromTrusted(officeFid, "numberOfAtms",
+				"numberOfCheckingAccounts", "numberOfSavingsAccounts", source);
+	}
+
+	@When("the user enters the office total atms value as <totalAtms>")
+	public void enterOfficeTotalAtmsValue(@Named("totalAtms") String totalAtms) {
+		getEditOfficePage().enterValueInStatisticsPageTextField("office_total_atms_xpath", totalAtms);
+	}
+
+	@When("the user enters the office total checking accounts value as <totalCheckingAccounts>")
+	public void enterOfficeTotalCheckingAccountsValue(@Named("totalCheckingAccounts") String totalCheckingAccounts) {
+		getEditOfficePage().enterValueInStatisticsPageTextField("office_total_checking_accounts_xpath", totalCheckingAccounts);
+	}
+
+	@When("the user enters the office total savings accounts value as <totalSavingsAccounts>")
+	public void enterOfficeTotalSavingsAccountsValue(@Named("totalSavingsAccounts") String totalSavingsAccounts) {
+		getEditOfficePage().enterValueInStatisticsPageTextField("office_total_savings_accounts_xpath", totalSavingsAccounts);
+	}
+
+	@When("the user enters the office total atms value as <totalAtms1>")
+	public void enterOfficeTotalAtmsNewValue(@Named("totalAtms1") String totalAtms1) {
+		getEditOfficePage().enterValueInStatisticsPageTextField("office_total_atms_xpath", totalAtms1);
+	}
+
+	@When("the user enters the office total checking accounts value as <totalCheckingAccounts1>")
+	public void enterOfficeTotalCheckingAccountsNewValue(
+			@Named("totalCheckingAccounts1") String totalCheckingAccounts1) {
+		getEditOfficePage().enterValueInStatisticsPageTextField("office_total_checking_accounts_xpath", totalCheckingAccounts1);
+	}
+
+	@When("the user enters the office total savings accounts value as <totalSavingsAccounts1>")
+	public void enterOfficeTotalSavingsAccountsNewValue(@Named("totalSavingsAccounts1") String totalSavingsAccounts1) {
+		getEditOfficePage().enterValueInStatisticsPageTextField("office_total_savings_accounts_xpath", totalSavingsAccounts1);
+	}
+
+	@Then("the user verifies the office statistics field values in UI")
+	public void verifyOfficeStatisticsValueInUI(@Named("totalAtms") String totalAtms,
+			@Named("totalCheckingAccounts") String totalCheckingAccounts,
+			@Named("totalSavingsAccounts") String totalSavingsAccounts) throws InterruptedException {
+		getEditOfficePage().verifyOfficeStatisticsValueInUI(totalAtms, totalCheckingAccounts, totalSavingsAccounts);
+	}
+
+	@Then("the user verifies the office statistics new field values in UI")
+	public void verifyOfficeStatisticsNewValueInUI(@Named("totalAtms1") String totalAtms1,
+			@Named("totalCheckingAccounts1") String totalCheckingAccounts1,
+			@Named("totalSavingsAccounts1") String totalSavingsAccounts1) throws InterruptedException {
+		getEditOfficePage().verifyOfficeStatisticsValueInUI(totalAtms1, totalCheckingAccounts1, totalSavingsAccounts1);
+	}
+
+	@Then("the user verifies the office statistics values as in $source document for fid <officeFid>")
+	public void verifyOfficeStatisticsValuesFromZeus(@Named("officeFid") String officeFid,
+			@Named("source") String source, @Named("totalAtms") String totalAtms,
+			@Named("totalCheckingAccounts") String totalCheckingAccounts,
+			@Named("totalSavingsAccounts") String totalSavingsAccounts) {
+		getEditOfficePage().verifyOfficeStatisticsValueFromZeus(officeFid, source, totalAtms, totalCheckingAccounts,
+				totalSavingsAccounts);
+	}
+
+	@Then("the user verifies the office statistics new values as in $source document for fid <officeFid>")
+	public void verifyOfficeStatisticsUpdatedValuesFromZeus(@Named("officeFid") String officeFid,
+			@Named("source") String source, @Named("totalAtms1") String totalAtms1,
+			@Named("totalCheckingAccounts1") String totalCheckingAccounts1,
+			@Named("totalSavingsAccounts1") String totalSavingsAccounts1) {
+		getEditOfficePage().verifyOfficeStatisticsValueFromZeus(officeFid, source, totalAtms1, totalCheckingAccounts1,
+				totalSavingsAccounts1);
+	}
+
+	@Then("the user verifies office statistics page fields max length attribute is $maxLength")
+	public void verifyAreaTimeZoneSummaryMaxLenghtAttribute(@Named("maxLength") String maxLength,
+			@Named("totalAtms") String totalAtms, @Named("totalCheckingAccounts") String totalCheckingAccounts,
+			@Named("totalSavingsAccounts") String totalSavingsAccounts) {
+		getEditOfficePage().verifyOfficeStatisticsFieldsMaxLenghtAttribute(maxLength, totalAtms, totalCheckingAccounts,
+				totalSavingsAccounts);
+	}
+
+	@Then("the user should see the $errMsg error message for the total atms field in the office statistics page")
+	public void verifyErrorMessageForRequiredTotalAtms(@Named("errMsg") String errMsg) {
+		getEditOfficePage().verifyErrorMessageForTotalAtm(errMsg);
+	}
+
+	@Then("the user should see the $errMsg error message for the total checking accounts field in the office statistics page")
+	public void verifyErrorMessageForRequiredTotalCheckingAccounts(@Named("errMsg") String errMsg) {
+		getEditOfficePage().verifyErrorMessageForTotalCheckingAccounts(errMsg);
+	}
+
+	@Then("the user should see the $errMsg error message for the total savings account field in the office statistics page")
+	public void verifyErrorMessageForRequiredTotalAtmField(@Named("errMsg") String errMsg) {
+		getEditOfficePage().verifyErrorMessageForTotalSavingsAccount(errMsg);
+	}
+
+	@Then("the user verifies the office statistics field values are limited to 8 numbers in UI")
+	public void verifyOfficeStatisticsValueFieldLimitInUI(@Named("totalAtms") String totalAtms,
+			@Named("totalCheckingAccounts") String totalCheckingAccounts,
+			@Named("totalSavingsAccounts") String totalSavingsAccounts) throws InterruptedException {
+		getEditOfficePage().verifyOfficeStatisticsValueInUI(totalAtms.substring(0, 8),
+				totalCheckingAccounts.substring(0, 8), totalSavingsAccounts.substring(0, 8));
+	}
+
+	@Then("the user verifies the office statistics values as in $source document for fid <officeFid> are limited to 8 numbers")
+	public void verifyOfficeStatisticsValueFieldLimitFromZeus(@Named("officeFid") String officeFid,
+			@Named("source") String source, @Named("totalAtms") String totalAtms,
+			@Named("totalCheckingAccounts") String totalCheckingAccounts,
+			@Named("totalSavingsAccounts") String totalSavingsAccounts) {
+		getEditOfficePage().verifyOfficeStatisticsValueFromZeus(officeFid, source, totalAtms.substring(0, 8),
+				totalCheckingAccounts.substring(0, 8), totalSavingsAccounts.substring(0, 8));
+	}
+	}
 
