@@ -951,6 +951,20 @@ public class EditOfficePage extends AbstractPage {
 		verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
     }
 	
+	public void clickOnDeleteOfficePersonnelRowButton() {
+		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_delete_personnel_row_button_xpath"));
+	}
+	
+	public void verifyNewlyAddedOfficePersonnelRowIsDisplayed() {
+		try {
+			WebElement personnel = getDriver()
+					.findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_input_xpath"));
+			assertTrue(personnel != null);
+		} catch (Exception e) {
+			assertTrue(false);
+		}
+	}
+	
     @Override
     public String getPageUrl() {
         return null;

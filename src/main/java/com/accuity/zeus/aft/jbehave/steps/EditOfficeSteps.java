@@ -661,6 +661,16 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyErrorMessageForPersonnelType(@Named("errorMessage") String errorMessage) {
 		getEditOfficePage().verifyErrorMessageForPersonnelType(errorMessage);
 	}
+	
+	@When("the user clicks on the delete personnel row button in the office personnel page")
+	public void clickOnDeleteOfficePersonnelRowButton() {
+		getEditOfficePage().clickOnDeleteOfficePersonnelRowButton();
+	}
+	
+	@Then("the user should see the newly added personnel row in the office personnel page")
+	public void verifyNewlyAddedOfficePersonnelRowIsDisplayed() throws Exception {
+		getEditOfficePage().verifyNewlyAddedOfficePersonnelRowIsDisplayed();
+	}
 
 }
 
