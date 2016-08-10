@@ -527,19 +527,19 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().verifyOfficeBusinessHourValueFromTrustedDB(officeFid, source);
 	}
 
-	@When("the user enters the <businessHourText> in the office business hour text area")
-	public void enterOfficeBusinessHourText(@Named("businessHourText") String businessHourText) {
-		getEditOfficePage().enterOfficeBusinessHourText(businessHourText);
+	@When("the user enters the <businessHour> in the office business hour text area")
+	public void enterOfficeBusinessHourText(@Named("businessHour") String businessHour) {
+		getEditOfficePage().enterOfficeBusinessHourText(businessHour);
 	}
 
-	@When("the user enters the <businessHourDiffText> in the office business hour text area")
-	public void enterOfficeBusinessHourDiffText(@Named("businessHourDiffText") String businessHourDiffText) {
-		getEditOfficePage().enterOfficeBusinessHourText(businessHourDiffText);
+	@When("the user enters the <businessHour2> in the office business hour text area")
+	public void enterOfficeBusinessHourDiffText(@Named("businessHour2") String businessHour2) {
+		getEditOfficePage().enterOfficeBusinessHourText(businessHour2);
 	}
 
 	@Then("the user should be able to verify the values are entered in the office business hour field")
-	public void verifyOfficeBusinessHourTextInUI(@Named("businessHourText") String businessHourText) {
-		getEditOfficePage().verifyOfficeBusinessHourTextInUI(businessHourText);
+	public void verifyOfficeBusinessHourTextInUI(@Named("businessHour") String businessHour) {
+		getEditOfficePage().verifyOfficeBusinessHourTextInUI(businessHour);
 	}
 
 	@Then("the user should see the office business hours value same as in $source document")

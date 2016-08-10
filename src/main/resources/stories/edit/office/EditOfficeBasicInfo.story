@@ -1032,12 +1032,12 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
 Then the user should see the office's business hours value same as in trusted document
-When the user enters the <businessHourDiffText> in the office business hour text area
+When the user enters the <businessHour2> in the office business hour text area
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 When the user clicks on the office update link
-When the user enters the <businessHourText> in the office business hour text area
+When the user enters the <businessHour> in the office business hour text area
 And the user clicks on the save button
 Then the user should see the below summary changes in confirmation modal
 |Summary|
@@ -1049,8 +1049,9 @@ Then the user should see the office business hours value same as in zeus documen
 Then the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|businessHourDiffText|businessHourText|
+|entity|searchBy|fid|officeFid|businessHour2|businessHour|
 |1038|FID|1038|1038-51|Sample text|Alternative text|
+|1038|FID|1038|1038-51|12:00|8:56|
 |1038|FID|1038|1038-51|Sample text||
 
 Scenario: To view that there is no change in value when the user has entered a value for 'Business Hours' that is no different to the current value in Office Basic Info page
@@ -1069,12 +1070,12 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
-When the user enters the <businessHourText> in the office business hour text area
+When the user enters the <businessHour> in the office business hour text area
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 When the user clicks on the office update link
-When the user enters the <businessHourText> in the office business hour text area
+When the user enters the <businessHour> in the office business hour text area
 And the user clicks on the save button
 Then the user should not see the below summary changes in confirmation modal
 |Summary|
@@ -1086,7 +1087,7 @@ Then the user should see the office business hours value same as in zeus documen
 Then the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|businessHourText|
+|entity|searchBy|fid|officeFid|businessHour|
 |1038|FID|1038|1038-51|Sample text|
 
 Scenario: User verifies that business hours field is limited to 200 unicode characters in Office basic info Page

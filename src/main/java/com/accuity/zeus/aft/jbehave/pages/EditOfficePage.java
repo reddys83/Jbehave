@@ -803,7 +803,7 @@ public class EditOfficePage extends AbstractPage {
     
 	public void verifyOfficeBusinessHourValueFromTrustedDB(String officeFid, String source) {
 		assertEquals(getOfficeBusinessHoursInfoFromDB(officeFid, source, "hours"),
-				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_edit_mode"))
+				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_edit_mode"))
 						.getAttribute("value"));
 	}
 
@@ -827,32 +827,32 @@ public class EditOfficePage extends AbstractPage {
 	}
 
 	public void enterOfficeBusinessHourText(String businessHourText) {
-		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_edit_mode"), businessHourText);
+		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_business_hours_edit_mode"), businessHourText);
 	}
 
 	public void verifyOfficeBusinessHourTextInUI(String businessHourText) {
 		assertEquals(businessHourText, getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode")).getText());
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_view_mode")).getText());
 	}
 
 	public void verifyOfficeBusinessHourValueFromZeusDB(String officeFid, String source) {
 		assertEquals(getOfficeBusinessHoursInfoFromDB(officeFid, source, "hours"), getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode")).getText());
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_view_mode")).getText());
 	}
 
 	public void enterMaximumCharactersInOfficeBusinessHours() {
 		String businessHoursRandomText = createBigString(200);
-		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_edit_mode"), businessHoursRandomText);
+		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_business_hours_edit_mode"), businessHoursRandomText);
 	}
 
 	public void viewOfficeBusinessHoursValidCharacterLength() {
 		Integer businessHoursTextLength = getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode")).getText().length();
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_view_mode")).getText().length();
 		assertEquals(businessHoursTextLength.toString(), "200");
 	}		
 	
 	public void verifyOfficeBusinessHoursMaxLenghtAttribute(String maxLength) {
-		assertEquals((getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_edit_mode"))
+		assertEquals((getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_edit_mode"))
 				.getAttribute("maxlength")), maxLength);
 	}
     
