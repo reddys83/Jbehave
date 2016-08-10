@@ -1019,6 +1019,7 @@ b)User verifies Business Hours value is updated in Office basic info page
 c)User verifies Business Hours value is updated in Zeus Document
 d)User verifies whether blank value for Business Hours is saved successfully in office basic info page
 e)User verifies blank Business Hours value updated in Zeus Document
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -1056,6 +1057,7 @@ Scenario: To view that there is no change in value when the user has entered a v
 a)User verifies Office Basic Info changes has not been updated in confirmation modal
 b)User verifies Business Hours value is updated correctly in office basic info page
 c)User verifies Business Hours values in Zeus Document
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -1089,6 +1091,7 @@ Examples:
 
 Scenario: User verifies that business hours field is limited to 200 unicode characters in Office basic info Page
 a)User verifies that the maxlength attribute is 200.
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -1106,6 +1109,7 @@ When the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 Then the user should be able to view that only 200 unicode characters are saved in office business hours
+Then the user should see the office business hours value same as in zeus document
 Then the user reverts the changes to the document
 
 Examples:
