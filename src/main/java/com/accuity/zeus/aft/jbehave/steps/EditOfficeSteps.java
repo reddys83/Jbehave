@@ -515,6 +515,27 @@ public class EditOfficeSteps extends AbstractSteps{
 
     }
 
+    @When("the user clicks on the No button to cancel the deletion of row in office locations section")
+    public void pressNoButtonInDeleteConfirmationModalForOfficeLocation() {
+        getEditOfficePage().pressNoButtonInDeleteConfirmationModalForOfficeLocation();
+    }
+    @Then("the user should see the location row in the office locations page")
+    public void verifyOfficeLocationRowIsDisplayed() throws Exception {
+        getEditOfficePage().verifyOfficeLocationRowIsDisplayed();
+    }
+
+    @Then("the user verifies that the row values exists in the office locations page")
+    public void verifyNewlyAddedOfficeLocationRowExists() {
+        getEditOfficePage().verifyNewlyAddedOfficeLocationRowExists();
+    }
+
+
+    @When("the user clicks on the No button to cancel the deletion of row in office locations page")
+    public void pressNoButtonInDeleteConfirmationModalForOffice() {
+        getEditOfficePage().pressNoButtonInDeleteConfirmationModalForOfficeLocation();
+    }
+
+
 }
 
 

@@ -55,13 +55,13 @@ Then the user should see the successful update message at top of the office page
 And the user should not see the newly added locations row in the office locations page
 And the user reverts the changes to the document
 
-
 Examples:
 |entity|searchBy|fid|officeFid|
 |50900|FID|50900|50900-0|
 
-
-Scenario: Verify that the user should be able to delete an existing office location row
+Scenario: Verify that the user should be able to edit an existing office location row
+a) - Verify if User can prevent deleting the location row by clicking on 'No'.
+b) - Verify if User can delete the location row by clicking on 'Yes'.
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -74,6 +74,15 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
+And the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on delete office locations row button for the row office_first_existing_row_location_delete_button
+Then the user should see the delete row confirmation modal in the office page
+When the user clicks on the No button to cancel the deletion of row in office locations section
+Then the user should see the location row in the office locations page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user verifies that the row values exists in the office locations page
+When the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on delete office locations row button for the row office_first_existing_row_location_delete_button
 Then the user should see the delete row confirmation modal in the office page
@@ -91,7 +100,9 @@ Examples:
 |entity|searchBy|fid|officeFid|
 |299676|FID|299676|299676-0|
 
-Scenario: Verify that the user should be able to delete a new office location row
+Scenario: Verify that the user should be able to edit a new office location row
+a) - Verify if User can prevent deleting the location row by clicking on 'No'.
+b) - Verify if User can delete the location row by clicking on 'Yes'.
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -104,6 +115,16 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
+And the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on the add new office location button in the office page
+And the user clicks on delete office locations row button for the row office_first_new_row_location_delete_button
+Then the user should see the delete row confirmation modal in the office page
+When the user clicks on the No button to cancel the deletion of row in office locations section
+Then the user should see the location row in the office locations page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user verifies that the row values exists in the office locations page
+When the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on the add new office location button in the office page
 And the user clicks on delete office locations row button for the row office_first_new_row_location_delete_button
@@ -328,7 +349,6 @@ Examples:
 |entity|searchBy|fid|officeFid|Country|Area|
 |1010|FID|1010|1010-45|Åland Islands|No Area|
 
-
 Scenario: Verify User can select a new value for Postal Code, Postal Code Suffix, Info
 
 Given a user is on the search page
@@ -352,7 +372,10 @@ Examples:
 |entity|searchBy|fid|officeFid|PostalCode|PostalCodeSuffix|Info|
 |1010|FID|1010|1010-45|60126|123|adhsbd|
 
-Scenario: Verify that the user should be able to delete a new office address row
+Scenario: Verify that the user should be able to edit a new office address row
+a) - Verify if User can prevent deleting the location row by clicking on 'No'.
+b) - Verify if User can delete the location row by clicking on 'Yes'.
+
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -369,6 +392,10 @@ And the user gets the document with get id for offices with the <officeFid> from
 And the user clicks on the add new office location button in the office page
 And the user clicks on add new office address button in the office locations
 And the user clicks on delete office address row button for the row office_first_new_row_address_delete_button
+When the user clicks on the No button to cancel the deletion of row in office locations page
+And the user clicks on the save button
+And the user clicks on the confirm button
+Then the user verifies that the row values exists in the office locations page
 When the user clicks on the yes button in the delete row confirmation modal in the office page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -382,7 +409,6 @@ And the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|officeFid|
 |249093|FID|249093|249093-0|
-
 
 Scenario: a)Verify that the delete button is disabled for the office address row where the address type is physical when the Legal Entity is associated with the office is a "deposit taking institution"
           b)Verify that the user should be able to add a new office address when the adddress type is mailing
@@ -405,11 +431,9 @@ And the user clicks on add new office address button in the office locations
 When the user selects office address type office_addressType_first_row_new_address_type_dropdown value as <Type>
 Then the user should see the office_addressType_first_row_new_address_type_dropdown in disabled state in locations section
 
-
 Examples:
 |entity|searchBy|fid|officeFid|Type|Type|
 |1010|FID|1010|1010-44|mailing|physical|
-
 
 Scenario:  Verify Office Address Type dropdown values are from lookup ADDRESS_TYPE
 
@@ -431,7 +455,6 @@ Then the user should see the office_addressType_first_row_new_address_type_dropd
 Examples:
 |entity|searchBy|fid|officeFid|
 |1010|FID|1010|1010-44|
-
 
 Scenario: a) Verify that the error message required is displayed when the the Address Type dropdown is left blank
           b) Verify that the error message required is not displayed when the Address Line1,Address Line2, Address Line3, Address Line 4, Postal Code, Postal Code Suffix, Info are left blank
@@ -489,13 +512,11 @@ Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user reverts the changes to the document
 
-
 Examples:
 |entity|searchBy|fid|officeFid|
 |1010|FID|1010|1010-44|
 
 Scenario: Verify that the error message "At least one physical address required" is displayed when none of the Address Type is physical
-
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -606,12 +627,10 @@ And the user verifies that the office telecom fields are entered in the office l
 And the user should see the office telecomm fields as in zeus document
 And the user reverts the changes to the document
 
-
 Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|TextBefore|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|
 |1010|FID|1010|1010-45|telephone|1|5 pm|708|298|3125|20|123|9 am|1 hr|
 |1010|FID|1010|1010-45|fax|1|5 pm|708|298|3142|20|123|9 am|1 hr|
-
 
 
 Scenario: a)Verify user can select a new value for Telecom Type as email and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value
@@ -649,8 +668,6 @@ Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|
 |1010|FID|1010|1010-45|email|1|5 pm|abc||||||||
 |1010|FID|1010|1010-45|website|4|5 pm|xyz||||||||
-
-
 
 Scenario: a)Verify user can select a new value for Telecom Type as telex and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
           b)Verify user can select a new value for Telecom Type as reuters and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
@@ -691,8 +708,6 @@ Examples:
 |1010|FID|1010|1010-45|telex|1|5 pm|abc||||||9 am|1 hr|
 |1010|FID|1010|1010-45|reuters|1|5 pm|afv||||||9 am|1 hr|
 |1010|FID|1010|1010-45|cable|1|5 pm|hsn||||||9 am|1 hr|
-
-
 
 Scenario: a) Verify that the error message "Enter upto valid characters" is displayed when the Telecom Rank,Country Code, Number are left blank when the Type field is not null
 
@@ -754,6 +769,32 @@ Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|
 |1010|FID|1010|1010-44|email|2|||
 
+Scenario: a) Verify that the error message incorrect format is displayed when the value field has incorrect format when telecom type is email
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+When the user clicks on the office update link
+And the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on add new office telecoms button in the office locations
+And the user selects office address type office_addressType_first_row_new_address_type_dropdown value as <Type>
+And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
+And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
+And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
+And the user clicks on the save button
+Then the user should see the error message Incorrect format. for the office value field
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|
+|1010|FID|1010|1010-44|email|2||@gkjhnhasdkjlk|
+
 
 Scenario: Verify office Telecom fields- Rank,Text Before,Value, Country Code, Area Code, Number,Range Limit, Ext, Text After, AnswerBack fields max length when type(telephone/fax)
 
@@ -805,7 +846,6 @@ Examples:
 |entity|searchBy|fid|officeFid|Type|
 |1010|FID|1010|1010-44|cable|
 
-
 Scenario: a)Verify Office telecoms country code, Area code, Number,Rangelimit, allows only number and spaces and verify an error message Invalid characters: "Numbers and spaces allowed only" is displayed
           b) Verify Office ext field allows only numbers,hypens and spaces
 
@@ -834,11 +874,9 @@ And the user should see the error message Invalid characters: "Numbers and space
 And the user should see the error message Invalid characters: "Numbers and spaces allowed only". for the office range limit field
 And the user should see the error message Invalid characters: "Numbers,hypens and spaces allowed only". for the office ext field
 
-
 Examples:
 |entity|searchBy|fid|officeFid|Type|CountryCode|AreaCode|Number|RangeLimit|Ext|
 |1010|FID|1010|1010-44|telephone|hnv 1|qwrgw88ji|gwqeywjij002349=|638-283wesr|gfdin-|
-
 
 Scenario: Verify that the user should be able to delete an existing office telecoms row
 
@@ -855,7 +893,11 @@ And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on delete office telecoms row button for the row office_first_row_telecoms_delete_button
-And the user clicks on the yes button in the delete row confirmation modal in the office page
+When the user clicks on the No button to cancel the deletion of row in office locations page
+And the user clicks on the save button
+And the user clicks on the confirm button
+Then the user verifies that the row values exists in the office locations page
+When the user clicks on the yes button in the delete row confirmation modal in the office page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
@@ -864,11 +906,11 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 And the user should not see the office telecoms row in the locations office page
-
+And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|
-|1010|FID|1010|1010-45|
+|17649|FID|17649|17649-0|
 
 Scenario: Verify that the user should be able to delete a new office telecoms row
 
@@ -886,6 +928,14 @@ And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on add new office telecoms button in the office locations
 And the user clicks on delete office telecoms row button for the row office_first_new_row_telecoms_delete_button
+When the user clicks on the No button to cancel the deletion of row in office locations page
+And the user clicks on the save button
+And the user clicks on the confirm button
+Then the user verifies that the row values exists in the office locations page
+When the user clicks on the office update link
+And the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on add new office telecoms button in the office locations
+And the user clicks on delete office telecoms row button for the row office_first_new_row_telecoms_delete_button
 And the user clicks on the yes button in the delete row confirmation modal in the office page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -895,7 +945,6 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 And the user should not see the office telecoms row in the locations office page
-
 
 Examples:
 |entity|searchBy|fid|officeFid|

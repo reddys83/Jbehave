@@ -105,6 +105,8 @@ public class OfficeIdentifiers {
         hmap.put("office_locations_telecoms_textAfter_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Text After']/td"));
         hmap.put("office_locations_telecoms_answerback_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Answerback']/td"));
         hmap.put("office_locations_telecoms_value2_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Value']/td"));
+        hmap.put("office_location_delete_no_button", By.id("cancel-button"));
+        hmap.put("office_delete_no_button", By.id("no-button"));
     }
 
     public static By getObjectIdentifier(String key) {

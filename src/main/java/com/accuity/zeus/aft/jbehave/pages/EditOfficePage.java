@@ -771,7 +771,33 @@ public class EditOfficePage extends AbstractPage {
     public void verifyMaxlengthOfficeTelecomsText(String maxSize, String rowIdentifier) {
         assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);}
 
-        @Override
+    public void pressNoButtonInDeleteConfirmationModalForOfficeLocation() {
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_location_delete_no_button")).click();
+    }
+
+    public void pressNoButtonInDeleteConfirmationModalForOffice() {
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_delete_no_button")).click();
+    }
+
+    public void verifyOfficeLocationRowIsDisplayed() {
+        WebElement identifier = getDriver()
+                .findElement(OfficeIdentifiers.getObjectIdentifier("office_addressType_first_row_existing_address_type_dropdown"));
+        assertTrue(identifier != null);
+    }
+
+    public void verifyNewlyAddedOfficeLocationRowExists() {
+        try
+        {
+            WebElement identifier = getDriver()
+                    .findElement(OfficeIdentifiers.getObjectIdentifier("office_locations_primaryflag_view"));
+            assertTrue(identifier != null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
     public String getPageUrl() {
         return null;
     }
