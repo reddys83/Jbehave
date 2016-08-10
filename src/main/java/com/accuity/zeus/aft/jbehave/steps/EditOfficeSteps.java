@@ -619,6 +619,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 	
 	@Then("the user should see the upadated office personnel values as in $source document")
+	@Alias("the user verifies that no personnel values are updated in $source document")
 	public void verifyUpdatedOfficePersonnelValuesFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid,
 			@Named("newPersonnelType") String personnelType, @Named("newPersonnelValue") String personnelValue) {
 
@@ -628,6 +629,37 @@ public class EditOfficeSteps extends AbstractSteps{
 		personnelValues.add(personnelValue);
 
 		getEditOfficePage().verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
+	}
+	
+	@Then("the user should not see the newly added personnel row in the office personnel page")
+	public void verifyNewlyAddedOfficePersonnelRowIsNotDisplayed() throws Exception {
+		getEditOfficePage().verifyNewlyAddedOfficePersonnelRowIsNotDisplayed();
+	}
+	
+	@Then("the user should see the error message $errorMessage for personnel value field in the office personnel page")
+	public void verifyErrorMessageForPersonnelValue(@Named("errorMessage") String errorMessage) {
+		getEditOfficePage().verifyErrorMessageForPersonnelValue(errorMessage);
+	}
+	
+	@When("the user enters 10000 characters in the office personnel value text area")
+    public void enter10000CharactersInOfficePersonnelValue() {
+        getEditOfficePage().enter10000CharactersInOfficePersonnelValue();
+    }
+	
+	@Then("the user should see the office personnel value text area field length as 10000")
+    public void verifyOfficePersonnelValueTextAreaLength() {
+        getEditOfficePage().verifyOfficePersonnelValueTextAreaLength();
+    }
+	
+	@Then("the user should see the office personnel value text with 10000 characters for fid <officeFid> in $source document")
+    public void verifyPersonnelValueWithMaxLengthFromDB(@Named("personnelType") String personnelType,
+    		                   @Named("officeFid") String officeFid, @Named("source") String source) {
+        getEditOfficePage().verifyPersonnelValueWithMaxLengthFromZeus(personnelType, officeFid, source);
+    }
+	
+	@Then("the user should see the error message $errorMessage for personnel type field in the office personnel page")
+	public void verifyErrorMessageForPersonnelType(@Named("errorMessage") String errorMessage) {
+		getEditOfficePage().verifyErrorMessageForPersonnelType(errorMessage);
 	}
 
 }

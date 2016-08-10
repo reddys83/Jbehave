@@ -878,8 +878,9 @@ public class EditOfficePage extends AbstractPage {
 					assertEquals(childNodeList.item(0).getTextContent(), personnelTypes.get(index));
 					assertEquals(childNodeList.item(1).getTextContent(), personnelValues.get(index));
 				}
-			} else
+			} else {
 				assertTrue(source + "document is not available", false);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -913,6 +914,42 @@ public class EditOfficePage extends AbstractPage {
 			assertTrue(personnelRows.get(i).findElements(By.tagName("td")).get(1).getText().equals(personnelValues.get(i)));
 		}
 	} 
+	
+	public void verifyNewlyAddedOfficePersonnelRowIsNotDisplayed() {
+		try {
+			getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_AdditionalPersonnel"));
+		} catch (Exception e) {
+			assertTrue(true);
+		}
+	}
+	
+	public void verifyErrorMessageForPersonnelValue(String errorMessage) {
+		assertEquals(errorMessage, getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_error_msg_xpath")).getText());
+	}
+	
+	public void verifyErrorMessageForPersonnelType(String errorMessage) {
+		assertEquals(errorMessage, getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_error_msg_xpath")).getText());
+	}
+	
+	public void enter10000CharactersInOfficePersonnelValue() {
+        String strBigString = createBigString(10000);
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath")).clear();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + strBigString + "'", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath")));
+    }
+	
+	public void verifyOfficePersonnelValueTextAreaLength() {
+        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath")).getAttribute("maxlength"), "10000");
+    }
+	
+	public void verifyPersonnelValueWithMaxLengthFromZeus(String personnelType, String officeFid, String source) {
+		List<String> personnelTypes = new ArrayList<>();
+		personnelTypes.add(personnelType);
+		List<String> personnelValues = new ArrayList<>();
+		personnelValues.add(bigString);
+		verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
+    }
 	
     @Override
     public String getPageUrl() {
