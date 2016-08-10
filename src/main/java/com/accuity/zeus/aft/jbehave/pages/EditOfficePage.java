@@ -801,6 +801,17 @@ public class EditOfficePage extends AbstractPage {
 		}
 	}
     
+    public void verifyOfficeServiceCategoryFromLookup() {
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get office service category list");
+		List<WebElement> officeIdentifierTypesList = getDriver()
+				.findElements(OfficeIdentifiers.getObjectIdentifier("office_service_category_id"));
+
+		List<WebElement> options = officeIdentifierTypesList.get(0).findElements(By.cssSelector("option"));
+		for (int indexOfOption = 1; indexOfOption < options.size(); indexOfOption++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(),
+					options.get(indexOfOption).getText().trim());
+		}
+	}
 
     @Override
     public String getPageUrl() {

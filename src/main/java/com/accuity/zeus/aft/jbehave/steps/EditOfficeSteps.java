@@ -519,6 +519,16 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyNewlyAddedOfficeIdentifierRowIsDisplayed() throws Exception {
 		getEditOfficePage().verifyNewlyAddedOfficeIdentifierRowIsDisplayed();
 	}
+	
+	@Then("the user should see the office's service's values are same as in $source document")
+    public void verifyEditOfficeServiceValueFromTrusted(@Named("officeFid") String officeFid,@Named("source") String source){
+        //getEditOfficePage().verifyEditOfficesOfficeTypeValueFromTrusted(officeFid,"type",source);
+    }
+	
+	@Then ("the user should see the office service category dropdown values from lookup SERVICE_CATEGORY")
+	public void verifyOfficeServiceCategoryFromLookup(){
+        getEditOfficePage().verifyOfficeServiceCategoryFromLookup();
+    }
 
 }
 
