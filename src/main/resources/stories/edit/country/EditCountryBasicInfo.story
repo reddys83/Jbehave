@@ -16,6 +16,7 @@ JIRA ID - ZEUS-441 - User can save edits to country
 JIRA ID - ZEUS-920 - Properly handle Hera validation errors
 JIRA ID - ZEUS-953 - Item deletion, Confirmation Message
 JIRA ID - ZEUS-1001- When the user is on the country edit page and try to change the id in the URL , Then the modified country page should be in view mode
+JIRA ID - ZEUS-1173 - Error handling when error is in section not currently displayed
 
 Scenario: Verify country names type from lookup COUNTRY_NAME_TYPE
 Given a user is on the search page
@@ -43,8 +44,6 @@ And the user clicks on the add new name button in the basic info country page
 And the user enters country name as <countryName> in the basic info country page
 And the user clicks on the save button
 Then the user should see the error message for the required country name field in the basic info country page
-Then the user should see the error message for the required name type field in the basic info country page
-Then the user should see the error message for the required name value field in the basic info country page
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
@@ -296,7 +295,6 @@ Examples:
 |Albania|Numeric ISO Code|aksjuilrw1aksjuilrw1aksjuilrw1aksjuilrw1aksju%)~12y1|
 
 Scenario: User can edit country identifiers - Verify country Identifier types from lookup THIRD_PARTY_IDENTIFIER_GEO
-Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -350,7 +348,6 @@ Examples:
 |Afghanistan||
 
 Scenario:User will get warning if click away from screen they are editing
-Meta:test10
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -372,10 +369,10 @@ Then the user should see the currency page
 
 Examples:
 |country|currency|
-|Afghanistan|Rand|
+|Afghanistan|Baht|
 
 Scenario: User will see summary of changes made in confirmation modal
-Meta:@test11
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area
@@ -393,7 +390,14 @@ And the user enters holiday month <month> in the holidays country page
 And the user enters holiday year <year> in the holidays country page
 When the user clicks on the country credit rating link in the navigation bar
 And the user clicks on add new credit rating button in the credit rating country page
+And the user selects credit rating agency as <agency> in the country page
+And the user selects credit rating type as <type> in the country page
+And the user enters credit rating value as <value> in the country page
+And the user enters applied date day <appliedDay> in the credit rating country page
+And the user selects applied date month <appliedMonth> in the credit rating country page
 And the user enters applied date year <appliedYear> in the credit rating country page
+And the user enters confirmed date day <confirmedDay> in the credit rating country page
+And the user selects confirmed date month <confirmedMonth> in the credit rating country page
 And the user enters confirmed date year <confirmedYear> in the credit rating country page
 And the user clicks on the save button
 Then the user should see the save confirmation modal
@@ -406,8 +410,8 @@ And the user should see the below summary changes in confirmation modal
 
 
 Examples:
-|country|demographicType|demographicValue|appliedYear|confirmedYear|countryStartYear|countryEndYear|day|month|year|
-|Guam|Largest County Population|34000000|2011|2013|2011|2013|1|Jan|2015|
+|country|demographicType|demographicValue|countryStartYear|countryEndYear|day|month|year|agency|type|value|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|
+|Guam|Largest County Population|34000000|2011|2013|1|Jan|2015|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|
 
 Scenario: save country basic info
 Given a user is on the search page
@@ -478,3 +482,21 @@ Examples:
 |country|enityID|
 |Albania|21b69329-6bc2-4e43-aac7-9a18c937324e|
 
+Scenario: ZEUS-1173- Verify when user is viewing a section other than Basic Info and Basic Info section has some errors, upon saving the country,
+the user should automatically navigate to All section.
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user enters country name as <countryName> in the basic info country page
+And the user clicks on the country credit rating link in the navigation bar
+And the user clicks on the save button
+Then the user should see the user is navigated to All section view
+And the user should see the error message for the required name value field in the basic info country page
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|country|countryName|
+|USA||

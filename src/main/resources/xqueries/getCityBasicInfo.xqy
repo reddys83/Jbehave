@@ -39,6 +39,17 @@ return
     <type>{$cityNameType}</type>
     <value>{$cityNameValue}</value>
   </name>
+  
+(: Taking City Region List :)
+let $cityRegionList := for $x in ($city/alternativeRegions/region)
+  let $cityRegionType := $x/type/text()
+  let $cityRegionValue := ($x/value/text())
+return 
+  <region>
+    <type>{$cityRegionType}</type>
+    <value>{$cityRegionValue}</value>
+  </region>
+
 
 (: Taking identifier List :)
 let $cityIdentifierList := for $x in ($city/summary/identifiers/identifier)
@@ -71,8 +82,8 @@ let $cityCreditRating := for $x in ($city/creditRatings/rating)
 let $cityCreditAgencyName := $x/agencyName/text()
 let $cityCreditType := $x/type/text()
 let $cityCreditValue := $x/value/text()  
-let $cityCreditDateApplied := $x/dateApplied/text()  
-let $cityCreditDateConfirmed := $x/dateConfirmed/text() 
+let $cityCreditDateApplied := local:getDateAsPerAccuracy($x/dateApplied)
+let $cityCreditDateConfirmed := local:getDateAsPerAccuracy($x/dateConfirmed) 
 return
       <creditRating>       
         <creditRatingAgencyName>{$cityCreditAgencyName}</creditRatingAgencyName>
@@ -93,4 +104,5 @@ return
   <population>{$cityPopulation}</population>
   <addressFlag>{$cityAddressFlag}</addressFlag>
   <creditRatings>{$cityCreditRating}</creditRatings>
+  <regions>{$cityRegionList}</regions>
   </city>   

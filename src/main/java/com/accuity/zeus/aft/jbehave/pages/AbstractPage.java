@@ -152,9 +152,24 @@ public abstract class AbstractPage {
 
     public void waitForElementToAppear(By by) {
         try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), 15);
+            WebDriverWait wait = new WebDriverWait(getDriver(), 30);
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
+    }
+
+    public void waitForElementToDisappear(By by) {
+        try {
+            try {
+                Thread.sleep(STANDARD_WAIT);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
+        catch (org.openqa.selenium.StaleElementReferenceException e) {
         }
     }
 

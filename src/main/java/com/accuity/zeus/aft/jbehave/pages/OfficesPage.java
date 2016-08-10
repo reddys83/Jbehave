@@ -126,9 +126,9 @@ public class OfficesPage extends AbstractPage {
         }
     }
 
-    public void verifyOfficesDepartmentTabsInOffice() {
+    public void verifyOfficesTabInOffice() {
         assertTrue(getDriver().findElement(office_tab_id).isDisplayed());
-        assertTrue(getDriver().findElement(office_department_tab_id).isDisplayed());
+
     }
 
     public void clickOnOfficeCreditRatingsLink() {
@@ -311,5 +311,55 @@ public class OfficesPage extends AbstractPage {
             zeusPairs.add(new BasicNameValuePair("source", "zeus"));
             Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", zeusPairs);
             assertEquals(principalFlag, document.getElementsByTagName("principalOffice").item(0).getTextContent());
+    }
+
+    public void checkStatisticsSectionNotExists(String fid){
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity statistics flag", nvPairs);
+        if(getNodeValuesByTagName(document, "flag").get(0).equals("false")) {
+            assertFalse(getDriver().findElement(office_statistics_link_id).isDisplayed());
+        }
+        else
+        {
+            assertFalse("Data Error...Please correct the data",true);
+        }
+
+    }
+
+    public void verifyStatisticsSectionNotExistsInAllPage(){
+        assertFalse(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("legalEntity_statistics_label_xpath")).isDisplayed());
+    }
+
+    public void verifyStatisticsSectionExistsInAllPage(){
+        assertTrue(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("legalEntity_statistics_label_xpath")).isDisplayed());
+    }
+
+    public void checkStatisticsSectionExists(String fid){
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "verify trust power section display", nvPairs);
+        if(getNodeValuesByTagName(document, "flag").get(0).equals("true")) {
+            assertTrue(getDriver().findElement(office_statistics_link_id).isDisplayed());
+        }
+        else
+        {
+            assertFalse("Data Error...Please correct the data",true);
+        }
+
     }
 }

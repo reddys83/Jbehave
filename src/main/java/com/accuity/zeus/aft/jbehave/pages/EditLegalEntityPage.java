@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -1123,7 +1124,7 @@ public class EditLegalEntityPage extends AbstractPage {
         assertTrue(getNodeValuesByTagName(document, "history").contains(historyValue));
     }
 
-    public void verifyLegalEntityBoardMeetingInZeus(String fid) {
+    public void verifyLegalEntityBoardMeetingInZeus(String fid,String monthNumber) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", "zeus"));
@@ -1134,8 +1135,8 @@ public class EditLegalEntityPage extends AbstractPage {
         }
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity BoardMeeting", nvPairs);
         assertTrue(getNodeValuesByTagName(document, "summary").get(0).contains(EditLEgalEntityBoardmeetingSummary));
-        assertTrue(getNodeValuesByTagName(document, "type").contains(EditLegalEntityBoardMeetingsType));
-        assertTrue(getNodeValuesByTagName(document, "value").contains(EditLegalEntityBoardMeetingValue));
+        assertTrue(getNodeValuesByTagName(document, "meetingType").contains(EditLegalEntityBoardMeetingsType.toLowerCase()));
+        assertTrue(getNodeValuesByTagName(document, "meetingValue").contains(monthNumber));
     }
 
     public void verifyLegalEntityPersonnelInZeus(String fid) {
@@ -1230,10 +1231,12 @@ public class EditLegalEntityPage extends AbstractPage {
     public void clickOnIdentifierStatusDropDown(String rowIdentifier) {
         getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
     }
-    public void verifyLegalEntityIdentifierTypesListFromLookup(String rowIdentifier) {
-
+    public void
+    verifyLegalEntityIdentifierTypesListFromLookup(String rowIdentifier) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", "THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY"));
         List<String> dropdownValuesList = returnAllDropDownUnselectedValues(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity IdentifierTypes From Lookup", null);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity IdentifierTypes From Lookup", nvPairs);
         // finding the list of values from the taxonomy and subtracting the values which are selected in other dropdowns
         List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "IdentifierType"), getAlreadySelectedEntityTypes("legalEntity_Identifier_All_Types_dropdown_xpath"));
         assertEquals(dropdownValuesList, resultList);
@@ -1244,8 +1247,10 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyLegalEntityIdentifierStatusList(String rowIdentifier) {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", "STATUS"));
         List<String> dropdownValuesList = returnAllListValues(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity IdentifierStatus From Lookup", null);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity IdentifierStatus From Lookup", nvPairs);
         assertEquals(dropdownValuesList, getNodeValuesByTagName(document, "IdentifierStatus"));
     }
 
@@ -1426,6 +1431,16 @@ public class EditLegalEntityPage extends AbstractPage {
         assertEquals(dropdownValuesList, getNodeValuesByTagName(document, "OwnershipType"));
     }
 
+    public void verifyTrustPowersInEditModeFromTrusted(String source,String fid) {
+        HashMap<String, String> hmap = new HashMap<String, String>();
+        hmap = getTrustPowersValuesFromDB(source, fid);
+        assertEquals(hmap.get("powersGrantedValue"), getSelectedDropdownValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_granted_dropdown")));
+        assertEquals(hmap.get("powersFullValue"), getSelectedRadioValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_full_radio")));
+        assertEquals(hmap.get("powersUsedValue"), getSelectedRadioValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_used_radio")));
+        assertEquals(hmap.get("professionalValue"), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_professional_textbox")).getAttribute("value"));
+        assertEquals(hmap.get("administrativeValue"), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_admin_textbox")).getAttribute("value"));
+        assertEquals(hmap.get("minAccountSizeValue"), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_minAccountSize_textbox")).getAttribute("value"));
+    }
     public void clickAddNewOwnershipButton(){
         attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_ownershipsummaries_add_button_id"));
     }
@@ -1784,8 +1799,149 @@ public class EditLegalEntityPage extends AbstractPage {
         }
     }
 
+    public void clickonDeleteBoardMeetingsRowButton(String rowIdentifier) {
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+    }
+
+       public void verifyEditLegalEntityBoardMeetingsValuesNotExistInZeus(ExamplesTable ex, String fid, String source)
+    {
+        assertFalse(checkEditLegalEntityBoardMeetingsValuesFromZeus(ex.getRow(0).get("type"),ex.getRow(0).get("value"),fid,source));
+
+    }
+    public void verifyNewlyAddedBoardMeetingRowIsNotDisplayed() {
+            try
+        {
+            WebElement identifier = getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardmeeting_type_view_mode"));
+            assertTrue(identifier != null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean checkEditLegalEntityBoardMeetingsValuesFromZeus(String type,String value,String fid,String source)
+    {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Boolean flag=false;
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity board meetings", nvPairs);
+        String boardMeetings=type+value;
+        if (document != null) {
+
+            List typeList = getNodeValuesByTagName(document, "type");
+            List valueList =getNodeValuesByTagName(document, "value");
+
+            for(int i=0;i<typeList.size();i++)
+            {
+                String boardMeetingsfromZeus=typeList.get(i).toString()+valueList.get(i).toString();
+                if(boardMeetingsfromZeus.equals(boardMeetings)) {
+                    flag=true;
+                    break;
+                }
+            }
+
+        }
+         return flag;
+
+    }
+
+    public void verifyDisabledTrustPowersFromTrusted(String source,String fid)
+    {
+        HashMap<String, String> hmap = new HashMap<String, String>();
+        hmap=getTrustPowersValuesFromDB(source,fid);
+        assertEquals(hmap.get("powersFullValue"),getSelectedRadioValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_full_radio")));
+        assertEquals(hmap.get("powersUsedValue"),getSelectedRadioValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_used_radio")));
+        assertEquals(hmap.get("professionalValue"), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_professional_textbox")).getAttribute("value"));
+        assertEquals(hmap.get("administrativeValue"),getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_admin_textbox")).getAttribute("value"));
+        assertEquals(hmap.get("minAccountSizeValue"),getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_minAccountSize_textbox")).getAttribute("value"));
+
+    }
+
+
+
+
+    public HashMap<String, String> getTrustPowersValuesFromDB(String source,String fid)
+    {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Trust Powers for Legal Entity", nvPairs);
+        HashMap<String, String> hmap = new HashMap<String, String>();
+        hmap.put("powersGrantedValue",getNodeValuesByTagName(document, "powersGranted").size() == 0 ? "" : getNodeValuesByTagName(document, "powersGranted").get(0));
+        hmap.put("powersFullValue",getNodeValuesByTagName(document, "powersFull").size() == 0 ? "" : getNodeValuesByTagName(document, "powersFull").get(0));
+        hmap.put("powersUsedValue",getNodeValuesByTagName(document, "powersUsed").size() == 0 ? "" : getNodeValuesByTagName(document, "powersUsed").get(0));
+        hmap.put("professionalValue",getNodeValuesByTagName(document, "professional").size() == 0 ? "" : getNodeValuesByTagName(document, "professional").get(0));
+        hmap.put("administrativeValue", getNodeValuesByTagName(document, "administrative").size() == 0 ? "" : getNodeValuesByTagName(document, "administrative").get(0));
+        hmap.put("minAccountSizeValue",getNodeValuesByTagName(document, "minAccountSize").size() == 0 ? "" : getNodeValuesByTagName(document, "minAccountSize").get(0));
+        return hmap;
+    }
+
+    public void selectTrustPowersGrantedValue(String grantedValue){
+        selectItemFromDropdownListByValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_granted_dropdown"),grantedValue);
+    }
+    public void selectTrustPowersFullValue(String fullValue){
+        selectRadioButtonByValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_full_radio"),fullValue);
+    }
+    public void selectTrustPowersUsedValue(String usedValue){
+        selectRadioButtonByValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_used_radio"),usedValue);
+    }
+    public void enterTrustPowersProfessionalValue(String profValue){
+        clearAndEnterValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_professional_textbox"),profValue);
+    }
+    public void enterTrustPowersAdminEmployeesValue(String adminValue){
+        clearAndEnterValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_admin_textbox"),adminValue);
+    }
+    public void enterTrustPowersMinAccountSize(String minAcctSizeValue){
+        clearAndEnterValue(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_minAccountSize_textbox"),minAcctSizeValue);
+    }
+    public void verifyEditTrustPowerValuesInZeusDocument(String grantedValue,String fullValue,String usedValue,String profEmployees,String adminEmployees,String minacctSize,String fid,String source){
+        HashMap<String, String> hmap = new HashMap<String, String>();
+        hmap=getTrustPowersValuesFromDB(source,fid);
+        assertEquals(hmap.get("powersGrantedValue"),grantedValue);
+        assertEquals(hmap.get("powersFullValue"),fullValue);
+        assertEquals(hmap.get("powersUsedValue"),usedValue);
+        assertEquals(hmap.get("professionalValue"),profEmployees);
+        assertEquals(hmap.get("administrativeValue"),adminEmployees);
+        assertEquals(hmap.get("minAccountSizeValue"),minacctSize);
+
+    }
+
+    public void verifyTrustPowerFieldsStatus(){
+        assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_full_radio")).isEnabled());
+        assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_used_radio")).isEnabled());
+        assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_professional_textbox")).isEnabled());
+        assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_admin_textbox")).isEnabled());
+        assertFalse(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_minAccountSize_textbox")).isEnabled());
+
+    }
+
+    public void verifyTrustPowerFieldsEnabledStatus(){
+        assertTrue(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_full_radio")).isEnabled());
+        assertTrue(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_used_radio")).isEnabled());
+        assertTrue(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_professional_textbox")).isEnabled());
+        assertTrue(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_admin_textbox")).isEnabled());
+        assertTrue(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_edit_trustpowers_minAccountSize_textbox")).isEnabled());
+
+    }
+
+    public void verifyMaxLengthForTrustedPowers(String identifier,String maxSize){
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(identifier)).getAttribute("maxLength"),maxSize);
+
+    }
+
+    public void verifyErrorMsgForTrustPowers(String identifier, String errMsg)
+    {
+        assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(identifier)).getText(),errMsg);
+    }
     @Override
     public String getPageUrl() {
         return null;
     }
+
+
 }

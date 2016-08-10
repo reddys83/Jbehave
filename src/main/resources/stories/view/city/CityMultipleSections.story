@@ -158,7 +158,7 @@ Examples:
 |Albania|Berat|Ura-Vajgurore|
 
 Scenario: Verify city multiple selection
-Meta:@verifyBuild
+Meta:@verifyBuild @test1233
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area

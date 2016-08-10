@@ -173,9 +173,11 @@ public class CountryPage extends AbstractPage {
     private By country_credit_rating_confirmed_date_xpath = By.xpath(".//*[@data-internal_id='creditRatingConfirmedDate']//input[@name='creditRatingConfirmedDate-year']");
     private By country_credit_rating_confirmed_date_error_msg_xpath = By.xpath("//*[@class='notification error'][@data-error_id='creditRatingConfirmedDateError']");
     private By country_credit_rating_addRow_id = By.id("add-creditRatings");
-    private By country_credit_rating_delete_button_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[4]/td[6]/button");
+    private By country_credit_rating_delete_button_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[@class='new']/td[6]/button");
     private int rowCount;
     private By country_credit_rating_value_xpath = By.xpath("//*[@id='additionalCreditRatings']/tr[1]/td[3]/input");
+    private By country_credit_rating_agency_xpath = By.xpath("//*[@id='additionalCreditRatings']/tr[1]/td[1]/select");
+    private By country_credit_rating_type_xpath = By.xpath("//*[@id='additionalCreditRatings']/tr[1]/td[2]/select");
     private By country_credit_value_error_msg_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[3]/p");
     private By country_credit_rating_applied_date_month_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[4]/fieldset/select");
     private By country_credit_rating_confirmed_year_month_xpath = By.xpath(".//*[@id='additionalCreditRatings']/tr[1]/td[5]/fieldset/select");
@@ -282,9 +284,6 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyCountryCurrencies(ExamplesTable countryCurrencies) {
-        if (SearchPage.selectedEntity != "") {
-            selectedCountry = SearchPage.selectedEntity;
-        }
         assertTrue(getDriver().findElement(country_currencies_label_xpath).getText().matches("^CURRENCIES FOR " + selectedCountry.toUpperCase() + ".*$"));
         assertEquals("ISO NAME START DATE END DATE PRIMARY REPLACED BY STATUS", getDriver().findElement(country_currencies_table_headings_xpath).getText());
         List<WebElement> iso = getDriver().findElements(country_currencies_iso_xpath);
@@ -843,6 +842,11 @@ public class CountryPage extends AbstractPage {
 
     public void clickOnCountryCurrenciesLink() {
         attemptClick(country_currencies_link_id);
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void clickOnCountryNameType() {
@@ -938,7 +942,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyErrorMessageForCountryName() {
-        assertEquals("Required", getDriver().findElement(country_name_value_required_err_msg_xpath).getText());
+        assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_name_value_required_err_msg_xpath).getText());
     }
 
     public void verifyErrorMessageForRequiredNameType() {
@@ -1039,11 +1043,17 @@ public class CountryPage extends AbstractPage {
         countryPlacesArea = AreaPlaces;
         getDriver().findElement(By.xpath(country_places_area_dropdown_xpath + "//input")).sendKeys(AreaPlaces);
         getDriver().findElement(By.xpath(country_places_area_dropdown_xpath + "//input")).sendKeys(Keys.RETURN);
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void selectsCityInPlacesForCountry(String cityPlaces) {
         getDriver().findElement(By.xpath(country_places_city_dropdown_xpath + "//input")).sendKeys(cityPlaces);
         getDriver().findElement(By.xpath(country_places_city_dropdown_xpath + "//input")).sendKeys(Keys.RETURN);
+        waitForElementToAppear(By.xpath("//*[@id='city_chosen']/a/span[text()='"+cityPlaces+"']"));
     }
 
     public void verifyPlaceInPlacesForCountry(String place) {
@@ -1785,6 +1795,10 @@ public class CountryPage extends AbstractPage {
         assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(country_banking_hours_delete_row_confirmation_modal_xpath).getText());
     }
 
+    public void selectCreditRatingAgency(String agency) {
+        selectItemFromDropdownListByValue(country_credit_rating_agency_xpath, agency);
+    }
+
 
     public void deleteAllBankingHours() {
 
@@ -1806,5 +1820,14 @@ public class CountryPage extends AbstractPage {
         } catch (org.openqa.selenium.NoSuchElementException e) {
         }
     }
-}
 
+    public void selectCreditRatingType(String type) {
+        selectItemFromDropdownListByValue(country_credit_rating_type_xpath, type);
+    }
+
+    public void enterCreditRatingValue(String value) {
+        getDriver().findElement(country_credit_rating_value_xpath).clear();
+
+        getDriver().findElement(country_credit_rating_value_xpath).sendKeys(value);
+    }
+}

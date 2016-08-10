@@ -390,7 +390,7 @@ public class LegalEntityPage extends AbstractPage {
             e.printStackTrace();
         }
         attemptClick(office_link_xpath);
-        (new WebDriverWait(getDriver(), 30)).until(ExpectedConditions.presenceOfElementLocated(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_office_page_offices_label_xpath")));
+        (new WebDriverWait(getDriver(), 40)).until(ExpectedConditions.presenceOfElementLocated(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_office_page_offices_label_xpath")));
         return new OfficesPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
@@ -480,6 +480,10 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyTrustPowerSectionNotExistsInAllPage(){
         assertFalse(getDriver().findElement(legalEntity_trustPowers_label_xpath).isDisplayed());
+    }
+
+    public void verifyServicesSection() {
+        assertTrue(getDriver().findElement(legalEntity_services_link_id).getAttribute("class").equals("selected"));
     }
 
 

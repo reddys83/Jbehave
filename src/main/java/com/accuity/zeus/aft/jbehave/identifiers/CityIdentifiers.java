@@ -58,6 +58,7 @@ public class CityIdentifiers {
 		hmap.put("city_use_in_address_false", By.xpath("//*[@id='cityBasicInfo']//input[@value='false']"));
 		hmap.put("city_address_flag_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Use In Address']/td"));
 		hmap.put("city_creditRating_row_xpath", By.xpath("//*[@class='data']//*[@id='cityCreditRating']//tr"));
+		hmap.put("city_creditRating_new_row_xpath", By.xpath("//*[@class='data']//*[@id='cityCreditRating']//tr[@class='new']"));
 		
 		hmap.put("city_creditRating", By.xpath("//*[@id='cityCreditRating']"));
 		hmap.put("city_credit_rating_applied_date_day_xpath", By.xpath("//input[@name='creditRatingAppliedDate-day']"));
@@ -83,7 +84,7 @@ public class CityIdentifiers {
 
 		// adding values for city names
 		hmap.put("city_names_full_name_xpath", By.xpath("//*[@id='additionalNames']//td[text() = 'Full Name']"));
-		hmap.put("city_names_full_name_value_xpath", By.xpath("//*[@id='additionalNames']//input[@name='fixedNameValue']"));
+		hmap.put("city_names_full_name_value_xpath", By.xpath("//*[@id='additionalNames']//input[@name='fixedName']"));
 		hmap.put("city_add_new_name_button_xpath", By.xpath("//*[@id='cityBasicInfo']//*[@id='add-names']"));
         hmap.put("city_name_type_input_xpath", By.xpath(".//*[@id='additionalNames']//*[@data-internal_id='nameType']"));
 		hmap.put("city_names_full_name_value_view_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[td='Full Name']/td[2]"));
@@ -130,6 +131,16 @@ public class CityIdentifiers {
 		hmap.put("city_get_relatedplace_detailsvalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td[3]"));
 		hmap.put("city_get_relatedplace_entirevalue_xpath", By.xpath("//*[@id='cityPlaces']//tbody"));
 		hmap.put("city_All_link_id", By.xpath("//*[@id='all']"));
+	    //city regions
+		hmap.put("city_region_type_identifier_dropdown_options_xpath", By.xpath(("//*[@id='cityRegions']//*[@id='regionType']/option")));
+		hmap.put("city_add_new_region_button_id", By.id("add-regions"));
+		hmap.put("city_region_type_dropdown_xpath", By.xpath(".//*[@id='regionType']"));
+		hmap.put("city_region_value_dropdown_xpath", By.xpath(".//select[@id='regionValue']"));
+		hmap.put("city_region_value_dropdown_option", By.xpath(".//select[@id='regionValue']/option"));
+		hmap.put("city_region_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalRegions']//*[@data-error_id='regionValueError']")));
+		hmap.put("city_delete_region_row_button_xpath", By.xpath(".//*[@data-row_id='regions']//button[@class='delete-row']"));
+		hmap.put("city_region_table", By.xpath("//*[@id='cityRegions']//table"));
+		
 	}
 
 	public static By getObjectIdentifier(String key) {

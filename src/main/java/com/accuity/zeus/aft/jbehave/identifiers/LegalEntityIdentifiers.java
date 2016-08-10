@@ -180,6 +180,21 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_creditRating_value_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingValueError']"));
         hmap.put("legalEntity_basicInfo_appliedDate_errorMessage_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingAppliedDateError']"));
         hmap.put("legalEntity_basicInfo_confirmedDate_errorMessage_xpath",By.xpath("//*[@class='notification error'][@data-error_id='creditRatingConfirmedDateError']"));
+        hmap.put("legalEntity_first_existing_row_boardmeeting_delete_button",By.xpath("//*[@id='additionalBoardMeetings']/tr[1]//button"));
+        hmap.put("legalEntity_boardmeeting_type_view_mode",By.xpath(".//*[@id='legalEntityBoardMeetings']/table/tbody/tr"));
+
+
+
+        hmap.put("legalEntity_edit_trustpowers_granted_dropdown", By.xpath("//*[@id='additionalTrustPowers']/tr/td/select[@name='trustPowerGranted']"));
+        hmap.put("legalEntity_edit_trustpowers_full_radio", By.xpath("//*[@id='additionalTrustPowers']/tr/td/fieldset[@data-internal_id='trustPowerFull']/input"));
+        hmap.put("legalEntity_edit_trustpowers_used_radio", By.xpath("//*[@id='additionalTrustPowers']/tr/td/fieldset[@data-internal_id='trustPowerUsed']/input"));
+        hmap.put("legalEntity_edit_trustpowers_professional_textbox", By.xpath("//*[@id='additionalTrustPowers']/tr/td/input[@name='trustPowerProfessional']"));
+        hmap.put("legalEntity_edit_trustpowers_admin_textbox", By.xpath("//*[@id='additionalTrustPowers']/tr/td/input[@name='trustPowerAdmin']"));
+        hmap.put("legalEntity_edit_trustpowers_minAccountSize_textbox", By.xpath("//*[@id='additionalTrustPowers']/tr/td/input[@name='trustPowerMinAccountSize']"));
+        hmap.put("legalEntity_trustPower_Professional_error_message_xpath",By.xpath(".//*[@class='notification error'][@data-error_id='trustPowerProfessionalError']"));
+        hmap.put("legalEntity_trustPower_admin_error_message_xpath",By.xpath(".//*[@class='notification error'][@data-error_id='trustPowerAdminError']"));
+        hmap.put("legalEntity_trustPower_MinAccountSize_error_message_xpath",By.xpath(".//*[@class='notification error'][@data-error_id='trustPowerMinAccountSizeError']"));
+
     }
 
     public static By getObjectIdentifier(String key) {

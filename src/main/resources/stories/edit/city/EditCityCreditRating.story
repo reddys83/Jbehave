@@ -6,6 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 
 JIRA ID - ZEUS-973 - User can view City Credit Ratings
+JIRA ID - ZEUS-1173 - Error handling when error is in section not currently displayed
 
 Scenario: Verify City's Credit Ratings Agency and Type dropdown values are
 from lookup CREDIT_RATING_AGENCY and CREDIT_RATING_TYPE respectively in the same order as taxonomy
@@ -25,16 +26,25 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 When the user clicks on the city credit rating link in the navigation bar
 And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+When the user clicks on add new credit rating button in the credit rating city page
+When the user enters credit rating agency as <agency> in credit rating row $rowNumber in the basic info city page
+When the user enters credit rating type as <type> in credit rating row $rowNumber in the basic info city page
+When the user enters credit rating <value> in credit rating row $rowNumber in the basic info city page
+When the user clicks on the save button
+When the user clicks on the confirm button
+And the user clicks on the city update link
 Then the user should see the city Agency names from look up CREDIT_RATING_AGENCY in existing creditRating row $rowNumber
 Then the user should see the city Agency types from look up CREDIT_RATING_TYPE in existing creditRating row $rowNumber
 When the user deletes the existing credit rating rows
 When the user clicks on add new credit rating button in the credit rating city page
 Then the user should see the city Agency names from look up CREDIT_RATING_AGENCY in new creditRating row $rowNumber
 Then the user should see the city Agency types from look up CREDIT_RATING_TYPE in new creditRating row $rowNumber
+Then the user reverts the changes to the document
 
 Examples:
-|country|area|city|rowNumber|
-|USA|Alabama|Alexander City|1|
+|country|area|city|agency|type|value|rowNumber|
+|USA|Alabama|Altoona|Standard & Poors|Long Term Rating|1234|1|
 
 Scenario: Update and Save existing credit ratings
 a) User selects a new value for Agency, Type, Value, Applied Date and Confirmed Date and click Save. Updated Credit rating should be saved in Zeus document
@@ -53,12 +63,11 @@ When the user clicks on the city credit rating link in the navigation bar
 When the user clicks on the city update link
 Then the user should see the city credit rating values same as in trusted document
 When the user gets the document with get document id for city with the <city> from the database
-When the user clicks on add new credit rating button in the credit rating city page
 When the user enters credit rating agency as <agency> in credit rating row $rowNumber in the basic info city page
 When the user enters credit rating type as <type> in credit rating row $rowNumber in the basic info city page
 When the user enters credit rating <value> in credit rating row $rowNumber in the basic info city page
 And the user enters applied date day <appliedDay> <appliedMonth> <appliedYear> in the credit rating city page
-And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedMonth> in the credit rating city page
+And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedYear> in the credit rating city page
 When the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
@@ -68,8 +77,8 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|agency|type|value|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|||||||1|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|1|
+|USA|Montana|Belt|Standard & Poors|Long Term Rating|1234|||||||1|
+|USA|Montana|Belt|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|1|
 
 
 Scenario: User has selected to update the existing credit rating row, verifies the Zeus app and DB.
@@ -98,7 +107,7 @@ When the user enters credit rating agency as <agency2> in credit rating row $row
 When the user enters credit rating type as <type2> in credit rating row $rowNumber in the basic info city page
 When the user enters credit rating <value2> in credit rating row $rowNumber in the basic info city page
 And the user enters applied date day <appliedDay> <appliedMonth> <appliedYear> in the credit rating city page
-And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedMonth> in the credit rating city page
+And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedYear> in the credit rating city page
 When the user clicks on the save button
 Then the user should see the below summary changes in confirmation modal
 |Summary|
@@ -111,7 +120,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|agency|type|value|agency2|type2|value2|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|Moody's|Long Term Sovereign Debt Rating|12457|15|Jan|2016|17|Jan|2016|1|
+|USA|Montana|Belt|Standard & Poors|Long Term Rating|1234|Moody's|Long Term Sovereign Debt Rating|12457|15|Jan|2016|17|Jan|2016|1|
 
 Scenario: User has selected to add credit rating row and saving without entering any values, it should be saved successfully.
 Given a user is on the search page
@@ -138,7 +147,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|agency|type|value|rowNumber|
-|USA|Alabama|Alexander City||||1|
+|USA|Montana|Belt||||1|
 
 Scenario: User has selected to add credit rating row and entering one of the agency dropdown and also value, error message should be thrown while saving
 
@@ -163,7 +172,7 @@ Then user should see Required error message in credit rating type field
 
 Examples:
 |country|area|city|agency|type|value|rowNumber|
-|USA|Alabama|Alexander City|Standard & Poors||789|1|
+|USA|Montana|Belt|Standard & Poors||789|1|
 
 Scenario: User has selected to add credit rating row and entering credit rating type dropdown and also value, error message should thrown while saving
 Given a user is on the search page
@@ -188,7 +197,7 @@ Then user should see Required error message in credit rating agency field
 
 Examples:
 |country|area|city|agency|type|value|rowNumber|
-|USA|Alabama|Alexander City||Long Term Rating|789|1|
+|USA|Montana|Belt||Long Term Rating|789|1|
 
 Scenario: User has selected to add credit rating row and entering one of the agency dropdown and also type dropdown, error message should be thrown while saving
 Given a user is on the search page
@@ -212,7 +221,7 @@ Then the user should be able to view the error message Enter up to 5 valid chara
 
 Examples:
 |country|area|city|agency|type|value|rowNumber|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating||1|
+|USA|Montana|Belt|Standard & Poors|Long Term Rating||1|
 
 Scenario: Verifying error message enter a day/month/year for applied date
 1. only day
@@ -241,10 +250,10 @@ And the user should see the error message enter a day/month/year for applied dat
 
 Examples:
 |country|area|city|appliedDay|appliedMonth|appliedYear|rowNumber|
-|USA|Alabama|Alexander City|15|||1|
-|USA|Alabama|Alexander City|15|Jan||1|
-|USA|Alabama|Alexander City|15||2016|1|
-|USA|Alabama|Alexander City||Jan||1|
+|USA|Montana|Belt|15|||1|
+|USA|Montana|Belt|15|Jan||1|
+|USA|Montana|Belt|15||2016|1|
+|USA|Montana|Belt||Jan||1|
 
 
 Scenario: Verifying Verify error message enter a year, month/year or day/month/year for confirmed date
@@ -275,10 +284,10 @@ And the user should see the error message enter a day/month/year for confirmed d
 
 Examples:
 |country|area|city|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
-|USA|Alabama|Alexander City|15|||1|
-|USA|Alabama|Alexander City|15|Jan||1|
-|USA|Alabama|Alexander City|15||2016|1|
-|USA|Alabama|Alexander City||Jan||1|
+|USA|Montana|Belt|15|||1|
+|USA|Montana|Belt|15|Jan||1|
+|USA|Montana|Belt|15||2016|1|
+|USA|Montana|Belt||Jan||1|
 
 Scenario: Verify that Applied Date and Confirmed Date can not be later than today
 
@@ -303,7 +312,7 @@ Then the user should see the error text Must be no later than today. for confirm
 
 Examples:
 |country|area|city|row|
-|USA|Alabama|Alexander City|1|
+|USA|Montana|Belt|1|
 
 Scenario: User updates invalid Applied date and Confirmed date
 Verifying error message displaying Invalid Date when invalid date entered
@@ -333,7 +342,7 @@ Then the user should see the error text Invalid Date for confirmed date in the c
 
 Examples:
 |country|area|city|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
-|USA|Alabama|Alexander City|15|Dec|abcd|15|Dec|abcd|1|
+|USA|Montana|Belt|15|Dec|abcd|15|Dec|abcd|1|
 
 Scenario: User can edit city identifiers- Verify if User can delete credit rating by clicking on 'Yes' , then after saving it should be removed.
 Given a user is on the search page
@@ -354,7 +363,7 @@ When the user enters credit rating agency as <agency> in credit rating row $rowN
 When the user enters credit rating type as <type> in credit rating row $rowNumber in the basic info city page
 When the user enters credit rating <value> in credit rating row $rowNumber in the basic info city page
 And the user enters applied date day <appliedDay> <appliedMonth> <appliedYear> in the credit rating city page
-And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedMonth> in the credit rating city page
+And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedYear> in the credit rating city page
 When the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
@@ -371,10 +380,9 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|agency|type|value|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|1|
+|USA|Montana|Belt|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|1|
 
 Scenario: User can edit city identifiers- Verify if User can delete credit rating by clicking on 'cancel', then after saving the credit rating row should not get deleted.
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -393,7 +401,7 @@ When the user enters credit rating agency as <agency> in credit rating row $rowN
 When the user enters credit rating type as <type> in credit rating row $rowNumber in the basic info city page
 When the user enters credit rating <value> in credit rating row $rowNumber in the basic info city page
 And the user enters applied date day <appliedDay> <appliedMonth> <appliedYear> in the credit rating city page
-And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedMonth> in the credit rating city page
+And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedYear> in the credit rating city page
 When the user clicks on the save button
 And the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
@@ -407,4 +415,32 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|agency|type|value|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
-|USA|Alabama|Alexander City|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|1|
+|USA|Montana|Belt|Standard & Poors|Long Term Rating|1234|15|Jan|2016|17|Jan|2016|1|
+
+
+Scenario: ZEUS-1173- Verify when user is viewing a section other than Credit ratings section and cedit rating section has some errors, upon saving the City,
+the user should automatically navigate to All section
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+When the user clicks on the city credit rating link in the navigation bar
+And the user clicks on the city update link
+When the user deletes the existing credit rating rows
+When the user clicks on add new credit rating button in the credit rating city page
+When the user enters credit rating agency as <agency> in credit rating row $rowNumber in the basic info city page
+When the user enters credit rating type as <type> in credit rating row $rowNumber in the basic info city page
+When the user clicks on the city credit rating link in the navigation bar
+When the user clicks on the save button
+Then the user should see the user is navigated to All section view
+Then user should see Required error message in credit rating agency field
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|country|area|city|agency|type|rowNumber|
+|USA|Alabama|Alexandria||Long Term Rating|1|
