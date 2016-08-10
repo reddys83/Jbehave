@@ -813,7 +813,7 @@ public class EditOfficePage extends AbstractPage {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("fid", officeFid));
 			nvPairs.add(new BasicNameValuePair("source", source));
-			Thread.sleep(5000L);
+			Thread.sleep(2000L);
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get office basic info", nvPairs);
 			if (document != null) {
@@ -831,11 +831,13 @@ public class EditOfficePage extends AbstractPage {
 	}
 
 	public void verifyOfficeBusinessHourTextInUI(String businessHourText) {
-		assertEquals(businessHourText, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode")).getText());
+		assertEquals(businessHourText, getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode")).getText());
 	}
 
 	public void verifyOfficeBusinessHourValueFromZeusDB(String officeFid, String source) {
-		assertEquals(getOfficeBusinessHoursInfoFromDB(officeFid, source, "hours"), getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode")).getText());
+		assertEquals(getOfficeBusinessHoursInfoFromDB(officeFid, source, "hours"), getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode")).getText());
 	}
 
 	public void enterMaximumCharactersInOfficeBusinessHours() {
@@ -845,8 +847,7 @@ public class EditOfficePage extends AbstractPage {
 
 	public void viewOfficeBusinessHoursValidCharacterLength() {
 		Integer businessHoursTextLength = getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode"))
-				.getText().length();
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_text_view_mode")).getText().length();
 		assertEquals(businessHoursTextLength.toString(), "200");
 	}		
 	
