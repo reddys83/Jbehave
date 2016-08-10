@@ -1,5 +1,6 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import com.accuity.zeus.aft.jbehave.pages.DataPage;
 import com.accuity.zeus.aft.jbehave.pages.SearchPage;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
@@ -10,11 +11,14 @@ import org.springframework.stereotype.Component;
 public class SearchSteps extends AbstractSteps {
 
 	private SearchPage searchPage;
+	private DataPage dataPage;
 
 	@Given("a user is on the search page")
 	public void SearchPage() {
+		dataPage = new DataPage(webDriverState.getWebDriver(), getDataManagementWebappUrl(), database, apacheHttpClient, restClient, heraApi);
 		searchPage = new SearchPage(webDriverState.getWebDriver(), getDataManagementWebappUrl(), database, apacheHttpClient, restClient, heraApi);
 		setSearchPage(searchPage.goToSearchPage());
+		setDataPage(dataPage);
 	}
 
 	@When("the user searches for <entity> with <field> equals <value>")
