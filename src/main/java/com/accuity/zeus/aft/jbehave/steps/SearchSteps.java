@@ -30,6 +30,10 @@ public class SearchSteps extends AbstractSteps {
     public void clickOnReportsTab(){
         setReportPage(getSearchPage().clickOnReportsTab());
     }
+	@When("the user clicks on the results tab")
+	public void clickOnResultsTab(){
+		setResultsPage(getSearchPage().clickOnResultsTab());
+	}
 
 	@When("the user clicks on the logout link in the search page")
 	public void clickOnLogout(){
