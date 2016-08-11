@@ -27,6 +27,7 @@ let $office := (/office[@fid=$fid][@source=$source])
 
 let $officeSortName := ($office/summary/names/officeSortKey)
 let $officeOpenedDate := local:getDateAsPerAccuracy($office/summary/dates/opened)
+let $LeadLocation := ($office/summary/leadLocation)
 let $officeClosedDate := local:getDateAsPerAccuracy($office/summary/dates/closed)
 let $LeadLocation := ($office/summary/leadLocation)
 let $foreignOffice := ($office/summary/foreignOffice)
@@ -46,12 +47,13 @@ else ""
 let $officeOverrideValue := if(fn:exists($office/summary/names/officeTitleOverride))
 then $office/summary/names/officeTitleOverride/text()
 else ""
+let $principalOffice:= $office/summary/principalOffice
 let $businessHours := ($office/summary/hours)
 
 return <office>
     <officeOpenedDate>{$officeOpenedDate}</officeOpenedDate>
     <officeClosedDate>{$officeClosedDate}</officeClosedDate>
-   <LeadLocation>{$LeadLocation}</LeadLocation>
+    <LeadLocation>{$LeadLocation}</LeadLocation>
     <foreignOffice>{$foreignOffice}</foreignOffice>
     <additionalInfos>{$additionalInfo}</additionalInfos>
     <officeOfficeTypes>{$officeOfficeTypes}</officeOfficeTypes>
@@ -61,6 +63,7 @@ return <office>
     <officePrefixValue>{$officePrefixValue}</officePrefixValue>
     <officeSuffixValue>{$officeSuffixValue}</officeSuffixValue>
     <officeOverrideValue>{$officeOverrideValue}</officeOverrideValue>
+    <principalOffice>{$principalOffice}</principalOffice>
     <officeBusinessHours>{$businessHours}</officeBusinessHours>
     </office>
 
