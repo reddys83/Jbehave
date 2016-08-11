@@ -271,6 +271,21 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyOfficeAddressRowIsNotDisplayed();
     }
 
+    @Then("the user verifies that the deleted row for office locations does not exist in $source document")
+    public void verifyOfficeLocationsRowNotPresentInZeusDB(@Named("officeFid") String officeFid,  @Named("source") String source) {
+        getEditOfficePage().verifyOfficeLocationsRowNotPresentInZeusDB(officeFid, source);
+    }
+
+    @Then("the user verifies that the deleted row for office address does not exist in $source document")
+    public void verifyOfficeAddressRowNotPresentInZeusDB(@Named("officeFid") String officeFid,  @Named("source") String source) {
+        getEditOfficePage().verifyOfficeAddressRowNotPresentInZeusDB(officeFid, source);
+    }
+
+    @Then("the user verifies that the deleted row for office telecoms does not exist in $source document")
+    public void verifyOfficeTelecomsRowNotPresentInZeusDB(@Named("officeFid") String officeFid,  @Named("source") String source) {
+        getEditOfficePage().verifyOfficeTelecomsRowNotPresentInZeusDB(officeFid, source);
+    }
+
     @When("the user clicks on add new office telecoms button in the office locations")
     public void clickOnAddTelecomsRowButton(){
         getEditOfficePage().clickOnAddTelecomsRowButton();

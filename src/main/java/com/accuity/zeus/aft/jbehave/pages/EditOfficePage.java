@@ -423,6 +423,58 @@ public class EditOfficePage extends AbstractPage {
         }
     }
 
+    public void verifyOfficeLocationsRowNotPresentInZeusDB(String officeFid, String source) {
+        try {
+            List<NameValuePair> nvPairs = new ArrayList<>();
+            nvPairs.add(new BasicNameValuePair("fid", officeFid));
+            nvPairs.add(new BasicNameValuePair("source", source));
+            Thread.sleep(3000L);
+            Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office locations", nvPairs);
+            if (document != null) {
+                assertNull(document.getElementsByTagName("location ").item(0));
+
+            } else
+                assert false : source + " document is null";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void verifyOfficeAddressRowNotPresentInZeusDB(String officeFid, String source) {
+        try {
+            List<NameValuePair> nvPairs = new ArrayList<>();
+            nvPairs.add(new BasicNameValuePair("fid", officeFid));
+            nvPairs.add(new BasicNameValuePair("source", source));
+            Thread.sleep(3000L);
+            Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office locations", nvPairs);
+            if (document != null) {
+                assertNull(document.getElementsByTagName("address ").item(0));
+
+            } else
+                assert false : source + " document is null";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void verifyOfficeTelecomsRowNotPresentInZeusDB(String officeFid, String source) {
+        try {
+            List<NameValuePair> nvPairs = new ArrayList<>();
+            nvPairs.add(new BasicNameValuePair("fid", officeFid));
+            nvPairs.add(new BasicNameValuePair("source", source));
+            Thread.sleep(3000L);
+            Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office locations", nvPairs);
+            if (document != null) {
+                assertNull(document.getElementsByTagName("telecom ").item(0));
+
+            } else
+                assert false : source + " document is null";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void clickOnAddTelecomsRowButton() {
         attemptClick(OfficeIdentifiers.getObjectIdentifier("office_telecoms_addRow_id"));
     }

@@ -94,6 +94,7 @@ And the user should see the below summary changes in confirmation modal
 |Basic Info|
 When the user clicks on the confirm button
 Then the user should not see the office address row in the locations office page
+And the user verifies that the deleted row for office locations does not exist in zeus document
 And the user reverts the changes to the document
 
 Examples:
@@ -137,6 +138,7 @@ And the user should see the below summary changes in confirmation modal
 |Basic Info|
 When the user clicks on the confirm button
 Then the user should not see the office location row in the locations office page
+And the user verifies that the deleted row for office locations does not exist in zeus document
 And the user reverts the changes to the document
 
 Examples:
@@ -404,6 +406,7 @@ And the user should see the below summary changes in confirmation modal
 |Basic Info|
 When the user clicks on the confirm button
 Then the user should not see the office address row in the locations office page
+And the user verifies that the deleted row for office address does not exist in zeus document
 And the user reverts the changes to the document
 
 Examples:
@@ -906,6 +909,7 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 And the user should not see the office telecoms row in the locations office page
+And the user verifies that the deleted row for office telecoms does not exist in zeus document
 And the user reverts the changes to the document
 
 Examples:
@@ -945,6 +949,8 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 And the user should not see the office telecoms row in the locations office page
+And the user verifies that the deleted row for office telecoms does not exist in zeus document
+And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|
