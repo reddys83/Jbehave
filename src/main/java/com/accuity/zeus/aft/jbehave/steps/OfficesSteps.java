@@ -19,6 +19,13 @@ public class OfficesSteps extends AbstractSteps {
     Database database;
     private String selectedOffice;
 
+
+    @When("the user clicks on the offices results card with fid <entityFid>")
+    public void clickOnEntityFid(@Named("entityFid") String entityFid){
+        selectedOffice = entityFid;
+        getOfficesPage().clickOnOfficeResultsCard(entityFid);
+    }
+
     @When("the user clicks on the offices results card with fid <officeFid>")
     public void clickOnOfficeResultsCard(@Named("officeFid") String officeFid){
         selectedOffice = officeFid;
@@ -138,6 +145,18 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().verifyStatisticsSectionNotExistsInAllPage();
     }
 
+
+    @Then("the user verifies office <principalFlag> from zeus document <entityFid>")
+    public void verifyPrincipalFlagInZeusDocument(@Named("principalFlag") String principalFlag, @Named("entityFid") String officeFid){
+        getOfficesPage().verifyPrincipalFlagInZeus(principalFlag, officeFid);
+    }
+
+    @Then ("the user verifies office principal office is <principalFlag>")
+    public void verifyPrincipalFlag(@Named("principalFlag") String principalFlag){
+        getOfficesPage().verifyPrincipalFlag(principalFlag);
+    }
+
+
     @Then("the user should see the statistics section visible for fid <fid>")
     public void checkStatisticsSectionExists(@Named("fid") String fid ){
         getOfficesPage().checkStatisticsSectionExists(fid);
@@ -148,5 +167,6 @@ public class OfficesSteps extends AbstractSteps {
     {
         getOfficesPage().verifyStatisticsSectionExistsInAllPage();
     }
+
 }
 

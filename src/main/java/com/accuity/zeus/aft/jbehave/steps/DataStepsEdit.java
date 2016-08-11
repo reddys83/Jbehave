@@ -1,6 +1,8 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.pages.DataPage;
+import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -38,6 +40,11 @@ public class DataStepsEdit extends AbstractSteps {
 	@Then("the user reverts the changes to the document")
 	public void revertChangesToCurrency() {
 		getDataPage().revertChangesToDocument();
+	}
+
+	@Given("the user updates $endpoint with fid <entityFid>")
+	public void updateXmlDocument(@Named("endpoint") String endpoint, @Named("entityFid") String entityFid){
+		getDataPage().updateDocument(endpoint, entityFid);
 	}
 
 	@Then("the user should see the cancel update confirmation modal")
