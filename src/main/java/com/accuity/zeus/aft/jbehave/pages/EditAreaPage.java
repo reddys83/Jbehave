@@ -1460,7 +1460,6 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyUseInAddressAreaFromZeusDB(String country, String area, String tagName, String source) {
 		assertEquals(StringUtils.capitalize(getAreaBasicInfoFromDB(country, area, tagName, source)),
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_view_mode_xpath")).getText());
-
 	}
 
 	public void verifyUseInAddressAreaFromTrustedDB(String country, String area, String tagName, String source) {
