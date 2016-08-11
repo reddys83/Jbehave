@@ -802,7 +802,7 @@ public class EditOfficePage extends AbstractPage {
 		}
 	}
     
-    public String getOfficeHistoryFromDB(String source,String tagName,String officeFid) {
+	public String getOfficeHistoryFromDB(String source, String tagName, String officeFid) {
 
 		String tagValue = null;
 		List<NameValuePair> nvPairs = new ArrayList<>();
@@ -822,67 +822,59 @@ public class EditOfficePage extends AbstractPage {
 		return tagValue;
 	}
 
-    public void verifyOfficeHistoryFromTrustedDB(String source,String tagName,String officeFid) {
-		assertEquals(getOfficeHistoryFromDB(source,tagName ,officeFid),
-				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath")).getText());
+	public void verifyOfficeHistoryFromTrustedDB(String source, String tagName, String officeFid) {
+		assertEquals(getOfficeHistoryFromDB(source, tagName, officeFid), getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_edit_mode_xpath")).getText());
 	}
-    
-    public void enterOfficeHistory(String officeHistoryValue) {
-		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath"), officeHistoryValue);
+
+	public void enterOfficeHistory(String officeHistoryValue) {
+		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_history_edit_mode_xpath"), officeHistoryValue);
 	}
-    
-    public void verifyOfficeHistory(String officeHistoryValue) {
+
+	public void verifyOfficeHistory(String officeHistoryValue) {
 		try {
 			Thread.sleep(2000);
+			assertEquals(officeHistoryValue, getDriver()
+					.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_view_mode_xpath")).getText());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		assertEquals(officeHistoryValue, getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath_after_save")).getText());
 	}
-    
-    public void verifyOfficeHistoryZeus(String source,String tagName,String officeFid) {
-    	assertEquals(getOfficeHistoryFromDB(source,tagName ,officeFid),
-				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath_after_save")).getText());
+
+	public void verifyOfficeHistoryZeus(String source, String tagName, String officeFid) {
+		assertEquals(getOfficeHistoryFromDB(source, tagName, officeFid), getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_view_mode_xpath")).getText());
 	}
-    
-    private String getBigStringOfGivenLength(int length) {
-		StringBuilder returnCharText = new StringBuilder();
-		for (int i = 0; i <= length; i++) {
-			returnCharText.append("i");
-		}
-		return returnCharText.toString();
-	}
-    
-    public void enterCharactersInOfficeHistory() {
-		String getCharText = getBigStringOfGivenLength(10000);
-		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath")).clear();
-		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath")).sendKeys(getCharText);
+
+	public void enterCharactersInOfficeHistory() {
+		String getCharText = createBigString(10000);
+		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_history_edit_mode_xpath"), getCharText);
 		officeHistoryMaximumCharacter = getCharText;
 	}
-    
-    public void verifyMaxLengthOfficeHistory(String maxLength) {
-		 assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath"))
-               .getAttribute("maxlength"), maxLength);
+
+	public void verifyMaxLengthOfficeHistory(String maxLength) {
+		assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_history_edit_mode_xpath"))
+				.getAttribute("maxlength"), maxLength);
 	}
-    
-    public void viewValidCharacterLengthOfficeHistory() {
+
+	public void viewValidCharacterLengthOfficeHistory() {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		Integer officeHistoryLength = getDriver().findElement(OfficeIdentifiers
-				.getObjectIdentifier("office_history_text_xpath_after_save")).getText().length();
+
+		Integer officeHistoryLength = getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_view_mode_xpath")).getText()
+				.length();
 		assertEquals(officeHistoryLength.toString(), "10000");
 	}
-    
-    public void verifyMaximumTextInOfficeHistory() {
+
+	public void verifyMaximumTextInOfficeHistory() {
 		assertEquals(officeHistoryMaximumCharacter.subSequence(0, 10000), getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_text_xpath_after_save")).getText());
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_view_mode_xpath")).getText());
 	}
-    
+
     @Override
     public String getPageUrl() {
         return null;

@@ -79,10 +79,9 @@ public class OfficeIdentifiers {
         hmap.put("office_basicInfo_view_suffix_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Suffix']/td"));
         hmap.put("office_basicInfo_view_override_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Override']/td"));
         
-        hmap.put("office_history_text_xpath", By.xpath("//*[@id='officeHistory']/textarea"));
-        hmap.put("office_history_link", By.xpath("//*[@id='legalEntityHistory']"));
-        hmap.put("office_history_text_xpath_after_save", By.xpath("//*[@id='officeHistory']/p"));
-        hmap.put("office_save_confirmation_message_id", By.xpath(("//*[@id='saveSuccess']")));
+		hmap.put("office_history_edit_mode_xpath", By.xpath("//*[@id='officeHistory']/textarea"));
+		hmap.put("office_history_link", By.xpath("//*[@id='legalEntityHistory']"));
+		hmap.put("office_history_view_mode_xpath", By.xpath("//*[@id='officeHistory']/p"));
         
         
     }

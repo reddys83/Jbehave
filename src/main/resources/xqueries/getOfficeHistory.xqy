@@ -4,7 +4,7 @@ let $office := (/office[@fid=$fid][@source=$source])
 let $officeHistory := ($office/history/summaries/summary/text())
 
 return 
-<Office>
-<officeHistory>{$officeHistory} </officeHistory>
-</Office>
+<office>
+<officeHistory>{$officeHistory}</officeHistory>
+</office>
   
