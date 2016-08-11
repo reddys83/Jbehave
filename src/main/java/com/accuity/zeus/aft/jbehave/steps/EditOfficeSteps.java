@@ -160,6 +160,11 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().selectOfficeAddressType(typeRowIdentifier,Type);
     }
 
+    @When("the user selects office address type $typeRowIdentifier value as <Type1>")
+    public void selectOfficeAddressType1(@Named("$typeRowIdentifier") String typeRowIdentifier,@Named("Type1") String Type1)
+    {
+        getEditOfficePage().selectOfficeAddressType(typeRowIdentifier,Type1);
+    }
     @When("the user enters office address address line 1 $addressLine1RowIdentifier value as <AddressLine1>")
     public void enterofficeAddressLine1(@Named("addressLine1RowIdentifier") String addressLine1RowIdentifier,@Named("AddressLine1") String AddressLine1)
     {
@@ -547,7 +552,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @When("the user clicks on the No button to cancel the deletion of row in office locations page")
     public void pressNoButtonInDeleteConfirmationModalForOffice() {
-        getEditOfficePage().pressNoButtonInDeleteConfirmationModalForOfficeLocation();
+        getEditOfficePage().pressNoButtonInDeleteConfirmationModalForOffice();
     }
 
 

@@ -431,11 +431,11 @@ And the user gets the document with get id for offices with the <officeFid> from
 Then the user should see the office_first_row_existing_delete_address_type_physical_button in disabled state in locations section
 When the user selects office address type office_addressType_first_row_existing_address_type_dropdown value as <Type>
 And the user clicks on add new office address button in the office locations
-When the user selects office address type office_addressType_first_row_new_address_type_dropdown value as <Type>
+When the user selects office address type office_addressType_first_row_new_address_type_dropdown value as <Type1>
 Then the user should see the office_addressType_first_row_new_address_type_dropdown in disabled state in locations section
 
 Examples:
-|entity|searchBy|fid|officeFid|Type|Type|
+|entity|searchBy|fid|officeFid|Type|Type1|
 |1010|FID|1010|1010-44|mailing|physical|
 
 Scenario:  Verify Office Address Type dropdown values are from lookup ADDRESS_TYPE
