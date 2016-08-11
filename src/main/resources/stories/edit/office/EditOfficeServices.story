@@ -23,10 +23,37 @@ And the user clicks on the office services link in the navigation bar
 And the user clicks on the office update link
 Then the user should see the office's service's values are same as in trusted document
 Then the user should see the office service category dropdown values from lookup SERVICE_CATEGORY
+Then the user should see the successful update message at top of the office page
 
 Examples:
 |entity|searchBy|fid|officeFid|
 |1038|FID|1038|1038-51|
+
+
+Scenario: User verifies whether values entered in Service section are saved successfully
+1- User verifies if new row with 'Service Category' & 'Service Override' values are saved successfully.
+2- User verifies that 'Service Category' value (from 1st row) is not displayed in the 'Service Category' dropdown (in new row)
+3- User verifies if another new row (2nd row) with 'Service Category' & 'Service Override' values are saved successfully.
+4- User verifies 'Your Changes have been saved' message is displayed after save
+5- Verify Zeus Office's Services page is updated with entered service values
+6- Verify Zeus DB is updated with entered service values
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office services link in the navigation bar
+And the user clicks on the office update link
+
+
+
+
+
 
 Scenario: User can edit office's identifiers- Verify if User can add New Office identifiers-Verify that all fields- "Type","Value" and "Status" are updated successfully
 1 - Verify two identifer rows are added
