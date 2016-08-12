@@ -5,6 +5,8 @@ import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
+import com.accuity.zeus.xml.XmlDocument;
+import com.accuity.zeus.xml.XmlDocumentLoader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +18,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -41,7 +45,6 @@ public abstract class AbstractPage {
     protected final RestClient restClient;
     public String bigString="";
     protected By contentLocator = By.xpath("//body/div[@id='content']");
-
 
     public AbstractPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         this.driver = driver;
@@ -327,4 +330,27 @@ public abstract class AbstractPage {
         }
         return selectedValueList;
     }
+
+    public XmlDocument getTestDataXml(String resource, String fileName){
+
+        URI filePath = null;
+        try {
+            filePath = getClass().getResource("/testdata/" + resource + "/" + fileName + ".xml").toURI();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return XmlDocumentLoader.loadDocumentFromFile(filePath);
+    }
+
+    public String getResourceURL(String resource, String fileName){
+        URI filePath = null;
+        try {
+            filePath = getClass().getResource("/testdata/" + resource + "/" + fileName + ".xml").toURI();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        Document document =  XmlDocumentLoader.getDocument(filePath);
+        return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("resource").getNodeValue();
+    }
+
 }
