@@ -78,6 +78,14 @@ public class OfficeIdentifiers {
         hmap.put("office_basicInfo_view_prefix_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Prefix']/td"));
         hmap.put("office_basicInfo_view_suffix_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Suffix']/td"));
         hmap.put("office_basicInfo_view_override_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Override']/td"));
+        hmap.put("office_add_service_button_xpath", By.xpath("//*[@id='add-services']"));
+        hmap.put("delete_row_confirmation_modal_service_xpath", By.xpath("//*[@id='additionalServices']/tr[2]"));  
+        hmap.put("office_delete_yes_button_id", By.xpath("//*[@id='yes-button']"));
+        hmap.put("office_services_delete_button_xpath",By.xpath(".//*[@data-row_id='services']//button[@class='delete-row']"));
+        //hmap.put("office_add_services_button_edit_id", By.xpath(".//*[@data-row_id='services']//button[@class='delete-row']"));
+        hmap.put("office_service_category_dropdown_edit_mode_xpath", By.xpath(".//*[@class='new'][@data-row_id='services']//select[@id='serviceCategory']"));
+        hmap.put("office_service_override_textbox_edit_mode_xpath", By.xpath("//*[@id='additionalServices']/tr/td[2]/input"));
+                  
     }
 
     public static By getObjectIdentifier(String key) {

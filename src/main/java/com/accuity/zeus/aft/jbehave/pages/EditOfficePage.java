@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.commons.collections.ListUtils;
@@ -812,7 +813,88 @@ public class EditOfficePage extends AbstractPage {
 					options.get(indexOfOption).getText().trim());
 		}
 	}
+    
+    public void verifyDeleteConfirmationModalService() {
+		assertEquals("Please confirm - would you like to delete this row? NO YES",
+				getDriver()
+						.findElement(
+								OfficeIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_service_xpath"))
+						.getText());
+	}
+    
+    public void pressEnterButtonInDeleteConfirmationModalForOffice() {
+		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_delete_yes_button_id")).sendKeys(Keys.ENTER);
+	}
+    
+    public void deleteAllServiceRows() {
+		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_service_button_xpath"));
+		List<WebElement> deleteRows = getDriver()
+				.findElements(OfficeIdentifiers.getObjectIdentifier("office_services_delete_button_xpath"));
 
+		for (int index = 0; index < deleteRows.size(); index++) {
+			WebElement currentInstance = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_services_delete_button_xpath")).get(0);
+			if (currentInstance != null) {
+				currentInstance.click();
+				verifyDeleteConfirmationModalService();
+				pressEnterButtonInDeleteConfirmationModalForOffice();
+			}
+
+		}
+
+	}
+    
+    public void clickOnAddServicesButton() {
+		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_service_button_xpath"));
+	}
+    
+    public void selectsServiceCategoryTypeFromDropdown(String serviceCategory,int rowNumber) {
+
+		try {
+			List<WebElement> serviceCategoryDropDowns = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_edit_mode_xpath"));
+			if (rowNumber <= serviceCategoryDropDowns.size()) {
+				Select dropdown = new Select(serviceCategoryDropDowns.get(rowNumber - 1));
+				if (serviceCategory.equals("")) {
+					dropdown.selectByValue(serviceCategory);
+				} else {
+					dropdown.selectByVisibleText(serviceCategory);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+    	//selectItemFromDropdownListByText(OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_edit_mode_xpath"),
+    			//serviceCategory);
+	}
+    
+    public void enterServiceOverrideValue(String serviceOverride,int rowNumber) {
+		try {
+			List<WebElement> serviceOverrideValues = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_value_input_xpath"));
+			if (rowNumber <= serviceOverrideValues.size()) {
+				serviceOverrideValues.get(rowNumber - 1).clear();
+				serviceOverrideValues.get(rowNumber - 1).sendKeys(serviceOverride);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
+    public void verifySelectedOfficeServiceCategoryNotInNewRow(String serviceCategory, int rowNumber) {
+		try {
+			List<WebElement> serviceCategoryDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_edit_mode_xpath"));
+			if (rowNumber <= serviceCategoryDropDowns.size()) {
+				Select dropdown = new Select(serviceCategoryDropDowns.get(rowNumber - 1));
+				for (int index = 0; index < dropdown.getOptions().size(); index++) {
+					assertTrue(!dropdown.getOptions().get(index).getText().contains(serviceCategory));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	} 
     @Override
     public String getPageUrl() {
         return null;

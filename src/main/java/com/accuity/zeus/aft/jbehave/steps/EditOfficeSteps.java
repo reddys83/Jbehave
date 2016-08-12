@@ -396,6 +396,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
 	@Then("the user should see the successful update message at top of the office page")
 	public void verifySuccessfulUpdatedMessage() {
+		
 		getEditCityPage().verifySuccessfulUpdatedMessage();
 	}
 
@@ -530,5 +531,38 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyOfficeServiceCategoryFromLookup();
     }
 
+	@When("the user deletes the existing service rows")
+	public void deleteAllServiceRows() {
+		getEditOfficePage().deleteAllServiceRows();
+	}
+	
+	@When("the user clicks on the add button for adding new services for office page")
+	public void clickOnAddServicesButton() {
+		getEditOfficePage().clickOnAddServicesButton();
+	}
+	
+	@When("the user selects <serviceCategory> type in the services for office page")
+	public void selectsServiceCategoryTypeFromDropdown(@Named("serviceCategory") String serviceCategory) {
+		getEditOfficePage().selectsServiceCategoryTypeFromDropdown(serviceCategory,1);
+	}	
+	
+	@When("the user enters <serviceOverride> value  in the text box for office page")
+	public void enterServiceOverrideValue(@Named("serviceOverride") String serviceOverride) {
+		getEditOfficePage().enterServiceOverrideValue(serviceOverride,1);
+	}
+	
+	@Then("the user verifies that previously selected <serviceCategory> is not displayed in TYPE (DropDown) in second row")
+	public void verifySelectedOfficeServiceCategoryNotInNewRow(@Named("serviceCategory") String serviceCategory) {
+		getEditOfficePage().verifySelectedOfficeServiceCategoryNotInNewRow(serviceCategory, 2);
+	}
+	
+	@When("the user selects <serviceCategory2> type in the services for office page")
+	public void selectsServiceCategoryTypeFromDropdown2(@Named("serviceCategory2") String serviceCategory2) {
+		getEditOfficePage().selectsServiceCategoryTypeFromDropdown(serviceCategory2,2);
+	}	
+	
+	@When("the user enters <serviceOverride2> value  in the text box for office page")
+	public void enterServiceOverrideValue2(@Named("serviceOverride2") String serviceOverride2) {
+		getEditOfficePage().enterServiceOverrideValue(serviceOverride2,2);
+	}
 }
-
