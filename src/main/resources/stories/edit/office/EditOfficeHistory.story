@@ -10,8 +10,8 @@ Scenario: User can edit  'Office History' that is different from the current val
 a)User verifies existing 'Office History' values are retrieved  from trusted doc 
 b)User verifies 'Your Changes have been saved' message is displayed after save
 c)User verifies Office History has been updated in confirmation modal
-d)User verifies whether updated 'Office History' is reflecting in Office Web page
-e)User verifies whether updated 'Office History' is reflecting in zeus document
+d)User verifies 'Office History' is reflecting in Office Web page
+e)User verifies 'Office History' is reflecting in zeus document
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -50,8 +50,8 @@ Examples:
 Scenario: User can edit  'Office History' that is No different from the current value
 a)User verifies 'Your Changes have been saved' message is displayed after save
 b)User verifies Office History has been not been updated in confirmation modal
-d)User verifies whether updated 'Office History' is reflecting in Office Web page
-e)User verifies whether updated 'Office History' is reflecting in zeus document
+d)User verifies 'Office History' is reflecting in Office Web page
+e)User verifies 'Office History' is reflecting in zeus document
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -88,8 +88,8 @@ Examples:
 
 Scenario: User is updating an Office's  History  and verifies whether Blank value for 'History' is getting saved successfully
 a)User verifies 'Your Changes have been saved' message is displayed after save
-b)User verifies whether updated 'Office History' is reflecting in Office Web page
-c)User verifies whether updated 'Office History' is reflecting in zeus document
+b)User verifies 'Office History' is reflecting in Office Web page
+c)User verifies 'Office History' is reflecting in zeus document
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page

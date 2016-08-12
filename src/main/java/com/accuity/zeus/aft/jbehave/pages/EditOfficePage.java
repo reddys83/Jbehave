@@ -857,7 +857,7 @@ public class EditOfficePage extends AbstractPage {
 				.getAttribute("maxlength"), maxLength);
 	}
 
-	public void viewValidCharacterLengthOfficeHistory() {
+	public void verifyValidCharacterLengthOfficeHistory() {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {

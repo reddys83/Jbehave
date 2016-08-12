@@ -562,8 +562,8 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@Then("the user should be able to view that only 10000 unicode characters are saved in Office History field")
-	public void viewValidCharacterLengthOfficeHistory() {
-		getEditOfficePage().viewValidCharacterLengthOfficeHistory();
+	public void verifyValidCharacterLengthOfficeHistory() {
+		getEditOfficePage().verifyValidCharacterLengthOfficeHistory();
 	}
 
 	@Then("the user should be able to verify the maximum values are entered in the Office History field")
