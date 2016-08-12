@@ -396,7 +396,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
 	@Then("the user should see the successful update message at top of the office page")
 	public void verifySuccessfulUpdatedMessage() {
-		
+		setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().verifySuccessfulUpdatedMessage();
 	}
 
@@ -544,7 +544,12 @@ public class EditOfficeSteps extends AbstractSteps{
 	@When("the user selects <serviceCategory> type in the services for office page")
 	public void selectsServiceCategoryTypeFromDropdown(@Named("serviceCategory") String serviceCategory) {
 		getEditOfficePage().selectsServiceCategoryTypeFromDropdown(serviceCategory,1);
-	}	
+	}
+	
+	@When("the user selects <newServiceCategory> type in the services for office page")
+	public void selectsServicesCategoryTypeFromDropdown(@Named("newServiceCategory") String newServiceCategory) {
+		getEditOfficePage().selectsExistingServiceCategoryTypeFromDropdown(newServiceCategory);
+	}
 	
 	@When("the user enters <serviceOverride> value  in the text box for office page")
 	public void enterServiceOverrideValue(@Named("serviceOverride") String serviceOverride) {
@@ -564,5 +569,30 @@ public class EditOfficeSteps extends AbstractSteps{
 	@When("the user enters <serviceOverride2> value  in the text box for office page")
 	public void enterServiceOverrideValue2(@Named("serviceOverride2") String serviceOverride2) {
 		getEditOfficePage().enterServiceOverrideValue(serviceOverride2,2);
+	}
+	
+	@Then("the user should see the Office Services values updated in office services page")
+	public void verifyOfficeServicesParametersInUI(@Named("serviceCategory") String serviceCategory,
+			@Named("serviceOverride") String serviceOverride, @Named("serviceCategory2") String serviceCategory2,
+			@Named("serviceOverride2") String serviceOverride2) {
+		String[] serviceCategoryValues = { serviceCategory, serviceCategory2 };
+		String[] serviceOverrideValues = { serviceOverride, serviceOverride2 };
+		getEditOfficePage().verifyOfficeServiceParametersInUI(serviceCategoryValues, serviceOverrideValues);
+	}
+	
+	//@When("the user selects <newServiceCategory> type in the services for office page")
+	//public void selectsServiceCategoryTypeFromDropdownNew(@Named("newServiceCategory") String newServiceCategory) {
+		//getEditOfficePage().selectsServiceCategoryTypeFromDropdown(newServiceCategory,1);
+	//}	
+	
+	@When("the user enters <newServiceOverride> value  in the text box for office page")
+	public void enterServiceOverrideValueNew(@Named("newServiceOverride") String newServiceOverride) {
+		getEditOfficePage().enterServiceOverrideValue(newServiceOverride,1);
+	}
+	
+	@Then("the user should see the existing Office Services values updated in office services page")
+	public void verifyExistingOfficeServicesParametersInUI(@Named("newServiceCategory") String newServiceCategory,
+			@Named("newServiceOverride") String newServiceOverride) {
+		getEditOfficePage().verifyOfficeServicesParametersInUI(newServiceCategory, newServiceOverride);
 	}
 }

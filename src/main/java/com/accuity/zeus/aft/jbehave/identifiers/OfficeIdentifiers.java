@@ -85,7 +85,10 @@ public class OfficeIdentifiers {
         //hmap.put("office_add_services_button_edit_id", By.xpath(".//*[@data-row_id='services']//button[@class='delete-row']"));
         hmap.put("office_service_category_dropdown_edit_mode_xpath", By.xpath(".//*[@class='new'][@data-row_id='services']//select[@id='serviceCategory']"));
         hmap.put("office_service_override_textbox_edit_mode_xpath", By.xpath("//*[@id='additionalServices']/tr/td[2]/input"));
-                  
+        hmap.put("office_services_type_view_mode", By.xpath("//*[@id='officeServices']//tbody/tr")); 
+        hmap.put("office_service_category_view_mode", By.xpath("//*[@id='officeServices']//tr/td[1]")); 
+        hmap.put("office_services_override_view_mode", By.xpath("//*[@id='officeServices']//tr/td[2]")); 
+        hmap.put("office_service_category_dropdown_exist_edit_mode_xpath",By.xpath("//select[@id='serviceCategory']"));
     }
 
     public static By getObjectIdentifier(String key) {

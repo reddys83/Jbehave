@@ -864,15 +864,16 @@ public class EditOfficePage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
-    	//selectItemFromDropdownListByText(OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_edit_mode_xpath"),
-    			//serviceCategory);
+	}
+    
+    public void selectsExistingServiceCategoryTypeFromDropdown(String serviceCategory) {
+    	selectItemFromDropdownListByText(OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_exist_edit_mode_xpath"), serviceCategory);	
 	}
     
     public void enterServiceOverrideValue(String serviceOverride,int rowNumber) {
 		try {
 			List<WebElement> serviceOverrideValues = getDriver()
-					.findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_value_input_xpath"));
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_service_override_textbox_edit_mode_xpath"));
 			if (rowNumber <= serviceOverrideValues.size()) {
 				serviceOverrideValues.get(rowNumber - 1).clear();
 				serviceOverrideValues.get(rowNumber - 1).sendKeys(serviceOverride);
@@ -895,6 +896,30 @@ public class EditOfficePage extends AbstractPage {
 			e.printStackTrace();
 		}
 	} 
+    
+    public void verifyOfficeServiceParametersInUI(String[] serviceCategory, String[] serviceOverride) {
+		
+		List<WebElement> serviceRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_services_type_view_mode"));
+		
+		for (int i = 0; i < serviceRows.size(); i++) {
+			assertTrue(serviceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(serviceCategory[i]));
+			assertTrue(serviceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(serviceOverride[i]));
+		}
+    }
+
+   public void verifyOfficeServicesParametersInUI(String serviceCategory, String serviceOverride) {
+	   
+	   System.out.println("UI "+getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_category_view_mode"))
+						.getText()+"PAss  "+serviceCategory);
+	   
+	   assertEquals(serviceCategory,
+				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_category_view_mode"))
+						.getText());
+	   assertEquals(serviceOverride,
+				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_services_override_view_mode"))
+						.getText());
+    }
+   
     @Override
     public String getPageUrl() {
         return null;
