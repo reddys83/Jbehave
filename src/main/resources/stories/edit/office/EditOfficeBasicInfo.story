@@ -21,8 +21,6 @@ Scenario: Update and Save office Opened date
 Verify User updates a value for Opened Date and click Save. Updated Office opened date should be saved in Zeus document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -45,8 +43,6 @@ Scenario: User updates Office Opened date
 Verifying error message Enter a year, month/year or day/month/year. is displaying for invalid date entered.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -67,8 +63,6 @@ Scenario: User updates Office Opened date
 Verifying error message Invalid Date is displaying for invalid date entered.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -87,8 +81,6 @@ Examples:
 
 Scenario: Verify that Opened Date can not be later than today
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -108,8 +100,6 @@ Examples:
 Scenario: User updates Office Opened date- Verify null values are allowed for day, month and year
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -134,8 +124,6 @@ Scenario: Verify the default Edit value and Save Lead Location value for an offi
        b. Select the value as False for Lead Location flag and Save for an office with a default value as True or False
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -159,8 +147,6 @@ Examples:
 Scenario: User will see summary of changes made in confirmation modal
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -190,8 +176,6 @@ Scenario: Verify the default Edit value and Save Foreign Office value for an off
        b. Select the value as False for Foreign Office flag and Save for an office
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -215,8 +199,6 @@ Examples:
 Scenario: User will see summary of changes made in confirmation modal
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -242,8 +224,6 @@ Scenario: Verify that the Offices's Additional Info can be saved
     b. Save with same value as current
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -279,8 +259,6 @@ Scenario: a)Verify that the Offices's Additional Info is not a required field an
           b)Verify that the Office's Additional Info field max length is 10000 characters only.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -318,8 +296,6 @@ a) Verify for an existing OfficeTypes row, the office type values are from OFFIC
 b) Verify for a new OfficeTypes row, the office type values are from OFFICE_TYPE
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -341,8 +317,6 @@ Scenario: Update and Save existing office type- Select a non-Blank value and Sav
 
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -371,8 +345,6 @@ Examples:
 Scenario:Update and Save existing office type-Select a null value and Save. Verify that null value is not saved.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -399,8 +371,6 @@ Examples:
 Scenario: Add a new legal entity type row and Save- Select a non-Blank value and Save. Verify the value is saved in Zeus document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -429,8 +399,6 @@ Examples:
 Scenario: Add a new legal entity type row and Save- Select a null value and Save. Verify that null value is not saved.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -463,8 +431,6 @@ c) Verify that the user should get the confirmation window for deleting existing
 
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -499,8 +465,6 @@ a) Verify that the user should get the confirmation window for deleting new offi
 b) Verify that the user should get the confirmation window for deleting new office type rows and user clicks Yes button and row should be deleted
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -530,8 +494,6 @@ Examples:
 Scenario: Verify that the user should get the Required field message when saving an office type value to null and that is the only office type exists on the page.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -552,8 +514,6 @@ Examples:
 
 Scenario: Verify that the user should see the Required field message against the first row only when user enters null value for all the office type rows
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -573,8 +533,6 @@ Examples:
 Scenario: Verify that the user should NOT get the Required field message when user enters null value for all the office type rows except one row
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -603,8 +561,6 @@ a) Verify for an existing Office Name row, the Office Type values are from OFFIC
 b) Verify for a new Office Name row, the Office Type values are from OFFICE_NAME_TYPE
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -625,8 +581,6 @@ Scenario: Update and Save office names
 User selects a value for an existing row for Type, Value and click Save. Updated office name should be saved in Zeus document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -655,8 +609,6 @@ Scenario: Update and Save office names
 User selects a value for a new row for Type, Value and click Save. Updated office name should be saved in Zeus document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -685,8 +637,6 @@ Examples:
 Scenario: verify no required message for office names type, value when both are null for a new row.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -715,8 +665,6 @@ Scenario:
 a. Verify that the user should see Required error message for value field when select a value for Type but keeps the Value as blank
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -740,8 +688,6 @@ Examples:
 
 Scenario: Delete and Save existing office Names
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -771,8 +717,6 @@ Examples:
 
 Scenario: Delete newly added office name row
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -803,8 +747,6 @@ Examples:
 Scenario: Verify the delete icon should not present for type Legal Title
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -821,8 +763,6 @@ Examples:
 Scenario: verify the length for value field
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -846,8 +786,6 @@ Scenario: Update and Save Sort Name
 User selects a value for a sort name and verify the length for sort name field and click Save. Updated sort name should be saved in Zeus document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -875,8 +813,6 @@ Examples:
 
 Scenario: User updates the Prefix, Suffix and Override fields. Verifies that Override value is saved and Prefix and Suffix values are null in Zeus document.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -902,8 +838,6 @@ Examples:
 
 Scenario: User updates the Prefix, Suffix fields and keeps override as blank. Verifies that Override value is null and Prefix and Suffix values are saved in Zeus document.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -929,8 +863,6 @@ Examples:
 
 Scenario: User updates the suffix value and keeps prefix and Override value as blank. Verifies that suffix value is saved and prefix and Override values are null in Zeus document.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -956,8 +888,6 @@ Examples:
 
 Scenario: User updates the prefix value and keeps suffix and Override value as blank. Verifies that prefix value is saved and suffix and Override values are null in Zeus document.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -984,8 +914,6 @@ Examples:
 Scenario: User updates the prefix and suffix values and enters blank spaces in the Override field. Verifies that prefix and suffix values are saved and Override value is null in Zeus document.
 Verify the max length for prefix, Suffix and override fiels as 200 characters.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

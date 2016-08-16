@@ -8,8 +8,6 @@ JIRA ID - ZEUS-909 - User can edit Legal Entity's Location Summaries
 
 Scenario: Verify legalEntity location summary type values are coming from LOCATION_SUMMARY_TEXT_TYPE look up table for new and existing row
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -28,8 +26,6 @@ Examples:
 
 Scenario: Verify the Required error message for legalEntity location type drop down for new and existing row
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -50,8 +46,6 @@ Examples:
 
 Scenario: Verify the Enter up to 10000 valid characters error message for legalEntity location value textbox for new and existing row
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -72,8 +66,6 @@ Examples:
 
 Scenario: Verify the edits save in ZEUS document upon valid inputs for existing row
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -95,8 +87,6 @@ Examples:
 
 Scenario: Verify the edits save in zeus upon valid inputs for new row
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -119,8 +109,6 @@ Examples:
 
 Scenario: The user should see the confirmation modal to delete places row message Please confirm - would you like to delete this row?
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

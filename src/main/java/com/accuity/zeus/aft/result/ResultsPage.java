@@ -235,7 +235,13 @@ public class ResultsPage extends AbstractPage {
             e.printStackTrace();
         }
         element.click();
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return new LegalEntityPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
+
     }
 
     public WebElement getFidElements(String fid) {
@@ -923,4 +929,14 @@ public class ResultsPage extends AbstractPage {
 		}
 
 	}
+
+    public DataPage createDataPage() {
+        DataPage DOP=null;
+        try {
+            DOP= new DataPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+        }
+        catch(Exception e)
+        {e.printStackTrace();}
+        return DOP;
+    }
 }

@@ -2,6 +2,8 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.pages.DataPage;
+import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -126,6 +128,10 @@ public class SearchResultsSteps extends AbstractSteps{
     public void clickOnResultCard(@Named("fid") String fid){
         searchedEntity = fid;
         setLegalEntityPage(getResultsPage().clickOnResultCard(getResultsPage().getFidElements(fid)));
+
+        if(dataPage==null){
+            dataPage = getResultsPage().createDataPage();
+        }
     }
 
     @Then("the user should see the search results for the institution")
