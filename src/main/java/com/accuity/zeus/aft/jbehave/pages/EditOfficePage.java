@@ -207,8 +207,13 @@ public class EditOfficePage extends AbstractPage {
     }
 
 
-    public void clickonDeleteOfficeLocationsRowButton(String rowIdentifier) {
+    public void clickonDeleteOfficeLocationsRowButton(String rowIdentifier)
+    {
+        try {
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+        } catch (NoSuchElementException e) {
+        }
+
     }
 
     public void verifyOfficeLocationRowIsNotDisplayed() {
@@ -268,7 +273,7 @@ public class EditOfficePage extends AbstractPage {
     }
     public void clickOnCountryListBox() {
 
-        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_country_dropdown_list"));
+        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_country_dropdown"));
            }
 
        public CountryPage enterOfficeCountryInTheTypeAheadBox(String Country) {
@@ -313,7 +318,7 @@ public class EditOfficePage extends AbstractPage {
         }
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area list", nvPairs);
         for (int i = 0; i < document.getElementsByTagName("area").getLength(); i++) {
-            assertEquals(document.getElementsByTagName("area").item(i).getTextContent(), getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_list")).get(i).getText());
+            assertEquals(document.getElementsByTagName("area").item(i).getTextContent(), getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown")).get(i).getText());
 
         }
     }
@@ -325,11 +330,11 @@ public class EditOfficePage extends AbstractPage {
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_type_ahead")).sendKeys(Area);
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_type_ahead")).sendKeys(Keys.RETURN);
         try {
-            Thread.sleep(3000L);
+            Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
+            }
 
     public void verifyOfficeSubAreaList(Database database, ApacheHttpClient apacheHttpClient) {
         List<NameValuePair> nvPairs = new ArrayList<>();
@@ -342,17 +347,17 @@ public class EditOfficePage extends AbstractPage {
         }
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get subarea list", nvPairs);
         for (int i = 0; i < document.getElementsByTagName("subarea").getLength(); i++) {
-            assertEquals(document.getElementsByTagName("subarea").item(i).getTextContent(), getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown_list")).get(i).getText());
+            assertEquals(document.getElementsByTagName("subarea").item(i).getTextContent(), getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown")).get(i).getText());
         }
     }
 
     public void clickOnSubAreaListBox() {
 
-        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown_list"));
+        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown"));
     }
 
     public void enterOfficeSubAreaInTypeAhead(String subArea) {
-        SimpleCacheManager.getInstance().put("selectedSubArea", subArea);
+        SimpleCacheManager.getInstance().put("selectedsubArea", subArea);
         selectedEntity = subArea;
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown_typeAhead")).sendKeys(subArea);
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown_typeAhead")).sendKeys(Keys.RETURN);
@@ -391,7 +396,7 @@ public class EditOfficePage extends AbstractPage {
 
     public void clickOnCityDropdown() {
 
-        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_city_dropdown_xpath"));
+        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_city_dropdown"));
     }
 
 
@@ -411,7 +416,11 @@ public class EditOfficePage extends AbstractPage {
     }
 
     public void clickonDeleteOfficeAddressRowButton(String rowIdentifier) {
-        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+        try {
+            getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).click();
+        } catch (Exception e) {
+
+        }
     }
 
      public void verifyOfficeAddressRowIsNotDisplayed() {
@@ -575,10 +584,11 @@ public class EditOfficePage extends AbstractPage {
     public void verifyOfficeAddressTypesFromLookup(String officeaddress_rowIdentifier,String lookupFid) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", "lookupFid"));
+
         List<String> dropdownValuesList = returnAllDropDownUnselectedValues(OfficeIdentifiers.getObjectIdentifier(officeaddress_rowIdentifier));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office address types from lookup", nvPairs);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Office Address Types", nvPairs);
         // finding the list of values from the taxonomy and subtracting the values which are selected in other dropdowns
-        List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "AddressType"), getAlreadySelectedAddressTypes("office_addressType_first_row_existing_address_type_dropdown"));
+        List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "officeAddressTypes"), getAlreadySelectedAddressTypes("office_addressType_first_row_existing_address_type_dropdown"));
         assertEquals(dropdownValuesList, resultList);
 
     }
@@ -587,10 +597,9 @@ public class EditOfficePage extends AbstractPage {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", "lookupFid"));
         List<String> dropdownValuesList = returnAllListValues(OfficeIdentifiers.getObjectIdentifier(officetelecom_rowIdentifier));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office telecoms type from lookup", nvPairs);
-        assertEquals(dropdownValuesList, getNodeValuesByTagName(document, "TelecomType"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Office Telecoms Types", nvPairs);
+        assertEquals(dropdownValuesList, getNodeValuesByTagName(document, "officeTelecomTypes"));
     }
-
 
 
     public List<String> getAlreadySelectedAddressTypes(String identifier) {
@@ -826,26 +835,39 @@ public class EditOfficePage extends AbstractPage {
     public void pressNoButtonInDeleteConfirmationModalForOfficeLocation() {
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_location_delete_no_button")).click();
     }
+    public void pressYesButtonInDeleteConfirmationModalForOfficeLocation() {
+        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_location_delete_yes_button")).click();
+    }
 
     public void pressNoButtonInDeleteConfirmationModalForOffice() {
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_delete_no_button")).click();
     }
 
-    public void verifyOfficeLocationRowIsDisplayed() {
-        WebElement identifier = getDriver()
-                .findElement(OfficeIdentifiers.getObjectIdentifier("office_addressType_first_row_existing_address_type_dropdown"));
-        assertTrue(identifier != null);
-    }
-
-    public void verifyNewlyAddedOfficeLocationRowExists() {
+      public void verifyNewlyAddedOfficeLocationRowExists() {
         try
         {
+          //  WebElement identifier = getDriver()
+             //       .findElement(OfficeIdentifiers.getObjectIdentifier("office_locations_primaryflag_view"));
             WebElement identifier = getDriver()
-                    .findElement(OfficeIdentifiers.getObjectIdentifier("office_locations_primaryflag_view"));
+                    .findElement(OfficeIdentifiers.getObjectIdentifier("office_addressType_first_row_existing_address_type_dropdown"));
             assertTrue(identifier != null);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void verifyDeleteConfirmationModal() {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals("Confirm DeleteAre you sure, you want to delete?NO YES", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_location_delete_row_confirmation_modal")).getText().replace("\n", ""));
+
+    }
+
+    public void verifyOfficeLocationsEditPageMode() {
+        assertTrue(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_location_primaryoffice_location_delete_row_edit_mode_flag_radio_options")).size()>0);
     }
 
 

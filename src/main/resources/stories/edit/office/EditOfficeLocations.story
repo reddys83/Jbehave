@@ -76,17 +76,17 @@ And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on delete office locations row button for the row office_first_existing_row_location_delete_button
-Then the user should see the delete row confirmation modal in the office page
-When the user clicks on the No button to cancel the deletion of row in office locations section
-Then the user should see the location row in the office locations page
+Then the user should see the delete row confirmation modal in the office locations
+When the user clicks on the cancel no button
+Then the user should return to edit office locations page mode
 When the user clicks on the save button
 When the user clicks on the confirm button
 Then the user verifies that the row values exists in the office locations page
 When the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on delete office locations row button for the row office_first_existing_row_location_delete_button
-Then the user should see the delete row confirmation modal in the office page
-When the user clicks on the yes button in the delete row confirmation modal in the office page
+Then the user should see the delete row confirmation modal in the office locations
+When the user clicks on the Yes button to confirm the deletion of row in office locations section
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
@@ -96,6 +96,7 @@ When the user clicks on the confirm button
 Then the user should not see the office address row in the locations office page
 And the user verifies that the deleted row for office locations does not exist in zeus document
 And the user reverts the changes to the document
+
 
 Examples:
 |entity|searchBy|fid|officeFid|
@@ -119,9 +120,8 @@ And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on the add new office location button in the office page
 And the user clicks on delete office locations row button for the row office_first_new_row_location_delete_button
-Then the user should see the delete row confirmation modal in the office page
-When the user clicks on the No button to cancel the deletion of row in office locations section
-Then the user should see the location row in the office locations page
+Then the user should see the delete row confirmation modal in the office locations
+When the user clicks on the cancel no button
 When the user clicks on the save button
 When the user clicks on the confirm button
 Then the user verifies that the row values exists in the office locations page
@@ -129,8 +129,8 @@ When the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on the add new office location button in the office page
 And the user clicks on delete office locations row button for the row office_first_new_row_location_delete_button
-Then the user should see the delete row confirmation modal in the office page
-When the user clicks on the yes button in the delete row confirmation modal in the office page
+Then the user should see the delete row confirmation modal in the office locations
+When the user clicks on the Yes button to confirm the deletion of row in office locations section
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
@@ -276,6 +276,7 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
+And the user clicks on add new office address button in the office locations
 When the user gets the document with get id for offices with the <officeFid> from the database
 When the user clicks on the choose a country option in the office locations
 When the user enters the office country <Country> in the type-ahead box
@@ -322,6 +323,7 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
+And the user clicks on add new office address button in the office locations
 When the user gets the document with get id for offices with the <officeFid> from the database
 When the user clicks on the choose a country option in the office locations
 When the user enters the office country <Country> in the type-ahead box
@@ -391,8 +393,7 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
-And the user clicks on the add new office location button in the office page
-And the user clicks on add new office address button in the office locations
+When the user selects office address type office_addressType_first_row_existing_address_type_dropdown value as <Type>
 And the user clicks on delete office address row button for the row office_first_new_row_address_delete_button
 When the user clicks on the No button to cancel the deletion of row in office locations page
 And the user clicks on the save button
@@ -411,7 +412,8 @@ And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|
-|249093|FID|249093|249093-0|
+|1010|FID|1010|1010-54|
+
 
 Scenario: a)Verify that the delete button is disabled for the office address row where the address type is physical when the Legal Entity is associated with the office is a "deposit taking institution"
           b)Verify that the user should be able to add a new office address when the adddress type is mailing
@@ -432,7 +434,7 @@ Then the user should see the office_first_row_existing_delete_address_type_physi
 When the user selects office address type office_addressType_first_row_existing_address_type_dropdown value as <Type>
 And the user clicks on add new office address button in the office locations
 When the user selects office address type office_addressType_first_row_new_address_type_dropdown value as <Type1>
-Then the user should see the office_addressType_first_row_new_address_type_dropdown in disabled state in locations section
+Then the user should see the office_first_row_new_delete_address_type_physical_button in disabled state in locations section
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|Type1|
@@ -451,9 +453,9 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on add new office address button in the office locations
-Then the user should see the office_addressType_first_row_new_address_type_dropdown values in office location's section from lookup ADDRESS_TYPE except the values that are selected already
+When the user gets the document with get id for offices with the <officeFid> from the database
+Then the user should see the office_addressType_second_row_address_type_dropdown values in office location's section from lookup ADDRESS_TYPE except the values that are selected already
 
 Examples:
 |entity|searchBy|fid|officeFid|
@@ -931,7 +933,7 @@ And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on add new office telecoms button in the office locations
-And the user clicks on delete office telecoms row button for the row office_first_new_row_telecoms_delete_button
+And the user clicks on delete office telecoms row button for the row office_first_row_telecoms_delete_button
 When the user clicks on the No button to cancel the deletion of row in office locations page
 And the user clicks on the save button
 And the user clicks on the confirm button
@@ -939,7 +941,7 @@ Then the user verifies that the row values exists in the office locations page
 When the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on add new office telecoms button in the office locations
-And the user clicks on delete office telecoms row button for the row office_first_new_row_telecoms_delete_button
+And the user clicks on delete office telecoms row button for the row office_first_row_telecoms_delete_button
 And the user clicks on the yes button in the delete row confirmation modal in the office page
 And the user clicks on the save button
 Then the user should see the save confirmation modal

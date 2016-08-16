@@ -393,7 +393,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @Then("the user should see the $officeaddress_rowIdentifier values in office location's section from lookup $lookup except the values that are selected already")
     public void verifyOfficeAddressTypesFromLookup(@Named("officeaddress_rowIdentifier") String officeaddress_rowIdentifier,@Named("lookupFid") String lookupFid) {
-        getEditOfficePage().verifyOfficeAddressTypesFromLookup(officeaddress_rowIdentifier, lookupFid);
+        getEditOfficePage().verifyOfficeAddressTypesFromLookup(officeaddress_rowIdentifier,lookupFid);
     }
 
     @Then("the user should see the error message $errorMsg for the office address type field")
@@ -539,9 +539,10 @@ public class EditOfficeSteps extends AbstractSteps{
     public void pressNoButtonInDeleteConfirmationModalForOfficeLocation() {
         getEditOfficePage().pressNoButtonInDeleteConfirmationModalForOfficeLocation();
     }
-    @Then("the user should see the location row in the office locations page")
-    public void verifyOfficeLocationRowIsDisplayed() throws Exception {
-        getEditOfficePage().verifyOfficeLocationRowIsDisplayed();
+
+    @When("the user clicks on the Yes button to confirm the deletion of row in office locations section")
+    public void pressYesButtonInDeleteConfirmationModalForOfficeLocation() {
+        getEditOfficePage().pressYesButtonInDeleteConfirmationModalForOfficeLocation();
     }
 
     @Then("the user verifies that the row values exists in the office locations page")
@@ -553,6 +554,15 @@ public class EditOfficeSteps extends AbstractSteps{
     @When("the user clicks on the No button to cancel the deletion of row in office locations page")
     public void pressNoButtonInDeleteConfirmationModalForOffice() {
         getEditOfficePage().pressNoButtonInDeleteConfirmationModalForOffice();
+    }
+    @Then("the user should see the delete row confirmation modal in the office locations")
+    public void verifyDeleteConfirmationModal() {
+        getEditOfficePage().verifyDeleteConfirmationModal();
+    }
+
+    @Then("the user should return to edit office locations page mode")
+    public void verifyOfficeLocationsEditPageMode(){
+        getEditOfficePage().verifyOfficeLocationsEditPageMode();
     }
 
 
