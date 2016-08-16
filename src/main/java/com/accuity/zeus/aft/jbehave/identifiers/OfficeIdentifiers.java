@@ -82,6 +82,8 @@ public class OfficeIdentifiers {
         hmap.put("office_basicInfo_view_prefix_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Prefix']/td"));
         hmap.put("office_basicInfo_view_suffix_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Suffix']/td"));
         hmap.put("office_basicInfo_view_override_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Override']/td"));
+        hmap.put("office_business_hours_edit_mode", By.xpath("//*[@id='officeBasicInfo']//input[@name='businessHours']"));
+        hmap.put("office_business_hours_view_mode", By.xpath("//*[@id='officeBasicInfo']//tr[th='Business Hours']/td"));
     }
 
     public static By getObjectIdentifier(String key) {
