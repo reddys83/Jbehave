@@ -579,12 +579,7 @@ public class EditOfficeSteps extends AbstractSteps{
 		String[] serviceOverrideValues = { serviceOverride, serviceOverride2 };
 		getEditOfficePage().verifyOfficeServiceParametersInUI(serviceCategoryValues, serviceOverrideValues);
 	}
-	
-	//@When("the user selects <newServiceCategory> type in the services for office page")
-	//public void selectsServiceCategoryTypeFromDropdownNew(@Named("newServiceCategory") String newServiceCategory) {
-		//getEditOfficePage().selectsServiceCategoryTypeFromDropdown(newServiceCategory,1);
-	//}	
-	
+		
 	@When("the user enters <newServiceOverride> value  in the text box for office page")
 	public void enterServiceOverrideValueNew(@Named("newServiceOverride") String newServiceOverride) {
 		getEditOfficePage().enterServiceOverrideValue(newServiceOverride,1);
@@ -594,5 +589,52 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyExistingOfficeServicesParametersInUI(@Named("newServiceCategory") String newServiceCategory,
 			@Named("newServiceOverride") String newServiceOverride) {
 		getEditOfficePage().verifyOfficeServicesParametersInUI(newServiceCategory, newServiceOverride);
+	}
+	
+	@When("the user enters values which is beyond 100 unicode characters in the office service field")
+	public void enterInvalidCharactersInOfficeServices() {
+		getEditOfficePage().enterInvalidCharactersInServiceOverride();
+	}
+	
+	@Then("the user should see maximum length of office service value is limited to $maxLength")
+	public void verifyMaxLengthOfficeService(@Named("maxLength") String maxLength) {
+		getEditOfficePage().verifyMaxLengthInServiceOverride(maxLength);
+	}
+	
+	@Then("the user should be able to view that only 100 unicode characters are saved in office service field")
+	public void viewValidCharacterLengthServiceOvveride() {
+		getEditOfficePage().viewValidCharacterLengthServiceOvveride();
+	}
+	
+	@Then("the user should see error message for the required office Service Category field in office page")
+    public void verifyErrorMsgRequiredForOfficeServiceCategory(){
+        getEditOfficePage().verifyErrorMsgRequiredForOfficeServiceCategory();
+    }
+	
+	@Then("the user should see the Office Services values are updated in office services page")
+	public void verifyOfficeServicesParametersInUI(@Named("serviceCategory2") String serviceCategory2,
+			@Named("serviceOverride2") String serviceOverride2) {
+		getEditOfficePage().verifyOfficeServicesParametersInUI(serviceCategory2, serviceOverride2);
+	}
+	
+	@When("the user selects <serviceCategory2> type in the services office page")
+	public void selectsServiceCategoryFromDropdown2(@Named("serviceCategory2") String serviceCategory2) {
+		getEditOfficePage().selectsServiceCategoryTypeFromDropdown(serviceCategory2,1);
+	}	
+	
+	@When("the user enters <serviceOverride2> value  in the text box for service office page")
+	public void enterServiceOverrideText2(@Named("serviceOverride2") String serviceOverride2) {
+		getEditOfficePage().enterServiceOverrideValue(serviceOverride2,1);
+	}
+	
+	@When("the user clicks on the delete services row button in the office services page")
+	public void clickOnDeleteNewOfficeServiceRowButton() {
+		getEditOfficePage().clickOnDeleteNewOfficeServicesRowButton();
+	}
+	
+	@Then("the user should not see the deleted Office Services values in office services page")
+	public void verifyOfficeServicesParametersNotInUI(@Named("serviceCategory") String serviceCategory,
+			@Named("serviceOverride") String serviceOverride) {
+		getEditOfficePage().verifyOfficeServicesParametersNotInUI(serviceCategory, serviceOverride);
 	}
 }

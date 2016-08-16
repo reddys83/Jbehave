@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
@@ -30,6 +31,7 @@ public class EditOfficePage extends AbstractPage {
     static String endpointWithID;
     public String EditSortNameValue = "";
     public String EditOfficeSortName = "";
+    public static String officeServicesMaximumCharacter=null;
 
     public EditOfficePage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -433,7 +435,6 @@ public class EditOfficePage extends AbstractPage {
     }
 
     public void verifyErrorMsgRequiredForOfficeType() {
-        assertEquals(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_office_type_error_msg_xpath")).size(), 1);
         assertEquals("Required", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_office_type_error_msg_xpath")).getText());
     }
 
@@ -908,10 +909,7 @@ public class EditOfficePage extends AbstractPage {
     }
 
    public void verifyOfficeServicesParametersInUI(String serviceCategory, String serviceOverride) {
-	   
-	   System.out.println("UI "+getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_category_view_mode"))
-						.getText()+"PAss  "+serviceCategory);
-	   
+	      
 	   assertEquals(serviceCategory,
 				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_category_view_mode"))
 						.getText());
@@ -920,6 +918,52 @@ public class EditOfficePage extends AbstractPage {
 						.getText());
     }
    
+   public void enterInvalidCharactersInServiceOverride() {
+		String charText = createBigString(101);
+		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_service_override_textbox_edit_mode_xpath"), charText);
+		officeServicesMaximumCharacter = charText;
+	}
+   
+   public void verifyMaxLengthInServiceOverride(String maxLength) {
+		 assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_override_textbox_edit_mode_xpath"))
+              .getAttribute("maxlength"), maxLength);
+	}
+   
+   public void viewValidCharacterLengthServiceOvveride() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		Integer serviceOverrideLength = getDriver().findElement(OfficeIdentifiers
+				.getObjectIdentifier("office_services_override_view_mode")).getText().length();
+		assertEquals(serviceOverrideLength.toString(), "100");
+	}
+   
+   public void verifyErrorMsgRequiredForOfficeServiceCategory() {
+       assertEquals(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_service_category_error_msg_xpath")).size(), 1);
+       assertEquals("Required", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_category_error_msg_xpath")).getText());
+   }
+   
+   public void clickOnDeleteNewOfficeServicesRowButton() {
+		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_delete_services_row_button_xpath"));
+	}
+   
+   public void verifyOfficeServicesParametersNotInUI(String serviceCategory, String serviceOverride) {
+	  try{    
+	   assertNotEquals(serviceCategory,
+				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_category_view_mode"))
+						.getText());
+	   assertNotEquals(serviceOverride,
+				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_services_override_view_mode"))
+						.getText());
+    }
+   
+   catch(NoSuchElementException ex) {
+		assertTrue("Deleted Row not present", true);
+	}
+   }
     @Override
     public String getPageUrl() {
         return null;
