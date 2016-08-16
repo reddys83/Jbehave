@@ -1440,7 +1440,7 @@ public class EditAreaPage extends AbstractPage {
 	}
 	
 	public void selectUseInAddress(String useInAddressValue) {
-		if (useInAddressValue.equals("true")){
+		if (useInAddressValue.equals("True")){
 			attemptClick(AreaIdentifiers.getObjectIdentifier("area_use_in_address_true"));	
 		}
 		else{
