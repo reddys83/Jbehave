@@ -714,7 +714,17 @@ public class EditOfficePage extends AbstractPage {
 	}
     
     public void verifySelectedOfficeIdentifierTypeNotInNewRow(String identifierType, int rowNumber) {
-		verifySelectedTypeNotInNewRow(identifierType, rowNumber, OfficeIdentifiers.getObjectIdentifier("office_identifier_type_input_xpath"));
+    	try {
+			List<WebElement> identifierDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_input_xpath"));
+			if (rowNumber <= identifierDropDowns.size()) {
+				Select dropdown = new Select(identifierDropDowns.get(rowNumber - 1));
+				for (int index = 0; index < dropdown.getOptions().size(); index++) {
+					assertTrue(!dropdown.getOptions().get(index).getText().contains(identifierType));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	} 
     
     public void verifyOfficeIdentifierParametersInUI(String[] identifierTypes, String[] identifierValues,
@@ -791,9 +801,7 @@ public class EditOfficePage extends AbstractPage {
 			assertTrue(false);
 		}
 	}
-    
-    // personnel
-    
+        
     public void clickOnOfficeAddNewPersonnelButton() {
 		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_new_personnel_button_id"));
 	}
@@ -908,16 +916,8 @@ public class EditOfficePage extends AbstractPage {
 		}
 	}
 	
-	public void verifyOfficePersonnelParametersInUI(List<String> personnelTypes, List<String> personnelValues) {
-		
-		try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-		
-		List<WebElement> personnelRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_view_mode"));
-		
+	public void verifyOfficePersonnelParametersInUI(List<String> personnelTypes, List<String> personnelValues) {			
+		List<WebElement> personnelRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_view_mode"));		
 		for (int i = 0; i < personnelRows.size(); i++) {
 			assertTrue(personnelRows.get(i).findElements(By.tagName("td")).get(0).getText().equals(personnelTypes.get(i)));
 			assertTrue(personnelRows.get(i).findElements(By.tagName("td")).get(1).getText().equals(personnelValues.get(i)));
@@ -950,11 +950,7 @@ public class EditOfficePage extends AbstractPage {
 	public void verifyOfficePersonnelValueTextAreaLength() {
         assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath")).getAttribute("maxlength"), "10000");
     }
-	
-	public void verifyOfficePersonnelValueInUi() {
-        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath")).getAttribute("maxlength"), "10000");
-    }
-	
+
 	public void verifyPersonnelValueWithMaxLengthFromZeus(String personnelType, String officeFid, String source) {
 		List<String> personnelTypes = new ArrayList<>();
 		personnelTypes.add(personnelType);

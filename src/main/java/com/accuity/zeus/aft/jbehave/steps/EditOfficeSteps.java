@@ -629,7 +629,7 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().verifyOfficePersonnelParametersInUI(personnelTypes, personnelValues);
 	}
 	
-	@Then("the user should see the upadated office personnel values as in $source document")
+	@Then("the user should see the updated office personnel values as in $source document")
 	@Alias("the user verifies that no personnel values are updated in $source document")
 	public void verifyUpdatedOfficePersonnelValuesFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid,
 			@Named("newPersonnelType") String personnelType, @Named("newPersonnelValue") String personnelValue) {
