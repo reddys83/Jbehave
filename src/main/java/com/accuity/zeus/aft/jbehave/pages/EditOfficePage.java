@@ -809,46 +809,31 @@ public class EditOfficePage extends AbstractPage {
 					options.get(indexOfOption).getText().trim());
 		}
 	}
-    
-    public void enterOfficePersonnelType(String personnelType, int rowNumber) {
-		try {
-			List<WebElement> personnelTypeDropDowns = getDriver()
-					.findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_input_xpath"));
-			if (rowNumber <= personnelTypeDropDowns.size()) {
-				Select dropdown = new Select(personnelTypeDropDowns.get(rowNumber - 1));
-				if (personnelType.equals("")) {
-					dropdown.selectByValue(personnelType);
-				} else {
-					dropdown.selectByVisibleText(personnelType);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-    
-    public void enterOfficePersonnelValue(String personnelValue, int rowNumber) {
+  
+	public void enterOfficePersonnelValueInNewlyAddedRow(String personnelValue) {
 		try {
 			List<WebElement> personnelValues = getDriver()
 					.findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath"));
-			if (rowNumber <= personnelValues.size()) {
-				personnelValues.get(rowNumber - 1).clear();
-				personnelValues.get(rowNumber - 1).sendKeys(personnelValue);
+			int rowCount = personnelValues.size();
+			if (rowCount > 0) {
+				personnelValues.get(rowCount - 1).clear();
+				personnelValues.get(rowCount - 1).sendKeys(personnelValue);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
     
-    public void verifyOfficePersonnelValuesFromTrustedDB(String source, String officeFid) {
-    	try {
+	public void verifyOfficePersonnelValuesFromTrustedDB(String source, String officeFid) {
+		try {
 			List<String> personnelTypes = new ArrayList<>();
 			List<String> personnelValues = new ArrayList<>();
+			attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_new_personnel_button_id"));
 			List<WebElement> personnelTypeDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_input_xpath"));
-			
+
 			if (personnelTypeDropDowns.size() > 0) {
 				List<WebElement> personnelValueDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath"));
-				for (int index = 0; index < personnelTypeDropDowns.size(); index++) {					
+				for (int index = 0; index < personnelTypeDropDowns.size(); index++) {
 					personnelTypes.add(new Select(personnelTypeDropDowns.get(index)).getAllSelectedOptions().get(0).getText());
 					personnelValues.add(personnelValueDropDowns.get(index).getAttribute("value"));
 				}
@@ -859,8 +844,26 @@ public class EditOfficePage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    }
-    
+	}
+
+	public void enterOfficePersonnelTypeInNewlyAddedRow(String personnelType) {
+		try {
+			List<WebElement> personnelTypeDropDowns = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_input_xpath"));
+			int rowCount = personnelTypeDropDowns.size();
+			if (rowCount > 0) {
+				Select dropdown = new Select(personnelTypeDropDowns.get(rowCount - 1));
+				if (personnelType.equals("")) {
+					dropdown.selectByValue(personnelType);
+				} else {
+					dropdown.selectByVisibleText(personnelType);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void verifyOfficePersonnelValuesFromDB(String source, String officeFid, List<String> personnelTypes,
 			List<String> personnelValues) {
 		try {
@@ -872,7 +875,7 @@ public class EditOfficePage extends AbstractPage {
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get office personnel values", nvPairs);
 			if (document != null) {				
-				NodeList nodeList = document.getElementsByTagName("personnel");
+				NodeList nodeList = document.getElementsByTagName("personnel");				
 				for(int index = 0; index < nodeList.getLength(); index++)  {
 					NodeList childNodeList = nodeList.item(index).getChildNodes();
 					assertEquals(childNodeList.item(0).getTextContent(), personnelTypes.get(index));
@@ -930,8 +933,7 @@ public class EditOfficePage extends AbstractPage {
 	}
 	
 	public void verifyErrorMessageForPersonnelValue(String errorMessage) {
-		assertEquals(errorMessage, getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_error_msg_xpath")).getText());
+		assertEquals(errorMessage, getDriver().findElement(By.xpath("//*[@data-error_id='personnelValueError']")).getText());
 	}
 	
 	public void verifyErrorMessageForPersonnelType(String errorMessage) {
@@ -949,6 +951,10 @@ public class EditOfficePage extends AbstractPage {
         assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath")).getAttribute("maxlength"), "10000");
     }
 	
+	public void verifyOfficePersonnelValueInUi() {
+        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath")).getAttribute("maxlength"), "10000");
+    }
+	
 	public void verifyPersonnelValueWithMaxLengthFromZeus(String personnelType, String officeFid, String source) {
 		List<String> personnelTypes = new ArrayList<>();
 		personnelTypes.add(personnelType);
@@ -957,6 +963,10 @@ public class EditOfficePage extends AbstractPage {
 		verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
     }
 	
+	public String getBigStringValue()
+	{
+		return bigString;
+	}
 	public void clickOnDeleteOfficePersonnelRowButton() {
 		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_delete_personnel_row_button_xpath"));
 	}

@@ -533,22 +533,22 @@ public class EditOfficeSteps extends AbstractSteps{
 	
 	@When("the user enters personnel type as <personnelType> in the office personnel page")
 	public void enterOfficePersonnelType(@Named("personnelType") String personnelType) {
-		getEditOfficePage().enterOfficePersonnelType(personnelType, 1);
+		getEditOfficePage().enterOfficePersonnelTypeInNewlyAddedRow(personnelType);
 	}
 
 	@When("the user enters personnel value as <personnelValue> in the office personnel page")
 	public void enterOfficePersonnelValue(@Named("personnelValue") String personnelValue) {
-		getEditOfficePage().enterOfficePersonnelValue(personnelValue, 1);
+		getEditOfficePage().enterOfficePersonnelValueInNewlyAddedRow(personnelValue);
 	}
 	
 	@When("the user enters personnel type as <personnelType2> in the office personnel page")
 	public void enterOfficePersonnelType2(@Named("personnelType2") String personnelType) {
-		getEditOfficePage().enterOfficePersonnelType(personnelType, 2);
+		getEditOfficePage().enterOfficePersonnelTypeInNewlyAddedRow(personnelType);
 	}
 
 	@When("the user enters personnel value as <personnelValue2> in the office personnel page")
 	public void enterOfficePersonnelValue2(@Named("personnelValue2") String personnelValue) {
-		getEditOfficePage().enterOfficePersonnelValue(personnelValue, 2);
+		getEditOfficePage().enterOfficePersonnelValueInNewlyAddedRow(personnelValue);
 	}
 	
 	@Then("the user should see the office's personnel values same as in $source document")
@@ -580,6 +580,17 @@ public class EditOfficeSteps extends AbstractSteps{
 		
 		getEditOfficePage().verifyOfficePersonnelParametersInUI(personnelTypes, personnelValues);
 	}
+	
+	@Then("the user verifies that the personnel parameters with 10000 characters are present in the office identifiers page")
+	public void verifyOfficePersonnelParametersInUI(@Named("personnelType2") String personnelType) {
+
+		List<String> personnelTypes = new ArrayList<>();
+		personnelTypes.add(personnelType);		
+		List<String> personnelValues = new ArrayList<>();
+		personnelValues.add(getEditOfficePage().getBigStringValue());		
+		
+		getEditOfficePage().verifyOfficePersonnelParametersInUI(personnelTypes, personnelValues);
+	}
 
 	@Then("the user should see the office personnel values as in $source document")
 	public void verifyOfficePersonnelValuesFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid,
@@ -598,12 +609,12 @@ public class EditOfficeSteps extends AbstractSteps{
 	
 	@When("the user enters personnel type as <newPersonnelType> in the office personnel page")
 	public void editOfficePersonnelType(@Named("newPersonnelType") String personnelType) {
-		getEditOfficePage().enterOfficePersonnelType(personnelType, 1);
+		getEditOfficePage().enterOfficePersonnelTypeInNewlyAddedRow(personnelType);
 	}
 
 	@When("the user enters personnel value as <newPersonnelValue> in the office personnel page")
 	public void editOfficePersonnelValue(@Named("newPersonnelValue") String personnelValue) {
-		getEditOfficePage().enterOfficePersonnelValue(personnelValue, 1);
+		getEditOfficePage().enterOfficePersonnelValueInNewlyAddedRow(personnelValue);
 	}
 	
 	@Then("the user verifies that the existing personnel parameters are updated in the office identifiers page")
@@ -652,7 +663,7 @@ public class EditOfficeSteps extends AbstractSteps{
     }
 	
 	@Then("the user should see the office personnel value text with 10000 characters for fid <officeFid> in $source document")
-    public void verifyPersonnelValueWithMaxLengthFromDB(@Named("personnelType") String personnelType,
+    public void verifyPersonnelValueWithMaxLengthFromDB(@Named("personnelType2") String personnelType,
     		                   @Named("officeFid") String officeFid, @Named("source") String source) {
         getEditOfficePage().verifyPersonnelValueWithMaxLengthFromZeus(personnelType, officeFid, source);
     }
