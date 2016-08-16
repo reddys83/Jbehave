@@ -536,11 +536,6 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().enterOfficeBusinessHourText(businessHour);
 	}
 
-	@When("the user enters the <businessHour2> in the office business hour text area")
-	public void enterOfficeBusinessHourDiffText(@Named("businessHour2") String businessHour2) {
-		getEditOfficePage().enterOfficeBusinessHourText(businessHour2);
-	}
-
 	@Then("the user should be able to verify the values are entered in the office business hour field")
 	public void verifyOfficeBusinessHourTextInUI(@Named("businessHour") String businessHour) {
 		getEditOfficePage().verifyOfficeBusinessHourTextInUI(businessHour);
