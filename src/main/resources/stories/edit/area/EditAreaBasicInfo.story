@@ -1697,13 +1697,13 @@ And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 Then the user should see Use in address value is retrieved from trusted document
 When the user gets the document with get document id for area with the <area> from the database
-When the user clicks on True option for Area Use in Address
+When the user clicks on <useInAddressOld> option for Area Use in Address
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 When the user clicks on the area update link
-When the user clicks on False option for Area Use in Address
+When the user clicks on <useInAddress> option for Area Use in Address
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 Then the user should see the below summary changes in confirmation modal
@@ -1716,8 +1716,8 @@ Then the user should see updated Use in address value in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|useInAddress|
-|Angola|Cabinda|False|
+|country|area|useInAddressOld|useInAddress|
+|Angola|Cabinda|True|False|
 
 Scenario: User is updating  Area's Basic Info  page and  entered  value for 'Use in Address' that is no different from the current value
 a)User verifies 'Your Changes have been saved' message is displayed after save
@@ -1734,13 +1734,13 @@ And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
-When the user clicks on True option for Area Use in Address
+When the user clicks on <useInAddressOld> option for Area Use in Address
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 When the user clicks on the area update link
-When the user clicks on True option for Area Use in Address
+When the user clicks on <useInAddressOld> option for Area Use in Address
 When the user clicks on the save button
 Then the user should not see the below summary changes in confirmation modal
 |Summary|
@@ -1752,5 +1752,5 @@ Then the user should see updated Use in address value in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|useInAddress|
-|Angola|Cabinda|True|
+|country|area|useInAddress|useInAddressOld|
+|Angola|Cabinda|True|True|

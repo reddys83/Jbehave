@@ -752,14 +752,14 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyMaxLengthInterestRate(maxLength);
 	}
 	
-	@When("the user clicks on False option for Area Use in Address")
-	public void selectFalseForUseInAddress() {
-		getEditAreaPage().selectFalseForUseInAddress();
+	@When("the user clicks on <useInAddressOld> option for Area Use in Address")
+	public void selectUseInAddressOld(@Named("useInAddressOld") String useInAddressOld) {
+		getEditAreaPage().selectUseInAddress(useInAddressOld);
 	}
-
-	@When("the user clicks on True option for Area Use in Address")
-	public void selectTrueForUseInAddress() {
-		getEditAreaPage().selectTrueForUseInAddress();
+	
+	@When("the user clicks on <useInAddress> option for Area Use in Address")
+	public void selectUseInAddress(@Named("useInAddress") String useInAddress) {
+		getEditAreaPage().selectUseInAddress(useInAddress);
 	}
 
 	@Then("the user should see the updated <useInAddress> in area web page")

@@ -1439,12 +1439,13 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 	
-	public void selectTrueForUseInAddress() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_use_in_address_true"));
-	}
-
-	public void selectFalseForUseInAddress() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_use_in_address_false"));
+	public void selectUseInAddress(String useInAddressValue) {
+		if (useInAddressValue.equals("true")){
+			attemptClick(AreaIdentifiers.getObjectIdentifier("area_use_in_address_true"));	
+		}
+		else{
+			attemptClick(AreaIdentifiers.getObjectIdentifier("area_use_in_address_false"));
+		}
 	}
 
 	public void verifyUseInAddressInAreaPage(String useInAddress) {
