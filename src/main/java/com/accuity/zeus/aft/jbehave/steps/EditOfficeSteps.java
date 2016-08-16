@@ -637,4 +637,10 @@ public class EditOfficeSteps extends AbstractSteps{
 			@Named("serviceOverride") String serviceOverride) {
 		getEditOfficePage().verifyOfficeServicesParametersNotInUI(serviceCategory, serviceOverride);
 	}
+	
+	@Then("the user should see Office Services values are updated in office services page")
+	public void verifyOfficeServicesParameterInUI(@Named("serviceCategory") String serviceCategory,
+			@Named("serviceOverride") String serviceOverride) {
+		getEditOfficePage().verifyOfficeServicesParametersInUI(serviceCategory, serviceOverride);
+	}
 }

@@ -910,12 +910,18 @@ public class EditOfficePage extends AbstractPage {
 
    public void verifyOfficeServicesParametersInUI(String serviceCategory, String serviceOverride) {
 	      
-	   assertEquals(serviceCategory,
+	   try{
+		   assertEquals(serviceCategory,
+	   
 				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_category_view_mode"))
 						.getText());
 	   assertEquals(serviceOverride,
 				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_services_override_view_mode"))
 						.getText());
+	   }
+	   catch(NoSuchElementException ex) {
+		   ex.printStackTrace();
+		}
     }
    
    public void enterInvalidCharactersInServiceOverride() {
