@@ -1440,10 +1440,9 @@ public class EditAreaPage extends AbstractPage {
 	}
 	
 	public void selectUseInAddress(String useInAddressValue) {
-		if (useInAddressValue.equals("True")){
-			attemptClick(AreaIdentifiers.getObjectIdentifier("area_use_in_address_true"));	
-		}
-		else{
+		if (useInAddressValue.equals("True")) {
+			attemptClick(AreaIdentifiers.getObjectIdentifier("area_use_in_address_true"));
+		} else {
 			attemptClick(AreaIdentifiers.getObjectIdentifier("area_use_in_address_false"));
 		}
 	}
@@ -1454,13 +1453,13 @@ public class EditAreaPage extends AbstractPage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		assertEquals(useInAddress,
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_view_mode_xpath")).getText());
+		assertEquals(useInAddress, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_view_mode_xpath")).getText());
 	}
 
 	public void verifyUseInAddressAreaFromZeusDB(String country, String area, String tagName, String source) {
-		assertEquals(StringUtils.capitalize(getAreaBasicInfoFromDB(country, area, tagName, source)),
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_view_mode_xpath")).getText());
+		assertEquals(StringUtils.capitalize(getAreaBasicInfoFromDB(country, area, tagName, source)), getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_view_mode_xpath")).getText());
 	}
 
 	public void verifyUseInAddressAreaFromTrustedDB(String country, String area, String tagName, String source) {
@@ -1468,7 +1467,7 @@ public class EditAreaPage extends AbstractPage {
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_edit_mode_xpath"))
 						.getAttribute("value"));
 	}
-	
+
 	@Override
 	public String getPageUrl() {
 		return null;

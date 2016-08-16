@@ -756,7 +756,7 @@ public class EditAreaSteps extends AbstractSteps {
 	public void selectUseInAddressOld(@Named("useInAddressOld") String useInAddressOld) {
 		getEditAreaPage().selectUseInAddress(useInAddressOld);
 	}
-	
+
 	@When("the user clicks on <useInAddress> option for Area Use in Address")
 	public void selectUseInAddress(@Named("useInAddress") String useInAddress) {
 		getEditAreaPage().selectUseInAddress(useInAddress);
