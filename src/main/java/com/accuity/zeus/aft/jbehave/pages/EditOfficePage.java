@@ -809,12 +809,12 @@ public class EditOfficePage extends AbstractPage {
 		nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
 		nvPairs.add(new BasicNameValuePair("source", source));
 		try {
-			Thread.sleep(7000L);
+			Thread.sleep(3000L);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-				"get office history details", nvPairs);
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, 
+																		"get office history details", nvPairs);
 		if (document != null) {
 			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
 					: getNodeValuesByTagName(document, tagName).get(0);
@@ -847,9 +847,9 @@ public class EditOfficePage extends AbstractPage {
 	}
 
 	public void enterCharactersInOfficeHistory() {
-		String getCharText = createBigString(10000);
-		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_history_edit_mode_xpath"), getCharText);
-		officeHistoryMaximumCharacter = getCharText;
+		String officeHistoryText = createBigString(10000);
+		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_history_edit_mode_xpath"), officeHistoryText);
+		officeHistoryMaximumCharacter = officeHistoryText;
 	}
 
 	public void verifyMaxLengthOfficeHistory(String maxLength) {
@@ -864,9 +864,8 @@ public class EditOfficePage extends AbstractPage {
 			e.printStackTrace();
 		}
 
-		Integer officeHistoryLength = getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_view_mode_xpath")).getText()
-				.length();
+		Integer officeHistoryLength = getDriver().findElement(OfficeIdentifiers
+				.getObjectIdentifier("office_history_view_mode_xpath")).getText().length();
 		assertEquals(officeHistoryLength.toString(), "10000");
 	}
 
