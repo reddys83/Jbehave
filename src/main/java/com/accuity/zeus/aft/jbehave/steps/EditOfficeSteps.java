@@ -370,6 +370,7 @@ public class EditOfficeSteps extends AbstractSteps{
     public void verifyOfficeLocationsRowIsNotDisplayed() throws Exception {
         getEditOfficePage().verifyOfficeLocationsRowIsNotDisplayed();
     }
+
     @When("the user enters office address postal code $postalCodeRowIdentifier value as <PostalCode>")
     public void enterOfficeAddressPostalCode(@Named("postalCodeRowIdentifier") String postalCodeRowIdentifier,@Named("PostalCode") String PostalCode)
     {

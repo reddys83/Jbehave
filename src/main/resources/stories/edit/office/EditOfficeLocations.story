@@ -53,6 +53,7 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 And the user should not see the newly added locations row in the office locations page
+Then the user verifies that the deleted row for office locations does not exist in zeus document
 And the user reverts the changes to the document
 
 Examples:

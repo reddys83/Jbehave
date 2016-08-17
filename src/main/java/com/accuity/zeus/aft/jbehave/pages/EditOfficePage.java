@@ -782,9 +782,6 @@ public class EditOfficePage extends AbstractPage {
 
     }
 
-
-
-
     public String getDocumentPrimaryFlagFromDB(String officeFid, String source) {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", officeFid));
@@ -810,15 +807,7 @@ public class EditOfficePage extends AbstractPage {
 
 
     }
-    public void verifyNoNewOfficeNameRow(String rowIdentifier) {
-        try {
-            assertFalse(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).isDisplayed());
-        } catch (NoSuchElementException e) {
-        }
-
-    }
-
-    public void verifySuccessfulUpdatedMessage() {
+     public void verifySuccessfulUpdatedMessage() {
         try {
             assertTrue(
                     getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_locations_save_confirmation_message"))
@@ -846,10 +835,8 @@ public class EditOfficePage extends AbstractPage {
       public void verifyNewlyAddedOfficeLocationRowExists() {
         try
         {
-          //  WebElement identifier = getDriver()
-             //       .findElement(OfficeIdentifiers.getObjectIdentifier("office_locations_primaryflag_view"));
-            WebElement identifier = getDriver()
-                    .findElement(OfficeIdentifiers.getObjectIdentifier("office_addressType_first_row_existing_address_type_dropdown"));
+
+            WebElement identifier = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_addressType_first_row_existing_address_type_dropdown"));
             assertTrue(identifier != null);
         } catch (Exception e) {
             e.printStackTrace();
