@@ -41,7 +41,7 @@ public class RestClient{
         return patchResponse;
     }
 
-    public int putDocumentByID(String endpointWithID, HeraApi heraApi, String document)
+    public int putDocumentByID(String endpointWithID, HeraApi heraApi, String document, String url)
     {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", String.valueOf(MediaType.APPLICATION_XML));
@@ -49,7 +49,12 @@ public class RestClient{
         headers.set("source", "zeus");
         HttpEntity<?> requestEntity = new HttpEntity<Object> (document, headers);
 
-        String url = utils.constructURLForHeaApi(heraApi.getScheme(), heraApi.getHost(), heraApi.getPort(), heraApi.getPath(), endpointWithID);
+        if (url.length()<=0) {
+            url = utils.constructURLForHeaApi(heraApi.getScheme(), heraApi.getHost(), heraApi.getPort(), heraApi.getPath(), endpointWithID.replace("id/", ""));
+        } else {
+            url = utils.constructURLForHeaApi(heraApi.getScheme(), heraApi.getHost(), heraApi.getPort(), heraApi.getPath(), endpointWithID);
+        }
+
 
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         requestFactory.setConnectTimeout(0);
@@ -58,6 +63,24 @@ public class RestClient{
 
         return restTemplate.exchange(url, HttpMethod.PUT, requestEntity, String.class).getStatusCode().value();
     }
+    
+	public int putDocumentByID(String endpointWithID, HeraApi heraApi, String document) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Content-Type", String.valueOf(MediaType.APPLICATION_XML));
+		headers.set("Accept", String.valueOf(MediaType.APPLICATION_XML));
+		headers.set("source", "zeus");
+		HttpEntity<?> requestEntity = new HttpEntity<Object>(document, headers);
+		
+		String url = utils.constructURLForHeaApi(heraApi.getScheme(), heraApi.getHost(), heraApi.getPort(),
+				heraApi.getPath(), endpointWithID);
+		
+		HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+		requestFactory.setConnectTimeout(0);
+		requestFactory.setReadTimeout(0);
+		restTemplate.setRequestFactory(requestFactory);
+
+		return restTemplate.exchange(url, HttpMethod.PUT, requestEntity, String.class).getStatusCode().value();
+	}
 
     public ResponseEntity getDocumentByID(String endpointWithID, HeraApi heraApi)
     {
