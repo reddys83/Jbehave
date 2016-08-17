@@ -81,7 +81,6 @@ public class OfficeIdentifiers {
         hmap.put("office_basicInfo_edit_override_xpath", By.xpath("//*[@id='officeBasicInfo']//input[@name='officeTitleOverride']"));
         hmap.put("office_basicInfo_view_prefix_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Prefix']/td"));
         hmap.put("office_basicInfo_view_suffix_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Suffix']/td"));
-        hmap.put("office_basicInfo_view_override_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Override']/td"));       
         hmap.put("office_add_new_personnel_button_id", By.id("add-personnel"));
         hmap.put("office_personnel_type_input_xpath", By.xpath(".//*[@id='additionalPersonnel']//*[@data-internal_id='personnelType']"));
         hmap.put("office_personnel_value_input_xpath", By.xpath(".//*[@id='additionalPersonnel']//*[@data-internal_id='personnelValue']"));
@@ -93,7 +92,6 @@ public class OfficeIdentifiers {
         hmap.put("office_basicInfo_view_override_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Override']/td"));
         hmap.put("office_business_hours_edit_mode", By.xpath("//*[@id='officeBasicInfo']//input[@name='businessHours']"));
         hmap.put("office_business_hours_view_mode", By.xpath("//*[@id='officeBasicInfo']//tr[th='Business Hours']/td"));
-
     }
 
     public static By getObjectIdentifier(String key) {

@@ -189,6 +189,6 @@ And the user verifies that no personnel values are updated in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|personnelType|personnelValue|newPersonnelType|newPersonnelValue|
-|1038|FID|1038|1038-60|InstitutionEmployees|QATest|||
+|entity|searchBy|fid|officeFid|personnelType|personnelValue|
+|1038|FID|1038|1038-60|InstitutionEmployees|QATest|
 

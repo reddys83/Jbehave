@@ -574,8 +574,9 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 	
 	@Then("the user verifies that the personnel parameters are present in the office identifiers page")
-	public void verifyOfficePersonnelParametersInUI(@Named("personnelType") String personnelType, @Named("personnelValue") String personnelValue, 
-			@Named("personnelType2") String personnelType2, @Named("personnelValue2") String personnelValue2) {
+	public void verifyOfficePersonnelParametersInUI(@Named("personnelType") String personnelType, 
+					@Named("personnelValue") String personnelValue, @Named("personnelType2") String personnelType2, 
+					@Named("personnelValue2") String personnelValue2) {
 
 		List<String> personnelTypes = new ArrayList<>();
 		personnelTypes.add(personnelType);
@@ -599,7 +600,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@Then("the user should see the office personnel values as in $source document")
-	public void verifyOfficePersonnelValuesFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid,
+	public void verifyOfficePersonnelValuesFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid, 
 			@Named("personnelType") String personnelType, @Named("personnelValue") String personnelValue, 
 			@Named("personnelType2") String personnelType2, @Named("personnelValue2") String personnelValue2) {
 
@@ -654,8 +655,8 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 	
 	@When("the user enters 10000 characters in the office personnel value text area")
-    public void enter10000CharactersInOfficePersonnelValue() {
-        getEditOfficePage().enter10000CharactersInOfficePersonnelValue();
+    public void enterOfficePersonnelValue() {
+        getEditOfficePage().enterOfficePersonnelValue();
     }
 	
 	@Then("the user should see the office personnel value text area field length as 10000")
@@ -664,8 +665,8 @@ public class EditOfficeSteps extends AbstractSteps{
     }
 	
 	@Then("the user should see the office personnel value text with 10000 characters for fid <officeFid> in $source document")
-    public void verifyPersonnelValueWithMaxLengthFromDB(@Named("personnelType2") String personnelType,
-    		                   @Named("officeFid") String officeFid, @Named("source") String source) {
+    public void verifyPersonnelValueWithMaxLengthFromDB(@Named("personnelType2") String personnelType, 
+    		@Named("officeFid") String officeFid, @Named("source") String source) {
         getEditOfficePage().verifyPersonnelValueWithMaxLengthFromZeus(personnelType, officeFid, source);
     }
 	
@@ -704,7 +705,6 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyOfficeBusinessHourValueFromZeusDB(@Named("officeFid") String officeFid,
 			@Named("source") String source) {
 		getEditOfficePage().verifyOfficeBusinessHourValueFromZeusDB(officeFid, source);
-
 	}
 
 	@When("the user enters 200 unicode characters in the office business hours field")

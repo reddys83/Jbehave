@@ -878,7 +878,7 @@ public class EditOfficePage extends AbstractPage {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("source", source));
 			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
-			Thread.sleep(3000L);
+			Thread.sleep(2000L);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get office personnel values", nvPairs);
@@ -944,14 +944,16 @@ public class EditOfficePage extends AbstractPage {
 				.findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_error_msg_xpath")).getText());
 	}
 	
-	public void enter10000CharactersInOfficePersonnelValue() {
-        String strBigString = createBigString(10000);
+	public void enterOfficePersonnelValue() {
+        String personnelValue = createBigString(10000);
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath")).clear();
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + strBigString + "'", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath")));
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + personnelValue + "'", 
+        		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath")));
     }
 	
 	public void verifyOfficePersonnelValueTextAreaLength() {
-        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath")).getAttribute("maxlength"), "10000");
+        assertEquals(getDriver().findElement(OfficeIdentifiers
+        		.getObjectIdentifier("office_personnel_value_input_xpath")).getAttribute("maxlength"), "10000");
     }
 
 	public void verifyPersonnelValueWithMaxLengthFromZeus(String personnelType, String officeFid, String source) {
@@ -962,10 +964,10 @@ public class EditOfficePage extends AbstractPage {
 		verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
     }
 	
-	public String getBigStringValue()
-	{
+	public String getBigStringValue() {
 		return bigString;
 	}
+	
 	public void clickOnDeleteOfficePersonnelRowButton() {
 		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_delete_personnel_row_button_xpath"));
 	}
