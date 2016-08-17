@@ -8,7 +8,6 @@ JIRA ID - ZEUS-917 - User can edit Legal Entity's Personnel Summaries
 
 Scenario: Verify edit legalEntity personnel TYPE values are from PERSONNEL_SUMMARY_TEXT_TYPE for exisiting field
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -25,7 +24,6 @@ Examples:
 
 Scenario: Verify edit legalEntity personnel TYPE values are from PERSONNEL_SUMMARY_TEXT_TYPE for new field
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -42,7 +40,6 @@ Examples:
 
 Scenario: Verify error message for value field
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -78,7 +75,6 @@ Examples:
 
 Scenario: Verify REQUIRED error message for Type dropdwon
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -96,7 +92,6 @@ Examples:
 
 Scenario: Verify successfull save with valid inputs for type and value in legalEntity personnel
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

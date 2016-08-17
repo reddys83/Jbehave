@@ -115,7 +115,6 @@ Examples:
 Scenario: Verifying error message displayed for wrong format of claimes est date
 
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -141,7 +140,6 @@ Examples:
 Scenario: Verifying user can update claimed est date in trusted and zeus document.
 
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -171,7 +169,6 @@ Veriyfing if charter type values are updated in Zeus and Trusted documents.
 Verifying the options displayed for charter type are same as those in lookup document.
 
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -391,7 +388,6 @@ Examples:
 
 Scenario: User can edit legal Entity's corporate statement
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -799,7 +795,7 @@ Scenario: User updates Chartered date
 Verifying updated date is been is saved in zeus document.
 
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
+
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -823,7 +819,7 @@ Scenario: User updates Chartered date
 Verifying error message displaying Enter a year, month/year or day/month/year. for invalid date entered.
 
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
+
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -845,7 +841,6 @@ Scenario: User updates Chartered date
 Verifying error message displaying Invalid Date for invalid date entered.
 
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -868,7 +863,6 @@ Scenario: User updates Insurance type
 Verifying the options displayed for insurance type are same as those in lookup document.
 
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -885,7 +879,6 @@ Scenario: User updates Insurance type
 Verifying the value updated by user is reflected in Zeus document
 
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -907,7 +900,6 @@ Scenario: User updates Ownership type
 Verifying the options displayed for Ownership type are same as those in lookup document.
 
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -924,7 +916,6 @@ Scenario: User updates Ownership type
 Verifying the value updated by user is reflected in Zeus document
 
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

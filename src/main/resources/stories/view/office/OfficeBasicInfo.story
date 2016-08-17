@@ -9,7 +9,6 @@ JIRA ID - ZUES-542 - User will see head office address & legal entity in header 
 
 Scenario: Verify the basic info for office
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -48,7 +47,6 @@ Examples:
 
 Scenario: Verify the header links in the offices page should navigate to legalEntity page(default view).
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -68,7 +66,6 @@ Examples:
 
 Scenario: verify the legalTitle link in the office search resutls page should navigate to the default view of legalEntity page.
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -88,7 +85,6 @@ Examples:
 Scenario: The office and department tabs should be present in the offices default view page.
 Meta:@test123
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -128,7 +124,6 @@ Examples:
 
 Scenario: Verify office headers - Bug-ZEUS-1313
 Given a user is on the search page
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
