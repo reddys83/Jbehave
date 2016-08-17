@@ -397,4 +397,9 @@ public class SearchResultsSteps extends AbstractSteps{
 		getResultsPage().verifyActiveOfficesSearchResultsForAllPages(searchedEntity, status, count);
 	}
 
+    @Then("the user should see the message No results found")
+    public void verifyNoResultsMessage()
+    {
+        getResultsPage().verifyNoResultsMessage();
+    }
 }

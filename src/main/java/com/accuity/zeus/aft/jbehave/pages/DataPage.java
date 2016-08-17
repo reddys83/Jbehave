@@ -8,6 +8,7 @@ import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.rest.Response;
 import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.utils.SimpleCacheManager;
+import com.accuity.zeus.xml.XmlDocument;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -216,7 +217,6 @@ public class DataPage extends AbstractPage {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
-
     @Override
     public String getPageUrl() {
         return null;
@@ -261,7 +261,7 @@ public class DataPage extends AbstractPage {
     }
 
     public CountryPage enterCountryInTheTypeAheadBox(String country) {
-        SimpleCacheManager.getInstance().put("selectedCountry",country);
+        SimpleCacheManager.getInstance().put("selectedCountry", country);
         selectedEntity = country;
         getDriver().findElement(country_type_ahead_xpath).sendKeys(country);
         getDriver().findElement(country_type_ahead_xpath).sendKeys(Keys.RETURN);
@@ -274,7 +274,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void enterAreaInTypeAhead(String area) {
-        SimpleCacheManager.getInstance().put("selectedArea",area);
+        SimpleCacheManager.getInstance().put("selectedArea", area);
         selectedEntity = area;
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(area);
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
@@ -970,7 +970,7 @@ public class DataPage extends AbstractPage {
 
     public void clickOnCityNameLink(String subCity)
     {
-        attemptClick(By.xpath(city_name_link_xpath + subCity +  "']"));
+        attemptClick(By.xpath(city_name_link_xpath + subCity + "']"));
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -1078,9 +1078,8 @@ public class DataPage extends AbstractPage {
     }
 
     public void revertChangesToDocument() {
-
         int response = restClient.putDocumentByID(endpointWithID, heraApi, responseEntity.getBody().toString());
-        assertTrue(response == 200||response == 202);
+        assertTrue(response == 200 || response==202);
     }
 
     public void clickOnCancelYesButton() {
@@ -1332,5 +1331,10 @@ public class DataPage extends AbstractPage {
         assertTrue(getDriver().findElement(select_places_view_xpath).isDisplayed());
     }
 
-
+    public void updateDocument(String endpoint, String entityFid) {
+        XmlDocument xmlDocument = getTestDataXml(endpoint, entityFid);
+        String url = getResourceURL(endpoint, entityFid);
+        int response = restClient.putDocumentByID(endpoint, heraApi, xmlDocument.toString(),url);
+        assertTrue(response == 202);
+    }
 }

@@ -55,7 +55,7 @@ public class ResultsPage extends AbstractPage {
     private By address_locator_xpath = By.xpath("//*[@id='search-results-items']/li/div/p");
     private By status_locator_xpath = By.xpath("//*[@id='search-results-items']/li/dl[3]/dd");
     private By status_label_locator_xpath = By.xpath("//*[@id='search-results-items']/li/dl[3]/dt");
-
+    private By no_search_results_msg_xpath=By.xpath("//*[@id='search-results-summary']/h1/header/p");
     private By office_search_results_table_head_xpath = By.xpath("//*[@id='subEntityList-list']//thead//tr");
     private By office_label_xpath = By.xpath("//*[@id='subEntityList-summary']//h1/span");
     private By office_id_locator_xpath = By.xpath("//*[@id='subEntityList-list']//tbody/tr/td[1]");
@@ -923,4 +923,8 @@ public class ResultsPage extends AbstractPage {
 		}
 
 	}
+
+    public void verifyNoResultsMessage(){
+        assertEquals(getTextOnPage(no_search_results_msg_xpath),"No results found");
+    }
 }
