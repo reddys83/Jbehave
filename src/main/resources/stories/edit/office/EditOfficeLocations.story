@@ -6,16 +6,14 @@ I want to perform an action
 So that I can achieve a business goal
 
 JIRA ID - ZEUS-1075 - User can select to edit Office's Locations
-and
-JIRA ID - ZEUS-1299 - User can edit Office's Locations(Addresses)
-and
-JIRA ID - ZEUS-1300 - User can edit Office's Locations(Telecoms)
+!--and
+!--JIRA ID - ZEUS-1299 - User can edit Office's Locations(Addresses)
+!--and
+!--JIRA ID - ZEUS-1300 - User can edit Office's Locations(Telecoms)
 
 Scenario: Verify that the add button is disabled for the first row of office location when there is a location
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -34,8 +32,6 @@ Examples:
 Scenario: Verify that the user should be able to add a new row when there is no location with no values and verify the added row is not added in UI and Zeus
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -46,15 +42,15 @@ And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on the add new office location button in the office page
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info|
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-And the user should not see the newly added locations row in the office locations page
-Then the user verifies that the deleted row for office locations does not exist in zeus document
-And the user reverts the changes to the document
+!--Then the user should see the save confirmation modal
+!--And the user should see the below summary changes in confirmation modal
+!--|Summary|
+!--|Basic Info|
+!--When the user clicks on the confirm button
+!-- Then the user should see the successful update message at top of the office page
+!-- And the user should not see the newly added locations row in the office locations page
+!-- Then the user verifies that the deleted row for office locations does not exist in zeus document
+!-- And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|
@@ -65,8 +61,6 @@ a) - Verify if User can prevent deleting the location row by clicking on 'No'.
 b) - Verify if User can delete the location row by clicking on 'Yes'.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -80,23 +74,23 @@ And the user clicks on delete office locations row button for the row office_fir
 Then the user should see the delete row confirmation modal in the office locations
 When the user clicks on the cancel no button
 Then the user should return to edit office locations page mode
-When the user clicks on the save button
-When the user clicks on the confirm button
-Then the user verifies that the row values exists in the office locations page
+!-- When the user clicks on the save button
+!-- When the user clicks on the confirm button
+!-- Then the user verifies that the row values exists in the office locations page
 When the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on delete office locations row button for the row office_first_existing_row_location_delete_button
 Then the user should see the delete row confirmation modal in the office locations
 When the user clicks on the Yes button to confirm the deletion of row in office locations section
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info|
-When the user clicks on the confirm button
-Then the user should not see the office address row in the locations office page
-And the user verifies that the deleted row for office locations does not exist in zeus document
-And the user reverts the changes to the document
+!-- And the user clicks on the save button
+!-- Then the user should see the save confirmation modal
+!-- And the user should see the below summary changes in confirmation modal
+!-- |Summary|
+!-- |Basic Info|
+!-- When the user clicks on the confirm button
+!-- Then the user should not see the office address row in the locations office page
+!-- And the user verifies that the deleted row for office locations does not exist in zeus document
+!-- And the user reverts the changes to the document
 
 
 Examples:
@@ -108,8 +102,6 @@ a) - Verify if User can prevent deleting the location row by clicking on 'No'.
 b) - Verify if User can delete the location row by clicking on 'Yes'.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -123,24 +115,24 @@ And the user clicks on the add new office location button in the office page
 And the user clicks on delete office locations row button for the row office_first_new_row_location_delete_button
 Then the user should see the delete row confirmation modal in the office locations
 When the user clicks on the cancel no button
-When the user clicks on the save button
-When the user clicks on the confirm button
-Then the user verifies that the row values exists in the office locations page
+!-- When the user clicks on the save button
+!-- When the user clicks on the confirm button
+!-- Then the user verifies that the row values exists in the office locations page
 When the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on the add new office location button in the office page
 And the user clicks on delete office locations row button for the row office_first_new_row_location_delete_button
 Then the user should see the delete row confirmation modal in the office locations
 When the user clicks on the Yes button to confirm the deletion of row in office locations section
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info|
-When the user clicks on the confirm button
-Then the user should not see the office location row in the locations office page
-And the user verifies that the deleted row for office locations does not exist in zeus document
-And the user reverts the changes to the document
+!-- And the user clicks on the save button
+!-- Then the user should see the save confirmation modal
+!-- And the user should see the below summary changes in confirmation modal
+!-- |Summary|
+!-- |Basic Info|
+!-- When the user clicks on the confirm button
+!-- Then the user should not see the office location row in the locations office page
+!-- And the user verifies that the deleted row for office locations does not exist in zeus document
+!-- And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|
@@ -150,8 +142,6 @@ Scenario: Verify the default Edit value and change Primary flag Office value for
 Select the value as True for Primary flag when the default value if False
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -162,14 +152,14 @@ And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
 And the user selects primary flag  value <primaryFlag> in the office locations
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Office Locations|
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-And the user should see office location primary flag value as <primaryFlag> for fid <officeFid> in zeus document and in zeus UI
+!-- And the user clicks on the save button
+!-- Then the user should see the save confirmation modal
+!-- And the user should see the below summary changes in confirmation modal
+!-- |Summary|
+!-- |Office Locations|
+!-- When the user clicks on the confirm button
+!-- Then the user should see the successful update message at top of the office page
+!-- And the user should see office location primary flag value as <primaryFlag> for fid <officeFid> in zeus document and in zeus UI
 
 Examples:
 |entity|searchBy|fid|officeFid|primaryFlag|
@@ -178,8 +168,6 @@ Examples:
 Scenario: a)Verify that the user should be able to Add new address row for an office location
           b)Verify User can select and save values for Type, Address Line 1,Address Line 2,Address Line 3,Address Line 4,Country,Area, Subarea,City,PostalCode,PostalCodeSuffix and Info
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -214,61 +202,24 @@ Then the user should see the below office cities for the selected subarea:
 When the user enters office address postal code office_address_first_row_new_postalCode value as <PostalCode>
 And the user enters office address postal code suffix office_address_first_row_new_postalCodeSuffix value as <PostalCodeSuffix>
 And the user enters office address info office_address_first_row_new_info value as <Info>
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Office Locations|
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-And the user verifies that the office address lines addresses are entered in the office locations page
-And the user should see the office address lines addresses as in zeus document
-And the user reverts the changes to the document
+!-- And the user clicks on the save button
+!-- Then the user should see the save confirmation modal
+!-- And the user should see the below summary changes in confirmation modal
+!-- |Summary|
+!-- |Office Locations|
+!-- When the user clicks on the confirm button
+!-- Then the user should see the successful update message at top of the office page
+!-- And the user verifies that the office address lines addresses are entered in the office locations page
+!-- And the user should see the office address lines addresses as in zeus document
+!-- And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|AddressLine1|AddressLine2|AddressLine3|AddressLine4|Country|Area|subArea|City|PostalCode|PostalCodeSuffix|Info|
 |1010|FID|1010|1010-45|mailing|123 Marie Ln|345 Palmer Dr|456 Franklin Ln|789 Apple Valley|USA|Illinois|Warren|Alexis|60126|123|adhsbd|
 
-Scenario: Verify User can select a new value for Country,Area,Subarea,City
-
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-And the user clicks on the office locations link in the navigation bar
-And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
-When the user clicks on the choose a country option in the office locations
-When the user enters the office country <Country> in the type-ahead box
-Then the user should see the list of all existing area for the selected country by full name in office address
-When the user clicks on the choose an area option in the office locations
-When the user enters the office area <Area> in the type-ahead box
-Then the user should see the list of all existing subarea for the selected area by full name in office address
-When the user clicks on the choose a subarea option in the office locations
-When the user enters the office subarea <subArea> in the type-ahead box
-When the user clicks on the choose a city option in the office locations
-Then the user should see the below office cities for the selected subarea:
-|CITIES|
-|Alexis|
-|Kirkwood|
-|Little York|
-|Monmouth|
-|Roseville|
-
-Examples:
-|entity|searchBy|fid|officeFid|Country|Area|subArea|City|
-|1010|FID|1010|1010-45|USA|Illinois|Warren|Alexis|
-
 Scenario: Verify return all cities.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -314,8 +265,6 @@ Examples:
 Scenario: Verify return cities wth no area
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -354,37 +303,12 @@ Examples:
 |entity|searchBy|fid|officeFid|Country|Area|
 |1010|FID|1010|1010-45|Åland Islands|No Area|
 
-Scenario: Verify User can select a new value for Postal Code, Postal Code Suffix, Info
-
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-And the user clicks on the office locations link in the navigation bar
-And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
-And the user clicks on add new office address button in the office locations
-And the user enters office address postal code office_address_first_row_new_postalCode value as <PostalCode>
-And the user enters office address postal code suffix office_address_first_row_new_postalCodeSuffix value as <PostalCodeSuffix>
-And the user enters office address info office_address_first_row_new_info value as <Info>
-
-Examples:
-|entity|searchBy|fid|officeFid|PostalCode|PostalCodeSuffix|Info|
-|1010|FID|1010|1010-45|60126|123|adhsbd|
-
 Scenario: Verify that the user should be able to edit a new office address row
 a) - Verify if User can prevent deleting the location row by clicking on 'No'.
 b) - Verify if User can delete the location row by clicking on 'Yes'.
 
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -397,19 +321,20 @@ And the user gets the document with get id for offices with the <officeFid> from
 When the user selects office address type office_addressType_first_row_existing_address_type_dropdown value as <Type>
 And the user clicks on delete office address row button for the row office_first_new_row_address_delete_button
 When the user clicks on the No button to cancel the deletion of row in office locations page
-And the user clicks on the save button
-And the user clicks on the confirm button
-Then the user verifies that the row values exists in the office locations page
+!-- And the user clicks on the save button
+!-- And the user clicks on the confirm button
+!-- Then the user verifies that the row values exists in the office locations page
+And the user clicks on delete office address row button for the row office_first_new_row_address_delete_button
 When the user clicks on the yes button in the delete row confirmation modal in the office page
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info|
-When the user clicks on the confirm button
-Then the user should not see the office address row in the locations office page
-And the user verifies that the deleted row for office address does not exist in zeus document
-And the user reverts the changes to the document
+!-- And the user clicks on the save button
+!--Then the user should see the save confirmation modal
+!--And the user should see the below summary changes in confirmation modal
+!--|Summary|
+!--|Basic Info|
+!--When the user clicks on the confirm button
+!--Then the user should not see the office address row in the locations office page
+!--And the user verifies that the deleted row for office address does not exist in zeus document
+!--And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|
@@ -420,8 +345,6 @@ Scenario: a)Verify that the delete button is disabled for the office address row
           b)Verify that the user should be able to add a new office address when the adddress type is mailing
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -444,8 +367,6 @@ Examples:
 Scenario:  Verify Office Address Type dropdown values are from lookup ADDRESS_TYPE
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -464,10 +385,8 @@ Examples:
 
 Scenario: a) Verify that the error message required is displayed when the the Address Type dropdown is left blank
           b) Verify that the error message required is not displayed when the Address Line1,Address Line2, Address Line3, Address Line 4, Postal Code, Postal Code Suffix, Info are left blank
-
+Meta: @skip
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -494,10 +413,8 @@ Examples:
 |1010|FID|1010|1010-44|||||||||
 
 Scenario: Verify office Address Line 1,Address Line 2,Address Line 3,Address Line3,Address Line 4, Postal Code, Postal Code Sufffix,Info field max length
-
+Meta: @skip
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -523,10 +440,8 @@ Examples:
 |1010|FID|1010|1010-44|
 
 Scenario: Verify that the error message "At least one physical address required" is displayed when none of the Address Type is physical
-
+Meta: @skip
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -546,10 +461,8 @@ Examples:
 
 Scenario: a)Verify that the error message "required" is displayed when Country is null(Choose a Country) and when the Address Type is not null
           b)Verify that the error message "required" is displayed when City is null(Choose a City) and when the Address Type is not null
-
+Meta: @skip
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -577,8 +490,6 @@ Examples:
 Scenario:  Verify Office Telecoms Type dropdown values are from lookup TELECOM_TYPE
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -600,8 +511,6 @@ Scenario: a)Verify that the user should be able to Add new telecoms row for an o
           c)Verify user can select a new value for Telecom Type as fax and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,RangeLimit,Ext,TextAfter,AnswerBack
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -622,16 +531,16 @@ And the user enters office telecoms range limit office_telecoms_first_row_new_ra
 And the user enters office telecoms ext office_telecoms_first_row_new_ext value as <Ext>
 And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
 And the user enters office telecoms answer back office_telecoms_first_row_new_answerBack value as <AnswerBack>
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Office Locations|
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-And the user verifies that the office telecom fields are entered in the office locations page
-And the user should see the office telecomm fields as in zeus document
-And the user reverts the changes to the document
+!-- And the user clicks on the save button
+!--Then the user should see the save confirmation modal
+!--And the user should see the below summary changes in confirmation modal
+!--|Summary|
+!--|Office Locations|
+!--When the user clicks on the confirm button
+!--Then the user should see the successful update message at top of the office page
+!--And the user verifies that the office telecom fields are entered in the office locations page
+!--And the user should see the office telecomm fields as in zeus document
+!--And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|TextBefore|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|
@@ -642,9 +551,7 @@ Examples:
 Scenario: a)Verify user can select a new value for Telecom Type as email and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value
           b)Verify user can select a new value for Telecom Type as website and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value
 
-iven a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
+Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -659,16 +566,16 @@ And the user selects office telecoms type office_telecoms_first_row_new_telecoms
 And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
 And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
 And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Office Locations|
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-And the user verifies that the office telecom fields are entered in the office locations page
-And the user should see the office telecomm fields as in zeus document
-And the user reverts the changes to the document
+!--And the user clicks on the save button
+!--Then the user should see the save confirmation modal
+!--And the user should see the below summary changes in confirmation modal
+!--|Summary|
+!--|Office Locations|
+!--When the user clicks on the confirm button
+!--Then the user should see the successful update message at top of the office page
+!--And the user verifies that the office telecom fields are entered in the office locations page
+!--And the user should see the office telecomm fields as in zeus document
+!--And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|
@@ -680,8 +587,6 @@ Scenario: a)Verify user can select a new value for Telecom Type as telex and Ver
           c)Verify user can select a new value for Telecom Type as cable and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -698,16 +603,16 @@ And the user enters office telecoms text before office_telecoms_first_row_new_te
 And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
 And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
 And the user enters office telecoms answer back office_telecoms_first_row_new_answerBack value as <AnswerBack>
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Office Locations|
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-And the user verifies that the office telecom fields are entered in the office locations page
-And the user should see the office telecomm fields as in zeus document
-And the user reverts the changes to the document
+!--And the user clicks on the save button
+!--Then the user should see the save confirmation modal
+!--And the user should see the below summary changes in confirmation modal
+!--|Summary|
+!--|Office Locations|
+!--When the user clicks on the confirm button
+!--Then the user should see the successful update message at top of the office page
+!--And the user verifies that the office telecom fields are entered in the office locations page
+!--And the user should see the office telecomm fields as in zeus document
+!--And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|
@@ -716,10 +621,8 @@ Examples:
 |1010|FID|1010|1010-45|cable|1|5 pm|hsn||||||9 am|1 hr|
 
 Scenario: a) Verify that the error message "Enter upto valid characters" is displayed when the Telecom Rank,Country Code, Number are left blank when the Type field is not null
-
+Meta: @skip
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -750,10 +653,8 @@ Examples:
 |1010|FID|1010|1010-44|telephone|||||||||||
 
 Scenario: a) Verify that the error message Enter upto 100 valid characters is displayed when the value field is left blank when telecom type is email
-
+Meta: @skip
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -776,10 +677,8 @@ Examples:
 |1010|FID|1010|1010-44|email|2|||
 
 Scenario: a) Verify that the error message incorrect format is displayed when the value field has incorrect format when telecom type is email
-
+Meta: @skip
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -803,10 +702,8 @@ Examples:
 
 
 Scenario: Verify office Telecom fields- Rank,Text Before,Value, Country Code, Area Code, Number,Range Limit, Ext, Text After, AnswerBack fields max length when type(telephone/fax)
-
+Meta: @skip
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -817,7 +714,7 @@ And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on add new office telecoms button in the office locations
 Then the user verifies the office <Rank> maxlength is 4 for the office_telecoms_first_row_new_rank in the telecom section
-And the user verifies the office <TextBefore> maxlength is 50 for the office_telecoms_first_row_new_textBefore
+Then the user verifies the office <TextBefore> maxlength is 50 for the office_telecoms_first_row_new_textBefore
 And the user verifies the office <Value> maxlength is 100 for the office_telecoms_first_row_new_value
 And the user verifies the office <CountryCode> maxlength is 5 for the office_telecoms_first_row_new_CountryCode
 And the user verifies the office <AreaCode> maxlength is 70 for the office_telecoms_first_row_new_AreaCode
@@ -833,10 +730,8 @@ Examples:
 |1010|FID|1010|1010-44|telephone|
 
 Scenario: Verify office Telecom field Value when type(telex/reuters)/cable/email/website)
-
+Meta: @skip
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -854,10 +749,8 @@ Examples:
 
 Scenario: a)Verify Office telecoms country code, Area code, Number,Rangelimit, allows only number and spaces and verify an error message Invalid characters: "Numbers and spaces allowed only" is displayed
           b) Verify Office ext field allows only numbers,hypens and spaces
-
+Meta: @skip
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -887,8 +780,6 @@ Examples:
 Scenario: Verify that the user should be able to delete an existing office telecoms row
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -900,20 +791,21 @@ And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on delete office telecoms row button for the row office_first_row_telecoms_delete_button
 When the user clicks on the No button to cancel the deletion of row in office locations page
-And the user clicks on the save button
-And the user clicks on the confirm button
-Then the user verifies that the row values exists in the office locations page
-When the user clicks on the yes button in the delete row confirmation modal in the office page
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Office Locations|
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-And the user should not see the office telecoms row in the locations office page
-And the user verifies that the deleted row for office telecoms does not exist in zeus document
-And the user reverts the changes to the document
+!-- And the user clicks on the save button
+!--And the user clicks on the confirm button
+!--Then the user verifies that the row values exists in the office locations page
+When the user clicks on delete office telecoms row button for the row office_first_row_telecoms_delete_button
+And the user clicks on the yes button in the delete row confirmation modal in the office page
+!--And the user clicks on the save button
+!--Then the user should see the save confirmation modal
+!--And the user should see the below summary changes in confirmation modal
+!--|Summary|
+!--|Office Locations|
+!--When the user clicks on the confirm button
+!--Then the user should see the successful update message at top of the office page
+!--And the user should not see the office telecoms row in the locations office page
+!--And the user verifies that the deleted row for office telecoms does not exist in zeus document
+!--And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|
@@ -922,8 +814,6 @@ Examples:
 Scenario: Verify that the user should be able to delete a new office telecoms row
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -936,24 +826,21 @@ And the user gets the document with get id for offices with the <officeFid> from
 And the user clicks on add new office telecoms button in the office locations
 And the user clicks on delete office telecoms row button for the row office_first_row_telecoms_delete_button
 When the user clicks on the No button to cancel the deletion of row in office locations page
-And the user clicks on the save button
-And the user clicks on the confirm button
-Then the user verifies that the row values exists in the office locations page
-When the user clicks on the office update link
-And the user gets the document with get id for offices with the <officeFid> from the database
-And the user clicks on add new office telecoms button in the office locations
+!--And the user clicks on the save button
+!--And the user clicks on the confirm button
+!--Then the user verifies that the row values exists in the office locations page
 And the user clicks on delete office telecoms row button for the row office_first_row_telecoms_delete_button
 And the user clicks on the yes button in the delete row confirmation modal in the office page
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Office Locations|
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-And the user should not see the office telecoms row in the locations office page
-And the user verifies that the deleted row for office telecoms does not exist in zeus document
-And the user reverts the changes to the document
+!--And the user clicks on the save button
+!--Then the user should see the save confirmation modal
+!--And the user should see the below summary changes in confirmation modal
+!--|Summary|
+!--|Office Locations|
+!--When the user clicks on the confirm button
+!--Then the user should see the successful update message at top of the office page
+!--And the user should not see the office telecoms row in the locations office page
+!--And the user verifies that the deleted row for office telecoms does not exist in zeus document
+!--And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|

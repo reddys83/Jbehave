@@ -566,7 +566,6 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyOfficeLocationsEditPageMode();
     }
 
-
 }
 
 
