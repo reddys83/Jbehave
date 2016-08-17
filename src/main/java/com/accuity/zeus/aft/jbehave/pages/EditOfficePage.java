@@ -30,7 +30,7 @@ public class EditOfficePage extends AbstractPage {
     public String EditSortNameValue = "";
     public String EditOfficeSortName = "";
     public static String officeHistoryMaximumCharacter = null;
-    
+
     public EditOfficePage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
@@ -802,6 +802,61 @@ public class EditOfficePage extends AbstractPage {
 		}
 	}
     
+	public void verifyOfficeBusinessHourValueFromTrustedDB(String officeFid, String source) {
+		assertEquals(getOfficeBusinessHoursInfoFromDB(officeFid, source, "hours"),
+				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_edit_mode"))
+						.getAttribute("value"));
+	}
+
+	public String getOfficeBusinessHoursInfoFromDB(String officeFid, String source, String tagName) {		
+		String tagValue = null;
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("fid", officeFid));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(2000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get office basic info", nvPairs);
+			if (document != null) {
+				tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+						: getNodeValuesByTagName(document, tagName).get(0);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return tagValue;
+	}
+
+	public void enterOfficeBusinessHourText(String businessHourText) {
+		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_business_hours_edit_mode"), businessHourText);
+	}
+
+	public void verifyOfficeBusinessHourTextInUI(String businessHourText) {
+		assertEquals(businessHourText, getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_view_mode")).getText());
+	}
+
+	public void verifyOfficeBusinessHourValueFromZeusDB(String officeFid, String source) {
+		assertEquals(getOfficeBusinessHoursInfoFromDB(officeFid, source, "hours"), getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_view_mode")).getText());
+	}
+
+	public void enterMaximumCharactersInOfficeBusinessHours() {
+		String businessHoursRandomText = createBigString(200);
+		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_business_hours_edit_mode"), businessHoursRandomText);
+	}
+
+	public void viewOfficeBusinessHoursValidCharacterLength() {
+		Integer businessHoursTextLength = getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_view_mode")).getText().length();
+		assertEquals(businessHoursTextLength.toString(), "200");
+	}		
+	
+	public void verifyOfficeBusinessHoursMaxLenghtAttribute(String maxLength) {
+		assertEquals((getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_edit_mode"))
+				.getAttribute("maxlength")), maxLength);
+	}
+    
 	public String getOfficeHistoryFromDB(String source, String tagName, String officeFid) {
 
 		String tagValue = null;
@@ -873,7 +928,7 @@ public class EditOfficePage extends AbstractPage {
 		assertEquals(officeHistoryMaximumCharacter.subSequence(0, 10000), getDriver()
 				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_view_mode_xpath")).getText());
 	}
-
+	
     @Override
     public String getPageUrl() {
         return null;
@@ -885,4 +940,3 @@ public class EditOfficePage extends AbstractPage {
         } else getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_principalFlag_name")).get(1).click();
     }
 }
-
