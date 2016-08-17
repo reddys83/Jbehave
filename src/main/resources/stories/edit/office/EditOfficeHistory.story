@@ -26,12 +26,6 @@ And the user clicks on the office history link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
 Then the user should see the Office History value in office page is same as per trusted document
-When the user enters <officeHistoryOld> value in office page
-When the user clicks on the save button
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-Then the user should see the entered <officeHistoryOld> in Office page
-When the user clicks on the office update link
 When the user enters <officeHistory> value in Office page
 When the user clicks on the save button
 Then the user should see the below summary changes in confirmation modal
@@ -44,10 +38,10 @@ Then the user should see the entered Office History in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|officeHistoryOld|officeHistory|
-|1038|FID|1038|1038-51|This is sample old text||
-|1038|FID|1038|1038-51||!@#$%^&*()_+}{|":>?<?.,|
-|1038|FID|1038|1038-51||24154545444545455|
+|entity|searchBy|fid|officeFid|officeHistory|
+|1038|FID|1038|1038-51||
+|1038|FID|1038|1038-51|!@#$%^&*()_+}{|":>?<?.,|
+|1038|FID|1038|1038-51|24154545444545455|
 
 Scenario: User can edit  'Office History' that is No different from the current value
 a)User verifies 'Your Changes have been saved' message is displayed after save
@@ -67,12 +61,6 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office history link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
-When the user enters <officeHistoryOld> value in office page
-When the user clicks on the save button
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-Then the user should see the entered <officeHistoryOld> in Office page
-When the user clicks on the office update link
 When the user enters <officeHistory> value in Office page
 When the user clicks on the save button
 Then the user should not see the below summary changes in confirmation modal
@@ -85,8 +73,8 @@ Then the user should see the entered Office History in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|officeHistoryOld|officeHistory|
-|1038|FID|1038|1038-51|This is sample old text|This is sample old text|
+|entity|searchBy|fid|officeFid|officeHistory|
+|1038|FID|1038|1038-51|This is sample old text|
 
 Scenario: User verifies that Office History  field is limited to 10000 unicode characters & verifies the max length attribute is restricted to 10000 in Office Page
 

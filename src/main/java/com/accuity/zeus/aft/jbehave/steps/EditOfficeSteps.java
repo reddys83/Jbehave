@@ -567,16 +567,6 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().verifyOfficeHistoryFromTrustedDB(source, "officeHistory", officeFid);
 	}
 
-	@When("the user enters <officeHistoryOld> value in office page")
-	public void enterOfficeHistoryOld(@Named("officeHistoryOld") String officeHistoryOld) {
-		getEditOfficePage().enterOfficeHistory(officeHistoryOld);
-	}
-
-	@Then("the user should see the entered <officeHistoryOld> in Office page")
-	public void verifyOfficeHistoryOld(@Named("officeHistoryOld") String officeHistoryOld) {
-		getEditOfficePage().verifyOfficeHistory(officeHistoryOld);
-	}
-
 	@When("the user enters <officeHistory> value in Office page")
 	public void enterOfficeHistory(@Named("officeHistory") String officeHistory) {
 		getEditOfficePage().enterOfficeHistory(officeHistory);
