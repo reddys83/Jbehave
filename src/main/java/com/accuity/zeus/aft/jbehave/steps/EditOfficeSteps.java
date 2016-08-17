@@ -542,22 +542,6 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().enterValueInStatisticsPageTextField("office_total_savings_accounts_xpath", totalSavingsAccounts);
 	}
 
-	@When("the user enters the office total atms value as <totalAtms1>")
-	public void enterOfficeTotalAtmsNewValue(@Named("totalAtms1") String totalAtms1) {
-		getEditOfficePage().enterValueInStatisticsPageTextField("office_total_atms_xpath", totalAtms1);
-	}
-
-	@When("the user enters the office total checking accounts value as <totalCheckingAccounts1>")
-	public void enterOfficeTotalCheckingAccountsNewValue(
-			@Named("totalCheckingAccounts1") String totalCheckingAccounts1) {
-		getEditOfficePage().enterValueInStatisticsPageTextField("office_total_checking_accounts_xpath", totalCheckingAccounts1);
-	}
-
-	@When("the user enters the office total savings accounts value as <totalSavingsAccounts1>")
-	public void enterOfficeTotalSavingsAccountsNewValue(@Named("totalSavingsAccounts1") String totalSavingsAccounts1) {
-		getEditOfficePage().enterValueInStatisticsPageTextField("office_total_savings_accounts_xpath", totalSavingsAccounts1);
-	}
-
 	@Then("the user verifies the office statistics field values are updated in Office Page")
 	public void verifyOfficeStatisticsValueInUI(@Named("totalAtms") String totalAtms,
 			@Named("totalCheckingAccounts") String totalCheckingAccounts,
@@ -565,29 +549,13 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().verifyOfficeStatisticsValueInUI(totalAtms, totalCheckingAccounts, totalSavingsAccounts);
 	}
 
-	@Then("the user verifies the office statistics field new values are updated in Office Page")
-	public void verifyOfficeStatisticsNewValueInUI(@Named("totalAtms1") String totalAtms1,
-			@Named("totalCheckingAccounts1") String totalCheckingAccounts1,
-			@Named("totalSavingsAccounts1") String totalSavingsAccounts1) throws InterruptedException {
-		getEditOfficePage().verifyOfficeStatisticsValueInUI(totalAtms1, totalCheckingAccounts1, totalSavingsAccounts1);
-	}
-
-	@Then("the user verifies the office statistics new values are updated in $source document for fid <officeFid>")
-	public void verifyOfficeStatisticsValuesFromZeus(@Named("officeFid") String officeFid,
+	@Then("the user verifies the office statistics values are updated in $source document for fid <officeFid>")
+	public void verifyOfficeStatisticsUpdatedValuesFromZeus(@Named("officeFid") String officeFid,
 			@Named("source") String source, @Named("totalAtms") String totalAtms,
 			@Named("totalCheckingAccounts") String totalCheckingAccounts,
 			@Named("totalSavingsAccounts") String totalSavingsAccounts) {
 		getEditOfficePage().verifyOfficeStatisticsValueFromZeus(officeFid, source, totalAtms, totalCheckingAccounts,
 				totalSavingsAccounts);
-	}
-
-	@Then("the user verifies the office statistics values are updated in $source document for fid <officeFid>")
-	public void verifyOfficeStatisticsUpdatedValuesFromZeus(@Named("officeFid") String officeFid,
-			@Named("source") String source, @Named("totalAtms1") String totalAtms1,
-			@Named("totalCheckingAccounts1") String totalCheckingAccounts1,
-			@Named("totalSavingsAccounts1") String totalSavingsAccounts1) {
-		getEditOfficePage().verifyOfficeStatisticsValueFromZeus(officeFid, source, totalAtms1, totalCheckingAccounts1,
-				totalSavingsAccounts1);
 	}
 
 	@Then("the user verifies office statistics page fields max length attribute is $maxLength")

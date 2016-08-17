@@ -7,11 +7,12 @@ So that I can achieve a business goal
 
 JIRA ID - ZEUS-1081 - User can edit Office's statistics
 
-Scenario: User can edit  'Office Statistics' that is different from the current value
+Scenario: 1 User can edit  'Office Statistics' that is different from the current value
 1- User verifies whether the current value in statistics page is defaulted from trusted
 2- User verifies confirmation dialog modal has summary change text as 'Basic Info / Statistics'
-3- User verifies that 'total ATMs', 'total checking accounts', 'total savings account' values are saved and  reflected in UI
-4- User verifies that 'total ATMs', 'total checking accounts', 'total savings account' value are saved and  reflected in Zeus
+3- User verifies that 'total ATMs', 'total checking accounts', 'total savings account' values are saved and reflected in UI
+4- User verifies that 'total ATMs', 'total checking accounts', 'total savings account' value are saved and reflected in Zeus
+
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -31,30 +32,19 @@ And the user enters the office total atms value as <totalAtms>
 And the user enters the office total checking accounts value as <totalCheckingAccounts>
 And the user enters the office total savings accounts value as <totalSavingsAccounts>
 And the user clicks on the save button
-Then the user should see the save confirmation modal
+Then the user should not see the below summary changes in confirmation modal
+|Summary|
+|Statistics|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 Then the user verifies the office statistics field values are updated in Office Page
 Then the user verifies the office statistics values are updated in zeus document for fid <officeFid>
-When the user clicks on the office update link
-When the user enters the office total atms value as <totalAtms1>
-When the user enters the office total checking accounts value as <totalCheckingAccounts1>
-When the user enters the office total savings accounts value as <totalSavingsAccounts1>
-When the user clicks on the save button
-Then the user should not see the below summary changes in confirmation modal
-|Summary|
-|Statistics|
-Then the user should see the save confirmation modal
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-Then the user verifies the office statistics field new values are updated in Office Page
-Then the user verifies the office statistics new values are updated in zeus document for fid <officeFid>
 And the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|totalAtms|totalCheckingAccounts|totalSavingsAccounts|totalAtms1|totalCheckingAccounts1|totalSavingsAccounts1|
-|1038|FID|1038|1038-52|123|123|123|62|62|62|
-|1038|FID|1038|1038-52||||72|72|72|
+|entity|searchBy|fid|officeFid|totalAtms|totalCheckingAccounts|totalSavingsAccounts|
+|1038|FID|1038|1038-51|12|12|12| 
+|1038|FID|1038|1038-51||||
 
 Scenario: User can edit  'Office Statistics'  that is No different from the current value
 and saves the office page
@@ -81,27 +71,18 @@ And the user enters the office total checking accounts value as <totalCheckingAc
 And the user enters the office total savings accounts value as <totalSavingsAccounts>
 Then the user verifies office statistics page fields max length attribute is 8
 When the user clicks on the save button
-Then the user should see the save confirmation modal
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-When the user clicks on the office update link
-When the user enters the office total atms value as <totalAtms1>
-When the user enters the office total checking accounts value as <totalCheckingAccounts1>
-When the user enters the office total savings accounts value as <totalSavingsAccounts1>
-When the user clicks on the save button
 Then the user should not see the below summary changes in confirmation modal
 |Summary|
 |Statistics|
-Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
-Then the user verifies the office statistics field new values are updated in Office Page
-Then the user verifies the office statistics new values are updated in zeus document for fid <officeFid>
+Then the user verifies the office statistics field values are updated in Office Page
+Then the user verifies the office statistics values are updated in zeus document for fid <officeFid>
 And the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|totalAtms|totalCheckingAccounts|totalSavingsAccounts|totalAtms1|totalCheckingAccounts1|totalSavingsAccounts1|
-|1038|FID|1038|1038-52|123|12|123|124|13|14|
+|entity|searchBy|fid|officeFid|totalAtms|totalCheckingAccounts|totalSavingsAccounts| 
+|1038|FID|1038|1038-51|123|123|123|
 
 Scenario: User is updating an 'office statistics' page and enters value as alphanumerals and special characters for office statistics fields
 1- User verifies the 'total atm' field is showing 'Enter up to 8 valid numbers' validation message
@@ -130,5 +111,5 @@ Then the user should see the Enter up to 8 valid numbers. error message for the 
 
 Examples:
 |entity|searchBy|fid|officeFid|totalAtms|totalCheckingAccounts|totalSavingsAccounts|
-|1038|FID|1038|1038-52|123,rw|123.ty|12345g3|
+|1038|FID|1038|1038-51|123,rw|123.ty|12345g3|
 
