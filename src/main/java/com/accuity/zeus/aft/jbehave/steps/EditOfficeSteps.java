@@ -2,6 +2,11 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -40,6 +45,11 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @Then("the user verifies office opened date from $source document <officeFid> <day> <month> <year>")
     public void verifyUpdatedOfficeOpenedDate(@Named("officeFid") String officeFid,@Named("day") String day,@Named("month") String month,@Named("year") String year,@Named("source") String source){getEditOfficePage().verifyUpdatedOfficeOpenedDate(officeFid,day,month,year,source);}
+
+    @When("the user updates principal office flag to <principalFlag>")
+    public void updatePrincipalFlag(@Named("principalFlag") String principalFlag){
+        editOfficePage.setPrincipalOffice(principalFlag);
+    }
 
 
     @When("the user selects lead location value <leadLocationflag> in the basicinfo office page")
@@ -232,9 +242,6 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().enterNullValueForAllOfficeTypeRows();
     }
 
-
-
-
     @Then("the user should see the $office_rowIdentifier values in office's section from lookup $lookup")
     public void verifyOfficesNameTypesFromLookup(@Named("offices_rowIdentifier") String offices_rowIdentifier,@Named("lookup") String lookup) {
         getEditOfficePage().verifyOfficesNameTypesFromLookup(offices_rowIdentifier,lookup);
@@ -267,7 +274,6 @@ public class EditOfficeSteps extends AbstractSteps{
 
         getEditOfficePage().verifyEditOfficeNameValuesExistInZeusandinUI(type,value,officeFid,source);
     }
-
 
     @When("the user clicks on delete office names row button for the row $deletebutton_Row")
     public void clickonDeleteOfficeNamesRowButton(String deletebutton_Row)
@@ -314,6 +320,246 @@ public class EditOfficeSteps extends AbstractSteps{
     public void verifyOfficeSortNameInZeusDocumentAndInUI(@Named("officeFid") String officeFid,@Named("sortName") String sortName) {
         getEditOfficePage().verifyOfficeSortNameInZeusDocumentAndInUI(officeFid,sortName);
     }
+    
+    @Then("the user should see the office's identifier values same as in $source document")
+	public void verifyOfficeIdentifierValuesFromTrustedDB(@Named("source") String source, @Named("officeFid") String officeFid) { 		 
+    	
+    	getEditOfficePage().verifyOfficeIdentifierValuesFromTrustedDB(source, officeFid);
+	}
+    
+    @When("the user clicks on the add new identifier button in the office identifier page")
+    public void clickOnOfficeAddNewIdentifierButton() {
+    	getEditOfficePage().clickOnOfficeAddNewIdentifierButton();
+	} 
+    
+    @Then("the user should see the office identifier types from lookup THIRD_PARTY_IDENTIFIER_OFFICE")
+	public void verifyOfficeIdentifierTypesList() {
+    	getEditOfficePage().verifyOfficeIdentifierTypesList();
+	}
+    
+    @Then("the user should see the office identifier status from lookup STATUS")
+	public void verifyOfficeIdentifierStatusList() {
+    	getEditOfficePage().verifyOfficeIdentifierStatusList();
+	}
+    
+    @When("the user deletes the existing office identifier rows")
+    public void deleteAllOfficeIdentifiers() {
+    	setEditCityPage(getDataPage().createEditCityPage());
+    	getEditCityPage().deleteAllIdentifierRows();
+	} 
+    
+	@When("the user enters identifier type as <identifierType> in the office identifier page")
+	public void enterOfficeIdentifierType(@Named("identifierType") String identifierType) {
+		getEditOfficePage().enterOfficeIdentifierType(identifierType, 1);
+	}
 
+	@When("the user enters identifier value as <identifierValue> in the office identifier page")
+	public void enterOfficeIdentifierValue(@Named("identifierValue") String identifierValue) {
+		getEditOfficePage().enterOfficeIdentifierValue(identifierValue, 1);
+	}
+
+	@When("the user enters identifier status as <identifierStatus> in the office identifier page")
+	public void enterOfficeIdentifierStatus(@Named("identifierStatus") String identifierStatus) {
+		getEditOfficePage().enterOfficeIdentifierStatus(identifierStatus, 1);
+	}
+
+	@Then("the user verifies that previously selected <identifierType> is not present in the new office identifier row")
+	public void verifySelectedOfficeIdentifierTypeNotInNewRow(@Named("identifierType") String identifierType) {
+		getEditOfficePage().verifySelectedOfficeIdentifierTypeNotInNewRow(identifierType, 2);
+	}
+
+	@When("the user enters identifier type as <newIdentifierType> in the office identifier page")
+	public void editOfficeIdentifierType(@Named("newIdentifierType") String identifierType) {
+		getEditOfficePage().enterOfficeIdentifierType(identifierType, 1);
+	}
+
+	@When("the user enters identifier value as <newIdentifierValue> in the office identifier page")
+	public void editOfficeIdentifierValue(@Named("newIdentifierValue") String identifierValue) {
+		getEditOfficePage().enterOfficeIdentifierValue(identifierValue, 1);
+	}
+
+	@When("the user enters identifier status as <newIdentifierStatus> in the office identifier page")
+	public void editOfficeIdentifierStatus(@Named("newIdentifierStatus") String identifierStatus) {
+		getEditOfficePage().enterOfficeIdentifierStatus(identifierStatus, 1);
+	}
+
+	@When("the user enters identifier type as <identifierType2> in the office identifier page")
+	public void enterOfficeIdentifierType2(@Named("identifierType2") String identifierType) {
+		getEditOfficePage().enterOfficeIdentifierType(identifierType, 2);
+	}
+
+	@When("the user enters identifier value as <identifierValue2> in the office identifier page")
+	public void enterOfficeIdentifierValues2(@Named("identifierValue2") String identifierValue) {
+		getEditOfficePage().enterOfficeIdentifierValue(identifierValue, 2);
+	}
+
+	@When("the user enters identifier status as <identifierStatus2> in the office identifier page")
+	public void enterOfficeIdentifierStatus2(@Named("identifierStatus2") String identifierStatus) {
+		getEditOfficePage().enterOfficeIdentifierStatus(identifierStatus, 2);
+	}
+
+	@Then("the user should see the successful update message at top of the office page")
+	public void verifySuccessfulUpdatedMessage() {
+		setEditCityPage(getDataPage().createEditCityPage());
+		getEditCityPage().verifySuccessfulUpdatedMessage();
+	}
+
+	@Then("the user verifies that the identifiers parameters are entered in the office identifiers page")
+	public void verifyOfficeIdentifierParametersInUI(@Named("identifierType") String identifierType,
+			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus,
+			@Named("identifierType2") String identifierType2, @Named("identifierValue2") String identifierValue2,
+			@Named("identifierStatus2") String identifierStatus2) {
+
+		String[] identifierTypes = { identifierType, identifierType2 };
+		String[] identifierValues = { identifierValue, identifierValue2 };
+		String[] identifierStatusValues = { identifierStatus, identifierStatus2 };
+
+		getEditOfficePage().verifyOfficeIdentifierParametersInUI(identifierTypes, identifierValues,
+				identifierStatusValues);
+	}
+
+	@Then("the user should see the office identifier values as in $source document")
+	public void verifyOfficeIdentifierValuesFromZeusDB(@Named("source") String source,
+			@Named("officeFid") String officeFid, @Named("identifierType") String identifierType,
+			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus,
+			@Named("identifierType2") String identifierType2, @Named("identifierValue2") String identifierValue2,
+			@Named("identifierStatus2") String identifierStatus2) {
+
+		List<String> identifierTypes = new ArrayList<>();
+		List<String> identifierValues = new ArrayList<>();
+		List<String> identifierStatusValues = new ArrayList<>();
+		identifierTypes.add(identifierType);
+		identifierValues.add(identifierValue);
+		identifierStatusValues.add(identifierStatus);
+		identifierTypes.add(identifierType2);
+		identifierValues.add(identifierValue2);
+		identifierStatusValues.add(identifierStatus2);
+
+		getEditOfficePage().verifyOfficeIdentifierValuesFromDB(source, officeFid, identifierTypes, identifierValues,
+				identifierStatusValues);
+	}
+
+	@Then("the user should not see the newly added identifier row in the office identifiers page")
+	@Alias("the user should not see the identifier row in the office identifiers page")
+	public void verifyNewlyAddedOfficeIdentifierRowIsNotDisplayed() throws Exception {
+		getEditOfficePage().verifyNewlyAddedOfficeIdentifierRowIsNotDisplayed();
+	}
+
+	@Then("the user verifies that no values are entered in $source document for office identifiers")
+	public void verifyOfficeIdentifierRowValuesFromZeusDB(@Named("source") String source,
+			@Named("officeFid") String officeFid, @Named("identifierType") String identifierType,
+			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus) {
+		List<String> identifierTypes = new ArrayList<>();
+		List<String> identifierValues = new ArrayList<>();
+		List<String> identifierStatusValues = new ArrayList<>();
+		identifierTypes.add(identifierType);
+		identifierValues.add(identifierValue);
+		identifierStatusValues.add(identifierStatus);
+
+		getEditOfficePage().verifyOfficeIdentifierValuesFromDB(source, officeFid, identifierTypes, identifierValues,
+				identifierStatusValues);
+	}
+
+	@Then("the user verifies that office identifier values are updated in $source document")
+	public void verifyOfficeIdentifierRowValuesAreUpdatedInZeusDB(@Named("source") String source,
+			@Named("officeFid") String officeFid, @Named("newIdentifierType") String identifierType,
+			@Named("newIdentifierValue") String identifierValue,
+			@Named("newIdentifierStatus") String identifierStatus) {
+		List<String> identifierTypes = new ArrayList<>();
+		List<String> identifierValues = new ArrayList<>();
+		List<String> identifierStatusValues = new ArrayList<>();
+		identifierTypes.add(identifierType);
+		identifierValues.add(identifierValue);
+		identifierStatusValues.add(identifierStatus);
+
+		getEditOfficePage().verifyOfficeIdentifierValuesFromDB(source, officeFid, identifierTypes, identifierValues,
+				identifierStatusValues);
+	}
+
+	@Then("the user verifies existing offices identifiers parameters are updated with new office identifiers")
+	public void verifyOfficeIdentifierParametersInUI(@Named("newIdentifierType") String identifierType,
+			@Named("newIdentifierValue") String identifierValue,
+			@Named("newIdentifierStatus") String identifierStatus) {
+
+		String[] identifierTypes = { identifierType };
+		String[] identifierValues = { identifierValue };
+		String[] identifierStatusValues = { identifierStatus };
+
+		getEditOfficePage().verifyOfficeIdentifierParametersInUI(identifierTypes, identifierValues,
+				identifierStatusValues);
+	}
+
+	@Then("the user should see maximum length of office identifier value is limited to $maxLength")
+	public void verifyMaxLengthInOfficeIdentifierValue(@Named("maxLength") String maxLength) {
+		getEditOfficePage().verifyMaxLengthInOfficeIdentifierValue(maxLength);
+	}
+
+	@Then("the user should see the error message $errorMessage for identifier type field in the office identifiers page")
+	public void verifyErrorMessageForRequiredOfficeIdentifierType(@Named("errorMessage") String errorMessage) {
+		getEditOfficePage().verifyErrorMessageForRequiredOfficeIdentifierType(errorMessage);
+	}
+
+	@Then("the user should see the error message $errorMessage for identifier value field in the office identifiers page")
+	public void verifyErrorMessageForRequiredOfficeIdentifierValue(@Named("errorMessage") String errorMessage) {
+		getEditOfficePage().verifyErrorMessageForRequiredOfficeIdentifierValue(errorMessage);
+	}
+
+	@Then("the user should see the error message $errorMessage for identifier status field in the office identifiers page")
+	public void verifyErrorMessageForRequiredOfficeIdentifierStatus(@Named("errorMessage") String errorMessage) {
+		getEditOfficePage().verifyErrorMessageForRequiredOfficeIdentifierStatus(errorMessage);
+	}
+
+	@Then("the user verifies that the deleted row for office identifier does not exist in $source document")
+	public void verifyOfficeIdentifierRowNotPresentInZeusDB(@Named("source") String source,
+			@Named("officeFid") String officeFid) {
+		getEditOfficePage().verifyIdentifierRowNotPresentInZeusDB(source, officeFid);
+	}
+
+	@When("the user clicks on the delete identifier row button in the office identifiers page")
+	public void clickOnDeleteNewOfficeIdentifierRowButton() {
+		getEditOfficePage().clickOnDeleteNewOfficeIdentifierRowButton();
+	}
+
+	@Then("the user should see the newly added identifier row in the office identifiers page")
+	public void verifyNewlyAddedOfficeIdentifierRowIsDisplayed() throws Exception {
+		getEditOfficePage().verifyNewlyAddedOfficeIdentifierRowIsDisplayed();
+	}
+	
+	@Then("the user should see the office's business hours value same as in $source document")
+	public void verifyOfficeBusinessHourValueFromTrustedDB(@Named("officeFid") String officeFid,
+			@Named("source") String source) {
+		getEditOfficePage().verifyOfficeBusinessHourValueFromTrustedDB(officeFid, source);
+	}
+
+	@When("the user enters the <businessHour> in the office business hour text area")
+	public void enterOfficeBusinessHourText(@Named("businessHour") String businessHour) {
+		getEditOfficePage().enterOfficeBusinessHourText(businessHour);
+	}
+
+	@Then("the user should be able to verify the values are entered in the office business hour field")
+	public void verifyOfficeBusinessHourTextInUI(@Named("businessHour") String businessHour) {
+		getEditOfficePage().verifyOfficeBusinessHourTextInUI(businessHour);
+	}
+
+	@Then("the user should see the office business hours value same as in $source document")
+	public void verifyOfficeBusinessHourValueFromZeusDB(@Named("officeFid") String officeFid,
+			@Named("source") String source) {
+		getEditOfficePage().verifyOfficeBusinessHourValueFromZeusDB(officeFid, source);
+	}
+
+	@When("the user enters 200 unicode characters in the office business hours field")
+	public void enterMaximumCharactersInOfficeBusinessHours() {
+		getEditOfficePage().enterMaximumCharactersInOfficeBusinessHours();
+	}
+
+	@Then("the user should be able to view that only 200 unicode characters are saved in office business hours")
+	public void viewOfficeBusinessHoursValidCharacterLength() {
+		getEditOfficePage().viewOfficeBusinessHoursValidCharacterLength();
+	}
+	
+	@Then("the user verifies business hours max length attribute is $maxLength")
+	public void verifyOfficeBusinessHoursMaxLenghtAttribute(@Named("maxLength") String maxLength) {
+		getEditOfficePage().verifyOfficeBusinessHoursMaxLenghtAttribute(maxLength);
+	}
 }
 

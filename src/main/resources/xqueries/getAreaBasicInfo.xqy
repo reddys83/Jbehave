@@ -33,6 +33,9 @@ let $DateFields :=
   (: Taking Add Info :)
  let $areaadditionalinfo := ($areaDoc/summary/additionalInfos/additionalInfo/text())
  
+  (: Taking Area Use In Address :)
+  let $areaUseInAddress := ($areaDoc/summary/useInAddress/text())
+  
   (: Taking Area Interest Rate :)
   let $areaInterestRate := ($areaDoc/summary/maxConsumerRate/text())
   
@@ -47,6 +50,14 @@ return
   <identifierValue>{$areaIdentifierValue} </identifierValue>
   <identifierStatus>{$areaIdentifierStatus} </identifierStatus>
   </identifier>
+  
+(: Get summary and utc value :) 
+let $utcList := for $x in ($areaDoc/summary/timeZones/zone)
+let $utc := $x/text()
+return 
+ <utcValue>{$utc}</utcValue>
+ 
+let $summary := ($areaDoc/summary/timeZones/summaries/summary/text())
  
 return
   <area>
@@ -55,4 +66,7 @@ return
       <AdditionalInfo>{$areaadditionalinfo}</AdditionalInfo>
       <identifiers>{$areaIdentifierList}</identifiers> 
 	  <areaInterestRate>{$areaInterestRate}</areaInterestRate>
+	  <summary>{$summary}</summary>     
+      <timeZoneUtc>{$utcList}</timeZoneUtc>
+	  <areaUseInAddress>{$areaUseInAddress}</areaUseInAddress>
   </area>
