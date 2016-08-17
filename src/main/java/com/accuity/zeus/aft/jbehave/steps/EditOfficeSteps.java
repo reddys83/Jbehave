@@ -528,7 +528,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
 	@When("the user clicks on the add new personnel button in the office personnel page")
     public void clickOnOfficeAddNewPersonnelButton() {
-    	getEditOfficePage().clickOnOfficeAddNewPersonnelButton();
+		getEditOfficePage().clickOnOfficeAddNewPersonnelButton();
 	}
 	
 	@Then("the user should see the office personnel types from lookup PERSONNEL_SUMMARY_TEXT_TYPE")
@@ -564,6 +564,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	@When("the user deletes the existing office personnel rows")
     public void deleteAllOfficePersonnel() {
 		setEditLegalEntityPage(getLegalEntityPage().createEditLegalEntityPage());
+		getEditOfficePage().clickOnOfficeAddNewPersonnelButton();
 		getEditLegalEntityPage().deleteAllLegalEntityRows(OfficeIdentifiers.getObjectIdentifier("office_delete_personnel_row_button_xpath"));
 	}
 	
@@ -611,20 +612,10 @@ public class EditOfficeSteps extends AbstractSteps{
 
 		getEditOfficePage().verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
 	}
-	
-	@When("the user enters personnel type as <newPersonnelType> in the office personnel page")
-	public void editOfficePersonnelType(@Named("newPersonnelType") String personnelType) {
-		getEditOfficePage().enterOfficePersonnelTypeInNewlyAddedRow(personnelType);
-	}
-
-	@When("the user enters personnel value as <newPersonnelValue> in the office personnel page")
-	public void editOfficePersonnelValue(@Named("newPersonnelValue") String personnelValue) {
-		getEditOfficePage().enterOfficePersonnelValueInNewlyAddedRow(personnelValue);
-	}
-	
+		
 	@Then("the user verifies that the existing personnel parameters are updated in the office identifiers page")
-	public void verifyUpdatedOfficePersonnelParametersInUI(@Named("newPersonnelType") String personnelType,
-			@Named("newPersonnelValue") String personnelValue) {
+	public void verifyUpdatedOfficePersonnelParametersInUI(@Named("personnelType") String personnelType,
+			@Named("personnelValue") String personnelValue) {
 
 		List<String> personnelTypes = new ArrayList<>();
 		personnelTypes.add(personnelType);
@@ -634,10 +625,9 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().verifyOfficePersonnelParametersInUI(personnelTypes, personnelValues);
 	}
 	
-	@Then("the user should see the updated office personnel values as in $source document")
-	@Alias("the user verifies that no personnel values are updated in $source document")
+	@Then("the user should see the updated office personnel values as in $source document")	
 	public void verifyUpdatedOfficePersonnelValuesFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid,
-			@Named("newPersonnelType") String personnelType, @Named("newPersonnelValue") String personnelValue) {
+			@Named("personnelType") String personnelType, @Named("personnelValue") String personnelValue) {
 
 		List<String> personnelTypes = new ArrayList<>();
 		personnelTypes.add(personnelType);
@@ -646,6 +636,12 @@ public class EditOfficeSteps extends AbstractSteps{
 
 		getEditOfficePage().verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
 	}
+	
+	@Then("the user verifies that no personnel values are updated in $source document")
+	public void verifyOfficePersonnelValuesAreDeletedFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid) {
+		getEditOfficePage().verifyOfficePersonnelValuesFromDB(source, officeFid, null, null);
+	}
+	
 	
 	@Then("the user should not see the newly added personnel row in the office personnel page")
 	public void verifyNewlyAddedOfficePersonnelRowIsNotDisplayed() throws Exception {

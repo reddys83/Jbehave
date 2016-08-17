@@ -882,9 +882,12 @@ public class EditOfficePage extends AbstractPage {
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get office personnel values", nvPairs);
-			if (document != null) {				
-				NodeList nodeList = document.getElementsByTagName("personnel");				
-				for(int index = 0; index < nodeList.getLength(); index++)  {
+			if (document != null) {
+				NodeList nodeList = document.getElementsByTagName("personnel");
+				if (personnelTypes == null && personnelValues == null) {
+					assertTrue("Personal data is not deleted from Zeus Document", nodeList.getLength() == 0);
+				}
+				for (int index = 0; index < nodeList.getLength(); index++) {
 					NodeList childNodeList = nodeList.item(index).getChildNodes();
 					assertEquals(childNodeList.item(0).getTextContent(), personnelTypes.get(index));
 					assertEquals(childNodeList.item(1).getTextContent(), personnelValues.get(index));
