@@ -632,9 +632,9 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office update link
-Then the user should see the office_name_second_row_existing_office_name_type_dropdown values in office's section from lookup OFFICE_NAME_TYPE
+Then the user should see the office_name_second_row_existing_office_type_dropdown values in office's section from lookup OFFICE_NAME_TYPE
 When the user clicks on add new office name button in the office name page
-Then the user should see the office_name_first_row_new_office_name_type_dropdown values in office's section from lookup OFFICE_NAME_TYPE
+Then the user should see the office_name_type_first_row_new_office_name_type_dropdown values in office's section from lookup OFFICE_NAME_TYPE
 
 Examples:
 |entity|searchBy|fid|officeFid|

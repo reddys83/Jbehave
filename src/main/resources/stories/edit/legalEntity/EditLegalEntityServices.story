@@ -100,7 +100,7 @@ Then the user should not see legal entity service values for fid <fid> in zeus d
 Then the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|category|override|financialCategory|financialDetails|
-|1010|FID|1010|Correspondent Banking|Banking|Consumer Credit|Visa|
+|1010|FID|1010|Correspondent Banking|General Services|Consumer Credit|Visa|
 
 Scenario: Delete newly added services
 Given a user is on the search page
