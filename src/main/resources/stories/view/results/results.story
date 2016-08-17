@@ -20,5 +20,5 @@ Then the user should see the same results of the previous search
 
 
 Examples:
-|entity|searchBy|fid|
-|National Bank|Name|1038|
+|entity|searchBy|
+|National Bank|Name|

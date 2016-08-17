@@ -73,7 +73,13 @@ public class SearchPage extends AbstractPage {
 
 	public ResultsPage clickOnResultsTab(){
 		getDriver().findElement(results_tab_xpath).click();
+		try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return new ResultsPage(getDriver(), getUrlPrefix(),getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
+
 	}
 
 	public LoginPage clickOnLogout() {
