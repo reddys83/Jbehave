@@ -40,6 +40,17 @@ return
     <value>{$cityNameValue}</value>
   </name>
 
+(: Taking City Region List :)
+let $cityRegionList := for $x in ($city/alternativeRegions/region)
+  let $cityRegionType := $x/type/text()
+  let $cityRegionValue := ($x/value/text())
+return
+  <region>
+    <type>{$cityRegionType}</type>
+    <value>{$cityRegionValue}</value>
+  </region>
+
+
 (: Taking identifier List :)
 let $cityIdentifierList := for $x in ($city/summary/identifiers/identifier)
   let $cityIdentifierType := $x/type/text()
@@ -87,7 +98,7 @@ return
 
 let $withinLink := ($city/within/place/link/@href)
 let $area := /area[@source = "trusted"][@resource = $withinLink]/summary[type = "area" ]/names/name[1]/value/text()
-let $subAreaList := for $x in (/area[@source = "trusted"][@resource = $withinLink]/summary[type = "subarea" ])  
+let $subAreaList := for $x in (/area[@source = "trusted"][@resource = $withinLink]/summary[type = "subarea" ])
 let $subArea := ($x/names/name[1]/value/text())
 return <subArea>{$subArea}</subArea>
 
@@ -101,7 +112,9 @@ return
   <additionalinfo>{$cityadditionalinfo}</additionalinfo>
   <population>{$cityPopulation}</population>
   <addressFlag>{$cityAddressFlag}</addressFlag>
-  <creditRatings>{$cityCreditRating}</creditRatings> 
+  <creditRatings>{$cityCreditRating}</creditRatings>
+  <regions>{$cityRegionList}</regions>
+  <creditRatings>{$cityCreditRating}</creditRatings>
   <area>{$area}</area>
   <subAreas>{$subAreaList}</subAreas>
-  </city>   
+  </city>

@@ -58,7 +58,8 @@ public class CityIdentifiers {
 		hmap.put("city_use_in_address_false", By.xpath("//*[@id='cityBasicInfo']//input[@value='false']"));
 		hmap.put("city_address_flag_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Use In Address']/td"));
 		hmap.put("city_creditRating_row_xpath", By.xpath("//*[@class='data']//*[@id='cityCreditRating']//tr"));
-		
+		hmap.put("city_creditRating_new_row_xpath", By.xpath("//*[@class='data']//*[@id='cityCreditRating']//tr[@class='new']"));
+
 		hmap.put("city_creditRating", By.xpath("//*[@id='cityCreditRating']"));
 		hmap.put("city_credit_rating_applied_date_day_xpath", By.xpath("//input[@name='creditRatingAppliedDate-day']"));
 		hmap.put("city_credit_rating_applied_date_month_xpath", By.xpath("//*[@name='creditRatingAppliedDate-month']"));
@@ -83,7 +84,7 @@ public class CityIdentifiers {
 
 		// adding values for city names
 		hmap.put("city_names_full_name_xpath", By.xpath("//*[@id='additionalNames']//td[text() = 'Full Name']"));
-		hmap.put("city_names_full_name_value_xpath", By.xpath("//*[@id='additionalNames']//input[@name='fixedNameValue']"));
+		hmap.put("city_names_full_name_value_xpath", By.xpath("//*[@id='additionalNames']//input[@name='fixedName']"));
 		hmap.put("city_add_new_name_button_xpath", By.xpath("//*[@id='cityBasicInfo']//*[@id='add-names']"));
         hmap.put("city_name_type_input_xpath", By.xpath(".//*[@id='additionalNames']//*[@data-internal_id='nameType']"));
 		hmap.put("city_names_full_name_value_view_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[td='Full Name']/td[2]"));
@@ -130,24 +131,34 @@ public class CityIdentifiers {
 		hmap.put("city_get_relatedplace_detailsvalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td[3]"));
 		hmap.put("city_get_relatedplace_entirevalue_xpath", By.xpath("//*[@id='cityPlaces']//tbody"));
 		hmap.put("city_All_link_id", By.xpath("//*[@id='all']"));
-		
+	    //city regions
+		hmap.put("city_region_type_identifier_dropdown_options_xpath", By.xpath(("//*[@id='cityRegions']//*[@id='regionType']/option")));
+		hmap.put("city_add_new_region_button_id", By.id("add-regions"));
+		hmap.put("city_region_type_dropdown_xpath", By.xpath(".//*[@id='regionType']"));
+		hmap.put("city_region_value_dropdown_xpath", By.xpath(".//select[@id='regionValue']"));
+		hmap.put("city_region_value_dropdown_option", By.xpath(".//select[@id='regionValue']/option"));
+		hmap.put("city_region_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalRegions']//*[@data-error_id='regionValueError']")));
+		hmap.put("city_delete_region_row_button_xpath", By.xpath(".//*[@data-row_id='regions']//button[@class='delete-row']"));
+		hmap.put("city_region_table", By.xpath("//*[@id='cityRegions']//table"));
+
+
 		 //locators for Country, area and sub area elements
-        hmap.put("country_places_country_dropDown_xpath", By.xpath(".//*[@id='country']//option"));  		
+        hmap.put("country_places_country_dropDown_xpath", By.xpath(".//*[@id='country']//option"));
         hmap.put("country_places_country_dropDown_select_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Country']//select"));
-        hmap.put("country_places_country_dropDown_select_option_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Country']//select/option"));  
+        hmap.put("country_places_country_dropDown_select_option_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Country']//select/option"));
         hmap.put("country_places_areas_dropdown_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Area']//select"));
-        hmap.put("country_places_areas_option_dropdown_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Area']//select/option"));       
-        hmap.put("city_area_dropdown_xpath", By.xpath("//select[@id='area']/option"));     
+        hmap.put("country_places_areas_option_dropdown_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Area']//select/option"));
+        hmap.put("city_area_dropdown_xpath", By.xpath("//select[@id='area']/option"));
         hmap.put("area_subarea_xpath", By.id("subArea_chosen"));
-        hmap.put("area_subarea_list_xpath", By.xpath("//*[@class='chosen-results']/li"));  
-        hmap.put("area_subarea_choosenList", By.xpath(".//*[@class='chosen-choices']//li"));    
+        hmap.put("area_subarea_list_xpath", By.xpath("//*[@class='chosen-results']/li"));
+        hmap.put("area_subarea_choosenList", By.xpath(".//*[@class='chosen-choices']//li"));
         hmap.put("area_subareas_typeahead_xpath", By.xpath(".//*[@class='chosen-choices']//input"));
         hmap.put("subareas_choices_xpath", By.xpath("//*[@id='subArea_chosen']//li[@class='search-choice']"));
         hmap.put("subarea_noarea_xpath", By.xpath(".//*[@id='cityBasicInfo']//tr[th='Sub Area']/td"));
         hmap.put("country_current_value_xpath", By.xpath("(.//*[@class='chosen-single'])[1]//span"));
         hmap.put("area_current_value_xpath", By.xpath("(.//*[@class='chosen-single'])[2]//span"));
-        hmap.put("city_current_value_xpath", By.xpath("(.//*[@class='chosen-single'])[3]//span")); 
-        hmap.put("city_List_value_xpath", By.xpath("(//*[@id='entitySelect_chosen'])[3]//li"));      
+        hmap.put("city_current_value_xpath", By.xpath("(.//*[@class='chosen-single'])[3]//span"));
+        hmap.put("city_List_value_xpath", By.xpath("(//*[@id='entitySelect_chosen'])[3]//li"));
         hmap.put("subarea_noarea_xpath", By.xpath(".//*[@id='cityBasicInfo']//tr[th='Sub Area']/td"));
         hmap.put("area_noarea_xpath", By.xpath(".//*[@id='cityBasicInfo']//tr[th='Area']/td"));
         hmap.put("subarea_dropdrown", By.xpath("(//*[@id='entitySelect_chosen'])[3]"));

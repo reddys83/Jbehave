@@ -25,6 +25,12 @@ public class DataSteps extends AbstractSteps {
 		getDataPage().clickOnUpdateCurrencyLink();
 		setEditCityPage(getDataPage().createEditCityPage());
 	}
+	
+	@When("the user clicks on the area update link")
+	public void clickOnUpdateAreaLink() {
+		getDataPage().clickOnUpdateCurrencyLink();
+		setEditAreaPage(getDataPage().createEditAreaPage());
+	}
 
     @When("the user clicks on the country tab in the data area")
     public void clickOnCountryTab() {
@@ -289,6 +295,7 @@ public class DataSteps extends AbstractSteps {
     @Alias("the user clicks on the sub-area basic info link in the navigation bar")
     public void clickOnAreaBasicInfoInNavigationBar() {
         getDataPage().clickOnAreaBasicInfoInNavigationBar();
+        setEditAreaPage(getDataPage().createEditAreaPage());
     }
 
     @When("the user clicks on the city basic info link in the navigation bar")
@@ -538,6 +545,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see all is selected by default in the navigation bar")
+    @Alias("the user should see the user is navigated to All section view")
     public void verifyDefaultToViewAll() {
         getDataPage().verifyDefaultToViewAll();
     }
@@ -879,4 +887,5 @@ public class DataSteps extends AbstractSteps {
 
     @Then("the user should see the $entity page in the view mode")
     public void verifyViewModeForEntity(){getDataPage().verifyViewModeForEntity();}
+
 }

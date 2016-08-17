@@ -86,7 +86,6 @@ Examples:
 |1717|FID|1717|Quarter|
 
 Scenario: Veirfy the valid inputs for legalEntity Board meeting - Bug-ZEUS-1225
-Meta:@test99
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the legal entity tab in the data area
@@ -162,3 +161,34 @@ Then user should see the duplicate error message for value dropdown in legalEnti
 Examples:
 |entity|searchBy|fid|summary|type|value|
 |1717|FID|1717|Stock Exchange Interim Entity Identifier|Month|Jan|
+
+
+Scenario: Delete and Save existing board meetings
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the legal entity tab in the data area
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+When the user clicks on the legal entity board meetings link in the navigation bar
+And the user clicks on the legalEntity update link
+When the user gets the document with get Id for legalentity with the fid as <entity> from the database
+And the user clicks on delete legal entity board meetings row button for the row legalEntity_first_existing_row_boardmeeting_delete_button
+Then the user should see the delete row confirmation modal in the legal entity page
+When the user clicks on the yes button in the delete row confirmation modal in the legal entity basic info page
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should not see boardmeetings values for fid <fid> in zeus document as:
+|type|value|
+|Month|July|
+And the user should not see the board meeting row in the basic info legal entity page
+And the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|
+|1010|FID|1010|

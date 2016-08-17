@@ -391,4 +391,15 @@ public class SearchResultsSteps extends AbstractSteps{
     public void verifyClickToViewOfficeSearch(){
         getResultsPage().verifyToolTipClickToView();
     }
+
+	@Then("the user should see the list of <status> offices in All result pages")
+	public void verifyActiveOfficesSearchResultsInAllPages(@Named("status") String status, @Named("count") int count) {
+		getResultsPage().verifyActiveOfficesSearchResultsForAllPages(searchedEntity, status, count);
+	}
+
+    @Then("the user should see the message No results found")
+    public void verifyNoResultsMessage()
+    {
+        getResultsPage().verifyNoResultsMessage();
+    }
 }
