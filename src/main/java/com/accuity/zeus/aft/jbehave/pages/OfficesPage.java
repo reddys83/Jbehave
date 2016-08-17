@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
@@ -290,6 +291,28 @@ public class OfficesPage extends AbstractPage {
         return EOP;
     }
 
+    public void verifyPrincipalFlag(String principalFlag) {
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(principalFlag, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_principalFlag_view_name")).getText());
+    }
+
+    public void verifyPrincipalFlagInZeus(String principalFlag, String officeFid) {
+            try {
+                Thread.sleep(5000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            List<NameValuePair> zeusPairs = new ArrayList<>();
+            zeusPairs.add(new BasicNameValuePair("fid", officeFid));
+            zeusPairs.add(new BasicNameValuePair("source", "zeus"));
+            Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", zeusPairs);
+            assertEquals(principalFlag, document.getElementsByTagName("principalOffice").item(0).getTextContent());
+    }
+
     public void checkStatisticsSectionNotExists(String fid){
 
         List<NameValuePair> nvPairs = new ArrayList<>();
@@ -339,5 +362,4 @@ public class OfficesPage extends AbstractPage {
         }
 
     }
-
 }

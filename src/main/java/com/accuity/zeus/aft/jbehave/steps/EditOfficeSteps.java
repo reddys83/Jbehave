@@ -46,6 +46,11 @@ public class EditOfficeSteps extends AbstractSteps{
     @Then("the user verifies office opened date from $source document <officeFid> <day> <month> <year>")
     public void verifyUpdatedOfficeOpenedDate(@Named("officeFid") String officeFid,@Named("day") String day,@Named("month") String month,@Named("year") String year,@Named("source") String source){getEditOfficePage().verifyUpdatedOfficeOpenedDate(officeFid,day,month,year,source);}
 
+    @When("the user updates principal office flag to <principalFlag>")
+    public void updatePrincipalFlag(@Named("principalFlag") String principalFlag){
+        editOfficePage.setPrincipalOffice(principalFlag);
+    }
+
 
     @When("the user selects lead location value <leadLocationflag> in the basicinfo office page")
     public void selectOfficeLeadLocationFlag(@Named("leadLocationflag") String leadLocationflag){
@@ -269,7 +274,6 @@ public class EditOfficeSteps extends AbstractSteps{
 
         getEditOfficePage().verifyEditOfficeNameValuesExistInZeusandinUI(type,value,officeFid,source);
     }
-
 
     @When("the user clicks on delete office names row button for the row $deletebutton_Row")
     public void clickonDeleteOfficeNamesRowButton(String deletebutton_Row)

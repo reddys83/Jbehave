@@ -139,6 +139,11 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifySearchResults();
     }
 
+    @Then("the user should see the same results of the previous search")
+    public void compareSearchResults() {
+        getResultsPage().compareURLAndSearchResults();
+    }
+
     @Then("the user should see the legal entity search results card matching the searched entity $legalEntitySearchResults")
     public void verifyLegalEntitySearchResultsCards(ExamplesTable legalEntitySearchResults){
         getResultsPage().verifyLegalEntitySearchResultsCards(legalEntitySearchResults);
@@ -402,5 +407,12 @@ public class SearchResultsSteps extends AbstractSteps{
 	public void verifyActiveOfficesSearchResultsInAllPages(@Named("status") String status, @Named("count") int count) {
 		getResultsPage().verifyActiveOfficesSearchResultsForAllPages(searchedEntity, status, count);
 	}
+
+    @Then("the user should see results tab is selected")
+    public void verifyResultsTabSelected()
+    {
+        getResultsPage().verifyResultsTabSelected();
+    }
+
 
 }
