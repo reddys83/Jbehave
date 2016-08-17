@@ -8,8 +8,6 @@ JIRA ID - ZEUS-427 - User can view office locations
 
 Scenario: verify office locations - addresses, telecom and summary
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -26,8 +24,6 @@ Examples:
 
 Scenario: verify office locations postal code
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

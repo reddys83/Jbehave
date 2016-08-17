@@ -8,8 +8,6 @@ JIRA ID - ZEUS - 405 User can view office statistics
 
 Scenario: Verify office statistics  ( Office Id - cac0b9d5-8043-40d2-80cd-aea4180c74cb )
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -31,8 +29,6 @@ Examples:
 
 Scenario: Verify no statistics  (Office Id - c6458990-e7e7-4155-9024-7af61d55f9e9 )
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -54,8 +50,6 @@ Examples:
 
 Scenario: Verify statistics subsection will be supressed in the Office view if the office is linked to a non-US Entity legal entity.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -73,8 +67,6 @@ Examples:
 Scenario: Veirfy statistics section will appear in the office view for the entities that will match below criteria:
 Legal Entity country of operations is one of the values US, VI, MP, GU, PR, AS
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

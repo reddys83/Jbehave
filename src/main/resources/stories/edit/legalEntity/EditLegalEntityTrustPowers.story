@@ -12,8 +12,6 @@ b)Leave Admin Employees value as blank
 c)Leave min Account Size value as blank
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -47,8 +45,6 @@ a)Set the Granted value to false
 b)Set the Granted value to null
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -77,8 +73,6 @@ a)Set the Granted value from false to true
 b)Set the Granted value from null to true
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -109,8 +103,6 @@ Scenario:
 a) Verify Legal Entity's identifier value field max length is 50
 b) Verify error messages for the fields when enter invalid values
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

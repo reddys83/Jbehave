@@ -13,8 +13,6 @@ b) Verify for an existing CreditRating's row, the Credit Rating's Type values ar
 c) Verify for a new CreditRating's row, the Credit Rating's Agency values are from CREDIT_RATING_AGENCY
 d) Verify for a new CreditRating's row, the Credit Rating's Type values are from CREDIT_RATING_TYPE
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -34,8 +32,6 @@ Scenario: Update and Save existing credit ratings
 a) User selects a new value for Agency, Type, Value, Applied Date and Confirmed Date and click Save. Updated Credit rating should be saved in Zeus document
 b) User selects a new value for Agency, Type, Value and no values for Applied Date and Confirmed Date and click Save. Updated Credit rating should be saved in Zeus document
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -66,8 +62,6 @@ Examples:
 
 Scenario: Update and Save all existing credit ratings values to null
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -102,8 +96,6 @@ Scenario: Add and Save new credit ratings
 a) User selects a new value for Agency, Type, Value, Applied Date and Confirmed Date and click Save. New Credit rating should be saved in Zeus document
 b) User selects a new value for Agency, Type, Value and no values for Applied Date and Confirmed Date and click Save. New Credit rating should be saved in Zeus document
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -136,8 +128,6 @@ Scenario:
 a. Add and Save all new credit ratings values to null. Should not get any erros
 b. Verify the maxlength value is 5 for Value field.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -165,8 +155,6 @@ Examples:
 
 Scenario: Delete and Save existing credit ratings
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -191,8 +179,6 @@ Examples:
 
 Scenario: Delete newly added credit ratings row
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -219,8 +205,6 @@ a. Verify that the user User should see Required error message for both Type and
 b. User should see Required error message for both Agency and value when  selects Type but keeps the Agency and Value as blank
 c. User should see Required error message for both Agency and Type when enters a valid value for Value but keeps the Agency and Type as blank
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -257,8 +241,6 @@ Examples:
 Scenario: User updates invalid Applied date and Confirmed date
 Verifying error message displaying Invalid Date when invalid date entered.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -284,8 +266,6 @@ Examples:
 
 Scenario: Verify that Month,Day and Year are required for Applied Date and Confirmed Date
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -311,8 +291,6 @@ Examples:
 
 Scenario: Verify that Applied Date and Confirmed Date can not be later than today
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

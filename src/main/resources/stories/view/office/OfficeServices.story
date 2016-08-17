@@ -8,8 +8,6 @@ JIRA ID - ZEUS - 407 - User can view office services
 
 Scenario: Verify office services (Office Id- c6458990-e7e7-4155-9024-7af61d55f9e9 )
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -36,8 +34,6 @@ Examples:
 
 Scenario: Verify no office services (Office Id - cac0b9d5-8043-40d2-80cd-aea4180c74cb)
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
