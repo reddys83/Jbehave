@@ -929,7 +929,7 @@ public class EditOfficePage extends AbstractPage {
 	
 	public void verifyNewlyAddedOfficePersonnelRowIsNotDisplayed() {
 		try {
-			getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_AdditionalPersonnel"));
+			getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_additional_personnel"));
 		} catch (Exception e) {
 			assertTrue(true);
 		}

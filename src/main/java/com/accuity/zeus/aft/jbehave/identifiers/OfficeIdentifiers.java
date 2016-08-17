@@ -86,7 +86,7 @@ public class OfficeIdentifiers {
         hmap.put("office_personnel_value_input_xpath", By.xpath(".//*[@id='additionalPersonnel']//*[@data-internal_id='personnelValue']"));
         hmap.put("office_delete_personnel_row_button_xpath", By.xpath(".//*[@data-row_id='personnel']//button[@class='delete-row']"));
         hmap.put("office_personnel_type_view_mode", By.xpath("//*[@id='officePersonnel']//tbody/tr"));
-        hmap.put("office_AdditionalPersonnel", By.xpath("#additionalPersonnel"));
+        hmap.put("office_additional_personnel", By.xpath("#additionalPersonnel"));
         hmap.put("office_personnel_type_error_msg_xpath", By.xpath("//*[@data-error_id='personnelTypeError']"));
 		hmap.put("office_personnel_value_error_msg_xpath", By.xpath("//*[@data-error_id='personnelValueError']"));
         hmap.put("office_basicInfo_view_override_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Override']/td"));
