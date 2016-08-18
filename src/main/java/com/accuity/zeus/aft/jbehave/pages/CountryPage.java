@@ -950,7 +950,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyErrorMessageForRequiredIdentifierValue() {
-        assertEquals("Required", getDriver().findElement(country_identifier_value_err_msg_xpath).getText());
+        assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_identifier_value_err_msg_xpath).getText());
     }
 
     public void clickOnAddDemographicsButton() {
@@ -1303,7 +1303,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyErrorMessageForRequiredValueType() {
-        assertEquals("Required", getDriver().findElement(country_names_value_required_err_msg_xpath).getText());
+        assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_names_value_required_err_msg_xpath).getText());
     }
 
     public void verifyNewlyAddedNameRowIsDisplayed() {

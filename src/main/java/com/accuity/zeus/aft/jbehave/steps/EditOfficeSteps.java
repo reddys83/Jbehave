@@ -46,6 +46,11 @@ public class EditOfficeSteps extends AbstractSteps{
     @Then("the user verifies office opened date from $source document <officeFid> <day> <month> <year>")
     public void verifyUpdatedOfficeOpenedDate(@Named("officeFid") String officeFid,@Named("day") String day,@Named("month") String month,@Named("year") String year,@Named("source") String source){getEditOfficePage().verifyUpdatedOfficeOpenedDate(officeFid,day,month,year,source);}
 
+    @When("the user updates principal office flag to <principalFlag>")
+    public void updatePrincipalFlag(@Named("principalFlag") String principalFlag){
+        editOfficePage.setPrincipalOffice(principalFlag);
+    }
+
 
     @When("the user selects lead location value <leadLocationflag> in the basicinfo office page")
     public void selectOfficeLeadLocationFlag(@Named("leadLocationflag") String leadLocationflag){
@@ -269,7 +274,6 @@ public class EditOfficeSteps extends AbstractSteps{
 
         getEditOfficePage().verifyEditOfficeNameValuesExistInZeusandinUI(type,value,officeFid,source);
     }
-
 
     @When("the user clicks on delete office names row button for the row $deletebutton_Row")
     public void clickonDeleteOfficeNamesRowButton(String deletebutton_Row)
@@ -519,6 +523,43 @@ public class EditOfficeSteps extends AbstractSteps{
 	@Then("the user should see the newly added identifier row in the office identifiers page")
 	public void verifyNewlyAddedOfficeIdentifierRowIsDisplayed() throws Exception {
 		getEditOfficePage().verifyNewlyAddedOfficeIdentifierRowIsDisplayed();
+	}
+	
+	@Then("the user should see the office's business hours value same as in $source document")
+	public void verifyOfficeBusinessHourValueFromTrustedDB(@Named("officeFid") String officeFid,
+			@Named("source") String source) {
+		getEditOfficePage().verifyOfficeBusinessHourValueFromTrustedDB(officeFid, source);
+	}
+
+	@When("the user enters the <businessHour> in the office business hour text area")
+	public void enterOfficeBusinessHourText(@Named("businessHour") String businessHour) {
+		getEditOfficePage().enterOfficeBusinessHourText(businessHour);
+	}
+
+	@Then("the user should be able to verify the values are entered in the office business hour field")
+	public void verifyOfficeBusinessHourTextInUI(@Named("businessHour") String businessHour) {
+		getEditOfficePage().verifyOfficeBusinessHourTextInUI(businessHour);
+	}
+
+	@Then("the user should see the office business hours value same as in $source document")
+	public void verifyOfficeBusinessHourValueFromZeusDB(@Named("officeFid") String officeFid,
+			@Named("source") String source) {
+		getEditOfficePage().verifyOfficeBusinessHourValueFromZeusDB(officeFid, source);
+	}
+
+	@When("the user enters 200 unicode characters in the office business hours field")
+	public void enterMaximumCharactersInOfficeBusinessHours() {
+		getEditOfficePage().enterMaximumCharactersInOfficeBusinessHours();
+	}
+
+	@Then("the user should be able to view that only 200 unicode characters are saved in office business hours")
+	public void viewOfficeBusinessHoursValidCharacterLength() {
+		getEditOfficePage().viewOfficeBusinessHoursValidCharacterLength();
+	}
+	
+	@Then("the user verifies business hours max length attribute is $maxLength")
+	public void verifyOfficeBusinessHoursMaxLenghtAttribute(@Named("maxLength") String maxLength) {
+		getEditOfficePage().verifyOfficeBusinessHoursMaxLenghtAttribute(maxLength);
 	}
 	
 	@Then("the user should see the office's service's values are same as in $source document")

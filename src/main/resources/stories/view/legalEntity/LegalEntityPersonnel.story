@@ -8,8 +8,6 @@ JIRA ID - ZEUS-399 - User can view legal entity personnel
 
 Scenario: Verify legal entity's personnel
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -27,8 +25,6 @@ Examples:
 
 Scenario: Verify no legal entity's personnel
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

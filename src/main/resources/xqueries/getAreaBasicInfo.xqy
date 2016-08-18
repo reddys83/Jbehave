@@ -33,6 +33,9 @@ let $DateFields :=
   (: Taking Add Info :)
  let $areaadditionalinfo := ($areaDoc/summary/additionalInfos/additionalInfo/text())
  
+  (: Taking Area Use In Address :)
+  let $areaUseInAddress := ($areaDoc/summary/useInAddress/text())
+  
   (: Taking Area Interest Rate :)
   let $areaInterestRate := ($areaDoc/summary/maxConsumerRate/text())
   
@@ -65,4 +68,5 @@ return
 	  <areaInterestRate>{$areaInterestRate}</areaInterestRate>
 	  <summary>{$summary}</summary>     
       <timeZoneUtc>{$utcList}</timeZoneUtc>
+	  <areaUseInAddress>{$areaUseInAddress}</areaUseInAddress>
   </area>
