@@ -43,6 +43,7 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office services link in the navigation bar
 And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
 When the user deletes the existing service rows
 And the user clicks on the add button for adding new services for office page
 When the user selects <serviceCategory> type in the services for office page
@@ -56,6 +57,7 @@ When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 Then the user should see the Office Services values updated in office services page
 Then the user should see the <serviceCategory> <serviceOverride> <serviceCategory2> <serviceOverride2> values updated in zeus document
+Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|serviceCategory|serviceOverride|serviceCategory2|serviceOverride2|
