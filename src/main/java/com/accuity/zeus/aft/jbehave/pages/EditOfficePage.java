@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.commons.collections.ListUtils;
@@ -1181,7 +1182,16 @@ public class EditOfficePage extends AbstractPage {
 			ex.printStackTrace();
 		}
 	}
-
+   
+	public void verifyBlankOfficeServices() {try {
+		Thread.sleep(1000);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	assertEquals("", getDriver()
+			.findElement(OfficeIdentifiers.getObjectIdentifier("office_services_entire_xpath")).getText());
+	}
+	
     @Override
     public String getPageUrl() {
         return null;

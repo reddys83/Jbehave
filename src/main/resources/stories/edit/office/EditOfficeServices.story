@@ -114,7 +114,7 @@ When the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
-Then the user should see Office Services values are updated in office services page
+Then the user should see Office Services values are updated as blank in office services page
 Then the user should see the <serviceCategory> <serviceOverride> values updated in zeus document
 Then the user reverts the changes to the document
 

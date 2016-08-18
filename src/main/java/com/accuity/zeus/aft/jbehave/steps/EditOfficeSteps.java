@@ -731,4 +731,9 @@ public class EditOfficeSteps extends AbstractSteps{
 			@Named("serviceOverride") String serviceOverride) {
 		getEditOfficePage().verifyOfficeServicesParametersInEditUI(serviceCategory, serviceOverride);
 	}
+	
+	@Then("the user should see Office Services values are updated as blank in office services page")
+	public void verifyBlankOfficeServicesParameterInUI() {
+		getEditOfficePage().verifyBlankOfficeServices();
+	}
 }
