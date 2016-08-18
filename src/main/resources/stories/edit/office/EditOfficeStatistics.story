@@ -15,8 +15,6 @@ Scenario: 1 User can edit  'Office Statistics' that is different from the curren
 
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -46,7 +44,7 @@ Examples:
 |1038|FID|1038|1038-51|12|12|12| 
 |1038|FID|1038|1038-51||||
 
-Scenario: User can edit  'Office Statistics'  that is No different from the current value
+Scenario: 2 User can edit  'Office Statistics'  that is No different from the current value
 and saves the office page
 1- User verifies confirmation dialog modal do not have summary change text as 'Basic Info / Statistics'
 2- User verifies that the old value is reflected in zeus document
@@ -54,8 +52,6 @@ and saves the office page
 4- User verifies the timezone 'total atm', 'total checking accounts','total savings accounts' field are having max length attribute as '8'
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -84,14 +80,12 @@ Examples:
 |entity|searchBy|fid|officeFid|totalAtms|totalCheckingAccounts|totalSavingsAccounts| 
 |1038|FID|1038|1038-51|123|123|123|
 
-Scenario: User is updating an 'office statistics' page and enters value as alphanumerals and special characters for office statistics fields
+Scenario: 3 User is updating an 'office statistics' page and enters value as alphanumerals and special characters for office statistics fields
 1- User verifies the 'total atm' field is showing 'Enter up to 8 valid numbers' validation message
 2- User verifies the 'total checking accounts' field is showing 'Enter up to 8 valid numbers' validation message
 3- User verifies the 'total savings accounts' field is showing 'Enter up to 8 valid numbers' validation message
-
+ 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
