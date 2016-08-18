@@ -566,6 +566,22 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyOfficeLocationsEditPageMode();
     }
 
+    @Then("the user should see the area dropdown with $areaDropDown selected")
+    public void verifyAreaDropdownNull(@Named("areaDropDown") String areaDropDown) {
+        getEditOfficePage().verifyAreaDropdownNull(areaDropDown);
+    }
+
+    @Then("the user should see the subarea dropdown with Choose a subarea selected")
+    public void verifySubAreaDropdownNull(@Named("subareaDropDown") String subareaDropDown) {
+        getEditOfficePage().verifySubAreaDropdownNull(subareaDropDown);
+    }
+
+    @Then("the user should see the city dropdown with Choose a city selected")
+    public void verifyCityDropdownNull(@Named("cityDropDown") String cityDropDown) {
+        getEditOfficePage().verifyCityDropdownNull(cityDropDown);
+    }
+
+
 }
 
 

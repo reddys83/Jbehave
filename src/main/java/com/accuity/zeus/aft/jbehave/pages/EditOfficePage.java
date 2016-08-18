@@ -857,7 +857,34 @@ public class EditOfficePage extends AbstractPage {
         assertTrue(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_location_primaryoffice_location_delete_row_edit_mode_flag_radio_options")).size()>0);
     }
 
+    public void verifyAreaDropdownNull(String areaDropDown) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(areaDropDown, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_area_listBox")).getText());
 
+    }
+
+    public void verifySubAreaDropdownNull(String subareaDropDown) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(subareaDropDown, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_subarea_listBox")).getText());
+
+    }
+    public void verifyCityDropdownNull(String cityDropDown) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(cityDropDown, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_city_listBox")).getText());
+
+    }
     @Override
     public String getPageUrl() {
         return null;

@@ -112,6 +112,10 @@ public class OfficeIdentifiers {
         hmap.put("office_location_delete_no_button", By.id("cancel-button"));
         hmap.put("office_location_delete_yes_button",By.id("confirm-button"));
         hmap.put("office_delete_no_button", By.id("no-button"));
+        hmap.put("office_area_listBox",By.xpath("//*[@id='area']/td//span"));
+        hmap.put("office_subarea_listBox",By.xpath(".//*[@id='subarea']/td//span"));
+        hmap.put("office_city_listBox",By.xpath(".//*[@id='city']/td//span"));
+
     }
 
     public static By getObjectIdentifier(String key) {

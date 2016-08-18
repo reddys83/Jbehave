@@ -303,6 +303,77 @@ Examples:
 |entity|searchBy|fid|officeFid|Country|Area|
 |1010|FID|1010|1010-45|Åland Islands|No Area|
 
+Scenario: Verify the values of area,subarea,city should be changed to null when the country value is changed
+
+Meta: @skip
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+When the user clicks on the choose a country option in the office locations
+When the user enters the office country <Country> in the type-ahead box
+Then the user should see the area dropdown with Choose an area selected
+And the user should see the area dropdown with Choose an area selected
+And the user should see the subarea dropdown with Choose a subarea selected
+And the user should see the city dropdown with Choose a city selected
+
+
+Examples:
+|entity|searchBy|fid|officeFid|Country|
+|1010|FID|1010|1010-45|Canada|
+
+
+Scenario: Verify the values of subarea,city should be changed to null when the area value is changed
+
+Meta: @skip
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on the choose an area option in the office locations
+And the user enters the office area <Area> in the type-ahead box
+Then the user should see the subarea dropdown with Choose a subarea selected
+And the user should see the city dropdown with Choose a city selected
+
+
+Examples:
+|entity|searchBy|fid|officeFid|Area|
+|1010|FID|1010|1010-45|
+
+Scenario: Verify the value of city should be changed to null when the subarea value is changed
+
+Meta: @skip
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on the choose a subarea option in the office locations
+And the user enters the office subarea <subArea> in the type-ahead box
+Then the user should see the city dropdown with Choose a city selected
+
+
+Examples:
+|entity|searchBy|fid|officeFid|subArea|
+|1010|FID|1010|1010-45|Kings|
+
 Scenario: Verify that the user should be able to edit a new office address row
 a) - Verify if User can prevent deleting the location row by clicking on 'No'.
 b) - Verify if User can delete the location row by clicking on 'Yes'.
@@ -539,7 +610,7 @@ And the user enters office telecoms answer back office_telecoms_first_row_new_an
 !--When the user clicks on the confirm button
 !--Then the user should see the successful update message at top of the office page
 !--And the user verifies that the office telecom fields are entered in the office locations page
-!--And the user should see the office telecomm fields as in zeus document
+Then the user should see the office telecomm fields as in zeus document
 !--And the user reverts the changes to the document
 
 Examples:
