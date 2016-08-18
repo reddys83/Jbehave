@@ -351,6 +351,6 @@ public abstract class AbstractPage {
         }
         Document document =  XmlDocumentLoader.getDocument(filePath);
         return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("resource").getNodeValue();
-    } 
+    }
 
 }
