@@ -696,6 +696,20 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().verifyOfficeServiceValuesAreUpdatedInZeusDB(source, officeFid, serviceCategoryValues, serviceOverrideValues);
 	}
 	
+	@Then("the user should see the <serviceCategory> <serviceOverride> <serviceCategory2> <serviceOverride2> values updated in $source document")
+	public void verifyOfficeMultipleServiceValuesAreUpdatedInZeusDB(@Named("source") String source,
+			@Named("officeFid") String officeFid, @Named("serviceCategory") String serviceCategory,
+			@Named("serviceOverride") String serviceOverride, @Named("serviceCategory2") String serviceCategory2,
+			@Named("serviceOverride2") String serviceOverride2) {
+		List<String> serviceCategoryValues = new ArrayList<>();
+		List<String> serviceOverrideValues = new ArrayList<>();
+		serviceCategoryValues.add(serviceCategory);
+		serviceCategoryValues.add(serviceCategory2);
+		serviceOverrideValues.add(serviceOverride);
+		serviceOverrideValues.add(serviceOverride2);
+		getEditOfficePage().verifyOfficeServiceValuesAreUpdatedInZeusDB(source, officeFid, serviceCategoryValues, serviceOverrideValues);
+	}
+	
 	@Then("the user should see the <serviceCategory> <serviceOverride> values not updated in $source document")
 	public void verifyOfficeServiceValuesAreNotUpdatedInZeusDB(@Named("source") String source,
 			@Named("officeFid") String officeFid, @Named("serviceCategory") String serviceCategory,
@@ -716,5 +730,11 @@ public class EditOfficeSteps extends AbstractSteps{
 		serviceCategoryValues.add(serviceCategory);
 		serviceOverrideValues.add(serviceOverride);
 		getEditOfficePage().verifyOfficeServiceValuesAreUpdatedInZeusDB(source, officeFid, serviceCategoryValues, serviceOverrideValues);
+	}
+	
+	@Then("the user should see Office Services values are updated in Edit office services page")
+	public void verifyOfficeServicesParameterInEditUI(@Named("serviceCategory") String serviceCategory,
+			@Named("serviceOverride") String serviceOverride) {
+		getEditOfficePage().verifyOfficeServicesParametersInEditUI(serviceCategory, serviceOverride);
 	}
 }

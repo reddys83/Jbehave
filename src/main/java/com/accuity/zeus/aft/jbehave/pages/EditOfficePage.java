@@ -1025,7 +1025,7 @@ public class EditOfficePage extends AbstractPage {
 	}
    }
    
-   public String getOfficeServicesFromTrustedDB(String source, String tagName, String officeFid) {
+  /* public String getOfficeServicesFromTrustedDB(String source, String tagName, String officeFid) {
 
 		String tagValue = null;
 		List<NameValuePair> nvPairs = new ArrayList<>();
@@ -1043,10 +1043,10 @@ public class EditOfficePage extends AbstractPage {
 					: getNodeValuesByTagName(document, tagName).get(0);
 		}
 		return tagValue;
-	}
+	}*/
    
    
-   public void verifyOfficeServiceValuesFromTrustedDB(String source, String officeFid) {
+  /*public void verifyOfficeServiceValuesFromTrustedDB(String source, String officeFid) {
    	try {
 			attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_service_button_xpath"));
 			List<String> serviceCategory = new ArrayList<>();
@@ -1071,7 +1071,7 @@ public class EditOfficePage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-   }
+   }*/
    
    public void verifyOfficeServiceValuesAreUpdatedInZeusDB(String source, String officeFid, List<String> serviceCategoryValues,
 			List<String> serviceOverrideValues) {
@@ -1188,6 +1188,20 @@ public class EditOfficePage extends AbstractPage {
 		}
 	}
   
+   public void verifyOfficeServicesParametersInEditUI(String serviceCategory, String serviceOverride) {
+	      
+	   try{		   
+		   assertEquals(serviceCategory,
+	   
+				   getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_edit_mode_xpath")).getAttribute("value"));
+	   assertEquals(serviceOverride,
+				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_override_textbox_edit_mode_xpath"))
+						.getAttribute("value"));
+	   }
+	   catch(NoSuchElementException ex) {
+		   ex.printStackTrace();
+		}
+    }
    
     
     @Override
