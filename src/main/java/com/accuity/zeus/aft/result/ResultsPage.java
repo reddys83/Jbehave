@@ -910,4 +910,17 @@ public class ResultsPage extends AbstractPage {
 		}
 
 	}
+
+    public DataPage createDataPage() {
+        DataPage DOP=null;
+        try {
+            DOP= new DataPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+        }
+        catch(Exception e)
+        {e.printStackTrace();}
+        return DOP;
+    }
+
 }
+
+

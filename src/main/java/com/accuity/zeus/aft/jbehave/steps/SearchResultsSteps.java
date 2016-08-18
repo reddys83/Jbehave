@@ -9,6 +9,8 @@ import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.accuity.zeus.aft.jbehave.pages.DataPage;
+import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 
 import static org.junit.Assert.*;
 
@@ -126,6 +128,9 @@ public class SearchResultsSteps extends AbstractSteps{
     public void clickOnResultCard(@Named("fid") String fid){
         searchedEntity = fid;
         setLegalEntityPage(getResultsPage().clickOnResultCard(getResultsPage().getFidElements(fid)));
+        if(dataPage==null){
+            dataPage = getResultsPage().createDataPage();
+        }
     }
 
     @Then("the user should see the search results for the institution")

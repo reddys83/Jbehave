@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 
 public class OfficesPage extends AbstractPage {
 
-    private String office_results_card_xpath = "//*[@id='data']//tr[td='";
+    private String office_results_card_xpath = "//*[@id='results']//tr[td='";
     private By office_personnel_link_id = By.id("officePersonnel");
     private By office_basic_info_link_id = By.id("officeBasicInfo");
     private By office_history_link_id = By.id("officeHistory");
