@@ -84,12 +84,15 @@ public class OfficeIdentifiers {
         hmap.put("office_basicInfo_view_override_xpath", By.xpath("//*[@id='officeBasicInfo']//tr[th='Override']/td"));
         hmap.put("office_business_hours_edit_mode", By.xpath("//*[@id='officeBasicInfo']//input[@name='businessHours']"));
         hmap.put("office_business_hours_view_mode", By.xpath("//*[@id='officeBasicInfo']//tr[th='Business Hours']/td"));
+        hmap.put("office_history_edit_mode_xpath", By.xpath("//*[@id='officeHistory']/textarea"));
+		hmap.put("office_history_link", By.xpath("//*[@id='legalEntityHistory']"));
+		hmap.put("office_history_view_mode_xpath", By.xpath("//*[@id='officeHistory']/p"));
         hmap.put("office_total_atms_xpath", By.xpath("//*[@name='numberOfATMs']"));
         hmap.put("office_total_checking_accounts_xpath", By.xpath("//*[@name='numberOfCheckingAccounts']"));
         hmap.put("office_total_savings_accounts_xpath", By.xpath("//*[@name='numberOfSavingsAccounts']"));
         hmap.put("office_total_atms_err_msg_xpath", By.xpath("//*[@id='officeStatistics']//*[@data-error_id='numberOfATMsError']"));
         hmap.put("office_total_checking_accounts_err_msg_xpath", By.xpath("//*[@id='officeStatistics']//*[@data-error_id='numberOfCheckingAccountsError']"));
-        hmap.put("office_total_savings_accounts_err_msg_xpath", By.xpath("//*[@id='officeStatistics']//*[@data-error_id='numberOfSavingsAccountsError']"));   
+        hmap.put("office_total_savings_accounts_err_msg_xpath", By.xpath("//*[@id='officeStatistics']//*[@data-error_id='numberOfSavingsAccountsError']"));
         hmap.put("office_total_atms_view_xpath", By.xpath("//*[@id='officeStatistics']//tr[th='Total ATMs']/td"));
         hmap.put("office_total_checking_accounts_view_xpath", By.xpath("//*[@id='officeStatistics']//tr[th='Total Checking Accounts']/td"));
         hmap.put("office_total_savings_accounts_view_xpath", By.xpath("//*[@id='officeStatistics']//tr[th='Total Savings Accounts']/td"));

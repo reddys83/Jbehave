@@ -563,7 +563,12 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyOfficeBusinessHoursMaxLenghtAttribute(@Named("maxLength") String maxLength) {
 		getEditOfficePage().verifyOfficeBusinessHoursMaxLenghtAttribute(maxLength);
 	}
-	
+
+	@Then("the user should see the Office History value in office page is same as per $source document")
+	public void verifyOfficeHistoryFromTrustedDB(@Named("officeFid") String officeFid, @Named("source") String source) {
+		getEditOfficePage().verifyOfficeHistoryFromTrustedDB(source, "officeHistory", officeFid);
+	}
+
 	@Then("the user should see the statistics values same as in $source document for fid <officeFid>")
 	public void verifyEditOfficeStatisticsValueFromTrusted(@Named("officeFid") String fid,
 			@Named("source") String source) throws InterruptedException {
@@ -571,14 +576,49 @@ public class EditOfficeSteps extends AbstractSteps{
 		inputParameters.put("fid", fid);
 		inputParameters.put("source", source);
 
-		getEditOfficePage().verifyEditOfficeStatisticsValueFromTrusted("numberOfAtms", 
+		getEditOfficePage().verifyEditOfficeStatisticsValueFromTrusted("numberOfAtms",
 				getDataPage().getTagValueFromDB("get office statistics values", "numberOfAtms", inputParameters));
-		getEditOfficePage().verifyEditOfficeStatisticsValueFromTrusted("numberOfCheckingAccounts", 
+		getEditOfficePage().verifyEditOfficeStatisticsValueFromTrusted("numberOfCheckingAccounts",
 				getDataPage().getTagValueFromDB("get office statistics values", "numberOfCheckingAccounts", inputParameters));
-		getEditOfficePage().verifyEditOfficeStatisticsValueFromTrusted("numberOfSavingsAccounts", 
+		getEditOfficePage().verifyEditOfficeStatisticsValueFromTrusted("numberOfSavingsAccounts",
 				getDataPage().getTagValueFromDB("get office statistics values", "numberOfSavingsAccounts", inputParameters));
 	}
 
+	@When("the user enters <officeHistory> value in Office page")
+	public void enterOfficeHistory(@Named("officeHistory") String officeHistory) {
+		getEditOfficePage().enterOfficeHistory(officeHistory);
+	}
+
+	@Then("the user should see the entered <officeHistory> in Office page")
+	public void verifyOfficeHistory(@Named("officeHistory") String officeHistory) {
+		getEditOfficePage().verifyOfficeHistory(officeHistory);
+	}
+
+	@Then("the user should see the entered Office History in $source document")
+	public void verifyOfficeHistoryZeus(@Named("officeFid") String officeFid, @Named("source") String source) {
+		getEditOfficePage().verifyOfficeHistoryZeus(source, "officeHistory", officeFid);
+	}
+
+	@When("the user enters values which is beyond 10000 unicode characters in the Office History field")
+	public void enterCharactersInOfficeHistory() {
+		getEditOfficePage().enterCharactersInOfficeHistory();
+	}
+
+	@Then("the user should see maximum length of office history is limited to $maxLength")
+	public void verifyMaxLengthOfficeHistory(@Named("maxLength") String maxLength) {
+		getEditOfficePage().verifyMaxLengthOfficeHistory(maxLength);
+	}
+
+	@Then("the user should be able to view that only 10000 unicode characters are saved in Office History field")
+	public void verifyValidCharacterLengthOfficeHistory() {
+		getEditOfficePage().verifyValidCharacterLengthOfficeHistory();
+	}
+
+	@Then("the user should be able to verify the maximum values are entered in the Office History field")
+	public void verifyMaximumTextInOfficeHistory() {
+		getEditOfficePage().verifyMaximumTextInOfficeHistory();
+	}
+}
 	@When("the user enters the office total atms value as <totalAtms>")
 	public void enterOfficeTotalAtmsValue(@Named("totalAtms") String totalAtms) {
 		getEditOfficePage().enterValueInStatisticsPageTextField("office_total_atms_xpath", totalAtms);
@@ -604,18 +644,18 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@Then("the user verifies the office statistics values are updated in $source document for fid <officeFid>")
-	public void verifyOfficeStatisticsUpdatedValuesFromZeus(@Named("officeFid") String fid, @Named("source") String source, 
+	public void verifyOfficeStatisticsUpdatedValuesFromZeus(@Named("officeFid") String fid, @Named("source") String source,
 			@Named("totalAtms") String totalAtms, @Named("totalCheckingAccounts") String totalCheckingAccounts,
 			@Named("totalSavingsAccounts") String totalSavingsAccounts) {
 		Map<String, String> inputParameters = new HashMap<String, String>();
 		inputParameters.put("fid", fid);
 		inputParameters.put("source", source);
 
-		getEditOfficePage().verifyOfficeStatisticsValueFromZeus("numberOfAtms", totalAtms, 
+		getEditOfficePage().verifyOfficeStatisticsValueFromZeus("numberOfAtms", totalAtms,
 				getDataPage().getTagValueFromDB("get office statistics values", "numberOfAtms", inputParameters));
-		getEditOfficePage().verifyOfficeStatisticsValueFromZeus("numberOfCheckingAccounts", 
+		getEditOfficePage().verifyOfficeStatisticsValueFromZeus("numberOfCheckingAccounts",
 				totalCheckingAccounts, getDataPage().getTagValueFromDB("get office statistics values", "numberOfCheckingAccounts", inputParameters));
-		getEditOfficePage().verifyOfficeStatisticsValueFromZeus("numberOfSavingsAccounts", 
+		getEditOfficePage().verifyOfficeStatisticsValueFromZeus("numberOfSavingsAccounts",
 				totalCheckingAccounts, getDataPage().getTagValueFromDB("get office statistics values", "numberOfSavingsAccounts", inputParameters));
 	}
 
@@ -628,7 +668,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@Then("the user should see the $errorMessage error message for the total atms field in the office statistics page")
-	public void verifyErrorMessageForTotalAtms(@Named("errorMessage") String errorMessage) {		
+	public void verifyErrorMessageForTotalAtms(@Named("errorMessage") String errorMessage) {
 		getEditOfficePage().verifyErrorMessageForTotalAtm(errorMessage);
 	}
 
