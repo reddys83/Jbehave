@@ -861,7 +861,7 @@ public class EditOfficePage extends AbstractPage {
 	public void verifyEditOfficeStatisticsValueFromTrusted(String fieldName, String fieldValue)
 			throws InterruptedException {
 		
-		assertEquals(fieldName + " in trusted document is not matching with UI value", getDriver().findElement(
+		assertEquals(fieldName + " : " + fieldValue, fieldValue, getDriver().findElement(
 				          OfficeIdentifiers.getObjectIdentifier("office_total_atms_xpath")).getAttribute("value"));
 	}
 
@@ -874,7 +874,7 @@ public class EditOfficePage extends AbstractPage {
 	}
 
 	public void verifyOfficeStatisticsValueFromZeus(String fieldName, String fieldValue, String fieldValueInDB) {
-		assertEquals(fieldName + " field value in zeus DB is not matching with UI", fieldValue, fieldValueInDB);
+		assertEquals(fieldName + " : " + fieldValue, fieldValue, fieldValueInDB);
 	}
 
 	public void verifyOfficeStatisticsFieldsMaxLenghtAttribute(String maxLength, String totalAtms,
@@ -888,16 +888,16 @@ public class EditOfficePage extends AbstractPage {
 						.getAttribute("maxlength"));
 	}
 
-	public void verifyErrorMessageForTotalAtm(String errMsg) {
-		assertEquals(errMsg, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_atms_err_msg_xpath")).getText());
+	public void verifyErrorMessageForTotalAtm(String errorMessage) {		
+		assertEquals(errorMessage, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_atms_err_msg_xpath")).getText());
 	}
 
-	public void verifyErrorMessageForTotalCheckingAccounts(String errMsg) {		
-		assertEquals(errMsg, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_checking_accounts_err_msg_xpath")).getText());
+	public void verifyErrorMessageForTotalCheckingAccounts(String errorMessage) {		
+		assertEquals(errorMessage, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_checking_accounts_err_msg_xpath")).getText());
 	}
 
-	public void verifyErrorMessageForTotalSavingsAccount(String errMsg) {		
-		assertEquals(errMsg, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_savings_accounts_err_msg_xpath")).getText());
+	public void verifyErrorMessageForTotalSavingsAccount(String errorMessage) {		
+		assertEquals(errorMessage, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_savings_accounts_err_msg_xpath")).getText());
 	}
 
 	public void enterValueInStatisticsPageTextField(String textField, String value) {

@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -571,12 +572,9 @@ public class EditOfficeSteps extends AbstractSteps{
 		inputParameters.put("fid", fid);
 		inputParameters.put("source", source);
 
-		getEditOfficePage().verifyEditOfficeStatisticsValueFromTrusted("numberOfAtms",
-				getDataPage().getTagValueFromDB("get office statistics values", "numberOfAtms", inputParameters));
-		getEditOfficePage().verifyEditOfficeStatisticsValueFromTrusted("numberOfCheckingAccounts", getDataPage()
-				.getTagValueFromDB("get office statistics values", "numberOfCheckingAccounts", inputParameters));
-		getEditOfficePage().verifyEditOfficeStatisticsValueFromTrusted("numberOfSavingsAccounts", getDataPage()
-				.getTagValueFromDB("get office statistics values", "numberOfSavingsAccounts", inputParameters));
+		getEditOfficePage().verifyEditOfficeStatisticsValueFromTrusted("numberOfAtms", getDataPage().getTagValueFromDB("get office statistics values", "numberOfAtms", inputParameters));
+		getEditOfficePage().verifyEditOfficeStatisticsValueFromTrusted("numberOfCheckingAccounts", getDataPage().getTagValueFromDB("get office statistics values", "numberOfCheckingAccounts", inputParameters));
+		getEditOfficePage().verifyEditOfficeStatisticsValueFromTrusted("numberOfSavingsAccounts", getDataPage().getTagValueFromDB("get office statistics values", "numberOfSavingsAccounts", inputParameters));
 	}
 
 	@When("the user enters the office total atms value as <totalAtms>")
@@ -626,17 +624,17 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@Then("the user should see the $errorMessage error message for the total atms field in the office statistics page")
-	public void verifyErrorMessageForRequiredTotalAtms(@Named("errorMessage") String errorMessage) {
+	public void verifyErrorMessageForRequiredTotalAtms(@Named("errorMessage") String errorMessage) {		
 		getEditOfficePage().verifyErrorMessageForTotalAtm(errorMessage);
 	}
 
 	@Then("the user should see the $errorMessage error message for the total checking accounts field in the office statistics page")
-	public void verifyErrorMessageForRequiredTotalCheckingAccounts(@Named("errMsg") String errorMessage) {
+	public void verifyErrorMessageForRequiredTotalCheckingAccounts(@Named("errorMessage") String errorMessage) {
 		getEditOfficePage().verifyErrorMessageForTotalCheckingAccounts(errorMessage);
 	}
 
 	@Then("the user should see the $errorMessage error message for the total savings account field in the office statistics page")
-	public void verifyErrorMessageForRequiredTotalAtmField(@Named("errMsg") String errorMessage) {
+	public void verifyErrorMessageForRequiredTotalAtmField(@Named("errorMessage") String errorMessage) {
 		getEditOfficePage().verifyErrorMessageForTotalSavingsAccount(errorMessage);
 	}
 }
