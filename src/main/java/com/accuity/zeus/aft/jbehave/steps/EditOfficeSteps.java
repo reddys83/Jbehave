@@ -2,7 +2,6 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
-import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -619,7 +618,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyAreaTimeZoneSummaryMaxLenghtAttribute(@Named("maxLength") String maxLength,
 			@Named("totalAtms") String totalAtms, @Named("totalCheckingAccounts") String totalCheckingAccounts,
 			@Named("totalSavingsAccounts") String totalSavingsAccounts) {
-		getEditOfficePage().verifyOfficeStatisticsFieldsMaxLenghtAttribute(maxLength, totalAtms, totalCheckingAccounts,
+		getEditOfficePage().verifyOfficeStatisticsFieldsMaxLengthAttribute(maxLength, totalAtms, totalCheckingAccounts,
 				totalSavingsAccounts);
 	}
 

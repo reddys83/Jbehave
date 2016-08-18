@@ -877,7 +877,7 @@ public class EditOfficePage extends AbstractPage {
 		assertEquals(fieldName + " : " + fieldValue, fieldValue, fieldValueInDB);
 	}
 
-	public void verifyOfficeStatisticsFieldsMaxLenghtAttribute(String maxLength, String totalAtms,
+	public void verifyOfficeStatisticsFieldsMaxLengthAttribute(String maxLength, String totalAtms,
 			String totalCheckingAccounts, String totalSavingsAccounts) {
 		
 		assertEquals(maxLength,	getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_atms_xpath"))
