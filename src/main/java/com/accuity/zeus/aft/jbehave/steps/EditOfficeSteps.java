@@ -523,7 +523,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	
 	@Then("the user should see the office's service's values are same as in $source document")
     public void verifyEditOfficeServiceValueFromTrusted(@Named("officeFid") String officeFid,@Named("source") String source){
-        //getEditOfficePage().verifyEditOfficesOfficeTypeValueFromTrusted(officeFid,"type",source);
+		getEditOfficePage().verifyOfficesServicesFromTrusted(officeFid,source);
     }
 	
 	@Then ("the user should see the office service category dropdown values from lookup SERVICE_CATEGORY")
@@ -546,9 +546,9 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().selectsServiceCategoryTypeFromDropdown(serviceCategory,1);
 	}
 	
-	@When("the user selects <newServiceCategory> type in the services for office page")
-	public void selectsServicesCategoryTypeFromDropdown(@Named("newServiceCategory") String newServiceCategory) {
-		getEditOfficePage().selectsExistingServiceCategoryTypeFromDropdown(newServiceCategory);
+	@When("the user updates <serviceCategory> type in the services for office page")
+	public void selectsServicesCategoryTypeFromDropdown(@Named("serviceCategory") String serviceCategory) {
+		getEditOfficePage().selectsExistingServiceCategoryTypeFromDropdown(serviceCategory);
 	}
 	
 	@When("the user enters <serviceOverride> value  in the text box for office page")
@@ -642,5 +642,38 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyOfficeServicesParameterInUI(@Named("serviceCategory") String serviceCategory,
 			@Named("serviceOverride") String serviceOverride) {
 		getEditOfficePage().verifyOfficeServicesParametersInUI(serviceCategory, serviceOverride);
+	}
+	
+	@Then("the user should see the <serviceCategory> <serviceOverride> values updated in $source document")
+	public void verifyOfficeServiceValuesAreUpdatedInZeusDB(@Named("source") String source,
+			@Named("officeFid") String officeFid, @Named("serviceCategory") String serviceCategory,
+			@Named("serviceOverride") String serviceOverride) {
+		List<String> serviceCategoryValues = new ArrayList<>();
+		List<String> serviceOverrideValues = new ArrayList<>();
+		serviceCategoryValues.add(serviceCategory);
+		serviceOverrideValues.add(serviceOverride);
+		getEditOfficePage().verifyOfficeServiceValuesAreUpdatedInZeusDB(source, officeFid, serviceCategoryValues, serviceOverrideValues);
+	}
+	
+	@Then("the user should see the <serviceCategory> <serviceOverride> values not updated in $source document")
+	public void verifyOfficeServiceValuesAreNotUpdatedInZeusDB(@Named("source") String source,
+			@Named("officeFid") String officeFid, @Named("serviceCategory") String serviceCategory,
+			@Named("serviceOverride") String serviceOverride) {
+		List<String> serviceCategoryValues = new ArrayList<>();
+		List<String> serviceOverrideValues = new ArrayList<>();
+		serviceCategoryValues.add(serviceCategory);
+		serviceOverrideValues.add(serviceOverride);
+		getEditOfficePage().verifyOfficeServiceValuesAreUpdatedInZeusDB(source, officeFid, serviceCategoryValues, serviceOverrideValues);
+	}
+	
+	@Then("the user should see the <serviceCategory2> <serviceOverride2> values updated in $source document")
+	public void verifyOfficeServiceValuesAreUpdatedInZeusDB2(@Named("source") String source,
+			@Named("officeFid") String officeFid, @Named("serviceCategory") String serviceCategory,
+			@Named("serviceOverride") String serviceOverride) {
+		List<String> serviceCategoryValues = new ArrayList<>();
+		List<String> serviceOverrideValues = new ArrayList<>();
+		serviceCategoryValues.add(serviceCategory);
+		serviceOverrideValues.add(serviceOverride);
+		getEditOfficePage().verifyOfficeServiceValuesAreUpdatedInZeusDB(source, officeFid, serviceCategoryValues, serviceOverrideValues);
 	}
 }

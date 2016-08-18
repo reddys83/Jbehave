@@ -805,10 +805,10 @@ public class EditOfficePage extends AbstractPage {
     
     public void verifyOfficeServiceCategoryFromLookup() {
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get office service category list");
-		List<WebElement> officeIdentifierTypesList = getDriver()
-				.findElements(OfficeIdentifiers.getObjectIdentifier("office_service_category_id"));
+		List<WebElement> officeServiceCategoryList = getDriver()
+				.findElements(OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_exist_edit_mode_xpath"));
 
-		List<WebElement> options = officeIdentifierTypesList.get(0).findElements(By.cssSelector("option"));
+		List<WebElement> options = officeServiceCategoryList.get(0).findElements(By.cssSelector("option"));
 		for (int indexOfOption = 1; indexOfOption < options.size(); indexOfOption++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(),
 					options.get(indexOfOption).getText().trim());
@@ -853,7 +853,7 @@ public class EditOfficePage extends AbstractPage {
 
 		try {
 			List<WebElement> serviceCategoryDropDowns = getDriver()
-					.findElements(OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_edit_mode_xpath"));
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_exist_edit_mode_xpath"));
 			if (rowNumber <= serviceCategoryDropDowns.size()) {
 				Select dropdown = new Select(serviceCategoryDropDowns.get(rowNumber - 1));
 				if (serviceCategory.equals("")) {
@@ -970,6 +970,171 @@ public class EditOfficePage extends AbstractPage {
 		assertTrue("Deleted Row not present", true);
 	}
    }
+   
+   public String getOfficeServicesFromTrustedDB(String source, String tagName, String officeFid) {
+
+		String tagValue = null;
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, 
+																		"get office service details", nvPairs);
+		if (document != null) {
+			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+					: getNodeValuesByTagName(document, tagName).get(0);
+		}
+		return tagValue;
+	}
+   
+   
+   public void verifyOfficeServiceValuesFromTrustedDB(String source, String officeFid) {
+   	try {
+			attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_service_button_xpath"));
+			List<String> serviceCategory = new ArrayList<>();
+			List<String> serviceOverride = new ArrayList<>();
+			List<WebElement> serviceCategoryDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_edit_mode_xpath"));
+			
+			if (serviceCategoryDropDowns.size() > 0) {
+				List<WebElement> identifierValueDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_value_input_xpath"));
+				List<WebElement> identifierStatusDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_status_input_xpath"));
+				
+				for (int index = 0; index < serviceCategoryDropDowns.size(); index++) {					
+					//identifierTypes.add(new Select(serviceCategoryDropDowns.get(index)).getAllSelectedOptions().get(0).getText());
+					
+				}
+				
+				//verifyOfficeIdentifierValuesFromDB(source, officeFid, identifierTypes, identifierValues,
+						//identifierStatusValues);
+			} else {
+				assertTrue("There is no existing values in Identifier section", true);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+   }
+   
+   public void verifyOfficeServiceValuesAreUpdatedInZeusDB(String source, String officeFid, List<String> serviceCategoryValues,
+			List<String> serviceOverrideValues) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get office service values", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("services").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("services").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						switch (document.getElementsByTagName("services").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "serviceCategoryValues":
+							assertEquals(document.getElementsByTagName("services").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), serviceCategoryValues.get(i));
+							break;
+						case "serviceOverrideValues":
+							assertEquals(document.getElementsByTagName("services").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), serviceOverrideValues.get(i));
+							break;
+						}
+					}
+				}
+			} else
+				assertTrue(source+ "document is null",false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+   
+   public void verifyOfficesServicesFromTrusted(String source, String officeFid) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
+			String serviceCategoryValue=getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_exist_edit_mode_xpath"))
+					.getText();
+			String serviceOverrideValue=getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_override_textbox_edit_mode_xpath"))
+					.getText();
+			
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get office service values", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("services").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("services").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						switch (document.getElementsByTagName("services").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "serviceCategoryValues":
+							assertEquals(document.getElementsByTagName("services").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), serviceCategoryValue);
+							break;
+						case "serviceOverrideValues":
+							assertEquals(document.getElementsByTagName("services").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), serviceOverrideValue);
+							break;
+						}
+					}
+				}
+			} else
+				assertTrue(source+ "document is null",false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+   
+   public void verifyOfficeServiceValuesAreNotUpdatedInZeusDB(String source, String officeFid, List<String> serviceCategoryValues,
+			List<String> serviceOverrideValues) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get office service values", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("services").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("services").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						switch (document.getElementsByTagName("services").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "serviceCategoryValues":
+							assertNotEquals(document.getElementsByTagName("services").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), serviceCategoryValues.get(i));
+							break;
+						case "serviceOverrideValues":
+							assertNotEquals(document.getElementsByTagName("services").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), serviceOverrideValues.get(i));
+							break;
+						}
+					}
+				}
+			} else
+				assertTrue(source+ "document is null",false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+  
+   
     @Override
     public String getPageUrl() {
         return null;
