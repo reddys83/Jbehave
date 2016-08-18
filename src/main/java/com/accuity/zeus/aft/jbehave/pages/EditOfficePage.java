@@ -860,9 +860,8 @@ public class EditOfficePage extends AbstractPage {
 	
 	public void verifyEditOfficeStatisticsValueFromTrusted(String fieldName, String fieldValue)
 			throws InterruptedException {
-		
-		assertEquals(fieldName + " in trusted document is not matching with UI value", getDriver().findElement(
-				          OfficeIdentifiers.getObjectIdentifier("office_total_atms_xpath")).getAttribute("value"));
+		assertEquals(fieldName + " in trusted document is not matching with UI value", getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_total_atms_xpath")).getAttribute("value"));
 	}
 
 	public void verifyOfficeStatisticsValueInUI(String totalAtms, String totalCheckingAccounts,

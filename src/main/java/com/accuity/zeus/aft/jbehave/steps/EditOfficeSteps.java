@@ -604,17 +604,19 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@Then("the user verifies the office statistics values are updated in $source document for fid <officeFid>")
-	public void verifyOfficeStatisticsUpdatedValuesFromZeus(@Named("officeFid") String fid,
-			@Named("source") String source, @Named("totalAtms") String totalAtms,
-			@Named("totalCheckingAccounts") String totalCheckingAccounts,
+	public void verifyOfficeStatisticsUpdatedValuesFromZeus(@Named("officeFid") String fid, @Named("source") String source, 
+			@Named("totalAtms") String totalAtms, @Named("totalCheckingAccounts") String totalCheckingAccounts,
 			@Named("totalSavingsAccounts") String totalSavingsAccounts) {
 		Map<String, String> inputParameters = new HashMap<String, String>();
 		inputParameters.put("fid", fid);
 		inputParameters.put("source", source);
 
-		getEditOfficePage().verifyOfficeStatisticsValueFromZeus("numberOfAtms", totalAtms, getDataPage().getTagValueFromDB("get office statistics values", "numberOfAtms", inputParameters));
-		getEditOfficePage().verifyOfficeStatisticsValueFromZeus("numberOfCheckingAccounts", totalCheckingAccounts, getDataPage().getTagValueFromDB("get office statistics values", "numberOfCheckingAccounts", inputParameters));
-		getEditOfficePage().verifyOfficeStatisticsValueFromZeus("numberOfSavingsAccounts", totalCheckingAccounts, getDataPage().getTagValueFromDB("get office statistics values", "numberOfSavingsAccounts", inputParameters));
+		getEditOfficePage().verifyOfficeStatisticsValueFromZeus("numberOfAtms", totalAtms, 
+				getDataPage().getTagValueFromDB("get office statistics values", "numberOfAtms", inputParameters));
+		getEditOfficePage().verifyOfficeStatisticsValueFromZeus("numberOfCheckingAccounts", totalCheckingAccounts, 
+				getDataPage().getTagValueFromDB("get office statistics values", "numberOfCheckingAccounts", inputParameters));
+		getEditOfficePage().verifyOfficeStatisticsValueFromZeus("numberOfSavingsAccounts", totalCheckingAccounts, 
+				getDataPage().getTagValueFromDB("get office statistics values", "numberOfSavingsAccounts", inputParameters));
 	}
 
 	@Then("the user verifies office statistics page fields max length attribute is $maxLength")
@@ -626,17 +628,17 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@Then("the user should see the $errorMessage error message for the total atms field in the office statistics page")
-	public void verifyErrorMessageForRequiredTotalAtms(@Named("errorMessage") String errorMessage) {
+	public void verifyErrorMessageForTotalAtms(@Named("errorMessage") String errorMessage) {
 		getEditOfficePage().verifyErrorMessageForTotalAtm(errorMessage);
 	}
 
 	@Then("the user should see the $errorMessage error message for the total checking accounts field in the office statistics page")
-	public void verifyErrorMessageForRequiredTotalCheckingAccounts(@Named("errMsg") String errorMessage) {
+	public void verifyErrorMessageForTotalCheckingAccounts(@Named("errMsg") String errorMessage) {
 		getEditOfficePage().verifyErrorMessageForTotalCheckingAccounts(errorMessage);
 	}
 
 	@Then("the user should see the $errorMessage error message for the total savings account field in the office statistics page")
-	public void verifyErrorMessageForRequiredTotalAtmField(@Named("errMsg") String errorMessage) {
+	public void verifyErrorMessageForTotalSavingsAccount(@Named("errMsg") String errorMessage) {
 		getEditOfficePage().verifyErrorMessageForTotalSavingsAccount(errorMessage);
 	}
 }

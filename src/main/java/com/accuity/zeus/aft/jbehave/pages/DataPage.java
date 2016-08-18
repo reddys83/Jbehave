@@ -1339,26 +1339,22 @@ public class DataPage extends AbstractPage {
         assertTrue(response == 202);
     }
     
-    public String getTagValueFromDB(String queryName, String tagName, Map<String, String> inputParameters) {
-        try {
-               String tagValue = null;
-               List<NameValuePair> nvPairs = new ArrayList<>();
-               for (Map.Entry<String, String> entry : inputParameters.entrySet()) {
-                     nvPairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
-               }
-               Thread.sleep(5000L);
-               Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, queryName,
-                            nvPairs);
-               if (document != null) {
-                     tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
-                                   : getNodeValuesByTagName(document, tagName).get(0);
-               }
-               return tagValue;
-        } catch (InterruptedException e) {
-               e.printStackTrace();
-               return null;
-        }
- }
-
-
+	public String getTagValueFromDB(String queryName, String tagName, Map<String, String> inputParameters) {
+		String tagValue = null;
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			for (Map.Entry<String, String> entry : inputParameters.entrySet()) {
+				nvPairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+			}
+			Thread.sleep(2000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, queryName, nvPairs);
+			if (document != null) {
+				tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? "" 
+						: getNodeValuesByTagName(document, tagName).get(0);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return tagValue;
+	}
 }
