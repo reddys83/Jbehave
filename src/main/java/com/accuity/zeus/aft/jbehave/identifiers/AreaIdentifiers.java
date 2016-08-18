@@ -75,7 +75,10 @@ public class AreaIdentifiers {
 		hmap.put("timezone_utc_current_value_xpath", By.xpath("//*[@name='utc3']//option[@selected='selected']"));		
 		hmap.put("summary_current_value_view_mode_xpath", By.xpath("//*[@id='areaBasicInfo']//dl[dt='Summary']/dd"));
 		hmap.put("area_timezone_add_button_xpath", By.xpath("//*[@id='areaBasicInfo']//*[@id='add-timeZones']"));
-
+		hmap.put("area_use_in_address_true", By.xpath("//*[@id='areaBasicInfo']//input[@value='true']"));
+		hmap.put("area_use_in_address_false", By.xpath("//*[@id='areaBasicInfo']//input[@value='false']"));
+		hmap.put("area_address_flag_view_mode_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='Use in Address']/td"));
+		hmap.put("area_address_flag_edit_mode_xpath", By.xpath("//input[@name='useInAddress']"));
 	}
 
 	public static By getObjectIdentifier(String key) {

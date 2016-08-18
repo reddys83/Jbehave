@@ -8,8 +8,6 @@ JIRA ID - ZEUS-910 - User can edit Legal Entity's Board Meetings
 
 Scenario: Verify legalEntity board meeting type values should list month and quater
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -29,8 +27,6 @@ Examples:
 
 Scenario: Verify legalEntity board meeting value dropdown for type MONTH
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -62,8 +58,6 @@ Examples:
 
 Scenario: Verify legalEntity board meeting value dropdown for type QUATER
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -87,8 +81,6 @@ Examples:
 
 Scenario: Veirfy the valid inputs for legalEntity Board meeting - Bug-ZEUS-1225
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -116,8 +108,6 @@ Examples:
 
 Scenario: Verify the error message for summary field.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -134,8 +124,6 @@ Examples:
 
 Scenario: Verify legalEntity board meeting value dropdown for type MONTH
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -165,8 +153,6 @@ Examples:
 
 Scenario: Delete and Save existing board meetings
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

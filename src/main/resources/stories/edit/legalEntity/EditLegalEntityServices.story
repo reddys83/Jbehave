@@ -9,8 +9,6 @@ JIRA ID - ZEUS-1173 - Error handling when error is in section not currently disp
 
 Scenario: Verify legalEntity services category,Override,Financial Category and Financial Details values are coming from SERVICE_CATEGORY, FINANCIAL_SERVICE look up tables for new and existing row
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -33,8 +31,6 @@ Examples:
 
 Scenario: Update and Save existing legal Entity services
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -59,8 +55,6 @@ Examples:
 
 Scenario: Add a new row and Save new legal Entity services
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -86,8 +80,6 @@ Examples:
 
 Scenario: Delete and Save existing credit ratings
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -108,12 +100,10 @@ Then the user should not see legal entity service values for fid <fid> in zeus d
 Then the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|category|override|financialCategory|financialDetails|
-|1010|FID|1010|Correspondent Banking|Banking|Consumer Credit|Visa|
+|1010|FID|1010|Correspondent Banking|General Services|Consumer Credit|Visa|
 
 Scenario: Delete newly added services
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -139,8 +129,6 @@ Scenario: Verify Offered Service Category and financial category details fields 
 Override field maximum length is 100 characters.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -165,8 +153,6 @@ Examples:
 Scenario: ZEUS-1173- Verify when user is viewing a section other than Services and Services section has some errors, upon saving the legal entity,
 the user should automatically navigate to All section
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -189,8 +175,6 @@ Examples:
 Scenario: ZEUS-1173- Verify when user is viewing Services section and Services and Basic info sections have some errors, upon saving the legal entity,
 the user should automatically navigate to All section.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -217,8 +201,6 @@ Examples:
 Scenario: ZEUS-1173- Verify when user is viewing Services section and Services section only has some errors, upon saving the legal entity,
 the user should still stay in Services section
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
