@@ -29,6 +29,7 @@ public class EditOfficePage extends AbstractPage {
     static String endpointWithID;
     public String EditSortNameValue = "";
     public String EditOfficeSortName = "";
+    public static String officeHistoryMaximumCharacter = null;
 
     public EditOfficePage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -856,6 +857,78 @@ public class EditOfficePage extends AbstractPage {
 				.getAttribute("maxlength")), maxLength);
 	}
     
+	public String getOfficeHistoryFromDB(String source, String tagName, String officeFid) {
+
+		String tagValue = null;
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, 
+																		"get office history details", nvPairs);
+		if (document != null) {
+			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+					: getNodeValuesByTagName(document, tagName).get(0);
+		}
+		return tagValue;
+	}
+
+	public void verifyOfficeHistoryFromTrustedDB(String source, String tagName, String officeFid) {
+		assertEquals(getOfficeHistoryFromDB(source, tagName, officeFid), getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_edit_mode_xpath")).getText());
+	}
+
+	public void enterOfficeHistory(String officeHistoryValue) {
+		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_history_edit_mode_xpath"), officeHistoryValue);
+	}
+
+	public void verifyOfficeHistory(String officeHistoryValue) {
+		try {
+			Thread.sleep(2000);
+			assertEquals(officeHistoryValue, getDriver()
+					.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_view_mode_xpath")).getText());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyOfficeHistoryZeus(String source, String tagName, String officeFid) {
+		assertEquals(getOfficeHistoryFromDB(source, tagName, officeFid), getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_view_mode_xpath")).getText());
+	}
+
+	public void enterCharactersInOfficeHistory() {
+		String officeHistoryText = createBigString(10000);
+		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_history_edit_mode_xpath"), officeHistoryText);
+		officeHistoryMaximumCharacter = officeHistoryText;
+	}
+
+	public void verifyMaxLengthOfficeHistory(String maxLength) {
+		assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_history_edit_mode_xpath"))
+				.getAttribute("maxlength"), maxLength);
+	}
+
+	public void verifyValidCharacterLengthOfficeHistory() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Integer officeHistoryLength = getDriver().findElement(OfficeIdentifiers
+				.getObjectIdentifier("office_history_view_mode_xpath")).getText().length();
+		assertEquals(officeHistoryLength.toString(), "10000");
+	}
+
+	public void verifyMaximumTextInOfficeHistory() {
+		assertEquals(officeHistoryMaximumCharacter.subSequence(0, 10000), getDriver()
+				.findElement(OfficeIdentifiers.getObjectIdentifier("office_history_view_mode_xpath")).getText());
+	}
+	
     @Override
     public String getPageUrl() {
         return null;

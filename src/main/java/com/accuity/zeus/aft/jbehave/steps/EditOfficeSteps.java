@@ -561,5 +561,44 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyOfficeBusinessHoursMaxLenghtAttribute(@Named("maxLength") String maxLength) {
 		getEditOfficePage().verifyOfficeBusinessHoursMaxLenghtAttribute(maxLength);
 	}
-}
+	
+	@Then("the user should see the Office History value in office page is same as per $source document")
+	public void verifyOfficeHistoryFromTrustedDB(@Named("officeFid") String officeFid, @Named("source") String source) {
+		getEditOfficePage().verifyOfficeHistoryFromTrustedDB(source, "officeHistory", officeFid);
+	}
 
+	@When("the user enters <officeHistory> value in Office page")
+	public void enterOfficeHistory(@Named("officeHistory") String officeHistory) {
+		getEditOfficePage().enterOfficeHistory(officeHistory);
+	}
+
+	@Then("the user should see the entered <officeHistory> in Office page")
+	public void verifyOfficeHistory(@Named("officeHistory") String officeHistory) {
+		getEditOfficePage().verifyOfficeHistory(officeHistory);
+	}
+
+	@Then("the user should see the entered Office History in $source document")
+	public void verifyOfficeHistoryZeus(@Named("officeFid") String officeFid, @Named("source") String source) {
+		getEditOfficePage().verifyOfficeHistoryZeus(source, "officeHistory", officeFid);
+	}
+
+	@When("the user enters values which is beyond 10000 unicode characters in the Office History field")
+	public void enterCharactersInOfficeHistory() {
+		getEditOfficePage().enterCharactersInOfficeHistory();
+	}
+
+	@Then("the user should see maximum length of office history is limited to $maxLength")
+	public void verifyMaxLengthOfficeHistory(@Named("maxLength") String maxLength) {
+		getEditOfficePage().verifyMaxLengthOfficeHistory(maxLength);
+	}
+
+	@Then("the user should be able to view that only 10000 unicode characters are saved in Office History field")
+	public void verifyValidCharacterLengthOfficeHistory() {
+		getEditOfficePage().verifyValidCharacterLengthOfficeHistory();
+	}
+
+	@Then("the user should be able to verify the maximum values are entered in the Office History field")
+	public void verifyMaximumTextInOfficeHistory() {
+		getEditOfficePage().verifyMaximumTextInOfficeHistory();
+	}
+}
