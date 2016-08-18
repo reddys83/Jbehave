@@ -5,6 +5,7 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.Response;
 import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.utils.SimpleCacheManager;
@@ -1337,4 +1338,22 @@ public class DataPage extends AbstractPage {
         int response = restClient.putDocumentByID(endpoint, heraApi, xmlDocument.toString(),url);
         assertTrue(response == 202);
     }
+    
+    public void deleteAllRows(By by) {
+		
+		List<WebElement> deleteRows = getDriver()
+				.findElements(by);
+
+		for (int index = 0; index < deleteRows.size(); index++) {
+			WebElement currentInstance = getDriver()
+					.findElements(by).get(0);
+			if (currentInstance != null) {
+				currentInstance.click();
+				verifyDeleteConfirmationModal();
+				clickOnYesButtonInDeleteConfirmationModal();
+			}
+
+		}
+
+	}
 }

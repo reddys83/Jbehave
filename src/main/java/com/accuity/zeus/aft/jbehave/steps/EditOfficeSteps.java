@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -571,17 +572,18 @@ public class EditOfficeSteps extends AbstractSteps{
 	@Then("the user should see the office service category dropdown values from lookup SERVICE_CATEGORY")
 	public void verifyOfficeServiceCategoryFromLookup() {
 		getEditOfficePage().verifyOfficeServiceCategoryFromLookup();
-	}
-
-	@When("the user deletes the existing service rows")
-	public void deleteAllServiceRows() {
-		getEditOfficePage().deleteAllServiceRows();
-	}
+	}	
 
 	@When("the user clicks on the add button for adding new services for office page")
 	public void clickOnAddServicesButton() {
 		getEditOfficePage().clickOnAddServicesButton();
 	}
+	
+	@When("the user deletes all service rows in office page")
+	public void deleteAllRows() {
+		getEditOfficePage().clickOnAddServicesButton();
+		getDataPage().deleteAllRows(OfficeIdentifiers.getObjectIdentifier("office_services_delete_button_xpath"));
+	}	
 
 	@When("the user selects <serviceCategory> type in the services for office page")
 	public void selectsServiceCategoryTypeFromDropdown(@Named("serviceCategory") String serviceCategory) {
@@ -598,7 +600,7 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().enterServiceOverrideValue(serviceOverride, 1);
 	}
 
-	@Then("the user verifies that previously selected <serviceCategory> is not displayed in TYPE (DropDown) in second row")
+	@Then("the user verifies that previously selected <serviceCategory> is not displayed in second row")
 	public void verifySelectedOfficeServiceCategoryNotInNewRow(@Named("serviceCategory") String serviceCategory) {
 		getEditOfficePage().verifySelectedOfficeServiceCategoryNotInNewRow(serviceCategory, 2);
 	}
@@ -622,19 +624,9 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().verifyOfficeServiceParametersInUI(serviceCategoryValues, serviceOverrideValues);
 	}
 
-	@When("the user enters values which is beyond 100 unicode characters in the office service field")
-	public void enterInvalidCharactersInOfficeServices() {
-		getEditOfficePage().enterInvalidCharactersInServiceOverride();
-	}
-
 	@Then("the user should see maximum length of office service value is limited to $maxLength")
 	public void verifyMaxLengthOfficeService(@Named("maxLength") String maxLength) {
 		getEditOfficePage().verifyMaxLengthInServiceOverride(maxLength);
-	}
-
-	@Then("the user should be able to view that only 100 unicode characters are saved in office service field")
-	public void viewValidCharacterLengthServiceOvveride() {
-		getEditOfficePage().viewValidCharacterLengthServiceOvveride();
 	}
 
 	@Then("the user should see error message for the required office Service Category field in office page")
@@ -691,7 +683,7 @@ public class EditOfficeSteps extends AbstractSteps{
 				serviceOverrideValues);
 	}
 
-	@Then("the user should see the <serviceCategory> <serviceOverride> <serviceCategory2> <serviceOverride2> values updated in $source document")
+	@Then("the user should see the user should see the  Office Services values updated in $source document")
 	public void verifyOfficeMultipleServiceValuesAreUpdatedInZeusDB(@Named("source") String source,
 			@Named("officeFid") String officeFid, @Named("serviceCategory") String serviceCategory,
 			@Named("serviceOverride") String serviceOverride, @Named("serviceCategory2") String serviceCategory2,
