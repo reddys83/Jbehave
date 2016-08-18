@@ -354,24 +354,23 @@ public abstract class AbstractPage {
         return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("resource").getNodeValue();
     }
     
-    public void selectDropDownValueFromRowNumber(By by, String value,int rowNumber) {
-    	try {
-		List<WebElement> dropdownValue = getDriver().findElements(by);
-		if (rowNumber <= dropdownValue.size()) {
-			Select dropdown = new Select(dropdownValue.get(rowNumber - 1));
-			if (value.equals("")) {
-				dropdown.selectByValue(value);
-			} else {
-				dropdown.selectByVisibleText(value);
+    public void selectDropDownValueFromRowNumber(By by, String value, int rowNumber) {
+		try {
+			List<WebElement> dropdownValue = getDriver().findElements(by);
+			if (rowNumber <= dropdownValue.size()) {
+				Select dropdown = new Select(dropdownValue.get(rowNumber - 1));
+				if (value.equals("")) {
+					dropdown.selectByValue(value);
+				} else {
+					dropdown.selectByVisibleText(value);
+				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-    
     }
     
-    public void selectTexBoxValueFromRowNumber(By by,String value,int rowNumber) {
+    public void selectTexBoxValueFromRowNumber(By by, String value, int rowNumber) {
 		try {
 			List<WebElement> textBoxValues = getDriver().findElements(by);
 			if (rowNumber <= textBoxValues.size()) {

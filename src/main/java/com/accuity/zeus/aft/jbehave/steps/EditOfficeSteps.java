@@ -635,7 +635,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@Then("the user should see the Office Services values are updated in office services page")
-	public void verifyOfficeServiceParametersInUI(@Named("serviceCategory2") String serviceCategory2,
+	public void verifyOfficeServiceParameters2InUI(@Named("serviceCategory2") String serviceCategory2,
 			@Named("serviceOverride2") String serviceOverride2) {
 		String[] serviceCategoryValues = { serviceCategory2 };
 		String[] serviceOverrideValues = { serviceOverride2 };

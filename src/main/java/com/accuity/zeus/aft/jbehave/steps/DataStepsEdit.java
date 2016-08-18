@@ -7,7 +7,6 @@ import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
-import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -112,5 +111,4 @@ public class DataStepsEdit extends AbstractSteps {
 	public void verifyAreaPlacesView() {
 		getDataPage().verifyAreaPlacesView();
 	}
-		
 }

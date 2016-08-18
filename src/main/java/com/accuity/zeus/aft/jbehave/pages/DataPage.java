@@ -1339,21 +1339,15 @@ public class DataPage extends AbstractPage {
         assertTrue(response == 202);
     }
     
-    public void deleteAllRows(By by) {
-		
-		List<WebElement> deleteRows = getDriver()
-				.findElements(by);
-
+	public void deleteAllRows(By by) {
+		List<WebElement> deleteRows = getDriver().findElements(by);
 		for (int index = 0; index < deleteRows.size(); index++) {
-			WebElement currentInstance = getDriver()
-					.findElements(by).get(0);
+			WebElement currentInstance = getDriver().findElements(by).get(0);
 			if (currentInstance != null) {
 				currentInstance.click();
 				verifyDeleteConfirmationModal();
 				clickOnYesButtonInDeleteConfirmationModal();
 			}
-
 		}
-
 	}
 }
