@@ -19,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.w3c.dom.Document;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import static org.junit.Assert.*;
 
 
@@ -856,82 +858,48 @@ public class EditOfficePage extends AbstractPage {
 				.getAttribute("maxlength")), maxLength);
 	}
 	
-	public void verifyEditOfficeStatisticsValueFromTrusted(String officeFid, String tagName, String tagName1,
-			String tagName2, String source) throws InterruptedException {
-		assertEquals(getOfficeStatisticsInfoFromDB(officeFid, tagName, source), getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_total_atms_xpath")).getAttribute("value"));
-		assertEquals(getOfficeStatisticsInfoFromDB(officeFid, tagName1, source),
-				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_checking_accounts_xpath"))
-						.getAttribute("value"));
-		assertEquals(getOfficeStatisticsInfoFromDB(officeFid, tagName2, source),
-				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_savings_accounts_xpath"))
-						.getAttribute("value"));
+	public void verifyEditOfficeStatisticsValueFromTrusted(String fieldName, String fieldValue)
+			throws InterruptedException {
+		
+		assertEquals(fieldName + " in trusted document is not matching with UI value", getDriver().findElement(
+				          OfficeIdentifiers.getObjectIdentifier("office_total_atms_xpath")).getAttribute("value"));
 	}
 
 	public void verifyOfficeStatisticsValueInUI(String totalAtms, String totalCheckingAccounts,
-			String totalSavingsAccounts) throws InterruptedException {		
+			String totalSavingsAccounts) throws InterruptedException {
+		
 		assertEquals(totalAtms, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_atms_view_xpath")).getText());
 		assertEquals(totalCheckingAccounts,	getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_checking_accounts_view_xpath")).getText());
 		assertEquals(totalSavingsAccounts, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_savings_accounts_view_xpath")).getText());
 	}
 
-	public void verifyOfficeStatisticsValueFromZeus(String officeFid, String source, String totalAtms,
-			String totalCheckingAccounts, String totalSavingsAccounts) {	
-		assertEquals(getOfficeStatisticsInfoFromDB(officeFid, "numberOfAtms", source), totalAtms);
-		assertEquals(getOfficeStatisticsInfoFromDB(officeFid, "numberOfCheckingAccounts", source), totalCheckingAccounts);
-		assertEquals(getOfficeStatisticsInfoFromDB(officeFid, "numberOfSavingsAccounts", source), totalSavingsAccounts);
+	public void verifyOfficeStatisticsValueFromZeus(String fieldName, String fieldValue, String fieldValueInDB) {
+		assertEquals(fieldName + " field value in zeus DB is not matching with UI", fieldValue, fieldValueInDB);
 	}
 
 	public void verifyOfficeStatisticsFieldsMaxLenghtAttribute(String maxLength, String totalAtms,
 			String totalCheckingAccounts, String totalSavingsAccounts) {
-		assertEquals(maxLength,getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_atms_xpath"))
+		
+		assertEquals(maxLength,	getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_atms_xpath"))
 						.getAttribute("maxlength"));
-		assertEquals(maxLength,getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_checking_accounts_xpath"))
+		assertEquals(maxLength,	getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_checking_accounts_xpath"))
 						.getAttribute("maxlength"));
-		assertEquals(maxLength,getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_savings_accounts_xpath"))
+		assertEquals(maxLength,	getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_savings_accounts_xpath"))
 						.getAttribute("maxlength"));
 	}
 
 	public void verifyErrorMessageForTotalAtm(String errMsg) {
-		textToBePresentInElement(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_atms_err_msg_xpath")));
-		assertEquals(errMsg, getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_total_atms_err_msg_xpath")).getText());
+		assertEquals(errMsg, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_atms_err_msg_xpath")).getText());
 	}
 
-	public void verifyErrorMessageForTotalCheckingAccounts(String errMsg) {
-		textToBePresentInElement(getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_total_checking_accounts_err_msg_xpath")));
-		assertEquals(errMsg,getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_checking_accounts_err_msg_xpath"))
-						.getText());
+	public void verifyErrorMessageForTotalCheckingAccounts(String errMsg) {		
+		assertEquals(errMsg, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_checking_accounts_err_msg_xpath")).getText());
 	}
 
-	public void verifyErrorMessageForTotalSavingsAccount(String errMsg) {
-		textToBePresentInElement(getDriver()
-				.findElement(OfficeIdentifiers.getObjectIdentifier("office_total_savings_accounts_err_msg_xpath")));
-		assertEquals(errMsg,getDriver()	.findElement(OfficeIdentifiers.getObjectIdentifier("office_total_savings_accounts_err_msg_xpath"))
-						.getText());
+	public void verifyErrorMessageForTotalSavingsAccount(String errMsg) {		
+		assertEquals(errMsg, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_savings_accounts_err_msg_xpath")).getText());
 	}
 
-	public String getOfficeStatisticsInfoFromDB(String fid, String tagName, String source) {
-
-		String tagValue = null;
-		List<NameValuePair> nvPairs = new ArrayList<>();
-		nvPairs.add(new BasicNameValuePair("fid", fid));
-		nvPairs.add(new BasicNameValuePair("source", source));
-		try {
-			Thread.sleep(7000L);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-				"get office statistics values", nvPairs);
-		if (document != null) {
-			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
-					: getNodeValuesByTagName(document, tagName).get(0);
-		}
-		return tagValue;
-	}
-	
 	public void enterValueInStatisticsPageTextField(String textField, String value) {
 		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier(textField), value);
 	}

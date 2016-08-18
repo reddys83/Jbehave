@@ -32,7 +32,7 @@ And the user enters the office total atms value as <totalAtms>
 And the user enters the office total checking accounts value as <totalCheckingAccounts>
 And the user enters the office total savings accounts value as <totalSavingsAccounts>
 And the user clicks on the save button
-Then the user should not see the below summary changes in confirmation modal
+Then the user should see the below summary changes in confirmation modal
 |Summary|
 |Statistics|
 When the user clicks on the confirm button
@@ -111,5 +111,5 @@ Then the user should see the Enter up to 8 valid numbers. error message for the 
 
 Examples:
 |entity|searchBy|fid|officeFid|totalAtms|totalCheckingAccounts|totalSavingsAccounts|
-|1038|FID|1038|1038-51|123,rw|123.ty|12345g3|
+|1038|FID|1038|1038-51|123%rw|123#ty|123$&Gs|
 

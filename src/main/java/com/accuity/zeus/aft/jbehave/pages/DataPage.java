@@ -22,6 +22,7 @@ import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -1337,4 +1338,27 @@ public class DataPage extends AbstractPage {
         int response = restClient.putDocumentByID(endpoint, heraApi, xmlDocument.toString(),url);
         assertTrue(response == 202);
     }
+    
+    public String getTagValueFromDB(String queryName, String tagName, Map<String, String> inputParameters) {
+        try {
+               String tagValue = null;
+               List<NameValuePair> nvPairs = new ArrayList<>();
+               for (Map.Entry<String, String> entry : inputParameters.entrySet()) {
+                     nvPairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+               }
+               Thread.sleep(5000L);
+               Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, queryName,
+                            nvPairs);
+               if (document != null) {
+                     tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+                                   : getNodeValuesByTagName(document, tagName).get(0);
+               }
+               return tagValue;
+        } catch (InterruptedException e) {
+               e.printStackTrace();
+               return null;
+        }
+ }
+
+
 }
