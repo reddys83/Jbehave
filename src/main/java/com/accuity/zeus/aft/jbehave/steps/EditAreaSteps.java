@@ -751,4 +751,26 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyMaxLengthInterestRate(@Named("maxLength") String maxLength) {
 		getEditAreaPage().verifyMaxLengthInterestRate(maxLength);
 	}
+		
+	@When("the user clicks on <useInAddress> option for Area Use in Address")
+	public void selectUseInAddress(@Named("useInAddress") String useInAddress) {
+		getEditAreaPage().selectUseInAddress(useInAddress);
+	}
+
+	@Then("the user should see the updated <useInAddress> in area web page")
+	public void verifyUseInAddressInAreaPage(@Named("useInAddress") String useInAddress) {
+		getEditAreaPage().verifyUseInAddressInAreaPage(useInAddress);
+	}
+
+	@Then("the user should see updated Use in address value in $source document")
+	public void verifyUseInAddressAreaFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source) {
+		getEditAreaPage().verifyUseInAddressAreaFromZeusDB(country, area, "areaUseInAddress", source);
+	}
+
+	@Then("the user should see Use in address value is retrieved from $source document")
+	public void verifyUseInAddressAreaFromTrustedDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source) {
+		getEditAreaPage().verifyUseInAddressAreaFromTrustedDB(country, area, "areaUseInAddress", source);
+	}
 }

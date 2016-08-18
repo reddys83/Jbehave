@@ -11,8 +11,6 @@ a) Verify legalEntity History value can be updated with a  new value and can be 
 b) Verify legalEntity History can be updated with the same value and the confirmation summary is not displayed.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -46,8 +44,6 @@ Scenario:
 a) Verify that the Legal Entity's history field max length is 10000 characters only.
 b) Verify that blank value can be entered and saved in History field.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

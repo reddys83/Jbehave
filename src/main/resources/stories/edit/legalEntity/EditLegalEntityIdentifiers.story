@@ -10,8 +10,6 @@ Scenario: For existing rows verify Legal Entity's identifiers Type and Status dr
 a) Verify for an existing Legal Entity's identifiers row, the Legal Entity's ientifier Type values are from THIRD_PARTY_IDENTIFIER_LEGAL_ENTITY
 b) Verify for an existing Legal Entity's identifiers row, the Legal Entity's identifier Status values are from STATUS
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -33,8 +31,6 @@ a) Verify for a new Legal Entity's identifiers row, the Legal Entity's identifie
 b) Verify for a new Legal Entity's identifiers row, the Legal Entity's identifier Status values are from STATUS
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -54,8 +50,6 @@ Examples:
 Scenario: For existing rows, update the Type, Value,and Status and click Save. Updated Identifier is verified zeus document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -82,8 +76,6 @@ Examples:
 Scenario: For new row, add the Type, Value,and Status and click Save. Updated Identifier is verified zeus document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -109,8 +101,6 @@ Examples:
 
 Scenario: For existing rows, verify row can be deleted by clicking on the yes button in delete confirmation section.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the country tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -133,8 +123,6 @@ Examples:
 
 Scenario: User can edit Legal Entity's identifiers- Verifying new row can be deleted by click on enter on the yes button in delete confirmation section.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the country tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -159,8 +147,6 @@ Examples:
 Scenario: Verify Legal Entity's identifier value field max length is 50
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the country tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -184,8 +170,6 @@ User should see Required error message for type field when user enters a value f
 User should see Required error message for status field when user selects a type and enters a value but keeps the status field blank
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

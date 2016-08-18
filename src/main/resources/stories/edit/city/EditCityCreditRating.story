@@ -150,7 +150,7 @@ Examples:
 |USA|Montana|Belt||||1|
 
 Scenario: User has selected to add credit rating row and entering one of the agency dropdown and also value, error message should be thrown while saving
-
+Meta:@wed34
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -443,4 +443,4 @@ And the user should see the error message at top of page the highlighted fields 
 
 Examples:
 |country|area|city|agency|type|rowNumber|
-|USA|Alabama|Alexandria||Long Term Rating|1|
+|USA|Montana|Belt||Long Term Rating|1|
