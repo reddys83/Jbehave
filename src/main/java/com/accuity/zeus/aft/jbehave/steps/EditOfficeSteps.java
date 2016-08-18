@@ -614,7 +614,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@Then("the user should see the Office Services values updated in office services page")
-	public void verifyOfficeServicesParametersInUI(@Named("serviceCategory") String serviceCategory,
+	public void verifyOfficeServiceParametersInUI(@Named("serviceCategory") String serviceCategory,
 			@Named("serviceOverride") String serviceOverride, @Named("serviceCategory2") String serviceCategory2,
 			@Named("serviceOverride2") String serviceOverride2) {
 		String[] serviceCategoryValues = { serviceCategory, serviceCategory2 };
@@ -643,9 +643,11 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@Then("the user should see the Office Services values are updated in office services page")
-	public void verifyOfficeServicesParametersInUI(@Named("serviceCategory2") String serviceCategory2,
+	public void verifyOfficeServiceParametersInUI(@Named("serviceCategory2") String serviceCategory2,
 			@Named("serviceOverride2") String serviceOverride2) {
-		getEditOfficePage().verifyOfficeServicesParametersInUI(serviceCategory2, serviceOverride2);
+		String[] serviceCategoryValues = { serviceCategory2 };
+		String[] serviceOverrideValues = { serviceOverride2 };
+		getEditOfficePage().verifyOfficeServiceParametersInUI(serviceCategoryValues, serviceOverrideValues);
 	}
 
 	@When("the user selects <serviceCategory2> type in the services office page")
@@ -672,7 +674,9 @@ public class EditOfficeSteps extends AbstractSteps{
 	@Then("the user should see Office Services values are updated in office services page")
 	public void verifyOfficeServicesParameterInUI(@Named("serviceCategory") String serviceCategory,
 			@Named("serviceOverride") String serviceOverride) {
-		getEditOfficePage().verifyOfficeServicesParametersInUI(serviceCategory, serviceOverride);
+		String[] serviceCategoryValues = { serviceCategory };
+		String[] serviceOverrideValues = { serviceOverride };
+		getEditOfficePage().verifyOfficeServiceParametersInUI(serviceCategoryValues, serviceOverrideValues);
 	}
 
 	@Then("the user should see the <serviceCategory> <serviceOverride> values updated in $source document")

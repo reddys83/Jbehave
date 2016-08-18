@@ -402,7 +402,7 @@ public class EditCityPage extends AbstractPage {
 		try {
 			assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_save_confirmation_message_id"))
 					.isDisplayed());
-			Thread.sleep(4000);// wait for page to get refreshed with newly saved values
+			Thread.sleep(3000);// wait for page to get refreshed with newly saved values
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

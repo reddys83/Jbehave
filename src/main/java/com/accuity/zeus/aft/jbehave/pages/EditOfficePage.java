@@ -4,7 +4,6 @@ import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
-import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.commons.collections.ListUtils;
@@ -30,7 +29,6 @@ public class EditOfficePage extends AbstractPage {
     static String endpointWithID;
     public String EditSortNameValue = "";
     public String EditOfficeSortName = "";
-    public static String officeServicesMaximumCharacter=null;
     
     public EditOfficePage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -862,7 +860,7 @@ public class EditOfficePage extends AbstractPage {
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
 				"get office service category list");
 		List<WebElement> officeServiceCategoryList = getDriver().findElements(
-				OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_exist_edit_mode_xpath"));
+				OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_edit_mode_xpath"));
 
 		List<WebElement> options = officeServiceCategoryList.get(0).findElements(By.cssSelector("option"));
 		for (int indexOfOption = 1; indexOfOption < options.size(); indexOfOption++) {
@@ -894,7 +892,8 @@ public class EditOfficePage extends AbstractPage {
 					.findElements(OfficeIdentifiers.getObjectIdentifier("office_services_delete_button_xpath")).get(0);
 			if (currentInstance != null) {
 				currentInstance.click();
-				verifyDeleteConfirmationModalService();
+				//verifyDeleteConfirmationModalService();
+				
 				pressEnterButtonInDeleteConfirmationModalForOffice();
 			}
 
@@ -910,7 +909,7 @@ public class EditOfficePage extends AbstractPage {
 
 		try {
 			List<WebElement> serviceCategoryDropDowns = getDriver().findElements(
-					OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_exist_edit_mode_xpath"));
+					OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_edit_mode_xpath"));
 			if (rowNumber <= serviceCategoryDropDowns.size()) {
 				Select dropdown = new Select(serviceCategoryDropDowns.get(rowNumber - 1));
 				if (serviceCategory.equals("")) {
@@ -926,7 +925,7 @@ public class EditOfficePage extends AbstractPage {
 
 	public void selectsExistingServiceCategoryTypeFromDropdown(String serviceCategory) {
 		selectItemFromDropdownListByText(
-				OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_exist_edit_mode_xpath"),
+				OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_edit_mode_xpath"),
 				serviceCategory);
 	}
 
@@ -969,7 +968,7 @@ public class EditOfficePage extends AbstractPage {
 		}
 	}
 
-	public void verifyOfficeServicesParametersInUI(String serviceCategory, String serviceOverride) {
+	/*public void verifyOfficeServicesParametersInUI(String serviceCategory, String serviceOverride) {
 
 		try {
 			assertEquals(serviceCategory,
@@ -982,13 +981,12 @@ public class EditOfficePage extends AbstractPage {
 		} catch (NoSuchElementException ex) {
 			ex.printStackTrace();
 		}
-	}
+	}*/
 
 	public void enterInvalidCharactersInServiceOverride() {
-		String charText = createBigString(101);
+		String charText = createBigString(100);
 		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier("office_service_override_textbox_edit_mode_xpath"),
 				charText);
-		officeServicesMaximumCharacter = charText;
 	}
 
 	public void verifyMaxLengthInServiceOverride(String maxLength) {
@@ -1021,7 +1019,7 @@ public class EditOfficePage extends AbstractPage {
 	}
 
 	public void clickOnDeleteNewOfficeServicesRowButton() {
-		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_delete_services_row_button_xpath"));
+		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_services_delete_button_xpath"));
 	}
 
 	public void verifyOfficeServicesParametersNotInUI(String serviceCategory, String serviceOverride) {
@@ -1085,7 +1083,7 @@ public class EditOfficePage extends AbstractPage {
 			nvPairs.add(new BasicNameValuePair("source", source));
 			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
 			String serviceCategoryValue = getDriver().findElement(
-					OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_exist_edit_mode_xpath"))
+					OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_edit_mode_xpath"))
 					.getText();
 			String serviceOverrideValue = getDriver()
 					.findElement(
@@ -1165,19 +1163,9 @@ public class EditOfficePage extends AbstractPage {
 	}
 
 	public void verifyOfficeServicesParametersInEditUI(String serviceCategory, String serviceOverride) {
-
 		try {
-			assertEquals(serviceCategory,
-
-					getDriver()
-							.findElement(OfficeIdentifiers
-									.getObjectIdentifier("office_service_category_dropdown_edit_mode_xpath"))
-							.getAttribute("value"));
-			assertEquals(serviceOverride,
-					getDriver()
-							.findElement(OfficeIdentifiers
-									.getObjectIdentifier("office_service_override_textbox_edit_mode_xpath"))
-							.getAttribute("value"));
+			assertEquals(serviceCategory,getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_category_dropdown_edit_mode_xpath")).getAttribute("value"));
+			assertEquals(serviceOverride,getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_service_override_textbox_edit_mode_xpath")).getAttribute("value"));
 		} catch (NoSuchElementException ex) {
 			ex.printStackTrace();
 		}
