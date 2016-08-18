@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.xml.XmlDocument;
 import com.accuity.zeus.xml.XmlDocumentLoader;
@@ -352,5 +353,33 @@ public abstract class AbstractPage {
         Document document =  XmlDocumentLoader.getDocument(filePath);
         return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("resource").getNodeValue();
     }
+    
+    public void selectDropDownValueFromRowNumber(By by, String value, int rowNumber) {
+		try {
+			List<WebElement> dropdownValue = getDriver().findElements(by);
+			if (rowNumber <= dropdownValue.size()) {
+				Select dropdown = new Select(dropdownValue.get(rowNumber - 1));
+				if (value.equals("")) {
+					dropdown.selectByValue(value);
+				} else {
+					dropdown.selectByVisibleText(value);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
+    public void selectTexBoxValueFromRowNumber(By by, String value, int rowNumber) {
+		try {
+			List<WebElement> textBoxValues = getDriver().findElements(by);
+			if (rowNumber <= textBoxValues.size()) {
+				textBoxValues.get(rowNumber - 1).clear();
+				textBoxValues.get(rowNumber - 1).sendKeys(value);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
