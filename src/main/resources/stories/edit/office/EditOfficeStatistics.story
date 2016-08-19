@@ -8,12 +8,10 @@ So that I can achieve a business goal
 JIRA ID - ZEUS-1081 - User can edit Office's statistics
 
 Scenario: 1 User can edit  'Office Statistics' that is different from the current value
-1- User verifies whether the current value in statistics page is defaulted from trusted
+1- User verifies whether the current value in statistics page is from trusted document
 2- User verifies confirmation dialog modal has summary change text as 'Basic Info / Statistics'
-3- User verifies that 'total ATMs', 'total checking accounts', 'total savings account' values are saved and reflected in UI
-4- User verifies that 'total ATMs', 'total checking accounts', 'total savings account' value are saved and reflected in Zeus
-
-
+3- User verifies that 'total ATMs', 'total checking accounts', 'total savings account' values are saved and reflected in UI and Zeus
+ 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -21,7 +19,6 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-When the user clicks on the office all link in the navigation bar
 And the user clicks on the office statistics link in the navigation bar
 And the user clicks on the office update link
 Then the user should see the statistics values same as in trusted document for fid <officeFid>
@@ -47,9 +44,8 @@ Examples:
 Scenario: 2 User can edit  'Office Statistics'  that is No different from the current value
 and saves the office page
 1- User verifies confirmation dialog modal do not have summary change text as 'Basic Info / Statistics'
-2- User verifies that the old value is reflected in zeus document
-3- User verifies that the old value is reflected on the page
-4- User verifies the timezone 'total atm', 'total checking accounts','total savings accounts' field are having max length attribute as '8'
+2- User verifies that the old value is reflected in UI and zeus document
+3- User verifies the max length attribute value is 8 for 'total atm', 'total checking accounts','total savings accounts' fields.
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -58,7 +54,6 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-When the user clicks on the office all link in the navigation bar
 And the user clicks on the office statistics link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
@@ -92,7 +87,6 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
-When the user clicks on the office all link in the navigation bar
 And the user clicks on the office statistics link in the navigation bar
 And the user clicks on the office update link
 And the user enters the office total atms value as <totalAtms>
@@ -106,4 +100,6 @@ Then the user should see the Enter up to 8 valid numbers. error message for the 
 Examples:
 |entity|searchBy|fid|officeFid|totalAtms|totalCheckingAccounts|totalSavingsAccounts|
 |1038|FID|1038|1038-51|123%rw|123#ty|123$&Gs|
+|1038|FID|1038|1038-51|123.55|123.77|123.66|
+
 

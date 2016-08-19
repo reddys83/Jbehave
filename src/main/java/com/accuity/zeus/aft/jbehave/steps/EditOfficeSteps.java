@@ -618,7 +618,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyMaximumTextInOfficeHistory() {
 		getEditOfficePage().verifyMaximumTextInOfficeHistory();
 	}
-}
+
 	@When("the user enters the office total atms value as <totalAtms>")
 	public void enterOfficeTotalAtmsValue(@Named("totalAtms") String totalAtms) {
 		getEditOfficePage().enterValueInStatisticsPageTextField("office_total_atms_xpath", totalAtms);
