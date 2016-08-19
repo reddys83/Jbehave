@@ -525,6 +525,165 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyNewlyAddedOfficeIdentifierRowIsDisplayed() throws Exception {
 		getEditOfficePage().verifyNewlyAddedOfficeIdentifierRowIsDisplayed();
 	}
+
+	@When("the user clicks on the add new personnel button in the office personnel page")
+    public void clickOnOfficeAddNewPersonnelButton() {
+		getEditOfficePage().clickOnOfficeAddNewPersonnelButton();
+	}
+	
+	@Then("the user should see the office personnel types from lookup PERSONNEL_SUMMARY_TEXT_TYPE")
+	public void verifyOfficePersonnelTypesList() {
+    	getEditOfficePage().verifyOfficePersonnelTypesList();
+	}
+	
+	@When("the user enters personnel type as <personnelType> in the office personnel page")
+	public void enterOfficePersonnelType(@Named("personnelType") String personnelType) {
+		getEditOfficePage().enterOfficePersonnelTypeInNewlyAddedRow(personnelType);
+	}
+
+	@When("the user enters personnel value as <personnelValue> in the office personnel page")
+	public void enterOfficePersonnelValue(@Named("personnelValue") String personnelValue) {
+		getEditOfficePage().enterOfficePersonnelValueInNewlyAddedRow(personnelValue);
+	}
+	
+	@When("the user enters personnel type as <personnelType2> in the office personnel page")
+	public void enterOfficePersonnelType2(@Named("personnelType2") String personnelType) {
+		getEditOfficePage().enterOfficePersonnelTypeInNewlyAddedRow(personnelType);
+	}
+
+	@When("the user enters personnel value as <personnelValue2> in the office personnel page")
+	public void enterOfficePersonnelValue2(@Named("personnelValue2") String personnelValue) {
+		getEditOfficePage().enterOfficePersonnelValueInNewlyAddedRow(personnelValue);
+	}
+	
+	@Then("the user should see the office's personnel values same as in $source document")
+	public void verifyOfficePersonnelValuesFromDB(@Named("source") String source, @Named("officeFid") String officeFid) {
+    	getEditOfficePage().verifyOfficePersonnelValuesFromTrustedDB(source, officeFid);
+	}
+	
+	@When("the user deletes the existing office personnel rows")
+    public void deleteAllOfficePersonnel() {
+		setEditLegalEntityPage(getLegalEntityPage().createEditLegalEntityPage());
+		getEditOfficePage().clickOnOfficeAddNewPersonnelButton();
+		getEditLegalEntityPage().deleteAllLegalEntityRows(OfficeIdentifiers.getObjectIdentifier("office_delete_personnel_row_button_xpath"));
+	}
+	
+	@Then("the user verifies that previously selected <personnelType> is not present in the new office personnel row")
+	public void verifySelectedOfficePersonnelTypeNotInNewRow(@Named("personnelType") String personnelType) {
+		getEditOfficePage().verifySelectedOfficePersonnelTypeNotInNewRow(personnelType, 2);
+	}
+	
+	@Then("the user verifies that the personnel parameters are present in the office identifiers page")
+	public void verifyOfficePersonnelParametersInUI(@Named("personnelType") String personnelType, 
+					@Named("personnelValue") String personnelValue, @Named("personnelType2") String personnelType2, 
+					@Named("personnelValue2") String personnelValue2) {
+
+		List<String> personnelTypes = new ArrayList<>();
+		personnelTypes.add(personnelType);
+		personnelTypes.add(personnelType2);
+		List<String> personnelValues = new ArrayList<>();
+		personnelValues.add(personnelValue);
+		personnelValues.add(personnelValue2);
+		
+		getEditOfficePage().verifyOfficePersonnelParametersInUI(personnelTypes, personnelValues);
+	}
+	
+	@Then("the user verifies that the personnel parameters with 10000 characters are present in the office identifiers page")
+	public void verifyOfficePersonnelParametersInUI(@Named("personnelType2") String personnelType) {
+
+		List<String> personnelTypes = new ArrayList<>();
+		personnelTypes.add(personnelType);		
+		List<String> personnelValues = new ArrayList<>();
+		personnelValues.add(getEditOfficePage().getBigStringValue());		
+		
+		getEditOfficePage().verifyOfficePersonnelParametersInUI(personnelTypes, personnelValues);
+	}
+
+	@Then("the user should see the office personnel values as in $source document")
+	public void verifyOfficePersonnelValuesFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid, 
+			@Named("personnelType") String personnelType, @Named("personnelValue") String personnelValue, 
+			@Named("personnelType2") String personnelType2, @Named("personnelValue2") String personnelValue2) {
+
+		List<String> personnelTypes = new ArrayList<>();
+		personnelTypes.add(personnelType);
+		personnelTypes.add(personnelType2);
+		List<String> personnelValues = new ArrayList<>();
+		personnelValues.add(personnelValue);
+		personnelValues.add(personnelValue2);
+
+		getEditOfficePage().verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
+	}
+		
+	@Then("the user verifies that the existing personnel parameters are updated in the office identifiers page")
+	public void verifyUpdatedOfficePersonnelParametersInUI(@Named("personnelType") String personnelType,
+			@Named("personnelValue") String personnelValue) {
+
+		List<String> personnelTypes = new ArrayList<>();
+		personnelTypes.add(personnelType);
+		List<String> personnelValues = new ArrayList<>();
+		personnelValues.add(personnelValue);
+		
+		getEditOfficePage().verifyOfficePersonnelParametersInUI(personnelTypes, personnelValues);
+	}
+	
+	@Then("the user should see the updated office personnel values as in $source document")	
+	public void verifyUpdatedOfficePersonnelValuesFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid,
+			@Named("personnelType") String personnelType, @Named("personnelValue") String personnelValue) {
+
+		List<String> personnelTypes = new ArrayList<>();
+		personnelTypes.add(personnelType);
+		List<String> personnelValues = new ArrayList<>();
+		personnelValues.add(personnelValue);
+
+		getEditOfficePage().verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
+	}
+	
+	@Then("the user verifies that no personnel values are updated in $source document")
+	public void verifyOfficePersonnelValuesAreDeletedFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid) {
+		getEditOfficePage().verifyOfficePersonnelValuesFromDB(source, officeFid, null, null);
+	}
+	
+	
+	@Then("the user should not see the newly added personnel row in the office personnel page")
+	public void verifyNewlyAddedOfficePersonnelRowIsNotDisplayed() throws Exception {
+		getEditOfficePage().verifyNewlyAddedOfficePersonnelRowIsNotDisplayed();
+	}
+	
+	@Then("the user should see the error message $errorMessage for personnel value field in the office personnel page")
+	public void verifyErrorMessageForPersonnelValue(@Named("errorMessage") String errorMessage) {
+		getEditOfficePage().verifyErrorMessageForPersonnelValue(errorMessage);
+	}
+	
+	@When("the user enters 10000 characters in the office personnel value text area")
+    public void enterOfficePersonnelValue() {
+        getEditOfficePage().enterOfficePersonnelValue();
+    }
+	
+	@Then("the user should see the office personnel value text area field length as 10000")
+    public void verifyOfficePersonnelValueTextAreaLength() {
+        getEditOfficePage().verifyOfficePersonnelValueTextAreaLength();
+    }
+	
+	@Then("the user should see the office personnel value text with 10000 characters for fid <officeFid> in $source document")
+    public void verifyPersonnelValueWithMaxLengthFromDB(@Named("personnelType2") String personnelType, 
+    		@Named("officeFid") String officeFid, @Named("source") String source) {
+        getEditOfficePage().verifyPersonnelValueWithMaxLengthFromZeus(personnelType, officeFid, source);
+    }
+	
+	@Then("the user should see the error message $errorMessage for personnel type field in the office personnel page")
+	public void verifyErrorMessageForPersonnelType(@Named("errorMessage") String errorMessage) {
+		getEditOfficePage().verifyErrorMessageForPersonnelType(errorMessage);
+	}
+	
+	@When("the user clicks on the delete personnel row button in the office personnel page")
+	public void clickOnDeleteOfficePersonnelRowButton() {
+		getEditOfficePage().clickOnDeleteOfficePersonnelRowButton();
+	}
+	
+	@Then("the user should see the newly added personnel row in the office personnel page")
+	public void verifyNewlyAddedOfficePersonnelRowIsDisplayed() throws Exception {
+		getEditOfficePage().verifyNewlyAddedOfficePersonnelRowIsDisplayed();
+	}
 	
 	@Then("the user should see the office's business hours value same as in $source document")
 	public void verifyOfficeBusinessHourValueFromTrustedDB(@Named("officeFid") String officeFid,
