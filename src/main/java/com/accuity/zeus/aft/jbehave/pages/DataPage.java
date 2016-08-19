@@ -20,10 +20,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.springframework.http.ResponseEntity;
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.openqa.selenium.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.Map;
 
 
 import static org.junit.Assert.*;
@@ -1350,4 +1353,35 @@ public class DataPage extends AbstractPage {
 			}
 		}
 	}
+	
+	public void verifyLookUpValues(String queryName, String tagName, String fid, By by) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("fid", fid));
+		nvPairs.add(new BasicNameValuePair("source", "trusted"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, queryName,
+				nvPairs);
+		List<WebElement> countryOfOperationsList = getDriver().findElements(by);
+		for (int i = 0; i < (document.getElementsByTagName(tagName).getLength()) - 1; i++) {
+			assertEquals(document.getElementsByTagName(tagName).item(i).getTextContent().trim(), countryOfOperationsList.get(i + 1).getText().trim());
+		}
+	}
+
+	public void enterValueInTypeHeadDropDown(By by, String value) {
+		getDriver().findElement(by).sendKeys(value);
+		getDriver().findElement(by).sendKeys(Keys.RETURN);
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	 
+	public void clickOnWebElement(By by) {
+		attemptClick(by);
+	}
+
+	public void verifyWebElementText(String fieldName, String expectedText, By by) {
+		assertEquals(fieldName + ":", expectedText, getDriver().findElement(by).getText());
+	}
+
 }
