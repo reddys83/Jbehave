@@ -73,7 +73,7 @@ And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|totalAtms|totalCheckingAccounts|totalSavingsAccounts| 
-|1038|FID|1038|1038-51|123|123|123|
+|1038|FID|1038|1038-51|12345678|12345678|12345678|
 
 Scenario: 3 User is updating an 'office statistics' page and enters value as alphanumerals and special characters for office statistics fields
 1- User verifies the 'total atm' field is showing 'Enter up to 8 valid numbers' validation message
