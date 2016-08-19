@@ -18,8 +18,6 @@ Scenario: 1 User can edit Office's Personnel -
 9 - Verify Blank value is accepted
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -59,8 +57,6 @@ Scenario: 2 User can edit Office's existing Personnel
 2 - Verify Zeus DB is updated with entered personnel values
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -89,10 +85,7 @@ Scenario: 3 User can edit office's Personnel
 3 - Verify whether the text entered in the Personnel 'Value' field is not beyond 10000 unicode characters.
 4 - Verify whether the Personnel 'Value' field max length attribute
 
-
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -129,8 +122,6 @@ Scenario: 4 User can edit Office's Personnel -
 Verify if user is able to delete existing Office Personnel row by clicking yes on confirmation modal
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -159,8 +150,6 @@ Scenario: 5 User can edit Office's Personnel -
 2 - Verify if user is able to delete newly added Office Personnel row by clicking yes on confirmation modal
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
