@@ -16,6 +16,7 @@ JIRA ID - ZEUS-86 - User can update a legal entity's type
 JIRA ID - ZEUS-919 - User can edit Legal Entity's Chartered Date
 JIRA ID - ZEUS-85 - User can update legal entity's insurance type
 JIRA ID - ZEUS-83 - User can update legal entity's ownership type
+JIRA ID - ZEUS-79 - User can update a legal entity's country of operations
 
 
 
@@ -933,3 +934,150 @@ Examples:
 |1038|fid|1038|Government Bank|
 |1038|fid|1038||
 |1038|fid|1038|Corporate Bank|
+
+Scenario: User is viewing a Legal Entity's Basic Info - 
+User verifies whether the current 'Country of Operations' value is same as in trusted document.
+
+Given a user is on the search page
+When the user clicks on the results tab
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the legalEntity update link
+Then the user should see the legal entity's country of operations value same as in trusted document
+Then the user verifies that the country of operations value is sorted in alphabetical order
+
+Examples:
+|entity|searchBy|fid|
+|1038|fid|1038|
+
+Scenario: User is updating a Legal Entity's Basic Info page - 
+a) User selects 'Undefined' for Country of Operations dropdown for a valid Legal Entity Type
+b) User selects 'No' in the warning message to prevent saving of 'Undefined' for Country of Operations
+c) User selects 'Yes' in the warning message to save 'Undefined' for Country of Operations.
+d) User verifies Country of Operations value is updated correctly in Legal Entity's basic info page
+e) User verifies Country of Operations value in Zeus Document
+
+Given a user is on the search page
+When the user clicks on the results tab
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the legalEntity update link
+When the user gets the document with get Id for legalentity with the fid as <entity> from the database
+When the user enters <countryOfOperations> in the country of operations drop down
+Then the user should see the warning message for legal entity's country of operations
+When the user clicks on the No button for legal entity's country of operations warning message
+Then the user should not see the newly added country of operations value in the legal entity basic info page
+When the user enters <countryOfOperations> in the country of operations drop down
+Then the user should see the warning message for legal entity's country of operations
+When the user clicks on the Yes button for legal entity's country of operations warning message
+Then the user should see the newly added country of operations value in the legal entity basic info page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the legal entity page
+Then the user should see the country of operations value same as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|countryOfOperations|
+|91832|FID|91832|Unknown|
+
+Scenario: User is updating a Legal Entity's Basic Info page -
+a) User selects a country in the Country of Operations dropdown for invalid Legal Entity Type
+b) User verifies 'Required' error message for Country of Operations dropdown
+
+Given a user is on the search page
+When the user clicks on the results tab
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the legalEntity update link
+And the user selects to delete all the entity type rows except the first one
+And the user selects entity type value as <entityTypeValue> from first_existing_entitytype_dropdown in the basicinfo legalentity page
+When the user enters <countryOfOperations> in the country of operations drop down
+When the user clicks on the save button
+Then the user should see the error message Required for country of operations dropdown in the legal entity basic info page
+
+Examples:
+|entity|searchBy|fid|entityTypeValue|countryOfOperations|
+|1038|FID|1038|Bank|Unknown|
+|1038|FID|1038|Building Society|Unknown|
+|1038|FID|1038|Co-operative Bank|Unknown|
+|1038|FID|1038|Credit Union|Unknown|
+|1038|FID|1038|Savings & Loan Association|Unknown|
+|1038|FID|1038|Savings Bank|Unknown|
+
+Scenario: To update the Legal Entity`s 'Basic Info' by entering a value for 'Country of Opeartions' that is different from the current value
+a) User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
+b) User verifies Legal Entity Basic Info changes has been updated in confirmation modal
+c) User verifies Country of Operations value is updated correctly in Legal Entity's basic info page
+d) User verifies Country of Operations value in Zeus Document 
+
+Given a user is on the search page
+When the user clicks on the results tab
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the legalEntity update link
+When the user gets the document with get Id for legalentity with the fid as <entity> from the database
+When the user enters <countryOfOperations> in the country of operations drop down
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the legal entity page
+Then the user verifies the country of operations value in the legal entity basic info page
+Then the user should see the country of operations value same as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|countryOfOperations|
+|1038|FID|1038|Brazil|
+
+Scenario: To update the Legal Entity`s 'Basic Info' by entering a value for 'Country of Operations' that is no different from the current value
+a) User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
+b) User verifies Legal Entity Basic Info changes has not been updated in confirmation modal
+c) User verifies Country of Operations value is updated correctly in Legal Entity's basic info page
+d) User verifies Country of Operations value in Zeus Document 
+
+Given a user is on the search page
+When the user clicks on the results tab
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the legalEntity update link
+When the user gets the document with get Id for legalentity with the fid as <entity> from the database
+When the user enters <countryOfOperations> in the country of operations drop down
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the legal entity page
+When the user clicks on the legalEntity update link
+When the user enters <countryOfOperations> in the country of operations drop down
+When the user clicks on the save button
+Then the user should not see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the legal entity page
+Then the user verifies the country of operations value in the legal entity basic info page
+Then the user should see the country of operations value same as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|countryOfOperations|
+|1038|FID|1038|Brazil|

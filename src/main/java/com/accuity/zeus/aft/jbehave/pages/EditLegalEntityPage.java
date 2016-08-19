@@ -1938,6 +1938,97 @@ public class EditLegalEntityPage extends AbstractPage {
     {
         assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(identifier)).getText(),errMsg);
     }
+    
+    public void verifyCountryOfOperationsFromTrustedDB(String fid, String source, String tagName)
+    {
+    	assertEquals(getLegalEntityValuesFromDB(fid, tagName, source), getDriver()
+				.findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode")).getText());
+    }
+    
+    public void clickOnCountryOfOperations()
+    {
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_dropdown_select"));
+    }
+    
+    public void verifyCountryOfOperationsList(String fid)
+    {
+    	List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("fid", fid));
+		nvPairs.add(new BasicNameValuePair("source", "trusted"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "country list",
+				nvPairs);
+		List<WebElement> countryOfOperationsList = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_list"));
+		for (int i = 0; i < (document.getElementsByTagName("value").getLength()) - 1; i++) {
+			assertEquals(document.getElementsByTagName("value").item(i).getTextContent().trim(), countryOfOperationsList.get(i+1).getText().trim());
+
+		}
+    }
+    
+    public void enterCountryOfOperationsDropDownValue(String country)
+    {
+    	getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_type_ahead")).sendKeys(country);
+        getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_type_ahead")).sendKeys(Keys.RETURN);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void verifyCountryOfOperationsUIViewMode(String country)
+    {
+    	assertEquals(country, getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_view_mode")).getText());
+    }
+    
+    public void verifyCountryOfOperationsFromZeusDB(String fid, String countryOfOperations, String source, String tagName)
+    {
+    	if(countryOfOperations.equals("Unknown"))
+    	{
+    		countryOfOperations = "";
+    	}
+    	assertEquals(getLegalEntityValuesFromDB(fid, tagName, source), countryOfOperations);
+    }
+    
+    public void verifyErrorMessageForCountryOfOperations(String errorMessage)
+    {
+    	assertEquals(errorMessage, getDriver()
+				.findElement(LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_error_message")).getText());
+    }
+    
+    public void verifyCountryOfOperationsWarningMessage()
+    {
+    	 try {
+             Thread.sleep(1000L);
+         } catch (InterruptedException e) {
+             e.printStackTrace();
+         }
+         assertEquals("Confirm Changes", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_confirm_changes_heading")).getText());
+         assertEquals("Please confirm - Legal Entity does not have a Country of Operations", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_confirm_changes_info")).getText());
+         assertEquals("NO", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("warning_message_no_button")).getText());
+         assertEquals("YES", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("warning_message_yes_button")).getText());
+    }
+    
+    public void clickOnWarningMessageNoButton()
+    {
+    	attemptClick(LegalEntityIdentifiers.getObjectIdentifier("warning_message_no_button"));
+    }
+    
+    public void verifyEnteredCountryOfOperationsValueNotInUI(String country)
+    {
+    	assertTrue(!country.equals(getDriver()
+				.findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode")).getText()));
+    }
+    
+    public void clickOnWarningMessageYesButton()
+    {
+    	attemptClick(LegalEntityIdentifiers.getObjectIdentifier("warning_message_yes_button"));
+    }
+    
+    public void verifyEnteredCountryOfOperationsValueInUI(String country)
+    {
+    	assertTrue(country.equals(getDriver()
+				.findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode")).getText()));
+    }
     @Override
     public String getPageUrl() {
         return null;
