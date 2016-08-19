@@ -95,6 +95,15 @@ public class OfficeIdentifiers {
         hmap.put("office_history_edit_mode_xpath", By.xpath("//*[@id='officeHistory']/textarea"));
 		hmap.put("office_history_link", By.xpath("//*[@id='legalEntityHistory']"));
 		hmap.put("office_history_view_mode_xpath", By.xpath("//*[@id='officeHistory']/p"));
+        hmap.put("office_total_atms_xpath", By.xpath("//*[@name='numberOfATMs']"));
+        hmap.put("office_total_checking_accounts_xpath", By.xpath("//*[@name='numberOfCheckingAccounts']"));
+        hmap.put("office_total_savings_accounts_xpath", By.xpath("//*[@name='numberOfSavingsAccounts']"));
+        hmap.put("office_total_atms_err_msg_xpath", By.xpath("//*[@id='officeStatistics']//*[@data-error_id='numberOfATMsError']"));
+        hmap.put("office_total_checking_accounts_err_msg_xpath", By.xpath("//*[@id='officeStatistics']//*[@data-error_id='numberOfCheckingAccountsError']"));
+        hmap.put("office_total_savings_accounts_err_msg_xpath", By.xpath("//*[@id='officeStatistics']//*[@data-error_id='numberOfSavingsAccountsError']"));
+        hmap.put("office_total_atms_view_xpath", By.xpath("//*[@id='officeStatistics']//tr[th='Total ATMs']/td"));
+        hmap.put("office_total_checking_accounts_view_xpath", By.xpath("//*[@id='officeStatistics']//tr[th='Total Checking Accounts']/td"));
+        hmap.put("office_total_savings_accounts_view_xpath", By.xpath("//*[@id='officeStatistics']//tr[th='Total Savings Accounts']/td"));
 	    hmap.put("office_add_service_button_xpath", By.xpath("//*[@id='add-services']"));
 	    hmap.put("delete_row_confirmation_modal_service_xpath", By.xpath("//*[@colspan='10']")); 
 	    hmap.put("office_delete_yes_button_id", By.xpath("//*[@id='yes-button']"));

@@ -20,6 +20,8 @@ import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import static org.junit.Assert.*;
 
 
@@ -802,11 +804,11 @@ public class EditOfficePage extends AbstractPage {
 			assertTrue(false);
 		}
 	}
-        
+
     public void clickOnOfficeAddNewPersonnelButton() {
 		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_new_personnel_button_id"));
 	}
-    
+
     public void verifyOfficePersonnelTypesList() {
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get office personnel type list");
 		List<WebElement> officePersonnelTypesList = getDriver()
@@ -818,7 +820,7 @@ public class EditOfficePage extends AbstractPage {
 					options.get(indexOfOption).getText().trim());
 		}
 	}
-  
+
 	public void enterOfficePersonnelValueInNewlyAddedRow(String personnelValue) {
 		try {
 			List<WebElement> personnelValues = getDriver()
@@ -832,7 +834,7 @@ public class EditOfficePage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-    
+
 	public void verifyOfficePersonnelValuesFromTrustedDB(String source, String officeFid) {
 		try {
 			List<String> personnelTypes = new ArrayList<>();
@@ -872,7 +874,7 @@ public class EditOfficePage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void verifyOfficePersonnelValuesFromDB(String source, String officeFid, List<String> personnelTypes,
 			List<String> personnelValues) {
 		try {
@@ -900,7 +902,7 @@ public class EditOfficePage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void verifySelectedOfficePersonnelTypeNotInNewRow(String personnelType, int rowNumber) {
 		verifySelectedTypeNotInNewRow(personnelType, rowNumber, OfficeIdentifiers.getObjectIdentifier("office_personnel_type_input_xpath"));
 	}
@@ -919,15 +921,15 @@ public class EditOfficePage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
-	public void verifyOfficePersonnelParametersInUI(List<String> personnelTypes, List<String> personnelValues) {			
-		List<WebElement> personnelRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_view_mode"));		
+
+	public void verifyOfficePersonnelParametersInUI(List<String> personnelTypes, List<String> personnelValues) {
+		List<WebElement> personnelRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_view_mode"));
 		for (int i = 0; i < personnelRows.size(); i++) {
 			assertTrue(personnelRows.get(i).findElements(By.tagName("td")).get(0).getText().equals(personnelTypes.get(i)));
 			assertTrue(personnelRows.get(i).findElements(By.tagName("td")).get(1).getText().equals(personnelValues.get(i)));
 		}
-	} 
-	
+	}
+
 	public void verifyNewlyAddedOfficePersonnelRowIsNotDisplayed() {
 		try {
 			getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_additional_personnel"));
@@ -935,23 +937,23 @@ public class EditOfficePage extends AbstractPage {
 			assertTrue(true);
 		}
 	}
-	
+
 	public void verifyErrorMessageForPersonnelValue(String errorMessage) {
 		assertEquals(errorMessage, getDriver().findElement(By.xpath("//*[@data-error_id='personnelValueError']")).getText());
 	}
-	
+
 	public void verifyErrorMessageForPersonnelType(String errorMessage) {
 		assertEquals(errorMessage, getDriver()
 				.findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_type_error_msg_xpath")).getText());
 	}
-	
+
 	public void enterOfficePersonnelValue() {
         String personnelValue = createBigString(10000);
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath")).clear();
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + personnelValue + "'", 
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].value='" + personnelValue + "'",
         		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_personnel_value_input_xpath")));
     }
-	
+
 	public void verifyOfficePersonnelValueTextAreaLength() {
         assertEquals(getDriver().findElement(OfficeIdentifiers
         		.getObjectIdentifier("office_personnel_value_input_xpath")).getAttribute("maxlength"), "10000");
@@ -964,15 +966,15 @@ public class EditOfficePage extends AbstractPage {
 		personnelValues.add(bigString);
 		verifyOfficePersonnelValuesFromDB(source, officeFid, personnelTypes, personnelValues);
     }
-	
+
 	public String getBigStringValue() {
 		return bigString;
 	}
-	
+
 	public void clickOnDeleteOfficePersonnelRowButton() {
 		attemptClick(OfficeIdentifiers.getObjectIdentifier("office_delete_personnel_row_button_xpath"));
 	}
-	
+
 	public void verifyNewlyAddedOfficePersonnelRowIsDisplayed() {
 		try {
 			WebElement personnel = getDriver()
@@ -982,7 +984,7 @@ public class EditOfficePage extends AbstractPage {
 			assertTrue(false);
 		}
 	}
-	
+
 	public void verifyOfficeBusinessHourValueFromTrustedDB(String officeFid, String source) {
 		assertEquals(getOfficeBusinessHoursInfoFromDB(officeFid, source, "hours"),
 				getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_edit_mode"))
@@ -1037,9 +1039,57 @@ public class EditOfficePage extends AbstractPage {
 		assertEquals((getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_business_hours_edit_mode"))
 				.getAttribute("maxlength")), maxLength);
 
-	}  
+	}
 
-    
+    public void verifyEditOfficeStatisticsValueFromTrusted(String fieldName, String fieldValue)
+			throws InterruptedException {
+
+		assertEquals(fieldName + " : " + fieldValue, fieldValue, getDriver().findElement(
+				          OfficeIdentifiers.getObjectIdentifier("office_total_atms_xpath")).getAttribute("value"));
+	}
+
+	public void verifyOfficeStatisticsValueInUI(String totalAtms, String totalCheckingAccounts,
+			String totalSavingsAccounts) throws InterruptedException {
+
+		assertEquals(totalAtms, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_atms_view_xpath")).getText());
+		assertEquals(totalCheckingAccounts,	getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_checking_accounts_view_xpath")).getText());
+		assertEquals(totalSavingsAccounts, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_total_savings_accounts_view_xpath")).getText());
+	}
+
+	public void verifyOfficeStatisticsValueFromZeus(String fieldName, String fieldValue, String fieldValueInDB) {
+		assertEquals(fieldName + " : " + fieldValue, fieldValue, fieldValueInDB);
+	}
+
+	public void verifyOfficeStatisticsFieldsMaxLengthAttribute(String maxLength, String totalAtms,
+			String totalCheckingAccounts, String totalSavingsAccounts) {
+
+		assertEquals(maxLength,	getDriver().findElement(OfficeIdentifiers
+				.getObjectIdentifier("office_total_atms_xpath")).getAttribute("maxlength"));
+		assertEquals(maxLength,	getDriver().findElement(OfficeIdentifiers
+				.getObjectIdentifier("office_total_checking_accounts_xpath")).getAttribute("maxlength"));
+		assertEquals(maxLength,	getDriver().findElement(OfficeIdentifiers
+				.getObjectIdentifier("office_total_savings_accounts_xpath")).getAttribute("maxlength"));
+	}
+
+	public void verifyErrorMessageForTotalAtm(String errorMessage) {
+		assertEquals(errorMessage, getDriver().findElement(OfficeIdentifiers
+				.getObjectIdentifier("office_total_atms_err_msg_xpath")).getText());
+	}
+
+	public void verifyErrorMessageForTotalCheckingAccounts(String errorMessage) {
+		assertEquals(errorMessage, getDriver().findElement(OfficeIdentifiers
+				.getObjectIdentifier("office_total_checking_accounts_err_msg_xpath")).getText());
+	}
+
+	public void verifyErrorMessageForTotalSavingsAccount(String errorMessage) {
+		assertEquals(errorMessage, getDriver().findElement(OfficeIdentifiers
+				.getObjectIdentifier("office_total_savings_accounts_err_msg_xpath")).getText());
+	}
+
+	public void enterValueInStatisticsPageTextField(String textField, String value) {
+		clearAndEnterValue(OfficeIdentifiers.getObjectIdentifier(textField), value);
+	}
+
 	public String getOfficeHistoryFromDB(String source, String tagName, String officeFid) {
 
 		String tagValue = null;
@@ -1354,6 +1404,6 @@ public class EditOfficePage extends AbstractPage {
             getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_principalFlag_name")).get(0).click();
         } else getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_principalFlag_name")).get(1).click();
     }
-    
- 
+
+
 }
