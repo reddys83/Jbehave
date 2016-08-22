@@ -773,4 +773,36 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("source") String source) {
 		getEditAreaPage().verifyUseInAddressAreaFromTrustedDB(country, area, "areaUseInAddress", source);
 	}
+	
+	@When("the user clicks on the add new region button in the area region page")
+	public void clickOnAddNewRegionButton() {
+		setEditCityPage(getDataPage().createEditCityPage());
+		getEditCityPage().clickOnAddNewRegionButton();
+	}
+	
+	@When("the user enters region type as <newRegionType> in the region area page")
+	public void enterAreaRegionType(@Named("newRegionType") String newRegionType) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getEditAreaPage().enterAreaRegionType(newRegionType);
+	}
+	
+	@Then("the user should see the region type from 'AREA_ALTERNATIVE_REGION' look up")
+	public void verifyAreaRegionTypeList() {
+		getEditAreaPage().verifyAreaRegionTypeList();
+	}
+	
+	@Then("the user should see the area region value from <regionValueLookUp>")
+	public void verifyAreaRegionValueList(@Named("regionValueLookUp") String regionValueLookUp) {
+		getEditAreaPage().verifyAreaRegionValueList(regionValueLookUp);
+	}
+	
+	 @When("the user clicks on the area regions link in the navigation bar")
+	    public void clickOnAreaRegions() {
+		 setEditAreaPage(getDataPage().createEditAreaPage());
+		 getEditAreaPage().clickOnAreaRegionsInNavigationBar();
+	    }
 }

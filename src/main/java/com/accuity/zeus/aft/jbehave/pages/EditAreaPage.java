@@ -23,6 +23,7 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -1467,6 +1468,45 @@ public class EditAreaPage extends AbstractPage {
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_edit_mode_xpath"))
 						.getAttribute("value"));
 	}
+	
+	public void enterAreaRegionType(String regionType) {
+		selectItemFromDropdownListByValue(AreaIdentifiers.getObjectIdentifier("area_region_type_dropdown_xpath"), regionType);
+	}
+	
+	public void verifyAreaRegionTypeList() {
+		List<WebElement> regionTypeList = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_region_type_identifier_dropdown_options_xpath"));
+		
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area region types");
+		assertTrue(document.getElementsByTagName("regiontype").getLength()>1);
+		for (int i = 1; i < document.getElementsByTagName("regiontype").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					regionTypeList.get(i).getAttribute("value"));
+		}
+	}
+	
+	public void verifyAreaRegionValueList(String regionValueLookUp) {		
+		List<WebElement> regionValueList = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_region_value_dropdown_option"));
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("fid", regionValueLookUp));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area region values", nvPairs);
+	
+		assertTrue("DB values are empty", document.getElementsByTagName("regionvalue").getLength()>1);
+		for (int i = 1; i < document.getElementsByTagName("regionvalue").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					regionValueList.get(i).getAttribute("value"));
+		}
+	}
+	
+	 public void clickOnAreaRegionsInNavigationBar() {
+	        attemptClick(AreaIdentifiers.getObjectIdentifier("area_region_link"));
+	        try {
+	            Thread.sleep(2000L);
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 	@Override
 	public String getPageUrl() {
