@@ -940,7 +940,7 @@ Scenario: 1 User is updating Legal Entity's Basic Info with existing data No dif
 2 - User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
 3 - User verifies Legal Entity Basic Info changes has not been updated in confirmation modal
 4 - User verifies Country of Operations value is updated correctly in UI and Zeus
-Meta: @79
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -971,7 +971,7 @@ Scenario: 2 User is updating a Legal Entity's Basic Info page -
 2 - User selects 'No' in the warning message to prevent saving of 'Undefined' for Country of Operations
 3 - User selects 'Yes' in the warning message to save 'Undefined' for Country of Operations.
 4 - User verifies Country of Operations value is updated both in UI and Zeus DB.
-Meta: @79
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -1003,7 +1003,7 @@ Examples:
 Scenario: 3 User is updating a Legal Entity's Basic Info page -
 a) User selects a country in the Country of Operations dropdown for invalid Legal Entity Type
 b) User verifies 'Required' error message for Country of Operations dropdown
-Meta: @79
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -1025,7 +1025,7 @@ Scenario: 4 To update the Legal Entity`s 'Country of Opeartions' that is differe
 a) User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
 b) User verifies confirmation modal has summary change
 c) User verifies Country of Operations value is reflected UI and Zeus
-Meta: @79
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown

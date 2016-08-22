@@ -1374,17 +1374,6 @@ public class DataPage extends AbstractPage {
 			}
 		}
 	}
-	
-	public void verifyLookUpValues(String queryName, String tagName, String fid, By by) {
-		List<NameValuePair> nvPairs = new ArrayList<>();
-		nvPairs.add(new BasicNameValuePair("fid", fid));
-		nvPairs.add(new BasicNameValuePair("source", "trusted"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, queryName, nvPairs);
-		List<WebElement> countryOfOperationsList = getDriver().findElements(by);
-		for (int i = 0; i < (document.getElementsByTagName(tagName).getLength()) - 1; i++) {
-			assertEquals(document.getElementsByTagName(tagName).item(i).getTextContent().trim(), countryOfOperationsList.get(i + 1).getText().trim());
-		}
-	}
 
 	public void enterValueInTypeHeadDropDown(By by, String value) {
 		getDriver().findElement(by).sendKeys(value);

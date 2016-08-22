@@ -1096,7 +1096,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
 	@Then("the user verifies that the country of operations value is sorted in alphabetical order")
 	public void verifyCountryOfOperationsList(@Named("fid") String fid) {
 		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_dropdown_select"));
-		getDataPage().verifyLookUpValues("country list", "value", fid, LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_list"));
+		getEditLegalEntityPage().verifyCountryOfOperationsLookUpValues("country list", "value", fid);
 	}
 
 	@When("the user enters <countryOfOperations> in the country of operations drop down")
