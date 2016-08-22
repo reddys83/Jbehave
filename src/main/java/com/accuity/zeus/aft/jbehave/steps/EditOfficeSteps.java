@@ -581,6 +581,12 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyCityDropdownNull(cityDropDown);
     }
 
+    @Then("the user should see the delete row confirmation modal")
+    public void verifyOfficeDeleteConfirmationModal() {
+        getEditOfficePage().verifyOfficeDeleteConfirmationModal();
+    }
+
+
 
 }
 

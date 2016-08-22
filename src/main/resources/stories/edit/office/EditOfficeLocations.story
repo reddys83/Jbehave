@@ -73,7 +73,10 @@ And the user gets the document with get id for offices with the <officeFid> from
 And the user clicks on delete office locations row button for the row office_first_existing_row_location_delete_button
 Then the user should see the delete row confirmation modal in the office locations
 When the user clicks on the cancel no button
-Then the user should return to edit office locations page mode
+!-- The below three steps are the extra steps as the save functionality is not implemented in this story. These steps can be removed for 1299 and 1300
+And the user clicks on the cancel button
+Then the user should see the cancel update confirmation modal
+When the user clicks on the cancel yes button
 !-- When the user clicks on the save button
 !-- When the user clicks on the confirm button
 !-- Then the user verifies that the row values exists in the office locations page
@@ -115,6 +118,10 @@ And the user clicks on the add new office location button in the office page
 And the user clicks on delete office locations row button for the row office_first_new_row_location_delete_button
 Then the user should see the delete row confirmation modal in the office locations
 When the user clicks on the cancel no button
+!-- The below three steps are the extra steps as the save functionality is not implemented in this story. These steps can be removed for 1299 and 1300
+And the user clicks on the cancel button
+Then the user should see the cancel update confirmation modal
+When the user clicks on the cancel yes button
 !-- When the user clicks on the save button
 !-- When the user clicks on the confirm button
 !-- Then the user verifies that the row values exists in the office locations page
@@ -374,7 +381,7 @@ Examples:
 |entity|searchBy|fid|officeFid|subArea|
 |1010|FID|1010|1010-45|Kings|
 
-Scenario: Verify that the user should be able to edit a new office address row
+Scenario: Verify that the user should be able to edit an existing office address row
 a) - Verify if User can prevent deleting the location row by clicking on 'No'.
 b) - Verify if User can delete the location row by clicking on 'Yes'.
 
@@ -390,12 +397,16 @@ And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 When the user selects office address type office_addressType_first_row_existing_address_type_dropdown value as <Type>
-And the user clicks on delete office address row button for the row office_first_new_row_address_delete_button
+And the user clicks on delete office address row button for the row office_first_existing_row_address_delete_button
+Then the user should see the delete row confirmation modal
 When the user clicks on the No button to cancel the deletion of row in office locations page
 !-- And the user clicks on the save button
 !-- And the user clicks on the confirm button
 !-- Then the user verifies that the row values exists in the office locations page
-And the user clicks on delete office address row button for the row office_first_new_row_address_delete_button
+And the user gets the document with get id for offices with the <officeFid> from the database
+When the user selects office address type office_addressType_first_row_existing_address_type_dropdown value as <Type>
+And the user clicks on delete office address row button for the row office_first_existing_row_address_delete_button
+Then the user should see the delete row confirmation modal
 When the user clicks on the yes button in the delete row confirmation modal in the office page
 !-- And the user clicks on the save button
 !--Then the user should see the save confirmation modal
@@ -578,8 +589,8 @@ Examples:
 |1010|FID|1010|1010-44|
 
 Scenario: a)Verify that the user should be able to Add new telecoms row for an office location
-          b)Verify user can select a new value for Telecom Type as telephone and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,RangeLimit,Ext,TextAfter,AnswerBack
-          c)Verify user can select a new value for Telecom Type as fax and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,RangeLimit,Ext,TextAfter,AnswerBack
+          b)Verify user can select a new value for Telecom Type as telephone and Verify that the user can see and select values for the following fields :Rank,TextBefore,Country code,Area code,Number,RangeLimit,Ext,TextAfter
+          c)Verify user can select a new value for Telecom Type as fax and Verify that the user can see and select values for the following fields :Rank,TextBefore,Country code,Area code,Number,RangeLimit,Ext,TextAfter
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -601,7 +612,6 @@ And the user enters office telecoms value office_telecoms_first_row_new_Number v
 And the user enters office telecoms range limit office_telecoms_first_row_new_rangeLimit value as <RangeLimit>
 And the user enters office telecoms ext office_telecoms_first_row_new_ext value as <Ext>
 And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
-And the user enters office telecoms answer back office_telecoms_first_row_new_answerBack value as <AnswerBack>
 !-- And the user clicks on the save button
 !--Then the user should see the save confirmation modal
 !--And the user should see the below summary changes in confirmation modal
@@ -610,17 +620,17 @@ And the user enters office telecoms answer back office_telecoms_first_row_new_an
 !--When the user clicks on the confirm button
 !--Then the user should see the successful update message at top of the office page
 !--And the user verifies that the office telecom fields are entered in the office locations page
-Then the user should see the office telecomm fields as in zeus document
+!--Then the user should see the office telecomm fields as in zeus document
 !--And the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|
-|1010|FID|1010|1010-45|telephone|1|5 pm|708|298|3125|20|123|9 am|1 hr|
-|1010|FID|1010|1010-45|fax|1|5 pm|708|298|3142|20|123|9 am|1 hr|
+|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|
+|1010|FID|1010|1010-45|telephone|1|5 pm|708|298|3125|20|123|9 am|
+|1010|FID|1010|1010-45|fax|1|5 pm|708|298|3142|20|123|9 am|
 
 
-Scenario: a)Verify user can select a new value for Telecom Type as email and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value
-          b)Verify user can select a new value for Telecom Type as website and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value
+Scenario: a)Verify user can select a new value for Telecom Type as email and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter
+          b)Verify user can select a new value for Telecom Type as website and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -637,6 +647,7 @@ And the user selects office telecoms type office_telecoms_first_row_new_telecoms
 And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
 And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
 And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
+And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
 !--And the user clicks on the save button
 !--Then the user should see the save confirmation modal
 !--And the user should see the below summary changes in confirmation modal
@@ -648,10 +659,13 @@ And the user enters office telecoms value office_telecoms_first_row_new_value va
 !--And the user should see the office telecomm fields as in zeus document
 !--And the user reverts the changes to the document
 
+
 Examples:
-|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|
-|1010|FID|1010|1010-45|email|1|5 pm|abc||||||||
-|1010|FID|1010|1010-45|website|4|5 pm|xyz||||||||
+|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|TextAfter|
+|1010|FID|1010|1010-45|email|1|5 pm|abc|5 pm|
+|1010|FID|1010|1010-45|website|5|3 pm|xyz|4 pm|
+
+
 
 Scenario: a)Verify user can select a new value for Telecom Type as telex and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
           b)Verify user can select a new value for Telecom Type as reuters and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
@@ -686,10 +700,10 @@ And the user enters office telecoms answer back office_telecoms_first_row_new_an
 !--And the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|
-|1010|FID|1010|1010-45|telex|1|5 pm|abc||||||9 am|1 hr|
-|1010|FID|1010|1010-45|reuters|1|5 pm|afv||||||9 am|1 hr|
-|1010|FID|1010|1010-45|cable|1|5 pm|hsn||||||9 am|1 hr|
+|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|TextAfter|AnswerBack|
+|1010|FID|1010|1010-45|telex|1|5 pm|abc|9 am|1 hr|
+|1010|FID|1010|1010-45|reuters|1|5 pm|afv|9 am|1 hr|
+|1010|FID|1010|1010-45|cable|1|5 pm|hsn||9 am|1 hr|
 
 Scenario: a) Verify that the error message "Enter upto valid characters" is displayed when the Telecom Rank,Country Code, Number are left blank when the Type field is not null
 Meta: @skip

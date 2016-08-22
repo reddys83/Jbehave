@@ -885,6 +885,10 @@ public class EditOfficePage extends AbstractPage {
         assertEquals(cityDropDown, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_city_listBox")).getText());
 
     }
+
+    public void verifyOfficeDeleteConfirmationModal() {
+        assertEquals("Please confirm - would you like to delete this row? NO YES", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("delete_row_confirmation_modal_xpath")).getText());
+    }
     @Override
     public String getPageUrl() {
         return null;
