@@ -935,7 +935,7 @@ Examples:
 |1038|fid|1038||
 |1038|fid|1038|Corporate Bank|
 
-Scenario: 1 User is updating Legal Entity's Basic Info with existing data No different from current value- 
+Scenario: (1) User is updating Legal Entity's Basic Info with existing data No different from current value- 
 1 - User verifies whether the current 'Country of Operations' value is same as in trusted document.
 2 - User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
 3 - User verifies Legal Entity Basic Info changes has not been updated in confirmation modal
@@ -966,11 +966,11 @@ Examples:
 |entity|searchBy|fid|countryOfOperations|
 |1038|FID|1038|USA|
 
-Scenario: 2 User is updating a Legal Entity's Basic Info page - 
+Scenario: (2) User is updating a Legal Entity's Basic Info page - 
 1 - User selects 'UnKnown' for Country of Operations dropdown for a valid Legal Entity Type
 2 - User selects 'No' in the warning message to prevent saving of 'Undefined' for Country of Operations
 3 - User selects 'Yes' in the warning message to save 'Undefined' for Country of Operations.
-4 - User verifies Country of Operations value is updated both in UI and Zeus DB.
+4 - User verifies Country of Operations value is updated in Zeus DB.
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -1000,9 +1000,14 @@ Examples:
 |951|FID|951|Unknown|
 |153965|FID|153965|Unknown|
 
-Scenario: 3 User is updating a Legal Entity's Basic Info page -
-a) User selects a country in the Country of Operations dropdown for invalid Legal Entity Type
-b) User verifies 'Required' error message for Country of Operations dropdown
+Scenario: (3) User is updating a Legal Entity's Basic Info page -
+1- User verifies 'Required' error message for Country of Operations dropdown if Legal Entity Type is from following values
+	Bank
+	Building Society
+	Co-operative Bank
+	Credit Union
+	Savings & Loan Association
+	Savings Bank.
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -1021,10 +1026,10 @@ Examples:
 |1717|FID|1717|Unknown|
 |1165|FID|1165|Unknown|
 
-Scenario: 4 To update the Legal Entity`s 'Country of Opeartions' that is different from the current value
+Scenario: (4) To update the Legal Entity`s 'Country of Opeartions' that is different from the current value
 a) User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
 b) User verifies confirmation modal has summary change
-c) User verifies Country of Operations value is reflected UI and Zeus
+c) User verifies Country of Operations value is reflected in UI and Zeus
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead

@@ -1959,17 +1959,17 @@ public class EditLegalEntityPage extends AbstractPage {
 		}
 	}
 
-	public void verifyEnteredCountryOfOperationsValueNotInUI(String country) {
+	public void verifyCountryOfOperationsIsNotUpdated(String country) {
 		assertTrue(!country.equals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode")).getText()));
 	}
 	
-	public void verifyCountryOfOperationsLookUpValues(String queryName, String tagName, String fid) {
+	public void verifyLookUpValues(String queryName, String tagName, String fid) {
 		List<NameValuePair> nvPairs = new ArrayList<>();
 		nvPairs.add(new BasicNameValuePair("fid", fid));
 		nvPairs.add(new BasicNameValuePair("source", "trusted"));
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, queryName, nvPairs);
 		List<WebElement> countryOfOperationsList = getDriver().findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_list"));
-		for (int i = 0; i < (document.getElementsByTagName(tagName).getLength()) - 1; i++) {
+		for (int i = 0; i < (document.getElementsByTagName(tagName).getLength()); i++) {
 			assertEquals(document.getElementsByTagName(tagName).item(i).getTextContent().trim(), countryOfOperationsList.get(i+1).getText().trim());
 		}
 	}

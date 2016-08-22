@@ -20,15 +20,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.springframework.http.ResponseEntity;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 import org.openqa.selenium.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.util.Map;
-
 
 import static org.junit.Assert.*;
 
@@ -1376,15 +1372,15 @@ public class DataPage extends AbstractPage {
 	}
 
 	public void enterValueInTypeHeadDropDown(By by, String value) {
-		getDriver().findElement(by).sendKeys(value);
-		getDriver().findElement(by).sendKeys(Keys.RETURN);
 		try {
+			getDriver().findElement(by).sendKeys(value);
+			getDriver().findElement(by).sendKeys(Keys.RETURN);
 			Thread.sleep(1000L);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
-	 
+
 	public void clickOnWebElement(By by) {
 		attemptClick(by);
 	}
@@ -1397,5 +1393,4 @@ public class DataPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-
 }

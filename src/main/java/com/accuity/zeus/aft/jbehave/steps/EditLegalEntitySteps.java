@@ -1095,13 +1095,13 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
 	@Then("the user verifies that the country of operations value is sorted in alphabetical order")
 	public void verifyCountryOfOperationsList(@Named("fid") String fid) {
-		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_dropdown_select"));
-		getEditLegalEntityPage().verifyCountryOfOperationsLookUpValues("country list", "value", fid);
+		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
+		getEditLegalEntityPage().verifyLookUpValues("country list", "value", fid);
 	}
 
 	@When("the user enters <countryOfOperations> in the country of operations drop down")
 	public void enterCountryOfOperationsDropDownValue(@Named("countryOfOperations") String countryOfOperations) {
-		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_dropdown_select"));
+		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
 		getDataPage().enterValueInTypeHeadDropDown(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_type_ahead"),countryOfOperations);
 	}
 
@@ -1144,8 +1144,8 @@ public class EditLegalEntitySteps extends AbstractSteps{
 	}
 
 	@Then("the user should not see the newly added country of operations value in the legal entity basic info page")
-	public void verifyEnteredCountryOfOperationsValueNotInUI(@Named("countryOfOperations") String countryOfOperations) {
-		getEditLegalEntityPage().verifyEnteredCountryOfOperationsValueNotInUI(countryOfOperations);
+	public void verifyCountryOfOperationsIsNotUpdated(@Named("countryOfOperations") String countryOfOperations) {
+		getEditLegalEntityPage().verifyCountryOfOperationsIsNotUpdated(countryOfOperations);
 	}
 
 	@When("the user clicks on the Yes button for legal entity's country of operations warning message")
