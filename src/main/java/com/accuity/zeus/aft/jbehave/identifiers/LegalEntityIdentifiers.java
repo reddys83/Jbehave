@@ -195,15 +195,15 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_trustPower_admin_error_message_xpath",By.xpath(".//*[@class='notification error'][@data-error_id='trustPowerAdminError']"));
         hmap.put("legalEntity_trustPower_MinAccountSize_error_message_xpath",By.xpath(".//*[@class='notification error'][@data-error_id='trustPowerMinAccountSizeError']"));
         hmap.put("legalEntity_country_of_operations_edit_mode", By.xpath(".//*[@class='chosen-single']/span"));
-        hmap.put("country_of_operations_dropdown_select", By.xpath(".//*[@class='chosen-single']"));
-        hmap.put("country_of_operations_list", By.xpath(".//*[@id='legalEntityBasicInfo']//tr[th='Country of Operations']//ul[@class='chosen-results']/li"));
-        hmap.put("country_of_operations_type_ahead", By.xpath(".//*[@id='legalEntityBasicInfo']//div[@class='chosen-search']/input"));
-        hmap.put("legalEntity_country_of_operations_view_mode", By.xpath(".//*[@id='legalEntityBasicInfo']//tbody/tr[10]//a"));
-        hmap.put("country_of_operations_error_message", By.xpath("//*[@class='notification error'][@data-error_id='countryOfOperationsError']"));
-        hmap.put("country_of_operations_confirm_changes_heading", By.xpath("//*[@id='modal-region']//h1"));
-        hmap.put("country_of_operations_confirm_changes_info", By.xpath("//*[@id='modal-region']//p"));
-        hmap.put("warning_message_no_button", By.xpath(".//*[@class='modal-content']//button[@id='cancel-button']"));
-        hmap.put("warning_message_yes_button", By.xpath(".//*[@class='modal-content']//button[@id='confirm-button']"));
+        hmap.put("legalEntity_country_of_operations_dropdown_select", By.xpath(".//*[@class='chosen-single']"));
+        hmap.put("legalEntity_country_of_operations_list", By.xpath(".//*[@id='legalEntityBasicInfo']//tr[th='Country of Operations']//ul[@class='chosen-results']/li"));
+        hmap.put("legalEntity_country_of_operations_type_ahead", By.xpath(".//*[@id='legalEntityBasicInfo']//div[@class='chosen-search']/input"));
+        hmap.put("legalEntity_country_of_operations_view_mode", By.xpath(".//*[@id='legalEntityBasicInfo']//tr[th='Country of Operations']//td"));
+        hmap.put("legalEntity_country_of_operations_error_message", By.xpath("//*[@class='notification error'][@data-error_id='countryOfOperationsError']"));
+        hmap.put("legalEntity_warning_message_header", By.xpath("//*[@id='modal-region']//h1"));
+        hmap.put("legalEntity_warning_message_content", By.xpath("//*[@id='modal-region']//p"));
+        hmap.put("legalEntity_warning_message_no_button", By.xpath(".//*[@class='modal-content']//button[@id='cancel-button']"));
+        hmap.put("legalEntity_warning_message_yes_button", By.xpath(".//*[@class='modal-content']//button[@id='confirm-button']"));
 
     }
 

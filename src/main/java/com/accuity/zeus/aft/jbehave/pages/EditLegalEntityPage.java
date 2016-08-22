@@ -1940,34 +1940,29 @@ public class EditLegalEntityPage extends AbstractPage {
     }
     
 
-    public void verifyCountryOfOperationsFromTrustedDB(String fid, String source, String tagName)
-    {
-    	assertEquals(getLegalEntityValuesFromDB(fid, tagName, source), getDriver()
-				.findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode")).getText());
-    } 
-    
-    public void verifyCountryOfOperationsFromZeusDB(String fid, String countryOfOperations, String source, String tagName)
-    {    	
-    	assertEquals(getLegalEntityValuesFromDB(fid, tagName, source), countryOfOperations);
-    }   
-     
+	public void verifyCountryOfOperationsFromTrustedDB(String fid, String source, String tagName) {
+		assertEquals(getLegalEntityValuesFromDB(fid, tagName, source), getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode")).getText());
+	}
+
+	public void verifyCountryOfOperationsFromZeusDB(String fid, String countryOfOperations, String source, String tagName) {
+		assertEquals(getLegalEntityValuesFromDB(fid, tagName, source), countryOfOperations);
+	}
+
 	public void verifyCountryOfOperationsWarningMessage() {
 		try {
 			Thread.sleep(1000L);
-			 Thread.sleep(1000L);
-             assertEquals("Confirm Changes", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_confirm_changes_heading")).getText());
-             assertEquals("Please confirm - Legal Entity does not have a Country of Operations", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_confirm_changes_info")).getText());
-             assertEquals("NO", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("warning_message_no_button")).getText());
-             assertEquals("YES", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("warning_message_yes_button")).getText());
+			assertEquals("Confirm Changes", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_header")).getText());
+			assertEquals("Please confirm - Legal Entity does not have a Country of Operations", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_content")).getText());
+			assertEquals("NO", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_no_button")).getText());
+			assertEquals("YES",	getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_yes_button")).getText());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
-    
-    public void verifyEnteredCountryOfOperationsValueNotInUI(String country)
-    {
-    	assertTrue(!country.equals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode")).getText()));
-    }
+
+	public void verifyEnteredCountryOfOperationsValueNotInUI(String country) {
+		assertTrue(!country.equals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode")).getText()));
+	}
     
     @Override
     public String getPageUrl() {

@@ -940,9 +940,8 @@ Scenario: 1 User is updating Legal Entity's Basic Info with existing data No dif
 2 - User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
 3 - User verifies Legal Entity Basic Info changes has not been updated in confirmation modal
 4 - User verifies Country of Operations value is updated correctly in UI and Zeus
-
+Meta: @79
 Given a user is on the search page
-When the user clicks on the results tab
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -972,9 +971,8 @@ Scenario: 2 User is updating a Legal Entity's Basic Info page -
 2 - User selects 'No' in the warning message to prevent saving of 'Undefined' for Country of Operations
 3 - User selects 'Yes' in the warning message to save 'Undefined' for Country of Operations.
 4 - User verifies Country of Operations value is updated both in UI and Zeus DB.
-
+Meta: @79
 Given a user is on the search page
-When the user clicks on the results tab
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -993,48 +991,42 @@ Then the user should see the newly added country of operations value in the lega
 When the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the legal entity page
-Then the user verifies the country of operations value in the legal entity basic info page
 Then the user should see the country of operations value same as in zeus document
 Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|countryOfOperations|
 |91832|FID|91832|Unknown|
+|951|FID|951|Unknown|
+|153965|FID|153965|Unknown|
 
 Scenario: 3 User is updating a Legal Entity's Basic Info page -
 a) User selects a country in the Country of Operations dropdown for invalid Legal Entity Type
 b) User verifies 'Required' error message for Country of Operations dropdown
-
+Meta: @79
 Given a user is on the search page
-When the user clicks on the results tab
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the legalEntity update link
-And the user selects to delete all the entity type rows except the first one
-And the user selects entity type value as <entityTypeValue> from first_existing_entitytype_dropdown in the basicinfo legalentity page
 When the user enters <countryOfOperations> in the country of operations drop down
 When the user clicks on the save button
 Then the user should see the error message Required for country of operations dropdown in the legal entity basic info page
 
 Examples:
-|entity|searchBy|fid|entityTypeValue|countryOfOperations|
-|1038|FID|1038|Bank|Unknown|
-|1038|FID|1038|Building Society|Unknown|
-|1038|FID|1038|Co-operative Bank|Unknown|
-|1038|FID|1038|Credit Union|Unknown|
-|1038|FID|1038|Savings & Loan Association|Unknown|
-|1038|FID|1038|Savings Bank|Unknown|
+|entity|searchBy|fid|countryOfOperations|
+|1038|FID|1038|Unknown|
+|1717|FID|1717|Unknown|
+|1165|FID|1165|Unknown|
 
 Scenario: 4 To update the Legal Entity`s 'Country of Opeartions' that is different from the current value
 a) User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
 b) User verifies confirmation modal has summary change
 c) User verifies Country of Operations value is reflected UI and Zeus
-
+Meta: @79
 Given a user is on the search page
-When the user clicks on the results tab
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

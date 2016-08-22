@@ -1095,18 +1095,14 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
 	@Then("the user verifies that the country of operations value is sorted in alphabetical order")
 	public void verifyCountryOfOperationsList(@Named("fid") String fid) {
-		getDataPage()
-				.clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_dropdown_select"));
-		getDataPage().verifyLookUpValues("country list", "value", fid,
-				LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_list"));
+		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_dropdown_select"));
+		getDataPage().verifyLookUpValues("country list", "value", fid, LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_list"));
 	}
 
 	@When("the user enters <countryOfOperations> in the country of operations drop down")
 	public void enterCountryOfOperationsDropDownValue(@Named("countryOfOperations") String countryOfOperations) {
-		getDataPage()
-				.clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_dropdown_select"));
-		getDataPage().enterValueInTypeHeadDropDown(
-				LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_type_ahead"), countryOfOperations);
+		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_dropdown_select"));
+		getDataPage().enterValueInTypeHeadDropDown(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_type_ahead"),countryOfOperations);
 	}
 
 	@Then("the user verifies the country of operations value in the legal entity basic info page")
@@ -1114,8 +1110,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
 		if (countryOfOperations.equals("Unknown")) {
 			countryOfOperations = "";
 		}
-		getDataPage().verifyWebElementText("Country Of Operations", countryOfOperations,
-				LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_view_mode"));
+		getDataPage().verifyWebElementText("Country Of Operations", countryOfOperations, LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_view_mode"));
 	}
 
 	@Then("the user should see the successful update message at top of the legal entity page")
@@ -1135,8 +1130,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
 	@Then("the user should see the error message $errorMessage for country of operations dropdown in the legal entity basic info page")
 	public void verifyErrorMessageForCountryOfOperations(@Named("errorMessage") String errorMessage) {
-		getDataPage().verifyWebElementText("Country Of Operations", errorMessage,
-				LegalEntityIdentifiers.getObjectIdentifier("country_of_operations_error_message"));
+		getDataPage().verifyWebElementText("Country Of Operations", errorMessage, LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_error_message"));
 	}
 
 	@Then("the user should see the warning message for legal entity's country of operations")
@@ -1146,7 +1140,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
 	@When("the user clicks on the No button for legal entity's country of operations warning message")
 	public void clickOnWarningMessageNoButton() {
-		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("warning_message_no_button"));
+		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_no_button"));
 	}
 
 	@Then("the user should not see the newly added country of operations value in the legal entity basic info page")
@@ -1156,13 +1150,12 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
 	@When("the user clicks on the Yes button for legal entity's country of operations warning message")
 	public void clickOnWarningMessageYesButton() {
-		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("warning_message_yes_button"));
+		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_yes_button"));
 	}
 
 	@Then("the user should see the newly added country of operations value in the legal entity basic info page")
 	public void verifyEnteredCountryOfOperationsValueInUI(@Named("countryOfOperations") String countryOfOperations) {
-		getDataPage().verifyWebElementText("Country Of Operations", countryOfOperations,
-				LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
+		getDataPage().verifyWebElementText("Country Of Operations", countryOfOperations, LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
 	}
     
   }

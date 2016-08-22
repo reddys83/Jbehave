@@ -1379,8 +1379,7 @@ public class DataPage extends AbstractPage {
 		List<NameValuePair> nvPairs = new ArrayList<>();
 		nvPairs.add(new BasicNameValuePair("fid", fid));
 		nvPairs.add(new BasicNameValuePair("source", "trusted"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, queryName,
-				nvPairs);
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, queryName, nvPairs);
 		List<WebElement> countryOfOperationsList = getDriver().findElements(by);
 		for (int i = 0; i < (document.getElementsByTagName(tagName).getLength()) - 1; i++) {
 			assertEquals(document.getElementsByTagName(tagName).item(i).getTextContent().trim(), countryOfOperationsList.get(i + 1).getText().trim());
@@ -1402,7 +1401,12 @@ public class DataPage extends AbstractPage {
 	}
 
 	public void verifyWebElementText(String fieldName, String expectedText, By by) {
-		assertEquals(fieldName + ":", expectedText, getDriver().findElement(by).getText());
+		try {
+			Thread.sleep(2000L);
+			assertEquals(fieldName + ":", expectedText, getDriver().findElement(by).getText());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
