@@ -92,7 +92,7 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_personnel_add_button_id", By.id("add-personnel"));
         hmap.put("legalEntity_personnel_type_error_message_xpath", By.xpath(".//*[@id='additionalPersonnel']//p[@class='notification error']"));
         hmap.put("legalEntity_personnel_value_error_message_xpath", By.xpath(".//*[@id='additionalPersonnel']//p[@data-error_id='personnelValueError']"));
-        hmap.put("legalEntity_office_page_offices_label_xpath",By.xpath("//div[@id='subEntityList-summary']//span[text()='offices']"));
+        hmap.put("legalEntity_office_page_offices_label_xpath",By.xpath("//div[@id='subEntityList-summary']//span[contains(text(),'office')]"));
         hmap.put("legalEntity_Identifier_link_Navigation_xpath",By.xpath(".//*[@id='legalEntityIdentifiers']"));
         hmap.put("legalEntity_first_row_existing_identifier_type_dropdown",By.xpath("//*[@id='additionalIdentifiers']/tr[1]/td[1]/select"));
         hmap.put("legalEntity_first_row_existing_identifier_status_dropdown",By.xpath("//*[@id='additionalIdentifiers']/tr[1]/td[3]/select"));
