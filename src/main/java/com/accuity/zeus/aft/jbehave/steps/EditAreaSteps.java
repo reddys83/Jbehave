@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 
 @Component
 public class EditAreaSteps extends AbstractSteps {
@@ -805,4 +808,33 @@ public class EditAreaSteps extends AbstractSteps {
 		 setEditAreaPage(getDataPage().createEditAreaPage());
 		 getEditAreaPage().clickOnAreaRegionsInNavigationBar();
 	    }
+	 
+	 @When("the user deletes all existing area regions in area page in area page")
+		public void deleteAllAreaRegionsRows() {
+		    setEditCityPage(getDataPage().createEditCityPage());
+			getEditCityPage().clickOnAddNewRegionButton();
+			getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_delete_region_row_button_xpath"));
+		}
+	 
+	 @When("the user enters region value as <newRegionValue> in the region area page")
+		public void enterRegionValue(@Named("newRegionValue") String newRegionValue) {
+		 getEditAreaPage().enterRegionValue(newRegionValue);
+		}
+	 
+	 @Then("the user should see the area region type and value updated in UI")
+		public void verifyAreaRegionTypeAndValue(@Named("newRegionType") String newRegionType, 
+											     @Named("newRegionValue") String newRegionValue) {
+		 getEditAreaPage().verifyRegionTypeAndValue(newRegionType, newRegionValue);		
+		}
+		
+	 @Then("the user should see the error message for the required region value field in the area region page")
+		public void verifyErrorMessageForRequiredAreaRegionValue() {
+		 getEditAreaPage().verifyErrorMessageForRequiredAreaRegionValue();
+		}
+	 
+	 @Then("the user should see the blank area region type and blank value is not updated in $source document")
+		public void verifyAreaRegionForBlankValue(@Named("country") String country, @Named("area") String area,@Named("source") String source) {
+			Map<String, String> areaRegionValueMap = getEditAreaPage().getAreaRegionValueMapFromDB(country, area,source);
+			getEditAreaPage().verifyAreaRegionForBlankValue(areaRegionValueMap);
+		}
 }

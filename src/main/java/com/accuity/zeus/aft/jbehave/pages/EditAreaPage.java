@@ -24,6 +24,7 @@ import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -1507,7 +1508,69 @@ public class EditAreaPage extends AbstractPage {
 	            e.printStackTrace();
 	        }
 	    }
+	 
+	 public void clickOnAddRegionsButton() {
+			attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_new_region_button_id"));
+		}
 
+	 public void enterRegionValue(String regionValue) {
+			selectItemFromDropdownListByValue(AreaIdentifiers.getObjectIdentifier("area_region_value_dropdown_xpath"), regionValue);
+		}
+	 
+	 public void verifyRegionTypeAndValue(String regionType, String regionValue) {
+			try {
+				Boolean regionAndValueFound = false;
+				WebElement regionTable = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_table"));
+				List<WebElement> regionRows = regionTable.findElements(By.tagName("tr"));
+				for(int i=1;i<regionRows.size();i++)
+				{
+					if(regionRows.get(i).getText().contains(regionType) && regionRows.get(i).getText().contains(regionValue)){				
+						List<WebElement> regionRowColumns = regionRows.get(i).findElements(By.tagName("td"));					
+						if (regionRowColumns.get(0).getText().equals(regionType) && regionRowColumns.get(1).getText().equals(regionValue)) {				
+							regionAndValueFound = true;
+							break;
+						}
+					}		
+				}
+				assertTrue(regionAndValueFound);
+				
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}	
+	 
+	 public void verifyErrorMessageForRequiredAreaRegionValue() {
+			assertEquals("Required", getDriver()
+					.findElement(AreaIdentifiers.getObjectIdentifier("area_region_value_req_err_msg_xpath")).getText());
+		}
+	 
+	 public Map<String, String> getAreaRegionValueMapFromDB(String country, String area,String source) {
+			Map<String, String> areaRegionMap = new HashMap<String, String>();
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			try {
+				Thread.sleep(1000L);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area basic info", nvPairs);
+			if (document != null) {
+				NodeList nodeList = document.getElementsByTagName("region");
+				for(int index = 0; index < nodeList.getLength(); index++)  {
+					NodeList childNodeList = nodeList.item(index).getChildNodes();
+					areaRegionMap.put(childNodeList.item(0).getTextContent(), childNodeList.item(1).getTextContent());
+				}
+			}
+			return areaRegionMap;
+		}
+
+	 public void verifyAreaRegionForBlankValue(Map<String, String> areaRegionValueMap) {
+			assertEquals(areaRegionValueMap.keySet().size(), 0);
+		}
+	 
 	@Override
 	public String getPageUrl() {
 		return null;
