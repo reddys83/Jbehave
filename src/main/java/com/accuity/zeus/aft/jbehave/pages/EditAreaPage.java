@@ -1571,6 +1571,11 @@ public class EditAreaPage extends AbstractPage {
 			assertEquals(areaRegionValueMap.keySet().size(), 0);
 		}
 	 
+	 public void verifyRegionValueInDB(Map<String, String> areaRegionMap, String newRegionType, String newRegionValue) {
+			assertTrue(areaRegionMap.containsKey(newRegionType));
+			assertEquals(areaRegionMap.get(newRegionType), newRegionValue);
+		}
+	 
 	@Override
 	public String getPageUrl() {
 		return null;

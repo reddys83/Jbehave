@@ -837,4 +837,16 @@ public class EditAreaSteps extends AbstractSteps {
 			Map<String, String> areaRegionValueMap = getEditAreaPage().getAreaRegionValueMapFromDB(country, area,source);
 			getEditAreaPage().verifyAreaRegionForBlankValue(areaRegionValueMap);
 		}
+	 
+	 @Then("the user should see the area region type and value updated in $source document")
+		public void verifyAreaRegion2ValueFromDB(@Named("country") String country, @Named("area") String area,@Named("newRegionValue") String newRegionValue,@Named("newRegionType") String newRegionType,@Named("source") String source) {
+		 Map<String, String> areaRegionValueMap = getEditAreaPage().getAreaRegionValueMapFromDB(country, area,source);
+		 getEditAreaPage().verifyRegionValueInDB(areaRegionValueMap, newRegionValue, newRegionType);
+		}
+	 
+	 /*@Then("the user should see the area region type and value updated in UI")
+		public void verifyAreaRegionTypeAndValueUI(@Named("newRegionType") String newRegionType, 
+											     @Named("newRegionValue") String newRegionValue) {
+			getEditCityPage().verifyRegionTypeAndValue(newRegionType, newRegionValue);
+		}*/
 }
