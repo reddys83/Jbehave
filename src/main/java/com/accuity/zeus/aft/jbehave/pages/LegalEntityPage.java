@@ -86,7 +86,7 @@ public class LegalEntityPage extends AbstractPage {
     String legalEntity_boardMeeting_type_values_xpath = ("//li[h1='Board Meetings']//tr[td='");
     private By legalEntity_boardMeeting_header_xpath = By.xpath("//li[h1='Board Meetings'] //span");
     private By credit_rating_section_xpath = By.xpath("//li[h1='Credit Rating']");
-    private By office_link_xpath = By.id("office-link");
+    private By office_link_xpath = By.id("office-nav");
     private By legalEntity_leadinstitution_radio_options_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//input[@name='leadInstitution']");
 
 

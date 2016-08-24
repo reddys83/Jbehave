@@ -199,13 +199,8 @@ Then the user should see the list of all existing subarea for the selected area 
 When the user clicks on the choose a subarea option in the office locations
 When the user enters the office subarea <subArea> in the type-ahead box
 When the user clicks on the choose a city option in the office locations
-Then the user should see the below office cities for the selected subarea:
-|CITIES|
-|Alexis|
-|Kirkwood|
-|Little York|
-|Monmouth|
-|Roseville|
+When the user enters the office city <City> in the type-ahead box
+Then the user should see the list of all existing city for the selected area by full name in office address
 When the user enters office address postal code office_address_first_row_new_postalCode value as <PostalCode>
 And the user enters office address postal code suffix office_address_first_row_new_postalCodeSuffix value as <PostalCodeSuffix>
 And the user enters office address info office_address_first_row_new_info value as <Info>
@@ -245,29 +240,12 @@ Then the user should see the below office states for the selected country:
 |No Area|
 |Return All Cities|
 When the user enters the office area <Area> in the type-ahead box
-And the user clicks on the choose a city option in the office locations
-Then the user should see the below office cities for the selected area:
-
-|CITIES|
-|Brändö|
-|Eckerö|
-|Föglö|
-|Geta|
-|Godby|
-|Hammarland|
-|Jomala|
-|Kökar|
-|Kumlinge|
-|Lappo|
-|Lemland|
-|Mariehamn|
-|Saltvik|
-|Sottunga|
-|Vårdö|
+When the user clicks on the choose a city option in the office locations
+Then the user should see the list of all existing city for the selected area by full name in office address
 
 Examples:
 |entity|searchBy|fid|officeFid|Country|Area|
-|1010|FID|1010|1010-45|Åland Islands|Return All Cities|
+|1010|FID|1010|1010-45|USA|Return All Cities|
 
 Scenario: Verify return cities wth no area
 
@@ -287,28 +265,11 @@ When the user enters the office country <Country> in the type-ahead box
 When the user clicks on the choose an area option in the office locations
 When the user enters the office area <Area> in the type-ahead box
 And the user clicks on the choose a city option in the office locations
-Then the user should see the below office cities for the selected area:
-
-|CITIES|
-|Brändö|
-|Eckerö|
-|Föglö|
-|Geta|
-|Godby|
-|Hammarland|
-|Jomala|
-|Kökar|
-|Kumlinge|
-|Lappo|
-|Lemland|
-|Mariehamn|
-|Saltvik|
-|Sottunga|
-|Vårdö|
+Then the user should see the list of all existing city for the selected area by full name in office address
 
 Examples:
 |entity|searchBy|fid|officeFid|Country|Area|
-|1010|FID|1010|1010-45|Åland Islands|No Area|
+|1010|FID|1010|1010-45|USA|No Area|
 
 Scenario: Verify the values of area,subarea,city should be changed to null when the country value is changed
 

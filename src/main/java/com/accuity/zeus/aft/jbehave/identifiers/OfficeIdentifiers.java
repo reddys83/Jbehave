@@ -26,7 +26,6 @@ public class OfficeIdentifiers {
         hmap.put("office_basicInfo_view_foreignoffice_xpath", By.xpath(".//*[@id='officeBasicInfo']//tr[th='Foreign Office']/td"));
         hmap.put("office_basicInfo_AdditionalInfo_textarea_xpath", By.xpath(".//*[@id='officeBasicInfo']//tr[th='Add Info']/td/textarea"));
         hmap.put("office_basicInfo_AdditionalInfo_textarea_view_xpath", By.xpath(".//*[@id='officeBasicInfo']//tr[th='Add Info']/td"));
-        hmap.put("office_location_addRow_id", By.id("add-locations"));
         hmap.put("office_first_row_existing_location_add_button", By.id("add-locations"));
         hmap.put("office_locations_row_view", By.xpath(".//*[@id='officeLocations']/h1"));
         hmap.put("office_first_existing_row_location_delete_button", By.id("delete-location"));

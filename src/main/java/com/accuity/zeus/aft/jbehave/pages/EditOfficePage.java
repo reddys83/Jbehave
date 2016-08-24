@@ -195,7 +195,7 @@ public class EditOfficePage extends AbstractPage {
     }
 
      public void clickAddRowButton() {
-        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_location_addRow_id"));
+        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_first_row_existing_location_add_button"));
     }
 
     public void verifyAddOfficeLocationButtonStatus(String add_button) {
@@ -381,6 +381,7 @@ public class EditOfficePage extends AbstractPage {
             assertEquals(areas.getRow(i).get(areas.getHeaders().get(0)), areasCollection.get(i).getText());
         }
     }
+
 
     public void verifyCitiesForSelectedArea(ExamplesTable cities) {
         List<WebElement> areasCollection = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_city_dropdown_list"));
