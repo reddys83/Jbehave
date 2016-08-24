@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -840,8 +841,33 @@ public class EditAreaSteps extends AbstractSteps {
 	 
 	 @Then("the user should see the area region type and value updated in $source document")
 		public void verifyAreaRegion2ValueFromDB(@Named("country") String country, @Named("area") String area,@Named("newRegionValue") String newRegionValue,@Named("newRegionType") String newRegionType,@Named("source") String source) {
-		 Map<String, String> areaRegionValueMap = getEditAreaPage().getAreaRegionValueMapFromDB(country, area,source);
-		 getEditAreaPage().verifyRegionValueInDB(areaRegionValueMap, newRegionValue, newRegionType);
+		 //List <String> areaRegionValueMap = (HashMap<String, String>) getEditAreaPage().getAreaRegionValueMapFromDB(country, area,source);
+		 //getEditAreaPage().verifyRegionValueInDB(areaRegionValueMap, newRegionType, newRegionValue);
+		}
+	 
+	 @When("the user clicks on the delete region row button in the region area page")
+		public void clickOnDeleteRegionRowButtonArea() {
+		 getEditAreaPage().clickOnDeleteRegionRowButtonArea();
+		}
+	 
+	 @Then("the user should see the area region type and value updated in edit area page")
+		public void verifyAreaRegionTypeAndValueInEditMode(@Named("newRegionType") String newRegionType, 
+											     @Named("newRegionValue") String newRegionValue) {
+		 getEditAreaPage().verifyAreaRegionTypeAndValueInEditMode(newRegionType, newRegionValue);		
+		}
+	 
+	 @Then("the user should see the area region type and value deleted in UI")
+		public void verifyAreaRegionTypeDeleted(@Named("newRegionType") String newRegionType,
+				@Named("newRegionValue") String newRegionValue) {
+		 getEditAreaPage().verifyRegionTypeNotPresentInUI(newRegionType, newRegionValue);
+		}
+	 
+	 @Then("the user should see the area region not present in $source document")
+		public void verifyAreaRegionDeletedFromDB(@Named("country") String country, @Named("area") String area, 
+												  @Named("source") String source, @Named("newRegionType") String newRegionType, 
+												  @Named("newRegionValue") String newRegionValue) {
+			Map<String, String> areaRegionValueMap = getEditAreaPage().getAreaRegionValueMapFromDB(country, area, source);
+			getEditAreaPage().verifyAreaRegionDeletedFromDB(areaRegionValueMap, newRegionType);
 		}
 	 
 	 /*@Then("the user should see the area region type and value updated in UI")

@@ -85,7 +85,7 @@ public class AreaIdentifiers {
 		hmap.put("area_region_value_dropdown_xpath", By.xpath(".//select[@id='regionValue']"));
 		hmap.put("area_region_value_dropdown_option", By.xpath(".//select[@id='regionValue']/option"));
 		hmap.put("area_region_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalRegions']//*[@data-error_id='regionValueError']")));
-		hmap.put("area_delete_region_row_button_xpath", By.xpath(".//*[@data-row_id='regions']//button[@class='delete-row']"));
+		hmap.put("area_delete_region_row_button_xpath", By.xpath(".//*[@data-row_id='regions']//button[@class='delete-element']"));
 		hmap.put("area_region_table", By.xpath("//*[@id='areaRegions']//table"));
 		hmap.put("area_region_link", By.xpath("//*[@id='areaRegions']"));
 	}
