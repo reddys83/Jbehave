@@ -321,7 +321,6 @@ Examples:
 
 Scenario: a)Verify that the Offices's Additional Info is not a required field and the value can be blank.
           b)Verify that the Office's Additional Info field max length is 10000 characters only.
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -334,9 +333,6 @@ When the user gets the document with get id for offices with the <officeFid> fro
 And the user enters the <additionalInfoText> in the office additional info text area
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info|
 When the user clicks on the confirm button
 Then the user should see office additional info text value as <additionalInfoText> for fid <officeFid> in zeus document and in zeus UI
 And the user reverts the changes to the document
@@ -379,7 +375,7 @@ Examples:
 
 Scenario: Update and Save existing office type- Select a non-Blank value and Save. Verify the value is saved in Zeus document
 
-
+Meta:@red109
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
