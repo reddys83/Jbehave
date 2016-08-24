@@ -66,6 +66,11 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().verifyOfficesTabInOffice();
     }
 
+    @Then("the user should not see the offices tab in the office page")
+    public void verifyNoOfficesTabInOffice() {
+        getOfficesPage().verifyNoOfficesTabInOffice();
+    }
+
     @When("the user clicks on the office basic info link in the navigation bar")
     public void clickOnOfficeBasicInfoLink() {
         getOfficesPage().clickOnOfficeBasicInfoLink();
