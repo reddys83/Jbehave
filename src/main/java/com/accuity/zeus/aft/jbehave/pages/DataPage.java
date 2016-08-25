@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.Response;
@@ -1371,4 +1372,18 @@ public class DataPage extends AbstractPage {
 			}
 		}
 	}
+	
+	public void verifyLookUpValues(By by,String xqueryName,String tagName) {
+		List<WebElement> regionTypeList = getDriver().findElements(by);
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xqueryName);
+		assertTrue(document.getElementsByTagName(tagName).getLength() > 1);
+		for (int i = 1; i < document.getElementsByTagName(tagName).getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					regionTypeList.get(i).getAttribute("value"));
+		}
+	}
+	
+	public void clickOnWebElement(By by) {
+		  attemptClick(by);
+		 }
 }

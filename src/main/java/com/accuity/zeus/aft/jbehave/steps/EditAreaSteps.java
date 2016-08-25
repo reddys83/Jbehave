@@ -1,7 +1,6 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Component;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 
 @Component
 public class EditAreaSteps extends AbstractSteps {
@@ -796,7 +794,9 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should see the region type from 'AREA_ALTERNATIVE_REGION' look up")
 	public void verifyAreaRegionTypeList() {
-		getEditAreaPage().verifyAreaRegionTypeList();
+		getDataPage().verifyLookUpValues(
+				AreaIdentifiers.getObjectIdentifier("area_region_type_identifier_dropdown_options_xpath"),
+				"get area region types", "regiontype");
 	}
 
 	@Then("the user should see the area region value from <regionValueLookUp>")
@@ -807,7 +807,7 @@ public class EditAreaSteps extends AbstractSteps {
 	@When("the user clicks on the area regions link in the navigation bar")
 	public void clickOnAreaRegions() {
 		setEditAreaPage(getDataPage().createEditAreaPage());
-		getEditAreaPage().clickOnAreaRegionsInNavigationBar();
+		getDataPage().clickOnWebElement(AreaIdentifiers.getObjectIdentifier("area_region_link"));
 	}
 
 	@When("the user deletes all existing area regions in area page in area page")
@@ -850,7 +850,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on the delete region row button in the region area page")
 	public void clickOnDeleteRegionRowButtonArea() {
-		getEditAreaPage().clickOnDeleteRegionRowButtonArea();
+		getDataPage().clickOnWebElement(AreaIdentifiers.getObjectIdentifier("area_delete_region_row_button_xpath"));
 	}
 
 	@Then("the user should see the area region type and value updated in edit area page")

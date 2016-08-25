@@ -23,8 +23,6 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -1475,18 +1473,6 @@ public class EditAreaPage extends AbstractPage {
 				regionType);
 	}
 
-	public void verifyAreaRegionTypeList() {
-		List<WebElement> regionTypeList = getDriver().findElements(
-				AreaIdentifiers.getObjectIdentifier("area_region_type_identifier_dropdown_options_xpath"));
-
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area region types");
-		assertTrue(document.getElementsByTagName("regiontype").getLength() > 1);
-		for (int i = 1; i < document.getElementsByTagName("regiontype").getLength(); i++) {
-			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
-					regionTypeList.get(i).getAttribute("value"));
-		}
-	}
-
 	public void verifyAreaRegionValueList(String regionValueLookUp) {
 		List<WebElement> regionValueList = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_region_value_dropdown_option"));
@@ -1500,19 +1486,6 @@ public class EditAreaPage extends AbstractPage {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					regionValueList.get(i).getAttribute("value"));
 		}
-	}
-
-	public void clickOnAreaRegionsInNavigationBar() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_region_link"));
-		try {
-			Thread.sleep(2000L);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void clickOnAddRegionsButton() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_new_region_button_id"));
 	}
 
 	public void enterRegionValue(String regionValue) {
@@ -1581,10 +1554,6 @@ public class EditAreaPage extends AbstractPage {
 		assertEquals(areaRegionMap.get(newRegionType), newRegionValue);
 	}
 
-	public void clickOnDeleteRegionRowButtonArea() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_region_row_button_xpath"));
-	}
-
 	public void verifyAreaRegionTypeAndValueInEditMode(String regionType, String regionValue) {
 		try {
 			assertEquals(regionType,
@@ -1600,7 +1569,7 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyRegionTypeNotPresentInUI(String regionType, String regionValue) {
 		try {
-			WebElement regionTable = getDriver().findElement(CityIdentifiers.getObjectIdentifier("area_region_table"));
+			WebElement regionTable = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_table"));
 			List<WebElement> regionRows = regionTable.findElements(By.tagName("tr"));
 			Boolean regionTypeAndValueNotFound = true;
 			for (int i = 0; i < regionRows.size(); i++) {

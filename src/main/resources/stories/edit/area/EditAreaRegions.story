@@ -25,6 +25,7 @@ Then the user should see the area region value from <regionValueLookUp>
 Examples:
 |country|area|newRegionType|regionValueLookUp|
 |Angola|Cabinda|Federal Reserve District|FEDERAL_RESERVE_DISTRICT|
+|Angola|Cabinda|Federal Home Loan Bank District|FEDERAL_HOME_LOAN_BANK_DISTRICT|
 
 Scenario: User updates existing region type and value, checks the confirmation summary modal and saves the data to DB
 
@@ -53,6 +54,7 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|newRegionType|newRegionValue|
 |Angola|Cabinda|Federal Reserve District|1|
+|Angola|Cabinda|Federal Home Loan Bank District|6|
 
 Scenario: User adds new region type and value, checks the confirmation summary modal and saves the data to DB
 
@@ -80,6 +82,7 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|newRegionType|newRegionValue|
 |Angola|Cabinda|Federal Reserve District|3|
+|Angola|Cabinda|Federal Home Loan Bank District|9|
 
 Scenario: User adds new region type but not selected region value, checks whether the required message is displayed
 
@@ -123,8 +126,8 @@ Then the user should see the blank area region type and blank value is not updat
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|newRegionType|newRegionValue|
-|Angola|Cabinda|Federal Reserve District|6|
+|country|area|
+|Angola|Cabinda|
 
 
 Scenario: User can edit area region - 
