@@ -1471,161 +1471,159 @@ public class EditAreaPage extends AbstractPage {
 	}
 	
 	public void enterAreaRegionType(String regionType) {
-		selectItemFromDropdownListByValue(AreaIdentifiers.getObjectIdentifier("area_region_type_dropdown_xpath"), regionType);
+		selectItemFromDropdownListByValue(AreaIdentifiers.getObjectIdentifier("area_region_type_dropdown_xpath"),
+				regionType);
 	}
-	
+
 	public void verifyAreaRegionTypeList() {
-		List<WebElement> regionTypeList = getDriver()
-				.findElements(AreaIdentifiers.getObjectIdentifier("area_region_type_identifier_dropdown_options_xpath"));
-		
+		List<WebElement> regionTypeList = getDriver().findElements(
+				AreaIdentifiers.getObjectIdentifier("area_region_type_identifier_dropdown_options_xpath"));
+
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area region types");
-		assertTrue(document.getElementsByTagName("regiontype").getLength()>1);
+		assertTrue(document.getElementsByTagName("regiontype").getLength() > 1);
 		for (int i = 1; i < document.getElementsByTagName("regiontype").getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					regionTypeList.get(i).getAttribute("value"));
 		}
 	}
-	
-	public void verifyAreaRegionValueList(String regionValueLookUp) {		
+
+	public void verifyAreaRegionValueList(String regionValueLookUp) {
 		List<WebElement> regionValueList = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_region_value_dropdown_option"));
 		List<NameValuePair> nvPairs = new ArrayList<>();
 		nvPairs.add(new BasicNameValuePair("fid", regionValueLookUp));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area region values", nvPairs);
-	
-		assertTrue("DB values are empty", document.getElementsByTagName("regionvalue").getLength()>1);
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get area region values", nvPairs);
+
+		assertTrue("DB values are empty", document.getElementsByTagName("regionvalue").getLength() > 1);
 		for (int i = 1; i < document.getElementsByTagName("regionvalue").getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					regionValueList.get(i).getAttribute("value"));
 		}
 	}
-	
-	 public void clickOnAreaRegionsInNavigationBar() {
-	        attemptClick(AreaIdentifiers.getObjectIdentifier("area_region_link"));
-	        try {
-	            Thread.sleep(2000L);
-	        } catch (InterruptedException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	 
-	 public void clickOnAddRegionsButton() {
-			attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_new_region_button_id"));
-		}
 
-	 public void enterRegionValue(String regionValue) {
-			selectItemFromDropdownListByValue(AreaIdentifiers.getObjectIdentifier("area_region_value_dropdown_xpath"), regionValue);
+	public void clickOnAreaRegionsInNavigationBar() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_region_link"));
+		try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-	 
-	 public void verifyRegionTypeAndValue(String regionType, String regionValue) {
-			try {
-				Boolean regionAndValueFound = false;
-				WebElement regionTable = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_table"));
-				List<WebElement> regionRows = regionTable.findElements(By.tagName("tr"));
-				for(int i=1;i<regionRows.size();i++)
-				{
-					if(regionRows.get(i).getText().contains(regionType) && regionRows.get(i).getText().contains(regionValue)){				
-						List<WebElement> regionRowColumns = regionRows.get(i).findElements(By.tagName("td"));					
-						if (regionRowColumns.get(0).getText().equals(regionType) && regionRowColumns.get(1).getText().equals(regionValue)) {				
-							regionAndValueFound = true;
-							break;
-						}
-					}		
-				}
-				assertTrue(regionAndValueFound);
-				
-			} catch(Exception ex) {
-				ex.printStackTrace();
-			}
-		}	
-	 
-	 public void verifyErrorMessageForRequiredAreaRegionValue() {
-			assertEquals("Required", getDriver()
-					.findElement(AreaIdentifiers.getObjectIdentifier("area_region_value_req_err_msg_xpath")).getText());
-		}
-	 
-	 public Map<String, String> getAreaRegionValueMapFromDB(String country, String area,String source) {
-			Map<String, String> areaRegionMap = new HashMap<String, String>();
-			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("country", country));
-			nvPairs.add(new BasicNameValuePair("area", area));
-			nvPairs.add(new BasicNameValuePair("source", source));
-			try {
-				Thread.sleep(2000L);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+	}
 
-			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area regions list", nvPairs);
-			if (document != null) {
-				NodeList nodeList = document.getElementsByTagName("region");
-				for(int index = 0; index < nodeList.getLength(); index++)  {
-					NodeList childNodeList = nodeList.item(index).getChildNodes();
-					areaRegionMap.put(childNodeList.item(0).getTextContent(), childNodeList.item(1).getTextContent());
+	public void clickOnAddRegionsButton() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_new_region_button_id"));
+	}
+
+	public void enterRegionValue(String regionValue) {
+		selectItemFromDropdownListByValue(AreaIdentifiers.getObjectIdentifier("area_region_value_dropdown_xpath"),
+				regionValue);
+	}
+
+	public void verifyRegionTypeAndValue(String regionType, String regionValue) {
+		try {
+			Boolean regionAndValueFound = false;
+			WebElement regionTable = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_table"));
+			List<WebElement> regionRows = regionTable.findElements(By.tagName("tr"));
+			for (int i = 1; i < regionRows.size(); i++) {
+				if (regionRows.get(i).getText().contains(regionType)
+						&& regionRows.get(i).getText().contains(regionValue)) {
+					List<WebElement> regionRowColumns = regionRows.get(i).findElements(By.tagName("td"));
+					if (regionRowColumns.get(0).getText().equals(regionType)
+							&& regionRowColumns.get(1).getText().equals(regionValue)) {
+						regionAndValueFound = true;
+						break;
+					}
 				}
 			}
-			return areaRegionMap;
+			assertTrue(regionAndValueFound);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public void verifyErrorMessageForRequiredAreaRegionValue() {
+		assertEquals("Required", getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_region_value_req_err_msg_xpath")).getText());
+	}
+
+	public Map<String, String> getAreaRegionValueMapFromDB(String country, String area, String source) {
+		Map<String, String> areaRegionMap = new HashMap<String, String>();
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 
-	 public void verifyAreaRegionForBlankValue(Map<String, String> areaRegionValueMap) {
-			assertEquals(areaRegionValueMap.keySet().size(), 0);
-		}
-	 
-	 public void verifyRegionValueInDB(Map<String, String> areaRegionMap, String newRegionType, String newRegionValue) {
-			
-		 assertTrue(areaRegionMap.containsKey(newRegionType));
-		 //assertTrue(areaRegionMap.containsKey(newRegionValue));
-		 //assertEquals(areaRegionMap.get(newRegionValue), newRegionValue);
-		 //assertEquals(areaRegionMap.get(newRegionType), newRegionType);
-			
-		 System.out.println(areaRegionMap.containsKey(newRegionType)+" DB");	
-		 System.out.println(areaRegionMap.containsKey(newRegionValue)+" DB");	
-		 System.out.println(areaRegionMap+"pass "+newRegionType+" "+newRegionValue);
-		 System.out.println(areaRegionMap.get(newRegionType)+" type");
-		 System.out.println(areaRegionMap.get(newRegionValue)+" value");
-		 
-		 //assertTrue(areaRegionMap.containsKey(newRegionType,newRegionValue);
-		 //assertTrue(areaRegionMap.containsKey(newRegionValue));
-			//assertEquals(areaRegionMap.get(newRegionType), newRegionValue);
-		}
-	 
-	 public void clickOnDeleteRegionRowButtonArea() {
-			attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_region_row_button_xpath"));
-		}
-	 
-	 public void verifyAreaRegionTypeAndValueInEditMode(String regionType, String regionValue) {
-			try {
-				assertEquals(regionType,getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_type_dropdown_xpath")).getAttribute("value"));
-				assertEquals(regionValue,getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_value_dropdown_xpath"))
-								.getAttribute("value"));
-			} catch (NoSuchElementException ex) {
-				ex.printStackTrace();
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get area regions list", nvPairs);
+		if (document != null) {
+			NodeList nodeList = document.getElementsByTagName("region");
+			for (int index = 0; index < nodeList.getLength(); index++) {
+				NodeList childNodeList = nodeList.item(index).getChildNodes();
+				areaRegionMap.put(childNodeList.item(0).getTextContent(), childNodeList.item(1).getTextContent());
 			}
 		}
-	 
-	 public void verifyRegionTypeNotPresentInUI(String regionType, String regionValue) {
-			try {			
-				WebElement regionTable = getDriver().findElement(CityIdentifiers.getObjectIdentifier("area_region_table"));
-				List<WebElement> regionRows = regionTable.findElements(By.tagName("tr"));		
-				Boolean regionTypeAndValueNotFound = true;
-				for (int i = 0; i < regionRows.size(); i++) {		
-					if(regionRows.get(i).getText().contains(regionType) && regionRows.get(i).getText().contains(regionValue)){				
-						List<WebElement> regionRowColumns = regionRows.get(i).findElements(By.tagName("td"));					
-						if (regionRowColumns.get(0).getText().equals(regionType) && regionRowColumns.get(1).getText().equals(regionValue)) {				
-							regionTypeAndValueNotFound = false;
-						}
-					}	
+		return areaRegionMap;
+	}
+
+	public void verifyAreaRegionForBlankValue(Map<String, String> areaRegionValueMap) {
+		assertEquals(areaRegionValueMap.keySet().size(), 0);
+	}
+
+	public void verifyRegionValueInDB(Map<String, String> areaRegionMap, String newRegionType, String newRegionValue) {
+		assertTrue(areaRegionMap.containsKey(newRegionType));
+		assertEquals(areaRegionMap.get(newRegionType), newRegionValue);
+	}
+
+	public void clickOnDeleteRegionRowButtonArea() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_region_row_button_xpath"));
+	}
+
+	public void verifyAreaRegionTypeAndValueInEditMode(String regionType, String regionValue) {
+		try {
+			assertEquals(regionType,
+					getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_type_dropdown_xpath"))
+							.getAttribute("value"));
+			assertEquals(regionValue,
+					getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_value_dropdown_xpath"))
+							.getAttribute("value"));
+		} catch (NoSuchElementException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public void verifyRegionTypeNotPresentInUI(String regionType, String regionValue) {
+		try {
+			WebElement regionTable = getDriver().findElement(CityIdentifiers.getObjectIdentifier("area_region_table"));
+			List<WebElement> regionRows = regionTable.findElements(By.tagName("tr"));
+			Boolean regionTypeAndValueNotFound = true;
+			for (int i = 0; i < regionRows.size(); i++) {
+				if (regionRows.get(i).getText().contains(regionType)
+						&& regionRows.get(i).getText().contains(regionValue)) {
+					List<WebElement> regionRowColumns = regionRows.get(i).findElements(By.tagName("td"));
+					if (regionRowColumns.get(0).getText().equals(regionType)
+							&& regionRowColumns.get(1).getText().equals(regionValue)) {
+						regionTypeAndValueNotFound = false;
+					}
 				}
-				assertTrue(regionTypeAndValueNotFound);
-				
-			} catch(Exception ex) {
-				assertTrue("Region Type is not present in the UI", true);
 			}
+			assertTrue(regionTypeAndValueNotFound);
+
+		} catch (Exception ex) {
+			assertTrue("Region Type is not present in the UI", true);
 		}
-	 
-	 public void verifyAreaRegionDeletedFromDB(Map<String, String> areaRegionValueMap, String regionValue) {
-			assertFalse(areaRegionValueMap.containsKey(regionValue));
-		}
+	}
+
+	public void verifyAreaRegionDeletedFromDB(Map<String, String> areaRegionValueMap, String regionValue) {
+		assertFalse(areaRegionValueMap.containsKey(regionValue));
+	}
+
 	@Override
 	public String getPageUrl() {
 		return null;

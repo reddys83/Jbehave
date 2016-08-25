@@ -47,6 +47,7 @@ Then the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should see the area region type and value updated in UI
+Then the user should see the area region type and value updated in zeus document
 Then the user reverts the changes to the document
 
 Examples:
@@ -73,6 +74,7 @@ When the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should see the area region type and value updated in UI
+Then the user should see the area region type and value updated in zeus document
 Then the user reverts the changes to the document
 
 Examples:
