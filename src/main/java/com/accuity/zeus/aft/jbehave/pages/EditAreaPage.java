@@ -1481,8 +1481,8 @@ public class EditAreaPage extends AbstractPage {
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 				"get area region values", nvPairs);
 
-		assertTrue("DB values are empty", document.getElementsByTagName("regionvalue").getLength() > 1);
-		for (int i = 1; i < document.getElementsByTagName("regionvalue").getLength(); i++) {
+		assertTrue("DB values are empty", document.getElementsByTagName("regionValue").getLength() > 1);
+		for (int i = 1; i < document.getElementsByTagName("regionValue").getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					regionValueList.get(i).getAttribute("value"));
 		}
