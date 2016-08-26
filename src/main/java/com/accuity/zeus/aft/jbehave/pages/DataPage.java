@@ -1371,4 +1371,17 @@ public class DataPage extends AbstractPage {
 			}
 		}
 	}
+	
+	public void verifyWebElementText(String fieldName, String expectedText, By by) {
+		try {
+			Thread.sleep(2000L);
+			assertEquals(fieldName + ":", expectedText, getDriver().findElement(by).getText());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void clickOnWebElement(By by) {
+		attemptClick(by);
+	}
 }
