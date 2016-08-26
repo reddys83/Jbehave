@@ -795,7 +795,7 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user should see the region type from 'AREA_ALTERNATIVE_REGION' look up")
 	public void verifyAreaRegionTypeList() {
 		getDataPage().verifyLookUpValues(AreaIdentifiers
-				.getObjectIdentifier("area_region_type_identifier_dropdown_options_xpath"), "get area region types", "regiontype");
+				.getObjectIdentifier("area_region_type_dropdown_options_xpath"), "get area region types", "regiontype");
 	}
 
 	@Then("the user should see the area region value from <regionValueLookUp>")
@@ -806,12 +806,11 @@ public class EditAreaSteps extends AbstractSteps {
 	@When("the user clicks on the area regions link in the navigation bar")
 	public void clickOnAreaRegions() {
 		setEditAreaPage(getDataPage().createEditAreaPage());
-		getDataPage().clickOnWebElement(AreaIdentifiers.getObjectIdentifier("area_region_link"));
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_region_link"));
 	}
 
 	@When("the user deletes all existing area regions in area page in area page")
 	public void deleteAllAreaRegionsRows() {
-		setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().clickOnAddNewRegionButton();
 		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_delete_region_row_button_xpath"));
 	}
@@ -849,7 +848,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on the delete region row button in the region area page")
 	public void clickOnDeleteRegionRowButtonArea() {
-		getDataPage().clickOnWebElement(AreaIdentifiers.getObjectIdentifier("area_delete_region_row_button_xpath"));
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_region_row_button_xpath"));
 	}
 
 	@Then("the user should see the area region type and value updated in edit area page")

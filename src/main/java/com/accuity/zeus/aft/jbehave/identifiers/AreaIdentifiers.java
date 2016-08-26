@@ -79,7 +79,7 @@ public class AreaIdentifiers {
 		hmap.put("area_use_in_address_false", By.xpath("//*[@id='areaBasicInfo']//input[@value='false']"));
 		hmap.put("area_address_flag_view_mode_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='Use in Address']/td"));
 		hmap.put("area_address_flag_edit_mode_xpath", By.xpath("//input[@name='useInAddress']"));
-		hmap.put("area_region_type_identifier_dropdown_options_xpath", By.xpath(("//*[@id='areaRegions']//*[@id='regionType']/option")));
+		hmap.put("area_region_type_dropdown_options_xpath", By.xpath(("//*[@id='areaRegions']//*[@id='regionType']/option")));
 		hmap.put("area_add_new_region_button_id", By.id("add-regions"));
 		hmap.put("area_region_type_dropdown_xpath", By.xpath(".//*[@id='regionType']"));
 		hmap.put("area_region_value_dropdown_xpath", By.xpath(".//select[@id='regionValue']"));

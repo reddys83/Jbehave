@@ -1381,8 +1381,4 @@ public class DataPage extends AbstractPage {
 					elementTypeList.get(i).getAttribute("value"));
 		}
 	}
-
-	public void clickOnWebElement(By by) {
-		attemptClick(by);
-	}
 }
