@@ -794,9 +794,8 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should see the region type from 'AREA_ALTERNATIVE_REGION' look up")
 	public void verifyAreaRegionTypeList() {
-		getDataPage().verifyLookUpValues(
-				AreaIdentifiers.getObjectIdentifier("area_region_type_identifier_dropdown_options_xpath"),
-				"get area region types", "regiontype");
+		getDataPage().verifyLookUpValues(AreaIdentifiers
+				.getObjectIdentifier("area_region_type_identifier_dropdown_options_xpath"), "get area region types", "regiontype");
 	}
 
 	@Then("the user should see the area region value from <regionValueLookUp>")

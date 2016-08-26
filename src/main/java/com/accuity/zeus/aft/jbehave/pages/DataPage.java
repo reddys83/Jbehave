@@ -1383,6 +1383,6 @@ public class DataPage extends AbstractPage {
 	}
 
 	public void clickOnWebElement(By by) {
-		  attemptClick(by);
-		 }
+		attemptClick(by);
+	}
 }

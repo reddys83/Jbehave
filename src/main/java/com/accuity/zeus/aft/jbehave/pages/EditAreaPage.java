@@ -1495,7 +1495,7 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyRegionTypeAndValue(String regionType, String regionValue) {
 		try {
-			Boolean regionAndValueFound = false;
+			boolean regionFound = false;
 			WebElement regionTable = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_table"));
 			List<WebElement> regionRows = regionTable.findElements(By.tagName("tr"));
 			for (int i = 1; i < regionRows.size(); i++) {
@@ -1504,13 +1504,12 @@ public class EditAreaPage extends AbstractPage {
 					List<WebElement> regionRowColumns = regionRows.get(i).findElements(By.tagName("td"));
 					if (regionRowColumns.get(0).getText().equals(regionType)
 							&& regionRowColumns.get(1).getText().equals(regionValue)) {
-						regionAndValueFound = true;
+						regionFound = true;
 						break;
 					}
 				}
 			}
-			assertTrue(regionAndValueFound);
-
+			assertTrue(regionFound);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -1556,11 +1555,9 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyAreaRegionTypeAndValueInEditMode(String regionType, String regionValue) {
 		try {
-			assertEquals(regionType,
-					getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_type_dropdown_xpath"))
+			assertEquals(regionType, getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_type_dropdown_xpath"))
 							.getAttribute("value"));
-			assertEquals(regionValue,
-					getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_value_dropdown_xpath"))
+			assertEquals(regionValue, getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_value_dropdown_xpath"))
 							.getAttribute("value"));
 		} catch (NoSuchElementException ex) {
 			ex.printStackTrace();
@@ -1571,19 +1568,18 @@ public class EditAreaPage extends AbstractPage {
 		try {
 			WebElement regionTable = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_table"));
 			List<WebElement> regionRows = regionTable.findElements(By.tagName("tr"));
-			Boolean regionTypeAndValueNotFound = true;
+			boolean regionNotFound = true;
 			for (int i = 0; i < regionRows.size(); i++) {
 				if (regionRows.get(i).getText().contains(regionType)
 						&& regionRows.get(i).getText().contains(regionValue)) {
 					List<WebElement> regionRowColumns = regionRows.get(i).findElements(By.tagName("td"));
 					if (regionRowColumns.get(0).getText().equals(regionType)
 							&& regionRowColumns.get(1).getText().equals(regionValue)) {
-						regionTypeAndValueNotFound = false;
+						regionNotFound = false;
 					}
 				}
 			}
-			assertTrue(regionTypeAndValueNotFound);
-
+			assertTrue(regionNotFound);
 		} catch (Exception ex) {
 			assertTrue("Region Type is not present in the UI", true);
 		}
@@ -1597,5 +1593,4 @@ public class EditAreaPage extends AbstractPage {
 	public String getPageUrl() {
 		return null;
 	}
-
 }
