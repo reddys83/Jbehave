@@ -42,7 +42,7 @@ Then the user should see the offices tab in the office page
 When the user clicks on the offices link in the legal entity page
 Then the user should see All Offices link is selected
 And the user should see the label offices on the results list page
-And the user should not see the offices tab in the office page
+And the user should not see the office tab in the office page
 When the user clicks on the legal entity tab in the data area
 Then the user should see Legal Entity menu is selected in the 2nd line
 When the user clicks on the results tab

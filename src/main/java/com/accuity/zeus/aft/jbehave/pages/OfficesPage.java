@@ -131,7 +131,7 @@ public class OfficesPage extends AbstractPage {
 
     }
 
-    public void verifyNoOfficesTabInOffice() {
+    public void verifyNoOfficeTabInOffice() {
 
         try
         {
