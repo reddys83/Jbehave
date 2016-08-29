@@ -1391,9 +1391,9 @@ public class DataPage extends AbstractPage {
 		}
 	}
 	
-	public void verifyRowIsDisplayed(By by, boolean toBeDisplayed) {
+	public void verifyRowIsDisplayed(By by, boolean display) {
 		try {
-			if (toBeDisplayed) {
+			if (display) {
 				WebElement rowToBeDisplayed = getDriver().findElement(by);
 				assertTrue(rowToBeDisplayed != null);
 			} else {
