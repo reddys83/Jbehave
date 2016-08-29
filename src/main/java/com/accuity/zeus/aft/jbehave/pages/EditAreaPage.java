@@ -1593,14 +1593,6 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 
-	public void verifyNewlyAddedAreaCreditRatingRowIsNotDisplayed() {
-		try {
-			assertTrue(getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_new_row")).size() == 0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	public void verifyAreaCreditRatingListFromLookup(int row, By by, String tagname) {
 		List<WebElement> creditRatingList = getDriver().findElements(by);
 		assertTrue(creditRatingList.size() >= row);
@@ -1628,15 +1620,6 @@ public class EditAreaPage extends AbstractPage {
 				Integer.toString(cal.get(Calendar.YEAR) + 1), row);
 		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year"), 
 				Integer.toString(cal.get(Calendar.YEAR) + 1), row);
-	}
-
-	public void verifyNewlyAddedAreaCreditRatingRowIsDisplayed() {
-		try {
-			WebElement creditRatingRow = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_credit_rating_row"));
-			assertTrue(creditRatingRow != null);
-		} catch (Exception e) {
-			assertTrue(false);
-		}
 	}
 
 	@Override
