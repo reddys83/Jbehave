@@ -7,13 +7,13 @@ let $areaDoc := /area[@source = $source][summary/names/name[type = "Full Name"]/
 
 (: Taking Area Region List :)
    
-let $areaRegionList := for $x in ($area/alternativeRegions/region)
+let $areaRegionList := for $x in ($areaDoc/alternativeRegions/region)
 let $areaRegionType := $x/type/text()
 let $areaRegionValue := ($x/value/text())
 
 return 
   <region>
-	<type>{$areaRegionType}</type>
+	 <type>{$areaRegionType}</type>
     <value>{$areaRegionValue}</value>
   </region>
   
