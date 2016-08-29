@@ -1601,31 +1601,6 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 
-	public void clickOnAreaCreditRating() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_creditRating"));
-	}
-
-	public void verifyAreaCreditRatingValuesAreNullFromDB(String country, String area, String source, int row) {
-
-		try {
-			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("country", country));
-			nvPairs.add(new BasicNameValuePair("area", area));
-			nvPairs.add(new BasicNameValuePair("source", source));
-			Thread.sleep(3000L);
-
-			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area credit ratings", nvPairs);
-
-			if (document != null) {
-				assertTrue(!(document.getElementsByTagName("creditRating").getLength() > row));
-			} else {
-				assertFalse("zeus document is not retireved", true);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	public void verifyNewlyAddedAreaCreditRatingRowIsNotDisplayed() {
 		try {
 			assertTrue(getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_creditRating_new_row_xpath")).size() == 0);

@@ -846,7 +846,7 @@ public class EditAreaSteps extends AbstractSteps {
 	@When("the user clicks on the area credit rating link in the navigation bar")
 	public void clickOnCityCreditRating() {
 		setEditAreaPage(getDataPage().createEditAreaPage());
-		getEditAreaPage().clickOnAreaCreditRating();
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_creditRating"));
 	}
 	
 	@When("the user clicks on add new credit rating button in the credit rating area page")
@@ -873,12 +873,6 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user should not see the newly added credit rating row in the credit rating area page")
 	public void verifyNewlyAddedCreditRatingRowIsNotDisplayed() throws Exception {
 		getEditAreaPage().verifyNewlyAddedAreaCreditRatingRowIsNotDisplayed();
-	}
-	
-	@Then("the user should not see the area credit rating values in $source document")
-	public void verifyAreaCreditRatingValueFromZeusDB(@Named("country") String country, @Named("area") String area,
-		   @Named("source") String source, @Named("rowNumber") int row) {
-		getEditAreaPage().verifyAreaCreditRatingValuesAreNullFromDB(country, area, source, row);
 	}
 	
 	@Then("the user should see $errorMessage error message in area credit rating agency field")
