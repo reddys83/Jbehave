@@ -27,7 +27,6 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {

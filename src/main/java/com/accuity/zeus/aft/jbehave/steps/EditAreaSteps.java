@@ -781,22 +781,22 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaCreditRatingValuesFromTrustedDB(country, area, source);
 	}
 	
-	@When("the user enters credit rating agency as <agency> in credit rating row $rowNumber in the credit rating area page")
+	@When("the user enters credit rating agency as <agency> in credit rating row $rowNumber in the area page")
 	public void enterCreditRatingAgency(@Named("agency") String agency, @Named("rowNumber") int row) {
 		getEditAreaPage().enterCreditRatingRowDropDownFieldValue(agency, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_dropdown_xpath"));
 	}
 	
-	@When("the user enters credit rating type as <type> in credit rating row $rowNumber in the credit rating area page")
+	@When("the user enters credit rating type as <type> in credit rating row $rowNumber in the area page")
 	public void enterCreditRatingType(@Named("type") String creditRatingType, @Named("rowNumber") int row) {
 		getEditAreaPage().enterCreditRatingRowDropDownFieldValue(creditRatingType, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_dropdown_xpath"));
 	}
 	
-	@When("the user enters credit rating <value> in credit rating row $rowNumber in the credit rating area page")
+	@When("the user enters credit rating <value> in credit rating row $rowNumber in the area page")
 	public void enterAreaCreditRatingValue(@Named("value") String value, @Named("rowNumber") int row) {
 		getEditAreaPage().enterAreaCreditRatingRowTextBoxValues(value, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_value_xpath"));
 	}
 	
-	@When("the user enters applied date day $appliedDay $appliedMonth $appliedYear in the credit rating area page")
+	@When("the user enters applied date day $appliedDay $appliedMonth $appliedYear in the area page")
 	public void enterCityCreditRatingAppliedDateDay(@Named("appliedDay") String appliedDay,
 			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
 			@Named("rowNumber") int row) {
@@ -805,7 +805,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().enterAreaCreditRatingRowTextBoxValues(appliedYear, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_appliedYear_xpath"));
 	}
 	
-	@When("the user enters confirmed date day $confirmedDay $confirmedMonth $confirmedYear in the credit rating area page")
+	@When("the user enters confirmed date day $confirmedDay $confirmedMonth $confirmedYear in the area page")
 	public void enterCityCreditRatingConfirmedDateDay(@Named("confirmedDay") String confirmedDay,
 			@Named("confirmedMonth") String confirmedMonth, @Named("confirmedYear") String confirmedYear,
 			@Named("rowNumber") int row) {
@@ -829,7 +829,7 @@ public class EditAreaSteps extends AbstractSteps {
 				appliedDate, confirmedDate, row);
 	}
 	
-	@Then("the user should see the entered area credit rating values are saved in UI in the row number $rowNumber")
+	@Then("the user should see the entered area credit rating values are saved in UI in the row $rowNumber")
 	public void verifyAreaCreditRatingValueFromUI(@Named("country") String country, @Named("area") String area,
 		    @Named("agency") String agency, @Named("type") String type,
 			@Named("value") String value, @Named("appliedDay") String appliedDay,
@@ -855,11 +855,13 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@Then("the user should see the area Agency names from look up $LookUpName in existing creditRating row $rowNumber")
+	@Alias("the user should see the area credit rating agency names from look up $LookUpName")
 	public void verifyAreaAgencyListExistingRow(@Named("rowNumber") int rowNumber) {
 		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber, AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_dropdown_xpath"), "creditRatingAgency");
 	}
 	
 	@Then("the user should see the area credit rating types from look up $LookUpName in existing creditRating row $rowNumber")
+	@Alias("the user should see the area credit rating types from look up $LookUpName")
 	public void verifyAreaCreditRatingTypeListExistingRow(@Named("rowNumber") int rowNumber) {
 		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber, AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_dropdown_xpath"), "creditRatingType");
 	}

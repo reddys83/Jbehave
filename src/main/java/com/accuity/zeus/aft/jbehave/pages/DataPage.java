@@ -1373,15 +1373,20 @@ public class DataPage extends AbstractPage {
 	}
 	
 	public void verifyWebElementText(String fieldName, String expectedText, By by) {
-		try {
-			Thread.sleep(2000L);
+		try {		
 			assertEquals(fieldName + ":", expectedText, getDriver().findElement(by).getText());
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void clickOnWebElement(By by) {
-		attemptClick(by);
+
+	public void verifyLookUpValues(By by, String xqueryName, String tagName) {
+		List<WebElement> elementTypeList = getDriver().findElements(by);
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xqueryName);
+		assertTrue(document.getElementsByTagName(tagName).getLength() > 1);
+		for (int i = 1; i < document.getElementsByTagName(tagName).getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					elementTypeList.get(i).getAttribute("value"));
+		}
 	}
 }
