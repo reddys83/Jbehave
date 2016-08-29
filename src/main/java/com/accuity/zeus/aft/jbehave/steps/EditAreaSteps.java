@@ -799,8 +799,8 @@ public class EditAreaSteps extends AbstractSteps {
 				.getObjectIdentifier("area_credit_rating_value"), value, row);
 	}
 	
-	@When("the user enters applied date day $appliedDay $appliedMonth $appliedYear in the area page")
-	public void enterCityCreditRatingAppliedDateDay(@Named("appliedDay") String appliedDay,
+	@When("the user enters applied date $appliedDay $appliedMonth $appliedYear in the area page")
+	public void enterAreaCreditRatingAppliedDate(@Named("appliedDay") String appliedDay,
 			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
 			@Named("rowNumber") int row) {
 		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
@@ -808,11 +808,11 @@ public class EditAreaSteps extends AbstractSteps {
 		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers
 				.getObjectIdentifier("area_credit_rating_applied_date_month"), appliedMonth, row);
 		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
-				.getObjectIdentifier("area_credit_rating_appliedYear"), appliedYear, row);
+				.getObjectIdentifier("area_credit_rating_applied_date_year"), appliedYear, row);
 	}
 	
-	@When("the user enters confirmed date day $confirmedDay $confirmedMonth $confirmedYear in the area page")
-	public void enterCityCreditRatingConfirmedDateDay(@Named("confirmedDay") String confirmedDay,
+	@When("the user enters confirmed date $confirmedDay $confirmedMonth $confirmedYear in the area page")
+	public void enterAreaCreditRatingConfirmedDate(@Named("confirmedDay") String confirmedDay,
 			@Named("confirmedMonth") String confirmedMonth, @Named("confirmedYear") String confirmedYear,
 			@Named("rowNumber") int row) {
 		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
@@ -851,14 +851,14 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@When("the user clicks on the area credit rating link in the navigation bar")
-	public void clickOnCityCreditRating() {
+	public void clickOnAreaCreditRating() {
 		setEditAreaPage(getDataPage().createEditAreaPage());
-		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_creditRating"));
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating"));
 	}
 	
 	@When("the user clicks on add new credit rating button in the credit rating area page")
 	public void clickOnAddButton() {
-		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating_addRow_id"));
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating_add_row_id"));
 	}
 	
 	@Then("the user should see the area credit rating agency names from look up $LookUpName")
@@ -875,13 +875,13 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@When("the user deletes the existing area credit rating rows")
 	public void deleteExistingCreditRatingRows() {
-		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating_addRow_id"));
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating_add_row_id"));
 		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_delete_credit_rating_row_button"));
 	}
 	
 	@Then("the user should not see the newly added credit rating row in the area page")
 	public void verifyNewlyAddedCreditRatingRowIsNotDisplayed() throws Exception {
-		getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_creditRating_new_row"), false);
+		getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_credit_rating_new_row"), false);
 	}
 	
 	@Then("the user should see $errorMessage error message in area credit rating agency field")
@@ -900,12 +900,12 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@Then("the user should see the error message $errorMessage for applied date in the area page")
-	public void verifyErrorMessageEnterYearMonthDayForAppliedDate(@Named("errorMessage") String errorMessage) {
+	public void verifyErrorMessageForAppliedDate(@Named("errorMessage") String errorMessage) {
 		getDataPage().verifyWebElementText("Applied Date", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_error_msg"));
 	}
 	
 	@Then("the user should see the error message $errorMessage for confirmed date in the area page")
-	public void verifyErrorMessageEnterYearMonthDayForConfirmedDate(@Named("errorMessage") String errorMessage) {
+	public void verifyErrorMessageForConfirmedDate(@Named("errorMessage") String errorMessage) {
 		getDataPage().verifyWebElementText("Confirmed Date", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_error_msg"));
 	}
 	
@@ -915,7 +915,7 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@When("the user clicks on the delete credit rating row button in the area credit rating page")
-	public void clickOnDeleteNewAreaCreditRatingRowButtonCity() {
+	public void clickOnDeleteNewAreaCreditRatingRowButton() {
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_credit_rating_row_button"));
 	}
 	
@@ -931,7 +931,7 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@Then("the user should see the newly added credit rating row in the area credit rating page")
 	public void verifyNewlyAddedAreaCreditRatingRowIsDisplayed() throws Exception {
-		getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_creditRating_row"), true);
+		getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_credit_rating_row"), true);
 	}
 	
 	@When("the user clicks on the Yes button to delete credit rating row")

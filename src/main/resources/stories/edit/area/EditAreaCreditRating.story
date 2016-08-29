@@ -28,8 +28,8 @@ Then the user should see the area credit rating types from look up CREDIT_RATING
 When the user enters credit rating agency as <agency> in credit rating row <rowNumber> in the area page
 When the user enters credit rating type as <type> in credit rating row <rowNumber> in the area page
 When the user enters credit rating <value> in credit rating row <rowNumber> in the area page
-And the user enters applied date day <appliedDay> <appliedMonth> <appliedYear> in the area page
-And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedYear> in the area page
+And the user enters applied date <appliedDay> <appliedMonth> <appliedYear> in the area page
+And the user enters confirmed date <confirmedDay> <confirmedMonth> <confirmedYear> in the area page
 When the user clicks on the save button
 Then the user should see the below summary changes in confirmation modal
 |Summary|
@@ -64,8 +64,8 @@ When the user clicks on add new credit rating button in the credit rating area p
 When the user enters credit rating agency as <agency> in credit rating row <rowNumber> in the area page
 When the user enters credit rating type as <type> in credit rating row <rowNumber> in the area page
 When the user enters credit rating <value> in credit rating row <rowNumber> in the area page
-And the user enters applied date day <appliedDay> <appliedMonth> <appliedYear> in the area page
-And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedYear> in the area page
+And the user enters applied date <appliedDay> <appliedMonth> <appliedYear> in the area page
+And the user enters confirmed date <confirmedDay> <confirmedMonth> <confirmedYear> in the area page
 When the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
@@ -98,8 +98,8 @@ When the user clicks on the area credit rating link in the navigation bar
 And the user clicks on the area update link
 When the user deletes the existing area credit rating rows
 When the user clicks on add new credit rating button in the credit rating area page
-And the user enters applied date day <appliedDay> <appliedMonth> <appliedYear> in the area page
-And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedYear> in the area page
+And the user enters applied date <appliedDay> <appliedMonth> <appliedYear> in the area page
+And the user enters confirmed date <confirmedDay> <confirmedMonth> <confirmedYear> in the area page
 When the user clicks on the save button
 Then the user should see Required error message in area credit rating agency field
 Then the user should see Required error message in area credit rating type field
@@ -129,8 +129,8 @@ When the user clicks on the area credit rating link in the navigation bar
 And the user clicks on the area update link
 When the user deletes the existing area credit rating rows
 When the user clicks on add new credit rating button in the credit rating area page
-And the user enters applied date day <appliedDay> <appliedMonth> <appliedYear> in the area page
-And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedYear> in the area page
+And the user enters applied date <appliedDay> <appliedMonth> <appliedYear> in the area page
+And the user enters confirmed date <confirmedDay> <confirmedMonth> <confirmedYear> in the area page
 When the user clicks on the save button
 Then the user should see the error message Invalid Date for applied date in the area page
 Then the user should see the error message Invalid Date for confirmed date in the area page
@@ -163,8 +163,8 @@ When the user clicks on add new credit rating button in the credit rating area p
 When the user enters credit rating agency as <agency> in credit rating row <rowNumber> in the area page
 When the user enters credit rating type as <type> in credit rating row <rowNumber> in the area page
 When the user enters credit rating <value> in credit rating row <rowNumber> in the area page
-And the user enters applied date day <appliedDay> <appliedMonth> <appliedYear> in the area page
-And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedYear> in the area page
+And the user enters applied date <appliedDay> <appliedMonth> <appliedYear> in the area page
+And the user enters confirmed date <confirmedDay> <confirmedMonth> <confirmedYear> in the area page
 When the user clicks on the save button
 When the user clicks on the confirm button
 And the user clicks on the area update link

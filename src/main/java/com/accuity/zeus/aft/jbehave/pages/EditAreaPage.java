@@ -1474,7 +1474,7 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void verifyAreaCreditRatingValuesFromTrustedDB(String country, String area, String source) {
 		try {
-			if (getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_creditRating_row_xpath")).size() > 1) {
+			if (getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_row")).size() > 1) {
 				List<WebElement> agencyDropDownList = getDriver()
 						.findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_dropdown"));
 				List<WebElement> typeDropDownList = getDriver()
@@ -1484,7 +1484,7 @@ public class EditAreaPage extends AbstractPage {
 				List<WebElement> appliedMonthList = getDriver()
 						.findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_month"));
 				List<WebElement> appliedYearList = getDriver()
-						.findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_appliedYear"));
+						.findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_year"));
 				List<WebElement> confirmedDateList = getDriver()
 						.findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_day"));
 				List<WebElement> confirmedMonth = getDriver()
@@ -1569,9 +1569,9 @@ public class EditAreaPage extends AbstractPage {
 			String value, String appliedDate, String confirmedDate, int rowNumber) {
 		try {
 			assertFalse("No rows exist in credit rating section", 
-					getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_creditRating_row")).size() == 1);
+					getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_row")).size() == 1);
 			List<WebElement> rowColums = getDriver().findElements(AreaIdentifiers
-					.getObjectIdentifier("area_creditRating_row")).get(rowNumber).findElements(By.tagName("td"));
+					.getObjectIdentifier("area_credit_rating_row")).get(rowNumber).findElements(By.tagName("td"));
 
 			String agencyInUI = rowColums.get(0).getText();
 			String typeInUI = rowColums.get(1).getText();
@@ -1595,7 +1595,7 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyNewlyAddedAreaCreditRatingRowIsNotDisplayed() {
 		try {
-			assertTrue(getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_creditRating_new_row")).size() == 0);
+			assertTrue(getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_new_row")).size() == 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1624,7 +1624,7 @@ public class EditAreaPage extends AbstractPage {
 		month = month.substring(0, 3);
 		selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_month"), month, row);
 		selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_month"), month, row);
-		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_appliedYear"), 
+		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_year"), 
 				Integer.toString(cal.get(Calendar.YEAR) + 1), row);
 		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year"), 
 				Integer.toString(cal.get(Calendar.YEAR) + 1), row);
@@ -1632,7 +1632,7 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyNewlyAddedAreaCreditRatingRowIsDisplayed() {
 		try {
-			WebElement creditRatingRow = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_creditRating_row"));
+			WebElement creditRatingRow = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_credit_rating_row"));
 			assertTrue(creditRatingRow != null);
 		} catch (Exception e) {
 			assertTrue(false);
