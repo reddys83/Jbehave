@@ -36,8 +36,8 @@ Then the user should see the below summary changes in confirmation modal
 |Credit Ratings|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
-Then the user should see the area credit rating values as in zeus document
 Then the user should see the entered area credit rating values are saved in UI in the row <rowNumber>
+Then the user should see the area credit rating values as in zeus document
 Then the user reverts the changes to the document
 
 Examples:
@@ -69,7 +69,7 @@ And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirme
 When the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
-Then the user should not see the newly added credit rating row in the credit rating area page
+Then the user should not see the newly added credit rating row in the area page
 Then the user should not see the area credit rating row in zeus document
 Then the user reverts the changes to the document
 
@@ -104,8 +104,8 @@ When the user clicks on the save button
 Then the user should see Required error message in area credit rating agency field
 Then the user should see Required error message in area credit rating type field
 Then the user should be able to view the error message Enter up to 5 valid characters. in area credit rating value
-Then the user should see the error message Enter a day/month/year. for applied date in the credit rating area page
-Then the user should see the error message Enter a day/month/year. for confirmed date in the credit rating area page
+Then the user should see the error message Enter a day/month/year. for applied date in the area page
+Then the user should see the error message Enter a day/month/year. for confirmed date in the area page
 
 Examples:
 |country|area|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
@@ -132,12 +132,12 @@ When the user clicks on add new credit rating button in the credit rating area p
 And the user enters applied date day <appliedDay> <appliedMonth> <appliedYear> in the area page
 And the user enters confirmed date day <confirmedDay> <confirmedMonth> <confirmedYear> in the area page
 When the user clicks on the save button
-Then the user should see the error message Invalid Date for applied date in the credit rating area page
-Then the user should see the error message Invalid Date for confirmed date in the credit rating area page
+Then the user should see the error message Invalid Date for applied date in the area page
+Then the user should see the error message Invalid Date for confirmed date in the area page
 When the user enters applied date and confirmed date that is later than today
 When the user clicks on the save button
-Then the user should see the error message Must be no later than today. for applied date in the credit rating area page
-Then the user should see the error message Must be no later than today. for confirmed date in the credit rating area page
+Then the user should see the error message Must be no later than today. for applied date in the area page
+Then the user should see the error message Must be no later than today. for confirmed date in the area page
 
 Examples:
 |country|area|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
@@ -177,7 +177,7 @@ When the user clicks on the Yes button to delete credit rating row
 When the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
-Then the user should not see the newly added credit rating row in the credit rating area page
+Then the user should not see the newly added credit rating row in the area page
 Then the user should not see the area credit rating row in zeus document
 Then the user reverts the changes to the document
 

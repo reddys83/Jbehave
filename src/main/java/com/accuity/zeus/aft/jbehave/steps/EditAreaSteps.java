@@ -783,35 +783,35 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@When("the user enters credit rating agency as <agency> in credit rating row $rowNumber in the area page")
 	public void enterCreditRatingAgency(@Named("agency") String agency, @Named("rowNumber") int row) {
-		getEditAreaPage().enterCreditRatingRowDropDownFieldValue(agency, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_dropdown_xpath"));
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_dropdown"), agency, row);
 	}
 	
 	@When("the user enters credit rating type as <type> in credit rating row $rowNumber in the area page")
 	public void enterCreditRatingType(@Named("type") String creditRatingType, @Named("rowNumber") int row) {
-		getEditAreaPage().enterCreditRatingRowDropDownFieldValue(creditRatingType, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_dropdown_xpath"));
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_dropdown"), creditRatingType, row);
 	}
 	
 	@When("the user enters credit rating <value> in credit rating row $rowNumber in the area page")
 	public void enterAreaCreditRatingValue(@Named("value") String value, @Named("rowNumber") int row) {
-		getEditAreaPage().enterAreaCreditRatingRowTextBoxValues(value, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_value_xpath"));
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_value"), value, row);
 	}
 	
 	@When("the user enters applied date day $appliedDay $appliedMonth $appliedYear in the area page")
 	public void enterCityCreditRatingAppliedDateDay(@Named("appliedDay") String appliedDay,
 			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
 			@Named("rowNumber") int row) {
-		getEditAreaPage().enterAreaCreditRatingRowTextBoxValues(appliedDay, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_day_xpath"));
-		getEditAreaPage().enterCreditRatingRowDropDownFieldValue(appliedMonth, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_month_xpath"));
-		getEditAreaPage().enterAreaCreditRatingRowTextBoxValues(appliedYear, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_appliedYear_xpath"));
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_day"), appliedDay, row);
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_month"), appliedMonth, row);
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_appliedYear"), appliedYear, row);
 	}
 	
 	@When("the user enters confirmed date day $confirmedDay $confirmedMonth $confirmedYear in the area page")
 	public void enterCityCreditRatingConfirmedDateDay(@Named("confirmedDay") String confirmedDay,
 			@Named("confirmedMonth") String confirmedMonth, @Named("confirmedYear") String confirmedYear,
 			@Named("rowNumber") int row) {
-		getEditAreaPage().enterAreaCreditRatingRowTextBoxValues(confirmedDay, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_day_xpath"));
-		getEditAreaPage().enterCreditRatingRowDropDownFieldValue(confirmedMonth, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_month_xpath"));
-		getEditAreaPage().enterAreaCreditRatingRowTextBoxValues(confirmedYear, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year_xpath"));
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_day"), confirmedDay, row);
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_month"), confirmedMonth, row);
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year"), confirmedYear, row);
 	}
 	
 	@Then("the user should see the area credit rating values as in $source document")
@@ -825,8 +825,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 		String appliedDate = appliedDay + " " + appliedMonth + " " + appliedYear;
 		String confirmedDate = confirmedDay + " " + confirmedMonth + " " + confirmedYear;
-		getEditAreaPage().verifyAreaCreditRatingValuesFromDB(country, area, source, agency, type, value,
-				appliedDate, confirmedDate, row);
+		getEditAreaPage().verifyAreaCreditRatingValuesFromDB(country, area, source, agency, type, value, appliedDate, confirmedDate, row);
 	}
 	
 	@Then("the user should see the entered area credit rating values are saved in UI in the row $rowNumber")
@@ -839,8 +838,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 		String appliedDate = appliedDay + " " + appliedMonth + " " + appliedYear;
 		String confirmedDate = confirmedDay + " " + confirmedMonth + " " + confirmedYear;
-		getEditAreaPage().verifyAreaCreditRatingValuesFromUI(country, area, agency, type, value, appliedDate,
-				confirmedDate, row);
+		getEditAreaPage().verifyAreaCreditRatingValuesFromUI(country, area, agency, type, value, appliedDate, confirmedDate, row);
 	}
 	
 	@When("the user clicks on the area credit rating link in the navigation bar")
@@ -851,55 +849,53 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@When("the user clicks on add new credit rating button in the credit rating area page")
 	public void clickOnAddButton() {
-		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating_addRow_id"));;
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating_addRow_id"));
 	}
 	
-	@Then("the user should see the area Agency names from look up $LookUpName in existing creditRating row $rowNumber")
-	@Alias("the user should see the area credit rating agency names from look up $LookUpName")
+	@Then("the user should see the area credit rating agency names from look up $LookUpName")
 	public void verifyAreaAgencyListExistingRow(@Named("rowNumber") int rowNumber) {
-		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber, AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_dropdown_xpath"), "creditRatingAgency");
+		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber, AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_dropdown"), "creditRatingAgency");
 	}
 	
-	@Then("the user should see the area credit rating types from look up $LookUpName in existing creditRating row $rowNumber")
-	@Alias("the user should see the area credit rating types from look up $LookUpName")
+	@Then("the user should see the area credit rating types from look up $LookUpName")
 	public void verifyAreaCreditRatingTypeListExistingRow(@Named("rowNumber") int rowNumber) {
-		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber, AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_dropdown_xpath"), "creditRatingType");
+		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber, AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_dropdown"), "creditRatingType");
 	}
 	
 	@When("the user deletes the existing area credit rating rows")
 	public void deleteExistingCreditRatingRows() {
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating_addRow_id"));
-		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_delete_credit_rating_row_button_xpath"));
+		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_delete_credit_rating_row_button"));
 	}
 	
-	@Then("the user should not see the newly added credit rating row in the credit rating area page")
+	@Then("the user should not see the newly added credit rating row in the area page")
 	public void verifyNewlyAddedCreditRatingRowIsNotDisplayed() throws Exception {
-		getEditAreaPage().verifyNewlyAddedAreaCreditRatingRowIsNotDisplayed();
+		getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_creditRating_new_row"), false);
 	}
 	
 	@Then("the user should see $errorMessage error message in area credit rating agency field")
 	public void verifyErrorMessageForRequiredAreaCreditRatingAgency(@Named("errorMessage") String errorMessage) {
-		getDataPage().verifyWebElementText("Agency", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_error_xpath"));
+		getDataPage().verifyWebElementText("Agency", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_error"));
 	}
 	
 	@Then("the user should see $errorMessage error message in area credit rating type field")
 	public void verifyErrorMessageForRequiredAreaCreditRatingType(@Named("errorMessage") String errorMessage) {
-		getDataPage().verifyWebElementText("Type", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_error_xpath"));
+		getDataPage().verifyWebElementText("Type", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_error"));
 	}
 	
 	@Then("the user should be able to view the error message $errorMessage in area credit rating value")
 	public void verifyErrorMessageInAreaCreditRatingValue(@Named("errorMsg") String errorMessage) {
-		getDataPage().verifyWebElementText("Value", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_value_error_xpath"));
+		getDataPage().verifyWebElementText("Value", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_value_error"));
 	}
 	
-	@Then("the user should see the error message $errorMessage for applied date in the credit rating area page")
+	@Then("the user should see the error message $errorMessage for applied date in the area page")
 	public void verifyErrorMessageEnterYearMonthDayForAppliedDate(@Named("errorMessage") String errorMessage) {
-		getDataPage().verifyWebElementText("Applied Date", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_error_msg_xpath"));
+		getDataPage().verifyWebElementText("Applied Date", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_error_msg"));
 	}
 	
-	@Then("the user should see the error message $errorMessage for confirmed date in the credit rating area page")
+	@Then("the user should see the error message $errorMessage for confirmed date in the area page")
 	public void verifyErrorMessageEnterYearMonthDayForConfirmedDate(@Named("errorMessage") String errorMessage) {
-		getDataPage().verifyWebElementText("Confirmed Date", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_error_msg_xpath"));
+		getDataPage().verifyWebElementText("Confirmed Date", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_error_msg"));
 	}
 	
 	@When("the user enters applied date and confirmed date that is later than today")
@@ -909,7 +905,7 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@When("the user clicks on the delete credit rating row button in the area credit rating page")
 	public void clickOnDeleteNewAreaCreditRatingRowButtonCity() {
-		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_credit_rating_row_button_xpath"));
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_credit_rating_row_button"));
 	}
 	
 	@Then("the user should see delete row confirmation modal in the area credit rating")
@@ -924,7 +920,7 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@Then("the user should see the newly added credit rating row in the area credit rating page")
 	public void verifyNewlyAddedAreaCreditRatingRowIsDisplayed() throws Exception {
-		getEditAreaPage().verifyNewlyAddedAreaCreditRatingRowIsDisplayed();
+		getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_creditRating_row"), true);
 	}
 	
 	@When("the user clicks on the Yes button to delete credit rating row")

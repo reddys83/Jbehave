@@ -1475,18 +1475,16 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyAreaCreditRatingValuesFromTrustedDB(String country, String area, String source) {
 
 		try {
-
-			if (getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_creditRating_row_xpath"))
-					.size() > 1) {
-				List<WebElement> agencyDropDownList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_dropdown_xpath"));
-				List<WebElement> typeDropDownList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_dropdown_xpath"));
-				List<WebElement> appliedDateList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_day_xpath"));
-				List<WebElement> appliedMonthList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_month_xpath"));
-				List<WebElement> appliedYearList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_appliedYear_xpath"));
-				List<WebElement> confirmedDateList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_day_xpath"));
-				List<WebElement> confirmedMonth = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_month_xpath"));
-				List<WebElement> confirmedYearList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year_xpath"));
-				List<WebElement> valueTextboxList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_value_xpath"));
+			if (getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_creditRating_row_xpath")).size() > 1) {
+				List<WebElement> agencyDropDownList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_dropdown"));
+				List<WebElement> typeDropDownList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_dropdown"));
+				List<WebElement> appliedDateList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_day"));
+				List<WebElement> appliedMonthList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_month"));
+				List<WebElement> appliedYearList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_appliedYear"));
+				List<WebElement> confirmedDateList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_day"));
+				List<WebElement> confirmedMonth = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_month"));
+				List<WebElement> confirmedYearList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year"));
+				List<WebElement> valueTextboxList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_value"));
 
 				for (int index = 0; index < agencyDropDownList.size(); index++) {
 					String agency = new Select(agencyDropDownList.get(index)).getFirstSelectedOption().getText().trim();
@@ -1503,7 +1501,6 @@ public class EditAreaPage extends AbstractPage {
 			} else {
 				assertTrue("There is no existing values in credit rating section", true);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1511,54 +1508,37 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyAreaCreditRatingValuesFromDB(String country, String area, String source, String agency,
 			String type, String value, String appliedDate, String confirmedDate, int row) {
-
 		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("country", country));
 			nvPairs.add(new BasicNameValuePair("area", area));
 			nvPairs.add(new BasicNameValuePair("source", source));
-			Thread.sleep(5000L);
-
-			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"get area credit ratings", nvPairs);
-
+			Thread.sleep(3000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,"get area credit ratings", nvPairs);
 			if (document != null && document.getElementsByTagName("creditRating").getLength() >= row) {
-
-				for (int childNode = 0; childNode < document.getElementsByTagName("creditRating").item(row - 1)
-						.getChildNodes().getLength(); childNode++) {
-
-					switch (document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode)
-							.getNodeName()) {
+				for (int childNode = 0; childNode < document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().getLength(); childNode++) {
+					switch (document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getNodeName()) {
 					case "creditRatingAgencyName":
-						assertEquals(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes()
-								.item(childNode).getTextContent(), agency);
+						assertEquals(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent(), agency);
 						break;
 					case "creditRatingType":
-						assertEquals(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes()
-								.item(childNode).getTextContent(), type);
+						assertEquals(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent(), type);
 						break;
 					case "creditRatingValue":
-						assertEquals(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes()
-								.item(childNode).getTextContent(), value);
+						assertEquals(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent(), value);
 						break;
 					case "creditDateApplied":
-						if (!appliedDate.isEmpty() && !(document.getElementsByTagName("creditRating").item(row - 1)
-								.getChildNodes().item(childNode).getTextContent().isEmpty())) {
-							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row - 1)
-									.getChildNodes().item(childNode).getTextContent()), appliedDate);
+						if (!appliedDate.isEmpty() && !(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent().isEmpty())) {
+							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent()), appliedDate);
 						}
-
 						break;
 					case "creditDateConfirmed":
-						if (!appliedDate.isEmpty() && !(document.getElementsByTagName("creditRating").item(row - 1)
-								.getChildNodes().item(childNode).getTextContent().isEmpty())) {
-							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row - 1)
-									.getChildNodes().item(childNode).getTextContent()), confirmedDate);
+						if (!appliedDate.isEmpty() && !(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent().isEmpty())) {
+							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent()), confirmedDate);
 						}
 						break;
 					}
 				}
-
 			} else if (document != null) {
 				assertTrue(!(document.getElementsByTagName("creditRating").getLength() > row));
 			} else {
@@ -1572,13 +1552,9 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyAreaCreditRatingValuesFromUI(String country, String area, String agency, String type,
 			String value, String appliedDate, String confirmedDate, int rowNumber) {
-
 		try {
-
-			// to avoid the driver finding time when there are no rows, clicking
-			// row button. so that at least one web element will be exist.
-			assertFalse("No rows exist in credit rating section", getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_creditRating_row_xpath")).size() == 1);
-			List<WebElement> rowColums = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_creditRating_row_xpath")).get(rowNumber).findElements(By.tagName("td"));
+			assertFalse("No rows exist in credit rating section", getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_creditRating_row")).size() == 1);
+			List<WebElement> rowColums = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_creditRating_row")).get(rowNumber).findElements(By.tagName("td"));
 
 			String agencyInUI = rowColums.get(0).getText();
 			String typeInUI = rowColums.get(1).getText();
@@ -1602,7 +1578,7 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyNewlyAddedAreaCreditRatingRowIsNotDisplayed() {
 		try {
-			assertTrue(getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_creditRating_new_row_xpath")).size() == 0);
+			assertTrue(getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_creditRating_new_row")).size() == 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1619,33 +1595,22 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 
-	public void enterCreditRatingRowDropDownFieldValue(String fieldValue, int row, By by) {
-		List<WebElement> fieldDropDownList = getDriver().findElements(by);
-		selectItemFromDropdownListByText(fieldDropDownList.get(row - 1), fieldValue);
-	}
-
-	public void enterAreaCreditRatingRowTextBoxValues(String fieldValue, int row, By by) {
-		List<WebElement> textboxValueList = getDriver().findElements(by);
-		textboxValueList.get(row - 1).clear();
-		textboxValueList.get(row - 1).sendKeys(fieldValue);
-	}
-
 	public void enterAppliedAndConfirmedDateLaterThanToday(int row) {
 		Calendar cal = Calendar.getInstance();
-		enterAreaCreditRatingRowTextBoxValues(Integer.toString(cal.get(Calendar.DATE) + 1), row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_day_xpath"));
-		enterAreaCreditRatingRowTextBoxValues(Integer.toString(cal.get(Calendar.DATE) + 1), row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_day_xpath"));
+		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_day"), Integer.toString(cal.get(Calendar.DATE) + 1), row);
+		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_day"), Integer.toString(cal.get(Calendar.DATE) + 1), row);
 		Format formatter = new SimpleDateFormat("MMMM");
 		String month = formatter.format(new Date());
 		month = month.substring(0, 3);
-		enterCreditRatingRowDropDownFieldValue(month, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_month_xpath"));
-		enterCreditRatingRowDropDownFieldValue(month, row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_month_xpath"));
-		enterAreaCreditRatingRowTextBoxValues(Integer.toString(cal.get(Calendar.YEAR) + 1), row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_appliedYear_xpath"));
-		enterAreaCreditRatingRowTextBoxValues(Integer.toString(cal.get(Calendar.YEAR) + 1), row, AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year_xpath"));
+		selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_month"), month, row);
+		selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_month"), month, row);
+		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_appliedYear"), Integer.toString(cal.get(Calendar.YEAR) + 1), row);
+		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year"), Integer.toString(cal.get(Calendar.YEAR) + 1), row);
 	}
 
 	public void verifyNewlyAddedAreaCreditRatingRowIsDisplayed() {
 		try {
-			WebElement creditRatingRow = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_creditRating_row_xpath"));
+			WebElement creditRatingRow = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_creditRating_row"));
 			assertTrue(creditRatingRow != null);
 		} catch (Exception e) {
 			assertTrue(false);

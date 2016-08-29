@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.commons.ParamMap;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.Response;
@@ -1387,6 +1388,19 @@ public class DataPage extends AbstractPage {
 		for (int i = 1; i < document.getElementsByTagName(tagName).getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					elementTypeList.get(i).getAttribute("value"));
+		}
+	}
+	
+	public void verifyRowIsDisplayed(By by, boolean toBeDisplayed) {
+		try {
+			if (toBeDisplayed) {
+				WebElement rowToBeDisplayed = getDriver().findElement(by);
+				assertTrue(rowToBeDisplayed != null);
+			} else {
+				assertTrue(getDriver().findElements(by).size() == 0);
+			}
+		} catch (Exception e) {
+			assertTrue(false);
 		}
 	}
 }
