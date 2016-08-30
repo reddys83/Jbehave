@@ -1230,7 +1230,6 @@ Examples:
 |Belgium|Limburg|Bree|Panj Shair|
 
 Scenario: User can edit city names - Verify that an error message 'Enter up to 75 valid characters.' is displayed when user left name value blank and enters value in name type
-Meta:@test444
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area

@@ -22,7 +22,6 @@ Examples:
 |73788|FID|73788|
 
 Scenario: Verify legalEntity has no trust powers
-Meta:@test2344
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown

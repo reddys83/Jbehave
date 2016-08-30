@@ -43,7 +43,6 @@ Examples:
 Scenario:
 a) Verify that the Legal Entity's history field max length is 10000 characters only.
 b) Verify that blank value can be entered and saved in History field.
-Meta:@ram789
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
