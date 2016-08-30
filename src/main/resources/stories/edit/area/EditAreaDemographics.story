@@ -17,8 +17,8 @@ And the user clicks on the area tab in the data area
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
 And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
 And the user clicks on the area's demographics link in the navigation bar
-When the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
 When the user clicks on the add new demographics button in the area page
 Then the user should see the area demographics types from lookup DEMOGRAPHIC_METRIC
@@ -27,7 +27,7 @@ Then the user should see the demographics units in area page are from lookup UNI
 
 Examples:
 |country|area|demographicType|
-|Angola|Constantine|Area|
+|Angola|Bengo|Area|
 
 Scenario: The metric unit type is null, do not display a unit drop-down for that row
 TestCase: demographics type other than Area should not display the unit drop down
@@ -47,7 +47,7 @@ Then the user should not see the unit drop down for selected demographic type in
 
 Examples:
 |country|area|demographicType|
-|Andorra|Constantine|Largest County Population|
+|Andorra|Bengo|Largest County Population|
 
 Scenario: User should see the error message "Must be no later than today" if the date is later than today
 User should see the required error message if the type and value fields are null.
@@ -71,7 +71,7 @@ Then the user should see the error message required for the type and value field
 
 Examples:
 |country|area|
-|Algeria|Constantine|
+|Algeria|Bengo|
 
 Scenario: User should see the required error message if the type and value fields are null.
 Testcase: Confirmation modal to delete the row in demographich country basic info.

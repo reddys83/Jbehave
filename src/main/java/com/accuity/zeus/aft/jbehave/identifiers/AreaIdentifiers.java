@@ -87,7 +87,8 @@ public class AreaIdentifiers {
 		hmap.put("area_demographicDate-day", By.xpath("//*[@id='areaDemographics']//*[@name='demographicDate-day"));
 		hmap.put("area_demographicDate-month", By.xpath("//*[@id='areaDemographics']//*[@name='demographicDate-month"));
 		hmap.put("area_demographicDate-year", By.xpath("//*[@id='areaDemographics']//*[@name='demographicDate-year'"));
-		hmap.put("area_demographic-delete-button", By.xpath("//*[@id='areaDemographics']//button[@title='Delete Row'"));			
+		hmap.put("area_demographic-delete-button", By.xpath("//*[@id='areaDemographics']//button[@title='Delete Row'"));	
+		hmap.put("area_demographics_type_dropdown", By.xpath("//*[@id='demographicType']/option"));
 	}
 
 	public static By getObjectIdentifier(String key) {

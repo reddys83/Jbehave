@@ -782,7 +782,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should see the area demographics types from lookup DEMOGRAPHIC_METRIC")
 	public void verifyCountryDemographicsTypeDropdownList() {
-		getDataPage().verifyLookUpValues(AreaIdentifiers.getObjectIdentifier("area_demographics_type"), "type", "getDemographicsType.xqy");
+		getDataPage().verifyLookUpValues(AreaIdentifiers.getObjectIdentifier("area_demographics_type_dropdown"), "get area demographics type", "type");
 	}
 	
 	@Then("the user should see the demographics units in area page are from lookup UNIT_OF_MEASUREMENT")
