@@ -22,7 +22,7 @@ import org.w3c.dom.NodeList;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
-import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers; 
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -31,6 +31,7 @@ public class EditAreaPage extends AbstractPage {
    private static final String FULL_NAME = "Full Name";
    public static String addInfoMaximumCharacterString=null;
    public static String interestRateMaximumCharacter = null;
+   public static String editAreaDemographicType = null;
    
 	public EditAreaPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
@@ -1467,7 +1468,34 @@ public class EditAreaPage extends AbstractPage {
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_edit_mode_xpath"))
 						.getAttribute("value"));
 	}
+	
+    public void verifyAreaDemographicsUnitDropdownList() {
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("unit", editAreaDemographicType.toLowerCase()));
+        attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_demographics_unit_dropdown"));      
+        List<WebElement> demographicsUnit = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_add_demographics_unit_options"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area demographics unit", nvPairs);
+        for (int i = 0; i < document.getElementsByTagName("unit").getLength(); i++) {
+            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), demographicsUnit.get(i + 1).getText());
+        }
+    }   
 
+    public void verifyAreaDemographicsUnitDropdownNotExist() {
+        try {
+            getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_demographics_unit_dropdown")).toString();
+        } catch (NoSuchElementException e) {
+            System.out.println("Element not found");
+        }
+    }
+    
+    public void verifyAreaTextField(String fieldName, String expectedText, By by) {
+		try {		
+			assertEquals(fieldName + ":", expectedText, getDriver().findElement(by).getText());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}    
+   
 	@Override
 	public String getPageUrl() {
 		return null;

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 
 @Component
 public class EditAreaSteps extends AbstractSteps {
@@ -20,7 +21,7 @@ public class EditAreaSteps extends AbstractSteps {
 	ApacheHttpClient apacheHttpClient;
 	@Autowired
 	Database database;
-
+	
 	@Then("the user should see area end date value same as in $source document")
 	public void verifyAreaEndDateValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
@@ -773,4 +774,56 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("source") String source) {
 		getEditAreaPage().verifyUseInAddressAreaFromTrustedDB(country, area, "areaUseInAddress", source);
 	}
+	
+	@When("the user clicks on the add new demographics button in the area page")
+	public void clickOnAddDemographicsButton() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_demographics_button"));
+	}
+
+	@Then("the user should see the area demographics types from lookup DEMOGRAPHIC_METRIC")
+	public void verifyCountryDemographicsTypeDropdownList() {
+		getDataPage().verifyLookUpValues(AreaIdentifiers.getObjectIdentifier("area_demographics_type"), "type", "getDemographicsType.xqy");
+	}
+	
+	@Then("the user should see the demographics units in area page are from lookup UNIT_OF_MEASUREMENT")
+    public void verifyAreaDemographicsUnitDropdownList() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"));
+		getEditAreaPage().verifyAreaDemographicsUnitDropdownList();
+    }
+	
+	@When("the user selects the demographic types <demographicType> in the area page")
+	public void selectsDemographicsTypesFromDropdown(@Named("demographicType") String demographicType) {		
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographics_type"), demographicType, 1);
+	}
+
+	@Then("the user should not see the unit drop down for selected demographic type in area page")
+	public void verifyCountryDemographicsUnitDropdownNotExist() {
+		getEditAreaPage().verifyAreaDemographicsUnitDropdownNotExist();
+	}
+	
+	@When("the user enter demographics day <day> in the demographics area page")
+	public void entersDemographicsDay(@Named("day") String day) {
+		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographicDate-day"), day);
+	}
+
+	@When("the user enter demographics month <month> in the demographics area page")
+	public void entersDemographicsMonth(@Named("month") String month) {
+		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographicDate-day"), month);
+	}
+
+	@When("the user enter demographics year <year> in the demographics area page")
+	public void entersDemographicYear(@Named("year") String year) {
+		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographicDate-day"), year);
+	}
+	
+	@Then("the user should see the error message $errorMessage in the demographics area page")
+    public void verifyErrorMsgForAreaDemographicsDate(@Named("errorMessage") String errorMessage){
+		getEditAreaPage().verifyAreaTextField("DemographicsDate",errorMessage, AreaIdentifiers.getObjectIdentifier("area_demographicDate-day"));
+    }	
+	
+	@When("the user clicks on delete area demographics option")
+	public void clickOnDeleteAreaDemographicsOption() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographic-delete-button"));
+	}
+
 }

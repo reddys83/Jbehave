@@ -1371,4 +1371,15 @@ public class DataPage extends AbstractPage {
 			}
 		}
 	}
+	
+	public void verifyLookUpValues(By by, String xqueryName, String tagName) {
+		List<WebElement> elementTypeList = getDriver().findElements(by);
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xqueryName);
+		assertTrue(document.getElementsByTagName(tagName).getLength() > 1);
+		for (int i = 1; i < document.getElementsByTagName(tagName).getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					elementTypeList.get(i).getAttribute("value"));
+		}
+	}	
+	
 }

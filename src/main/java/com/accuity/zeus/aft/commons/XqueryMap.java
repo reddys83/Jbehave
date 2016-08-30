@@ -125,6 +125,8 @@ public class XqueryMap {
 		queryMap.put("get office statistics values","getOfficeStatisticsValues.xqy");
 		queryMap.put("get office service category list","getOfficeServiceCategoryFromLookup.xqy");
 		queryMap.put("get office service values","getOfficeServiceValues.xqy");
+		queryMap.put("get area demographics type","getDemographicsType.xqy");
+        queryMap.put("get area demographics unit","getDemographicsUnit.xqy");
    }
 
     public String getXquery(String key){

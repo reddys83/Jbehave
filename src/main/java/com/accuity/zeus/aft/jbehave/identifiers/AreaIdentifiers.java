@@ -79,6 +79,15 @@ public class AreaIdentifiers {
 		hmap.put("area_use_in_address_false", By.xpath("//*[@id='areaBasicInfo']//input[@value='false']"));
 		hmap.put("area_address_flag_view_mode_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='Use in Address']/td"));
 		hmap.put("area_address_flag_edit_mode_xpath", By.xpath("//input[@name='useInAddress']"));
+		
+		hmap.put("area_add_demographics_button", By.id("add-demographics"));
+		hmap.put("area_demographics_type", By.id("demographicType"));
+		hmap.put("area_demographics_unit_dropdown", By.xpath("//*[@id='areaDemographics']//*[@id='demographicUnit']"));
+		hmap.put("area_demographics_unit_options", By.xpath("//*[@id='areaDemographics']//*[@id='demographicUnit']/option"));
+		hmap.put("area_demographicDate-day", By.xpath("//*[@id='areaDemographics']//*[@name='demographicDate-day"));
+		hmap.put("area_demographicDate-month", By.xpath("//*[@id='areaDemographics']//*[@name='demographicDate-month"));
+		hmap.put("area_demographicDate-year", By.xpath("//*[@id='areaDemographics']//*[@name='demographicDate-year'"));
+		hmap.put("area_demographic-delete-button", By.xpath("//*[@id='areaDemographics']//button[@title='Delete Row'"));			
 	}
 
 	public static By getObjectIdentifier(String key) {
