@@ -5,9 +5,11 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.Response;
 import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.utils.SimpleCacheManager;
+import com.accuity.zeus.xml.XmlDocument;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -21,6 +23,7 @@ import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -34,6 +37,7 @@ public class DataPage extends AbstractPage {
     public static String clickedCurrencyIso = "";
     private By legalEntity_tab_id = By.id("legalEntity-nav");
     private By country_listBox_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span");
+    private By country_listBox_Choose_A_Country_xpath = By.xpath("//*[@id='selection0'] //*[@id='entitySelect_chosen']//span[text()='Choose a Country']");
     private By area_listBox_xpath = By.xpath("//*[@id='selection1'] //*[@id='entitySelect_chosen']//span");
     private By subarea_listBox_xpath = By.xpath("//*[@id='selection2'] //*[@id='entitySelect_chosen']//span");
     private By regions_label_xpath = By.xpath("//li[contains(h1,'Regions for')] //span");
@@ -215,7 +219,6 @@ public class DataPage extends AbstractPage {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
-
     @Override
     public String getPageUrl() {
         return null;
@@ -260,7 +263,7 @@ public class DataPage extends AbstractPage {
     }
 
     public CountryPage enterCountryInTheTypeAheadBox(String country) {
-        SimpleCacheManager.getInstance().put("selectedCountry",country);
+        SimpleCacheManager.getInstance().put("selectedCountry", country);
         selectedEntity = country;
         getDriver().findElement(country_type_ahead_xpath).sendKeys(country);
         getDriver().findElement(country_type_ahead_xpath).sendKeys(Keys.RETURN);
@@ -273,7 +276,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void enterAreaInTypeAhead(String area) {
-        SimpleCacheManager.getInstance().put("selectedArea",area);
+        SimpleCacheManager.getInstance().put("selectedArea", area);
         selectedEntity = area;
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(area);
         getDriver().findElement(area_area_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
@@ -783,6 +786,11 @@ public class DataPage extends AbstractPage {
         selectedEntity = subArea;
         getDriver().findElement(area_subarea_dropdown_typeAhead_xpath).sendKeys(subArea);
         getDriver().findElement(area_subarea_dropdown_typeAhead_xpath).sendKeys(Keys.RETURN);
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void clickOnAreasAlternativeRegions() {
@@ -964,7 +972,7 @@ public class DataPage extends AbstractPage {
 
     public void clickOnCityNameLink(String subCity)
     {
-        attemptClick(By.xpath(city_name_link_xpath + subCity +  "']"));
+        attemptClick(By.xpath(city_name_link_xpath + subCity + "']"));
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -974,9 +982,8 @@ public class DataPage extends AbstractPage {
 
     public void clickOnCityRelatedPlace(String relatedPlace) {
         attemptClick(By.xpath(city_related_places_place_link_xpath + relatedPlace + "']/td/a"));
-        waitForElementToAppear(area_listBox_xpath);
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -992,11 +999,13 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifyClickedCountryPage(String countryDropDown) {
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(3000L);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        waitForElementToAppear(country_listBox_xpath);
+        waitForElementToDisappear(country_listBox_Choose_A_Country_xpath);
         assertEquals(countryDropDown, getDriver().findElement(country_listBox_xpath).getText());
     }
 
@@ -1071,9 +1080,8 @@ public class DataPage extends AbstractPage {
     }
 
     public void revertChangesToDocument() {
-
         int response = restClient.putDocumentByID(endpointWithID, heraApi, responseEntity.getBody().toString());
-        assertTrue(response == 200||response == 202);
+        assertTrue(response == 200 || response==202);
     }
 
     public void clickOnCancelYesButton() {
@@ -1251,7 +1259,6 @@ public class DataPage extends AbstractPage {
                 assertFalse(Summary.getRow(i).get(Summary.getHeaders().get(0)).equals(confirmChanges.get(i).getText()));
             }
         } catch (Exception e) {
-            e.printStackTrace();
             assertTrue(true);
         }
     }
@@ -1326,5 +1333,42 @@ public class DataPage extends AbstractPage {
         assertTrue(getDriver().findElement(select_places_view_xpath).isDisplayed());
     }
 
+    public void updateDocument(String endpoint, String entityFid) {
+        XmlDocument xmlDocument = getTestDataXml(endpoint, entityFid);
+        String url = getResourceURL(endpoint, entityFid);
+        int response = restClient.putDocumentByID(endpoint, heraApi, xmlDocument.toString(),url);
+        assertTrue(response == 202);
+    }
+    
 
+	public String getTagValueFromDB(String queryName, String tagName, Map<String, String> inputParameters) {
+		String tagValue = null;
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			for (Map.Entry<String, String> entry : inputParameters.entrySet()) {
+				nvPairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+			}
+			Thread.sleep(2000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, queryName, nvPairs);
+			if (document != null) {
+				tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? "" 
+						: getNodeValuesByTagName(document, tagName).get(0);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return tagValue;		
+	}
+
+	public void deleteAllRows(By by) {
+		List<WebElement> deleteRows = getDriver().findElements(by);
+		for (int index = 0; index < deleteRows.size(); index++) {
+			WebElement currentInstance = getDriver().findElements(by).get(0);
+			if (currentInstance != null) {
+				currentInstance.click();
+				verifyDeleteConfirmationModal();
+				clickOnYesButtonInDeleteConfirmationModal();
+			}
+		}
+	}
 }

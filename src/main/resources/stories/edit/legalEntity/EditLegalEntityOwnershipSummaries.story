@@ -9,8 +9,6 @@ JIRA ID - ZEUS-916 - User can edit Legal Entity's Ownership Summaries
 Scenario: Verify Legal Entity's ownership Type dropdown values are from the lookup OWNERSHIP_SUMMARY_TEXT_TYPE in the same order as taxonomy
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -27,8 +25,6 @@ Examples:
 
 Scenario: For existing ownership summary rows, update the Type,Value and click Save. Updated values are updated in zeus document
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -52,8 +48,6 @@ Examples:
 
 Scenario: Add a new ownership summary row with Type,Value and click Save. Values are updated in zeus document
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -76,8 +70,6 @@ Examples:
 
 Scenario: For existing rows, verify row can be deleted by clicking on the yes button in delete confirmation section.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -101,8 +93,6 @@ Examples:
 
 Scenario: User can edit Legal Entity's ownership summaries- Verifying new row can be deleted by click on enter on the yes button in delete confirmation section.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -122,8 +112,6 @@ Examples:
 Scenario: Verify Legal Entity's ownership summary value field max length is 10000
 Verify Legal Entity ownership Summary Type is a required field
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -145,8 +133,6 @@ Examples:
 
 Scenario: Verify Legal Entity ownership Summary Value is a required field
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -165,8 +151,6 @@ Examples:
 
 Scenario: Verify the changes are recognized when deleted all ownership summary rows and the changes are saved in Zeus document
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

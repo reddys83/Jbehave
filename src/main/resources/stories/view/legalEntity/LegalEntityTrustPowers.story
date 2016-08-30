@@ -10,8 +10,6 @@ Scenario: Verify legalEntity trust powers
 BUG-ID - ZEUS-627 - Legal Entity Trust Powers - Case transformation should not happen when displaying the values.
 Meta:
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -25,8 +23,6 @@ Examples:
 
 Scenario: Verify legalEntity has no trust powers
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -42,8 +38,6 @@ Scenario: Veirfy LegalEntity trust powers section will appear for the entities t
 Legal entity type is one of the values Bank, Building Society, Credit Union, Government, Savings & Loan Association, Savings Bank, Trust Company
 and Legal Entity country of operations is one of the values US, VI, MP, GU, PR, AS
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -69,8 +63,6 @@ Legal entity type is one of the values Bank, Building Society, Credit Union, Gov
 and Legal Entity country of operations is one of the values US, VI, MP, GU, PR, AS
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

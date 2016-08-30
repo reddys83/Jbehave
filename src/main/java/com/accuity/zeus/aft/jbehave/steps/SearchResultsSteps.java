@@ -2,6 +2,8 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.pages.DataPage;
+import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -136,6 +138,11 @@ public class SearchResultsSteps extends AbstractSteps{
     @Then("the user should see the search results for the institution")
     public void verifySearchResults() {
         getResultsPage().verifySearchResults();
+    }
+
+    @Then("the user should see the same results of the previous search")
+    public void compareSearchResults() {
+        getResultsPage().compareURLAndSearchResults();
     }
 
     @Then("the user should see the legal entity search results card matching the searched entity $legalEntitySearchResults")
@@ -401,5 +408,12 @@ public class SearchResultsSteps extends AbstractSteps{
 	public void verifyActiveOfficesSearchResultsInAllPages(@Named("status") String status, @Named("count") int count) {
 		getResultsPage().verifyActiveOfficesSearchResultsForAllPages(searchedEntity, status, count);
 	}
+
+    @Then("the user should see results tab is selected")
+    public void verifyResultsTabSelected()
+    {
+        getResultsPage().verifyResultsTabSelected();
+    }
+
 
 }

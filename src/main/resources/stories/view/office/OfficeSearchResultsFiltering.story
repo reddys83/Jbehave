@@ -13,8 +13,6 @@ JIRA - ID - ZEUS - 487 - User can refine list of offices by city
 
 Scenario: Filter offices by type - Domestic
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -30,8 +28,6 @@ Examples:
 
 Scenario: Filter offices by type - Foreign
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -47,8 +43,6 @@ Examples:
 
 Scenario: Search returned 0 results
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -64,8 +58,6 @@ Examples:
 
 Scenario: Change number of office results per page
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -91,8 +83,6 @@ Examples:
 Scenario: Filter offices by status - Active
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -109,8 +99,6 @@ Examples:
 Scenario: Filter offices by status - Inactive
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -126,8 +114,6 @@ Examples:
 
 Scenario: Search returned 0 results for status filter
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -143,8 +129,6 @@ Examples:
 
 Scenario: User can use a combination of filters for office list
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -162,8 +146,6 @@ Examples:
 Scenario: User should see the types in the type filter should be based on the office search results types
 1. ZEUS-589
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -177,8 +159,6 @@ Examples:
 
 Scenario: User selects one of the office type filter in left sidebar should show the list the offices with the selected office type
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -196,8 +176,6 @@ Examples:
 
 Scenario: Verify the office type filter, When the office has single office type for the institution it should be selected by default and ALL should not be present
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -211,8 +189,6 @@ Examples:
 
 Scenario: User should see the error message if the combination of the selection filter is returning zero results
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -229,8 +205,6 @@ Examples:
 Scenario: User selects a column sort and a filter, Both the coulumn sort and filter are applied to the results list
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -254,8 +228,6 @@ Examples:
 Scenario: Verify the refine filter for city
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -269,10 +241,7 @@ Examples:
 |3125|FID|3125|
 
 Scenario: Filter offices by status - User verifies whether All pages of 'Active' filter has 'Active' status for all fids
-
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

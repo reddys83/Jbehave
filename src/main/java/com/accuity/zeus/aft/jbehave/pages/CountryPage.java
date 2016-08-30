@@ -284,9 +284,6 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyCountryCurrencies(ExamplesTable countryCurrencies) {
-        if (SearchPage.selectedEntity != "") {
-            selectedCountry = SearchPage.selectedEntity;
-        }
         assertTrue(getDriver().findElement(country_currencies_label_xpath).getText().matches("^CURRENCIES FOR " + selectedCountry.toUpperCase() + ".*$"));
         assertEquals("ISO NAME START DATE END DATE PRIMARY REPLACED BY STATUS", getDriver().findElement(country_currencies_table_headings_xpath).getText());
         List<WebElement> iso = getDriver().findElements(country_currencies_iso_xpath);
@@ -953,7 +950,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyErrorMessageForRequiredIdentifierValue() {
-        assertEquals("Required", getDriver().findElement(country_identifier_value_err_msg_xpath).getText());
+        assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_identifier_value_err_msg_xpath).getText());
     }
 
     public void clickOnAddDemographicsButton() {
@@ -1056,6 +1053,7 @@ public class CountryPage extends AbstractPage {
     public void selectsCityInPlacesForCountry(String cityPlaces) {
         getDriver().findElement(By.xpath(country_places_city_dropdown_xpath + "//input")).sendKeys(cityPlaces);
         getDriver().findElement(By.xpath(country_places_city_dropdown_xpath + "//input")).sendKeys(Keys.RETURN);
+        waitForElementToAppear(By.xpath("//*[@id='city_chosen']/a/span[text()='"+cityPlaces+"']"));
     }
 
     public void verifyPlaceInPlacesForCountry(String place) {
@@ -1305,7 +1303,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyErrorMessageForRequiredValueType() {
-        assertEquals("Required", getDriver().findElement(country_names_value_required_err_msg_xpath).getText());
+        assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_names_value_required_err_msg_xpath).getText());
     }
 
     public void verifyNewlyAddedNameRowIsDisplayed() {

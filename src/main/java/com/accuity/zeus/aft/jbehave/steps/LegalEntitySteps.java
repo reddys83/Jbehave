@@ -199,6 +199,11 @@ public class LegalEntitySteps extends AbstractSteps {
     public void verifyLegalEntityFinancialServicesLabels() {
         getLegalEntityPage().verifyLegalEntityFinancialServicesLabels();
     }
+    @Then("the user should see the user is still in the services section of legalentity page")
+    public void verifyServicesSection() {
+        getLegalEntityPage().verifyServicesSection();
+    }
+
 
     @Then("the user should see the trust powers for the legal entity")
     public void verifyLegalEntityTrustPowersLabels() {

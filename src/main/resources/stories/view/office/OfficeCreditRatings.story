@@ -8,8 +8,6 @@ JIRA ID - ZEUS - 411 - User can view office credit ratings
 
 Scenario: Verify office credit ratings  (Office ID - 99f53adf-5c75-400a-9f84-c8a098c3bcf0 )
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -29,8 +27,6 @@ Examples:
 
 Scenario: Verify no office credit ratings ( Office ID - cac0b9d5-8043-40d2-80cd-aea4180c74cb )
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

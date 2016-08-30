@@ -8,8 +8,6 @@ JIRA ID - ZEUS-400 User can view legalEntity history
 
 Scenario: Verify legal entity's history
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -29,8 +27,6 @@ Examples:
 Scenario: Verify no history for legalEntity
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -45,8 +41,6 @@ Examples:
 Scenario: Verify that the history is the default section for an inactive legal entity. User can select other sections
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
