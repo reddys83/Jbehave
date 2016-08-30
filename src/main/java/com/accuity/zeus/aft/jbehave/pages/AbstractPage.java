@@ -351,7 +351,7 @@ public abstract class AbstractPage {
             e.printStackTrace();
         }
         Document document =  XmlDocumentLoader.getDocument(filePath);
-        return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("resource").getNodeValue();
+        return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("id").getNodeValue();
     }
     
     public void selectDropDownValueFromRowNumber(By by, String value, int rowNumber) {

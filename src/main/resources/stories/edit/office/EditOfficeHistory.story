@@ -14,8 +14,6 @@ d)User verifies 'Office History' is reflecting in Office Web page
 e)User verifies 'Office History' is reflecting in zeus document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -50,8 +48,6 @@ d)User verifies 'Office History' is reflecting in Office Web page
 e)User verifies 'Office History' is reflecting in zeus document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -79,8 +75,6 @@ Examples:
 Scenario: User verifies that Office History  field is limited to 10000 unicode characters & verifies the max length attribute is restricted to 10000 in Office Page
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
