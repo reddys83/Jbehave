@@ -39,6 +39,7 @@ Examples:
 |1038|FID|1038|
 
 Scenario: Verify error message for value field
+Meta:@test2900
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown

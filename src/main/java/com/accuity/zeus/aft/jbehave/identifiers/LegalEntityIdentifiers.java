@@ -125,7 +125,7 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_ownership_summary_type_Required_error_message_xpath", By.xpath(".//*[@class='notification error'][@data-error_id='ownershipSummaryTypeError']"));
         hmap.put("legalEntity_ownership_summary_value_Required_error_message_xpath", By.xpath(".//*[@class='notification error'][@data-error_id='ownershipSummaryValueError']"));
         hmap.put("legalEntity_first_row_existing_offeredservices_category_dropdown",By.xpath("//*[@id='additionalServices']/tr[1]/td/select[@id='serviceCategory']"));
-        hmap.put("legalEntity_offeredservices_category_dropdown",By.xpath("//*[@id='additionalServices']/tr/td/select[@id='offeredServiceCategory']"));
+        hmap.put("legalEntity_offeredservices_category_dropdown",By.xpath("//*[@id='additionalServices']/tr/td/select[@id='serviceCategory']"));
         hmap.put("legalEntity_offeredservices_override_text_field",By.xpath("//*[@id='additionalServices']/tr/td/input"));
         hmap.put("legalEntity_first_row_existing_offeredservices_override_text_field",By.xpath("//*[@id='additionalServices']/tr[1]/td/input"));
         hmap.put("legalEntity_first_row_new_offeredservices_override_text_field",By.xpath("//*[@id='additionalServices']/tr[@class='new']/td/input"));

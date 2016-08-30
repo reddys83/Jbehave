@@ -140,7 +140,7 @@ public class CityIdentifiers {
 		hmap.put("city_region_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalRegions']//*[@data-error_id='regionValueError']")));
 		hmap.put("city_delete_region_row_button_xpath", By.xpath(".//*[@data-row_id='regions']//button[@class='delete-element']"));
 		hmap.put("city_region_table", By.xpath("//*[@id='cityRegions']//table"));
-		
+
 	}
 
 	public static By getObjectIdentifier(String key) {

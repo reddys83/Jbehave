@@ -1463,9 +1463,7 @@ public class EditAreaPage extends AbstractPage {
 	}
 
 	public void verifyUseInAddressAreaFromTrustedDB(String country, String area, String tagName, String source) {
-		assertEquals((getAreaBasicInfoFromDB(country, area, tagName, source)),
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_edit_mode_xpath"))
-						.getAttribute("value"));
+		assertEquals((getAreaBasicInfoFromDB(country, area, tagName, source)),getSelectedRadioValue(AreaIdentifiers.getObjectIdentifier("area_address_flag_edit_mode_xpath")));
 	}
 
 	@Override

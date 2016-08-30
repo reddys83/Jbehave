@@ -119,7 +119,7 @@ Examples:
 |entity|searchBy|fid|officeFid|day|month|year|
 |1010|FID|1010|1010-44||||
 
-JIRA ID - ZEUS-1069 - User can edit Principal Office flag
+
 Scenario: User makes a change to the principal office flag where the xml does not have the node principal office node and saves it
 1. verify that the confirmation modal displays the change
 2. verify that the change is reflected in zeus document
@@ -127,8 +127,6 @@ Scenario: User makes a change to the principal office flag where the xml does no
 
 Given a user is on the search page
 And the user updates office with fid <entityFid>
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -150,16 +148,13 @@ Examples:
 |entity|searchBy|fid|entityFid|principalFlag|
 |1010|FID|1010|1010-44|true|
 
-JIRA ID - ZEUS-1069 - User can edit Principal Office flag
+
 Scenario: User does not make a change to the principal office flag and saves it
 1. verify that the confirmation modal does displays that change has been made to Basic Info
 2. verify that the old value is reflected in zeus document
 3. verify that the old value is reflected on the page
-
 Given a user is on the search page
 And the user updates office with fid <entityFid>
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -374,8 +369,6 @@ Examples:
 |1010|FID|1010|1010-44|
 
 Scenario: Update and Save existing office type- Select a non-Blank value and Save. Verify the value is saved in Zeus document
-
-Meta:@red109
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -403,7 +396,6 @@ Examples:
 
 
 Scenario:Update and Save existing office type-Select a null value and Save. Verify that null value is not saved.
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -429,7 +421,6 @@ Examples:
 |1010|FID|1010|1010-44||
 
 Scenario: Add a new legal entity type row and Save- Select a non-Blank value and Save. Verify the value is saved in Zeus document
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -457,7 +448,6 @@ Examples:
 
 
 Scenario: Add a new legal entity type row and Save- Select a null value and Save. Verify that null value is not saved.
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -1008,8 +998,6 @@ d)User verifies whether blank value for Business Hours is saved successfully in 
 e)User verifies blank Business Hours value updated in Zeus Document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -1042,8 +1030,6 @@ b)User verifies Business Hours value is updated correctly in office basic info p
 c)User verifies Business Hours values in Zeus Document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -1076,8 +1062,6 @@ Scenario: User verifies that business hours field is limited to 200 unicode char
 a)User verifies that the maxlength attribute is 200.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
