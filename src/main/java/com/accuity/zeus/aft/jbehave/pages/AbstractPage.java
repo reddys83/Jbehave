@@ -21,7 +21,11 @@ import org.w3c.dom.NodeList;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -351,7 +355,7 @@ public abstract class AbstractPage {
             e.printStackTrace();
         }
         Document document =  XmlDocumentLoader.getDocument(filePath);
-        return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("resource").getNodeValue();
+        return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("id").getNodeValue();
     }
     
     public void selectDropDownValueFromRowNumber(By by, String value, int rowNumber) {
@@ -381,5 +385,11 @@ public abstract class AbstractPage {
 			e.printStackTrace();
 		}
 	}
-
+    
+    public String getDayLaterThanToday() throws ParseException {
+    	Format dateFormat = new SimpleDateFormat("dd");
+    	Calendar cal = Calendar.getInstance();		 	
+		cal.add(Calendar.DATE, 1);
+		return dateFormat.format(cal.getTime());
+	}	
 }

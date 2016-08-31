@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 import static org.junit.Assert.*;
 
 import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -1467,9 +1468,128 @@ public class EditAreaPage extends AbstractPage {
 	}
 
 	public void verifyUseInAddressAreaFromTrustedDB(String country, String area, String tagName, String source) {
-		assertEquals((getAreaBasicInfoFromDB(country, area, tagName, source)),
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_address_flag_edit_mode_xpath"))
-						.getAttribute("value"));
+		assertEquals((getAreaBasicInfoFromDB(country, area, tagName, source)),getSelectedRadioValue(AreaIdentifiers.getObjectIdentifier("area_address_flag_edit_mode_xpath")));
+	}
+	
+	public void enterAreaRegionType(String regionType) {
+		selectItemFromDropdownListByValue(AreaIdentifiers.getObjectIdentifier("area_region_type_dropdown_xpath"),
+				regionType);
+	}
+
+	public void verifyAreaRegionValueList(String regionValueLookUp) {
+		List<WebElement> regionValueList = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_region_value_dropdown_option"));
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("fid", regionValueLookUp));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get area region values", nvPairs);
+
+		assertTrue("DB values are empty", document.getElementsByTagName("regionValue").getLength() > 1);
+		for (int i = 1; i < document.getElementsByTagName("regionValue").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					regionValueList.get(i).getAttribute("value"));
+		}
+	}
+
+	public void enterRegionValue(String regionValue) {
+		selectItemFromDropdownListByValue(AreaIdentifiers.getObjectIdentifier("area_region_value_dropdown_xpath"),
+				regionValue);
+	}
+
+	public void verifyRegionTypeAndValue(String regionType, String regionValue) {
+		try {
+			boolean regionFound = false;
+			WebElement regionTable = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_table"));
+			List<WebElement> regionRows = regionTable.findElements(By.tagName("tr"));
+			for (int i = 1; i < regionRows.size(); i++) {
+				if (regionRows.get(i).getText().contains(regionType)
+						&& regionRows.get(i).getText().contains(regionValue)) {
+					List<WebElement> regionRowColumns = regionRows.get(i).findElements(By.tagName("td"));
+					if (regionRowColumns.get(0).getText().equals(regionType)
+							&& regionRowColumns.get(1).getText().equals(regionValue)) {
+						regionFound = true;
+						break;
+					}
+				}
+			}
+			assertTrue(regionFound);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public void verifyErrorMessageForRequiredAreaRegionValue() {
+		assertEquals("Required", getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_region_value_req_err_msg_xpath")).getText());
+	}
+
+	public Map<String, String> getAreaRegionValueMapFromDB(String country, String area, String source) {
+		Map<String, String> areaRegionMap = new HashMap<String, String>();
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get area regions list", nvPairs);
+		if (document != null) {
+			NodeList nodeList = document.getElementsByTagName("region");
+			for (int index = 0; index < nodeList.getLength(); index++) {
+				NodeList childNodeList = nodeList.item(index).getChildNodes();
+				areaRegionMap.put(childNodeList.item(0).getTextContent(), childNodeList.item(1).getTextContent());
+			}
+		}
+		return areaRegionMap;
+	}
+
+	public void verifyAreaRegionForBlankValue(Map<String, String> areaRegionValueMap) {
+		assertEquals(areaRegionValueMap.keySet().size(), 0);
+	}
+
+	public void verifyRegionValueInDB(Map<String, String> areaRegionMap, String newRegionType, String newRegionValue) {
+		assertTrue(areaRegionMap.containsKey(newRegionType));
+		assertEquals(areaRegionMap.get(newRegionType), newRegionValue);
+	}
+
+	public void verifyAreaRegionTypeAndValueInEditMode(String regionType, String regionValue) {
+		try {
+			assertEquals(regionType, getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_type_dropdown_xpath"))
+							.getAttribute("value"));
+			assertEquals(regionValue, getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_value_dropdown_xpath"))
+							.getAttribute("value"));
+		} catch (NoSuchElementException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public void verifyRegionTypeNotPresentInUI(String regionType, String regionValue) {
+		try {
+			WebElement regionTable = getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_region_table"));
+			List<WebElement> regionRows = regionTable.findElements(By.tagName("tr"));
+			boolean regionNotFound = true;
+			for (int i = 0; i < regionRows.size(); i++) {
+				if (regionRows.get(i).getText().contains(regionType)
+						&& regionRows.get(i).getText().contains(regionValue)) {
+					List<WebElement> regionRowColumns = regionRows.get(i).findElements(By.tagName("td"));
+					if (regionRowColumns.get(0).getText().equals(regionType)
+							&& regionRowColumns.get(1).getText().equals(regionValue)) {
+						regionNotFound = false;
+					}
+				}
+			}
+			assertTrue(regionNotFound);
+		} catch (Exception ex) {
+			assertTrue("Region Type is not present in the UI", true);
+		}
+	}
+
+	public void verifyAreaRegionDeletedFromDB(Map<String, String> areaRegionValueMap, String regionValue) {
+		assertFalse(areaRegionValueMap.containsKey(regionValue));
 	}
 	
 	public void verifyAreaCreditRatingValuesFromTrustedDB(String country, String area, String source) {
@@ -1605,26 +1725,22 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 
-	public void enterAppliedAndConfirmedDateLaterThanToday(int row) {
-		Calendar cal = Calendar.getInstance();
-		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_day"), 
-				Integer.toString(cal.get(Calendar.DATE) + 1), row);
-		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_day"), 
-				Integer.toString(cal.get(Calendar.DATE) + 1), row);
+	public void enterAppliedAndConfirmedDateLaterThanToday(int row) throws ParseException {
 		Format formatter = new SimpleDateFormat("MMMM");
 		String month = formatter.format(new Date());
 		month = month.substring(0, 3);
+		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_day"), 	getDayLaterThanToday(), row);
+		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_day"), getDayLaterThanToday(), row);
+		
 		selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_month"), month, row);
 		selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_month"), month, row);
-		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_year"), 
-				Integer.toString(cal.get(Calendar.YEAR) + 1), row);
-		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year"), 
-				Integer.toString(cal.get(Calendar.YEAR) + 1), row);
+		
+		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_year"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), row);
+		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), row);
 	}
 
 	@Override
 	public String getPageUrl() {
 		return null;
 	}
-
 }
