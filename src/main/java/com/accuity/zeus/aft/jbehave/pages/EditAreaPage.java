@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,8 @@ import org.w3c.dom.NodeList;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
-import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers; 
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -30,8 +32,7 @@ public class EditAreaPage extends AbstractPage {
    private static final String DISPLAY_NAME = "Display Name";
    private static final String FULL_NAME = "Full Name";
    public static String addInfoMaximumCharacterString=null;
-   public static String interestRateMaximumCharacter = null;
-   public static String editAreaDemographicType = null;
+   public static String interestRateMaximumCharacter = null;  
    
 	public EditAreaPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
@@ -1590,9 +1591,9 @@ public class EditAreaPage extends AbstractPage {
 	
     public void verifyAreaDemographicsUnitDropdownList() {
         List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("unit", editAreaDemographicType.toLowerCase()));
-        attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_demographics_unit_dropdown"));      
-        List<WebElement> demographicsUnit = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_add_demographics_unit_options"));
+        nvPairs.add(new BasicNameValuePair("unit", "area"));
+        attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"));      
+        List<WebElement> demographicsUnit = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_options"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area demographics unit", nvPairs);
         for (int i = 0; i < document.getElementsByTagName("unit").getLength(); i++) {
             assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), demographicsUnit.get(i + 1).getText());
@@ -1614,6 +1615,74 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}    
+    
+	public void verifyDemographicValueInUI(String demographicType, String demographicValue,
+			String demographicUnit, String date, int rowNumber) {
+		try {
+			assertFalse("No rows exist in demographics section", getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).size() == 1);
+			List<WebElement> rowColums = getDriver()
+					.findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).get(rowNumber).findElements(By.tagName("td"));
+			String typeInUI = rowColums.get(0).getText();
+			String valueInUI = rowColums.get(1).getText();
+			String UnitUI = rowColums.get(2).getText();
+			String dateInUI = rowColums.get(3).getText();
+
+			assertEquals(typeInUI, demographicType);
+			assertEquals(valueInUI, demographicValue);
+			assertEquals(UnitUI, demographicUnit);
+			if (!dateInUI.isEmpty() && !date.isEmpty()) {
+				assertEquals(dateInUI, date);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyDemographicValueInDB(String country, String area, String source, List<String> demographicType,
+			List<String> demographicValue, List<String> demographicUnit, List<String> date, int rowNumber) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			Thread.sleep(3000L);
+
+			Map<String, String> nodeList = new HashMap<String, String>();
+			nodeList.put("areaDemographicsType", "areaDemographicsType");
+			nodeList.put("areaDemographicsValue", "areaDemographicsValue");
+			nodeList.put("areaDemographicsUnit", "areaDemographicsUnit");
+			nodeList.put("areaDemographicsDate", "areaDemographicsDate");
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get area demographics info", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("metrics").item(0).getChildNodes().getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("metrics").item(0).getChildNodes()
+							.item(i).getChildNodes().getLength(); childNode++) {
+
+						switch (document.getElementsByTagName("metrics").item(0).getChildNodes().item(0).getChildNodes()
+								.item(childNode).getNodeName()) {
+						case "":
+							assertEquals(document.getElementsByTagName("metrics").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), demographicType.get(i));
+							break;
+
+						case "areaDemographicsDate":
+							break;
+
+						}
+					}
+				}
+			} else
+				assertTrue(source + "document is null", false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+ 
    
 	@Override
 	public String getPageUrl() {

@@ -10,7 +10,8 @@ JIRA ID - ZEUS-1042 - User can edit Area's Demographics
 Scenario: user verifies area's demographics 
 1- The demographic type drop-down lists values should be from DEMORGAPHIC_METRIC look up
 2- The demographic unit drop-down lists values should be from UNIT_OF_MEASUREMENT for demographic type 'area'
-
+3- Verify user can enter demogrpahic unit value and which is reflected in UI and Zeus
+Meta: @Testing
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -24,12 +25,21 @@ When the user clicks on the add new demographics button in the area page
 Then the user should see the area demographics types from lookup DEMOGRAPHIC_METRIC
 When the user selects the demographic types <demographicType> in the area page
 Then the user should see the demographics units in area page are from lookup UNIT_OF_MEASUREMENT
-
-!-- select unit value and verify UI and Zeus --
+When the user selects the demographic types <demographicType> in the area page
+When the user enters the demographic value <demographicValue> in the area page
+When the user enters the demographic unit <unitValue> in the area page
+And the user clicks on the save button
+Then the user should not see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should see the area demographic values are saved in area page
+Then the user should see the area demographic values as in zeus document
 
 Examples:
-|country|area|demographicType|
-|Angola|Bengo|Area|
+|country|area|demographicType|unitValue|
+|Angola|Bengo|Area|km²|
 
 Scenario: User updates existing values to 
 1 - Verify demographics type other than Area should not display the unit drop down 

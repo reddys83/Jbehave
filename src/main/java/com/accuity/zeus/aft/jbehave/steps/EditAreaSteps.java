@@ -2,9 +2,11 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
@@ -878,13 +880,14 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 
 	@Then("the user should see the area demographics types from lookup DEMOGRAPHIC_METRIC")
-	public void verifyCountryDemographicsTypeDropdownList() {
-		getDataPage().verifyLookUpValues(AreaIdentifiers.getObjectIdentifier("area_demographics_type_dropdown"), "get area demographics type", "type");
+	public void verifyAreaDemographicsTypeDropdownList() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographics_type"));
+		getDataPage().verifyLookUpValues(AreaIdentifiers.getObjectIdentifier("area_demographics_type_options"), "get area demographics type", "type");
 	}
 	
 	@Then("the user should see the demographics units in area page are from lookup UNIT_OF_MEASUREMENT")
-    public void verifyAreaDemographicsUnitDropdownList() {
-		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"));
+    public void verifyAreaDemographicsUnitDropdownList(@Named("demographicType") String demographicType) {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"));	
 		getEditAreaPage().verifyAreaDemographicsUnitDropdownList();
     }
 	
@@ -896,6 +899,11 @@ public class EditAreaSteps extends AbstractSteps {
 	@When("the user enters the demographic value <demographicValue> in the area page")
 	public void enterDemographicsValue(@Named("demographicValue") String demographicValue) {		
 		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographics_value"), demographicValue);
+	}
+	
+	@When("the user enters the demographic unit <unitValue> in the area page")
+	public void enterDemographicsUnit(@Named("unitValue") String demographicUnit) {		
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), demographicUnit, 1);
 	}
 
 	@Then("the user should not see the unit drop down for selected demographic type in area page")
@@ -940,11 +948,18 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@Then("the user should see the area demographic values as in $source document")
 	public void verifyDemographicsValueFromZeusDB(@Named("country") String country, @Named("area") String area,
-			@Named("source") String source, @Named("demographicType") String demographicType,
-			@Named("demographicValue") String demographicValue, @Named("day") String day,
-			@Named("month") String month, @Named("year") String year){
+			@Named("source") String source, @Named("demographicType") String demographicType, @Named("unitValue") 
+	        String demographicUnit, @Named("demographicValue") String demographicValue, @Named("day") String day,
+	        @Named("month") String month, @Named("year") String year) {
+		String date = day + " " + month + " " + year;
+		getEditAreaPage().verifyDemographicValueInUI(demographicType, demographicValue, demographicUnit, date, 1);
+	}
 
-		String date = day + " " + month + " " + year;		 
-		 
+	@Then("the user should see the area demographic values are saved in area page")
+	public void verifyDemographicsValuesInUI(@Named("demographicType") String demographicType,
+			@Named("demographicValue") String demographicValue, @Named("unitValue") String demographicUnit,
+			@Named("day") String day, @Named("month") String month, @Named("year") String year) {
+		String date = day + " " + month + " " + year;
+		getEditAreaPage().verifyDemographicValueInUI(demographicType, demographicValue, demographicUnit, date, 1);
 	}
 }
