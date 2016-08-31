@@ -1339,8 +1339,8 @@ public class DataPage extends AbstractPage {
 
     public void updateDocument(String endpoint, String entityFid) {
         XmlDocument xmlDocument = getTestDataXml(endpoint, entityFid);
-        String url = getResourceURL(endpoint, entityFid);
-        int response = restClient.putDocumentByID(endpoint, heraApi, xmlDocument.toString(),url);
+        String url = "/"+endpoint+"/id/"+getResourceURL(endpoint, entityFid);
+        int response = restClient.putDocumentByID(url, heraApi, xmlDocument.toString());
         assertTrue(response == 202);
     }
     
@@ -1373,6 +1373,16 @@ public class DataPage extends AbstractPage {
 				verifyDeleteConfirmationModal();
 				clickOnYesButtonInDeleteConfirmationModal();
 			}
+		}
+	}
+	
+	public void verifyLookUpValues(By by, String xqueryName, String tagName) {
+		List<WebElement> elementTypeList = getDriver().findElements(by);
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xqueryName);
+		assertTrue(document.getElementsByTagName(tagName).getLength() > 1);
+		for (int i = 1; i < document.getElementsByTagName(tagName).getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					elementTypeList.get(i).getAttribute("value"));
 		}
 	}
 }

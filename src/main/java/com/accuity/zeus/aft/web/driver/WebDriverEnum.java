@@ -52,7 +52,7 @@ public enum WebDriverEnum {
 		public WebDriver createWebDriver() {
 			URL hubUrl = null;
 			try {
-				hubUrl = new URL("http://localhost:4444/wd/hub");
+				hubUrl = new URL("http://localhost:5556/wd/hub");
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}

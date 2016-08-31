@@ -18,6 +18,7 @@ JIRA ID - ZEUS-1073 - User can edit Office's Names
 JIRA ID - ZEUS-1064 - User can edit Office's Prefix, Suffix and Override
 JIRA ID - ZEUS-1071 - User can edit Office's Business Hours
 
+
 Scenario: Update and Save office Opened date
 Verify User updates a value for Opened Date and click Save. Updated Office opened date should be saved in Zeus document
 
@@ -119,7 +120,7 @@ Examples:
 |entity|searchBy|fid|officeFid|day|month|year|
 |1010|FID|1010|1010-44||||
 
-JIRA ID - ZEUS-1069 - User can edit Principal Office flag
+
 Scenario: User makes a change to the principal office flag where the xml does not have the node principal office node and saves it
 1. verify that the confirmation modal displays the change
 2. verify that the change is reflected in zeus document
@@ -127,8 +128,6 @@ Scenario: User makes a change to the principal office flag where the xml does no
 
 Given a user is on the search page
 And the user updates office with fid <entityFid>
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -150,16 +149,13 @@ Examples:
 |entity|searchBy|fid|entityFid|principalFlag|
 |1010|FID|1010|1010-44|true|
 
-JIRA ID - ZEUS-1069 - User can edit Principal Office flag
+
 Scenario: User does not make a change to the principal office flag and saves it
 1. verify that the confirmation modal does displays that change has been made to Basic Info
 2. verify that the old value is reflected in zeus document
 3. verify that the old value is reflected on the page
-
 Given a user is on the search page
 And the user updates office with fid <entityFid>
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -321,7 +317,6 @@ Examples:
 
 Scenario: a)Verify that the Offices's Additional Info is not a required field and the value can be blank.
           b)Verify that the Office's Additional Info field max length is 10000 characters only.
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -334,9 +329,6 @@ When the user gets the document with get id for offices with the <officeFid> fro
 And the user enters the <additionalInfoText> in the office additional info text area
 When the user clicks on the save button
 Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Basic Info|
 When the user clicks on the confirm button
 Then the user should see office additional info text value as <additionalInfoText> for fid <officeFid> in zeus document and in zeus UI
 And the user reverts the changes to the document
@@ -354,6 +346,11 @@ And the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|officeFid|additionalInfoText|
 |1010|FID|1010|1010-44||
+
+
+
+
+
 Scenario: Verify Office's Office Type dropdown values from lookup OFFICE_TYPE  except those that have already been selected for this Office
 
 a) Verify for an existing OfficeTypes row, the office type values are from OFFICE_TYPE
@@ -378,8 +375,6 @@ Examples:
 |1010|FID|1010|1010-44|
 
 Scenario: Update and Save existing office type- Select a non-Blank value and Save. Verify the value is saved in Zeus document
-
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -407,7 +402,6 @@ Examples:
 
 
 Scenario:Update and Save existing office type-Select a null value and Save. Verify that null value is not saved.
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -433,7 +427,6 @@ Examples:
 |1010|FID|1010|1010-44||
 
 Scenario: Add a new legal entity type row and Save- Select a non-Blank value and Save. Verify the value is saved in Zeus document
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -461,7 +454,6 @@ Examples:
 
 
 Scenario: Add a new legal entity type row and Save- Select a null value and Save. Verify that null value is not saved.
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -1012,8 +1004,6 @@ d)User verifies whether blank value for Business Hours is saved successfully in 
 e)User verifies blank Business Hours value updated in Zeus Document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -1046,8 +1036,6 @@ b)User verifies Business Hours value is updated correctly in office basic info p
 c)User verifies Business Hours values in Zeus Document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -1080,8 +1068,6 @@ Scenario: User verifies that business hours field is limited to 200 unicode char
 a)User verifies that the maxlength attribute is 200.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -1102,3 +1088,4 @@ Then the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|officeFid|
 |1038|FID|1038|1038-51|
+

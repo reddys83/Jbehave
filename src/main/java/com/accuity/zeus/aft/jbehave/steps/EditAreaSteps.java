@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 
 @Component
 public class EditAreaSteps extends AbstractSteps {
@@ -772,5 +774,100 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyUseInAddressAreaFromTrustedDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
 		getEditAreaPage().verifyUseInAddressAreaFromTrustedDB(country, area, "areaUseInAddress", source);
+	}
+	
+	@When("the user clicks on the add new region button in the area region page")
+	public void clickOnAddNewRegionButton() {
+		setEditCityPage(getDataPage().createEditCityPage());
+		getEditCityPage().clickOnAddNewRegionButton();
+	}
+
+	@When("the user enters region type as <newRegionType> in the region area page")
+	public void enterAreaRegionType(@Named("newRegionType") String newRegionType) {
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		getEditAreaPage().enterAreaRegionType(newRegionType);
+	}
+
+	@Then("the user should see the region type from 'AREA_ALTERNATIVE_REGION' look up")
+	public void verifyAreaRegionTypeList() {
+		getDataPage().verifyLookUpValues(AreaIdentifiers
+				.getObjectIdentifier("area_region_type_dropdown_options_xpath"), "get area region types", "regiontype");
+	}
+
+	@Then("the user should see the area region value from <regionValueLookUp>")
+	public void verifyAreaRegionValueList(@Named("regionValueLookUp") String regionValueLookUp) {
+		getEditAreaPage().verifyAreaRegionValueList(regionValueLookUp);
+	}
+
+	@When("the user clicks on the area regions link in the navigation bar")
+	public void clickOnAreaRegions() {
+		setEditAreaPage(getDataPage().createEditAreaPage());
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_region_link"));
+	}
+
+	@When("the user deletes all existing area regions in area page in area page")
+	public void deleteAllAreaRegionsRows() {
+		getEditCityPage().clickOnAddNewRegionButton();
+		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_delete_region_row_button_xpath"));
+	}
+
+	@When("the user enters region value as <newRegionValue> in the region area page")
+	public void enterRegionValue(@Named("newRegionValue") String newRegionValue) {
+		getEditAreaPage().enterRegionValue(newRegionValue);
+	}
+
+	@Then("the user should see the area region type and value updated in UI")
+	public void verifyAreaRegionTypeAndValue(@Named("newRegionType") String newRegionType,
+			@Named("newRegionValue") String newRegionValue) {
+		getEditAreaPage().verifyRegionTypeAndValue(newRegionType, newRegionValue);
+	}
+
+	@Then("the user should see the error message for the required region value field in the area region page")
+	public void verifyErrorMessageForRequiredAreaRegionValue() {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaRegionValue();
+	}
+
+	@Then("the user should see the blank area region type and blank value is not updated in $source document")
+	public void verifyAreaRegionForBlankValue(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source) {
+		Map<String, String> areaRegionValueMap = getEditAreaPage().getAreaRegionValueMapFromDB(country, area, source);
+		getEditAreaPage().verifyAreaRegionForBlankValue(areaRegionValueMap);
+	}
+
+	@Then("the user should see the area region type and value updated in $source document")
+	public void verifyAreaRegion2ValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("newRegionValue") String newRegionValue, @Named("newRegionType") String newRegionType,
+			@Named("source") String source) {
+		Map<String, String> areaRegionValueMap = getEditAreaPage().getAreaRegionValueMapFromDB(country, area, source);
+		getEditAreaPage().verifyRegionValueInDB(areaRegionValueMap, newRegionType, newRegionValue);
+	}
+
+	@When("the user clicks on the delete region row button in the region area page")
+	public void clickOnDeleteRegionRowButtonArea() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_region_row_button_xpath"));
+	}
+
+	@Then("the user should see the area region type and value updated in edit area page")
+	public void verifyAreaRegionTypeAndValueInEditMode(@Named("newRegionType") String newRegionType,
+			@Named("newRegionValue") String newRegionValue) {
+		getEditAreaPage().verifyAreaRegionTypeAndValueInEditMode(newRegionType, newRegionValue);
+	}
+
+	@Then("the user should see the area region type and value deleted in UI")
+	public void verifyAreaRegionTypeDeleted(@Named("newRegionType") String newRegionType,
+			@Named("newRegionValue") String newRegionValue) {
+		getEditAreaPage().verifyRegionTypeNotPresentInUI(newRegionType, newRegionValue);
+	}
+
+	@Then("the user should see the area region not present in $source document")
+	public void verifyAreaRegionDeletedFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("newRegionType") String newRegionType,
+			@Named("newRegionValue") String newRegionValue) {
+		Map<String, String> areaRegionValueMap = getEditAreaPage().getAreaRegionValueMapFromDB(country, area, source);
+		getEditAreaPage().verifyAreaRegionDeletedFromDB(areaRegionValueMap, newRegionType);
 	}
 }
