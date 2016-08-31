@@ -1095,13 +1095,13 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
 	@Then("the user verifies that the country of operations value is sorted in alphabetical order")
 	public void verifyCountryOfOperationsList(@Named("fid") String fid) {
-		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
+		getDataPage().attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
 		getEditLegalEntityPage().verifyLookUpValues("country list", "value", fid);
 	}
 
 	@When("the user enters <countryOfOperations> in the country of operations drop down")
 	public void enterCountryOfOperationsDropDownValue(@Named("countryOfOperations") String countryOfOperations) {
-		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
+		getDataPage().attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
 		getDataPage().enterValueInTypeHeadDropDown(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_type_ahead"),countryOfOperations);
 	}
 
@@ -1140,7 +1140,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
 	@When("the user clicks on the No button for legal entity's country of operations warning message")
 	public void clickOnWarningMessageNoButton() {
-		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_no_button"));
+		getDataPage().attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_no_button"));
 	}
 
 	@Then("the user should not see the newly added country of operations value in the legal entity basic info page")
@@ -1150,7 +1150,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
 	@When("the user clicks on the Yes button for legal entity's country of operations warning message")
 	public void clickOnWarningMessageYesButton() {
-		getDataPage().clickOnWebElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_yes_button"));
+		getDataPage().attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_yes_button"));
 	}
 
 	@Then("the user should see the newly added country of operations value in the legal entity basic info page")

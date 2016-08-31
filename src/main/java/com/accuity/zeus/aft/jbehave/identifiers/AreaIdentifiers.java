@@ -42,14 +42,14 @@ public class AreaIdentifiers {
 		hmap.put("delete_row_confirmation_modal_xpath", By.xpath("//*[@colspan='10']"));	
 		hmap.put("area_name_type_error_msg_xpath", By.xpath(("//*[@id='additionalNames']//*[@data-error_id='nameTypeError']")));
 		hmap.put("area_name_value_error_msg_xpath", By.xpath(("//*[@id='additionalNames']//*[@data-error_id='nameValueError']")));
-		hmap.put("area_delete_name_row_button_xpath", By.xpath(".//*[@data-row_id='names']//button[@class='delete-row']"));
+		hmap.put("area_delete_name_row_button_xpath", By.xpath(".//*[@data-row_id='names']//button[@class='delete-element']"));
 		hmap.put("area_second_name_value_input_xpath", By.xpath(".//*[@id='additionalNames']/tr[4]//*[@data-internal_id='nameValue']"));
 		hmap.put("area_add_info_text_xpath", By.xpath(("//*[@id='areaBasicInfo']//textarea[@name='addInfo']")));
 		hmap.put("area_add_info_xpath_after_save", By.xpath("//*[@id='areaBasicInfo']//tr[th='Add Info']/td"));
 		hmap.put("area_add_new_identifier_button_id", By.id("add-identifiers"));
 		hmap.put("areaIdentifier_type_id", By.xpath("//*[@id='identifierType']"));
 		hmap.put("area_identifier_status_input_xpath", By.xpath(".//*[@id='additionalIdentifiers']//*[@data-internal_id='identifierStatus']"));
-		hmap.put("area_delete_identifiers_row_button_xpath", By.xpath(".//*[@data-row_id='identifiers']//button[@class='delete-row']"));
+		hmap.put("area_delete_identifiers_row_button_xpath", By.xpath(".//*[@data-row_id='identifiers']//button[@class='delete-element']"));
 		hmap.put("delete_area_identifier_row_confirmation_modal_xpath", By.xpath("//*[@id='additionalIdentifiers']/tr[2]"));
 		hmap.put("area_delete_yes_button_id", By.xpath("//*[@id='yes-button']"));
 		hmap.put("area_identifier_type_input_xpath", By.xpath(".//*[@id='additionalIdentifiers']//*[@data-internal_id='identifierType']"));
@@ -68,7 +68,7 @@ public class AreaIdentifiers {
 		hmap.put("timezone_utc_dropdown_xpath", By.xpath("//*[@name='utc3']"));
 		hmap.put("timezone_utc_dropdown_option", By.xpath("//*[@name='utc3']/option"));		
 		hmap.put("area_summary_timezone_xpath", By.xpath("//*[@name='timeZonesSummary']"));
-		hmap.put("area_delete_timezone_row_button_xpath", By.xpath("//*[@id='additionalTimeZones']//*[@class='delete-row']"));
+		hmap.put("area_delete_timezone_row_button_xpath", By.xpath("//*[@id='additionalTimeZones']//*[@class='delete-element']"));
 		hmap.put("area_timezone_dropdown_xpath", By.xpath("//*[@id='additionalTimeZones']/tr"));
 		hmap.put("area_timezone_type_view_mode", By.xpath("//*[@id='additionalTimeZones']"));		
 		hmap.put("utc_current_value_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='UTC']/td"));		
@@ -79,6 +79,15 @@ public class AreaIdentifiers {
 		hmap.put("area_use_in_address_false", By.xpath("//*[@id='areaBasicInfo']//input[@value='false']"));
 		hmap.put("area_address_flag_view_mode_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='Use in Address']/td"));
 		hmap.put("area_address_flag_edit_mode_xpath", By.xpath("//input[@name='useInAddress']"));
+		hmap.put("area_region_type_dropdown_options_xpath", By.xpath(("//*[@id='areaRegions']//*[@id='regionType']/option")));
+		hmap.put("area_add_new_region_button_id", By.id("add-regions"));
+		hmap.put("area_region_type_dropdown_xpath", By.xpath(".//*[@id='regionType']"));
+		hmap.put("area_region_value_dropdown_xpath", By.xpath(".//select[@id='regionValue']"));
+		hmap.put("area_region_value_dropdown_option", By.xpath(".//select[@id='regionValue']/option"));
+		hmap.put("area_region_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalRegions']//*[@data-error_id='regionValueError']")));
+		hmap.put("area_delete_region_row_button_xpath", By.xpath(".//*[@data-row_id='regions']//button[@class='delete-element']"));
+		hmap.put("area_region_table", By.xpath("//*[@id='areaRegions']//table"));
+		hmap.put("area_region_link", By.xpath("//*[@id='areaRegions']"));
 	}
 
 	public static By getObjectIdentifier(String key) {

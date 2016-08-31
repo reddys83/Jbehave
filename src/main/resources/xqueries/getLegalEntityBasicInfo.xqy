@@ -70,9 +70,9 @@ return <ownershipSummaryType>{$x/@type/string()}</ownershipSummaryType>
 let $ownershipValue:=for $x in $legalEntityS/ownership/summaries/summary
 return <ownershipSummaryValue>{($x/text())}</ownershipSummaryValue>
 
-let $history:=if($legalEntityS/history/summaries/summary eq "")
-then <history>null</history>
-else <history>{$legalEntityS/history/summaries/summary/text()}</history>
+let $history:=if(fn:exists($legalEntityS/history/summaries/summary))
+then <history>{$legalEntityS/history/summaries/summary/text()}</history>
+else <history>null</history>
 
 
 return <legalEntity>

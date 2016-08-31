@@ -54,7 +54,7 @@ public class OfficeIdentifiers {
         hmap.put("office_identifier_type_req_err_msg_xpath", By.xpath("//*[@id='additionalIdentifiers']//*[@data-error_id='identifierTypeError']"));
         hmap.put("office_identifier_value_req_err_msg_xpath", By.xpath("//*[@id='additionalIdentifiers']//*[@data-error_id='identifierValueError']"));
         hmap.put("office_identifier_status_req_err_msg_xpath", By.xpath("//*[@id='additionalIdentifiers']//*[@data-error_id='identifierStatusError']"));        
-        hmap.put("office_delete_identifiers_row_button_xpath", By.xpath(".//*[@data-row_id='identifiers']//button[@class='delete-row']"));
+        hmap.put("office_delete_identifiers_row_button_xpath", By.xpath(".//*[@data-row_id='identifiers']//button[@class='delete-element']"));
         
         hmap.put("office_name_type_first_row_existing_office_name_value",By.xpath("//*[@id='additionalNames']//input[@name='fixedName']"));
         hmap.put("office_name_second_row_existing_office_type_dropdown",By.xpath(".//*[@id='additionalNames']//select[@name='nameType']"));
@@ -70,7 +70,7 @@ public class OfficeIdentifiers {
         hmap.put("office_name_value_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='nameValueError']"));
         hmap.put("office_name_first_row_new_delete_button",By.xpath("//*[@id='additionalNames']//tr[@class='new'][1]//button"));
         hmap.put("office_name_second_row_existing_delete_button",By.xpath("//*[@id='additionalNames']//tr[2]//button"));
-        hmap.put("office_name_delete_button_for_legalTitle_edit_xpath",By.xpath(".//*[@id='additionalNames']//tr[td='Legal Title']//button[@class='delete-row']"));
+        hmap.put("office_name_delete_button_for_legalTitle_edit_xpath",By.xpath(".//*[@id='additionalNames']//tr[td='Legal Title']//button[@class='delete-element']"));
         hmap.put("office_name_basicInfo_names_value_edit_xpath",By.xpath(".//*[@id='additionalNames']//tr[@class='new']//input"));
         hmap.put("office_name_sort_name_xpath",By.xpath(".//*[@id='officeBasicInfo']//input[@name='officeSortName']"));
         hmap.put("office_name_sort_name_view",By.xpath(".//*[@id='officeBasicInfo']/ul/li[1]/dl/dd"));
@@ -84,7 +84,7 @@ public class OfficeIdentifiers {
         hmap.put("office_add_new_personnel_button_id", By.id("add-personnel"));
         hmap.put("office_personnel_type_input_xpath", By.xpath(".//*[@id='additionalPersonnel']//*[@data-internal_id='personnelType']"));
         hmap.put("office_personnel_value_input_xpath", By.xpath(".//*[@id='additionalPersonnel']//*[@data-internal_id='personnelValue']"));
-        hmap.put("office_delete_personnel_row_button_xpath", By.xpath(".//*[@data-row_id='personnel']//button[@class='delete-row']"));
+        hmap.put("office_delete_personnel_row_button_xpath", By.xpath(".//*[@data-row_id='personnel']//button[@class='delete-element']"));
         hmap.put("office_personnel_type_view_mode", By.xpath("//*[@id='officePersonnel']//tbody/tr"));
         hmap.put("office_additional_personnel", By.xpath("#additionalPersonnel"));
         hmap.put("office_personnel_type_error_msg_xpath", By.xpath("//*[@data-error_id='personnelTypeError']"));
@@ -107,7 +107,7 @@ public class OfficeIdentifiers {
 	    hmap.put("office_add_service_button_xpath", By.xpath("//*[@id='add-services']"));
 	    hmap.put("delete_row_confirmation_modal_service_xpath", By.xpath("//*[@colspan='10']")); 
 	    hmap.put("office_delete_yes_button_id", By.xpath("//*[@id='yes-button']"));
-	    hmap.put("office_services_delete_button_xpath",By.xpath(".//*[@data-row_id='services']//button[@class='delete-row']"));
+	    hmap.put("office_services_delete_button_xpath",By.xpath(".//*[@data-row_id='services']//button[@class='delete-element']"));
 	    hmap.put("office_service_category_dropdown_edit_mode_xpath", By.xpath("//select[@id='serviceCategory']"));
 	    hmap.put("office_service_override_textbox_edit_mode_xpath", By.xpath("//*[@id='additionalServices']/tr/td[2]/input"));
 	    hmap.put("office_services_type_view_mode", By.xpath("//*[@id='officeServices']//tbody/tr")); 
