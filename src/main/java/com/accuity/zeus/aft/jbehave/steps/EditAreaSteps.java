@@ -1,6 +1,7 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public class EditAreaSteps extends AbstractSteps {
 	ApacheHttpClient apacheHttpClient;
 	@Autowired
 	Database database;
-	
+
 	@Then("the user should see area end date value same as in $source document")
 	public void verifyAreaEndDateValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
@@ -775,58 +776,7 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("source") String source) {
 		getEditAreaPage().verifyUseInAddressAreaFromTrustedDB(country, area, "areaUseInAddress", source);
 	}
-
-	@When("the user clicks on the add new demographics button in the area page")
-	public void clickOnAddDemographicsButton() {
-		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_demographics_button"));
-	}
-
-	@Then("the user should see the area demographics types from lookup DEMOGRAPHIC_METRIC")
-	public void verifyCountryDemographicsTypeDropdownList() {
-		getDataPage().verifyLookUpValues(AreaIdentifiers.getObjectIdentifier("area_demographics_type_dropdown"), "get area demographics type", "type");
-	}
 	
-	@Then("the user should see the demographics units in area page are from lookup UNIT_OF_MEASUREMENT")
-    public void verifyAreaDemographicsUnitDropdownList() {
-		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"));
-		getEditAreaPage().verifyAreaDemographicsUnitDropdownList();
-    }
-	
-	@When("the user selects the demographic types <demographicType> in the area page")
-	public void selectsDemographicsTypesFromDropdown(@Named("demographicType") String demographicType) {		
-		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographics_type"), demographicType, 1);
-	}
-
-	@Then("the user should not see the unit drop down for selected demographic type in area page")
-	public void verifyCountryDemographicsUnitDropdownNotExist() {
-		getEditAreaPage().verifyAreaDemographicsUnitDropdownNotExist();
-	}
-	
-	@When("the user enter demographics day <day> in the demographics area page")
-	public void entersDemographicsDay(@Named("day") String day) {
-		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographicDate-day"), day);
-	}
-
-	@When("the user enter demographics month <month> in the demographics area page")
-	public void entersDemographicsMonth(@Named("month") String month) {
-		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographicDate-day"), month);
-	}
-
-	@When("the user enter demographics year <year> in the demographics area page")
-	public void entersDemographicYear(@Named("year") String year) {
-		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographicDate-day"), year);
-	}
-	
-	@Then("the user should see the error message $errorMessage in the demographics area page")
-    public void verifyErrorMsgForAreaDemographicsDate(@Named("errorMessage") String errorMessage){
-		getEditAreaPage().verifyAreaTextField("DemographicsDate",errorMessage, AreaIdentifiers.getObjectIdentifier("area_demographicDate-day"));
-    }	
-	
-	@When("the user clicks on delete area demographics option")
-	public void clickOnDeleteAreaDemographicsOption() {
-		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographic-delete-button"));
-	}
-
 	@When("the user clicks on the add new region button in the area region page")
 	public void clickOnAddNewRegionButton() {
 		setEditCityPage(getDataPage().createEditCityPage());
@@ -920,5 +870,81 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("newRegionValue") String newRegionValue) {
 		Map<String, String> areaRegionValueMap = getEditAreaPage().getAreaRegionValueMapFromDB(country, area, source);
 		getEditAreaPage().verifyAreaRegionDeletedFromDB(areaRegionValueMap, newRegionType);
+	}
+	
+	@When("the user clicks on the add new demographics button in the area page")
+	public void clickOnAddDemographicsButton() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_demographics_button"));
+	}
+
+	@Then("the user should see the area demographics types from lookup DEMOGRAPHIC_METRIC")
+	public void verifyCountryDemographicsTypeDropdownList() {
+		getDataPage().verifyLookUpValues(AreaIdentifiers.getObjectIdentifier("area_demographics_type_dropdown"), "get area demographics type", "type");
+	}
+	
+	@Then("the user should see the demographics units in area page are from lookup UNIT_OF_MEASUREMENT")
+    public void verifyAreaDemographicsUnitDropdownList() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"));
+		getEditAreaPage().verifyAreaDemographicsUnitDropdownList();
+    }
+	
+	@When("the user selects the demographic types <demographicType> in the area page")
+	public void selectsDemographicsTypesFromDropdown(@Named("demographicType") String demographicType) {		
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographics_type"), demographicType, 1);
+	}
+	
+	@When("the user enters the demographic value <demographicValue> in the area page")
+	public void enterDemographicsValue(@Named("demographicValue") String demographicValue) {		
+		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographics_value"), demographicValue);
+	}
+
+	@Then("the user should not see the unit drop down for selected demographic type in area page")
+	public void verifyCountryDemographicsUnitDropdownNotExist() {
+		getEditAreaPage().verifyAreaDemographicsUnitDropdownNotExist();
+	}
+	
+	@When("the user enter demographics day <day> in the demographics area page")
+	public void entersDemographicsDay(@Named("day") String day) {
+		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographic_date-day"), day);
+	}
+
+	@When("the user enter demographics month <month> in the demographics area page")
+	public void entersDemographicsMonth(@Named("month") String month) {
+		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographic_date-month"), month);
+	}
+
+	@When("the user enter demographics year <year> in the demographics area page")
+	public void entersDemographicYear(@Named("year") String year) {
+		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographic_date-year"), year);
+	}
+	
+	@Then("the user should see the error message $errorMessage in the demographics area page")
+    public void verifyErrorMsgForAreaDemographicsDate(@Named("errorMessage") String errorMessage){
+		getEditAreaPage().verifyAreaTextField("DemographicsDate",errorMessage, AreaIdentifiers.getObjectIdentifier("area_demographic_date-day"));
+    }	
+	
+	@When("the user clicks on delete area demographics option")
+	public void clickOnDeleteAreaDemographicsOption() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographic-delete-button"));
+	}
+	
+	@When("the user enters the demographic date later than today in area page")
+    public void entersDemographicDateLaterThanToday() {
+		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographicDate-year"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1));
+    }
+	
+	@Then("the user should see the error message $errorMessage for the type and value fields in area page")
+	public void verifyErrorMessageForTypeAndValue(@Named("errorMessage") String errorMessage) {
+		getEditAreaPage().verifyAreaTextField("Date field",errorMessage,  AreaIdentifiers.getObjectIdentifier("area_demographic_date_error_message"));
+	}
+	
+	@Then("the user should see the area demographic values as in $source document")
+	public void verifyDemographicsValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("demographicType") String demographicType,
+			@Named("demographicValue") String demographicValue, @Named("day") String day,
+			@Named("month") String month, @Named("year") String year){
+
+		String date = day + " " + month + " " + year;		 
+		 
 	}
 }
