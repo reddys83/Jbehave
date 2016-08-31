@@ -1335,8 +1335,8 @@ public class DataPage extends AbstractPage {
 
     public void updateDocument(String endpoint, String entityFid) {
         XmlDocument xmlDocument = getTestDataXml(endpoint, entityFid);
-        String url = getResourceURL(endpoint, entityFid);
-        int response = restClient.putDocumentByID(endpoint, heraApi, xmlDocument.toString(),url);
+        String url = "/"+endpoint+"/id/"+getResourceURL(endpoint, entityFid);
+        int response = restClient.putDocumentByID(url, heraApi, xmlDocument.toString());
         assertTrue(response == 202);
     }
     
@@ -1380,6 +1380,7 @@ public class DataPage extends AbstractPage {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					elementTypeList.get(i).getAttribute("value"));
 		}
-	}	
-	
+
+	}
+
 }

@@ -1685,7 +1685,6 @@ b)User verifies 'Your Changes have been saved' message is displayed after save
 c)User verifies Area Basic Info has been updated in confirmation modal
 d)User verifies whether updated 'Use in Address' is reflecting in Area Web page
 e)User verifies whether updated 'Use in Address' is reflecting in zeus document
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1717,7 +1716,6 @@ Scenario: User is updating  Area's Basic Info  page and  entered  value for 'Use
 a)User verifies 'Your Changes have been saved' message is displayed after save
 b)User verifies Area Basic Info has not been updated in confirmation modal
 c)User verifies whether updated 'Use in Address' is reflecting in Area Web page
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
