@@ -1102,7 +1102,8 @@ public class EditLegalEntitySteps extends AbstractSteps{
 	@When("the user enters <countryOfOperations> in the country of operations drop down")
 	public void enterCountryOfOperationsDropDownValue(@Named("countryOfOperations") String countryOfOperations) {
 		getDataPage().attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
-		getDataPage().enterValueInTypeHeadDropDown(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_type_ahead"),countryOfOperations);
+		getDataPage().enterValueInTypeHeadDropDown(LegalEntityIdentifiers
+				.getObjectIdentifier("legalEntity_country_of_operations_type_ahead"),countryOfOperations);
 	}
 
 	@Then("the user verifies the country of operations value in the legal entity basic info page")
@@ -1110,7 +1111,8 @@ public class EditLegalEntitySteps extends AbstractSteps{
 		if (countryOfOperations.equals("Unknown")) {
 			countryOfOperations = "";
 		}
-		getDataPage().verifyWebElementText("Country Of Operations", countryOfOperations, LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_view_mode"));
+		getDataPage().verifyWebElementText("Country Of Operations", 
+				countryOfOperations, LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_view_mode"));
 	}
 
 	@Then("the user should see the successful update message at top of the legal entity page")
@@ -1155,7 +1157,8 @@ public class EditLegalEntitySteps extends AbstractSteps{
 
 	@Then("the user should see the newly added country of operations value in the legal entity basic info page")
 	public void verifyEnteredCountryOfOperationsValueInUI(@Named("countryOfOperations") String countryOfOperations) {
-		getDataPage().verifyWebElementText("Country Of Operations", countryOfOperations, LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
+		getDataPage().verifyWebElementText("Country Of Operations", countryOfOperations, 
+				LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
 	}
     
   }

@@ -1394,7 +1394,7 @@ public class DataPage extends AbstractPage {
 
 	public void verifyWebElementText(String fieldName, String expectedText, By by) {
 		try {
-			Thread.sleep(2000L);
+			Thread.sleep(1000L);
 			assertEquals(fieldName + ":", expectedText, getDriver().findElement(by).getText());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
