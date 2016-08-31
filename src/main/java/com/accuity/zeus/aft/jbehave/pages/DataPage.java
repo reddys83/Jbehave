@@ -1329,6 +1329,10 @@ public class DataPage extends AbstractPage {
         assertTrue(getDriver().findElement(currency_update_button_id).isDisplayed());
     }
 
+    public void verifyLegalEntity2ndLineMenuItem(){
+        assertTrue(getDriver().findElement(legalEntity_tab_id).getAttribute("class").equals("selected"));
+    }
+
     public void verifyAreaPlacesView() {
         assertTrue(getDriver().findElement(select_places_view_xpath).isDisplayed());
     }

@@ -415,5 +415,9 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifyResultsTabSelected();
     }
 
-
+    @Then("the user should see the label offices on the results list page")
+    public void verifyOfficesLabelOnResultsPage()
+    {
+        getResultsPage().verifyOfficeHeading();
+    }
 }
