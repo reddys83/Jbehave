@@ -961,9 +961,12 @@ public class ResultsPage extends AbstractPage {
         return DOP;
     }
 
+
     public void verifyResultsTabSelected(){
         assertTrue(getDriver().findElement(results_tab_xpath).getAttribute("class").equals("selected"));
 
     }
 
 }
+
+
