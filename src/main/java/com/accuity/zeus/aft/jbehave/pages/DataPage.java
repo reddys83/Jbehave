@@ -1385,4 +1385,25 @@ public class DataPage extends AbstractPage {
 					elementTypeList.get(i).getAttribute("value"));
 		}
 	}
+	
+	public void verifyWebElementText(String fieldName, String expectedText, By by) {
+		try {		
+			assertEquals(fieldName + ":", expectedText, getDriver().findElement(by).getText());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyRowIsDisplayed(By by, boolean display) {
+		try {
+			if (display) {
+				WebElement rowToBeDisplayed = getDriver().findElement(by);
+				assertTrue(rowToBeDisplayed != null);
+			} else {
+				assertTrue(getDriver().findElements(by).size() == 0);
+			}
+		} catch (Exception e) {
+			assertTrue(false);
+		}
+	}
 }
