@@ -91,16 +91,20 @@ public class AreaIdentifiers {
 		
 		hmap.put("area_add_demographics_button", By.id("add-demographics"));
 		hmap.put("area_demographics_type", By.xpath("//select[@id='demographicType']"));
-		hmap.put("area_demographics_value", By.id("demographicValue"));
-		hmap.put("area_demographics_unit_dropdown", By.xpath("//*[@id='areaDemographics']//*[@id='demographicUnit']"));
-		hmap.put("area_demographics_unit_options", By.xpath("//*[@id='areaDemographics']//*[@id='demographicUnit']/option"));
-		hmap.put("area_demographic_date-day", By.xpath("//*[@id='areaDemographics']//*[@name='demographicDate-day"));
-		hmap.put("area_demographic_date-month", By.xpath("//*[@id='areaDemographics']//*[@name='demographicDate-month"));
-		hmap.put("area_demographic_date-year", By.xpath("//*[@id='areaDemographics']//*[@name='demographicDate-year'"));
-		hmap.put("area_demographic-delete-button", By.xpath("//*[@id='areaDemographics']//button[@title='Delete Row'"));	
+		hmap.put("area_demographics_value", By.xpath("//*[@id='additionalDemographics']//*[@data-internal_id='demographicValue']")); 
+		hmap.put("area_demographics_unit_dropdown", By.xpath("//*[@id='areaDemographics']//*[@data-internal_id='demographicUnit']"));
+		hmap.put("area_demographics_unit_options", By.xpath("//*[@id='areaDemographics']//*[@data-internal_id='demographicUnit']/option"));
+		hmap.put("area_demographic_date-day", By.xpath("//*[@id='areaDemographics']//*[@name='demographicDate-day']"));
+		hmap.put("area_demographic_date-month", By.xpath("//*[@id='areaDemographics']//*[@name='demographicDate-month']"));
+		hmap.put("area_demographic_date-year", By.xpath("//*[@id='areaDemographics']//*[@name='demographicDate-year']"));
+		hmap.put("area_demographic-delete-button", By.xpath("//*[@id='additionalDemographics']//button[@class='delete-element']"));	
 		hmap.put("area_demographics_type_options", By.xpath("//select[@id='demographicType']/option"));
-		hmap.put("area_demographic_type_error_message", By.xpath(""));
-		hmap.put("area_demographic_date_error_message", By.xpath(""));
+		hmap.put("area_demographic_type_error_message", By.xpath("//*[@data-error_id='demographicTypeError']"));
+		hmap.put("area_demographic_value_error_message", By.xpath("//*[@data-error_id='demographicValueError']"));
+		hmap.put("area_demographic_date_error_message", By.xpath("//*[@data-error_id='demographicDateError']"));
+		hmap.put("area_demographics_row", By.xpath("//*[@class='data']//*[@id='areaDemographics']//tr[@data-row_id='demographics']"));
+		hmap.put("area_demographics_row_view_mode", By.xpath("//*[@class='data']//*[@id='areaDemographics']//tr"));
+		
 	}
 
 	public static By getObjectIdentifier(String key) {

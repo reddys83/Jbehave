@@ -381,5 +381,15 @@ public abstract class AbstractPage {
 			e.printStackTrace();
 		}
 	}
+    
+    public void selectItemFromDropdownListByindex(By by, int i) {
+        try {           
+            Select dropdown = new Select(driver.findElement(by));
+            dropdown.selectByIndex(i);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+      
+    }
 
 }

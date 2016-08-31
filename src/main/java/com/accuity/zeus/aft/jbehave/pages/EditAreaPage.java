@@ -1603,7 +1603,7 @@ public class EditAreaPage extends AbstractPage {
     public void verifyAreaDemographicsUnitDropdownNotExist() {
         try {
             getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_demographics_unit_dropdown")).toString();
-        } catch (NoSuchElementException e) {
+        } catch (Exception e) {
             System.out.println("Element not found");
         }
     }
@@ -1620,17 +1620,17 @@ public class EditAreaPage extends AbstractPage {
 			String demographicUnit, String date, int rowNumber) {
 		try {
 			assertFalse("No rows exist in demographics section", getDriver()
-					.findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).size() == 1);
+					.findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_row_view_mode")).size() == 1);
 			List<WebElement> rowColums = getDriver()
-					.findElements(CityIdentifiers.getObjectIdentifier("city_creditRating_row_xpath")).get(rowNumber).findElements(By.tagName("td"));
+					.findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_row_view_mode")).get(rowNumber).findElements(By.tagName("td"));
 			String typeInUI = rowColums.get(0).getText();
 			String valueInUI = rowColums.get(1).getText();
 			String UnitUI = rowColums.get(2).getText();
 			String dateInUI = rowColums.get(3).getText();
 
 			assertEquals(typeInUI, demographicType);
-			assertEquals(valueInUI, demographicValue);
-			assertEquals(UnitUI, demographicUnit);
+			assertEquals(valueInUI.replace(",", ""), demographicValue);
+			assertTrue(UnitUI.contains(demographicUnit.substring(0,2)));
 			if (!dateInUI.isEmpty() && !date.isEmpty()) {
 				assertEquals(dateInUI, date);
 			}
@@ -1638,7 +1638,7 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void verifyDemographicValueInDB(String country, String area, String source, List<String> demographicType,
 			List<String> demographicValue, List<String> demographicUnit, List<String> date, int rowNumber) {
 		try {
@@ -1646,43 +1646,37 @@ public class EditAreaPage extends AbstractPage {
 			nvPairs.add(new BasicNameValuePair("source", source));
 			nvPairs.add(new BasicNameValuePair("country", country));
 			nvPairs.add(new BasicNameValuePair("area", area));
-			Thread.sleep(3000L);
+			// Thread.sleep(3000L);
 
-			Map<String, String> nodeList = new HashMap<String, String>();
-			nodeList.put("areaDemographicsType", "areaDemographicsType");
-			nodeList.put("areaDemographicsValue", "areaDemographicsValue");
-			nodeList.put("areaDemographicsUnit", "areaDemographicsUnit");
-			nodeList.put("areaDemographicsDate", "areaDemographicsDate");
+			Map<String, List<String>> nodeList = new HashMap<String, List<String>>();
+			nodeList.put("areaDemographicsType", demographicType);
+			nodeList.put("areaDemographicsValue", demographicValue);
+			nodeList.put("areaDemographicsUnit", demographicUnit);
+			nodeList.put("areaDemographicsDate", date);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get area demographics info", nvPairs);
+
 			if (document != null) {
-				for (int i = 0; i < document.getElementsByTagName("metrics").item(0).getChildNodes().getLength(); i++) {
-
-					for (int childNode = 0; childNode < document.getElementsByTagName("metrics").item(0).getChildNodes()
-							.item(i).getChildNodes().getLength(); childNode++) {
-
-						switch (document.getElementsByTagName("metrics").item(0).getChildNodes().item(0).getChildNodes()
-								.item(childNode).getNodeName()) {
-						case "":
-							assertEquals(document.getElementsByTagName("metrics").item(0).getChildNodes().item(i)
-									.getChildNodes().item(childNode).getTextContent(), demographicType.get(i));
-							break;
-
-						case "areaDemographicsDate":
-							break;
-
+				NodeList nodeListInDB = document.getElementsByTagName("metrics").item(0).getChildNodes();
+				for (int nodeIndex = 0; nodeIndex < nodeListInDB.getLength(); nodeIndex++) {
+					String nodeName = nodeListInDB.item(nodeIndex).getNodeName();
+					for (int index = 0; index < demographicType.size(); index++) {
+						if (nodeName == "areaDemographicsUnit") {
+							assertEquals(nodeListInDB.item(nodeIndex).getTextContent().substring(0, 2), nodeList.get(nodeName).get(index).substring(0, 2));
+						} else {
+							assertEquals(nodeListInDB.item(nodeIndex).getTextContent(), nodeList.get(nodeName).get(index));
 						}
 					}
+					
 				}
-			} else
+			} else {
 				assertTrue(source + "document is null", false);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
- 
    
 	@Override
 	public String getPageUrl() {

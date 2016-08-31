@@ -27,13 +27,13 @@ let $areaDemographicsList := for $x in ($areaDoc/summary/demographics/metric)
   let $name := $x/name/text()
   let $value := ($x/value/text())
   let $unit := ($x/unit/text())
-  let $date := ($x/date/text())
+  let $date := local:getDateAsPerAccuracy($x/date)
 return 
   <metrics>
-  <areaDemographicsType>{$name}</areaDemographicsType>
-  <areaDemographicsValue>{$value}</areaDemographicsValue>
-  <areaDemographicsUnit>{$unit}</areaDemographicsUnit>
-  <areaDemographicsDate>{$date}</areaDemographicsDate>
+	  <areaDemographicsType>{$name}</areaDemographicsType>
+	  <areaDemographicsValue>{$value}</areaDemographicsValue>
+	  <areaDemographicsUnit>{$unit}</areaDemographicsUnit>
+	  <areaDemographicsDate>{$date}</areaDemographicsDate>
   </metrics>  
  
 return

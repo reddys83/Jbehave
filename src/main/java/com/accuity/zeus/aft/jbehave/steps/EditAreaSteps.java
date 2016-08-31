@@ -902,8 +902,14 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
 	@When("the user enters the demographic unit <unitValue> in the area page")
-	public void enterDemographicsUnit(@Named("unitValue") String demographicUnit) {		
-		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), demographicUnit, 1);
+	public void enterDemographicsUnit(@Named("unitValue") String demographicUnit) {
+		if (demographicUnit.contains("km")) {
+			getDataPage().selectItemFromDropdownListByindex(
+					AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), 1);
+		} else if (demographicUnit.contains("mi")) {
+			getDataPage().selectItemFromDropdownListByindex(
+					AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), 2);
+		}
 	}
 
 	@Then("the user should not see the unit drop down for selected demographic type in area page")
@@ -918,7 +924,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user enter demographics month <month> in the demographics area page")
 	public void entersDemographicsMonth(@Named("month") String month) {
-		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographic_date-month"), month);
+		getEditAreaPage().selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_demographic_date-month"), month);
 	}
 
 	@When("the user enter demographics year <year> in the demographics area page")
@@ -936,23 +942,21 @@ public class EditAreaSteps extends AbstractSteps {
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographic-delete-button"));
 	}
 	
-	@When("the user enters the demographic date later than today in area page")
-    public void entersDemographicDateLaterThanToday() {
-		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographicDate-year"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1));
-    }
-	
-	@Then("the user should see the error message $errorMessage for the type and value fields in area page")
-	public void verifyErrorMessageForTypeAndValue(@Named("errorMessage") String errorMessage) {
-		getEditAreaPage().verifyAreaTextField("Date field",errorMessage,  AreaIdentifiers.getObjectIdentifier("area_demographic_date_error_message"));
-	}
 	
 	@Then("the user should see the area demographic values as in $source document")
 	public void verifyDemographicsValueFromZeusDB(@Named("country") String country, @Named("area") String area,
-			@Named("source") String source, @Named("demographicType") String demographicType, @Named("unitValue") 
-	        String demographicUnit, @Named("demographicValue") String demographicValue, @Named("day") String day,
-	        @Named("month") String month, @Named("year") String year) {
-		String date = day + " " + month + " " + year;
-		getEditAreaPage().verifyDemographicValueInUI(demographicType, demographicValue, demographicUnit, date, 1);
+			@Named("source") String source, @Named("demographicType") String type, @Named("unitValue") 
+	        String unit, @Named("demographicValue") String value, @Named("day") String day,
+	        @Named("month") String month, @Named("year") String year) {		
+		List<String> demographicType = new ArrayList<>();
+		List<String> demographicValue = new ArrayList<>();
+		List<String> demographicUnit = new ArrayList<>();
+		List<String> date = new ArrayList<>();
+		demographicType.add(type);
+		demographicValue.add(value);
+		demographicUnit.add(unit);
+		date.add(day + " " + month + " " + year);
+		getEditAreaPage().verifyDemographicValueInDB(country, area, source, demographicType, demographicValue, demographicUnit, date, 1);
 	}
 
 	@Then("the user should see the area demographic values are saved in area page")
@@ -962,4 +966,50 @@ public class EditAreaSteps extends AbstractSteps {
 		String date = day + " " + month + " " + year;
 		getEditAreaPage().verifyDemographicValueInUI(demographicType, demographicValue, demographicUnit, date, 1);
 	}
+	
+	@When("the user deletes the existing area demographics rows")
+	public void deleteAlldemographics() {
+		clickOnAddDemographicsButton();
+		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_demographic-delete-button"));
+	}
+	
+    @Then("the user should see delete row confirmation modal in the area demographics page")
+    public void verifyDeleteConfirmationModalInAreaCreditRating() {
+           getDataPage().verifyDeleteConfirmationModal();
+    }
+    
+    @When("the user clicks on the No button to cancel the deletion of area demographics row")
+    public void clickNoButtonInAreaCreditRatingDeleteModal() {
+           getDataPage().clickOnNoButtonInDeleteConfirmationModal();
+    }
+    
+    @Then("the user should see the newly added demographics row in the area demographics page")
+    public void verifyNewlyAddedAreaCreditRatingRowIsDisplayed() throws Exception {
+           getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_demographics_row"), true);
+    }
+    
+    @When("the user clicks on the Yes button to delete area demographics row")
+    public void clickYesButtonInAreaCreditRatingDeleteModal() {
+           getDataPage().clickOnYesButtonInDeleteConfirmationModal();
+    }
+    
+    @Then("the user should not see the newly added demographics row in the area page")
+    public void verifyNewlyAddedCreditRatingRowIsNotDisplayed() throws Exception {
+           getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_demographics_row"), false);
+    }
+    
+	@When("the user enters the demographic date later than today in area page")
+	public void entersDemographicDateLaterThanToday() {
+		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographic_date-year"),
+				String.valueOf(Calendar.getInstance().get(Calendar.YEAR) + 1));
+	}
+
+	@Then("the user should see the error message $errorMessage for the type and value fields in area page")
+	public void verifyErrorMessageForTypeAndValue(@Named("errorMessage") String errorMessage) {
+		getEditAreaPage().verifyAreaTextField("Type field", errorMessage,
+				AreaIdentifiers.getObjectIdentifier("area_demographic_type_error_message"));
+		getEditAreaPage().verifyAreaTextField("Value field", errorMessage,
+				AreaIdentifiers.getObjectIdentifier("area_demographic_value_error_message"));
+	}
+
 }

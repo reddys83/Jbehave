@@ -1382,5 +1382,18 @@ public class DataPage extends AbstractPage {
 		}
 
 	}
+	
+	public void verifyRowIsDisplayed(By by, boolean display) {
+		try {
+			if (display) {
+				WebElement rowToBeDisplayed = getDriver().findElement(by);
+				assertTrue(rowToBeDisplayed != null);
+			} else {
+				assertTrue(getDriver().findElements(by).size() == 0);
+			}
+		} catch (Exception e) {
+			assertTrue(false);
+		}
+	}
 
 }
