@@ -1035,4 +1035,29 @@ public class EditAreaSteps extends AbstractSteps {
 	public void clickYesButtonInAreaCreditRatingDeleteModal() {
 		getDataPage().clickOnYesButtonInDeleteConfirmationModal();
 	}
+	
+	@When("the user clicks on the add button for adding new places for area page")
+	public void clickOnAddPlacesButton() {
+		getEditCityPage().clickOnAddPlacesButton();
+	}
+	
+	@When("the user clicks on new area places type drop-down for area")
+	public void clickAreaPlaceType() {
+		getEditCityPage().clickCityPlaceType();
+	}
+	
+	@Then("the user should see the values for type dropdown from lookup AREA_RELATED_PLACE_TYPE")
+	public void verifyAreaPlacesTypeList() {
+		getEditAreaPage().verifyAreaPlacesTypeList();
+	}
+	
+	@When("the user clicks on new area places details drop-down for area")
+	public void clickDetailsDropDown() {
+		getEditCityPage().clickDetailsDropDown();
+	}
+	
+	@Then("the user should see the values for details dropdown from lookup AREA_RELATED_PLACE_SUBTYPE")
+	public void verifyAreaPlacesDetailsList() {
+		getEditAreaPage().verifyAreaPlacesDetailsList();
+	}
 }

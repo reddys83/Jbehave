@@ -28,6 +28,7 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -1739,6 +1740,25 @@ public class EditAreaPage extends AbstractPage {
 		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), row);
 	}
 
+	public void verifyAreaPlacesTypeList() {
+		List<WebElement> areaPlacesTypeList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_places_type_options_dropdown_xpath"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area places type lookup");
+		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					areaPlacesTypeList.get(i).getText());
+		}
+	}
+	
+	public void verifyAreaPlacesDetailsList() {
+		List<WebElement> areaPlacesDetailsList = getDriver()
+				.findElements(CityIdentifiers.getObjectIdentifier("city_places_details_options_dropdown_xpath"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area places detail lookup");
+		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					areaPlacesDetailsList.get(i).getText());
+		}
+	}
 	@Override
 	public String getPageUrl() {
 		return null;
