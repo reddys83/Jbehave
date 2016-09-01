@@ -17,7 +17,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
+When the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the area's demographics link in the navigation bar
 And the user clicks on the area update link
@@ -68,14 +68,14 @@ And the user enter demographics year <year> in the demographics area page
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
-Then the user should see the area demographic values are saved in area page
+Then the user should see the area demographic row values are saved in area page
 Then the user should see the area demographic values as in zeus document
 Then the user reverts the changes to the document
 
 Examples:
 |country|area|demographicType|demographicValue|day|month|year|
-|Algeria|Constantine|Largest County Population|34000000|||2014|
-|Algeria|Constantine|Population|34000000|||2014|
+|Angola|Bengo|Largest County Population|34000000|||2014|
+|Angola|Bengo|Population|34000000|||2014|
 
 Scenario: The metric unit type is null, do not display a unit drop-down for that row
 TestCase: demographics type other than Area should not display the unit drop down

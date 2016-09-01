@@ -1,12 +1,11 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
@@ -874,6 +873,170 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaRegionDeletedFromDB(areaRegionValueMap, newRegionType);
 	}
 	
+	@Then("the user should see the area credit rating values same as in $source document")
+	public void verifyAreaCreditRatingValueFromTrustedDB(@Named("country") String country, 
+			@Named("area") String area, @Named("source") String source) {
+		getEditAreaPage().verifyAreaCreditRatingValuesFromTrustedDB(country, area, source);
+	}
+	
+	@When("the user enters credit rating agency as <agency> in credit rating row $rowNumber in the area page")
+	public void enterCreditRatingAgency(@Named("agency") String agency, @Named("rowNumber") int row) {
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_agency_dropdown"), agency, row);
+	}
+	
+	@When("the user enters credit rating type as <type> in credit rating row $rowNumber in the area page")
+	public void enterCreditRatingType(@Named("type") String creditRatingType, @Named("rowNumber") int row) {
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_type_dropdown"), creditRatingType, row);
+	}
+	
+	@When("the user enters credit rating <value> in credit rating row $rowNumber in the area page")
+	public void enterAreaCreditRatingValue(@Named("value") String value, @Named("rowNumber") int row) {
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_value"), value, row);
+	}
+	
+	@When("the user enters applied date $appliedDay $appliedMonth $appliedYear in the area page")
+	public void enterAreaCreditRatingAppliedDate(@Named("appliedDay") String appliedDay,
+			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
+			@Named("rowNumber") int row) {
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_applied_date_day"), appliedDay, row);
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_applied_date_month"), appliedMonth, row);
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_applied_date_year"), appliedYear, row);
+	}
+	
+	@When("the user enters confirmed date $confirmedDay $confirmedMonth $confirmedYear in the area page")
+	public void enterAreaCreditRatingConfirmedDate(@Named("confirmedDay") String confirmedDay,
+			@Named("confirmedMonth") String confirmedMonth, @Named("confirmedYear") String confirmedYear,
+			@Named("rowNumber") int row) {
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_confirmed_date_day"), confirmedDay, row);
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_confirmed_date_month"), confirmedMonth, row);
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_confirmed_date_year"), confirmedYear, row);
+	}
+	
+	@Then("the user should see the area credit rating values as in $source document")
+	@Alias("the user should not see the area credit rating row in $source document")
+	public void verifyAreaCreditRatingValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+		    @Named("source") String source, @Named("agency") String agency,
+			@Named("type") String type, @Named("value") String value, @Named("appliedDay") String appliedDay,
+			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
+			@Named("confirmedDay") String confirmedDay, @Named("confirmedMonth") String confirmedMonth,
+			@Named("confirmedYear") String confirmedYear, @Named("rowNumber") int row) {
+
+		String appliedDate = appliedDay + " " + appliedMonth + " " + appliedYear;
+		String confirmedDate = confirmedDay + " " + confirmedMonth + " " + confirmedYear;
+		getEditAreaPage().verifyAreaCreditRatingValuesFromDB(country, area, source, agency, type, value, appliedDate, confirmedDate, row);
+	}
+	
+	@Then("the user should see the entered area credit rating values are saved in UI in the row $rowNumber")
+	public void verifyAreaCreditRatingValueFromUI(@Named("country") String country, @Named("area") String area,
+		    @Named("agency") String agency, @Named("type") String type,
+			@Named("value") String value, @Named("appliedDay") String appliedDay,
+			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
+			@Named("confirmedDay") String confirmedDay, @Named("confirmedMonth") String confirmedMonth,
+			@Named("confirmedYear") String confirmedYear, @Named("rowNumber") int row) {
+
+		String appliedDate = appliedDay + " " + appliedMonth + " " + appliedYear;
+		String confirmedDate = confirmedDay + " " + confirmedMonth + " " + confirmedYear;
+		getEditAreaPage().verifyAreaCreditRatingValuesFromUI(country, area, agency, type, value, appliedDate, confirmedDate, row);
+	}
+	
+	@When("the user clicks on the area credit rating link in the navigation bar")
+	public void clickOnAreaCreditRating() {
+		setEditAreaPage(getDataPage().createEditAreaPage());
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating"));
+	}
+	
+	@When("the user clicks on add new credit rating button in the credit rating area page")
+	public void clickOnAddButton() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating_add_row_id"));
+	}
+	
+	@Then("the user should see the area credit rating agency names from look up $LookUpName")
+	public void verifyAreaAgencyListExistingRow(@Named("rowNumber") int rowNumber) {
+		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber, 
+				AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_dropdown"), "creditRatingAgency");
+	}
+	
+	@Then("the user should see the area credit rating types from look up $LookUpName")
+	public void verifyAreaCreditRatingTypeListExistingRow(@Named("rowNumber") int rowNumber) {
+		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber, 
+				AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_dropdown"), "creditRatingType");
+	}
+	
+	@When("the user deletes the existing area credit rating rows")
+	public void deleteExistingCreditRatingRows() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating_add_row_id"));
+		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_delete_credit_rating_row_button"));
+	}
+	
+	@Then("the user should not see the newly added credit rating row in the area page")
+	public void verifyNewlyAddedCreditRatingRowIsNotDisplayed() throws Exception {
+		getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_credit_rating_new_row"), false);
+	}
+	
+	@Then("the user should see $errorMessage error message in area credit rating agency field")
+	public void verifyErrorMessageForAreaCreditRatingAgency(@Named("errorMessage") String errorMessage) {
+		getDataPage().verifyWebElementText("Agency", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_error"));
+	}
+	
+	@Then("the user should see $errorMessage error message in area credit rating type field")
+	public void verifyErrorMessageForAreaCreditRatingType(@Named("errorMessage") String errorMessage) {
+		getDataPage().verifyWebElementText("Type", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_error"));
+	}
+	
+	@Then("the user should be able to view the error message $errorMessage in area credit rating value")
+	public void verifyErrorMessageInAreaCreditRatingValue(@Named("errorMsg") String errorMessage) {
+		getDataPage().verifyWebElementText("Value", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_value_error"));
+	}
+	
+	@Then("the user should see the error message $errorMessage for applied date in the area page")
+	public void verifyErrorMessageForAppliedDate(@Named("errorMessage") String errorMessage) {
+		getDataPage().verifyWebElementText("Applied Date", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_error_msg"));
+	}
+	
+	@Then("the user should see the error message $errorMessage for confirmed date in the area page")
+	public void verifyErrorMessageForConfirmedDate(@Named("errorMessage") String errorMessage) {
+		getDataPage().verifyWebElementText("Confirmed Date", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_error_msg"));
+	}
+	
+	@When("the user enters applied date and confirmed date that is later than today")
+	public void enterAppliedAndConfirmedDateLaterThanToday(@Named("rowNumber") int row) throws ParseException {
+		getEditAreaPage().enterAppliedAndConfirmedDateLaterThanToday(row);
+	}
+	
+	@When("the user clicks on the delete credit rating row button in the area credit rating page")
+	public void clickOnDeleteNewAreaCreditRatingRowButton() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_credit_rating_row_button"));
+	}
+	
+	@Then("the user should see delete row confirmation modal in the area credit rating")
+	public void verifyDeleteConfirmationModalInAreaCreditRating() {
+		getDataPage().verifyDeleteConfirmationModal();
+	}
+	
+	@When("the user clicks on the No button to cancel the deletion of credit rating row")
+	public void clickNoButtonInAreaCreditRatingDeleteModal() {
+		getDataPage().clickOnNoButtonInDeleteConfirmationModal();
+	}
+	
+	@Then("the user should see the newly added credit rating row in the area credit rating page")
+	public void verifyNewlyAddedAreaCreditRatingRowIsDisplayed() throws Exception {
+		getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_credit_rating_row"), true);
+	}
+	
+	@When("the user clicks on the Yes button to delete credit rating row")
+	public void clickYesButtonInAreaCreditRatingDeleteModal() {
+		getDataPage().clickOnYesButtonInDeleteConfirmationModal();
+	}
+	
 	@When("the user clicks on the add new demographics button in the area page")
 	public void clickOnAddDemographicsButton() {
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_demographics_button"));
@@ -934,7 +1097,7 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@Then("the user should see the error message $errorMessage in the demographics area page")
     public void verifyErrorMsgForAreaDemographicsDate(@Named("errorMessage") String errorMessage){
-		getEditAreaPage().verifyAreaTextField("DemographicsDate",errorMessage, AreaIdentifiers.getObjectIdentifier("area_demographic_date-day"));
+		getDataPage().verifyWebElementText("DemographicsDate",errorMessage, AreaIdentifiers.getObjectIdentifier("area_demographic_date-day"));
     }	
 	
 	@When("the user clicks on delete area demographics option")
@@ -960,10 +1123,16 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 
 	@Then("the user should see the area demographic values are saved in area page")
-	public void verifyDemographicsValuesInUI(@Named("demographicType") String demographicType,
-			@Named("demographicValue") String demographicValue, @Named("unitValue") String demographicUnit,
+	public void verifyDemographicsValuesInUI(@Named("demographicType") String type,
+			@Named("demographicValue") String value, @Named("unitValue") String unit,
 			@Named("day") String day, @Named("month") String month, @Named("year") String year) {
-		String date = day + " " + month + " " + year;
+		List<String> demographicType = new ArrayList<>();	
+		List<String> demographicValue = new ArrayList<>();
+		List<String> date = new ArrayList<>();
+		List<String> demographicUnit = new ArrayList<>();
+		demographicType.add(type);
+		demographicValue.add(value);
+		date.add(day + " " + month + " " + year);
 		getEditAreaPage().verifyDemographicValueInUI(demographicType, demographicValue, demographicUnit, date, 1);
 	}
 	
@@ -974,27 +1143,27 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 	
     @Then("the user should see delete row confirmation modal in the area demographics page")
-    public void verifyDeleteConfirmationModalInAreaCreditRating() {
+    public void verifyDeleteConfirmationModalInAreaDemographics() {
            getDataPage().verifyDeleteConfirmationModal();
     }
     
     @When("the user clicks on the No button to cancel the deletion of area demographics row")
-    public void clickNoButtonInAreaCreditRatingDeleteModal() {
+    public void clickNoButtonInAreaDemographicsDeleteModal() {
            getDataPage().clickOnNoButtonInDeleteConfirmationModal();
     }
     
     @Then("the user should see the newly added demographics row in the area demographics page")
-    public void verifyNewlyAddedAreaCreditRatingRowIsDisplayed() throws Exception {
+    public void verifyNewlyAddedAreaDemographicsRowIsDisplayed() throws Exception {
            getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_demographics_row"), true);
     }
     
     @When("the user clicks on the Yes button to delete area demographics row")
-    public void clickYesButtonInAreaCreditRatingDeleteModal() {
+    public void clickYesButtonInAreaDemographicsDeleteModal() {
            getDataPage().clickOnYesButtonInDeleteConfirmationModal();
     }
     
     @Then("the user should not see the newly added demographics row in the area page")
-    public void verifyNewlyAddedCreditRatingRowIsNotDisplayed() throws Exception {
+    public void verifyNewlyAddedDemographicsRowIsNotDisplayed() throws Exception {
            getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_demographics_row"), false);
     }
     
@@ -1006,10 +1175,22 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should see the error message $errorMessage for the type and value fields in area page")
 	public void verifyErrorMessageForTypeAndValue(@Named("errorMessage") String errorMessage) {
-		getEditAreaPage().verifyAreaTextField("Type field", errorMessage,
+		getDataPage().verifyWebElementText("Type field", errorMessage,
 				AreaIdentifiers.getObjectIdentifier("area_demographic_type_error_message"));
-		getEditAreaPage().verifyAreaTextField("Value field", errorMessage,
+		getDataPage().verifyWebElementText("Value field", errorMessage,
 				AreaIdentifiers.getObjectIdentifier("area_demographic_value_error_message"));
+	}
+	
+	@Then("the user should see the area demographic row values are saved in area page")
+	public void verifyDemographicsValuesAreSavedInUI(@Named("demographicType") String type,
+			@Named("demographicValue") String value, @Named("day") String day, @Named("month") String month, @Named("year") String year) {		
+		List<String> demographicType = new ArrayList<>();	
+		List<String> demographicValue = new ArrayList<>();
+		List<String> date = new ArrayList<>();
+		demographicType.add(type);
+		demographicValue.add(value);
+		date.add(day + " " + month + " " + year);
+		getEditAreaPage().verifyDemographicValueInUI(demographicType, demographicValue, null, date, 1);
 	}
 
 }

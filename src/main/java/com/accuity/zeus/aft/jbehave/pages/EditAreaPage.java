@@ -2,8 +2,12 @@ package com.accuity.zeus.aft.jbehave.pages;
 
 import static org.junit.Assert.*;
 
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +28,6 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -32,7 +35,7 @@ public class EditAreaPage extends AbstractPage {
    private static final String DISPLAY_NAME = "Display Name";
    private static final String FULL_NAME = "Full Name";
    public static String addInfoMaximumCharacterString=null;
-   public static String interestRateMaximumCharacter = null;  
+   public static String interestRateMaximumCharacter = null;
    
 	public EditAreaPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
@@ -1589,56 +1592,153 @@ public class EditAreaPage extends AbstractPage {
 		assertFalse(areaRegionValueMap.containsKey(regionValue));
 	}
 	
-    public void verifyAreaDemographicsUnitDropdownList() {
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("unit", "area"));
-        attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"));      
-        List<WebElement> demographicsUnit = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_options"));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area demographics unit", nvPairs);
-        for (int i = 0; i < document.getElementsByTagName("unit").getLength(); i++) {
-            assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), demographicsUnit.get(i + 1).getText());
-        }
-    }   
-
-    public void verifyAreaDemographicsUnitDropdownNotExist() {
-        try {
-            getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_demographics_unit_dropdown")).toString();
-        } catch (Exception e) {
-            System.out.println("Element not found");
-        }
-    }
-    
-    public void verifyAreaTextField(String fieldName, String expectedText, By by) {
-		try {		
-			assertEquals(fieldName + ":", expectedText, getDriver().findElement(by).getText());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}    
-    
-	public void verifyDemographicValueInUI(String demographicType, String demographicValue,
-			String demographicUnit, String date, int rowNumber) {
+	public void verifyAreaCreditRatingValuesFromTrustedDB(String country, String area, String source) {
 		try {
-			assertFalse("No rows exist in demographics section", getDriver()
-					.findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_row_view_mode")).size() == 1);
-			List<WebElement> rowColums = getDriver()
-					.findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_row_view_mode")).get(rowNumber).findElements(By.tagName("td"));
-			String typeInUI = rowColums.get(0).getText();
-			String valueInUI = rowColums.get(1).getText();
-			String UnitUI = rowColums.get(2).getText();
-			String dateInUI = rowColums.get(3).getText();
+			if (getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_row")).size() > 1) {
+				List<WebElement> agencyDropDownList = getDriver()
+						.findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_dropdown"));
+				List<WebElement> typeDropDownList = getDriver()
+						.findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_dropdown"));
+				List<WebElement> appliedDateList = getDriver()
+						.findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_day"));
+				List<WebElement> appliedMonthList = getDriver()
+						.findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_month"));
+				List<WebElement> appliedYearList = getDriver()
+						.findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_year"));
+				List<WebElement> confirmedDateList = getDriver()
+						.findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_day"));
+				List<WebElement> confirmedMonth = getDriver()
+						.findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_month"));
+				List<WebElement> confirmedYearList = getDriver()
+						.findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year"));
+				List<WebElement> valueTextboxList = getDriver().
+						findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_value"));
 
-			assertEquals(typeInUI, demographicType);
-			assertEquals(valueInUI.replace(",", ""), demographicValue);
-			assertTrue(UnitUI.contains(demographicUnit.substring(0,2)));
-			if (!dateInUI.isEmpty() && !date.isEmpty()) {
-				assertEquals(dateInUI, date);
+				for (int index = 0; index < agencyDropDownList.size(); index++) {
+					String agency = new Select(agencyDropDownList.get(index)).getFirstSelectedOption().getText().trim();
+					String type = new Select(typeDropDownList.get(index)).getFirstSelectedOption().getText();
+					String value = valueTextboxList.get(index).getAttribute("value");
+					String appliedDate = new Select(appliedMonthList.get(index)).getFirstSelectedOption().getText()	
+							+ " " + appliedYearList.get(index).getAttribute("value");
+					String confirmedDate = new Select(confirmedMonth.get(index)).getFirstSelectedOption().getText()	
+							+ " " + confirmedYearList.get(index).getAttribute("value");
+
+					if (!appliedDateList.get(index).getAttribute("value").isEmpty()	
+							&& !confirmedDateList.get(index).getAttribute("value").isEmpty()) {
+						appliedDate = String.format("%02d", Integer.parseInt(appliedDateList.get(index).getAttribute("value"))) + " " + appliedDate;
+						confirmedDate = String.format("%02d", Integer.parseInt(confirmedDateList.get(index).getAttribute("value"))) + " " + confirmedDate;
+					}
+					verifyAreaCreditRatingValuesFromDB(country, area, source, agency, type, value, appliedDate,	confirmedDate, index + 1);
+				}
+			} else {
+				assertTrue("There is no existing values in credit rating section", true);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	public void verifyAreaCreditRatingValuesFromDB(String country, String area, String source, String agency,
+			String type, String value, String appliedDate, String confirmedDate, int row) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(2000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,"get area credit ratings", nvPairs);
+			
+			if (document != null && document.getElementsByTagName("creditRating").getLength() >= row) {
+				for (int childNode = 0; childNode < document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().getLength(); childNode++) {
+					switch (document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getNodeName()) {
+					case "creditRatingAgencyName":
+						assertEquals(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent(), agency);
+						break;
+					case "creditRatingType":
+						assertEquals(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent(), type);
+						break;
+					case "creditRatingValue":
+						assertEquals(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent(), value);
+						break;
+					case "creditDateApplied":
+						if (!appliedDate.isEmpty() 
+								&& !(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent().isEmpty())) {
+							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent()), appliedDate);
+						}
+						break;
+					case "creditDateConfirmed":
+						if (!appliedDate.isEmpty() 
+								&& !(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent().isEmpty())) {
+							assertEquals(String.valueOf(document.getElementsByTagName("creditRating").item(row - 1).getChildNodes().item(childNode).getTextContent()), confirmedDate);
+						}
+						break;
+					}
+				}
+			} else if (document != null) {
+				assertTrue(!(document.getElementsByTagName("creditRating").getLength() > row));
+			} else {
+				assertFalse("The creditRating rows in " + source + " DB is not matching with credit rating rows in UI", true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyAreaCreditRatingValuesFromUI(String country, String area, String agency, String type,
+			String value, String appliedDate, String confirmedDate, int rowNumber) {
+		try {
+			assertFalse("No rows exist in credit rating section", 
+					getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_credit_rating_row")).size() == 1);
+			List<WebElement> rowColums = getDriver().findElements(AreaIdentifiers
+					.getObjectIdentifier("area_credit_rating_row")).get(rowNumber).findElements(By.tagName("td"));
+
+			String agencyInUI = rowColums.get(0).getText();
+			String typeInUI = rowColums.get(1).getText();
+			String valueInUI = rowColums.get(2).getText();
+			String appliedDateInUI = rowColums.get(3).getText();
+			String confirmedDateInUI = rowColums.get(4).getText();
+
+			assertEquals(agencyInUI, agency);
+			assertEquals(typeInUI, type);
+			assertEquals(valueInUI, value);
+			if (!appliedDateInUI.isEmpty() && !appliedDate.isEmpty()) {
+				assertEquals(appliedDateInUI, appliedDate);
+			}
+			if (!confirmedDateInUI.isEmpty() && !confirmedDate.isEmpty()) {
+				assertEquals(confirmedDateInUI, confirmedDate);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyAreaCreditRatingListFromLookup(int row, By by, String tagname) {
+		List<WebElement> creditRatingList = getDriver().findElements(by);
+		assertTrue(creditRatingList.size() >= row);
+		List<WebElement> creditRatingListOptions = creditRatingList.get(row - 1).findElements(By.tagName("option"));
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city credit look up values");
+		for (int i = 0; i < document.getElementsByTagName(tagname).getLength(); i++) {
+			assertEquals(document.getElementsByTagName(tagname).item(i).getTextContent(), 
+					creditRatingListOptions.get(i + 1).getAttribute("value"));
+		}
+	}
+
+	public void enterAppliedAndConfirmedDateLaterThanToday(int row) throws ParseException {
+		Format formatter = new SimpleDateFormat("MMMM");
+		String month = formatter.format(new Date());
+		month = month.substring(0, 3);
+		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_day"), 	getDayLaterThanToday(), row);
+		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_day"), getDayLaterThanToday(), row);
+		
+		selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_month"), month, row);
+		selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_month"), month, row);
+		
+		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_year"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), row);
+		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), row);
+	}
+	
 	public void verifyDemographicValueInDB(String country, String area, String source, List<String> demographicType,
 			List<String> demographicValue, List<String> demographicUnit, List<String> date, int rowNumber) {
 		try {
@@ -1646,7 +1746,7 @@ public class EditAreaPage extends AbstractPage {
 			nvPairs.add(new BasicNameValuePair("source", source));
 			nvPairs.add(new BasicNameValuePair("country", country));
 			nvPairs.add(new BasicNameValuePair("area", area));
-			// Thread.sleep(3000L);
+			 Thread.sleep(3000L);
 
 			Map<String, List<String>> nodeList = new HashMap<String, List<String>>();
 			nodeList.put("areaDemographicsType", demographicType);
@@ -1656,19 +1756,20 @@ public class EditAreaPage extends AbstractPage {
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get area demographics info", nvPairs);
-
 			if (document != null) {
 				NodeList nodeListInDB = document.getElementsByTagName("metrics").item(0).getChildNodes();
 				for (int nodeIndex = 0; nodeIndex < nodeListInDB.getLength(); nodeIndex++) {
 					String nodeName = nodeListInDB.item(nodeIndex).getNodeName();
 					for (int index = 0; index < demographicType.size(); index++) {
 						if (nodeName == "areaDemographicsUnit") {
-							assertEquals(nodeListInDB.item(nodeIndex).getTextContent().substring(0, 2), nodeList.get(nodeName).get(index).substring(0, 2));
+							assertEquals(nodeListInDB.item(nodeIndex).getTextContent().substring(0, 2),
+									nodeList.get(nodeName).get(index).substring(0, 2));
 						} else {
-							assertEquals(nodeListInDB.item(nodeIndex).getTextContent(), nodeList.get(nodeName).get(index));
+							assertEquals(nodeListInDB.item(nodeIndex).getTextContent(),
+									nodeList.get(nodeName).get(index));
 						}
 					}
-					
+
 				}
 			} else {
 				assertTrue(source + "document is null", false);
@@ -1677,7 +1778,57 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-   
+
+	public void verifyDemographicValueInUI(List<String> demographicType, List<String> demographicValue,
+			List<String> demographicUnit, List<String> date, int rowNumber) {
+		try {
+			assertFalse("No rows exist in demographics section", getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_row_view_mode")).size() == 1);
+			List<WebElement> demographicsRows = getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_row_view_mode"));
+			
+			for (int index = 1; index < demographicsRows.size(); index++) {
+				List<WebElement> demographicsColumn = getDriver().findElements(AreaIdentifiers.
+						getObjectIdentifier("area_demographics_row_view_mode")).get(index-1).findElements(By.tagName("td"));
+				assertEquals("demographicType: ", demographicsColumn.get(0).getText(), demographicType.get(index-1));
+				assertEquals("demographicValue: ", demographicsColumn.get(1).getText().replace(",", ""),
+						demographicValue.get(index-1));
+				if (!demographicUnit.get(index-1).isEmpty()) {
+					assertTrue("demographicUnit",
+							demographicsColumn.get(2).getText().contains(demographicUnit.get(index-1).substring(0, 2)));
+				}
+				if (!date.isEmpty()) {
+					assertEquals("date :", demographicsColumn.get(3).getText(), date.get(index-1));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyAreaDemographicsUnitDropdownList() {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("unit", "area"));
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"));
+		List<WebElement> demographicsUnit = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_options"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get area demographics unit", nvPairs);
+		for (int i = 0; i < document.getElementsByTagName("unit").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					demographicsUnit.get(i + 1).getText());
+		}
+	}
+
+	public void verifyAreaDemographicsUnitDropdownNotExist() {
+		try {
+			getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_demographics_unit_dropdown"))
+					.toString();
+		} catch (Exception e) {
+			System.out.println("Element not found");
+		}
+	}
+
 	@Override
 	public String getPageUrl() {
 		return null;

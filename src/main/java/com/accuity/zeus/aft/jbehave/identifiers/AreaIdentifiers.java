@@ -88,7 +88,25 @@ public class AreaIdentifiers {
 		hmap.put("area_delete_region_row_button_xpath", By.xpath(".//*[@data-row_id='regions']//button[@class='delete-element']"));
 		hmap.put("area_region_table", By.xpath("//*[@id='areaRegions']//table"));
 		hmap.put("area_region_link", By.xpath("//*[@id='areaRegions']"));
-		
+		hmap.put("area_credit_rating", By.xpath("//*[@id='areaCreditRating']"));
+		hmap.put("area_credit_rating_row", By.xpath("//*[@class='data']//*[@id='areaCreditRating']//tr"));
+		hmap.put("area_credit_rating_new_row", By.xpath("//*[@class='data']//*[@id='areaCreditRating']//tr[@class='new']"));
+		hmap.put("area_credit_rating_agency_dropdown", By.xpath("//*[@id='additionalCreditRatings']//select[@data-internal_id='creditRatingAgency']"));
+		hmap.put("area_credit_rating_type_dropdown", By.xpath("//*[@id='additionalCreditRatings']//select[@data-internal_id='creditRatingType']"));
+		hmap.put("area_credit_rating_applied_date_day", By.xpath("//input[@name='creditRatingAppliedDate-day']"));
+		hmap.put("area_credit_rating_applied_date_month", By.xpath("//*[@name='creditRatingAppliedDate-month']"));
+		hmap.put("area_credit_rating_applied_date_year", By.xpath("//input[@name='creditRatingAppliedDate-year']"));
+		hmap.put("area_credit_rating_confirmed_date_day", By.xpath("//input[@name='creditRatingConfirmedDate-day']"));
+		hmap.put("area_credit_rating_confirmed_date_month", By.xpath("//*[@name='creditRatingConfirmedDate-month']"));
+		hmap.put("area_credit_rating_confirmed_date_year", By.xpath("//input[@name='creditRatingConfirmedDate-year']"));
+		hmap.put("area_credit_rating_value", By.xpath("//*[@id='additionalCreditRatings']//*[@name='creditRatingValue']"));
+		hmap.put("area_credit_rating_add_row_id", By.xpath("//*[@id='add-creditRatings']"));
+		hmap.put("area_delete_credit_rating_row_button", By.xpath(".//*[@id='additionalCreditRatings']//*[@class='delete-element']"));
+		hmap.put("area_credit_rating_agency_error", By.xpath("//*[@id='additionalCreditRatings']//*[@data-error_id='creditRatingAgencyError']"));
+		hmap.put("area_credit_rating_type_error", By.xpath("//*[@id='additionalCreditRatings']//*[@data-error_id='creditRatingTypeError']"));
+		hmap.put("area_credit_rating_value_error", By.xpath("//*[@id='additionalCreditRatings']//*[@data-error_id='creditRatingValueError']"));
+		hmap.put("area_credit_rating_applied_date_error_msg", By.xpath("//*[@data-error_id='creditRatingAppliedDateError']"));
+		hmap.put("area_credit_rating_confirmed_date_error_msg", By.xpath("//*[@data-error_id='creditRatingConfirmedDateError']"));
 		hmap.put("area_add_demographics_button", By.id("add-demographics"));
 		hmap.put("area_demographics_type", By.xpath("//select[@id='demographicType']"));
 		hmap.put("area_demographics_value", By.xpath("//*[@id='additionalDemographics']//*[@data-internal_id='demographicValue']")); 
@@ -104,7 +122,6 @@ public class AreaIdentifiers {
 		hmap.put("area_demographic_date_error_message", By.xpath("//*[@data-error_id='demographicDateError']"));
 		hmap.put("area_demographics_row", By.xpath("//*[@class='data']//*[@id='areaDemographics']//tr[@data-row_id='demographics']"));
 		hmap.put("area_demographics_row_view_mode", By.xpath("//*[@class='data']//*[@id='areaDemographics']//tr"));
-		
 	}
 
 	public static By getObjectIdentifier(String key) {

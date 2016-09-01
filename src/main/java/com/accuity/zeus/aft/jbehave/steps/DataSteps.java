@@ -888,4 +888,9 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the $entity page in the view mode")
     public void verifyViewModeForEntity(){getDataPage().verifyViewModeForEntity();}
 
+    @Then("the user should see Legal Entity menu is selected in the 2nd line")
+    public void verify2ndLineMenuItems(){
+        getDataPage().verifyLegalEntity2ndLineMenuItem();
+    }
+
 }

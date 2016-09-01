@@ -6,7 +6,7 @@ I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-1082 - User can edit Office's History
 
-Scenario: User can edit  'Office History' that is different from the current value & verifies whether Blank,spl character,numbers & character values for 'History' is getting saved successfully
+Scenario: User can edit 'Office History' that is different from the current value & verifies whether Blank,spl character,numbers & character values for 'History' is getting saved successfully
 a)User verifies existing 'Office History' values are retrieved  from trusted doc 
 b)User verifies 'Your Changes have been saved' message is displayed after save
 c)User verifies Office History has been updated in confirmation modal

@@ -18,6 +18,7 @@ JIRA ID - ZEUS-1073 - User can edit Office's Names
 JIRA ID - ZEUS-1064 - User can edit Office's Prefix, Suffix and Override
 JIRA ID - ZEUS-1071 - User can edit Office's Business Hours
 
+
 Scenario: Update and Save office Opened date
 Verify User updates a value for Opened Date and click Save. Updated Office opened date should be saved in Zeus document
 
@@ -345,6 +346,11 @@ And the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|officeFid|additionalInfoText|
 |1010|FID|1010|1010-44||
+
+
+
+
+
 Scenario: Verify Office's Office Type dropdown values from lookup OFFICE_TYPE  except those that have already been selected for this Office
 
 a) Verify for an existing OfficeTypes row, the office type values are from OFFICE_TYPE
@@ -1082,3 +1088,4 @@ Then the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|officeFid|
 |1038|FID|1038|1038-51|
+
