@@ -273,6 +273,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @When("the user clicks on the choose an area option")
+    @Alias("the user clicks on the choose an area option in area Page")
     public void clickOnAreaDropdown() {
         getDataPage().clickOnAreaDropdown();
     }

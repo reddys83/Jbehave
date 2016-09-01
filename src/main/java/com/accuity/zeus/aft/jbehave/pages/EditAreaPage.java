@@ -1761,12 +1761,11 @@ public class EditAreaPage extends AbstractPage {
 				for (int nodeIndex = 0; nodeIndex < nodeListInDB.getLength(); nodeIndex++) {
 					String nodeName = nodeListInDB.item(nodeIndex).getNodeName();
 					for (int index = 0; index < demographicType.size(); index++) {
-						if (nodeName == "areaDemographicsUnit") {
+						if (nodeName == "areaDemographicsUnit" && !(nodeList.get(nodeName).get(index).isEmpty())) {
 							assertEquals(nodeListInDB.item(nodeIndex).getTextContent().substring(0, 2),
 									nodeList.get(nodeName).get(index).substring(0, 2));
 						} else {
-							assertEquals(nodeListInDB.item(nodeIndex).getTextContent(),
-									nodeList.get(nodeName).get(index));
+							assertEquals(nodeListInDB.item(nodeIndex).getTextContent(),	nodeList.get(nodeName).get(index).trim());
 						}
 					}
 
@@ -1780,7 +1779,7 @@ public class EditAreaPage extends AbstractPage {
 	}
 
 	public void verifyDemographicValueInUI(List<String> demographicType, List<String> demographicValue,
-			List<String> demographicUnit, List<String> date, int rowNumber) {
+			List<String> demographicUnit, List<String> date) {
 		try {
 			assertFalse("No rows exist in demographics section", getDriver()
 					.findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_row_view_mode")).size() == 1);
@@ -1789,18 +1788,39 @@ public class EditAreaPage extends AbstractPage {
 			
 			for (int index = 1; index < demographicsRows.size(); index++) {
 				List<WebElement> demographicsColumn = getDriver().findElements(AreaIdentifiers.
-						getObjectIdentifier("area_demographics_row_view_mode")).get(index-1).findElements(By.tagName("td"));
+						getObjectIdentifier("area_demographics_row_view_mode")).get(index).findElements(By.tagName("td"));
 				assertEquals("demographicType: ", demographicsColumn.get(0).getText(), demographicType.get(index-1));
 				assertEquals("demographicValue: ", demographicsColumn.get(1).getText().replace(",", ""),
 						demographicValue.get(index-1));
-				if (!demographicUnit.get(index-1).isEmpty()) {
+				if (demographicUnit!=null) {
 					assertTrue("demographicUnit",
 							demographicsColumn.get(2).getText().contains(demographicUnit.get(index-1).substring(0, 2)));
 				}
-				if (!date.isEmpty()) {
-					assertEquals("date :", demographicsColumn.get(3).getText(), date.get(index-1));
+				if (date!=null) {
+					assertEquals("date :", demographicsColumn.get(3).getText(), date.get(index-1).trim());
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyDemographicValueRowInUI(String demographicType, String demographicValue, String demographicUnit,
+			String date, int rowNumber) {
+		try {
+			List<WebElement> demographicsColumn = getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_row_view_mode")).get(rowNumber)
+					.findElements(By.tagName("td"));
+			assertEquals("demographicType: ", demographicsColumn.get(0).getText(), demographicType);
+			assertEquals("demographicValue: ", demographicsColumn.get(1).getText().replace(",", ""), demographicValue);
+			if (!demographicUnit.isEmpty()) {
+				assertTrue("demographicUnit",
+						demographicsColumn.get(2).getText().contains(demographicUnit.substring(0, 2)));
+			}
+			if (!date.isEmpty()) {
+				assertEquals("date :", demographicsColumn.get(3).getText(), date);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

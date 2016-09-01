@@ -1126,14 +1126,9 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyDemographicsValuesInUI(@Named("demographicType") String type,
 			@Named("demographicValue") String value, @Named("unitValue") String unit,
 			@Named("day") String day, @Named("month") String month, @Named("year") String year) {
-		List<String> demographicType = new ArrayList<>();	
-		List<String> demographicValue = new ArrayList<>();
-		List<String> date = new ArrayList<>();
-		List<String> demographicUnit = new ArrayList<>();
-		demographicType.add(type);
-		demographicValue.add(value);
-		date.add(day + " " + month + " " + year);
-		getEditAreaPage().verifyDemographicValueInUI(demographicType, demographicValue, demographicUnit, date, 1);
+	 
+		String date = (day + " " + month + " " + year);
+		getEditAreaPage().verifyDemographicValueRowInUI(type, value, unit, date, 1);
 	}
 	
 	@When("the user deletes the existing area demographics rows")
@@ -1190,7 +1185,7 @@ public class EditAreaSteps extends AbstractSteps {
 		demographicType.add(type);
 		demographicValue.add(value);
 		date.add(day + " " + month + " " + year);
-		getEditAreaPage().verifyDemographicValueInUI(demographicType, demographicValue, null, date, 1);
+		getEditAreaPage().verifyDemographicValueInUI(demographicType, demographicValue, null, date);
 	}
 
 }

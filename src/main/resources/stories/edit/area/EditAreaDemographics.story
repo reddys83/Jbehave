@@ -17,7 +17,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
-When the user clicks on the choose an area option
+When the user clicks on the choose an area option in area Page
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the area's demographics link in the navigation bar
 And the user clicks on the area update link
@@ -52,7 +52,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
+When the user clicks on the choose an area option in area Page
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the area's demographics link in the navigation bar
 And the user clicks on the area update link
@@ -73,9 +73,9 @@ Then the user should see the area demographic values as in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|demographicType|demographicValue|day|month|year|
-|Angola|Bengo|Largest County Population|34000000|||2014|
-|Angola|Bengo|Population|34000000|||2014|
+|country|area|demographicType|demographicValue|unitValue|day|month|year|
+|Angola|Bengo|Largest County Population|34000000||||2014|
+|Angola|Bengo|Population|34000000||||2014|
 
 Scenario: The metric unit type is null, do not display a unit drop-down for that row
 TestCase: demographics type other than Area should not display the unit drop down
@@ -85,7 +85,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
+When the user clicks on the choose an area option in area Page
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the area's demographics link in the navigation bar
 And the user clicks on the area update link
@@ -108,7 +108,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
+When the user clicks on the choose an area option in area Page
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the area's demographics link in the navigation bar
 And the user clicks on the area update link
@@ -140,7 +140,7 @@ When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
 When the user clicks on the choose a country option
 And the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
+When the user clicks on the choose an area option in area Page
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the area's demographics link in the navigation bar
 And the user clicks on the area update link
