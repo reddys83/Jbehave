@@ -1329,6 +1329,10 @@ public class DataPage extends AbstractPage {
         assertTrue(getDriver().findElement(currency_update_button_id).isDisplayed());
     }
 
+    public void verifyLegalEntity2ndLineMenuItem(){
+        assertTrue(getDriver().findElement(legalEntity_tab_id).getAttribute("class").equals("selected"));
+    }
+
     public void verifyAreaPlacesView() {
         assertTrue(getDriver().findElement(select_places_view_xpath).isDisplayed());
     }
@@ -1382,6 +1386,27 @@ public class DataPage extends AbstractPage {
 		}
 	}
 	
+	public void verifyWebElementText(String fieldName, String expectedText, By by) {
+		try {		
+			assertEquals(fieldName + ":", expectedText, getDriver().findElement(by).getText());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyRowIsDisplayed(By by, boolean display) {
+		try {
+			if (display) {
+				WebElement rowToBeDisplayed = getDriver().findElement(by);
+				assertTrue(rowToBeDisplayed != null);
+			} else {
+				assertTrue(getDriver().findElements(by).size() == 0);
+			}
+		} catch (Exception e) {
+			assertTrue(false);
+		}
+	}
+	
 	public void enterValueInTypeHeadDropDown(By by, String value) {
 		try {
 			getDriver().findElement(by).sendKeys(value);
@@ -1392,12 +1417,4 @@ public class DataPage extends AbstractPage {
 		}
 	}
 
-	public void verifyWebElementText(String fieldName, String expectedText, By by) {
-		try {
-			Thread.sleep(1000L);
-			assertEquals(fieldName + ":", expectedText, getDriver().findElement(by).getText());
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
 }

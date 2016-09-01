@@ -131,6 +131,16 @@ public class OfficesPage extends AbstractPage {
 
     }
 
+    public void verifyNoOfficeTabInOffice() {
+
+        try
+        {
+        assertFalse(getDriver().findElement(office_tab_id).isDisplayed());
+        }
+        catch (NoSuchElementException e){
+        }
+
+    }
     public void clickOnOfficeCreditRatingsLink() {
         attemptClick(office_credit_ratings_link_id);
     }
