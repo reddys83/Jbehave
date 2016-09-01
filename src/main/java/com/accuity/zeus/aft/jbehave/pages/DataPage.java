@@ -1344,6 +1344,13 @@ public class DataPage extends AbstractPage {
         assertTrue(response == 202);
     }
     
+    public void verifyElementNotExistInUI(By by) {
+		try {			
+			assertTrue(getDriver().findElement(by).toString() != null);
+		} catch (Exception e) {
+			assertTrue(true);
+		}
+	}
 
 	public String getTagValueFromDB(String queryName, String tagName, Map<String, String> inputParameters) {
 		String tagValue = null;
@@ -1384,9 +1391,8 @@ public class DataPage extends AbstractPage {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					elementTypeList.get(i).getAttribute("value"));
 		}
-
-	}	
-
+	}
+	
 	public void verifyWebElementText(String fieldName, String expectedText, By by) {
 		try {		
 			assertEquals(fieldName + ":", expectedText, getDriver().findElement(by).getText());
@@ -1407,5 +1413,4 @@ public class DataPage extends AbstractPage {
 			assertTrue(false);
 		}
 	}
-
 }

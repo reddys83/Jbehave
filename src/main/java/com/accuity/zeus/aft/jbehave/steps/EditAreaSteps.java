@@ -1077,7 +1077,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should not see the unit drop down for selected demographic type in area page")
 	public void verifyCountryDemographicsUnitDropdownNotExist() {
-		getEditAreaPage().verifyAreaDemographicsUnitDropdownNotExist();
+		getDataPage().verifyElementNotExistInUI(AreaIdentifiers.getObjectIdentifier("area_add_demographics_unit_dropdown"));
 	}
 	
 	@When("the user enter demographics day <day> in the demographics area page")
@@ -1097,14 +1097,13 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@Then("the user should see the error message $errorMessage in the demographics area page")
     public void verifyErrorMsgForAreaDemographicsDate(@Named("errorMessage") String errorMessage){
-		getDataPage().verifyWebElementText("DemographicsDate",errorMessage, AreaIdentifiers.getObjectIdentifier("area_demographic_date-day"));
+		getDataPage().verifyWebElementText("DemographicsDate",errorMessage, AreaIdentifiers.getObjectIdentifier("area_demographic_date_error_message"));
     }	
 	
 	@When("the user clicks on delete area demographics option")
 	public void clickOnDeleteAreaDemographicsOption() {
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographic-delete-button"));
 	}
-	
 	
 	@Then("the user should see the area demographic values as in $source document")
 	public void verifyDemographicsValueFromZeusDB(@Named("country") String country, @Named("area") String area,
@@ -1125,8 +1124,7 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user should see the area demographic values are saved in area page")
 	public void verifyDemographicsValuesInUI(@Named("demographicType") String type,
 			@Named("demographicValue") String value, @Named("unitValue") String unit,
-			@Named("day") String day, @Named("month") String month, @Named("year") String year) {
-	 
+			@Named("day") String day, @Named("month") String month, @Named("year") String year) {	 
 		String date = (day + " " + month + " " + year);
 		getEditAreaPage().verifyDemographicValueRowInUI(type, value, unit, date, 1);
 	}
@@ -1159,7 +1157,7 @@ public class EditAreaSteps extends AbstractSteps {
     
     @Then("the user should not see the newly added demographics row in the area page")
     public void verifyNewlyAddedDemographicsRowIsNotDisplayed() throws Exception {
-           getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_demographics_row"), false);
+    	getDataPage().verifyElementNotExistInUI(AreaIdentifiers.getObjectIdentifier("area_demographics_row"));
     }
     
 	@When("the user enters the demographic date later than today in area page")
@@ -1186,6 +1184,12 @@ public class EditAreaSteps extends AbstractSteps {
 		demographicValue.add(value);
 		date.add(day + " " + month + " " + year);
 		getEditAreaPage().verifyDemographicValueInUI(demographicType, demographicValue, null, date);
+	}
+	
+	@Then("the user should see the area demographic values are null in $source document")
+	public void verifyDemographicsValueNullFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source) {	
+		getEditAreaPage().verifyDemographicsRowNotPresentInZeusDB(country, area, source);		 
 	}
 
 }

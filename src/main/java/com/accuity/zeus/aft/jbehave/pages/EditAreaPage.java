@@ -1746,7 +1746,7 @@ public class EditAreaPage extends AbstractPage {
 			nvPairs.add(new BasicNameValuePair("source", source));
 			nvPairs.add(new BasicNameValuePair("country", country));
 			nvPairs.add(new BasicNameValuePair("area", area));
-			 Thread.sleep(3000L);
+			Thread.sleep(3000L);
 
 			Map<String, List<String>> nodeList = new HashMap<String, List<String>>();
 			nodeList.put("areaDemographicsType", demographicType);
@@ -1768,7 +1768,6 @@ public class EditAreaPage extends AbstractPage {
 							assertEquals(nodeListInDB.item(nodeIndex).getTextContent(),	nodeList.get(nodeName).get(index).trim());
 						}
 					}
-
 				}
 			} else {
 				assertTrue(source + "document is null", false);
@@ -1820,7 +1819,6 @@ public class EditAreaPage extends AbstractPage {
 			if (!date.isEmpty()) {
 				assertEquals("date :", demographicsColumn.get(3).getText(), date);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1830,24 +1828,34 @@ public class EditAreaPage extends AbstractPage {
 		List<NameValuePair> nvPairs = new ArrayList<>();
 		nvPairs.add(new BasicNameValuePair("unit", "area"));
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"));
-		List<WebElement> demographicsUnit = getDriver()
-				.findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_options"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-				"get area demographics unit", nvPairs);
+		List<WebElement> demographicsUnit = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_options"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area demographics unit", nvPairs);
 		for (int i = 0; i < document.getElementsByTagName("unit").getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					demographicsUnit.get(i + 1).getText());
 		}
 	}
 
-	public void verifyAreaDemographicsUnitDropdownNotExist() {
+	public void verifyDemographicsRowNotPresentInZeusDB(String country, String area, String source) {
 		try {
-			getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_add_demographics_unit_dropdown"))
-					.toString();
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			Thread.sleep(1000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get area demographics info", nvPairs);
+			if (document != null) {
+				assertNull(document.getElementsByTagName("areaDemographicsType").item(0));
+				assertNull(document.getElementsByTagName("areaDemographicsValue").item(0));
+				assertNull(document.getElementsByTagName("areaDemographicsUnit").item(0));
+				assertNull(document.getElementsByTagName("areaDemographicsDate").item(0));
+			} else
+				assert false : source + " document is null";
 		} catch (Exception e) {
-			System.out.println("Element not found");
+			e.printStackTrace();
 		}
-	}
+	}	
 
 	@Override
 	public String getPageUrl() {

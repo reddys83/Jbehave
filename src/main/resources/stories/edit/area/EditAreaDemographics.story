@@ -43,7 +43,28 @@ Examples:
 |country|area|demographicType|demographicValue|unitValue|day|month|year|
 |Angola|Bengo|Area|12345|km²|12|Jun|2011|
 
-Scenario: User updates existing values to 
+Scenario: The metric unit type is null, do not display a unit drop-down for that row
+TestCase: demographics type other than Area should not display the unit drop down
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+When the user clicks on the choose an area option in area Page
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the area's demographics link in the navigation bar
+And the user clicks on the area update link
+When the user deletes the existing area demographics rows
+When the user clicks on the add new demographics button in the area page
+When the user selects the demographic types <demographicType> in the area page
+Then the user should not see the unit drop down for selected demographic type in area page
+
+Examples:
+|country|area|demographicType|
+|Angola|Bengo|Largest County Population|
+
+Scenario: User adding new demographics values 
 1 - Verify demographics type other than Area should not display the unit drop down 
 2 - Verify entered demographic values are reflected in Zeus and UI
 
@@ -77,8 +98,9 @@ Examples:
 |Angola|Bengo|Largest County Population|34000000||||2014|
 |Angola|Bengo|Population|34000000||||2014|
 
-Scenario: The metric unit type is null, do not display a unit drop-down for that row
-TestCase: demographics type other than Area should not display the unit drop down
+Scenario: The user has entered a value for 'Demographics' that is no different to the current value in the Area Demographics page
+1 - User verifies Area Demographics changes has not been updated in confirmation modal
+2 - User verifies Demographics values in Area Demographics page and Zeus Document
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -89,14 +111,25 @@ When the user clicks on the choose an area option in area Page
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the area's demographics link in the navigation bar
 And the user clicks on the area update link
-When the user deletes the existing area demographics rows
-When the user clicks on the add new demographics button in the area page
+When the user gets the document with get document id for area with the <area> from the database
 When the user selects the demographic types <demographicType> in the area page
-Then the user should not see the unit drop down for selected demographic type in area page
+When the user enters the demographic value <demographicValue> in the area page
+And the user enter demographics day <day> in the demographics area page
+And the user enter demographics month <month> in the demographics area page
+And the user enter demographics year <year> in the demographics area page
+And the user clicks on the save button
+Then the user should not see the below summary changes in confirmation modal
+|Summary|
+|Demographics|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the area page
+Then the user should see the area demographic row values are saved in area page
+Then the user should see the area demographic values as in zeus document
+Then the user reverts the changes to the document
 
 Examples:
-|country|area|demographicType|
-|Andorra|Bengo|Largest County Population|
+|country|area|demographicType|demographicValue|unitValue|day|month|year|
+|Portugal|Braga|Population|123||12|Jun|2011|
 
 Scenario: User verifies appropriate error messages are displayed for invalid input 
 1 - Verify error message enter a year, month/year or day/month/year for newly added holiday
@@ -126,8 +159,8 @@ Then the user should see the error message Required for the type and value field
 
 Examples:
 |country|area|day|month|year|
-|Algeria|Constantine||Jun||
-|Algeria|Constantine|21|Aug||
+|Angola|Bengo||Jun||
+|Angola|Bengo|21|Aug||
 
 
 Scenario: User is adding/deleting new Area's Demographics -
@@ -166,8 +199,9 @@ And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should not see the newly added demographics row in the area page
+Then the user should see the area demographic values are null in zeus document
 Then the user reverts the changes to the document
 
 Examples:
 |country|area|demographicType|demographicValue|day|month|year|
-|Algeria|Constantine|Population|123|12|Jun|2011|
+|Angola|Bengo|Population|123|12|Jun|2011|

@@ -393,14 +393,13 @@ public abstract class AbstractPage {
 		return dateFormat.format(cal.getTime());
 	}	
     
-    public void selectItemFromDropdownListByindex(By by, int i) {
-        try {           
-            Select dropdown = new Select(driver.findElement(by));
-            dropdown.selectByIndex(i);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-      
-    }
+	public void selectItemFromDropdownListByindex(By by, int i) {
+		try {
+			Select dropdown = new Select(driver.findElement(by));
+			dropdown.selectByIndex(i);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
