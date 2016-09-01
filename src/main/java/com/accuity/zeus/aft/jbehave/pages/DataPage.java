@@ -1346,7 +1346,7 @@ public class DataPage extends AbstractPage {
     
     public void verifyElementNotExistInUI(By by) {
 		try {			
-			assertTrue(getDriver().findElement(by).toString() != null);
+			assertTrue(getDriver().findElement(by) == null);
 		} catch (Exception e) {
 			assertTrue(true);
 		}

@@ -1848,8 +1848,6 @@ public class EditAreaPage extends AbstractPage {
 			if (document != null) {
 				assertNull(document.getElementsByTagName("areaDemographicsType").item(0));
 				assertNull(document.getElementsByTagName("areaDemographicsValue").item(0));
-				assertNull(document.getElementsByTagName("areaDemographicsUnit").item(0));
-				assertNull(document.getElementsByTagName("areaDemographicsDate").item(0));
 			} else
 				assert false : source + " document is null";
 		} catch (Exception e) {
