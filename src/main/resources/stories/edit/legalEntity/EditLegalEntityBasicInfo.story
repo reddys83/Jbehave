@@ -1022,7 +1022,6 @@ Then the user should see the error message Required for country of operations dr
 Examples:
 |entity|searchBy|fid|countryOfOperations|
 |1717|FID|1717|Unknown|
-|1165|FID|1165|Unknown|
 
 Scenario: (4) To update the Legal Entity`s 'Country of Opeartions' that is different from the current value
 a) User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
