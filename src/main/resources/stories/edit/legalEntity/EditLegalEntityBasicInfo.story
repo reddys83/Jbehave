@@ -964,7 +964,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|countryOfOperations|
-|1038|FID|1038|USA|
+|223191|FID|223191|Puerto Rico|
 
 Scenario: (2) User is updating a Legal Entity's Basic Info page - 
 1 - User selects 'UnKnown' for Country of Operations dropdown for a valid Legal Entity Type
@@ -991,14 +991,13 @@ Then the user should see the newly added country of operations value in the lega
 When the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the legal entity page
+Then the user verifies the country of operations value in the legal entity basic info page
 Then the user should see the country of operations value same as in zeus document
 Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|countryOfOperations|
 |91832|FID|91832|Unknown|
-|951|FID|951|Unknown|
-|153965|FID|153965|Unknown|
 
 Scenario: (3) User is updating a Legal Entity's Basic Info page -
 1- User verifies 'Required' error message for Country of Operations dropdown if Legal Entity Type is from following values
@@ -1022,7 +1021,6 @@ Then the user should see the error message Required for country of operations dr
 
 Examples:
 |entity|searchBy|fid|countryOfOperations|
-|1038|FID|1038|Unknown|
 |1717|FID|1717|Unknown|
 |1165|FID|1165|Unknown|
 
@@ -1053,4 +1051,4 @@ Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|countryOfOperations|
-|1038|FID|1038|Brazil|
+|223191|FID|223191|Brazil|
