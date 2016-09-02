@@ -124,14 +124,13 @@ Then the user should not see the below summary changes in confirmation modal
 |Summary|
 |Demographics|
 When the user clicks on the confirm button
-Then the user should see the successful update message at top of the area page
 Then the user should see the area demographic row is saved in area page
 Then the user should see the area demographic values as in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|demographicType|demographicValue|day|month|year|
-|Angola|Cabinda|Population|124|12|Jun|2011|
+|country|area|demographicType|demographicValue|unitValue|day|month|year|
+|Angola|Cabinda|Population|124||12|Jun|2011|
 
 Scenario: User verifies appropriate error messages are displayed for invalid input 
 1 - Verify error message enter a year, month/year or day/month/year for newly added holiday

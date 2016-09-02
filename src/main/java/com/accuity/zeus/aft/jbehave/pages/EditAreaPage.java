@@ -1761,7 +1761,7 @@ public class EditAreaPage extends AbstractPage {
 					NodeList nodeListInDB = document.getElementsByTagName("metrics").item(index).getChildNodes();
 					for (int nodeIndex = 0; nodeIndex < nodeListInDB.getLength(); nodeIndex++) {
 						String nodeName = nodeListInDB.item(nodeIndex).getNodeName();					
-							if (nodeName == "areaDemographicsUnit" && (nodeList.get(nodeName)!=null)) {
+							if (nodeName == "areaDemographicsUnit" && (nodeList.get(nodeName)!=null) && !(nodeList.get(nodeName).get(index).isEmpty())) {
 								assertEquals(nodeListInDB.item(nodeIndex).getTextContent().substring(0, 2),
 										nodeList.get(nodeName).get(index).substring(0, 2));
 							} else if(nodeName != "areaDemographicsUnit"){
@@ -1814,7 +1814,7 @@ public class EditAreaPage extends AbstractPage {
 					.findElements(By.tagName("td"));
 			assertEquals("demographicType: ", demographicsColumn.get(0).getText(), demographicType);
 			assertEquals("demographicValue: ", demographicsColumn.get(1).getText().replace(",", ""), demographicValue);
-			if (!demographicUnit.isEmpty()) {
+			if (demographicUnit!=null) {
 				assertTrue("demographicUnit",
 						demographicsColumn.get(2).getText().contains(demographicUnit.substring(0, 2)));
 			}
