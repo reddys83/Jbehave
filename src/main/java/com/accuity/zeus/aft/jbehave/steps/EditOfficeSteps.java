@@ -296,11 +296,11 @@ public class EditOfficeSteps extends AbstractSteps{
     }
 
 
-    @When("the user clicks on the choose an area option")
+    /*@When("the user clicks on the choose an area option")
     public void clickOnAreaDropdown() {
         getEditOfficePage().clickOnAreaDropdown();
     }
-
+*/
     @When("the user clicks on the choose a city option in the office locations")
     public void clickOnCityDropdown() {
         getEditOfficePage().clickOnCityDropdown();

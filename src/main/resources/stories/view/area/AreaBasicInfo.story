@@ -48,7 +48,6 @@ And the user should see the Area Parent of an area as Atchison
 And the user should see the area's replace by as California, Kansas
 And the user should see the Use in Address of an area as True
 And the user should see the Interest Rate Limit of an area as 92%
-And the user should see the ISO2 of an area as IL
 And the user should see the Add Info of an area as ILLINOIS: Census area dissolved in 2100
 
 
@@ -96,7 +95,6 @@ And the user should see the Area Parent of an sub-area as Illinois
 And the user should see the sub-area's replace by as California, Kansas
 And the user should see the Use in Address of an sub-area as False
 And the user should see the Interest Rate Limit of an sub-area as 92%
-And the user should see the ISO2 of an sub-area as CK
 And the user should see the Add Info of an sub-area as ILLINOIS: Census area dissolved in 2100
 
 
