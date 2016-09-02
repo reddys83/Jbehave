@@ -257,7 +257,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @When("the user clicks on the choose an area option in the office locations")
     public void clickOnAreaListBox() throws InterruptedException {
-        getEditOfficePage().clickOnAreaListBox();
+       getEditOfficePage().clickOnAreaListBox();
     }
 
     @When("the user enters the office area <Area> in the type-ahead box")
@@ -296,10 +296,10 @@ public class EditOfficeSteps extends AbstractSteps{
     }
 
 
-    @When("the user clicks on the choose an area option")
-    public void clickOnAreaDropdown() {
-        getEditOfficePage().clickOnAreaDropdown();
-    }
+   // @When("the user clicks on the choose an area option")
+   // public void clickOnAreaDropdown() {
+       // getEditOfficePage().clickOnAreaDropdown();
+   // }
 
     @When("the user clicks on the choose a city option in the office locations")
     public void clickOnCityDropdown() {
