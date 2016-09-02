@@ -109,7 +109,7 @@ public class AreaIdentifiers {
 		hmap.put("area_credit_rating_confirmed_date_error_msg", By.xpath("//*[@data-error_id='creditRatingConfirmedDateError']"));
 		hmap.put("area_add_demographics_button", By.id("add-demographics"));
 		hmap.put("area_demographics_type", By.xpath("//select[@id='demographicType']"));
-		hmap.put("area_demographics_value", By.xpath("//*[@id='additionalDemographics']//*[@data-internal_id='demographicValue']")); 
+		hmap.put("area_demographics_value", By.xpath("//*[@id='additionalDemographics']//*[@data-internal_id='demographicValue']"));		 
 		hmap.put("area_demographics_unit_dropdown", By.xpath("//*[@id='areaDemographics']//*[@data-internal_id='demographicUnit']"));
 		hmap.put("area_demographics_unit_options", By.xpath("//*[@id='areaDemographics']//*[@data-internal_id='demographicUnit']/option"));
 		hmap.put("area_demographic_date-day", By.xpath("//*[@id='areaDemographics']//*[@name='demographicDate-day']"));

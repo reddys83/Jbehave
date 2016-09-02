@@ -1740,7 +1740,7 @@ public class EditAreaPage extends AbstractPage {
 	}
 	
 	public void verifyDemographicValueInDB(String country, String area, String source, List<String> demographicType,
-			List<String> demographicValue, List<String> demographicUnit, List<String> date, int rowNumber) {
+			List<String> demographicValue, List<String> demographicUnit, List<String> date) {
 		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("source", source));
@@ -1757,18 +1757,20 @@ public class EditAreaPage extends AbstractPage {
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get area demographics info", nvPairs);
 			if (document != null) {
-				NodeList nodeListInDB = document.getElementsByTagName("metrics").item(0).getChildNodes();
-				for (int nodeIndex = 0; nodeIndex < nodeListInDB.getLength(); nodeIndex++) {
-					String nodeName = nodeListInDB.item(nodeIndex).getNodeName();
-					for (int index = 0; index < demographicType.size(); index++) {
-						if (nodeName == "areaDemographicsUnit" && !(nodeList.get(nodeName).get(index).isEmpty())) {
-							assertEquals(nodeListInDB.item(nodeIndex).getTextContent().substring(0, 2),
-									nodeList.get(nodeName).get(index).substring(0, 2));
-						} else {
-							assertEquals(nodeListInDB.item(nodeIndex).getTextContent(),	nodeList.get(nodeName).get(index).trim());
-						}
+				for (int index = 0; index < demographicType.size(); index++) {
+					NodeList nodeListInDB = document.getElementsByTagName("metrics").item(index).getChildNodes();
+					for (int nodeIndex = 0; nodeIndex < nodeListInDB.getLength(); nodeIndex++) {
+						String nodeName = nodeListInDB.item(nodeIndex).getNodeName();					
+							if (nodeName == "areaDemographicsUnit" && (nodeList.get(nodeName)!=null)) {
+								assertEquals(nodeListInDB.item(nodeIndex).getTextContent().substring(0, 2),
+										nodeList.get(nodeName).get(index).substring(0, 2));
+							} else if(nodeName != "areaDemographicsUnit"){
+								assertEquals(nodeListInDB.item(nodeIndex).getTextContent(),	nodeList.get(nodeName).get(index).trim());
+							}
+						
 					}
 				}
+				
 			} else {
 				assertTrue(source + "document is null", false);
 			}

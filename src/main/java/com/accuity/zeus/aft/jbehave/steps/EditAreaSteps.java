@@ -1125,7 +1125,7 @@ public class EditAreaSteps extends AbstractSteps {
 		demographicUnit.add(unit);
 		date.add(day + " " + month + " " + year);
 		getEditAreaPage().verifyDemographicValueInDB(country, area, source, demographicType, demographicValue,
-				demographicUnit, date, 1);
+				demographicUnit, date);
 	}
 
 	@Then("the user should see the area demographic values are saved in area page")
@@ -1134,6 +1134,20 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("month") String month, @Named("year") String year) {
 		String date = day + " " + month + " " + year;
 		getEditAreaPage().verifyDemographicValueRowInUI(type, value, unit, date, 1);
+	}
+
+	@When("the user enter demographics date <day> <month> <year> in the demographics row 1 in area page")
+	public void enterDemographicDate1(@Named("day") String day, @Named("month") String month, @Named("year") String year) {
+		getDataPage().enterTextUsingIndex(AreaIdentifiers.getObjectIdentifier("area_demographic_date-day"), day, 1);
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographic_date-month"), month, 1);
+		getDataPage().enterTextUsingIndex(AreaIdentifiers.getObjectIdentifier("area_demographic_date-year"), year, 1);
+	}
+	
+	@When("the user enter demographics date <day> <month> <year> in the demographics row 2 in area page")
+	public void enterDemographicDate2(@Named("day") String day, @Named("month") String month, @Named("year") String year) {
+		getDataPage().enterTextUsingIndex(AreaIdentifiers.getObjectIdentifier("area_demographic_date-day"), day, 2);
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographic_date-month"), month, 2);
+		getDataPage().enterTextUsingIndex(AreaIdentifiers.getObjectIdentifier("area_demographic_date-year"), year, 2);
 	}
 
 	@When("the user deletes the existing area demographics rows")
@@ -1184,13 +1198,13 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user should see the area demographic row values are saved in area page")
 	public void verifyDemographicsValuesAreSavedInUI(@Named("demographicType") String type,
 			@Named("demographicValue") String value, @Named("day") String day, @Named("month") String month,
-			@Named("year") String year) {
+			@Named("year") String year, @Named("demographicType2") String type2, @Named("demographicValue2") String value2) {
 		List<String> demographicType = new ArrayList<>();
-		List<String> demographicValue = new ArrayList<>();
+		List<String> demographicValue = new ArrayList<>();		
 		List<String> date = new ArrayList<>();
-		demographicType.add(type);
-		demographicValue.add(value);
-		date.add(day + " " + month + " " + year);
+		demographicType.add(type); demographicType.add(type2);
+		demographicValue.add(value); demographicValue.add(value2);
+		date.add(day + " " + month + " " + year); date.add(day + " " + month + " " + year);
 		getEditAreaPage().verifyDemographicValueInUI(demographicType, demographicValue, null, date);
 	}
 
@@ -1199,5 +1213,33 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("source") String source) {
 		getEditAreaPage().verifyDemographicsRowNotPresentInZeusDB(country, area, source);
 	}
-
+	
+	@Then("the user should see the area demographic values in two rows as in $source document")
+	public void verifyDemographicsValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("demographicType") String type, @Named("demographicValue") String value, @Named("demographicType2") String type2, 
+			@Named("demographicValue2") String value2, @Named("day") String day, @Named("month") String month, @Named("year") String year) {
+		List<String> demographicType = new ArrayList<>();
+		List<String> demographicValue = new ArrayList<>();
+		List<String> date = new ArrayList<>();
+		demographicType.add(type); demographicType.add(type2);
+		demographicValue.add(value); demographicValue.add(value2);
+		date.add(day + " " + month + " " + year); date.add(day + " " + month + " " + year);
+		getEditAreaPage().verifyDemographicValueInDB(country, area, source, demographicType, demographicValue, null, date);
+	}
+	
+	@When("the user selects the demographic types <demographicType2> <demographicValue2> in the area page")
+	public void enterDemographicsTypeAndValuesInTwoRows(@Named("demographicType2") String demographicType, @Named("demographicValue2") String demographicValue) {
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographics_type"),
+				demographicType, 2);
+		getDataPage().enterTextUsingIndex(AreaIdentifiers.getObjectIdentifier("area_demographics_value"),
+				demographicValue, 2);
+	}
+	
+	@Then("the user should see the area demographic row is saved in area page")
+	public void verifyDemographicsValuesInUI(@Named("demographicType") String type,
+			@Named("demographicValue") String value, @Named("day") String day, @Named("month") String month,
+			@Named("year") String year) {
+		String date = day + " " + month + " " + year;
+		getEditAreaPage().verifyDemographicValueRowInUI(type, value, null, date, 1);
+	}
 }
