@@ -1759,6 +1759,22 @@ public class EditAreaPage extends AbstractPage {
 					areaPlacesDetailsList.get(i).getText());
 		}
 	}
+	
+	public void verifyRelatedPlacesInAreaPage(String type, String place, String details) {
+		try {
+			Thread.sleep(6000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertEquals(type, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_typevalue_xpath")).getText());
+		assertEquals(place, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_placevalue_xpath")).getText());
+		assertEquals(details,
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_detailsvalue_xpath"))
+						.getText());
+	}
+	
 	@Override
 	public String getPageUrl() {
 		return null;

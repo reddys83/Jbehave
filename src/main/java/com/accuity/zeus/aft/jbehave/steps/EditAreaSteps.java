@@ -1060,4 +1060,65 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyAreaPlacesDetailsList() {
 		getEditAreaPage().verifyAreaPlacesDetailsList();
 	}
+	
+	@Then("the user should see the error message required for type in places for area")
+	public void verifyRequiredErrorMessageForType() {
+		getEditCityPage().verifyRequiredErrorMessageForType();
+	}
+	
+	@When("the user selects type value as <PlaceType> in the places for area")
+	public void selectsTypeFromDropdown(@Named("PlaceType") String PlaceType) {
+		getEditCityPage().selectsPlacesTypeFromDropdwon(PlaceType);
+	}
+	
+	@When("the user clicks on edit button in places for area")
+	public void clicksOnEditButton() {
+		getEditCityPage().clicksOnEditButton();
+	}
+	
+	@When("the user clicks on the country option in the places for area")
+	public void clicksOnCountryInPlacesForArea() {
+		getEditCityPage().clicksOnCountryInPlacesForCity();
+	}
+	
+	@When("the user enters the country <countryPlaces> in type-ahead box for area related places")
+	public void selectsCountryInPlacesForArea(@Named("countryPlaces") String countryPlaces) {
+		getEditCityPage().selectsCountryInPlacesForCity(countryPlaces);
+	}
+	
+	@When("the user clicks on area option in the places for area")
+	public void clicksOnAreaDropdownInPlacesForArea() {
+		getEditCityPage().clicksOnAreaDropdownInPlacesForCity();
+	}
+	
+	@When("the user enters area <areaPlaces> in the type-ahead box for area related places")
+	public void selectsAreaInPlacesForArea(@Named("areaPlaces") String areaPlaces) {
+		getEditCityPage().selectsAreaInPlacesForCity(areaPlaces);
+	}
+	
+	@When("the user clicks on city options in the places for area")
+	public void clicksOnCityDropdownInPlacesForArea() {
+		getEditCityPage().clicksOnCityDropdownInPlacesForCity();
+	}
+	
+	@When("the user enters city <cityPlaces> in the type-ahead box for area related places")
+	public void selectsCityInPlacesForCountry(@Named("cityPlaces") String cityPlaces) {
+		getEditCityPage().selectsCityInPlacesForCountry(cityPlaces);
+	}
+
+	@When("the user clicks on go button in places for area")
+	public void clicksOnGoButton() {
+		getEditCityPage().clicksOnGoButton();
+	}
+	
+	@When("the user selects details value as <PlaceDetails> in the places for area")
+	public void selectsDetailsFromDropdown(@Named("PlaceDetails") String PlaceDetails) {
+		getEditCityPage().selectsPlacesDetailsFromDropdown(PlaceDetails);
+	}
+	
+	@Then("the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in area related place")
+	public void verifyRelatedPlacesInAreaPage(@Named("PlaceType") String areaPlacesType,
+			@Named("areaPlaces") String areaPlacesPlace, @Named("PlaceDetails") String areaPlacesDetails) {
+		getEditAreaPage().verifyRelatedPlacesInAreaPage(areaPlacesType, areaPlacesPlace, areaPlacesDetails);
+	}
 }
