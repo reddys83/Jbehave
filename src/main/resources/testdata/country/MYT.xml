@@ -1,0 +1,60 @@
+<country deleted="false" fid="MYT" id="95f046a4-228d-427c-b698-de3c8b1f9b79" resource="/country/id/95f046a4-228d-427c-b698-de3c8b1f9b79" source="zeus" stub="true">
+    <summary>
+        <iso2>YT</iso2>
+        <iso3>MYT</iso3>
+        <names>
+            <name>
+                <type>Country Name</type>
+                <value>Mayotte Island</value>
+            </name>
+            <countrySortKey>MAYOTTE ISLAND</countrySortKey>
+        </names>
+        <status>active</status>
+        <timeZones>
+            <summaries>
+                <summary>+3 hours</summary>
+            </summaries>
+        </timeZones>
+        <demographics>
+            <metric>
+                <name>Population</name>
+                <value>100000</value>
+            </metric>
+        </demographics>
+        <politicalStructure>Territorial Collectivity of France</politicalStructure>
+        <primaryExports>Ylang-ylang (perfume essence), vanilla, copra</primaryExports>
+        <primaryImports>Building materials, machinery &amp; transportation equipment, metals, chemicals, rice, clothing, and flour</primaryImports>
+        <telephoneCode>269</telephoneCode>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <languages>
+        <summaries>
+            <summary>French</summary>
+        </summaries>
+    </languages>
+    <iban>
+        <registered>true</registered>
+        <rule>
+            <displayISO>FR</displayISO>
+            <routingCodeType />
+        </rule>
+    </iban>
+    <alternativeRegions>
+        <region>
+            <type>Continent</type>
+            <value>Africa</value>
+        </region>
+        <region>
+            <type>Trading Region</type>
+            <value>Africa</value>
+        </region>
+    </alternativeRegions>
+    <currencies>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/fcc42dec-364b-46b1-9fe4-b463465b4193" rel="src" />
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">2002-01-01</startDate>
+        </currency>
+    </currencies>
+</country>

@@ -43,6 +43,8 @@ public abstract class AbstractPage {
     protected final HeraApi heraApi;
 
     protected final RestClient restClient;
+
+    public DataPage dataPage;
     public String bigString="";
     protected By contentLocator = By.xpath("//body/div[@id='content']");
 

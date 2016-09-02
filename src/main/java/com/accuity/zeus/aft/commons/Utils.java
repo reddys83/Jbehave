@@ -104,7 +104,7 @@ public class Utils {
           return builder.setScheme(scheme)
                         .setHost(host)
                         .setPort(port)
-                        .setPath(path + endpointWithID).build().toString();
+                        .setPath(path + "/"+endpointWithID).build().toString();
       }
       catch (URISyntaxException e) {
           e.printStackTrace();

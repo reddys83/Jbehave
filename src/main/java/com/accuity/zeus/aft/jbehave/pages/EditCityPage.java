@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.accuity.domain.city.City;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -2185,44 +2186,49 @@ public class EditCityPage extends AbstractPage {
 		List<WebElement> areaList = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("city_area_dropdown_xpath"));
 
-		if (areaList != null) {
-			assertEquals(areaList.get(0).getText(), "Choose an Area");
-			assertEquals(areaList.get(1).getText(), "No Area");
+    		assertEquals(areaList.get(0).getText(), "No Area");
 			for (int i = 0; i < document.getElementsByTagName("area").getLength() && areaList.size() > 2; i++) {
 				assertEquals(document.getElementsByTagName("area").item(i).getTextContent(),
-						areaList.get(i + 2).getText());
+						areaList.get(i + 1).getText());
 			}
-		} else {
-			assertTrue("area list is not displayed", false);
 		}
 
-	}
+    public void clicksOnCountryDropdownInCityBasicInfo()
+    {
+        attemptClick(CityIdentifiers.getObjectIdentifier("city_basic_info_country_dropdown"));
+    }
+
+    public void clicksOnAreaDropdownInCityBasicInfo()
+    {
+        attemptClick(CityIdentifiers.getObjectIdentifier("city_basic_info_area_dropdown"));
+    }
+
+    public void clicksOnSubareaDropdownInCityBasicInfo()
+    {
+        attemptClick(CityIdentifiers.getObjectIdentifier("city_basic_info_subarea_dropdown"));
+    }
 
 	public void changeCountryValue(String country) throws InterruptedException {
 		try {
-			List<WebElement> drpList = getDriver().findElements(
-					CityIdentifiers.getObjectIdentifier("country_places_country_dropDown_select_option_xpath"));
-			for (int i = 0; i < drpList.size(); i++) {
-				if (drpList.get(i).getText().equals(country)) {
-					selectItemFromDropdownListByindex(
-							CityIdentifiers.getObjectIdentifier("country_places_country_dropDown_select_xpath"), i);
-					selectedCountryID = drpList.get(i).getAttribute("value");
-					Thread.sleep(5000);
-					break;
-				}
-			}
+
+            List<WebElement> drpList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("country_places_country_dropDown_xpath"));
+            for(WebElement option:drpList) {
+                if (option.getText().equals(country)) {
+                    option.click();
+                    break;
+                }
+            }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void userVerifyAreaDropdown() {
-		assertEquals("Choose an Area", getDriver()
-				.findElements(CityIdentifiers.getObjectIdentifier("city_area_dropdown_xpath")).get(0).getText());
+	public void userVerifyTextInAreaDropdown() {
+		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_basic_info_area_dropdown")).getText(),"Choose an Area");
 
 	}
 
-	public void userVerifySubAreaDropdown() {
+	public void userVerifyTextInSubAreaDropdown() {
 
 		WebElement subAreaMultiSelectBox = getDriver()
 				.findElement(CityIdentifiers.getObjectIdentifier("area_subarea_xpath"))
@@ -2231,38 +2237,17 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public void changeAreaValue(String area) throws InterruptedException {
-
 		try {
-
-			attemptClick(CityIdentifiers.getObjectIdentifier("country_places_areas_dropdown_xpath"));
-			List<WebElement> drpList = getDriver()
-					.findElements(CityIdentifiers.getObjectIdentifier("country_places_areas_option_dropdown_xpath"));
-			for (int i = 0; i < drpList.size(); i++) {
-				if (drpList.get(i).getText().equals(area)) {
-					selectItemFromDropdownListByindex(
-							CityIdentifiers.getObjectIdentifier("country_places_areas_dropdown_xpath"), i);
-					selectedAreaID = drpList.get(i).getAttribute("value");
-					Thread.sleep(5000);
-					break;
-				}
-			}
+            List<WebElement> drpList = getDriver().findElements(CityIdentifiers.getObjectIdentifier("city_area_dropdown_xpath"));
+            for(WebElement option:drpList) {
+                if (option.getText().equals(area)) {
+                    option.click();
+                    break;
+                }
+            }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void userVerifiesNoArea() {
-		assertEquals("No Area", getDriver()
-				.findElements(CityIdentifiers.getObjectIdentifier("city_area_dropdown_xpath")).get(0).getText());
-	}
-
-	public void verifyNoSubarea() {
-		assertEquals("No Area", getDriver().findElements(CityIdentifiers.getObjectIdentifier("area_subarea_list_xpath"))
-				.get(0).getText());
-	}
-
-	public void clickOnSubAreaDropdown() throws InterruptedException {
-		attemptClick(CityIdentifiers.getObjectIdentifier("area_subarea_xpath"));
 	}
 
 	public void clearSubAreaOptions() throws InterruptedException {
@@ -2273,13 +2258,6 @@ public class EditCityPage extends AbstractPage {
 					.sendKeys(Keys.BACK_SPACE);
 			subAreaOptions = getDriver().findElements(CityIdentifiers.getObjectIdentifier("area_subarea_choosenList"));
 		}
-	}
-
-	public void verifyNoAreaOptionOnlyExistInSubArea() {
-		assertEquals("No Area", getDriver().findElements(CityIdentifiers.getObjectIdentifier("area_subarea_list_xpath"))
-				.get(0).getText());
-		assertEquals(getDriver().findElements(CityIdentifiers.getObjectIdentifier("area_subarea_list_xpath")).size(),
-				1);
 	}
 
 	public void userSelectsSubarea(String subarea) throws InterruptedException {
@@ -2299,7 +2277,7 @@ public class EditCityPage extends AbstractPage {
 		for (int j = 0; j < subAreaChoices.size(); j++) {
 			selectedOptions.add((subAreaChoices.get(j)).getText());
 		}
-		assertTrue(selectedOptions.contains(subarea));
+		assertFalse(selectedOptions.contains(subarea));
 	}
 
 	public void verifySubAreaValue(String country, String area, String city, String tagName, String source,
@@ -2310,7 +2288,7 @@ public class EditCityPage extends AbstractPage {
 	public void verifySubAreaIsUpdatedInUI(String subArea) {
 
 		List<WebElement> subAreaChoices = getDriver()
-				.findElements(CityIdentifiers.getObjectIdentifier("subareas_choices_xpath"));
+				.findElements(CityIdentifiers.getObjectIdentifier("area_subarea_choosenList"));
 		List<String> selectedOptions = new ArrayList<String>();
 		for (int j = 0; j < subAreaChoices.size(); j++) {
 			selectedOptions.add((subAreaChoices.get(j)).getText());
@@ -2329,12 +2307,27 @@ public class EditCityPage extends AbstractPage {
 
 	}
 
-	public void checksAddressBarIsHavingNewCountryAreaIds() throws InterruptedException {
+	public void checksAddressBarIsHavingNewCountryAreaIds(String country, String area) throws InterruptedException {
 		String[] urlPartitions = getDriver().getCurrentUrl().split("/");
 		String countryID = urlPartitions[6];
 		String areaID = urlPartitions[7];
-		assertEquals(countryID, selectedCountryID);
-		assertEquals(areaID, selectedAreaID);
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("name", country));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for country", nvPairs);
+        if(document != null) {
+           assertEquals(countryID, document.getElementsByTagName("documentId").item(0).getAttributes().getNamedItem("id").getTextContent().toString());
+        }
+
+        nvPairs.add(new BasicNameValuePair("name", area));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+
+         document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for area", nvPairs);
+        if(document != null) {
+            assertEquals(areaID, document.getElementsByTagName("documentId").item(0).getAttributes().getNamedItem("id").getTextContent().toString());
+        }
 	}
 
 	public void verfyCityDropdown(String city) throws InterruptedException {
@@ -2364,11 +2357,12 @@ public class EditCityPage extends AbstractPage {
 		nvPairs.add(new BasicNameValuePair("source", "trusted"));
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "subarea list",
 				nvPairs);
-		List<WebElement> subAreaList = getDriver()
+
+        List<WebElement> subAreaList = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("area_subarea_list_xpath"));
-		for (int i = 1; i < (document.getElementsByTagName("subarea").getLength()) - 1; i++) {
+		for (int i = 0; i < (document.getElementsByTagName("subarea").getLength()); i++) {
 			assertEquals(document.getElementsByTagName("subarea").item(i).getTextContent(),
-					subAreaList.get(i + 1).getText());
+					subAreaList.get(i).getText());
 
 		}
 	}
@@ -2379,7 +2373,7 @@ public class EditCityPage extends AbstractPage {
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "country list");
 		for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(),
-					countryList.get(i).getText().trim());
+					countryList.get(i+1).getText().trim());
 		}
 	}
 

@@ -217,6 +217,8 @@ public class DataPage extends AbstractPage {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
+
+
     @Override
     public String getPageUrl() {
         return null;
@@ -1277,8 +1279,6 @@ public class DataPage extends AbstractPage {
 
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,xqueryName);
         assertTrue(document!=null);
-
-
     }
 
     public EditCityPage createEditCityPage() {
@@ -1333,8 +1333,8 @@ public class DataPage extends AbstractPage {
 
     public void updateDocument(String endpoint, String entityFid) {
         XmlDocument xmlDocument = getTestDataXml(endpoint, entityFid);
-        String url = getResourceURL(endpoint, entityFid);
-        int response = restClient.putDocumentByID(endpoint, heraApi, xmlDocument.toString(),url);
+        String endpointWithID = getResourceURL(endpoint, entityFid);
+        int response = restClient.putDocumentByID(endpointWithID, heraApi, xmlDocument.toString());
         assertTrue(response == 202);
     }
 }

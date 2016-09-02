@@ -1,0 +1,198 @@
+<country deleted="false" fid="DZA" id="21b69329-6bc2-4e43-aac7-9a18c937324e" resource="/country/id/21b69329-6bc2-4e43-aac7-9a18c937324e" source="zeus">
+    <summary>
+        <iso2>DZ</iso2>
+        <iso3>DZA</iso3>
+        <names>
+            <name>
+                <type>Display Name</type>
+                <value>New york</value>
+            </name>
+            <name>
+                <type>Country Name</type>
+                <value>Algeria</value>
+            </name>
+            <countrySortKey>ALGERIA</countrySortKey>
+        </names>
+        <status>active</status>
+        <dates>
+            <dateBegan accuracy="day">2016-01-01</dateBegan>
+            <dateCeased accuracy="day">2016-02-01</dateCeased>
+        </dates>
+        <timeZones>
+            <summaries>
+                <summary>+1 hour</summary>
+            </summaries>
+        </timeZones>
+        <businessHours>
+            <summaries>
+                <summary />
+            </summaries>
+        </businessHours>
+        <redirectTo>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/country/id/5ee26c17-e9e9-4ba1-a053-a408e0b35803" rel="src" />
+            </place>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/country/id/a9dc7df8-f647-4265-9b2c-b5bcafbd7a12" rel="src" />
+            </place>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/country/id/55407226-a9b5-4d16-95b4-9ca1f8067351" rel="src" />
+            </place>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/country/id/829a409c-efb9-4948-a4b4-8dedf45d381a" rel="src" />
+            </place>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/country/id/0c57917a-ab73-469f-b513-019de723c021" rel="src" />
+            </place>
+        </redirectTo>
+        <demographics>
+            <metric>
+                <name>Area</name>
+                <value>919595</value>
+                <unit>miles2</unit>
+            </metric>
+            <metric>
+                <name>Area</name>
+                <value>2381741</value>
+                <unit>km2</unit>
+            </metric>
+            <metric>
+                <name>Population</name>
+                <value>34000000</value>
+            </metric>
+        </demographics>
+        <politicalStructure>Republic</politicalStructure>
+        <primaryExports>Petroleum, natural gas, and petroleum products</primaryExports>
+        <primaryImports>Capital goods, foodstuffs, consumer goods</primaryImports>
+        <telephoneCode>213</telephoneCode>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <languages>
+        <summaries>
+            <summary>Arabic; French; Berber</summary>
+        </summaries>
+    </languages>
+    <currencies>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/92d1918f-64fb-42e2-bc9e-4f72432a476f" rel="src" />
+            <name>Algerian Dinar</name>
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">1980-01-01</startDate>
+        </currency>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/425f6d3b-0e50-486b-b5ce-173111e60515" rel="src" />
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="year">1988-01-01</startDate>
+        </currency>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/425f6d3b-0e50-486b-b5ce-173111e60515" rel="src" />
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">1990-01-01</startDate>
+        </currency>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/819819ee-3d5b-4708-aae0-21c1ded75f71" rel="src" />
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="year">1988-01-01</startDate>
+        </currency>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/7e883bcc-2df1-4d5e-ba88-f89997ff010d" rel="src" />
+            <primary>false</primary>
+            <status>active</status>
+            <startDate accuracy="day">2001-11-01</startDate>
+        </currency>
+    </currencies>
+    <iban>
+        <registered>false</registered>
+    </iban>
+    <holidays>
+        <holiday>
+            <date accuracy="day">2015-01-01</date>
+            <name>New Year's Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-07-05</date>
+            <name>Independence Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-09-23</date>
+            <name>Eid al-Adha</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-09-24</date>
+            <name>Eid al-Adha 2</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-10-14</date>
+            <name>First Day of Muharram</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-11-01</date>
+            <name>Anniversary of the Revolution</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-24</date>
+            <name>Prophet's Birthday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-05-01</date>
+            <name>Labour Day</name>
+            <note />
+        </holiday>
+    </holidays>
+    <creditRatings>
+        <rating>
+            <agencyName>Capital Intelligence</agencyName>
+            <type>Long Term Sovereign Debt Rating</type>
+            <value>qerqe</value>
+            <dateConfirmed accuracy="day">2006-03-12</dateConfirmed>
+        </rating>
+    </creditRatings>
+    <alternativeRegions>
+        <region>
+            <type>Trading Region</type>
+            <value>Middle East &amp; North Africa</value>
+        </region>
+    </alternativeRegions>
+    <relatedPlaces>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>Capital City</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/7e16fedf-a2ec-442e-863f-6635a54987a9" rel="src" />
+            </place>
+        </relation>
+        <relation>
+            <type>Financial Centre</type>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/7e16fedf-a2ec-442e-863f-6635a54987a9" rel="src" />
+            </place>
+        </relation>
+    </relatedPlaces>
+    <relatedPresences>
+        <relation>
+            <type>Central Bank</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/d88e933f-5437-4dd9-ad1b-fffb928e96e5" rel="src" />
+            </presence>
+        </relation>
+        <relation>
+            <type>Regulator</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/d88e933f-5437-4dd9-ad1b-fffb928e96e5" rel="src" />
+            </presence>
+        </relation>
+    </relatedPresences>
+</country>

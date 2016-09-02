@@ -41,7 +41,7 @@ public class RestClient{
         return patchResponse;
     }
 
-    public int putDocumentByID(String endpointWithID, HeraApi heraApi, String document, String url)
+  /*  public int putDocumentByID(String endpointWithID, HeraApi heraApi, String document, String url)
     {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", String.valueOf(MediaType.APPLICATION_XML));
@@ -62,7 +62,7 @@ public class RestClient{
         restTemplate.setRequestFactory(requestFactory);
 
         return restTemplate.exchange(url, HttpMethod.PUT, requestEntity, String.class).getStatusCode().value();
-    }
+    } */
     
 	public int putDocumentByID(String endpointWithID, HeraApi heraApi, String document) {
 		HttpHeaders headers = new HttpHeaders();

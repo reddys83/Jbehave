@@ -86,14 +86,15 @@ public class XqueryMap {
         queryMap.put("get document id for city","getIdForCity.xqy");
         queryMap.put("get city identifiers", "getCountryIdentifiers.xqy");
 		queryMap.put("get city Status types","getCityStatusTypes.xqy");
-		queryMap.put("get city basic info","getCityBasicInfo.xqy");
+
         queryMap.put("get office basic info","getOfficeBasicInfo.xqy");
         queryMap.put("get id for offices", "getIdForOffices.xqy");
+        queryMap.put("get Id for area", "getIdForArea.xqy");
 
 		queryMap.put("get city places type lookup","getCityRelatedPlacesTypeFromLookup.xqy");
 		queryMap.put("get city places detail lookup","getCityRelatedPlacesDetailsFromLookup.xqy");
 		queryMap.put("get city related place info","getCityRelatedPlaces.xqy");
-		queryMap.put("get city basic info","getCityBasicInfo.xqy");
+
         queryMap.put("get LegalEntity personnel", "getLegalEntityPersonnel.xqy");
         queryMap.put("get LegalEntity IdentifierTypes From Lookup","getLegalEntityIdentifierTypesFromLookup.xqy");
         queryMap.put("get LegalEntity IdentifierStatus From Lookup","getLegalEntityIdentifierStatusFromLookup.xqy");

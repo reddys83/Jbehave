@@ -1199,7 +1199,7 @@ public class EditCitySteps extends AbstractSteps {
 	@Then("user should see the list of Sub area options in city page are in Alphabetical order")
 	@Alias("user should see the list of Sub area options are refreshed pointing to selected <area2>")
 	public void verifysubAreaListInPlacesForCountry(@Named("area2") String area) throws InterruptedException {
-		getEditCityPage().clickOnSubAreaDropdown();
+		//getEditCityPage().clickOnSubAreaDropdown();
 		getEditCityPage().verifySubAreaListInPlacesForCountry(area);
 	}
 
@@ -1208,14 +1208,31 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().changeCountryValue(country);
 	}
 
+    @When("the user clicks on the country drop down in the city basic info")
+    public void clicksOnCountryDropdownInCityBasicInfo()
+    {
+        getEditCityPage().clicksOnCountryDropdownInCityBasicInfo();
+    }
+
+    @When("user clicks on the area drop down in the city basic info")
+    public void clicksOnAreaDropdownInCityBasicInfo() {
+        getEditCityPage().clicksOnAreaDropdownInCityBasicInfo();
+    }
+
+    @When("user clicks on the subarea drop down in the city basic info")
+    public void clicksOnSubAreaDropdownInCityBasicInfo() {
+        getEditCityPage().clicksOnSubareaDropdownInCityBasicInfo();
+    }
+
 	@Then("the user verify the Area dropdown is populating with 'Choose an Area'as a option")
-	public void userverifyareadropdown() {
-		getEditCityPage().userVerifyAreaDropdown();
+	public void userVerifyAreaDropdown() {
+		getEditCityPage().userVerifyTextInAreaDropdown();
 	}
 
+
 	@Then("the user verify the SubArea dropdown is populating with 'Choose a SubArea' as a option")
-	public void userVerifySubareadropdown() {
-		getEditCityPage().userVerifySubAreaDropdown();
+	public void userVerifySubareaDropdown() {
+		getEditCityPage().userVerifyTextInSubAreaDropdown();
 	}
 
 	@Then("user changes the area <area2> in the area dropdown field in city basic page")
@@ -1223,34 +1240,21 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().changeAreaValue(area);
 	}
 
-	@Then("the user should verfiy that the 'No Area' option is available at the top of the area dropdown option")
-	public void userVerifiesNoArea() {
-		getEditCityPage().userVerifiesNoArea();
-	}
-
-	@Then("the user should verfiy that the 'No Area' option is available at the top of the Subarea dropdown option")
-	public void userVerifyNoSubarea() {
-		getEditCityPage().verifyNoSubarea();
-	}
-
 	@Then("user selects $noArea in area dropdown field in city basic page")
 	public void userSelectNoAreaInAreaDrodown(@Named("noArea") String area) throws InterruptedException {
 		getEditCityPage().changeAreaValue(area);
 	}
 
+    /*
 	@When("the user clicks on the choose a subarea option of city basic page")
 	public void clicksOnSubAreaDropdown() throws InterruptedException {
 		getEditCityPage().clickOnSubAreaDropdown();
 	}
+	*/
 
 	@When("the user clears subarea options in city basic page")
 	public void clearSubAreaDropdown() throws InterruptedException {
 		getEditCityPage().clearSubAreaOptions();
-	}
-
-	@Then("the user should verfiy that the 'No Area' option is only option exist in Subarea dropdown option")
-	public void verifyNoAreaIsOnlyOptionInSubarea() {
-		getEditCityPage().verifyNoAreaOptionOnlyExistInSubArea();
 	}
 
 	@Then("user selects subarea <subarea1> in the subarea multiselect dropdown")
@@ -1286,8 +1290,8 @@ public class EditCitySteps extends AbstractSteps {
 	}
 
 	@Then("the user checks whether the Address bar url is updated  with <country2>, <area2>")
-	public void checksAddressBar() throws InterruptedException {
-		getEditCityPage().checksAddressBarIsHavingNewCountryAreaIds();
+	public void checksAddressBar(@Named("country2") String country, @Named("area2") String area) throws InterruptedException {
+		getEditCityPage().checksAddressBarIsHavingNewCountryAreaIds(country, area);
 	}
 
 	@Then("user verify the city dropdown does not have city <city> value mapped to old country and area")
