@@ -1043,7 +1043,7 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@When("the user clicks on new area places type drop-down for area")
 	public void clickAreaPlaceType() {
-		getEditCityPage().clickCityPlaceType();
+		getEditAreaPage().clickAreaPlaceType();
 	}
 	
 	@Then("the user should see the values for type dropdown from lookup AREA_RELATED_PLACE_TYPE")
@@ -1140,5 +1140,11 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user should see the list of all existing city for the selected area by full name in places for area")
 	public void verifyCityListInPlacesForArea(@Named("areaPlaces") String countryareaPlaces) {
 		getEditCityPage().verifyCityListInPlacesForCity(countryareaPlaces);
+	}
+	
+	@When("the user clicks on the area places link in the navigation bar")
+	public void clickOnAreaPlaces() {
+		setEditAreaPage(getDataPage().createEditAreaPage());
+		getEditAreaPage().clickOnAreaPlaces();
 	}
 }

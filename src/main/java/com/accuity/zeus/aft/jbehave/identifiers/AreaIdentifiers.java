@@ -112,6 +112,9 @@ public class AreaIdentifiers {
 		hmap.put("area_get_relatedplace_placevalue_xpath", By.xpath("//*[@id='areaPlaces']//tr/td[2]/a"));
 		hmap.put("area_get_relatedplace_detailsvalue_xpath", By.xpath("//*[@id='areaPlaces']//tr/td[3]"));
 		hmap.put("area_get_relatedplace_entirevalue_xpath", By.xpath("//*[@id='areaPlaces']//tbody"));
+		hmap.put("area_places_link_id", By.xpath("//*[@id='areaPlaces']"));
+		hmap.put("area_places_type_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']"));
+		hmap.put("area_places_type_options_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']/option"));
 	}
 
 	public static By getObjectIdentifier(String key) {
