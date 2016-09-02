@@ -1121,4 +1121,24 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("areaPlaces") String areaPlacesPlace, @Named("PlaceDetails") String areaPlacesDetails) {
 		getEditAreaPage().verifyRelatedPlacesInAreaPage(areaPlacesType, areaPlacesPlace, areaPlacesDetails);
 	}
+	
+	@Then("the user should see the error message required for place in places for area")
+	public void verifyRequiredErrorMessageForPlace() {
+		getEditCityPage().verifyRequiredErrorMessageForPlace();
+	}
+	
+	@Then("the user should see the list of all existing countries by full name in places for area")
+	public void verifyCountryListInPlacesForArea() {
+		getEditCityPage().verifyCountryListInPlacesForCity();
+	}
+	
+	@Then("the user should see the list of all existing area for the selected country by full name in places for area")
+	public void verifyAreaListInPlacesForArea(@Named("countryPlaces") String country) {
+		getEditCityPage().verifyAreaListInPlacesForCity(country);
+	}
+	
+	@Then("the user should see the list of all existing city for the selected area by full name in places for area")
+	public void verifyCityListInPlacesForArea(@Named("areaPlaces") String countryareaPlaces) {
+		getEditCityPage().verifyCityListInPlacesForCity(countryareaPlaces);
+	}
 }

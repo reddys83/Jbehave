@@ -27,7 +27,7 @@ Examples:
 |country|area|
 |Angola|Cabinda|
 
-Scenario: User updates existing region type and value, checks the confirmation summary modal and saves the data to DB
+Scenario: Verify whether User is able to see error message "Required" when input values are blank for 'place' & 'type' field
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -41,6 +41,7 @@ And the user clicks on the area update link
 And the user clicks on the add button for adding new places for area page
 And the user clicks on the save button
 Then the user should see the error message required for type in places for area
+Then the user should see the error message required for place in places for area
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
@@ -124,3 +125,57 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|
 |Angola|Cabinda|Twin City|Angola|Bengo|Caxito|Capital City|
+
+Scenario: Verify whether the list in country, Area and city dropdown is displaying as expected
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the area regions link in the navigation bar
+And the user clicks on the area update link
+When the user clicks on edit button in places for area
+And the user clicks on the country option in the places for area
+Then the user should see the list of all existing countries by full name in places for area
+When the user enters the country <countryPlaces> in type-ahead box for area related places
+When the user clicks on area option in the places for area
+Then the user should see the list of all existing area for the selected country by full name in places for area
+When the user enters area <areaPlaces> in the type-ahead box for area related places
+And the user clicks on city options in the places for area
+Then the user should see the list of all existing city for the selected area by full name in places for area
+
+Examples:
+|country|area|city|countryPlaces|areaPlaces|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|Algeria|Blida|
+
+Scenario: Verify whether User is able to see Go Button is disabled when
+User should see Go Button is disabled when
+a)Country not selected ("Choose a Country")
+b)Country selected. Area selected and = "Return All Cities" or "No area". City not selected ("Choose a City")
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the area regions link in the navigation bar
+And the user clicks on the area update link
+When the user deletes the existing related places rows
+And the user clicks on the add button for adding new places for area page
+When the user clicks on edit button in places for area
+Then the user should see 'Go' button disabled until value for City is selected
+When the user clicks on the country option in the places for area
+And the user enters the country <countryPlaces> in type-ahead box for area related places
+And the user clicks on area option in the places for area
+And the user enters area <areaPlaces> in the type-ahead box for area related places
+Then the user should see 'Go' button disabled until value for City is selected
+
+Examples:
+|country|area|countryPlaces|areaPlaces|
+|Tajikistan|Leninabadskaya Oblast|Algeria|No Area|
+|Tajikistan|Leninabadskaya Oblast|Algeria|Return All Cities|
