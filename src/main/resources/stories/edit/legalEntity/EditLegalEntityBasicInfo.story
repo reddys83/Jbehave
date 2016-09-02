@@ -935,6 +935,7 @@ Examples:
 |1038|fid|1038||
 |1038|fid|1038|Corporate Bank|
 
+
 Scenario: (1) User is updating Legal Entity's Basic Info with existing data No different from current value- 
 1 - User verifies whether the current 'Country of Operations' value is same as in trusted document.
 2 - User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
@@ -967,7 +968,7 @@ Examples:
 |223191|FID|223191|Puerto Rico|
 
 Scenario: (2) User is updating a Legal Entity's Basic Info page - 
-1 - User selects 'UnKnown' for Country of Operations dropdown for a valid Legal Entity Type
+1 - User selects 'UnKnown' for Country of Operations dropdown for a valid Legal Entity Type (default value in UI should be some other countryOfOperations to get warning pop up while changing)
 2 - User selects 'No' in the warning message to prevent saving of 'Undefined' for Country of Operations
 3 - User selects 'Yes' in the warning message to save 'Undefined' for Country of Operations.
 4 - User verifies Country of Operations value is updated in Zeus DB.
@@ -997,7 +998,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|countryOfOperations|
-|91832|FID|91832|Unknown|
+|951|FID|951|Unknown|
 
 Scenario: (3) User is updating a Legal Entity's Basic Info page -
 1- User verifies 'Required' error message for Country of Operations dropdown if Legal Entity Type is from following values
@@ -1050,4 +1051,4 @@ Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|countryOfOperations|
-|223191|FID|223191|Brazil|
+|951|FID|951|Brazil|
