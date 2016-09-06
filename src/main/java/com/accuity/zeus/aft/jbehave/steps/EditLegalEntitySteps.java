@@ -1160,5 +1160,30 @@ public class EditLegalEntitySteps extends AbstractSteps{
 		getDataPage().verifyWebElementText("Country Of Operations", countryOfOperations, 
 				LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
 	}
+	
+	@When("the user enters <countryOfOperations2> in the country of operations drop down")
+	public void enterCountryOfOperationsDropDownValue2(@Named("countryOfOperations2") String countryOfOperations) {
+		getDataPage().attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
+		getDataPage().enterValueInTypeHeadDropDown(LegalEntityIdentifiers
+				.getObjectIdentifier("legalEntity_country_of_operations_type_ahead"),countryOfOperations);
+	}
+	
+	@Then("the user verifies the <countryOfOperations2> value in the legal entity basic info page")
+	public void verifyCountryOfOperationsUIViewMode2(@Named("countryOfOperations2") String countryOfOperations) {
+		if (countryOfOperations.equals("Unknown")) {
+			countryOfOperations = "";
+		}
+		getDataPage().verifyWebElementText("Country Of Operations", 
+				countryOfOperations, LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_view_mode"));
+	}
+	
+	@Then("the user should see the <countryOfOperations2> value same as in $source document")
+	public void verifyCountryOfOperationsFromZeusDB2(@Named("fid") String fid,
+			@Named("countryOfOperations2") String countryOfOperations, @Named("source") String source) {
+		if (countryOfOperations.equals("Unknown")) {
+			countryOfOperations = "";
+		}
+		getEditLegalEntityPage().verifyCountryOfOperationsFromZeusDB(fid, countryOfOperations, source, "value");
+	}
     
   }
