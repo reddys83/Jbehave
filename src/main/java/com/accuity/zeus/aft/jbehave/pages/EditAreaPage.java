@@ -1745,7 +1745,7 @@ public class EditAreaPage extends AbstractPage {
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_places_type_options_dropdown_xpath"));
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area places type lookup");
 		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
-			System.out.println("DB "+document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent());
+			//System.out.println("DB "+document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent());
 			//System.out.println("UI "+areaPlacesTypeList.get(i).getText());
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					areaPlacesTypeList.get(i).getText());
@@ -1783,6 +1783,16 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void clickAreaPlaceType() {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"));
+	}
+	
+	public void verifyDeletedRelatedPlaces(String type, String place, String details) {
+		try {
+			Thread.sleep(6000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertEquals("", getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_entirevalue_xpath")).getText());
 	}
 	
 	@Override

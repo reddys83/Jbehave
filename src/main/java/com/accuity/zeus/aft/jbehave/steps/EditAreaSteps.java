@@ -1038,6 +1038,7 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@When("the user clicks on the add button for adding new places for area page")
 	public void clickOnAddPlacesButton() {
+		setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().clickOnAddPlacesButton();
 	}
 	
@@ -1073,6 +1074,7 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@When("the user clicks on edit button in places for area")
 	public void clicksOnEditButton() {
+		setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().clicksOnEditButton();
 	}
 	
@@ -1118,7 +1120,7 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@Then("the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in area related place")
 	public void verifyRelatedPlacesInAreaPage(@Named("PlaceType") String areaPlacesType,
-			@Named("areaPlaces") String areaPlacesPlace, @Named("PlaceDetails") String areaPlacesDetails) {
+			@Named("cityPlaces") String areaPlacesPlace, @Named("PlaceDetails") String areaPlacesDetails) {
 		getEditAreaPage().verifyRelatedPlacesInAreaPage(areaPlacesType, areaPlacesPlace, areaPlacesDetails);
 	}
 	
@@ -1146,5 +1148,22 @@ public class EditAreaSteps extends AbstractSteps {
 	public void clickOnAreaPlaces() {
 		setEditAreaPage(getDataPage().createEditAreaPage());
 		getEditAreaPage().clickOnAreaPlaces();
+	}
+	
+	@Then("the user should see place as $place in places for area")
+	public void verifyPlaceInPlacesForArea(@Named("place") String place) {
+		getEditCityPage().verifyPlaceInPlacesForCity(place);
+	}
+	
+	@When("the user clicks on delete area places type")
+	public void clicksOnDeleteAreaPlacesType() {
+		setEditCityPage(getDataPage().createEditCityPage());
+		getEditCityPage().clicksOnDeleteCityPlacesType();
+	}
+	
+	@Then("the user should not see <PlaceType> <cityPlaces> <PlaceDetails> updated in area related place")
+	public void verifyDeletedRelatedPlaces(@Named("PlaceType") String type, @Named("cityPlaces") String place,
+			@Named("PlaceDetails") String details) {
+		getEditAreaPage().verifyDeletedRelatedPlaces(type, place, details);
 	}
 }
