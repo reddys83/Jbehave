@@ -1166,4 +1166,15 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("PlaceDetails") String details) {
 		getEditAreaPage().verifyDeletedRelatedPlaces(type, place, details);
 	}
+	
+	@Then("the user should see the area related place date <PlaceType> <cityPlaces> <PlaceDetails> value in $source document")
+	public void verifyAreaRelatedValueFromZeusDB(@Named("area") String area, @Named("PlaceType") String type, @Named("cityPlaces") String place,
+			@Named("PlaceDetails") String details, @Named("source") String source) {
+		getEditAreaPage().verifyAreaRelatedValueFromZeusDB(area, type, place, details, source);
+	}
+	
+	@Then("the user should not see the area related place value in $source document")
+	public void verifyDeletedAreaRelatedValueFromZeusDB(@Named("area") String area, @Named("source") String source) {
+		getEditAreaPage().verifyDeletedAreaRelatedValueFromZeusDB(area, source);
+	}
 }

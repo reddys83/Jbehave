@@ -80,9 +80,13 @@ And the user clicks on go button in places for area
 And the user selects details value as <PlaceDetails> in the places for area
 And the user clicks on the save button
 Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Related Places|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in area related place
+Then the user should see the area related place date <PlaceType> <cityPlaces> <PlaceDetails> value in zeus document
 Then the user reverts the changes to the document
 
 Examples:
@@ -272,6 +276,7 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user should not see <PlaceType> <cityPlaces> <PlaceDetails> updated in area related place
+Then the user should not see the area related place value in zeus document
 Then the user reverts the changes to the document
 
 Examples:
@@ -305,3 +310,44 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|ConfirmationSummary|
 |Angola|Cabinda|Capital City|Angola|Bengo|Caxito|State Capital|Summary|
+
+Scenario: User is verifying whether all expected Fields are disabled/Enabled at Related Place section
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the area places link in the navigation bar
+And the user clicks on the area update link
+When the user deletes the existing related places rows
+And the user clicks on the add button for adding new places for area page
+When the user clicks on edit button in places for area
+Then the user should see the default value for country is Choose a country
+Then the user should see the area dropdown is disabled
+Then the user should see the city dropdown is disabled
+Then the user should see Edit button for place field is disabled
+Then the user should see the delete option is  disabled until drawer closes
+When the user clicks on the country option in the places for area
+When the user enters the country <countryPlaces> in type-ahead box for area related places
+And the user clicks on the country option in the places for area
+Then the user should see Choose a country option is not selectable
+Then the user should see the default value for area is Choose an area
+When the user clicks on area option in the places for area
+When the user enters area <areaPlaces> in the type-ahead box for area related places
+When the user clicks on area option in the places for area
+Then the user should see Choose an area option is not selectable
+Then the user should see the default value for area is Choose a city
+When the user clicks on city options in the places for area
+And the user enters city <cityPlaces> in the type-ahead box for area related places
+When the user clicks on city options in the places for area
+Then the user should see Choose a City option is not selectable
+When the user clicks on go button in places for area
+Then the user should see that drawer is closed
+Then the user should see that Edit button for place field is enabled
+
+Examples:
+|country|area|PlaceType|countryPlaces|areaPlaces|cityPlaces|
+|Angola|Cabinda|Capital City|Algeria|Blida|Bouinan|

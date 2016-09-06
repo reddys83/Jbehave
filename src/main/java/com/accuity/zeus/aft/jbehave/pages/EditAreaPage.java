@@ -1795,6 +1795,42 @@ public class EditAreaPage extends AbstractPage {
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_entirevalue_xpath")).getText());
 	}
 	
+	public String getAreaRelatedInfoFromDB(String area, String tagName, String source) {
+
+		String tagValue = null;
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("name", area));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get area related place info", nvPairs);
+		if (document != null) {
+			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+					: getNodeValuesByTagName(document, tagName).get(0);
+		}
+		return tagValue;
+	}
+	
+	public void verifyAreaRelatedValueFromZeusDB(String area, String type, String place,
+			String details, String source) {
+		assertEquals(getAreaRelatedInfoFromDB(area, "type", source), type);
+		assertEquals(getAreaRelatedInfoFromDB(area,  "value", source), place);
+		assertEquals(getAreaRelatedInfoFromDB(area,  "details", source), details);
+
+	}
+	
+	public void verifyDeletedAreaRelatedValueFromZeusDB(String area, String source) {
+		assertEquals(getAreaRelatedInfoFromDB(area, "type", source), "");
+		assertEquals(getAreaRelatedInfoFromDB(area,  "value", source), "");
+		assertEquals(getAreaRelatedInfoFromDB(area,  "details", source), "");
+
+	}
+	
 	@Override
 	public String getPageUrl() {
 		return null;
