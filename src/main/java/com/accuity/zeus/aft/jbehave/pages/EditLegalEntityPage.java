@@ -1938,6 +1938,50 @@ public class EditLegalEntityPage extends AbstractPage {
     {
         assertEquals(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier(identifier)).getText(),errMsg);
     }
+    
+	public void verifyCountryOfOperationsFromTrustedDB(String fid, String source, String tagName) {
+		assertEquals(getLegalEntityValuesFromDB(fid, tagName, source), 
+				getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode")).getText());
+	}
+
+	public void verifyCountryOfOperationsFromZeusDB(String fid, String countryOfOperations, String source, String tagName) {
+		assertEquals(getLegalEntityValuesFromDB(fid, tagName, source), countryOfOperations);
+	}
+
+	public void verifyCountryOfOperationsWarningMessage() {
+		try {
+			Thread.sleep(1000L);
+			assertEquals("Confirm Changes", getDriver()
+					.findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_header")).getText());
+			assertEquals("Please confirm - Legal Entity does not have a Country of Operations", getDriver()
+					.findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_content")).getText());
+			assertEquals("NO", getDriver()
+					.findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_no_button")).getText());
+			assertEquals("YES",	getDriver()
+					.findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_yes_button")).getText());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyCountryOfOperationsIsNotUpdated(String country) {
+		assertTrue(!country.equals(getDriver()
+				.findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode")).getText()));
+	}
+	
+	public void verifyLookUpValues(String queryName, String tagName, String fid) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("fid", fid));
+		nvPairs.add(new BasicNameValuePair("source", "trusted"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, queryName, nvPairs);
+		List<WebElement> countryOfOperationsList = getDriver()
+				.findElements(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_list"));
+		for (int i = 0; i < (document.getElementsByTagName(tagName).getLength()); i++) {
+			assertEquals(document.getElementsByTagName(tagName).item(i).getTextContent().trim(), 
+					countryOfOperationsList.get(i+1).getText().trim());
+		}
+	}
+   
     @Override
     public String getPageUrl() {
         return null;

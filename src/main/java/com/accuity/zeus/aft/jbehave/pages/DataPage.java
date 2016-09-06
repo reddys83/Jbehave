@@ -1406,4 +1406,15 @@ public class DataPage extends AbstractPage {
 			assertTrue(false);
 		}
 	}
+	
+	public void enterValueInTypeHeadDropDown(By by, String value) {
+		try {
+			getDriver().findElement(by).sendKeys(value);
+			getDriver().findElement(by).sendKeys(Keys.RETURN);
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
