@@ -2223,17 +2223,16 @@ public class EditCityPage extends AbstractPage {
 		}
 	}
 
-	public void userVerifyTextInAreaDropdown() {
+	public void userVerifyTextInAreaDropdown() throws InterruptedException {
+        Thread.sleep(2000);
 		assertEquals(getDriver().findElement(CityIdentifiers.getObjectIdentifier("city_basic_info_area_dropdown")).getText(),"Choose an Area");
 
 	}
 
-	public void userVerifyTextInSubAreaDropdown() {
-
-		WebElement subAreaMultiSelectBox = getDriver()
-				.findElement(CityIdentifiers.getObjectIdentifier("area_subarea_xpath"))
-				.findElement(By.xpath("//*[@class='search-field']/input"));
-		assertEquals("Choose a Sub Area", subAreaMultiSelectBox.getAttribute("value"));
+	public void userVerifyTextInSubAreaDropdown() throws InterruptedException {
+        Thread.sleep(2000);
+		WebElement subAreaMultiSelectBox = getDriver().findElement(By.xpath("//*[@class='search-field']/input"));
+		assertEquals("Choose a Subarea", subAreaMultiSelectBox.getAttribute("value"));
 	}
 
 	public void changeAreaValue(String area) throws InterruptedException {
@@ -2297,7 +2296,7 @@ public class EditCityPage extends AbstractPage {
 	}
 
 	public void checksHeaderDropdownValues(String country, String area, String city) throws InterruptedException {
-		Thread.sleep(10000);
+		Thread.sleep(3000);
 		assertEquals(country,
 				getDriver().findElement(CityIdentifiers.getObjectIdentifier("country_current_value_xpath")).getText());
 		assertEquals(area,
@@ -2339,11 +2338,6 @@ public class EditCityPage extends AbstractPage {
 			citylist.add((cityListValues.get(j)).getText());
 		}
 		assertFalse(citylist.contains(city));
-	}
-
-	public void verfySubAreaIsNullInUI(String city) throws InterruptedException {
-		assertTrue(getDriver().findElement(CityIdentifiers.getObjectIdentifier("subarea_noarea_xpath")).getText()
-				.isEmpty());
 	}
 
 	public void verfyAreaIsNullInUI(String city) throws InterruptedException {

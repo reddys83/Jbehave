@@ -1225,13 +1225,13 @@ public class EditCitySteps extends AbstractSteps {
     }
 
 	@Then("the user verify the Area dropdown is populating with 'Choose an Area'as a option")
-	public void userVerifyAreaDropdown() {
+	public void userVerifyAreaDropdown() throws InterruptedException {
 		getEditCityPage().userVerifyTextInAreaDropdown();
 	}
 
 
-	@Then("the user verify the SubArea dropdown is populating with 'Choose a SubArea' as a option")
-	public void userVerifySubareaDropdown() {
+	@Then("the user verify the SubArea dropdown is populating with 'Choose a Subarea' as a option")
+	public void userVerifySubareaDropdown() throws InterruptedException {
 		getEditCityPage().userVerifyTextInSubAreaDropdown();
 	}
 
@@ -1267,10 +1267,15 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().userSelectsSubarea(subarea);
 	}
 
-	@Then("the user checks whether this subarea1 <subarea1> are not reselectable")
+	@Then("the user checks whether this subarea <subarea1> are not reselectable")
 	public void verifySubAreaIsNotReselectable(@Named("subarea1") String subarea) {
 		getEditCityPage().verifySubAreaIsNotReselectable(subarea);
 	}
+
+    @Then("the user checks whether this subarea <subarea2> are not reselectable")
+    public void verifySubAreaIsNotReselctable(@Named("subarea2") String subarea) {
+        getEditCityPage().verifySubAreaIsNotReselectable(subarea);
+    }
 
 	@Then("verify $source document whether the city is updated with newly added SubArea <subarea1>")
 	public void verifyZeusDBIsUpdatedWithNewValue(@Named("source") String source, @Named("city") String city,
@@ -1321,13 +1326,8 @@ public class EditCitySteps extends AbstractSteps {
 		getEditCityPage().verifyNodeValueIsEmpty(country2, area2, city, "subArea", source);
 	}
 
-	@Then("user verify the city is not updated with newly added subarea(null)")
-	public void verfySubAreaIsNullInUI(@Named("city") String city) throws InterruptedException {
-		getEditCityPage().verfySubAreaIsNullInUI(city);
-	}
-
 	@Then("user verify the city is not updated with newly added area(null)")
-	public void verfyAreaIsNullInUI(@Named("city") String city) throws InterruptedException {
+	public void verifyAreaIsNullInUI(@Named("city") String city) throws InterruptedException {
 		getEditCityPage().verfyAreaIsNullInUI(city);
 	}
 
