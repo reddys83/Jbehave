@@ -1743,25 +1743,25 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyAreaPlacesTypeList() {
 		List<WebElement> areaPlacesTypeList = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_places_type_options_dropdown_xpath"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area places type lookup");
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
+				"get area places type lookup");
 		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
-			//System.out.println("DB "+document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent());
-			//System.out.println("UI "+areaPlacesTypeList.get(i).getText());
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					areaPlacesTypeList.get(i).getText());
 		}
 	}
-	
+
 	public void verifyAreaPlacesDetailsList() {
 		List<WebElement> areaPlacesDetailsList = getDriver()
 				.findElements(CityIdentifiers.getObjectIdentifier("city_places_details_options_dropdown_xpath"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area places detail lookup");
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
+				"get area places detail lookup");
 		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					areaPlacesDetailsList.get(i).getText());
 		}
 	}
-	
+
 	public void verifyRelatedPlacesInAreaPage(String type, String place, String details) {
 		try {
 			Thread.sleep(6000);
@@ -1776,15 +1776,15 @@ public class EditAreaPage extends AbstractPage {
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_detailsvalue_xpath"))
 						.getText());
 	}
-	
+
 	public void clickOnAreaPlaces() {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_link_id"));
 	}
-	
+
 	public void clickAreaPlaceType() {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"));
 	}
-	
+
 	public void verifyDeletedRelatedPlaces(String type, String place, String details) {
 		try {
 			Thread.sleep(6000);
@@ -1794,7 +1794,7 @@ public class EditAreaPage extends AbstractPage {
 		assertEquals("", getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_entirevalue_xpath")).getText());
 	}
-	
+
 	public String getAreaRelatedInfoFromDB(String area, String tagName, String source) {
 
 		String tagValue = null;
@@ -1815,22 +1815,22 @@ public class EditAreaPage extends AbstractPage {
 		}
 		return tagValue;
 	}
-	
-	public void verifyAreaRelatedValueFromZeusDB(String area, String type, String place,
-			String details, String source) {
+
+	public void verifyAreaRelatedValueFromZeusDB(String area, String type, String place, String details,
+			String source) {
 		assertEquals(getAreaRelatedInfoFromDB(area, "type", source), type);
-		assertEquals(getAreaRelatedInfoFromDB(area,  "value", source), place);
-		assertEquals(getAreaRelatedInfoFromDB(area,  "details", source), details);
+		assertEquals(getAreaRelatedInfoFromDB(area, "value", source), place);
+		assertEquals(getAreaRelatedInfoFromDB(area, "details", source), details);
 
 	}
-	
+
 	public void verifyDeletedAreaRelatedValueFromZeusDB(String area, String source) {
 		assertEquals(getAreaRelatedInfoFromDB(area, "type", source), "");
-		assertEquals(getAreaRelatedInfoFromDB(area,  "value", source), "");
-		assertEquals(getAreaRelatedInfoFromDB(area,  "details", source), "");
+		assertEquals(getAreaRelatedInfoFromDB(area, "value", source), "");
+		assertEquals(getAreaRelatedInfoFromDB(area, "details", source), "");
 
 	}
-	
+
 	public void selectsPlacesTypeFromDropdwon(String placeType) {
 		selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"),
 				placeType);

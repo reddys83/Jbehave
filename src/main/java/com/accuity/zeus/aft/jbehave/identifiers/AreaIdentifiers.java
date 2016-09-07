@@ -107,7 +107,6 @@ public class AreaIdentifiers {
 		hmap.put("area_credit_rating_value_error", By.xpath("//*[@id='additionalCreditRatings']//*[@data-error_id='creditRatingValueError']"));
 		hmap.put("area_credit_rating_applied_date_error_msg", By.xpath("//*[@data-error_id='creditRatingAppliedDateError']"));
 		hmap.put("area_credit_rating_confirmed_date_error_msg", By.xpath("//*[@data-error_id='creditRatingConfirmedDateError']"));
-		//hmap.put("area_places_city_dropDown_list_xpath", By.xpath(".//*[@id='city_chosen']//li"));
 		hmap.put("area_get_relatedplace_typevalue_xpath", By.xpath("//*[@id='areaPlaces']//tr/td"));
 		hmap.put("area_get_relatedplace_placevalue_xpath", By.xpath("//*[@id='areaPlaces']//tr/td[2]/a"));
 		hmap.put("area_get_relatedplace_detailsvalue_xpath", By.xpath("//*[@id='areaPlaces']//tr/td[3]"));
@@ -115,7 +114,6 @@ public class AreaIdentifiers {
 		hmap.put("area_places_link_id", By.xpath("//*[@id='areaPlaces']"));
 		hmap.put("area_places_type_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']"));
 		hmap.put("area_places_type_options_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']/option"));
-		//hmap.put("area_places_type_select_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']/select"));
 	}
 
 	public static By getObjectIdentifier(String key) {
