@@ -8,6 +8,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-1048 - User can edit Area's Related Places
 
 Scenario: Verify the list of type dropdown are from AREA_RELATED_PLACE_TYPE and details dropdown from AREA_RELATED_PLACE_SUBTYPE
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -91,7 +92,44 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|
-|Angola|Cabinda|Capital City|Angola|Bengo|Caxito|State Capital|
+|Angola|Cabinda|Capital City|Angola|Zaire|Soyo|State Capital|
+
+Scenario: 
+a)Verify whether user is able to update an existing  Area Related place (no different to the current value) with same values successfully
+b)Verify whether user should get no changes in confirmation modal
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the area places link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+And the user updates type value as <PlaceType> in the places for area
+When the user clicks on edit button in places for area
+And the user clicks on the country option in the places for area
+When the user enters the country <countryPlaces> in type-ahead box for area related places
+And the user clicks on area option in the places for area
+When the user enters area <areaPlaces> in the type-ahead box for area related places
+And the user clicks on city options in the places for area
+And the user enters city <cityPlaces> in the type-ahead box for area related places
+And the user clicks on go button in places for area
+And the user selects details value as <PlaceDetails> in the places for area
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+Then the user should not see the <ConfirmationSummary> changes in confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in area related place
+Then the user should see the area related place date <PlaceType> <cityPlaces> <PlaceDetails> value in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|ConfirmationSummary|
+|Angola|Cabinda|Capital City|Angola|Bengo|Caxito|State Capital|Summary|
 
 Scenario: Verify whether the list in country, Area and city dropdown is displaying as expected
 
@@ -234,7 +272,7 @@ Examples:
 |Angola|Cabinda|Angola|Namibe|Bibala|Capital City|State Capital|
 
 Scenario: 
-a)Verify whether user is able to delete an existing  City Related place successfully in City Web page
+a)Verify whether user is able to delete an existing  Area Related place successfully in Area Web page
 b)Verify whether user is not able to view the deleted related place in Zeus Document
 
 Given a user is on the search page
@@ -284,7 +322,7 @@ Examples:
 |Angola|Cabinda|Capital City|Angola|Bengo|Caxito|State Capital|
 
 Scenario: 
-Verify whether user is able to view the related place in city page when 'no' button is clicked in delete confirmation dialog
+Verify whether user is able to view the related place in Area page when 'no' button is clicked in delete confirmation dialog
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -351,3 +389,4 @@ Then the user should see that Edit button for place field is enabled
 Examples:
 |country|area|PlaceType|countryPlaces|areaPlaces|cityPlaces|
 |Angola|Cabinda|Capital City|Algeria|Blida|Bouinan|
+

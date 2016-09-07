@@ -1177,4 +1177,10 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyDeletedAreaRelatedValueFromZeusDB(@Named("area") String area, @Named("source") String source) {
 		getEditAreaPage().verifyDeletedAreaRelatedValueFromZeusDB(area, source);
 	}
+	
+	@When("the user updates type value as <PlaceType> in the places for area")
+	public void selectsExistingTypeFromDropdown(@Named("PlaceType") String PlaceType) {
+		//setEditCityPage(getDataPage().createEditCityPage());
+		getEditAreaPage().selectsPlacesTypeFromDropdwon(PlaceType);
+	}
 }

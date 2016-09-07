@@ -1831,6 +1831,11 @@ public class EditAreaPage extends AbstractPage {
 
 	}
 	
+	public void selectsPlacesTypeFromDropdwon(String placeType) {
+		selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"),
+				placeType);
+	}
+	
 	@Override
 	public String getPageUrl() {
 		return null;

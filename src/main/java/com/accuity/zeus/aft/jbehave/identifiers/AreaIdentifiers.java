@@ -115,6 +115,7 @@ public class AreaIdentifiers {
 		hmap.put("area_places_link_id", By.xpath("//*[@id='areaPlaces']"));
 		hmap.put("area_places_type_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']"));
 		hmap.put("area_places_type_options_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']/option"));
+		//hmap.put("area_places_type_select_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']/select"));
 	}
 
 	public static By getObjectIdentifier(String key) {
