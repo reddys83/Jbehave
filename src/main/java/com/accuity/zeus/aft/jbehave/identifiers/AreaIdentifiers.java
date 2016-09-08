@@ -107,6 +107,17 @@ public class AreaIdentifiers {
 		hmap.put("area_credit_rating_value_error", By.xpath("//*[@id='additionalCreditRatings']//*[@data-error_id='creditRatingValueError']"));
 		hmap.put("area_credit_rating_applied_date_error_msg", By.xpath("//*[@data-error_id='creditRatingAppliedDateError']"));
 		hmap.put("area_credit_rating_confirmed_date_error_msg", By.xpath("//*[@data-error_id='creditRatingConfirmedDateError']"));
+		hmap.put("area_enity_link_id", By.xpath(""));
+		hmap.put("area_entity_type_dropdown_xpath", By.xpath("//*[@id='additionalPresences']/tr/td[1]/select"));
+		hmap.put("area_entity_type_options_dropdown_xpath",
+				By.xpath(".//*[@class='new'][@data-row_id='presences']//select[@id='presencesType']/option"));
+		hmap.put("area_entity_details_Select_dropdown_xpath",
+				By.xpath("//*[@id='additionalPresences']/tr/td[4]/select"));
+		hmap.put("area_entity_details_options_dropdown_xpath", By.xpath(
+				".//*[@class='new'][@data-row_id='presences']//select[@data-internal_id='presencesDetails']/option"));
+		hmap.put("area_entity_link_id", By.xpath("//*[@id='areaPresences']"));
+		hmap.put("area_add_entity_button_edit_id", By.xpath("//button[@id='add-presences']"));
+		hmap.put("area_entity_delete_button_xpath",By.xpath(".//*[@data-row_id='presences']//button[@class='delete-element']"));
 	}
 
 	public static By getObjectIdentifier(String key) {

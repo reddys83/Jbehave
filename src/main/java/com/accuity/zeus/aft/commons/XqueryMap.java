@@ -131,6 +131,8 @@ public class XqueryMap {
 		queryMap.put("get area region values","getAreaRegionValues.xqy");
 		queryMap.put("get area regions list","getAreaRegionList.xqy");
 		queryMap.put("get area credit ratings", "getAreaCreditRatingValues.xqy");
+		queryMap.put("get area entity type lookup","getAreaRelatedEntityTypeFromLookup.xqy");
+		queryMap.put("get area entity detail lookup", "getAreaRelatedEntityDetailsFromLookup.xqy");
    }
 
     public String getXquery(String key){

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 
 @Component
 public class EditAreaSteps extends AbstractSteps {
@@ -1034,5 +1035,48 @@ public class EditAreaSteps extends AbstractSteps {
 	@When("the user clicks on the Yes button to delete credit rating row")
 	public void clickYesButtonInAreaCreditRatingDeleteModal() {
 		getDataPage().clickOnYesButtonInDeleteConfirmationModal();
+	}
+	
+	@When("the user clicks on the area entity link in the navigation bar")
+	public void clickOnAreaEntity() {
+		setEditAreaPage(getDataPage().createEditAreaPage());
+		getEditAreaPage().clickOnAreaEntity();
+	}
+	
+	@Then("the user should see the values retrieved from $source document are present in Area Web page")
+	public void verifyRelatedEntityFromTrustedDB(@Named("area") String area,
+			@Named("source") String source) {
+		getDataPage().clickOnNoButtonInDeleteConfirmationModal();
+	}
+	
+	@When("the user clicks on new area entity type drop-down for area")
+	public void clickAreaEntityType() {
+		getEditAreaPage().clickAreaEntityType();
+	}
+	
+	@Then("the user should see the values for type dropdown from lookup AREA_RELATED_PRESENCE_TYPE")
+	public void verifyAreaEntityTypeList() {
+		getEditAreaPage().verifyAreaEntityTypeList();
+	}
+	
+	@When("the user clicks on new area entity details drop-down for area")
+	public void clickEntityDetailsDropDown() {
+		getEditAreaPage().clickEntityDetailsDropDown();
+	}
+
+	@Then("the user should see the values for details dropdown from lookup AREA_RELATED_PRESENCE_SUBTYPE")
+	public void verifyAreaEntityDetailsList() {
+		getEditAreaPage().verifyAreaEntityDetailsList();
+	}
+	
+	@When("the user clicks on the add button for adding new places for area page")
+	public void clickOnAddEntityButton() {
+		getEditAreaPage().clickOnAddEntityButton();
+	}
+	
+	@When("the user deletes all existing related entity rows")
+	public void deleteAllRelatedEntity() {
+		getEditAreaPage().clickOnAddEntityButton();
+		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_entity_delete_button_xpath"));
 	}
 }

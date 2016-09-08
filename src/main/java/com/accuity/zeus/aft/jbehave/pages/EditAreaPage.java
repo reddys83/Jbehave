@@ -28,6 +28,7 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -1738,7 +1739,43 @@ public class EditAreaPage extends AbstractPage {
 		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_year"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), row);
 		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), row);
 	}
+	
+	public void clickOnAreaEntity() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_link_id"));
+	}
 
+	public void clickAreaEntityType() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_type_dropdown_xpath"));
+	}
+	
+	public void verifyAreaEntityTypeList() {
+		List<WebElement> areaEntityTypeList = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_entity_type_options_dropdown_xpath"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area entity type lookup");
+		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					areaEntityTypeList.get(i).getText());
+		}
+	}
+	
+	public void clickEntityDetailsDropDown() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_details_Select_dropdown_xpath"));
+	}
+	
+	public void verifyAreaEntityDetailsList() {
+		List<WebElement> areaEntityDetailsList = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_entity_details_options_dropdown_xpath"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area entity detail lookup");
+		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					areaEntityDetailsList.get(i).getText());
+		}
+	}
+	
+	public void clickOnAddEntityButton() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_entity_button_edit_id"));
+	}
+	
 	@Override
 	public String getPageUrl() {
 		return null;
