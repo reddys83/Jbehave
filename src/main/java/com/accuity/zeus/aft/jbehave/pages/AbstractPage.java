@@ -392,4 +392,14 @@ public abstract class AbstractPage {
 		cal.add(Calendar.DATE, 1);
 		return dateFormat.format(cal.getTime());
 	}	
+    
+	public void selectItemFromDropdownListByindex(By by, int i) {
+		try {
+			Select dropdown = new Select(driver.findElement(by));
+			dropdown.selectByIndex(i);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
