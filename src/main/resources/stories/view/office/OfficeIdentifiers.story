@@ -8,8 +8,6 @@ JIRA ID - ZEUS-406 - User can view office identifiers
 
 Scenario: Verify office's identifier - Bug-ZEUS-1314
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -20,8 +18,8 @@ And the user clicks on the office identifier link in the navigation bar
 
 Then the user should see the office's identifiers as:
 |TYPE|VALUE|STATUS|
-|FDIC Office Branch|5|active|
-|FDIC Office Branch ID|5|inactive|
+|FDIC Office Branch|5|Active|
+|FDIC Office Branch ID|5|Inactive|
 
 Examples:
 |entity|searchBy|fid|officeFid|
@@ -29,8 +27,6 @@ Examples:
 
 Scenario: Verify no office's identifier
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

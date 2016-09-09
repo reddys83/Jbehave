@@ -22,7 +22,7 @@ public class CityIdentifiers {
         hmap.put("city_identifier_value_input_xpath", By.xpath(".//*[@id='additionalIdentifiers']//*[@data-internal_id='identifierValue']"));
         hmap.put("city_identifier_status_input_xpath", By.xpath(".//*[@id='additionalIdentifiers']//*[@data-internal_id='identifierStatus']"));
         hmap.put("city_confirm_button", By.xpath("//button[@id='confirm-button']"));       
-        hmap.put("city_delete_identifiers_row_button_xpath", By.xpath(".//*[@data-row_id='identifiers']//button[@class='delete-row']"));
+        hmap.put("city_delete_identifiers_row_button_xpath", By.xpath(".//*[@data-row_id='identifiers']//button[@class='delete-element']"));
         hmap.put("delete_row_confirmation_modal_xpath", By.xpath("//*[@id='additionalIdentifiers']/tr[2]"));            
     	hmap.put("city_delete_yes_button_id", By.xpath("//*[@id='yes-button']"));
     	hmap.put("city_additional_identifiers_row_id", By.xpath("//*[@id='additionalIdentifiers']/tr"));
@@ -58,6 +58,7 @@ public class CityIdentifiers {
 		hmap.put("city_use_in_address_false", By.xpath("//*[@id='cityBasicInfo']//input[@value='false']"));
 		hmap.put("city_address_flag_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[th='Use In Address']/td"));
 		hmap.put("city_creditRating_row_xpath", By.xpath("//*[@class='data']//*[@id='cityCreditRating']//tr"));
+		hmap.put("city_creditRating_new_row_xpath", By.xpath("//*[@class='data']//*[@id='cityCreditRating']//tr[@class='new']"));
 		
 		hmap.put("city_creditRating", By.xpath("//*[@id='cityCreditRating']"));
 		hmap.put("city_credit_rating_applied_date_day_xpath", By.xpath("//input[@name='creditRatingAppliedDate-day']"));
@@ -71,7 +72,7 @@ public class CityIdentifiers {
 		hmap.put("city_credit_rating_type_dropdown_xpath", By.xpath("//*[@id='additionalCreditRatings']//select[@data-internal_id='creditRatingType']"));
 		hmap.put("city_credit_rating_agency_dropdown_xpath", By.xpath("//*[@id='additionalCreditRatings']//select[@data-internal_id='creditRatingAgency']"));
 		hmap.put("city_credit_rating_value_xpath", By.xpath("//*[@id='additionalCreditRatings']//*[@name='creditRatingValue']"));
-		hmap.put("city_delete_credit_rating_row_button_xpath", By.xpath(".//*[@id='additionalCreditRatings']//*[@class='delete-row']"));
+		hmap.put("city_delete_credit_rating_row_button_xpath", By.xpath(".//*[@id='additionalCreditRatings']//*[@class='delete-element']"));
 		hmap.put("city_delete_credit_rating_row_confirmation_modal_xpath", By.xpath("//*[@id='additionalCreditRatings']/tr[2]"));
 		hmap.put("city_credit_rating_agency_error_xpath", By.xpath("//*[@id='additionalCreditRatings']//*[@data-error_id='creditRatingAgencyError']"));
 		hmap.put("city_credit_rating_type_error_xpath", By.xpath("//*[@id='additionalCreditRatings']//*[@data-error_id='creditRatingTypeError']"));
@@ -83,7 +84,7 @@ public class CityIdentifiers {
 
 		// adding values for city names
 		hmap.put("city_names_full_name_xpath", By.xpath("//*[@id='additionalNames']//td[text() = 'Full Name']"));
-		hmap.put("city_names_full_name_value_xpath", By.xpath("//*[@id='additionalNames']//input[@name='fixedNameValue']"));
+		hmap.put("city_names_full_name_value_xpath", By.xpath("//*[@id='additionalNames']//input[@name='fixedName']"));
 		hmap.put("city_add_new_name_button_xpath", By.xpath("//*[@id='cityBasicInfo']//*[@id='add-names']"));
         hmap.put("city_name_type_input_xpath", By.xpath(".//*[@id='additionalNames']//*[@data-internal_id='nameType']"));
 		hmap.put("city_names_full_name_value_view_xpath", By.xpath("//*[@id='cityBasicInfo']//tr[td='Full Name']/td[2]"));
@@ -91,7 +92,7 @@ public class CityIdentifiers {
         hmap.put("city_name_value_input_xpath", By.xpath(".//*[@id='additionalNames']//*[@data-internal_id='nameValue']"));
         hmap.put("city_name_type_req_err_msg_xpath", By.xpath(("//*[@id='additionalNames']//*[@data-error_id='nameTypeError']")));
         hmap.put("city_name_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalNames']//*[@data-error_id='nameValueError']")));
-        hmap.put("city_delete_name_row_button_xpath", By.xpath(".//*[@data-row_id='names']//button[@class='delete-row']"));
+        hmap.put("city_delete_name_row_button_xpath", By.xpath(".//*[@data-row_id='names']//button[@class='delete-element']"));
         hmap.put("delete_names_row_confirmation_modal_xpath", By.xpath("//*[@id='additionalNames']/tr[3]"));
         
 		hmap.put("city_places_link_id", By.xpath("//*[@id='cityPlaces']"));
@@ -119,7 +120,7 @@ public class CityIdentifiers {
 		hmap.put("city_places_place_edit_xpath", By.xpath("//input[@id='relatedPlacePlace']"));
 		hmap.put("delete_row_confirmation_modal_relatedplace_xpath", By.xpath("//*[@colspan='10']"));
 		hmap.put("city_places_delete_button_xpath",
-				By.xpath(".//*[@data-row_id='relatedPlaces']//button[@class='delete-row']"));
+				By.xpath(".//*[@data-row_id='relatedPlaces']//button[@class='delete-element']"));
 		hmap.put("city_places_country_dropDown_list_xpath", By.xpath(".//*[@id='country_chosen']//li"));
 		hmap.put("city_places_area_dropDown_list_xpath", By.xpath(".//*[@id='area_chosen']//li"));
 		hmap.put("city_places_area_dropDown_list1_xpath", By.xpath(".//*[@id='area_chosen']//li[1]"));
@@ -130,6 +131,16 @@ public class CityIdentifiers {
 		hmap.put("city_get_relatedplace_detailsvalue_xpath", By.xpath("//*[@id='cityPlaces']//tr/td[3]"));
 		hmap.put("city_get_relatedplace_entirevalue_xpath", By.xpath("//*[@id='cityPlaces']//tbody"));
 		hmap.put("city_All_link_id", By.xpath("//*[@id='all']"));
+	    //city regions
+		hmap.put("city_region_type_identifier_dropdown_options_xpath", By.xpath(("//*[@id='cityRegions']//*[@id='regionType']/option")));
+		hmap.put("city_add_new_region_button_id", By.id("add-regions"));
+		hmap.put("city_region_type_dropdown_xpath", By.xpath(".//*[@id='regionType']"));
+		hmap.put("city_region_value_dropdown_xpath", By.xpath(".//select[@id='regionValue']"));
+		hmap.put("city_region_value_dropdown_option", By.xpath(".//select[@id='regionValue']/option"));
+		hmap.put("city_region_value_req_err_msg_xpath", By.xpath(("//*[@id='additionalRegions']//*[@data-error_id='regionValueError']")));
+		hmap.put("city_delete_region_row_button_xpath", By.xpath(".//*[@data-row_id='regions']//button[@class='delete-element']"));
+		hmap.put("city_region_table", By.xpath("//*[@id='cityRegions']//table"));
+
 	}
 
 	public static By getObjectIdentifier(String key) {

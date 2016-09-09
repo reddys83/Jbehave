@@ -4,7 +4,10 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
+import com.accuity.zeus.xml.XmlDocument;
+import com.accuity.zeus.xml.XmlDocumentLoader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +19,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -41,7 +50,6 @@ public abstract class AbstractPage {
     protected final RestClient restClient;
     public String bigString="";
     protected By contentLocator = By.xpath("//body/div[@id='content']");
-
 
     public AbstractPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         this.driver = driver;
@@ -149,7 +157,7 @@ public abstract class AbstractPage {
 
     public void waitForElementToAppear(By by) {
         try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), 15);
+            WebDriverWait wait = new WebDriverWait(getDriver(), 30);
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         } catch (org.openqa.selenium.NoSuchElementException e) {
         }
@@ -327,7 +335,64 @@ public abstract class AbstractPage {
         }
         return selectedValueList;
     }
-    
+
+    public XmlDocument getTestDataXml(String resource, String fileName){
+
+        URI filePath = null;
+        try {
+            filePath = getClass().getResource("/testdata/" + resource + "/" + fileName + ".xml").toURI();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return XmlDocumentLoader.loadDocumentFromFile(filePath);
+    }
+
+    public String getResourceURL(String resource, String fileName){
+        URI filePath = null;
+        try {
+            filePath = getClass().getResource("/testdata/" + resource + "/" + fileName + ".xml").toURI();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        Document document =  XmlDocumentLoader.getDocument(filePath);
+        return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("id").getNodeValue();
+    }
+
+    public void selectDropDownValueFromRowNumber(By by, String value, int rowNumber) {
+		try {
+			List<WebElement> dropdownValue = getDriver().findElements(by);
+			if (rowNumber <= dropdownValue.size()) {
+				Select dropdown = new Select(dropdownValue.get(rowNumber - 1));
+				if (value.equals("")) {
+					dropdown.selectByValue(value);
+				} else {
+					dropdown.selectByVisibleText(value);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+
+    public void selectTexBoxValueFromRowNumber(By by, String value, int rowNumber) {
+		try {
+			List<WebElement> textBoxValues = getDriver().findElements(by);
+			if (rowNumber <= textBoxValues.size()) {
+				textBoxValues.get(rowNumber - 1).clear();
+				textBoxValues.get(rowNumber - 1).sendKeys(value);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+    public String getDayLaterThanToday() throws ParseException {
+    	Format dateFormat = new SimpleDateFormat("dd");
+    	Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, 1);
+		return dateFormat.format(cal.getTime());
+	}
+
     public void selectItemFromDropdownListByindex(By by, int i) {
         try {
             Thread.sleep(3000L);
@@ -338,7 +403,7 @@ public abstract class AbstractPage {
         dropdown.selectByIndex(i);
 
     }
-    
+
     public void textToBePresentInElement(WebElement requiredMessage) {
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), 25);

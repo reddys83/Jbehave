@@ -86,7 +86,7 @@ public class LegalEntityPage extends AbstractPage {
     String legalEntity_boardMeeting_type_values_xpath = ("//li[h1='Board Meetings']//tr[td='");
     private By legalEntity_boardMeeting_header_xpath = By.xpath("//li[h1='Board Meetings'] //span");
     private By credit_rating_section_xpath = By.xpath("//li[h1='Credit Rating']");
-    private By office_link_xpath = By.id("office-link");
+    private By office_link_xpath = By.id("office-nav");
     private By legalEntity_leadinstitution_radio_options_xpath = By.xpath("//*[@id='legalEntityBasicInfo']//input[@name='leadInstitution']");
 
 
@@ -480,6 +480,15 @@ public class LegalEntityPage extends AbstractPage {
 
     public void verifyTrustPowerSectionNotExistsInAllPage(){
         assertFalse(getDriver().findElement(legalEntity_trustPowers_label_xpath).isDisplayed());
+    }
+
+    public void verifyServicesSection() {
+        assertTrue(getDriver().findElement(legalEntity_services_link_id).getAttribute("class").equals("selected"));
+    }
+
+    public void verifyAllOfficesLinkIsSelected(){
+        assertTrue(getDriver().findElement(office_link_xpath).getAttribute("class").equals("selected"));
+        assertTrue(getDriver().findElement(office_link_xpath).getText().equals("All Offices"));
     }
 
 

@@ -26,9 +26,9 @@ let $areaDoc := /area[@source = 'trusted'][summary/names/name[type = "Full Name"
 let $subareaDoc := /area[@source = $source][summary/names/name[type = "Full Name"]/value = $subarea][within/place/link/@href=$areaDoc/@resource]
 
 
-(: Get area and Subarea value :) 
-let $areavalue := ($areaDoc/summary/names/name[1]/value/text()) 
-let $subareavalue := ($subareaDoc/summary/names/name[1]/value/text()) 
+(: Get area and Subarea value :)
+let $areavalue := ($areaDoc/summary/names/name[1]/value/text())
+let $subareavalue := ($subareaDoc/summary/names/name[1]/value/text())
 
 (: Taking End Date :)        
 (: Taking Begin Date :)
@@ -40,6 +40,35 @@ let $DateFields :=
   (: Taking Add Info :)
  let $areaadditionalinfo := ($areaDoc/summary/additionalInfos/additionalInfo/text())
 
+  (: Taking Area Use In Address :)
+  let $areaUseInAddress := ($areaDoc/summary/useInAddress/text())
+
+  (: Taking Area Interest Rate :)
+  let $areaInterestRate := ($areaDoc/summary/maxConsumerRate/text())
+
+ (: Taking identifier List :)
+let $areaIdentifierList := for $x in ($areaDoc/summary/identifiers/identifier)
+  let $areaIdentifierType := $x/type/text()
+  let $areaIdentifierValue := ($x/value/text())
+  let $areaIdentifierStatus := ($x/status/text())
+return
+  <identifier>
+  <identifierType>{$areaIdentifierType} </identifierType>
+  <identifierValue>{$areaIdentifierValue} </identifierValue>
+  <identifierStatus>{$areaIdentifierStatus} </identifierStatus>
+  </identifier>
+
+(: Get summary and utc value :)
+let $utcList := for $x in ($areaDoc/summary/timeZones/zone)
+let $utc := $x/text()
+return
+ <utcValue>{$utc}</utcValue>
+
+let $summary := ($areaDoc/summary/timeZones/summaries/summary/text())
+
+return
+  <area>
+
   return
   <Area>
       { $areaDoc/summary/names }
@@ -47,12 +76,18 @@ let $DateFields :=
       <AdditionalInfo>{$areaadditionalinfo}</AdditionalInfo>
       <area>{$areavalue}</area>
       <subarea>{$subareavalue}</subarea>
-      <identifiers> {$areaIdentifierList} </identifiers> 
+      <identifiers> {$areaIdentifierList} </identifiers>
   </Area>
- 
+
   
 
   
   
   
-  
+
+      <identifiers>{$areaIdentifierList}</identifiers>
+	  <areaInterestRate>{$areaInterestRate}</areaInterestRate>
+	  <summary>{$summary}</summary>
+      <timeZoneUtc>{$utcList}</timeZoneUtc>
+	  <areaUseInAddress>{$areaUseInAddress}</areaUseInAddress>
+  </area>

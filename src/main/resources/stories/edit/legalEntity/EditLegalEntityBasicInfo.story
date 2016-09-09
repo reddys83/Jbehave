@@ -16,6 +16,7 @@ JIRA ID - ZEUS-86 - User can update a legal entity's type
 JIRA ID - ZEUS-919 - User can edit Legal Entity's Chartered Date
 JIRA ID - ZEUS-85 - User can update legal entity's insurance type
 JIRA ID - ZEUS-83 - User can update legal entity's ownership type
+JIRA ID - ZEUS-79 - User can update a legal entity's country of operations
 
 
 
@@ -27,10 +28,7 @@ Scenario: Verify the default Edit value and Save Lead Institution value for a le
        e. Do not select any value and Save for a legalEntity with a default value as null
        f. Verify the save confirmation modal
        g. Verify default Lead Institution value while editing the legal entity
-Meta:@run44
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -56,8 +54,6 @@ Examples:
 
 Scenario: Verify that the Lead Institution label is not shown during edit mode for a legal entity which do not have a lead Institution
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -72,8 +68,6 @@ Examples:
 Scenario:User will get warning if click away from screen they are editing
 Meta:
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -98,8 +92,6 @@ Examples:
 Scenario: User will see summary of changes made in confirmation modal
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -124,9 +116,6 @@ Examples:
 Scenario: Verifying error message displayed for wrong format of claimes est date
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -152,9 +141,6 @@ Examples:
 Scenario: Verifying user can update claimed est date in trusted and zeus document.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -184,9 +170,6 @@ Veriyfing if charter type values are updated in Zeus and Trusted documents.
 Verifying the options displayed for charter type are same as those in lookup document.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -210,8 +193,6 @@ Examples:
 
 Scenario: Verify Legal Entity's Status dropdown values from lookup Status in the same order as taxonomy
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -232,8 +213,6 @@ c)Type a matching text "p" in the status dropdown and verify that the status "Pe
 d)Type a unmatching text "x" in the status dropdown and verify that the previously selected status "Pending" is still selected.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -255,8 +234,6 @@ Examples:
 Scenario: User will see summary of changes made in confirmation modal when update the Legal Entity's status
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -283,8 +260,6 @@ c) Upate the status with the same existing value and verify the existing value i
 d) verify that the status can be changed to all 3 values active,inactive and pending
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -307,8 +282,6 @@ Examples:
 
 Scenario: Verify Legal Entity's Fatca Status dropdown values from lookup LEGAL_ENTITY_FATCA_STATUS in the same order as taxonomy
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -329,8 +302,6 @@ c)Type a matching text "Reporting" in the Fatca status dropdown and verify that 
 d)Type a unmatching text "xyz" in the Fatca status dropdown and verify that the previously selected Fatca status "Reporting Model 1 FFI" is still selected.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -352,8 +323,6 @@ Examples:
 Scenario: User will see summary of changes made for Fatca status in confirmation modal
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -380,8 +349,6 @@ c) Upate the Fatca status with the same existing value and verify the existing v
 d) verify that the Fatca status can be changed to different values and can be saved
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -406,8 +373,6 @@ Examples:
 Scenario: Verify that the Legal Entity's Fatca Status field is not a required field
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -424,9 +389,6 @@ Examples:
 
 Scenario: User can edit legal Entity's corporate statement
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -451,8 +413,6 @@ Examples:
 Scenario: Verify that the Legal Entity's Corporatea Action field max length is 10000 characters only.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -480,8 +440,6 @@ Scenario: Verify that the Legal Entity's Additional Info can be saved
     b. Save with same value as current
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -504,8 +462,6 @@ Examples:
 Scenario: Verify that the Legal Entity's Additional Info is not a required field and the value can be blank.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -525,8 +481,6 @@ Examples:
 Scenario: Verify that the Legal Entity's Additional Info field max length is 10000 characters only.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -555,8 +509,6 @@ Examples:
 
 Scenario: Verify for an existing row, Legal Entity's Entity Type dropdown values from lookup LEGAL_ENTITY_CATEGORY in the same order as taxonomy except those that have already been selected for this Legal Entity
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -572,8 +524,6 @@ Examples:
 Scenario: Verify for a new row, Legal Entity's Entity Type dropdown values from lookup LEGAL_ENTITY_CATEGORY in the same order as taxonomy except those that have already been selected for this Legal Entity
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -592,8 +542,6 @@ a) Select a non-Blank value and Save. Verify the value is saved in Zeus document
 b) Select a null value and Save. Verify that null value is not saved.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -624,8 +572,6 @@ a) Select a non-Blank value and Save. Verify the value is saved in Zeus document
 b) Select a null value and Save. Verify that null value is not saved.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -651,8 +597,6 @@ b) Verify that the user should get the confirmation window for deleting existing
 c) Verify that the user should get the confirmation window for deleting existing entity type rows and user clicks Yes button and row should be deleted
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -682,8 +626,6 @@ a) Verify that the user should get the confirmation window for deleting new enti
 b) Verify that the user should get the confirmation window for deleting new entity type rows and user clicks Yes button and row should be deleted
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -704,8 +646,6 @@ Examples:
 
 Scenario: Verify that the user should get the Required field message when saving an entity type value to null and that is the only entity type exists on the page.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -722,8 +662,6 @@ Examples:
 
 Scenario: Verify that the user should see the Required field message against the first row only when user enters null value for all the entity type rows - Bug - ZEUS-1138
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -740,8 +678,6 @@ Examples:
 Scenario: Verify that the user should NOT get the Required field message when user enters null value for all the entity type rows except one row
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -763,8 +699,6 @@ Examples:
 Scenario: ZEUS-77 - Verify the type dropDown from names in legalEntity basic info
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -789,8 +723,6 @@ Examples:
 Scenario: verify no required message for legalEntiy names type, value when both are null for a new row.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -810,8 +742,6 @@ Examples:
 Scenario: Verify the delete confirmation modal
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -834,8 +764,6 @@ Examples:
 Scenario: Verify the delete icon should not present for type Legal Title
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -850,8 +778,6 @@ Examples:
 Scenario: verify the length for value and user should see the validation error when user enters more than 200 charecters
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -870,9 +796,7 @@ Scenario: User updates Chartered date
 Verifying updated date is been is saved in zeus document.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
+
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -896,9 +820,7 @@ Scenario: User updates Chartered date
 Verifying error message displaying Enter a year, month/year or day/month/year. for invalid date entered.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
+
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -920,9 +842,6 @@ Scenario: User updates Chartered date
 Verifying error message displaying Invalid Date for invalid date entered.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -945,9 +864,6 @@ Scenario: User updates Insurance type
 Verifying the options displayed for insurance type are same as those in lookup document.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -964,9 +880,6 @@ Scenario: User updates Insurance type
 Verifying the value updated by user is reflected in Zeus document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -988,9 +901,6 @@ Scenario: User updates Ownership type
 Verifying the options displayed for Ownership type are same as those in lookup document.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -1007,9 +917,6 @@ Scenario: User updates Ownership type
 Verifying the value updated by user is reflected in Zeus document
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -1027,3 +934,129 @@ Examples:
 |1038|fid|1038|Government Bank|
 |1038|fid|1038||
 |1038|fid|1038|Corporate Bank|
+
+
+Scenario: (1) User is updating Legal Entity's Basic Info with existing data No different from current value- 
+1 - User verifies whether the current 'Country of Operations' value is same as in trusted document.
+2 - User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
+3 - User verifies Legal Entity Basic Info changes has not been updated in confirmation modal
+4 - User verifies Country of Operations value is updated correctly in UI and Zeus
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the legalEntity update link
+When the user gets the document with get Id for legalentity with the fid as <entity> from the database
+Then the user should see the legal entity's country of operations value same as in trusted document
+Then the user verifies that the country of operations value is sorted in alphabetical order
+When the user enters <countryOfOperations> in the country of operations drop down
+When the user clicks on the save button
+Then the user should not see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the legal entity page
+Then the user verifies the country of operations value in the legal entity basic info page
+Then the user should see the country of operations value same as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|countryOfOperations|
+|223191|FID|223191|Puerto Rico|
+
+Scenario: (2) User is updating a Legal Entity's Basic Info page - 
+1 - User selects 'UnKnown' for Country of Operations dropdown for a valid Legal Entity Type 
+2 - User selects 'No' in the warning message to prevent saving of 'Undefined' for Country of Operations
+3 - User selects 'Yes' in the warning message to save 'Undefined' for Country of Operations.
+4 - User verifies Country of Operations value is updated in UI and Zeus DB.
+5 - User changes the 'Undefined' value to valid country value for Country of Operations and verifies UI and Zeus DB. 
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the legalEntity update link
+When the user gets the document with get Id for legalentity with the fid as <entity> from the database
+When the user enters <countryOfOperations> in the country of operations drop down
+Then the user should see the warning message for legal entity's country of operations
+When the user clicks on the No button for legal entity's country of operations warning message
+Then the user should not see the newly added country of operations value in the legal entity basic info page
+When the user enters <countryOfOperations> in the country of operations drop down
+Then the user should see the warning message for legal entity's country of operations
+When the user clicks on the Yes button for legal entity's country of operations warning message
+Then the user should see the newly added country of operations value in the legal entity basic info page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the legal entity page
+Then the user verifies the country of operations value in the legal entity basic info page
+Then the user should see the country of operations value same as in zeus document
+When the user clicks on the legalEntity update link
+When the user enters <countryOfOperations2> in the country of operations drop down
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the legal entity page
+Then the user verifies the <countryOfOperations2> value in the legal entity basic info page
+Then the user should see the <countryOfOperations2> value same as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|countryOfOperations|countryOfOperations2|
+|951|FID|951|Unknown|USA|
+
+Scenario: (3) User is updating a Legal Entity's Basic Info page -
+1- User verifies 'Required' error message for Country of Operations dropdown if Legal Entity Type is from following values
+	Bank
+	Building Society
+	Co-operative Bank
+	Credit Union
+	Savings & Loan Association
+	Savings Bank.
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the legalEntity update link
+When the user enters <countryOfOperations> in the country of operations drop down
+When the user clicks on the save button
+Then the user should see the error message Required for country of operations dropdown in the legal entity basic info page
+
+Examples:
+|entity|searchBy|fid|countryOfOperations|
+|1717|FID|1717|Unknown|
+
+Scenario: (4) To update the Legal Entity`s 'Country of Opeartions' that is different from the current value
+1 - User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
+2 - User verifies confirmation modal has summary change
+3 - User verifies Country of Operations value is reflected in UI and Zeus
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the legalEntity update link
+When the user gets the document with get Id for legalentity with the fid as <entity> from the database
+When the user enters <countryOfOperations> in the country of operations drop down
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the legal entity page
+Then the user verifies the country of operations value in the legal entity basic info page
+Then the user should see the country of operations value same as in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|countryOfOperations|
+|951|FID|951|Brazil|

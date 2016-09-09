@@ -3,7 +3,11 @@ package com.accuity.zeus.aft.jbehave.pages;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -11,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -19,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 
 public class OfficesPage extends AbstractPage {
 
-    private String office_results_card_xpath = "//*[@id='data']//tr[td='";
+    private String office_results_card_xpath = "//*[@id='results']//tr[td='";
     private By office_personnel_link_id = By.id("officePersonnel");
     private By office_basic_info_link_id = By.id("officeBasicInfo");
     private By office_history_link_id = By.id("officeHistory");
@@ -121,11 +126,21 @@ public class OfficesPage extends AbstractPage {
         }
     }
 
-    public void verifyOfficesDepartmentTabsInOffice() {
+    public void verifyOfficesTabInOffice() {
         assertTrue(getDriver().findElement(office_tab_id).isDisplayed());
-        assertTrue(getDriver().findElement(office_department_tab_id).isDisplayed());
+
     }
 
+    public void verifyNoOfficeTabInOffice() {
+
+        try
+        {
+        assertFalse(getDriver().findElement(office_tab_id).isDisplayed());
+        }
+        catch (NoSuchElementException e){
+        }
+
+    }
     public void clickOnOfficeCreditRatingsLink() {
         attemptClick(office_credit_ratings_link_id);
     }
@@ -286,4 +301,75 @@ public class OfficesPage extends AbstractPage {
         return EOP;
     }
 
+    public void verifyPrincipalFlag(String principalFlag) {
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(principalFlag, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_principalFlag_view_name")).getText());
+    }
+
+    public void verifyPrincipalFlagInZeus(String principalFlag, String officeFid) {
+            try {
+                Thread.sleep(5000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            List<NameValuePair> zeusPairs = new ArrayList<>();
+            zeusPairs.add(new BasicNameValuePair("fid", officeFid));
+            zeusPairs.add(new BasicNameValuePair("source", "zeus"));
+            Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", zeusPairs);
+            assertEquals(principalFlag, document.getElementsByTagName("principalOffice").item(0).getTextContent());
+    }
+
+    public void checkStatisticsSectionNotExists(String fid){
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get LegalEntity statistics flag", nvPairs);
+        if(getNodeValuesByTagName(document, "flag").get(0).equals("false")) {
+            assertFalse(getDriver().findElement(office_statistics_link_id).isDisplayed());
+        }
+        else
+        {
+            assertFalse("Data Error...Please correct the data",true);
+        }
+
+    }
+
+    public void verifyStatisticsSectionNotExistsInAllPage(){
+        assertFalse(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("legalEntity_statistics_label_xpath")).isDisplayed());
+    }
+
+    public void verifyStatisticsSectionExistsInAllPage(){
+        assertTrue(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("legalEntity_statistics_label_xpath")).isDisplayed());
+    }
+
+    public void checkStatisticsSectionExists(String fid){
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "verify trust power section display", nvPairs);
+        if(getNodeValuesByTagName(document, "flag").get(0).equals("true")) {
+            assertTrue(getDriver().findElement(office_statistics_link_id).isDisplayed());
+        }
+        else
+        {
+            assertFalse("Data Error...Please correct the data",true);
+        }
+
+    }
 }

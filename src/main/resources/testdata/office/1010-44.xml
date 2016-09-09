@@ -1,0 +1,58 @@
+<office deleted="false" fid="1010-44" id="f9bad391-d68b-4a36-ba05-c561c5e80f33" resource="http://10.72.0.121:8080/heraapi/office/id/f9bad391-d68b-4a36-ba05-c561c5e80f33" source="zeus" tfpid="10383620-10354700" tfpuid="10600594">
+    <summary>
+        <institution>
+            <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/4a77cec3-529a-405b-bae9-b9b377fac255" rel="src"/>
+        </institution>
+        <status>inactive</status>
+        <types>
+            <type>Branch</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Bank Leumi USA</value>
+            </name>
+            <name>
+                <type>Office Name</type>
+                <value>HEWLETT BRANCH</value>
+            </name>
+            <officeTitleOverride>Bank Leumi Trust Company of New York</officeTitleOverride>
+            <officeSortKey>HEWLETT BRANCH</officeSortKey>
+        </names>
+        <dates>
+            <closed accuracy="day">2015-01-15</closed>
+        </dates>
+        <leadLocation>true</leadLocation>
+        <foreignOffice>false</foreignOffice>
+    </summary>
+    <locations>
+        <location primary="true">
+            <address fid="1010-50">
+                <link href="http://10.72.0.121:8080/heraapi/address/id/fa518796-49ee-4589-95ae-25d51207aae4" rel="src"/>
+                <type>physical</type>
+                <function>Branch Address</function>
+                <streetAddress>
+                    <addressLine1>1280 Broadway</addressLine1>
+                </streetAddress>
+                <city>
+                    <link href="http://10.72.0.121:8080/heraapi/city/id/10dba39f-94fd-4f39-ab09-1dfa6188813e" rel="src"/>
+                </city>
+                <subarea>
+                    <link href="http://10.72.0.121:8080/heraapi/area/id/1585b43d-67e0-4613-929f-3c20c22e0300" rel="src"/>
+                </subarea>
+                <area>
+                    <link href="http://10.72.0.121:8080/heraapi/area/id/8595edad-ba62-4273-bfb1-3835a56446cf" rel="src"/>
+                </area>
+                <country>
+                    <link href="http://10.72.0.121:8080/heraapi/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+                </country>
+                <postalCode position="afterArea">11557-2004</postalCode>
+            </address>
+        </location>
+    </locations>
+    <personnel>
+        <summaries>
+            <summary type="locationEmployees">0</summary>
+        </summaries>
+    </personnel>
+</office>

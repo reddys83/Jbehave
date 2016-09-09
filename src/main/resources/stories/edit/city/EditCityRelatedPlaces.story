@@ -151,7 +151,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|PlaceType|countryPlaces|areaPlaces|cityPlaces|PlaceDetails|PlaceType2|countryPlaces2|areaPlaces2|cityPlaces2|PlaceDetails2|
-|Tajikistan|Leninabadskaya Oblast|Gafurov|Capital City|Angola|Luanda|Palanca|Legislative Capital|Twin City|Bolivia|Beni|Trinidad|Judicial Capital|
+|Tajikistan|Leninabadskaya Oblast|Gafurov|Capital City|Angola|Luanda|Palanca|Legislative Capital|Twin City|Bolivia|Pando|Cobija|Judicial Capital|
 
 Scenario: 
 a)Verify whether user is able to update an existing  City Related place (no different to the current value) with same values successfully
@@ -372,20 +372,6 @@ And the user selects type value as <PlaceType> in the places for city
 When the user clicks on edit button in places for city
 And the user clicks on the country option in the places for city
 When the user enters the country <countryPlaces> in type-ahead box for city related places
-And the user clicks on area option in the places for city
-When the user enters area <areaPlaces> in the type-ahead box for city related places
-And the user clicks on city options in the places for city
-And the user enters city <cityPlaces> in the type-ahead box for city related places
-And the user clicks on go button in places for city
-And the user selects details value as <PlaceDetails> in the places for city
-And the user clicks on the save button
-Then the user should see the save confirmation modal
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the page
-When the user clicks on the update link
-When the user clicks on edit button in places for city
-When the user clicks on the country option in the places for city
-And the user enters the country <countryPlaces> in type-ahead box for city related places
 Then the user should see Go button enabled
 When the user clicks on go button in places for city
 Then the user should see place as Angola in places for city
@@ -397,6 +383,19 @@ When the user enters area <areaPlaces> in the type-ahead box for city related pl
 Then the user should see Go button enabled
 When the user clicks on go button in places for city
 Then the user should see place as Namibe in places for city
+When the user clicks on edit button in places for city
+When the user clicks on the country option in the places for city
+And the user enters the country <countryPlaces> in type-ahead box for city related places
+When the user clicks on area option in the places for city
+When the user enters area <areaPlaces> in the type-ahead box for city related places
+And the user clicks on city options in the places for city
+And the user enters city <cityPlaces> in the type-ahead box for city related places
+And the user clicks on go button in places for city
+And the user selects details value as <PlaceDetails> in the places for city
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
 Then the user reverts the changes to the document
 
 Examples:

@@ -897,6 +897,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
     public void verifyMaxLengthForOverrideTextField(@Named("maxlength") String maxlength,@Named("rowIdentifier") String rowIdentifier)
     {getEditLegalEntityPage().verifyMaxLengthForOverrideTextField(maxlength,rowIdentifier);}
 
+    @When("the user selects agency type $agencyTypeRowIdentifier value as <type>")
     public void selectCreditRatingsAgencyType(@Named("agencyTypeRowIdentifier") String agencyTypeRowIdentifier,@Named("type") String type)
     {getEditLegalEntityPage().selectCreditRatingsAgencyType(agencyTypeRowIdentifier,type);
     }
@@ -971,4 +972,218 @@ public class EditLegalEntitySteps extends AbstractSteps{
         getEditLegalEntityPage().verifyConfirmedDateErrorMessage(confirmedDateErrorMsg);
     }
 
-}
+
+    @When("the user clicks on delete legal entity board meetings row button for the row $deletebutton_Row")
+    public void clickonDeleteBoardMeetingsRowButton(String deletebutton_Row)
+    {
+        getEditLegalEntityPage().clickonDeleteBoardMeetingsRowButton(deletebutton_Row);
+    }
+    @Then("the user should see the trust power values as in $source document with fid <fid> in edit mode")
+    public void verifyTrustPowersInEditModeFromTrusted(@Named("source") String source,@Named("fid") String fid){
+        getEditLegalEntityPage().verifyTrustPowersInEditModeFromTrusted(source, fid);
+    }
+
+    @When("the user selects the trust powers granted value as <grantedValue>")
+    public void selectTrustPowersGrantedValue(@Named("grantedValue") String grantedValue)
+    {
+        getEditLegalEntityPage().selectTrustPowersGrantedValue(grantedValue);
+    }
+    @When("the user selects the trust powers granted value as <grantedValue1>")
+    public void selectTrustPowersGrantedValue1(@Named("grantedValue1") String grantedValue1)
+    {
+        getEditLegalEntityPage().selectTrustPowersGrantedValue(grantedValue1);
+    }
+    @When("the user selects the trust powers full value as <fullValue>")
+    public void selectTrustPowersFullValue(@Named("fullValue") String fullValue)
+    {
+        getEditLegalEntityPage().selectTrustPowersFullValue(fullValue);
+    }
+    @When("the user selects the trust powers used value as <usedValue>")
+    public void selectTrustPowersUsedValue(@Named("usedValue") String usedValue)
+    {
+        getEditLegalEntityPage().selectTrustPowersUsedValue(usedValue);
+    }
+    @When("the user enters the trust powers professional employees value as <profEmployees>")
+    public void enterTrustPowersProfessionalValue(@Named("profEmployees") String profEmployees)
+    {
+        getEditLegalEntityPage().enterTrustPowersProfessionalValue(profEmployees);
+    }
+    @When("the user enters the trust powers admin employees value as <adminEmployees>")
+    public void enterTrustPowersAdminEmployeesValue(@Named("adminEmployees") String adminEmployees)
+    {
+        getEditLegalEntityPage().enterTrustPowersAdminEmployeesValue(adminEmployees);
+    }
+    @When("the user enters the trust powers min account size value as <minacctSize>")
+    public void enterTrustPowersMinAccountSize(@Named("minacctSize") String minacctSize)
+    {
+        getEditLegalEntityPage().enterTrustPowersMinAccountSize(minacctSize);
+    }
+
+    @Then("the user should see trust power values as <grantedValue><fullValue><usedValue><profEmployees><adminEmployees><minacctSize> for fid <fid> in $source document")
+    public void verifyEditTrustPowerValuesInZeusDocument(@Named("grantedValue") String grantedValue,@Named("fullValue") String fullValue,
+                                                         @Named("usedValue") String usedValue,@Named("profEmployees") String profEmployees,
+                                                         @Named("adminEmployees") String adminEmployees,
+                                                         @Named("minacctSize") String minacctSize,@Named("fid") String fid,
+                                                         @Named("source") String source
+                                                         ){
+        getEditLegalEntityPage().verifyEditTrustPowerValuesInZeusDocument(grantedValue,fullValue,usedValue,profEmployees,adminEmployees,minacctSize,fid,source);
+    }
+
+    @Then("the user should see the other trust power fields in disabled state")
+    public void verifyTrustPowerFieldsStatus(){
+        getEditLegalEntityPage().verifyTrustPowerFieldsStatus();
+    }
+    @Then("the user should see the other trust power fields in enabled state")
+    public void verifyTrustPowerFieldsEnabledStatus(){
+        getEditLegalEntityPage().verifyTrustPowerFieldsEnabledStatus();
+    }
+
+    @Then("the user should see the $status trust power values same as in $source document with fid <fid> in edit mode")
+    public void verifyDisabledTrustPowersFromTrusted(@Named("source") String source,@Named("fid") String fid){
+        getEditLegalEntityPage().verifyDisabledTrustPowersFromTrusted(source, fid);
+    }
+
+    @Then("the user verifies the trust powers professional employees value maxlength is $maxSize")
+    public void verifyMaxLengthForTrustedPowersProfessionalEmployees(String maxSize)
+    {getEditLegalEntityPage().verifyMaxLengthForTrustedPowers("legalEntity_edit_trustpowers_professional_textbox",maxSize);
+
+    }
+
+    @Then("the user verifies the trust powers admin employees value maxlength is $maxSize")
+    public void verifyMaxLengthForTrustedPowersAdminEmployees(String maxSize)
+    {getEditLegalEntityPage().verifyMaxLengthForTrustedPowers("legalEntity_edit_trustpowers_admin_textbox",maxSize);
+
+    }
+    @Then("the user verifies the trust powers min account size value maxlength is $maxSize")
+    public void verifyMaxLengthForTrustedPowersMinAcctSize(String maxSize)
+    {
+        getEditLegalEntityPage().verifyMaxLengthForTrustedPowers("legalEntity_edit_trustpowers_minAccountSize_textbox",maxSize);
+    }
+
+    @Then("the user should see the error message $errMsg for prof Employees field")
+    public void verifyErrorMsgForprofEmployee(@Named("errMsg") String errMsg)
+    {
+        getEditLegalEntityPage().verifyErrorMsgForTrustPowers("legalEntity_trustPower_Professional_error_message_xpath",errMsg);
+    }
+    @Then("the user should see the error message $errMsg for prof Admin field")
+    public void verifyErrorMsgForprofAdmin(@Named("errMsg") String errMsg)
+    {
+        getEditLegalEntityPage().verifyErrorMsgForTrustPowers("legalEntity_trustPower_admin_error_message_xpath",errMsg);
+    }
+    @Then("the user should see the error message $errMsg for min account size field")
+    public void verifyErrorMsgForminAccountSize(@Named("errMsg") String errMsg)
+    {
+        getEditLegalEntityPage().verifyErrorMsgForTrustPowers("legalEntity_trustPower_MinAccountSize_error_message_xpath",errMsg);
+    }
+
+
+    @Then("the user should not see boardmeetings values for fid <fid> in $source document as: $boardMeetings")
+    public void verifyEditLegalEntityBoardMeetingsValuesNotExistInZeus(@Named("boardMeetings") ExamplesTable boardMeetings,@Named("fid") String fid,@Named("source") String source)
+    {
+        getEditLegalEntityPage().verifyEditLegalEntityBoardMeetingsValuesNotExistInZeus(boardMeetings,fid,source);
+    }
+
+    @Then("the user should not see the board meeting row in the basic info legal entity page")
+    public void verifyNewlyAddedBoardMeetingRowIsNotDisplayed() throws Exception {
+        getEditLegalEntityPage().verifyNewlyAddedBoardMeetingRowIsNotDisplayed();
+    }
+    
+    @Then("the user should see the legal entity's country of operations value same as in $source document")
+	public void verifyCountryOfOperationsFromTrustedDB(@Named("fid") String fid, @Named("source") String source) {
+		getEditLegalEntityPage().verifyCountryOfOperationsFromTrustedDB(fid, source, "value");
+	}
+
+	@Then("the user verifies that the country of operations value is sorted in alphabetical order")
+	public void verifyCountryOfOperationsList(@Named("fid") String fid) {
+		getDataPage().attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
+		getEditLegalEntityPage().verifyLookUpValues("country list", "value", fid);
+	}
+
+	@When("the user enters <countryOfOperations> in the country of operations drop down")
+	public void enterCountryOfOperationsDropDownValue(@Named("countryOfOperations") String countryOfOperations) {
+		getDataPage().attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
+		getDataPage().enterValueInTypeHeadDropDown(LegalEntityIdentifiers
+				.getObjectIdentifier("legalEntity_country_of_operations_type_ahead"),countryOfOperations);
+	}
+
+	@Then("the user verifies the country of operations value in the legal entity basic info page")
+	public void verifyCountryOfOperationsUIViewMode(@Named("countryOfOperations") String countryOfOperations) {
+		if (countryOfOperations.equals("Unknown")) {
+			countryOfOperations = "";
+		}
+		getDataPage().verifyWebElementText("Country Of Operations", 
+				countryOfOperations, LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_view_mode"));
+	}
+
+	@Then("the user should see the successful update message at top of the legal entity page")
+	public void verifySuccessfulUpdatedMessage() {
+		setEditCityPage(getDataPage().createEditCityPage());
+		getEditCityPage().verifySuccessfulUpdatedMessage();
+	}
+
+	@Then("the user should see the country of operations value same as in $source document")
+	public void verifyCountryOfOperationsFromZeusDB(@Named("fid") String fid,
+			@Named("countryOfOperations") String countryOfOperations, @Named("source") String source) {
+		if (countryOfOperations.equals("Unknown")) {
+			countryOfOperations = "";
+		}
+		getEditLegalEntityPage().verifyCountryOfOperationsFromZeusDB(fid, countryOfOperations, source, "value");
+	}
+
+	@Then("the user should see the error message $errorMessage for country of operations dropdown in the legal entity basic info page")
+	public void verifyErrorMessageForCountryOfOperations(@Named("errorMessage") String errorMessage) {
+		getDataPage().verifyWebElementText("Country Of Operations", errorMessage, LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_error_message"));
+	}
+
+	@Then("the user should see the warning message for legal entity's country of operations")
+	public void verifyCountryOfOperationsWarningMessage() {
+		getEditLegalEntityPage().verifyCountryOfOperationsWarningMessage();
+	}
+
+	@When("the user clicks on the No button for legal entity's country of operations warning message")
+	public void clickOnWarningMessageNoButton() {
+		getDataPage().attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_no_button"));
+	}
+
+	@Then("the user should not see the newly added country of operations value in the legal entity basic info page")
+	public void verifyCountryOfOperationsIsNotUpdated(@Named("countryOfOperations") String countryOfOperations) {
+		getEditLegalEntityPage().verifyCountryOfOperationsIsNotUpdated(countryOfOperations);
+	}
+
+	@When("the user clicks on the Yes button for legal entity's country of operations warning message")
+	public void clickOnWarningMessageYesButton() {
+		getDataPage().attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_warning_message_yes_button"));
+	}
+
+	@Then("the user should see the newly added country of operations value in the legal entity basic info page")
+	public void verifyEnteredCountryOfOperationsValueInUI(@Named("countryOfOperations") String countryOfOperations) {
+		getDataPage().verifyWebElementText("Country Of Operations", countryOfOperations, 
+				LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
+	}
+	
+	@When("the user enters <countryOfOperations2> in the country of operations drop down")
+	public void enterCountryOfOperationsDropDownValue2(@Named("countryOfOperations2") String countryOfOperations) {
+		getDataPage().attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
+		getDataPage().enterValueInTypeHeadDropDown(LegalEntityIdentifiers
+				.getObjectIdentifier("legalEntity_country_of_operations_type_ahead"),countryOfOperations);
+	}
+	
+	@Then("the user verifies the <countryOfOperations2> value in the legal entity basic info page")
+	public void verifyCountryOfOperationsUIViewMode2(@Named("countryOfOperations2") String countryOfOperations) {
+		if (countryOfOperations.equals("Unknown")) {
+			countryOfOperations = "";
+		}
+		getDataPage().verifyWebElementText("Country Of Operations", 
+				countryOfOperations, LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_view_mode"));
+	}
+	
+	@Then("the user should see the <countryOfOperations2> value same as in $source document")
+	public void verifyCountryOfOperationsFromZeusDB2(@Named("fid") String fid,
+			@Named("countryOfOperations2") String countryOfOperations, @Named("source") String source) {
+		if (countryOfOperations.equals("Unknown")) {
+			countryOfOperations = "";
+		}
+		getEditLegalEntityPage().verifyCountryOfOperationsFromZeusDB(fid, countryOfOperations, source, "value");
+	}
+    
+  }

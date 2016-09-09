@@ -66,12 +66,12 @@ public class CountryPage extends AbstractPage {
     private By country_name_value_required_err_msg_xpath = By.xpath("//tr[td = 'Country Name']/td[2]/p");
     private By country_names_type_required_err_msg_xpath = By.xpath("//*[@id='additionalNames']/tr/td[1]/p");
     private By country_names_value_required_err_msg_xpath = By.xpath("//*[@id='additionalNames']/tr/td[2]/p");
-    private By country_delete_timeZone_new_row_button_xpath = By.xpath(".//*[@data-row_id='timeZones']//button[@class='delete-row']");
-    private By country_delete_identifiers_row_button_xpath = By.xpath(".//*[@data-row_id='identifiers']//button[@class='delete-row']");
-    private By country_delete_names_row_button_xpath = By.xpath(".//*[@data-row_id='names']//button[@class='delete-row']");
-    private By country_delete_holidays_row_button_xpath = By.xpath(".//*[@data-row_id='holidays']//button[@class='delete-row']");
-    private By country_delete_Iban_new_row_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='ibans']//button[@class='delete-row']");
-    private By country_delete_routingCode_new_row_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='codeTypes']//button[@class='delete-row']");
+    private By country_delete_timeZone_new_row_button_xpath = By.xpath(".//*[@data-row_id='timeZones']//button[@class='delete-element']");
+    private By country_delete_identifiers_row_button_xpath = By.xpath(".//*[@data-row_id='identifiers']//button[@class='delete-element']");
+    private By country_delete_names_row_button_xpath = By.xpath(".//*[@data-row_id='names']//button[@class='delete-element']");
+    private By country_delete_holidays_row_button_xpath = By.xpath(".//*[@data-row_id='holidays']//button[@class='delete-element']");
+    private By country_delete_Iban_new_row_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='ibans']//button[@class='delete-element']");
+    private By country_delete_routingCode_new_row_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='codeTypes']//button[@class='delete-element']");
     private By country_delete_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
     private By country_delete_no_button_id = By.id("no-button");
     private By country_delete_yes_button_id = By.id("yes-button");
@@ -141,7 +141,7 @@ public class CountryPage extends AbstractPage {
     private By countryBasicInfo_bankingHours_existing_day_dropdown_values_xpath = By.xpath(".//*[@data-row_id='businessHours']//select[@name='bankingDay']/option[@selected='selected']");
     private By countryBasicInfo_bankingHours_startHour_dropdown_xpath = By.xpath(".//*[@class='new'][@data-row_id='businessHours']//select[@name='bankingHour0']/option");
     private By countryBasicInfo_bankingHours_endHour_dropdown_xpath = By.xpath(".//*[@class='new'][@data-row_id='businessHours']//select[@name='bankingHour1']/option");
-    private By countryBasicInfo_bankingHours_delete_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='businessHours']//button[@class='delete-row']");
+    private By countryBasicInfo_bankingHours_delete_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='businessHours']//button[@class='delete-element']");
 
     private By language_summary_textarea_xpath = By.xpath("//*[@data-edit_id='languages']");
 
@@ -206,7 +206,7 @@ public class CountryPage extends AbstractPage {
     private By country_payments_new_iban_row_xpath = By.xpath("//*[@id='additionalIbans']/tr[@class='new']");
     private By country_payments_new_routing_code_row_xpath = By.xpath("//*[@id='additionalCodeTypes']/tr[@class='new']");
     private By countryBasicInfo_Add_demographics_button_edit_id = By.id("add-demographics");
-    private By countryBasicInfo_Delete_demographics_button_edit_id = By.xpath(".//*[@class='new'][@data-row_id='demographics']//button[@class='delete-row']");
+    private By countryBasicInfo_Delete_demographics_button_edit_id = By.xpath(".//*[@class='new'][@data-row_id='demographics']//button[@class='delete-element']");
     private By countryBasicInfo_demographics_date_year_edit_xpath = By.xpath(".//*[@class='new'][@data-row_id='demographics']//input[@name='demographicDate-year']");
     private By countryBasicInfo_demographics_date_day_edit_xpath = By.xpath(".//*[@class='new'][@data-row_id='demographics']//input[@name='demographicDate-day']");
     private By countryBasicInfo_demographics_date_month_edit_xpath = By.xpath(".//*[@class='new'][@data-row_id='demographics']//select[@name='demographicDate-month']");
@@ -228,19 +228,19 @@ public class CountryPage extends AbstractPage {
     private By country_sepaRegion_value_xpath = By.xpath(".//*[@id='additionalRegions']//fieldset");
     private By country_region_type_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='regionTypeError']");
     private By country_region_value_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='regionValueError']");
-    private By country_region_delete_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='regions']//button[@class='delete-row']");
+    private By country_region_delete_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='regions']//button[@class='delete-element']");
     String country_regions_new_type_xpath = ".//*[@id='additionalRegions']/tr[@class='new']/td[1]/select";
     String country_trading_region_value_dropdown_xpath = ".//*[@id='additionalRegions']//select[@data-error_id='tradingRegionValue']";
     String country_region_value_dropdown_xpath = ".//*[@id='additionalRegions']//select[@data-error_id='regionValue']";
     private By country_banking_hrs_day_list_xpath = By.xpath("//*[@class='new'] //*[@id='bankingDay-select']");
     private By country_banking_hrs_start_time_list_xpath = By.xpath("//*[@class='new'] //*[@data-error_ref_id='bankingHour0Error']");
     private By country_banking_hrs_end_time_list_xpath = By.xpath("//*[@class='new'] //*[@data-error_ref_id='bankingHour1Error']");
-    private By country_banking_hours_row_delete_button_xpath = By.xpath(".//*[@id='additionalBusinessHours']//button[@class='delete-row']");
+    private By country_banking_hours_row_delete_button_xpath = By.xpath(".//*[@id='additionalBusinessHours']//button[@class='delete-element']");
     private By country_banking_hours_delete_row_confirmation_modal_xpath = By.xpath("//*[@colspan='10']");
     private By country_bankingHours_rows_xpath= By.xpath(".//*[@id='countryBasicInfo']//*[@data-row-id='businessHours']");
     private By country_places_go_button_xpath = By.xpath(".//*[@id='multiSelectRow']/button");
     private By country_places_required_error_message_xpath = By.xpath(".//*[@class='notification error'][@data-error_id='relatedPlacePlaceError']");
-    private By country_places_delete_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='relatedPlaces']//button[@class='delete-row']");
+    private By country_places_delete_button_xpath = By.xpath(".//*[@class='new'][@data-row_id='relatedPlaces']//button[@class='delete-element']");
     private By country_places_place_edit_xpath = By.xpath(".//*[@class='new']/td/input[@id='relatedPlacePlace']");
     private By country_places_place_edit_button_xpath = By.xpath(".//tr[@class='new']//button[@class='edit-row']");
     private By country_places_existing_place_edit_button_xpath = By.xpath(".//tr//button[@class='edit-row']");
@@ -284,9 +284,6 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyCountryCurrencies(ExamplesTable countryCurrencies) {
-        if (SearchPage.selectedEntity != "") {
-            selectedCountry = SearchPage.selectedEntity;
-        }
         assertTrue(getDriver().findElement(country_currencies_label_xpath).getText().matches("^CURRENCIES FOR " + selectedCountry.toUpperCase() + ".*$"));
         assertEquals("ISO NAME START DATE END DATE PRIMARY REPLACED BY STATUS", getDriver().findElement(country_currencies_table_headings_xpath).getText());
         List<WebElement> iso = getDriver().findElements(country_currencies_iso_xpath);
@@ -945,7 +942,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyErrorMessageForCountryName() {
-        assertEquals("Required", getDriver().findElement(country_name_value_required_err_msg_xpath).getText());
+        assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_name_value_required_err_msg_xpath).getText());
     }
 
     public void verifyErrorMessageForRequiredNameType() {
@@ -953,7 +950,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyErrorMessageForRequiredIdentifierValue() {
-        assertEquals("Required", getDriver().findElement(country_identifier_value_err_msg_xpath).getText());
+        assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_identifier_value_err_msg_xpath).getText());
     }
 
     public void clickOnAddDemographicsButton() {
@@ -1047,7 +1044,7 @@ public class CountryPage extends AbstractPage {
         getDriver().findElement(By.xpath(country_places_area_dropdown_xpath + "//input")).sendKeys(AreaPlaces);
         getDriver().findElement(By.xpath(country_places_area_dropdown_xpath + "//input")).sendKeys(Keys.RETURN);
         try {
-            Thread.sleep(2000L);
+            Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -1056,6 +1053,7 @@ public class CountryPage extends AbstractPage {
     public void selectsCityInPlacesForCountry(String cityPlaces) {
         getDriver().findElement(By.xpath(country_places_city_dropdown_xpath + "//input")).sendKeys(cityPlaces);
         getDriver().findElement(By.xpath(country_places_city_dropdown_xpath + "//input")).sendKeys(Keys.RETURN);
+        waitForElementToAppear(By.xpath("//*[@id='city_chosen']/a/span[text()='"+cityPlaces+"']"));
     }
 
     public void verifyPlaceInPlacesForCountry(String place) {
@@ -1305,7 +1303,7 @@ public class CountryPage extends AbstractPage {
     }
 
     public void verifyErrorMessageForRequiredValueType() {
-        assertEquals("Required", getDriver().findElement(country_names_value_required_err_msg_xpath).getText());
+        assertEquals("Enter up to 50 valid characters.", getDriver().findElement(country_names_value_required_err_msg_xpath).getText());
     }
 
     public void verifyNewlyAddedNameRowIsDisplayed() {

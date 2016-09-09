@@ -89,7 +89,9 @@ public class XqueryMap {
 		queryMap.put("get city basic info","getCityBasicInfo.xqy");
         queryMap.put("get office basic info","getOfficeBasicInfo.xqy");
         queryMap.put("get id for offices", "getIdForOffices.xqy");
-
+        queryMap.put("get Office Telecoms Types", "getOfficeTelecomsTypeFromLookup.xqy");
+        queryMap.put("get Office Address Types", "getOfficeAddressTypesFromLookup.xqy");
+        queryMap.put("get Office Locations", "getOfficeLocations.xqy");
 		queryMap.put("get city places type lookup","getCityRelatedPlacesTypeFromLookup.xqy");
 		queryMap.put("get city places detail lookup","getCityRelatedPlacesDetailsFromLookup.xqy");
 		queryMap.put("get city related place info","getCityRelatedPlaces.xqy");
@@ -97,7 +99,6 @@ public class XqueryMap {
         queryMap.put("get LegalEntity personnel", "getLegalEntityPersonnel.xqy");
         queryMap.put("get LegalEntity IdentifierTypes From Lookup","getLegalEntityIdentifierTypesFromLookup.xqy");
         queryMap.put("get LegalEntity IdentifierStatus From Lookup","getLegalEntityIdentifierStatusFromLookup.xqy");
-		queryMap.put("get area basic info","getAreaBasicInfo.xqy");
         queryMap.put("get city credit look up values","getCityCreditRatingLookUpValues.xqy");
         queryMap.put("get LegalEntity OwnershipType From Lookup","getLegalEntityOwnershipSummariesFromLookup.xqy");
 		queryMap.put("get city basic info","getCityBasicInfo.xqy");
@@ -108,9 +109,30 @@ public class XqueryMap {
         queryMap.put("get city name types","getCityNameTypes.xqy");
 		queryMap.put("get area Status types","getCityStatusTypes.xqy");
 		queryMap.put("get areastatus","getAreaStatus.xqy");
-		queryMap.put("get area basic info","getAreaBasicInfo.xqy");		
+		queryMap.put("get area name types","getAreaNameTypes.xqy");
+		queryMap.put("get area basic info","getAreaBasicInfo.xqy");
 		queryMap.put("active office test list","getActiveOfficeFidTest.xqy");
+		queryMap.put("get area identifiers","getCountryIdentifiers.xqy");
+        queryMap.put("get offices office types","getOfficesOfficeTypes.xqy");
+        queryMap.put("get office name types from lookup","getOfficeNameTypesFromLookup.xqy");
+        queryMap.put("get office identifiers values", "getOfficeIdentifiers.xqy");
+		queryMap.put("get office identifiers type list", "getOfficeIdentifiersTypesFromLookup.xqy");
+		queryMap.put("get office Status types", "getCityStatusTypes.xqy");
+        queryMap.put("get area timezones","getCountryTimeZone.xqy");
+        queryMap.put("get city region types","getCityRegionTypes.xqy");
+		queryMap.put("get city region values","getCityRegionValues.xqy");
+		queryMap.put("get office personnel values", "getOfficePersonnel.xqy");
+		queryMap.put("get office personnel type list", "getLegalEntityPersonnelTypesFromLookup.xqy");
+		queryMap.put("get office history details","getOfficeHistory.xqy");
+		queryMap.put("get office statistics values","getOfficeStatisticsValues.xqy");
+		queryMap.put("get office service category list","getOfficeServiceCategoryFromLookup.xqy");
+		queryMap.put("get office service values","getOfficeServiceValues.xqy");
+		queryMap.put("get area region types","getAreaRegionTypes.xqy");
+		queryMap.put("get area region values","getAreaRegionValues.xqy");
+		queryMap.put("get area regions list","getAreaRegionList.xqy");
+		queryMap.put("get area credit ratings", "getAreaCreditRatingValues.xqy");
 		queryMap.put("get document id for subarea","getIdForSubArea.xqy");
+        queryMap.put("get Id for area", "getIdForArea.xqy");
    }
 
     public String getXquery(String key){

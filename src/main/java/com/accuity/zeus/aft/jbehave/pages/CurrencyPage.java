@@ -72,7 +72,7 @@ public class CurrencyPage extends AbstractPage {
     private By currency_use_table_additional_use_primary_edit_xpath = By.xpath("//*[@id='additionalCurrencyUses']/tr[@class='new'] //fieldset/input[@checked]");
     private By currency_use_table_additional_use_status_xpath = By.xpath("//*[@id='additionalCurrencyUses']/tr[@class='new']/td[@class='status']");
     private By currency_add_country_list_xpath = By.xpath("//*[@id='add_currencyUses_chosen'] //ul/li");
-    private By currency_use_table_delete_use_option_xpath = By.xpath("//*[@id='additionalCurrencyUses']/tr[@class='new']/td[@class='delete']/button[@class='delete-row']");
+    private By currency_use_table_delete_use_option_xpath = By.xpath("//*[@id='additionalCurrencyUses']/tr[@class='new']/td[@class='delete']/button[@class='delete-element']");
     private By currency_use_table_additional_use_row_xpath = By.xpath("//*[@id='additionalCurrencyUses']/tr[@class='new']");
     private By labels_xpath = By.xpath("//*[@id='selection']/fieldset/h1");
     private By no_results_match_xpath = By.xpath("//*[@id='entitySelect_chosen']/div/ul/li");
@@ -644,6 +644,7 @@ public class CurrencyPage extends AbstractPage {
         }
         getDriver().findElement(currency_input_xpath).sendKeys(currency);
         getDriver().findElement(currency_input_xpath).sendKeys(Keys.RETURN);
+        waitForElementToAppear(By.xpath("//*[@id='entitySelect_chosen']/a/span[text()='"+currency+"']"));
         return new CurrencyPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 

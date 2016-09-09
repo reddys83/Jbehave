@@ -24,10 +24,11 @@ public class SearchPage extends AbstractPage {
 	private By logout_link_id = By.id("logout");
 	private By settings_icon_id = By.cssSelector("#user-menu>span");
 	private Utils utils = new Utils();
-	private By admin_tab_xpath = By.xpath("//header/nav[1]/ul/li[5]");
+	private By admin_tab_xpath = By.xpath("//header/nav[1]/ul/li[4]");
 	private By search_field_xpath = By.xpath(".//header/form/select[@name='idType']");
 	private By search_button_id = By.id("search-button");
-	private By data_tab_xpath = By.xpath("//header/nav[1]/ul/li[1]");
+	private By data_tab_xpath = By.xpath("//header/nav[1]/ul/li[2]");
+	private By results_tab_xpath = By.xpath("//*[@id='results-nav']");
 	private By legalEntity_type_ahead_xpath = By.xpath(".//*[@id='main-header']//input[2]");
 	private By legalEntity_search_option_type_dropdown_id= By.id("search-type");
 	private By legalEntity_search_button_id=By.id("search-button");
@@ -69,6 +70,17 @@ public class SearchPage extends AbstractPage {
         getDriver().findElement(result_link_id).click();
         return new ReportPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
+
+	public ResultsPage clickOnResultsTab(){
+		getDriver().findElement(results_tab_xpath).click();
+		try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return new ResultsPage(getDriver(), getUrlPrefix(),getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
+
+	}
 
 	public LoginPage clickOnLogout() {
 		if(!getDriver().getCurrentUrl().contains("#login")) {

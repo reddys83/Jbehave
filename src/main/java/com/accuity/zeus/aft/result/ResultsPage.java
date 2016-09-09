@@ -7,6 +7,7 @@ import com.accuity.zeus.aft.jbehave.pages.AbstractPage;
 import com.accuity.zeus.aft.jbehave.pages.DataPage;
 import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 import com.accuity.zeus.aft.rest.RestClient;
+import com.accuity.zeus.utils.SimpleCacheManager;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import junit.framework.Assert;
 import org.apache.http.NameValuePair;
@@ -55,7 +56,7 @@ public class ResultsPage extends AbstractPage {
     private By address_locator_xpath = By.xpath("//*[@id='search-results-items']/li/div/p");
     private By status_locator_xpath = By.xpath("//*[@id='search-results-items']/li/dl[3]/dd");
     private By status_label_locator_xpath = By.xpath("//*[@id='search-results-items']/li/dl[3]/dt");
-
+    private By no_search_results_msg_xpath = By.xpath("//*[@id='search-results-summary']/h1/header/p");
     private By office_search_results_table_head_xpath = By.xpath("//*[@id='subEntityList-list']//thead//tr");
     private By office_label_xpath = By.xpath("//*[@id='subEntityList-summary']//h1/span");
     private By office_id_locator_xpath = By.xpath("//*[@id='subEntityList-list']//tbody/tr/td[1]");
@@ -113,14 +114,15 @@ public class ResultsPage extends AbstractPage {
     private By office_search_refine_results_searchBox_xpath = By.xpath("//input[@id='refine-input']");
     private By office_addressList_locator_xpath = By.xpath(".//*[@class='search-results-module'] //td[3]");
     private By office_search_total_number_of_results_xpath = By.xpath("//*[@id='subEntityList-header']");
+    private By results_tab_xpath = By.xpath("//*[@id='results-nav']");
 
 
-    public ResultsPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi ) {
-        super(driver, urlPrefix,database, apacheHttpClient, restClient, heraApi);
+    public ResultsPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
+        super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
     public ResultsPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi, String entity, String field, String value) {
-        this(driver, urlPrefix, database, apacheHttpClient,restClient, heraApi);
+        this(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
         this.entity = entity;
         this.field = field;
         this.value = value;
@@ -250,6 +252,31 @@ public class ResultsPage extends AbstractPage {
 
     public void verifySearchResults() {
         getDriver().findElement(legalEntity_search_results_xpath).isDisplayed();
+        saveTheResultsAndCurrentURLToCache();
+    }
+
+
+    public void saveTheResultsAndCurrentURLToCache() {
+    List<String> fids = new ArrayList<>();
+    List<WebElement> elements = getDriver().findElements(fid_locator_xpath);
+    for(WebElement element:elements)
+        fids.add(element.getText());
+
+    SimpleCacheManager.getInstance().put("legalEntityFIDs",fids);
+    SimpleCacheManager.getInstance().put("currentURL",getDriver().getCurrentUrl());
+
+}
+    public void compareURLAndSearchResults(){
+        assertEquals(SimpleCacheManager.getInstance().get("currentURL").toString(),getDriver().getCurrentUrl());
+        List<WebElement> elements=getDriver().findElements(fid_locator_xpath);
+        List<String> fids=new ArrayList<>();
+        for (WebElement element:elements)
+        {
+            fids.add(element.getText());
+        }
+        List<WebElement> previousSeacrhResultsFidsList=(List)SimpleCacheManager.getInstance().get("legalEntityFIDs");
+        assertTrue(fids.equals(previousSeacrhResultsFidsList));
+
     }
 
     public void verifyLegalEntitySearchResultsCards(ExamplesTable legalEntitySearchResults) {
@@ -346,28 +373,30 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void navigateToOfficeLastSearchResultsPage() {
+       // String currentPageNumber=getDriver().findElement(office_search_results_current_page_xpath).getText();
        attemptClick(office_search_results_last_page_xpath);
         waitForElementToDisappear(By.id("loader"));
+       // waitForElementToDisappear(By.xpath("//*[@id='pages-navigation-list']//li[@class='current-page' and text()='"+currentPageNumber+"']"));
     }
 
     public void verifySearchResultsNavigation() {
         if (Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) > 7) {
             if (Integer.parseInt(getOfficeSearchResultsCurrentPage()) <= 4) {
-                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 2 3 4 5 … " + getOfficeSearchResultsLastNavigationPage() + " Next");
+                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), ("Previous 1 2 3 4 5 … " + getOfficeSearchResultsLastNavigationPage() + " Next"));
             } else if((Integer.parseInt(getOfficeSearchResultsCurrentPage()) >= 5)
                     && Integer.parseInt(getOfficeSearchResultsCurrentPage()) < (Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 3)) {
-                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 … " +
+                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), ("Previous 1 … " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsCurrentPage()) - 1) + " " +
                         getOfficeSearchResultsCurrentPage() + " " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsCurrentPage()) + 1) + " … " +
-                        getOfficeSearchResultsLastNavigationPage() + " Next");
+                        getOfficeSearchResultsLastNavigationPage() + " Next"));
             } else {
-                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), "Previous 1 … " +
+                assertEquals(getDriver().findElement(office_search_results_navigation_xpath).getText(), ("Previous 1 … " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 4) + " " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 3) + " " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 2) + " " +
                         Integer.toString(Integer.parseInt(getOfficeSearchResultsLastNavigationPage()) - 1) + " " +
-                        getOfficeSearchResultsLastNavigationPage() + " Next");
+                        getOfficeSearchResultsLastNavigationPage() + " Next"));
             }
         } else {
             assertTrue(getDriver().findElement(office_search_results_navigation_xpath).getText().contains("Previous"));
@@ -377,6 +406,7 @@ public class ResultsPage extends AbstractPage {
             }
         }
     }
+
 
     public void verifyCurrentPageOnSearchResults(String page) {
         try {
@@ -392,19 +422,27 @@ public class ResultsPage extends AbstractPage {
         if (page.equals("last")) {
             navigateToOfficeLastSearchResultsPage();
         } else {
+            //String currentPageNumber=getDriver().findElement(office_search_results_current_page_xpath).getText();
             navigateToDesiredSearchResultsPage(Integer.toString(Integer.parseInt(page.replace("st", "").replace("nd", "").replace("rd", "").replace("th", "")) + 1)).click();
             waitForElementToDisappear(By.id("loader"));
+            //waitForElementToDisappear(By.xpath("//*[@id='pages-navigation-list']//li[@class='current-page' and text()='"+currentPageNumber+"']"));
+
         }
     }
 
     public void navigateToNextOfficeSearchResultsPage() {
+        //String currentPageNumber=getDriver().findElement(office_search_results_current_page_xpath).getText();
         attemptClick(office_search_results_next_page_classname);
         waitForElementToDisappear(By.id("loader"));
+        //waitForElementToDisappear(By.xpath("//*[@id='pages-navigation-list']//li[@class='current-page' and text()='"+currentPageNumber+"']"));
+
     }
 
     public void navigateToPreviousOfficeSearchResultsPage() {
+        //String currentPageNumber=getDriver().findElement(office_search_results_current_page_xpath).getText();
         attemptClick(office_search_results_previous_page_classname);
         waitForElementToDisappear(By.id("loader"));
+       // waitForElementToDisappear(By.xpath("//*[@id='pages-navigation-list']//li[@class='current-page' and text()='"+currentPageNumber+"']"));
     }
 
 
@@ -881,7 +919,8 @@ public class ResultsPage extends AbstractPage {
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"active office test list", nvPairs);
 			while (nextPage != null) {
-				Thread.sleep(5000L); //there is no unique element in next page, hence using direct wait
+
+				//Thread.sleep(5000L); //there is no unique element in next page, hence using direct wait
 				List<WebElement> resultList = getDriver().findElements(office_search_results_rows_xpath);
 				List<WebElement> fidList = getDriver().findElements(office_id_locator_xpath);
 
@@ -896,7 +935,9 @@ public class ResultsPage extends AbstractPage {
 				if (comparedFidsCount < Integer.parseInt(fidCount)) {
 					nextPage = getDriver().findElement(office_search_results_next_page_classname);
 					if (nextPage != null) {
+                        String currentPageNumber=getDriver().findElement(office_search_results_current_page_xpath).getText();
 						nextPage.click();
+                        waitForElementToDisappear(By.xpath("//*[@id='pages-navigation-list']//li[@class='current-page' and text()='"+currentPageNumber+"']"));
 					}
 				} else {
 					break;
@@ -909,4 +950,23 @@ public class ResultsPage extends AbstractPage {
 		}
 
 	}
-}
+
+    public DataPage createDataPage() {
+        DataPage DOP=null;
+        try {
+            DOP= new DataPage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+        }
+        catch(Exception e)
+        {e.printStackTrace();}
+        return DOP;
+    }
+
+
+    public void verifyResultsTabSelected(){
+        assertTrue(getDriver().findElement(results_tab_xpath).getAttribute("class").equals("selected"));
+
+    }
+
+
+ }
+

@@ -15,15 +15,11 @@ JIRA ID - ZEUS-877 - View Legal Entity - Lead Institution
 
 Scenario: Verify the basic info for legalEntity (BUG : ZEUS-950)
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
-
 Then the user should see the basic info label for selected legal entity
 Then the user verifies basic info for legal entity left column <fid> from trusted document
 
@@ -60,9 +56,6 @@ Examples:
 
 Scenario: Verify legal entity header with UseInAddress = False
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -76,9 +69,6 @@ Examples:
 Scenario: Verify the User can follow link to head office from legal entity
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -98,9 +88,6 @@ Examples:
 
 Scenario: Verify the User cannot follow link to head office from legal entity when legal entity has no head office
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -115,9 +102,6 @@ Examples:
 
 Scenario: Verify the basic info for legalEntity - multiple telecoms
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -134,9 +118,6 @@ Examples:
 
 Scenario: Verify legal entity headers
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -153,9 +134,6 @@ Examples:
 
 Scenario: Verify legal entity sections list
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -182,9 +160,6 @@ Examples:
 
 Scenario: Verify the head office address for legalEntity with head office not like -0
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -200,9 +175,6 @@ Examples:
 Scenario: Verifing data displayed on legal entity page left column with database.
 Scenario: Verify the lead institution is been displayed only when there is relatinoship with other legal entity.
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -217,8 +189,6 @@ Examples:
 
 Scenario: Verify the charter type is displayed properly (without case transformation) from trusted document (Bug - ZEUS-950)
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
