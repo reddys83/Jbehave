@@ -406,7 +406,7 @@ public class EditOfficeSteps extends AbstractSteps{
     
     @Then("the user should not see the office telecoms row in the locations office page")
 	public void verifyNewlyAddedOfficeTelecomRowIsNotDisplayed() throws Exception {
-		getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_telecom_row_view_mode"), false);
+		getDataPage().verifyElementNotExistInUI(OfficeIdentifiers.getObjectIdentifier("office_locations_telecom_row_view_mode"));
 	}
 
     @Then("the user should not see the newly added locations row in the office locations page")
@@ -448,11 +448,16 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @Then("the user should see the $officetelecom_rowIdentifier values in office telecoms's section from lookup $lookup")
     public void verifyOfficeTelecomTypesFromLookup(@Named("$officetelecom_rowIdentifier") String officetelecom_rowIdentifier,@Named("lookupFid") String lookupFid) {
-        getEditOfficePage().verifyOfficeTelecomTypesFromLookup(officetelecom_rowIdentifier, lookupFid);
+        getDataPage().verifyLookUpValues(OfficeIdentifiers.getObjectIdentifier(officetelecom_rowIdentifier), "get Office Telecoms Types", "officeTelecomTypes");
     }
     
-    @Then("the user verifies the $officeAddressField maxlength is $maxSize for the $rowIdentifier")
-    public void verifyMaxlengthOfficeAddressText(@Named("$officeAddressField") String officeAddressField,@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){
+    @Then("the user should see the office telecom values same as in $source document")
+	public void verifyOfficeValueFromTrustedDB(@Named("officeFid") String officeFid, @Named("source") String source) {
+    	getEditOfficePage().verifyOfficeTelecomValuesFromTrustedDB(officeFid, source);
+	}
+    
+    @Then("the user verifies the $officeField maxlength is $maxSize for the $rowIdentifier")
+    public void verifyMaxlengthOfficeAddressText(@Named("$officeField") String officeField,@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){
     	getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);
     }
 
@@ -1493,9 +1498,9 @@ public class EditOfficeSteps extends AbstractSteps{
 		getDataPage().deleteAllRows(OfficeIdentifiers.getObjectIdentifier("office_first_row_telecoms_delete_button"));
 	}
 	
-	@Then("the user should see the error message <errorMessage> for the office telecom value field")
-    public void verifyOfficeTelecomValueErrMessage(@Named("errorMessage") String errorMessage) {
-        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_value_error_msg", errorMessage);
+	@Then("the user should see the error message <errorText> for the office telecom value field")
+    public void verifyOfficeTelecomErrorMessage(@Named("errorText") String errorText) {
+        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_value_error_msg", errorText);
 
     }
 	

@@ -541,9 +541,9 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on add new office telecoms button in the office locations
 Then the user should see the office_telecoms_first_row_new_telecoms_type_dropdown values in office telecoms's section from lookup TELECOM_TYPE
+Then the user should see the office telecom values same as in trusted document
 
 Examples:
 |entity|searchBy|fid|officeFid|
@@ -586,8 +586,15 @@ Examples:
 |1038|FID|1038|1038-60|telephone|1|5 pm|708|298|3125|20|123|9 am|||
 |1038|FID|1038|1038-60|fax|1|5 pm|708|298|3142|20|123|9 am|||
 
-Scenario: a)Verify user can select a new value for Telecom Type as email and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter
-          b)Verify user can select a new value for Telecom Type as website and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter
+Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Telephone' or 'Fax' 
+a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
+b) Verify that the error message "Enter up to 20 valid characters" is displayed when the 'Value' field is blank.
+c) Verify that the error message "Enter up to 4 valid numbers" is displayed when alphabets are entered for 'Rank' field.
+d) Verify that the error message "Numbers and spaces allowed only" is displayed when invalid characters are entered for 'Country Code' field.
+e) Verify that the error message "Enter up to 10 valid characters" is displayed when invalid characters are entered for 'Area Code' field.
+f) Verify that the error message "Numbers and spaces allowed only" is displayed when invalid characters are entered for 'Number' field.
+g) Verify that the error message "Enter up to 20 valid characters" is displayed when invalid characters are entered for 'Range Limit' field.
+h) Verify that the error message "Enter up to 10 valid characters" is displayed when invalid characters are entered for 'Ext' field.
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -602,25 +609,37 @@ When the user gets the document with get id for offices with the <officeFid> fro
 When the user deletes the existing office telecom locations rows
 And the user clicks on add new office telecoms button in the office locations
 And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
-And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
-And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
-And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
-And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
+Then the user verifies the office Rank maxlength is 4 for the office_telecoms_first_row_new_rank
+Then the user verifies the office TextBefore maxlength is 50 for the office_telecoms_first_row_new_textBefore
+Then the user verifies the office CountryCode maxlength is 5 for the office_telecoms_first_row_new_CountryCode
+Then the user verifies the office AreaCode maxlength is 10 for the office_telecoms_first_row_new_AreaCode
+Then the user verifies the office Number maxlength is 20 for the office_telecoms_first_row_new_Number
+Then the user verifies the office RangeLimit maxlength is 20 for the office_telecoms_first_row_new_rangeLimit
+Then the user verifies the office Ext maxlength is 10 for the office_telecoms_first_row_new_ext
+Then the user verifies the office TextAfter maxlength is 50 for the office_telecoms_first_row_new_textAfter
+When the user clicks on the save button
+Then the user should see the error message Enter up to 4 valid numbers. for the office telecom rank field
+Then the user should see the error message Enter up to 20 valid characters. for the office value field
+When the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
+And the user enters office telecoms value office_telecoms_first_row_new_CountryCode value as <CountryCode>
+And the user enters office telecoms value office_telecoms_first_row_new_AreaCode value as <AreaCode>
+And the user enters office telecoms value office_telecoms_first_row_new_Number value as <Number>
+When the user enters office telecoms range limit office_telecoms_first_row_new_rangeLimit value as <RangeLimit>
+And the user enters office telecoms ext office_telecoms_first_row_new_ext value as <Ext>
 And the user clicks on the save button
-Then the user should see the save confirmation modal
-And the user should see the below summary changes in confirmation modal
-|Summary|
-|Locations|
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-And the user verifies that the office telecom fields are entered in the office locations page
-And the user should see the office telecomm fields as in zeus document
-And the user reverts the changes to the document
+Then the user should see the error message Enter up to 4 valid numbers. for the office telecom rank field
+Then the user should see the error message <errorText> for the office telecom value field
+Then the user should see the error message Enter up to 20 valid characters. for the office range limit field
+Then the user should see the error message Enter up to 10 valid characters. for the office ext field
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
-|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|TextAfter|
-|1038|FID|1038|1038-60|email|1|5 pm|aft@zeus.com|5 pm|
-|1038|FID|1038|1038-60|website|5|3 pm|www.zeus.com|4 pm|
+|entity|searchBy|fid|officeFid|Type|Rank|CountryCode|AreaCode|Number|RangeLimit|Ext|errorText|
+|1010|FID|1010|1010-44|telephone|Text|Text|123|456|Text|Text|Numbers and spaces allowed only|
+|1010|FID|1010|1010-44|telephone|Text|123|Text|456|Text|Text|Enter up to 10 valid characters.|
+|1010|FID|1010|1010-44|telephone|Text|123|456|Text|Text|Text|Numbers and spaces allowed only|
+|1010|FID|1010|1010-44|fax|Text||456|123|Text|Text|Enter up to 5 valid characters.|
+|1010|FID|1010|1010-44|fax|Text|123|456||Text|Text|Enter up to 20 valid characters.|
 
 Scenario: a)Verify user can select a new value for Telecom Type as telex and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
           b)Verify user can select a new value for Telecom Type as reuters and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
@@ -661,52 +680,6 @@ Examples:
 |1038|FID|1038|1038-60|reuters|1|5 pm|afv|9 am|1 hr|
 |1038|FID|1038|1038-60|cable|1|5 pm|hsn||9 am|1 hr|
 
-Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Telephone' or 'Fax' 
-a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
-b) Verify that the error message "Enter up to 20 valid characters" is displayed when the 'Value' field is blank.
-c) Verify that the error message "Enter up to 4 valid numbers" is displayed when alphabets are entered for 'Rank' field.
-d) Verify that the error message "Numbers and spaces allowed only" is displayed when invalid characters are entered for 'Country Code' field.
-e) Verify that the error message "Enter up to 10 valid characters" is displayed when invalid characters are entered for 'Area Code' field.
-f) Verify that the error message "Numbers and spaces allowed only" is displayed when invalid characters are entered for 'Number' field.
-g) Verify that the error message "Enter up to 20 valid characters" is displayed when invalid characters are entered for 'Range Limit' field.
-h) Verify that the error message "Enter up to 10 valid characters" is displayed when invalid characters are entered for 'Ext' field.
-
-Given a user is on the search page
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-And the user clicks on the office locations link in the navigation bar
-And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
-When the user deletes the existing office telecom locations rows
-And the user clicks on add new office telecoms button in the office locations
-And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
-And the user clicks on the save button
-Then the user should see the error message Enter up to 4 valid numbers. for the office telecom rank field
-Then the user should see the error message Enter up to 20 valid characters. for the office value field
-When the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
-And the user enters office telecoms value office_telecoms_first_row_new_CountryCode value as <CountryCode>
-And the user enters office telecoms value office_telecoms_first_row_new_AreaCode value as <AreaCode>
-And the user enters office telecoms value office_telecoms_first_row_new_Number value as <Number>
-When the user enters office telecoms range limit office_telecoms_first_row_new_rangeLimit value as <RangeLimit>
-And the user enters office telecoms ext office_telecoms_first_row_new_ext value as <Ext>
-And the user clicks on the save button
-Then the user should see the error message Enter up to 4 valid numbers. for the office telecom rank field
-Then the user should see the error message <errorMessage> for the office telecom value field
-Then the user should see the error message Enter up to 20 valid characters. for the office range limit field
-Then the user should see the error message Enter up to 10 valid characters. for the office ext field
-And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
-
-Examples:
-|entity|searchBy|fid|officeFid|Type|Rank|CountryCode|AreaCode|Number|RangeLimit|Ext|errorMessage|
-|1010|FID|1010|1010-44|telephone|Text|Text|123|456|Text|Text|Numbers and spaces allowed only|
-|1010|FID|1010|1010-44|telephone|Text|123|Text|456|Text|Text|Enter up to 10 valid characters.|
-|1010|FID|1010|1010-44|telephone|Text|123|456|Text|Text|Text|Numbers and spaces allowed only|
-|1010|FID|1010|1010-44|fax|Text||456|123|Text|Text|Enter up to 5 valid characters.|
-|1010|FID|1010|1010-44|fax|Text|123|456||Text|Text|Enter up to 20 valid characters.|
 
 Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Telex', 'Reuters', 'Cable', 'Website' 
 a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
@@ -722,11 +695,12 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
 When the user deletes the existing office telecom locations rows
 And the user clicks on add new office telecoms button in the office locations
 And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
-And the user clicks on the save button
+Then the user verifies the office AnswerBack maxlength is 20 for the office_telecoms_first_row_new_answerBack
+Then the user verifies the office Value maxlength is 100 for the office_telecoms_first_row_new_value
+When the user clicks on the save button
 Then the user should see the error message Enter up to 4 valid numbers. for the office telecom rank field
 Then the user should see the error message Enter up to 100 valid characters. for the office value field
 When the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
@@ -740,6 +714,43 @@ Examples:
 |1010|FID|1010|1010-44|reuters|Text|
 |1010|FID|1010|1010-44|cable|Text|
 |1010|FID|1010|1010-44|website|Text|
+
+Scenario: a)Verify user can select a new value for Telecom Type as email and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter
+          b)Verify user can select a new value for Telecom Type as website and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office telecom locations rows
+And the user clicks on add new office telecoms button in the office locations
+And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
+And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
+And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
+And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
+And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Locations|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+And the user verifies that the office telecom fields are entered in the office locations page
+And the user should see the office telecomm fields as in zeus document
+And the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|TextAfter|
+|1038|FID|1038|1038-60|email|1|5 pm|aft@zeus.com|5 pm|
+|1038|FID|1038|1038-60|website|5|3 pm|www.zeus.com|4 pm|
+
 
 Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Email' 
 a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
@@ -822,54 +833,6 @@ Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|
 |1010|FID|1010|1010-44|email|2||@gkjhnhasdkjlk|
 
-Scenario: Verify office Telecom fields- Rank,Text Before, Country Code, Area Code, Number,Range Limit, Ext, Text After fields max length attributes when Type(telephone/fax)
-
-Given a user is on the search page
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-And the user clicks on the office locations link in the navigation bar
-And the user clicks on the office update link
-And the user clicks on add new office telecoms button in the office locations
-And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
-Then the user verifies the office Rank maxlength is 4 for the office_telecoms_first_row_new_rank
-Then the user verifies the office TextBefore maxlength is 50 for the office_telecoms_first_row_new_textBefore
-Then the user verifies the office CountryCode maxlength is 5 for the office_telecoms_first_row_new_CountryCode
-Then the user verifies the office AreaCode maxlength is 10 for the office_telecoms_first_row_new_AreaCode
-Then the user verifies the office Number maxlength is 20 for the office_telecoms_first_row_new_Number
-Then the user verifies the office RangeLimit maxlength is 20 for the office_telecoms_first_row_new_rangeLimit
-Then the user verifies the office Ext maxlength is 10 for the office_telecoms_first_row_new_ext
-Then the user verifies the office TextAfter maxlength is 50 for the office_telecoms_first_row_new_textAfter
-
-Examples:
-|entity|searchBy|fid|officeFid|Type|
-|1010|FID|1010|1010-44|telephone|
-|1010|FID|1010|1010-44|fax|
-
-Scenario: Verify office Telecom fields - AnswerBack and Value fields max length attributes when Type(telex/reuters/cable)
-
-Given a user is on the search page
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-And the user clicks on the office locations link in the navigation bar
-And the user clicks on the office update link
-And the user clicks on add new office telecoms button in the office locations
-And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
-Then the user verifies the office AnswerBack maxlength is 20 for the office_telecoms_first_row_new_answerBack
-Then the user verifies the office Value maxlength is 100 for the office_telecoms_first_row_new_value
-
-Examples:
-|entity|searchBy|fid|officeFid|Type|
-|1010|FID|1010|1010-44|telex|
-|1010|FID|1010|1010-44|reuters|
-|1010|FID|1010|1010-44|cable|
 
 Scenario: a)Verify Office telecoms country code, Area code, Number,Rangelimit, allows only number and spaces and verify an error message Invalid characters: "Numbers and spaces allowed only" is displayed
           b) Verify Office ext field allows only numbers,hypens and spaces

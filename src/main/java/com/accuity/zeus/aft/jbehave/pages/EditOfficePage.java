@@ -1266,9 +1266,9 @@ public class EditOfficePage extends AbstractPage {
     }
 
     
-    public void verifyOfficeIdentifierValuesFromTrustedDB(String source, String officeFid) {
+    public void verifyOfficeTelecomValuesFromTrustedDB(String source, String officeFid) {
     	try {
-			attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_new_identifier_button_id"));
+    		 attemptClick(OfficeIdentifiers.getObjectIdentifier("office_telecoms_addRow_id"));
 			List<String> identifierTypes = new ArrayList<>();
 			List<String> identifierValues = new ArrayList<>();
 			List<String> identifierStatusValues = new ArrayList<>();
@@ -2094,15 +2094,44 @@ public class EditOfficePage extends AbstractPage {
 		assertEquals("", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_services_entire_xpath")).getText());
 	}
 
+	public void verifyOfficeIdentifierValuesFromTrustedDB(String source, String officeFid) {
+		try {
+			attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_new_identifier_button_id"));
+			List<String> identifierTypes = new ArrayList<>();
+			List<String> identifierValues = new ArrayList<>();
+			List<String> identifierStatusValues = new ArrayList<>();
+			List<WebElement> identifierTypeDropDowns = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_input_xpath"));
+
+			if (identifierTypeDropDowns.size() > 0) {
+				List<WebElement> identifierValueDropDowns = getDriver()
+						.findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_value_input_xpath"));
+				List<WebElement> identifierStatusDropDowns = getDriver()
+						.findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_status_input_xpath"));
+
+				for (int index = 0; index < identifierTypeDropDowns.size(); index++) {
+					identifierTypes.add(
+							new Select(identifierTypeDropDowns.get(index)).getAllSelectedOptions().get(0).getText());
+					identifierValues.add(identifierValueDropDowns.get(index).getAttribute("value"));
+					identifierStatusValues.add(
+							new Select(identifierStatusDropDowns.get(index)).getAllSelectedOptions().get(0).getText());
+				}
+
+				verifyOfficeIdentifierValuesFromDB(source, officeFid, identifierTypes, identifierValues,
+						identifierStatusValues);
+			} else {
+				assertTrue("There is no existing values in Identifier section", true);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
     @Override
     public String getPageUrl() {
         return null;
     }
-
-
-
-
 
     public void setPrincipalOffice(String principalFlag) {
         if (principalFlag.equalsIgnoreCase("true")) {
