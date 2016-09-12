@@ -203,7 +203,7 @@ public class EditOfficeSteps extends AbstractSteps{
     }
 
     @When("the user selects office address type $typeRowIdentifier value as <Type>")
-      public void selectOfficeAddressType(@Named("$typeRowIdentifier") String typeRowIdentifier,@Named("Type") String Type)
+      public void selectOfficeAddressType(@Named("typeRowIdentifier") String typeRowIdentifier,@Named("Type") String Type)
     {
         getEditOfficePage().selectOfficeAddressType(typeRowIdentifier,Type);
     }
@@ -403,10 +403,11 @@ public class EditOfficeSteps extends AbstractSteps{
     {
         getEditOfficePage().enterOfficeTelecomsValue(valueRowIdentifier,Value);
     }
+    
     @Then("the user should not see the office telecoms row in the locations office page")
-    public void verifyOfficeTelecomsRowIsNotDisplayed() throws Exception {
-        getEditOfficePage().verifyOfficeTelecomsRowIsNotDisplayed();
-    }
+	public void verifyNewlyAddedOfficeTelecomRowIsNotDisplayed() throws Exception {
+		getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_telecom_row_view_mode"), false);
+	}
 
     @Then("the user should not see the newly added locations row in the office locations page")
     public void verifyOfficeLocationsRowIsNotDisplayed() throws Exception {
@@ -449,8 +450,11 @@ public class EditOfficeSteps extends AbstractSteps{
     public void verifyOfficeTelecomTypesFromLookup(@Named("$officetelecom_rowIdentifier") String officetelecom_rowIdentifier,@Named("lookupFid") String lookupFid) {
         getEditOfficePage().verifyOfficeTelecomTypesFromLookup(officetelecom_rowIdentifier, lookupFid);
     }
-    @Then("the user verifies the $officeAddressField  maxlength is $maxSize for the $rowIdentifier")
-    public void verifyMaxlengthOfficeAddressText(@Named("$officeAddressField") String officeAddressField,@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);}
+    
+    @Then("the user verifies the $officeAddressField maxlength is $maxSize for the $rowIdentifier")
+    public void verifyMaxlengthOfficeAddressText(@Named("$officeAddressField") String officeAddressField,@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){
+    	getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);
+    }
 
     @Then("the user verifies that the office address lines addresses are entered in the office locations page")
     public void verifyOfficeAddressLinesAddressesInUI(@Named("Type") String Type,@Named("AddressLine1") String AddressLine1,
@@ -562,15 +566,15 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_type_error_msg", errorMsg);
 
     }
-    @Then("the user should see the error message $errorMsg for the office value field")
-    public void verifyOfficeTelecomValueErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_value_error_msg", errorMsg);
-
+    
+    @Then("the user should see the error message $errMsg for the office value field")
+    public void verifyOfficeTelecomValueErrorMessage(@Named("errMsg") String errorMessage) {
+        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_value_error_msg", errorMessage);
     }
 
     @Then("the user should see the error message $errorMsg for the office telecom rank field")
     public void verifyOfficeTelecomRankErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_value_error_msg", errorMsg);
+        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_rank_error_msg", errorMsg);
 
     }
 
@@ -1482,4 +1486,22 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyBlankOfficeServicesParameterInUI() {
 		getEditOfficePage().verifyBlankOfficeServices(); 
 	}
+	
+	@When("the user deletes the existing office telecom locations rows")
+	public void deleteExistingTelecomLocationRows() {
+		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_telecoms_addRow_id"));
+		getDataPage().deleteAllRows(OfficeIdentifiers.getObjectIdentifier("office_first_row_telecoms_delete_button"));
+	}
+	
+	@Then("the user should see the error message <errorMessage> for the office telecom value field")
+    public void verifyOfficeTelecomValueErrMessage(@Named("errorMessage") String errorMessage) {
+        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_value_error_msg", errorMessage);
+
+    }
+	
+	@Then("the user should see the newly added telecom row in the office locations telecom page")
+	public void verifyNewlyAddedOfficeTelecomRowIsDisplayed() throws Exception {
+		getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_telecom_row_edit_mode"), true);
+	}
+
 }

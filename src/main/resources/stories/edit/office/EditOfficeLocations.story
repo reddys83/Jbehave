@@ -563,6 +563,7 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office telecom locations rows
 And the user clicks on add new office telecoms button in the office locations
 And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
 And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
@@ -573,22 +574,17 @@ And the user enters office telecoms value office_telecoms_first_row_new_Number v
 And the user enters office telecoms range limit office_telecoms_first_row_new_rangeLimit value as <RangeLimit>
 And the user enters office telecoms ext office_telecoms_first_row_new_ext value as <Ext>
 And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
-!-- And the user clicks on the save button
-!--Then the user should see the save confirmation modal
-!--And the user should see the below summary changes in confirmation modal
-!--|Summary|
-!--|Office Locations|
-!--When the user clicks on the confirm button
-!--Then the user should see the successful update message at top of the office page
-!--And the user verifies that the office telecom fields are entered in the office locations page
-!--Then the user should see the office telecomm fields as in zeus document
-!--And the user reverts the changes to the document
+And the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+And the user verifies that the office telecom fields are entered in the office locations page
+Then the user should see the office telecomm fields as in zeus document
+And the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|
-|1010|FID|1010|1010-45|telephone|1|5 pm|708|298|3125|20|123|9 am|
-|1010|FID|1010|1010-45|fax|1|5 pm|708|298|3142|20|123|9 am|
-
+|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|Value|
+|1038|FID|1038|1038-60|telephone|1|5 pm|708|298|3125|20|123|9 am|||
+|1038|FID|1038|1038-60|fax|1|5 pm|708|298|3142|20|123|9 am|||
 
 Scenario: a)Verify user can select a new value for Telecom Type as email and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter
           b)Verify user can select a new value for Telecom Type as website and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter
@@ -603,30 +599,28 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office telecom locations rows
 And the user clicks on add new office telecoms button in the office locations
 And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
 And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
 And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
 And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
 And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
-!--And the user clicks on the save button
-!--Then the user should see the save confirmation modal
-!--And the user should see the below summary changes in confirmation modal
-!--|Summary|
-!--|Office Locations|
-!--When the user clicks on the confirm button
-!--Then the user should see the successful update message at top of the office page
-!--And the user verifies that the office telecom fields are entered in the office locations page
-!--And the user should see the office telecomm fields as in zeus document
-!--And the user reverts the changes to the document
-
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Locations|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+And the user verifies that the office telecom fields are entered in the office locations page
+And the user should see the office telecomm fields as in zeus document
+And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|TextAfter|
-|1010|FID|1010|1010-45|email|1|5 pm|abc|5 pm|
-|1010|FID|1010|1010-45|website|5|3 pm|xyz|4 pm|
-
-
+|1038|FID|1038|1038-60|email|1|5 pm|aft@zeus.com|5 pm|
+|1038|FID|1038|1038-60|website|5|3 pm|www.zeus.com|4 pm|
 
 Scenario: a)Verify user can select a new value for Telecom Type as telex and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
           b)Verify user can select a new value for Telecom Type as reuters and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
@@ -642,6 +636,7 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office telecom locations rows
 And the user clicks on add new office telecoms button in the office locations
 And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
 And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
@@ -649,25 +644,33 @@ And the user enters office telecoms text before office_telecoms_first_row_new_te
 And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
 And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
 And the user enters office telecoms answer back office_telecoms_first_row_new_answerBack value as <AnswerBack>
-!--And the user clicks on the save button
-!--Then the user should see the save confirmation modal
-!--And the user should see the below summary changes in confirmation modal
-!--|Summary|
-!--|Office Locations|
-!--When the user clicks on the confirm button
-!--Then the user should see the successful update message at top of the office page
-!--And the user verifies that the office telecom fields are entered in the office locations page
-!--And the user should see the office telecomm fields as in zeus document
-!--And the user reverts the changes to the document
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Locations|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+And the user verifies that the office telecom fields are entered in the office locations page
+And the user should see the office telecomm fields as in zeus document
+And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|TextAfter|AnswerBack|
-|1010|FID|1010|1010-45|telex|1|5 pm|abc|9 am|1 hr|
-|1010|FID|1010|1010-45|reuters|1|5 pm|afv|9 am|1 hr|
-|1010|FID|1010|1010-45|cable|1|5 pm|hsn||9 am|1 hr|
+|1038|FID|1038|1038-60|telex|1|5 pm|abc|9 am|1 hr|
+|1038|FID|1038|1038-60|reuters|1|5 pm|afv|9 am|1 hr|
+|1038|FID|1038|1038-60|cable|1|5 pm|hsn||9 am|1 hr|
 
-Scenario: a) Verify that the error message "Enter upto valid characters" is displayed when the Telecom Rank,Country Code, Number are left blank when the Type field is not null
-Meta: @skip
+Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Telephone' or 'Fax' 
+a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
+b) Verify that the error message "Enter up to 20 valid characters" is displayed when the 'Value' field is blank.
+c) Verify that the error message "Enter up to 4 valid numbers" is displayed when alphabets are entered for 'Rank' field.
+d) Verify that the error message "Numbers and spaces allowed only" is displayed when invalid characters are entered for 'Country Code' field.
+e) Verify that the error message "Enter up to 10 valid characters" is displayed when invalid characters are entered for 'Area Code' field.
+f) Verify that the error message "Numbers and spaces allowed only" is displayed when invalid characters are entered for 'Number' field.
+g) Verify that the error message "Enter up to 20 valid characters" is displayed when invalid characters are entered for 'Range Limit' field.
+h) Verify that the error message "Enter up to 10 valid characters" is displayed when invalid characters are entered for 'Ext' field.
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -675,28 +678,101 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office telecom locations rows
 And the user clicks on add new office telecoms button in the office locations
-And the user selects office address type office_addressType_first_row_new_address_type_dropdown value as <Type>
+And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
+And the user clicks on the save button
+Then the user should see the error message Enter up to 4 valid numbers. for the office telecom rank field
+Then the user should see the error message Enter up to 20 valid characters. for the office value field
 When the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
-And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
 And the user enters office telecoms value office_telecoms_first_row_new_CountryCode value as <CountryCode>
 And the user enters office telecoms value office_telecoms_first_row_new_AreaCode value as <AreaCode>
 And the user enters office telecoms value office_telecoms_first_row_new_Number value as <Number>
-And the user enters office telecoms range limit office_telecoms_first_row_new_rangeLimit value as <RangeLimit>
+When the user enters office telecoms range limit office_telecoms_first_row_new_rangeLimit value as <RangeLimit>
 And the user enters office telecoms ext office_telecoms_first_row_new_ext value as <Ext>
-And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
-And the user enters office telecoms answer back office_telecoms_first_row_new_answerBack value as <AnswerBack>
 And the user clicks on the save button
 Then the user should see the error message Enter up to 4 valid numbers. for the office telecom rank field
-And the user should see the error message Enter up to 5 valid charcters. for the office country code field
-And the user should see the error message Enter up to 20 valid charcters. for the office number field
+Then the user should see the error message <errorMessage> for the office telecom value field
+Then the user should see the error message Enter up to 20 valid characters. for the office range limit field
+Then the user should see the error message Enter up to 10 valid characters. for the office ext field
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
-|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|
-|1010|FID|1010|1010-44|telephone|||||||||||
+|entity|searchBy|fid|officeFid|Type|Rank|CountryCode|AreaCode|Number|RangeLimit|Ext|errorMessage|
+|1010|FID|1010|1010-44|telephone|Text|Text|123|456|Text|Text|Numbers and spaces allowed only|
+|1010|FID|1010|1010-44|telephone|Text|123|Text|456|Text|Text|Enter up to 10 valid characters.|
+|1010|FID|1010|1010-44|telephone|Text|123|456|Text|Text|Text|Numbers and spaces allowed only|
+|1010|FID|1010|1010-44|fax|Text||456|123|Text|Text|Enter up to 5 valid characters.|
+|1010|FID|1010|1010-44|fax|Text|123|456||Text|Text|Enter up to 20 valid characters.|
+
+Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Telex', 'Reuters', 'Cable', 'Website' 
+a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
+b) Verify that the error message "Enter up to 100 valid characters" is displayed when the 'Value' field is blank.
+c) Verify that the error message "Enter up to 4 valid numbers" is displayed when alphabets are entered for 'Rank' field.
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office telecom locations rows
+And the user clicks on add new office telecoms button in the office locations
+And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
+And the user clicks on the save button
+Then the user should see the error message Enter up to 4 valid numbers. for the office telecom rank field
+Then the user should see the error message Enter up to 100 valid characters. for the office value field
+When the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
+And the user clicks on the save button
+Then the user should see the error message Enter up to 4 valid numbers. for the office telecom rank field
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|entity|searchBy|fid|officeFid|Type|Rank|
+|1010|FID|1010|1010-44|telex|Text|
+|1010|FID|1010|1010-44|reuters|Text|
+|1010|FID|1010|1010-44|cable|Text|
+|1010|FID|1010|1010-44|website|Text|
+
+Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Email' 
+a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
+b) Verify that the error message "Enter up to 100 valid characters" is displayed when the 'Value' field is blank.
+c) Verify that the error message "Enter up to 4 valid numbers" is displayed when alphabets are entered for 'Rank' field.
+d) Verify that the error message "Enter up to 100 valid characters" is displayed when a text without '@' key is entered for 'Value' field.
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office telecom locations rows
+And the user clicks on add new office telecoms button in the office locations
+And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
+And the user clicks on the save button
+Then the user should see the error message Enter up to 4 valid numbers. for the office telecom rank field
+Then the user should see the error message Enter up to 100 valid characters. for the office value field
+When the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
+When the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
+And the user clicks on the save button
+Then the user should see the error message Enter up to 4 valid numbers. for the office telecom rank field
+Then the user should see the error message Enter up to 100 valid characters. for the office value field
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|entity|searchBy|fid|officeFid|Type|Rank|Value|
+|1010|FID|1010|1010-44|email|Text|www.zeus.com|
 
 Scenario: a) Verify that the error message Enter upto 100 valid characters is displayed when the value field is left blank when telecom type is email
 Meta: @skip
@@ -746,9 +822,8 @@ Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|
 |1010|FID|1010|1010-44|email|2||@gkjhnhasdkjlk|
 
+Scenario: Verify office Telecom fields- Rank,Text Before, Country Code, Area Code, Number,Range Limit, Ext, Text After fields max length attributes when Type(telephone/fax)
 
-Scenario: Verify office Telecom fields- Rank,Text Before,Value, Country Code, Area Code, Number,Range Limit, Ext, Text After, AnswerBack fields max length when type(telephone/fax)
-Meta: @skip
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -756,27 +831,26 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on add new office telecoms button in the office locations
-Then the user verifies the office <Rank> maxlength is 4 for the office_telecoms_first_row_new_rank in the telecom section
-Then the user verifies the office <TextBefore> maxlength is 50 for the office_telecoms_first_row_new_textBefore
-And the user verifies the office <Value> maxlength is 100 for the office_telecoms_first_row_new_value
-And the user verifies the office <CountryCode> maxlength is 5 for the office_telecoms_first_row_new_CountryCode
-And the user verifies the office <AreaCode> maxlength is 70 for the office_telecoms_first_row_new_AreaCode
-And the user verifies the office <Number> maxlength is 20 for the office_telecoms_first_row_new_Number
-And the user verifies the office <RangeLimit> maxlength is 20 for the office_telecoms_first_row_new_rangeLimit
-And the user verifies the office <Ext> maxlength is 10 for the office_telecoms_first_row_new_ext
-And the user verifies the office <TextAfter> maxlength is 50 for the office_telecoms_first_row_new_textAfter
-And the user verifies the office <AnswerBack> maxlength is 20 for the office_telecoms_first_row_new_answerBack
-And the user verifies the office <Value> maxlength is 100 for the office_telecoms_first_row_new_value
+And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
+Then the user verifies the office Rank maxlength is 4 for the office_telecoms_first_row_new_rank
+Then the user verifies the office TextBefore maxlength is 50 for the office_telecoms_first_row_new_textBefore
+Then the user verifies the office CountryCode maxlength is 5 for the office_telecoms_first_row_new_CountryCode
+Then the user verifies the office AreaCode maxlength is 10 for the office_telecoms_first_row_new_AreaCode
+Then the user verifies the office Number maxlength is 20 for the office_telecoms_first_row_new_Number
+Then the user verifies the office RangeLimit maxlength is 20 for the office_telecoms_first_row_new_rangeLimit
+Then the user verifies the office Ext maxlength is 10 for the office_telecoms_first_row_new_ext
+Then the user verifies the office TextAfter maxlength is 50 for the office_telecoms_first_row_new_textAfter
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|
 |1010|FID|1010|1010-44|telephone|
+|1010|FID|1010|1010-44|fax|
 
-Scenario: Verify office Telecom field Value when type(telex/reuters)/cable/email/website)
-Meta: @skip
+Scenario: Verify office Telecom fields - AnswerBack and Value fields max length attributes when Type(telex/reuters/cable)
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -784,13 +858,17 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on add new office telecoms button in the office locations
-Then the user verifies the office <Value> maxlength is 100 for the office_telecoms_first_row_new_value
+And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
+Then the user verifies the office AnswerBack maxlength is 20 for the office_telecoms_first_row_new_answerBack
+Then the user verifies the office Value maxlength is 100 for the office_telecoms_first_row_new_value
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|
+|1010|FID|1010|1010-44|telex|
+|1010|FID|1010|1010-44|reuters|
 |1010|FID|1010|1010-44|cable|
 
 Scenario: a)Verify Office telecoms country code, Area code, Number,Rangelimit, allows only number and spaces and verify an error message Invalid characters: "Numbers and spaces allowed only" is displayed
@@ -857,7 +935,10 @@ Examples:
 |entity|searchBy|fid|officeFid|
 |17649|FID|17649|17649-0|
 
-Scenario: Verify that the user should be able to delete a new office telecoms row
+Scenario: Scenario: User is adding/deleting new Office's Locations Telecom -
+1 - Verify if User can prevent deleting telecom row by clicking on 'No'.
+2 - Verify if User can delete telecom row by clicking on 'Yes' , then after saving it should be removed.
+3 - User verifies that UI and Zeus document is updated.
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -869,29 +950,33 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office telecom locations rows
 And the user clicks on add new office telecoms button in the office locations
+And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
+And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
+And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
+And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
+And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
+And the user enters office telecoms answer back office_telecoms_first_row_new_answerBack value as <AnswerBack>
+And the user clicks on the save button
+And the user clicks on the confirm button
+And the user clicks on the office update link
 And the user clicks on delete office telecoms row button for the row office_first_row_telecoms_delete_button
 When the user clicks on the No button to cancel the deletion of row in office locations page
-!--And the user clicks on the save button
-!--And the user clicks on the confirm button
-!--Then the user verifies that the row values exists in the office locations page
-And the user clicks on delete office telecoms row button for the row office_first_row_telecoms_delete_button
+Then the user should see the newly added telecom row in the office locations telecom page
+When the user clicks on delete office telecoms row button for the row office_first_row_telecoms_delete_button
 And the user clicks on the yes button in the delete row confirmation modal in the office page
-!--And the user clicks on the save button
-!--Then the user should see the save confirmation modal
-!--And the user should see the below summary changes in confirmation modal
-!--|Summary|
-!--|Office Locations|
-!--When the user clicks on the confirm button
-!--Then the user should see the successful update message at top of the office page
-!--And the user should not see the office telecoms row in the locations office page
-!--And the user verifies that the deleted row for office telecoms does not exist in zeus document
-!--And the user reverts the changes to the document
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+And the user should not see the office telecoms row in the locations office page
+And the user verifies that the deleted row for office telecoms does not exist in zeus document
+And the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|
-|1010|FID|1010|1010-45|
-
+|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|TextAfter|AnswerBack|
+|1038|FID|1038|1038-60|telex|1|5 pm|abc|9 am|1 hr|
 
 
 
