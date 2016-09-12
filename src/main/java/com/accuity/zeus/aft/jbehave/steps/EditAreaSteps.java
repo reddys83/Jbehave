@@ -1079,4 +1079,67 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().clickOnAddEntityButton();
 		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_entity_delete_button_xpath"));
 	}
+	
+	@When("the user selects type value as <entityType> in the places for area")
+	public void selectsEntityTypeFromDropdown(@Named("entityType") String entityType) {
+		getEditAreaPage().selectsEntityTypeFromDropdown(entityType);
+	}
+	
+	@When("the user selects details value as <entityDetails> in the places for area")
+	public void selectsEntityDetailsFromDropdown(@Named("entityDetails") String entityDetails) {
+		getEditAreaPage().selectsEntityDetailsFromDropdown(entityDetails);
+	}
+	
+	@Then("the user should see the error message required for type in entity for area")
+	public void verifyRequiredErrorMessageForType() {
+		getEditAreaPage().verifyRequiredErrorMessageForType();
+	}
+	
+	@Then("the user should see the error message required for entity for area")
+	public void verifyRequiredErrorMessageForEntity() {
+		getEditAreaPage().verifyRequiredErrorMessageForEntity();
+	}
+	
+	@Then("the user should see the error message enter a valid fid  for entity for area")
+	public void verifyFidErrorMessageForEntity() {
+		getEditAreaPage().verifyFidErrorMessageForEntity();
+	}
+	
+	@When("the user selects fid value as <fid> in the places for area")
+	public void selectsEntityFidFromDropdown(@Named("fid") String fid) {
+		getEditAreaPage().selectsEntityFidFromDropdown(fid);
+	}
+	
+
+	@When("the user clicks on go button in entity for area")
+	public void clicksOnGoButton() {
+		getEditAreaPage().clicksOnGoButton();
+	}
+	
+	@Then("the user should see <entityType> <entity> <entityDetails> updated in area related entity")
+	public void verifyRelatedEntityInAreaPage(@Named("entityType") String entityType,
+			@Named("entity") String entity, @Named("entityDetails") String entityDetails) {
+		getEditAreaPage().verifyRelatedEntityInAreaPage(entityType, entity, entityDetails);
+	}
+	
+	@Then("the user should see the area related entity date <entityType> <fid> <entityDetails> value in zeus document")
+	public void verifyAreaRelatedEntityFromZeusDB(@Named("area") String area,@Named("entityType") String entityType, @Named("fid") String fid,
+			@Named("entityDetails") String entityDetails, @Named("source") String source) {
+		getEditAreaPage().verifyAreaRelatedEntityFromZeusDB(area, entityType, fid, entityDetails, source);
+	}
+	
+	@When("the user clicks on delete area entity type")
+	public void clicksOnDeleteAreaEntityType() {
+		getEditAreaPage().clicksOnDeleteAreaEntityType();
+	}
+	
+	@Then("the user should not see <entityType> <fid> <entityDetails> updated in area entity place")
+	public void verifyDeletedRelatedEntity() {
+		getEditAreaPage().verifyDeletedRelatedEntity();
+	}
+	
+	@When("the user clicks on edit button in entity for area")
+	public void clicksOnEditButtonEntityArea() {
+		getEditAreaPage().clicksOnEditButton();
+	}
 }

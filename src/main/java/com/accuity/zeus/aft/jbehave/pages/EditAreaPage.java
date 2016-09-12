@@ -1776,6 +1776,108 @@ public class EditAreaPage extends AbstractPage {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_entity_button_edit_id"));
 	}
 	
+	public void selectsEntityTypeFromDropdown(String entityType) {
+		selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_entity_type_dropdown_xpath"),
+				entityType);
+	}
+	
+    public void selectsEntityDetailsFromDropdown(String entityDetails) {
+		
+		selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_entity_details_Select_dropdown_xpath"),
+				entityDetails);
+		}
+    
+    public void verifyRequiredErrorMessageForType() {
+		assertEquals(getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_entity_type_required_error_message_xpath"))
+				.getText(), "Required");
+	}
+    
+    public void verifyRequiredErrorMessageForEntity() {
+		assertEquals(getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_entity_required_error_message_xpath"))
+				.getText(), "Required");
+	}
+
+
+    public void verifyFidErrorMessageForEntity() {
+		assertEquals(getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_fid_required_error_message_xpath"))
+				.getText(), "Enter a valid FID");
+	}
+    
+    public void selectsEntityFidFromDropdown(String fid) {
+    	clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_entity_fid_dropdown_xpath"), fid);
+		//selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_entity_fid_dropdown_xpath"),
+				//fid);
+	}
+    
+    public void clicksOnGoButton() {
+		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_entity_go_button_xpath")).click();
+	}
+    
+    public void verifyRelatedEntityInAreaPage(String entityType, String fid, String entityDetails) {
+		try {
+			Thread.sleep(6000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertEquals(entityType, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_typevalue_xpath")).getText());
+		assertEquals(fid, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_fidvalue_xpath")).getText());
+		
+		assertEquals(entityDetails,
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("are_get_relatedentity_detailsvalue_xpath"))
+						.getText());
+	}
+    
+    public String getAreaRelatedInfoFromDB(String area,String tagName, String source) {
+
+		String tagValue = null;
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("name", area));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(7000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get area related entity info", nvPairs);
+		if (document != null) {
+			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+					: getNodeValuesByTagName(document, tagName).get(0);
+		}
+		return tagValue;
+	}
+    
+    public void verifyAreaRelatedEntityFromZeusDB(String area,String type, String fid,
+			String details, String source) {
+		assertEquals(getAreaRelatedInfoFromDB(area, "type", source), type);
+		assertEquals(getAreaRelatedInfoFromDB(area,  "value", source), fid);
+		assertEquals(getAreaRelatedInfoFromDB(area,  "details", source), details);
+	}
+    
+    public void clicksOnDeleteAreaEntityType() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_delete_button_xpath"));
+	}
+
+    public void verifyDeletedRelatedEntity() {
+		try {
+			Thread.sleep(6000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertEquals("", getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_entirevalue_xpath")).getText());
+	}
+    
+    public void clicksOnEditButton() {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_edit_button_xpath"));
+	}
+    
 	@Override
 	public String getPageUrl() {
 		return null;
