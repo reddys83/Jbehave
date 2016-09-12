@@ -130,6 +130,9 @@ public class XqueryMap {
 		queryMap.put("get area region types","getAreaRegionTypes.xqy");
 		queryMap.put("get area region values","getAreaRegionValues.xqy");
 		queryMap.put("get area regions list","getAreaRegionList.xqy");
+		queryMap.put("get area demographics type","getDemographicsType.xqy");
+        queryMap.put("get area demographics unit","getDemographicsUnit.xqy");
+        queryMap.put("get area demographics info","getAreaDemographics.xqy");
 		queryMap.put("get area credit ratings", "getAreaCreditRatingValues.xqy");
 		queryMap.put("get document id for subarea","getIdForSubArea.xqy");
         queryMap.put("get Id for area", "getIdForArea.xqy");
