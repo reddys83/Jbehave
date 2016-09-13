@@ -1039,8 +1039,7 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@When("the user clicks on the area entity link in the navigation bar")
 	public void clickOnAreaEntity() {
-		setEditAreaPage(getDataPage().createEditAreaPage());
-		getEditAreaPage().clickOnAreaEntity();
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_link_id"));
 	}
 	
 	@Then("the user should see the values retrieved from $source document are present in Area Web page")
@@ -1051,7 +1050,7 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@When("the user clicks on new area entity type drop-down for area")
 	public void clickAreaEntityType() {
-		getEditAreaPage().clickAreaEntityType();
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_type_dropdown_xpath"));
 	}
 	
 	@Then("the user should see the values for type dropdown from lookup AREA_RELATED_PRESENCE_TYPE")
@@ -1061,15 +1060,16 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@When("the user clicks on new area entity details drop-down for area")
 	public void clickEntityDetailsDropDown() {
-		getEditAreaPage().clickEntityDetailsDropDown();
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_details_Select_dropdown_xpath"));
 	}
 
 	@Then("the user should see the values for details dropdown from lookup AREA_RELATED_PRESENCE_SUBTYPE")
 	public void verifyAreaEntityDetailsList() {
-		getEditAreaPage().verifyAreaEntityDetailsList();
+		getDataPage().verifyLookUpValues(AreaIdentifiers
+				.getObjectIdentifier("area_entity_details_options_dropdown_xpath"), "get area entity detail lookup", "detail");
 	}
 	
-	@When("the user clicks on the add button for adding new places for area page")
+	@When("the user clicks on the add button for adding new entity for area page")
 	public void clickOnAddEntityButton() {
 		getEditAreaPage().clickOnAddEntityButton();
 	}
@@ -1080,12 +1080,12 @@ public class EditAreaSteps extends AbstractSteps {
 		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_entity_delete_button_xpath"));
 	}
 	
-	@When("the user selects type value as <entityType> in the places for area")
+	@When("the user selects type value as <entityType> in the entity for area")
 	public void selectsEntityTypeFromDropdown(@Named("entityType") String entityType) {
 		getEditAreaPage().selectsEntityTypeFromDropdown(entityType);
 	}
 	
-	@When("the user selects details value as <entityDetails> in the places for area")
+	@When("the user selects details value as <entityDetails> in the entity for area")
 	public void selectsEntityDetailsFromDropdown(@Named("entityDetails") String entityDetails) {
 		getEditAreaPage().selectsEntityDetailsFromDropdown(entityDetails);
 	}
@@ -1105,7 +1105,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyFidErrorMessageForEntity();
 	}
 	
-	@When("the user selects fid value as <fid> in the places for area")
+	@When("the user selects fid value as <fid> in the entity for area")
 	public void selectsEntityFidFromDropdown(@Named("fid") String fid) {
 		getEditAreaPage().selectsEntityFidFromDropdown(fid);
 	}
@@ -1113,7 +1113,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on go button in entity for area")
 	public void clicksOnGoButton() {
-		getEditAreaPage().clicksOnGoButton();
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_go_button_xpath"));		
 	}
 	
 	@Then("the user should see <entityType> <entity> <entityDetails> updated in area related entity")
@@ -1122,15 +1122,15 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyRelatedEntityInAreaPage(entityType, entity, entityDetails);
 	}
 	
-	@Then("the user should see the area related entity date <entityType> <fid> <entityDetails> value in zeus document")
-	public void verifyAreaRelatedEntityFromZeusDB(@Named("area") String area,@Named("entityType") String entityType, @Named("fid") String fid,
+	@Then("the user should see the area related entity date <entityType> <entity> <entityDetails> value in $source document")
+	public void verifyAreaRelatedEntityFromZeusDB(@Named("country") String country,@Named("area") String area,@Named("entityType") String entityType, @Named("entity") String entity,
 			@Named("entityDetails") String entityDetails, @Named("source") String source) {
-		getEditAreaPage().verifyAreaRelatedEntityFromZeusDB(area, entityType, fid, entityDetails, source);
+		getEditAreaPage().verifyAreaRelatedEntityFromZeusDB(country,area, entityType, entity, entityDetails, source);
 	}
 	
 	@When("the user clicks on delete area entity type")
 	public void clicksOnDeleteAreaEntityType() {
-		getEditAreaPage().clicksOnDeleteAreaEntityType();
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_delete_button_xpath"));
 	}
 	
 	@Then("the user should not see <entityType> <fid> <entityDetails> updated in area entity place")
@@ -1140,7 +1140,7 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@When("the user clicks on edit button in entity for area")
 	public void clicksOnEditButtonEntityArea() {
-		getEditAreaPage().clicksOnEditButton();
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_edit_button_xpath"));
 	}
 	
 	@Then("the user verifies that no new row is added in area web page")

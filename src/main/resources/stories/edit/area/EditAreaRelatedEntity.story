@@ -20,7 +20,7 @@ And the user clicks on the area entity link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
 When the user deletes all existing related entity rows
-And the user clicks on the add button for adding new places for area page
+And the user clicks on the add button for adding new entity for area page
 When the user clicks on new area entity type drop-down for area
 Then the user should see the values for type dropdown from lookup AREA_RELATED_PRESENCE_TYPE
 When the user clicks on new area entity details drop-down for area
@@ -44,16 +44,17 @@ And the user clicks on the area entity link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
 When the user deletes all existing related entity rows
-And the user clicks on the add button for adding new places for area page
-And the user selects type value as <entityType> in the places for area
+And the user clicks on the add button for adding new entity for area page
+And the user selects type value as <entityType> in the entity for area
 And the user clicks on edit button in entity for area
-And the user selects fid value as <fid> in the places for area
+And the user selects fid value as <fid> in the entity for area
 And the user clicks on go button in entity for area
-And the user selects details value as <entityDetails> in the places for area
+And the user selects details value as <entityDetails> in the entity for area
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should see <entityType> <entity> <entityDetails> updated in area related entity
+Then the user should see the area related entity date <entityType> <entity> <entityDetails> value in zeus document
 Then the user reverts the changes to the document
 
 Examples:
@@ -72,11 +73,11 @@ And the user enters the area <area> in the type-ahead box
 And the user clicks on the area entity link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
-And the user selects type value as <entityType> in the places for area
+And the user selects type value as <entityType> in the entity for area
 And the user clicks on edit button in entity for area
-And the user selects fid value as <fid> in the places for area
+And the user selects fid value as <fid> in the entity for area
 And the user clicks on go button in entity for area
-And the user selects details value as <entityDetails> in the places for area
+And the user selects details value as <entityDetails> in the entity for area
 And the user clicks on the save button
 Then the user should see the below summary changes in confirmation modal
 |Summary|
@@ -84,6 +85,7 @@ Then the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should see <entityType> <entity> <entityDetails> updated in area related entity
+Then the user should see the area related entity date <entityType> <entity> <entityDetails> value in zeus document
 Then the user reverts the changes to the document
 
 Examples:
@@ -103,7 +105,7 @@ And the user clicks on the area entity link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
 When the user deletes all existing related entity rows
-And the user clicks on the add button for adding new places for area page
+And the user clicks on the add button for adding new entity for area page
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
@@ -126,14 +128,14 @@ And the user enters the area <area> in the type-ahead box
 And the user clicks on the area entity link in the navigation bar
 And the user clicks on the area update link
 When the user deletes all existing related entity rows
-And the user clicks on the add button for adding new places for area page
-And the user selects details value as <entityDetails> in the places for area
+And the user clicks on the add button for adding new entity for area page
+And the user selects details value as <entityDetails> in the entity for area
 And the user clicks on the save button
 Then the user should see the error message required for type in entity for area
 Then the user should see the error message required for entity for area
-When the user selects type value as <entityType> in the places for area
+When the user selects type value as <entityType> in the entity for area
 And the user clicks on edit button in entity for area
-And the user selects fid value as <fid> in the places for area
+And the user selects fid value as <fid> in the entity for area
 And the user clicks on go button in entity for area
 Then the user should see the error message enter a valid fid  for entity for area
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
@@ -160,16 +162,17 @@ And the user clicks on the area entity link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
 When the user deletes all existing related entity rows
-And the user clicks on the add button for adding new places for area page
-And the user selects type value as <entityType> in the places for area
+And the user clicks on the add button for adding new entity for area page
+And the user selects type value as <entityType> in the entity for area
 And the user clicks on edit button in entity for area
-And the user selects fid value as <fid> in the places for area
+And the user selects fid value as <fid> in the entity for area
 And the user clicks on go button in entity for area
-And the user selects details value as <entityDetails> in the places for area
+And the user selects details value as <entityDetails> in the entity for area
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should see <entityType> <entity> <entityDetails> updated in area related entity
+Then the user should see the area related entity date <entityType> <entity> <entityDetails> value in zeus document
 Then the user reverts the changes to the document
 
 Examples:
@@ -188,11 +191,11 @@ And the user enters the area <area> in the type-ahead box
 And the user clicks on the area entity link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
-And the user selects type value as <entityType> in the places for area
+And the user selects type value as <entityType> in the entity for area
 And the user clicks on edit button in entity for area
-And the user selects fid value as <fid> in the places for area
+And the user selects fid value as <fid> in the entity for area
 And the user clicks on go button in entity for area
-And the user selects details value as <entityDetails> in the places for area
+And the user selects details value as <entityDetails> in the entity for area
 And the user clicks on the save button
 Then the user should see the below summary changes in confirmation modal
 |Summary|
@@ -205,4 +208,6 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|entityDetails|entityType|fid|entity|
 |USA|Alabama|State Government|Government|1038|Bank of America National Association|
+
+
 

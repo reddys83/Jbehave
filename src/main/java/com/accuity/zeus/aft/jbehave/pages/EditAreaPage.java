@@ -1813,9 +1813,7 @@ public class EditAreaPage extends AbstractPage {
 	}
     
     public void selectsEntityFidFromDropdown(String fid) {
-    	clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_entity_fid_dropdown_xpath"), fid);
-		//selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_entity_fid_dropdown_xpath"),
-				//fid);
+    	clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_entity_fid_dropdown_xpath"), fid);	
 	}
     
     public void clicksOnGoButton() {
@@ -1838,11 +1836,11 @@ public class EditAreaPage extends AbstractPage {
 						.getText());
 	}
     
-    public String getAreaRelatedInfoFromDB(String area,String tagName, String source) {
+    public String getAreaRelatedInfoFromDB(String country,String area,String tagName, String source) {
 
 		String tagValue = null;
 		List<NameValuePair> nvPairs = new ArrayList<>();
-		nvPairs.add(new BasicNameValuePair("name", area));
+		nvPairs.add(new BasicNameValuePair("area", area));
 		nvPairs.add(new BasicNameValuePair("source", source));
 		try {
 			Thread.sleep(7000L);
@@ -1851,7 +1849,7 @@ public class EditAreaPage extends AbstractPage {
 		}
 
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-				"get area related entity info", nvPairs);
+				"get area related entity details", nvPairs);
 		if (document != null) {
 			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
 					: getNodeValuesByTagName(document, tagName).get(0);
@@ -1859,11 +1857,11 @@ public class EditAreaPage extends AbstractPage {
 		return tagValue;
 	}
     
-    public void verifyAreaRelatedEntityFromZeusDB(String area,String type, String fid,
+    public void verifyAreaRelatedEntityFromZeusDB(String country,String area,String type, String fid,
 			String details, String source) {
-		assertEquals(getAreaRelatedInfoFromDB(area, "type", source), type);
-		assertEquals(getAreaRelatedInfoFromDB(area,  "value", source), fid);
-		assertEquals(getAreaRelatedInfoFromDB(area,  "details", source), details);
+		assertEquals(getAreaRelatedInfoFromDB(country, area, "areaRelatedEntityType", source), type);
+		assertEquals(getAreaRelatedInfoFromDB(country, area,  "areaRelatedEntity", source), fid);
+		assertEquals(getAreaRelatedInfoFromDB(country, area,  "areaRelatedEntityDetail", source), details);
 	}
     
     public void clicksOnDeleteAreaEntityType() {
