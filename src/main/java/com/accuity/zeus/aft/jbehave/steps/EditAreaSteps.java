@@ -1142,4 +1142,9 @@ public class EditAreaSteps extends AbstractSteps {
 	public void clicksOnEditButtonEntityArea() {
 		getEditAreaPage().clicksOnEditButton();
 	}
+	
+	@Then("the user verifies that no new row is added in area web page")
+	public void verifyNoNewRowAdded() {
+		getEditAreaPage().verifyNoNewRowAdded();
+	}
 }

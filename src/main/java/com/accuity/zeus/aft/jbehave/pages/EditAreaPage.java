@@ -1801,9 +1801,15 @@ public class EditAreaPage extends AbstractPage {
 
 
     public void verifyFidErrorMessageForEntity() {
+    	try{
+    		Thread.sleep(2000);	
+    	}
+    	catch(Exception e){
+    		e.printStackTrace();
+    	}    	
 		assertEquals(getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_fid_required_error_message_xpath"))
-				.getText(), "Enter a valid FID");
+				.getText(), "Enter valid FID");
 	}
     
     public void selectsEntityFidFromDropdown(String fid) {
@@ -1818,7 +1824,7 @@ public class EditAreaPage extends AbstractPage {
     
     public void verifyRelatedEntityInAreaPage(String entityType, String fid, String entityDetails) {
 		try {
-			Thread.sleep(6000);
+			Thread.sleep(3000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1876,6 +1882,17 @@ public class EditAreaPage extends AbstractPage {
     
     public void clicksOnEditButton() {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_edit_button_xpath"));
+	}
+    
+    public void verifyNoNewRowAdded() {
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertEquals("", getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_entirevalue_xpath")).getText());
+		
 	}
     
 	@Override

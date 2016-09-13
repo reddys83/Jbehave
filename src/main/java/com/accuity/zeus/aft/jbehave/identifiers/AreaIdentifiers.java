@@ -123,11 +123,11 @@ public class AreaIdentifiers {
 		hmap.put("area_entity_details_Select_dropdown_xpath",
 				By.xpath("//*[@id='additionalPresences']/tr/td[4]/select"));
 		hmap.put("area_entity_type_required_error_message_xpath",
-				By.xpath(".//*[@class='notification error'][@data-error_id='presencesType']"));
+				By.xpath("//*[@id='additionalPresences']/tr/td[1]/p"));
 		hmap.put("area_entity_required_error_message_xpath",
-				By.xpath(".//*[@class='notification error'][@data-error_id='presencesEntity']"));
+				By.xpath("//*[@id='additionalPresences']/tr/td[3]/p"));
 		hmap.put("area_fid_required_error_message_xpath",
-				By.xpath(".//*[@class='notification error'][@data-error_id='textSelectError']"));
+				By.xpath("//*[@id='additionalPresences']/tr/td[3]/div/p"));
 		hmap.put("area_entity_fid_dropdown_xpath",
 				By.xpath("//*[@id='fid']"));
 		
@@ -141,6 +141,7 @@ public class AreaIdentifiers {
 				By.xpath(".//*[@data-row_id='presences']//button[@class='delete-element']"));
 		hmap.put("area_get_relatedentity_entirevalue_xpath", By.xpath("//*[@id='areaPresences']//tbody"));
 		hmap.put("area_entity_edit_button_xpath", By.xpath("//button[@class='edit-row edit-presences']"));
+		hmap.put("area_get_relatedentity_entirevalue_xpath", By.xpath("//*[@id='areaPresences']//tbody"));
 	}
 
 	public static By getObjectIdentifier(String key) {
