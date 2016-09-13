@@ -197,8 +197,8 @@ public class EditAreaSteps extends AbstractSteps {
 		getDataPage().enterAreaInTypeAhead(area);
 	}
 
-	@Then("the user should see the status value in area page is same as in $source document")
-	public void verifyCityBeganDateValueFromDB(@Named("country") String country, @Named("area") String area,
+	@Then("the user should see the area status value in area page is same as in $source document")
+	public void verifyAreaStatusValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
 		getEditAreaPage().verifyAreaFromTrustedDB(country, area, "status", source);
 	}
