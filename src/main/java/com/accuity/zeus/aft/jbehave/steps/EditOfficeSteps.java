@@ -679,7 +679,7 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().clickonDeleteOfficeTypeRowButton(deletebutton);
     }
 
-    @Then("the user should still see the office $dropdown with value $dropdownvalue in office type in office page")
+    @Then("the user should still see the office $dropdown with value $dropdownvalue as office type in office page")
     public void verifyExistingOfficeTypeRow(String dropdown,String dropdownvalue)
     {
         getEditOfficePage().verifyExistingOfficeTypeRow(dropdown,dropdownvalue);
@@ -781,7 +781,7 @@ public class EditOfficeSteps extends AbstractSteps{
     public void verifyMaxlengthOfficeNameValueText(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeNameValueText(maxSize,rowIdentifier);}
 
 
-    @Then("the user verifies the office name sort name maxlength is $maxSize for the sortName")
+    @Then("the user verifies the office name sort name maxlength as $maxSize for the sortName field")
     public void verifyMaxlengthOfficeNameSortNameText(@Named("maxSize") String maxSize){getEditOfficePage().verifyMaxlengthOfficeNameSortNameText(maxSize);}
 
 
