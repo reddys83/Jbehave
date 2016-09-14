@@ -1120,7 +1120,8 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user selects details value as <placeDetails> in the places for area")
 	public void selectsDetailsFromDropdown(@Named("placeDetails") String placeDetails) {
-		getEditCityPage().selectsPlacesDetailsFromDropdown(placeDetails);
+		getEditAreaPage().selectsAreaPlacesDetailsFromDropdwon(placeDetails,1);
+		//getEditCityPage().selectsPlacesDetailsFromDropdown(placeDetails);
 	}
 
 	@Then("the user should see <placeType> <cityPlaces> <placeDetails> updated in area related place")
@@ -1173,11 +1174,11 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyDeletedRelatedPlaces(type, place, details);
 	}
 
-	@Then("the user should see the area related place date <placeType> <cityPlaces> <placeDetails> value in $source document")
+	/*@Then("the user should see the area related place date <placeType> <cityPlaces> <placeDetails> value in $source document")
 	public void verifyAreaRelatedValueFromZeusDB(@Named("area") String area, @Named("placeType") String type,
 			@Named("cityPlaces") String place, @Named("placeDetails") String details, @Named("source") String source) {
 		getEditAreaPage().verifyAreaRelatedValueFromZeusDB(area, type, place, details, source);
-	}
+	}*/
 
 	@Then("the user should not see the area related place value in $source document")
 	public void verifyDeletedAreaRelatedValueFromZeusDB(@Named("area") String area, @Named("source") String source) {
@@ -1192,6 +1193,82 @@ public class EditAreaSteps extends AbstractSteps {
 	@When("the user selects type value as <placeType> in the places for area")
 	public void selectsAreaTypeFromDropdown(@Named("placeType") String placeType) {
 		
-		getEditCityPage().selectsPlacesTypeFromDropdwon(placeType);
+		getEditAreaPage().selectsAreaPlacesTypeFromDropdwon(placeType,1);
+	}
+	
+
+	@When("the user selects type value as <placeType2> in the places for area")
+	public void selectsAreaTypeFromDropdown2(@Named("placeType2") String placeType2) {
+		
+		getEditAreaPage().selectsAreaPlacesTypeFromDropdwon(placeType2,2);
+	}
+	
+	@When("the user selects details value as <placeDetails2> in the places for area")
+	public void selectsDetailsFromDropdown2(@Named("placeDetails2") String placeDetails2) {
+		getEditAreaPage().selectsAreaPlacesDetailsFromDropdwon(placeDetails2,2);
+		//getEditCityPage().selectsPlacesDetailsFromDropdown(placeDetails);
+	}
+	
+	@When("the user clicks on edit button for second row  in places for area")
+	public void clicksOnEditButton2() {
+		getEditAreaPage().clicksOnEditButton();
+	}
+	
+	@When("the user enters the country <countryPlaces2> in type-ahead box for area related places")
+	public void selectsCountryInPlacesForArea2(@Named("countryPlaces2") String countryPlaces2) {
+		getEditCityPage().selectsCountryInPlacesForCity(countryPlaces2);
+	}
+	
+	@When("the user enters area <areaPlaces2> in the type-ahead box for area related places")
+	public void selectsAreaInPlacesForArea2(@Named("areaPlaces2") String areaPlaces2) {
+		getEditCityPage().selectsAreaInPlacesForCity(areaPlaces2);
+	}
+	
+	@When("the user enters city <cityPlaces2> in the type-ahead box for area related places")
+	public void selectsCityInPlacesForCountry2(@Named("cityPlaces2") String cityPlaces2) {
+		getEditCityPage().selectsCityInPlacesForCountry(cityPlaces2);
+	}
+	
+	@Then("the user should see <placeType> <cityPlaces> <placeDetails> updated correctly in area related place")
+	public void verifyAreaRelatedPlacesInUI(@Named("placeType") String areaPlacesType,
+			@Named("cityPlaces") String areaPlacesPlace, @Named("placeDetails") String areaPlacesDetails,@Named("placeType2") String areaPlacesType2,
+			@Named("cityPlaces2") String areaPlacesPlace2, @Named("placeDetails2") String areaPlacesDetails2) {
+		String[] areaRelatedTypes = { areaPlacesType, areaPlacesType2 };
+		String[] areaRelatedPlaces = { areaPlacesPlace, areaPlacesPlace2 };
+		String[] areaRelatedDetail = { areaPlacesDetails, areaPlacesDetails2 };
+		
+		getEditAreaPage().verifyAreaRelatedPlacesParametersInUI(areaRelatedTypes, areaRelatedPlaces, areaRelatedDetail);
+	}
+	
+	@Then("the user should see the area related place date <placeType> <cityPlaces> <placeDetails> value in $source document")
+	public void verifyAreaRelatedValueFromZeusDB(@Named("placeType") String areaPlacesType,
+			@Named("cityPlaces") String areaPlacesPlace, @Named("placeDetails") String areaPlacesDetails,@Named("placeType2") String areaPlacesType2,
+			@Named("cityPlaces2") String areaPlacesPlace2, @Named("placeDetails2") String areaPlacesDetails2,@Named("source") String source,@Named("area") String area) {
+		
+		List<String> relatedTypes = new ArrayList<>();
+		List<String> relatedValues = new ArrayList<>();
+		List<String> relatedDetails = new ArrayList<>();
+		relatedTypes.add(areaPlacesType);
+		relatedValues.add(areaPlacesPlace);
+		relatedDetails.add(areaPlacesDetails);
+		relatedTypes.add(areaPlacesType2);
+		relatedValues.add(areaPlacesPlace2);
+		relatedDetails.add(areaPlacesDetails2);
+		
+		getEditAreaPage().verifyAreaRelatedValueFromZeusDB(area,source, relatedTypes, relatedValues, relatedDetails);
+	}
+	
+	@Then("the user should see the updated area related place date <placeType> <cityPlaces> <placeDetails> value in $source document")
+	public void verifyUpdatedAreaRelatedValueFromZeusDB(@Named("placeType") String areaPlacesType,
+			@Named("cityPlaces") String areaPlacesPlace, @Named("placeDetails") String areaPlacesDetails,@Named("source") String source,@Named("area") String area) {
+		
+		List<String> relatedTypes = new ArrayList<>();
+		List<String> relatedValues = new ArrayList<>();
+		List<String> relatedDetails = new ArrayList<>();
+		relatedTypes.add(areaPlacesType);
+		relatedValues.add(areaPlacesPlace);
+		relatedDetails.add(areaPlacesDetails);
+				
+		getEditAreaPage().verifyAreaRelatedValueFromZeusDB(area,source, relatedTypes, relatedValues, relatedDetails);
 	}
 }

@@ -86,6 +86,17 @@ And the user clicks on city options in the places for area
 And the user enters city <cityPlaces> in the type-ahead box for area related places
 And the user clicks on go button in places for area
 And the user selects details value as <placeDetails> in the places for area
+And the user clicks on the add button for adding new places for area page
+And the user selects type value as <placeType2> in the places for area
+When the user clicks on edit button for second row  in places for area
+And the user clicks on the country option in the places for area
+When the user enters the country <countryPlaces2> in type-ahead box for area related places
+And the user clicks on area option in the places for area
+When the user enters area <areaPlaces2> in the type-ahead box for area related places
+And the user clicks on city options in the places for area
+And the user enters city <cityPlaces2> in the type-ahead box for area related places
+And the user clicks on go button in places for area
+And the user selects details value as <placeDetails2> in the places for area
 And the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
@@ -93,13 +104,13 @@ And the user should see the below summary changes in confirmation modal
 |Related Places|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
-Then the user should see <placeType> <cityPlaces> <placeDetails> updated in area related place
+Then the user should see <placeType> <cityPlaces> <placeDetails> updated correctly in area related place
 Then the user should see the area related place date <placeType> <cityPlaces> <placeDetails> value in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|country|area|placeType|countryPlaces|areaPlaces|cityPlaces|placeDetails|
-|Angola|Cabinda|Capital City|Angola|Zaire|Soyo|State Capital|
+|country|area|placeType|countryPlaces|areaPlaces|cityPlaces|placeDetails|placeType2|placeDetails2|countryPlaces2|areaPlaces2|cityPlaces2|
+|Angola|Cabinda|Capital City|Angola|Zaire|Soyo|State Capital|Capital City|State Capital|Angola|Namibe|Camucuio|
 
 Scenario: 
 a)Verify whether user is able to update an existing  Area Related place (no different to the current value) with same values successfully
@@ -131,37 +142,12 @@ Then the user should not see the <ConfirmationSummary> changes in confirmation m
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user should see <placeType> <cityPlaces> <placeDetails> updated in area related place
-Then the user should see the area related place date <placeType> <cityPlaces> <placeDetails> value in zeus document
+Then the user should see the updated area related place date <placeType> <cityPlaces> <placeDetails> value in zeus document
 Then the user reverts the changes to the document
 
 Examples:
 |country|area|placeType|countryPlaces|areaPlaces|cityPlaces|placeDetails|ConfirmationSummary|
 |Angola|Cabinda|Capital City|Angola|Bengo|Caxito|State Capital|Summary|
-
-Scenario: Verify whether the list in country, area and city dropdown is displaying as expected
-
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the area tab in the data area
-When the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
-And the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-And the user clicks on the area places link in the navigation bar
-And the user clicks on the area update link
-When the user clicks on edit button in places for area
-And the user clicks on the country option in the places for area
-Then the user should see the list of all existing countries by full name in places for area
-When the user enters the country <countryPlaces> in type-ahead box for area related places
-When the user clicks on area option in the places for area
-Then the user should see the list of all existing area for the selected country by full name in places for area
-When the user enters area <areaPlaces> in the type-ahead box for area related places
-And the user clicks on city options in the places for area
-Then the user should see the list of all existing city for the selected area by full name in places for area
-
-Examples:
-|country|area|countryPlaces|areaPlaces|
-|Angola|Cabinda|Algeria|Blida|
 
 Scenario: Verify whether User is able to see Go Button is disabled when
 User should see Go Button is disabled when
@@ -396,4 +382,3 @@ Then the user should see that Edit button for place field is enabled
 Examples:
 |country|area|placeType|countryPlaces|areaPlaces|cityPlaces|
 |Angola|Cabinda|Capital City|Algeria|Blida|Bouinan|
-
