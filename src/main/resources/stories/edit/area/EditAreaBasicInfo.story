@@ -1748,7 +1748,6 @@ Scenario: User views the Area basic page,selects the update button with subarea=
 2- User verifies the country dropdown is populating with header country value
 3- User verifies the country list are in Alphabetical order
 4- User verifies the Area parent list is empty
-Meta:@test155
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1776,7 +1775,6 @@ Scenario: User views the Area basic page,selects the update button with subarea
 4- User verifies area parent dropdown is populating with header area value
 5- User verifies the Area parent list are in Alphabetical order and list shows all areas related to the Country
 6- User verifies Area parent option do not have 'No Area'
-Meta:@test155
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1802,7 +1800,6 @@ Examples:
 
 Scenario: User views the area basic page,selects the update button with subarea = 'Choose a Subarea',changes the country2
 User verifies whether the Area Parent value is defaulted with null
-Meta:@test155
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1824,7 +1821,6 @@ Examples:
 Scenario: User views the area basic page,selects the update button with subarea,changes the country2
 1- User verifies whether Area parent showing default value as 'Choose an Area'
 2- User verifies the Area parent is in Alphabetical order and list shows all areas related to country2
-Meta:@test155
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1850,7 +1846,6 @@ each of 'Country','Area Parent','Sub Area',change the country2,'Area Parent'
 2- User verifies Address bar url is updated with country2 and areaparent
 3- User verifies Zeus DB whether the subarea is mapped under newly added country2 and areaparent
 4- User verifies subarea is not mapped to country and area
-Meta:@test155
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1889,7 +1884,6 @@ Scenario: User is updating a Areas's Basic Info and has set values for
 each of 'Country' ,'Area','Sub Area' as 'Choose a Subarea',change the country
 1-  User verifies the header dropdowns are updated with country2 and area
 2 - User verifies the Zeus DB whether the area is mapped under newly added country2
-Meta:@test155
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1919,7 +1913,6 @@ Scenario: User is updating a Areas's Basic Info and has set values for
 each of 'Country','Area Parent','Sub Area',change the 'country' with 'Area Parent' as 'Choose an Area'
 1 - User verifies Area Parent dropdown is populated with 'Choose an area'
 2 - User verifies the 'Area Parent' field is showing 'Required' validation message
-Meta:@test156
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
