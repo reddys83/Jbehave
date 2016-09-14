@@ -531,7 +531,7 @@ Examples:
 |1010|FID|1010|1010-44|Mailing|USA||
 
 Scenario:  Verify Office Telecoms Type dropdown values are from lookup TELECOM_TYPE
-
+Meta: @qatest
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -541,8 +541,9 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
+When the user deletes the existing office telecom locations values in fdb document
 And the user clicks on add new office telecoms button in the office locations
-Then the user should see the office_telecoms_first_row_new_telecoms_type_dropdown values in office telecoms's section from lookup TELECOM_TYPE
+Then the user should see the office_locations_telecoms_type_dropdown_options values in office telecoms's section from lookup TELECOM_TYPE
 Then the user should see the office telecom values same as in trusted document
 
 Examples:
@@ -563,6 +564,7 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office telecom locations values in fdb document
 When the user deletes the existing office telecom locations rows
 And the user clicks on add new office telecoms button in the office locations
 And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
@@ -577,14 +579,14 @@ And the user enters office telecoms text after office_telecoms_first_row_new_tex
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
-And the user verifies that the office telecom fields are entered in the office locations page
-Then the user should see the office telecomm fields as in zeus document
+And the user verifies that the office telecom fields for Type(telephone/fax) are entered in the office locations page
+Then the user should see the office telecomm fields for Type(telephone/fax) as in zeus document
 And the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|AnswerBack|Value|
-|1038|FID|1038|1038-60|telephone|1|5 pm|708|298|3125|20|123|9 am|||
-|1038|FID|1038|1038-60|fax|1|5 pm|708|298|3142|20|123|9 am|||
+|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|CountryCode|AreaCode|Number|RangeLimit|Ext|TextAfter|
+|1038|FID|1038|1038-51|telephone|1|5 pm|708|298|3125|20|123|9 am|
+|1038|FID|1038|1038-51|fax|1|5 pm|708|298|3142|20|123|9 am|
 
 Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Telephone' or 'Fax' 
 a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
@@ -655,6 +657,7 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office telecom locations values in fdb document
 When the user deletes the existing office telecom locations rows
 And the user clicks on add new office telecoms button in the office locations
 And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
@@ -670,16 +673,15 @@ And the user should see the below summary changes in confirmation modal
 |Locations|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
-And the user verifies that the office telecom fields are entered in the office locations page
-And the user should see the office telecomm fields as in zeus document
+And the user verifies that the office telecom fields for Type(telex/reuters/cable) are entered in the office locations page
+And the user should see the office telecomm fields for Type(telex/reuters/cable) as in zeus document
 And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|TextAfter|AnswerBack|
-|1038|FID|1038|1038-60|telex|1|5 pm|abc|9 am|1 hr|
-|1038|FID|1038|1038-60|reuters|1|5 pm|afv|9 am|1 hr|
-|1038|FID|1038|1038-60|cable|1|5 pm|hsn||9 am|1 hr|
-
+|1038|FID|1038|1038-51|telex|1|5 pm|abc|9 am|1 hr|
+|1038|FID|1038|1038-51|reuters|1|5 pm|afv|9 am|1 hr|
+|1038|FID|1038|1038-51|cable|1|5 pm|hsn|9 am|1 hr|
 
 Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Telex', 'Reuters', 'Cable', 'Website' 
 a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
@@ -728,6 +730,7 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office telecom locations values in fdb document
 When the user deletes the existing office telecom locations rows
 And the user clicks on add new office telecoms button in the office locations
 And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
@@ -742,8 +745,8 @@ And the user should see the below summary changes in confirmation modal
 |Locations|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
-And the user verifies that the office telecom fields are entered in the office locations page
-And the user should see the office telecomm fields as in zeus document
+And the user verifies that the office telecom fields for Type(email/website) are entered in the office locations page
+And the user should see the office telecomm fields for Type(email/website) as in zeus document
 And the user reverts the changes to the document
 
 Examples:
@@ -913,6 +916,7 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office telecom locations values in fdb document
 When the user deletes the existing office telecom locations rows
 And the user clicks on add new office telecoms button in the office locations
 And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
