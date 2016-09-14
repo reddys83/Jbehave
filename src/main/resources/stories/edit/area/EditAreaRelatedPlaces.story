@@ -51,14 +51,15 @@ And the user clicks on the area places link in the navigation bar
 And the user clicks on the area update link
 When the user deletes the existing related places rows
 And the user clicks on the add button for adding new places for area page
+And the user selects details value as <placeDetails> in the places for area
 And the user clicks on the save button
 Then the user should see the error message required for type in places for area
 Then the user should see the error message required for place in places for area
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
-|country|area|
-|Angola|Cabinda|
+|country|area|placeDetails|
+|Angola|Cabinda|State Capital|
 
 Scenario: 
 a)Verify whether user is able to add a Area Related place successfully in Area Web page
@@ -147,7 +148,122 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|placeType|countryPlaces|areaPlaces|cityPlaces|placeDetails|ConfirmationSummary|
-|Angola|Cabinda|Capital City|Angola|Bengo|Caxito|State Capital|Summary|
+|Angola|Cabinda|Capital City|Angola|Cunene|Cahama|State Capital|Summary|
+
+Scenario: Verify whether User is able to see Go Button is disabled when
+User should see Go Button is disabled when
+a)Country not selected ("Choose a Country")
+b)Country selected. Area selected and = "Return All Cities" or "No area". City not selected ("Choose a City")
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the area places link in the navigation bar
+And the user clicks on the area update link
+When the user deletes the existing related places rows
+And the user clicks on the add button for adding new places for area page
+When the user clicks on edit button in places for area
+Then the user should see 'Go' button disabled until value for City is selected
+When the user clicks on the country option in the places for area
+And the user enters the country <countryPlaces> in type-ahead box for area related places
+And the user clicks on area option in the places for area
+And the user enters area <areaPlaces> in the type-ahead box for area related places
+Then the user should see 'Go' button disabled until value for City is selected
+
+Examples:
+|country|area|countryPlaces|areaPlaces|
+|Angola|Cabinda|Algeria|No Area|
+|Angola|Cabinda|Algeria|Return All Cities|
+
+Scenario: Verify whether User is able to see Go Button is disabled when (while adding a new related place)
+User should see Go Button is Enabled when
+a)Country selected. Area not selected ("Choose an Area") & Country should be updated in place
+b)Country selected. Area selected and <> "Return All Areas" or "NO area". City not selected ("Choose a City") & Area should be updated in place
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the area places link in the navigation bar
+And the user clicks on the area update link
+When the user deletes the existing related places rows
+And the user clicks on the add button for adding new places for area page
+When the user clicks on edit button in places for area
+When the user clicks on the country option in the places for area
+And the user enters the country <countryPlaces> in type-ahead box for area related places
+Then the user should see Go button enabled
+When the user clicks on go button in places for area
+Then the user should see place as Angola in places for area
+When the user clicks on edit button in places for area
+When the user clicks on the country option in the places for area
+And the user enters the country <countryPlaces> in type-ahead box for area related places
+When the user clicks on area option in the places for area
+When the user enters area <areaPlaces> in the type-ahead box for area related places
+Then the user should see Go button enabled
+When the user clicks on go button in places for area
+Then the user should see place as Moxico in places for area
+
+Examples:
+|country|area|countryPlaces|areaPlaces|
+|Angola|Cabinda|Angola|Moxico|
+
+Scenario: Verify whether User is able to see Go Button is disabled when (while updating existing related place)
+User should see Go Button is Enabled when
+a)Country selected. Area not selected ("Choose an Area") & Country should be updated in place
+b)Country selected. Area selected and <> "Return All Areas" or "NO area". City not selected ("Choose a City") & Area should be updated in place
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the area tab in the data area
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the area places link in the navigation bar
+And the user clicks on the area update link
+When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing related places rows
+And the user clicks on the add button for adding new places for area page
+And the user selects type value as <placeType> in the places for area
+When the user clicks on edit button in places for area
+And the user clicks on the country option in the places for area
+When the user enters the country <countryPlaces> in type-ahead box for area related places
+Then the user should see Go button enabled
+When the user clicks on go button in places for area
+Then the user should see place as Angola in places for area
+When the user clicks on edit button in places for area
+When the user clicks on the country option in the places for area
+And the user enters the country <countryPlaces> in type-ahead box for area related places
+When the user clicks on area option in the places for area
+When the user enters area <areaPlaces> in the type-ahead box for area related places
+Then the user should see Go button enabled
+When the user clicks on go button in places for area
+Then the user should see place as Namibe in places for area
+When the user clicks on edit button in places for area
+When the user clicks on the country option in the places for area
+And the user enters the country <countryPlaces> in type-ahead box for area related places
+When the user clicks on area option in the places for area
+When the user enters area <areaPlaces> in the type-ahead box for area related places
+And the user clicks on city options in the places for area
+And the user enters city <cityPlaces> in the type-ahead box for area related places
+And the user clicks on go button in places for area
+And the user selects details value as <placeDetails> in the places for area
+And the user clicks on the save button
+Then the user should see the save confirmation modal
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the page
+Then the user reverts the changes to the document
+
+Examples:
+|country|area|countryPlaces|areaPlaces|cityPlaces|placeType|placeDetails|
+|Angola|Cabinda|Angola|Namibe|Bibala|Capital City|State Capital|
 
 Scenario: Verify whether User is able to see Go Button is disabled when
 User should see Go Button is disabled when
@@ -312,7 +428,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|placeType|countryPlaces|areaPlaces|cityPlaces|placeDetails|
-|Angola|Cabinda|Capital City|Angola|Bengo|Caxito|State Capital|
+|Angola|Cabinda|Capital City|Angola|Luanda|Palanca|State Capital|
 
 Scenario: 
 Verify whether user is able to view the related place in Area page when 'no' button is clicked in delete confirmation dialog
@@ -340,7 +456,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|placeType|countryPlaces|areaPlaces|cityPlaces|placeDetails|ConfirmationSummary|
-|Angola|Cabinda|Capital City|Angola|Bengo|Caxito|State Capital|Summary|
+|Angola|Cabinda|Capital City|Angola|Cunene|Cahama|State Capital|Summary|
 
 Scenario: User is verifying whether all expected Fields are disabled/Enabled at Related Place section
 
