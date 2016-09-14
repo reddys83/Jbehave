@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 
 @Component
 public class EditAreaSteps extends AbstractSteps {
@@ -1043,13 +1044,15 @@ public class EditAreaSteps extends AbstractSteps {
 	}
 
 	@When("the user clicks on new area places type drop-down for area")
-	public void clickAreaPlaceType() {
-		getEditAreaPage().clickAreaPlaceType();
+	public void clickAreaplaceType() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"));
+		//getEditAreaPage().clickAreaplaceType();
 	}
 
 	@Then("the user should see the values for type dropdown from lookup AREA_RELATED_PLACE_TYPE")
 	public void verifyAreaPlacesTypeList() {
-		getEditAreaPage().verifyAreaPlacesTypeList();
+		getDataPage().verifyLookUpValues(AreaIdentifiers.getObjectIdentifier("area_places_type_options_dropdown_xpath"), "get area places type lookup", "detail");
+		//getEditAreaPage().verifyAreaPlacesTypeList();
 	}
 
 	@When("the user clicks on new area places details drop-down for area")
@@ -1059,7 +1062,8 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should see the values for details dropdown from lookup AREA_RELATED_PLACE_SUBTYPE")
 	public void verifyAreaPlacesDetailsList() {
-		getEditAreaPage().verifyAreaPlacesDetailsList();
+		getDataPage().verifyLookUpValues(CityIdentifiers.getObjectIdentifier("city_places_details_options_dropdown_xpath"), "get area places detail lookup", "detail");
+		//getEditAreaPage().verifyAreaPlacesDetailsList();
 	}
 
 	@Then("the user should see the error message required for type in places for area")
@@ -1067,11 +1071,12 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditCityPage().verifyRequiredErrorMessageForType();
 	}
 
-	@When("the user selects type value as <PlaceType> in the places for area")
-	public void selectsTypeFromDropdown(@Named("PlaceType") String PlaceType) {
-		getEditCityPage().selectsPlacesTypeFromDropdwon(PlaceType);
+	/*@When("the user selects type value as <placeType> in the places for area")
+	public void selectsTypeFromDropdown(@Named("placeType") String placeType) {
+		
+		getEditCityPage().selectsPlacesTypeFromDropdwon(placeType);
 	}
-
+*/
 	@When("the user clicks on edit button in places for area")
 	public void clicksOnEditButton() {
 		setEditCityPage(getDataPage().createEditCityPage());
@@ -1113,14 +1118,14 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditCityPage().clicksOnGoButton();
 	}
 
-	@When("the user selects details value as <PlaceDetails> in the places for area")
-	public void selectsDetailsFromDropdown(@Named("PlaceDetails") String PlaceDetails) {
-		getEditCityPage().selectsPlacesDetailsFromDropdown(PlaceDetails);
+	@When("the user selects details value as <placeDetails> in the places for area")
+	public void selectsDetailsFromDropdown(@Named("placeDetails") String placeDetails) {
+		getEditCityPage().selectsPlacesDetailsFromDropdown(placeDetails);
 	}
 
-	@Then("the user should see <PlaceType> <cityPlaces> <PlaceDetails> updated in area related place")
-	public void verifyRelatedPlacesInAreaPage(@Named("PlaceType") String areaPlacesType,
-			@Named("cityPlaces") String areaPlacesPlace, @Named("PlaceDetails") String areaPlacesDetails) {
+	@Then("the user should see <placeType> <cityPlaces> <placeDetails> updated in area related place")
+	public void verifyRelatedPlacesInAreaPage(@Named("placeType") String areaPlacesType,
+			@Named("cityPlaces") String areaPlacesPlace, @Named("placeDetails") String areaPlacesDetails) {
 		getEditAreaPage().verifyRelatedPlacesInAreaPage(areaPlacesType, areaPlacesPlace, areaPlacesDetails);
 	}
 
@@ -1147,7 +1152,8 @@ public class EditAreaSteps extends AbstractSteps {
 	@When("the user clicks on the area places link in the navigation bar")
 	public void clickOnAreaPlaces() {
 		setEditAreaPage(getDataPage().createEditAreaPage());
-		getEditAreaPage().clickOnAreaPlaces();
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_link_id"));
+		//getEditAreaPage().clickOnAreaPlaces();
 	}
 
 	@Then("the user should see place as $place in places for area")
@@ -1161,15 +1167,15 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditCityPage().clicksOnDeleteCityPlacesType();
 	}
 
-	@Then("the user should not see <PlaceType> <cityPlaces> <PlaceDetails> updated in area related place")
-	public void verifyDeletedRelatedPlaces(@Named("PlaceType") String type, @Named("cityPlaces") String place,
-			@Named("PlaceDetails") String details) {
+	@Then("the user should not see <placeType> <cityPlaces> <placeDetails> updated in area related place")
+	public void verifyDeletedRelatedPlaces(@Named("placeType") String type, @Named("cityPlaces") String place,
+			@Named("placeDetails") String details) {
 		getEditAreaPage().verifyDeletedRelatedPlaces(type, place, details);
 	}
 
-	@Then("the user should see the area related place date <PlaceType> <cityPlaces> <PlaceDetails> value in $source document")
-	public void verifyAreaRelatedValueFromZeusDB(@Named("area") String area, @Named("PlaceType") String type,
-			@Named("cityPlaces") String place, @Named("PlaceDetails") String details, @Named("source") String source) {
+	@Then("the user should see the area related place date <placeType> <cityPlaces> <placeDetails> value in $source document")
+	public void verifyAreaRelatedValueFromZeusDB(@Named("area") String area, @Named("placeType") String type,
+			@Named("cityPlaces") String place, @Named("placeDetails") String details, @Named("source") String source) {
 		getEditAreaPage().verifyAreaRelatedValueFromZeusDB(area, type, place, details, source);
 	}
 
@@ -1178,8 +1184,14 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyDeletedAreaRelatedValueFromZeusDB(area, source);
 	}
 
-	@When("the user updates type value as <PlaceType> in the places for area")
-	public void selectsExistingTypeFromDropdown(@Named("PlaceType") String PlaceType) {
-		getEditAreaPage().selectsPlacesTypeFromDropdwon(PlaceType);
+	@When("the user updates type value as <placeType> in the places for area")
+	public void selectsExistingTypeFromDropdown(@Named("placeType") String placeType) {
+		getEditAreaPage().selectsPlacesTypeFromDropdwon(placeType);
+	}
+	
+	@When("the user selects type value as <placeType> in the places for area")
+	public void selectsAreaTypeFromDropdown(@Named("placeType") String placeType) {
+		
+		getEditCityPage().selectsPlacesTypeFromDropdwon(placeType);
 	}
 }

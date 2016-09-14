@@ -1795,7 +1795,7 @@ public class EditAreaPage extends AbstractPage {
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_entirevalue_xpath")).getText());
 	}
 
-	public String getAreaRelatedInfoFromDB(String area, String tagName, String source) {
+/*	public String getAreaRelatedInfoFromDB(String area, String tagName, String source) {
 
 		String tagValue = null;
 		List<NameValuePair> nvPairs = new ArrayList<>();
@@ -1814,20 +1814,20 @@ public class EditAreaPage extends AbstractPage {
 					: getNodeValuesByTagName(document, tagName).get(0);
 		}
 		return tagValue;
-	}
+	}*/
 
 	public void verifyAreaRelatedValueFromZeusDB(String area, String type, String place, String details,
 			String source) {
-		assertEquals(getAreaRelatedInfoFromDB(area, "type", source), type);
-		assertEquals(getAreaRelatedInfoFromDB(area, "value", source), place);
-		assertEquals(getAreaRelatedInfoFromDB(area, "details", source), details);
+		//assertEquals(getTagValueFromDB("get area related place info", "type", Map(source,),type);
+		//assertEquals(getAreaRelatedInfoFromDB(area, "value", source), place);
+		//assertEquals(getAreaRelatedInfoFromDB(area, "details", source), details);
 
 	}
 
 	public void verifyDeletedAreaRelatedValueFromZeusDB(String area, String source) {
-		assertEquals(getAreaRelatedInfoFromDB(area, "type", source), "");
-		assertEquals(getAreaRelatedInfoFromDB(area, "value", source), "");
-		assertEquals(getAreaRelatedInfoFromDB(area, "details", source), "");
+		//assertEquals(getAreaRelatedInfoFromDB(area, "type", source), "");
+		//assertEquals(getAreaRelatedInfoFromDB(area, "value", source), "");
+		//assertEquals(getAreaRelatedInfoFromDB(area, "details", source), "");
 
 	}
 
@@ -1835,6 +1835,14 @@ public class EditAreaPage extends AbstractPage {
 		selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"),
 				placeType);
 	}
+	
+	public void selectsAreaPlacesTypeFromDropdwon(String placeType,int rowNumber) {
+		selectDropDownValueFromRowNumber(
+				AreaIdentifiers.getObjectIdentifier("city_places_type_dropdown_xpath"),
+				 placeType, rowNumber);
+			//selectItemFromDropdownListByText(CityIdentifiers.getObjectIdentifier("city_places_type_dropdown_xpath"),
+			//placeType);
+    }
 	
 	@Override
 	public String getPageUrl() {
