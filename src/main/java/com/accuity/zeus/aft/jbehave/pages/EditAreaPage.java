@@ -28,7 +28,6 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -1224,7 +1223,7 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void verifyAreaInterestRateFromTrustedDB(String country, String area, String tagName, String source) {
 		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source),
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).getText());
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).getAttribute("value"));
 	}
 	
 	public void verifyMaxLengthInterestRate(String maxLength) {
@@ -1740,6 +1739,124 @@ public class EditAreaPage extends AbstractPage {
 		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), row);
 	}
 	
+	public void verifyDemographicValueInDB(String country, String area, String source, List<String> demographicType,
+			List<String> demographicValue, List<String> demographicUnit, List<String> date) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			Thread.sleep(3000L);
+
+			Map<String, List<String>> nodeList = new HashMap<String, List<String>>();
+			nodeList.put("areaDemographicsType", demographicType);
+			nodeList.put("areaDemographicsValue", demographicValue);
+			nodeList.put("areaDemographicsUnit", demographicUnit);
+			nodeList.put("areaDemographicsDate", date);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get area demographics info", nvPairs);
+			if (document != null) {
+				for (int index = 0; index < demographicType.size(); index++) {
+					NodeList nodeListInDB = document.getElementsByTagName("metrics").item(index).getChildNodes();
+					for (int nodeIndex = 0; nodeIndex < nodeListInDB.getLength(); nodeIndex++) {
+						String nodeName = nodeListInDB.item(nodeIndex).getNodeName();					
+							if (nodeName == "areaDemographicsUnit" && (nodeList.get(nodeName)!=null) && !(nodeList.get(nodeName).get(index).isEmpty())) {
+								assertEquals(nodeListInDB.item(nodeIndex).getTextContent().substring(0, 2),
+										nodeList.get(nodeName).get(index).substring(0, 2));
+							} else if(nodeName != "areaDemographicsUnit"){
+								assertEquals(nodeListInDB.item(nodeIndex).getTextContent(),	nodeList.get(nodeName).get(index).trim());
+							}
+						
+					}
+				}
+				
+			} else {
+				assertTrue(source + "document is null", false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyDemographicValueInUI(List<String> demographicType, List<String> demographicValue,
+			List<String> demographicUnit, List<String> date) {
+		try {
+			assertFalse("No rows exist in demographics section", getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_row_view_mode")).size() == 1);
+			List<WebElement> demographicsRows = getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_row_view_mode"));
+			
+			for (int index = 1; index < demographicsRows.size(); index++) {
+				List<WebElement> demographicsColumn = getDriver().findElements(AreaIdentifiers.
+						getObjectIdentifier("area_demographics_row_view_mode")).get(index).findElements(By.tagName("td"));
+				assertEquals("demographicType: ", demographicsColumn.get(0).getText(), demographicType.get(index-1));
+				assertEquals("demographicValue: ", demographicsColumn.get(1).getText().replace(",", ""),
+						demographicValue.get(index-1));
+				if (demographicUnit!=null) {
+					assertTrue("demographicUnit",
+							demographicsColumn.get(2).getText().contains(demographicUnit.get(index-1).substring(0, 2)));
+				}
+				if (date!=null) {
+					assertEquals("date :", demographicsColumn.get(3).getText(), date.get(index-1).trim());
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyDemographicValueRowInUI(String demographicType, String demographicValue, String demographicUnit,
+			String date, int rowNumber) {
+		try {
+			List<WebElement> demographicsColumn = getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_row_view_mode")).get(rowNumber)
+					.findElements(By.tagName("td"));
+			assertEquals("demographicType: ", demographicsColumn.get(0).getText(), demographicType);
+			assertEquals("demographicValue: ", demographicsColumn.get(1).getText().replace(",", ""), demographicValue);
+			if (demographicUnit!=null) {
+				assertTrue("demographicUnit",
+						demographicsColumn.get(2).getText().contains(demographicUnit.substring(0, 2)));
+			}
+			if (!date.isEmpty()) {
+				assertEquals("date :", demographicsColumn.get(3).getText(), date);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyAreaDemographicsUnitDropdownList() {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("unit", "area"));
+		attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"));
+		List<WebElement> demographicsUnit = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_options"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get area demographics unit", nvPairs);
+		for (int i = 0; i < document.getElementsByTagName("unit").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					demographicsUnit.get(i + 1).getText());
+		}
+	}
+
+	public void verifyDemographicsRowNotPresentInZeusDB(String country, String area, String source) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			Thread.sleep(1000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get area demographics info", nvPairs);
+			if (document != null) {
+				assertNull(document.getElementsByTagName("areaDemographicsType").item(0));
+				assertNull(document.getElementsByTagName("areaDemographicsValue").item(0));
+			} else
+				assert false : source + " document is null";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
+
 	public void clickOnAreaEntity() {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_link_id"));
 	}

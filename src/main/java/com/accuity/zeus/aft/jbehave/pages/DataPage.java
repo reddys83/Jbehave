@@ -1344,6 +1344,24 @@ public class DataPage extends AbstractPage {
         assertTrue(response == 202);
     }
     
+    public void verifyElementNotExistInUI(By by) {
+		try {			
+			assertTrue(getDriver().findElement(by) == null);
+		} catch (Exception e) {
+			assertTrue(true);
+		}
+	}
+    
+    public void enterTextUsingIndex(By by, String value, int index) { 
+    	try {
+    		List<WebElement> elementList = getDriver().findElements(by);		
+        	elementList.get(index-1).clear();
+        	elementList.get(index-1).sendKeys(value);
+    	}
+    	catch (Exception e) {
+			assertFalse("Element not found", false);
+		}    	
+	}
 
 	public String getTagValueFromDB(String queryName, String tagName, Map<String, String> inputParameters) {
 		String tagValue = null;
