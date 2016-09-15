@@ -1345,7 +1345,6 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on the area places link in the navigation bar")
 	public void clickOnAreaPlaces() {
-//		setEditAreaPage(getDataPage().createEditAreaPage());
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_link_id"));
 	}
 
