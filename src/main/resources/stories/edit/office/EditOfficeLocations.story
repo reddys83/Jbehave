@@ -531,7 +531,7 @@ Examples:
 |1010|FID|1010|1010-44|Mailing|USA||
 
 Scenario:  Verify Office Telecoms Type dropdown values are from lookup TELECOM_TYPE
-Meta: @qatest
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -543,9 +543,9 @@ And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 Then the user should see the office telecom values same as in trusted document
 When the user deletes the existing office telecom locations values in fdb document
+When the user deletes the existing office telecom locations rows
 And the user clicks on add new office telecoms button in the office locations
 Then the user should see the office_locations_telecoms_type_dropdown_options values in office telecoms's section from lookup TELECOM_TYPE
-
 
 Examples:
 |entity|searchBy|fid|officeFid|

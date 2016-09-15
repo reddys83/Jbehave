@@ -345,77 +345,66 @@ public class EditOfficeSteps extends AbstractSteps{
     @When("the user selects office telecoms type $typeRowIdentifier value as <Type>")
     public void selectOfficeTelecomsType(@Named("typeRowIdentifier") String typeRowIdentifier,@Named("Type") String Type)
     {
-        //getEditOfficePage().selectOfficeTelecomsType(typeRowIdentifier,Type);
         getEditOfficePage().selectDropDownValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier(typeRowIdentifier), Type, 1);
     }
 
     @When("the user enters office telecoms rank $rankRowIdentifier value as <Rank>")
     public void enterOfficeTelecomsRank(@Named("rankRowIdentifier") String rankRowIdentifier,@Named("Rank") String Rank)
     {
-        //getEditOfficePage().enterOfficeTelecomsRank(rankRowIdentifier,Rank);
         getEditOfficePage().selectTexBoxValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier(rankRowIdentifier), Rank, 1);
     }
 
     @When("the user enters office telecoms text before $textBeforeRowIdentifier value as <TextBefore>")
     public void enterOfficeTelecomsTextBefore(@Named("textBeforeRowIdentifier") String textBeforeRowIdentifier,@Named("TextBefore") String TextBefore)
     {
-        //getEditOfficePage().enterOfficeTelecomsTextBefore(textBeforeRowIdentifier,TextBefore);
         getEditOfficePage().selectTexBoxValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier(textBeforeRowIdentifier), TextBefore, 1);
     }
 
     @When("the user enters office telecoms value $valueRowIdentifier value as <CountryCode>")
      public void enterOfficeTelecomsCountryCode(@Named("valueRowIdentifier") String valueRowIdentifier,@Named("CountryCode") String CountryCode)
     {
-        //getEditOfficePage().enterOfficeTelecomsCountryCode(valueRowIdentifier,CountryCode);
         getEditOfficePage().selectTexBoxValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier(valueRowIdentifier), CountryCode, 1);
     }
 
     @When("the user enters office telecoms value $valueRowIdentifier value as <AreaCode>")
     public void enterOfficeTelecomsAreaCode(@Named("valueRowIdentifier") String valueRowIdentifier,@Named("AreaCode") String AreaCode)
     {
-        //getEditOfficePage().enterOfficeTelecomsAreaCode(valueRowIdentifier,AreaCode);
         getEditOfficePage().selectTexBoxValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier(valueRowIdentifier), AreaCode, 1);
     }
 
     @When("the user enters office telecoms value $valueRowIdentifier value as <Number>")
     public void enterOfficeTelecomsNumber(@Named("valueRowIdentifier") String valueRowIdentifier,@Named("Number") String Number)
     {
-        //getEditOfficePage().enterOfficeTelecomsNumber(valueRowIdentifier,Number);
         getEditOfficePage().selectTexBoxValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier(valueRowIdentifier), Number, 1);
     }
 
     @When("the user enters office telecoms range limit $rangeLimitRowIdentifier value as <RangeLimit>")
     public void enterOfficeTelecomsRangeLimit(@Named("rangeLimitRowIdentifier") String rangeLimitRowIdentifier,@Named("RangeLimit") String RangeLimit)
     {
-       // getEditOfficePage().enterOfficeTelecomsRangeLimit(rangeLimitRowIdentifier,RangeLimit);
         getEditOfficePage().selectTexBoxValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier(rangeLimitRowIdentifier), RangeLimit, 1);
     }
 
     @When("the user enters office telecoms ext $extRowIdentifier value as <Ext>")
        public void enterOfficeTelecomsExt(@Named("extRowIdentifier") String extRowIdentifier,@Named("Ext") String Ext)
     {
-        //getEditOfficePage().enterOfficeTelecomsExt(extRowIdentifier,Ext);
         getEditOfficePage().selectTexBoxValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier(extRowIdentifier), Ext, 1);
     }
 
     @When("the user enters office telecoms text after $textAfterRowIdentifier value as <TextAfter>")
     public void enterOfficeTelecomsTextAfter(@Named("textAfterRowIdentifier") String textAfterRowIdentifier,@Named("TextAfter") String TextAfter)
     {
-        //getEditOfficePage().enterOfficeTelecomsTextAfter(textAfterRowIdentifier,TextAfter);
         getEditOfficePage().selectTexBoxValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier(textAfterRowIdentifier), TextAfter, 1);
     }
 
     @When("the user enters office telecoms answer back $answerBackRowIdentifier value as <AnswerBack>")
     public void enterOfficeTelecomsAnswerBack(@Named("answerBackRowIdentifier") String answerBackRowIdentifier,@Named("AnswerBack") String AnswerBack)
     {
-       // getEditOfficePage().enterOfficeTelecomsAnswerBack(answerBackRowIdentifier,AnswerBack);
         getEditOfficePage().selectTexBoxValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier(answerBackRowIdentifier), AnswerBack, 1);
     }
 
     @When("the user enters office telecoms value $valueRowIdentifier value as <Value>")
      public void enterOfficeTelecomsValue(@Named("valueRowIdentifier") String valueRowIdentifier,@Named("Value") String Value)
     {
-        //getEditOfficePage().enterOfficeTelecomsValue(valueRowIdentifier,Value);
         getEditOfficePage().selectTexBoxValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier(valueRowIdentifier), Value, 1);
     }
     
@@ -463,7 +452,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @Then("the user should see the $officetelecom_rowIdentifier values in office telecoms's section from lookup $lookup")
     public void verifyOfficeTelecomTypesFromLookup(@Named("officetelecom_rowIdentifier") String officetelecom_rowIdentifier, @Named("lookup") String lookup) {
-       // getDataPage().verifyLookUpValues(OfficeIdentifiers.getObjectIdentifier(officetelecom_rowIdentifier), "get Office Telecoms Types", "officeTelecomTypes");
+        getDataPage().verifyLookUpValues(OfficeIdentifiers.getObjectIdentifier(officetelecom_rowIdentifier), "get Office Telecoms Types", "officeTelecomTypes");
     }
     
     @Then("the user should see the office telecom values same as in $source document")
@@ -472,7 +461,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
     
     @Then("the user verifies the $officeField maxlength is $maxSize for the $rowIdentifier")
-    public void verifyMaxlengthOfficeAddressText(@Named("$officeField") String officeField,@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){
+    public void verifyMaxlengthOfficeLocationsText(@Named("$officeField") String officeField,@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){
     	getEditOfficePage().verifyMaxlengthOfficeAddressText(maxSize,rowIdentifier);
     }
 
@@ -490,46 +479,44 @@ public class EditOfficeSteps extends AbstractSteps{
 
 
     @Then("the user should see the office address lines addresses as in $source document")
-    public void verifyOfficeAddressLinesAddressesFromDB(@Named("Type") String Type,@Named("officeFid") String officeFid, @Named("AddressLine1") String AddressLine1,
-                                                        @Named("AddressLine2") String AddressLine2,
-                                                        @Named("AddressLine3") String AddressLine3,
-                                                        @Named("AddressLine4") String AddressLine4,@Named("PostalCode") String PostalCode,
-                                                        @Named("PostalCodeSuffix") String PostalCodeSuffix,@Named("PostalCodePosition") String PostalCodePosition,
-                                                        @Named("Info") String Info,@Named("Country") String Country,@Named("Area") String Area,@Named("Subarea") String Subarea,
-                                                        @Named("City") String City,@Named("source") String source) {
-
-        getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(Type,AddressLine1, AddressLine2, AddressLine3, AddressLine4,PostalCode,PostalCodeSuffix,PostalCodePosition,Info,Country,Area,Subarea,City,officeFid,source);
-
-    }
+	public void verifyOfficeAddressLinesAddressesFromDB(@Named("Type") String Type,
+			@Named("officeFid") String officeFid, @Named("AddressLine1") String AddressLine1,
+			@Named("AddressLine2") String AddressLine2, @Named("AddressLine3") String AddressLine3,
+			@Named("AddressLine4") String AddressLine4, @Named("PostalCode") String PostalCode,
+			@Named("PostalCodeSuffix") String PostalCodeSuffix, @Named("PostalCodePosition") String PostalCodePosition,
+			@Named("Info") String Info, @Named("Country") String Country, @Named("Area") String Area,
+			@Named("Subarea") String Subarea, @Named("City") String City, @Named("source") String source) {
+		getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(Type, AddressLine1, AddressLine2, AddressLine3,
+				AddressLine4, PostalCode, PostalCodeSuffix, PostalCodePosition, Info, Country, Area, Subarea, City,
+				officeFid, source);
+	}
 
     @Then("the user should see the office telecomm fields for Type(telephone/fax) as in $source document")
-    public void verifyOfficeTelecommFieldsFromDB(@Named("Type") String Type, @Named("Rank") String Rank,
-                                                        @Named("TextBefore") String TextBefore,
-                                                        @Named("CountryCode") String CountryCode,
-                                                        @Named("AreaCode") String AreaCode,@Named("Number") String Number,
-                                                        @Named("RangeLimit") String RangeLimit,@Named("Ext") String Ext,
-                                                        @Named("TextAfter") String TextAfter,
-                                                        @Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyOfficeTelecommFieldsFromDB(Type, Rank, TextBefore, CountryCode, AreaCode, Number, RangeLimit, Ext, TextAfter, null, null, officeFid, source);
-    }
+	public void verifyOfficeTelecommFieldsFromDB(@Named("Type") String Type, @Named("Rank") String Rank,
+			@Named("TextBefore") String TextBefore, @Named("CountryCode") String CountryCode,
+			@Named("AreaCode") String AreaCode, @Named("Number") String Number, @Named("RangeLimit") String RangeLimit,
+			@Named("Ext") String Ext, @Named("TextAfter") String TextAfter, @Named("officeFid") String officeFid,
+			@Named("source") String source) {
+		getEditOfficePage().verifyOfficeTelecommFieldsFromDB(Type, Rank, TextBefore, CountryCode, AreaCode, Number,
+				RangeLimit, Ext, TextAfter, null, null, officeFid, source);
+	}
     
     @Then("the user should see the office telecomm fields for Type(telex/reuters/cable) as in $source document")
-    public void verifyOfficeTelecommFieldsFromDB(@Named("Type") String Type, @Named("Rank") String Rank,
-                                                        @Named("TextBefore") String TextBefore,
-                                                        @Named("TextAfter") String TextAfter,@Named("AnswerBack") String AnswerBack,
-                                                        @Named("Value" ) String Value,
-                                                        @Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyOfficeTelecommFieldsFromDB(Type, Rank, TextBefore, null, null, null, null, null, TextAfter, AnswerBack, Value, officeFid, source);
-    }
+	public void verifyOfficeTelecommFieldsFromDB(@Named("Type") String Type, @Named("Rank") String Rank,
+			@Named("TextBefore") String TextBefore, @Named("TextAfter") String TextAfter,
+			@Named("AnswerBack") String AnswerBack, @Named("Value") String Value, @Named("officeFid") String officeFid,
+			@Named("source") String source) {
+		getEditOfficePage().verifyOfficeTelecommFieldsFromDB(Type, Rank, TextBefore, null, null, null, null, null,
+				TextAfter, AnswerBack, Value, officeFid, source);
+	}
     
     @Then("the user should see the office telecomm fields for Type(email/website) as in $source document")
-    public void verifyOfficeTelecommFieldsFromDB(@Named("Type") String Type, @Named("Rank") String Rank,
-                                                        @Named("TextBefore") String TextBefore,
-                                                        @Named("TextAfter") String TextAfter,
-                                                        @Named("Value" ) String Value,
-                                                        @Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyOfficeTelecommFieldsFromDB(Type, Rank, TextBefore, null, null, null, null, null, TextAfter, null, Value, officeFid, source);
-    }
+	public void verifyOfficeTelecommFieldsFromDB(@Named("Type") String Type, @Named("Rank") String Rank,
+			@Named("TextBefore") String TextBefore, @Named("TextAfter") String TextAfter, @Named("Value") String Value,
+			@Named("officeFid") String officeFid, @Named("source") String source) {
+		getEditOfficePage().verifyOfficeTelecommFieldsFromDB(Type, Rank, TextBefore, null, null, null, null, null,
+				TextAfter, null, Value, officeFid, source);
+	}
 
     @Then("the user should see office location primary flag value as <primaryFlag> for fid <officeFid> in $source document and in zeus UI")
     public void getDocumentPrimaryFlag(@Named("primaryFlag") String primaryFlag,@Named("officeFid") String officeFid,@Named("source") String source) {
@@ -585,18 +572,16 @@ public class EditOfficeSteps extends AbstractSteps{
     @Then("the user should see the error message $errorMsg for the office telecom type field")
     public void verifyOfficeTelecomTypeErrorMessage(@Named("errorMsg") String errorMsg) {
         getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_type_error_msg", errorMsg);
-
     }
     
-    @Then("the user should see the error message $errMsg for the office value field")
-    public void verifyOfficeTelecomValueErrorMessage(@Named("errMsg") String errorMessage) {
+    @Then("the user should see the error message $errorMessage for the office value field")
+    public void verifyOfficeTelecomValueErrorMessage(@Named("errorMessage") String errorMessage) {
         getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_value_error_msg", errorMessage);
     }
 
-    @Then("the user should see the error message $errorMsg for the office telecom rank field")
-    public void verifyOfficeTelecomRankErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_rank_error_msg", errorMsg);
-
+    @Then("the user should see the error message $errorMessage for the office telecom rank field")
+    public void verifyOfficeTelecomRankErrorMessage(@Named("errorMessage") String errorMessage) {
+        getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_rank_error_msg", errorMessage);
     }
 
     @When("the user clicks on the No button to cancel the deletion of row in office locations section")
@@ -1517,7 +1502,6 @@ public class EditOfficeSteps extends AbstractSteps{
 	@Then("the user should see the error message <errorText> for the office telecom value field")
     public void verifyOfficeTelecomErrorMessage(@Named("errorText") String errorText) {
         getEditOfficePage().verifyOfficeErrorMessage("office_telecoms_value_error_msg", errorText);
-
     }
 	
 	@Then("the user should see the newly added telecom row in the office locations telecom page")
@@ -1526,34 +1510,27 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 	
 	@Then("the user verifies that the office telecom fields for Type(telephone/fax) are entered in the office locations page")
-	public void verifyOfficeTelecommFieldsInUI(@Named("Type") String Type,
-            @Named("Rank") String Rank,
-            @Named("TextBefore") String TextBefore,
-            @Named("CountryCode") String CountryCode,@Named("AreaCode") String AreaCode,
-            @Named("Number") String Number,@Named("RangeLimit") String RangeLimit,
-            @Named("Ext") String Ext,@Named("TextAfter") String TextAfter)
-            {
-		    String Value = CountryCode + "-" + AreaCode + "-" + Number;		
-            getEditOfficePage().verifyOfficeLocationsTelecommFieldsInUI(Rank, TextBefore, Value, RangeLimit, Ext, TextAfter, null);	
-		}
+	public void verifyOfficeTelecommFieldsInUI(@Named("Type") String Type, @Named("Rank") String Rank,
+			@Named("TextBefore") String TextBefore, @Named("CountryCode") String CountryCode,
+			@Named("AreaCode") String AreaCode, @Named("Number") String Number, @Named("RangeLimit") String RangeLimit,
+			@Named("Ext") String Ext, @Named("TextAfter") String TextAfter) {
+		String Value = CountryCode + "-" + AreaCode + "-" + Number;
+		getEditOfficePage().verifyOfficeLocationsTelecommFieldsInUI(Rank, TextBefore, Value, RangeLimit, Ext, TextAfter, null);
+	}
 	
 	@Then("the user verifies that the office telecom fields for Type(telex/reuters/cable) are entered in the office locations page")
-	public void verifyOfficeTelecommFieldsInUI(@Named("Type") String Type,
-            @Named("Rank") String Rank,
-            @Named("TextBefore") String TextBefore,
-            @Named("TextAfter") String TextAfter,@Named("AnswerBack") String AnswerBack,@Named("Value" ) String Value)
-            {
-			getEditOfficePage().verifyOfficeLocationsTelecommFieldsInUI(Rank, TextBefore, Value, null, null, TextAfter, AnswerBack);	
-		}
+	public void verifyOfficeTelecommFieldsInUI(@Named("Type") String Type, @Named("Rank") String Rank,
+			@Named("TextBefore") String TextBefore, @Named("TextAfter") String TextAfter,
+			@Named("AnswerBack") String AnswerBack, @Named("Value") String Value) {
+		getEditOfficePage().verifyOfficeLocationsTelecommFieldsInUI(Rank, TextBefore, Value, null, null, TextAfter,	AnswerBack);
+	}
 	
 	@Then("the user verifies that the office telecom fields for Type(email/website) are entered in the office locations page")
-	public void verifyOfficeTelecommFieldsInUI(@Named("Type") String Type,
-            @Named("Rank") String Rank,
-            @Named("TextBefore") String TextBefore,                  
-            @Named("TextAfter") String TextAfter, @Named("Value") String Value)
-            {
-			getEditOfficePage().verifyOfficeLocationsTelecommFieldsInUI(Rank, TextBefore, Value, null, null, TextAfter, null);
-		}
+	public void verifyOfficeTelecommFieldsInUI(@Named("Type") String Type, @Named("Rank") String Rank,
+			@Named("TextBefore") String TextBefore, @Named("TextAfter") String TextAfter,
+			@Named("Value") String Value) {
+		getEditOfficePage().verifyOfficeLocationsTelecommFieldsInUI(Rank, TextBefore, Value, null, null, TextAfter, null);
+	}
 	
 	@When("the user deletes the existing office telecom locations values in fdb document")
 	public void deleteExistingTelecomLocationValuesInFDBDocument(@Named("officeFid") String officeFid) {

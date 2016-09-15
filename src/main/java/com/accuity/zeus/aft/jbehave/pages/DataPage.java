@@ -1433,6 +1433,6 @@ public class DataPage extends AbstractPage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}	
+	}
 
 }
