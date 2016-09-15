@@ -140,6 +140,11 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifySearchResults();
     }
 
+    @Then("the user should see the search results for routingCode")
+    public void verifyRoutingCodeSearchResults() {
+        getResultsPage().verifyRoutingCodeSearchResults();
+    }
+
     @Then("the user should see the same results of the previous search")
     public void compareSearchResults() {
         getResultsPage().compareURLAndSearchResults();
@@ -151,7 +156,7 @@ public class SearchResultsSteps extends AbstractSteps{
     }
 
     @Then("the user should see the office search results card for the searched legal entity $officeSearchResults")
-    public void verifyOfficeSearchResults(ExamplesTable officeSearchResults){
+    public void verifyOfficeSearchResults(ExamplesTable officeSearchResults) {
         getResultsPage().verifyOfficeSearchResults(officeSearchResults);
     }
 
@@ -377,7 +382,7 @@ public class SearchResultsSteps extends AbstractSteps{
     }
 
     @When("the user selects the institution type filter $institutionType")
-    public void selectOfficeInstitutionType(@Named("institutionType") String institutionType){
+    public void selectOfficeInstitutionType(@Named("institutionType") String institutionType) {
         getResultsPage().selectOfficeInstitutionType(institutionType);
     }
     @Then("the user should see $institutionType is selected by default")
@@ -390,12 +395,12 @@ public class SearchResultsSteps extends AbstractSteps{
     }
 
     @Then("the user should see the office search results sorted ascending by addressLine1 from trusted document")
-    public void verfiyOfficeAddressSortingAscending(){
+    public void verfiyOfficeAddressSortingAscending() {
         getResultsPage().verifySortAscOrderByAddress(database, apacheHttpClient, searchedEntity);
     }
 
     @Then("the user should see the office search results sorted descending by addressLine1 from trusted document")
-    public void verifyOfficeAddressSortingDescending(){
+    public void verifyOfficeAddressSortingDescending() {
         getResultsPage().verifySortDscOrderByAddress(database, apacheHttpClient, searchedEntity);
     }
 
@@ -410,8 +415,7 @@ public class SearchResultsSteps extends AbstractSteps{
 	}
 
     @Then("the user should see results tab is selected")
-    public void verifyResultsTabSelected()
-    {
+    public void verifyResultsTabSelected() {
         getResultsPage().verifyResultsTabSelected();
     }
 

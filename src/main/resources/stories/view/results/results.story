@@ -6,6 +6,7 @@ As a user I want to cover the requirements mentioned in
 JIRA ID - ZEUS-1391- Zeus Menus Re-work #1: 1st Menu Line
 JIRA ID - ZEUS-1392- Zeus Menus Re-work #2: Move Legal Entity from DATA to RESULTS
 JIRA ID - ZEUS-1393- Zeus Menus Re-work #3: Move OFFICES to 2nd line
+JIRA ID - ZEUS-1132- User can search for a routingCode (Exact Match)
 
 Scenario: Verify the results tab shows the legal entity results when search for a legal entity
 Given a user is on the search page
@@ -51,3 +52,16 @@ Then the user should see the same results of the previous search
 Examples:
 |entity|searchBy|fid|officeFid|
 |1010|FID|1010|1010-44|
+
+
+Scenario: verify the routingCode search results with EXACT MATCH
+Given a user is on the search page
+When the user clicks on the results tab
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for routingCode
+
+Examples:
+|entity|searchBy|
+|001|Routing Code|

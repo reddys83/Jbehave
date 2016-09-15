@@ -255,6 +255,14 @@ public class ResultsPage extends AbstractPage {
         saveTheResultsAndCurrentURLToCache();
     }
 
+    public void verifyRoutingCodeSearchResults() {
+              verifyRoutingCodeSearchResultsHeaders();
+    }
+
+    public void verifyRoutingCodeSearchResultsHeaders(){
+        getDriver().findElement()
+    }
+
 
     public void saveTheResultsAndCurrentURLToCache() {
     List<String> fids = new ArrayList<>();
