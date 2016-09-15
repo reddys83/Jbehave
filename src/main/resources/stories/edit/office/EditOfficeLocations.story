@@ -541,14 +541,15 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
+Then the user should see the office telecom values same as in trusted document
 When the user deletes the existing office telecom locations values in fdb document
 And the user clicks on add new office telecoms button in the office locations
 Then the user should see the office_locations_telecoms_type_dropdown_options values in office telecoms's section from lookup TELECOM_TYPE
-Then the user should see the office telecom values same as in trusted document
+
 
 Examples:
 |entity|searchBy|fid|officeFid|
-|1010|FID|1010|1010-44|
+|1038|FID|1038|1038-60|
 
 Scenario: a)Verify that the user should be able to Add new telecoms row for an office location
           b)Verify user can select a new value for Telecom Type as telephone and Verify that the user can see and select values for the following fields :Rank,TextBefore,Country code,Area code,Number,RangeLimit,Ext,TextAfter

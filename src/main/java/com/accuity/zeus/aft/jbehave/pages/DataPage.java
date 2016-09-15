@@ -1433,18 +1433,6 @@ public class DataPage extends AbstractPage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public String getTextUsingIndex(By by, int index) { 
-		String value = null;
-    	try {
-    		List<WebElement> elementList = getDriver().findElements(by);		
-        	value = elementList.get(index-1).getText();        	
-    	}
-    	catch (Exception e) {
-			assertFalse("Element not found", false);
-		}  
-    	return value;
-	}
+	}	
 
 }
