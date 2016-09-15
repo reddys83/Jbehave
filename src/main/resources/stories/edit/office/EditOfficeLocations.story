@@ -6,10 +6,11 @@ I want to perform an action
 So that I can achieve a business goal
 
 JIRA ID - ZEUS-1075 - User can select to edit Office's Locations
+JIRA ID - ZEUS-1300 - User can edit Office's Locations(Telecoms)
 !--and
 !--JIRA ID - ZEUS-1299 - User can edit Office's Locations(Addresses)
-!--and
-!--JIRA ID - ZEUS-1300 - User can edit Office's Locations(Telecoms)
+
+
 
 Scenario: Verify that the add button is disabled for the first row of office location when there is a location
 
@@ -530,7 +531,9 @@ Examples:
 |entity|searchBy|fid|officeFid|Type|Country|
 |1010|FID|1010|1010-44|Mailing|USA||
 
-Scenario:  Verify Office Telecoms Type dropdown values are from lookup TELECOM_TYPE
+Scenario: User is viewing Office's Locations (Telecom) - 
+a) Verify Office Telecoms Type dropdown values are from lookup TELECOM_TYPE
+b) Verify Office Telecoms existing values are trusted document.
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -551,9 +554,9 @@ Examples:
 |entity|searchBy|fid|officeFid|
 |1038|FID|1038|1038-60|
 
-Scenario: a)Verify that the user should be able to Add new telecoms row for an office location
-          b)Verify user can select a new value for Telecom Type as telephone and Verify that the user can see and select values for the following fields :Rank,TextBefore,Country code,Area code,Number,RangeLimit,Ext,TextAfter
-          c)Verify user can select a new value for Telecom Type as fax and Verify that the user can see and select values for the following fields :Rank,TextBefore,Country code,Area code,Number,RangeLimit,Ext,TextAfter
+Scenario: User is updating an Office's Locations (Telecom) -  
+a) Verify user can select a new value for Telecom Type as telephone/fax and Verify that the user can see and select values for the following fields :Rank,TextBefore,Country code,Area code,Number,RangeLimit,Ext,TextAfter
+b) Verify that UI and Zeus document is updated correctly.
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -644,10 +647,10 @@ Examples:
 |1010|FID|1010|1010-44|fax|Text||456|123|Text|Text|Enter up to 5 valid characters.|
 |1010|FID|1010|1010-44|fax|Text|123|456||Text|Text|Enter up to 20 valid characters.|
 
-Scenario: a)Verify user can select a new value for Telecom Type as telex and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
-          b)Verify user can select a new value for Telecom Type as reuters and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
-          c)Verify user can select a new value for Telecom Type as cable and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
-
+Scenario: User is updating an Office's Locations (Telecom) - 
+a) Verify user can select a new value for Telecom Type as telex/reuters/cable and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
+b) Verify that UI and Zeus document is updated.
+          
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -718,8 +721,9 @@ Examples:
 |1010|FID|1010|1010-44|cable|Text|
 |1010|FID|1010|1010-44|website|Text|
 
-Scenario: a)Verify user can select a new value for Telecom Type as email and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter
-          b)Verify user can select a new value for Telecom Type as website and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter
+Scenario: User is updating an Office's Locations (Telecom) -  
+a) Verify user can select a new value for Telecom Type as email/website and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter
+b) Verify that UI and Zeus document is updated correctly.
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -755,7 +759,6 @@ Examples:
 |1038|FID|1038|1038-60|email|1|5 pm|aft@zeus.com|5 pm|
 |1038|FID|1038|1038-60|website|5|3 pm|www.zeus.com|4 pm|
 
-
 Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Email' 
 a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
 b) Verify that the error message "Enter up to 100 valid characters" is displayed when the 'Value' field is blank.
@@ -788,119 +791,6 @@ And the user should see the error message at top of page the highlighted fields 
 Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|Value|
 |1010|FID|1010|1010-44|email|Text|www.zeus.com|
-
-Scenario: a) Verify that the error message Enter upto 100 valid characters is displayed when the value field is left blank when telecom type is email
-Meta: @skip
-Given a user is on the search page
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-When the user clicks on the office update link
-And the user gets the document with get id for offices with the <officeFid> from the database
-And the user clicks on add new office telecoms button in the office locations
-And the user selects office address type office_addressType_first_row_new_address_type_dropdown value as <Type>
-And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
-And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
-And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
-And the user clicks on the save button
-Then the user should see the error message Enter up to valid 100 characters. for the office value field
-And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
-
-Examples:
-|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|
-|1010|FID|1010|1010-44|email|2|||
-
-Scenario: a) Verify that the error message incorrect format is displayed when the value field has incorrect format when telecom type is email
-Meta: @skip
-Given a user is on the search page
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-When the user clicks on the office update link
-And the user gets the document with get id for offices with the <officeFid> from the database
-And the user clicks on add new office telecoms button in the office locations
-And the user selects office address type office_addressType_first_row_new_address_type_dropdown value as <Type>
-And the user enters office telecoms rank office_telecoms_first_row_new_rank value as <Rank>
-And the user enters office telecoms text before office_telecoms_first_row_new_textBefore value as <TextBefore>
-And the user enters office telecoms value office_telecoms_first_row_new_value value as <Value>
-And the user clicks on the save button
-Then the user should see the error message Incorrect format. for the office value field
-And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
-
-Examples:
-|entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|
-|1010|FID|1010|1010-44|email|2||@gkjhnhasdkjlk|
-
-
-Scenario: a)Verify Office telecoms country code, Area code, Number,Rangelimit, allows only number and spaces and verify an error message Invalid characters: "Numbers and spaces allowed only" is displayed
-          b) Verify Office ext field allows only numbers,hypens and spaces
-Meta: @skip
-Given a user is on the search page
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
-And the user clicks on add new office telecoms button in the office locations
-And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
-And the user enters office telecoms value office_telecoms_first_row_new_CountryCode value as <CountryCode>
-And the user enters office telecoms value office_telecoms_first_row_new_AreaCode value as <AreaCode>
-And the user enters office telecoms value office_telecoms_first_row_new_Number value as <Number>
-And the user enters office telecoms range limit office_telecoms_first_row_new_rangeLimit value as <RangeLimit>
-And the user enters office telecoms ext office_telecoms_first_row_new_ext value as <Ext>
-And the user clicks on the save button
-Then the user should see the error message Invalid characters: "Numbers and spaces allowed only". for the office country code field
-And the user should see the error message Invalid characters: "Numbers and spaces allowed only". for the office area code field
-And the user should see the error message Invalid characters: "Numbers and spaces allowed only". for the office number field
-And the user should see the error message Invalid characters: "Numbers and spaces allowed only". for the office range limit field
-And the user should see the error message Invalid characters: "Numbers,hypens and spaces allowed only". for the office ext field
-
-Examples:
-|entity|searchBy|fid|officeFid|Type|CountryCode|AreaCode|Number|RangeLimit|Ext|
-|1010|FID|1010|1010-44|telephone|hnv 1|qwrgw88ji|gwqeywjij002349=|638-283wesr|gfdin-|
-
-Scenario: Verify that the user should be able to delete an existing office telecoms row
-
-Given a user is on the search page
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-And the user clicks on the office locations link in the navigation bar
-And the user clicks on the office update link
-And the user gets the document with get id for offices with the <officeFid> from the database
-And the user clicks on delete office telecoms row button for the row office_first_row_telecoms_delete_button
-When the user clicks on the No button to cancel the deletion of row in office locations page
-!-- And the user clicks on the save button
-!--And the user clicks on the confirm button
-!--Then the user verifies that the row values exists in the office locations page
-When the user clicks on delete office telecoms row button for the row office_first_row_telecoms_delete_button
-And the user clicks on the yes button in the delete row confirmation modal in the office page
-!--And the user clicks on the save button
-!--Then the user should see the save confirmation modal
-!--And the user should see the below summary changes in confirmation modal
-!--|Summary|
-!--|Office Locations|
-!--When the user clicks on the confirm button
-!--Then the user should see the successful update message at top of the office page
-!--And the user should not see the office telecoms row in the locations office page
-!--And the user verifies that the deleted row for office telecoms does not exist in zeus document
-!--And the user reverts the changes to the document
-
-Examples:
-|entity|searchBy|fid|officeFid|
-|17649|FID|17649|17649-0|
 
 Scenario: Scenario: User is adding/deleting new Office's Locations Telecom -
 1 - Verify if User can prevent deleting telecom row by clicking on 'No'.
@@ -945,17 +835,3 @@ And the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|TextBefore|Value|TextAfter|AnswerBack|
 |1038|FID|1038|1038-60|telex|1|5 pm|abc|9 am|1 hr|
-
-
-
-
-
-
-
-
-
-
-
-
-
-

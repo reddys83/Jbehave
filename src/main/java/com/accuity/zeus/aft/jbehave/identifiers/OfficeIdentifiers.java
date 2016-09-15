@@ -207,8 +207,7 @@ public class OfficeIdentifiers {
 	    hmap.put("office_locations_telecom_row_view_mode", By.xpath("//*[@class='location']/table/tbody/tr"));
 	    hmap.put("office_locations_telecoms_type_dropdown_options", By.xpath(".//*[@id='additionalLocationTelecomms-0']//tr[1]//select[@id='telecommType-0']/option"));
 	    hmap.put("office_telecom_type_dropdown_input", By.xpath(".//*[@id='additionalLocationTelecomms-0']//select[@id='telecommType-0']"));
-	    hmap.put("office_telecom_rows_edit_mode", By.xpath(".//*[@data-edit_id='locationTelecomms-0']//tr"));
-	    
+	    hmap.put("office_telecom_rows_edit_mode", By.xpath(".//*[@data-edit_id='locationTelecomms-0']//tr"));   
 	  //*[@class='location']//h2[text(), 'Telecoms']/table//tr
     }
 

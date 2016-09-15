@@ -853,8 +853,7 @@ public class EditOfficePage extends AbstractPage {
             Thread.sleep(3000L);
             Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office locations", nvPairs);
             if (document != null) {
-                assertNull(document.getElementsByTagName("telecom ").item(0));
-
+                assertNull(document.getElementsByTagName("telecom").item(0));
             } else
                 assert false : source + " document is null";
         } catch (Exception e) {
