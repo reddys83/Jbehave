@@ -1280,7 +1280,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on edit button in places for area")
 	public void clicksOnEditButton() {
-		setEditCityPage(getDataPage().createEditCityPage());
+		//setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().clicksOnEditButton();
 	}
 
@@ -1358,7 +1358,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on delete area places type")
 	public void clicksOnDeleteAreaPlacesType() {
-		setEditCityPage(getDataPage().createEditCityPage());
+		//setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().clicksOnDeleteCityPlacesType();
 	}
 

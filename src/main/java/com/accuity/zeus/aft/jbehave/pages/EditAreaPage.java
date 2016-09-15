@@ -28,7 +28,6 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -1865,7 +1864,7 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}
 		assertTrue(
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_entirevalue_xpath"))
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_place_entirevalue_xpath"))
 						.getText().isEmpty());
 	}
 
@@ -1873,7 +1872,7 @@ public class EditAreaPage extends AbstractPage {
 			String[] areaPlacesDetail) {
 
 		List<WebElement> relatedPlaceRows = getDriver()
-				.findElements(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_entirevalues_xpath"));
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_place_entirevalues_xpath"));
 
 		for (int i = 0; i < relatedPlaceRows.size(); i++) {
 			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText()

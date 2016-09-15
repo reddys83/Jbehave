@@ -150,7 +150,7 @@ Examples:
 |country|area|placeType|countryPlaces|areaPlaces|cityPlaces|placeDetails|ConfirmationSummary|
 |Angola|Cabinda|Capital City|Angola|Cunene|Cahama|State Capital|Summary|
 
-Scenario: Verify whether User is able to see Go Button is disabled when
+Scenario: Verify whether Go Button is disabled when
 User should see Go Button is disabled when
 a)Country not selected ("Choose a Country")
 b)Country selected. Area selected and = "Return All Cities" or "No area". City not selected ("Choose a City")
@@ -179,7 +179,7 @@ Examples:
 |Angola|Cabinda|Algeria|No Area|
 |Angola|Cabinda|Algeria|Return All Cities|
 
-Scenario: Verify whether User is able to see Go Button is disabled when (while adding a new related place)
+Scenario: Verify whether Go Button is disabled when (while adding a new related place)
 User should see Go Button is Enabled when
 a)Country selected. Area not selected ("Choose an Area") & Country should be updated in place
 b)Country selected. Area selected and <> "Return All Areas" or "NO area". City not selected ("Choose a City") & Area should be updated in place
@@ -214,7 +214,7 @@ Examples:
 |country|area|countryPlaces|areaPlaces|
 |Angola|Cabinda|Angola|Moxico|
 
-Scenario: Verify whether User is able to see Go Button is disabled when (while updating existing related place)
+Scenario: Verify whether Go Button is disabled when (while updating existing related place)
 User should see Go Button is Enabled when
 a)Country selected. Area not selected ("Choose an Area") & Country should be updated in place
 b)Country selected. Area selected and <> "Return All Areas" or "NO area". City not selected ("Choose a City") & Area should be updated in place
@@ -265,7 +265,7 @@ Examples:
 |country|area|countryPlaces|areaPlaces|cityPlaces|placeType|placeDetails|
 |Angola|Cabinda|Angola|Namibe|Bibala|Capital City|State Capital|
 
-Scenario: Verify whether User is able to see Go Button is disabled when
+Scenario: Verify whether Go Button is disabled when
 User should see Go Button is disabled when
 a)Country not selected ("Choose a Country")
 b)Country selected. Area selected and = "Return All Cities" or "No area". City not selected ("Choose a City")
@@ -294,7 +294,7 @@ Examples:
 |Angola|Cabinda|Algeria|No Area|
 |Angola|Cabinda|Algeria|Return All Cities|
 
-Scenario: Verify whether User is able to see Go Button is disabled when (while adding a new related place)
+Scenario: Verify whether Go Button is disabled when (while adding a new related place)
 User should see Go Button is Enabled when
 a)Country selected. Area not selected ("Choose an Area") & Country should be updated in place
 b)Country selected. Area selected and <> "Return All Areas" or "NO area". City not selected ("Choose a City") & Area should be updated in place
@@ -329,7 +329,7 @@ Examples:
 |country|area|countryPlaces|areaPlaces|
 |Angola|Cabinda|Angola|Moxico|
 
-Scenario: Verify whether User is able to see Go Button is disabled when (while updating existing related place)
+Scenario: Verify whether Go Button is disabled when (while updating existing related place)
 User should see Go Button is Enabled when
 a)Country selected. Area not selected ("Choose an Area") & Country should be updated in place
 b)Country selected. Area selected and <> "Return All Areas" or "NO area". City not selected ("Choose a City") & Area should be updated in place

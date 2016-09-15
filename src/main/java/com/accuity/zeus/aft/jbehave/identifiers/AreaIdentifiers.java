@@ -122,14 +122,14 @@ public class AreaIdentifiers {
 		hmap.put("area_demographic_date_error_message", By.xpath("//*[@data-error_id='demographicDateError']"));
 		hmap.put("area_demographics_row", By.xpath("//*[@class='data']//*[@id='areaDemographics']//tr[@data-row_id='demographics']"));
 		hmap.put("area_demographics_row_view_mode", By.xpath("//*[@class='data']//*[@id='areaDemographics']//tr"));
-		hmap.put("area_get_relatedplace_entirevalue_xpath", By.xpath("//*[@id='areaPlaces']//tbody"));
+		hmap.put("area_place_entirevalue_xpath", By.xpath("//*[@id='areaPlaces']//tbody"));
 		hmap.put("area_places_link_id", By.xpath("//*[@id='areaPlaces']"));
 		hmap.put("area_places_type_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']"));
 		hmap.put("area_places_type_options_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']/option"));
 		hmap.put("area_places_detail_dropdown_xpath", By.xpath("//*[@data-internal_id='relatedPlaceDetails']"));
 		hmap.put("area_places_place_edit_button_2_xpath",
 				By.xpath("//*[@id='additionalRelatedPlaces']/tr[2]/td[2]/button"));
-		hmap.put("area_get_relatedplace_entirevalues_xpath", By.xpath("//*[@id='areaPlaces']//tbody//tr"));
+		hmap.put("area_place_entirevalues_xpath", By.xpath("//*[@id='areaPlaces']//tbody//tr"));
 	}
 
 	public static By getObjectIdentifier(String key) {
