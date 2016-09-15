@@ -1071,12 +1071,13 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@When("the user clicks on the add button for adding new entity for area page")
 	public void clickOnAddEntityButton() {
-		getEditAreaPage().clickOnAddEntityButton();
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_entity_button_edit_id"));
+		//getEditAreaPage().clickOnAddEntityButton();
 	}
 	
 	@When("the user deletes all existing related entity rows")
 	public void deleteAllRelatedEntity() {
-		getEditAreaPage().clickOnAddEntityButton();
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_entity_button_edit_id"));
 		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_entity_delete_button_xpath"));
 	}
 	

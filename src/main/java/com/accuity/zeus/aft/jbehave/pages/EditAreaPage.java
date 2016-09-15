@@ -1772,10 +1772,6 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 	
-	public void clickOnAddEntityButton() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_entity_button_edit_id"));
-	}
-	
 	public void selectsEntityTypeFromDropdown(String entityType) {
 		selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_entity_type_dropdown_xpath"),
 				entityType);
