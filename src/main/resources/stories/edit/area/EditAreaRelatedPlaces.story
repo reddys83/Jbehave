@@ -143,7 +143,7 @@ Then the user should not see the <ConfirmationSummary> changes in confirmation m
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user should see <placeType> <cityPlaces> <placeDetails> updated in area related place
-Then the user should see the updated area related place date <placeType> <cityPlaces> <placeDetails> value in zeus document
+Then the user should see area related place date <placeType> <cityPlaces> <placeDetails> value in zeus document
 Then the user reverts the changes to the document
 
 Examples:
@@ -452,6 +452,7 @@ Then the user should not see the <ConfirmationSummary> changes in confirmation m
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user should see <placeType> <cityPlaces> <placeDetails> updated in area related place
+Then the user should see area related place date <placeType> <cityPlaces> <placeDetails> value in zeus document
 Then the user reverts the changes to the document
 
 Examples:

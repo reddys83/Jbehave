@@ -1740,28 +1740,6 @@ public class EditAreaPage extends AbstractPage {
 		selectTexBoxValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_year"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), row);
 	}
 
-	public void verifyAreaPlacesTypeList() {
-		List<WebElement> areaPlacesTypeList = getDriver()
-				.findElements(AreaIdentifiers.getObjectIdentifier("area_places_type_options_dropdown_xpath"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
-				"get area places type lookup");
-		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
-			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
-					areaPlacesTypeList.get(i).getText());
-		}
-	}
-
-	public void verifyAreaPlacesDetailsList() {
-		List<WebElement> areaPlacesDetailsList = getDriver()
-				.findElements(CityIdentifiers.getObjectIdentifier("city_places_details_options_dropdown_xpath"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
-				"get area places detail lookup");
-		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
-			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
-					areaPlacesDetailsList.get(i).getText());
-		}
-	}
-
 	public void verifyRelatedPlacesInAreaPage(String type, String place, String details) {
 		try {
 			Thread.sleep(6000);
@@ -1777,14 +1755,6 @@ public class EditAreaPage extends AbstractPage {
 						.getText());
 	}
 
-	public void clickOnAreaPlaces() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_link_id"));
-	}
-
-	public void clickAreaPlaceType() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"));
-	}
-
 	public void verifyDeletedRelatedPlaces(String type, String place, String details) {
 		try {
 			Thread.sleep(6000);
@@ -1795,121 +1765,83 @@ public class EditAreaPage extends AbstractPage {
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_entirevalue_xpath")).getText());
 	}
 
-/*	public String getAreaRelatedInfoFromDB(String area, String tagName, String source) {
-
-		String tagValue = null;
-		List<NameValuePair> nvPairs = new ArrayList<>();
-		nvPairs.add(new BasicNameValuePair("name", area));
-		nvPairs.add(new BasicNameValuePair("source", source));
-		try {
-			Thread.sleep(2000L);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-				"get area related place info", nvPairs);
-		if (document != null) {
-			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
-					: getNodeValuesByTagName(document, tagName).get(0);
-		}
-		return tagValue;
-	}*/
-
-	//public void verifyAreaRelatedValueFromZeusDB(String area, String type, String place, String details,
-			//String source) {
-		//assertEquals(getTagValueFromDB("get area related place info", "type", Map(source,),type);
-		//assertEquals(getAreaRelatedInfoFromDB(area, "value", source), place);
-		//assertEquals(getAreaRelatedInfoFromDB(area, "details", source), details);
-
-	//}
-
-	public void verifyDeletedAreaRelatedValueFromZeusDB(String area, String source) {
-		//assertEquals(getAreaRelatedInfoFromDB(area, "type", source), "");
-		//assertEquals(getAreaRelatedInfoFromDB(area, "value", source), "");
-		//assertEquals(getAreaRelatedInfoFromDB(area, "details", source), "");
-
-	}
-
 	public void selectsPlacesTypeFromDropdwon(String placeType) {
 		selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"),
 				placeType);
 	}
-	
-	public void selectsAreaPlacesTypeFromDropdwon(String placeType,int rowNumber) {
-		selectDropDownValueFromRowNumber(
-				AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"),
-				 placeType, rowNumber);
-			//selectItemFromDropdownListByText(CityIdentifiers.getObjectIdentifier("city_places_type_dropdown_xpath"),
-			//placeType);
-    }
-	
-	public void selectsAreaPlacesDetailsFromDropdwon(String placeDetails,int rowNumber) {
-		selectDropDownValueFromRowNumber(
-				AreaIdentifiers.getObjectIdentifier("area_places_detail_dropdown_xpath"),
+
+	public void selectsAreaPlacesTypeFromDropdwon(String placeType, int rowNumber) {
+		selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"),
+				placeType, rowNumber);
+	}
+
+	public void selectsAreaPlacesDetailsFromDropdwon(String placeDetails, int rowNumber) {
+		selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_detail_dropdown_xpath"),
 				placeDetails, rowNumber);
-			//selectItemFromDropdownListByText(CityIdentifiers.getObjectIdentifier("city_places_type_dropdown_xpath"),
-			//placeType);
-    }
-	
+	}
+
 	public void clicksOnEditButton() {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_place_edit_button_2_xpath"));
 	}
-	
-	public void verifyAreaRelatedPlacesParametersInUI(String[] areaPlacesType, String[] areaPlacesPlace, String[] areaPlacesDetail) {
+
+	public void verifyAreaRelatedPlacesParametersInUI(String[] areaPlacesType, String[] areaPlacesPlace,
+			String[] areaPlacesDetail) {
 
 		List<WebElement> relatedPlaceRows = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_entirevalues_xpath"));
 
 		for (int i = 0; i < relatedPlaceRows.size(); i++) {
-			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(areaPlacesType[i]));
-			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(areaPlacesPlace[i]));
-			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(areaPlacesDetail[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText()
+					.contains(areaPlacesType[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText()
+					.contains(areaPlacesPlace[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText()
+					.contains(areaPlacesDetail[i]));
 		}
 	}
-	
-	 public void verifyAreaRelatedValueFromZeusDB(String source, String area, List<String> areaPlacesType,
-				List<String> areaPlace, List<String> areaPlacesDetail) {
-			try {
-				List<NameValuePair> nvPairs = new ArrayList<>();
-				nvPairs.add(new BasicNameValuePair("source", source));
-				nvPairs.add(new BasicNameValuePair("name", area));
-				Thread.sleep(3000L);
 
-				Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-						"get area related place info", nvPairs);
-				if (document != null) {
-					for (int i = 0; i < document.getElementsByTagName("relations").item(0).getChildNodes()
-							.getLength(); i++) {
+	public void verifyAreaRelatedValueFromZeusDB(String source, String area, List<String> areaPlacesType,
+			List<String> areaPlace, List<String> areaPlacesDetail) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("name", area));
+			Thread.sleep(3000L);
 
-						for (int childNode = 0; childNode < document.getElementsByTagName("relation").item(0)
-								.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get area related place info", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("relations").item(0).getChildNodes()
+						.getLength(); i++) {
 
-							switch (document.getElementsByTagName("relation").item(0).getChildNodes().item(0)
-									.getChildNodes().item(childNode).getNodeName()) {
-							case "type":
-								assertEquals(document.getElementsByTagName("relation").item(0).getChildNodes().item(i)
-										.getChildNodes().item(childNode).getTextContent(), areaPlacesType.get(i));
-								break;
-							case "detail":
-								assertEquals(document.getElementsByTagName("relation").item(0).getChildNodes().item(i)
-										.getChildNodes().item(childNode).getTextContent(), areaPlacesDetail.get(i));
-								break;
-							case "value":
-								assertEquals(
-										StringUtils.capitalize(document.getElementsByTagName("relation").item(0)
-												.getChildNodes().item(i).getChildNodes().item(childNode).getTextContent()),
-										areaPlace.get(i));
-								break;
-							}
+					for (int childNode = 0; childNode < document.getElementsByTagName("relation").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						switch (document.getElementsByTagName("relation").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "type":
+							assertEquals(document.getElementsByTagName("relation").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), areaPlacesType.get(i));
+							break;
+						case "detail":
+							assertEquals(document.getElementsByTagName("relation").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), areaPlacesDetail.get(i));
+							break;
+						case "value":
+							assertEquals(
+									StringUtils.capitalize(document.getElementsByTagName("relation").item(0)
+											.getChildNodes().item(i).getChildNodes().item(childNode).getTextContent()),
+									areaPlace.get(i));
+							break;
 						}
 					}
-				} else
-					assertTrue(source+ "document is null",false);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+				}
+			} else
+				assertTrue(source + "document is null", false);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+	}
 	
 	@Override
 	public String getPageUrl() {

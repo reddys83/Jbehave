@@ -115,11 +115,9 @@ public class AreaIdentifiers {
 		hmap.put("area_places_type_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']"));
 		hmap.put("area_places_type_options_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']/option"));
 		hmap.put("area_places_detail_dropdown_xpath", By.xpath("//*[@data-internal_id='relatedPlaceDetails']"));
-		hmap.put("area_places_place_edit_button_2_xpath", By.xpath("//*[@id='additionalRelatedPlaces']/tr[2]/td[2]/button"));
+		hmap.put("area_places_place_edit_button_2_xpath",
+				By.xpath("//*[@id='additionalRelatedPlaces']/tr[2]/td[2]/button"));
 		hmap.put("area_get_relatedplace_entirevalues_xpath", By.xpath("//*[@id='areaPlaces']//tbody//tr"));
-		//hmap.put("office_identifier_value_input_xpath", By.xpath(".//*[@id='additionalIdentifiers']//*[@data-internal_id='identifierValue']"));
-		//hmap.put("city_places_type_dropdown_xpath",
-			//	By.xpath(".//*[@class='new'][@data-row_id='relatedPlaces']//select[@id='relatedPlaceType']"))
 	}
 
 	public static By getObjectIdentifier(String key) {
