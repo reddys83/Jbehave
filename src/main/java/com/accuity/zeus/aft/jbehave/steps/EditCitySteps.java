@@ -836,7 +836,6 @@ public class EditCitySteps extends AbstractSteps {
 
 	@When("the user deletes the existing related places rows")
 	public void deleteAllRelatedPlaces() {
-		setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().deleteAllRelatedPlaces();
 	}
 
