@@ -108,11 +108,11 @@ public class AreaIdentifiers {
 		hmap.put("area_credit_rating_applied_date_error_msg", By.xpath("//*[@data-error_id='creditRatingAppliedDateError']"));
 		hmap.put("area_credit_rating_confirmed_date_error_msg", By.xpath("//*[@data-error_id='creditRatingConfirmedDateError']"));
 		hmap.put("area_enity_link_id", By.xpath(""));
-		hmap.put("area_entity_type_dropdown_xpath", By.xpath("//*[@id='additionalPresences']/tr/td[1]/select"));
+		hmap.put("area_entity_type_dropdown_xpath", By.xpath("//*[@data-internal_id='presencesType']"));
 		hmap.put("area_entity_type_options_dropdown_xpath",
 				By.xpath(".//*[@class='new'][@data-row_id='presences']//select[@id='presencesType']/option"));
 		hmap.put("area_entity_details_Select_dropdown_xpath",
-				By.xpath("//*[@id='additionalPresences']/tr/td[4]/select"));
+				By.xpath("//*[@data-internal_id='presencesDetails']"));
 		hmap.put("area_entity_details_options_dropdown_xpath", By.xpath(
 				".//*[@class='new'][@data-row_id='presences']//select[@data-internal_id='presencesDetails']/option"));
 		hmap.put("area_entity_link_id", By.xpath("//*[@id='areaPresences']"));
@@ -120,8 +120,8 @@ public class AreaIdentifiers {
 		hmap.put("area_entity_delete_button_xpath",By.xpath(".//*[@data-row_id='presences']//button[@class='delete-element']"));
 		//hmap.put("area_entity_type_dropdown_xpath",
 			//	By.xpath(".//*[@class='new'][@data-row_id='presences']//select[@id='presencesType']"));
-		hmap.put("area_entity_details_Select_dropdown_xpath",
-				By.xpath("//*[@id='additionalPresences']/tr/td[4]/select"));
+		//hmap.put("area_entity_details_Select_dropdown_xpath",
+				//By.xpath("//*[@id='additionalPresences']/tr/td[4]/select"));
 		hmap.put("area_entity_type_required_error_message_xpath",
 				By.xpath("//*[@id='additionalPresences']/tr/td[1]/p"));
 		hmap.put("area_entity_required_error_message_xpath",

@@ -1083,12 +1083,16 @@ public class EditAreaSteps extends AbstractSteps {
 	
 	@When("the user selects type value as <entityType> in the entity for area")
 	public void selectsEntityTypeFromDropdown(@Named("entityType") String entityType) {
-		getEditAreaPage().selectsEntityTypeFromDropdown(entityType);
+		getEditAreaPage().selectDropDownValueFromRowNumber(
+				AreaIdentifiers.getObjectIdentifier("area_entity_type_dropdown_xpath"), entityType, 1);
+		//getEditAreaPage().selectsEntityTypeFromDropdown(entityType);
 	}
 	
 	@When("the user selects details value as <entityDetails> in the entity for area")
 	public void selectsEntityDetailsFromDropdown(@Named("entityDetails") String entityDetails) {
-		getEditAreaPage().selectsEntityDetailsFromDropdown(entityDetails);
+		getEditAreaPage().selectDropDownValueFromRowNumber(
+				(AreaIdentifiers.getObjectIdentifier("area_entity_details_Select_dropdown_xpath")), entityDetails, 1);
+		//getEditAreaPage().selectsEntityDetailsFromDropdown(entityDetails);
 	}
 	
 	@Then("the user should see the error message required for type in entity for area")
