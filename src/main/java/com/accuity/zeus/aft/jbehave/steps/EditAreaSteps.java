@@ -1268,8 +1268,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should see the values for details dropdown from lookup AREA_RELATED_PLACE_SUBTYPE")
 	public void verifyAreaPlacesDetailsList() {
-		getDataPage().verifyLookUpValues(
-				CityIdentifiers.getObjectIdentifier("city_places_details_options_dropdown_xpath"),
+		getDataPage().verifyLookUpValues(CityIdentifiers.getObjectIdentifier("city_places_details_options_dropdown_xpath"),
 				"get area places detail lookup", "detail");
 	}
 
@@ -1280,7 +1279,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on edit button in places for area")
 	public void clicksOnEditButton() {
-		setEditCityPage(getDataPage().createEditCityPage());
+//		setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().clicksOnEditButton();
 	}
 
@@ -1321,8 +1320,8 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user selects details value as <placeDetails> in the places for area")
 	public void selectsDetailsFromDropdown(@Named("placeDetails") String placeDetails) {
-		getEditAreaPage().selectDropDownValueFromRowNumber(
-				(AreaIdentifiers.getObjectIdentifier("area_places_detail_dropdown_xpath")), placeDetails, 1);
+		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_detail_dropdown_xpath"), 
+				placeDetails, 1);
 	}
 
 	@Then("the user should see the error message required for place in places for area")
@@ -1347,7 +1346,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on the area places link in the navigation bar")
 	public void clickOnAreaPlaces() {
-		setEditAreaPage(getDataPage().createEditAreaPage());
+//		setEditAreaPage(getDataPage().createEditAreaPage());
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_link_id"));
 	}
 
@@ -1358,7 +1357,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on delete area places type")
 	public void clicksOnDeleteAreaPlacesType() {
-		setEditCityPage(getDataPage().createEditCityPage());
+//		setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().clicksOnDeleteCityPlacesType();
 	}
 
@@ -1385,28 +1384,25 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user updates type value as <placeType> in the places for area")
 	public void selectsExistingTypeFromDropdown(@Named("placeType") String placeType) {
-		getEditAreaPage().selectItemFromDropdownListByText(
-				(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath")), placeType);
+		getEditAreaPage().selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"), placeType);
 	}
 
 	@When("the user selects type value as <placeType> in the places for area")
 	public void selectsAreaTypeFromDropdown(@Named("placeType") String placeType) {
-
-		getEditAreaPage().selectDropDownValueFromRowNumber(
-				AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"), placeType, 1);
+		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"), 
+				placeType, 1);
 	}
 
 	@When("the user selects type value as <placeType2> in the places for area")
 	public void selectsAreaTypeFromDropdown2(@Named("placeType2") String placeType2) {
-
-		getEditAreaPage().selectDropDownValueFromRowNumber(
-				AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"), placeType2, 2);
+		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"), 
+				placeType2, 2);
 	}
 
 	@When("the user selects details value as <placeDetails2> in the places for area")
 	public void selectsDetailsFromDropdown2(@Named("placeDetails2") String placeDetails2) {
-		getEditAreaPage().selectDropDownValueFromRowNumber(
-				(AreaIdentifiers.getObjectIdentifier("area_places_detail_dropdown_xpath")), placeDetails2, 2);
+		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_detail_dropdown_xpath"), 
+				placeDetails2, 2);
 	}
 
 	@When("the user clicks on edit button for second row  in places for area")

@@ -1860,38 +1860,33 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyDeletedRelatedPlaces(String type, String place, String details) {
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue(
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_entirevalue_xpath"))
+		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_entirevalue_xpath"))
 						.getText().isEmpty());
 	}
 
-	public void verifyAreaRelatedPlacesParametersInUI(String[] areaPlacesType, String[] areaPlacesPlace,
-			String[] areaPlacesDetail) {
+	public void verifyAreaRelatedPlacesParametersInUI(String[] areaPlacesType, String[] areaPlacesPlace, String[] areaPlacesDetail) {
 
 		List<WebElement> relatedPlaceRows = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_entirevalues_xpath"));
 
 		for (int i = 0; i < relatedPlaceRows.size(); i++) {
-			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText()
-					.contains(areaPlacesType[i]));
-			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText()
-					.contains(areaPlacesPlace[i]));
-			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText()
-					.contains(areaPlacesDetail[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(areaPlacesType[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(areaPlacesPlace[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(areaPlacesDetail[i]));
 		}
 	}
 
 	public void verifyAreaRelatedValueFromZeusDB(String source, String area, List<String> areaPlacesType,
-			List<String> areaPlace, List<String> areaPlacesDetail) {
+												 List<String> areaPlace, List<String> areaPlacesDetail) {
 		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("source", source));
 			nvPairs.add(new BasicNameValuePair("name", area));
-			Thread.sleep(3000L);
+			Thread.sleep(1000L);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get area related place info", nvPairs);
@@ -1913,10 +1908,8 @@ public class EditAreaPage extends AbstractPage {
 									.getChildNodes().item(childNode).getTextContent(), areaPlacesDetail.get(i));
 							break;
 						case "value":
-							assertEquals(
-									StringUtils.capitalize(document.getElementsByTagName("relation").item(0)
-											.getChildNodes().item(i).getChildNodes().item(childNode).getTextContent()),
-									areaPlace.get(i));
+							assertEquals(StringUtils.capitalize(document.getElementsByTagName("relation").item(0)
+											.getChildNodes().item(i).getChildNodes().item(childNode).getTextContent()), areaPlace.get(i));
 							break;
 						}
 					}
