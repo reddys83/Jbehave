@@ -1933,22 +1933,26 @@ public class EditAreaPage extends AbstractPage {
 		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_entity_go_button_xpath")).click();
 	}
     
-    public void verifyRelatedEntityInAreaPage(String entityType, String fid, String entityDetails) {
+    public void verifyRelatedEntityInAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
 		try {
 			Thread.sleep(3000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals(entityType, getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_typevalue_xpath")).getText());
-		assertEquals(fid, getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_fidvalue_xpath")).getText());
+		List<WebElement> relatedPlaceRows = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_relatedentity_entirevalues_xpath"));
+
 		
-		assertEquals(entityDetails,
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("are_get_relatedentity_detailsvalue_xpath"))
-						.getText());
+		
+		for (int i = 0; i < relatedPlaceRows.size(); i++) {
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText()
+					.contains(entityType[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText()
+					.contains(entity[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText()
+					.contains(entityDetails[i]));
 	}
-    
+   }
     public String getAreaRelatedInfoFromDB(String country,String area,String tagName, String source) {
 
 		String tagValue = null;

@@ -157,6 +157,8 @@ public class AreaIdentifiers {
 		hmap.put("area_get_relatedentity_entirevalue_xpath", By.xpath("//*[@id='areaPresences']//tbody"));
 		hmap.put("area_entity_edit_button_xpath", By.xpath("//button[@class='edit-row edit-presences']"));
 		hmap.put("area_get_relatedentity_entirevalue_xpath", By.xpath("//*[@id='areaPresences']//tbody"));
+		hmap.put("area_entity_edit_button2_xpath", By.xpath("//*[@id='additionalPresences']/tr[2]/td[2]/button"));
+		hmap.put("area_relatedentity_entirevalues_xpath", By.xpath("//*[@id='areaPresences']//tbody//tr"));
 	}
 
 	public static By getObjectIdentifier(String key) {

@@ -1323,13 +1323,23 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on go button in entity for area")
 	public void clicksOnGoButton() {
-		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_go_button_xpath"));		
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_go_button_xpath"));	
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	@Then("the user should see <entityType> <entity> <entityDetails> updated in area related entity")
+	@Then("the user should see related entity values updated in area related entity")
 	public void verifyRelatedEntityInAreaPage(@Named("entityType") String entityType,
-			@Named("entity") String entity, @Named("entityDetails") String entityDetails) {
-		getEditAreaPage().verifyRelatedEntityInAreaPage(entityType, entity, entityDetails);
+			@Named("entity") String entity, @Named("entityDetails") String entityDetails,@Named("entityType2") String entityType2,
+			@Named("entity2") String entity2, @Named("entityDetails2") String entityDetails2) {
+		
+		String[] areaEntityTypes = { entityType, entityType2 };
+		String[] areaEntity = { entity, entity2 };
+		String[] areaEntityDetail = { entityDetails, entityDetails2 };
+		getEditAreaPage().verifyRelatedEntityInAreaPage(areaEntityTypes, areaEntity, areaEntityDetail);
 	}
 	
 	@Then("the user should see the area related entity date <entityType> <entity> <entityDetails> value in $source document")
@@ -1356,5 +1366,39 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user verifies that no new row is added in area web page")
 	public void verifyNoNewRowAdded() {
 		getEditAreaPage().verifyNoNewRowAdded();
+	}
+	
+
+	@When("the user selects type value as <entityType2> in the entity for area")
+	public void selectsEntityTypeFromDropdown2(@Named("entityType2") String entityType2) {
+		getEditAreaPage().selectDropDownValueFromRowNumber(
+				AreaIdentifiers.getObjectIdentifier("area_entity_type_dropdown_xpath"), entityType2, 2);
+	}
+	
+	@When("the user clicks on edit button in second row for entity for area")
+	public void clicksOnEditButtonEntityArea2() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_edit_button2_xpath"));
+	}
+	
+	@When("the user selects details value as <entityDetails2> in the entity for area")
+	public void selectsEntityDetailsFromDropdown2(@Named("entityDetails2") String entityDetails2) {
+		getEditAreaPage().selectDropDownValueFromRowNumber(
+				(AreaIdentifiers.getObjectIdentifier("area_entity_details_Select_dropdown_xpath")), entityDetails2, 2);
+		//getEditAreaPage().selectsEntityDetailsFromDropdown(entityDetails);
+	}
+	
+	@When("the user selects fid value as <fid2> in the entity for area")
+	public void selectsEntityFidFromDropdown2(@Named("fid2") String fid2) {
+		getEditAreaPage().selectsEntityFidFromDropdown(fid2);
+	}
+	
+	@Then("the user should see <entityType> <entity> <entityDetails> updated in area related entity")
+	public void verifyRelatedEntityInAreaPage2(@Named("entityType") String entityType,
+			@Named("entity") String entity, @Named("entityDetails") String entityDetails) {
+		
+		String[] areaEntityTypes = { entityType};
+		String[] areaEntity = { entity};
+		String[] areaEntityDetail = { entityDetails };
+		getEditAreaPage().verifyRelatedEntityInAreaPage(areaEntityTypes, areaEntity, areaEntityDetail);
 	}
 }
