@@ -105,8 +105,8 @@ And the user should see the below summary changes in confirmation modal
 |Related Places|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
-Then the user should see <placeType> <cityPlaces> <placeDetails> updated correctly in area related place
-Then the user should see the area related place date <placeType> <cityPlaces> <placeDetails> value in zeus document
+Then the user should see related place details saved in area web page
+Then the user should see related place details saved in in zeus document
 Then the user reverts the changes to the document
 
 Examples:

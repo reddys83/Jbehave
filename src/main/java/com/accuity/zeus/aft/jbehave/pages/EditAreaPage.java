@@ -1858,48 +1858,15 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}	
 
-	public void verifyRelatedPlacesInAreaPage(String type, String place, String details) {
-		try {
-			Thread.sleep(6000);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		assertEquals(type, getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_typevalue_xpath")).getText());
-		assertEquals(place, getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_placevalue_xpath")).getText());
-		assertEquals(details,
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_detailsvalue_xpath"))
-						.getText());
-	}
-
 	public void verifyDeletedRelatedPlaces(String type, String place, String details) {
 		try {
-			Thread.sleep(6000);
+			Thread.sleep(3000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals("", getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_entirevalue_xpath")).getText());
-	}
-
-	public void selectsPlacesTypeFromDropdwon(String placeType) {
-		selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"),
-				placeType);
-	}
-
-	public void selectsAreaPlacesTypeFromDropdwon(String placeType, int rowNumber) {
-		selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"),
-				placeType, rowNumber);
-	}
-
-	public void selectsAreaPlacesDetailsFromDropdwon(String placeDetails, int rowNumber) {
-		selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_detail_dropdown_xpath"),
-				placeDetails, rowNumber);
-	}
-
-	public void clicksOnEditButton() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_place_edit_button_2_xpath"));
+		assertTrue(
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedplace_entirevalue_xpath"))
+						.getText().isEmpty());
 	}
 
 	public void verifyAreaRelatedPlacesParametersInUI(String[] areaPlacesType, String[] areaPlacesPlace,
@@ -1960,7 +1927,7 @@ public class EditAreaPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public String getPageUrl() {
 		return null;
