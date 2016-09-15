@@ -394,6 +394,7 @@ Scenario: ZEUS-838 - User will see confirmation message after saving currency ed
 1. @accuracy = year
 2. @accuracy = month
 3. @accuracy = day
+Meta:@test1600
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
