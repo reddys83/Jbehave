@@ -115,9 +115,6 @@ Examples:
 Scenario: Verifying error message displayed for wrong format of claimes est date
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -143,9 +140,6 @@ Examples:
 
 Scenario: User can edit legal Entity's corporate statement
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -201,8 +195,6 @@ Examples:
 
 Scenario: Filter offices by type - Domestic
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -219,8 +211,6 @@ Examples:
 Scenario: Verify the sorting office results by FID
 Meta:
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

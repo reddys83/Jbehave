@@ -19,8 +19,6 @@ JIRA ID - ZEUS-561 - User can sort office results by addressline1
 Scenario: Verify the list of office multiple types should order alphabetically in office search results page
 Meta:
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -35,8 +33,6 @@ Examples:
 Scenario: Verify the sorting office results by FID
 Meta:
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -53,8 +49,6 @@ Examples:
 
 Scenario: Verify the sorting office results by STATUS
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -83,8 +77,6 @@ Examples:
 Scenario: Verify the sorting office results by TYPE
 Meta:
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -104,8 +96,6 @@ Examples:
 Scenario: Verify the sorting office results by TYPE where the office has multiple types
 Meta:
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -123,8 +113,6 @@ Examples:
 Scenario: Verify Office Results by name
 Meta:
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -142,8 +130,6 @@ Examples:
 Scenario: Verify Office Results by Area
 Meta:
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -160,8 +146,6 @@ Examples:
 
 Scenario: Verify Office Results by City
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -178,8 +162,6 @@ Examples:
 
 Scenario: Verify the sorting office results by country
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -198,8 +180,6 @@ Examples:
 
 Scenario: Verify Office Results Pagination and Counter
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

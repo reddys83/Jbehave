@@ -12,8 +12,6 @@ Scenario: User can edit office's identifiers -
 3- Verify existing identifier values are from trusted 
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -38,8 +36,6 @@ Scenario: User can edit office's identifiers- Verify if User can add New Office 
 4 - Verify Zeus DB is updated with entered identifier values
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -78,8 +74,6 @@ Scenario: User can edit existin office's identifiers- Verify if User can add New
 4 - Verify Zeus DB is updated with entered identifier values
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -117,8 +111,6 @@ Examples:
 Scenario: Verifying that office's identifier row in not added after saving when blank values are entered for 'Type', 'Value' and 'Status'
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -154,8 +146,6 @@ Examples:
 Scenario: User can edit office's identifiers - Verify whether the text entered in the Identifier 'Value' field is not beyond 50 unicode characters.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -184,8 +174,6 @@ Scenario: User can edit office's identifiers
 1 - Verify that an error message 'Required' is displayed when the user leaves the identifier Type as blank and enters value in identifier 'Value' and 'Status'
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -210,8 +198,6 @@ Scenario: User can edit office's identifiers
 1 - Verify that an error message 'Required' is displayed when user leaves identifier Value as blank and enters value in identifier 'Type' and 'Status'
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -236,8 +222,6 @@ Scenario: User can edit office's identifiers
 1 - Verify that an error message 'Required' is displayed when user leaves identifier status as blank and enters value in identifier 'Type' and 'Value'
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -262,8 +246,6 @@ Scenario: User can edit office's identifiers
 1 - Verify if User can delete exisiting identifiers( "Type","Value" and "Status").
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -290,8 +272,6 @@ Scenario: User can edit office's identifiers
 2 - Verify if User can delete identifiers( "Type","Value" and "Status") by clicking on 'Yes' , then after saving it should be removed.
 
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button

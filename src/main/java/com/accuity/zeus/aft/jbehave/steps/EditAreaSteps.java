@@ -1,7 +1,10 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 
 @Component
 public class EditAreaSteps extends AbstractSteps {
@@ -194,8 +198,8 @@ public class EditAreaSteps extends AbstractSteps {
 		getDataPage().enterAreaInTypeAhead(area);
 	}
 
-	@Then("the user should see the status value in area page is same as in $source document")
-	public void verifyCityBeganDateValueFromDB(@Named("country") String country, @Named("area") String area,
+	@Then("the user should see the area status value in area page is same as in $source document")
+	public void verifyAreaStatusValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
 		getEditAreaPage().verifyAreaFromTrustedDB(country, area, "status", source);
 	}
@@ -772,5 +776,469 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyUseInAddressAreaFromTrustedDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
 		getEditAreaPage().verifyUseInAddressAreaFromTrustedDB(country, area, "areaUseInAddress", source);
+	}
+	
+	@When("the user clicks on the add new region button in the area region page")
+	public void clickOnAddNewRegionButton() {
+		setEditCityPage(getDataPage().createEditCityPage());
+		getEditCityPage().clickOnAddNewRegionButton();
+	}
+
+	@When("the user enters region type as <newRegionType> in the region area page")
+	public void enterAreaRegionType(@Named("newRegionType") String newRegionType) {
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		getEditAreaPage().enterAreaRegionType(newRegionType);
+	}
+
+	@Then("the user should see the region type from 'AREA_ALTERNATIVE_REGION' look up")
+	public void verifyAreaRegionTypeList() {
+		getDataPage().verifyLookUpValues(AreaIdentifiers
+				.getObjectIdentifier("area_region_type_dropdown_options_xpath"), "get area region types", "regiontype");
+	}
+
+	@Then("the user should see the area region value from <regionValueLookUp>")
+	public void verifyAreaRegionValueList(@Named("regionValueLookUp") String regionValueLookUp) {
+		getEditAreaPage().verifyAreaRegionValueList(regionValueLookUp);
+	}
+
+	@When("the user clicks on the area regions link in the navigation bar")
+	public void clickOnAreaRegions() {
+		setEditAreaPage(getDataPage().createEditAreaPage());
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_region_link"));
+	}
+
+	@When("the user deletes all existing area regions in area page in area page")
+	public void deleteAllAreaRegionsRows() {
+		getEditCityPage().clickOnAddNewRegionButton();
+		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_delete_region_row_button_xpath"));
+	}
+
+	@When("the user enters region value as <newRegionValue> in the region area page")
+	public void enterRegionValue(@Named("newRegionValue") String newRegionValue) {
+		getEditAreaPage().enterRegionValue(newRegionValue);
+	}
+
+	@Then("the user should see the area region type and value updated in UI")
+	public void verifyAreaRegionTypeAndValue(@Named("newRegionType") String newRegionType,
+			@Named("newRegionValue") String newRegionValue) {
+		getEditAreaPage().verifyRegionTypeAndValue(newRegionType, newRegionValue);
+	}
+
+	@Then("the user should see the error message for the required region value field in the area region page")
+	public void verifyErrorMessageForRequiredAreaRegionValue() {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaRegionValue();
+	}
+
+	@Then("the user should see the blank area region type and blank value is not updated in $source document")
+	public void verifyAreaRegionForBlankValue(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source) {
+		Map<String, String> areaRegionValueMap = getEditAreaPage().getAreaRegionValueMapFromDB(country, area, source);
+		getEditAreaPage().verifyAreaRegionForBlankValue(areaRegionValueMap);
+	}
+
+	@Then("the user should see the area region type and value updated in $source document")
+	public void verifyAreaRegion2ValueFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("newRegionValue") String newRegionValue, @Named("newRegionType") String newRegionType,
+			@Named("source") String source) {
+		Map<String, String> areaRegionValueMap = getEditAreaPage().getAreaRegionValueMapFromDB(country, area, source);
+		getEditAreaPage().verifyRegionValueInDB(areaRegionValueMap, newRegionType, newRegionValue);
+	}
+
+	@When("the user clicks on the delete region row button in the region area page")
+	public void clickOnDeleteRegionRowButtonArea() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_region_row_button_xpath"));
+	}
+
+	@Then("the user should see the area region type and value updated in edit area page")
+	public void verifyAreaRegionTypeAndValueInEditMode(@Named("newRegionType") String newRegionType,
+			@Named("newRegionValue") String newRegionValue) {
+		getEditAreaPage().verifyAreaRegionTypeAndValueInEditMode(newRegionType, newRegionValue);
+	}
+
+	@Then("the user should see the area region type and value deleted in UI")
+	public void verifyAreaRegionTypeDeleted(@Named("newRegionType") String newRegionType,
+			@Named("newRegionValue") String newRegionValue) {
+		getEditAreaPage().verifyRegionTypeNotPresentInUI(newRegionType, newRegionValue);
+	}
+
+	@Then("the user should see the area region not present in $source document")
+	public void verifyAreaRegionDeletedFromDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("newRegionType") String newRegionType,
+			@Named("newRegionValue") String newRegionValue) {
+		Map<String, String> areaRegionValueMap = getEditAreaPage().getAreaRegionValueMapFromDB(country, area, source);
+		getEditAreaPage().verifyAreaRegionDeletedFromDB(areaRegionValueMap, newRegionType);
+	}
+	
+	@Then("the user should see the area credit rating values same as in $source document")
+	public void verifyAreaCreditRatingValueFromTrustedDB(@Named("country") String country, 
+			@Named("area") String area, @Named("source") String source) {
+		getEditAreaPage().verifyAreaCreditRatingValuesFromTrustedDB(country, area, source);
+	}
+	
+	@When("the user enters credit rating agency as <agency> in credit rating row $rowNumber in the area page")
+	public void enterCreditRatingAgency(@Named("agency") String agency, @Named("rowNumber") int row) {
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_agency_dropdown"), agency, row);
+	}
+	
+	@When("the user enters credit rating type as <type> in credit rating row $rowNumber in the area page")
+	public void enterCreditRatingType(@Named("type") String creditRatingType, @Named("rowNumber") int row) {
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_type_dropdown"), creditRatingType, row);
+	}
+	
+	@When("the user enters credit rating <value> in credit rating row $rowNumber in the area page")
+	public void enterAreaCreditRatingValue(@Named("value") String value, @Named("rowNumber") int row) {
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_value"), value, row);
+	}
+	
+	@When("the user enters applied date $appliedDay $appliedMonth $appliedYear in the area page")
+	public void enterAreaCreditRatingAppliedDate(@Named("appliedDay") String appliedDay,
+			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
+			@Named("rowNumber") int row) {
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_applied_date_day"), appliedDay, row);
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_applied_date_month"), appliedMonth, row);
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_applied_date_year"), appliedYear, row);
+	}
+	
+	@When("the user enters confirmed date $confirmedDay $confirmedMonth $confirmedYear in the area page")
+	public void enterAreaCreditRatingConfirmedDate(@Named("confirmedDay") String confirmedDay,
+			@Named("confirmedMonth") String confirmedMonth, @Named("confirmedYear") String confirmedYear,
+			@Named("rowNumber") int row) {
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_confirmed_date_day"), confirmedDay, row);
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_confirmed_date_month"), confirmedMonth, row);
+		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
+				.getObjectIdentifier("area_credit_rating_confirmed_date_year"), confirmedYear, row);
+	}
+	
+	@Then("the user should see the area credit rating values as in $source document")
+	@Alias("the user should not see the area credit rating row in $source document")
+	public void verifyAreaCreditRatingValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+		    @Named("source") String source, @Named("agency") String agency,
+			@Named("type") String type, @Named("value") String value, @Named("appliedDay") String appliedDay,
+			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
+			@Named("confirmedDay") String confirmedDay, @Named("confirmedMonth") String confirmedMonth,
+			@Named("confirmedYear") String confirmedYear, @Named("rowNumber") int row) {
+
+		String appliedDate = appliedDay + " " + appliedMonth + " " + appliedYear;
+		String confirmedDate = confirmedDay + " " + confirmedMonth + " " + confirmedYear;
+		getEditAreaPage().verifyAreaCreditRatingValuesFromDB(country, area, source, agency, type, value, appliedDate, confirmedDate, row);
+	}
+	
+	@Then("the user should see the entered area credit rating values are saved in UI in the row $rowNumber")
+	public void verifyAreaCreditRatingValueFromUI(@Named("country") String country, @Named("area") String area,
+		    @Named("agency") String agency, @Named("type") String type,
+			@Named("value") String value, @Named("appliedDay") String appliedDay,
+			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
+			@Named("confirmedDay") String confirmedDay, @Named("confirmedMonth") String confirmedMonth,
+			@Named("confirmedYear") String confirmedYear, @Named("rowNumber") int row) {
+
+		String appliedDate = appliedDay + " " + appliedMonth + " " + appliedYear;
+		String confirmedDate = confirmedDay + " " + confirmedMonth + " " + confirmedYear;
+		getEditAreaPage().verifyAreaCreditRatingValuesFromUI(country, area, agency, type, value, appliedDate, confirmedDate, row);
+	}
+	
+	@When("the user clicks on the area credit rating link in the navigation bar")
+	public void clickOnAreaCreditRating() {
+		setEditAreaPage(getDataPage().createEditAreaPage());
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating"));
+	}
+	
+	@When("the user clicks on add new credit rating button in the credit rating area page")
+	public void clickOnAddButton() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating_add_row_id"));
+	}
+	
+	@Then("the user should see the area credit rating agency names from look up $LookUpName")
+	public void verifyAreaAgencyListExistingRow(@Named("rowNumber") int rowNumber) {
+		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber, 
+				AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_dropdown"), "creditRatingAgency");
+	}
+	
+	@Then("the user should see the area credit rating types from look up $LookUpName")
+	public void verifyAreaCreditRatingTypeListExistingRow(@Named("rowNumber") int rowNumber) {
+		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber, 
+				AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_dropdown"), "creditRatingType");
+	}
+	
+	@When("the user deletes the existing area credit rating rows")
+	public void deleteExistingCreditRatingRows() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating_add_row_id"));
+		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_delete_credit_rating_row_button"));
+	}
+	
+	@Then("the user should not see the newly added credit rating row in the area page")
+	public void verifyNewlyAddedCreditRatingRowIsNotDisplayed() throws Exception {
+		getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_credit_rating_new_row"), false);
+	}
+	
+	@Then("the user should see $errorMessage error message in area credit rating agency field")
+	public void verifyErrorMessageForAreaCreditRatingAgency(@Named("errorMessage") String errorMessage) {
+		getDataPage().verifyWebElementText("Agency", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_error"));
+	}
+	
+	@Then("the user should see $errorMessage error message in area credit rating type field")
+	public void verifyErrorMessageForAreaCreditRatingType(@Named("errorMessage") String errorMessage) {
+		getDataPage().verifyWebElementText("Type", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_error"));
+	}
+	
+	@Then("the user should be able to view the error message $errorMessage in area credit rating value")
+	public void verifyErrorMessageInAreaCreditRatingValue(@Named("errorMsg") String errorMessage) {
+		getDataPage().verifyWebElementText("Value", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_value_error"));
+	}
+	
+	@Then("the user should see the error message $errorMessage for applied date in the area page")
+	public void verifyErrorMessageForAppliedDate(@Named("errorMessage") String errorMessage) {
+		getDataPage().verifyWebElementText("Applied Date", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_error_msg"));
+	}
+	
+	@Then("the user should see the error message $errorMessage for confirmed date in the area page")
+	public void verifyErrorMessageForConfirmedDate(@Named("errorMessage") String errorMessage) {
+		getDataPage().verifyWebElementText("Confirmed Date", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_confirmed_date_error_msg"));
+	}
+	
+	@When("the user enters applied date and confirmed date that is later than today")
+	public void enterAppliedAndConfirmedDateLaterThanToday(@Named("rowNumber") int row) throws ParseException {
+		getEditAreaPage().enterAppliedAndConfirmedDateLaterThanToday(row);
+	}
+	
+	@When("the user clicks on the delete credit rating row button in the area credit rating page")
+	public void clickOnDeleteNewAreaCreditRatingRowButton() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_delete_credit_rating_row_button"));
+	}
+	
+	@Then("the user should see delete row confirmation modal in the area credit rating")
+	public void verifyDeleteConfirmationModalInAreaCreditRating() {
+		getDataPage().verifyDeleteConfirmationModal();
+	}
+	
+	@When("the user clicks on the No button to cancel the deletion of credit rating row")
+	public void clickNoButtonInAreaCreditRatingDeleteModal() {
+		getDataPage().clickOnNoButtonInDeleteConfirmationModal();
+	}
+	
+	@Then("the user should see the newly added credit rating row in the area credit rating page")
+	public void verifyNewlyAddedAreaCreditRatingRowIsDisplayed() throws Exception {
+		getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_credit_rating_row"), true);
+	}
+	
+	@When("the user clicks on the Yes button to delete credit rating row")
+	public void clickYesButtonInAreaCreditRatingDeleteModal() {
+		getDataPage().clickOnYesButtonInDeleteConfirmationModal();
+	}
+	
+	@When("the user clicks on the add new demographics button in the area page")
+	public void clickOnAddDemographicsButton() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_demographics_button"));
+	}
+
+	@Then("the user should see the area demographics types from lookup DEMOGRAPHIC_METRIC")
+	public void verifyAreaDemographicsTypeDropdownList() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographics_type"));
+		getDataPage().verifyLookUpValues(AreaIdentifiers.getObjectIdentifier("area_demographics_type_options"),
+				"get area demographics type", "type");
+	}
+
+	@Then("the user should see the demographics units in area page are from lookup UNIT_OF_MEASUREMENT")
+	public void verifyAreaDemographicsUnitDropdownList(@Named("demographicType") String demographicType) {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"));
+		getEditAreaPage().verifyAreaDemographicsUnitDropdownList();
+	}
+
+	@When("the user selects the demographic types <demographicType> in the area page")
+	public void selectsDemographicsTypesFromDropdown(@Named("demographicType") String demographicType) {
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographics_type"),
+				demographicType, 1);
+	}
+
+	@When("the user enters the demographic value <demographicValue> in the area page")
+	public void enterDemographicsValue(@Named("demographicValue") String demographicValue) {
+		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographics_value"),
+				demographicValue);
+	}
+
+	@When("the user enters the demographic unit <unitValue> in the area page")
+	public void enterDemographicsUnit(@Named("unitValue") String demographicUnit) {
+		if (demographicUnit.contains("km")) {
+			getDataPage().selectItemFromDropdownListByindex(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), 1);
+		} else if (demographicUnit.contains("mi")) {
+			getDataPage().selectItemFromDropdownListByindex(
+					AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), 2);
+		}
+	}
+
+	@Then("the user should not see the unit drop down for selected demographic type in area page")
+	public void verifyCountryDemographicsUnitDropdownNotExist() {
+		getDataPage()
+				.verifyElementNotExistInUI(AreaIdentifiers.getObjectIdentifier("area_add_demographics_unit_dropdown"));
+	}
+
+	@When("the user enter demographics day <day> in the demographics area page")
+	public void enterDemographicsDay(@Named("day") String day) {
+		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographic_date-day"), day);
+	}
+
+	@When("the user enter demographics month <month> in the demographics area page")
+	public void enterDemographicsMonth(@Named("month") String month) {
+		getEditAreaPage().selectItemFromDropdownListByText(
+				AreaIdentifiers.getObjectIdentifier("area_demographic_date-month"), month);
+	}
+
+	@When("the user enter demographics year <year> in the demographics area page")
+	public void enterDemographicYear(@Named("year") String year) {
+		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographic_date-year"), year);
+	}
+
+	@Then("the user should see the error message $errorMessage in the demographics area page")
+	public void verifyErrorMsgForAreaDemographicsDate(@Named("errorMessage") String errorMessage) {
+		getDataPage().verifyWebElementText("DemographicsDate", errorMessage,
+				AreaIdentifiers.getObjectIdentifier("area_demographic_date_error_message"));
+	}
+
+	@When("the user clicks on delete area demographics option")
+	public void clickOnDeleteAreaDemographicsOption() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_demographic-delete-button"));
+	}
+
+	@Then("the user should see the area demographic values as in $source document")
+	public void verifyDemographicsValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("demographicType") String type, @Named("unitValue") String unit,
+			@Named("demographicValue") String value, @Named("day") String day, @Named("month") String month,
+			@Named("year") String year) {
+		List<String> demographicType = new ArrayList<>();
+		List<String> demographicValue = new ArrayList<>();
+		List<String> demographicUnit = new ArrayList<>();
+		List<String> date = new ArrayList<>();
+		demographicType.add(type);
+		demographicValue.add(value);
+		demographicUnit.add(unit);
+		date.add(day + " " + month + " " + year);
+		getEditAreaPage().verifyDemographicValueInDB(country, area, source, demographicType, demographicValue,
+				demographicUnit, date);
+	}
+
+	@Then("the user should see the area demographic values are saved in area page")
+	public void verifyDemographicsValuesInUI(@Named("demographicType") String type,
+			@Named("demographicValue") String value, @Named("unitValue") String unit, @Named("day") String day,
+			@Named("month") String month, @Named("year") String year) {
+		String date = day + " " + month + " " + year;
+		getEditAreaPage().verifyDemographicValueRowInUI(type, value, unit, date, 1);
+	}
+
+	@When("the user enter demographics date <day> <month> <year> in the demographics row 1 in area page")
+	public void enterDemographicDate1(@Named("day") String day, @Named("month") String month, @Named("year") String year) {
+		getDataPage().enterTextUsingIndex(AreaIdentifiers.getObjectIdentifier("area_demographic_date-day"), day, 1);
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographic_date-month"), month, 1);
+		getDataPage().enterTextUsingIndex(AreaIdentifiers.getObjectIdentifier("area_demographic_date-year"), year, 1);
+	}
+	
+	@When("the user enter demographics date <day> <month> <year> in the demographics row 2 in area page")
+	public void enterDemographicDate2(@Named("day") String day, @Named("month") String month, @Named("year") String year) {
+		getDataPage().enterTextUsingIndex(AreaIdentifiers.getObjectIdentifier("area_demographic_date-day"), day, 2);
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographic_date-month"), month, 2);
+		getDataPage().enterTextUsingIndex(AreaIdentifiers.getObjectIdentifier("area_demographic_date-year"), year, 2);
+	}
+
+	@When("the user deletes the existing area demographics rows")
+	public void deleteAlldemographics() {
+		clickOnAddDemographicsButton();
+		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_demographic-delete-button"));
+	}
+
+	@Then("the user should see delete row confirmation modal in the area demographics page")
+	public void verifyDeleteConfirmationModalInAreaDemographics() {
+		getDataPage().verifyDeleteConfirmationModal();
+	}
+
+	@When("the user clicks on the No button to cancel the deletion of area demographics row")
+	public void clickNoButtonInAreaDemographicsDeleteModal() {
+		getDataPage().clickOnNoButtonInDeleteConfirmationModal();
+	}
+
+	@Then("the user should see the newly added demographics row in the area demographics page")
+	public void verifyNewlyAddedAreaDemographicsRowIsDisplayed() throws Exception {
+		getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_demographics_row"), true);
+	}
+
+	@When("the user clicks on the Yes button to delete area demographics row")
+	public void clickYesButtonInAreaDemographicsDeleteModal() {
+		getDataPage().clickOnYesButtonInDeleteConfirmationModal();
+	}
+
+	@Then("the user should not see the newly added demographics row in the area page")
+	public void verifyNewlyAddedDemographicsRowIsNotDisplayed() throws Exception {
+		getDataPage().verifyElementNotExistInUI(AreaIdentifiers.getObjectIdentifier("area_demographics_row"));
+	}
+
+	@When("the user enters the demographic date later than today in area page")
+	public void enterDemographicDateLaterThanToday() {
+		getEditAreaPage().clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_demographic_date-year"),
+				String.valueOf(Calendar.getInstance().get(Calendar.YEAR) + 1));
+	}
+
+	@Then("the user should see the error message $errorMessage for the type and value fields in area page")
+	public void verifyErrorMessageForTypeAndValue(@Named("errorMessage") String errorMessage) {
+		getDataPage().verifyWebElementText("Type field", errorMessage,
+				AreaIdentifiers.getObjectIdentifier("area_demographic_type_error_message"));
+		getDataPage().verifyWebElementText("Value field", errorMessage,
+				AreaIdentifiers.getObjectIdentifier("area_demographic_value_error_message"));
+	}
+
+	@Then("the user should see the area demographic row values are saved in area page")
+	public void verifyDemographicsValuesAreSavedInUI(@Named("demographicType") String type,
+			@Named("demographicValue") String value, @Named("day") String day, @Named("month") String month,
+			@Named("year") String year, @Named("demographicType2") String type2, @Named("demographicValue2") String value2) {
+		List<String> demographicType = new ArrayList<>();
+		List<String> demographicValue = new ArrayList<>();		
+		List<String> date = new ArrayList<>();
+		demographicType.add(type); demographicType.add(type2);
+		demographicValue.add(value); demographicValue.add(value2);
+		date.add(day + " " + month + " " + year); date.add(day + " " + month + " " + year);
+		getEditAreaPage().verifyDemographicValueInUI(demographicType, demographicValue, null, date);
+	}
+
+	@Then("the user should see the area demographic values are null in $source document")
+	public void verifyDemographicsValueNullFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source) {
+		getEditAreaPage().verifyDemographicsRowNotPresentInZeusDB(country, area, source);
+	}
+	
+	@Then("the user should see the area demographic values in two rows as in $source document")
+	public void verifyDemographicsValueFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("source") String source, @Named("demographicType") String type, @Named("demographicValue") String value, @Named("demographicType2") String type2, 
+			@Named("demographicValue2") String value2, @Named("day") String day, @Named("month") String month, @Named("year") String year) {
+		List<String> demographicType = new ArrayList<>();
+		List<String> demographicValue = new ArrayList<>();
+		List<String> date = new ArrayList<>();
+		demographicType.add(type); demographicType.add(type2);
+		demographicValue.add(value); demographicValue.add(value2);
+		date.add(day + " " + month + " " + year); date.add(day + " " + month + " " + year);
+		getEditAreaPage().verifyDemographicValueInDB(country, area, source, demographicType, demographicValue, null, date);
+	}
+	
+	@When("the user selects the demographic types <demographicType2> <demographicValue2> in the area page")
+	public void enterDemographicsTypeAndValuesInTwoRows(@Named("demographicType2") String demographicType, @Named("demographicValue2") String demographicValue) {
+		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographics_type"),
+				demographicType, 2);
+		getDataPage().enterTextUsingIndex(AreaIdentifiers.getObjectIdentifier("area_demographics_value"),
+				demographicValue, 2);
+	}
+	
+	@Then("the user should see the area demographic row is saved in area page")
+	public void verifyDemographicsValuesInUI(@Named("demographicType") String type,
+			@Named("demographicValue") String value, @Named("day") String day, @Named("month") String month,
+			@Named("year") String year) {
+		String date = day + " " + month + " " + year;
+		getEditAreaPage().verifyDemographicValueRowInUI(type, value, null, date, 1);
 	}
 }

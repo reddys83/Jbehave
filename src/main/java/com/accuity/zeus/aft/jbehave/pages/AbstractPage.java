@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.xml.XmlDocument;
 import com.accuity.zeus.xml.XmlDocumentLoader;
@@ -20,7 +21,11 @@ import org.w3c.dom.NodeList;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -325,7 +330,7 @@ public abstract class AbstractPage {
     
     public void selectItemFromDropdownListByindex(By by, int i) {
         try {
-            Thread.sleep(3000L);
+            Thread.sleep(2000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -363,7 +368,42 @@ public abstract class AbstractPage {
             e.printStackTrace();
         }
         Document document =  XmlDocumentLoader.getDocument(filePath);
-        return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("resource").getNodeValue();
+        return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("id").getNodeValue();
     }
-
+    
+    public void selectDropDownValueFromRowNumber(By by, String value, int rowNumber) {
+		try {
+			List<WebElement> dropdownValue = getDriver().findElements(by);
+			if (rowNumber <= dropdownValue.size()) {
+				Select dropdown = new Select(dropdownValue.get(rowNumber - 1));
+				if (value.equals("")) {
+					dropdown.selectByValue(value);
+				} else {
+					dropdown.selectByVisibleText(value);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
+    public void selectTexBoxValueFromRowNumber(By by, String value, int rowNumber) {
+		try {
+			List<WebElement> textBoxValues = getDriver().findElements(by);
+			if (rowNumber <= textBoxValues.size()) {
+				textBoxValues.get(rowNumber - 1).clear();
+				textBoxValues.get(rowNumber - 1).sendKeys(value);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public String getDayLaterThanToday() throws ParseException {
+    	Format dateFormat = new SimpleDateFormat("dd");
+    	Calendar cal = Calendar.getInstance();		 	
+		cal.add(Calendar.DATE, 1);
+		return dateFormat.format(cal.getTime());
+	}	
+    
 }

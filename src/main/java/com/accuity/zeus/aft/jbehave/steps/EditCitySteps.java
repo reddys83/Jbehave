@@ -998,7 +998,7 @@ public class EditCitySteps extends AbstractSteps {
 	public void clickOnAddNewNameButton() {
 		getEditCityPage().clickOnAddNewNameButton();
 	}
-	
+
 	@When("the user clicks on the city name type drop-down")
 	public void clickOnCityNameType() {
 		getEditCityPage().clickOnCityNameType();

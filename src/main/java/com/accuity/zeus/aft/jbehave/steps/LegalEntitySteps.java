@@ -258,4 +258,12 @@ public class LegalEntitySteps extends AbstractSteps {
     {
         getLegalEntityPage().verifyTrustPowerSectionNotExistsInAllPage();
     }
+
+   @Then("the user should see All Offices link is selected")
+        public void verifyAllOfficesLinkIsSelected()
+    {
+        getLegalEntityPage().verifyAllOfficesLinkIsSelected();
+    }
+
+
 }

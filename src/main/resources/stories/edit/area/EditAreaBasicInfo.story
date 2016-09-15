@@ -303,7 +303,6 @@ Examples:
 |USA|Alabama|
 
 Scenario: Verify whether Area Status value in Area Web Page is retrieved from trusted document.
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -313,7 +312,7 @@ And the user clicks on the choose an area option
 And the user enters the <area> in the type-ahead box
 And the user clicks on the area basic info link in the navigation bar
 And the user clicks on the area update link
-Then the user should see the status value in area page is same as in trusted document
+Then the user should see the area status value in area page is same as in trusted document
 
 Examples:
 |country|area|
@@ -1072,7 +1071,6 @@ Examples:
 |Angola|Namibe|Namibe1|
 
 Scenario: User has selected to add Alternative Name in Area's Basic Info
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1346,7 +1344,6 @@ b)User verifies 'Your Changes have been saved' message is displayed after save
 c)User verifies Area Basic Info has been updated in confirmation modal
 d)User verifies whether updated 'Interest Rate Limit is reflecting in Area Web page
 e)User verifies whether updated 'Interest rate limit' is reflecting in zeus document
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1685,7 +1682,6 @@ b)User verifies 'Your Changes have been saved' message is displayed after save
 c)User verifies Area Basic Info has been updated in confirmation modal
 d)User verifies whether updated 'Use in Address' is reflecting in Area Web page
 e)User verifies whether updated 'Use in Address' is reflecting in zeus document
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -1717,7 +1713,6 @@ Scenario: User is updating  Area's Basic Info  page and  entered  value for 'Use
 a)User verifies 'Your Changes have been saved' message is displayed after save
 b)User verifies Area Basic Info has not been updated in confirmation modal
 c)User verifies whether updated 'Use in Address' is reflecting in Area Web page
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area

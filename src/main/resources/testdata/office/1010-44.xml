@@ -52,7 +52,7 @@
     </locations>
     <personnel>
         <summaries>
-            <summary type="LocationEmployees">0</summary>
+            <summary type="locationEmployees">0</summary>
         </summaries>
     </personnel>
 </office>

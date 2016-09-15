@@ -44,11 +44,9 @@ And the user should see the Began Date of an area as 21 May 2006
 And the user should see the End Date of an area as 13 Jul 1922
 And the user should see the Type of an area as Area
 And the user should see the Country of an area as USA
-And the user should see the Area Parent of an area as Atchison
 And the user should see the area's replace by as California, Kansas
 And the user should see the Use in Address of an area as True
 And the user should see the Interest Rate Limit of an area as 92%
-And the user should see the ISO2 of an area as IL
 And the user should see the Add Info of an area as ILLINOIS: Census area dissolved in 2100
 
 
@@ -96,47 +94,12 @@ And the user should see the Area Parent of an sub-area as Illinois
 And the user should see the sub-area's replace by as California, Kansas
 And the user should see the Use in Address of an sub-area as False
 And the user should see the Interest Rate Limit of an sub-area as 92%
-And the user should see the ISO2 of an sub-area as CK
 And the user should see the Add Info of an sub-area as ILLINOIS: Census area dissolved in 2100
 
 
 Examples:
 |country|area|subArea|
 |USA|Illinois|Cook|
-
-Scenario: Verify area parent link.
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the area tab in the data area
-When the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
-When the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-When the user clicks on the area basic info link in the navigation bar
-And the user clicks on the area parent <areaParent> link for the selected area
-Then the user should see the area's names as:
-|TYPE|VALUE|
-|Full Name|Atchison|
-|Display Name|Atchison|
-
-Examples:
-|country|area|areaParent|
-|USA|Illinois|Atchison|
-
-Scenario: Verify Area basic info with have no link to another area
-Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the area tab in the data area
-And the user clicks on the choose a country option
-And the user enters the country <country> in the type-ahead box
-When the user clicks on the choose an area option
-And the user enters the area <area> in the type-ahead box
-And the user clicks on the area basic info link in the navigation bar
-Then the user should not see the area's area link
-
-Examples:
-|country|area|
-|Albania|Fier|
 
 Scenario: Verify area sections list
 Given a user is on the search page

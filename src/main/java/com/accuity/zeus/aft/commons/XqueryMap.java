@@ -89,7 +89,13 @@ public class XqueryMap {
 
         queryMap.put("get office basic info","getOfficeBasicInfo.xqy");
         queryMap.put("get id for offices", "getIdForOffices.xqy");
-        queryMap.put("get Id for area", "getIdForArea.xqy");
+        // duplicate
+       // queryMap.put("get Id for area", "getIdForArea.xqy");
+
+
+        queryMap.put("get Office Telecoms Types", "getOfficeTelecomsTypeFromLookup.xqy");
+        queryMap.put("get Office Address Types", "getOfficeAddressTypesFromLookup.xqy");
+        queryMap.put("get Office Locations", "getOfficeLocations.xqy");
 
 		queryMap.put("get city places type lookup","getCityRelatedPlacesTypeFromLookup.xqy");
 		queryMap.put("get city places detail lookup","getCityRelatedPlacesDetailsFromLookup.xqy");
@@ -104,6 +110,7 @@ public class XqueryMap {
         queryMap.put("get legalEntity Services From Lookup","getLegalEntityServicesFromLookup.xqy");
         queryMap.put("get legalEntity Services From DB","getLegalEntityServicesFromDB.xqy");
         queryMap.put("get legal entity credit ratings from trusted","getLegalEntityCreditRatings.xqy");
+
         queryMap.put("get document id for area","getIdForArea.xqy");
         queryMap.put("get city name types","getCityNameTypes.xqy");
 		queryMap.put("get area Status types","getCityStatusTypes.xqy");
@@ -120,6 +127,19 @@ public class XqueryMap {
         queryMap.put("get area timezones","getCountryTimeZone.xqy");
         queryMap.put("get city region types","getCityRegionTypes.xqy");
 		queryMap.put("get city region values","getCityRegionValues.xqy");
+		queryMap.put("get office personnel values", "getOfficePersonnel.xqy");
+		queryMap.put("get office personnel type list", "getLegalEntityPersonnelTypesFromLookup.xqy");
+		queryMap.put("get office history details","getOfficeHistory.xqy");
+		queryMap.put("get office statistics values","getOfficeStatisticsValues.xqy");
+		queryMap.put("get office service category list","getOfficeServiceCategoryFromLookup.xqy");
+		queryMap.put("get office service values","getOfficeServiceValues.xqy");
+		queryMap.put("get area region types","getAreaRegionTypes.xqy");
+		queryMap.put("get area region values","getAreaRegionValues.xqy");
+		queryMap.put("get area regions list","getAreaRegionList.xqy");
+		queryMap.put("get area demographics type","getDemographicsType.xqy");
+        queryMap.put("get area demographics unit","getDemographicsUnit.xqy");
+        queryMap.put("get area demographics info","getAreaDemographics.xqy");
+		queryMap.put("get area credit ratings", "getAreaCreditRatingValues.xqy");
    }
 
     public String getXquery(String key){

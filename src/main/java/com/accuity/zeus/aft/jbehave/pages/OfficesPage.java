@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 
 public class OfficesPage extends AbstractPage {
 
-    private String office_results_card_xpath = "//*[@id='data']//tr[td='";
+    private String office_results_card_xpath = "//*[@id='results']//tr[td='";
     private By office_personnel_link_id = By.id("officePersonnel");
     private By office_basic_info_link_id = By.id("officeBasicInfo");
     private By office_history_link_id = By.id("officeHistory");
@@ -131,6 +131,16 @@ public class OfficesPage extends AbstractPage {
 
     }
 
+    public void verifyNoOfficeTabInOffice() {
+
+        try
+        {
+        assertFalse(getDriver().findElement(office_tab_id).isDisplayed());
+        }
+        catch (NoSuchElementException e){
+        }
+
+    }
     public void clickOnOfficeCreditRatingsLink() {
         attemptClick(office_credit_ratings_link_id);
     }

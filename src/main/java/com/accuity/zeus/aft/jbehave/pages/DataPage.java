@@ -5,6 +5,7 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.LegalEntityIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.Response;
 import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.utils.SimpleCacheManager;
@@ -22,10 +23,12 @@ import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 import static org.junit.Assert.*;
+
 
 public class DataPage extends AbstractPage {
 
@@ -1327,14 +1330,112 @@ public class DataPage extends AbstractPage {
         assertTrue(getDriver().findElement(currency_update_button_id).isDisplayed());
     }
 
+    public void verifyLegalEntity2ndLineMenuItem(){
+        assertTrue(getDriver().findElement(legalEntity_tab_id).getAttribute("class").equals("selected"));
+    }
+
     public void verifyAreaPlacesView() {
         assertTrue(getDriver().findElement(select_places_view_xpath).isDisplayed());
     }
 
     public void updateDocument(String endpoint, String entityFid) {
         XmlDocument xmlDocument = getTestDataXml(endpoint, entityFid);
+
         String endpointWithID = getResourceURL(endpoint, entityFid);
         int response = restClient.putDocumentByID(endpointWithID, heraApi, xmlDocument.toString());
+
         assertTrue(response == 202);
     }
+    
+    public void verifyElementNotExistInUI(By by) {
+		try {			
+			assertTrue(getDriver().findElement(by) == null);
+		} catch (Exception e) {
+			assertTrue(true);
+		}
+	}
+    
+    public void enterTextUsingIndex(By by, String value, int index) { 
+    	try {
+    		List<WebElement> elementList = getDriver().findElements(by);		
+        	elementList.get(index-1).clear();
+        	elementList.get(index-1).sendKeys(value);
+    	}
+    	catch (Exception e) {
+			assertFalse("Element not found", false);
+		}    	
+	}
+
+	public String getTagValueFromDB(String queryName, String tagName, Map<String, String> inputParameters) {
+		String tagValue = null;
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			for (Map.Entry<String, String> entry : inputParameters.entrySet()) {
+				nvPairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+			}
+			Thread.sleep(2000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, queryName, nvPairs);
+			if (document != null) {
+				tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? "" 
+						: getNodeValuesByTagName(document, tagName).get(0);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return tagValue;		
+	}
+
+	public void deleteAllRows(By by) {
+		List<WebElement> deleteRows = getDriver().findElements(by);
+		for (int index = 0; index < deleteRows.size(); index++) {
+			WebElement currentInstance = getDriver().findElements(by).get(0);
+			if (currentInstance != null) {
+				currentInstance.click();
+				verifyDeleteConfirmationModal();
+				clickOnYesButtonInDeleteConfirmationModal();
+			}
+		}
+	}
+	
+	public void verifyLookUpValues(By by, String xqueryName, String tagName) {
+		List<WebElement> elementTypeList = getDriver().findElements(by);
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xqueryName);
+		assertTrue(document.getElementsByTagName(tagName).getLength() > 1);
+		for (int i = 1; i < document.getElementsByTagName(tagName).getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					elementTypeList.get(i).getAttribute("value"));
+		}
+	}
+	
+	public void verifyWebElementText(String fieldName, String expectedText, By by) {
+		try {		
+			assertEquals(fieldName + ":", expectedText, getDriver().findElement(by).getText());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyRowIsDisplayed(By by, boolean display) {
+		try {
+			if (display) {
+				WebElement rowToBeDisplayed = getDriver().findElement(by);
+				assertTrue(rowToBeDisplayed != null);
+			} else {
+				assertTrue(getDriver().findElements(by).size() == 0);
+			}
+		} catch (Exception e) {
+			assertTrue(false);
+		}
+	}
+	
+	public void enterValueInTypeHeadDropDown(By by, String value) {
+		try {
+			getDriver().findElement(by).sendKeys(value);
+			getDriver().findElement(by).sendKeys(Keys.RETURN);
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

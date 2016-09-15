@@ -30,7 +30,7 @@ public abstract class AbstractSteps {
 	private static ResultsPage resultsPage;
 	private static ResetPasswordPage resetPasswordPage;
 	private static LoginPage loginPage;
-	private static DataPage dataPage;
+	public static DataPage dataPage;
 	private static AdminPage adminPage;
 	private static LegalEntityPage legalEntityPage;
 	private static OfficesPage officesPage;

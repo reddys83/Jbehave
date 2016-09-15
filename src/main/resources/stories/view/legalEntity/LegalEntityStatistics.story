@@ -9,9 +9,6 @@ JIRA ID - ZEUS - 948 Suppress STATISTICS subsection from Legal Entity for non-US
 
 Scenario: Verify legalEntity statistics
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -35,9 +32,6 @@ Examples:
 
 Scenario: Verify LegalEnity Statistics presence with the navigation of ALL in the navigation bar
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -60,9 +54,6 @@ Examples:
 
 Scenario: Verify legalEntity suppress (not shown) statistics subsection from legal entity for non-US Entities
 Given a user is on the search page
-When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-Then the user should see the message you can search for a legal entity at any time using the header search
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
