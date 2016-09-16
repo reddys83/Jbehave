@@ -1223,7 +1223,7 @@ public class EditAreaPage extends AbstractPage {
 	
 	public void verifyAreaInterestRateFromTrustedDB(String country, String area, String tagName, String source) {
 		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source),
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).getText());
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).getAttribute("value"));
 	}
 	
 	public void verifyMaxLengthInterestRate(String maxLength) {

@@ -62,6 +62,13 @@ And the user enters the office total checking accounts value as <totalCheckingAc
 And the user enters the office total savings accounts value as <totalSavingsAccounts>
 Then the user verifies office statistics page fields max length attribute is 8
 When the user clicks on the save button
+When the user clicks on the confirm button
+And the user clicks on the office update link
+And the user enters the office total atms value as <totalAtms>
+And the user enters the office total checking accounts value as <totalCheckingAccounts>
+And the user enters the office total savings accounts value as <totalSavingsAccounts>
+Then the user verifies office statistics page fields max length attribute is 8
+When the user clicks on the save button
 Then the user should not see the below summary changes in confirmation modal
 |Summary|
 |Statistics|
