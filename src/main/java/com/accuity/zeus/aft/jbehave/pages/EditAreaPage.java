@@ -1974,48 +1974,25 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 	
-	public void verifyAreaRelatedEntityDeletedFromZeusDB(String country, String area, List<String> type, List<String> entity,
-			List<String> details, String source) {
-		try {
-			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("source", source));
-			nvPairs.add(new BasicNameValuePair("country", country));
-			nvPairs.add(new BasicNameValuePair("area", area));
-			Thread.sleep(2000L);
-
-			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"get area entity details", nvPairs);
-			if (document != null) {
-				for (int i = 0; i < document.getElementsByTagName("relations").item(0).getChildNodes()
-						.getLength(); i++) {
-
-					for (int childNode = 0; childNode < document.getElementsByTagName("areaRelatedEntity").item(0)
-							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
-
-						switch (document.getElementsByTagName("areaRelatedEntity").item(0).getChildNodes().item(0)
-								.getChildNodes().item(childNode).getNodeName()) {
-						case "areaRelatedEntityType":
-							assertEquals(document.getElementsByTagName("areaRelatedEntity").item(0).getChildNodes()
-									.item(i).getChildNodes().item(childNode).getTextContent(), type.get(i));
-							break;
-						case "areaRelatedEntity":
-							assertEquals(document.getElementsByTagName("areaRelatedEntity").item(0).getChildNodes()
-									.item(i).getChildNodes().item(childNode).getTextContent(), entity.get(i));
-							break;
-
-						case "areaRelatedEntityDetail":
-							assertEquals(document.getElementsByTagName("areaRelatedEntity").item(0).getChildNodes()
-									.item(i).getChildNodes().item(childNode).getTextContent(), details.get(i));
-							break;
-						}
-					}
-				}
-			} else
-				assertTrue(source + "document is null", false);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	public void verifyAreaRelatedEntityDeletedFromZeusDB(String country, String area,String type,String entity,String details, String source) {
+        try {
+            List<NameValuePair> nvPairs = new ArrayList<>();
+            nvPairs.add(new BasicNameValuePair("source", source));
+            nvPairs.add(new BasicNameValuePair("country", country));
+            nvPairs.add(new BasicNameValuePair("area", area));
+            Thread.sleep(1000L);
+            Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+                         "get area entity details", nvPairs);
+            if (document != null) {
+                   assertNull(document.getElementsByTagName("areaRelatedEntityType").item(0));
+                   assertNull(document.getElementsByTagName("areaRelatedEntity").item(0));
+                   assertNull(document.getElementsByTagName("areaRelatedEntityDetail").item(0));
+            } else
+                  assert false : source + " document is null";
+     } catch (Exception e) {
+            e.printStackTrace();
+     }
+}
     
 	@Override
 	public String getPageUrl() {

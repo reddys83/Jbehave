@@ -94,7 +94,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|entityDetails|entityType|fid|entity|
-|USA|Alabama|State Government|Government|1038|Bank of America National Association|
+|USA|Alabama|State Government|Banking Association|1038|Bank of America National Association|
 
 Scenario: Verify whether No new row is added in Area web page when all the entity fields are having blank values
 

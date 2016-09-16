@@ -1441,13 +1441,7 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyAreaRelatedEntityDeletedFromZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("entityType") String entityType, @Named("entity") String entity,
 			@Named("entityDetails") String entityDetails, @Named("source") String source) {
-		List<String> areaEntityTypes = new ArrayList<>();
-		List<String> areaEntity = new ArrayList<>();
-		List<String> areaEntityDetail = new ArrayList<>();
-		areaEntityTypes.add(entityType);
-		areaEntity.add(entity);	
-		areaEntityDetail.add(entityDetails);
-		getEditAreaPage().verifyAreaRelatedEntityDeletedFromZeusDB(country, area, areaEntityTypes, areaEntity,
-				areaEntityDetail, source);
+		getEditAreaPage().verifyAreaRelatedEntityDeletedFromZeusDB(country, area, entityType, entity,
+				entityDetails, source);
 	}
 }
