@@ -1879,18 +1879,16 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyRelatedEntityInAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<WebElement> relatedPlaceRows = getDriver()
-				.findElements(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalues_xpath"));
+		List<WebElement> relatedPlaceRows = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalues_xpath"));
 
 		for (int i = 0; i < relatedPlaceRows.size(); i++) {
 			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(entityType[i]));
 			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(entity[i]));
-			assertTrue(
-					relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(entityDetails[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(entityDetails[i]));
 		}
 	}
 
@@ -1939,28 +1937,28 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyDeletedRelatedEntity() {
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_related_entity_entirevalue_xpath"))
+		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalue_xpath"))
 						.getText().isEmpty());
 	}
 
 	public void verifyNoNewRowAdded() {
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_related_entity_entirevalue_xpath"))
+		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalue_xpath"))
 						.getText().isEmpty());
 
 	}
 
 	public void verifyRelatedEntityNotInAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

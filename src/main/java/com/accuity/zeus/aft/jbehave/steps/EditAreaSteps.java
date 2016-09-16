@@ -1303,12 +1303,14 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should see the error message required for type in entity for area")
 	public void verifyRequiredErrorMessageForType() {
-		getDataPage().verifyWebElementText("ErrorMessage for Entity Type","Required",(AreaIdentifiers.getObjectIdentifier("area_entity_type_required_error_message_xpath")));
+		getDataPage().verifyWebElementText("ErrorMessage for Entity Type","Required", 
+				AreaIdentifiers.getObjectIdentifier("area_entity_type_error_message_xpath"));
 	}
 
 	@Then("the user should see the error message required for entity for area")
 	public void verifyRequiredErrorMessageForEntity() {
-		getDataPage().verifyWebElementText("ErrorMessage for Entity","Required",(AreaIdentifiers.getObjectIdentifier("area_entity_required_error_message_xpath")));
+		getDataPage().verifyWebElementText("ErrorMessage for Entity","Required", 
+				AreaIdentifiers.getObjectIdentifier("area_entity_error_message_xpath"));
 	}
 
 	@Then("the user should see the error message enter a valid fid  for entity for area")
@@ -1318,7 +1320,8 @@ public class EditAreaSteps extends AbstractSteps {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		getDataPage().verifyWebElementText("ErrorMessage for Fid","Enter valid FID",(AreaIdentifiers.getObjectIdentifier("area_fid_required_error_message_xpath")));
+		getDataPage().verifyWebElementText("ErrorMessage for Fid","Enter valid FID", 
+				AreaIdentifiers.getObjectIdentifier("area_fid_error_message_xpath"));
 	}
 
 	@When("the user selects fid value as <fid> in the entity for area")
@@ -1330,7 +1333,7 @@ public class EditAreaSteps extends AbstractSteps {
 	public void clicksOnGoButton() {
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_go_button_xpath"));
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
