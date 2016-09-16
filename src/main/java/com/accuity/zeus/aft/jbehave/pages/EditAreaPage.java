@@ -1865,76 +1865,76 @@ public class EditAreaPage extends AbstractPage {
 	public void clickAreaEntityType() {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_type_dropdown_xpath"));
 	}
-	
+
 	public void verifyAreaEntityTypeList() {
 		List<WebElement> areaEntityTypeList = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_entity_type_options_dropdown_xpath"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area entity type lookup");
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
+				"get area entity type lookup");
 		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					areaEntityTypeList.get(i).getText());
 		}
 	}
-	
+
 	public void clickEntityDetailsDropDown() {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_details_Select_dropdown_xpath"));
 	}
-	
+
 	public void verifyAreaEntityDetailsList() {
 		List<WebElement> areaEntityDetailsList = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_entity_details_options_dropdown_xpath"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get area entity detail lookup");
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
+				"get area entity detail lookup");
 		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					areaEntityDetailsList.get(i).getText());
 		}
 	}
-	
+
 	public void selectsEntityTypeFromDropdown(String entityType) {
 		selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_entity_type_dropdown_xpath"),
 				entityType);
 	}
-	
-    public void selectsEntityDetailsFromDropdown(String entityDetails) {
-		
-		selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_entity_details_Select_dropdown_xpath"),
-				entityDetails);
-		}
-    
-    public void verifyRequiredErrorMessageForType() {
+
+	public void selectsEntityDetailsFromDropdown(String entityDetails) {
+
+		selectItemFromDropdownListByText(
+				AreaIdentifiers.getObjectIdentifier("area_entity_details_Select_dropdown_xpath"), entityDetails);
+	}
+
+	public void verifyRequiredErrorMessageForType() {
 		assertEquals(getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_entity_type_required_error_message_xpath"))
 				.getText(), "Required");
 	}
-    
-    public void verifyRequiredErrorMessageForEntity() {
+
+	public void verifyRequiredErrorMessageForEntity() {
 		assertEquals(getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_entity_required_error_message_xpath"))
-				.getText(), "Required");
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_entity_required_error_message_xpath")).getText(),
+				"Required");
 	}
 
-
-    public void verifyFidErrorMessageForEntity() {
-    	try{
-    		Thread.sleep(2000);	
-    	}
-    	catch(Exception e){
-    		e.printStackTrace();
-    	}    	
+	public void verifyFidErrorMessageForEntity() {
+		try {
+			Thread.sleep(2000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		assertEquals(getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_fid_required_error_message_xpath"))
-				.getText(), "Enter valid FID");
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_fid_required_error_message_xpath")).getText(),
+				"Enter valid FID");
 	}
-    
-    public void selectsEntityFidFromDropdown(String fid) {
-    	clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_entity_fid_dropdown_xpath"), fid);	
+
+	public void selectsEntityFidFromDropdown(String fid) {
+		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_entity_fid_dropdown_xpath"), fid);
 	}
-    
-    public void clicksOnGoButton() {
+
+	public void clicksOnGoButton() {
 		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_entity_go_button_xpath")).click();
 	}
-    
-    public void verifyRelatedEntityInAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
+
+	public void verifyRelatedEntityInAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
 		try {
 			Thread.sleep(3000);
 		} catch (Exception e) {
@@ -1944,15 +1944,14 @@ public class EditAreaPage extends AbstractPage {
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_relatedentity_entirevalues_xpath"));
 
 		for (int i = 0; i < relatedPlaceRows.size(); i++) {
-			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText()
-					.contains(entityType[i]));
-			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText()
-					.contains(entity[i]));
-			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText()
-					.contains(entityDetails[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(entityType[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(entity[i]));
+			assertTrue(
+					relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(entityDetails[i]));
+		}
 	}
-   }
-    public String getAreaRelatedInfoFromDB(String country,String area,String tagName, String source) {
+
+	public String getAreaRelatedInfoFromDB(String country, String area, String tagName, String source) {
 
 		String tagValue = null;
 		List<NameValuePair> nvPairs = new ArrayList<>();
@@ -1972,44 +1971,82 @@ public class EditAreaPage extends AbstractPage {
 		}
 		return tagValue;
 	}
-    
-    public void verifyAreaRelatedEntityFromZeusDB(String country,String area,String type, String fid,
-			String details, String source) {
-		assertEquals(getAreaRelatedInfoFromDB(country, area, "areaRelatedEntityType", source), type);
-		assertEquals(getAreaRelatedInfoFromDB(country, area,  "areaRelatedEntity", source), fid);
-		assertEquals(getAreaRelatedInfoFromDB(country, area,  "areaRelatedEntityDetail", source), details);
+
+	public void verifyAreaRelatedEntityFromZeusDB(String country, String area, List<String> type, List<String> entity,
+			List<String> details, String source) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			Thread.sleep(2000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get area entity details", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("relations").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("areaRelatedEntity").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						switch (document.getElementsByTagName("areaRelatedEntity").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "areaRelatedEntityType":
+							assertEquals(document.getElementsByTagName("areaRelatedEntity").item(0).getChildNodes()
+									.item(i).getChildNodes().item(childNode).getTextContent(), type.get(i));
+							break;
+						case "areaRelatedEntity":
+							assertEquals(document.getElementsByTagName("areaRelatedEntity").item(0).getChildNodes()
+									.item(i).getChildNodes().item(childNode).getTextContent(), entity.get(i));
+							break;
+
+						case "areaRelatedEntityDetail":
+							assertEquals(document.getElementsByTagName("areaRelatedEntity").item(0).getChildNodes()
+									.item(i).getChildNodes().item(childNode).getTextContent(), details.get(i));
+							break;
+						}
+					}
+				}
+			} else
+				assertTrue(source + "document is null", false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-    
-    public void clicksOnDeleteAreaEntityType() {
+
+	public void clicksOnDeleteAreaEntityType() {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_delete_button_xpath"));
 	}
 
-    public void verifyDeletedRelatedEntity() {
+	public void verifyDeletedRelatedEntity() {
 		try {
 			Thread.sleep(6000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals("", getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_entirevalue_xpath")).getText());
+		assertEquals("",
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_entirevalue_xpath"))
+						.getText());
 	}
-    
-    public void clicksOnEditButton() {
+
+	public void clicksOnEditButton() {
 		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_edit_button_xpath"));
 	}
-    
-    public void verifyNoNewRowAdded() {
+
+	public void verifyNoNewRowAdded() {
 		try {
 			Thread.sleep(3000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals("", getDriver()
-				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_entirevalue_xpath")).getText());
-		
+		assertEquals("",
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_entirevalue_xpath"))
+						.getText());
+
 	}
-    
-    public void verifyRelatedEntityNotInAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
+
+	public void verifyRelatedEntityNotInAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
 		try {
 			Thread.sleep(3000);
 		} catch (Exception e) {
@@ -2019,14 +2056,13 @@ public class EditAreaPage extends AbstractPage {
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_relatedentity_entirevalues_xpath"));
 
 		for (int i = 0; i < relatedPlaceRows.size(); i++) {
-			assertFalse(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText()
-					.contains(entityType[i]));
-			assertFalse(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText()
-					.contains(entity[i]));
-			assertFalse(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText()
-					.contains(entityDetails[i]));
+			assertFalse(
+					relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(entityType[i]));
+			assertFalse(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(entity[i]));
+			assertFalse(
+					relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(entityDetails[i]));
+		}
 	}
-   }
     
 	@Override
 	public String getPageUrl() {

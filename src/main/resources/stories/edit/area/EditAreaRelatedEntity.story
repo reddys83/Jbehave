@@ -6,7 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 
 JIRA ID - ZEUS-1049 - User can edit Area's Related Entities
-				 
+		
 Scenario: Verify the list of type dropdown are from AREA_RELATED_PRESENCE_TYPE and details dropdown from AREA_RELATED_PRESENCE_SUBTYPE
 
 Given a user is on the search page
@@ -27,10 +27,11 @@ When the user clicks on new area entity details drop-down for area
 Then the user should see the values for details dropdown from lookup AREA_RELATED_PRESENCE_SUBTYPE
 Then the user reverts the changes to the document
 
+
 Examples:
 |country|area|
 |USA|Alabama|
-
+				 
 Scenario: add related entity
 
 Given a user is on the search page
@@ -60,11 +61,12 @@ And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should see related entity values updated in area related entity
+Then the user should see the area related entity values in zeus document
 Then the user reverts the changes to the document
 
 Examples:
 |country|area|entityDetails|entityType|fid|entity|entityDetails2|entityType2|fid2|entity2|
-|USA|Alabama|State Government|Banking Association|1038|Bank of America National Association|State Government|Government|1039|United Overseas Bank (Thai) Public Company Limited|
+|USA|Alabama|State Government|Banking Association|1038|Bank of America National Association|State Government|Government|1038|Bank of America National Association|
 
 Scenario: update existing related entity
 
@@ -149,7 +151,6 @@ Examples:
 |USA|Alabama|State Government|pppp|Government|
 |USA|Alabama|State Government|999999|Government|
 
-
 Scenario: 
 a)Verify whether user is able to delete an existing  area Related entity successfully in area Web page
 b)Verify whether user is not able to view the deleted related entity in Zeus Document
@@ -176,12 +177,7 @@ And the user selects details value as <entityDetails> in the entity for area
 When the user clicks on the delete entity row button in the area entity page
 Then the user should see the delete row confirmation modal in the area page
 When the user clicks on the no button in the delete row confirmation modal in the area page
-When the user clicks on the delete entity row button in the area entity page
-Then the user should see the delete row confirmation modal in the area page
-When the user clicks on the yes button in the delete row confirmation modal in the area page
-And the user clicks on the save button
-When the user clicks on the confirm button
-Then the user should not see the deleted Area Entity values in area entity page
+Then the user should see <entityType> <entity> <entityDetails> updated in area related entity
 Then the user reverts the changes to the document
 
 Examples:

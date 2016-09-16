@@ -133,10 +133,6 @@ public class AreaIdentifiers {
 		hmap.put("area_entity_link_id", By.xpath("//*[@id='areaPresences']"));
 		hmap.put("area_add_entity_button_edit_id", By.xpath("//button[@id='add-presences']"));
 		hmap.put("area_entity_delete_button_xpath",By.xpath(".//*[@data-row_id='presences']//button[@class='delete-element']"));
-		//hmap.put("area_entity_type_dropdown_xpath",
-			//	By.xpath(".//*[@class='new'][@data-row_id='presences']//select[@id='presencesType']"));
-		//hmap.put("area_entity_details_Select_dropdown_xpath",
-				//By.xpath("//*[@id='additionalPresences']/tr/td[4]/select"));
 		hmap.put("area_entity_type_required_error_message_xpath",
 				By.xpath("//*[@id='additionalPresences']/tr/td[1]/p"));
 		hmap.put("area_entity_required_error_message_xpath",
@@ -148,10 +144,6 @@ public class AreaIdentifiers {
 		
 		hmap.put("area_entity_go_button_xpath",
 				By.xpath("//button[@class='go  go-text-select']"));
-		
-		//hmap.put("area_get_relatedentity_typevalue_xpath", By.xpath("//*[@id='areaPresences']//tr/td"));
-		//hmap.put("area_get_relatedentity_fidvalue_xpath", By.xpath("//*[@id='areaPresences']//tr/td[2]"));
-		//hmap.put("are_get_relatedentity_detailsvalue_xpath", By.xpath("//*[@id='areaPresences']//tr/td[3]"));
 		hmap.put("area_entity_delete_button_xpath",
 				By.xpath(".//*[@data-row_id='presences']//button[@class='delete-element']"));
 		hmap.put("area_get_relatedentity_entirevalue_xpath", By.xpath("//*[@id='areaPresences']//tbody"));
