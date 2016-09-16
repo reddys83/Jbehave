@@ -149,6 +149,7 @@ Examples:
 |USA|Alabama|State Government|pppp|Government|
 |USA|Alabama|State Government|999999|Government|
 
+
 Scenario: 
 a)Verify whether user is able to delete an existing  area Related entity successfully in area Web page
 b)Verify whether user is not able to view the deleted related entity in Zeus Document
@@ -172,10 +173,15 @@ And the user clicks on edit button in entity for area
 And the user selects fid value as <fid> in the entity for area
 And the user clicks on go button in entity for area
 And the user selects details value as <entityDetails> in the entity for area
+When the user clicks on the delete entity row button in the area entity page
+Then the user should see the delete row confirmation modal in the area page
+When the user clicks on the no button in the delete row confirmation modal in the area page
+When the user clicks on the delete entity row button in the area entity page
+Then the user should see the delete row confirmation modal in the area page
+When the user clicks on the yes button in the delete row confirmation modal in the area page
 And the user clicks on the save button
 When the user clicks on the confirm button
-Then the user should see the successful update message at top of the area page
-Then the user should see <entityType> <entity> <entityDetails> updated in area related entity
+Then the user should not see the deleted Area Entity values in area entity page
 Then the user reverts the changes to the document
 
 Examples:

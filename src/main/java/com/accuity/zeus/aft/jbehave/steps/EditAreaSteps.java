@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 
 @Component
 public class EditAreaSteps extends AbstractSteps {
@@ -1325,7 +1326,7 @@ public class EditAreaSteps extends AbstractSteps {
 	public void clicksOnGoButton() {
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_go_button_xpath"));	
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -1400,5 +1401,19 @@ public class EditAreaSteps extends AbstractSteps {
 		String[] areaEntity = { entity};
 		String[] areaEntityDetail = { entityDetails };
 		getEditAreaPage().verifyRelatedEntityInAreaPage(areaEntityTypes, areaEntity, areaEntityDetail);
+	}
+	
+	@When("the user clicks on the delete entity row button in the area entity page")
+	public void clickOnDeleteNewOfficeServiceRowButton() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_relatedEntity_delete_button_xpath"));
+	}
+	
+	@Then("the user should not see the deleted Area Entity values in area entity page")
+	public void verifyAreaEntityParametersNotInUI(@Named("entityDetails") String entityDetails,
+			@Named("entityType") String entityType,@Named("entity") String entity) {
+		String[] areaEntityTypes = { entityType};
+		String[] areaEntity = { entity};
+		String[] areaEntityDetail = { entityDetails };
+		getEditAreaPage().verifyRelatedEntityNotInAreaPage(areaEntityTypes, areaEntity,areaEntityDetail);
 	}
 }

@@ -28,6 +28,7 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 
 public class EditAreaPage extends AbstractPage {
@@ -1942,8 +1943,6 @@ public class EditAreaPage extends AbstractPage {
 		List<WebElement> relatedPlaceRows = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_relatedentity_entirevalues_xpath"));
 
-		
-		
 		for (int i = 0; i < relatedPlaceRows.size(); i++) {
 			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText()
 					.contains(entityType[i]));
@@ -2009,6 +2008,25 @@ public class EditAreaPage extends AbstractPage {
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_entirevalue_xpath")).getText());
 		
 	}
+    
+    public void verifyRelatedEntityNotInAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<WebElement> relatedPlaceRows = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_relatedentity_entirevalues_xpath"));
+
+		for (int i = 0; i < relatedPlaceRows.size(); i++) {
+			assertFalse(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText()
+					.contains(entityType[i]));
+			assertFalse(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText()
+					.contains(entity[i]));
+			assertFalse(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText()
+					.contains(entityDetails[i]));
+	}
+   }
     
 	@Override
 	public String getPageUrl() {
