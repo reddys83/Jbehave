@@ -555,8 +555,9 @@ Examples:
 |1038|FID|1038|1038-60|
 
 Scenario: User is updating an Office's Locations (Telecom) -  
-a) Verify user can select a new value for Telecom Type as telephone/fax and Verify that the user can see and select values for the following fields :Rank,TextBefore,Country code,Area code,Number,RangeLimit,Ext,TextAfter
-b) Verify that UI and Zeus document is updated correctly.
+a) Verify user can select a new value for Telecom Type as telephone/fax and Verify that the user can see and select values for the following fields: 
+   Rank, TextBefore, Country Code, Area code, Number, RangeLimit, Ext, TextAfter.
+b) Verify that UI and Zeus document is updated.
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -592,7 +593,7 @@ Examples:
 |1038|FID|1038|1038-51|telephone|1|5 pm|708|298|3125|20|123|9 am|
 |1038|FID|1038|1038-51|fax|1|5 pm|708|298|3142|20|123|9 am|
 
-Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Telephone' or 'Fax' 
+Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Telephone', 'Fax' 
 a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
 b) Verify that the error message "Enter up to 20 valid characters" is displayed when the 'Value' field is blank.
 c) Verify that the error message "Enter up to 4 valid numbers" is displayed when alphabets are entered for 'Rank' field.
@@ -611,7 +612,6 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
 When the user deletes the existing office telecom locations rows
 And the user clicks on add new office telecoms button in the office locations
 And the user selects office telecoms type office_telecoms_first_row_new_telecoms_type_dropdown value as <Type>
@@ -648,9 +648,10 @@ Examples:
 |1010|FID|1010|1010-44|fax|Text|123|456||Text|Text|Enter up to 20 valid characters.|
 
 Scenario: User is updating an Office's Locations (Telecom) - 
-a) Verify user can select a new value for Telecom Type as telex/reuters/cable and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter,AnswerBack
+a) Verify user can select a new value for Telecom Type as telex/reuters/cable and Verify that the user can see and select values for the following fields: 
+   Rank, TextBefore, Value, TextAfter, AnswerBack
 b) Verify that UI and Zeus document is updated.
-          
+       
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -691,7 +692,7 @@ Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Telex', '
 a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
 b) Verify that the error message "Enter up to 100 valid characters" is displayed when the 'Value' field is blank.
 c) Verify that the error message "Enter up to 4 valid numbers" is displayed when alphabets are entered for 'Rank' field.
-
+ 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -722,9 +723,10 @@ Examples:
 |1010|FID|1010|1010-44|website|Text|
 
 Scenario: User is updating an Office's Locations (Telecom) -  
-a) Verify user can select a new value for Telecom Type as email/website and Verify that the user can see and select values for the following fields :Rank,TextBefore,Value,TextAfter
+a) Verify user can select a new value for Telecom Type as email/website and Verify that the user can see and select values for the following fields: 
+   Rank, TextBefore, Value, TextAfter
 b) Verify that UI and Zeus document is updated correctly.
-
+ 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -793,9 +795,9 @@ Examples:
 |1010|FID|1010|1010-44|email|Text|www.zeus.com|
 
 Scenario: Scenario: User is adding/deleting new Office's Locations Telecom -
-1 - Verify if User can prevent deleting telecom row by clicking on 'No'.
-2 - Verify if User can delete telecom row by clicking on 'Yes' , then after saving it should be removed.
-3 - User verifies that UI and Zeus document is updated.
+a) Verify if User can prevent deleting telecom row by clicking on 'No'.
+b) Verify if User can delete telecom row by clicking on 'Yes' , then after saving it should be removed.
+c) User verifies that UI and Zeus document is updated.
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead

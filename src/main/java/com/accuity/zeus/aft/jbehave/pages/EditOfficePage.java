@@ -1084,7 +1084,7 @@ public class EditOfficePage extends AbstractPage {
 			String AreaCode, String Number, String RangeLimit, String Ext, String TextAfter, String AnswerBack,
 			String Value, String officeFid, String source) {
 		try {
-			Thread.sleep(3000L);
+			Thread.sleep(2000L);
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("fid", officeFid));
 			nvPairs.add(new BasicNameValuePair("source", source));
@@ -1092,20 +1092,20 @@ public class EditOfficePage extends AbstractPage {
 					"get office telecom locations", nvPairs);
 
 			if (document != null) {
-				assertEquals(Rank, getNodeValuesByTagName(document, "tRank").get(0).toString());
-				assertEquals(TextBefore, getNodeValuesByTagName(document, "tTextBefore").get(0).toString());
-				assertEquals(TextAfter, getNodeValuesByTagName(document, "tTextAfter").get(0).toString());
+				assertEquals(Rank, getNodeValuesByTagName(document, "tRank").get(0));
+				assertEquals(TextBefore, getNodeValuesByTagName(document, "tTextBefore").get(0));
+				assertEquals(TextAfter, getNodeValuesByTagName(document, "tTextAfter").get(0));
 				if (RangeLimit != null && Ext != null) {
-					assertEquals(RangeLimit, getNodeValuesByTagName(document, "tRangeLimit").get(0).toString());
-					assertEquals(Ext, getNodeValuesByTagName(document, "tExt").get(0).toString());
+					assertEquals(RangeLimit, getNodeValuesByTagName(document, "tRangeLimit").get(0));
+					assertEquals(Ext, getNodeValuesByTagName(document, "tExt").get(0));
 				}
 				if (AnswerBack != null)
-					assertEquals(AnswerBack, getNodeValuesByTagName(document, "tAnswerback").get(0).toString());
+					assertEquals(AnswerBack, getNodeValuesByTagName(document, "tAnswerback").get(0));
 				if (CountryCode != null && AreaCode != null && Number != null) {
 					String newValue = CountryCode + "-" + AreaCode + "-" + Number;
-					assertEquals(newValue, getNodeValuesByTagName(document, "tValue").get(0).toString());
+					assertEquals(newValue, getNodeValuesByTagName(document, "tValue").get(0));
 				} else {
-					assertEquals(Value, getNodeValuesByTagName(document, "tValue").get(0).toString());
+					assertEquals(Value, getNodeValuesByTagName(document, "tValue").get(0));
 				}
 			}
 		} catch (InterruptedException e) {
@@ -2056,15 +2056,15 @@ public class EditOfficePage extends AbstractPage {
 		apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "delete office telecom values from fdb document", nvPairs);
 	}
 	
-	public void verifyOfficeTelecomValuesFromTrustedDB(String source, String officeFid) {
+	public void verifyOfficeTelecomValuesFromTrustedDB(String officeFid, String source) {
     	try{
 			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("fid", source));
-			nvPairs.add(new BasicNameValuePair("source", officeFid));
+			nvPairs.add(new BasicNameValuePair("fid", officeFid));
+			nvPairs.add(new BasicNameValuePair("source", source));
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get office telecom locations", nvPairs);
     		List<WebElement> telecomRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_telecom_rows_edit_mode"));    		
-    		Thread.sleep(3000L);
+    		Thread.sleep(2000L);
         	for(int index = 1; index < telecomRows.size(); index++)
         	{       	
         		String telecomType = getTelecomFieldValue("type", index);

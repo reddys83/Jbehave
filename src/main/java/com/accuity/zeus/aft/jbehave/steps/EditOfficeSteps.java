@@ -207,7 +207,7 @@ public class EditOfficeSteps extends AbstractSteps{
     }
 
     @When("the user selects office address type $typeRowIdentifier value as <Type>")
-      public void selectOfficeAddressType(@Named("typeRowIdentifier") String typeRowIdentifier,@Named("Type") String Type)
+      public void selectOfficeAddressType(@Named("$typeRowIdentifier") String typeRowIdentifier,@Named("Type") String Type)
     {
         getEditOfficePage().selectOfficeAddressType(typeRowIdentifier,Type);
     }
@@ -468,17 +468,17 @@ public class EditOfficeSteps extends AbstractSteps{
 
 
     @Then("the user should see the office address lines addresses as in $source document")
-	public void verifyOfficeAddressLinesAddressesFromDB(@Named("Type") String Type,
-			@Named("officeFid") String officeFid, @Named("AddressLine1") String AddressLine1,
-			@Named("AddressLine2") String AddressLine2, @Named("AddressLine3") String AddressLine3,
-			@Named("AddressLine4") String AddressLine4, @Named("PostalCode") String PostalCode,
-			@Named("PostalCodeSuffix") String PostalCodeSuffix, @Named("PostalCodePosition") String PostalCodePosition,
-			@Named("Info") String Info, @Named("Country") String Country, @Named("Area") String Area,
-			@Named("Subarea") String Subarea, @Named("City") String City, @Named("source") String source) {
-		getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(Type, AddressLine1, AddressLine2, AddressLine3,
-				AddressLine4, PostalCode, PostalCodeSuffix, PostalCodePosition, Info, Country, Area, Subarea, City,
-				officeFid, source);
-	}
+    public void verifyOfficeAddressLinesAddressesFromDB(@Named("Type") String Type,@Named("officeFid") String officeFid, @Named("AddressLine1") String AddressLine1,
+                                                        @Named("AddressLine2") String AddressLine2,
+                                                        @Named("AddressLine3") String AddressLine3,
+                                                        @Named("AddressLine4") String AddressLine4,@Named("PostalCode") String PostalCode,
+                                                        @Named("PostalCodeSuffix") String PostalCodeSuffix,@Named("PostalCodePosition") String PostalCodePosition,
+                                                        @Named("Info") String Info,@Named("Country") String Country,@Named("Area") String Area,@Named("Subarea") String Subarea,
+                                                        @Named("City") String City,@Named("source") String source) {
+
+        getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(Type,AddressLine1, AddressLine2, AddressLine3, AddressLine4,PostalCode,PostalCodeSuffix,PostalCodePosition,Info,Country,Area,Subarea,City,officeFid,source);
+
+    }
 
     @Then("the user should see the office telecomm fields for Type(telephone/fax) as in $source document")
 	public void verifyOfficeTelecommFieldsFromDB(@Named("Type") String Type, @Named("Rank") String Rank,
@@ -1494,7 +1494,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	
 	@Then("the user should see the newly added telecom row in the office locations telecom page")
 	public void verifyNewlyAddedOfficeTelecomRowIsDisplayed() throws Exception {
-		getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_telecom_row_edit_mode"), true);
+		getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_telecom_rows_edit_mode"), true);
 	}
 	
 	@Then("the user verifies that the office telecom fields for Type(telephone/fax) are entered in the office locations page")
