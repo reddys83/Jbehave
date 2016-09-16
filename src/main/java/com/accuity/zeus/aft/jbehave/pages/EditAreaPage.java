@@ -1858,14 +1858,6 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}	
 
-	public void clickOnAreaEntity() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_link_id"));
-	}
-
-	public void clickAreaEntityType() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_type_dropdown_xpath"));
-	}
-
 	public void verifyAreaEntityTypeList() {
 		List<WebElement> areaEntityTypeList = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_entity_type_options_dropdown_xpath"));
@@ -1875,32 +1867,6 @@ public class EditAreaPage extends AbstractPage {
 			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					areaEntityTypeList.get(i).getText());
 		}
-	}
-
-	public void clickEntityDetailsDropDown() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_details_Select_dropdown_xpath"));
-	}
-
-	public void verifyAreaEntityDetailsList() {
-		List<WebElement> areaEntityDetailsList = getDriver()
-				.findElements(AreaIdentifiers.getObjectIdentifier("area_entity_details_options_dropdown_xpath"));
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
-				"get area entity detail lookup");
-		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
-			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
-					areaEntityDetailsList.get(i).getText());
-		}
-	}
-
-	public void selectsEntityTypeFromDropdown(String entityType) {
-		selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_entity_type_dropdown_xpath"),
-				entityType);
-	}
-
-	public void selectsEntityDetailsFromDropdown(String entityDetails) {
-
-		selectItemFromDropdownListByText(
-				AreaIdentifiers.getObjectIdentifier("area_entity_details_Select_dropdown_xpath"), entityDetails);
 	}
 
 	public void verifyRequiredErrorMessageForType() {
@@ -1951,27 +1917,6 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 
-	public String getAreaRelatedInfoFromDB(String country, String area, String tagName, String source) {
-
-		String tagValue = null;
-		List<NameValuePair> nvPairs = new ArrayList<>();
-		nvPairs.add(new BasicNameValuePair("area", area));
-		nvPairs.add(new BasicNameValuePair("source", source));
-		try {
-			Thread.sleep(7000L);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-				"get area related entity details", nvPairs);
-		if (document != null) {
-			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
-					: getNodeValuesByTagName(document, tagName).get(0);
-		}
-		return tagValue;
-	}
-
 	public void verifyAreaRelatedEntityFromZeusDB(String country, String area, List<String> type, List<String> entity,
 			List<String> details, String source) {
 		try {
@@ -2015,23 +1960,14 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 
-	public void clicksOnDeleteAreaEntityType() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_delete_button_xpath"));
-	}
-
 	public void verifyDeletedRelatedEntity() {
 		try {
 			Thread.sleep(6000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals("",
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_entirevalue_xpath"))
-						.getText());
-	}
-
-	public void clicksOnEditButton() {
-		attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_edit_button_xpath"));
+		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_entirevalue_xpath"))
+						.getText().isEmpty());
 	}
 
 	public void verifyNoNewRowAdded() {
@@ -2040,9 +1976,8 @@ public class EditAreaPage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals("",
-				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_entirevalue_xpath"))
-						.getText());
+		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_get_relatedentity_entirevalue_xpath"))
+						.getText().isEmpty());
 
 	}
 
