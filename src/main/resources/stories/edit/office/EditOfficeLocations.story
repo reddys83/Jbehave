@@ -10,8 +10,6 @@ JIRA ID - ZEUS-1300 - User can edit Office's Locations(Telecoms)
 !--and
 !--JIRA ID - ZEUS-1299 - User can edit Office's Locations(Addresses)
 
-
-
 Scenario: Verify that the add button is disabled for the first row of office location when there is a location
 
 Given a user is on the search page
