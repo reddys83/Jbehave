@@ -1,5 +1,7 @@
 package com.accuity.zeus.aft.jbehave.steps;
 
+import static org.junit.Assert.assertEquals;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -1266,7 +1268,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on new area entity details drop-down for area")
 	public void clickEntityDetailsDropDown() {
-		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_details_Select_dropdown_xpath"));
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_details_select_dropdown_xpath"));
 	}
 
 	@Then("the user should see the values for details dropdown from lookup AREA_RELATED_PRESENCE_SUBTYPE")
@@ -1296,22 +1298,27 @@ public class EditAreaSteps extends AbstractSteps {
 	@When("the user selects details value as <entityDetails> in the entity for area")
 	public void selectsEntityDetailsFromDropdown(@Named("entityDetails") String entityDetails) {
 		getEditAreaPage().selectDropDownValueFromRowNumber(
-				(AreaIdentifiers.getObjectIdentifier("area_entity_details_Select_dropdown_xpath")), entityDetails, 1);
+				(AreaIdentifiers.getObjectIdentifier("area_entity_details_select_dropdown_xpath")), entityDetails, 1);
 	}
 
 	@Then("the user should see the error message required for type in entity for area")
 	public void verifyRequiredErrorMessageForType() {
-		getEditAreaPage().verifyRequiredErrorMessageForType();
+		getDataPage().verifyWebElementText("ErrorMessage for Entity Type","Required",(AreaIdentifiers.getObjectIdentifier("area_entity_type_required_error_message_xpath")));
 	}
 
 	@Then("the user should see the error message required for entity for area")
 	public void verifyRequiredErrorMessageForEntity() {
-		getEditAreaPage().verifyRequiredErrorMessageForEntity();
+		getDataPage().verifyWebElementText("ErrorMessage for Entity","Required",(AreaIdentifiers.getObjectIdentifier("area_entity_required_error_message_xpath")));
 	}
 
 	@Then("the user should see the error message enter a valid fid  for entity for area")
 	public void verifyFidErrorMessageForEntity() {
-		getEditAreaPage().verifyFidErrorMessageForEntity();
+		try {
+			Thread.sleep(2000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		getDataPage().verifyWebElementText("ErrorMessage for Fid","Enter valid FID",(AreaIdentifiers.getObjectIdentifier("area_fid_required_error_message_xpath")));
 	}
 
 	@When("the user selects fid value as <fid> in the entity for area")
@@ -1389,13 +1396,13 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on edit button in second row for entity for area")
 	public void clicksOnEditButtonEntityArea2() {
-		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_edit_button2_xpath"));
+		getDataPage().clickElementUsingIndex(AreaIdentifiers.getObjectIdentifier("area_entity_edit_button"),2);
 	}
 
 	@When("the user selects details value as <entityDetails2> in the entity for area")
 	public void selectsEntityDetailsFromDropdown2(@Named("entityDetails2") String entityDetails2) {
 		getEditAreaPage().selectDropDownValueFromRowNumber(
-				(AreaIdentifiers.getObjectIdentifier("area_entity_details_Select_dropdown_xpath")), entityDetails2, 2);
+				(AreaIdentifiers.getObjectIdentifier("area_entity_details_select_dropdown_xpath")), entityDetails2, 2);
 	}
 
 	@When("the user selects fid value as <fid2> in the entity for area")
@@ -1415,7 +1422,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user clicks on the delete entity row button in the area entity page")
 	public void clickOnDeleteNewOfficeServiceRowButton() {
-		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_relatedEntity_delete_button_xpath"));
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_delete_button_xpath"));
 	}
 
 	@Then("the user should not see the deleted Area Entity values in area entity page")
@@ -1425,5 +1432,19 @@ public class EditAreaSteps extends AbstractSteps {
 		String[] areaEntity = { entity };
 		String[] areaEntityDetail = { entityDetails };
 		getEditAreaPage().verifyRelatedEntityNotInAreaPage(areaEntityTypes, areaEntity, areaEntityDetail);
+	}
+	
+	@Then("the user should see the area related entity values deleted in $source document")
+	public void verifyAreaRelatedEntityDeletedFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("entityType") String entityType, @Named("entity") String entity,
+			@Named("entityDetails") String entityDetails, @Named("source") String source) {
+		List<String> areaEntityTypes = new ArrayList<>();
+		List<String> areaEntity = new ArrayList<>();
+		List<String> areaEntityDetail = new ArrayList<>();
+		areaEntityTypes.add(entityType);
+		areaEntity.add(entity);	
+		areaEntityDetail.add(entityDetails);
+		getEditAreaPage().verifyAreaRelatedEntityDeletedFromZeusDB(country, area, areaEntityTypes, areaEntity,
+				areaEntityDetail, source);
 	}
 }

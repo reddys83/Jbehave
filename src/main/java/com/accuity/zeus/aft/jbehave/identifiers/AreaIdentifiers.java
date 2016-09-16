@@ -122,36 +122,22 @@ public class AreaIdentifiers {
 		hmap.put("area_demographic_date_error_message", By.xpath("//*[@data-error_id='demographicDateError']"));
 		hmap.put("area_demographics_row", By.xpath("//*[@class='data']//*[@id='areaDemographics']//tr[@data-row_id='demographics']"));
 		hmap.put("area_demographics_row_view_mode", By.xpath("//*[@class='data']//*[@id='areaDemographics']//tr"));
-		hmap.put("area_enity_link_id", By.xpath(""));
 		hmap.put("area_entity_type_dropdown_xpath", By.xpath("//*[@data-internal_id='presencesType']"));
-		hmap.put("area_entity_type_options_dropdown_xpath",
-				By.xpath(".//*[@class='new'][@data-row_id='presences']//select[@id='presencesType']/option"));
-		hmap.put("area_entity_details_Select_dropdown_xpath",
-				By.xpath("//*[@data-internal_id='presencesDetails']"));
-		hmap.put("area_entity_details_options_dropdown_xpath", By.xpath(
-				".//*[@class='new'][@data-row_id='presences']//select[@data-internal_id='presencesDetails']/option"));
+		hmap.put("area_entity_type_options_dropdown_xpath",By.xpath(".//*[@data-row_id='presences']//select[@id='presencesType']/option"));
+		hmap.put("area_entity_details_Select_dropdown_xpath", By.xpath("//*[@data-internal_id='presencesDetails']"));
+		hmap.put("area_entity_details_options_dropdown_xpath", By.xpath(".//*[@data-row_id='presences']//select[@data-internal_id='presencesDetails']/option"));
 		hmap.put("area_entity_link_id", By.xpath("//*[@id='areaPresences']"));
 		hmap.put("area_add_entity_button_edit_id", By.xpath("//button[@id='add-presences']"));
-		hmap.put("area_entity_delete_button_xpath",By.xpath(".//*[@data-row_id='presences']//button[@class='delete-element']"));
-		hmap.put("area_entity_type_required_error_message_xpath",
-				By.xpath("//*[@id='additionalPresences']/tr/td[1]/p"));
-		hmap.put("area_entity_required_error_message_xpath",
-				By.xpath("//*[@id='additionalPresences']/tr/td[3]/p"));
-		hmap.put("area_fid_required_error_message_xpath",
-				By.xpath("//*[@id='additionalPresences']/tr/td[3]/div/p"));
-		hmap.put("area_entity_fid_dropdown_xpath",
-				By.xpath("//*[@id='fid']"));
+		hmap.put("area_entity_type_required_error_message_xpath",By.xpath("//*[@id='additionalPresences']//*[@data-error_id='presencesTypeError']"));
+		hmap.put("area_entity_required_error_message_xpath",By.xpath("//*[@id='additionalPresences']//*[@data-error_id='presencesEntityError']"));
+		hmap.put("area_fid_required_error_message_xpath",By.xpath("//*[@id='additionalPresences']//*[@data-error_id='fidError']"));
+		hmap.put("area_entity_fid_dropdown_xpath", By.xpath("//*[@id='fid']"));
+		hmap.put("area_entity_go_button_xpath",	By.xpath("//button[@class='go  go-text-select']"));
+		hmap.put("area_entity_delete_button_xpath", By.xpath(".//*[@data-row_id='presences']//button[@class='delete-element']"));
+		hmap.put("area_get_related_entity_entirevalue_xpath", By.xpath("//*[@id='areaPresences']//tbody"));   
+		hmap.put("area_entity_edit_button_xpath", By.xpath("//*[@id='additionalPresences']//button[@class='edit-row edit-presences']")); 
+		hmap.put("area_related_entity_entirevalues_xpath", By.xpath("//*[@id='areaPresences']//tbody//tr")); 
 		
-		hmap.put("area_entity_go_button_xpath",
-				By.xpath("//button[@class='go  go-text-select']"));
-		hmap.put("area_entity_delete_button_xpath",
-				By.xpath(".//*[@data-row_id='presences']//button[@class='delete-element']"));
-		hmap.put("area_get_relatedentity_entirevalue_xpath", By.xpath("//*[@id='areaPresences']//tbody"));
-		hmap.put("area_entity_edit_button_xpath", By.xpath("//button[@class='edit-row edit-presences']"));
-		hmap.put("area_get_relatedentity_entirevalue_xpath", By.xpath("//*[@id='areaPresences']//tbody"));
-		hmap.put("area_entity_edit_button2_xpath", By.xpath("//*[@id='additionalPresences']/tr[2]/td[2]/button"));
-		hmap.put("area_relatedentity_entirevalues_xpath", By.xpath("//*[@id='areaPresences']//tbody//tr"));
-		hmap.put("area_relatedEntity_delete_button_xpath",By.xpath(".//*[@data-row_id='presences']//button[@class='delete-element']"));
 	}
 
 	public static By getObjectIdentifier(String key) {

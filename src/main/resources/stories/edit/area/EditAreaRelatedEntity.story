@@ -18,21 +18,19 @@ And the user clicks on the choose an area option
 And the user enters the area <area> in the type-ahead box
 And the user clicks on the area entity link in the navigation bar
 And the user clicks on the area update link
-When the user gets the document with get document id for area with the <area> from the database
 When the user deletes all existing related entity rows
 And the user clicks on the add button for adding new entity for area page
 When the user clicks on new area entity type drop-down for area
 Then the user should see the values for type dropdown from lookup AREA_RELATED_PRESENCE_TYPE
 When the user clicks on new area entity details drop-down for area
 Then the user should see the values for details dropdown from lookup AREA_RELATED_PRESENCE_SUBTYPE
-Then the user reverts the changes to the document
-
 
 Examples:
 |country|area|
 |USA|Alabama|
 				 
-Scenario: add related entity
+Scenario: a)Verify whether user is able to add a Area  entity successfully in Area Web page
+b)Verify whether user is able to view the added related entity in Zeus Document
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -68,7 +66,7 @@ Examples:
 |country|area|entityDetails|entityType|fid|entity|entityDetails2|entityType2|fid2|entity2|
 |USA|Alabama|State Government|Banking Association|1038|Bank of America National Association|State Government|Government|1038|Bank of America National Association|
 
-Scenario: update existing related entity
+Scenario: a)Verify whether user is able to update an existing Area Related entity (different to the current value) with same values successfully
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -98,7 +96,7 @@ Examples:
 |country|area|entityDetails|entityType|fid|entity|
 |USA|Alabama|State Government|Government|1038|Bank of America National Association|
 
-Scenario: Blank Value Scenario
+Scenario: Verify whether No new row is added in Area web page when all the entity fields are having blank values
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -122,7 +120,7 @@ Examples:
 |country|area|entityDetails|entityType|fid|entity|
 |USA|Alabama|State Government|Government|1038|Bank of America National Association|
 
-Scenario: Verify whether User is able to see error message "Required" when input values are blank for 'type' field
+Scenario: Verify whether User is able to see error message "Required" when input values are blank for 'type','entity','enter a valid fid' fields
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
@@ -151,6 +149,10 @@ Examples:
 |USA|Alabama|State Government|pppp|Government|
 |USA|Alabama|State Government|999999|Government|
 
+Scenario: 
+a)Verify whether user is able to delete an existing  area Related entity successfully in area Web page
+b)Verify whether user is able to view the related entity in area page when 'no' button is clicked in delete confirmation dialog
+
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area
@@ -171,12 +173,14 @@ And the user selects details value as <entityDetails> in the entity for area
 When the user clicks on the delete entity row button in the area entity page
 Then the user should see the delete row confirmation modal in the area page
 When the user clicks on the no button in the delete row confirmation modal in the area page
+Then the user should see <entityType> <entity> <entityDetails> updated in area related entity
 When the user clicks on the delete entity row button in the area entity page
 Then the user should see the delete row confirmation modal in the area page
 When the user clicks on the yes button in the delete row confirmation modal in the area page
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should not see the deleted Area Entity values in area entity page
+Then the user should see the area related entity values deleted in zeus document
 Then the user reverts the changes to the document
 
 Examples:
