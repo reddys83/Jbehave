@@ -204,9 +204,10 @@ public class OfficeIdentifiers {
 	    hmap.put("office_service_category_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='serviceCategoryError']"));
 	    hmap.put("office_services_entire_xpath",By.xpath("//*[@id='officeServices']//tbody"));
 	    hmap.put("office_locations_telecom_row_view_mode", By.xpath("//*[@id='officeLocations']//*[@class='location']/table/tbody/tr"));
-	    hmap.put("office_locations_telecoms_type_dropdown_options", By.xpath(".//*[@id='additionalLocationTelecomms-0']//select[@id='telecommType-0']/option"));
+	    hmap.put("office_locations_telecoms_type_dropdown_options", By.xpath(".//*[@id='additionalLocationTelecomms-0']//select[@id='telecommType-0']//option"));
 	    hmap.put("office_telecom_type_dropdown_input", By.xpath(".//*[@id='additionalLocationTelecomms-0']//select[@id='telecommType-0']"));
 	    hmap.put("office_telecom_rows_edit_mode", By.xpath(".//*[@data-edit_id='locationTelecomms-0']//tr"));
+	    hmap.put("office_row_telecoms_delete_button", By.xpath(".//*[@id='additionalLocationTelecomms-0']//button[@class='delete-element']"));
     }
 
     public static By getObjectIdentifier(String key) {

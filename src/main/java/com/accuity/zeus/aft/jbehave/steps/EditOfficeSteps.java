@@ -1480,7 +1480,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	@When("the user deletes the existing office telecom locations rows")
 	public void deleteExistingTelecomLocationRows() {
 		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_telecoms_addRow_id"));
-		getDataPage().deleteAllRows(OfficeIdentifiers.getObjectIdentifier("office_first_row_telecoms_delete_button"));
+		getDataPage().deleteAllRows(OfficeIdentifiers.getObjectIdentifier("office_row_telecoms_delete_button"));
 	}
 	
 	@Then("the user should see the error message <errorText> for the office telecom value field")

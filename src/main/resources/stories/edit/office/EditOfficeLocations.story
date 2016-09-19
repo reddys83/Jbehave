@@ -580,6 +580,10 @@ And the user enters office telecoms range limit office_telecoms_first_row_new_ra
 And the user enters office telecoms ext office_telecoms_first_row_new_ext value as <Ext>
 And the user enters office telecoms text after office_telecoms_first_row_new_textAfter value as <TextAfter>
 And the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Locations|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 And the user verifies that the office telecom fields for Type(telephone/fax) are entered in the office locations page
@@ -718,7 +722,6 @@ Examples:
 |1010|FID|1010|1010-44|telex|Text|
 |1010|FID|1010|1010-44|reuters|Text|
 |1010|FID|1010|1010-44|cable|Text|
-|1010|FID|1010|1010-44|website|Text|
 
 Scenario: User is updating an Office's Locations (Telecom) -  
 a) Verify user can select a new value for Telecom Type as email/website and Verify that the user can see and select values for the following fields: 
@@ -759,11 +762,11 @@ Examples:
 |1038|FID|1038|1038-60|email|1|5 pm|aft@zeus.com|5 pm|
 |1038|FID|1038|1038-60|website|5|3 pm|www.zeus.com|4 pm|
 
-Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Email' 
+Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Email' and 'Website'
 a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
 b) Verify that the error message "Enter up to 100 valid characters" is displayed when the 'Value' field is blank.
 c) Verify that the error message "Enter up to 4 valid numbers" is displayed when alphabets are entered for 'Rank' field.
-d) Verify that the error message "Enter up to 100 valid characters" is displayed when a text without '@' key is entered for 'Value' field.
+d) Verify that the error message "Enter up to 100 valid characters" is displayed for Type - 'Email' when a text without '@' character is entered for 'Value' field.
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -791,6 +794,7 @@ And the user should see the error message at top of page the highlighted fields 
 Examples:
 |entity|searchBy|fid|officeFid|Type|Rank|Value|
 |1010|FID|1010|1010-44|email|Text|www.zeus.com|
+|1010|FID|1010|1010-44|website|Text||
 
 Scenario: Scenario: User is adding/deleting new Office's Locations Telecom -
 a) Verify if User can prevent deleting telecom row by clicking on 'No'.
