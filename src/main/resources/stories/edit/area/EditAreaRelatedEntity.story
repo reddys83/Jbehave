@@ -173,7 +173,7 @@ And the user selects details value as <entityDetails> in the entity for area
 When the user clicks on the delete entity row button in the area entity page
 Then the user should see the delete row confirmation modal in the area page
 When the user clicks on the no button in the delete row confirmation modal in the area page
-Then the user should see <entityType> <entity> <entityDetails> updated in area related entity
+Then the user should see the Area entity values in area related entity web page
 When the user clicks on the delete entity row button in the area entity page
 Then the user should see the delete row confirmation modal in the area page
 When the user clicks on the yes button in the delete row confirmation modal in the area page

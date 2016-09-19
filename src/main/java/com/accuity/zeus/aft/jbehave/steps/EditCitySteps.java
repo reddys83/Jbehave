@@ -220,7 +220,6 @@ public class EditCitySteps extends AbstractSteps {
 
 	@When("the user clicks on the No button to cancel the deletion of row")
 	public void clickNoButtonInDeleteConfirmationModalForCity() {
-		setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().clickNoButtonInDeleteConfirmationModalForCity();
 	}
 
@@ -837,6 +836,7 @@ public class EditCitySteps extends AbstractSteps {
 
 	@When("the user deletes the existing related places rows")
 	public void deleteAllRelatedPlaces() {
+		setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().deleteAllRelatedPlaces();
 	}
 
