@@ -134,6 +134,7 @@ public class XqueryMap {
         queryMap.put("get area demographics unit","getDemographicsUnit.xqy");
         queryMap.put("get area demographics info","getAreaDemographics.xqy");
 		queryMap.put("get area credit ratings", "getAreaCreditRatingValues.xqy");
+        queryMap.put("get routingCode basic info","getRoutingCodeBasicInfo.xqy");
    }
 
     public String getXquery(String key){
