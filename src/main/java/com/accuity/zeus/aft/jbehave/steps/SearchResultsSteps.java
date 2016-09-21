@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.jbehave.pages.DataPage;
 import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -140,9 +141,55 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifySearchResults();
     }
 
-    @Then("the user should see the search results for routingCode")
-    public void verifyRoutingCodeSearchResults() {
-        getResultsPage().verifyRoutingCodeSearchResults();
+    @Then("the user should see the search results for <entity> routingCode")
+    public void verifyRoutingCodeSearchResults(@Named("entity") String code) {
+        getResultsPage().verifyRoutingCodeSearchResults(code);
+    }
+    @When("the user applied the country filter as: $Country")
+    public void applyCountryFilter(ExamplesTable Country) {
+        getResultsPage().applyCountryFilter(Country);
+    }
+
+    @When("the user applied the type filter as: $Type")
+    public void applyTypeFilterInRCResults(ExamplesTable Type) {
+        getResultsPage().applyTypeFilter(Type);
+    }
+
+    @Then("the user should see the routingCode search results for selected country as: $Country")
+    public void verifyCountryFilterInRCSearchResults(ExamplesTable Country) {
+        getResultsPage().verifyCountryFilterInRCSearchResults(Country);
+    }
+
+    @Then("the user should see the routingCode search results for selected type as: $Type")
+    public void verifyTypeFilterInRCSearchResults(ExamplesTable Type) {
+        getResultsPage().verifyTypeFilterInRCSearchResults(Type);
+    }
+
+    @When("the user applied the status filter $status in the routingCode search results")
+    public void applyStatusFilterInRCSearch(String status){
+        getResultsPage().applyStatusFilterInRCSearch(status);
+    }
+
+    @Then("the user should see the routing code search results for $status status")
+    public void verifyStatusFilterInRCSearchResults(String status){
+        getResultsPage().verifyStatusFilterInRCSearchResults(status);
+    }
+
+    @Then("the user should see the error message enter at least 2 valid characters in routing search results")
+    public void verifyErrorMessageForAtleast2Char()
+    {
+        getResultsPage().verifyErrorMessageForAtleast2Char();
+    }
+
+    @Then("the user should see the message for 0 search results in routingCode search results")
+    public void verifyMessageFor0Results()
+    {
+        getResultsPage().verifyMessageFor0Results();
+    }
+
+    @When("the user clicks on $fid in the routing search results")
+    public void clickFidNavigation(String fid) {
+       setOfficesPage(getResultsPage().clickFidNavigation(fid));
     }
 
     @Then("the user should see the same results of the previous search")
@@ -181,17 +228,17 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @Then("the user should see the office search results cards sorted $xqueryName with fid $fid from the database")
     public void verifySortOrderByOfficeFid(String xqueryName, String fid) {
-        getResultsPage().verifySortOrderByOfficeFid(database, apacheHttpClient, xqueryName, fid);
+        getResultsPage().verifySortOrderByOfficeFid(xqueryName, fid);
     }
 
     @Then("the office search results should sort by type which sorted $xqueryName with fid $fid from the database")
     public void verifySortOrderByOfficeType(String xqueryName, String fid) {
-        getResultsPage().verifySortOrderByOfficeType(database, apacheHttpClient, xqueryName, searchedEntity);
+        getResultsPage().verifySortOrderByOfficeType(xqueryName, searchedEntity);
     }
 
     @Then("the office search results should sort by name which sorted $xqueryName with fid $fid from the database")
     public void verifySortOrderByOfficeName(String xqueryName, String fid) {
-        getResultsPage().verifySortOrderByOfficeName(database, apacheHttpClient, xqueryName, fid);
+        getResultsPage().verifySortOrderByOfficeName(xqueryName, fid);
     }
 
     @Then("the office search results should sort by area which sorted $xqueryName with fid $fid from the database")
@@ -216,12 +263,12 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @Then("the user should see the office search results cards sorted ascending order by office status")
     public void verifyOfficeIsSortedAscByStatus(){
-        getResultsPage().verifyOfficeIsSortedAscByStatus(database, apacheHttpClient, searchedEntity);
+        getResultsPage().verifyOfficeIsSortedAscByStatus(searchedEntity);
     }
 
     @Then("the user should see the office search results cards sorted descending order by office status")
     public void verifyOfficeIsSortedDescByStatus(){
-        getResultsPage().verifyOfficeIsSortedDescByStatus(database, apacheHttpClient, searchedEntity);
+        getResultsPage().verifyOfficeIsSortedDescByStatus(searchedEntity);
     }
 
     @Then("the user should see the office search results paginated")
@@ -271,7 +318,7 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @Then("the user should see the $xqueryName with comma separated for office $fid")
     public void verifyMultipleOfficeTypesAlphabetically(String xqueryName, String fid) {
-        getResultsPage().verifyMultipleOfficeTypesAlphabetically(database, apacheHttpClient, xqueryName, fid);
+        getResultsPage().verifyMultipleOfficeTypesAlphabetically(xqueryName, fid);
     }
     @Then("the user should see the office type filter default to all")
     public void verifyDefaultOfficeTypeFilterIsAll(){
@@ -293,12 +340,12 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @Then("the user should see the list of domestic offices in the office search results")
     public void verifyDomesticOfficesSearchResults() {
-        getResultsPage().verifyDomesticOfficesSearchResults(database, apacheHttpClient, searchedEntity);
+        getResultsPage().verifyDomesticOfficesSearchResults(searchedEntity);
     }
 
     @Then("the user should see the list of foreign offices in the office search results")
     public void verifyForeignOfficesSearchResults() {
-        getResultsPage().verifyForeignOfficesSearchResults(database, apacheHttpClient, searchedEntity);
+        getResultsPage().verifyForeignOfficesSearchResults(searchedEntity);
     }
 
     @When("the user clicks on the office search results status column")
@@ -343,12 +390,12 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @Then("the user should see the list of active offices in the office search results")
     public void verifyActiveOfficesSearchResults() {
-        getResultsPage().verifyActiveOfficesSearchResults(database, apacheHttpClient, searchedEntity);
+        getResultsPage().verifyActiveOfficesSearchResults(searchedEntity);
     }
 
     @Then("the user should see the list of inactive offices in the office search results")
     public void verifyInactiveOfficesSearchResults() {
-        getResultsPage().verifyInactiveOfficesSearchResults(database, apacheHttpClient, searchedEntity);
+        getResultsPage().verifyInactiveOfficesSearchResults(searchedEntity);
     }
 
     @Then("the user should see the office status filter default to all")
@@ -358,22 +405,22 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @Then("the user should see the office search results cards sorted ascending order by office country")
     public void verifyOfficeIsSortedAscByCountry(){
-        getResultsPage().verifyOfficeIsSortedAscByCountry(database, apacheHttpClient, searchedEntity);
+        getResultsPage().verifyOfficeIsSortedAscByCountry(searchedEntity);
     }
 
     @Then("the user should see the types in the type filter should be based on the types of office search results")
     public void verifyOfficeTypesInTypeFilter() {
-        getResultsPage().verifyOfficeTypesInTypeFilter(database, apacheHttpClient, searchedEntity);
+        getResultsPage().verifyOfficeTypesInTypeFilter(searchedEntity);
     }
 
     @Then("the user should see the office list for the institution <entity> with the $institutionType office type in the office search results")
     public void officeSearchResultsWithTypeFilter(@Named("institutionType") String institutionType, @Named("entity") String searchedEntity) {
-        getResultsPage().officeSearchResultsWithTypeFilter(database, apacheHttpClient, searchedEntity,institutionType);
+        getResultsPage().officeSearchResultsWithTypeFilter(searchedEntity,institutionType);
     }
 
     @Then("the user should see the office search results cards sorted descending order by office country")
     public void verifyOfficeIsSortedDescByCountry() {
-        getResultsPage().verifyOfficeIsSortedDescByCountry(database, apacheHttpClient, searchedEntity);
+        getResultsPage().verifyOfficeIsSortedDescByCountry(searchedEntity);
     }
 
     @When("the user clicks on the office search results country column")
@@ -395,13 +442,13 @@ public class SearchResultsSteps extends AbstractSteps{
     }
 
     @Then("the user should see the office search results sorted ascending by addressLine1 from trusted document")
-    public void verfiyOfficeAddressSortingAscending() {
-        getResultsPage().verifySortAscOrderByAddress(database, apacheHttpClient, searchedEntity);
+    public void verifyOfficeAddressSortingAscending() {
+        getResultsPage().verifySortAscOrderByAddress(searchedEntity);
     }
 
     @Then("the user should see the office search results sorted descending by addressLine1 from trusted document")
     public void verifyOfficeAddressSortingDescending() {
-        getResultsPage().verifySortDscOrderByAddress(database, apacheHttpClient, searchedEntity);
+        getResultsPage().verifySortDscOrderByAddress(searchedEntity);
     }
 
     @Then("the user should see the click to view tooltip on office search page")

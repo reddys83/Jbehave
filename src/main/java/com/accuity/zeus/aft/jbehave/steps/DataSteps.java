@@ -107,11 +107,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyNames(names);
     }
 
-    @Then("the user should see the office's names as: $Names")
-    public void verifyOfficeNames(ExamplesTable Names) {
-        getDataPage().verifyNames(Names);
-    }
-
     @Then("the user should see the office sort key as $officeSortKey")
     public void verifyOfficeSortKey(@Named("officeSortKey") String officeSortKey) {
         getDataPage().verifyOfficeSortKey(officeSortKey);

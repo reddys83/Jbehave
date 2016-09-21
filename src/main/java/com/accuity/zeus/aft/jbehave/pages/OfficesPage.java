@@ -131,6 +131,31 @@ public class OfficesPage extends AbstractPage {
 
     }
 
+    public void verifyOfficeNames(String fid)
+    {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
+         for (int i=0; i<document.getElementsByTagName("officeType").getLength();i++)
+         {
+             assertEquals(getDriver().findElement(By.xpath(".//*[@id='officeBasicInfo']//li[1]/table[1]//tr["+i+"]/td[1]")).getText(),
+                     document.getElementsByTagName("officeType").item(i).getTextContent());
+         }
+        for (int j=0;j<document.getElementsByTagName("officeValue").getLength();j++)
+        {
+            assertEquals(getDriver().findElement(By.xpath(".//*[@id='officeBasicInfo']//li[1]/table[1]//tr["+j+"]/td[2]")).getText(),
+                    document.getElementsByTagName("officeValue").item(j).getTextContent());
+        }
+
+    }
+
     public void verifyNoOfficeTabInOffice() {
 
         try
@@ -149,6 +174,8 @@ public class OfficesPage extends AbstractPage {
        verifyOfficeOfferedServicesLabels();
        verifyServices(services, "Services");
     }
+
+
 
     public void verifyServices(ExamplesTable services, String serviceType){
         List<WebElement> category = getDriver().findElements(By.xpath(".//li[h1='" + serviceType + "']//tr/td[1]"));
@@ -190,13 +217,15 @@ public class OfficesPage extends AbstractPage {
         attemptClick(office_locations_link_id);
     }
 
-    public void verifyOfficeLocations(Database database, ApacheHttpClient apacheHttpClient, String selectedOffice) {
+    public void verifyOfficeLocations(String selectedOffice) {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "office locations", "fid", selectedOffice);
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", selectedOffice));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "office locations", nvPairs);
         for(int i=0; i<getDriver().findElements(office_locations_address_xpath).size(); i++){
             assertEquals("LOCATIONS", getDriver().findElement(office_locations_title_xpath).getText());
             verifyOfficeLocationsAddresses(document, i);
@@ -264,7 +293,9 @@ public class OfficesPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "get Office Location Summary From LegalEntity", "fid", officeFid);
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair(  "fid", officeFid));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Office Location Summary From LegalEntity", nvPairs );
         assertEquals("LOCATION SUMMARY",getDriver().findElement(office_searchresults_locations_summary_title_xpath).getText());
         for(int i=0; i<getDriver().findElements(office_searchresults_locations_summary_type_xpath).size(); i++){
             assertEquals(document.getElementsByTagName("summaryType").item(i).getTextContent(),getDriver().findElements(office_searchresults_locations_summary_type_xpath).get(i).getText());
