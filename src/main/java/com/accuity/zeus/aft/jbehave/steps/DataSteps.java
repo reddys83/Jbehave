@@ -699,7 +699,7 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the basic info label for selected legal entity")
     @Alias("the user should see the basic info for selected office")
     public void verifyBasicInfo() {
-        getDataPage().verifyBasicInfo();
+        setOfficesPage(getDataPage().verifyBasicInfo());
     }
 
     @Then("the user should see the legal entity's identifiers as: $identifiers")

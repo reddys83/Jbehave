@@ -287,13 +287,14 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyBasicInfo() {
+    public OfficesPage verifyBasicInfo() {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         assertEquals("BASIC INFO", getDriver().findElement(basic_info_xpath).getText());
+        return new OfficesPage(getDriver(), getPageUrl(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void verifyNames(ExamplesTable namesList) {

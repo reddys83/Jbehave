@@ -134,7 +134,7 @@ public class OfficesPage extends AbstractPage {
     public void verifyOfficeNames(String fid)
     {
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(2000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -143,15 +143,15 @@ public class OfficesPage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
 
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
-         for (int i=0; i<document.getElementsByTagName("officeType").getLength();i++)
+         for (int i=1; i<=document.getElementsByTagName("officeType").getLength();i++)
          {
              assertEquals(getDriver().findElement(By.xpath(".//*[@id='officeBasicInfo']//li[1]/table[1]//tr["+i+"]/td[1]")).getText(),
-                     document.getElementsByTagName("officeType").item(i).getTextContent());
+                     document.getElementsByTagName("officeType").item(i-1).getTextContent());
          }
-        for (int j=0;j<document.getElementsByTagName("officeValue").getLength();j++)
+        for (int j=1;j<=document.getElementsByTagName("officeValue").getLength();j++)
         {
             assertEquals(getDriver().findElement(By.xpath(".//*[@id='officeBasicInfo']//li[1]/table[1]//tr["+j+"]/td[2]")).getText(),
-                    document.getElementsByTagName("officeValue").item(j).getTextContent());
+                    document.getElementsByTagName("officeValue").item(j-1).getTextContent());
         }
 
     }

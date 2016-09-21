@@ -292,7 +292,7 @@ public class ResultsPage extends AbstractPage {
         {
             typeFilter.add(row.get("Type"));
         }
-        List <WebElement>  typeListElement = getDriver().findElements(By.xpath(".//*[@class='search-results-module']//td[2]"));
+        List <WebElement>  typeListElement = getDriver().findElements(ResultsIdentifiers.getObjectIdentifier("routingCode_results_type_xpath"));
         for(WebElement e : typeListElement)
         {
             typeList.add(e.getText());
@@ -309,13 +309,18 @@ public class ResultsPage extends AbstractPage {
         boolean val=false;
         List countryFilter = new ArrayList();
         List countryList = new ArrayList();
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         for(Map<String,String> row : Country.getRows())
         {
            countryFilter.add(row.get("Country"));
         }
 
-        List <WebElement>  countryListElement = getDriver().findElements(By.xpath(".//*[@class='search-results-module']//td[8]"));
+        List <WebElement>  countryListElement = getDriver().findElements(ResultsIdentifiers.getObjectIdentifier("routingCode_results_country_xpath"));
         for(WebElement e : countryListElement)
         {
            countryList.add(e.getText());
@@ -334,7 +339,7 @@ public class ResultsPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        List<WebElement> statusElement = getDriver().findElements(By.xpath(".//*[@class='search-results-module']//td[9]"));
+        List<WebElement> statusElement = getDriver().findElements(ResultsIdentifiers.getObjectIdentifier("routingCode_results_status_xpath"));
         for (int i=0;i<statusElement.size();i++)
         {
             assertEquals(statusElement.get(i).getText().toLowerCase(),status);
@@ -378,18 +383,18 @@ public class ResultsPage extends AbstractPage {
 
     public void verifyErrorMessageForAtleast2Char()
     {
-        assertEquals("Enter at least 2 valid characters",getDriver().findElement(ResultsIdentifiers.getObjectIdentifier("routingCode_results_valid_character_error_message")));
+        assertEquals("ENTER AT LEAST 2 VALID CHARACTERS",getDriver().findElement(ResultsIdentifiers.getObjectIdentifier("routingCode_results_valid_character_error_message")).getText());
     }
 
     public void verifyMessageFor0Results()
     {
-        assertEquals("Your search returned 0 results",getDriver().findElement(ResultsIdentifiers.getObjectIdentifier("routingCode_results_zero_results_message_xpath")));
+        assertEquals("Your search returned 0 results.",getDriver().findElement(ResultsIdentifiers.getObjectIdentifier("routingCode_results_zero_results_message_xpath")).getText());
     }
 
-    public OfficesPage clickFidNavigation(String fid)
+    public void clickFidNavigation(String fid)
     {
         getDriver().findElement(By.xpath(".//*[@id='searchEntityList-list']//tbody//tr[td='" + fid + "']//a")).click();
-        return new OfficesPage(getDriver(), getPageUrl(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
+
     }
 
     public void saveTheResultsAndCurrentURLToCache() {

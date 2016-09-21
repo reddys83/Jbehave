@@ -189,7 +189,7 @@ public class SearchResultsSteps extends AbstractSteps{
 
     @When("the user clicks on $fid in the routing search results")
     public void clickFidNavigation(String fid) {
-       setOfficesPage(getResultsPage().clickFidNavigation(fid));
+       getResultsPage().clickFidNavigation(fid);
     }
 
     @Then("the user should see the same results of the previous search")
