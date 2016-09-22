@@ -1016,48 +1016,57 @@ public class EditOfficePage extends AbstractPage {
 
         }
 
-    public boolean verifyOfficeAddressLinesAddressesFromDB(String Type,String AddressLine1,String AddressLine2, String AddressLine3, String AddressLine4,String PostalCode,String PostalCodeSuffix,String PostalCodePosition,String Info,String Country,String Area,String Subarea, String City,String officeFid,String source) {
+	public boolean verifyOfficeAddressLinesAddressesFromDB(String Type, String AddressLine1, String AddressLine2,
+			String AddressLine3, String AddressLine4, String PostalCode, String PostalCodeSuffix,
+			String PostalCodePosition, String Info, String Country, String Area, String Subarea, String City,
+			String officeFid, String source) {
 
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("fid", officeFid));
-        nvPairs.add(new BasicNameValuePair("source", source));
-        Boolean flag=false;
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office locations", nvPairs);
-        String officeAddressLines=Type+AddressLine1+AddressLine2+AddressLine3+AddressLine4+PostalCode+PostalCodeSuffix+PostalCodePosition+Info+Country+Area+Subarea+City;
-        if (document != null) {
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("fid", officeFid));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		Boolean flag = false;
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get office locations", nvPairs);
+		String officeAddressLines = Type + AddressLine1 + AddressLine2 + AddressLine3 + AddressLine4 + PostalCode
+				+ PostalCodeSuffix + PostalCodePosition + Info + Country + Area + Subarea + City;
+		if (document != null) {
 
-            List TypeList = getNodeValuesByTagName(document, "addressType");
-            List AddressLine1List = getNodeValuesByTagName(document, "addressLine1");
-            List AddressLine2List =getNodeValuesByTagName(document, "addressLine2");
-            List AddressLine3List =getNodeValuesByTagName(document, "addressLine3");
-            List AddressLine4List =getNodeValuesByTagName(document, "addressLine4");
-            List PostalCodeList =getNodeValuesByTagName(document, "postalCode");
-            List PostalCodeSuffixList =getNodeValuesByTagName(document, "postalCodeSuffix");
-            List PostalCodePositionList= getNodeValuesByTagName(document, "postalCodePosition");
-            List InfoList =getNodeValuesByTagName(document, "info");
-            List CountryList=getNodeValuesByTagName(document, "country");
-            List AreaList=getNodeValuesByTagName(document, "area");
-            List SubareaList=getNodeValuesByTagName(document, "subarea");
-            List CityList=getNodeValuesByTagName(document, "city");
+			List<String> TypeList = getNodeValuesByTagName(document, "addressType");
+			List<String> AddressLine1List = getNodeValuesByTagName(document, "addressLine1");
+			List<String> AddressLine2List = getNodeValuesByTagName(document, "addressLine2");
+			List<String> AddressLine3List = getNodeValuesByTagName(document, "addressLine3");
+			List<String> AddressLine4List = getNodeValuesByTagName(document, "addressLine4");
+			List<String> PostalCodeList = getNodeValuesByTagName(document, "postalCode");
+			List<String> PostalCodeSuffixList = getNodeValuesByTagName(document, "postalCodeSuffix");
+			List<String> PostalCodePositionList = getNodeValuesByTagName(document, "postalCodePosition");
+			List<String> InfoList = getNodeValuesByTagName(document, "info");
+			List<String> CountryList = getNodeValuesByTagName(document, "country");
+			List<String> AreaList = getNodeValuesByTagName(document, "area");
+			List<String> SubareaList = getNodeValuesByTagName(document, "subarea");
+			List<String> CityList = getNodeValuesByTagName(document, "city");
 
-        for(int i=0;i<TypeList.size();i++)
-            {
-        String officeAddressLinesFromZeus=TypeList.get(i).toString()+AddressLine1List.get(i).toString()+AddressLine2List.get(i).toString()+AddressLine3List.get(i).toString()+AddressLine4List.get(i).toString()+PostalCodeList.get(i).toString()+PostalCodeSuffixList.get(i).toString()+InfoList.get(i).toString()+CountryList.get(i).toString()+AreaList.get(i).toString()+SubareaList.get(i).toString()+CityList.get(i).toString()+PostalCodePositionList.get(i).toString();
-                if(officeAddressLinesFromZeus.equals(officeAddressLines)) {
-                    flag=true;
-                    break;
-            }
-            }
+			for (int i = 0; i < TypeList.size(); i++) {
+				String officeAddressLinesFromZeus = TypeList.get(i).toString() + AddressLine1List.get(i).toString()
+						+ AddressLine2List.get(i).toString() + AddressLine3List.get(i).toString()
+						+ AddressLine4List.get(i).toString() + PostalCodeList.get(i).toString()
+						+ PostalCodeSuffixList.get(i).toString() + InfoList.get(i).toString()
+						+ CountryList.get(i).toString() + AreaList.get(i).toString() + SubareaList.get(i).toString()
+						+ CityList.get(i).toString() + PostalCodePositionList.get(i).toString();
+				if (officeAddressLinesFromZeus.equals(officeAddressLines)) {
+					flag = true;
+					break;
+				}
+			}
 
-        }
-        return flag;
+		}
+		return flag;
 
-    }
+	}
 
     public void verifyOfficeTelecommFieldsInUI(String Type,String Rank,String TextBefore,String CountryCode,String AreaCode,String Number,String RangeLimit,String Ext,String TextAfter,String AnswerBack,String Value){
         String Value1;
@@ -1171,17 +1180,7 @@ public class EditOfficePage extends AbstractPage {
         return primaryFlagDBValue;
     }
 
-    public void verifyPrimaryFlagValuefromZeusDocumentAndUI(String primaryFlag, String selectedEntity, String source) {
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        assertEquals(getDocumentPrimaryFlagFromDB(selectedEntity, source), primaryFlag);
-        assertEquals(primaryFlag, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_view_primaryflag_xpath")));
-
-
-    }
+  
      public void verifySuccessfulUpdatedMessage() {
         try {
             assertTrue(
