@@ -163,6 +163,7 @@ And the user enters the area <area> in the type-ahead box
 And the user clicks on the area entity link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
+Then the user should see the area related entity values are from trusted document
 When the user deletes all existing related entity rows
 And the user clicks on the add button for adding new entity for area page
 And the user selects type value as <entityType> in the entity for area
