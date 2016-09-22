@@ -1689,4 +1689,11 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyRelatedEntityInEditAreaPage(areaEntityTypes, areaEntity, areaEntityDetail);
 	}
 
+	@Then("the user should see the area related entity values are from $source document")
+	public void verifyAreaRelatedEntityFromTrustedDB(@Named("country") String country, @Named("area") String area,
+			@Named("entityType") String entityType, @Named("entity") String entity,
+			@Named("entityDetails") String entityDetails,@Named("source") String source) {
+		getEditAreaPage().verifyAreaRelatedEntityFromTrustedDB(country, area, entityType, entity,
+				entityDetails, source);
+	}
 }
