@@ -78,12 +78,12 @@ public class OfficeIdentifiers {
         hmap.put("office_telecoms_delete_row_edit_view", By.xpath(".//*[@id='locationDiv']/div/div[3]/h2"));
         hmap.put("office_first_new_row_telecoms_delete_button", By.xpath(".//*[@id='additionalLocationTelecomms-0']/tr[2]//button[@class='delete-element']"));
         hmap.put("office_first_row_telecoms_delete_button", By.xpath(".//*[@id='additionalLocationTelecomms-0']/tr[1]//button[@class='delete-element']"));
-        hmap.put("office_address_type_error_msg", By.xpath(".//*[@id='locationDiv']//li[@class='address new']//select[@data-error_id='addressTypeError-0']"));
-        hmap.put("office_locations_Address_type_textarea_view", By.xpath(".//*[@id='officeLocations']//dl[dt='Type']/dd"));
-        hmap.put("office_locations_AddressLine1_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Address Line 1']/td"));
-        hmap.put("office_locations_AddressLine2_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Address Line 2']/td"));
-        hmap.put("office_locations_AddressLine3_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Address Line 3']/td"));
-        hmap.put("office_locations_AddressLine4_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Address Line 4']/td "));
+        hmap.put("office_address_type_error_msg", By.xpath(".//*[@id='additionalLocationAddresses-0']//li[@class='address new']//*[@data-error_id='addressType-0Error']"));
+        hmap.put("office_locations_Address_type_textarea_view", By.xpath(".//*[@id='officeLocations']//dl[dt='Type'][2]/dd"));
+        hmap.put("office_locations_AddressLine1_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Address Line 1'][2]/td"));
+        hmap.put("office_locations_AddressLine2_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Address Line 2'][2]/td"));
+        hmap.put("office_locations_AddressLine3_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Address Line 3'][2]/td"));
+        hmap.put("office_locations_AddressLine4_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Address Line 4'][2]/td "));
         hmap.put("office_locations_primaryflag_view", By.xpath(".//*[@id='officeLocations']//dl[dt='Primary']/dd"));
         hmap.put("office_locations_postalCode_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Postal Code']/td"));
         hmap.put("office_locations_postalCodeSuffix_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Postal Code Suffix']/td"));
@@ -101,7 +101,7 @@ public class OfficeIdentifiers {
         hmap.put("office_first_row_new_delete_address_type_physical_button", By.xpath(".//*[@id='additionalLocationAddresses-0']/li[2]//button"));
         hmap.put("office_locations_save_confirmation_message", By.xpath(("//*[@id='saveSuccess']")));
         hmap.put("office_locations_AddressLines_textarea_view", By.xpath(".//*[@id='officeLocations']//tr"));
-        hmap.put("office_address_city_error_msg_xpath", By.xpath(".//*[@id='officeLocations']//li[@class='address new']//select[@data-error_id='addrcity']"));
+        hmap.put("office_address_city_error_msg", By.xpath(".//*[@id='officeLocations']//li[@class='address new']//*[@data-error_id='cityError']"));
         hmap.put("office_locations_telecoms_type_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Type']/td"));
         hmap.put("office_locations_telecoms_rank_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Rank']/td"));
         hmap.put("office_locations_telecoms_textBefore_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Text Before']/td"));
@@ -203,6 +203,8 @@ public class OfficeIdentifiers {
 	    hmap.put("office_service_category_dropdown_exist_edit_mode_xpath",By.xpath("//select[@id='serviceCategory']"));
 	    hmap.put("office_service_category_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='serviceCategoryError']"));
 	    hmap.put("office_services_entire_xpath",By.xpath("//*[@id='officeServices']//tbody"));
+	    hmap.put("office_address_country_error_msg", By.xpath(".//*[@id='officeLocations']//li[@class='address new']//*[@data-error_id='countryError']"));
+	    hmap.put("office_address_type_physical_error_msg", By.xpath(".//*[@id='additionalLocationAddresses-0']//li[@class='address']//*[@data-error_id='addressType-0Error']"));
     }
 
     public static By getObjectIdentifier(String key) {

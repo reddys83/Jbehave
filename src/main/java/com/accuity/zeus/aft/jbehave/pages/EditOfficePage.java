@@ -988,8 +988,14 @@ public class EditOfficePage extends AbstractPage {
     }
 
     public void verifyOfficeErrorMessage(String xpathIdentifier, String errorMsg) {
-        assertEquals(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier(xpathIdentifier)).size(), 1);
+    	try {
+			Thread.sleep(2000L);
+        assertTrue(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier(xpathIdentifier)).size() > 0);
         assertEquals(errorMsg, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(xpathIdentifier)).getText());
+    	} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 
@@ -997,7 +1003,7 @@ public class EditOfficePage extends AbstractPage {
         assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);}
 
 
-    public void verifyOfficeAddressLinesAddressesInUI(String Type,String AddressLine1, String AddressLine2, String AddressLine3, String AddressLine4, String Country, String Area, String Subarea, String City, String PostalCode, String PostalCodeSuffix,String PostalCodePosition, String Info) {
+    public void verifyOfficeAddressLinesAddressesInUI(String Type,String AddressLine1, String AddressLine2, String AddressLine3, String AddressLine4, String Country, String Area, String Subarea, String City, String PostalCode, String PostalCodeSuffix, String Info) {
 
             assertEquals(Type, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_Address_type_textarea_view")));
             assertEquals(AddressLine1, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_AddressLine1_textarea_view")));
@@ -1010,7 +1016,6 @@ public class EditOfficePage extends AbstractPage {
             assertEquals(City, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_city_dropdown_xpath")));
             assertEquals(PostalCode, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_postalCode")));
             assertEquals(PostalCodeSuffix, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_postalCodeSuffix")));
-            assertEquals(PostalCodePosition, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_address_postalCodePosition")));
             assertEquals(Info, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_info")));
 
 
@@ -2093,6 +2098,17 @@ public class EditOfficePage extends AbstractPage {
 		assertEquals("", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_services_entire_xpath")).getText());
 	}
 
+	public void verifyPrimaryFlagValuefromZeusDocumentAndUI(String primaryFlag, String selectedEntity, String source) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(getDocumentPrimaryFlagFromDB(selectedEntity, source), primaryFlag);
+        assertEquals(primaryFlag, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_view_primaryflag_xpath")));
+
+
+    }
 
     @Override
     public String getPageUrl() {

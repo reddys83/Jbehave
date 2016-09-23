@@ -206,6 +206,7 @@ public class EditOfficeSteps extends AbstractSteps{
       public void selectOfficeAddressType(@Named("$typeRowIdentifier") String typeRowIdentifier,@Named("Type") String Type)
     {
         getEditOfficePage().selectOfficeAddressType(typeRowIdentifier,Type);
+    	//getDataPage().selectItemFromDropdownListByValue(OfficeIdentifiers.getObjectIdentifier(typeRowIdentifier), Type);
     }
 
     @When("the user selects office address type $typeRowIdentifier value as <Type1>")
@@ -244,6 +245,10 @@ public class EditOfficeSteps extends AbstractSteps{
     @When("the user enters the office country <Country> in the type-ahead box")
     public void enterOfficeCountryInTheTypeAheadBox(@Named("Country") String Country) {
         getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(Country);
+    	//setEditOfficePage(getOfficesPage().createEditOfficePage());
+    	//getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_address_country_edit"));
+		//getDataPage().enterValueInTypeHeadDropDown(OfficeIdentifiers
+				//.getObjectIdentifier("office_address_country_type_ahead"), Country);
     }
 
     @When("the user enters the office city <City> in the type-ahead box")
@@ -441,7 +446,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @Then("the user should see the error message $errorMsg for the office address type field")
     public void verifyOfficeAddressTypeErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditOfficePage().verifyOfficeErrorMessage("office_address_type_error_msg", errorMsg);
+        getEditOfficePage().verifyOfficeErrorMessage("office_address_type_physical_error_msg", errorMsg);
 
     }
 
@@ -457,11 +462,11 @@ public class EditOfficeSteps extends AbstractSteps{
                                                       @Named("AddressLine2") String AddressLine2,
                                                       @Named("AddressLine3") String AddressLine3,
                                                       @Named("AddressLine4") String AddressLine4,@Named("PostalCode") String PostalCode,
-                                                      @Named("PostalCodeSuffix") String PostalCodeSuffix,@Named("PostalCodePosition") String PostalCodePosition,
-                                                      @Named("Info") String Info,@Named("Country") String Country,@Named("Area") String Area,@Named("Subarea") String Subarea,
+                                                      @Named("PostalCodeSuffix") String PostalCodeSuffix,
+                                                      @Named("Info") String Info,@Named("Country") String Country,@Named("Area") String Area,@Named("subArea") String Subarea,
                                                       @Named("City") String City) {
 
-        getEditOfficePage().verifyOfficeAddressLinesAddressesInUI(Type,AddressLine1, AddressLine2, AddressLine3, AddressLine4,Country,Area,Subarea,City,PostalCode,PostalCodePosition,PostalCodeSuffix,Info);
+        getEditOfficePage().verifyOfficeAddressLinesAddressesInUI(Type,AddressLine1, AddressLine2, AddressLine3, AddressLine4,Country,Area,Subarea,City,PostalCode,PostalCodeSuffix,Info);
     }
 
 
@@ -514,7 +519,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @Then("the user should see the error message $errorMsg for the office country field")
     public void verifyOfficeCountryErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditOfficePage().verifyOfficeErrorMessage("office_address_country_error_msg_xpath", errorMsg);
+        getEditOfficePage().verifyOfficeErrorMessage("office_address_country_error_msg", errorMsg);
 
     }
     @Then("the user should see the error message $errorMsg for the office country code field")
@@ -549,7 +554,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @Then("the user should see the error message $errorMsg for the office city field")
     public void verifyOfficeCityErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditOfficePage().verifyOfficeErrorMessage("office_address_country_error_msg", errorMsg);
+        getEditOfficePage().verifyOfficeErrorMessage("office_address_city_error_msg", errorMsg);
 
     }
 
