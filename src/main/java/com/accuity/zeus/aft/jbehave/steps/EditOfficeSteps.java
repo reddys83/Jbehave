@@ -1482,4 +1482,29 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyBlankOfficeServicesParameterInUI() {
 		getEditOfficePage().verifyBlankOfficeServices(); 
 	}
+	
+	@Then("the user should see the primary flag value same as in $source document")
+	public void primaryFlagValueFromTrustedDB(@Named("source") String source, @Named("officeFid") String officeFid) {
+		getEditOfficePage().primaryFlagValueFromTrustedDB(source, officeFid);
+	}
+	
+	@When("the user selects true for office locations second primary flag")
+	public void selectPrimaryFlagTrueValue() {
+		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_second_location_true_primary_flag"));
+	}
+	
+	@Then("the user verifies that the selected true primary flag is not editable")
+	public void verifySelectedPrimaryFlagNotEditable() {
+		getEditOfficePage().verifySelectedPrimaryFlagNotEditable();
+	}
+	
+	@Then("the user verifies that false is selected for other office locations primary flag")
+	public void verifyFalseSelectedInFirstPrimaryFlag() {
+		getEditOfficePage().verifyFalseSelectedInFirstPrimaryFlag();
+	}
+	
+	@Then("the user verifies the primary flag values in $source document")
+	public void primaryFlagValueFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid) {
+		getEditOfficePage().primaryFlagValueFromZeusDB(source, officeFid);
+	}
 }

@@ -400,6 +400,12 @@ public abstract class AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}	
+
+	public String getAttributeValue(By by) {
+		String attributeValue = null;
+		attributeValue = getDriver().findElement(by).getAttribute("value");
+		return attributeValue;
 	}
 
 }
