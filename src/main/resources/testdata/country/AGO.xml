@@ -1,0 +1,221 @@
+<country deleted="false" fid="AGO" id="55407226-a9b5-4d16-95b4-9ca1f8067351" resource="/country/id/55407226-a9b5-4d16-95b4-9ca1f8067351" source="zeus">
+    <summary>
+        <iso2>AO</iso2>
+        <iso3>AGO</iso3>
+        <names>
+            <name>
+                <type>Country Name</type>
+                <value>Angola</value>
+            </name>
+            <countrySortKey>ANGOLA</countrySortKey>
+        </names>
+        <status>active</status>
+        <timeZones>
+            <summaries>
+                <summary>+2 hour</summary>
+            </summaries>
+        </timeZones>
+        <businessHours>
+            <summaries>
+                <summary />
+            </summaries>
+        </businessHours>
+        <demographics>
+            <metric>
+                <name>Area</name>
+                <value>481354</value>
+                <unit>miles2</unit>
+            </metric>
+            <metric>
+                <name>Area</name>
+                <value>1246700</value>
+                <unit>km2</unit>
+            </metric>
+            <metric>
+                <name>Population</name>
+                <value>14000000</value>
+            </metric>
+        </demographics>
+        <politicalStructure>Republic</politicalStructure>
+        <primaryExports>Crude oil, diamonds, refined petroleum products, gas, coffee, sisal, fish and fish products, timber, cotton</primaryExports>
+        <primaryImports>Machinery and electrical equipment, vehicles and spare parts, medicines, food, textiles, military goods</primaryImports>
+        <telephoneCode>244</telephoneCode>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <languages>
+        <summaries>
+            <summary>Portuguese</summary>
+        </summaries>
+    </languages>
+    <currencies>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/08138751-0f1f-4b7e-bd17-7481e29dfaff" rel="src" />
+            <name>Kwanza</name>
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">1999-12-01</startDate>
+        </currency>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/819819ee-3d5b-4708-aae0-21c1ded75f71" rel="src" />
+            <primary>false</primary>
+            <status>active</status>
+            <startDate accuracy="year">1987-01-01</startDate>
+        </currency>
+
+
+    </currencies>
+    <iban>
+        <registered>false</registered>
+    </iban>
+    <holidays>
+        <holiday>
+            <date accuracy="day">2015-01-01</date>
+            <name>New Year's Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-01-26</date>
+            <name>Luanda Day OBS</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-02-04</date>
+            <name>Start of Liberation War</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-02-17</date>
+            <name>Carnival Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-03-09</date>
+            <name>International Women's Day OBS</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-04-03</date>
+            <name>Good Friday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-05-01</date>
+            <name>Labour Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-09-17</date>
+            <name>National Heroes' Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-11-02</date>
+            <name>All Soul's Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-11-11</date>
+            <name>Independence Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-25</date>
+            <name>Christmas Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-01</date>
+            <name>New Year's Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-25</date>
+            <name>Luanda Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-02-04</date>
+            <name>Start of Liberation War</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-02-09</date>
+            <name>Carnival Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-08</date>
+            <name>International Women's Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-25</date>
+            <name>Good Friday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-04-04</date>
+            <name>Peace Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-05-02</date>
+            <name>Labour Day OBS</name>
+            <note />
+        </holiday>
+    </holidays>
+    <creditRatings>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Sovereign Debt Rating</type>
+            <value>B+</value>
+            <dateConfirmed accuracy="day">2015-01-01</dateConfirmed>
+        </rating>
+    </creditRatings>
+    <alternativeRegions>
+        <region>
+            <type>Trading Region</type>
+            <value>Africa</value>
+        </region>
+    </alternativeRegions>
+    <relatedPlaces>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>Capital City</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/374eb22f-06a8-46da-88a0-81dc8f9c7707" rel="src" />
+            </place>
+        </relation>
+        <relation>
+            <type>Financial Centre</type>
+            <details>
+                <detail>Capital City</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/area/id/dfe7b370-4021-4d17-bcc9-05e61374d099" rel="src" />
+            </place>
+        </relation>
+        <relation>
+            <type>Financial Centre</type>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/374eb22f-06a8-46da-88a0-81dc8f9c7707" rel="src" />
+            </place>
+        </relation>
+    </relatedPlaces>
+    <relatedPresences>
+        <relation>
+            <type>Central Bank</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/913fdc58-359e-4295-ac57-b579b93918b3" rel="src" />
+            </presence>
+        </relation>
+        <relation>
+            <type>Regulator</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/913fdc58-359e-4295-ac57-b579b93918b3" rel="src" />
+            </presence>
+        </relation>
+    </relatedPresences>
+</country>

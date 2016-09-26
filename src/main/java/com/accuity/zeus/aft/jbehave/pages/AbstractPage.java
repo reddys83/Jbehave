@@ -48,6 +48,8 @@ public abstract class AbstractPage {
     protected final HeraApi heraApi;
 
     protected final RestClient restClient;
+
+    public DataPage dataPage;
     public String bigString="";
     protected By contentLocator = By.xpath("//body/div[@id='content']");
 
@@ -325,6 +327,17 @@ public abstract class AbstractPage {
         }
         return dropdownValuesList;
     }
+    
+    public void selectItemFromDropdownListByindex(By by, int i) {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Select dropdown = new Select(driver.findElement(by));
+        dropdown.selectByIndex(i);
+
+    }
 
     public List<String> getAlreadySelectedValuesInAllRowsForADropdown(By by) {
         ArrayList<String> selectedValueList = new ArrayList();
@@ -393,13 +406,4 @@ public abstract class AbstractPage {
 		return dateFormat.format(cal.getTime());
 	}	
     
-	public void selectItemFromDropdownListByindex(By by, int i) {
-		try {
-			Select dropdown = new Select(driver.findElement(by));
-			dropdown.selectByIndex(i);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }

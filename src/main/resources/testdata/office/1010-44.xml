@@ -1,4 +1,4 @@
-<office deleted="false" fid="1010-44" id="f9bad391-d68b-4a36-ba05-c561c5e80f33" resource="http://10.72.0.121:8080/heraapi/office/id/f9bad391-d68b-4a36-ba05-c561c5e80f33" source="zeus" tfpid="10383620-10354700" tfpuid="10600594">
+<office deleted="false" fid="1010-44" id="f9bad391-d68b-4a36-ba05-c561c5e80f33" resource="/office/id/f9bad391-d68b-4a36-ba05-c561c5e80f33" source="zeus" tfpid="10383620-10354700" tfpuid="10600594">
     <summary>
         <institution>
             <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/4a77cec3-529a-405b-bae9-b9b377fac255" rel="src"/>
