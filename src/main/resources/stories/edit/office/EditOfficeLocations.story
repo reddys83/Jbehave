@@ -690,7 +690,7 @@ Examples:
 |1038|FID|1038|1038-51|reuters|1|5 pm|afv|9 am|1 hr|
 |1038|FID|1038|1038-51|cable|1|5 pm|hsn|9 am|1 hr|
 
-Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Telex', 'Reuters', 'Cable', 'Website' 
+Scenario:User is updating an Office's Locations (Telecom)- For Type - 'Telex', 'Reuters' and 'Cable' 
 a) Verify that the error message "Enter up to 4 valid numbers" is displayed when the 'Rank' field is blank.
 b) Verify that the error message "Enter up to 100 valid characters" is displayed when the 'Value' field is blank.
 c) Verify that the error message "Enter up to 4 valid numbers" is displayed when alphabets are entered for 'Rank' field.

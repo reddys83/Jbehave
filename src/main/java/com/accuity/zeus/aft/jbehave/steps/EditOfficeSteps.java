@@ -1515,8 +1515,8 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().verifyOfficeLocationsTelecommFieldsInUI(Rank, TextBefore, Value, null, null, TextAfter, null);
 	}
 	
-	@When("the user deletes the existing office telecom locations values in fdb document")
-	public void deleteExistingTelecomLocationValuesInFDBDocument(@Named("officeFid") String officeFid) {
-		getEditOfficePage().deleteExistingTelecomLocationValuesInFDBDocument(officeFid);
+	@When("the user deletes the existing office $locationType locations values in fdb document")
+	public void deleteExistingTelecomLocationValuesInFDBDocument(@Named("officeFid") String officeFid, @Named("locationType") String locationType) {
+		getEditOfficePage().deleteExistingTelecomLocationValuesInFDBDocument(officeFid, locationType);
 	}
 }

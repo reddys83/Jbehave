@@ -36,7 +36,7 @@ import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractPage {
 
-    private final static long STANDARD_WAIT = 1000L;
+    private final static long STANDARD_WAIT = 3000L;
 
     private WebDriver driver;
 
@@ -416,20 +416,18 @@ public abstract class AbstractPage {
 	}
 	
 	public String getSelectedOptionInDropDownByindex(By by, int index) {
- 		String value = null;
-    	try {
-    		List<WebElement> elementList = getDriver().findElements(by);	
-    		if(elementList.size() >= index) {    			
-        	value = new Select(elementList.get(index-1)).getFirstSelectedOption().getText();
-    		}
-    		else {
-    			assertFalse("dropdown not found in row :"+ index, true);
-    		}
-    	}
-    	catch (Exception e) {
+		String value = null;
+		try {
+			List<WebElement> elementList = getDriver().findElements(by);
+			if (elementList.size() >= index) {
+				value = new Select(elementList.get(index - 1)).getFirstSelectedOption().getText();
+			} else {
+				assertFalse("dropdown not found in row :" + index, true);
+			}
+		} catch (Exception e) {
 			assertFalse("Element not found", true);
-		}  
-    	return value;
+		}
+		return value;
 	}
 
 }
