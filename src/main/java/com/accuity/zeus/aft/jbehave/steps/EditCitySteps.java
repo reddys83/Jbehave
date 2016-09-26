@@ -6,9 +6,10 @@ import java.util.Map;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.annotations.*;
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 
@@ -117,6 +118,7 @@ public class EditCitySteps extends AbstractSteps {
 
 	@When("the user clicks on the save button in city page")
 	public void clickOnSaveButton() {
+
 		getEditCityPage().clickOnSaveButton();
 	}
 
@@ -836,6 +838,7 @@ public class EditCitySteps extends AbstractSteps {
 
 	@When("the user deletes the existing related places rows")
 	public void deleteAllRelatedPlaces() {
+		setEditCityPage(getDataPage().createEditCityPage());
 		getEditCityPage().deleteAllRelatedPlaces();
 	}
 
@@ -1064,22 +1067,22 @@ public class EditCitySteps extends AbstractSteps {
 	public void verifyCityNameValueMaxLength(@Named("maxValue") String maxValue) {
 		getEditCityPage().verifyCityNameValueMaxlength(maxValue);
 	}
-	
+
 	@Then("the user should see the region type from 'CITY_ALTERNATIVE_REGION' look up")
 	public void verifyCityRegionTypeList() {
 		getEditCityPage().verifyCityRegionTypeList();
 	}
-	
+
 	@Then("the user should see the region value from <regionValueLookUp>")
 	public void verifyCityRegionValueList(@Named("regionValueLookUp") String regionValueLookUp) {
 		getEditCityPage().verifyCityRegionValueList(regionValueLookUp);
 	}
-	
+
 	@When("the user clicks on the add new region button in the city region page")
 	public void clickOnAddNewRegionButton() {
 		getEditCityPage().clickOnAddNewRegionButton();
 	}
-	
+
 	@When("the user enters region type as <newRegionType> in the region city page")
 	public void enterRegionType(@Named("newRegionType") String newRegionType) {
         try {
@@ -1089,52 +1092,52 @@ public class EditCitySteps extends AbstractSteps {
         }
 		getEditCityPage().enterRegionType(newRegionType);
 	}
-	
+
 	@When("the user enters region value as <newRegionValue> in the region city page")
 	public void enterRegionValue(@Named("newRegionValue") String newRegionValue) {
 		getEditCityPage().enterRegionValue(newRegionValue);
 	}
-	
+
 	@When("the user enters region type as <newRegionType2> in the region city page")
 	public void enterRegionType2(@Named("newRegionType2") String newRegionType) {
 		getEditCityPage().enterRegionType(newRegionType);
 	}
-	
+
 	@When("the user enters region value as <newRegionValue2> in the region city page")
 	public void enterRegionValue2(@Named("newRegionValue2") String newRegionValue) {
 		getEditCityPage().enterRegionValue(newRegionValue);
 	}
-	
+
 	@Then("the user should see the region type and value updated in $source document")
-	public void verifyCityRegionValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
-									  @Named("source") String source, @Named("newRegionType") String newRegionType, 
+	public void verifyCityRegionValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city,
+									  @Named("source") String source, @Named("newRegionType") String newRegionType,
 									  @Named("newRegionValue") String newRegionValue) {
 		Map<String, String> cityRegionValueMap = getEditCityPage().getCityRegionValueMapFromDB(country, area, city, source);
 		getEditCityPage().verifyRegionValueInDB(cityRegionValueMap, newRegionType, newRegionValue);
 	}
-	
+
 	@Then("the user should see the region type 2 and value 2 updated in $source document")
-	public void verifyCityRegion2ValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
-									  @Named("source") String source, @Named("newRegionType2") String newRegionType2, 
+	public void verifyCityRegion2ValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city,
+									  @Named("source") String source, @Named("newRegionType2") String newRegionType2,
 									  @Named("newRegionValue2") String newRegionValue2) {
 		Map<String, String> cityRegionValueMap = getEditCityPage().getCityRegionValueMapFromDB(country, area, city, source);
 		getEditCityPage().verifyRegionValueInDB(cityRegionValueMap, newRegionType2, newRegionValue2);
 	}
 
 	@Then("the user should see the city region type and value updated in UI")
-	public void verifyCityRegionTypeAndValue(@Named("newRegionType") String newRegionType, 
+	public void verifyCityRegionTypeAndValue(@Named("newRegionType") String newRegionType,
 										     @Named("newRegionValue") String newRegionValue) {
-		getEditCityPage().verifyRegionTypeAndValue(newRegionType, newRegionValue);		
+		getEditCityPage().verifyRegionTypeAndValue(newRegionType, newRegionValue);
 	}
-	
+
 	@Then("the user should see the city region type and value updated in edit city page")
-	public void verifyCityRegionTypeAndValueInEditMode(@Named("newRegionType") String newRegionType, 
+	public void verifyCityRegionTypeAndValueInEditMode(@Named("newRegionType") String newRegionType,
 										     @Named("newRegionValue") String newRegionValue) {
-		getEditCityPage().verifyCityRegionTypeAndValueInEditMode(newRegionType, newRegionValue);		
+		getEditCityPage().verifyCityRegionTypeAndValueInEditMode(newRegionType, newRegionValue);
 	}
-	
+
 	@Then("the user should see the city region type 2 and value 2 updated in UI")
-	public void verifyCityRegionType2AndValue2(@Named("newRegionType2") String newRegionType, 
+	public void verifyCityRegionType2AndValue2(@Named("newRegionType2") String newRegionType,
 										     @Named("newRegionValue2") String newRegionValue) {
 		getEditCityPage().verifyRegionTypeAndValue(newRegionType, newRegionValue);
 	}
@@ -1144,41 +1147,200 @@ public class EditCitySteps extends AbstractSteps {
 			@Named("newRegionValue") String newRegionValue) {
 		getEditCityPage().verifyRegionTypeNotPresentInUI(newRegionType, newRegionValue);
 	}
-	
+
 	@Then("the user should see city region value same as in $source document")
-	public void verifyCityRegionTypeAndValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+	public void verifyCityRegionTypeAndValueFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city,
 												 @Named("source") String source) {
 		Map<String, String> cityRegionValueMap = getEditCityPage().getCityRegionValueMapFromDB(country, area, city, source);
 		getEditCityPage().verifyRegionValueInTrusted(cityRegionValueMap);
 	}
-	
+
 	@Then("the user should see the blank region type and blank value is not updated in $source document")
-	public void verifyCityRegionForBlankValue(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
+	public void verifyCityRegionForBlankValue(@Named("country") String country, @Named("area") String area, @Named("city") String city,
 									  @Named("source") String source) {
 		Map<String, String> cityRegionValueMap = getEditCityPage().getCityRegionValueMapFromDB(country, area, city, source);
 		getEditCityPage().verifyCityRegionForBlankValue(cityRegionValueMap);
 	}
-	
+
 	@Then("the user should see the error message for the required region value field in the city region page")
 	public void verifyErrorMessageForRequiredCityRegionValue() {
 		getEditCityPage().verifyErrorMessageForRequiredCityRegionValue();
-	}	
-	
+	}
+
 	@When("the user clicks on the delete region row button in the region city page")
 	public void clickOnDeleteRegionRowButtonCity() {
 		getEditCityPage().clickOnDeleteRegionRowButtonCity();
 	}
-	
+
 	@Then("the user should see the region not present in $source document")
-	public void verifyCityRegionDeletedFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city, 
-											  @Named("source") String source, @Named("newRegionType") String newRegionType, 
+	public void verifyCityRegionDeletedFromDB(@Named("country") String country, @Named("area") String area, @Named("city") String city,
+											  @Named("source") String source, @Named("newRegionType") String newRegionType,
 											  @Named("newRegionValue") String newRegionValue) {
 		Map<String, String> cityRegionValueMap = getEditCityPage().getCityRegionValueMapFromDB(country, area, city, source);
 		getEditCityPage().verifyCityRegionDeletedFromDB(cityRegionValueMap, newRegionType);
 	}
-	
+
 	@When("the user deletes the existing city regions")
 	public void deleteAllCityRegions() {
 		getEditCityPage().deleteAllCityRegions();
+	}
+
+
+	@Then("the user should see all the list of countries in city page are in Alphabetical order")
+	public void verifyCountryListInPlacesFortheCountry() {
+		getEditCityPage().verifyCountryListInPlacesForCountry();
+	}
+
+	@Then("user should see the list of Area options in city page are in Alphabetical order")
+	@Alias("user should see the list of Area options are refreshed pointing to selected <country2>")
+	public void verifyAreaListInPlacesForCountry(@Named("country2") String country) {
+		getEditCityPage().verifyAreaListInPlacesForCountry(country);
+	}
+
+	@Then("user should see the list of Sub area options in city page are in Alphabetical order")
+	@Alias("user should see the list of Sub area options are refreshed pointing to selected <area2>")
+	public void verifysubAreaListInPlacesForCountry(@Named("area2") String area) throws InterruptedException {
+		//getEditCityPage().clickOnSubAreaDropdown();
+		getEditCityPage().verifySubAreaListInPlacesForCountry(area);
+	}
+
+	@When("user changes the <country2> in the country drop downfield of city basic page")
+	public void userChangesCountryDropdownValue(@Named("country2") String country) throws InterruptedException {
+		getEditCityPage().changeCountryValue(country);
+	}
+
+    @When("the user clicks on the country drop down in the city basic info")
+    public void clicksOnCountryDropdownInCityBasicInfo()
+    {
+        getEditCityPage().clicksOnCountryDropdownInCityBasicInfo();
+    }
+
+    @When("user clicks on the area drop down in the city basic info")
+    public void clicksOnAreaDropdownInCityBasicInfo() {
+        getEditCityPage().clicksOnAreaDropdownInCityBasicInfo();
+    }
+
+    @When("user clicks on the subarea drop down in the city basic info")
+    public void clicksOnSubAreaDropdownInCityBasicInfo() {
+        getEditCityPage().clicksOnSubareaDropdownInCityBasicInfo();
+    }
+
+	@Then("the user verify the Area dropdown is populating with 'Choose an Area'as a option")
+	public void userVerifyAreaDropdown() throws InterruptedException {
+		getEditCityPage().userVerifyTextInAreaDropdown();
+	}
+
+
+	@Then("the user verify the SubArea dropdown is populating with 'Choose a Subarea' as a option")
+	public void userVerifySubareaDropdown() throws InterruptedException {
+		getEditCityPage().userVerifyTextInSubAreaDropdown();
+	}
+
+	@Then("user changes the area <area2> in the area dropdown field in city basic page")
+	public void userChangesAreaDropdownvalue(@Named("area2") String area) throws InterruptedException {
+		getEditCityPage().changeAreaValue(area);
+	}
+
+	@Then("user selects $noArea in area dropdown field in city basic page")
+	public void userSelectNoAreaInAreaDrodown(@Named("noArea") String area) throws InterruptedException {
+		getEditCityPage().changeAreaValue(area);
+	}
+
+    /*
+	@When("the user clicks on the choose a subarea option of city basic page")
+	public void clicksOnSubAreaDropdown() throws InterruptedException {
+		getEditCityPage().clickOnSubAreaDropdown();
+	}
+	*/
+
+	@When("the user clears subarea options in city basic page")
+	public void clearSubAreaDropdown() throws InterruptedException {
+		getEditCityPage().clearSubAreaOptions();
+	}
+
+	@Then("user selects subarea <subarea1> in the subarea multiselect dropdown")
+	public void userSelectsSubarea1(@Named("subarea1") String subarea) throws InterruptedException {
+		getEditCityPage().userSelectsSubarea(subarea);
+	}
+
+	@Then("user selects subarea <subarea2> in the subarea multiselect dropdown")
+	public void userSelectsSubarea2(@Named("subarea2") String subarea) throws InterruptedException {
+		getEditCityPage().userSelectsSubarea(subarea);
+	}
+
+	@Then("the user checks whether this subarea <subarea1> are not reselectable")
+	public void verifySubAreaIsNotReselectable(@Named("subarea1") String subarea) {
+		getEditCityPage().verifySubAreaIsNotReselectable(subarea);
+	}
+
+    @Then("the user checks whether this subarea <subarea2> are not reselectable")
+    public void verifySubAreaIsNotReselctable(@Named("subarea2") String subarea) {
+        getEditCityPage().verifySubAreaIsNotReselectable(subarea);
+    }
+
+	@Then("verify $source document whether the city is updated with newly added SubArea <subarea1>")
+	public void verifyZeusDBIsUpdatedWithNewValue(@Named("source") String source, @Named("city") String city,
+			@Named("country2") String country2, @Named("area2") String area2, @Named("subarea1") String subarea) {
+		getEditCityPage().verifySubAreaValue(country2, area2, city, "subArea", source, subarea);
+	}
+
+	@Then("verify UI whether city is updated with newly added SubArea <subarea1>")
+	public void verifyCityIsUpdatedWithSubAreaInUI(@Named("subarea1") String subarea) {
+		getEditCityPage().verifySubAreaIsUpdatedInUI(subarea);
+	}
+
+	@Then("the user checks whether the header dropdown updates with <country2>, <area2>, <city>")
+	public void checksHeaderDropdownValues(@Named("country2") String country, @Named("area2") String area,
+			@Named("city") String city) throws InterruptedException {
+		getEditCityPage().checksHeaderDropdownValues(country, area, city);
+	}
+
+	@Then("the user checks whether the Address bar url is updated  with <country2>, <area2>")
+	public void checksAddressBar(@Named("country2") String country, @Named("area2") String area) throws InterruptedException {
+		getEditCityPage().checksAddressBarIsHavingNewCountryAreaIds(country, area);
+	}
+
+	@Then("user verify the city dropdown does not have city <city> value mapped to old country and area")
+	public void verfyCityDropdown(@Named("city") String city) throws InterruptedException {
+		getEditCityPage().verfyCityDropdown(city);
+	}
+
+	@Then("verify $source document whether <city> is mapped to newly added <country2> and <area2>")
+	public void verifyZeusDocument(@Named("source") String source, @Named("city") String city,
+			@Named("country2") String country2, @Named("area") String area, @Named("area2") String area2)
+			throws InterruptedException {
+		getEditCityPage().verifyCityInfoFromZeusDB(country2, area2, city, "area", source, area2);
+	}
+
+	@Then("verify $source document whether the city is not updated with newly added area and subArea")
+	public void verifyZeusDBIsNull(@Named("source") String source, @Named("city") String city,
+			@Named("country2") String country2, @Named("area2") String area2)
+			throws InterruptedException {
+		getEditCityPage().verifyNodeValueIsEmpty(country2, area2, city, "area", source);
+		getEditCityPage().verifyNodeValueIsEmpty(country2, area2, city, "subArea", source);
+	}
+
+	@Then("verify $source document whether the city is not updated with newly SubArea")
+	public void verifySubAreaIsNull(@Named("source") String source, @Named("city") String city,
+			@Named("country2") String country2, @Named("area2") String area2)
+			throws InterruptedException {
+		getEditCityPage().verifyNodeValueIsEmpty(country2, area2, city, "subArea", source);
+	}
+
+	@Then("user verify the city is not updated with newly added area(null)")
+	public void verifyAreaIsNullInUI(@Named("city") String city) throws InterruptedException {
+		getEditCityPage().verfyAreaIsNullInUI(city);
+	}
+
+	@Then("verify $source document whether <city> is mapped to <subarea1> and <subarea2>")
+	public void verifySubareasInZeusDocument(@Named("source") String source, @Named("city") String city,
+			@Named("country2") String country2, @Named("area") String area, @Named("area2") String area2,
+			@Named("subarea1") String subArea1, @Named("subarea2") String subArea2) throws InterruptedException {
+
+		List<String> citySubAreaList = new ArrayList<String>();
+		citySubAreaList.add(subArea2);
+		citySubAreaList.add(subArea1);
+		getEditCityPage().VerifySubAreaListInDB(country2, area2, city, "subArea", source, citySubAreaList);
+
 	}
 }

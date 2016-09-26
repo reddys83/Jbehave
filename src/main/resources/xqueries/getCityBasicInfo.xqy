@@ -39,12 +39,12 @@ return
     <type>{$cityNameType}</type>
     <value>{$cityNameValue}</value>
   </name>
-  
+
 (: Taking City Region List :)
 let $cityRegionList := for $x in ($city/alternativeRegions/region)
   let $cityRegionType := $x/type/text()
   let $cityRegionValue := ($x/value/text())
-return 
+return
   <region>
     <type>{$cityRegionType}</type>
     <value>{$cityRegionValue}</value>
@@ -83,7 +83,7 @@ let $cityCreditAgencyName := $x/agencyName/text()
 let $cityCreditType := $x/type/text()
 let $cityCreditValue := $x/value/text()  
 let $cityCreditDateApplied := local:getDateAsPerAccuracy($x/dateApplied)
-let $cityCreditDateConfirmed := local:getDateAsPerAccuracy($x/dateConfirmed) 
+let $cityCreditDateConfirmed := local:getDateAsPerAccuracy($x/dateConfirmed)
 return
       <creditRating>       
         <creditRatingAgencyName>{$cityCreditAgencyName}</creditRatingAgencyName>
@@ -94,7 +94,16 @@ return
      </creditRating> 
 
 
+(: to get Area , SubArea details:)
+
+let $withinLink := ($city/within/place/link/@href)
+let $area := /area[@source = "trusted"][@resource = $withinLink]/summary[type = "area" ]/names/name[1]/value/text()
+let $subAreaList := for $x in (/area[@source = "trusted"][@resource = $withinLink]/summary[type = "subarea" ])
+let $subArea := ($x/names/name[1]/value/text())
+return <subArea>{$subArea}</subArea>
+
 return
+
   <city>
   <names>{$cityNameList}</names>
   <status>{$cityStatus}</status>  
@@ -105,4 +114,7 @@ return
   <addressFlag>{$cityAddressFlag}</addressFlag>
   <creditRatings>{$cityCreditRating}</creditRatings>
   <regions>{$cityRegionList}</regions>
-  </city>   
+  <creditRatings>{$cityCreditRating}</creditRatings>
+  <area>{$area}</area>
+  <subAreas>{$subAreaList}</subAreas>
+  </city>

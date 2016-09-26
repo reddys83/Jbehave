@@ -1857,6 +1857,68 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}	
 
+	public void verifyDeletedRelatedPlaces(String type, String place, String details) {
+		try {
+			Thread.sleep(1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_place_entirevalue_xpath")).getText().isEmpty());
+	}
+
+	public void verifyAreaRelatedPlacesParametersInUI(String[] areaPlacesType, String[] areaPlacesPlace, String[] areaPlacesDetail) {
+
+		List<WebElement> relatedPlaceRows = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_place_entirevalues_xpath"));
+
+		for (int i = 0; i < relatedPlaceRows.size(); i++) {
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(areaPlacesType[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(areaPlacesPlace[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(areaPlacesDetail[i]));
+		}
+	}
+
+	public void verifyAreaRelatedValueFromZeusDB(String source, String area, List<String> areaPlacesType,
+												 List<String> areaPlace, List<String> areaPlacesDetail) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("name", area));
+			Thread.sleep(1000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get area related place info", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("relations").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("relation").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						switch (document.getElementsByTagName("relation").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "type":
+							assertEquals(document.getElementsByTagName("relation").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), areaPlacesType.get(i));
+							break;
+						case "detail":
+							assertEquals(document.getElementsByTagName("relation").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), areaPlacesDetail.get(i));
+							break;
+						case "value":
+							assertEquals(StringUtils.capitalize(document.getElementsByTagName("relation").item(0)
+											.getChildNodes().item(i).getChildNodes().item(childNode).getTextContent()), areaPlace.get(i));
+							break;
+						}
+					}
+				}
+			} else
+				assertTrue(source + "document is null", false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public String getPageUrl() {
 		return null;
