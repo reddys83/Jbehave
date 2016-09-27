@@ -1,0 +1,104 @@
+<country deleted="false" fid="ALA" id="6da739af-1f92-487d-b090-1f24fc7f92c9" resource="/country/id/6da739af-1f92-487d-b090-1f24fc7f92c9" source="zeus" stub="true">
+    <summary>
+        <iso2>AX</iso2>
+        <iso3>ALA</iso3>
+        <names>
+            <name>
+                <type>Country Name</type>
+                <value>Åland Islands</value>
+            </name>
+            <countrySortKey>ALAND ISLANDS</countrySortKey>
+        </names>
+        <status>active</status>
+        <dates>
+            <dateBegan accuracy="day">2012-03-01</dateBegan>
+        </dates>
+        <timeZones>
+            <summaries>
+                <summary>+2 hours</summary>
+            </summaries>
+        </timeZones>
+        <businessHours>
+            <summaries>
+                <summary>Monday to Friday 09.30-16.15</summary>
+            </summaries>
+            <day>
+                <name>Monday</name>
+                <hours>08:30-09:00</hours>
+            </day>
+        </businessHours>
+        <demographics>
+            <metric>
+                <name>Area</name>
+                <value>6788</value>
+                <unit>km2</unit>
+            </metric>
+            <metric>
+                <name>Population</name>
+                <value>27500</value>
+            </metric>
+        </demographics>
+        <politicalStructure>Dependency of Finland</politicalStructure>
+        <primaryExports />
+        <primaryImports />
+        <telephoneCode>358</telephoneCode>
+        <additionalInfos>
+            <additionalInfo />
+        </additionalInfos>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <languages>
+        <summaries>
+            <summary>Swedish</summary>
+        </summaries>
+    </languages>
+    <iban>
+        <registered>true</registered>
+        <rule>
+            <displayISO>FI</displayISO>
+            <routingCodeType />
+        </rule>
+        <rule>
+            <displayISO>FI</displayISO>
+            <routingCodeType />
+        </rule>
+    </iban>
+    <holidays>
+        <holiday>
+            <date accuracy="day">2015-01-01</date>
+            <name />
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-01-06</date>
+            <name />
+            <note />
+        </holiday>
+    </holidays>
+    <alternativeRegions>
+        <region>
+            <type>SEPA</type>
+            <value>true</value>
+        </region>
+        <region>
+            <type>Trading Region</type>
+            <value>Western Europe</value>
+        </region>
+    </alternativeRegions>
+    <relatedPlaces>
+        <relation>
+            <type>Financial Centre</type>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/aeb405e5-d7db-4d72-893d-6d3edf72fa9d" rel="src" />
+            </place>
+        </relation>
+    </relatedPlaces>
+    <currencies>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/fcc42dec-364b-46b1-9fe4-b463465b4193" rel="src" />
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">2002-01-01</startDate>
+        </currency>
+    </currencies>
+</country>

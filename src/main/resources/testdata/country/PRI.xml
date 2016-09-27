@@ -1,0 +1,88 @@
+<country deleted="false" fid="PRI" id="8cf145f3-a0a7-4165-922b-06e868299781" resource="/country/id/8cf145f3-a0a7-4165-922b-06e868299781" source="zeus" tfpid="PP">
+    <summary>
+        <iso2>PR</iso2>
+        <iso3>PRI</iso3>
+        <names>
+            <name>
+                <type>Country Name</type>
+                <value>Puerto Rico</value>
+            </name>
+            <countrySortKey>PUERTO RICO</countrySortKey>
+        </names>
+        <status>active</status>
+        <timeZones>
+            <summaries>
+                <summary>+1 hour</summary>
+            </summaries>
+        </timeZones>
+        <businessHours>
+            <summaries>
+                <summary>09.00-15.00</summary>
+            </summaries>
+        </businessHours>
+        <demographics>
+            <metric>
+                <name>Area</name>
+                <value>9104</value>
+                <unit>km2</unit>
+            </metric>
+            <metric>
+                <name>Population</name>
+                <value>3915798</value>
+            </metric>
+        </demographics>
+        <politicalStructure />
+        <primaryExports>test</primaryExports>
+        <primaryImports>Chemicals, machinery and equipment, clothing, food, fish, petroleum products</primaryImports>
+        <telephoneCode>1 787</telephoneCode>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <languages>
+        <summaries>
+            <summary>Spanish; English</summary>
+        </summaries>
+    </languages>
+    <currencies>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/1df34c3b-b52a-4f00-a539-95cd5e5d325e" rel="src" />
+            <name>US Dollar</name>
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">1980-01-01</startDate>
+        </currency>
+    </currencies>
+    <iban>
+        <registered>false</registered>
+    </iban>
+    <alternativeRegions>
+        <region>
+            <type>Trading Region</type>
+            <value>Caribbean</value>
+        </region>
+    </alternativeRegions>
+    <relatedPlaces>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>Capital City</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/d37b0094-1dc4-4969-b535-e775f847d29d" rel="src" />
+            </place>
+        </relation>
+        <relation>
+            <type>Financial Centre</type>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/496eb352-16ae-4070-8074-2e1cb1e148c5" rel="src" />
+            </place>
+        </relation>
+    </relatedPlaces>
+    <relatedPresences>
+        <relation>
+            <type>Regulator</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/efe190b7-f025-4c22-840d-481ce935d9d1" rel="src" />
+            </presence>
+        </relation>
+    </relatedPresences>
+</country>
