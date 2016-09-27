@@ -35,8 +35,8 @@ public class EditOfficePage extends AbstractPage {
     public String EditSortNameValue = "";
     public String EditOfficeSortName = "";
     public static String officeHistoryMaximumCharacter = null;   
-    public static int telecomAreaCodeCount = 0 ;
-    public static int telecomValueCount = 0 ; 
+    public int telecomAreaCodeCount = 0 ;
+    public int telecomValueCount = 0 ; 
 	
     
     public EditOfficePage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
