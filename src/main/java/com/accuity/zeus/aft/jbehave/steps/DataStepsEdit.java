@@ -17,6 +17,8 @@ public class DataStepsEdit extends AbstractSteps {
 	@Autowired
 	Database database;
 
+    private DataPage dataPage;
+
 	@When("the user clicks on the update link")
 	public void clickOnUpdateCurrencyLink() {
 		getDataPage().clickOnUpdateCurrencyLink();
@@ -44,6 +46,8 @@ public class DataStepsEdit extends AbstractSteps {
 
 	@Given("the user updates $endpoint with fid <entityFid>")
 	public void updateXmlDocument(@Named("endpoint") String endpoint, @Named("entityFid") String entityFid){
+        dataPage = new DataPage(webDriverState.getWebDriver(), getDataManagementWebappUrl(), database, apacheHttpClient, restClient, heraApi);
+        setDataPage(dataPage);
 		getDataPage().updateDocument(endpoint, entityFid);
 	}
 

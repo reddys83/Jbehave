@@ -1,0 +1,216 @@
+<country deleted="false" fid="AND" id="a9dc7df8-f647-4265-9b2c-b5bcafbd7a12" resource="/country/id/a9dc7df8-f647-4265-9b2c-b5bcafbd7a12" source="zeus" tfpid="AD">
+    <summary>
+        <iso2>AD</iso2>
+        <iso3>AND</iso3>
+        <names>
+            <name>
+                <type>Country Name</type>
+                <value>Andorra</value>
+            </name>
+            <countrySortKey>ANDORRA</countrySortKey>
+        </names>
+        <status>active</status>
+        <timeZones>
+            <summaries>
+                <summary>+1 hour</summary>
+            </summaries>
+        </timeZones>
+        <businessHours>
+            <summaries>
+                <summary>Monday to Friday 09.00-13.00, 15.00-17.00</summary>
+            </summaries>
+        </businessHours>
+        <identifiers>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>sdfaaf</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+        <demographics>
+            <metric>
+                <name>Area</name>
+                <value>190</value>
+                <unit>miles2</unit>
+            </metric>
+            <metric>
+                <name>Area</name>
+                <value>468</value>
+                <unit>km2</unit>
+            </metric>
+            <metric>
+                <name>Population</name>
+                <value>85015</value>
+            </metric>
+        </demographics>
+        <politicalStructure>Republic</politicalStructure>
+        <primaryExports>Tobacco products, furniture</primaryExports>
+        <primaryImports>Consumer goods, food, electricity</primaryImports>
+        <telephoneCode>376b</telephoneCode>
+        <additionalInfos>
+            <additionalInfo />
+        </additionalInfos>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <languages>
+        <summaries>
+            <summary>Catalan</summary>
+        </summaries>
+    </languages>
+    <currencies>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/fcc42dec-364b-46b1-9fe4-b463465b4193" rel="src" />
+            <name>Euro</name>
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">2002-01-01</startDate>
+        </currency>
+    </currencies>
+    <iban>
+        <registered>true</registered>
+        <rule>
+            <displayISO>AD</displayISO>
+            <routingCodeType />
+        </rule>
+        <rule>
+            <displayISO>AD</displayISO>
+            <routingCodeType />
+        </rule>
+    </iban>
+    <holidays>
+        <holiday>
+            <date accuracy="day">2015-01-01</date>
+            <name>New Year's Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-01-06</date>
+            <name>Twelfth Night</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-02-16</date>
+            <name>Carnival</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-04-03</date>
+            <name>Good Friday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-04-06</date>
+            <name>Easter Monday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-05-01</date>
+            <name>Labour Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-05-25</date>
+            <name>Whitmonday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-06-24</date>
+            <name>St. John Baptist</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-09-08</date>
+            <name>Our Lady of Meritxell/National Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-08</date>
+            <name>Immaculate Conception</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-24</date>
+            <name>Christmas Eve</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-25</date>
+            <name>Christmas Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-31</date>
+            <name>New Year's Eve</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-01</date>
+            <name>New Year's Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-06</date>
+            <name>Twelfth Night</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-02-08</date>
+            <name>Carnival</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-14</date>
+            <name>Constitution Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-25</date>
+            <name>Good Friday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-28</date>
+            <name>Easter Monday</name>
+            <note />
+        </holiday>
+    </holidays>
+    <creditRatings>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Sovereign Debt Rating</type>
+            <value>BBB</value>
+            <dateConfirmed accuracy="day">2002-01-02</dateConfirmed>
+        </rating>
+    </creditRatings>
+    <alternativeRegions>
+        <region>
+            <type>Trading Region</type>
+            <value>Western Europe</value>
+        </region>
+    </alternativeRegions>
+    <relatedPlaces>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>Administrative Capital</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/c4fad42d-889d-4e9f-8683-b622d66e8e4d" rel="src" />
+            </place>
+        </relation>
+    </relatedPlaces>
+    <relatedPresences>
+        <relation>
+            <type>Regulator</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/c6af159f-756e-4437-9e67-a467aae3a956" rel="src" />
+            </presence>
+        </relation>
+        <relation>
+            <type>National Association</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/cad0527c-3756-4114-8984-48bba7936ef1" rel="src" />
+            </presence>
+        </relation>
+    </relatedPresences>
+</country>

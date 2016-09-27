@@ -1,0 +1,27 @@
+<city deleted="false" fid="72758" id="04309ebc-ce9f-44de-8c5e-c3a27325d918" resource="/city/id/04309ebc-ce9f-44de-8c5e-c3a27325d918" source="zeus">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Addlestone</value>
+            </name>
+            <citySortKey>ADDLESTONE</citySortKey>
+        </names>
+        <status>active</status>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/52be49f6-c37c-4bed-baec-6b9accabf100" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/fc168f45-535c-4992-943f-81f0b00ffe60" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/7b10b466-f8d0-4712-a6e5-d67b066b3ea5" rel="src"/>
+
+        </place>
+    </within>
+</city>

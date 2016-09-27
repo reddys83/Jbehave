@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<country deleted="false" fid="NLD" id="9839e3ae-1a91-4951-9250-f0d517aaa61f" resource="/country/id/9839e3ae-1a91-4951-9250-f0d517aaa61f" source="zeus" stub="true">
+    <summary>
+        <iso2>NL</iso2>
+        <iso3>NLD</iso3>
+        <names>
+            <name>
+                <type>Country Name</type>
+                <value>Netherlands</value>
+            </name>
+            <countrySortKey>NETHERLANDS</countrySortKey>
+        </names>
+        <status>active</status>
+        <timeZones>
+            <summaries>
+                <summary>+1 hour</summary>
+            </summaries>
+        </timeZones>
+        <businessHours>
+            <summaries>
+                <summary>Monday to Friday 09.00-17.00 Closed Saturday and Sunday</summary>
+            </summaries>
+        </businessHours>
+        <demographics>
+            <metric>
+                <name>Area</name>
+                <value>41528</value>
+                <unit>km2</unit>
+            </metric>
+            <metric>
+                <name>Population</name>
+                <value>16404282</value>
+            </metric>
+        </demographics>
+        <politicalStructure>Constitutional monarchy</politicalStructure>
+        <primaryExports>Machinery and equipment, chemicals, fuels; foodstuffs</primaryExports>
+        <primaryImports>Machinery and transport equipment, chemicals, fuels; foodstuffs, clothing</primaryImports>
+        <telephoneCode>31</telephoneCode>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <languages>
+        <summaries>
+            <summary>Dutch</summary>
+        </summaries>
+    </languages>
+    <iban>
+        <registered>true</registered>
+        <rule>
+            <displayISO>NL</displayISO>
+            <routingCodeType>SWIFT BIC</routingCodeType>
+        </rule>
+    </iban>
+    <holidays>
+        <holiday>
+            <date accuracy="day">2015-01-01</date>
+            <name>New Year's Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-04-03</date>
+            <name>Good Friday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-04-06</date>
+            <name>Easter Monday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-04-27</date>
+            <name>King's Birthday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-05-05</date>
+            <name>Liberation Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-05-14</date>
+            <name>Ascension Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-05-25</date>
+            <name>Whitmonday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-25</date>
+            <name>Christmas Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-01</date>
+            <name>New Year's Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-25</date>
+            <name>Good Friday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-28</date>
+            <name>Easter Monday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-04-27</date>
+            <name>King's Birthday</name>
+            <note />
+        </holiday>
+    </holidays>
+    <alternativeRegions>
+        <region>
+            <type>SEPA</type>
+            <value>false</value>
+        </region>
+        <region>
+            <type>Trading Region</type>
+            <value>Western Europe</value>
+        </region>
+    </alternativeRegions>
+    <currencies>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/fcc42dec-364b-46b1-9fe4-b463465b4193" rel="src" />
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">2002-01-01</startDate>
+        </currency>
+    </currencies>
+</country>
