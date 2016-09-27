@@ -1498,9 +1498,14 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().verifySelectedPrimaryFlagNotEditable();
 	}
 	
-	@Then("the user verifies that false is selected for other office locations primary flag")
-	public void verifyFalseSelectedInFirstPrimaryFlag() {
-		getEditOfficePage().verifyFalseSelectedInFirstPrimaryFlag();
+	@Then("the user verifies that true is selected for selected primary flag after saving")
+	public void verifyTruePrimaryFlagIsSelectedAfterSave() {
+		getEditOfficePage().verifyTruePrimaryFlagIsSelectedAfterSave();
+	}
+	
+	@Then("the user verifies that false is selected for other office locations primary flag after saving")
+	public void verifyFalsePrimaryFlagIsSelectedAfterSave() {
+		getEditOfficePage().verifyFalsePrimaryFlagIsSelectedAfterSave();
 	}
 	
 	@Then("the user verifies the primary flag values in $source document")

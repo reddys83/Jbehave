@@ -37,6 +37,7 @@ public class EditOfficePage extends AbstractPage {
     public static String officeHistoryMaximumCharacter = null;
     public static String primaryFlagValue = null;
     public static String addressLine1SecondPrimaryFlag = null;
+    public static String addressLine1FirstPrimaryFlag = null;
 
 
     public EditOfficePage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
@@ -2097,17 +2098,15 @@ public class EditOfficePage extends AbstractPage {
 	}
 	
 	public void primaryFlagValueFromTrustedDB(String source, String officeFid) {
-		if (getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_row")).size() > 1) {
+		if (getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_row_edit_mode")).size() > 1) {
 			List<WebElement> primaryFlagList = getDriver()
-					.findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_primary_flag"));
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_primary_flag_field"));
 
 			for (int index = 0; index < primaryFlagList.size(); index++) {
 				if (primaryFlagList.get(index).findElements(By.tagName("input")).get(0).isSelected()) {
-					primaryFlagValue = primaryFlagList.get(index).findElements(By.tagName("input")).get(0)
-							.getAttribute("value");
+					primaryFlagValue = primaryFlagList.get(index).findElements(By.tagName("input")).get(0).getAttribute("value");
 				} else {
-					primaryFlagValue = primaryFlagList.get(index).findElements(By.tagName("input")).get(1)
-							.getAttribute("value");
+					primaryFlagValue = primaryFlagList.get(index).findElements(By.tagName("input")).get(1).getAttribute("value");
 				}
 				verifyOfficePrimaryFlagValuesFromTrustedDB(source, officeFid, primaryFlagValue, "primary", index);
 			}
@@ -2142,11 +2141,27 @@ public class EditOfficePage extends AbstractPage {
 			assertFalse(secondPrimaryFlagList.get(index).isEnabled());
 		}
 		addressLine1SecondPrimaryFlag = getAttributeValue(OfficeIdentifiers.getObjectIdentifier("office_first_location_addressline1_edit_mode"));
+		addressLine1FirstPrimaryFlag = getAttributeValue(OfficeIdentifiers.getObjectIdentifier("office_second_location_addressline1_edit_mode"));
 	}
 	
-	public void verifyFalseSelectedInFirstPrimaryFlag() {
-		assertEquals("false", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_second_location_primary_flag_view_mode")).getText());
-		assertEquals(addressLine1SecondPrimaryFlag, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_second_location_addressline1_view_mode")).getText());
+	public void verifyTruePrimaryFlagIsSelectedAfterSave() {
+		try {
+			Thread.sleep(3000L);
+			assertEquals("true", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_first_location_primary_flag_view_mode")).getText());
+			assertEquals(addressLine1FirstPrimaryFlag,	getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_first_location_addressline1_view_mode")).getText());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyFalsePrimaryFlagIsSelectedAfterSave() {
+		try {
+			Thread.sleep(3000L);
+			assertEquals("false", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_second_location_primary_flag_view_mode")).getText());
+			assertEquals(addressLine1SecondPrimaryFlag,	getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_second_location_addressline1_view_mode")).getText());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void primaryFlagValueFromZeusDB(String source, String officeFid) {

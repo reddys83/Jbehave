@@ -896,7 +896,7 @@ Scenario: User is viewing and updating Office's Locations (Primary Flag) -
 a)User verifies whether current value of Primary Flag is same as in trusted document.
 b)User selects a location where Primary Flag is false and sets to true and verifies that primary flag options are disabled.
 c)User verifies that the other Primary Flag is changed to false.
-Meta:@qatest
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -912,7 +912,8 @@ When the user selects true for office locations second primary flag
 Then the user verifies that the selected true primary flag is not editable
 When the user clicks on the save button
 And the user clicks on the confirm button
-Then the user verifies that false is selected for other office locations primary flag
+Then the user verifies that true is selected for selected primary flag after saving
+Then the user verifies that false is selected for other office locations primary flag after saving
 Then the user verifies the primary flag values in zeus document
 And the user reverts the changes to the document
 
