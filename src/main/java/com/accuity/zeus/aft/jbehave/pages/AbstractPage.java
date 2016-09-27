@@ -368,7 +368,12 @@ public abstract class AbstractPage {
             e.printStackTrace();
         }
         Document document =  XmlDocumentLoader.getDocument(filePath);
-        return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("id").getNodeValue();
+        String resourceURL=document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("resource").getNodeValue();
+        if(resourceURL.contains("http")){
+            String[] splitURL=resourceURL.split(heraApi.getPath());
+            resourceURL=splitURL[1];
+        }
+        return resourceURL;
     }
     
     public void selectDropDownValueFromRowNumber(By by, String value, int rowNumber) {

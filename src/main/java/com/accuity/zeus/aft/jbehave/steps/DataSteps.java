@@ -198,6 +198,15 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
+
+    @Then("the user should see the routing code page header with <legalentity>, <headOfficeAddress>, <routingCodeFid> and <routingCodeTfpid>")
+    public void verifyRoutingCodePageHeader(@Named("legalentity") String entity,
+                                   @Named("headOfficeAddress") String headOfficeAddress,
+                                   @Named("routingCodeFid") String fid,
+                                   @Named("routingCodeTfpid") String tfpid) {
+        getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
+    }
+
     @Then("the user should see the $label of a city as $value")
     @Aliases(values = {"the user should see the $label of an office as $value",
             "the user should see the $label of an area as $value",

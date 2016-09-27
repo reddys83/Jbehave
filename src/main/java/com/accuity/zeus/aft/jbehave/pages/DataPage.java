@@ -1346,6 +1346,15 @@ public class DataPage extends AbstractPage {
 
         assertTrue(response == 202);
     }
+
+    public void updateRoutingCodeDocument(String endpoint, String routingCode, String routingCodeType){
+        XmlDocument xmlDocument = getTestDataXml(endpoint, routingCode+"-"+routingCodeType);
+
+        String endpointWithID = getResourceURL(endpoint, routingCode+"-"+routingCodeType);
+        int response = restClient.putDocumentByID(endpointWithID, heraApi, xmlDocument.toString());
+
+        assertTrue(response == 202);
+    }
     
     public void verifyElementNotExistInUI(By by) {
 		try {			
