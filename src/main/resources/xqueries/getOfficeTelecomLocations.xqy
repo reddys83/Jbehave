@@ -29,14 +29,14 @@ let $tAnswerback := $y/answerback/text()
 let $tDisplay := $y/value/text()
 
 return <telecom>
-    <tType>{$tType}</tType>
-    <tRank>{$tRank}</tRank>
-    <tTextBefore>{$tTextBefore}</tTextBefore>
-    <tValue>{$tValue}</tValue>
-    <tRangeLimit>{$tRangeLimit}</tRangeLimit>
-    <tExt>{$tExt}</tExt>
-    <tTextAfter>{$tTextAfter}</tTextAfter>
-    <tAnswerback>{$tAnswerback}</tAnswerback>
+    <type>{$tType}</type>
+    <rank>{$tRank}</rank>
+    <textBefore>{$tTextBefore}</textBefore>
+    <value>{$tValue}</value>
+    <phoneNumberRangeLimit>{$tRangeLimit}</phoneNumberRangeLimit>
+    <phoneExtension>{$tExt}</phoneExtension>
+    <textAfter>{$tTextAfter}</textAfter>
+    <answerBack>{$tAnswerback}</answerBack>
 </telecom>
 return <location>{$officeTelecoms}</location>
 
