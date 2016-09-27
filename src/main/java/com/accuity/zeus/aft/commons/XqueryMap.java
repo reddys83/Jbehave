@@ -138,7 +138,7 @@ public class XqueryMap {
 		queryMap.put("get area places detail lookup","getAreaRelatedPlacesDetailsFromLookup.xqy");
 		queryMap.put("get area related place info","getAreaRelatedPlaces.xqy");
 		queryMap.put("get office telecom locations", "getOfficeTelecomLocations.xqy");
-		queryMap.put("delete office locations values from fdb document", "deleteOfficeLocationsValuesFromFdbDocument.xqy");
+		queryMap.put("delete office locations values", "deleteOfficeLocationsValues.xqy");
    }
 
     public String getXquery(String key){

@@ -929,8 +929,9 @@ public class EditOfficePage extends AbstractPage {
     }
 
 
-    public void verifyMaxlengthOfficeAddressText(String maxSize, String rowIdentifier) {
-        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);}
+	public void verifyMaxlengthOfficeLocationsTextFields(String maxSize, String rowIdentifier) {
+		assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"),maxSize);
+	}
 
 
     public void verifyOfficeAddressLinesAddressesInUI(String Type,String AddressLine1, String AddressLine2, String AddressLine3, String AddressLine4, String Country, String Area, String Subarea, String City, String PostalCode, String PostalCodeSuffix,String PostalCodePosition, String Info) {
@@ -995,22 +996,22 @@ public class EditOfficePage extends AbstractPage {
 
     }
 
-	public void verifyOfficeLocationsTelecommFieldsInUI(String Rank, String TextBefore, String Value, String RangeLimit,
-			String Ext, String TextAfter, String AnswerBack) {
+	public void verifyOfficeLocationsTelecommFieldsInUI(String rank, String textBefore, String value, String rangeLimit,
+			String ext, String textAfter, String answerBack) {
 		assertFalse("No rows exist in office locations telecom section",
 				getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_telecom_row_view_mode")).size() == 0);
 		List<WebElement> telecomColumn = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_telecom_row_view_mode")).get(0)
 				.findElements(By.tagName("td"));
-		assertEquals("Rank: ", telecomColumn.get(1).getText(), Rank);
-		assertEquals("Text Before: ", telecomColumn.get(2).getText(), TextBefore);
-		assertEquals("Value: ", telecomColumn.get(3).getText(), Value);
-		if (RangeLimit != null && Ext != null) {
-			assertEquals("Range Limit: ", telecomColumn.get(4).getText(), RangeLimit);
-			assertEquals("Ext: ", telecomColumn.get(5).getText(), Ext);
+		assertEquals("Rank: ", telecomColumn.get(1).getText(), rank);
+		assertEquals("Text Before: ", telecomColumn.get(2).getText(), textBefore);
+		assertEquals("Value: ", telecomColumn.get(3).getText(), value);
+		if (rangeLimit != null && ext != null) {
+			assertEquals("Range Limit: ", telecomColumn.get(4).getText(), rangeLimit);
+			assertEquals("Ext: ", telecomColumn.get(5).getText(), ext);
 		}
-		assertEquals("Text After: ", telecomColumn.get(6).getText(), TextAfter);
-		if (AnswerBack != null) {
-			assertEquals("Answer Back: ", telecomColumn.get(7).getText(), AnswerBack);
+		assertEquals("Text After: ", telecomColumn.get(6).getText(), textAfter);
+		if (answerBack != null) {
+			assertEquals("Answer Back: ", telecomColumn.get(7).getText(), answerBack);
 		}
 	}
 
@@ -1018,7 +1019,7 @@ public class EditOfficePage extends AbstractPage {
 			String AreaCode, String Number, String RangeLimit, String Ext, String TextAfter, String AnswerBack,
 			String Value, String officeFid, String source) {
 		try {
-			Thread.sleep(2000L);
+			Thread.sleep(1000L);
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("fid", officeFid));
 			nvPairs.add(new BasicNameValuePair("source", source));
@@ -1026,20 +1027,20 @@ public class EditOfficePage extends AbstractPage {
 					"get office telecom locations", nvPairs);
 
 			if (document != null) {
-				assertEquals(Rank, getNodeValuesByTagName(document, "tRank").get(0));
-				assertEquals(TextBefore, getNodeValuesByTagName(document, "tTextBefore").get(0));
-				assertEquals(TextAfter, getNodeValuesByTagName(document, "tTextAfter").get(0));
+				assertEquals(Rank, getNodeValuesByTagName(document, "rank").get(0));
+				assertEquals(TextBefore, getNodeValuesByTagName(document, "textBefore").get(0));
+				assertEquals(TextAfter, getNodeValuesByTagName(document, "textAfter").get(0));
 				if (RangeLimit != null && Ext != null) {
-					assertEquals(RangeLimit, getNodeValuesByTagName(document, "tRangeLimit").get(0));
-					assertEquals(Ext, getNodeValuesByTagName(document, "tExt").get(0));
+					assertEquals(RangeLimit, getNodeValuesByTagName(document, "phoneNumberRangeLimit").get(0));
+					assertEquals(Ext, getNodeValuesByTagName(document, "phoneExtension").get(0));
 				}
 				if (AnswerBack != null)
-					assertEquals(AnswerBack, getNodeValuesByTagName(document, "tAnswerback").get(0));
+					assertEquals(AnswerBack, getNodeValuesByTagName(document, "answerBack").get(0));
 				if (CountryCode != null && AreaCode != null && Number != null) {
 					String newValue = CountryCode + "-" + AreaCode + "-" + Number;
-					assertEquals(newValue, getNodeValuesByTagName(document, "tValue").get(0));
+					assertEquals(newValue, getNodeValuesByTagName(document, "value").get(0));
 				} else {
-					assertEquals(Value, getNodeValuesByTagName(document, "tValue").get(0));
+					assertEquals(Value, getNodeValuesByTagName(document, "value").get(0));
 				}
 			}
 		} catch (InterruptedException e) {
@@ -1984,44 +1985,44 @@ public class EditOfficePage extends AbstractPage {
 		assertEquals("", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_services_entire_xpath")).getText());
 	}
 
-	public void deleteExistingTelecomLocationValuesInFDBDocument(String officeFid, String location) {
+	public void deleteExistingLocationValues(String officeFid, String location, String documentType) {
 		List<NameValuePair> nvPairs = new ArrayList<>();
 		nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
 		nvPairs.add(new BasicNameValuePair("location", location));
-		apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "delete office locations values from fdb document", nvPairs);
+		nvPairs.add(new BasicNameValuePair("documentType", documentType));
+		apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "delete office locations values", nvPairs);
 	}
 	
 	public void verifyOfficeTelecomValuesFromTrustedDB(String officeFid, String source) {
-    	try{
+		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("fid", officeFid));
 			nvPairs.add(new BasicNameValuePair("source", source));
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get office telecom locations", nvPairs);
     		List<WebElement> telecomRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_telecom_rows_edit_mode"));    		
-    		Thread.sleep(2000L);
-        	for(int index = 1; index < telecomRows.size(); index++)
-        	{       	
-        		String telecomType = getTelecomFieldValue("type", index);
-        		assertEquals(telecomType, getNodeValuesByTagName(document, "tType").get(index-1));  
-        		if(telecomType.equals("cable") || telecomType.equals("reuters") || telecomType.equals("telex")) {
-        			if(!getTelecomFieldValue("answerBack", index).isEmpty()) {
-        				assertEquals(getTelecomFieldValue("answerBack", index), getNodeValuesByTagName(document, "tAnswerback").get(index-1));
-        			}
-        		}
-        		if(!(telecomType.equals("email") || telecomType.equals("website")) ) {
-        			if(!getTelecomFieldValue("rangeLimit", index).isEmpty()) {
-        				assertEquals(getTelecomFieldValue("rangeLimit", index), getNodeValuesByTagName(document, "tRangeLimit").get(index-1));	
-        			}
-        			if(!getTelecomFieldValue("ext", index).isEmpty()) {
-        				assertEquals(getTelecomFieldValue("ext", index), getNodeValuesByTagName(document, "tExt").get(index-1));	
-        			}          		
-        		}        				      		        		
-        		assertEquals(getTelecomFieldValue("rank", index), getNodeValuesByTagName(document, "tRank").get(index-1));
-        		assertEquals(getTelecomFieldValue("textBefore", index), getNodeValuesByTagName(document, "tTextBefore").get(index-1));
-        		assertEquals(getTelecomFieldValue("value", index), getNodeValuesByTagName(document, "tValue").get(index-1));        		
-        		assertEquals(getTelecomFieldValue("textAfter", index), getNodeValuesByTagName(document, "tTextAfter").get(index-1));
-        	}    		
+    		Thread.sleep(1000L);
+			for (int index = 1; index < telecomRows.size(); index++) {
+				String telecomType = getTelecomFieldValue("type", index);
+				assertEquals(telecomType, getNodeValuesByTagName(document, "type").get(index - 1));
+				if (telecomType.equals("cable") || telecomType.equals("reuters") || telecomType.equals("telex")) {
+					if (!getTelecomFieldValue("answerBack", index).isEmpty()) {
+						assertEquals(getTelecomFieldValue("answerBack", index),	getNodeValuesByTagName(document, "answerBack").get(index - 1));
+					}
+				}
+				if (!(telecomType.equals("email") || telecomType.equals("website"))) {
+					if (!getTelecomFieldValue("rangeLimit", index).isEmpty()) {
+						assertEquals(getTelecomFieldValue("rangeLimit", index),	getNodeValuesByTagName(document, "phoneNumberRangeLimit").get(index - 1));
+					}
+					if (!getTelecomFieldValue("ext", index).isEmpty()) {
+						assertEquals(getTelecomFieldValue("ext", index), getNodeValuesByTagName(document, "phoneExtension").get(index - 1));
+					}
+				}
+				assertEquals(getTelecomFieldValue("rank", index), getNodeValuesByTagName(document, "rank").get(index - 1));
+				assertEquals(getTelecomFieldValue("textBefore", index),	getNodeValuesByTagName(document, "textBefore").get(index - 1));
+				assertEquals(getTelecomFieldValue("value", index), getNodeValuesByTagName(document, "value").get(index - 1));
+				assertEquals(getTelecomFieldValue("textAfter", index), getNodeValuesByTagName(document, "textAfter").get(index - 1));
+			}    		
     	}
     	catch(Exception e) {
     		e.printStackTrace();		
@@ -2038,16 +2039,16 @@ public class EditOfficePage extends AbstractPage {
 				telecomFieldMap.put("type", OfficeIdentifiers.getObjectIdentifier("office_telecom_type_dropdown_input"));
 				telecomFieldMap.put("rank", OfficeIdentifiers.getObjectIdentifier("office_telecoms_first_row_new_rank"));
 				telecomFieldMap.put("textBefore", OfficeIdentifiers.getObjectIdentifier("office_telecoms_first_row_new_textBefore"));
-				telecomFieldMap.put("countryCode", OfficeIdentifiers.getObjectIdentifier("office_telecoms_first_row_new_CountryCode"));
-				telecomFieldMap.put("areaCode", OfficeIdentifiers.getObjectIdentifier("office_telecoms_first_row_new_AreaCode"));
-				telecomFieldMap.put("number", OfficeIdentifiers.getObjectIdentifier("office_telecoms_first_row_new_Number"));
+				telecomFieldMap.put("countryCode", OfficeIdentifiers.getObjectIdentifier("office_telecoms_first_row_new_countryCode"));
+				telecomFieldMap.put("areaCode", OfficeIdentifiers.getObjectIdentifier("office_telecoms_first_row_new_areaCode"));
+				telecomFieldMap.put("number", OfficeIdentifiers.getObjectIdentifier("office_telecoms_first_row_new_number"));
 				telecomFieldMap.put("rangeLimit", OfficeIdentifiers.getObjectIdentifier("office_telecoms_first_row_new_rangeLimit"));
 				telecomFieldMap.put("ext", OfficeIdentifiers.getObjectIdentifier("office_telecoms_first_row_new_ext"));
 				telecomFieldMap.put("textAfter", OfficeIdentifiers.getObjectIdentifier("office_telecoms_first_row_new_textAfter"));		
 				telecomFieldMap.put("answerBack",OfficeIdentifiers.getObjectIdentifier( "office_telecoms_first_row_new_answerBack"));	
 				telecomFieldMap.put("value", OfficeIdentifiers.getObjectIdentifier("office_telecoms_first_row_new_value"));
-				Thread.sleep(2000L);
-				typeValue = getSelectedOptionInDropDownByindex(telecomFieldMap.get("type"), row);
+				Thread.sleep(1000L);
+				typeValue = getSelectedOptionInDropDownByIndex(telecomFieldMap.get("type"), row);
 				if (fieldName.equals("type")) {
 					value = typeValue;
 				} else if (typeValue.equals("telephone") || typeValue.equals("fax")) {

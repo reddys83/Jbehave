@@ -36,7 +36,7 @@ import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractPage {
 
-    private final static long STANDARD_WAIT = 3000L;
+    private final static long STANDARD_WAIT = 1000L;
 
     private WebDriver driver;
 
@@ -415,7 +415,7 @@ public abstract class AbstractPage {
     	return value;
 	}
 	
-	public String getSelectedOptionInDropDownByindex(By by, int index) {
+	public String getSelectedOptionInDropDownByIndex(By by, int index) {
 		String value = null;
 		try {
 			List<WebElement> elementList = getDriver().findElements(by);

@@ -67,9 +67,9 @@ public class OfficeIdentifiers {
         hmap.put("office_telecoms_first_row_new_telecoms_type_dropdown", By.xpath(".//*[@id='additionalLocationTelecomms-0']//select[@id='telecommType-0']"));
         hmap.put("office_telecoms_first_row_new_rank", By.xpath(".//*[@id='additionalLocationTelecomms-0']//input[@name='telecommRank']"));
         hmap.put("office_telecoms_first_row_new_textBefore", By.xpath(".//*[@id='additionalLocationTelecomms-0']//input[@name='telecommTextBefore']"));
-        hmap.put("office_telecoms_first_row_new_CountryCode", By.xpath(".//*[@id='additionalLocationTelecomms-0']//input[@name='telecommValueCountry']"));
-        hmap.put("office_telecoms_first_row_new_AreaCode", By.xpath(".//*[@id='additionalLocationTelecomms-0']//input[@name='telecommValueArea']"));
-        hmap.put("office_telecoms_first_row_new_Number", By.xpath(".//*[@id='additionalLocationTelecomms-0']//input[@name='telecommValueNumber']"));
+        hmap.put("office_telecoms_first_row_new_countryCode", By.xpath(".//*[@id='additionalLocationTelecomms-0']//input[@name='telecommValueCountry']"));
+        hmap.put("office_telecoms_first_row_new_areaCode", By.xpath(".//*[@id='additionalLocationTelecomms-0']//input[@name='telecommValueArea']"));
+        hmap.put("office_telecoms_first_row_new_number", By.xpath(".//*[@id='additionalLocationTelecomms-0']//input[@name='telecommValueNumber']"));
         hmap.put("office_telecoms_first_row_new_rangeLimit", By.xpath(".//*[@id='additionalLocationTelecomms-0']//input[@name='telecommRange']"));
         hmap.put("office_telecoms_first_row_new_ext", By.xpath(".//*[@id='additionalLocationTelecomms-0']//input[@name='telecommExt']"));
         hmap.put("office_telecoms_first_row_new_textAfter", By.xpath(".//*[@id='additionalLocationTelecomms-0']//input[@name='telecommTextAfter']"));
