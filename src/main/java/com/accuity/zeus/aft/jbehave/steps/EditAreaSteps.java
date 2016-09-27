@@ -1478,7 +1478,6 @@ public class EditAreaSteps extends AbstractSteps {
 		getEditAreaPage().verifyAreaRelatedPlacesParametersInUI(areaRelatedTypes, areaRelatedPlaces, areaRelatedDetail);
 	}
 	
-	
 	@When("the user clicks on the area entity link in the navigation bar")
 	public void clickOnAreaEntity() {
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_link_id"));
@@ -1506,8 +1505,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@Then("the user should see the values for details dropdown from lookup AREA_RELATED_PRESENCE_SUBTYPE")
 	public void verifyAreaEntityDetailsList() {
-		getDataPage().verifyLookUpValues(
-				AreaIdentifiers.getObjectIdentifier("area_entity_details_options_dropdown_xpath"),
+		getDataPage().verifyLookUpValues(AreaIdentifiers.getObjectIdentifier("area_entity_details_options_dropdown_xpath"),
 				"get area entity detail lookup", "detail");
 	}
 
@@ -1566,7 +1564,7 @@ public class EditAreaSteps extends AbstractSteps {
 	public void clicksOnGoButtonEntity() {
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_go_button_xpath"));
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -1576,7 +1574,6 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyRelatedEntityInAreaPage(@Named("entityType") String entityType, @Named("entity") String entity,
 			@Named("entityDetails") String entityDetails, @Named("entityType2") String entityType2,
 			@Named("entity2") String entity2, @Named("entityDetails2") String entityDetails2) {
-
 		String[] areaEntityTypes = { entityType, entityType2 };
 		String[] areaEntity = { entity, entity2 };
 		String[] areaEntityDetail = { entityDetails, entityDetails2 };
@@ -1649,7 +1646,6 @@ public class EditAreaSteps extends AbstractSteps {
 	@Then("the user should see <entityType> <entity> <entityDetails> updated in area related entity")
 	public void verifyRelatedEntityInAreaPage2(@Named("entityType") String entityType, @Named("entity") String entity,
 			@Named("entityDetails") String entityDetails) {
-
 		String[] areaEntityTypes = { entityType };
 		String[] areaEntity = { entity };
 		String[] areaEntityDetail = { entityDetails };

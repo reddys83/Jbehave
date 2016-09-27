@@ -11,19 +11,19 @@ let $relatedEntityDetails :=
       let $entityLink := $relation/presence/link/@href
       let $relatedEntity := if(contains($entityLink, "legalEntity"))
       then (
-      let $id := tokenize($entityLink, "/")[last()]
-      return /legalEntity[@source = $source and @id eq $id]/summary/names/name[type="LegalTitle"]/value/text()
-       ) else (
-      let $id := tokenize($entityLink, "/")[last()]
+      	let $id := tokenize($entityLink, "/")[last()]
+      	return /legalEntity[@source = $source and @id eq $id]/summary/names/name[type="LegalTitle"]/value/text()
+      ) else (
+      	let $id := tokenize($entityLink, "/")[last()]
                              return /office[@source = $source and @id eq $id]/summary/names/name[type="Legal Title"]/value/text()
-                          )
+      )
       let $entityType := ($relation/type/text())
       let $entityDetail := ($relation/details/detail/text())
       return
       <areaRelatedEntity>
-                    <areaRelatedEntityType>{$entityType}</areaRelatedEntityType>
-                    <areaRelatedEntity>{$relatedEntity}</areaRelatedEntity>
-                    <areaRelatedEntityDetail>{$entityDetail}</areaRelatedEntityDetail>
+      	<areaRelatedEntityType>{$entityType}</areaRelatedEntityType>
+        <areaRelatedEntity>{$relatedEntity}</areaRelatedEntity>
+        <areaRelatedEntityDetail>{$entityDetail}</areaRelatedEntityDetail>
       </areaRelatedEntity>
 return <relations>{$relatedEntityDetails}</relations>
                     

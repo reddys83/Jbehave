@@ -1946,8 +1946,8 @@ public class EditAreaPage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		List<WebElement> relatedPlaceRows = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalues_xpath"));
-
 		for (int i = 0; i < relatedPlaceRows.size(); i++) {
 			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(entityType[i]));
 			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(entity[i]));
@@ -2016,7 +2016,6 @@ public class EditAreaPage extends AbstractPage {
 		}
 		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalue_xpath"))
 						.getText().isEmpty());
-
 	}
 
 	public void verifyRelatedEntityNotInAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
@@ -2025,15 +2024,14 @@ public class EditAreaPage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		List<WebElement> relatedPlaceRows = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalues_xpath"));
 
 		for (int i = 0; i < relatedPlaceRows.size(); i++) {
-			assertFalse(
-					relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(entityType[i]));
+			assertFalse(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(entityType[i]));
 			assertFalse(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(entity[i]));
-			assertFalse(
-					relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(entityDetails[i]));
+			assertFalse(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(entityDetails[i]));
 		}
 	}
 	
@@ -2050,12 +2048,13 @@ public class EditAreaPage extends AbstractPage {
                    assertNull(document.getElementsByTagName("areaRelatedEntityType").item(0));
                    assertNull(document.getElementsByTagName("areaRelatedEntity").item(0));
                    assertNull(document.getElementsByTagName("areaRelatedEntityDetail").item(0));
-            } else
+            } else {
                   assert false : source + " document is null";
-     } catch (Exception e) {
+            }
+        }catch(Exception e) {
             e.printStackTrace();
-     }
-}
+        }
+	}
 	
 	public void verifyRelatedEntityInEditAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
 		try {
@@ -2063,8 +2062,8 @@ public class EditAreaPage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<WebElement> relatedPlaceRows = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalues_edit_xpath"));
 
+		List<WebElement> relatedPlaceRows = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalues_edit_xpath"));
 		for (int i = 0; i < relatedPlaceRows.size(); i++) {
 			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(entityType[i]));
 			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(entity[i]));
