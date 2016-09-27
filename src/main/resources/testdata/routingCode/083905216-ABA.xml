@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routingCode deleted="false" fid="C-1121793" id="647b8553-2b9c-4e38-a6d0-ad9209ac6cae"
+             resource="http://10.72.0.121:8080/heraapi/routingCode/id/647b8553-2b9c-4e38-a6d0-ad9209ac6cae"
+             source="trusted" tfpid="ABA-083905216">
+    <codeType>ABA</codeType>
+    <codeSubtype>Regular Routing Number</codeSubtype>
+    <codeSource>ABA</codeSource>
+    <codeTypeDescription>US Routing Number</codeTypeDescription>
+    <codeValue>083905216</codeValue>
+    <codeCheckDigit>codeCheckDigit123</codeCheckDigit>
+    <codeAlternateForms>
+        <codeAlternateForm type="fdb_legacy">083905216</codeAlternateForm>
+        <codeAlternateForm type="fractional">codeAlternateForm1</codeAlternateForm>
+    </codeAlternateForms>
+    <codeStatus>active</codeStatus>
+    <internalUseOnly useHeadOffice="false">false</internalUseOnly>
+    <accountEligible>true</accountEligible>
+    <dates>
+        <validFrom accuracy="day">2004-05-04</validFrom>
+        <validTo accuracy="day">2014-05-04</validTo>
+        <retireAt accuracy="day">2017-05-04</retireAt>
+        <confirmed accuracy="day">2016-05-04</confirmed>
+    </dates>
+    <paymentSystems>
+        <paymentSystem>
+            <product>
+                <link
+                        href="http://10.72.0.121:8080/heraapi/product/id/dc96bf44-64d2-402f-8b86-67f423d0e999"
+                        rel="src"/>
+            </product>
+            <useCodeForm>default</useCodeForm>
+            <codeSystemMembership>online</codeSystemMembership>
+            <codeSystemStatus>active</codeSystemStatus>
+            <attributes>
+                <attribute>
+                    <name>Settlement Only</name>
+                    <value>false</value>
+                </attribute>
+                <attribute>
+                    <name>Telegraph Name</name>
+                    <value>BK OF JAMESTOWN KY</value>
+                </attribute>
+                <attribute>
+                    <name>Origination Capability</name>
+                    <value>true</value>
+                </attribute>
+                <attribute>
+                    <name>Savings Accounts</name>
+                    <value>Credits</value>
+                </attribute>
+                <attribute>
+                    <name>Checking Accounts</name>
+                    <value>Credits and Debits</value>
+                </attribute>
+                <attribute>
+                    <name>Processor For Others</name>
+                    <value>false</value>
+                </attribute>
+                <attribute>
+                    <name>Receive Type</name>
+                    <value>Commercial and Government</value>
+                </attribute>
+                <attribute>
+                    <name>Official Checks Issued</name>
+                    <value>true</value>
+                </attribute>
+                <attribute>
+                    <name>Check RCP Status</name>
+                    <value>active</value>
+                </attribute>
+                <attribute>
+                    <name>Check PT Status</name>
+                    <value>inactive</value>
+                </attribute>
+                <attribute>
+                    <name>Check SDS Status</name>
+                    <value>inactive</value>
+                </attribute>
+                <attribute>
+                    <name>Check Alternative SDS Status</name>
+                    <value>inactive</value>
+                </attribute>
+                <attribute>
+                    <name>Routing Number Reference</name>
+                    <value>1</value>
+                </attribute>
+            </attributes>
+            <contactLocations>
+                <contactLocation>
+                    <type>Primary Wire Location</type>
+                    <presence>
+                        <link
+                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                rel="src"/>
+                    </presence>
+                </contactLocation>
+                <contactLocation>
+                    <type>Primary ACH Location</type>
+                    <presence>
+                        <link
+                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                rel="src"/>
+                    </presence>
+                </contactLocation>
+                <contactLocation>
+                    <type>ACH Contact TfpsysLocation</type>
+                    <presence>
+                        <link
+                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                rel="src"/>
+                    </presence>
+                </contactLocation>
+                <contactLocation>
+                    <type>Assigned Address</type>
+                    <presence>
+                        <link
+                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                rel="src"/>
+                    </presence>
+                </contactLocation>
+                <contactLocation>
+                    <type>Primary Check Location</type>
+                    <presence>
+                        <link
+                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                rel="src"/>
+                    </presence>
+                </contactLocation>
+            </contactLocations>
+        </paymentSystem>
+    </paymentSystems>
+    <relatedCodes>
+        <relation>
+            <routingCode>
+                <link
+                        href="/routingCode/id/863f2d9b-bff7-44c2-a208-ad0ede572e6f"
+                        rel="src"/>
+            </routingCode>
+            <context>Federal Reserve ACH</context>
+        </relation>
+    </relatedCodes>
+    <assignedInstitution>
+        <link
+                href="http://10.72.0.121:8080/heraapi/legalEntity/id/3f6ec391-3f19-4aa0-967e-ee04f329e8af"
+                rel="src"/>
+        <legalName>Bank of Jamestown</legalName>
+    </assignedInstitution>
+    <usageLocations>
+        <usageLocation primaryAssignee="true" rankAtLocation="1">
+            <presence>
+                <link
+                        href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                        rel="src"/>
+            </presence>
+        </usageLocation>
+        <usageLocation primaryAssignee="false" rankAtLocation="1">
+            <presence>
+                <link
+                        href="http://10.72.0.121:8080/heraapi/office/id/67cf9dfe-6a00-49a6-8cb5-4b52ee136567"
+                        rel="src"/>
+            </presence>
+        </usageLocation>
+        <usageLocation primaryAssignee="false" rankAtLocation="1">
+            <presence>
+                <link
+                        href="http://10.72.0.121:8080/heraapi/office/id/b158e312-391c-4af5-9f03-55d3fed40b0a"
+                        rel="src"/>
+            </presence>
+        </usageLocation>
+    </usageLocations>
+    <comment>test comments</comment>
+    <subscriptionNumber>12345</subscriptionNumber>
+</routingCode>
