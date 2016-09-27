@@ -1973,7 +1973,7 @@ public class EditAreaPage extends AbstractPage {
 					for (int childNode = 0; childNode < document.getElementsByTagName("areaEntity").item(0)
 							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
 
-						switch (document.getElementsByTagName("areaRelatedEntity").item(0).getChildNodes().item(0)
+						switch (document.getElementsByTagName("areaEntity").item(0).getChildNodes().item(0)
 								.getChildNodes().item(childNode).getNodeName()) {
 						case "areaRelatedEntityType":
 							assertEquals(document.getElementsByTagName("areaRelatedEntity").item(0).getChildNodes()
@@ -2072,25 +2072,27 @@ public class EditAreaPage extends AbstractPage {
 		}
 	}
 	
-	public void verifyAreaRelatedEntityFromTrustedDB(String country, String area,String type,String entity,String details, String source) {
-        List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("source", source));
-        nvPairs.add(new BasicNameValuePair("country", country));
-        nvPairs.add(new BasicNameValuePair("area", area));
-        try {
+	public void verifyAreaRelatedEntityFromTrustedDB(String country, String area, String type, String entity,
+			String details, String source) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("source", source));
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		try {
 			Thread.sleep(3000L);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-                     "get area entity details", nvPairs);
-        if (document != null) {      
-        	assertEquals(getNodeValuesByTagName(document,"areaRelatedEntityDetail").get(0),details);
-        	assertEquals(getNodeValuesByTagName(document,"areaRelatedEntityType").get(0),type);
-        	assertEquals(getNodeValuesByTagName(document,"areaRelatedEntity").get(0),entity);
-        } else
-              assert false : source + " document is null";
- } 
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get area entity details", nvPairs);
+		if (document != null) {
+			assertEquals(getNodeValuesByTagName(document, "areaRelatedEntityDetail").get(0), details);
+			assertEquals(getNodeValuesByTagName(document, "areaRelatedEntityType").get(0), type);
+			assertEquals(getNodeValuesByTagName(document, "areaRelatedEntity").get(0), entity);
+		} else {
+			assert false : source + " document is null";	
+		}
+	}
 	
 	@Override
 	public String getPageUrl() {

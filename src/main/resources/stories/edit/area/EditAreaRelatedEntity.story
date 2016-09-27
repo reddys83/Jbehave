@@ -86,7 +86,7 @@ And the user selects details value as <entityDetails> in the entity for area
 And the user clicks on the save button
 Then the user should see the below summary changes in confirmation modal
 |Summary|
-|Presences|
+|Related Presences|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the area page
 Then the user should see <entityType> <entity> <entityDetails> updated in area related entity
@@ -187,4 +187,3 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|entityDetails|entityType|fid|entity|ConfirmationSummary|
 |USA|Alabama|State Government|Government|1038|Bank of America National Association|Summary|
-

@@ -130,20 +130,20 @@ public class AreaIdentifiers {
 		hmap.put("area_places_place_edit_button_2_xpath",
 				By.xpath("//*[@id='additionalRelatedPlaces']/tr[2]/td[2]/button"));
 		hmap.put("area_place_entirevalues_xpath", By.xpath("//*[@id='areaPlaces']//tbody//tr"));
-		hmap.put("area_entity_type_dropdown_xpath", By.xpath("//*[@data-internal_id='presencesType']"));
+		hmap.put("area_entity_type_dropdown_xpath", By.xpath("//*[@data-internal_id='relatedPresenceType']"));
 		hmap.put("area_entity_type_options_dropdown_xpath",By.xpath(".//*[@data-row_id='presences']//select[@id='presencesType']/option"));
-		hmap.put("area_entity_details_select_dropdown_xpath", By.xpath("//*[@data-internal_id='presencesDetails']"));
-		hmap.put("area_entity_details_options_dropdown_xpath", By.xpath(".//*[@data-row_id='presences']//select[@data-internal_id='presencesDetails']/option"));
+		hmap.put("area_entity_details_select_dropdown_xpath", By.xpath("//*[@data-internal_id='relatedPresenceDetails']"));
+		hmap.put("area_entity_details_options_dropdown_xpath", By.xpath(".//*[@data-row_id='relatedPresences']//select[@data-internal_id='relatedPresenceDetails']/option"));
 		hmap.put("area_entity_link_id", By.xpath("//*[@id='areaPresences']"));
-		hmap.put("area_add_entity_button_edit_id", By.xpath("//button[@id='add-presences']"));
+		hmap.put("area_add_entity_button_edit_id", By.xpath("//button[@id='add-relatedPresences']"));
 		hmap.put("area_entity_type_error_message_xpath",By.xpath("//*[@id='additionalPresences']//*[@data-error_id='presencesTypeError']"));
 		hmap.put("area_entity_error_message_xpath",By.xpath("//*[@id='additionalPresences']//*[@data-error_id='presencesEntityError']"));
 		hmap.put("area_fid_error_message_xpath",By.xpath("//*[@id='additionalPresences']//*[@data-error_id='fidError']"));
 		hmap.put("area_entity_fid_dropdown_xpath", By.xpath("//*[@id='fid']"));
-		hmap.put("area_entity_go_button_xpath",	By.xpath("//*[@id='additionalPresences']//button[@class='go go-text-select']"));
-		hmap.put("area_entity_delete_button_xpath", By.xpath(".//*[@data-row_id='presences']//button[@class='delete-element']"));
+		hmap.put("area_entity_go_button_xpath",	By.xpath("//*[@id='additionalRelatedPresences']//button[@class='go']"));
+		hmap.put("area_entity_delete_button_xpath", By.xpath(".//*[@data-row_id='relatedPresences']//button[@class='delete-element']"));
 		hmap.put("area_related_entity_entirevalue_xpath", By.xpath("//*[@id='areaPresences']//tbody"));   
-		hmap.put("area_entity_edit_button_xpath", By.xpath(".//*[@id='additionalPresences']//button[@class='edit-row edit-presences']")); 
+		hmap.put("area_entity_edit_button_xpath", By.xpath(".//*[@id='additionalRelatedPresences']//button[@class='edit-row edit-presence']")); 
 		hmap.put("area_related_entity_entirevalues_xpath", By.xpath("//*[@id='areaPresences']//tbody//tr")); 
 		hmap.put("area_related_entity_entirevalues_edit_xpath", By.xpath("//*[@id='additionalPresences']//tbody//tr"));
 		
