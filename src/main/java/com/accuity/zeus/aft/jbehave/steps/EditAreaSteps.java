@@ -1553,7 +1553,7 @@ public class EditAreaSteps extends AbstractSteps {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		getDataPage().verifyWebElementText("ErrorMessage for Fid","Enter valid FID", 
+		getDataPage().verifyWebElementText("ErrorMessage for Fid","Enter a valid FID", 
 				AreaIdentifiers.getObjectIdentifier("area_fid_error_message_xpath"));
 	}
 
