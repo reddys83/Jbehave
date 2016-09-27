@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.jbehave.core.annotations.Alias;
-import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.CityIdentifiers;
 
 @Component
 public class EditAreaSteps extends AbstractSteps {
@@ -199,8 +199,8 @@ public class EditAreaSteps extends AbstractSteps {
 		getDataPage().enterAreaInTypeAhead(area);
 	}
 
-	@Then("the user should see the status value in area page is same as in $source document")
-	public void verifyCityBeganDateValueFromDB(@Named("country") String country, @Named("area") String area,
+	@Then("the user should see the area status value in area page is same as in $source document")
+	public void verifyAreaStatusValueFromDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source) {
 		getEditAreaPage().verifyAreaFromTrustedDB(country, area, "status", source);
 	}
@@ -305,36 +305,36 @@ public class EditAreaSteps extends AbstractSteps {
 	public void clickOnDeleteNameRowButton() {
 		getEditAreaPage().clickOnDeleteNameRowButton();
 	}
-
+	
 	@Then("the user should not see delete row button against <type>")
 	public void checkDeleteRowButtonNotExist(@Named("type") String nameType) {
 		getEditAreaPage().checkDeleteRowButtonNotExist(nameType);
 	}
-
+	
 	@When("the user enters second name type as <type> in the area basic info page")
 	public void enterSecondNameType(@Named("type") String newNameType) {
 		getEditAreaPage().enterNameType(newNameType, 1);
 	}
-
+	
 	@When("the user enters second name value as <value2> in the area basic info page")
 	public void enterSecondNameValue(@Named("value2") String newNameValue) {
 		getEditAreaPage().enterSecondNameValue(newNameValue);
 	}
-
+	
 	@Then("the user should see the $nameType <value> and <value2> in $source document")
 	public void verifyUpdatedMultipleAreaNameValuesInDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source, @Named("nameType") String nameType, @Named("value") String nameValue, @Named("value2") String nameValue2) {
 		getEditAreaPage().verifyUpdatedMultipleAreaNamesInDB(country, area, nameType, source, nameValue, nameValue2);
 	}
-
+	
 	@Then("the user should see the second area name type and value updated in the area basic info page")
-	public void veritySecondAreaNameTypeAndValue(@Named("type") String newNameType,
+	public void veritySecondAreaNameTypeAndValue(@Named("type") String newNameType, 
 			@Named("value2") String newNameValue) {
 		getEditAreaPage().verifyNameTypeAndValueInViewMode(newNameType, newNameValue);
 	}
-
+	
 	@Then("the user should not see the second area name type and value updated in the area basic info page")
-	public void veritySecondAreaNameTypeAndValueNotPresent(@Named("type") String newNameType,
+	public void veritySecondAreaNameTypeAndValueNotPresent(@Named("type") String newNameType, 
 			@Named("value2") String newNameValue) {
 		getEditAreaPage().verifyDuplicateNameTypeNotPresent(newNameType, newNameValue);
 	}
@@ -388,74 +388,74 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyAreaIdentifierTypesList() {
 		getEditAreaPage().verifyAreaIdentifierTypesList();
 	}
-
+	
 	@Then("the user should see the area identifier status from lookup STATUS")
 	public void verifyAreaIdentifierStatusList() {
 		getEditAreaPage().verifyAreaIdentifierStatusList();
 	}
-
+	
 	@When("the user deletes the existing area identifier rows")
 	public void deleteAllAreaIdentifiers() {
 		getEditAreaPage().deleteAllAreaIdentifierRows();
 	}
-
+	
 	@Then("the user should see the identifier values same as in $source document")
-	public void verifyAreaIdentifierValuesFromTrustedDB(@Named("country") String country, @Named("area") String area, @Named("source") String source) {
+	public void verifyAreaIdentifierValuesFromTrustedDB(@Named("country") String country, @Named("area") String area, @Named("source") String source) { 		 
 
 		getEditAreaPage().verifyAreaIdentifierValuesFromTrustedDB(country, area, source);
 	}
-
+	
 	@When("the user enters identifier type as <identifierType> in the basic info area page")
 	public void enterAreaIdentifierType(@Named("identifierType") String identifierType) {
 		getEditAreaPage().enterAreaIdentifierType(identifierType, 1);
 	}
-
+	
 	@When("the user enters identifier value as <identifierValue> in the basic info area page")
 	public void enterAreaIdentifierValue(@Named("identifierValue") String identifierValue) {
 		getEditAreaPage().enterAreaIdentifierValue(identifierValue, 1);
 	}
-
+	
 	@When("the user enters identifier status as <identifierStatus> in the basic info area page")
 	public void enterAreaIdentifierStatus(@Named("identifierStatus") String identifierStatus) {
 		getEditAreaPage().enterAreaIdentifierStatus(identifierStatus, 1);
 	}
-
+	
 	@When("the user enters identifier type as <identifierType2> in the basic info area page")
 	public void enterAreaIdentifierType2(@Named("identifierType2") String identifierType) {
 		getEditAreaPage().enterAreaIdentifierType(identifierType, 2);
 	}
-
+	
 	@When("the user enters identifier value as <identifierValue2> in the basic info area page")
 	public void enterAreaIdentifierValues2(@Named("identifierValue2") String identifierValue) {
 		getEditAreaPage().enterAreaIdentifierValue(identifierValue, 2);
 	}
-
+	
 	@When("the user enters identifier status as <identifierStatus2> in the basic info area page")
 	public void enterAreaIdentifierStatus2(@Named("identifierStatus2") String identifierStatus) {
 		getEditAreaPage().enterAreaIdentifierStatus(identifierStatus, 2);
 	}
-
+	
 	@Then("the user should see the area identifier values as in $source document")
 	public void verifyAreaIdentifierValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
 	        @Named("identifierType") String identifierType,
 			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus,
 			@Named("identifierType2") String identifierType2, @Named("identifierValue2") String identifierValue2,
 			@Named("identifierStatus2") String identifierStatus2, @Named("source") String source) {
-
+ 
 		List<String> identifierTypes = new ArrayList<>();
 		List<String> identifierValues = new ArrayList<>();
-		List<String> identifierStatusValues = new ArrayList<>();
-		identifierTypes.add(identifierType);
+		List<String> identifierStatusValues = new ArrayList<>();		
+		identifierTypes.add(identifierType);		
 		identifierValues.add(identifierValue);
-		identifierStatusValues.add(identifierStatus);
+		identifierStatusValues.add(identifierStatus);		
 		identifierTypes.add(identifierType2);
 		identifierValues.add(identifierValue2);
 		identifierStatusValues.add(identifierStatus2);
-
+		
 		getEditAreaPage().verifyAreaIdentifierValuesFromDB(country, area, identifierTypes, identifierValues,
 				identifierStatusValues, source);
 	}
-
+	
 	@When("the user clicks on the delete identifier row button in the basic info area page")
 	public void clickOnDeleteNewAreaIdentifierRowButton() {
 		getEditAreaPage().clickOnDeleteNewAreaIdentifierRowButton();
@@ -465,38 +465,38 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyDeleteConfirmationModal() {
 		getEditAreaPage().verifyDeleteConfirmationModal();
 	}
-
+	
 	@When("the user clicks on the Yes button to delete the row in basic info area page")
 	public void pressEnterButtonInDeleteConfirmationModalForArea() {
 		getEditAreaPage().pressEnterButtonInDeleteConfirmationModalForArea();
 	}
-
+	
 	@Then("the user should not see the newly added identifier row in the basic info area page")
 	@Alias("the user should not see the identifier row in the basic info area page")
 	public void verifyNewlyAddedAreaIdentifierRowIsNotDisplayed() throws Exception {
 		getEditAreaPage().verifyNewlyAddedAreaIdentifierRowIsNotDisplayed();
 	}
-
+	
 	@When("the user enters an incorrect identifier value as <identifierValueIncorrect> in the basic info area page")
 	public void enterIncorrectAreaIdentifierValue(@Named("identifierValueIncorrect") String incorrectIdentifierValue) {
 		getEditAreaPage().enterAreaIdentifierValue(incorrectIdentifierValue, 1);
 	}
-
+	
 	@Then("the user should see maximum length of area identifier value is limited to $maxLength")
 	public void verifyMaxLengthInAreaIdentifierValue(@Named("maxLength") String maxLength) {
 		getEditAreaPage().verifyMaxLengthInAreaIdentifierValue(maxLength);
 	}
-
+	
 	@Then("the user should see the error message $errMsg for identifier value field in the area basic info page")
 	public void verifyErrorMessageForRequiredAreaIdentifierValue(@Named("errMsg") String errMsg) {
 		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierValue(errMsg);
 	}
-
+	
 	@Then("the user should see the error message $errMsg for identifier status field in the area basic info page")
 	public void verifyErrorMessageForRequiredAreaIdentifierStatus(@Named("errMsg") String errMsg) {
 		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierStatus(errMsg);
 	}
-
+		
 	@Then("the user verifies that the row values for area identifier entered exists in $source document")
 	@Alias("the user verifies that no values are entered in $source document")
 	public void verifyAreaIdentifierRowValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
@@ -505,52 +505,52 @@ public class EditAreaSteps extends AbstractSteps {
 		List<String> identifierTypes = new ArrayList<>();
 		List<String> identifierValues = new ArrayList<>();
 		List<String> identifierStatusValues = new ArrayList<>();
-		identifierTypes.add(identifierType);
-		identifierValues.add(identifierValue);
+		identifierTypes.add(identifierType);		
+		identifierValues.add(identifierValue);		
 		identifierStatusValues.add(identifierStatus);
-
+		
 		getEditAreaPage().verifyAreaIdentifierValuesFromDB(country, area, identifierTypes, identifierValues,
 				identifierStatusValues, source);
-	}
-
+	}	
+	
 	@When("the user clicks on the No button to cancel the deletion of row in basic info area page")
 	public void pressNoButtonInDeleteConfirmationModalForArea() {
 		getEditAreaPage().pressNoButtonInDeleteConfirmationModalForArea();
 	}
-
+	
 	@Then("the user should see the newly added identifier row in the basic info area page")
 	public void verifyNewlyAddedAreaIdentifierRowIsDisplayed() throws Exception {
 		getEditAreaPage().verifyNewlyAddedAreaIdentifierRowIsDisplayed();
 	}
-
+	
 	@Then("the user verifies that the deleted row for area identifier does not exist in $source document")
 	public void verifyAreaIdentifierRowNotPresentInZeusDB(@Named("country") String country, @Named("area") String area, @Named("source") String source) {
 		getEditAreaPage().verifyIdentifierRowNotPresentInZeusDB(country, area, source);
 	}
-
+	
 	@Then("the user should see the error message $errMsg for identifier type field in the area basic info page")
 	public void verifyErrorMessageForRequiredAreaIdentifierType(@Named("errMsg") String errMsg) {
 		getEditAreaPage().verifyErrorMessageForRequiredAreaIdentifierType(errMsg);
 	}
-
+	
 	@Then("the user verifies that the area identifiers parameters are entered in the basic info area page")
 	public void verifyAreaIdentifierParametersInUI( @Named("identifierType") String identifierType,
 			@Named("identifierValue") String identifierValue, @Named("identifierStatus") String identifierStatus,
 			@Named("identifierType2") String identifierType2, @Named("identifierValue2") String identifierValue2,
 			@Named("identifierStatus2") String identifierStatus2) {
-
+		
 		String[] identifierTypes = { identifierType, identifierType2 };
 		String[] identifierValues = { identifierValue, identifierValue2 };
 		String[] identifierStatusValues = { identifierStatus, identifierStatus2 };
-
+		
 		getEditAreaPage().verifyAreaIdentifierParametersInUI(identifierTypes, identifierValues, identifierStatusValues);
 	}
-
+	
 	@Then("the user verifies that previously selected <identifierType> is not present in the new identifier row")
 	public void verifySelectedIdentifierTypeNotInNewRow(@Named("identifierType") String identifierType) {
 		getEditAreaPage().verifySelectedIdentifierTypeNotInNewRow(identifierType, 2);
 	}
-
+	
 	@Then("the user verifies that the newly added identifier row values exists in the basic info area page")
 	public void verifyNewlyAddedAreaIdentifierRowExists() {
 		getEditAreaPage().verifyNewlyAddedAreaIdentifierRowExists();
@@ -560,7 +560,7 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyDeleteConfirmationModals() {
 		getEditAreaPage().verifyDeleteConfirmationModal();
 	}
-
+	
 	@Then("the user should see the timezone values from TIME_ZONE lookup")
 	public void verifyTimeZoneDropdownListMatchesWithLookup() throws InterruptedException {
 		getEditAreaPage().verifyTimeZoneDropdownListMatchesWithLookup();
@@ -570,7 +570,7 @@ public class EditAreaSteps extends AbstractSteps {
 	public void userVerifyTimeZoneDropDownDefaultValueFromTrusted(@Named("country") String country,
 			@Named("area") String area, @Named("source") String source) {
 		getEditAreaPage().verifyTimeZoneDefaultValueFromTrusted(country, area, "summary", source);
-	}
+	}	 
 
 	@Then("the user clicks on add new timezone button")
 	public void userClickOnAddNewTimeZoneButton() {
@@ -632,19 +632,19 @@ public class EditAreaSteps extends AbstractSteps {
 	public void verifyNewlyAddedAreaTimeZoneRowIsNotDisplayed() throws Exception {
 		getEditAreaPage().verifyNewlyAddedAreaTimeZoneRowIsNotDisplayed();
 	}
-
+	 
 	@Then("user verifies newly added timezone summary is updated in $source document")
 	public void verifyAreaSummaryValuesFromZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source, @Named("summary") String summary) {
 		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary);
 	}
-
+	
 	@Then("the user verifies the $source document whether the area is updated with the newly updated summary")
 	public void verifyAreaSummaryValueFromZeusDB(@Named("country") String country, @Named("area") String area,
 			@Named("source") String source, @Named("summary1") String summary1) {
 		getEditAreaPage().verifyAreaSummaryValuesFromZeusDB(country, area, "summary", source, summary1);
 	}
-
+ 
 	@Then("the user verifies the area page is updated with the new timezone summary")
 	public void verifyAreaSummary1ValueInUI(@Named("summary1") String summary1) throws InterruptedException {
 		getEditAreaPage().verifyAreaSummaryValueInUI(summary1);
@@ -751,12 +751,12 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("source") String source) {
 		getEditAreaPage().verifyAreaInterestRateFromTrustedDB(country, area, "areaInterestRate", source);
 	}
-
+	
 	@Then("the user should see maximum length of interest rate value is limited to $maxLength")
 	public void verifyMaxLengthInterestRate(@Named("maxLength") String maxLength) {
 		getEditAreaPage().verifyMaxLengthInterestRate(maxLength);
 	}
-
+		
 	@When("the user clicks on <useInAddress> option for Area Use in Address")
 	public void selectUseInAddress(@Named("useInAddress") String useInAddress) {
 		getEditAreaPage().selectUseInAddress(useInAddress);
@@ -778,7 +778,7 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("source") String source) {
 		getEditAreaPage().verifyUseInAddressAreaFromTrustedDB(country, area, "areaUseInAddress", source);
 	}
-
+	
 	@When("the user clicks on the add new region button in the area region page")
 	public void clickOnAddNewRegionButton() {
 		setEditCityPage(getDataPage().createEditCityPage());
@@ -873,31 +873,31 @@ public class EditAreaSteps extends AbstractSteps {
 		Map<String, String> areaRegionValueMap = getEditAreaPage().getAreaRegionValueMapFromDB(country, area, source);
 		getEditAreaPage().verifyAreaRegionDeletedFromDB(areaRegionValueMap, newRegionType);
 	}
-
+	
 	@Then("the user should see the area credit rating values same as in $source document")
-	public void verifyAreaCreditRatingValueFromTrustedDB(@Named("country") String country,
+	public void verifyAreaCreditRatingValueFromTrustedDB(@Named("country") String country, 
 			@Named("area") String area, @Named("source") String source) {
 		getEditAreaPage().verifyAreaCreditRatingValuesFromTrustedDB(country, area, source);
 	}
-
+	
 	@When("the user enters credit rating agency as <agency> in credit rating row $rowNumber in the area page")
 	public void enterCreditRatingAgency(@Named("agency") String agency, @Named("rowNumber") int row) {
 		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers
 				.getObjectIdentifier("area_credit_rating_agency_dropdown"), agency, row);
 	}
-
+	
 	@When("the user enters credit rating type as <type> in credit rating row $rowNumber in the area page")
 	public void enterCreditRatingType(@Named("type") String creditRatingType, @Named("rowNumber") int row) {
 		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers
 				.getObjectIdentifier("area_credit_rating_type_dropdown"), creditRatingType, row);
 	}
-
+	
 	@When("the user enters credit rating <value> in credit rating row $rowNumber in the area page")
 	public void enterAreaCreditRatingValue(@Named("value") String value, @Named("rowNumber") int row) {
 		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
 				.getObjectIdentifier("area_credit_rating_value"), value, row);
 	}
-
+	
 	@When("the user enters applied date $appliedDay $appliedMonth $appliedYear in the area page")
 	public void enterAreaCreditRatingAppliedDate(@Named("appliedDay") String appliedDay,
 			@Named("appliedMonth") String appliedMonth, @Named("appliedYear") String appliedYear,
@@ -909,7 +909,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
 				.getObjectIdentifier("area_credit_rating_applied_date_year"), appliedYear, row);
 	}
-
+	
 	@When("the user enters confirmed date $confirmedDay $confirmedMonth $confirmedYear in the area page")
 	public void enterAreaCreditRatingConfirmedDate(@Named("confirmedDay") String confirmedDay,
 			@Named("confirmedMonth") String confirmedMonth, @Named("confirmedYear") String confirmedYear,
@@ -921,7 +921,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getDataPage().selectTexBoxValueFromRowNumber(AreaIdentifiers
 				.getObjectIdentifier("area_credit_rating_confirmed_date_year"), confirmedYear, row);
 	}
-
+	
 	@Then("the user should see the area credit rating values as in $source document")
 	@Alias("the user should not see the area credit rating row in $source document")
 	public void verifyAreaCreditRatingValueFromZeusDB(@Named("country") String country, @Named("area") String area,
@@ -935,7 +935,7 @@ public class EditAreaSteps extends AbstractSteps {
 		String confirmedDate = confirmedDay + " " + confirmedMonth + " " + confirmedYear;
 		getEditAreaPage().verifyAreaCreditRatingValuesFromDB(country, area, source, agency, type, value, appliedDate, confirmedDate, row);
 	}
-
+	
 	@Then("the user should see the entered area credit rating values are saved in UI in the row $rowNumber")
 	public void verifyAreaCreditRatingValueFromUI(@Named("country") String country, @Named("area") String area,
 		    @Named("agency") String agency, @Named("type") String type,
@@ -948,56 +948,56 @@ public class EditAreaSteps extends AbstractSteps {
 		String confirmedDate = confirmedDay + " " + confirmedMonth + " " + confirmedYear;
 		getEditAreaPage().verifyAreaCreditRatingValuesFromUI(country, area, agency, type, value, appliedDate, confirmedDate, row);
 	}
-
+	
 	@When("the user clicks on the area credit rating link in the navigation bar")
 	public void clickOnAreaCreditRating() {
 		setEditAreaPage(getDataPage().createEditAreaPage());
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating"));
 	}
-
+	
 	@When("the user clicks on add new credit rating button in the credit rating area page")
 	public void clickOnAddButton() {
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating_add_row_id"));
 	}
-
+	
 	@Then("the user should see the area credit rating agency names from look up $LookUpName")
 	public void verifyAreaAgencyListExistingRow(@Named("rowNumber") int rowNumber) {
-		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber,
+		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber, 
 				AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_dropdown"), "creditRatingAgency");
 	}
-
+	
 	@Then("the user should see the area credit rating types from look up $LookUpName")
 	public void verifyAreaCreditRatingTypeListExistingRow(@Named("rowNumber") int rowNumber) {
-		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber,
+		getEditAreaPage().verifyAreaCreditRatingListFromLookup(rowNumber, 
 				AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_dropdown"), "creditRatingType");
 	}
-
+	
 	@When("the user deletes the existing area credit rating rows")
 	public void deleteExistingCreditRatingRows() {
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_credit_rating_add_row_id"));
 		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_delete_credit_rating_row_button"));
 	}
-
+	
 	@Then("the user should not see the newly added credit rating row in the area page")
 	public void verifyNewlyAddedCreditRatingRowIsNotDisplayed() throws Exception {
 		getDataPage().verifyRowIsDisplayed(AreaIdentifiers.getObjectIdentifier("area_credit_rating_new_row"), false);
 	}
-
+	
 	@Then("the user should see $errorMessage error message in area credit rating agency field")
 	public void verifyErrorMessageForAreaCreditRatingAgency(@Named("errorMessage") String errorMessage) {
 		getDataPage().verifyWebElementText("Agency", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_agency_error"));
 	}
-
+	
 	@Then("the user should see $errorMessage error message in area credit rating type field")
 	public void verifyErrorMessageForAreaCreditRatingType(@Named("errorMessage") String errorMessage) {
 		getDataPage().verifyWebElementText("Type", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_type_error"));
 	}
-
+	
 	@Then("the user should be able to view the error message $errorMessage in area credit rating value")
 	public void verifyErrorMessageInAreaCreditRatingValue(@Named("errorMsg") String errorMessage) {
 		getDataPage().verifyWebElementText("Value", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_value_error"));
 	}
-
+	
 	@Then("the user should see the error message $errorMessage for applied date in the area page")
 	public void verifyErrorMessageForAppliedDate(@Named("errorMessage") String errorMessage) {
 		getDataPage().verifyWebElementText("Applied Date", errorMessage, AreaIdentifiers.getObjectIdentifier("area_credit_rating_applied_date_error_msg"));
@@ -1037,7 +1037,7 @@ public class EditAreaSteps extends AbstractSteps {
 	public void clickYesButtonInAreaCreditRatingDeleteModal() {
 		getDataPage().clickOnYesButtonInDeleteConfirmationModal();
 	}
-
+	
 	@When("the user clicks on the add new demographics button in the area page")
 	public void clickOnAddDemographicsButton() {
 		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_demographics_button"));
@@ -1071,8 +1071,7 @@ public class EditAreaSteps extends AbstractSteps {
 	@When("the user enters the demographic unit <unitValue> in the area page")
 	public void enterDemographicsUnit(@Named("unitValue") String demographicUnit) {
 		if (demographicUnit.contains("km")) {
-			getDataPage().selectItemFromDropdownListByindex(
-					AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), 1);
+			getDataPage().selectItemFromDropdownListByindex(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), 1);
 		} else if (demographicUnit.contains("mi")) {
 			getDataPage().selectItemFromDropdownListByindex(
 					AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), 2);
@@ -1143,7 +1142,7 @@ public class EditAreaSteps extends AbstractSteps {
 		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographic_date-month"), month, 1);
 		getDataPage().enterTextUsingIndex(AreaIdentifiers.getObjectIdentifier("area_demographic_date-year"), year, 1);
 	}
-
+	
 	@When("the user enter demographics date <day> <month> <year> in the demographics row 2 in area page")
 	public void enterDemographicDate2(@Named("day") String day, @Named("month") String month, @Named("year") String year) {
 		getDataPage().enterTextUsingIndex(AreaIdentifiers.getObjectIdentifier("area_demographic_date-day"), day, 2);
@@ -1201,7 +1200,7 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("demographicValue") String value, @Named("day") String day, @Named("month") String month,
 			@Named("year") String year, @Named("demographicType2") String type2, @Named("demographicValue2") String value2) {
 		List<String> demographicType = new ArrayList<>();
-		List<String> demographicValue = new ArrayList<>();
+		List<String> demographicValue = new ArrayList<>();		
 		List<String> date = new ArrayList<>();
 		demographicType.add(type); demographicType.add(type2);
 		demographicValue.add(value); demographicValue.add(value2);
@@ -1214,10 +1213,10 @@ public class EditAreaSteps extends AbstractSteps {
 			@Named("source") String source) {
 		getEditAreaPage().verifyDemographicsRowNotPresentInZeusDB(country, area, source);
 	}
-
+	
 	@Then("the user should see the area demographic values in two rows as in $source document")
 	public void verifyDemographicsValueFromZeusDB(@Named("country") String country, @Named("area") String area,
-			@Named("source") String source, @Named("demographicType") String type, @Named("demographicValue") String value, @Named("demographicType2") String type2,
+			@Named("source") String source, @Named("demographicType") String type, @Named("demographicValue") String value, @Named("demographicType2") String type2, 
 			@Named("demographicValue2") String value2, @Named("day") String day, @Named("month") String month, @Named("year") String year) {
 		List<String> demographicType = new ArrayList<>();
 		List<String> demographicValue = new ArrayList<>();
@@ -1227,7 +1226,7 @@ public class EditAreaSteps extends AbstractSteps {
 		date.add(day + " " + month + " " + year); date.add(day + " " + month + " " + year);
 		getEditAreaPage().verifyDemographicValueInDB(country, area, source, demographicType, demographicValue, null, date);
 	}
-
+	
 	@When("the user selects the demographic types <demographicType2> <demographicValue2> in the area page")
 	public void enterDemographicsTypeAndValuesInTwoRows(@Named("demographicType2") String demographicType, @Named("demographicValue2") String demographicValue) {
 		getDataPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_demographics_type"),
@@ -1235,13 +1234,248 @@ public class EditAreaSteps extends AbstractSteps {
 		getDataPage().enterTextUsingIndex(AreaIdentifiers.getObjectIdentifier("area_demographics_value"),
 				demographicValue, 2);
 	}
-
+	
 	@Then("the user should see the area demographic row is saved in area page")
 	public void verifyDemographicsValuesInUI(@Named("demographicType") String type,
 			@Named("demographicValue") String value, @Named("day") String day, @Named("month") String month,
 			@Named("year") String year) {
 		String date = day + " " + month + " " + year;
 		getEditAreaPage().verifyDemographicValueRowInUI(type, value, null, date, 1);
+	}
+
+	@When("the user clicks on the add button for adding new places for area page")
+	public void clickOnAddPlacesButton() {
+		setEditCityPage(getDataPage().createEditCityPage());
+		getEditCityPage().clickOnAddPlacesButton();
+	}
+
+	@When("the user clicks on new area places type drop-down for area")
+	public void clickAreaplaceType() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"));
+	}
+
+	@Then("the user should see the values for type dropdown from lookup AREA_RELATED_PLACE_TYPE")
+	public void verifyAreaPlacesTypeList() {
+		getDataPage().verifyLookUpValues(AreaIdentifiers.getObjectIdentifier("area_places_type_options_dropdown_xpath"),
+				"get area places type lookup", "detail");
+	}
+
+	@When("the user clicks on new area places details drop-down for area")
+	public void clickDetailsDropDown() {
+		getEditCityPage().clickDetailsDropDown();
+	}
+
+	@Then("the user should see the values for details dropdown from lookup AREA_RELATED_PLACE_SUBTYPE")
+	public void verifyAreaPlacesDetailsList() {
+		getDataPage().verifyLookUpValues(CityIdentifiers.getObjectIdentifier("city_places_details_options_dropdown_xpath"),
+				"get area places detail lookup", "detail");
+	}
+
+	@Then("the user should see the error message required for type in places for area")
+	public void verifyRequiredErrorMessageForType() {
+		getEditCityPage().verifyRequiredErrorMessageForType();
+	}
+
+	@When("the user clicks on edit button in places for area")
+	public void clicksOnEditButton() {
+		getEditCityPage().clicksOnEditButton();
+	}
+
+	@When("the user clicks on the country option in the places for area")
+	public void clicksOnCountryInPlacesForArea() {
+		getEditCityPage().clicksOnCountryInPlacesForCity();
+	}
+
+	@When("the user enters the country <countryPlaces> in type-ahead box for area related places")
+	public void selectsCountryInPlacesForArea(@Named("countryPlaces") String countryPlaces) {
+		getEditCityPage().selectsCountryInPlacesForCity(countryPlaces);
+	}
+
+	@When("the user clicks on area option in the places for area")
+	public void clicksOnAreaDropdownInPlacesForArea() {
+		getEditCityPage().clicksOnAreaDropdownInPlacesForCity();
+	}
+
+	@When("the user enters area <areaPlaces> in the type-ahead box for area related places")
+	public void selectsAreaInPlacesForArea(@Named("areaPlaces") String areaPlaces) {
+		getEditCityPage().selectsAreaInPlacesForCity(areaPlaces);
+	}
+
+	@When("the user clicks on city options in the places for area")
+	public void clicksOnCityDropdownInPlacesForArea() {
+		getEditCityPage().clicksOnCityDropdownInPlacesForCity();
+	}
+
+	@When("the user enters city <cityPlaces> in the type-ahead box for area related places")
+	public void selectsCityInPlacesForCountry(@Named("cityPlaces") String cityPlaces) {
+		getEditCityPage().selectsCityInPlacesForCountry(cityPlaces);
+	}
+
+	@When("the user clicks on go button in places for area")
+	public void clicksOnGoButton() {
+		getEditCityPage().clicksOnGoButton();
+	}
+
+	@When("the user selects details value as <placeDetails> in the places for area")
+	public void selectsDetailsFromDropdown(@Named("placeDetails") String placeDetails) {
+		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_detail_dropdown_xpath"),
+				placeDetails, 1);
+	}
+
+	@Then("the user should see the error message required for place in places for area")
+	public void verifyRequiredErrorMessageForPlace() {
+		getEditCityPage().verifyRequiredErrorMessageForPlace();
+	}
+
+	@Then("the user should see the list of all existing countries by full name in places for area")
+	public void verifyCountryListInPlacesForArea() {
+		getEditCityPage().verifyCountryListInPlacesForCity();
+	}
+
+	@Then("the user should see the list of all existing area for the selected country by full name in places for area")
+	public void verifyAreaListInPlacesForArea(@Named("countryPlaces") String country) {
+		getEditCityPage().verifyAreaListInPlacesForCity(country);
+	}
+
+	@Then("the user should see the list of all existing city for the selected area by full name in places for area")
+	public void verifyCityListInPlacesForArea(@Named("areaPlaces") String countryareaPlaces) {
+		getEditCityPage().verifyCityListInPlacesForCity(countryareaPlaces);
+	}
+
+	@When("the user clicks on the area places link in the navigation bar")
+	public void clickOnAreaPlaces() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_link_id"));
+	}
+
+	@Then("the user should see place as $place in places for area")
+	public void verifyPlaceInPlacesForArea(@Named("place") String place) {
+		getEditCityPage().verifyPlaceInPlacesForCity(place);
+	}
+
+	@When("the user clicks on delete area places type")
+	public void clicksOnDeleteAreaPlacesType() {
+		getEditCityPage().clicksOnDeleteCityPlacesType();
+	}
+
+	@Then("the user should not see <placeType> <cityPlaces> <placeDetails> updated in area related place")
+	public void verifyDeletedRelatedPlaces(@Named("placeType") String type, @Named("cityPlaces") String place,
+			@Named("placeDetails") String details) {
+		getEditAreaPage().verifyDeletedRelatedPlaces(type, place, details);
+	}
+
+	@Then("the user should not see the area related place value in $source document")
+	public void verifyDeletedAreaRelatedValueFromZeusDB(@Named("placeType") String areaPlacesType,
+			@Named("cityPlaces") String areaPlacesPlace, @Named("placeDetails") String areaPlacesDetails,
+			@Named("source") String source, @Named("area") String area) {
+
+		List<String> relatedTypes = new ArrayList<>();
+		List<String> relatedValues = new ArrayList<>();
+		List<String> relatedDetails = new ArrayList<>();
+		relatedTypes.add(areaPlacesType);
+		relatedValues.add(areaPlacesPlace);
+		relatedDetails.add(areaPlacesDetails);
+
+		getEditAreaPage().verifyAreaRelatedValueFromZeusDB(area, source, relatedTypes, relatedValues, relatedDetails);
+	}
+
+	@When("the user updates type value as <placeType> in the places for area")
+	public void selectsExistingTypeFromDropdown(@Named("placeType") String placeType) {
+		getEditAreaPage().selectItemFromDropdownListByText(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"), placeType);
+	}
+
+	@When("the user selects type value as <placeType> in the places for area")
+	public void selectsAreaTypeFromDropdown(@Named("placeType") String placeType) {
+		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"),
+				placeType, 1);
+	}
+
+	@When("the user selects type value as <placeType2> in the places for area")
+	public void selectsAreaTypeFromDropdown2(@Named("placeType2") String placeType2) {
+		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"),
+				placeType2, 2);
+	}
+
+	@When("the user selects details value as <placeDetails2> in the places for area")
+	public void selectsDetailsFromDropdown2(@Named("placeDetails2") String placeDetails2) {
+		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_detail_dropdown_xpath"),
+				placeDetails2, 2);
+	}
+
+	@When("the user clicks on edit button for second row  in places for area")
+	public void clicksOnEditButton2() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_places_place_edit_button_2_xpath"));
+	}
+
+	@When("the user enters the country <countryPlaces2> in type-ahead box for area related places")
+	public void selectsCountryInPlacesForArea2(@Named("countryPlaces2") String countryPlaces2) {
+		getEditCityPage().selectsCountryInPlacesForCity(countryPlaces2);
+	}
+
+	@When("the user enters area <areaPlaces2> in the type-ahead box for area related places")
+	public void selectsAreaInPlacesForArea2(@Named("areaPlaces2") String areaPlaces2) {
+		getEditCityPage().selectsAreaInPlacesForCity(areaPlaces2);
+	}
+
+	@When("the user enters city <cityPlaces2> in the type-ahead box for area related places")
+	public void selectsCityInPlacesForCountry2(@Named("cityPlaces2") String cityPlaces2) {
+		getEditCityPage().selectsCityInPlacesForCountry(cityPlaces2);
+	}
+
+	@Then("the user should see related place details saved in area web page")
+	public void verifyAreaRelatedPlacesInUI(@Named("placeType") String areaPlacesType,
+			@Named("cityPlaces") String areaPlacesPlace, @Named("placeDetails") String areaPlacesDetails,
+			@Named("placeType2") String areaPlacesType2, @Named("cityPlaces2") String areaPlacesPlace2,
+			@Named("placeDetails2") String areaPlacesDetails2) {
+		String[] areaRelatedTypes = { areaPlacesType, areaPlacesType2 };
+		String[] areaRelatedPlaces = { areaPlacesPlace, areaPlacesPlace2 };
+		String[] areaRelatedDetail = { areaPlacesDetails, areaPlacesDetails2 };
+
+		getEditAreaPage().verifyAreaRelatedPlacesParametersInUI(areaRelatedTypes, areaRelatedPlaces, areaRelatedDetail);
+	}
+
+	@Then("the user should see related place details saved in in $source document")
+	public void verifyAreaRelatedValueFromZeusDB(@Named("placeType") String areaPlacesType,
+			@Named("cityPlaces") String areaPlacesPlace, @Named("placeDetails") String areaPlacesDetails,
+			@Named("placeType2") String areaPlacesType2, @Named("cityPlaces2") String areaPlacesPlace2,
+			@Named("placeDetails2") String areaPlacesDetails2, @Named("source") String source,
+			@Named("area") String area) {
+
+		List<String> relatedTypes = new ArrayList<>();
+		List<String> relatedValues = new ArrayList<>();
+		List<String> relatedDetails = new ArrayList<>();
+		relatedTypes.add(areaPlacesType);
+		relatedValues.add(areaPlacesPlace);
+		relatedDetails.add(areaPlacesDetails);
+		relatedTypes.add(areaPlacesType2);
+		relatedValues.add(areaPlacesPlace2);
+		relatedDetails.add(areaPlacesDetails2);
+
+		getEditAreaPage().verifyAreaRelatedValueFromZeusDB(area, source, relatedTypes, relatedValues, relatedDetails);
+	}
+
+	@Then("the user should see area related place date <placeType> <cityPlaces> <placeDetails> value in $source document")
+	public void verifyUpdatedAreaRelatedValueFromZeusDB(@Named("placeType") String areaPlacesType,
+			@Named("cityPlaces") String areaPlacesPlace, @Named("placeDetails") String areaPlacesDetails,
+			@Named("source") String source, @Named("area") String area) {
+
+		List<String> relatedTypes = new ArrayList<>();
+		List<String> relatedValues = new ArrayList<>();
+		List<String> relatedDetails = new ArrayList<>();
+		relatedTypes.add(areaPlacesType);
+		relatedValues.add(areaPlacesPlace);
+		relatedDetails.add(areaPlacesDetails);
+
+		getEditAreaPage().verifyAreaRelatedValueFromZeusDB(area, source, relatedTypes, relatedValues, relatedDetails);
+	}
+
+	@Then("the user should see <placeType> <cityPlaces> <placeDetails> updated in area related place")
+	public void verifyAreaRelatedPlaceInUI(@Named("placeType") String areaPlacesType,
+			@Named("cityPlaces") String areaPlacesPlace, @Named("placeDetails") String areaPlacesDetails) {
+		String[] areaRelatedTypes = { areaPlacesType };
+		String[] areaRelatedPlaces = { areaPlacesPlace };
+		String[] areaRelatedDetail = { areaPlacesDetails };
+
+		getEditAreaPage().verifyAreaRelatedPlacesParametersInUI(areaRelatedTypes, areaRelatedPlaces, areaRelatedDetail);
 	}
 
 	@Then("the user should verify the header dropdowns are disabled")

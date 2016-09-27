@@ -29,6 +29,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.*;
 
+
 public class DataPage extends AbstractPage {
 
     private By currency_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li");
@@ -218,6 +219,8 @@ public class DataPage extends AbstractPage {
     public DataPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
+
+
 
     @Override
     public String getPageUrl() {
@@ -1279,8 +1282,6 @@ public class DataPage extends AbstractPage {
 
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,xqueryName);
         assertTrue(document!=null);
-
-
     }
 
     public EditCityPage createEditCityPage() {
@@ -1359,8 +1360,10 @@ public class DataPage extends AbstractPage {
 
     public void updateDocument(String endpoint, String entityFid) {
         XmlDocument xmlDocument = getTestDataXml(endpoint, entityFid);
-        String url = "/"+endpoint+"/id/"+getResourceURL(endpoint, entityFid);
-        int response = restClient.putDocumentByID(url, heraApi, xmlDocument.toString());
+
+        String endpointWithID = getResourceURL(endpoint, entityFid);
+        int response = restClient.putDocumentByID(endpointWithID, heraApi, xmlDocument.toString());
+
         assertTrue(response == 202);
     }
     

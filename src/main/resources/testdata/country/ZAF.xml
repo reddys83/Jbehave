@@ -1,0 +1,183 @@
+<country deleted="false" fid="ZAF" id="908b7873-7d4b-439c-a153-473d575015ff" resource="/country/id/908b7873-7d4b-439c-a153-473d575015ff" source="zeus">
+    <summary>
+        <iso2>ZA</iso2>
+        <iso3>ZAF</iso3>
+        <names>
+            <name>
+                <type>Country Name</type>
+                <value>South Africa</value>
+            </name>
+            <countrySortKey>SOUTH AFRICA</countrySortKey>
+        </names>
+        <status>active</status>
+        <timeZones>
+            <summaries>
+                <summary>+2 hours</summary>
+            </summaries>
+        </timeZones>
+        <businessHours>
+            <summaries>
+                <summary>08.00-16.45</summary>
+            </summaries>
+            <day>
+                <name>Tuesday</name>
+                <hours>09:00-17:00</hours>
+            </day>
+            <day>
+                <name>Sunday</name>
+                <hours>11:30-16:30</hours>
+            </day>
+        </businessHours>
+        <demographics>
+            <metric>
+                <name>Area</name>
+                <value>1127200</value>
+                <unit>km2</unit>
+            </metric>
+            <metric>
+                <name>Population</name>
+                <value>47400000</value>
+            </metric>
+        </demographics>
+        <politicalStructure>Republic</politicalStructure>
+        <primaryExports>Gold, diamonds, platinum, other metals and minerals, machinery and equipment</primaryExports>
+        <primaryImports>Machinery, foodstuffs and equipment, chemicals, petroleum products, scientific instruments</primaryImports>
+        <telephoneCode>27</telephoneCode>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <languages>
+        <summaries>
+            <summary>Afrikaans; English; isiNdebele; isiXhosa; isiZulu; Sesothosa Leboa; Sesotho; Setswana; siSwati</summary>
+        </summaries>
+    </languages>
+    <currencies>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/2b46c9da-1306-4e22-a5d3-a31fe61b2821" rel="src" />
+            <name>Rand</name>
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">1980-01-01</startDate>
+        </currency>
+    </currencies>
+    <iban>
+        <registered>false</registered>
+    </iban>
+    <holidays>
+        <holiday>
+            <date accuracy="day">2015-01-01</date>
+            <name>New Year's Day</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-04-03</date>
+            <name>Good Friday</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-04-06</date>
+            <name>Family Day (Easter Monday)</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-04-27</date>
+            <name>Freedom Day</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-05-01</date>
+            <name>Workers' Day</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-06-16</date>
+            <name>Youth Day</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-08-10</date>
+            <name>National Women's Day OBS</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-09-24</date>
+            <name>Heritage Day</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-16</date>
+            <name>Day of Reconciliation</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-25</date>
+            <name>Christmas Day</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-01</date>
+            <name>New Year's Day</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-21</date>
+            <name>Human Rights Day</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-25</date>
+            <name>Good Friday</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-28</date>
+            <name>Family Day (Easter Monday)</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-04-27</date>
+            <name>Freedom Day</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-05-02</date>
+            <name>Workers' Day OBS</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-06-16</date>
+            <name>Youth Day</name>
+        </holiday>
+    </holidays>
+    <creditRatings>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Sovereign Debt Rating</type>
+            <value>BBB</value>
+            <dateConfirmed accuracy="day">2015-02-02</dateConfirmed>
+        </rating>
+    </creditRatings>
+    <alternativeRegions>
+        <region>
+            <type>Trading Region</type>
+            <value>Africa</value>
+        </region>
+    </alternativeRegions>
+    <relatedPlaces>
+        <relation>
+            <type>Capital City</type>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/ab3007dc-b991-4486-813a-210fe6bfed2e" rel="src" />
+            </place>
+        </relation>
+        <relation>
+            <type>Capital City</type>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/1d78a0fe-1110-4c49-8a79-447452a78466" rel="src" />
+            </place>
+        </relation>
+        <relation>
+            <type>Financial Centre</type>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/8f509ed0-8fa8-470f-adc3-e4953f6773ec" rel="src" />
+            </place>
+        </relation>
+    </relatedPlaces>
+    <relatedPresences>
+        <relation>
+            <type>Central Bank</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/b15974bf-38d9-429d-a550-05eef00365d9" rel="src" />
+            </presence>
+        </relation>
+        <relation>
+            <type>Regulator</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/b15974bf-38d9-429d-a550-05eef00365d9" rel="src" />
+            </presence>
+        </relation>
+    </relatedPresences>
+</country>

@@ -48,6 +48,8 @@ public abstract class AbstractPage {
     protected final HeraApi heraApi;
 
     protected final RestClient restClient;
+
+    public DataPage dataPage;
     public String bigString="";
     protected By contentLocator = By.xpath("//body/div[@id='content']");
 
@@ -326,6 +328,17 @@ public abstract class AbstractPage {
         return dropdownValuesList;
     }
 
+    public void selectItemFromDropdownListByindex(By by, int i) {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Select dropdown = new Select(driver.findElement(by));
+        dropdown.selectByIndex(i);
+
+    }
+
     public List<String> getAlreadySelectedValuesInAllRowsForADropdown(By by) {
         ArrayList<String> selectedValueList = new ArrayList();
         for (WebElement WebElement : getDriver().findElements(by)) {
@@ -357,7 +370,7 @@ public abstract class AbstractPage {
         Document document =  XmlDocumentLoader.getDocument(filePath);
         return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("id").getNodeValue();
     }
-
+    
     public void selectDropDownValueFromRowNumber(By by, String value, int rowNumber) {
 		try {
 			List<WebElement> dropdownValue = getDriver().findElements(by);
@@ -373,7 +386,7 @@ public abstract class AbstractPage {
 			e.printStackTrace();
 		}
     }
-
+    
     public void selectTexBoxValueFromRowNumber(By by, String value, int rowNumber) {
 		try {
 			List<WebElement> textBoxValues = getDriver().findElements(by);
@@ -385,24 +398,13 @@ public abstract class AbstractPage {
 			e.printStackTrace();
 		}
 	}
-
+    
     public String getDayLaterThanToday() throws ParseException {
     	Format dateFormat = new SimpleDateFormat("dd");
-    	Calendar cal = Calendar.getInstance();
+    	Calendar cal = Calendar.getInstance();		 	
 		cal.add(Calendar.DATE, 1);
 		return dateFormat.format(cal.getTime());
-	}
-
-    public void selectItemFromDropdownListByindex(By by, int i) {
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Select dropdown = new Select(driver.findElement(by));
-        dropdown.selectByIndex(i);
-
-    }
+	}	
 
     public void textToBePresentInElement(WebElement requiredMessage) {
         try {

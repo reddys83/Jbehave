@@ -3,10 +3,10 @@ Narrative:
 Reloading the data after data refresh
 
 Scenario: Used for loading test data after data refresh for Area and Sub Area.
-Creates test data for Area-> Illinois and SubArea-> Cook
+Create test data for Area-> Illinois and SubArea-> Cook
 
 Given the user loads area test data for nightly runs in database <xqueryName>
-
+And the user updates office with fid <entityFid>
 
 Examples:
 |xqueryName|

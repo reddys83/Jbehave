@@ -120,7 +120,11 @@ Examples:
 |entity|searchBy|fid|officeFid|day|month|year|
 |1010|FID|1010|1010-44||||
 
+<<<<<<< HEAD
+ JIRA ID - ZEUS-1069 - User can edit Principal Office flag
+=======
 
+>>>>>>> develop
 Scenario: User makes a change to the principal office flag where the xml does not have the node principal office node and saves it
 1. verify that the confirmation modal displays the change
 2. verify that the change is reflected in zeus document
@@ -485,7 +489,7 @@ a) Verify that the delete button is disabled for the first row of office type
 b) Verify that the user should get the confirmation window for deleting existing office type rows and user clicks No button
 c) Verify that the user should get the confirmation window for deleting existing office type rows and user clicks Yes button and row should be deleted
 
-
+Meta:@test929
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -499,7 +503,7 @@ Then the user should see the first_row_existing_officetype_delete_button in disa
 When the user clicks on the second_row_existing_officetype_delete_button in office types section
 Then the user should see the delete row confirmation modal in the office page
 When the user clicks on the no button in the delete row confirmation modal in the office page
-Then the user should still see the office second_existing_officetype_dropdown with value Trust Branch in office type in office page
+Then the user should still see the office second_existing_officetype_dropdown with value Trust Branch as office type in office page
 When the user clicks on the second_row_existing_officetype_delete_button in office types section
 When the user clicks on the yes button in the delete row confirmation modal in the office page
 When the user clicks on the save button
@@ -852,7 +856,7 @@ And the user clicks on the office update link
 Then the user should see the office name values as in trusted document with fid <officeFid>
 When the user gets the document with get id for offices with the <officeFid> from the database
 When the user enters sort name as <sortName> in the office name
-Then the user verifies the office name sort name maxlength is 75 for the sortName
+Then the user verifies the office name sort name maxlength as 75 for the sortName field
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
