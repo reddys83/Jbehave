@@ -1071,8 +1071,7 @@ public class EditAreaSteps extends AbstractSteps {
 	@When("the user enters the demographic unit <unitValue> in the area page")
 	public void enterDemographicsUnit(@Named("unitValue") String demographicUnit) {
 		if (demographicUnit.contains("km")) {
-			getDataPage().selectItemFromDropdownListByindex(
-					AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), 1);
+			getDataPage().selectItemFromDropdownListByindex(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), 1);
 		} else if (demographicUnit.contains("mi")) {
 			getDataPage().selectItemFromDropdownListByindex(
 					AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), 2);

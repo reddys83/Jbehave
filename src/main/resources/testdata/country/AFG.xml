@@ -1,0 +1,335 @@
+<country deleted="false" fid="AFG" id="f55a7a93-7336-4ff1-b6b3-6df257cd05d0" resource="/country/id/f55a7a93-7336-4ff1-b6b3-6df257cd05d0" source="zeus">
+    <summary>
+        <iso2>AF</iso2>
+        <iso3>AFG</iso3>
+        <names>
+            <name>
+                <type>Display Name</type>
+                <value>Afghanistan</value>
+            </name>
+            <name>
+                <type>Alternative Name</type>
+                <value>Afghanistan</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Afghanistan</value>
+            </name>
+            <name>
+                <type>Country Name</type>
+                <value>Afghanistan</value>
+            </name>
+            <countrySortKey>AFGHANISTAN</countrySortKey>
+        </names>
+        <status>active</status>
+        <dates>
+            <dateBegan accuracy="day">1818-12-03</dateBegan>
+            <dateCeased accuracy="day">2016-02-03</dateCeased>
+        </dates>
+        <timeZones>
+            <summaries>
+                <summary>+4½ hours</summary>
+            </summaries>
+        </timeZones>
+        <businessHours>
+            <summaries>
+                <summary>Saturday-Wednesday 08.00-16.00</summary>
+            </summaries>
+            <day>
+                <name>Saturday</name>
+                <hours>09:00-12:00</hours>
+            </day>
+        </businessHours>
+        <redirectTo>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/country/id/89add079-03c2-4850-80d5-edb4415f82c9" rel="src" />
+            </place>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/country/id/21b69329-6bc2-4e43-aac7-9a18c937324e" rel="src" />
+            </place>
+        </redirectTo>
+        <identifiers>
+            <identifier>
+                <type>Numeric ISO Code</type>
+                <value>ASDF</value>
+                <status>inactive</status>
+            </identifier>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>Test Identifier</value>
+                <status>inactive</status>
+            </identifier>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>24601</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>ASDF</value>
+                <status>inactive</status>
+            </identifier>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>Test Identifier</value>
+                <status>inactive</status>
+            </identifier>
+        </identifiers>
+        <demographics>
+            <metric>
+                <name>Area</name>
+                <value>253861</value>
+                <unit>miles2</unit>
+                <date accuracy="day">2003-01-02</date>
+            </metric>
+            <metric>
+                <name>Area</name>
+                <value>647497</value>
+                <unit>km2</unit>
+                <date accuracy="day">2003-01-02</date>
+            </metric>
+            <metric>
+                <name>Population</name>
+                <value>29863000</value>
+                <date accuracy="day">2003-01-02</date>
+            </metric>
+        </demographics>
+        <politicalStructure>Republic</politicalStructure>
+        <primaryExports>Natural gas, fruits & nuts, carpets, karakul, wool, cotton, hides and pelts, precious and semiprecious gems</primaryExports>
+        <primaryImports>Capital goods, food, textiles, petroleum products</primaryImports>
+        <telephoneCode>93</telephoneCode>
+        <additionalInfos>
+            <additionalInfo>Country</additionalInfo>
+        </additionalInfos>
+        <domesticWith>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/country/id/2baf3f80-0d87-41c8-9d37-4c08c5cba037" rel="src" />
+            </place>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/country/id/64b0793a-3a51-4fa8-9c4a-bf08ca9d4fae" rel="src" />
+            </place>
+        </domesticWith>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <languages>
+        <summaries>
+            <summary>Pushto; Dari</summary>
+        </summaries>
+    </languages>
+    <currencies>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/425f6d3b-0e50-486b-b5ce-173111e60515" rel="src" />
+            <name>Afghani</name>
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">2003-01-02</startDate>
+        </currency>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/a3cc2fef-c65d-4384-8c43-ca7da800b6c7" rel="src" />
+            <primary>false</primary>
+            <status>inactive</status>
+            <startDate accuracy="day">1980-01-01</startDate>
+            <endDate accuracy="day">2015-12-31</endDate>
+        </currency>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/819819ee-3d5b-4708-aae0-21c1ded75f71" rel="src" />
+            <primary>false</primary>
+            <status>active</status>
+            <startDate accuracy="year">1987-01-01</startDate>
+        </currency>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/819819ee-3d5b-4708-aae0-21c1ded75f71" rel="src" />
+            <primary>false</primary>
+            <status>active</status>
+            <startDate accuracy="year">1988-01-01</startDate>
+        </currency>
+    </currencies>
+    <iban>
+        <registered>false</registered>
+    </iban>
+    <holidays>
+        <holiday>
+            <date accuracy="day">2015-01-01</date>
+            <name>New Year's Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-01-03</date>
+            <name>Mohemmed's Birthday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-02-15</date>
+            <name>Liberation Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-03-21</date>
+            <name>Noruz (New Year) 1</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-04-28</date>
+            <name>Victory Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-06-18</date>
+            <name>Ramadan</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-07-17</date>
+            <name>Eid ul Fitr 1</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-07-18</date>
+            <name>Eid ul Fitr 2</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-07-19</date>
+            <name>Eid ul Fitr 3</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-08-19</date>
+            <name>National Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-09-09</date>
+            <name>Ahmed Shah Masoud Memorial Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-09-23</date>
+            <name>Eid ul Adha Additional Holiday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-09-24</date>
+            <name>Eid ul Adha 1</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-09-26</date>
+            <name>Eid ul Adha 3</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-24</date>
+            <name>Prophet's Birthday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-02-15</date>
+            <name>Liberation Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-21</date>
+            <name>Noruz (New Year) 1</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-04-28</date>
+            <name>Victory Day</name>
+            <note />
+        </holiday>
+    </holidays>
+    <creditRatings>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Sovereign Debt Rating</type>
+            <value>B</value>
+            <dateApplied accuracy="day">1990-01-01</dateApplied>
+            <dateConfirmed accuracy="day">1991-01-04</dateConfirmed>
+        </rating>
+        <rating>
+            <agencyName>Standard & Poors</agencyName>
+            <type>Long Term Sovereign Debt Rating</type>
+            <value>A-</value>
+            <dateApplied accuracy="day">1990-01-01</dateApplied>
+            <dateConfirmed accuracy="day">1991-01-04</dateConfirmed>
+        </rating>
+        <rating>
+            <agencyName>Capital Intelligence</agencyName>
+            <type>Long Term Sovereign Debt Rating</type>
+            <value>F+</value>
+            <dateConfirmed accuracy="day">1991-01-04</dateConfirmed>
+        </rating>
+    </creditRatings>
+    <alternativeRegions>
+        <region>
+            <type>Continent</type>
+            <value>Europe</value>
+        </region>
+        <region>
+            <type>Trading Region</type>
+            <value>South Asia</value>
+        </region>
+    </alternativeRegions>
+    <relatedPlaces>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>Capital City</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/3c9d2b4b-f1ab-4050-87e2-e5d8696b292b" rel="src" />
+            </place>
+        </relation>
+        <relation>
+            <type>Financial Centre</type>
+            <details>
+                <detail>Administrative Capital</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/3c9d2b4b-f1ab-4050-87e2-e5d8696b292b" rel="src" />
+            </place>
+        </relation>
+        <relation>
+            <type>Financial Centre</type>
+            <details>
+                <detail>Legislative Capital</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/area/id/2b45a5e9-20da-40a6-966c-776f55adfb04" rel="src" />
+            </place>
+        </relation>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>Capital City</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/ec7b005f-9966-4971-808a-a36210a1ba58" rel="src" />
+            </place>
+        </relation>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>Capital City</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/b03dcaa1-71d4-4387-a7c1-5e3f372f23c4" rel="src" />
+            </place>
+        </relation>
+    </relatedPlaces>
+    <relatedPresences>
+        <relation>
+            <type>Central Bank</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/4c956607-c156-4aa8-aad1-aebffb74505b" rel="src" />
+            </presence>
+        </relation>
+        <relation>
+            <type>Regulator</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/4c956607-c156-4aa8-aad1-aebffb74505b" rel="src" />
+            </presence>
+        </relation>
+    </relatedPresences>
+</country>
