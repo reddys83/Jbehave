@@ -327,7 +327,7 @@ public abstract class AbstractPage {
         }
         return dropdownValuesList;
     }
-    
+
     public void selectItemFromDropdownListByindex(By by, int i) {
         try {
             Thread.sleep(2000L);
@@ -410,5 +410,12 @@ public abstract class AbstractPage {
 		cal.add(Calendar.DATE, 1);
 		return dateFormat.format(cal.getTime());
 	}	
-    
+
+    public void textToBePresentInElement(WebElement requiredMessage) {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), 25);
+            wait.until(ExpectedConditions.textToBePresentInElement(requiredMessage,"Required"));
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
+    }
 }

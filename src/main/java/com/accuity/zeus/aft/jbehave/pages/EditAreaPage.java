@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.apache.commons.lang3.*;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -36,7 +36,9 @@ public class EditAreaPage extends AbstractPage {
    private static final String FULL_NAME = "Full Name";
    public static String addInfoMaximumCharacterString=null;
    public static String interestRateMaximumCharacter = null;
-   
+	private static String selectedCountryID = "";
+	private static  String selectedAreaID = "";
+
 	public EditAreaPage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient,
 			RestClient restClient, HeraApi heraApi) {
 		super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
@@ -889,6 +891,7 @@ public class EditAreaPage extends AbstractPage {
 	public void verifyAreaAddInfoValueFromZeus(String country, String area, String tagName, String source,
 			String addInfoText) {
 		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source), addInfoText);
+
 	}
 	
 	public void clickOnAreaAddNewIdentifierButton() {
@@ -1215,17 +1218,17 @@ public class EditAreaPage extends AbstractPage {
 				.getObjectIdentifier("area_interest_rate_xpath_after_save")).getText().length();
 		assertEquals(interestRateLength.toString(), "256");
 	}
-		
+
 	public void verifyMaximumTextInInterestRate() {
 		assertEquals(interestRateMaximumCharacter.subSequence(0, 256), getDriver()
 				.findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_xpath_after_save")).getText());
 	}
-	
+
 	public void verifyAreaInterestRateFromTrustedDB(String country, String area, String tagName, String source) {
 		assertEquals(getAreaBasicInfoFromDB(country, area, tagName, source),
 				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath")).getAttribute("value"));
 	}
-	
+
 	public void verifyMaxLengthInterestRate(String maxLength) {
 		 assertEquals(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_interest_rate_text_xpath"))
                 .getAttribute("maxlength"), maxLength);
@@ -1917,6 +1920,264 @@ public class EditAreaPage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void checksAddressBarIsHavingNewCountryAreaIds(String country, String areaParent)
+			throws InterruptedException {
+		String[] urlPartitions = getDriver().getCurrentUrl().split("/");
+		String countryID = urlPartitions[6];
+		String areaID = urlPartitions[7];
+
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("name", country));
+		nvPairs.add(new BasicNameValuePair("source", "zeus"));
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for country", nvPairs);
+		if(document != null) {
+			assertEquals(countryID, document.getElementsByTagName("documentId").item(0).getAttributes().getNamedItem("id").getTextContent().toString());
+		}
+
+		nvPairs.add(new BasicNameValuePair("name", areaParent));
+		nvPairs.add(new BasicNameValuePair("source", "zeus"));
+
+		document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get Id for area", nvPairs);
+		if(document != null) {
+			assertEquals(areaID, document.getElementsByTagName("documentId").item(0).getAttributes().getNamedItem("id").getTextContent().toString());
+		}
+	}
+
+	public void verifySubAreaInfoFromZeusDB(String country, String area, String subArea, String tagName, String source,
+			String subAreaId) {
+		assertEquals(getSubareaInfoFromDB(country, area, subArea, tagName, source), subAreaId);
+	}
+
+	public String getSubareaInfoFromDB(String country, String area, String subarea, String tagName, String source) {
+
+		String tagValue = null;
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("subarea", subarea));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(7000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get area basic info", nvPairs);
+		if (document != null) {
+			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+					: getNodeValuesByTagName(document, tagName).get(0);
+		}
+		return tagValue;
+	}
+
+	public void verifySubAreaDropdown(String subArea) throws InterruptedException {
+		List<WebElement> subAreaList = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_List_value_xpath"));
+		List<String> subAreasTextlist = new ArrayList<String>();
+		for (int j = 0; j < subAreaList.size(); j++) {
+			subAreasTextlist.add((subAreaList.get(j)).getText());
+		}
+		assertFalse(subAreasTextlist.contains(subArea));
+	}
+
+	public void verifyNoParentAreaDropdown() {
+		try {
+			assertFalse(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath")).isDisplayed());
+		}
+		catch(NoSuchElementException e)
+		{
+			 assertTrue(true);
+		}
+
+		}
+
+
+	public void verifyChooseAnAreaOptionInAreaparent() throws InterruptedException {
+		assertEquals("Choose an Area",
+				getDriver()
+						.findElement(AreaIdentifiers.getObjectIdentifier("parent_area_default_value_dropdown_xpath"))
+						.getText());
+	}
+
+	public void verifyAreaListInPlacesForCountry(String country) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("name", country));
+		nvPairs.add(new BasicNameValuePair("source", "trusted"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list",
+				nvPairs);
+		List<WebElement> areaList = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"));
+		areaList.remove(0);
+		if (areaList != null) {
+			for (int i = 0; i < document.getElementsByTagName("area").getLength(); i++) {
+				assertEquals(document.getElementsByTagName("area").item(i).getTextContent(),
+						areaList.get(i).getAttribute("text"));
+			}
+		} else {
+			assertTrue("area list is not displayed", false);
+		}
+	}
+
+	public void userVerifyHeaderDropdownValuesDisabled() throws InterruptedException {
+		assertFalse(
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("country_type_ahead_xpath")).isEnabled());
+		assertFalse(getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_subarea_dropdown_typeAhead_xpath")).isEnabled());
+		assertFalse(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_area_dropdown_typeAhead_xpath"))
+				.isEnabled());
+	}
+
+	public void userVerifyCountryDropdownDefaultValue(String country) {
+
+		assertEquals(country, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("country_default_value_dropdown_xpath")).getText());
+
+	}
+
+	public void verifyCountryListInPlacesForCountry() {
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "country list");
+
+		List<WebElement> countryList = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("country_places_country_dropDown_xpath"));
+		countryList.remove(0);
+		if (countryList != null) {
+			for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
+				assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent().trim(),
+						countryList.get(i).getAttribute("text").trim());
+			}
+		} else  {
+			assertTrue("area list is not displayed", false);
+		}
+	}
+
+	public void verifyErrorMessageForRequiredAreaparentField(String errorMessage) throws InterruptedException {
+		//textToBePresentInElement(
+		//		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_identifier_type_req_err_msg_xpath")));
+		assertEquals(errorMessage, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("area_parent_req_err_msg_xpath")).getText());
+	}
+
+	public void checksHeaderdropdownValue(String country, String area) throws InterruptedException {
+		Thread.sleep(3000);// wait for header dropdowns to reload
+		assertEquals(country,
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("country_current_value_xpath")).getText());
+		assertEquals(area,
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_current_value_xpath")).getText());
+	}
+
+	public void verifyAreaInfoFromZeusDB(String country, String area, String tagName, String source, String areaId)
+			throws InterruptedException {
+		assertEquals(getAreasInfoFromDB(country, area, tagName, source), areaId);
+	}
+
+	public String getAreasInfoFromDB(String country, String area, String tagName, String source) {
+		String tagValue = null;
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		try {
+			Thread.sleep(7000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get area basic info", nvPairs);
+		if (document != null) {
+			tagValue = getNodeValuesByTagName(document, tagName).size() == 0 ? ""
+					: getNodeValuesByTagName(document, tagName).get(0);
+		}
+		return tagValue;
+	}
+
+	public void userVerifyAreaParentDropdownDefaultValue(String area) {
+		assertEquals(area,
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("parent_area_default_value_dropdown_xpath"))
+						.getText());
+	}
+
+	public void clickOnAreaDropdown() throws InterruptedException {
+		attemptClick(AreaIdentifiers.getObjectIdentifier("areaParent_currentValue_xpath"));
+	}
+
+	public void verifyParentAreaDropdownDontHaveNoArea() {
+		List<WebElement> listArea = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"));
+		List<String> areaParentList = new ArrayList<String>();
+		for (int j = 0; j < listArea.size(); j++) {
+			areaParentList.add((listArea.get(j)).getText());
+		}
+		assertFalse(areaParentList.contains("No Area"));
+	}
+
+	public void verifyAreaListInPlaceForCountry(String Country) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("name", Country));
+		nvPairs.add(new BasicNameValuePair("source", "trusted"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "area list",
+				nvPairs);
+		for (int i = 0; i < document.getElementsByTagName("area").getLength(); i++) {
+			assertEquals(document.getElementsByTagName("area").item(i).getTextContent(),
+					getDriver()
+							.findElements(
+									AreaIdentifiers.getObjectIdentifier("country_places_areaparent_dropdown_xpath"))
+							.get(i + 1).getAttribute("text"));
+		}
+	}
+
+	public void verifyHeaderDropDownValues(String country, String areaParent, String subArea)
+			throws InterruptedException {
+		Thread.sleep(3000);// wait time for Header drop downs to reload
+		assertEquals(country,
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("country_current_value_xpath")).getText());
+		assertEquals(areaParent,
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_current_value_xpath")).getText());
+		assertEquals(subArea,
+				getDriver().findElement(AreaIdentifiers.getObjectIdentifier("subarea_current_value_xpath")).getText());
+	}
+
+	public void selectCountryValue(String country) throws InterruptedException {
+		try {
+
+
+
+			attemptClick(AreaIdentifiers.getObjectIdentifier("country_header_value_xpath"));
+			//Select dropdown = new Select(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("country_places_country_dropDown_select_xpath")));
+			List<WebElement> options = getDriver().findElements(
+					AreaIdentifiers.getObjectIdentifier("country_places_country_dropDown_select_option_xpath"));
+			for (WebElement option : options) {
+				if (option.getText().equals(country)) {
+					option.click();
+					selectedCountryID = option.getAttribute("value");
+					break;
+				}
+			}
+		} catch (Exception e) {
+		}
+		Thread.sleep(4000);
+	}
+
+
+
+	public void userChangesAreaDropdownvalue(String areaParent) throws InterruptedException {
+		try {
+			attemptClick(AreaIdentifiers.getObjectIdentifier("areaParent_currentValue_xpath"));
+			List<WebElement> options = getDriver()
+					.findElements(AreaIdentifiers.getObjectIdentifier("country_places_areas_option_dropdown_xpath"));
+			for (WebElement option : options) {
+				if (option.getText().equals(areaParent)) {
+					option.click();
+					break;
+				}
+			}
+		} catch (Exception e) {
+		}
+
 	}
 
 	@Override
