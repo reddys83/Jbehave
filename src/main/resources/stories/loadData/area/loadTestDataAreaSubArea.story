@@ -1,4 +1,4 @@
-Meta:@loadData
+Meta:@loadTestDataAreaSubArea @loadData
 Narrative:
 Reloading the data after data refresh
 

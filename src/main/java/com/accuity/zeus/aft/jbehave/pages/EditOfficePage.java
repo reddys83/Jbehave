@@ -2115,7 +2115,7 @@ public class EditOfficePage extends AbstractPage {
 					Thread.sleep(2000L);
 
 					Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-							"office locations primary flag values", nvPairs);
+							"get office locations primary flag values", nvPairs);
 					if (document != null && document.getElementsByTagName("primary").getLength() > 0) {
 						assertEquals(primaryFlagValue, document.getElementsByTagName("primary").item(index).getTextContent());
 					} else {
@@ -2167,7 +2167,7 @@ public class EditOfficePage extends AbstractPage {
 			Thread.sleep(2000L);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"office locations primary flag values", nvPairs);
+					"get office locations primary flag values", nvPairs);
 			HashMap<String, String> locationValueInUI = new HashMap<String, String>();
 			HashMap<String, String> locationValueInDB = new HashMap<String, String>();
 			

@@ -29,7 +29,7 @@ public class SearchPage extends AbstractPage {
 	private By search_button_id = By.id("search-button");
 	private By data_tab_xpath = By.xpath("//header/nav[1]/ul/li[2]");
 	private By results_tab_xpath = By.xpath("//*[@id='results-nav']");
-	private By legalEntity_type_ahead_xpath = By.xpath(".//*[@id='main-header']//input[2]");
+	private By legalEntity_type_ahead_xpath = By.xpath(".//*[@id='main-header']//input[1]");
 	private By legalEntity_search_option_type_dropdown_id= By.id("search-type");
 	private By legalEntity_search_button_id=By.id("search-button");
 	public static String selectedEntity="";
