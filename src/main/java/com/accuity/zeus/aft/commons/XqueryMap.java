@@ -143,8 +143,11 @@ public class XqueryMap {
 		queryMap.put("get area places type lookup","getAreaRelatedPlacesTypeFromLookup.xqy");
 		queryMap.put("get area places detail lookup","getAreaRelatedPlacesDetailsFromLookup.xqy");
 		queryMap.put("get area related place info","getAreaRelatedPlaces.xqy");
+		queryMap.put("get document id for subarea","getIdForSubArea.xqy");
+        queryMap.put("get Id for area", "getIdForArea.xqy");
+        queryMap.put("get routingCode basic info","getRoutingCodeBasicInfo.xqy");
 		queryMap.put("get office telecom locations", "getOfficeTelecomLocations.xqy");
-		queryMap.put("delete office locations values", "deleteOfficeLocationsValues.xqy");
+		queryMap.put("delete office locations values", "deleteOfficeLocationsValues.xqy");		
    }
 
     public String getXquery(String key){
