@@ -405,10 +405,4 @@ public abstract class AbstractPage {
 		cal.add(Calendar.DATE, 1);
 		return dateFormat.format(cal.getTime());
 	}	
-
-	public String getAttributeValue(By by) {
-		String attributeValue = null;
-		attributeValue = getDriver().findElement(by).getAttribute("value");
-		return attributeValue;
-	}
 }

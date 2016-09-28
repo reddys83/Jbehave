@@ -908,18 +908,18 @@ And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 Then the user should see the primary flag value same as in trusted document
-When the user selects true for office locations second primary flag
-Then the user verifies that the selected true primary flag is not editable
+When the user selects <primaryFlag1> for office locations second primary flag
+Then the user verifies the true primary flag is not editable
 When the user clicks on the save button
 And the user clicks on the confirm button
-Then the user verifies that true is selected for selected primary flag after saving
-Then the user verifies that false is selected for other office locations primary flag after saving
+Then the user verifies that <primaryFlag1> is selected for selected primary flag after saving
+Then the user verifies <primaryFlag2> is saved for other location
 Then the user verifies the primary flag values in zeus document
 And the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|officeFid|
-|91832|FID|91832|91832-0|
+|entity|searchBy|fid|officeFid|primaryFlag1|primaryFlag2|
+|91832|FID|91832|91832-0|true|false|
 
 
 

@@ -1485,27 +1485,28 @@ public class EditOfficeSteps extends AbstractSteps{
 	
 	@Then("the user should see the primary flag value same as in $source document")
 	public void primaryFlagValueFromTrustedDB(@Named("source") String source, @Named("officeFid") String officeFid) {
-		getEditOfficePage().primaryFlagValueFromTrustedDB(source, officeFid);
+		getEditOfficePage().verifyPrimaryFlagValueFromTrustedDB(source, officeFid);
 	}
 	
-	@When("the user selects true for office locations second primary flag")
-	public void selectPrimaryFlagTrueValue() {
+	@When("the user selects <primaryFlag1> for office locations second primary flag")
+	public void selectPrimaryFlagTrueValue(@Named("primaryFlag1") String primaryFlag1) {
 		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_second_location_true_primary_flag"));
+		getEditOfficePage().getAddressLine1ValueForPrimaryFlag();
 	}
 	
-	@Then("the user verifies that the selected true primary flag is not editable")
+	@Then("the user verifies the true primary flag is not editable")
 	public void verifySelectedPrimaryFlagNotEditable() {
 		getEditOfficePage().verifySelectedPrimaryFlagNotEditable();
 	}
 	
-	@Then("the user verifies that true is selected for selected primary flag after saving")
-	public void verifyTruePrimaryFlagIsSelectedAfterSave() {
-		getEditOfficePage().verifyTruePrimaryFlagIsSelectedAfterSave();
+	@Then("the user verifies that <primaryFlag1> is selected for selected primary flag after saving")
+	public void verifyTruePrimaryFlagIsSelectedAfterSave(@Named("primaryFlag1") String primaryFlag1) {
+		getEditOfficePage().verifyPrimaryFlagInUI(primaryFlag1);
 	}
 	
-	@Then("the user verifies that false is selected for other office locations primary flag after saving")
-	public void verifyFalsePrimaryFlagIsSelectedAfterSave() {
-		getEditOfficePage().verifyFalsePrimaryFlagIsSelectedAfterSave();
+	@Then("the user verifies <primaryFlag2> is saved for other location")
+	public void verifyFalsePrimaryFlagIsSelectedAfterSave(@Named("primaryFlag2") String primaryFlag2) {
+		getEditOfficePage().verifyPrimaryFlagInUI(primaryFlag2);
 	}
 	
 	@Then("the user verifies the primary flag values in $source document")

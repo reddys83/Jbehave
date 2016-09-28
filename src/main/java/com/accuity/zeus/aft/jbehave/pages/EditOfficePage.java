@@ -35,7 +35,6 @@ public class EditOfficePage extends AbstractPage {
     public String EditSortNameValue = "";
     public String EditOfficeSortName = "";
     public static String officeHistoryMaximumCharacter = null;
-    public static String primaryFlagValue = null;
     public static String addressLine1SecondPrimaryFlag = null;
     public static String addressLine1FirstPrimaryFlag = null;
 
@@ -2097,7 +2096,8 @@ public class EditOfficePage extends AbstractPage {
 		assertEquals("", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_services_entire_xpath")).getText());
 	}
 	
-	public void primaryFlagValueFromTrustedDB(String source, String officeFid) {
+	public void verifyPrimaryFlagValueFromTrustedDB(String source, String officeFid) {
+		String primaryFlagValue = null;
 		if (getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_row_edit_mode")).size() > 1) {
 			List<WebElement> primaryFlagList = getDriver()
 					.findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_primary_flag_field"));
@@ -2108,29 +2108,23 @@ public class EditOfficePage extends AbstractPage {
 				} else {
 					primaryFlagValue = primaryFlagList.get(index).findElements(By.tagName("input")).get(1).getAttribute("value");
 				}
-				verifyOfficePrimaryFlagValuesFromTrustedDB(source, officeFid, primaryFlagValue, "primary", index);
-			}
-		}
-	}
-	
-	public void verifyOfficePrimaryFlagValuesFromTrustedDB(String source, String officeFid, String flagValue, String tagname,
-			int index) {
-		try {
-			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
-			nvPairs.add(new BasicNameValuePair("source", source));
-			Thread.sleep(2000L);
+				try {
+					List<NameValuePair> nvPairs = new ArrayList<>();
+					nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
+					nvPairs.add(new BasicNameValuePair("source", source));
+					Thread.sleep(2000L);
 
-			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"office locations details", nvPairs);
-			if (document != null && document.getElementsByTagName(tagname).getLength() > 0) {
-				assertEquals(flagValue, document.getElementsByTagName(tagname).item(index).getTextContent());
-			} else {
-				assertTrue(source + "document is null / primary tagname is not present", false);
+					Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+							"office locations primary flag values", nvPairs);
+					if (document != null && document.getElementsByTagName("primary").getLength() > 0) {
+						assertEquals(primaryFlagValue, document.getElementsByTagName("primary").item(index).getTextContent());
+					} else {
+						assertTrue(source + "document is null / primary tagname is not present", false);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -2140,25 +2134,26 @@ public class EditOfficePage extends AbstractPage {
 		for(int index=0; index < secondPrimaryFlagList.size(); index++) {
 			assertFalse(secondPrimaryFlagList.get(index).isEnabled());
 		}
-		addressLine1SecondPrimaryFlag = getAttributeValue(OfficeIdentifiers.getObjectIdentifier("office_first_location_addressline1_edit_mode"));
-		addressLine1FirstPrimaryFlag = getAttributeValue(OfficeIdentifiers.getObjectIdentifier("office_second_location_addressline1_edit_mode"));
 	}
 	
-	public void verifyTruePrimaryFlagIsSelectedAfterSave() {
-		try {
-			Thread.sleep(3000L);
-			assertEquals("true", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_first_location_primary_flag_view_mode")).getText());
-			assertEquals(addressLine1FirstPrimaryFlag,	getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_first_location_addressline1_view_mode")).getText());
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	public void getAddressLine1ValueForPrimaryFlag() {
+		addressLine1SecondPrimaryFlag = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_first_location_addressline1_edit_mode")).getAttribute("value");
+		addressLine1FirstPrimaryFlag = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_second_location_addressline1_edit_mode")).getAttribute("value");
 	}
 	
-	public void verifyFalsePrimaryFlagIsSelectedAfterSave() {
+	public void verifyPrimaryFlagInUI(String primaryFlag) {
 		try {
 			Thread.sleep(3000L);
-			assertEquals("false", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_second_location_primary_flag_view_mode")).getText());
-			assertEquals(addressLine1SecondPrimaryFlag,	getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_second_location_addressline1_view_mode")).getText());
+			if (primaryFlag.equals("true")) {
+				assertEquals(primaryFlag, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_first_location_primary_flag_view_mode"))
+								.getText());
+				assertEquals(addressLine1FirstPrimaryFlag, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_first_location_addressline1_view_mode"))
+								.getText());
+			} else {
+				assertEquals(primaryFlag, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_second_location_primary_flag_view_mode")).getText());
+				assertEquals(addressLine1SecondPrimaryFlag,	getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_second_location_addressline1_view_mode"))
+								.getText());
+			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -2172,24 +2167,25 @@ public class EditOfficePage extends AbstractPage {
 			Thread.sleep(2000L);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"office locations details", nvPairs);
-			HashMap<String, String> hm1 = new HashMap<String, String>();
-			HashMap<String, String> hm2 = new HashMap<String, String>();
+					"office locations primary flag values", nvPairs);
+			HashMap<String, String> locationValueInUI = new HashMap<String, String>();
+			HashMap<String, String> locationValueInDB = new HashMap<String, String>();
 			
 			if(document!=null && document.getElementsByTagName("location").getLength()>1) {
 				for(int index=0; index < document.getElementsByTagName("location").getLength(); index++) {
-					String primaryFlagDBValue = document.getElementsByTagName("location").item(index).getFirstChild().getTextContent();
-					String addressLine1DB = document.getElementsByTagName("location").item(index).getFirstChild().getNextSibling().getFirstChild().getNextSibling().getTextContent();
-					hm1.put(primaryFlagDBValue, addressLine1DB);
+					String primaryFlagDBValue = document.getElementsByTagName("primary").item(index).getTextContent();
+					String addressLine1DB = document.getElementsByTagName("location").item(index).getChildNodes()
+							.item(1).getChildNodes().item(1).getTextContent();
+					locationValueInUI.put(primaryFlagDBValue, addressLine1DB);
 				}
 			}
 			
-			hm2.put(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_first_location_primary_flag_view_mode")).getText(),
+			locationValueInDB.put(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_first_location_primary_flag_view_mode")).getText(),
 					getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_first_location_addressline1_view_mode")).getText());
-			hm2.put(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_second_location_primary_flag_view_mode")).getText(),
+			locationValueInDB.put(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_second_location_primary_flag_view_mode")).getText(),
 					getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_second_location_addressline1_view_mode")).getText());
 			
-			assertTrue(hm1.equals(hm2));
+			assertTrue(locationValueInUI.equals(locationValueInDB));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
