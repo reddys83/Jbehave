@@ -6,6 +6,7 @@ I want to perform an action
 So that I can achieve a business goal
 
 JIRA ID - ZEUS-1075 - User can select to edit Office's Locations
+JIRA ID - ZEUS-1301 - User can edit Office's Locations (Primary Flag)
 !--and
 !--JIRA ID - ZEUS-1299 - User can edit Office's Locations(Addresses)
 !--and
