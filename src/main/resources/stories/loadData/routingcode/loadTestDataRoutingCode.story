@@ -11,3 +11,4 @@ Examples:
 |routingCode|routingCodeType|
 |083905216|ABA|
 |01056|Swift BIC|
+|DAAEDEDD435|Swift BIC|

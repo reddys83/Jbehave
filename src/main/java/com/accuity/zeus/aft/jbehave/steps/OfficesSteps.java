@@ -66,6 +66,12 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().verifyOfficesTabInOffice();
     }
 
+    @Then("the user should see the office names for <officeFid> in the office basic info")
+    public void verifyOfficeNames(@Named("officeFid") String fid) {
+        getOfficesPage().verifyOfficeNames(fid);
+    }
+
+
     @Then("the user should not see the office tab in the office page")
     public void verifyNoOfficeTabInOffice() {
         getOfficesPage().verifyNoOfficeTabInOffice();
