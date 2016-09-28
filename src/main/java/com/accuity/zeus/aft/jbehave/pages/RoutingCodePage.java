@@ -157,7 +157,7 @@ public class RoutingCodePage extends AbstractPage {
         }
         for (int i = 0; i < document.getElementsByTagName("results").getLength(); i++) {
             for (int j = 1; j <= document.getFirstChild().getChildNodes().item(i).getChildNodes().getLength(); j++) {
-                assertEquals(getDriver().findElement(By.xpath(".//*[@id='usages']/tr[" + (i + 1) + "]/td[" + j + "]")).getText(), document.getFirstChild().getChildNodes().item(i).getChildNodes().item(j - 1).getTextContent());
+                assertEquals(document.getFirstChild().getChildNodes().item(i).getChildNodes().item(j - 1).getTextContent(),getDriver().findElement(By.xpath(".//*[@id='usages']/tr[" + (i + 1) + "]/td[" + j + "]")).getText());
             }
         }
     }
