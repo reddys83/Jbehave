@@ -2098,33 +2098,37 @@ public class EditOfficePage extends AbstractPage {
 	
 	public void verifyPrimaryFlagValueFromTrustedDB(String source, String officeFid) {
 		String primaryFlagValue = null;
-		if (getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_row_edit_mode")).size() > 1) {
-			List<WebElement> primaryFlagList = getDriver()
-					.findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_primary_flag_field"));
+		try {
+			if (getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_row_edit_mode")).size() > 0) {
+				List<WebElement> primaryFlagList = getDriver()
+						.findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_primary_flag_field"));
 
-			for (int index = 0; index < primaryFlagList.size(); index++) {
-				if (primaryFlagList.get(index).findElements(By.tagName("input")).get(0).isSelected()) {
-					primaryFlagValue = primaryFlagList.get(index).findElements(By.tagName("input")).get(0).getAttribute("value");
-				} else {
-					primaryFlagValue = primaryFlagList.get(index).findElements(By.tagName("input")).get(1).getAttribute("value");
-				}
-				try {
+				for (int index = 0; index < primaryFlagList.size(); index++) {
+					List<WebElement> flagOptions = primaryFlagList.get(index).findElements(By.name("primaryLocation-"+index));
+					for (int flagIndex = 0; flagIndex < flagOptions.size(); flagIndex++) {
+						if (flagOptions.get(flagIndex).isSelected()) {
+							primaryFlagValue = flagOptions.get(flagIndex).getAttribute("value");
+							break;
+						}
+					}
 					List<NameValuePair> nvPairs = new ArrayList<>();
 					nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
 					nvPairs.add(new BasicNameValuePair("source", source));
 					Thread.sleep(2000L);
 
 					Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-							"get office locations primary flag values", nvPairs);
+							"office locations", nvPairs);
 					if (document != null && document.getElementsByTagName("primary").getLength() > 0) {
-						assertEquals(primaryFlagValue, document.getElementsByTagName("primary").item(index).getTextContent());
+						assertEquals(primaryFlagValue,
+								document.getElementsByTagName("primary").item(index).getTextContent());
 					} else {
 						assertTrue(source + "document is null / primary tagname is not present", false);
 					}
-				} catch (Exception e) {
-					e.printStackTrace();
+
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -2167,15 +2171,15 @@ public class EditOfficePage extends AbstractPage {
 			Thread.sleep(2000L);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"get office locations primary flag values", nvPairs);
+					"office locations", nvPairs);
 			HashMap<String, String> locationValueInUI = new HashMap<String, String>();
 			HashMap<String, String> locationValueInDB = new HashMap<String, String>();
 			
-			if(document!=null && document.getElementsByTagName("location").getLength()>1) {
-				for(int index=0; index < document.getElementsByTagName("location").getLength(); index++) {
-					String primaryFlagDBValue = document.getElementsByTagName("primary").item(index).getTextContent();
-					String addressLine1DB = document.getElementsByTagName("location").item(index).getChildNodes()
-							.item(1).getChildNodes().item(1).getTextContent();
+			if(document!=null && document.getElementsByTagName("locationPrimaryFlag").getLength()>1) {
+				for(int index=0; index < document.getElementsByTagName("locationPrimaryFlag").getLength(); index++) {
+					String primaryFlagDBValue = document.getElementsByTagName("primaryFlag").item(index).getTextContent();
+					String addressLine1DB = document.getElementsByTagName("locationPrimaryFlag").item(index).getChildNodes()
+							.item(1).getTextContent();
 					locationValueInUI.put(primaryFlagDBValue, addressLine1DB);
 				}
 			}

@@ -1499,13 +1499,13 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().verifySelectedPrimaryFlagNotEditable();
 	}
 	
-	@Then("the user verifies that <primaryFlag1> is selected for selected primary flag after saving")
-	public void verifyTruePrimaryFlagIsSelectedAfterSave(@Named("primaryFlag1") String primaryFlag1) {
+	@Then("the user verifies that <primaryFlag1> is updated in UI")
+	public void verifyPrimaryFlagIsTrue(@Named("primaryFlag1") String primaryFlag1) {
 		getEditOfficePage().verifyPrimaryFlagInUI(primaryFlag1);
 	}
 	
 	@Then("the user verifies <primaryFlag2> is saved for other location")
-	public void verifyFalsePrimaryFlagIsSelectedAfterSave(@Named("primaryFlag2") String primaryFlag2) {
+	public void verifyPrimaryFlagIsFalse(@Named("primaryFlag2") String primaryFlag2) {
 		getEditOfficePage().verifyPrimaryFlagInUI(primaryFlag2);
 	}
 	

@@ -204,7 +204,7 @@ public class OfficeIdentifiers {
 	    hmap.put("office_service_category_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='serviceCategoryError']"));
 	    hmap.put("office_services_entire_xpath",By.xpath("//*[@id='officeServices']//tbody"));
 	    hmap.put("office_locations_row_edit_mode",By.xpath("//*[@id='officeLocations']//*[@class='location']"));
-	    hmap.put("office_locations_primary_flag_field", By.xpath("//*[@id='officeLocations']//*[@class='location']//*[dt='Primary']//fieldset"));
+	    hmap.put("office_locations_primary_flag_field", By.xpath("//*[@id='additionalLocations']//fieldset[contains(@data-edit_id,'primaryLocation')]"));
 	    hmap.put("office_second_location_true_primary_flag", By.xpath("//*[@id='officeLocations']//*[@data-edit_id='primaryLocation-1']/input[@value='true']"));
 	    hmap.put("office_second_location_false_primary_flag", By.xpath("//*[@id='officeLocations']//*[@data-edit_id='primaryLocation-1']/input[@value='false']"));
 	    hmap.put("office_second_location_primary_flag", By.xpath("//*[@id='officeLocations']//*[@data-edit_id='primaryLocation-1']//input"));

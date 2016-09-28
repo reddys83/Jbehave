@@ -912,7 +912,7 @@ When the user selects <primaryFlag1> for office locations second primary flag
 Then the user verifies the true primary flag is not editable
 When the user clicks on the save button
 And the user clicks on the confirm button
-Then the user verifies that <primaryFlag1> is selected for selected primary flag after saving
+Then the user verifies that <primaryFlag1> is updated in UI
 Then the user verifies <primaryFlag2> is saved for other location
 Then the user verifies the primary flag values in zeus document
 And the user reverts the changes to the document
