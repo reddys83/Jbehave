@@ -209,8 +209,8 @@ public class OfficeIdentifiers {
 	    hmap.put("office_second_location_false_primary_flag", By.xpath("//*[@id='officeLocations']//*[@data-edit_id='primaryLocation-1']/input[@value='false']"));
 	    hmap.put("office_second_location_primary_flag", By.xpath("//*[@id='officeLocations']//*[@data-edit_id='primaryLocation-1']//input"));
 	    hmap.put("office_first_location_primary_flag_view_mode", By.xpath("//*[@id='officeLocations']//*[@class='location'][1]//*[dt='Primary']/dd"));
-	    hmap.put("office_first_location_addressline1_edit_mode", By.xpath("//*[@id='additionalLocationAddresses-0']//*[@class='address'][1]//*[th='Address Line 1']//input"));
-	    hmap.put("office_second_location_addressline1_edit_mode", By.xpath("//*[@id='additionalLocationAddresses-0']//*[@class='address'][2]//*[th='Address Line 1']//input"));
+	    hmap.put("office_first_location_addressline1_edit_mode", By.xpath("//*[@data-row_id='locationAddresses-0']//*[@class='address'][1]//*[th='Address Line 1']//input"));
+	    hmap.put("office_second_location_addressline1_edit_mode", By.xpath("//*[@data-row_id='locationAddresses-1']//*[@class='address'][1]//*[th='Address Line 1']//input"));
 	    hmap.put("office_first_location_addressline1_view_mode", By.xpath("//*[@id='officeLocations']//*[@class='location'][1]//*[@class='vertical'][1]//*[th='Address Line 1']/td"));
 	    hmap.put("office_second_location_addressline1_view_mode", By.xpath("//*[@id='officeLocations']//*[@class='location'][2]//*[@class='vertical'][1]//*[th='Address Line 1']/td"));
 	    hmap.put("office_second_location_primary_flag_view_mode", By.xpath("//*[@id='officeLocations']//*[@class='location'][2]//*[dt='Primary']/dd"));

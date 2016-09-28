@@ -405,4 +405,5 @@ public abstract class AbstractPage {
 		cal.add(Calendar.DATE, 1);
 		return dateFormat.format(cal.getTime());
 	}	
+    
 }
