@@ -143,7 +143,10 @@ public class XqueryMap {
 		queryMap.put("get area places type lookup","getAreaRelatedPlacesTypeFromLookup.xqy");
 		queryMap.put("get area places detail lookup","getAreaRelatedPlacesDetailsFromLookup.xqy");
 		queryMap.put("get area related place info","getAreaRelatedPlaces.xqy");
-		queryMap.put("get area entity type lookup","getAreaRelatedEntityTypeFromLookup.xqy");
+		queryMap.put("get document id for subarea","getIdForSubArea.xqy");
+        queryMap.put("get Id for area", "getIdForArea.xqy");
+        queryMap.put("get routingCode basic info","getRoutingCodeBasicInfo.xqy");
+        queryMap.put("get area entity type lookup","getAreaRelatedEntityTypeFromLookup.xqy");
 		queryMap.put("get area entity detail lookup", "getAreaRelatedEntityDetailsFromLookup.xqy");
 		queryMap.put("get area entity details", "getAreaRelatedEntityDetails.xqy");
    }

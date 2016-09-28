@@ -1064,7 +1064,7 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void getDocument(String xqueryName, String name) {
+      public void getDocument(String xqueryName, String name) {
 
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", name));
@@ -1337,11 +1337,40 @@ public class DataPage extends AbstractPage {
     public void verifyAreaPlacesView() {
         assertTrue(getDriver().findElement(select_places_view_xpath).isDisplayed());
     }
+    
+    public void getDocumentforSubArea(String xqueryName, String subArea, String country, String  area) {
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("subarea", subArea));
+        nvPairs.add(new BasicNameValuePair("country", country));
+        nvPairs.add(new BasicNameValuePair("area", area));      
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
+        if(document != null) {
+	        endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
+
+	        responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
+	        assertTrue(responseEntity.getStatusCode().value() == 200);
+	    }
+	    else {
+            assertFalse("Zeus document with subArea " + subArea + " does not exist in the DB", true);
+	    }
+    }
 
     public void updateDocument(String endpoint, String entityFid) {
         XmlDocument xmlDocument = getTestDataXml(endpoint, entityFid);
 
         String endpointWithID = getResourceURL(endpoint, entityFid);
+        int response = restClient.putDocumentByID(endpointWithID, heraApi, xmlDocument.toString());
+
+        assertTrue(response == 202);
+    }
+
+    public void updateRoutingCodeDocument(String endpoint, String routingCode, String routingCodeType){
+        XmlDocument xmlDocument = getTestDataXml(endpoint, routingCode+"-"+routingCodeType);
+
+        String endpointWithID = getResourceURL(endpoint, routingCode+"-"+routingCodeType);
         int response = restClient.putDocumentByID(endpointWithID, heraApi, xmlDocument.toString());
 
         assertTrue(response == 202);

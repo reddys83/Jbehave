@@ -1,4 +1,4 @@
-Meta:@loadTestDataCountry
+Meta:@loadTestDataCountry @loadData
 Narrative:
 Reloading the data after data refresh
 
