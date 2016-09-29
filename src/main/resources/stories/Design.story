@@ -13,4 +13,3 @@ Then the user should see the usages for routingCode <routingCode> and code type 
 Examples:
 |entity|searchBy|routingCode|codeType|
 |DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|
-|001|Routing Code|001|AF Cheque Clearing Sys|

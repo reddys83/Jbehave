@@ -151,7 +151,7 @@ public class RoutingCodePage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("codeType", codeType));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode usages", nvPairs);
         try {
-            Thread.sleep(2000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
