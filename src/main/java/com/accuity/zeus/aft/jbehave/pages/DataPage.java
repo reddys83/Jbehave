@@ -1437,5 +1437,15 @@ public class DataPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
+	
+	public void clickElementUsingIndex(By by, int index) {		
+    	try {
+    		List<WebElement> elementList = getDriver().findElements(by);		
+        	elementList.get(index-1).click();        	
+    	}
+    	catch (Exception e) {
+			assertFalse("Element not found", false);
+		}    	
+	} 
 
 }
