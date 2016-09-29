@@ -701,7 +701,7 @@ public class EditOfficePage extends AbstractPage {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("name", selectedEntity));
 			nvPairs.add(new BasicNameValuePair("source", "trusted"));
-			Thread.sleep(2000L);
+			Thread.sleep(1000L);
 			List<WebElement> subAreaList = getDriver()
 					.findElements(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown_list"));
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
@@ -978,20 +978,19 @@ public class EditOfficePage extends AbstractPage {
 
 
     public void verifyOfficeAddressLinesAddressesInUI(String type,String addressLine1, String addressLine2, String addressLine3, String addressLine4, String country, String area, String subArea, String city, String postalCode, String postalCodeSuffix, String info) {
-    	try {
-    		List<WebElement> addressList = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_addressList_view_mode"));    
-        	assertEquals(type, addressList.get(0).getText());
-            assertEquals(addressLine1, addressList.get(1).getText());
-            assertEquals(addressLine2, addressList.get(1).getText());
-            assertEquals(addressLine3, addressList.get(1).getText());
-            assertEquals(addressLine4, addressList.get(1).getText());
-            assertEquals(country, addressList.get(1).getText());
-            assertEquals(area, addressList.get(1).getText());
-            assertEquals(subArea, addressList.get(1).getText());
-            assertEquals(city, addressList.get(1).getText());
-            assertEquals(postalCode, addressList.get(1).getText());
-            assertEquals(postalCodeSuffix, addressList.get(1).getText());
-            assertEquals(info, addressList.get(1).getText()); 
+    	try {    			    	
+            assertEquals(type, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_view_mode")));
+            assertEquals(addressLine1, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine1_view_mode")));
+            assertEquals(addressLine2, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine2_view_mode")));
+            assertEquals(addressLine3, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine3_view_mode")));
+            assertEquals(addressLine4, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine4_view_mode")));
+            assertEquals(country, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_country_view_mode")));
+            assertEquals(area, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_area_view_mode")));
+            assertEquals(subArea, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_subarea_view_mode")));
+            assertEquals(city, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_city_view_mode")));
+            assertEquals(postalCode, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_postal_code_view_mode")));
+            assertEquals(postalCodeSuffix, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_postal_code_suffix_view_mode")));           
+            assertEquals(info, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_info_view_mode")));
     	}
     	catch(Exception e) {
     		e.printStackTrace();
@@ -999,17 +998,17 @@ public class EditOfficePage extends AbstractPage {
     }
 
 	public boolean verifyOfficeAddressLinesAddressesFromDB(String type, String addressLine1, String addressLine2,
-			String addressLine3, String addressLine4, String postalCode, String postalCodeSuffix, String info, String country, String area, String subArea, String city,
-			String officeFid, String source) {
+			String addressLine3, String addressLine4, String postalCode, String postalCodeSuffix, String info,
+			String country, String area, String subArea, String city, String officeFid, String source) {
 		Boolean flag = false;
 		try {
-			Thread.sleep(3000L);
+			Thread.sleep(10L);
 			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("fid", officeFid));
+			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
 			nvPairs.add(new BasicNameValuePair("source", source));
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"get office locations", nvPairs);
+					"get Office Locations", nvPairs);
 			StringBuilder officeAddressLines = new StringBuilder();
 			officeAddressLines.append(type);
 			officeAddressLines.append(addressLine1);
@@ -1017,7 +1016,7 @@ public class EditOfficePage extends AbstractPage {
 			officeAddressLines.append(addressLine3);
 			officeAddressLines.append(addressLine4);
 			officeAddressLines.append(postalCode);
-			officeAddressLines.append(postalCodeSuffix);			
+			officeAddressLines.append(postalCodeSuffix);
 			officeAddressLines.append(info);
 			officeAddressLines.append(country);
 			officeAddressLines.append(area);
@@ -1032,7 +1031,7 @@ public class EditOfficePage extends AbstractPage {
 				List<String> addressLine3List = getNodeValuesByTagName(document, "addressLine3");
 				List<String> addressLine4List = getNodeValuesByTagName(document, "addressLine4");
 				List<String> postalCodeList = getNodeValuesByTagName(document, "postalCode");
-				List<String> postalCodeSuffixList = getNodeValuesByTagName(document, "postalCodeSuffix");				
+				List<String> postalCodeSuffixList = getNodeValuesByTagName(document, "postalSuffix");
 				List<String> infoList = getNodeValuesByTagName(document, "info");
 				List<String> countryList = getNodeValuesByTagName(document, "country");
 				List<String> areaList = getNodeValuesByTagName(document, "area");
@@ -1045,9 +1044,9 @@ public class EditOfficePage extends AbstractPage {
 							+ addressLine4List.get(i).toString() + postalCodeList.get(i).toString()
 							+ postalCodeSuffixList.get(i).toString() + infoList.get(i).toString()
 							+ countryList.get(i).toString() + areaList.get(i).toString() + subAreaList.get(i).toString()
-							+ cityList.get(i).toString() ;
-						if (officeAddressLinesFromZeus.equals(officeAddressLines)) {
-							flag = true;
+							+ cityList.get(i).toString();
+					if (officeAddressLinesFromZeus.equals(officeAddressLines.toString())) {
+						flag = true;
 						break;
 					}
 				}
@@ -1055,8 +1054,50 @@ public class EditOfficePage extends AbstractPage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
 		return flag;
+	}
+	
+
+	public void deleteLocationRows() {
+		List<WebElement> deleteRows = getDriver()
+				.findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_row_delete_button"));
+		for (int index = 0; index < deleteRows.size(); index++) {
+			WebElement currentInstance = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_row_delete_button")).get(0);
+			if (currentInstance != null) {
+				currentInstance.click();
+				verifyDeleteConfirmationModalForLocation();
+				pressYesButtonInDeleteConfirmationModalForOfficeLocation();
+			}
+		}
+	}
+	
+	public void verifySelectedOfficeAddressTypeNotInNewRow(String Type, int rowNo) {
+		try {
+			List<WebElement> addressTypeDropDown = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_dropdown"));
+			if (rowNo <= addressTypeDropDown.size()) {
+				Select dropdown = new Select(addressTypeDropDown.get(rowNo - 1));
+				for (int index = 0; index < dropdown.getOptions().size(); index++) {
+					assertTrue(!dropdown.getOptions().get(index).getText().contains(Type));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyDeleteConfirmationModalForLocation() {
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals("Confirm DeleteAre you sure, you want to delete?NO YES",
+				getDriver()
+						.findElement(
+								OfficeIdentifiers.getObjectIdentifier("office_location_delete_row_confirmation_modal"))
+						.getText().replace("\n", ""));
 	}
 
     public void verifyOfficeTelecommFieldsInUI(String Type,String Rank,String TextBefore,String CountryCode,String AreaCode,String Number,String RangeLimit,String Ext,String TextAfter,String AnswerBack,String Value){
@@ -1229,7 +1270,6 @@ public class EditOfficePage extends AbstractPage {
             e.printStackTrace();
         }
         assertEquals(areaDropDown, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_area_listBox")).getText());
-
     }
 
     public void verifySubAreaDropdownNull(String subareaDropDown) {
@@ -1239,7 +1279,6 @@ public class EditOfficePage extends AbstractPage {
             e.printStackTrace();
         }
         assertEquals(subareaDropDown, getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_subarea_listBox")).getText());
-
     }
     public void verifyCityDropdownNull(String cityDropDown) {
         try {
