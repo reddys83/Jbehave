@@ -327,7 +327,7 @@ public abstract class AbstractPage {
         }
         return dropdownValuesList;
     }
-    
+
     public void selectItemFromDropdownListByindex(By by, int i) {
         try {
             Thread.sleep(2000L);
@@ -368,7 +368,12 @@ public abstract class AbstractPage {
             e.printStackTrace();
         }
         Document document =  XmlDocumentLoader.getDocument(filePath);
-        return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("id").getNodeValue();
+        String resourceURL=document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("resource").getNodeValue();
+        if(resourceURL.contains("http")){
+            String[] splitURL=resourceURL.split(heraApi.getPath());
+            resourceURL=splitURL[1];
+        }
+        return resourceURL;
     }
     
     public void selectDropDownValueFromRowNumber(By by, String value, int rowNumber) {
@@ -405,5 +410,12 @@ public abstract class AbstractPage {
 		cal.add(Calendar.DATE, 1);
 		return dateFormat.format(cal.getTime());
 	}	
-    
+
+    public void textToBePresentInElement(WebElement requiredMessage) {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), 25);
+            wait.until(ExpectedConditions.textToBePresentInElement(requiredMessage,"Required"));
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
+    }
 }

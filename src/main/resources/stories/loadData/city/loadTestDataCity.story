@@ -1,4 +1,4 @@
-Meta:@loadTestDataCity
+Meta:@loadTestDataCity @loadData
 Narrative:
 Reloading the data after data refresh
 

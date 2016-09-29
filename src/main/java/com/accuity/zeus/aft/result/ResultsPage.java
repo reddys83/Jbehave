@@ -3,9 +3,11 @@ package com.accuity.zeus.aft.result;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 import com.accuity.zeus.aft.jbehave.pages.AbstractPage;
 import com.accuity.zeus.aft.jbehave.pages.DataPage;
 import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
+import com.accuity.zeus.aft.jbehave.pages.RoutingCodePage;
 import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.utils.SimpleCacheManager;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -240,10 +242,35 @@ public class ResultsPage extends AbstractPage {
         return new LegalEntityPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
+    public RoutingCodePage clickOnRoutingCodeResultCard(WebElement element) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        element.click();
+
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new RoutingCodePage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
+    }
     public WebElement getFidElements(String fid) {
         List<WebElement> elements = getDriver().findElements(fid_locator_xpath);
         for (WebElement element : elements) {
             if (element.getText().equals(fid.toString())) {
+                return element;
+            }
+        }
+        return null;
+    }
+
+    public WebElement getRoutingCodeElements(String routingCode,String codeType) {
+        List<WebElement> elements = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcodes_rows_xpath"));
+        for (WebElement element : elements) {
+            if (element.findElement(By.xpath("td[1]")).getText().equals(routingCode) && element.findElement(By.xpath("td[2]")).getText().equals(codeType)) {
                 return element;
             }
         }
