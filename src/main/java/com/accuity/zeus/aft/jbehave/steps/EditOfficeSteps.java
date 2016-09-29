@@ -251,7 +251,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
 	@When("the user clicks on the choose an area option in the office locations")
 	public void clickOnAreaListBox() throws InterruptedException {
-		getEditOfficePage().clickOnAreaListBox();
+		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown"));
 	}
 
 	@When("the user enters the office area <Area> in the type-ahead box")
@@ -467,12 +467,10 @@ public class EditOfficeSteps extends AbstractSteps{
 					@Named("officeFid") String officeFid, @Named("AddressLine1") String addressLine1,
 					@Named("AddressLine2") String addressLine2, @Named("AddressLine3") String addressLine3,
 					@Named("AddressLine4") String addressLine4, @Named("PostalCode") String postalCode,
-					@Named("PostalCodeSuffix") String postalCodeSuffix, @Named("PostalCodePosition") String postalCodePosition,
-					@Named("Info") String info, @Named("Country") String country, @Named("Area") String area,
+					@Named("PostalCodeSuffix") String postalCodeSuffix, @Named("Info") String info, @Named("Country") String country, @Named("Area") String area,
 					@Named("Subarea") String subArea, @Named("City") String city, @Named("source") String source) {
 
-		getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(type, addressLine1, addressLine2, addressLine3,
-					addressLine4, postalCode, postalCodeSuffix, postalCodePosition, info, country, area, subArea, city,
+		getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(type, addressLine1, addressLine2, addressLine3,	addressLine4, postalCode, postalCodeSuffix, info, country, area, subArea, city,
 					officeFid, source);
 
 	}

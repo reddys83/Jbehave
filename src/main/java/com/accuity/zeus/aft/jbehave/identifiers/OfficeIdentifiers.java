@@ -48,17 +48,18 @@ public class OfficeIdentifiers {
         hmap.put("office_location_addressLine4", By.xpath(".//*[@id='officeLocations']//*[@class='address new']//input[@name='addrLine4']"));
         hmap.put("office_address_first_row_new_addressLine4", By.xpath(".//*[@id='officeLocations']//input[@name='addrLine4']"));
         hmap.put("office_country_dropdown", By.xpath("//*[@id='officeLocations']//li[@class='address new']//tr[@id='country']//a"));
-        hmap.put("office_area_dropdown_list_view", By.xpath(".//*[@id='addrarea-0']//*[@class='chosen-single']"));
+        hmap.put("office_area_dropdown", By.xpath(".//*[@id='officeLocations']//*[@class='address new']//*[@id='area']//div"));
         hmap.put("office_address_country_type_ahead", By.xpath("//*[@id='officeLocations']//li[@class='address new']//tr[@id='country']/td//input"));
         hmap.put("office_address_city_type_ahead", By.xpath("//*[@id='officeLocations']//li[@class='address new']//tr[@id='city']/td//input"));
-        hmap.put("office_area_dropdown", By.xpath("//*[@id='officeLocations']//li[@class='address new']//tr[@id='area']//*[contains(@class, 'active-result')]"));
-        hmap.put("office_area_dropdown_list", By.xpath(".//*[@id='area']/td//ul/li"));
+        hmap.put("office_area_dropdown_list", By.xpath("//*[@id='officeLocations']//li[@class='address new']//tr[@id='area']//*[contains(@class, 'active-result')]"));        
+        hmap.put("office_locations_addressList_view_mode", By.xpath(".//*[@id='officeLocations']//*[@class='location']//tr"));
+        
         hmap.put("office_area_dropdown_type_ahead", By.xpath("//*[@id='officeLocations']//li[@class='address new']//tr[@id='area']/td//input"));
         hmap.put("office_subarea_dropdown", By.xpath("//*[@id='officeLocations']//li[@class='address new']//tr[@id='subarea']/td//a"));
         hmap.put("office_subarea_dropdown_list", By.xpath(".//*[@id='subarea']//*[contains(@class, 'active-result')]"));
         hmap.put("office_subarea_dropdown_typeAhead", By.xpath("//*[@id='officeLocations']//li[@class='address new']//tr[@id='subarea']/td//input"));
         hmap.put("office_city_dropdown", By.xpath("//*[@id='officeLocations']//li[@class='address new']//tr[@id='city']/td//a"));
-        hmap.put("office_city_dropdown_list", By.xpath(".//*[@id='city']/td//ul/li"));
+        hmap.put("office_city_dropdown_list", By.xpath(".//*[@id='city']/td//ul/li"));        
         hmap.put("office_address_first_row_new_postalCode", By.xpath(".//*[@id='additionalLocationAddresses-0']//li[@class='address new']//input[@name='addrPostCode']"));
         hmap.put("office_address_first_row_new_postalCodeSuffix", By.xpath(".//*[@id='additionalLocationAddresses-0']//li[@class='address new']//input[@name='addrPostCodeSuffix']"));
         hmap.put("office_address_postalCodePosition", By.xpath(".//*[@id='additionalLocationAddresses-0']/li[1]/div[1]/ul//li[3]//tr[2]/td"));

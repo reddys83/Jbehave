@@ -125,6 +125,7 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
+When the user clicks on the add new office location button in the office page
 When the user clicks on add new office address button in the office locations
 And the user selects office address type value as <Type> in row 1
 And the user enters office address <AddressLine1> in row 1
@@ -133,15 +134,15 @@ And the user enters office address <AddressLine3> in row 1
 And the user enters office address <AddressLine4> in row 1
 When the user clicks on the choose a country option in the office locations
 When the user enters the office country <Country> in the type-ahead box
-Then the user should see the list of all existing area for the selected country by full name in office address
 When the user clicks on the choose an area option in the office locations
+Then the user should see the list of all existing area for the selected country by full name in office address
 When the user enters the office area <Area> in the type-ahead box
-Then the user should see the list of all existing subarea for the selected area by full name in office address
 When the user clicks on the choose a subarea option in the office locations
+Then the user should see the list of all existing subarea for the selected area by full name in office address
 When the user enters the office subarea <subArea> in the type-ahead box
 When the user clicks on the choose a city option in the office locations
-When the user enters the office city <City> in the type-ahead box
 Then the user should see the list of all existing city for the selected area by full name in office address
+When the user enters the office city <City> in the type-ahead box
 When the user enters office address postal code value as <PostalCode> in location 1
 And the user enters office address postal code suffix value as <PostalCodeSuffix> in location 1
 And the user enters office address info value as <Info> in location 1
@@ -158,7 +159,7 @@ And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|AddressLine1|AddressLine2|AddressLine3|AddressLine4|Country|Area|subArea|City|PostalCode|PostalCodeSuffix|Info|
-|1010|FID|1010|1010-45|mailing|123 Marie Ln|345 Palmer Dr|456 Franklin Ln|789 Apple Valley|USA|Illinois|Warren|Alexis|60126|123|adhsbd|
+|50900|FID|50900|50900-0|mailing|123 Marie Ln|345 Palmer Dr|456 Franklin Ln|789 Apple Valley|USA|Illinois|Warren|Alexis|60126|123|adhsbd|
 
 Scenario: 
 1- Verify the values of area,subarea,city should be changed to null when the country value is changed
