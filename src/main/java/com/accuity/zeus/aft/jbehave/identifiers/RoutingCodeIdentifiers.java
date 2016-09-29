@@ -36,6 +36,28 @@ public class RoutingCodeIdentifiers {
         hmap.put("routingcode_basicInfo_view_String UseHeadOffice",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Use Head Office']/td"));
         hmap.put("routingcode_basicInfo_view_String Comment",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']/td"));
         hmap.put("routingcode_page_header_link",By.xpath(".//*[@id='cssTempFixId']/header//a"));
+        hmap.put("edit_routingcode_page_add_alternateCode_btn",By.xpath("//*[@id='add-alternateCodes']"));
+        hmap.put("edit_routingcode_page_new_delete_alternateCode_btn",By.xpath("//*[@id='additionalAlternateCodes']/tr[@class='new']/td[@class='delete']"));
+        hmap.put("edit_routingcode_page_alternateCode_table",By.xpath("//*[@id='additionalAlternateCodes']/tr"));
+        hmap.put("edit_routingcode_page_routingcode_subtype_dropdown",By.xpath("//*[@id='routingCodeSubtype']"));
+        hmap.put("edit_routingcode_page_ABA_CodeSource_dropdown",By.xpath("//*[@id='routingCodeSource']"));
+        hmap.put("edit_routingcode_accountEligibility_radio",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Account Eligibility']//input"));
+        hmap.put("edit_routingcode_internalUseOnly_radio",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Internal Use Only']//input"));
+        hmap.put("edit_routingcode_useHeadOffice_radio",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Use Head Office']//input"));
+        hmap.put("edit_routingcode_page_startDateDay",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Start Date']/td/input[@name='validFrom-day']"));
+        hmap.put("edit_routingcode_page_startDateMonth",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Start Date']/td/select[@name='validFrom-month']"));
+        hmap.put("edit_routingcode_page_startDateYear",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Start Date']/td/input[@name='validFrom-year']"));
+        hmap.put("edit_routingcode_page_endDateDay",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='End Date']/td/input[@name='validTo-day']"));
+        hmap.put("edit_routingcode_page_endDateMonth",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='End Date']/td/select[@name='validTo-month']"));
+        hmap.put("edit_routingcode_page_endDateYear",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='End Date']/td/input[@name='validTo-year']"));
+        hmap.put("edit_routingcode_page_ForthcomingRetirementDateDay",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Forthcoming Retirement Date']/td/input[@name='retireAt-day']"));
+        hmap.put("edit_routingcode_page_ForthcomingRetirementDateMonth",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Forthcoming Retirement Date']/td/select[@name='retireAt-month']"));
+        hmap.put("edit_routingcode_page_ForthcomingRetirementDateYear",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Forthcoming Retirement Date']/td/input[@name='retireAt-year']"));
+        hmap.put("edit_routingcode_page_ConfirmedWithFedDateDay",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Confirmed with Fed']/td/input[@name='confirmedDate-day']"));
+        hmap.put("edit_routingcode_page_ConfirmedWithFedDateMonth",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Confirmed with Fed']/td/select[@name='confirmedDate-month']"));
+        hmap.put("edit_routingcode_page_ConfirmedWithFedDateYear",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Confirmed with Fed']/td/input[@name='confirmedDate-year']"));
+        hmap.put("edit_routingcode_page_RegistrarFeeSFDCSubscription",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Registrar Fee SFDC Subscription']//input"));
+        hmap.put("edit_routingcode_page_RoutingCodeComment",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']//input"));
     }
 
     public static By getObjectIdentifier(String key) {
