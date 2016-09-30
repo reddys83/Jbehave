@@ -349,8 +349,7 @@ And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|Country|Area|subArea|City|
-|249093|FID|249093|249093-0|physical|USA|Illinois|Warren|Alexis|
-|299676|FID|299676|299676-0|physical|USA|Illinois|Warren|Alexis|
+|444|FID|444|444-676|mailing|USA|Illinois|Warren|Alexis|
 
 Scenario: User is viewing Office's Locations (Telecom) - 
 a) Verify Office Telecoms Type dropdown values are from lookup TELECOM_TYPE

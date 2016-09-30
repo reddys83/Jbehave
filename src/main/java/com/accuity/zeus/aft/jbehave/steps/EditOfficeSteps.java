@@ -489,7 +489,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
 	@Then("the user verifies that the newly added address row exists in the office locations page")
 	public void verifyNewlyAddedOfficeAddressRowIsDisplayed() throws Exception {
-		getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_address_rows_edit_mode"),
+		getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_address_rows_edit_mode"),
 				true);
 	}
 	@Then("the user should see the error message $errorMsg for the office address addressLine1 field")
