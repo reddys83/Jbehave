@@ -146,6 +146,8 @@ public class XqueryMap {
 		queryMap.put("get document id for subarea","getIdForSubArea.xqy");
         queryMap.put("get Id for area", "getIdForArea.xqy");
         queryMap.put("get routingCode basic info","getRoutingCodeBasicInfo.xqy");
+		queryMap.put("get office telecom locations", "getOfficeTelecomLocations.xqy");
+		queryMap.put("delete office locations values", "deleteOfficeLocationsValues.xqy");		
    }
 
     public String getXquery(String key){
