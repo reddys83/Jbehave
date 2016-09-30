@@ -428,9 +428,14 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().clickonDeleteOfficeTelecomsRowButton(deletebutton_Row);
     }
 
+    @When("the user clicks on office address type drodown")
+    public void clickonTypeDropdown() {
+           getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_dropdown_xpath"));
+    }
+    
     @Then("the user should see the address type values in office location's section from lookup $lookup")
-    public void verifyOfficeAddressTypesFromLookup(@Named("officeaddress_rowIdentifier") String officeaddress_rowIdentifier,@Named("lookupFid") String lookupFid) {     
-    	getDataPage().verifyLookUpValues(OfficeIdentifiers.getObjectIdentifier("office_addressType_second_row_address_type_dropdown"), "get Office Address Types", "officeAddressTypes");
+    public void verifyOfficeAddressTypesFromLookup(@Named("officeaddress_rowIdentifier") String officeaddress_rowIdentifier,@Named("officeFid") String lookupFid) {     
+    	getDataPage().verifyLookUpValues(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_options_dropdown"), "get Office Address Types", "officeAddressTypes");
     }
 
     @Then("the user should see the error message $errorMsg for the office address type field")
