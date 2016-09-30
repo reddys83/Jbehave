@@ -2195,10 +2195,6 @@ public class EditAreaPage extends AbstractPage {
 		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_entity_fid_dropdown_xpath"), fid);
 	}
 
-	public void clicksOnGoButton() {
-		getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_entity_go_button_xpath")).click();
-	}
-
 	public void verifyRelatedEntityInAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
 		try {
 			Thread.sleep(1000);
