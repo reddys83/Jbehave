@@ -100,12 +100,13 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
-And the user clicks on add new office address button in the office locations
+And the user selects office address type value as <Type> in row 1
+And the user clicks on office address type drodown
 Then the user should see the address type values in office location's section from lookup ADDRESS_TYPE
 
 Examples:
-|entity|searchBy|fid|officeFid|
-|1010|FID|1010|1010-44|
+|entity|searchBy|fid|officeFid|Type|
+|1010|FID|1010|1010-44||
 
 Scenario: Adding new location and location address for both depositing entity type ana non depositing entity type.
 a)Verify that the user should be able to Add new address row for an office location

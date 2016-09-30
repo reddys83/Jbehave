@@ -227,6 +227,7 @@ public class OfficeIdentifiers {
 	    hmap.put("office_telecom_rows_edit_mode", By.xpath(".//*[@data-edit_id='locationTelecomms-0']//tr"));
 	    hmap.put("office_row_telecoms_delete_button", By.xpath(".//*[@id='additionalLocationTelecomms-0']//button[@class='delete-element']"));
 	    hmap.put("office_locations_address_rows_edit_mode", By.xpath(".//*[@data-edit_id='locationAddresses-0']"));
+	    hmap.put("office_location_address_type_options_dropdown", By.xpath(".//*[@id='officeLocations']//select[@id='addressType-0']/option"));
 
     }
 
