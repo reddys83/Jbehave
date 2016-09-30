@@ -278,6 +278,19 @@ public class EditOfficeSteps extends AbstractSteps{
 		getEditOfficePage().verifyAreaForSelectedCountry(areas);
 
 	}
+	
+	@Then("the user verifies that the location row exists in the office locations page")
+    public void verifyOfficeLocationsRowIsDisplayed() throws Exception {
+           getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_row_exists_edit_mode"),
+                        true);
+    }
+    
+    @Then("the user verifies that the location row does not exist in the office locations page")
+    public void verifyOfficeLocationsRowIsDeleted() throws Exception {
+           getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_location_row_exists_view_mode"),
+                        false);
+    }
+
 
 	@Then("the user should see the below office cities for the selected area: $cities")
 	public void verifyCitiesForSelectedArea(ExamplesTable cities) {

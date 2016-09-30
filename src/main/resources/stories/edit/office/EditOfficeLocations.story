@@ -42,7 +42,7 @@ And the user clicks on the add new office location button in the office page
 When the user clicks on the save button
 Then the user should see the below summary changes in confirmation modal
 |Summary|
-|Basic Info|
+|Locations|
 When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 And the user should not see the newly added locations row in the office locations page
@@ -51,7 +51,8 @@ And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|
-|1000|FID|1000|1000-9|
+|249093|FID|249093|249093-0|
+
 
 Scenario: Verify that the user should be able to edit an existing office location row
 a) - Verify if User can prevent deleting the location row by clicking on 'No'.
@@ -69,30 +70,24 @@ And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on delete office locations 1 delete button
 Then the user should see the delete row confirmation modal in the office locations
-When the user clicks on the cancel no button
-And the user clicks on the cancel button
-Then the user should see the cancel update confirmation modal
-When the user clicks on the cancel yes button
-When the user clicks on the save button
-When the user clicks on the confirm button
-Then the user verifies that the row values exists in the office locations page
-When the user clicks on the office update link
-And the user clicks on delete office locations 1 delete button
-Then the user should see the delete row confirmation modal in the office locations
+When the user clicks on the No button to cancel the deletion of row in office locations section
+Then the user verifies that the location row exists in the office locations page
+When the user clicks on delete office locations 1 delete button
 When the user clicks on the Yes button to confirm the deletion of row in office locations section
-And the user clicks on the save button
+When the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
 |Summary|
-|Basic Info|
+|Locations|
 When the user clicks on the confirm button
-Then the user should not see the office address row in the locations office page
+Then the user verifies that the location row does not exist in the office locations page
 And the user verifies that the deleted row for office locations does not exist in zeus document
 And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|
-|299676|FID|299676|299676-0|
+|444|FID|444|444-505|
+
 
 Scenario:  Verify Office Address Type dropdown values are from lookup ADDRESS_TYPE
 
@@ -125,7 +120,6 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
-When the user gets the document with get id for offices with the <officeFid> from the database
 When the user deletes the existing office locations rows
 When the user clicks on the add new office location button in the office page
 When the user clicks on add new office address button in the office locations
@@ -156,17 +150,18 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user verifies that the office address lines addresses are entered in the office locations page
 And the user should see the office address lines addresses as in zeus document
-And the user reverts the changes to the document
+
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|AddressLine1|AddressLine2|AddressLine3|AddressLine4|Country|Area|subArea|City|PostalCode|PostalCodeSuffix|Info|
-|444|FID|444|444-499|physical|123 Marie Ln|345 Palmer Dr|456 Franklin Ln|789 Apple Valley|USA|Illinois|Warren|Alexis|60126|123|adhsbd|
 |951|FID|951|951-4|mailing|123 Marie Ln|345 Palmer Dr|456 Franklin Ln|789 Apple Valley|USA|Illinois|Warren|Alexis|60126|123|adhsbd|
+|444|FID|444|444-499|physical|123 Marie Ln|345 Palmer Dr|456 Franklin Ln|789 Apple Valley|USA|Illinois|Warren|Alexis|60126|123|adhsbd|
+
 
 Scenario: Adding updates location and location address for both depositing entity type ana non depositing entity type.
 a)Verify that the user should be able to Add new address row for an office location
           b)Verify User can select and save values for Type, Address Line 1, Address Line 2, Address Line 3, Address Line 4, Country,Area, Subarea, City, PostalCode, PostalCodeSuffix and Info
-
+Meta: @testRun
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -177,8 +172,6 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
-When the user clicks on the add new office location button in the office page
-When the user clicks on add new office address button in the office locations
 And the user selects office address type value as <Type> in row 1
 And the user enters office address <AddressLine1> in row 1
 And the user enters office address <AddressLine2> in row 1
@@ -210,8 +203,7 @@ And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|AddressLine1|AddressLine2|AddressLine3|AddressLine4|Country|Area|subArea|City|PostalCode|PostalCodeSuffix|Info|
-|444|FID|444|444-499|physical|123 Marie Ln|345 Palmer Dr|456 Franklin Ln|789 Apple Valley|USA|Illinois|Warren|Alexis|60126|123|adhsbd|
-|951|FID|951|951-4|mailing|123 Marie Ln|345 Palmer Dr|456 Franklin Ln|789 Apple Valley|USA|Illinois|Warren|Alexis|60126|123|adhsbd|
+|951|FID|951|951-4|physical|123 Marie Ln|34 Palmer Dr|45 Frank|789 Valley|USA|Illinois|Warren|Alexis|60126|123|adhsbd|
 
 Scenario: Location Address default value validation 
 1- Verify the values of area, subarea, city should be changed to null when the country value is changed

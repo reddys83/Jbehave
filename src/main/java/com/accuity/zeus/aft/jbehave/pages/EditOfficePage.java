@@ -587,7 +587,7 @@ public class EditOfficePage extends AbstractPage {
 
     public void verifyOfficeAreaList() {        
         try { 
-            Thread.sleep(3000L);
+            Thread.sleep(3000L);           
             List<NameValuePair> nvPairs = new ArrayList<>();
             nvPairs.add(new BasicNameValuePair("name", selectedEntity));
             nvPairs.add(new BasicNameValuePair("source", "trusted"));
@@ -624,7 +624,7 @@ public class EditOfficePage extends AbstractPage {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("name", selectedEntity));
 			nvPairs.add(new BasicNameValuePair("source", "trusted"));
-			Thread.sleep(1000L);
+			Thread.sleep(5000L);
 			List<WebElement> subAreaList = getDriver()
 					.findElements(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown_list"));
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
