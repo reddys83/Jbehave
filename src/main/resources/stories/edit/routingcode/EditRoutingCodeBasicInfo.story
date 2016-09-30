@@ -6,7 +6,7 @@ I want to perform an action
 So that I can achieve a business goal
 JIRA ID - ZEUS-1179 - User can select to edit Routing Code's Basic Info
 
-Scenario: Verify the routing code basic info values in edit mode.
+Scenario: Verify the routing code basic info values in edit mode for ABA and non-ABA code types
 Verify the headers and the legal entity link on the header
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -21,3 +21,4 @@ Examples:
 |entity|searchBy|routingCode|codeType|
 |083905216|Routing Code|083905216|ABA|
 |01056|Routing Code|01056|Swift BIC|
+|262176840|Routing Code|262176840|ABA|
