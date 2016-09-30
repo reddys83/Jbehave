@@ -79,7 +79,7 @@ public class OfficeIdentifiers {
         hmap.put("office_address_postalCodePosition", By.xpath(".//*[@id='additionalLocationAddresses-0']/li[1]/div[1]/ul//li[3]//tr[2]/td"));
         hmap.put("office_address_first_row_new_info", By.xpath(".//*[@id='additionalLocationAddresses-0']//li[@class='address new']//input[@name='addrInfo']"));
         hmap.put("office_first_existing_row_address_delete_button", By.xpath(".//*[@id='additionalLocationAddresses-0']/li[1]//button"));
-        hmap.put("office_address_delete_row_view", By.xpath(".//*[@id='officeLocations']/div/h2[1]"));
+        hmap.put("office_address_delete_row_view", By.xpath(".//*[@id='officeLocations']/div[@class='location']/ul"));
         
         hmap.put("office_telecoms_addRow_id", By.id("add-locationTelecomms-0"));
         hmap.put("office_telecoms_first_row_new_telecoms_type_dropdown", By.xpath(".//*[@id='additionalLocationTelecomms-0']//select[@id='telecommType-0']"));
@@ -226,6 +226,7 @@ public class OfficeIdentifiers {
 	    hmap.put("office_telecom_type_dropdown_input", By.xpath(".//*[@id='additionalLocationTelecomms-0']//select[@id='telecommType-0']"));
 	    hmap.put("office_telecom_rows_edit_mode", By.xpath(".//*[@data-edit_id='locationTelecomms-0']//tr"));
 	    hmap.put("office_row_telecoms_delete_button", By.xpath(".//*[@id='additionalLocationTelecomms-0']//button[@class='delete-element']"));
+	    hmap.put("office_locations_address_rows_edit_mode", By.xpath(".//*[@data-edit_id='locationAddresses-0']"));
 
     }
 
