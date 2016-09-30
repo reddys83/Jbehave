@@ -203,12 +203,6 @@ public class EditOfficeSteps extends AbstractSteps{
 		getDataPage().selectDropDownValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_dropdown"), type, index);
 	}
 
-	@When("the user selects office address type $typeRowIdentifier value as <Type1>")
-	public void selectOfficeAddressType1(@Named("$typeRowIdentifier") String typeRowIdentifier,
-			@Named("Type1") String Type1) {
-		//getEditOfficePage().selectOfficeAddressType(typeRowIdentifier, Type1);
-	}
-
 	@When("the user enters office address <AddressLine1> in row $index")
 	public void enterofficeAddressLine1(@Named("index") int index, @Named("AddressLine1") String AddressLine1) {
 		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine1"), AddressLine1, index);
