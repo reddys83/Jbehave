@@ -20,7 +20,7 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
-Then the user should see the office_first_row_existing_location_add_button in disabled state in locations section
+Then the user should see the office_add_locations_id in disabled state in locations section
 
 Examples:
 |entity|searchBy|fid|officeFid|
@@ -57,7 +57,7 @@ Examples:
 Scenario: Verify that the user should be able to edit an existing office location row
 a) - Verify if User can prevent deleting the location row by clicking on 'No'.
 b) - Verify if User can delete the location row by clicking on 'Yes'.
-
+Meta:@sureshtest
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown

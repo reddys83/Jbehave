@@ -1010,7 +1010,8 @@ public class EditOfficePage extends AbstractPage {
     }
 
     public void verifyMaxlengthOfficeTelecomsText(String maxSize, String rowIdentifier) {
-        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);}
+        assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);
+    }
 
     public void pressNoButtonInDeleteConfirmationModalForOfficeLocation() {
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_location_delete_no_button")).click();
