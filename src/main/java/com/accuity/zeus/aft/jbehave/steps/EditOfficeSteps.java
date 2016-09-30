@@ -617,7 +617,7 @@ public class EditOfficeSteps extends AbstractSteps{
     }
     @Then("the user should see the delete row confirmation modal in the office locations")
     public void verifyDeleteConfirmationModal() {
-    	getDataPage().verifyDeleteConfirmationModal();
+    	getEditOfficePage().verifyDeleteConfirmationModalForLocation();
     }
 
     @Then("the user should return to edit office locations page mode")
