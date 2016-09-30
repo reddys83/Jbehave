@@ -1014,9 +1014,20 @@ public class EditOfficePage extends AbstractPage {
     }
 
     public void pressNoButtonInDeleteConfirmationModalForOfficeLocation() {
-        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_location_delete_no_button")).click();
+    	try {
+    		Thread.sleep(1000);
+    	} catch(Exception ex) {
+    		ex.printStackTrace();
+    	}
+    	getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_location_delete_no_button")).click();
     }
+
     public void pressYesButtonInDeleteConfirmationModalForOfficeLocation() {
+    	try {
+    		Thread.sleep(1000);
+    	} catch(Exception ex) {
+    		ex.printStackTrace();
+    	}
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_location_delete_yes_button")).click();
     }
 
