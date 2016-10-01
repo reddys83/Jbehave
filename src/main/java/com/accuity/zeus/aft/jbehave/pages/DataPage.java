@@ -1377,7 +1377,8 @@ public class DataPage extends AbstractPage {
     }
     
     public void verifyElementNotExistInUI(By by) {
-		try {			
+		try {	
+			Thread.sleep(2000L);
 			assertTrue(getDriver().findElement(by) == null);
 		} catch (Exception e) {
 			assertTrue(true);
@@ -1431,7 +1432,7 @@ public class DataPage extends AbstractPage {
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xqueryName);
 		assertTrue(document.getElementsByTagName(tagName).getLength() > 1);
 		for (int i = 1; i < document.getElementsByTagName(tagName).getLength(); i++) {
-			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+			assertEquals(document.getFirstChild().getChildNodes().item(i-1).getFirstChild().getTextContent(),
 					elementTypeList.get(i).getAttribute("value"));
 		}
 	}
@@ -1468,7 +1469,7 @@ public class DataPage extends AbstractPage {
 	}
 	
 	public void clickElementUsingIndex(By by, int index) {		
-    	try {
+    	try {    		
     		List<WebElement> elementList = getDriver().findElements(by);		
         	elementList.get(index-1).click();        	
     	}

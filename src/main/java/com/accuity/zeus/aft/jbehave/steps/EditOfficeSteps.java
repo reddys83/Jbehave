@@ -171,7 +171,8 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@When("the user clicks on delete office locations $rowNumber delete button")
-	public void clickonDeleteOfficeLocationsRowButton(@Named("rowNumber") int rowNumber) throws Exception {		
+	public void clickonDeleteOfficeLocationsRowButton(@Named("rowNumber") int rowNumber) throws Exception {	
+		Thread.sleep(3000L);
 		getDataPage().clickElementUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_delete_button"), rowNumber);
 	}
 
@@ -426,7 +427,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @When("the user clicks on office address type drodown")
     public void clickonTypeDropdown() {
-           getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_dropdown_xpath"));
+           getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_dropdown"));
     }
     
     @Then("the user should see the address type values in office location's section from lookup $lookup")
@@ -538,10 +539,11 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@When("the user deletes the existing office locations rows")
-    public void deleteExistingOfficeLocationRows() {
-           getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_locations_id"));
-           getEditOfficePage().deleteLocationRows();
-    }
+	public void deleteExistingOfficeLocationRows() throws Exception {
+		Thread.sleep(2000);//loading issue in multi location
+		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_locations_id"));
+		getEditOfficePage().deleteLocationRows();
+	}
 	
 	@Then("the user should see the office locations address same as in $source document")
 	public void verifyOfficeLocationAddressFromTrustedDB(@Named("officeFid") String officeFid,

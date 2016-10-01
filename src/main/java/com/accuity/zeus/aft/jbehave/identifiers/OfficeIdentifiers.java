@@ -65,7 +65,6 @@ public class OfficeIdentifiers {
 	    hmap.put("office_location_address_postal_code_suffix_view_mode", By.xpath(".//*[@class='location']//tr/th[contains(text(), 'Postal Code Suffix')]/following-sibling::td"));
 	    hmap.put("office_location_address_info_view_mode", By.xpath(".//*[@class='location']//tr/th[contains(text(), 'Info')]/following-sibling::td"));
 	    hmap.put("office_locations_row_exists_edit_mode", By.xpath("//*[@class='location'][@data-sequence_id='0']"));
-        hmap.put("office_location_row_exists_view_mode", By.xpath("//*[@class='location']"));
         
         hmap.put("office_area_dropdown_type_ahead", By.xpath("//*[@id='officeLocations']//tr[@id='area']/td//input"));
         hmap.put("office_subarea_dropdown", By.xpath("//*[@id='officeLocations']//tr[@id='subarea']/td//a"));

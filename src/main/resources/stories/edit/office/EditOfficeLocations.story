@@ -9,6 +9,7 @@ JIRA ID - ZEUS-1075 - User can select to edit Office's Locations
 JIRA ID - ZEUS-1300 - User can edit Office's Locations(Telecoms)
 JIRA ID - ZEUS-1299 - User can edit Office's Locations(Addresses)
 
+
 Scenario: Verify that the add button is disabled for the first row of office location when there is a location
 
 Given a user is on the search page
@@ -205,7 +206,6 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
-When the user clicks on add new office address button in the office locations
 And the user selects office address type value as <Type> in row 1
 And the user enters office address <AddressLine1> in row 1
 And the user enters office address <AddressLine2> in row 1
@@ -340,7 +340,7 @@ Examples:
 |444|FID|444|444-499|physical|Sample Text|
 
 
-Scenario: Verify that the user should be able to edit an existing office address row
+Scenario: Verify that the user should be able to edit an existing office address row for multi location fid and single location fid
 a) - Verify if User can prevent deleting the location row by clicking on 'No'.
 b) - Verify if User can delete the location row by clicking on 'Yes'.
 
@@ -385,8 +385,8 @@ And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|Country|Area|subArea|City|
-|444|FID|444|444-676|mailing|USA|Illinois|Warren|Alexis|
 |264536|FID|264536|264536-2|mailing|USA|Illinois|Warren|Alexis|
+|444|FID|444|444-676|mailing|USA|Illinois|Warren|Alexis|
 
 Scenario: User is viewing Office's Locations (Telecom) - 
 a) Verify Office Telecoms Type dropdown values are from lookup TELECOM_TYPE

@@ -742,26 +742,25 @@ public class EditOfficePage extends AbstractPage {
     }
     
 	public void verifyOfficeLocationFromTrustedDB(String officeFid, String source) {
-		try {
-			if (getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_view_mode"))
-					.size() > 0) {
-				List<WebElement> typeList = getDriver()
-						.findElements(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_view_mode"));
+		try {			
+			List<WebElement> typeList = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_view_mode"));
+			if (typeList.size() > 0) {				
 
-				for (int index = 0; index < typeList.size(); index++) {					
-					String type = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_view_mode"), index);
-		            String addressLine1 = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine1_view_mode"), index);
-		            String addressLine2 = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine2_view_mode"), index);
-		            String addressLine3 = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine3_view_mode"), index);
-		            String addressLine4 = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine4_view_mode"), index);
-		            String country = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_country_view_mode"), index);
-		            String area = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_area_view_mode"), index);
-		            String subArea = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_subarea_view_mode"), index);
-		            String city = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_city_view_mode"), index);
-		            String postalCode = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_postal_code_view_mode"), index);
-		            String postalCodeSuffix = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_postal_code_suffix_view_mode"), index);           
-		            String info = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_info_view_mode"), index);					
-					verifyOfficeAddressLinesAddressesFromDB(type, addressLine1, addressLine2, addressLine3,	addressLine4, postalCode, postalCodeSuffix, info, country, area, subArea, city,
+				for (int index = 1; index <= typeList.size(); index++) {					
+					String type = getSelectedOptionInDropDownByIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_dropdown"), index);
+					 String addressLine1 = getAttributeValueOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine1"), index);
+			            String addressLine2 = getAttributeValueOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine2"), index);
+			            String addressLine3 = getAttributeValueOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine3"), index);
+			            String addressLine4 = getAttributeValueOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine4"), index);
+			            String country = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_country_view_mode"), index);
+			            String area = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_area_view_mode"), index);
+			            String subArea = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_subarea_view_mode"), index);
+			            String city = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_city_view_mode"), index);
+			            String postalCode = getAttributeValueOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_postalCode"), index);
+			            String postalCodeSuffix = getAttributeValueOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_postalCodeSuffix"), index);           
+			            String info = getAttributeValueOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_info"), index);					
+					    verifyOfficeAddressLinesAddressesFromDB(type, addressLine1, addressLine2, addressLine3,	addressLine4, postalCode, postalCodeSuffix, info, country, area, subArea, city,
 							officeFid, source);	
 				}
 			} else {
@@ -846,7 +845,7 @@ public class EditOfficePage extends AbstractPage {
 			String country, String area, String subArea, String city, String officeFid, String source) {
 		Boolean flag = false;
 		try {
-			Thread.sleep(10L);
+			Thread.sleep(1000L);
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
 			nvPairs.add(new BasicNameValuePair("source", source));
@@ -903,17 +902,23 @@ public class EditOfficePage extends AbstractPage {
 	
 
 	public void deleteLocationRows() {
-		List<WebElement> deleteRows = getDriver()
-				.findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_row_delete_button"));
-		for (int index = 0; index < deleteRows.size(); index++) {
-			WebElement currentInstance = getDriver()
-					.findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_row_delete_button")).get(0);
-			if (currentInstance != null) {
-				currentInstance.click();
-				verifyDeleteConfirmationModalForLocation();
-				attemptClick(OfficeIdentifiers.getObjectIdentifier("office_location_delete_yes_button"));
+		try {
+			List<WebElement> deleteRows = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_row_delete_button"));
+			for (int index = 0; index < deleteRows.size(); index++) {
+				WebElement currentInstance = getDriver()
+						.findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_row_delete_button")).get(0);
+				if (currentInstance != null) {
+					attemptClick(OfficeIdentifiers.getObjectIdentifier("office_locations_row_delete_button"));
+					verifyDeleteConfirmationModalForLocation();
+					Thread.sleep(5000L);
+					attemptClick(OfficeIdentifiers.getObjectIdentifier("office_location_delete_yes_button"));
+				}
 			}
-		}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	public void verifySelectedOfficeAddressTypeNotInNewRow(String Type, int rowNo) {
@@ -1958,42 +1963,7 @@ public class EditOfficePage extends AbstractPage {
     	}
     }
 	
-	public void verifyOfficeAddressValuesFromTrustedDB(String officeFid, String source) {
-		try {
-			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("fid", officeFid));
-			nvPairs.add(new BasicNameValuePair("source", source));
-			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"get office telecom locations", nvPairs);
-    		List<WebElement> telecomRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_telecom_rows_edit_mode"));    		
-    		Thread.sleep(1000L);
-			for (int index = 1; index < telecomRows.size(); index++) {
-				String telecomType = getTelecomFieldValue("type", index);
-				assertEquals(telecomType, getNodeValuesByTagName(document, "type").get(index - 1));
-				if (telecomType.equals("cable") || telecomType.equals("reuters") || telecomType.equals("telex")) {
-					if (!getTelecomFieldValue("answerBack", index).isEmpty()) {
-						assertEquals(getTelecomFieldValue("answerBack", index),	getNodeValuesByTagName(document, "answerBack").get(index - 1));
-					}
-				}
-				if (!(telecomType.equals("email") || telecomType.equals("website"))) {
-					if (!getTelecomFieldValue("rangeLimit", index).isEmpty()) {
-						assertEquals(getTelecomFieldValue("rangeLimit", index),	getNodeValuesByTagName(document, "phoneNumberRangeLimit").get(index - 1));
-					}
-					if (!getTelecomFieldValue("ext", index).isEmpty()) {
-						assertEquals(getTelecomFieldValue("ext", index), getNodeValuesByTagName(document, "phoneExtension").get(index - 1));
-					}
-				}
-				assertEquals(getTelecomFieldValue("rank", index), getNodeValuesByTagName(document, "rank").get(index - 1));
-				assertEquals(getTelecomFieldValue("textBefore", index),	getNodeValuesByTagName(document, "textBefore").get(index - 1));
-				assertEquals(getTelecomFieldValue("value", index), getNodeValuesByTagName(document, "value").get(index - 1));
-				assertEquals(getTelecomFieldValue("textAfter", index), getNodeValuesByTagName(document, "textAfter").get(index - 1));
-			}    		
-    	}
-    	catch(Exception e) {
-    		e.printStackTrace();		
-    	}
-    }
-
+		
 	public String getTelecomFieldValue(String fieldName, int row) {
 		Map<String, By> telecomFieldMap = new HashMap<String, By>();
 		List<WebElement> telecomRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_telecom_rows_edit_mode"));
