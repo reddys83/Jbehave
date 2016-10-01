@@ -553,37 +553,36 @@ public class EditOfficePage extends AbstractPage {
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(addressLine4RowIdentifier)).clear();
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(addressLine4RowIdentifier)).sendKeys(AddressLine4);
 
-    }
-    public void clickOnCountryListBox() {
+    }  
 
-        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_country_dropdown"));
-           }
-
-       public CountryPage enterOfficeCountryInTheTypeAheadBox(String Country) {
-           SimpleCacheManager.getInstance().put("selectedCountry", Country);
-           selectedEntity = Country;
-           getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_address_country_type_ahead")).sendKeys(Country);
-           getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_address_country_type_ahead")).sendKeys(Keys.RETURN);
-           try {
-               Thread.sleep(1000L);
-           } catch (InterruptedException e) {
-               e.printStackTrace();
-           }
-           return new CountryPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
-       }
+	public CountryPage enterOfficeCountryInTheTypeAheadBox(String Country, int index) {		
+		try {
+			SimpleCacheManager.getInstance().put("selectedCountry", Country);
+			selectedEntity = Country;		
+			List<WebElement> countryDropDownList = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_address_country_type_ahead"));
+			countryDropDownList.get(index-1).sendKeys(Country);
+			countryDropDownList.get(index-1).sendKeys(Keys.RETURN);			
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return new CountryPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(),
+				getHeraApi());
+	}
 
 
-    public void enterOfficeCityInTheTypeAheadBox(String City) {
-        SimpleCacheManager.getInstance().put("selectedCity", City);
-        selectedEntity = City;
-        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_address_city_type_ahead")).sendKeys(City);
-        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_address_city_type_ahead")).sendKeys(Keys.RETURN);
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+	public void enterOfficeCityInTheTypeAheadBox(String city, int index) {
+		try {
+			SimpleCacheManager.getInstance().put("selectedCity", city);
+			selectedEntity = city;
+			List<WebElement> dropDownList = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_address_city_type_ahead"));
+			dropDownList.get(index-1).sendKeys(city);
+			dropDownList.get(index-1).sendKeys(Keys.RETURN);
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
     public void verifyOfficeAreaList() {        
         try { 
@@ -604,14 +603,13 @@ public class EditOfficePage extends AbstractPage {
     }
 
 
-	public void enterOfficeAreaInTypeAhead(String Area) {
-		SimpleCacheManager.getInstance().put("selectedArea", Area);
-		selectedEntity = Area;
-		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_type_ahead"))
-				.sendKeys(Area);
-		getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_type_ahead"))
-				.sendKeys(Keys.RETURN);
+	public void enterOfficeAreaInTypeAhead(String Area, int index) {		
 		try {
+			SimpleCacheManager.getInstance().put("selectedArea", Area);
+			selectedEntity = Area;
+			List<WebElement> dropDownList = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_type_ahead"));
+			dropDownList.get(index-1).sendKeys(Area);
+			dropDownList.get(index-1).sendKeys(Keys.RETURN);
 			Thread.sleep(1000L);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -639,17 +637,19 @@ public class EditOfficePage extends AbstractPage {
 
 	}
 
-    public void enterOfficeSubAreaInTypeAhead(String subArea) {
-        SimpleCacheManager.getInstance().put("selectedsubArea", subArea);
-        selectedEntity = subArea;
-        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown_typeAhead")).sendKeys(subArea);
-        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown_typeAhead")).sendKeys(Keys.RETURN);
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+	public void enterOfficeSubAreaInTypeAhead(String subArea, int index) {
+		try {
+			SimpleCacheManager.getInstance().put("selectedsubArea", subArea);
+			selectedEntity = subArea;
+			List<WebElement> dropDownList = getDriver()
+					.findElements(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown_typeAhead"));
+			dropDownList.get(index - 1).sendKeys(subArea);
+			dropDownList.get(index - 1).sendKeys(Keys.RETURN);
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
     public void verifyCitiesForSelectedSubArea(ExamplesTable cities) {
         List<WebElement> citiesCollection = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_city_dropdown_list"));
@@ -672,21 +672,10 @@ public class EditOfficePage extends AbstractPage {
             assertEquals(cities.getRow(i).get(cities.getHeaders().get(0)), areasCollection.get(i).getText());
         }
     }
-    public void clickOnAreaDropdown() {
 
-        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown_list"));
-    }
-
-
-    public void clickOnCityDropdown() {
-
-        attemptClick(OfficeIdentifiers.getObjectIdentifier("office_city_dropdown"));
-    }
-
-
-    public void verifyOfficeCityList() {
+    public void verifyOfficeCityList(String area) {
         List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
+        nvPairs.add(new BasicNameValuePair("name", area));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
         try {
             Thread.sleep(3000L);
@@ -808,20 +797,20 @@ public class EditOfficePage extends AbstractPage {
 	}
 
 
-    public void verifyOfficeAddressLinesAddressesInUI(String type,String addressLine1, String addressLine2, String addressLine3, String addressLine4, String country, String area, String subArea, String city, String postalCode, String postalCodeSuffix, String info) {
+    public void verifyOfficeAddressLinesAddressesInUI(String type,String addressLine1, String addressLine2, String addressLine3, String addressLine4, String country, String area, String subArea, String city, String postalCode, String postalCodeSuffix, String info, int index) {
     	try {    			    	
-            assertEquals(type, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_view_mode")));
-            assertEquals(addressLine1, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine1_view_mode")));
-            assertEquals(addressLine2, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine2_view_mode")));
-            assertEquals(addressLine3, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine3_view_mode")));
-            assertEquals(addressLine4, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine4_view_mode")));
-            assertEquals(country, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_country_view_mode")));
-            assertEquals(area, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_area_view_mode")));
-            assertEquals(subArea, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_subarea_view_mode")));
-            assertEquals(city, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_city_view_mode")));
-            assertEquals(postalCode, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_postal_code_view_mode")));
-            assertEquals(postalCodeSuffix, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_postal_code_suffix_view_mode")));           
-            assertEquals(info, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_location_address_info_view_mode")));
+            assertEquals(type, getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_view_mode"), index));
+            assertEquals(addressLine1, getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine1_view_mode"), index));
+            assertEquals(addressLine2, getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine2_view_mode"), index));
+            assertEquals(addressLine3, getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine3_view_mode"), index));
+            assertEquals(addressLine4, getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine4_view_mode"), index));
+            assertEquals(country, getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_country_view_mode"), index));
+            assertEquals(area, getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_area_view_mode"), index));
+            assertEquals(subArea, getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_subarea_view_mode"), index));
+            assertEquals(city, getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_city_view_mode"), index));
+            assertEquals(postalCode, getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_postal_code_view_mode"), index));
+            assertEquals(postalCodeSuffix, getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_postal_code_suffix_view_mode"), index));           
+            assertEquals(info, getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_info_view_mode"), index));
     	}
     	catch(Exception e) {
     		e.printStackTrace();

@@ -230,12 +230,12 @@ public class EditOfficeSteps extends AbstractSteps{
 
 	@When("the user enters the office country <Country> in the type-ahead box")
 	public void enterOfficeCountryInTheTypeAheadBox(@Named("Country") String Country) {
-		getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(Country);
+		getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(Country, 1);
 	}
 
 	@When("the user enters the office city <City> in the type-ahead box")
 	public void enterOfficeCityInTheTypeAheadBox(@Named("City") String City) {
-		getEditOfficePage().enterOfficeCityInTheTypeAheadBox(City);
+		getEditOfficePage().enterOfficeCityInTheTypeAheadBox(City, 1);
 	}
 
 	@Then("the user should see the list of all existing area for the selected country by full name in office address")
@@ -250,7 +250,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
 	@When("the user enters the office area <Area> in the type-ahead box")
 	public void enterOfficeAreaInTypeAhead(@Named("Area") String Area) {
-		getEditOfficePage().enterOfficeAreaInTypeAhead(Area);
+		getEditOfficePage().enterOfficeAreaInTypeAhead(Area, 1);
 	}
 
 	@Then("the user should see the list of all existing subarea for the selected area by full name in office address")
@@ -265,7 +265,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
 	@When("the user enters the office subarea <subArea> in the type-ahead box")
 	public void enterOfficeSubAreaInTypeAhead(@Named("subArea") String subArea) {
-		getEditOfficePage().enterOfficeSubAreaInTypeAhead(subArea);
+		getEditOfficePage().enterOfficeSubAreaInTypeAhead(subArea, 1);
 	}
 
 	@Then("the user should see the below office cities for the selected subarea: $cities")
@@ -299,12 +299,12 @@ public class EditOfficeSteps extends AbstractSteps{
 
 	@When("the user clicks on the choose a city option in the office locations")
 	public void clickOnCityDropdown() {
-		getEditOfficePage().clickOnCityDropdown();
+		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_city_dropdown"));
 	}
 
 	@Then("the user should see the list of all existing city for the selected area by full name in office address")
-	public void verifyOfficeCityList() {
-		getEditOfficePage().verifyOfficeCityList();
+	public void verifyOfficeCityList(@Named("Area") String area) {
+		getEditOfficePage().verifyOfficeCityList(area);
 	}
 
 	@When("the user clicks on delete office address row button for the row $deletebutton_Row")
@@ -416,12 +416,12 @@ public class EditOfficeSteps extends AbstractSteps{
 				OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_postalCodeSuffix"), PostalCodeSuffix, index);
 	}
 	
-    @When("the user enters office address info value as <Info> in location $index")
-    public void enterOfficeAddressInfo(@Named("index") int index, @Named("Info") String info)
-    {
-    	getDataPage().enterTextUsingIndex(
-				OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_info"), info, index);
-    }
+	@When("the user enters office address info value as <Info> in location $index")
+	public void enterOfficeAddressInfo(@Named("index") int index, @Named("Info") String info) {
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_info"),
+				info, index);
+	}
+	
     @When("the user clicks on delete office telecoms row button for the row $deletebutton_Row")
     public void clickonDeleteOfficeTelecomsRowButton(String deletebutton_Row)
     {
@@ -459,6 +459,20 @@ public class EditOfficeSteps extends AbstractSteps{
     	getEditOfficePage().verifyMaxlengthOfficeLocationsTextFields(maxSize,rowIdentifier);
     }
 
+	@Then("the user verifies that the office address lines addresses are entered in the office locations page for two locations")
+	public void verifyOfficeAddressLinesAddressesForTwoLocations(@Named("Type") String type, @Named("Type2") String type2,
+					@Named("AddressLine1") String addressLine1, @Named("AddressLine2") String addressLine2,
+					@Named("AddressLine3") String addressLine3, @Named("AddressLine4") String addressLine4,
+					@Named("PostalCode") String postalCode, @Named("PostalCodeSuffix") String postalCodeSuffix, 
+					@Named("Info") String info, @Named("Country") String country, @Named("Area") String area,
+					@Named("subArea") String subArea, @Named("City") String city) {		
+	
+		getEditOfficePage().verifyOfficeAddressLinesAddressesInUI(type, addressLine1, addressLine2, addressLine3,
+					addressLine4, country, area, subArea, city, postalCode, postalCodeSuffix, info, 1);
+		getEditOfficePage().verifyOfficeAddressLinesAddressesInUI(type2, addressLine1, addressLine2, addressLine3,
+				addressLine4, country, area, subArea, city, postalCode, postalCodeSuffix, info, 2);
+	}
+	
 	@Then("the user verifies that the office address lines addresses are entered in the office locations page")
 	public void verifyOfficeAddressLinesAddressesInUI(@Named("Type") String type,
 					@Named("AddressLine1") String addressLine1, @Named("AddressLine2") String addressLine2,
@@ -466,15 +480,13 @@ public class EditOfficeSteps extends AbstractSteps{
 					@Named("PostalCode") String postalCode, @Named("PostalCodeSuffix") String postalCodeSuffix, 
 					@Named("Info") String info, @Named("Country") String country, @Named("Area") String area,
 					@Named("subArea") String subArea, @Named("City") String city) {		
-		 if(editOfficePage==null){
-	            editOfficePage = getOfficesPage().createEditOfficePage();
-	        }
+		
 		getEditOfficePage().verifyOfficeAddressLinesAddressesInUI(type, addressLine1, addressLine2, addressLine3,
-					addressLine4, country, area, subArea, city, postalCode, postalCodeSuffix, info);
+					addressLine4, country, area, subArea, city, postalCode, postalCodeSuffix, info, 1);		
 	}
 
 	@Then("the user should see the office address lines addresses as in $source document")
-	public void verifyOfficeAddressLinesAddressesFromDB(@Named("Type") String type,
+	public void verifyOfficeAddressLinesAddressesFromDB(@Named("Type") String type, @Named("Type2") String type2,
 			@Named("officeFid") String officeFid, @Named("AddressLine1") String addressLine1,
 			@Named("AddressLine2") String addressLine2, @Named("AddressLine3") String addressLine3,
 			@Named("AddressLine4") String addressLine4, @Named("PostalCode") String postalCode,
@@ -483,9 +495,38 @@ public class EditOfficeSteps extends AbstractSteps{
 
 		getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(type, addressLine1, addressLine2, addressLine3,	addressLine4, postalCode, postalCodeSuffix, info, country, area, subArea, city,
 					officeFid, source);
+		getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(type2, addressLine1, addressLine2, addressLine3,	addressLine4, postalCode, postalCodeSuffix, info, country, area, subArea, city,
+				officeFid, source);
 
 	}
-	
+
+	@When("the user enters office address values in location $index")
+	public void enterLocationAddressesInLocation2(@Named("Type2") String type2,
+			@Named("AddressLine1") String addressLine1, @Named("AddressLine2") String addressLine2,
+			@Named("AddressLine3") String addressLine3, @Named("AddressLine4") String addressLine4,
+			@Named("PostalCode") String postalCode, @Named("PostalCodeSuffix") String postalCodeSuffix,
+			@Named("Info") String info, @Named("Country") String country, @Named("Area") String area,
+			@Named("subArea") String subArea, @Named("City") String city,@Named("index") int index) {
+		
+		getDataPage().selectDropDownValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_dropdown"), type2, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine1"), addressLine1, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine2"), addressLine2, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine3"), addressLine3, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine4"), addressLine4, index);
+		getDataPage().clickElementUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_country_dropdown"), index);
+		getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(country, index);
+		getDataPage().clickElementUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown"), index);
+		getEditOfficePage().enterOfficeAreaInTypeAhead(area, index);
+		getDataPage().clickElementUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown"), index);
+		getEditOfficePage().enterOfficeSubAreaInTypeAhead(subArea, index);
+		getDataPage().clickElementUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_city_dropdown"), index);
+		getEditOfficePage().enterOfficeCityInTheTypeAheadBox(city, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_postalCode"), postalCode, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_postalCodeSuffix"), postalCodeSuffix, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_info"), info, index);
+		
+	}
+
 	@When("the user deletes the existing office locations rows")
     public void deleteExistingOfficeLocationRows() {
            getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_locations_id"));

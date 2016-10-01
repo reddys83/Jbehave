@@ -57,7 +57,7 @@ Examples:
 Scenario: Verify that the user should be able to edit an existing office location row
 a) - Verify if User can prevent deleting the location row by clicking on 'No'.
 b) - Verify if User can delete the location row by clicking on 'Yes'.
-Meta:@sureshtest
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -181,17 +181,45 @@ And the user enters office address <AddressLine4> in row 1
 When the user clicks on the choose a country option in the office locations
 When the user enters the office country <Country> in the type-ahead box
 When the user clicks on the choose an area option in the office locations
-Then the user should see the list of all existing area for the selected country by full name in office address
 When the user enters the office area <Area> in the type-ahead box
 When the user clicks on the choose a subarea option in the office locations
-Then the user should see the list of all existing subarea for the selected area by full name in office address
 When the user enters the office subarea <subArea> in the type-ahead box
 When the user clicks on the choose a city option in the office locations
-Then the user should see the list of all existing city for the selected area by full name in office address
 When the user enters the office city <City> in the type-ahead box
 When the user enters office address postal code value as <PostalCode> in location 1
 And the user enters office address postal code suffix value as <PostalCodeSuffix> in location 1
 And the user enters office address info value as <Info> in location 1
+When the user enters office address values in location 2
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Locations|
+When the user clicks on the confirm button
+Then the user verifies that the office address lines addresses are entered in the office locations page for two locations
+And the user should see the office address lines addresses as in zeus document
+And the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|Type|AddressLine1|AddressLine2|AddressLine3|AddressLine4|Country|Area|subArea|City|PostalCode|PostalCodeSuffix|Info|Type2|
+|299676|FID|299676|264536-3|physical|123 Marie Ln|34 Palmer Dr|45 Frank|789 Valley|USA|Illinois|Warren|Alexis|60126|123|test|mailing|
+
+
+Scenario: Adding updates location and location address for both depositing entity type ana non depositing entity type.
+a)Verify that the user should be able to Add new address row for an office location
+          b)Verify User can select and save location address fields values
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+When the user gets the document with get id for offices with the <officeFid> from the database
+When the user enters office address values in location 1
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
@@ -204,12 +232,14 @@ And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|AddressLine1|AddressLine2|AddressLine3|AddressLine4|Country|Area|subArea|City|PostalCode|PostalCodeSuffix|Info|
-|951|FID|951|951-4|physical|123 Marie Ln|34 Palmer Dr|45 Frank|789 Valley|USA|Illinois|Warren|Alexis|60126|123|adhsbd|
+|951|FID|951|951-4|physical|123 Marie Ln|34 Palmer Dr|45 Frank|789 Valley|USA|Illinois|Warren|Alexis|60126|123|test|
+|444|FID|444|444-499|physical|123 Marie Ln|34 Palmer Dr|45 Frank|789 Valley|USA|Illinois|Warren|Alexis|60126|123|test|  
 
 Scenario: Location Address default value validation 
 1- Verify the values of area, subarea, city should be changed to null when the country value is changed
 2 -Verify the values of subarea, city should be changed to null when the area value is changed
 3- Verify the value of city should be changed to null when the subarea value is changed
+4 -Verify country, area, subarea and city dropdown are loaded with appropriate list of values from DB
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -229,18 +259,22 @@ Then the user should see the area dropdown with Choose an Area selected
 And the user should see the subarea dropdown with Choose a Subarea selected
 And the user should see the city dropdown with Choose a City selected
 When the user clicks on the choose an area option in the office locations
-And the user enters the office area <Area> in the type-ahead box
+Then the user should see the list of all existing area for the selected country by full name in office address
+When the user enters the office area <Area> in the type-ahead box
 Then the user should see the city dropdown with Choose a City selected
 Then the user should see the subarea dropdown with Choose a Subarea selected
 When the user clicks on the choose a subarea option in the office locations
+Then the user should see the list of all existing subarea for the selected area by full name in office address
 When the user enters the office subarea <subArea> in the type-ahead box
 Then the user should see the city dropdown with Choose a City selected
+When the user clicks on the choose a city option in the office locations
+Then the user should see the list of all existing city for the selected area by full name in office address
 
 Examples:
 |entity|searchBy|fid|officeFid|Country|Area|subArea|
 |1010|FID|1010|1010-45|USA|Illinois|Warren|
 
-Scenario: User is updating Office's Locations (Address) in the Office Page. 
+Scenario: User is verifying Office's Locations (Address) error scenarios for non-deposit taking legal entities. 
 1 - Verify that error message 'Required' is displayed after saving when Type field is blank for an office fid which is not a deposit taking institution.
 2 - Verify Office Address Line 1, Address Line 2, Address Line 3, Address Line3, Address Line 4, Postal Code, Postal Code Sufffix, Info field max length attributes
 
@@ -271,7 +305,7 @@ Examples:
 |entity|searchBy|fid|officeFid|Type|
 |951|FID|951|951-4||
 
-Scenario: User is updating Office's Locations (Address) in the Office Page. 
+Scenario: User is verifying Office's Locations (Address) error scenarios  for deposit taking legal entities. 
 1 - Verify that error message 'At least one physical address required' is displayed when Type field is blank for an office fid which is a deposit taking institution.
 2 - Verify previously selected Address Type is not listed in Address dropdown of next row.
 3 - Verify that the error message 'Required' is displayed after saving when Type is blank for a new row.
@@ -351,6 +385,7 @@ And the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|officeFid|Type|Country|Area|subArea|City|
 |444|FID|444|444-676|mailing|USA|Illinois|Warren|Alexis|
+|264536|FID|264536|264536-2|mailing|USA|Illinois|Warren|Alexis|
 
 Scenario: User is viewing Office's Locations (Telecom) - 
 a) Verify Office Telecoms Type dropdown values are from lookup TELECOM_TYPE

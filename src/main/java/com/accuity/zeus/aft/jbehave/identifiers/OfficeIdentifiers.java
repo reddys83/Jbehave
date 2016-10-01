@@ -66,7 +66,6 @@ public class OfficeIdentifiers {
 	    hmap.put("office_location_address_info_view_mode", By.xpath(".//*[@class='location']//tr/th[contains(text(), 'Info')]/following-sibling::td"));
 	    hmap.put("office_locations_row_exists_edit_mode", By.xpath("//*[@class='location'][@data-sequence_id='0']"));
         hmap.put("office_location_row_exists_view_mode", By.xpath("//*[@class='location']"));
-
         
         hmap.put("office_area_dropdown_type_ahead", By.xpath("//*[@id='officeLocations']//tr[@id='area']/td//input"));
         hmap.put("office_subarea_dropdown", By.xpath("//*[@id='officeLocations']//tr[@id='subarea']/td//a"));
@@ -74,10 +73,9 @@ public class OfficeIdentifiers {
         hmap.put("office_subarea_dropdown_typeAhead", By.xpath("//*[@id='officeLocations']//tr[@id='subarea']/td//input"));
         hmap.put("office_city_dropdown", By.xpath("//*[@id='officeLocations']//tr[@id='city']/td//a"));
         hmap.put("office_city_dropdown_list", By.xpath(".//*[@id='city']//*[contains(@class, 'active-result')]"));        
-        hmap.put("office_address_first_row_new_postalCode", By.xpath(".//*[@id='additionalLocationAddresses-0']//input[@name='addrPostCode']"));
-        hmap.put("office_address_first_row_new_postalCodeSuffix", By.xpath(".//*[@id='additionalLocationAddresses-0']//input[@name='addrPostCodeSuffix']"));
-        hmap.put("office_address_postalCodePosition", By.xpath(".//*[@id='additionalLocationAddresses-0']/li[1]/div[1]/ul//li[3]//tr[2]/td"));
-        hmap.put("office_address_first_row_new_info", By.xpath(".//*[@id='additionalLocationAddresses-0']//li[@class='address new']//input[@name='addrInfo']"));
+        hmap.put("office_address_first_row_new_postalCode", By.xpath(".//*[@id='officeLocations']//input[@name='addrPostCode']"));
+        hmap.put("office_address_first_row_new_postalCodeSuffix", By.xpath(".//*[@id='officeLocations']//input[@name='addrPostCodeSuffix']"));       
+        hmap.put("office_address_first_row_new_info", By.xpath(".//*[@id='officeLocations']//input[@name='addrInfo']"));
         hmap.put("office_first_existing_row_address_delete_button", By.xpath(".//*[@id='additionalLocationAddresses-0']/li[1]//button"));
         hmap.put("office_address_delete_row_view", By.xpath(".//*[@id='officeLocations']/div[@class='location']/ul"));
         

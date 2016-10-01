@@ -133,6 +133,25 @@ public abstract class AbstractPage {
         }
         return text;
     }
+    
+    public String getTextOnPageUsingIndex(By by, int index) {
+        int attempts = 0;
+        String text = null;
+        while (true) {
+            waitFor();
+            List<WebElement> elementList = driver.findElements(by);
+            if (elementList.get(index-1).isDisplayed()) {
+                text = elementList.get(index-1).getText().trim();
+                break;
+            }
+            if (attempts >= 10) {
+                break;
+            }
+            waitFor();
+            attempts++;
+        }
+        return text;
+    }
 
     public void attemptClick(By by) {
         int attempts = 0;
