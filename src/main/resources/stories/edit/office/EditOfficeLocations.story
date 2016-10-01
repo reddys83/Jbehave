@@ -68,6 +68,7 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
+And the user clicks on the add new office location button in the office page
 And the user clicks on delete office locations 1 delete button
 Then the user should see the delete row confirmation modal in the office locations
 When the user clicks on the No button to cancel the deletion of row in office locations section
@@ -89,28 +90,10 @@ Examples:
 |444|FID|444|444-505|
 
 
-Scenario:  Verify Office Address Type dropdown values are from lookup ADDRESS_TYPE
-
-Given a user is on the search page
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-And the user clicks on the office locations link in the navigation bar
-And the user clicks on the office update link
-And the user selects office address type value as <Type> in row 1
-And the user clicks on office address type drodown
-Then the user should see the address type values in office location's section from lookup ADDRESS_TYPE
-
-Examples:
-|entity|searchBy|fid|officeFid|Type|
-|1010|FID|1010|1010-44||
-
 Scenario: Adding new location and location address for both depositing entity type ana non depositing entity type.
-a)Verify that the user should be able to Add new address row for an office location
-          b)Verify User can select and save values for Type, Address Line 1, Address Line 2, Address Line 3, Address Line 4, Country,Area, Subarea, City, PostalCode, PostalCodeSuffix and Info
+1- Verify Office Address Type dropdown values are from lookup ADDRESS_TYPE
+2- Verify that the user should be able to Add new address row for an office location
+3- Verify User can select and save values for Type, Address Line 1, Address Line 2, Address Line 3, Address Line 4, Country,Area, Subarea, City, PostalCode, PostalCodeSuffix and Info
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -121,10 +104,14 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
+Then the user should see the office locations address same as in trusted document
+When the user gets the document with get id for offices with the <officeFid> from the database
 When the user deletes the existing office locations rows
 When the user clicks on the add new office location button in the office page
 When the user clicks on add new office address button in the office locations
-And the user selects office address type value as <Type> in row 1
+And the user clicks on office address type drodown
+Then the user should see the address type values in office location's section from lookup ADDRESS_TYPE
+When the user selects office address type value as <Type> in row 1
 And the user enters office address <AddressLine1> in row 1
 And the user enters office address <AddressLine2> in row 1
 And the user enters office address <AddressLine3> in row 1
@@ -132,13 +119,10 @@ And the user enters office address <AddressLine4> in row 1
 When the user clicks on the choose a country option in the office locations
 When the user enters the office country <Country> in the type-ahead box
 When the user clicks on the choose an area option in the office locations
-Then the user should see the list of all existing area for the selected country by full name in office address
 When the user enters the office area <Area> in the type-ahead box
 When the user clicks on the choose a subarea option in the office locations
-Then the user should see the list of all existing subarea for the selected area by full name in office address
 When the user enters the office subarea <subArea> in the type-ahead box
 When the user clicks on the choose a city option in the office locations
-Then the user should see the list of all existing city for the selected area by full name in office address
 When the user enters the office city <City> in the type-ahead box
 When the user enters office address postal code value as <PostalCode> in location 1
 And the user enters office address postal code suffix value as <PostalCodeSuffix> in location 1
@@ -151,6 +135,7 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user verifies that the office address lines addresses are entered in the office locations page
 And the user should see the office address lines addresses as in zeus document
+And the user reverts the changes to the document
 
 
 Examples:
@@ -159,10 +144,10 @@ Examples:
 |444|FID|444|444-499|physical|123 Marie Ln|345 Palmer Dr|456 Franklin Ln|789 Apple Valley|USA|Illinois|Warren|Alexis|60126|123|adhsbd|
 
 
-Scenario: Adding updates location and location address for both depositing entity type ana non depositing entity type.
-a)Verify that the user should be able to Add new address row for an office location
-          b)Verify User can select and save values for Type, Address Line 1, Address Line 2, Address Line 3, Address Line 4, Country,Area, Subarea, City, PostalCode, PostalCodeSuffix and Info
-Meta: @testRun
+Scenario: user updates location and location address for multi location office id
+a)Verify that the user should be able to update new address row for an office location
+b)Verify User can select and save values for Type, Address Line 1, Address Line 2, Address Line 3, Address Line 4, Country,Area, Subarea, City, PostalCode, PostalCodeSuffix and Info
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -173,6 +158,7 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office address locations values in fdb document
 And the user selects office address type value as <Type> in row 1
 And the user enters office address <AddressLine1> in row 1
 And the user enters office address <AddressLine2> in row 1
@@ -197,17 +183,17 @@ And the user should see the below summary changes in confirmation modal
 |Locations|
 When the user clicks on the confirm button
 Then the user verifies that the office address lines addresses are entered in the office locations page for two locations
-And the user should see the office address lines addresses as in zeus document
+And the user should see the office address lines addresses as in zeus document for two locations
 And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|Type|AddressLine1|AddressLine2|AddressLine3|AddressLine4|Country|Area|subArea|City|PostalCode|PostalCodeSuffix|Info|Type2|
-|299676|FID|299676|264536-3|physical|123 Marie Ln|34 Palmer Dr|45 Frank|789 Valley|USA|Illinois|Warren|Alexis|60126|123|test|mailing|
+|299201|FID|299201|299201-0|physical|123 Marie Ln|34 Palmer Dr|45 Frank|789 Valley|USA|Illinois|Warren|Alexis|60126|123|test|mailing|
 
 
 Scenario: Adding updates location and location address for both depositing entity type ana non depositing entity type.
-a)Verify that the user should be able to Add new address row for an office location
-          b)Verify User can select and save location address fields values
+a)Verify that the user should be able to update new address row for an office location
+b)Verify User can select and save location address fields values
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -219,7 +205,23 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 When the user gets the document with get id for offices with the <officeFid> from the database
-When the user enters office address values in location 1
+When the user clicks on add new office address button in the office locations
+And the user selects office address type value as <Type> in row 1
+And the user enters office address <AddressLine1> in row 1
+And the user enters office address <AddressLine2> in row 1
+And the user enters office address <AddressLine3> in row 1
+And the user enters office address <AddressLine4> in row 1
+When the user clicks on the choose a country option in the office locations
+When the user enters the office country <Country> in the type-ahead box
+When the user clicks on the choose an area option in the office locations
+When the user enters the office area <Area> in the type-ahead box
+When the user clicks on the choose a subarea option in the office locations
+When the user enters the office subarea <subArea> in the type-ahead box
+When the user clicks on the choose a city option in the office locations
+When the user enters the office city <City> in the type-ahead box
+When the user enters office address postal code value as <PostalCode> in location 1
+And the user enters office address postal code suffix value as <PostalCodeSuffix> in location 1
+And the user enters office address info value as <Info> in location 1
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 And the user should see the below summary changes in confirmation modal
@@ -265,14 +267,13 @@ Then the user should see the city dropdown with Choose a City selected
 Then the user should see the subarea dropdown with Choose a Subarea selected
 When the user clicks on the choose a subarea option in the office locations
 Then the user should see the list of all existing subarea for the selected area by full name in office address
-When the user enters the office subarea <subArea> in the type-ahead box
 Then the user should see the city dropdown with Choose a City selected
 When the user clicks on the choose a city option in the office locations
 Then the user should see the list of all existing city for the selected area by full name in office address
 
 Examples:
-|entity|searchBy|fid|officeFid|Country|Area|subArea|
-|1010|FID|1010|1010-45|USA|Illinois|Warren|
+|entity|searchBy|fid|officeFid|Country|Area|
+|1010|FID|1010|1010-45|USA|Illinois|
 
 Scenario: User is verifying Office's Locations (Address) error scenarios for non-deposit taking legal entities. 
 1 - Verify that error message 'Required' is displayed after saving when Type field is blank for an office fid which is not a deposit taking institution.

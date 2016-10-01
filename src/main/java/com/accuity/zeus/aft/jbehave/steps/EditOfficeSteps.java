@@ -2,7 +2,6 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
-import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 
 import java.util.ArrayList;
@@ -36,7 +35,6 @@ public class EditOfficeSteps extends AbstractSteps{
     @When("the user gets the document with $xqueryName with the <officeFid> from the database")
     public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("officeFid") String officeFid) {
         getDataPage().getDocument(xqueryName, "fid",officeFid);
-
     }
 
     @Then("the user should see the error $openedDateErrorMsg for opened date")
@@ -157,11 +155,10 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyAdditionalInfoValueWithMaxLengthFromZeus("additionalInfo",officeFid,source);
     }
 
-
-   @When("the user clicks on the add new office location button in the office page")
-    public void clickOnAddButton(){
-       getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_locations_id"));
-    }
+	@When("the user clicks on the add new office location button in the office page")
+	public void clickOnAddButton() {
+		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_locations_id"));
+	}
 
 	@Then("the user should see the $add_button in disabled state in locations section")
 	public void verifyAddOfficeLocationButtonStatus(@Named("add_button") String add_button) {
@@ -174,7 +171,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@When("the user clicks on delete office locations $rowNumber delete button")
-	public void clickonDeleteOfficeLocationsRowButton(@Named("rowNumber") int rowNumber) {
+	public void clickonDeleteOfficeLocationsRowButton(@Named("rowNumber") int rowNumber) throws Exception {		
 		getDataPage().clickElementUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_delete_button"), rowNumber);
 	}
 
@@ -182,11 +179,10 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyOfficeLocationRowIsNotDisplayed() throws Exception {
 		getEditOfficePage().verifyOfficeLocationRowIsNotDisplayed();
 	}
-    
-    public void verifyNoNewOfficeLocationRow(String dropdown)
-    {
-        getEditOfficePage().verifyNoNewOfficeLocationRow(dropdown);
-    }
+
+	public void verifyNoNewOfficeLocationRow(String dropdown) {
+		getEditOfficePage().verifyNoNewOfficeLocationRow(dropdown);
+	}
 
     @When("the user selects primary flag  value <primaryFlag> in the office locations")
     public void selectPrimaryFlag(@Named("primaryFlag") String primaryFlag){
@@ -287,8 +283,8 @@ public class EditOfficeSteps extends AbstractSteps{
     
     @Then("the user verifies that the location row does not exist in the office locations page")
     public void verifyOfficeLocationsRowIsDeleted() throws Exception {
-           getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_location_row_exists_view_mode"),
-                        false);
+    	Thread.sleep(2000L);
+        getDataPage().verifyElementNotExistInUI(OfficeIdentifiers.getObjectIdentifier("office_location_row_exists_view_mode"));
     }
 
 
@@ -303,8 +299,8 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@Then("the user should see the list of all existing city for the selected area by full name in office address")
-	public void verifyOfficeCityList(@Named("Area") String area) {
-		getEditOfficePage().verifyOfficeCityList(area);
+	public void verifyOfficeCityList() {
+		getEditOfficePage().verifyOfficeCityList();
 	}
 
 	@When("the user clicks on delete office address row button for the row $deletebutton_Row")
@@ -466,7 +462,9 @@ public class EditOfficeSteps extends AbstractSteps{
 					@Named("PostalCode") String postalCode, @Named("PostalCodeSuffix") String postalCodeSuffix, 
 					@Named("Info") String info, @Named("Country") String country, @Named("Area") String area,
 					@Named("subArea") String subArea, @Named("City") String city) {		
-	
+		if(editOfficePage==null){
+            editOfficePage = getOfficesPage().createEditOfficePage();
+        }
 		getEditOfficePage().verifyOfficeAddressLinesAddressesInUI(type, addressLine1, addressLine2, addressLine3,
 					addressLine4, country, area, subArea, city, postalCode, postalCodeSuffix, info, 1);
 		getEditOfficePage().verifyOfficeAddressLinesAddressesInUI(type2, addressLine1, addressLine2, addressLine3,
@@ -486,7 +484,19 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 
 	@Then("the user should see the office address lines addresses as in $source document")
-	public void verifyOfficeAddressLinesAddressesFromDB(@Named("Type") String type, @Named("Type2") String type2,
+	public void verifyOfficeAddressLinesAddressesFromDB(@Named("Type") String type, 
+			@Named("officeFid") String officeFid, @Named("AddressLine1") String addressLine1,
+			@Named("AddressLine2") String addressLine2, @Named("AddressLine3") String addressLine3,
+			@Named("AddressLine4") String addressLine4, @Named("PostalCode") String postalCode,
+			@Named("PostalCodeSuffix") String postalCodeSuffix, @Named("Info") String info, @Named("Country") String country, @Named("Area") String area,
+			@Named("subArea") String subArea, @Named("City") String city, @Named("source") String source) {
+
+		getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(type, addressLine1, addressLine2, addressLine3,	addressLine4, postalCode, postalCodeSuffix, info, country, area, subArea, city,
+					officeFid, source);		
+	}
+	
+	@Then("the user should see the office address lines addresses as in $source document for two locations")
+	public void verifyOfficeAddressLinesAddressesFromDBForTwoLocations(@Named("Type") String type, @Named("Type2") String type2,
 			@Named("officeFid") String officeFid, @Named("AddressLine1") String addressLine1,
 			@Named("AddressLine2") String addressLine2, @Named("AddressLine3") String addressLine3,
 			@Named("AddressLine4") String addressLine4, @Named("PostalCode") String postalCode,
@@ -497,8 +507,8 @@ public class EditOfficeSteps extends AbstractSteps{
 					officeFid, source);
 		getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(type2, addressLine1, addressLine2, addressLine3,	addressLine4, postalCode, postalCodeSuffix, info, country, area, subArea, city,
 				officeFid, source);
-
 	}
+
 
 	@When("the user enters office address values in location $index")
 	public void enterLocationAddressesInLocation2(@Named("Type2") String type2,
@@ -532,6 +542,12 @@ public class EditOfficeSteps extends AbstractSteps{
            getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_locations_id"));
            getEditOfficePage().deleteLocationRows();
     }
+	
+	@Then("the user should see the office locations address same as in $source document")
+	public void verifyOfficeLocationAddressFromTrustedDB(@Named("officeFid") String officeFid,
+			@Named("source") String source) {
+		getEditOfficePage().verifyOfficeLocationFromTrustedDB(officeFid, source);
+	}
 
 	@Then("the user verifies that the newly added address row exists in the office locations page")
 	public void verifyNewlyAddedOfficeAddressRowIsDisplayed() throws Exception {
@@ -643,12 +659,12 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @When("the user clicks on the No button to cancel the deletion of row in office locations section")
     public void pressNoButtonInDeleteConfirmationModalForOfficeLocation() {
-        getEditOfficePage().pressNoButtonInDeleteConfirmationModalForOfficeLocation();
+    	getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_location_delete_no_button"));
     }
 
     @When("the user clicks on the Yes button to confirm the deletion of row in office locations section")
     public void pressYesButtonInDeleteConfirmationModalForOfficeLocation() {
-        getEditOfficePage().pressYesButtonInDeleteConfirmationModalForOfficeLocation();
+        getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_location_delete_yes_button"));
     }
 
     @Then("the user verifies that the row values exists in the office locations page")
@@ -656,10 +672,9 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyNewlyAddedOfficeLocationRowExists();
     }
 
-
     @When("the user clicks on the No button to cancel the deletion of row in office locations page")
     public void pressNoButtonInDeleteConfirmationModalForOffice() {
-        getEditOfficePage().pressNoButtonInDeleteConfirmationModalForOffice();
+        getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_delete_no_button"));
     }
     @Then("the user should see the delete row confirmation modal in the office locations")
     public void verifyDeleteConfirmationModal() {

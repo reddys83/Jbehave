@@ -39,7 +39,7 @@ public class OfficeIdentifiers {
         hmap.put("office_address_addRow_button", By.cssSelector("button[id*='add-locationAddresses']")); 
         hmap.put("office_addressType_first_row_existing_address_type_dropdown", By.xpath(".//*[@id='officeLocations']//li[1]//select[@id='addressType-0']"));
         hmap.put("office_addressType_second_row_address_type_dropdown", By.xpath(".//*[@id='officeLocations']//li[2]//select[@id='addressType-0']"));
-        hmap.put("office_location_address_type_dropdown", By.xpath(".//*[@id='officeLocations']//select[@id='addressType-0']"));
+        hmap.put("office_location_address_type_dropdown", By.xpath(".//*[@id='officeLocations']//select[contains(@id, 'addressType')]"));
         hmap.put("office_address_types_dropdown", By.xpath(".//*[@id='officeLocations']//select[@id='addressType-0']"));
         hmap.put("office_location_addressLine1", By.xpath(".//*[@id='officeLocations']//input[@name='addrLine1']"));
         hmap.put("office_location_addressLine2", By.xpath(".//*[@id='officeLocations']//input[@name='addrLine2']"));
@@ -61,7 +61,7 @@ public class OfficeIdentifiers {
 	    hmap.put("office_location_address_country_view_mode", By.xpath(".//*[@class='location']//tr/th[contains(text(), 'Country')]/following-sibling::td"));
 	    hmap.put("office_location_address_subarea_view_mode", By.xpath(".//*[@class='location']//tr/th[contains(text(), 'Subarea')]/following-sibling::td"));
 	    hmap.put("office_location_address_area_view_mode", By.xpath(".//*[@class='location']//tr/th[contains(text(), 'Area')]/following-sibling::td"));
-	    hmap.put("office_location_address_postal_code_view_mode", By.xpath(".//*[@class='location']//tr/th[contains(text(), 'Postal Code')]/following-sibling::td"));
+	    hmap.put("office_location_address_postal_code_view_mode", By.xpath(".//*[@class='location']//tr/th[text()= 'Postal Code']/following-sibling::td"));
 	    hmap.put("office_location_address_postal_code_suffix_view_mode", By.xpath(".//*[@class='location']//tr/th[contains(text(), 'Postal Code Suffix')]/following-sibling::td"));
 	    hmap.put("office_location_address_info_view_mode", By.xpath(".//*[@class='location']//tr/th[contains(text(), 'Info')]/following-sibling::td"));
 	    hmap.put("office_locations_row_exists_edit_mode", By.xpath("//*[@class='location'][@data-sequence_id='0']"));
@@ -96,6 +96,10 @@ public class OfficeIdentifiers {
         hmap.put("office_first_row_telecoms_delete_button", By.xpath(".//*[@id='additionalLocationTelecomms-0']/tr[1]//button[@class='delete-element']"));
         hmap.put("office_address_type_error_msg", By.xpath(".//*[@id='additionalLocationAddresses-0']//li[@class='address new']//*[@data-error_id='addressType-0Error']"));    
         hmap.put("office_locations_addressLineList_view_mode", By.xpath(".//*[@id='officeLocations']//table[4]//tr"));
+        hmap.put("office_address_country_error_msg", By.xpath(".//*[@id='officeLocations']//li[@class='address new']//*[@data-error_id='countryError']"));
+	    hmap.put("office_address_type_physical_error_msg", By.xpath(".//*[@id='additionalLocationAddresses-0']//*[@data-error_id='addressType-0Error']"));
+	    hmap.put("office_address_type_error_msg_second_row", By.xpath(".//*[@id='additionalLocationAddresses-0']//*[@data-error_id='addressType-0Error'][@data-sequence_id='01']"));
+        hmap.put("office_locations_addressLine1_error_msg_second_row", By.xpath(".//*[@id='additionalLocationAddresses-0']//*[@data-error_id='addrLine1Error'][@data-sequence_id='01']"));
         
         hmap.put("office_locations_primaryflag_view", By.xpath(".//*[@id='officeLocations']//dl[dt='Primary']/dd"));
         hmap.put("office_locations_postalCode_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Postal Code']/td"));
@@ -124,8 +128,8 @@ public class OfficeIdentifiers {
         hmap.put("office_locations_telecoms_textAfter_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Text After']/td"));
         hmap.put("office_locations_telecoms_answerback_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Answerback']/td"));
         hmap.put("office_locations_telecoms_value2_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Value']/td"));
-        hmap.put("office_location_delete_no_button", By.id("cancel-button"));
-        hmap.put("office_location_delete_yes_button",By.id("confirm-button"));
+        hmap.put("office_location_delete_no_button", By.xpath("//*[@id='modal-region']//*[@id='cancel-button']"));
+        hmap.put("office_location_delete_yes_button", By.xpath("//*[@id='modal-region']//*[@id='confirm-button']"));
         hmap.put("office_delete_no_button", By.id("no-button"));
         hmap.put("office_area_listBox",By.xpath("//*[@id='area']/td//span"));
         hmap.put("office_subarea_listBox",By.xpath(".//*[@id='subarea']/td//span"));
@@ -215,10 +219,7 @@ public class OfficeIdentifiers {
 	    hmap.put("office_services_override_view_mode", By.xpath("//*[@id='officeServices']//tr/td[2]")); 
 	    hmap.put("office_service_category_dropdown_exist_edit_mode_xpath",By.xpath("//select[@id='serviceCategory']"));
 	    hmap.put("office_service_category_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='serviceCategoryError']"));
-	    hmap.put("office_services_entire_xpath",By.xpath("//*[@id='officeServices']//tbody"));
-
-	    hmap.put("office_address_country_error_msg", By.xpath(".//*[@id='officeLocations']//li[@class='address new']//*[@data-error_id='countryError']"));
-	    hmap.put("office_address_type_physical_error_msg", By.xpath(".//*[@id='additionalLocationAddresses-0']//li[@class='address']//*[@data-error_id='addressType-0Error']"));
+	    hmap.put("office_services_entire_xpath",By.xpath("//*[@id='officeServices']//tbody"));	    
 	    hmap.put("office_locations_telecom_row_view_mode", By.xpath("//*[@id='officeLocations']//*[@class='location']/table/tbody/tr"));
 	    hmap.put("office_locations_telecoms_type_dropdown_options", By.xpath(".//*[@id='additionalLocationTelecomms-0']//select[@id='telecommType-0']//option"));
 	    hmap.put("office_telecom_type_dropdown_input", By.xpath(".//*[@id='additionalLocationTelecomms-0']//select[@id='telecommType-0']"));

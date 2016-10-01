@@ -524,13 +524,6 @@ public class EditOfficePage extends AbstractPage {
         selectRadioButtonByValue(OfficeIdentifiers.getObjectIdentifier("office_location_primary_flag_radio_options"), primaryFlag);
     }
 
-   /* public void selectOfficeAddressType(String typeRowIdentifier, String Type) {
-        Select dropdown = new Select(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(typeRowIdentifier)));
-        if (dropdown.getFirstSelectedOption().getText()!=Type) {
-            dropdown.selectByVisibleText(Type);
-        } else {assertFalse("dropdown selection value passed from story is the same as the one on the webpage",true);}
-
-    }*/
     public void enterofficeAddressLine1(String addressLine1RowIdentifier, String AddressLine1) {
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(addressLine1RowIdentifier)).clear();
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(addressLine1RowIdentifier)).sendKeys(AddressLine1);
@@ -673,9 +666,9 @@ public class EditOfficePage extends AbstractPage {
         }
     }
 
-    public void verifyOfficeCityList(String area) {
+    public void verifyOfficeCityList() {
         List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("name", area));
+        nvPairs.add(new BasicNameValuePair("name", selectedEntity));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
         try {
             Thread.sleep(3000L);
@@ -747,6 +740,37 @@ public class EditOfficePage extends AbstractPage {
             e.printStackTrace();
         }
     }
+    
+	public void verifyOfficeLocationFromTrustedDB(String officeFid, String source) {
+		try {
+			if (getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_view_mode"))
+					.size() > 0) {
+				List<WebElement> typeList = getDriver()
+						.findElements(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_view_mode"));
+
+				for (int index = 0; index < typeList.size(); index++) {					
+					String type = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_view_mode"), index);
+		            String addressLine1 = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine1_view_mode"), index);
+		            String addressLine2 = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine2_view_mode"), index);
+		            String addressLine3 = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine3_view_mode"), index);
+		            String addressLine4 = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine4_view_mode"), index);
+		            String country = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_country_view_mode"), index);
+		            String area = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_area_view_mode"), index);
+		            String subArea = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_subarea_view_mode"), index);
+		            String city = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_city_view_mode"), index);
+		            String postalCode = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_postal_code_view_mode"), index);
+		            String postalCodeSuffix = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_postal_code_suffix_view_mode"), index);           
+		            String info = getTextOnPageUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_address_info_view_mode"), index);					
+					verifyOfficeAddressLinesAddressesFromDB(type, addressLine1, addressLine2, addressLine3,	addressLine4, postalCode, postalCodeSuffix, info, country, area, subArea, city,
+							officeFid, source);	
+				}
+			} else {
+				assertTrue("There is no existing values in location address section", true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
     public void clickOnAddTelecomsRowButton() {
         attemptClick(OfficeIdentifiers.getObjectIdentifier("office_telecoms_addRow_id"));
@@ -887,7 +911,7 @@ public class EditOfficePage extends AbstractPage {
 			if (currentInstance != null) {
 				currentInstance.click();
 				verifyDeleteConfirmationModalForLocation();
-				pressYesButtonInDeleteConfirmationModalForOfficeLocation();
+				attemptClick(OfficeIdentifiers.getObjectIdentifier("office_location_delete_yes_button"));
 			}
 		}
 	}
@@ -1002,49 +1026,20 @@ public class EditOfficePage extends AbstractPage {
         assertEquals(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)).getAttribute("maxlength"), maxSize);
     }
 
-    public void pressNoButtonInDeleteConfirmationModalForOfficeLocation() {
-    	try {
-    		Thread.sleep(1000);
-    	} catch(Exception ex) {
-    		ex.printStackTrace();
-    	}
-    	getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_location_delete_no_button")).click();
-    }
-
-    public void pressYesButtonInDeleteConfirmationModalForOfficeLocation() {
-    	try {
-    		Thread.sleep(1000);
-    	} catch(Exception ex) {
-    		ex.printStackTrace();
-    	}
-        getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_location_delete_yes_button")).click();
-    }
-
     public void pressNoButtonInDeleteConfirmationModalForOffice() {
         getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_delete_no_button")).click();
     }
 
-      public void verifyNewlyAddedOfficeLocationRowExists() {
-        try
-        {
+	public void verifyNewlyAddedOfficeLocationRowExists() {
+		try {
+			WebElement identifier = getDriver().findElement(OfficeIdentifiers
+					.getObjectIdentifier("office_addressType_first_row_existing_address_type_dropdown"));
+			assertTrue(identifier != null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-            WebElement identifier = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_addressType_first_row_existing_address_type_dropdown"));
-            assertTrue(identifier != null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-/*
-    public void verifyDeleteConfirmationModal() {
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        assertEquals("Confirm DeleteAre you sure, you want to delete?NO YES", getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_location_delete_row_confirmation_modal")).getText().replace("\n", ""));
-
-    }
-*/
     public void verifyOfficeLocationsEditPageMode() {
         assertTrue(getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_location_primaryoffice_location_delete_row_edit_mode_flag_radio_options")).size()>0);
     }
