@@ -2110,6 +2110,10 @@ public class EditOfficePage extends AbstractPage {
         } else getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_principalFlag_name")).get(1).click();
     }
 
-
+    public void verifypostalCodePositonInUI(String country,String postalCodePositon)
+    {
+    	 assertEquals(country, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_country_dropdown_list")));
+         assertEquals(postalCodePositon, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_AddressLine1_textarea_view")));
+    }
 }
 

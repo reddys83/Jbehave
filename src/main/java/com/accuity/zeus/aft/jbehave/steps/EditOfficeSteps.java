@@ -1482,4 +1482,10 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyBlankOfficeServicesParameterInUI() {
 		getEditOfficePage().verifyBlankOfficeServices(); 
 	}
+	
+	@Then("the user should verify the postal code position is updated in Office web page")
+    public void verifyPostalCodePositionInUI(@Named("country") String country,@Named("postalCodePosition") String postalCodePosition) {
+
+        getEditOfficePage().verifypostalCodePositonInUI(country,postalCodePosition);
+    }
 }
