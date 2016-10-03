@@ -1,6 +1,7 @@
 let $fid := xs:string(xdmp:get-request-field("fid"))
+let $source := xs:string(xdmp:get-request-field("source"))
 
-let $offices := cts:search(fn:collection('source-trusted')/office,
+let $offices := cts:search(fn:collection(fn:concat('source-', $source))/office,
         cts:and-query((
             cts:element-attribute-range-query(xs:QName("office"), xs:QName("fid"), "=", $fid)
         )))
@@ -80,4 +81,17 @@ return <summaries><summary>
     <summaryValue>{$summaryValue}</summaryValue>
 </summary></summaries>
 
-return <locations>{$officeLocations}{$summaries}</locations>
+(: To verify Primary Flag and its corresponding Address Line 1 values :)
+let $officePrimaryFlag := for $a in $offices/locations/location
+
+let $primaryFlag := $a/@primary/string()
+
+let $officeAddressLine1 := for $b in $a/address
+
+let $addressLine1Value := $b/streetAddress/addressLine1/text()
+
+return <addressLine1Value>{$addressLine1Value}</addressLine1Value>
+
+return <locationPrimaryFlag><primaryFlag>{$primaryFlag}</primaryFlag>{$officeAddressLine1}</locationPrimaryFlag>
+
+return <locations>{$officeLocations}{$summaries}{$officePrimaryFlag}</locations>
