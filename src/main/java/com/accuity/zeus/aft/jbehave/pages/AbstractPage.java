@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -417,5 +418,32 @@ public abstract class AbstractPage {
             wait.until(ExpectedConditions.textToBePresentInElement(requiredMessage,"Required"));
         } catch (org.openqa.selenium.NoSuchElementException e) {
         }
+    }
+    
+    public String getTextUsingIndex(By by, int index) { 
+    	String value = null;
+    	try {
+    		List<WebElement> elementList = getDriver().findElements(by);		
+        	value = elementList.get(index-1).getAttribute("value");        	
+    	}
+    	catch (Exception e) {
+    		assertFalse("Element not found", false);
+    	}  
+    	return value;
+    }
+
+    public String getSelectedOptionInDropDownByIndex(By by, int index) {
+    	String value = null;
+    	try {
+    		List<WebElement> elementList = getDriver().findElements(by);
+    		if (elementList.size() >= index) {
+    			value = new Select(elementList.get(index - 1)).getFirstSelectedOption().getText();
+    		} else {
+    			assertFalse("dropdown not found in row :" + index, true);
+    		}
+    	} catch (Exception e) {
+    		assertFalse("Element not found", true);
+    	}
+    	return value;
     }
 }
