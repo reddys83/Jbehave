@@ -1432,7 +1432,7 @@ public class DataPage extends AbstractPage {
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xqueryName);
 		assertTrue(document.getElementsByTagName(tagName).getLength() > 1);
 		for (int i = 1; i < document.getElementsByTagName(tagName).getLength(); i++) {
-			assertEquals(document.getFirstChild().getChildNodes().item(i-1).getFirstChild().getTextContent(),
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
 					elementTypeList.get(i).getAttribute("value"));
 		}
 	}

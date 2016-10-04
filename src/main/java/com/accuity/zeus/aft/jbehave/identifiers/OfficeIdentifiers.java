@@ -26,8 +26,7 @@ public class OfficeIdentifiers {
         hmap.put("office_foreignoffice_radio_options_xpath", By.xpath("//*[@id='officeBasicInfo']//input[@name='foreignOffice']"));
         hmap.put("office_basicInfo_view_foreignoffice_xpath", By.xpath(".//*[@id='officeBasicInfo']//tr[th='Foreign Office']/td"));
         hmap.put("office_basicInfo_AdditionalInfo_textarea_xpath", By.xpath(".//*[@id='officeBasicInfo']//tr[th='Add Info']/td/textarea"));
-        hmap.put("office_basicInfo_AdditionalInfo_textarea_view_xpath", By.xpath(".//*[@id='officeBasicInfo']//tr[th='Add Info']/td"));
-      
+        hmap.put("office_basicInfo_AdditionalInfo_textarea_view_xpath", By.xpath(".//*[@id='officeBasicInfo']//tr[th='Add Info']/td"));      
         hmap.put("office_add_locations_id", By.id("add-locations"));
         hmap.put("office_locations_row_delete_button", By.xpath("//*[@class='delete-block']"));
         hmap.put("office_locations_row_view", By.xpath(".//*[@id='officeLocations']/h1"));
@@ -76,8 +75,7 @@ public class OfficeIdentifiers {
         hmap.put("office_address_first_row_new_postalCodeSuffix", By.xpath(".//*[@id='officeLocations']//input[@name='addrPostCodeSuffix']"));       
         hmap.put("office_address_first_row_new_info", By.xpath(".//*[@id='officeLocations']//input[@name='addrInfo']"));
         hmap.put("office_first_existing_row_address_delete_button", By.xpath(".//*[@id='additionalLocationAddresses-0']/li[1]//button"));
-        hmap.put("office_address_delete_row_view", By.xpath(".//*[@id='officeLocations']/div[@class='location']/ul"));
-        
+        hmap.put("office_address_delete_row_view", By.xpath(".//*[@id='officeLocations']/div[@class='location']/ul"));        
         hmap.put("office_telecoms_addRow_id", By.id("add-locationTelecomms-0"));
         hmap.put("office_telecoms_first_row_new_telecoms_type_dropdown", By.xpath(".//*[@id='additionalLocationTelecomms-0']//select[@id='telecommType-0']"));
         hmap.put("office_telecoms_first_row_new_rank", By.xpath(".//*[@id='additionalLocationTelecomms-0']//input[@name='telecommRank']"));
@@ -98,8 +96,7 @@ public class OfficeIdentifiers {
         hmap.put("office_address_country_error_msg", By.xpath(".//*[@id='officeLocations']//li[@class='address new']//*[@data-error_id='countryError']"));
 	    hmap.put("office_address_type_physical_error_msg", By.xpath(".//*[@id='additionalLocationAddresses-0']//*[@data-error_id='addressType-0Error']"));
 	    hmap.put("office_address_type_error_msg_second_row", By.xpath(".//*[@id='additionalLocationAddresses-0']//*[@data-error_id='addressType-0Error'][@data-sequence_id='01']"));
-        hmap.put("office_locations_addressLine1_error_msg_second_row", By.xpath(".//*[@id='additionalLocationAddresses-0']//*[@data-error_id='addrLine1Error'][@data-sequence_id='01']"));
-        
+        hmap.put("office_locations_addressLine1_error_msg_second_row", By.xpath(".//*[@id='additionalLocationAddresses-0']//*[@data-error_id='addrLine1Error'][@data-sequence_id='01']"));        
         hmap.put("office_locations_primaryflag_view", By.xpath(".//*[@id='officeLocations']//dl[dt='Primary']/dd"));
         hmap.put("office_locations_postalCode_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Postal Code']/td"));
         hmap.put("office_locations_postalCodeSuffix_textarea_view", By.xpath(".//*[@id='officeLocations']//tr[th='Postal Code Suffix']/td"));
@@ -134,7 +131,6 @@ public class OfficeIdentifiers {
         hmap.put("office_subarea_listBox",By.xpath(".//*[@id='subarea']/td//span"));
         hmap.put("office_city_listBox",By.xpath(".//*[@id='city']/td//span"));
         hmap.put("delete_row_confirmation_modal_xpath",By.xpath(".//*[@id='additionalLocationAddresses-0']/li[2]"));
-
         hmap.put("first_existing_officetype_dropdown", By.xpath((".//*[@id='officeBasicInfo']//tbody[@id='additionalTypes']/tr[1]/td[1]/select")));
         hmap.put("second_existing_officetype_dropdown", By.xpath((".//*[@id='officeBasicInfo']//tbody[@id='additionalTypes']/tr[2]/td[1]/select")));
         hmap.put("office_basicInfo_officetypes_dropdown_xpath",By.xpath(".//*[@id='officeBasicInfo']//tbody[@id='additionalTypes']//select[@id='officeType' or @id='firstOfficeType']"));
@@ -157,8 +153,7 @@ public class OfficeIdentifiers {
         hmap.put("office_identifier_type_req_err_msg_xpath", By.xpath("//*[@id='additionalIdentifiers']//*[@data-error_id='identifierTypeError']"));
         hmap.put("office_identifier_value_req_err_msg_xpath", By.xpath("//*[@id='additionalIdentifiers']//*[@data-error_id='identifierValueError']"));
         hmap.put("office_identifier_status_req_err_msg_xpath", By.xpath("//*[@id='additionalIdentifiers']//*[@data-error_id='identifierStatusError']"));        
-        hmap.put("office_delete_identifiers_row_button_xpath", By.xpath(".//*[@data-row_id='identifiers']//button[@class='delete-element']"));
-        
+        hmap.put("office_delete_identifiers_row_button_xpath", By.xpath(".//*[@data-row_id='identifiers']//button[@class='delete-element']"));        
         hmap.put("office_name_type_first_row_existing_office_name_value",By.xpath("//*[@id='additionalNames']//input[@name='fixedName']"));
         hmap.put("office_name_second_row_existing_office_type_dropdown",By.xpath(".//*[@id='additionalNames']//select[@name='nameType']"));
         hmap.put("office_name_second_row_existing_office_value",By.xpath(".//*[@id='additionalNames']//input[@data-internal_id='nameValue']"));

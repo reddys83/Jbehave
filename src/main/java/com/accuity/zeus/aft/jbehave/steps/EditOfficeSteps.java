@@ -432,7 +432,7 @@ public class EditOfficeSteps extends AbstractSteps{
     
     @Then("the user should see the address type values in office location's section from lookup $lookup")
     public void verifyOfficeAddressTypesFromLookup(@Named("officeaddress_rowIdentifier") String officeaddress_rowIdentifier,@Named("officeFid") String lookupFid) {     
-    	getDataPage().verifyLookUpValues(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_options_dropdown"), "get Office Address Types", "officeAddressTypes");
+    	getDataPage().verifyLookUpValues(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_options_dropdown"), "get Office Address Types", "officeAddressType");
     }
 
     @Then("the user should see the error message $errorMsg for the office address type field")
