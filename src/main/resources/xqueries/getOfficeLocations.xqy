@@ -1,8 +1,7 @@
 let $fid := xs:string(xdmp:get-request-field("officeFid"))
 let $source := xs:string(xdmp:get-request-field("source"))
 
-
-let $offices := cts:search(fn:collection(fn:concat('source-',$source))/office,
+let $offices := cts:search(fn:collection(fn:concat('source-', $source))/office,
         cts:and-query((
             cts:element-attribute-range-query(xs:QName("office"), xs:QName("fid"), "=", $fid)
         )))

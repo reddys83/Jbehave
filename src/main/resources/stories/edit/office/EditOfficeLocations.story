@@ -7,6 +7,7 @@ So that I can achieve a business goal
 
 JIRA ID - ZEUS-1075 - User can select to edit Office's Locations
 JIRA ID - ZEUS-1300 - User can edit Office's Locations(Telecoms)
+JIRA ID - ZEUS-1301 - User can edit Office's Locations (Primary Flag)
 JIRA ID - ZEUS-1299 - User can edit Office's Locations(Addresses)
 
 
@@ -699,3 +700,35 @@ Examples:
 |entity|searchBy|fid|officeFid|type|rank|textBefore|value|textAfter|answerBack|
 |1038|FID|1038|1038-60|telex|1|5 pm|abc|9 am|1 hr|
 
+Scenario: User is viewing and updating Office's Locations (Primary Flag) - 
+a)User verifies whether current value of Primary Flag is same as in trusted document.
+b)User selects a location where Primary Flag is false and sets to true and verifies that primary flag options are disabled.
+c)User verifies that the other Primary Flag is changed to false.
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+And the user gets the document with get id for offices with the <officeFid> from the database
+Then the user should see the primary flag value same as in trusted document
+When the user selects <primaryFlag1> for office locations second primary flag
+Then the user verifies the true primary flag is not editable
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Locations|
+When the user clicks on the confirm button
+Then the user verifies that <primaryFlag1> is updated in UI
+Then the user verifies <primaryFlag2> is saved for other location
+Then the user verifies the primary flag values in zeus document
+And the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|primaryFlag1|primaryFlag2|
+|91832|FID|91832|91832-0|true|false|
