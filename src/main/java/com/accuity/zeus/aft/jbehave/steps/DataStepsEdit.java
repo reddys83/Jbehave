@@ -17,6 +17,8 @@ public class DataStepsEdit extends AbstractSteps {
 	@Autowired
 	Database database;
 
+    private DataPage dataPage;
+
 	@When("the user clicks on the update link")
 	public void clickOnUpdateCurrencyLink() {
 		getDataPage().clickOnUpdateCurrencyLink();
@@ -44,7 +46,16 @@ public class DataStepsEdit extends AbstractSteps {
 
 	@Given("the user updates $endpoint with fid <entityFid>")
 	public void updateXmlDocument(@Named("endpoint") String endpoint, @Named("entityFid") String entityFid){
+		dataPage = new DataPage(webDriverState.getWebDriver(), getDataManagementWebappUrl(), database, apacheHttpClient, restClient, heraApi);
+		setDataPage(dataPage);
 		getDataPage().updateDocument(endpoint, entityFid);
+	}
+
+	@Given("the user updates $endPoint document with value <routingCode> and code type <routingCodeType>")
+	public void updateRoutingCodeXmlDocument(@Named("endPoint") String endPoint,@Named("routingCode") String routingCode, @Named("routingCodeType") String routingCodeType){
+		dataPage = new DataPage(webDriverState.getWebDriver(), getDataManagementWebappUrl(), database, apacheHttpClient, restClient, heraApi);
+		setDataPage(dataPage);
+		getDataPage().updateRoutingCodeDocument(endPoint,routingCode,routingCodeType);
 	}
 
 	@Then("the user should see the cancel update confirmation modal")

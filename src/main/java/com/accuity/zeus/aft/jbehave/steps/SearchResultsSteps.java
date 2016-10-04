@@ -136,6 +136,15 @@ public class SearchResultsSteps extends AbstractSteps{
         }
     }
 
+    @When("the user clicks on the search results card with routing code <routingCode> and code type <codeType>")
+    public void clickOnResultCard(@Named("routingCode") String routingCode,@Named("codeType") String codeType){
+        //searchedEntity = fid;
+        setRoutingCodePage(getResultsPage().clickOnRoutingCodeResultCard(getResultsPage().getRoutingCodeElements(routingCode,codeType)));
+        if(dataPage==null){
+            dataPage = getResultsPage().createDataPage();
+        }
+    }
+
     @Then("the user should see the search results for the institution")
     public void verifySearchResults() {
         getResultsPage().verifySearchResults();

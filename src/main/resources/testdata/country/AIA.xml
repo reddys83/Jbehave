@@ -1,0 +1,236 @@
+<country deleted="false" fid="AIA" id="829a409c-efb9-4948-a4b4-8dedf45d381a" resource="/country/id/829a409c-efb9-4948-a4b4-8dedf45d381a" source="zeus" tfpid="AI">
+    <summary>
+        <iso2>AI</iso2>
+        <iso3>AIA</iso3>
+        <names>
+            <name>
+                <type>Country Name</type>
+                <value>Anguilla</value>
+            </name>
+            <countrySortKey>ANGUILLA</countrySortKey>
+        </names>
+        <status>active</status>
+        <timeZones>
+            <summaries>
+                <summary>-4 hours</summary>
+            </summaries>
+        </timeZones>
+        <businessHours>
+            <summaries>
+                <summary>08.00-16.00</summary>
+            </summaries>
+        </businessHours>
+        <demographics>
+            <metric>
+                <name>Area</name>
+                <value>35</value>
+                <unit>miles2</unit>
+            </metric>
+            <metric>
+                <name>Population</name>
+                <value>13477</value>
+            </metric>
+        </demographics>
+        <politicalStructure>Dependency of the United Kingdom</politicalStructure>
+        <primaryExports>Lobster, fish, livestock, salt, concrete blocks, rum</primaryExports>
+        <primaryImports>Fuels, foodstuffs, manufactures, chemicals, trucks, textiles</primaryImports>
+        <telephoneCode>1 264</telephoneCode>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <languages>
+        <summaries>
+            <summary>English</summary>
+        </summaries>
+    </languages>
+    <currencies>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/b561f8e0-f8eb-47d0-a5a1-60614f6b93fc" rel="src" />
+            <name>East Caribbean Dollar</name>
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">1980-01-01</startDate>
+        </currency>
+    </currencies>
+    <iban>
+        <registered>false</registered>
+    </iban>
+    <holidays>
+        <holiday>
+            <date accuracy="day">2015-01-01</date>
+            <name>New Year's Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-03-02</date>
+            <name>James Ronald Webster Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-04-03</date>
+            <name>Good Friday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-04-06</date>
+            <name>Easter Monday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-05-01</date>
+            <name>Labour Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-05-25</date>
+            <name>Whitmonday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-06-01</date>
+            <name>Anguilla Day OBS</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-06-15</date>
+            <name>Queen's Birthday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-08-03</date>
+            <name>August Monday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-08-06</date>
+            <name>August Thursday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-08-07</date>
+            <name>Constitution Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-21</date>
+            <name>National Heroes and Heroines Day OBS</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-25</date>
+            <name>Christmas Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-28</date>
+            <name>Boxing Day OBS</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-01</date>
+            <name>New Year's Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-02</date>
+            <name>James Ronald Webster Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-25</date>
+            <name>Good Friday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-28</date>
+            <name>Easter Monday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-02</date>
+            <name>Labour Day OBS</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-16</date>
+            <name>Whitmonday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-30</date>
+            <name>Anguilla Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-13</date>
+            <name>Queen's Birthday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-02-01</date>
+            <name>August Monday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-02-04</date>
+            <name>August Thursday</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-02-05</date>
+            <name>Constitution Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-02-19</date>
+            <name>National Heroes and Heroines Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-26</date>
+            <name>Boxing Day</name>
+            <note />
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-27</date>
+            <name>Christmas Day OBS</name>
+            <note />
+        </holiday>
+    </holidays>
+    <alternativeRegions>
+        <region>
+            <type>Trading Region</type>
+            <value>Caribbean</value>
+        </region>
+    </alternativeRegions>
+    <relatedPlaces>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>Capital City</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/0864bdcc-2dcf-402e-afac-60315322240c" rel="src" />
+            </place>
+        </relation>
+        <relation>
+            <type>Financial Centre</type>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/0864bdcc-2dcf-402e-afac-60315322240c" rel="src" />
+            </place>
+        </relation>
+    </relatedPlaces>
+    <relatedPresences>
+        <relation>
+            <type>Central Bank</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/31370367-e13e-4c75-868c-00ca38a9fca0" rel="src" />
+            </presence>
+        </relation>
+        <relation>
+            <type>Regulator</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/3fa2f0b5-fc51-41a7-8264-f2f7799d44d7" rel="src" />
+            </presence>
+        </relation>
+    </relatedPresences>
+</country>

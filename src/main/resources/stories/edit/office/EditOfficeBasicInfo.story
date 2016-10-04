@@ -120,7 +120,11 @@ Examples:
 |entity|searchBy|fid|officeFid|day|month|year|
 |1010|FID|1010|1010-44||||
 
+<<<<<<< HEAD
+ JIRA ID - ZEUS-1069 - User can edit Principal Office flag
+=======
 
+>>>>>>> develop
 Scenario: User makes a change to the principal office flag where the xml does not have the node principal office node and saves it
 1. verify that the confirmation modal displays the change
 2. verify that the change is reflected in zeus document
