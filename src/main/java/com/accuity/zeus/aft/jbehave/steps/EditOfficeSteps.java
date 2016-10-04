@@ -35,7 +35,6 @@ public class EditOfficeSteps extends AbstractSteps{
     @When("the user gets the document with $xqueryName with the <officeFid> from the database")
     public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("officeFid") String officeFid) {
         getDataPage().getDocument(xqueryName, "fid",officeFid);
-
     }
 
     @Then("the user should see the error $openedDateErrorMsg for opened date")
@@ -156,41 +155,35 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyAdditionalInfoValueWithMaxLengthFromZeus("additionalInfo",officeFid,source);
     }
 
+	@When("the user clicks on the add new office location button in the office page")
+	public void clickOnAddButton() {
+		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_locations_id"));
+	}
 
-   @When("the user clicks on the add new office location button in the office page")
-    public void clickOnAddButton(){
-        getEditOfficePage().clickAddRowButton();
-    }
+	@Then("the user should see the $add_button in disabled state in locations section")
+	public void verifyAddOfficeLocationButtonStatus(@Named("add_button") String add_button) {
+		getEditOfficePage().verifyAddOfficeLocationButtonStatus(add_button);
+	}
 
-    @Then("the user should see the $add_button in disabled state in locations section")
-    public void verifyAddOfficeLocationButtonStatus(@Named("add_button") String add_button)
-    {
-        getEditOfficePage().verifyAddOfficeLocationButtonStatus(add_button);
-    }
+	@Then("the user should see the $delete_button in disabled state in location address section")
+	public void verifyDeleteOfficeAddressButtonStatus(@Named("delete_button") String delete_button) {
+		getEditOfficePage().verifyDeleteOfficeAddressButtonStatus(delete_button);
+	}
 
+	@When("the user clicks on delete office locations $rowNumber delete button")
+	public void clickonDeleteOfficeLocationsRowButton(@Named("rowNumber") int rowNumber) throws Exception {	
+		Thread.sleep(3000L);
+		getDataPage().clickElementUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_delete_button"), rowNumber);
+	}
 
-    @Then("the user should see the $delete_button in disabled state in location address section")
-    public void verifyDeleteOfficeAddressButtonStatus(@Named("delete_button") String delete_button)
-    {
-        getEditOfficePage().verifyDeleteOfficeAddressButtonStatus(delete_button);
-    }
+	@Then("the user should not see the office location row in the locations office page")
+	public void verifyOfficeLocationRowIsNotDisplayed() throws Exception {
+		getEditOfficePage().verifyOfficeLocationRowIsNotDisplayed();
+	}
 
-    @When("the user clicks on delete office locations row button for the row $deletebutton_Row")
-    public void clickonDeleteOfficeLocationsRowButton(String deletebutton_Row)
-    {
-        getEditOfficePage().clickonDeleteOfficeLocationsRowButton(deletebutton_Row);
-    }
-
-    @Then("the user should not see the office location row in the locations office page")
-    public void verifyOfficeLocationRowIsNotDisplayed() throws Exception {
-        getEditOfficePage().verifyOfficeLocationRowIsNotDisplayed();
-    }
-
-
-    public void verifyNoNewOfficeLocationRow(String dropdown)
-    {
-        getEditOfficePage().verifyNoNewOfficeLocationRow(dropdown);
-    }
+	public void verifyNoNewOfficeLocationRow(String dropdown) {
+		getEditOfficePage().verifyNoNewOfficeLocationRow(dropdown);
+	}
 
     @When("the user selects primary flag  value <primaryFlag> in the office locations")
     public void selectPrimaryFlag(@Named("primaryFlag") String primaryFlag){
@@ -199,126 +192,130 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @When("the user clicks on add new office address button in the office locations")
     public void clickOnAddAddressRowButton(){
-        getEditOfficePage().clickOnAddAddressRowButton();
+        getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_address_addRow_button"));
     }
 
-    @When("the user selects office address type $typeRowIdentifier value as <Type>")
-      public void selectOfficeAddressType(@Named("$typeRowIdentifier") String typeRowIdentifier,@Named("Type") String Type)
-    {
-        getEditOfficePage().selectOfficeAddressType(typeRowIdentifier,Type);
+	@When("the user selects office address type value as <Type> in row $index")
+	public void selectOfficeAddressType(@Named("index") int index, @Named("Type") String type) {	 
+		getDataPage().selectDropDownValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_dropdown"), type, index);
+	}
+
+	@When("the user enters office address <AddressLine1> in row $index")
+	public void enterofficeAddressLine1(@Named("index") int index, @Named("AddressLine1") String AddressLine1) {
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine1"), AddressLine1, index);
+	}
+
+	@When("the user enters office address <AddressLine2> in row $index")
+	public void enterofficeAddressLine2(@Named("index") int index, @Named("AddressLine2") String AddressLine2) {
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine2"), AddressLine2, index);
+	}
+
+	@When("the user enters office address <AddressLine3> in row $index")
+	public void enterofficeAddressLine3(@Named("index") int index, @Named("AddressLine3") String AddressLine3) {
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine3"), AddressLine3, index);
+	}
+
+	@When("the user enters office address <AddressLine4> in row $index")
+	public void enterofficeAddressLine4(@Named("index") int index, @Named("AddressLine4") String AddressLine4) {
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine4"), AddressLine4, index);
+	}
+
+	@When("the user clicks on the choose a country option in the office locations")
+	public void clickOnCountryListBox() throws InterruptedException {
+		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_country_dropdown"));
+	}
+
+	@When("the user enters the office country <Country> in the type-ahead box")
+	public void enterOfficeCountryInTheTypeAheadBox(@Named("Country") String Country) {
+		getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(Country, 1);
+	}
+
+	@When("the user enters the office city <City> in the type-ahead box")
+	public void enterOfficeCityInTheTypeAheadBox(@Named("City") String City) {
+		getEditOfficePage().enterOfficeCityInTheTypeAheadBox(City, 1);
+	}
+
+	@Then("the user should see the list of all existing area for the selected country by full name in office address")
+	public void verifyOfficeAreaList() {
+		getEditOfficePage().verifyOfficeAreaList();
+	}
+
+	@When("the user clicks on the choose an area option in the office locations")
+	public void clickOnAreaListBox() throws InterruptedException {
+		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown"));
+	}
+
+	@When("the user enters the office area <Area> in the type-ahead box")
+	public void enterOfficeAreaInTypeAhead(@Named("Area") String Area) {
+		getEditOfficePage().enterOfficeAreaInTypeAhead(Area, 1);
+	}
+
+	@Then("the user should see the list of all existing subarea for the selected area by full name in office address")
+	public void verifyOfficeSubAreaList() {
+		getEditOfficePage().verifyOfficeSubAreaList(database, apacheHttpClient);
+	}
+
+	@When("the user clicks on the choose a subarea option in the office locations")
+	public void clickOnSubAreaListBox() throws InterruptedException {
+		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown"));
+	}
+
+	@When("the user enters the office subarea <subArea> in the type-ahead box")
+	public void enterOfficeSubAreaInTypeAhead(@Named("subArea") String subArea) {
+		getEditOfficePage().enterOfficeSubAreaInTypeAhead(subArea, 1);
+	}
+
+	@Then("the user should see the below office cities for the selected subarea: $cities")
+	public void verifyCitiesForSelectedSubArea(ExamplesTable cities) {
+		getEditOfficePage().verifyCitiesForSelectedSubArea(cities);
+	}
+
+	@Then("the user should see the below office states for the selected country: $areas")
+	public void verifyAreaForSelectedCountry(ExamplesTable areas) {
+		getEditOfficePage().verifyAreaForSelectedCountry(areas);
+
+	}
+	
+	@Then("the user verifies that the location row exists in the office locations page")
+    public void verifyOfficeLocationsRowIsDisplayed() throws Exception {
+           getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_row_exists_edit_mode"),
+                        true);
+    }
+    
+    @Then("the user verifies that the location row does not exist in the office locations page")
+    public void verifyOfficeLocationsRowIsDeleted() throws Exception {
+    	Thread.sleep(2000L);
+        getDataPage().verifyElementNotExistInUI(OfficeIdentifiers.getObjectIdentifier("office_location_row_exists_view_mode"));
     }
 
-    @When("the user selects office address type $typeRowIdentifier value as <Type1>")
-    public void selectOfficeAddressType1(@Named("$typeRowIdentifier") String typeRowIdentifier,@Named("Type1") String Type1)
-    {
-        getEditOfficePage().selectOfficeAddressType(typeRowIdentifier,Type1);
-    }
-    @When("the user enters office address address line 1 $addressLine1RowIdentifier value as <AddressLine1>")
-    public void enterofficeAddressLine1(@Named("addressLine1RowIdentifier") String addressLine1RowIdentifier,@Named("AddressLine1") String AddressLine1)
-    {
-        getEditOfficePage().enterofficeAddressLine1(addressLine1RowIdentifier,AddressLine1);
-    }
-    @When("the user enters office address address line 2 $addressLine2RowIdentifier value as <AddressLine2>")
-    public void enterofficeAddressLine2(@Named("addressLine2RowIdentifier") String addressLine2RowIdentifier,@Named("AddressLine2") String AddressLine2)
-    {
-        getEditOfficePage().enterofficeAddressLine2(addressLine2RowIdentifier,AddressLine2);
-    }
 
-    @When("the user enters office address address line 3 $addressLine3RowIdentifier value as <AddressLine3>")
-    public void enterofficeAddressLine3(@Named("addressLine3RowIdentifier") String addressLine3RowIdentifier,@Named("AddressLine3") String AddressLine3)
-    {
-        getEditOfficePage().enterofficeAddressLine3(addressLine3RowIdentifier,AddressLine3);
-    }
+	@Then("the user should see the below office cities for the selected area: $cities")
+	public void verifyCitiesForSelectedArea(ExamplesTable cities) {
+		getEditOfficePage().verifyCitiesForSelectedArea(cities);
+	}
 
-    @When("the user enters office address address line 4 $addressLine4RowIdentifier value as <AddressLine4>")
-    public void enterofficeAddressLine4(@Named("addressLine4RowIdentifier") String addressLine4RowIdentifier,@Named("AddressLine4") String AddressLine4)
-    {
-        getEditOfficePage().enterofficeAddressLine4(addressLine4RowIdentifier,AddressLine4);
-    }
+	@When("the user clicks on the choose a city option in the office locations")
+	public void clickOnCityDropdown() {
+		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_city_dropdown"));
+	}
 
-    @When("the user clicks on the choose a country option in the office locations")
-    public void clickOnCountryListBox() throws InterruptedException {
-        getEditOfficePage().clickOnCountryListBox();
-    }
+	@Then("the user should see the list of all existing city for the selected area by full name in office address")
+	public void verifyOfficeCityList() {
+		getEditOfficePage().verifyOfficeCityList();
+	}
 
-    @When("the user enters the office country <Country> in the type-ahead box")
-    public void enterOfficeCountryInTheTypeAheadBox(@Named("Country") String Country) {
-        getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(Country);
-    }
+	@When("the user clicks on delete office address row button for the row $deletebutton_Row")
+	public void clickonDeleteOfficeAddressRowButton(String deletebutton_Row) {
+		getEditOfficePage().clickonDeleteOfficeAddressRowButton(deletebutton_Row);
+	}
 
-    @When("the user enters the office city <City> in the type-ahead box")
-    public void enterOfficeCityInTheTypeAheadBox(@Named("City") String City) {
-        getEditOfficePage().enterOfficeCityInTheTypeAheadBox(City);
-    }
-    @Then("the user should see the list of all existing area for the selected country by full name in office address")
-    public void verifyOfficeAreaList() {
-        getEditOfficePage().verifyOfficeAreaList();
-    }
-
-    @When("the user clicks on the choose an area option in the office locations")
-    public void clickOnAreaListBox() throws InterruptedException {
-        getEditOfficePage().clickOnAreaListBox();
-    }
-
-    @When("the user enters the office area <Area> in the type-ahead box")
-    public void enterOfficeAreaInTypeAhead(@Named("Area") String Area) {
-        getEditOfficePage().enterOfficeAreaInTypeAhead(Area);
-    }
-
-
-    @Then("the user should see the list of all existing subarea for the selected area by full name in office address")
-    public void verifyOfficeSubAreaList() {
-        getEditOfficePage().verifyOfficeSubAreaList(database, apacheHttpClient);
-    }
-
-
-    @When("the user clicks on the choose a subarea option in the office locations")
-    public void clickOnSubAreaListBox() throws InterruptedException {
-        getEditOfficePage().clickOnSubAreaListBox();
-    }
-    @When("the user enters the office subarea <subArea> in the type-ahead box")
-    public void enterOfficeSubAreaInTypeAhead(@Named("subArea") String subArea) {
-        getEditOfficePage().enterOfficeSubAreaInTypeAhead(subArea);
-    }
-    @Then("the user should see the below office cities for the selected subarea: $cities")
-    public void verifyCitiesForSelectedSubArea(ExamplesTable cities) {
-        getEditOfficePage().verifyCitiesForSelectedSubArea(cities);
-    }
-
-    @Then("the user should see the below office states for the selected country: $areas")
-    public void verifyAreaForSelectedCountry(ExamplesTable areas) {
-        getEditOfficePage().verifyAreaForSelectedCountry(areas);
-
-    }
-    @Then("the user should see the below office cities for the selected area: $cities")
-    public void verifyCitiesForSelectedArea(ExamplesTable cities) {
-        getEditOfficePage().verifyCitiesForSelectedArea(cities);
-    }
-
-    @When("the user clicks on the choose a city option in the office locations")
-    public void clickOnCityDropdown() {
-        getEditOfficePage().clickOnCityDropdown();
-    }
-
-    @Then("the user should see the list of all existing city for the selected area by full name in office address")
-    public void verifyOfficeCityList() {
-        getEditOfficePage().verifyOfficeCityList();
-
-            }
-
-
-    @When("the user clicks on delete office address row button for the row $deletebutton_Row")
-    public void clickonDeleteOfficeAddressRowButton(String deletebutton_Row)
-    {
-        getEditOfficePage().clickonDeleteOfficeAddressRowButton(deletebutton_Row);
-    }
-
-    @Then("the user should not see the office address row in the locations office page")
-    public void verifyOfficeAddressRowIsNotDisplayed() throws Exception {
-        getEditOfficePage().verifyOfficeAddressRowIsNotDisplayed();
-    }
+	@Then("the user should not see the office address row in the locations office page")
+	public void verifyOfficeAddressRowIsNotDisplayed() throws Exception {
+		getDataPage().verifyElementNotExistInUI(OfficeIdentifiers.getObjectIdentifier("office_address_delete_row_view"));
+	}
 
     @Then("the user verifies that the deleted row for office locations does not exist in $source document")
+    @Alias("the user verifies that blank office locations row is not added in $source document")
     public void verifyOfficeLocationsRowNotPresentInZeusDB(@Named("officeFid") String officeFid,  @Named("source") String source) {
         getEditOfficePage().verifyOfficeLocationsRowNotPresentInZeusDB(officeFid, source);
     }
@@ -403,35 +400,44 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyOfficeLocationsRowIsNotDisplayed();
     }
 
-    @When("the user enters office address postal code $postalCodeRowIdentifier value as <PostalCode>")
-    public void enterOfficeAddressPostalCode(@Named("postalCodeRowIdentifier") String postalCodeRowIdentifier,@Named("PostalCode") String PostalCode)
-    {
-        getEditOfficePage().enterOfficeAddressPostalCode(postalCodeRowIdentifier,PostalCode);
-    }
-    @When("the user enters office address postal code suffix $postalCodeSuffixRowIdentifier value as <PostalCodeSuffix>")
-    public void enterOfficeAddressPostalCodeSuffix(@Named("postalCodeSuffixRowIdentifier") String postalCodeSuffixRowIdentifier,@Named("PostalCodeSuffix") String PostalCodeSuffix)
-    {
-        getEditOfficePage().enterOfficeAddressPostalCodeSuffix(postalCodeSuffixRowIdentifier,PostalCodeSuffix);
-    }
-    @When("the user enters office address info $infoRowIdentifier value as <Info>")
-    public void enterOfficeAddressInfo(@Named("infoRowIdentifier") String infoRowIdentifier,@Named("Info") String Info)
-    {
-        getEditOfficePage().enterOfficeAddressInfo(infoRowIdentifier,Info);
-    }
+	@When("the user enters office address postal code value as <PostalCode> in location $index")
+	public void enterOfficeAddressPostalCode(@Named("index") int index, @Named("PostalCode") String postalCode) {
+		getDataPage().enterTextUsingIndex(
+				OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_postalCode"), postalCode, index);
+	}
+	
+	@When("the user enters office address postal code suffix value as <PostalCodeSuffix> in location $index")
+	public void enterOfficeAddressPostalCodeSuffix(@Named("index") int index,
+			@Named("PostalCodeSuffix") String PostalCodeSuffix) {
+		getDataPage().enterTextUsingIndex(
+				OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_postalCodeSuffix"), PostalCodeSuffix, index);
+	}
+	
+	@When("the user enters office address info value as <Info> in location $index")
+	public void enterOfficeAddressInfo(@Named("index") int index, @Named("Info") String info) {
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_info"),
+				info, index);
+	}
+	
     @When("the user clicks on delete office telecoms row button for the row $deletebutton_Row")
     public void clickonDeleteOfficeTelecomsRowButton(String deletebutton_Row)
     {
         getEditOfficePage().clickonDeleteOfficeTelecomsRowButton(deletebutton_Row);
     }
 
-    @Then("the user should see the $officeaddress_rowIdentifier values in office location's section from lookup $lookup except the values that are selected already")
-    public void verifyOfficeAddressTypesFromLookup(@Named("officeaddress_rowIdentifier") String officeaddress_rowIdentifier,@Named("lookupFid") String lookupFid) {
-        getEditOfficePage().verifyOfficeAddressTypesFromLookup(officeaddress_rowIdentifier,lookupFid);
+    @When("the user clicks on office address type drodown")
+    public void clickonTypeDropdown() {
+           getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_dropdown"));
+    }
+    
+    @Then("the user should see the address type values in office location's section from lookup $lookup")
+    public void verifyOfficeAddressTypesFromLookup(@Named("officeaddress_rowIdentifier") String officeaddress_rowIdentifier,@Named("officeFid") String lookupFid) {     
+    	getDataPage().verifyLookUpValues(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_options_dropdown"), "get Office Address Types", "officeAddressType");
     }
 
     @Then("the user should see the error message $errorMsg for the office address type field")
     public void verifyOfficeAddressTypeErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditOfficePage().verifyOfficeErrorMessage("office_address_type_error_msg", errorMsg);
+        getEditOfficePage().verifyOfficeErrorMessage("office_address_type_physical_error_msg", errorMsg);
 
     }
 
@@ -450,30 +456,119 @@ public class EditOfficeSteps extends AbstractSteps{
     	getEditOfficePage().verifyMaxlengthOfficeLocationsTextFields(maxSize,rowIdentifier);
     }
 
-    @Then("the user verifies that the office address lines addresses are entered in the office locations page")
-    public void verifyOfficeAddressLinesAddressesInUI(@Named("Type") String Type,@Named("AddressLine1") String AddressLine1,
-                                                      @Named("AddressLine2") String AddressLine2,
-                                                      @Named("AddressLine3") String AddressLine3,
-                                                      @Named("AddressLine4") String AddressLine4,@Named("PostalCode") String PostalCode,
-                                                      @Named("PostalCodeSuffix") String PostalCodeSuffix,@Named("PostalCodePosition") String PostalCodePosition,
-                                                      @Named("Info") String Info,@Named("Country") String Country,@Named("Area") String Area,@Named("Subarea") String Subarea,
-                                                      @Named("City") String City) {
+	@Then("the user verifies that the office address lines addresses are entered in the office locations page for two locations")
+	public void verifyOfficeAddressLinesAddressesForTwoLocations(@Named("Type") String type, @Named("Type2") String type2,
+					@Named("AddressLine1") String addressLine1, @Named("AddressLine2") String addressLine2,
+					@Named("AddressLine3") String addressLine3, @Named("AddressLine4") String addressLine4,
+					@Named("PostalCode") String postalCode, @Named("PostalCodeSuffix") String postalCodeSuffix, 
+					@Named("Info") String info, @Named("Country") String country, @Named("Area") String area,
+					@Named("subArea") String subArea, @Named("City") String city) {		
+		if(editOfficePage==null){
+            editOfficePage = getOfficesPage().createEditOfficePage();
+        }
+		getEditOfficePage().verifyOfficeAddressLinesAddressesInUI(type, addressLine1, addressLine2, addressLine3,
+					addressLine4, country, area, subArea, city, postalCode, postalCodeSuffix, info, 1);
+		getEditOfficePage().verifyOfficeAddressLinesAddressesInUI(type2, addressLine1, addressLine2, addressLine3,
+				addressLine4, country, area, subArea, city, postalCode, postalCodeSuffix, info, 2);
+	}
+	
+	@Then("the user verifies that the office address lines addresses are entered in the office locations page")
+	public void verifyOfficeAddressLinesAddressesInUI(@Named("Type") String type,
+					@Named("AddressLine1") String addressLine1, @Named("AddressLine2") String addressLine2,
+					@Named("AddressLine3") String addressLine3, @Named("AddressLine4") String addressLine4,
+					@Named("PostalCode") String postalCode, @Named("PostalCodeSuffix") String postalCodeSuffix, 
+					@Named("Info") String info, @Named("Country") String country, @Named("Area") String area,
+					@Named("subArea") String subArea, @Named("City") String city) {		
+		
+		getEditOfficePage().verifyOfficeAddressLinesAddressesInUI(type, addressLine1, addressLine2, addressLine3,
+					addressLine4, country, area, subArea, city, postalCode, postalCodeSuffix, info, 1);		
+	}
 
-        getEditOfficePage().verifyOfficeAddressLinesAddressesInUI(Type,AddressLine1, AddressLine2, AddressLine3, AddressLine4,Country,Area,Subarea,City,PostalCode,PostalCodePosition,PostalCodeSuffix,Info);
-    }
+	@Then("the user should see the office address lines addresses as in $source document")
+	public void verifyOfficeAddressLinesAddressesFromDB(@Named("Type") String type, 
+			@Named("officeFid") String officeFid, @Named("AddressLine1") String addressLine1,
+			@Named("AddressLine2") String addressLine2, @Named("AddressLine3") String addressLine3,
+			@Named("AddressLine4") String addressLine4, @Named("PostalCode") String postalCode,
+			@Named("PostalCodeSuffix") String postalCodeSuffix, @Named("Info") String info, @Named("Country") String country, @Named("Area") String area,
+			@Named("subArea") String subArea, @Named("City") String city, @Named("source") String source) {
+
+		getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(type, addressLine1, addressLine2, addressLine3,	addressLine4, postalCode, postalCodeSuffix, info, country, area, subArea, city,
+					officeFid, source);		
+	}
+	
+	@Then("the user should see the office address lines addresses as in $source document for two locations")
+	public void verifyOfficeAddressLinesAddressesFromDBForTwoLocations(@Named("Type") String type, @Named("Type2") String type2,
+			@Named("officeFid") String officeFid, @Named("AddressLine1") String addressLine1,
+			@Named("AddressLine2") String addressLine2, @Named("AddressLine3") String addressLine3,
+			@Named("AddressLine4") String addressLine4, @Named("PostalCode") String postalCode,
+			@Named("PostalCodeSuffix") String postalCodeSuffix, @Named("Info") String info, @Named("Country") String country, @Named("Area") String area,
+			@Named("subArea") String subArea, @Named("City") String city, @Named("source") String source) {
+
+		getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(type, addressLine1, addressLine2, addressLine3,	addressLine4, postalCode, postalCodeSuffix, info, country, area, subArea, city,
+					officeFid, source);
+		getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(type2, addressLine1, addressLine2, addressLine3,	addressLine4, postalCode, postalCodeSuffix, info, country, area, subArea, city,
+				officeFid, source);
+	}
 
 
-    @Then("the user should see the office address lines addresses as in $source document")
-    public void verifyOfficeAddressLinesAddressesFromDB(@Named("Type") String Type,@Named("officeFid") String officeFid, @Named("AddressLine1") String AddressLine1,
-                                                        @Named("AddressLine2") String AddressLine2,
-                                                        @Named("AddressLine3") String AddressLine3,
-                                                        @Named("AddressLine4") String AddressLine4,@Named("PostalCode") String PostalCode,
-                                                        @Named("PostalCodeSuffix") String PostalCodeSuffix,@Named("PostalCodePosition") String PostalCodePosition,
-                                                        @Named("Info") String Info,@Named("Country") String Country,@Named("Area") String Area,@Named("Subarea") String Subarea,
-                                                        @Named("City") String City,@Named("source") String source) {
+	@When("the user enters office address values in location $index")
+	public void enterLocationAddressesInLocation2(@Named("Type2") String type2,
+			@Named("AddressLine1") String addressLine1, @Named("AddressLine2") String addressLine2,
+			@Named("AddressLine3") String addressLine3, @Named("AddressLine4") String addressLine4,
+			@Named("PostalCode") String postalCode, @Named("PostalCodeSuffix") String postalCodeSuffix,
+			@Named("Info") String info, @Named("Country") String country, @Named("Area") String area,
+			@Named("subArea") String subArea, @Named("City") String city,@Named("index") int index) {
+		
+		getDataPage().selectDropDownValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier("office_location_address_type_dropdown"), type2, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine1"), addressLine1, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine2"), addressLine2, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine3"), addressLine3, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_location_addressLine4"), addressLine4, index);
+		getDataPage().clickElementUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_country_dropdown"), index);
+		getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(country, index);
+		getDataPage().clickElementUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_area_dropdown"), index);
+		getEditOfficePage().enterOfficeAreaInTypeAhead(area, index);
+		getDataPage().clickElementUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_subarea_dropdown"), index);
+		getEditOfficePage().enterOfficeSubAreaInTypeAhead(subArea, index);
+		getDataPage().clickElementUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_city_dropdown"), index);
+		getEditOfficePage().enterOfficeCityInTheTypeAheadBox(city, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_postalCode"), postalCode, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_postalCodeSuffix"), postalCodeSuffix, index);
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_address_first_row_new_info"), info, index);
+		
+	}
 
-        getEditOfficePage().verifyOfficeAddressLinesAddressesFromDB(Type,AddressLine1, AddressLine2, AddressLine3, AddressLine4,PostalCode,PostalCodeSuffix,PostalCodePosition,Info,Country,Area,Subarea,City,officeFid,source);
+	@When("the user deletes the existing office locations rows")
+	public void deleteExistingOfficeLocationRows() throws Exception {
+		Thread.sleep(2000);//loading issue in multi location
+		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_locations_id"));
+		getEditOfficePage().deleteLocationRows();
+	}
+	
+	@Then("the user should see the office locations address same as in $source document")
+	public void verifyOfficeLocationAddressFromTrustedDB(@Named("officeFid") String officeFid,
+			@Named("source") String source) {
+		getEditOfficePage().verifyOfficeLocationFromTrustedDB(officeFid, source);
+	}
 
+	@Then("the user verifies that the newly added address row exists in the office locations page")
+	public void verifyNewlyAddedOfficeAddressRowIsDisplayed() throws Exception {
+		getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_address_rows_edit_mode"),
+				true);
+	}
+	@Then("the user should see the error message $errorMsg for the office address addressLine1 field")
+	public void verifyOfficeAddressLine1ErrorMessage(@Named("errorMsg") String errorMsg) {
+		getEditOfficePage().verifyOfficeErrorMessage("office_locations_addressLine1_error_msg_second_row", errorMsg);
+	}
+
+	@Then("the user should see the error message $errorMsg for the office address type field for the second address row")
+	public void verifyOfficeAddressTypeErrorMessageSecondRow(@Named("errorMsg") String errorMsg) {
+		getEditOfficePage().verifyOfficeErrorMessage("office_address_type_error_msg_second_row", errorMsg);
+	}
+    
+    @Then("the user verifies that previously selected <Type> is not present in the new address row")
+    public void verifySelectedOfficeAddressTypeNotInNewRow(@Named("Type") String Type) {
+           getEditOfficePage().verifySelectedOfficeAddressTypeNotInNewRow(Type, 2);
     }
 
     @Then("the user should see the office telecomm fields for Type(telephone/fax) as in $source document")
@@ -510,7 +605,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @Then("the user should see the error message $errorMsg for the office country field")
     public void verifyOfficeCountryErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditOfficePage().verifyOfficeErrorMessage("office_address_country_error_msg_xpath", errorMsg);
+        getEditOfficePage().verifyOfficeErrorMessage("office_address_country_error_msg", errorMsg);
 
     }
     @Then("the user should see the error message $errorMsg for the office country code field")
@@ -545,7 +640,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @Then("the user should see the error message $errorMsg for the office city field")
     public void verifyOfficeCityErrorMessage(@Named("errorMsg") String errorMsg) {
-        getEditOfficePage().verifyOfficeErrorMessage("office_address_country_error_msg", errorMsg);
+        getEditOfficePage().verifyOfficeErrorMessage("office_address_city_error_msg", errorMsg);
 
     }    
 
@@ -566,12 +661,12 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @When("the user clicks on the No button to cancel the deletion of row in office locations section")
     public void pressNoButtonInDeleteConfirmationModalForOfficeLocation() {
-        getEditOfficePage().pressNoButtonInDeleteConfirmationModalForOfficeLocation();
+    	getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_location_delete_no_button"));
     }
 
     @When("the user clicks on the Yes button to confirm the deletion of row in office locations section")
     public void pressYesButtonInDeleteConfirmationModalForOfficeLocation() {
-        getEditOfficePage().pressYesButtonInDeleteConfirmationModalForOfficeLocation();
+        getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_location_delete_yes_button"));
     }
 
     @Then("the user verifies that the row values exists in the office locations page")
@@ -579,14 +674,13 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyNewlyAddedOfficeLocationRowExists();
     }
 
-
     @When("the user clicks on the No button to cancel the deletion of row in office locations page")
     public void pressNoButtonInDeleteConfirmationModalForOffice() {
-        getEditOfficePage().pressNoButtonInDeleteConfirmationModalForOffice();
+        getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_delete_no_button"));
     }
     @Then("the user should see the delete row confirmation modal in the office locations")
     public void verifyDeleteConfirmationModal() {
-        getEditOfficePage().verifyDeleteConfirmationModal();
+    	getEditOfficePage().verifyDeleteConfirmationModalForLocation();
     }
 
     @Then("the user should return to edit office locations page mode")
@@ -599,12 +693,12 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyAreaDropdownNull(areaDropDown);
     }
 
-    @Then("the user should see the subarea dropdown with Choose a subarea selected")
-    public void verifySubAreaDropdownNull(@Named("subareaDropDown") String subareaDropDown) {
+    @Then("the user should see the subarea dropdown with $subAreaDropDown selected")
+    public void verifySubAreaDropdownNull(@Named("subAreaDropDown") String subareaDropDown) {
         getEditOfficePage().verifySubAreaDropdownNull(subareaDropDown);
     }
 
-    @Then("the user should see the city dropdown with Choose a city selected")
+    @Then("the user should see the city dropdown with $cityDropDown selected")
     public void verifyCityDropdownNull(@Named("cityDropDown") String cityDropDown) {
         getEditOfficePage().verifyCityDropdownNull(cityDropDown);
     }
@@ -614,42 +708,23 @@ public class EditOfficeSteps extends AbstractSteps{
         getEditOfficePage().verifyOfficeDeleteConfirmationModal();
     }
 
-
-
-
     @When("the user clicks on the $officetype_dropdown in the basicinfo office page")
     public void clickOnNewOfficeTypeDropDown(String officetype_dropdown ){
         getEditOfficePage().clickOnNewOfficeTypeDropDown(officetype_dropdown);
     }
-
-    @Then("the user should see the $dropdown values from lookup $fid except the values that are selected already in office")
-    public void verifyOfficeTypeListFromLookup(String dropdown,String fid){
-        getEditOfficePage().verifyOfficeTypeListFromLookup(fid,dropdown);
-    }
-
 
     @When("the user clicks on the add new office type button")
     public void clickOnAddNewOfficeTypeButton()
     {
         getEditOfficePage().clickOnAddNewOfficeTypeButton();
     }
-
-    @Then("the user should see the officeType value as in $source document with fid <officeFid>")
-    public void verifyEditOfficesOfficeTypeValueFromTrusted(@Named("officeFid") String officeFid,@Named("source") String source){
-        getEditOfficePage().verifyEditOfficesOfficeTypeValueFromTrusted(officeFid,"type",source);
-    }
-
+  
     @When("the user selects office type value as <officeTypeValue> from $rowIdentifier in the basicinfo office page")
     public void selectOfficeType(@Named("officeTypeValue") String officeTypeValue, @Named("rowIdentifier")String rowIdentifier)
     {
         getEditOfficePage().selectOfficeType(officeTypeValue,rowIdentifier);
     }
-
-    @Then("the user should see officeType value as <officeTypeValue> for fid <officeFid> in $source document and in UI")
-    public void verifyEditOfficesOfficeTypeValueFromZeusAndInUI(@Named("officeTypeValue") String officeTypeValue,@Named("officeFid") String officeFid,@Named("source") String source) {
-        getEditOfficePage().verifyEditOfficesOfficeTypeValueFromZeusAndInUI(officeTypeValue, "type", officeFid, source, "get office basic info");
-    }
-
+   
     @Then("the user should not see the deleted office type value $officeTypeValue in the $source document and in UI for fid <officeFid>")
     public void verifyOfficeTypeNotPresentInZeusAndInUI(@Named("officeTypeValue") String officeTypeValue,@Named("source") String source,@Named("officeFid") String officeFid)
     {
@@ -666,7 +741,7 @@ public class EditOfficeSteps extends AbstractSteps{
     @When("the user clicks on the $deletebutton in office types section")
     public void clickonDeleteOfficeTypeRowButton(String deletebutton)
     {
-        getEditOfficePage().clickonDeleteOfficeTypeRowButton(deletebutton);
+        getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier(deletebutton));
     }
 
     @Then("the user should still see the office $dropdown with value $dropdownvalue as office type in office page")
