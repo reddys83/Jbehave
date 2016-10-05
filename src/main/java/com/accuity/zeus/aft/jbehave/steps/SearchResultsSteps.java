@@ -139,7 +139,7 @@ public class SearchResultsSteps extends AbstractSteps{
     @When("the user clicks on the search results card with routing code <routingCode> and code type <codeType>")
     public void clickOnResultCard(@Named("routingCode") String routingCode,@Named("codeType") String codeType){
         //searchedEntity = fid;
-        setRoutingCodePage(getResultsPage().clickOnRoutingCodeResultCard(getResultsPage().getRoutingCodeElements(routingCode,codeType)));
+        setRoutingCodePage(getResultsPage().clickOnRoutingCodeResultCard(getResultsPage().getRoutingCodeElements(routingCode, codeType)));
         if(dataPage==null){
             dataPage = getResultsPage().createDataPage();
         }
@@ -196,9 +196,9 @@ public class SearchResultsSteps extends AbstractSteps{
         getResultsPage().verifyMessageFor0Results();
     }
 
-    @When("the user clicks on $fid in the routing search results")
-    public void clickFidNavigation(String fid) {
-       getResultsPage().clickFidNavigation(fid);
+    @When("the user clicks on <fid> in the routing search results")
+    public void clickFidNavigation(@Named("fid") String fid) {
+       setLegalEntityPage(getResultsPage().clickFidNavigation(fid));
     }
 
     @Then("the user should see the same results of the previous search")

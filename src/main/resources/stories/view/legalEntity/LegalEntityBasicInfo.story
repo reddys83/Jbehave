@@ -23,26 +23,9 @@ When the user clicks on the search results card with fid <fid>
 Then the user should see the basic info label for selected legal entity
 Then the user verifies basic info for legal entity left column <fid> from trusted document
 
-And the user should see the legal entity's names as:
-|TYPE|VALUE|
-|Legal Title|DNB Bank ASA|
-|Former Name|DnB NOR Bank ASA|
-|Former Name|Union Bank of Norway|
+And the user should see the legalEntity names for <fid> in the legalEntity basic info
 
-And the user should see the legal entity's entity types as:
-|TYPE|
-|Bank|
-|Commercial Bank|
-|Corporate Bank|
-|Investment Bank|
-|Merchant Bank|
-|Mortgage Bank|
-|Private Bank|
-|Retail Bank|
-|Savings Bank|
-|Bank|
-|Commercial Bank|
-|Universal Bank|
+And the user should see the legalEntity types for <fid> in the legalEntity basic info
 
 And the user should see the legal entity's virtual presence as:
 |TYPE|RANK|INFO|VALUE|

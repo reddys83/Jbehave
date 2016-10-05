@@ -7,16 +7,10 @@ import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 import com.accuity.zeus.aft.jbehave.pages.AbstractPage;
 import com.accuity.zeus.aft.jbehave.pages.DataPage;
 import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
-<<<<<<< HEAD
 import com.accuity.zeus.aft.jbehave.identifiers.ResultsIdentifiers;
-import com.accuity.zeus.aft.jbehave.pages.OfficesPage;
-=======
 import com.accuity.zeus.aft.jbehave.pages.RoutingCodePage;
->>>>>>> develop
 import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.utils.SimpleCacheManager;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import junit.framework.Assert;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -26,15 +20,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.w3c.dom.Document;
-
-import javax.xml.crypto.Data;
 import java.util.*;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
-import com.accuity.zeus.aft.io.ApacheHttpClient;
-import com.accuity.zeus.aft.io.Database;
 
 
 public class ResultsPage extends AbstractPage {
@@ -421,9 +411,10 @@ public class ResultsPage extends AbstractPage {
         assertEquals("Your search returned 0 results.",getDriver().findElement(ResultsIdentifiers.getObjectIdentifier("routingCode_results_zero_results_message_xpath")).getText());
     }
 
-    public void clickFidNavigation(String fid)
+    public LegalEntityPage clickFidNavigation(String fid)
     {
         getDriver().findElement(By.xpath(".//*[@id='searchEntityList-list']//tbody//tr[td='" + fid + "']//a")).click();
+        return new LegalEntityPage(getDriver(), getPageUrl(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
 
     }
 
@@ -701,7 +692,7 @@ public class ResultsPage extends AbstractPage {
         }
         nvPairs.add(new BasicNameValuePair("fid", fid));
         List<WebElement> nameList = getDriver().findElements(office_name_locator_xpath);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xQueryName,nvPairs);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xQueryName, nvPairs);
         for (int i=0; i< nameList.size();i++) {
             try {
                 assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(), nameList.get(i).getText());
