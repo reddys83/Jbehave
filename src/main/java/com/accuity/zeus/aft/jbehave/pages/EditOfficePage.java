@@ -2115,5 +2115,9 @@ public class EditOfficePage extends AbstractPage {
     	 assertEquals(country, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_country_dropdown_list")));
          assertEquals(postalCodePositon, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_AddressLine1_textarea_view")));
     }
+    
+    public void verifyPostalCodePositionZeus(String postalCodePositionUI,String postalCodePositionDB){
+    	assertEquals(postalCodePositionUI,postalCodePositionDB);
+    }
 }
 

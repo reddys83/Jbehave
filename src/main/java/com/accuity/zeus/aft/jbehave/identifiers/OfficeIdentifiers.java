@@ -203,6 +203,7 @@ public class OfficeIdentifiers {
 	    hmap.put("office_service_category_dropdown_exist_edit_mode_xpath",By.xpath("//select[@id='serviceCategory']"));
 	    hmap.put("office_service_category_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='serviceCategoryError']"));
 	    hmap.put("office_services_entire_xpath",By.xpath("//*[@id='officeServices']//tbody"));
+	    hmap.put("office_locations_postalCodePosition_xpath", By.xpath(".//*[@id='officeLocations']//tr[th='Postal Code Position']/td"));
     }
 
     public static By getObjectIdentifier(String key) {

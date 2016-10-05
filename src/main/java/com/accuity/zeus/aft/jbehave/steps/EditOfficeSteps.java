@@ -1488,4 +1488,15 @@ public class EditOfficeSteps extends AbstractSteps{
 
         getEditOfficePage().verifypostalCodePositonInUI(country,postalCodePosition);
     }
+	
+	@Then("the user should verify postal code position is $source document")
+    public void verifyPostalCodePositionInZeus(@Named("country") String country,@Named("postalCodePosition") String postalCodePosition,@Named("officeFid") String officeFid,@Named("source") String source) {
+		Map<String, String> inputParameters = new HashMap<String, String>();
+		inputParameters.put("fid", officeFid);
+		inputParameters.put("source", source);
+		
+		getEditOfficePage().verifyPostalCodePositionZeus(postalCodePosition,getDataPage().getTagValueFromDB("get Office Locations", "postalCodePos", inputParameters));
+		getEditOfficePage().verifyPostalCodePositionZeus(postalCodePosition,getDataPage().getTagValueFromDB("get postalCodePos from countryDoc", "postalCodePosition", inputParameters));
+		
+    }
 }
