@@ -1584,4 +1584,219 @@ public class EditAreaSteps extends AbstractSteps {
 	public void getDocumentByFidSubArea(@Named("xqueryName") String xqueryName, @Named("subArea") String subArea,@Named("country") String country,@Named("area") String area) {
 		getDataPage().getDocumentforSubArea(xqueryName, subArea, country, area);
 	}
+	
+	
+	@When("the user clicks on the area entity link in the navigation bar")
+	public void clickOnAreaEntity() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_link_id"));
+	}
+
+	@Then("the user should see the values retrieved from $source document are present in Area Web page")
+	public void verifyRelatedEntityFromTrustedDB(@Named("area") String area, @Named("source") String source) {
+		getDataPage().clickOnNoButtonInDeleteConfirmationModal();
+	}
+
+	@When("the user clicks on new area entity type drop-down for area")
+	public void clickAreaEntityType() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_type_dropdown_xpath"));
+	}
+
+	@Then("the user should see the values for type dropdown from lookup AREA_RELATED_PRESENCE_TYPE")
+	public void verifyAreaEntityTypeList() {
+		getEditAreaPage().verifyAreaEntityTypeList();
+	}
+
+	@When("the user clicks on new area entity details drop-down for area")
+	public void clickEntityDetailsDropDown() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_details_select_dropdown_xpath"));
+	}
+
+	@Then("the user should see the values for details dropdown from lookup AREA_RELATED_PRESENCE_SUBTYPE")
+	public void verifyAreaEntityDetailsList() {
+		getDataPage().verifyLookUpValues(AreaIdentifiers.getObjectIdentifier("area_entity_details_options_dropdown_xpath"),
+				"get area entity detail lookup", "detail");
+	}
+
+	@When("the user clicks on the add button for adding new entity for area page")
+	public void clickOnAddEntityButton() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_entity_button_edit_id"));
+	}
+
+	@When("the user deletes all existing related entity rows")
+	public void deleteAllRelatedEntity() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_add_entity_button_edit_id"));
+		getDataPage().deleteAllRows(AreaIdentifiers.getObjectIdentifier("area_entity_delete_button_xpath"));
+	}
+
+	@When("the user selects type value as <entityType> in the entity for area")
+	public void selectsEntityTypeFromDropdown(@Named("entityType") String entityType) {
+		getEditAreaPage().selectDropDownValueFromRowNumber(
+				AreaIdentifiers.getObjectIdentifier("area_entity_type_dropdown_xpath"), entityType, 1);
+	}
+
+	@When("the user selects details value as <entityDetails> in the entity for area")
+	public void selectsEntityDetailsFromDropdown(@Named("entityDetails") String entityDetails) {
+		getEditAreaPage().selectDropDownValueFromRowNumber(
+				(AreaIdentifiers.getObjectIdentifier("area_entity_details_select_dropdown_xpath")), entityDetails, 1);
+	}
+
+	@Then("the user should see the error message required for type in entity for area")
+	public void verifyRequiredErrorMessageForEntityType() {
+		getDataPage().verifyWebElementText("ErrorMessage for Entity Type","Required", 
+				AreaIdentifiers.getObjectIdentifier("area_entity_type_error_message_xpath"));
+	}
+
+	@Then("the user should see the error message required for entity for area")
+	public void verifyRequiredErrorMessageForEntity() {
+		getDataPage().verifyWebElementText("ErrorMessage for Entity","Required", 
+				AreaIdentifiers.getObjectIdentifier("area_entity_error_message_xpath"));
+	}
+
+	@Then("the user should see the error message enter a valid fid  for entity for area")
+	public void verifyFidErrorMessageForEntity() {
+		try {
+			Thread.sleep(2000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		getDataPage().verifyWebElementText("ErrorMessage for Fid","Enter a valid FID", 
+				AreaIdentifiers.getObjectIdentifier("area_fid_error_message_xpath"));
+	}
+
+	@When("the user selects fid value as <fid> in the entity for area")
+	public void selectsEntityFidFromDropdown(@Named("fid") String fid) {
+		getEditAreaPage().selectsEntityFidFromDropdown(fid);
+	}
+
+	@When("the user clicks on go button in entity for area")
+	public void clicksOnGoButtonEntity() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_go_button_xpath"));
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Then("the user should see related entity values updated in area related entity")
+	public void verifyRelatedEntityInAreaPage(@Named("entityType") String entityType, @Named("entity") String entity,
+			@Named("entityDetails") String entityDetails, @Named("entityType2") String entityType2,
+			@Named("entity2") String entity2, @Named("entityDetails2") String entityDetails2) {
+		String[] areaEntityTypes = { entityType, entityType2 };
+		String[] areaEntity = { entity, entity2 };
+		String[] areaEntityDetail = { entityDetails, entityDetails2 };
+		getEditAreaPage().verifyRelatedEntityInAreaPage(areaEntityTypes, areaEntity, areaEntityDetail);
+	}
+
+	@Then("the user should see the area related entity values in $source document")
+	public void verifyAreaRelatedEntityFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("entityType") String entityType, @Named("entity") String entity,
+			@Named("entityDetails") String entityDetails, @Named("entityType2") String entityType2,
+			@Named("entity2") String entity2, @Named("entityDetails2") String entityDetails2,
+			@Named("source") String source) {
+		List<String> areaEntityTypes = new ArrayList<>();
+		List<String> areaEntity = new ArrayList<>();
+		List<String> areaEntityDetail = new ArrayList<>();
+
+		areaEntityTypes.add(entityType);
+		areaEntityTypes.add(entityType2);
+		areaEntity.add(entity);
+		areaEntity.add(entity2);
+		areaEntityDetail.add(entityDetails);
+		areaEntityDetail.add(entityDetails2);
+
+		getEditAreaPage().verifyAreaRelatedEntityFromZeusDB(country, area, areaEntityTypes, areaEntity,
+				areaEntityDetail, source);
+	}
+
+	@When("the user clicks on delete area entity type")
+	public void clicksOnDeleteAreaEntityType() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_delete_button_xpath"));
+	}
+
+	@Then("the user should not see <entityType> <fid> <entityDetails> updated in area entity place")
+	public void verifyDeletedRelatedEntity() {
+		getEditAreaPage().verifyDeletedRelatedEntity();
+	}
+
+	@When("the user clicks on edit button in entity for area")
+	public void clicksOnEditButtonEntityArea() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_edit_button_xpath"));
+	}
+
+	@Then("the user verifies that no new row is added in area web page")
+	public void verifyNoNewRowAdded() {
+		getEditAreaPage().verifyNoNewRowAdded();
+	}
+
+	@When("the user selects type value as <entityType2> in the entity for area")
+	public void selectsEntityTypeFromDropdown2(@Named("entityType2") String entityType2) {
+		getEditAreaPage().selectDropDownValueFromRowNumber(
+				AreaIdentifiers.getObjectIdentifier("area_entity_type_dropdown_xpath"), entityType2, 2);
+	}
+
+	@When("the user clicks on edit button in second row for entity for area")
+	public void clicksOnEditButtonEntityArea2() {
+		getDataPage().clickElementUsingIndex(AreaIdentifiers.getObjectIdentifier("area_entity_edit_button_xpath"),2);
+	}
+
+	@When("the user selects details value as <entityDetails2> in the entity for area")
+	public void selectsEntityDetailsFromDropdown2(@Named("entityDetails2") String entityDetails2) {
+		getEditAreaPage().selectDropDownValueFromRowNumber(
+				(AreaIdentifiers.getObjectIdentifier("area_entity_details_select_dropdown_xpath")), entityDetails2, 2);
+	}
+
+	@When("the user selects fid value as <fid2> in the entity for area")
+	public void selectsEntityFidFromDropdown2(@Named("fid2") String fid2) {
+		getEditAreaPage().selectsEntityFidFromDropdown(fid2);
+	}
+
+	@Then("the user should see <entityType> <entity> <entityDetails> updated in area related entity")
+	public void verifyRelatedEntityInAreaPage2(@Named("entityType") String entityType, @Named("entity") String entity,
+			@Named("entityDetails") String entityDetails) {
+		String[] areaEntityTypes = { entityType };
+		String[] areaEntity = { entity };
+		String[] areaEntityDetail = { entityDetails };
+		getEditAreaPage().verifyRelatedEntityInAreaPage(areaEntityTypes, areaEntity, areaEntityDetail);
+	}
+
+	@When("the user clicks on the delete entity row button in the area entity page")
+	public void clickOnDeleteNewOfficeServiceRowButton() {
+		getDataPage().attemptClick(AreaIdentifiers.getObjectIdentifier("area_entity_delete_button_xpath"));
+	}
+
+	@Then("the user should not see the deleted Area Entity values in area entity page")
+	public void verifyAreaEntityParametersNotInUI(@Named("entityDetails") String entityDetails,
+			@Named("entityType") String entityType, @Named("entity") String entity) {
+		String[] areaEntityTypes = { entityType };
+		String[] areaEntity = { entity };
+		String[] areaEntityDetail = { entityDetails };
+		getEditAreaPage().verifyRelatedEntityNotInAreaPage(areaEntityTypes, areaEntity, areaEntityDetail);
+	}
+	
+	@Then("the user should see the area related entity values deleted in $source document")
+	public void verifyAreaRelatedEntityDeletedFromZeusDB(@Named("country") String country, @Named("area") String area,
+			@Named("entityType") String entityType, @Named("entity") String entity,
+			@Named("entityDetails") String entityDetails, @Named("source") String source) {
+		getEditAreaPage().verifyAreaRelatedEntityDeletedFromZeusDB(country, area, entityType, entity,
+				entityDetails, source);
+	}
+	
+	@Then("the user should see the Area entity values in area related entity web page")
+	public void verifyRelatedEntityEditInAreaPage(@Named("entityType") String entityType, @Named("entity") String entity,
+			@Named("entityDetails") String entityDetails) {
+
+		String[] areaEntityTypes = { entityType };
+		String[] areaEntity = { entity };
+		String[] areaEntityDetail = { entityDetails };
+		getEditAreaPage().verifyRelatedEntityInEditAreaPage(areaEntityTypes, areaEntity, areaEntityDetail);
+	}
+
+	@Then("the user should see the area related entity values are from $source document")
+	public void verifyAreaRelatedEntityFromTrustedDB(@Named("country") String country, @Named("area") String area,
+			@Named("entityType") String entityType, @Named("entity") String entity,
+			@Named("entityDetails") String entityDetails,@Named("source") String source) {
+		getEditAreaPage().verifyAreaRelatedEntityFromTrustedDB(country, area, entityType, entity,
+				entityDetails, source);
+	}
 }

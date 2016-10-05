@@ -2179,6 +2179,174 @@ public class EditAreaPage extends AbstractPage {
 		}
 
 	}
+	
+	public void verifyAreaEntityTypeList() {
+		List<WebElement> areaEntityTypeList = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_entity_type_options_dropdown_xpath"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,
+				"get area entity type lookup");
+		for (int i = 1; i < document.getElementsByTagName("detail").getLength(); i++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent(),
+					areaEntityTypeList.get(i).getText());
+		}
+	}
+
+	public void selectsEntityFidFromDropdown(String fid) {
+		clearAndEnterValue(AreaIdentifiers.getObjectIdentifier("area_entity_fid_dropdown_xpath"), fid);
+	}
+
+	public void verifyRelatedEntityInAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
+		try {
+			Thread.sleep(1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		List<WebElement> relatedPlaceRows = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalues_xpath"));
+		for (int i = 0; i < relatedPlaceRows.size(); i++) {
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(entityType[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(entity[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(entityDetails[i]));
+		}
+	}
+
+	public void verifyAreaRelatedEntityFromZeusDB(String country, String area, List<String> type, List<String> entity,
+			List<String> details, String source) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("country", country));
+			nvPairs.add(new BasicNameValuePair("area", area));
+			Thread.sleep(2000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get area entity details", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("relations").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("areaEntity").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						switch (document.getElementsByTagName("areaEntity").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "areaRelatedEntityType":
+							assertEquals(document.getElementsByTagName("areaRelatedEntity").item(0).getChildNodes()
+									.item(i).getChildNodes().item(childNode).getTextContent(), type.get(i));
+							break;
+						case "areaRelatedEntity":
+							assertEquals(document.getElementsByTagName("areaRelatedEntity").item(0).getChildNodes()
+									.item(i).getChildNodes().item(childNode).getTextContent(), entity.get(i));
+							break;
+
+						case "areaRelatedEntityDetail":
+							assertEquals(document.getElementsByTagName("areaRelatedEntity").item(0).getChildNodes()
+									.item(i).getChildNodes().item(childNode).getTextContent(), details.get(i));
+							break;
+						}
+					}
+				}
+			} else
+				assertTrue(source + "document is null", false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifyDeletedRelatedEntity() {
+		try {
+			Thread.sleep(1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalue_xpath"))
+						.getText().isEmpty());
+	}
+
+	public void verifyNoNewRowAdded() {
+		try {
+			Thread.sleep(1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertTrue(getDriver().findElement(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalue_xpath"))
+						.getText().isEmpty());
+	}
+
+	public void verifyRelatedEntityNotInAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
+		try {
+			Thread.sleep(1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		List<WebElement> relatedPlaceRows = getDriver()
+				.findElements(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalues_xpath"));
+
+		for (int i = 0; i < relatedPlaceRows.size(); i++) {
+			assertFalse(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(entityType[i]));
+			assertFalse(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(entity[i]));
+			assertFalse(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(entityDetails[i]));
+		}
+	}
+	
+	public void verifyAreaRelatedEntityDeletedFromZeusDB(String country, String area,String type,String entity,String details, String source) {
+        try {
+            List<NameValuePair> nvPairs = new ArrayList<>();
+            nvPairs.add(new BasicNameValuePair("source", source));
+            nvPairs.add(new BasicNameValuePair("country", country));
+            nvPairs.add(new BasicNameValuePair("area", area));
+            Thread.sleep(1000L);
+            Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+                         "get area entity details", nvPairs);
+            if (document != null) {
+                   assertNull(document.getElementsByTagName("areaRelatedEntityType").item(0));
+                   assertNull(document.getElementsByTagName("areaRelatedEntity").item(0));
+                   assertNull(document.getElementsByTagName("areaRelatedEntityDetail").item(0));
+            } else {
+                  assert false : source + " document is null";
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void verifyRelatedEntityInEditAreaPage(String[] entityType, String[] entity, String[] entityDetails) {
+		try {
+			Thread.sleep(1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		List<WebElement> relatedPlaceRows = getDriver().findElements(AreaIdentifiers.getObjectIdentifier("area_related_entity_entirevalues_edit_xpath"));
+		for (int i = 0; i < relatedPlaceRows.size(); i++) {
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(entityType[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(entity[i]));
+			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(entityDetails[i]));
+		}
+	}
+	
+	public void verifyAreaRelatedEntityFromTrustedDB(String country, String area, String type, String entity,
+			String details, String source) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("source", source));
+		nvPairs.add(new BasicNameValuePair("country", country));
+		nvPairs.add(new BasicNameValuePair("area", area));
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get area entity details", nvPairs);
+		if (document != null) {
+			assertEquals(getNodeValuesByTagName(document, "areaRelatedEntityDetail").get(0), details);
+			assertEquals(getNodeValuesByTagName(document, "areaRelatedEntityType").get(0), type);
+			assertEquals(getNodeValuesByTagName(document, "areaRelatedEntity").get(0), entity);
+		} else {
+			assert false : source + " document is null";	
+		}
+	}
 
 	@Override
 	public String getPageUrl() {
