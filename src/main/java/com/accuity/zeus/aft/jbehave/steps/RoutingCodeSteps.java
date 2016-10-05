@@ -24,16 +24,16 @@ public class RoutingCodeSteps extends AbstractSteps {
     public void verifyRoutingCodeBasicInfoPage() {
         getRoutingCodePage().verifyRoutingCodeBasicInfoPage();
     }
-    @Then("the user should see the routing code basic info values from Trusted document for routing code <routingCode> with code type <codeType>")
-            public void verifyRoutingCodeBasicInfoValuesFromTrustedDoc(@Named("routingCode") String routingCode,@Named("codeType") String codeType){
+    @Then("the user should see the routing code basic info values from $source document for routing code <routingCode> with code type <codeType>")
+            public void verifyRoutingCodeBasicInfoValuesFromTrustedDoc(@Named("source") String source,@Named("routingCode") String routingCode,@Named("codeType") String codeType){
 
-            getRoutingCodePage().verifyRoutingCodeBasicInfoValuesFromTrustedDoc(routingCode,codeType);
+            getRoutingCodePage().verifyRoutingCodeBasicInfoValuesFromTrustedDoc(source,routingCode,codeType);
     }
 
-    @Then("the user should see the routing code payment system values from Trusted document for routing code <routingCode> with code type <codeType>")
-    public void verifyRoutingCodePaymentSystemValuesFromTrustedDoc(@Named("routingCode") String routingCode,@Named("codeType") String codeType){
+    @Then("the user should see the routing code payment system values from $source document for routing code <routingCode> with code type <codeType>")
+    public void verifyRoutingCodePaymentSystemValuesFromTrustedDoc(@Named("source") String source,@Named("routingCode") String routingCode,@Named("codeType") String codeType){
 
-        getRoutingCodePage().verifyRoutingCodePaymentSystemValuesFromTrustedDoc(routingCode,codeType);
+        getRoutingCodePage().verifyRoutingCodePaymentSystemValuesFromTrustedDoc(source,routingCode,codeType);
     }
     @Then("the user should not see ABA code type specific fields in the basic info page")
     public void verifyABAFieldsNotExist()

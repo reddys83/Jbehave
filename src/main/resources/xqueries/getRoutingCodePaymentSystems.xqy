@@ -16,12 +16,16 @@ declare function local:getDateAsPerAccuracy( $date as node() ) {
         default return "date not valid"
 };
 
-let $routingCodeValue := "HLFXGB21K03"
-let $codeType := "SWIFT BIC"
-let $routingDoc:= (collection('current')/routingCode[@source="trusted"][codeValue = $routingCodeValue and codeType=$codeType])
+let $routingCodeValue := xs:string(xdmp:get-request-field("routingCode"))
+let $routingCodeTypeValue := xs:string(xdmp:get-request-field("routingCodeType"))
+let $source := xs:string(xdmp:get-request-field("source"))
+
+let $routingDoc:= (collection('current')/routingCode[@source=$source][codeValue = $routingCodeValue and codeType=$routingCodeTypeValue])
 let $paymentSystemValues:=
     for $p in $routingDoc/paymentSystems/paymentSystem
-    let $productvalue1 := collection('current')/product[@source="trusted"][@resource=$p/product/link/@href]/summary/names/name[type='Full Name']/value
+    let $productvalue1 :=if(fn:exists($p/product/link))
+    then collection('current')/product[@source="trusted"][@resource=$p/product/link/@href]/summary/names/name[type='Full Name']/value
+    else $p/product/name/value
     let $dateJoined := <dateJoined>{local:getDateAsPerAccuracy($p/dateBegan)}</dateJoined>
     let $dateLeft := <dateLeft>{local:getDateAsPerAccuracy($p/dateEnded)}</dateLeft>
     let $AlternateFormType := $p/useCodeForm
@@ -29,16 +33,23 @@ let $paymentSystemValues:=
     let $SystemActivityStatus := $p/codeSystemStatus
     let $RouteViaLink := $p/routeVia/link/@href
     let $RouteVia:=collection('current')/routingCode[@source="trusted"][@resource=$RouteViaLink]/codeValue/text()
+    let $PaymentSystemAttributes := for $x in $p/attributes/attribute
+    return <PaymentSystemAttribute>{$x/name/text()}{$x/value/text()}</PaymentSystemAttribute>
+    let $PaymentSystemContactLocations := for $x in $p/contactLocations/contactLocation
+    return <ContactLocations><ContactLocationType>{$x/type/text()}</ContactLocationType><ContactOffice>{collection("current")/office[@resource=$x/presence/link/@href][@source="trusted"]/summary/names/name[type="Office Name"]/value/text()}{collection("current")/office[@resource=$x/presence/link/@href][@source="trusted"]/locations/location[@primary="true"]/address[type="physical"]/city/name/text()}</ContactOffice>
+        <ContactLocationsSpecialInstructions>{$x/specialInstructions/text()}</ContactLocationsSpecialInstructions></ContactLocations>
     let $Correspondent := for $x in $p/correspondents/correspondent
     return collection('current')/routingCode[@source="trusted"][@resource=collection('current')/ssi[@source="trusted"][@resource=$x/link/@href]/route/clearer/routingCodes/routingCode/link/@href]/codeValue
     return  <paymentSystem>
-        {$productvalue1}
+        <productName>{$productvalue1/text()}</productName>
         {$dateJoined}
         {$dateLeft}
         {$AlternateFormType}
         {$MembershipType}
         {$SystemActivityStatus}
-        <routeViaLink>{$RouteVia}</routeViaLink>
-        <correspondentLink>{$Correspondent}</correspondentLink>
+        <routeVia>{$RouteVia}</routeVia>
+        <correspondents>{$Correspondent}</correspondents>
+        {$PaymentSystemAttributes}
+        {$PaymentSystemContactLocations}
     </paymentSystem>
 return <paymentSystemValues>{$paymentSystemValues}</paymentSystemValues>
