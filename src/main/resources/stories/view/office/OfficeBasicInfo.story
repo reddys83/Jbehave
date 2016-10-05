@@ -18,10 +18,7 @@ And the user navigates to the 4th page on the office search results
 And the user clicks on the offices results card with fid <officeFid>
 When the user clicks on the office basic info link in the navigation bar
 
-Then the user should see the office's names as:
-|TYPE|VALUE|
-|Legal Title|Anchor Savings Bank|
-|Office Name|BUFFALO BRANCH|
+Then the user should see the office names for <officeFid> in the office basic info
 
 And the user should see the office sort key as BUFFALO BRANCH
 And the user should see the office types:

@@ -290,13 +290,14 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyBasicInfo() {
+    public OfficesPage verifyBasicInfo() {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         assertEquals("BASIC INFO", getDriver().findElement(basic_info_xpath).getText());
+        return new OfficesPage(getDriver(), getPageUrl(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void verifyNames(ExamplesTable namesList) {
@@ -1092,7 +1093,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifySaveConfirmationModal() {
-        try {
+    	try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -1377,7 +1378,8 @@ public class DataPage extends AbstractPage {
     }
     
     public void verifyElementNotExistInUI(By by) {
-		try {			
+		try {	
+			Thread.sleep(2000L);
 			assertTrue(getDriver().findElement(by) == null);
 		} catch (Exception e) {
 			assertTrue(true);
@@ -1466,6 +1468,16 @@ public class DataPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
+	
+	public void clickElementUsingIndex(By by, int index) {		
+    	try {    		
+    		List<WebElement> elementList = getDriver().findElements(by);		
+        	elementList.get(index-1).click();        	
+    	}
+    	catch (Exception e) {
+			assertFalse("Element not found", false);
+		}    	
+	} 
 
 	public void clickElementUsingIndex(By by, int index) {		
     	try {

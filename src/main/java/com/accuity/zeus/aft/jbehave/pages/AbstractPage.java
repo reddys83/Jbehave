@@ -133,6 +133,44 @@ public abstract class AbstractPage {
         }
         return text;
     }
+    
+    public String getTextOnPageUsingIndex(By by, int index) {
+        int attempts = 0;
+        String text = null;
+        while (true) {
+            waitFor();
+            List<WebElement> elementList = driver.findElements(by);
+            if (elementList.get(index-1).isDisplayed()) {
+                text = elementList.get(index-1).getText().trim();
+                break;
+            }
+            if (attempts >= 10) {
+                break;
+            }
+            waitFor();
+            attempts++;
+        }
+        return text;
+    }
+    
+    public String getAttributeValueOnPageUsingIndex(By by, int index) {
+        int attempts = 0;
+        String text = null;
+        while (true) {
+            waitFor();
+            List<WebElement> elementList = driver.findElements(by);
+            if (elementList.get(index-1).isDisplayed()) {
+                text = elementList.get(index-1).getAttribute("value").trim();
+                break;
+            }
+            if (attempts >= 10) {
+                break;
+            }
+            waitFor();
+            attempts++;
+        }
+        return text;
+    }
 
     public void attemptClick(By by) {
         int attempts = 0;
@@ -377,6 +415,21 @@ public abstract class AbstractPage {
         return resourceURL;
     }
     
+	public String getSelectedDropdownValueUsingIndex(By by, int index) {
+		String value = null;
+		try {
+			List<WebElement> elementList = getDriver().findElements(by);
+			if (elementList.size() >= index) {
+				value = new Select(elementList.get(index - 1)).getFirstSelectedOption().getAttribute("value");
+			} else {
+				assertFalse("dropdown not found in row :" + index, true);
+			}
+		} catch (Exception e) {
+			assertFalse("Element not found", true);
+		}
+		return value;
+	}
+    
     public void selectDropDownValueFromRowNumber(By by, String value, int rowNumber) {
 		try {
 			List<WebElement> dropdownValue = getDriver().findElements(by);
@@ -445,5 +498,6 @@ public abstract class AbstractPage {
     		assertFalse("Element not found", true);
     	}
     	return value;
-    }
+    }    
+    
 }
