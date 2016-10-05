@@ -12,13 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class EditRoutingCodeSteps extends AbstractSteps {
 
-    @Autowired
-    ApacheHttpClient apacheHttpClient;
-    @Autowired
-    Database database;
-    private String selectedOffice;
-
-
     @When("the user clicks on the routing code update link")
     public void clickOnUpdateRoutingCodeLink() {
         getDataPage().clickOnUpdateCurrencyLink();
