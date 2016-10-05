@@ -1,0 +1,163 @@
+<country deleted="false" fid="ALB" id="89add079-03c2-4850-80d5-edb4415f82c9" resource="/country/id/89add079-03c2-4850-80d5-edb4415f82c9" source="zeus">
+    <summary>
+        <iso2>AL</iso2>
+        <iso3>ALB</iso3>
+        <names>
+            <name>
+                <type>Country Name</type>
+                <value>Albania</value>
+            </name>
+            <countrySortKey>ALBANIA</countrySortKey>
+        </names>
+        <status>active</status>
+        <dates>
+            <dateBegan accuracy="day">2012-03-04</dateBegan>
+            <dateCeased accuracy="day">2013-03-06</dateCeased>
+        </dates>
+        <timeZones>
+            <summaries>
+                <summary>+1 hour</summary>
+            </summaries>
+        </timeZones>
+        <businessHours>
+            <summaries>
+                <summary>Monday to Friday 08.00-16.00 (Some banks are open on Saturdays)</summary>
+            </summaries>
+        </businessHours>
+        <demographics>
+            <metric>
+                <name>Largest County Population</name>
+                <value>11100</value>
+                <date accuracy="day">2015-03-02</date>
+            </metric>
+            <metric>
+                <name>Population</name>
+                <value>2815749</value>
+                <date accuracy="day">2013-12-04</date>
+            </metric>
+            <metric>
+                <name>Area</name>
+                <value>11100</value>
+                <unit>miles2</unit>
+                <date accuracy="day">2012-11-05</date>
+            </metric>
+        </demographics>
+        <politicalStructure>Parliamentary Republic</politicalStructure>
+        <primaryExports>Textiles and footwear; asphalt, metals and metallic ores, crude oil; vegetables, fruits, tobacco</primaryExports>
+        <primaryImports>Machinery and equipment, foodstuffs, textiles, chemicals</primaryImports>
+        <telephoneCode>355</telephoneCode>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <languages>
+        <summaries>
+            <summary>Albanian</summary>
+        </summaries>
+    </languages>
+    <currencies>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/ef66f2e1-0c27-4185-bf9b-896c91bb3b20" rel="src" />
+            <name>Lek</name>
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">1980-01-01</startDate>
+        </currency>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/a3cc2fef-c65d-4384-8c43-ca7da800b6c7" rel="src" />
+            <primary>false</primary>
+            <status>active</status>
+            <startDate accuracy="day">2000-09-01</startDate>
+        </currency>
+    </currencies>
+    <iban>
+        <registered>true</registered>
+    </iban>
+    <holidays>
+        <holiday>
+            <date accuracy="day">2015-01-02</date>
+            <name>New Year's Holiday</name>
+            <note>New Year's Holiday</note>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-05-01</date>
+            <name>Labour Day</name>
+            <note>Labour Day</note>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-07-17</date>
+            <name>Last Day of Ramadan</name>
+            <note>Last Day of Ramadan</note>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-09-24</date>
+            <name>Sacrifice Day</name>
+            <note>Sacrifice Day</note>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-10-19</date>
+            <name>Beatification Day of Mother Teresa</name>
+            <note>Beatification Day of Mother Teresa</note>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-08</date>
+            <name>National Youth Day</name>
+            <note>National Youth Day</note>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-25</date>
+            <name>Christmas Day</name>
+            <note>Christmas Day</note>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-01-01</date>
+            <name>New Year's Day</name>
+            <note>New Year's Day</note>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-14</date>
+            <name>Springs Day</name>
+            <note>Springs Day</note>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-22</date>
+            <name>Nevruz</name>
+            <note>Nevruz</note>
+        </holiday>
+    </holidays>
+    <alternativeRegions>
+        <region>
+            <type>Trading Region</type>
+            <value>Central &amp; Eastern Europe</value>
+        </region>
+    </alternativeRegions>
+    <relatedPlaces>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>Capital City</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/ba392452-f760-4762-b398-ee7392b2dd1a" rel="src" />
+            </place>
+        </relation>
+        <relation>
+            <type>Financial Centre</type>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/ba392452-f760-4762-b398-ee7392b2dd1a" rel="src" />
+            </place>
+        </relation>
+    </relatedPlaces>
+    <relatedPresences>
+        <relation>
+            <type>Central Bank</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/090c353d-3d4e-46b4-9738-935fd7dde637" rel="src" />
+            </presence>
+        </relation>
+        <relation>
+            <type>Regulator</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/090c353d-3d4e-46b4-9738-935fd7dde637" rel="src" />
+            </presence>
+        </relation>
+    </relatedPresences>
+</country>

@@ -1071,8 +1071,7 @@ public class EditAreaSteps extends AbstractSteps {
 	@When("the user enters the demographic unit <unitValue> in the area page")
 	public void enterDemographicsUnit(@Named("unitValue") String demographicUnit) {
 		if (demographicUnit.contains("km")) {
-			getDataPage().selectItemFromDropdownListByindex(
-					AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), 1);
+			getDataPage().selectItemFromDropdownListByindex(AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), 1);
 		} else if (demographicUnit.contains("mi")) {
 			getDataPage().selectItemFromDropdownListByindex(
 					AreaIdentifiers.getObjectIdentifier("area_demographics_unit_dropdown"), 2);
@@ -1243,7 +1242,7 @@ public class EditAreaSteps extends AbstractSteps {
 		String date = day + " " + month + " " + year;
 		getEditAreaPage().verifyDemographicValueRowInUI(type, value, null, date, 1);
 	}
-	
+
 	@When("the user clicks on the add button for adding new places for area page")
 	public void clickOnAddPlacesButton() {
 		setEditCityPage(getDataPage().createEditCityPage());
@@ -1319,7 +1318,7 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user selects details value as <placeDetails> in the places for area")
 	public void selectsDetailsFromDropdown(@Named("placeDetails") String placeDetails) {
-		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_detail_dropdown_xpath"), 
+		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_detail_dropdown_xpath"),
 				placeDetails, 1);
 	}
 
@@ -1386,19 +1385,19 @@ public class EditAreaSteps extends AbstractSteps {
 
 	@When("the user selects type value as <placeType> in the places for area")
 	public void selectsAreaTypeFromDropdown(@Named("placeType") String placeType) {
-		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"), 
+		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"),
 				placeType, 1);
 	}
 
 	@When("the user selects type value as <placeType2> in the places for area")
 	public void selectsAreaTypeFromDropdown2(@Named("placeType2") String placeType2) {
-		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"), 
+		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_type_dropdown_xpath"),
 				placeType2, 2);
 	}
 
 	@When("the user selects details value as <placeDetails2> in the places for area")
 	public void selectsDetailsFromDropdown2(@Named("placeDetails2") String placeDetails2) {
-		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_detail_dropdown_xpath"), 
+		getEditAreaPage().selectDropDownValueFromRowNumber(AreaIdentifiers.getObjectIdentifier("area_places_detail_dropdown_xpath"),
 				placeDetails2, 2);
 	}
 
@@ -1477,5 +1476,112 @@ public class EditAreaSteps extends AbstractSteps {
 		String[] areaRelatedDetail = { areaPlacesDetails };
 
 		getEditAreaPage().verifyAreaRelatedPlacesParametersInUI(areaRelatedTypes, areaRelatedPlaces, areaRelatedDetail);
+	}
+
+	@Then("the user should verify the header dropdowns are disabled")
+	public void userVerifyHeaderDropdownValuesDisabled() throws InterruptedException {
+		getEditAreaPage().userVerifyHeaderDropdownValuesDisabled();
+	}
+
+	@Then("the user should verify the country dropdown is populating with default country <country> as a option")
+	public void userVerifyCountryDropdownDefaultValue(@Named("country") String country) {
+		getEditAreaPage().userVerifyCountryDropdownDefaultValue(country);
+	}
+
+	@Then("the user should see all the list of existing countries by full name in Alphabetical order in area basic info page")
+	public void verifyCountryListInPlacesFortheCountry() {
+		getEditAreaPage().verifyCountryListInPlacesForCountry();
+	}
+
+	@Then("the user should see the $errorMessage error message for the required area parent field in the area basic page")
+	public void verifyErrorMessageForRequiredAreaparentField(@Named("errorMessage") String errorMessage) throws InterruptedException {
+		getEditAreaPage().verifyErrorMessageForRequiredAreaparentField(errorMessage);
+	}
+
+	@Then("the user checks whether the header dropdown updates with <country2>, <area>")
+	public void checksHeaderdropdownValue(@Named("country2") String country, @Named("area") String area)
+			throws InterruptedException {
+		getEditAreaPage().checksHeaderdropdownValue(country, area);
+	}
+
+	@Then("the user verifies <area> is mapped to newly added <country2> in $source document")
+	public void verifyZeusDocument(@Named("source") String source, @Named("area") String area,
+			@Named("country2") String country2, @Named("area") String areaId) throws InterruptedException {
+		getEditAreaPage().verifyAreaInfoFromZeusDB(country2, area, "area", source, areaId);
+	}
+
+	@Then("the user should verify the parent area dropdown is populating with default area <area> as a option")
+	public void userVerifyAreaParentDropdownDefaultValue(@Named("area") String area) {
+		getEditAreaPage().userVerifyAreaParentDropdownDefaultValue(area);
+	}
+
+	@When("the user click on the choose an area parent option of area basic page")
+	public void clicksOnAreaDropdown() throws InterruptedException {
+		getEditAreaPage().clickOnAreaDropdown();
+	}
+
+	@Then("user should see the list of area parent options are pointing to selected <country> in area basic page")
+	public void verifyParentAreaListInPlaceForCountry(@Named("country") String country) {
+		getEditAreaPage().verifyAreaListInPlacesForCountry(country);
+	}
+
+	@Then("user verify the list of area parent options do not have No Area")
+	public void verifyParentAreaListDontHaveNullNovalue() {
+		getEditAreaPage().verifyParentAreaDropdownDontHaveNoArea();
+	}
+
+	@Then("the user checks whether the header dropdown updates with <country2>, <areaParent>, <subArea>")
+	public void checksHeaderdropdownValues(@Named("country2") String country, @Named("areaParent") String areaParent,
+			@Named("subArea") String subArea) throws InterruptedException {
+		getEditAreaPage().verifyHeaderDropDownValues(country, areaParent, subArea);
+	}
+
+	@Then("the user checks whether the Address bar url is updated  with <country2>, <areaParent>")
+	public void checksAddressBar(@Named("country2") String country, @Named("areaParent") String areaParent)
+			throws InterruptedException {
+		getEditAreaPage().checksAddressBarIsHavingNewCountryAreaIds(country, areaParent);
+	}
+
+	@Then("the user verifies <subArea> is mapped to newly added <country2> and <areaParent> in $source document")
+	public void verifySubAreaInfoFromZeusDocument(@Named("source") String source, @Named("subArea") String subArea,
+			@Named("country2") String country2, @Named("area") String area, @Named("areaParent") String areaParent)
+			throws InterruptedException {
+		getEditAreaPage().verifySubAreaInfoFromZeusDB(country2, areaParent, subArea, "subarea", source, subArea);
+	}
+
+	@Then("user should verify the subArea dropdown does not have subArea <subArea> value mapped to old country and area")
+	public void verifySubAreaDropdown(@Named("subArea") String subArea) throws InterruptedException {
+		getEditAreaPage().verifySubAreaDropdown(subArea);
+	}
+
+	@Then("user should not see the area parent dropdown")
+	public void verifyNoParentAreaDropdown() {
+		getEditAreaPage().verifyNoParentAreaDropdown();
+	}
+
+	@Then("the user should verfiy that the 'Choose an Area' option is populated in the area parent dropdown")
+	public void userVerifyNoSubarea() throws InterruptedException {
+		getEditAreaPage().verifyChooseAnAreaOptionInAreaparent();
+	}
+
+	@Then("user should see the list of Area parent options in Area page are in Alphabetical order")
+	@Alias("user should see the list of area parent options are refreshed pointing to selected <country2> in area basic info page")
+	public void verifyParentAreaListInPlacesForCountry(@Named("country2") String country) {
+		getEditAreaPage().verifyAreaListInPlaceForCountry(country);
+	}
+
+	@When("user changes the <country2> in the country dropdownfield of area basic page")
+	public void userChangesCountryDropdownValue(@Named("country2") String country2) throws InterruptedException {
+		getEditAreaPage().selectCountryValue(country2);
+	}
+
+	@Then("user changes the area <areaParent> in the area dropdown field in area basic page")
+	public void userChangesAreaDropdownvalue(@Named("areaParent") String areaParent) throws InterruptedException {
+		getEditAreaPage().userChangesAreaDropdownvalue(areaParent);
+	}
+
+	@When("the user gets the document with $xqueryName with the <subArea> from the database")
+	public void getDocumentByFidSubArea(@Named("xqueryName") String xqueryName, @Named("subArea") String subArea,@Named("country") String country,@Named("area") String area) {
+		getDataPage().getDocumentforSubArea(xqueryName, subArea, country, area);
 	}
 }

@@ -1,0 +1,23 @@
+<city deleted="false" fid="72748" id="5a99e910-f267-4c1c-a6f0-f712886dcbb9" resource="/city/id/5a99e910-f267-4c1c-a6f0-f712886dcbb9" source="zeus">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Aberfeldy</value>
+            </name>
+            <citySortKey>ABERFELDY</citySortKey>
+        </names>
+        <status>active</status>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/52be49f6-c37c-4bed-baec-6b9accabf100" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/4b3528c8-fa44-48fd-baed-1375bea4c7a3" rel="src"/>
+
+        </place>
+    </within>
+</city>

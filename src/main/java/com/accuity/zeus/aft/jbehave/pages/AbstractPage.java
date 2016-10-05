@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -48,6 +49,8 @@ public abstract class AbstractPage {
     protected final HeraApi heraApi;
 
     protected final RestClient restClient;
+
+    public DataPage dataPage;
     public String bigString="";
     protected By contentLocator = By.xpath("//body/div[@id='content']");
 
@@ -120,6 +123,44 @@ public abstract class AbstractPage {
             waitFor();
             if (driver.findElement(by).isDisplayed()) {
                 text = driver.findElement(by).getText().trim();
+                break;
+            }
+            if (attempts >= 10) {
+                break;
+            }
+            waitFor();
+            attempts++;
+        }
+        return text;
+    }
+    
+    public String getTextOnPageUsingIndex(By by, int index) {
+        int attempts = 0;
+        String text = null;
+        while (true) {
+            waitFor();
+            List<WebElement> elementList = driver.findElements(by);
+            if (elementList.get(index-1).isDisplayed()) {
+                text = elementList.get(index-1).getText().trim();
+                break;
+            }
+            if (attempts >= 10) {
+                break;
+            }
+            waitFor();
+            attempts++;
+        }
+        return text;
+    }
+    
+    public String getAttributeValueOnPageUsingIndex(By by, int index) {
+        int attempts = 0;
+        String text = null;
+        while (true) {
+            waitFor();
+            List<WebElement> elementList = driver.findElements(by);
+            if (elementList.get(index-1).isDisplayed()) {
+                text = elementList.get(index-1).getAttribute("value").trim();
                 break;
             }
             if (attempts >= 10) {
@@ -326,6 +367,17 @@ public abstract class AbstractPage {
         return dropdownValuesList;
     }
 
+    public void selectItemFromDropdownListByindex(By by, int i) {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Select dropdown = new Select(driver.findElement(by));
+        dropdown.selectByIndex(i);
+
+    }
+
     public List<String> getAlreadySelectedValuesInAllRowsForADropdown(By by) {
         ArrayList<String> selectedValueList = new ArrayList();
         for (WebElement WebElement : getDriver().findElements(by)) {
@@ -355,8 +407,28 @@ public abstract class AbstractPage {
             e.printStackTrace();
         }
         Document document =  XmlDocumentLoader.getDocument(filePath);
-        return document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("id").getNodeValue();
+        String resourceURL=document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("resource").getNodeValue();
+        if(resourceURL.contains("http")){
+            String[] splitURL=resourceURL.split(heraApi.getPath());
+            resourceURL=splitURL[1];
+        }
+        return resourceURL;
     }
+    
+	public String getSelectedDropdownValueUsingIndex(By by, int index) {
+		String value = null;
+		try {
+			List<WebElement> elementList = getDriver().findElements(by);
+			if (elementList.size() >= index) {
+				value = new Select(elementList.get(index - 1)).getFirstSelectedOption().getAttribute("value");
+			} else {
+				assertFalse("dropdown not found in row :" + index, true);
+			}
+		} catch (Exception e) {
+			assertFalse("Element not found", true);
+		}
+		return value;
+	}
     
     public void selectDropDownValueFromRowNumber(By by, String value, int rowNumber) {
 		try {
@@ -392,14 +464,40 @@ public abstract class AbstractPage {
 		cal.add(Calendar.DATE, 1);
 		return dateFormat.format(cal.getTime());
 	}	
-    
-	public void selectItemFromDropdownListByindex(By by, int i) {
-		try {
-			Select dropdown = new Select(driver.findElement(by));
-			dropdown.selectByIndex(i);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
+    public void textToBePresentInElement(WebElement requiredMessage) {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), 25);
+            wait.until(ExpectedConditions.textToBePresentInElement(requiredMessage,"Required"));
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
+    }
+    
+    public String getTextUsingIndex(By by, int index) { 
+    	String value = null;
+    	try {
+    		List<WebElement> elementList = getDriver().findElements(by);		
+        	value = elementList.get(index-1).getAttribute("value");        	
+    	}
+    	catch (Exception e) {
+    		assertFalse("Element not found", false);
+    	}  
+    	return value;
+    }
+
+    public String getSelectedOptionInDropDownByIndex(By by, int index) {
+    	String value = null;
+    	try {
+    		List<WebElement> elementList = getDriver().findElements(by);
+    		if (elementList.size() >= index) {
+    			value = new Select(elementList.get(index - 1)).getFirstSelectedOption().getText();
+    		} else {
+    			assertFalse("dropdown not found in row :" + index, true);
+    		}
+    	} catch (Exception e) {
+    		assertFalse("Element not found", true);
+    	}
+    	return value;
+    }    
+    
 }
