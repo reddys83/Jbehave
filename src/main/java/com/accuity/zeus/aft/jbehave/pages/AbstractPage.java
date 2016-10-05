@@ -313,6 +313,12 @@ public abstract class AbstractPage {
         return selectedValue;
     }
 
+    public String getSelectedDropdownText(By by) {
+        Select dropdown = new Select(driver.findElement(by));
+        String selectedValue = dropdown.getFirstSelectedOption().getText();
+        return selectedValue;
+    }
+
     public String createBigString(int stringSize)
     {
         StringBuilder builder = new StringBuilder();
