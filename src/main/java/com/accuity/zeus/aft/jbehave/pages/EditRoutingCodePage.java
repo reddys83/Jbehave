@@ -100,12 +100,12 @@ public class EditRoutingCodePage extends AbstractPage {
 
     }
     
-    public void verifyRoutingCodeBooleanFieldValuesInUI(String booleanFieldValue) {
+    public void verifyRoutingCodeBooleanFieldValuesInUI(String accountEligibilityValue, String internalUseOnlyValue, String useHeadOfficeValue) {
     	try {
 			Thread.sleep(2000L);
-			assertEquals(booleanFieldValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AccountEligibility")).getText().toLowerCase());
-			assertEquals(booleanFieldValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_InternalUseOnly")).getText().toLowerCase());
-			assertEquals(booleanFieldValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String UseHeadOffice")).getText().toLowerCase());
+			assertEquals(accountEligibilityValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AccountEligibility")).getText().toLowerCase());
+			assertEquals(internalUseOnlyValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_InternalUseOnly")).getText().toLowerCase());
+			assertEquals(useHeadOfficeValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String UseHeadOffice")).getText().toLowerCase());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}	 

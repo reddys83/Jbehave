@@ -58,9 +58,6 @@ public class RoutingCodeIdentifiers {
         hmap.put("edit_routingcode_page_ConfirmedWithFedDateYear",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Confirmed with Fed']/td/input[@name='confirmedDate-year']"));
         hmap.put("edit_routingcode_page_RegistrarFeeSFDCSubscription",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Registrar Fee SFDC Subscription']//input"));
         hmap.put("edit_routingcode_page_RoutingCodeComment",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']//input"));
-        hmap.put("edit_routingcode_page_AccountEligibility_false", By.xpath("//*[@id='routingCodeBasicInfo']//*[@name='accountEligibility'][@value='false']"));
-        hmap.put("edit_routingcode_page_InternalUseOnly_false", By.xpath("//*[@id='routingCodeBasicInfo']//*[@name='internalUseOnly'][@value='false']"));
-        hmap.put("edit_routingcode_page_UseHeadOffice_false", By.xpath("//*[@id='routingCodeBasicInfo']//*[@name='useHeadOffice'][@value='false']"));
     }
 
     public static By getObjectIdentifier(String key) {
