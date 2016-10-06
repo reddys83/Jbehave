@@ -13,6 +13,7 @@ JIRA ID - ZEUS-964 - User can edit City's END Date
 JIRA ID - ZEUS-980 - User can edit City's Use In Address Flag
 JIRA ID - ZEUS-963 - User can edit City's Began Date
 JIRA ID - ZEUS-970 - User can edit City's Names
+JIRA ID - ZEUS-966 - User can edit City's Country, Area & Sub Area
 
 Scenario: Verify City Status dropdown values from lookup Status
 Given a user is on the search page
@@ -1377,3 +1378,171 @@ Then the user should see the maxlength of name value field set to 75
 Examples:
 |country|area|city|
 |Belgium|Limburg|Bree|
+
+
+Scenario:ZEUS-966
+User views the city basic page,selects the update button and verify the country, area, subarea list are in Alphabetical order
+  1- verify the area showing default value as 'Choose an Area'
+  2- verify the sub area showing default value as 'Choose a SubArea'
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user clicks on the country drop down in the city basic info
+Then the user should see all the list of countries in city page are in Alphabetical order
+When user changes the <country2> in the country drop downfield of city basic page
+Then the user verify the Area dropdown is populating with 'Choose an Area'as a option
+When user clicks on the area drop down in the city basic info
+Then user should see the list of Area options in city page are in Alphabetical order
+Then user changes the area <area2> in the area dropdown field in city basic page
+Then the user verify the SubArea dropdown is populating with 'Choose a Subarea' as a option
+When user clicks on the subarea drop down in the city basic info
+Then user should see the list of Sub area options in city page are in Alphabetical order
+
+Examples:
+|country|area|city|country2|area2|
+|USA|California|Alamo|India|Tamil Nadu|
+
+
+Scenario: User updates the city basic page info by changing the country,area,subarea options
+1- Verify whether the selected sub area is not reselectable for another sub area.
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+
+When the user clicks on the country drop down in the city basic info
+When user changes the <country2> in the country drop downfield of city basic page
+
+When user clicks on the area drop down in the city basic info
+Then user changes the area <area2> in the area dropdown field in city basic page
+When user clicks on the subarea drop down in the city basic info
+When the user clears subarea options in city basic page
+
+Then user selects subarea <subarea1> in the subarea multiselect dropdown
+When user clicks on the subarea drop down in the city basic info
+Then the user checks whether this subarea <subarea1> are not reselectable
+
+When the user clicks on the save button in city page
+When the user clicks on the confirm button in city page
+Then the user should see the successful update message at top of the page
+Then verify zeus document whether the city is updated with newly added SubArea <subarea1>
+When the user clicks on the city update link
+Then verify UI whether city is updated with newly added SubArea <subarea1>
+Then the user reverts the changes to the document
+
+
+Examples:
+|country|area|city|country2|area2|subarea1|
+|UK|Scotland|Aberfeldy|UK|Wales|Cardiff|
+
+Scenario: User is updating a City's Basic Info and has set values for each of 'Country', 'Area' and 'Sub Area
+1 - Verify city is mapped under newly added country2 and area2 (headers)
+2 - Verify the Zeus DB whether the city is mapped under newly added country2 and area2
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+
+When the user clicks on the country drop down in the city basic info
+When user changes the <country2> in the country drop downfield of city basic page
+
+When user clicks on the area drop down in the city basic info
+Then user changes the area <area2> in the area dropdown field in city basic page
+When user clicks on the subarea drop down in the city basic info
+When the user clears subarea options in city basic page
+
+Then user selects subarea <subarea1> in the subarea multiselect dropdown
+
+When the user clicks on the save button in city page
+When the user clicks on the confirm button in city page
+
+Then the user should see the successful update message at top of the page
+
+Then the user checks whether the header dropdown updates with <country2>, <area2>, <city>
+Then the user checks whether the Address bar url is updated  with <country2>, <area2>
+
+Then verify zeus document whether <city> is mapped to newly added <country2> and <area2>
+When the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+Then user verify the city dropdown does not have city <city> value mapped to old country and area
+Then the user reverts the changes to the document
+
+
+Examples:
+|country|area|city|country2|area2|subarea1|
+|UK|Scotland|Aberfeldy|UK|Wales|Cardiff|
+
+
+
+Scenario: User is updating a City's Basic Info and has set values for each of 'Country', 'Area' and 'Sub Area
+1 - User adds two sub areas and verify Zeus DB is updating with two sub area
+
+Given a user is on the search page
+When the user clicks on the data tab in the search page
+And the user clicks on the city tab in the data area
+And the user clicks on the choose a country option
+And the user enters the country <country> in the type-ahead box
+And the user clicks on the choose an area option
+And the user enters the area <area> in the type-ahead box
+And the user clicks on the choose a city option
+And the user enters the city <city> in the type-ahead box
+And the user clicks on the city basic info link in the navigation bar
+When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
+
+When the user clicks on the country drop down in the city basic info
+When user changes the <country2> in the country drop downfield of city basic page
+
+When user clicks on the area drop down in the city basic info
+Then user changes the area <area2> in the area dropdown field in city basic page
+
+When user clicks on the subarea drop down in the city basic info
+When the user clears subarea options in city basic page
+
+Then user selects subarea <subarea1> in the subarea multiselect dropdown
+Then user selects subarea <subarea2> in the subarea multiselect dropdown
+
+When user clicks on the subarea drop down in the city basic info
+Then the user checks whether this subarea <subarea1> are not reselectable
+Then the user checks whether this subarea <subarea2> are not reselectable
+
+When the user clicks on the save button in city page
+When the user clicks on the confirm button in city page
+Then the user should see the successful update message at top of the page
+
+Then verify zeus document whether <city> is mapped to <subarea1> and <subarea2>
+Then the user reverts the changes to the document
+
+
+Examples:
+|country|area|city|country2|area2|subarea1|subarea2|
+|UK|England|Addlestone|USA|Arizona|Gila|Graham|

@@ -107,11 +107,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyNames(names);
     }
 
-    @Then("the user should see the office's names as: $Names")
-    public void verifyOfficeNames(ExamplesTable Names) {
-        getDataPage().verifyNames(Names);
-    }
-
     @Then("the user should see the office sort key as $officeSortKey")
     public void verifyOfficeSortKey(@Named("officeSortKey") String officeSortKey) {
         getDataPage().verifyOfficeSortKey(officeSortKey);
@@ -195,6 +190,15 @@ public class DataSteps extends AbstractSteps {
                                    @Named("headOfficeAddress") String headOfficeAddress,
                                    @Named("officeFid") String fid,
                                    @Named("officeTfpid") String tfpid) {
+        getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
+    }
+
+
+    @Then("the user should see the routing code page header with <legalentity>, <headOfficeAddress>, <routingCodeFid> and <routingCodeTfpid>")
+    public void verifyRoutingCodePageHeader(@Named("legalentity") String entity,
+                                   @Named("headOfficeAddress") String headOfficeAddress,
+                                   @Named("routingCodeFid") String fid,
+                                   @Named("routingCodeTfpid") String tfpid) {
         getDataPage().verifyHeader(entity, headOfficeAddress, fid, tfpid);
     }
 
@@ -704,7 +708,7 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the basic info label for selected legal entity")
     @Alias("the user should see the basic info for selected office")
     public void verifyBasicInfo() {
-        getDataPage().verifyBasicInfo();
+        setOfficesPage(getDataPage().verifyBasicInfo());
     }
 
     @Then("the user should see the legal entity's identifiers as: $identifiers")

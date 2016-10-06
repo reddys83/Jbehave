@@ -1,0 +1,48 @@
+<city deleted="false" fid="76996" id="7c885cea-eaed-4cfb-942e-27b3fb04d102" resource="/city/id/7c885cea-eaed-4cfb-942e-27b3fb04d102" source="zeus">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Alamo</value>
+            </name>
+            <citySortKey>ALAMO</citySortKey>
+        </names>
+        <status>active</status>
+        <identifiers>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>617</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+        <demographics>
+            <metric>
+                <name>Population</name>
+                <value>100</value>
+            </metric>
+        </demographics>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </place>
+        <place>
+            <link href="/area/id/e2a97a2e-63fd-4535-9b97-da52ce4c67b4" rel="src"/>
+        </place>
+    </within>
+    <alternativeRegions>
+        <region>
+            <type>Metropolitan Statistical Area</type>
+            <value>41860</value>
+        </region>
+        <region>
+            <type>Federal Reserve District</type>
+            <value>12</value>
+        </region>
+        <region>
+            <type>Federal Home Loan Bank District</type>
+            <value>11</value>
+        </region>
+    </alternativeRegions>
+</city>

@@ -470,7 +470,10 @@ public class EditLegalEntityPage extends AbstractPage {
     }
 
     public void verifyCharterTypeOptions() {
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithParameter(database, "get charter type from lookup document", "source", "source-trusted");
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get charter type from lookup document",nvPairs );
         Select charterTypeDropDown = new Select(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_CharterType_dropdown_xpath")));
         Integer optionsDisplayed = charterTypeDropDown.getOptions().size();
         for (int i = 0; i < optionsDisplayed - 2; i++) {

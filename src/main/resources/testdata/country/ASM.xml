@@ -1,0 +1,97 @@
+<country deleted="false" fid="ASM" id="5ee26c17-e9e9-4ba1-a053-a408e0b35803" resource="/country/id/5ee26c17-e9e9-4ba1-a053-a408e0b35803" source="zeus">
+    <summary>
+        <iso2>AS</iso2>
+        <iso3>ASM</iso3>
+        <names>
+            <name>
+                <type>Country Name</type>
+                <value>American Samoa</value>
+            </name>
+            <countrySortKey>AMERICAN SAMOA</countrySortKey>
+        </names>
+        <status>active</status>
+        <dates>
+            <dateBegan accuracy="day">2001-02-12</dateBegan>
+        </dates>
+        <timeZones>
+            <summaries>
+                <summary>11 hours</summary>
+            </summaries>
+        </timeZones>
+        <businessHours>
+            <summaries>
+                <summary>test</summary>
+            </summaries>
+        </businessHours>
+        <demographics>
+            <metric>
+                <name>Area</name>
+                <value>199</value>
+                <unit>km2</unit>
+            </metric>
+            <metric>
+                <name>Population</name>
+                <value>6.6432</value>
+            </metric>
+        </demographics>
+        <politicalStructure>adfas</politicalStructure>
+        <primaryExports>adfa</primaryExports>
+        <primaryImports>sdfsd</primaryImports>
+        <telephoneCode>1234</telephoneCode>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <languages>
+        <summaries>
+            <summary>English, Samoan</summary>
+        </summaries>
+    </languages>
+    <currencies>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/1df34c3b-b52a-4f00-a539-95cd5e5d325e" rel="src" />
+            <name>US Dollar</name>
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">1980-01-01</startDate>
+        </currency>
+        <currency>
+            <link href="http://10.72.0.121:8080/heraapi/currency/id/1df34c3b-b52a-4f00-a539-95cd5e5d325e" rel="src" />
+            <primary>true</primary>
+            <status>active</status>
+            <startDate accuracy="day">1500-01-01</startDate>
+        </currency>
+    </currencies>
+    <iban>
+        <registered>false</registered>
+    </iban>
+    <alternativeRegions>
+        <region>
+            <type>Trading Region</type>
+            <value>Australasia</value>
+        </region>
+    </alternativeRegions>
+    <relatedPlaces>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>Capital City</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/aeb405e5-d7db-4d72-893d-6d3edf72fa9d" rel="src" />
+            </place>
+        </relation>
+        <relation>
+            <type>Financial Centre</type>
+            <place>
+                <link href="http://10.72.0.121:8080/heraapi/city/id/aeb405e5-d7db-4d72-893d-6d3edf72fa9d" rel="src" />
+            </place>
+        </relation>
+    </relatedPlaces>
+    <relatedPresences>
+        <relation>
+            <type>Central Bank</type>
+            <presence>
+                <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/ea84cdae-e7a2-426c-b561-eb4e16761305" rel="src" />
+            </presence>
+        </relation>
+    </relatedPresences>
+</country>

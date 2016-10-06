@@ -29,6 +29,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.*;
 
+
 public class DataPage extends AbstractPage {
 
     private By currency_tab_xpath = By.xpath("//*[@id='data-navbar']/ul/li");
@@ -219,6 +220,8 @@ public class DataPage extends AbstractPage {
         super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
 
+
+
     @Override
     public String getPageUrl() {
         return null;
@@ -287,13 +290,14 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyBasicInfo() {
+    public OfficesPage verifyBasicInfo() {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         assertEquals("BASIC INFO", getDriver().findElement(basic_info_xpath).getText());
+        return new OfficesPage(getDriver(), getPageUrl(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void verifyNames(ExamplesTable namesList) {
@@ -1061,7 +1065,7 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void getDocument(String xqueryName, String name) {
+      public void getDocument(String xqueryName, String name) {
 
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("name", name));
@@ -1089,7 +1093,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifySaveConfirmationModal() {
-        try {
+    	try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -1279,8 +1283,6 @@ public class DataPage extends AbstractPage {
 
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database,xqueryName);
         assertTrue(document!=null);
-
-
     }
 
     public EditCityPage createEditCityPage() {
@@ -1336,16 +1338,48 @@ public class DataPage extends AbstractPage {
     public void verifyAreaPlacesView() {
         assertTrue(getDriver().findElement(select_places_view_xpath).isDisplayed());
     }
+    
+    public void getDocumentforSubArea(String xqueryName, String subArea, String country, String  area) {
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("subarea", subArea));
+        nvPairs.add(new BasicNameValuePair("country", country));
+        nvPairs.add(new BasicNameValuePair("area", area));      
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
+        if(document != null) {
+	        endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
+
+	        responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
+	        assertTrue(responseEntity.getStatusCode().value() == 200);
+	    }
+	    else {
+            assertFalse("Zeus document with subArea " + subArea + " does not exist in the DB", true);
+	    }
+    }
 
     public void updateDocument(String endpoint, String entityFid) {
         XmlDocument xmlDocument = getTestDataXml(endpoint, entityFid);
-        String url = "/"+endpoint+"/id/"+getResourceURL(endpoint, entityFid);
-        int response = restClient.putDocumentByID(url, heraApi, xmlDocument.toString());
+
+        String endpointWithID = getResourceURL(endpoint, entityFid);
+        int response = restClient.putDocumentByID(endpointWithID, heraApi, xmlDocument.toString());
+
+        assertTrue(response == 202);
+    }
+
+    public void updateRoutingCodeDocument(String endpoint, String routingCode, String routingCodeType){
+        XmlDocument xmlDocument = getTestDataXml(endpoint, routingCode+"-"+routingCodeType);
+
+        String endpointWithID = getResourceURL(endpoint, routingCode+"-"+routingCodeType);
+        int response = restClient.putDocumentByID(endpointWithID, heraApi, xmlDocument.toString());
+
         assertTrue(response == 202);
     }
     
     public void verifyElementNotExistInUI(By by) {
-		try {			
+		try {	
+			Thread.sleep(2000L);
 			assertTrue(getDriver().findElement(by) == null);
 		} catch (Exception e) {
 			assertTrue(true);
@@ -1434,5 +1468,24 @@ public class DataPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
+	
+	public void clickElementUsingIndex(By by, int index) {		
+    	try {    		
+    		List<WebElement> elementList = getDriver().findElements(by);		
+        	elementList.get(index-1).click();        	
+    	}
+    	catch (Exception e) {
+			assertFalse("Element not found", false);
+		}    	
+	} 
 
+	public void clickElementUsingIndex(By by, int index) {		
+    	try {
+    		List<WebElement> elementList = getDriver().findElements(by);		
+        	elementList.get(index-1).click();        	
+    	}
+    	catch (Exception e) {
+			assertFalse("Element not found", false);
+		}    	
+	} 
 }

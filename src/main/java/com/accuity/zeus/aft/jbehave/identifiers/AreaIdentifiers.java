@@ -39,13 +39,43 @@ public class AreaIdentifiers {
 		hmap.put("area_name_type_input_xpath", By.xpath(".//*[@id='additionalNames']//*[@data-internal_id='nameType']"));
 		hmap.put("area_name_value_input_xpath", By.xpath(".//*[@id='additionalNames']//*[@data-internal_id='nameValue']"));
 		hmap.put("area_NameTable", By.xpath("//*[@id='areaBasicInfo']//h2[text() = 'Names']/.."));
-		hmap.put("delete_row_confirmation_modal_xpath", By.xpath("//*[@colspan='10']"));	
+		hmap.put("delete_row_confirmation_modal_xpath", By.xpath("//*[@colspan='10']"));
 		hmap.put("area_name_type_error_msg_xpath", By.xpath(("//*[@id='additionalNames']//*[@data-error_id='nameTypeError']")));
 		hmap.put("area_name_value_error_msg_xpath", By.xpath(("//*[@id='additionalNames']//*[@data-error_id='nameValueError']")));
 		hmap.put("area_delete_name_row_button_xpath", By.xpath(".//*[@data-row_id='names']//button[@class='delete-element']"));
 		hmap.put("area_second_name_value_input_xpath", By.xpath(".//*[@id='additionalNames']/tr[4]//*[@data-internal_id='nameValue']"));
 		hmap.put("area_add_info_text_xpath", By.xpath(("//*[@id='areaBasicInfo']//textarea[@name='addInfo']")));
 		hmap.put("area_add_info_xpath_after_save", By.xpath("//*[@id='areaBasicInfo']//tr[th='Add Info']/td"));
+		hmap.put("area_status_identifier_dropdown_xpath",
+				By.xpath(("//*[@id='areaBasicInfo']//tr[th='Status']//select")));
+		hmap.put("area_status_identifier_dropdown_options_xpath",
+				By.xpath(("//*[@id='areaBasicInfo']//tr[th='Status']//select/option")));
+		hmap.put("area_update_button_xpath", By.xpath("//*[@id='update-button']"));
+		hmap.put("area_save_confirmation_message_xpath", By.xpath(("//*[@id='saveSuccess']")));
+		hmap.put("area_get_status_value_xpath", By.xpath(("//*[@id='areaBasicInfo']//tr[th='Status']/td")));
+		hmap.put("area_get_status_value_xpath", By.xpath(("//*[@id='areaBasicInfo']//tr[th='Status']/td")));
+	    hmap.put("country_places_country_dropDown_select_option_xpath", By.xpath("//*[@id='country']//li"));
+	    hmap.put("country_places_areas_dropdown_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='Area Parent']//select"));
+	    hmap.put("country_places_country_dropDown_select_xpath", By.xpath("//*[@id='country']//td//select"));
+	    hmap.put("country_places_areas_option_dropdown_xpath", By.xpath("//*[@id='area']//li"));
+        hmap.put("country_current_value_xpath", By.xpath(".//*[@id='selection0']//span"));
+        hmap.put("area_current_value_xpath", By.xpath(".//*[@id='selection1']//span"));
+        hmap.put("area_List_value_xpath", By.xpath(".//*[@id='selection2']/div //*[@id='entitySelect_chosen']//li"));
+        hmap.put("country_places_country_dropDown_xpath", By.xpath("//*[@id='country']//select/option"));
+        hmap.put("area_parent_req_err_msg_xpath", By.xpath(("//*[@data-error_id='areaError']")));
+        hmap.put("country_places_areaparent_dropdown_xpath", By.xpath(".//*[@id='area']//option"));
+        hmap.put("country_default_value_dropdown_xpath", By.xpath("//*[@id='country']//a[@class='chosen-single']/span"));
+        hmap.put("parent_area_default_value_dropdown_xpath", By.xpath(".//*[@id='area']//a/span"));
+        hmap.put("country_header_value_xpath", By.xpath(".//*[@id='country']"));
+        hmap.put("area_header_value_xpath", By.xpath(".//*[@id='area']//option"));
+        hmap.put("subarea_header_value_xpath", By.xpath(".//*[@id='area']//option"));
+        hmap.put("subarea_header_value_xpath", By.xpath(".//*[@id='selection0'] //*[@id='entitySelect_chosen']//input"));
+        hmap.put("country_type_ahead_xpath", By.xpath(".//*[@id='selection0'] //*[@id='entitySelect_chosen']//input"));
+        hmap.put("area_area_dropdown_typeAhead_xpath", By.xpath(".//*[@id='selection1'] /div //*[@id='entitySelect_chosen']//input"));
+        hmap.put("area_subarea_dropdown_typeAhead_xpath", By.xpath(".//*[@id='selection2'] /div //*[@id='entitySelect_chosen']//input"));
+        hmap.put("areaParent_currentValue_xpath", By.xpath(".//*[@id='area']"));
+        hmap.put("subarea_current_value_xpath", By.xpath(".//*[@id='selection2']//span"));
+
 		hmap.put("area_add_new_identifier_button_id", By.id("add-identifiers"));
 		hmap.put("areaIdentifier_type_id", By.xpath("//*[@id='identifierType']"));
 		hmap.put("area_identifier_status_input_xpath", By.xpath(".//*[@id='additionalIdentifiers']//*[@data-internal_id='identifierStatus']"));
@@ -63,16 +93,16 @@ public class AreaIdentifiers {
 		hmap.put("area_identifier_type_view_mode", By.xpath("//*[@id='areaBasicInfo']//table[2]//tbody/tr"));
 		hmap.put("area_interest_rate_xpath_after_save",By.xpath("//*[@id='areaBasicInfo']//tr[th='Interest Rate Limit']/td"));
 		hmap.put("area_interest_rate_text_xpath",By.xpath("//*[@id='areaBasicInfo']//tr[th='Interest Rate Limit']/td/input"));
-		hmap.put("area_timezone_utc_second_dropDown", By.xpath("(//*[@name='utc3'])[2]//option"));	
-		hmap.put("timezone_utc_add_timezone_xpath", By.xpath("//*[@id='add-timeZones']"));	
+		hmap.put("area_timezone_utc_second_dropDown", By.xpath("(//*[@name='utc3'])[2]//option"));
+		hmap.put("timezone_utc_add_timezone_xpath", By.xpath("//*[@id='add-timeZones']"));
 		hmap.put("timezone_utc_dropdown_xpath", By.xpath("//*[@name='utc3']"));
-		hmap.put("timezone_utc_dropdown_option", By.xpath("//*[@name='utc3']/option"));		
+		hmap.put("timezone_utc_dropdown_option", By.xpath("//*[@name='utc3']/option"));
 		hmap.put("area_summary_timezone_xpath", By.xpath("//*[@name='timeZonesSummary']"));
 		hmap.put("area_delete_timezone_row_button_xpath", By.xpath("//*[@id='additionalTimeZones']//*[@class='delete-element']"));
 		hmap.put("area_timezone_dropdown_xpath", By.xpath("//*[@id='additionalTimeZones']/tr"));
-		hmap.put("area_timezone_type_view_mode", By.xpath("//*[@id='additionalTimeZones']"));		
-		hmap.put("utc_current_value_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='UTC']/td"));		
-		hmap.put("timezone_utc_current_value_xpath", By.xpath("//*[@name='utc3']//option[@selected='selected']"));		
+		hmap.put("area_timezone_type_view_mode", By.xpath("//*[@id='additionalTimeZones']"));
+		hmap.put("utc_current_value_xpath", By.xpath("//*[@id='areaBasicInfo']//tr[th='UTC']/td"));
+		hmap.put("timezone_utc_current_value_xpath", By.xpath("//*[@name='utc3']//option[@selected='selected']"));
 		hmap.put("summary_current_value_view_mode_xpath", By.xpath("//*[@id='areaBasicInfo']//dl[dt='Summary']/dd"));
 		hmap.put("area_timezone_add_button_xpath", By.xpath("//*[@id='areaBasicInfo']//*[@id='add-timeZones']"));
 		hmap.put("area_use_in_address_true", By.xpath("//*[@id='areaBasicInfo']//input[@value='true']"));
@@ -122,6 +152,31 @@ public class AreaIdentifiers {
 		hmap.put("area_demographic_date_error_message", By.xpath("//*[@data-error_id='demographicDateError']"));
 		hmap.put("area_demographics_row", By.xpath("//*[@class='data']//*[@id='areaDemographics']//tr[@data-row_id='demographics']"));
 		hmap.put("area_demographics_row_view_mode", By.xpath("//*[@class='data']//*[@id='areaDemographics']//tr"));
+		hmap.put("area_place_entirevalue_xpath", By.xpath("//*[@id='areaPlaces']//tbody"));
+		hmap.put("area_places_link_id", By.xpath("//*[@id='areaPlaces']"));
+		hmap.put("area_places_type_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']"));
+		hmap.put("area_places_type_options_dropdown_xpath", By.xpath("//*[@id='relatedPlaceType']/option"));
+		hmap.put("area_places_detail_dropdown_xpath", By.xpath("//*[@data-internal_id='relatedPlaceDetails']"));
+		hmap.put("area_places_place_edit_button_2_xpath",
+				By.xpath("//*[@id='additionalRelatedPlaces']/tr[2]/td[2]/button"));
+		hmap.put("area_place_entirevalues_xpath", By.xpath("//*[@id='areaPlaces']//tbody//tr"));
+		hmap.put("area_entity_type_dropdown_xpath", By.xpath("//*[@data-internal_id='relatedPresenceType']"));
+		hmap.put("area_entity_type_options_dropdown_xpath",By.xpath(".//*[@data-row_id='presences']//select[@id='presencesType']/option"));
+		hmap.put("area_entity_details_select_dropdown_xpath", By.xpath("//*[@data-internal_id='relatedPresenceDetails']"));
+		hmap.put("area_entity_details_options_dropdown_xpath", By.xpath(".//*[@data-row_id='relatedPresences']//select[@data-internal_id='relatedPresenceDetails']/option"));
+		hmap.put("area_entity_link_id", By.xpath("//*[@id='areaPresences']"));
+		hmap.put("area_add_entity_button_edit_id", By.xpath("//button[@id='add-relatedPresences']"));
+		hmap.put("area_entity_type_error_message_xpath",By.xpath("//*[@id='additionalRelatedPresences']//*[@data-error_id='relatedPresenceTypeError']"));
+		hmap.put("area_entity_error_message_xpath",By.xpath("//*[@id='additionalRelatedPresences']//*[@data-error_id='relatedPresenceEntityError']"));
+		hmap.put("area_fid_error_message_xpath",By.xpath("//*[@id='additionalRelatedPresences']//*[@data-error_id='fidError']"));
+		hmap.put("area_entity_fid_dropdown_xpath", By.xpath("//*[@id='fid']"));
+		hmap.put("area_entity_go_button_xpath",	By.xpath("//*[@id='additionalRelatedPresences']//button[@class='go']"));
+		hmap.put("area_entity_delete_button_xpath", By.xpath(".//*[@data-row_id='relatedPresences']//button[@class='delete-element']"));
+		hmap.put("area_related_entity_entirevalue_xpath", By.xpath("//*[@id='areaPresences']//tbody"));   
+		hmap.put("area_entity_edit_button_xpath", By.xpath(".//*[@id='additionalRelatedPresences']//button[@class='edit-row edit-presence']")); 
+		hmap.put("area_related_entity_entirevalues_xpath", By.xpath("//*[@id='areaPresences']//tbody//tr")); 
+		hmap.put("area_related_entity_entirevalues_edit_xpath", By.xpath("//*[@id='additionalPresences']//tbody//tr"));
+		
 	}
 
 	public static By getObjectIdentifier(String key) {

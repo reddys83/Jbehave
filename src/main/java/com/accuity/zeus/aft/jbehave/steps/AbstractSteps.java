@@ -34,13 +34,14 @@ public abstract class AbstractSteps {
 	private static AdminPage adminPage;
 	private static LegalEntityPage legalEntityPage;
 	private static OfficesPage officesPage;
+	private static RoutingCodePage routingCodePage;
 	private static CurrencyPage currencyPage;
 	private static CountryPage countryPage;
 
 
     public static EditOfficePage editOfficePage;
 	public static EditLegalEntityPage editLegalEntityPage;
-
+	public static EditRoutingCodePage editRoutingCodePage;
 
 
 	public static EditCityPage editCityPage;
@@ -202,16 +203,25 @@ public abstract class AbstractSteps {
 		this.legalEntityPage = legalEntityPage;
 	}
 
+	public void setRoutingCodePage(RoutingCodePage routingCodePage) {
+		this.routingCodePage = routingCodePage;
+	}
 	public OfficesPage getOfficesPage() {
 		return officesPage;
 	}
-
+	public RoutingCodePage getRoutingCodePage() {
+		return routingCodePage;
+	}
 	public void setOfficesPage(OfficesPage officesPage) {
 		this.officesPage = officesPage;
 	}
 
 	public static EditOfficePage getEditOfficePage(){
 		return editOfficePage;
+	}
+
+	public static EditRoutingCodePage getEditRoutingCodePage(){
+		return editRoutingCodePage;
 	}
 
 	public static void setEditOfficePage(EditOfficePage editOfficePage) {
