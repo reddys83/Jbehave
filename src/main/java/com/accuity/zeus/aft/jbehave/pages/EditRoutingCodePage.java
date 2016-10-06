@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.w3c.dom.Document;
+import org.openqa.selenium.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,6 +99,88 @@ public class EditRoutingCodePage extends AbstractPage {
         }
 
     }
+    
+    public void verifyRoutingCodeBooleanFieldValuesInUI(String booleanFieldValue) {
+    	try {
+			Thread.sleep(2000L);
+			assertEquals(booleanFieldValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AccountEligibility")).getText().toLowerCase());
+			assertEquals(booleanFieldValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_InternalUseOnly")).getText().toLowerCase());
+			assertEquals(booleanFieldValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String UseHeadOffice")).getText().toLowerCase());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}	 
+	 }
+	 
+	 public String verifyRoutingCodeBooleanFieldValuesFromDB(String source, String routingCode, String codeType) {
+		 String tagValue = null;
+			try {
+				List<NameValuePair> nvPairs = new ArrayList<>();
+				nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+				nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+				nvPairs.add(new BasicNameValuePair("source", source));
+				Thread.sleep(2000L);
+				Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+						"get routingCode basic info", nvPairs);
+				if (document != null) {
+					String accountEligibilityTagValue = getNodeValuesByTagName(document, "routingcodeaccountEligibility").size() == 0 ? ""
+							: getNodeValuesByTagName(document, "routingcodeaccountEligibility").get(0);
+					String internalUseOnlyTagValue = getNodeValuesByTagName(document, "routingcodeInternalUseOnly").size() == 0 ? ""
+							: getNodeValuesByTagName(document, "routingcodeInternalUseOnly").get(0);
+					String useHeadOfficeTagValue = getNodeValuesByTagName(document, "routingcodeUseHeadOffice").size() == 0 ? ""
+							: getNodeValuesByTagName(document, "routingcodeUseHeadOffice").get(0);
+					
+					tagValue = accountEligibilityTagValue + " " + internalUseOnlyTagValue + " " + useHeadOfficeTagValue;
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return tagValue;
+	 }
+	 
+	 public void verifyRoutingCodeBooleanFieldValuesFromZeusDB(String source, String routingCode, String codeType) {
+		 String accountEligibilityValueInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AccountEligibility")).getText().toLowerCase();
+		 String internalUseOnlyValueInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_InternalUseOnly")).getText().toLowerCase();
+		 String useHeadOfficeValueInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String UseHeadOffice")).getText().toLowerCase();
+		 String booleanFieldValuesInUI = accountEligibilityValueInUI + " " + internalUseOnlyValueInUI + " " + useHeadOfficeValueInUI;
+		 assertEquals(booleanFieldValuesInUI, verifyRoutingCodeBooleanFieldValuesFromDB(source, routingCode, codeType));
+	 }
+	 
+	 public void verifyRoutingCodeBooleanFieldValuesFromTrustedDB(String source, String routingCode, String codeType) {
+		try {
+			    String accountEligibilityFlag = null;
+			    String internalUseOnlyFlag = null;
+			    String useHeadOfficeFlag = null;
+			
+				List<WebElement> accountEligibilityFlagOptions = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_accountEligibility_radio"));
+				for (int flagIndex = 0; flagIndex < accountEligibilityFlagOptions.size(); flagIndex++) {
+					if (accountEligibilityFlagOptions.get(flagIndex).isSelected()) {
+						accountEligibilityFlag = accountEligibilityFlagOptions.get(flagIndex).getAttribute("value");
+						break;
+					}
+				}
+				
+				List<WebElement> internalUseOnlyFlagOptions = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_internalUseOnly_radio"));
+				for (int flagIndex = 0; flagIndex < internalUseOnlyFlagOptions.size(); flagIndex++) {
+					if (internalUseOnlyFlagOptions.get(flagIndex).isSelected()) {
+						internalUseOnlyFlag = internalUseOnlyFlagOptions.get(flagIndex).getAttribute("value");
+						break;
+					}
+				}
+				
+				List<WebElement> useHeadOfficeFlagOptions = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_useHeadOffice_radio"));
+				for (int flagIndex = 0; flagIndex < useHeadOfficeFlagOptions.size(); flagIndex++) {
+					if (useHeadOfficeFlagOptions.get(flagIndex).isSelected()) {
+						useHeadOfficeFlag = useHeadOfficeFlagOptions.get(flagIndex).getAttribute("value");
+						break;
+					}
+				}
+				
+				String booleanFieldValuesInUI = accountEligibilityFlag + " " + internalUseOnlyFlag + " " + useHeadOfficeFlag;
+				assertEquals(booleanFieldValuesInUI, verifyRoutingCodeBooleanFieldValuesFromDB(source, routingCode, codeType));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	 }
 
 
 }
