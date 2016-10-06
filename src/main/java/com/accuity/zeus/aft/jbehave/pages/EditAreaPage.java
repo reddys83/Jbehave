@@ -1715,8 +1715,8 @@ public class EditAreaPage extends AbstractPage {
 
 	public void verifyAreaCreditRatingListFromLookup(int row, By by, String tagname) {
 		List<WebElement> creditRatingList = getDriver().findElements(by);
-		assertTrue(creditRatingList.size() >= row);
-		List<WebElement> creditRatingListOptions = creditRatingList.get(row - 1).findElements(By.tagName("option"));
+	//	assertTrue(creditRatingList.size() >= row);
+		List<WebElement> creditRatingListOptions = creditRatingList.get(0).findElements(By.tagName("option"));
 
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, "get city credit look up values");
 		for (int i = 0; i < document.getElementsByTagName(tagname).getLength(); i++) {

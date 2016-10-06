@@ -676,7 +676,7 @@ Examples:
 |1165|FID|1165||
 
 Scenario: Verify that the user should NOT get the Required field message when user enters null value for all the entity type rows except one row
-
+Meta:@test789
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown

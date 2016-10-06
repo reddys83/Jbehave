@@ -1,27 +1,23 @@
 Meta:@Design
-
-
+Scenario: User deletes all rows of banking hours and verify if the rows are deleted from Zeus document
 Given a user is on the search page
-And the user updates office with fid <entityFid>
 When the user clicks on the data tab in the search page
-And the user clicks on the legal entity tab in the data area
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <entityFid>
-And the user clicks on the office update link
-And the user updates principal office flag to <principalFlag>
+And the user clicks on the country tab in the data area
+When the user clicks on the choose a country option
+When the user enters the country <country> in the type-ahead box
+And the user clicks on the update link
+And the user get the document with get Id for country with the name as South Africa from the database
+And the user deletes the existing banking hours rows
 And the user clicks on the save button
-Then the user should not see the below summary changes in confirmation modal
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
 |Summary|
-|Basic Info|
+|Basic Info / Banking Hours|
 When the user clicks on the confirm button
-Then the user verifies office principal office is <principalFlag>
-And the user verifies office <principalFlag> from zeus document <entityFid>
-
+Then the user should not see the banking hours rows
+Then the user should see the edits to country banking hrs in zeus document
+And the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|fid|entityFid|principalFlag|
-|1010|FID|1010|1010-45|false|
+|country|
+|South Africa|
