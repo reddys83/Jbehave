@@ -650,19 +650,20 @@ public class EditOfficePage extends AbstractPage {
         attemptClick(OfficeIdentifiers.getObjectIdentifier("office_country_dropdown"));
            }
 
-       public CountryPage enterOfficeCountryInTheTypeAheadBox(String Country) {
-           SimpleCacheManager.getInstance().put("selectedCountry", Country);
-           selectedEntity = Country;
-           getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_address_country_type_ahead")).sendKeys(Country);
-           getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_address_country_type_ahead")).sendKeys(Keys.RETURN);
-           try {
-               Thread.sleep(1000L);
-           } catch (InterruptedException e) {
-               e.printStackTrace();
-           }
-           return new CountryPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
-       }
-
+    public CountryPage enterOfficeCountryInTheTypeAheadBox(String Country, int index) {		
+		try {
+			SimpleCacheManager.getInstance().put("selectedCountry", Country);
+			selectedEntity = Country;		
+			List<WebElement> countryDropDownList = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_address_country_type_ahead"));
+			countryDropDownList.get(index-1).sendKeys(Country);
+			countryDropDownList.get(index-1).sendKeys(Keys.RETURN);			
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return new CountryPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(),
+				getHeraApi());
+	}
 
     public void enterOfficeCityInTheTypeAheadBox(String City) {
         SimpleCacheManager.getInstance().put("selectedCity", City);
@@ -2112,8 +2113,8 @@ public class EditOfficePage extends AbstractPage {
 
     public void verifypostalCodePositonInUI(String country,String postalCodePositon)
     {
-    	 assertEquals(country, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_country_dropdown_list")));
-         assertEquals(postalCodePositon, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_AddressLine1_textarea_view")));
+    	 //assertEquals(country, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_country_dropdown_list")));
+         assertEquals(postalCodePositon, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_postalCodePosition_xpath")));
     }
     
     public void verifyPostalCodePositionZeus(String postalCodePositionUI,String postalCodePositionDB){

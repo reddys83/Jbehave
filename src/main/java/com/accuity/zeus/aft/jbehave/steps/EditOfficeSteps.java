@@ -243,7 +243,7 @@ public class EditOfficeSteps extends AbstractSteps{
 
     @When("the user enters the office country <Country> in the type-ahead box")
     public void enterOfficeCountryInTheTypeAheadBox(@Named("Country") String Country) {
-        getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(Country);
+    	getEditOfficePage().enterOfficeCountryInTheTypeAheadBox(Country, 1);
     }
 
     @When("the user enters the office city <City> in the type-ahead box")
@@ -1484,19 +1484,26 @@ public class EditOfficeSteps extends AbstractSteps{
 	}
 	
 	@Then("the user should verify the postal code position is updated in Office web page")
-    public void verifyPostalCodePositionInUI(@Named("country") String country,@Named("postalCodePosition") String postalCodePosition) {
+    public void verifyPostalCodePositionInUI(@Named("Country") String country,@Named("postalCodePosition") String postalCodePosition) {
 
         getEditOfficePage().verifypostalCodePositonInUI(country,postalCodePosition);
     }
 	
 	@Then("the user should verify postal code position is $source document")
-    public void verifyPostalCodePositionInZeus(@Named("country") String country,@Named("postalCodePosition") String postalCodePosition,@Named("officeFid") String officeFid,@Named("source") String source) {
+    public void verifyPostalCodePositionInZeus(@Named("Country") String country,@Named("postalCodePosition") String postalCodePosition,@Named("officeFid") String officeFid,@Named("source") String source) {
 		Map<String, String> inputParameters = new HashMap<String, String>();
 		inputParameters.put("fid", officeFid);
 		inputParameters.put("source", source);
+		inputParameters.put("country", source);
 		
 		getEditOfficePage().verifyPostalCodePositionZeus(postalCodePosition,getDataPage().getTagValueFromDB("get Office Locations", "postalCodePos", inputParameters));
 		getEditOfficePage().verifyPostalCodePositionZeus(postalCodePosition,getDataPage().getTagValueFromDB("get postalCodePos from countryDoc", "postalCodePosition", inputParameters));
 		
+    }
+	
+	@Then("the user should verify the postal code position should be null in office web page")
+    public void verifyPostalCodePositionNullInUI(@Named("Country") String country,@Named("postalCodePosition") String postalCodePosition) {
+
+        getEditOfficePage().verifypostalCodePositonInUI(country,postalCodePosition);
     }
 }
