@@ -29,10 +29,10 @@ a) User verifies whether the current values for Boolean Fields(Account Eligibili
 b) User enters all Boolean Fields different from the current value to verify change in the confirmation modal.
 c) User enters all Boolean Fields same as the current value to verify no change in the confirmation modal.
 d) User verifies that the Basic Info page and Zeus document is updated correctly.
-Meta: @qatest
+
 Given a user is on the search page
+When the user selects the <searchBy> from the dropdown
 When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the exact match link in the routing code results page
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
