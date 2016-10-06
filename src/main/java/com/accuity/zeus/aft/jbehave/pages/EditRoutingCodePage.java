@@ -111,7 +111,7 @@ public class EditRoutingCodePage extends AbstractPage {
 		}	 
 	 }
 	 
-	 public String verifyRoutingCodeBooleanFieldValuesFromDB(String source, String routingCode, String codeType) {
+	 public String getRoutingCodeBooleanFieldValuesFromDB(String source, String routingCode, String codeType) {
 		 String tagValue = null;
 			try {
 				List<NameValuePair> nvPairs = new ArrayList<>();
@@ -142,7 +142,7 @@ public class EditRoutingCodePage extends AbstractPage {
 		 String internalUseOnlyValueInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_InternalUseOnly")).getText().toLowerCase();
 		 String useHeadOfficeValueInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String UseHeadOffice")).getText().toLowerCase();
 		 String booleanFieldValuesInUI = accountEligibilityValueInUI + " " + internalUseOnlyValueInUI + " " + useHeadOfficeValueInUI;
-		 assertEquals(booleanFieldValuesInUI, verifyRoutingCodeBooleanFieldValuesFromDB(source, routingCode, codeType));
+		 assertEquals(booleanFieldValuesInUI, getRoutingCodeBooleanFieldValuesFromDB(source, routingCode, codeType));
 	 }
 	 
 	 public void verifyRoutingCodeBooleanFieldValuesFromTrustedDB(String source, String routingCode, String codeType) {
@@ -150,33 +150,14 @@ public class EditRoutingCodePage extends AbstractPage {
 			    String accountEligibilityFlag = null;
 			    String internalUseOnlyFlag = null;
 			    String useHeadOfficeFlag = null;
-			
-				List<WebElement> accountEligibilityFlagOptions = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_accountEligibility_radio"));
-				for (int flagIndex = 0; flagIndex < accountEligibilityFlagOptions.size(); flagIndex++) {
-					if (accountEligibilityFlagOptions.get(flagIndex).isSelected()) {
-						accountEligibilityFlag = accountEligibilityFlagOptions.get(flagIndex).getAttribute("value");
-						break;
-					}
-				}
-				
-				List<WebElement> internalUseOnlyFlagOptions = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_internalUseOnly_radio"));
-				for (int flagIndex = 0; flagIndex < internalUseOnlyFlagOptions.size(); flagIndex++) {
-					if (internalUseOnlyFlagOptions.get(flagIndex).isSelected()) {
-						internalUseOnlyFlag = internalUseOnlyFlagOptions.get(flagIndex).getAttribute("value");
-						break;
-					}
-				}
-				
-				List<WebElement> useHeadOfficeFlagOptions = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_useHeadOffice_radio"));
-				for (int flagIndex = 0; flagIndex < useHeadOfficeFlagOptions.size(); flagIndex++) {
-					if (useHeadOfficeFlagOptions.get(flagIndex).isSelected()) {
-						useHeadOfficeFlag = useHeadOfficeFlagOptions.get(flagIndex).getAttribute("value");
-						break;
-					}
-				}
+			    
+			    accountEligibilityFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_accountEligibility_radio"));
+			    internalUseOnlyFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_internalUseOnly_radio"));
+			    useHeadOfficeFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_useHeadOffice_radio"));
 				
 				String booleanFieldValuesInUI = accountEligibilityFlag + " " + internalUseOnlyFlag + " " + useHeadOfficeFlag;
-				assertEquals(booleanFieldValuesInUI, verifyRoutingCodeBooleanFieldValuesFromDB(source, routingCode, codeType));
+				
+				assertEquals(booleanFieldValuesInUI, getRoutingCodeBooleanFieldValuesFromDB(source, routingCode, codeType));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
