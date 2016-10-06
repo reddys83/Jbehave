@@ -71,6 +71,7 @@ And the user clicks on the choose a city option
 And the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 When the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
 When the user selects value as <status> from Status drop-down in the city basicinfo page
 And the user clicks on the save button in city page
 When the user clicks on the confirm button
@@ -84,6 +85,7 @@ And the user should see the below summary changes in confirmation modal
 |Basic Info|
 When the user clicks on the return button
 Then the user should return to edit city page mode
+Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|status|
@@ -95,7 +97,6 @@ a) Veriy that the default value of status during edit matches with the status of
 b) Upate the status with a new value and verify it is updated in zeus document
 c) Upate the status with the same existing value and verify the existing value in zeus document
 d) verify that the status can be changed to all 3 values active,inactive and pending
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area
@@ -188,12 +189,13 @@ When the user clicks on the choose a city option
 When the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
 Then the user should see the addInfoText value same as in trusted document
 When the user enters the <addInfoText> in the add info text area
 When the user clicks on the save button in city page
 And the user clicks on the confirm button
 Then the user should see the city addinfo value <addInfoText> as in zeus document
-
+Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|addInfoText|
@@ -232,13 +234,14 @@ When the user clicks on the choose a city option
 When the user enters the city <city> in the type-ahead box
 And the user clicks on the city basic info link in the navigation bar
 And the user clicks on the city update link
+When the user gets the document with get document id for city with the <city> from the database
 When the user enters values which is beyond 500 unicode characters in the add info field
 When the user clicks on the save button in city page
 And the user clicks on the confirm button
 Then the user should see the successful update message at top of the page
 Then the user should be able to view that only 500 unicode characters are saved
 Then the user should be able to verify the maximum values are entered in the add info field
-
+Then the user reverts the changes to the document
 
 Examples:
 |country|area|city|
