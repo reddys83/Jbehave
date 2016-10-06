@@ -146,17 +146,11 @@ public class EditRoutingCodePage extends AbstractPage {
 	 }
 	 
 	 public void verifyRoutingCodeBooleanFieldValuesFromTrustedDB(String source, String routingCode, String codeType) {
-		try {
-			    String accountEligibilityFlag = null;
-			    String internalUseOnlyFlag = null;
-			    String useHeadOfficeFlag = null;
-			    
-			    accountEligibilityFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_accountEligibility_radio"));
-			    internalUseOnlyFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_internalUseOnly_radio"));
-			    useHeadOfficeFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_useHeadOffice_radio"));
-				
-				String booleanFieldValuesInUI = accountEligibilityFlag + " " + internalUseOnlyFlag + " " + useHeadOfficeFlag;
-				
+		try {			    
+			    String accountEligibilityFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_accountEligibility_radio"));
+			    String internalUseOnlyFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_internalUseOnly_radio"));
+			    String useHeadOfficeFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_useHeadOffice_radio"));				
+				String booleanFieldValuesInUI = accountEligibilityFlag + " " + internalUseOnlyFlag + " " + useHeadOfficeFlag;				
 				assertEquals(booleanFieldValuesInUI, getRoutingCodeBooleanFieldValuesFromDB(source, routingCode, codeType));
 		} catch (Exception e) {
 			e.printStackTrace();
