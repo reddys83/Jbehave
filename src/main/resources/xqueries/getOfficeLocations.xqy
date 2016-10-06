@@ -1,6 +1,7 @@
-let $fid := xs:string(xdmp:get-request-field("fid"))
+let $fid := xs:string(xdmp:get-request-field("officeFid"))
+let $source := xs:string(xdmp:get-request-field("source"))
 
-let $offices := cts:search(fn:collection('source-trusted')/office,
+let $offices := cts:search(fn:collection(fn:concat('source-', $source))/office,
         cts:and-query((
             cts:element-attribute-range-query(xs:QName("office"), xs:QName("fid"), "=", $fid)
         )))
@@ -26,7 +27,7 @@ let $postalCodePos := $y/postalCode/@position/string()
 let $postalSuffix := $y/postalSuffix/text()
 
 return  <address>
-    <type>{$type}</type>
+    <addressType>{$type}</addressType>
     <info>{$info}</info>
     <addressLine1>{$addressLine1}</addressLine1>
     <addressLine2>{$addressLine2}</addressLine2>
@@ -60,24 +61,29 @@ let $tAnswerback := $y/answerback/text()
 let $tDisplay := $y/value/text()
 
 return <telecom>
-    <tType>{$tType}</tType>
-    <tRank>{$tRank}</tRank>
-    <tTextBefore>{$tTextBefore}</tTextBefore>
-    <tValue>{$tValue}</tValue>
-    <tRangeLimit>{$tRangeLimit}</tRangeLimit>
-    <tExt>{$tExt}</tExt>
-    <tTextAfter>{$tTextAfter}</tTextAfter>
-    <tAnswerback>{$tAnswerback}</tAnswerback>
+    <type>{$tType}</type>
+    <rank>{$tRank}</rank>
+    <textBefore>{$tTextBefore}</textBefore>
+    <value>{$tValue}</value>
+    <phoneNumberRangeLimit>{$tRangeLimit}</phoneNumberRangeLimit>
+    <phoneExtension>{$tExt}</phoneExtension>
+    <textAfter>{$tTextAfter}</textAfter>
+    <answerBack>{$tAnswerback}</answerBack>
 </telecom>
 
 return <location><primary>{$isPrimary}</primary>{$officeAddresses}{$officeTelecoms}</location>
 
-let $summaries := for $x in $offices/locations/summaries/summary
-let $summaryType := $x/@type/string()
-let $summaryValue := $x/text()
-return <summaries><summary>
-    <summaryType>{$summaryType}</summaryType>
-    <summaryValue>{$summaryValue}</summaryValue>
-</summary></summaries>
+(: To verify Primary Flag and its corresponding Address Line 1 values :)
+let $officePrimaryFlag := for $a in $offices/locations/location
 
-return <locations>{$officeLocations}{$summaries}</locations>
+let $primaryFlag := $a/@primary/string()
+
+let $officeAddressLine1 := for $b in $a/address
+
+let $addressLine1Value := $b/streetAddress/addressLine1/text()
+
+return <addressLine1Value>{$addressLine1Value}</addressLine1Value>
+
+return <locationPrimaryFlag><primaryFlag>{$primaryFlag}</primaryFlag>{$officeAddressLine1}</locationPrimaryFlag>
+
+return <locations>{$officeLocations}{$officePrimaryFlag}</locations>

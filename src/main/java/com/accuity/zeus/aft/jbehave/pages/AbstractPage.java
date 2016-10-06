@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -122,6 +123,44 @@ public abstract class AbstractPage {
             waitFor();
             if (driver.findElement(by).isDisplayed()) {
                 text = driver.findElement(by).getText().trim();
+                break;
+            }
+            if (attempts >= 10) {
+                break;
+            }
+            waitFor();
+            attempts++;
+        }
+        return text;
+    }
+    
+    public String getTextOnPageUsingIndex(By by, int index) {
+        int attempts = 0;
+        String text = null;
+        while (true) {
+            waitFor();
+            List<WebElement> elementList = driver.findElements(by);
+            if (elementList.get(index-1).isDisplayed()) {
+                text = elementList.get(index-1).getText().trim();
+                break;
+            }
+            if (attempts >= 10) {
+                break;
+            }
+            waitFor();
+            attempts++;
+        }
+        return text;
+    }
+    
+    public String getAttributeValueOnPageUsingIndex(By by, int index) {
+        int attempts = 0;
+        String text = null;
+        while (true) {
+            waitFor();
+            List<WebElement> elementList = driver.findElements(by);
+            if (elementList.get(index-1).isDisplayed()) {
+                text = elementList.get(index-1).getAttribute("value").trim();
                 break;
             }
             if (attempts >= 10) {
@@ -274,6 +313,12 @@ public abstract class AbstractPage {
         return selectedValue;
     }
 
+    public String getSelectedDropdownText(By by) {
+        Select dropdown = new Select(driver.findElement(by));
+        String selectedValue = dropdown.getFirstSelectedOption().getText();
+        return selectedValue;
+    }
+
     public String createBigString(int stringSize)
     {
         StringBuilder builder = new StringBuilder();
@@ -376,6 +421,21 @@ public abstract class AbstractPage {
         return resourceURL;
     }
     
+	public String getSelectedDropdownValueUsingIndex(By by, int index) {
+		String value = null;
+		try {
+			List<WebElement> elementList = getDriver().findElements(by);
+			if (elementList.size() >= index) {
+				value = new Select(elementList.get(index - 1)).getFirstSelectedOption().getAttribute("value");
+			} else {
+				assertFalse("dropdown not found in row :" + index, true);
+			}
+		} catch (Exception e) {
+			assertFalse("Element not found", true);
+		}
+		return value;
+	}
+    
     public void selectDropDownValueFromRowNumber(By by, String value, int rowNumber) {
 		try {
 			List<WebElement> dropdownValue = getDriver().findElements(by);
@@ -418,4 +478,32 @@ public abstract class AbstractPage {
         } catch (org.openqa.selenium.NoSuchElementException e) {
         }
     }
+    
+    public String getTextUsingIndex(By by, int index) { 
+    	String value = null;
+    	try {
+    		List<WebElement> elementList = getDriver().findElements(by);		
+        	value = elementList.get(index-1).getAttribute("value");        	
+    	}
+    	catch (Exception e) {
+    		assertFalse("Element not found", false);
+    	}  
+    	return value;
+    }
+
+    public String getSelectedOptionInDropDownByIndex(By by, int index) {
+    	String value = null;
+    	try {
+    		List<WebElement> elementList = getDriver().findElements(by);
+    		if (elementList.size() >= index) {
+    			value = new Select(elementList.get(index - 1)).getFirstSelectedOption().getText();
+    		} else {
+    			assertFalse("dropdown not found in row :" + index, true);
+    		}
+    	} catch (Exception e) {
+    		assertFalse("Element not found", true);
+    	}
+    	return value;
+    }    
+    
 }
