@@ -47,9 +47,9 @@ public class EditRoutingCodeSteps extends AbstractSteps {
 	}
 
 	@Then("the user should be able to verify the values are entered in the routing code basic info page")
-	public void verifyResisterFeeAndRoutingCodeComment(@Named("routingCodeComment") String routingCodeComment,
+	public void verifyRegistrarFeeAndRoutingCodeComment(@Named("routingCodeComment") String routingCodeComment,
 			@Named("registarFeeSFDCSubscription") String registarFeeSFDCSubscription) {
-		getEditRoutingCodePage().verifyResisterFeeAndRoutingCodeComment(registarFeeSFDCSubscription,
+		getEditRoutingCodePage().verifyRegistrarFeeAndRoutingCodeComment(registarFeeSFDCSubscription,
 				routingCodeComment);
 	}
 

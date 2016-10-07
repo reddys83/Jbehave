@@ -3,8 +3,6 @@ package com.accuity.zeus.aft.jbehave.pages;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
-import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.OfficeIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
@@ -100,13 +98,13 @@ public class EditRoutingCodePage extends AbstractPage {
 
     }
 
-	public void verifyResisterFeeAndRoutingCodeComment(String registarFeeSFDCSubscription, String routingCodeComment) {
+	public void verifyRegistrarFeeAndRoutingCodeComment(String registrarFeeSFDCSubscription, String routingCodeComment) {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		assertEquals(registarFeeSFDCSubscription,
+		assertEquals(registrarFeeSFDCSubscription,
 				getDriver()
 						.findElement(RoutingCodeIdentifiers
 								.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath"))
@@ -179,7 +177,7 @@ public class EditRoutingCodePage extends AbstractPage {
 	}
 
 	public void verifyMaximumTextInRegisterFeeSubscription() {
-		assertEquals(bigString,
+		assertEquals(bigString.subSequence(0, 30),
 				getDriver()
 						.findElement(RoutingCodeIdentifiers
 								.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath"))
@@ -213,7 +211,7 @@ public class EditRoutingCodePage extends AbstractPage {
 	}
 
 	public void verifyMaximumTextInRoutingCodeComment() {
-		assertEquals(bigString,
+		assertEquals(bigString.subSequence(0, 1000),
 				getDriver().findElement(RoutingCodeIdentifiers
 						.getObjectIdentifier("edit_routingcode_routingCodeComment_afterSave_xpath")).getText());
 	}
