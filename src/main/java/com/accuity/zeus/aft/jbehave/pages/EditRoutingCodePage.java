@@ -23,10 +23,7 @@ public class EditRoutingCodePage extends AbstractPage {
 
     private String office_results_card_xpath = "//*[@id='results']//tr[td='";
     private By office_personnel_link_id = By.id("officePersonnel");
-    public static String registerFeeSubscriptionMaxCharacter = null;   
-    public static String routingCodeCommentMaxCharacter = null;
-
-
+   
     public EditRoutingCodePage(WebDriver driver, String urlPrefix, Database database, ApacheHttpClient apacheHttpClient, RestClient restClient, HeraApi heraApi) {
        super(driver, urlPrefix, database, apacheHttpClient, restClient, heraApi);
     }
@@ -103,116 +100,134 @@ public class EditRoutingCodePage extends AbstractPage {
 
     }
 
-    public void clearAndEnterValue(By webElement, String value) {
-		getDriver().findElement(webElement).clear();
-		getDriver().findElement(webElement).sendKeys(value);
-	}
-    
-    public void enterTextInRegistarFeeSFDCSubscription(String registarFeeSFDCSubscriptionText) {
-		clearAndEnterValue(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_RegistrarFeeSFDCSubscription"), registarFeeSFDCSubscriptionText);
-	}
-
-    public void enterTextInRoutingCodeComment(String routingCodeComment) {
-		clearAndEnterValue(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_text_xpath"), routingCodeComment);
-	}
-    
-    public void verifyResisterFeeAndRoutingCodeComment(String registarFeeSFDCSubscription,String routingCodeComment) {
+	public void verifyResisterFeeAndRoutingCodeComment(String registarFeeSFDCSubscription, String routingCodeComment) {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		assertEquals(registarFeeSFDCSubscription, getDriver()
-				.findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath")).getText());
-		assertEquals(routingCodeComment, getDriver()
-				.findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_afterSave_xpath")).getText());
-	
-    }
-    
-    public String getRegisterFeeAndRoutingCodeFromDB(String source, String routingCode, String codeType) {
-		 String tagValue = null;
-			try {
-				List<NameValuePair> nvPairs = new ArrayList<>();
-				nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
-				nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
-				nvPairs.add(new BasicNameValuePair("source", source));
-				Thread.sleep(2000L);
-				Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-						"get routingCode basic info", nvPairs);
-				if (document != null) {
-					String routingCodeRegisterFeeTagValue = getNodeValuesByTagName(document, "routingcodeRegistrarFeeSFDCSubscription").size() == 0 ? ""
-							: getNodeValuesByTagName(document, "routingcodeRegistrarFeeSFDCSubscription").get(0);
-					String routingCodeCommentTagValue = getNodeValuesByTagName(document, "routingcodeComment").size() == 0 ? ""
-							: getNodeValuesByTagName(document, "routingcodeComment").get(0);
-					tagValue = routingCodeRegisterFeeTagValue + " " + routingCodeCommentTagValue;
-				}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			return tagValue;
-	 }
-    
-    public void verifyRegisterFeeAndRoutingCodeFromZeusDB(String source, String routingCode, String codeType) {
-		 String registarFeeSFDCSubscriptionInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath")).getText();
-		 String routingCodeCommentInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_afterSave_xpath")).getText();
-		 String ResisterFeeAndRoutingCodeCommentInUI = registarFeeSFDCSubscriptionInUI + " " + routingCodeCommentInUI;
-		 assertEquals(ResisterFeeAndRoutingCodeCommentInUI, getRegisterFeeAndRoutingCodeFromDB(source, routingCode, codeType));
-	 }
-    
-    public void enterInvalidCharactersInRegisterFeeSubscription() {
-		String registerFeeSubscription = createBigString(10000);
-		clearAndEnterValue(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_RegistrarFeeSFDCSubscription"), registerFeeSubscription);
-		registerFeeSubscriptionMaxCharacter = registerFeeSubscription;
+		assertEquals(registarFeeSFDCSubscription,
+				getDriver()
+						.findElement(RoutingCodeIdentifiers
+								.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath"))
+						.getText());
+		assertEquals(routingCodeComment, getDriver().findElement(
+				RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_afterSave_xpath"))
+				.getText());
+
 	}
-    
-    public void verifyMaxLengthRegisterFeeSubscription(String maxLength) {
-		assertEquals(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_RegistrarFeeSFDCSubscription"))
+
+	public String getRegisterFeeAndRoutingCodeFromDB(String source, String routingCode, String codeType) {
+		String tagValue = null;
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(2000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get routingCode basic info", nvPairs);
+			if (document != null) {
+				String routingCodeRegisterFeeTagValue = getNodeValuesByTagName(document,
+						"routingcodeRegistrarFeeSFDCSubscription").size() == 0 ? ""
+								: getNodeValuesByTagName(document, "routingcodeRegistrarFeeSFDCSubscription").get(0);
+				String routingCodeCommentTagValue = getNodeValuesByTagName(document, "routingcodeComment").size() == 0
+						? "" : getNodeValuesByTagName(document, "routingcodeComment").get(0);
+				tagValue = routingCodeRegisterFeeTagValue + " " + routingCodeCommentTagValue;
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return tagValue;
+	}
+
+	public void verifyRegisterFeeAndRoutingCodeFromZeusDB(String source, String routingCode, String codeType) {
+		String registarFeeSFDCSubscriptionInUI = getDriver().findElement(RoutingCodeIdentifiers
+				.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath")).getText();
+		String routingCodeCommentInUI = getDriver().findElement(
+				RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_afterSave_xpath"))
+				.getText();
+		String ResisterFeeAndRoutingCodeCommentInUI = registarFeeSFDCSubscriptionInUI + " " + routingCodeCommentInUI;
+		assertEquals(ResisterFeeAndRoutingCodeCommentInUI,
+				getRegisterFeeAndRoutingCodeFromDB(source, routingCode, codeType));
+	}
+
+	public void enterMaxCharactersInRegisterFeeSubscription() {
+		createBigString(30);
+		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_RegistrarFeeSFDCSubscription"), bigString, 1);
+	}
+
+	public void verifyMaxLengthRegisterFeeSubscription(String maxLength) {
+		assertEquals(getDriver()
+				.findElement(RoutingCodeIdentifiers
+						.getObjectIdentifier("edit_routingcode_page_RegistrarFeeSFDCSubscription"))
 				.getAttribute("maxlength"), maxLength);
 	}
 
-    public void verifyValidCharacterLengthRegisterFeeSubscription() {
+	public void verifyValidCharacterLengthRegisterFeeSubscription() {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
-		Integer registerFeeSubscriptionLength = getDriver().findElement(RoutingCodeIdentifiers
-				.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath")).getText().length();
+		Integer registerFeeSubscriptionLength = getDriver()
+				.findElement(RoutingCodeIdentifiers
+						.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath"))
+				.getText().length();
 		assertEquals(registerFeeSubscriptionLength.toString(), "30");
 	}
-    
-    public void verifyMaximumTextInRegisterFeeSubscription() {
-		assertEquals(registerFeeSubscriptionMaxCharacter.subSequence(0, 30), getDriver()
-				.findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath")).getText());
+
+	public void verifyMaximumTextInRegisterFeeSubscription() {
+		assertEquals(bigString,
+				getDriver()
+						.findElement(RoutingCodeIdentifiers
+								.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath"))
+						.getText());
 	}
-    
-    public void enterInvalidCharactersInRoutingCodeComment() {
-		String routingCodeComment = createBigString(10000);
-		clearAndEnterValue(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_text_xpath"), routingCodeComment);
-		routingCodeCommentMaxCharacter = routingCodeComment;
+
+	public void enterMaxCharactersInRoutingCodeComment() {
+		createBigString(1000);
+		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_text_xpath"), bigString, 1);
+		
 	}
-    
-    public void verifyMaxLengthRoutingCodeComment(String maxLength) {
-		assertEquals(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_text_xpath"))
+
+	public void verifyMaxLengthRoutingCodeComment(String maxLength) {
+		assertEquals(getDriver()
+				.findElement(
+						RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_text_xpath"))
 				.getAttribute("maxlength"), maxLength);
 	}
-    
-    public void verifyValidCharacterLengthRoutingCodeComment() {
+
+	public void verifyValidCharacterLengthRoutingCodeComment() {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
-		Integer routingCodeCommentLength = getDriver().findElement(RoutingCodeIdentifiers
-				.getObjectIdentifier("edit_routingcode_routingCodeComment_afterSave_xpath")).getText().length();
+		Integer routingCodeCommentLength = getDriver().findElement(
+				RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_afterSave_xpath"))
+				.getText().length();
 		assertEquals(routingCodeCommentLength.toString(), "1000");
 	}
-    
-    public void verifyMaximumTextInRoutingCodeComment() {
-		assertEquals(routingCodeCommentMaxCharacter.subSequence(0, 1000), getDriver()
-				.findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_afterSave_xpath")).getText());
+
+	public void verifyMaximumTextInRoutingCodeComment() {
+		assertEquals(bigString,
+				getDriver().findElement(RoutingCodeIdentifiers
+						.getObjectIdentifier("edit_routingcode_routingCodeComment_afterSave_xpath")).getText());
+	}
+	
+	public void verifyRegisterFeeAndRoutingCodeFromTrustedDB(String source, String routingCode, String codeType) {
+		String registarFeeSFDCSubscriptionInUI = getDriver().findElement(RoutingCodeIdentifiers
+				.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_text_xpath")).getAttribute("value");
+		String routingCodeCommentInUI = getDriver().findElement(
+				RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_afterSave_xpath"))
+				.getText();
+		String ResisterFeeAndRoutingCodeCommentInUI = registarFeeSFDCSubscriptionInUI + " " + routingCodeCommentInUI;
+		assertEquals(ResisterFeeAndRoutingCodeCommentInUI,
+				getRegisterFeeAndRoutingCodeFromDB(source, routingCode, codeType));
 	}
 
+	
 }
