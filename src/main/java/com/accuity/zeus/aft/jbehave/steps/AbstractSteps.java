@@ -251,5 +251,8 @@ public abstract class AbstractSteps {
 		return editAreaPage;
 	}
 	
+	public static void setEditRoutingCodePage(EditRoutingCodePage editRoutingCodePage) {
+		AbstractSteps.editRoutingCodePage = editRoutingCodePage;
+	}
 
 }

@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.pages;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
@@ -99,5 +100,60 @@ public class EditRoutingCodePage extends AbstractPage {
 
     }
 
+    public void clearAndEnterValue(By webElement, String value) {
+		getDriver().findElement(webElement).clear();
+		getDriver().findElement(webElement).sendKeys(value);
+	}
+    
+    public void enterTextInRegistarFeeSFDCSubscription(String registarFeeSFDCSubscriptionText) {
+		clearAndEnterValue(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_text_xpath"), registarFeeSFDCSubscriptionText);
+	}
+
+    public void enterTextInRoutingCodeComment(String routingCodeComment) {
+		clearAndEnterValue(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_text_xpath"), routingCodeComment);
+	}
+    
+    public void verifyResisterFeeAndRoutingCodeComment(String registarFeeSFDCSubscription,String routingCodeComment) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals(registarFeeSFDCSubscription, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath")).getText());
+		assertEquals(routingCodeComment, getDriver()
+				.findElement(AreaIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_afterSave_xpath")).getText());
+	
+    }
+    
+    public String getRegisterFeeAndRoutingCodeFromDB(String source, String routingCode, String codeType) {
+		 String tagValue = null;
+			try {
+				List<NameValuePair> nvPairs = new ArrayList<>();
+				nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+				nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+				nvPairs.add(new BasicNameValuePair("source", source));
+				Thread.sleep(2000L);
+				Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+						"get routingCode basic info", nvPairs);
+				if (document != null) {
+					String routingCodeRegisterFeeTagValue = getNodeValuesByTagName(document, "routingcodeRegistrarFeeSFDCSubscription").size() == 0 ? ""
+							: getNodeValuesByTagName(document, "routingcodeComment").get(0);
+					String routingCodeCommentTagValue = getNodeValuesByTagName(document, "routingcodeInternalUseOnly").size() == 0 ? ""
+							: getNodeValuesByTagName(document, "routingcodeInternalUseOnly").get(0);
+					tagValue = routingCodeRegisterFeeTagValue + " " + routingCodeCommentTagValue;
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return tagValue;
+	 }
+    
+    public void verifyRegisterFeeAndRoutingCodeFromZeusDB(String source, String routingCode, String codeType) {
+		 String registarFeeSFDCSubscriptionInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath")).getText();
+		 String routingCodeCommentInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_afterSave_xpath")).getText();
+		 String ResisterFeeAndRoutingCodeCommentInUI = registarFeeSFDCSubscriptionInUI + " " + routingCodeCommentInUI;
+		 assertEquals(ResisterFeeAndRoutingCodeCommentInUI, getRegisterFeeAndRoutingCodeFromDB(source, routingCode, codeType));
+	 }
 
 }
