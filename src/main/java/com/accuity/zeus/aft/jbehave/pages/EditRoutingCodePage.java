@@ -162,26 +162,9 @@ public class EditRoutingCodePage extends AbstractPage {
 				.getAttribute("maxlength"), maxLength);
 	}
 
-	public void verifyValidCharacterLengthRegisterFeeSubscription() {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		Integer registerFeeSubscriptionLength = getDriver()
-				.findElement(RoutingCodeIdentifiers
-						.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath"))
-				.getText().length();
-		assertEquals(registerFeeSubscriptionLength.toString(), "30");
-	}
-
 	public void verifyMaximumTextInRegisterFeeSubscription() {
 		assertEquals(bigString.subSequence(0, 30),
-				getDriver()
-						.findElement(RoutingCodeIdentifiers
-								.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath"))
-						.getText());
+				getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath")).getText());
 	}
 
 	public void enterMaxCharactersInRoutingCodeComment() {
@@ -196,20 +179,7 @@ public class EditRoutingCodePage extends AbstractPage {
 						RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_text_xpath"))
 				.getAttribute("maxlength"), maxLength);
 	}
-
-	public void verifyValidCharacterLengthRoutingCodeComment() {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		Integer routingCodeCommentLength = getDriver().findElement(
-				RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_afterSave_xpath"))
-				.getText().length();
-		assertEquals(routingCodeCommentLength.toString(), "1000");
-	}
-
+	
 	public void verifyMaximumTextInRoutingCodeComment() {
 		assertEquals(bigString.subSequence(0, 1000),
 				getDriver().findElement(RoutingCodeIdentifiers

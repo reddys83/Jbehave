@@ -74,7 +74,7 @@ Examples:
 |entity|searchBy|routingCode|codeType|registarFeeSFDCSubscription|routingCodeComment|
 |083905216|Routing Code|083905216|ABA|408123|Sample Text|
 
-Scenario: Verify whether User can update blank values for  'Registrar Fee SFDC Subscription Number' & 'Routing Code Comment' and successfully in routing code page
+Scenario: Verify whether User can update blank values/special characters for 'Registrar Fee SFDC Subscription Number' & 'Routing Code Comment'
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -119,8 +119,6 @@ Then the user should see maximum length of Registar Fee subscription field is li
 Then the user should see maximum length of Routing Code Comment field is limited to 1000
 When the user clicks on the save button
 And the user clicks on the confirm button
-Then the user should be able to view that only 30 unicode characters are saved in Registar Fee subscription field
-Then the user should be able to view that only 1000 unicode characters are saved in Routing Code Comment field
 Then the user should be able to verify the maximum values are entered in Registar Fee subscription field
 Then the user should be able to verify the maximum values are entered in Routing Code Comment field
 Then the user reverts the changes to the document

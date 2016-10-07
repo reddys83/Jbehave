@@ -75,11 +75,6 @@ public class EditRoutingCodeSteps extends AbstractSteps {
 		getEditRoutingCodePage().verifyMaxLengthRegisterFeeSubscription(maxLength);
 	}
 
-	@Then("the user should be able to view that only 30 unicode characters are saved in Registar Fee subscription field")
-	public void verifyValidCharacterLengthRegisterFeeSubscription() {
-		getEditRoutingCodePage().verifyValidCharacterLengthRegisterFeeSubscription();
-	}
-
 	@Then("the user should be able to verify the maximum values are entered in Registar Fee subscription field")
 	public void verifyMaximumTextInRegisterFeeSubscription() {
 		getEditRoutingCodePage().verifyMaximumTextInRegisterFeeSubscription();
@@ -93,11 +88,6 @@ public class EditRoutingCodeSteps extends AbstractSteps {
 	@Then("the user should see maximum length of Routing Code Comment field is limited to $maxLength")
 	public void verifyMaxLengthRoutingCodeComment(@Named("maxLength") String maxLength) {
 		getEditRoutingCodePage().verifyMaxLengthRoutingCodeComment(maxLength);
-	}
-
-	@Then("the user should be able to view that only 1000 unicode characters are saved in Routing Code Comment field")
-	public void verifyValidCharacterLengthRoutingCodeComment() {
-		getEditRoutingCodePage().verifyValidCharacterLengthRoutingCodeComment();
 	}
 
 	@Then("the user should be able to verify the maximum values are entered in Routing Code Comment field")
