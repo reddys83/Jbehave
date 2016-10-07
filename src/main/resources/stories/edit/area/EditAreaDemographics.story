@@ -41,7 +41,7 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|demographicType|demographicValue|unitValue|day|month|year|
-|Angola|Bengo|Area|12345|km²|12|Jun|2011|
+|Angola|Bengo|Area|12345|kmï¿½|12|Jun|2011|
 
 Scenario: The metric unit type is null, then unit drop-down for that row should get displayed
 1- demographics type other than Area should not display the unit drop down
@@ -114,6 +114,14 @@ And the user enters the area <area> in the type-ahead box
 And the user clicks on the area's demographics link in the navigation bar
 And the user clicks on the area update link
 When the user gets the document with get document id for area with the <area> from the database
+When the user deletes the existing area demographics rows
+When the user clicks on the add new demographics button in the country basic info page
+When the user selects the demographic types <demographicType> in the area page
+When the user enters the demographic value <demographicValue> in the area page
+When the user enter demographics date <day> <month> <year> in the demographics row 1 in area page
+And the user clicks on the save button
+When the user clicks on the confirm button
+And the user clicks on the area update link
 When the user selects the demographic types <demographicType> in the area page
 When the user enters the demographic value <demographicValue> in the area page
 And the user enter demographics day <day> in the demographics area page
@@ -131,6 +139,7 @@ Then the user reverts the changes to the document
 Examples:
 |country|area|demographicType|demographicValue|unitValue|day|month|year|
 |Angola|Cabinda|Population|124||12|Jun|2011|
+
 
 Scenario: User verifies appropriate error messages are displayed for invalid input 
 1 - Verify error message enter a year, month/year or day/month/year for newly added holiday

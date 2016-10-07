@@ -42,8 +42,8 @@ Then the user reverts the changes to the document
 
 Examples:
 |country|area|agency|type|value|appliedDay|appliedMonth|appliedYear|confirmedDay|confirmedMonth|confirmedYear|rowNumber|
+|USA|Alabama|Fitch|Long Term Rating|abcd|30|Jan|2015|30|Jan|2016|1|
 |USA|Alabama|Fitch|Long Term Rating|abcd|30|Jan|2015|30|Jan|2016|2|
-|USA|Alabama|Fitch|Long Term Rating|abcd|30|Jan|2015|30|Jan|2016|3|
 
 Scenario: User is updating a Area's Credit Ratings - 
 a) User adds a new row and enters blank values for all fields for Credit Ratings and verifies that the new row is not added after saving.
