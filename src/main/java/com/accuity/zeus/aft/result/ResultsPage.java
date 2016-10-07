@@ -7,12 +7,12 @@ import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 import com.accuity.zeus.aft.jbehave.pages.AbstractPage;
 import com.accuity.zeus.aft.jbehave.pages.DataPage;
 import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
-<<<<<<< HEAD
+
 import com.accuity.zeus.aft.jbehave.identifiers.ResultsIdentifiers;
 import com.accuity.zeus.aft.jbehave.pages.OfficesPage;
-=======
+
 import com.accuity.zeus.aft.jbehave.pages.RoutingCodePage;
->>>>>>> develop
+
 import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.utils.SimpleCacheManager;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;

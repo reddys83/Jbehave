@@ -50,7 +50,53 @@ public class EditRoutingCodeSteps extends AbstractSteps {
     @Then("the user should see the <registarFeeSFDCSubscription> and <routingCodeComment> field values same as in $source document")
     public void verifyResisterFeeAndRoutingCodeCommentZeusDB(@Named("source") String source, @Named("routingCode") String routingCode, @Named("codeType") String codeType) {
     	getEditRoutingCodePage().verifyRegisterFeeAndRoutingCodeFromZeusDB(source, routingCode, codeType);
-    }    
+    }
+    
+    @When("the user gets the document with $xqueryName with the <routingCode> and <codeType> from the database")
+    public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("routingCode") String routingCode, @Named("codeType") String codeType) {
+		getDataPage().getDocumentForRoutingCode(xqueryName, routingCode, codeType);
+	}
+    
+    @When("the user enters values which is beyond 30 unicode characters in Registar Fee subscription field")
+	public void enterInvalidCharactersInRegisterFeeSubscription() {
+    	getEditRoutingCodePage().enterInvalidCharactersInRegisterFeeSubscription();
+	}
+    
+    @Then("the user should see maximum length of Registar Fee subscription field is limited to $maxLength")
+	public void verifyMaxLengthRegisterFeeSubscription(@Named("maxLength") String maxLength) {
+    	getEditRoutingCodePage().verifyMaxLengthRegisterFeeSubscription(maxLength);
+	}
+    
+    @Then("the user should be able to view that only 30 unicode characters are saved in Registar Fee subscription field")
+	public void verifyValidCharacterLengthRegisterFeeSubscription() {
+    	getEditRoutingCodePage().verifyValidCharacterLengthRegisterFeeSubscription();
+	}
+	
+    @Then("the user should be able to verify the maximum values are entered in Registar Fee subscription field")
+	public void verifyMaximumTextInRegisterFeeSubscription() {
+    	getEditRoutingCodePage().verifyMaximumTextInRegisterFeeSubscription();
+	}
+    
+    @When("the user enters values which is beyond 1000 unicode characters in Routing Code Comment field")
+	public void enterInvalidCharactersInRoutingCodeComment() {
+    	getEditRoutingCodePage().enterInvalidCharactersInRoutingCodeComment();
+	}
+    
+    @Then("the user should see maximum length of Routing Code Comment field is limited to $maxLength")
+	public void verifyMaxLengthRoutingCodeComment(@Named("maxLength") String maxLength) {
+    	getEditRoutingCodePage().verifyMaxLengthRoutingCodeComment(maxLength);
+	}
+    
+    @Then("the user should be able to view that only 1000 unicode characters are saved in Routing Code Comment field")
+	public void verifyValidCharacterLengthRoutingCodeComment() {
+    	getEditRoutingCodePage().verifyValidCharacterLengthRoutingCodeComment();
+	}
+    
+    @Then("the user should be able to verify the maximum values are entered in Routing Code Comment field")
+	public void verifyMaximumTextInRoutingCodeComment() {
+    	getEditRoutingCodePage().verifyMaximumTextInRoutingCodeComment();
+	}
+	
 }
 
 

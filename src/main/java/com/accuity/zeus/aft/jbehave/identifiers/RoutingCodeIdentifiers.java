@@ -57,8 +57,8 @@ public class RoutingCodeIdentifiers {
         hmap.put("edit_routingcode_page_ConfirmedWithFedDateMonth",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Confirmed with Fed']/td/select[@name='confirmedDate-month']"));
         hmap.put("edit_routingcode_page_ConfirmedWithFedDateYear",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Confirmed with Fed']/td/input[@name='confirmedDate-year']"));
         hmap.put("edit_routingcode_page_RegistrarFeeSFDCSubscription",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Registrar Fee SFDC Subscription']//input"));
-        hmap.put("edit_routingcode_page_RoutingCodeComment",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']//input"));
-        hmap.put("edit_routingcode_registarFeeSFDCSubscription_text_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//textarea[@name='subscriptionNumber']")));  
+        //hmap.put("edit_routingcode_page_RoutingCodeComment",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']//input"));
+        //hmap.put("edit_routingcode_registarFeeSFDCSubscription_text_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//text[@name='subscriptionNumber']")));  
         hmap.put("edit_routingcode_routingCodeComment_text_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//textarea[@name='routingCodeComment']")));
         hmap.put("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Registrar Fee SFDC Subscription']/td")));  
         hmap.put("edit_routingcode_routingCodeComment_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']/td")));
