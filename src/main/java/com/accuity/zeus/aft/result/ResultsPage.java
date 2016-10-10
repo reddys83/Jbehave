@@ -8,9 +8,12 @@ import com.accuity.zeus.aft.jbehave.pages.AbstractPage;
 import com.accuity.zeus.aft.jbehave.pages.DataPage;
 import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 import com.accuity.zeus.aft.jbehave.identifiers.ResultsIdentifiers;
+import com.accuity.zeus.aft.jbehave.pages.OfficesPage;
 import com.accuity.zeus.aft.jbehave.pages.RoutingCodePage;
 import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.utils.SimpleCacheManager;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import junit.framework.Assert;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -20,10 +23,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.w3c.dom.Document;
+
+import javax.xml.crypto.Data;
 import java.util.*;
+
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
+import com.accuity.zeus.aft.io.ApacheHttpClient;
+import com.accuity.zeus.aft.io.Database;
 
 
 public class ResultsPage extends AbstractPage {

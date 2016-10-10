@@ -43,10 +43,10 @@ public class RoutingCodePage extends AbstractPage {
         assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_label")).getText().equals("BASIC INFO"));
     }
 
-    public void verifyRoutingCodeBasicInfoValuesFromTrustedDoc(String source,String routingCode, String codeType) {
+    public void verifyRoutingCodeBasicInfoValuesFromTrustedDoc(String routingCode, String codeType) {
 
         List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("source", source));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
         nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
         nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);
@@ -124,6 +124,16 @@ public class RoutingCodePage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public EditRoutingCodePage createEditRoutingCodePage() {
+        EditRoutingCodePage ERP=null;
+        try {
+            ERP= new EditRoutingCodePage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+        }
+        catch(Exception e)
+        {e.printStackTrace();}
+        return ERP;
     }
 
     public void clickonPaymentSystems()

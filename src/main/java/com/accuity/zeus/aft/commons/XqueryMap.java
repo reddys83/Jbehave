@@ -149,6 +149,9 @@ public class XqueryMap {
         queryMap.put("get routingCode basic info","getRoutingCodeBasicInfo.xqy");
 		queryMap.put("get office telecom locations", "getOfficeTelecomLocations.xqy");
 		queryMap.put("delete office locations values", "deleteOfficeLocationsValues.xqy");
+		queryMap.put("get area entity type lookup","getAreaRelatedEntityTypeFromLookup.xqy");
+		queryMap.put("get area entity detail lookup", "getAreaRelatedEntityDetailsFromLookup.xqy");
+		queryMap.put("get area entity details", "getAreaRelatedEntityDetails.xqy");
         queryMap.put("get routingCode payment systems info","getRoutingCodePaymentSystems.xqy");
    }
 

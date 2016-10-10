@@ -4,11 +4,12 @@ Narrative:
 In order to view and edit the office
 As a user
 I want to cover the requirements mentioned in
-JIRA ID - ZEUS-1134 - User can view Routing Code Basic Info
+JIRA ID - ZEUS-1136 - User can view Routing Code Payment Systems
 
-Scenario: Verify the basic info for a routing code of type ABA
-Verify the headers and the legal entity link on the header
-
+Scenario: Verify the payment systems view for different types of routing codes
+a) ABA
+b) SWIFT BIC
+C) SWIFT BIC (ZEUS-1610) - Unable to view one of the Routing code 01056)
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown

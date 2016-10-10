@@ -45,6 +45,7 @@ Examples:
 |USA|Illinois|Cook|
 
 Scenario: Verify no related entities for area.
+Meta:@test8990
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the area tab in the data area

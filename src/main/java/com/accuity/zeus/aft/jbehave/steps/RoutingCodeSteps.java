@@ -24,10 +24,10 @@ public class RoutingCodeSteps extends AbstractSteps {
     public void verifyRoutingCodeBasicInfoPage() {
         getRoutingCodePage().verifyRoutingCodeBasicInfoPage();
     }
-    @Then("the user should see the routing code basic info values from $source document for routing code <routingCode> with code type <codeType>")
-            public void verifyRoutingCodeBasicInfoValuesFromTrustedDoc(@Named("source") String source,@Named("routingCode") String routingCode,@Named("codeType") String codeType){
+    @Then("the user should see the routing code basic info values from trusted document for routing code <routingCode> with code type <codeType>")
+            public void verifyRoutingCodeBasicInfoValuesFromTrustedDoc(@Named("routingCode") String routingCode,@Named("codeType") String codeType){
 
-            getRoutingCodePage().verifyRoutingCodeBasicInfoValuesFromTrustedDoc(source,routingCode,codeType);
+            getRoutingCodePage().verifyRoutingCodeBasicInfoValuesFromTrustedDoc(routingCode,codeType);
     }
 
     @Then("the user should see the routing code payment system values from $source document for routing code <routingCode> with code type <codeType>")
