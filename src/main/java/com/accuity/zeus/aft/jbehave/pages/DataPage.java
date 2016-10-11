@@ -213,6 +213,7 @@ public class DataPage extends AbstractPage {
     private String area_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
     private By confirmation_modal_xpath = By.xpath("//*[@id='modal-region']");
     private By routing_code_exact_match_id = By.id("searchType-exact");
+
     static ResponseEntity responseEntity;
     static String endpointWithID;
 
@@ -1478,7 +1479,7 @@ public class DataPage extends AbstractPage {
 			assertFalse("Element not found", false);
 		}    	
 	} 
-
+	
 	public void getDocumentForRoutingCode(String xqueryName, String routingCode, String codeType) {
 		List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
