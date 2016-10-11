@@ -7,6 +7,7 @@ So that I can achieve a business goal
 JIRA ID - ZEUS-1179 - User can select to edit Routing Code's Basic Info
 JIRA ID - ZEUS-1474 - User can edit Routing Code Basic Info - Text Fields
 
+
 Scenario: Verify the routing code basic info values in edit mode for ABA and non-ABA code types
 Verify the headers and the legal entity link on the header
 Given a user is on the search page
@@ -30,7 +31,6 @@ Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
-When the user clicks on the exact match link in the routing code results page
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
 When the user clicks on the routing code update link
@@ -53,7 +53,6 @@ Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
-When the user clicks on the exact match link in the routing code results page
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
 When the user clicks on the routing code update link
@@ -80,7 +79,6 @@ Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
-When the user clicks on the exact match link in the routing code results page
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
 When the user clicks on the routing code update link
@@ -108,7 +106,6 @@ Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
-When the user clicks on the exact match link in the routing code results page
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
 When the user clicks on the routing code update link
