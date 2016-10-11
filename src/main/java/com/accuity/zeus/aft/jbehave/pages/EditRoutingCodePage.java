@@ -12,7 +12,12 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.w3c.dom.Document;
 
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -97,6 +102,20 @@ public class EditRoutingCodePage extends AbstractPage {
             assertEquals(AlternateCodeForms.get(i),getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_alternateCode_table")).get(i).findElement(By.xpath("td[2]")).getText());
         }
 
+    }
+    
+    public void enterStartDateAndConfirmedWithFedLaterThanToday() throws ParseException {
+    	Format formatter = new SimpleDateFormat("MMMM");
+		String month = formatter.format(new Date());
+		month = month.substring(0, 3);
+		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateDay"), getDayLaterThanToday(), 1);
+		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateDay"), getDayLaterThanToday(), 1);
+		
+		selectDropDownValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateMonth"), month, 1);
+		selectDropDownValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateMonth"), month, 1);
+		
+		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateYear"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), 1);
+		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateYear"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), 1);
     }
 
 
