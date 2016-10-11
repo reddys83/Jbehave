@@ -81,6 +81,7 @@ Then the user should see the error message <errorMessage> for routing code confi
 Examples:
 |entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|retirementDay|retirementMonth|retirementYear|fedDay|fedMonth|fedYear|errorMessage|
 |083905216|Routing Code|083905216|ABA|ab|Jan|20s4|0.|Jun|wxyz|df|Dec|asd|4?|Aug|qw45|Invalid Date|
+|083905216|Routing Code|083905216|ABA|6||2016|6|Jun|||Jun||6|||Enter a year, month/year or day/month/year.|
 
 Scenario: User is updating a Routing Code's Basic Info - 
 User verifies that the error message 'Invalid Date' is displayed for the Date fields(Start Date, End Date) when invalid date is entered and when code type not = 'ABA'
@@ -101,3 +102,4 @@ Then the user should see the error message <errorMessage> for routing code end d
 Examples:
 |entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|errorMessage|
 |DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|32|Jun|2015|29|Feb|2015|Invalid Date|  
+|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|6||2016|6|Jun||Enter a year, month/year or day/month/year.|

@@ -63,22 +63,22 @@ public void enterRoutingCodeConfirmedWithFedField(@Named("fedDay") String fedDay
 
 @Then("the user should see the error message <errorMessage> for routing code start date field")
 public void verifyErrorMessageForStartDateField(@Named("errorMessage") String errorMessage) {
-	getDataPage().verifyWebElementText("Routing Code Start Date", "Invalid Date", RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_StartDate_errorMessage"));
+	getDataPage().verifyWebElementText("Routing Code Start Date", errorMessage, RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_StartDate_errorMessage"));
 }
 
 @Then("the user should see the error message <errorMessage> for routing code end date field")
 public void verifyErrorMessageForEndDateField(@Named("errorMessage") String errorMessage) {
-	getDataPage().verifyWebElementText("Routing Code End Date", "Invalid Date", RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_EndDate_errorMessage"));
+	getDataPage().verifyWebElementText("Routing Code End Date", errorMessage, RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_EndDate_errorMessage"));
 }
 
 @Then("the user should see the error message <errorMessage> for routing code forthcoming retirement date field")
 public void verifyErrorMessageForRetirementDateField(@Named("errorMessage") String errorMessage) {
-	getDataPage().verifyWebElementText("Routing Code Forthcoming Retirement Date", "Invalid Date", RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ForthcomingRetirementDate_errorMessage"));
+	getDataPage().verifyWebElementText("Routing Code Forthcoming Retirement Date", errorMessage, RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ForthcomingRetirementDate_errorMessage"));
 }
 
 @Then("the user should see the error message <errorMessage> for routing code confirmed with fed field")
 public void verifyErrorMessageForConfirmedWithFedField(@Named("errorMessage") String errorMessage) {
-	getDataPage().verifyWebElementText("Routing Code Confirmed With Fed", "Invalid Date", RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDate_errorMessage"));
+	getDataPage().verifyWebElementText("Routing Code Confirmed With Fed", errorMessage, RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDate_errorMessage"));
 }
 }
 
