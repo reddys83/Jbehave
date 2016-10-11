@@ -1478,5 +1478,23 @@ public class DataPage extends AbstractPage {
 			assertFalse("Element not found", false);
 		}    	
 	} 
+	
+public void getDocumentForRoutingCode(String xqueryName, String routingCode, String codeType) {
+		
+		List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+        nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
 
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
+        if(document != null) {
+	        endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
+
+	        responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
+	        assertTrue(responseEntity.getStatusCode().value() == 200);
+	    }
+	    else {
+            assertFalse("Zeus document with Routing Code " + routingCode + " and Routing Code Type " + codeType + " does not exist in the DB", true);
+	    }
+    }	
 }
