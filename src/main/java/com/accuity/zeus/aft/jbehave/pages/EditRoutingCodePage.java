@@ -8,7 +8,6 @@ import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.w3c.dom.Document;
 
@@ -104,7 +103,7 @@ public class EditRoutingCodePage extends AbstractPage {
 
     }
     
-    public void enterStartDateAndConfirmedWithFedLaterThanToday() throws ParseException {
+    public void enterFutureDateForStartDateAndConfirmedDate() throws ParseException {
     	Format formatter = new SimpleDateFormat("MMMM");
 		String month = formatter.format(new Date());
 		month = month.substring(0, 3);
@@ -118,5 +117,41 @@ public class EditRoutingCodePage extends AbstractPage {
 		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateYear"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), 1);
     }
 
+	public void verifyUpdatedDateFieldsInDB(String routingCode, String codeType, String startDate, String endDate, String forthcomingRetirementDate, String confirmedWithFedDate, String source) {
+		try {
+			Thread.sleep(1000L);
+			List<NameValuePair> nvPairs = new ArrayList<>();
+	        nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+	        nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+	        nvPairs.add(new BasicNameValuePair("source", source));	        
+	        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);			
+			String startDateDB=getNodeValuesByTagName(document, "StartDate").size() == 0 ? "" : getNodeValuesByTagName(document, "StartDate").get(0);
+	        String endDateDB=getNodeValuesByTagName(document, "EndDate").size() == 0 ? "" : getNodeValuesByTagName(document, "EndDate").get(0);
+	        String forthcomingRetirementDateDB=getNodeValuesByTagName(document, "ForthcomingRetirementDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ForthcomingRetirementDate").get(0);
+	        String confirmedwithFedDB=getNodeValuesByTagName(document, "ConfirmedWithFedDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ConfirmedWithFedDate").get(0);	        
+	        assertEquals(startDate, startDateDB);
+	        assertEquals(endDate, endDateDB);
+	        assertEquals(forthcomingRetirementDate, forthcomingRetirementDateDB);
+	        assertEquals(confirmedWithFedDate, confirmedwithFedDB);	        
+					
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyUpdatedDateFieldsInUI(String codeType, String startDate, String endDate, String forthcomingRetirementDate, String confirmedWithFedDate) {
+		try {
+			 Thread.sleep(1000L);
+			 if(codeType.equals("ABA")) {
+				 assertEquals(forthcomingRetirementDate,getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ForthcomingRetirementDate")).getText());
+		         assertEquals(confirmedWithFedDate,getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ConfirmedwithFed")).getText());							 
+			 }
+			 assertEquals(startDate,getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_StartDate")).getText());
+		     assertEquals(endDate,getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_EndDate")).getText());		     
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

@@ -84,8 +84,8 @@ public class EditRoutingCodeSteps extends AbstractSteps {
     }
     
     @When("the user enters start date and confirmed with fed later than today")
-    public void enterStartDateAndConfirmedWithFedLaterThanToday() throws ParseException {
-    	getEditRoutingCodePage().enterStartDateAndConfirmedWithFedLaterThanToday();
+    public void enterFutureDateForStartDateAndConfirmedDate() throws ParseException {
+    	getEditRoutingCodePage().enterFutureDateForStartDateAndConfirmedDate();
     }
     
     @Then("the user should see that forthcoming retirement date and confirmed with fed fields does not exist")
@@ -93,6 +93,42 @@ public class EditRoutingCodeSteps extends AbstractSteps {
     	getDataPage().verifyElementNotExistInUI(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ForthcomingRetirementDate"));
     	getDataPage().verifyElementNotExistInUI(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ConfirmedwithFed"));
     }
+
+	@Then("the user should see the date field values same as in $source document")
+	public void verifyUpdatedDateFieldsInDB(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("startDateDay") String startDateDay, 
+			@Named("startDateMonth") String startDateMonth, @Named("startDateYear") String startDateYear, @Named("endDateDay") String endDateDay, @Named("endDateMonth") 
+	        String endDateMonth, @Named("endDateYear") String endDateYear, @Named("retirementDay") String retirementDay, @Named("retirementMonth") String retirementMonth, 
+	        @Named("retirementYear") String retirementYear, @Named("fedDay") String fedDay, @Named("fedMonth") String fedMonth, @Named("fedYear")
+	        String fedYear, @Named("source") String source) {
+		String startDateDB = startDateDay + startDateMonth + startDateYear;
+        String endDateDB = endDateDay + endDateMonth + endDateYear;
+        String forthcomingRetirementDateDB = retirementDay + retirementMonth + retirementYear;
+        String confirmedwithFedDB=fedDay + fedMonth + fedYear;
+        getEditRoutingCodePage().verifyUpdatedDateFieldsInDB(routingCode, codeType, startDateDB, endDateDB, forthcomingRetirementDateDB, confirmedwithFedDB, source);
+	}
+	
+	@Then("the user should see the updated date field values in routing code basic info page")
+	public void verifyUpdatedDateFieldsInUI(@Named("codeType") String codeType, @Named("startDateDay") String startDateDay, 
+			@Named("startDateMonth") String startDateMonth, @Named("startDateYear") String startDateYear, @Named("endDateDay") String endDateDay, @Named("endDateMonth") 
+		    String endDateMonth, @Named("endDateYear") String endDateYear, @Named("retirementDay") String retirementDay, @Named("retirementMonth") String retirementMonth, 
+		    @Named("retirementYear") String retirementYear, @Named("fedDay") String fedDay, @Named("fedMonth") String fedMonth, @Named("fedYear")
+		    String fedYear) {
+		String startDateDB = startDateDay + startDateMonth + startDateYear;
+		String endDateDB = endDateDay + endDateMonth + endDateYear;
+		String forthcomingRetirementDateDB = retirementDay + retirementMonth + retirementYear;
+		String confirmedwithFedDB=fedDay + fedMonth + fedYear;
+		getEditRoutingCodePage().verifyUpdatedDateFieldsInUI(codeType, startDateDB, endDateDB, forthcomingRetirementDateDB, confirmedwithFedDB);
+	}
+	
+	@Then("the user should see the updated date field values in routing code basic info page for non ABA code type")
+	public void verifyUpdatedDateFieldsInUIForNonABA(@Named("codeType") String codeType, @Named("startDateDay") String startDateDay, 
+			@Named("startDateMonth") String startDateMonth, @Named("startDateYear") String startDateYear, @Named("endDateDay") String endDateDay, @Named("endDateMonth") 
+		    String endDateMonth, @Named("endDateYear") String endDateYear) {
+		String startDateDB = startDateDay + startDateMonth + startDateYear;
+		String endDateDB = endDateDay + endDateMonth + endDateYear;		
+		getEditRoutingCodePage().verifyUpdatedDateFieldsInUI(codeType, startDateDB, endDateDB, null, null);
+	}
+	
 }
 
 
