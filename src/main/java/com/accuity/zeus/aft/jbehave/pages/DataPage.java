@@ -1481,7 +1481,6 @@ public class DataPage extends AbstractPage {
 	}
 	
 	public void getDocumentForRoutingCode(String xqueryName, String routingCode, String codeType) {
-
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
         nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
