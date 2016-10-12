@@ -138,9 +138,9 @@ When the user enters the <entity> in the typeahead
 And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
+When the user changes the status for routing code <routingCode> and code type <codeType> to pending
 When the user clicks on the routing code update link
-When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
-!-- Then the user should see the edit routing code values from trusted document for routing code <routingCode> with code type <codeType>
+Then the user should see the edit routing code date field values from trusted document for routing code <routingCode> with code type <codeType>
 When the user enters <startDateDay> <startDateMonth> <startDateYear> for routing code start date field
 When the user enters <endDateDay> <endDateMonth> <endDateYear> for routing code end date field
 When the user enters <retirementDay> <retirementMonth> <retirementYear> for routing code forthcoming retirement date field
@@ -153,12 +153,12 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the updated date field values in routing code basic info page
 Then the user should see the date field values same as in zeus document
-Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|retirementDay|retirementMonth|retirementYear|fedDay|fedMonth|fedYear|
 |083905216|Routing Code|083905216|ABA|||||||||||||
 |083905216|Routing Code|083905216|ABA|1|Jan|2016|12|Dec|2016|12|Dec|2050|26|Jan|2016|
+
 
 Scenario: User is updating a Routing Code's Date fields(Start Date, End Date, Forthcoming Retirement Date, Confirmed with Fed) 
 a) User verifies that the error message 'Invalid Date' is displayed when invalid date is entered with code type = 'ABA'    
@@ -282,4 +282,5 @@ Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|
+|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|||||||
 |DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|1|Jan|2017|12|Dec|2017|

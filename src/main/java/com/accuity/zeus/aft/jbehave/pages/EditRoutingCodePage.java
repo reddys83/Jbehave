@@ -40,6 +40,7 @@ public class EditRoutingCodePage extends AbstractPage {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
         nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);
         try {
             Thread.sleep(5000L);
@@ -227,11 +228,13 @@ public class EditRoutingCodePage extends AbstractPage {
 			String startDateDB=getNodeValuesByTagName(document, "StartDate").size() == 0 ? "" : getNodeValuesByTagName(document, "StartDate").get(0);
 	        String endDateDB=getNodeValuesByTagName(document, "EndDate").size() == 0 ? "" : getNodeValuesByTagName(document, "EndDate").get(0);
 	        String forthcomingRetirementDateDB=getNodeValuesByTagName(document, "ForthcomingRetirementDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ForthcomingRetirementDate").get(0);
-	        String confirmedwithFedDB=getNodeValuesByTagName(document, "ConfirmedWithFedDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ConfirmedWithFedDate").get(0);	        
-	        assertEquals(startDate, startDateDB);
-	        assertEquals(endDate, endDateDB);
-	        assertEquals(forthcomingRetirementDate, forthcomingRetirementDateDB);
-	        assertEquals(confirmedWithFedDate, confirmedwithFedDB);	        
+	        String confirmedwithFedDB=getNodeValuesByTagName(document, "ConfirmedWithFedDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ConfirmedWithFedDate").get(0);
+	        if(codeType.equals("ABA")) {
+	        	assertEquals(forthcomingRetirementDate.trim(), forthcomingRetirementDateDB.replaceFirst("^0", ""));
+		        assertEquals(confirmedWithFedDate.trim(), confirmedwithFedDB.replaceFirst("^0", ""));	
+	        }
+	        assertEquals(startDate.trim(), startDateDB.replaceFirst("^0", ""));
+	        assertEquals(endDate.trim(), endDateDB.replaceFirst("^0", ""));	                
 					
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -242,13 +245,48 @@ public class EditRoutingCodePage extends AbstractPage {
 		try {
 			 Thread.sleep(1000L);
 			 if(codeType.equals("ABA")) {
-				 assertEquals(forthcomingRetirementDate,getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ForthcomingRetirementDate")).getText());
-		         assertEquals(confirmedWithFedDate,getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ConfirmedwithFed")).getText());							 
+				 assertEquals(forthcomingRetirementDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ForthcomingRetirementDate")).getText().replaceFirst("^0", ""));
+		         assertEquals(confirmedWithFedDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ConfirmedwithFed")).getText().replaceFirst("^0", ""));							 
 			 }
-			 assertEquals(startDate,getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_StartDate")).getText());
-		     assertEquals(endDate,getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_EndDate")).getText());		     
+			 assertEquals(startDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_StartDate")).getText().replaceFirst("^0", ""));
+		     assertEquals(endDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_EndDate")).getText().replaceFirst("^0", ""));		     
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}	
+	
+	public void changeRoutingCodeStatus(String routingCode, String codeType, String status) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+		nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+		nvPairs.add(new BasicNameValuePair("status", status));
+		apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "change routing code status",
+				nvPairs);
+	}
+	
+	public void verifyEditRoutingCodeDateFieldsValuesFromTrusted(String routingCode, String codeType, String source) {
+		try {
+			Thread.sleep(1000L);
+		 	List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+			nvPairs.add(new BasicNameValuePair("source", source));	        
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);			
+			String startDateDB=getNodeValuesByTagName(document, "StartDate").size() == 0 ? "" : getNodeValuesByTagName(document, "StartDate").get(0);
+			String endDateDB=getNodeValuesByTagName(document, "EndDate").size() == 0 ? "" : getNodeValuesByTagName(document, "EndDate").get(0);
+			String forthcomingRetirementDateDB=getNodeValuesByTagName(document, "ForthcomingRetirementDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ForthcomingRetirementDate").get(0);
+			String confirmedwithFedDB=getNodeValuesByTagName(document, "ConfirmedWithFedDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ConfirmedWithFedDate").get(0);
+			if(codeType.equals("ABA")) {
+				assertEquals(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ForthcomingRetirementDate")).getText().replaceFirst("^0", "").trim(), forthcomingRetirementDateDB.replaceFirst("^0", ""));
+				assertEquals(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ConfirmedwithFed")).getText().replaceFirst("^0", "").trim(), confirmedwithFedDB.replaceFirst("^0", ""));	
+			}
+			assertEquals(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_StartDate")).getText().replaceFirst("^0", "").trim(), startDateDB.replaceFirst("^0", ""));
+			assertEquals(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_EndDate")).getText().replaceFirst("^0", "").trim(), endDateDB.replaceFirst("^0", ""));		 		     
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
+
 }

@@ -153,6 +153,7 @@ public class XqueryMap {
 		queryMap.put("get area entity detail lookup", "getAreaRelatedEntityDetailsFromLookup.xqy");
 		queryMap.put("get area entity details", "getAreaRelatedEntityDetails.xqy");
 		queryMap.put("get document id for routing code", "getIdForRoutingCode.xqy");
+		queryMap.put("change routing code status", "changeRoutingCodeStatus.xqy");
    }
 
     public String getXquery(String key){
