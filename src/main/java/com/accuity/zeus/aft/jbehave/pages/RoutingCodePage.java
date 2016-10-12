@@ -129,4 +129,34 @@ public class RoutingCodePage extends AbstractPage {
         {e.printStackTrace();}
         return ERP;
     }
+    
+    public void verifyFormerUsageColumnNames() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals("NAME",
+				getDriver()
+						.findElement(RoutingCodeIdentifiers
+								.getObjectIdentifier("view_routingcode_name_col_xpath"))
+						.getText());
+		assertEquals("CITY",
+				getDriver()
+						.findElement(RoutingCodeIdentifiers
+								.getObjectIdentifier("view_routingcode_city_col_xpath"))
+						.getText());
+		assertEquals("AREA",
+				getDriver()
+						.findElement(RoutingCodeIdentifiers
+								.getObjectIdentifier("view_routingcode_area_col_xpath"))
+						.getText());
+		assertEquals("ADDITIONAL INFO",
+				getDriver()
+						.findElement(RoutingCodeIdentifiers
+								.getObjectIdentifier("view_routingcode_additional_info_col_xpath"))
+						.getText());
+	
+	
+	}
 }

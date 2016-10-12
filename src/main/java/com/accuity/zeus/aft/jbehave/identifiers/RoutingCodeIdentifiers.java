@@ -61,6 +61,12 @@ public class RoutingCodeIdentifiers {
         hmap.put("edit_routingcode_routingCodeComment_text_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//textarea[@name='routingCodeComment']")));
         hmap.put("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Registrar Fee SFDC Subscription']/td")));  
         hmap.put("edit_routingcode_routingCodeComment_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']/td")));
+        hmap.put("routingcode_navigation_link", By.xpath("//*[@id='routingCodeFormerUsages']"));
+        hmap.put("exact_match_link", By.xpath("//*[@id='searchType-exact']"));
+        hmap.put("view_routingcode_name_col_xpath", By.xpath("//*[@id='routingCodeFormerUsages']/table/thead/tr/th[1]"));
+        hmap.put("view_routingcode_city_col_xpath", By.xpath("//*[@id='routingCodeFormerUsages']/table/thead/tr/th[2]"));
+        hmap.put("view_routingcode_area_col_xpath", By.xpath("//*[@id='routingCodeFormerUsages']/table/thead/tr/th[3]"));
+        hmap.put("view_routingcode_additional_info_col_xpath", By.xpath("//*[@id='routingCodeFormerUsages']/table/thead/tr/th[4]"));
     }
     
     public static By getObjectIdentifier(String key) {
