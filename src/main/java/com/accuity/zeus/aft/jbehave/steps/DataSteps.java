@@ -897,11 +897,4 @@ public class DataSteps extends AbstractSteps {
     public void verify2ndLineMenuItems(){
         getDataPage().verifyLegalEntity2ndLineMenuItem();
     }
-    
-    @When("the user clicks on the exact match link in the routing code results page")
-    public void clickOnExactMatchLinkInRoutingCodeResultsPage() {
-        getDataPage().clickOnExactMatchLinkInRoutingCodeResultsPage();
-        setEditRoutingCodePage(getDataPage().createEditRoutingCodePage());
-    }
-
 }
