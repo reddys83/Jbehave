@@ -278,12 +278,26 @@ public class EditRoutingCodePage extends AbstractPage {
 			String forthcomingRetirementDateDB=getNodeValuesByTagName(document, "ForthcomingRetirementDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ForthcomingRetirementDate").get(0);
 			String confirmedwithFedDB=getNodeValuesByTagName(document, "ConfirmedWithFedDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ConfirmedWithFedDate").get(0);
 			if(codeType.equals("ABA")) {
-				assertEquals(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ForthcomingRetirementDate")).getText().replaceFirst("^0", "").trim(), forthcomingRetirementDateDB.replaceFirst("^0", ""));
-				assertEquals(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ConfirmedwithFed")).getText().replaceFirst("^0", "").trim(), confirmedwithFedDB.replaceFirst("^0", ""));	
+				String forthcomingRetirementDateDayUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ForthcomingRetirementDateDay")).getAttribute("value");
+				String forthcomingRetirementDateMonthUI = getSelectedDropdownText(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ForthcomingRetirementDateMonth"));
+				String forthcomingRetirementDateYearUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ForthcomingRetirementDateYear")).getAttribute("value");
+				assertEquals((forthcomingRetirementDateDayUI + " " + forthcomingRetirementDateMonthUI + " " + forthcomingRetirementDateYearUI).trim(), forthcomingRetirementDateDB.replaceFirst("^0", ""));
+				
+				String confirmedwithFedDayUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateDay")).getAttribute("value");
+				String confirmedwithFedMonthUI = getSelectedDropdownText(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateMonth"));
+				String confirmedwithFedYearUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateYear")).getAttribute("value");
+				assertEquals((confirmedwithFedDayUI + " " + confirmedwithFedMonthUI + " " + confirmedwithFedYearUI).trim(), confirmedwithFedDB.replaceFirst("^0", ""));
 			}
-			assertEquals(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_StartDate")).getText().replaceFirst("^0", "").trim(), startDateDB.replaceFirst("^0", ""));
-			assertEquals(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_EndDate")).getText().replaceFirst("^0", "").trim(), endDateDB.replaceFirst("^0", ""));		 		     
 			
+			String startDateDayUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateDay")).getAttribute("value");
+			String startDateMonthUI = getSelectedDropdownText(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateMonth"));
+			String startDateYearUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateYear")).getAttribute("value");
+			assertEquals((startDateDayUI + " " + startDateMonthUI + " " + startDateYearUI).trim(), startDateDB.replaceFirst("^0", ""));
+			
+			String endDateDayUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_endDateDay")).getAttribute("value");
+			String endDateMonthUI = getSelectedDropdownText(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_endDateMonth"));
+			String endDateYearUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_endDateYear")).getAttribute("value");
+			assertEquals((endDateDayUI + " " + endDateMonthUI + " " + endDateYearUI).trim(), endDateDB.replaceFirst("^0", ""));			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

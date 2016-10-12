@@ -138,7 +138,7 @@ When the user enters the <entity> in the typeahead
 And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
-When the user changes the status for routing code <routingCode> and code type <codeType> to pending
+When the user changes the status for routing code <routingCode> and code type <codeType> to <status>
 When the user clicks on the routing code update link
 Then the user should see the edit routing code date field values from trusted document for routing code <routingCode> with code type <codeType>
 When the user enters <startDateDay> <startDateMonth> <startDateYear> for routing code start date field
@@ -155,9 +155,10 @@ Then the user should see the updated date field values in routing code basic inf
 Then the user should see the date field values same as in zeus document
 
 Examples:
-|entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|retirementDay|retirementMonth|retirementYear|fedDay|fedMonth|fedYear|
-|083905216|Routing Code|083905216|ABA|||||||||||||
-|083905216|Routing Code|083905216|ABA|1|Jan|2016|12|Dec|2016|12|Dec|2050|26|Jan|2016|
+|entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|retirementDay|retirementMonth|retirementYear|fedDay|fedMonth|fedYear|status|
+|083905216|Routing Code|083905216|ABA|||||||||||||active|
+|083905216|Routing Code|083905216|ABA|1|Jan|2016|12|Dec|2016|12|Dec|2050|26|Jan|2016|active|
+|083905216|Routing Code|083905216|ABA|1|Jan|2017|12|Dec|2017|12|Dec|2050|26|Jan|2016|pending|
 
 
 Scenario: User is updating a Routing Code's Date fields(Start Date, End Date, Forthcoming Retirement Date, Confirmed with Fed) 
@@ -218,6 +219,7 @@ When the user enters the <entity> in the typeahead
 And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
+When the user changes the status for routing code <routingCode> and code type <codeType> to <status>
 When the user clicks on the routing code update link
 When the user enters start date and confirmed with fed later than today
 When the user clicks on the save button
@@ -225,8 +227,8 @@ Then the user should see the error message <errorMessage> for routing code start
 Then the user should see the error message <errorMessage> for routing code confirmed with fed field
 
 Examples:
-|entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|fedDay|fedMonth|fedYear|errorMessage|
-|083905216|Routing Code|083905216|ABA|1|Jan|2017|31|Dec|2017|Must be no later than today.|
+|entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|fedDay|fedMonth|fedYear|errorMessage|status|
+|083905216|Routing Code|083905216|ABA|1|Jan|2017|31|Dec|2017|Must be no later than today.|active|
 
 Scenario: User is updating a Routing Code's Date fields(Start Date, End Date, Forthcoming Retirement Date, Confirmed with Fed)
 a) User verifies no change in confirmation modal.   
@@ -238,6 +240,7 @@ When the user enters the <entity> in the typeahead
 And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
+When the user changes the status for routing code <routingCode> and code type <codeType> to <status>
 When the user clicks on the routing code update link
 When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
 When the user enters <startDateDay> <startDateMonth> <startDateYear> for routing code start date field
@@ -255,8 +258,8 @@ Then the user should see the date field values same as in zeus document
 Then the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|retirementDay|retirementMonth|retirementYear|fedDay|fedMonth|fedYear|
-|083905216|Routing Code|083905216|ABA|1|Jan|2016|12|Dec|2016|12|Dec|2050|26|Jan|2016|
+|entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|retirementDay|retirementMonth|retirementYear|fedDay|fedMonth|fedYear|status|
+|083905216|Routing Code|083905216|ABA|1|Jan|2017|12|Dec|2017|12|Dec|2050|26|Jan|2016|pending|
 
 Scenario: User is updating a Routing Code's Basic Info - 
 a) User verifies that Forthcoming Retirement Date and Confirmed with Fed fields do not exist when codetype is not 'ABA'.
@@ -269,18 +272,17 @@ And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
 Then the user should see that forthcoming retirement date and confirmed with fed fields does not exist
+When the user changes the status for routing code <routingCode> and code type <codeType> to <status>
 When the user clicks on the routing code update link
-When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
 When the user enters <startDateDay> <startDateMonth> <startDateYear> for routing code start date field
 When the user enters <endDateDay> <endDateMonth> <endDateYear> for routing code end date field
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the updated date field values in routing code basic info page for non ABA code type
-Then the user should see the date field values same as in zeus document
-Then the user reverts the changes to the document
+Then the user should see the date field values same as in zeus document for non ABA code type
 
 Examples:
-|entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|
-|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|||||||
-|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|1|Jan|2017|12|Dec|2017|
+|entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|status|
+|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|||||||active|
+|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|1|Jan|2017|12|Dec|2017|pending|

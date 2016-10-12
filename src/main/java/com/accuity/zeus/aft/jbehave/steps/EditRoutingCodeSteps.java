@@ -197,21 +197,30 @@ public class EditRoutingCodeSteps extends AbstractSteps {
 		getEditRoutingCodePage().verifyUpdatedDateFieldsInUI(codeType, startDateDB, endDateDB, null, null);
 	}
 	
-	@When("the user changes the status for routing code <routingCode> and code type <codeType> to $status")
+	@When("the user changes the status for routing code <routingCode> and code type <codeType> to <status>")
 	public void changeRoutingCodeStatus(@Named("routingCode") String routingCode, @Named("codeType") String codeType,
 			@Named("status") String status) throws Exception {			
-			Thread.sleep(5000L);
 			if (editRoutingCodePage == null) {
 				editRoutingCodePage = getRoutingCodePage().createEditRoutingCodePage();
 			}
 			getEditRoutingCodePage().changeRoutingCodeStatus(routingCode, codeType, status);
-			getDataPage().refreshThePage();		
+			getDataPage().refreshThePage();	
+			Thread.sleep(5000L);
 	}
 	
 	@Then("the user should see the edit routing code date field values from $source document for routing code <routingCode> with code type <codeType>")
 	public void verifyEditRoutingCodeDateFieldsValuesFromTrusted(@Named("routingCode") String routingCode,
 			@Named("codeType") String codeType, @Named("source") String source) {
 		getEditRoutingCodePage().verifyEditRoutingCodeDateFieldsValuesFromTrusted(routingCode, codeType, source);
+	}
+	
+	@Then("the user should see the date field values same as in $source document for non ABA code type")
+	public void verifyUpdatedDateFieldsInDB(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("startDateDay") String startDateDay, 
+			@Named("startDateMonth") String startDateMonth, @Named("startDateYear") String startDateYear, @Named("endDateDay") String endDateDay, @Named("endDateMonth") 
+	        String endDateMonth, @Named("endDateYear") String endDateYear, @Named("source") String source) {
+		String startDateDB = startDateDay + " " + startDateMonth + " " + startDateYear;
+		String endDateDB = endDateDay  + " " + endDateMonth  + " " + endDateYear;
+        getEditRoutingCodePage().verifyUpdatedDateFieldsInDB(routingCode, codeType, startDateDB, endDateDB, null, null, source);
 	}
 
 }
