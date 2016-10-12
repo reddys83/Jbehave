@@ -24,18 +24,86 @@ public class EditRoutingCodeSteps extends AbstractSteps {
         }}
 
 
-    @Then("the user should see the edit routing code values from trusted document for routing code <routingCode> with code type <codeType>")
-    public void verifyEditRoutingCodeValuesFromTrusted(@Named("routingCode") String routingCode,@Named("codeType") String codeType){
+	@Then("the user should see the edit routing code values from trusted document for routing code <routingCode> with code type <codeType>")
+	public void verifyEditRoutingCodeValuesFromTrusted(@Named("routingCode") String routingCode,
+			@Named("codeType") String codeType) {
 
-        getEditRoutingCodePage().verifyEditRoutingCodeValuesFromTrusted(routingCode,codeType);
-    }
-    
-    @When("the user gets the document with $xqueryName with the <routingCode> and <codeType> from the database")
-    public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("routingCode") String routingCode, @Named("codeType") String codeType) {
-    	getDataPage().getDocumentForRoutingCode(xqueryName, routingCode, codeType);
-    }
+		getEditRoutingCodePage().verifyEditRoutingCodeValuesFromTrusted(routingCode, codeType);
+	}
 
-    @When("the user enters <startDateDay> <startDateMonth> <startDateYear> for routing code start date field")
+	@When("the user enters the <registarFeeSFDCSubscription> in the routing code basic info page")
+	public void enterTextInRegistarFeeSFDCSubscription(
+			@Named("registarFeeSFDCSubscription") String registarFeeSFDCSubscription) {
+		getDataPage().enterTextUsingIndex(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_RegistrarFeeSFDCSubscription"), registarFeeSFDCSubscription, 1);
+	}
+
+	@When("the user enters the <routingCodeComment> in the routing code basic info page")
+	public void enterTextInRoutingCodeComment(@Named("routingCodeComment") String routingCodeComment) {
+		getDataPage().enterTextUsingIndex(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_routingCodeComment_text_xpath"), routingCodeComment, 1);
+	}
+
+	@Then("the user should see the successful update message at top of the routing code page")
+	public void verifySuccessfulUpdatedMessage() {
+		setEditCityPage(getDataPage().createEditCityPage());
+		getEditCityPage().verifySuccessfulUpdatedMessage();
+	}
+
+	@Then("the user should be able to verify the values are entered in the routing code basic info page")
+	public void verifyRegistrarFeeAndRoutingCodeComment(@Named("routingCodeComment") String routingCodeComment,
+			@Named("registarFeeSFDCSubscription") String registarFeeSFDCSubscription) {
+		getEditRoutingCodePage().verifyRegistrarFeeAndRoutingCodeComment(registarFeeSFDCSubscription,
+				routingCodeComment);
+	}
+
+	@Then("the user should see the <registarFeeSFDCSubscription> and <routingCodeComment> field values same as in $source document")
+	public void verifyResisterFeeAndRoutingCodeCommentZeusDB(@Named("source") String source,
+			@Named("routingCode") String routingCode, @Named("codeType") String codeType) {
+		getEditRoutingCodePage().verifyRegisterFeeAndRoutingCodeFromZeusDB(source, routingCode, codeType);
+	}
+
+	@When("the user gets the document with $xqueryName with the <routingCode> and <codeType> from the database")
+	public void getDocumentByFid(@Named("xqueryName") String xqueryName, @Named("routingCode") String routingCode,
+			@Named("codeType") String codeType) {
+		getDataPage().getDocumentForRoutingCode(xqueryName, routingCode, codeType);
+	}
+
+	@When("the user enters 30 unicode characters in Registar Fee subscription field")
+	public void enterInvalidCharactersInRegisterFeeSubscription() {
+		getEditRoutingCodePage().enterMaxCharactersInRegisterFeeSubscription();
+	}
+
+	@Then("the user should see maximum length of Registar Fee subscription field is limited to $maxLength")
+	public void verifyMaxLengthRegisterFeeSubscription(@Named("maxLength") String maxLength) {
+		getEditRoutingCodePage().verifyMaxLengthRegisterFeeSubscription(maxLength);
+	}
+
+	@Then("the user should be able to verify the maximum values are entered in Registar Fee subscription field")
+	public void verifyMaximumTextInRegisterFeeSubscription() {
+		getEditRoutingCodePage().verifyMaximumTextInRegisterFeeSubscription();
+	}
+
+	@When("the user enters 1000 unicode characters in Routing Code Comment field")
+	public void enterInvalidCharactersInRoutingCodeComment() {
+		getEditRoutingCodePage().enterMaxCharactersInRoutingCodeComment();
+	}
+
+	@Then("the user should see maximum length of Routing Code Comment field is limited to $maxLength")
+	public void verifyMaxLengthRoutingCodeComment(@Named("maxLength") String maxLength) {
+		getEditRoutingCodePage().verifyMaxLengthRoutingCodeComment(maxLength);
+	}
+
+	@Then("the user should be able to verify the maximum values are entered in Routing Code Comment field")
+	public void verifyMaximumTextInRoutingCodeComment() {
+		getEditRoutingCodePage().verifyMaximumTextInRoutingCodeComment();
+	}
+	
+	@Then("the user should see <registarFeeSFDCSubscription> and <routingCodeComment> field values same as in $source document")
+	public void verifyResisterFeeAndRoutingCodeCommentTrustedDB(@Named("source") String source,
+			@Named("routingCode") String routingCode, @Named("codeType") String codeType) {
+		getEditRoutingCodePage().verifyRegisterFeeAndRoutingCodeFromTrustedDB(source, routingCode, codeType);
+	}
+	
+	@When("the user enters <startDateDay> <startDateMonth> <startDateYear> for routing code start date field")
     public void enterRoutingCodeStartDateField(@Named("startDateDay") String startDateDay, @Named("startDateMonth") String startDateMonth, @Named("startDateYear") String startDateYear) {
     	getDataPage().enterTextUsingIndex(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateDay"), startDateDay, 1);
     	getDataPage().selectItemFromDropdownListByText(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateMonth"), startDateMonth);
@@ -128,7 +196,6 @@ public class EditRoutingCodeSteps extends AbstractSteps {
 		String endDateDB = endDateDay + endDateMonth + endDateYear;		
 		getEditRoutingCodePage().verifyUpdatedDateFieldsInUI(codeType, startDateDB, endDateDB, null, null);
 	}
-	
 }
 
 

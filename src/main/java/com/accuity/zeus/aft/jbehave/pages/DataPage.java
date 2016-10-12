@@ -212,7 +212,7 @@ public class DataPage extends AbstractPage {
     private By area_basic_info_country_link_xpath = By.xpath(".//*//tr[th='Country']/td/a");
     private String area_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
     private By confirmation_modal_xpath = By.xpath("//*[@id='modal-region']");
-
+    
     static ResponseEntity responseEntity;
     static String endpointWithID;
 
@@ -1479,8 +1479,7 @@ public class DataPage extends AbstractPage {
 		}    	
 	} 
 	
-public void getDocumentForRoutingCode(String xqueryName, String routingCode, String codeType) {
-		
+	public void getDocumentForRoutingCode(String xqueryName, String routingCode, String codeType) {
 		List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
         nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
@@ -1496,5 +1495,10 @@ public void getDocumentForRoutingCode(String xqueryName, String routingCode, Str
 	    else {
             assertFalse("Zeus document with Routing Code " + routingCode + " and Routing Code Type " + codeType + " does not exist in the DB", true);
 	    }
-    }	
+    }
+	
+	public EditRoutingCodePage createEditRoutingCodePage() {
+        return new EditRoutingCodePage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+    }
+	
 }
