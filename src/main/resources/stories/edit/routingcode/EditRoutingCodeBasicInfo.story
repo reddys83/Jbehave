@@ -163,6 +163,7 @@ Examples:
 Scenario: User is updating a Routing Code's Date fields(Start Date, End Date, Forthcoming Retirement Date, Confirmed with Fed) 
 a) User verifies that the error message 'Invalid Date' is displayed when invalid date is entered with code type = 'ABA'    
 b) User verifies that the error message 'Enter a year, month/year or day/month/year.' is displayed when invalid date format is entered with code type = 'ABA' 
+c) User verifies that the error message 'Must be after 1500CE.' is displayed when year is less than 1500 with code type = 'ABA'  
   
 Given a user is on the search page
 When the user selects the <searchBy> from the dropdown
@@ -185,6 +186,7 @@ Examples:
 |entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|retirementDay|retirementMonth|retirementYear|fedDay|fedMonth|fedYear|errorMessage|
 |083905216|Routing Code|083905216|ABA|ab|Jan|20s4|0.|Jun|wxyz|df|Dec|asd|4?|Aug|qw45|Invalid Date|
 |083905216|Routing Code|083905216|ABA|6||2016|6|Jun|||Jun||6|||Enter a year, month/year or day/month/year.|
+|083905216|Routing Code|083905216|ABA|1|Jan|24|2|Jun|25|1|Dec|24|4|Aug|20|Must be after 1500CE.|
 
 Scenario: User is updating a Routing Code's Date fields(Start Date, End Date) 
 a) User verifies that the error message 'Invalid Date' is displayed when invalid date is entered with code type is not 'ABA'    
