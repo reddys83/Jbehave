@@ -62,11 +62,17 @@ public class RoutingCodeIdentifiers {
         hmap.put("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Registrar Fee SFDC Subscription']/td")));  
         hmap.put("edit_routingcode_routingCodeComment_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']/td")));
         hmap.put("routingcode_former_usages_navigation_link", By.xpath("//*[@id='routingCodeFormerUsages']"));
-        hmap.put("exact_match_link", By.xpath("//*[@id='searchType-exact']"));
         hmap.put("view_routingcode_name_col", By.xpath("//*[@id='routingCodeFormerUsages']//th[@sortfield='departmentName,officeName']"));
         hmap.put("view_routingcode_city_col", By.xpath("//*[@id='routingCodeFormerUsages']//th[@sortfield='cityName']"));
         hmap.put("view_routingcode_area_col", By.xpath("//*[@id='routingCodeFormerUsages']//th[@sortfield='areaName']"));
         hmap.put("view_routingcode_additional_info_col", By.xpath("//*[@id='routingCodeFormerUsages']//*[contains(text(),'Additional Info')]"));
+        hmap.put("view_routingcode_name_list", By.xpath("//*[@id='formerUsages']//*[@href]"));
+        hmap.put("view_routingcode_city_list", By.xpath("//*[@id='formerUsages']//td[2]"));
+        hmap.put("view_routingcode_area_list", By.xpath("//*[@id='formerUsages']//td[3]"));
+        hmap.put("view_routingcode_first_office_name_link", By.xpath("//*[@id='formerUsages']/tr[1]//*[@href]"));
+        hmap.put("officename_basicInfo_link", By.xpath("//*[@id='officeBasicInfo']"));
+        hmap.put("officename_basicInfo_label", By.xpath("//*[@id='officeBasicInfo']/h1/span"));
+        hmap.put("officename_text_value", By.xpath("//*[@id='officeBasicInfo']//tr[td='Office Name']/td[2]"));
     }
     
     public static By getObjectIdentifier(String key) {

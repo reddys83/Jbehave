@@ -132,31 +132,37 @@ public class RoutingCodePage extends AbstractPage {
     
     public void verifyFormerUsageColumnNames() {
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(2000L);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		assertEquals("NAME",
-				getDriver()
-						.findElement(RoutingCodeIdentifiers
-								.getObjectIdentifier("view_routingcode_name_col"))
-						.getText());
-		assertEquals("CITY",
-				getDriver()
-						.findElement(RoutingCodeIdentifiers
-								.getObjectIdentifier("view_routingcode_city_col"))
-						.getText());
-		assertEquals("AREA",
-				getDriver()
-						.findElement(RoutingCodeIdentifiers
-								.getObjectIdentifier("view_routingcode_area_col"))
-						.getText());
-		assertEquals("ADDITIONAL INFO",
-				getDriver()
-						.findElement(RoutingCodeIdentifiers
-								.getObjectIdentifier("view_routingcode_additional_info_col"))
-						.getText());
-	
-	
+		assertEquals("NAME", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_col")).getText());
+		assertEquals("CITY", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_city_col")).getText());
+		assertEquals("AREA", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_area_col")).getText());
+		assertEquals("ADDITIONAL INFO",	getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_additional_info_col")).getText());	
 	}
+    
+    public void verifyFormerUsagesColumnInAlphabeticalOrder(By by) {
+    	List<WebElement> columnListFromUI = getDriver().findElements(by);
+    	String previous = "";
+    	for(int index = 0; index < columnListFromUI.size(); index++) {
+    		if(columnListFromUI.get(index).getText().compareTo(previous) < 0) {
+    			assertTrue("The column is not in alphabetical order.",false);
+    		}
+    		previous = columnListFromUI.get(index).getText();
+    	}
+    	assertTrue(true);
+    }
+    
+    public String getOfficeNameLinkText() {
+    	String text = null;
+    	text = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_first_office_name_link")).getText();
+    	return text;
+    }
+    
+    public void verifyOfficeNameBasicInfoPage(String formerUsageOfficeName) {
+    	assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_link")).getAttribute("class").equals("selected"));
+        assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_label")).getText().equals("BASIC INFO"));
+        assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_text_value")).getText().equals(formerUsageOfficeName));
+    }
 }
