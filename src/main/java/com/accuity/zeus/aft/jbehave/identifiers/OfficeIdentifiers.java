@@ -232,7 +232,7 @@ public class OfficeIdentifiers {
 	    hmap.put("office_second_location_primary_flag_view_mode", By.xpath("//*[@id='officeLocations']//*[@class='location'][2]//*[dt='Primary']/dd"));
 	    hmap.put("office_locations_address_rows_edit_mode", By.xpath(".//*[@data-edit_id='locationAddresses-0']"));
 	    hmap.put("office_location_address_type_options_dropdown", By.xpath(".//*[@id='officeLocations']//select[@id='addressType-0']/option"));
-	    hmap.put("office_locations_postalCodePosition_xpath", By.xpath(".//*[@id='officeLocations']//tr[th='Postal Code Position']/td"));
+	    hmap.put("office_locations_postalCodePosition_xpath", By.xpath("//*[@id='additionalLocationAddresses-0']//*[th='Postal Code Position']/td/input"));
 	    
     }
 

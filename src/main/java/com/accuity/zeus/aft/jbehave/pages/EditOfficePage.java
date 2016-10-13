@@ -2113,18 +2113,14 @@ public class EditOfficePage extends AbstractPage {
 		return value;
 	}
 	
-    public void verifypostalCodePositonInUI(String country,String postalCodePositon)
-    {
-    	 //assertEquals(country, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_country_dropdown_list")));
-         assertEquals(postalCodePositon, getTextOnPage(OfficeIdentifiers.getObjectIdentifier("office_locations_postalCodePosition_xpath")));
-    }
-    
-    public void verifyPostalCodePositionZeus(String postalCodePositionUI,String postalCodePositionDB){
-    	assertEquals(postalCodePositionUI,postalCodePositionDB);
-    }
-	
-	
-    @Override
+	public void verifypostalCodePositonInUI(String postalCodePositon) {
+		assertEquals(postalCodePositon,
+				getDriver()
+						.findElement(OfficeIdentifiers.getObjectIdentifier("office_locations_postalCodePosition_xpath"))
+						.getAttribute("value"));
+	}
+
+	   @Override
     public String getPageUrl() {
         return null;
     }
