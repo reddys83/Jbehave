@@ -897,5 +897,4 @@ public class DataSteps extends AbstractSteps {
     public void verify2ndLineMenuItems(){
         getDataPage().verifyLegalEntity2ndLineMenuItem();
     }
-
 }
