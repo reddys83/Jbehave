@@ -154,6 +154,48 @@ public class SearchResultsSteps extends AbstractSteps{
     public void verifyRoutingCodeSearchResults(@Named("entity") String code) {
         getResultsPage().verifyRoutingCodeSearchResults(code);
     }
+
+    @Then("user should see the results in descending order by code for <entity> routingCode")
+    public void verifyRoutingCodeResultsDescendingOrder(@Named("entity") String code)
+    {
+        getResultsPage().verifyRoutingCodeResultsDescendingOrder(code);
+    }
+
+    @Then("user should see the results in ascending order by type for <entity> routingCode")
+    public void verifyRoutingCodeResultsAscendingByType(@Named("entity") String code) {
+        getResultsPage().verifyRoutingCodeResultsAscendingByType(code);
+    }
+
+    @Then("user should see the results in ascending order by entity for <entity> routingCode")
+    public void verifyRoutingCodeResultsAscendingByEntity(@Named("entity") String code){
+        getResultsPage().verifyRoutingCodeResultsAscendingByEntity(code);
+    }
+
+    @Then("user should see the results in ascending order by fid for <entity> routingCode")
+    public void verifyRoutingCodeResultsAscendingByFID(@Named("entity") String code){
+        getResultsPage().verifyRoutingCodeResultsAscendingByFID(code);
+    }
+
+    @When("the user clicks on the column CODE in the routingCode search results")
+    public void clickOnRoutingCodeResultsCODEColumn() {
+        getResultsPage().clickOnRoutingCodeResultsCODEColumn();
+    }
+
+    @When("the user clicks on the column TYPE in the routingCode search results")
+    public void clickOnRoutingCodeResultsTYPEColumn() {
+        getResultsPage().clickOnRoutingCodeResultsTYPEColumn();
+    }
+
+    @When("the user clicks on the column ENTITY in the routingCode search results")
+    public void clickOnRoutingCodeResultsENTITYColumn() {
+        getResultsPage().clickOnRoutingCodeResultsENTITYColumn();
+    }
+
+    @When("the user clicks on the column FID in the routingCode search results")
+    public void clickOnRoutingCodeResultsFIDColumn() {
+        getResultsPage().clickOnRoutingCodeResultsFIDColumn();
+    }
+
     @When("the user applied the country filter as: $Country")
     public void applyCountryFilter(ExamplesTable Country) {
         getResultsPage().applyCountryFilter(Country);

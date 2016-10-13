@@ -303,7 +303,7 @@ public class ResultsPage extends AbstractPage {
         List typeFilter = new ArrayList();
         List typeList = new ArrayList();
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -330,7 +330,7 @@ public class ResultsPage extends AbstractPage {
         List countryFilter = new ArrayList();
         List countryList = new ArrayList();
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -355,7 +355,7 @@ public class ResultsPage extends AbstractPage {
     public void verifyStatusFilterInRCSearchResults(String status)
     {
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -372,31 +372,129 @@ public class ResultsPage extends AbstractPage {
         assertEquals("CODE TYPE ENTITY FID ADDRESS CITY AREA COUNTRY STATUS",getDriver().findElement(ResultsIdentifiers.getObjectIdentifier("routingCode_results_list_header_xpath")).getText());
     }
 
+    public void clickOnRoutingCodeResultsCODEColumn() {
+        attemptClick(ResultsIdentifiers.getObjectIdentifier("routingCode_results_codeHeader_xpath"));
+    }
+
+    public void clickOnRoutingCodeResultsTYPEColumn() {
+        attemptClick(ResultsIdentifiers.getObjectIdentifier("routingCode_results_typeHeader_xpath"));
+    }
+
+    public void clickOnRoutingCodeResultsENTITYColumn() {
+        attemptClick(ResultsIdentifiers.getObjectIdentifier("routingCode_results_entityHeader_xpath"));
+    }
+
+    public void clickOnRoutingCodeResultsFIDColumn() {
+        attemptClick(ResultsIdentifiers.getObjectIdentifier("routingCode_results_fidHeader_xpath"));
+    }
+    public void verifyRoutingCodeResultsDescendingOrder(String code)
+    {
+        List<String> Codes = new ArrayList<>();
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("code", code));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode results", nvPairs);
+
+        for (int i = 0; i < document.getElementsByTagName("results").getLength(); i++) {
+            Codes.add(document.getElementsByTagName("Code").item(i).getTextContent());
+        }
+        Collections.sort(Codes, Collections.reverseOrder());
+        List<WebElement> RoutingCodesList = getDriver().findElements(ResultsIdentifiers.getObjectIdentifier("routingCode_results_codeList_xpath"));
+
+        for (int j=0;j<Codes.size();j++)
+        {
+            assertEquals(Codes.get(j),RoutingCodesList.get(j).getText());
+        }
+    }
+
+    public void verifyRoutingCodeResultsAscendingByType(String code) {
+        List<String> Types = new ArrayList<>();
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("code", code));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode results", nvPairs);
+
+        for (int i = 0; i < document.getElementsByTagName("results").getLength(); i++) {
+            Types.add(document.getElementsByTagName("Type").item(i).getTextContent());
+        }
+        Collections.sort(Types);
+        List<WebElement> RoutingCodesTypeList = getDriver().findElements(ResultsIdentifiers.getObjectIdentifier("routingCode_results_type_xpath"));
+
+        for (int j=0;j<Types.size();j++)
+        {
+            assertEquals(Types.get(j),RoutingCodesTypeList.get(j).getText());
+        }
+    }
+
+    public void verifyRoutingCodeResultsAscendingByEntity(String code){
+        List<String> Entity = new ArrayList<>();
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("code", code));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode results", nvPairs);
+
+        for (int i = 0; i < document.getElementsByTagName("results").getLength(); i++) {
+            Entity.add(document.getElementsByTagName("Entity").item(i).getTextContent());
+        }
+        Collections.sort(Entity);
+        List<WebElement> RoutingCodesEntityList = getDriver().findElements(ResultsIdentifiers.getObjectIdentifier("routingCode_results_entity_xpath"));
+
+        for (int j=0;j<Entity.size();j++)
+        {
+            assertEquals(Entity.get(j),RoutingCodesEntityList.get(j).getText());
+        }
+    }
+
+    public void verifyRoutingCodeResultsAscendingByFID(String code){
+        List<String> Fid = new ArrayList<>();
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("code", code));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode results", nvPairs);
+
+        for (int i = 0; i < document.getElementsByTagName("results").getLength(); i++) {
+            Fid.add(document.getElementsByTagName("FID").item(i).getTextContent());
+        }
+        Collections.sort(Fid);
+        List<WebElement> RoutingCodesFidList = getDriver().findElements(ResultsIdentifiers.getObjectIdentifier("routingCode_results_fid_xpath"));
+
+        for (int j=0;j<Fid.size();j++)
+        {
+            assertEquals(Fid.get(j),RoutingCodesFidList.get(j).getText());
+        }
+    }
 
     public void verifyRoutingCodeSearchResults(String code) {
+        code=code.replaceAll("[^a-zA-Z0-9]+","");
+
+       /* Due to perfomance issue with the routingCode resutls
+       Forced to sleep for 50 seconds */
+
+        try {
+            Thread.sleep(50000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         verifyRoutingCodeSearchResultsHeaders();
-        assertEquals("Routing Code results for " + code.replaceAll("[^a-zA-Z0-9]+",""), getDriver().findElement(ResultsIdentifiers.getObjectIdentifier("routingCode_results_header_xpath")).getText());
+        assertEquals("Routing Code results for " + code, getDriver().findElement(ResultsIdentifiers.getObjectIdentifier("routingCode_results_header_xpath")).getText());
 
         List <WebElement> resultsCount = getDriver().findElements(ResultsIdentifiers.getObjectIdentifier("routingCode_results_resultsCount_xpath"));
-        List <WebElement> CodeResultsCount = getDriver().findElements(ResultsIdentifiers.getObjectIdentifier("routingCode_results_codeList_xpath"));
-
-        for (int p=0;p<resultsCount.size();p++)
-        {
-                     assertEquals("1 to "+CodeResultsCount.size()+" of "+CodeResultsCount.size()+" results",resultsCount.get(p).getText());
-        }
-
-
         nvPairs.add(new BasicNameValuePair("code", code));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,"get routingCode results",nvPairs);
 
+        int codeResultsCount= Integer.parseInt(document.getElementsByTagName("codeCount").item(0).getTextContent());
+        for (int p=0;p<resultsCount.size();p++) {
+            if (codeResultsCount < 25) {
+                assertEquals("1 to " + codeResultsCount + " of " + codeResultsCount + " results", resultsCount.get(p).getText());
+            }
+            else
+                assertEquals("1 to 25 of " + codeResultsCount + " results", resultsCount.get(p).getText());
+        }
+
         for(int i=0;i<document.getElementsByTagName("results").getLength();i++)
         {
-            String routingCodes = document.getElementsByTagName("Type").item(i).getTextContent();
-            for (int j = 1; j <=document.getFirstChild().getChildNodes().item(i).getChildNodes().getLength(); j++)
+            String routingCodeType = document.getElementsByTagName("Type").item(i).getTextContent();
+            String routingCode = document.getElementsByTagName("Code").item(i).getTextContent();
+            for (int j = 1; j <=document.getElementsByTagName("results").item(i).getChildNodes().getLength(); j++)
             {
-               assertEquals(getDriver().findElement(By.xpath(".//*[@class='searchEntityList-container']//tbody/tr[td='" + routingCodes + "']/td[" + j + "]")).getText(),
-                       document.getFirstChild().getChildNodes().item(i).getChildNodes().item(j - 1).getTextContent());
-
+               assertEquals(document.getElementsByTagName("results").item(i).getChildNodes().item(j-1).getTextContent().replaceAll(" +", " "),
+                       getDriver().findElement(By.xpath(".//*[@class='searchEntityList-container']//tbody/tr[td[1][text()='" + routingCode + "'] and td[2][text()='" + routingCodeType + "']]/td["+j+"]")).getText());
             }
         }
     }
