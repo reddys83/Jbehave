@@ -46,9 +46,9 @@ public class RoutingCodeSteps extends AbstractSteps {
     }
     
 
-	@When("the user clicks on the former usage link in the navigation bar")
+	@When("the user clicks on the former usages link in the navigation bar")
 	public void clickOnFormerUsageLink() {
-		 getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_navigation_link"));
+		 getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_former_usages_navigation_link"));
 	}
 	
 	@When("the user clicks on exact match link")
