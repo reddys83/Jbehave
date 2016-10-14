@@ -46,7 +46,6 @@ public class RoutingCodeSteps extends AbstractSteps {
         getRoutingCodePage().clickonHeaderLink();
     }
     
-
 	@When("the user clicks on the former usages link in the navigation bar")
 	public void clickOnFormerUsageLink() {
 		 getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_former_usages_navigation_link"));
@@ -62,9 +61,14 @@ public class RoutingCodeSteps extends AbstractSteps {
 		getRoutingCodePage().verifyFormerUsageColumnNames();
 	}
 	
-	@Then("the user verifies that values in name column is in alphabetical order")
-	public void verifyFormerUsagesNameColumnInAlphabeticalOrder() {
-		getRoutingCodePage().verifyFormerUsagesColumnInAlphabeticalOrder(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_list"));
+	@Then("the user verifies that values in $column column is in $order order")
+	public void verifyFormerUsagesNameColumnInAlphabeticalOrder(@Named("column") String column, @Named("order") String order) {
+		getRoutingCodePage().verifyFormerUsagesColumnInOrder(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_" + column + "_list"), column, order);
+	}
+	
+	@When("the user clicks on sort button for name column")
+	public void clickOnFormerUsagesNameSortButton() {
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_col"));
 	}
 	
 	@When("the user clicks on sort button for city column")
@@ -72,19 +76,9 @@ public class RoutingCodeSteps extends AbstractSteps {
 		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_city_col"));
 	}
 	
-	@Then("the user verifies that values in city column is in alphabetical order")
-	public void verifyFormerUsagesCityColumnInAlphabeticalOrder() {
-		getRoutingCodePage().verifyFormerUsagesColumnInAlphabeticalOrder(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_city_list"));
-	}
-	
 	@When("the user clicks on sort button for area column")
 	public void clickOnFormerUsagesAreaSortButton() {
 		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_area_col"));
-	}
-	
-	@Then("the user verifies that values in area column is in alphabetical order")
-	public void verifyFormerUsagesAreaColumnInAlphabeticalOrder() {
-		getRoutingCodePage().verifyFormerUsagesColumnInAlphabeticalOrder(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_area_list"));
 	}
 	
 	@When("the user clicks on the first office name link")
