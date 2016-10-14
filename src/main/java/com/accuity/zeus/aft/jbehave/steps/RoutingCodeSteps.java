@@ -4,7 +4,6 @@ package com.accuity.zeus.aft.jbehave.steps;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
-
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -48,11 +47,6 @@ public class RoutingCodeSteps extends AbstractSteps {
 	@When("the user clicks on the former usages link in the navigation bar")
 	public void clickOnFormerUsageLink() {
 		 getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_former_usages_navigation_link"));
-	}
-	
-	@When("the user clicks on exact match link")
-	public void clickOnExactMatchLink() {
-		 getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("exact_match_link"));
 	}
 	
 	@Then("the user should verify the column names in former usage page")
