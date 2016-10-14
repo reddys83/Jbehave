@@ -3,7 +3,6 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
-import com.accuity.zeus.aft.jbehave.identifiers.AreaIdentifiers;
 import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 
 import org.jbehave.core.annotations.Named;

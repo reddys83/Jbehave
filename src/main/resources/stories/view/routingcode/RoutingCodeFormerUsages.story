@@ -7,7 +7,7 @@ I want to cover the requirements mentioned in
 
 JIRA ID - ZEUS-1144 - User can view Routing Code Former Usages
 
-Scenario: User is on the Routing Code Doc screen for a routing code - 
+Scenario: User is on the Routing Code page - 
 a) Verify that user can view Routing Code's former usages section has a table with below columns in view mode
     1 - NAME
     2 - CITY
