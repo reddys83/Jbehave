@@ -9,7 +9,7 @@ JIRA ID - ZEUS-1075 - User can select to edit Office's Locations
 JIRA ID - ZEUS-1300 - User can edit Office's Locations(Telecoms)
 JIRA ID - ZEUS-1301 - User can edit Office's Locations (Primary Flag)
 JIRA ID - ZEUS-1299 - User can edit Office's Locations(Addresses)
-
+JIRA ID - ZEUS-1302 - User can edit Office's Locations (Postal Code Position)
 
 Scenario: Verify that the add button is disabled for the first row of office location when there is a location
 
@@ -732,3 +732,43 @@ And the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|officeFid|primaryFlag1|primaryFlag2|
 |91832|FID|91832|91832-0|true|false|
+
+Scenario: Verify if the postal code position is updated when country is selected
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+When the user clicks on the choose a country option in the office locations
+When the user enters the office country <Country> in the type-ahead box
+Then the user should verify the postal code position is updated in Office web page
+Then the user should verify postal code position is trusted document
+
+Examples:
+|entity|searchBy|fid|officeFid|Country|postalCodePosition|
+|1045|FID|1045|1045-26|Afghanistan|beforeCity|
+
+Scenario: Verify if the  postal code position is null in web page & trusted document
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+When the user clicks on the choose a country option in the office locations
+When the user enters the office country <Country> in the type-ahead box
+Then the user should verify the postal code position should be null in office web page
+Then the user should verify postal code position should be blank in trusted document
+
+Examples:
+|entity|searchBy|fid|officeFid|Country|postalCodePosition|
+|1045|FID|1045|1045-26|Algeria||
