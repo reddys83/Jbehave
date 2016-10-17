@@ -19,8 +19,12 @@ declare variable $getHeadOffice := function($routing as element()) {
 let $rc := xs:string(xdmp:get-request-field('code'))
 let $rcWildCard  := fn:concat($rc, '*')
 
-let $routingCodes:= (for $x in cts:search(fn:collection('source-trusted')/routingCode,
-        cts:element-word-query(xs:QName("codeValue"),$rcWildCard,("wildcarded","case-insensitive"))) return $x)
+let $rcValues := cts:value-match(cts:path-reference("/routingCode/codeValue","collation=http://marklogic.com/collation//S1") ,$rcWildCard)
+
+let $routingCodes:= for $x in cts:search(
+        fn:collection('source-trusted')/routingCode,
+        cts:path-range-query("/routingCode/codeValue","=",$rcValues,"collation=http://marklogic.com/collation//S1"))
+return $x
 
 let $routingCodeResults:= (
  for $x in $routingCodes
