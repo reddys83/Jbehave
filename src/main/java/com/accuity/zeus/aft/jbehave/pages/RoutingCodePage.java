@@ -119,4 +119,14 @@ public class RoutingCodePage extends AbstractPage {
             e.printStackTrace();
         }
     }
+
+    public EditRoutingCodePage createEditRoutingCodePage() {
+        EditRoutingCodePage ERP=null;
+        try {
+            ERP= new EditRoutingCodePage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+        }
+        catch(Exception e)
+        {e.printStackTrace();}
+        return ERP;
+    }
 }

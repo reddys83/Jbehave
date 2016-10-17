@@ -366,6 +366,7 @@ Save updates tp existing currency use STORY:920(failing because of invalid data 
 1. @accuracy = year
 2. @accuracy = month
 3. @accuracy = day
+Meta:@test900
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
@@ -575,14 +576,20 @@ And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
+And the user clicks on the add country type-ahead option
+When the user enters the country <addCurrencyCountry> in the add country type-ahead box
+
+When the user enters the currency new start day as <currencyStartDay> in the currency page
+And the user enters the currency new start month as <currencyStartMonth> in the currency page
+And the user enters the currency new start year as <currencyStartYear> in the currency page
 And the user clicks on the save button
 Then the user should see the error Currency may not be used in a country more than once in the same date range for start date
 Then the user should see the error Currency may not be used in a country more than once in the same date range for end date
 Then the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
-|currency|
-|Ariary|
+|currency|addCurrencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|
+|Ariary|Madagascar|21|Jun|2005|
 
 Scenario: Verify user should get the error "Duplicate primary currency exists" when updating a currency use for a country which is having a primary currency already.
 
@@ -610,7 +617,6 @@ Examples:
 
 
 Scenario: Verify user can add a new non-primary currency for a country which is having a primary currency already.
-
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
