@@ -60,7 +60,11 @@ public class RoutingCodeIdentifiers {
         hmap.put("edit_routingcode_registarFeeSFDCSubscription_text_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//input[@name='subscriptionNumber']")));  
         hmap.put("edit_routingcode_routingCodeComment_text_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//textarea[@name='routingCodeComment']")));
         hmap.put("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Registrar Fee SFDC Subscription']/td")));  
-        hmap.put("edit_routingcode_routingCodeComment_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']/td")));
+        hmap.put("edit_routingcode_routingCodeComment_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']/td")));        
+        hmap.put("edit_routingcode_page_StartDate_errorMessage", By.xpath("//*[@data-error_id='validFromError']"));
+        hmap.put("edit_routingcode_page_EndDate_errorMessage", By.xpath("//*[@data-error_id='validToError']"));
+        hmap.put("edit_routingcode_page_ForthcomingRetirementDate_errorMessage", By.xpath("//*[@data-error_id='retireAtError']"));
+        hmap.put("edit_routingcode_page_ConfirmedWithFedDate_errorMessage", By.xpath("//*[@data-error_id='confirmedDateError']"));
     }
     
     public static By getObjectIdentifier(String key) {
