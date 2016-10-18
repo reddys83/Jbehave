@@ -74,6 +74,7 @@ public class RoutingCodeIdentifiers {
         hmap.put("view_routingcode_name_list", By.xpath("//*[@id='formerUsages']//td[1]"));
         hmap.put("view_routingcode_city_list", By.xpath("//*[@id='formerUsages']//td[2]"));
         hmap.put("view_routingcode_area_list", By.xpath("//*[@id='formerUsages']//td[3]"));
+        hmap.put("view_routingcode_additional_info_list", By.xpath("//*[@id='formerUsages']//td[4]"));
         hmap.put("view_routingcode_first_office_name_link", By.xpath("//*[@id='formerUsages']/tr[1]//*[@href]"));
         hmap.put("officename_basicInfo_link", By.xpath("//*[@id='officeBasicInfo']"));
         hmap.put("officename_basicInfo_label", By.xpath("//*[@id='officeBasicInfo']/h1/span"));

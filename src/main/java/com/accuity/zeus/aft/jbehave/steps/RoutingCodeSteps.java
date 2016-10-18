@@ -84,6 +84,26 @@ public class RoutingCodeSteps extends AbstractSteps {
 	public void verifyOfficeNameBasicInfoPage() {
 		getRoutingCodePage().verifyOfficeNameBasicInfoPage(formerUsageOfficeName);
 	}
+	
+	@Then("the user should see the former usages field values same as in $source document")
+	public void verifyFormerUsagesFieldValuesFromTrustedDB(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("source") String source) {
+		getRoutingCodePage().verifyFormerUsagesFieldValuesFromTrustedDB(routingCode, codeType, source);
+	}
+	
+	@When("the user deletes the existing former usages values")
+	public void deleteExistingFormerUsagesValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType) {
+		if (editRoutingCodePage == null) {
+			editRoutingCodePage = getRoutingCodePage().createEditRoutingCodePage();
+		}
+		getRoutingCodePage().deleteExistingFormerUsagesValues(routingCode, codeType);
+	}
+	
+	@When("the user inserts new former usages values")
+	public void insertNewFormerUsagesValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType) throws InterruptedException {
+		getRoutingCodePage().insertNewFormerUsagesValues(routingCode, codeType);
+		getDataPage().refreshThePage();	
+		Thread.sleep(5000L);
+	}
 }
 
 
