@@ -168,24 +168,22 @@ public class RoutingCodePage extends AbstractPage {
         assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_text_value")).getText().equals(formerUsageOfficeName));
     }
     
-public void verifyFormerUsagesFieldValuesFromTrustedDB(String routingCode, String routingCodeType, String source) {
-		
-		if(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_list")).size() > 0) {
+    public void verifyFormerUsagesFieldValuesFromTrustedDB(String routingCode, String routingCodeType, String source) {	
+		if (getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_list")).size() > 0) {
 			List<String> formerUsagesNames = new ArrayList<String>();
 			List<String> formerUsagesCity = new ArrayList<String>();
 			List<String> formerUsagesArea = new ArrayList<String>();
 			List<String> formerUsagesAdditionalInfo = new ArrayList<String>();
-			
-			for(int index = 0; index < getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_list")).size(); index++) {
+
+			for (int index = 0; index < getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_list")).size(); index++) {
 				formerUsagesNames.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_list")).get(index).getText());
 				formerUsagesCity.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_city_list")).get(index).getText());
 				formerUsagesArea.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_area_list")).get(index).getText());
 				formerUsagesAdditionalInfo.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_additional_info_list")).get(index).getText());
 			}
-			
-			verifyFormerUsagesFieldValuesFromDB(routingCode, routingCodeType, source, formerUsagesNames, formerUsagesCity, formerUsagesArea, formerUsagesAdditionalInfo);
-		}
-		else {
+			verifyFormerUsagesFieldValuesFromDB(routingCode, routingCodeType, source, formerUsagesNames,
+					formerUsagesCity, formerUsagesArea, formerUsagesAdditionalInfo);
+		} else {
 			assertTrue("There is no existing values in Former Usages section", false);
 		}
     }
