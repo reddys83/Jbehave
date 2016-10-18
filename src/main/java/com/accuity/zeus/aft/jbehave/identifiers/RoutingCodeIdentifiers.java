@@ -79,6 +79,12 @@ public class RoutingCodeIdentifiers {
         hmap.put("officename_basicInfo_link", By.xpath("//*[@id='officeBasicInfo']"));
         hmap.put("officename_basicInfo_label", By.xpath("//*[@id='officeBasicInfo']/h1/span"));
         hmap.put("officename_text_value", By.xpath("//*[@id='officeBasicInfo']//tr[td='Office Name']/td[2]"));
+        hmap.put("routingCode_relatedCodes_link", By.id("routingCodeRelatedCodes"));
+        hmap.put("routingCode_relatedCodes_context", By.xpath(".//*[@id='routingCodeRelatedCodes']//tbody/tr[1]/td[1]"));
+        hmap.put("routingCode_relatedCodes_header", By.xpath(".//*[@id='routingCodeRelatedCodes']//span"));
+        hmap.put("routingCode_relatedCodes_context_header", By.xpath(".//*[@id='routingCodeRelatedCodes']//thead//th[1]"));
+        hmap.put("routingCode_relatedCodes_code_header",By.xpath(".//*[@id='routingCodeRelatedCodes']//thead//th[2]"));
+        hmap.put("routingCode_relatedCodes_type_header",By.xpath(".//*[@id='routingCodeRelatedCodes']//thead//th[3]"));
     }
     
     public static By getObjectIdentifier(String key) {

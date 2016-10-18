@@ -38,7 +38,24 @@ public class RoutingCodeSteps extends AbstractSteps {
         getRoutingCodePage().verifyABAFieldsNotExist();
     }
 
-    @When("the user clicks on the legal entity link in the routing code page header")
+
+	@When("the user clicks on the routing code related codes link in the navigation bar")
+	public void clickOnRelatedCodeLink() {
+		getRoutingCodePage().clickOnRelatedCodeLink();
+	}
+
+	@Then("the user should see the related codes for routingCode <routingCode> and code type <codeType>")
+	public void verifyRelatedCodesFromTrusted(@Named("routingCode") String routingCode, @Named("codeType") String codeType){
+		getRoutingCodePage().verifyRelatedCodesFromTrusted(routingCode,codeType);
+	}
+
+	@Then("the user should not see related codes for routingCode <routingCode> and code type <codeType>")
+	public void verifyNoRelatedCodesForRoutingCodes()
+	{
+		getRoutingCodePage().verifyNoRelatedCodesForRoutingCodes();
+	}
+
+	@When("the user clicks on the legal entity link in the routing code page header")
     public void clickonHeaderLink()
     {
         getRoutingCodePage().clickonHeaderLink();
@@ -53,7 +70,7 @@ public class RoutingCodeSteps extends AbstractSteps {
 	public void verifyFormerUsageColumnNames() {
 		getRoutingCodePage().verifyFormerUsageColumnNames();
 	}
-	
+
 	@Then("the user verifies that values in $column column is in $order order")
 	public void verifyFormerUsagesNameColumnInAlphabeticalOrder(@Named("column") String column, @Named("order") String order) {
 		getRoutingCodePage().verifyFormerUsagesColumnInOrder(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_" + column + "_list"), column, order);
