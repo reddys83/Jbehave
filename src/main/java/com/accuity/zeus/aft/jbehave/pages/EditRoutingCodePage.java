@@ -12,7 +12,12 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.w3c.dom.Document;
 
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -35,6 +40,7 @@ public class EditRoutingCodePage extends AbstractPage {
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
         nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);
         try {
             Thread.sleep(5000L);
@@ -196,6 +202,105 @@ public class EditRoutingCodePage extends AbstractPage {
 		assertEquals(ResisterFeeAndRoutingCodeCommentInUI,
 				getRegisterFeeAndRoutingCodeFromDB(source, routingCode, codeType));
 	}
-
 	
+	public void enterFutureDateForStartDateAndConfirmedDate() throws ParseException {
+    	Format formatter = new SimpleDateFormat("MMMM");
+		String month = formatter.format(new Date());
+		month = month.substring(0, 3);
+		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateDay"), getDayLaterThanToday(), 1);
+		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateDay"), getDayLaterThanToday(), 1);
+		
+		selectDropDownValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateMonth"), month, 1);
+		selectDropDownValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateMonth"), month, 1);
+		
+		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateYear"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), 1);
+		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateYear"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), 1);
+    }
+
+	public void verifyUpdatedDateFieldsInDB(String routingCode, String codeType, String startDate, String endDate, String forthcomingRetirementDate, String confirmedWithFedDate, String source) {
+		try {
+			Thread.sleep(1000L);
+			List<NameValuePair> nvPairs = new ArrayList<>();
+	        nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+	        nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+	        nvPairs.add(new BasicNameValuePair("source", source));	        
+	        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);			
+			String startDateDB=getNodeValuesByTagName(document, "StartDate").size() == 0 ? "" : getNodeValuesByTagName(document, "StartDate").get(0);
+	        String endDateDB=getNodeValuesByTagName(document, "EndDate").size() == 0 ? "" : getNodeValuesByTagName(document, "EndDate").get(0);
+	        String forthcomingRetirementDateDB=getNodeValuesByTagName(document, "ForthcomingRetirementDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ForthcomingRetirementDate").get(0);
+	        String confirmedwithFedDB=getNodeValuesByTagName(document, "ConfirmedWithFedDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ConfirmedWithFedDate").get(0);
+	        if(codeType.equals("ABA")) {
+	        	assertEquals(forthcomingRetirementDate.trim(), forthcomingRetirementDateDB.replaceFirst("^0", ""));
+		        assertEquals(confirmedWithFedDate.trim(), confirmedwithFedDB.replaceFirst("^0", ""));	
+	        }
+	        assertEquals(startDate.trim(), startDateDB.replaceFirst("^0", ""));
+	        assertEquals(endDate.trim(), endDateDB.replaceFirst("^0", ""));	                
+					
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyUpdatedDateFieldsInUI(String codeType, String startDate, String endDate, String forthcomingRetirementDate, String confirmedWithFedDate) {
+		try {
+			 Thread.sleep(1000L);
+			 if(codeType.equals("ABA")) {
+				 assertEquals(forthcomingRetirementDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ForthcomingRetirementDate")).getText().replaceFirst("^0", ""));
+		         assertEquals(confirmedWithFedDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ConfirmedwithFed")).getText().replaceFirst("^0", ""));							 
+			 }
+			 assertEquals(startDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_StartDate")).getText().replaceFirst("^0", ""));
+		     assertEquals(endDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_EndDate")).getText().replaceFirst("^0", ""));		     
+			
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}	
+	
+	public void changeRoutingCodeStatus(String routingCode, String codeType, String status) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+		nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+		nvPairs.add(new BasicNameValuePair("status", status));
+		apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "change routing code status",
+				nvPairs);
+	}
+	
+	public void verifyEditRoutingCodeDateFieldsValuesFromTrusted(String routingCode, String codeType, String source) {
+		try {
+			Thread.sleep(1000L);
+		 	List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+			nvPairs.add(new BasicNameValuePair("source", source));	        
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);			
+			String startDateDB=getNodeValuesByTagName(document, "StartDate").size() == 0 ? "" : getNodeValuesByTagName(document, "StartDate").get(0);
+			String endDateDB=getNodeValuesByTagName(document, "EndDate").size() == 0 ? "" : getNodeValuesByTagName(document, "EndDate").get(0);
+			String forthcomingRetirementDateDB=getNodeValuesByTagName(document, "ForthcomingRetirementDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ForthcomingRetirementDate").get(0);
+			String confirmedwithFedDB=getNodeValuesByTagName(document, "ConfirmedWithFedDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ConfirmedWithFedDate").get(0);
+			if(codeType.equals("ABA")) {
+				String forthcomingRetirementDateDayUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ForthcomingRetirementDateDay")).getAttribute("value");
+				String forthcomingRetirementDateMonthUI = getSelectedDropdownText(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ForthcomingRetirementDateMonth"));
+				String forthcomingRetirementDateYearUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ForthcomingRetirementDateYear")).getAttribute("value");
+				assertEquals((forthcomingRetirementDateDayUI + " " + forthcomingRetirementDateMonthUI + " " + forthcomingRetirementDateYearUI).trim(), forthcomingRetirementDateDB.replaceFirst("^0", ""));
+				
+				String confirmedwithFedDayUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateDay")).getAttribute("value");
+				String confirmedwithFedMonthUI = getSelectedDropdownText(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateMonth"));
+				String confirmedwithFedYearUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateYear")).getAttribute("value");
+				assertEquals((confirmedwithFedDayUI + " " + confirmedwithFedMonthUI + " " + confirmedwithFedYearUI).trim(), confirmedwithFedDB.replaceFirst("^0", ""));
+			}
+			
+			String startDateDayUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateDay")).getAttribute("value");
+			String startDateMonthUI = getSelectedDropdownText(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateMonth"));
+			String startDateYearUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateYear")).getAttribute("value");
+			assertEquals((startDateDayUI + " " + startDateMonthUI + " " + startDateYearUI).trim(), startDateDB.replaceFirst("^0", ""));
+			
+			String endDateDayUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_endDateDay")).getAttribute("value");
+			String endDateMonthUI = getSelectedDropdownText(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_endDateMonth"));
+			String endDateYearUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_endDateYear")).getAttribute("value");
+			assertEquals((endDateDayUI + " " + endDateMonthUI + " " + endDateYearUI).trim(), endDateDB.replaceFirst("^0", ""));			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
+
 }
