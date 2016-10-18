@@ -155,6 +155,9 @@ public class XqueryMap {
 		queryMap.put("get document id for routing code", "getIdForRoutingCode.xqy");
 		queryMap.put("get postalCodePos from countryDoc","getPostalCodeFromCountryDoc.xqy");
 		queryMap.put("change routing code status", "changeRoutingCodeStatus.xqy");
+		queryMap.put("get routing code former usages values", "getRoutingCodeFormerUsages.xqy");
+		queryMap.put("delete routing code former usages values", "deleteRoutingCodeFormerUsagesValues.xqy");
+		queryMap.put("insert routing code former usages values", "insertRoutingCodeFormerUsagesValues.xqy");
    }
 
     public String getXquery(String key){
