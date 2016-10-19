@@ -1136,7 +1136,7 @@ public class ResultsPage extends AbstractPage {
 
     }
     
-    public WebElement getRoutingCodeHyperlinkElementsForCodeValue(String routingCode,String codeType) {
+    public WebElement getRoutingCodeHyperlinkElementForCodeValue(String routingCode, String codeType) {
         List<WebElement> elements = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcodes_rows_xpath"));
         for (WebElement element : elements) {
             if (element.findElement(By.xpath("td[1]")).getText().equals(routingCode) && element.findElement(By.xpath("td[2]")).getText().equals(codeType)) {

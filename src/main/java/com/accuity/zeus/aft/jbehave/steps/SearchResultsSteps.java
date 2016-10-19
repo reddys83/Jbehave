@@ -482,8 +482,8 @@ public class SearchResultsSteps extends AbstractSteps{
     }
     
     @When("the user clicks on the code value hyperlink on the search results card with routing code <routingCode> and code type <codeType>")
-    public void clickOnCodeValueHyperlink(@Named("routingCode") String routingCode,@Named("codeType") String codeType){
-        setRoutingCodePage(getResultsPage().clickOnRoutingCodeResultCard(getResultsPage().getRoutingCodeHyperlinkElementsForCodeValue(routingCode,codeType)));
+    public void clickOnCodeValueHyperlink(@Named("routingCode") String routingCode, @Named("codeType") String codeType) {
+        setRoutingCodePage(getResultsPage().clickOnRoutingCodeResultCard(getResultsPage().getRoutingCodeHyperlinkElementForCodeValue(routingCode, codeType)));
         if(dataPage==null){
             dataPage = getResultsPage().createDataPage();
         }
