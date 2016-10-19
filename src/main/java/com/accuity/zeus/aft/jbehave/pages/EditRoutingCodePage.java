@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.w3c.dom.Document;
+import org.openqa.selenium.*;
 
 import java.text.Format;
 import java.text.ParseException;
@@ -103,6 +104,63 @@ public class EditRoutingCodePage extends AbstractPage {
         }
 
     }
+    
+    public void verifyRoutingCodeBooleanFieldValuesInUI(String accountEligibilityValue, String internalUseOnlyValue, String useHeadOfficeValue) {
+    	try {
+			Thread.sleep(2000L);
+			assertEquals(accountEligibilityValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AccountEligibility")).getText().toLowerCase());
+			assertEquals(internalUseOnlyValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_InternalUseOnly")).getText().toLowerCase());
+			assertEquals(useHeadOfficeValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String UseHeadOffice")).getText().toLowerCase());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}	 
+	 }
+	 
+	 public String getRoutingCodeBooleanFieldValuesFromDB(String source, String routingCode, String codeType) {
+		 String tagValue = null;
+			try {
+				List<NameValuePair> nvPairs = new ArrayList<>();
+				nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+				nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+				nvPairs.add(new BasicNameValuePair("source", source));
+				Thread.sleep(2000L);
+				Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+						"get routingCode basic info", nvPairs);
+				if (document != null) {
+					String accountEligibilityTagValue = getNodeValuesByTagName(document, "routingcodeaccountEligibility").size() == 0 ? ""
+							: getNodeValuesByTagName(document, "routingcodeaccountEligibility").get(0);
+					String internalUseOnlyTagValue = getNodeValuesByTagName(document, "routingcodeInternalUseOnly").size() == 0 ? ""
+							: getNodeValuesByTagName(document, "routingcodeInternalUseOnly").get(0);
+					String useHeadOfficeTagValue = getNodeValuesByTagName(document, "routingcodeUseHeadOffice").size() == 0 ? ""
+							: getNodeValuesByTagName(document, "routingcodeUseHeadOffice").get(0);
+					
+					tagValue = accountEligibilityTagValue + " " + internalUseOnlyTagValue + " " + useHeadOfficeTagValue;
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return tagValue;
+	 }
+	 
+	 public void verifyRoutingCodeBooleanFieldValuesFromZeusDB(String source, String routingCode, String codeType) {
+		 String accountEligibilityValueInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AccountEligibility")).getText().toLowerCase();
+		 String internalUseOnlyValueInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_InternalUseOnly")).getText().toLowerCase();
+		 String useHeadOfficeValueInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String UseHeadOffice")).getText().toLowerCase();
+		 String booleanFieldValuesInUI = accountEligibilityValueInUI + " " + internalUseOnlyValueInUI + " " + useHeadOfficeValueInUI;
+		 assertEquals(booleanFieldValuesInUI, getRoutingCodeBooleanFieldValuesFromDB(source, routingCode, codeType));
+	 }
+	 
+	 public void verifyRoutingCodeBooleanFieldValuesFromTrustedDB(String source, String routingCode, String codeType) {
+		try {			    
+			    String accountEligibilityFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_accountEligibility_radio"));
+			    String internalUseOnlyFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_internalUseOnly_radio"));
+			    String useHeadOfficeFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_useHeadOffice_radio"));				
+				String booleanFieldValuesInUI = accountEligibilityFlag + " " + internalUseOnlyFlag + " " + useHeadOfficeFlag;				
+				assertEquals(booleanFieldValuesInUI, getRoutingCodeBooleanFieldValuesFromDB(source, routingCode, codeType));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	 }
 
 	public void verifyRegistrarFeeAndRoutingCodeComment(String registrarFeeSFDCSubscription, String routingCodeComment) {
 		try {
