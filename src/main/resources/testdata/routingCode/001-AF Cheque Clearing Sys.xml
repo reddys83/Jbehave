@@ -1,0 +1,35 @@
+<routingCode deleted="false" fid="C-713215" id="d1f86ce1-a1a8-469a-b5cf-b528b1a5f114" resource="/routingCode/id/d1f86ce1-a1a8-469a-b5cf-b528b1a5f114" source="trusted">
+    <codeType>AF Cheque Clearing Sys</codeType>
+    <codeTypeDescription>AF Cheque Clearing Sys</codeTypeDescription>
+    <codeValue>001</codeValue>
+    <codeAlternateForms>
+        <codeAlternateForm type="fdb_legacy">001</codeAlternateForm>
+    </codeAlternateForms>
+    <codeStatus>active</codeStatus>
+    <accountEligible>true</accountEligible>
+    <paymentSystems>
+        <paymentSystem>
+            <product>
+                <name>
+                    <type>Display Name</type>
+                    <value>default</value>
+                </name>
+            </product>
+            <useCodeForm>default</useCodeForm>
+            <codeSystemMembership>Direct Participant</codeSystemMembership>
+            <codeSystemStatus>active</codeSystemStatus>
+        </paymentSystem>
+    </paymentSystems>
+    <assignedInstitution>
+        <link href="/legalEntity/id/fba7d564-8c54-4192-9e06-d8dff599c63a" rel="src"/>
+
+    </assignedInstitution>
+    <usageLocations>
+        <usageLocation primaryAssignee="false" rankAtLocation="999">
+            <presence>
+                <link href="/office/id/22e326c7-00bd-476b-af5e-2d97955b2b72" rel="src"/>
+
+            </presence>
+        </usageLocation>
+    </usageLocations>
+</routingCode>

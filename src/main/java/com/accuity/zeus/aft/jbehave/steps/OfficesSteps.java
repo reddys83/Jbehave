@@ -71,6 +71,10 @@ public class OfficesSteps extends AbstractSteps {
         getOfficesPage().verifyOfficeNames(fid);
     }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> develop
     @Then("the user should not see the office tab in the office page")
     public void verifyNoOfficeTabInOffice() {
         getOfficesPage().verifyNoOfficeTabInOffice();

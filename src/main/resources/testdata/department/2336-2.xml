@@ -1,0 +1,76 @@
+<department deleted="false" fid="2336-2" id="159e24d1-698d-4192-9f87-c487fd418f96" resource="/department/id/159e24d1-698d-4192-9f87-c487fd418f96" source="trusted" tfpid="20220100">
+    <summary>
+        <institution>
+            <link href="/legalEntity/id/65cbc471-cc6a-4b6c-8e27-488ced3535dd" rel="src"/>
+
+        </institution>
+        <office>
+            <link href="/office/id/9fdc14bc-2438-4adb-8fc3-ef1faaaff121" rel="src"/>
+
+        </office>
+        <status>active</status>
+        <types>
+            <type>FATCA</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Deutsche Apotheker-und Ärztebank eG</value>
+            </name>
+            <name>
+                <type>Department Name</type>
+                <value>FATCA</value>
+            </name>
+            <departmentSortKey>FATCA</departmentSortKey>
+        </names>
+    </summary>
+    <locations>
+        <location primary="true">
+            <address fid="2336-5">
+                <link href="/address/id/ebc0ff35-4a17-456d-ac2c-69dcc86b263b" rel="src"/>
+
+                <type>physical</type>
+                <function>Head Office</function>
+                <streetAddress>
+                    <addressLine1>Richard-Oskar-Mattern-Strasse 6</addressLine1>
+                </streetAddress>
+                <city>
+                    <link href="/city/id/be397fff-56d0-49bb-92c8-1ba976779046" rel="src"/>
+                    <fid>22672</fid>
+                    <name>Düsseldorf (department)</name>
+                    <citySortKey>DÜSSELDORF</citySortKey>
+                    <useInAddress>true</useInAddress>
+                </city>
+                <subarea>
+                    <link href="/area/id/9a0eec45-afce-4464-b2e4-a34c87a305f2" rel="src"/>
+                    <fid>SA-1286</fid>
+                    <name>Bezirk Düsseldorf</name>
+                    <areaSortKey>BEZIRK DÜSSELDORF</areaSortKey>
+                    <useInAddress>false</useInAddress>
+                </subarea>
+                <area>
+                    <link href="/area/id/48db4773-f455-498c-8828-f0e84adf7542" rel="src"/>
+                    <fid>A-NORDWE</fid>
+                    <name>Nordrhein-Westfalen(department)</name>
+                    <areaSortKey>NORDRHEIN WESTFALEN</areaSortKey>
+                    <useInAddress>false</useInAddress>
+                </area>
+                <country>
+                    <link href="/country/id/b6d347a7-3adb-45e5-9492-3709a2041306" rel="src"/>
+                    <fid>DEU</fid>
+                    <iso2>DE</iso2>
+                    <name>Germany</name>
+                    <countrySortKey>GERMANY</countrySortKey>
+                    <useInAddress>true</useInAddress>
+                </country>
+                <postalCode position="beforeCity">40547</postalCode>
+            </address>
+            <telecom fid="E-2336-3" rank="10">
+                <link href="/telecom/id/d82b7972-e7a0-4cba-abb3-3eebfbdaceee" rel="src"/>
+
+                <type>email</type>
+                <value>tax@apobank.de</value>
+            </telecom>
+        </location>
+    </locations>
+</department>

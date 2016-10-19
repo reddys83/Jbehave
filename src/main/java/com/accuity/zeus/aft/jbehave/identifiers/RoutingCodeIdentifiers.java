@@ -36,6 +36,19 @@ public class RoutingCodeIdentifiers {
         hmap.put("routingcode_basicInfo_view_String UseHeadOffice",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Use Head Office']/td"));
         hmap.put("routingcode_basicInfo_view_String Comment",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']/td"));
         hmap.put("routingcode_page_header_link",By.xpath(".//*[@id='cssTempFixId']/header//a"));
+<<<<<<< HEAD
+        hmap.put("routingCode_usages_link", By.xpath(".//*[@id='data-side-navbar']//li[@id='routingCodeUsages']"));
+        hmap.put("routingCode_usages_header_text", By.xpath(".//*[@id='routingCodeUsages']//thead/tr"));
+        hmap.put("routingCode_usages_name_column_header_xpath", By.xpath(".//*[@id='routingCodeUsages']//thead//th[3]"));
+        hmap.put("routingCode_usages_city_column_header_xpath", By.xpath(".//*[@id='routingCodeUsages']//thead//th[4]"));
+        hmap.put("routingCode_usages_area_column_header_xpath", By.xpath(".//*[@id='routingCodeUsages']//thead//th[5]"));
+        hmap.put("routingCode_owning_usages_name_column_xpath", By.xpath(".//*[@id='usages']/tr[td='true']/td[3]"));
+        hmap.put("routingCode_owning_usages_city_column_xpath", By.xpath(".//*[@id='usages']/tr[td='true']/td[4]"));
+        hmap.put("routingCode_owning_usages_area_column_xpath", By.xpath(".//*[@id='usages']/tr[td='true']/td[5]"));
+        hmap.put("routingCode_NotOwing_usages_name_column_xpath", By.xpath(".//*[@id='usages']/tr[not(td='true')]/td[3]"));
+        hmap.put("routingCode_NotOwing_usages_city_column_xpath", By.xpath(".//*[@id='usages']/tr[not(td='true')]/td[4]"));
+        hmap.put("routingCode_NotOwing_usages_area_column_xpath", By.xpath(".//*[@id='usages']/tr[not(td='true')]/td[5]"));
+=======
         hmap.put("edit_routingcode_page_add_alternateCode_btn",By.xpath("//*[@id='add-alternateCodes']"));
         hmap.put("edit_routingcode_page_new_delete_alternateCode_btn",By.xpath("//*[@id='additionalAlternateCodes']/tr[@class='new']/td[@class='delete']"));
         hmap.put("edit_routingcode_page_alternateCode_table",By.xpath("//*[@id='additionalAlternateCodes']/tr"));
@@ -79,6 +92,7 @@ public class RoutingCodeIdentifiers {
         hmap.put("officename_basicInfo_link", By.xpath("//*[@id='officeBasicInfo']"));
         hmap.put("officename_basicInfo_label", By.xpath("//*[@id='officeBasicInfo']/h1/span"));
         hmap.put("officename_text_value", By.xpath("//*[@id='officeBasicInfo']//tr[td='Office Name']/td[2]"));
+>>>>>>> develop
     }
     
     public static By getObjectIdentifier(String key) {
