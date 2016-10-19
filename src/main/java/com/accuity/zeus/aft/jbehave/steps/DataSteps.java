@@ -107,11 +107,6 @@ public class DataSteps extends AbstractSteps {
         getDataPage().verifyNames(names);
     }
 
-    @Then("the user should see the office's names as: $Names")
-    public void verifyOfficeNames(ExamplesTable Names) {
-        getDataPage().verifyNames(Names);
-    }
-
     @Then("the user should see the office sort key as $officeSortKey")
     public void verifyOfficeSortKey(@Named("officeSortKey") String officeSortKey) {
         getDataPage().verifyOfficeSortKey(officeSortKey);
@@ -713,7 +708,7 @@ public class DataSteps extends AbstractSteps {
     @Then("the user should see the basic info label for selected legal entity")
     @Alias("the user should see the basic info for selected office")
     public void verifyBasicInfo() {
-        getDataPage().verifyBasicInfo();
+        setOfficesPage(getDataPage().verifyBasicInfo());
     }
 
     @Then("the user should see the legal entity's identifiers as: $identifiers")
@@ -902,5 +897,4 @@ public class DataSteps extends AbstractSteps {
     public void verify2ndLineMenuItems(){
         getDataPage().verifyLegalEntity2ndLineMenuItem();
     }
-
 }

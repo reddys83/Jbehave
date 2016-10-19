@@ -1,4 +1,4 @@
-Meta: @EditCityRegions
+Meta: @EditCityRegions @Edit @City @AllStories
 
 Narrative:
 In order to view and edit the city page
@@ -35,7 +35,7 @@ Examples:
 
 
 Scenario: User adds new region type and value, checks the confirmation summary modal and saves the data to DB
-
+Meta:@test566
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the city tab in the data area

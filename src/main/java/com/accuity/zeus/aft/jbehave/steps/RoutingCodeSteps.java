@@ -3,6 +3,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 public class RoutingCodeSteps extends AbstractSteps {
 
     private String selectedOffice;
+    public String formerUsageOfficeName;
 
     @Then("the user should see the routing code basic info page")
     public void verifyRoutingCodeBasicInfoPage() {
@@ -36,6 +38,7 @@ public class RoutingCodeSteps extends AbstractSteps {
     {
         getRoutingCodePage().clickonHeaderLink();
     }
+<<<<<<< HEAD
 
     @When("the user clicks on the routingCode usages link in the navigation bar")
     public void clickOnUsagesLink() {
@@ -83,6 +86,69 @@ public class RoutingCodeSteps extends AbstractSteps {
         getRoutingCodePage().verifyRoutingCodeUsagesAscendingOrderByArea(routingCode, codeType);
     }
 
+=======
+    
+	@When("the user clicks on the former usages link in the navigation bar")
+	public void clickOnFormerUsageLink() {
+		 getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_former_usages_navigation_link"));
+	}
+	
+	@Then("the user should verify the column names in former usage page")
+	public void verifyFormerUsageColumnNames() {
+		getRoutingCodePage().verifyFormerUsageColumnNames();
+	}
+	
+	@Then("the user verifies that values in $column column is in $order order")
+	public void verifyFormerUsagesNameColumnInAlphabeticalOrder(@Named("column") String column, @Named("order") String order) {
+		getRoutingCodePage().verifyFormerUsagesColumnInOrder(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_" + column + "_list"), column, order);
+	}
+	
+	@When("the user clicks on sort button for name column")
+	public void clickOnFormerUsagesNameSortButton() {
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_col"));
+	}
+	
+	@When("the user clicks on sort button for city column")
+	public void clickOnFormerUsagesCitySortButton() {
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_city_col"));
+	}
+	
+	@When("the user clicks on sort button for area column")
+	public void clickOnFormerUsagesAreaSortButton() {
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_area_col"));
+	}
+	
+	@When("the user clicks on the first office name link")
+	public void clickOnFirstOfficeNameLink() {
+		formerUsageOfficeName = getRoutingCodePage().getOfficeNameLinkText();
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_first_office_name_link"));
+	}
+	
+	@Then("the user should see the office name basic info page")
+	public void verifyOfficeNameBasicInfoPage() {
+		getRoutingCodePage().verifyOfficeNameBasicInfoPage(formerUsageOfficeName);
+	}
+	
+	@Then("the user should see the former usages field values same as in $source document")
+	public void verifyFormerUsagesFieldValuesFromTrustedDB(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("source") String source) {
+		getRoutingCodePage().verifyFormerUsagesFieldValuesFromTrustedDB(routingCode, codeType, source);
+	}
+	
+	@When("the user deletes the existing former usages values")
+	public void deleteExistingFormerUsagesValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType) {
+		if (editRoutingCodePage == null) {
+			editRoutingCodePage = getRoutingCodePage().createEditRoutingCodePage();
+		}
+		getRoutingCodePage().deleteExistingFormerUsagesValues(routingCode, codeType);
+	}
+	
+	@When("the user inserts new former usages values")
+	public void insertNewFormerUsagesValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType) throws InterruptedException {
+		getRoutingCodePage().insertNewFormerUsagesValues(routingCode, codeType);
+		getDataPage().refreshThePage();	
+		Thread.sleep(5000L);
+	}
+>>>>>>> develop
 }
 
 

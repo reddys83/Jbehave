@@ -30,7 +30,7 @@ public class DataStepsEdit extends AbstractSteps {
 	}
 
 	@Then("the user should see the save confirmation modal")
-	public void verifySaveConfirmationModal() {
+	public void verifySaveConfirmationModal() {		
 		getDataPage().verifySaveConfirmationModal();
 	}
 

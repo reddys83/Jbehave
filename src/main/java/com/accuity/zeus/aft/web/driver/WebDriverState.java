@@ -37,8 +37,8 @@ public class WebDriverState {
 
 	@AfterStories
 	public void cleanup(){
-		webDriver.quit();
-	}
+        webDriver.quit();
+    }
 
 	public WebDriver getWebDriver() {
 		return webDriver;

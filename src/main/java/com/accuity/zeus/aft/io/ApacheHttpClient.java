@@ -78,36 +78,8 @@ public class ApacheHttpClient {
         method.releaseConnection();
     }
 
-    public Document executeDatabaseAdminQueryWithParameter(Database database, String xquery, String param, String paramValue) {
-      //  Utils utils = new Utils();
-        Document document = null;
-        HttpClient client = new HttpClient();
-        client.getState().setCredentials(new AuthScope(database.getHost(), database.getPort(), "public"), new UsernamePasswordCredentials(database.getUsername(), database.getPassword()));
-
-        List<String> authPrefs = new ArrayList<>();
-        authPrefs.add(AuthPolicy.DIGEST);
-        client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
-
-        HttpMethod method = new GetMethod(utils.constructURLWithParameter(database.getScheme(), database.getHost(), database.getPort(), database.getPath(), xquery, param, paramValue));
-        try {
-            client.executeMethod(method);
-            if(((GetMethod) method).getResponseContentLength()!=0){
-                document = new XmlDocument().convertFromString(method.getResponseBodyAsString());
-                Thread.sleep(1000L);
-            }
-
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        method.releaseConnection();
-        return document;
-    }
-
     public Document executeDatabaseAdminQueryWithMultipleParameter(Database database, String xquery, List<NameValuePair> nvPairs) {
-     //   Utils utils = new Utils();
+        //   Utils utils = new Utils();
         Document document = null;
         HttpClient client = new HttpClient();
         client.getState().setCredentials(new AuthScope(database.getHost(), database.getPort(), "public"), new UsernamePasswordCredentials(database.getUsername(), database.getPassword()));

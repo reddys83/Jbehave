@@ -84,7 +84,7 @@ Then the user should see the office header with <entity>, <headOfficeAddress>, <
 
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|viewHeadOffice|officeAddress|officeFid|officeTfpid|
-|Berliner Volksbank eG|Name|Berlin, Germany|1717|20205500|(View Head Office)|Berlin, Germany|1717-0|20205500-0|
+|Berliner Volksbank eG|Name|Berlin, Bezirk Freiburg, Sachsen-Anhalt, Germany|1717|20205500|(View Head Office)|Berlin, Bezirk Freiburg, Sachsen-Anhalt, Germany|1717-0|20205500-0|
 
 Scenario: Verify the User cannot follow link to head office from legal entity when legal entity has no head office
 Given a user is on the search page
@@ -129,7 +129,7 @@ Then the user should see the legal entity header with <entity>, <headOfficeAddre
 Examples:
 |entity|searchBy|headOfficeAddress|fid|tfpid|
 |Banque Tarneaud|Name||1645|20172300|
-|Berliner Volksbank eG|Name|Berlin, Germany|1717|20205500|
+|Berliner Volksbank eG|Name|Berlin, Bezirk Freiburg, Sachsen-Anhalt, Germany|1717|20205500|
 |Collins Stewart Europe Limited|Name||271690||
 
 Scenario: Verify legal entity sections list

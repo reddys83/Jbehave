@@ -41,7 +41,7 @@ public abstract class AbstractSteps {
 
     public static EditOfficePage editOfficePage;
 	public static EditLegalEntityPage editLegalEntityPage;
-
+	public static EditRoutingCodePage editRoutingCodePage;
 
 
 	public static EditCityPage editCityPage;
@@ -220,6 +220,10 @@ public abstract class AbstractSteps {
 		return editOfficePage;
 	}
 
+	public static EditRoutingCodePage getEditRoutingCodePage(){
+		return editRoutingCodePage;
+	}
+
 	public static void setEditOfficePage(EditOfficePage editOfficePage) {
 		AbstractSteps.editOfficePage = editOfficePage;
 	}
@@ -247,5 +251,8 @@ public abstract class AbstractSteps {
 		return editAreaPage;
 	}
 	
+	public static void setEditRoutingCodePage(EditRoutingCodePage editRoutingCodePage) {
+		AbstractSteps.editRoutingCodePage = editRoutingCodePage;
+	}
 
 }

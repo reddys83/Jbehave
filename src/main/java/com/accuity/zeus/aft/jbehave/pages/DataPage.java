@@ -212,7 +212,7 @@ public class DataPage extends AbstractPage {
     private By area_basic_info_country_link_xpath = By.xpath(".//*//tr[th='Country']/td/a");
     private String area_related_places_place_link_xpath = "//li[contains(h1,'Places')]//tr[td='";
     private By confirmation_modal_xpath = By.xpath("//*[@id='modal-region']");
-
+    
     static ResponseEntity responseEntity;
     static String endpointWithID;
 
@@ -290,13 +290,14 @@ public class DataPage extends AbstractPage {
         }
     }
 
-    public void verifyBasicInfo() {
+    public OfficesPage verifyBasicInfo() {
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         assertEquals("BASIC INFO", getDriver().findElement(basic_info_xpath).getText());
+        return new OfficesPage(getDriver(), getPageUrl(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void verifyNames(ExamplesTable namesList) {
@@ -1092,7 +1093,7 @@ public class DataPage extends AbstractPage {
     }
 
     public void verifySaveConfirmationModal() {
-        try {
+    	try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -1377,7 +1378,8 @@ public class DataPage extends AbstractPage {
     }
     
     public void verifyElementNotExistInUI(By by) {
-		try {			
+		try {	
+			Thread.sleep(2000L);
 			assertTrue(getDriver().findElement(by) == null);
 		} catch (Exception e) {
 			assertTrue(true);
@@ -1466,5 +1468,37 @@ public class DataPage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
+	
+	public void clickElementUsingIndex(By by, int index) {		
+    	try {    		
+    		List<WebElement> elementList = getDriver().findElements(by);		
+        	elementList.get(index-1).click();        	
+    	}
+    	catch (Exception e) {
+			assertFalse("Element not found", false);
+		}    	
+	} 
+	
+	public void getDocumentForRoutingCode(String xqueryName, String routingCode, String codeType) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+        nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+        nvPairs.add(new BasicNameValuePair("source", "zeus"));
 
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
+        if(document != null) {
+	        endpointWithID = document.getElementsByTagName("documentIdwithEndpoint").item(0).getAttributes().getNamedItem("resource").getTextContent().toString();
+
+	        responseEntity = restClient.getDocumentByID(endpointWithID, heraApi);
+	        assertTrue(responseEntity.getStatusCode().value() == 200);
+	    }
+	    else {
+            assertFalse("Zeus document with Routing Code " + routingCode + " and Routing Code Type " + codeType + " does not exist in the DB", true);
+	    }
+    }
+	
+	public EditRoutingCodePage createEditRoutingCodePage() {
+        return new EditRoutingCodePage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+    }
+	
 }
