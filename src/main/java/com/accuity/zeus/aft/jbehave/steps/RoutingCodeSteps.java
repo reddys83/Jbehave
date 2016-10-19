@@ -104,6 +104,17 @@ public class RoutingCodeSteps extends AbstractSteps {
 		getDataPage().refreshThePage();	
 		Thread.sleep(5000L);
 	}
+	
+	@Then("the user should see all the routing code menus in the sidebar")
+	public void verifyRoutingCodeMenusInSidebar() {
+		getDataPage().verifyElementIsDisplayed("ALL", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_all_link"));
+		getDataPage().verifyElementIsDisplayed("BASIC INFO", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_link"));
+		getDataPage().verifyElementIsDisplayed("PAYMENT SYSTEMS", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_payment_systems_link"));
+		getDataPage().verifyElementIsDisplayed("RELATED CODES", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_related_codes_link"));
+		getDataPage().verifyElementIsDisplayed("USAGES", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_usages_link"));
+		getDataPage().verifyElementIsDisplayed("FORMER USAGES", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_former_usages_link"));
+		getDataPage().verifyElementIsDisplayed("HISTORY", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_link"));
+	}
 }
 
 
