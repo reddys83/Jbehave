@@ -65,6 +65,8 @@ public class RoutingCodeIdentifiers {
         hmap.put("edit_routingcode_page_EndDate_errorMessage", By.xpath("//*[@data-error_id='validToError']"));
         hmap.put("edit_routingcode_page_ForthcomingRetirementDate_errorMessage", By.xpath("//*[@data-error_id='retireAtError']"));
         hmap.put("edit_routingcode_page_ConfirmedWithFedDate_errorMessage", By.xpath("//*[@data-error_id='confirmedDateError']"));
+        hmap.put("view_routingCodeSearchEntityPlaceHolder_xpath", By.xpath("//input[@placeholder='Enter at least 2 valid characters']"));
+        hmap.put("view_routingCodeSearchTypeAheadBox_xpath", By.xpath("//*[@id='search']"));
     }
     
     public static By getObjectIdentifier(String key) {

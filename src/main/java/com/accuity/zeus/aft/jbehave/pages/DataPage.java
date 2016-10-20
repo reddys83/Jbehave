@@ -1501,4 +1501,8 @@ public class DataPage extends AbstractPage {
         return new EditRoutingCodePage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
     }
 	
+	public RoutingCodePage createRoutingCodePage() {
+        return new RoutingCodePage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+    }
+	
 }

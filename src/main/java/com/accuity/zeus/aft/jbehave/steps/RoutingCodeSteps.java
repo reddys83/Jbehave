@@ -41,6 +41,39 @@ public class RoutingCodeSteps extends AbstractSteps {
     {
         getRoutingCodePage().clickonHeaderLink();
     }
+    
+    @Then("the user should verify the message")
+    public void verifyRoutingCodeSearchText()
+    {
+    	try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	setRoutingCodePage(getDataPage().createRoutingCodePage());
+        getRoutingCodePage().verifyRoutingCodeSearchText();
+    }
+    
+    @Then("the user should not see the message")
+    public void verifyRoutingCodeSearchTextNoDisplay()
+    {
+    	try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	setRoutingCodePage(getDataPage().createRoutingCodePage());
+        getRoutingCodePage().verifyRoutingCodeSearchText();
+    }
+    
+    
+    @When("the user clears the entity value in type ahead box")
+	public void clearEntityInTypeAheadBox() {
+    	getRoutingCodePage().clearEntityInTypeAheadBox();
+	}
 }
 
 

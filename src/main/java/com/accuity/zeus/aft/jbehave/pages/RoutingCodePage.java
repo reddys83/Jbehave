@@ -129,4 +129,16 @@ public class RoutingCodePage extends AbstractPage {
         {e.printStackTrace();}
         return ERP;
     }
+    
+    public void verifyRoutingCodeSearchText() {
+    	assertEquals("Enter at least 2 valid characters",getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingCodeSearchEntityPlaceHolder_xpath")).getAttribute("placeholder"));
+    }
+    
+    public void verifyRoutingCodeSearchTextNoDisplay() {
+    	assertNotEquals("Enter at least 2 valid characters",getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingCodeSearchEntityPlaceHolder_xpath")).getAttribute("placeholder"));
+    }
+    
+    public void clearEntityInTypeAheadBox(){
+    	getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingCodeSearchTypeAheadBox_xpath")).clear();
+    }
 }
