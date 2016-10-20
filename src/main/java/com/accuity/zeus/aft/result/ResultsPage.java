@@ -1146,13 +1146,9 @@ public class ResultsPage extends AbstractPage {
         return null;
     }
     
-    public void verifyToolTipViewRoutingCode() {
-    	assertEquals("View Routing Code", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcodes_rows_xpath")).getAttribute("title"));
-    }
-    
-    public void verifyToolTipViewOffice() {
-    	assertEquals("View Office", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_office_fid_search_results")).getAttribute("title"));
-    }
+    public void verifyToolTipInRoutingCodeSearchResultsPage(String tooltip, By by) {
+    	assertEquals(tooltip, getDriver().findElement(by).getAttribute("title"));
+    } 
 
 
  }
