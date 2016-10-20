@@ -141,44 +141,36 @@ public class RoutingCodeSteps extends AbstractSteps {
 	}
 	
 	@When("the user inserts new former usages values")
-	public void insertNewFormerUsagesValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType) throws InterruptedException {
+	public void insertNewFormerUsagesValues(@Named("routingCode") String routingCode,
+			@Named("codeType") String codeType) throws InterruptedException {
 		getRoutingCodePage().insertNewFormerUsagesValues(routingCode, codeType);
-		getDataPage().refreshThePage();	
+		getDataPage().refreshThePage();
 		Thread.sleep(5000L);
 	}
-	
-	 @Then("the user should verify the message")
-	    public void verifyRoutingCodeSearchText()
-	    {
-	    	try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    	setRoutingCodePage(getDataPage().createRoutingCodePage());
-	        getRoutingCodePage().verifyRoutingCodeSearchText();
-	    }
-	    
-	    @Then("the user should not see the message")
-	    public void verifyRoutingCodeSearchTextNoDisplay()
-	    {
-	    	try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    	
-	    	setRoutingCodePage(getDataPage().createRoutingCodePage());
-	        getRoutingCodePage().verifyRoutingCodeSearchText();
-	    }
-	    
-	    
-	    @When("the user clears the entity value in type ahead box")
-		public void clearEntityInTypeAheadBox() {
-	    	getRoutingCodePage().clearEntityInTypeAheadBox();
+
+	@Then("the user should verify the message $message")
+	public void verifyRoutingCodeSearchText() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		setRoutingCodePage(getDataPage().createRoutingCodePage());
+		getRoutingCodePage().verifyRoutingCodeSearchText();
+	}
+
+	@Then("the user should not see the message $message")
+	public void verifyRoutingCodeSearchTextNoDisplay() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		getRoutingCodePage().verifyRoutingCodeSearchText();
+	}
+
+	@When("the user clears the entity value in type ahead box")
+	public void clearEntityInTypeAheadBox() {
+		getRoutingCodePage().clearEntityInTypeAheadBox();
+	}
 }
-
-
