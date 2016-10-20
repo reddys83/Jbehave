@@ -506,4 +506,15 @@ public abstract class AbstractPage {
     	return value;
     }    
     
+    public String getSelectedRadioButtonOption(By by) {
+		String flagValue = null;
+		List<WebElement> fieldFlagOptions = getDriver().findElements(by);
+		for (int flagIndex = 0; flagIndex < fieldFlagOptions.size(); flagIndex++) {
+			if (fieldFlagOptions.get(flagIndex).isSelected()) {
+				flagValue = fieldFlagOptions.get(flagIndex).getAttribute("value");
+				break;
+			}
+		}
+		return flagValue;
+	} 
 }

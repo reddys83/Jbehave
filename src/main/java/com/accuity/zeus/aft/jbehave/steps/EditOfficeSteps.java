@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
-
+import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1620,5 +1620,47 @@ public class EditOfficeSteps extends AbstractSteps{
 	@Then("the user verifies the primary flag values in $source document")
 	public void primaryFlagValueFromZeusDB(@Named("source") String source, @Named("officeFid") String officeFid) {
 		getEditOfficePage().primaryFlagValueFromZeusDB(source, officeFid);
+	}
+	
+	@Then("the user should verify the postal code position is updated in Office web page")
+	public void verifyPostalCodePositionInUI(@Named("postalCodePosition") String postalCodePosition) {
+
+		getEditOfficePage().verifypostalCodePositonInUI(postalCodePosition);
+	}
+
+	@Then("the user should verify postal code position is $source document")
+	public void verifyPostalCodePositionInZeus(@Named("Country") String country,
+			@Named("postalCodePosition") String postalCodePosition, @Named("officeFid") String officeFid,
+			@Named("source") String source) {
+		Map<String, String> inputParameters = new HashMap<String, String>();
+		inputParameters.put("officeFid", officeFid);
+		inputParameters.put("source", source);
+		inputParameters.put("Country", country);
+		assertEquals(postalCodePosition,
+				getDataPage().getTagValueFromDB("get Office Locations", "postalCodePos", inputParameters));
+		assertEquals(postalCodePosition, getDataPage().getTagValueFromDB("get postalCodePos from countryDoc",
+				"postalCodePosition", inputParameters));
+
+	}
+
+	@Then("the user should verify the postal code position should be null in office web page")
+	public void verifyPostalCodePositionNullInUI(@Named("postalCodePosition") String postalCodePosition) {
+
+		getEditOfficePage().verifypostalCodePositonInUI(postalCodePosition);
+	}
+
+	@Then("the user should verify postal code position should be blank in $source document")
+	public void verifyPostalCodePositionBlankInZeus(@Named("Country") String country,
+			@Named("postalCodePosition") String postalCodePosition, @Named("officeFid") String officeFid,
+			@Named("source") String source) {
+		Map<String, String> inputParameters = new HashMap<String, String>();
+		inputParameters.put("officeFid", officeFid);
+		inputParameters.put("source", source);
+		inputParameters.put("Country", country);
+
+		assertNotEquals(postalCodePosition,
+				getDataPage().getTagValueFromDB("get Office Locations", "postalCodePos", inputParameters));
+		assertNotEquals(postalCodePosition, getDataPage().getTagValueFromDB("get postalCodePos from countryDoc",
+				"postalCodePosition", inputParameters));
 	}
 }

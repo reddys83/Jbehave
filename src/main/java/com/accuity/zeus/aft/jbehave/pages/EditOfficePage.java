@@ -2113,7 +2113,14 @@ public class EditOfficePage extends AbstractPage {
 		return value;
 	}
 	
-    @Override
+	public void verifypostalCodePositonInUI(String postalCodePositon) {
+		assertEquals(postalCodePositon,
+				getDriver()
+						.findElement(OfficeIdentifiers.getObjectIdentifier("office_locations_postalCodePosition_xpath"))
+						.getAttribute("value"));
+	}
+
+	   @Override
     public String getPageUrl() {
         return null;
     }
