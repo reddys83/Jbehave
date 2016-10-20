@@ -490,13 +490,13 @@ public class SearchResultsSteps extends AbstractSteps{
         }
     }
     
-    @Then("the user should see the view routing code tooltip on routing code search results page")
-    public void verifyToolTipViewRoutingCode() {
-    	getResultsPage().verifyToolTipInRoutingCodeSearchResultsPage("View Routing Code", RoutingCodeIdentifiers.getObjectIdentifier("routingcodes_rows_xpath"));
+    @Then("the user should see the $tooltip tooltip on routing code results page")
+    public void verifyToolTipViewRoutingCode(@Named("tooltip") String tooltip) {
+    	getResultsPage().verifyToolTipInRoutingCodeResultsPage(tooltip, RoutingCodeIdentifiers.getObjectIdentifier("routingcodes_rows_xpath"));
     }
     
-    @Then("the user should see the view office tooltip on routing code search results page")
-    public void verifyToolTipViewOffice() {
-    	getResultsPage().verifyToolTipInRoutingCodeSearchResultsPage("View Office", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_office_fid_search_results"));
+    @Then("the user should see the $tooltip tooltip on routing code search results page")
+    public void verifyToolTipViewOffice(@Named("tooltip") String tooltip) {
+    	getResultsPage().verifyToolTipInRoutingCodeResultsPage(tooltip, RoutingCodeIdentifiers.getObjectIdentifier("routingcode_office_fid_search_results"));
     }
 }

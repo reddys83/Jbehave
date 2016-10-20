@@ -1146,7 +1146,7 @@ public class ResultsPage extends AbstractPage {
         return null;
     }
     
-    public void verifyToolTipInRoutingCodeSearchResultsPage(String tooltip, By by) {
+    public void verifyToolTipInRoutingCodeResultsPage(String tooltip, By by) {
     	assertEquals(tooltip, getDriver().findElement(by).getAttribute("title"));
     } 
 

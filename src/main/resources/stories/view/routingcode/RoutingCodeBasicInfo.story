@@ -52,8 +52,8 @@ Given a user is on the search page
 When the user selects the <searchBy> from the dropdown
 When the user enters the <entity> in the typeahead
 And the user clicks on the search button
-Then the user should see the view routing code tooltip on routing code search results page
-Then the user should see the view office tooltip on routing code search results page
+Then the user should see the View Routing Code tooltip on routing code results page
+Then the user should see the View Office tooltip on routing code search results page
 When the user clicks on the code value hyperlink on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
 Then the user should see all the routing code menus in the sidebar
