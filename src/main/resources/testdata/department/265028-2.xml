@@ -1,0 +1,90 @@
+<department deleted="false" fid="265028-2" id="8a9cef7e-e8c3-4462-b650-0fa587253b6d" resource="/department/id/8a9cef7e-e8c3-4462-b650-0fa587253b6d" source="trusted" tfpid="70009395">
+    <summary>
+        <institution>
+            <link href="/legalEntity/id/eb789730-215c-464b-9264-d96ddd8b9062" rel="src"/>
+
+        </institution>
+        <office>
+            <link href="/office/id/d1a9634f-cce7-4c5d-bfb0-5d61332b7ab6" rel="src"/>
+
+        </office>
+        <status>active</status>
+        <types>
+            <type abbreviation="From TFPSYS: 074">ACH Contact</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Teamsters Local 697 Federal Credit Union</value>
+            </name>
+            <name>
+                <type>Department Name</type>
+                <value>ACH Contact</value>
+            </name>
+            <departmentSortKey>ACH CONTACT</departmentSortKey>
+        </names>
+    </summary>
+    <locations>
+        <location primary="true">
+            <address fid="265028-2">
+                <link href="/address/id/b959a508-d173-49a4-9279-6ce26a5d3b6b" rel="src"/>
+
+                <type>physical</type>
+                <function>Head Office</function>
+                <streetAddress>
+                    <addressLine1>901 Market St</addressLine1>
+                </streetAddress>
+                <city>
+                    <link href="/city/id/7d1a12e6-da35-4604-a45b-b7b6eac8618c" rel="src"/>
+
+                    <fid>83925</fid>
+                    <name>Wheeling (dept cityonly)</name>
+                    <citySortKey>WHEELING</citySortKey>
+                    <useInAddress>true</useInAddress>
+                </city>
+                <subarea>
+                    <link href="/area/id/62860660-7f0f-4d5c-955f-99454b667d2c" rel="src"/>
+
+                    <fid>SA-4499</fid>
+                    <name>Ohio</name>
+                    <areaSortKey>OHIO</areaSortKey>
+                    <useInAddress>false</useInAddress>
+                </subarea>
+                <country>
+                    <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+
+                    <fid>USA</fid>
+                    <iso2>US</iso2>
+                    <name>USA</name>
+                    <countrySortKey>USA</countrySortKey>
+                    <useInAddress>true</useInAddress>
+                </country>
+                <postalCode position="afterArea">26003</postalCode>
+            </address>
+            <telecom fid="E-265028-1" rank="10">
+                <link href="/telecom/id/00ea2356-7e27-4195-8725-d42305897938" rel="src"/>
+
+                <type>email</type>
+                <value>beckyk@wvdsl.net</value>
+            </telecom>
+            <telecom fid="F-265028-4" rank="10">
+                <link href="/telecom/id/d3d8e6b5-6516-49be-b4e8-a58ca4206613" rel="src"/>
+
+                <type>fax</type>
+                <phoneCountryCode>1</phoneCountryCode>
+                <phoneAreaCode>304</phoneAreaCode>
+                <phoneNumber>2325840</phoneNumber>
+                <value>+1-304-2325840</value>
+            </telecom>
+            <telecom fid="T-265028-4" rank="10">
+                <link href="/telecom/id/154e74f9-3ace-4181-aeeb-e9fc883dac9b" rel="src"/>
+
+                <type>telephone</type>
+                <phoneCountryCode>1</phoneCountryCode>
+                <phoneAreaCode>304</phoneAreaCode>
+                <phoneNumber>2329840</phoneNumber>
+                <value>+1-304-2329840</value>
+            </telecom>
+        </location>
+    </locations>
+</department>

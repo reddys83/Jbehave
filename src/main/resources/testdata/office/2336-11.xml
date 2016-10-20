@@ -1,0 +1,127 @@
+<office deleted="false" fid="2336-11" id="c2b1f3ab-95d8-4726-9c1c-2839f1450530" resource="/office/id/c2b1f3ab-95d8-4726-9c1c-2839f1450530" source="trusted">
+    <summary>
+        <institution>
+            <link href="/legalEntity/id/65cbc471-cc6a-4b6c-8e27-488ced3535dd" rel="src"/>
+
+        </institution>
+        <status>active</status>
+        <types>
+            <type>Branch</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Deutsche Apotheker-und Ärztebank eG</value>
+            </name>
+            <name>
+                <type>Office Name</type>
+                <value>Karl-Liebknecht-Str</value>
+            </name>
+            <officeSortKey>KARL LIEBKNECHT STR</officeSortKey>
+        </names>
+        <principalOffice>false</principalOffice>
+        <foreignOffice>true</foreignOffice>
+    </summary>
+    <locations>
+        <location primary="true">
+            <address fid="2336-19">
+                <link href="/address/id/40f83fbd-21c2-4ead-a498-1daf0d0ae139" rel="src"/>
+
+                <type>physical</type>
+                <function>Branch Address</function>
+                <streetAddress>
+                    <addressLine1>Karl-Liebknecht-Str 2</addressLine1>
+                </streetAddress>
+                <city>
+                    <link href="/city/id/2695dfac-790f-46de-8342-01aea507568d" rel="src"/>
+
+                    <fid>23215</fid>
+                    <name>Dortmund</name>
+                    <citySortKey>DORTMUND</citySortKey>
+                    <useInAddress>true</useInAddress>
+                </city>
+                <subarea>
+                    <link href="/area/id/bfc9ffd7-110f-445e-be36-ddfde4d0dc65" rel="src"/>
+
+                    <fid>SA-1284</fid>
+                    <name>Bezirk Arnsberg</name>
+                    <areaSortKey>BEZIRK ARNSBERG</areaSortKey>
+                    <useInAddress>false</useInAddress>
+                </subarea>
+                <country>
+                    <link href="/country/id/b6d347a7-3adb-45e5-9492-3709a2041306" rel="src"/>
+
+                    <fid>DEU</fid>
+                    <iso2>DE</iso2>
+                    <name>Germany</name>
+                    <countrySortKey>GERMANY</countrySortKey>
+                    <useInAddress>true</useInAddress>
+                </country>
+                <postalCode position="beforeCity">44141</postalCode>
+            </address>
+            <telecom fid="F-2336-15" rank="10">
+                <link href="/telecom/id/53e96132-dcd2-46d8-aaac-5fd70383f256" rel="src"/>
+
+                <type>fax</type>
+                <phoneCountryCode>49</phoneCountryCode>
+                <phoneAreaCode>231</phoneAreaCode>
+                <phoneNumber>4345229</phoneNumber>
+                <value>+49-231-4345229</value>
+            </telecom>
+            <telecom fid="T-2336-15" rank="10">
+                <link href="/telecom/id/d8146acc-3827-4ea5-80d8-4be28c44c7a7" rel="src"/>
+
+                <type>telephone</type>
+                <phoneCountryCode>49</phoneCountryCode>
+                <phoneAreaCode>231</phoneAreaCode>
+                <phoneNumber>43450</phoneNumber>
+                <value>+49-231-43450</value>
+            </telecom>
+        </location>
+        <location primary="false">
+            <address fid="2336-71">
+                <link href="/address/id/beefb08e-620d-4e9a-8d3e-d6073a992038" rel="src"/>
+
+                <type>mailing</type>
+                <function>Postal Address</function>
+                <streetAddress>
+                    <addressLine1>Postfach 10 02 63</addressLine1>
+                </streetAddress>
+                <city>
+                    <link href="/city/id/2695dfac-790f-46de-8342-01aea507568d" rel="src"/>
+
+                    <fid>23215</fid>
+                    <name>Dortmund</name>
+                    <citySortKey>DORTMUND</citySortKey>
+                    <useInAddress>true</useInAddress>
+                </city>
+                <subarea>
+                    <link href="/area/id/bfc9ffd7-110f-445e-be36-ddfde4d0dc65" rel="src"/>
+
+                    <fid>SA-1284</fid>
+                    <name>Bezirk Arnsberg</name>
+                    <areaSortKey>BEZIRK ARNSBERG</areaSortKey>
+                    <useInAddress>false</useInAddress>
+                </subarea>
+                <area>
+                    <link href="/area/id/48db4773-f455-498c-8828-f0e84adf7542" rel="src"/>
+
+                    <fid>A-NORDWE</fid>
+                    <name>Nordrhein-Westfalen</name>
+                    <areaSortKey>NORDRHEIN-WESTFALEN</areaSortKey>
+                    <useInAddress>false</useInAddress>
+                </area>
+                <country>
+                    <link href="/country/id/b6d347a7-3adb-45e5-9492-3709a2041306" rel="src"/>
+
+                    <fid>DEU</fid>
+                    <iso2>DE</iso2>
+                    <name>Germany</name>
+                    <countrySortKey>GERMANY</countrySortKey>
+                    <useInAddress>true</useInAddress>
+                </country>
+                <postalCode position="beforeCity">44002</postalCode>
+            </address>
+        </location>
+    </locations>
+</office>

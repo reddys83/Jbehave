@@ -89,10 +89,6 @@ public class XqueryMap {
 
         queryMap.put("get office basic info","getOfficeBasicInfo.xqy");
         queryMap.put("get id for offices", "getIdForOffices.xqy");
-        // duplicate
-       // queryMap.put("get Id for area", "getIdForArea.xqy");
-
-
         queryMap.put("get Office Telecoms Types", "getOfficeTelecomsTypeFromLookup.xqy");
         queryMap.put("get Office Address Types", "getOfficeAddressTypesFromLookup.xqy");
         queryMap.put("get Office Locations", "getOfficeLocations.xqy");
@@ -147,6 +143,7 @@ public class XqueryMap {
 		queryMap.put("get document id for subarea","getIdForSubArea.xqy");
         queryMap.put("get Id for area", "getIdForArea.xqy");
         queryMap.put("get routingCode basic info","getRoutingCodeBasicInfo.xqy");
+        queryMap.put("get routingCode usages", "getRoutingCodeUsages.xqy");
 		queryMap.put("get office telecom locations", "getOfficeTelecomLocations.xqy");
 		queryMap.put("delete office locations values", "deleteOfficeLocationsValues.xqy");
 		queryMap.put("get area entity type lookup","getAreaRelatedEntityTypeFromLookup.xqy");
@@ -155,6 +152,9 @@ public class XqueryMap {
 		queryMap.put("get document id for routing code", "getIdForRoutingCode.xqy");
 		queryMap.put("get postalCodePos from countryDoc","getPostalCodeFromCountryDoc.xqy");
 		queryMap.put("change routing code status", "changeRoutingCodeStatus.xqy");
+		queryMap.put("get routing code former usages values", "getRoutingCodeFormerUsages.xqy");
+		queryMap.put("delete routing code former usages values", "deleteRoutingCodeFormerUsagesValues.xqy");
+		queryMap.put("insert routing code former usages values", "insertRoutingCodeFormerUsagesValues.xqy");
    }
 
     public String getXquery(String key){
