@@ -488,4 +488,14 @@ public class SearchResultsSteps extends AbstractSteps{
             dataPage = getResultsPage().createDataPage();
         }
     }
+    
+    @Then("the user should see the view routing code tooltip on routing code search results page")
+    public void verifyToolTipViewRoutingCode() {
+    	getResultsPage().verifyToolTipViewRoutingCode();
+    }
+    
+    @Then("the user should see the view office tooltip on routing code search results page")
+    public void verifyToolTipViewOffice() {
+    	getResultsPage().verifyToolTipViewOffice();
+    }
 }
