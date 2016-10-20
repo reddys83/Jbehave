@@ -1,0 +1,30 @@
+<department deleted="false" fid="701-5" id="a9de4a11-fe8c-4123-a9a0-2e2d88312006" resource="/department/id/a9de4a11-fe8c-4123-a9a0-2e2d88312006" source="trusted" tfpid="21024400">
+    <summary>
+        <institution>
+            <link href="/legalEntity/id/c449c110-942b-4416-85e6-7dce2ce5469c" rel="src"/>
+        </institution>
+        <office>
+            <link href="/office/id/b7c83ec2-4763-4aa4-9460-67bef6d5b717" rel="src"/>
+        </office>
+        <status>active</status>
+        <types>
+            <type>Brokerage</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Banco Finantia SA</value>
+            </name>
+            <name>
+                <type>Department Name</type>
+                <value>Brokerage</value>
+            </name>
+            <departmentSortKey>BROKERAGE</departmentSortKey>
+        </names>
+    </summary>
+    <locations>
+        <location primary="true">
+
+        </location>
+    </locations>
+</department>
