@@ -38,7 +38,6 @@ public class RoutingCodeSteps extends AbstractSteps {
     {
         getRoutingCodePage().clickonHeaderLink();
     }
-<<<<<<< HEAD
 
     @When("the user clicks on the routingCode usages link in the navigation bar")
     public void clickOnUsagesLink() {
@@ -159,7 +158,6 @@ public class RoutingCodeSteps extends AbstractSteps {
 		getDataPage().verifyElementIsDisplayed("FORMER USAGES", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_former_usages_link"));
 		getDataPage().verifyElementIsDisplayed("HISTORY", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_link"));
 	}
->>>>>>> develop
 }
 
 
