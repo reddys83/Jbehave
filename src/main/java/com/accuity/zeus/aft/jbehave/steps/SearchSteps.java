@@ -84,7 +84,7 @@ public class SearchSteps extends AbstractSteps {
 	@Then("the user should not see the message $message in search box")
 	public void verifyRoutingCodeSearchTextNoDisplay(@Named("message") String message) {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
