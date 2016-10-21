@@ -372,16 +372,16 @@ public class RoutingCodePage extends AbstractPage {
 		}
     }
     
-	public void verifyRoutingCodeSearchText() {
-		assertEquals("Enter at least 2 valid characters",
+	public void verifyRoutingCodeSearchText(String message) {
+		assertEquals(message,
 				getDriver()
 						.findElement(RoutingCodeIdentifiers
 								.getObjectIdentifier("view_routingCodeSearchEntityPlaceHolder_xpath"))
 						.getAttribute("placeholder"));
 	}
 
-	public void verifyRoutingCodeSearchTextNoDisplay() {
-		assertNotEquals("Enter at least 2 valid characters",
+	public void verifyRoutingCodeSearchTextNoDisplay(String message) {
+		assertNotEquals(message,
 				getDriver()
 						.findElement(RoutingCodeIdentifiers
 								.getObjectIdentifier("view_routingCodeSearchEntityPlaceHolder_xpath"))
@@ -392,4 +392,18 @@ public class RoutingCodePage extends AbstractPage {
 		getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingCodeSearchTypeAheadBox_xpath"))
 				.clear();
 	}
+	
+	public void verifyResultsPage() {
+		System.out.println("hi");
+		System.out.println(getDriver()
+		.findElement(RoutingCodeIdentifiers
+				.getObjectIdentifier("view_getRoutingCodeResultsHeader_xpath"))
+		.getAttribute("placeholder"));		
+		assertEquals("Routing Code results for",
+				getDriver()
+						.findElement(RoutingCodeIdentifiers
+								.getObjectIdentifier("view_getRoutingCodeResultsHeader_xpath"))
+						.getAttribute("placeholder"));
+	}
+
 }

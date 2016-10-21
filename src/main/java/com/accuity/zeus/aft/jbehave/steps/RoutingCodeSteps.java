@@ -149,28 +149,40 @@ public class RoutingCodeSteps extends AbstractSteps {
 	}
 
 	@Then("the user should verify the message $message")
-	public void verifyRoutingCodeSearchText() {
+	public void verifyRoutingCodeSearchText(@Named("message") String message) {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		setRoutingCodePage(getDataPage().createRoutingCodePage());
-		getRoutingCodePage().verifyRoutingCodeSearchText();
+		getRoutingCodePage().verifyRoutingCodeSearchText(message);
 	}
 
 	@Then("the user should not see the message $message")
+	public void verifyRoutingCodeSearchTextNoDisplay(@Named("message") String message) {
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		setRoutingCodePage(getDataPage().createRoutingCodePage());
+		//getRoutingCodePage().verifyRoutingCodeSearchText(message);
+	}
+
+	@When("the user clears the entity value in type ahead box")
+	public void clearEntityInTypeAheadBox() {
+		getRoutingCodePage().clearEntityInTypeAheadBox();
+	}
+	
+	@Then("the user should see Results page displayed")
 	public void verifyRoutingCodeSearchTextNoDisplay() {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		getRoutingCodePage().verifyRoutingCodeSearchText();
-	}
-
-	@When("the user clears the entity value in type ahead box")
-	public void clearEntityInTypeAheadBox() {
-		getRoutingCodePage().clearEntityInTypeAheadBox();
+		setRoutingCodePage(getDataPage().createRoutingCodePage());
+		getRoutingCodePage().verifyResultsPage();
 	}
 }
