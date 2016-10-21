@@ -360,7 +360,6 @@ And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
 When the user clicks on the routing code update link
-When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
 Then the user verifies that the drop-down field values are same as in trusted document
 Then the user should see the routing code subtype values from lookup ROUTING_CODE_SUBTYPE
 Then the user should see the ABA code source values from lookup ROUTING_CODE_SOURCE
@@ -374,12 +373,11 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should be able to verify the drop-down field values in routing code basic info page
 Then the user should see the drop-down field values same as in zeus document
-Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|routingCode|codeType|routingCodeSubtype|ABACodeSource|
-|083905216|Routing Code|083905216|ABA|Electronic Transaction Identifier|EFT Data Collection|
 |083905216|Routing Code|083905216|ABA|Unknown|Other (Unknown)|
+|083905216|Routing Code|083905216|ABA|Electronic Transaction Identifier|EFT Data Collection|
 
 Scenario: User is updating Routing Code's Basic Info page -
 a) User verifies no change in confirmation modal by entering Routing Code Subtype and ABA Code Source drop-down values that is same as the current values.
@@ -405,7 +403,7 @@ Then the user should see the drop-down field values same as in zeus document
 
 Examples:
 |entity|searchBy|routingCode|codeType|routingCodeSubtype|ABACodeSource|
-|083905216|Routing Code|083905216|ABA|Non Par Routing Numbers|ABA|
+|083905216|Routing Code|083905216|ABA|Electronic Transaction Identifier|EFT Data Collection|
 
 Scenario: User is on the Routing Code's Basic Info page - 
 a) User selects a Routing Code where the Routing Code Type is not 'ABA'.
