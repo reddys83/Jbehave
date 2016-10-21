@@ -44,6 +44,8 @@ Examples:
 |entity|searchBy|routingCode|codeType|
 |01056|Routing Code|01056|Swift BIC|
 
+Scenario: User verifies the message "Enter at least 2 valid characters" when only one alpha numeric character is entered
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
