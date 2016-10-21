@@ -403,18 +403,6 @@ public class EditRoutingCodePage extends AbstractPage {
 		}
 	}
 	
-	public void verifyDropDownFieldValuesInUI(String routingCodeSubtype, String ABACodeSource) {
-		try {
-			Thread.sleep(3000L);
-			String routingCodeSubtypeUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeSubtype")).getText();
-			String ABACodeSourceUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ABACodeSource")).getText();
-			assertEquals(routingCodeSubtype, routingCodeSubtypeUI);
-			assertEquals(ABACodeSource, ABACodeSourceUI);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public void verifyDropDownFieldValuesFromZeusDB(String source, String routingCode, String codeType) {
 		String routingCodeSubtypeUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeSubtype")).getText();
 		String ABACodeSourceUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ABACodeSource")).getText();

@@ -279,8 +279,10 @@ public class EditRoutingCodeSteps extends AbstractSteps {
     }
     
     @Then("the user should be able to verify the drop-down field values in routing code basic info page")
-    public void verifyDropDownFieldValuesInUI(@Named("routingCodeSubtype") String routingCodeSubtype, @Named("ABACodeSource") String ABACodeSource) {
-    	getEditRoutingCodePage().verifyDropDownFieldValuesInUI(routingCodeSubtype, ABACodeSource);
+    public void verifyDropDownFieldValuesInUI(@Named("routingCodeSubtype") String routingCodeSubtype, @Named("ABACodeSource") String ABACodeSource) throws InterruptedException {
+    	Thread.sleep(3000L);
+    	getDataPage().verifyWebElementText("Routing Code Subtype", routingCodeSubtype, RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeSubtype"));
+    	getDataPage().verifyWebElementText("ABA Code Source", ABACodeSource, RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ABACodeSource"));
     }
     
     @Then("the user should see the drop-down field values same as in $source document")
