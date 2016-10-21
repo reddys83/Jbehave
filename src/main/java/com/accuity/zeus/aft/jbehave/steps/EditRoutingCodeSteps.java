@@ -252,6 +252,47 @@ public class EditRoutingCodeSteps extends AbstractSteps {
     public void verifyRoutingCodeBooleanFieldValuesFromTrustedDB(@Named("source") String source, @Named("routingCode") String routingCode, @Named("codeType") String codeType) {
     	getEditRoutingCodePage().verifyRoutingCodeBooleanFieldValuesFromTrustedDB(source, routingCode, codeType);
     }
+    
+    @Then("the user verifies that the drop-down field values are same as in $source document")
+    public void verifyDropDownFieldValuesFromTrustedDB(@Named("source") String source, @Named("routingCode") String routingCode, @Named("codeType") String codeType) {
+    	getEditRoutingCodePage().verifyDropDownFieldValuesFromTrustedDB(source, routingCode, codeType);
+    }
+    
+    @Then("the user should see the routing code subtype values from lookup ROUTING_CODE_SUBTYPE")
+    public void verifyRoutingCodeSubtypeValuesFromLookup() {
+    	getEditRoutingCodePage().verifyLookUpValuesForDropDownFields(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_routingcode_subtype_dropdown"), "get routing code subtype lookup");
+    }
+    
+    @Then("the user should see the ABA code source values from lookup ROUTING_CODE_SOURCE")
+    public void verifyABACodeSourceValuesFromLookup() {
+    	getEditRoutingCodePage().verifyLookUpValuesForDropDownFields(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ABA_CodeSource_dropdown"), "get ABA code source lookup");
+    }
+    
+    @When("the user selects the routing code subtype as <routingCodeSubtype> in the routing code basic info page")
+    public void selectRoutingCodeSubtypeValue(@Named("routingCodeSubtype") String routingCodeSubtype) {
+    	getDataPage().selectDropDownValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_routingcode_subtype_dropdown"), routingCodeSubtype, 1);
+    }
+    
+    @When("the user selects the ABA code source as <ABACodeSource> in the routing code basic info page")
+    public void selectABACodeSourceValue(@Named("ABACodeSource") String ABACodeSource) {
+    	getDataPage().selectDropDownValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ABA_CodeSource_dropdown"), ABACodeSource, 1);
+    }
+    
+    @Then("the user should be able to verify the drop-down field values in routing code basic info page")
+    public void verifyDropDownFieldValuesInUI(@Named("routingCodeSubtype") String routingCodeSubtype, @Named("ABACodeSource") String ABACodeSource) {
+    	getEditRoutingCodePage().verifyDropDownFieldValuesInUI(routingCodeSubtype, ABACodeSource);
+    }
+    
+    @Then("the user should see the drop-down field values same as in $source document")
+    public void verifyDropDownFieldValuesFromZeusDB(@Named("source") String source, @Named("routingCode") String routingCode, @Named("codeType") String codeType) {
+    	getEditRoutingCodePage().verifyDropDownFieldValuesFromZeusDB(source, routingCode, codeType);
+    }
+    
+    @Then("the user should see that the routing code subtype and ABA code source fields does not exist")
+    public void verifyDropDownFieldsNotInUI() {
+    	getDataPage().verifyElementNotExistInUI(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeSubtype"));
+    	getDataPage().verifyElementNotExistInUI(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ABACodeSource"));
+    }
 
 }
 

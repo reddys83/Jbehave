@@ -360,5 +360,65 @@ public class EditRoutingCodePage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}	
+	
+	public void verifyDropDownFieldValuesFromTrustedDB(String source, String routingCode, String codeType) {
+		String routingCodeSubtype = null;
+		String ABACodeSource = null;	
+		List<WebElement> routingCodeSubtypeDropDown = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_routingcode_subtype_dropdown"));
+		List<WebElement> ABACodeSourceDropDown = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ABA_CodeSource_dropdown"));
+		
+		if(routingCodeSubtypeDropDown.size() > 0 && ABACodeSourceDropDown.size() > 0) {
+			routingCodeSubtype = getSelectedOptionInDropDownByIndex(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_routingcode_subtype_dropdown"), 1);
+			ABACodeSource = getSelectedOptionInDropDownByIndex(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ABA_CodeSource_dropdown"), 1);
+		} else {
+			assertTrue("There is no value in the drop-down field", false);
+		}
+		verifyDropDownFieldValuesFromDB(source, routingCode, codeType, routingCodeSubtype, ABACodeSource);
+	}
+	
+	public void verifyDropDownFieldValuesFromDB(String source, String routingCode, String routingCodeType, String routingCodeSubtype, String ABACodeSource) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			Thread.sleep(3000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);
+			String routingCodeSubtypeDB = getNodeValuesByTagName(document, "routingcodeSubtype").size() == 0 ? "" : getNodeValuesByTagName(document, "routingcodeSubtype").get(0);
+			String ABACodeSourceDB = getNodeValuesByTagName(document, "ABACodeSource").size() == 0 ? "" : getNodeValuesByTagName(document, "ABACodeSource").get(0);
+			
+			assertEquals("The Routing Code Subtype value in UI is not same as in " + source +" database", routingCodeSubtype, routingCodeSubtypeDB);
+			assertEquals("The ABA Code Source value in UI is not same as in " + source +" database", ABACodeSource, ABACodeSourceDB);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyLookUpValuesForDropDownFields(By by, String xquery) {
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xquery);
+		List<WebElement> dropDownFieldList = getDriver().findElements(by);
+		List<WebElement> options = dropDownFieldList.get(0).findElements(By.cssSelector("option"));
+		for (int indexOfOption = 0; indexOfOption < options.size(); indexOfOption++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getTextContent(), options.get(indexOfOption).getText().trim());
+		}
+	}
+	
+	public void verifyDropDownFieldValuesInUI(String routingCodeSubtype, String ABACodeSource) {
+		try {
+			Thread.sleep(3000L);
+			String routingCodeSubtypeUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeSubtype")).getText();
+			String ABACodeSourceUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ABACodeSource")).getText();
+			assertEquals(routingCodeSubtype, routingCodeSubtypeUI);
+			assertEquals(ABACodeSource, ABACodeSourceUI);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyDropDownFieldValuesFromZeusDB(String source, String routingCode, String codeType) {
+		String routingCodeSubtypeUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeSubtype")).getText();
+		String ABACodeSourceUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ABACodeSource")).getText();
+		verifyDropDownFieldValuesFromDB(source, routingCode, codeType, routingCodeSubtypeUI, ABACodeSourceUI);
+	}
 
 }
