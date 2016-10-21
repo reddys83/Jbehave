@@ -468,39 +468,4 @@ public class RoutingCodePage extends AbstractPage {
 			e.printStackTrace();
 		}
     }
-    
-	public void verifyRoutingCodeSearchText(String message) {
-		assertEquals(message,
-				getDriver()
-						.findElement(RoutingCodeIdentifiers
-								.getObjectIdentifier("view_routingCodeSearchEntityPlaceHolder_xpath"))
-						.getAttribute("placeholder"));
-	}
-
-	public void verifyRoutingCodeSearchTextNoDisplay(String message) {
-		assertNotEquals(message,
-				getDriver()
-						.findElement(RoutingCodeIdentifiers
-								.getObjectIdentifier("view_routingCodeSearchEntityPlaceHolder_xpath"))
-						.getAttribute("placeholder"));
-	}
-
-	public void clearEntityInTypeAheadBox() {
-		getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingCodeSearchTypeAheadBox_xpath"))
-				.clear();
-	}
-	
-	public void verifyResultsPage() {
-		System.out.println("hi");
-		System.out.println(getDriver()
-		.findElement(RoutingCodeIdentifiers
-				.getObjectIdentifier("view_getRoutingCodeResultsHeader_xpath"))
-		.getAttribute("placeholder"));		
-		assertEquals("Routing Code results for",
-				getDriver()
-						.findElement(RoutingCodeIdentifiers
-								.getObjectIdentifier("view_getRoutingCodeResultsHeader_xpath"))
-						.getAttribute("placeholder"));
-	}
-
 }

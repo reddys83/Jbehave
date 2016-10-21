@@ -480,4 +480,14 @@ public class SearchResultsSteps extends AbstractSteps{
     {
         getResultsPage().verifyOfficeHeading();
     }
+    
+    @Then("the user should see Results page displayed")
+	public void verifyRoutingCodeSearchTextNoDisplay() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+        getResultsPage().verifyResultsPage();
+	}
 }

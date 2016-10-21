@@ -4,8 +4,13 @@ import com.accuity.zeus.aft.commons.Utils;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import com.accuity.zeus.aft.result.ResultsPage;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 import org.jbehave.core.annotations.AfterStories;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -144,4 +149,26 @@ public class SearchPage extends AbstractPage {
             e.printStackTrace();
         }  return new ResultsPage(getDriver(), getPageUrl(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
+	
+	public void verifyRoutingCodeSearchText(String message) {
+		assertEquals(message,
+				getDriver()
+						.findElement(RoutingCodeIdentifiers
+								.getObjectIdentifier("view_routingCodeSearchEntityPlaceHolder_xpath"))
+						.getAttribute("placeholder"));
+	}
+
+	public void verifyRoutingCodeSearchTextNoDisplay(String message) {
+		assertNotEquals(message,
+				getDriver()
+						.findElement(RoutingCodeIdentifiers
+								.getObjectIdentifier("view_routingCodeSearchEntityPlaceHolder_xpath"))
+						.getAttribute("placeholder"));
+	}
+
+	public void clearEntityInTypeAheadBox() {
+		getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingCodeSearchTypeAheadBox_xpath"))
+				.clear();
+	}
+
 }
