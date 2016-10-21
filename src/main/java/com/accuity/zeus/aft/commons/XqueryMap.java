@@ -89,6 +89,10 @@ public class XqueryMap {
 
         queryMap.put("get office basic info","getOfficeBasicInfo.xqy");
         queryMap.put("get id for offices", "getIdForOffices.xqy");
+        // duplicate
+       // queryMap.put("get Id for area", "getIdForArea.xqy");
+
+
         queryMap.put("get Office Telecoms Types", "getOfficeTelecomsTypeFromLookup.xqy");
         queryMap.put("get Office Address Types", "getOfficeAddressTypesFromLookup.xqy");
         queryMap.put("get Office Locations", "getOfficeLocations.xqy");
@@ -155,6 +159,7 @@ public class XqueryMap {
 		queryMap.put("get routing code former usages values", "getRoutingCodeFormerUsages.xqy");
 		queryMap.put("delete routing code former usages values", "deleteRoutingCodeFormerUsagesValues.xqy");
 		queryMap.put("insert routing code former usages values", "insertRoutingCodeFormerUsagesValues.xqy");
+        queryMap.put("get routingCode payment systems info","getRoutingCodePaymentSystems.xqy");
    }
 
     public String getXquery(String key){

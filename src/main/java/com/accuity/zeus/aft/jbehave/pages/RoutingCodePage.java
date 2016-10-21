@@ -15,6 +15,9 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +48,7 @@ public class RoutingCodePage extends AbstractPage {
     public void verifyRoutingCodeBasicInfoValuesFromTrustedDoc(String routingCode, String codeType) {
 
         List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
         nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
         nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);
@@ -79,25 +83,25 @@ public class RoutingCodePage extends AbstractPage {
             assertEquals(ConfirmedwithFed, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ConfirmedwithFed")).getText());
             assertEquals(RegistrarFeeSFDCSubscription, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RegistrarFeeSFDCSubscription")).getText());
             assertEquals(Comment, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String Comment")).getText());
-        }
-        assertEquals(RoutingCodeType, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeType")).getText());
-        assertEquals(RoutingCodeTypeDescription, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeTypeDescription")).getText());
-        assertEquals(RoutingCode, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCode")).getText());
-        if (!RoutingCodeCheckDigit.equals("")) {
-            assertEquals(RoutingCodeCheckDigit, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeCheckDigit")).getText());
-        }
-        assertEquals(Status.toLowerCase(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_Status")).getText().toLowerCase());
-        assertEquals(AccountEligibility.toLowerCase(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AccountEligibility")).getText().toLowerCase());
-        assertEquals(StartDate, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_StartDate")).getText());
-        assertEquals(EndDate, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_EndDate")).getText());
-        assertEquals(AssignedInstitutionName, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AssignedInstitutionName")).getText());
-        assertEquals(InternalUseOnly.toLowerCase(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_InternalUseOnly")).getText().toLowerCase());
-        assertEquals(UseHeadOffice.toLowerCase(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String UseHeadOffice")).getText().toLowerCase());
-        for (int i = 0; i < AlternateCodeForms.size(); i++) {
-            assertEquals(AlternateCodeFormTypes.get(i), getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AlternateCodeForm")).get(i).getAttribute("title"));
-            assertEquals(AlternateCodeForms.get(i), getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AlternateCodeForm")).get(i).getText());
-        }
+            assertEquals(RoutingCodeType, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeType")).getText());
+            assertEquals(RoutingCodeTypeDescription, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeTypeDescription")).getText());
+            assertEquals(RoutingCode, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCode")).getText());
+            if (!RoutingCodeCheckDigit.equals("")) {
+                assertEquals(RoutingCodeCheckDigit, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeCheckDigit")).getText());
+            }
+            assertEquals(Status.toLowerCase(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_Status")).getText().toLowerCase());
+            assertEquals(AccountEligibility.toLowerCase(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AccountEligibility")).getText().toLowerCase());
+            assertEquals(StartDate, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_StartDate")).getText());
+            assertEquals(EndDate, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_EndDate")).getText());
+            assertEquals(AssignedInstitutionName, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AssignedInstitutionName")).getText());
+            assertEquals(InternalUseOnly.toLowerCase(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_InternalUseOnly")).getText().toLowerCase());
+            assertEquals(UseHeadOffice.toLowerCase(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String UseHeadOffice")).getText().toLowerCase());
+            for (int i = 0; i < AlternateCodeForms.size(); i++) {
+                assertEquals(AlternateCodeFormTypes.get(i), getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AlternateCodeForm")).get(i).getAttribute("title"));
+                assertEquals(AlternateCodeForms.get(i), getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AlternateCodeForm")).get(i).getText());
+            }
 
+        }
     }
 
     public void verifyABAFieldsNotExist() {
@@ -245,7 +249,100 @@ public class RoutingCodePage extends AbstractPage {
         {e.printStackTrace();}
         return ERP;
     }
-    
+
+    public void clickonPaymentSystems()
+    {
+        attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_page_paymentsystems_link"));
+    }
+
+    public void verifyRoutingCodePaymentSystemValuesFromTrustedDoc(String source,String routingCode, String codeType) {
+
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+        nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode payment systems info", nvPairs);
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        NodeList paymentSystems=document.getElementsByTagName("paymentSystem");
+       for (int i=0;i<paymentSystems.getLength();i++)
+        {
+            Node paymentSystem =paymentSystems.item(i);
+            if(paymentSystem.getNodeType() == Node.ELEMENT_NODE){
+                NodeList productNames = ((Element)paymentSystem).getElementsByTagName("productName");
+                String ProductName=productNames.item(0).getTextContent();
+                NodeList dateJoinedList = ((Element)paymentSystem).getElementsByTagName("dateJoined");
+                String dateJoined=dateJoinedList.item(0).getTextContent();
+                NodeList dateLeftList = ((Element)paymentSystem).getElementsByTagName("dateLeft");
+                String dateLeft=dateLeftList.item(0).getTextContent();
+                NodeList alternateFormTypeList = ((Element)paymentSystem).getElementsByTagName("useCodeForm");
+                String alternateFormType=alternateFormTypeList.item(0).getTextContent();
+                NodeList membershipList = ((Element)paymentSystem).getElementsByTagName("codeSystemMembership");
+                String membership=membershipList.item(0).getTextContent();
+                NodeList codeSystemStatusList = ((Element)paymentSystem).getElementsByTagName("codeSystemStatus");
+                String codeSystemStatus=codeSystemStatusList.item(0).getTextContent();
+                NodeList routeViaList = ((Element)paymentSystem).getElementsByTagName("routeVia");
+                String routeVia=routeViaList.item(0).getTextContent();
+                NodeList correspondentList = ((Element)paymentSystem).getElementsByTagName("codeValue");
+                NodeList attributesList = ((Element)paymentSystem).getElementsByTagName("PaymentSystemAttribute");
+                NodeList contactLocationsList = ((Element)paymentSystem).getElementsByTagName("ContactLocations");
+
+                assertEquals(ProductName,getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("paymentsystems_productName")).get(i).getText());
+                assertEquals(dateJoined,getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("paymentsystems_dateJoined")).get(i).getText());
+                assertEquals(dateLeft,getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("paymentsystems_dateLeft")).get(i).getText());
+                assertEquals(alternateFormType,getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("paymentsystems_alternateFormType")).get(i).getText());
+                assertEquals(membership,getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("paymentsystems_membershipType")).get(i).getText());
+                assertEquals(codeSystemStatus,getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("paymentsystems_systemActivityStatus")).get(i).getText());
+                if(codeType.equals("Swift BIC")||codeType.equals("SWIFT BIC")) {
+                    assertEquals(routeVia, getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("paymentsystems_routeVia")).get(i).getText());
+                }
+                for(int correspondentCount=0;correspondentCount<correspondentList.getLength();correspondentCount++)
+                {
+                    assertEquals(correspondentList.item(correspondentCount).getTextContent(),getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("paymentsystems_correspondents")).get(i).findElements(By.xpath("tr/td")).get(correspondentCount).getText());
+                }
+                for(int attributeCount=0;attributeCount<attributesList.getLength();attributeCount++)
+                {
+                    assertEquals(attributesList.item(attributeCount).getTextContent().replaceAll(" ",""),getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("paymentsystems_attributes")).get(i).findElements(By.xpath("tr")).get(attributeCount).getText().replaceAll(" ",""));
+                }
+                if(codeType.equals("ABA")) {
+                for(int contactListCount=0;contactListCount<contactLocationsList.getLength();contactListCount++)
+                {
+
+                    String ContactLocationType=((Element)(contactLocationsList.item(contactListCount))).getElementsByTagName("ContactLocationType").item(0).getTextContent();
+                    String ContactOffice=((Element)(contactLocationsList.item(contactListCount))).getElementsByTagName("ContactOffice").item(0).getTextContent().replaceAll(" ","");
+                    String ContactLocationsSpecialInstructions=((Element)(contactLocationsList.item(contactListCount))).getElementsByTagName("ContactLocationsSpecialInstructions").item(0).getTextContent();
+                    //assertEquals(contactLocationsList.item(contactListCount).getTextContent().ge);
+
+                    String ContactLocationTypeFromUI=getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("paymentsystems_contactLocations")).get(i).findElements(By.xpath("tr")).get(contactListCount).findElements(By.xpath("td")).get(0).getText();
+                    String ContactOfficeFromUI=getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("paymentsystems_contactLocations")).get(i).findElements(By.xpath("tr")).get(contactListCount).findElements(By.xpath("td")).get(1).getText().replaceAll(",","").replaceAll(" ","");
+                    String ContactLocationsSpecialInstructionsFromUI=getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("paymentsystems_contactLocations")).get(i).findElements(By.xpath("tr")).get(contactListCount).findElements(By.xpath("td")).get(2).getText();
+
+                    assertEquals(ContactLocationType,ContactLocationTypeFromUI);
+                    assertEquals(ContactOffice,ContactOfficeFromUI);
+                    assertEquals(ContactLocationsSpecialInstructions,ContactLocationsSpecialInstructionsFromUI);
+                }}
+                else {
+                    try {
+                        assertFalse(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("paymentsystems_contactLocations")).findElement(By.xpath("tr")).isDisplayed());
+                    }
+                    catch(Exception e)
+                    {
+
+                    }
+                }
+
+
+
+
+
+            }
+        }
+
+    }
+
     public void verifyFormerUsageColumnNames() {
 		try {
 			Thread.sleep(2000L);
@@ -255,9 +352,9 @@ public class RoutingCodePage extends AbstractPage {
 		assertEquals("NAME", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_col")).getText());
 		assertEquals("CITY", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_city_col")).getText());
 		assertEquals("AREA", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_area_col")).getText());
-		assertEquals("ADDITIONAL INFO",	getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_additional_info_col")).getText());	
+		assertEquals("ADDITIONAL INFO",	getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_additional_info_col")).getText());
 	}
-    
+
     public void verifyFormerUsagesColumnInOrder(By by, String column, String order) {
 		List<WebElement> columnListFromUI = getDriver().findElements(by);
 		for (int index = 0; index < (columnListFromUI.size() - 1); index++) {
@@ -272,18 +369,18 @@ public class RoutingCodePage extends AbstractPage {
 			}
 		}
     }
-    
+
     public String getOfficeNameLinkText() {
     	return getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_first_office_name_link")).getText();
     }
-    
+
     public void verifyOfficeNameBasicInfoPage(String formerUsageOfficeName) {
     	assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_link")).getAttribute("class").equals("selected"));
         assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_label")).getText().equals("BASIC INFO"));
         assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_text_value")).getText().equals(formerUsageOfficeName));
     }
-    
-    public void verifyFormerUsagesFieldValuesFromTrustedDB(String routingCode, String routingCodeType, String source) {	
+
+    public void verifyFormerUsagesFieldValuesFromTrustedDB(String routingCode, String routingCodeType, String source) {
 		if (getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_list")).size() > 0) {
 			List<String> formerUsagesNames = new ArrayList<String>();
 			List<String> formerUsagesCity = new ArrayList<String>();
@@ -302,7 +399,7 @@ public class RoutingCodePage extends AbstractPage {
 			assertTrue("There is no existing values in Former Usages section", false);
 		}
     }
-    
+
     public void verifyFormerUsagesFieldValuesFromDB(String routingCode, String routingCodeType, String source, List<String> formerUsagesNames, List<String> formerUsagesCity, List<String> formerUsagesArea, List<String> formerUsagesAdditionalInfo) {
     	try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
@@ -347,7 +444,7 @@ public class RoutingCodePage extends AbstractPage {
 			e.printStackTrace();
 		}
     }
-    
+
     public void deleteExistingFormerUsagesValues(String routingCode, String routingCodeType) {
 		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
@@ -359,7 +456,7 @@ public class RoutingCodePage extends AbstractPage {
 			e.printStackTrace();
 		}
     }
-    
+
     public void insertNewFormerUsagesValues(String routingCode, String routingCodeType) {
 		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
