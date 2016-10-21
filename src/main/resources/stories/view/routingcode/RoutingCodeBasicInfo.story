@@ -7,8 +7,6 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-1134 - User can view Routing Code Basic Info
 JIRA ID - ZEUs-1540 - Routing Code Search: Search Value of 1 digit
 
-Scenario: User verifies the message "Enter at least 2 valid characters" when only one alpha numeric character is entered
-
 Scenario: Verify the basic info for a routing code of type ABA
 Verify the headers and the legal entity link on the header
 

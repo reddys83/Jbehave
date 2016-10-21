@@ -104,7 +104,7 @@ public class RoutingCodeIdentifiers {
         hmap.put("paymentsystems_contactLocations",By.xpath("//*[@id='routingCodePaymentSystems']//div[@class='payment-system']/table//tbody"));
         hmap.put("view_routingCodeSearchEntityPlaceHolder_xpath", By.xpath("//input[@placeholder='Enter at least 2 valid characters']"));
         hmap.put("view_routingCodeSearchTypeAheadBox_xpath", By.xpath("//*[@id='search']"));
-        hmap.put("view_getRoutingCodeResultsHeader_xpath", By.xpath("//div[@id='cssTempFixId']/header/div/h1"));
+        hmap.put("routingCodeResultsHeader_view_mode", By.xpath("//div[@id='contentSummary']//*[@class='search-results']"));
 
 
     }

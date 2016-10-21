@@ -151,19 +151,11 @@ public class SearchPage extends AbstractPage {
     }
 	
 	public void verifyRoutingCodeSearchText(String message) {
-		assertEquals(message,
-				getDriver()
-						.findElement(RoutingCodeIdentifiers
-								.getObjectIdentifier("view_routingCodeSearchEntityPlaceHolder_xpath"))
-						.getAttribute("placeholder"));
+		assertEquals(message,getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingCodeSearchEntityPlaceHolder_xpath")).getAttribute("placeholder"));
 	}
 
 	public void verifyRoutingCodeSearchTextNoDisplay(String message) {
-		assertNotEquals(message,
-				getDriver()
-						.findElement(RoutingCodeIdentifiers
-								.getObjectIdentifier("view_routingCodeSearchEntityPlaceHolder_xpath"))
-						.getAttribute("placeholder"));
+		assertNotEquals(message,getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingCodeSearchEntityPlaceHolder_xpath")).getAttribute("placeholder"));
 	}
 
 	public void clearEntityInTypeAheadBox() {

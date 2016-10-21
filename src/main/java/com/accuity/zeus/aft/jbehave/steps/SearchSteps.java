@@ -71,28 +71,28 @@ public class SearchSteps extends AbstractSteps {
 		setResultsPage(getSearchPage().clicksOnSearchIcon());
 	}
 	
-	 @Then("the user should see the message $message in search box")
-		public void verifyRoutingCodeSearchText(@Named("message") String message) {
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			getSearchPage().verifyRoutingCodeSearchText(message);
+	@Then("the user should see the message $message in search box")
+	public void verifyRoutingCodeSearchText(@Named("message") String message) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		getSearchPage().verifyRoutingCodeSearchText(message);
+	}
 
-		@Then("the user should not see the message $message in search box")
-		public void verifyRoutingCodeSearchTextNoDisplay(@Named("message") String message) {
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			getSearchPage().verifyRoutingCodeSearchText(message);
+	@Then("the user should not see the message $message in search box")
+	public void verifyRoutingCodeSearchTextNoDisplay(@Named("message") String message) {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		getSearchPage().verifyRoutingCodeSearchText(message);
+	}
 
-		@When("the user clears the entity value in type ahead box")
-		public void clearEntityInTypeAheadBox() {
-			getSearchPage().clearEntityInTypeAheadBox();
-		}
+	@When("the user clears the entity value in type ahead box")
+	public void clearEntityInTypeAheadBox() {
+		getSearchPage().clearEntityInTypeAheadBox();
+	}
 }

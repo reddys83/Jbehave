@@ -1137,6 +1137,6 @@ public class ResultsPage extends AbstractPage {
     }
    
 	public void verifyResultsPage() {		
-		assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_getRoutingCodeResultsHeader_xpath")).getText().contains("Routing Code results for"));
+		assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingCodeResultsHeader_view_mode")).getText().contains("Routing Code results for"));
 	}
  }
