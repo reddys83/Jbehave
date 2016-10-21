@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routingCode deleted="false" fid="S-66552" id="46d02f94-d8d2-4e33-bd7a-def6e53cbbc1" resource="/routingCode/id/46d02f94-d8d2-4e33-bd7a-def6e53cbbc1" tfpid="BIC-HLFXGB21K03" source="trusted">
+    <codeType>SWIFT BIC</codeType>
+    <codeTypeDescription>SWIFT BIC</codeTypeDescription>
+    <codeValue>HLFXGB21K03</codeValue>
+    <codeAlternateForms>
+        <codeAlternateForm type="fdb_legacy">HLFXGB21K03</codeAlternateForm>
+        <codeAlternateForm type="tfp_legacy">HLFX GB 21 K03</codeAlternateForm>
+    </codeAlternateForms>
+    <codeStatus>active</codeStatus>
+    <accountEligible>true</accountEligible>
+    <paymentSystems>
+        <paymentSystem>
+            <product>
+                <link href="/product/id/adebf5f5-4e80-438f-a239-4e758bb8f326" rel="src"></link>
+            </product>
+            <useCodeForm>default</useCodeForm>
+            <codeSystemMembership>Unconnected</codeSystemMembership>
+            <codeSystemStatus>online</codeSystemStatus>
+            <attributes>
+                <attribute>
+                    <name>Settlement Only</name>
+                    <value>false</value>
+                </attribute>
+                <attribute>
+                    <name>Origination Capability</name>
+                    <value>false</value>
+                </attribute>
+                <attribute>
+                    <name>Savings Accounts</name>
+                    <value>Credits and Debits</value>
+                </attribute>
+                <attribute>
+                    <name>Checking Accounts</name>
+                    <value>Credits and Debits</value>
+                </attribute>
+            </attributes>
+            <routeVia>
+                <link href="/routingCode/id/68425a9e-4b3e-4103-a9a2-a01f7107aea9" rel="src"></link>
+            </routeVia>
+            <correspondents>
+                <correspondent>
+                    <link href="/ssi/id/1c7f230c-e83f-495d-ab42-e993219bcff3" rel="src"></link>
+                </correspondent>
+                <correspondent>
+                    <link href="/ssi/id/f1a22dc8-0a4d-4c48-b127-b5ed7d5cc1c2" rel="src"></link>
+                </correspondent>
+            </correspondents>
+
+        </paymentSystem>
+        <paymentSystem>
+            <product>
+                <link href="/product/id/f4482a66-127b-4b7b-979c-b3f78441315d" rel="src"></link>
+            </product>
+            <dateBegan accuracy="day">2008-01-28</dateBegan>
+            <dateEnded accuracy="day">2015-01-28</dateEnded>
+            <useCodeForm>default</useCodeForm>
+            <codeSystemMembership>Full Member</codeSystemMembership>
+            <codeSystemStatus>active</codeSystemStatus>
+            <attributes>
+                <attribute>
+                    <name>Settlement Only</name>
+                    <value>false</value>
+                </attribute>
+                <attribute>
+                    <name>Origination Capability</name>
+                    <value>false</value>
+                </attribute>
+                <attribute>
+                    <name>Savings Accounts</name>
+                    <value>Credits and Debits</value>
+                </attribute>
+                <attribute>
+                    <name>Checking Accounts</name>
+                    <value>Credits and Debits</value>
+                </attribute>
+            </attributes>
+            <correspondents>
+                <correspondent>
+                    <link href="/ssi/id/f1a22dc8-0a4d-4c48-b127-b5ed7d5cc1c2" rel="src"></link>
+                </correspondent>
+            </correspondents>
+        </paymentSystem>
+    </paymentSystems>
+    <assignedInstitution>
+        <link href="/legalEntity/id/b98d564c-c785-48d6-b485-0d48550581b6" rel="src"></link>
+    </assignedInstitution>
+    <usageLocations>
+        <usageLocation primaryAssignee="true" rankAtLocation="2">
+            <presence>
+                <link href="/office/id/6c544f19-cb72-468a-9316-0743ba7ad79a" rel="src"></link>
+            </presence>
+        </usageLocation>
+    </usageLocations>
+</routingCode>
