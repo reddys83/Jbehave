@@ -1,0 +1,208 @@
+<legalEntity deleted="false" fid="4537" id="dd2321ab-a6c9-4d74-98cd-f10cb9fc5baa" resource="/legalEntity/id/dd2321ab-a6c9-4d74-98cd-f10cb9fc5baa" source="trusted" stub="true" tfpid="96664340">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/170e2534-8c03-4427-ba8c-fbf93803b566" rel="src"/>
+
+        </countryOfOperations>
+        <organisationType>Corporate Bank</organisationType>
+        <fatcaStatus>Reporting Model 1 FFI</fatcaStatus>
+        <legalEntityType>Bank</legalEntityType>
+        <types>
+            <type source="FDB">Bank</type>
+            <type source="FDB">Commercial Bank</type>
+            <type source="FDB">Corporate Bank</type>
+            <type source="FDB">Investment Bank</type>
+            <type source="FDB">Merchant Bank</type>
+            <type source="FDB">Mortgage Bank</type>
+            <type source="FDB">Private Bank</type>
+            <type source="FDB">Retail Bank</type>
+            <type source="FDB">Savings Bank</type>
+            <type source="TFP">Universal Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>DNB Bank ASA</value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>DnB NOR Bank ASA</value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>Union Bank of Norway</value>
+            </name>
+            <legalEntitySortKey>DNB BANK ASA</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1990-07-01</established>
+            <chartered accuracy="year">1990-07-01</chartered>
+        </dates>
+        <boardMeetings>
+            <meeting>
+                <periodType>month</periodType>
+                <value>04</value>
+            </meeting>
+        </boardMeetings>
+        <identifiers>
+            <identifier transferable="false">
+                <type>Global Intermediary Identification Number</type>
+                <value>HHC0GH.00000.LE.578</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>The Global Markets Entity Identifier (GMEI)</type>
+                <value>549300GKFG0RYRRQ1414</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>RegistrationNo</type>
+                <value>Org No: 981 276 957</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <services>
+        <service>
+            <category>Asset Management</category>
+        </service>
+        <service>
+            <category>Bills of Exchange</category>
+        </service>
+        <service>
+            <category>Bonds</category>
+        </service>
+        <service>
+            <category>Capital Markets Advisory</category>
+        </service>
+        <service>
+            <category>Capital Markets</category>
+        </service>
+        <service>
+            <category>Corporate Finance</category>
+        </service>
+        <service>
+            <category>Correspondent Banking</category>
+        </service>
+        <service>
+            <category>Deposits</category>
+            <customDescription>Deposit taking &amp; lending</customDescription>
+        </service>
+        <service>
+            <category>Documentary Credits</category>
+        </service>
+        <service>
+            <category>Equity Investments</category>
+        </service>
+        <service>
+            <category>Factoring</category>
+        </service>
+        <service>
+            <category>Financing</category>
+        </service>
+        <service>
+            <category>Foreign Exchange</category>
+        </service>
+        <service>
+            <category>Guarantees</category>
+        </service>
+        <service>
+            <category>Insurance Services</category>
+            <customDescription>Life Assurance</customDescription>
+        </service>
+        <service>
+            <category>International Settlements</category>
+        </service>
+        <service>
+            <category>Leasing</category>
+        </service>
+        <service>
+            <category>Letters of Credit</category>
+        </service>
+        <service>
+            <category>Mergers and Acquisitions</category>
+        </service>
+        <service>
+            <category>Money Markets</category>
+        </service>
+        <service>
+            <category>Mutual Fund Administration</category>
+        </service>
+        <service>
+            <category>Portfolio Management</category>
+        </service>
+        <service>
+            <category>Real Estate</category>
+        </service>
+        <service>
+            <category>Securities</category>
+        </service>
+        <service>
+            <category>Syndicated Loans</category>
+        </service>
+        <service>
+            <category>Underwriting</category>
+        </service>
+        <service>
+            <category>Internet Banking</category>
+        </service>
+        <service>
+            <category>Mortgages</category>
+        </service>
+        <service>
+            <category>Mortgage Backed Securities</category>
+        </service>
+        <service>
+            <category>Tax Exempt Accounts</category>
+        </service>
+    </services>
+    <locations>
+        <summaries>
+            <summary type="BranchSummary">185, 9 International Branches, 5 International Representative Offices, 150 DNB Baltics and Poland Branches and 6 JSC DNB Bank (Russia) branches</summary>
+        </summaries>
+    </locations>
+    <personnel>
+        <summaries>
+            <summary type="InstitutionEmployees">13517</summary>
+        </summaries>
+    </personnel>
+    <creditRatings>
+        <rating>
+            <agencyName>Moody's</agencyName>
+            <type>Long Term Rating</type>
+            <value>A1</value>
+            <dateApplied accuracy="day">2012-05-29</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Moody's</agencyName>
+            <type>Short Term Rating</type>
+            <value>P-1</value>
+            <dateApplied accuracy="day">2012-05-29</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Long Term Rating</type>
+            <value>A+</value>
+            <dateApplied accuracy="day">2010-01-05</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Short Term Rating</type>
+            <value>A-1</value>
+            <dateApplied accuracy="day">2010-01-05</dateApplied>
+        </rating>
+    </creditRatings>
+    <history>
+        <summaries>
+            <summary>DnB Bank ASA is the largest and leading financial institution in Norway, resulting from  a merger between Union Bank of Norway and Den norske Bank ASA.  DnB:  Established April 17, 1990 being a merger of Den norske Creditbank (est 1857) and Bergen Bank (est 1975) as Den norske Bank ASA and on December 1, 1999 Postbanken BA merged into it.  Union Bank of Norway:  Established October 1, 1990 being a merger between Sparebanken ABC, Sparebanken Buskerud, Sparebanken Østlandet and Sparebanken Vestfold.  History of the largest unit dates back to 1822. On June 21, 1999 Gjensidige Bank AS merged into Union Bank of Norway which became a part of the new financial group - Gjensidige NOR.  On January 19, 2004 Den norske Bank ASA (est 1990) merged into Union Bank of Norway and name changed to DnB Nor Bank ASA. On September 1, 2010 DnB NOR Finans AS merged into DnB Nor Bank ASA and on November 11, 2011 name changed as above. On October 1, 2012 Nordlandsbanken ASA merged into the above</summary>
+        </summaries>
+    </history>
+    <audit>
+        <comments>
+            <comment type="Ownership comment">GSC2 completed JB 24-7-97</comment>
+            <comment type="Subsidiary comment">GSC2 completed JB 24-7-97</comment>
+            <comment type="Editorial Comment">Fitch LT A+ ST F1 added manually 5.5.04</comment>
+        </comments>
+    </audit>
+</legalEntity>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <routingCode deleted="false" fid="C-1112604" id="954c7bef-59eb-415f-b836-3202b51cf973"
-             resource="http://10.72.0.121:8080/heraapi/routingCode/id/954c7bef-59eb-415f-b836-3202b51cf973"
+             resource="/routingCode/id/954c7bef-59eb-415f-b836-3202b51cf973"
              source="trusted" tfpid="UZRN-01056">
     <codeType>Swift BIC</codeType>
     <codeTypeDescription>MFO</codeTypeDescription>
@@ -36,13 +36,13 @@
             </attributes>
             <routeVia>
                 <link
-                        href="http://10.72.0.121:8080/heraapi/routingCode/id/c42c916b-8f9b-4fda-a2e0-0f8c4c5973fb"
+                        href="/routingCode/id/c42c916b-8f9b-4fda-a2e0-0f8c4c5973fb"
                         rel="src"/>
             </routeVia>
             <correspondents>
                 <correspondent>
                     <link
-                            href="http://10.72.0.121:8080/heraapi/ssi/id/d9d2ea09-7d94-41de-aee6-51a536969e09"
+                            href="/ssi/id/d9d2ea09-7d94-41de-aee6-51a536969e09"
                             rel="src"/>
                 </correspondent>
             </correspondents>
