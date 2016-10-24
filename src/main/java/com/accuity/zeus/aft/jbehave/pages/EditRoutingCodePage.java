@@ -403,10 +403,4 @@ public class EditRoutingCodePage extends AbstractPage {
 		}
 	}
 	
-	public void verifyDropDownFieldValuesFromZeusDB(String source, String routingCode, String codeType) {
-		String routingCodeSubtypeUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeSubtype")).getText();
-		String ABACodeSourceUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ABACodeSource")).getText();
-		verifyDropDownFieldValuesFromDB(source, routingCode, codeType, routingCodeSubtypeUI, ABACodeSourceUI);
-	}
-
 }

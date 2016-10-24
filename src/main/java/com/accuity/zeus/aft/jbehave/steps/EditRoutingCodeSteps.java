@@ -286,16 +286,17 @@ public class EditRoutingCodeSteps extends AbstractSteps {
     }
     
     @Then("the user should see the drop-down field values same as in $source document")
-    public void verifyDropDownFieldValuesFromZeusDB(@Named("source") String source, @Named("routingCode") String routingCode, @Named("codeType") String codeType) {
-    	getEditRoutingCodePage().verifyDropDownFieldValuesFromZeusDB(source, routingCode, codeType);
-    }
+	public void verifyDropDownFieldValuesFromZeusDB(@Named("source") String source,	@Named("routingCode") String routingCode, @Named("codeType") String codeType,
+			@Named("routingCodeSubtype") String routingCodeSubtype, @Named("ABACodeSource") String ABACodeSource) {
+		getEditRoutingCodePage().verifyDropDownFieldValuesFromDB(source, routingCode, codeType, routingCodeSubtype,	ABACodeSource);
+	}
     
     @Then("the user should see that the routing code subtype and ABA code source fields does not exist")
     public void verifyDropDownFieldsNotInUI() {
     	getDataPage().verifyElementNotExistInUI(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeSubtype"));
     	getDataPage().verifyElementNotExistInUI(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ABACodeSource"));
     }
-
+    
 }
 
 

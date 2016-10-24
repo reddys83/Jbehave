@@ -377,6 +377,8 @@ Then the user should see the drop-down field values same as in zeus document
 Examples:
 |entity|searchBy|routingCode|codeType|routingCodeSubtype|ABACodeSource|
 |083905216|Routing Code|083905216|ABA|Unknown|Other (Unknown)|
+|083905216|Routing Code|083905216|ABA|Special Series|Other (Unknown)| 
+|083905216|Routing Code|083905216|ABA|Unknown|ABA|
 |083905216|Routing Code|083905216|ABA|Electronic Transaction Identifier|EFT Data Collection|
 
 Scenario: User is updating Routing Code's Basic Info page -
