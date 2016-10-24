@@ -100,6 +100,79 @@ public class EditRoutingCodeSteps extends AbstractSteps {
 			@Named("routingCode") String routingCode, @Named("codeType") String codeType) {
 		getEditRoutingCodePage().verifyRegisterFeeAndRoutingCodeFromTrustedDB(source, routingCode, codeType);
 	}
+
+	@Then("the user verifies that the existing alternate code forms can not be edited")
+	public void verifyEditStatusForAlternateCodeForms()
+	{
+		getEditRoutingCodePage().verifyEditStatusForAlternateCodeForms();
+	}
+
+	@Then("the user verifies that the fractional value can not be deleted")
+	public void checkDeleteButtonStatusForFractionalValue()
+	{
+		getEditRoutingCodePage().checkDeleteButtonStatusForFractionalValue();
+	}
+
+	@When("the user clicks on the delete alternate code form button")
+	public void clickOnDeleteAlternateCodeForm()
+	{
+		getEditRoutingCodePage().clickOnDeleteAlternateCodeForm();
+	}
+
+	@Then("the user should not see the alternate code form values <alternateCodeType> and <alternateCodeValue> in the routing code basic info page")
+	public void checkForDeletedAlternateCodeFormInZeusApp(@Named("alternateCodeType") String alternateCodeType,@Named("alternateCodeValue") String alternateCodeValue)
+	{
+		getEditRoutingCodePage().checkForDeletedAlternateCodeFormInZeusApp(alternateCodeType,alternateCodeValue);
+	}
+	@When("the user click on add new alternate code form button")
+	public void clickOnAddNewAlternateCodeFormButton(){
+		getEditRoutingCodePage().clickOnAddNewAlternateCodeFormButton();
+	}
+	@When("the user selects alternate code form type as <alternateCodeType>")
+	public void selectAlternateCodeType(@Named("alternateCodeType") String codeType){
+		getEditRoutingCodePage().selectAlternateCodeType(codeType);
+	}
+
+	@When("the user enters the alternate code form value as <alternateCodeValue>")
+	public void enterAlternateCodeValue(@Named("alternateCodeValue") String codeValue){
+		getEditRoutingCodePage().enterAlternateCodeValue(codeValue);
+	}
+
+	@Then("the user should see the alternate code form values as <alternateCodeType> and <alternateCodeValue> in the routing code basic info page")
+	public void verifyAlternateCodeFormsInUI(@Named("alternateCodeType") String alternateCodeType,@Named("alternateCodeValue") String alternateCodeValue)
+	{
+		getEditRoutingCodePage().verifyAlternateCodeFormsExistInUI(alternateCodeType,alternateCodeValue);
+	}
+	@Then("the user should see the alternate code form values same as in zeus document for routing code <routingCode> with code type <codeType>")
+			public void verifyAlternateCodeFormsFromZeusDocument(@Named("routingCode") String routingCode,@Named("codeType") String codeType){
+		getEditRoutingCodePage().verifyAlternateCodeFormsFromZeusDocument(routingCode,codeType);
+	}
+
+	@When("the user clicks on the Yes button to delete a row")
+	public void clickYesButtonInDeleteConfirmationModalForRoutingCode() {
+		getEditRoutingCodePage().clickYesButtonInDeleteConfirmationModalForRoutingCode();
+	}
+
+	@Then("the user should see the alternate code type values from lookup ROUTING_CODE_ALTERNATE_FORM_TYPE except the values that were selected already")
+	public void verifyRoutingCodeAlternateCodeTypesFromLookup(){
+		getEditRoutingCodePage().verifyRoutingCodeAlternateCodeTypesFromLookup();
+	}
+
+	@Then("the user verifies the alternate code form value maxlength is $maxLength characters")
+	public void verifyMaxLengthForAlternateCodeFormValue(@Named("maxlength") String maxlength)
+	{
+		getEditRoutingCodePage().verifyMaxLengthForAlternateCodeFormValue(maxlength);
+	}
+
+	@Then("the user should see the error message for the required alternate code type field in the basic info routing code page")
+	public void verifyErrorMsgRequiredForAlternateCodeType(){
+		getEditRoutingCodePage().verifyErrorMsgRequiredForAlternateCodeType();
+	}
+
+	@Then("the user should see the error message for the required alternate code value field in the basic info routing code page")
+	public void verifyErrorMsgRequiredForAlternateCodeValue(){
+		getEditRoutingCodePage().verifyErrorMsgRequiredForAlternateCodeValue();
+	}
 }
 
 

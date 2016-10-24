@@ -61,6 +61,17 @@ public class RoutingCodeIdentifiers {
         hmap.put("edit_routingcode_routingCodeComment_text_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//textarea[@name='routingCodeComment']")));
         hmap.put("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Registrar Fee SFDC Subscription']/td")));  
         hmap.put("edit_routingcode_routingCodeComment_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']/td")));
+        hmap.put("edit_routingcode_existing_alternate_code_type",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//select[@id='alternateCodeType']"));
+        hmap.put("edit_routingcode_existing_alternate_code_value",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//input[@name='alternateCodeValue']"));
+        hmap.put("edit_routingcode_new_alternate_code_type",By.xpath("//*[@id='additionalAlternateCodes']/tr[@class='new']//select[@id='alternateCodeType']"));
+        hmap.put("edit_routingcode_new_alternate_code_value",By.xpath("//*[@id='additionalAlternateCodes']/tr[@class='new']//input"));
+        hmap.put("edit_routingcode_add_new_alternate_code",By.xpath("//*[@id='add-alternateCodes']"));
+        hmap.put("edit_routingcode_delete_first_row_alternate_code",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//button"));
+        hmap.put("edit_routingcode_delete_second_row_alternate_code",By.xpath("//*[@id='additionalAlternateCodes']/tr[2]//button"));
+        hmap.put("edit_routingCode_delete_yes_button_id_click", By.xpath("//*[@id='yes-button']"));
+        hmap.put("edit_routingcode_alternate_code_type",By.xpath("//*[@id='alternateCodeType']"));
+        hmap.put("edit_routingcode_alternate_code_type_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='alternateCodeTypeError']"));
+        hmap.put("edit_routingcode_alternate_code_value_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='alternateCodeValueError']"));
     }
     
     public static By getObjectIdentifier(String key) {

@@ -5,11 +5,14 @@ import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
+import org.apache.commons.collections.ListUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
 
 import java.util.ArrayList;
@@ -197,5 +200,122 @@ public class EditRoutingCodePage extends AbstractPage {
 				getRegisterFeeAndRoutingCodeFromDB(source, routingCode, codeType));
 	}
 
-	
+	public void verifyEditStatusForAlternateCodeForms(){
+	assertFalse(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_existing_alternate_code_type")).isEnabled());
+	assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_existing_alternate_code_value")).getAttribute("readonly").equals("true"));
+	}
+	public void clickOnAddNewAlternateCodeFormButton(){
+		attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_add_new_alternate_code"));
+	}
+	public void selectAlternateCodeType(String value){
+		selectItemFromDropdownListByValue(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_new_alternate_code_type"),value);
+	}
+	public void enterAlternateCodeValue(String codeValue){
+		getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_new_alternate_code_value")).sendKeys(codeValue);
+	}
+
+
+	public void verifyAlternateCodeFormsExistInUI(String alternateCodeType,String alternateCodeValue){
+
+		assertTrue(IsAlternateCodeFormsInUI(alternateCodeType,alternateCodeValue));
+	}
+
+	public boolean IsAlternateCodeFormsInUI(String alternateCodeType,String alternateCodeValue){
+		List<WebElement> alternateCode_rows_list=getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AlternateCodeForm"));
+		boolean flag=false;
+		for(int count=0;count<alternateCode_rows_list.size();count++)
+		{
+			if((alternateCode_rows_list.get(count).getAttribute("title").equals(alternateCodeType)) && (alternateCode_rows_list.get(count).getText().equals(alternateCodeValue)))
+			{
+				flag=true;
+			}
+		}
+		return flag;
+	}
+
+	public void verifyAlternateCodeFormsFromZeusDocument(String routingCode,String codeType)
+	{try {
+		Thread.sleep(5000L);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+		nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+		nvPairs.add(new BasicNameValuePair("source", "zeus"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);
+		try {
+			Thread.sleep(5000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		List AlternateCodeFormTypes=getNodeValuesByTagName(document, "alternateCodeFormType");
+		List AlternateCodeForms=getNodeValuesByTagName(document, "alternateCodeForm");
+
+		for (int i=0;i<AlternateCodeForms.size();i++)
+		{
+			assertEquals(AlternateCodeFormTypes.get(i),getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AlternateCodeForm")).get(i).getAttribute("title"));
+			assertEquals(AlternateCodeForms.get(i),getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AlternateCodeForm")).get(i).getText());
+		}
+
+	}
+
+	public void checkDeleteButtonStatusForFractionalValue(){
+		assertFalse(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_delete_first_row_alternate_code")).isEnabled());
+	}
+
+	public void clickOnDeleteAlternateCodeForm()
+	{
+		attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_delete_second_row_alternate_code"));
+	}
+
+	public void checkForDeletedAlternateCodeFormInZeusApp(String alternateCodeType,String alternateCodeValue)
+	{
+		assertFalse(IsAlternateCodeFormsInUI(alternateCodeType,alternateCodeValue));
+	}
+
+	public void clickYesButtonInDeleteConfirmationModalForRoutingCode(){
+		getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingCode_delete_yes_button_id_click")).click();
+		}
+
+
+	public void verifyRoutingCodeAlternateCodeTypesFromLookup(){
+
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("fid", "ROUTING_CODE_ALTERNATE_FORM_TYPE"));
+			List<String> dropdownValuesList = returnAllDropDownUnselectedValues(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_new_alternate_code_type"));
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get RoutingCode Alternate Code Form Types From Lookup", nvPairs);
+			// finding the list of values from the taxonomy and subtracting the values which are selected in other dropdowns
+			List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "routingCodeAlternateFormType"), getAlreadySelectedAlternateCodeTypes("edit_routingcode_alternate_code_type"));
+			assertEquals(dropdownValuesList, resultList);
+
+		}
+
+
+	public List<String> getAlreadySelectedAlternateCodeTypes(String identifier) {
+		ArrayList<String> selectedValueList = new ArrayList();
+		for (WebElement entityTypeDropDown : getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier(identifier))) {
+			Select dropdown = new Select(entityTypeDropDown);
+			String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
+			selectedValueList.add(selectedValue);
+		}
+		return selectedValueList;
+	}
+
+	public void verifyMaxLengthForAlternateCodeFormValue(String maxLength)
+	{
+		assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_new_alternate_code_value")).getAttribute("maxlength").equals("20"));
+	}
+
+	public void verifyErrorMsgRequiredForAlternateCodeType()
+	{
+		assertEquals("Required", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_alternate_code_type_error_msg_xpath")).getText());
+	}
+
+	public void verifyErrorMsgRequiredForAlternateCodeValue()
+	{
+		assertEquals("Enter up to 20 valid characters.", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_alternate_code_value_error_msg_xpath")).getText());
+	}
+
 }
