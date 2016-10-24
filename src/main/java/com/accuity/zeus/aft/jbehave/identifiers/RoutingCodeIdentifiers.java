@@ -18,7 +18,7 @@ public class RoutingCodeIdentifiers {
         hmap.put("routingcode_basicInfo_label", By.xpath("//*[@id='routingCodeBasicInfo']/h1/span"));
         hmap.put("routingcode_basicInfo_view_RoutingCodeType", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Type']/td"));
         hmap.put("routingcode_basicInfo_view_RoutingCodeTypeDescription", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Type Description']/td"));
-        hmap.put("routingcode_basicInfo_view_ RoutingCodeSubtype", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Subtype']/td"));
+        hmap.put("routingcode_basicInfo_view_RoutingCodeSubtype", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Subtype']/td"));
         hmap.put("routingcode_basicInfo_view_ABACodeSource", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='ABA Code Source']/td"));
         hmap.put("routingcode_basicInfo_view_RoutingCode", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code']/td"));
         hmap.put("routingcode_basicInfo_view_RoutingCodeCheckDigit", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Check Digit']/td"));
@@ -33,9 +33,20 @@ public class RoutingCodeIdentifiers {
         hmap.put("routingcode_basicInfo_view_AssignedInstitutionName", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Assigned Institution Name']/td"));
         hmap.put("routingcode_basicInfo_view_RegistrarFeeSFDCSubscription",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Registrar Fee SFDC Subscription']/td"));
         hmap.put("routingcode_basicInfo_view_InternalUseOnly",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Internal Use Only']/td"));
-        hmap.put("routingcode_basicInfo_view_String UseHeadOffice",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Use Head Office']/td"));
-        hmap.put("routingcode_basicInfo_view_String Comment",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']/td"));
+        hmap.put("routingcode_basicInfo_view_UseHeadOffice",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Use Head Office']/td"));
+        hmap.put("routingcode_basicInfo_view_Comment",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']/td"));
         hmap.put("routingcode_page_header_link",By.xpath(".//*[@id='cssTempFixId']/header//a"));
+        hmap.put("routingCode_usages_link", By.xpath(".//*[@id='data-side-navbar']//li[@id='routingCodeUsages']"));
+        hmap.put("routingCode_usages_header_text", By.xpath(".//*[@id='routingCodeUsages']//thead/tr"));
+        hmap.put("routingCode_usages_name_column_header_xpath", By.xpath(".//*[@id='routingCodeUsages']//thead//th[3]"));
+        hmap.put("routingCode_usages_city_column_header_xpath", By.xpath(".//*[@id='routingCodeUsages']//thead//th[4]"));
+        hmap.put("routingCode_usages_area_column_header_xpath", By.xpath(".//*[@id='routingCodeUsages']//thead//th[5]"));
+        hmap.put("routingCode_owning_usages_name_column_xpath", By.xpath(".//*[@id='usages']/tr[td='true']/td[3]"));
+        hmap.put("routingCode_owning_usages_city_column_xpath", By.xpath(".//*[@id='usages']/tr[td='true']/td[4]"));
+        hmap.put("routingCode_owning_usages_area_column_xpath", By.xpath(".//*[@id='usages']/tr[td='true']/td[5]"));
+        hmap.put("routingCode_NotOwing_usages_name_column_xpath", By.xpath(".//*[@id='usages']/tr[not(td='true')]/td[3]"));
+        hmap.put("routingCode_NotOwing_usages_city_column_xpath", By.xpath(".//*[@id='usages']/tr[not(td='true')]/td[4]"));
+        hmap.put("routingCode_NotOwing_usages_area_column_xpath", By.xpath(".//*[@id='usages']/tr[not(td='true')]/td[5]"));
         hmap.put("edit_routingcode_page_add_alternateCode_btn",By.xpath("//*[@id='add-alternateCodes']"));
         hmap.put("edit_routingcode_page_new_delete_alternateCode_btn",By.xpath("//*[@id='additionalAlternateCodes']/tr[@class='new']/td[@class='delete']"));
         hmap.put("edit_routingcode_page_alternateCode_table",By.xpath("//*[@id='additionalAlternateCodes']/tr"));
@@ -57,10 +68,42 @@ public class RoutingCodeIdentifiers {
         hmap.put("edit_routingcode_page_ConfirmedWithFedDateMonth",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Confirmed with Fed']/td/select[@name='confirmedDate-month']"));
         hmap.put("edit_routingcode_page_ConfirmedWithFedDateYear",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Confirmed with Fed']/td/input[@name='confirmedDate-year']"));
         hmap.put("edit_routingcode_page_RegistrarFeeSFDCSubscription",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Registrar Fee SFDC Subscription']//input"));
-        hmap.put("edit_routingcode_registarFeeSFDCSubscription_text_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//input[@name='subscriptionNumber']")));  
+        hmap.put("edit_routingcode_registarFeeSFDCSubscription_text_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//input[@name='subscriptionNumber']")));
         hmap.put("edit_routingcode_routingCodeComment_text_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//textarea[@name='routingCodeComment']")));
-        hmap.put("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Registrar Fee SFDC Subscription']/td")));  
+        hmap.put("edit_routingcode_registarFeeSFDCSubscription_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Registrar Fee SFDC Subscription']/td")));
         hmap.put("edit_routingcode_routingCodeComment_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']/td")));
+        hmap.put("edit_routingcode_page_StartDate_errorMessage", By.xpath("//*[@data-error_id='validFromError']"));
+        hmap.put("edit_routingcode_page_EndDate_errorMessage", By.xpath("//*[@data-error_id='validToError']"));
+        hmap.put("edit_routingcode_page_ForthcomingRetirementDate_errorMessage", By.xpath("//*[@data-error_id='retireAtError']"));
+        hmap.put("edit_routingcode_page_ConfirmedWithFedDate_errorMessage", By.xpath("//*[@data-error_id='confirmedDateError']"));
+        hmap.put("edit_routingcode_routingCodeComment_afterSave_xpath", By.xpath(("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']/td")));
+        hmap.put("routingcode_former_usages_navigation_link", By.xpath("//*[@id='routingCodeFormerUsages']"));
+        hmap.put("view_routingcode_name_col", By.xpath("//*[@id='routingCodeFormerUsages']//th[@sortfield='departmentName,officeName']"));
+        hmap.put("view_routingcode_city_col", By.xpath("//*[@id='routingCodeFormerUsages']//th[@sortfield='cityName']"));
+        hmap.put("view_routingcode_area_col", By.xpath("//*[@id='routingCodeFormerUsages']//th[@sortfield='areaName']"));
+        hmap.put("view_routingcode_additional_info_col", By.xpath("//*[@id='routingCodeFormerUsages']//*[contains(text(),'Additional Info')]"));
+        hmap.put("view_routingcode_name_list", By.xpath("//*[@id='formerUsages']//td[1]"));
+        hmap.put("view_routingcode_city_list", By.xpath("//*[@id='formerUsages']//td[2]"));
+        hmap.put("view_routingcode_area_list", By.xpath("//*[@id='formerUsages']//td[3]"));
+        hmap.put("view_routingcode_additional_info_list", By.xpath("//*[@id='formerUsages']//td[4]"));
+        hmap.put("view_routingcode_first_office_name_link", By.xpath("//*[@id='formerUsages']/tr[1]//*[@href]"));
+        hmap.put("officename_basicInfo_link", By.xpath("//*[@id='officeBasicInfo']"));
+        hmap.put("officename_basicInfo_label", By.xpath("//*[@id='officeBasicInfo']/h1/span"));
+        hmap.put("officename_text_value", By.xpath("//*[@id='officeBasicInfo']//tr[td='Office Name']/td[2]"));
+        hmap.put("edit_routingcode_page_RoutingCodeComment",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']//input"));
+        hmap.put("routingcode_page_paymentsystems_link",By.xpath("//*[@id='routingCodePaymentSystems'][text()='Payment Systems']"));
+        hmap.put("paymentsystems_productName",By.xpath("//*[@id='routingCodePaymentSystems']/div[@class='payment-system']/h3"));
+        hmap.put("paymentsystems_dateJoined",By.xpath("//*[@id='routingCodePaymentSystems']/div[@class='payment-system']//tr[th='Date Joined']/td"));
+        hmap.put("paymentsystems_alternateFormType",By.xpath("//*[@id='routingCodePaymentSystems']/div[@class='payment-system']//tr[th='Alternate Form Type']/td"));
+        hmap.put("paymentsystems_membershipType",By.xpath("//*[@id='routingCodePaymentSystems']/div[@class='payment-system']//tr[th='Membership Type']/td"));
+        hmap.put("paymentsystems_systemActivityStatus",By.xpath("//*[@id='routingCodePaymentSystems']/div[@class='payment-system']//tr[th='System Activity Status']/td"));
+        hmap.put("paymentsystems_routeVia",By.xpath("//*[@id='routingCodePaymentSystems']/div[@class='payment-system']//tr[th='Route Via']/td"));
+        hmap.put("paymentsystems_dateLeft",By.xpath("//*[@id='routingCodePaymentSystems']/div[@class='payment-system']//tr[th='Date Left']/td"));
+        hmap.put("paymentsystems_correspondents",By.xpath("//*[@id='routingCodePaymentSystems']//li[@class='correspondent']//tbody[//th='Code']"));
+        hmap.put("paymentsystems_attributes",By.xpath("//*[@id='routingCodePaymentSystems']//li[h2='Payment System Attributes']//tbody"));
+        hmap.put("paymentsystems_contactLocations",By.xpath("//*[@id='routingCodePaymentSystems']//div[@class='payment-system']/table//tbody"));
+
+
         hmap.put("edit_routingcode_existing_alternate_code_type",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//select[@id='alternateCodeType']"));
         hmap.put("edit_routingcode_existing_alternate_code_value",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//input[@name='alternateCodeValue']"));
         hmap.put("edit_routingcode_new_alternate_code_type",By.xpath("//*[@id='additionalAlternateCodes']/tr[@class='new']//select[@id='alternateCodeType']"));
@@ -73,7 +116,7 @@ public class RoutingCodeIdentifiers {
         hmap.put("edit_routingcode_alternate_code_type_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='alternateCodeTypeError']"));
         hmap.put("edit_routingcode_alternate_code_value_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='alternateCodeValueError']"));
     }
-    
+
     public static By getObjectIdentifier(String key) {
         setIdentifiers();
         return hmap.get(key);

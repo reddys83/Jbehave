@@ -16,11 +16,11 @@ declare function local:getDateAsPerAccuracy( $date as node() ) {
         default return "date not valid"
 };
 
-let $country := xs:string(xdmp:get-request-field("country"))
+
 let $routingCodeValue := xs:string(xdmp:get-request-field("routingCode"))
 let $routingCodeTypeValue := xs:string(xdmp:get-request-field("routingCodeType"))
 let $source := xs:string(xdmp:get-request-field("source"))
-let $routingCodeDoc := for $x in /routingCode[@source = "trusted"] where $x/codeValue ='083905216' and $x/codeType='ABA'
+let $routingCodeDoc := for $x in /routingCode[@source = $source] where $x/codeValue =$routingCodeValue and $x/codeType=$routingCodeTypeValue
 return $x
 
 let $DateFields :=
