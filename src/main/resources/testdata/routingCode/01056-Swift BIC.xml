@@ -10,8 +10,8 @@
         <codeAlternateForm type="fdb_legacy">01056</codeAlternateForm>
     </codeAlternateForms>
     <codeStatus>active</codeStatus>
-    <internalUseOnly useHeadOffice="true">true</internalUseOnly>
-    <accountEligible>true</accountEligible>
+    <internalUseOnly useHeadOffice="false">false</internalUseOnly>
+    <accountEligible>false</accountEligible>
     <dates>
         <validFrom accuracy="day">2004-05-04</validFrom>
         <validTo accuracy="day">2014-05-04</validTo>
@@ -48,15 +48,16 @@
             </correspondents>
             <contactLocations>
                 <contactLocation>
-                    <type>ABA</type>
+                    <type>Primary Wire Location</type>
                     <presence>
                         <link
-                                href="http://10.72.0.121:8080/heraapi/office/id/b0654aa9-89f8-444a-8565-674e01d11ed0"
+                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
-                    <specialInstructions>ABA</specialInstructions>
+                    <specialInstructions>test instructions</specialInstructions>
                 </contactLocation>
             </contactLocations>
+
         </paymentSystem>
         <paymentSystem>
             <product>

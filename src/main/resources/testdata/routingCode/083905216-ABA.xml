@@ -3,17 +3,16 @@
              resource="/routingCode/id/647b8553-2b9c-4e38-a6d0-ad9209ac6cae"
              source="trusted" tfpid="ABA-083905216">
     <codeType>ABA</codeType>
-    <codeSubtype>Regular Routing Number</codeSubtype>
-    <codeSource>ABA</codeSource>
     <codeTypeDescription>US Routing Number</codeTypeDescription>
+    <codeSubtype>Government Routing Number</codeSubtype>
+    <codeSource>ABA</codeSource>
     <codeValue>083905216</codeValue>
     <codeCheckDigit>codeCheckDigit123</codeCheckDigit>
     <codeAlternateForms>
-        <codeAlternateForm type="fdb_legacy">083905216</codeAlternateForm>
-        <codeAlternateForm type="fractional">codeAlternateForm1</codeAlternateForm>
+        <codeAlternateForm type="fractional">12345678</codeAlternateForm>
     </codeAlternateForms>
     <codeStatus>active</codeStatus>
-    <internalUseOnly useHeadOffice="false">false</internalUseOnly>
+    <internalUseOnly useHeadOffice="true">true</internalUseOnly>
     <accountEligible>true</accountEligible>
     <dates>
         <validFrom accuracy="day">2004-05-04</validFrom>
@@ -85,6 +84,11 @@
                     <value>1</value>
                 </attribute>
             </attributes>
+            <routeVia>
+                <link
+                        href="http://10.72.0.121:8080/heraapi/routingCode/id/c42c916b-8f9b-4fda-a2e0-0f8c4c5973fb"
+                        rel="src"/>
+            </routeVia>
             <contactLocations>
                 <contactLocation>
                     <type>Primary Wire Location</type>
@@ -93,6 +97,7 @@
                                 href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
+                    <specialInstructions>test instructions</specialInstructions>
                 </contactLocation>
                 <contactLocation>
                     <type>Primary ACH Location</type>
@@ -101,6 +106,7 @@
                                 href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
+                    <specialInstructions>test instructions</specialInstructions>
                 </contactLocation>
                 <contactLocation>
                     <type>ACH Contact TfpsysLocation</type>
@@ -109,6 +115,7 @@
                                 href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
+                    <specialInstructions>test instructions</specialInstructions>
                 </contactLocation>
                 <contactLocation>
                     <type>Assigned Address</type>
@@ -117,6 +124,7 @@
                                 href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
+                    <specialInstructions>test instructions</specialInstructions>
                 </contactLocation>
                 <contactLocation>
                     <type>Primary Check Location</type>
@@ -125,6 +133,7 @@
                                 href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
+                    <specialInstructions>test instructions</specialInstructions>
                 </contactLocation>
             </contactLocations>
         </paymentSystem>
@@ -133,7 +142,7 @@
         <relation>
             <routingCode>
                 <link
-                        href="/routingCode/id/863f2d9b-bff7-44c2-a208-ad0ede572e6f"
+                        href="http://10.72.0.121:8080/heraapi/routingCode/id/863f2d9b-bff7-44c2-a208-ad0ede572e6f"
                         rel="src"/>
             </routingCode>
             <context>Federal Reserve ACH</context>
@@ -168,6 +177,4 @@
             </presence>
         </usageLocation>
     </usageLocations>
-    <comment>test comments</comment>
-    <subscriptionNumber>12345</subscriptionNumber>
 </routingCode>
