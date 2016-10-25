@@ -153,13 +153,47 @@ public class RoutingCodeSteps extends AbstractSteps {
 		Thread.sleep(5000L);
 	}
 
-
     @When("the user clicks on payment systems section")
     public void clickOnPaymentSystems()
     {
         getRoutingCodePage().clickonPaymentSystems();
     }
-}
+    
+
+	@Then("the user should verify the column names in history page")
+	public void verifyHistoryEventColumnNames() {
+		if (routingCodePage == null) {
+			routingCodePage = getRoutingCodePage().createRoutingCodePage();
+		}
+	
+		getRoutingCodePage().verifyHistoryEventColumnNames();
+	}
+
+	@When("the user clicks on the history link in the navigation bar")
+	public void clickOnRoutingCodeLink() {
+		 getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_navigation_link"));
+	}
+	
+	@Then("the user clicks on the eye icon in first row")
+	public void clickOnEyeIcon() {
+		
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"));
+	}
+	
+	@Then("the user clicks on the eye icon in second row")
+	public void clickOnEyeIcon2() {
+		
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon_secondRow"));
+	}
+	
+	@Then("the user should verify the column names in history usage")
+	public void verifyHistoryUsageColumnNames() {
+		getRoutingCodePage().verifyHistoryUsageColumnNames();
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"));
+	}
+	
+ }
+
 
 
 

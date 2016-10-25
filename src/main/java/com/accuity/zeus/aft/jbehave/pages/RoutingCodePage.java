@@ -468,5 +468,45 @@ public class RoutingCodePage extends AbstractPage {
 			e.printStackTrace();
 		}
     }
-}
+    
+    public void verifyHistoryEventColumnNames() {
+ 		try {
+ 			Thread.sleep(5000L);
+ 		} catch (InterruptedException e) {
+ 			e.printStackTrace();
+ 		}
+ 		assertEquals("TYPE", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_type_col")).getText());
+ 		assertEquals("DATE", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_date_col")).getText());
+ 		assertEquals("DESCRIPTION", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_description_col")).getText());
+ 		assertEquals("REPLACED BY CODE", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_replacedbycode_col")).getText());
+ 		assertEquals("DETAILS", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_details_col")).getText());
+ 	}
+    
+    public RoutingCodePage createRoutingCodePage() {
+        RoutingCodePage ERP=null;
+        try {
+            ERP= new RoutingCodePage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
+        }
+        catch(Exception e)
+        {e.printStackTrace();}
+        return ERP;
+    }
+    
+    public void verifyHistoryUsageColumnNames() {
+ 		try {
+ 			Thread.sleep(5000L);
+ 		} catch (InterruptedException e) {
+ 			e.printStackTrace();
+ 		}
+ 		assertEquals("NAME", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_usage_name_col")).getText());
+ 		assertEquals("ADDRESS", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_usage_address_col")).getText());
+ 		assertEquals("CITY", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_usage_city_col")).getText());
+ 		assertEquals("AREA", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_usage_area_col")).getText());
+ 		assertEquals("SUB AREA", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_usage_subarea_col")).getText());
+ 		assertEquals("COUNTRY", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_usage_country_col")).getText());
+ 		assertEquals("POSTAL CODE", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_usage_postalcode_col")).getText());
+ 		assertEquals("ADDITIONAL INFO", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_usage_addinfo_col")).getText());
+ 	}
+    
+    }
 

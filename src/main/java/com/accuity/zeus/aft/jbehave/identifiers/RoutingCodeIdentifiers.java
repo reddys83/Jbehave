@@ -102,8 +102,23 @@ public class RoutingCodeIdentifiers {
         hmap.put("paymentsystems_correspondents",By.xpath("//*[@id='routingCodePaymentSystems']//li[@class='correspondent']//tbody[//th='Code']"));
         hmap.put("paymentsystems_attributes",By.xpath("//*[@id='routingCodePaymentSystems']//li[h2='Payment System Attributes']//tbody"));
         hmap.put("paymentsystems_contactLocations",By.xpath("//*[@id='routingCodePaymentSystems']//div[@class='payment-system']/table//tbody"));
-
-
+        hmap.put("view_routingcode_history_type_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Type')]"));
+        hmap.put("routingcode_history_navigation_link", By.xpath("//*[@id='routingCodeHistory']"));
+        hmap.put("view_routingcode_history_date_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Date')]"));
+        hmap.put("view_routingcode_history_description_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Description')]"));
+        hmap.put("view_routingcode_history_replacedbycode_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Replaced by Code')]"));
+        hmap.put("view_routingcode_history_details_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Details')]"));
+        hmap.put("routingcode_history_eye_icon", By.xpath("//*[@id='history']/tr[1]/td[5]/button"));
+        hmap.put("routingcode_history_eye_icon_secondRow", By.xpath("//*[@id='history']/tr[2]/td[5]/button"));
+        hmap.put("view_routingcode_history_usage_name_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Name')]"));
+        hmap.put("view_routingcode_history_usage_address_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Address')]"));
+        hmap.put("view_routingcode_history_usage_city_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'City')]"));
+        hmap.put("view_routingcode_history_usage_area_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Area')]"));
+        hmap.put("view_routingcode_history_usage_subarea_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Sub Area')]"));
+        hmap.put("view_routingcode_history_usage_country_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Country')]"));
+        hmap.put("view_routingcode_history_usage_postalcode_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Postal Code')]"));
+        hmap.put("view_routingcode_history_usage_addinfo_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Additional Info')]"));
+        hmap.put("view_routingcode_date_list", By.xpath("//*[@id='history']//td[2]"));
     }
 
     public static By getObjectIdentifier(String key) {
