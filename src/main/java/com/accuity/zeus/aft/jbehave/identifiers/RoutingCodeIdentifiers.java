@@ -102,11 +102,16 @@ public class RoutingCodeIdentifiers {
         hmap.put("paymentsystems_correspondents",By.xpath("//*[@id='routingCodePaymentSystems']//li[@class='correspondent']//tbody[//th='Code']"));
         hmap.put("paymentsystems_attributes",By.xpath("//*[@id='routingCodePaymentSystems']//li[h2='Payment System Attributes']//tbody"));
         hmap.put("paymentsystems_contactLocations",By.xpath("//*[@id='routingCodePaymentSystems']//div[@class='payment-system']/table//tbody"));
+        hmap.put("routingcode_all_link", By.xpath("//*[@id='all']"));
+        hmap.put("routingcode_payment_systems_link", By.xpath("//*[@id='routingCodePaymentSystems']"));
+        hmap.put("routingcode_related_codes_link", By.xpath("//*[@id='routingCodeRelatedCodes']"));
+        hmap.put("routingcode_usages_link", By.xpath("//*[@id='routingCodeUsages']"));
+        hmap.put("routingcode_former_usages_link", By.xpath("//*[@id='routingCodeFormerUsages']"));
+        hmap.put("routingcode_history_link", By.xpath("//*[@id='routingCodeHistory']"));
+        hmap.put("routingcode_office_fid_search_results", By.xpath("//*[@id='searchEntityList-list']//tbody//td[4]/*[@href]"));
         hmap.put("view_routingCodeSearchEntityPlaceHolder_xpath", By.xpath("//input[@placeholder='Enter at least 2 valid characters']"));
         hmap.put("view_routingCodeSearchTypeAheadBox_xpath", By.xpath("//*[@id='search']"));
         hmap.put("routingCodeResultsHeader_view_mode", By.xpath("//div[@id='contentSummary']//*[@class='search-results']"));
-
-
     }
 
     public static By getObjectIdentifier(String key) {

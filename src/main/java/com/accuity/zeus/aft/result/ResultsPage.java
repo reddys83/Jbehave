@@ -1135,8 +1135,23 @@ public class ResultsPage extends AbstractPage {
         assertTrue(getDriver().findElement(results_tab_xpath).getAttribute("class").equals("selected"));
 
     }
-   
+    
+    public WebElement getRoutingCodeHyperlinkElementForCodeValue(String routingCode, String codeType) {
+        List<WebElement> elements = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcodes_rows_xpath"));
+        for (WebElement element : elements) {
+            if (element.findElement(By.xpath("td[1]")).getText().equals(routingCode) && element.findElement(By.xpath("td[2]")).getText().equals(codeType)) {
+                return element.findElement(By.xpath("td[1]/*[@href]"));
+            }
+        }
+        return null;
+    }
+    
+    public void verifyToolTipInRoutingCodeResultsPage(String tooltip, By by) {
+    	assertEquals(tooltip, getDriver().findElement(by).getAttribute("title"));
+    } 
+
 	public void verifyResultsPage() {		
 		assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingCodeResultsHeader_view_mode")).getText().contains("Routing Code results for"));
 	}
+
  }

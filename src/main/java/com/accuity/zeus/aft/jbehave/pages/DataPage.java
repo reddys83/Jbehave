@@ -1501,4 +1501,7 @@ public class DataPage extends AbstractPage {
         return new EditRoutingCodePage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
     }
 	
+	public void verifyElementIsDisplayed(String fieldName, By by) {
+		assertTrue(fieldName + " is not displayed.", getDriver().findElement(by).isDisplayed());
+	}	
 }
