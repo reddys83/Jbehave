@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 import com.accuity.zeus.aft.jbehave.pages.DataPage;
 import com.accuity.zeus.aft.jbehave.pages.LegalEntityPage;
 import org.jbehave.core.annotations.Alias;
@@ -479,5 +480,23 @@ public class SearchResultsSteps extends AbstractSteps{
     public void verifyOfficesLabelOnResultsPage()
     {
         getResultsPage().verifyOfficeHeading();
+    }
+    
+    @When("the user clicks on the code value hyperlink on the search results card with routing code <routingCode> and code type <codeType>")
+    public void clickOnCodeValueHyperlink(@Named("routingCode") String routingCode, @Named("codeType") String codeType) {
+        setRoutingCodePage(getResultsPage().clickOnRoutingCodeResultCard(getResultsPage().getRoutingCodeHyperlinkElementForCodeValue(routingCode, codeType)));
+        if(dataPage==null){
+            dataPage = getResultsPage().createDataPage();
+        }
+    }
+    
+    @Then("the user should see the $tooltip tooltip on routing code results page")
+    public void verifyToolTipViewRoutingCode(@Named("tooltip") String tooltip) {
+    	getResultsPage().verifyToolTipInRoutingCodeResultsPage(tooltip, RoutingCodeIdentifiers.getObjectIdentifier("routingcodes_rows_xpath"));
+    }
+    
+    @Then("the user should see the $tooltip tooltip on routing code search results page")
+    public void verifyToolTipViewOffice(@Named("tooltip") String tooltip) {
+    	getResultsPage().verifyToolTipInRoutingCodeResultsPage(tooltip, RoutingCodeIdentifiers.getObjectIdentifier("routingcode_office_fid_search_results"));
     }
 }
