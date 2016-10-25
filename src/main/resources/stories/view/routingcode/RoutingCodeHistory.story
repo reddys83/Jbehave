@@ -29,8 +29,8 @@ When the user clicks on the history link in the navigation bar
 Then the user should verify the column names in history page
 Then the user clicks on the eye icon in first row
 Then the user should verify the column names in history usage
-Then the user verifies that values in date column is in descending order
+Then the user verifies that values in routing code history are displayed from zeus db
 
 Examples:
 |entity|searchBy|routingCode|codeType|
-|262176840|Routing Code|262176840|ABA|
+|083905216|Routing Code|083905216|ABA|
