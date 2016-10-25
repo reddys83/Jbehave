@@ -191,7 +191,15 @@ public class RoutingCodeSteps extends AbstractSteps {
 		getRoutingCodePage().verifyHistoryUsageColumnNames();
 		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"));
 	}
+	//
 	
+
+	@Then("the user verifies that values in routing code history are displayed from zeus db")
+	public void verifyHistoryValuesFromZeus() {
+	
+		getRoutingCodePage().verifyHistoryValuesFromZeus();
+
+	}
  }
 
 

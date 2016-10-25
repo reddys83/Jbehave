@@ -508,5 +508,90 @@ public class RoutingCodePage extends AbstractPage {
  		assertEquals("ADDITIONAL INFO", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_usage_addinfo_col")).getText());
  	}
     
+    public void verifyHistoryValuesFromZeus(){
+
+		List<String> historyEventType = new ArrayList<String>();
+		List<String> historyEventDate = new ArrayList<String>();
+		List<String> historyEventDescription = new ArrayList<String>();
+		List<String> historyEventReplacedByCode= new ArrayList<String>();
+		
+		List<String> historyUsageName= new ArrayList<String>();
+		List<String> historyUsageAddress= new ArrayList<String>();
+		List<String> historyUsageCity= new ArrayList<String>();
+		List<String> historyUsageArea= new ArrayList<String>();
+		List<String> historyUsageSubArea= new ArrayList<String>();
+		List<String> historyUsageCountry= new ArrayList<String>();
+		List<String> historyUsagePostalCode= new ArrayList<String>();
+		List<String> historyUsageAdditionalInfo= new ArrayList<String>();
+		
+
+		for (int index = 0; index < getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_type_list")).size(); index++) {
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_type_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_date_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_description_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_replacebycode_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_details_list")).get(index).getText());
+
+			historyEventType.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_type_list")).get(index).getText());
+			historyEventDate.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_date_list")).get(index).getText());
+			historyEventDescription.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_description_list")).get(index).getText());
+			historyEventReplacedByCode.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_replacebycode_list")).get(index).getText());
+		}
+		attemptClick((RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon")));
+		for (int index = 0; index < getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_address_list")).size(); index++) {
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_name_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_address_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_city_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_area_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_subarea_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_country_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_postalcode_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_addinfo_list")).get(index).getText());
+			historyUsageName.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_name_list")).get(index).getText());
+			historyUsageAddress.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_address_list")).get(index).getText());
+			historyUsageCity.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_city_list")).get(index).getText());
+			historyUsageArea.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_area_list")).get(index).getText());
+			historyUsageSubArea.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_subarea_list")).get(index).getText());
+			historyUsageCountry.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_country_list")).get(index).getText());
+			historyUsagePostalCode.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_postalcode_list")).get(index).getText());
+			historyUsageAdditionalInfo.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_addinfo_list")).get(index).getText());
+		}
+		attemptClick((RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon")));
+		attemptClick((RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon_secondRow")));
+		
+		//getDriver().findElement((RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon")));
+		//getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"));
+		//getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon_secondRow"));
+		
+		for (int index = 0; index < getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_address_list")).size(); index++) {
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_name_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_address_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_city_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_area_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_subarea_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_country_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_postalcode_list")).get(index).getText());
+			//System.out.println(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_addinfo_list")).get(index).getText());
+		
+			//formerUsagesAdditionalInfo.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_additional_info_list")).get(index).getText());
+			historyUsageName.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_name_list")).get(index).getText());
+			historyUsageAddress.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_address_list")).get(index).getText());
+			historyUsageCity.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_city_list")).get(index).getText());
+			historyUsageArea.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_area_list")).get(index).getText());
+			historyUsageSubArea.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_subarea_list")).get(index).getText());
+			historyUsageCountry.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_country_list")).get(index).getText());
+			historyUsagePostalCode.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_postalcode_list")).get(index).getText());
+			historyUsageAdditionalInfo.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_addinfo_list")).get(index).getText());
+		}
+		
+	
+		
+		
+		
+    	
+    }
+    
+    
+    
     }
 
