@@ -1663,4 +1663,87 @@ public class EditOfficeSteps extends AbstractSteps{
 		assertNotEquals(postalCodePosition, getDataPage().getTagValueFromDB("get postalCodePos from countryDoc",
 				"postalCodePosition", inputParameters));
 	}
+	
+	@Then("the user should see the locations summary value same as in $source document")
+	public void verifyLocationsSummaryValuesFromTrustedDB(@Named("source") String source, @Named("officeFid") String officeFid) {
+		getEditOfficePage().verifyLocationsSummaryValuesFromTrustedDB(source, officeFid);
+	}
+	
+	@When("the user clicks on the add new summary button in the office locations page")
+	public void clickOnAddSummaryRow() {
+		getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier("office_add_locations_summary_row"));
+	}
+	
+	@Then("the user should see the type drop-down values from lookup LOCATION_SUMMARY_TEXT_TYPE")
+	public void verifyLocationSummaryTypeFromLookup() {
+		getEditOfficePage().verifyLookUpValuesForLocationSummaryType(OfficeIdentifiers.getObjectIdentifier("office_edit_locations_summary_type_dropdown"),
+				"get office locations summary type lookup");
+	}
+	
+	@When("the user deletes the existing office locations summary rows")
+	public void deleteAllOfficeLocationsSummaryRows() {
+		getDataPage().deleteAllRows(OfficeIdentifiers.getObjectIdentifier("office_delete_locations_summary_row"));
+	}
+	
+	@When("the user selects the type drop-down value as <type> in the office locations page")
+	public void selectOfficeLocationsSummaryType(@Named("type") String type) {
+		getDataPage().selectDropDownValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier("office_edit_locations_summary_type_dropdown"), type, 1);
+	}
+	
+	@When("the user selects the value field as <value> in the office locations page")
+	public void enterOfficeLocationsSummaryValueField(@Named("value") String value) {
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_edit_locations_summary_value"), value, 1);
+	}
+	
+	@Then("the user should not see the newly added summary row in the office locations page")
+	public void verifyLocationsSummaryRowNotDisplayed() {
+		getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_summary_row_view_mode"), false);
+	}
+	
+	@Then("the user verifies that no values are entered in $source document for office locations summary")
+	@Alias("the user verifies that the office locations summary parameters in the $source document")
+	public void verifyOfficeIdentifierRowValuesFromZeusDB(@Named("source") String source,
+			@Named("officeFid") String officeFid, @Named("type") String type, @Named("value") String value) {
+		List<String> summaryTypes = new ArrayList<>();
+		List<String> summaryValues = new ArrayList<>();
+		summaryTypes.add(type);
+		summaryValues.add(value);
+		getEditOfficePage().verifyLocationsSummaryValuesFromDB(source, officeFid, summaryTypes, summaryValues);
+	}
+	
+	@When("the user selects the type drop-down value as <type2> in the office locations page")
+	public void selectOfficeLocationsSummaryType2(@Named("type2") String type) {
+		getDataPage().selectDropDownValueFromRowNumber(OfficeIdentifiers.getObjectIdentifier("office_edit_locations_summary_type_dropdown"), type, 2);
+	}
+	
+	@When("the user selects the value field as <value2> in the office locations page")
+	public void enterOfficeLocationsSummaryValueField2(@Named("value2") String value) {
+		getDataPage().enterTextUsingIndex(OfficeIdentifiers.getObjectIdentifier("office_edit_locations_summary_value"), value, 2);
+	}
+	
+	@Then("the user verifies that the summary parameters are entered in the office locations page")
+	public void verifyOfficeLocationsSummaryParametersInUI(@Named("type") String type, @Named("value") String value, @Named("type2") String type2, @Named("value2") String value2) {
+		String[] summaryTypes = { type, type2 };
+		String[] summaryValues = { value, value2 };
+		getEditOfficePage().verifyOfficeLocationsSummaryParametersInUI(summaryTypes, summaryValues);
+	}
+	
+	@Then("the user verifies that the office locations summary parameters are entered in the $source document")
+	public void verifyOfficeIdentifierValuesFromZeusDB(@Named("source") String source,
+			@Named("officeFid") String officeFid, @Named("type") String type, @Named("value") String value, @Named("type2") String type2, @Named("value2") String value2) {
+		List<String> summaryTypes = new ArrayList<>();
+		List<String> summaryValues = new ArrayList<>();
+		summaryTypes.add(type);
+		summaryTypes.add(type2);
+		summaryValues.add(value);
+		summaryValues.add(value2);
+		getEditOfficePage().verifyLocationsSummaryValuesFromDB(source, officeFid, summaryTypes, summaryValues);
+	}
+	
+	@Then("the user verifies existing locations summary parameters are updated with new values")
+	public void verifyOfficeIdentifierParametersInUI(@Named("type") String type, @Named("value") String value) {
+		String[] summaryTypes = { type };
+		String[] summaryValues = { value };
+		getEditOfficePage().verifyOfficeLocationsSummaryParametersInUI(summaryTypes, summaryValues);
+	}
 }

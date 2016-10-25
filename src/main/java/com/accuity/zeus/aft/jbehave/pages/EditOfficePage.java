@@ -2119,6 +2119,75 @@ public class EditOfficePage extends AbstractPage {
 						.findElement(OfficeIdentifiers.getObjectIdentifier("office_locations_postalCodePosition_xpath"))
 						.getAttribute("value"));
 	}
+	
+	public void verifyLocationsSummaryValuesFromTrustedDB(String source, String officeFid) {
+		List<String> summaryTypeList = new ArrayList<String>();
+		List<String> summaryValueList = new ArrayList<String>();
+		List<WebElement> summaryTypeDropDowns = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_edit_locations_summary_type_dropdown"));
+		List<WebElement> summaryValueTextBox = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_edit_locations_summary_value"));
+		if(summaryTypeDropDowns.size() > 0) {
+			for (int index = 1; index <= summaryTypeDropDowns.size(); index++) {					
+				summaryTypeList.add(getSelectedOptionInDropDownByIndex(OfficeIdentifiers.getObjectIdentifier("office_edit_locations_summary_type_dropdown"), index));
+				summaryValueList.add(summaryValueTextBox.get(index-1).getText());
+			}
+			verifyLocationsSummaryValuesFromDB(source, officeFid, summaryTypeList, summaryValueList);
+		} else {
+			assertTrue("There is no existing values in Locations summary section", true);
+		}
+	}
+	
+	public void verifyLocationsSummaryValuesFromDB(String source, String officeFid, List<String> summaryTypeList, List<String> summaryValueList) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"office locations", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("summaries").item(0).getChildNodes().getLength(); i++) {
+					for (int childNode = 0; childNode < document.getElementsByTagName("summaries").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						switch (document.getElementsByTagName("summaries").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "summaryType":
+							assertEquals(document.getElementsByTagName("summaries").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), summaryTypeList.get(i));
+							break;
+						case "summaryValue":
+							assertEquals(document.getElementsByTagName("summaries").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), summaryValueList.get(i));
+							break;
+						}
+					}
+				}
+			} else
+				assertTrue(source+ "document is null",false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyLookUpValuesForLocationSummaryType(By by, String xquery) {
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xquery);
+		List<WebElement> dropDownFieldList = getDriver().findElements(by);
+		List<WebElement> options = dropDownFieldList.get(0).findElements(By.cssSelector("option"));
+		for (int indexOfOption = 0; indexOfOption < options.size(); indexOfOption++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getTextContent(), options.get(indexOfOption).getText().trim());
+		}
+	}
+	
+	public void verifyOfficeLocationsSummaryParametersInUI(String[] summaryTypes, String[] summaryValues) {
+		
+		List<WebElement> summaryRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_summary_row_view_mode"));
+		
+		for (int i = 0; i < summaryRows.size(); i++) {
+			assertTrue(summaryRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(summaryTypes[i]));
+			assertTrue(summaryRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(summaryValues[i]));
+		}
+	}   
 
 	   @Override
     public String getPageUrl() {

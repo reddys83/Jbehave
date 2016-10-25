@@ -233,6 +233,12 @@ public class OfficeIdentifiers {
 	    hmap.put("office_locations_address_rows_edit_mode", By.xpath(".//*[@data-edit_id='locationAddresses-0']"));
 	    hmap.put("office_location_address_type_options_dropdown", By.xpath(".//*[@id='officeLocations']//select[@id='addressType-0']/option"));
 	    hmap.put("office_locations_postalCodePosition_xpath", By.xpath("//*[@id='additionalLocationAddresses-0']//*[th='Postal Code Position']/td/input"));
+	    hmap.put("office_add_locations_summary_row", By.xpath("//*[@id='add-locationSummaries']"));
+	    hmap.put("office_edit_locations_summary_type_dropdown", By.xpath("//*[@id='locationSummaryType']"));
+	    hmap.put("office_edit_locations_summary_value", By.xpath("//*[@id='additionalLocationSummaries']//*[@data-internal_id='locationSummaryValue']"));
+	    hmap.put("office_delete_locations_summary_row", By.xpath("//*[@data-row_id='locationSummaries']//*[@class='delete-element']"));
+	    hmap.put("office_locations_summary_row_edit_mode", By.xpath("//*[@id='additionalLocationSummaries']"));
+	    hmap.put("office_locations_summary_row_view_mode", By.xpath("//*[@id='officeLocations']/table/tbody/tr"));
 	    
     }
 

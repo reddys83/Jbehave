@@ -10,6 +10,7 @@ JIRA ID - ZEUS-1300 - User can edit Office's Locations(Telecoms)
 JIRA ID - ZEUS-1301 - User can edit Office's Locations (Primary Flag)
 JIRA ID - ZEUS-1299 - User can edit Office's Locations(Addresses)
 JIRA ID - ZEUS-1302 - User can edit Office's Locations (Postal Code Position)
+JIRA ID - ZEUS-1078 - User can edit Office's Location Summaries
 
 Scenario: Verify that the add button is disabled for the first row of office location when there is a location
 
@@ -772,3 +773,109 @@ Then the user should verify postal code position should be blank in trusted docu
 Examples:
 |entity|searchBy|fid|officeFid|Country|postalCodePosition|
 |1045|FID|1045|1045-26|Algeria||
+
+Scenario: User is viewing and updating Office's Locations Summary - 
+a) User verifies whether current value of Locations Summary is same as in trusted document.
+b) User verifies if the 'Type' dropdown field values are from the lookup LOCATION_SUMMARY_TEXT_TYPE.
+c) User verifies that no new row is added after saving when blank values are entered for 'Type' and 'Value' fields.
+d) User verifies no changes in the Zeus document.
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+And the user gets the document with get id for offices with the <officeFid> from the database
+Then the user should see the locations summary value same as in trusted document
+When the user clicks on the add new summary button in the office locations page
+Then the user should see the type drop-down values from lookup LOCATION_SUMMARY_TEXT_TYPE
+When the user deletes the existing office locations summary rows
+When the user clicks on the add new summary button in the office locations page
+When the user selects the type drop-down value as <type> in the office locations page
+When the user selects the value field as <value> in the office locations page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+Then the user should not see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+Then the user should not see the newly added summary row in the office locations page
+Then the user verifies that no values are entered in zeus document for office locations summary
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|type|value|
+|1038|FID|1038|1038-51|||
+
+Scenario: User is updating Office's Locations Summary - 
+a) User verifies two summary rows are added.
+b) Verify previously selected summary Type is not listed in summary type dropdown of next row.
+c) Verify that UI and Zeus document is updated.
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+And the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office locations summary rows
+When the user clicks on the add new summary button in the office locations page
+When the user selects the type drop-down value as <type> in the office locations page
+When the user selects the value field as <value> in the office locations page
+When the user clicks on the add new summary button in the office locations page
+When the user selects the type drop-down value as <type2> in the office locations page
+When the user selects the value field as <value2> in the office locations page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Locations|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+Then the user verifies that the summary parameters are entered in the office locations page
+Then the user verifies that the office locations summary parameters are entered in the zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|type|value|type2|value2|
+|1038|FID|1038|1038-60|NumberOfBranches|Sample text 1|AgencySummary|Sample text 2|
+
+Scenario: User is updating Office's Locations Summary - 
+a) User is updating existing locations summary and verifies the change in confirmation modal after saving.
+b) User verifies that UI and Zeus document is updated.
+Meta: @qatest
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+And the user gets the document with get id for offices with the <officeFid> from the database
+When the user selects the type drop-down value as <type> in the office locations page
+When the user selects the value field as <value> in the office locations page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+Then the user should see the below summary changes in confirmation modal
+|Summary|
+|Locations|
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+Then the user verifies existing locations summary parameters are updated with new values
+Then the user verifies that the office locations summary parameters in the zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|type|value|
+|1038|FID|1038|1038-60|AgencySummary|Sample text 2|
