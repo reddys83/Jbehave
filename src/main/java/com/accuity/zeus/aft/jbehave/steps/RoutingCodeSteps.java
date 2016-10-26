@@ -194,14 +194,24 @@ public class RoutingCodeSteps extends AbstractSteps {
 	//
 	
 
-	@Then("the user verifies that values in routing code history are displayed from zeus db")
-	public void verifyHistoryValuesFromZeus() {
+	@Then("the user should see the history field values same as in $source document")
+	public void verifyHistoryValuesFromZeus(@Named("routingCode") String routingCode, @Named("codeType") String codeType,@Named("source") String source) {
 	
-		getRoutingCodePage().verifyHistoryValuesFromZeus();
+		getRoutingCodePage().verifyHistoryValuesFromZeus(routingCode, codeType, source);
 
 	}
+	
+	@When("the user deletes the existing history values")
+	public void deleteExistingHistoryValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType) {
+		
+		getRoutingCodePage().deleteExistingHistoryValues(routingCode, codeType);
+	}
+	
+	@When("the user inserts new history values")
+	public void insertHistoryValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType) throws InterruptedException {
+		getRoutingCodePage().insertHistoryValues(routingCode, codeType);
+		getDataPage().refreshThePage();
+		Thread.sleep(5000L);
+	}
+
  }
-
-
-
-

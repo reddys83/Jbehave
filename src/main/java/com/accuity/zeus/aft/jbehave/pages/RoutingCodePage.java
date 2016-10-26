@@ -508,7 +508,7 @@ public class RoutingCodePage extends AbstractPage {
  		assertEquals("ADDITIONAL INFO", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_history_usage_addinfo_col")).getText());
  	}
     
-    public void verifyHistoryValuesFromZeus(){
+    public void verifyHistoryValuesFromZeus(String routingCode, String routingCodeType, String source){
 
 		List<String> historyEventType = new ArrayList<String>();
 		List<String> historyEventDate = new ArrayList<String>();
@@ -584,14 +584,77 @@ public class RoutingCodePage extends AbstractPage {
 			historyUsageAdditionalInfo.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_historyUsage_addinfo_list")).get(index).getText());
 		}
 		
-	
-		
-		
-		
-    	
+		verifyHistoryValuesFromDB(routingCode, routingCodeType, source, historyEventType,
+				historyEventDate, historyEventDescription, historyEventReplacedByCode,historyUsageName,historyUsageAddress,historyUsageCity,historyUsageArea,historyUsageSubArea,historyUsageCountry,historyUsagePostalCode,historyUsageAdditionalInfo);
     }
     
+    public void verifyHistoryValuesFromDB(String routingCode, String routingCodeType, String source,List<String> historyEventType,
+    		List<String> historyEventDate,List<String> historyEventDescription,List<String> historyEventReplacedByCode,List<String> historyUsageName,List<String> historyUsageAddress,List<String> historyUsageCity,List<String> historyUsageArea,List<String> historyUsageSubArea,List<String> historyUsageCountry,List<String> historyUsagePostalCode,List<String> historyUsageAdditionalInfo) {
+    	try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("officeFid", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			Thread.sleep(4000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get routing code history values", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("historicFields").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("historicFields").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						switch (document.getElementsByTagName("historicFields").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "type":
+							assertEquals(document.getElementsByTagName("historicFields").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), historyEventType.get(i));
+							break;
+						case "date":
+							assertEquals(document.getElementsByTagName("historicFields").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), historyEventDate.get(i));
+							break;
+						case "description":
+							assertEquals(document.getElementsByTagName("historicFields").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), historyEventDescription.get(i));
+							break;
+						case "replacedByCode":
+							assertEquals(document.getElementsByTagName("historicFields").item(0).getChildNodes().item(i)
+									.getChildNodes().item(childNode).getTextContent(), historyEventReplacedByCode.get(i));
+							break;
+						}
+					}
+				}
+			} else
+				assertTrue(source+ "document is null",false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
     
-    
+		 public void deleteExistingHistoryValues(String routingCode,String routingCodeType) {
+				try {
+					List<NameValuePair> nvPairs = new ArrayList<>();
+					nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+					nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+					Thread.sleep(3000L);
+					apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "delete routing code former usages values", nvPairs);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		    }
+		
+		 public void insertHistoryValues(String routingCode, String routingCodeType) {
+				try {
+					List<NameValuePair> nvPairs = new ArrayList<>();
+					nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+					nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+					Thread.sleep(3000L);
+					apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "insert routing code history values", nvPairs);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		    }
     }
 

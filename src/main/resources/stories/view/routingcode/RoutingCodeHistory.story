@@ -25,11 +25,10 @@ When the user selects the <searchBy> from the dropdown
 When the user enters the <entity> in the typeahead
 And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
+When the user deletes the existing history values
+When the user inserts new history values
 When the user clicks on the history link in the navigation bar
-Then the user should verify the column names in history page
-Then the user clicks on the eye icon in first row
-Then the user should verify the column names in history usage
-Then the user verifies that values in routing code history are displayed from zeus db
+Then the user should see the history field values same as in trusted document
 
 Examples:
 |entity|searchBy|routingCode|codeType|
