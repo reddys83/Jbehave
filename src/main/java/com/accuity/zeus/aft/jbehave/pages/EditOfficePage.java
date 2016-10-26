@@ -1426,7 +1426,7 @@ public class EditOfficePage extends AbstractPage {
 	}
 
 
-	private void verifySelectedTypeNotInNewRow(String selectedType, int rowNumber, By by) {
+	public void verifySelectedTypeNotInNewRow(String selectedType, int rowNumber, By by) {
 		try {
 			List<WebElement> typeDropDowns = getDriver().findElements(by);
 			if (rowNumber <= typeDropDowns.size()) {
@@ -2170,24 +2170,35 @@ public class EditOfficePage extends AbstractPage {
 		}
 	}
 	
-	public void verifyLookUpValuesForLocationSummaryType(By by, String xquery) {
-		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xquery);
-		List<WebElement> dropDownFieldList = getDriver().findElements(by);
-		List<WebElement> options = dropDownFieldList.get(0).findElements(By.cssSelector("option"));
-		for (int indexOfOption = 0; indexOfOption < options.size(); indexOfOption++) {
-			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getTextContent(), options.get(indexOfOption).getText().trim());
-		}
-	}
-	
-	public void verifyOfficeLocationsSummaryParametersInUI(String[] summaryTypes, String[] summaryValues) {
-		
-		List<WebElement> summaryRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_summary_row_view_mode"));
-		
+	public void verifyOfficeLocationsSummaryParametersInUI(String[] summaryTypes, String[] summaryValues) {		
+		List<WebElement> summaryRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_summary_row_view_mode"));	
 		for (int i = 0; i < summaryRows.size(); i++) {
 			assertTrue(summaryRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(summaryTypes[i]));
 			assertTrue(summaryRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(summaryValues[i]));
 		}
-	}   
+	}
+	
+	public void verifyOfficeLocationsSummaryValueMaxLengthAttribute(String maxlength) {
+        assertEquals(getDriver().findElement(OfficeIdentifiers
+        		.getObjectIdentifier("office_edit_locations_summary_value")).getAttribute("maxlength"), maxlength);
+    }
+	
+	public void verifyOfficeLocationsSummaryRowNotPresentInZeusDB(String source, String officeFid) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("officeFid", officeFid));
+			Thread.sleep(2000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "office locations", nvPairs);
+			if (document != null) {
+				assertNull(document.getElementsByTagName("summaryType").item(0));
+				assertNull(document.getElementsByTagName("summaryValue").item(0));
+			} else
+				assert false : source + " document is null";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	   @Override
     public String getPageUrl() {

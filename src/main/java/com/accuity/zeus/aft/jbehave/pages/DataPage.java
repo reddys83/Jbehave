@@ -1501,4 +1501,13 @@ public class DataPage extends AbstractPage {
         return new EditRoutingCodePage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
     }
 	
+	public void verifyValuesFromLookup(By by, String xquery) {
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xquery);
+		List<WebElement> dropDownFieldList = getDriver().findElements(by);
+		List<WebElement> options = dropDownFieldList.get(0).findElements(By.cssSelector("option"));
+		for (int indexOfOption = 0; indexOfOption < options.size(); indexOfOption++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getTextContent(), options.get(indexOfOption).getText().trim());
+		}
+	}
+	
 }

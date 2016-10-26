@@ -832,6 +832,7 @@ When the user clicks on the add new summary button in the office locations page
 When the user selects the type drop-down value as <type> in the office locations page
 When the user selects the value field as <value> in the office locations page
 When the user clicks on the add new summary button in the office locations page
+Then the user verifies that previously selected <type> is not present in the new office locations summary row
 When the user selects the type drop-down value as <type2> in the office locations page
 When the user selects the value field as <value2> in the office locations page
 When the user clicks on the save button
@@ -852,7 +853,7 @@ Examples:
 Scenario: User is updating Office's Locations Summary - 
 a) User is updating existing locations summary and verifies the change in confirmation modal after saving.
 b) User verifies that UI and Zeus document is updated.
-Meta: @qatest
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -879,3 +880,83 @@ Then the user reverts the changes to the document
 Examples:
 |entity|searchBy|fid|officeFid|type|value|
 |1038|FID|1038|1038-60|AgencySummary|Sample text 2|
+
+Scenario: User is updating Office's Locations Summary - 
+a) User verifies that 'Required' error message is displayed when 'Type' drop-down is blank while 'Value' field has some text.
+b) User verifies that 'Enter up to 10000 valid characters' error message is displayed when 'Value' field is blank while 'Type' drop-down has some value.
+c) User verifies that the max length attribute for 'Value' field is 10000.
+d) User verifies that the text entered in the 'Value' field cannot be beyond 10000 characters.
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+And the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office locations summary rows
+When the user clicks on the add new summary button in the office locations page
+When the user selects the type drop-down value as <type> in the office locations page
+When the user clicks on the add new summary button in the office locations page
+When the user selects the value field as <value2> in the office locations page
+When the user clicks on the save button
+Then the user should see the error message Required for type field in the office locations summary page
+Then the user should see the error message Enter up to 10000 valid characters. for value field in the office locations summary page
+When the user deletes the existing office locations summary rows
+When the user clicks on the add new summary button in the office locations page
+When the user selects the type drop-down value as <type> in the office locations page
+When the user enters 10000 characters in the office locations summary value text area
+Then the user should see the office locations summary value text area field length as 10000
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+Then the user verifies that 10000 characters are present for value field in the office locations summary page
+Then the user should see the office locations summary value text with 10000 characters in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|type|value2|
+|1038|FID|1038|1038-51|NumberOfBranches|Sample text 2|
+
+Scenario: User selects to delete a Office's Locations Summary row - 
+a) Verify if user can prevent deleting locations summary fields( "Type" and "Value") by clicking on 'No'.
+b) Verify if user can delete locations summary fields( "Type" and "Value") by clicking on 'Yes'.
+c) Verify that UI and Zeus document is updated.
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the offices link in the legal entity page
+And the user clicks on the offices results card with fid <officeFid>
+And the user clicks on the office locations link in the navigation bar
+And the user clicks on the office update link
+And the user gets the document with get id for offices with the <officeFid> from the database
+When the user deletes the existing office locations summary rows
+When the user clicks on the add new summary button in the office locations page
+When the user selects the type drop-down value as <type> in the office locations page
+When the user selects the value field as <value> in the office locations page
+When the user clicks on the save button
+When the user clicks on the confirm button
+And the user clicks on the office update link
+When the user clicks on the delete summary row button in the office locations summary page
+Then the user should see the delete row confirmation modal in the office locations summary page
+When the user clicks on the no button in the delete row confirmation modal in the office locations summary page
+Then the user should see the newly added summary row in the office locations summary page
+When the user clicks on the delete summary row button in the office locations summary page
+Then the user should see the delete row confirmation modal in the office locations summary page
+When the user clicks on the yes button in the delete row confirmation modal in the office locations summary page
+When the user clicks on the save button
+When the user clicks on the confirm button
+Then the user should see the successful update message at top of the office page
+Then the user should not see the newly added summary row in the office locations page
+Then the user verifies that the deleted row for office locations summary does not exist in zeus document
+Then the user reverts the changes to the document
+
+Examples:
+|entity|searchBy|fid|officeFid|type|value|
+|1038|FID|1038|1038-51|BranchSummary|Sample text|
