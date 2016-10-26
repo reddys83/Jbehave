@@ -1,0 +1,38 @@
+<legalEntity deleted="false" fid="295783" id="ac699485-1042-4b5d-913a-7784453611da" resource="/legalEntity/id/ac699485-1042-4b5d-913a-7784453611da" source="trusted" tfpid="50360228">
+    <summary>
+        <status>inactive</status>
+        <countryOfOperations>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </countryOfOperations>
+        <legalEntityType>Credit Union</legalEntityType>
+        <types>
+            <type source="trusted">Credit Union</type>
+            <type source="trusted">Subsidiary - Unspecified</type>
+            <type source="trusted">Credit Union</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Forbes Empl FCU</value>
+            </name>
+            <legalEntitySortKey>FORBES EMPL FCU</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1979-07-01</established>
+            <chartered accuracy="year">1979-07-01</chartered>
+        </dates>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+        <creditUnionShareDraftFlag>false</creditUnionShareDraftFlag>
+        <leadInstitution>false</leadInstitution>
+        <trust>
+            <powersGranted>false</powersGranted>
+            <powersFull>false</powersFull>
+            <powersUsed>false</powersUsed>
+        </trust>
+    </summary>
+    <locations>
+        <headOffice>
+            <link href="/office/id/00143ed9-387c-4db7-b447-6ce797898552" rel="src"/>
+        </headOffice>
+    </locations>
+</legalEntity>

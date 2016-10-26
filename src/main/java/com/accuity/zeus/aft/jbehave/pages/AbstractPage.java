@@ -414,10 +414,6 @@ public abstract class AbstractPage {
         }
         Document document =  XmlDocumentLoader.getDocument(filePath);
         String resourceURL=document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("resource").getNodeValue();
-        if(resourceURL.contains("http")){
-            String[] splitURL=resourceURL.split(heraApi.getPath());
-            resourceURL=splitURL[1];
-        }
         return resourceURL;
     }
     
@@ -506,4 +502,15 @@ public abstract class AbstractPage {
     	return value;
     }    
     
+    public String getSelectedRadioButtonOption(By by) {
+		String flagValue = null;
+		List<WebElement> fieldFlagOptions = getDriver().findElements(by);
+		for (int flagIndex = 0; flagIndex < fieldFlagOptions.size(); flagIndex++) {
+			if (fieldFlagOptions.get(flagIndex).isSelected()) {
+				flagValue = fieldFlagOptions.get(flagIndex).getAttribute("value");
+				break;
+			}
+		}
+		return flagValue;
+	} 
 }

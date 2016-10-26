@@ -1,7 +1,7 @@
-<office deleted="false" fid="1010-45" id="58d58dd1-b682-4d2e-91df-d372b6e763f7" resource="http://10.72.0.121:8080/heraapi/office/id/58d58dd1-b682-4d2e-91df-d372b6e763f7" source="trusted" tfpid="10383620-10372730" tfpuid="10372730">
+<office deleted="false" fid="1010-45" id="58d58dd1-b682-4d2e-91df-d372b6e763f7" resource="/office/id/58d58dd1-b682-4d2e-91df-d372b6e763f7" source="trusted" tfpid="10383620-10372730" tfpuid="10372730">
     <summary>
         <institution>
-            <link href="http://10.72.0.121:8080/heraapi/legalEntity/id/4a77cec3-529a-405b-bae9-b9b377fac255" rel="src"/>
+            <link href="/legalEntity/id/4a77cec3-529a-405b-bae9-b9b377fac255" rel="src"/>
         </institution>
         <status>inactive</status>
         <types>
@@ -29,23 +29,23 @@
     <locations>
         <location primary="true">
             <address fid="1010-51">
-                <link href="http://10.72.0.121:8080/heraapi/address/id/90769782-d8ac-4582-aec8-7a113e989a8a" rel="src"/>
+                <link href="/address/id/90769782-d8ac-4582-aec8-7a113e989a8a" rel="src"/>
                 <type>physical</type>
                 <function>Branch Address</function>
                 <streetAddress>
                     <addressLine1>121 Middle Neck Rd</addressLine1>
                 </streetAddress>
                 <city>
-                    <link href="http://10.72.0.121:8080/heraapi/city/id/80070ad2-14b6-46be-b3aa-e3f1b21569c0" rel="src"/>
+                    <link href="/city/id/80070ad2-14b6-46be-b3aa-e3f1b21569c0" rel="src"/>
                 </city>
                 <subarea>
-                    <link href="http://10.72.0.121:8080/heraapi/area/id/1585b43d-67e0-4613-929f-3c20c22e0300" rel="src"/>
+                    <link href="/area/id/1585b43d-67e0-4613-929f-3c20c22e0300" rel="src"/>
                 </subarea>
                 <area>
-                    <link href="http://10.72.0.121:8080/heraapi/area/id/8595edad-ba62-4273-bfb1-3835a56446cf" rel="src"/>
+                    <link href="/area/id/8595edad-ba62-4273-bfb1-3835a56446cf" rel="src"/>
                 </area>
                 <country>
-                    <link href="http://10.72.0.121:8080/heraapi/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+                    <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
                 </country>
                 <postalCode position="afterArea">11021-1291</postalCode>
             </address>

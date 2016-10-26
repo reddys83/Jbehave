@@ -1,0 +1,82 @@
+<legalEntity deleted="false" fid="1645" id="4560d448-fba2-4062-8c80-61bcf1647dc6" resource="/legalEntity/id/4560d448-fba2-4062-8c80-61bcf1647dc6" source="trusted" stub="true" tfpid="20172300">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/5c776cfd-10a7-455a-ad4c-a4bd57139350" rel="src"/>
+
+        </countryOfOperations>
+        <organisationType>Private Stock Bank</organisationType>
+        <legalEntityType>Bank</legalEntityType>
+        <types>
+            <type source="FDB">Bank</type>
+            <type source="FDB">Commercial Bank</type>
+            <type source="TFP">Foreign Exchange</type>
+            <type source="TFP">Private Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Banque Tarneaud</value>
+            </name>
+            <legalEntitySortKey>BANQUE TARNEAUD</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1809-07-01</established>
+            <chartered accuracy="year">1809-07-01</chartered>
+        </dates>
+        <boardMeetings>
+            <meeting>
+                <periodType>month</periodType>
+                <value>04</value>
+            </meeting>
+        </boardMeetings>
+        <identifiers>
+            <identifier transferable="false">
+                <type>Global Intermediary Identification Number</type>
+                <value>QQA6ZW.00041.ME.250</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>Institut National de la Statistique et des Etudes Economiques (INSEE)</type>
+                <value>969500QMD9H878YIJZ23</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+
+    </summary>
+    <services>
+        <service>
+            <category>Domestic and International  Banking</category>
+            <customDescription>Domestic and International Operations</customDescription>
+        </service>
+    </services>
+    <locations>
+        <summaries>
+            <summary type="NumberOfBranches">74</summary>
+        </summaries>
+    </locations>
+    <personnel>
+        <summaries>
+            <summary type="InstitutionEmployees">596</summary>
+        </summaries>
+    </personnel>
+    <creditRatings>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Long Term Rating</type>
+            <value>A</value>
+            <dateApplied accuracy="day">2012-02-01</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Short Term Rating</type>
+            <value>A-1</value>
+            <dateApplied accuracy="day">2012-02-01</dateApplied>
+        </rating>
+    </creditRatings>
+    <history>
+        <summaries>
+            <summary>Established 1809</summary>
+        </summaries>
+    </history>
+</legalEntity>

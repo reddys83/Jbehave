@@ -1,0 +1,215 @@
+<legalEntity deleted="false" fid="930" id="bcc87a63-811b-48e5-87d2-1d68a2d95e99" resource="/legalEntity/id/bcc87a63-811b-48e5-87d2-1d68a2d95e99" source="trusted" tfpid="20361200">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/c283690b-adac-4a7a-a4ff-cf4c86d2b58f" rel="src"/>
+
+        </countryOfOperations>
+        <organisationType>Private Bank</organisationType>
+        <charterType>US National Bank</charterType>
+        <legalEntityType>Bank</legalEntityType>
+        <types>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Commercial Bank</type>
+            <type source="trusted">Corporate Bank</type>
+            <type source="trusted">Investment Bank</type>
+            <type source="trusted">Mortgage Bank</type>
+            <type source="trusted">Private Bank</type>
+            <type source="trusted">Retail Bank</type>
+            <type source="trusted">Savings Bank</type>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Commercial Bank</type>
+            <type source="trusted">Private Bank</type>
+            <type source="trusted">Retail Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>PT Bank UOB Indonesia</value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>PT Bank UOB Buana</value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>PT Bank UOB Buana Tbk</value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>PT Bank Buana Indonesia Tbk</value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>PT Bank Buana Indonesia</value>
+            </name>
+            <legalEntitySortKey>PT BANK UOB INDONESIA</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1956-07-01</established>
+            <chartered accuracy="year">1956-07-01</chartered>
+        </dates>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+        <numberOfCreditUnionMembers>0</numberOfCreditUnionMembers>
+        <boardMeetings>
+            <meeting>
+                <periodType>month</periodType>
+                <value>06</value>
+            </meeting>
+        </boardMeetings>
+        <identifiers>
+            <identifier transferable="false">
+                <type>Global Intermediary Identification Number</type>
+                <value>BTGAT6.00042.ME.360</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>The Global Markets Entity Identifier (GMEI)</type>
+                <value>549300EZ5250PHXCJ452</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>Fitch ID</type>
+                <value>80360808</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <services>
+        <service>
+            <category>Asset Management</category>
+        </service>
+        <service>
+            <category>Bills of Exchange</category>
+        </service>
+        <service>
+            <category>Bonds</category>
+        </service>
+        <service>
+            <category>Corporate Finance</category>
+        </service>
+        <service>
+            <category>Correspondent Banking</category>
+        </service>
+        <service>
+            <category>Deposits</category>
+            <customDescription>Time Deposits, Current Accounts</customDescription>
+        </service>
+        <service>
+            <category>Documentary Credits</category>
+        </service>
+        <service>
+            <category>Foreign Exchange</category>
+        </service>
+        <service>
+            <category>Investment Banking</category>
+        </service>
+        <service>
+            <category>Letters of Credit</category>
+        </service>
+        <service>
+            <category>Money Markets</category>
+        </service>
+        <service>
+            <category>Private Banking</category>
+        </service>
+        <service>
+            <category>Retail Banking</category>
+        </service>
+        <service>
+            <category>Financial Futures</category>
+        </service>
+        <service>
+            <category>Lines of Credit - Personal</category>
+        </service>
+        <service>
+            <category>Lines of Credit - Business</category>
+        </service>
+        <service>
+            <category>Mortgages</category>
+        </service>
+        <service>
+            <category>Savings Accounts - Personal</category>
+            <customDescription>Savings Accounts</customDescription>
+        </service>
+        <service>
+            <category>Unsecured Loans - Personal</category>
+        </service>
+    </services>
+    <locations>
+        <summaries>
+            <summary type="NumberOfBranches">213</summary>
+        </summaries>
+        <headOffice>
+            <link href="/office/id/ef3063ad-ea8e-49b0-9c21-9039aacd9974" rel="src"/>
+
+        </headOffice>
+    </locations>
+    <ownership>
+        <summaries>
+            <summary type="additional">Others 1.001%</summary>
+        </summaries>
+    </ownership>
+    <personnel>
+        <summaries>
+            <summary type="InstitutionEmployees">5291</summary>
+        </summaries>
+    </personnel>
+    <creditRatings>
+        <rating>
+            <agencyName>Capital Intelligence</agencyName>
+            <type>Long Term Rating</type>
+            <value>BB+</value>
+            <dateApplied accuracy="day">2014-08-14</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Capital Intelligence</agencyName>
+            <type>Short Term Rating</type>
+            <value>B</value>
+            <dateApplied accuracy="day">2014-08-14</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Rating</type>
+            <value>WD</value>
+            <dateApplied accuracy="day">2015-10-06</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Short Term Rating</type>
+            <value>WD</value>
+            <dateApplied accuracy="day">2015-10-06</dateApplied>
+        </rating>
+    </creditRatings>
+    <history>
+        <summaries>
+            <summary>Established August 31, 1956 as PT Bank Buana Indonesia by deed of Notary Public Eliza Pondaag SH No. 150 and approved by decree No. J.A. 5/78/4 (October 24, 1956) of the Minister of Justice. On September 6, 2000 changed name to PT Bank Buana Indonesia Tbk.  On March 9, 2007 changed name to PT Bank UOB Buana Tbk. On June 17, 2009 changed name to PT Bank UOB Buana. On June 30, 2010 PT Bank UOB Indonesia merged into PT Bank UOB Buana. On May 19, 2011 bank name changed as above</summary>
+        </summaries>
+    </history>
+    <relatedPresences>
+        <relation>
+            <link href="/relationship/id/47f0abe0-253a-48eb-a2d7-d008704421aa" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/cae9e1d0-e8a0-472c-823c-23bb4c5224c6" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/b2c61132-59cc-4511-8b0f-2cbe2c827a7b" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/45b23a02-7391-4b60-8d55-5afd0a79922c" rel="src"/>
+
+        </relation>
+    </relatedPresences>
+    <audit>
+        <comments>
+            <comment type="Ownership comment">D/L fid 4584 99% at request fid 4584 BC 29/04/2009</comment>
+            <comment type="Ownership comment">GSC3 BA 10/97</comment>
+            <comment type="Subsidiary comment">GSC3 BA 10/97</comment>
+            <comment type="Due Diligence">ANN 2004 DO3 H/C Report starts on page 3.  Page 5 not numbered.  Page 71 is blank.  Financial statements contained in middle of report.  Page 7 of financial statement is landscape along with pages 54-58, 62-65.  Report carries on to page 174  ///</comment>
+        </comments>
+    </audit>
+</legalEntity>

@@ -132,17 +132,4 @@ Examples:
 |entity|searchBy|
 |001|Routing Code|
 
-Scenario: Verify user can resort the results by 'CODE'
-Given a user is on the search page
-When the user clicks on the results tab
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-Then the user should see the search results for <entity> routingCode
-When the user clicks on the column CODE in the routingCode search results
-Then user should see the results in descending order for <entity> routingCode
-
-Examples:
-|entity|searchBy|
-|qa|Routing Code|
 

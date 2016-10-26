@@ -1,0 +1,104 @@
+<legalEntity deleted="false" fid="128" id="45eae15a-b8f8-4792-b186-2f472fb0c6cb" resource="/legalEntity/id/45eae15a-b8f8-4792-b186-2f472fb0c6cb" source="trusted" tfpid="22013840">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/b9d843d2-98ab-4ef6-8ca8-28c6cb0132f6" rel="src"/>
+        </countryOfOperations>
+        <legalEntityType>Bank</legalEntityType>
+        <types>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Co-operative Bank</type>
+            <type source="trusted">Regional Bank</type>
+            <type source="trusted">Cooperative</type>
+            <type source="trusted">Cooperative Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>The Amagasaki Shinkin Bank</value>
+            </name>
+            <legalEntitySortKey>AMAGASAKI SHINKIN BANK</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1921-07-01</established>
+            <chartered accuracy="year">1921-07-01</chartered>
+        </dates>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+        <numberOfCreditUnionMembers>0</numberOfCreditUnionMembers>
+        <boardMeetings>
+            <meeting>
+                <periodType>month</periodType>
+                <value>06</value>
+            </meeting>
+        </boardMeetings>
+        <identifiers>
+            <identifier transferable="false">
+                <type>Global Intermediary Identification Number</type>
+                <value>W86C4M.99999.SL.392</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <services>
+        <service>
+            <category>Corporate Finance</category>
+        </service>
+        <service>
+            <category>Foreign Exchange</category>
+        </service>
+        <service>
+            <category>Syndicated Loans</category>
+        </service>
+        <service>
+            <category>Internet Banking</category>
+        </service>
+        <service>
+            <category>Savings Accounts - Personal</category>
+        </service>
+        <service>
+            <category>Savings Accounts - Specialty</category>
+        </service>
+    </services>
+    <locations>
+        <summaries>
+            <summary type="BranchSummary">Branches:Japan 93</summary>
+        </summaries>
+        <headOffice>
+            <link href="/office/id/b29a6e63-81c4-4871-9048-2e1288d37fa6" rel="src"/>
+
+        </headOffice>
+    </locations>
+    <ownership>
+        <summaries>
+            <summary type="replacement">Individual Shareholders, 100%</summary>
+        </summaries>
+    </ownership>
+    <personnel>
+        <summaries>
+            <summary type="InstitutionEmployees">1451</summary>
+        </summaries>
+    </personnel>
+    <creditRatings>
+        <rating>
+            <agencyName>Japan Credit Rating Agency</agencyName>
+            <type>Long Term Rating</type>
+            <value>A</value>
+            <dateApplied accuracy="day">2010-11-03</dateApplied>
+        </rating>
+    </creditRatings>
+    <history>
+        <summaries>
+            <summary>Established June 1921</summary>
+        </summaries>
+    </history>
+    <relatedPresences>
+        <relation>
+            <link href="/relationship/id/0c495860-01c3-4849-b4ac-e1996b320307" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/167d9c7c-435f-498f-a4b4-3fdd340f41ce" rel="src"/>
+
+        </relation>
+    </relatedPresences>
+</legalEntity>

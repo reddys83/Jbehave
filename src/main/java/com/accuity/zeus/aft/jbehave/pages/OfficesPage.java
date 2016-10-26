@@ -130,7 +130,6 @@ public class OfficesPage extends AbstractPage {
         assertTrue(getDriver().findElement(office_tab_id).isDisplayed());
 
     }
-
     public void verifyOfficeNames(String fid)
     {
         try {
@@ -143,11 +142,11 @@ public class OfficesPage extends AbstractPage {
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
 
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office basic info", nvPairs);
-         for (int i=1; i<=document.getElementsByTagName("officeType").getLength();i++)
-         {
-             assertEquals(getDriver().findElement(By.xpath(".//*[@id='officeBasicInfo']//li[1]/table[1]//tr["+i+"]/td[1]")).getText(),
-                     document.getElementsByTagName("officeType").item(i-1).getTextContent());
-         }
+        for (int i=1; i<=document.getElementsByTagName("officeType").getLength();i++)
+        {
+            assertEquals(getDriver().findElement(By.xpath(".//*[@id='officeBasicInfo']//li[1]/table[1]//tr["+i+"]/td[1]")).getText(),
+                    document.getElementsByTagName("officeType").item(i-1).getTextContent());
+        }
         for (int j=1;j<=document.getElementsByTagName("officeValue").getLength();j++)
         {
             assertEquals(getDriver().findElement(By.xpath(".//*[@id='officeBasicInfo']//li[1]/table[1]//tr["+j+"]/td[2]")).getText(),
@@ -156,6 +155,10 @@ public class OfficesPage extends AbstractPage {
 
     }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> develop
     public void verifyNoOfficeTabInOffice() {
 
         try
@@ -275,7 +278,7 @@ public class OfficesPage extends AbstractPage {
         assertEquals(document.getElementsByTagName("tRangeLimit").item(i).getTextContent(),getDriver().findElements(office_locations_telecoms_range_limit_xpath).get(i).getText());
         assertEquals(document.getElementsByTagName("tExt").item(i).getTextContent(),getDriver().findElements(office_locations_telecoms_ext_xpath).get(i).getText());
         assertEquals(document.getElementsByTagName("tTextAfter").item(i).getTextContent(),getDriver().findElements(office_locations_telecoms_text_after_xpath).get(i).getText());
-        assertEquals(document.getElementsByTagName("tAnswerback").item(i).getTextContent(),getDriver().findElements(office_locations_telecoms_answerback_xpath).get(i).getText());
+        assertEquals(document.getElementsByTagName("tAnswerback").item(i).getTextContent(), getDriver().findElements(office_locations_telecoms_answerback_xpath).get(i).getText());
     }
 
     public void verifyOfficeLocationsSummaries(Document document){
