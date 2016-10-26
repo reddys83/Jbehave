@@ -1,0 +1,29 @@
+<city deleted="false" fid="8409549" id="c357e6a8-8270-4a4c-8fcf-b7bcb211d543" resource="/city/id/c357e6a8-8270-4a4c-8fcf-b7bcb211d543" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Doba</value>
+            </name>
+            <citySortKey>DOBA</citySortKey>
+        </names>
+        <status>active</status>
+        <additionalInfos>
+            <additionalInfo>gwejhgw
+
+
+
+                fedghfwehdg
+
+
+                kjenxdkj</additionalInfo>
+        </additionalInfos>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/e9fee54a-1bc6-4ca2-bdd3-b15b79a29248" rel="src"/>
+
+        </place>
+    </within>
+</city>

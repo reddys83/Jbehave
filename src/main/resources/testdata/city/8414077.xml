@@ -1,0 +1,32 @@
+<city deleted="false" fid="8414077" id="8ef072c9-31e7-4121-a822-bcd0ddb7912e" resource="/city/id/8ef072c9-31e7-4121-a822-bcd0ddb7912e" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Patos</value>
+            </name>
+            <citySortKey>PATOS</citySortKey>
+        </names>
+        <status>active</status>
+        <dates>
+        </dates>
+        <identifiers>
+            <identifier>
+                <type>Numeric ISO Code</type>
+                <value>aksjuilrw1aksjuilrw1aksjuilrw1aksjuilrw1aksju%)~12</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/89add079-03c2-4850-80d5-edb4415f82c9" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/352c7438-9f03-4d3f-ba64-8f897be4b574" rel="src"/>
+
+        </place>
+    </within>
+</city>

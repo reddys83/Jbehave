@@ -1,0 +1,23 @@
+<city deleted="false" fid="8446321" id="51db0c7a-abbc-4927-936a-6c50e9132e93" resource="/city/id/51db0c7a-abbc-4927-936a-6c50e9132e93" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Pelileo</value>
+            </name>
+            <citySortKey>PELILEO</citySortKey>
+        </names>
+        <status>active</status>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/f06f7389-c26f-4a9b-9a8d-48f905d5d0c7" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/99c622b8-8e70-49dd-92b4-adbcec5c6558" rel="src"/>
+
+        </place>
+    </within>
+</city>

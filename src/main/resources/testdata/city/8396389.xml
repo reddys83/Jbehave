@@ -1,0 +1,52 @@
+<city deleted="false" fid="8396389" id="637f2b95-d4b6-4a52-8851-69af57315a71" resource="/city/id/637f2b95-d4b6-4a52-8851-69af57315a71" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Bee Cave</value>
+            </name>
+            <citySortKey>BEE CAVE</citySortKey>
+        </names>
+        <status>active</status>
+        <identifiers>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>7156</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/a14f12fc-7d1f-4755-9deb-d29b28dea237" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/66c510e9-2c4b-4284-848c-b76ecb95b29c" rel="src"/>
+
+        </place>
+    </within>
+    <alternativeRegions>
+        <region>
+            <type>Metropolitan Statistical Area</type>
+            <value>12420</value>
+        </region>
+        <region>
+            <type>Federal Reserve District</type>
+            <value>11</value>
+        </region>
+        <region>
+            <type>Federal Home Loan Bank District</type>
+            <value>9</value>
+        </region>
+        <region>
+            <type>National Credit Union Administration Region</type>
+            <value>V  </value>
+        </region>
+    </alternativeRegions>
+</city>
