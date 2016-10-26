@@ -1,0 +1,44 @@
+<legalEntity deleted="false" fid="91832" id="621693d8-76d7-47c1-8d37-2f8674dd1795" resource="/legalEntity/id/621693d8-76d7-47c1-8d37-2f8674dd1795" source="trusted" stub="true" tfpid="96691281">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/f55a7a93-7336-4ff1-b6b3-6df257cd05d0" rel="src"/>
+
+        </countryOfOperations>
+        <legalEntityType>Financial Services Company</legalEntityType>
+        <types>
+            <type source="FDB">Finance Company</type>
+            <type source="TFP">Financial Services Company</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Associated Commercial Finance Inc</value>
+            </name>
+            <legalEntitySortKey>ASSOCIATED COMMERCIAL FINANCE INC</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1983-01-01</established>
+        </dates>
+        <numberOfATMs>100</numberOfATMs>
+        <numberOfCheckingAccounts>1000000</numberOfCheckingAccounts>
+        <numberOfSavingsAccounts>5000</numberOfSavingsAccounts>
+        <creditUnionShareDraftFlag>false</creditUnionShareDraftFlag>
+        <leadInstitution>false</leadInstitution>
+        <trust>
+            <powersGranted>false</powersGranted>
+        </trust>
+        <identifiers>
+            <identifier>
+                <type>US Tax ID</type>
+                <value>391453149</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+
+    </summary>
+    <locations>
+    </locations>
+    <personnel>
+    </personnel>
+</legalEntity>

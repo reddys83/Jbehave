@@ -14,15 +14,6 @@ import org.springframework.stereotype.Component;
 public class LegalEntitySteps extends AbstractSteps {
 
     public static String selectedEntity = "";
-    @Autowired
-    ApacheHttpClient apacheHttpClient;
-    @Autowired
-    Database database;
-
-    @Then("the user should see the legal entity's entity types as: $legalEntityEntities")
-    public void verifyLegalEntityEntities(ExamplesTable legalEntities) {
-        getLegalEntityPage().verifyLegalEntityEntities(legalEntities);
-    }
 
     @Then("the user should see the legal entity's virtual presence as: $legalEntityTelecoms")
     public void verifyLegalEntitiesVirtualPresence(ExamplesTable legalEntitiesVirtualPresence) {
@@ -55,6 +46,17 @@ public class LegalEntitySteps extends AbstractSteps {
         getLegalEntityPage().verifyStatisticsInLegalEntity(fid);
     }
 
+    @Then("the user should see the legalEntity names for <fid> in the legalEntity basic info")
+    public void verifyLegalEntityNames(@Named("fid") String fid)
+    {
+        getLegalEntityPage().verifyLegalEntityNames(fid);
+    }
+
+    @Then("the user should see the legalEntity types for <fid> in the legalEntity basic info")
+    public void verifyLegalEntityTypes(@Named("fid") String fid) {
+        getLegalEntityPage().verifyLegalEntityTypes(fid);
+    }
+
     @Then("the user should not see the legal entity statistics for fid <fid>")
     public void verifyLegalEntityStatisticsNoShown(@Named("fid") String fid) {
         getLegalEntityPage().verifyStatisticsInLegalEntity(fid);
@@ -83,6 +85,11 @@ public class LegalEntitySteps extends AbstractSteps {
     @Then("the user should see the legal entity's trust powers for fid <fid> from trusted document")
     public void verifyLegalEntityTrustPowersfromDB(@Named("fid") String searchedEntity) {
         getLegalEntityPage().verifyLegalEntityTrustPowersfromDB(searchedEntity);
+    }
+
+    @Then("the user should see the basic info label for selected legal entity")
+    public void verifyBasicInfo() {
+     getLegalEntityPage().verifyBasicInfo();
     }
 
     @Then("the user should not see the legal entity's trust powers")

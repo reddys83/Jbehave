@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <routingCode deleted="false" fid="C-1112604" id="954c7bef-59eb-415f-b836-3202b51cf973"
-             resource="http://10.72.0.121:8080/heraapi/routingCode/id/954c7bef-59eb-415f-b836-3202b51cf973"
+             resource="/routingCode/id/954c7bef-59eb-415f-b836-3202b51cf973"
              source="trusted" tfpid="UZRN-01056">
     <codeType>Swift BIC</codeType>
     <codeTypeDescription>MFO</codeTypeDescription>
@@ -10,8 +10,8 @@
         <codeAlternateForm type="fdb_legacy">01056</codeAlternateForm>
     </codeAlternateForms>
     <codeStatus>active</codeStatus>
-    <internalUseOnly useHeadOffice="true">true</internalUseOnly>
-    <accountEligible>true</accountEligible>
+    <internalUseOnly useHeadOffice="false">false</internalUseOnly>
+    <accountEligible>false</accountEligible>
     <dates>
         <validFrom accuracy="day">2004-05-04</validFrom>
         <validTo accuracy="day">2014-05-04</validTo>
@@ -36,27 +36,28 @@
             </attributes>
             <routeVia>
                 <link
-                        href="http://10.72.0.121:8080/heraapi/routingCode/id/c42c916b-8f9b-4fda-a2e0-0f8c4c5973fb"
+                        href="/routingCode/id/c42c916b-8f9b-4fda-a2e0-0f8c4c5973fb"
                         rel="src"/>
             </routeVia>
             <correspondents>
                 <correspondent>
                     <link
-                            href="http://10.72.0.121:8080/heraapi/ssi/id/d9d2ea09-7d94-41de-aee6-51a536969e09"
+                            href="/ssi/id/d9d2ea09-7d94-41de-aee6-51a536969e09"
                             rel="src"/>
                 </correspondent>
             </correspondents>
             <contactLocations>
                 <contactLocation>
-                    <type>ABA</type>
+                    <type>Primary Wire Location</type>
                     <presence>
                         <link
-                                href="http://10.72.0.121:8080/heraapi/office/id/b0654aa9-89f8-444a-8565-674e01d11ed0"
+                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
-                    <specialInstructions>ABA</specialInstructions>
+                    <specialInstructions>test instructions</specialInstructions>
                 </contactLocation>
             </contactLocations>
+
         </paymentSystem>
         <paymentSystem>
             <product>

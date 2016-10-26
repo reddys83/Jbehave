@@ -67,6 +67,7 @@ public class XqueryMap {
         queryMap.put("get country places details","getCountryPlacesDetails.xqy");
         queryMap.put("get Trust Powers for Legal Entity", "getLegalEntityTrustPowers.xqy");
         queryMap.put("get legal entity basic info left column","getLegalEntityBasicInfo.xqy");
+        queryMap.put("get View legalEntity Names", "getViewLegalEntityNames.xqy");
         queryMap.put("get Office Location Summary From LegalEntity", "getOfficeLocationSummaryFromLegalEntity.xqy");
         queryMap.put("get charter type from lookup document", "getCharterTypeFromLookupTable.xqy");
         queryMap.put("get legal entity Status types","getLegalEntityStatusTypes.xqy");
@@ -147,6 +148,7 @@ public class XqueryMap {
 		queryMap.put("get document id for subarea","getIdForSubArea.xqy");
         queryMap.put("get Id for area", "getIdForArea.xqy");
         queryMap.put("get routingCode basic info","getRoutingCodeBasicInfo.xqy");
+        queryMap.put("get routingCode usages", "getRoutingCodeUsages.xqy");
 		queryMap.put("get office telecom locations", "getOfficeTelecomLocations.xqy");
 		queryMap.put("delete office locations values", "deleteOfficeLocationsValues.xqy");
 		queryMap.put("get area entity type lookup","getAreaRelatedEntityTypeFromLookup.xqy");
@@ -158,7 +160,11 @@ public class XqueryMap {
 		queryMap.put("get routing code former usages values", "getRoutingCodeFormerUsages.xqy");
 		queryMap.put("delete routing code former usages values", "deleteRoutingCodeFormerUsagesValues.xqy");
 		queryMap.put("insert routing code former usages values", "insertRoutingCodeFormerUsagesValues.xqy");
+<<<<<<< HEAD
         queryMap.put("get routingCode relatedCodes", "getRoutingCodeRelatedCodes.xqy");
+=======
+        queryMap.put("get routingCode payment systems info","getRoutingCodePaymentSystems.xqy");
+>>>>>>> develop
    }
 
     public String getXquery(String key){

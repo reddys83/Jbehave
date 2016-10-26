@@ -1,0 +1,92 @@
+<office deleted="false" fid="2336-4" id="3b19f4e0-a781-4a5e-a839-715f8b1e04f0" resource="/office/id/3b19f4e0-a781-4a5e-a839-715f8b1e04f0" source="trusted">
+    <summary>
+        <institution>
+            <link href="/legalEntity/id/65cbc471-cc6a-4b6c-8e27-488ced3535dd" rel="src"/>
+
+        </institution>
+        <status>active</status>
+        <types>
+            <type>Branch</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Deutsche Apotheker-und Ärztebank eG</value>
+            </name>
+            <name>
+                <type>Office Name</type>
+                <value>Brandenburger Str</value>
+            </name>
+            <officeSortKey>BRANDENBURGER STR</officeSortKey>
+        </names>
+        <principalOffice>false</principalOffice>
+        <foreignOffice>true</foreignOffice>
+    </summary>
+    <locations>
+        <location primary="true">
+            <telecom fid="F-2336-6" rank="10">
+                <link href="/telecom/id/aa7050f9-63a9-431b-b273-37f0916e5963" rel="src"/>
+
+                <type>fax</type>
+                <phoneCountryCode>49</phoneCountryCode>
+                <phoneAreaCode>921</phoneAreaCode>
+                <phoneNumber>7892334</phoneNumber>
+                <value>+49-921-7892334</value>
+            </telecom>
+            <telecom fid="T-2336-5" rank="10">
+                <link href="/telecom/id/a300d9ab-08e1-41f1-b612-92589bd6172b" rel="src"/>
+
+                <type>telephone</type>
+                <phoneCountryCode>49</phoneCountryCode>
+                <phoneAreaCode>921</phoneAreaCode>
+                <phoneNumber>789230</phoneNumber>
+                <value>+49-921-789230</value>
+            </telecom>
+        </location>
+        <location primary="false">
+            <address fid="2336-61">
+                <link href="/address/id/f251db70-a047-42ec-af33-f6140bd0be3d" rel="src"/>
+
+                <type>mailing</type>
+                <function>Postal Address</function>
+                <streetAddress>
+                    <addressLine1>Postfach 10 03 40</addressLine1>
+                </streetAddress>
+                <city>
+                    <link href="/city/id/d6087efa-627a-48e6-84f2-50f039d7783f" rel="src"/>
+
+                    <fid>22236</fid>
+                    <name>Bayreuth</name>
+                    <citySortKey>BAYREUTH</citySortKey>
+                    <useInAddress>true</useInAddress>
+                </city>
+                <subarea>
+                    <link href="/area/id/9e0ad150-4401-467c-8ef5-915c4b019e0c" rel="src"/>
+
+                    <fid>SA-265</fid>
+                    <name>Bezirk Oberfranken</name>
+                    <areaSortKey>BEZIRK OBERFRANKEN</areaSortKey>
+                    <useInAddress>false</useInAddress>
+                </subarea>
+                <area>
+                    <link href="/area/id/4e9c591e-5d0c-4c5f-aaa3-fbed7eb12f80" rel="src"/>
+
+                    <fid>A-BAY</fid>
+                    <name>Bayern</name>
+                    <areaSortKey>BAYERN</areaSortKey>
+                    <useInAddress>false</useInAddress>
+                </area>
+                <country>
+                    <link href="/country/id/b6d347a7-3adb-45e5-9492-3709a2041306" rel="src"/>
+
+                    <fid>DEU</fid>
+                    <iso2>DE</iso2>
+                    <name>Germany</name>
+                    <countrySortKey>GERMANY</countrySortKey>
+                    <useInAddress>true</useInAddress>
+                </country>
+                <postalCode position="beforeCity">95403</postalCode>
+            </address>
+        </location>
+    </locations>
+</office>

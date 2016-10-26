@@ -1,0 +1,93 @@
+<routingCode deleted="false" fid="S-142576" id="0e5c63af-42a9-47ec-a1ff-5330f8f29c51" resource="/routingCode/id/0e5c63af-42a9-47ec-a1ff-5330f8f29c51" tfpid="SWIFT-DAAEDEDD435" source="trusted">
+    <codeType>SWIFT BIC</codeType>
+    <codeTypeDescription>SWIFT BIC</codeTypeDescription>
+    <codeValue>DAAEDEDD435</codeValue>
+    <codeAlternateForms>
+        <codeAlternateForm type="fdb_legacy">DAAEDEDD435</codeAlternateForm>
+        <codeAlternateForm type="tfp_legacy">DAAE DE DD 435</codeAlternateForm>
+    </codeAlternateForms>
+    <codeStatus>active</codeStatus>
+    <accountEligible>true</accountEligible>
+    <paymentSystems>
+        <paymentSystem>
+            <product>
+                <link href="/product/id/adebf5f5-4e80-438f-a239-4e758bb8f326" rel="src"/>
+
+            </product>
+            <useCodeForm>default</useCodeForm>
+            <codeSystemMembership>Connected</codeSystemMembership>
+            <codeSystemStatus>online</codeSystemStatus>
+        </paymentSystem>
+        <paymentSystem>
+            <product>
+                <link href="/product/id/6dc213f8-5407-4e1f-af8f-568c104f1227" rel="src"/>
+
+            </product>
+            <dateBegan accuracy="day">2009-11-02</dateBegan>
+            <useCodeForm>default</useCodeForm>
+            <codeSystemMembership>Full Member</codeSystemMembership>
+            <codeSystemStatus>active</codeSystemStatus>
+        </paymentSystem>
+        <paymentSystem>
+            <product>
+                <link href="/product/id/f4482a66-127b-4b7b-979c-b3f78441315d" rel="src"/>
+
+            </product>
+            <dateBegan accuracy="day">2008-01-28</dateBegan>
+            <useCodeForm>default</useCodeForm>
+            <codeSystemMembership>Full Member</codeSystemMembership>
+            <codeSystemStatus>active</codeSystemStatus>
+        </paymentSystem>
+        <paymentSystem>
+            <product>
+                <link href="/product/id/29bc2b9d-6706-4915-81ce-67fe866f01a4" rel="src"/>
+
+            </product>
+            <dateBegan accuracy="day">2009-11-02</dateBegan>
+            <useCodeForm>default</useCodeForm>
+            <codeSystemMembership>Full Member</codeSystemMembership>
+            <codeSystemStatus>active</codeSystemStatus>
+        </paymentSystem>
+    </paymentSystems>
+    <assignedInstitution>
+        <link href="/legalEntity/id/65cbc471-cc6a-4b6c-8e27-488ced3535dd" rel="src"/>
+    </assignedInstitution>
+    <usageLocations>
+        <usageLocation primaryAssignee="true" rankAtLocation="2">
+            <presence>
+                <link href="/office/id/9fdc14bc-2438-4adb-8fc3-ef1faaaff121" rel="src"/>
+            </presence>
+            <department>
+                <link href="/department/id/159e24d1-698d-4192-9f87-c487fd418f96" rel="src"/>
+            </department>
+            <additionalInfo>Mahavidyalaya Gwalior</additionalInfo>
+            <description>Test</description>
+        </usageLocation>
+        <usageLocation primaryAssignee="false" rankAtLocation="20">
+            <presence>
+                <link href="/office/id/9fdc14bc-2438-4adb-8fc3-ef1faaaff121" rel="src"/>
+            </presence>
+            <department>
+                <link href="/department/id/a9de4a11-fe8c-4123-a9a0-2e2d88312006" rel="src"/>
+            </department>
+        </usageLocation>
+        <usageLocation primaryAssignee="false" rankAtLocation="20">
+            <presence>
+                <link href="/office/id/3b19f4e0-a781-4a5e-a839-715f8b1e04f0" rel="src"/>
+            </presence>
+        </usageLocation>
+        <usageLocation primaryAssignee="false">
+            <presence>
+                <link href="/office/id/9fdc14bc-2438-4adb-8fc3-ef1faaaff121" rel="src"/>
+            </presence>
+            <department>
+                <link href="/department/id/8a9cef7e-e8c3-4462-b650-0fa587253b6d" rel="src"/>
+            </department>
+        </usageLocation>
+        <usageLocation primaryAssignee="false">
+            <presence>
+                <link href="/office/id/c2b1f3ab-95d8-4726-9c1c-2839f1450530" rel="src"/>
+            </presence>
+        </usageLocation>
+    </usageLocations>
+</routingCode>

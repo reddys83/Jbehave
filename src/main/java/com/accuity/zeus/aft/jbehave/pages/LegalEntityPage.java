@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
 public class LegalEntityPage extends AbstractPage {
     private By legalEntity_entityType_label_xpath = By.xpath(".//*[@id='content']//h2[2]");
     private By legalEntity_entityType_type_label_xpath = By.xpath(".//*[@id='content']//table[2]//th");
-    private By legalEntity_entityType_list_xpath = By.xpath(".//*[@id='content']//table[2]//td");
+   // private By legalEntity_entityType_list_xpath = By.xpath(".//*[@id='content']//table[2]//td");
     private By legalEntity_telecoms_type_label_xpath = By.xpath(".//*[@id='content']//table[3]/thead//th[text()='Type']");
     private By legalEntity_telecoms_rank_label_xpath = By.xpath(".//*[@id='content']//table[3]/thead//th[text()='Rank']");
     private By legalEntity_telecoms_info_label_xpath = By.xpath(".//*[@id='content']//table[3]/thead//th[text()='Name']");
@@ -99,15 +99,6 @@ public class LegalEntityPage extends AbstractPage {
         return null;
     }
 
-    public void verifyLegalEntityEntities(ExamplesTable legalEntities) {
-        assertEquals("ENTITY TYPES", getDriver().findElement(legalEntity_entityType_label_xpath).getText());
-        assertEquals("TYPE", getDriver().findElement(legalEntity_entityType_type_label_xpath).getText());
-        List<WebElement> legalEntityEntityList = getDriver().findElements(legalEntity_entityType_list_xpath);
-        assertTrue(legalEntities.getRowCount() == legalEntityEntityList.size());
-        for (int i = 0; i < legalEntities.getRowCount(); i++) {
-            assertEquals(legalEntities.getRow(i).values().toString().replace(",", "").replace("[", "").replace("]", "").trim(), legalEntityEntityList.get(i).getText().replace(",", "").trim());
-        }
-    }
 
     public void verifyLegalEntitiesVirtualPresence(ExamplesTable legalEntitiesVirtualPresence) {
         assertEquals("TYPE", getDriver().findElement(legalEntity_telecoms_type_label_xpath).getText());
@@ -161,6 +152,60 @@ public class LegalEntityPage extends AbstractPage {
         else
         {
             assertFalse(getDriver().findElement(legalEntity_statistics_link_id).isDisplayed());
+        }
+    }
+    public void verifyBasicInfo() {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertEquals("BASIC INFO", getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_basicInfo_label_xpath")).getText());
+        }
+
+    public void verifyLegalEntityTypes(String fid)
+        {
+            assertEquals("ENTITY TYPES", getDriver().findElement(legalEntity_entityType_label_xpath).getText());
+            assertEquals("TYPE", getDriver().findElement(legalEntity_entityType_type_label_xpath).getText());
+
+            try {
+                Thread.sleep(2000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            List<NameValuePair> nvPairs = new ArrayList<>();
+            nvPairs.add(new BasicNameValuePair("fid", fid));
+            nvPairs.add(new BasicNameValuePair("source", "trusted"));
+
+            Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legal entity basic info left column", nvPairs);
+            for (int i=1; i<=document.getElementsByTagName("type").getLength();i++)
+            {
+                assertEquals(getDriver().findElement(By.xpath(".//*[@id='content']//table[2]/tbody/tr["+i+"]/td")).getText(),
+                        document.getElementsByTagName("type").item(i-1).getTextContent());
+            }
+        }
+
+    public void verifyLegalEntityNames(String fid)
+     {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", fid));
+        nvPairs.add(new BasicNameValuePair("source", "trusted"));
+
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get View legalEntity Names", nvPairs);
+        for (int i=1; i<=document.getElementsByTagName("type").getLength();i++)
+        {
+            assertEquals(getDriver().findElement(By.xpath(".//*[@id='legalEntityBasicInfo']//li[1]/table[1]//tr[" + i + "]/td[1]")).getText(),
+                    document.getElementsByTagName("type").item(i-1).getTextContent());
+        }
+        for (int j=1;j<=document.getElementsByTagName("value").getLength();j++)
+        {
+            assertEquals(getDriver().findElement(By.xpath(".//*[@id='legalEntityBasicInfo']//li[1]/table[1]//tr[" + j + "]/td[2]")).getText(),
+                    document.getElementsByTagName("value").item(j-1).getTextContent());
         }
     }
 

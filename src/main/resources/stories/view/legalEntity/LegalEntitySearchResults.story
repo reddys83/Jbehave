@@ -13,17 +13,19 @@ JIRA ID - ZEUS-475 - User can search for legal entity under "Data"
 
 Scenario: search by name and verify search results
 Given a user is on the search page
-When the user searches for <entity> with <field> equals <value>
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
 Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results
 
 Examples:
-|entity|field|value|
-|legalEntity|name|First National Bank|
+|entity|searchBy|
+|First National Bank|name|
 
 Scenario: search by name and verify search results
 Given a user is on the search page
-When the user searches for <entity> with <field> equals <value>
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
 
 Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
@@ -34,12 +36,13 @@ Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results
 
 Examples:
-|entity|field|value|
-|legalEntity|name|Bank of Montreal|
+|entity|searchBy|
+|Bank of Montreal|name|
 
 Scenario: search by name and verify search results
 Given a user is on the search page
-When the user searches for <entity> with <field> equals <value>
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
 
 Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
@@ -49,12 +52,13 @@ Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results
 
 Examples:
-|entity|field|value|
-|legalEntity|name|Société Générale|
+|entity|searchBy|
+|Société Générale|name|
 
 Scenario: search by fid and verify search results
 Given a user is on the search page
-When the user searches for <entity> with <field> equals <value>
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
 
 Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
@@ -64,12 +68,13 @@ Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results
 
 Examples:
-|entity|field|value|
-|fid|fid|12253|
+|entity|searchBy|
+|12253|fid|
 
 Scenario: search by tfpid and verify search results
 Given a user is on the search page
-When the user searches for <entity> with <field> equals <value>
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
 
 Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
@@ -79,13 +84,14 @@ Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results
 
 Examples:
-|entity|field|value|
-|tfpid|tfpid|10077420|
+|entity|searchBy|
+|10077420|tfpid|
 
 Scenario: search by name and navigate through different search results
 Meta:@verifyBuild
 Given a user is on the search page
-When the user searches for <entity> with <field> equals <value>
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
 Then the user should see the option to navigate to the desired page
 When the user navigates to the 4th page on the legal entity search results page
 Then the user should see the search results paginated for the searched entity
@@ -95,12 +101,13 @@ Then the user should see the search results paginated for the searched entity
 Then the user should see the option to navigate to the desired page
 
 Examples:
-|entity|field|value|
-|legalEntity|name|First National Bank|
+|entity|searchBy|
+|First National Bank|name|
 
 Scenario: search by name and navigate through different search results
 Given a user is on the search page
-When the user searches for <entity> with <field> equals <value>
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
 Then the user should see the option to navigate to the desired page
 When the user navigates to the 5th page on the legal entity search results page
 Then the user should see the search results paginated for the searched entity
@@ -110,12 +117,13 @@ Then the user should see the search results paginated for the searched entity
 Then the user should see the option to navigate to the desired page
 
 Examples:
-|entity|field|value|
-|legalEntity|name|First National Bank|
+|entity|searchBy|
+|First National Bank|name|
 
 Scenario: search by name and verify no search results
 Given a user is on the search page
-When the user searches for <entity> with <field> equals <value>
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
 Then the user should see the option to navigate to the desired page
 When the user navigates to the 5th page on the legal entity search results page
 Then the user should see the search results paginated for the searched entity
@@ -125,33 +133,36 @@ Then the user should see the search results paginated for the searched entity
 Then the user should see the option to navigate to the desired page
 
 Examples:
-|entity|field|value|
-|legalEntity|name|First National Bank|
+|entity|searchBy|
+|First National Bank|name|
 
 Scenario: search by name and verify no search results
 Given a user is on the search page
-When the user searches for <entity> with <field> equals <value>
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
 Then the user should see no results found message
 
 Examples:
-|entity|field|value|
-|legalEntity|name|bank of greece|
+|entity|searchBy|
+|bank of greece|name|
 
 Scenario: search by name and navigate to search results pages using Previous/Next link BUG:927
 Given a user is on the search page
-When the user searches for <entity> with <field> equals <value>
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
 And the user clicks on the next page link
 Then the user should see the search results paginated for the searched entity
 When the user clicks on the previous page link
 Then the user should see the search results paginated for the searched entity
 
 Examples:
-|entity|field|value|
-|legalEntity|name|First National Bank|
+|entity|searchBy|
+|First National Bank|name|
 
 Scenario: search by fid and verify legal entity head office (not with fid -0)
 Given a user is on the search page
-When the user searches for <entity> with <field> equals <value>
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
 
 Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
@@ -161,12 +172,13 @@ Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results
 
 Examples:
-|entity|field|value|
-|fid|fid|1|
+|entity|searchBy|
+|1|fid|
 
 Scenario: Bug:ZEUS-930- LegalEntity search results are not showing up
 Given a user is on the search page
-When the user searches for <entity> with <field> equals <value>
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
 
 Then the user should see the legal entity search results card matching the searched entity
 |FID|TFPID|NAME|ADDRESS|STATUS|
@@ -176,5 +188,5 @@ Then the user should see the search results paginated for the searched entity
 And the user should see the number of records displayed in the page w.r.t total search results
 
 Examples:
-|entity|field|value|
-|fid|fid|224355|
+|entity|searchBy|
+|224355|fid|
