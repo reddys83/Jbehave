@@ -414,10 +414,6 @@ public abstract class AbstractPage {
         }
         Document document =  XmlDocumentLoader.getDocument(filePath);
         String resourceURL=document.getElementsByTagName(resource).item(0).getAttributes().getNamedItem("resource").getNodeValue();
-        if(resourceURL.contains("http")){
-            String[] splitURL=resourceURL.split(heraApi.getPath());
-            resourceURL=splitURL[1];
-        }
         return resourceURL;
     }
     

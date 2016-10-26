@@ -90,8 +90,6 @@ public class RoutingCodeSteps extends AbstractSteps {
         getRoutingCodePage().verifyRoutingCodeUsagesAscendingOrderByArea(routingCode, codeType);
     }
 
-
-
 	@When("the user clicks on the former usages link in the navigation bar")
 	public void clickOnFormerUsageLink() {
 		 getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_former_usages_navigation_link"));
@@ -152,7 +150,6 @@ public class RoutingCodeSteps extends AbstractSteps {
 		getDataPage().refreshThePage();
 		Thread.sleep(5000L);
 	}
-
 
     @When("the user clicks on payment systems section")
     public void clickOnPaymentSystems()

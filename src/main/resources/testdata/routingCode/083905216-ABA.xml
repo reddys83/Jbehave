@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <routingCode deleted="false" fid="C-1121793" id="647b8553-2b9c-4e38-a6d0-ad9209ac6cae"
-             resource="http://10.72.0.121:8080/heraapi/routingCode/id/647b8553-2b9c-4e38-a6d0-ad9209ac6cae"
+             resource="/routingCode/id/647b8553-2b9c-4e38-a6d0-ad9209ac6cae"
              source="trusted" tfpid="ABA-083905216">
     <codeType>ABA</codeType>
     <codeTypeDescription>US Routing Number</codeTypeDescription>
@@ -24,7 +24,7 @@
         <paymentSystem>
             <product>
                 <link
-                        href="http://10.72.0.121:8080/heraapi/product/id/dc96bf44-64d2-402f-8b86-67f423d0e999"
+                        href="/product/id/dc96bf44-64d2-402f-8b86-67f423d0e999"
                         rel="src"/>
             </product>
             <useCodeForm>default</useCodeForm>
@@ -94,7 +94,7 @@
                     <type>Primary Wire Location</type>
                     <presence>
                         <link
-                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
                     <specialInstructions>test instructions</specialInstructions>
@@ -103,7 +103,7 @@
                     <type>Primary ACH Location</type>
                     <presence>
                         <link
-                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
                     <specialInstructions>test instructions</specialInstructions>
@@ -112,7 +112,7 @@
                     <type>ACH Contact TfpsysLocation</type>
                     <presence>
                         <link
-                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
                     <specialInstructions>test instructions</specialInstructions>
@@ -121,7 +121,7 @@
                     <type>Assigned Address</type>
                     <presence>
                         <link
-                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
                     <specialInstructions>test instructions</specialInstructions>
@@ -130,7 +130,7 @@
                     <type>Primary Check Location</type>
                     <presence>
                         <link
-                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
                     <specialInstructions>test instructions</specialInstructions>
@@ -150,7 +150,7 @@
     </relatedCodes>
     <assignedInstitution>
         <link
-                href="http://10.72.0.121:8080/heraapi/legalEntity/id/3f6ec391-3f19-4aa0-967e-ee04f329e8af"
+                href="/legalEntity/id/3f6ec391-3f19-4aa0-967e-ee04f329e8af"
                 rel="src"/>
         <legalName>Bank of Jamestown</legalName>
     </assignedInstitution>
@@ -158,21 +158,21 @@
         <usageLocation primaryAssignee="true" rankAtLocation="1">
             <presence>
                 <link
-                        href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                        href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                         rel="src"/>
             </presence>
         </usageLocation>
         <usageLocation primaryAssignee="false" rankAtLocation="1">
             <presence>
                 <link
-                        href="http://10.72.0.121:8080/heraapi/office/id/67cf9dfe-6a00-49a6-8cb5-4b52ee136567"
+                        href="/office/id/67cf9dfe-6a00-49a6-8cb5-4b52ee136567"
                         rel="src"/>
             </presence>
         </usageLocation>
         <usageLocation primaryAssignee="false" rankAtLocation="1">
             <presence>
                 <link
-                        href="http://10.72.0.121:8080/heraapi/office/id/b158e312-391c-4af5-9f03-55d3fed40b0a"
+                        href="/office/id/b158e312-391c-4af5-9f03-55d3fed40b0a"
                         rel="src"/>
             </presence>
         </usageLocation>
