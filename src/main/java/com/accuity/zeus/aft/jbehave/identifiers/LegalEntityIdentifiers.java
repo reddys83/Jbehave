@@ -33,6 +33,7 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_personnel_value_xpath", By.xpath(".//*[@id='additionalPersonnel']//textarea"));
         hmap.put("legalEntity_boardMeetings_second_new_type_dropdown", By.xpath("//tr[@class='new'][2]//td/select[@id='boardMeetingType']"));
         hmap.put("legalEntity_boardMeetings_add_button_id", By.id("add-boardMeetings"));
+        hmap.put("legalEntity_basicInfo_label_xpath",By.xpath("//*[@id='content']/div/ul/li/h1/span"));
         hmap.put("legalEntity_boardMeetings_first_existing_type_dropdown", By.xpath("//tr[1]//td/select[@id='boardMeetingType']"));
         hmap.put("legalEntity_boardMeetings_label_xpath", By.xpath(".//*[@id='legalEntityBoardMeetings']//h2"));
         hmap.put("legalEntity_boardMeetings_summary_error_message_xpath", By.xpath(".//*[@class='notification error'][@data-error_id='boardMeetingsSummaryError']"));

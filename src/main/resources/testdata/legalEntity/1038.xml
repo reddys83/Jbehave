@@ -1,0 +1,357 @@
+<legalEntity deleted="false" fid="1038" id="4054b437-e1d1-4891-ace4-756fc238c943" resource="/legalEntity/id/4054b437-e1d1-4891-ace4-756fc238c943" source="trusted" tfpid="10077420">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+            <iso2>US</iso2>
+            <name>USA</name>
+            <countrySortKey>UNITED STATES OF AMERICA</countrySortKey>
+        </countryOfOperations>
+        <organisationType>Corporate Bank</organisationType>
+        <charterType>Private</charterType>
+        <insuranceType>FDIC-BIF</insuranceType>
+        <fatcaStatus>Participating FFI</fatcaStatus>
+        <legalEntityType>Bank</legalEntityType>
+        <types>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Commercial Bank</type>
+            <type source="trusted">Corporate Bank</type>
+            <type source="trusted">Development Bank</type>
+            <type source="trusted">Investment Bank</type>
+            <type source="trusted">Mortgage Bank</type>
+            <type source="trusted">Private Bank</type>
+            <type source="trusted">Retail Bank</type>
+            <type source="trusted">Savings Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Bank of America National Association</value>
+            </name>
+            <name>
+                <type>Abbreviated Name</type>
+                <value>BofA</value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>Bank of America National Trust </value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>Bank of America National Trust &amp; Savings Association</value>
+            </name>
+            <name>
+                <type>Marketing Name</type>
+                <value>ABC</value>
+            </name>
+            <legalEntitySortKey>BANK OF AMERICA NATIONAL ASSOCIATION</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1954-01-01</established>
+            <chartered accuracy="day">1984-02-14</chartered>
+        </dates>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+        <leadInstitution>false</leadInstitution>
+        <corporateStatement>abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345</corporateStatement>
+        <additionalInfos>
+            <additionalInfo>helloxyz</additionalInfo>
+        </additionalInfos>
+        <trust>
+            <powersGranted>true</powersGranted>
+            <powersFull>true</powersFull>
+            <powersUsed>true</powersUsed>
+        </trust>
+        <identifiers>
+            <identifier>
+                <type>Bronnoysundregistrene (Norwegian LEIs) (EINO)</type>
+                <value>B4TYDEB6GKMZO031MB27</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>S and P Identification Number (SPID)</type>
+                <value>105940</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>FDIC</type>
+                <value>3510</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>US Tax ID</type>
+                <value>94-1687665</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>Fitch ID</type>
+                <value>80089060</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>Chinese Bank Serial Number</type>
+                <value>Lan Testing</value>
+                <status>inactive</status>
+            </identifier>
+            <identifier>
+                <type>National Settlement Depository (LEIRU)</type>
+                <value>123456789012345678901</value>
+                <status>pending</status>
+            </identifier>
+            <identifier>
+                <type>OCC</type>
+                <value>13044</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>Irish Stock Exchange (LEIIE)</type>
+                <value>Lan Iris Stock Exchange</value>
+                <status>inactive</status>
+            </identifier>
+        </identifiers>
+
+
+    </summary>
+    <services>
+        <service>
+            <category>Account Management</category>
+            <customDescription>eded</customDescription>
+        </service>
+        <service>
+            <category>Bills of Exchange</category>
+        </service>
+        <service>
+            <category>Bonds</category>
+        </service>
+        <service>
+            <category>Capital Markets Advisory</category>
+        </service>
+        <service>
+            <category>Capital Markets</category>
+        </service>
+        <service>
+            <category>Commercial Banking</category>
+        </service>
+        <service>
+            <category>Corporate Banking</category>
+        </service>
+        <service>
+            <category>Correspondent Banking</category>
+        </service>
+        <service>
+            <category>Debentures</category>
+        </service>
+        <service>
+            <category>Documentary Credits</category>
+        </service>
+        <service>
+            <category>Equity Investments</category>
+        </service>
+        <service>
+            <category>Factoring</category>
+        </service>
+        <service>
+            <category>Foreign Exchange</category>
+        </service>
+        <service>
+            <category>Guarantees</category>
+        </service>
+        <service>
+            <category>International Settlements</category>
+        </service>
+        <service>
+            <category>Investment Banking</category>
+        </service>
+        <service>
+            <category>Merchant Banking</category>
+        </service>
+        <service>
+            <category>Mergers and Acquisitions</category>
+        </service>
+        <service>
+            <category>Money Markets</category>
+        </service>
+        <service>
+            <category>Portfolio Management</category>
+        </service>
+        <service>
+            <category>Private Banking</category>
+        </service>
+        <service>
+            <category>Real Estate</category>
+        </service>
+        <service>
+            <category>Retail Banking</category>
+        </service>
+        <service>
+            <category>Underwriting</category>
+        </service>
+        <service>
+            <category>Offshore Services</category>
+        </service>
+        <service>
+            <category>Corporate Lending</category>
+        </service>
+        <service>
+            <category>Internet Banking</category>
+        </service>
+        <service>
+            <category>Financial Futures</category>
+        </service>
+        <service>
+            <category>Financial Advisory - Personal</category>
+        </service>
+        <service>
+            <category>Financial Advisory - Corporate</category>
+        </service>
+        <service>
+            <category>Financial Advisory - Institutional</category>
+        </service>
+        <service>
+            <category>Home Equity Lines of Credit</category>
+        </service>
+        <service>
+            <category>Home Equity Loans (2nd and 3rd mortgages)</category>
+        </service>
+        <service>
+            <category>Lines of Credit - Personal</category>
+        </service>
+        <service>
+            <category>Lines of Credit - Business</category>
+        </service>
+        <service>
+            <category>Mortgages</category>
+        </service>
+        <service>
+            <category>Mortgage Backed Securities</category>
+        </service>
+        <service>
+            <category>Savings Accounts - Personal</category>
+        </service>
+        <service>
+            <category>Savings Accounts - Specialty</category>
+        </service>
+        <service>
+            <category>Tax Exempt Accounts</category>
+        </service>
+        <service>
+            <category>Tax Exempt Savings Instruments</category>
+        </service>
+        <service>
+            <category>Unsecured Loans - Personal</category>
+        </service>
+        <service>
+            <category>Unsecured Loans - Commercial</category>
+        </service>
+        <service>
+            <category>Asset Management</category>
+        </service>
+    </services>
+    <locations>
+        <summaries>
+            <summary type="AgencySummary">wqewrw</summary>
+            <summary type="RepSummary">reyret</summary>
+        </summaries>
+        <headOffice>
+            <link href="/office/id/616f3abf-e9e8-4373-9c66-e08e4cc8ce0d" rel="src"/>
+
+        </headOffice>
+    </locations>
+    <personnel>
+        <summaries>
+            <summary type="InstitutionEmployees">8094</summary>
+        </summaries>
+    </personnel>
+    <creditRatings>
+        <rating>
+            <agencyName>Capital Intelligence</agencyName>
+            <type>Long Term Rating</type>
+            <value>A+</value>
+            <dateApplied accuracy="day">2015-10-07</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Long Term Rating</type>
+            <value>A</value>
+            <dateApplied accuracy="day">2011-12-02</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Short Term Rating</type>
+            <value>A-1</value>
+            <dateApplied accuracy="day">2011-12-02</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Rating</type>
+            <value>A+</value>
+            <dateApplied accuracy="day">2015-10-07</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Short Term Rating</type>
+            <value>F1</value>
+            <dateApplied accuracy="day">2015-10-07</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Capital Intelligence</agencyName>
+            <type>Short Term Rating</type>
+            <value>F1</value>
+            <dateApplied accuracy="day">2015-10-07</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Japan Credit Rating Agency</agencyName>
+            <type>Long Term Rating</type>
+            <value>A+</value>
+            <dateApplied accuracy="day">2015-10-07</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Moody's</agencyName>
+            <type>Long Term Rating</type>
+            <value>A1</value>
+            <dateApplied accuracy="day">2015-09-02</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Moody's</agencyName>
+            <type>Short Term Rating</type>
+            <value>P-1</value>
+            <dateApplied accuracy="day">2015-09-02</dateApplied>
+        </rating>
+    </creditRatings>
+    <history>
+        <summaries>
+            <summary>Established August 10, 1904 as Bank of Italy; commenced activities on October 17, 1904. On March 1, 1927 became a national bank under the title of Bank of Italy National Trust &amp; Savings Association. On November 3, 1930 merged with Bank of America of California and name changed to Bank of America National Trust &amp; Savings Association. On April 22, 1992 merged with Security Pacific National Bank. On January 7, 1996 absorbed Bank of America Oregon. On March 1, 1996 acquired Bank of America Idaho. On January 1, 1997 absorbed Bank of America Arizona. On June 30, 1997 Bank of America Illinois merged into Bank of America National Trust &amp; Savings Association. On July 9, 1998 acquired Sunwest Bank of El Paso NA. On July 23, 1999 Bank of America National Trust &amp; Savings Association name changed as above following merger with Bank of America NA (formerly NationsBank NA). On December 1, 1999 Bank of America Utah NA became branch of the above. On January 1, 2002 Bank of America Canada became branch of above. On July 1, 2002 Bank of America SA became a branch of the above. On June 13, 2005 Fleet National Bank merged into the above. On September 22, 2006 MBNA America (Delaware) NA merged into the above. On February 22, 2008 United States Trust Company NA merged into the above. On May 30, 2008 USTrust Technoloogy and Support Services Inc merged into the above. On June 30, 2008 Bank of America Georgia NA became branch of the above. On October 17, 2008 LaSalle Bank SA and LaSalle Bank Midwest NA merged into the above. On April 27, 2009 Countrywide Bank FSB merged into the above. On July 1, 2009 Merrill Lynch Bank USA merged into the above. On November 2, 2009 Merrill Lynch Bank &amp; Trust Company FSB merged into the above. On October 1, 2010 Merrill Lynch Commerical Finance Corp merged into the above. On July 1, 2011 Merrill Lynch Credit Corporation and BAC Home Loans Servicing LP merged into the above. On April 1, 2013 Bank of America Oregon NA and Bank of America Rhode Island merged into the above. On October 1, 2014 FIA Card Services NA merged into the above</summary>
+            <summary>New History message.</summary>
+        </summaries>
+    </history>
+    <relatedPresences>
+        <relation>
+            <link href="/relationship/id/a4de328a-290d-495a-abf1-48f0704c91f8" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/15e3b928-c808-4e71-b032-83dabbb16ac0" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/08c658e1-7cbe-41af-ac1c-ac7ea2e59e3c" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/dc4d54e5-4a42-4317-9868-04d0b8f4d200" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/f818b700-2249-445b-a0e9-769498e9c1d9" rel="src"/>
+
+        </relation>
+    </relatedPresences>
+    <audit>
+        <comments>
+            <comment type="Ownership comment">GSC1 please advise jacob if you are about to do GS
+                work on this bank</comment>
+            <comment type="Subsidiary comment">GSC1 please advise jacob if you are about to do GS
+                work on this bank</comment>
+            <comment type="Due Diligence">Wolfsberg bank Carol to contact</comment>
+        </comments>
+    </audit>
+</legalEntity>

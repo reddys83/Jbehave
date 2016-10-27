@@ -20,12 +20,6 @@ public class SearchSteps extends AbstractSteps {
 		setSearchPage(searchPage.goToSearchPage());
 		setDataPage(dataPage);
 	}
-
-	@When("the user searches for <entity> with <field> equals <value>")
-	public void search(@Named("entity") String entity, @Named("field") String field, @Named("value") String value) {
-			setResultsPage(getSearchPage().search(entity, field, value));
-	}
-
 	@When("the user clicks on the report tab")
     public void clickOnReportsTab(){
         setReportPage(getSearchPage().clickOnReportsTab());

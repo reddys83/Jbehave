@@ -1,0 +1,55 @@
+<legalEntity deleted="false" fid="254930" id="c3b20d9f-b121-4131-a76e-aefbe25b5b28" resource="/legalEntity/id/c3b20d9f-b121-4131-a76e-aefbe25b5b28" source="trusted" tfpid="70008485">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/2baf3f80-0d87-41c8-9d37-4c08c5cba037" rel="src"/>
+        </countryOfOperations>
+        <legalEntityType>Government</legalEntityType>
+        <types>
+            <type source="FDB">Credit Union</type>
+            <type source="FDB">Subsidiary - Unspecified</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Coast360 Federal Credit Union</value>
+            </name>
+            <legalEntitySortKey>COAST360 FEDERAL CREDIT UNION</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1962-01-01</established>
+        </dates>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+        <numberOfCreditUnionMembers>60034</numberOfCreditUnionMembers>
+        <creditUnionShareDraftFlag>false</creditUnionShareDraftFlag>
+        <leadInstitution>false</leadInstitution>
+        <trust>
+            <powersGranted>false</powersGranted>
+        </trust>
+        <identifiers>
+            <identifier>
+                <type>NCUA Charter Number</type>
+                <value>15222</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>CUNA ID Number</type>
+                <value>39560</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>US Tax ID</type>
+                <value>960001016</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <locations>
+        <headOffice>
+            <link href="/office/id/9b8ea504-e4a1-4fbb-a5df-53504dda2fed" rel="src"/>
+
+        </headOffice>
+    </locations>
+    <personnel>
+    </personnel>
+</legalEntity>

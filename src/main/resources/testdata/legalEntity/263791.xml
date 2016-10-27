@@ -1,0 +1,52 @@
+<legalEntity deleted="false" fid="263791" id="c7d326eb-2dcb-40e5-af37-c8ed5ea20e32" resource="/legalEntity/id/c7d326eb-2dcb-40e5-af37-c8ed5ea20e32" source="trusted" tfpid="96685583">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/8cf145f3-a0a7-4165-922b-06e868299781" rel="src"/>
+
+        </countryOfOperations>
+        <insuranceType>COSSEC (Puerto Rican CU's)</insuranceType>
+        <legalEntityType>Savings &amp; Loan Association</legalEntityType>
+        <types>
+            <type source="trusted">Credit Union</type>
+            <type source="trusted">Subsidiary - Unspecified</type>
+            <type source="trusted">Credit Union</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Cooperativa de Ahorro y Crédito de los Oficiales de Custodia de Puerto Rico</value>
+            </name>
+            <legalEntitySortKey>COOPERATIVA DE AHORRO Y CRÉDITO DE LOS OFICIALES DE CUSTODIA DE PUERTO RICO</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1962-07-01</established>
+        </dates>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+        <creditUnionShareDraftFlag>true</creditUnionShareDraftFlag>
+        <leadInstitution>false</leadInstitution>
+        <trust>
+            <powersGranted>false</powersGranted>
+            <powersFull>false</powersFull>
+            <powersUsed>false</powersUsed>
+        </trust>
+        <identifiers>
+            <identifier transferable="false">
+                <type>NCUA Charter Number</type>
+                <value>96991</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>CUNA ID Number</type>
+                <value>28414</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <locations>
+        <headOffice>
+            <link href="/office/id/d33067bb-33dd-4859-9e81-7cc4df5a066c" rel="src"/>
+
+        </headOffice>
+    </locations>
+</legalEntity>

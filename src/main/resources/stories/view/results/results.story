@@ -7,6 +7,7 @@ JIRA ID - ZEUS-1391- Zeus Menus Re-work #1: 1st Menu Line
 JIRA ID - ZEUS-1392- Zeus Menus Re-work #2: Move Legal Entity from DATA to RESULTS
 JIRA ID - ZEUS-1393- Zeus Menus Re-work #3: Move OFFICES to 2nd line
 JIRA ID - ZEUS-1132- User can search for a routingCode (Exact Match)
+JIRA ID - ZEUS-1509 - User can search for a routingCOde (Partial Match)
 
 Scenario: Verify the results tab shows the legal entity results when search for a legal entity
 Given a user is on the search page
@@ -66,6 +67,8 @@ Examples:
 |entity|searchBy|
 |001|Routing Code|
 |00!@#$%^&*(6|Routing Code|
+|qa|Routing Code|
+
 
 Scenario: Verify error message for atlease two characters
 Given a user is on the search page
@@ -99,39 +102,18 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for <entity> routingCode
-When the user clicks on 186-99 in the routing search results
+When the user clicks on <fid> in the routing search results
 
 Then the user should see the basic info for selected office
 Then the user should see the office names for <officeFid> in the office basic info
 
 Examples:
-|entity|searchBy|
-|01065|Routing Code|
+|entity|searchBy|fid|
+|01065|Routing Code|186-99|
 
 
 Scenario: Verify the FID navigate to legalEntity in routing Code search results
 Case 1: When routingCode does not have any usageLocations
-Given a user is on the search page
-When the user clicks on the results tab
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-Then the user should see the search results for <entity> routingCode
-When the user clicks on 494 in the routing search results
-
-Then the user should see the basic info label for selected legal entity
-
-And the user should see the legal entity's names as:
-|TYPE|VALUE|
-|Legal Title|Banco Central de Venezuela|
-|Marketing Name|BCV|
-
-Examples:
-|entity|searchBy|
-|001|Routing Code|
-
-
-Scenario: Verify the FID navigate to legalEntity in routing Code search results
 Case 2: When routingCode had usageLocation @primaryAssignee= 'false'
 Given a user is on the search page
 When the user clicks on the results tab
@@ -139,19 +121,15 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for <entity> routingCode
-When the user clicks on 4275 in the routing search results
+When the user clicks on <fid> in the routing search results
 
 Then the user should see the basic info label for selected legal entity
-
-And the user should see the legal entity's names as:
-|TYPE|VALUE|
-|Legal Title|Standard Chartered Bank|
-|Former Name|First Interstate International of California - Miami|
+And the user should see the legalEntity names for <fid> in the legalEntity basic info
 
 Examples:
-|entity|searchBy|
-|001|Routing Code|
-
+|entity|searchBy|fid|
+|001|Routing Code|494|
+|001|Routing Code|4275|
 
 Scenario: verify the routingCode search results with country filter
 Given a user is on the search page
@@ -207,9 +185,24 @@ Examples:
 |entity|searchBy|
 |001|Routing Code|
 
+Scenario: Verify user can resort the results by 'CODE'
+Given a user is on the search page
+When the user clicks on the results tab
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for <entity> routingCode
+When the user clicks on the column CODE in the routingCode search results
+Then user should see the results in descending order by code for <entity> routingCode
+When the user clicks on the column TYPE in the routingCode search results
+Then user should see the results in ascending order by type for <entity> routingCode
+When the user clicks on the column ENTITY in the routingCode search results
+Then user should see the results in ascending order by entity for <entity> routingCode
+When the user clicks on the column FID in the routingCode search results
+Then user should see the results in ascending order by fid for <entity> routingCode
 
 
-
-
-
+Examples:
+|entity|searchBy|
+|qa|Routing Code|
 

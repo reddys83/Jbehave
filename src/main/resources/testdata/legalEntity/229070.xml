@@ -1,0 +1,27 @@
+<legalEntity deleted="false" fid="229070" id="d011b5bf-2876-4fce-853b-18b113f1fa57" resource="/legalEntity/id/d011b5bf-2876-4fce-853b-18b113f1fa57" source="trusted">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/52be49f6-c37c-4bed-baec-6b9accabf100" rel="src"/>
+
+        </countryOfOperations>
+        <legalEntityType>Unknown</legalEntityType>
+        <types>
+            <type source="trusted">Subsidiary - Unspecified</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Grant West Property Limited</value>
+            </name>
+            <legalEntitySortKey>GRANT WEST PROPERTY LIMITED</legalEntitySortKey>
+        </names>
+        <creditUnionShareDraftFlag>false</creditUnionShareDraftFlag>
+    </summary>
+    <locations>
+        <headOffice>
+            <link href="/office/id/b3fa10d3-afe5-4f0b-9062-06ec6c65dd61" rel="src"/>
+
+        </headOffice>
+    </locations>
+</legalEntity>

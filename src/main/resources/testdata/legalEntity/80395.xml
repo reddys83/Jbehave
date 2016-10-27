@@ -1,0 +1,86 @@
+<legalEntity deleted="false" fid="80395" id="635e4f7d-0d7e-445d-8697-28c697539df5" resource="/legalEntity/id/635e4f7d-0d7e-445d-8697-28c697539df5" source="trusted" tfpid="96688473">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/11951a14-a2e3-4459-9bd2-1c41b8f931d4" rel="src"/>
+
+        </countryOfOperations>
+        <charterType>US State Chartered Bank</charterType>
+        <insuranceType>FDIC-BIF</insuranceType>
+        <legalEntityType>Credit Union</legalEntityType>
+        <types>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Commercial Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Bank of St Croix Inc</value>
+            </name>
+            <legalEntitySortKey>BANK OF ST CROIX INC</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1995-07-01</established>
+            <chartered accuracy="year">1995-07-01</chartered>
+        </dates>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+        <numberOfCreditUnionMembers>0</numberOfCreditUnionMembers>
+        <leadInstitution>false</leadInstitution>
+        <trust>
+            <powersGranted>false</powersGranted>
+            <powersFull>false</powersFull>
+            <powersUsed>false</powersUsed>
+        </trust>
+        <identifiers>
+            <identifier transferable="true">
+                <type>RSSD</type>
+                <value>2281371</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>FDIC</type>
+                <value>33990</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>US Tax ID</type>
+                <value>660514189</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <locations>
+        <headOffice>
+            <link href="/office/id/b2d4e574-418c-4840-ba0d-fb679f232ab6" rel="src"/>
+
+        </headOffice>
+    </locations>
+    <history>
+        <summaries>
+            <summary>Established March 1, 1995</summary>
+        </summaries>
+    </history>
+    <relatedPresences>
+        <relation>
+            <link href="/relationship/id/e4086e66-1034-4693-9445-e7a615724ca9" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/6ae5f6d0-21f1-4d3c-be0f-e228eb17781f" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/56daf526-34d1-47b6-8deb-ad37e02e7646" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/b5fba486-7102-4122-b40d-ce273eee3056" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/fa87af9c-2561-443d-809d-242068f15f72" rel="src"/>
+
+        </relation>
+    </relatedPresences>
+</legalEntity>
