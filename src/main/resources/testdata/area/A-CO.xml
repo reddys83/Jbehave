@@ -1,0 +1,35 @@
+<area deleted="false" fid="A-CO" id="fe98e718-0b18-46ef-9a8a-eb8521afb4e1"
+      resource="/area/id/fe98e718-0b18-46ef-9a8a-eb8521afb4e1" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Colorado</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>CO</value>
+            </name>
+        </names>
+        <status>active</status>
+        <useInAddress>true</useInAddress>
+
+    </summary>
+    <relatedPlaces>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>State Capital</detail>
+            </details>
+            <place>
+                <link href="/city/id/d11f080a-3dab-4395-8051-283a3e12185f" rel="src"/>
+            </place>
+        </relation>
+    </relatedPlaces>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </place>
+    </within>
+</area>

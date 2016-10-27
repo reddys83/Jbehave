@@ -1,0 +1,24 @@
+<area deleted="false" fid="A-CHI" id="8257dbee-7d34-41de-9879-afd5644593a3"
+      resource="/area/id/8257dbee-7d34-41de-9879-afd5644593a3" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Chittagong</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Chittagong</value>
+            </name>
+        </names>
+        <status>active</status>
+
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/ab3351a9-63e6-4002-bbec-0f00aa2c62f2" rel="src"/>
+        </place>
+    </within>
+</area>

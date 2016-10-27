@@ -1,0 +1,47 @@
+<area deleted="false" fid="A-CABI" id="559a382a-5ab4-4f34-ad0d-b9fb4ffc0ffc"
+      resource="/area/id/559a382a-5ab4-4f34-ad0d-b9fb4ffc0ffc" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Cabinda</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Cabinda</value>
+            </name>
+        </names>
+        <status>active</status>
+        <dates>
+            <dateBegan accuracy="year">2016-01-01</dateBegan>
+            <dateCeased accuracy="day">2015-06-06</dateCeased>
+        </dates>
+        <demographics>
+            <metric>
+                <name>Population</name>
+                <value>124</value>
+                <date accuracy="day">2011-06-12</date>
+            </metric>
+        </demographics>
+        <maxConsumerRate>!@#$%^&amp;*()_+}{</maxConsumerRate>
+        <useInAddress>false</useInAddress>
+
+    </summary>
+    <relatedPresences>
+        <relation>
+            <type>Banking Association</type>
+            <details>
+                <detail>State Government</detail>
+            </details>
+            <presence>
+                <link href="/legalEntity/id/bd747dc0-2b84-41f3-9526-ccad65da1169" rel="src"/>
+            </presence>
+        </relation>
+    </relatedPresences>
+    <within>
+        <place>
+            <link href="/country/id/55407226-a9b5-4d16-95b4-9ca1f8067351" rel="src"/>
+        </place>
+    </within>
+</area>
