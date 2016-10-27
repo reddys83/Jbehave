@@ -160,11 +160,10 @@ public class XqueryMap {
 		queryMap.put("get routing code former usages values", "getRoutingCodeFormerUsages.xqy");
 		queryMap.put("delete routing code former usages values", "deleteRoutingCodeFormerUsagesValues.xqy");
 		queryMap.put("insert routing code former usages values", "insertRoutingCodeFormerUsagesValues.xqy");
-<<<<<<< HEAD
         queryMap.put("get routingCode relatedCodes", "getRoutingCodeRelatedCodes.xqy");
-=======
         queryMap.put("get routingCode payment systems info","getRoutingCodePaymentSystems.xqy");
->>>>>>> develop
+        queryMap.put("get routing code subtype lookup", "getRoutingCodeSubtypeFromLookup.xqy");
+        queryMap.put("get ABA code source lookup", "getABACodeSourceTypesFromLookup.xqy");
    }
 
     public String getXquery(String key){
