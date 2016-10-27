@@ -2170,13 +2170,17 @@ public class EditOfficePage extends AbstractPage {
 		}
 	}
 	
-	public void verifyOfficeLocationsSummaryParametersInUI(String[] summaryTypes, String[] summaryValues) {		
-		List<WebElement> summaryRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_summary_row_view_mode"));
-		assertTrue(summaryRows.get(0).findElements(By.tagName("th")).get(0).getText().contains("TYPE"));
-		assertTrue(summaryRows.get(0).findElements(By.tagName("th")).get(1).getText().contains("VALUE"));
-		for (int i = 1; i < summaryRows.size(); i++) {
-			assertTrue(summaryRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(summaryTypes[i-1]));
-			assertTrue(summaryRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(summaryValues[i-1]));
+	public void verifyOfficeLocationsSummaryParametersInUI(String[] summaryTypes, String[] summaryValues) {	
+		try {
+			List<WebElement> summaryRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_summary_row_view_mode"));
+			assertTrue(summaryRows.get(0).findElements(By.tagName("th")).get(0).getText().contains("TYPE"));
+			assertTrue(summaryRows.get(0).findElements(By.tagName("th")).get(1).getText().contains("VALUE"));
+			for (int i = 1; i < summaryRows.size(); i++) {
+				assertTrue(summaryRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(summaryTypes[i - 1]));
+				assertTrue(summaryRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(summaryValues[i - 1]));
+			}
+		} catch (Exception e) {
+			assertTrue("Locations Summary section is not present.", false);
 		}
 	}
 	

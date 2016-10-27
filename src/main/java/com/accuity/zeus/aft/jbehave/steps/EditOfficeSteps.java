@@ -1676,7 +1676,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	
 	@Then("the user should see the type drop-down values from lookup LOCATION_SUMMARY_TEXT_TYPE")
 	public void verifyLocationSummaryTypeFromLookup() {
-		getDataPage().verifyValuesFromLookup(OfficeIdentifiers.getObjectIdentifier("office_edit_locations_summary_type_dropdown"),
+		getDataPage().verifyLookupValuesWithBlankOption(OfficeIdentifiers.getObjectIdentifier("office_edit_locations_summary_type_dropdown"),
 				"get office locations summary type lookup");
 	}
 	
@@ -1700,15 +1700,18 @@ public class EditOfficeSteps extends AbstractSteps{
 		getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_existing_summary_rows_view_mode"), false);
 	}
 	
-	@Then("the user verifies that no values are entered in $source document for office locations summary")
-	@Alias("the user verifies that the office locations summary parameters in the $source document")
+	@Then("the user verifies that the office locations summary parameters in the $source document")
 	public void verifyOfficeIdentifierRowValuesFromZeusDB(@Named("source") String source,
 			@Named("officeFid") String officeFid, @Named("type") String type, @Named("value") String value) {
 		List<String> summaryTypes = new ArrayList<>();
 		List<String> summaryValues = new ArrayList<>();
 		summaryTypes.add(type);
 		summaryValues.add(value);
-		getEditOfficePage().verifyLocationsSummaryValuesFromDB(source, officeFid, summaryTypes, summaryValues);
+		if (type.equals("") && value.equals("")) {
+			getEditOfficePage().verifyOfficeLocationsSummaryRowNotPresentInZeusDB(source, officeFid);
+		} else {
+			getEditOfficePage().verifyLocationsSummaryValuesFromDB(source, officeFid, summaryTypes, summaryValues);
+		}
 	}
 	
 	@When("the user selects the type drop-down value as <type2> in the office locations page")
@@ -1744,7 +1747,11 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyOfficeIdentifierParametersInUI(@Named("type") String type, @Named("value") String value) {
 		String[] summaryTypes = { type };
 		String[] summaryValues = { value };
-		getEditOfficePage().verifyOfficeLocationsSummaryParametersInUI(summaryTypes, summaryValues);
+		if(type.equals("") && value.equals("")) {
+			getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_existing_summary_rows_view_mode"), false);
+		} else {
+			getEditOfficePage().verifyOfficeLocationsSummaryParametersInUI(summaryTypes, summaryValues);
+		}
 	}
 	
 	@Then("the user verifies that previously selected <type> is not present in the new office locations summary row")

@@ -774,11 +774,12 @@ Examples:
 |entity|searchBy|fid|officeFid|Country|postalCodePosition|
 |1045|FID|1045|1045-26|Algeria||
 
-Scenario: User is viewing and updating Office's Locations Summary - 
+Scenario: User is updating Office's Locations Summary -
 a) User verifies whether current value of Locations Summary is same as in trusted document.
-b) User verifies if the 'Type' dropdown field values are from the lookup LOCATION_SUMMARY_TEXT_TYPE.
-c) User verifies that no new row is added after saving when blank values are entered for 'Type' and 'Value' fields.
-d) User verifies no changes in the Zeus document.
+b) User verifies if the 'Type' dropdown field values are from the lookup LOCATION_SUMMARY_TEXT_TYPE. 
+c) User verifies two summary rows are added.
+d) Verify previously selected summary Type is not listed in summary type dropdown of next row.
+e) Verify that UI and Zeus document is updated.
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -791,44 +792,9 @@ And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
 And the user gets the document with get id for offices with the <officeFid> from the database
 Then the user should see the locations summary value same as in trusted document
+When the user deletes the existing office locations summary rows
 When the user clicks on the add new summary button in the office locations page
 Then the user should see the type drop-down values from lookup LOCATION_SUMMARY_TEXT_TYPE
-When the user deletes the existing office locations summary rows
-When the user clicks on the add new summary button in the office locations page
-When the user selects the type drop-down value as <type> in the office locations page
-When the user selects the value field as <value> in the office locations page
-When the user clicks on the save button
-Then the user should see the save confirmation modal
-Then the user should not see the below summary changes in confirmation modal
-|Summary|
-|Basic Info|
-When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
-Then the user should not see the newly added summary row in the office locations page
-Then the user verifies that no values are entered in zeus document for office locations summary
-Then the user reverts the changes to the document
-
-Examples:
-|entity|searchBy|fid|officeFid|type|value|
-|1038|FID|1038|1038-51|||
-
-Scenario: User is updating Office's Locations Summary - 
-a) User verifies two summary rows are added.
-b) Verify previously selected summary Type is not listed in summary type dropdown of next row.
-c) Verify that UI and Zeus document is updated.
-
-Given a user is on the search page
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with fid <fid>
-And the user clicks on the offices link in the legal entity page
-And the user clicks on the offices results card with fid <officeFid>
-And the user clicks on the office locations link in the navigation bar
-And the user clicks on the office update link
-And the user gets the document with get id for offices with the <officeFid> from the database
-When the user deletes the existing office locations summary rows
-When the user clicks on the add new summary button in the office locations page
 When the user selects the type drop-down value as <type> in the office locations page
 When the user selects the value field as <value> in the office locations page
 When the user clicks on the add new summary button in the office locations page
@@ -848,11 +814,12 @@ Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|type|value|type2|value2|
-|1038|FID|1038|1038-60|NumberOfBranches|Sample text 1|AgencySummary|Sample text 2|
+|1038|FID|1038|1038-51|NumberOfBranches|Sample text 1|AgencySummary|Sample text 2|
 
 Scenario: User is updating Office's Locations Summary - 
 a) User is updating existing locations summary and verifies the change in confirmation modal after saving.
-b) User verifies that UI and Zeus document is updated.
+b) User verifies that no new row is added after saving when blank values are entered for 'Type' and 'Value' fields.
+c) User verifies that UI and Zeus document is updated.
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -863,7 +830,7 @@ And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office locations link in the navigation bar
 And the user clicks on the office update link
-And the user gets the document with get id for offices with the <officeFid> from the database
+When the user clicks on the add new summary button in the office locations page
 When the user selects the type drop-down value as <type> in the office locations page
 When the user selects the value field as <value> in the office locations page
 When the user clicks on the save button
@@ -875,10 +842,10 @@ When the user clicks on the confirm button
 Then the user should see the successful update message at top of the office page
 Then the user verifies existing locations summary parameters are updated with new values
 Then the user verifies that the office locations summary parameters in the zeus document
-Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|type|value|
+|1038|FID|1038|1038-60|||
 |1038|FID|1038|1038-60|AgencySummary|Sample text 2|
 
 Scenario: User is updating Office's Locations Summary - 
@@ -921,7 +888,8 @@ Examples:
 |entity|searchBy|fid|officeFid|type|value2|
 |1038|FID|1038|1038-51|NumberOfBranches|Sample text 2|
 
-Scenario: User selects to delete a Office's Locations Summary row - 
+Scenario: User selects to delete a Office's Locations Summary row -
+a) Verify that there is no change in the save confirmation modal when same parameters are entered for Locations Summary row.
 a) Verify if user can prevent deleting locations summary fields( "Type" and "Value") by clicking on 'No'.
 b) Verify if user can delete locations summary fields( "Type" and "Value") by clicking on 'Yes'.
 c) Verify that UI and Zeus document is updated.
@@ -941,22 +909,22 @@ When the user clicks on the add new summary button in the office locations page
 When the user selects the type drop-down value as <type> in the office locations page
 When the user selects the value field as <value> in the office locations page
 When the user clicks on the save button
+Then the user should not see the below summary changes in confirmation modal
+|Summary|
+|Locations|
 When the user clicks on the confirm button
 And the user clicks on the office update link
 When the user clicks on the delete summary row button in the office locations summary page
-Then the user should see the delete row confirmation modal in the office locations summary page
 When the user clicks on the no button in the delete row confirmation modal in the office locations summary page
 Then the user should see the newly added summary row in the office locations summary page
 When the user clicks on the delete summary row button in the office locations summary page
-Then the user should see the delete row confirmation modal in the office locations summary page
 When the user clicks on the yes button in the delete row confirmation modal in the office locations summary page
 When the user clicks on the save button
 When the user clicks on the confirm button
-Then the user should see the successful update message at top of the office page
 Then the user should not see the newly added summary row in the office locations page
 Then the user verifies that the deleted row for office locations summary does not exist in zeus document
 Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|type|value|
-|1038|FID|1038|1038-51|BranchSummary|Sample text|
+|1038|FID|1038|1038-60|AgencySummary|Sample text 2|

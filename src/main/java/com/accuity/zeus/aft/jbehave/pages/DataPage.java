@@ -1506,12 +1506,16 @@ public class DataPage extends AbstractPage {
 		assertTrue(fieldName + " is not displayed.", getDriver().findElement(by).isDisplayed());
 	}
 	
-	public void verifyValuesFromLookup(By by, String xquery) {
+	public void verifyLookupValuesWithBlankOption(By by, String xquery) {
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xquery);
-		List<WebElement> dropDownFieldList = getDriver().findElements(by);
-		List<WebElement> options = dropDownFieldList.get(0).findElements(By.cssSelector("option"));
-		for (int indexOfOption = 0; indexOfOption < options.size(); indexOfOption++) {
-			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getTextContent(), options.get(indexOfOption).getText().trim());
+		try {
+			List<WebElement> dropDownFieldList = getDriver().findElements(by);
+			List<WebElement> options = dropDownFieldList.get(0).findElements(By.cssSelector("option"));
+			for (int indexOfOption = 0; indexOfOption < options.size(); indexOfOption++) {
+				assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getTextContent(),	options.get(indexOfOption).getText().trim());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
