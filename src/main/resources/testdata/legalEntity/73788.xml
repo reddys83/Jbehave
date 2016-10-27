@@ -1,0 +1,135 @@
+<legalEntity deleted="false" fid="73788" id="11e54fae-5802-4fdc-90f2-366decbb0f48" resource="/legalEntity/id/11e54fae-5802-4fdc-90f2-366decbb0f48" source="trusted" stub="true" tfpid="10220700">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </countryOfOperations>
+        <charterType>State</charterType>
+        <insuranceType>FDIC-BIF</insuranceType>
+        <legalEntityType>Bank</legalEntityType>
+        <types>
+            <type source="FDB">Bank</type>
+            <type source="FDB">Commercial Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>The Monticello Banking Company</value>
+            </name>
+            <legalEntitySortKey>MONTICELLO BANKING COMPANY</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1895-07-01</established>
+            <chartered accuracy="year">1895-07-01</chartered>
+        </dates>
+        <numberOfATMs>11</numberOfATMs>
+        <leadInstitution>true</leadInstitution>
+
+        <trust>
+            <powersGranted>true</powersGranted>
+            <powersFull>true</powersFull>
+            <powersUsed>true</powersUsed>
+            <employees>
+                <professional>2</professional>
+                <administrative>1</administrative>
+            </employees>
+            <minAccountSize>10000</minAccountSize>
+        </trust>
+        <identifiers>
+            <identifier transferable="true">
+                <type>RSSD</type>
+                <value>266945</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>FDIC</type>
+                <value>292</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>US Tax ID</type>
+                <value>610284670</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <services>
+        <service>
+            <category>Asset Management</category>
+            <customDescription>Wealth Management</customDescription>
+        </service>
+        <service>
+            <category>Cash Services</category>
+            <customDescription>Checking</customDescription>
+        </service>
+        <service>
+            <category>Commercial Banking</category>
+        </service>
+        <service>
+            <category>Loans</category>
+        </service>
+        <service>
+            <category>Trust Administration</category>
+            <customDescription>Estate Management</customDescription>
+        </service>
+        <service>
+            <category>Trusteeship Services</category>
+            <customDescription>Trust Services</customDescription>
+        </service>
+        <service>
+            <category>Payment Services</category>
+            <customDescription>Wire Transfers</customDescription>
+        </service>
+        <service>
+            <category>Internet Banking</category>
+        </service>
+        <service>
+            <category>Savings Accounts - Personal</category>
+        </service>
+    </services>
+    <financialServices>
+        <financialService>
+            <category>Fixed Income-Short Term</category>
+            <detail>Certificates of Deposit-Domestic</detail>
+        </financialService>
+        <financialService>
+            <category>Municipal</category>
+            <detail>General Obligation Bonds</detail>
+        </financialService>
+        <financialService>
+            <category>Fixed Income-Medium to Long Term</category>
+            <detail>Treasury Notes and Bonds</detail>
+        </financialService>
+        <financialService>
+            <category>Fixed Income-Medium to Long Term</category>
+            <detail>Preferred Stock</detail>
+        </financialService>
+        <financialService>
+            <category>Equities</category>
+            <detail>Mutual Funds</detail>
+        </financialService>
+        <financialService>
+            <category>Fixed Income-Short Term</category>
+            <detail>Money Market Funds</detail>
+        </financialService>
+        <financialService>
+            <category>Fixed Income-Medium to Long Term</category>
+            <detail>Commercial Mortgage-Backed Securities</detail>
+        </financialService>
+        <financialService>
+            <category>Consumer Credit</category>
+            <detail>Visa</detail>
+        </financialService>
+        <financialService>
+            <category>Municipal</category>
+            <detail>Industrial Revenue Bonds</detail>
+        </financialService>
+    </financialServices>
+    <locations>
+    </locations>
+    <history>
+        <summaries>
+            <summary>Established January 1, 1895. On September 9, 2002 Bank of Clinton County Inc merged into the above</summary>
+        </summaries>
+    </history>
+</legalEntity>

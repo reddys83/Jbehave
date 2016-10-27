@@ -1,0 +1,39 @@
+<legalEntity deleted="false" fid="951" id="f00359e1-0439-4c21-aa6e-afb6af6be555" resource="/legalEntity/id/f00359e1-0439-4c21-aa6e-afb6af6be555" source="trusted" stub="true" tfpid="20624100">
+    <summary>
+        <countryOfOperations>
+            <link href="/country/id/cd83f9a6-4597-4e2b-b5a2-40e41d43ab5b" rel="src"/>
+
+        </countryOfOperations>
+        <legalEntityType>Financial Services Company</legalEntityType>
+        <types>
+            <type source="FDB">Subsidiary - Unspecified</type>
+            <type source="TFP">Financial Services Company</type>
+        </types>
+        <names>
+            <legalEntitySortKey>UBS CARD CENTER AG</legalEntitySortKey>
+            <name>
+                <type>Legal Title</type>
+                <value>UBS Card Center AG</value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>Bank Finalba AG</value>
+            </name>
+        </names>
+        <dates>
+            <established accuracy="year">1935-01-01</established>
+        </dates>
+        <status>active</status>
+        <trust>
+        </trust>
+    </summary>
+    <locations>
+    </locations>
+    <audit>
+        <comments>
+            <comment type="Ownership comment">GSC1 4/97</comment>
+            <comment type="Subsidiary comment">GSC1 4/97</comment>
+            <comment type="Due Diligence">Contacted via UBS mailing</comment>
+        </comments>
+    </audit>
+</legalEntity>

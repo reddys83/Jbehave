@@ -1,0 +1,184 @@
+<legalEntity deleted="false" fid="732" id="8f0d80ea-f516-4143-af8d-68a9ad0c83ff" resource="/legalEntity/id/8f0d80ea-f516-4143-af8d-68a9ad0c83ff" source="trusted" tfpid="96786805">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/cd83f9a6-4597-4e2b-b5a2-40e41d43ab5b" rel="src"/>
+        </countryOfOperations>
+        <organisationType>Joint Stock Bank</organisationType>
+        <legalEntityType>Bank</legalEntityType>
+        <types>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Commercial Bank</type>
+            <type source="trusted">Investment Bank</type>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Commercial Bank</type>
+            <type source="trusted">Investment Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Banco Indusval SA</value>
+            </name>
+            <name>
+                <type>Marketing Name</type>
+                <value>Banco Indusval &amp; Partners</value>
+            </name>
+            <legalEntitySortKey>BANCO INDUSVAL SA</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1991-07-01</established>
+            <chartered accuracy="year">1991-07-01</chartered>
+        </dates>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+        <leadInstitution>false</leadInstitution>
+        <boardMeetings>
+            <meeting>
+                <periodType>month</periodType>
+                <value>04</value>
+            </meeting>
+        </boardMeetings>
+        <identifiers>
+            <identifier transferable="false">
+                <type>The Global Markets Entity Identifier (GMEI)</type>
+                <value>549300FD2UKBUN6EJK86</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>Global Intermediary Identification Number</type>
+                <value>3KUNQS.00000.SP.076</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>Global Intermediary Identification Number</type>
+                <value>J1UGZ5.00000.LE.076</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>S and P Identification Number (SPID)</type>
+                <value>384839</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>Moodys Organisation ID</type>
+                <value>807454354</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>RegistrationNo</type>
+                <value>CNPJ: 61.024.352/0001-71</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>Fitch ID</type>
+                <value>82354696</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <services>
+        <service>
+            <category>Bills of Exchange</category>
+        </service>
+        <service>
+            <category>Capital Markets</category>
+        </service>
+        <service>
+            <category>Commercial Banking</category>
+        </service>
+        <service>
+            <category>Correspondent Banking</category>
+        </service>
+        <service>
+            <category>Debentures</category>
+        </service>
+        <service>
+            <category>Documentary Credits</category>
+        </service>
+        <service>
+            <category>Foreign Exchange</category>
+        </service>
+        <service>
+            <category>Guarantees</category>
+        </service>
+        <service>
+            <category>Letters of Credit</category>
+        </service>
+        <service>
+            <category>Mergers and Acquisitions</category>
+        </service>
+        <service>
+            <category>Syndicated Loans</category>
+        </service>
+        <service>
+            <category>Lines of Credit - Business</category>
+        </service>
+    </services>
+    <locations>
+        <summaries>
+            <summary type="NumberOfBranches">7</summary>
+        </summaries>
+        <headOffice>
+            <link href="/office/id/b8c66adf-fccc-49a8-b4b2-d2634bfca2a7" rel="src"/>
+
+        </headOffice>
+    </locations>
+    <ownership>
+        <summaries>
+            <summary type="additional">Manoel Felix Cintra Neto, 11.50%; Luiz Masagão Ribeiro, 10%; Roberto De Rezende Barbosa, 8.50%; Carlos Ciampolini, 6.90%; Afonso Antonio Hennel, 5.10%; Cristina Hennel Fay, 5.70%; Others, with less than 5%, 31.90%; WP X Brasil Fundo de Inv. em Participações do not intend to control, having only the investment character</summary>
+        </summaries>
+    </ownership>
+    <personnel>
+        <summaries>
+            <summary type="InstitutionEmployees">408</summary>
+        </summaries>
+    </personnel>
+    <creditRatings>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Rating</type>
+            <value>NR</value>
+            <dateApplied accuracy="day">2015-10-07</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Short Term Rating</type>
+            <value>NR</value>
+            <dateApplied accuracy="day">2015-10-07</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Long Term Rating</type>
+            <value>B+</value>
+            <dateApplied accuracy="day">2015-09-11</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Short Term Rating</type>
+            <value>B</value>
+            <dateApplied accuracy="day">2015-09-11</dateApplied>
+        </rating>
+    </creditRatings>
+    <history>
+        <summaries>
+            <summary>Established 1991. On September 24, 2013 Banco Intercap SA banking business acquired by the above</summary>
+        </summaries>
+    </history>
+    <relatedPresences>
+        <relation>
+            <link href="/relationship/id/085f6abd-1939-4f02-b281-943f8ac1a408" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/f2b2bce4-e7fb-4fee-9c33-e02c0840694e" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/7932d963-ef5e-4c6e-aad9-e839693cc6e4" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/6a9d6a24-d2d9-43e4-af00-4b5b9c6b18cc" rel="src"/>
+
+        </relation>
+    </relatedPresences>
+</legalEntity>

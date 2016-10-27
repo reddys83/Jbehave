@@ -1,0 +1,245 @@
+<legalEntity deleted="false" fid="1165" id="b3232d09-c4d8-41f0-90d0-0ff079fd676e" resource="/legalEntity/id/b3232d09-c4d8-41f0-90d0-0ff079fd676e" source="trusted" tfpid="96680886">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/54761b88-02fc-43fa-b625-fb81a27397db" rel="src"/>
+        </countryOfOperations>
+        <organisationType>Government Bank</organisationType>
+        <charterType>
+        </charterType>
+        <fatcaStatus>Participating FFI</fatcaStatus>
+        <legalEntityType>Bank</legalEntityType>
+        <types>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Commercial Bank</type>
+            <type source="trusted">Foreign Exchange</type>
+            <type source="trusted">Government Bank</type>
+            <type source="trusted">International Bank</type>
+            <type source="trusted">Retail Bank</type>
+            <type source="trusted">Trade Finance</type>
+            <type source="zeus">Brokerage Firm</type>
+            <type source="zeus">ATM Network</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Bank of Taiwan</value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>Collins</value>
+            </name>
+            <legalEntitySortKey>BANK OF TAIWAN</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1899-01-01</established>
+            <chartered accuracy="year">1899-01-01</chartered>
+        </dates>
+        <numberOfGroupBanks>1</numberOfGroupBanks>
+        <leadInstitution>false</leadInstitution>
+        <additionalInfos>
+            <additionalInfo>abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345abcde12345</additionalInfo>
+        </additionalInfos>
+        <trust>
+        </trust>
+        <boardMeetings>
+            <meeting>
+                <periodType>month</periodType>
+                <value>9</value>
+            </meeting>
+        </boardMeetings>
+        <identifiers>
+            <identifier>
+                <type>S and P Identification Number (SPID)</type>
+                <value>303191</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>RegistrationNo</type>
+                <value>03557311</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>The Global Markets Entity Identifier (GMEI)</type>
+                <value>549300QBHSCPTZ7YV010</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <services>
+        <service>
+            <category>Bills of Exchange</category>
+        </service>
+        <service>
+            <category>Capital Markets</category>
+        </service>
+        <service>
+            <category>Corporate Finance</category>
+        </service>
+        <service>
+            <category>Correspondent Banking</category>
+        </service>
+        <service>
+            <category>Documentary Credits</category>
+        </service>
+        <service>
+            <category>Factoring</category>
+        </service>
+        <service>
+            <category>Finance</category>
+        </service>
+        <service>
+            <category>Guarantees</category>
+        </service>
+        <service>
+            <category>Letters of Credit</category>
+        </service>
+        <service>
+            <category>Money Markets</category>
+        </service>
+        <service>
+            <category>Syndicated Loans</category>
+        </service>
+        <service>
+            <category>Underwriting</category>
+        </service>
+        <service>
+            <category>Offshore Services</category>
+        </service>
+        <service>
+            <category>Internet Banking</category>
+        </service>
+        <service>
+            <category>Lines of Credit - Personal</category>
+        </service>
+        <service>
+            <category>Lines of Credit - Business</category>
+        </service>
+        <service>
+            <category>Savings Accounts - Personal</category>
+        </service>
+        <service>
+            <category>Savings Accounts - Specialty</category>
+        </service>
+        <service>
+            <category>Unsecured Loans - Personal</category>
+        </service>
+        <service>
+            <category>Unsecured Loans - Commercial</category>
+        </service>
+        <service>
+            <category>Foreign Exchange</category>
+        </service>
+    </services>
+    <locations>
+        <summaries>
+            <summary type="BranchSummary">test</summary>
+        </summaries>
+        <headOffice>
+            <link href="/office/id/b1e43864-a0db-440d-98ce-06a63e4cb379" rel="src"/>
+
+        </headOffice>
+    </locations>
+    <personnel>
+        <summaries>
+            <summary type="InstitutionEmployees">8094</summary>
+        </summaries>
+    </personnel>
+    <creditRatings>
+        <rating>
+            <agencyName>Capital Intelligence</agencyName>
+            <type>Long Term Rating</type>
+            <value>A</value>
+            <dateApplied accuracy="day">2014-12-05</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Moody's</agencyName>
+            <type>Short Term Rating</type>
+            <value>P-1</value>
+            <dateApplied accuracy="day">2007-05-09</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Short Term Rating</type>
+            <value>A-1</value>
+            <dateApplied accuracy="day">1999-09-16</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Capital Intelligence</agencyName>
+            <type>Short Term Rating</type>
+            <value>A1</value>
+            <dateApplied accuracy="day">2014-12-05</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Moody's</agencyName>
+            <type>Long Term Rating</type>
+            <value>Aa3</value>
+            <dateApplied accuracy="day">2007-05-09</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Long Term Rating</type>
+            <value>A+</value>
+            <dateApplied accuracy="day">1999-09-16</dateApplied>
+        </rating>
+    </creditRatings>
+    <relatedPresences>
+        <relation>
+            <link href="/relationship/id/3cd06f60-f4ce-4e09-937a-fa6ec4b56e38" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/e6710da5-2615-4e5c-ba57-376a32fb6381" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/331fce8d-1aec-4fb6-88ae-9e89a59d6757" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/c0734a47-2b92-4fc9-8023-ac124026f777" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/4d391e41-59ab-4188-bf77-6b70c2954806" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/9854b92d-a539-429f-aa7b-0b987a6e1761" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/b0e0caf9-7402-4427-aa7f-7d19304095ce" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/72234e17-467d-4bcb-b54d-ec8b46e87a97" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/456c20bd-75a6-4e8e-bf0b-d8986ae1b5c5" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/de85c435-ee0e-4120-b3bb-e114874edc04" rel="src"/>
+
+        </relation>
+    </relatedPresences>
+    <audit>
+        <comments>
+            <comment type="Ownership comment">GSC3 BA
+                10/97</comment>
+            <comment type="Subsidiary comment">GSC3 BA
+                10/97</comment>
+        </comments>
+    </audit>
+    <history>
+        <summaries>
+            <summary>Established 1899 and reorganised in 1946. On July
+                1, 2000 Bank of Taiwan (South Africa) Ltd became a
+                branch of the above. On July 1, 2007 Central Trust
+                of China (Est. 1935) merged into the
+                above</summary>
+        </summaries>
+    </history>
+</legalEntity>

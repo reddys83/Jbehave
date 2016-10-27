@@ -1,0 +1,271 @@
+<legalEntity deleted="false" fid="1717" id="3f6ec391-3f19-4aa0-967e-ee04f329e8af" resource="/legalEntity/id/3f6ec391-3f19-4aa0-967e-ee04f329e8af" source="trusted" tfpid="20205500">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/b6d347a7-3adb-45e5-9492-3709a2041306" rel="src"/>
+
+        </countryOfOperations>
+        <organisationType>Mutual Bank</organisationType>
+        <charterType>State</charterType>
+        <legalEntityType>Co-operative Bank</legalEntityType>
+        <types>
+            <type source="FDB">Bank</type>
+            <type source="FDB">Co-operative Bank</type>
+            <type source="FDB">Commercial Bank</type>
+            <type source="FDB">Regional Bank</type>
+            <type source="TFP">Cooperative</type>
+            <type source="TFP">Cooperative Bank</type>
+            <type source="zeus">Association</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Berliner Volksbank eG</value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>Berliner Volksbank (West) eG</value>
+            </name>
+            <legalEntitySortKey>BERLINER VOLKSBANK EG</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="day">1950-08-10</established>
+            <chartered accuracy="day">1860-05-01</chartered>
+        </dates>
+        <numberOfGroupBanks>1</numberOfGroupBanks>
+        <numberOfCreditUnionMembers>0</numberOfCreditUnionMembers>
+        <corporateStatement>LAN: CORPORATE STATEMENT</corporateStatement>
+        <additionalInfos>
+            <additionalInfo>LAN: DEBUGGING..</additionalInfo>
+        </additionalInfos>
+        <trust>
+        </trust>
+        <boardMeetings>
+            <summaries>
+                <summary>Stock Exchange Interim Entity Identifier
+                </summary>
+            </summaries>
+            <meeting>
+                <periodType>month</periodType>
+                <value>1</value>
+            </meeting>
+        </boardMeetings>
+        <identifiers>
+            <identifier>
+                <type>OTS</type>
+                <value>529900T7MYZUMMW4O176</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>Global Intermediary Identification Number</type>
+                <value>79FZP1.99999.SL.276</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>S and P Identification Number (SPID)</type>
+                <value>403430</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>RegistrationNo</type>
+                <value>GnR 23</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>Fitch ID</type>
+                <value>82411946</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>US Tax ID</type>
+                <value>Lan Testing8</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>China Legal Entity Identifier System</type>
+                <value>Lan 2016-06-15</value>
+                <status>inactive</status>
+            </identifier>
+            <identifier>
+                <type>WM Datenservice General Entity Identifier (GEI)</type>
+                <value>529900T7MYZUMMW4O176</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <services>
+        <service>
+            <category>Bills of Exchange</category>
+        </service>
+        <service>
+            <category>Bonds</category>
+        </service>
+        <service>
+            <category>Capital Markets</category>
+        </service>
+        <service>
+            <category>Corporate Finance</category>
+        </service>
+        <service>
+            <category>Debentures</category>
+        </service>
+        <service>
+            <category>Documentary Credits</category>
+        </service>
+        <service>
+            <category>Factoring</category>
+        </service>
+        <service>
+            <category>Foreign Exchange</category>
+        </service>
+        <service>
+            <category>Guarantees</category>
+        </service>
+        <service>
+            <category>International Settlements</category>
+        </service>
+        <service>
+            <category>Letters of Credit</category>
+        </service>
+        <service>
+            <category>Money Markets</category>
+        </service>
+        <service>
+            <category>Portfolio Management</category>
+        </service>
+        <service>
+            <category>Real Estate</category>
+        </service>
+        <service>
+            <category>Risk Insurance</category>
+        </service>
+        <service>
+            <category>Offshore Services</category>
+        </service>
+        <service>
+            <category>Internet Banking</category>
+        </service>
+        <service>
+            <category>Financial Futures</category>
+        </service>
+        <service>
+            <category>Financial Advisory - Personal</category>
+        </service>
+        <service>
+            <category>Financial Advisory - Corporate</category>
+        </service>
+        <service>
+            <category>Financial Advisory - Institutional</category>
+        </service>
+        <service>
+            <category>Home Equity Lines of Credit</category>
+        </service>
+        <service>
+            <category>Home Equity Loans (2nd and 3rd mortgages)</category>
+        </service>
+        <service>
+            <category>Lines of Credit - Personal</category>
+        </service>
+        <service>
+            <category>Lines of Credit - Business</category>
+        </service>
+        <service>
+            <category>Mortgages</category>
+        </service>
+        <service>
+            <category>Savings Accounts - Personal</category>
+        </service>
+        <service>
+            <category>Savings Accounts - Specialty</category>
+        </service>
+        <service>
+            <category>Unsecured Loans - Personal</category>
+        </service>
+        <service>
+            <category>Unsecured Loans - Commercial</category>
+        </service>
+        <service>
+            <category>Asset Management</category>
+        </service>
+    </services>
+    <financialServices>
+        <financialService>
+            <category>Consumer Credit</category>
+            <detail>Mastercard</detail>
+        </financialService>
+    </financialServices>
+    <locations>
+        <summaries>
+            <summary type="NumberOfBranches">100</summary>
+            <summary type="BranchSummary">100</summary>
+        </summaries>
+        <headOffice>
+            <link href="/office/id/9bf66246-0151-4fe0-ab45-0da85e46f489" rel="src"/>
+
+        </headOffice>
+    </locations>
+    <ownership>
+        <summaries>
+            <summary type="replacement">Co-operative Banking Society with over 103,500 shareholders</summary>
+        </summaries>
+    </ownership>
+    <personnel>
+        <summaries>
+            <summary type="InstitutionEmployees">2500</summary>
+        </summaries>
+    </personnel>
+    <creditRatings>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Rating</type>
+            <value>AA-</value>
+            <dateApplied accuracy="day">2015-04-15</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Short Term Rating</type>
+            <value>F1+</value>
+            <dateApplied accuracy="day">2015-04-15</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Long Term Rating</type>
+            <value>AA-</value>
+            <dateApplied accuracy="day">2012-01-12</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Short Term Rating</type>
+            <value>A-1+</value>
+            <dateApplied accuracy="day">2012-01-12</dateApplied>
+        </rating>
+    </creditRatings>
+    <history>
+        <summaries>
+            <summary>Established 1860. In July, 1989 name changed as above. In December 1990 merged with Berliner Volksbank (East). On September 2, 1996 Raiffeisenbank eG Zehdenick merged into the above. On July 14, 1998 Raiffeisenbank Oranienburg eG merged into the above. On July 14, 1999 merged with Grundkreditbank eG - Köpenicker Bank</summary>
+        </summaries>
+    </history>
+    <relatedPresences>
+        <relation>
+            <link href="/relationship/id/bcd15b4f-e1f9-4320-b67b-f955ff495931" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/23de8b5a-c294-404d-aa99-0624095643a5" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/5b5a8e8e-6e22-4ae6-862d-0f8087a06f55" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/064f3513-7146-4ba6-ae27-772c930254f8" rel="src"/>
+
+        </relation>
+    </relatedPresences>
+    <audit>
+        <comments>
+            <comment type="Due Diligence">REFUSAL - Aug 2006 - Alice advised (NR)</comment>
+        </comments>
+    </audit>
+</legalEntity>

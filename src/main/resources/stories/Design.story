@@ -1,4 +1,5 @@
-Meta:@Desig
+Meta:@Design
+
 
 
 Scenario: verify the routingCode search results with EXACT MATCH
@@ -13,6 +14,8 @@ Examples:
 |entity|searchBy|
 |001|Routing Code|
 |00!@#$%^&*(6|Routing Code|
+|qa|Routing Code|
+
 
 Scenario: Verify error message for atlease two characters
 Given a user is on the search page
@@ -46,39 +49,18 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for <entity> routingCode
-When the user clicks on 186-99 in the routing search results
+When the user clicks on <fid> in the routing search results
 
 Then the user should see the basic info for selected office
 Then the user should see the office names for <officeFid> in the office basic info
 
 Examples:
-|entity|searchBy|officeFid|
+|entity|searchBy|fid|
 |01065|Routing Code|186-99|
 
 
 Scenario: Verify the FID navigate to legalEntity in routing Code search results
 Case 1: When routingCode does not have any usageLocations
-Given a user is on the search page
-When the user clicks on the results tab
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-Then the user should see the search results for <entity> routingCode
-When the user clicks on 494 in the routing search results
-
-Then the user should see the basic info label for selected legal entity
-
-And the user should see the legal entity's names as:
-|TYPE|VALUE|
-|Legal Title|Banco Central de Venezuela|
-|Marketing Name|BCV|
-
-Examples:
-|entity|searchBy|
-|001|Routing Code|
-
-
-Scenario: Verify the FID navigate to legalEntity in routing Code search results
 Case 2: When routingCode had usageLocation @primaryAssignee= 'false'
 Given a user is on the search page
 When the user clicks on the results tab
@@ -86,19 +68,15 @@ When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 Then the user should see the search results for <entity> routingCode
-When the user clicks on 4275 in the routing search results
+When the user clicks on <fid> in the routing search results
 
 Then the user should see the basic info label for selected legal entity
-
-And the user should see the legal entity's names as:
-|TYPE|VALUE|
-|Legal Title|Standard Chartered Bank|
-|Former Name|First Interstate International of California - Miami|
+And the user should see the legalEntity names for <fid> in the legalEntity basic info
 
 Examples:
-|entity|searchBy|
-|001|Routing Code|
-
+|entity|searchBy|fid|
+|001|Routing Code|494|
+|001|Routing Code|4275|
 
 Scenario: verify the routingCode search results with country filter
 Given a user is on the search page
@@ -131,17 +109,6 @@ And the user applied the type filter as:
 |HNRN4|
 |CLRN|
 
-Scenario: User is updating a City's Basic Info and has set values for each of 'Country', 'Area' and 'Sub Area
-1 - User adds two sub areas and verify Zeus DB is updating with two sub area
-
-Given a user is on the search page
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
-And the user clicks on the routingCode usages link in the navigation bar
-Then the user should see the usages for routingCode <routingCode> and code type <codeType>
-
 Then the user should see the routingCode search results for selected type as:
 |Type|
 |HNRN4|
@@ -164,4 +131,5 @@ Then the user should see the routing code search results for active status
 Examples:
 |entity|searchBy|
 |001|Routing Code|
+
 

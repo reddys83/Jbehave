@@ -1,0 +1,190 @@
+<legalEntity deleted="false" fid="3125" id="61d4ce12-71a7-4a78-a8f8-5d72e846c82f" resource="/legalEntity/id/61d4ce12-71a7-4a78-a8f8-5d72e846c82f" source="trusted" stub="true" tfpid="21083600">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/b6d347a7-3adb-45e5-9492-3709a2041306" rel="src"/>
+
+        </countryOfOperations>
+        <fatcaStatus>Registered Deemed Compliant FFI (Including a Reporting Financial Institution under a Model 1 IGA)</fatcaStatus>
+        <legalEntityType>Savings Bank</legalEntityType>
+        <types>
+            <type source="FDB">Bank</type>
+            <type source="FDB">Commercial Bank</type>
+            <type source="FDB">Investment Bank</type>
+            <type source="FDB">Savings Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Kreissparkasse Göppingen</value>
+            </name>
+            <legalEntitySortKey>KREISSPARKASSE GÖPPINGEN</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1846-07-01</established>
+            <chartered accuracy="year">1846-07-01</chartered>
+        </dates>
+        <identifiers>
+            <identifier transferable="false">
+                <type>Global Intermediary Identification Number</type>
+                <value>YZVETF.99999.SL.276</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>WM Datenservice General Entity Identifier (GEI)</type>
+                <value>52990051JDPDRCH81306</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>RegistrationNo</type>
+                <value>HRA 531783</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>Fitch ID</type>
+                <value>89747953</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <services>
+        <service>
+            <category>Asset Management</category>
+        </service>
+        <service>
+            <category>Bills of Exchange</category>
+        </service>
+        <service>
+            <category>Bonds</category>
+        </service>
+        <service>
+            <category>Capital Markets Advisory</category>
+        </service>
+        <service>
+            <category>Capital Markets</category>
+        </service>
+        <service>
+            <category>Corporate Finance</category>
+        </service>
+        <service>
+            <category>Correspondent Banking</category>
+        </service>
+        <service>
+            <category>Debentures</category>
+        </service>
+        <service>
+            <category>Documentary Credits</category>
+        </service>
+        <service>
+            <category>Equity Investments</category>
+        </service>
+        <service>
+            <category>Factoring</category>
+        </service>
+        <service>
+            <category>Foreign Exchange</category>
+        </service>
+        <service>
+            <category>Guarantees</category>
+        </service>
+        <service>
+            <category>International Settlements</category>
+        </service>
+        <service>
+            <category>Investment Banking</category>
+        </service>
+        <service>
+            <category>Letters of Credit</category>
+        </service>
+        <service>
+            <category>Merchant Banking</category>
+        </service>
+        <service>
+            <category>Mergers and Acquisitions</category>
+        </service>
+        <service>
+            <category>Money Markets</category>
+        </service>
+        <service>
+            <category>Portfolio Management</category>
+        </service>
+        <service>
+            <category>Real Estate</category>
+        </service>
+        <service>
+            <category>Internet Banking</category>
+        </service>
+        <service>
+            <category>Financial Futures</category>
+        </service>
+        <service>
+            <category>Financial Advisory - Personal</category>
+        </service>
+        <service>
+            <category>Financial Advisory - Corporate</category>
+        </service>
+        <service>
+            <category>Financial Advisory - Institutional</category>
+        </service>
+        <service>
+            <category>Home Equity Lines of Credit</category>
+        </service>
+        <service>
+            <category>Lines of Credit - Personal</category>
+        </service>
+        <service>
+            <category>Lines of Credit - Business</category>
+        </service>
+        <service>
+            <category>Mortgages</category>
+        </service>
+        <service>
+            <category>Mortgage Backed Securities</category>
+        </service>
+        <service>
+            <category>Savings Accounts - Personal</category>
+        </service>
+        <service>
+            <category>Savings Accounts - Specialty</category>
+        </service>
+    </services>
+    <locations>
+        <summaries>
+            <summary type="NumberOfBranches">76</summary>
+        </summaries>
+    </locations>
+    <ownership>
+        <summaries>
+            <summary type="replacement">Office of the District President Göppingen</summary>
+        </summaries>
+    </ownership>
+    <personnel>
+        <summaries>
+            <summary type="InstitutionEmployees">1193</summary>
+        </summaries>
+    </personnel>
+    <creditRatings>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Rating</type>
+            <value>A+</value>
+            <dateApplied accuracy="day">2015-04-15</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Short Term Rating</type>
+            <value>F1+</value>
+            <dateApplied accuracy="day">2015-04-15</dateApplied>
+        </rating>
+    </creditRatings>
+    <history>
+        <summaries>
+            <summary>Established 1846</summary>
+        </summaries>
+    </history>
+    <audit>
+        <comments>
+            <comment type="Due Diligence">ANN D 01 (HC) - No page numbers. 4 pgs in total. 22/03/2005 KB  ///</comment>
+        </comments>
+    </audit>
+</legalEntity>
