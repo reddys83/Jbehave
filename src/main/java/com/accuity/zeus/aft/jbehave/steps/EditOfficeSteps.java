@@ -1697,7 +1697,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	
 	@Then("the user should not see the newly added summary row in the office locations page")
 	public void verifyLocationsSummaryRowNotDisplayed() {
-		getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_summary_row_view_mode"), false);
+		getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_existing_summary_rows_view_mode"), false);
 	}
 	
 	@Then("the user verifies that no values are entered in $source document for office locations summary")
@@ -1749,7 +1749,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	
 	@Then("the user verifies that previously selected <type> is not present in the new office locations summary row")
 	public void verifySelectedOfficeLocationsSummaryTypeNotInNewRow(@Named("type") String type) {
-		getEditOfficePage().verifySelectedTypeNotInNewRow(type, 2, OfficeIdentifiers.getObjectIdentifier("office_edit_locations_summary_type_dropdown"));
+		getDataPage().verifySelectedTypeNotInNewRow(type, 2, OfficeIdentifiers.getObjectIdentifier("office_edit_locations_summary_type_dropdown"));
 	}
 	
 	@Then("the user should see the error message $errorMessage for type field in the office locations summary page")

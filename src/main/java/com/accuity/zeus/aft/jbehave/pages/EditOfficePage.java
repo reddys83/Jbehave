@@ -1426,7 +1426,7 @@ public class EditOfficePage extends AbstractPage {
 	}
 
 
-	public void verifySelectedTypeNotInNewRow(String selectedType, int rowNumber, By by) {
+	private void verifySelectedTypeNotInNewRow(String selectedType, int rowNumber, By by) {
 		try {
 			List<WebElement> typeDropDowns = getDriver().findElements(by);
 			if (rowNumber <= typeDropDowns.size()) {
@@ -2171,10 +2171,12 @@ public class EditOfficePage extends AbstractPage {
 	}
 	
 	public void verifyOfficeLocationsSummaryParametersInUI(String[] summaryTypes, String[] summaryValues) {		
-		List<WebElement> summaryRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_summary_row_view_mode"));	
-		for (int i = 0; i < summaryRows.size(); i++) {
-			assertTrue(summaryRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(summaryTypes[i]));
-			assertTrue(summaryRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(summaryValues[i]));
+		List<WebElement> summaryRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_locations_summary_row_view_mode"));
+		assertTrue(summaryRows.get(0).findElements(By.tagName("th")).get(0).getText().contains("TYPE"));
+		assertTrue(summaryRows.get(0).findElements(By.tagName("th")).get(1).getText().contains("VALUE"));
+		for (int i = 1; i < summaryRows.size(); i++) {
+			assertTrue(summaryRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(summaryTypes[i-1]));
+			assertTrue(summaryRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(summaryValues[i-1]));
 		}
 	}
 	

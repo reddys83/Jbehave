@@ -18,6 +18,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.springframework.http.ResponseEntity;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
@@ -1511,6 +1512,20 @@ public class DataPage extends AbstractPage {
 		List<WebElement> options = dropDownFieldList.get(0).findElements(By.cssSelector("option"));
 		for (int indexOfOption = 0; indexOfOption < options.size(); indexOfOption++) {
 			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getTextContent(), options.get(indexOfOption).getText().trim());
+		}
+	}
+	
+	public void verifySelectedTypeNotInNewRow(String selectedDropDownValue, int rowNumber, By by) {
+		try {
+			List<WebElement> dropDownList = getDriver().findElements(by);
+			if (rowNumber <= dropDownList.size()) {
+				Select dropdown = new Select(dropDownList.get(rowNumber - 1));
+				for (int index = 0; index < dropdown.getOptions().size(); index++) {
+					assertTrue(!dropdown.getOptions().get(index).getText().contains(selectedDropDownValue));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

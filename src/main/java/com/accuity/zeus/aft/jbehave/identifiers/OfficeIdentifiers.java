@@ -238,11 +238,11 @@ public class OfficeIdentifiers {
 	    hmap.put("office_edit_locations_summary_value", By.xpath("//*[@id='additionalLocationSummaries']//*[@data-internal_id='locationSummaryValue']"));
 	    hmap.put("office_delete_locations_summary_row", By.xpath("//*[@data-row_id='locationSummaries']//*[@class='delete-element']"));
 	    hmap.put("office_locations_summary_row_edit_mode", By.xpath("//*[@id='additionalLocationSummaries']"));
-	    hmap.put("office_locations_summary_row_view_mode", By.xpath("//*[@id='officeLocations']/table/tbody/tr"));
+	    hmap.put("office_locations_summary_row_view_mode", By.xpath(".//*[@id='officeLocations']//h2[contains(text(), 'Summary')]/following-sibling::table//tr"));
 	    hmap.put("office_locations_summary_value_error_msg", By.xpath("//*[@data-error_id='locationSummaryValueError'][@class='notification error']"));
 	    hmap.put("office_locations_summary_type_error_msg", By.xpath("//*[@data-error_id='locationSummaryTypeError'][@class='notification error']"));
 	    hmap.put("office_locations_summary_delete_row_button", By.xpath("//*[@id='additionalLocationSummaries']//*[@class='delete-element']"));
-	    
+	    hmap.put("office_locations_existing_summary_rows_view_mode", By.xpath(".//*[@id='officeLocations']//h2[contains(text(), 'Summary')]/following-sibling::table/tbody/tr"));
     }
 
     public static By getObjectIdentifier(String key) {
