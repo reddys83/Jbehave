@@ -165,50 +165,48 @@ public class RoutingCodeSteps extends AbstractSteps {
 		if (routingCodePage == null) {
 			routingCodePage = getRoutingCodePage().createRoutingCodePage();
 		}
-	
 		getRoutingCodePage().verifyHistoryEventColumnNames();
 	}
 
 	@When("the user clicks on the history link in the navigation bar")
 	public void clickOnRoutingCodeLink() {
-		 getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_navigation_link"));
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_navigation_link"));
 	}
-	
-	@Then("the user clicks on the eye icon in first row")
+
+	@When("the user clicks on the eye icon in first row")
 	public void clickOnEyeIcon() {
-		
 		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"));
 	}
-	
+
 	@Then("the user clicks on the eye icon in second row")
 	public void clickOnEyeIcon2() {
-		
-		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon_secondRow"));
+		getDataPage()
+				.attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon_secondRow"));
 	}
-	
+
 	@Then("the user should verify the column names in history usage")
 	public void verifyHistoryUsageColumnNames() {
 		getRoutingCodePage().verifyHistoryUsageColumnNames();
 		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"));
+		getDataPage()
+				.attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon_secondRow"));
 	}
-	//
-	
 
 	@Then("the user should see the history field values same as in $source document")
-	public void verifyHistoryValuesFromZeus(@Named("routingCode") String routingCode, @Named("codeType") String codeType,@Named("source") String source) {
-	
+	public void verifyHistoryValuesFromZeus(@Named("routingCode") String routingCode,
+			@Named("codeType") String codeType, @Named("source") String source) {
 		getRoutingCodePage().verifyHistoryValuesFromZeus(routingCode, codeType, source);
-
 	}
-	
+
 	@When("the user deletes the existing history values")
-	public void deleteExistingHistoryValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType) {
-		
+	public void deleteExistingHistoryValues(@Named("routingCode") String routingCode,
+			@Named("codeType") String codeType) {
 		getRoutingCodePage().deleteExistingHistoryValues(routingCode, codeType);
 	}
-	
+
 	@When("the user inserts new history values")
-	public void insertHistoryValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType) throws InterruptedException {
+	public void insertHistoryValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType)
+			throws InterruptedException {
 		getRoutingCodePage().insertHistoryValues(routingCode, codeType);
 		getDataPage().refreshThePage();
 		Thread.sleep(5000L);
