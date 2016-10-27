@@ -1707,7 +1707,7 @@ public class EditOfficeSteps extends AbstractSteps{
 		List<String> summaryValues = new ArrayList<>();
 		summaryTypes.add(type);
 		summaryValues.add(value);
-		if (type.equals("") && value.equals("")) {
+		if (type.isEmpty() && value.isEmpty()) {
 			getEditOfficePage().verifyOfficeLocationsSummaryRowNotPresentInZeusDB(source, officeFid);
 		} else {
 			getEditOfficePage().verifyLocationsSummaryValuesFromDB(source, officeFid, summaryTypes, summaryValues);
@@ -1747,7 +1747,7 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyOfficeIdentifierParametersInUI(@Named("type") String type, @Named("value") String value) {
 		String[] summaryTypes = { type };
 		String[] summaryValues = { value };
-		if(type.equals("") && value.equals("")) {
+		if(type.isEmpty() && value.isEmpty()) {
 			getDataPage().verifyRowIsDisplayed(OfficeIdentifiers.getObjectIdentifier("office_locations_existing_summary_rows_view_mode"), false);
 		} else {
 			getEditOfficePage().verifyOfficeLocationsSummaryParametersInUI(summaryTypes, summaryValues);
