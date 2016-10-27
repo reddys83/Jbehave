@@ -5,6 +5,7 @@ In order to view and edit the office
 As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-1134 - User can view Routing Code Basic Info
+JIRA ID - ZEUS-1479 - User can hyperlink from Routing Code Search Results to Routing Code Basic Info screen
 
 Scenario: Verify the basic info for a routing code of type ABA
 Verify the headers and the legal entity link on the header
@@ -40,3 +41,23 @@ And the user should see the routing code basic info values from trusted document
 Examples:
 |entity|searchBy|routingCode|codeType|
 |01056|Routing Code|01056|Swift BIC|
+
+Scenario: User is viewing the results of a routing code search - 
+1 - User selects the 'code' value which is a hyperlink in the routing code search results row.
+2 - Verify that the page is redirected to Routing Code's basic info page.
+3 - Verify that the following menus are available in the sidebar.
+    (ALL, BASIC INFO, PAYMENT SYSTEMS, RELATED CODES, USAGES, FORMER USAGES, HISTORY) 
+    
+Given a user is on the search page
+When the user selects the <searchBy> from the dropdown
+When the user enters the <entity> in the typeahead
+And the user clicks on the search button
+Then the user should see the View Routing Code tooltip on routing code results page
+Then the user should see the View Office tooltip on routing code search results page
+When the user clicks on the code value hyperlink on the search results card with routing code <routingCode> and code type <codeType>
+Then the user should see the routing code basic info page
+Then the user should see all the routing code menus in the sidebar
+
+Examples:
+|entity|searchBy|routingCode|codeType|
+|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|    

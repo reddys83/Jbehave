@@ -1,0 +1,21 @@
+<legalEntity deleted="false" fid="271690" id="af10f70c-91d4-4ad5-aaac-ef5a821d90f8" resource="/legalEntity/id/af10f70c-91d4-4ad5-aaac-ef5a821d90f8" source="trusted">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/5c776cfd-10a7-455a-ad4c-a4bd57139350" rel="src"/>
+        </countryOfOperations>
+        <legalEntityType>Unknown</legalEntityType>
+        <types>
+            <type source="trusted">Financial Service Company</type>
+            <type source="trusted">Subsidiary - Unspecified</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Collins Stewart Europe Limited</value>
+            </name>
+            <legalEntitySortKey>COLLINS STEWART EUROPE LIMITED</legalEntitySortKey>
+        </names>
+        <creditUnionShareDraftFlag>false</creditUnionShareDraftFlag>
+    </summary>
+</legalEntity>

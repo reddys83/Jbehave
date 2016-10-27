@@ -1,0 +1,160 @@
+<legalEntity deleted="false" fid="1706" id="f28e172a-d547-4b8f-bc0c-3b2261d75f84" resource="/legalEntity/id/f28e172a-d547-4b8f-bc0c-3b2261d75f84" source="trusted" stub="true" tfpid="20048900">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/ae5484b9-d67e-4007-80b6-8bc56296c4d2" rel="src"/>
+
+        </countryOfOperations>
+        <organisationType>Joint Stock Bank</organisationType>
+        <fatcaStatus>Participating FFI</fatcaStatus>
+        <legalEntityType>Bank</legalEntityType>
+        <types>
+            <type source="FDB">Bank</type>
+            <type source="FDB">Commercial Bank</type>
+            <type source="FDB">Investment Bank</type>
+            <type source="TFP">Joint Stock Company</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Belvnesheconombank Open Joint Stock Company</value>
+            </name>
+            <name>
+                <type>FDB Alternative Name</type>
+                <value>Bank BelVEB OJSC</value>
+            </name>
+            <legalEntitySortKey>BELVNESHECONOMBANK OPEN JOINT STOCK COMPANY</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1991-07-01</established>
+            <chartered accuracy="year">1991-07-01</chartered>
+        </dates>
+        <boardMeetings>
+            <meeting>
+                <periodType>month</periodType>
+                <value>03</value>
+            </meeting>
+        </boardMeetings>
+        <identifiers>
+            <identifier transferable="false">
+                <type>National Settlement Depository (LEIRU)</type>
+                <value>25340038P8SYW80B9W34</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>Global Intermediary Identification Number</type>
+                <value>8KIFHY.00001.ME.112</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>RegistrationNo</type>
+                <value>24</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>Fitch ID</type>
+                <value>88222256</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <services>
+        <service>
+            <category>Bills of Exchange</category>
+        </service>
+        <service>
+            <category>Bonds</category>
+        </service>
+        <service>
+            <category>Capital Markets Advisory</category>
+        </service>
+        <service>
+            <category>Capital Markets</category>
+        </service>
+        <service>
+            <category>Commercial Banking</category>
+        </service>
+        <service>
+            <category>Corporate Finance</category>
+        </service>
+        <service>
+            <category>Correspondent Banking</category>
+        </service>
+        <service>
+            <category>Foreign Exchange</category>
+        </service>
+        <service>
+            <category>Guarantees</category>
+        </service>
+        <service>
+            <category>International Settlements</category>
+        </service>
+        <service>
+            <category>Investment Banking</category>
+        </service>
+        <service>
+            <category>Letters of Credit</category>
+        </service>
+        <service>
+            <category>Money Markets</category>
+        </service>
+        <service>
+            <category>Underwriting</category>
+        </service>
+        <service>
+            <category>Internet Banking</category>
+        </service>
+    </services>
+    <locations>
+        <summaries>
+            <summary type="NumberOfBranches">23</summary>
+        </summaries>
+    </locations>
+    <personnel>
+        <summaries>
+            <summary type="InstitutionEmployees">2294</summary>
+        </summaries>
+    </personnel>
+    <creditRatings>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Rating</type>
+            <value>B-</value>
+            <dateApplied accuracy="day">2015-04-15</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Short Term Rating</type>
+            <value>B</value>
+            <dateApplied accuracy="day">2015-04-15</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Long Term Rating</type>
+            <value>B-</value>
+            <dateApplied accuracy="day">2011-11-01</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Short Term Rating</type>
+            <value>C</value>
+            <dateApplied accuracy="day">2011-11-01</dateApplied>
+        </rating>
+    </creditRatings>
+    <history>
+        <summaries>
+            <summary>Established 1991. On March 1, 2001 Belkoopbank merged into the above</summary>
+        </summaries>
+    </history>
+    <audit>
+        <comments>
+            <comment type="Ownership comment">GSC4 - 07-01-98 NKS</comment>
+            <comment type="Subsidiary comment">GSC4 - 07-01-98 NKS</comment>
+        </comments>
+    </audit>
+    <sanctions>
+        <sanction>
+            <listName>HM Treasury Enhancements List</listName>
+        </sanction>
+    </sanctions>
+</legalEntity>

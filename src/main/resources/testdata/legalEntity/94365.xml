@@ -1,0 +1,46 @@
+<legalEntity deleted="false" fid="94365" id="955005eb-6b39-4f6d-b242-37dd704a8cd2" resource="/legalEntity/id/955005eb-6b39-4f6d-b242-37dd704a8cd2" source="trusted">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+
+        </countryOfOperations>
+        <legalEntityType>Unknown</legalEntityType>
+        <types>
+            <type source="trusted">Dealer/Broker/Brokerage</type>
+            <type source="trusted">Securities Company</type>
+            <type source="trusted">Subsidiary - Unspecified</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>MBSC Securities Corporation</value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>Dreyfus Service Corporation</value>
+            </name>
+            <legalEntitySortKey>MBSC SECURITIES CORPORATION</legalEntitySortKey>
+        </names>
+        <creditUnionShareDraftFlag>false</creditUnionShareDraftFlag>
+        <identifiers>
+            <identifier transferable="true">
+                <type>RSSD</type>
+                <value>2243221</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <locations>
+        <headOffice>
+            <link href="/office/id/2575aed8-9d46-4a5c-943c-30cc98cad535" rel="src"/>
+
+        </headOffice>
+    </locations>
+    <history>
+        <summaries>
+            <summary>On June 30, 2007 Mellon Funds Distributor LP and MBSC LLC merged into Dreyfus Service Corporation and name changed as above. On December 1, 2009 Founders Asset Management LLC merged into the above</summary>
+            <summary>Summary 2nd line</summary>
+        </summaries>
+    </history>
+</legalEntity>

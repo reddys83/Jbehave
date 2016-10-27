@@ -1,0 +1,198 @@
+<legalEntity deleted="false" fid="1010" id="4a77cec3-529a-405b-bae9-b9b377fac255" resource="/legalEntity/id/4a77cec3-529a-405b-bae9-b9b377fac255" source="trusted" tfpid="10383620">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </countryOfOperations>
+        <organisationType>Holding Bank</organisationType>
+        <charterType>New York State Chartered Bank</charterType>
+        <insuranceType>FDIC-BIF</insuranceType>
+        <fatcaStatus>true</fatcaStatus>
+        <legalEntityType>Bank</legalEntityType>
+        <types>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Commercial Bank</type>
+            <type source="trusted">Private Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Bank Leumi USA</value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>Bank Leumi Trust Company of New York</value>
+            </name>
+            <legalEntitySortKey>BANK LEUMI USA</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1968-01-01</established>
+            <chartered accuracy="year">1968-01-01</chartered>
+        </dates>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+        <numberOfCreditUnionMembers>0</numberOfCreditUnionMembers>
+        <leadInstitution>true</leadInstitution>
+        <additionalInfos>
+            <additionalInfo type="MemberOf">Ultimate Parent Company: Bank Leumi le-Israel BM, 24-32
+                Yehuda Halevi Street, Tel Aviv 65546 Israel</additionalInfo>
+        </additionalInfos>
+        <trust>
+            <powersGranted>true</powersGranted>
+            <powersFull>false</powersFull>
+            <powersUsed>true</powersUsed>
+            <employees>
+                <administrative>12345678</administrative>
+            </employees>
+            <minAccountSize>1234567890</minAccountSize>
+        </trust>
+        <boardMeetings>
+            <summaries>
+                <summary>hallo</summary>
+            </summaries>
+        </boardMeetings>
+        <identifiers>
+            <identifier>
+                <type>OCC</type>
+                <value>Z01RQ8BXBEV51Q8XKV43</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>US Tax ID</type>
+                <value>13-2614394</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>The Global Markets Entity Identifier (GMEI)</type>
+                <value>Z01RQ8BXBEV51Q8XKV43</value>
+                <status>active</status>
+            </identifier>
+            <identifier>
+                <type>FDIC</type>
+                <value>19842</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <services>
+        <service>
+            <category>Letters of Credit</category>
+        </service>
+        <service>
+            <category>Portfolio Management</category>
+        </service>
+        <service>
+            <category>Private Banking</category>
+        </service>
+        <service>
+            <category>Real Estate</category>
+        </service>
+        <service>
+            <category>Trade Finance</category>
+        </service>
+        <service>
+            <category>Brokerage</category>
+        </service>
+        <service>
+            <category>Cash Services</category>
+            <customDescription>Cash Management</customDescription>
+        </service>
+        <service>
+            <category>Asset Management</category>
+            <customDescription>Wealth Management</customDescription>
+        </service>
+        <service>
+            <category>Commercial Banking</category>
+        </service>
+        <service>
+            <category>Corporate Finance</category>
+        </service>
+        <service>
+            <category>Advisory &amp; Information Services</category>
+            <customDescription>Advisory Services</customDescription>
+        </service>
+        <service>
+            <category>Deposits</category>
+        </service>
+        <service>
+            <category>Documentary Credits</category>
+        </service>
+        <service>
+            <category>Foreign Exchange</category>
+        </service>
+    </services>
+    <locations>
+        <headOffice>
+            <link href="/office/id/543f87a5-861f-482a-be18-afba27b81b88" rel="src"/>
+
+        </headOffice>
+    </locations>
+    <ownership>
+        <summaries>
+            <summary type="additional">test190090</summary>
+        </summaries>
+    </ownership>
+    <personnel>
+        <summaries>
+            <summary type="InstitutionEmployees">450</summary>
+        </summaries>
+    </personnel>
+    <creditRatings>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Long Term Rating</type>
+            <value>BBB+</value>
+            <dateApplied accuracy="day">2015-08-12</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Japan Credit Rating Agency</agencyName>
+            <type>Long Term Rating</type>
+            <value>A+</value>
+        </rating>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Short Term Rating</type>
+            <value>A++</value>
+        </rating>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Rating</type>
+            <value>B+</value>
+        </rating>
+    </creditRatings>
+    <history>
+        <summaries>
+            <summary>Established June 1968 as First Israel Bank and Trust Company of New York, to
+                take over the New York branch of the Bank Leumi le-Israel B.M. On June 1, 1973 name
+                changed to Bank Leumi Trust Company of New York. On November 14, 1997 name changed
+                as above - srikan</summary>
+        </summaries>
+    </history>
+    <relatedPresences>
+        <relation>
+            <link href="/relationship/id/e547d069-6a16-48bb-861a-c37a64d1f0b8" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/043be2e3-73b6-4609-8543-40e8446c1968" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/382469bc-1f8f-4a81-bdb7-658e2c110089" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/e6cdebab-6f5a-4166-b27b-ddd8026cd42b" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/571a1b3a-ef0a-4e1a-aa89-70c333456b0e" rel="src"/>
+
+        </relation>
+    </relatedPresences>
+    <audit>
+        <comments>
+            <comment type="Ownership comment">GSC4 RA 6/1/98</comment>
+            <comment type="Subsidiary comment">GSC4 RA 6/1/98</comment>
+        </comments>
+    </audit>
+</legalEntity>

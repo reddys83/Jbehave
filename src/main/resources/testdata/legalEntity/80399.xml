@@ -1,0 +1,63 @@
+<legalEntity deleted="false" fid="80399" id="7013a377-46bc-4647-9f18-49d68a6a8637" resource="/legalEntity/id/7013a377-46bc-4647-9f18-49d68a6a8637" source="trusted" tfpid="10010700">
+    <summary>
+        <status>inactive</status>
+        <countryOfOperations>
+            <link href="/country/id/5ee26c17-e9e9-4ba1-a053-a408e0b35803" rel="src"/>
+
+        </countryOfOperations>
+        <charterType>US State Chartered Bank</charterType>
+        <insuranceType>FDIC-BIF</insuranceType>
+        <legalEntityType>Savings Bank</legalEntityType>
+        <types>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Commercial Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>ANZ Amerika Samoa Bank</value>
+            </name>
+            <name>
+                <type>Former Name</type>
+                <value>Amerika Samoa Bank</value>
+            </name>
+            <legalEntitySortKey>ANZ AMERIKA SAMOA BANK</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1979-07-01</established>
+            <chartered accuracy="year">1979-07-01</chartered>
+        </dates>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+        <numberOfCreditUnionMembers>0</numberOfCreditUnionMembers>
+        <leadInstitution>false</leadInstitution>
+        <trust>
+            <powersGranted>false</powersGranted>
+            <powersFull>false</powersFull>
+            <powersUsed>false</powersUsed>
+        </trust>
+        <identifiers>
+            <identifier transferable="true">
+                <type>RSSD</type>
+                <value>709675</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>US Tax ID</type>
+                <value>980040003</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <locations>
+        <headOffice>
+            <link href="/office/id/375c5776-5d0c-4910-ba43-8d7d4e4cb096" rel="src"/>
+
+        </headOffice>
+    </locations>
+    <history>
+        <summaries>
+            <summary>Established August 18, 1979. On April 1, 2001 Amerika Samoa Bank name changed as above</summary>
+        </summaries>
+    </history>
+</legalEntity>

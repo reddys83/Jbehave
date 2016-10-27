@@ -457,20 +457,69 @@ public class RoutingCodePage extends AbstractPage {
 		}
     }
 
-	public void insertNewFormerUsagesValues(String routingCode, String routingCodeType) {
+    public void insertNewFormerUsagesValues(String routingCode, String routingCodeType) {
 		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
 			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
 			Thread.sleep(3000L);
-			apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"insert routing code former usages values", nvPairs);
+			apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "insert routing code former usages values", nvPairs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+    }
 
-	public void verifyHistoryEventColumnNames() {
+    public void verifyRelatedCodesHeaders()
+    {
+        assertEquals("RELATED CODES",getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingCode_relatedCodes_header")).getText().toUpperCase());
+        assertEquals("CONTEXT",getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingCode_relatedCodes_context_header")).getText().toUpperCase());
+        assertEquals("CODE",getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingCode_relatedCodes_code_header")).getText().toUpperCase());
+        assertEquals("TYPE",getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingCode_relatedCodes_type_header")).getText().toUpperCase());
+
+
+
+    }
+
+    public void verifyNoRelatedCodesForRoutingCodes()
+    {
+        verifyRelatedCodesHeaders();
+        try {
+            assertFalse(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingCode_relatedCodes_context")).isDisplayed());
+
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+        }
+    }
+
+    public void verifyRelatedCodesFromTrusted(String routingCode, String codeType)
+    {
+        verifyRelatedCodesHeaders();
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+        nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+        nvPairs.add(new BasicNameValuePair("source","trusted"));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode relatedCodes", nvPairs);
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        for (int i=0;i<document.getElementsByTagName("relatedCodes").getLength();i++)
+        {
+            for (int j=1;j<=document.getFirstChild().getChildNodes().item(i).getChildNodes().getLength();j++)
+            {
+                assertEquals(document.getFirstChild().getChildNodes().item(i).getChildNodes().item(j - 1).getTextContent(),
+                        getDriver().findElement(By.xpath(".//*[@id='routingCodeRelatedCodes']//tbody/tr["+(i+1)+"]/td["+j+"]")).getText());
+            }
+        }
+    }
+
+    public void clickOnRelatedCodeLink()
+    {
+        attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingCode_relatedCodes_link"));
+    }
+    
+    public void verifyHistoryEventColumnNames() {
 		try {
 			Thread.sleep(5000L);
 		} catch (InterruptedException e) {
@@ -811,5 +860,4 @@ public class RoutingCodePage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-   }
-
+}
