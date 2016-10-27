@@ -541,4 +541,14 @@ public class SearchResultsSteps extends AbstractSteps{
     public void verifyToolTipViewOffice(@Named("tooltip") String tooltip) {
     	getResultsPage().verifyToolTipInRoutingCodeResultsPage(tooltip, RoutingCodeIdentifiers.getObjectIdentifier("routingcode_office_fid_search_results"));
     }
+    
+    @Then("the user should see Results page displayed")
+	public void verifyRoutingCodeSearchTextNoDisplay() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+        getResultsPage().verifyResultsPage();
+	}
 }
