@@ -776,11 +776,11 @@ public class RoutingCodePage extends AbstractPage {
 	public void deleteExistingHistoryValues(String routingCode, String routingCodeType) {
 		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("officeFid", routingCode));
 			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
 			Thread.sleep(3000L);
 			apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"delete routing code former usages values", nvPairs);
+					"delete routing code history values", nvPairs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -789,11 +789,24 @@ public class RoutingCodePage extends AbstractPage {
 	public void insertHistoryValues(String routingCode, String routingCodeType) {
 		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("officeFid", routingCode));
 			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
 			Thread.sleep(3000L);
 			apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"insert routing code history values", nvPairs);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void modifyHistoryValues(String routingCode, String routingCodeType) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			Thread.sleep(3000L);
+			apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"modify routing code history values", nvPairs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

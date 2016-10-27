@@ -162,9 +162,6 @@ public class RoutingCodeSteps extends AbstractSteps {
 
 	@Then("the user should verify the column names in history page")
 	public void verifyHistoryEventColumnNames() {
-		if (routingCodePage == null) {
-			routingCodePage = getRoutingCodePage().createRoutingCodePage();
-		}
 		getRoutingCodePage().verifyHistoryEventColumnNames();
 	}
 
@@ -209,7 +206,22 @@ public class RoutingCodeSteps extends AbstractSteps {
 			throws InterruptedException {
 		getRoutingCodePage().insertHistoryValues(routingCode, codeType);
 		getDataPage().refreshThePage();
-		Thread.sleep(5000L);
+		Thread.sleep(3000L);
+	}
+	
+	@When("the user modifes the existing history values")
+	public void modifyHistoryValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType)
+			throws InterruptedException {
+		getRoutingCodePage().deleteExistingHistoryValues(routingCode, codeType);
+		Thread.sleep(2000L);
+		getRoutingCodePage().modifyHistoryValues(routingCode, codeType);
+		getDataPage().refreshThePage();
+		Thread.sleep(2000L);
+	}
+	
+	@Then("the user should see N/A value under details column")
+	public void verifyNAValueInDetailColumn() {
+		getDataPage().verifyWebElementText("N/A value under details column", "N/A", RoutingCodeIdentifiers.getObjectIdentifier("view_history_na_text"));
 	}
 
  }
