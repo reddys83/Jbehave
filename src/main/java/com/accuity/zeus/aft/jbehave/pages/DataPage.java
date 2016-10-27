@@ -1501,6 +1501,10 @@ public class DataPage extends AbstractPage {
         return new EditRoutingCodePage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
     }
 	
+	public void verifyElementIsDisplayed(String fieldName, By by) {
+		assertTrue(fieldName + " is not displayed.", getDriver().findElement(by).isDisplayed());
+	}
+	
 	public void verifyValuesFromLookup(By by, String xquery) {
 		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xquery);
 		List<WebElement> dropDownFieldList = getDriver().findElements(by);
@@ -1509,5 +1513,4 @@ public class DataPage extends AbstractPage {
 			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getTextContent(), options.get(indexOfOption).getText().trim());
 		}
 	}
-	
 }

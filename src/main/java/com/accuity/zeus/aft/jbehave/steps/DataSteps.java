@@ -101,8 +101,7 @@ public class DataSteps extends AbstractSteps {
     }
 
     @Then("the user should see the area's names as: $names")
-    @Aliases(values = {"the user should see the legal entity's names as: $names",
-            "the user should see the sub-area's names as: $names"})
+    @Aliases(values = {"the user should see the sub-area's names as: $names"})
     public void verifyAreaNames(ExamplesTable names) {
         getDataPage().verifyNames(names);
     }
@@ -705,8 +704,8 @@ public class DataSteps extends AbstractSteps {
         getDataPage().clicksOnAllLink();
     }
 
-    @Then("the user should see the basic info label for selected legal entity")
-    @Alias("the user should see the basic info for selected office")
+
+    @Then("the user should see the basic info for selected office")
     public void verifyBasicInfo() {
         setOfficesPage(getDataPage().verifyBasicInfo());
     }

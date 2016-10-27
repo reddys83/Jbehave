@@ -1,0 +1,27 @@
+<legalEntity deleted="false" fid="278242" id="d43a9593-9574-484b-ae83-21f5de13b8ee" resource="/legalEntity/id/d43a9593-9574-484b-ae83-21f5de13b8ee" source="trusted" tfpid="28082257">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/be40b321-2c55-4d88-9a33-b782fab4d6cb" rel="src"/>
+        </countryOfOperations>
+        <legalEntityType>Unknown</legalEntityType>
+        <types>
+            <type source="trusted">Subsidiary - Unspecified</type>
+            <type source="trusted">Unconfirmed</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Eurowire Cash Management Trust</value>
+            </name>
+            <legalEntitySortKey>EUROWIRE CASH MANAGEMENT TRUST</legalEntitySortKey>
+        </names>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+    </summary>
+    <locations>
+        <headOffice>
+            <link href="/office/id/af3d0ee6-73e0-4d27-83a8-49eed36d3b49" rel="src"/>
+
+        </headOffice>
+    </locations>
+</legalEntity>

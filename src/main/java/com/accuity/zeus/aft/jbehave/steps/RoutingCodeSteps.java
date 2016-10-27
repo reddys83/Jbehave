@@ -38,7 +38,24 @@ public class RoutingCodeSteps extends AbstractSteps {
         getRoutingCodePage().verifyABAFieldsNotExist();
     }
 
-    @When("the user clicks on the legal entity link in the routing code page header")
+
+	@When("the user clicks on the routing code related codes link in the navigation bar")
+	public void clickOnRelatedCodeLink() {
+		getRoutingCodePage().clickOnRelatedCodeLink();
+	}
+
+	@Then("the user should see the related codes for routingCode <routingCode> and code type <codeType>")
+	public void verifyRelatedCodesFromTrusted(@Named("routingCode") String routingCode, @Named("codeType") String codeType){
+		getRoutingCodePage().verifyRelatedCodesFromTrusted(routingCode,codeType);
+	}
+
+	@Then("the user should not see related codes for routingCode <routingCode> and code type <codeType>")
+	public void verifyNoRelatedCodesForRoutingCodes()
+	{
+		getRoutingCodePage().verifyNoRelatedCodesForRoutingCodes();
+	}
+
+	@When("the user clicks on the legal entity link in the routing code page header")
     public void clickonHeaderLink()
     {
         getRoutingCodePage().clickonHeaderLink();
@@ -89,8 +106,6 @@ public class RoutingCodeSteps extends AbstractSteps {
     public void verifyRoutingCodeUsagesAscendingOrderByArea(@Named("routingCode") String routingCode, @Named("codeType") String codeType) {
         getRoutingCodePage().verifyRoutingCodeUsagesAscendingOrderByArea(routingCode, codeType);
     }
-
-
 
 	@When("the user clicks on the former usages link in the navigation bar")
 	public void clickOnFormerUsageLink() {
@@ -153,12 +168,22 @@ public class RoutingCodeSteps extends AbstractSteps {
 		Thread.sleep(5000L);
 	}
 
-
     @When("the user clicks on payment systems section")
     public void clickOnPaymentSystems()
     {
         getRoutingCodePage().clickonPaymentSystems();
     }
+    
+    @Then("the user should see all the routing code menus in the sidebar")
+	public void verifyRoutingCodeMenusInSidebar() {
+		getDataPage().verifyElementIsDisplayed("ALL", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_all_link"));
+		getDataPage().verifyElementIsDisplayed("BASIC INFO", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_link"));
+		getDataPage().verifyElementIsDisplayed("PAYMENT SYSTEMS", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_payment_systems_link"));
+		getDataPage().verifyElementIsDisplayed("RELATED CODES", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_related_codes_link"));
+		getDataPage().verifyElementIsDisplayed("USAGES", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_usages_link"));
+		getDataPage().verifyElementIsDisplayed("FORMER USAGES", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_former_usages_link"));
+		getDataPage().verifyElementIsDisplayed("HISTORY", RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_link"));
+	}
 }
 
 

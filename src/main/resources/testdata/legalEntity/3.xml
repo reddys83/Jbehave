@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<legalEntity deleted="false" fid="3" id="e6e19b77-ae17-4b8a-a9a5-c085d611e2e5" resource="/legalEntity/id/e6e19b77-ae17-4b8a-a9a5-c085d611e2e5" source="trusted" stub="true" tfpid="20657400">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/52be49f6-c37c-4bed-baec-6b9accabf100" rel="src"/>
+        </countryOfOperations>
+        <organisationType>Private Bank</organisationType>
+        <fatcaStatus>Reporting Model 1 FFI</fatcaStatus>
+        <legalEntityType>Bank</legalEntityType>
+        <types>
+            <type source="FDB">Bank</type>
+            <type source="FDB">Commercial Bank</type>
+            <type source="FDB">Corporate Bank</type>
+            <type source="FDB">Islamic Bank</type>
+            <type source="TFP">Wholesale Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>ABC International Bank plc</value>
+            </name>
+            <legalEntitySortKey>ABC INTERNATIONAL BANK PLC</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1991-07-01</established>
+            <chartered accuracy="year">1991-07-01</chartered>
+        </dates>
+        <additionalInfos>
+            <additionalInfo type="Italics">Authorised by the Prudential Regulation Authority and regulated by the Financial Conduct Authority and the Prudential Regulation Authority</additionalInfo>
+        </additionalInfos>
+        <identifiers>
+            <identifier transferable="false">
+                <type>London Stock Exchange Interim Entity Identifier (IEI)</type>
+                <value>PQEBSF10YW5QXWIKTJ21</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>Global Intermediary Identification Number</type>
+                <value>UUVZN5.00009.ME.826</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>RegistrationNo</type>
+                <value>2564490</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <services>
+        <service>
+            <category>Asset Management</category>
+            <customDescription>Islamic Asset Management</customDescription>
+        </service>
+        <service>
+            <category>Banking</category>
+        </service>
+        <service>
+            <category>Bills of Exchange</category>
+        </service>
+        <service>
+            <category>Bonds</category>
+        </service>
+        <service>
+            <category>Capital Markets Advisory</category>
+        </service>
+        <service>
+            <category>Capital Markets</category>
+        </service>
+        <service>
+            <category>Commodity Dealing</category>
+            <customDescription>Commodity Finance</customDescription>
+        </service>
+        <service>
+            <category>Corporate Finance</category>
+        </service>
+        <service>
+            <category>Correspondent Banking</category>
+        </service>
+        <service>
+            <category>Debentures</category>
+        </service>
+        <service>
+            <category>Documentary Credits</category>
+        </service>
+        <service>
+            <category>Equity Investments</category>
+        </service>
+        <service>
+            <category>Foreign Exchange</category>
+        </service>
+        <service>
+            <category>Guarantees</category>
+        </service>
+        <service>
+            <category>Letters of Credit</category>
+        </service>
+        <service>
+            <category>Money Markets</category>
+        </service>
+        <service>
+            <category>Project Finance</category>
+            <customDescription>Project &amp; Structured Finance</customDescription>
+        </service>
+        <service>
+            <category>Trade Finance</category>
+        </service>
+        <service>
+            <category>Treasury Services</category>
+        </service>
+        <service>
+            <category>Lines of Credit - Business</category>
+        </service>
+        <service>
+            <category>Mortgages</category>
+        </service>
+        <service>
+            <category>Mortgage Backed Securities</category>
+        </service>
+    </services>
+    <locations>
+        <summaries>
+            <summary type="NumberOfBranches">4</summary>
+        </summaries>
+    </locations>
+    <personnel>
+        <summaries>
+            <summary type="InstitutionEmployees">208</summary>
+        </summaries>
+    </personnel>
+    <history>
+        <summaries>
+            <summary>Established on April 1, 1991.  On January 1, 2004 Arab Banking Corporation - Daus &amp; Co GmbH and the Milan branch of Arab Banking Corporation became branches of the above</summary>
+        </summaries>
+    </history>
+    <audit>
+        <comments>
+            <comment type="Ownership comment">GSC3 - 10/97 KW (GS from ABC - 175)</comment>
+        </comments>
+    </audit>
+</legalEntity>
