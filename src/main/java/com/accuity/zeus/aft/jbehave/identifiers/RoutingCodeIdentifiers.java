@@ -133,7 +133,7 @@ public class RoutingCodeIdentifiers {
         hmap.put("view_routingcode_history_usage_postalcode_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Postal Code')]"));
         hmap.put("view_routingcode_history_usage_addinfo_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Additional Info')]"));
         hmap.put("view_history_event_table", By.xpath("//*[@id='routingCodeHistory']//tr"));
-        hmap.put("view_history_usage_table", By.xpath("//*[@id='shelfRow']//tbody/tr"));
+        hmap.put("view_history_usage_table", By.xpath("//*[@id='routingCodeHistory']//div[@class='container']//tbody//tr"));
     }
 
     public static By getObjectIdentifier(String key) {

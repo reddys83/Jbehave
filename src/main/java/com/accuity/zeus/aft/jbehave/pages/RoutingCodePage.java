@@ -593,7 +593,6 @@ public class RoutingCodePage extends AbstractPage {
 				attemptClickTheWebElement(eyeIcons.get(index));
 			}			
 			List<WebElement> historyUsagesRows = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_usage_table"));
-
 			for (int innerIndex = 0; innerIndex < historyUsagesRows.size(); innerIndex++) {
 				List<WebElement> historyUsageTableColumns = historyUsagesRows.get(innerIndex).findElements(By.tagName("td"));
 				historyUsageName.add(historyUsageTableColumns.get(0).getText());
@@ -632,7 +631,7 @@ public class RoutingCodePage extends AbstractPage {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
 			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
-			Thread.sleep(4000L);
+			Thread.sleep(5000L);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get routing code history values", nvPairs);
