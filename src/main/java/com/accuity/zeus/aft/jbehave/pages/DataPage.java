@@ -1504,4 +1504,19 @@ public class DataPage extends AbstractPage {
 	public void verifyElementIsDisplayed(String fieldName, By by) {
 		assertTrue(fieldName + " is not displayed.", getDriver().findElement(by).isDisplayed());
 	}	
+	
+	 public void verifyColumnInOrder(By by, String column, String order) {
+			List<WebElement> columnListFromUI = getDriver().findElements(by);
+			for (int index = 0; index < (columnListFromUI.size() - 1); index++) {
+				if (order.equals("ascending")) {
+					if (columnListFromUI.get(index+1).getText().compareTo(columnListFromUI.get(index).getText()) < 0) {
+						assertTrue("The " + column + " column is not in " + order + " order.", false);
+					}
+				} else {
+					if (columnListFromUI.get(index+1).getText().compareTo(columnListFromUI.get(index).getText()) > 0) {
+						assertTrue("The " + column + " column is not in " + order + " order.", false);
+					}
+				}
+			}
+	    }
 }

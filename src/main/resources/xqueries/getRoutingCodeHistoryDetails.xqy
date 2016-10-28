@@ -1,137 +1,86 @@
 declare namespace functx = "http://www.functx.com";
-declare function functx:capitalize-first
-  ( $arg as xs:string? )  as xs:string? {
+declare function functx:month-abbrev-en
+( $date as xs:anyAtomicType? )  as xs:string? {
 
-   concat(upper-case(substring($arg,1,1)),
-             substring($arg,2))
- } ;
- 
-declare variable $getHeadOffice := function($routing as element()) {
-   let $headOffice :=cts:search(fn:collection('current')/office[@source='fdb'],
-                                    cts:and-query((
-                                      cts:path-range-query("/office/summary/institution/link/@href", "=", $routing/assignedInstitution/link/@href, "collation=http://marklogic.com/collation/"),
-                                      cts:path-range-query("/office/summary/types/type", "=","Head Office", "collation=http://marklogic.com/collation//S1"
-                                      ))))
-                                      
-   return $headOffice
+    ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
+    [month-from-date(xs:date($date))]
+} ;
+
+declare function functx:day-abbrev-en
+( $date as xs:anyAtomicType? )  as xs:string? {
+    ('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31')
+    [day-from-date(xs:date($date))]
+} ;
+
+declare function local:getDateAsPerAccuracy
+( $date as node() ) {
+    switch($date/@accuracy/string())
+        case "day" return fn:concat(functx:day-abbrev-en(xs:date($date)), ' ', functx:month-abbrev-en(xs:date($date)), ' ', year-from-date(xs:date($date)))
+        case "month" return fn:concat(functx:month-abbrev-en(xs:date($date)), ' ', year-from-date(xs:date($date)))
+        case "year"  return year-from-date(xs:date($date))
+        default return "date not valid"
 };
 
-let $rc := xs:string(xdmp:get-request-field('code'))
+declare variable $getReplacedBy := function($routing as element()) {
+   let $replacedBy :=cts:search(fn:collection('current')/routingCode[@source='trusted'],
+   cts:and-query((
+   cts:element-attribute-range-query(xs:QName("routingCode"),xs:QName("resource"), "=", $routing/replacedBy/link/@href)
+   )))                                      
+   return $replacedBy
+};
 
-let $routingCodes:= (for $x in cts:search(fn:collection('source-trusted')/routingCode,
-                        cts:and-query((
-                                 cts:path-range-query("/routingCode/codeValue","=",$rc, "collation=http://marklogic.com/collation//S1")
-                                     ))) return $x)
-let $routingCodeResults:= (
- for $x in $routingCodes
+declare variable $getOffice := function($routing as element()) {
+    let $Office :=cts:search(fn:collection('current')/office[@source='trusted'],
+            cts:and-query((cts:element-attribute-range-query(xs:QName("office"),xs:QName("resource"), "=", $routing/presence/link/@href))))
+    return $Office
+};
 
-let $Code := fn:data($x/codeValue/text()) 
+let $rc := xs:string(xdmp:get-request-field("routingCode"))
+let $rcType := xs:string(xdmp:get-request-field("routingCodeType"))
+let $source := "trusted"
 
-let $Type := fn:data($x/codeType/text())
+let $routingCodes:= (for $x in cts:search(fn:collection('current')/routingCode[@source=$source],
+cts:and-query((
+cts:path-range-query("/routingCode/codeValue","=",$rc, "collation=http://marklogic.com/collation//S1"),
+cts:path-range-query("/routingCode/codeType", "=", $rcType, "collation=http://marklogic.com/collation//S1")
+))) return $x)/codeHistory/codeEvent     
 
-let $Status := fn:data(functx:capitalize-first($x/codeStatus/text()))
+let $routingCodeHistory := for $x in $routingCodes  
+let $type := $x/eventType/text()
+let $date := local:getDateAsPerAccuracy($x/eventDate)
+let $description := $x/eventDescription/text()
+let $replacedBy := ($getReplacedBy($x))/codeValue/text()
+let $details := (for $y in $x return $y)/historicUsageLocations/historicUsageLocation
 
-let $Entity := if(exists($x/assignedInstitution/link))
-                 then (doc($x/assignedInstitution/link/@href || '_CURR_SRC~trusted')//summary/names/name[type='Legal Title']/value/text())
-                  else($x/assignedInstitution/legalName/text())
- 
-let $OFID :=  for $y in $x/usageLocations/usageLocation
-                          return if($y/@primaryAssignee='true')
-                          then fn:doc($y/presence/link/@href || '_CURR_SRC~fdb')/office/@fid/string()
-                          else()
+let $offdetails := for $y in $details
+let $name := $getOffice($y)/summary/names/name[type='Office Name']/value/text()
+let $address := $y/presence/address/streetAddress/addressLine1/text()
+let $city := $y/presence/address/city/displayName/text()
+let $area := $y/presence/address/area/fullName/text()
+let $subArea := $y/presence/address/subarea/displayName/text()
+let $country := $y/presence/address/country/name/text()
+let $postalCode := $y/presence/address/postalCode/text()
+let $additionalInfo := $y/additionalInfo/text()
 
-let $FID := if(exists($OFID))
-            then $OFID
-            else fn:doc($x/assignedInstitution/link/@href || '_CURR_SRC~fdb')/legalEntity/@fid/string()
-            
-let $OAddress := for $y in $x/usageLocations/usageLocation
-                          return if($y/@primaryAssignee='true')
-                          then fn:doc($y/presence/link/@href || '_CURR_SRC~fdb')/office/locations/location[@primary="true"]/address[type='physical']/streetAddress/addressLine1/text()
-                          else()
-                          
-let $Address := if(exists($OAddress))
-                 then $OAddress
-                 else let $headOffice := $getHeadOffice($x)  
-                               return $headOffice/locations/location[@primary="true"]/address[type='physical']/streetAddress/addressLine1/text()
-                               
-let $City :=  let $officeusageLocation := for $y in $x/usageLocations/usageLocation[@primaryAssignee='true'] return $y
+return 
+<office>
+  <name>{$name}</name>
+  <address>{$address}</address>
+  <city>{$city}</city>
+  <area>{$area}</area>
+  <subArea>{$subArea}</subArea>
+  <country>{$country}</country>
+  <postalCode>{$postalCode}</postalCode>
+  <additionalInfo>{$additionalInfo}</additionalInfo>
+</office>
 
-                    let $officeHrefs := for $z in $officeusageLocation/presence/link/@href return $z
+return 
+<historicFields>
+<type>{$type}</type>
+<date>{$date}</date>
+<description>{$description}</description>
+<replacedByCode>{$replacedBy}</replacedByCode>
+<officeDetails>{$offdetails}</officeDetails>
+</historicFields>
 
-
-                     let $cityHrefs := cts:search(fn:collection('current')/office[@source="fdb"],                
-                                               cts:and-query((
-                                               cts:element-attribute-range-query(xs:QName("office"),xs:QName("resource"), "=", $officeHrefs)
-                                                             ))
-                                                   )/locations/location[@primary="true"]/address[type='physical']/city/link/@href                         
-              
-                      let $OcityName := cts:search(fn:collection('current')/city[@source="fdb"],                
-                                               cts:element-attribute-range-query(xs:QName("city"),xs:QName("resource"), "=", $cityHrefs)
-                                                    )/summary/names/name[type="Full Name"]/value
-
-                return if(exists($OcityName))
-                then $OcityName/text()
-                  else(let $HeadOfficeCityHrefs := $getHeadOffice($x)/locations/location[@primary="true"]/address[type='physical']/city/link/@href/string() 
-                       let $HeadOfficeCityName := cts:search(fn:collection('current')/city[@source="fdb"],                
-                                               cts:element-attribute-range-query(xs:QName("city"),xs:QName("resource"), "=", $HeadOfficeCityHrefs)
-                                                    )/summary/names/name[type="Full Name"]/value
-                        return $HeadOfficeCityName/text())
-                        
-
-let $Area  :=  let $officeHrefs := for $y in $x/usageLocations/usageLocation[@primaryAssignee='true']/presence/link/@href return $y
-
-                   let $areaHrefs := cts:search(fn:collection('current')/office[@source="fdb"],                
-                                               cts:and-query((
-                                               cts:element-attribute-range-query(xs:QName("office"),xs:QName("resource"), "=", $officeHrefs)
-                                                             ))
-                                                   )/locations/location[@primary="true"]/address[type='physical']/area/link/@href                         
-              
-                      let $OareaName := cts:search(fn:collection('current')/area[@source="fdb"],                
-                                               cts:element-attribute-range-query(xs:QName("area"),xs:QName("resource"), "=", $areaHrefs)
-                                                    )/summary/names/name[type="Full Name"]/value
-
-                return if(exists($OareaName))
-                then $OareaName/text()
-                  else(let $HeadOfficeAreaHrefs := $getHeadOffice($x)/locations/location[@primary="true"]/address[type='physical']/area/link/@href/string() 
-                       let $HeadOfficeAreaName := cts:search(fn:collection('current')/area[@source="fdb"],                
-                                               cts:element-attribute-range-query(xs:QName("area"),xs:QName("resource"), "=", $HeadOfficeAreaHrefs)
-                                                    )/summary/names/name[type="Full Name"]/value
-                        return $HeadOfficeAreaName/text())
-                        
-let $Country :=  let $officeHrefs := for $y in $x/usageLocations/usageLocation[@primaryAssignee='true']/presence/link/@href return $y
-
-                   let $countryHrefs := cts:search(fn:collection('current')/office[@source="fdb"],                
-                                               cts:and-query((
-                                               cts:element-attribute-range-query(xs:QName("office"),xs:QName("resource"), "=", $officeHrefs)
-                                                             ))
-                                                   )/locations/location[@primary="true"]/address[type='physical']/country/link/@href                         
-              
-                      let $OCountryName := cts:search(fn:collection('current')/country[@source="fdb"],                
-                                               cts:element-attribute-range-query(xs:QName("country"),xs:QName("resource"), "=", $countryHrefs)
-                                                    )/summary/names/name[type="Country Name"]/value
-
-                return if(exists($OCountryName))
-                then $OCountryName/text()
-                  else(let $HeadOfficeCountryHrefs := $getHeadOffice($x)/locations/location[@primary="true"]/address[type='physical']/country/link/@href/string() 
-                       let $HeadOfficeCountryName := cts:search(fn:collection('current')/country[@source="fdb"],                
-                                               cts:element-attribute-range-query(xs:QName("country"),xs:QName("resource"), "=", $HeadOfficeCountryHrefs)
-                                                    )/summary/names/name[type="Country Name"]/value
-                        return $HeadOfficeCountryName/text())
-                                            
-order by $x/codeValue ascending
-  return <results>
- <Code>{$Code}</Code>
- <Type>{$Type}</Type>
- <Entity>{$Entity}</Entity>
- <FID>{$FID}</FID>
- <Address>{$Address}</Address>
- <City>{$City}</City>
- <Area>{$Area}</Area>
- <Country>{$Country}</Country>
- <Status>{$Status}</Status>
- </results>)
- return <codeResults>{$routingCodeResults}</codeResults> 
-
-
-
-
+return <routingCode><routingCodeHistory>{$routingCodeHistory}</routingCodeHistory></routingCode>

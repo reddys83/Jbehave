@@ -41,7 +41,7 @@ Then the user should verify the column names in history page
 When the user clicks on the eye icon in first row
 Then the user should verify the column names in history usage
 Then the user verifies that values in date column is in descending order
-When the user modifes the existing history values
+When user inserts a history event with no details
 When the user clicks on the history link in the navigation bar
 Then the user should see N/A value under details column
 

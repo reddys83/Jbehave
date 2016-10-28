@@ -119,7 +119,8 @@ public class RoutingCodeSteps extends AbstractSteps {
 
 	@Then("the user verifies that values in $column column is in $order order")
 	public void verifyFormerUsagesNameColumnInAlphabeticalOrder(@Named("column") String column, @Named("order") String order) {
-		getRoutingCodePage().verifyFormerUsagesColumnInOrder(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_" + column + "_list"), column, order);
+		getDataPage().verifyColumnInOrder(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_" + column + "_list"), column, order);
+		//getRoutingCodePage().verifyFormerUsagesColumnInOrder(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_" + column + "_list"), column, order);
 	}
 
 	@When("the user clicks on sort button for name column")
@@ -234,11 +235,10 @@ public class RoutingCodeSteps extends AbstractSteps {
 		Thread.sleep(3000L);
 	}
 	
-	@When("the user modifes the existing history values")
+	@When("user inserts a history event with no details")
 	public void modifyHistoryValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType)
 			throws InterruptedException {
 		getRoutingCodePage().deleteExistingHistoryValues(routingCode, codeType);
-		Thread.sleep(2000L);
 		getRoutingCodePage().modifyHistoryValues(routingCode, codeType);
 		getDataPage().refreshThePage();
 		Thread.sleep(2000L);

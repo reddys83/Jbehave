@@ -145,6 +145,8 @@ public class RoutingCodeIdentifiers {
         hmap.put("view_historyUsage_postalcode_list", By.xpath("//*[@id='shelfRow']//td[7]"));
         hmap.put("view_historyUsage_addinfo_list", By.xpath("//*[@id='shelfRow']//td[8]"));   
         hmap.put("view_history_na_text", By.xpath("//*[@id='history']/tr[3]/td[5]"));
+        hmap.put("view_history_table", By.xpath("//*[@id='routingCodeHistory']//tr"));
+        hmap.put("view_history_table_2", By.xpath("//*[@id='shelfRow']//tr"));
     }
 
     public static By getObjectIdentifier(String key) {
