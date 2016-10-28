@@ -162,6 +162,8 @@ public class XqueryMap {
 		queryMap.put("insert routing code former usages values", "insertRoutingCodeFormerUsagesValues.xqy");
         queryMap.put("get routingCode relatedCodes", "getRoutingCodeRelatedCodes.xqy");
         queryMap.put("get routingCode payment systems info","getRoutingCodePaymentSystems.xqy");
+        queryMap.put("get routing code subtype lookup", "getRoutingCodeSubtypeFromLookup.xqy");
+        queryMap.put("get ABA code source lookup", "getABACodeSourceTypesFromLookup.xqy");
         queryMap.put("get office locations summary type lookup", "getOfficeLocationsSummaryTypeFromLookup.xqy");
    }
 
