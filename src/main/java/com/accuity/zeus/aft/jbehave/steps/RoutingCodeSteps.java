@@ -237,6 +237,6 @@ public class RoutingCodeSteps extends AbstractSteps {
 	
 	@Then("the user should see N/A value under details column")
 	public void verifyNAValueInDetailColumn() {
-		getDataPage().verifyWebElementText("N/A value under details column", "N/A", RoutingCodeIdentifiers.getObjectIdentifier("view_history_na_text"));
+		getDataPage().verifyElementIsDisplayed("Details (N/A)", RoutingCodeIdentifiers.getObjectIdentifier("view_routing_code_history_details_N/A"));
 	}
 }
