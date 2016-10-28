@@ -119,8 +119,7 @@ public class RoutingCodeSteps extends AbstractSteps {
 
 	@Then("the user verifies that values in $column column is in $order order")
 	public void verifyFormerUsagesNameColumnInAlphabeticalOrder(@Named("column") String column, @Named("order") String order) {
-		getDataPage().verifyColumnInOrder(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_" + column + "_list"), column, order);
-		//getRoutingCodePage().verifyFormerUsagesColumnInOrder(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_" + column + "_list"), column, order);
+		getDataPage().verifyColumnIsSorted(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_" + column + "_list"), column, order);
 	}
 
 	@When("the user clicks on sort button for name column")
@@ -198,27 +197,19 @@ public class RoutingCodeSteps extends AbstractSteps {
 
 	@When("the user clicks on the eye icon in first row")
 	public void clickOnEyeIcon() {
-		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"));
-	}
-
-	@Then("the user clicks on the eye icon in second row")
-	public void clickOnEyeIcon2() {
-		getDataPage()
-				.attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon_secondRow"));
+		getDataPage().clickElementUsingIndex(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"), 1);
 	}
 
 	@Then("the user should verify the column names in history usage")
 	public void verifyHistoryUsageColumnNames() {
 		getRoutingCodePage().verifyHistoryUsageColumnNames();
-		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"));
-		getDataPage()
-				.attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon_secondRow"));
+		getDataPage().clickElementUsingIndex(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"), 1);
 	}
 
 	@Then("the user should see the history field values same as in $source document")
-	public void verifyHistoryValuesFromZeus(@Named("routingCode") String routingCode,
+	public void verifyHistoryValuesFromTrusted(@Named("routingCode") String routingCode,
 			@Named("codeType") String codeType, @Named("source") String source) {
-		getRoutingCodePage().verifyHistoryValuesFromZeus(routingCode, codeType, source);
+		getRoutingCodePage().verifyHistoryValuesFromTrusted(routingCode, codeType, source);
 	}
 
 	@When("the user deletes the existing history values")
@@ -249,5 +240,3 @@ public class RoutingCodeSteps extends AbstractSteps {
 		getDataPage().verifyWebElementText("N/A value under details column", "N/A", RoutingCodeIdentifiers.getObjectIdentifier("view_history_na_text"));
 	}
 }
-
-

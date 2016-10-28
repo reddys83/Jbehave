@@ -1505,7 +1505,7 @@ public class DataPage extends AbstractPage {
 		assertTrue(fieldName + " is not displayed.", getDriver().findElement(by).isDisplayed());
 	}	
 	
-	 public void verifyColumnInOrder(By by, String column, String order) {
+	 public void verifyColumnIsSorted(By by, String column, String order) {
 			List<WebElement> columnListFromUI = getDriver().findElements(by);
 			for (int index = 0; index < (columnListFromUI.size() - 1); index++) {
 				if (order.equals("ascending")) {

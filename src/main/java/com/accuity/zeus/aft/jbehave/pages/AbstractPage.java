@@ -218,6 +218,22 @@ public abstract class AbstractPage {
         catch (org.openqa.selenium.StaleElementReferenceException e) {
         }
     }
+    
+    public void attemptClickTheWebElement(WebElement obj) {
+        int attempts = 0;       
+        while (true) {
+            waitFor();
+            if (obj.isDisplayed()) {
+            	obj.click();
+                break;
+            }
+            if (attempts >= 10) {
+                break;
+            }
+            waitFor();
+            attempts++;
+        }
+    }
 
     public void selectItemFromDropdownListByValue(By by, String value) {
         try {
