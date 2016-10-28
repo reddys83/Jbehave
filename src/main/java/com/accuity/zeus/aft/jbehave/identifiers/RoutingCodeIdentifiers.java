@@ -115,6 +115,12 @@ public class RoutingCodeIdentifiers {
         hmap.put("routingcode_former_usages_link", By.xpath("//*[@id='routingCodeFormerUsages']"));
         hmap.put("routingcode_history_link", By.xpath("//*[@id='routingCodeHistory']"));
         hmap.put("routingcode_office_fid_search_results", By.xpath("//*[@id='searchEntityList-list']//tbody//td[4]/*[@href]"));
+        hmap.put("view_routingCodeSearchEntityPlaceHolder_xpath", By.xpath("//input[@placeholder='Enter at least 2 valid characters']"));
+        hmap.put("view_routingCodeSearchTypeAheadBox_xpath", By.xpath("//*[@id='search']"));
+        hmap.put("routingCodeResultsHeader_view_mode", By.xpath("//div[@id='contentSummary']//*[@class='search-results']"));
+        hmap.put("view_routingCodeSearchEntityPlaceHolder_xpath", By.xpath("//input[@placeholder='Enter at least 2 valid characters']"));
+        hmap.put("view_routingCodeSearchTypeAheadBox_xpath", By.xpath("//*[@id='search']"));
+        hmap.put("routingCodeResultsHeader_view_mode", By.xpath("//div[@id='contentSummary']//*[@class='search-results']"));
         hmap.put("view_routingcode_history_type_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Type')]"));
         hmap.put("routingcode_history_navigation_link", By.xpath("//*[@id='routingCodeHistory']"));
         hmap.put("view_routingcode_history_date_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Date')]"));

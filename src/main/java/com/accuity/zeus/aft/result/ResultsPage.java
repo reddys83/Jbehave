@@ -490,20 +490,17 @@ public class ResultsPage extends AbstractPage {
 
         for(int i=0;i<document.getElementsByTagName("results").getLength();i++)
         {
-<<<<<<< HEAD
             String routingCodes = document.getElementsByTagName("Type").item(i).getTextContent();
             for (int j = 1; j <= document.getFirstChild().getChildNodes().item(i).getChildNodes().getLength(); j++) {
                 assertEquals(getDriver().findElement(By.xpath(".//*[@class='searchEntityList-container']//tbody/tr[td='" + routingCodes + "']/td[" + j + "]")).getText(),
                        document.getFirstChild().getChildNodes().item(i).getChildNodes().item(j - 1).getTextContent());
 
-=======
             String routingCodeType = document.getElementsByTagName("Type").item(i).getTextContent();
             String routingCode = document.getElementsByTagName("Code").item(i).getTextContent();
             for (int j = 1; j <=document.getElementsByTagName("results").item(i).getChildNodes().getLength(); j++)
             {
                assertEquals(document.getElementsByTagName("results").item(i).getChildNodes().item(j-1).getTextContent().replaceAll(" +", " "),
                        getDriver().findElement(By.xpath(".//*[@class='searchEntityList-container']//tbody/tr[td[1][text()='" + routingCode + "'] and td[2][text()='" + routingCodeType + "']]/td["+j+"]")).getText());
->>>>>>> develop
             }
         }
     }
@@ -1235,8 +1232,6 @@ public class ResultsPage extends AbstractPage {
     public void verifyResultsTabSelected(){
         assertTrue(getDriver().findElement(results_tab_xpath).getAttribute("class").equals("selected"));
     }
-<<<<<<< HEAD
-=======
     
     public WebElement getRoutingCodeHyperlinkElementForCodeValue(String routingCode, String codeType) {
         List<WebElement> elements = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcodes_rows_xpath"));
@@ -1252,6 +1247,8 @@ public class ResultsPage extends AbstractPage {
     	assertEquals(tooltip, getDriver().findElement(by).getAttribute("title"));
     } 
 
+    public void verifyResultsPage() {		
+		assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingCodeResultsHeader_view_mode")).getText().contains("Routing Code results for"));
+	}
 
->>>>>>> develop
  }

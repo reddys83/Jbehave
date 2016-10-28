@@ -6,6 +6,7 @@ As a user
 I want to cover the requirements mentioned in
 JIRA ID - ZEUS-1134 - User can view Routing Code Basic Info
 JIRA ID - ZEUS-1479 - User can hyperlink from Routing Code Search Results to Routing Code Basic Info screen
+JIRA ID - ZEUs-1540 - Routing Code Search: Search Value of 1 digit
 
 Scenario: Verify the basic info for a routing code of type ABA
 Verify the headers and the legal entity link on the header
@@ -60,4 +61,39 @@ Then the user should see all the routing code menus in the sidebar
 
 Examples:
 |entity|searchBy|routingCode|codeType|
-|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|    
+|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|
+
+Scenario: User verifies the message "Enter at least 2 valid characters" when only one alpha numeric character is entered
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the message Enter at least 2 valid characters in search box
+
+Examples:
+|entity|searchBy|
+|1#$@|Routing Code|
+|a#$@|Routing Code|
+||Routing Code|
+|2|Routing Code|
+|B|Routing Code|
+|.-|Routing Code|
+
+Scenario: User should not see message "Enter at least 2 valid characters" when more than 2 alpha numeric characters are entered
+
+Given a user is on the search page
+When the user selects the <searchBy> from the dropdown
+And the user enters the <entity> in the typeahead
+Then the user should not see the message Enter at least 2 valid characters in search box
+Then the user should see Results page displayed
+When the user enters the <entity> in the typeahead
+When the user clears the entity value in type ahead box
+Then the user should see the message Enter at least 2 valid characters in search box
+
+Examples: 
+|entity|searchBy|
+|1#$@2|Routing Code|
+|1a@#%@%#$%|Routing Code|
+|22$@#$@#$@$|Routing Code|
+|107001119|Routing Code|    
