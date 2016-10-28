@@ -14,6 +14,7 @@ let $relatedCodes := (
     let $code := fn:doc($x/routingCode/link/@href || '_CURR_SRC~trusted')//codeValue/text()
     let $type := fn:doc($x/routingCode/link/@href || '_CURR_SRC~trusted')//codeType/text()
 
+    order by $context ascending
     return
         <relatedCodes>
             <context>{$context}</context>
