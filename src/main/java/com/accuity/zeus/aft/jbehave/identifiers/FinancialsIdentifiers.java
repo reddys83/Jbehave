@@ -1,0 +1,23 @@
+package com.accuity.zeus.aft.jbehave.identifiers;
+
+import org.openqa.selenium.By;
+
+import java.util.HashMap;
+
+/**
+ * Created by tubatil on 10/31/2016.
+ */
+public class FinancialsIdentifiers {
+
+    private static HashMap<String, By> hmap = new HashMap<String, By>();
+
+    public static void setIdentifiers() {
+        hmap.put("financialStatement_period_EndDate_leftSideMenu_xpath", By.xpath((".//*[@id='results']//ul[@id='periodEnd']/li")));
+    }
+
+    public static By getObjectIdentifier(String key) {
+        setIdentifiers();
+        return hmap.get(key);
+
+    }
+}

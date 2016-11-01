@@ -490,11 +490,6 @@ public class ResultsPage extends AbstractPage {
 
         for(int i=0;i<document.getElementsByTagName("results").getLength();i++)
         {
-            String routingCodes = document.getElementsByTagName("Type").item(i).getTextContent();
-            for (int j = 1; j <= document.getFirstChild().getChildNodes().item(i).getChildNodes().getLength(); j++) {
-                assertEquals(getDriver().findElement(By.xpath(".//*[@class='searchEntityList-container']//tbody/tr[td='" + routingCodes + "']/td[" + j + "]")).getText(),
-                       document.getFirstChild().getChildNodes().item(i).getChildNodes().item(j - 1).getTextContent());
-
             String routingCodeType = document.getElementsByTagName("Type").item(i).getTextContent();
             String routingCode = document.getElementsByTagName("Code").item(i).getTextContent();
             for (int j = 1; j <=document.getElementsByTagName("results").item(i).getChildNodes().getLength(); j++)

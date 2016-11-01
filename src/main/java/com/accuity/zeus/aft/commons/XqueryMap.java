@@ -165,6 +165,8 @@ public class XqueryMap {
         queryMap.put("get routing code subtype lookup", "getRoutingCodeSubtypeFromLookup.xqy");
         queryMap.put("get ABA code source lookup", "getABACodeSourceTypesFromLookup.xqy");
         queryMap.put("get office locations summary type lookup", "getOfficeLocationsSummaryTypeFromLookup.xqy");
+
+        queryMap.put("get legalEntity financialStatements periodEndDate","getLegalEntityFinancialStatementPeroidEndDate.xqy");
    }
 
     public String getXquery(String key){
