@@ -121,7 +121,7 @@ public class RoutingCodeSteps extends AbstractSteps {
 
 	@Then("the user verifies that values in $column column is in $order order")
 	public void verifyFormerUsagesNameColumnInAlphabeticalOrder(@Named("column") String column, @Named("order") String order) {
-		getDataPage().verifyColumnIsSorted(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_" + column + "_list"), column, order);
+		getRoutingCodePage().verifyFormerUsagesColumnInOrder(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_" + column + "_list"), column, order);
 	}
 
 	@When("the user clicks on sort button for name column")

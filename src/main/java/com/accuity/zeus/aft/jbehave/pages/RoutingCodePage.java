@@ -649,7 +649,6 @@ public class RoutingCodePage extends AbstractPage {
 
 						switch (document.getElementsByTagName("routingCodeHistory").item(0).getChildNodes().item(0)
 								.getChildNodes().item(childNode).getNodeName()) {
-
 						case "type": assertEquals(historyEventValue, historyEventType.get(i));
 							break;
 						case "date": assertEquals(historyEventValue, historyEventDate.get(i));
@@ -698,8 +697,7 @@ public class RoutingCodePage extends AbstractPage {
 								break;
 							}
 						}						
-					}
-					
+					}					
 				}
 			}
 			else
@@ -707,6 +705,5 @@ public class RoutingCodePage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
+	}	
 }
