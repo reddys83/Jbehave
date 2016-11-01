@@ -4,6 +4,8 @@ package com.accuity.zeus.aft.jbehave.steps;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
+
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -195,7 +197,8 @@ public class RoutingCodeSteps extends AbstractSteps {
 		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_navigation_link"));
 	}
 
-	@When("the user clicks on the eye icon in first row")
+	@When("the user clicks on the eye icon in first row to open the drawer")
+	@Alias("the user clicks on the eye icon in first row to close the drawer")
 	public void clickOnEyeIcon() {
 		getDataPage().clickElementUsingIndex(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"), 1);
 	}
@@ -210,30 +213,7 @@ public class RoutingCodeSteps extends AbstractSteps {
 	public void verifyHistoryValuesFromTrusted(@Named("routingCode") String routingCode,
 			@Named("codeType") String codeType, @Named("source") String source) {
 		getRoutingCodePage().verifyHistoryValuesFromTrusted(routingCode, codeType, source);
-	}
-
-	@When("the user deletes the existing history values")
-	public void deleteExistingHistoryValues(@Named("routingCode") String routingCode,
-			@Named("codeType") String codeType) {
-		getRoutingCodePage().deleteExistingHistoryValues(routingCode, codeType);
-	}
-
-	@When("the user inserts new history values")
-	public void insertHistoryValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType)
-			throws InterruptedException {
-		getRoutingCodePage().insertHistoryValues(routingCode, codeType);
-		getDataPage().refreshThePage();
-		Thread.sleep(3000L);
-	}
-	
-	@When("user inserts a history event with no details")
-	public void modifyHistoryValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType)
-			throws InterruptedException {
-		getRoutingCodePage().deleteExistingHistoryValues(routingCode, codeType);
-		getRoutingCodePage().modifyHistoryValues(routingCode, codeType);
-		getDataPage().refreshThePage();
-		Thread.sleep(2000L);
-	}
+	}	
 	
 	@Then("the user should see N/A value under details column")
 	public void verifyNAValueInDetailColumn() {

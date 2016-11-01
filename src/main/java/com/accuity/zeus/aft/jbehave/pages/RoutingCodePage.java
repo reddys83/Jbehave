@@ -591,7 +591,8 @@ public class RoutingCodePage extends AbstractPage {
 			List<WebElement> eyeIcons = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"));
 			for (int index = 0; index < eyeIcons.size() ; index++) {			
 				attemptClickTheWebElement(eyeIcons.get(index));
-			}			
+			}	
+			
 			List<WebElement> historyUsagesRows = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_usage_table"));
 			for (int innerIndex = 0; innerIndex < historyUsagesRows.size(); innerIndex++) {
 				List<WebElement> historyUsageTableColumns = historyUsagesRows.get(innerIndex).findElements(By.tagName("td"));
@@ -660,41 +661,45 @@ public class RoutingCodePage extends AbstractPage {
 								item(i).getChildNodes().item(childNode).getTextContent(), historyEventReplacedByCode.get(i));
 							break;
 						}
+					}				
+					
+					if(document.getElementsByTagName("officeDetails").item(i).getChildNodes().getLength()>0) {
+						for (int childNodes = 0; childNodes < document.getElementsByTagName("officeDetails").item(0)
+								.getChildNodes().item(0).getChildNodes().getLength(); childNodes++) {
+							
+							historyUsageValue = document.getElementsByTagName("officeDetails").item(i)
+									.getChildNodes().item(0).getChildNodes().item(childNodes).getTextContent();
+							
+							switch (document.getElementsByTagName("officeDetails").item(0).getChildNodes().item(0)
+									.getChildNodes().item(childNodes).getNodeName()) {
+							case "name":
+								assertEquals(historyUsageValue, historyUsageName.get(i));
+								break;
+							case "address":
+								assertEquals(historyUsageValue, historyUsageAddress.get(i));
+								break;
+							case "city":
+								assertEquals(historyUsageValue, historyUsageCity.get(i));
+								break;
+							case "area":
+								assertEquals(historyUsageValue, historyUsageArea.get(i));
+								break;
+							case "subArea":
+								assertEquals(historyUsageValue, historyUsageSubArea.get(i));
+								break;
+							case "country":
+								assertEquals(historyUsageValue, historyUsageCountry.get(i));
+								break;
+							case "postalCode":
+								assertEquals(historyUsageValue, historyUsagePostalCode.get(i));
+								break;
+							case "additionalInfo":
+								assertEquals(historyUsageValue, historyUsageAdditionalInfo.get(i));
+								break;
+							}
+						}						
 					}
-					for (int childNodes = 0; childNodes < document.getElementsByTagName("officeDetails").item(0)
-							.getChildNodes().item(0).getChildNodes().getLength(); childNodes++) {
-						
-						historyUsageValue = document.getElementsByTagName("officeDetails").item(i)
-								.getChildNodes().item(0).getChildNodes().item(childNodes).getTextContent();
-						
-						switch (document.getElementsByTagName("officeDetails").item(0).getChildNodes().item(0)
-								.getChildNodes().item(childNodes).getNodeName()) {
-						case "name":
-							assertEquals(historyUsageValue, historyUsageName.get(i));
-							break;
-						case "address":
-							assertEquals(historyUsageValue, historyUsageAddress.get(i));
-							break;
-						case "city":
-							assertEquals(historyUsageValue, historyUsageCity.get(i));
-							break;
-						case "area":
-							assertEquals(historyUsageValue, historyUsageArea.get(i));
-							break;
-						case "subArea":
-							assertEquals(historyUsageValue, historyUsageSubArea.get(i));
-							break;
-						case "country":
-							assertEquals(historyUsageValue, historyUsageCountry.get(i));
-							break;
-						case "postalCode":
-							assertEquals(historyUsageValue, historyUsagePostalCode.get(i));
-							break;
-						case "additionalInfo":
-							assertEquals(historyUsageValue, historyUsageAdditionalInfo.get(i));
-							break;
-						}
-					}
+					
 				}
 			}
 			else
@@ -703,42 +708,5 @@ public class RoutingCodePage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-
-	public void deleteExistingHistoryValues(String routingCode, String routingCodeType) {
-		try {
-			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
-			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
-			
-			apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"delete routing code history values", nvPairs);
-         Thread.sleep(2000);			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void insertHistoryValues(String routingCode, String routingCodeType) {
-		try {
-			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
-			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
-			apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"insert routing code history values", nvPairs);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
-	public void modifyHistoryValues(String routingCode, String routingCodeType) {
-		try {
-			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
-			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
-			apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"modify routing code history values", nvPairs);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }
