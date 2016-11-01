@@ -462,7 +462,7 @@ public class ResultsPage extends AbstractPage {
     }
 
     public void verifyRoutingCodeSearchResults(String code) {
-        code=code.replaceAll("[^a-zA-Z0-9]+","");
+        code = code.replaceAll("[^a-zA-Z0-9]+", "");
 
        /* Due to perfomance issue with the routingCode resutls
        Forced to sleep for 50 seconds */
@@ -475,35 +475,33 @@ public class ResultsPage extends AbstractPage {
         verifyRoutingCodeSearchResultsHeaders();
         assertEquals("Routing Code results for " + code, getDriver().findElement(ResultsIdentifiers.getObjectIdentifier("routingCode_results_header_xpath")).getText());
 
-        List <WebElement> resultsCount = getDriver().findElements(ResultsIdentifiers.getObjectIdentifier("routingCode_results_resultsCount_xpath"));
+        List<WebElement> resultsCount = getDriver().findElements(ResultsIdentifiers.getObjectIdentifier("routingCode_results_resultsCount_xpath"));
         nvPairs.add(new BasicNameValuePair("code", code));
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,"get routingCode results",nvPairs);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode results", nvPairs);
 
-        int codeResultsCount= Integer.parseInt(document.getElementsByTagName("codeCount").item(0).getTextContent());
-        for (int p=0;p<resultsCount.size();p++) {
+        int codeResultsCount = Integer.parseInt(document.getElementsByTagName("codeCount").item(0).getTextContent());
+        for (int p = 0; p < resultsCount.size(); p++) {
             if (codeResultsCount < 25) {
                 assertEquals("1 to " + codeResultsCount + " of " + codeResultsCount + " results", resultsCount.get(p).getText());
-            }
-            else
+            } else
                 assertEquals("1 to 25 of " + codeResultsCount + " results", resultsCount.get(p).getText());
         }
 
-        for(int i=0;i<document.getElementsByTagName("results").getLength();i++)
-        {
+        for (int i = 0; i < document.getElementsByTagName("results").getLength(); i++) {
             String routingCodes = document.getElementsByTagName("Type").item(i).getTextContent();
             for (int j = 1; j <= document.getFirstChild().getChildNodes().item(i).getChildNodes().getLength(); j++) {
                 assertEquals(getDriver().findElement(By.xpath(".//*[@class='searchEntityList-container']//tbody/tr[td='" + routingCodes + "']/td[" + j + "]")).getText(),
-                       document.getFirstChild().getChildNodes().item(i).getChildNodes().item(j - 1).getTextContent());
-
+                        document.getFirstChild().getChildNodes().item(i).getChildNodes().item(j - 1).getTextContent());
+            }
             String routingCodeType = document.getElementsByTagName("Type").item(i).getTextContent();
             String routingCode = document.getElementsByTagName("Code").item(i).getTextContent();
-            for (int j = 1; j <=document.getElementsByTagName("results").item(i).getChildNodes().getLength(); j++)
-            {
-               assertEquals(document.getElementsByTagName("results").item(i).getChildNodes().item(j-1).getTextContent().replaceAll(" +", " "),
-                       getDriver().findElement(By.xpath(".//*[@class='searchEntityList-container']//tbody/tr[td[1][text()='" + routingCode + "'] and td[2][text()='" + routingCodeType + "']]/td["+j+"]")).getText());
+            for (int j = 1; j <= document.getElementsByTagName("results").item(i).getChildNodes().getLength(); j++) {
+                assertEquals(document.getElementsByTagName("results").item(i).getChildNodes().item(j - 1).getTextContent().replaceAll(" +", " "),
+                        getDriver().findElement(By.xpath(".//*[@class='searchEntityList-container']//tbody/tr[td[1][text()='" + routingCode + "'] and td[2][text()='" + routingCodeType + "']]/td[" + j + "]")).getText());
             }
         }
     }
+
 
     public void verifyErrorMessageForAtleast2Char()
     {
