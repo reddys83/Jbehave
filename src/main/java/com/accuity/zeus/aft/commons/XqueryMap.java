@@ -168,6 +168,7 @@ public class XqueryMap {
         queryMap.put("insert routing code history values", "insertCodeHistory.xqy");
         queryMap.put("get routing code history values", "getRoutingCodeHistoryDetails.xqy");
         queryMap.put("modify routing code history values", "modifyCodeHistory.xqy");
+        queryMap.put("get office locations summary type lookup", "getOfficeLocationsSummaryTypeFromLookup.xqy");
    }
 
     public String getXquery(String key){
