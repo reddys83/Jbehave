@@ -30,6 +30,7 @@ public class FinancialsPage extends AbstractPage{
     }
 
     public void verifyLegalEntityFinancialStatements(String fid) {
+        ArrayList<String> periodEndDateFromDB= new ArrayList<>();
         List<NameValuePair> nvPairs = new ArrayList<>();
         nvPairs.add(new BasicNameValuePair("fid", fid));
         nvPairs.add(new BasicNameValuePair("source", "trusted"));
@@ -40,9 +41,18 @@ public class FinancialsPage extends AbstractPage{
         }
         List<WebElement> periodEndDate = getDriver().findElements(FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_EndDate_leftSideMenu_xpath"));
 
+
+
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legalEntity financialStatements periodEndDate", nvPairs);
+        for (int j=0;j<document.getElementsByTagName("periodEnd").getLength();j++)
+        {
+            periodEndDateFromDB.add(document.getElementsByTagName("periodEnd").item(j).getTextContent());
+        }
+     if(periodEndDateFromDB.size()>=1) {
+         assertEquals(periodEndDateFromDB.get(0), getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_default_selected_endDate_xpath")).getText());
+     }
         for (int i = 0; i < periodEndDate.size(); i++) {
             assertEquals(document.getElementsByTagName("periodEnd").item(i).getTextContent(), periodEndDate.get(i).getText());
             }
     }
-}
+  }

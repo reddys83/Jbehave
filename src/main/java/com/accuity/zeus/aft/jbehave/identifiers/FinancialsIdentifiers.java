@@ -13,6 +13,7 @@ public class FinancialsIdentifiers {
 
     public static void setIdentifiers() {
         hmap.put("financialStatement_period_EndDate_leftSideMenu_xpath", By.xpath((".//*[@id='results']//ul[@id='periodEnd']/li")));
+        hmap.put("financialStatement_default_selected_endDate_xpath", By.xpath(".//*[@id='results']//ul[@id='periodEnd']/li[@class='selected']"));
     }
 
     public static By getObjectIdentifier(String key) {
