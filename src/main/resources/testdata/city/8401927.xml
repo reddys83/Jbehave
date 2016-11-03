@@ -1,0 +1,23 @@
+<city deleted="false" fid="8401927" id="48b3786e-efb8-4f24-99cb-72db4e94d0ea" resource="/city/id/48b3786e-efb8-4f24-99cb-72db4e94d0ea" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Barajyolu</value>
+            </name>
+            <citySortKey>BARAJYOLU</citySortKey>
+        </names>
+        <status>active</status>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/bff7db64-61eb-4661-8fde-4c5274907506" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/4409a95d-8616-4cd6-8505-e8c84f0d5336" rel="src"/>
+
+        </place>
+    </within>
+</city>

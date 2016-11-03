@@ -500,10 +500,9 @@ public class ResultsPage extends AbstractPage {
                             getDriver().findElement(By.xpath(".//*[@class='searchEntityList-container']//tbody/tr[td[1][text()='" + routingCode + "'] and td[2][text()='" + routingCodeType + "']]/td[" + j + "]")).getText());
 
                 }
+
             }
         }
-
-
 
     public void verifyErrorMessageForAtleast2Char()
     {
@@ -1247,7 +1246,7 @@ public class ResultsPage extends AbstractPage {
     	assertEquals(tooltip, getDriver().findElement(by).getAttribute("title"));
     } 
 
-    public void verifyResultsPage() {		
+    public void verifyResultsPage() {
 		assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingCodeResultsHeader_view_mode")).getText().contains("Routing Code results for"));
 	}
  }

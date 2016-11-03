@@ -1,0 +1,65 @@
+<city deleted="false" fid="8449064" id="4a9fb34c-54e0-4545-920c-8abe25b8acf9" resource="/city/id/4a9fb34c-54e0-4545-920c-8abe25b8acf9" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Adrian</value>
+            </name>
+            <citySortKey>ADRIAN</citySortKey>
+        </names>
+        <status>pending</status>
+        <dates>
+            <dateBegan accuracy="day">2016-06-01</dateBegan>
+            <dateCeased accuracy="day">2016-06-05</dateCeased>
+        </dates>
+        <identifiers>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>660</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+        <demographics>
+            <metric>
+                <name>Population</name>
+                <value>123457</value>
+            </metric>
+        </demographics>
+        <additionalInfos>
+            <additionalInfo>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</additionalInfo>
+        </additionalInfos>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <alternativeRegions>
+        <region>
+            <type>Federal Reserve District</type>
+            <value>6</value>
+        </region>
+        <region>
+            <type>Federal Home Loan Bank District</type>
+            <value>4</value>
+        </region>
+        <region>
+            <type>National Credit Union Administration Region</type>
+            <value>III</value>
+        </region>
+    </alternativeRegions>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/e353d15d-b2f2-4076-a717-d0c567769161" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/0595c30b-ffba-417a-9796-a0e98495c03f" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/e2ed36bf-2a65-45f9-9407-9fb0a82e5505" rel="src"/>
+
+        </place>
+    </within>
+</city>
