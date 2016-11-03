@@ -28,10 +28,15 @@ And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on Financials section header
 Then the user should see the financials section field values same as in the trusted document
-When the user clicks on another <financialStatementPeriondEndDate> on the left navigation
+Then the user should see the <financialStatementPeriondEndDate> should be the prefix to the Section Header 'FINANCIALS'
 Then the user should see the financials section field values same as in the trusted document
+Then the user verifies Audited by field is displayed only when Audited field is true
+When the user clicks on another <financialStatementPeriondEndDate> on the left navigation
+Then the user should see the exchange rate at period end same as in the trusted document
+
 
 Examples:
 |entity|searchBy|fid|financialStatementPeriondEndDate|
 |1010|FID|1010|2011 DEC 31|
+|1234|FID|1234|2010 DEC 31|
 
