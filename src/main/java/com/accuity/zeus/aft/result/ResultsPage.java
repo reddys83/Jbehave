@@ -488,7 +488,6 @@ public class ResultsPage extends AbstractPage {
         }
 
         for (int i = 0; i < document.getElementsByTagName("results").getLength(); i++) {
-
             String routingCodes = document.getElementsByTagName("Type").item(i).getTextContent();
             for (int j = 1; j <= document.getFirstChild().getChildNodes().item(i).getChildNodes().getLength(); j++) {
                 assertEquals(getDriver().findElement(By.xpath(".//*[@class='searchEntityList-container']//tbody/tr[td='" + routingCodes + "']/td[" + j + "]")).getText(),
@@ -503,6 +502,7 @@ public class ResultsPage extends AbstractPage {
                 }
             }
         }
+
 
 
     public void verifyErrorMessageForAtleast2Char()
@@ -1233,7 +1233,6 @@ public class ResultsPage extends AbstractPage {
         assertTrue(getDriver().findElement(results_tab_xpath).getAttribute("class").equals("selected"));
     }
 
-    
     public WebElement getRoutingCodeHyperlinkElementForCodeValue(String routingCode, String codeType) {
         List<WebElement> elements = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcodes_rows_xpath"));
         for (WebElement element : elements) {
@@ -1248,5 +1247,8 @@ public class ResultsPage extends AbstractPage {
     	assertEquals(tooltip, getDriver().findElement(by).getAttribute("title"));
     } 
 
-
+    public void verifyResultsPage() {		
+		assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingCodeResultsHeader_view_mode")).getText().contains("Routing Code results for"));
+	}
  }
+
