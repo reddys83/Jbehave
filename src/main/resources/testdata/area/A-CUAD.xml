@@ -1,0 +1,35 @@
+<area deleted="false" fid="A-CUAD" id="87d4b8e8-ecba-4e9e-beff-daee28edecba"
+      resource="/area/id/87d4b8e8-ecba-4e9e-beff-daee28edecba" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Cuando Cubango</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Cuando Cubango</value>
+            </name>
+        </names>
+        <status>active</status>
+        <useInAddress>true</useInAddress>
+
+    </summary>
+    <relatedPresences>
+        <relation>
+            <type>Government</type>
+            <details>
+                <detail>State Government</detail>
+            </details>
+            <presence>
+                <link href="/legalEntity/id/4054b437-e1d1-4891-ace4-756fc238c943" rel="src"/>
+            </presence>
+        </relation>
+    </relatedPresences>
+    <within>
+        <place>
+            <link href="/country/id/55407226-a9b5-4d16-95b4-9ca1f8067351" rel="src"/>
+        </place>
+    </within>
+</area>

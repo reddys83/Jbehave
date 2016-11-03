@@ -154,6 +154,7 @@ public class OfficesPage extends AbstractPage {
         }
 
     }
+
     public void verifyNoOfficeTabInOffice() {
 
         try
