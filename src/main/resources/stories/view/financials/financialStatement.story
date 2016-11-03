@@ -10,9 +10,7 @@ Scenario: Verify legalEntity financialStatement periodEnd date(Left menu)
 testdata:
  1.legalEntity which has more than one financialStatement
  2.legalEntity which has only one financialStatement
- 3.legalEntity which one of the financialStatement has only year
- 4.legalEntity which one of the financialStatement has only month
- 5.legalEntity with no financialStatements
+ 3.legalEntity with no financialStatements
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -26,7 +24,5 @@ Examples:
 |entity|searchBy|fid|
 |1234|fid|1234|
 |60115|fid|60115|
-|1247|fid|1247|
-|13927|fid|13927|
 |286840|fid|286840|
 
