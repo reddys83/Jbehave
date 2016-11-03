@@ -1,0 +1,34 @@
+<area deleted="false" fid="A-1657" id="1762f78b-0521-4a9d-957b-eeba4b8d7938" resource="/area/id/1762f78b-0521-4a9d-957b-eeba4b8d7938" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+
+
+            <name>
+                <type>Full Name</type>
+                <value>Missouri</value>
+            </name><name>
+            <type>Display Name</type>
+            <value>MO</value>
+        </name></names>
+        <status>active</status>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <relatedPlaces>
+
+        <relation>
+            <type>city</type>
+            <details>
+                <detail>Test City</detail>
+            </details>
+            <place>
+                <link href="/city/id/cf43ecf0-e91b-4a65-8f08-01a9448803d9" rel="src"/>
+            </place>
+        </relation></relatedPlaces>
+
+
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </place>
+    </within></area>

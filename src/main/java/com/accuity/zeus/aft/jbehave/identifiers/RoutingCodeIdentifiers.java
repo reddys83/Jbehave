@@ -22,7 +22,6 @@ public class RoutingCodeIdentifiers {
         hmap.put("routingcode_basicInfo_view_ABACodeSource", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='ABA Code Source']/td"));
         hmap.put("routingcode_basicInfo_view_RoutingCode", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code']/td"));
         hmap.put("routingcode_basicInfo_view_RoutingCodeCheckDigit", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Check Digit']/td"));
-       // hmap.put("routingcode_basicInfo_view_AlternateCodeFormType", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Type']/td"));
         hmap.put("routingcode_basicInfo_view_AlternateCodeForm", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Alternate Code Form']/td/span"));
         hmap.put("routingcode_basicInfo_view_Status", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Status']/td"));
         hmap.put("routingcode_basicInfo_view_AccountEligibility", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Account Eligibility']/td"));
@@ -90,12 +89,14 @@ public class RoutingCodeIdentifiers {
         hmap.put("officename_basicInfo_link", By.xpath("//*[@id='officeBasicInfo']"));
         hmap.put("officename_basicInfo_label", By.xpath("//*[@id='officeBasicInfo']/h1/span"));
         hmap.put("officename_text_value", By.xpath("//*[@id='officeBasicInfo']//tr[td='Office Name']/td[2]"));
+
         hmap.put("routingCode_relatedCodes_link", By.id("routingCodeRelatedCodes"));
         hmap.put("routingCode_relatedCodes_context", By.xpath(".//*[@id='routingCodeRelatedCodes']//tbody/tr[1]/td[1]"));
         hmap.put("routingCode_relatedCodes_header", By.xpath(".//*[@id='routingCodeRelatedCodes']//span"));
         hmap.put("routingCode_relatedCodes_context_header", By.xpath(".//*[@id='routingCodeRelatedCodes']//thead//th[1]"));
         hmap.put("routingCode_relatedCodes_code_header",By.xpath(".//*[@id='routingCodeRelatedCodes']//thead//th[2]"));
         hmap.put("routingCode_relatedCodes_type_header",By.xpath(".//*[@id='routingCodeRelatedCodes']//thead//th[3]"));
+
         hmap.put("edit_routingcode_page_RoutingCodeComment",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']//input"));
         hmap.put("routingcode_page_paymentsystems_link",By.xpath("//*[@id='routingCodePaymentSystems'][text()='Payment Systems']"));
         hmap.put("paymentsystems_productName",By.xpath("//*[@id='routingCodePaymentSystems']/div[@class='payment-system']/h3"));
@@ -115,6 +116,7 @@ public class RoutingCodeIdentifiers {
         hmap.put("routingcode_former_usages_link", By.xpath("//*[@id='routingCodeFormerUsages']"));
         hmap.put("routingcode_history_link", By.xpath("//*[@id='routingCodeHistory']"));
         hmap.put("routingcode_office_fid_search_results", By.xpath("//*[@id='searchEntityList-list']//tbody//td[4]/*[@href]"));
+
         hmap.put("view_routingCodeSearchEntityPlaceHolder_xpath", By.xpath("//input[@placeholder='Enter at least 2 valid characters']"));
         hmap.put("view_routingCodeSearchTypeAheadBox_xpath", By.xpath("//*[@id='search']"));
         hmap.put("routingCodeResultsHeader_view_mode", By.xpath("//div[@id='contentSummary']//*[@class='search-results']"));
