@@ -744,7 +744,7 @@ public class EditOfficeSteps extends AbstractSteps{
         getDataPage().attemptClick(OfficeIdentifiers.getObjectIdentifier(deletebutton));
     }
 
-    @Then("the user should still see the office $dropdown with value $dropdownvalue as office type in office page")
+    @Then("the user should still see the office $dropdown with the value $dropdownvalue as office type in office page")
     public void verifyExistingOfficeTypeRow(String dropdown,String dropdownvalue)
     {
         getEditOfficePage().verifyExistingOfficeTypeRow(dropdown,dropdownvalue);
@@ -842,7 +842,7 @@ public class EditOfficeSteps extends AbstractSteps{
     }
 
 
-    @Then("the user verifies the office name value maxlength is $maxSize for the $rowIdentifier")
+    @Then("the user verifies the office name value maxlength is $maxSize for $rowIdentifier")
     public void verifyMaxlengthOfficeNameValueText(@Named("maxSize") String maxSize,@Named("rowIdentifier") String rowIdentifier){getEditOfficePage().verifyMaxlengthOfficeNameValueText(maxSize,rowIdentifier);}
 
 
@@ -1811,4 +1811,29 @@ public class EditOfficeSteps extends AbstractSteps{
 	public void verifyOfficeLocationsSummaryRowNotPresentInZeusDB(@Named("source") String source, @Named("officeFid") String officeFid) {
 		getEditOfficePage().verifyOfficeLocationsSummaryRowNotPresentInZeusDB(source, officeFid);
 	}
+	
+	@Then("the user should see the $dropdown values from lookup $fid except the values that are selected already in office")
+	public void verifyOfficeTypeListFromLookup(String dropdown, String fid) {
+		getEditOfficePage().verifyOfficeTypeListFromLookup(fid, dropdown);
+	}
+	
+	@Then("the user should see the officeType value as in $source document with fid <officeFid>")
+	public void verifyEditOfficesOfficeTypeValueFromTrusted(@Named("officeFid") String officeFid,
+			@Named("source") String source) {
+		getEditOfficePage().verifyEditOfficesOfficeTypeValueFromTrusted(officeFid, "type", source);
+	}
+	
+	@Then("the user should see officeType value as <officeTypeValue> for fid <officeFid> in $source document and in UI")
+	public void verifyEditOfficesOfficeTypeValueFromZeusAndInUI(@Named("officeTypeValue") String officeTypeValue,
+			@Named("officeFid") String officeFid, @Named("source") String source) {
+		getEditOfficePage().verifyEditOfficesOfficeTypeValueFromZeusAndInUI(officeTypeValue, "type", officeFid, source,
+				"get office basic info");
+	}
+	
+	@When("the user clicks on add new office name button in the office name page")
+	public void clickOnofficeAddButton() {
+		getEditOfficePage().clickAddRowButton();
+	}
+	
+	
 }
