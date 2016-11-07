@@ -297,6 +297,77 @@ public class EditRoutingCodeSteps extends AbstractSteps {
     	getDataPage().verifyElementNotExistInUI(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ABACodeSource"));
     }
     
+    @Then("the user verifies the former usages field values same as in $source document")
+    public void verifyFormerUsagesFieldValuesFromTrustedDB(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("source") String source) {
+    	getEditRoutingCodePage().verifyFormerUsagesFieldValuesFromTrustedDB(routingCode, codeType, source);
+	}
+    
+    @Then("the user verifies the column names in former usages edit page")
+	public void verifyFormerUsageColumnNames() {
+    	//getEditRoutingCodePage().verifyFormerUsageColumnNames();
+    	getDataPage().verifyWebElementText("Name", "NAME", RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_name_col"));
+    	getDataPage().verifyWebElementText("City", "CITY", RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_city_col"));
+    	getDataPage().verifyWebElementText("Area", "AREA", RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_area_col"));
+    	getDataPage().verifyWebElementText("Additional Info", "ADDITIONAL INFO", RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_additional_info_col"));
+	}
+    
+    @Then("the user verifies no add row button in former usages edit page")
+    public void verifyNoFormerUsagesAddRowButton() {
+    	getDataPage().verifyElementNotExistInUI(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_add_button"));
+    }
+    
+    @Then("the user verifies that the office name is not a hyperlink in former usages edit page")
+    public void verifyFormerUsagesOfficeNameNotHyperlink() {
+    	getDataPage().verifyElementNotExistInUI(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_hyperlink"));
+    }
+    
+    @Then("the user verifies that values in $column column is in $order order in former usages edit page")
+	public void verifyFormerUsagesColumnsInAlphabeticalOrder(@Named("column") String column, @Named("order") String order) {
+		getDataPage().verifyColumnIsSorted(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_" + column + "_list"), column, order);
+	}
+
+	@When("the user clicks on sort button for name column in former usages edit page")
+	public void clickOnFormerUsagesNameSortButton() {
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_name_col"));
+	}
+
+	@When("the user clicks on sort button for city column in former usages edit page")
+	public void clickOnFormerUsagesCitySortButton() {
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_city_col"));
+	}
+
+	@When("the user clicks on sort button for area column in former usages edit page")
+	public void clickOnFormerUsagesAreaSortButton() {
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_area_col"));
+	}
+	
+	@When("the user inserts a former usages value for one row")
+	public void insertNewFormerUsagesValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType) throws InterruptedException {
+		getEditRoutingCodePage().insertNewFormerUsagesValueForOneRow(routingCode, codeType);
+		getDataPage().refreshThePage();
+		Thread.sleep(15000L);
+	}
+	
+	@When("the user clicks on the delete former usages row button in the former usages edit page")
+	public void clickOnDeleteFormerUsagesRowButton() {
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_delete_row_button"));
+	}
+	
+	@Then("the user should see the newly added former usages row in the former usages edit page")
+	public void verifyNewlyAddedFormerUsagesRowIsDisplayed() {
+		getDataPage().verifyRowIsDisplayed(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_row"), true);
+	}
+	
+	@Then("the user should not see the newly added former usages row in the former usages view page")
+	public void verifyNewlyAddedFormerUsagesRowNotDisplayed() {
+		getDataPage().verifyRowIsDisplayed(RoutingCodeIdentifiers.getObjectIdentifier("view_former_usages_row"), false);
+	}
+	
+	@Then("the user verifies that the former usages field values does not exist in $source document")
+    public void verifyFormerUsagesFieldValuesFromZeusDB(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("source") String source) {
+    	getEditRoutingCodePage().verifyFormerUsagesValuesNotPresentInZeusDB(routingCode, codeType, source);
+	}
+    
 }
 
 
