@@ -522,16 +522,4 @@ public class EditRoutingCodePage extends AbstractPage {
 		}
 	}
 	
-	/*public void verifyFormerUsageColumnNames() {
-		try {
-			Thread.sleep(2000L);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		assertEquals("NAME", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_name_col")).getText());
-		assertEquals("CITY", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_city_col")).getText());
-		assertEquals("AREA", getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_area_col")).getText());
-		assertEquals("ADDITIONAL INFO",	getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_additional_info_col")).getText());
-	}*/
-	
 }

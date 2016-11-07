@@ -304,7 +304,6 @@ public class EditRoutingCodeSteps extends AbstractSteps {
     
     @Then("the user verifies the column names in former usages edit page")
 	public void verifyFormerUsageColumnNames() {
-    	//getEditRoutingCodePage().verifyFormerUsageColumnNames();
     	getDataPage().verifyWebElementText("Name", "NAME", RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_name_col"));
     	getDataPage().verifyWebElementText("City", "CITY", RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_city_col"));
     	getDataPage().verifyWebElementText("Area", "AREA", RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_area_col"));
@@ -345,7 +344,7 @@ public class EditRoutingCodeSteps extends AbstractSteps {
 	public void insertNewFormerUsagesValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType) throws InterruptedException {
 		getEditRoutingCodePage().insertNewFormerUsagesValueForOneRow(routingCode, codeType);
 		getDataPage().refreshThePage();
-		Thread.sleep(15000L);
+		Thread.sleep(5000L);
 	}
 	
 	@When("the user clicks on the delete former usages row button in the former usages edit page")
@@ -359,13 +358,19 @@ public class EditRoutingCodeSteps extends AbstractSteps {
 	}
 	
 	@Then("the user should not see the newly added former usages row in the former usages view page")
-	public void verifyNewlyAddedFormerUsagesRowNotDisplayed() {
+	public void verifyNewlyAddedFormerUsagesRowNotDisplayed() throws InterruptedException {
+		Thread.sleep(3000L);
 		getDataPage().verifyRowIsDisplayed(RoutingCodeIdentifiers.getObjectIdentifier("view_former_usages_row"), false);
 	}
 	
 	@Then("the user verifies that the former usages field values does not exist in $source document")
-    public void verifyFormerUsagesFieldValuesFromZeusDB(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("source") String source) {
+    public void verifyFormerUsagesValuesNotPresentInZeusDB(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("source") String source) {
     	getEditRoutingCodePage().verifyFormerUsagesValuesNotPresentInZeusDB(routingCode, codeType, source);
+	}
+	
+	@Then("the user verifies that the former usages field values is same as in $source document")
+    public void verifyFormerUsagesFieldValuesFromZeusDB(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("source") String source) {
+    	getEditRoutingCodePage().verifyFormerUsagesFieldValuesFromZeusDB(routingCode, codeType, source);
 	}
     
 }

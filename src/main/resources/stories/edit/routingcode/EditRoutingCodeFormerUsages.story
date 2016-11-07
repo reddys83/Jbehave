@@ -13,14 +13,12 @@ c) Verify that the 'Office Name' field is not a hyperlink.
 d) Verify that values in the Name, City and Area column can be in ascending and descending order after clicking on sort button.
 e) Verify that there is no change in the confirmation modal after clicking on Save button.
 f) Verify that Name column list values is in default order after clicking on confirm button.
-Meta: @qatest
+
 Given a user is on the search page
 When the user selects the <searchBy> from the dropdown
 When the user enters the <entity> in the typeahead
 And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
-When the user deletes the existing former usages values
-When the user inserts new former usages values
 Then the user should see the routing code basic info page
 When the user clicks on the former usages link in the navigation bar
 When the user clicks on the routing code update link
@@ -39,12 +37,14 @@ When the user clicks on sort button for area column in former usages edit page
 Then the user verifies that values in area column is in ascending order in former usages edit page
 When the user clicks on sort button for area column in former usages edit page
 Then the user verifies that values in area column is in descending order in former usages edit page
+When the user clicks on sort button for name column in former usages edit page
 When the user clicks on the save button
 Then the user should not see the below summary changes in confirmation modal
 |Summary|
 |Former Usages|
 When the user clicks on the confirm button
 Then the user verifies that values in name column is in ascending order
+Then the user verifies that the former usages field values is same as in zeus document
 
 Examples:
 |entity|searchBy|routingCode|codeType|
@@ -58,8 +58,8 @@ Given a user is on the search page
 When the user selects the <searchBy> from the dropdown
 When the user enters the <entity> in the typeahead
 And the user clicks on the search button
-When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
+When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
 When the user deletes the existing former usages values
 When the user inserts a former usages value for one row
 Then the user should see the routing code basic info page
