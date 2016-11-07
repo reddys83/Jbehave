@@ -1,0 +1,50 @@
+<area deleted="false" fid="A-CST" id="18493641-e17d-4c17-b2f2-4da39a09a980"
+      resource="/area/id/18493641-e17d-4c17-b2f2-4da39a09a980" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Constantine</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Constantine</value>
+            </name>
+        </names>
+        <status>active</status>
+        <identifiers>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>H4Testing</value>
+                <status>pending</status>
+            </identifier>
+        </identifiers>
+        <demographics>
+            <metric>
+                <name>Population</name>
+                <value>123</value>
+                <date accuracy="day">2011-06-12</date>
+            </metric>
+        </demographics>
+        <additionalInfos>
+            <additionalInfo>test srikanth reddy srikanth</additionalInfo>
+        </additionalInfos>
+        <useInAddress>true</useInAddress>
+
+    </summary>
+    <creditRatings>
+        <rating>
+            <agencyName>Capital Intelligence</agencyName>
+            <type>Long Term Rating</type>
+            <value>@#@$@</value>
+            <dateApplied accuracy="day">2016-01-22</dateApplied>
+            <dateConfirmed accuracy="day">2009-04-30</dateConfirmed>
+        </rating>
+    </creditRatings>
+    <within>
+        <place>
+            <link href="/country/id/21b69329-6bc2-4e43-aac7-9a18c937324e" rel="src"/>
+        </place>
+    </within>
+</area>

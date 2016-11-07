@@ -1,0 +1,28 @@
+<area deleted="false" fid="A-NAMI" id="be431fc1-1984-441b-b86c-95b795aa8bc9"
+      resource="/area/id/be431fc1-1984-441b-b86c-95b795aa8bc9" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Namibe</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Namibe</value>
+            </name>
+            <name>
+                <type>Alternative Name</type>
+                <value>testing</value>
+            </name>
+        </names>
+        <status>active</status>
+        <useInAddress>true</useInAddress>
+
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/55407226-a9b5-4d16-95b4-9ca1f8067351" rel="src"/>
+        </place>
+    </within>
+</area>

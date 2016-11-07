@@ -1,0 +1,199 @@
+<area deleted="false" fid="SA-2500" id="9d138ae1-59eb-4a79-abf6-8809d8878bcc"
+      resource="/area/id/9d138ae1-59eb-4a79-abf6-8809d8878bcc" source="trusted">
+    <summary>
+        <isoCode>CK</isoCode>
+        <type>subarea</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Cook</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Cook</value>
+            </name>
+        </names>
+        <status>active</status>
+        <dates>
+            <dateBegan accuracy="day">2006-05-21</dateBegan>
+            <dateCeased accuracy="day">1922-07-13</dateCeased>
+        </dates>
+        <timeZones>
+            <summaries>
+                <summary>+2 hour</summary>
+            </summaries>
+            <zone>+02:00</zone>
+            <zone>+02:00</zone>
+        </timeZones>
+
+        <redirectTo>
+            <place>
+                <link href="/area/id/e2a97a2e-63fd-4535-9b97-da52ce4c67b4" rel="src"/>
+            </place>
+            <place>
+                <link href="/area/id/b6b0da33-8042-464e-b111-880b7289f390" rel="src"/>
+            </place>
+        </redirectTo>
+        <identifiers>
+            <identifier>
+                <type>typeA</type>
+                <value>coolIdentifier 24601</value>
+                <status>Active</status>
+            </identifier>
+            <identifier>
+                <type>typeB</type>
+                <value>ASDF</value>
+                <status>Inactive</status>
+            </identifier>
+            <identifier>
+                <type>FIPS Code</type>
+                <value>Test Identifier</value>
+                <status>Inactive</status>
+            </identifier>
+        </identifiers>
+        <demographics>
+            <metric>
+                <name>Number of Counties</name>
+                <value>1</value>
+                <unit>mi²</unit>
+                <date accuracy="day">2015-02-02</date>
+            </metric>
+            <metric>
+                <name>Persons per Household</name>
+                <value>2.65</value>
+                <date accuracy="day">2015-02-02</date>
+            </metric>
+            <metric>
+                <name>Largest MSA Population</name>
+                <value>9729825</value>
+                <date accuracy="day">2015-02-02</date>
+            </metric>
+        </demographics>
+        <maxConsumerRate>92%</maxConsumerRate>
+        <additionalInfos>
+            <additionalInfo>ILLINOIS: Census area dissolved in 2100</additionalInfo>
+        </additionalInfos>
+
+        <useInAddress>false</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </place>
+        <place>
+            <link href="/area/id/40e82d7f-0397-4675-aca9-0006ce9175a8" rel="src"/>
+        </place>
+    </within>
+    <creditRatings>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Sovereign Debt Rating</type>
+            <value>B</value>
+            <dateApplied accuracy="day">1990-01-01</dateApplied>
+            <dateConfirmed accuracy="day">1991-01-04</dateConfirmed>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Long Term Sovereign Debt Rating</type>
+            <value>A-</value>
+            <dateApplied accuracy="month">2010-01-07</dateApplied>
+            <dateConfirmed accuracy="day">2010-05-04</dateConfirmed>
+        </rating>
+        <rating>
+            <type>Chicagos Terrible Credit Rating</type>
+            <value>F+</value>
+        </rating>
+    </creditRatings>
+    <alternativeRegions>
+        <region>
+            <type>Federal Reserve Bank Region</type>
+            <value>San Francisco 12</value>
+        </region>
+        <region>
+            <type>Federal Home Loan Bank Region</type>
+            <value>Seattle 12</value>
+        </region>
+        <region>
+            <type>My random sweet region</type>
+            <value>Sugar 1234</value>
+        </region>
+    </alternativeRegions>
+    <relatedPlaces>
+        <relation>
+            <type>Country</type>
+            <details>
+                <detail>Test Data</detail>
+                <detail>Test Data</detail>
+            </details>
+            <place>
+                <link rel="src" href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4"/>
+            </place>
+        </relation>
+        <relation>
+            <type>Subarea</type>
+            <details>
+                <detail>Test Data</detail>
+                <detail>Test Data</detail>
+            </details>
+            <place>
+                <link rel="src" href="/area/id/639a67b2-8501-4a14-961a-bad8cc3efd89"/>
+            </place>
+        </relation>
+        <relation>
+            <type>Area</type>
+            <details>
+                <detail>Same Country area</detail>
+                <detail>Same Country area</detail>
+            </details>
+            <place>
+                <link rel="src" href="/area/id/3c23b2ec-3fdb-4ff4-9384-be3578f36798"/>
+            </place>
+        </relation>
+        <relation>
+            <type>City</type>
+            <details>
+                <detail>City with no Area</detail>
+                <detail>City with no area</detail>
+            </details>
+            <place>
+                <link rel="src" href="/city/id/53275917-dfe2-4aaf-b0c1-7fc3ced61b54"/>
+            </place>
+        </relation>
+    </relatedPlaces>
+    <relatedPeople>
+        <relation>
+            <type>Financial Institution Board member</type>
+            <person>
+                <link rel="src" href="/person/id/bcb20480-ae1d-4c6d-9b9d-71c68d12e02b"/>
+            </person>
+        </relation>
+        <relation>
+            <type>President</type>
+            <type>Cheif executor</type>
+            <person>
+                <link rel="src" href="/person/id/bfbb736b-e5ed-4054-9ff9-28417ac483af"/>
+            </person>
+        </relation>
+    </relatedPeople>
+    <relatedPresences>
+        <relation>
+            <type>Government</type>
+            <details>
+                <detail>City Government</detail>
+            </details>
+            <presence>
+                <link rel="src" href="/legalEntity/id/16a95094-843c-4044-ba62-9b40519c61ef"/>
+            </presence>
+        </relation>
+        <relation>
+            <type>Government Type</type>
+            <details>
+                <detail>City Government</detail>
+                <detail>City Government</detail>
+            </details>
+            <presence>
+                <link rel="src" href="/legalEntity/id/16a95094-843c-4044-ba62-9b40519c61ef"/>
+            </presence>
+        </relation>
+    </relatedPresences>
+</area>

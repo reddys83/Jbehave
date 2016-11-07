@@ -1,0 +1,24 @@
+<area deleted="false" fid="A-1606" id="2e3c8790-2748-4712-b711-9ac980a57ac0"
+      resource="/area/id/2e3c8790-2748-4712-b711-9ac980a57ac0" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>New Jersey</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>NJ</value>
+            </name>
+        </names>
+        <status>active</status>
+
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </place>
+    </within>
+</area>
