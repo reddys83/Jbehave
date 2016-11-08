@@ -121,6 +121,19 @@ public class RoutingCodeIdentifiers {
         hmap.put("view_routingCodeSearchEntityPlaceHolder_xpath", By.xpath("//input[@placeholder='Enter at least 2 valid characters']"));
         hmap.put("view_routingCodeSearchTypeAheadBox_xpath", By.xpath("//*[@id='search']"));
         hmap.put("routingCodeResultsHeader_view_mode", By.xpath("//div[@id='contentSummary']//*[@class='search-results']"));
+        hmap.put("edit_routingcode_page_add_new_relatedcodes_btn", By.xpath("//*[@id='add-relatedCodes']"));
+        hmap.put("edit_routingcode_page_relatedcodes_context_dropdown", By.xpath("//*[@id='additionalRelatedCodes']/tr//select[@id='relatedCodeContext']"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_context_dropdown", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//select[@id='relatedCodeContext']"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_chosen_Select_input", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//div[@class='chosen-search']/input"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_chosen_Select_options", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//select[@id='relatedCode']/option"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_chosen_Select_dropdown", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//div[@id='relatedCode_chosen']//ul/li"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_chosen_Select_link", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//div[@id='relatedCode_chosen']/a"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_type", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//input[@id='relatedCodeType']"));
+        hmap.put("first_row_existing_related_codes_delete_button", By.xpath("//*[@id='additionalRelatedCodes']/tr[1]//button[@title='Delete Row']"));
+        hmap.put("edit_routingcode_page_relatedcodes_table", By.xpath("//*[@id='additionalRelatedCodes']/tr"));
+        hmap.put("edit_routingcode_page_relatedcodes_no_searchResults_msg", By.xpath("//*[@id='relatedCode_chosen']/div/ul/li[@class='no-results']"));
+
+
     }
 
     public static By getObjectIdentifier(String key) {

@@ -5,21 +5,20 @@ import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
+import org.apache.commons.collections.ListUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
 
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -104,8 +103,33 @@ public class EditRoutingCodePage extends AbstractPage {
         }
 
     }
-    
-    public void verifyRoutingCodeBooleanFieldValuesInUI(String accountEligibilityValue, String internalUseOnlyValue, String useHeadOfficeValue) {
+
+
+	public void verifyEditRoutingCodeRelatedCodeValuesFromTrusted(String routingCode, String codeType) {
+
+		    List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+			nvPairs.add(new BasicNameValuePair("source","trusted"));
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode relatedCodes", nvPairs);
+			try {
+				Thread.sleep(1000L);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			for (int i=0;i<document.getElementsByTagName("relatedCodes").getLength();i++)
+			{
+				assertEquals(document.getFirstChild().getChildNodes().item(i).getChildNodes().item(0).getTextContent(),
+							getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_relatedcodes_table")).get(i).findElement(By.xpath("td[1]/select/option[@selected='selected']")).getText());
+				assertEquals(document.getFirstChild().getChildNodes().item(i).getChildNodes().item(1).getTextContent(),
+						getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_relatedcodes_table")).get(i).findElement(By.xpath("td[2]/input")).getAttribute("value"));
+				assertEquals(document.getFirstChild().getChildNodes().item(i).getChildNodes().item(2).getTextContent(),
+						getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_relatedcodes_table")).get(i).findElement(By.xpath("td[3]/input")).getAttribute("value"));
+			}
+		}
+
+	public void verifyRoutingCodeBooleanFieldValuesInUI(String accountEligibilityValue, String internalUseOnlyValue, String useHeadOfficeValue) {
     	try {
 			Thread.sleep(2000L);
 			assertEquals(accountEligibilityValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AccountEligibility")).getText().toLowerCase());
@@ -402,5 +426,192 @@ public class EditRoutingCodePage extends AbstractPage {
 			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getTextContent(), options.get(indexOfOption).getText().trim());
 		}
 	}
-	
+
+	public void verifyRoutingCodeRelatedCodeContextValuesFromLookup(){
+
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("fid", "RELATED_CODE_CONTEXT"));
+		List<String> dropdownValuesList = returnAllDropDownUnselectedValues(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_new_relatedcodes_context_dropdown"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get related code context values from lookup", nvPairs);
+		// finding the list of values from the taxonomy and subtracting the values which are selected in other dropdowns
+		List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "routingCodeContextType"), getAlreadySelectedContextTypes("edit_routingcode_page_relatedcodes_context_dropdown"));
+		assertEquals(dropdownValuesList, resultList);
+
+	}
+
+	public List<String> getAlreadySelectedContextTypes(String identifier) {
+		ArrayList<String> selectedValueList = new ArrayList();
+		for (WebElement entityTypeDropDown : getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier(identifier))) {
+			Select dropdown = new Select(entityTypeDropDown);
+			String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
+			selectedValueList.add(selectedValue);
+		}
+		return selectedValueList;
+	}
+
+	public void clickOnAddNewRelatedCode_Btn(){
+
+		attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_add_new_relatedcodes_btn"));
+	}
+
+	public void selectRoutingCodeRelatedCodeContextType(String contextType){
+		selectItemFromDropdownListByValue(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_new_relatedcodes_context_dropdown"),contextType);
+	}
+
+
+	public void searchAndSelectRelatedCode(String searchCode, String relatedCode)
+	{
+	attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_new_relatedcodes_chosen_Select_link"));
+		getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_new_relatedcodes_chosen_Select_input")).sendKeys(searchCode);
+		getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_new_relatedcodes_chosen_Select_input")).sendKeys(Keys.RETURN);
+		try {
+			Thread.sleep(5000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		List<WebElement> dropDownOptions=getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_new_relatedcodes_chosen_Select_dropdown"));
+		for (WebElement option:dropDownOptions)
+		{
+			if (option.getText().equals(relatedCode)){
+				option.click();
+				break;
+			}
+		}
+	}
+
+	public void searchRelatedCode(String searchCode)
+	{
+		attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_new_relatedcodes_chosen_Select_link"));
+		getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_new_relatedcodes_chosen_Select_input")).sendKeys(searchCode);
+		getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_new_relatedcodes_chosen_Select_input")).sendKeys(Keys.RETURN);
+		try {
+			Thread.sleep(5000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+
+	public void verifyRelatedRoutingcodesFromTrusted(String code)
+	{ List<NameValuePair> nvPairs = new ArrayList<>();
+		List<String> routingCodeListFromUI=new ArrayList<>();
+		List<String> routingCodeListFromTrusted=new ArrayList<>();
+		List<String> routingCodeTypeListFromTrusted=new ArrayList<>();
+		List<String> routingCodeAndTypeListFromTrusted=new ArrayList<>();
+
+		List<WebElement> dropDownOptions=getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_new_relatedcodes_chosen_Select_dropdown"));
+		for (WebElement option:dropDownOptions)
+		{
+			routingCodeListFromUI.add(option.getText());
+		}
+		code=code.replaceAll("[^a-zA-Z0-9]+","");
+		nvPairs.add(new BasicNameValuePair("code", code));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,"get routingCode results for dropdown",nvPairs);
+		for(int i=0;i<document.getElementsByTagName("results").getLength();i++) {
+			String routingCodeType = document.getElementsByTagName("Type").item(i).getTextContent();
+			String routingCode = document.getElementsByTagName("Code").item(i).getTextContent();
+			routingCodeListFromTrusted.add(routingCode);
+			routingCodeTypeListFromTrusted.add(routingCodeType);
+
+		}
+
+		final Set<String> duplicatesList=findDuplicates(routingCodeListFromTrusted);
+		for (int i=0;i<routingCodeListFromTrusted.size();i++)
+		{
+			if(duplicatesList.contains(routingCodeListFromTrusted.get(i)))
+			{
+				routingCodeAndTypeListFromTrusted.add(routingCodeListFromTrusted.get(i)+" - "+routingCodeTypeListFromTrusted.get(i));
+			}
+			else{
+				routingCodeAndTypeListFromTrusted.add(routingCodeListFromTrusted.get(i));
+			}
+		}
+		assertEquals(routingCodeListFromUI,routingCodeAndTypeListFromTrusted);
+	}
+
+
+	public Set<String> findDuplicates(List<String> listContainingDuplicates)
+	{
+		final Set<String> setToReturn = new HashSet();
+		final Set<String> set1 = new HashSet();
+
+		for (String str : listContainingDuplicates)
+		{
+			if (!set1.add(str))
+			{
+				setToReturn.add(str);
+			}
+		}
+		return setToReturn;
+	}
+
+
+
+	public void verifyRelatedCodesCodeType(String CodeType){
+
+		assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_new_relatedcodes_type")).getAttribute("value").equals(CodeType));
+	}
+
+	public void verifyEditRoutingCodeRelatedCodeValuesFromZeus(String routingCode,String codeType){
+
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+		nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
+		nvPairs.add(new BasicNameValuePair("source","zeus"));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode relatedCodes", nvPairs);
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		for (int i=0;i<document.getElementsByTagName("relatedCodes").getLength();i++)
+		{
+			for (int j=1;j<=document.getFirstChild().getChildNodes().item(i).getChildNodes().getLength();j++)
+			{
+				assertEquals(document.getFirstChild().getChildNodes().item(i).getChildNodes().item(j - 1).getTextContent(),
+						getDriver().findElement(By.xpath(".//*[@id='routingCodeRelatedCodes']//tbody/tr["+(i+1)+"]/td["+j+"]")).getText());
+			}
+		}
+	}
+
+
+	public void verifyRoutingCodeRelatedCodeValuesInZeusUI(String relatedCode,String contextType)
+	{
+		assertTrue(checkRoutingCodeRelatedCodeValuesInZeusUI(relatedCode,contextType));
+	}
+
+
+	public boolean checkRoutingCodeRelatedCodeValuesInZeusUI(String relatedCode,String contextType){
+
+		int noOfRows=getDriver().findElements(By.xpath(".//*[@id='routingCodeRelatedCodes']//tbody/tr")).size();
+		boolean flag=false;
+		for (int i=0;i<noOfRows;i++)
+		{
+			if(contextType.equals(getDriver().findElement(By.xpath(".//*[@id='routingCodeRelatedCodes']//tbody/tr["+(i+1)+"]/td[1]")).getText()) &&
+					relatedCode.split("-")[0].trim().equals(getDriver().findElement(By.xpath(".//*[@id='routingCodeRelatedCodes']//tbody/tr["+(i+1)+"]/td[2]")).getText())&&
+					relatedCode.split("-")[1].trim().equals(getDriver().findElement(By.xpath(".//*[@id='routingCodeRelatedCodes']//tbody/tr["+(i+1)+"]/td[3]")).getText())){
+				flag=true;
+				break;
+			}
+		}
+		return flag;
+	}
+
+
+	public void verifyRoutingCodeRelatedCodeValuesNotExistInZeusUI(String relatedCode,String contextType)
+	{
+		assertFalse(checkRoutingCodeRelatedCodeValuesInZeusUI(relatedCode,contextType));
+	}
+
+	public void clickOnDeleteRelatedCode_Btn(String delete_btn)
+	{
+		attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("first_row_existing_related_codes_delete_button"));
+	}
+
+	public void noResultsMsgForRoutingCode(String searchCode){
+
+		assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_relatedcodes_no_searchResults_msg")).getText().equals("No results for \""+searchCode+"\""));
+	}
 }

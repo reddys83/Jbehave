@@ -37,6 +37,7 @@ And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
 When the user clicks on the routing code update link
+When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
 Then the user should see <registarFeeSFDCSubscription> and <routingCodeComment> field values same as in trusted document
 When the user enters the <registarFeeSFDCSubscription> in the routing code basic info page
 When the user enters the <routingCodeComment> in the routing code basic info page
@@ -45,6 +46,7 @@ When the user clicks on the confirm button
 Then the user should see the successful update message at top of the routing code page
 Then the user should be able to verify the values are entered in the routing code basic info page
 Then the user should see the <registarFeeSFDCSubscription> and <routingCodeComment> field values same as in zeus document
+Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|routingCode|codeType|registarFeeSFDCSubscription|routingCodeComment|
@@ -142,6 +144,7 @@ When the user clicks on the search results card with routing code <routingCode> 
 Then the user should see the routing code basic info page
 When the user changes the status for routing code <routingCode> and code type <codeType> to <status>
 When the user clicks on the routing code update link
+When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
 Then the user should see the edit routing code date field values from trusted document for routing code <routingCode> with code type <codeType>
 When the user enters <startDateDay> <startDateMonth> <startDateYear> for routing code start date field
 When the user enters <endDateDay> <endDateMonth> <endDateYear> for routing code end date field
@@ -155,6 +158,7 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the updated date field values in routing code basic info page
 Then the user should see the date field values same as in zeus document
+Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|retirementDay|retirementMonth|retirementYear|fedDay|fedMonth|fedYear|status|
@@ -245,6 +249,7 @@ When the user clicks on the search results card with routing code <routingCode> 
 Then the user should see the routing code basic info page
 When the user changes the status for routing code <routingCode> and code type <codeType> to <status>
 When the user clicks on the routing code update link
+When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
 When the user enters <startDateDay> <startDateMonth> <startDateYear> for routing code start date field
 When the user enters <endDateDay> <endDateMonth> <endDateYear> for routing code end date field
 When the user enters <retirementDay> <retirementMonth> <retirementYear> for routing code forthcoming retirement date field
@@ -257,6 +262,7 @@ And the user should not see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should see the updated date field values in routing code basic info page
 Then the user should see the date field values same as in zeus document
+Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|retirementDay|retirementMonth|retirementYear|fedDay|fedMonth|fedYear|status|
@@ -275,6 +281,7 @@ Then the user should see the routing code basic info page
 Then the user should see that forthcoming retirement date and confirmed with fed fields does not exist
 When the user changes the status for routing code <routingCode> and code type <codeType> to <status>
 When the user clicks on the routing code update link
+When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
 When the user enters <startDateDay> <startDateMonth> <startDateYear> for routing code start date field
 When the user enters <endDateDay> <endDateMonth> <endDateYear> for routing code end date field
 When the user clicks on the save button
@@ -282,6 +289,7 @@ Then the user should see the save confirmation modal
 When the user clicks on the confirm button
 Then the user should see the updated date field values in routing code basic info page for non ABA code type
 Then the user should see the date field values same as in zeus document for non ABA code type
+Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|status|
@@ -300,6 +308,7 @@ And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
 When the user clicks on the routing code update link
+When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
 Then the user verifies the boolean field values same as in trusted document
 When the user selects <accountEligibilityValue> for routing code account eligibility field
 When the user selects <internalUseOnlyValue> for routing code internal use only field
@@ -312,6 +321,7 @@ Then the user should not see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should be able to verify the boolean field values in routing code basic info page
 Then the user should see the boolean field values same as in zeus document
+Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|routingCode|codeType|accountEligibilityValue|internalUseOnlyValue|useHeadOfficeValue|
@@ -360,6 +370,7 @@ And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
 When the user clicks on the routing code update link
+When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
 Then the user verifies that the drop-down field values are same as in trusted document
 Then the user should see the routing code subtype values from lookup ROUTING_CODE_SUBTYPE
 Then the user should see the ABA code source values from lookup ROUTING_CODE_SOURCE
@@ -373,6 +384,7 @@ And the user should see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should be able to verify the drop-down field values in routing code basic info page
 Then the user should see the drop-down field values same as in zeus document
+Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|routingCode|codeType|routingCodeSubtype|ABACodeSource|
@@ -392,6 +404,7 @@ And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
 When the user clicks on the routing code update link
+When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
 When the user selects the routing code subtype as <routingCodeSubtype> in the routing code basic info page
 When the user selects the ABA code source as <ABACodeSource> in the routing code basic info page
 When the user clicks on the save button
@@ -402,6 +415,7 @@ Then the user should not see the below summary changes in confirmation modal
 When the user clicks on the confirm button
 Then the user should be able to verify the drop-down field values in routing code basic info page
 Then the user should see the drop-down field values same as in zeus document
+Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|routingCode|codeType|routingCodeSubtype|ABACodeSource|

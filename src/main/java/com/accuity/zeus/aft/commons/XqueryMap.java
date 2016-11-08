@@ -142,6 +142,7 @@ public class XqueryMap {
         queryMap.put("get area demographics info","getAreaDemographics.xqy");
 		queryMap.put("get area credit ratings", "getAreaCreditRatingValues.xqy");
         queryMap.put("get routingCode results", "getRoutingCodeResults.xqy");
+        queryMap.put("get routingCode results for dropdown","getRoutingCodeResults_dropdown.xqy");
 		queryMap.put("get area places type lookup","getAreaRelatedPlacesTypeFromLookup.xqy");
 		queryMap.put("get area places detail lookup","getAreaRelatedPlacesDetailsFromLookup.xqy");
 		queryMap.put("get area related place info","getAreaRelatedPlaces.xqy");
@@ -164,6 +165,7 @@ public class XqueryMap {
         queryMap.put("get routingCode payment systems info","getRoutingCodePaymentSystems.xqy");
         queryMap.put("get routing code subtype lookup", "getRoutingCodeSubtypeFromLookup.xqy");
         queryMap.put("get ABA code source lookup", "getABACodeSourceTypesFromLookup.xqy");
+        queryMap.put("get related code context values from lookup", "getRoutingCodeRelatedCodeContextValuesFromLookup.xqy");
    }
 
     public String getXquery(String key){
