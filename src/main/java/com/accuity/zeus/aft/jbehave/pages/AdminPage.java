@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.commons.Utils;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.TaxonomiesIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
@@ -121,5 +122,12 @@ public class AdminPage extends AbstractPage{
                 assertTrue(getDriver().findElement(By.xpath("//table[1]//tr[" + i + "]//button[2]")).isDisplayed());
             }
         }
+    }
+    
+    public void verifySubGroupingInHierarchicalTaxonomy() {
+    	List<WebElement> hierarchialTaxonomyList = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("hierarchial_taxonomies_list"));
+    	for(int index = 0; index < hierarchialTaxonomyList.size(); index++) {
+    		assertTrue(hierarchialTaxonomyList.get(index).findElement(By.xpath("tr[@class='level1']")).isDisplayed());
+    	}
     }
 }

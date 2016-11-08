@@ -8,6 +8,7 @@ JIRA ID - ZEUS-259 - Admin can search for taxonomy by name
 JIRA ID - ZEUS-211 - Admin user can view a taxonomy
 JIRA ID - ZEUS-506 - Taxonomies - The taxonomy list is not sorted.
 JIRA ID - ZEUS-501 - The text for "Choose a Taxonomy" should be in black. Currently it is in grey.
+JIRA ID - ZEUS-956 - User can view Hierarchical Taxonomies
 
 Scenario: View for taxonomy by name and verify "Choose a Taxonomy" text color
 Given a user is on the search page
@@ -68,3 +69,18 @@ Then the user should see the taxonomy's entry as:
 Examples:
 |taxonomy|
 |Area Related Entity Type|
+
+Scenario: User is viewing a selected hierarchical taxonomies - 
+a) Verify that the selected hierarchical taxonomies values is from the trusted document.
+b) Verify that each taxonomies has atleast one layer of sub-groupings.
+
+Given a user is on the search page
+When the user clicks on the admin tab in the search page
+And the user clicks on the taxonomies tab in the data area
+And the user clicks on the choose a taxonomy option
+And the user enters the taxonomy <taxonomy> in the type-ahead box
+Then the user should see that each hierarchical taxonomy should have atleast one layer of sub-grouping
+
+Examples:
+|taxonomy|
+|Financial Service|

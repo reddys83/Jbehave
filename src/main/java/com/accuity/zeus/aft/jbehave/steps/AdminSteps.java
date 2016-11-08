@@ -62,4 +62,9 @@ public class AdminSteps extends AbstractSteps{
     public void verifyTaxonomiesEntry(ExamplesTable taxonomyEntry){
         getAdminPage().verifyTaxonomiesEntry(taxonomyEntry);
     }
+    
+    @Then("the user should see that each hierarchical taxonomy should have atleast one layer of sub-grouping")
+    public void verifySubGroupingInHierarchicalTaxonomy() {
+    	getAdminPage().verifySubGroupingInHierarchicalTaxonomy();
+    }
 }
