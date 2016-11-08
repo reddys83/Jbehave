@@ -1,0 +1,27 @@
+<city deleted="false" fid="8406226" id="1add50f1-e45c-4b59-bda2-eea9c3f0ce18" resource="/city/id/1add50f1-e45c-4b59-bda2-eea9c3f0ce18" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Dondo</value>
+            </name>
+            <citySortKey>DONDO</citySortKey>
+        </names>
+        <status>active</status>
+        <dates>
+            <dateBegan accuracy="day">2015-03-04</dateBegan>
+            <dateCeased accuracy="day">2016-04-05</dateCeased>
+        </dates>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/55407226-a9b5-4d16-95b4-9ca1f8067351" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/ae591225-ffe1-4143-a79e-96967b4f386a" rel="src"/>
+
+        </place>
+    </within>
+</city>

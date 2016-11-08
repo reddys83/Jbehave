@@ -1,0 +1,23 @@
+<area deleted="false" fid="A-1494" id="07f07664-2960-4270-b02e-079610f43b60"
+      resource="/area/id/07f07664-2960-4270-b02e-079610f43b60" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Ajman</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Ajman</value>
+            </name>
+        </names>
+        <status>active</status>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/03022884-099c-41e5-a2ad-1767c22df881" rel="src"/>
+        </place>
+    </within>
+</area>

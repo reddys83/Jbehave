@@ -1,0 +1,38 @@
+<city deleted="false" fid="8388214" id="57ad6682-8abe-4135-810f-882546ad9859" resource="/city/id/57ad6682-8abe-4135-810f-882546ad9859" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Gafurov</value>
+            </name>
+            <citySortKey>GAFUROV</citySortKey>
+        </names>
+        <status>inactive</status>
+        <dates>
+            <dateBegan accuracy="day">1902-09-25</dateBegan>
+        </dates>
+        <useInAddress>false</useInAddress>
+    </summary>
+    <relatedPlaces>
+        <relation>
+            <type>Twin City</type>
+            <details>
+                <detail>Judicial Capital</detail>
+            </details>
+            <place>
+                <link href="/city/id/29d2b458-9e96-4b37-8258-8cec9bf43f42" rel="src"/>
+
+            </place>
+        </relation>
+    </relatedPlaces>
+    <within>
+        <place>
+            <link href="/country/id/fcb069ea-4cdb-483a-b42c-e825645434e6" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/7458706d-6427-4f9b-94d6-ddc34fa40a0f" rel="src"/>
+
+        </place>
+    </within>
+</city>

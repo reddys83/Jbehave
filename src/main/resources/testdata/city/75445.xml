@@ -1,0 +1,44 @@
+<city deleted="false" fid="75445" id="eb5454b7-8f6d-4db1-8231-ae4b12f7fb84" resource="/city/id/eb5454b7-8f6d-4db1-8231-ae4b12f7fb84" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Brooklyn</value>
+            </name>
+            <citySortKey>BROOKLYN</citySortKey>
+        </names>
+        <status>inactive</status>
+        <identifiers>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>H4Testing</value>
+                <status>pending</status>
+            </identifier>
+            <identifier>
+                <type>Numeric ISO Code</type>
+                <value>H4Testing</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+        <demographics>
+            <metric>
+                <name>Population</name>
+                <value>24513451345134516000000000000000000000000000000000</value>
+            </metric>
+        </demographics>
+        <additionalInfos>
+            <additionalInfo>njhvuyyh</additionalInfo>
+        </additionalInfos>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/8595edad-ba62-4273-bfb1-3835a56446cf" rel="src"/>
+
+        </place>
+    </within>
+</city>

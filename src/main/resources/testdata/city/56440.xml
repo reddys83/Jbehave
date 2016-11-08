@@ -1,0 +1,23 @@
+<city deleted="false" fid="56440" id="8ef95574-4cc2-4268-a789-fb2decb23df8" resource="/city/id/8ef95574-4cc2-4268-a789-fb2decb23df8" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Ocu</value>
+            </name>
+            <citySortKey>OCU</citySortKey>
+        </names>
+        <status>active</status>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/29169a77-8000-4517-8bbb-3bf8b781630c" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/5e32d7b6-1c71-44de-b1a6-ea46fe49cb40" rel="src"/>
+
+        </place>
+    </within>
+</city>

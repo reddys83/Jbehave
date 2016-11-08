@@ -1,0 +1,26 @@
+<area deleted="false" fid="SA-2258" id="9bb6dcf7-d6cd-4936-9f5b-065984efaddd"
+      resource="/area/id/9bb6dcf7-d6cd-4936-9f5b-065984efaddd" source="trusted">
+    <summary>
+        <type>subarea</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Fairfield</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Fairfield</value>
+            </name>
+        </names>
+        <status>active</status>
+        <useInAddress>false</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </place>
+        <place>
+            <link href="/area/id/a79b68da-6959-482d-9289-bc16fe3f7dbf" rel="src"/>
+        </place>
+    </within>
+</area>

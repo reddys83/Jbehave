@@ -1,0 +1,26 @@
+<area deleted="false" fid="SA-2994" id="0a042bc7-dc3a-4a82-a0ff-7d630af7ecea"
+      resource="/area/id/0a042bc7-dc3a-4a82-a0ff-7d630af7ecea" source="trusted">
+    <summary>
+        <type>subarea</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Alger</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Alger</value>
+            </name>
+        </names>
+        <status>active</status>
+        <useInAddress>false</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </place>
+        <place>
+            <link href="/area/id/3c23b2ec-3fdb-4ff4-9384-be3578f36798" rel="src"/>
+        </place>
+    </within>
+</area>
