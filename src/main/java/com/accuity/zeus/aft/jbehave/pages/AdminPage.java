@@ -4,7 +4,11 @@ import com.accuity.zeus.aft.commons.Utils;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.TaxonomiesIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -121,5 +125,46 @@ public class AdminPage extends AbstractPage{
                 assertTrue(getDriver().findElement(By.xpath("//table[1]//tr[" + i + "]//button[2]")).isDisplayed());
             }
         }
+    }
+    
+    public void verifyNonHeirarchicalTaxonomyValuesFromDB(String taxonomy, String source, List<String> columnHeaderList, List<String> rowValueList) {
+    	String taxonomyId = taxonomy.replace(" ", "_").toUpperCase();
+    	try {
+    	List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("taxonomy", taxonomyId));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Thread.sleep(3000L);
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get non-heirarchical taxonomy values", nvPairs);
+        if (document != null) {
+        	for (int i = 0; i < document.getElementsByTagName("columnHeaders").item(0).getChildNodes().getLength(); i++) {
+        		assertEquals(document.getElementsByTagName("columnHeaders").item(0).getChildNodes().item(i).getTextContent().toUpperCase(), columnHeaderList.get(i));
+        	}
+         	
+        	for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
+        		assertEquals(document.getElementsByTagName("value").item(i).getTextContent(), rowValueList.get(i));
+        	}
+        } else
+			assertTrue(source+ " document is null", false);
+	} catch (Exception e) {
+		e.printStackTrace();
+    }
+    }
+    
+    public void verifyNonHeirarchicalTaxonomyValuesFromTrustedDB(String taxonomy, String source) {
+    	List<String> columnHeaderList = new ArrayList<String>();
+		List<String> rowValueList = new ArrayList<String>();
+		List<WebElement> columnHeader = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_column_header_list"));
+		List<WebElement> rowValue = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_row_values_list"));
+		if(columnHeader.size() > 0) {
+			for (int index = 0; index < columnHeader.size(); index++) {					
+				columnHeaderList.add(columnHeader.get(index).getText());
+			}
+			for(int index = 0; index < rowValue.size(); index++) {
+				rowValueList.add(rowValue.get(index).getText());
+			}
+			verifyNonHeirarchicalTaxonomyValuesFromDB(taxonomy, source, columnHeaderList, rowValueList);
+		} else {
+			assertTrue("There is no existing values for " + taxonomy + " taxonomy", true);
+		}
     }
 }

@@ -70,8 +70,8 @@ Examples:
 |taxonomy|
 |Area Related Entity Type|
 
-Scenario: User is viewing a non-hierarchial taxonomies - 
-a) Verify that the selected non-hierarchial taxonomies values is from the trusted document.
+Scenario: User is viewing a non-hierarchical taxonomies - 
+a) Verify that the selected non-hierarchical taxonomies values is from the trusted document.
 b) Verify that each taxonomies does not have any layer of sub-groupings.
 c) Verify 'Update' button is displayed.
 d) Verify that the taxonomy name ID will be displayed as part of the category header.
@@ -81,6 +81,7 @@ When the user clicks on the admin tab in the search page
 And the user clicks on the taxonomies tab in the data area
 And the user clicks on the choose a taxonomy option
 And the user enters the taxonomy <taxonomy> in the type-ahead box
+Then the user should see the selected taxonomy values same as in trusted document
 Then the user should not see any sub-grouping for the selected taxonomy
 Then the user should see that the taxonomies update button is displayed
 Then the user verifies the taxonomy name in the category header

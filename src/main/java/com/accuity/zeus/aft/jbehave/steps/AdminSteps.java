@@ -78,4 +78,9 @@ public class AdminSteps extends AbstractSteps{
     public void verifyTaxonomyNameInCategoryHeader(@Named("taxonomy") String taxonomy) {
     	getDataPage().verifyWebElementText("Taxonomy Category Header", taxonomy.toUpperCase(), TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_category_header"));
     }
+    
+    @Then("the user should see the selected taxonomy values same as in $source document")
+    public void verifyNonHeirarchicalTaxonomyValuesFromTrustedDB(@Named("taxonomy") String taxonomy, @Named("source") String source) {
+    	getAdminPage().verifyNonHeirarchicalTaxonomyValuesFromTrustedDB(taxonomy, source);
+    }
 }
