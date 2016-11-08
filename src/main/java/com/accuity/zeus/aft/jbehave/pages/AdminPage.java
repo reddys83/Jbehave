@@ -6,7 +6,6 @@ import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.TaxonomiesIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
@@ -138,10 +137,13 @@ public class AdminPage extends AbstractPage{
         if (document != null) {
         	for (int i = 0; i < document.getElementsByTagName("columnHeaders").item(0).getChildNodes().getLength(); i++) {
         		assertEquals(document.getElementsByTagName("columnHeaders").item(0).getChildNodes().item(i).getTextContent().toUpperCase(), columnHeaderList.get(i));
-        	}
-         	
-        	for (int i = 0; i < document.getElementsByTagName("value").getLength(); i++) {
-        		assertEquals(document.getElementsByTagName("value").item(i).getTextContent(), rowValueList.get(i));
+        	}         	
+        	for (int i = 0; i < document.getElementsByTagName("entryValues").getLength(); i++) {
+        		String taxonomyRowValue = "";
+        		for(int index = 0; index < document.getElementsByTagName("entryValues").item(i).getChildNodes().getLength(); index++) {
+        			taxonomyRowValue += document.getElementsByTagName("entryValues").item(i).getChildNodes().item(index).getTextContent() + " ";
+        		}
+        		assertEquals(taxonomyRowValue.trim(), rowValueList.get(i));
         	}
         } else
 			assertTrue(source+ " document is null", false);
@@ -164,7 +166,7 @@ public class AdminPage extends AbstractPage{
 			}
 			verifyNonHeirarchicalTaxonomyValuesFromDB(taxonomy, source, columnHeaderList, rowValueList);
 		} else {
-			assertTrue("There is no existing values for " + taxonomy + " taxonomy", true);
+			assertTrue("There is no existing values for " + taxonomy + " taxonomy", false);
 		}
     }
 }

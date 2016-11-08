@@ -88,4 +88,6 @@ Then the user verifies the taxonomy name in the category header
 
 Examples:
 |taxonomy|
+|Department Type|
 |Address Type|
+|Country Related Place Type|
