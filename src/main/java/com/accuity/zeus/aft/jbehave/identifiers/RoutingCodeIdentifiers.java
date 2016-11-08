@@ -132,6 +132,8 @@ public class RoutingCodeIdentifiers {
         hmap.put("first_row_existing_related_codes_delete_button", By.xpath("//*[@id='additionalRelatedCodes']/tr[1]//button[@title='Delete Row']"));
         hmap.put("edit_routingcode_page_relatedcodes_table", By.xpath("//*[@id='additionalRelatedCodes']/tr"));
         hmap.put("edit_routingcode_page_relatedcodes_no_searchResults_msg", By.xpath("//*[@id='relatedCode_chosen']/div/ul/li[@class='no-results']"));
+        hmap.put("edit_routingcode_page_relatedcode_required_errorMessage", By.xpath("//*[@data-error_id='relatedCodeError']"));
+        hmap.put("edit_routingcode_page_relatedcode_context_required_errorMessage", By.xpath("//*[@data-error_id='relatedCodeContextError']"));
 
 
     }

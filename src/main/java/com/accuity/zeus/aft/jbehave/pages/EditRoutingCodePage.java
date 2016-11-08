@@ -614,4 +614,8 @@ public class EditRoutingCodePage extends AbstractPage {
 
 		assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_relatedcodes_no_searchResults_msg")).getText().equals("No results for \""+searchCode+"\""));
 	}
+
+	public void verifyRequiredMessageForRelatedCodes(By by){
+		assertTrue(getDriver().findElement(by).getText().equals("Required"));
+	}
 }

@@ -318,6 +318,10 @@ public class EditRoutingCodeSteps extends AbstractSteps {
 	public void selectRoutingCodeRelatedCodeContextType(@Named("contextType") String contextType) {
 		getEditRoutingCodePage().selectRoutingCodeRelatedCodeContextType(contextType);
 	}
+	@When("the user selects routing code related code context type as <blank>")
+	public void selectRoutingCodeRelatedCodeContextTypeAsBlank(@Named("blank") String contextType) {
+		getEditRoutingCodePage().selectRoutingCodeRelatedCodeContextType(contextType);
+	}
 
 	@When("the user search for a routing code using the search code <searchCode> and selects routing code <relatedCode>")
 	public void searchAndSelectRelatedCode(@Named("searchCode") String searchCode,@Named("relatedCode") String relatedCode)
@@ -372,7 +376,21 @@ public class EditRoutingCodeSteps extends AbstractSteps {
 		getEditRoutingCodePage().noResultsMsgForRoutingCode(searchCode);
 
 	}
+
+	@Then("the user should see the required error message for relatedcode")
+	public void verifyRequiredMessageForRelatedCode()
+	{
+		getEditRoutingCodePage().verifyRequiredMessageForRelatedCodes(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_relatedcode_required_errorMessage"));
+	}
+
+	@Then("the user should see the required error message for context")
+
+	public void verifyRequiredMessageForRelatedCodeContext()
+	{
+		getEditRoutingCodePage().verifyRequiredMessageForRelatedCodes(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_relatedcode_context_required_errorMessage"));
 }
+}
+
 
 
 
