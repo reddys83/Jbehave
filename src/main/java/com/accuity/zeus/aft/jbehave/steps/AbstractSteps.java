@@ -38,6 +38,8 @@ public abstract class AbstractSteps {
 	private static CurrencyPage currencyPage;
 	private static CountryPage countryPage;
 
+    private static FinancialsPage financialsPage;
+
 
     public static EditOfficePage editOfficePage;
 	public static EditLegalEntityPage editLegalEntityPage;
@@ -254,5 +256,10 @@ public abstract class AbstractSteps {
 	public static void setEditRoutingCodePage(EditRoutingCodePage editRoutingCodePage) {
 		AbstractSteps.editRoutingCodePage = editRoutingCodePage;
 	}
+
+    public FinancialsPage getFinancialsPage() {      return financialsPage;   }
+
+    public void setFinancialsPage(FinancialsPage financialsPage) {        this.financialsPage = financialsPage;    }
+
 
 }
