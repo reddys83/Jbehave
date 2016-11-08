@@ -1,0 +1,26 @@
+<area deleted="false" fid="SA-3473" id="07e936c1-6a35-4341-b15f-be2594fb4abb"
+      resource="/area/id/07e936c1-6a35-4341-b15f-be2594fb4abb" source="trusted">
+    <summary>
+        <type>subarea</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Camden</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Camden</value>
+            </name>
+        </names>
+        <status>active</status>
+        <useInAddress>false</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </place>
+        <place>
+            <link href="/area/id/2e3c8790-2748-4712-b711-9ac980a57ac0" rel="src"/>
+        </place>
+    </within>
+</area>

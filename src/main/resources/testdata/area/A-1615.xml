@@ -1,0 +1,24 @@
+<area deleted="false" fid="A-1615" id="3c23b2ec-3fdb-4ff4-9384-be3578f36798"
+      resource="/area/id/3c23b2ec-3fdb-4ff4-9384-be3578f36798" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Michigan</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>MI</value>
+            </name>
+        </names>
+        <status>active</status>
+
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </place>
+    </within>
+</area>

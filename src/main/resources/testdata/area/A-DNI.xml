@@ -1,0 +1,24 @@
+<area deleted="false" fid="A-DNI" id="427ebcb6-c112-48d7-9fee-335960b0c8ff"
+      resource="/area/id/427ebcb6-c112-48d7-9fee-335960b0c8ff" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Dnipropetrovsk Region</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Dnipropetrovsk Region</value>
+            </name>
+        </names>
+        <status>active</status>
+
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/c6eb259f-6610-419f-b85a-668907069f31" rel="src"/>
+        </place>
+    </within>
+</area>

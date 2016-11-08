@@ -1,0 +1,47 @@
+<area deleted="false" fid="A-BENG" id="8546b8f5-648a-4b48-b4a0-27b0c5ba354c"
+      resource="/area/id/8546b8f5-648a-4b48-b4a0-27b0c5ba354c" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Bengo</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Bengo</value>
+            </name>
+            <name>
+                <type>Alternative Name</type>
+                <value>test1</value>
+            </name>
+            <name>
+                <type>Alternative Name</type>
+                <value>test2</value>
+            </name>
+        </names>
+        <status>inactive</status>
+        <dates>
+            <dateBegan accuracy="day">2015-01-10</dateBegan>
+            <dateCeased accuracy="day">2016-02-10</dateCeased>
+        </dates>
+        <useInAddress>true</useInAddress>
+
+    </summary>
+    <relatedPlaces>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>State Capital</detail>
+            </details>
+            <place>
+                <link href="/city/id/8ef072c9-31e7-4121-a822-bcd0ddb7912e" rel="src"/>
+            </place>
+        </relation>
+    </relatedPlaces>
+    <within>
+        <place>
+            <link href="/country/id/55407226-a9b5-4d16-95b4-9ca1f8067351" rel="src"/>
+        </place>
+    </within>
+</area>

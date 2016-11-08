@@ -171,6 +171,6 @@ Then the user should see the area's names as:
 
 
 Examples:
-|country|area|city|subCity
-|USA|Illinois|Chicago|Chester
+|country|area|city|subCity|
+|USA|Illinois|Chicago|Chester|
 

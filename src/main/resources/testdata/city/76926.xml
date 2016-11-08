@@ -1,0 +1,240 @@
+<city deleted="false" fid="76926" id="8b450304-ccd5-412e-8ecb-1994a4c362de" resource="/city/id/8b450304-ccd5-412e-8ecb-1994a4c362de" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Chicago</value>
+            </name>
+            <citySortKey>CHICAGO</citySortKey>
+        </names>
+        <status>active</status>
+        <dates>
+            <dateBegan accuracy="day">1818-12-03</dateBegan>
+            <dateCeased accuracy="day">2776-07-03</dateCeased>
+        </dates>
+        <redirectTo>
+            <place>
+                <link href="/city/id/cf150790-6692-4485-a829-9fea231f0896" rel="src"/>
+
+            </place>
+            <place>
+                <link href="/city/id/48b3786e-efb8-4f24-99cb-72db4e94d0ea" rel="src"/>
+
+            </place>
+        </redirectTo>
+
+
+        <identifiers>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>14000</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+        <demographics>
+            <metric>
+                <name>Population</name>
+                <value>149998</value>
+            </metric>
+        </demographics>
+        <additionalInfos>
+            <additionalInfo>Land of Lincoln</additionalInfo>
+        </additionalInfos>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <alternativeRegions>
+        <region>
+            <type>Metropolitan Statistical Area</type>
+            <value>16980</value>
+        </region>
+        <region>
+            <type>Federal Reserve District</type>
+            <value>7</value>
+        </region>
+        <region>
+            <type>Federal Home Loan Bank District</type>
+            <value>7</value>
+        </region>
+        <region>
+            <type>National Credit Union Administration Region</type>
+            <value>IV</value>
+        </region>
+    </alternativeRegions>
+    <creditRatings>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Sovereign Debt Rating</type>
+            <value>B</value>
+            <dateApplied accuracy="day">1990-01-01</dateApplied>
+            <dateConfirmed accuracy="day">1991-01-04</dateConfirmed>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Long Term Sovereign Debt Rating</type>
+            <value>A-</value>
+            <dateApplied accuracy="month">1990-01-01</dateApplied>
+            <dateConfirmed accuracy="day">1991-01-04</dateConfirmed>
+        </rating>
+        <rating>
+            <type>Chicagos Terrible Credit Rating</type>
+            <value>F+</value>
+        </rating>
+    </creditRatings>
+    <relatedPresences>
+        <relation>
+            <type>Government Type</type>
+            <presence>
+                <link href="/legalEntity/id/16a95094-843c-4044-ba62-9b40519c61ef" rel="src"/>
+
+            </presence>
+        </relation>
+        <relation>
+            <type>Government, city</type>
+            <details>
+                <detail>City Government, Also known as the IBA</detail>
+            </details>
+            <presence>
+                <link href="/legalEntity/id/16a95094-843c-4044-ba62-9b40519c61ef" rel="src"/>
+
+            </presence>
+        </relation>
+    </relatedPresences>
+    <relatedPlaces>
+        <relation>
+            <type>City South Valley Stream</type>
+            <details>
+                <detail>City</detail>
+                <detail>South Valley Stream</detail>
+            </details>
+            <place>
+                <link href="/city/id/53275917-dfe2-4aaf-b0c1-7fc3ced61b54" rel="src"/>
+
+            </place>
+        </relation>
+        <relation>
+            <type>Area Illinois</type>
+            <place>
+                <link href="/area/id/40e82d7f-0397-4675-aca9-0006ce9175a8" rel="src"/>
+
+            </place>
+        </relation>
+        <relation>
+            <type>Country USA</type>
+            <details>
+                <detail>Country</detail>
+                <detail>USA</detail>
+            </details>
+            <place>
+                <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+
+            </place>
+        </relation>
+        <relation>
+            <type>Sub-Area Cook</type>
+            <details>
+                <detail>Sub-Area</detail>
+                <detail>Cook</detail>
+            </details>
+            <place>
+                <link href="/area/id/9d138ae1-59eb-4a79-abf6-8809d8878bcc" rel="src"/>
+
+            </place>
+        </relation>
+        <relation>
+            <type>Country UK</type>
+            <details>
+                <detail>UK</detail>
+            </details>
+            <place>
+                <link href="/country/id/52be49f6-c37c-4bed-baec-6b9accabf100" rel="src"/>
+
+            </place>
+        </relation>
+        <relation>
+            <type>Area Albania</type>
+            <details>
+                <detail>In Country Albania</detail>
+            </details>
+            <place>
+                <link href="/area/id/850b5f2b-2dc9-44ba-9dfc-83fd3fe2e6d8" rel="src"/>
+
+            </place>
+        </relation>
+        <relation>
+            <type>Sub-Area In Country India</type>
+            <details>
+                <detail>In Country India</detail>
+            </details>
+            <place>
+                <link href="/area/id/2976aa97-e9f8-49e9-86e3-19b207a2ed1a" rel="src"/>
+
+            </place>
+        </relation>
+        <relation>
+            <type>Federal Reserve Bank Region</type>
+            <details>
+                <detail>Test Data</detail>
+                <detail>Test Data</detail>
+            </details>
+            <place>
+                <link href="/city/id/53275917-dfe2-4aaf-b0c1-7fc3ced61b54" rel="src"/>
+
+            </place>
+        </relation>
+        <relation>
+            <type>Area</type>
+            <type>Test Data</type>
+            <place>
+                <link href="/area/id/1585b43d-67e0-4613-929f-3c20c22e0300" rel="src"/>
+            </place>
+        </relation>
+        <relation>
+            <type>Country</type>
+            <details>
+                <detail>Test Data</detail>
+                <detail>Test Data</detail>
+            </details>
+            <place>
+                <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+
+            </place>
+        </relation>
+    </relatedPlaces>
+    <relatedPeople>
+        <relation>
+            <type>President</type>
+            <type>Cheif executor</type>
+            <person>
+                <link href="/person/id/bfbb736b-e5ed-4054-9ff9-28417ac483af" rel="src"/>
+                <role>
+                    <link rel="src" href="/relationship/id/a93eaacf-0c90-4dcc-85d7-f97b2e975960"/>
+                </role>
+            </person>
+        </relation>
+        <relation>
+            <type>Financial Institution Board member</type>
+            <person>
+                <link href="/person/id/bcb20480-ae1d-4c6d-9b9d-71c68d12e02b" rel="src"/>
+
+                <role>
+                    <link rel="src" href="/relationship/id/1737b603-87ce-49c5-99f1-3cef386e6f43"/>
+
+                </role>
+            </person>
+        </relation>
+    </relatedPeople>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/9d138ae1-59eb-4a79-abf6-8809d8878bcc" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/40e82d7f-0397-4675-aca9-0006ce9175a8" rel="src"/>
+
+        </place>
+    </within>
+</city>
