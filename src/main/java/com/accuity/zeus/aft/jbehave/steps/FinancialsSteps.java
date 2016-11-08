@@ -15,4 +15,9 @@ public class FinancialsSteps  extends AbstractSteps{
     {
         getFinancialsPage().verifyLegalEntityFinancialStatements(fid);
     }
+    
+    @Then("the user should see the line items retrieved from $source document")
+	public void verifyHistoryValuesFromTrusted(@Named("fid") String fid,@Named("source") String source) {
+    	getFinancialsPage().verifyLineItemsFromTrusted(fid, source);
+	}	
 }

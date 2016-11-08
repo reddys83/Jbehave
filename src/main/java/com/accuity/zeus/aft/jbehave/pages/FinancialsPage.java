@@ -4,9 +4,11 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.FinancialsIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
@@ -55,4 +57,29 @@ public class FinancialsPage extends AbstractPage{
             assertEquals(document.getElementsByTagName("periodEnd").item(i).getTextContent(), periodEndDate.get(i).getText());
             }
     }
+    
+    public void verifyLineItemsFromTrusted(String fid, String source) {
+		
+			List<String> lineItemType = new ArrayList<String>();
+			/*List<String> historyEventDate = new ArrayList<String>();
+			List<String> historyEventDescription = new ArrayList<String>();
+			List<String> historyEventReplacedByCode = new ArrayList<String>();
+			List<String> historyUsageName = new ArrayList<String>();
+			List<String> historyUsageAddress = new ArrayList<String>();
+			List<String> historyUsageCity = new ArrayList<String>();
+			List<String> historyUsageArea = new ArrayList<String>();
+			List<String> historyUsageSubArea = new ArrayList<String>();
+			List<String> historyUsageCountry = new ArrayList<String>();
+			List<String> historyUsagePostalCode = new ArrayList<String>();
+			List<String> historyUsageAdditionalInfo = new ArrayList<String>();	*/	
+			
+			List<WebElement> lineItemRows = getDriver().findElements(FinancialsIdentifiers.getObjectIdentifier("view_financial_line_item_table"));
+			System.out.println(lineItemRows.size());
+			for (int index = 1; index < lineItemRows.size() ; index++) {
+				List<WebElement> historyEventColumns = lineItemRows.get(index).findElements(By.tagName("td"));
+				lineItemType.add(historyEventColumns.get(0).getText());
+				System.out.println(historyEventColumns.get(0).getText());
+				
+			}
+		}
   }
