@@ -80,7 +80,7 @@ public class AdminSteps extends AbstractSteps{
     }
     
     @Then("the user should see the selected taxonomy values same as in $source document")
-    public void verifyNonHeirarchicalTaxonomyValuesFromTrustedDB(@Named("taxonomy") String taxonomy, @Named("source") String source) {
-    	getAdminPage().verifyNonHeirarchicalTaxonomyValuesFromTrustedDB(taxonomy, source);
+    public void verifyNonHierarchicalTaxonomyValuesFromTrustedDB(@Named("taxonomy") String taxonomy, @Named("source") String source) {
+    	getAdminPage().verifyNonHierarchicalTaxonomyValuesFromTrustedDB(taxonomy, source);
     }
 }

@@ -126,47 +126,49 @@ public class AdminPage extends AbstractPage{
         }
     }
     
-    public void verifyNonHeirarchicalTaxonomyValuesFromDB(String taxonomy, String source, List<String> columnHeaderList, List<String> rowValueList) {
-    	String taxonomyId = taxonomy.replace(" ", "_").toUpperCase();
+    public void verifyNonHierarchicalTaxonomyValuesFromDB(String taxonomy, String source, List<String> columnHeaderList, List<String> rowValueList) {
     	try {
-    	List<NameValuePair> nvPairs = new ArrayList<>();
-        nvPairs.add(new BasicNameValuePair("taxonomy", taxonomyId));
-        nvPairs.add(new BasicNameValuePair("source", source));
-        Thread.sleep(3000L);
-        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get non-heirarchical taxonomy values", nvPairs);
-        if (document != null) {
-        	for (int i = 0; i < document.getElementsByTagName("columnHeaders").item(0).getChildNodes().getLength(); i++) {
-        		assertEquals(document.getElementsByTagName("columnHeaders").item(0).getChildNodes().item(i).getTextContent().toUpperCase(), columnHeaderList.get(i));
-        	}         	
-        	for (int i = 0; i < document.getElementsByTagName("entryValues").getLength(); i++) {
-        		String taxonomyRowValue = "";
-        		for(int index = 0; index < document.getElementsByTagName("entryValues").item(i).getChildNodes().getLength(); index++) {
-        			taxonomyRowValue += document.getElementsByTagName("entryValues").item(i).getChildNodes().item(index).getTextContent() + " ";
-        		}
-        		assertEquals(taxonomyRowValue.trim(), rowValueList.get(i));
-        	}
-        } else
-			assertTrue(source+ " document is null", false);
-	} catch (Exception e) {
-		e.printStackTrace();
-    }
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("taxonomy", taxonomy));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get non-heirarchical taxonomy values", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("columnHeaders").item(0).getChildNodes().getLength(); i++) {
+					assertEquals(document.getElementsByTagName("columnHeaders").item(0).getChildNodes().item(i)
+							.getTextContent().toUpperCase(), columnHeaderList.get(i));
+				}
+				for (int i = 0; i < document.getElementsByTagName("entryValues").getLength(); i++) {
+					String taxonomyRowValue = "";
+					for (int index = 0; index < document.getElementsByTagName("entryValues").item(i).getChildNodes().getLength(); index++) {
+						if (!document.getElementsByTagName("entryValues").item(i).getChildNodes().item(index).getTextContent().equals("")) {
+							taxonomyRowValue += document.getElementsByTagName("entryValues").item(i).getChildNodes().item(index).getTextContent() + " ";
+						}
+					}
+					assertEquals(taxonomyRowValue.trim(), rowValueList.get(i));
+				}
+			} else
+				assertTrue(source + " document is null", false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
     
-    public void verifyNonHeirarchicalTaxonomyValuesFromTrustedDB(String taxonomy, String source) {
-    	List<String> columnHeaderList = new ArrayList<String>();
+    public void verifyNonHierarchicalTaxonomyValuesFromTrustedDB(String taxonomy, String source) {
+		List<String> columnHeaderList = new ArrayList<String>();
 		List<String> rowValueList = new ArrayList<String>();
 		List<WebElement> columnHeader = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_column_header_list"));
 		List<WebElement> rowValue = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_row_values_list"));
-		if(columnHeader.size() > 0) {
-			for (int index = 0; index < columnHeader.size(); index++) {					
+		if (columnHeader.size() > 0) {
+			for (int index = 0; index < columnHeader.size(); index++) {
 				columnHeaderList.add(columnHeader.get(index).getText());
 			}
-			for(int index = 0; index < rowValue.size(); index++) {
+			for (int index = 0; index < rowValue.size(); index++) {
 				rowValueList.add(rowValue.get(index).getText());
 			}
-			verifyNonHeirarchicalTaxonomyValuesFromDB(taxonomy, source, columnHeaderList, rowValueList);
+			verifyNonHierarchicalTaxonomyValuesFromDB(taxonomy, source, columnHeaderList, rowValueList);
 		} else {
 			assertTrue("There is no existing values for " + taxonomy + " taxonomy", false);
 		}
-    }
+	}
 }
