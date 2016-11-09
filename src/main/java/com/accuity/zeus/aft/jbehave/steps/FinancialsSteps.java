@@ -2,7 +2,10 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
 import org.springframework.stereotype.Component;
+
+import com.accuity.zeus.aft.jbehave.identifiers.FinancialsIdentifiers;
 
 /**
  * Created by tubatil on 10/31/2016.
@@ -17,7 +20,15 @@ public class FinancialsSteps  extends AbstractSteps{
     }
     
     @Then("the user should see the line items retrieved from $source document")
-	public void verifyHistoryValuesFromTrusted(@Named("fid") String fid,@Named("source") String source) {
-    	getFinancialsPage().verifyLineItemsFromTrusted(fid, source);
-	}	
+	public void verifyHistoryValuesFromTrusted(@Named("entityFid") String entityFid,@Named("source") String source) {
+    	getFinancialsPage().verifyLineItemsFromTrusted(entityFid, source);
+	}
+    
+    @When("the user clicks on the <financialStatementDate> in financial page")
+    public void clickOnFinancialsStatement(@Named("financialStatementDate") String financialStatementDate) {
+       // getDataPage().attemptClick(FinancialsIdentifiers.getObjectIdentifier("view_financial_line_item_table"));
+    	//setFinancialsPage(getLegalEntityPage().clickOnFinancialsLink());
+    	getFinancialsPage().clickOnFinancialStatement(financialStatementDate);
+    }
+
 }

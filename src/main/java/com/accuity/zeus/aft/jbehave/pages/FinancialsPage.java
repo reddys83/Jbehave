@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by tubatil on 10/31/2016.
@@ -61,25 +62,100 @@ public class FinancialsPage extends AbstractPage{
     public void verifyLineItemsFromTrusted(String fid, String source) {
 		
 			List<String> lineItemType = new ArrayList<String>();
-			/*List<String> historyEventDate = new ArrayList<String>();
-			List<String> historyEventDescription = new ArrayList<String>();
-			List<String> historyEventReplacedByCode = new ArrayList<String>();
-			List<String> historyUsageName = new ArrayList<String>();
-			List<String> historyUsageAddress = new ArrayList<String>();
-			List<String> historyUsageCity = new ArrayList<String>();
-			List<String> historyUsageArea = new ArrayList<String>();
-			List<String> historyUsageSubArea = new ArrayList<String>();
-			List<String> historyUsageCountry = new ArrayList<String>();
-			List<String> historyUsagePostalCode = new ArrayList<String>();
-			List<String> historyUsageAdditionalInfo = new ArrayList<String>();	*/	
+			List<String> lineItemCalculated = new ArrayList<String>();
+			List<String> lineItemValue = new ArrayList<String>();
+			List<String> lineItemNormalized= new ArrayList<String>();
+			List<String> lineItemNotes = new ArrayList<String>();
 			
 			List<WebElement> lineItemRows = getDriver().findElements(FinancialsIdentifiers.getObjectIdentifier("view_financial_line_item_table"));
 			System.out.println(lineItemRows.size());
-			for (int index = 1; index < lineItemRows.size() ; index++) {
-				List<WebElement> historyEventColumns = lineItemRows.get(index).findElements(By.tagName("td"));
-				lineItemType.add(historyEventColumns.get(0).getText());
-				System.out.println(historyEventColumns.get(0).getText());
+			for (int index = 0; index < lineItemRows.size() ; index++) {
+				List<WebElement> lineItemCols = lineItemRows.get(index).findElements(By.tagName("td"));
+				lineItemType.add(lineItemCols.get(0).getText());
+				lineItemCalculated.add(lineItemCols.get(1).getText());
+				lineItemValue.add(lineItemCols.get(2).getText());
+				lineItemNormalized.add(lineItemCols.get(3).getText());
+				lineItemNotes.add(lineItemCols.get(4).getText());
+				
 				
 			}
+			verifyLineItemsValuesFromDB(fid, source, lineItemType, lineItemCalculated,
+					lineItemValue, lineItemNormalized, lineItemNotes);
+			
+			
 		}
+    
+    public void verifyLineItemsValuesFromDB(String fid, String source, List<String> lineItemType, List<String> lineItemCalculated, List<String> lineItemValue,
+			List<String> lineItemNormalized, List<String> lineItemNotes) {
+		
+		String lineItemsValue;
+		
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("fid", fid));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(5000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get line items values", nvPairs);
+
+			//System.out.println(document.getElementsByTagName("lineItems").item(0).getChildNodes()
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("lineItems").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("lineItems").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+					
+						
+					lineItemsValue = document.getElementsByTagName("lineItems").item(0).getChildNodes().item(i)
+							.getChildNodes().item(childNode).getTextContent();
+
+					System.out.println("DB"+lineItemsValue);
+                        System.out.println(childNode+"2cond for");
+						
+						switch (document.getElementsByTagName("lineItems").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "typeName": 
+							System.out.println(lineItemsValue+lineItemType.get(i));
+							assertEquals(lineItemsValue, lineItemType.get(i));
+						System.out.println(lineItemsValue+lineItemType.get(i));	
+						break;
+						case "calculated": 
+							System.out.println(lineItemsValue+lineItemCalculated.get(i));
+							assertEquals(lineItemsValue, (lineItemCalculated.get(i).toLowerCase()));
+						System.out.println(lineItemsValue+lineItemCalculated.get(i));
+						break;
+						case "notes":
+							System.out.println("UI"+lineItemNotes.get(i));
+							System.out.println("DB"+lineItemsValue);
+							assertEquals(lineItemsValue, lineItemNotes.get(i));;
+							break;
+						
+						}
+					}				
+					
+				}			
+				}
+			
+			else
+				assertTrue(source + "document is null", false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void clickOnFinancialStatement(String financialStatementDate){
+
+    	List<WebElement> periodEndDate = getDriver().findElements(FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_EndDate_leftSideMenu_xpath"));
+    	
+    	
+    	for (int i = 0; i < periodEndDate.size(); i++) {
+            if(financialStatementDate.equals(periodEndDate.get(i).getText())){
+    			periodEndDate.get(i).click();
+    		}
+    		
+            }
+    }
   }
