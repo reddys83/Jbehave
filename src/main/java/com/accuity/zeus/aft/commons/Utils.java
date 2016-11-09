@@ -11,12 +11,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 @Component
 public class Utils {
 
     XqueryMap xqueryMap = new XqueryMap();
     ParamMap paramMap = new ParamMap();
+    static Map<String,String> orderOfMagnitude = new HashMap<String,String>();
 
     public Properties readPropertyFile(){
         Properties prop = new Properties();
@@ -110,6 +113,40 @@ public class Utils {
           e.printStackTrace();
           return null;
       }
+    }
+
+
+    public static String formatMonth(String inputDate){
+
+        String[] dateParts = inputDate.split(" ");
+        String formattedMonth  = null;
+        try {
+            Date date = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(dateParts[1]);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int month = cal.get(Calendar.MONTH)+1;
+
+            formattedMonth = month<10 ? "0"+month:""+month;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dateParts[0]+"-"+formattedMonth+"-"+dateParts[2];
+
+    }
+
+    public static String getOrderOfMagnitude(String key){
+        if(orderOfMagnitude.isEmpty()) {
+            orderOfMagnitude.put("1", "Units");
+            orderOfMagnitude.put("2", "Thousands ");
+            orderOfMagnitude.put("3", "Millions");
+            orderOfMagnitude.put("4", "Billions");
+            orderOfMagnitude.put("5", "Trillions");
+            orderOfMagnitude.put("6", "Quadrillions");
+            orderOfMagnitude.put("7", "Quintillions");
+            orderOfMagnitude.put("8", "Sextillions");
+        }
+        return orderOfMagnitude.get(key);
     }
 
 

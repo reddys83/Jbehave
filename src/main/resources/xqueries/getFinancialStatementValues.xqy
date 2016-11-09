@@ -5,7 +5,7 @@ declare function local:exchangeRateTo($currencyCode as xs:string,$value as xs:st
     </exchangeRate>
 };
 
-declare function local:exchangeRateToOther($exchangeRateToOther as node()*){
+declare function local:exchangeRateToOther($exchangeRateToOther as node()*,$source as xs:string){
     for $node in $exchangeRateToOther
     let $currencyId := fn:tokenize($node/currency/link/@href, "/")[last()]
     let $currency := /currency[@source = $source and @id=$currencyId]
@@ -44,7 +44,7 @@ return <results>{
     local:exchangeRateTo("USD",fn:data($financialStatement/exchangeRates/exchangeRateToUSD)),
     local:exchangeRateTo("GBP",fn:data($financialStatement/exchangeRates/exchangeRateToGBP)),
     local:exchangeRateTo("EUR",fn:data($financialStatement/exchangeRates/exchangeRateToEUR)),
-    local:exchangeRateToOther($financialStatement/exchangeRates//exchangeRateToOther)
+    local:exchangeRateToOther($financialStatement/exchangeRates//exchangeRateToOther,$source)
 }
 
 </results>
