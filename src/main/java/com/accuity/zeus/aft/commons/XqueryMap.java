@@ -167,6 +167,8 @@ public class XqueryMap {
 
         queryMap.put("get legalEntity financialStatements periodEndDate","getLegalEntityFinancialStatementPeroidEndDate.xqy");
         queryMap.put("get line items values", "getLineItemValues.xqy");
+        queryMap.put("get line items type fid values", "getTypeFidValues.xqy");
+        queryMap.put("get line items type lookup Values", "getlineItemTypeFidFromLookup.xqy");
     }
 
     public String getXquery(String key){
