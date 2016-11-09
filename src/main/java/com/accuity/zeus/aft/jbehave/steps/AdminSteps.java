@@ -67,4 +67,9 @@ public class AdminSteps extends AbstractSteps{
     public void verifySubGroupingInHierarchicalTaxonomy() {
     	getAdminPage().verifySubGroupingInHierarchicalTaxonomy();
     }
+    
+    @Then("the user should see the selected hierarchical taxonomy values same as in $source document")
+    public void verifyHierarchicalTaxonomyValuesFromTrustedDB(@Named("taxonomy") String taxonomy, @Named("source") String source) {
+    	getAdminPage().verifyHierarchicalTaxonomyValuesFromTrustedDB(taxonomy, source);
+    } 
 }

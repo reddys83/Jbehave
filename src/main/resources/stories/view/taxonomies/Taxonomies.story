@@ -79,8 +79,9 @@ When the user clicks on the admin tab in the search page
 And the user clicks on the taxonomies tab in the data area
 And the user clicks on the choose a taxonomy option
 And the user enters the taxonomy <taxonomy> in the type-ahead box
+Then the user should see the selected hierarchical taxonomy values same as in trusted document
 Then the user should see that each hierarchical taxonomy should have atleast one layer of sub-grouping
 
 Examples:
 |taxonomy|
-|Financial Service|
+|Document Type|

@@ -10,6 +10,10 @@ public class TaxonomiesIdentifiers {
 
     public static void setIdentifiers() {
     	hmap.put("hierarchial_taxonomies_list", By.xpath("//*[@class='multi-body']//tbody"));
+    	hmap.put("taxonomies_category_header", By.xpath("//*[@class='side-navbar-layout']//h1"));
+    	hmap.put("hierarchical_taxonomy_sub_groupings_list", By.xpath("//*[@class='multi-body']//*[starts-with(@class,'level')]"));
+    	hmap.put("hierarchical_taxonomies_row_values_list", By.xpath("//*[@class='side-navbar-layout']//tbody//tr[1]"));
+    	hmap.put("taxonomies_column_header_list", By.xpath("//*[@class='side-navbar-layout']//th"));
     }
     
     public static By getObjectIdentifier(String key) {
