@@ -51,7 +51,6 @@ When the user clicks on the search results card with fid <fid>
 And the user clicks on the offices link in the legal entity page
 And the user clicks on the offices results card with fid <officeFid>
 When the user clicks on the legal title in the office headers
-
 Then the user should see the legal entity's names as:
 |TYPE|VALUE|
 |Legal Title|Bank of Taiwan|
