@@ -204,6 +204,7 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_warning_message_content", By.xpath("//*[@id='modal-region']//p"));
         hmap.put("legalEntity_warning_message_no_button", By.xpath(".//*[@class='modal-content']//button[@id='cancel-button']"));
         hmap.put("legalEntity_warning_message_yes_button", By.xpath(".//*[@class='modal-content']//button[@id='confirm-button']"));
+        hmap.put("LegalEntity_financials_link", By.id("financialStatement-nav"));
     }
 
     public static By getObjectIdentifier(String key) {
