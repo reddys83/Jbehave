@@ -85,3 +85,4 @@ Then the user should see that each hierarchical taxonomy should have atleast one
 Examples:
 |taxonomy|
 |Document Type|
+|Routing Code Subtype|
