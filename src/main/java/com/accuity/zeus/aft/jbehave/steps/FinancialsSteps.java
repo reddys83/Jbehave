@@ -15,4 +15,9 @@ public class FinancialsSteps  extends AbstractSteps{
     {
         getFinancialsPage().verifyLegalEntityFinancialStatements(fid);
     }
+    
+    @Then("the user should see the missing items retrieved from $source document")
+	public void verifyHistoryValuesFromTrusted(@Named("entityFid") String entityFid, @Named("source") String source) {
+		getFinancialsPage().verifyMissingItemsFromTrusted(entityFid, source);
+	}
 }
