@@ -18,7 +18,6 @@
             <type source="trusted">Retail Bank</type>
             <type source="trusted">Trade Finance</type>
             <type source="zeus">Brokerage Firm</type>
-            <type source="zeus">ATM Network</type>
         </types>
         <names>
             <name>

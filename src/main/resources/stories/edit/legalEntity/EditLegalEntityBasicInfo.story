@@ -77,9 +77,10 @@ When the user clicks on the currency tab in the data area
 Then the user should see the cancel update confirmation modal
 When the user clicks on the cancel no button
 Then the user should return to edit legalentity page mode
-When the user clicks on the currency tab in the data area
+When the user clicks on the data tab in the search page
 Then the user should see the cancel update confirmation modal
 When the user clicks on the cancel yes button
+When the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 Then the user should see the currency page
@@ -168,7 +169,6 @@ Examples:
 Scenario: User updates Charter type
 Veriyfing if charter type values are updated in Zeus and Trusted documents.
 Verifying the options displayed for charter type are same as those in lookup document.
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -1036,7 +1036,7 @@ Scenario: (4) To update the Legal Entity`s 'Country of Opeartions' that is diffe
 1 - User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
 2 - User verifies confirmation modal has summary change
 3 - User verifies Country of Operations value is reflected in UI and Zeus
-
+Meta:@test776
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
