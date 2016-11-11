@@ -401,6 +401,7 @@ Examples:
 
 
 Scenario:Update and Save existing office type-Select a null value and Save. Verify that null value is not saved.
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -423,9 +424,10 @@ And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|officeTypeValue|
-|1010|FID|1010|1010-44||
+|1165|FID|1165|1165-30||
 
 Scenario: Add a new legal entity type row and Save- Select a non-Blank value and Save. Verify the value is saved in Zeus document
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -453,6 +455,7 @@ Examples:
 
 
 Scenario: Add a new legal entity type row and Save- Select a null value and Save. Verify that null value is not saved.
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -476,7 +479,7 @@ And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|officeTypeValue|
-|1010|FID|1010|1010-44||
+|1165|FID|1165|1165-30||
 
 
 Scenario:
@@ -484,7 +487,6 @@ a) Verify that the delete button is disabled for the first row of office type
 b) Verify that the user should get the confirmation window for deleting existing office type rows and user clicks No button
 c) Verify that the user should get the confirmation window for deleting existing office type rows and user clicks Yes button and row should be deleted
 
-Meta:@test929
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -498,7 +500,7 @@ Then the user should see the first_row_existing_officetype_delete_button in disa
 When the user clicks on the second_row_existing_officetype_delete_button in office types section
 Then the user should see the delete row confirmation modal in the office page
 When the user clicks on the no button in the delete row confirmation modal in the office page
-Then the user should still see the office second_existing_officetype_dropdown with value Trust Branch as office type in office page
+Then the user should still see the office second_existing_officetype_dropdown with the value Trust Branch as office type in office page
 When the user clicks on the second_row_existing_officetype_delete_button in office types section
 When the user clicks on the yes button in the delete row confirmation modal in the office page
 When the user clicks on the save button
@@ -512,7 +514,7 @@ And the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|fid|officeFid|officeTypeValue|
-|1010|FID|1010|1010-44|Trust Branch|
+|1165|FID|1165|1165-30|Trust Branch|
 
 
 Scenario:
@@ -563,7 +565,7 @@ Then the user should see the error message for the required office type field in
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
-|entity|searchBy|fid|officeFid|officeTypeValue
+|entity|searchBy|fid|officeFid|officeTypeValue|
 |1010|FID|1010|1010-44||
 
 
@@ -582,7 +584,7 @@ Then the user should see the error message for the required office type field in
 And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
 
 Examples:
-|entity|searchBy|fid|officeFid|officeTypeValue
+|entity|searchBy|fid|officeFid|officeTypeValue|
 |1010|FID|1010|1010-44||
 
 Scenario: Verify that the user should NOT get the Required field message when user enters null value for all the office type rows except one row
@@ -827,7 +829,7 @@ And the user clicks on the offices results card with fid <officeFid>
 When the user gets the document with get id for offices with the <officeFid> from the database
 And the user clicks on the office update link
 When the user clicks on add new office name button in the office name page
-Then the user verifies the office name value maxlength is 75 for the office_name_first_row_new_office_value
+Then the user verifies the office name value maxlength is 75 for office_name_first_row_new_office_value
 When the user clicks on the save button
 Then the user should see the save confirmation modal
 When the user clicks on the confirm button
