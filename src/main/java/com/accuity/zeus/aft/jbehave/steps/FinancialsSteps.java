@@ -6,13 +6,13 @@ import org.jbehave.core.annotations.When;
 import org.springframework.stereotype.Component;
 
 import com.accuity.zeus.aft.jbehave.identifiers.FinancialsIdentifiers;
+import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 
-/**
- * Created by tubatil on 10/31/2016.
- */
 @Component
 public class FinancialsSteps  extends AbstractSteps{
-  
+	public String financialAlternateEntityName;
+	public String financialAlternateStatementName;
+	
     @Then("the user should see the missing items retrieved from $source document")
 	public void verifyHistoryValuesFromTrusted(@Named("entityFid") String entityFid, @Named("source") String source) {
 		getFinancialsPage().verifyMissingItemsFromTrusted(entityFid, source);
@@ -23,23 +23,31 @@ public class FinancialsSteps  extends AbstractSteps{
 		getFinancialsPage().clickOnFinancialStatement(financialStatementDate);
 	}
 	
-	@When("the user selects 'Alternate of Statement' hyperlink")
+	@When("the user clicks on 'Alternate of Statement' hyperlink")
 	public void clickLinkAlternateStatement(){
+		try{
+			financialAlternateStatementName = getFinancialsPage().AlternateStatementName();
 		getDataPage().attemptClick(FinancialsIdentifiers.getObjectIdentifier("financialStatement_missingItem_alternateStatement_link_xpath"));
+		Thread.sleep(2000L);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	@When("the user clicks on 'Alternate Entity' hyperlink")
 	public void clickLinkAlternateEntity(){
-		getDataPage().attemptClick(FinancialsIdentifiers.getObjectIdentifier("financialStatement_missingItem_alternateStatement_link_xpath"));
+		financialAlternateEntityName = getFinancialsPage().getAlternateEntityLinkText();
+		getDataPage().attemptClick(FinancialsIdentifiers.getObjectIdentifier("financialStatement_missingItem_entity_link_xpath"));
 	}
 	
 	@Then("the user should see Legal Entity basic info page is dispayed")
 	public void verifyLegalEntityBasicInfoPage(){
-		getDataPage().attemptClick(FinancialsIdentifiers.getObjectIdentifier("financialStatement_missingItem_alternateStatement_link_xpath"));
+		getFinancialsPage().verifyLegalEntityNameBasicInfoPage(financialAlternateEntityName);
 	}
 	
 	@Then("the user should see details screen for the linked Financial Statement is displayed")
 	public void verifyLinkedFinancialStatementIsDisplayed(){
-		getDataPage().attemptClick(FinancialsIdentifiers.getObjectIdentifier("financialStatement_missingItem_alternateStatement_link_xpath"));
+		getFinancialsPage().verifyFinancialMissingPage(financialAlternateStatementName,financialAlternateEntityName);
 	}
 }

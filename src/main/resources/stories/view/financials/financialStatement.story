@@ -23,7 +23,14 @@ When the user clicks on the <financialStatementDate> in financial page
 Then the user should see the missing items retrieved from trusted document
 When the user clicks on 'Alternate Entity' hyperlink
 Then the user should see Legal Entity basic info page is dispayed
-When the user selects 'Alternate of Statement' hyperlink
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for the institution
+When the user clicks on the search results card with fid <fid>
+And the user clicks on the financials link in the legal entity page
+When the user clicks on the <financialStatementDate> in financial page
+When the user clicks on 'Alternate of Statement' hyperlink
 Then the user should see details screen for the linked Financial Statement is displayed
 
 Examples:

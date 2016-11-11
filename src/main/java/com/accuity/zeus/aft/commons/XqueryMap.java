@@ -164,8 +164,6 @@ public class XqueryMap {
         queryMap.put("get ABA code source lookup", "getABACodeSourceTypesFromLookup.xqy");        
         queryMap.put("get routing code history values", "getRoutingCodeHistoryDetails.xqy");        
         queryMap.put("get office locations summary type lookup", "getOfficeLocationsSummaryTypeFromLookup.xqy");
-
-        queryMap.put("get legalEntity financialStatements periodEndDate","getLegalEntityFinancialStatementPeroidEndDate.xqy");
         queryMap.put("get missing items values","getMissingItemsValues.xqy");
    
     }
