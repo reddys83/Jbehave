@@ -1,3 +1,8 @@
+declare function local:getCategoryEntry($node as node()*, $columnIds as xs:string*){
+  for $cat in  $node
+  return <entryValues>{local:getEntry($cat,$columnIds)}</entryValues>
+};
+
 declare function local:getEntry($node as node()*, $columnIds as xs:string*){
   for $id in $columnIds
       let $value :=  for $field in $node/@*
@@ -10,10 +15,8 @@ declare function local:getEntry($node as node()*, $columnIds as xs:string*){
 };
 
 declare function local:getCategory($category as node()*,$level as xs:int,$columnIds as xs:string*)
-{
-  
-   if($category/entry) then 
-     
+{  
+   if($category/entry) then      
      let $entryValues := for $entry in $category/entry return 
                           <entryValues>{local:getEntry($entry,$columnIds)}</entryValues> 
      return element subCategory{ 
@@ -42,6 +45,5 @@ let $columnIds := fn:data($headers/lookupFields/field/@name)
 return
 <taxonomyTable>
 <columnHeaders>{$taxonomyColumns}</columnHeaders>
-<category>{(<entryValues>{local:getEntry($headers/lookupBody/category,$columnIds)}</entryValues>,local:getCategory($headers/lookupBody/category,1,$columnIds))}</category>
-
+<category>{(local:getCategoryEntry($headers/lookupBody/category,$columnIds),local:getCategory($headers/lookupBody/category,1,$columnIds))}</category>
 </taxonomyTable>
