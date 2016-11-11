@@ -4,7 +4,10 @@ import com.accuity.zeus.aft.commons.Utils;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.TaxonomiesIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -93,21 +96,13 @@ public class AdminPage extends AbstractPage{
     }
 
     public void enterTaxonomyInTheTypeAheadBox(String taxonomy) {
-        /*getDriver().findElement(taxonomy_input_xpath).sendKeys(taxonomy);
-        getDriver().findElement(taxonomy_input_xpath).sendKeys(Keys.RETURN);*/
-        List<WebElement> options = getDriver().findElements(By.xpath("//*[@id='entitySelect_chosen']/div//li"));
-        for(WebElement option:options){
-            if(option.getText().contains(taxonomy)){
+        List<WebElement> taxonomyOptions = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_dropdown_list"));
+        for(WebElement option:taxonomyOptions){
+            if(option.getText().equals(taxonomy)){
                 option.click();
                 break;
             }
         }
-
-
-
-
-
-
     }
 
     public void verifyTaxonomiesEntry(ExamplesTable taxonomyEntry) {
@@ -121,5 +116,56 @@ public class AdminPage extends AbstractPage{
                 assertTrue(getDriver().findElement(By.xpath("//table[1]//tr[" + i + "]//button[2]")).isDisplayed());
             }
         }
+    }
+    
+    public void verifyNonHierarchicalTaxonomyValuesFromDB(String taxonomy, String source, List<String> columnHeaderList, List<String> rowValueList) {
+    	try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("taxonomy", taxonomy));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get non-hierarchical taxonomy values", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("columnHeaders").item(0).getChildNodes().getLength(); i++) {
+					assertEquals(document.getElementsByTagName("columnHeaders").item(0).getChildNodes().item(i)
+							.getTextContent().toUpperCase(), columnHeaderList.get(i));
+				}
+				for (int i = 0; i < document.getElementsByTagName("entryValues").getLength(); i++) {
+					String taxonomyRowValue = "";
+					for (int index = 0; index < document.getElementsByTagName("entryValues").item(i).getChildNodes().getLength(); index++) {
+						if (!document.getElementsByTagName("entryValues").item(i).getChildNodes().item(index).getTextContent().equals("")) {
+							taxonomyRowValue += document.getElementsByTagName("entryValues").item(i).getChildNodes().item(index).getTextContent() + " ";
+						}
+					}
+					assertEquals(taxonomyRowValue.trim(), rowValueList.get(i));
+				}
+			} else
+				assertTrue(source + " document is null", false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
+    public void verifyNonHierarchicalTaxonomyValuesFromTrustedDB(String taxonomy, String source) {
+		try {
+			List<String> columnHeaderList = new ArrayList<String>();
+			List<String> rowValueList = new ArrayList<String>();
+			Thread.sleep(5000L);
+			List<WebElement> columnHeader = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_column_header_list"));
+			List<WebElement> rowValue = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_row_values_list"));
+			if (columnHeader.size() > 0) {
+				for (int index = 0; index < columnHeader.size(); index++) {
+					columnHeaderList.add(columnHeader.get(index).getText());
+				}
+				for (int index = 0; index < rowValue.size(); index++) {
+					rowValueList.add(rowValue.get(index).getText());
+				}
+				verifyNonHierarchicalTaxonomyValuesFromDB(taxonomy, source, columnHeaderList, rowValueList);
+			} else {
+				assertTrue("There is no existing values for " + taxonomy + " taxonomy", false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 }
