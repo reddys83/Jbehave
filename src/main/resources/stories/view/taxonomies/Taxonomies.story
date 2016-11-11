@@ -84,7 +84,7 @@ Then the user should see that each hierarchical taxonomy should have atleast one
 
 Examples:
 |taxonomy|
+|Document Type|
 |Financial Service|
 |Payment System Attribute|
-|Document Type|
 |Routing Code Subtype|

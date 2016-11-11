@@ -160,7 +160,7 @@ public class AdminPage extends AbstractPage{
 				
 				for (int index = 0; index < categoryListValues.size(); index++) {
 					if( categoryListValues.get(index).getAttribute("class").isEmpty() ) {
-						categoryList.add(categoryListValues.get(index).getText().replace(" ", ""));
+						categoryList.add(categoryListValues.get(index).getText());
 					}					
 				}
 				Collections.sort(categoryList);
@@ -169,7 +169,7 @@ public class AdminPage extends AbstractPage{
 				for (int index = 0; index < levelCount.size(); index++) {
 					for (int innerIndex = 0; innerIndex < taxonomySubGroupingRows.size(); innerIndex++) {
 						if (taxonomySubGroupingRows.get(innerIndex).getAttribute("class").equals("level" + levelCount.get(index))) {
-							taxonomySubGroupingRowValueList.add(taxonomySubGroupingRows.get(innerIndex).getText().replace(" ", ""));
+							taxonomySubGroupingRowValueList.add(taxonomySubGroupingRows.get(innerIndex).getText());
 						}
 					}
 					Collections.sort(taxonomySubGroupingRowValueList);
@@ -216,16 +216,28 @@ public class AdminPage extends AbstractPage{
 				}				
 				
 				for(int index = 0; index < levelCount.size();index++) {
-				 nodeList = document.getElementsByTagName("entryValues");
+				 nodeList = document.getElementsByTagName("entryValues");				
 					for (int innerIndex = 0; innerIndex<nodeList.getLength(); innerIndex++) {
 						if(nodeList.item(innerIndex).getParentNode().getAttributes().getLength()>0) {
 							if(levelCount.get(index).equals(nodeList.item(innerIndex).getParentNode().getAttributes().item(0).getNodeValue())) {
-								categorySubgroupList.add(nodeList.item(innerIndex).getTextContent().replace(" ", ""));
+								String rowValue = "";
+								for(int columIndex=0;columIndex<columnHeaderList.size();columIndex++) {
+									if(!nodeList.item(innerIndex).getChildNodes().item(columIndex).getTextContent().isEmpty()) {
+										rowValue = rowValue + nodeList.item(innerIndex).getChildNodes().item(columIndex).getTextContent() + " ";
+									}									
+								}
+								categorySubgroupList.add(rowValue.trim());
 							}	
 						}
-						else if(nodeList.item(innerIndex).getParentNode().getNodeName().equals("category")) {
-							if(!categoryList.contains(nodeList.item(innerIndex).getTextContent().replace(" ", ""))) {
-									categoryList.add(nodeList.item(innerIndex).getTextContent().replace(" ", ""));
+						else if(nodeList.item(innerIndex).getParentNode().getNodeName().equals("category")) {													
+							if(index==0) {
+								String rowValue = "";	
+								for(int columIndex=0;columIndex<columnHeaderList.size();columIndex++) {
+									if(!nodeList.item(innerIndex).getChildNodes().item(columIndex).getTextContent().isEmpty()) {
+										rowValue = rowValue + nodeList.item(innerIndex).getChildNodes().item(columIndex).getTextContent() + " ";	
+									}									
+								}	
+								categoryList.add(rowValue.trim());
 							}
 						}						
 					}
