@@ -96,21 +96,13 @@ public class AdminPage extends AbstractPage{
     }
 
     public void enterTaxonomyInTheTypeAheadBox(String taxonomy) {
-        /*getDriver().findElement(taxonomy_input_xpath).sendKeys(taxonomy);
-        getDriver().findElement(taxonomy_input_xpath).sendKeys(Keys.RETURN);*/
-        List<WebElement> options = getDriver().findElements(By.xpath("//*[@id='entitySelect_chosen']/div//li"));
-        for(WebElement option:options){
-            if(option.getText().contains(taxonomy)){
+        List<WebElement> taxonomyOptions = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_dropdown_list"));
+        for(WebElement option:taxonomyOptions){
+            if(option.getText().equals(taxonomy)){
                 option.click();
                 break;
             }
         }
-
-
-
-
-
-
     }
 
     public void verifyTaxonomiesEntry(ExamplesTable taxonomyEntry) {
@@ -132,7 +124,7 @@ public class AdminPage extends AbstractPage{
 			nvPairs.add(new BasicNameValuePair("taxonomy", taxonomy));
 			nvPairs.add(new BasicNameValuePair("source", source));
 			Thread.sleep(3000L);
-			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get non-heirarchical taxonomy values", nvPairs);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get non-hierarchical taxonomy values", nvPairs);
 			if (document != null) {
 				for (int i = 0; i < document.getElementsByTagName("columnHeaders").item(0).getChildNodes().getLength(); i++) {
 					assertEquals(document.getElementsByTagName("columnHeaders").item(0).getChildNodes().item(i)
@@ -155,30 +147,25 @@ public class AdminPage extends AbstractPage{
     }
     
     public void verifyNonHierarchicalTaxonomyValuesFromTrustedDB(String taxonomy, String source) {
-		List<String> columnHeaderList = new ArrayList<String>();
-		List<String> rowValueList = new ArrayList<String>();
-		List<WebElement> columnHeader = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_column_header_list"));
-		List<WebElement> rowValue = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_row_values_list"));
-		if (columnHeader.size() > 0) {
-			for (int index = 0; index < columnHeader.size(); index++) {
-				columnHeaderList.add(columnHeader.get(index).getText());
+		try {
+			List<String> columnHeaderList = new ArrayList<String>();
+			List<String> rowValueList = new ArrayList<String>();
+			Thread.sleep(5000L);
+			List<WebElement> columnHeader = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_column_header_list"));
+			List<WebElement> rowValue = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_row_values_list"));
+			if (columnHeader.size() > 0) {
+				for (int index = 0; index < columnHeader.size(); index++) {
+					columnHeaderList.add(columnHeader.get(index).getText());
+				}
+				for (int index = 0; index < rowValue.size(); index++) {
+					rowValueList.add(rowValue.get(index).getText());
+				}
+				verifyNonHierarchicalTaxonomyValuesFromDB(taxonomy, source, columnHeaderList, rowValueList);
+			} else {
+				assertTrue("There is no existing values for " + taxonomy + " taxonomy", false);
 			}
-			for (int index = 0; index < rowValue.size(); index++) {
-				rowValueList.add(rowValue.get(index).getText());
-			}
-			verifyNonHierarchicalTaxonomyValuesFromDB(taxonomy, source, columnHeaderList, rowValueList);
-		} else {
-			assertTrue("There is no existing values for " + taxonomy + " taxonomy", false);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-	}
-    
-    public void selectTaxonomyInTheTypeAheadBox(String taxonomy) {
-        List<WebElement> taxonomyOptions = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_dropdown_list"));
-        for(WebElement option:taxonomyOptions){
-            if(option.getText().equals(taxonomy)){
-                option.click();
-                break;
-            }
-        }
     }
 }
