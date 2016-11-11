@@ -80,7 +80,7 @@ Given a user is on the search page
 When the user clicks on the admin tab in the search page
 And the user clicks on the taxonomies tab in the data area
 And the user clicks on the choose a taxonomy option
-And the user enters the taxonomy <taxonomy> in the type-ahead box
+And the user selects the taxonomy <taxonomy> in the type-ahead box
 Then the user should see the selected taxonomy values same as in trusted document
 Then the user should not see any sub-grouping for the selected taxonomy
 Then the user should see that the taxonomies update button is displayed
@@ -88,6 +88,9 @@ Then the user verifies the taxonomy name in the category header
 
 Examples:
 |taxonomy|
+|Status|
+|Legal Entity FATCA Status|
+|Financials Missing Reason|
 |Department Type|
 |Address Type|
 |Country Related Place Type|

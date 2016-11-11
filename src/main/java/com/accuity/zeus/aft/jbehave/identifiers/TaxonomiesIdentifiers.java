@@ -14,6 +14,7 @@ public class TaxonomiesIdentifiers {
     	hmap.put("taxonomies_category_header", By.xpath("//*[@class='side-navbar-layout']//h1"));
     	hmap.put("taxonomies_column_header_list", By.xpath("//*[@class='side-navbar-layout']//th"));
     	hmap.put("taxonomies_row_values_list", By.xpath("//*[@class='side-navbar-layout']//tbody//tr"));
+    	hmap.put("taxonomies_dropdown_list", By.xpath("//*[@class='chosen-results']//*[contains(@class,'active-result')]"));
     }
     
     public static By getObjectIdentifier(String key) {

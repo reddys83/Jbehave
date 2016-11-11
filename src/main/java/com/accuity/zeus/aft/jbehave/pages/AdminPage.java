@@ -171,4 +171,14 @@ public class AdminPage extends AbstractPage{
 			assertTrue("There is no existing values for " + taxonomy + " taxonomy", false);
 		}
 	}
+    
+    public void selectTaxonomyInTheTypeAheadBox(String taxonomy) {
+        List<WebElement> taxonomyOptions = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_dropdown_list"));
+        for(WebElement option:taxonomyOptions){
+            if(option.getText().equals(taxonomy)){
+                option.click();
+                break;
+            }
+        }
+    }
 }

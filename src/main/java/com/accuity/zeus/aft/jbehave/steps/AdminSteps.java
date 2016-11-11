@@ -83,4 +83,9 @@ public class AdminSteps extends AbstractSteps{
     public void verifyNonHierarchicalTaxonomyValuesFromTrustedDB(@Named("taxonomy") String taxonomy, @Named("source") String source) {
     	getAdminPage().verifyNonHierarchicalTaxonomyValuesFromTrustedDB(taxonomy, source);
     }
+    
+    @When("the user selects the taxonomy <taxonomy> in the type-ahead box")
+    public void selectTaxonomyInTheTypeAheadBox(@Named("taxonomy") String taxonomy){
+    	getAdminPage().selectTaxonomyInTheTypeAheadBox(taxonomy);
+    }
 }
