@@ -1,0 +1,26 @@
+<area deleted="false" fid="SA-1452" id="7669f627-0fb9-49dd-acca-cb5623fe7e8f"
+      resource="/area/id/7669f627-0fb9-49dd-acca-cb5623fe7e8f" source="trusted">
+    <summary>
+        <type>subarea</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Chittagong</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>Chittagong</value>
+            </name>
+        </names>
+        <status>active</status>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/ab3351a9-63e6-4002-bbec-0f00aa2c62f2" rel="src"/>
+        </place>
+        <place>
+            <link href="/area/id/8257dbee-7d34-41de-9879-afd5644593a3" rel="src"/>
+        </place>
+    </within>
+</area>

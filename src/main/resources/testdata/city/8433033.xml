@@ -1,0 +1,23 @@
+<city deleted="false" fid="8433033" id="d927e1bb-bd04-4ecb-83c9-4056cee353fd" resource="/city/id/d927e1bb-bd04-4ecb-83c9-4056cee353fd" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Sint-Stevens-Woluwe</value>
+            </name>
+            <citySortKey>SINT STEVENS WOLUWE</citySortKey>
+        </names>
+        <status>active</status>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/24493ead-a5a0-46b1-bf9c-a040ab18daa6" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/b00f9f9a-b46a-4832-8f3e-89ee9ea86d4f" rel="src"/>
+
+        </place>
+    </within>
+</city>

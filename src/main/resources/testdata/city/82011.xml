@@ -1,0 +1,65 @@
+<city deleted="false" fid="82011" id="ac32a9eb-3543-4b3e-b7fa-3a7beaaa92a0" resource="/city/id/ac32a9eb-3543-4b3e-b7fa-3a7beaaa92a0" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Belt</value>
+            </name>
+            <citySortKey>BELT</citySortKey>
+        </names>
+        <status>active</status>
+        <identifiers>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>5275</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <creditRatings>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Long Term Rating</type>
+            <value>1234</value>
+            <dateApplied accuracy="day">2016-01-15</dateApplied>
+            <dateConfirmed accuracy="day">2016-01-17</dateConfirmed>
+        </rating>
+    </creditRatings>
+    <alternativeRegions>
+        <region>
+            <type>Metropolitan Statistical Area</type>
+            <value>24500</value>
+        </region>
+        <region>
+            <type>Federal Reserve District</type>
+            <value>9</value>
+        </region>
+        <region>
+            <type>Federal Reserve Sub District</type>
+            <value>10OC</value>
+        </region>
+        <region>
+            <type>Federal Home Loan Bank District</type>
+            <value>12</value>
+        </region>
+        <region>
+            <type>National Credit Union Administration Region</type>
+            <value>II</value>
+        </region>
+    </alternativeRegions>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/7062d240-d10d-4481-9c28-87af2bacfacf" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/1e5bc63b-e35b-4768-9411-7e834cada7aa" rel="src"/>
+
+        </place>
+    </within>
+</city>

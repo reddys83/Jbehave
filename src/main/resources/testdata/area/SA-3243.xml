@@ -1,0 +1,36 @@
+<area deleted="false" fid="SA-3243" id="e76f75e0-b146-45df-bd32-14acab6e40a4" resource="/area/id/e76f75e0-b146-45df-bd32-14acab6e40a4" source="trusted">
+    <summary>
+        <type>subarea</type>
+        <names>
+
+
+            <name>
+                <type>Full Name</type>
+                <value>Dade</value>
+            </name><name>
+            <type>Display Name</type>
+            <value>Dade</value>
+        </name></names>
+        <status>active</status>
+        <useInAddress>false</useInAddress>
+    </summary>
+
+    <relatedPlaces>
+
+        <relation>
+            <type>city</type>
+            <details>
+                <detail>Test City</detail>
+            </details>
+            <place>
+                <link href="/city/id/cf43ecf0-e91b-4a65-8f08-01a9448803d9" rel="src"/>
+            </place>
+        </relation></relatedPlaces>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </place>
+        <place>
+            <link href="/area/id/1762f78b-0521-4a9d-957b-eeba4b8d7938" rel="src"/>
+        </place>
+    </within></area>
