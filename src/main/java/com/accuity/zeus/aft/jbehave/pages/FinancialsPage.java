@@ -10,6 +10,7 @@ import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
@@ -37,14 +38,14 @@ public class FinancialsPage extends AbstractPage {
 	public void verifyMissingItemsFromTrusted(String fid, String source) {
 		String reason;
 		String alternateEntity;
-		String alternatestatement;
+		String alternateStatement;
 		List<WebElement> missingItemRows = getDriver()
 				.findElements(FinancialsIdentifiers.getObjectIdentifier("view_financial_missing_item_table"));
 		List<WebElement> lineItemCols = missingItemRows.get(0).findElements(By.tagName("td"));
 		reason = (lineItemCols.get(0).getText());
 		alternateEntity = (lineItemCols.get(1).getText());
-		alternatestatement = (lineItemCols.get(2).getText());
-		verifyMissingItemsValuesFromDB(fid, source, reason, alternateEntity, alternatestatement);
+		alternateStatement = (lineItemCols.get(2).getText());
+		verifyMissingItemsValuesFromDB(fid, source, reason, alternateEntity, alternateStatement);
 	}
 
 	public void verifyMissingItemsValuesFromDB(String fid, String source, String reason, String alternateEntity,
@@ -92,16 +93,6 @@ public class FinancialsPage extends AbstractPage {
 		}
 	}
 
-	public void clickOnFinancialStatement(String financialStatementDate) {
-		List<WebElement> periodEndDate = getDriver().findElements(
-				FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_EndDate_leftSideMenu_xpath"));
-		for (int i = 0; i < periodEndDate.size(); i++) {
-			if (financialStatementDate.equals(periodEndDate.get(i).getText())) {
-				periodEndDate.get(i).click();
-			}
-		}
-	}
-
 	public String getAlternateEntityLinkText() {
 		return getDriver()
 				.findElement(
@@ -109,7 +100,7 @@ public class FinancialsPage extends AbstractPage {
 				.getText();
 	}
 
-	public String AlternateStatementName() {
+	public String alternateStatementName() {
 		return getDriver().findElement(FinancialsIdentifiers
 				.getObjectIdentifier("financialStatement_missingItem_alternateStatement_link_xpath")).getText();
 	}
@@ -127,15 +118,33 @@ public class FinancialsPage extends AbstractPage {
 			String financialAlternateEntityName) {
 		assertTrue(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("LegalEntity_financials_link"))
 				.getAttribute("class").equals("selected"));
-		assertTrue(getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("LegalEntity_financials_link"))
-				.getText().equals("Financials"));
 		assertTrue(getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("alternateEntity_text_value"))
 				.getText().equals(financialAlternateEntityName));
 		assertEquals((financialAlternateStatementName.substring(7, 19).toLowerCase().trim()),
-				getDriver()
-						.findElement(
-								FinancialsIdentifiers.getObjectIdentifier("financial_missing_item_statement_header"))
-						.getText().toLowerCase().substring(0, 11));
+				getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financial_missing_item_statement_header")).getText().toLowerCase().substring(0, 11));
+	}
+	
+	public void clickPeriodEndDate(String date) {    	
+    	List<WebElement> displayDates = getDriver().findElements(FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_endDate_leftSideMenu_xpath"));
+    	for(int index = 0; index<displayDates.size(); index++) {
+    		if (displayDates.get(index).getText().equals(date)) {
+    			attemptClickTheWebElement(displayDates.get(index));
+    		}
+    	}
+    }
+	
+	public void verifyFinancialsHeadingText(String periodEndDate) {
+		try {
+			try {
+				Thread.sleep(3000L);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			String endDate = new String(new StringBuffer(periodEndDate.replace("-", " ")).append(" MISSING"));
+			assertEquals(endDate, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_heading_xpath")).getText());
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
 	}
 
   }

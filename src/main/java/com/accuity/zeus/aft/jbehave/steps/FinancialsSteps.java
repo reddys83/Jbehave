@@ -18,15 +18,10 @@ public class FinancialsSteps  extends AbstractSteps{
 		getFinancialsPage().verifyMissingItemsFromTrusted(entityFid, source);
 	}
     
-	@When("the user clicks on the <financialStatementDate> in financial page")
-	public void clickOnFinancialsStatement(@Named("financialStatementDate") String financialStatementDate) {
-		getFinancialsPage().clickOnFinancialStatement(financialStatementDate);
-	}
-	
 	@When("the user clicks on 'Alternate of Statement' hyperlink")
 	public void clickLinkAlternateStatement(){
 		try{
-			financialAlternateStatementName = getFinancialsPage().AlternateStatementName();
+			financialAlternateStatementName = getFinancialsPage().alternateStatementName();
 		getDataPage().attemptClick(FinancialsIdentifiers.getObjectIdentifier("financialStatement_missingItem_alternateStatement_link_xpath"));
 		Thread.sleep(2000L);
 		}
@@ -49,5 +44,15 @@ public class FinancialsSteps  extends AbstractSteps{
 	@Then("the user should see details screen for the linked Financial Statement is displayed")
 	public void verifyLinkedFinancialStatementIsDisplayed(){
 		getFinancialsPage().verifyFinancialMissingPage(financialAlternateStatementName,financialAlternateEntityName);
+	}
+	
+	@When("the user clicks on <periodEndDate> on the left navigation")
+    public void clickPeriodEndDate(@Named("periodEndDate") String periodEndDate){
+    	getFinancialsPage().clickPeriodEndDate(periodEndDate);
+    }
+	
+	@Then("the user should see the <displayDate> should be the prefix to the Section Header 'MISSING'")
+	public void verifyFinancialsHeading(@Named("displayDate") String displayDate) {
+		getFinancialsPage().verifyFinancialsHeadingText(displayDate);
 	}
 }
