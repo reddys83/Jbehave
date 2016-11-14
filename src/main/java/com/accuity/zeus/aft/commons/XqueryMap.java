@@ -167,6 +167,7 @@ public class XqueryMap {
 
         queryMap.put("get legalEntity financialStatements periodEndDate","getLegalEntityFinancialStatementPeroidEndDate.xqy");
         queryMap.put("get non-hierarchical taxonomy values", "getNonHierarchicalTaxonomyValues.xqy");
+        queryMap.put("get hierarchial taxonomy sub-grouping values", "getHierarchialTaxonomySubGroupingValues.xqy");
    }
 
     public String getXquery(String key){
