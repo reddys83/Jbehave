@@ -1,0 +1,15 @@
+<financialStatement deleted="false" fid="60115-20131231-1" id="e6aa7c8b-be1c-43ea-9b00-90bbac195ff6" resource="/financialStatement/id/e6aa7c8b-be1c-43ea-9b00-90bbac195ff6" source="trusted">
+    <owner>
+        <link href="/legalEntity/id/8c8db05a-5ba8-46a0-9f4b-c481e918a3d8" rel="src"/>
+    </owner>
+    <statementType>Annual</statementType>
+    <periodStart accuracy="day">2013-01-01</periodStart>
+    <periodEnd accuracy="day">2013-12-31</periodEnd>
+    <financialYearEnd accuracy="day">2013-12-31</financialYearEnd>
+    <missingReason>
+        <missingReasonType>Refer to Other Entity</missingReasonType>
+        <alternateEntity>
+            <link href="/legalEntity/id/4921f30f-4e6a-496e-a30f-3a1fa4d07ee2" rel="src"/>
+        </alternateEntity>
+    </missingReason>
+</financialStatement>

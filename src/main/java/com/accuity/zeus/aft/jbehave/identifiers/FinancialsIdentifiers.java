@@ -1,17 +1,20 @@
 package com.accuity.zeus.aft.jbehave.identifiers;
 
-
 import org.openqa.selenium.By;
 
 import java.util.HashMap;
 
+/**
+ * Created by tubatil on 10/31/2016.
+ */
 public class FinancialsIdentifiers {
 
     private static HashMap<String, By> hmap = new HashMap<String, By>();
 
     public static void setIdentifiers() {
-        hmap.put("financialStatement_period_endDate_leftSideMenu_xpath", By.xpath((".//*[@id='results']//*[@id='periodEnd']/li")));
+        hmap.put("financialStatement_period_EndDate_leftSideMenu_xpath", By.xpath((".//*[@id='results']//ul[@id='periodEnd']/li")));
         hmap.put("financialStatement_default_selected_endDate_xpath", By.xpath(".//*[@id='results']//*[@id='periodEnd']/*[@class='selected']"));
+        hmap.put("financialStatement_period_endDate_leftSideMenu_xpath", By.xpath((".//*[@id='results']//*[@id='periodEnd']/li")));
         hmap.put("financialStatement_financials_heading_xpath",By.xpath((".//*[@id='results']//*[@class='side-navbar-layout']/h1")));
         hmap.put("financialStatement_financials_statementType",By.xpath((".//*[@id='results']//*['side-navbar-layout']//tr[th='Financial Statement Type']/td")));
         hmap.put("financialStatement_financials_startDate",By.xpath((".//*[@id='results']//*['side-navbar-layout']//tr[th='Period Start Date']/td")));

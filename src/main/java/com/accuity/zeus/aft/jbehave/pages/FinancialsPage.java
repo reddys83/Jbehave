@@ -8,13 +8,16 @@ import com.accuity.zeus.aft.jbehave.identifiers.FinancialsIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -43,21 +46,24 @@ public class FinancialsPage extends AbstractPage{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        List<WebElement> periodEndDate = getDriver().findElements(FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_endDate_leftSideMenu_xpath"));
+        List<WebElement> periodEndDate = getDriver().findElements(FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_EndDate_leftSideMenu_xpath"));
+
+
+
         Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get legalEntity financialStatements periodEndDate", nvPairs);
         for (int j=0;j<document.getElementsByTagName("periodEnd").getLength();j++)
         {
             periodEndDateFromDB.add(document.getElementsByTagName("periodEnd").item(j).getTextContent());
         }
-        if(periodEndDateFromDB.size()>=1) {
-            assertEquals(periodEndDateFromDB.get(0), getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_default_selected_endDate_xpath")).getText());
-        }
+     if(periodEndDateFromDB.size()>=1) {
+         assertEquals(periodEndDateFromDB.get(0), getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_default_selected_endDate_xpath")).getText());
+     }
         for (int i = 0; i < periodEndDate.size(); i++) {
             assertEquals(document.getElementsByTagName("periodEnd").item(i).getTextContent(), periodEndDate.get(i).getText());
-        }
+            }
     }
-
-	public void verifyFinancialsHeadingText(String periodEndDate) {
+    
+    public void verifyFinancialsHeadingText(String periodEndDate) {
 		try {
 			try {
 				Thread.sleep(3000L);
@@ -150,6 +156,4 @@ public class FinancialsPage extends AbstractPage{
     		}
     	}
     }
-    
-        
-}
+  }

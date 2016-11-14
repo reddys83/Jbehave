@@ -232,6 +232,7 @@ public class LegalEntitySteps extends AbstractSteps {
         setFinancialsPage(getLegalEntityPage().clickOnFinancialsLink());
     }
 
+
     @When("the user selects lead institution value other than default value in the basicinfo legalentity page")
     public void changeLegalEntityLeadInstitutionFlag() {
         getLegalEntityPage().changeLegalEntityLeadInstitutionFlag();
@@ -275,6 +276,4 @@ public class LegalEntitySteps extends AbstractSteps {
     {
         getLegalEntityPage().verifyAllOfficesLinkIsSelected();
     }
-
-
 }

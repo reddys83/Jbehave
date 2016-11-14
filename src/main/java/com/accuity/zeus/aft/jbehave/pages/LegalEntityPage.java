@@ -453,6 +453,7 @@ public class LegalEntityPage extends AbstractPage {
         return new FinancialsPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
 
     }
+
     public void changeLegalEntityLeadInstitutionFlag() {
         String newleadInstitutionflag = "";
         String selectedRadioValue = getSelectedRadioValue(legalEntity_leadinstitution_radio_options_xpath);
