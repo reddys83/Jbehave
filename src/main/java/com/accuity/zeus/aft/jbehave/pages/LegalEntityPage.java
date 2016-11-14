@@ -443,6 +443,16 @@ public class LegalEntityPage extends AbstractPage {
         return new OfficesPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
+    public FinancialsPage clickOnFinancialsLink() {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        attemptClick(LegalEntityIdentifiers.getObjectIdentifier("LegalEntity_financials_link"));
+        return new FinancialsPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
+
+    }
 
     public void changeLegalEntityLeadInstitutionFlag() {
         String newleadInstitutionflag = "";
