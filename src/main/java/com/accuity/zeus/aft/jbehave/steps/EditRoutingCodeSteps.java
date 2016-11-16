@@ -252,51 +252,125 @@ public class EditRoutingCodeSteps extends AbstractSteps {
     public void verifyRoutingCodeBooleanFieldValuesFromTrustedDB(@Named("source") String source, @Named("routingCode") String routingCode, @Named("codeType") String codeType) {
     	getEditRoutingCodePage().verifyRoutingCodeBooleanFieldValuesFromTrustedDB(source, routingCode, codeType);
     }
-    
+
     @Then("the user verifies that the drop-down field values are same as in $source document")
     public void verifyDropDownFieldValuesFromTrustedDB(@Named("source") String source, @Named("routingCode") String routingCode, @Named("codeType") String codeType) {
     	getEditRoutingCodePage().verifyDropDownFieldValuesFromTrustedDB(source, routingCode, codeType);
     }
-    
+
     @Then("the user should see the routing code subtype values from lookup ROUTING_CODE_SUBTYPE")
     public void verifyRoutingCodeSubtypeValuesFromLookup() {
     	getEditRoutingCodePage().verifyLookUpValuesForDropDownFields(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_routingcode_subtype_dropdown"), "get routing code subtype lookup");
     }
-    
+
     @Then("the user should see the ABA code source values from lookup ROUTING_CODE_SOURCE")
     public void verifyABACodeSourceValuesFromLookup() {
     	getEditRoutingCodePage().verifyLookUpValuesForDropDownFields(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ABA_CodeSource_dropdown"), "get ABA code source lookup");
     }
-    
+
     @When("the user selects the routing code subtype as <routingCodeSubtype> in the routing code basic info page")
     public void selectRoutingCodeSubtypeValue(@Named("routingCodeSubtype") String routingCodeSubtype) {
     	getDataPage().selectDropDownValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_routingcode_subtype_dropdown"), routingCodeSubtype, 1);
     }
-    
+
     @When("the user selects the ABA code source as <ABACodeSource> in the routing code basic info page")
     public void selectABACodeSourceValue(@Named("ABACodeSource") String ABACodeSource) {
     	getDataPage().selectDropDownValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ABA_CodeSource_dropdown"), ABACodeSource, 1);
     }
-    
+
     @Then("the user should be able to verify the drop-down field values in routing code basic info page")
     public void verifyDropDownFieldValuesInUI(@Named("routingCodeSubtype") String routingCodeSubtype, @Named("ABACodeSource") String ABACodeSource) throws InterruptedException {
     	Thread.sleep(3000L);
     	getDataPage().verifyWebElementText("Routing Code Subtype", routingCodeSubtype, RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeSubtype"));
     	getDataPage().verifyWebElementText("ABA Code Source", ABACodeSource, RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ABACodeSource"));
     }
-    
+
     @Then("the user should see the drop-down field values same as in $source document")
 	public void verifyDropDownFieldValuesFromZeusDB(@Named("source") String source,	@Named("routingCode") String routingCode, @Named("codeType") String codeType,
 			@Named("routingCodeSubtype") String routingCodeSubtype, @Named("ABACodeSource") String ABACodeSource) {
 		getEditRoutingCodePage().verifyDropDownFieldValuesFromDB(source, routingCode, codeType, routingCodeSubtype,	ABACodeSource);
 	}
-    
+
     @Then("the user should see that the routing code subtype and ABA code source fields does not exist")
     public void verifyDropDownFieldsNotInUI() {
     	getDataPage().verifyElementNotExistInUI(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeSubtype"));
     	getDataPage().verifyElementNotExistInUI(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ABACodeSource"));
     }
-    
+
+
+
+	@Then("the user verifies that the existing alternate code forms can not be edited")
+	public void verifyEditStatusForAlternateCodeForms()
+	{
+		getEditRoutingCodePage().verifyEditStatusForAlternateCodeForms();
+	}
+
+	@Then("the user verifies that the fractional value can not be deleted")
+	public void checkDeleteButtonStatusForFractionalValue()
+	{
+		getEditRoutingCodePage().checkDeleteButtonStatusForFractionalValue();
+	}
+
+	@When("the user clicks on the delete alternate code form button")
+	public void clickOnDeleteAlternateCodeForm()
+	{
+		getEditRoutingCodePage().clickOnDeleteAlternateCodeForm();
+	}
+
+	@Then("the user should not see the alternate code form values <alternateCodeType> and <alternateCodeValue> in the routing code basic info page")
+	public void checkForDeletedAlternateCodeFormInZeusApp(@Named("alternateCodeType") String alternateCodeType,@Named("alternateCodeValue") String alternateCodeValue)
+	{
+		getEditRoutingCodePage().checkForDeletedAlternateCodeFormInZeusApp(alternateCodeType,alternateCodeValue);
+	}
+	@When("the user click on add new alternate code form button")
+	public void clickOnAddNewAlternateCodeFormButton(){
+		getEditRoutingCodePage().clickOnAddNewAlternateCodeFormButton();
+	}
+	@When("the user selects alternate code form type as <alternateCodeType>")
+	public void selectAlternateCodeType(@Named("alternateCodeType") String codeType){
+		getEditRoutingCodePage().selectAlternateCodeType(codeType);
+	}
+
+	@When("the user enters the alternate code form value as <alternateCodeValue>")
+	public void enterAlternateCodeValue(@Named("alternateCodeValue") String codeValue){
+		getEditRoutingCodePage().enterAlternateCodeValue(codeValue);
+	}
+
+	@Then("the user should see the alternate code form values as <alternateCodeType> and <alternateCodeValue> in the routing code basic info page")
+	public void verifyAlternateCodeFormsInUI(@Named("alternateCodeType") String alternateCodeType,@Named("alternateCodeValue") String alternateCodeValue)
+	{
+		getEditRoutingCodePage().verifyAlternateCodeFormsExistInUI(alternateCodeType,alternateCodeValue);
+	}
+	@Then("the user should see the alternate code form values same as in zeus document for routing code <routingCode> with code type <codeType>")
+			public void verifyAlternateCodeFormsFromZeusDocument(@Named("routingCode") String routingCode,@Named("codeType") String codeType){
+		getEditRoutingCodePage().verifyAlternateCodeFormsFromZeusDocument(routingCode,codeType);
+	}
+
+	@When("the user clicks on the Yes button to delete a row")
+	public void clickYesButtonInDeleteConfirmationModalForRoutingCode() {
+		getEditRoutingCodePage().clickYesButtonInDeleteConfirmationModalForRoutingCode();
+	}
+
+	@Then("the user should see the alternate code type values from lookup ROUTING_CODE_ALTERNATE_FORM_TYPE except the values that were selected already")
+	public void verifyRoutingCodeAlternateCodeTypesFromLookup(){
+		getEditRoutingCodePage().verifyRoutingCodeAlternateCodeTypesFromLookup();
+	}
+
+	@Then("the user verifies the alternate code form value maxlength is $maxLength characters")
+	public void verifyMaxLengthForAlternateCodeFormValue(@Named("maxlength") String maxlength)
+	{
+		getEditRoutingCodePage().verifyMaxLengthForAlternateCodeFormValue(maxlength);
+	}
+
+	@Then("the user should see the error message for the required alternate code type field in the basic info routing code page")
+	public void verifyErrorMsgRequiredForAlternateCodeType(){
+		getEditRoutingCodePage().verifyErrorMsgRequiredForAlternateCodeType();
+	}
+
+	@Then("the user should see the error message for the required alternate code value field in the basic info routing code page")
+	public void verifyErrorMsgRequiredForAlternateCodeValue(){
+		getEditRoutingCodePage().verifyErrorMsgRequiredForAlternateCodeValue();
+	}
 }
 
 
