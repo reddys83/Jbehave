@@ -10,7 +10,6 @@ JIRA ID - ZEUs-1540 - Routing Code Search: Search Value of 1 digit
 
 Scenario: Verify the basic info for a routing code of type ABA
 Verify the headers and the legal entity link on the header
-Meta:@test321
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown

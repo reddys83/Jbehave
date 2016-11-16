@@ -72,7 +72,6 @@ Examples:
 |1165|FID|1165|
 
 Scenario: The office and department tabs should be present in the offices default view page.
-Meta:@test123
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
