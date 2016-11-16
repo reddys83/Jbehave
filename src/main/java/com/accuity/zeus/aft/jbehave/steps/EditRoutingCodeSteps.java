@@ -31,6 +31,13 @@ public class EditRoutingCodeSteps extends AbstractSteps {
 		getEditRoutingCodePage().verifyEditRoutingCodeValuesFromTrusted(routingCode, codeType);
 	}
 
+	@Then("the user should see the routing code related code values from trusted document for routing code <routingCode> with code type <codeType>")
+	public void verifyEditRoutingCodeRelatedCodeValuesFromTrusted(@Named("routingCode") String routingCode,
+													   @Named("codeType") String codeType) {
+
+		getEditRoutingCodePage().verifyEditRoutingCodeRelatedCodeValuesFromTrusted(routingCode, codeType);
+	}
+
 	@When("the user enters the <registarFeeSFDCSubscription> in the routing code basic info page")
 	public void enterTextInRegistarFeeSFDCSubscription(
 			@Named("registarFeeSFDCSubscription") String registarFeeSFDCSubscription) {
@@ -371,7 +378,94 @@ public class EditRoutingCodeSteps extends AbstractSteps {
 	public void verifyErrorMsgRequiredForAlternateCodeValue(){
 		getEditRoutingCodePage().verifyErrorMsgRequiredForAlternateCodeValue();
 	}
+
+	@Then("the user should see the routing code related codes context values from lookup RELATED_CODE_CONTEXT except the values that were selected already")
+	public void verifyRoutingCodeRelatedCodeContextValuesFromLookup() {
+		getEditRoutingCodePage().verifyRoutingCodeRelatedCodeContextValuesFromLookup();
+	}
+
+	@When("the user clicks on add new related codes button")
+	public void clickOnAddNewRelatedCode_Btn() {
+		getEditRoutingCodePage().clickOnAddNewRelatedCode_Btn();
+	}
+
+	@When("the user selects routing code related code context type as <contextType>")
+	public void selectRoutingCodeRelatedCodeContextType(@Named("contextType") String contextType) {
+		getEditRoutingCodePage().selectRoutingCodeRelatedCodeContextType(contextType);
+	}
+	@When("the user selects routing code related code context type as <blank>")
+	public void selectRoutingCodeRelatedCodeContextTypeAsBlank(@Named("blank") String contextType) {
+		getEditRoutingCodePage().selectRoutingCodeRelatedCodeContextType(contextType);
+	}
+
+	@When("the user search for a routing code using the search code <searchCode> and selects routing code <relatedCode>")
+	public void searchAndSelectRelatedCode(@Named("searchCode") String searchCode,@Named("relatedCode") String relatedCode)
+	{
+		getEditRoutingCodePage().searchAndSelectRelatedCode(searchCode,relatedCode);
+	}
+
+	@Then("the user should see the related code's code type as <relatedCodeType>")
+	public void verifyRelatedCodesCodeType(@Named("relatedCodeType") String CodeType)
+	{
+		getEditRoutingCodePage().verifyRelatedCodesCodeType(CodeType);
+	}
+
+	@Then("the user should see the related codes for the routing code <routingCode> with code type <codeType> in zeus document")
+	public void verifyEditRoutingCodeRelatedCodeValuesFromZeus(@Named("routingCode") String routingCode,@Named("codeType") String codeType) {
+
+		getEditRoutingCodePage().verifyEditRoutingCodeRelatedCodeValuesFromZeus(routingCode, codeType);
+	}
+
+	@Then("the user should see the newly added related code <relatedCode> with contextType <contextType> in the zeus UI")
+	public void verifyRoutingCodeRelatedCodeValuesInZeusUI(@Named("relatedCode") String relatedCode,@Named("contextType") String contextType){
+
+		getEditRoutingCodePage().verifyRoutingCodeRelatedCodeValuesInZeusUI(relatedCode,contextType);
+	}
+
+	@Then("the user should not see the deleted related code <relatedCode> with contextType <contextType> in the zeus UI")
+	public void verifyRoutingCodeRelatedCodeValuesNotExistInZeusUI(@Named("relatedCode") String relatedCode,@Named("contextType") String contextType){
+
+		getEditRoutingCodePage().verifyRoutingCodeRelatedCodeValuesNotExistInZeusUI(relatedCode,contextType);
+	}
+
+	@When("the user clicks on the $deleteButton in the related codes section")
+	public void clickOnDeleteRelatedCode_Btn(@Named("deleteButton") String deleteButton)
+	{
+		getEditRoutingCodePage().clickOnDeleteRelatedCode_Btn(deleteButton);
+	}
+
+	@When("the user search for a routing code using the search code <searchCode>")
+	public void searchRelatedCode(@Named("searchCode") String searchCode)
+	{
+	getEditRoutingCodePage().searchRelatedCode(searchCode);
+	}
+
+	@Then("the user should see the routing code search results in the related code dropdown for search code <searchCode>")
+	public void verifyRelatedRoutingcodesFromTrusted(@Named("searchCode") String searchCode)
+	{
+		getEditRoutingCodePage().verifyRelatedRoutingcodesFromTrusted(searchCode);
+	}
+
+	@Then("the user should see the message No results for <searchCode>")
+	public void noResultsMsgForRoutingCode(@Named("searchCode") String searchCode){
+		getEditRoutingCodePage().noResultsMsgForRoutingCode(searchCode);
+
+	}
+
+	@Then("the user should see the required error message for relatedcode")
+	public void verifyRequiredMessageForRelatedCode()
+	{
+		getEditRoutingCodePage().verifyRequiredMessageForRelatedCodes(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_relatedcode_required_errorMessage"));
+	}
+
+	@Then("the user should see the required error message for context")
+
+	public void verifyRequiredMessageForRelatedCodeContext()
+	{
+		getEditRoutingCodePage().verifyRequiredMessageForRelatedCodes(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_relatedcode_context_required_errorMessage"));
 }
+}
+
 
 
 
