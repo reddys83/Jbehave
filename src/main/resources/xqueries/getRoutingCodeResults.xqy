@@ -16,12 +16,19 @@ declare variable $getHeadOffice := function($routing as element()) {
    return $headOffice
 };
 
-let $rc := xs:string(xdmp:get-request-field('code'))
 
-let $routingCodes:= (for $x in cts:search(fn:collection('source-trusted')/routingCode,
-                        cts:and-query((
-                                 cts:path-range-query("/routingCode/codeValue","=",$rc, "collation=http://marklogic.com/collation//S1")
-                                     ))) return $x)
+
+
+let $rc := xs:string(xdmp:get-request-field('code'))
+let $rcWildCard  := fn:concat($rc, '*')
+
+let $rcValues := cts:value-match(cts:path-reference("/routingCode/codeValue","collation=http://marklogic.com/collation//S1") ,$rcWildCard)
+
+let $routingCodes:= for $x in cts:search(
+                        fn:collection('source-trusted')/routingCode,                        
+                        cts:path-range-query("/routingCode/codeValue","=",$rcValues,"collation=http://marklogic.com/collation//S1")) 
+                        return $x
+                         
 let $routingCodeResults:= (
  for $x in $routingCodes
 
@@ -117,9 +124,9 @@ let $Country :=  let $officeHrefs := for $y in $x/usageLocations/usageLocation[@
                                                cts:element-attribute-range-query(xs:QName("country"),xs:QName("resource"), "=", $HeadOfficeCountryHrefs)
                                                     )/summary/names/name[type="Country Name"]/value
                         return $HeadOfficeCountryName/text())
-                                            
 order by $x/codeValue ascending
-  return <results>
+ 
+return <results>
  <Code>{$Code}</Code>
  <Type>{$Type}</Type>
  <Entity>{$Entity}</Entity>
@@ -129,9 +136,10 @@ order by $x/codeValue ascending
  <Area>{$Area}</Area>
  <Country>{$Country}</Country>
  <Status>{$Status}</Status>
- </results>)
- return <codeResults>{$routingCodeResults}</codeResults> 
-
-
+ </results>)[1 to 25]
+ return <root>
+ <codeCount>{count($routingCodes)} </codeCount>
+ <codeResults>{$routingCodeResults}</codeResults>
+ </root>
 
 

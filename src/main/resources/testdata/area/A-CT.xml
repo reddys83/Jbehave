@@ -1,0 +1,24 @@
+<area deleted="false" fid="A-CT" id="a79b68da-6959-482d-9289-bc16fe3f7dbf"
+      resource="/area/id/a79b68da-6959-482d-9289-bc16fe3f7dbf" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Connecticut</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>CT</value>
+            </name>
+        </names>
+        <status>active</status>
+
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </place>
+    </within>
+</area>

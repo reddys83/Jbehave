@@ -1,0 +1,65 @@
+<city deleted="false" fid="8397053" id="15e4417c-322e-461d-8f80-82ef3177d5af" resource="/city/id/15e4417c-322e-461d-8f80-82ef3177d5af" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Altoona</value>
+            </name>
+            <citySortKey>ALTOONA</citySortKey>
+        </names>
+        <status>active</status>
+        <dates>
+        </dates>
+        <identifiers>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>1660</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <creditRatings>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Long Term Rating</type>
+            <value>1234</value>
+        </rating>
+    </creditRatings>
+    <alternativeRegions>
+        <region>
+            <type>Metropolitan Statistical Area</type>
+            <value>23460</value>
+        </region>
+        <region>
+            <type>Federal Reserve District</type>
+            <value>6</value>
+        </region>
+        <region>
+            <type>Federal Reserve Sub District</type>
+            <value>5B</value>
+        </region>
+        <region>
+            <type>Federal Home Loan Bank District</type>
+            <value>4</value>
+        </region>
+        <region>
+            <type>National Credit Union Administration Region</type>
+            <value>III</value>
+        </region>
+    </alternativeRegions>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/7e77bc0b-2af6-4e1c-b531-78a8eb5ae87f" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/f5d48e59-e052-41f9-aefb-4c9e1fad2ed8" rel="src"/>
+
+        </place>
+    </within>
+</city>

@@ -1,0 +1,92 @@
+<area deleted="false" fid="A-AL" id="f5d48e59-e052-41f9-aefb-4c9e1fad2ed8"
+      resource="/area/id/f5d48e59-e052-41f9-aefb-4c9e1fad2ed8" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Alabama</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>AL</value>
+            </name>
+            <name>
+                <type>Alternative Name</type>
+                <value>zxdsds</value>
+            </name>
+            <name>
+                <type>Alternative Name</type>
+                <value>dsds</value>
+            </name>
+        </names>
+        <status>inactive</status>
+        <dates>
+            <dateBegan accuracy="day">1501-06-01</dateBegan>
+            <dateCeased accuracy="day">2016-07-05</dateCeased>
+        </dates>
+        <identifiers>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>12</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+        <demographics>
+            <metric>
+                <name>Largest County Population</name>
+                <value>2.1</value>
+                <date accuracy="day">2001-07-06</date>
+            </metric>
+        </demographics>
+        <maxConsumerRate>%%%%</maxConsumerRate>
+        <additionalInfos>
+            <additionalInfo>Sample text</additionalInfo>
+        </additionalInfos>
+        <useInAddress>true</useInAddress>
+
+    </summary>
+    <creditRatings>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Short Term Rating</type>
+            <value>Text2</value>
+            <dateApplied accuracy="day">2000-03-01</dateApplied>
+            <dateConfirmed accuracy="day">2016-02-01</dateConfirmed>
+        </rating>
+        <rating>
+            <agencyName>Japan Credit Rating Agency</agencyName>
+            <type>Long Term Sovereign Debt Rating</type>
+            <value>Text3</value>
+            <dateApplied accuracy="day">2000-06-01</dateApplied>
+            <dateConfirmed accuracy="day">2016-03-01</dateConfirmed>
+        </rating>
+    </creditRatings>
+    <relatedPlaces>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>State Capital</detail>
+            </details>
+            <place>
+                <link href="/area/id/4287f19c-bc02-4e24-9f27-68e11fed64cc" rel="src"/>
+            </place>
+        </relation>
+    </relatedPlaces>
+    <relatedPresences>
+        <relation>
+            <type>Government</type>
+            <details>
+                <detail>State Government</detail>
+            </details>
+            <presence>
+                <link href="/legalEntity/id/4054b437-e1d1-4891-ace4-756fc238c943" rel="src"/>
+            </presence>
+        </relation>
+    </relatedPresences>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </place>
+    </within>
+</area>

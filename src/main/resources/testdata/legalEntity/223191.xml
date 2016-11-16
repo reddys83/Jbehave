@@ -1,0 +1,40 @@
+<legalEntity deleted="false" fid="223191" id="00242944-9d70-46f2-90d6-aff3b86e41bf" resource="/legalEntity/id/00242944-9d70-46f2-90d6-aff3b86e41bf" source="trusted" tfpid="28081578">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/8cf145f3-a0a7-4165-922b-06e868299781" rel="src"/>
+
+        </countryOfOperations>
+        <legalEntityType>Trust Company</legalEntityType>
+        <types>
+            <type source="FDB">Bank</type>
+            <type source="TFP">International Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Nodus International Bank Inc</value>
+            </name>
+            <legalEntitySortKey>NODUS INTERNATIONAL BANK INC</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">2009-01-01</established>
+            <chartered accuracy="year">2009-01-01</chartered>
+        </dates>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+
+        <trust>
+        </trust>
+    </summary>
+    <locations>
+        <headOffice>
+            <link href="/office/id/d36b02c5-b932-4f50-82fe-d17c82f00dcc" rel="src"/>
+
+        </headOffice>
+    </locations>
+    <history>
+        <summaries>
+            <summary>Established November 17, 2009</summary>
+        </summaries>
+    </history>
+</legalEntity>

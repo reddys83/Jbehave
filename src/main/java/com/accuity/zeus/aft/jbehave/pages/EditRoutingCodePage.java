@@ -107,7 +107,7 @@ public class EditRoutingCodePage extends AbstractPage {
         }
 
     }
-
+    
     public void verifyRoutingCodeBooleanFieldValuesInUI(String accountEligibilityValue, String internalUseOnlyValue, String useHeadOfficeValue) {
     	try {
 			Thread.sleep(2000L);
@@ -116,9 +116,9 @@ public class EditRoutingCodePage extends AbstractPage {
 			assertEquals(useHeadOfficeValue, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String UseHeadOffice")).getText().toLowerCase());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		}	 
 	 }
-
+	 
 	 public String getRoutingCodeBooleanFieldValuesFromDB(String source, String routingCode, String codeType) {
 		 String tagValue = null;
 			try {
@@ -136,7 +136,7 @@ public class EditRoutingCodePage extends AbstractPage {
 							: getNodeValuesByTagName(document, "routingcodeInternalUseOnly").get(0);
 					String useHeadOfficeTagValue = getNodeValuesByTagName(document, "routingcodeUseHeadOffice").size() == 0 ? ""
 							: getNodeValuesByTagName(document, "routingcodeUseHeadOffice").get(0);
-
+					
 					tagValue = accountEligibilityTagValue + " " + internalUseOnlyTagValue + " " + useHeadOfficeTagValue;
 				}
 			} catch (InterruptedException e) {
@@ -144,7 +144,7 @@ public class EditRoutingCodePage extends AbstractPage {
 			}
 			return tagValue;
 	 }
-
+	 
 	 public void verifyRoutingCodeBooleanFieldValuesFromZeusDB(String source, String routingCode, String codeType) {
 		 String accountEligibilityValueInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AccountEligibility")).getText().toLowerCase();
 		 String internalUseOnlyValueInUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_InternalUseOnly")).getText().toLowerCase();
@@ -152,13 +152,13 @@ public class EditRoutingCodePage extends AbstractPage {
 		 String booleanFieldValuesInUI = accountEligibilityValueInUI + " " + internalUseOnlyValueInUI + " " + useHeadOfficeValueInUI;
 		 assertEquals(booleanFieldValuesInUI, getRoutingCodeBooleanFieldValuesFromDB(source, routingCode, codeType));
 	 }
-
+	 
 	 public void verifyRoutingCodeBooleanFieldValuesFromTrustedDB(String source, String routingCode, String codeType) {
-		try {
+		try {			    
 			    String accountEligibilityFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_accountEligibility_radio"));
 			    String internalUseOnlyFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_internalUseOnly_radio"));
-			    String useHeadOfficeFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_useHeadOffice_radio"));
-				String booleanFieldValuesInUI = accountEligibilityFlag + " " + internalUseOnlyFlag + " " + useHeadOfficeFlag;
+			    String useHeadOfficeFlag = getSelectedRadioButtonOption(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_useHeadOffice_radio"));				
+				String booleanFieldValuesInUI = accountEligibilityFlag + " " + internalUseOnlyFlag + " " + useHeadOfficeFlag;				
 				assertEquals(booleanFieldValuesInUI, getRoutingCodeBooleanFieldValuesFromDB(source, routingCode, codeType));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -263,17 +263,17 @@ public class EditRoutingCodePage extends AbstractPage {
 		assertEquals(ResisterFeeAndRoutingCodeCommentInUI,
 				getRegisterFeeAndRoutingCodeFromDB(source, routingCode, codeType));
 	}
-
+	
 	public void enterFutureDateForStartDateAndConfirmedDate() throws ParseException {
     	Format formatter = new SimpleDateFormat("MMMM");
 		String month = formatter.format(new Date());
 		month = month.substring(0, 3);
 		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateDay"), getDayLaterThanToday(), 1);
 		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateDay"), getDayLaterThanToday(), 1);
-
+		
 		selectDropDownValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateMonth"), month, 1);
 		selectDropDownValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateMonth"), month, 1);
-
+		
 		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateYear"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), 1);
 		selectTexBoxValueFromRowNumber(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateYear"), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)+1), 1);
     }
@@ -284,39 +284,39 @@ public class EditRoutingCodePage extends AbstractPage {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 	        nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
 	        nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
-	        nvPairs.add(new BasicNameValuePair("source", source));
-	        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);
+	        nvPairs.add(new BasicNameValuePair("source", source));	        
+	        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);			
 			String startDateDB=getNodeValuesByTagName(document, "StartDate").size() == 0 ? "" : getNodeValuesByTagName(document, "StartDate").get(0);
 	        String endDateDB=getNodeValuesByTagName(document, "EndDate").size() == 0 ? "" : getNodeValuesByTagName(document, "EndDate").get(0);
 	        String forthcomingRetirementDateDB=getNodeValuesByTagName(document, "ForthcomingRetirementDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ForthcomingRetirementDate").get(0);
 	        String confirmedwithFedDB=getNodeValuesByTagName(document, "ConfirmedWithFedDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ConfirmedWithFedDate").get(0);
 	        if(codeType.equals("ABA")) {
 	        	assertEquals(forthcomingRetirementDate.trim(), forthcomingRetirementDateDB.replaceFirst("^0", ""));
-		        assertEquals(confirmedWithFedDate.trim(), confirmedwithFedDB.replaceFirst("^0", ""));
+		        assertEquals(confirmedWithFedDate.trim(), confirmedwithFedDB.replaceFirst("^0", ""));	
 	        }
 	        assertEquals(startDate.trim(), startDateDB.replaceFirst("^0", ""));
-	        assertEquals(endDate.trim(), endDateDB.replaceFirst("^0", ""));
-
+	        assertEquals(endDate.trim(), endDateDB.replaceFirst("^0", ""));	                
+					
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void verifyUpdatedDateFieldsInUI(String codeType, String startDate, String endDate, String forthcomingRetirementDate, String confirmedWithFedDate) {
 		try {
 			 Thread.sleep(1000L);
 			 if(codeType.equals("ABA")) {
 				 assertEquals(forthcomingRetirementDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ForthcomingRetirementDate")).getText().replaceFirst("^0", ""));
-		         assertEquals(confirmedWithFedDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ConfirmedwithFed")).getText().replaceFirst("^0", ""));
+		         assertEquals(confirmedWithFedDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ConfirmedwithFed")).getText().replaceFirst("^0", ""));							 
 			 }
 			 assertEquals(startDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_StartDate")).getText().replaceFirst("^0", ""));
-		     assertEquals(endDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_EndDate")).getText().replaceFirst("^0", ""));
-
+		     assertEquals(endDate.trim(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_EndDate")).getText().replaceFirst("^0", ""));		     
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}
-
+	}	
+	
 	public void changeRoutingCodeStatus(String routingCode, String codeType, String status) {
 		List<NameValuePair> nvPairs = new ArrayList<>();
 		nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
@@ -325,15 +325,15 @@ public class EditRoutingCodePage extends AbstractPage {
 		apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "change routing code status",
 				nvPairs);
 	}
-
+	
 	public void verifyEditRoutingCodeDateFieldsValuesFromTrusted(String routingCode, String codeType, String source) {
 		try {
 			Thread.sleep(1000L);
 		 	List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
 			nvPairs.add(new BasicNameValuePair("routingCodeType", codeType));
-			nvPairs.add(new BasicNameValuePair("source", source));
-			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);
+			nvPairs.add(new BasicNameValuePair("source", source));	        
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);			
 			String startDateDB=getNodeValuesByTagName(document, "StartDate").size() == 0 ? "" : getNodeValuesByTagName(document, "StartDate").get(0);
 			String endDateDB=getNodeValuesByTagName(document, "EndDate").size() == 0 ? "" : getNodeValuesByTagName(document, "EndDate").get(0);
 			String forthcomingRetirementDateDB=getNodeValuesByTagName(document, "ForthcomingRetirementDate").size() == 0 ? "" : getNodeValuesByTagName(document, "ForthcomingRetirementDate").get(0);
@@ -343,27 +343,68 @@ public class EditRoutingCodePage extends AbstractPage {
 				String forthcomingRetirementDateMonthUI = getSelectedDropdownText(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ForthcomingRetirementDateMonth"));
 				String forthcomingRetirementDateYearUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ForthcomingRetirementDateYear")).getAttribute("value");
 				assertEquals((forthcomingRetirementDateDayUI + " " + forthcomingRetirementDateMonthUI + " " + forthcomingRetirementDateYearUI).trim(), forthcomingRetirementDateDB.replaceFirst("^0", ""));
-
+				
 				String confirmedwithFedDayUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateDay")).getAttribute("value");
 				String confirmedwithFedMonthUI = getSelectedDropdownText(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateMonth"));
 				String confirmedwithFedYearUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ConfirmedWithFedDateYear")).getAttribute("value");
 				assertEquals((confirmedwithFedDayUI + " " + confirmedwithFedMonthUI + " " + confirmedwithFedYearUI).trim(), confirmedwithFedDB.replaceFirst("^0", ""));
 			}
-
+			
 			String startDateDayUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateDay")).getAttribute("value");
 			String startDateMonthUI = getSelectedDropdownText(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateMonth"));
 			String startDateYearUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_startDateYear")).getAttribute("value");
 			assertEquals((startDateDayUI + " " + startDateMonthUI + " " + startDateYearUI).trim(), startDateDB.replaceFirst("^0", ""));
-
+			
 			String endDateDayUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_endDateDay")).getAttribute("value");
 			String endDateMonthUI = getSelectedDropdownText(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_endDateMonth"));
 			String endDateYearUI = getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_endDateYear")).getAttribute("value");
-			assertEquals((endDateDayUI + " " + endDateMonthUI + " " + endDateYearUI).trim(), endDateDB.replaceFirst("^0", ""));
+			assertEquals((endDateDayUI + " " + endDateMonthUI + " " + endDateYearUI).trim(), endDateDB.replaceFirst("^0", ""));			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
+
+	public void verifyDropDownFieldValuesFromTrustedDB(String source, String routingCode, String codeType) {
+		String routingCodeSubtype = null;
+		String ABACodeSource = null;
+		List<WebElement> routingCodeSubtypeDropDown = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_routingcode_subtype_dropdown"));
+		List<WebElement> ABACodeSourceDropDown = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ABA_CodeSource_dropdown"));
+
+		if(routingCodeSubtypeDropDown.size() > 0 && ABACodeSourceDropDown.size() > 0) {
+			routingCodeSubtype = getSelectedOptionInDropDownByIndex(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_routingcode_subtype_dropdown"), 1);
+			ABACodeSource = getSelectedOptionInDropDownByIndex(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_ABA_CodeSource_dropdown"), 1);
+		} else {
+			assertTrue("There is no value in the drop-down field", false);
+		}
+		verifyDropDownFieldValuesFromDB(source, routingCode, codeType, routingCodeSubtype, ABACodeSource);
+	}
+
+	public void verifyDropDownFieldValuesFromDB(String source, String routingCode, String routingCodeType, String routingCodeSubtype, String ABACodeSource) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("source", source));
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			Thread.sleep(3000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routingCode basic info", nvPairs);
+			String routingCodeSubtypeDB = getNodeValuesByTagName(document, "routingcodeSubtype").size() == 0 ? "" : getNodeValuesByTagName(document, "routingcodeSubtype").get(0);
+			String ABACodeSourceDB = getNodeValuesByTagName(document, "ABACodeSource").size() == 0 ? "" : getNodeValuesByTagName(document, "ABACodeSource").get(0);
+
+			assertEquals("The Routing Code Subtype value in UI is not same as in " + source +" database", routingCodeSubtype, routingCodeSubtypeDB);
+			assertEquals("The ABA Code Source value in UI is not same as in " + source +" database", ABACodeSource, ABACodeSourceDB);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	public void verifyLookUpValuesForDropDownFields(By by, String xquery) {
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xquery);
+		List<WebElement> dropDownFieldList = getDriver().findElements(by);
+		List<WebElement> options = dropDownFieldList.get(0).findElements(By.cssSelector("option"));
+		for (int indexOfOption = 0; indexOfOption < options.size(); indexOfOption++) {
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getTextContent(), options.get(indexOfOption).getText().trim());
+		}
+	}
 
 	public void verifyEditStatusForAlternateCodeForms(){
 	assertFalse(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_existing_alternate_code_type")).isEnabled());

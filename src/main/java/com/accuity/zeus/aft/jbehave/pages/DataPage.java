@@ -18,6 +18,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.springframework.http.ResponseEntity;
 import org.w3c.dom.Document;
 import org.openqa.selenium.*;
@@ -1501,4 +1502,49 @@ public class DataPage extends AbstractPage {
         return new EditRoutingCodePage(getDriver(), getUrlPrefix(), database, apacheHttpClient, restClient, heraApi);
     }
 	
+	public void verifyElementIsDisplayed(String fieldName, By by) {
+		assertTrue(fieldName + " is not displayed.", getDriver().findElement(by).isDisplayed());
+	}
+	
+	public void verifyLookupValuesWithBlankOption(By by, String xquery) {
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithResponse(database, xquery);
+		try {
+			List<WebElement> dropDownFieldList = getDriver().findElements(by);
+			List<WebElement> options = dropDownFieldList.get(0).findElements(By.cssSelector("option"));
+			for (int indexOfOption = 0; indexOfOption < options.size(); indexOfOption++) {
+				assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getTextContent(),	options.get(indexOfOption).getText().trim());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifySelectedTypeNotInNewRow(String selectedDropDownValue, int rowNumber, By by) {
+		try {
+			List<WebElement> dropDownList = getDriver().findElements(by);
+			if (rowNumber <= dropDownList.size()) {
+				Select dropdown = new Select(dropDownList.get(rowNumber - 1));
+				for (int index = 0; index < dropdown.getOptions().size(); index++) {
+					assertTrue(!dropdown.getOptions().get(index).getText().contains(selectedDropDownValue));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyColumnIsSorted(By by, String column, String order) {
+		List<WebElement> columnListFromUI = getDriver().findElements(by);
+		for (int index = 0; index < (columnListFromUI.size() - 1); index++) {
+			if (order.equals("ascending")) {
+				if (columnListFromUI.get(index+1).getText().compareTo(columnListFromUI.get(index).getText()) < 0) {
+					assertTrue("The " + column + " column is not in " + order + " order.", false);
+				}
+			} else {
+				if (columnListFromUI.get(index+1).getText().compareTo(columnListFromUI.get(index).getText()) > 0) {
+					assertTrue("The " + column + " column is not in " + order + " order.", false);
+				}
+			}
+		}
+    }
 }

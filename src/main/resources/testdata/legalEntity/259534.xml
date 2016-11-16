@@ -1,0 +1,51 @@
+<legalEntity deleted="false" fid="259534" id="2a7d5ad6-f3f1-4b73-a574-5a1e3c201225" resource="/legalEntity/id/2a7d5ad6-f3f1-4b73-a574-5a1e3c201225" source="trusted" tfpid="50303090">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </countryOfOperations>
+        <legalEntityType>Credit Union</legalEntityType>
+        <types>
+            <type source="trusted">Credit Union</type>
+            <type source="trusted">Subsidiary - Unspecified</type>
+            <type source="trusted">Credit Union</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>1st Community Federal Credit Union</value>
+            </name>
+            <legalEntitySortKey>1ST COMMUNITY FEDERAL CREDIT UNION</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1953-07-01</established>
+        </dates>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+        <numberOfCreditUnionMembers>23256</numberOfCreditUnionMembers>
+        <creditUnionShareDraftFlag>true</creditUnionShareDraftFlag>
+        <leadInstitution>false</leadInstitution>
+        <trust>
+            <powersGranted>false</powersGranted>
+            <powersFull>false</powersFull>
+            <powersUsed>false</powersUsed>
+        </trust>
+        <identifiers>
+            <identifier transferable="false">
+                <type>NCUA Charter Number</type>
+                <value>8715</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>CUNA ID Number</type>
+                <value>38876</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <locations>
+        <headOffice>
+            <link href="/office/id/84f4f3bb-a1be-4014-9b37-4e2204959e5d" rel="src"/>
+
+        </headOffice>
+    </locations>
+</legalEntity>

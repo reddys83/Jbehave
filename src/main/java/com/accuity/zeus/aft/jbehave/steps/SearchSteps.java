@@ -4,6 +4,7 @@ import com.accuity.zeus.aft.jbehave.pages.DataPage;
 import com.accuity.zeus.aft.jbehave.pages.SearchPage;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
+import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.springframework.stereotype.Component;
 
@@ -20,12 +21,6 @@ public class SearchSteps extends AbstractSteps {
 		setSearchPage(searchPage.goToSearchPage());
 		setDataPage(dataPage);
 	}
-
-	@When("the user searches for <entity> with <field> equals <value>")
-	public void search(@Named("entity") String entity, @Named("field") String field, @Named("value") String value) {
-			setResultsPage(getSearchPage().search(entity, field, value));
-	}
-
 	@When("the user clicks on the report tab")
     public void clickOnReportsTab(){
         setReportPage(getSearchPage().clickOnReportsTab());
@@ -68,5 +63,30 @@ public class SearchSteps extends AbstractSteps {
 	@When("the user clicks on the search button")
 	public void clicksOnSearchIcon() {
 		setResultsPage(getSearchPage().clicksOnSearchIcon());
+	}
+	
+	@Then("the user should see the message $message in search box")
+	public void verifyRoutingCodeSearchText(@Named("message") String message) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		getSearchPage().verifyRoutingCodeSearchText(message);
+	}
+
+	@Then("the user should not see the message $message in search box")
+	public void verifyRoutingCodeSearchTextNoDisplay(@Named("message") String message) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		getSearchPage().verifyRoutingCodeSearchText(message);
+	}
+
+	@When("the user clears the entity value in type ahead box")
+	public void clearEntityInTypeAheadBox() {
+		getSearchPage().clearEntityInTypeAheadBox();
 	}
 }

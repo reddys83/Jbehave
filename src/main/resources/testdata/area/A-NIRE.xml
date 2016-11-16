@@ -1,0 +1,24 @@
+<area deleted="false" fid="A-NIRE" id="de723b70-117b-4b2e-b25b-7227830819bb"
+      resource="/area/id/de723b70-117b-4b2e-b25b-7227830819bb" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Northern Ireland</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>N. Ireland</value>
+            </name>
+        </names>
+        <status>active</status>
+
+        <useInAddress>false</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/52be49f6-c37c-4bed-baec-6b9accabf100" rel="src"/>
+        </place>
+    </within>
+</area>

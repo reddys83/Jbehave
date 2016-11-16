@@ -1,0 +1,19 @@
+<city deleted="false" fid="70328" id="7850a8ab-aaed-4d9a-91c4-c0263bb832c3" resource="/city/id/7850a8ab-aaed-4d9a-91c4-c0263bb832c3" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Mary</value>
+            </name>
+            <citySortKey>MARY</citySortKey>
+        </names>
+        <status>active</status>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/3524b93a-38e6-4b05-8b3c-b1add5dd703d" rel="src"/>
+
+        </place>
+    </within>
+</city>

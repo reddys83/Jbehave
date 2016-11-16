@@ -1,0 +1,52 @@
+<city deleted="false" fid="8422022" id="6dc39d5d-1438-42ae-951b-c5f59a851779" resource="/city/id/6dc39d5d-1438-42ae-951b-c5f59a851779" source="trusted">
+    <summary>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Channahon</value>
+            </name>
+            <citySortKey>CHANNAHON</citySortKey>
+        </names>
+        <status>active</status>
+        <identifiers>
+            <identifier>
+                <type>FIPS Place Code</type>
+                <value>12476</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+        <useInAddress>true</useInAddress>
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/f8437618-1c28-4b7c-8ebc-000c2653de34" rel="src"/>
+
+        </place>
+        <place>
+            <link href="/area/id/40e82d7f-0397-4675-aca9-0006ce9175a8" rel="src"/>
+
+        </place>
+    </within>
+    <alternativeRegions>
+        <region>
+            <type>Metropolitan Statistical Area</type>
+            <value>16980</value>
+        </region>
+        <region>
+            <type>Federal Reserve District</type>
+            <value>7</value>
+        </region>
+        <region>
+            <type>Federal Home Loan Bank District</type>
+            <value>7</value>
+        </region>
+        <region>
+            <type>National Credit Union Administration Region</type>
+            <value>IV </value>
+        </region>
+    </alternativeRegions>
+</city>

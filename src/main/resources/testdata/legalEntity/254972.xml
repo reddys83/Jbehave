@@ -1,0 +1,57 @@
+<legalEntity deleted="false" fid="254972" id="55d1d4c6-6cf4-49d4-9c5d-62cfb745966d" resource="/legalEntity/id/55d1d4c6-6cf4-49d4-9c5d-62cfb745966d" source="trusted" tfpid="10238800">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/a7ec7281-a96c-475a-9f7a-22b922872f05" rel="src"/>
+
+        </countryOfOperations>
+        <insuranceType>FDIC-BIF</insuranceType>
+        <legalEntityType>Building Society</legalEntityType>
+        <types>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Bank</type>
+            <type source="trusted">Commercial Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Bank of Saipan, Inc</value>
+            </name>
+            <legalEntitySortKey>BANK OF SAIPAN INC</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1979-07-01</established>
+        </dates>
+        <numberOfGroupBanks>0</numberOfGroupBanks>
+        <numberOfCreditUnionMembers>0</numberOfCreditUnionMembers>
+        <leadInstitution>false</leadInstitution>
+        <trust>
+            <powersGranted>false</powersGranted>
+            <powersFull>false</powersFull>
+            <powersUsed>false</powersUsed>
+        </trust>
+        <identifiers>
+            <identifier transferable="false">
+                <type>US Tax ID</type>
+                <value>986020676</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <locations>
+        <headOffice>
+            <link href="/office/id/b5c471ad-615a-4910-9f88-978627858761" rel="src"/>
+
+        </headOffice>
+    </locations>
+    <relatedPresences>
+        <relation>
+            <link href="/relationship/id/351c49f7-cd27-4464-899e-3e24e0e089f4" rel="src"/>
+
+        </relation>
+        <relation>
+            <link href="/relationship/id/8a2505c5-ac9d-4744-b379-5b2eff2aca98" rel="src"/>
+
+        </relation>
+    </relatedPresences>
+</legalEntity>

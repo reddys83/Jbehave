@@ -1,0 +1,189 @@
+<legalEntity deleted="false" fid="1124" id="b3c82bc1-5ff7-4cde-abfe-50f75afbeed2" resource="/legalEntity/id/b3c82bc1-5ff7-4cde-abfe-50f75afbeed2" source="trusted" stub="true" tfpid="10383720">
+    <summary>
+        <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/51f6b158-b8f6-4002-8aab-839b088197c1" rel="src"/>
+
+        </countryOfOperations>
+        <organisationType>Corporate Bank</organisationType>
+        <legalEntityType>Bank</legalEntityType>
+        <types>
+            <type source="FDB">Bank</type>
+            <type source="FDB">Commercial Bank</type>
+            <type source="FDB">Corporate Bank</type>
+            <type source="FDB">Investment Bank</type>
+            <type source="FDB">Merchant Bank</type>
+            <type source="FDB">Mortgage Bank</type>
+            <type source="FDB">Private Bank</type>
+            <type source="FDB">Retail Bank</type>
+            <type source="FDB">Savings Bank</type>
+            <type source="TFP">Foreign Exchange</type>
+            <type source="TFP">International Bank</type>
+            <type source="TFP">Trade Finance</type>
+            <type source="TFP">Universal Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Bank of Montreal</value>
+            </name>
+            <name>
+                <type>FDB Alternative Name</type>
+                <value>Banque de Montreal</value>
+            </name>
+            <name>
+                <type>FDB Alternative Name</type>
+                <value>BMO Financial Group</value>
+            </name>
+            <name>
+                <type>FDB Alternative Name</type>
+                <value>BMO Groupe Financier</value>
+            </name>
+            <legalEntitySortKey>BANK OF MONTREAL</legalEntitySortKey>
+        </names>
+        <dates>
+            <established accuracy="year">1817-07-01</established>
+            <chartered accuracy="year">1817-07-01</chartered>
+        </dates>
+        <boardMeetings>
+            <meeting>
+                <periodType>month</periodType>
+                <value>03</value>
+            </meeting>
+            <meeting>
+                <periodType>month</periodType>
+                <value>04</value>
+            </meeting>
+        </boardMeetings>
+        <identifiers>
+            <identifier transferable="false">
+                <type>The Global Markets Entity Identifier (GMEI)</type>
+                <value>NQQ6HPCNCCU6TUTQYE16</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>Global Intermediary Identification Number</type>
+                <value>PEN6Z6.00000.LE.124</value>
+                <status>active</status>
+            </identifier>
+            <identifier transferable="false">
+                <type>Fitch ID</type>
+                <value>80089143</value>
+                <status>active</status>
+            </identifier>
+        </identifiers>
+    </summary>
+    <services>
+        <service>
+            <category>Asset Management</category>
+        </service>
+        <service>
+            <category>Capital Markets</category>
+        </service>
+        <service>
+            <category>Commercial Banking</category>
+        </service>
+        <service>
+            <category>Corporate Banking</category>
+        </service>
+        <service>
+            <category>Corporate Finance</category>
+        </service>
+        <service>
+            <category>Correspondent Banking</category>
+        </service>
+        <service>
+            <category>Equity Investments</category>
+        </service>
+        <service>
+            <category>Foreign Exchange</category>
+        </service>
+        <service>
+            <category>Investment Banking</category>
+        </service>
+        <service>
+            <category>Money Markets</category>
+        </service>
+        <service>
+            <category>Portfolio Management</category>
+        </service>
+        <service>
+            <category>Private Banking</category>
+        </service>
+        <service>
+            <category>Retail Banking</category>
+        </service>
+        <service>
+            <category>Internet Banking</category>
+        </service>
+        <service>
+            <category>Mortgages</category>
+        </service>
+    </services>
+    <locations>
+        <summaries>
+            <summary type="BranchSummary">Canada 937; USA 634; Other 4</summary>
+            <summary type="RepSummary">Brazil 1; Mexico 1; Taiwan 1</summary>
+        </summaries>
+    </locations>
+    <ownership>
+        <summaries>
+            <summary type="replacement">Common shareholders resident in Canada 85.6%; United States 10.4% and other countries 4.0%</summary>
+        </summaries>
+    </ownership>
+    <personnel>
+        <summaries>
+            <summary type="InstitutionEmployees">46628</summary>
+        </summaries>
+    </personnel>
+    <creditRatings>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Long Term Rating</type>
+            <value>AA-</value>
+            <dateApplied accuracy="day">2015-04-15</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Fitch</agencyName>
+            <type>Short Term Rating</type>
+            <value>F1+</value>
+            <dateApplied accuracy="day">2015-04-15</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Moody's</agencyName>
+            <type>Long Term Rating</type>
+            <value>Aa3</value>
+            <dateApplied accuracy="day">2013-02-05</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Moody's</agencyName>
+            <type>Short Term Rating</type>
+            <value>P-1</value>
+            <dateApplied accuracy="day">2013-02-05</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Long Term Rating</type>
+            <value>A+</value>
+            <dateApplied accuracy="day">2007-07-24</dateApplied>
+        </rating>
+        <rating>
+            <agencyName>Standard &amp; Poors</agencyName>
+            <type>Short Term Rating</type>
+            <value>A-1</value>
+            <dateApplied accuracy="day">2007-07-24</dateApplied>
+        </rating>
+    </creditRatings>
+    <history>
+        <summaries>
+            <summary>Bank of Montreal, Canada's first bank, opened for business on November 3, 1817. It provided Canada's first widely-recognized and circulated currency, and has played a major and continuing role in the development of the country. Today, it is one of Canada's pre-eminent financial institutions and a significant presence in the United States and world markets</summary>
+        </summaries>
+    </history>
+    <audit>
+        <comments>
+            <comment type="Ownership comment">GSC3 10/97 RA</comment>
+            <comment type="Subsidiary comment">GSC3 10/97 RA</comment>
+            <comment type="Due Diligence">Group UPA Cert</comment>
+        </comments>
+    </audit>
+</legalEntity>

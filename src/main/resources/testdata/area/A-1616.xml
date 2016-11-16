@@ -1,0 +1,25 @@
+<area deleted="false" fid="A-1616" id="e2ed36bf-2a65-45f9-9407-9fb0a82e5505"
+      resource="/area/id/e2ed36bf-2a65-45f9-9407-9fb0a82e5505" source="trusted">
+    <summary>
+        <type>area</type>
+        <names>
+            <name>
+                <type>Full Name</type>
+                <value>Georgia</value>
+            </name>
+            <name>
+                <type>Display Name</type>
+                <value>GA</value>
+            </name>
+        </names>
+        <status>active</status>
+        <dates/>
+        <useInAddress>true</useInAddress>
+
+    </summary>
+    <within>
+        <place>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </place>
+    </within>
+</area>

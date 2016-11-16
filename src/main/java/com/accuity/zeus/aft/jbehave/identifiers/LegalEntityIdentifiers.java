@@ -33,6 +33,7 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_personnel_value_xpath", By.xpath(".//*[@id='additionalPersonnel']//textarea"));
         hmap.put("legalEntity_boardMeetings_second_new_type_dropdown", By.xpath("//tr[@class='new'][2]//td/select[@id='boardMeetingType']"));
         hmap.put("legalEntity_boardMeetings_add_button_id", By.id("add-boardMeetings"));
+        hmap.put("legalEntity_basicInfo_label_xpath",By.xpath("//*[@id='content']/div/ul/li/h1/span"));
         hmap.put("legalEntity_boardMeetings_first_existing_type_dropdown", By.xpath("//tr[1]//td/select[@id='boardMeetingType']"));
         hmap.put("legalEntity_boardMeetings_label_xpath", By.xpath(".//*[@id='legalEntityBoardMeetings']//h2"));
         hmap.put("legalEntity_boardMeetings_summary_error_message_xpath", By.xpath(".//*[@class='notification error'][@data-error_id='boardMeetingsSummaryError']"));
@@ -203,6 +204,7 @@ public class LegalEntityIdentifiers {
         hmap.put("legalEntity_warning_message_content", By.xpath("//*[@id='modal-region']//p"));
         hmap.put("legalEntity_warning_message_no_button", By.xpath(".//*[@class='modal-content']//button[@id='cancel-button']"));
         hmap.put("legalEntity_warning_message_yes_button", By.xpath(".//*[@class='modal-content']//button[@id='confirm-button']"));
+        hmap.put("LegalEntity_financials_link", By.id("financialStatement-nav"));
     }
 
     public static By getObjectIdentifier(String key) {

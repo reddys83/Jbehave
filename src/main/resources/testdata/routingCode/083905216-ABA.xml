@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <routingCode deleted="false" fid="C-1121793" id="647b8553-2b9c-4e38-a6d0-ad9209ac6cae"
-             resource="http://10.72.0.121:8080/heraapi/routingCode/id/647b8553-2b9c-4e38-a6d0-ad9209ac6cae"
+             resource="/routingCode/id/647b8553-2b9c-4e38-a6d0-ad9209ac6cae"
              source="trusted" tfpid="ABA-083905216">
     <codeType>ABA</codeType>
     <codeTypeDescription>US Routing Number</codeTypeDescription>
@@ -24,7 +24,7 @@
         <paymentSystem>
             <product>
                 <link
-                        href="http://10.72.0.121:8080/heraapi/product/id/dc96bf44-64d2-402f-8b86-67f423d0e999"
+                        href="/product/id/dc96bf44-64d2-402f-8b86-67f423d0e999"
                         rel="src"/>
             </product>
             <useCodeForm>default</useCodeForm>
@@ -94,7 +94,7 @@
                     <type>Primary Wire Location</type>
                     <presence>
                         <link
-                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
                     <specialInstructions>test instructions</specialInstructions>
@@ -103,7 +103,7 @@
                     <type>Primary ACH Location</type>
                     <presence>
                         <link
-                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
                     <specialInstructions>test instructions</specialInstructions>
@@ -112,7 +112,7 @@
                     <type>ACH Contact TfpsysLocation</type>
                     <presence>
                         <link
-                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
                     <specialInstructions>test instructions</specialInstructions>
@@ -121,7 +121,7 @@
                     <type>Assigned Address</type>
                     <presence>
                         <link
-                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
                     <specialInstructions>test instructions</specialInstructions>
@@ -130,7 +130,7 @@
                     <type>Primary Check Location</type>
                     <presence>
                         <link
-                                href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                                href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                                 rel="src"/>
                     </presence>
                     <specialInstructions>test instructions</specialInstructions>
@@ -150,7 +150,7 @@
     </relatedCodes>
     <assignedInstitution>
         <link
-                href="http://10.72.0.121:8080/heraapi/legalEntity/id/3f6ec391-3f19-4aa0-967e-ee04f329e8af"
+                href="/legalEntity/id/3f6ec391-3f19-4aa0-967e-ee04f329e8af"
                 rel="src"/>
         <legalName>Bank of Jamestown</legalName>
     </assignedInstitution>
@@ -158,23 +158,149 @@
         <usageLocation primaryAssignee="true" rankAtLocation="1">
             <presence>
                 <link
-                        href="http://10.72.0.121:8080/heraapi/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
+                        href="/office/id/faddd79e-231e-46b1-b29e-3f12f8d1c6b8"
                         rel="src"/>
             </presence>
         </usageLocation>
         <usageLocation primaryAssignee="false" rankAtLocation="1">
             <presence>
                 <link
-                        href="http://10.72.0.121:8080/heraapi/office/id/67cf9dfe-6a00-49a6-8cb5-4b52ee136567"
+                        href="/office/id/67cf9dfe-6a00-49a6-8cb5-4b52ee136567"
                         rel="src"/>
             </presence>
         </usageLocation>
         <usageLocation primaryAssignee="false" rankAtLocation="1">
             <presence>
                 <link
-                        href="http://10.72.0.121:8080/heraapi/office/id/b158e312-391c-4af5-9f03-55d3fed40b0a"
+                        href="/office/id/b158e312-391c-4af5-9f03-55d3fed40b0a"
                         rel="src"/>
             </presence>
         </usageLocation>
     </usageLocations>
-</routingCode>
+    <codeHistory>
+	    <codeEvent>
+	      <eventType>Reinstatement</eventType>
+	      <eventDate accuracy="day">2013-08-09</eventDate>
+	      <historicUsageLocations>
+	 		 <historicUsageLocation>
+	    		<presence>
+	      			<link href="/office/id/f97ece20-9eaa-4df7-ac7e-b82e1c61118b" rel="ref"/>
+	      				<institution>
+	       				 <link href="/legalEntity/id/b8d0f49c-6bc4-4886-9a00-2d36f491ba48" rel="ref"/>
+	      				</institution>
+	     			 <legalTitle>Family Security CU</legalTitle>
+	     			 <address>
+	       				 <streetAddress>
+	    					<addressLine1>2204 Family Security Pl SW</addressLine1>
+	       				 </streetAddress>
+	       				 <postalCode>35603</postalCode>
+	        			<city>
+	   						 <link href="/city/id/b6f2255f-6817-4c27-bb3d-52440622fe2b" rel="ref"/>
+							    <displayName>DECATUR</displayName>
+							    <placeType>city</placeType>
+	      			   </city>
+	       			 <area>
+						    <link href="/area/id/f5d48e59-e052-41f9-aefb-4c9e1fad2ed8" rel="ref"/>
+						    <fullName>Alabama</fullName>
+						    <displayName>AL</displayName>
+						    <placeType>area</placeType>
+	        		</area>
+	        		<country>
+					    <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="ref"/>
+					    <iso2>US</iso2>
+					    <name>USA</name>
+					    <placeType>country</placeType>
+	        		</country>
+	     		 </address>
+	      		 <presenceType>office</presenceType>
+	      		</presence>
+	  		</historicUsageLocation>
+	     </historicUsageLocations>
+	  	</codeEvent>
+	   	<codeEvent>
+	      <eventType>Began use and number retired</eventType>
+	      <eventDate accuracy="day">2007-10-04</eventDate>
+	      <eventDescription>This code is assigned</eventDescription>
+	      <historicUsageLocations>
+	  		<historicUsageLocation>
+	  		  <presence>
+	     		 <link href="/office/id/ce501d9a-1fa9-45ed-b040-dbca30264afb" rel="ref"/>
+	     		 <institution>
+	       			 <link href="/legalEntity/id/b8d0f49c-6bc4-4886-9a00-2d36f491ba48" rel="ref"/>
+	      		</institution>
+	     	    <legalTitle>Family Security CU</legalTitle>
+	    	    <address>
+		        	<streetAddress>
+		   				 <addressLine1>Pine Hill Industrial Park</addressLine1>
+		        	</streetAddress>
+		        	<postalCode>36769</postalCode>
+		        	<city>
+					    <link href="/city/id/a14ec715-e0c2-43ce-b2d5-3025cf998ed4" rel="ref"/>
+					    <displayName>PINE HILL</displayName>
+					    <placeType>city</placeType>
+		       		 </city>
+		        	<area>
+					    <link href="/area/id/f5d48e59-e052-41f9-aefb-4c9e1fad2ed8" rel="ref"/>
+					    <fullName>Alabama</fullName>
+					    <displayName>AL</displayName>
+					    <placeType>area</placeType>
+		       	   </area>
+		           <country>
+					    <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="ref"/>
+					    <iso2>US</iso2>
+					    <name>USA</name>
+					    <placeType>country</placeType>
+		           </country>
+	    	   </address>
+	      	   <presenceType>office</presenceType>
+	    	</presence>
+	 	 </historicUsageLocation>
+	  	<historicUsageLocation>
+	    <presence>
+	      <link href="/office/id/5c205ae5-db57-44ba-8f3b-a8c85a4486c3" rel="ref"/>
+	      <institution>
+	        <link href="/legalEntity/id/b8d0f49c-6bc4-4886-9a00-2d36f491ba48" rel="ref"/>
+	      </institution>
+	      <legalTitle>Family Security CU</legalTitle>
+	      <address>
+	        <streetAddress>
+	   			 <addressLine1>2204 Family Security Pl SW</addressLine1>
+	        </streetAddress>
+	        <postalCode>35603</postalCode>
+	        <city>
+			    <link href="/city/id/b6f2255f-6817-4c27-bb3d-52440622fe2b" rel="ref"/>
+			    <displayName>DECATUR</displayName>
+			    <placeType>city</placeType>
+	        </city>
+	        <area>
+			    <link href="/area/id/f5d48e59-e052-41f9-aefb-4c9e1fad2ed8" rel="ref"/>
+			    <fullName>Alabama</fullName>
+			    <displayName>AL</displayName>
+			    <placeType>area</placeType>
+	        </area>
+	        <country>
+			    <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="ref"/>
+			    <iso2>US</iso2>
+			    <name>USA</name>
+			    <placeType>country</placeType>
+	        </country>
+	      </address>
+	      <presenceType>office</presenceType>
+	    </presence>
+	   	 <additionalInfo>Testing</additionalInfo>
+	  </historicUsageLocation>
+	 </historicUsageLocations>
+	 <replacedBy>
+		  <link href="/routingCode/id/d1f86ce1-a1a8-469a-b5cf-b528b1a5f114" rel="src"/>
+	 </replacedBy>
+	</codeEvent>
+   	<codeEvent>
+      <eventType>Began use and number retired</eventType>
+      <eventDate accuracy="day">2007-10-04</eventDate>
+      <eventDescription>This code is assigned</eventDescription>	     	 	  	  
+	  <replacedBy>
+		  <link href="/routingCode/id/d1f86ce1-a1a8-469a-b5cf-b528b1a5f114" rel="src"/>
+	  </replacedBy>
+	</codeEvent>		        
+  </codeHistory>
+</routingCode>        

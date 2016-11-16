@@ -8,6 +8,7 @@ JIRA ID - ZEUS-1179 - User can select to edit Routing Code's Basic Info
 JIRA ID - ZEUS-1474 - User can edit Routing Code Basic Info - Text Fields
 JIRA ID - ZEUS-1475 - User can edit Routing Code Basic Info - Date Fields
 JIRA ID - ZEUS-1476 - User can edit Routing Code Basic Info - Boolean Fields
+JIRA ID - ZEUS-1477 - User can edit Routing Code Basic Info - Drop-down Fields
 
 
 Scenario: Verify the routing code basic info values in edit mode for ABA and non-ABA code types
@@ -126,7 +127,7 @@ Examples:
 |entity|searchBy|routingCode|codeType|
 |083905216|Routing Code|083905216|ABA|
 
-Scenario: User is updating a Routing Code's Basic Info -
+Scenario: User is updating a Routing Code's Basic Info - 
 a) User verifies that the current Date Field values is same as in trusted document.
 b) User verifies the change in confirmation modal by entering Date fields(Start Date, End Date, Forthcoming Retirement Date, Confirmed with Fed)
    that is different from the current Date values.
@@ -161,11 +162,11 @@ Examples:
 |083905216|Routing Code|083905216|ABA|1|Jan|2016|12|Dec|2016|12|Dec|2050|26|Jan|2016|active|
 |083905216|Routing Code|083905216|ABA|1|Jan|2017|12|Dec|2017|12|Dec|2050|26|Jan|2016|pending|
 
-Scenario: User is updating a Routing Code's Date fields(Start Date, End Date, Forthcoming Retirement Date, Confirmed with Fed)
-a) User verifies that the error message 'Invalid Date' is displayed when invalid date is entered with code type = 'ABA'
-b) User verifies that the error message 'Enter a year, month/year or day/month/year.' is displayed when invalid date format is entered with code type = 'ABA'
-c) User verifies that the error message 'Must be after 1500CE.' is displayed when year is less than 1500 with code type = 'ABA'
-
+Scenario: User is updating a Routing Code's Date fields(Start Date, End Date, Forthcoming Retirement Date, Confirmed with Fed) 
+a) User verifies that the error message 'Invalid Date' is displayed when invalid date is entered with code type = 'ABA'    
+b) User verifies that the error message 'Enter a year, month/year or day/month/year.' is displayed when invalid date format is entered with code type = 'ABA' 
+c) User verifies that the error message 'Must be after 1500CE.' is displayed when year is less than 1500 with code type = 'ABA'  
+  
 Given a user is on the search page
 When the user selects the <searchBy> from the dropdown
 When the user enters the <entity> in the typeahead
@@ -189,9 +190,9 @@ Examples:
 |083905216|Routing Code|083905216|ABA|6||2016|6|Jun|||Jun||6|||Enter a year, month/year or day/month/year.|
 |083905216|Routing Code|083905216|ABA|1|Jan|24|2|Jun|25|1|Dec|24|4|Aug|20|Must be after 1500CE.|
 
-Scenario: User is updating a Routing Code's Date fields(Start Date, End Date)
-a) User verifies that the error message 'Invalid Date' is displayed when invalid date is entered with code type is not 'ABA'
-b) User verifies that the error message 'Enter a year, month/year or day/month/year.' is displayed when invalid date format is entered with code type is not 'ABA'
+Scenario: User is updating a Routing Code's Date fields(Start Date, End Date) 
+a) User verifies that the error message 'Invalid Date' is displayed when invalid date is entered with code type is not 'ABA'    
+b) User verifies that the error message 'Enter a year, month/year or day/month/year.' is displayed when invalid date format is entered with code type is not 'ABA' 
 
 Given a user is on the search page
 When the user selects the <searchBy> from the dropdown
@@ -208,13 +209,13 @@ Then the user should see the error message <errorMessage> for routing code end d
 
 Examples:
 |entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|errorMessage|
-|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|32|Jun|2015|29|Feb|2015|Invalid Date|
+|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|32|Jun|2015|29|Feb|2015|Invalid Date|  
 |DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|6||2016|6|Jun||Enter a year, month/year or day/month/year.|
 
-Scenario: User is updating a Routing Code's Basic Info -
-a) User verifies that the error message 'Must be no later than today.' is displayed for the Date fields(Start Date, Confirmed With Fed) when date later than today is entered and
+Scenario: User is updating a Routing Code's Basic Info - 
+a) User verifies that the error message 'Must be no later than today.' is displayed for the Date fields(Start Date, Confirmed With Fed) when date later than today is entered and 
    when code status not = 'pending'
-
+  
 Given a user is on the search page
 When the user selects the <searchBy> from the dropdown
 When the user enters the <entity> in the typeahead
@@ -233,7 +234,7 @@ Examples:
 |083905216|Routing Code|083905216|ABA|1|Jan|2017|31|Dec|2017|Must be no later than today.|active|
 
 Scenario: User is updating a Routing Code's Date fields(Start Date, End Date, Forthcoming Retirement Date, Confirmed with Fed)
-a) User verifies no change in confirmation modal.
+a) User verifies no change in confirmation modal.   
 b) User verifies that Routing Code Basic Info page and Zeus document is updated.
 
 Given a user is on the search page
@@ -261,7 +262,7 @@ Examples:
 |entity|searchBy|routingCode|codeType|startDateDay|startDateMonth|startDateYear|endDateDay|endDateMonth|endDateYear|retirementDay|retirementMonth|retirementYear|fedDay|fedMonth|fedYear|status|
 |083905216|Routing Code|083905216|ABA|1|Jan|2017|12|Dec|2017|12|Dec|2050|26|Jan|2016|pending|
 
-Scenario: User is updating a Routing Code's Basic Info -
+Scenario: User is updating a Routing Code's Basic Info - 
 a) User verifies that Forthcoming Retirement Date and Confirmed with Fed fields do not exist when codetype is not 'ABA'.
 b) User enters values for Start Date and End Date fields and verifies UI and Zeus document after saving.
 
@@ -287,7 +288,7 @@ Examples:
 |DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|||||||active|
 |DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|1|Jan|2017|12|Dec|2017|pending|
 
-Scenario: User is updating Routing Code's Basic Info page -
+Scenario: User is updating Routing Code's Basic Info page - 
 a) User verifies whether the current values for Boolean Fields(Account Eligibility, Internal Use Only, Use Head Office) is same as in trusted document.
 c) User enters all Boolean Fields same as the current value to verify no change in the confirmation modal.
 d) User verifies that the Basic Info page and Zeus document is updated correctly.
@@ -316,7 +317,7 @@ Examples:
 |entity|searchBy|routingCode|codeType|accountEligibilityValue|internalUseOnlyValue|useHeadOfficeValue|
 |01056|Routing Code|01056|Swift BIC|true|true|true|
 
-Scenario: User is updating Routing Code's Basic Info page -
+Scenario: User is updating Routing Code's Basic Info page - 
 a) User enters all Boolean Fields different from the current value to verify change in the confirmation modal.
 b) User verifies that the Basic Info page and Zeus document is updated correctly.
 
@@ -344,6 +345,83 @@ Then the user reverts the changes to the document
 Examples:
 |entity|searchBy|routingCode|codeType|accountEligibilityValue|internalUseOnlyValue|useHeadOfficeValue|
 |01056|Routing Code|01056|Swift BIC|false|false|false|
+
+Scenario: User is updating Routing Code's Basic Info page -
+a) User verifies that the current Routing Code Subtype and ABA Code Source drop-down values is same as in trusted document.
+b) User verifies that Routing Code Subtype drop-down values are from ROUTING_CODE_SUBTYPE lookup.
+c) User verifies that ABA Code Source drop-down values are from ROUTING_CODE_SOURCE lookup.
+d) User verifies the change in confirmation modal by entering Routing Code Subtype and ABA Code Source drop-down values that is different from the current values.
+e) User verifies UI and Zeus document is updated.
+
+Given a user is on the search page
+When the user selects the <searchBy> from the dropdown
+When the user enters the <entity> in the typeahead
+And the user clicks on the search button
+When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
+Then the user should see the routing code basic info page
+When the user clicks on the routing code update link
+Then the user verifies that the drop-down field values are same as in trusted document
+Then the user should see the routing code subtype values from lookup ROUTING_CODE_SUBTYPE
+Then the user should see the ABA code source values from lookup ROUTING_CODE_SOURCE
+When the user selects the routing code subtype as <routingCodeSubtype> in the routing code basic info page
+When the user selects the ABA code source as <ABACodeSource> in the routing code basic info page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+And the user should see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should be able to verify the drop-down field values in routing code basic info page
+Then the user should see the drop-down field values same as in zeus document
+
+Examples:
+|entity|searchBy|routingCode|codeType|routingCodeSubtype|ABACodeSource|
+|083905216|Routing Code|083905216|ABA|Unknown|Other (Unknown)|
+|083905216|Routing Code|083905216|ABA|Special Series|Other (Unknown)|
+|083905216|Routing Code|083905216|ABA|Unknown|ABA|
+|083905216|Routing Code|083905216|ABA|Electronic Transaction Identifier|EFT Data Collection|
+
+Scenario: User is updating Routing Code's Basic Info page -
+a) User verifies no change in confirmation modal by entering Routing Code Subtype and ABA Code Source drop-down values that is same as the current values.
+b) User verifies UI and Zeus document has no change.
+
+Given a user is on the search page
+When the user selects the <searchBy> from the dropdown
+When the user enters the <entity> in the typeahead
+And the user clicks on the search button
+When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
+Then the user should see the routing code basic info page
+When the user clicks on the routing code update link
+When the user selects the routing code subtype as <routingCodeSubtype> in the routing code basic info page
+When the user selects the ABA code source as <ABACodeSource> in the routing code basic info page
+When the user clicks on the save button
+Then the user should see the save confirmation modal
+Then the user should not see the below summary changes in confirmation modal
+|Summary|
+|Basic Info|
+When the user clicks on the confirm button
+Then the user should be able to verify the drop-down field values in routing code basic info page
+Then the user should see the drop-down field values same as in zeus document
+
+Examples:
+|entity|searchBy|routingCode|codeType|routingCodeSubtype|ABACodeSource|
+|083905216|Routing Code|083905216|ABA|Electronic Transaction Identifier|EFT Data Collection|
+
+Scenario: User is on the Routing Code's Basic Info page -
+a) User selects a Routing Code where the Routing Code Type is not 'ABA'.
+b) User verifies that the Routing Code Subtype and ABA Source Code fields does not exist in the basic info page.
+
+Given a user is on the search page
+When the user selects the <searchBy> from the dropdown
+When the user enters the <entity> in the typeahead
+And the user clicks on the search button
+When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
+Then the user should see the routing code basic info page
+Then the user should see that the routing code subtype and ABA code source fields does not exist
+
+Examples:
+|entity|searchBy|routingCode|codeType|
+|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|
 
 Scenario: Verify alternate code forms can be added for a routing code
 Verify the max length for the alternate code form value

@@ -1,0 +1,29 @@
+<legalEntity deleted="false" fid="312461" id="33f583a6-48f0-473d-b828-b7e693a7a1b3" resource="/legalEntity/id/33f583a6-48f0-473d-b828-b7e693a7a1b3" source="trusted" stub="true" tfpid="10077880">
+    <summary>
+        <status>inactive</status>
+        <countryOfOperations>
+            <link href="/country/id/a244f883-0cf2-4c95-a65a-3416877f18b4" rel="src"/>
+        </countryOfOperations>
+        <charterType>State</charterType>
+        <legalEntityType>Bank</legalEntityType>
+        <types>
+            <type source="FDB">Bank</type>
+            <type source="TFP">Commercial Bank</type>
+        </types>
+        <names>
+            <name>
+                <type>Legal Title</type>
+                <value>Bank of Montreal</value>
+            </name>
+            <legalEntitySortKey>BANK OF MONTREAL</legalEntitySortKey>
+        </names>
+        <leadInstitution>false</leadInstitution>
+        <trust>
+            <powersGranted>false</powersGranted>
+            <powersFull>false</powersFull>
+            <powersUsed>false</powersUsed>
+        </trust>
+    </summary>
+    <locations>
+    </locations>
+</legalEntity>
