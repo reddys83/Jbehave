@@ -389,7 +389,7 @@ Then the user reverts the changes to the document
 Examples:
 |entity|searchBy|routingCode|codeType|routingCodeSubtype|ABACodeSource|
 |083905216|Routing Code|083905216|ABA|Unknown|Other (Unknown)|
-|083905216|Routing Code|083905216|ABA|Special Series|Other (Unknown)| 
+|083905216|Routing Code|083905216|ABA|Special Series|Other (Unknown)|
 |083905216|Routing Code|083905216|ABA|Unknown|ABA|
 |083905216|Routing Code|083905216|ABA|Electronic Transaction Identifier|EFT Data Collection|
 
@@ -421,7 +421,7 @@ Examples:
 |entity|searchBy|routingCode|codeType|routingCodeSubtype|ABACodeSource|
 |083905216|Routing Code|083905216|ABA|Electronic Transaction Identifier|EFT Data Collection|
 
-Scenario: User is on the Routing Code's Basic Info page - 
+Scenario: User is on the Routing Code's Basic Info page -
 a) User selects a Routing Code where the Routing Code Type is not 'ABA'.
 b) User verifies that the Routing Code Subtype and ABA Source Code fields does not exist in the basic info page.
 
@@ -436,3 +436,102 @@ Then the user should see that the routing code subtype and ABA code source field
 Examples:
 |entity|searchBy|routingCode|codeType|
 |DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|
+
+Scenario: Verify alternate code forms can be added for a routing code
+Verify the max length for the alternate code form value
+Verify the alternate code form type values from lookup ROUTING_CODE_ALTERNATE_FORM_TYPE
+Verify existing alternate code forms can not be edited
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
+Then the user should see the routing code basic info page
+When the user clicks on the routing code update link
+When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
+Then the user verifies that the existing alternate code forms can not be edited
+When the user click on add new alternate code form button
+Then the user should see the alternate code type values from lookup ROUTING_CODE_ALTERNATE_FORM_TYPE except the values that were selected already
+Then the user verifies the alternate code form value maxlength is 20 characters
+When the user selects alternate code form type as <alternateCodeType>
+And the user enters the alternate code form value as <alternateCodeValue>
+When the user clicks on the save button
+And the user clicks on the confirm button
+Then the user should see the successful update message at top of the routing code page
+Then the user should see the alternate code form values as <alternateCodeType> and <alternateCodeValue> in the routing code basic info page
+Then the user should see the alternate code form values same as in zeus document for routing code <routingCode> with code type <codeType>
+Then the user reverts the changes to the document
+
+
+Examples:
+|entity|searchBy|routingCode|codeType|alternateCodeType|alternateCodeValue|
+|083905216|Routing Code|083905216|ABA|tfp_legacy|123456|
+
+Scenario: Verify alternate code forms can be deleted for a routing code except the fractional value
+Verify alternate code forms of type "fractional" can not be deleted
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
+Then the user should see the routing code basic info page
+When the user clicks on the routing code update link
+When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
+Then the user verifies that the fractional value can not be deleted
+When the user clicks on the delete alternate code form button
+And the user clicks on the Yes button to delete a row
+And the user clicks on the save button
+And the user clicks on the confirm button
+Then the user should see the successful update message at top of the routing code page
+Then the user should not see the alternate code form values <alternateCodeType> and <alternateCodeValue> in the routing code basic info page
+Then the user should see the alternate code form values same as in zeus document for routing code <routingCode> with code type <codeType>
+Then the user reverts the changes to the document
+
+
+Examples:
+|entity|searchBy|routingCode|codeType|alternateCodeType|alternateCodeValue|
+|083905216|Routing Code|083905216|ABA|fdb_legacy|2324|
+
+Scenario: Verify that the user should get the Required field messages for alternate code type
+
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
+Then the user should see the routing code basic info page
+When the user clicks on the routing code update link
+When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
+Then the user verifies that the existing alternate code forms can not be edited
+When the user click on add new alternate code form button
+When the user selects alternate code form type as <alternateCodeType>
+And the user enters the alternate code form value as <alternateCodeValue>
+When the user clicks on the save button
+Then the user should see the error message for the required alternate code type field in the basic info routing code page
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+
+Examples:
+|entity|searchBy|routingCode|codeType|alternateCodeType|alternateCodeValue|
+|083905216|Routing Code|083905216|ABA||2324|
+
+Scenario: Verify that the user should get the Required field messages for alternate code value
+Given a user is on the search page
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
+Then the user should see the routing code basic info page
+When the user clicks on the routing code update link
+When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
+Then the user verifies that the existing alternate code forms can not be edited
+When the user click on add new alternate code form button
+When the user selects alternate code form type as <alternateCodeType>
+And the user enters the alternate code form value as <alternateCodeValue>
+When the user clicks on the save button
+Then the user should see the error message for the required alternate code value field in the basic info routing code page
+And the user should see the error message at top of page the highlighted fields must be addressed before this update can be saved
+Examples:
+|entity|searchBy|routingCode|codeType|alternateCodeType|alternateCodeValue|
+|083905216|Routing Code|083905216|ABA|tfp_legacy||

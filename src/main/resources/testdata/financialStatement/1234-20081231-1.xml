@@ -1,0 +1,1039 @@
+<financialStatement deleted="false" fid="1234-20081231-1" id="8e038994-a4b8-453b-ba6a-72539ce9d96c" resource="/financialStatement/id/8e038994-a4b8-453b-ba6a-72539ce9d96c" source="trusted">
+    <owner>
+        <link href="/legalEntity/id/d86e39dd-72f2-4b81-b022-411905a3bd3c" rel="src"/>
+    </owner>
+    <statementType>Annual</statementType>
+    <periodStart accuracy="day">2008-01-01</periodStart>
+    <periodEnd accuracy="day">2008-12-31</periodEnd>
+    <financialYearEnd accuracy="day">2008-12-31</financialYearEnd>
+    <currency>
+        <link href="/currency/id/e0a3b6e1-12f1-4471-8373-983316f4c92e" rel="src"/>
+    </currency>
+    <orderOfMagnitude>6</orderOfMagnitude>
+    <exchangeRates>
+        <exchangeRateToUSD>0.00008931761343336905</exchangeRateToUSD>
+        <exchangeRateToGBP>0.0000616499991156161</exchangeRateToGBP>
+        <exchangeRateToEUR>0.00006389776357827476</exchangeRateToEUR>
+    </exchangeRates>
+    <consolidated>false</consolidated>
+    <accountingStandards>Local</accountingStandards>
+    <lineItems>
+        <item calculated="false" fid="FAL0001">
+            <name>Cash &amp; due from banks</name>
+            <value>229843</value>
+            <normalizedValue>20.52902822</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0002">
+            <name>Certificates of deposit (assets)</name>
+        </item>
+        <item calculated="false" fid="FAL0003">
+            <name>Due from central banks</name>
+            <value>1811728</value>
+            <normalizedValue>161.81922115</normalizedValue>
+            <note>Current accounts with Bank Indonesia</note>
+        </item>
+        <item calculated="false" fid="FAL0004">
+            <name>Total cash &amp; equivalents (subtotal)</name>
+            <value>2041571</value>
+            <normalizedValue>182.34824937</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0005">
+            <name>Treasury &amp; other bills</name>
+        </item>
+        <item calculated="false" fid="FAL0006">
+            <name>Government securities</name>
+            <value>9192622</value>
+            <normalizedValue>821.06305824</normalizedValue>
+            <note>Securities: Held to maturity - Bank Indonesia certificates (Rp 1,478,054) + Government bonds (Rp 7,576,569)  + Interest receivables (Rp 137,999)</note>
+        </item>
+        <item calculated="false" fid="FAL0007">
+            <name>Deposits with banks</name>
+            <value>138864</value>
+            <normalizedValue>12.40300107</normalizedValue>
+            <note>Current accounts with other banks (Rp 11,594) + Placements with other banks (Rp 125,213) + Interest receivables (Rp 2,057)</note>
+        </item>
+        <item calculated="false" fid="FAL0008">
+            <name>Trading &amp; financial &amp; other listed securities including bonds</name>
+            <value>258331</value>
+            <normalizedValue>23.0735084</normalizedValue>
+            <note>Securities (Bond): Available for sale (Rp 89,385) + Held to maturity (Rp 1,648,009) - Bank Indonesia certificates (Rp 1,478,054) - Allowances (Rp 4,029)  + Interest receivables (Rp 3,020)</note>
+        </item>
+        <item calculated="false" fid="FAL0009">
+            <name>Due from banks &amp; other credit institutions</name>
+        </item>
+        <item calculated="false" fid="FAL0010">
+            <name>Other equity investments</name>
+        </item>
+        <item calculated="false" fid="FAL0011">
+            <name>Non-listed securities including JV etc.</name>
+        </item>
+        <item calculated="false" fid="FAL0012">
+            <name>Other assets</name>
+            <value>495727</value>
+            <normalizedValue>44.27715255</normalizedValue>
+            <note>Interest rate swap receivables (Rp 33,028) + Deferred tax assets (Rp 103,981)  + Other assets (Rp 358,718)</note>
+        </item>
+        <item calculated="false" fid="FAL0013">
+            <name>Intangible assets</name>
+        </item>
+        <item calculated="false" fid="FAL0014">
+            <name>Total other earning assets excluding accounts receivable &amp; loans (subtotal)</name>
+            <value>10085544</value>
+            <normalizedValue>900.81672026</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0015">
+            <name>Loans to banks/credit institutions</name>
+        </item>
+        <item calculated="false" fid="FAL0016">
+            <name>Customer loans - net</name>
+            <value>6371742</value>
+            <normalizedValue>569.10878885</normalizedValue>
+            <note>Loans to third parties (Rp 30,767,976) - Housing loans (Rp 25,413,780) + Sharia financing to third parties (Rp 1,250,366) + Interest on loans (Rp 323,775) - Allowances on loans (Rp 540,827) - Allowances on Sharia financing (Rp 15,768)</note>
+        </item>
+        <item calculated="false" fid="FAL0017">
+            <name>HP/lease/other loans</name>
+        </item>
+        <item calculated="false" fid="FAL0018">
+            <name>Mortgages</name>
+            <value>25413780</value>
+            <normalizedValue>2269.89817792</normalizedValue>
+            <note>Housing loans</note>
+        </item>
+        <item calculated="false" fid="FAL0019">
+            <name>Loans to group companies/associates</name>
+            <value>6889</value>
+            <normalizedValue>0.61530904</normalizedValue>
+            <note>Loans to related parties (Rp 6,019) + Sharia financing to related parties (Rp 870)</note>
+        </item>
+        <item calculated="false" fid="FAL0020">
+            <name>Trust account lending</name>
+        </item>
+        <item calculated="false" fid="FAL0021">
+            <name>Net loans (subtotal)</name>
+            <value>31792411</value>
+            <normalizedValue>2839.62227581</normalizedValue>
+            <note>Loans to Banks/Credit Institutions (0) + Customer Loans - Net (Rp 6,371,742) + HP / Lease/Other Loans (0) + Mortgages (Rp 25,413,780) + Loans to Group Companies / Associates (Rp 6,889) + Trust Account Lending (0)</note>
+        </item>
+        <item calculated="false" fid="FAL0023">
+            <name>Memo - gross loans</name>
+            <value>32349006</value>
+            <normalizedValue>2889.33601286</normalizedValue>
+            <note>Net loans (Rp 31,792,411) + Loan loss reserves (Rp 556,595)</note>
+        </item>
+        <item calculated="false" fid="FAL0025">
+            <name>Memo - total problem loans</name>
+            <value>1023878</value>
+            <normalizedValue>91.45033941</normalizedValue>
+            <note>Non performing loans (Rp 1,018,716) + Non performing Sharia financing (Rp 5,162)</note>
+        </item>
+        <item calculated="false" fid="FAL0026">
+            <name>Memo - loan loss reserves - included in above</name>
+            <value>556595</value>
+            <normalizedValue>49.71373705</normalizedValue>
+            <note>Allowances on loans (Rp 540,827) + Allowances on Sharia financing (Rp 15,768)</note>
+        </item>
+        <item calculated="false" fid="FAL0027">
+            <name>Land &amp; buildings</name>
+            <value>917037</value>
+            <normalizedValue>81.90755627</normalizedValue>
+            <note>Land (Rp 511,786) + Buildings: Gross (Rp 545,397) - Depreciation (Rp 168,283) + Constructions in progress (Rp 28,137)</note>
+        </item>
+        <item calculated="false" fid="FAL0028">
+            <name>Other tangible assets</name>
+            <value>155608</value>
+            <normalizedValue>13.89853519</normalizedValue>
+            <note>Office furniture, fixtures and motor vehicles: Gross (655,155) - Depreciation (499,547)</note>
+        </item>
+        <item calculated="false" fid="FAL0029">
+            <name>Total fixed assets (subtotal)</name>
+            <value>1072645</value>
+            <normalizedValue>95.80609146</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0030">
+            <name>Total assets</name>
+            <value>44992171</value>
+            <normalizedValue>4018.59333691</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0032">
+            <name>Memo - loans&lt;=1year</name>
+            <value>1919666</value>
+            <normalizedValue>171.45998571</normalizedValue>
+            <note>Loans and Sharia financing (Rp 1,919,666)</note>
+        </item>
+        <item calculated="false" fid="FAL0033">
+            <name>Memo - loans>1year</name>
+            <value>30105565</value>
+            <normalizedValue>2688.95721686</normalizedValue>
+            <note>Loans and Sharia financing (Rp 1,123,874 + Rp 3,740,874 + Rp 25,240,817)</note>
+        </item>
+        <item calculated="false" fid="FAL0034">
+            <name>Memo - loans where no split available</name>
+            <value>323775</value>
+            <normalizedValue>28.91881029</normalizedValue>
+            <note>Interest on loans (Rp 323,775)</note>
+        </item>
+        <item calculated="false" fid="FAL0035">
+            <name>Customer deposits</name>
+            <value>31569623</value>
+            <normalizedValue>2819.72338335</normalizedValue>
+            <note>Total Demand, Saving and Time deposits (Rp 31,448,744) + Accrued interest (Rp 120,879)</note>
+        </item>
+        <item calculated="false" fid="FAL0036">
+            <name>Deposits - central bank</name>
+        </item>
+        <item calculated="false" fid="FAL0037">
+            <name>Bank &amp; other credit institution deposits</name>
+            <value>330659</value>
+            <normalizedValue>29.53367274</normalizedValue>
+            <note>Deposits from other Banks (Rp 330,190) + Accrued interest (Rp 469)</note>
+        </item>
+        <item calculated="false" fid="FAL0038">
+            <name>Other deposits</name>
+        </item>
+        <item calculated="false" fid="FAL0039">
+            <name>Total deposits (subtotal)</name>
+            <value>31900282</value>
+            <normalizedValue>2849.25705609</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0040">
+            <name>Certificates of deposit (liabilities)</name>
+        </item>
+        <item calculated="false" fid="FAL0041">
+            <name>Loans from banks</name>
+            <value>1795039</value>
+            <normalizedValue>160.3285995</normalizedValue>
+            <note>Borrowings from Bank Indonesia</note>
+        </item>
+        <item calculated="false" fid="FAL0042">
+            <name>Debt securities (including commercial paper)</name>
+            <value>750000</value>
+            <normalizedValue>66.98821008</normalizedValue>
+            <note>Securities Issued: BTN Bonds </note>
+        </item>
+        <item calculated="false" fid="FAL0043">
+            <name>Other securities &amp; loans including intercompany</name>
+            <value>2240044</value>
+            <normalizedValue>200.07538407</normalizedValue>
+            <note>Securities sold under repurchase agreements (Rp 1,775,000) + Accrued interest (Rp 27,651) + Fund borrowings (Rp 6,297 + Rp 183,152 + Rp 247,944)</note>
+        </item>
+        <item calculated="false" fid="FAL0044">
+            <name>Total money market funding (subtotal)</name>
+            <value>4785083</value>
+            <normalizedValue>427.39219364</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0045">
+            <name>Mortgage bonds</name>
+        </item>
+        <item calculated="false" fid="FAL0046">
+            <name>Convertible bonds &amp; other debt instruments</name>
+            <value>2839622</value>
+            <normalizedValue>253.62826009</normalizedValue>
+            <note>Securities Issued: BTN Bonds (Rp 1,750,000) - Deferred bonds issuance costs (Rp 3,843) + Accrued interest (Rp 34,650) + Fund borrowings (Rp 2,843,901) - Borrowings from Bank Indonesia (Rp 1,795,039) + Accrued interest (Rp 9,953)</note>
+        </item>
+        <item calculated="false" fid="FAL0047">
+            <name>Subordinated debt</name>
+        </item>
+        <item calculated="false" fid="FAL0048">
+            <name>Hybrid capital</name>
+            <value>253052</value>
+            <normalizedValue>22.60200071</normalizedValue>
+            <note>Subordinated loans (Rp 249,902) + Accrued interest (Rp 3,150)</note>
+        </item>
+        <item calculated="false" fid="FAL0049">
+            <name>Provisions including deferred tax</name>
+            <value>73832</value>
+            <normalizedValue>6.59449804</normalizedValue>
+            <note>Provisions for losses on commitments and contingencies (Rp 28,183) + Social and employee welfare (42,959) + Allowance for litigation liabilities (Rp 2,690)</note>
+        </item>
+        <item calculated="false" fid="FAL0050">
+            <name>Total other funding (subtotal)</name>
+            <value>3166506</value>
+            <normalizedValue>282.82475884</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0051">
+            <name>General loan loss reserves</name>
+        </item>
+        <item calculated="false" fid="FAL0052">
+            <name>Other non equity reserves</name>
+        </item>
+        <item calculated="false" fid="FAL0053">
+            <name>Total loan loss &amp; other reserves (subtotal)</name>
+            <value>0</value>
+            <normalizedValue>0</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0054">
+            <name>Other liabilities</name>
+            <value>2061830</value>
+            <normalizedValue>184.15773491</normalizedValue>
+            <note>Current liabilities (Rp 592,025) + Interest rate swap liabilities (Rp 2,115) + Other liabilities (Rp 1,513,339) - Social and employee welfare (42,959) - Allowance for litigation liabilities (Rp 2,690)</note>
+        </item>
+        <item calculated="false" fid="FAL0055">
+            <name>Total liabilities (subtotal)</name>
+            <value>41913701</value>
+            <normalizedValue>3743.63174348</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0056">
+            <name>Retained earnings</name>
+            <value>202939</value>
+            <normalizedValue>18.12602715</normalizedValue>
+            <note>Appropriated retained earnings (Rp 202,939) + Unappropriated retained earnings (Rp 430,474) - Current year earnings (Rp 430,474)</note>
+        </item>
+        <item calculated="false" fid="FAL0057">
+            <name>Current year earnings</name>
+            <value>430474</value>
+            <normalizedValue>38.44891033</normalizedValue>
+            <note>Current year earnings </note>
+        </item>
+        <item calculated="false" fid="FAL0058">
+            <name>Other equity reserves including currency translation adjustment</name>
+        </item>
+        <item calculated="false" fid="FAL0059">
+            <name>Revaluation reserves</name>
+            <value>-114747</value>
+            <normalizedValue>-10.24892819</normalizedValue>
+            <note>Unrealized loss on available for sale securities and government bonds</note>
+        </item>
+        <item calculated="false" fid="FAL0060">
+            <name>Minority interests in reserves</name>
+        </item>
+        <item calculated="false" fid="FAL0061">
+            <name>Total equity reserves (subtotal)</name>
+            <value>518666</value>
+            <normalizedValue>46.32600929</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0062">
+            <name>Preferred stock/shares</name>
+        </item>
+        <item calculated="false" fid="FAL0063">
+            <name>Minority interest</name>
+        </item>
+        <item calculated="false" fid="FAL0064">
+            <name>Common shares/stock</name>
+            <value>2559804</value>
+            <normalizedValue>228.63558414</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0065">
+            <name>Total share capital (subtotal)</name>
+            <value>2559804</value>
+            <normalizedValue>228.63558414</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0066">
+            <name>Treasury stock</name>
+        </item>
+        <item calculated="false" fid="FAL0067">
+            <name>Total equity (subtotal or keyed if no breakdown)</name>
+            <value>3078470</value>
+            <normalizedValue>274.96159343</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0069">
+            <name>Total liabilities &amp; equity</name>
+            <value>44992171</value>
+            <normalizedValue>4018.59333691</normalizedValue>
+            <note>Total Liabilities (Rp 41,913,701) + Total Equity (Rp 3,508,944)</note>
+        </item>
+        <item calculated="false" fid="FAL0070">
+            <name>Memo - deposits - demand</name>
+            <value>2853550</value>
+            <normalizedValue>254.87227581</normalizedValue>
+            <note>Total demand deposits of customers (Rp 2,853,230) + Demand deposits of banks (Rp 320)</note>
+        </item>
+        <item calculated="false" fid="FAL0071">
+            <name>Memo - deposits - savings</name>
+            <value>7375198</value>
+            <normalizedValue>658.73508396</normalizedValue>
+            <note>Total saving deposits of customers (Rp 7,375,098) + Saving deposits of banks (Rp 100)</note>
+        </item>
+        <item calculated="false" fid="FAL0072">
+            <name>Memo - deposits&lt;=1year</name>
+            <value>21542591</value>
+            <normalizedValue>1924.13281529</normalizedValue>
+            <note>Time deposits (Rp 12,276,612 + Rp 4,382,551 + Rp 1,267,966 + Rp 3,212,718 + Rp 72,974) + Time deposits of banks (Rp 290,530) + Placements with banks (Rp 39,240)</note>
+        </item>
+        <item calculated="false" fid="FAL0073">
+            <name>Memo - deposits>1year</name>
+            <value>7595</value>
+            <normalizedValue>0.67836727</normalizedValue>
+            <note>Time deposits (Rp 7,595)</note>
+        </item>
+        <item calculated="false" fid="FAL0074">
+            <name>Memo - deposits where no time split available</name>
+            <value>121348</value>
+            <normalizedValue>10.83851375</normalizedValue>
+            <note>Accrued interest (Rp 120,879 + Rp 469)</note>
+        </item>
+        <item calculated="false" fid="FAL0075">
+            <name>Interest income</name>
+            <value>4567026</value>
+            <normalizedValue>407.91586281</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0076">
+            <name>Interest expense</name>
+            <value>-2606694</value>
+            <normalizedValue>-232.82368703</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0077">
+            <name>Net interest revenue (subtotal or keyed if no breakdown)</name>
+            <value>1960332</value>
+            <normalizedValue>175.09217578</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0078">
+            <name>Commission income</name>
+        </item>
+        <item calculated="false" fid="FAL0079">
+            <name>Commission expense</name>
+        </item>
+        <item calculated="false" fid="FAL0080">
+            <name>Net commission revenue (subtotal or keyed if no breakdown)</name>
+            <value>0</value>
+            <normalizedValue>0</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0081">
+            <name>Fee income</name>
+            <value>176330</value>
+            <normalizedValue>15.74937478</normalizedValue>
+            <note>Penalties and administrative fees on deposits and loans</note>
+        </item>
+        <item calculated="false" fid="FAL0082">
+            <name>Fee expense</name>
+        </item>
+        <item calculated="false" fid="FAL0083">
+            <name>Net fee income (subtotal or keyed if no breakdown)</name>
+            <value>176330</value>
+            <normalizedValue>15.74937478</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0084">
+            <name>Fee &amp; commission income (only keyed if no breakdown)</name>
+        </item>
+        <item calculated="false" fid="FAL0085">
+            <name>Fee &amp; commission expense (only keyed if no breakdown)</name>
+        </item>
+        <item calculated="false" fid="FAL0086">
+            <name>Net fee &amp; commission income (subtotal or keyed if no breakdown)</name>
+            <value>0</value>
+            <normalizedValue>0</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0087">
+            <name>FX &amp; trading losses/gains</name>
+            <value>-65912</value>
+            <normalizedValue>-5.88710254</normalizedValue>
+            <note>Gain on sale of treasury bonds (Rp 321) + Gain on sale of securities (Rp 53)  - Loss on foreign exchange (Rp 3,530) - Loss on sale of government bonds (Rp 23,105) - Loss from decrease in value of trading government bonds (Rp 32,116) - Loss from decrease in value of trading securities (Rp 7,535)</note>
+        </item>
+        <item calculated="false" fid="FAL0088">
+            <name>Net trading income (subtotal or keyed if no breakdown)</name>
+            <value>2070750</value>
+            <normalizedValue>184.95444802</normalizedValue>
+            <note>Net Interest Revenue (Rp 1,960,332) + Net Commission Revenue (0) +  Net Fee Income (Rp 176,330) + Net Fee &amp; Commission Income (0) -  FX and Trading Losses/Gains (Rp 65,912)</note>
+        </item>
+        <item calculated="false" fid="FAL0089">
+            <name>Other operating income</name>
+            <value>41747</value>
+            <normalizedValue>3.72874241</normalizedValue>
+            <note>Others (Rp 40,367) + Provision on Interest rate swap receivables (Rp 1,380)</note>
+        </item>
+        <item calculated="false" fid="FAL0090">
+            <name>Total operating income (subtotal)</name>
+            <value>2112497</value>
+            <normalizedValue>188.68319043</normalizedValue>
+            <note>Net Trading Income (Rp 2,070,750) + Other Operating Income (Rp 41,747)</note>
+        </item>
+        <item calculated="false" fid="FAL0091">
+            <name>Personnel expenses</name>
+            <value>-772818</value>
+            <normalizedValue>-69.02625938</normalizedValue>
+            <note>Salary and employee benefits</note>
+        </item>
+        <item calculated="false" fid="FAL0092">
+            <name>Other admin expenses</name>
+            <value>-484665</value>
+            <normalizedValue>-43.28912111</normalizedValue>
+            <note>Total administrative expenses (Rp 555,335) - Depreciation (Rp 70,670)</note>
+        </item>
+        <item calculated="false" fid="FAL0093">
+            <name>Other operating expenses</name>
+            <value>-129003</value>
+            <normalizedValue>-11.52224009</normalizedValue>
+            <note>Provision on Current accounts with other banks (Rp 9,789) + Provision on Placements with other banks (Rp 5,995) + Provision on securities (Rp 1,118) + Provision on abandoned properties (Rp 3,950)  + Premium on government's guarantee program (Rp 51,298) + Others (Rp 56,853)</note>
+        </item>
+        <item calculated="false" fid="FAL0094">
+            <name>Goodwill write-off</name>
+        </item>
+        <item calculated="false" fid="FAL0095">
+            <name>Loan loss provisions</name>
+            <value>24254</value>
+            <normalizedValue>2.1663094</normalizedValue>
+            <note>Reversal on loans and Sharia financing receivables</note>
+        </item>
+        <item calculated="false" fid="FAL0096">
+            <name>Other provisions - depreciation</name>
+            <value>-80440</value>
+            <normalizedValue>-7.18470882</normalizedValue>
+            <note>Provision for losses on commitments and contingencies (Rp 9,770) + Depreciation (Rp 70,670)</note>
+        </item>
+        <item calculated="false" fid="FAL0097">
+            <name>Total operating expense (subtotal)</name>
+            <value>-1442672</value>
+            <normalizedValue>-128.85602001</normalizedValue>
+            <note>Personnel Expenses (Rp 772,818)+ Other Admin Expenses (484,665) + Other Operating Expenses (Rp 129,003) + Goodwill Write-off (0) + Loan Loss Provisions (Rp 24,254) + Other Provisions - Depreciation (Rp 80,440)</note>
+        </item>
+        <item calculated="false" fid="FAL0098">
+            <name>Operating profit (subtotal)</name>
+            <value>669825</value>
+            <normalizedValue>59.82717042</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0099">
+            <name>Non-operating income (including dividend income)</name>
+        </item>
+        <item calculated="false" fid="FAL0100">
+            <name>Non-operating expense</name>
+            <value>-9208</value>
+            <normalizedValue>-0.82243658</normalizedValue>
+            <note>Total non operating expense (Rp 4,292) - Gain on sale of vehicle and office furniture (Rp 4,916)</note>
+        </item>
+        <item calculated="false" fid="FAL0101">
+            <name>Extraordinary income</name>
+        </item>
+        <item calculated="false" fid="FAL0102">
+            <name>Extraordinary expense</name>
+        </item>
+        <item calculated="false" fid="FAL0103">
+            <name>Exceptional income</name>
+            <value>4916</value>
+            <normalizedValue>0.43908539</normalizedValue>
+            <note>Gain on sale of vehicle and office furniture</note>
+        </item>
+        <item calculated="false" fid="FAL0104">
+            <name>Exceptional expense</name>
+        </item>
+        <item calculated="false" fid="FAL0105">
+            <name>Pre-tax profit (subtotal or keyed)</name>
+            <value>665533</value>
+            <normalizedValue>59.44381922</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0106">
+            <name>Taxes</name>
+            <value>-235059</value>
+            <normalizedValue>-20.9949089</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0107">
+            <name>Post-tax profit (subtotal or keyed)</name>
+            <value>430474</value>
+            <normalizedValue>38.44891033</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0108">
+            <name>Transfer to/(from) fund for general banking risks</name>
+        </item>
+        <item calculated="false" fid="FAL0109">
+            <name>Published net income</name>
+            <value>430474</value>
+            <normalizedValue>38.44891033</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0110">
+            <name>Preference dividends</name>
+        </item>
+        <item calculated="false" fid="FAL0111">
+            <name>Other dividends</name>
+            <value>-23598</value>
+            <normalizedValue>-2.10771704</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0112">
+            <name>Other distributions</name>
+        </item>
+        <item calculated="false" fid="FAL0113">
+            <name>Retained income</name>
+        </item>
+        <item calculated="false" fid="FAL0114">
+            <name>Minority interests</name>
+        </item>
+        <item calculated="false" fid="FAL0115">
+            <name>Equity - Tier 1 capital</name>
+        </item>
+        <item calculated="false" fid="FAL0116">
+            <name>Supplementary items - Tier 2 capital</name>
+        </item>
+        <item calculated="false" fid="FAL0117">
+            <name>Total capital - Tier 1 plus Tier 2 capital</name>
+        </item>
+        <item calculated="false" fid="FAL0121">
+            <name>Tier 1 capital as published by institution</name>
+            <value>2281464</value>
+            <normalizedValue>203.77491961</normalizedValue>
+            <note>Core Capital</note>
+        </item>
+        <item calculated="false" fid="FAL0122">
+            <name>Tier 2 capital as published by institution</name>
+            <value>943517</value>
+            <normalizedValue>84.27268667</normalizedValue>
+            <note>Supplementary Capital</note>
+        </item>
+        <item calculated="false" fid="FAL0123">
+            <name>Total capital as published by institution</name>
+            <value>3224981</value>
+            <normalizedValue>288.04760629</normalizedValue>
+            <note>Total Capital</note>
+        </item>
+        <item calculated="false" fid="FAL0127">
+            <name>Acceptances</name>
+        </item>
+        <item calculated="false" fid="FAL0128">
+            <name>Documentary credits</name>
+            <value>22</value>
+            <normalizedValue>0.00196499</normalizedValue>
+            <note>Irrevocable letters of credit (Rp 22)</note>
+        </item>
+        <item calculated="false" fid="FAL0129">
+            <name>Guarantees</name>
+            <value>17906</value>
+            <normalizedValue>1.59932119</normalizedValue>
+            <note>Guarantees issued</note>
+        </item>
+        <item calculated="false" fid="FAL0130">
+            <name>Other</name>
+            <value>2145594</value>
+            <normalizedValue>191.63933548</normalizedValue>
+            <note>Total commitments payable (Rp 2,145,638) - Irrevocable letters of credit (Rp 22)</note>
+        </item>
+        <item calculated="false" fid="FAL0131">
+            <name>Total financial commitments &amp; contingencies</name>
+            <value>2163522</value>
+            <normalizedValue>193.24062165</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0132">
+            <name>Gross charge-offs (if available)</name>
+        </item>
+        <item calculated="false" fid="FAL0133">
+            <name>Write-offs (if available)</name>
+        </item>
+        <item calculated="false" fid="FAL0134">
+            <name>Write-backs (if available)</name>
+            <value>93280</value>
+            <normalizedValue>8.33154698</normalizedValue>
+            <note>Recovery</note>
+        </item>
+        <item calculated="false" fid="FAL0135">
+            <name>Net charge-offs (if available)</name>
+            <value>93280</value>
+            <normalizedValue>8.33154698</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0136">
+            <name>Total assets average</name>
+            <value>40842709</value>
+            <normalizedValue>3647.97329403</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0137">
+            <name>Risk based assets</name>
+            <value>19981855</value>
+            <normalizedValue>1784.73160057</normalizedValue>
+            <note>Published by the bank</note>
+        </item>
+        <item calculated="false" fid="FAL0138">
+            <name>Liquid assets</name>
+            <value>2041571</value>
+            <normalizedValue>182.34824937</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0139">
+            <name>Marketable debt securities</name>
+            <value>9450953</value>
+            <normalizedValue>844.13656663</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0140">
+            <name>Borrowed funds</name>
+            <value>7624705</value>
+            <normalizedValue>681.02045373</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0141">
+            <name>Bank funding</name>
+            <value>2125698</value>
+            <normalizedValue>189.86227224</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0142">
+            <name>Bank loan assets</name>
+            <value>1950592</value>
+            <normalizedValue>174.22222222</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0143">
+            <name>Total equity average</name>
+            <value>2932941</value>
+            <normalizedValue>261.96329046</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0144">
+            <name>Gross loans average</name>
+            <value>27476179.5</value>
+            <normalizedValue>2454.10677921</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0145">
+            <name>Net loans average</name>
+            <value>26954097.5</value>
+            <normalizedValue>2407.47566095</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0146">
+            <name>Operating profit/total assets (av)</name>
+            <value>0.016400111951437892</value>
+            <normalizedValue>0.01640011</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0147">
+            <name>Pre-tax profit/total assets (av)</name>
+            <value>0.01629502587597703</value>
+            <normalizedValue>0.01629503</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0148">
+            <name>Pre-tax profit/total equity (av)</name>
+            <value>0.22691660009526274</value>
+            <normalizedValue>0.2269166</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0149">
+            <name>Cost to income ratio</name>
+            <value>0.6829226266356828</value>
+            <normalizedValue>0.68292263</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0150">
+            <name>Interest income/interest expense ratio</name>
+            <value>1.7520376384800056</value>
+            <normalizedValue>1.75203764</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0151">
+            <name>Operating profit/total equity (av)</name>
+            <value>0.2283799776401912</value>
+            <normalizedValue>0.22837998</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0152">
+            <name>Post-tax profit/total assets (av)</name>
+            <value>0.010539800383955923</value>
+            <normalizedValue>0.0105398</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0153">
+            <name>Post-tax profit/total equity (av)</name>
+            <value>0.14677213077249082</value>
+            <normalizedValue>0.14677213</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0154">
+            <name>Net interest revenue/total assets (av)</name>
+            <value>0.047997110083956476</value>
+            <normalizedValue>0.04799711</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0155">
+            <name>Net interest revenue/total equity (av)</name>
+            <value>0.6683843964130203</value>
+            <normalizedValue>0.6683844</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0158">
+            <name>Total equity/total assets</name>
+            <value>0.0684223484125716</value>
+            <normalizedValue>0.06842235</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0159">
+            <name>Total equity/net loans</name>
+            <value>0.09683034105214607</value>
+            <normalizedValue>0.09683034</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0160">
+            <name>Common equity/total assets</name>
+            <value>0.05689443170012845</value>
+            <normalizedValue>0.05689443</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0161">
+            <name>Dividend pay-out ratio</name>
+            <value>0.054818641776274525</value>
+            <normalizedValue>0.05481864</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0162">
+            <name>Liquid assets/deposits &amp; money market funding</name>
+            <value>0.05565082969734661</value>
+            <normalizedValue>0.05565083</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0163">
+            <name>Net loans/total deposits</name>
+            <value>0.9966184938427817</value>
+            <normalizedValue>0.99661849</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0164">
+            <name>Liquid assets &amp; marketable debt securities/deposits &amp; money market funding</name>
+            <value>0.3132727178808225</value>
+            <normalizedValue>0.31327272</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0165">
+            <name>Net loans/total assets</name>
+            <value>0.7066209585663248</value>
+            <normalizedValue>0.70662096</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0166">
+            <name>Loan loss reserves/gross loans (av)</name>
+            <value>0.020257365111477743</value>
+            <normalizedValue>0.02025737</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0167">
+            <name>Loan loss reserves/net loans (av)</name>
+            <value>0.02064973609300033</value>
+            <normalizedValue>0.02064974</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0168">
+            <name>Loan loss reserves/total problem loans</name>
+            <value>0.5436145712672799</value>
+            <normalizedValue>0.54361457</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0169">
+            <name>Loan loss reserves/gross loans</name>
+            <value>0.017205938259741274</value>
+            <normalizedValue>0.01720594</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0170">
+            <name>Loan loss reserves/net loans</name>
+            <value>0.017507165467884774</value>
+            <normalizedValue>0.01750717</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0171">
+            <name>Net charge-offs/gross loans (av)</name>
+            <value>-0.003394940697632289</value>
+            <normalizedValue>-0.00339494</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0172">
+            <name>Net charge-offs/net loans (av)</name>
+            <value>-0.003460698322397921</value>
+            <normalizedValue>-0.0034607</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0173">
+            <name>Loan loss provisions/pre-provision operating profit</name>
+            <value>-0.03756984127230002</value>
+            <normalizedValue>-0.03756984</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0174">
+            <name>Loan loss provisions/net interest revenue ratio</name>
+            <value>-0.012372394063862651</value>
+            <normalizedValue>-0.01237239</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0175">
+            <name>Specific loan loss reserves/total problem loans</name>
+        </item>
+        <item calculated="false" fid="FAL0176">
+            <name>Total problem loans/net loans</name>
+            <value>0.03220510706155629</value>
+            <normalizedValue>0.03220511</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0177">
+            <name>Total problem loans/total equity</name>
+            <value>0.33259313879946856</value>
+            <normalizedValue>0.33259314</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0178">
+            <name>Total problem loans/gross loans</name>
+            <value>0.0316509879778068</value>
+            <normalizedValue>0.03165099</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0179">
+            <name>Total deposits/net loans ratio</name>
+            <value>1.0033929795384189</value>
+            <normalizedValue>1.00339298</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0180">
+            <name>Borrowed funds/net loans ratio</name>
+            <value>0.23982783186842924</value>
+            <normalizedValue>0.23982783</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0181">
+            <name>Bank funding/total funding (liabilities) ratio</name>
+            <value>0.05071606537442255</value>
+            <normalizedValue>0.05071607</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0182">
+            <name>Interbank ratio</name>
+            <value>0.9176242344867427</value>
+            <normalizedValue>0.91762423</normalizedValue>
+        </item>
+        <item calculated="false" fid="FAL0183">
+            <name>Tier 1 capital ratio (as published unless indicated with *)</name>
+            <value>0.11417678688990587</value>
+            <normalizedValue>0.11417679</normalizedValue>
+            <note>Tier 1 capital (Rp 2,281,464) / Risk based assets (Rp 19,981,855)</note>
+        </item>
+        <item calculated="false" fid="FAL0184">
+            <name>Tier 2 capital ratio (as published unless indicated with *)</name>
+            <value>0.04721868915573654</value>
+            <normalizedValue>0.04721869</normalizedValue>
+            <note>Tier 2 capital (Rp 943,517) / Risk based assets (Rp 19,981,855)</note>
+        </item>
+        <item calculated="false" fid="FAL0185">
+            <name>Total capital ratio (as published unless indicated with *)</name>
+            <value>0.1614</value>
+            <normalizedValue>0.1614</normalizedValue>
+            <note>Capital adequacy ratio </note>
+        </item>
+        <item calculated="false" fid="FAL0156">
+            <name>Tier 1 capital ratio (as published unless indicated with *)</name>
+            <value>0.11417678688990587</value>
+            <normalizedValue>0.11417679</normalizedValue>
+            <note>Tier 1 capital (Rp 2,281,464) / Risk based assets (Rp 19,981,855)</note>
+        </item>
+        <item calculated="false" fid="FAL0157">
+            <name>Total capital ratio (as published unless indicated with *)</name>
+            <value>0.1614</value>
+            <normalizedValue>0.1614</normalizedValue>
+            <note>Capital adequacy ratio </note>
+        </item>
+        <item calculated="false" fid="FAL0187">
+            <name>Customers (receivable)</name>
+        </item>
+        <item calculated="false" fid="FAL0189">
+            <name>Other accounts receivable</name>
+        </item>
+        <item calculated="false" fid="FAL0186">
+            <name>Deposits with clearing corporations</name>
+        </item>
+        <item calculated="false" fid="FAL0192">
+            <name>Brokers, dealers &amp; clearing organizations (payable)</name>
+        </item>
+        <item calculated="false" fid="FAL0191">
+            <name>Customers (payable)</name>
+        </item>
+        <item calculated="false" fid="FAL0190">
+            <name>Total accounts receivable (subtotal)</name>
+        </item>
+        <item calculated="false" fid="FAL0188">
+            <name>Brokers, dealers &amp; clearing organizations (receivable)</name>
+        </item>
+        <item calculated="false" fid="FAL0198">
+            <name>Compensation &amp; benefits</name>
+        </item>
+        <item calculated="false" fid="FAL0199">
+            <name>Bad debt expenses</name>
+        </item>
+        <item calculated="false" fid="FAL0200">
+            <name>Common equity Tier 1 capital (CET1) as published by institution</name>
+        </item>
+        <item calculated="false" fid="FAL0195">
+            <name>Underwriting &amp; investment banking fees</name>
+        </item>
+        <item calculated="false" fid="FAL0194">
+            <name>Total accounts payable (subtotal)</name>
+        </item>
+        <item calculated="false" fid="FAL0196">
+            <name>Asset management, distribution &amp; administration fees</name>
+        </item>
+        <item calculated="false" fid="FAL0197">
+            <name>Trading &amp; principal transactions</name>
+        </item>
+        <item calculated="false" fid="FAL0203">
+            <name>Tier 1 leverage ratio as published by institution</name>
+        </item>
+        <item calculated="false" fid="FAL0202">
+            <name>Common equity Tier 1 capital (CET1) ratio as published by institution</name>
+        </item>
+        <item calculated="false" fid="FAL0193">
+            <name>Other accounts payable</name>
+        </item>
+        <item calculated="false" fid="FAL0201">
+            <name>Common equity Tier 1 capital (CET1) ratio as published by institution</name>
+        </item>
+        <item calculated="true" fid="FDB002F">
+            <name>Equity Capital</name>
+            <value>3078470</value>
+            <normalizedValue>274.96159343</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB003F">
+            <name>Total Assets</name>
+            <value>44992171</value>
+            <normalizedValue>4018.59333691</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB004F">
+            <name>Total Liabilities</name>
+            <value>44992171</value>
+            <normalizedValue>4018.59333691</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB005F">
+            <name>Net Profit</name>
+            <value>430474</value>
+            <normalizedValue>38.44891033</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0025">
+            <name>Cash &amp; Banks</name>
+            <value>2178378</value>
+            <normalizedValue>194.56752412</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0084">
+            <name>Investments</name>
+            <value>9342962</value>
+            <normalizedValue>834.49106824</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0099">
+            <name>Loans, &amp;c</name>
+            <value>30233168</value>
+            <normalizedValue>2700.35441229</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0045">
+            <name>Fixed Assets</name>
+            <value>1072645</value>
+            <normalizedValue>95.80609146</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0114">
+            <name>Other Assets</name>
+            <value>2165018</value>
+            <normalizedValue>193.3742408</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0162">
+            <name>Capital</name>
+            <value>2559804</value>
+            <normalizedValue>228.63558414</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0244">
+            <name>Subordinated Loan</name>
+            <value>249902</value>
+            <normalizedValue>22.32065023</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0221">
+            <name>Reserves</name>
+            <value>88192</value>
+            <normalizedValue>7.87709896</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0183">
+            <name>Deposits, &amp;c</name>
+            <value>32370959</value>
+            <normalizedValue>2891.29680243</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0158">
+            <name>Borrowings, &amp;c</name>
+            <value>3281294</value>
+            <normalizedValue>293.07734905</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0214">
+            <name>Other Liabilities</name>
+            <value>6011546</value>
+            <normalizedValue>536.93694176</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0218">
+            <name>Profit Balance</name>
+            <value>430474</value>
+            <normalizedValue>38.44891033</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0263">
+            <name>Net Profit/Equity Capital</name>
+            <value>13.98</value>
+            <normalizedValue>13.98</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0264">
+            <name>Net Profit/Total Assets</name>
+            <value>0.96</value>
+            <normalizedValue>0.96</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0265">
+            <name>Equity Capital/Total Assets</name>
+            <value>6.84</value>
+            <normalizedValue>6.84</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0259">
+            <name>Net Interest Inc.</name>
+            <value>1771949</value>
+            <normalizedValue>158.26625581</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0260">
+            <name>Other Income</name>
+            <value>416870</value>
+            <normalizedValue>37.23383351</normalizedValue>
+        </item>
+        <item calculated="true" fid="FDB0261">
+            <name>Other Expense</name>
+            <value>1758345</value>
+            <normalizedValue>157.05117899</normalizedValue>
+        </item>
+    </lineItems>
+    <sourceDocument>
+        <link href="/document/id/8bdcf66b-721c-4dbc-9197-4e2b364ef976" rel="src"/>
+    </sourceDocument>
+</financialStatement>

@@ -158,6 +158,17 @@ public class RoutingCodeIdentifiers {
         hmap.put("view_history_event_table", By.xpath("//*[@id='routingCodeHistory']//tr"));
         hmap.put("view_history_usage_table", By.xpath("//*[@id='routingCodeHistory']//div[@class='container']//tbody//tr"));
 
+        hmap.put("edit_routingcode_existing_alternate_code_type",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//select[@id='alternateCodeType']"));
+        hmap.put("edit_routingcode_existing_alternate_code_value",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//input[@name='alternateCodeValue']"));
+        hmap.put("edit_routingcode_new_alternate_code_type",By.xpath("//*[@id='additionalAlternateCodes']/tr[@class='new']//select[@id='alternateCodeType']"));
+        hmap.put("edit_routingcode_new_alternate_code_value",By.xpath("//*[@id='additionalAlternateCodes']/tr[@class='new']//input"));
+        hmap.put("edit_routingcode_add_new_alternate_code",By.xpath("//*[@id='add-alternateCodes']"));
+        hmap.put("edit_routingcode_delete_first_row_alternate_code",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//button"));
+        hmap.put("edit_routingcode_delete_second_row_alternate_code",By.xpath("//*[@id='additionalAlternateCodes']/tr[2]//button"));
+        hmap.put("edit_routingCode_delete_yes_button_id_click", By.xpath("//*[@id='yes-button']"));
+        hmap.put("edit_routingcode_alternate_code_type",By.xpath("//*[@id='alternateCodeType']"));
+        hmap.put("edit_routingcode_alternate_code_type_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='alternateCodeTypeError']"));
+        hmap.put("edit_routingcode_alternate_code_value_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='alternateCodeValueError']"));
         hmap.put("edit_routingcode_page_add_new_relatedcodes_btn", By.xpath("//*[@id='add-relatedCodes']"));
         hmap.put("edit_routingcode_page_relatedcodes_context_dropdown", By.xpath("//*[@id='additionalRelatedCodes']/tr//select[@id='relatedCodeContext']"));
         hmap.put("edit_routingcode_page_new_relatedcodes_context_dropdown", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//select[@id='relatedCodeContext']"));
