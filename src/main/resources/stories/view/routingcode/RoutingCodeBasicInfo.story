@@ -10,7 +10,7 @@ JIRA ID - ZEUs-1540 - Routing Code Search: Search Value of 1 digit
 
 Scenario: Verify the basic info for a routing code of type ABA
 Verify the headers and the legal entity link on the header
-
+Meta:@test321
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -20,14 +20,11 @@ Then the user should see the routing code basic info page
 And the user should see the routing code basic info values from trusted document for routing code <routingCode> with code type <codeType>
 And the user should see the routing code page header with <legalentity>, <headOfficeAddress>, <routingCodeFid> and <routingCodeTfpid>
 When the user clicks on the legal entity link in the routing code page header
-Then the user should see the legal entity's names as:
-|TYPE|VALUE|
-|Legal Title|Berliner Volksbank eG|
-|Former Name|Berliner Volksbank (West) eG|
+Then the user should see the legalEntity names for <fid> in the legalEntity basic info
 
 Examples:
-|entity|searchBy|routingCode|codeType|legalentity|headOfficeAddress|routingCodeFid|routingCodeTfpid|
-|083905216|Routing Code|083905216|ABA|Berliner Volksbank eG|Berlin, Germany|C-1121793|ABA-083905216|
+|entity|searchBy|routingCode|codeType|legalentity|headOfficeAddress|routingCodeFid|routingCodeTfpid|fid|
+|083905216|Routing Code|083905216|ABA|Berliner Volksbank eG|Berlin, Germany|C-1121793|ABA-083905216|1717|
 
 
 Scenario: Verify the basic info for a routing code of type non-ABA (Swift BIC)
