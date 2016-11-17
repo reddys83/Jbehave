@@ -487,7 +487,7 @@ public class ResultsPage extends AbstractPage {
                 assertEquals("1 to 25 of " + codeResultsCount + " results", resultsCount.get(p).getText());
         }
 
-        for (int i = 0; i < document.getElementsByTagName("results").getLength(); i++) {
+       for (int i = 0; i < document.getElementsByTagName("results").getLength(); i++) {
             String routingCodes = document.getElementsByTagName("Type").item(i).getTextContent();
             for (int j = 1; j <= document.getFirstChild().getChildNodes().item(i).getChildNodes().getLength(); j++) {
                 assertEquals(getDriver().findElement(By.xpath(".//*[@class='searchEntityList-container']//tbody/tr[td='" + routingCodes + "']/td[" + j + "]")).getText(),
@@ -500,7 +500,6 @@ public class ResultsPage extends AbstractPage {
                             getDriver().findElement(By.xpath(".//*[@class='searchEntityList-container']//tbody/tr[td[1][text()='" + routingCode + "'] and td[2][text()='" + routingCodeType + "']]/td[" + j + "]")).getText());
 
                 }
-
             }
         }
 
@@ -1241,13 +1240,12 @@ public class ResultsPage extends AbstractPage {
         }
         return null;
     }
-    
+
     public void verifyToolTipInRoutingCodeResultsPage(String tooltip, By by) {
     	assertEquals(tooltip, getDriver().findElement(by).getAttribute("title"));
-    } 
+    }
 
     public void verifyResultsPage() {
 		assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingCodeResultsHeader_view_mode")).getText().contains("Routing Code results for"));
 	}
  }
-

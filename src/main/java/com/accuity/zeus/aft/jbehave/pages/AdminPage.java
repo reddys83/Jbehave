@@ -4,17 +4,24 @@ import com.accuity.zeus.aft.commons.Utils;
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
+import com.accuity.zeus.aft.jbehave.identifiers.TaxonomiesIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.jbehave.core.model.ExamplesTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -93,21 +100,13 @@ public class AdminPage extends AbstractPage{
     }
 
     public void enterTaxonomyInTheTypeAheadBox(String taxonomy) {
-        /*getDriver().findElement(taxonomy_input_xpath).sendKeys(taxonomy);
-        getDriver().findElement(taxonomy_input_xpath).sendKeys(Keys.RETURN);*/
-        List<WebElement> options = getDriver().findElements(By.xpath("//*[@id='entitySelect_chosen']/div//li"));
-        for(WebElement option:options){
-            if(option.getText().contains(taxonomy)){
+        List<WebElement> taxonomyOptions = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_dropdown_list"));
+        for(WebElement option:taxonomyOptions){
+            if(option.getText().equals(taxonomy)){
                 option.click();
                 break;
             }
         }
-
-
-
-
-
-
     }
 
     public void verifyTaxonomiesEntry(ExamplesTable taxonomyEntry) {
@@ -122,4 +121,180 @@ public class AdminPage extends AbstractPage{
             }
         }
     }
+    
+    public void verifyNonHierarchicalTaxonomyValuesFromDB(String taxonomy, String source, List<String> columnHeaderList, List<String> rowValueList) {
+    	try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("taxonomy", taxonomy));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get non-hierarchical taxonomy values", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("columnHeaders").item(0).getChildNodes().getLength(); i++) {
+					assertEquals(document.getElementsByTagName("columnHeaders").item(0).getChildNodes().item(i)
+							.getTextContent().toUpperCase(), columnHeaderList.get(i));
+				}
+				for (int i = 0; i < document.getElementsByTagName("entryValues").getLength(); i++) {
+					String taxonomyRowValue = "";
+					for (int index = 0; index < document.getElementsByTagName("entryValues").item(i).getChildNodes().getLength(); index++) {
+						if (!document.getElementsByTagName("entryValues").item(i).getChildNodes().item(index).getTextContent().equals("")) {
+							taxonomyRowValue += document.getElementsByTagName("entryValues").item(i).getChildNodes().item(index).getTextContent() + " ";
+						}
+					}
+					assertEquals(taxonomyRowValue.trim(), rowValueList.get(i));
+				}
+			} else
+				assertTrue(source + " document is null", false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
+    public void verifyNonHierarchicalTaxonomyValuesFromTrustedDB(String taxonomy, String source) {
+		try {
+			List<String> columnHeaderList = new ArrayList<String>();
+			List<String> rowValueList = new ArrayList<String>();
+			Thread.sleep(5000L);
+			List<WebElement> columnHeader = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_column_header_list"));
+			List<WebElement> rowValue = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_row_values_list"));
+			if (columnHeader.size() > 0) {
+				for (int index = 0; index < columnHeader.size(); index++) {
+					columnHeaderList.add(columnHeader.get(index).getText());
+				}
+				for (int index = 0; index < rowValue.size(); index++) {
+					rowValueList.add(rowValue.get(index).getText());
+				}
+				verifyNonHierarchicalTaxonomyValuesFromDB(taxonomy, source, columnHeaderList, rowValueList);
+			} else {
+				assertTrue("There is no existing values for " + taxonomy + " taxonomy", false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
+    public void verifySubGroupingInHierarchicalTaxonomy() {
+    	List<WebElement> hierarchialTaxonomyList = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("hierarchial_taxonomies_list"));    	
+    	assertTrue(hierarchialTaxonomyList.get(0).isDisplayed());    	
+    }
+    
+	public void verifyHierarchicalTaxonomyValuesFromTrustedDB(String taxonomy, String source) {
+		try {			
+			List<String> columnHeaderList = new ArrayList<String>();
+			List<String> categoryList = new ArrayList<String>();
+			List<String> taxonomySubGroupingRowValueList = new ArrayList<String>();
+			List<WebElement> columnHeader = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_column_header_list"));
+			List<WebElement> categoryListValues = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("hierarchical_taxonomies_row_values_list"));
+			List<WebElement> taxonomySubGroupingRows = getDriver().findElements(TaxonomiesIdentifiers.getObjectIdentifier("hierarchical_taxonomy_sub_groupings_list"));
+			Map<String, List<String>> taxonomyMapForUI = new HashMap<String, List<String>>();
+			if (columnHeader.size() > 0) {
+				for (int index = 0; index < columnHeader.size(); index++) {
+					columnHeaderList.add(columnHeader.get(index).getText());
+				}
+				Collections.sort(columnHeaderList);
+				taxonomyMapForUI.put("columnHeaderList", columnHeaderList);	
+				List<String> levelCount = new ArrayList<String>();			 
+				for (int index = 0; index<taxonomySubGroupingRows.size(); index++) {
+					String level = taxonomySubGroupingRows.get(index).getAttribute("class").replace("level", "");
+					if(!levelCount.contains(level)) {
+						levelCount.add(level);
+					}							
+				}
+				
+				for (int index = 0; index < categoryListValues.size(); index++) {
+					if( categoryListValues.get(index).getAttribute("class").isEmpty() ) {
+						categoryList.add(categoryListValues.get(index).getText());
+					}					
+				}
+				Collections.sort(categoryList);
+				taxonomyMapForUI.put("categoryList", categoryList);	
+				
+				for (int index = 0; index < levelCount.size(); index++) {
+					for (int innerIndex = 0; innerIndex < taxonomySubGroupingRows.size(); innerIndex++) {
+						if (taxonomySubGroupingRows.get(innerIndex).getAttribute("class").equals("level" + levelCount.get(index))) {
+							taxonomySubGroupingRowValueList.add(taxonomySubGroupingRows.get(innerIndex).getText());
+						}
+					}
+					Collections.sort(taxonomySubGroupingRowValueList);
+					taxonomyMapForUI.put("subCategory " + levelCount.get(index), taxonomySubGroupingRowValueList);	
+					taxonomySubGroupingRowValueList = new ArrayList<String>();
+				}				
+				verifyHeirarchicalTaxonomyValuesFromDB(taxonomy, source, taxonomyMapForUI);
+			} else {
+				assertTrue("There is no existing values for " + taxonomy + " taxonomy", false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+
+	public void verifyHeirarchicalTaxonomyValuesFromDB(String taxonomy, String source, Map<String, List<String>>  taxonomyMapForUI) {			 
+		try {
+			
+			List<String> columnHeaderList = new ArrayList<String>();
+			List<String> categoryList = new ArrayList<String>();
+			List<String> categorySubgroupList = new ArrayList<String>();
+			Map<String, List<String>> taxonomyMapForDB = new HashMap<String, List<String>>();
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			
+			nvPairs.add(new BasicNameValuePair("taxonomy", taxonomy));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(2000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get hierarchial taxonomy sub-grouping values", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("columnHeaders").item(0).getChildNodes()
+						.getLength(); i++) {
+					columnHeaderList.add(document.getElementsByTagName("columnHeaders").item(0).getChildNodes().item(i).getTextContent().toUpperCase());
+				}	
+				Collections.sort(columnHeaderList);
+				taxonomyMapForDB.put("columnHeaderList", columnHeaderList);	
+				
+				List<String> levelCount = new ArrayList<String>();					
+				NodeList nodeList = document.getElementsByTagName("subCategory");
+				for (int index = 0; index<nodeList.getLength(); index++) {
+					if(!levelCount.contains(nodeList.item(index).getAttributes().item(0).getNodeValue())) {
+						levelCount.add(nodeList.item(index).getAttributes().item(0).getNodeValue());
+					}							
+				}				
+				
+				for(int index = 0; index < levelCount.size();index++) {
+				 nodeList = document.getElementsByTagName("entryValues");				
+					for (int innerIndex = 0; innerIndex<nodeList.getLength(); innerIndex++) {
+						if(nodeList.item(innerIndex).getParentNode().getAttributes().getLength()>0) {
+							if(levelCount.get(index).equals(nodeList.item(innerIndex).getParentNode().getAttributes().item(0).getNodeValue())) {
+								String rowValue = "";
+								for(int columIndex=0;columIndex<columnHeaderList.size();columIndex++) {
+									if(!nodeList.item(innerIndex).getChildNodes().item(columIndex).getTextContent().isEmpty()) {
+										rowValue = rowValue + nodeList.item(innerIndex).getChildNodes().item(columIndex).getTextContent() + " ";
+									}									
+								}
+								categorySubgroupList.add(rowValue.trim());
+							}	
+						}
+						else if(nodeList.item(innerIndex).getParentNode().getNodeName().equals("category")) {													
+							if(index==0) {
+								String rowValue = "";	
+								for(int columIndex=0;columIndex<columnHeaderList.size();columIndex++) {
+									if(!nodeList.item(innerIndex).getChildNodes().item(columIndex).getTextContent().isEmpty()) {
+										rowValue = rowValue + nodeList.item(innerIndex).getChildNodes().item(columIndex).getTextContent() + " ";	
+									}									
+								}	
+								categoryList.add(rowValue.trim());
+							}
+						}						
+					}
+					Collections.sort(categorySubgroupList);
+					taxonomyMapForDB.put("subCategory " + levelCount.get(index), categorySubgroupList);
+					categorySubgroupList = new ArrayList<String>();
+				}
+				Collections.sort(categoryList);
+				taxonomyMapForDB.put("categoryList", categoryList);			
+				assertEquals(taxonomyMapForDB, taxonomyMapForUI);				
+			} else
+				assertTrue(source + " document is null", false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -2205,6 +2205,86 @@ public class EditOfficePage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
+	
+	public void verifyOfficeTypeListFromLookup(String lookupFid, String rowIdentifier) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		List<String> dropdownValuesList = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("fid", lookupFid));
+		Select dropdown = new Select(getDriver().findElement(OfficeIdentifiers.getObjectIdentifier(rowIdentifier)));
+		String selectedValue = dropdown.getFirstSelectedOption().getText();
+		for (WebElement option : dropdown.getOptions()) {
+			dropdownValuesList.add(option.getText());
+		}
+		dropdownValuesList.remove(selectedValue);
+		if (dropdownValuesList.get(0).equals("")) {
+			dropdownValuesList.remove(0);
+		}
+		// finding the list of values from the taxonomy and subtracting the
+		// values which are selected in other dropdowns
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get offices office types", nvPairs);
+		List resultList = ListUtils.subtract(getNodeValuesByTagName(document, "OfficeType"),
+				getAlreadySelectedOfficeTypes("office_basicInfo_officetypes_dropdown_xpath"));
+		assertEquals(dropdownValuesList, resultList);
+
+	}
+
+	public void verifyEditOfficesOfficeTypeValueFromTrusted(String officeFid, String tagName, String source) {
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("fid", officeFid));
+		nvPairs.add(new BasicNameValuePair("source", source));
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get office basic info", nvPairs);
+		if (document != null) {
+			assertEquals(getNodeValuesByTagName(document, tagName),
+					getAlreadySelectedOfficeTypes("office_basicInfo_officetypes_dropdown_xpath"));
+		}
+
+	}
+
+	public List<String> getAlreadySelectedOfficeTypes(String identifier) {
+		ArrayList<String> selectedValueList = new ArrayList();
+		for (WebElement officeTypeDropDown : getDriver()
+				.findElements(OfficeIdentifiers.getObjectIdentifier(identifier))) {
+			Select dropdown = new Select(officeTypeDropDown);
+			String selectedValue = dropdown.getFirstSelectedOption().getAttribute("value");
+			selectedValueList.add(selectedValue);
+		}
+		return selectedValueList;
+	}
+	
+	public void verifyEditOfficesOfficeTypeValueFromZeusAndInUI(String officeTypeValue, String tagName, String officeFid, String source, String xqueryName) {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<NameValuePair> nvPairs = new ArrayList<>();
+        nvPairs.add(new BasicNameValuePair("fid", officeFid));
+        nvPairs.add(new BasicNameValuePair("source", source));
+        Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, xqueryName, nvPairs);
+        if (document != null && !officeTypeValue.isEmpty()) {
+            assertTrue(getNodeValuesByTagName(document, tagName).contains(officeTypeValue));
+
+            Boolean flag=false;
+            List<WebElement> officeTypes = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("basic_info_office_type_xpath"));
+
+                for (int j=0;j<officeTypes.size();j++){
+                    if(officeTypeValue.equals(officeTypes.get(j).getText()))
+                    {
+                        flag=true;
+                        break;
+                    }
+                    assertTrue(flag);
+                }
+
+        } else if (document != null && officeTypeValue.isEmpty()) {
+            assertFalse(getNodeValuesByTagName(document, tagName).contains(officeTypeValue));
+           assertEquals(officeTypeValue,getTextOnPage(OfficeIdentifiers.getObjectIdentifier("basic_info_office_type_xpath")));
+        }
+
+    }
+
 
 	   @Override
     public String getPageUrl() {

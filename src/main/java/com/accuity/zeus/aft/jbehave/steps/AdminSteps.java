@@ -2,6 +2,7 @@ package com.accuity.zeus.aft.jbehave.steps;
 
 import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
+import com.accuity.zeus.aft.jbehave.identifiers.TaxonomiesIdentifiers;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -62,4 +63,34 @@ public class AdminSteps extends AbstractSteps{
     public void verifyTaxonomiesEntry(ExamplesTable taxonomyEntry){
         getAdminPage().verifyTaxonomiesEntry(taxonomyEntry);
     }
+    
+    @Then("the user should not see any sub-grouping for the selected taxonomy")
+    public void verifyNoSubGroupingForSelectedTaxonomy() {
+    	getDataPage().verifyElementNotExistInUI(TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_sub_groupings"));
+    }
+    
+    @Then("the user should see that the taxonomies update button is displayed")
+    public void verifyTaxonomiesUpdateButtonIsDisplayed() {
+    	getDataPage().verifyElementIsDisplayed("Taxonomies Update button", TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_update_button"));
+    }
+    
+    @Then("the user verifies the taxonomy name in the category header")
+    public void verifyTaxonomyNameInCategoryHeader(@Named("taxonomy") String taxonomy) {
+    	getDataPage().verifyWebElementText("Taxonomy Category Header", taxonomy.toUpperCase(), TaxonomiesIdentifiers.getObjectIdentifier("taxonomies_category_header"));
+    }
+    
+    @Then("the user should see the selected taxonomy values same as in $source document")
+    public void verifyNonHierarchicalTaxonomyValuesFromTrustedDB(@Named("taxonomy") String taxonomy, @Named("source") String source) {
+    	getAdminPage().verifyNonHierarchicalTaxonomyValuesFromTrustedDB(taxonomy, source);
+    }
+    
+    @Then("the user should see that each hierarchical taxonomy should have atleast one layer of sub-grouping")
+    public void verifySubGroupingInHierarchicalTaxonomy() {
+    	getAdminPage().verifySubGroupingInHierarchicalTaxonomy();
+    }
+    
+    @Then("the user should see the selected hierarchical taxonomy values same as in $source document")
+    public void verifyHierarchicalTaxonomyValuesFromTrustedDB(@Named("taxonomy") String taxonomy, @Named("source") String source) {
+    	getAdminPage().verifyHierarchicalTaxonomyValuesFromTrustedDB(taxonomy, source);
+    } 
 }
