@@ -83,4 +83,14 @@ public class AdminSteps extends AbstractSteps{
     public void verifyNonHierarchicalTaxonomyValuesFromTrustedDB(@Named("taxonomy") String taxonomy, @Named("source") String source) {
     	getAdminPage().verifyNonHierarchicalTaxonomyValuesFromTrustedDB(taxonomy, source);
     }
+    
+    @Then("the user should see that each hierarchical taxonomy should have atleast one layer of sub-grouping")
+    public void verifySubGroupingInHierarchicalTaxonomy() {
+    	getAdminPage().verifySubGroupingInHierarchicalTaxonomy();
+    }
+    
+    @Then("the user should see the selected hierarchical taxonomy values same as in $source document")
+    public void verifyHierarchicalTaxonomyValuesFromTrustedDB(@Named("taxonomy") String taxonomy, @Named("source") String source) {
+    	getAdminPage().verifyHierarchicalTaxonomyValuesFromTrustedDB(taxonomy, source);
+    } 
 }

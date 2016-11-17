@@ -65,14 +65,10 @@ public class FinancialsPage extends AbstractPage{
     
     public void verifyFinancialsHeadingText(String periodEndDate) {
 		try {
-			try {
-				Thread.sleep(3000L);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			String endDate = new String(new StringBuffer(periodEndDate.replace("-", " ")).append(" FINANCIALS"));
+			Thread.sleep(3000L);
+			String endDate = new String(new StringBuffer(periodEndDate).append(" FINANCIALS"));
 			assertEquals(endDate, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_heading_xpath")).getText());
-		} catch (NoSuchElementException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -104,8 +100,8 @@ public class FinancialsPage extends AbstractPage{
 	        assertEquals(periodEnd, Utils.formatMonth(getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_endDate")).getText()));
 	        assertEquals(financialYearEnd, Utils.formatMonth(getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_yearEnd")).getText()));
 	        assertEquals(currency, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_currency")).getText());
-	       // assertEquals(Utils.getOrderOfMagnitude(orderOfMagnitude), getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_orderOfMagnitude")).getText());
-	       // assertEquals(consolidated, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_consolidated")).getText());
+	        assertEquals(Utils.getOrderOfMagnitude(orderOfMagnitude), getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_orderOfMagnitude")).getText());
+	        assertEquals(consolidated, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_consolidated")).getText().toLowerCase());
 	        assertEquals(accountingStandards, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_accountingStandards")).getText());
 	        assertEquals(audited, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_audited")).getText().toLowerCase());
 	        assertEquals(auditedBy, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_auditedBy")).getText());
@@ -142,18 +138,23 @@ public class FinancialsPage extends AbstractPage{
         Boolean audited = new Boolean(getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_audited")).getText().toLowerCase());
         String auditedBy = getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_auditedBy")).getText();
         if(audited){
-            assertNotEquals("",auditedBy);
+            assertNotEquals("", auditedBy);
         }else {
-            assertEquals("",auditedBy);
+            assertEquals("", auditedBy);
         }
     }
     
-	public void clickPeriodEndDate(String date) {    	
+	public void clickPeriodEndDate(String date) { 
+		Boolean flag = false;
     	List<WebElement> displayDates = getDriver().findElements(FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_endDate_leftSideMenu_xpath"));
-    	for(int index = 0; index<displayDates.size(); index++) {
+    	for(int index = 0; index < displayDates.size(); index++) {
     		if (displayDates.get(index).getText().equals(date)) {
     			attemptClickTheWebElement(displayDates.get(index));
+    			flag = true;
     		}
+    	}
+    	if(!flag) {
+    		assertTrue("The date " + date + " is not available in the Financial page.", false);
     	}
     }
   }

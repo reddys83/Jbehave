@@ -1240,10 +1240,10 @@ public class ResultsPage extends AbstractPage {
         }
         return null;
     }
-    
+
     public void verifyToolTipInRoutingCodeResultsPage(String tooltip, By by) {
     	assertEquals(tooltip, getDriver().findElement(by).getAttribute("title"));
-    } 
+    }
 
     public void verifyResultsPage() {
 		assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingCodeResultsHeader_view_mode")).getText().contains("Routing Code results for"));

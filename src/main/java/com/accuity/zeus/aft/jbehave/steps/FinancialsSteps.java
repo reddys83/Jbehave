@@ -32,8 +32,8 @@ public class FinancialsSteps  extends AbstractSteps{
         getFinancialsPage().verifyAuditedByField();
     }
     
-    @When("the user clicks on <periodEndDate> on the left navigation")
-    public void clickPeriodEndDate(@Named("periodEndDate") String periodEndDate){
-    	getFinancialsPage().clickPeriodEndDate(periodEndDate);
+    @When("the user clicks on <displayDate> on the left navigation")
+    public void clickPeriodEndDate(@Named("displayDate") String displayDate){
+    	getFinancialsPage().clickPeriodEndDate(displayDate);
     }
 }

@@ -137,14 +137,14 @@ public class Utils {
 
     public static String getOrderOfMagnitude(String key){
         if(orderOfMagnitude.isEmpty()) {
-            orderOfMagnitude.put("1", "Units");
-            orderOfMagnitude.put("2", "Thousands ");
-            orderOfMagnitude.put("3", "Millions");
-            orderOfMagnitude.put("4", "Billions");
-            orderOfMagnitude.put("5", "Trillions");
-            orderOfMagnitude.put("6", "Quadrillions");
-            orderOfMagnitude.put("7", "Quintillions");
-            orderOfMagnitude.put("8", "Sextillions");
+            orderOfMagnitude.put("0", "Units");
+            orderOfMagnitude.put("3", "Thousands ");
+            orderOfMagnitude.put("6", "Millions");
+            orderOfMagnitude.put("9", "Billions");
+            orderOfMagnitude.put("12", "Trillions");
+            orderOfMagnitude.put("15", "Quadrillions");
+            orderOfMagnitude.put("18", "Quintillions");
+            orderOfMagnitude.put("21", "Sextillions");
         }
         return orderOfMagnitude.get(key);
     }
