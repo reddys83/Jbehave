@@ -93,7 +93,7 @@ Examples:
 |444|FID|444|444-505|
 
 
-Scenario: Adding new location and location address for both depositing entity type ana non depositing entity type.
+Scenario: Adding new location and location address for both depositing entity type ana non depositing entity type for Office.
 1- Verify Office Address Type dropdown values are from lookup ADDRESS_TYPE
 2- Verify that the user should be able to Add new address row for an office location
 3- Verify User can select and save values for Type, Address Line 1, Address Line 2, Address Line 3, Address Line 4, Country,Area, Subarea, City, PostalCode, PostalCodeSuffix and Info

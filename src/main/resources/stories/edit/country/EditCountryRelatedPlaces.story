@@ -52,7 +52,7 @@ Examples:
 |country|PlaceType|countryPlaces|areaPlaces|
 |Anguilla|Capital City|Algeria|Blida|
 
-Scenario: Verify the user is able to save the documetn with valid inputs
+Scenario: Verify the user is able to save the country document with valid inputs for related places
 Meta:
 Given a user is on the search page
 When the user clicks on the data tab in the search page
