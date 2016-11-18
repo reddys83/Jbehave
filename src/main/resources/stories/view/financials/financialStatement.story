@@ -38,8 +38,7 @@ And the user clicks on the search button
 Then the user should see the search results for the institution
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the financials link in the legal entity page
-When the user clicks on the <financialStatementDate> in financial page
-Then the user should see order of Type Name groupings is as per the corresponding lookup FINANCIAL_LINE_ITEM_TYPE 
+When the user clicks on the <financialStatementDate> in financial page 
 Then the user should see the line items retrieved from trusted document
 
 Examples:

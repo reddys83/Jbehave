@@ -4,7 +4,6 @@ import com.accuity.zeus.aft.io.ApacheHttpClient;
 import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.FinancialsIdentifiers;
-import com.accuity.zeus.aft.jbehave.identifiers.RoutingCodeIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -136,35 +135,4 @@ public class FinancialsPage extends AbstractPage{
 		}
 	}
 
-	public void verifyLineItemTypeValuesFromLoopup(String source, String entityFid) {
-		try {
-			List<String> lineItemTypeFidDb = new ArrayList<String>();
-			List<String> lineItemTypeFidLookup = new ArrayList<String>();
-			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("fid", entityFid));
-			nvPairs.add(new BasicNameValuePair("source", source));
-			Thread.sleep(3000L);
-			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"get line items type fid values", nvPairs);
-			Document document2 = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
-					"get line items type lookup Values", nvPairs);
-			if (document != null) {
-				for (int i = 0; i < document.getElementsByTagName("items").getLength(); i++) {
-					lineItemTypeFidDb
-							.add(document.getFirstChild().getChildNodes().item(i).getFirstChild().getTextContent());
-				}
-				for (int x = 0; x < document2.getElementsByTagName("lineItem").getLength(); x++) {
-					lineItemTypeFidLookup
-							.add(document2.getFirstChild().getChildNodes().item(x).getFirstChild().getTextContent());
-				}
-				for (int y = 0; y < document.getElementsByTagName("items").getLength(); y++) {
-					//assertTrue((lineItemTypeFidDb.get(y).contains(lineItemTypeFidLookup.get(y))));
-				}
-			} else {
-				assertTrue(source + "document is null", false);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
   }
