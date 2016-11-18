@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.text.ParseException;
 @Component
 public class Utils {
 
@@ -111,7 +113,24 @@ public class Utils {
           return null;
       }
     }
+ 
+public static String formatMonth(String inputDate){
 
+        String[] dateParts = inputDate.split(" ");
+        String formattedMonth  = null;
+        try {
+            Date date = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(dateParts[1]);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int month = cal.get(Calendar.MONTH)+1;
 
+            formattedMonth = month<10 ? "0"+month:""+month;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dateParts[0]+"-"+formattedMonth+"-"+dateParts[2];
+
+    } 
 
 }

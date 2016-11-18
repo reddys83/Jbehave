@@ -17,6 +17,7 @@ import org.w3c.dom.Document;
 import java.util.ArrayList;
 import static org.junit.Assert.assertTrue;
 import java.util.List;
+import com.accuity.zeus.aft.commons.Utils;
 
 import static org.junit.Assert.assertEquals;
 
@@ -60,7 +61,7 @@ public class FinancialsPage extends AbstractPage{
             }
     }
     
-    public void verifyMissingItemsFromTrusted(String fid, String source) {
+    public void verifyMissingItemsFromTrusted(String fid,String displayDate, String source) {
 		String reason;
 		String alternateEntity;
 		String alternateStatement;
@@ -70,16 +71,18 @@ public class FinancialsPage extends AbstractPage{
 		reason = (lineItemCols.get(0).getText());
 		alternateEntity = (lineItemCols.get(1).getText());
 		alternateStatement = (lineItemCols.get(2).getText());
-		verifyMissingItemsValuesFromDB(fid, source, reason, alternateEntity, alternateStatement);
+		verifyMissingItemsValuesFromDB(fid, displayDate, source, reason, alternateEntity, alternateStatement);
 	}
 
-	public void verifyMissingItemsValuesFromDB(String fid, String source, String reason, String alternateEntity,
+	public void verifyMissingItemsValuesFromDB(String fid, String displayDate, String source, String reason, String alternateEntity,
 			String alternatestatement) {
 		String missingItemsValue;
 		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("fid", fid));
 			nvPairs.add(new BasicNameValuePair("source", source));
+			System.out.println(Utils.formatMonth(displayDate));
+			nvPairs.add(new BasicNameValuePair("endDate", Utils.formatMonth(displayDate))); 
 			Thread.sleep(5000L);
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get missing items values", nvPairs);

@@ -21,8 +21,8 @@ public class FinancialsSteps  extends AbstractSteps{
     }
     
     @Then("the user should see the missing items retrieved from $source document")
-	public void verifyHistoryValuesFromTrusted(@Named("entityFid") String entityFid, @Named("source") String source) {
-		getFinancialsPage().verifyMissingItemsFromTrusted(entityFid, source);
+	public void verifyHistoryValuesFromTrusted(@Named("fid") String fid,@Named("displayDate") String displayDate, @Named("source") String source) {
+		getFinancialsPage().verifyMissingItemsFromTrusted(fid,displayDate, source);
 	}
 
 	@When("the user clicks on 'Alternate of Statement' hyperlink")

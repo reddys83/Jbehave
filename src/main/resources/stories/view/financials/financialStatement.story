@@ -30,8 +30,7 @@ Examples:
 Scenario:
 User should verify
 a)Missing Items are retrieved from trusted document
-b)User is taken to the details screen for the linked Financial Statement when User selects the hyperlink 'Alternate of Statement' field value
-c)User is taken to the Basic Info screen of the corresponding legal entity when User selects the hyperlink 'Alternate Entity' field value
+b)User is taken to the Basic Info screen of the corresponding legal entity when User selects the hyperlink 'Alternate Entity' field value
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
@@ -45,6 +44,14 @@ Then the user should see the <displayDate> should be the prefix to the Section H
 Then the user should see the missing items retrieved from trusted document
 When the user clicks on 'Alternate Entity' hyperlink
 Then the user should see Legal Entity basic info page is dispayed
+
+Examples:
+|entity|searchBy|fid|displayDate|
+|237381|fid|237381|2010 DEC 31|
+
+Scenario:User should verify
+a)User is taken to the details screen for the linked Financial Statement when User selects the hyperlink 'Alternate of Statement' field value
+Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -56,5 +63,5 @@ When the user clicks on 'Alternate of Statement' hyperlink
 Then the user should see details screen for the linked Financial Statement is displayed
 
 Examples:
-|entity|searchBy|fid|entityFid|displayDate|
-|237381|fid|237381|237381-20101231-1|2010 DEC 31|
+|entity|searchBy|fid|displayDate|
+|237381|fid|237381|2010 DEC 31|
