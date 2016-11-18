@@ -35,6 +35,37 @@ public class FinancialsPage extends AbstractPage {
 		return null;
 	}
 
+	public void verifyLegalEntityFinancialStatements(String fid) {
+		ArrayList<String> periodEndDateFromDB = new ArrayList<>();
+		List<NameValuePair> nvPairs = new ArrayList<>();
+		nvPairs.add(new BasicNameValuePair("fid", fid));
+		nvPairs.add(new BasicNameValuePair("source", "trusted"));
+		try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		List<WebElement> periodEndDate = getDriver().findElements(
+				FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_EndDate_leftSideMenu_xpath"));
+
+		Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+				"get legalEntity financialStatements periodEndDate", nvPairs);
+		for (int j = 0; j < document.getElementsByTagName("periodEnd").getLength(); j++) {
+			periodEndDateFromDB.add(document.getElementsByTagName("periodEnd").item(j).getTextContent());
+		}
+		if (periodEndDateFromDB.size() >= 1) {
+			assertEquals(periodEndDateFromDB.get(0),
+					getDriver()
+							.findElement(FinancialsIdentifiers
+									.getObjectIdentifier("financialStatement_default_selected_endDate_xpath"))
+							.getText());
+		}
+		for (int i = 0; i < periodEndDate.size(); i++) {
+			assertEquals(document.getElementsByTagName("periodEnd").item(i).getTextContent(),
+					periodEndDate.get(i).getText());
+		}
+	}
+
 	public void verifyMissingItemsFromTrusted(String fid, String source) {
 		String reason;
 		String alternateEntity;
@@ -76,7 +107,7 @@ public class FinancialsPage extends AbstractPage {
 					case "statementType":
 						assertTrue(alternatestatement.contains(missingItemsValue));
 						break;
-						
+
 					case "periodEndDate":
 						SimpleDateFormat actualMissingItemsValue = new SimpleDateFormat("yyyy-MM-dd");
 						SimpleDateFormat newMissingItemsValue = new SimpleDateFormat("yyyy MMM dd");
@@ -95,14 +126,12 @@ public class FinancialsPage extends AbstractPage {
 
 	public String getAlternateEntityLinkText() {
 		return getDriver()
-				.findElement(
-						FinancialsIdentifiers.getObjectIdentifier("financialStatement_missingItem_entity_link"))
-				.getText();
+				.findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_missingItem_entity_link")).getText();
 	}
 
 	public String alternateStatementName() {
-		return getDriver().findElement(FinancialsIdentifiers
-				.getObjectIdentifier("financialStatement_missingItem_alternateStatement_link")).getText();
+		return getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_missingItem_alternateStatement_link"))
+				.getText();
 	}
 
 	public void verifyLegalEntityNameBasicInfoPage(String financialAlternateEntityName) {
@@ -110,39 +139,40 @@ public class FinancialsPage extends AbstractPage {
 				.getAttribute("class").equals("selected"));
 		assertTrue(getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("legalEntity_basicInfo_label"))
 				.getText().equals("BASIC INFO"));
-		
 		assertTrue(getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("alternateEntity_text_value"))
 				.getText().equals(financialAlternateEntityName));
 	}
 
 	public void verifyFinancialMissingPage(String financialAlternateStatementName,
 			String financialAlternateEntityName) {
-		
 		assertTrue(getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("alternateEntity_text_value"))
 				.getText().equals(financialAlternateEntityName));
 		String[] financialAlternateStatementDate = financialAlternateStatementName.split(",");
-		assertTrue((getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financial_missing_item_statement_header")).getText().toUpperCase()).contains(financialAlternateStatementDate[1].toUpperCase().trim()));
+		assertTrue((getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financial_missing_item_statement_header"))
+						.getText().toUpperCase()).contains(financialAlternateStatementDate[1].toUpperCase().trim()));
 	}
-	
-	public void clickPeriodEndDate(String date) { 
+
+	public void clickPeriodEndDate(String date) {
 		Boolean flag = false;
-    	List<WebElement> displayDates = getDriver().findElements(FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_endDate_leftSideMenu_xpath"));
-    	for(int index = 0; index < displayDates.size(); index++) {
-    		if (displayDates.get(index).getText().equals(date)) {
-    			attemptClickTheWebElement(displayDates.get(index));
-    			flag = true;
-    		}
-    	}
-    	if(!flag) {
-    		assertTrue("The date " + date + " is not available in the Financial page.", false);
-    	}
-    }
-	
+		List<WebElement> displayDates = getDriver().findElements(
+				FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_endDate_leftSideMenu_xpath"));
+		for (int index = 0; index < displayDates.size(); index++) {
+			if (displayDates.get(index).getText().equals(date)) {
+				attemptClickTheWebElement(displayDates.get(index));
+				flag = true;
+			}
+		}
+		if (!flag) {
+			assertTrue("The date " + date + " is not available in the Financial page.", false);
+		}
+	}
+
 	public void verifyFinancialMissingHeading(String periodEndDate) {
 		try {
 			Thread.sleep(3000L);
 			String endDate = new String(new StringBuffer(periodEndDate).append(" MISSING"));
-			assertEquals(endDate, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financial_missing_item_statement_header")).getText());
+			assertEquals(endDate,getDriver().findElement(
+							FinancialsIdentifiers.getObjectIdentifier("financial_missing_item_statement_header")).getText());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
