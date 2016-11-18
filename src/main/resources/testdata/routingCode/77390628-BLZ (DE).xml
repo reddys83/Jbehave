@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routingCode deleted="false" fid="C-233987" id="c0344ac5-d048-464d-96cb-a7abd3db1b32" resource="/routingCode/id/c0344ac5-d048-464d-96cb-a7abd3db1b32" source="trusted" tfpid="BLZ-77390628">
+    <codeType>BLZ (DE)</codeType>
+    <codeTypeDescription>BLZ (DE)</codeTypeDescription>
+    <codeValue>77390628</codeValue>
+    <codeAlternateForms>
+        <codeAlternateForm type="fdb_legacy">773 906 28</codeAlternateForm>
+        <codeAlternateForm type="tfp_legacy">773 906 28</codeAlternateForm>
+    </codeAlternateForms>
+    <codeStatus>active</codeStatus>
+    <accountEligible>false</accountEligible>
+    <paymentSystems>
+        <paymentSystem>
+            <product>
+                <name>
+                    <type>Display Name</type>
+                    <value>default</value>
+                </name>
+            </product>
+            <useCodeForm>default</useCodeForm>
+            <codeSystemMembership>Direct Participant</codeSystemMembership>
+            <codeSystemStatus>active</codeSystemStatus>
+        </paymentSystem>
+    </paymentSystems>
+    <relatedCodes>
+        <relation>
+            <routingCode>
+                <link href="/routingCode/id/d266fb55-16be-49ba-8e17-b8ea80892ccb" rel="src"/>
+            </routingCode>
+            <context>ERP Override</context>
+        </relation>
+        <relation>
+            <routingCode>
+                <link href="/routingCode/id/7a15cfd3-bdc1-4e7d-9b64-ed55385f19fd" rel="src"/>
+            </routingCode>
+            <context>IBAN</context>
+        </relation>
+        <relation>
+            <routingCode>
+                <link href="/routingCode/id/7a15cfd3-bdc1-4e7d-9b64-ed55385f19fd" rel="src"/>
+            </routingCode>
+            <context>IBAN Code Mask</context>
+        </relation>
+    </relatedCodes>
+    <assignedInstitution>
+        <link href="/legalEntity/id/65cbc471-cc6a-4b6c-8e27-488ced3535dd" rel="src"/>
+    </assignedInstitution>
+    <usageLocations>
+        <usageLocation primaryAssignee="true" rankAtLocation="1">
+            <presence>
+                <link href="/office/id/3b19f4e0-a781-4a5e-a839-715f8b1e04f0" rel="src"/>
+            </presence>
+            <additionalInfo>Eigen</additionalInfo>
+        </usageLocation>
+    </usageLocations>
+</routingCode>

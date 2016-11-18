@@ -60,7 +60,8 @@ public class RoutingCodeSteps extends AbstractSteps {
 	@When("the user clicks on the legal entity link in the routing code page header")
     public void clickonHeaderLink()
     {
-        getRoutingCodePage().clickonHeaderLink();
+		setLegalEntityPage(getRoutingCodePage().clickonHeaderLink());
+
     }
 
     @When("the user clicks on the routingCode usages link in the navigation bar")

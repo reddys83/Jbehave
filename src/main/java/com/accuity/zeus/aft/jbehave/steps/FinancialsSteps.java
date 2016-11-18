@@ -22,7 +22,7 @@ public class FinancialsSteps  extends AbstractSteps{
 	public void clickLinkAlternateStatement(){
 		try{
 			financialAlternateStatementName = getFinancialsPage().alternateStatementName();
-		getDataPage().attemptClick(FinancialsIdentifiers.getObjectIdentifier("financialStatement_missingItem_alternateStatement_link_xpath"));
+		getDataPage().attemptClick(FinancialsIdentifiers.getObjectIdentifier("financialStatement_missingItem_alternateStatement_link"));
 		Thread.sleep(2000L);
 		}
 		catch(Exception e){
@@ -33,7 +33,7 @@ public class FinancialsSteps  extends AbstractSteps{
 	@When("the user clicks on 'Alternate Entity' hyperlink")
 	public void clickLinkAlternateEntity(){
 		financialAlternateEntityName = getFinancialsPage().getAlternateEntityLinkText();
-		getDataPage().attemptClick(FinancialsIdentifiers.getObjectIdentifier("financialStatement_missingItem_entity_link_xpath"));
+		getDataPage().attemptClick(FinancialsIdentifiers.getObjectIdentifier("financialStatement_missingItem_entity_link"));
 	}
 	
 	@Then("the user should see Legal Entity basic info page is dispayed")
@@ -46,13 +46,14 @@ public class FinancialsSteps  extends AbstractSteps{
 		getFinancialsPage().verifyFinancialMissingPage(financialAlternateStatementName,financialAlternateEntityName);
 	}
 	
-	@When("the user clicks on <periodEndDate> on the left navigation")
-    public void clickPeriodEndDate(@Named("periodEndDate") String periodEndDate){
-    	getFinancialsPage().clickPeriodEndDate(periodEndDate);
+	@When("the user clicks on <displayDate> on the left navigation")
+    public void clickPeriodEndDate(@Named("displayDate") String displayDate){
+    	getFinancialsPage().clickPeriodEndDate(displayDate);
     }
 	
 	@Then("the user should see the <displayDate> should be the prefix to the Section Header 'MISSING'")
-	public void verifyFinancialsHeading(@Named("displayDate") String displayDate) {
-		getFinancialsPage().verifyFinancialsHeadingText(displayDate);
+	public void verifyFinancialMissingHeading(@Named("displayDate") String displayDate) {
+		getFinancialsPage().verifyFinancialMissingHeading(displayDate);
 	}
+	
 }

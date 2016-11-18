@@ -158,6 +158,32 @@ public class RoutingCodeIdentifiers {
         hmap.put("view_history_event_table", By.xpath("//*[@id='routingCodeHistory']//tr"));
         hmap.put("view_history_usage_table", By.xpath("//*[@id='routingCodeHistory']//div[@class='container']//tbody//tr"));
 
+        hmap.put("edit_routingcode_existing_alternate_code_type",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//select[@id='alternateCodeType']"));
+        hmap.put("edit_routingcode_existing_alternate_code_value",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//input[@name='alternateCodeValue']"));
+        hmap.put("edit_routingcode_new_alternate_code_type",By.xpath("//*[@id='additionalAlternateCodes']/tr[@class='new']//select[@id='alternateCodeType']"));
+        hmap.put("edit_routingcode_new_alternate_code_value",By.xpath("//*[@id='additionalAlternateCodes']/tr[@class='new']//input"));
+        hmap.put("edit_routingcode_add_new_alternate_code",By.xpath("//*[@id='add-alternateCodes']"));
+        hmap.put("edit_routingcode_delete_first_row_alternate_code",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//button"));
+        hmap.put("edit_routingcode_delete_second_row_alternate_code",By.xpath("//*[@id='additionalAlternateCodes']/tr[2]//button"));
+        hmap.put("edit_routingCode_delete_yes_button_id_click", By.xpath("//*[@id='yes-button']"));
+        hmap.put("edit_routingcode_alternate_code_type",By.xpath("//*[@id='alternateCodeType']"));
+        hmap.put("edit_routingcode_alternate_code_type_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='alternateCodeTypeError']"));
+        hmap.put("edit_routingcode_alternate_code_value_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='alternateCodeValueError']"));
+        hmap.put("edit_routingcode_page_add_new_relatedcodes_btn", By.xpath("//*[@id='add-relatedCodes']"));
+        hmap.put("edit_routingcode_page_relatedcodes_context_dropdown", By.xpath("//*[@id='additionalRelatedCodes']/tr//select[@id='relatedCodeContext']"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_context_dropdown", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//select[@id='relatedCodeContext']"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_chosen_Select_input", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//div[@class='chosen-search']/input"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_chosen_Select_options", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//select[@id='relatedCode']/option"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_chosen_Select_dropdown", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//div[@id='relatedCode_chosen']//ul/li"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_chosen_Select_link", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//div[@id='relatedCode_chosen']/a"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_type", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//input[@id='relatedCodeType']"));
+        hmap.put("first_row_existing_related_codes_delete_button", By.xpath("//*[@id='additionalRelatedCodes']/tr[1]//button[@title='Delete Row']"));
+        hmap.put("edit_routingcode_page_relatedcodes_table", By.xpath("//*[@id='additionalRelatedCodes']/tr"));
+        hmap.put("edit_routingcode_page_relatedcodes_no_searchResults_msg", By.xpath("//*[@id='relatedCode_chosen']/div/ul/li[@class='no-results']"));
+        hmap.put("edit_routingcode_page_relatedcode_required_errorMessage", By.xpath("//*[@data-error_id='relatedCodeError']"));
+        hmap.put("edit_routingcode_page_relatedcode_context_required_errorMessage", By.xpath("//*[@data-error_id='relatedCodeContextError']"));
+
+
     }
 
     public static By getObjectIdentifier(String key) {
