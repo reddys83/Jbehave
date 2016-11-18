@@ -83,4 +83,4 @@ Then the user reverts the changes to the document
 
 Examples:
 |entity|searchBy|routingCode|codeType|
-|083905216|Routing Code|083905216|ABA|
+|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|
