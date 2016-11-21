@@ -22,9 +22,9 @@ public class FinancialsSteps  extends AbstractSteps{
 		getFinancialsPage().verifyLineItemsFromTrusted(entityFid, source);
 	}
 
-	@When("the user clicks on the <financialStatementDate> in financial page")
-	public void clickOnFinancialsStatement(@Named("financialStatementDate") String financialStatementDate) {
-		getFinancialsPage().clickOnFinancialStatement(financialStatementDate);
+	@When("the user clicks on <displayDate> on the left navigation")
+	public void clickPeriodEndDate(@Named("displayDate") String displayDate) {
+		getFinancialsPage().clickPeriodEndDate(displayDate);
 	}
 
 }

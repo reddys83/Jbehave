@@ -8,6 +8,7 @@ import com.accuity.zeus.aft.rest.RestClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
@@ -59,7 +60,7 @@ public class FinancialsPage extends AbstractPage{
     }
     
 	public void verifyLineItemsFromTrusted(String fid, String source) {
-
+try{
 		List<String> lineItemType = new ArrayList<String>();
 		List<String> lineItemCalculated = new ArrayList<String>();
 		List<String> lineItemValue = new ArrayList<String>();
@@ -67,9 +68,11 @@ public class FinancialsPage extends AbstractPage{
 		List<String> lineItemNotes = new ArrayList<String>();
 		List<WebElement> lineItemRows = getDriver()
 				.findElements(FinancialsIdentifiers.getObjectIdentifier("view_financial_line_item_table"));
+		System.out.println(lineItemRows.size());
 		for (int index = 0; index < lineItemRows.size(); index++) {
 			List<WebElement> lineItemCols = lineItemRows.get(index).findElements(By.tagName("td"));
 			lineItemType.add(lineItemCols.get(0).getText());
+			System.out.println(lineItemCols.get(0).getText());
 			lineItemCalculated.add(lineItemCols.get(1).getText());
 			lineItemValue.add(lineItemCols.get(2).getText());
 			lineItemNormalized.add(lineItemCols.get(3).getText());
@@ -77,6 +80,11 @@ public class FinancialsPage extends AbstractPage{
 		}
 		verifyLineItemsValuesFromDB(fid, source, lineItemType, lineItemCalculated, lineItemValue, lineItemNormalized,
 				lineItemNotes);
+}
+catch (StaleElementReferenceException e){
+	e.printStackTrace();
+}
+	
 	}
     
 	public void verifyLineItemsValuesFromDB(String fid, String source, List<String> lineItemType,
@@ -125,13 +133,18 @@ public class FinancialsPage extends AbstractPage{
 		}
 	}
     
-	public void clickOnFinancialStatement(String financialStatementDate) {
-		List<WebElement> periodEndDate = getDriver().findElements(
-				FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_EndDate_leftSideMenu_xpath"));
-		for (int i = 0; i < periodEndDate.size(); i++) {
-			if (financialStatementDate.equals(periodEndDate.get(i).getText())) {
-				periodEndDate.get(i).click();
+	public void clickPeriodEndDate(String date) {
+		Boolean flag = false;
+		List<WebElement> displayDates = getDriver().findElements(
+				FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_endDate_leftSideMenu_xpath"));
+		for (int index = 0; index < displayDates.size(); index++) {
+			if (displayDates.get(index).getText().equals(date)) {
+				attemptClickTheWebElement(displayDates.get(index));
+				flag = true;
 			}
+		}
+		if (!flag) {
+			assertTrue("The date " + date + " is not available in the Financial page.", false);
 		}
 	}
 

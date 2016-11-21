@@ -15,6 +15,7 @@ public class FinancialsIdentifiers {
         hmap.put("financialStatement_period_EndDate_leftSideMenu_xpath", By.xpath((".//*[@id='results']//ul[@id='periodEnd']/li")));
         hmap.put("financialStatement_default_selected_endDate_xpath", By.xpath(".//*[@id='results']//ul[@id='periodEnd']/li[@class='selected']"));
         hmap.put("view_financial_line_item_table", By.xpath("//*[@id='financialStatementLineItems']//tbody/tr"));
+        hmap.put("financialStatement_period_endDate_leftSideMenu_xpath", By.xpath((".//*[@id='results']//*[@id='periodEnd']/li"))); 
     }
 
     public static By getObjectIdentifier(String key) {
