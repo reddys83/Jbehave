@@ -27,4 +27,9 @@ public class FinancialsSteps  extends AbstractSteps{
 		getFinancialsPage().clickPeriodEndDate(displayDate);
 	}
 
+	@Then("the user should see the line items are sorted as per lookup")
+	public void verifyLineItemsSort() {
+		getFinancialsPage().verifyLineItemsSort();
+	}
+	
 }

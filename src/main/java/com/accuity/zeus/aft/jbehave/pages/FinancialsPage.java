@@ -66,13 +66,19 @@ try{
 		List<String> lineItemValue = new ArrayList<String>();
 		List<String> lineItemNormalized = new ArrayList<String>();
 		List<String> lineItemNotes = new ArrayList<String>();
+	
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		List<WebElement> lineItemRows = getDriver()
 				.findElements(FinancialsIdentifiers.getObjectIdentifier("view_financial_line_item_table"));
 		System.out.println(lineItemRows.size());
 		for (int index = 0; index < lineItemRows.size(); index++) {
 			List<WebElement> lineItemCols = lineItemRows.get(index).findElements(By.tagName("td"));
 			lineItemType.add(lineItemCols.get(0).getText());
-			System.out.println(lineItemCols.get(0).getText());
 			lineItemCalculated.add(lineItemCols.get(1).getText());
 			lineItemValue.add(lineItemCols.get(2).getText());
 			lineItemNormalized.add(lineItemCols.get(3).getText());
@@ -148,4 +154,69 @@ catch (StaleElementReferenceException e){
 		}
 	}
 
+	public void verifyLineItemsSort(){
+		
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			Thread.sleep(5000L);
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get line items type lookup Values", nvPairs);
+			if (document != null) {
+				//System.out.println("length");
+				//System.out.println(document.getElementsByTagName("lineItem").getLength());
+				List<String> lineItemLookup = new ArrayList<String>();
+				List<String> lineItemFromUi = new ArrayList<String>();
+				for (int i = 0; i < document.getElementsByTagName("lineItem").getLength(); i++) {
+					lineItemLookup.add(document.getElementsByTagName("lineItem").item(i).getTextContent());
+				}
+				
+				List<WebElement> lineItemRows = getDriver()
+						.findElements(FinancialsIdentifiers.getObjectIdentifier("view_financial_line_item_table"));
+				System.out.println(lineItemRows.size());
+				for (int index = 0; index < lineItemRows.size(); index++) {
+					List<WebElement> lineItemCols = lineItemRows.get(index).findElements(By.tagName("td"));
+					lineItemFromUi.add(lineItemCols.get(0).getText());
+				}
+				
+				System.out.println(document.getElementsByTagName("lineItem").getLength());
+				//compare
+				for(String temp: lineItemLookup ){
+				
+					if((lineItemFromUi.contains(temp))){
+						for(int i=1;i<=lineItemFromUi.size();i++){
+							for(int x=0;i<lineItemFromUi.size();x++){
+								//int firstIndexUiInLookUp=lineItemLookup.indexOf(lineItemFromUi.get(0));
+								System.out.println(x);
+								System.out.println(i);
+								System.out.println("**************");
+								System.out.println((lineItemLookup.indexOf(lineItemFromUi.get(x))));
+								System.out.println(lineItemLookup.indexOf(lineItemFromUi.get(i)));
+								System.out.println();
+								System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+								System.out.println(lineItemFromUi.get(x));
+								System.out.println(lineItemLookup.get(x));
+								System.out.println("%%%%%%%%%%%%%%%%%");
+								if((lineItemLookup.indexOf(lineItemFromUi.get(x)))>lineItemLookup.indexOf(lineItemFromUi.get(i))){
+									System.out.println("Failure");
+									System.out.println(lineItemFromUi.get(i));
+								}
+							}
+							
+						}
+						
+					}
+				}
+				
+				
+				//System.out.println(lineItemFromUi.get(0));
+				
+				
+				
+				}
+			}
+		
+	 catch(Exception e){
+		 e.printStackTrace();
+	 }
   }
+}
