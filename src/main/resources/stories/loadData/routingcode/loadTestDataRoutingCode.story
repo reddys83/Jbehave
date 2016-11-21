@@ -14,3 +14,4 @@ Examples:
 |DAAEDEDD435|Swift BIC|
 |HLFXGB21K03|SWIFT BIC|
 |77390628|BLZ (DE)|
+|001|AF Cheque Clearing Sys|

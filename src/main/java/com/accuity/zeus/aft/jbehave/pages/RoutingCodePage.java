@@ -719,7 +719,6 @@ public class RoutingCodePage extends AbstractPage {
 			nvPairs1.add(new BasicNameValuePair("source", "trusted"));
 			nvPairs2.add(new BasicNameValuePair("officeFid", officeFid));
 			nvPairs2.add(new BasicNameValuePair("source", "trusted"));
-			Thread.sleep(3000L);
 			
 			Document routingCodeAssignedInstitutionDoc = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routing code assigned institution",	nvPairs1);
 			String routingCodeAssignedInstitutionLink = routingCodeAssignedInstitutionDoc.getElementsByTagName("assignedInstitutionLink").item(0).getTextContent();
@@ -734,15 +733,9 @@ public class RoutingCodePage extends AbstractPage {
 
 			if (!override.isEmpty()) {
 				assertEquals(override + " should be the office name in the former usages page.", override, formerUsageOfficeName);
-			} else if (!prefix.isEmpty() && !suffix.isEmpty()) {
-				assertEquals(prefix + " " + legalTitle + " " + suffix + " should be the office name in the former usages page.",
-						prefix + " " + legalTitle + " " + suffix, formerUsageOfficeName);
-			} else if (!prefix.isEmpty() && suffix.isEmpty()) {
-				assertEquals(prefix + " " + legalTitle + " should be the office name in the former usages page.",
-						prefix + " " + legalTitle, formerUsageOfficeName);
-			} else if (prefix.isEmpty() && !suffix.isEmpty()) {
-				assertEquals(legalTitle + " " + suffix + " should be the office name in the former usages page.",
-						legalTitle + " " + suffix, formerUsageOfficeName);
+			} else if ((!prefix.isEmpty() && !suffix.isEmpty()) || (!prefix.isEmpty() && suffix.isEmpty()) || (prefix.isEmpty() && !suffix.isEmpty())) {
+				assertEquals((prefix + " " + legalTitle + " " + suffix).trim() + " should be the office name in the former usages page.",
+						(prefix + " " + legalTitle + " " + suffix).trim(), formerUsageOfficeName);
 			} else if (routingCodeAssignedInstitutionLink.equals(officeInstitutionLink)) {
 				assertEquals(officeName + " should be the office name in the former usages page.", officeName, formerUsageOfficeName);
 			} else {

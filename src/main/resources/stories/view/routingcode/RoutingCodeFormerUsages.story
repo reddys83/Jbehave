@@ -59,12 +59,11 @@ b) Verify the Office Title for Office name in the Former Usages page for the fol
    2. Prefix is prepended and suffix is appended with space with the Legal Title when override is null and either suffix or prefix is not null.
    3. Legal Title is the Office title when routing code institution and office institution link is not same, provided Office's override is null.
    4. Office Name is the Office title when routing code institution and office institution link is same, provided Office's override is null.
- 
+
 Given a user is on the search page
 When the user selects the <searchBy> from the dropdown
 When the user enters the <entity> in the typeahead
 And the user clicks on the search button
-When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
 When the user clicks on the former usages link in the navigation bar

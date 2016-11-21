@@ -55,8 +55,12 @@
     </usageLocations>
     <formerUsageLocations>
       <formerUsageLocation>
-       <presence> <link href="/office/id/657045be-e677-4e46-bcf4-d471a9b65c64" rel="src"> </link> </presence>
-       <department> <link href="/department/id/a9de4a11-fe8c-4123-a9a0-2e2d88312006" rel="src"> </link> </department>
+       <presence> 
+       	<link href="/office/id/657045be-e677-4e46-bcf4-d471a9b65c64" rel="src"/> 
+       </presence>
+       <department> 
+       	<link href="/department/id/a9de4a11-fe8c-4123-a9a0-2e2d88312006" rel="src"/> 
+       </department>
        <additionalInfo>testing comment</additionalInfo>
       </formerUsageLocation>
     </formerUsageLocations>
