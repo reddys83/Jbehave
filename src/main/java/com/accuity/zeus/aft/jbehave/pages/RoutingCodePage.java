@@ -706,5 +706,50 @@ public class RoutingCodePage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}	
+	}
+	
+	public void verifyOfficeTitleInFormerUsages(String routingCode, String routingCodeType, String formerUsageOfficeName) {
+		try {
+			Thread.sleep(5000L);
+			String officeFid = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_page_fid")).getText();
+			List<NameValuePair> nvPairs1 = new ArrayList<>();
+			List<NameValuePair> nvPairs2 = new ArrayList<>();
+			nvPairs1.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs1.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			nvPairs1.add(new BasicNameValuePair("source", "trusted"));
+			nvPairs2.add(new BasicNameValuePair("officeFid", officeFid));
+			nvPairs2.add(new BasicNameValuePair("source", "trusted"));
+			Thread.sleep(3000L);
+			
+			Document routingCodeAssignedInstitutionDoc = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get routing code assigned institution",	nvPairs1);
+			String routingCodeAssignedInstitutionLink = routingCodeAssignedInstitutionDoc.getElementsByTagName("assignedInstitutionLink").item(0).getTextContent();
+			Document officeInstitutionLinkDoc = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "get office institution link", nvPairs2);
+			String officeInstitutionLink = officeInstitutionLinkDoc.getElementsByTagName("officeInstitution").item(0).getTextContent();
+
+			String prefix = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_view_prefix_xpath")).getText();
+			String suffix = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_view_suffix_xpath")).getText();
+			String override = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_view_override_xpath")).getText();
+			String legalTitle = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicinfo_view_legal_title_value")).getText();
+			String officeName = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicinfo_view_office_name_value")).getText();
+
+			if (!override.isEmpty()) {
+				assertEquals(override + " should be the office name in the former usages page.", override, formerUsageOfficeName);
+			} else if (!prefix.isEmpty() && !suffix.isEmpty()) {
+				assertEquals(prefix + " " + legalTitle + " " + suffix + " should be the office name in the former usages page.",
+						prefix + " " + legalTitle + " " + suffix, formerUsageOfficeName);
+			} else if (!prefix.isEmpty() && suffix.isEmpty()) {
+				assertEquals(prefix + " " + legalTitle + " should be the office name in the former usages page.",
+						prefix + " " + legalTitle, formerUsageOfficeName);
+			} else if (prefix.isEmpty() && !suffix.isEmpty()) {
+				assertEquals(legalTitle + " " + suffix + " should be the office name in the former usages page.",
+						legalTitle + " " + suffix, formerUsageOfficeName);
+			} else if (routingCodeAssignedInstitutionLink.equals(officeInstitutionLink)) {
+				assertEquals(officeName + " should be the office name in the former usages page.", officeName, formerUsageOfficeName);
+			} else {
+				assertEquals(legalTitle + " should be the office name in the former usages page.", legalTitle, formerUsageOfficeName);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 }

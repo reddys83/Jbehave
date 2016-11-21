@@ -220,4 +220,9 @@ public class RoutingCodeSteps extends AbstractSteps {
 	public void verifyNAValueInDetailColumn() {
 		getDataPage().verifyElementIsDisplayed("Details (N/A)", RoutingCodeIdentifiers.getObjectIdentifier("view_routing_code_history_details_N/A"));
 	}
+	
+	@Then("the user should see the correct office title for office name in the former usages page")
+	public void verifyOfficeTitleInFormerUsages(@Named("routingCode") String routingCode, @Named("codeType") String routingCodeType) {
+		getRoutingCodePage().verifyOfficeTitleInFormerUsages(routingCode, routingCodeType, formerUsageOfficeName);
+	}
 }
