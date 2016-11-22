@@ -14,6 +14,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
+import com.accuity.zeus.aft.commons.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +100,7 @@ public class FinancialsPage extends AbstractPage{
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("fid", fid));
 			nvPairs.add(new BasicNameValuePair("source", "trusted"));
-			nvPairs.add(new BasicNameValuePair("displayDate", periodEndDate));
+			nvPairs.add(new BasicNameValuePair("displayDate", Utils.formatMonth(periodEndDate)));
 			Thread.sleep(3000L);
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get line items values", nvPairs);
