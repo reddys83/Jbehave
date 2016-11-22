@@ -28,8 +28,9 @@ Examples:
 |286840|fid|286840|
 
 Scenario: User should verify the following
-a)Line Item values (Type,Calculated,Value,NormalizedValue & Notes) should be displayed in UI from Trusted document
+a)Line Item values (Type, Calculated, Value, NormalizedValue & Notes) should be displayed in UI from Trusted document
 b)Type Name Fid values should be displayed from look up FINANCIAL_LINE_ITEM_TYPE
+c)Line Items should be sorted as per look up
 
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
