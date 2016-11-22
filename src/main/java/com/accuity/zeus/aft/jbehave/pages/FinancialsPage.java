@@ -177,12 +177,12 @@ public class FinancialsPage extends AbstractPage{
 					if (tempIndex == lineItemFromUi.size()) {
 						if ((lineItemLookup.indexOf(lineItemFromUi.get(tempIndex - 1))) < lineItemLookup
 								.indexOf(lineItemFromUi.get(count - 1))) {
-							assertTrue("Line Items Type is not sorted in order", false);
+							assertTrue("Line Items Type is not sorted in order: "+"Line No :"+lineItemFromUi.get(tempIndex - 1)+"Value :"+lineItemFromUi.get(tempIndex - 1), false);
 						}
 					} else {
-						if ((lineItemLookup.indexOf(lineItemFromUi.get(tempIndex))) < lineItemLookup
-								.indexOf(lineItemFromUi.get(count))) {
-							assertTrue("Line Items Type is not sorted in order", false);
+						if ((lineItemLookup.indexOf(lineItemFromUi.get(tempIndex))) < lineItemLookup.indexOf(lineItemFromUi.get(count))) {
+							assertTrue("Line Items Type is not sorted in order :"+lineItemLookup
+									.indexOf(lineItemFromUi.get(count))+"Line No :"+lineItemFromUi.get(tempIndex - 1)+"Value :"+lineItemFromUi.get(tempIndex - 1), false);
 						}
 						tempIndex++;
 					}
