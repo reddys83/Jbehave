@@ -5,6 +5,8 @@ import com.accuity.zeus.aft.io.Database;
 import com.accuity.zeus.aft.io.HeraApi;
 import com.accuity.zeus.aft.jbehave.identifiers.FinancialsIdentifiers;
 import com.accuity.zeus.aft.rest.RestClient;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.By;
@@ -59,49 +61,46 @@ public class FinancialsPage extends AbstractPage{
             }
     }
     
-	public void verifyLineItemsFromTrusted(String fid, String source) {
-try{
-		List<String> lineItemType = new ArrayList<String>();
-		List<String> lineItemCalculated = new ArrayList<String>();
-		List<String> lineItemValue = new ArrayList<String>();
-		List<String> lineItemNormalized = new ArrayList<String>();
-		List<String> lineItemNotes = new ArrayList<String>();
-	
+	public void verifyLineItemsFromTrusted(String periodEndDate, String fid, String source) {
 		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			List<String> lineItemType = new ArrayList<String>();
+			List<String> lineItemCalculated = new ArrayList<String>();
+			List<String> lineItemValue = new ArrayList<String>();
+			List<String> lineItemNormalized = new ArrayList<String>();
+			List<String> lineItemNotes = new ArrayList<String>();
+
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			List<WebElement> lineItemRows = getDriver()
+					.findElements(FinancialsIdentifiers.getObjectIdentifier("view_financial_line_item_table"));
+			for (int index = 0; index < lineItemRows.size(); index++) {
+				List<WebElement> lineItemCols = lineItemRows.get(index).findElements(By.tagName("td"));
+				lineItemType.add(lineItemCols.get(0).getText());
+				lineItemCalculated.add(lineItemCols.get(1).getText());
+				lineItemValue.add(lineItemCols.get(2).getText());
+				lineItemNormalized.add(lineItemCols.get(3).getText());
+				lineItemNotes.add(lineItemCols.get(4).getText());
+			}
+			verifyLineItemsValuesFromDB(periodEndDate, fid, source, lineItemType, lineItemCalculated, lineItemValue,
+					lineItemNormalized, lineItemNotes);
+		} catch (StaleElementReferenceException e) {
 			e.printStackTrace();
 		}
-		List<WebElement> lineItemRows = getDriver()
-				.findElements(FinancialsIdentifiers.getObjectIdentifier("view_financial_line_item_table"));
-		System.out.println(lineItemRows.size());
-		for (int index = 0; index < lineItemRows.size(); index++) {
-			List<WebElement> lineItemCols = lineItemRows.get(index).findElements(By.tagName("td"));
-			lineItemType.add(lineItemCols.get(0).getText());
-			lineItemCalculated.add(lineItemCols.get(1).getText());
-			lineItemValue.add(lineItemCols.get(2).getText());
-			lineItemNormalized.add(lineItemCols.get(3).getText());
-			lineItemNotes.add(lineItemCols.get(4).getText());
-		}
-		verifyLineItemsValuesFromDB(fid, source, lineItemType, lineItemCalculated, lineItemValue, lineItemNormalized,
-				lineItemNotes);
-}
-catch (StaleElementReferenceException e){
-	e.printStackTrace();
-}
-	
 	}
     
-	public void verifyLineItemsValuesFromDB(String fid, String source, List<String> lineItemType,
+	public void verifyLineItemsValuesFromDB(String periodEndDate, String fid, String source, List<String> lineItemType,
 			List<String> lineItemCalculated, List<String> lineItemValue, List<String> lineItemNormalized,
 			List<String> lineItemNotes) {
 		String lineItemsValue;
 		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("fid", fid));
-			nvPairs.add(new BasicNameValuePair("source", source));
-			Thread.sleep(5000L);
+			nvPairs.add(new BasicNameValuePair("source", "trusted"));
+			nvPairs.add(new BasicNameValuePair("displayDate", periodEndDate));
+			Thread.sleep(3000L);
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get line items values", nvPairs);
 			if (document != null) {
@@ -114,19 +113,19 @@ catch (StaleElementReferenceException e){
 						switch (document.getElementsByTagName("lineItems").item(0).getChildNodes().item(0)
 								.getChildNodes().item(childNode).getNodeName()) {
 						case "typeName":
-							assertEquals(lineItemsValue, lineItemType.get(i));
+							assertTrue(lineItemType.contains(lineItemsValue));
 							break;
 						case "calculated":
-							assertEquals(lineItemsValue, (lineItemCalculated.get(i).toLowerCase()));
+							assertTrue(lineItemCalculated.contains(StringUtils.capitalize(lineItemsValue)));
 							break;
 						case "normalizedValue":
-							assertEquals(lineItemsValue, (lineItemNormalized.get(i)));
+							assertTrue(lineItemNormalized.contains(lineItemsValue));
 							break;
 						case "value":
-							assertEquals(lineItemsValue, (lineItemValue.get(i)));
+							assertTrue(lineItemValue.contains(lineItemsValue));
 							break;
 						case "notes":
-							assertEquals(lineItemsValue.replaceAll("\\s{2,}", " "), lineItemNotes.get(i));
+							assertTrue(lineItemNotes.contains(lineItemsValue.replaceAll("\\s{2,}", " ")));
 							;
 							break;
 						}
@@ -154,69 +153,42 @@ catch (StaleElementReferenceException e){
 		}
 	}
 
-	public void verifyLineItemsSort(){
-		
+	public void verifyLineItemsSort() {
 		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
-			Thread.sleep(5000L);
+			Thread.sleep(3000L);
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get line items type lookup Values", nvPairs);
 			if (document != null) {
-				//System.out.println("length");
-				//System.out.println(document.getElementsByTagName("lineItem").getLength());
 				List<String> lineItemLookup = new ArrayList<String>();
 				List<String> lineItemFromUi = new ArrayList<String>();
-				for (int i = 0; i < document.getElementsByTagName("lineItem").getLength(); i++) {
-					lineItemLookup.add(document.getElementsByTagName("lineItem").item(i).getTextContent());
+				for (int indexDb = 0; indexDb < document.getElementsByTagName("lineItem").getLength(); indexDb++) {
+					lineItemLookup.add(document.getElementsByTagName("lineItem").item(indexDb).getTextContent());
 				}
-				
 				List<WebElement> lineItemRows = getDriver()
 						.findElements(FinancialsIdentifiers.getObjectIdentifier("view_financial_line_item_table"));
-				System.out.println(lineItemRows.size());
-				for (int index = 0; index < lineItemRows.size(); index++) {
-					List<WebElement> lineItemCols = lineItemRows.get(index).findElements(By.tagName("td"));
+				for (int indexUI = 0; indexUI < lineItemRows.size(); indexUI++) {
+					List<WebElement> lineItemCols = lineItemRows.get(indexUI).findElements(By.tagName("td"));
 					lineItemFromUi.add(lineItemCols.get(0).getText());
 				}
-				
-				System.out.println(document.getElementsByTagName("lineItem").getLength());
-				//compare
-				for(String temp: lineItemLookup ){
-				
-					if((lineItemFromUi.contains(temp))){
-						for(int i=1;i<=lineItemFromUi.size();i++){
-							for(int x=0;i<lineItemFromUi.size();x++){
-								//int firstIndexUiInLookUp=lineItemLookup.indexOf(lineItemFromUi.get(0));
-								System.out.println(x);
-								System.out.println(i);
-								System.out.println("**************");
-								System.out.println((lineItemLookup.indexOf(lineItemFromUi.get(x))));
-								System.out.println(lineItemLookup.indexOf(lineItemFromUi.get(i)));
-								System.out.println();
-								System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-								System.out.println(lineItemFromUi.get(x));
-								System.out.println(lineItemLookup.get(x));
-								System.out.println("%%%%%%%%%%%%%%%%%");
-								if((lineItemLookup.indexOf(lineItemFromUi.get(x)))>lineItemLookup.indexOf(lineItemFromUi.get(i))){
-									System.out.println("Failure");
-									System.out.println(lineItemFromUi.get(i));
-								}
-							}
-							
+				int tempIndex = 1;
+				for (int count = 0; count < lineItemFromUi.size(); count++) {
+					if (tempIndex == lineItemFromUi.size()) {
+						if ((lineItemLookup.indexOf(lineItemFromUi.get(tempIndex - 1))) < lineItemLookup
+								.indexOf(lineItemFromUi.get(count - 1))) {
+							assertTrue("Line Items Type is not sorted in order", false);
 						}
-						
+					} else {
+						if ((lineItemLookup.indexOf(lineItemFromUi.get(tempIndex))) < lineItemLookup
+								.indexOf(lineItemFromUi.get(count))) {
+							assertTrue("Line Items Type is not sorted in order", false);
+						}
+						tempIndex++;
 					}
 				}
-				
-				
-				//System.out.println(lineItemFromUi.get(0));
-				
-				
-				
-				}
 			}
-		
-	 catch(Exception e){
-		 e.printStackTrace();
-	 }
-  }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -18,8 +18,8 @@ public class FinancialsSteps  extends AbstractSteps{
     }
     
 	@Then("the user should see the line items retrieved from $source document")
-	public void verifyHistoryValuesFromTrusted(@Named("entityFid") String entityFid, @Named("source") String source) {
-		getFinancialsPage().verifyLineItemsFromTrusted(entityFid, source);
+	public void verifyLineItemsFromTrusted(@Named("displayDate") String displayDate,@Named("fid") String fid, @Named("source") String source) {
+		getFinancialsPage().verifyLineItemsFromTrusted(displayDate, fid, source);
 	}
 
 	@When("the user clicks on <displayDate> on the left navigation")
