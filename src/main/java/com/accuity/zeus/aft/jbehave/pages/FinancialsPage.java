@@ -100,19 +100,15 @@ public class FinancialsPage extends AbstractPage{
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("fid", fid));
 			nvPairs.add(new BasicNameValuePair("source", "trusted"));
-			nvPairs.add(new BasicNameValuePair("displayDate", Utils.formatMonth(periodEndDate)));
-			Thread.sleep(3000L);
+			nvPairs.add(new BasicNameValuePair("periodEndDate", Utils.formatMonth(periodEndDate)));
+			Thread.sleep(4000L);
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get line items values", nvPairs);
 			if (document != null) {
-				for (int i = 0; i < document.getElementsByTagName("lineItems").item(0).getChildNodes()
-						.getLength(); i++) {
-					for (int childNode = 0; childNode < document.getElementsByTagName("lineItems").item(0)
-							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
-						lineItemsValue = document.getElementsByTagName("lineItems").item(0).getChildNodes().item(i)
-								.getChildNodes().item(childNode).getTextContent().trim();
-						switch (document.getElementsByTagName("lineItems").item(0).getChildNodes().item(0)
-								.getChildNodes().item(childNode).getNodeName()) {
+				for (int i = 0; i < document.getElementsByTagName("items").getLength(); i++) {
+					for (int childNode = 0; childNode < document.getElementsByTagName("items").item(0).getChildNodes().getLength(); childNode++) {
+						lineItemsValue = document.getElementsByTagName("items").item(i).getChildNodes().item(childNode).getTextContent().trim();
+						switch (document.getElementsByTagName("items").item(0).getChildNodes().item(childNode).getNodeName()) {
 						case "typeName":
 							assertTrue(lineItemType.contains(lineItemsValue));
 							break;

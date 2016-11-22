@@ -173,7 +173,6 @@ public class XqueryMap {
         queryMap.put("get ABA code source lookup", "getABACodeSourceTypesFromLookup.xqy");
         queryMap.put("get related code context values from lookup", "getRoutingCodeRelatedCodeContextValuesFromLookup.xqy");
         queryMap.put("get line items values", "getLineItemValues.xqy");
-        queryMap.put("get line items type fid values", "getTypeFidValues.xqy");
         queryMap.put("get line items type lookup Values", "getLineItemTypeFromLookup.xqy");
     }
 
