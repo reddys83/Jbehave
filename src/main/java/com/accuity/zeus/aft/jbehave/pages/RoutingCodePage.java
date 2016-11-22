@@ -730,18 +730,16 @@ public class RoutingCodePage extends AbstractPage {
 			String override = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicInfo_view_override_xpath")).getText();
 			String legalTitle = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicinfo_view_legal_title_value")).getText();
 			String officeName = getDriver().findElement(OfficeIdentifiers.getObjectIdentifier("office_basicinfo_view_office_name_value")).getText();
-
+			
 			if (!override.isEmpty()) {
 				assertEquals(override + " should be the office name in the former usages page.", override, formerUsageOfficeName);
-			} else if ((!prefix.isEmpty() && !suffix.isEmpty()) || (!prefix.isEmpty() && suffix.isEmpty()) || (prefix.isEmpty() && !suffix.isEmpty())) {
+			} else if (!prefix.isEmpty() || !suffix.isEmpty() || !(routingCodeAssignedInstitutionLink.equals(officeInstitutionLink))) {
 				assertEquals((prefix + " " + legalTitle + " " + suffix).trim() + " should be the office name in the former usages page.",
 						(prefix + " " + legalTitle + " " + suffix).trim(), formerUsageOfficeName);
-			} else if (routingCodeAssignedInstitutionLink.equals(officeInstitutionLink)) {
-				assertEquals(officeName + " should be the office name in the former usages page.", officeName, formerUsageOfficeName);
 			} else {
-				assertEquals(legalTitle + " should be the office name in the former usages page.", legalTitle, formerUsageOfficeName);
+				assertEquals(officeName + " should be the office name in the former usages page.", officeName, formerUsageOfficeName);
 			}
-		} catch (InterruptedException e) {
+		}catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
