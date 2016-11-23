@@ -48,12 +48,13 @@ And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the financials link in the legal entity page
-When the user clicks on <displayDate> on the left navigation
-Then the user should see the <displayDate> should be the prefix to the Section Header 'FINANCIALS'
-Then the user should see the financials section field values same as in the trusted document of <fid> for <displayDate>
+When the user clicks on displayDate <dateIndex> on the left navigation
+Then the user should see the displayDate <dateIndex> should be the prefix to the Section Header 'FINANCIALS'
+Then the user should see the financials section field values same as in the trusted document of <fid> for displayDate <dateIndex>
 Then the user verifies Audited by field is displayed only when Audited field is true
 
 Examples:
-|entity|searchBy|fid|displayDate|
-|1234|FID|1234|2008 DEC 31|
-|1234|FID|1234|2007 DEC 31|
+|entity|searchBy|fid|dateIndex|
+|1234|FID|1234|1|
+|1234|FID|1234|2|
+|1234|FID|1234|3|

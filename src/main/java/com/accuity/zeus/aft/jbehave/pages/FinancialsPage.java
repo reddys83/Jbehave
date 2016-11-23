@@ -89,6 +89,9 @@ public class FinancialsPage extends AbstractPage{
 	        String financialYearEnd = getNodeValuesByTagName(document, "financialYearEnd").size() == 0 ? "" : getNodeValuesByTagName(document, "financialYearEnd").get(0);
 	        String currency =  getNodeValuesByTagName(document, "currency").size() == 0 ? "" : getNodeValuesByTagName(document, "currency").get(0);
 	        String orderOfMagnitude = getNodeValuesByTagName(document, "orderOfMagnitude").size() == 0 ? "" : getNodeValuesByTagName(document, "orderOfMagnitude").get(0);
+	        if(!orderOfMagnitude.isEmpty()) {
+	        	orderOfMagnitude = Utils.getOrderOfMagnitude(orderOfMagnitude);	
+	        }	        
 	        String consolidated = getNodeValuesByTagName(document, "consolidated").size() == 0 ? "" : getNodeValuesByTagName(document, "consolidated").get(0);
 	        String accountingStandards = getNodeValuesByTagName(document, "accountingStandards").size() == 0 ? "" : getNodeValuesByTagName(document, "accountingStandards").get(0);
 	        String audited = getNodeValuesByTagName(document, "audited").size() == 0 ? "" : getNodeValuesByTagName(document, "audited").get(0);
@@ -100,7 +103,7 @@ public class FinancialsPage extends AbstractPage{
 	        assertEquals(periodEnd, Utils.formatMonth(getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_endDate")).getText()));
 	        assertEquals(financialYearEnd, Utils.formatMonth(getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_yearEnd")).getText()));
 	        assertEquals(currency, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_currency")).getText());
-	        assertEquals(Utils.getOrderOfMagnitude(orderOfMagnitude), getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_orderOfMagnitude")).getText());
+	        assertEquals(orderOfMagnitude, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_orderOfMagnitude")).getText());
 	        assertEquals(consolidated, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_consolidated")).getText().toLowerCase());
 	        assertEquals(accountingStandards, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_accountingStandards")).getText());
 	        assertEquals(audited, getDriver().findElement(FinancialsIdentifiers.getObjectIdentifier("financialStatement_financials_audited")).getText().toLowerCase());
@@ -144,17 +147,28 @@ public class FinancialsPage extends AbstractPage{
         }
     }
     
-	public void clickPeriodEndDate(String date) { 
+	public void clickPeriodEndDateWithIndex(int dateIndex) { 
 		Boolean flag = false;
+		ArrayList<String> displayDatesInUI = getDisplayDates();
+		assertTrue("There is no date with "+dateIndex+" in left navigation" , displayDatesInUI.size()>=dateIndex);
     	List<WebElement> displayDates = getDriver().findElements(FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_endDate_leftSideMenu_xpath"));
     	for(int index = 0; index < displayDates.size(); index++) {
-    		if (displayDates.get(index).getText().equals(date)) {
+    		if (displayDates.get(index).getText().equals(displayDatesInUI.get(dateIndex-1))) {
     			attemptClickTheWebElement(displayDates.get(index));
     			flag = true;
     		}
     	}
     	if(!flag) {
-    		assertTrue("The date " + date + " is not available in the Financial page.", false);
+    		assertTrue("The date " + displayDatesInUI.get(dateIndex) + " is not available in the Financial page.", false);
     	}
+    }
+	
+	public ArrayList<String> getDisplayDates() {		
+		ArrayList<String> displayDatesListInUI = new ArrayList<String>();
+    	List<WebElement> displayDates = getDriver().findElements(FinancialsIdentifiers.getObjectIdentifier("financialStatement_period_endDate_leftSideMenu_xpath"));    	
+    	for(int index = 0; index < displayDates.size(); index++) {    		
+    		displayDatesListInUI.add(displayDates.get(index).getText());
+    	} 
+    	return displayDatesListInUI;
     }
   }
