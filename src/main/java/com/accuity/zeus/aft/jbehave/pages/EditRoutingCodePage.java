@@ -804,18 +804,6 @@ public class EditRoutingCodePage extends AbstractPage {
 		}
     }
 	
-	public void insertNewFormerUsagesValueForOneRow(String routingCode, String routingCodeType) {
-		try {
-			List<NameValuePair> nvPairs = new ArrayList<>();
-			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
-			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
-			Thread.sleep(3000L);
-			apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database, "insert routing code former usages value one row", nvPairs);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-    }
-	
 	public void verifyFormerUsagesFieldValuesFromZeusDB(String routingCode, String routingCodeType, String source) {
 		if (getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_list")).size() > 0) {
 			List<String> formerUsagesNames = new ArrayList<String>();

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<routingCode deleted="false" fid="C-1121793" id="647b8553-2b9c-4e38-a6d0-ad9209ac6cae"
-             resource="/routingCode/id/647b8553-2b9c-4e38-a6d0-ad9209ac6cae"
-             source="trusted" tfpid="ABA-083905216">
+<routingCode deleted="false" fid="C-1126556" id="12542ad5-cb6a-44cb-8e27-7d797fb17682"
+             resource="/routingCode/id/12542ad5-cb6a-44cb-8e27-7d797fb17682"
+             source="trusted" tfpid="ABA-262176840">
     <codeType>ABA</codeType>
     <codeTypeDescription>US Routing Number</codeTypeDescription>
-    <codeSubtype>Government Routing Number</codeSubtype>
+    <codeSubtype>Regular Routing Number</codeSubtype>
     <codeSource>ABA</codeSource>
-    <codeValue>083905216</codeValue>
+    <codeValue>262176840</codeValue>
     <codeCheckDigit>codeCheckDigit123</codeCheckDigit>
     <codeAlternateForms>
-        <codeAlternateForm type="fractional">12345678</codeAlternateForm>
+        <codeAlternateForm type="fdb_legacy">262176840</codeAlternateForm>
+        <codeAlternateForm type="fractional">61-7684/2621</codeAlternateForm>
+        <codeAlternateForm type="tfp_legacy">2621 7684 0</codeAlternateForm>
     </codeAlternateForms>
     <codeStatus>active</codeStatus>
     <internalUseOnly useHeadOffice="true">true</internalUseOnly>
@@ -150,7 +152,7 @@
     </relatedCodes>
     <assignedInstitution>
         <link
-                href="/legalEntity/id/3f6ec391-3f19-4aa0-967e-ee04f329e8af"
+                href="/legalEntity/id/b8d0f49c-6bc4-4886-9a00-2d36f491ba48"
                 rel="src"/>
         <legalName>Bank of Jamestown</legalName>
     </assignedInstitution>
@@ -304,39 +306,23 @@
 	</codeEvent>		        
   </codeHistory>
   <formerUsageLocations>
-   <formerUsageLocation>
+   <formerUsageLocation> 
     <presence> 
-     <link href="/office/id/876923d5-6176-400d-8fbd-ed35ef58b355" rel="src"/> 
+     <link href="/office/id/ce501d9a-1fa9-45ed-b040-dbca30264afb" rel="src"/>
     </presence>
     <department> 
      <link href="/department/id/8a9cef7e-e8c3-4462-b650-0fa587253b6d" rel="src"/>
     </department>
-   </formerUsageLocation>   
-   <formerUsageLocation>
-    <presence> 
-     <link href="/office/id/4f3d318a-e1fe-4b1a-a73e-af5a084c69f7" rel="src"/> 
-    </presence>
-    <department> 
-     <link href="/department/id/a9de4a11-fe8c-4123-a9a0-2e2d88312006" rel="src"/> 
-    </department>
-   </formerUsageLocation>
-   <formerUsageLocation>
-    <presence> 
-     <link href="/office/id/657045be-e677-4e46-bcf4-d471a9b65c64" rel="src"/> 
-    </presence>
-    <department> 
-     <link href="/department/id/a9de4a11-fe8c-4123-a9a0-2e2d88312006" rel="src"/> 
-    </department>
     <additionalInfo>testing comment</additionalInfo>
    </formerUsageLocation>
-   <formerUsageLocation>
+   <formerUsageLocation> 
     <presence> 
-     <link href="/office/id/5cb1de4f-cd18-411f-9bf6-f404c90e8d89" rel="src"/> 
+     <link href="/office/id/ce501d9a-1fa9-45ed-b040-dbca30264afb" rel="src"/>
     </presence>
     <department> 
-     <link href="/department/id/a9de4a11-fe8c-4123-a9a0-2e2d88312006" rel="src"/> 
+     <link href="/department/id/a9de4a11-fe8c-4123-a9a0-2e2d88312006" rel="src"/>
     </department>
     <additionalInfo>testing</additionalInfo>
-   </formerUsageLocation>     
+   </formerUsageLocation>    
   </formerUsageLocations>
 </routingCode>        

@@ -508,13 +508,6 @@ public class EditRoutingCodeSteps extends AbstractSteps {
 		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_area_col"));
 	}
 	
-	@When("the user inserts a former usages value for one row")
-	public void insertNewFormerUsagesValues(@Named("routingCode") String routingCode, @Named("codeType") String codeType) throws InterruptedException {
-		getEditRoutingCodePage().insertNewFormerUsagesValueForOneRow(routingCode, codeType);
-		getDataPage().refreshThePage();
-		Thread.sleep(5000L);
-	}
-	
 	@When("the user clicks on the delete former usages row button in the former usages edit page")
 	public void clickOnDeleteFormerUsagesRowButton() {
 		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_delete_row_button"));

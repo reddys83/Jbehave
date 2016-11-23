@@ -48,7 +48,7 @@ Then the user verifies that the former usages field values is same as in zeus do
 
 Examples:
 |entity|searchBy|routingCode|codeType|
-|083905216|Routing Code|083905216|ABA|
+|262176840|Routing Code|262176840|ABA|
 
 Scenario: User is deleting a row in Routing Code's Former Usages page in edit mode -
 a) Verify if user can prevent deleting a former usage row("Name", "City", "Area" and "Additional Info") by clicking on 'No' button.
@@ -60,8 +60,6 @@ When the user enters the <entity> in the typeahead
 And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
-When the user deletes the existing former usages values
-When the user inserts a former usages value for one row
 Then the user should see the routing code basic info page
 When the user clicks on the former usages link in the navigation bar
 When the user clicks on the routing code update link
