@@ -738,4 +738,111 @@ public class EditRoutingCodePage extends AbstractPage {
 	public void verifyRequiredMessageForRelatedCodes(By by){
 		assertTrue(getDriver().findElement(by).getText().equals("Required"));
 	}
+	
+	public void verifyFormerUsagesFieldValuesFromTrustedDB(String routingCode, String routingCodeType, String source) {
+		if (getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_name_list")).size() > 0) {
+			List<String> formerUsagesNames = new ArrayList<String>();
+			List<String> formerUsagesCity = new ArrayList<String>();
+			List<String> formerUsagesArea = new ArrayList<String>();
+			List<String> formerUsagesAdditionalInfo = new ArrayList<String>();
+
+			for (int index = 0; index < getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_name_list")).size(); index++) {
+				formerUsagesNames.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_name_list")).get(index).getText());
+				formerUsagesCity.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_city_list")).get(index).getText());
+				formerUsagesArea.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_area_list")).get(index).getText());
+				formerUsagesAdditionalInfo.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_former_usages_additional_info_list")).get(index).getText());
+			}
+			verifyFormerUsagesFieldValuesFromDB(routingCode, routingCodeType, source, formerUsagesNames,
+					formerUsagesCity, formerUsagesArea, formerUsagesAdditionalInfo);
+		} else {
+			assertTrue("There is no existing values in Former Usages section", false);
+		}
+    }
+	
+	public void verifyFormerUsagesFieldValuesFromDB(String routingCode, String routingCodeType, String source, List<String> formerUsagesNames, List<String> formerUsagesCity, List<String> formerUsagesArea, List<String> formerUsagesAdditionalInfo) {
+    	try {
+    		String formerUsagesDBValue;
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get routing code former usages values", nvPairs);
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("formerUsages").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("formerUsages").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+						
+						formerUsagesDBValue = document.getElementsByTagName("formerUsages").item(0).getChildNodes().item(i)
+								.getChildNodes().item(childNode).getTextContent();
+
+						switch (document.getElementsByTagName("formerUsages").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "name":
+							assertEquals(formerUsagesDBValue, formerUsagesNames.get(i));
+							break;
+						case "city":
+							assertEquals(formerUsagesDBValue, formerUsagesCity.get(i));
+							break;
+						case "area":
+							assertEquals(formerUsagesDBValue, formerUsagesArea.get(i));
+							break;
+						case "addInfo":
+							assertEquals(formerUsagesDBValue, formerUsagesAdditionalInfo.get(i));
+							break;
+						}
+					}
+				}
+			} else
+				assertTrue(source+ "document is null",false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+	
+	public void verifyFormerUsagesFieldValuesFromZeusDB(String routingCode, String routingCodeType, String source) {
+		if (getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_list")).size() > 0) {
+			List<String> formerUsagesNames = new ArrayList<String>();
+			List<String> formerUsagesCity = new ArrayList<String>();
+			List<String> formerUsagesArea = new ArrayList<String>();
+			List<String> formerUsagesAdditionalInfo = new ArrayList<String>();
+
+			for (int index = 0; index < getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_list")).size(); index++) {
+				formerUsagesNames.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_name_list")).get(index).getText());
+				formerUsagesCity.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_city_list")).get(index).getText());
+				formerUsagesArea.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_area_list")).get(index).getText());
+				formerUsagesAdditionalInfo.add(getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_additional_info_list")).get(index).getText());
+			}
+			verifyFormerUsagesFieldValuesFromDB(routingCode, routingCodeType, source, formerUsagesNames,
+					formerUsagesCity, formerUsagesArea, formerUsagesAdditionalInfo);
+		} else {
+			assertTrue("There is no existing values in Former Usages section", false);
+		}
+    }
+	
+	public void verifyFormerUsagesValuesNotPresentInZeusDB(String routingCode, String routingCodeType, String source) {
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get routing code former usages values", nvPairs);
+			if (document != null) {
+				assertNull(document.getElementsByTagName("name").item(0));
+				assertNull(document.getElementsByTagName("city").item(0));
+				assertNull(document.getElementsByTagName("area").item(0));
+				assertNull(document.getElementsByTagName("addInfo").item(0));
+			} else
+				assert false : source + " document is null";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

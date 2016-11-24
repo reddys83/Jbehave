@@ -172,8 +172,9 @@ public class XqueryMap {
         queryMap.put("get RoutingCode Alternate Code Form Types From Lookup","getRoutingCodeAlternateCodeTypesFromLookup.xqy");
         queryMap.put("get ABA code source lookup", "getABACodeSourceTypesFromLookup.xqy");
         queryMap.put("get related code context values from lookup", "getRoutingCodeRelatedCodeContextValuesFromLookup.xqy");
+        queryMap.put("get financial statement field values","getFinancialStatementValues.xqy");
         queryMap.put("get missing items values","getMissingItemsValues.xqy");
-    }
+   }
 
     public String getXquery(String key){
         return queryMap.get(key);
