@@ -77,3 +77,4 @@ Examples:
 |001|Routing Code|001|AF Cheque Clearing Sys|
 |01056|Routing Code|01056|Swift BIC|
 |HLFXGB21K03|Routing Code|HLFXGB21K03|SWIFT BIC|
+|262176840|Routing Code|262176840|ABA|
