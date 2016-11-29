@@ -152,6 +152,7 @@ public class RoutingCodeSteps extends AbstractSteps {
 	}
 
 	@Then("the user should see the former usages field values same as in $source document")
+	@Alias("the user should see the former usages office name same as in $source document")
 	public void verifyFormerUsagesFieldValuesFromTrustedDB(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("source") String source) {
 		getRoutingCodePage().verifyFormerUsagesFieldValuesFromTrustedDB(routingCode, codeType, source);
 	}

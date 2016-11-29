@@ -15,3 +15,4 @@ Examples:
 |HLFXGB21K03|SWIFT BIC|
 |77390628|BLZ (DE)|
 |262176840|ABA|
+|001|AF Cheque Clearing Sys|
