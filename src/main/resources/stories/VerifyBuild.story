@@ -126,11 +126,9 @@ And the user should see the Began Date of an area as 21 May 2006
 And the user should see the End Date of an area as 13 Jul 1922
 And the user should see the Type of an area as Area
 And the user should see the Country of an area as USA
-And the user should see the Area Parent of an area as Atchison
 And the user should see the area's replace by as California, Kansas
 And the user should see the Use in Address of an area as True
 And the user should see the Interest Rate Limit of an area as 92%
-And the user should see the ISO2 of an area as IL
 And the user should see the Add Info of an area as ILLINOIS: Census area dissolved in 2100
 
 
@@ -187,24 +185,24 @@ Examples:
 |1038|fid|1038| |
 
 Scenario: ZEUS-838 - User will see confirmation message after saving currency edits
-ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Active status ) STORY:920(failing because of invalid data in database)
+ ZEUS-286 - User can save edits to the currency uses and verify the data is save in the zeus document ( Active status ) STORY:920(failing because of invalid data in database)
 1. @accuracy = year
 2. @accuracy = month
 3. @accuracy = day
-Meta:
+Meta:@test1600
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the currency tab in the data area
 And the user clicks on the choose a currency option in the currency page
 And the user enters the currency <currency> in the typeahead box in the currency page
 And the user clicks on the update link
-And the user get the document with get Id for currency with the name as Afghani-test from the database
+And the user get the document with get Id for currency with the name as Asian Currency Unit from the database
 
 When the user enters the country <currencyCountry> in the currency usage
 When the user enters the currency start day as <currencyStartDay> in the currency page
 And the user enters the currency start month as <currencyStartMonth> in the currency page
 And the user enters the currency start year as <currencyStartYear> in the currency page
-And the user enters the first_new_row_currency_primary_radio_button value as <primary> in the currency page
+And the user enters the first_existing_row_currency_primary_radio_button value as <primary> in the currency page
 And the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see confirmation message
@@ -214,9 +212,10 @@ And the user reverts the changes to the document
 
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|primary|
-|Afghani-test|Angola|||1987|false|
-|Afghani-test|Angola||Jun|1987|false|
-|Afghani-test|Angola|21|Jun|1987|false|
+|Asian Currency Unit|Angola|||1987|false|
+|Asian Currency Unit|Angola||Jun|1987|false|
+|Asian Currency Unit|Angola|21|Jun|1987|false|
+
 
 
 Scenario: Filter offices by type - Domestic
@@ -371,22 +370,6 @@ Examples:
 |entity|searchBy|fid|
 |229070|FID|229070|
 |3|FID|3|
-|259534|FID|259534|
-
-
-Scenario: verify the routingCode search results with EXACT MATCH
-Given a user is on the search page
-When the user clicks on the results tab
-When the user enters the <entity> in the typeahead
-And the user selects the <searchBy> from the dropdown
-And the user clicks on the search button
-Then the user should see the search results for <entity> routingCode
-
-Examples:
-|entity|searchBy|
-|001|Routing Code|
-|00!@#$%^&*(6|Routing Code|
-|qa|Routing Code|
 
 
 Scenario: verify the routingCode search results with type filter
@@ -412,7 +395,6 @@ Examples:
 
 Scenario: Verify the basic info for a routing code of type ABA
 Verify the headers and the legal entity link on the header
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -422,14 +404,12 @@ Then the user should see the routing code basic info page
 And the user should see the routing code basic info values from trusted document for routing code <routingCode> with code type <codeType>
 And the user should see the routing code page header with <legalentity>, <headOfficeAddress>, <routingCodeFid> and <routingCodeTfpid>
 When the user clicks on the legal entity link in the routing code page header
-Then the user should see the legal entity's names as:
-|TYPE|VALUE|
-|Legal Title|Berliner Volksbank eG|
-|Former Name|Berliner Volksbank (West) eG|
+Then the user should see the legalEntity names for <fid> in the legalEntity basic info
 
 Examples:
-|entity|searchBy|routingCode|codeType|legalentity|headOfficeAddress|routingCodeFid|routingCodeTfpid|
-|083905216|Routing Code|083905216|ABA|Berliner Volksbank eG|Berlin, Germany|C-1121793|ABA-083905216|
+|entity|searchBy|routingCode|codeType|legalentity|headOfficeAddress|routingCodeFid|routingCodeTfpid|fid|
+|083905216|Routing Code|083905216|ABA|Berliner Volksbank eG|Berlin, Germany|C-1121793|ABA-083905216|1717|
+
 
 Scenario: Verify the payment systems view for different types of routing codes
 a) ABA
@@ -731,7 +711,6 @@ Scenario:Delete legal entity type
 a) Verify that the delete button is disabled for the first row of legal entity type
 b) Verify that the user should get the confirmation window for deleting existing entity type rows and user clicks No button
 c) Verify that the user should get the confirmation window for deleting existing entity type rows and user clicks Yes button and row should be deleted
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -762,7 +741,6 @@ Scenario: Update Office services - User verifies SERVICE_CATEGORY ('Service Cate
 2- User verifies whether existing office's service values are from trusted document.
 3- User verifies whether existing office's service values updated with different data both in UI and Zeus document.
 4- User verifies that Service Override Field is limited to 100 unicode characters in Office service Page
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -815,7 +793,6 @@ When the user gets the document with get id for offices with the <officeFid> fro
 When the user deletes the existing office locations rows
 When the user clicks on the add new office location button in the office page
 When the user clicks on add new office address button in the office locations
-And the user clicks on office address type drodown
 Then the user should see the address type values in office location's section from lookup ADDRESS_TYPE
 When the user selects office address type value as <Type> in row 1
 And the user enters office address <AddressLine1> in row 1
@@ -856,7 +833,6 @@ b) User verifies the change in confirmation modal by entering Date fields(Start 
    that is different from the current Date values.
 c) User verifies that blank values is saving successfully in the Routing Code Basic Info page.
 d) User verifies that Routing Code Basic Info page and Zeus document is updated.
-
 Given a user is on the search page
 When the user selects the <searchBy> from the dropdown
 When the user enters the <entity> in the typeahead
@@ -884,3 +860,18 @@ Examples:
 |083905216|Routing Code|083905216|ABA|||||||||||||active|
 |083905216|Routing Code|083905216|ABA|1|Jan|2016|12|Dec|2016|12|Dec|2050|26|Jan|2016|active|
 |083905216|Routing Code|083905216|ABA|1|Jan|2017|12|Dec|2017|12|Dec|2050|26|Jan|2016|pending|
+
+
+Scenario: verify the routingCode search results with EXACT MATCH
+Given a user is on the search page
+When the user clicks on the results tab
+When the user enters the <entity> in the typeahead
+And the user selects the <searchBy> from the dropdown
+And the user clicks on the search button
+Then the user should see the search results for <entity> routingCode
+
+Examples:
+|entity|searchBy|
+|001|Routing Code|
+|00!@#$%^&*(6|Routing Code|
+|qa|Routing Code|
