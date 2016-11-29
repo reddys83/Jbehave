@@ -67,9 +67,7 @@ And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 Then the user should see the routing code basic info page
 When the user clicks on the former usages link in the navigation bar
-Then the user should see the former usages field values same as in trusted document
-When the user clicks on the first office name link
-Then the user should see the correct office title for office name in the former usages page
+Then the user should see the former usages office name same as in trusted document
 
 Examples:
 |entity|searchBy|routingCode|codeType|

@@ -243,9 +243,6 @@ public class OfficeIdentifiers {
 	    hmap.put("office_locations_summary_type_error_msg", By.xpath("//*[@data-error_id='locationSummaryTypeError'][@class='notification error']"));
 	    hmap.put("office_locations_summary_delete_row_button", By.xpath("//*[@id='additionalLocationSummaries']//*[@class='delete-element']"));
 	    hmap.put("office_locations_existing_summary_rows_view_mode", By.xpath(".//*[@id='officeLocations']//h2[contains(text(), 'Summary')]/following-sibling::table/tbody/tr"));
-	    hmap.put("office_page_fid", By.xpath("//*[@class='data-header-internal']//*[th='FID']/td"));
-	    hmap.put("office_basicinfo_view_legal_title_value", By.xpath("//*[@id='officeBasicInfo']//*[contains(text(), 'Names')]/following-sibling::table//*[td='Legal Title']/td[2]"));
-	    hmap.put("office_basicinfo_view_office_name_value", By.xpath("//*[@id='officeBasicInfo']//*[contains(text(), 'Names')]/following-sibling::table//*[td='Office Name']/td[2]"));
     }
 
     public static By getObjectIdentifier(String key) {

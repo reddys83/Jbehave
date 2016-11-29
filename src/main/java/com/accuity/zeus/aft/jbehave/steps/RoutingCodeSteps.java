@@ -152,6 +152,7 @@ public class RoutingCodeSteps extends AbstractSteps {
 	}
 
 	@Then("the user should see the former usages field values same as in $source document")
+	@Alias("the user should see the former usages office name same as in $source document")
 	public void verifyFormerUsagesFieldValuesFromTrustedDB(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("source") String source) {
 		getRoutingCodePage().verifyFormerUsagesFieldValuesFromTrustedDB(routingCode, codeType, source);
 	}
@@ -219,10 +220,5 @@ public class RoutingCodeSteps extends AbstractSteps {
 	@Then("the user should see N/A value under details column")
 	public void verifyNAValueInDetailColumn() {
 		getDataPage().verifyElementIsDisplayed("Details (N/A)", RoutingCodeIdentifiers.getObjectIdentifier("view_routing_code_history_details_N/A"));
-	}
-	
-	@Then("the user should see the correct office title for office name in the former usages page")
-	public void verifyOfficeTitleInFormerUsages(@Named("routingCode") String routingCode, @Named("codeType") String routingCodeType) {
-		getRoutingCodePage().verifyOfficeTitleInFormerUsages(routingCode, routingCodeType, formerUsageOfficeName);
 	}
 }

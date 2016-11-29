@@ -30,6 +30,13 @@ public class FinancialsIdentifiers {
         hmap.put("financialStatement_financials_exchangeRate_From",By.xpath((".//*[@id='results']//h2[contains(text(), 'Exchange Rate at Period End')]/following-sibling::table//td[1]")));
         hmap.put("financialStatement_financials_exchangeRate_To",By.xpath((".//*[@id='results']//h2[contains(text(), 'Exchange Rate at Period End')]/following-sibling::table//td[2]")));
         hmap.put("financialStatement_financials_exchangeRate_Value",By.xpath((".//*[@id='results']//h2[contains(text(), 'Exchange Rate at Period End')]/following-sibling::table//td[3]")));
+        hmap.put("financial_missing_item_table", By.xpath("//*[@id='financialStatementMissing']//tbody/tr"));
+        hmap.put("financialStatement_missingItem_alternateStatement_link", By.xpath("//*[@id='financialStatementMissing']//span[contains(text(), 'Missing')]/../following-sibling::table//tr[1]/td[3]"));
+        hmap.put("financialStatement_missingItem_entity_link", By.xpath("//*[@id='financialStatementMissing']//span[contains(text(), 'Missing')]/../following-sibling::table//tr[1]//a[1]"));
+        hmap.put("legalEntity_basicInfo_link", By.xpath("//*[@id='legalEntityBasicInfo']"));
+        hmap.put("legalEntity_basicInfo_label", By.xpath("//*[@id='legalEntityBasicInfo']/h1"));
+        hmap.put("alternateEntity_text_value",  By.xpath("//*[@class='data-header-internal']//a[@class='entity']"));
+        hmap.put("financial_missing_item_statement_header", By.xpath("//*[@id='financialStatementMissing']//span[contains(text(), 'Missing')]"));
     }
 
     public static By getObjectIdentifier(String key) {
