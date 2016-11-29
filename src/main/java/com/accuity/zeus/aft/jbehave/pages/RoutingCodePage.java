@@ -706,5 +706,5 @@ public class RoutingCodePage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}	
+	}
 }
