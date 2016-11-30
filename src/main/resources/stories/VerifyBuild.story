@@ -212,8 +212,6 @@ And the user reverts the changes to the document
 
 Examples:
 |currency|currencyCountry|currencyStartDay|currencyStartMonth|currencyStartYear|primary|
-|Asian Currency Unit|Angola|||1987|false|
-|Asian Currency Unit|Angola||Jun|1987|false|
 |Asian Currency Unit|Angola|21|Jun|1987|false|
 
 
