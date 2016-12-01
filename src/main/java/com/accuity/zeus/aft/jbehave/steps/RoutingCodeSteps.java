@@ -214,11 +214,23 @@ public class RoutingCodeSteps extends AbstractSteps {
 	@Then("the user should see the history field values same as in $source document")
 	public void verifyHistoryValuesFromTrusted(@Named("routingCode") String routingCode,
 			@Named("codeType") String codeType, @Named("source") String source) {
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		getRoutingCodePage().verifyHistoryValuesFromTrusted(routingCode, codeType, source);
 	}	
 	
 	@Then("the user should see N/A value under details column")
 	public void verifyNAValueInDetailColumn() {
 		getDataPage().verifyElementIsDisplayed("Details (N/A)", RoutingCodeIdentifiers.getObjectIdentifier("view_routing_code_history_details_N/A"));
+	}
+	
+
+	@When("the user clicks on the delete services row button in the routing code history page")
+	public void clickOnDeleteRoutingCodeHistoryRowButton() {
+		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_delete_history_row_button"));
 	}
 }
