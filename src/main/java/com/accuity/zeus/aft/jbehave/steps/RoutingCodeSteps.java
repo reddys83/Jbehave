@@ -146,9 +146,9 @@ public class RoutingCodeSteps extends AbstractSteps {
 		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_first_office_name_link"));
 	}
 
-	@Then("the user should see the office name basic info page")
+	@Then("the user should see the office basic info page")
 	public void verifyOfficeNameBasicInfoPage() {
-		getRoutingCodePage().verifyOfficeNameBasicInfoPage(formerUsageOfficeName);
+		getRoutingCodePage().verifyOfficeBasicInfoPage();
 	}
 
 	@Then("the user should see the former usages field values same as in $source document")

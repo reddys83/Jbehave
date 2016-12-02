@@ -375,10 +375,9 @@ public class RoutingCodePage extends AbstractPage {
     	return getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_first_office_name_link")).getText();
     }
 
-    public void verifyOfficeNameBasicInfoPage(String formerUsageOfficeName) {
+    public void verifyOfficeBasicInfoPage() {
     	assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_link")).getAttribute("class").equals("selected"));
         assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_label")).getText().equals("BASIC INFO"));
-        assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_text_value")).getText().equals(formerUsageOfficeName));
     }
 
     public void verifyFormerUsagesFieldValuesFromTrustedDB(String routingCode, String routingCodeType, String source) {

@@ -41,7 +41,7 @@ Then the user verifies that values in area column is in ascending order
 When the user clicks on sort button for area column
 Then the user verifies that values in area column is in descending order
 When the user clicks on the first office name link
-Then the user should see the office name basic info page
+Then the user should see the office basic info page
 Then the user reverts the changes to the document
 
 Examples:
