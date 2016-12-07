@@ -140,15 +140,15 @@ public class RoutingCodeSteps extends AbstractSteps {
 		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_area_col"));
 	}
 
-	@When("the user clicks on the first office name link")
-	public void clickOnFirstOfficeNameLink() {
-		formerUsageOfficeName = getRoutingCodePage().getOfficeNameLinkText();
-		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_first_office_name_link"));
+	@When("the user clicks on the office name link number <index>")
+	public void clickOnFirstOfficeNameLink(@Named("index") int index) {
+		formerUsageOfficeName = getRoutingCodePage().getOfficeNameLinkText(index);
+		getDataPage().clickElementUsingIndex(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_office_name_link"), index);
 	}
 
-	@Then("the user should see the office name basic info page")
-	public void verifyOfficeNameBasicInfoPage() {
-		getRoutingCodePage().verifyOfficeNameBasicInfoPage(formerUsageOfficeName);
+	@Then("the user should see the office basic info page")
+	public void verifyOfficeNameBasicInfoPage(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("index") int index) {
+		getRoutingCodePage().verifyOfficeBasicInfoPage(routingCode, codeType, "trusted", index);
 	}
 
 	@Then("the user should see the former usages field values same as in $source document")
