@@ -32,4 +32,14 @@
             </presence>
         </usageLocation>
     </usageLocations>
+    <formerUsageLocations>
+     <formerUsageLocation> 
+      <presence> 
+      	<link href="/office/id/4f3d318a-e1fe-4b1a-a73e-af5a084c69f7" rel="src"/> 
+      </presence>
+      <department> 
+        <link href="/department/id/a9de4a11-fe8c-4123-a9a0-2e2d88312006" rel="src"/>
+      </department>
+     </formerUsageLocation>
+    </formerUsageLocations>
 </routingCode>

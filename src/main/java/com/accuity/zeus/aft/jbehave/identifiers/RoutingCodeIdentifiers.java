@@ -157,6 +157,19 @@ public class RoutingCodeIdentifiers {
         hmap.put("view_routingcode_history_usage_addinfo_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Additional Info')]"));
         hmap.put("view_history_event_table", By.xpath("//*[@id='routingCodeHistory']//tr"));
         hmap.put("view_history_usage_table", By.xpath("//*[@id='routingCodeHistory']//div[@class='container']//tbody//tr"));
+        hmap.put("edit_former_usages_name_list", By.xpath("//*[@data-row_id='formerUsages']//td[1]"));
+        hmap.put("edit_former_usages_city_list", By.xpath("//*[@data-row_id='formerUsages']//td[2]"));
+        hmap.put("edit_former_usages_area_list", By.xpath("//*[@data-row_id='formerUsages']//td[3]"));
+        hmap.put("edit_former_usages_additional_info_list", By.xpath("//*[@data-row_id='formerUsages']//td[4]"));
+        hmap.put("edit_former_usages_name_col", By.xpath("//*[@data-edit_id='formerUsages']//th[@sortfield='departmentName,officeName']"));
+        hmap.put("edit_former_usages_city_col", By.xpath("//*[@data-edit_id='formerUsages']//th[@sortfield='cityName']"));
+        hmap.put("edit_former_usages_area_col", By.xpath("//*[@data-edit_id='formerUsages']//th[@sortfield='areaName']"));
+        hmap.put("edit_former_usages_additional_info_col", By.xpath("//*[@data-edit_id='formerUsages']//*[contains(text(),'Additional Info')]"));
+        hmap.put("edit_former_usages_add_button", By.xpath("//*[@data-edit_id='formerUsages']//*[starts-with(@class,'add')]"));
+        hmap.put("edit_former_usages_hyperlink", By.xpath("//*[@data-row_id='formerUsages']//*[@href]"));
+        hmap.put("edit_former_usages_delete_row_button", By.xpath("//*[@data-row_id='formerUsages']//*[@class='delete-element']"));
+        hmap.put("edit_former_usages_row", By.xpath("//*[@id='formerUsages']//*[@data-row_id='formerUsages']"));
+        hmap.put("view_former_usages_row", By.xpath("//*[@id='formerUsages']//tr"));
 
         hmap.put("edit_routingcode_existing_alternate_code_type",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//select[@id='alternateCodeType']"));
         hmap.put("edit_routingcode_existing_alternate_code_value",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//input[@name='alternateCodeValue']"));
