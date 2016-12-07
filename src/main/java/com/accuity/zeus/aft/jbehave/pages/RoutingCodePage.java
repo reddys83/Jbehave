@@ -371,13 +371,30 @@ public class RoutingCodePage extends AbstractPage {
 		}
     }
 
-    public String getOfficeNameLinkText() {
-    	return getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_first_office_name_link")).getText();
+    public String getOfficeNameLinkText(int index) {
+    	List<WebElement> officeNameList = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_office_name_link"));
+    	return officeNameList.get(index).getText();
     }
 
-    public void verifyOfficeBasicInfoPage() {
-    	assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_link")).getAttribute("class").equals("selected"));
-        assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_label")).getText().equals("BASIC INFO"));
+    public void verifyOfficeBasicInfoPage(String routingCode, String routingCodeType, String source, int index) {
+		try {
+			assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_link")).getAttribute("class").equals("selected"));
+			assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_label")).getText().equals("BASIC INFO"));
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get routing code former usages values", nvPairs);
+			if (document != null) {
+				assertEquals(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_text_value")).getText(),
+						document.getElementsByTagName("officeName").item(index - 1).getTextContent());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
     public void verifyFormerUsagesFieldValuesFromTrustedDB(String routingCode, String routingCodeType, String source) {

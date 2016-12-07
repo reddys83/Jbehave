@@ -40,13 +40,13 @@ When the user clicks on sort button for area column
 Then the user verifies that values in area column is in ascending order
 When the user clicks on sort button for area column
 Then the user verifies that values in area column is in descending order
-When the user clicks on the first office name link
+When the user clicks on the office name link number <index>
 Then the user should see the office basic info page
 Then the user reverts the changes to the document
 
 Examples:
-|entity|searchBy|routingCode|codeType|
-|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|
+|entity|searchBy|routingCode|codeType|index|
+|DAAEDEDD435|Routing Code|DAAEDEDD435|SWIFT BIC|1|
 
 Scenario: User is on the Routing Code page - 
 a) Verify that Routing Code's former usages section has a table with values for below colums in view mode which is same as in trusted document.
