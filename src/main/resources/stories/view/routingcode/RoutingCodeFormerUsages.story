@@ -16,7 +16,7 @@ a) Verify that user can view Routing Code's former usages section has a table wi
     4 - ADDITIONAL INFO
 b) Verify that values in the Name, City and Area column are in ascending and descending order after clicking on sort button.
 c) Verify that after clicking on Office Name link, the app is navigated to the corresponding office basic info page.
-   
+ 
 Given a user is on the search page
 When the user selects the <searchBy> from the dropdown
 When the user enters the <entity> in the typeahead
@@ -40,6 +40,7 @@ When the user clicks on sort button for area column
 Then the user verifies that values in area column is in ascending order
 When the user clicks on sort button for area column
 Then the user verifies that values in area column is in descending order
+When the user clicks on sort button for name column
 When the user clicks on the office name link number <index>
 Then the user should see the office basic info page
 Then the user reverts the changes to the document
