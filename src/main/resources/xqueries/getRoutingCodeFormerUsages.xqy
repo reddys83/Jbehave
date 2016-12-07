@@ -45,6 +45,8 @@ let $offName := if(exists($override))
                      then ((fn:concat($prefix," ", $getOffice($x)/summary/names/name[type="Legal Title"]/value/text()," ",$suffix)))
                      else $getOffice($x)/summary/names/name[type="Office Name"]/value/text()
 
+let $officeName := $getOffice($x)/summary/names/name[type='Office Name']/value/text()
+
 let $name:= if(exists($x/department/link))
             then (string-join(($getDepartment($x)/summary/names/name[type='Department Name']/value/text(), functx:trim($offName)), (',  ')))    
             
@@ -60,12 +62,14 @@ let $area:= if((exists($x/department/link)) and (exists($getDepartment($x)/locat
              then ($getDepartment($x)/locations/location[@primary='true']/address[type='physical']/area/name/text()) 
              
              else ($getOffice($x)/locations/location[@primary='true']/address[type='physical']/area/name/text())
+      order by $name ascending
              
 return <results>
         <name>{$name}</name>
         <city>{$city}</city>
         <area>{$area}</area>
         <addInfo>{$addInfo}</addInfo>
+        <officeName>{$officeName}</officeName>
       </results> )
         
 return <routingCode>
