@@ -1249,3 +1249,4 @@ public class ResultsPage extends AbstractPage {
 		assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingCodeResultsHeader_view_mode")).getText().contains("Routing Code results for"));
 	}
  }
+

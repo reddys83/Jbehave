@@ -115,6 +115,7 @@ public class Utils {
       }
     }
 
+
     public static String formatMonth(String inputDate){
 
         String[] dateParts = inputDate.split(" ");
@@ -132,7 +133,7 @@ public class Utils {
         }
         return dateParts[0]+"-"+formattedMonth+"-"+dateParts[2];
 
-    } 
+    }
 
     public static String getOrderOfMagnitude(String key){
         if(orderOfMagnitude.isEmpty()) {
