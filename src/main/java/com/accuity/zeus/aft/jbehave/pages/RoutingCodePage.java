@@ -707,4 +707,57 @@ public class RoutingCodePage extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
+	
+	public void verifyDeletedHistoryFieldsWebPage(String historyType,String historyDate){
+		try {
+			Thread.sleep(9000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> historyEventRows = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_event_table"));
+		List<WebElement> historyEventColumns = historyEventRows.get(1).findElements(By.tagName("td"));
+		assertFalse(historyType.equals(historyEventColumns.get(0).getText()));
+		assertFalse(historyDate.equals(historyEventColumns.get(1).getText()));
+		System.out.println(historyEventColumns.get(0).getText());
+		System.out.println(historyEventColumns.get(1).getText());
+	}
+	
+	public void verifyHistoryFieldsNotDeletedWebPage(String historyType,String historyDate){
+		try {
+			Thread.sleep(9000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> historyEventRows = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_event_table"));
+		List<WebElement> historyEventColumns = historyEventRows.get(1).findElements(By.tagName("td"));
+		assertTrue(historyType.equals(historyEventColumns.get(0).getText()));
+		assertTrue(historyDate.equals(historyEventColumns.get(1).getText()));
+		System.out.println(historyEventColumns.get(0).getText());
+		System.out.println(historyEventColumns.get(1).getText());
+	}
+	
+	public void verifyDeletedHistoryValuesFromTrusted(String routingCode,String routingCodeType){
+		try {
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			Thread.sleep(5000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get routing code history values", nvPairs);
+
+			if (document != null) {
+				System.out.println(document.getElementsByTagName("routingCodeHistory").item(0)
+						.getChildNodes().item(0).getChildNodes().item(0).getTextContent());
+				System.out.println(document.getElementsByTagName("type").item(0));
+			}
+		
+	  }
+		catch(Exception e){
+			
+		}
+		
+	}		
 }

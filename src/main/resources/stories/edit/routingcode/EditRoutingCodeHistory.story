@@ -22,16 +22,19 @@ And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 When the user clicks on the history link in the navigation bar
 When the user clicks on the routing code update link
-When the user gets the document with get document id for routing code with the <routingCode> and <codeType> from the database
-Then the user should see the history field values same as in trusted document
-When the user clicks on the delete services row button in the routing code history page
+When the user clicks on the delete history row button in the routing code history page
+Then the user should see the delete row confirmation modal in the routingCode page
+When the user clicks on the no button in the delete row confirmation modal in the routingCode page
+Then the user should see the history field values not deleted from the history web page
+When the user clicks on the delete history row button in the routing code history page
 Then the user should see the delete row confirmation modal in the routingCode page
 When the user clicks on the yes button in the delete row confirmation modal in the routingCode page
 When the user clicks on the save button
 When the user clicks on the confirm button
-Then the user should see the history field values same as in trusted document
-Then the user reverts the changes to the document
+Then the user should see the history field values deleted from the history web page
+Then the use should see the history field values are deleted from trusted document
+
 
 Examples:
-|entity|searchBy|routingCode|codeType|
-|083905216|Routing Code|083905216|ABA|
+|entity|searchBy|routingCode|codeType|historyType|historyDate|
+|083905216|Routing Code|083905216|ABA|Reinstatement|09 Aug 2013|

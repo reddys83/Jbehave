@@ -229,8 +229,35 @@ public class RoutingCodeSteps extends AbstractSteps {
 	}
 	
 
-	@When("the user clicks on the delete services row button in the routing code history page")
+	@When("the user clicks on the delete history row button in the routing code history page")
 	public void clickOnDeleteRoutingCodeHistoryRowButton() {
 		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_delete_history_row_button"));
 	}
+	
+	@Then("the user should see the history field values deleted from the history web page")
+	public void verifyDeletedHistoryFieldsWebPage(@Named("historyDate") String historyDate,
+			@Named("historyType") String historyType) {
+		getRoutingCodePage().verifyDeletedHistoryFieldsWebPage(historyType, historyDate);
+		//getDataPage().clickElementUsingIndex(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"), 1);
+	}
+	
+	@Then("the user should see the history field values not deleted from the history web page")
+	public void verifyHistoryFieldsNotDeletedWebPage(@Named("historyDate") String historyDate,
+			@Named("historyType") String historyType) {
+		getRoutingCodePage().verifyHistoryFieldsNotDeletedWebPage(historyType, historyDate);
+		//getDataPage().clickElementUsingIndex(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"), 1);
+	}
+	
+
+	@Then("the use should see the history field values are deleted from $source document")
+	public void verifyDeletedHistoryValuesFromTrusted(@Named("routingCode") String routingCode,
+			@Named("codeType") String codeType, @Named("source") String source) {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		getRoutingCodePage().verifyDeletedHistoryValuesFromTrusted(routingCode, codeType);
+	}	
 }
