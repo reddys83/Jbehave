@@ -196,7 +196,7 @@ public class RoutingCodeIdentifiers {
         hmap.put("edit_routingcode_page_relatedcode_required_errorMessage", By.xpath("//*[@data-error_id='relatedCodeError']"));
         hmap.put("edit_routingcode_page_relatedcode_context_required_errorMessage", By.xpath("//*[@data-error_id='relatedCodeContextError']"));
         hmap.put("edit_routingcode_page_delete_history_row_button", By.xpath(".//*[@data-row_id='history']//button[@class='delete-element']"));
-
+        hmap.put("edit_routingcode_history_eye_icon", By.xpath("//*[@data-row_id='history']//*[@class='show']"));
     }
 
     public static By getObjectIdentifier(String key) {

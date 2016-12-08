@@ -708,37 +708,34 @@ public class RoutingCodePage extends AbstractPage {
 		}
 	}
 	
-	public void verifyDeletedHistoryFieldsWebPage(String historyType,String historyDate){
+	public void verifyDeletedHistoryFieldsWebPage(String historyType, String historyDate) {
 		try {
 			Thread.sleep(9000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<WebElement> historyEventRows = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_event_table"));
+		List<WebElement> historyEventRows = getDriver()
+				.findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_event_table"));
 		List<WebElement> historyEventColumns = historyEventRows.get(1).findElements(By.tagName("td"));
 		assertFalse(historyType.equals(historyEventColumns.get(0).getText()));
 		assertFalse(historyDate.equals(historyEventColumns.get(1).getText()));
-		System.out.println(historyEventColumns.get(0).getText());
-		System.out.println(historyEventColumns.get(1).getText());
 	}
-	
-	public void verifyHistoryFieldsNotDeletedWebPage(String historyType,String historyDate){
+
+	public void verifyHistoryFieldsNotDeletedWebPage(String historyType, String historyDate) {
 		try {
 			Thread.sleep(9000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<WebElement> historyEventRows = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_event_table"));
+		List<WebElement> historyEventRows = getDriver()
+				.findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_event_table"));
 		List<WebElement> historyEventColumns = historyEventRows.get(1).findElements(By.tagName("td"));
 		assertTrue(historyType.equals(historyEventColumns.get(0).getText()));
 		assertTrue(historyDate.equals(historyEventColumns.get(1).getText()));
-		System.out.println(historyEventColumns.get(0).getText());
-		System.out.println(historyEventColumns.get(1).getText());
 	}
-	
-	public void verifyDeletedHistoryValuesFromTrusted(String routingCode,String routingCodeType){
+
+	public void verifyDeletedHistoryValuesFromTrusted(String routingCode, String routingCodeType, String historyType,
+			String historyDate) {
 		try {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
@@ -749,15 +746,24 @@ public class RoutingCodePage extends AbstractPage {
 					"get routing code history values", nvPairs);
 
 			if (document != null) {
-				System.out.println(document.getElementsByTagName("routingCodeHistory").item(0)
-						.getChildNodes().item(0).getChildNodes().item(0).getTextContent());
-				System.out.println(document.getElementsByTagName("type").item(0));
+				assertFalse((historyType).equals(document.getElementsByTagName("routingCodeHistory").item(0)
+						.getChildNodes().item(0).getChildNodes().item(0).getTextContent()));
+				assertFalse(historyDate.equals(document.getElementsByTagName("routingCodeHistory").item(0)
+						.getChildNodes().item(0).getChildNodes().item(1).getTextContent()));
 			}
-		
-	  }
-		catch(Exception e){
-			
+		} catch (Exception e) {
 		}
-		
-	}		
+	}
+
+	public void verifyDeleteButtonEnabled() {
+		assertTrue(getDriver()
+				.findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_delete_history_row_button"))
+				.isEnabled());
+	}
+
+	public void verifyEyeIconEnabled() {
+		assertTrue(
+				getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_history_eye_icon"))
+						.isEnabled());
+	}
 }
