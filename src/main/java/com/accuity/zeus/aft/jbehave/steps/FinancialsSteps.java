@@ -87,4 +87,14 @@ public class FinancialsSteps  extends AbstractSteps{
 	public void verifyFinancialMissingHeading(@Named("displayDate") String displayDate) {
 		getFinancialsPage().verifyFinancialMissingHeading(displayDate);
 	}
+	
+	@Then("the user should see the line items retrieved from $source document")
+	public void verifyLineItemsFromTrusted(@Named("displayDate") String displayDate,@Named("fid") String fid, @Named("source") String source) {
+		getFinancialsPage().verifyLineItemsFromTrusted(displayDate, fid, source);
+	}
+
+	@Then("the user should see the line items are sorted as per lookup")
+	public void verifyLineItemsSort() {
+		getFinancialsPage().verifyLineItemsSort();
+	}
 }

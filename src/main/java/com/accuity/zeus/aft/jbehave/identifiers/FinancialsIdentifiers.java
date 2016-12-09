@@ -37,6 +37,7 @@ public class FinancialsIdentifiers {
         hmap.put("legalEntity_basicInfo_label", By.xpath("//*[@id='legalEntityBasicInfo']/h1"));
         hmap.put("alternateEntity_text_value",  By.xpath("//*[@class='data-header-internal']//a[@class='entity']"));
         hmap.put("financial_missing_item_statement_header", By.xpath("//*[@id='financialStatementMissing']//span[contains(text(), 'Missing')]"));
+        hmap.put("view_financial_line_item_table", By.xpath("//*[@id='financialStatementLineItems']//tbody/tr"));
     }
 
     public static By getObjectIdentifier(String key) {

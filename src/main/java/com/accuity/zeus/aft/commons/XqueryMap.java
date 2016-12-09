@@ -174,6 +174,8 @@ public class XqueryMap {
         queryMap.put("get related code context values from lookup", "getRoutingCodeRelatedCodeContextValuesFromLookup.xqy");
         queryMap.put("get financial statement field values","getFinancialStatementValues.xqy");
         queryMap.put("get missing items values","getMissingItemsValues.xqy");
+        queryMap.put("get line items values", "getLineItemValues.xqy");
+        queryMap.put("get line items type lookup Values", "getLineItemTypeFromLookup.xqy");
    }
 
     public String getXquery(String key){
