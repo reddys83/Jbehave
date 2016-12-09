@@ -763,12 +763,13 @@ public class RoutingCodePage extends AbstractPage {
 	}
 
 	public void verifyDeletedHistoryValuesFromTrusted(String routingCode, String routingCodeType, String historyType,
-			String historyDate) {
+			String historyDate, String source) {
 		try {
 			String historyEventValue;
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
 			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			nvPairs.add(new BasicNameValuePair("source", source));
 			Thread.sleep(3000L);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,

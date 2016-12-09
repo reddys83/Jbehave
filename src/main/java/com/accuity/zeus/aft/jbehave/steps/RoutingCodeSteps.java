@@ -248,13 +248,13 @@ public class RoutingCodeSteps extends AbstractSteps {
 	@Then("the use should see the history field values are deleted from $source document")
 	public void verifyDeletedHistoryValuesFromTrusted(@Named("routingCode") String routingCode,
 			@Named("codeType") String codeType, @Named("historyDate") String historyDate,
-			@Named("historyType") String historyType) {
+			@Named("historyType") String historyType, @Named("source") String source) {
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		getRoutingCodePage().verifyDeletedHistoryValuesFromTrusted(routingCode, codeType, historyType, historyDate);
+		getRoutingCodePage().verifyDeletedHistoryValuesFromTrusted(routingCode, codeType, historyType, historyDate, source);
 	}
 
 	@Then("the user should verify that delete button is enabled")
