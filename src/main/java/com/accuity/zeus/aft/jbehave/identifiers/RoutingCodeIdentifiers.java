@@ -152,7 +152,7 @@ public class RoutingCodeIdentifiers {
         hmap.put("view_routingcode_history_usage_subarea_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Sub Area')]"));
         hmap.put("view_routingcode_history_usage_country_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Country')]"));
         hmap.put("view_routingcode_date_list", By.xpath("//*[@id='history']//td[2]"));
-        hmap.put("view_routing_code_history_details_N/A", By.xpath("//*[@id='history']//td[contains(text(), 'N/A')]"));
+        hmap.put("view_routing_code_history_details_N/A", By.xpath("//*[@id='routingCodeHistory']//td[contains(text(), 'N/A')]"));
         hmap.put("view_routingcode_history_usage_postalcode_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Postal Code')]"));
         hmap.put("view_routingcode_history_usage_addinfo_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Additional Info')]"));
         hmap.put("view_history_event_table", By.xpath("//*[@id='routingCodeHistory']//tr"));

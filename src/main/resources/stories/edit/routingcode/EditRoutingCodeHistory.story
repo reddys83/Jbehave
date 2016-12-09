@@ -17,6 +17,7 @@ When the user enters the <entity> in the typeahead
 And the user clicks on the search button
 When the user clicks on the search results card with routing code <routingCode> and code type <codeType>
 When the user clicks on the history link in the navigation bar
+When the user clicks on the routing code update link
 Then the user should see the history field values same as in trusted document
 Then the user verifies that values in date column is in descending order
 

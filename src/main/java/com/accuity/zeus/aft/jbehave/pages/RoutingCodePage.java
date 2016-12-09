@@ -763,7 +763,7 @@ public class RoutingCodePage extends AbstractPage {
 		assertTrue((historyEventDate).contains(historyDate));
 	}
 
-	public void verifyDeletedHistoryValuesFromTrusted(String routingCode, String routingCodeType, String historyType,
+	public void verifyDeletedHistoryValuesFromDB(String routingCode, String routingCodeType, String historyType,
 			String historyDate, String source) {
 		try {
 			String historyEventValue;
