@@ -1688,7 +1688,7 @@ public class EditOfficePage extends AbstractPage {
 
 		List<WebElement> options = officeServiceCategoryList.get(0).findElements(By.cssSelector("option"));
 		for (int indexOfOption = 1; indexOfOption < options.size(); indexOfOption++) {
-			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(),
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent().replaceAll("\\s{2,}", " ").trim(),
 					options.get(indexOfOption).getText().trim());
 		}
 	}
