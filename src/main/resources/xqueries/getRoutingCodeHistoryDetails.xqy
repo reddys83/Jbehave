@@ -37,7 +37,7 @@ declare variable $getOffice := function($routing as element()) {
 
 let $rc := xs:string(xdmp:get-request-field("routingCode"))
 let $rcType := xs:string(xdmp:get-request-field("routingCodeType"))
-let $source := "trusted"
+let $source := xs:string(xdmp:get-request-field("source"))
 
 let $routingCodes:= (for $x in cts:search(fn:collection('current')/routingCode[@source=$source],
 cts:and-query((

@@ -45,7 +45,7 @@ When the user clicks on the yes button in the delete row confirmation modal in t
 When the user clicks on the save button
 When the user clicks on the confirm button
 Then the user should see the history field values deleted from the history web page
-Then the use should see the history field values are deleted from trusted document
+Then the use should see the history field values are deleted from zeus document
 Then the user reverts the changes to the document
 
 Examples:
