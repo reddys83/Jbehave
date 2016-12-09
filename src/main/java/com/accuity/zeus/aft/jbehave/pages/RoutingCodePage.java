@@ -624,7 +624,7 @@ public class RoutingCodePage extends AbstractPage {
 			}
 			
 			//closing all opened drawers
-			eyeIcons = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"));
+			eyeIcons = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_history_eye_icon"));
 			for (int index = 0; index < eyeIcons.size() ; index++) {			
 				attemptClickTheWebElement(eyeIcons.get(index));
 			}	
@@ -726,42 +726,73 @@ public class RoutingCodePage extends AbstractPage {
 	
 	public void verifyDeletedHistoryFieldsWebPage(String historyType, String historyDate) {
 		try {
-			Thread.sleep(9000);
+			Thread.sleep(4000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		List<String> historyEventType = new ArrayList<String>();
+		List<String> historyEventDate = new ArrayList<String>();
 		List<WebElement> historyEventRows = getDriver()
 				.findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_event_table"));
-		List<WebElement> historyEventColumns = historyEventRows.get(1).findElements(By.tagName("td"));
-		assertFalse(historyType.equals(historyEventColumns.get(0).getText()));
-		assertFalse(historyDate.equals(historyEventColumns.get(1).getText()));
+		for (int index = 1; index < historyEventRows.size() ; index++) {
+			List<WebElement> historyEventColumns = historyEventRows.get(index).findElements(By.tagName("td"));
+			historyEventType.add(historyEventColumns.get(0).getText());
+			historyEventDate.add(historyEventColumns.get(1).getText());
+		}
+		assertFalse((historyEventType).contains(historyType));
+		assertFalse((historyEventDate).contains(historyDate));
 	}
 
 	public void verifyHistoryFieldsNotDeletedWebPage(String historyType, String historyDate) {
 		try {
-			Thread.sleep(9000);
+			Thread.sleep(4000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		List<WebElement> historyEventRows = getDriver()
 				.findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_event_table"));
-		List<WebElement> historyEventColumns = historyEventRows.get(1).findElements(By.tagName("td"));
-		assertTrue(historyType.equals(historyEventColumns.get(0).getText()));
-		assertTrue(historyDate.equals(historyEventColumns.get(1).getText()));
+		List<String> historyEventType = new ArrayList<String>();
+		List<String> historyEventDate = new ArrayList<String>();
+		for (int index = 1; index < historyEventRows.size() ; index++) {
+			List<WebElement> historyEventColumns = historyEventRows.get(index).findElements(By.tagName("td"));
+			historyEventType.add(historyEventColumns.get(0).getText());
+			historyEventDate.add(historyEventColumns.get(1).getText());
+		}		
+		assertTrue((historyEventType).contains(historyType));
+		assertTrue((historyEventDate).contains(historyDate));
 	}
 
 	public void verifyDeletedHistoryValuesFromTrusted(String routingCode, String routingCodeType, String historyType,
 			String historyDate) {
 		try {
+			String historyEventValue;
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
 			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
-			Thread.sleep(5000L);
+			Thread.sleep(3000L);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
 					"get routing code history values", nvPairs);
 
 			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("routingCodeHistory").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("routingCodeHistory").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						historyEventValue = document.getElementsByTagName("routingCodeHistory").item(0)
+								.getChildNodes().item(i).getChildNodes().item(childNode).getTextContent();
+					
+						switch (document.getElementsByTagName("routingCodeHistory").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "type": assertFalse(historyEventValue.equals(historyType));
+							break;
+						case "date": assertFalse(historyEventValue.equals(historyDate));
+							break;
+						}
+					}
+				}
 				assertFalse((historyType).equals(document.getElementsByTagName("routingCodeHistory").item(0)
 						.getChildNodes().item(0).getChildNodes().item(0).getTextContent()));
 				assertFalse(historyDate.equals(document.getElementsByTagName("routingCodeHistory").item(0)

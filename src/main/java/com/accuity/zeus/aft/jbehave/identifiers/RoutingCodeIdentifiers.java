@@ -144,7 +144,7 @@ public class RoutingCodeIdentifiers {
         hmap.put("view_routingcode_history_description_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Description')]"));
         hmap.put("view_routingcode_history_replacedbycode_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Replaced by Code')]"));
         hmap.put("view_routingcode_history_details_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Details')]"));
-        hmap.put("routingcode_history_eye_icon", By.xpath("//*[@id='history']//*[@class='show']"));
+        hmap.put("routingcode_history_eye_icon", By.xpath("//*[@id='routingCodeHistory']//*[@class='show']"));
         hmap.put("view_routingcode_history_usage_name_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Name')]"));
         hmap.put("view_routingcode_history_usage_address_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Address')]"));
         hmap.put("view_routingcode_history_usage_city_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'City')]"));
