@@ -624,7 +624,7 @@ public class RoutingCodePage extends AbstractPage {
 			}
 			
 			//closing all opened drawers
-			eyeIcons = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_history_eye_icon"));
+			eyeIcons = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_history_eye_icon"));
 			for (int index = 0; index < eyeIcons.size() ; index++) {			
 				attemptClickTheWebElement(eyeIcons.get(index));
 			}	
@@ -793,12 +793,9 @@ public class RoutingCodePage extends AbstractPage {
 						}
 					}
 				}
-				assertFalse((historyType).equals(document.getElementsByTagName("routingCodeHistory").item(0)
-						.getChildNodes().item(0).getChildNodes().item(0).getTextContent()));
-				assertFalse(historyDate.equals(document.getElementsByTagName("routingCodeHistory").item(0)
-						.getChildNodes().item(0).getChildNodes().item(1).getTextContent()));
 			}
 		} catch (Exception e) {
+		  e.printStackTrace();
 		}
 	}
 
