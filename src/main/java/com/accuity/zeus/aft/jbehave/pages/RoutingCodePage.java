@@ -649,6 +649,7 @@ public class RoutingCodePage extends AbstractPage {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
 			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			nvPairs.add(new BasicNameValuePair("source", source));
 			Thread.sleep(5000L);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
@@ -722,5 +723,91 @@ public class RoutingCodePage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void verifyDeletedHistoryFieldsWebPage(String historyType, String historyDate) {
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		List<String> historyEventType = new ArrayList<String>();
+		List<String> historyEventDate = new ArrayList<String>();
+		List<WebElement> historyEventRows = getDriver()
+				.findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_event_table"));
+		for (int index = 1; index < historyEventRows.size() ; index++) {
+			List<WebElement> historyEventColumns = historyEventRows.get(index).findElements(By.tagName("td"));
+			historyEventType.add(historyEventColumns.get(0).getText());
+			historyEventDate.add(historyEventColumns.get(1).getText());
+		}
+		assertFalse((historyEventType).contains(historyType));
+		assertFalse((historyEventDate).contains(historyDate));
+	}
+
+	public void verifyHistoryFieldsNotDeletedWebPage(String historyType, String historyDate) {
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		List<WebElement> historyEventRows = getDriver()
+				.findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_event_table"));
+		List<String> historyEventType = new ArrayList<String>();
+		List<String> historyEventDate = new ArrayList<String>();
+		for (int index = 1; index < historyEventRows.size() ; index++) {
+			List<WebElement> historyEventColumns = historyEventRows.get(index).findElements(By.tagName("td"));
+			historyEventType.add(historyEventColumns.get(0).getText());
+			historyEventDate.add(historyEventColumns.get(1).getText());
+		}		
+		assertTrue((historyEventType).contains(historyType));
+		assertTrue((historyEventDate).contains(historyDate));
+	}
+
+	public void verifyDeletedHistoryValuesFromDB(String routingCode, String routingCodeType, String historyType,
+			String historyDate, String source) {
+		try {
+			String historyEventValue;
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get routing code history values", nvPairs);
+
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("routingCodeHistory").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("routingCodeHistory").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						historyEventValue = document.getElementsByTagName("routingCodeHistory").item(0)
+								.getChildNodes().item(i).getChildNodes().item(childNode).getTextContent();
+					
+						switch (document.getElementsByTagName("routingCodeHistory").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "type": assertFalse(historyEventValue.equals(historyType));
+							break;
+						case "date": assertFalse(historyEventValue.equals(historyDate));
+							break;
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+		  e.printStackTrace();
+		}
+	}
+
+	public void verifyDeleteButtonEnabled() {
+		assertTrue(getDriver()
+				.findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_delete_history_row_button")).isEnabled());
+	}
+
+	public void verifyEyeIconEnabled() {
+		assertTrue(
+				getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_history_eye_icon")).isEnabled());
 	}
 }
