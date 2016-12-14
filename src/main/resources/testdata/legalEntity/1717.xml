@@ -45,10 +45,6 @@
                 <summary>Stock Exchange Interim Entity Identifier
                 </summary>
             </summaries>
-            <meeting>
-                <periodType>month</periodType>
-                <value>1</value>
-            </meeting>
         </boardMeetings>
         <identifiers>
             <identifier>

@@ -1,0 +1,113 @@
+<office deleted="false" fid="1038-51" id="e0172a11-1642-45ec-9920-c3a6fb8deb34" resource="/office/id/e0172a11-1642-45ec-9920-c3a6fb8deb34" source="trusted">
+    <summary>
+        <institution>
+            <link href="/legalEntity/id/4054b437-e1d1-4891-ace4-756fc238c943" rel="src"></link>
+        </institution>
+        <status>active</status>
+        <types>
+            <type source="zeus">Branch</type>
+        </types>
+        <names>
+
+            <name>
+                <type>Legal Title</type>
+                <value>Bank of America National Association</value>
+            </name>
+            <officeSortKey>BANK OF AMERICA NATIONAL ASSOCIATION</officeSortKey>
+        </names>
+        <numberOfATMs>12345678</numberOfATMs>
+        <numberOfCheckingAccounts>12345678</numberOfCheckingAccounts>
+        <numberOfSavingsAccounts>12345678</numberOfSavingsAccounts>
+        <hours>14:00</hours>
+        <principalOffice>false</principalOffice>
+        <foreignOffice>true</foreignOffice>
+        <identifiers>
+            <identifier>
+                <type>FDIC Office Branch ID</type>
+                <value>QATest</value>
+                <status>inactive</status>
+            </identifier>
+        </identifiers>
+
+    </summary>
+    <services>
+        <service>
+            <category>Accepting Credits</category>
+            <customDescription>5858585</customDescription>
+        </service>
+    </services>
+    <locations>
+        <location primary="true">
+            <address>
+                <type>physical</type>
+                <infos>
+                    <info>gdgdg</info>
+                </infos>
+                <streetAddress>
+                    <addressLine1>gdgdg</addressLine1>
+                    <addressLine2>56</addressLine2>
+                    <addressLine3>56</addressLine3>
+                    <addressLine4>56</addressLine4>
+                </streetAddress>
+                <city>
+                    <link href="/city/id/8fa98be5-ea6b-4122-93f0-717b0e8f18ce" rel="src"></link>
+                    <fid>8429015</fid>
+                    <name>Adabari</name>
+                    <citySortKey>ADABARI</citySortKey>
+                    <useInAddress>true</useInAddress>
+                </city>
+                <area>
+                    <link href="/area/id/5357e762-1c47-4031-bc15-8f40c4e5c96e" rel="src"></link>
+                    <fid>A-732</fid>
+                    <name>Assam</name>
+                    <areaSortKey>
+                    </areaSortKey>
+                    <useInAddress>true</useInAddress>
+                </area>
+                <country>
+                    <link href="/country/id/0e9bb5e2-d27f-476f-86a0-7d4502fd351b" rel="src"></link>
+                    <fid>IN</fid>
+                    <name>India</name>
+                    <countrySortKey>INDIA</countrySortKey>
+                    <useInAddress>true</useInAddress>
+                </country>
+                <postalSuffix>gddgdgdgd</postalSuffix>
+            </address>
+            <telecom rank="1232">
+                <type>telephone</type>
+                <infos>
+                    <info type="desc">udfghgfh</info>
+                    <info type="textAfter">sdf</info>
+                </infos>
+                <phoneCountryCode>123</phoneCountryCode>
+                <phoneAreaCode>123</phoneAreaCode>
+                <phoneNumber>1234</phoneNumber>
+                <phoneNumberRangeLimit>2345</phoneNumberRangeLimit>
+                <phoneExtension>1234</phoneExtension>
+                <value>+123-123-1234</value>
+            </telecom>
+            <telecom rank="1234">
+                <type>email</type>
+                <value>dfg@bndf.com</value>
+            </telecom>
+            <telecom rank="123">
+                <type>telex</type>
+                <infos>
+                    <info type="desc">dfg</info>
+                </infos>
+                <value>dfg@bndf.com</value>
+            </telecom>
+        </location>
+    </locations>
+    <personnel>
+        <summaries>
+            <summary type="locationEmployees">sdcsda</summary>
+            <summary type="InstitutionEmployees">dcacaca</summary>
+        </summaries>
+    </personnel>
+    <history>
+        <summaries>
+            <summary>This is sample old text</summary>
+        </summaries>
+    </history>
+</office>

@@ -11,7 +11,7 @@ Scenario: 1 User can edit  'Office Statistics' that is different from the curren
 1- User verifies whether the current value in statistics page is from trusted document
 2- User verifies confirmation dialog modal has summary change text as 'Basic Info / Statistics'
 3- User verifies that 'total ATMs', 'total checking accounts', 'total savings account' values are saved and reflected in UI and Zeus
- 
+
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown

@@ -127,7 +127,6 @@ Examples:
 
 Scenario: Verify Offered Service Category and financial category details fields are required fields.
 Override field maximum length is 100 characters.
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown

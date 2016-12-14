@@ -1817,7 +1817,7 @@ public class EditLegalEntityPage extends AbstractPage {
             WebElement identifier = getDriver().findElement(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_boardmeeting_type_view_mode"));
             assertTrue(identifier != null);
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
     }
 

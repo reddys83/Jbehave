@@ -120,6 +120,12 @@
             <category>Foreign Exchange</category>
         </service>
     </services>
+    <financialServices>
+        <financialService>
+            <category>Consumer Credit</category>
+            <detail>Visa</detail>
+        </financialService>
+    </financialServices>
     <locations>
         <headOffice>
             <link href="/office/id/543f87a5-861f-482a-be18-afba27b81b88" rel="src"/>

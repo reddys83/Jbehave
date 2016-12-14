@@ -96,7 +96,7 @@ public class RoutingCodeIdentifiers {
         hmap.put("routingCode_relatedCodes_context_header", By.xpath(".//*[@id='routingCodeRelatedCodes']//thead//th[1]"));
         hmap.put("routingCode_relatedCodes_code_header", By.xpath(".//*[@id='routingCodeRelatedCodes']//thead//th[2]"));
         hmap.put("routingCode_relatedCodes_type_header", By.xpath(".//*[@id='routingCodeRelatedCodes']//thead//th[3]"));
-        hmap.put("edit_routingcode_page_RoutingCodeComment", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']//input"));
+        hmap.put("edit_routingcode_page_RoutingCodeComment", By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']//textarea"));
         hmap.put("routingcode_page_paymentsystems_link", By.xpath("//*[@id='routingCodePaymentSystems'][text()='Payment Systems']"));
         hmap.put("paymentsystems_productName", By.xpath("//*[@id='routingCodePaymentSystems']/div[@class='payment-system']/h3"));
         hmap.put("paymentsystems_dateJoined", By.xpath("//*[@id='routingCodePaymentSystems']/div[@class='payment-system']//tr[th='Date Joined']/td"));
@@ -111,8 +111,6 @@ public class RoutingCodeIdentifiers {
 
         hmap.put("routingCode_relatedCodes_code_header",By.xpath(".//*[@id='routingCodeRelatedCodes']//thead//th[2]"));
         hmap.put("routingCode_relatedCodes_type_header",By.xpath(".//*[@id='routingCodeRelatedCodes']//thead//th[3]"));
-
-        hmap.put("edit_routingcode_page_RoutingCodeComment",By.xpath("//*[@id='routingCodeBasicInfo']//tr[th='Routing Code Comment']//input"));
         hmap.put("routingcode_page_paymentsystems_link",By.xpath("//*[@id='routingCodePaymentSystems'][text()='Payment Systems']"));
         hmap.put("paymentsystems_productName",By.xpath("//*[@id='routingCodePaymentSystems']/div[@class='payment-system']/h3"));
         hmap.put("paymentsystems_dateJoined",By.xpath("//*[@id='routingCodePaymentSystems']/div[@class='payment-system']//tr[th='Date Joined']/td"));

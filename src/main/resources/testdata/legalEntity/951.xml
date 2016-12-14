@@ -1,6 +1,9 @@
 <legalEntity deleted="false" fid="951" id="f00359e1-0439-4c21-aa6e-afb6af6be555" resource="/legalEntity/id/f00359e1-0439-4c21-aa6e-afb6af6be555" source="trusted" stub="true" tfpid="20624100">
     <summary>
         <status>active</status>
+        <countryOfOperations>
+            <link href="/country/id/93c99f47-3ff6-40da-9503-08fbf6d025a7" rel="src"></link>
+        </countryOfOperations>
         <legalEntityType>Financial Services Company</legalEntityType>
         <types>
             <type source="FDB">Subsidiary - Unspecified</type>

@@ -11,10 +11,6 @@
                 <type>Display Name</type>
                 <value>Namibe</value>
             </name>
-            <name>
-                <type>Alternative Name</type>
-                <value>testing</value>
-            </name>
         </names>
         <status>active</status>
         <useInAddress>true</useInAddress>

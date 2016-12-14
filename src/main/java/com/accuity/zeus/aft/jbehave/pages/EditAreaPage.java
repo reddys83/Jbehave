@@ -1874,7 +1874,7 @@ public class EditAreaPage extends AbstractPage {
 		List<WebElement> relatedPlaceRows = getDriver()
 				.findElements(AreaIdentifiers.getObjectIdentifier("area_place_entirevalues_xpath"));
 
-		for (int i = 0; i < relatedPlaceRows.size(); i++) {
+		for (int i = 0; i < areaPlacesType.length; i++) {
 			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(areaPlacesType[i]));
 			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(areaPlacesPlace[i]));
 			assertTrue(relatedPlaceRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(areaPlacesDetail[i]));

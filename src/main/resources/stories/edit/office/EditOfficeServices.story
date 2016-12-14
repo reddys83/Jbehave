@@ -23,10 +23,10 @@ And the user clicks on the offices results card with fid <officeFid>
 And the user clicks on the office services link in the navigation bar
 And the user clicks on the office update link
 Then the user should see the office's service's values are same as in trusted document
-Then the user should see the office service category dropdown values from lookup SERVICE_CATEGORY
 When the user gets the document with get id for offices with the <officeFid> from the database
 When the user deletes all service rows in office page
 And the user clicks on the add button for adding new services for office page
+Then the user should see the office service category dropdown values from lookup SERVICE_CATEGORY
 When the user selects <serviceCategory> type in the services for office page
 When the user enters <serviceOverride> value  in the text box for office page
 And the user clicks on the add button for adding new services for office page

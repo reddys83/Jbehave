@@ -10,8 +10,8 @@
         <codeAlternateForm type="fdb_legacy">01056</codeAlternateForm>
     </codeAlternateForms>
     <codeStatus>active</codeStatus>
-    <internalUseOnly useHeadOffice="false">false</internalUseOnly>
-    <accountEligible>false</accountEligible>
+    <internalUseOnly useHeadOffice="true">true</internalUseOnly>
+    <accountEligible>true</accountEligible>
     <dates>
         <validFrom accuracy="day">2004-05-04</validFrom>
         <validTo accuracy="day">2014-05-04</validTo>

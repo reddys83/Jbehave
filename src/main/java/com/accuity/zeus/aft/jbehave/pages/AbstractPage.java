@@ -450,7 +450,9 @@ public abstract class AbstractPage {
     
     public void selectDropDownValueFromRowNumber(By by, String value, int rowNumber) {
 		try {
-			List<WebElement> dropdownValue = getDriver().findElements(by);
+
+            Thread.sleep(4000L);
+            List<WebElement> dropdownValue = getDriver().findElements(by);
 			if (rowNumber <= dropdownValue.size()) {
 				Select dropdown = new Select(dropdownValue.get(rowNumber - 1));
 				if (value.equals("")) {

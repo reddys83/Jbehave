@@ -66,14 +66,13 @@ Examples:
 |128|FID|128|
 
 Scenario:User will get warning if click away from screen they are editing
-Meta:
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
 When the user clicks on the search results card with fid <fid>
 And the user clicks on the legalEntity update link
-When the user clicks on the currency tab in the data area
+When the user clicks on the data tab in the search page
 Then the user should see the cancel update confirmation modal
 When the user clicks on the cancel no button
 Then the user should return to edit legalentity page mode
@@ -794,9 +793,7 @@ Examples:
 
 Scenario: User updates Chartered date
 Verifying updated date is been is saved in zeus document.
-
 Given a user is on the search page
-
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
 And the user clicks on the search button
@@ -941,7 +938,6 @@ Scenario: (1) User is updating Legal Entity's Basic Info with existing data No d
 2 - User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
 3 - User verifies Legal Entity Basic Info changes has not been updated in confirmation modal
 4 - User verifies Country of Operations value is updated correctly in UI and Zeus
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -973,7 +969,6 @@ Scenario: (2) User is updating a Legal Entity's Basic Info page -
 3 - User selects 'Yes' in the warning message to save 'Undefined' for Country of Operations.
 4 - User verifies Country of Operations value is updated in UI and Zeus DB.
 5 - User changes the 'Undefined' value to valid country value for Country of Operations and verifies UI and Zeus DB. 
-
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown
@@ -1036,7 +1031,6 @@ Scenario: (4) To update the Legal Entity`s 'Country of Opeartions' that is diffe
 1 - User selects a country in the Country of Operations dropdown for a valid Legal Entity Type
 2 - User verifies confirmation modal has summary change
 3 - User verifies Country of Operations value is reflected in UI and Zeus
-Meta:@test776
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown

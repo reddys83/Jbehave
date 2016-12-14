@@ -96,7 +96,7 @@ Examples:
 |country|area|entityDetails|entityType|fid|entity|
 |USA|Alabama|State Government|Banking Association|1038|Bank of America National Association|
 
-Scenario: Verify whether No new row is added in Area web page when all the entity fields are having blank values
+Scenario: Verify whether No new row is added in Area web page when all the entity fields are having blank values - Bug# ZEUS-1745
 
 Given a user is on the search page
 When the user clicks on the data tab in the search page
