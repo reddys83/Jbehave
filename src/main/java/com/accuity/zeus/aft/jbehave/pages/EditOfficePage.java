@@ -1253,7 +1253,7 @@ public class EditOfficePage extends AbstractPage {
 		
 		List<WebElement> identifierRows = getDriver().findElements(OfficeIdentifiers.getObjectIdentifier("office_identifier_type_view_mode"));
 		
-		for (int i = 0; i < identifierRows.size(); i++) {
+		for (int i = 0; i < identifierTypes.length; i++) {
 			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(identifierTypes[i]));
 			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(identifierValues[i]));
 			assertTrue(identifierRows.get(i).findElements(By.tagName("td")).get(2).getText().contains(identifierStatusValues[i]));
@@ -1688,8 +1688,8 @@ public class EditOfficePage extends AbstractPage {
 
 		List<WebElement> options = officeServiceCategoryList.get(0).findElements(By.cssSelector("option"));
 		for (int indexOfOption = 1; indexOfOption < options.size(); indexOfOption++) {
-			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent().replaceAll("\\s{2,}", " ").trim(),
-					options.get(indexOfOption).getText().trim());
+			assertEquals(document.getFirstChild().getChildNodes().item(indexOfOption).getFirstChild().getTextContent(),
+					options.get(indexOfOption).getAttribute("value"));
 		}
 	}
 
@@ -1735,7 +1735,7 @@ public class EditOfficePage extends AbstractPage {
 		List<WebElement> serviceRows = getDriver()
 				.findElements(OfficeIdentifiers.getObjectIdentifier("office_services_type_view_mode"));
 
-		for (int i = 0; i < serviceRows.size(); i++) {
+		for (int i = 0; i < serviceCategory.length; i++) {
 			assertTrue(serviceRows.get(i).findElements(By.tagName("td")).get(0).getText().contains(serviceCategory[i]));
 			assertTrue(serviceRows.get(i).findElements(By.tagName("td")).get(1).getText().contains(serviceOverride[i]));
 		}

@@ -30,6 +30,7 @@ public class DataSteps extends AbstractSteps {
 	public void clickOnUpdateAreaLink() {
 		getDataPage().clickOnUpdateCurrencyLink();
 		setEditAreaPage(getDataPage().createEditAreaPage());
+        setEditCityPage(getDataPage().createEditCityPage());
 	}
 
     @When("the user clicks on the country tab in the data area")

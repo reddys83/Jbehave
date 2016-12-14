@@ -66,6 +66,7 @@ When the user clicks on the choose a country option
 When the user enters the country <country> in the type-ahead box
 When the user clicks on the country payments link in the navigation bar
 And the user clicks on the update link
+And the user clicks on the add new routing code button in the payments country page
 And the user clicks on the country payments routing code types in the country page
 Then the user should see the routing code type drop-down lists values alphabetically from lookup ROUTING_CODE_TYPE
 
@@ -74,6 +75,7 @@ Examples:
 |Qatar|
 
 Scenario: Verify country payments info from trusted document - Bug - ZEUS-1224
+Meta:@rest1000
 Given a user is on the search page
 When the user clicks on the data tab in the search page
 And the user clicks on the country tab in the data area

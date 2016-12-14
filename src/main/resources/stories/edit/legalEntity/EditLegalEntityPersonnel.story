@@ -74,6 +74,7 @@ Examples:
 |1165|FID|1165|
 
 Scenario: Verify REQUIRED error message for Type dropdwon
+Meta:@test7000
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown

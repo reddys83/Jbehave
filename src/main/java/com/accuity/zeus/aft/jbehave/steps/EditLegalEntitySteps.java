@@ -1097,6 +1097,7 @@ public class EditLegalEntitySteps extends AbstractSteps{
 	public void verifyCountryOfOperationsList(@Named("fid") String fid) {
 		getDataPage().attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
 		getEditLegalEntityPage().verifyLookUpValues("country list", "value", fid);
+        getDataPage().attemptClick(LegalEntityIdentifiers.getObjectIdentifier("legalEntity_country_of_operations_edit_mode"));
 	}
 
 	@When("the user enters <countryOfOperations> in the country of operations drop down")

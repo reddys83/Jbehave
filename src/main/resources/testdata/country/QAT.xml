@@ -1,0 +1,173 @@
+<country deleted="false" fid="QAT" id="500ec0a1-9816-4429-9f7d-13365995b612" resource="/country/id/500ec0a1-9816-4429-9f7d-13365995b612" source="trusted" stub="true" tfpid="QA">
+    <summary>
+        <iso2>QA</iso2>
+        <iso3>QAT</iso3>
+        <names>
+
+            <name>
+                <type>Country Name</type>
+                <value>Qatar</value>
+            </name>
+            <countrySortKey>QATAR</countrySortKey>
+        </names>
+        <status>active</status>
+        <timeZones>
+            <summaries>
+                <summary>+3 hours</summary>
+            </summaries>
+        </timeZones>
+        <businessHours>
+            <summaries>
+                <summary>07.30-14.00</summary>
+            </summaries>
+        </businessHours>
+        <demographics>
+            <metric>
+                <name>Area</name>
+                <value>4416</value>
+                <unit>miles2</unit>
+            </metric>
+            <metric>
+                <name>Area</name>
+                <value>11437</value>
+                <unit>km2</unit>
+            </metric>
+            <metric>
+                <name>Population</name>
+                <value>1678568</value>
+            </metric>
+
+        </demographics>
+
+        <politicalStructure>Emirate</politicalStructure>
+        <primaryExports>
+            Liquefied natural gas (LNG), petroleum products, fertilizers, steel
+        </primaryExports>
+        <primaryImports>Machinery and transport equipment, food, chemicals</primaryImports>
+        <telephoneCode>974</telephoneCode>
+        <postalCodePosition>beforeCity</postalCodePosition>
+        <useInAddress>true</useInAddress>
+
+    </summary>
+    <languages>
+        <summaries>
+            <summary>Arabic</summary>
+        </summaries>
+    </languages>
+    <iban>
+        <registered>true</registered>
+        <rule>
+            <registeredDate accuracy="day">2015-01-10</registeredDate>
+            <displayISO>QA</displayISO>
+            <routingCodeType>SWIFT BIC</routingCodeType>
+        </rule>
+    </iban>
+    <alternativeRegions>
+        <region>
+            <type>Continent</type>
+            <value>Asia</value>
+        </region>
+        <region>
+            <type>Trading Region</type>
+            <value>Middle East &amp; North Africa</value>
+        </region>
+    </alternativeRegions>
+    <relatedPeople>
+        <relation>
+            <type>Financial Institution Board member</type>
+            <person>
+                <link href="/person/id/bcb20480-ae1d-4c6d-9b9d-71c68d12e02b" rel="src"/>
+                <role>
+                    <link href="/relationship/id/1737b603-87ce-49c5-99f1-3cef386e6f43" rel="src"/>
+                </role>
+            </person>
+        </relation>
+        <relation>
+            <type>President, Cheif executor</type>
+            <person>
+                <link href="/person/id/bfbb736b-e5ed-4054-9ff9-28417ac483af" rel="src"/>
+                <role>
+                    <link href="/relationship/id/a93eaacf-0c90-4dcc-85d7-f97b2e975960" rel="src"/>
+                </role>
+            </person>
+        </relation>
+    </relatedPeople>
+    <holidays>
+        <holiday>
+            <date accuracy="day">2015-01-01</date>
+            <name>New Year's Day</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-02-10</date>
+            <name>National Sports Day</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-03-01</date>
+            <name>Bank Holiday</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-07-19</date>
+            <name>Eid al-Fitr 1</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-07-20</date>
+            <name>Eid al-Fitr 2</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-07-21</date>
+            <name>Eid al-Fitr 3</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-09-22</date>
+            <name>Eid al-Adha 1</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-09-23</date>
+            <name>Eid al-Adha 2</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-09-24</date>
+            <name>Eid al-Adha 3</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2015-12-17</date>
+            <name>National Day OBS</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-02-09</date>
+            <name>National Sports Day</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-03-06</date>
+            <name>Bank Holiday</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-07-06</date>
+            <name>Eid al-Fitr 1</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-07-07</date>
+            <name>Eid al-Fitr 2</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-09-12</date>
+            <name>Eid al-Adha 1</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-09-13</date>
+            <name>Eid al-Adha 2</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-09-14</date>
+            <name>Eid al-Adha 3</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-09-15</date>
+            <name>Eid al-Adha 4</name>
+        </holiday>
+        <holiday>
+            <date accuracy="day">2016-12-18</date>
+            <name>National Day</name>
+        </holiday>
+    </holidays>
+</country>

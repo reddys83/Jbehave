@@ -25,9 +25,34 @@
             </metric>
         </demographics>
         <maxConsumerRate>!@#$%^&amp;*()_+}{</maxConsumerRate>
-        <useInAddress>false</useInAddress>
-
+        <useInAddress>true</useInAddress>
     </summary>
+    <alternativeRegions>
+        <region>
+            <type>Federal Reserve District</type>
+            <value>4</value>
+        </region>
+    </alternativeRegions>
+    <relatedPlaces>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>State Capital</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.139:8080/heraapi/city/id/541bed3b-7f8d-4600-98cf-91c9af63b6ff" rel="src"/>
+            </place>
+        </relation>
+        <relation>
+            <type>Capital City</type>
+            <details>
+                <detail>State Capital</detail>
+            </details>
+            <place>
+                <link href="http://10.72.0.139:8080/heraapi/city/id/4f103b02-b294-47ae-a1b5-409d59cb60c6" rel="src"/>
+            </place>
+        </relation>
+    </relatedPlaces>
     <relatedPresences>
         <relation>
             <type>Banking Association</type>
