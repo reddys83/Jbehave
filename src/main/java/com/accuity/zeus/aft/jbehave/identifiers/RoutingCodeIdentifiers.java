@@ -85,7 +85,7 @@ public class RoutingCodeIdentifiers {
         hmap.put("view_routingcode_city_list", By.xpath("//*[@id='formerUsages']//td[2]"));
         hmap.put("view_routingcode_area_list", By.xpath("//*[@id='formerUsages']//td[3]"));
         hmap.put("view_routingcode_additional_info_list", By.xpath("//*[@id='formerUsages']//td[4]"));
-        hmap.put("view_routingcode_first_office_name_link", By.xpath("//*[@id='formerUsages']/tr[1]//*[@href]"));
+        hmap.put("view_routingcode_office_name_link", By.xpath("//*[@id='formerUsages']//*[@href]"));
         hmap.put("officename_basicInfo_link", By.xpath("//*[@id='officeBasicInfo']"));
         hmap.put("officename_basicInfo_label", By.xpath("//*[@id='officeBasicInfo']/h1/span"));
         hmap.put("officename_text_value", By.xpath("//*[@id='officeBasicInfo']//tr[td='Office Name']/td[2]"));
@@ -142,7 +142,7 @@ public class RoutingCodeIdentifiers {
         hmap.put("view_routingcode_history_description_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Description')]"));
         hmap.put("view_routingcode_history_replacedbycode_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Replaced by Code')]"));
         hmap.put("view_routingcode_history_details_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Details')]"));
-        hmap.put("routingcode_history_eye_icon", By.xpath("//*[@id='history']//*[@class='show']"));
+        hmap.put("routingcode_history_eye_icon", By.xpath("//*[@id='routingCodeHistory']//*[@class='show']"));
         hmap.put("view_routingcode_history_usage_name_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Name')]"));
         hmap.put("view_routingcode_history_usage_address_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Address')]"));
         hmap.put("view_routingcode_history_usage_city_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'City')]"));
@@ -150,12 +150,51 @@ public class RoutingCodeIdentifiers {
         hmap.put("view_routingcode_history_usage_subarea_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Sub Area')]"));
         hmap.put("view_routingcode_history_usage_country_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Country')]"));
         hmap.put("view_routingcode_date_list", By.xpath("//*[@id='history']//td[2]"));
-        hmap.put("view_routing_code_history_details_N/A", By.xpath("//*[@id='history']//td[contains(text(), 'N/A')]"));
+        hmap.put("view_routing_code_history_details_N/A", By.xpath("//*[@id='routingCodeHistory']//td[contains(text(), 'N/A')]"));
         hmap.put("view_routingcode_history_usage_postalcode_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Postal Code')]"));
         hmap.put("view_routingcode_history_usage_addinfo_col", By.xpath("//*[@id='routingCodeHistory']//*[contains(text(),'Additional Info')]"));
         hmap.put("view_history_event_table", By.xpath("//*[@id='routingCodeHistory']//tr"));
         hmap.put("view_history_usage_table", By.xpath("//*[@id='routingCodeHistory']//div[@class='container']//tbody//tr"));
+        hmap.put("edit_former_usages_name_list", By.xpath("//*[@data-row_id='formerUsages']//td[1]"));
+        hmap.put("edit_former_usages_city_list", By.xpath("//*[@data-row_id='formerUsages']//td[2]"));
+        hmap.put("edit_former_usages_area_list", By.xpath("//*[@data-row_id='formerUsages']//td[3]"));
+        hmap.put("edit_former_usages_additional_info_list", By.xpath("//*[@data-row_id='formerUsages']//td[4]"));
+        hmap.put("edit_former_usages_name_col", By.xpath("//*[@data-edit_id='formerUsages']//th[@sortfield='departmentName,officeName']"));
+        hmap.put("edit_former_usages_city_col", By.xpath("//*[@data-edit_id='formerUsages']//th[@sortfield='cityName']"));
+        hmap.put("edit_former_usages_area_col", By.xpath("//*[@data-edit_id='formerUsages']//th[@sortfield='areaName']"));
+        hmap.put("edit_former_usages_additional_info_col", By.xpath("//*[@data-edit_id='formerUsages']//*[contains(text(),'Additional Info')]"));
+        hmap.put("edit_former_usages_add_button", By.xpath("//*[@data-edit_id='formerUsages']//*[starts-with(@class,'add')]"));
+        hmap.put("edit_former_usages_hyperlink", By.xpath("//*[@data-row_id='formerUsages']//*[@href]"));
+        hmap.put("edit_former_usages_delete_row_button", By.xpath("//*[@data-row_id='formerUsages']//*[@class='delete-element']"));
+        hmap.put("edit_former_usages_row", By.xpath("//*[@id='formerUsages']//*[@data-row_id='formerUsages']"));
+        hmap.put("view_former_usages_row", By.xpath("//*[@id='formerUsages']//tr"));
 
+        hmap.put("edit_routingcode_existing_alternate_code_type",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//select[@id='alternateCodeType']"));
+        hmap.put("edit_routingcode_existing_alternate_code_value",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//input[@name='alternateCodeValue']"));
+        hmap.put("edit_routingcode_new_alternate_code_type",By.xpath("//*[@id='additionalAlternateCodes']/tr[@class='new']//select[@id='alternateCodeType']"));
+        hmap.put("edit_routingcode_new_alternate_code_value",By.xpath("//*[@id='additionalAlternateCodes']/tr[@class='new']//input"));
+        hmap.put("edit_routingcode_add_new_alternate_code",By.xpath("//*[@id='add-alternateCodes']"));
+        hmap.put("edit_routingcode_delete_first_row_alternate_code",By.xpath("//*[@id='additionalAlternateCodes']/tr[1]//button"));
+        hmap.put("edit_routingcode_delete_second_row_alternate_code",By.xpath("//*[@id='additionalAlternateCodes']/tr[2]//button"));
+        hmap.put("edit_routingCode_delete_yes_button_id_click", By.xpath("//*[@id='yes-button']"));
+        hmap.put("edit_routingcode_alternate_code_type",By.xpath("//*[@id='alternateCodeType']"));
+        hmap.put("edit_routingcode_alternate_code_type_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='alternateCodeTypeError']"));
+        hmap.put("edit_routingcode_alternate_code_value_error_msg_xpath",By.xpath("//*[@class='notification error'][@data-error_id='alternateCodeValueError']"));
+        hmap.put("edit_routingcode_page_add_new_relatedcodes_btn", By.xpath("//*[@id='add-relatedCodes']"));
+        hmap.put("edit_routingcode_page_relatedcodes_context_dropdown", By.xpath("//*[@id='additionalRelatedCodes']/tr//select[@id='relatedCodeContext']"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_context_dropdown", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//select[@id='relatedCodeContext']"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_chosen_Select_input", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//div[@class='chosen-search']/input"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_chosen_Select_options", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//select[@id='relatedCode']/option"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_chosen_Select_dropdown", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//div[@id='relatedCode_chosen']//ul/li"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_chosen_Select_link", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//div[@id='relatedCode_chosen']/a"));
+        hmap.put("edit_routingcode_page_new_relatedcodes_type", By.xpath("//*[@id='additionalRelatedCodes']/tr[@class='new']//input[@id='relatedCodeType']"));
+        hmap.put("first_row_existing_related_codes_delete_button", By.xpath("//*[@id='additionalRelatedCodes']/tr[1]//button[@title='Delete Row']"));
+        hmap.put("edit_routingcode_page_relatedcodes_table", By.xpath("//*[@id='additionalRelatedCodes']/tr"));
+        hmap.put("edit_routingcode_page_relatedcodes_no_searchResults_msg", By.xpath("//*[@id='relatedCode_chosen']/div/ul/li[@class='no-results']"));
+        hmap.put("edit_routingcode_page_relatedcode_required_errorMessage", By.xpath("//*[@data-error_id='relatedCodeError']"));
+        hmap.put("edit_routingcode_page_relatedcode_context_required_errorMessage", By.xpath("//*[@data-error_id='relatedCodeContextError']"));
+        hmap.put("edit_routingcode_page_delete_history_row_button", By.xpath(".//*[@data-row_id='history']//button[@class='delete-element']"));
+        hmap.put("edit_routingcode_history_eye_icon", By.xpath("//*[@data-row_id='history']//*[@class='show']"));
     }
 
     public static By getObjectIdentifier(String key) {

@@ -37,6 +37,7 @@ public abstract class AbstractSteps {
 	private static RoutingCodePage routingCodePage;
 	private static CurrencyPage currencyPage;
 	private static CountryPage countryPage;
+	private static FinancialsPage financialsPage;
 
 
     public static EditOfficePage editOfficePage;
@@ -215,6 +216,15 @@ public abstract class AbstractSteps {
 	public void setOfficesPage(OfficesPage officesPage) {
 		this.officesPage = officesPage;
 	}
+
+	public FinancialsPage getFinancialsPage() {
+		return financialsPage;
+	}
+
+	public void setFinancialsPage(FinancialsPage financialsPage) {
+		this.financialsPage = financialsPage;
+	}
+
 
 	public static EditOfficePage getEditOfficePage(){
 		return editOfficePage;

@@ -11,5 +11,8 @@ Examples:
 |routingCode|routingCodeType|
 |083905216|ABA|
 |01056|Swift BIC|
-|DAAEDEDD435|Swift BIC|
+|DAAEDEDD435|SWIFT BIC|
 |HLFXGB21K03|SWIFT BIC|
+|77390628|BLZ (DE)|
+|262176840|ABA|
+|001|AF Cheque Clearing Sys|

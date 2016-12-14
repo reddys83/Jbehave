@@ -7,6 +7,7 @@ I want to cover the requirements mentioned in
 JIRA ID - ZEUS-1142 - User can view Routing Code Related Codes
 
 Scenario: Verify RoutingCode related codes
+Meta:@test6767
 Given a user is on the search page
 When the user enters the <entity> in the typeahead
 And the user selects the <searchBy> from the dropdown

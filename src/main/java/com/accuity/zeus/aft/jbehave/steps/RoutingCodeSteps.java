@@ -60,7 +60,8 @@ public class RoutingCodeSteps extends AbstractSteps {
 	@When("the user clicks on the legal entity link in the routing code page header")
     public void clickonHeaderLink()
     {
-        getRoutingCodePage().clickonHeaderLink();
+		setLegalEntityPage(getRoutingCodePage().clickonHeaderLink());
+
     }
 
     @When("the user clicks on the routingCode usages link in the navigation bar")
@@ -139,18 +140,19 @@ public class RoutingCodeSteps extends AbstractSteps {
 		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_area_col"));
 	}
 
-	@When("the user clicks on the first office name link")
-	public void clickOnFirstOfficeNameLink() {
-		formerUsageOfficeName = getRoutingCodePage().getOfficeNameLinkText();
-		getDataPage().attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_first_office_name_link"));
+	@When("the user clicks on the office name link number <index>")
+	public void clickOnFirstOfficeNameLink(@Named("index") int index) {
+		formerUsageOfficeName = getRoutingCodePage().getOfficeNameLinkText(index);
+		getDataPage().clickElementUsingIndex(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_office_name_link"), index);
 	}
 
-	@Then("the user should see the office name basic info page")
-	public void verifyOfficeNameBasicInfoPage() {
-		getRoutingCodePage().verifyOfficeNameBasicInfoPage(formerUsageOfficeName);
+	@Then("the user should see the office basic info page")
+	public void verifyOfficeNameBasicInfoPage(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("index") int index) {
+		getRoutingCodePage().verifyOfficeBasicInfoPage(routingCode, codeType, "trusted", index);
 	}
 
 	@Then("the user should see the former usages field values same as in $source document")
+	@Alias("the user should see the former usages office name same as in $source document")
 	public void verifyFormerUsagesFieldValuesFromTrustedDB(@Named("routingCode") String routingCode, @Named("codeType") String codeType, @Named("source") String source) {
 		getRoutingCodePage().verifyFormerUsagesFieldValuesFromTrustedDB(routingCode, codeType, source);
 	}
@@ -218,5 +220,45 @@ public class RoutingCodeSteps extends AbstractSteps {
 	@Then("the user should see N/A value under details column")
 	public void verifyNAValueInDetailColumn() {
 		getDataPage().verifyElementIsDisplayed("Details (N/A)", RoutingCodeIdentifiers.getObjectIdentifier("view_routing_code_history_details_N/A"));
+	}
+	
+	@When("the user clicks on the delete history row button in the routing code history page")
+	public void clickOnDeleteRoutingCodeHistoryRowButton() {
+		getDataPage().attemptClick(
+				RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_delete_history_row_button"));
+	}
+
+	@Then("the user should see the history field values deleted from the history web page")
+	public void verifyDeletedHistoryFieldsWebPage(@Named("historyDate") String historyDate,
+			@Named("historyType") String historyType) {
+		getRoutingCodePage().verifyDeletedHistoryFieldsWebPage(historyType, historyDate);
+	}
+
+	@Then("the user should see the history field values not deleted from the history web page")
+	public void verifyHistoryFieldsNotDeletedWebPage(@Named("historyDate") String historyDate,
+			@Named("historyType") String historyType) {
+		getRoutingCodePage().verifyHistoryFieldsNotDeletedWebPage(historyType, historyDate);
+	}
+
+	@Then("the use should see the history field values are deleted from $source document")
+	public void verifyDeletedHistoryValuesFromDB(@Named("routingCode") String routingCode,
+			@Named("codeType") String codeType, @Named("historyDate") String historyDate,
+			@Named("historyType") String historyType, @Named("source") String source) {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		getRoutingCodePage().verifyDeletedHistoryValuesFromDB(routingCode, codeType, historyType, historyDate, source);
+	}
+
+	@Then("the user should verify that delete button is enabled")
+	public void verifyDeleteButtonEnabled() {
+		getRoutingCodePage().verifyDeleteButtonEnabled();
+	}
+
+	@Then("the user should see the eye icon enabled")
+	public void verifyEyeIconEnabled() {
+		getRoutingCodePage().verifyEyeIconEnabled();
 	}
 }

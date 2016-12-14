@@ -7,7 +7,7 @@ So that I can achieve a business goal
 JIRA ID - ZEUS-1079 - User can edit Office's Services
 
 
-Scenario: User verifies SERVICE_CATEGORY ('Service Category' & 'Service Override') fields
+Scenario: Update Office Services - User verifies SERVICE_CATEGORY ('Service Category' & 'Service Override') fields for Office
 1- User verifies that service category dropdown values are same as lookup values
 2- User verifies whether existing office's service values are from trusted document.
 3- User verifies whether existing office's service values updated with different data both in UI and Zeus document.

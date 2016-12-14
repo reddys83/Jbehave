@@ -92,4 +92,15 @@
             </presence>
         </usageLocation>
     </usageLocations>
+    <formerUsageLocations>
+      <formerUsageLocation>
+       <presence> 
+         <link href="/office/id/5cb1de4f-cd18-411f-9bf6-f404c90e8d89" rel="src"/> 
+       </presence>
+       <department> 
+         <link href="/department/id/a9de4a11-fe8c-4123-a9a0-2e2d88312006" rel="src"/> 
+       </department>
+       <additionalInfo>testing</additionalInfo>
+      </formerUsageLocation> 
+    </formerUsageLocations>
 </routingCode>

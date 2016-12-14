@@ -77,12 +77,12 @@ public class RoutingCodePage extends AbstractPage {
         String UseHeadOffice = getNodeValuesByTagName(document, "routingcodeUseHeadOffice").size() == 0 ? "" : getNodeValuesByTagName(document, "routingcodeUseHeadOffice").get(0);
         String Comment = getNodeValuesByTagName(document, "routingcodeComment").size() == 0 ? "" : getNodeValuesByTagName(document, "routingcodeComment").get(0);
         if (RoutingCodeType.equals("ABA")) {
-            assertEquals(RoutingCodeSubtype, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ RoutingCodeSubtype")).getText());
+            assertEquals(RoutingCodeSubtype, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeSubtype")).getText());
             assertEquals(ABACodeSource, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ABACodeSource")).getText());
             assertEquals(ForthcomingRetirementDate, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ForthcomingRetirementDate")).getText());
             assertEquals(ConfirmedwithFed, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ConfirmedwithFed")).getText());
             assertEquals(RegistrarFeeSFDCSubscription, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RegistrarFeeSFDCSubscription")).getText());
-            assertEquals(Comment, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String Comment")).getText());
+            assertEquals(Comment, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_Comment")).getText());
             assertEquals(RoutingCodeType, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeType")).getText());
             assertEquals(RoutingCodeTypeDescription, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeTypeDescription")).getText());
             assertEquals(RoutingCode, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCode")).getText());
@@ -95,7 +95,7 @@ public class RoutingCodePage extends AbstractPage {
             assertEquals(EndDate, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_EndDate")).getText());
             assertEquals(AssignedInstitutionName, getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AssignedInstitutionName")).getText());
             assertEquals(InternalUseOnly.toLowerCase(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_InternalUseOnly")).getText().toLowerCase());
-            assertEquals(UseHeadOffice.toLowerCase(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String UseHeadOffice")).getText().toLowerCase());
+            assertEquals(UseHeadOffice.toLowerCase(), getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_UseHeadOffice")).getText().toLowerCase());
             for (int i = 0; i < AlternateCodeForms.size(); i++) {
                 assertEquals(AlternateCodeFormTypes.get(i), getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AlternateCodeForm")).get(i).getAttribute("title"));
                 assertEquals(AlternateCodeForms.get(i), getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_AlternateCodeForm")).get(i).getText());
@@ -106,23 +106,24 @@ public class RoutingCodePage extends AbstractPage {
 
     public void verifyABAFieldsNotExist() {
         try {
-            assertFalse(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ RoutingCodeSubtype")).isDisplayed());
+            assertFalse(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RoutingCodeSubtype")).isDisplayed());
             assertFalse(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ABACodeSource")).isDisplayed());
             assertFalse(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ForthcomingRetirementDate")).isDisplayed());
             assertFalse(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_ConfirmedwithFed")).isDisplayed());
             assertFalse(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_RegistrarFeeSFDCSubscription")).isDisplayed());
-            assertFalse(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_String Comment")).isDisplayed());
+            assertFalse(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_basicInfo_view_Comment")).isDisplayed());
         } catch (NoSuchElementException e) {
         }
     }
 
-    public void clickonHeaderLink() {
+    public LegalEntityPage clickonHeaderLink() {
         attemptClick(RoutingCodeIdentifiers.getObjectIdentifier("routingcode_page_header_link"));
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return new LegalEntityPage(getDriver(), getUrlPrefix(), getDatabase(), getApacheHttpClient(), getRestClient(), getHeraApi());
     }
 
     public void clickOnUsagesLink() {
@@ -370,14 +371,30 @@ public class RoutingCodePage extends AbstractPage {
 		}
     }
 
-    public String getOfficeNameLinkText() {
-    	return getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_first_office_name_link")).getText();
+    public String getOfficeNameLinkText(int index) {
+    	List<WebElement> officeNameList = getDriver().findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_routingcode_office_name_link"));
+    	return officeNameList.get(index).getText();
     }
 
-    public void verifyOfficeNameBasicInfoPage(String formerUsageOfficeName) {
-    	assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_link")).getAttribute("class").equals("selected"));
-        assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_label")).getText().equals("BASIC INFO"));
-        assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_text_value")).getText().equals(formerUsageOfficeName));
+    public void verifyOfficeBasicInfoPage(String routingCode, String routingCodeType, String source, int index) {
+		try {
+			assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_link")).getAttribute("class").equals("selected"));
+			assertTrue(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_basicInfo_label")).getText().equals("BASIC INFO"));
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get routing code former usages values", nvPairs);
+			if (document != null) {
+				assertEquals(getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("officename_text_value")).getText(),
+						document.getElementsByTagName("officeName").item(index - 1).getTextContent());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
     public void verifyFormerUsagesFieldValuesFromTrustedDB(String routingCode, String routingCodeType, String source) {
@@ -632,6 +649,7 @@ public class RoutingCodePage extends AbstractPage {
 			List<NameValuePair> nvPairs = new ArrayList<>();
 			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
 			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			nvPairs.add(new BasicNameValuePair("source", source));
 			Thread.sleep(5000L);
 
 			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
@@ -705,5 +723,91 @@ public class RoutingCodePage extends AbstractPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}	
+	}
+	
+	public void verifyDeletedHistoryFieldsWebPage(String historyType, String historyDate) {
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		List<String> historyEventType = new ArrayList<String>();
+		List<String> historyEventDate = new ArrayList<String>();
+		List<WebElement> historyEventRows = getDriver()
+				.findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_event_table"));
+		for (int index = 1; index < historyEventRows.size() ; index++) {
+			List<WebElement> historyEventColumns = historyEventRows.get(index).findElements(By.tagName("td"));
+			historyEventType.add(historyEventColumns.get(0).getText());
+			historyEventDate.add(historyEventColumns.get(1).getText());
+		}
+		assertFalse((historyEventType).contains(historyType));
+		assertFalse((historyEventDate).contains(historyDate));
+	}
+
+	public void verifyHistoryFieldsNotDeletedWebPage(String historyType, String historyDate) {
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		List<WebElement> historyEventRows = getDriver()
+				.findElements(RoutingCodeIdentifiers.getObjectIdentifier("view_history_event_table"));
+		List<String> historyEventType = new ArrayList<String>();
+		List<String> historyEventDate = new ArrayList<String>();
+		for (int index = 1; index < historyEventRows.size() ; index++) {
+			List<WebElement> historyEventColumns = historyEventRows.get(index).findElements(By.tagName("td"));
+			historyEventType.add(historyEventColumns.get(0).getText());
+			historyEventDate.add(historyEventColumns.get(1).getText());
+		}		
+		assertTrue((historyEventType).contains(historyType));
+		assertTrue((historyEventDate).contains(historyDate));
+	}
+
+	public void verifyDeletedHistoryValuesFromDB(String routingCode, String routingCodeType, String historyType,
+			String historyDate, String source) {
+		try {
+			String historyEventValue;
+			List<NameValuePair> nvPairs = new ArrayList<>();
+			nvPairs.add(new BasicNameValuePair("routingCode", routingCode));
+			nvPairs.add(new BasicNameValuePair("routingCodeType", routingCodeType));
+			nvPairs.add(new BasicNameValuePair("source", source));
+			Thread.sleep(3000L);
+
+			Document document = apacheHttpClient.executeDatabaseAdminQueryWithMultipleParameter(database,
+					"get routing code history values", nvPairs);
+
+			if (document != null) {
+				for (int i = 0; i < document.getElementsByTagName("routingCodeHistory").item(0).getChildNodes()
+						.getLength(); i++) {
+
+					for (int childNode = 0; childNode < document.getElementsByTagName("routingCodeHistory").item(0)
+							.getChildNodes().item(i).getChildNodes().getLength(); childNode++) {
+
+						historyEventValue = document.getElementsByTagName("routingCodeHistory").item(0)
+								.getChildNodes().item(i).getChildNodes().item(childNode).getTextContent();
+					
+						switch (document.getElementsByTagName("routingCodeHistory").item(0).getChildNodes().item(0)
+								.getChildNodes().item(childNode).getNodeName()) {
+						case "type": assertFalse(historyEventValue.equals(historyType));
+							break;
+						case "date": assertFalse(historyEventValue.equals(historyDate));
+							break;
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+		  e.printStackTrace();
+		}
+	}
+
+	public void verifyDeleteButtonEnabled() {
+		assertTrue(getDriver()
+				.findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_page_delete_history_row_button")).isEnabled());
+	}
+
+	public void verifyEyeIconEnabled() {
+		assertTrue(
+				getDriver().findElement(RoutingCodeIdentifiers.getObjectIdentifier("edit_routingcode_history_eye_icon")).isEnabled());
+	}
 }

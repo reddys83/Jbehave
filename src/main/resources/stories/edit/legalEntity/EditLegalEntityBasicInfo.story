@@ -590,7 +590,7 @@ Examples:
 |1165|FID|1165|ATM Network|
 |1165|FID|1165||
 
-Scenario:
+Scenario: Delete legal entity type
 a) Verify that the delete button is disabled for the first row of legal entity type
 b) Verify that the user should get the confirmation window for deleting existing entity type rows and user clicks No button
 c) Verify that the user should get the confirmation window for deleting existing entity type rows and user clicks Yes button and row should be deleted
